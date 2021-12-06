@@ -1,0 +1,3 @@
+- Use "Ӿ" currency symbol
+- Add Bengali language
+- General fixes & improvements

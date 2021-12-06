@@ -1,0 +1,4 @@
+- Add "Carbon" theme
+- Fix change representative not working sometimes
+- Auto-fill amount from deep-link/QR/NFC even if balance is insufficient
+- Misc. other fixes
