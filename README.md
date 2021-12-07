@@ -2,7 +2,7 @@
 
 ![Cover](https://raw.githubusercontent.com/fwd/nautilus/master/.github/banner.png)
 
-A [Natrium](https://github.com/appditto/natrium_wallet_flutter) fork, with [Nano.to](https://github.com/formsend/nano) integration, and a few other improvements.
+### A [Natrium](https://github.com/appditto/natrium_wallet_flutter) fork, with [Nano.to](https://github.com/formsend/nano) integration, and a few other improvements.
 
 ## Server Repo
 
@@ -16,9 +16,9 @@ Nautilus's backend server can be found [here](https://github.com/fwd/nautilus-se
 
 ## Building
 
-Android (armeabi-v7a): `flutter build apk`
-Android (arm64-v8a): `flutter build apk --target=android-arm64`
-iOS: `flutter build ios`
+* iOS: `flutter build ios`
+* Android (armeabi-v7a): `flutter build apk`
+* Android (arm64-v8a): `flutter build apk --target=android-arm64`
 
 If you have a connected device or emulator you can run and deploy the app with `flutter run`
 
