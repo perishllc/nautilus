@@ -9,8 +9,8 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 ### Nautilus - Beta 0.1 (Q1 2022)
 
 - Replace all AppDitto trademarks, as to not infringe on their marks. **Logo assets pending**
-- Change default theme to a darker color. **CSS HEX TBD**
-- Simplify the 'New User' onboarding screens. Right down there are about 3-5 screens between new users, the UI (wallet). I want to bring this down to 1-3. 
+- Change default theme to a darker color. **Css hex color tbd**
+- Simplify the 'New User' onboarding screens. Right now there are about 3-5 screens between new users, the UI (wallet). I want to bring this down to 1-3. 
    - Set Pin
    - Backup Seed
    - Done!
