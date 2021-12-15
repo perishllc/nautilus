@@ -1,3 +1,9 @@
+# Nautilus Wallet
+
+![Cover](https://raw.githubusercontent.com/fwd/nautilus/master/.github/banner.png)
+
+---
+
 This project is in development by the team @ [Nano.to](https://nano.to/development)
 
 ### Nautilus - Beta 0.1 (Q1 2022)
@@ -25,6 +31,11 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 ### Nautilus - Beta 2.0 (Q1 2023)
 
 - On device PoW generation.
+- Eliminate Nautilus back-end server requirement.
+
+### Nautilus - Beta 2.0 (Q1 2024)
+
+- Metal NANO debit card, Managed via Nautilus (Nano.to/Card)
 
 ---
 
