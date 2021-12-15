@@ -9,34 +9,34 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 
 ##### Features
 
-- When you start typing in the Address input of 'Send From' screen, Nano.to/Known usernames will bw shown.
-- Usernames should be clickable to reveal the full address & when the username was last leased / updated
-- When searching Usernames, a '@' will not be need to show list... Just start typing.
+- [ ] When you start typing in the Address input of 'Send From' screen, Nano.to/Known usernames will be shown.
+- [ ] Usernames should be clickable to reveal the full address & when the username was last leased / updated
+- [ ] When searching Usernames, a '@' will not be need to show list... Just start typing.
    - Usernames when displayed in full will still show an @
-- Add as contact button / system using nano.to usernames
+- [ ] Add as contact button / system using nano.to usernames
    - Through the payment history in some form
    - Contacts may be nickname-able
-- Add Username Reservation Screen to app.
+- [ ] Add Username Reservation Screen to app.
    - Can be done on android np.
    - On iOS it can only be linked to / referenced unless you use the IAP mechanism (and Apple will take a % cut)
-- Payment history shows Nano.to Usernames.
-- Replace all AppDitto trademarks, as to not infringe on their marks. **Logo assets pending**
-   - Temporarily move assets to the legacy_assets folder, remove assets from here as they are developed
+- [ ] Payment history shows Nano.to Usernames.
+- [ ] Replace all AppDitto trademarks, as to not infringe on their marks. **Logo assets pending**
+   - [x] Move all appditto assets to a legacy_assets folder, to be removed as replacements are made
 
 ##### Aesthetic goals
-- Show nano.to usernames over full addresses wherever possible
-- Registered Usernames will be called Usernames. 
-- Simplify the 'New User' onboarding screens. Right now there are about 3-5 screens between new users, the UI (wallet). I want to bring this down to 1-3. 
+- [ ] Show nano.to usernames over full addresses wherever possible
+- [ ] Registered Usernames will be called Usernames. 
+- [ ] Simplify the 'New User' onboarding screens. Right now there are about 3-5 screens between new users, the UI (wallet). I want to bring this down to 1-3. 
    - Ask to import seed or create one
    - Backup Seed
    - Set Pin
    - Done!
-- Local contacts will be called Favorites.
-- Create clever UI to differenciate between Favorites & Usernames.
+- [ ] Local contacts will be called Favorites.
+- [ ] Create clever UI to differenciate between Favorites & Usernames.
    - Maybe prefix favorites with a # or $
    - Prefix usernames with an @
-- Change default theme to a darker color. **CSS hex color tbd**
-- Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
+- [ ] Change default theme to a darker color. **CSS hex color TBD**
+- [ ] Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
 
 
 ### Nautilus - Beta 0.1 (Q1 2022)
