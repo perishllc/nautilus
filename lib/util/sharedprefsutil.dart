@@ -3,19 +3,19 @@ import 'dart:ui';
 import 'dart:io';
 import 'dart:async';
 import 'package:intl/intl.dart';
-import 'package:natrium_wallet_flutter/network/model/response/alerts_response_item.dart';
-import 'package:natrium_wallet_flutter/util/random_util.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
+import 'package:nautilus_wallet_flutter/util/random_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:natrium_wallet_flutter/service_locator.dart';
-import 'package:natrium_wallet_flutter/util/encrypt.dart';
-import 'package:natrium_wallet_flutter/model/available_themes.dart';
-import 'package:natrium_wallet_flutter/model/authentication_method.dart';
-import 'package:natrium_wallet_flutter/model/available_currency.dart';
-import 'package:natrium_wallet_flutter/model/available_language.dart';
-import 'package:natrium_wallet_flutter/model/available_block_explorer.dart';
-import 'package:natrium_wallet_flutter/model/device_lock_timeout.dart';
-import 'package:natrium_wallet_flutter/model/vault.dart';
-import 'package:natrium_wallet_flutter/model/wallet.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/util/encrypt.dart';
+import 'package:nautilus_wallet_flutter/model/available_themes.dart';
+import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
+import 'package:nautilus_wallet_flutter/model/available_currency.dart';
+import 'package:nautilus_wallet_flutter/model/available_language.dart';
+import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
+import 'package:nautilus_wallet_flutter/model/device_lock_timeout.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/model/wallet.dart';
 
 /// Price conversion preference values
 enum PriceConversion { BTC, NONE, HIDDEN }
@@ -48,7 +48,7 @@ class SharedPrefsUtil {
   // Caching ninja API response
   static const String ninja_api_cache = 'fkalium_ninja_api_cache';
   // Natricon setting
-  static const String use_natricon = 'natrium_use_natricon';
+  static const String use_natricon = 'nautilus_use_natricon';
 
   // For plain-text data
   Future<void> set(String key, value) async {
@@ -232,7 +232,7 @@ class SharedPrefsUtil {
 
   Future<ThemeSetting> getTheme() async {
     return ThemeSetting(ThemeOptions.values[
-        await get(cur_theme, defaultValue: ThemeOptions.NATRIUM.index)]);
+        await get(cur_theme, defaultValue: ThemeOptions.NAUTILUS.index)]);
   }
 
   Future<void> setRepresentative(String rep) async {

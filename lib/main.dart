@@ -8,33 +8,33 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
-import 'package:natrium_wallet_flutter/model/available_language.dart';
-import 'package:natrium_wallet_flutter/ui/avatar/avatar.dart';
-import 'package:natrium_wallet_flutter/ui/avatar/avatar_change.dart';
-import 'package:natrium_wallet_flutter/ui/before_scan_screen.dart';
-import 'package:natrium_wallet_flutter/ui/intro/intro_backup_safety.dart';
-import 'package:natrium_wallet_flutter/ui/intro/intro_password.dart';
-import 'package:natrium_wallet_flutter/ui/intro/intro_password_on_launch.dart';
-import 'package:natrium_wallet_flutter/ui/password_lock_screen.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/dialog.dart';
-import 'package:natrium_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/model/available_language.dart';
+import 'package:nautilus_wallet_flutter/ui/avatar/avatar.dart';
+import 'package:nautilus_wallet_flutter/ui/avatar/avatar_change.dart';
+import 'package:nautilus_wallet_flutter/ui/before_scan_screen.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_safety.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_password.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_password_on_launch.dart';
+import 'package:nautilus_wallet_flutter/ui/password_lock_screen.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 
-import 'package:natrium_wallet_flutter/styles.dart';
-import 'package:natrium_wallet_flutter/appstate_container.dart';
-import 'package:natrium_wallet_flutter/localization.dart';
-import 'package:natrium_wallet_flutter/service_locator.dart';
-import 'package:natrium_wallet_flutter/ui/home_page.dart';
-import 'package:natrium_wallet_flutter/ui/lock_screen.dart';
-import 'package:natrium_wallet_flutter/ui/intro/intro_welcome.dart';
-import 'package:natrium_wallet_flutter/ui/intro/intro_backup_seed.dart';
-import 'package:natrium_wallet_flutter/ui/intro/intro_backup_confirm.dart';
-import 'package:natrium_wallet_flutter/ui/intro/intro_import_seed.dart';
-import 'package:natrium_wallet_flutter/ui/util/routes.dart';
-import 'package:natrium_wallet_flutter/model/vault.dart';
-import 'package:natrium_wallet_flutter/util/nanoutil.dart';
-import 'package:natrium_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/ui/home_page.dart';
+import 'package:nautilus_wallet_flutter/ui/lock_screen.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_welcome.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_seed.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_confirm.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_import_seed.dart';
+import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:root_checker/root_checker.dart';
 
 void main() async {
@@ -77,7 +77,7 @@ class _AppState extends State<App> {
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Natrium',
+        title: 'Nautilus',
         theme: ThemeData(
           dialogBackgroundColor:
               StateContainer.of(context).curTheme.backgroundDark,

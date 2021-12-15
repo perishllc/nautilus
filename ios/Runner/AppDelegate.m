@@ -42,7 +42,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
                                            details:nil]);
                 return;
             }
-            if ([@"natrium" isEqualToString:icon ]) {
+            if ([@"nautilus" isEqualToString:icon ]) {
                 [self lc_setAlternateIconName:nil];
             } else if ([@"titanium" isEqualToString:icon]) {
                 [self lc_setAlternateIconName:@"titanium"];

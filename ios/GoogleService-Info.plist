@@ -19,9 +19,9 @@
 	<key>BUNDLE_ID</key>
 	<string>com.avengemedia.natrium</string>
 	<key>PROJECT_ID</key>
-	<string>natrium-edfa2</string>
+	<string>nautilus-edfa2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>natrium-edfa2.appspot.com</string>
+	<string>nautilus-edfa2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>

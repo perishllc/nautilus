@@ -2,51 +2,51 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
-import 'package:natrium_wallet_flutter/model/available_block_explorer.dart';
-import 'package:natrium_wallet_flutter/model/natricon_option.dart';
-import 'package:natrium_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/accounts/accounts_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/settings/disable_password_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/settings/set_password_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/app_simpledialog.dart';
+import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
+import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
+import 'package:nautilus_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/accounts/accounts_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/disable_password_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/set_password_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/remote_message_card.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/remote_message_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-import 'package:natrium_wallet_flutter/appstate_container.dart';
-import 'package:natrium_wallet_flutter/localization.dart';
-import 'package:natrium_wallet_flutter/styles.dart';
-import 'package:natrium_wallet_flutter/app_icons.dart';
-import 'package:natrium_wallet_flutter/service_locator.dart';
-import 'package:natrium_wallet_flutter/bus/events.dart';
-import 'package:natrium_wallet_flutter/model/authentication_method.dart';
-import 'package:natrium_wallet_flutter/model/available_currency.dart';
-import 'package:natrium_wallet_flutter/model/device_unlock_option.dart';
-import 'package:natrium_wallet_flutter/model/device_lock_timeout.dart';
-import 'package:natrium_wallet_flutter/model/notification_settings.dart';
-import 'package:natrium_wallet_flutter/model/available_language.dart';
-import 'package:natrium_wallet_flutter/model/available_themes.dart';
-import 'package:natrium_wallet_flutter/model/vault.dart';
-import 'package:natrium_wallet_flutter/model/db/appdb.dart';
-import 'package:natrium_wallet_flutter/ui/settings/backupseed_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/settings/changerepresentative_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/settings/settings_list_item.dart';
-import 'package:natrium_wallet_flutter/ui/settings/contacts_widget.dart';
-import 'package:natrium_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/transfer/transfer_complete_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/dialog.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/security.dart';
-import 'package:natrium_wallet_flutter/ui/util/ui_util.dart';
-import 'package:natrium_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:natrium_wallet_flutter/util/biometrics.dart';
-import 'package:natrium_wallet_flutter/util/hapticutil.dart';
-import 'package:natrium_wallet_flutter/util/numberutil.dart';
-import 'package:natrium_wallet_flutter/util/caseconverter.dart';
-import 'package:natrium_wallet_flutter/util/ninja/api.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/bus/events.dart';
+import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
+import 'package:nautilus_wallet_flutter/model/available_currency.dart';
+import 'package:nautilus_wallet_flutter/model/device_unlock_option.dart';
+import 'package:nautilus_wallet_flutter/model/device_lock_timeout.dart';
+import 'package:nautilus_wallet_flutter/model/notification_settings.dart';
+import 'package:nautilus_wallet_flutter/model/available_language.dart';
+import 'package:nautilus_wallet_flutter/model/available_themes.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/backupseed_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/changerepresentative_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/settings_list_item.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/contacts_widget.dart';
+import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/transfer/transfer_complete_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:nautilus_wallet_flutter/util/biometrics.dart';
+import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
+import 'package:nautilus_wallet_flutter/util/numberutil.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/ninja/api.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flare_flutter/flare_actor.dart';
 
@@ -76,7 +76,7 @@ class _SettingsSheetState extends State<SettingsSheet>
   UnlockSetting _curUnlockSetting = UnlockSetting(UnlockOption.NO);
   LockTimeoutSetting _curTimeoutSetting =
       LockTimeoutSetting(LockTimeoutOption.ONE);
-  ThemeSetting _curThemeSetting = ThemeSetting(ThemeOptions.NATRIUM);
+  ThemeSetting _curThemeSetting = ThemeSetting(ThemeOptions.NAUTILUS);
 
   bool _securityOpen;
   bool _loadingAccounts;
@@ -816,7 +816,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                                         placeholderBuilder:
                                             (BuildContext context) => Container(
                                           child: FlareActor(
-                                            "assets/ntr_placeholder_animation.flr",
+                                            "legacy_assets/ntr_placeholder_animation.flr",
                                             animation: "main",
                                             fit: BoxFit.contain,
                                             color: StateContainer.of(context)
@@ -968,7 +968,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                                                     (BuildContext context) =>
                                                         Container(
                                                   child: FlareActor(
-                                                    "assets/ntr_placeholder_animation.flr",
+                                                    "legacy_assets/ntr_placeholder_animation.flr",
                                                     animation: "main",
                                                     fit: BoxFit.contain,
                                                     color: StateContainer.of(
@@ -1144,7 +1144,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                                                     (BuildContext context) =>
                                                         Container(
                                                   child: FlareActor(
-                                                    "assets/ntr_placeholder_animation.flr",
+                                                    "legacy_assets/ntr_placeholder_animation.flr",
                                                     animation: "main",
                                                     fit: BoxFit.contain,
                                                     color: StateContainer.of(
@@ -1618,11 +1618,11 @@ class _SettingsSheetState extends State<SettingsSheet>
                     ),
                     AppSettings.buildSettingsListItemSingleLine(
                         context,
-                        AppLocalization.of(context).shareNatrium,
+                        AppLocalization.of(context).shareNautilus,
                         AppIcons.share, onPressed: () {
                       Share.share(
-                          "Check out Natrium - NANO Wallet for iOS and Android" +
-                              " https://natrium.io");
+                          "Check out Nautilus - NANO Wallet for iOS and Android" +
+                              " https://fwd.dev");
                     }),
                     Divider(
                       height: 2,

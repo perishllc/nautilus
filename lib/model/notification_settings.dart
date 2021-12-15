@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:natrium_wallet_flutter/localization.dart';
-import 'package:natrium_wallet_flutter/model/setting_item.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/setting_item.dart';
 
 enum NotificationOptions { ON, OFF }
 

@@ -11,43 +11,43 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:logger/logger.dart';
 import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
-import 'package:natrium_wallet_flutter/model/db/account.dart';
-import 'package:natrium_wallet_flutter/network/model/response/alerts_response_item.dart';
-import 'package:natrium_wallet_flutter/network/model/response/subscribe_response.dart';
-import 'package:natrium_wallet_flutter/ui/popup_button.dart';
-import 'package:natrium_wallet_flutter/appstate_container.dart';
-import 'package:natrium_wallet_flutter/dimens.dart';
-import 'package:natrium_wallet_flutter/localization.dart';
-import 'package:natrium_wallet_flutter/service_locator.dart';
-import 'package:natrium_wallet_flutter/model/address.dart';
-import 'package:natrium_wallet_flutter/model/list_model.dart';
-import 'package:natrium_wallet_flutter/model/db/contact.dart';
-import 'package:natrium_wallet_flutter/model/db/appdb.dart';
-import 'package:natrium_wallet_flutter/network/model/block_types.dart';
-import 'package:natrium_wallet_flutter/network/model/response/account_history_response_item.dart';
-import 'package:natrium_wallet_flutter/styles.dart';
-import 'package:natrium_wallet_flutter/app_icons.dart';
-import 'package:natrium_wallet_flutter/ui/contacts/add_contact.dart';
-import 'package:natrium_wallet_flutter/ui/send/send_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/send/send_confirm_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/receive/receive_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/settings/settings_drawer.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/dialog.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/remote_message_card.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/remote_message_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/list_slidable.dart';
-import 'package:natrium_wallet_flutter/ui/util/routes.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/reactive_refresh.dart';
-import 'package:natrium_wallet_flutter/ui/util/ui_util.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/transaction_state_tag.dart';
-import 'package:natrium_wallet_flutter/util/manta.dart';
-import 'package:natrium_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:natrium_wallet_flutter/util/hapticutil.dart';
-import 'package:natrium_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/model/db/account.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
+import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/model/address.dart';
+import 'package:nautilus_wallet_flutter/model/list_model.dart';
+import 'package:nautilus_wallet_flutter/model/db/contact.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/ui/contacts/add_contact.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/settings_drawer.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/list_slidable.dart';
+import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/reactive_refresh.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/transaction_state_tag.dart';
+import 'package:nautilus_wallet_flutter/util/manta.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:natrium_wallet_flutter/bus/events.dart';
+import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AppHomePage extends StatefulWidget {
@@ -1069,7 +1069,7 @@ class _AppHomePageState extends State<AppHomePage>
             child: Container(
               alignment: AlignmentDirectional(-0.5, 0),
               constraints: BoxConstraints.expand(),
-              child: FlareActor("assets/pulltosend_animation.flr",
+              child: FlareActor("legacy_assets/pulltosend_animation.flr",
                   animation: "pull",
                   fit: BoxFit.contain,
                   controller: this,
@@ -1677,7 +1677,7 @@ class _AppHomePageState extends State<AppHomePage>
                                     placeholderBuilder:
                                         (BuildContext context) => Container(
                                       child: FlareActor(
-                                        "assets/ntr_placeholder_animation.flr",
+                                        "legacy_assets/ntr_placeholder_animation.flr",
                                         animation: "main",
                                         fit: BoxFit.contain,
                                         color: StateContainer.of(context)

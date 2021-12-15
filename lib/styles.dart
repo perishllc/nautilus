@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:natrium_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
 
 class AppStyles {
   // Text style for paragraph text.

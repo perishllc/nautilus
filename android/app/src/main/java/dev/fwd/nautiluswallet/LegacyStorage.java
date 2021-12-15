@@ -1,4 +1,4 @@
-package co.banano.natriumwallet;
+package dev.fwd.nautiluswallet;
 
 import android.util.Base64;
 

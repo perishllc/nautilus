@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:natrium_wallet_flutter/appstate_container.dart';
-import 'package:natrium_wallet_flutter/app_icons.dart';
-import 'package:natrium_wallet_flutter/localization.dart';
-import 'package:natrium_wallet_flutter/dimens.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/sheets.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:natrium_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 
 class AppTransferCompleteSheet {
   String transferAmount;
@@ -54,7 +54,7 @@ class AppTransferCompleteSheet {
                               children: <Widget>[
                                 Center(
                                   child: SvgPicture.asset(
-                                    'assets/transferfunds_illustration_end_paperwalletonly.svg',
+                                    'legacy_assets/transferfunds_illustration_end_paperwalletonly.svg',
                                     color: StateContainer.of(context)
                                         .curTheme
                                         .text45,
@@ -63,7 +63,7 @@ class AppTransferCompleteSheet {
                                 ),
                                 Center(
                                   child: SvgPicture.asset(
-                                    'assets/transferfunds_illustration_end_natriumwalletonly.svg',
+                                    'legacy_assets/transferfunds_illustration_end_nautiluswalletonly.svg',
                                     color: StateContainer.of(context)
                                         .curTheme
                                         .success,

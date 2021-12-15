@@ -318,7 +318,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "welcomeText": "Welcome to Natrium. To begin, you may create a new wallet or import an existing one.",
+  "welcomeText": "Welcome to Nautilus. To begin, you may create a new wallet or import an existing one.",
   "@welcomeText": {
     "description": "intro_welcome_title",
     "type": "text",
@@ -582,14 +582,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "shareNatrium": "Share Natrium",
-  "@shareNatrium": {
+  "shareNautilus": "Share Nautilus",
+  "@shareNautilus": {
     "description": "settings_share",
     "type": "text",
     "placeholders": {}
   },
-  "shareNatriumText": "Check out Natrium! A premier NANO mobile wallet!",
-  "@shareNatriumText": {
+  "shareNautilusText": "Check out Nautilus! A premier NANO mobile wallet!",
+  "@shareNautilusText": {
     "description": "share_extra",
     "type": "text",
     "placeholders": {}
@@ -624,7 +624,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "logoutDetail": "Logging out will remove your seed and all Natrium-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
+  "logoutDetail": "Logging out will remove your seed and all Nautilus-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
   "@logoutDetail": {
     "description": "settings_logout_alert_message",
     "type": "text",
@@ -708,7 +708,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "notificationBody": "Open Natrium to view this transaction",
+  "notificationBody": "Open Nautilus to view this transaction",
   "@notificationBody": {
     "description": "notification_body",
     "type": "text",
@@ -738,7 +738,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "kaliumWallet": "Natrium Wallet",
+  "kaliumWallet": "Nautilus Wallet",
   "@kaliumWallet": {
     "description": "kalium_wallet",
     "type": "text",
@@ -780,7 +780,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferIntro": "This process will transfer the funds from a paper wallet to your Natrium wallet.\n\nTap the \"%1\" button to start.",
+  "transferIntro": "This process will transfer the funds from a paper wallet to your Nautilus wallet.\n\nTap the \"%1\" button to start.",
   "@transferIntro": {
     "description": "transfer_intro",
     "type": "text",
@@ -828,7 +828,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferComplete": "%1 NANO successfully transferred to your Natrium Wallet.\n",
+  "transferComplete": "%1 NANO successfully transferred to your Nautilus Wallet.\n",
   "@transferComplete": {
     "description": "transfer_complete_text",
     "type": "text",
@@ -846,13 +846,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "unlockPin": "Enter PIN to Unlock Natrium",
+  "unlockPin": "Enter PIN to Unlock Nautilus",
   "@unlockPin": {
     "description": "unlock_kalium_pin",
     "type": "text",
     "placeholders": {}
   },
-  "unlockBiometrics": "Authenticate to Unlock Natrium",
+  "unlockBiometrics": "Authenticate to Unlock Nautilus",
   "@unlockBiometrics": {
     "description": "unlock_kalium_bio",
     "type": "text",
@@ -948,7 +948,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardIntro": "Welcome to Natrium. Once you receive NANO, transactions will show up like this:",
+  "exampleCardIntro": "Welcome to Nautilus. Once you receive NANO, transactions will show up like this:",
   "@exampleCardIntro": {
     "description": "example_card_intro",
     "type": "text",
@@ -1200,15 +1200,15 @@
     "type": "text",
     "placeholders": {}
   },
-  "passwordWillBeRequiredToOpenParagraph": "This password will be required to open Natrium.",
+  "passwordWillBeRequiredToOpenParagraph": "This password will be required to open Nautilus.",
   "@passwordWillBeRequiredToOpenParagraph": {
-    "description": "A paragraph that tells the users that the created password will be required to open Natrium.",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus.",
     "type": "text",
     "placeholders": {}
   },
-  "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Natrium anymore.",
+  "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Nautilus anymore.",
   "@passwordNoLongerRequiredToOpenParagraph": {
-    "description": "An info paragraph that tells the user a password will no longer be needed to open Natrium",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus",
     "type": "text",
     "placeholders": {}
   },
@@ -1242,9 +1242,9 @@
     "type": "text",
     "placeholders": {}
   },
-  "requireAPasswordToOpenHeader": "Require a password to open Natrium?",
+  "requireAPasswordToOpenHeader": "Require a password to open Nautilus?",
   "@requireAPasswordToOpenHeader": {
-    "description": "A paragraph that asks the users if they would like a password to be required to open Natrium.",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus.",
     "type": "text",
     "placeholders": {}
   },
@@ -1286,7 +1286,7 @@
   },
   "connectingHeader": "Connecting",
   "@connectingHeader": {
-    "description": "A header to let the user now that Natrium is currently connecting to (or loading) live chat.",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat.",
     "type": "text",
     "placeholders": {}
   }

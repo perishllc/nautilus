@@ -1,5 +1,5 @@
-name: natrium_wallet_flutter
-description: Natrium - Fast, Robust & Secure NANO Wallet.
+name: nautilus_wallet_flutter
+description: Nautilus - Fast, Robust & Secure NANO Wallet.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -153,10 +153,18 @@ dev_dependencies:
     sdk: flutter
   build_runner: 2.1.5
   json_serializable: ^6.0.1
+  # the next two packages have a dependency conflict and can't both be enabled at the same time
+  # though the second is just a command line tool for updating /changing the application icons
   intl_translation:
     git:
       url: https://github.com/bbedward/intl_translation.git
       ref: master
+#  flutter_launcher_icons: "^0.9.2"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app_icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -197,28 +205,28 @@ flutter:
         - asset: fonts/Comfortaa-Light.ttf
           weight: 300
   assets:
-    - assets/QR.svg
-    - assets/welcome_animation.flr
-    - assets/send_animation.flr
-    - assets/manta_animation.flr
-    - assets/transfer_animation_natriumwalletonly.flr
-    - assets/transfer_animation_paperwalletonly.flr
-    - assets/searchseedqr_animation_magnifyingglassonly.flr
-    - assets/searchseedqr_animation_glassonly.flr
-    - assets/searchseedqr_animation_qronly.flr
-    - assets/searchseedmanual_animation_magnifyingglassonly.flr
-    - assets/searchseedmanual_animation_glassonly.flr
-    - assets/searchseedmanual_animation_seedonly.flr
-    - assets/threedot_animation.flr
-    - assets/offline_animation.flr
-    - assets/sharecard_logo.svg
-    - assets/transferfunds_illustration_start_natriumwalletonly.svg
-    - assets/transferfunds_illustration_start_paperwalletonly.svg
-    - assets/transferfunds_illustration_end_natriumwalletonly.svg
-    - assets/transferfunds_illustration_end_paperwalletonly.svg
-    - assets/pulltosend_animation.flr
-    - assets/sheethandle_animation.flr
-    - assets/ntr_placeholder_animation.flr
+    - legacy_assets/QR.svg
+    - legacy_assets/welcome_animation.flr
+    - legacy_assets/send_animation.flr
+    - legacy_assets/manta_animation.flr
+    - legacy_assets/transfer_animation_nautiluswalletonly.flr
+    - legacy_assets/transfer_animation_paperwalletonly.flr
+    - legacy_assets/searchseedqr_animation_magnifyingglassonly.flr
+    - legacy_assets/searchseedqr_animation_glassonly.flr
+    - legacy_assets/searchseedqr_animation_qronly.flr
+    - legacy_assets/searchseedmanual_animation_magnifyingglassonly.flr
+    - legacy_assets/searchseedmanual_animation_glassonly.flr
+    - legacy_assets/searchseedmanual_animation_seedonly.flr
+    - legacy_assets/threedot_animation.flr
+    - legacy_assets/offline_animation.flr
+    - legacy_assets/sharecard_logo.svg
+    - legacy_assets/transferfunds_illustration_start_nautiluswalletonly.svg
+    - legacy_assets/transferfunds_illustration_start_paperwalletonly.svg
+    - legacy_assets/transferfunds_illustration_end_nautiluswalletonly.svg
+    - legacy_assets/transferfunds_illustration_end_paperwalletonly.svg
+    - legacy_assets/pulltosend_animation.flr
+    - legacy_assets/sheethandle_animation.flr
+    - legacy_assets/ntr_placeholder_animation.flr
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

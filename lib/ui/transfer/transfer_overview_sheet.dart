@@ -5,23 +5,23 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:natrium_wallet_flutter/localization.dart';
-import 'package:natrium_wallet_flutter/dimens.dart';
-import 'package:natrium_wallet_flutter/appstate_container.dart';
-import 'package:natrium_wallet_flutter/bus/events.dart';
-import 'package:natrium_wallet_flutter/network/account_service.dart';
-import 'package:natrium_wallet_flutter/network/model/response/account_balance_item.dart';
-import 'package:natrium_wallet_flutter/network/model/response/accounts_balances_response.dart';
-import 'package:natrium_wallet_flutter/service_locator.dart';
-import 'package:natrium_wallet_flutter/ui/transfer/transfer_manual_entry_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/sheets.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/dialog.dart';
-import 'package:natrium_wallet_flutter/ui/util/ui_util.dart';
-import 'package:natrium_wallet_flutter/styles.dart';
-import 'package:natrium_wallet_flutter/util/caseconverter.dart';
-import 'package:natrium_wallet_flutter/util/nanoutil.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/bus/events.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/ui/transfer/transfer_manual_entry_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:logger/logger.dart';
 
 class AppTransferOverviewSheet {
@@ -133,7 +133,7 @@ class AppTransferOverviewSheet {
                                 children: <Widget>[
                                   Center(
                                     child: SvgPicture.asset(
-                                        'assets/transferfunds_illustration_start_paperwalletonly.svg',
+                                        'legacy_assets/transferfunds_illustration_start_paperwalletonly.svg',
                                         color: StateContainer.of(context)
                                             .curTheme
                                             .text45,
@@ -142,7 +142,7 @@ class AppTransferOverviewSheet {
                                   ),
                                   Center(
                                     child: SvgPicture.asset(
-                                        'assets/transferfunds_illustration_start_natriumwalletonly.svg',
+                                        'legacy_assets/transferfunds_illustration_start_nautiluswalletonly.svg',
                                         color: StateContainer.of(context)
                                             .curTheme
                                             .primary,

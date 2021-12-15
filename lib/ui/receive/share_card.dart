@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:natrium_wallet_flutter/app_icons.dart';
-import 'package:natrium_wallet_flutter/appstate_container.dart';
-import 'package:natrium_wallet_flutter/themes.dart';
-import 'package:natrium_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flare_flutter/flare_actor.dart';
@@ -200,7 +200,7 @@ class _AppShareCardState extends State<AppShareCard> {
                                       end: 8,
                                     ),
                                     child: Icon(
-                                      AppIcons.natriumhorizontal,
+                                      AppIcons.nautilushorizontal,
                                       size: 4.9,
                                       color: StateContainer.of(context)
                                           .curTheme
@@ -218,7 +218,7 @@ class _AppShareCardState extends State<AppShareCard> {
                                 end: 8,
                               ),
                               child: Icon(
-                                AppIcons.natriumhorizontal,
+                                AppIcons.nautilushorizontal,
                                 size: 4.9,
                                 color: StateContainer.of(context)
                                     .curTheme

@@ -5,16 +5,16 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:natrium_wallet_flutter/appstate_container.dart';
-import 'package:natrium_wallet_flutter/dimens.dart';
-import 'package:natrium_wallet_flutter/styles.dart';
-import 'package:natrium_wallet_flutter/localization.dart';
-import 'package:natrium_wallet_flutter/app_icons.dart';
-import 'package:natrium_wallet_flutter/ui/avatar/nonce_response.dart';
-import 'package:natrium_wallet_flutter/ui/send/send_confirm_sheet.dart';
-import 'package:natrium_wallet_flutter/ui/util/ui_util.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/ui/avatar/nonce_response.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'dart:math' as math;
 
 const String NATRICON_ADDRESS =
@@ -179,7 +179,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                           child: this.loading
                               ? Container(
                                   child: FlareActor(
-                                    "assets/ntr_placeholder_animation.flr",
+                                    "legacy_assets/ntr_placeholder_animation.flr",
                                     animation: "main",
                                     fit: BoxFit.contain,
                                     color: StateContainer.of(context)
@@ -204,7 +204,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                                   placeholderBuilder: (BuildContext context) =>
                                       Container(
                                     child: FlareActor(
-                                      "assets/ntr_placeholder_animation.flr",
+                                      "legacy_assets/ntr_placeholder_animation.flr",
                                       animation: "main",
                                       fit: BoxFit.contain,
                                       color: StateContainer.of(context)

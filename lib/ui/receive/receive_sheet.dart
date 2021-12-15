@@ -4,19 +4,19 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'dart:math' as Math;
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:natrium_wallet_flutter/app_icons.dart';
-import 'package:natrium_wallet_flutter/themes.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
-import 'package:natrium_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart';
-import 'package:natrium_wallet_flutter/dimens.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:natrium_wallet_flutter/ui/util/ui_util.dart';
-import 'package:natrium_wallet_flutter/ui/receive/share_card.dart';
-import 'package:natrium_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/receive/share_card.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flare_flutter/flare_actor.dart';
 
@@ -126,9 +126,9 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             ? Container(
                                 child: AppShareCard(
                                     shareCardKey,
-                                    SvgPicture.asset('assets/QR.svg'),
+                                    SvgPicture.asset('legacy_assets/QR.svg'),
                                     SvgPicture.asset(
-                                        'assets/sharecard_logo.svg')),
+                                        'legacy_assets/sharecard_logo.svg')),
                                 alignment: AlignmentDirectional(0.0, 0.0),
                               )
                             : SizedBox(),
@@ -147,7 +147,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                           child: Container(
                             width: computedMaxSize / 1.07,
                             height: computedMaxSize / 1.07,
-                            child: SvgPicture.asset('assets/QR.svg'),
+                            child: SvgPicture.asset('legacy_assets/QR.svg'),
                           ),
                         ),
                         // Actual QR part of the QR
@@ -277,7 +277,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                     placeholderBuilder:
                                         (BuildContext context) => Container(
                                       child: FlareActor(
-                                        "assets/ntr_placeholder_animation.flr",
+                                        "legacy_assets/ntr_placeholder_animation.flr",
                                         animation: "main",
                                         fit: BoxFit.contain,
                                         color: StateContainer.of(context)
@@ -295,7 +295,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                     end: computedMaxSize / 16,
                                   ),
                                   child: Icon(
-                                    AppIcons.natriumhorizontal,
+                                    AppIcons.nautilushorizontal,
                                     size: computedMaxSize / 25,
                                     color: StateContainer.of(context)
                                         .curTheme

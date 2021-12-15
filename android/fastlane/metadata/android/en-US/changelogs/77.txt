@@ -1,2 +1,0 @@
-- Fix issue which sometimes caused the wallet to crash and log out users
-- Fix change representative not working in some instances

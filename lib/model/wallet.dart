@@ -1,8 +1,8 @@
 import 'package:decimal/decimal.dart';
 import 'package:intl/intl.dart';
-import 'package:natrium_wallet_flutter/model/available_currency.dart';
-import 'package:natrium_wallet_flutter/network/model/response/account_history_response_item.dart';
-import 'package:natrium_wallet_flutter/util/numberutil.dart';
+import 'package:nautilus_wallet_flutter/model/available_currency.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
+import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 
 /// Main wallet object that's passed around the app via state
 class AppWallet {

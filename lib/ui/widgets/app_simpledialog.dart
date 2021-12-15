@@ -8,7 +8,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:natrium_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
 
 // Examples can assume:
 // enum Department { treasury, state }

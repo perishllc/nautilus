@@ -1,4 +1,4 @@
-Natrium is a fast, robust & secure wallet for the NANO cryptocurrency. Natrium has been thoroughly audited by Red4Sec, a security firm with extensive experience in cryptocurrency and blockchain projects.
+// todo
 
 Features:
 - Create a new NANO wallet or import an existing one.
@@ -19,7 +19,7 @@ IMPORTANT:
 
 Remember to backup your wallet seed and store it in a safe place. It is the only way to recover your funds if you sign out of the wallet or lose your device! If someone else gets your seed, they will be able to control your funds!
 
-Natrium is open source and available on GitHub.
+Nautilus is open source and available on GitHub.
 
 For support:
-https://help.natrium.io
+// todo

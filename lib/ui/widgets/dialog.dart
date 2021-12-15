@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flare_flutter/flare_actor.dart';
-import 'package:natrium_wallet_flutter/localization.dart';
-import 'package:natrium_wallet_flutter/styles.dart';
-import 'package:natrium_wallet_flutter/themes.dart';
-import 'package:natrium_wallet_flutter/appstate_container.dart';
-import 'package:natrium_wallet_flutter/ui/widgets/app_simpledialog.dart';
-import 'package:natrium_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 
 class AppDialogs {
   static void showConfirmDialog(
@@ -162,7 +162,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
       case AnimationType.SEND:
         return Center(
           child: FlareActor(
-            "assets/send_animation.flr",
+            "legacy_assets/send_animation.flr",
             animation: "main",
             fit: BoxFit.contain,
             color: StateContainer.of(context).curTheme.primary,
@@ -171,7 +171,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
       case AnimationType.MANTA:
         return Center(
           child: FlareActor(
-            "assets/manta_animation.flr",
+            "legacy_assets/manta_animation.flr",
             animation: "main",
             fit: BoxFit.contain,
           ),
@@ -181,21 +181,21 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
           children: <Widget>[
             Center(
               child: FlareActor(
-                "assets/searchseedqr_animation_qronly.flr",
+                "legacy_assets/searchseedqr_animation_qronly.flr",
                 animation: "main",
                 fit: BoxFit.contain,
               ),
             ),
             Center(
               child: FlareActor(
-                "assets/searchseedqr_animation_glassonly.flr",
+                "legacy_assets/searchseedqr_animation_glassonly.flr",
                 animation: "main",
                 fit: BoxFit.contain,
               ),
             ),
             Center(
               child: FlareActor(
-                "assets/searchseedqr_animation_magnifyingglassonly.flr",
+                "legacy_assets/searchseedqr_animation_magnifyingglassonly.flr",
                 animation: "main",
                 fit: BoxFit.contain,
                 color: StateContainer.of(context).curTheme.primary,
@@ -208,7 +208,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
           children: <Widget>[
             Center(
               child: FlareActor(
-                "assets/searchseedmanual_animation_seedonly.flr",
+                "legacy_assets/searchseedmanual_animation_seedonly.flr",
                 animation: "main",
                 fit: BoxFit.contain,
                 color: StateContainer.of(context).curTheme.primary30,
@@ -216,14 +216,14 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
             ),
             Center(
               child: FlareActor(
-                "assets/searchseedmanual_animation_glassonly.flr",
+                "legacy_assets/searchseedmanual_animation_glassonly.flr",
                 animation: "main",
                 fit: BoxFit.contain,
               ),
             ),
             Center(
               child: FlareActor(
-                "assets/searchseedmanual_animation_magnifyingglassonly.flr",
+                "legacy_assets/searchseedmanual_animation_magnifyingglassonly.flr",
                 animation: "main",
                 fit: BoxFit.contain,
                 color: StateContainer.of(context).curTheme.primary,
@@ -235,12 +235,12 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
         return Stack(
           children: <Widget>[
             FlareActor(
-              "assets/transfer_animation_paperwalletonly.flr",
+              "legacy_assets/transfer_animation_paperwalletonly.flr",
               animation: "main",
               fit: BoxFit.contain,
             ),
             FlareActor(
-              "assets/transfer_animation_natriumwalletonly.flr",
+              "legacy_assets/transfer_animation_nautiluswalletonly.flr",
               animation: "main",
               fit: BoxFit.contain,
               color: StateContainer.of(context).curTheme.primary,
@@ -307,7 +307,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
                       width: 33.333,
                       height: 8.866,
                       child: FlareActor(
-                        "assets/threedot_animation.flr",
+                        "legacy_assets/threedot_animation.flr",
                         animation: "main",
                         fit: BoxFit.contain,
                         color: StateContainer.of(context).curTheme.primary,
