@@ -28,14 +28,16 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 
 - Available on most App stores. 
 
-### Nautilus - Beta 2.0 (Q1 2023)
+### Nautilus - Stable v1 (Q1 2023)
 
 - On device PoW generation.
 - Eliminate Nautilus back-end server requirement.
+- Offline/Bluetooth Payments (???)
 
-### Nautilus - Beta 2.0 (Q1 2024)
+### Nautilus - Stable v2 (Q4 2024)
 
-- Metal NANO debit card, Managed via Nautilus (Nano.to/Card)
+- Cash out NANO to bank via ACH, WIRE etc. 
+- Optional, Metal, NANO debit card (Nano.to/Card)
 
 ---
 
