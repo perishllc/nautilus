@@ -6,23 +6,44 @@
 
 This project is in development by the team @ [Nano.to](https://nano.to/development)
 
-### Nautilus - Beta 0.1 (Q1 2022)
 
-- Replace all AppDitto trademarks, as to not infringe on their marks. **Logo assets pending**
-- Change default theme to a darker color. **Css hex color tbd**
-- Simplify the 'New User' onboarding screens. Right now there are about 3-5 screens between new users, the UI (wallet). I want to bring this down to 1-3. 
-   - Set Pin
-   - Backup Seed
-   - Done!
-- Disable Natricon functionality entirely. 
-- When you start typing in the Address input of 'Send From' screen, Nano.to/Known usernames will bw shown. 
+##### Features
+
+- When you start typing in the Address input of 'Send From' screen, Nano.to/Known usernames will bw shown.
+- Usernames should be clickable to reveal the full address & when the username was last leased / updated
 - When searching Usernames, a '@' will not be need to show list... Just start typing.
-- Payment history show Nano.to Usernames.
-- Local contacts will be called Favorites. 
+   - Usernames when displayed in full will still show an @
+- Add as contact button / system using nano.to usernames
+   - Through the payment history in some form
+   - Contacts may be nickname-able
+- Add Username Reservation Screen to app.
+   - Can be done on android np.
+   - On iOS it can only be linked to / referenced unless you use the IAP mechanism (and Apple will take a % cut)
+- Payment history shows Nano.to Usernames.
+- Replace all AppDitto trademarks, as to not infringe on their marks. **Logo assets pending**
+   - Temporarily move assets to the legacy_assets folder, remove assets from here as they are developed
+
+##### Aesthetic goals
+- Show nano.to usernames over full addresses wherever possible
 - Registered Usernames will be called Usernames. 
-- Create clever UI to differenciate between Favorites & Usernames. 
+- Simplify the 'New User' onboarding screens. Right now there are about 3-5 screens between new users, the UI (wallet). I want to bring this down to 1-3. 
+   - Ask to import seed or create one
+   - Backup Seed
+   - Set Pin
+   - Done!
+- Local contacts will be called Favorites.
+- Create clever UI to differenciate between Favorites & Usernames.
+   - Maybe prefix favorites with a # or $
+   - Prefix usernames with an @
+- Change default theme to a darker color. **CSS hex color tbd**
 - Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
-- Add Username Reservation Screen to app. **This actually may be an issue with Apple not allowing third party payments.**
+
+
+### Nautilus - Beta 0.1 (Q1 2022)
+- Build with some / core features, possibly provide an apk on github
+
+### Nautilus - Beta 0.5 (Q2 2022)
+- Wider release / testing
 
 ### Nautilus - Beta 1.0 (Q3 2022)
 
@@ -36,7 +57,7 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 
 ### Nautilus - Stable v2 (Q4 2024)
 
-- Cash out NANO to bank via ACH, WIRE etc. 
+- Cash out NANO to bank via ACH, WIRE etc.
 - Optional, Metal, NANO debit card (Nano.to/Card)
 
 ---
