@@ -1,3 +1,33 @@
+This project is in development by the team @ [Nano.to](https://nano.to/development)
+
+### Nautilus - Beta 0.1 (Q1 2022)
+
+- Replace all AppDitto trademarks, as to not infringe on their marks. **Logo assets pending**
+- Change default theme to a darker color. **CSS HEX TBD**
+- Simplify the 'New User' onboarding screens. Right down there are about 3-5 screens between new users, the UI (wallet). I want to bring this down to 1-3. 
+   - Set Pin
+   - Backup Seed
+   - Done!
+- Disable Natricon functionality entirely. 
+- When you start typing in the Address input of 'Send From' screen, Nano.to/Known usernames will bw shown. 
+- When searching Usernames, a '@' will not be need to show list... Just start typing.
+- Payment history show Nano.to Usernames.
+- Local contacts will be called Favorites. 
+- Registered Usernames will be called Usernames. 
+- Create clever UI to differenciate between Favorites & Usernames. 
+- Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
+- Add Username Reservation Screen to app. **This actually may be an issue with Apple not allowing third party payments.**
+
+### Nautilus - Beta 1.0 (Q3 2022)
+
+- Available on most App stores. 
+
+### Nautilus - Beta 2.0 (Q1 2023)
+
+- On device PoW generation.
+
+---
+
 # Nautilus
 
 ![Cover](https://raw.githubusercontent.com/fwd/nautilus/master/.github/banner.png)
