@@ -51,14 +51,14 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 
 ### Nautilus - Stable v1 (Q1 2023)
 
-- On device PoW generation.
-- Eliminate Nautilus back-end server requirement.
-- Offline/Bluetooth Payments (???)
+- On device PoW generation. **Apple may not allow this. We'll see**
+- Eliminate Nautilus back-end server requirement. **Or minimize need for it**
+- Offline/Bluetooth Payments (???) **Big if**
 
 ### Nautilus - Stable v2 (Q4 2024)
 
-- Cash out NANO to bank via ACH, WIRE etc.
-- Optional, Metal, NANO debit card (Nano.to/Card)
+- Cash out NANO to bank via ACH, WIRE etc. 
+- Optional, Metal, NANO debit card (Nano.to/Card) 
 
 ---
 
