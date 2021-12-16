@@ -15,12 +15,12 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
    - Usernames when displayed in full will still show an @
 - [ ] Add as contact button / system using nano.to usernames
    - Through the payment history in some form
-   - Contacts may be nickname-able
+   - Contacts may be nickname-able (i.e Favorites)
 - [ ] Add Username Reservation Screen to app.
    - Can be done on android np.
-   - On iOS it can only be linked to / referenced unless you use the IAP mechanism (and Apple will take a % cut)
-- [ ] Payment history shows Nano.to Usernames.
-- [ ] Replace all AppDitto trademarks, as to not infringe on their marks. **Logo assets pending**
+   - On iOS it can only be linked to / referenced unless you use the IAP mechanism (and Apple will take a % cut) **Classic Monopoly**
+- [ ] Payment history shows Nano.to Usernames or Favorites
+- [ ] Replace all AppDitto trademarks, as to not infringe on their marks. 
    - [x] Move all appditto assets to a legacy_assets folder, to be removed as replacements are made
 
 ##### Aesthetic goals
@@ -35,14 +35,16 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 - [ ] Create clever UI to differenciate between Favorites & Usernames.
    - Maybe prefix favorites with a # or $
    - Prefix usernames with an @
-- [ ] Change default theme to a darker color. **CSS hex color TBD**
+- [ ] Change default theme to a darker color. **CSS Hex Color TBD**
 - [ ] Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
 
 
 ### Nautilus - Beta 0.1 (Q1 2022)
+
 - Build with some / core features, possibly provide an apk on github
 
 ### Nautilus - Beta 0.5 (Q2 2022)
+
 - Wider release / testing
 
 ### Nautilus - Beta 1.0 (Q3 2022)
