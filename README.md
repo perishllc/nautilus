@@ -43,6 +43,10 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 
 - Build with some / core features, possibly provide an apk on github
 
+### Nautilus - Beta 0.25 (Q1 2022)
+
+- Buy XNO right on the Wallet, with Simplex (or MoonPay) integration. Like Trust Wallet!
+
 ### Nautilus - Beta 0.5 (Q2 2022)
 
 - Wider release / testing
