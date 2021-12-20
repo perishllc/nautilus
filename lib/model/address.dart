@@ -5,6 +5,7 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 class Address {
   String _address;
   String _amount;
+  String _username;
 
   Address(String value) {
     _parseAddressString(value);

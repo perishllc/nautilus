@@ -73,11 +73,11 @@ class NautilusTheme extends BaseTheme {
 
   static const greenDark = Color(0xFF18A264);
 
-  static const blueishGreyDark = Color(0xFF1E2C3D);
+  static const blueishGreyDark = Color(0xFF1D1228);
 
-  static const blueishGreyLight = Color(0xFF2A3A4D);
+  static const blueishGreyLight = Color(0xFF302A4D);
 
-  static const blueishGreyDarkest = Color(0xFF1E2C3D);
+  static const blueishGreyDarkest = Color(0xFF271E3D);
 
   static const white = Color(0xFFFFFFFF);
 
@@ -135,8 +135,7 @@ class NautilusTheme extends BaseTheme {
   Color animationOverlayStrong = black.withOpacity(0.85);
 
   Brightness brightness = Brightness.dark;
-  SystemUiOverlayStyle statusBar =
-      SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
+  SystemUiOverlayStyle statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
@@ -214,8 +213,7 @@ class TitaniumTheme extends BaseTheme {
   Color animationOverlayStrong = black.withOpacity(0.85);
 
   Brightness brightness = Brightness.dark;
-  SystemUiOverlayStyle statusBar =
-      SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
+  SystemUiOverlayStyle statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
@@ -293,17 +291,10 @@ class IndiumTheme extends BaseTheme {
   Color animationOverlayStrong = white.withOpacity(0.85);
 
   Brightness brightness = Brightness.light;
-  SystemUiOverlayStyle statusBar =
-      SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent);
+  SystemUiOverlayStyle statusBar = SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent);
 
-  BoxShadow boxShadow = BoxShadow(
-      color: darkDeepBlue.withOpacity(0.1),
-      offset: Offset(0, 5),
-      blurRadius: 15);
-  BoxShadow boxShadowButton = BoxShadow(
-      color: darkDeepBlue.withOpacity(0.2),
-      offset: Offset(0, 5),
-      blurRadius: 15);
+  BoxShadow boxShadow = BoxShadow(color: darkDeepBlue.withOpacity(0.1), offset: Offset(0, 5), blurRadius: 15);
+  BoxShadow boxShadowButton = BoxShadow(color: darkDeepBlue.withOpacity(0.2), offset: Offset(0, 5), blurRadius: 15);
 
   OverlayTheme qrScanTheme = OverlayTheme.INDIUM;
   AppIconEnum appIcon = AppIconEnum.INDIUM;
@@ -378,8 +369,7 @@ class NeptuniumTheme extends BaseTheme {
   Color animationOverlayStrong = black.withOpacity(0.9);
 
   Brightness brightness = Brightness.dark;
-  SystemUiOverlayStyle statusBar =
-      SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
+  SystemUiOverlayStyle statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
@@ -457,8 +447,7 @@ class ThoriumTheme extends BaseTheme {
   Color animationOverlayStrong = black.withOpacity(0.85);
 
   Brightness brightness = Brightness.dark;
-  SystemUiOverlayStyle statusBar =
-      SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
+  SystemUiOverlayStyle statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
@@ -533,8 +522,7 @@ class CarbonTheme extends BaseTheme {
   Color animationOverlayStrong = blackBlueish.withOpacity(0.9);
 
   Brightness brightness = Brightness.dark;
-  SystemUiOverlayStyle statusBar =
-      SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
+  SystemUiOverlayStyle statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
   BoxShadow boxShadow = BoxShadow(
     color: white.withOpacity(0.14),

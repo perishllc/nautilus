@@ -50,8 +50,7 @@ void main() async {
   // Setup firebase
   await Firebase.initializeApp();
   // Run app
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
     runApp(new StateContainer(child: new App()));
   });
 }
@@ -70,8 +69,7 @@ class _AppState extends State<App> {
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        StateContainer.of(context).curTheme.statusBar);
+    SystemChrome.setSystemUIOverlayStyle(StateContainer.of(context).curTheme.statusBar);
     return OKToast(
       textStyle: AppStyles.textStyleSnackbar(context),
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -79,8 +77,7 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         title: 'Nautilus',
         theme: ThemeData(
-          dialogBackgroundColor:
-              StateContainer.of(context).curTheme.backgroundDark,
+          dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           primaryColor: StateContainer.of(context).curTheme.primary,
           accentColor: StateContainer.of(context).curTheme.primary10,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -93,9 +90,7 @@ class _AppState extends State<App> {
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
-        locale: StateContainer.of(context).curLanguage == null ||
-                StateContainer.of(context).curLanguage.language ==
-                    AvailableLanguage.DEFAULT
+        locale: StateContainer.of(context).curLanguage == null || StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT
             ? null
             : StateContainer.of(context).curLanguage.getLocale(),
         supportedLocales: [
@@ -126,10 +121,8 @@ class _AppState extends State<App> {
           const Locale('ca'), // Catalan
           const Locale('uk'), // Ukrainian
           const Locale('no'), // Norwegian
-          const Locale.fromSubtags(
-              languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
-          const Locale.fromSubtags(
-              languageCode: 'zh', scriptCode: 'Hant'), // Chinese Traditional
+          const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
+          const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'), // Chinese Traditional
           const Locale('ar'), // Arabic
           const Locale('lv'), // Latvian
           const Locale('bn'), // Bengali
@@ -208,14 +201,12 @@ class _AppState extends State<App> {
               );
             case '/home':
               return NoTransitionRoute(
-                builder: (_) =>
-                    AppHomePage(priceConversion: settings.arguments),
+                builder: (_) => AppHomePage(priceConversion: settings.arguments),
                 settings: settings,
               );
             case '/home_transition':
               return NoPopTransitionRoute(
-                builder: (_) =>
-                    AppHomePage(priceConversion: settings.arguments),
+                builder: (_) => AppHomePage(priceConversion: settings.arguments),
                 settings: settings,
               );
             case '/intro_welcome':
@@ -235,8 +226,7 @@ class _AppState extends State<App> {
               );
             case '/intro_backup':
               return MaterialPageRoute(
-                builder: (_) =>
-                    IntroBackupSeedPage(encryptedSeed: settings.arguments),
+                builder: (_) => IntroBackupSeedPage(encryptedSeed: settings.arguments),
                 settings: settings,
               );
             case '/intro_backup_safety':
@@ -270,16 +260,10 @@ class _AppState extends State<App> {
                 settings: settings,
               );
             case '/avatar_page':
-              return PageRouteBuilder(
-                  pageBuilder: (context, animationIn, animationOut) =>
-                      AvatarPage(),
-                  settings: settings,
-                  opaque: false);
+              return PageRouteBuilder(pageBuilder: (context, animationIn, animationOut) => AvatarPage(), settings: settings, opaque: false);
             case '/avatar_change_page':
               return MaterialPageRoute(
-                builder: (_) => AvatarChangePage(
-                    curAddress:
-                        StateContainer.of(context).selectedAccount.address),
+                builder: (_) => AvatarChangePage(curAddress: StateContainer.of(context).selectedAccount.address),
                 settings: settings,
               );
             case '/before_scan_screen':
@@ -312,8 +296,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       return false;
     }
     try {
-      String salted = NanoHelpers.bytesToUtf8String(
-          NanoHelpers.hexToBytes(seed.substring(0, 16)));
+      String salted = NanoHelpers.bytesToUtf8String(NanoHelpers.hexToBytes(seed.substring(0, 16)));
       if (salted == "Salted__") {
         return true;
       }
@@ -327,8 +310,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     // Update session key
     await sl.get<Vault>().updateSessionKey();
     // Check if device is rooted or jailbroken, show user a warning informing them of the risks if so
-    if (!(await sl.get<SharedPrefsUtil>().getHasSeenRootWarning()) &&
-        (await RootChecker.isDeviceRooted)) {
+    if (!(await sl.get<SharedPrefsUtil>().getHasSeenRootWarning()) && (await RootChecker.isDeviceRooted)) {
       AppDialogs.showConfirmDialog(
           context,
           CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
@@ -380,15 +362,12 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       if (isLoggedIn) {
         if (isEncrypted) {
           Navigator.of(context).pushReplacementNamed('/password_lock_screen');
-        } else if (await sl.get<SharedPrefsUtil>().getLock() ||
-            await sl.get<SharedPrefsUtil>().shouldLock()) {
+        } else if (await sl.get<SharedPrefsUtil>().getLock() || await sl.get<SharedPrefsUtil>().shouldLock()) {
           Navigator.of(context).pushReplacementNamed('/lock_screen');
         } else {
           await NanoUtil().loginAccount(seed, context);
-          PriceConversion conversion =
-              await sl.get<SharedPrefsUtil>().getPriceConversion();
-          Navigator.of(context)
-              .pushReplacementNamed('/home', arguments: conversion);
+          PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+          Navigator.of(context).pushReplacementNamed('/home', arguments: conversion);
         }
       } else {
         Navigator.of(context).pushReplacementNamed('/intro_welcome');
@@ -424,8 +403,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     _hasCheckedLoggedIn = false;
     _retried = false;
-    if (SchedulerBinding.instance.schedulerPhase ==
-        SchedulerPhase.persistentCallbacks) {
+    if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.persistentCallbacks) {
       SchedulerBinding.instance.addPostFrameCallback((_) => checkLoggedIn());
     }
   }
@@ -468,10 +446,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     // This seems to be the earliest place we can retrieve the device Locale
     setLanguage();
-    sl
-        .get<SharedPrefsUtil>()
-        .getCurrency(StateContainer.of(context).deviceLocale)
-        .then((currency) {
+    sl.get<SharedPrefsUtil>().getCurrency(StateContainer.of(context).deviceLocale).then((currency) {
       StateContainer.of(context).curCurrency = currency;
     });
     return new Scaffold(

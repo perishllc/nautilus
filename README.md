@@ -7,7 +7,7 @@
 This project is in development by the team @ [Nano.to](https://nano.to/development)
 
 
-##### Features
+#### Features
 
 - [ ] When you start typing in the Address input of 'Send From' screen, Nano.to/Known usernames will be shown.
 - [ ] Usernames should be clickable to reveal the full address & when the username was last leased / updated
@@ -23,7 +23,7 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 - [ ] Replace all AppDitto trademarks, as to not infringe on their marks. 
    - [x] Move all appditto assets to a legacy_assets folder, to be removed as replacements are made
 
-##### Aesthetic goals
+#### Aesthetic goals
 - [ ] Show nano.to usernames over full addresses wherever possible
 - [ ] Registered Usernames will be called Usernames. 
 - [ ] Simplify the 'New User' onboarding screens. Right now there are about 3-5 screens between new users, the UI (wallet). I want to bring this down to 1-3. 
@@ -37,6 +37,15 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
    - Prefix usernames with an @
 - [ ] Change default theme to a darker color. **CSS Hex Color TBD**
 - [ ] Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
+
+#### Changes so far
+- [x] removed natricons
+- [x] most branding / strings replaced with Nautilus
+- [x] experimenting with themes
+- [x] start changing the send screen
+- [ ] set random representative for new accounts using nano.to/reps?json=true
+- [ ] cache json from /reps and /known
+
 
 
 ### Nautilus - Beta 0.1 (Q1 2022)
@@ -53,7 +62,7 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 
 ### Nautilus - Beta 1.0 (Q3 2022)
 
-- Available on most App stores. 
+- Available on most App stores.
 
 ### Nautilus - Stable v1 (Q1 2023)
 
