@@ -1206,6 +1206,13 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
+                    // Natricon on-off
+                    // AppSettings.buildSettingsListItemDoubleLine(
+                    //     context, AppLocalization.of(context).natricon, _curNatriconSetting, AppIcons.natricon, _natriconDialog),
+                    // Divider(
+                    //   height: 2,
+                    //   color: StateContainer.of(context).curTheme.text15,
+                    // ),
                     Container(
                       margin: EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
                       child: Text(AppLocalization.of(context).manage,

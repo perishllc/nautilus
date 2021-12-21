@@ -155,16 +155,19 @@ dev_dependencies:
   json_serializable: ^6.0.1
   # the next two packages have a dependency conflict and can't both be enabled at the same time
   # though the second is just a command line tool for updating /changing the application icons
+  # to update the app icons use:
+  # `flutter pub get` &&
+  # `flutter pub run flutter_launcher_icons:main`
   intl_translation:
     git:
       url: https://github.com/bbedward/intl_translation.git
       ref: master
-#  flutter_launcher_icons: "^0.9.2"
+  # flutter_launcher_icons: "^0.9.2"
 
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/app_icon.png"
+  image_path: "assets/logo-square-gradient.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -227,6 +230,8 @@ flutter:
     - legacy_assets/pulltosend_animation.flr
     - legacy_assets/sheethandle_animation.flr
     - legacy_assets/ntr_placeholder_animation.flr
+    - assets/store/known.json
+    - assets/store/reps.json
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

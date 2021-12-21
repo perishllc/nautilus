@@ -37,14 +37,17 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
    - Prefix usernames with an @
 - [ ] Change default theme to a darker color. **CSS Hex Color TBD**
 - [ ] Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
+- [ ] Advanced theming support
 
 #### Changes so far
 - [x] removed natricons
 - [x] most branding / strings replaced with Nautilus
 - [x] experimenting with themes
 - [x] start changing the send screen
-- [ ] set random representative for new accounts using nano.to/reps?json=true
+- [x] update icons
+- [ ] use json data on the send screen
 - [ ] cache json from /reps and /known
+- [ ] set random representative for new accounts using nano.to/reps?json=true
 
 
 

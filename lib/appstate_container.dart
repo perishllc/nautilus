@@ -269,6 +269,8 @@ class StateContainerState extends State<StateContainer> {
     // sl.get<SharedPrefsUtil>().getUseNatricon().then((useNatricon) {
     //   setNatriconOn(useNatricon);
     // });
+    // make sure db is up to date
+    sl.get<DBHelper>().populateDBFromCache();
   }
 
   // Subscriptions

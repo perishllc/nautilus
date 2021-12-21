@@ -51,10 +51,8 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     this.totalToTransfer = BigInt.zero;
     this.totalAsReadableAmount = "";
     this.animationOpen = false;
-    widget.privKeyBalanceMap
-        .forEach((String account, AccountBalanceItem accountBalanceItem) {
-      totalToTransfer += BigInt.parse(accountBalanceItem.balance) +
-          BigInt.parse(accountBalanceItem.pending);
+    widget.privKeyBalanceMap.forEach((String account, AccountBalanceItem accountBalanceItem) {
+      totalToTransfer += BigInt.parse(accountBalanceItem.balance) + BigInt.parse(accountBalanceItem.pending);
     });
     this.totalAsReadableAmount = NumberUtil.getRawAsUsableString(totalToTransfer.toString());
   }
@@ -80,9 +78,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
             Container(
               margin: EdgeInsets.only(top: 30.0, left: 70, right: 70),
               child: AutoSizeText(
-                CaseChange.toUpperCase(
-                    AppLocalization.of(context).transferHeader,
-                    context),
+                CaseChange.toUpperCase(AppLocalization.of(context).transferHeader, context),
                 style: AppStyles.textStyleHeader(context),
                 textAlign: TextAlign.center,
                 maxLines: 2,
@@ -93,45 +89,30 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
             // A container for the paragraphs
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.1),
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                        margin: EdgeInsets.symmetric(
-                            horizontal:
-                                smallScreen(context) ? 35 : 60),
+                        margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                         child: Text(
-                          AppLocalization.of(context)
-                              .transferConfirmInfo
-                              .replaceAll(
-                                  "%1", totalAsReadableAmount),
-                          style: AppStyles.textStyleParagraphPrimary(
-                              context),
+                          AppLocalization.of(context).transferConfirmInfo.replaceAll("%1", totalAsReadableAmount),
+                          style: AppStyles.textStyleParagraphPrimary(context),
                           textAlign: TextAlign.start,
                         )),
                     Container(
-                        margin: EdgeInsets.symmetric(
-                            horizontal:
-                                smallScreen(context) ? 35 : 60),
+                        margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                         child: Text(
-                          AppLocalization.of(context)
-                              .transferConfirmInfoSecond,
-                          style:
-                              AppStyles.textStyleParagraph(context),
+                          AppLocalization.of(context).transferConfirmInfoSecond,
+                          style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.start,
                         )),
                     Container(
-                        margin: EdgeInsets.symmetric(
-                            horizontal:
-                                smallScreen(context) ? 35 : 60),
+                        margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                         child: Text(
-                          AppLocalization.of(context)
-                              .transferConfirmInfoThird,
-                          style:
-                              AppStyles.textStyleParagraph(context),
+                          AppLocalization.of(context).transferConfirmInfoThird,
+                          style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.start,
                         )),
                   ],
@@ -145,22 +126,13 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                     children: <Widget>[
                       // Send Button
                       AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY,
-                          CaseChange.toUpperCase(
-                              AppLocalization.of(context).confirm,
-                              context),
-                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                          context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                          onPressed: () async {
                         animationOpen = true;
-                        Navigator.of(context).push(
-                            AnimationLoadingOverlay(
-                                AnimationType.TRANSFER_TRANSFERRING,
-                                StateContainer.of(context)
-                                    .curTheme
-                                    .animationOverlayStrong,
-                                StateContainer.of(context)
-                                    .curTheme
-                                    .animationOverlayMedium, onPoppedCallback: () {
+                        Navigator.of(context).push(AnimationLoadingOverlay(
+                            AnimationType.TRANSFER_TRANSFERRING,
+                            StateContainer.of(context).curTheme.animationOverlayStrong,
+                            StateContainer.of(context).curTheme.animationOverlayMedium, onPoppedCallback: () {
                           animationOpen = false;
                         }));
                         await processWallets();
@@ -171,12 +143,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                     children: <Widget>[
                       // Scan QR Code Button
                       AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context)
-                              .cancel
-                              .toUpperCase(),
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).cancel.toUpperCase(), Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pop();
                       }),
                     ],
@@ -192,7 +159,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
 
   Future<String> _getPrivKey(int index) async {
     String seed;
-    if (StateContainer.of(context).encryptedSecret != null)  {
+    if (StateContainer.of(context).encryptedSecret != null) {
       seed = NanoHelpers.byteToHex(NanoCrypt.decrypt(StateContainer.of(context).encryptedSecret, await sl.get<Vault>().getSessionKey()));
     } else {
       seed = await sl.get<Vault>().getSeed();
@@ -205,7 +172,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     try {
       state.lockCallback();
       for (String account in widget.privKeyBalanceMap.keys) {
-        AccountBalanceItem  balanceItem = widget.privKeyBalanceMap[account];
+        AccountBalanceItem balanceItem = widget.privKeyBalanceMap[account];
         // Get frontiers first
         AccountInfoResponse resp = await sl.get<AccountService>().getAccountInfo(account);
         if (!resp.unopened) {
@@ -217,27 +184,17 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         for (String hash in pendingBlocks.keys) {
           PendingResponseItem item = pendingBlocks[hash];
           if (balanceItem.frontier != null) {
-            ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-              AppWallet.defaultRepresentative,
-              balanceItem.frontier,
-              item.amount,
-              hash,
-              account,
-              balanceItem.privKey
-            );
-            if (resp.hash != null)  {
+            ProcessResponse resp = await sl
+                .get<AccountService>()
+                .requestReceive(AppWallet.defaultRepresentative, balanceItem.frontier, item.amount, hash, account, balanceItem.privKey);
+            if (resp.hash != null) {
               balanceItem.frontier = resp.hash;
               totalTransferred += BigInt.parse(item.amount);
             }
           } else {
-            ProcessResponse resp = await sl.get<AccountService>().requestOpen(
-              item.amount,
-              hash,
-              account,
-              balanceItem.privKey
-            );
+            ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, hash, account, balanceItem.privKey);
             if (resp.hash != null) {
-              balanceItem.frontier = resp.hash;            
+              balanceItem.frontier = resp.hash;
               totalTransferred += BigInt.parse(item.amount);
             }
           }
@@ -246,15 +203,9 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         }
         // Process send from this account
         resp = await sl.get<AccountService>().getAccountInfo(account);
-        ProcessResponse sendResp = await sl.get<AccountService>().requestSend(
-          AppWallet.defaultRepresentative,
-          resp.frontier,
-          resp.balance,
-          state.wallet.address,
-          account,
-          balanceItem.privKey,
-          max: true
-        );
+        ProcessResponse sendResp = await sl
+            .get<AccountService>()
+            .requestSend(AppWallet.defaultRepresentative, resp.frontier, resp.balance, state.wallet.address, account, balanceItem.privKey, max: true);
         if (sendResp.hash != null) {
           totalTransferred += BigInt.parse(balanceItem.balance);
         }
@@ -278,27 +229,17 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         PendingResponseItem item = pendingBlocks[hash];
         if (state.wallet.openBlock != null) {
           ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-            state.wallet.representative,
-            state.wallet.frontier,
-            item.amount,
-            hash,
-            state.wallet.address,
-            await _getPrivKey(state.selectedAccount.index)
-          );
+              state.wallet.representative, state.wallet.frontier, item.amount, hash, state.wallet.address, await _getPrivKey(state.selectedAccount.index));
           if (resp.hash != null) {
             state.wallet.frontier = resp.hash;
           }
         } else {
           ProcessResponse resp = await sl.get<AccountService>().requestOpen(
-            item.amount,
-            hash,
-            state.wallet.address,
-            await _getPrivKey(state.selectedAccount.index),
-            representative: state.wallet.representative
-          );
+              item.amount, hash, state.wallet.address, await _getPrivKey(state.selectedAccount.index),
+              representative: state.wallet.representative);
           if (resp.hash != null) {
             state.wallet.frontier = resp.hash;
-            state.wallet.openBlock = resp.hash;            
+            state.wallet.openBlock = resp.hash;
           }
         }
       }
@@ -309,8 +250,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     } finally {
       state.unlockCallback();
     }
-    EventTaxiImpl.singleton()
-        .fire(TransferCompleteEvent(amount: totalTransferred));
+    EventTaxiImpl.singleton().fire(TransferCompleteEvent(amount: totalTransferred));
     if (animationOpen) {
       Navigator.of(context).pop();
     }

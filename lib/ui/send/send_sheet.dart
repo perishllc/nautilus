@@ -18,6 +18,7 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/contact.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
@@ -37,10 +38,11 @@ import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 class SendSheet extends StatefulWidget {
   final AvailableCurrency localCurrency;
   final Contact contact;
+  final User user;
   final String address;
   final String quickSendAmount;
 
-  SendSheet({@required this.localCurrency, this.contact, this.address, this.quickSendAmount}) : super();
+  SendSheet({@required this.localCurrency, this.contact, this.user, this.address, this.quickSendAmount}) : super();
 
   _SendSheetState createState() => _SendSheetState();
 }
@@ -62,12 +64,12 @@ class _SendSheetState extends State<SendSheet> {
   String _amountValidationText = "";
   String _addressValidationText = "";
   String quickSendAmount;
-  List<Contact> _contacts;
+  List<User> _users;
   bool animationOpen;
   // Used to replace address textfield with colorized TextSpan
   bool _addressValidAndUnfocused = false;
-  // Set to true when a contact is being entered
-  bool _isContact = false;
+  // Set to true when a username is being entered
+  bool _isUser = false;
   // Buttons States (Used because we hide the buttons under certain conditions)
   bool _pasteButtonVisible = true;
   bool _showContactButton = true;
@@ -87,13 +89,13 @@ class _SendSheetState extends State<SendSheet> {
     _sendAmountController = TextEditingController();
     _sendAddressController = TextEditingController();
     _sendAddressStyle = AddressStyle.TEXT60;
-    _contacts = List();
+    _users = List();
     quickSendAmount = widget.quickSendAmount;
     this.animationOpen = false;
     if (widget.contact != null) {
       // Setup initial state for contact pre-filled
       _sendAddressController.text = widget.contact.name;
-      _isContact = true;
+      _isUser = true;
       _showContactButton = false;
       _pasteButtonVisible = false;
       _sendAddressStyle = AddressStyle.PRIMARY;
@@ -137,17 +139,17 @@ class _SendSheetState extends State<SendSheet> {
           _addressValidAndUnfocused = false;
         });
         _sendAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAddressController.text.length));
-        if (_sendAddressController.text.startsWith("@")) {
-          sl.get<DBHelper>().getContactsWithNameLike(_sendAddressController.text).then((contactList) {
+        if (/*_sendAddressController.text.startsWith("@")*/ !_sendAddressController.text.startsWith("nano_")) {
+          sl.get<DBHelper>().getUsersWithNameLike(_sendAddressController.text).then((userList) {
             setState(() {
-              _contacts = contactList;
+              _users = userList;
             });
           });
         }
       } else {
         setState(() {
           _addressHint = "";
-          _contacts = [];
+          _users = [];
           if (Address(_sendAddressController.text).isValid()) {
             _addressValidAndUnfocused = true;
           }
@@ -395,9 +397,9 @@ class _SendSheetState extends State<SendSheet> {
                                               child: ListView.builder(
                                                 shrinkWrap: true,
                                                 padding: EdgeInsets.only(bottom: 0, top: 0),
-                                                itemCount: _contacts.length,
+                                                itemCount: _users.length,
                                                 itemBuilder: (context, index) {
-                                                  return _buildContactItem(_contacts[index]);
+                                                  return _buildUserItem(_users[index]);
                                                 },
                                               ), // ********* The pop-up Contacts List End ********* //
                                               // ************************************************** //
@@ -446,6 +448,7 @@ class _SendSheetState extends State<SendSheet> {
                       // Send Button
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                         bool validRequest = _validateRequest();
+                        // verifyies the input is a user in the db
                         if (_sendAddressController.text.startsWith("@") && validRequest) {
                           // Need to make sure its a valid contact
                           sl.get<DBHelper>().getContactWithName(_sendAddressController.text).then((contact) {
@@ -521,7 +524,7 @@ class _SendSheetState extends State<SendSheet> {
                             // Not a contact
                             if (mounted) {
                               setState(() {
-                                _isContact = false;
+                                _isUser = false;
                                 _addressValidationText = "";
                                 _sendAddressStyle = AddressStyle.TEXT90;
                                 _pasteButtonVisible = false;
@@ -537,7 +540,7 @@ class _SendSheetState extends State<SendSheet> {
                             // Is a contact
                             if (mounted) {
                               setState(() {
-                                _isContact = true;
+                                _isUser = true;
                                 _addressValidationText = "";
                                 _sendAddressStyle = AddressStyle.PRIMARY;
                                 _pasteButtonVisible = false;
@@ -703,7 +706,7 @@ class _SendSheetState extends State<SendSheet> {
   }
 
   // Build contact items for the list
-  Widget _buildContactItem(Contact contact) {
+  Widget _buildUserItem(User user) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -712,16 +715,16 @@ class _SendSheetState extends State<SendSheet> {
           width: double.infinity - 5,
           child: FlatButton(
             onPressed: () {
-              _sendAddressController.text = contact.name;
+              _sendAddressController.text = user.username;
               _sendAddressFocusNode.unfocus();
               setState(() {
-                _isContact = true;
+                _isUser = true;
                 _showContactButton = false;
                 _pasteButtonVisible = false;
                 _sendAddressStyle = AddressStyle.PRIMARY;
               });
             },
-            child: Text(contact.name, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+            child: Text(user.username, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(
@@ -766,20 +769,22 @@ class _SendSheetState extends State<SendSheet> {
       }
     }
     // Validate address
-    bool isContact = _sendAddressController.text.startsWith("@");
+    // bool isUser = _sendAddressController.text.startsWith("@");
+    bool isUser = !_sendAddressController.text.startsWith("nano_");
     if (_sendAddressController.text.trim().isEmpty) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context).addressMising;
+
         _pasteButtonVisible = true;
       });
-    } else if (!isContact && !Address(_sendAddressController.text).isValid()) {
+    } else if (!isUser && !Address(_sendAddressController.text).isValid()) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context).invalidAddress;
         _pasteButtonVisible = true;
       });
-    } else if (!isContact) {
+    } else if (!isUser) {
       setState(() {
         _addressValidationText = "";
         _pasteButtonVisible = false;
@@ -874,12 +879,12 @@ class _SendSheetState extends State<SendSheet> {
     return AppTextField(
         topMargin: 124,
         padding: _addressValidAndUnfocused ? EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
-        textAlign: _isContact && false ? TextAlign.start : TextAlign.center,
+        textAlign: _isUser && false ? TextAlign.start : TextAlign.center,
         focusNode: _sendAddressFocusNode,
         controller: _sendAddressController,
         cursorColor: StateContainer.of(context).curTheme.primary,
         inputFormatters: [
-          _isContact ? LengthLimitingTextInputFormatter(20) : LengthLimitingTextInputFormatter(65),
+          _isUser ? LengthLimitingTextInputFormatter(20) : LengthLimitingTextInputFormatter(65),
         ],
         textInputAction: TextInputAction.done,
         maxLines: null,
@@ -888,23 +893,23 @@ class _SendSheetState extends State<SendSheet> {
         prefixButton: TextFieldButton(
           icon: AppIcons.at,
           onPressed: () {
-            if (_showContactButton && _contacts.length == 0) {
+            if (_showContactButton && _users.length == 0) {
               // Show menu
               FocusScope.of(context).requestFocus(_sendAddressFocusNode);
               if (_sendAddressController.text.length == 0) {
                 _sendAddressController.text = "@";
                 _sendAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAddressController.text.length));
               }
-              sl.get<DBHelper>().getContacts().then((contactList) {
+              sl.get<DBHelper>().getUsers().then((userList) {
                 setState(() {
-                  _contacts = contactList;
+                  _users = userList;
                 });
               });
             }
           },
         ),
         fadePrefixOnCondition: true,
-        prefixShowFirstCondition: _showContactButton && _contacts.length == 0,
+        prefixShowFirstCondition: _showContactButton && _users.length == 0,
         suffixButton: TextFieldButton(
           icon: AppIcons.paste,
           onPressed: () {
@@ -917,10 +922,10 @@ class _SendSheetState extends State<SendSheet> {
               }
               Address address = Address(data.text);
               if (address.isValid()) {
-                sl.get<DBHelper>().getContactWithAddress(address.address).then((contact) {
-                  if (contact == null) {
+                sl.get<DBHelper>().getUserWithAddress(address.address).then((user) {
+                  if (user == null) {
                     setState(() {
-                      _isContact = false;
+                      _isUser = false;
                       _addressValidationText = "";
                       _sendAddressStyle = AddressStyle.TEXT90;
                       _pasteButtonVisible = false;
@@ -932,15 +937,15 @@ class _SendSheetState extends State<SendSheet> {
                       _addressValidAndUnfocused = true;
                     });
                   } else {
-                    // Is a contact
+                    // Is a user
                     setState(() {
-                      _isContact = true;
+                      _isUser = true;
                       _addressValidationText = "";
                       _sendAddressStyle = AddressStyle.PRIMARY;
                       _pasteButtonVisible = false;
                       _showContactButton = false;
                     });
-                    _sendAddressController.text = contact.name;
+                    _sendAddressController.text = user.username;
                   }
                 });
               }
@@ -964,42 +969,43 @@ class _SendSheetState extends State<SendSheet> {
               _showContactButton = true;
             });
           }
-          bool isContact = text.startsWith("@");
-          // Switch to contact mode if starts with @
-          if (isContact) {
+          // check if it's a real nano address:
+          bool isUser = !text.startsWith("nano_");
+          // bool isUser = false;
+          if (isUser) {
             setState(() {
-              _isContact = true;
+              _isUser = true;
             });
-            sl.get<DBHelper>().getContactsWithNameLike(text).then((matchedList) {
+            sl.get<DBHelper>().getUsersWithNameLike(text).then((matchedList) {
               setState(() {
-                _contacts = matchedList;
+                _users = matchedList;
               });
             });
           } else {
             setState(() {
-              _isContact = false;
-              _contacts = [];
+              _isUser = false;
+              _users = [];
             });
           }
           // Always reset the error message to be less annoying
           setState(() {
             _addressValidationText = "";
           });
-          if (!isContact && Address(text).isValid()) {
+          if (!isUser && Address(text).isValid()) {
             _sendAddressFocusNode.unfocus();
             setState(() {
               _sendAddressStyle = AddressStyle.TEXT90;
               _addressValidationText = "";
               _pasteButtonVisible = false;
             });
-          } else if (!isContact) {
+          } else if (!isUser) {
             setState(() {
               _sendAddressStyle = AddressStyle.TEXT60;
               _pasteButtonVisible = true;
             });
           } else {
-            sl.get<DBHelper>().getContactWithName(text).then((contact) {
-              if (contact == null) {
+            sl.get<DBHelper>().getUserWithName(text).then((user) {
+              if (user == null) {
                 setState(() {
                   _sendAddressStyle = AddressStyle.TEXT60;
                 });

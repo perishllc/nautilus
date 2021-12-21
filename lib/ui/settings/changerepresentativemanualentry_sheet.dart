@@ -65,8 +65,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
           _showChangeRepHint = false;
           _addressValidAndUnfocused = false;
         });
-        widget.repController.selection = TextSelection.fromPosition(
-            TextPosition(offset: widget.repController.text.length));
+        widget.repController.selection = TextSelection.fromPosition(TextPosition(offset: widget.repController.text.length));
       } else {
         setState(() {
           _showChangeRepHint = true;
@@ -85,9 +84,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
   }
 
   void _registerBus() {
-    _authSub = EventTaxiImpl.singleton()
-        .registerTo<AuthenticatedEvent>()
-        .listen((event) {
+    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((event) {
       if (event.authType == AUTH_EVENT_TYPE.CHANGE_MANUAL) {
         doChange(context);
       }
@@ -133,14 +130,9 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                           ),
                           Container(
                             margin: EdgeInsets.only(top: 15),
-                            constraints: BoxConstraints(
-                                maxWidth:
-                                    MediaQuery.of(context).size.width - 140),
+                            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                             child: AutoSizeText(
-                              CaseChange.toUpperCase(
-                                  AppLocalization.of(context)
-                                      .changeRepAuthenticate,
-                                  context),
+                              CaseChange.toUpperCase(AppLocalization.of(context).changeRepAuthenticate, context),
                               style: AppStyles.textStyleHeader(context),
                               textAlign: TextAlign.center,
                               maxLines: 2,
@@ -164,12 +156,8 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                         children: <Widget>[
                           // New representative
                           AppTextField(
-                            topMargin:
-                                MediaQuery.of(context).size.height * 0.05,
-                            padding: _addressValidAndUnfocused
-                                ? EdgeInsets.symmetric(
-                                    horizontal: 25.0, vertical: 15.0)
-                                : EdgeInsets.zero,
+                            topMargin: MediaQuery.of(context).size.height * 0.05,
+                            padding: _addressValidAndUnfocused ? EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
                             focusNode: _repFocusNode,
                             controller: widget.repController,
                             textAlign: TextAlign.center,
@@ -179,17 +167,12 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                             textInputAction: TextInputAction.done,
                             maxLines: null,
                             autocorrect: false,
-                            hintText: _showChangeRepHint
-                                ? AppLocalization.of(context).changeRepHint
-                                : "",
+                            hintText: _showChangeRepHint ? AppLocalization.of(context).changeRepHint : "",
                             prefixButton: TextFieldButton(
                               icon: AppIcons.scan,
                               onPressed: () {
                                 UIUtil.cancelLockEvent();
-                                BarcodeScanner.scan(StateContainer.of(context)
-                                        .curTheme
-                                        .qrScanTheme)
-                                    .then((result) {
+                                BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme).then((result) {
                                   if (result == null) {
                                     return;
                                   }
@@ -203,10 +186,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                                     widget.repController.text = address.address;
                                     _repFocusNode.unfocus();
                                   } else {
-                                    UIUtil.showSnackbar(
-                                        AppLocalization.of(context)
-                                            .qrInvalidAddress,
-                                        context);
+                                    UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
                                   }
                                 });
                               },
@@ -219,8 +199,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                                 if (!_showPasteButton) {
                                   return;
                                 }
-                                Clipboard.getData("text/plain")
-                                    .then((ClipboardData data) {
+                                Clipboard.getData("text/plain").then((ClipboardData data) {
                                   if (data == null || data.text == null) {
                                     return;
                                   }
@@ -240,9 +219,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                             fadeSuffixOnCondition: true,
                             suffixShowFirstCondition: _showPasteButton,
                             keyboardType: TextInputType.text,
-                            style: _repAddressValid
-                                ? AppStyles.textStyleAddressText90(context)
-                                : AppStyles.textStyleAddressText60(context),
+                            style: _repAddressValid ? AppStyles.textStyleAddressText90(context) : AppStyles.textStyleAddressText60(context),
                             onChanged: (text) {
                               if (Address(text).isValid()) {
                                 _repFocusNode.unfocus();
@@ -263,14 +240,11 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                                       setState(() {
                                         _addressValidAndUnfocused = false;
                                       });
-                                      Future.delayed(Duration(milliseconds: 50),
-                                          () {
-                                        FocusScope.of(context)
-                                            .requestFocus(_repFocusNode);
+                                      Future.delayed(Duration(milliseconds: 50), () {
+                                        FocusScope.of(context).requestFocus(_repFocusNode);
                                       });
                                     },
-                                    child: UIUtil.threeLineAddressText(
-                                        context, widget.repController.text),
+                                    child: UIUtil.threeLineAddressText(context, widget.repController.text),
                                   )
                                 : null,
                           ),
@@ -287,35 +261,22 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                           AppButton.buildAppButton(
                             context,
                             AppButtonType.PRIMARY,
-                            AppLocalization.of(context)
-                                .changeRepButton
-                                .toUpperCase(),
+                            AppLocalization.of(context).changeRepButton.toUpperCase(),
                             Dimens.BUTTON_TOP_DIMENS,
                             onPressed: () async {
-                              if (!NanoAccounts.isValid(NanoAccountType.NANO,
-                                  widget.repController.text)) {
+                              if (!NanoAccounts.isValid(NanoAccountType.NANO, widget.repController.text)) {
                                 return;
                               }
                               // Authenticate
-                              AuthenticationMethod authMethod = await sl
-                                  .get<SharedPrefsUtil>()
-                                  .getAuthMethod();
-                              bool hasBiometrics =
-                                  await sl.get<BiometricUtil>().hasBiometrics();
-                              if (authMethod.method == AuthMethod.BIOMETRICS &&
-                                  hasBiometrics) {
+                              AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                              bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                              if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                                 try {
-                                  bool authenticated = await sl
-                                      .get<BiometricUtil>()
-                                      .authenticateWithBiometrics(
-                                          context,
-                                          AppLocalization.of(context)
-                                              .changeRepAuthenticate);
+                                  bool authenticated =
+                                      await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context).changeRepAuthenticate);
                                   if (authenticated) {
                                     sl.get<HapticUtil>().fingerprintSucess();
-                                    EventTaxiImpl.singleton().fire(
-                                        AuthenticatedEvent(
-                                            AUTH_EVENT_TYPE.CHANGE_MANUAL));
+                                    EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE_MANUAL));
                                   }
                                 } catch (e) {
                                   await authenticateWithPin(context);
@@ -332,8 +293,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                           AppButton.buildAppButton(
                             context,
                             AppButtonType.PRIMARY_OUTLINE,
-                            CaseChange.toUpperCase(
-                                AppLocalization.of(context).close, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).close, context),
                             Dimens.BUTTON_BOTTOM_DIMENS,
                             onPressed: () {
                               Navigator.pop(context);
@@ -351,17 +311,12 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
   Future<void> doChange(BuildContext context) async {
     _animationOpen = true;
     Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.GENERIC,
-        StateContainer.of(context).curTheme.animationOverlayStrong,
-        StateContainer.of(context).curTheme.animationOverlayMedium,
+        AnimationType.GENERIC, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
         onPoppedCallback: () => _animationOpen = false));
     // If account isnt open, just store the account in sharedprefs
     if (StateContainer.of(context).wallet.openBlock == null) {
-      await sl
-          .get<SharedPrefsUtil>()
-          .setRepresentative(widget.repController.text);
-      StateContainer.of(context).wallet.representative =
-          widget.repController.text;
+      await sl.get<SharedPrefsUtil>().setRepresentative(widget.repController.text);
+      StateContainer.of(context).wallet.representative = widget.repController.text;
       UIUtil.showSnackbar(AppLocalization.of(context).changeRepSucces, context);
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
     } else {
@@ -371,13 +326,10 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
             widget.repController.text,
             StateContainer.of(context).wallet.frontier,
             StateContainer.of(context).wallet.accountBalance.toString(),
-            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(),
-                StateContainer.of(context).selectedAccount.index));
-        StateContainer.of(context).wallet.representative =
-            widget.repController.text;
+            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index));
+        StateContainer.of(context).wallet.representative = widget.repController.text;
         StateContainer.of(context).wallet.frontier = resp.hash;
-        UIUtil.showSnackbar(
-            AppLocalization.of(context).changeRepSucces, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).changeRepSucces, context);
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       } catch (e) {
         sl.get<Logger>().e("Failed to change", e);
@@ -392,8 +344,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
   Future<void> authenticateWithPin(BuildContext context) async {
     // PIN Authentication
     String expectedPin = await sl.get<Vault>().getPin();
-    bool auth = await Navigator.of(context)
-        .push(MaterialPageRoute(builder: (BuildContext context) {
+    bool auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return new PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
@@ -402,8 +353,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
     }));
     if (auth != null && auth) {
       await Future.delayed(Duration(milliseconds: 200));
-      EventTaxiImpl.singleton()
-          .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE_MANUAL));
+      EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE_MANUAL));
     }
   }
 }
