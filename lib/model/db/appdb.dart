@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io' as io;
 import 'package:flutter/foundation.dart';
+import 'package:get_it/get_it.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
@@ -27,10 +28,10 @@ class DBHelper {
         username TEXT, 
         address TEXT)""";
   static const String REPS_SQL = """CREATE TABLE Reps( 
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
         username TEXT, 
-        address TEXT,
-        monkey_path TEXT)""";
+        address TEXT)""";
   static const String ACCOUNTS_SQL = """CREATE TABLE Accounts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
@@ -71,7 +72,7 @@ class DBHelper {
     await db.execute(ACCOUNTS_SQL);
     await db.execute(ACCOUNTS_ADD_ACCOUNT_COLUMN_SQL);
 
-    // populateDBFromCache();
+    populateDBFromCache();
   }
 
   void _onUpgrade(Database db, int oldVersion, int newVersion) async {
@@ -86,32 +87,45 @@ class DBHelper {
 
   // read json and populate users table:
   Future<void> populateDBFromCache() async {
-    final String knownUsers = await rootBundle.loadString("assets/store/known.json");
-    final data = await json.decode(knownUsers);
-    // log the data:
-    // Log(data);
-    // loop through the data and insert into the users table:
-    // for (var user in data) {
-    //   await addUser(user);
-    // }
+    // delete the old databases:
+    nukeUsers();
+    // nukeReps();
 
-    // addUser(data["items"][0]);
+    // get the json from the cache:
+    final String userData = await rootBundle.loadString("assets/store/known.json");
+    final String repsData = await rootBundle.loadString("assets/store/reps.json");
+    final knownUsers = await json.decode(userData);
+    final repsUsers = await json.decode(repsData);
+
+    // loop through the data and insert into the users table:
     var users = parseUsers(knownUsers);
     for (var user in users) {
-      print(user.username);
       await addUser(user);
     }
 
-    // setState(() {
-    //   _items = data["items"];
-    // });
+    // loop through the data and insert into the users table:
+    // var reps = parseReps(repsUsers);
+    // for (var rep in reps) {
+    //   await addRep(rep);
+    // }
+  }
+
+  Future<void> fetchDatabases() async {
+    var users = await fetchNapiUsers(http.Client());
+
+    // nuke the old databases:
+    nukeUsers();
+    // add the new users:
+    for (var user in users) {
+      addUser(user);
+    }
   }
 
   // A function that converts a response body into a list of Users
   List<User> parseUsers(String responseBody) {
     final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-    print(parsed[12]);
-    return parsed.map<User>((json) => User.fromJson2(json)).toList();
+    // print(parsed[1]);
+    return parsed.map<User>((json) => User.fromJson(json)).toList();
   }
 
   Future<List<User>> fetchNapiUsers(http.Client client) async {
@@ -227,6 +241,21 @@ class DBHelper {
     return users;
   }
 
+  Future<List<User>> getUserSuggestionsWithNameLike(String pattern) async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE username LIKE \'%$pattern%\' ORDER BY LOWER(username)');
+    List<User> users = new List();
+    int maxSuggestions = 5;
+    int length = list.length;
+    // dart doesn't support function overloading so I can't import dart:math for the min() function
+    // which is why I'm doing this
+    int minned = (maxSuggestions <= list.length) ? maxSuggestions : list.length;
+    for (int i = 0; i < minned; i++) {
+      users.add(new User(username: list[i]["username"], address: list[i]["address"]));
+    }
+    return users;
+  }
+
   Future<User> getUserWithAddress(String address) async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
@@ -262,6 +291,16 @@ class DBHelper {
   Future<int> addUser(User user) async {
     var dbClient = await db;
     return await dbClient.rawInsert('INSERT INTO Users (username, address) values(?, ?)', [user.username, user.address.replaceAll("xrb_", "nano_")]);
+  }
+
+  Future<bool> deleteUser(User user) async {
+    var dbClient = await db;
+    return await dbClient.rawDelete("DELETE FROM Users WHERE lower(username) like \'%${user.username.toLowerCase()}\'") > 0;
+  }
+
+  Future<void> nukeUsers() async {
+    var dbClient = await db;
+    await dbClient.rawDelete("DELETE FROM Users");
   }
 
   // Accounts

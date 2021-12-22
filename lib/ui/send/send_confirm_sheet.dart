@@ -37,6 +37,7 @@ class SendConfirmSheet extends StatefulWidget {
   final String amountRaw;
   final String destination;
   final String contactName;
+  final String userName;
   final String localCurrency;
   final bool maxSend;
   final MantaWallet manta;
@@ -47,6 +48,7 @@ class SendConfirmSheet extends StatefulWidget {
       {this.amountRaw,
       this.destination,
       this.contactName,
+      this.userName,
       this.localCurrency,
       this.manta,
       this.paymentRequest,
@@ -66,9 +68,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   StreamSubscription<AuthenticatedEvent> _authSub;
 
   void _registerBus() {
-    _authSub = EventTaxiImpl.singleton()
-        .registerTo<AuthenticatedEvent>()
-        .listen((event) {
+    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((event) {
       if (event.authType == AUTH_EVENT_TYPE.SEND) {
         _doSend();
       }
@@ -88,15 +88,10 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     this.animationOpen = false;
     this.isMantaTransaction = widget.manta != null && widget.paymentRequest != null;
     // Derive amount from raw amount
-    if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") ==
-        NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
+    if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
       amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
     } else {
-      amount = NumberUtil.truncateDecimal(
-                  NumberUtil.getRawAsUsableDecimal(widget.amountRaw),
-                  digits: 6)
-              .toStringAsFixed(6) +
-          "~";
+      amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(widget.amountRaw), digits: 6).toStringAsFixed(6) + "~";
     }
     // Ensure nano_ prefix on destination
     destinationAltered = widget.destination.replaceAll("xrb_", "nano_");
@@ -111,17 +106,14 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   void _showSendingAnimation(BuildContext context) {
     animationOpen = true;
     Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.SEND,
-        StateContainer.of(context).curTheme.animationOverlayStrong,
-        StateContainer.of(context).curTheme.animationOverlayMedium,
+        AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
         onPoppedCallback: () => animationOpen = false));
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        minimum:
-            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+        minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
             // Sheet handle
@@ -145,8 +137,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(
-                              AppLocalization.of(context).sending, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).sending, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -154,14 +145,11 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                   ),
                   // Container for the amount text
                   Container(
-                    margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.105,
-                        right: MediaQuery.of(context).size.width * 0.105),
+                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                     padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color:
-                          StateContainer.of(context).curTheme.backgroundDarkest,
+                      color: StateContainer.of(context).curTheme.backgroundDarkest,
                       borderRadius: BorderRadius.circular(50),
                     ),
                     // Amount text
@@ -173,20 +161,16 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                           TextSpan(
                             text: "Ӿ$amount",
                             style: TextStyle(
-                              color:
-                                  StateContainer.of(context).curTheme.primary,
+                              color: StateContainer.of(context).curTheme.primary,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
                             ),
                           ),
                           TextSpan(
-                            text: widget.localCurrency != null
-                                ? " (${widget.localCurrency})"
-                                : "",
+                            text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
                             style: TextStyle(
-                              color:
-                                  StateContainer.of(context).curTheme.primary.withOpacity(0.75),
+                              color: StateContainer.of(context).curTheme.primary.withOpacity(0.75),
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
@@ -202,8 +186,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(
-                              AppLocalization.of(context).to, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).to, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -211,16 +194,11 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                   ),
                   // Address text
                   Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.105,
-                          right: MediaQuery.of(context).size.width * 0.105),
+                      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: StateContainer.of(context)
-                            .curTheme
-                            .backgroundDarkest,
+                        color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: isMantaTransaction
@@ -246,51 +224,39 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                                   style: AppStyles.addressText(context),
                                 ),
                                 Container(
-                                  margin: EdgeInsetsDirectional.only(
-                                      top: 10, bottom: 10),
+                                  margin: EdgeInsetsDirectional.only(top: 10, bottom: 10),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Expanded(
                                         child: Container(
                                           height: 1,
-                                          color: StateContainer.of(context)
-                                              .curTheme
-                                              .text30,
+                                          color: StateContainer.of(context).curTheme.text30,
                                         ),
                                       ),
                                       Container(
-                                        margin: EdgeInsetsDirectional.only(
-                                            start: 10, end: 20),
+                                        margin: EdgeInsetsDirectional.only(start: 10, end: 20),
                                         child: Icon(
                                           AppIcons.appia,
-                                          color: StateContainer.of(context)
-                                              .curTheme
-                                              .text30,
+                                          color: StateContainer.of(context).curTheme.text30,
                                           size: 20,
                                         ),
                                       ),
                                       Expanded(
                                         child: Container(
                                           height: 1,
-                                          color: StateContainer.of(context)
-                                              .curTheme
-                                              .text30,
+                                          color: StateContainer.of(context).curTheme.text30,
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
                                 smallScreen(context)
-                                    ? UIUtil.oneLineAddressText(
-                                        context, destinationAltered)
-                                    : UIUtil.threeLineAddressText(
-                                        context, destinationAltered)
+                                    ? UIUtil.oneLineAddressText(context, destinationAltered)
+                                    : UIUtil.threeLineAddressText(context, destinationAltered)
                               ],
                             )
-                          : UIUtil.threeLineAddressText(
-                              context, destinationAltered,
-                              contactName: widget.contactName)),
+                          : UIUtil.threeLineAddressText(context, destinationAltered, contactName: widget.contactName)),
                 ],
               ),
             ),
@@ -304,48 +270,34 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                     children: <Widget>[
                       // CONFIRM Button
                       AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY,
-                          CaseChange.toUpperCase(
-                              AppLocalization.of(context).confirm, context),
-                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                          context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                          onPressed: () async {
                         // Authenticate
                         AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                         bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
-                        if (authMethod.method == AuthMethod.BIOMETRICS &&
-                            hasBiometrics) {
-                              try {
-                                bool authenticated = await sl
-                                                  .get<BiometricUtil>()
-                                                  .authenticateWithBiometrics(
-                                                      context,
-                                                      AppLocalization.of(context)
-                                                          .sendAmountConfirm
-                                                          .replaceAll("%1", amount));
-                                if (authenticated) {
-                                  sl.get<HapticUtil>().fingerprintSucess();
-                                  EventTaxiImpl.singleton()
-                                            .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));   
-                                }
-                              } catch (e) {
-                                await authenticateWithPin();
-                              }
-                            } else {
-                              await authenticateWithPin();
+                        if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+                          try {
+                            bool authenticated = await sl
+                                .get<BiometricUtil>()
+                                .authenticateWithBiometrics(context, AppLocalization.of(context).sendAmountConfirm.replaceAll("%1", amount));
+                            if (authenticated) {
+                              sl.get<HapticUtil>().fingerprintSucess();
+                              EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
                             }
+                          } catch (e) {
+                            await authenticateWithPin();
                           }
-                      )
+                        } else {
+                          await authenticateWithPin();
+                        }
+                      })
                     ],
                   ),
                   // A row for CANCEL Button
                   Row(
                     children: <Widget>[
                       // CANCEL Button
-                      AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY_OUTLINE,
-                          CaseChange.toUpperCase(
-                              AppLocalization.of(context).cancel, context),
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pop();
                       }),
@@ -362,17 +314,15 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     try {
       _showSendingAnimation(context);
       ProcessResponse resp = await sl.get<AccountService>().requestSend(
-        StateContainer.of(context).wallet.representative,
-        StateContainer.of(context).wallet.frontier,
-        widget.amountRaw,
-        destinationAltered,
-        StateContainer.of(context).wallet.address,
-        NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
-        max: widget.maxSend
-      );
+          StateContainer.of(context).wallet.representative,
+          StateContainer.of(context).wallet.frontier,
+          widget.amountRaw,
+          destinationAltered,
+          StateContainer.of(context).wallet.address,
+          NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
+          max: widget.maxSend);
       if (widget.manta != null) {
-        widget.manta.sendPayment(
-            transactionHash: resp.hash, cryptoCurrency: "NANO");        
+        widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
       }
       StateContainer.of(context).wallet.frontier = resp.hash;
       StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
@@ -410,20 +360,16 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   Future<void> authenticateWithPin() async {
     // PIN Authentication
     String expectedPin = await sl.get<Vault>().getPin();
-    bool auth = await Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) {
-        return new PinScreen(
-          PinOverlayType.ENTER_PIN,
-          expectedPin: expectedPin,
-          description: AppLocalization.of(context)
-              .sendAmountConfirmPin
-              .replaceAll("%1", amount),
-        );
-      }));
+    bool auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+      return new PinScreen(
+        PinOverlayType.ENTER_PIN,
+        expectedPin: expectedPin,
+        description: AppLocalization.of(context).sendAmountConfirmPin.replaceAll("%1", amount),
+      );
+    }));
     if (auth != null && auth) {
       await Future.delayed(Duration(milliseconds: 200));
-       EventTaxiImpl.singleton()
-          .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));    
+      EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
     }
   }
 }

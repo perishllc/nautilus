@@ -449,10 +449,10 @@ class _SendSheetState extends State<SendSheet> {
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                         bool validRequest = _validateRequest();
                         // verifyies the input is a user in the db
-                        if (_sendAddressController.text.startsWith("@") && validRequest) {
+                        if (!_sendAddressController.text.startsWith("nano_") && validRequest) {
                           // Need to make sure its a valid contact
-                          sl.get<DBHelper>().getContactWithName(_sendAddressController.text).then((contact) {
-                            if (contact == null) {
+                          sl.get<DBHelper>().getUserWithName(_sendAddressController.text).then((user) {
+                            if (user == null) {
                               setState(() {
                                 _addressValidationText = AppLocalization.of(context).contactInvalid;
                               });
@@ -465,8 +465,8 @@ class _SendSheetState extends State<SendSheet> {
                                           : _rawAmount == null
                                               ? NumberUtil.getAmountAsRaw(_sendAmountController.text)
                                               : _rawAmount,
-                                      destination: contact.address,
-                                      contactName: contact.name,
+                                      destination: user.address,
+                                      userName: user.username,
                                       maxSend: _isMaxSend(),
                                       localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
                             }
@@ -519,8 +519,8 @@ class _SendSheetState extends State<SendSheet> {
                           // Is a URI
                           Address address = Address(scanResult);
                           // See if this address belongs to a contact
-                          Contact contact = await sl.get<DBHelper>().getContactWithAddress(address.address);
-                          if (contact == null) {
+                          User user = await sl.get<DBHelper>().getUserWithAddress(address.address);
+                          if (user == null) {
                             // Not a contact
                             if (mounted) {
                               setState(() {
@@ -546,7 +546,7 @@ class _SendSheetState extends State<SendSheet> {
                                 _pasteButtonVisible = false;
                                 _showContactButton = false;
                               });
-                              _sendAddressController.text = contact.name;
+                              _sendAddressController.text = user.username;
                             }
                           }
                           // If amount is present, fill it and go to SendConfirm
@@ -584,8 +584,8 @@ class _SendSheetState extends State<SendSheet> {
                                           : _rawAmount == null
                                               ? NumberUtil.getAmountAsRaw(_sendAmountController.text)
                                               : _rawAmount,
-                                      destination: contact != null ? contact.address : address.address,
-                                      contactName: contact != null ? contact.name : null,
+                                      destination: user != null ? user.address : address.address,
+                                      userName: user != null ? user.username : null,
                                       maxSend: _isMaxSend(),
                                       localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
                             }
@@ -960,15 +960,16 @@ class _SendSheetState extends State<SendSheet> {
                 ? AppStyles.textStyleAddressText90(context)
                 : AppStyles.textStyleAddressPrimary(context),
         onChanged: (text) {
-          if (text.length > 0) {
-            setState(() {
-              _showContactButton = false;
-            });
-          } else {
-            setState(() {
-              _showContactButton = true;
-            });
-          }
+          // commented so that it doesn't remove the @ symbol
+          // if (text.length > 0) {
+          //   setState(() {
+          //     _showContactButton = false;
+          //   });
+          // } else {
+          //   setState(() {
+          //     _showContactButton = true;
+          //   });
+          // }
           // check if it's a real nano address:
           bool isUser = !text.startsWith("nano_");
           // bool isUser = false;
@@ -976,7 +977,8 @@ class _SendSheetState extends State<SendSheet> {
             setState(() {
               _isUser = true;
             });
-            sl.get<DBHelper>().getUsersWithNameLike(text).then((matchedList) {
+            sl.get<DBHelper>().getUserSuggestionsWithNameLike(text).then((matchedList) {
+              print(matchedList[0]);
               setState(() {
                 _users = matchedList;
               });

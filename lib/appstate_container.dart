@@ -270,7 +270,9 @@ class StateContainerState extends State<StateContainer> {
     //   setNatriconOn(useNatricon);
     // });
     // make sure db is up to date
-    sl.get<DBHelper>().populateDBFromCache();
+    // TODO: only call when out of date
+    sl.get<DBHelper>().fetchDatabases();
+    // sl.get<DBHelper>().populateDBFromCache();
   }
 
   // Subscriptions

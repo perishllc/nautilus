@@ -45,11 +45,14 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 - [x] experimenting with themes
 - [x] start changing the send screen
 - [x] update icons
-- [ ] use json data on the send screen
+- [x] use json data on the send screen
 - [ ] cache json from /reps and /known
-- [ ] set random representative for new accounts using nano.to/reps?json=true
+- [ ] set random representative for new accounts using nano.to/reps
 
 
+<img src="/screenshots/flutter_01.png" width="200">
+<img src="/screenshots/flutter_02.png" width="200">
+<img src="/screenshots/flutter_03.png" width="200">
 
 ### Nautilus - Beta 0.1 (Q1 2022)
 
