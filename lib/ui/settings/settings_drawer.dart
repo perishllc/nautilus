@@ -1154,6 +1154,34 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         : null,
                     Container(
                       margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+                      child: Text(AppLocalization.of(context).nanoAPI,
+                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                    ),
+                    Divider(
+                      height: 2,
+                      color: StateContainer.of(context).curTheme.text15,
+                    ),
+                    Divider(
+                      height: 2,
+                      color: StateContainer.of(context).curTheme.text15,
+                    ),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).buyNano, AppIcons.changerepresentative, onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                        return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://nano.to");
+                      }));
+                    }),
+                    Divider(
+                      height: 2,
+                      color: StateContainer.of(context).curTheme.text15,
+                    ),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).registerUsername, AppIcons.changerepresentative,
+                        onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                        return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://nano.to");
+                      }));
+                    }),
+                    Container(
+                      margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(AppLocalization.of(context).preferences,
                           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
                     ),

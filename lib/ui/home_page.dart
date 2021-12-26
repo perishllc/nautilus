@@ -22,6 +22,7 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/list_model.dart';
 import 'package:nautilus_wallet_flutter/model/db/contact.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
@@ -81,6 +82,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
   List<Contact> _contacts = List();
+  List<User> _users = List();
 
   // Price conversion state (BTC, NANO, NONE)
   PriceConversion _priceConversion;
@@ -195,7 +197,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       settingsIconMarginTop = 5;
     }
     _addSampleContact();
-    _updateContacts();
+    // _updateContacts();
+    _updateUsers();
     // Setup placeholder animation and start
     _animationDisposed = false;
     _placeholderCardAnimationController = new AnimationController(
@@ -279,6 +282,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     sl.get<DBHelper>().getContacts().then((contacts) {
       setState(() {
         _contacts = contacts;
+      });
+    });
+  }
+
+  void _updateUsers() {
+    sl.get<DBHelper>().getUsers().then((users) {
+      setState(() {
+        _users = users;
       });
     });
   }
@@ -464,11 +475,25 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     String displayName = smallScreen(context)
         ? _historyListMap[StateContainer.of(context).wallet.address][localIndex].getShorterString()
         : _historyListMap[StateContainer.of(context).wallet.address][localIndex].getShortString();
-    _contacts.forEach((contact) {
+    bool matched = false;
+    // _contacts.forEach((contact) {
+    for (Contact contact in _contacts) {
       if (contact.address == _historyListMap[StateContainer.of(context).wallet.address][localIndex].account.replaceAll("xrb_", "nano_")) {
         displayName = contact.name;
+        matched = true;
+        break;
       }
-    });
+    }
+    // if still not matched to a contact, check if it's a username
+    if (!matched) {
+      // for user in users:
+      for (User user in _users) {
+        if (user.address == _historyListMap[StateContainer.of(context).wallet.address][localIndex].account.replaceAll("xrb_", "nano_")) {
+          displayName = "@" + user.username;
+          break;
+        }
+      }
+    }
 
     return _buildTransactionCard(_historyListMap[StateContainer.of(context).wallet.address][localIndex], animation, displayName, context);
   }

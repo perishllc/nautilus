@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2021-03-24T20:45:02.422993",
+  "@@last_modified": "2021-12-26T17:01:45.165477",
   "cancel": "Cancel",
   "@cancel": {
     "description": "dialog_cancel",
@@ -465,6 +465,18 @@
   "changeRepButton": "Change",
   "@changeRepButton": {
     "description": "change_representative_change",
+    "type": "text",
+    "placeholders": {}
+  },
+  "buyNano": "Buy Nano",
+  "@buyNano": {
+    "description": "buy_nano",
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerUsername": "Register Username",
+  "@registerUsername": {
+    "description": "register_username",
     "type": "text",
     "placeholders": {}
   },

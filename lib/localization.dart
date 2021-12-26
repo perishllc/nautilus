@@ -364,6 +364,14 @@ class AppLocalization {
     return Intl.message("Change", desc: 'change_representative_change', name: 'changeRepButton');
   }
 
+  String get buyNano {
+    return Intl.message("Buy Nano", desc: 'buy_nano', name: 'buyNano');
+  }
+
+  String get registerUsername {
+    return Intl.message("Register Username", desc: 'register_username', name: 'registerUsername');
+  }
+
   String get changeRepAuthenticate {
     return Intl.message("Change Representative", desc: 'settings_change_rep', name: 'changeRepAuthenticate');
   }
@@ -501,6 +509,10 @@ class AppLocalization {
 
   String get preferences {
     return Intl.message("Preferences", desc: 'settings_preferences_header', name: 'preferences');
+  }
+
+  String get nanoAPI {
+    return Intl.message("Nano API", desc: 'nano_api', name: 'nanoAPI');
   }
 
   String get manage {

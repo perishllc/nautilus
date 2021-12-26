@@ -52,6 +52,8 @@ dependencies:
 
   # Native webview plugin
   flutter_webview_plugin: ^0.4.0
+  # new webview made by flutter:
+  webview_flutter: ^3.0.0
 
   # SQLite
   sqflite: ^2.0.0+4

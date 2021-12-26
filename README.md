@@ -48,11 +48,16 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 - [x] use json data on the send screen
 - [ ] cache json from /reps and /known
 - [ ] set random representative for new accounts using nano.to/reps
+- [x] change addresses to usernames in the history
+- [x] add buy nano button to the drawer
+- [x] add register username button to the drawer
+- [x] add web views for the buttons
 
 
 <img src="/screenshots/flutter_01.png" width="200">
 <img src="/screenshots/flutter_02.png" width="200">
 <img src="/screenshots/flutter_03.png" width="200">
+<img src="/screenshots/flutter_04.png" width="200">
 
 ### Nautilus - Beta 0.1 (Q1 2022)
 
@@ -78,8 +83,8 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 
 ### Nautilus - Stable v2 (Q4 2024)
 
-- Cash out NANO to bank via ACH, WIRE etc. 
-- Optional, Metal, NANO debit card (Nano.to/Card) 
+- Cash out NANO to bank via ACH, WIRE etc. **lots of legal work**
+- Optional, Metal, NANO debit card (Nano.to/Card) **lots of legal work**
 
 ---
 
