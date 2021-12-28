@@ -9,35 +9,49 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 
 #### Features
 
-- [ ] When you start typing in the Address input of 'Send From' screen, Nano.to/Known usernames will be shown.
-- [ ] Usernames should be clickable to reveal the full address & when the username was last leased / updated
-- [ ] When searching Usernames, a '@' will not be need to show list... Just start typing.
+- [x] When you start typing in the Address input of 'Send From' screen, nano.to/known usernames will be shown.
+
+- [x] When searching Usernames, a '@' will not be need to show list... Just start typing.
    - Usernames when displayed in full will still show an @
-- [ ] Add as contact button / system using nano.to usernames
+- [x] Add as contact button / system using nano.to usernames
    - Through the payment history in some form
    - Contacts may be nickname-able (i.e Favorites)
-- [ ] Add Username Reservation Screen to app.
+- [x] Add Username Reservation Screen to app.
    - Can be done on android np.
    - On iOS it can only be linked to / referenced unless you use the IAP mechanism (and Apple will take a % cut) **Classic Monopoly**
-- [ ] Payment history shows Nano.to Usernames or Favorites
+- [x] Payment history shows Nano.to Usernames or Favorites
 - [ ] Replace all AppDitto trademarks, as to not infringe on their marks. 
    - [x] Move all appditto assets to a legacy_assets folder, to be removed as replacements are made
 
 #### Aesthetic goals
 - [ ] Show nano.to usernames over full addresses wherever possible
-- [ ] Registered Usernames will be called Usernames. 
+- [x] Registered Usernames will be called Usernames.
+- [ ] Usernames should be clickable to reveal the full address & when the username was last leased / updated
 - [ ] Simplify the 'New User' onboarding screens. Right now there are about 3-5 screens between new users, the UI (wallet). I want to bring this down to 1-3. 
    - Ask to import seed or create one
    - Backup Seed
    - Set Pin
    - Done!
-- [ ] Local contacts will be called Favorites.
-- [ ] Create clever UI to differenciate between Favorites & Usernames.
-   - Maybe prefix favorites with a # or $
+- [x] Local contacts will be called Favorites.
+- [x] Create clever UI to differenciate between Favorites & Usernames.
+   - Favorites prefixed with '★'
    - Prefix usernames with an @
 - [ ] Change default theme to a darker color. **CSS Hex Color TBD**
 - [ ] Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
 - [ ] Advanced theming support
+
+#### Immediate TODO
+- [ ] replace android/app/src/main/ic_launcher-web.png *must* be 512x512 for the play store
+- [ ] recieve screen usernames integration
+- [ ] accounts should show usernames if registered
+- [ ] remove natrium logo from the center of generated QR codes
+- [ ] cache json from /reps and /known
+- [ ] set random representative for new accounts using nano.to/reps
+
+
+#### less important TODO
+- [ ] provide a discount for usernames registered through nautilus
+- [ ] paper wallet generator / sender in app
 
 #### Changes so far
 - [x] removed natricons
@@ -46,12 +60,12 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 - [x] start changing the send screen
 - [x] update icons
 - [x] use json data on the send screen
-- [ ] cache json from /reps and /known
-- [ ] set random representative for new accounts using nano.to/reps
+- [x] finish contacts -> favorites
 - [x] change addresses to usernames in the history
 - [x] add buy nano button to the drawer
 - [x] add register username button to the drawer
 - [x] add web views for the buttons
+- [x] remove btc from top bar
 
 
 <img src="/screenshots/flutter_01.png" width="200">
@@ -65,7 +79,7 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 
 ### Nautilus - Beta 0.25 (Q1 2022)
 
-- Buy XNO right on the Wallet, with Simplex (or MoonPay) integration. Like Trust Wallet!
+- Buy XNO right on the Wallet, with Simplex (or MoonPay) integration.
 
 ### Nautilus - Beta 0.5 (Q2 2022)
 
@@ -79,12 +93,11 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 
 - On device PoW generation. **Apple may not allow this. We'll see**
 - Eliminate Nautilus back-end server requirement. **Or minimize need for it**
-- Offline/Bluetooth Payments (???) **Big if**
+- Offline/NFC Payments
 
 ### Nautilus - Stable v2 (Q4 2024)
-
-- Cash out NANO to bank via ACH, WIRE etc. **lots of legal work**
-- Optional, Metal, NANO debit card (Nano.to/Card) **lots of legal work**
+- Cash out NANO to bank via ACH, WIRE etc.
+- Optional, Metal, NANO debit card (Nano.to/Card)
 
 ---
 

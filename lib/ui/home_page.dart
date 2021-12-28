@@ -187,14 +187,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     // Main Card Size
     if (_priceConversion == PriceConversion.BTC) {
-      mainCardHeight = 120;
+      mainCardHeight = 80;
       settingsIconMarginTop = 7;
     } else if (_priceConversion == PriceConversion.NONE) {
       mainCardHeight = 64;
       settingsIconMarginTop = 7;
     } else if (_priceConversion == PriceConversion.HIDDEN) {
       mainCardHeight = 64;
-      settingsIconMarginTop = 5;
+      settingsIconMarginTop = 7;
     }
     _addSampleContact();
     // _updateContacts();
@@ -264,16 +264,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   Future<void> _addSampleContact() async {
     bool contactAdded = await sl.get<SharedPrefsUtil>().getFirstContactAdded();
     if (!contactAdded) {
-      bool addressExists = await sl.get<DBHelper>().contactExistsWithAddress("nano_1natrium1o3z5519ifou7xii8crpxpk8y65qmkih8e8bpsjri651oza8imdd");
+      bool addressExists = await sl.get<DBHelper>().contactExistsWithAddress("nano_37y6iq8m1zx9inwkkcgqh34kqsihzpjfwgp9jir8xpb9jrcwhkmoxpo61f4o");
       if (addressExists) {
         return;
       }
-      bool nameExists = await sl.get<DBHelper>().contactExistsWithName("@NatriumDonations");
+      bool nameExists = await sl.get<DBHelper>().contactExistsWithName("@NautilusDonations");
       if (nameExists) {
         return;
       }
       await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
-      Contact c = Contact(name: "@NatriumDonations", address: "nano_1natrium1o3z5519ifou7xii8crpxpk8y65qmkih8e8bpsjri651oza8imdd");
+      Contact c = Contact(name: "@NautilusDonations", address: "nano_37y6iq8m1zx9inwkkcgqh34kqsihzpjfwgp9jir8xpb9jrcwhkmoxpo61f4o");
       await sl.get<DBHelper>().saveContact(c);
     }
   }
@@ -479,7 +479,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // _contacts.forEach((contact) {
     for (Contact contact in _contacts) {
       if (contact.address == _historyListMap[StateContainer.of(context).wallet.address][localIndex].account.replaceAll("xrb_", "nano_")) {
-        displayName = contact.name;
+        displayName = "★" + contact.name;
         matched = true;
         break;
       }
@@ -1637,8 +1637,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         } else if (_priceConversion == PriceConversion.HIDDEN) {
           // Cycle to BTC price
           setState(() {
-            mainCardHeight = 120;
-            settingsIconMarginTop = 5;
+            mainCardHeight = 80;
+            settingsIconMarginTop = 7;
           });
           Future.delayed(Duration(milliseconds: 150), () {
             setState(() {
@@ -1701,16 +1701,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         ],
                       ),
                     ),
-                    _priceConversion == PriceConversion.BTC
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(_priceConversion == PriceConversion.BTC ? AppIcons.btc : AppIcons.nanocurrency,
-                                  color: _priceConversion == PriceConversion.NONE ? Colors.transparent : StateContainer.of(context).curTheme.text60, size: 14),
-                              Text(StateContainer.of(context).wallet.btcPrice, textAlign: TextAlign.center, style: AppStyles.textStyleCurrencyAlt(context)),
-                            ],
-                          )
-                        : SizedBox(height: 0),
+                    SizedBox(height: 0),
                   ],
                 ),
               ),

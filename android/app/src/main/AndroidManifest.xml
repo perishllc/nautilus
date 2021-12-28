@@ -20,14 +20,14 @@
     <application
         android:name=".MultidexApplication"
         android:label="Nautilus"
-        android:icon="@mipmap/launcher_icon"
+        android:icon="@mipmap/ic_launcher"
         android:allowBackup="false">
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />        
-        <meta-data
+        <!-- <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_status_bar" />
+            android:resource="@drawable/ic_status_bar" /> -->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -1167,7 +1167,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     ),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).buyNano, AppIcons.changerepresentative, onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                        return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://nano.to");
+                        return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://buy.chainbits.com");
                       }));
                     }),
                     Divider(
@@ -1250,7 +1250,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).contactsHeader, AppIcons.contact, onPressed: () {
+                    // TODO: replace contact icon with a heart icon
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).favoritesHeader, AppIcons.contact, onPressed: () {
                       setState(() {
                         _contactsOpen = true;
                       });

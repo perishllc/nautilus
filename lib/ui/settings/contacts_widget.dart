@@ -72,22 +72,17 @@ class _ContactsListState extends State<ContactsList> {
 
   void _registerBus() {
     // Contact added bus event
-    _contactAddedSub = EventTaxiImpl.singleton()
-        .registerTo<ContactAddedEvent>()
-        .listen((event) {
+    _contactAddedSub = EventTaxiImpl.singleton().registerTo<ContactAddedEvent>().listen((event) {
       setState(() {
         _contacts.add(event.contact);
         //Sort by name
-        _contacts.sort(
-            (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+        _contacts.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
       });
       // Full update which includes downloading new monKey
       _updateContacts();
     });
     // Contact removed bus event
-    _contactRemovedSub = EventTaxiImpl.singleton()
-        .registerTo<ContactRemovedEvent>()
-        .listen((event) {
+    _contactRemovedSub = EventTaxiImpl.singleton().registerTo<ContactRemovedEvent>().listen((event) {
       setState(() {
         _contacts.remove(event.contact);
       });
@@ -105,8 +100,7 @@ class _ContactsListState extends State<ContactsList> {
       }
       // Re-sort list
       setState(() {
-        _contacts.sort(
-            (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+        _contacts.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
       });
     });
   }
@@ -114,8 +108,7 @@ class _ContactsListState extends State<ContactsList> {
   Future<void> _exportContacts() async {
     List<Contact> contacts = await sl.get<DBHelper>().getContacts();
     if (contacts.length == 0) {
-      UIUtil.showSnackbar(
-          AppLocalization.of(context).noContactsExport, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).noContactsExport, context);
       return;
     }
     List<Map<String, dynamic>> jsonList = List();
@@ -123,8 +116,7 @@ class _ContactsListState extends State<ContactsList> {
       jsonList.add(contact.toJson());
     });
     DateTime exportTime = DateTime.now();
-    String filename =
-        "nautiluscontacts_${exportTime.year}${exportTime.month}${exportTime.day}${exportTime.hour}${exportTime.minute}${exportTime.second}.txt";
+    String filename = "nautiluscontacts_${exportTime.year}${exportTime.month}${exportTime.day}${exportTime.hour}${exportTime.minute}${exportTime.second}.txt";
     Directory baseDirectory = await getApplicationDocumentsDirectory();
     File contactsFile = File("${baseDirectory.path}/$filename");
     await contactsFile.writeAsString(json.encode(jsonList));
@@ -134,15 +126,11 @@ class _ContactsListState extends State<ContactsList> {
 
   Future<void> _importContacts() async {
     UIUtil.cancelLockEvent();
-    FilePickerResult result = await FilePicker.platform.pickFiles(
-        allowMultiple: false,
-        type: FileType.custom,
-        allowedExtensions: ["txt"]);
+    FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ["txt"]);
     if (result != null) {
       File f = File(result.files.single.path);
       if (!await f.exists()) {
-        UIUtil.showSnackbar(
-            AppLocalization.of(context).contactsImportErr, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
         return;
       }
       try {
@@ -154,10 +142,7 @@ class _ContactsListState extends State<ContactsList> {
           contacts.add(Contact.fromJson(contact));
         });
         for (Contact contact in contacts) {
-          if (!await sl.get<DBHelper>().contactExistsWithName(contact.name) &&
-              !await sl
-                  .get<DBHelper>()
-                  .contactExistsWithAddress(contact.address)) {
+          if (!await sl.get<DBHelper>().contactExistsWithName(contact.name) && !await sl.get<DBHelper>().contactExistsWithAddress(contact.address)) {
             // Contact doesnt exist, make sure name and address are valid
             if (Address(contact.address).isValid()) {
               if (contact.name.startsWith("@") && contact.name.length <= 20) {
@@ -170,28 +155,20 @@ class _ContactsListState extends State<ContactsList> {
         int numSaved = await sl.get<DBHelper>().saveContacts(contactsToAdd);
         if (numSaved > 0) {
           _updateContacts();
-          EventTaxiImpl.singleton().fire(
-              ContactModifiedEvent(contact: Contact(name: "", address: "")));
-          UIUtil.showSnackbar(
-              AppLocalization.of(context)
-                  .contactsImportSuccess
-                  .replaceAll("%1", numSaved.toString()),
-              context);
+          EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: Contact(name: "", address: "")));
+          UIUtil.showSnackbar(AppLocalization.of(context).contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
         } else {
-          UIUtil.showSnackbar(
-              AppLocalization.of(context).noContactsImport, context);
+          UIUtil.showSnackbar(AppLocalization.of(context).noContactsImport, context);
         }
       } catch (e) {
         log.e(e.toString(), e);
-        UIUtil.showSnackbar(
-            AppLocalization.of(context).contactsImportErr, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
         return;
       }
     } else {
       // Cancelled by user
       log.e("FilePicker cancelled by user");
-      UIUtil.showSnackbar(
-          AppLocalization.of(context).contactsImportErr, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
       return;
     }
   }
@@ -202,10 +179,7 @@ class _ContactsListState extends State<ContactsList> {
         decoration: BoxDecoration(
           color: StateContainer.of(context).curTheme.backgroundDark,
           boxShadow: [
-            BoxShadow(
-                color: StateContainer.of(context).curTheme.barrierWeakest,
-                offset: Offset(-5, 0),
-                blurRadius: 20),
+            BoxShadow(color: StateContainer.of(context).curTheme.barrierWeakest, offset: Offset(-5, 0), blurRadius: 20),
           ],
         ),
         child: SafeArea(
@@ -229,75 +203,57 @@ class _ContactsListState extends State<ContactsList> {
                           width: 40,
                           margin: EdgeInsets.only(right: 10, left: 10),
                           child: FlatButton(
-                              highlightColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              splashColor:
-                                  StateContainer.of(context).curTheme.text15,
+                              highlightColor: StateContainer.of(context).curTheme.text15,
+                              splashColor: StateContainer.of(context).curTheme.text15,
                               onPressed: () {
                                 setState(() {
                                   widget.contactsOpen = false;
                                 });
                                 widget.contactsController.reverse();
                               },
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                               padding: EdgeInsets.all(8.0),
-                              child: Icon(AppIcons.back,
-                                  color:
-                                      StateContainer.of(context).curTheme.text,
-                                  size: 24)),
+                              child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                         //Contacts Header Text
                         Text(
-                          AppLocalization.of(context).contactsHeader,
+                          AppLocalization.of(context).favoritesHeader,
                           style: AppStyles.textStyleSettingsHeader(context),
                         ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
-                        //Import button
-                        Container(
-                          height: 40,
-                          width: 40,
-                          margin: EdgeInsetsDirectional.only(end: 5),
-                          child: FlatButton(
-                              highlightColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              splashColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              onPressed: () {
-                                _importContacts();
-                              },
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(8.0),
-                              child: Icon(AppIcons.import_icon,
-                                  color:
-                                      StateContainer.of(context).curTheme.text,
-                                  size: 24)),
-                        ),
-                        //Export button
-                        Container(
-                          height: 40,
-                          width: 40,
-                          margin: EdgeInsetsDirectional.only(end: 20),
-                          child: FlatButton(
-                              highlightColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              splashColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              onPressed: () {
-                                _exportContacts();
-                              },
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(8.0),
-                              child: Icon(AppIcons.export_icon,
-                                  color:
-                                      StateContainer.of(context).curTheme.text,
-                                  size: 24)),
-                        ),
+                        // //Import button
+                        // Container(
+                        //   height: 40,
+                        //   width: 40,
+                        //   margin: EdgeInsetsDirectional.only(end: 5),
+                        //   child: FlatButton(
+                        //       highlightColor: StateContainer.of(context).curTheme.text15,
+                        //       splashColor: StateContainer.of(context).curTheme.text15,
+                        //       onPressed: () {
+                        //         _importContacts();
+                        //       },
+                        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                        //       padding: EdgeInsets.all(8.0),
+                        //       child: Icon(AppIcons.import_icon, color: StateContainer.of(context).curTheme.text, size: 24)),
+                        // ),
+                        // //Export button
+                        // Container(
+                        //   height: 40,
+                        //   width: 40,
+                        //   margin: EdgeInsetsDirectional.only(end: 20),
+                        //   child: FlatButton(
+                        //       highlightColor: StateContainer.of(context).curTheme.text15,
+                        //       splashColor: StateContainer.of(context).curTheme.text15,
+                        //       onPressed: () {
+                        //         _exportContacts();
+                        //       },
+                        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                        //       padding: EdgeInsets.all(8.0),
+                        //       child: Icon(AppIcons.export_icon, color: StateContainer.of(context).curTheme.text, size: 24)),
+                        // ),
                       ],
                     ),
                   ],
@@ -315,13 +271,9 @@ class _ContactsListState extends State<ContactsList> {
                       itemBuilder: (context, index) {
                         // Some disaster recovery if monKey is in DB, but doesnt exist in filesystem
                         if (_contacts[index].monkeyPath != null) {
-                          File("$documentsDirectory/${_contacts[index].monkeyPath}")
-                              .exists()
-                              .then((exists) {
+                          File("$documentsDirectory/${_contacts[index].monkeyPath}").exists().then((exists) {
                             if (!exists) {
-                              sl
-                                  .get<DBHelper>()
-                                  .setMonkeyForContact(_contacts[index], null);
+                              sl.get<DBHelper>().setMonkeyForContact(_contacts[index], null);
                             }
                           });
                         }
@@ -337,14 +289,7 @@ class _ContactsListState extends State<ContactsList> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [
-                              StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark,
-                              StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark00
-                            ],
+                            colors: [StateContainer.of(context).curTheme.backgroundDark, StateContainer.of(context).curTheme.backgroundDark00],
                             begin: AlignmentDirectional(0.5, -1.0),
                             end: AlignmentDirectional(0.5, 1.0),
                           ),
@@ -360,12 +305,8 @@ class _ContactsListState extends State<ContactsList> {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark00,
-                              StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark,
+                              StateContainer.of(context).curTheme.backgroundDark00,
+                              StateContainer.of(context).curTheme.backgroundDark,
                             ],
                             begin: AlignmentDirectional(0.5, -1.0),
                             end: AlignmentDirectional(0.5, 1.0),
@@ -380,13 +321,9 @@ class _ContactsListState extends State<ContactsList> {
                 margin: EdgeInsets.only(top: 10),
                 child: Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(
-                        context,
-                        AppButtonType.TEXT_OUTLINE,
-                        AppLocalization.of(context).addContact,
-                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                      Sheets.showAppHeightNineSheet(
-                          context: context, widget: AddContactSheet());
+                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context).addFavorite, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
+                      Sheets.showAppHeightNineSheet(context: context, widget: AddContactSheet());
                     }),
                   ],
                 ),
@@ -399,8 +336,7 @@ class _ContactsListState extends State<ContactsList> {
   Widget buildSingleContact(BuildContext context, Contact contact) {
     return FlatButton(
       onPressed: () {
-        ContactDetailsSheet(contact, documentsDirectory)
-            .mainBottomSheet(context);
+        ContactDetailsSheet(contact, documentsDirectory).mainBottomSheet(context);
       },
       padding: EdgeInsets.all(0.0),
       child: Column(children: <Widget>[
@@ -420,24 +356,14 @@ class _ContactsListState extends State<ContactsList> {
                   ? Container(
                       width: 64.0,
                       height: 64.0,
-                      child: SvgPicture.network(
-                          UIUtil.getNatriconURL(
-                              contact.address,
-                              StateContainer.of(context)
-                                  .getNatriconNonce(contact.address)),
-                          key: Key(UIUtil.getNatriconURL(
-                              contact.address,
-                              StateContainer.of(context)
-                                  .getNatriconNonce(contact.address))),
-                          placeholderBuilder: (BuildContext context) =>
-                              Container(
+                      child: SvgPicture.network(UIUtil.getNatriconURL(contact.address, StateContainer.of(context).getNatriconNonce(contact.address)),
+                          key: Key(UIUtil.getNatriconURL(contact.address, StateContainer.of(context).getNatriconNonce(contact.address))),
+                          placeholderBuilder: (BuildContext context) => Container(
                                 child: FlareActor(
                                   "legacy_assets/ntr_placeholder_animation.flr",
                                   animation: "main",
                                   fit: BoxFit.contain,
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .primary,
+                                  color: StateContainer.of(context).curTheme.primary,
                                 ),
                               )),
                     )
@@ -446,16 +372,13 @@ class _ContactsListState extends State<ContactsList> {
               Expanded(
                 child: Container(
                   height: 60,
-                  margin: EdgeInsetsDirectional.only(
-                      start:
-                          StateContainer.of(context).natriconOn ? 2.0 : 20.0),
+                  margin: EdgeInsetsDirectional.only(start: StateContainer.of(context).natriconOn ? 2.0 : 20.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       //Contact name
-                      Text(contact.name,
-                          style: AppStyles.textStyleSettingItemHeader(context)),
+                      Text(contact.name, style: AppStyles.textStyleSettingItemHeader(context)),
                       //Contact address
                       Text(
                         Address(contact.address).getShortString(),

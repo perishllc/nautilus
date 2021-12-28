@@ -68,6 +68,10 @@ abstract class BaseTheme {
 
 class NautilusTheme extends BaseTheme {
   static const brightBlue = Color(0xFFB999F0);
+  // some test colors:
+  // current: #B999F0
+  // darker: #B19CD9
+  // lighter: #CCA9DD
 
   static const green = Color(0xFF41E099);
 

@@ -218,6 +218,38 @@ class AppLocalization {
 
   /// -- END CONTACT ITEMS
 
+  /// -- FAVORITE ITEMS
+
+  String get removeFavorite {
+    return Intl.message('Remove Favorite', desc: 'favorite_remove_btn', name: 'removeFavorite');
+  }
+
+  String get removeFavoriteConfirmation {
+    return Intl.message('Are you sure you want to delete %1?', desc: 'favorite_remove_sure', name: 'removeFavoriteConfirmation');
+  }
+
+  String get favoriteHeader {
+    return Intl.message('Favorite', desc: 'favorite_view_header', name: 'favoriteHeader');
+  }
+
+  String get favoritesHeader {
+    return Intl.message('Favorites', desc: 'favorite_header', name: 'favoritesHeader');
+  }
+
+  String get addFavorite {
+    return Intl.message('Add Favorite', desc: 'favorite_add_button', name: 'addFavorite');
+  }
+
+  String get favoriteNameHint {
+    return Intl.message('Enter a Name @', desc: 'favorite_name_hint', name: 'favoriteNameHint');
+  }
+
+  String get favoriteInvalid {
+    return Intl.message("Invalid Favorite Name", desc: 'favorite_invalid_name', name: 'favoriteInvalid');
+  }
+
+  /// -- END FAVORITE ITEMS
+
   /// -- INTRO ITEMS
   String get backupYourSeed {
     return Intl.message('Backup your seed', desc: 'intro_new_wallet_seed_backup_header', name: 'backupYourSeed');
