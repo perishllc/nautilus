@@ -157,14 +157,20 @@ dev_dependencies:
   json_serializable: ^6.0.1
   # the next two packages have a dependency conflict and can't both be enabled at the same time
   # though the second is just a command line tool for updating /changing the application icons
-  # to update the app icons use:
-  # `flutter pub get` &&
-  # `flutter pub run flutter_launcher_icons:main`
   intl_translation:
     git:
       url: https://github.com/bbedward/intl_translation.git
       ref: master
   # flutter_launcher_icons: "^0.9.2"
+
+# to update the app icons use:
+# flutter pub get
+# flutter pub run flutter_launcher_icons:main
+  
+# to update the translations use:
+# flutter pub pub run intl_translation:extract_to_arb --output-dir=lib/l10n lib/localization.dart
+# flutter pub pub run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/localization.dart lib/l10n/intl_*.arb
+
 
 flutter_icons:
   android: true
