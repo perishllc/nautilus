@@ -1106,7 +1106,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                           Container(
                             child: Text(
                               StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.address != null
-                                  ? StateContainer.of(context).wallet?.address?.substring(0, 12)
+                                  ? (StateContainer.of(context).wallet?.username != null)
+                                      ? "@" + StateContainer.of(context).wallet?.username
+                                      : StateContainer.of(context).wallet?.address?.substring(0, 12)
                                   : "",
                               style: TextStyle(
                                 fontFamily: "OverpassMono",

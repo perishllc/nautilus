@@ -41,11 +41,9 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
 
   Future<Uint8List> _capturePng() async {
     if (shareCardKey != null && shareCardKey.currentContext != null) {
-      RenderRepaintBoundary boundary =
-          shareCardKey.currentContext.findRenderObject();
+      RenderRepaintBoundary boundary = shareCardKey.currentContext.findRenderObject();
       ui.Image image = await boundary.toImage(pixelRatio: 5.0);
-      ByteData byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
+      ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       return byteData.buffer.asUint8List();
     } else {
       return null;
@@ -66,8 +64,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        minimum:
-            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+        minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
             // A row for the address text and close button
@@ -93,12 +90,34 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                         borderRadius: BorderRadius.circular(100.0),
                       ),
                     ),
+                    // show napi username if available:
                     Container(
-                      margin: EdgeInsets.only(top: 15.0),
-                      child: UIUtil.threeLineAddressText(
-                          context, StateContainer.of(context).wallet.address,
-                          type: ThreeLineAddressTextType.PRIMARY60),
+                      margin: (StateContainer.of(context).wallet?.username != null) ? EdgeInsets.only(top: 35.0) : EdgeInsets.only(top: 15.0),
+                      child: (StateContainer.of(context).wallet?.username != null)
+                          ? Text("@" + StateContainer.of(context).wallet?.username,
+                              style: TextStyle(
+                                fontFamily: "OverpassMono",
+                                fontWeight: FontWeight.w100,
+                                fontSize: 24.0,
+                                color: StateContainer.of(context).curTheme.text60,
+                              ))
+                          : UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.address, type: ThreeLineAddressTextType.PRIMARY60),
                     ),
+                    // (StateContainer.of(context).wallet?.username != null)
+                    //     ? Container(
+                    //         margin: EdgeInsets.only(top: 15.0),
+                    //         child: Text("@" + StateContainer.of(context).wallet?.username,
+                    //             style: TextStyle(
+                    //               fontFamily: "OverpassMono",
+                    //               fontWeight: FontWeight.w100,
+                    //               fontSize: 24.0,
+                    //               color: StateContainer.of(context).curTheme.text60,
+                    //             )))
+                    //     : null,
+                    // Container(
+                    //   margin: EdgeInsets.only(top: 15.0),
+                    //   child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.address, type: ThreeLineAddressTextType.PRIMARY60),
+                    // ),
                   ],
                 ),
                 //Empty SizedBox
@@ -111,24 +130,19 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
             // QR which takes all the available space left from the buttons & address text
             Expanded(
               child: Padding(
-                padding: EdgeInsetsDirectional.only(
-                    top: 20, bottom: 28, start: 20, end: 20),
+                padding: EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
                 child: LayoutBuilder(builder: (context, constraints) {
                   double availableWidth = constraints.maxWidth;
-                  double availableHeight = constraints.maxHeight;
+                  double availableHeight = (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
                   double widthDivideFactor = 1.3;
-                  double computedMaxSize = Math.min(
-                      availableWidth / widthDivideFactor, availableHeight);
+                  double computedMaxSize = Math.min(availableWidth / widthDivideFactor, availableHeight);
                   return Center(
                     child: Stack(
                       children: <Widget>[
                         _showShareCard
                             ? Container(
-                                child: AppShareCard(
-                                    shareCardKey,
-                                    SvgPicture.asset('legacy_assets/QR.svg'),
-                                    SvgPicture.asset(
-                                        'legacy_assets/sharecard_logo.svg')),
+                                child:
+                                    AppShareCard(shareCardKey, SvgPicture.asset('legacy_assets/QR.svg'), SvgPicture.asset('legacy_assets/sharecard_logo.svg')),
                                 alignment: AlignmentDirectional(0.0, 0.0),
                               )
                             : SizedBox(),
@@ -137,9 +151,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                           child: Container(
                             width: 260,
                             height: 150,
-                            color: StateContainer.of(context)
-                                .curTheme
-                                .backgroundDark,
+                            color: StateContainer.of(context).curTheme.backgroundDark,
                           ),
                         ),
                         // Background/border part the QR
@@ -163,17 +175,10 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                         // Outer ring
                         Center(
                           child: Container(
-                            width: (StateContainer.of(context).curTheme
-                                    is IndiumTheme)
-                                ? computedMaxSize / 1.05
-                                : computedMaxSize,
+                            width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 1.05 : computedMaxSize,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .primary,
-                                  width: computedMaxSize / 90),
+                              border: Border.all(color: StateContainer.of(context).curTheme.primary, width: computedMaxSize / 90),
                             ),
                           ),
                         ),
@@ -187,36 +192,20 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                     shape: BoxShape.circle,
                                     color: Colors.white,
                                     border: Border.all(
-                                      width: (StateContainer.of(context)
-                                              .curTheme is IndiumTheme)
-                                          ? computedMaxSize / 85
-                                          : computedMaxSize / 110,
-                                      color: (StateContainer.of(context)
-                                              .curTheme is IndiumTheme)
-                                          ? StateContainer.of(context)
-                                              .curTheme
-                                              .backgroundDark
-                                          : StateContainer.of(context)
-                                              .curTheme
-                                              .primary,
+                                      width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 85 : computedMaxSize / 110,
+                                      color: (StateContainer.of(context).curTheme is IndiumTheme)
+                                          ? StateContainer.of(context).curTheme.backgroundDark
+                                          : StateContainer.of(context).curTheme.primary,
                                     ),
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        width: (StateContainer.of(context)
-                                                .curTheme is IndiumTheme)
-                                            ? computedMaxSize / 110
-                                            : computedMaxSize / 85,
-                                        color: (StateContainer.of(context)
-                                                .curTheme is IndiumTheme)
-                                            ? StateContainer.of(context)
-                                                .curTheme
-                                                .primary
-                                            : StateContainer.of(context)
-                                                .curTheme
-                                                .backgroundDark,
+                                        width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 110 : computedMaxSize / 85,
+                                        color: (StateContainer.of(context).curTheme is IndiumTheme)
+                                            ? StateContainer.of(context).curTheme.primary
+                                            : StateContainer.of(context).curTheme.backgroundDark,
                                       ),
                                     ),
                                   ),
@@ -240,9 +229,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                   width: computedMaxSize / 6.5,
                                   height: computedMaxSize / 6.5,
                                   decoration: BoxDecoration(
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .primary,
+                                    color: StateContainer.of(context).curTheme.primary,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -253,36 +240,18 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                 child: Container(
                                   width: computedMaxSize / 6.5,
                                   height: computedMaxSize / 6.5,
-                                  margin: EdgeInsetsDirectional.only(
-                                      top: computedMaxSize / 170),
+                                  margin: EdgeInsetsDirectional.only(top: computedMaxSize / 170),
                                   child: SvgPicture.network(
-                                    UIUtil.getNatriconURL(
-                                        StateContainer.of(context)
-                                            .selectedAccount
-                                            .address,
-                                        StateContainer.of(context)
-                                            .getNatriconNonce(
-                                                StateContainer.of(context)
-                                                    .selectedAccount
-                                                    .address)),
-                                    key: Key(UIUtil.getNatriconURL(
-                                        StateContainer.of(context)
-                                            .selectedAccount
-                                            .address,
-                                        StateContainer.of(context)
-                                            .getNatriconNonce(
-                                                StateContainer.of(context)
-                                                    .selectedAccount
-                                                    .address))),
-                                    placeholderBuilder:
-                                        (BuildContext context) => Container(
+                                    UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
+                                        StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
+                                    key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
+                                        StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
+                                    placeholderBuilder: (BuildContext context) => Container(
                                       child: FlareActor(
                                         "legacy_assets/ntr_placeholder_animation.flr",
                                         animation: "main",
                                         fit: BoxFit.contain,
-                                        color: StateContainer.of(context)
-                                            .curTheme
-                                            .primary,
+                                        color: StateContainer.of(context).curTheme.primary,
                                       ),
                                     ),
                                   ),
@@ -297,9 +266,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                   child: Icon(
                                     AppIcons.nautilushorizontal,
                                     size: computedMaxSize / 25,
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .backgroundDark,
+                                    color: StateContainer.of(context).curTheme.backgroundDark,
                                   ),
                                 ),
                               ),
@@ -318,15 +285,10 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                     AppButton.buildAppButton(
                         context,
                         // Share Address Button
-                        _addressCopied
-                            ? AppButtonType.SUCCESS
-                            : AppButtonType.PRIMARY,
-                        _addressCopied
-                            ? AppLocalization.of(context).addressCopied
-                            : AppLocalization.of(context).copyAddress,
+                        _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                        _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
                         Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                      Clipboard.setData(new ClipboardData(
-                          text: StateContainer.of(context).wallet.address));
+                      Clipboard.setData(new ClipboardData(text: StateContainer.of(context).wallet.address));
                       setState(() {
                         // Set copied style
                         _addressCopied = true;
@@ -334,8 +296,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                       if (_addressCopiedTimer != null) {
                         _addressCopiedTimer.cancel();
                       }
-                      _addressCopiedTimer =
-                          new Timer(const Duration(milliseconds: 800), () {
+                      _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
                         setState(() {
                           _addressCopied = false;
                         });
@@ -352,11 +313,9 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                         AppLocalization.of(context).addressShare,
                         Dimens.BUTTON_BOTTOM_DIMENS,
                         disabled: _showShareCard, onPressed: () {
-                      String receiveCardFileName =
-                          "share_${StateContainer.of(context).wallet.address}.png";
+                      String receiveCardFileName = "share_${StateContainer.of(context).wallet.address}.png";
                       getApplicationDocumentsDirectory().then((directory) {
-                        String filePath =
-                            "${directory.path}/$receiveCardFileName";
+                        String filePath = "${directory.path}/$receiveCardFileName";
                         File f = File(filePath);
                         setState(() {
                           _showShareCard = true;
@@ -367,10 +326,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                               if (byteData != null) {
                                 f.writeAsBytes(byteData).then((file) {
                                   UIUtil.cancelLockEvent();
-                                  Share.shareFile(file,
-                                      text: StateContainer.of(context)
-                                          .wallet
-                                          .address);
+                                  Share.shareFile(file, text: StateContainer.of(context).wallet.address);
                                 });
                               } else {
                                 // TODO - show a something went wrong message

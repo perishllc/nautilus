@@ -11,6 +11,7 @@ class AppWallet {
   bool _loading; // Whether or not app is initially loading
   bool _historyLoading; // Whether or not we have received initial account history response
   String _address;
+  String _username;
   BigInt _accountBalance;
   String _frontier;
   String _openBlock;
@@ -22,11 +23,23 @@ class AppWallet {
   int confirmationHeight;
   List<AccountHistoryResponseItem> _history;
 
-
-  AppWallet({String address, BigInt accountBalance, String frontier, String openBlock, String representativeBlock,
-                String representative, String localCurrencyPrice,String btcPrice, int blockCount,
-                List<AccountHistoryResponseItem> history, bool loading, bool historyLoading, this.confirmationHeight = -1}) {
+  AppWallet(
+      {String address,
+      String username,
+      BigInt accountBalance,
+      String frontier,
+      String openBlock,
+      String representativeBlock,
+      String representative,
+      String localCurrencyPrice,
+      String btcPrice,
+      int blockCount,
+      List<AccountHistoryResponseItem> history,
+      bool loading,
+      bool historyLoading,
+      this.confirmationHeight = -1}) {
     this._address = address;
+    this._username = username;
     this._accountBalance = accountBalance ?? BigInt.zero;
     this._frontier = frontier;
     this._openBlock = openBlock;
@@ -37,13 +50,19 @@ class AppWallet {
     this._blockCount = blockCount ?? 0;
     this._history = history ?? new List<AccountHistoryResponseItem>();
     this._loading = loading ?? true;
-    this._historyLoading = historyLoading  ?? true;
+    this._historyLoading = historyLoading ?? true;
   }
 
   String get address => _address;
 
   set address(String address) {
     this._address = address;
+  }
+
+  String get username => _username;
+
+  set username(String username) {
+    this._username = username;
   }
 
   BigInt get accountBalance => _accountBalance;
@@ -60,10 +79,9 @@ class AppWallet {
     return NumberUtil.getRawAsUsableString(_accountBalance.toString());
   }
 
-
   String getLocalCurrencyPrice(AvailableCurrency currency, {String locale = "en_US"}) {
     Decimal converted = Decimal.parse(_localCurrencyPrice) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
-    return NumberFormat.currency(locale:locale, symbol: currency.getCurrencySymbol()).format(converted.toDouble());
+    return NumberFormat.currency(locale: locale, symbol: currency.getCurrencySymbol()).format(converted.toDouble());
   }
 
   set localCurrencyPrice(String value) {
@@ -89,7 +107,7 @@ class AppWallet {
   }
 
   String get representative {
-   return _representative ?? defaultRepresentative;
+    return _representative ?? defaultRepresentative;
   }
 
   set representative(String value) {

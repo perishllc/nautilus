@@ -24,10 +24,10 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
    - [x] Move all appditto assets to a legacy_assets folder, to be removed as replacements are made
 
 #### Aesthetic goals
-- [ ] Show nano.to usernames over full addresses wherever possible
+- [x] Show nano.to usernames over full addresses wherever possible
 - [x] Registered Usernames will be called Usernames.
 - [ ] Usernames should be clickable to reveal the full address & when the username was last leased / updated
-- [ ] Simplify the 'New User' onboarding screens. Right now there are about 3-5 screens between new users, the UI (wallet). I want to bring this down to 1-3. 
+- [x] Simplify the 'New User' onboarding screens. Right now there are about 3-5 screens between new users, the UI (wallet). I want to bring this down to 1-3. 
    - Ask to import seed or create one
    - Backup Seed
    - Set Pin
@@ -36,8 +36,8 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 - [x] Create clever UI to differenciate between Favorites & Usernames.
    - Favorites prefixed with '★'
    - Prefix usernames with an @
-- [ ] Change default theme to a darker color. **CSS Hex Color TBD**
-- [ ] Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
+- [x] Change default theme to a darker color. **CSS Hex Color TBD**
+- [x] Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
 - [ ] Advanced theming support
 
 #### Immediate TODO
@@ -52,6 +52,7 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 #### less important TODO
 - [ ] provide a discount for usernames registered through nautilus
 - [ ] paper wallet generator / sender in app
+- [ ] request / pay buttons from usernames [requires server-side work]
 
 #### Changes so far
 - [x] removed natricons
@@ -66,13 +67,18 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 - [x] add register username button to the drawer
 - [x] add web views for the buttons
 - [x] remove btc from top bar
+- [x] use usernames in place of shorthand addresses where applicable
+- [x] simplified inro process
+- [x] scaled down the QR code size on the receive screen and added usernames when available
 
-
-<img src="/screenshots/flutter_01.png" width="200">
-<img src="/screenshots/flutter_02.png" width="200">
-<img src="/screenshots/flutter_03.png" width="200">
-<img src="/screenshots/flutter_04.png" width="200">
-
+<div style="display: flex; flex-direction: row">
+   <img src="/screenshots/flutter_01.png" width="200">
+   <img src="/screenshots/flutter_02.png" width="200">
+</div>
+<div style="display: flex; flex-direction: row">
+   <img src="/screenshots/flutter_03.png" width="200">
+   <img src="/screenshots/flutter_04.png" width="200">
+</div>
 ### Nautilus - Beta 0.1 (Q1 2022)
 
 - Build with some / core features, possibly provide an apk on github

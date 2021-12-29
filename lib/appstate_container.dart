@@ -174,6 +174,10 @@ class StateContainerState extends State<StateContainer> {
     return "";
   }
 
+  Future<void> fetchNapiDatabases() async {
+    sl.get<DBHelper>().fetchDatabases();
+  }
+
   Future<void> checkAndUpdateAlerts() async {
     // Get active alert
     try {
@@ -269,9 +273,11 @@ class StateContainerState extends State<StateContainer> {
     // sl.get<SharedPrefsUtil>().getUseNatricon().then((useNatricon) {
     //   setNatriconOn(useNatricon);
     // });
-    // make sure db is up to date
+    // make sure nano API databases are up to date
     // TODO: only call when out of date
-    sl.get<DBHelper>().fetchDatabases();
+    fetchNapiDatabases();
+    // sl.get<DBHelper>().fetchDatabases();
+
     // sl.get<DBHelper>().populateDBFromCache();
   }
 
@@ -291,9 +297,10 @@ class StateContainerState extends State<StateContainer> {
     });
     _priceEventSub = EventTaxiImpl.singleton().registerTo<PriceEvent>().listen((event) {
       // PriceResponse's get pushed periodically, it wasn't a request we made so don't pop the queue
+      // handle the null case in debug mode:
       setState(() {
-        wallet.btcPrice = event.response.btcPrice.toString();
-        wallet.localCurrencyPrice = event.response.price.toString();
+        wallet.btcPrice = event.response.btcPrice?.toString();
+        wallet.localCurrencyPrice = event.response.price?.toString();
       });
     });
     _connStatusSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((event) {
@@ -403,9 +410,16 @@ class StateContainerState extends State<StateContainer> {
     account.address = address;
     selectedAccount = account;
     updateRecentlyUsedAccounts();
-    setState(() {
-      wallet = AppWallet(address: address, loading: true);
-      requestUpdate();
+    // get username if it exists:
+    sl.get<DBHelper>().getUserWithAddress(address).then((user) {
+      String walletUsername = null;
+      if (user != null && user.username != null) {
+        walletUsername = user.username;
+      }
+      setState(() {
+        wallet = AppWallet(address: address, username: walletUsername, loading: true);
+        requestUpdate();
+      });
     });
   }
 

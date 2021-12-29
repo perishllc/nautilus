@@ -1,11 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 
 class IntroBackupSafetyPage extends StatefulWidget {
   @override
@@ -16,6 +20,20 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+
+    sl.get<Vault>().setSeed(NanoSeeds.generateSeed()).then((result) {
+      // Update wallet
+      StateContainer.of(context).getSeed().then((seed) {
+        NanoUtil().loginAccount(seed, context).then((_) {
+          StateContainer.of(context).requestUpdate();
+        });
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -23,9 +41,7 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
         builder: (context, constraints) => SafeArea(
-          minimum: EdgeInsets.only(
-              bottom: MediaQuery.of(context).size.height * 0.035,
-              top: MediaQuery.of(context).size.height * 0.075),
+          minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
               //A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
@@ -37,25 +53,18 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
                       children: <Widget>[
                         // Back Button
                         Container(
-                          margin: EdgeInsetsDirectional.only(
-                              start: smallScreen(context) ? 15 : 20),
+                          margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
                           height: 50,
                           width: 50,
                           child: FlatButton(
-                              highlightColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              splashColor:
-                                  StateContainer.of(context).curTheme.text15,
+                              highlightColor: StateContainer.of(context).curTheme.text15,
+                              splashColor: StateContainer.of(context).curTheme.text15,
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                               padding: EdgeInsets.all(0.0),
-                              child: Icon(AppIcons.back,
-                                  color:
-                                      StateContainer.of(context).curTheme.text,
-                                  size: 24)),
+                              child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                       ],
                     ),
@@ -89,10 +98,7 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
                     ),
                     // The paragraph
                     Container(
-                      margin: EdgeInsetsDirectional.only(
-                          start: smallScreen(context) ? 30 : 40,
-                          end: smallScreen(context) ? 30 : 40,
-                          top: 15.0),
+                      margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
                       alignment: Alignment.centerLeft,
                       child: Column(
                         children: <Widget>[
@@ -106,8 +112,7 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
                             margin: EdgeInsetsDirectional.only(top: 15),
                             child: AutoSizeText(
                               AppLocalization.of(context).secretWarning,
-                              style:
-                                  AppStyles.textStyleParagraphPrimary(context),
+                              style: AppStyles.textStyleParagraphPrimary(context),
                               maxLines: 4,
                               stepGranularity: 0.5,
                             ),
@@ -123,13 +128,8 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  AppButton.buildAppButton(
-                      context,
-                      AppButtonType.PRIMARY,
-                      AppLocalization.of(context).gotItButton,
-                      Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                    Navigator.of(context).pushNamed('/intro_backup',
-                        arguments: StateContainer.of(context).encryptedSecret);
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).gotItButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                    Navigator.of(context).pushNamed('/intro_backup', arguments: StateContainer.of(context).encryptedSecret);
                   }),
                 ],
               ),
