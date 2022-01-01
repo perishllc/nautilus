@@ -241,11 +241,19 @@ class AppLocalization {
   }
 
   String get favoriteNameHint {
-    return Intl.message('Enter a Name @', desc: 'favorite_name_hint', name: 'favoriteNameHint');
+    return Intl.message('Enter a Name ★', desc: 'favorite_name_hint', name: 'favoriteNameHint');
   }
 
   String get favoriteInvalid {
     return Intl.message("Invalid Favorite Name", desc: 'favorite_invalid_name', name: 'favoriteInvalid');
+  }
+
+  String get favoriteNameMissing {
+    return Intl.message("Choose a Name for this Favorite", desc: 'favorite_name_missing', name: 'favoriteNameMissing');
+  }
+
+  String get favoriteExists {
+    return Intl.message("Favorite Already Exists", desc: 'favorite_name_exists', name: 'favoriteExists');
   }
 
   /// -- END FAVORITE ITEMS
@@ -405,7 +413,7 @@ class AppLocalization {
   }
 
   String get generatePaperWallet {
-    return Intl.message("Register Username", desc: 'generate_paper_wallet', name: 'generatePaperWallet');
+    return Intl.message("Generate Paper Wallet", desc: 'generate_paper_wallet', name: 'generatePaperWallet');
   }
 
   String get changeRepAuthenticate {

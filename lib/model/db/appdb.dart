@@ -275,6 +275,20 @@ class DBHelper {
     return null;
   }
 
+  Future<dynamic> getUserOrContactWithName(String name) async {
+    var dbClient = await db;
+    List<Map> userList = await dbClient.rawQuery('SELECT * FROM Users WHERE username = ?', [name]);
+    if (userList.length > 0) {
+      return User(username: userList[0]["username"], address: userList[0]["address"]);
+    } else {
+      List<Map> contactList = await dbClient.rawQuery('SELECT * FROM Contacts WHERE name = ?', [name]);
+      if (contactList.length > 0) {
+        return Contact(id: contactList[0]["id"], name: contactList[0]["name"], address: contactList[0]["address"]);
+      }
+    }
+    return null;
+  }
+
   Future<bool> userExistsWithName(String name) async {
     var dbClient = await db;
     int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(username) = ?', [name.toLowerCase()]));

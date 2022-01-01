@@ -145,7 +145,7 @@ class _ContactsListState extends State<ContactsList> {
           if (!await sl.get<DBHelper>().contactExistsWithName(contact.name) && !await sl.get<DBHelper>().contactExistsWithAddress(contact.address)) {
             // Contact doesnt exist, make sure name and address are valid
             if (Address(contact.address).isValid()) {
-              if (contact.name.startsWith("@") && contact.name.length <= 20) {
+              if (contact.name.startsWith("★") && contact.name.length <= 20) {
                 contactsToAdd.add(contact);
               }
             }

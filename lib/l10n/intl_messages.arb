@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2021-12-26T17:01:45.165477",
+  "@@last_modified": "2022-01-01T16:04:14.791965",
   "cancel": "Cancel",
   "@cancel": {
     "description": "dialog_cancel",
@@ -276,6 +276,60 @@
     "type": "text",
     "placeholders": {}
   },
+  "removeFavorite": "Remove Favorite",
+  "@removeFavorite": {
+    "description": "favorite_remove_btn",
+    "type": "text",
+    "placeholders": {}
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "description": "favorite_remove_sure",
+    "type": "text",
+    "placeholders": {}
+  },
+  "favoriteHeader": "Favorite",
+  "@favoriteHeader": {
+    "description": "favorite_view_header",
+    "type": "text",
+    "placeholders": {}
+  },
+  "favoritesHeader": "Favorites",
+  "@favoritesHeader": {
+    "description": "favorite_header",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addFavorite": "Add Favorite",
+  "@addFavorite": {
+    "description": "favorite_add_button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "favoriteNameHint": "Enter a Name ★",
+  "@favoriteNameHint": {
+    "description": "favorite_name_hint",
+    "type": "text",
+    "placeholders": {}
+  },
+  "favoriteInvalid": "Invalid Favorite Name",
+  "@favoriteInvalid": {
+    "description": "favorite_invalid_name",
+    "type": "text",
+    "placeholders": {}
+  },
+  "favoriteNameMissing": "Choose a Name for this Favorite",
+  "@favoriteNameMissing": {
+    "description": "favorite_name_missing",
+    "type": "text",
+    "placeholders": {}
+  },
+  "favoriteExists": "Favorite Already Exists",
+  "@favoriteExists": {
+    "description": "favorite_name_exists",
+    "type": "text",
+    "placeholders": {}
+  },
   "backupYourSeed": "Backup your seed",
   "@backupYourSeed": {
     "description": "intro_new_wallet_seed_backup_header",
@@ -480,6 +534,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "generatePaperWallet": "Generate Paper Wallet",
+  "@generatePaperWallet": {
+    "description": "generate_paper_wallet",
+    "type": "text",
+    "placeholders": {}
+  },
   "changeRepAuthenticate": "Change Representative",
   "@changeRepAuthenticate": {
     "description": "settings_change_rep",
@@ -669,6 +729,12 @@
   "preferences": "Preferences",
   "@preferences": {
     "description": "settings_preferences_header",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nanoAPI": "Nano API",
+  "@nanoAPI": {
+    "description": "nano_api",
     "type": "text",
     "placeholders": {}
   },

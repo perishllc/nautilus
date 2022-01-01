@@ -40,11 +40,9 @@ class ContactDetailsSheet {
     AppSheets.showAppHeightEightSheet(
         context: context,
         builder: (BuildContext context) {
-          return StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
+          return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
             return SafeArea(
-                minimum: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).size.height * 0.035),
+                minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
                 child: Column(
                   children: <Widget>[
                     Row(
@@ -55,77 +53,48 @@ class ContactDetailsSheet {
                         Container(
                           width: 50,
                           height: 50,
-                          margin: EdgeInsetsDirectional.only(
-                              top: 10.0, start: 10.0),
+                          margin: EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
                           child: FlatButton(
-                            highlightColor:
-                                StateContainer.of(context).curTheme.text15,
-                            splashColor:
-                                StateContainer.of(context).curTheme.text15,
+                            highlightColor: StateContainer.of(context).curTheme.text15,
+                            splashColor: StateContainer.of(context).curTheme.text15,
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
                                   AppLocalization.of(context).removeContact,
-                                  AppLocalization.of(context)
-                                      .removeContactConfirmation
-                                      .replaceAll('%1', contact.name),
-                                  CaseChange.toUpperCase(
-                                      AppLocalization.of(context).yes, context),
-                                  () {
-                                sl
-                                    .get<DBHelper>()
-                                    .deleteContact(contact)
-                                    .then((deleted) {
+                                  AppLocalization.of(context).removeContactConfirmation.replaceAll('%1', contact.name),
+                                  CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                                sl.get<DBHelper>().deleteContact(contact).then((deleted) {
                                   if (deleted) {
                                     // Delete image if exists
                                     if (contact.monkeyPath != null) {
-                                      if (File(
-                                              "$documentsDirectory/${contact.monkeyPath}")
-                                          .existsSync()) {
-                                        File("$documentsDirectory/${contact.monkeyPath}")
-                                            .delete();
+                                      if (File("$documentsDirectory/${contact.monkeyPath}").existsSync()) {
+                                        File("$documentsDirectory/${contact.monkeyPath}").delete();
                                       }
                                     }
-                                    EventTaxiImpl.singleton().fire(
-                                        ContactRemovedEvent(contact: contact));
-                                    EventTaxiImpl.singleton().fire(
-                                        ContactModifiedEvent(contact: contact));
-                                    UIUtil.showSnackbar(
-                                        AppLocalization.of(context)
-                                            .contactRemoved
-                                            .replaceAll("%1", contact.name),
-                                        context);
+                                    EventTaxiImpl.singleton().fire(ContactRemovedEvent(contact: contact));
+                                    EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: contact));
+                                    UIUtil.showSnackbar(AppLocalization.of(context).contactRemoved.replaceAll("%1", contact.name), context);
                                     Navigator.of(context).pop();
                                   } else {
                                     // TODO - error for failing to delete contact
                                   }
                                 });
-                              },
-                                  cancelText: CaseChange.toUpperCase(
-                                      AppLocalization.of(context).no, context));
+                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
                             },
-                            child: Icon(AppIcons.trashcan,
-                                size: 24,
-                                color:
-                                    StateContainer.of(context).curTheme.text),
+                            child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
                             padding: EdgeInsets.all(13.0),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(100.0)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
                             materialTapTargetSize: MaterialTapTargetSize.padded,
                           ),
                         ),
                         // The header of the sheet
                         Container(
                           margin: EdgeInsets.only(top: 25.0),
-                          constraints: BoxConstraints(
-                              maxWidth:
-                                  MediaQuery.of(context).size.width - 140),
+                          constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                           child: Column(
                             children: <Widget>[
                               AutoSizeText(
-                                CaseChange.toUpperCase(
-                                    AppLocalization.of(context).contactHeader,
-                                    context),
+                                CaseChange.toUpperCase(AppLocalization.of(context).favoriteHeader, context),
                                 style: AppStyles.textStyleHeader(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
@@ -138,27 +107,18 @@ class ContactDetailsSheet {
                         Container(
                           width: 50,
                           height: 50,
-                          margin:
-                              EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
+                          margin: EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
                           child: FlatButton(
-                            highlightColor:
-                                StateContainer.of(context).curTheme.text15,
-                            splashColor:
-                                StateContainer.of(context).curTheme.text15,
+                            highlightColor: StateContainer.of(context).curTheme.text15,
+                            splashColor: StateContainer.of(context).curTheme.text15,
                             onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return UIUtil.showAccountWebview(
-                                    context, contact.address);
+                              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                                return UIUtil.showAccountWebview(context, contact.address);
                               }));
                             },
-                            child: Icon(AppIcons.search,
-                                size: 24,
-                                color:
-                                    StateContainer.of(context).curTheme.text),
+                            child: Icon(AppIcons.search, size: 24, color: StateContainer.of(context).curTheme.text),
                             padding: EdgeInsets.all(13.0),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(100.0)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
                             materialTapTargetSize: MaterialTapTargetSize.padded,
                           ),
                         ),
@@ -178,15 +138,12 @@ class ContactDetailsSheet {
                                     child: SvgPicture.network(
                                       UIUtil.getNatriconURL(contact.address, StateContainer.of(context).getNatriconNonce(contact.address)),
                                       key: Key(UIUtil.getNatriconURL(contact.address, StateContainer.of(context).getNatriconNonce(contact.address))),
-                                      placeholderBuilder:
-                                          (BuildContext context) => Container(
+                                      placeholderBuilder: (BuildContext context) => Container(
                                         child: FlareActor(
                                           "legacy_assets/ntr_placeholder_animation.flr",
                                           animation: "main",
                                           fit: BoxFit.contain,
-                                          color: StateContainer.of(context)
-                                              .curTheme
-                                              .primary,
+                                          color: StateContainer.of(context).curTheme.primary,
                                         ),
                                       ),
                                     ),
@@ -197,15 +154,11 @@ class ContactDetailsSheet {
                               width: double.infinity,
                               margin: EdgeInsets.only(
                                 left: MediaQuery.of(context).size.width * 0.105,
-                                right:
-                                    MediaQuery.of(context).size.width * 0.105,
+                                right: MediaQuery.of(context).size.width * 0.105,
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 25.0, vertical: 12.0),
+                              padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
                               decoration: BoxDecoration(
-                                color: StateContainer.of(context)
-                                    .curTheme
-                                    .backgroundDarkest,
+                                color: StateContainer.of(context).curTheme.backgroundDarkest,
                                 borderRadius: BorderRadius.circular(25),
                               ),
                               child: Text(
@@ -214,9 +167,7 @@ class ContactDetailsSheet {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16.0,
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .primary,
+                                  color: StateContainer.of(context).curTheme.primary,
                                   fontFamily: 'NunitoSans',
                                 ),
                               ),
@@ -224,16 +175,14 @@ class ContactDetailsSheet {
                             // Contact Address
                             GestureDetector(
                               onTap: () {
-                                Clipboard.setData(
-                                    new ClipboardData(text: contact.address));
+                                Clipboard.setData(new ClipboardData(text: contact.address));
                                 setState(() {
                                   _addressCopied = true;
                                 });
                                 if (_addressCopiedTimer != null) {
                                   _addressCopiedTimer.cancel();
                                 }
-                                _addressCopiedTimer = new Timer(
-                                    const Duration(milliseconds: 800), () {
+                                _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
                                   setState(() {
                                     _addressCopied = false;
                                   });
@@ -241,40 +190,24 @@ class ContactDetailsSheet {
                               },
                               child: Container(
                                 width: double.infinity,
-                                margin: EdgeInsets.only(
-                                    left: MediaQuery.of(context).size.width *
-                                        0.105,
-                                    right: MediaQuery.of(context).size.width *
-                                        0.105,
-                                    top: 15),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 25.0, vertical: 15.0),
+                                margin:
+                                    EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105, top: 15),
+                                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                                 decoration: BoxDecoration(
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .backgroundDarkest,
+                                  color: StateContainer.of(context).curTheme.backgroundDarkest,
                                   borderRadius: BorderRadius.circular(25),
                                 ),
-                                child: UIUtil.threeLineAddressText(
-                                    context, contact.address,
-                                    type: _addressCopied
-                                        ? ThreeLineAddressTextType.SUCCESS_FULL
-                                        : ThreeLineAddressTextType.PRIMARY),
+                                child: UIUtil.threeLineAddressText(context, contact.address,
+                                    type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
                               ),
                             ),
                             // Address Copied text container
                             Container(
                               margin: EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(
-                                  _addressCopied
-                                      ? AppLocalization.of(context)
-                                          .addressCopied
-                                      : "",
+                              child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
                                   style: TextStyle(
                                     fontSize: 14.0,
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .success,
+                                    color: StateContainer.of(context).curTheme.success,
                                     fontFamily: 'NunitoSans',
                                     fontWeight: FontWeight.w600,
                                   )),
@@ -291,34 +224,19 @@ class ContactDetailsSheet {
                           Row(
                             children: <Widget>[
                               // Send Button
-                              AppButton.buildAppButton(
-                                  context,
-                                  AppButtonType.PRIMARY,
-                                  AppLocalization.of(context).send,
-                                  Dimens.BUTTON_TOP_DIMENS,
-                                  disabled: StateContainer.of(context)
-                                          .wallet
-                                          .accountBalance ==
-                                      BigInt.zero, onPressed: () {
+                              AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS,
+                                  disabled: StateContainer.of(context).wallet.accountBalance == BigInt.zero, onPressed: () {
                                 Navigator.of(context).pop();
                                 Sheets.showAppHeightNineSheet(
-                                    context: context,
-                                    widget: SendSheet(
-                                        localCurrency:
-                                            StateContainer.of(context)
-                                                .curCurrency,
-                                        contact: contact));
+                                    context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, contact: contact));
                               }),
                             ],
                           ),
                           Row(
                             children: <Widget>[
                               // Close Button
-                              AppButton.buildAppButton(
-                                  context,
-                                  AppButtonType.PRIMARY_OUTLINE,
-                                  AppLocalization.of(context).close,
-                                  Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                              AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                                  onPressed: () {
                                 Navigator.pop(context);
                               }),
                             ],

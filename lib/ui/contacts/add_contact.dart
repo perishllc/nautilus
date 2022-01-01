@@ -355,7 +355,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
         if (addressExists) {
           setState(() {
             isValid = false;
-            _addressValidationText = AppLocalization.of(context).contactExists;
+            _addressValidationText = AppLocalization.of(context).favoriteExists;
           });
         }
       }
@@ -364,14 +364,14 @@ class _AddContactSheetState extends State<AddContactSheet> {
     if (_nameController.text.isEmpty) {
       isValid = false;
       setState(() {
-        _nameValidationText = AppLocalization.of(context).contactNameMissing;
+        _nameValidationText = AppLocalization.of(context).favoriteNameMissing;
       });
     } else {
       bool nameExists = await sl.get<DBHelper>().contactExistsWithName(_nameController.text);
       if (nameExists) {
         setState(() {
           isValid = false;
-          _nameValidationText = AppLocalization.of(context).contactExists;
+          _nameValidationText = AppLocalization.of(context).favoriteExists;
         });
       }
     }
