@@ -1182,6 +1182,16 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://nano.to");
                       }));
                     }),
+                    Divider(
+                      height: 2,
+                      color: StateContainer.of(context).curTheme.text15,
+                    ),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).generatePaperWallet, AppIcons.changerepresentative,
+                        onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                        return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://tools.nanos.cc/?tool=paper");
+                      }));
+                    }),
                     Container(
                       margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(AppLocalization.of(context).preferences,

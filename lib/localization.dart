@@ -404,6 +404,10 @@ class AppLocalization {
     return Intl.message("Register Username", desc: 'register_username', name: 'registerUsername');
   }
 
+  String get generatePaperWallet {
+    return Intl.message("Register Username", desc: 'generate_paper_wallet', name: 'generatePaperWallet');
+  }
+
   String get changeRepAuthenticate {
     return Intl.message("Change Representative", desc: 'settings_change_rep', name: 'changeRepAuthenticate');
   }

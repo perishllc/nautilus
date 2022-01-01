@@ -38,18 +38,16 @@ ___
 - [ ] Advanced theming support
 
 #### Immediate TODO
-- [ ] replace android/app/src/main/ic_launcher-web.png *must* be 512x512 for the play store
-- [ ] recieve screen usernames integration
-- [ ] accounts should show usernames if registered
 - [ ] remove natrium logo from the center of generated QR codes
 - [ ] cache json from /reps and /known
 - [ ] set random representative for new accounts using nano.to/reps
-
+- [ ] local favorites don't quite work (for sending) yet
 
 #### less important TODO
 - [ ] provide a discount for usernames registered through nautilus
 - [ ] paper wallet generator / sender in app
 - [ ] request / pay buttons from usernames [requires server-side work]
+- [ ] replace android/app/src/main/ic_launcher-web.png *must* be 512x512 for the play store
 
 #### Changes so far
 - [x] removed natricons
@@ -76,6 +74,8 @@ ___
    <img src="/screenshots/flutter_03.png" width="200">
    <img src="/screenshots/flutter_04.png" width="200">
 </div>
+
+___
 
 ## Timeline (subject to change)
 
