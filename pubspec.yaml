@@ -176,10 +176,10 @@ flutter_icons:
   android: true
   # android: "ic_launcher_round.png"
   ios: true
-  image_path: "assets/logo-square-purple.png"
+  image_path: "assets/logo-square.png"
   remove_alpha_ios: true
   adaptive_icon_background: "#000000"
-  adaptive_icon_foreground: "assets/logo-square-nano-to.png"
+  adaptive_icon_foreground: "assets/logo-square.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

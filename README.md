@@ -1,6 +1,6 @@
 # Nautilus Wallet
 
-![Cover](https://raw.githubusercontent.com/fwd/nautilus/master/.github/banner.png)
+![Cover](/assets/banner.png)
 
 ### A [Natrium](https://github.com/appditto/natrium_wallet_flutter) fork, with [Nano.to](https://github.com/formsend/nano) integration, and a few other improvements.
 
