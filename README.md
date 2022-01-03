@@ -45,6 +45,7 @@ ___
 
 #### less important TODO
 - [ ] provide a discount for usernames registered through nautilus
+- [ ] setting that let you choose which username to display in the app if multiple are registered
 - [ ] paper wallet generator / sender in app
 - [ ] request / pay buttons from usernames [requires server-side work]
 - [ ] replace android/app/src/main/ic_launcher-web.png *must* be 512x512 for the play store
@@ -74,7 +75,11 @@ ___
 </div>
 <div style="display: flex; flex-direction: row">
    <img src="/screenshots/flutter_03.png" width="200">
+   <img src="/screenshots/flutter_06.png" width="200">
+</div>
+<div style="display: flex; flex-direction: row">
    <img src="/screenshots/flutter_04.png" width="200">
+   <img src="/screenshots/flutter_05.png" width="200">
 </div>
 
 ___

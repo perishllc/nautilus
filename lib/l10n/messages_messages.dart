@@ -93,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "favoriteExists" : MessageLookupByLibrary.simpleMessage("Favorite Already Exists"),
     "favoriteHeader" : MessageLookupByLibrary.simpleMessage("Favorite"),
     "favoriteInvalid" : MessageLookupByLibrary.simpleMessage("Invalid Favorite Name"),
-    "favoriteNameHint" : MessageLookupByLibrary.simpleMessage("Enter a Name ★"),
+    "favoriteNameHint" : MessageLookupByLibrary.simpleMessage("Enter a Nick Name"),
     "favoriteNameMissing" : MessageLookupByLibrary.simpleMessage("Choose a Name for this Favorite"),
     "favoritesHeader" : MessageLookupByLibrary.simpleMessage("Favorites"),
     "fingerprintSeedBackup" : MessageLookupByLibrary.simpleMessage("Authenticate to backup seed."),

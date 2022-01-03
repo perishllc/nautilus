@@ -815,14 +815,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                     children: <Widget>[
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
+                          borderRadius: BorderRadius.circular(5),
                           boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
                         ),
                         height: 55,
                         width: (MediaQuery.of(context).size.width - 42) / 2,
                         margin: EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
                         child: FlatButton(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                           color: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
                           child: AutoSizeText(
                             AppLocalization.of(context).receive,
@@ -1265,7 +1265,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: StateContainer.of(context).curTheme.text45,
-                                      borderRadius: BorderRadius.circular(100),
+                                      borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: Text(
                                       text,
@@ -1298,7 +1298,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: StateContainer.of(context).curTheme.primary20,
-                                      borderRadius: BorderRadius.circular(100),
+                                      borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: Text(
                                       amount,
@@ -1344,7 +1344,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                               child: Container(
                                 decoration: BoxDecoration(
                                   color: StateContainer.of(context).curTheme.text20,
-                                  borderRadius: BorderRadius.circular(100),
+                                  borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: Text(
                                   address,
@@ -1488,7 +1488,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             onPressed: () {
                               Navigator.of(context).pushNamed('/avatar_page');
                             },
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                             highlightColor: StateContainer.of(context).curTheme.text15,
                             splashColor: StateContainer.of(context).curTheme.text15,
                             padding: EdgeInsets.all(0.0),
@@ -1537,7 +1537,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                           child: Container(
                             decoration: BoxDecoration(
                               color: StateContainer.of(context).curTheme.text20,
-                              borderRadius: BorderRadius.circular(100),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             child: Text(
                               "1234567",
@@ -1568,7 +1568,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                     child: Container(
                       decoration: BoxDecoration(
                         color: StateContainer.of(context).curTheme.primary60,
-                        borderRadius: BorderRadius.circular(100),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       child: AutoSizeText(
                         "1234567",
@@ -1597,7 +1597,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                           child: Container(
                             decoration: BoxDecoration(
                               color: StateContainer.of(context).curTheme.text20,
-                              borderRadius: BorderRadius.circular(100),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             child: Text(
                               "1234567",
@@ -1790,7 +1790,7 @@ class _TransactionDetailsSheetState extends State<TransactionDetailsSheet> {
                                     },
                                     splashColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                                     padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
                                     child: Icon(AppIcons.addcontact,
                                         size: 35,

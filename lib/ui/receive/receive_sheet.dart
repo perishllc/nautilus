@@ -87,7 +87,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                       width: MediaQuery.of(context).size.width * 0.15,
                       decoration: BoxDecoration(
                         color: StateContainer.of(context).curTheme.text10,
-                        borderRadius: BorderRadius.circular(100.0),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
                     // show napi username if available:

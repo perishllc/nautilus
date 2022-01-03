@@ -730,7 +730,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                       width: 64,
                                       height: 64,
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(100.0),
+                                        borderRadius: BorderRadius.circular(5.0),
                                         border: Border.all(color: StateContainer.of(context).curTheme.primary, width: 1.5),
                                       ),
                                       alignment: AlignmentDirectional(-1, 0),
@@ -756,7 +756,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                       width: 64,
                                       height: 64,
                                       child: FlatButton(
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                                         highlightColor: StateContainer.of(context).curTheme.text15,
                                         splashColor: StateContainer.of(context).curTheme.text15,
                                         padding: EdgeInsets.all(0.0),
@@ -868,7 +868,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                                         .fire(AccountChangedEvent(account: StateContainer.of(context).recentLast, delayPop: true));
                                                   });
                                                 },
-                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                                                 highlightColor: StateContainer.of(context).curTheme.text15,
                                                 splashColor: StateContainer.of(context).curTheme.text15,
                                                 padding: EdgeInsets.all(0.0),
@@ -973,7 +973,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                                         .fire(AccountChangedEvent(account: StateContainer.of(context).recentSecondLast, delayPop: true));
                                                   });
                                                 },
-                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.0)),
+                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                                                 highlightColor: StateContainer.of(context).curTheme.text15,
                                                 splashColor: StateContainer.of(context).curTheme.text15,
                                                 padding: EdgeInsets.all(0.0),
@@ -1163,10 +1163,6 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).buyNano, AppIcons.changerepresentative, onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                         return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://buy.chainbits.com");
@@ -1192,8 +1188,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://tools.nanos.cc/?tool=paper");
                       }));
                     }),
+                    Divider(
+                      height: 2,
+                      color: StateContainer.of(context).curTheme.text15,
+                    ),
                     Container(
-                      margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+                      margin: EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
                       child: Text(AppLocalization.of(context).preferences,
                           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
                     ),

@@ -123,7 +123,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
               width: MediaQuery.of(context).size.width * 0.15,
               decoration: BoxDecoration(
                 color: StateContainer.of(context).curTheme.text10,
-                borderRadius: BorderRadius.circular(100.0),
+                borderRadius: BorderRadius.circular(5.0),
               ),
             ),
             //The main widget that holds the text fields, "SENDING" and "TO" texts

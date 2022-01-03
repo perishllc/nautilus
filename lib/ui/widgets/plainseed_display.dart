@@ -15,8 +15,7 @@ class PlainSeedDisplay extends StatefulWidget {
   final bool obscureSeed;
   final bool showButton;
 
-  PlainSeedDisplay(
-      {@required this.seed, this.obscureSeed = false, this.showButton = true});
+  PlainSeedDisplay({@required this.seed, this.obscureSeed = false, this.showButton = true});
 
   _PlainSeedDisplayState createState() => _PlainSeedDisplayState();
 }
@@ -41,10 +40,7 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
       children: <Widget>[
         // The paragraph
         Container(
-          margin: EdgeInsets.only(
-              left: smallScreen(context) ? 30 : 40,
-              right: smallScreen(context) ? 30 : 40,
-              top: 15.0),
+          margin: EdgeInsets.only(left: smallScreen(context) ? 30 : 40, right: smallScreen(context) ? 30 : 40, top: 15.0),
           alignment: Alignment.centerLeft,
           child: AutoSizeText(
             AppLocalization.of(context).seedDescription,
@@ -69,18 +65,11 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
                   padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
                   margin: EdgeInsets.only(top: 25),
                   decoration: BoxDecoration(
-                    color:
-                        StateContainer.of(context).curTheme.backgroundDarkest,
+                    color: StateContainer.of(context).curTheme.backgroundDarkest,
                     borderRadius: BorderRadius.circular(25),
                   ),
-                  child: UIUtil.threeLineSeedText(
-                      context,
-                      widget.obscureSeed && _seedObscured
-                          ? _obscuredSeed
-                          : widget.seed,
-                      textStyle: _seedCopied
-                          ? AppStyles.textStyleSeedGreen(context)
-                          : AppStyles.textStyleSeed(context)),
+                  child: UIUtil.threeLineSeedText(context, widget.obscureSeed && _seedObscured ? _obscuredSeed : widget.seed,
+                      textStyle: _seedCopied ? AppStyles.textStyleSeedGreen(context) : AppStyles.textStyleSeed(context)),
                 ),
                 // Tap to reveal or hide
                 widget.obscureSeed
@@ -89,13 +78,11 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
                         child: _seedObscured
                             ? AutoSizeText(
                                 AppLocalization.of(context).tapToReveal,
-                                style: AppStyles.textStyleParagraphThinPrimary(
-                                    context),
+                                style: AppStyles.textStyleParagraphThinPrimary(context),
                               )
                             : Text(
                                 AppLocalization.of(context).tapToHide,
-                                style: AppStyles.textStyleParagraphThinPrimary(
-                                    context),
+                                style: AppStyles.textStyleParagraphThinPrimary(context),
                               ),
                       )
                     : SizedBox(),
@@ -115,35 +102,22 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
                     if (_seedCopiedTimer != null) {
                       _seedCopiedTimer.cancel();
                     }
-                    _seedCopiedTimer =
-                        new Timer(const Duration(milliseconds: 1500), () {
+                    _seedCopiedTimer = new Timer(const Duration(milliseconds: 1500), () {
                       setState(() {
                         _seedCopied = false;
                       });
                     });
                   },
-                  splashColor: _seedCopied
-                      ? Colors.transparent
-                      : StateContainer.of(context).curTheme.primary30,
-                  highlightColor: _seedCopied
-                      ? Colors.transparent
-                      : StateContainer.of(context).curTheme.primary15,
-                  highlightedBorderColor: _seedCopied
-                      ? StateContainer.of(context).curTheme.success
-                      : StateContainer.of(context).curTheme.primary,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100.0)),
-                  borderSide: BorderSide(
-                      color: _seedCopied
-                          ? StateContainer.of(context).curTheme.success
-                          : StateContainer.of(context).curTheme.primary,
-                      width: 1.0),
+                  splashColor: _seedCopied ? Colors.transparent : StateContainer.of(context).curTheme.primary30,
+                  highlightColor: _seedCopied ? Colors.transparent : StateContainer.of(context).curTheme.primary15,
+                  highlightedBorderColor: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                  borderSide:
+                      BorderSide(color: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary, width: 1.0),
                   child: AutoSizeText(
                     _seedCopied ? AppLocalization.of(context).copied : AppLocalization.of(context).copy,
                     textAlign: TextAlign.center,
-                    style: _seedCopied
-                        ? AppStyles.textStyleButtonSuccessSmallOutline(context)
-                        : AppStyles.textStyleButtonPrimarySmallOutline(context),
+                    style: _seedCopied ? AppStyles.textStyleButtonSuccessSmallOutline(context) : AppStyles.textStyleButtonPrimarySmallOutline(context),
                     maxLines: 1,
                     stepGranularity: 0.5,
                   ),

@@ -45,9 +45,7 @@ class AppChangeRepresentativeSheet {
   StreamSubscription<AuthenticatedEvent> _authSub;
 
   void _registerBus(BuildContext context) {
-    _authSub = EventTaxiImpl.singleton()
-        .registerTo<AuthenticatedEvent>()
-        .listen((event) {
+    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((event) {
       if (event.authType == AUTH_EVENT_TYPE.CHANGE) {
         doChange(context);
       }
@@ -88,8 +86,7 @@ class AppChangeRepresentativeSheet {
             style: AppStyles.textStyleDialogHeader(context),
           ),
         ),
-        children: _getRepresentativeWidgets(
-            context, StateContainer.of(context).nanoNinjaNodes));
+        children: _getRepresentativeWidgets(context, StateContainer.of(context).nanoNinjaNodes));
   }
 
   String _sanitizeAlias(String alias) {
@@ -119,20 +116,14 @@ class AppChangeRepresentativeSheet {
               }
               _rep = rep;
               // Authenticate
-              AuthenticationMethod authMethod =
-                  await sl.get<SharedPrefsUtil>().getAuthMethod();
-              bool hasBiometrics =
-                  await sl.get<BiometricUtil>().hasBiometrics();
+              AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+              bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
               if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                 try {
-                  bool authenticated = await sl
-                      .get<BiometricUtil>()
-                      .authenticateWithBiometrics(context,
-                          AppLocalization.of(context).changeRepAuthenticate);
+                  bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context).changeRepAuthenticate);
                   if (authenticated) {
                     sl.get<HapticUtil>().fingerprintSucess();
-                    EventTaxiImpl.singleton()
-                        .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
+                    EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
                   }
                 } catch (e) {
                   await authenticateWithPin(rep.account, context);
@@ -159,10 +150,7 @@ class AppChangeRepresentativeSheet {
                         Text(
                           _sanitizeAlias(rep.alias),
                           style: TextStyle(
-                              color: StateContainer.of(context).curTheme.text,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18.0,
-                              fontFamily: 'Nunito Sans'),
+                              color: StateContainer.of(context).curTheme.text, fontWeight: FontWeight.w700, fontSize: 18.0, fontFamily: 'Nunito Sans'),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 7),
@@ -171,24 +159,18 @@ class AppChangeRepresentativeSheet {
                               text: '',
                               children: [
                                 TextSpan(
-                                  text:
-                                      "${AppLocalization.of(context).votingWeight}: ",
+                                  text: "${AppLocalization.of(context).votingWeight}: ",
                                   style: TextStyle(
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .text,
+                                    color: StateContainer.of(context).curTheme.text,
                                     fontWeight: FontWeight.w100,
                                     fontSize: 14.0,
                                     fontFamily: 'Nunito Sans',
                                   ),
                                 ),
                                 TextSpan(
-                                  text: NumberUtil.getPercentOfTotalSupply(
-                                      rep.votingWeight),
+                                  text: NumberUtil.getPercentOfTotalSupply(rep.votingWeight),
                                   style: TextStyle(
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .primary,
+                                      color: StateContainer.of(context).curTheme.primary,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 14.0,
                                       fontFamily: 'Nunito Sans'),
@@ -196,9 +178,7 @@ class AppChangeRepresentativeSheet {
                                 TextSpan(
                                   text: "%",
                                   style: TextStyle(
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .primary,
+                                      color: StateContainer.of(context).curTheme.primary,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 14.0,
                                       fontFamily: 'Nunito Sans'),
@@ -214,22 +194,14 @@ class AppChangeRepresentativeSheet {
                               text: '',
                               children: [
                                 TextSpan(
-                                  text:
-                                      "${AppLocalization.of(context).uptime}: ",
+                                  text: "${AppLocalization.of(context).uptime}: ",
                                   style: TextStyle(
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .text,
-                                      fontWeight: FontWeight.w100,
-                                      fontSize: 14.0,
-                                      fontFamily: 'Nunito Sans'),
+                                      color: StateContainer.of(context).curTheme.text, fontWeight: FontWeight.w100, fontSize: 14.0, fontFamily: 'Nunito Sans'),
                                 ),
                                 TextSpan(
                                   text: (rep.uptime).toStringAsFixed(2),
                                   style: TextStyle(
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .primary,
+                                      color: StateContainer.of(context).curTheme.primary,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 14.0,
                                       fontFamily: 'Nunito Sans'),
@@ -237,9 +209,7 @@ class AppChangeRepresentativeSheet {
                                 TextSpan(
                                   text: "%",
                                   style: TextStyle(
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .primary,
+                                      color: StateContainer.of(context).curTheme.primary,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 14.0,
                                       fontFamily: 'Nunito Sans'),
@@ -269,9 +239,7 @@ class AppChangeRepresentativeSheet {
                             (rep.score).toString(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark,
+                              color: StateContainer.of(context).curTheme.backgroundDark,
                               fontSize: 13,
                               fontWeight: FontWeight.w800,
                               fontFamily: 'Nunito Sans',
@@ -293,9 +261,7 @@ class AppChangeRepresentativeSheet {
   Future<void> doChange(BuildContext context) async {
     _animationOpen = true;
     Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.GENERIC,
-        StateContainer.of(context).curTheme.animationOverlayStrong,
-        StateContainer.of(context).curTheme.animationOverlayMedium,
+        AnimationType.GENERIC, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
         onPoppedCallback: () => _animationOpen = false));
     // If account isnt open, just store the account in sharedprefs
     if (StateContainer.of(context).wallet.openBlock == null) {
@@ -310,12 +276,10 @@ class AppChangeRepresentativeSheet {
             _rep.account,
             StateContainer.of(context).wallet.frontier,
             StateContainer.of(context).wallet.accountBalance.toString(),
-            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(),
-                StateContainer.of(context).selectedAccount.index));
+            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index));
         StateContainer.of(context).wallet.representative = _rep.account;
         StateContainer.of(context).wallet.frontier = resp.hash;
-        UIUtil.showSnackbar(
-            AppLocalization.of(context).changeRepSucces, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).changeRepSucces, context);
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       } catch (e) {
         sl.get<Logger>().e("Failed to change", e);
@@ -332,8 +296,7 @@ class AppChangeRepresentativeSheet {
     AppSheets.showAppHeightEightSheet(
         context: context,
         builder: (BuildContext context) {
-          return StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
+          return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
             return WillPopScope(
                 onWillPop: _onWillPop,
                 child: SafeArea(
@@ -358,27 +321,17 @@ class AppChangeRepresentativeSheet {
                                   Container(
                                     margin: EdgeInsets.only(top: 10),
                                     height: 5,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.15,
+                                    width: MediaQuery.of(context).size.width * 0.15,
                                     decoration: BoxDecoration(
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .text10,
-                                      borderRadius:
-                                          BorderRadius.circular(100.0),
+                                      color: StateContainer.of(context).curTheme.text10,
+                                      borderRadius: BorderRadius.circular(5.0),
                                     ),
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(top: 15),
-                                    constraints: BoxConstraints(
-                                        maxWidth:
-                                            MediaQuery.of(context).size.width -
-                                                140),
+                                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                                     child: AutoSizeText(
-                                      CaseChange.toUpperCase(
-                                          AppLocalization.of(context)
-                                              .changeRepAuthenticate,
-                                          context),
+                                      CaseChange.toUpperCase(AppLocalization.of(context).changeRepAuthenticate, context),
                                       style: AppStyles.textStyleHeader(context),
                                       textAlign: TextAlign.center,
                                       maxLines: 2,
@@ -391,33 +344,17 @@ class AppChangeRepresentativeSheet {
                               Container(
                                 width: 50,
                                 height: 50,
-                                margin: EdgeInsetsDirectional.only(
-                                    top: 10.0, end: 10.0),
+                                margin: EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
                                 child: FlatButton(
-                                  highlightColor: StateContainer.of(context)
-                                      .curTheme
-                                      .text15,
-                                  splashColor: StateContainer.of(context)
-                                      .curTheme
-                                      .text15,
+                                  highlightColor: StateContainer.of(context).curTheme.text15,
+                                  splashColor: StateContainer.of(context).curTheme.text15,
                                   onPressed: () {
-                                    AppDialogs.showInfoDialog(
-                                        context,
-                                        AppLocalization.of(context)
-                                            .repInfoHeader,
-                                        AppLocalization.of(context).repInfo);
+                                    AppDialogs.showInfoDialog(context, AppLocalization.of(context).repInfoHeader, AppLocalization.of(context).repInfo);
                                   },
-                                  child: Icon(AppIcons.info,
-                                      size: 24,
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .text),
+                                  child: Icon(AppIcons.info, size: 24, color: StateContainer.of(context).curTheme.text),
                                   padding: EdgeInsets.all(13.0),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(100.0)),
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.padded,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                                  materialTapTargetSize: MaterialTapTargetSize.padded,
                                 ),
                               ),
                             ],
@@ -426,9 +363,7 @@ class AppChangeRepresentativeSheet {
                           //A expanded section for current representative and new representative fields
                           Expanded(
                             child: Container(
-                              margin: EdgeInsets.only(
-                                  top: smallScreen(context) ? 20 : 35,
-                                  bottom: smallScreen(context) ? 20 : 35),
+                              margin: EdgeInsets.only(top: smallScreen(context) ? 20 : 35, bottom: smallScreen(context) ? 20 : 35),
                               child: Stack(children: <Widget>[
                                 Container(
                                   color: Colors.transparent,
@@ -439,37 +374,23 @@ class AppChangeRepresentativeSheet {
                                   children: <Widget>[
                                     // Currently represented by text
                                     Container(
-                                        margin: EdgeInsets.only(
-                                            left: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.105,
-                                            right: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.105),
+                                        margin:
+                                            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                                         child: Text(
-                                          AppLocalization.of(context)
-                                              .currentlyRepresented,
-                                          style: AppStyles.textStyleParagraph(
-                                              context),
+                                          AppLocalization.of(context).currentlyRepresented,
+                                          style: AppStyles.textStyleParagraph(context),
                                         )),
                                     // Current representative
                                     GestureDetector(
                                       onTap: () {
-                                        Clipboard.setData(new ClipboardData(
-                                            text: StateContainer.of(context)
-                                                .wallet
-                                                .representative));
+                                        Clipboard.setData(new ClipboardData(text: StateContainer.of(context).wallet.representative));
                                         setState(() {
                                           _addressCopied = true;
                                         });
                                         if (_addressCopiedTimer != null) {
                                           _addressCopiedTimer.cancel();
                                         }
-                                        _addressCopiedTimer = new Timer(
-                                            const Duration(milliseconds: 800),
-                                            () {
+                                        _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
                                           setState(() {
                                             _addressCopied = false;
                                           });
@@ -478,50 +399,23 @@ class AppChangeRepresentativeSheet {
                                       child: Container(
                                         width: double.infinity,
                                         margin: EdgeInsets.only(
-                                            left: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.105,
-                                            right: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.105,
-                                            top: 10),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 25.0, vertical: 15.0),
+                                            left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105, top: 10),
+                                        padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                                         decoration: BoxDecoration(
-                                          color: StateContainer.of(context)
-                                              .curTheme
-                                              .backgroundDarkest,
-                                          borderRadius:
-                                              BorderRadius.circular(25),
+                                          color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                          borderRadius: BorderRadius.circular(25),
                                         ),
-                                        child: UIUtil.threeLineAddressText(
-                                            context,
-                                            StateContainer.of(context)
-                                                .wallet
-                                                .representative,
-                                            type: _addressCopied
-                                                ? ThreeLineAddressTextType
-                                                    .SUCCESS_FULL
-                                                : ThreeLineAddressTextType
-                                                    .PRIMARY),
+                                        child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.representative,
+                                            type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
                                       ),
                                     ),
                                     // Address Copied text container
                                     Container(
-                                      margin:
-                                          EdgeInsets.only(top: 5, bottom: 5),
-                                      child: Text(
-                                          _addressCopied
-                                              ? AppLocalization.of(context)
-                                                  .addressCopied
-                                              : "",
+                                      margin: EdgeInsets.only(top: 5, bottom: 5),
+                                      child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
                                           style: TextStyle(
                                             fontSize: 14.0,
-                                            color: StateContainer.of(context)
-                                                .curTheme
-                                                .success,
+                                            color: StateContainer.of(context).curTheme.success,
                                             fontFamily: 'NunitoSans',
                                             fontWeight: FontWeight.w600,
                                           )),
@@ -542,19 +436,13 @@ class AppChangeRepresentativeSheet {
                                     AppButtonType.PRIMARY,
                                     AppLocalization.of(context).pickFromList,
                                     Dimens.BUTTON_TOP_DIMENS,
-                                    disabled: StateContainer.of(context)
-                                            .nanoNinjaNodes ==
-                                        null,
+                                    disabled: StateContainer.of(context).nanoNinjaNodes == null,
                                     onPressed: () {
                                       showDialog(
-                                          barrierColor:
-                                              StateContainer.of(context)
-                                                  .curTheme
-                                                  .barrier,
+                                          barrierColor: StateContainer.of(context).curTheme.barrier,
                                           context: context,
                                           builder: (BuildContext context) {
-                                            return _buildRepresenativeDialog(
-                                                context);
+                                            return _buildRepresenativeDialog(context);
                                           });
                                     },
                                   ),
@@ -568,10 +456,7 @@ class AppChangeRepresentativeSheet {
                                     AppLocalization.of(context).manualEntry,
                                     Dimens.BUTTON_BOTTOM_DIMENS,
                                     onPressed: () {
-                                      Sheets.showAppHeightEightSheet(
-                                          context: context,
-                                          widget: ChangeRepManualSheet(
-                                              TextEditingController()));
+                                      Sheets.showAppHeightEightSheet(context: context, widget: ChangeRepManualSheet(TextEditingController()));
                                     },
                                   ),
                                 ],
@@ -588,8 +473,7 @@ class AppChangeRepresentativeSheet {
   Future<void> authenticateWithPin(String rep, BuildContext context) async {
     // PIN Authentication
     String expectedPin = await sl.get<Vault>().getPin();
-    bool auth = await Navigator.of(context)
-        .push(MaterialPageRoute(builder: (BuildContext context) {
+    bool auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return new PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
@@ -598,8 +482,7 @@ class AppChangeRepresentativeSheet {
     }));
     if (auth != null && auth) {
       await Future.delayed(Duration(milliseconds: 200));
-      EventTaxiImpl.singleton()
-          .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
+      EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
     }
   }
 }

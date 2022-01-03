@@ -14,10 +14,7 @@ class MnemonicDisplay extends StatefulWidget {
   final bool obscureSeed;
   final bool showButton;
 
-  MnemonicDisplay(
-      {@required this.wordList,
-      this.obscureSeed = false,
-      this.showButton = true});
+  MnemonicDisplay({@required this.wordList, this.obscureSeed = false, this.showButton = true});
 
   _MnemonicDisplayState createState() => _MnemonicDisplayState();
 }
@@ -51,9 +48,7 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
       for (int j = 0; j < itemsPerRow; j++) {
         items.add(
           Container(
-            width: (MediaQuery.of(context).size.width -
-                    (smallScreen(context) ? 15 : 30)) /
-                itemsPerRow,
+            width: (MediaQuery.of(context).size.width - (smallScreen(context) ? 15 : 30)) / itemsPerRow,
             child: RichText(
               textAlign: TextAlign.start,
               text: TextSpan(children: [
@@ -66,12 +61,8 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
                   style: AppStyles.textStyleNumbersOfMnemonic(context),
                 ),
                 TextSpan(
-                  text: _seedObscured && widget.obscureSeed
-                      ? _obscuredSeed[curWord]
-                      : widget.wordList[curWord],
-                  style: _seedCopied
-                      ? AppStyles.textStyleMnemonicSuccess(context)
-                      : AppStyles.textStyleMnemonic(context),
+                  text: _seedObscured && widget.obscureSeed ? _obscuredSeed[curWord] : widget.wordList[curWord],
+                  style: _seedCopied ? AppStyles.textStyleMnemonicSuccess(context) : AppStyles.textStyleMnemonic(context),
                 )
               ]),
             ),
@@ -81,12 +72,10 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
       }
       ret.add(
         Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: smallScreen(context) ? 6.0 : 9.0),
+            padding: EdgeInsets.symmetric(vertical: smallScreen(context) ? 6.0 : 9.0),
             child: Container(
               margin: EdgeInsetsDirectional.only(start: 5),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center, children: items),
+              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: items),
             )),
       );
       if (curWord == itemsPerRow * nRows) {
@@ -122,19 +111,16 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
             ),
             // Tap to reveal or hide
             widget.obscureSeed
-                ?
-                Container(
+                ? Container(
                     margin: EdgeInsetsDirectional.only(top: 8),
                     child: _seedObscured
                         ? AutoSizeText(
                             AppLocalization.of(context).tapToReveal,
-                            style: AppStyles.textStyleParagraphThinPrimary(
-                                context),
+                            style: AppStyles.textStyleParagraphThinPrimary(context),
                           )
                         : Text(
                             AppLocalization.of(context).tapToHide,
-                            style: AppStyles.textStyleParagraphThinPrimary(
-                                context),
+                            style: AppStyles.textStyleParagraphThinPrimary(context),
                           ),
                   )
                 : SizedBox(),
@@ -154,35 +140,22 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
                   if (_seedCopiedTimer != null) {
                     _seedCopiedTimer.cancel();
                   }
-                  _seedCopiedTimer =
-                      new Timer(const Duration(milliseconds: 1500), () {
+                  _seedCopiedTimer = new Timer(const Duration(milliseconds: 1500), () {
                     setState(() {
                       _seedCopied = false;
                     });
                   });
                 },
-                splashColor: _seedCopied
-                    ? Colors.transparent
-                    : StateContainer.of(context).curTheme.primary30,
-                highlightColor: _seedCopied
-                    ? Colors.transparent
-                    : StateContainer.of(context).curTheme.primary15,
-                highlightedBorderColor: _seedCopied
-                    ? StateContainer.of(context).curTheme.success
-                    : StateContainer.of(context).curTheme.primary,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100.0)),
-                borderSide: BorderSide(
-                    color: _seedCopied
-                        ? StateContainer.of(context).curTheme.success
-                        : StateContainer.of(context).curTheme.primary,
-                    width: 1.0),
+                splashColor: _seedCopied ? Colors.transparent : StateContainer.of(context).curTheme.primary30,
+                highlightColor: _seedCopied ? Colors.transparent : StateContainer.of(context).curTheme.primary15,
+                highlightedBorderColor: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                borderSide:
+                    BorderSide(color: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary, width: 1.0),
                 child: AutoSizeText(
                   _seedCopied ? AppLocalization.of(context).copied : AppLocalization.of(context).copy,
                   textAlign: TextAlign.center,
-                  style: _seedCopied
-                      ? AppStyles.textStyleButtonSuccessSmallOutline(context)
-                      : AppStyles.textStyleButtonPrimarySmallOutline(context),
+                  style: _seedCopied ? AppStyles.textStyleButtonSuccessSmallOutline(context) : AppStyles.textStyleButtonPrimarySmallOutline(context),
                   maxLines: 1,
                   stepGranularity: 0.5,
                 ),

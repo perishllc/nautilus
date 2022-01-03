@@ -52,8 +52,7 @@ class AppTransferOverviewSheet {
         context: context,
         onDisposed: _onWillPop,
         builder: (BuildContext context) {
-          return StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
+          return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
             return WillPopScope(
               onWillPop: _onWillPop,
               child: SafeArea(
@@ -83,24 +82,16 @@ class AppTransferOverviewSheet {
                                 height: 5,
                                 width: MediaQuery.of(context).size.width * 0.15,
                                 decoration: BoxDecoration(
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .text10,
-                                  borderRadius: BorderRadius.circular(100.0),
+                                  color: StateContainer.of(context).curTheme.text10,
+                                  borderRadius: BorderRadius.circular(5.0),
                                 ),
                               ),
                               // The header
                               Container(
                                 margin: EdgeInsets.only(top: 15.0),
-                                constraints: BoxConstraints(
-                                    maxWidth:
-                                        MediaQuery.of(context).size.width -
-                                            140),
+                                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                                 child: AutoSizeText(
-                                  CaseChange.toUpperCase(
-                                      AppLocalization.of(context)
-                                          .transferHeader,
-                                      context),
+                                  CaseChange.toUpperCase(AppLocalization.of(context).transferHeader, context),
                                   style: AppStyles.textStyleHeader(context),
                                   textAlign: TextAlign.center,
                                   maxLines: 2,
@@ -124,44 +115,26 @@ class AppTransferOverviewSheet {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
-                              constraints: BoxConstraints(
-                                  maxHeight:
-                                      MediaQuery.of(context).size.height * 0.2,
-                                  maxWidth:
-                                      MediaQuery.of(context).size.width * 0.6),
+                              constraints:
+                                  BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.2, maxWidth: MediaQuery.of(context).size.width * 0.6),
                               child: Stack(
                                 children: <Widget>[
                                   Center(
-                                    child: SvgPicture.asset(
-                                        'legacy_assets/transferfunds_illustration_start_paperwalletonly.svg',
-                                        color: StateContainer.of(context)
-                                            .curTheme
-                                            .text45,
-                                        width:
-                                            MediaQuery.of(context).size.width),
+                                    child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_paperwalletonly.svg',
+                                        color: StateContainer.of(context).curTheme.text45, width: MediaQuery.of(context).size.width),
                                   ),
                                   Center(
-                                    child: SvgPicture.asset(
-                                        'legacy_assets/transferfunds_illustration_start_nautiluswalletonly.svg',
-                                        color: StateContainer.of(context)
-                                            .curTheme
-                                            .primary,
-                                        width:
-                                            MediaQuery.of(context).size.width),
+                                    child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_nautiluswalletonly.svg',
+                                        color: StateContainer.of(context).curTheme.primary, width: MediaQuery.of(context).size.width),
                                   ),
                                 ],
                               ),
                             ),
                             Container(
                               alignment: AlignmentDirectional(-1, 0),
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: smallScreen(context) ? 35 : 50,
-                                  vertical: 20),
+                              margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
                               child: AutoSizeText(
-                                AppLocalization.of(context)
-                                    .transferIntro
-                                    .replaceAll("%1",
-                                        AppLocalization.of(context).scanQrCode),
+                                AppLocalization.of(context).transferIntro.replaceAll("%1", AppLocalization.of(context).scanQrCode),
                                 style: AppStyles.textStyleParagraph(context),
                                 textAlign: TextAlign.start,
                                 maxLines: 6,
@@ -181,14 +154,9 @@ class AppTransferOverviewSheet {
                             Dimens.BUTTON_TOP_DIMENS,
                             onPressed: () {
                               UIUtil.cancelLockEvent();
-                              BarcodeScanner.scan(StateContainer.of(context)
-                                      .curTheme
-                                      .qrScanTheme)
-                                  .then((value) {
+                              BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme).then((value) {
                                 if (!NanoSeeds.isValidSeed(value)) {
-                                  UIUtil.showSnackbar(
-                                      AppLocalization.of(context).qrInvalidSeed,
-                                      context);
+                                  UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidSeed, context);
                                   return;
                                 }
                                 startTransfer(context, value);
@@ -206,11 +174,10 @@ class AppTransferOverviewSheet {
                             Dimens.BUTTON_BOTTOM_DIMENS,
                             onPressed: () {
                               Sheets.showAppHeightNineSheet(
-                                context: context,
-                                widget: TransferManualEntrySheet(
-                                  validSeedCallback: manualEntryCallback,
-                                )
-                              );
+                                  context: context,
+                                  widget: TransferManualEntrySheet(
+                                    validSeedCallback: manualEntryCallback,
+                                  ));
                             },
                           ),
                         ],
@@ -224,17 +191,12 @@ class AppTransferOverviewSheet {
         });
   }
 
-  Future<void> startTransfer(BuildContext context, String seed,
-      {bool manualEntry = false}) async {
+  Future<void> startTransfer(BuildContext context, String seed, {bool manualEntry = false}) async {
     // Show loading overlay
     _animationOpen = true;
-    AnimationType animation = manualEntry
-        ? AnimationType.TRANSFER_SEARCHING_MANUAL
-        : AnimationType.TRANSFER_SEARCHING_QR;
+    AnimationType animation = manualEntry ? AnimationType.TRANSFER_SEARCHING_MANUAL : AnimationType.TRANSFER_SEARCHING_QR;
     Navigator.of(context).push(AnimationLoadingOverlay(
-        animation,
-        StateContainer.of(context).curTheme.animationOverlayStrong,
-        StateContainer.of(context).curTheme.animationOverlayMedium,
+        animation, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
         onPoppedCallback: () {
       _animationOpen = false;
     }));
@@ -246,8 +208,7 @@ class AppTransferOverviewSheet {
         Navigator.of(context).pop();
       }
       List<String> accountsToRemove = List();
-      resp.balances
-          .forEach((String account, AccountBalanceItem balItem) {
+      resp.balances.forEach((String account, AccountBalanceItem balItem) {
         BigInt balance = BigInt.parse(balItem.balance);
         BigInt pending = BigInt.parse(balItem.pending);
         if (balance + pending == BigInt.zero) {
@@ -262,22 +223,18 @@ class AppTransferOverviewSheet {
         privKeyBalanceMap.remove(account);
       });
       if (privKeyBalanceMap.length == 0) {
-        UIUtil.showSnackbar(
-            AppLocalization.of(context).transferNoFunds, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).transferNoFunds, context);
         return;
       }
       // Go to confirmation screen
-      EventTaxiImpl.singleton()
-          .fire(TransferConfirmEvent(balMap: privKeyBalanceMap));
+      EventTaxiImpl.singleton().fire(TransferConfirmEvent(balMap: privKeyBalanceMap));
       Navigator.of(context).pop();
     } catch (e) {
       sl.get<Logger>().e("error", e);
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(
-        AppLocalization.of(context).sendError,
-        context);
+      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
     }
   }
 
@@ -292,17 +249,14 @@ class AppTransferOverviewSheet {
       address = NanoUtil.seedToAddress(seed, i);
       // Don't add this if it is the currently logged in account
       if (address != StateContainer.of(context).wallet.address) {
-        privKeyBalanceMap.putIfAbsent(
-            address, () => AccountBalanceItem(privKey: privKey));
+        privKeyBalanceMap.putIfAbsent(address, () => AccountBalanceItem(privKey: privKey));
         accountsToRequest.add(address);
       }
     }
     // Also treat this seed as a private key
-    address = NanoAccounts.createAccount(
-        NanoAccountType.NANO, NanoKeys.createPublicKey(seed));
+    address = NanoAccounts.createAccount(NanoAccountType.NANO, NanoKeys.createPublicKey(seed));
     if (address != StateContainer.of(context).wallet.address) {
-      privKeyBalanceMap.putIfAbsent(
-          address, () => AccountBalanceItem(privKey: seed));
+      privKeyBalanceMap.putIfAbsent(address, () => AccountBalanceItem(privKey: seed));
       accountsToRequest.add(address);
     }
     return accountsToRequest;

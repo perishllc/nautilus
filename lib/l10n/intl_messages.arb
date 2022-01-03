@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2022-01-01T16:04:14.791965",
+  "@@last_modified": "2022-01-03T15:18:20.156795",
   "cancel": "Cancel",
   "@cancel": {
     "description": "dialog_cancel",
@@ -306,7 +306,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "favoriteNameHint": "Enter a Name ★",
+  "favoriteNameHint": "Enter a Nick Name",
   "@favoriteNameHint": {
     "description": "favorite_name_hint",
     "type": "text",

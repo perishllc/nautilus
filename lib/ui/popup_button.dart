@@ -37,9 +37,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
   void _showMantaAnimation() {
     animationOpen = true;
     Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.MANTA,
-        StateContainer.of(context).curTheme.animationOverlayStrong,
-        StateContainer.of(context).curTheme.animationOverlayMedium,
+        AnimationType.MANTA, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
         onPoppedCallback: () => animationOpen = false));
   }
 
@@ -50,20 +48,16 @@ class _AppPopupButtonState extends State<AppPopupButton> {
   }
 
   Future<void> scanAndHandlResult() async {
-    dynamic scanResult =
-        await Navigator.pushNamed(context, '/before_scan_screen');
+    dynamic scanResult = await Navigator.pushNamed(context, '/before_scan_screen');
     // Parse scan data and route appropriately
     if (scanResult == null) {
-      UIUtil.showSnackbar(
-          AppLocalization.of(context).qrInvalidAddress, context);
-    } else if (!QRScanErrs.ERROR_LIST.contains(scanResult) &&
-        MantaWallet.parseUrl(scanResult) != null) {
+      UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+    } else if (!QRScanErrs.ERROR_LIST.contains(scanResult) && MantaWallet.parseUrl(scanResult) != null) {
       try {
         _showMantaAnimation();
         // Get manta payment request
         MantaWallet manta = MantaWallet(scanResult);
-        PaymentRequestMessage paymentRequest =
-            await MantaUtil.getPaymentDetails(manta);
+        PaymentRequestMessage paymentRequest = await MantaUtil.getPaymentDetails(manta);
         if (animationOpen) {
           Navigator.of(context).pop();
         }
@@ -78,24 +72,16 @@ class _AppPopupButtonState extends State<AppPopupButton> {
       // Is a URI
       Address address = Address(scanResult);
       if (address.address == null) {
-        UIUtil.showSnackbar(
-            AppLocalization.of(context).qrInvalidAddress, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
       } else {
         // See if this address belongs to a contact
-        Contact contact =
-            await sl.get<DBHelper>().getContactWithAddress(address.address);
+        Contact contact = await sl.get<DBHelper>().getContactWithAddress(address.address);
         // If amount is present, fill it and go to SendConfirm
-        BigInt amountBigInt =
-            address.amount != null ? BigInt.tryParse(address.amount) : null;
+        BigInt amountBigInt = address.amount != null ? BigInt.tryParse(address.amount) : null;
         bool sufficientBalance = false;
         if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
-          UIUtil.showSnackbar(
-              AppLocalization.of(context)
-                  .minimumSend
-                  .replaceAll("%1", "0.000001"),
-              context);
-        } else if (amountBigInt != null &&
-            StateContainer.of(context).wallet.accountBalance > amountBigInt) {
+          UIUtil.showSnackbar(AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001"), context);
+        } else if (amountBigInt != null && StateContainer.of(context).wallet.accountBalance > amountBigInt) {
           sufficientBalance = true;
         }
         if (amountBigInt != null && sufficientBalance) {
@@ -104,8 +90,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
               context: context,
               widget: SendConfirmSheet(
                   amountRaw: address.amount,
-                  destination:
-                      contact != null ? contact.address : address.address,
+                  destination: contact != null ? contact.address : address.address,
                   contactName: contact != null ? contact.name : null));
         } else {
           // Go to send sheet
@@ -115,8 +100,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
                   localCurrency: StateContainer.of(context).curCurrency,
                   contact: contact,
                   address: contact != null ? contact.address : address.address,
-                  quickSendAmount:
-                      amountBigInt != null ? address.amount : null));
+                  quickSendAmount: amountBigInt != null ? address.amount : null));
         }
       }
     }
@@ -136,7 +120,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
             width: scanButtonSize,
             decoration: BoxDecoration(
               color: popupColor,
-              borderRadius: BorderRadius.circular(100),
+              borderRadius: BorderRadius.circular(5),
             ),
             child: Icon(
               AppIcons.scan,
@@ -147,18 +131,14 @@ class _AppPopupButtonState extends State<AppPopupButton> {
         ),
         // Send Button
         GestureDetector(
-          onVerticalDragStart: (StateContainer.of(context).wallet != null &&
-                  StateContainer.of(context).wallet.accountBalance >
-                      BigInt.zero)
+          onVerticalDragStart: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero)
               ? (value) {
                   setState(() {
                     popupColor = StateContainer.of(context).curTheme.primary;
                   });
                 }
               : (value) {},
-          onVerticalDragEnd: (StateContainer.of(context).wallet != null &&
-                  StateContainer.of(context).wallet.accountBalance >
-                      BigInt.zero)
+          onVerticalDragEnd: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero)
               ? (value) {
                   isSendButtonColorPrimary = true;
                   firstTime = true;
@@ -174,9 +154,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
                   });
                 }
               : (value) {},
-          onVerticalDragUpdate: (StateContainer.of(context).wallet != null &&
-                  StateContainer.of(context).wallet.accountBalance >
-                      BigInt.zero)
+          onVerticalDragUpdate: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero)
               ? (dragUpdateDetails) {
                   if (dragUpdateDetails.localPosition.dy < -60) {
                     isScrolledUpEnough = true;
@@ -206,8 +184,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
                     });
                   } else {
                     setState(() {
-                      scanButtonSize = 60 +
-                          ((dragUpdateDetails.localPosition.dy * -1) - 60) / 30;
+                      scanButtonSize = 60 + ((dragUpdateDetails.localPosition.dy * -1) - 60) / 30;
                       popupMarginBottom = 5 + scanButtonSize / 3;
                     });
                   }
@@ -216,19 +193,15 @@ class _AppPopupButtonState extends State<AppPopupButton> {
           child: AnimatedContainer(
             duration: Duration(milliseconds: 100),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
+              borderRadius: BorderRadius.circular(5.0),
               boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
             ),
             height: 55,
             width: (MediaQuery.of(context).size.width - 42) / 2,
-            margin: EdgeInsetsDirectional.only(
-                start: 7, top: popupMarginBottom, end: 14.0),
+            margin: EdgeInsetsDirectional.only(start: 7, top: popupMarginBottom, end: 14.0),
             child: FlatButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100.0)),
-              color: StateContainer.of(context).wallet != null &&
-                      StateContainer.of(context).wallet.accountBalance >
-                          BigInt.zero
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+              color: StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero
                   ? isSendButtonColorPrimary
                       ? StateContainer.of(context).curTheme.primary
                       : StateContainer.of(context).curTheme.success
@@ -241,24 +214,14 @@ class _AppPopupButtonState extends State<AppPopupButton> {
                 stepGranularity: 0.5,
               ),
               onPressed: () {
-                if (StateContainer.of(context).wallet != null &&
-                    StateContainer.of(context).wallet.accountBalance >
-                        BigInt.zero) {
-                  Sheets.showAppHeightNineSheet(
-                      context: context,
-                      widget: SendSheet(
-                          localCurrency:
-                              StateContainer.of(context).curCurrency));
+                if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero) {
+                  Sheets.showAppHeightNineSheet(context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency));
                 }
               },
-              highlightColor: StateContainer.of(context).wallet != null &&
-                      StateContainer.of(context).wallet.accountBalance >
-                          BigInt.zero
+              highlightColor: StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero
                   ? StateContainer.of(context).curTheme.background40
                   : Colors.transparent,
-              splashColor: StateContainer.of(context).wallet != null &&
-                      StateContainer.of(context).wallet.accountBalance >
-                          BigInt.zero
+              splashColor: StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero
                   ? StateContainer.of(context).curTheme.background40
                   : Colors.transparent,
             ),

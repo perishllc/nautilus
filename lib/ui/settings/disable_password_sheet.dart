@@ -37,8 +37,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
     return TapOutsideUnfocus(
         child: LayoutBuilder(
       builder: (context, constraints) => SafeArea(
-        minimum:
-            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+        minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
             // Sheet handle
@@ -48,7 +47,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
               width: MediaQuery.of(context).size.width * 0.15,
               decoration: BoxDecoration(
                 color: StateContainer.of(context).curTheme.text10,
-                borderRadius: BorderRadius.circular(100.0),
+                borderRadius: BorderRadius.circular(5.0),
               ),
             ),
             // The main widget that holds the header, text fields, and submit button
@@ -58,15 +57,11 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                 children: <Widget>[
                   // The header
                   Container(
-                    margin:
-                        EdgeInsetsDirectional.only(top: 10, start: 60, end: 60),
+                    margin: EdgeInsetsDirectional.only(top: 10, start: 60, end: 60),
                     child: Column(
                       children: <Widget>[
                         AutoSizeText(
-                          CaseChange.toUpperCase(
-                              AppLocalization.of(context)
-                                  .disablePasswordSheetHeader,
-                              context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).disablePasswordSheetHeader, context),
                           style: AppStyles.textStyleHeader(context),
                           minFontSize: 12,
                           stepGranularity: 0.1,
@@ -78,13 +73,9 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                   ),
                   // The paragraph
                   Container(
-                    margin: EdgeInsetsDirectional.only(
-                        start: smallScreen(context) ? 30 : 40,
-                        end: smallScreen(context) ? 30 : 40,
-                        top: 16.0),
+                    margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      AppLocalization.of(context)
-                          .passwordNoLongerRequiredToOpenParagraph,
+                      AppLocalization.of(context).passwordNoLongerRequiredToOpenParagraph,
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,
@@ -92,54 +83,49 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                   ),
                   // Text field
                   Expanded(
-                    child: KeyboardAvoider(
-                      duration: Duration(milliseconds: 0),
-                      autoScroll: true,
-                      focusPadding: 40,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          AppTextField(
-                            topMargin: 30,
-                            padding: EdgeInsetsDirectional.only(start: 16, end: 16),
-                            focusNode: passwordFocusNode,
-                            controller: passwordController,
-                            textInputAction: TextInputAction.done,
-                            maxLines: 1,
-                            autocorrect: false,
-                            onChanged: (String newText) {
-                              if (passwordError != null) {
-                                setState(() {
-                                  passwordError = null;
-                                });
-                              }
-                            },
-                            hintText: AppLocalization.of(context).enterPasswordHint,
-                            keyboardType: TextInputType.text,
-                            obscureText: true,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16.0,
-                              color: StateContainer.of(context).curTheme.text,
-                              fontFamily: 'NunitoSans',
+                      child: KeyboardAvoider(
+                          duration: Duration(milliseconds: 0),
+                          autoScroll: true,
+                          focusPadding: 40,
+                          child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
+                            AppTextField(
+                              topMargin: 30,
+                              padding: EdgeInsetsDirectional.only(start: 16, end: 16),
+                              focusNode: passwordFocusNode,
+                              controller: passwordController,
+                              textInputAction: TextInputAction.done,
+                              maxLines: 1,
+                              autocorrect: false,
+                              onChanged: (String newText) {
+                                if (passwordError != null) {
+                                  setState(() {
+                                    passwordError = null;
+                                  });
+                                }
+                              },
+                              hintText: AppLocalization.of(context).enterPasswordHint,
+                              keyboardType: TextInputType.text,
+                              obscureText: true,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16.0,
+                                color: StateContainer.of(context).curTheme.text,
+                                fontFamily: 'NunitoSans',
+                              ),
                             ),
-                          ),
-                          // Error Text
-                          Container(
-                            alignment: AlignmentDirectional(0, 0),
-                            margin: EdgeInsets.only(top: 3),
-                            child: Text(this.passwordError == null ? "" : passwordError,
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: StateContainer.of(context).curTheme.primary,
-                                  fontFamily: 'NunitoSans',
-                                  fontWeight: FontWeight.w600,
-                                )),
-                          ),
-                        ]
-                      )
-                    )
-                  )
+                            // Error Text
+                            Container(
+                              alignment: AlignmentDirectional(0, 0),
+                              margin: EdgeInsets.only(top: 3),
+                              child: Text(this.passwordError == null ? "" : passwordError,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    fontFamily: 'NunitoSans',
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                            ),
+                          ])))
                 ],
               ),
             ),
@@ -150,22 +136,16 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY,
-                          AppLocalization.of(context).disablePasswordSheetHeader,
-                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).disablePasswordSheetHeader, Dimens.BUTTON_TOP_DIMENS,
+                          onPressed: () async {
                         await submitAndDecrypt();
                       }),
                     ],
                   ),
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context).close,
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () {
                         Navigator.pop(context);
                       }),
                     ],
@@ -189,13 +169,11 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
       }
     } else {
       try {
-        String decryptedSeed = NanoHelpers.byteToHex(
-            NanoCrypt.decrypt(encryptedSeed, passwordController.text));
+        String decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(encryptedSeed, passwordController.text));
         throwIf(!NanoSeeds.isValidSeed(decryptedSeed), FormatException());
         await sl.get<Vault>().setSeed(decryptedSeed);
         StateContainer.of(context).resetEncryptedSecret();
-        UIUtil.showSnackbar(
-            AppLocalization.of(context).disablePasswordSuccess, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).disablePasswordSuccess, context);
         Navigator.pop(context);
       } catch (e) {
         if (mounted) {

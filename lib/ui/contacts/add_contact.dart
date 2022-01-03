@@ -158,7 +158,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                     focusNode: _nameFocusNode,
                     controller: _nameController,
                     textInputAction: widget.address != null ? TextInputAction.done : TextInputAction.next,
-                    hintText: _showNameHint ? AppLocalization.of(context).contactNameHint : "",
+                    hintText: _showNameHint ? AppLocalization.of(context).favoriteNameHint : "",
                     keyboardType: TextInputType.text,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,

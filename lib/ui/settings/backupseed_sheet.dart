@@ -36,8 +36,7 @@ class AppSeedBackupSheet {
     AppSheets.showAppHeightNineSheet(
         context: context,
         builder: (BuildContext context) {
-          return StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
+          return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
             return SafeArea(
                 minimum: EdgeInsets.only(
                   bottom: MediaQuery.of(context).size.height * 0.035,
@@ -61,34 +60,22 @@ class AppSeedBackupSheet {
                                   Container(
                                     margin: EdgeInsets.only(top: 10),
                                     height: 5,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.15,
+                                    width: MediaQuery.of(context).size.width * 0.15,
                                     decoration: BoxDecoration(
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .text10,
-                                      borderRadius:
-                                          BorderRadius.circular(100.0),
+                                      color: StateContainer.of(context).curTheme.text10,
+                                      borderRadius: BorderRadius.circular(5.0),
                                     ),
                                   ),
                                   //A container for the header
                                   Container(
                                     margin: EdgeInsets.only(top: 15.0),
-                                    constraints: BoxConstraints(
-                                        maxWidth: MediaQuery.of(context)
-                                                .size
-                                                .width -
-                                            140),
+                                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                                     child: Column(
                                       children: <Widget>[
                                         AutoSizeText(
                                           CaseChange.toUpperCase(
-                                              showMnemonic
-                                                  ? AppLocalization.of(context).secretPhrase
-                                                  : AppLocalization.of(context).seed,
-                                              context),
-                                          style: AppStyles.textStyleHeader(
-                                              context),
+                                              showMnemonic ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed, context),
+                                          style: AppStyles.textStyleHeader(context),
                                           maxLines: 1,
                                           stepGranularity: 0.1,
                                         ),
@@ -101,34 +88,19 @@ class AppSeedBackupSheet {
                               Container(
                                 width: 50,
                                 height: 50,
-                                margin: EdgeInsetsDirectional.only(
-                                    top: 10.0, end: 10.0),
+                                margin: EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
                                 child: FlatButton(
-                                  highlightColor: StateContainer.of(context)
-                                      .curTheme
-                                      .text15,
-                                  splashColor: StateContainer.of(context)
-                                      .curTheme
-                                      .text15,
+                                  highlightColor: StateContainer.of(context).curTheme.text15,
+                                  splashColor: StateContainer.of(context).curTheme.text15,
                                   onPressed: () {
                                     setState(() {
                                       showMnemonic = !showMnemonic;
                                     });
                                   },
-                                  child: Icon(
-                                      showMnemonic
-                                          ? AppIcons.seed
-                                          : Icons.vpn_key,
-                                      size: 24,
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .text),
+                                  child: Icon(showMnemonic ? AppIcons.seed : Icons.vpn_key, size: 24, color: StateContainer.of(context).curTheme.text),
                                   padding: EdgeInsets.all(13.0),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(100.0)),
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.padded,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                                  materialTapTargetSize: MaterialTapTargetSize.padded,
                                 ),
                               ),
                             ],
@@ -162,12 +134,8 @@ class AppSeedBackupSheet {
                                 AppButton.buildAppButton(
                                     context,
                                     // Copy Mnemonic Button
-                                    _mnemonicCopied
-                                        ? AppButtonType.SUCCESS
-                                        : AppButtonType.PRIMARY,
-                                    _mnemonicCopied
-                                        ? AppLocalization.of(context).secretPhraseCopied
-                                        : AppLocalization.of(context).secretPhraseCopy,
+                                    _mnemonicCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                                    _mnemonicCopied ? AppLocalization.of(context).secretPhraseCopied : AppLocalization.of(context).secretPhraseCopy,
                                     Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                                   UserDataUtil.setSecureClipboardItem(_mnemonic.join(" "));
                                   setState(() {
@@ -177,8 +145,7 @@ class AppSeedBackupSheet {
                                   if (_mnemonicCopiedTimer != null) {
                                     _mnemonicCopiedTimer.cancel();
                                   }
-                                  _mnemonicCopiedTimer = new Timer(
-                                      const Duration(milliseconds: 1000), () {
+                                  _mnemonicCopiedTimer = new Timer(const Duration(milliseconds: 1000), () {
                                     try {
                                       setState(() {
                                         _mnemonicCopied = false;
@@ -193,9 +160,7 @@ class AppSeedBackupSheet {
                                 AppButton.buildAppButton(
                                     context,
                                     // Copy Seed Button
-                                    _seedCopied
-                                        ? AppButtonType.SUCCESS
-                                        : AppButtonType.PRIMARY,
+                                    _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
                                     _seedCopied ? AppLocalization.of(context).seedCopiedShort : AppLocalization.of(context).copySeed,
                                     Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                                   UserDataUtil.setSecureClipboardItem(_seed);
@@ -206,8 +171,7 @@ class AppSeedBackupSheet {
                                   if (_seedCopiedTimer != null) {
                                     _seedCopiedTimer.cancel();
                                   }
-                                  _seedCopiedTimer = new Timer(
-                                      const Duration(milliseconds: 1000), () {
+                                  _seedCopiedTimer = new Timer(const Duration(milliseconds: 1000), () {
                                     setState(() {
                                       _seedCopied = false;
                                     });

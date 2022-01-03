@@ -59,45 +59,22 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       FlatButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                         onPressed: () {
-                          AppDialogs.showConfirmDialog(
-                              context,
-                              CaseChange.toUpperCase(
-                                  AppLocalization.of(context).warning, context),
-                              AppLocalization.of(context).logoutDetail,
-                              AppLocalization.of(context)
-                                  .logoutAction
-                                  .toUpperCase(), () {
+                          AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
+                              AppLocalization.of(context).logoutDetail, AppLocalization.of(context).logoutAction.toUpperCase(), () {
                             // Show another confirm dialog
-                            AppDialogs.showConfirmDialog(
-                                context,
-                                AppLocalization.of(context).logoutAreYouSure,
-                                AppLocalization.of(context).logoutReassurance,
-                                CaseChange.toUpperCase(
-                                    AppLocalization.of(context).yes, context),
-                                () {
+                            AppDialogs.showConfirmDialog(context, AppLocalization.of(context).logoutAreYouSure, AppLocalization.of(context).logoutReassurance,
+                                CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                               // Unsubscribe from notifications
-                              sl
-                                  .get<SharedPrefsUtil>()
-                                  .setNotificationsOn(false)
-                                  .then((_) {
-                                FirebaseMessaging.instance
-                                    .getToken()
-                                    .then((fcmToken) {
-                                  EventTaxiImpl.singleton()
-                                      .fire(FcmUpdateEvent(token: fcmToken));
+                              sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((_) {
+                                FirebaseMessaging.instance.getToken().then((fcmToken) {
+                                  EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
                                   // Delete all data
                                   sl.get<Vault>().deleteAll().then((_) {
-                                    sl
-                                        .get<SharedPrefsUtil>()
-                                        .deleteAll()
-                                        .then((result) {
+                                    sl.get<SharedPrefsUtil>().deleteAll().then((result) {
                                       StateContainer.of(context).logOut();
-                                      Navigator.of(context)
-                                          .pushNamedAndRemoveUntil('/',
-                                              (Route<dynamic> route) => false);
+                                      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
                                     });
                                   });
                                 });
@@ -105,22 +82,16 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                             });
                           });
                         },
-                        highlightColor:
-                            StateContainer.of(context).curTheme.text15,
+                        highlightColor: StateContainer.of(context).curTheme.text15,
                         splashColor: StateContainer.of(context).curTheme.text30,
                         padding: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
                         child: Container(
                           child: Row(
                             children: <Widget>[
-                              Icon(AppIcons.logout,
-                                  size: 16,
-                                  color:
-                                      StateContainer.of(context).curTheme.text),
+                              Icon(AppIcons.logout, size: 16, color: StateContainer.of(context).curTheme.text),
                               Container(
                                 margin: EdgeInsetsDirectional.only(start: 4),
-                                child: Text(AppLocalization.of(context).logout,
-                                    style: AppStyles.textStyleLogoutButton(
-                                        context)),
+                                child: Text(AppLocalization.of(context).logout, style: AppStyles.textStyleLogoutButton(context)),
                               ),
                             ],
                           ),
@@ -138,13 +109,11 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                         size: 80,
                         color: StateContainer.of(context).curTheme.primary,
                       ),
-                      margin: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height * 0.1),
+                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
                     ),
                     Container(
                       child: Text(
-                        CaseChange.toUpperCase(
-                            AppLocalization.of(context).locked, context),
+                        CaseChange.toUpperCase(AppLocalization.of(context).locked, context),
                         style: AppStyles.textStyleHeaderColored(context),
                       ),
                       margin: EdgeInsets.only(top: 10),
@@ -154,70 +123,56 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                             duration: Duration(milliseconds: 0),
                             autoScroll: true,
                             focusPadding: 40,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  // Enter your password Text Field
-                                  AppTextField(
-                                    topMargin: 30,
-                                    padding: EdgeInsetsDirectional.only(
-                                        start: 16, end: 16),
-                                    focusNode: enterPasswordFocusNode,
-                                    controller: enterPasswordController,
-                                    textInputAction: TextInputAction.go,
-                                    autofocus: true,
-                                    onChanged: (String newText) {
-                                      if (passwordError != null) {
-                                        setState(() {
-                                          passwordError = null;
-                                        });
-                                      }
-                                    },
-                                    onSubmitted: (value) async {
-                                      FocusScope.of(context).unfocus();
-                                      await validateAndDecrypt();
-                                    },
-                                    hintText: AppLocalization.of(context)
-                                        .enterPasswordHint,
-                                    keyboardType: TextInputType.text,
-                                    obscureText: true,
-                                    textAlign: TextAlign.center,
+                            child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
+                              // Enter your password Text Field
+                              AppTextField(
+                                topMargin: 30,
+                                padding: EdgeInsetsDirectional.only(start: 16, end: 16),
+                                focusNode: enterPasswordFocusNode,
+                                controller: enterPasswordController,
+                                textInputAction: TextInputAction.go,
+                                autofocus: true,
+                                onChanged: (String newText) {
+                                  if (passwordError != null) {
+                                    setState(() {
+                                      passwordError = null;
+                                    });
+                                  }
+                                },
+                                onSubmitted: (value) async {
+                                  FocusScope.of(context).unfocus();
+                                  await validateAndDecrypt();
+                                },
+                                hintText: AppLocalization.of(context).enterPasswordHint,
+                                keyboardType: TextInputType.text,
+                                obscureText: true,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16.0,
+                                  color: StateContainer.of(context).curTheme.primary,
+                                  fontFamily: 'NunitoSans',
+                                ),
+                              ),
+                              // Error Container
+                              Container(
+                                alignment: AlignmentDirectional(0, 0),
+                                margin: EdgeInsets.only(top: 3),
+                                child: Text(this.passwordError == null ? "" : this.passwordError,
                                     style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 16.0,
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .primary,
+                                      fontSize: 14.0,
+                                      color: StateContainer.of(context).curTheme.primary,
                                       fontFamily: 'NunitoSans',
-                                    ),
-                                  ),
-                                  // Error Container
-                                  Container(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    margin: EdgeInsets.only(top: 3),
-                                    child: Text(
-                                        this.passwordError == null
-                                            ? ""
-                                            : this.passwordError,
-                                        style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: StateContainer.of(context)
-                                              .curTheme
-                                              .primary,
-                                          fontFamily: 'NunitoSans',
-                                          fontWeight: FontWeight.w600,
-                                        )),
-                                  ),
-                                ])))
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ),
+                            ])))
                   ],
                 )),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(
-                        context,
-                        AppButtonType.PRIMARY,
-                        AppLocalization.of(context).unlock,
-                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).unlock, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () async {
                       await validateAndDecrypt();
                     }),
                   ],
@@ -230,11 +185,8 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
 
   Future<void> validateAndDecrypt() async {
     try {
-      String decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(
-          await sl.get<Vault>().getSeed(), enterPasswordController.text));
-      StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(
-          NanoCrypt.encrypt(
-              decryptedSeed, await sl.get<Vault>().getSessionKey())));
+      String decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(await sl.get<Vault>().getSeed(), enterPasswordController.text));
+      StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(decryptedSeed, await sl.get<Vault>().getSessionKey())));
       _goHome();
     } catch (e) {
       if (mounted) {
@@ -249,14 +201,10 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
     if (StateContainer.of(context).wallet != null) {
       StateContainer.of(context).reconnect();
     } else {
-      await NanoUtil()
-          .loginAccount(await StateContainer.of(context).getSeed(), context);
+      await NanoUtil().loginAccount(await StateContainer.of(context).getSeed(), context);
     }
     StateContainer.of(context).requestUpdate();
-    PriceConversion conversion =
-        await sl.get<SharedPrefsUtil>().getPriceConversion();
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        '/home_transition', (Route<dynamic> route) => false,
-        arguments: conversion);
+    PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+    Navigator.of(context).pushNamedAndRemoveUntil('/home_transition', (Route<dynamic> route) => false, arguments: conversion);
   }
 }

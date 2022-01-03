@@ -179,7 +179,7 @@ flutter_icons:
   image_path: "assets/logo-square-purple.png"
   remove_alpha_ios: true
   adaptive_icon_background: "#000000"
-  adaptive_icon_foreground: "assets/logo-square-purple.png"
+  adaptive_icon_foreground: "assets/logo-square-nano-to.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

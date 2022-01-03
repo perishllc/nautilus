@@ -241,7 +241,7 @@ class AppLocalization {
   }
 
   String get favoriteNameHint {
-    return Intl.message('Enter a Name ★', desc: 'favorite_name_hint', name: 'favoriteNameHint');
+    return Intl.message('Enter a Nick Name', desc: 'favorite_name_hint', name: 'favoriteNameHint');
   }
 
   String get favoriteInvalid {
