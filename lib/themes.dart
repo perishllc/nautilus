@@ -166,7 +166,7 @@ class NautilusTheme extends BaseTheme {
     spreadRadius: 0,
   );
 
-  OverlayTheme qrScanTheme = OverlayTheme.NAUTILUS;
+  OverlayTheme qrScanTheme = OverlayTheme.CARBON;
   AppIconEnum appIcon = AppIconEnum.NAUTILUS;
 }
 
@@ -652,7 +652,7 @@ class PurpeliumTheme extends BaseTheme {
     spreadRadius: 0,
   );
 
-  OverlayTheme qrScanTheme = OverlayTheme.PURPELIUM;
+  OverlayTheme qrScanTheme = OverlayTheme.CARBON;
   AppIconEnum appIcon = AppIconEnum.PURPELIUM;
 }
 
@@ -741,7 +741,7 @@ class NyanTheme extends BaseTheme {
     spreadRadius: 0,
   );
 
-  OverlayTheme qrScanTheme = OverlayTheme.NYAN;
+  OverlayTheme qrScanTheme = OverlayTheme.CARBON;
   AppIconEnum appIcon = AppIconEnum.NYAN;
 }
 
