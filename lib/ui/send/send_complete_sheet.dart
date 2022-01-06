@@ -87,7 +87,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                         text: '',
                         children: [
                           TextSpan(
-                            text: getCurrencySymbol(context) + "$amount",
+                            text: getCurrencySymbol(context) + NumberUtil.getNanoStringAsNyano(amount),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.success,
                               fontSize: 16.0,

@@ -157,8 +157,9 @@ class LowerCaseTextFormatter extends TextInputFormatter {
 
 String getCurrencySymbol(BuildContext context) {
   if (StateContainer.of(context).curTheme is NyanTheme) {
-    // Ꞥ ꞥ Ɏ ɏ
-    return "ў";
+    // TODO: decide on a symbol
+    // Ꞥ ꞥ Ɏ ɏ ў Ȳ
+    return "Ȳ";
   } else {
     return "Ӿ";
   }

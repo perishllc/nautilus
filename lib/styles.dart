@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 
+String getFontFamily(BuildContext context) {
+  // is nyano?
+  if (StateContainer.of(context).curTheme is NyanTheme) {
+    return "Nyano";
+  } else {
+    return "NunitoSans";
+  }
+}
+
 class AppStyles {
   // Text style for paragraph text.
   static TextStyle textStyleParagraph(BuildContext context) {

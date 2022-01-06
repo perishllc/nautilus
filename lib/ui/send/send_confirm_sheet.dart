@@ -160,7 +160,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         text: '',
                         children: [
                           TextSpan(
-                            text: getCurrencySymbol(context) + "$amount",
+                            text: getCurrencySymbol(context) + NumberUtil.getNanoStringAsNyano(amount),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary,
                               fontSize: 16.0,

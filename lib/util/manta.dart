@@ -27,24 +27,25 @@ class MantaUtil {
   static void processPaymentRequest(BuildContext context, MantaWallet manta, PaymentRequestMessage paymentRequest) {
     // Validate account balance and destination as valid
 
-    if (StateContainer.of(context).curTheme is NyanTheme) {
-      // TODO: Nyan theme
+    // if (StateContainer.of(context).curTheme is NyanTheme) {
+    //   // TODO: Nyan theme
+    // } else {
+    Destination dest = paymentRequest.destinations[0];
+    String rawAmountStr = NumberUtil.getAmountAsRaw(dest.amount.toString());
+    BigInt rawAmount = BigInt.tryParse(rawAmountStr);
+    if (!Address(dest.destination_address).isValid()) {
+      UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+    } else if (rawAmount == null || rawAmount > StateContainer.of(context).wallet.accountBalance) {
+      UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
+    } else if (rawAmount < BigInt.from(10).pow(24)) {
+      UIUtil.showSnackbar(AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001"), context);
     } else {
-      Destination dest = paymentRequest.destinations[0];
-      String rawAmountStr = NumberUtil.getAmountAsRaw(dest.amount.toString());
-      BigInt rawAmount = BigInt.tryParse(rawAmountStr);
-      if (!Address(dest.destination_address).isValid()) {
-        UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
-      } else if (rawAmount == null || rawAmount > StateContainer.of(context).wallet.accountBalance) {
-        UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
-      } else if (rawAmount < BigInt.from(10).pow(24)) {
-        UIUtil.showSnackbar(AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001"), context);
-      } else {
-        // Is valid, proceed
-        Sheets.showAppHeightNineSheet(
-            context: context,
-            widget: SendConfirmSheet(amountRaw: rawAmountStr, destination: dest.destination_address, manta: manta, paymentRequest: paymentRequest));
-      }
+      // Is valid, proceed
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          widget: SendConfirmSheet(amountRaw: rawAmountStr, destination: dest.destination_address, manta: manta, paymentRequest: paymentRequest));
     }
+
+    // }
   }
 }

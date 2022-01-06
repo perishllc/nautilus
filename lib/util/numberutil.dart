@@ -4,6 +4,7 @@ import 'package:decimal/decimal.dart';
 
 class NumberUtil {
   static final BigInt rawPerNano = BigInt.from(10).pow(30);
+  static final BigInt rawPerNyano = BigInt.from(10).pow(24);
   static const int maxDecimalDigits = 6; // Max digits after decimal
 
   /// Convert raw to ban and return as BigDecimal
@@ -64,6 +65,7 @@ class NumberUtil {
   /// @returns 1
   ///
   static String getRawAsNyanoString(String raw) {
+    print(raw);
     NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: maxDecimalDigits, symbol: '');
     String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw)));
     var split = asString.split(".");
@@ -104,6 +106,14 @@ class NumberUtil {
     // }
 
     return asString;
+  }
+
+  static String getNanoStringAsNyano(String amount) {
+    String raw = getAmountAsRaw(amount);
+    print("raw: " + raw);
+    String nyano = getRawAsNyanoString(raw);
+    print("nyano: " + nyano);
+    return nyano;
   }
 
   /// Return readable string amount as raw string
