@@ -324,7 +324,7 @@ class _SendSheetState extends State<SendSheet> {
                                                 text: _localCurrencyMode
                                                     ? StateContainer.of(context).wallet.getLocalCurrencyPrice(StateContainer.of(context).curCurrency,
                                                         locale: StateContainer.of(context).currencyLocale)
-                                                    : "Ӿ" + StateContainer.of(context).wallet.getAccountBalanceDisplay(),
+                                                    : getCurrencySymbol(context) + StateContainer.of(context).wallet.getAccountBalanceDisplay(context),
                                                 style: TextStyle(
                                                   color: StateContainer.of(context).curTheme.primary60,
                                                   fontSize: 14.0,
@@ -651,7 +651,7 @@ class _SendSheetState extends State<SendSheet> {
         balance =
             StateContainer.of(context).wallet.getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
       } else {
-        balance = StateContainer.of(context).wallet.getAccountBalanceDisplay().replaceAll(r",", "");
+        balance = StateContainer.of(context).wallet.getAccountBalanceDisplay(context).replaceAll(r",", "");
       }
       // Convert to Integer representations
       int textFieldInt;
@@ -859,7 +859,7 @@ class _SendSheetState extends State<SendSheet> {
             return;
           }
           if (!_localCurrencyMode) {
-            _sendAmountController.text = StateContainer.of(context).wallet.getAccountBalanceDisplay().replaceAll(r",", "");
+            _sendAmountController.text = StateContainer.of(context).wallet.getAccountBalanceDisplay(context).replaceAll(r",", "");
             _sendAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAddressController.text.length));
           } else {
             String localAmount = StateContainer.of(context)

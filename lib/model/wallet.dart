@@ -1,8 +1,11 @@
 import 'package:decimal/decimal.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
+import 'package:nautilus_wallet_flutter/themes.dart';
 
 /// Main wallet object that's passed around the app via state
 class AppWallet {
@@ -72,11 +75,16 @@ class AppWallet {
   }
 
   // Get pretty account balance version
-  String getAccountBalanceDisplay() {
+  String getAccountBalanceDisplay(BuildContext context) {
     if (accountBalance == null) {
       return "0";
     }
-    return NumberUtil.getRawAsUsableString(_accountBalance.toString());
+
+    if (StateContainer.of(context).curTheme is NyanTheme) {
+      return NumberUtil.getRawAsNyanoString(_accountBalance.toString());
+    } else {
+      return NumberUtil.getRawAsUsableString(_accountBalance.toString());
+    }
   }
 
   String getLocalCurrencyPrice(AvailableCurrency currency, {String locale = "en_US"}) {

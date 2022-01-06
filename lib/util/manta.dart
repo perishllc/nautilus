@@ -9,14 +9,14 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:pointycastle/asymmetric/api.dart' show RSAPublicKey;
+import 'package:nautilus_wallet_flutter/themes.dart';
 
 class MantaUtil {
   // Utilities for the manta protocol
   static Future<PaymentRequestMessage> getPaymentDetails(MantaWallet manta) async {
     await manta.connect();
     final RSAPublicKey cert = await manta.getCertificate();
-    final PaymentRequestEnvelope payReqEnv = await manta.getPaymentRequest(
-      cryptoCurrency: "NANO");
+    final PaymentRequestEnvelope payReqEnv = await manta.getPaymentRequest(cryptoCurrency: "NANO");
     if (!payReqEnv.verify(cert)) {
       throw 'Certificate verification failure';
     }
@@ -25,7 +25,11 @@ class MantaUtil {
   }
 
   static void processPaymentRequest(BuildContext context, MantaWallet manta, PaymentRequestMessage paymentRequest) {
-      // Validate account balance and destination as valid
+    // Validate account balance and destination as valid
+
+    if (StateContainer.of(context).curTheme is NyanTheme) {
+      // TODO: Nyan theme
+    } else {
       Destination dest = paymentRequest.destinations[0];
       String rawAmountStr = NumberUtil.getAmountAsRaw(dest.amount.toString());
       BigInt rawAmount = BigInt.tryParse(rawAmountStr);
@@ -38,14 +42,9 @@ class MantaUtil {
       } else {
         // Is valid, proceed
         Sheets.showAppHeightNineSheet(
-          context: context,
-          widget: SendConfirmSheet(
-                    amountRaw: rawAmountStr,
-                    destination: dest.destination_address,
-                    manta: manta,
-                    paymentRequest: paymentRequest
-          )
-        );
-      }    
+            context: context,
+            widget: SendConfirmSheet(amountRaw: rawAmountStr, destination: dest.destination_address, manta: manta, paymentRequest: paymentRequest));
+      }
+    }
   }
 }

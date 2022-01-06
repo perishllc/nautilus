@@ -2,6 +2,8 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/themes.dart';
 
 /// Input formatter for Crpto/Fiat amounts
 class CurrencyFormatter extends TextInputFormatter {
@@ -150,5 +152,14 @@ class LowerCaseTextFormatter extends TextInputFormatter {
       text: newValue.text?.toLowerCase(),
       selection: newValue.selection,
     );
+  }
+}
+
+String getCurrencySymbol(BuildContext context) {
+  if (StateContainer.of(context).curTheme is NyanTheme) {
+    // Ꞥ ꞥ Ɏ ɏ
+    return "ў";
+  } else {
+    return "Ӿ";
   }
 }

@@ -50,6 +50,7 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 
 class AppHomePage extends StatefulWidget {
   PriceConversion priceConversion;
@@ -984,7 +985,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                   text: '',
                                   children: [
                                     TextSpan(
-                                      text: "Ӿ" + item.getFormattedAmount(),
+                                      text: getCurrencySymbol(context) + item.getFormattedAmount(),
                                       style: AppStyles.textStyleTransactionAmount(
                                         context,
                                       ),
@@ -1682,7 +1683,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                 children: [
                                   // Main balance text
                                   TextSpan(
-                                    text: "Ӿ" + StateContainer.of(context).wallet.getAccountBalanceDisplay(),
+                                    text: getCurrencySymbol(context) + StateContainer.of(context).wallet.getAccountBalanceDisplay(context),
                                     style: _priceConversion == PriceConversion.BTC
                                         ? AppStyles.textStyleCurrency(context)
                                         : AppStyles.textStyleCurrencySmaller(

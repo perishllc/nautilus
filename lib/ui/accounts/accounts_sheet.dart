@@ -24,6 +24,7 @@ import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flare_flutter/flare_actor.dart';
+import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 
 class AppAccountsSheet {
   List<Account> accounts;
@@ -448,11 +449,11 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                   children: [
                                     // Main balance text
                                     TextSpan(
-                                      text: (account.balance != null ? "Ӿ" : "") +
+                                      text: (account.balance != null ? getCurrencySymbol(context) : "") +
                                           (account.balance != null && !account.selected
                                               ? NumberUtil.getRawAsUsableString(account.balance)
                                               : account.selected
-                                                  ? StateContainer.of(context).wallet.getAccountBalanceDisplay()
+                                                  ? StateContainer.of(context).wallet.getAccountBalanceDisplay(context)
                                                   : ""),
                                       style: TextStyle(
                                         fontSize: 16.0,

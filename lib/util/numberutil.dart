@@ -32,7 +32,7 @@ class NumberUtil {
   /// @returns 1
   ///
   static String getRawAsUsableString(String raw) {
-    NumberFormat nf = new NumberFormat.currency(locale:'en_US', decimalDigits: maxDecimalDigits, symbol:'');
+    NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: maxDecimalDigits, symbol: '');
     String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw)));
     var split = asString.split(".");
     if (split.length > 1) {
@@ -55,6 +55,54 @@ class NumberUtil {
         asString = newStr;
       }
     }
+    return asString;
+  }
+
+  /// Return raw as a normal amount.
+  ///
+  /// @param raw 100000000000000000000000000000
+  /// @returns 1
+  ///
+  static String getRawAsNyanoString(String raw) {
+    NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: maxDecimalDigits, symbol: '');
+    String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw)));
+    var split = asString.split(".");
+    // log this:
+    // print(split);
+    if (split.length > 1) {
+      // Remove trailing 0s from this
+      if (int.parse(split[1]) == 0) {
+        asString = split[0] * 1000000;
+      } else {
+        // print(split[0]);
+        String newStr = (int.parse(split[0]) * 1000000).toString();
+        String digits = split[1];
+        int toMove = 6;
+        String buildStr = "";
+
+        // digits.length is never more than 6 so I can cheat here a bit:
+
+        for (int i = 0; i < digits.length; i++) {
+          buildStr += digits[i];
+          toMove--;
+        }
+
+        // buildStr = (int.parse(buildStr) * pow(10, toMove)).toString();
+
+        buildStr = newStr.substring(0, newStr.length - (6 - toMove)) + buildStr;
+        asString = buildStr;
+      }
+    }
+
+    // if (asString != "0") {
+    //   asString = asString + "00000";
+    // }
+
+    // remove "0." from the beginning of the string:
+    // if (asString.startsWith("0.")) {
+    //   asString = asString.substring(2, asString.length);
+    // }
+
     return asString;
   }
 
@@ -90,7 +138,7 @@ class NumberUtil {
         input = splitStr[0] + "." + splitStr[1];
       }
     }
-    for (int i=0; i< input.length; i++) {
+    for (int i = 0; i < input.length; i++) {
       try {
         if (input[i] == ".") {
           sanitized = sanitized + input[i];
@@ -98,7 +146,7 @@ class NumberUtil {
           int.parse(input[i]);
           sanitized = sanitized + input[i];
         }
-      } catch (e) { }
+      } catch (e) {}
     }
     return sanitized;
   }

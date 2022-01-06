@@ -32,6 +32,7 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
+import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 
 class SendConfirmSheet extends StatefulWidget {
   final String amountRaw;
@@ -159,7 +160,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         text: '',
                         children: [
                           TextSpan(
-                            text: "Ӿ$amount",
+                            text: getCurrencySymbol(context) + "$amount",
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary,
                               fontSize: 16.0,
