@@ -6,7 +6,7 @@ description: Nautilus - Fast, Robust & Secure NANO Wallet.
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.1.0+1
+version: 0.1.2+1
 
 environment:
   sdk: ">=2.11.99 <3.0.0"
@@ -244,6 +244,7 @@ flutter:
     - legacy_assets/ntr_placeholder_animation.flr
     - assets/store/known.json
     - assets/store/reps.json
+    - assets/logo-square.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

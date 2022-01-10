@@ -40,12 +40,14 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                       width: double.infinity,
                       height: MediaQuery.of(context).size.width * 5 / 8,
                       child: Center(
-                        child: FlareActor(
+                        child: /*FlareActor(
                           "legacy_assets/welcome_animation.flr",
                           animation: "main",
                           fit: BoxFit.contain,
                           color: StateContainer.of(context).curTheme.primary,
-                        ),
+                        )*/
+                            //load image:
+                            Image(image: AssetImage("assets/logo-square.png")),
                       ),
                     ),
                     //Container for the paragraph

@@ -35,11 +35,12 @@ ___
    - Usernames prefixed with '@'
 - [x] Change default theme to a darker color.
 - [x] Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
-- [ ] Advanced theming support
+- [x] Advanced theming support
 - [ ] Auto-loading of paper wallets in the clipboard w/ confirmation on app open
 
 #### Immediate TODO
-- [ ] remove natrium logo from the center of generated QR codes
+- [ ] fix bug with account history not showing up
+- [ ] fix bug with account balance of current wallet in accounts screen being incorrectly displayed as 0
 - [ ] cache json from /reps and /known
 - [ ] set random representative for new accounts using nano.to/reps
 
@@ -68,6 +69,7 @@ ___
 - [x] scaled down the QR code size on the receive screen and added usernames when available
 - [x] fix sending to local favorites
 - [x] lots of UX improvements especially with favorites / sending in general
+- [x] remove natrium logo from the center of generated QR codes
 
 <div style="display: flex; flex-direction: row">
    <img src="/screenshots/flutter_01.png" width="200">

@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2022-01-03T15:18:20.156795",
+  "@@last_modified": "2022-01-09T20:56:32.239246",
   "cancel": "Cancel",
   "@cancel": {
     "description": "dialog_cancel",
@@ -732,8 +732,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "nanoAPI": "Nano API",
-  "@nanoAPI": {
+  "nautilusAPI": "Nautilus API",
+  "@nautilusAPI": {
     "description": "nano_api",
     "type": "text",
     "placeholders": {}

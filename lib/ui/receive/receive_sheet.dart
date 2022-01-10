@@ -229,7 +229,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                   width: computedMaxSize / 6.5,
                                   height: computedMaxSize / 6.5,
                                   decoration: BoxDecoration(
-                                    color: StateContainer.of(context).curTheme.primary,
+                                    color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -263,11 +263,12 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                   padding: EdgeInsetsDirectional.only(
                                     end: computedMaxSize / 16,
                                   ),
-                                  child: Icon(
+                                  child: /*Icon(
                                     AppIcons.nautilushorizontal,
                                     size: computedMaxSize / 25,
                                     color: StateContainer.of(context).curTheme.backgroundDark,
-                                  ),
+                                  )*/
+                                      null,
                                 ),
                               ),
                       ],

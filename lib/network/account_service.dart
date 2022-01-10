@@ -116,21 +116,17 @@ class AccountService {
 
       _isConnecting = true;
       suspended = false;
-      _channel = new IOWebSocketChannel.connect(_SERVER_ADDRESS,
-          headers: {'X-Client-Version': packageInfo.buildNumber});
+      _channel = new IOWebSocketChannel.connect(_SERVER_ADDRESS, headers: {'X-Client-Version': packageInfo.buildNumber});
       log.d("Connected to service");
       _isConnecting = false;
       _isConnected = true;
-      EventTaxiImpl.singleton()
-          .fire(ConnStatusEvent(status: ConnectionStatus.CONNECTED));
-      _channel.stream.listen(_onMessageReceived,
-          onDone: connectionClosed, onError: connectionClosedError);
+      EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.CONNECTED));
+      _channel.stream.listen(_onMessageReceived, onDone: connectionClosed, onError: connectionClosedError);
     } catch (e) {
       log.e("Error from service ${e.toString()}", e);
       _isConnected = false;
       _isConnecting = false;
-      EventTaxiImpl.singleton()
-          .fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
+      EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
     }
   }
 
@@ -141,8 +137,7 @@ class AccountService {
     clearQueue();
     log.d("disconnected from service");
     // Send disconnected message
-    EventTaxiImpl.singleton()
-        .fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
+    EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
   }
 
   // Connection closed (with error)
@@ -152,8 +147,7 @@ class AccountService {
     clearQueue();
     log.w("disconnected from service with error ${e.toString()}");
     // Send disconnected message
-    EventTaxiImpl.singleton()
-        .fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
+    EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
   }
 
   // Close connection
@@ -201,22 +195,17 @@ class AccountService {
       Map msg = await compute(decodeJson, message);
       // Determine response type
       if (msg.containsKey("uuid") ||
-          (msg.containsKey("frontier") &&
-              msg.containsKey("representative_block")) ||
+          (msg.containsKey("frontier") && msg.containsKey("representative_block")) ||
           msg.containsKey("error") && msg.containsKey("currency")) {
         // Subscribe response
         SubscribeResponse resp = await compute(subscribeResponseFromJson, msg);
         // Post to callbacks
         EventTaxiImpl.singleton().fire(SubscribeEvent(response: resp));
-      } else if (msg.containsKey("currency") &&
-          msg.containsKey("price") &&
-          msg.containsKey("btc")) {
+      } else if (msg.containsKey("currency") && msg.containsKey("price") && msg.containsKey("btc")) {
         // Price info sent from server
         PriceResponse resp = PriceResponse.fromJson(msg);
         EventTaxiImpl.singleton().fire(PriceEvent(response: resp));
-      } else if (msg.containsKey("block") &&
-          msg.containsKey("hash") &&
-          msg.containsKey("account")) {
+      } else if (msg.containsKey("block") && msg.containsKey("hash") && msg.containsKey("account")) {
         CallbackResponse resp = await compute(callbackResponseFromJson, msg);
         EventTaxiImpl.singleton().fire(CallbackEvent(response: resp));
       } else if (msg.containsKey("error")) {
@@ -254,13 +243,10 @@ class AccountService {
             return;
           }
           requestItem.isProcessing = true;
-          String requestJson =
-              await compute(encodeRequestItem, requestItem.request);
+          String requestJson = await compute(encodeRequestItem, requestItem.request);
           //log.d("Sending: $requestJson");
           await _send(requestJson);
-        } else if (requestItem != null &&
-            (DateTime.now().difference(requestItem.expireDt).inSeconds >
-                RequestItem.EXPIRE_TIME_S)) {
+        } else if (requestItem != null && (DateTime.now().difference(requestItem.expireDt).inSeconds > RequestItem.EXPIRE_TIME_S)) {
           pop();
           processQueue();
         }
@@ -305,9 +291,7 @@ class AccountService {
     if (_requestQueue != null && _requestQueue.length > 0) {
       List<RequestItem> toRemove = new List();
       _requestQueue.forEach((requestItem) {
-        if ((requestItem.request is SubscribeRequest ||
-                requestItem.request is AccountHistoryRequest ||
-                requestItem.request is PendingRequest) &&
+        if ((requestItem.request is SubscribeRequest || requestItem.request is AccountHistoryRequest || requestItem.request is PendingRequest) &&
             !requestItem.isProcessing) {
           toRemove.add(requestItem);
         }
@@ -347,9 +331,8 @@ class AccountService {
   // HTTP API
 
   Future<dynamic> makeHttpRequest(BaseRequest request) async {
-    http.Response response = await http.post(Uri.parse(_SERVER_ADDRESS_HTTP),
-        headers: {'Content-type': 'application/json'},
-        body: json.encode(request.toJson()));
+    http.Response response =
+        await http.post(Uri.parse(_SERVER_ADDRESS_HTTP), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
     if (response.statusCode != 200) {
       return null;
     }
@@ -373,14 +356,9 @@ class AccountService {
     return infoResponse;
   }
 
-  Future<PendingResponse> getPending(String account, int count,
-      {String threshold, bool includeActive = false}) async {
+  Future<PendingResponse> getPending(String account, int count, {String threshold, bool includeActive = false}) async {
     threshold = threshold ?? BigInt.from(10).pow(24).toString();
-    PendingRequest request = PendingRequest(
-        account: account,
-        count: count,
-        threshold: threshold,
-        includeActive: includeActive);
+    PendingRequest request = PendingRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
@@ -404,10 +382,9 @@ class AccountService {
     return item;
   }
 
-  Future<AccountHistoryResponse> requestAccountHistory(String account,
-      {int count = 1}) async {
-    AccountHistoryRequest request =
-        AccountHistoryRequest(account: account, count: count);
+  Future<AccountHistoryResponse> requestAccountHistory(String account, {int count = 1}) async {
+    AccountHistoryRequest request = AccountHistoryRequest(account: account, count: count);
+    print(request.toJson());
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
@@ -418,10 +395,8 @@ class AccountService {
     return AccountHistoryResponse.fromJson(response);
   }
 
-  Future<AccountsBalancesResponse> requestAccountsBalances(
-      List<String> accounts) async {
-    AccountsBalancesRequest request =
-        AccountsBalancesRequest(accounts: accounts);
+  Future<AccountsBalancesResponse> requestAccountsBalances(List<String> accounts) async {
+    AccountsBalancesRequest request = AccountsBalancesRequest(accounts: accounts);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
@@ -438,20 +413,12 @@ class AccountService {
     return item;
   }
 
-  Future<ProcessResponse> requestReceive(String representative, String previous,
-      String balance, String link, String account, String privKey) async {
+  Future<ProcessResponse> requestReceive(String representative, String previous, String balance, String link, String account, String privKey) async {
     StateBlock receiveBlock = StateBlock(
-        subtype: BlockTypes.RECEIVE,
-        previous: previous,
-        representative: representative,
-        balance: balance,
-        link: link,
-        account: account,
-        privKey: privKey);
+        subtype: BlockTypes.RECEIVE, previous: previous, representative: representative, balance: balance, link: link, account: account, privKey: privKey);
 
     BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    StateBlock previousBlock =
-        StateBlock.fromJson(json.decode(previousInfo.contents));
+    StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents));
 
     // Update data on our next pending request
     receiveBlock.representative = previousBlock.representative;
@@ -459,14 +426,12 @@ class AccountService {
     await receiveBlock.sign(privKey);
 
     // Process
-    ProcessRequest processRequest = ProcessRequest(
-        block: json.encode(receiveBlock.toJson()), subType: BlockTypes.RECEIVE);
+    ProcessRequest processRequest = ProcessRequest(block: json.encode(receiveBlock.toJson()), subType: BlockTypes.RECEIVE);
 
     return await requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestSend(String representative, String previous,
-      String sendAmount, String link, String account, String privKey,
+  Future<ProcessResponse> requestSend(String representative, String previous, String sendAmount, String link, String account, String privKey,
       {bool max = false}) async {
     StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
@@ -478,8 +443,7 @@ class AccountService {
         privKey: privKey);
 
     BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    StateBlock previousBlock =
-        StateBlock.fromJson(json.decode(previousInfo.contents));
+    StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents));
 
     // Update data on our next pending request
     sendBlock.representative = previousBlock.representative;
@@ -487,72 +451,53 @@ class AccountService {
     await sendBlock.sign(privKey);
 
     // Process
-    ProcessRequest processRequest = ProcessRequest(
-        block: json.encode(sendBlock.toJson()), subType: BlockTypes.SEND);
+    ProcessRequest processRequest = ProcessRequest(block: json.encode(sendBlock.toJson()), subType: BlockTypes.SEND);
 
     return await requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestOpen(
-      String balance, String link, String account, String privKey,
-      {String representative}) async {
-    representative =
-        representative ?? await sl.get<SharedPrefsUtil>().getRepresentative();
-    StateBlock openBlock = StateBlock(
-        subtype: BlockTypes.OPEN,
-        previous: "0",
-        representative: representative,
-        balance: balance,
-        link: link,
-        account: account,
-        privKey: privKey);
+  Future<ProcessResponse> requestOpen(String balance, String link, String account, String privKey, {String representative}) async {
+    representative = representative ?? await sl.get<SharedPrefsUtil>().getRepresentative();
+    StateBlock openBlock =
+        StateBlock(subtype: BlockTypes.OPEN, previous: "0", representative: representative, balance: balance, link: link, account: account, privKey: privKey);
 
     // Sign
     await openBlock.sign(privKey);
 
     // Process
-    ProcessRequest processRequest = ProcessRequest(
-        block: json.encode(openBlock.toJson()), subType: BlockTypes.OPEN);
+    ProcessRequest processRequest = ProcessRequest(block: json.encode(openBlock.toJson()), subType: BlockTypes.OPEN);
 
     return await requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestChange(String account, String representative,
-      String previous, String balance, String privKey) async {
+  Future<ProcessResponse> requestChange(String account, String representative, String previous, String balance, String privKey) async {
     StateBlock chgBlock = StateBlock(
         subtype: BlockTypes.CHANGE,
         previous: previous,
         representative: representative,
         balance: balance,
-        link:
-            "0000000000000000000000000000000000000000000000000000000000000000",
+        link: "0000000000000000000000000000000000000000000000000000000000000000",
         account: account,
         privKey: privKey);
 
     BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    StateBlock previousBlock =
-        StateBlock.fromJson(json.decode(previousInfo.contents));
+    StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents));
 
     // Update data on our next pending request
     chgBlock.setBalance(previousBlock.balance);
     await chgBlock.sign(privKey);
 
     // Process
-    ProcessRequest processRequest = ProcessRequest(
-        block: json.encode(chgBlock.toJson()), subType: BlockTypes.CHANGE);
+    ProcessRequest processRequest = ProcessRequest(block: json.encode(chgBlock.toJson()), subType: BlockTypes.CHANGE);
 
     return await requestProcess(processRequest);
   }
 
   Future<AlertResponseItem> getAlert(String lang) async {
-    http.Response response = await http.get(
-        Uri.parse(_SERVER_ADDRESS_ALERTS + "/" + lang),
-        headers: {"Accept": "application/json"});
+    http.Response response = await http.get(Uri.parse(_SERVER_ADDRESS_ALERTS + "/" + lang), headers: {"Accept": "application/json"});
     if (response.statusCode == 200) {
       List<AlertResponseItem> alerts;
-      alerts = (json.decode(response.body) as List)
-          .map((i) => AlertResponseItem.fromJson(i))
-          .toList();
+      alerts = (json.decode(response.body) as List).map((i) => AlertResponseItem.fromJson(i)).toList();
       if (alerts.length > 0) {
         if (alerts[0].active) {
           return alerts[0];

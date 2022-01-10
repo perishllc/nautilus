@@ -13,7 +13,6 @@ import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
 import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
