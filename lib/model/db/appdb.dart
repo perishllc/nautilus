@@ -18,7 +18,8 @@ import 'package:http/http.dart' as http;
 
 class DBHelper {
   static const int DB_VERSION = 3;
-  static const String CONTACTS_SQL = """CREATE TABLE Contacts( 
+  static const String CONTACTS_SQL =
+      """CREATE TABLE Contacts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
         address TEXT, 
@@ -27,12 +28,14 @@ class DBHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         username TEXT, 
         address TEXT)""";
-  static const String REPS_SQL = """CREATE TABLE Reps( 
+  static const String REPS_SQL =
+      """CREATE TABLE Reps( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         username TEXT, 
         address TEXT)""";
-  static const String ACCOUNTS_SQL = """CREATE TABLE Accounts( 
+  static const String ACCOUNTS_SQL =
+      """CREATE TABLE Accounts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
         acct_index INTEGER, 
@@ -124,7 +127,6 @@ class DBHelper {
   // A function that converts a response body into a list of Users
   List<User> parseUsers(String responseBody) {
     final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-    // print(parsed[1]);
     return parsed.map<User>((json) => User.fromJson(json)).toList();
   }
 

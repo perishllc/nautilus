@@ -34,6 +34,7 @@ import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
+import 'package:nautilus_wallet_flutter/themes.dart';
 
 class SendSheet extends StatefulWidget {
   final AvailableCurrency localCurrency;
@@ -475,7 +476,9 @@ class _SendSheetState extends State<SendSheet> {
                                       amountRaw: _localCurrencyMode
                                           ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
                                           : _rawAmount == null
-                                              ? NumberUtil.getAmountAsRaw(_sendAmountController.text)
+                                              ? (StateContainer.of(context).curTheme is NyanTheme)
+                                                  ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
+                                                  : NumberUtil.getAmountAsRaw(_sendAmountController.text)
                                               : _rawAmount,
                                       destination: user.address,
                                       userName: user is User ? user.username : null,
@@ -491,7 +494,9 @@ class _SendSheetState extends State<SendSheet> {
                                   amountRaw: _localCurrencyMode
                                       ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
                                       : _rawAmount == null
-                                          ? NumberUtil.getAmountAsRaw(_sendAmountController.text)
+                                          ? (StateContainer.of(context).curTheme is NyanTheme)
+                                              ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
+                                              : NumberUtil.getAmountAsRaw(_sendAmountController.text)
                                           : _rawAmount,
                                   destination: _sendAddressController.text,
                                   maxSend: _isMaxSend(),
@@ -571,7 +576,7 @@ class _SendSheetState extends State<SendSheet> {
                               UIUtil.showSnackbar(AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001"), context);
                             } else if (_localCurrencyMode && mounted) {
                               toggleLocalCurrency();
-                              _sendAmountController.text = NumberUtil.getRawAsUsableString(address.amount);
+                              _sendAmountController.text = getRawAsThemeAwareAmount(context, address.amount);
                             } else if (mounted) {
                               setState(() {
                                 _rawAmount = address.amount;
@@ -768,7 +773,7 @@ class _SendSheetState extends State<SendSheet> {
               ? _sendAmountController.text
               : NumberUtil.getRawAsUsableString(_rawAmount);
       BigInt balanceRaw = StateContainer.of(context).wallet.accountBalance;
-      BigInt sendAmount = BigInt.tryParse(NumberUtil.getAmountAsRaw(bananoAmount));
+      BigInt sendAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
       if (sendAmount == null || sendAmount == BigInt.zero) {
         isValid = false;
         setState(() {

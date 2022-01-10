@@ -20,7 +20,8 @@ import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/numberutil.dart';
+import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 
 // Account Details Sheet
 class AccountDetailsSheet {
@@ -147,7 +148,7 @@ class AccountDetailsSheet {
                                             ),
                                           ),
                                           TextSpan(
-                                            text: NumberUtil.getRawAsUsableString(
+                                            text: getRawAsThemeAwareAmount(context,
                                                 account.balance == null ? StateContainer.of(context).wallet.accountBalance.toString() : account.balance),
                                             style: TextStyle(
                                               color: StateContainer.of(context).curTheme.primary60,
@@ -157,7 +158,7 @@ class AccountDetailsSheet {
                                             ),
                                           ),
                                           TextSpan(
-                                            text: " NANO)",
+                                            text: (StateContainer.of(context).curTheme is NyanTheme) ? (" nyano)") : (" NANO)"),
                                             style: TextStyle(
                                               color: StateContainer.of(context).curTheme.primary60,
                                               fontSize: 14.0,

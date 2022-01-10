@@ -69,10 +69,7 @@ abstract class BaseTheme {
 }
 
 class NautilusTheme extends BaseTheme {
-  // static const nanoAPIBlue = Color(0xFF0041FF);
-  static const modifiedNanoAPIBlue = Color(0xFF1660F9);
-
-  static const brightBlue = Color(0xFF4080D7);
+  static const nautilusBlue = Color(0xFF4080D7);
   static const brighterBlue = Color(0xFF80BAC7);
   // some test colors:
   // current: #B999F0
@@ -91,13 +88,13 @@ class NautilusTheme extends BaseTheme {
   static const blackBlueish = Color(0xFF0D1014);
   static const blackLighter = Color(0xFF0E0F0F);
 
-  Color primary = brightBlue;
-  Color primary60 = brightBlue.withOpacity(0.6);
-  Color primary45 = brightBlue.withOpacity(0.45);
-  Color primary30 = brightBlue.withOpacity(0.3);
-  Color primary20 = brightBlue.withOpacity(0.2);
-  Color primary15 = brightBlue.withOpacity(0.15);
-  Color primary10 = brightBlue.withOpacity(0.1);
+  Color primary = nautilusBlue;
+  Color primary60 = nautilusBlue.withOpacity(0.6);
+  Color primary45 = nautilusBlue.withOpacity(0.45);
+  Color primary30 = nautilusBlue.withOpacity(0.3);
+  Color primary20 = nautilusBlue.withOpacity(0.2);
+  Color primary15 = nautilusBlue.withOpacity(0.15);
+  Color primary10 = nautilusBlue.withOpacity(0.1);
 
   Color success = green;
   Color success60 = green.withOpacity(0.6);
@@ -120,7 +117,7 @@ class NautilusTheme extends BaseTheme {
 
   Color backgroundDarkest = blackLighter;
 
-  Color lighterPrimary = brightBlue;
+  Color lighterPrimary = nautilusBlue;
 
   Color text = whiteish.withOpacity(0.9);
   Color text60 = whiteish.withOpacity(0.6);
@@ -159,7 +156,7 @@ class NautilusTheme extends BaseTheme {
     spreadRadius: 1,
   );
   BoxShadow boxShadowButton = BoxShadow(
-    color: brightBlue.withOpacity(0.24),
+    color: nautilusBlue.withOpacity(0.24),
     // color: brightRed,
     offset: Offset(0, 0),
     blurRadius: 0,
@@ -568,7 +565,7 @@ class CarbonTheme extends BaseTheme {
 }
 
 class PurpeliumTheme extends BaseTheme {
-  static const brightBlue = Color(0xFFB999F0);
+  static const purpeliumPurple = Color(0xFFB999F0);
   // some test colors:
   // current: #B999F0
   // darker: #B19CD9
@@ -585,13 +582,13 @@ class PurpeliumTheme extends BaseTheme {
   static const blackBlueish = Color(0xFF0D1014);
   static const blackLighter = Color(0xFF0E0F0F);
 
-  Color primary = brightBlue;
-  Color primary60 = brightBlue.withOpacity(0.6);
-  Color primary45 = brightBlue.withOpacity(0.45);
-  Color primary30 = brightBlue.withOpacity(0.3);
-  Color primary20 = brightBlue.withOpacity(0.2);
-  Color primary15 = brightBlue.withOpacity(0.15);
-  Color primary10 = brightBlue.withOpacity(0.1);
+  Color primary = purpeliumPurple;
+  Color primary60 = purpeliumPurple.withOpacity(0.6);
+  Color primary45 = purpeliumPurple.withOpacity(0.45);
+  Color primary30 = purpeliumPurple.withOpacity(0.3);
+  Color primary20 = purpeliumPurple.withOpacity(0.2);
+  Color primary15 = purpeliumPurple.withOpacity(0.15);
+  Color primary10 = purpeliumPurple.withOpacity(0.1);
 
   Color success = green;
   Color success60 = green.withOpacity(0.6);
@@ -646,7 +643,7 @@ class PurpeliumTheme extends BaseTheme {
     spreadRadius: 1,
   );
   BoxShadow boxShadowButton = BoxShadow(
-    color: brightBlue.withOpacity(0.24),
+    color: purpeliumPurple.withOpacity(0.24),
     offset: Offset(0, 0),
     blurRadius: 0,
     spreadRadius: 0,
@@ -657,7 +654,7 @@ class PurpeliumTheme extends BaseTheme {
 }
 
 class NyanTheme extends BaseTheme {
-  static const brightBlue = Color(0xFF4A90E2);
+  static const nyanoBlue = Color(0xFF4A90E2);
   static const darkerBlue = Color(0xFF0E1032);
   // some test colors:
   // current: #B999F0
@@ -675,13 +672,13 @@ class NyanTheme extends BaseTheme {
   static const blackBlueish = Color(0xFF0D1014);
   static const blackLighter = Color(0xFF0E0F0F);
 
-  Color primary = brightBlue;
-  Color primary60 = brightBlue.withOpacity(0.6);
-  Color primary45 = brightBlue.withOpacity(0.45);
-  Color primary30 = brightBlue.withOpacity(0.3);
-  Color primary20 = brightBlue.withOpacity(0.2);
-  Color primary15 = brightBlue.withOpacity(0.15);
-  Color primary10 = brightBlue.withOpacity(0.1);
+  Color primary = nyanoBlue;
+  Color primary60 = nyanoBlue.withOpacity(0.6);
+  Color primary45 = nyanoBlue.withOpacity(0.45);
+  Color primary30 = nyanoBlue.withOpacity(0.3);
+  Color primary20 = nyanoBlue.withOpacity(0.2);
+  Color primary15 = nyanoBlue.withOpacity(0.15);
+  Color primary10 = nyanoBlue.withOpacity(0.1);
 
   Color success = green;
   Color success60 = green.withOpacity(0.6);
@@ -736,7 +733,7 @@ class NyanTheme extends BaseTheme {
     spreadRadius: 1,
   );
   BoxShadow boxShadowButton = BoxShadow(
-    color: brightBlue.withOpacity(0.24),
+    color: nyanoBlue.withOpacity(0.24),
     offset: Offset(0, 0),
     blurRadius: 0,
     spreadRadius: 0,

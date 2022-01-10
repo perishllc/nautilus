@@ -555,8 +555,8 @@ class AppLocalization {
     return Intl.message("Preferences", desc: 'settings_preferences_header', name: 'preferences');
   }
 
-  String get nanoAPI {
-    return Intl.message("Nano API", desc: 'nano_api', name: 'nanoAPI');
+  String get nautilusAPI {
+    return Intl.message("Nautilus API", desc: 'nano_api', name: 'nautilusAPI');
   }
 
   String get manage {

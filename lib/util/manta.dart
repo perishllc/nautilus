@@ -26,10 +26,6 @@ class MantaUtil {
 
   static void processPaymentRequest(BuildContext context, MantaWallet manta, PaymentRequestMessage paymentRequest) {
     // Validate account balance and destination as valid
-
-    // if (StateContainer.of(context).curTheme is NyanTheme) {
-    //   // TODO: Nyan theme
-    // } else {
     Destination dest = paymentRequest.destinations[0];
     String rawAmountStr = NumberUtil.getAmountAsRaw(dest.amount.toString());
     BigInt rawAmount = BigInt.tryParse(rawAmountStr);
@@ -45,7 +41,5 @@ class MantaUtil {
           context: context,
           widget: SendConfirmSheet(amountRaw: rawAmountStr, destination: dest.destination_address, manta: manta, paymentRequest: paymentRequest));
     }
-
-    // }
   }
 }

@@ -164,3 +164,19 @@ String getCurrencySymbol(BuildContext context) {
     return "Ӿ";
   }
 }
+
+String getRawAsThemeAwareAmount(BuildContext context, String rawString) {
+  if (StateContainer.of(context).curTheme is NyanTheme) {
+    return NumberUtil.getRawAsNyanoString(rawString);
+  } else {
+    return NumberUtil.getRawAsUsableString(rawString);
+  }
+}
+
+String getThemeAwareAmountAsRaw(BuildContext context, String amount) {
+  if (StateContainer.of(context).curTheme is NyanTheme) {
+    return NumberUtil.getNyanoAmountAsRaw(amount);
+  } else {
+    return NumberUtil.getAmountAsRaw(amount);
+  }
+}

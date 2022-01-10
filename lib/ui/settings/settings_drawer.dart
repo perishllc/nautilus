@@ -1156,7 +1156,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         : null,
                     Container(
                       margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
-                      child: Text(AppLocalization.of(context).nanoAPI,
+                      child: Text(AppLocalization.of(context).nautilusAPI,
                           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
                     ),
                     Divider(

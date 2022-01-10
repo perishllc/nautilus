@@ -985,7 +985,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                   text: '',
                                   children: [
                                     TextSpan(
-                                      text: getCurrencySymbol(context) + item.getFormattedAmount(),
+                                      text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, item.amount),
                                       style: AppStyles.textStyleTransactionAmount(
                                         context,
                                       ),

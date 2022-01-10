@@ -18,6 +18,17 @@ class NumberUtil {
     return result;
   }
 
+  /// Convert raw to ban and return as BigDecimal
+  ///
+  /// @param raw 100000000000000000000000000000
+  /// @return Decimal value 1.000000000000000000000000000000
+  ///
+  static Decimal getRawAsNyanoDecimal(String raw) {
+    Decimal amount = Decimal.parse(raw.toString());
+    Decimal result = amount / Decimal.parse(rawPerNyano.toString());
+    return result;
+  }
+
   /// Truncate a Decimal to a specific amount of digits
   ///
   /// @param input 1.059
@@ -65,55 +76,46 @@ class NumberUtil {
   /// @returns 1
   ///
   static String getRawAsNyanoString(String raw) {
-    print(raw);
     NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: maxDecimalDigits, symbol: '');
-    String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw)));
+    String asString = nf.format(truncateDecimal(getRawAsNyanoDecimal(raw)));
     var split = asString.split(".");
-    // log this:
-    // print(split);
     if (split.length > 1) {
       // Remove trailing 0s from this
       if (int.parse(split[1]) == 0) {
-        asString = split[0] * 1000000;
+        asString = split[0];
       } else {
-        // print(split[0]);
-        String newStr = (int.parse(split[0]) * 1000000).toString();
+        String newStr = split[0] + ".";
         String digits = split[1];
-        int toMove = 6;
-        String buildStr = "";
-
-        // digits.length is never more than 6 so I can cheat here a bit:
-
-        for (int i = 0; i < digits.length; i++) {
-          buildStr += digits[i];
-          toMove--;
+        int endIndex = digits.length;
+        for (int i = 1; i <= digits.length; i++) {
+          if (int.parse(digits[digits.length - i]) == 0) {
+            endIndex--;
+          } else {
+            break;
+          }
         }
-
-        // buildStr = (int.parse(buildStr) * pow(10, toMove)).toString();
-
-        buildStr = newStr.substring(0, newStr.length - (6 - toMove)) + buildStr;
-        asString = buildStr;
+        digits = digits.substring(0, endIndex);
+        newStr = split[0] + "." + digits;
+        asString = newStr;
       }
     }
-
-    // if (asString != "0") {
-    //   asString = asString + "00000";
-    // }
-
-    // remove "0." from the beginning of the string:
-    // if (asString.startsWith("0.")) {
-    //   asString = asString.substring(2, asString.length);
-    // }
-
     return asString;
   }
 
   static String getNanoStringAsNyano(String amount) {
     String raw = getAmountAsRaw(amount);
-    print("raw: " + raw);
     String nyano = getRawAsNyanoString(raw);
-    print("nyano: " + nyano);
     return nyano;
+  }
+
+  /// Return readable string amount as raw string
+  /// @param amount 1.01
+  /// @returns  101000000000000000000000
+  ///
+  static String getNyanoAmountAsRaw(String amount) {
+    Decimal asDecimal = Decimal.parse(amount);
+    Decimal rawDecimal = Decimal.parse(rawPerNyano.toString());
+    return (asDecimal * rawDecimal).toString();
   }
 
   /// Return readable string amount as raw string
