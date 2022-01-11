@@ -245,6 +245,8 @@ flutter:
     - assets/store/known.json
     - assets/store/reps.json
     - assets/logo-square.png
+    # nyano assets:
+    - assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -104,8 +104,9 @@ class StateContainerState extends State<StateContainer> {
   Account recentLast;
   Account recentSecondLast;
 
-  // Natricon true
+  // Natricon / Nyanicon settings
   bool natriconOn = false;
+  bool nyaniconOn = false;
   Map<String, String> natriconNonce = Map<String, String>();
 
   // Active alert
@@ -480,6 +481,10 @@ class StateContainerState extends State<StateContainer> {
   void updateTheme(ThemeSetting theme, {bool setIcon = true}) {
     setState(() {
       curTheme = theme.getTheme();
+      if (curTheme is NyanTheme) {
+        // TODO: make toggle-able individually later
+        nyaniconOn = true;
+      }
     });
     if (setIcon) {
       AppIcon.setAppIcon(theme.getTheme().appIcon);
@@ -488,9 +493,9 @@ class StateContainerState extends State<StateContainer> {
 
   // Change natricon setting
   void setNatriconOn(bool natriconOn) {
-    // setState(() {
-    //   this.natriconOn = natriconOn;
-    // });
+    setState(() {
+      this.natriconOn = natriconOn;
+    });
   }
 
   void disconnect() {

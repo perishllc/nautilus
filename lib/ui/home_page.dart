@@ -1501,12 +1501,53 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                     ],
                   ),
                 )
-              : AnimatedContainer(
-                  duration: Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  width: 80.0,
-                  height: mainCardHeight,
-                ),
+              : StateContainer.of(context).nyaniconOn
+                  ? AnimatedContainer(
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                      width: mainCardHeight == 64 ? 60 : 74,
+                      height: mainCardHeight == 64 ? 60 : 74,
+                      margin: EdgeInsets.only(right: 2),
+                      alignment: Alignment(0, 0),
+                      child: Stack(
+                        children: <Widget>[
+                          Center(
+                            child: Container(
+                              // nyanicon
+                              child: Hero(
+                                tag: "avatar",
+                                child: StateContainer.of(context).selectedAccount.address != null
+                                    ? Image(image: AssetImage("assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png"))
+                                    : SizedBox(),
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Container(
+                              color: Colors.transparent,
+                              child: FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed('/avatar_page');
+                                },
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                                highlightColor: StateContainer.of(context).curTheme.text15,
+                                splashColor: StateContainer.of(context).curTheme.text15,
+                                padding: EdgeInsets.all(0.0),
+                                child: Container(
+                                  color: Colors.transparent,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : AnimatedContainer(
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                      width: 80.0,
+                      height: mainCardHeight,
+                    ),
         ],
       ),
     );
