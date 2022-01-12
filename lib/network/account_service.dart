@@ -384,7 +384,6 @@ class AccountService {
 
   Future<AccountHistoryResponse> requestAccountHistory(String account, {int count = 1}) async {
     AccountHistoryRequest request = AccountHistoryRequest(account: account, count: count);
-    print(request.toJson());
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");

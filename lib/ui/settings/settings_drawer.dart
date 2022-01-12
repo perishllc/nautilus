@@ -1164,9 +1164,10 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       color: StateContainer.of(context).curTheme.text15,
                     ),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).buyNano, AppIcons.changerepresentative, onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                        return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://buy.chainbits.com");
-                      }));
+                      // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                      //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://buy.chainbits.com");
+                      // }));
+                      Navigator.of(context).pushNamed("/purchase_nano");
                     }),
                     Divider(
                       height: 2,
@@ -1174,9 +1175,10 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     ),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).registerUsername, AppIcons.changerepresentative,
                         onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                        return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://nano.to");
-                      }));
+                      // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                      //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://nano.to");
+                      // }));
+                      Navigator.of(context).pushNamed("/register_username");
                     }),
                     Divider(
                       height: 2,
@@ -1184,9 +1186,10 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     ),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).generatePaperWallet, AppIcons.changerepresentative,
                         onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                        return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://tools.nanos.cc/?tool=paper");
-                      }));
+                      // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                      //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://tools.nanos.cc/?tool=paper");
+                      // }));
+                      Navigator.of(context).pushNamed("/generate_paper_wallet");
                     }),
                     Divider(
                       height: 2,

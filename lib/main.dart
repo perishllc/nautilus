@@ -17,6 +17,9 @@ import 'package:nautilus_wallet_flutter/ui/intro/intro_password.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_password_on_launch.dart';
 import 'package:nautilus_wallet_flutter/ui/password_lock_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:nautilus_wallet_flutter/ui/register_username.dart';
+import 'package:nautilus_wallet_flutter/ui/purchase_nano.dart';
+import 'package:nautilus_wallet_flutter/ui/generate_paper_wallet.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
@@ -269,6 +272,22 @@ class _AppState extends State<App> {
             case '/before_scan_screen':
               return NoTransitionRoute(
                 builder: (_) => BeforeScanScreen(),
+                settings: settings,
+              );
+            // nautilus API routes:
+            case '/register_username':
+              return NoTransitionRoute(
+                builder: (_) => RegisterUsernameScreen(),
+                settings: settings,
+              );
+            case '/purchase_nano':
+              return NoTransitionRoute(
+                builder: (_) => PurchaseNanoScreen(),
+                settings: settings,
+              );
+            case '/generate_paper_wallet':
+              return NoTransitionRoute(
+                builder: (_) => GeneratePaperWalletScreen(),
                 settings: settings,
               );
             default:

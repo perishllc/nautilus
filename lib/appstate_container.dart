@@ -271,9 +271,9 @@ class StateContainerState extends State<StateContainer> {
     // Update alert
     checkAndUpdateAlerts();
     // Get natricon pref
-    // sl.get<SharedPrefsUtil>().getUseNatricon().then((useNatricon) {
-    //   setNatriconOn(useNatricon);
-    // });
+    sl.get<SharedPrefsUtil>().getUseNatricon().then((useNatricon) {
+      setNatriconOn(useNatricon);
+    });
     // make sure nano API databases are up to date
     // TODO: only call when out of date
     fetchNapiDatabases();
@@ -484,6 +484,8 @@ class StateContainerState extends State<StateContainer> {
       if (curTheme is NyanTheme) {
         // TODO: make toggle-able individually later
         nyaniconOn = true;
+      } else {
+        nyaniconOn = false;
       }
     });
     if (setIcon) {

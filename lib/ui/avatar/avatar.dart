@@ -20,8 +20,7 @@ class AvatarPage extends StatefulWidget {
   _AvatarPageState createState() => _AvatarPageState();
 }
 
-class _AvatarPageState extends State<AvatarPage>
-    with SingleTickerProviderStateMixin {
+class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateMixin {
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
   AnimationController _controller;
   Animation<Color> bgColorAnimation;
@@ -46,20 +45,13 @@ class _AvatarPageState extends State<AvatarPage>
 
   @override
   Widget build(BuildContext context) {
-    hasEnoughFunds = StateContainer.of(context).wallet.accountBalance >
-        BigInt.parse("1234570000000000000000000000");
+    hasEnoughFunds = StateContainer.of(context).wallet.accountBalance > BigInt.parse("1234570000000000000000000000");
     bgColorAnimation = ColorTween(
       begin: Colors.transparent,
       end: StateContainer.of(context).curTheme.barrier,
-    ).animate(CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeOut,
-        reverseCurve: Curves.easeIn));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut, reverseCurve: Curves.easeIn));
     offsetTween = Tween<Offset>(begin: Offset(0, 200), end: Offset(0, 0))
-        .animate(CurvedAnimation(
-            parent: _controller,
-            curve: Curves.easeOut,
-            reverseCurve: Curves.easeIn));
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut, reverseCurve: Curves.easeIn));
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -70,8 +62,7 @@ class _AvatarPageState extends State<AvatarPage>
           body: LayoutBuilder(
             builder: (context, constraints) => SafeArea(
               bottom: false,
-              minimum: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.10),
+              minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.10),
               child: Column(
                 children: <Widget>[
                   Expanded(
@@ -87,8 +78,7 @@ class _AvatarPageState extends State<AvatarPage>
                         ),
                         // Avatar
                         Container(
-                          margin: EdgeInsetsDirectional.only(
-                              bottom: MediaQuery.of(context).size.height * 0.2),
+                          margin: EdgeInsetsDirectional.only(bottom: MediaQuery.of(context).size.height * 0.2),
                           child: ClipOval(
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.8,
@@ -100,33 +90,16 @@ class _AvatarPageState extends State<AvatarPage>
                                     Hero(
                                       tag: "avatar",
                                       child: SvgPicture.network(
-                                        UIUtil.getNatriconURL(
-                                            StateContainer.of(context)
-                                                .selectedAccount
-                                                .address,
-                                            StateContainer.of(context)
-                                                .getNatriconNonce(
-                                                    StateContainer.of(context)
-                                                        .selectedAccount
-                                                        .address)),
-                                        key: Key(UIUtil.getNatriconURL(
-                                            StateContainer.of(context)
-                                                .selectedAccount
-                                                .address,
-                                            StateContainer.of(context)
-                                                .getNatriconNonce(
-                                                    StateContainer.of(context)
-                                                        .selectedAccount
-                                                        .address))),
-                                        placeholderBuilder:
-                                            (BuildContext context) => Container(
+                                        UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
+                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
+                                        key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
+                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
+                                        placeholderBuilder: (BuildContext context) => Container(
                                           child: FlareActor(
                                             "legacy_assets/ntr_placeholder_animation.flr",
                                             animation: "main",
                                             fit: BoxFit.contain,
-                                            color: StateContainer.of(context)
-                                                .curTheme
-                                                .primary,
+                                            color: StateContainer.of(context).curTheme.primary,
                                           ),
                                         ),
                                       ),
@@ -162,38 +135,21 @@ class _AvatarPageState extends State<AvatarPage>
                                   offset: offsetTween.value,
                                   child: Container(
                                     decoration: BoxDecoration(
-                                        color: StateContainer.of(context)
-                                            .curTheme
-                                            .backgroundDark,
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(30),
-                                            topRight: Radius.circular(30))),
+                                        color: StateContainer.of(context).curTheme.backgroundDark,
+                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30))),
                                     child: SafeArea(
-                                      minimum: EdgeInsets.only(
-                                          bottom: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.035,
-                                          top: hasEnoughFunds ? 24 : 16),
+                                      minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: hasEnoughFunds ? 24 : 16),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
+                                        mainAxisAlignment: MainAxisAlignment.end,
                                         children: <Widget>[
                                           // If balance if below 0.0123457 Nano, don't display this button
                                           hasEnoughFunds
                                               ? Row(
                                                   children: <Widget>[
-                                                    AppButton.buildAppButton(
-                                                        context,
-                                                        AppButtonType.PRIMARY,
-                                                        "Change My Natricon",
-                                                        Dimens
-                                                            .BUTTON_TOP_DIMENS,
+                                                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, "Change My Natricon", Dimens.BUTTON_TOP_DIMENS,
                                                         onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pushNamed(
-                                                              '/avatar_change_page');
+                                                      Navigator.of(context).pushNamed('/avatar_change_page');
                                                     }),
                                                   ],
                                                 )
@@ -205,20 +161,12 @@ class _AvatarPageState extends State<AvatarPage>
                                                   // Share Address Button
                                                   AppButtonType.PRIMARY_OUTLINE,
                                                   "Turn Off Natricon",
-                                                  Dimens.BUTTON_BOTTOM_DIMENS,
-                                                  onPressed: () {
+                                                  Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                                                 _controller.reverse();
-                                                sl
-                                                    .get<SharedPrefsUtil>()
-                                                    .setUseNatricon(false)
-                                                    .then((result) {
+                                                sl.get<SharedPrefsUtil>().setUseNatricon(false).then((result) {
                                                   setState(() {
-                                                    StateContainer.of(context)
-                                                        .setNatriconOn(false);
-                                                    _curNatriconSetting =
-                                                        NatriconSetting(
-                                                            NatriconOptions
-                                                                .OFF);
+                                                    StateContainer.of(context).setNatriconOn(false);
+                                                    _curNatriconSetting = NatriconSetting(NatriconOptions.OFF);
                                                   });
                                                 });
                                                 Navigator.pop(context);
