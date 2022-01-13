@@ -32,14 +32,12 @@ class SharedPrefsUtil {
   static const String cur_language = 'fkalium_language_pref';
   static const String cur_theme = 'fkalium_theme_pref';
   static const String cur_explorer = 'fkalium_cur_explorer_pref';
-  static const String user_representative =
-      'fkalium_user_rep'; // For when non-opened accounts have set a representative
+  static const String user_representative = 'fkalium_user_rep'; // For when non-opened accounts have set a representative
   static const String firstcontact_added = 'fkalium_first_c_added';
   static const String notification_enabled = 'fkalium_notification_on';
   static const String lock_kalium = 'fkalium_lock_dev';
   static const String kalium_lock_timeout = 'fkalium_lock_timeout';
-  static const String has_shown_root_warning =
-      'fkalium_root_warn'; // If user has seen the root/jailbreak warning yet
+  static const String has_shown_root_warning = 'fkalium_root_warn'; // If user has seen the root/jailbreak warning yet
   // For maximum pin attempts
   static const String pin_attempts = 'fkalium_pin_attempts';
   static const String pin_lock_until = 'fkalium_lock_duraton';
@@ -79,10 +77,7 @@ class SharedPrefsUtil {
     } else {
       expiryVal = expiry;
     }
-    Map<String, dynamic> msg = {
-      'data':value,
-      'expiry':expiryVal
-    };
+    Map<String, dynamic> msg = {'data': value, 'expiry': expiryVal};
     String serialized = json.encode(msg);
     await set(key, serialized);
   }
@@ -114,14 +109,11 @@ class SharedPrefsUtil {
     // Retrieve/Generate encryption password
     String secret = await sl.get<Vault>().getEncryptionPhrase();
     if (secret == null) {
-      secret = RandomUtil.generateEncryptionSecret(16) +
-          ":" +
-          RandomUtil.generateEncryptionSecret(8);
+      secret = RandomUtil.generateEncryptionSecret(16) + ":" + RandomUtil.generateEncryptionSecret(8);
       await sl.get<Vault>().writeEncryptionPhrase(secret);
     }
     // Encrypt and save
-    Salsa20Encryptor encrypter =
-        new Salsa20Encryptor(secret.split(":")[0], secret.split(":")[1]);
+    Salsa20Encryptor encrypter = new Salsa20Encryptor(secret.split(":")[0], secret.split(":")[1]);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, encrypter.encrypt(value));
   }
@@ -130,8 +122,7 @@ class SharedPrefsUtil {
     String secret = await sl.get<Vault>().getEncryptionPhrase();
     if (secret == null) return null;
     // Decrypt and return
-    Salsa20Encryptor encrypter =
-        new Salsa20Encryptor(secret.split(":")[0], secret.split(":")[1]);
+    Salsa20Encryptor encrypter = new Salsa20Encryptor(secret.split(":")[0], secret.split(":")[1]);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String encrypted = prefs.get(key);
     if (encrypted == null) return null;
@@ -184,8 +175,7 @@ class SharedPrefsUtil {
   }
 
   Future<PriceConversion> getPriceConversion() async {
-    return PriceConversion.values[
-        await get(price_conversion, defaultValue: PriceConversion.BTC.index)];
+    return PriceConversion.values[await get(price_conversion, defaultValue: PriceConversion.BTC.index)];
   }
 
   Future<void> setAuthMethod(AuthenticationMethod method) async {
@@ -193,8 +183,7 @@ class SharedPrefsUtil {
   }
 
   Future<AuthenticationMethod> getAuthMethod() async {
-    return AuthenticationMethod(AuthMethod.values[
-        await get(auth_method, defaultValue: AuthMethod.BIOMETRICS.index)]);
+    return AuthenticationMethod(AuthMethod.values[await get(auth_method, defaultValue: AuthMethod.BIOMETRICS.index)]);
   }
 
   Future<void> setCurrency(AvailableCurrency currency) async {
@@ -202,10 +191,8 @@ class SharedPrefsUtil {
   }
 
   Future<AvailableCurrency> getCurrency(Locale deviceLocale) async {
-    return AvailableCurrency(AvailableCurrencyEnum.values[await get(
-        cur_currency,
-        defaultValue:
-            AvailableCurrency.getBestForLocale(deviceLocale).currency.index)]);
+    return AvailableCurrency(
+        AvailableCurrencyEnum.values[await get(cur_currency, defaultValue: AvailableCurrency.getBestForLocale(deviceLocale).currency.index)]);
   }
 
   Future<void> setLanguage(LanguageSetting language) async {
@@ -213,8 +200,7 @@ class SharedPrefsUtil {
   }
 
   Future<LanguageSetting> getLanguage() async {
-    return LanguageSetting(AvailableLanguage.values[await get(cur_language,
-        defaultValue: AvailableLanguage.DEFAULT.index)]);
+    return LanguageSetting(AvailableLanguage.values[await get(cur_language, defaultValue: AvailableLanguage.DEFAULT.index)]);
   }
 
   Future<void> setTheme(ThemeSetting theme) async {
@@ -226,13 +212,11 @@ class SharedPrefsUtil {
   }
 
   Future<AvailableBlockExplorer> getBlockExplorer() async {
-    return AvailableBlockExplorer(AvailableBlockExplorerEnum.values[await get(cur_explorer,
-        defaultValue: AvailableBlockExplorerEnum.NANOCRAWLER.index)]);
+    return AvailableBlockExplorer(AvailableBlockExplorerEnum.values[await get(cur_explorer, defaultValue: AvailableBlockExplorerEnum.NANOCRAWLER.index)]);
   }
 
   Future<ThemeSetting> getTheme() async {
-    return ThemeSetting(ThemeOptions.values[
-        await get(cur_theme, defaultValue: ThemeOptions.NAUTILUS.index)]);
+    return ThemeSetting(ThemeOptions.values[await get(cur_theme, defaultValue: ThemeOptions.NAUTILUS.index)]);
   }
 
   Future<void> setRepresentative(String rep) async {
@@ -240,8 +224,7 @@ class SharedPrefsUtil {
   }
 
   Future<String> getRepresentative() async {
-    return await get(user_representative,
-        defaultValue: AppWallet.defaultRepresentative);
+    return await get(user_representative, defaultValue: AppWallet.defaultRepresentative);
   }
 
   Future<void> setNotificationsOn(bool value) async {
@@ -256,9 +239,7 @@ class SharedPrefsUtil {
 
   /// If notifications have been set by user/app
   Future<bool> getNotificationsSet() async {
-    return await get(notification_enabled, defaultValue: null) == null
-        ? false
-        : true;
+    return await get(notification_enabled, defaultValue: null) == null ? false : true;
   }
 
   Future<void> setLock(bool value) async {
@@ -274,9 +255,7 @@ class SharedPrefsUtil {
   }
 
   Future<LockTimeoutSetting> getLockTimeout() async {
-    return LockTimeoutSetting(LockTimeoutOption.values[await get(
-        kalium_lock_timeout,
-        defaultValue: LockTimeoutOption.ONE.index)]);
+    return LockTimeoutSetting(LockTimeoutOption.values[await get(kalium_lock_timeout, defaultValue: LockTimeoutOption.ONE.index)]);
   }
 
   // Locking out when max pin attempts exceeded
@@ -305,31 +284,15 @@ class SharedPrefsUtil {
     int attempts = await getLockAttempts();
     if (attempts >= 20) {
       // 4+ failed attempts
-      await set(
-          pin_lock_until,
-          DateFormat.yMd()
-              .add_jms()
-              .format(DateTime.now().toUtc().add(Duration(hours: 24))));
+      await set(pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(Duration(hours: 24))));
     } else if (attempts >= 15) {
       // 3 failed attempts
-      await set(
-          pin_lock_until,
-          DateFormat.yMd()
-              .add_jms()
-              .format(DateTime.now().toUtc().add(Duration(minutes: 15))));
+      await set(pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(Duration(minutes: 15))));
     } else if (attempts >= 10) {
       // 2 failed attempts
-      await set(
-          pin_lock_until,
-          DateFormat.yMd()
-              .add_jms()
-              .format(DateTime.now().toUtc().add(Duration(minutes: 5))));
+      await set(pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(Duration(minutes: 5))));
     } else if (attempts >= 5) {
-      await set(
-          pin_lock_until,
-          DateFormat.yMd()
-              .add_jms()
-              .format(DateTime.now().toUtc().add(Duration(minutes: 1))));
+      await set(pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(Duration(minutes: 1))));
     }
   }
 
@@ -362,7 +325,7 @@ class SharedPrefsUtil {
   }
 
   Future<bool> getUseNatricon() async {
-    return await get(use_natricon, defaultValue: true);
+    return await get(use_natricon, defaultValue: false);
   }
 
   Future<void> dismissAlert(AlertResponseItem alert) async {
@@ -380,7 +343,7 @@ class SharedPrefsUtil {
 
   Future<bool> shouldShowAlert(AlertResponseItem alert) async {
     int exists = await getWithExpiry("alert_${alert.id}");
-    return exists == null ? true: false;
+    return exists == null ? true : false;
   }
 
   // For logging out

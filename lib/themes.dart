@@ -149,15 +149,15 @@ class NautilusTheme extends BaseTheme {
   SystemUiOverlayStyle statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
   BoxShadow boxShadow = BoxShadow(
-    // color: white.withOpacity(0.14),
-    color: brightRed.withOpacity(0.5),
+    color: white.withOpacity(0.14),
+    // color: black.withOpacity(0.5),
     offset: Offset(0, 0),
     blurRadius: 0,
     spreadRadius: 1,
   );
   BoxShadow boxShadowButton = BoxShadow(
-    color: nautilusBlue.withOpacity(0.24),
     // color: brightRed,
+    color: nautilusBlue.withOpacity(0.24),
     offset: Offset(0, 0),
     blurRadius: 0,
     spreadRadius: 0,
@@ -770,7 +770,7 @@ class AppIcon {
         iconStr = "carbon";
         break;
       case AppIconEnum.PURPELIUM:
-        iconStr = "puerpeleium";
+        iconStr = "purpeleium";
         break;
       case AppIconEnum.NYAN:
         iconStr = "nyan";
