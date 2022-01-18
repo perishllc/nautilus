@@ -71,8 +71,8 @@ class AppLocalization {
     return Intl.message('Received', desc: 'history_received', name: 'received');
   }
 
-  String get pending {
-    return Intl.message('pending', desc: 'history_pending', name: 'pending');
+  String get receivable {
+    return Intl.message('receivable', desc: 'history_receivable', name: 'receivable');
   }
 
   String get unconfirmed {
@@ -248,6 +248,10 @@ class AppLocalization {
     return Intl.message("Invalid Favorite Name", desc: 'favorite_invalid_name', name: 'favoriteInvalid');
   }
 
+  String get usernameInvalid {
+    return Intl.message("Invalid Username", desc: 'username_invalid_name', name: 'usernameInvalid');
+  }
+
   String get favoriteNameMissing {
     return Intl.message("Choose a Name for this Favorite", desc: 'favorite_name_missing', name: 'favoriteNameMissing');
   }
@@ -404,8 +408,8 @@ class AppLocalization {
     return Intl.message("Change", desc: 'change_representative_change', name: 'changeRepButton');
   }
 
-  String get buyNano {
-    return Intl.message("Buy Nano", desc: 'buy_nano', name: 'buyNano');
+  String get purchaseNano {
+    return Intl.message("Purchase Nano", desc: 'purchase_nano', name: 'purchaseNano');
   }
 
   String get registerUsername {
@@ -1067,11 +1071,11 @@ class AppLocalization {
 
   // TODO: LEGAL: change these URLS:
   String get eulaUrl {
-    return 'https://fossephate.com/nautilus/eula.html';
+    return 'https://avengemedia.github.io/kalium/eula_nautilus.html';
   }
 
   String get privacyUrl {
-    return 'https://fossephate.com/nautilus/privacy.html';
+    return 'https://avengemedia.github.io/kalium/privacy.html';
   }
 
   /// -- END NON-TRANSLATABLE ITEMS

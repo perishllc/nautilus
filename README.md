@@ -39,7 +39,6 @@ ___
 - [ ] Auto-loading of paper wallets in the clipboard w/ confirmation on app open
 
 #### Immediate TODO
-- [ ] fix bug with account history not showing up
 - [ ] fix bug with account balance of current wallet in accounts screen being incorrectly displayed as 0
 - [ ] cache json from /reps and /known
 - [ ] set random representative for new accounts using nano.to/reps
@@ -49,7 +48,6 @@ ___
 - [ ] setting that let you choose which username to display in the app if multiple are registered
 - [ ] paper wallet generator / sender in app
 - [ ] request / pay buttons from usernames [requires server-side work]
-- [ ] replace android/app/src/main/ic_launcher-web.png *must* be 512x512 for the play store
 
 #### Changes so far
 - [x] removed natricons
@@ -70,6 +68,13 @@ ___
 - [x] fix sending to local favorites
 - [x] lots of UX improvements especially with favorites / sending in general
 - [x] remove natrium logo from the center of generated QR codes
+- [x] fix bug with account history not showing up
+- [x] use different star icon for the app drawer favorites
+- [x] add more icons to the app drawer
+- [x] fix currency symbol bugs
+- [x] replace android/app/src/main/ic_launcher-web.png *must* be 512x512 for the play store
+- [x] fix "invalid favorite" error when sending an invalid username
+- [x] change @ to ★ on the send screen
 
 <div style="display: flex; flex-direction: row">
    <img src="/screenshots/flutter_01.png" width="200">

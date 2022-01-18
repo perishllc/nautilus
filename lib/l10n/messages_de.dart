@@ -142,7 +142,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordNoLongerRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Zum Öffnen der App wird jetzt kein Passwort mehr benötigt."),
     "passwordWillBeRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Dieses Passwort wird benötigt, um Nautilus zu öffnen."),
     "passwordsDontMatch" : MessageLookupByLibrary.simpleMessage("Passwörter stimmen nicht überein"),
-    "pending" : MessageLookupByLibrary.simpleMessage("ausstehend"),
     "pickFromList" : MessageLookupByLibrary.simpleMessage("Aus Liste wählen"),
     "pinConfirmError" : MessageLookupByLibrary.simpleMessage("PINs stimmen nicht überein"),
     "pinConfirmTitle" : MessageLookupByLibrary.simpleMessage("Bestätige deine PIN"),

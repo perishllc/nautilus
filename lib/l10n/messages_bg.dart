@@ -142,7 +142,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordNoLongerRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Няма да се изисква повече парола за да се отвори Nautilus."),
     "passwordWillBeRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Тази парола ще се изисква за да се отвори Nautilus."),
     "passwordsDontMatch" : MessageLookupByLibrary.simpleMessage("Паролите не съвпадат"),
-    "pending" : MessageLookupByLibrary.simpleMessage("Изчакване"),
     "pickFromList" : MessageLookupByLibrary.simpleMessage("Избери от листа"),
     "pinConfirmError" : MessageLookupByLibrary.simpleMessage("ПИН-а не съвпада"),
     "pinConfirmTitle" : MessageLookupByLibrary.simpleMessage("Потвърдете вашият ПИН"),

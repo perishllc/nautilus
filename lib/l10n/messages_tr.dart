@@ -142,7 +142,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordNoLongerRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Artık Nautilus\'u açmak için şifre gerekmeyecek."),
     "passwordWillBeRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Nautilus\'u açabilmek için bu şifre gerekecek."),
     "passwordsDontMatch" : MessageLookupByLibrary.simpleMessage("Şifreler eşleşmiyor"),
-    "pending" : MessageLookupByLibrary.simpleMessage("beklemede"),
     "pickFromList" : MessageLookupByLibrary.simpleMessage("Listeden Seç"),
     "pinConfirmError" : MessageLookupByLibrary.simpleMessage("Şifreler uyuşmuyor"),
     "pinConfirmTitle" : MessageLookupByLibrary.simpleMessage("Şifreyi onaylayın"),

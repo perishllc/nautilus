@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/AppIcons.ttf
 ///
-/// 
+///
 ///
 import 'package:flutter/widgets.dart';
 
@@ -19,6 +19,7 @@ class AppIcons {
   AppIcons._();
 
   static const _kFontFam = 'AppIcons';
+  static const _eFontFam = 'ExtraAppIcons';
   static const _kFontPkg = null;
 
   static const IconData accountswitcher = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
@@ -74,4 +75,11 @@ class AppIcons {
   static const IconData warning = IconData(0xe832, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData walletpassworddisabled = IconData(0xe833, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData security = IconData(0xe834, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  // extra app icons:
+  // had to include an extra font since I can't re-generate the font file without the config file
+  // could be done eventually, but for now I'm just including the extra font file
+  static const IconData heart = IconData(0xf004, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData star = IconData(0xf005, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  // static const IconData at = IconData(0xf1fa, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData wallet = IconData(0xf555, fontFamily: _eFontFam, fontPackage: _kFontPkg);
 }

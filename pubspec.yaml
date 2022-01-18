@@ -6,7 +6,7 @@ description: Nautilus - Fast, Robust & Secure NANO Wallet.
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.1.2+201
+version: 0.1.3+04
 
 environment:
   sdk: ">=2.11.99 <3.0.0"
@@ -166,11 +166,10 @@ dev_dependencies:
 # to update the app icons use:
 # flutter pub get
 # flutter pub run flutter_launcher_icons:main
-  
+
 # to update the translations use:
 # flutter pub pub run intl_translation:extract_to_arb --output-dir=lib/l10n lib/localization.dart
 # flutter pub pub run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/localization.dart lib/l10n/intl_*.arb
-
 
 flutter_icons:
   android: true
@@ -210,6 +209,10 @@ flutter:
     - family: AppIcons
       fonts:
         - asset: fonts/AppIcons.ttf
+          weight: 500
+    - family: ExtraAppIcons
+      fonts:
+        - asset: fonts/ExtraAppIcons.ttf
           weight: 500
     - family: Comfortaa
       fonts:

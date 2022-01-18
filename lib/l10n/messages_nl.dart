@@ -142,7 +142,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordNoLongerRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Je hebt geen wachtwoord meer nodig om Nautilus te openen."),
     "passwordWillBeRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Dit wachtwoord is vereist om Nautilus te openen."),
     "passwordsDontMatch" : MessageLookupByLibrary.simpleMessage("Wachtwoorden kom niet overeen"),
-    "pending" : MessageLookupByLibrary.simpleMessage("in afwachting"),
     "pickFromList" : MessageLookupByLibrary.simpleMessage("Kies uit lijst"),
     "pinConfirmError" : MessageLookupByLibrary.simpleMessage("Pincodes komen niet overeen"),
     "pinConfirmTitle" : MessageLookupByLibrary.simpleMessage("Bevestig pincode"),

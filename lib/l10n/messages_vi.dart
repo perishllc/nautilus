@@ -142,7 +142,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordNoLongerRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Bạn sẽ không cần mật khẩu để mở Nautilus nữa."),
     "passwordWillBeRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Mật khẩu này sẽ được yêu cầu để mở Nautilus."),
     "passwordsDontMatch" : MessageLookupByLibrary.simpleMessage("Mật khẩu không khớp"),
-    "pending" : MessageLookupByLibrary.simpleMessage("đang chờ xác nhận"),
     "pickFromList" : MessageLookupByLibrary.simpleMessage("Chọn từ danh sách"),
     "pinConfirmError" : MessageLookupByLibrary.simpleMessage("Mã PIN không khớp"),
     "pinConfirmTitle" : MessageLookupByLibrary.simpleMessage("Xác nhận mã PIN của bạn"),

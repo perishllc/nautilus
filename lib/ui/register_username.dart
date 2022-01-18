@@ -79,7 +79,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                       ),
                       alignment: AlignmentDirectional(-1, 0),
                       child: AutoSizeText(
-                        AppLocalization.of(context).secretInfoHeader,
+                        "TODO!",
                         style: AppStyles.textStyleHeaderColored(context),
                         stepGranularity: 0.1,
                         maxLines: 1,
@@ -87,42 +87,42 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                       ),
                     ),
                     // The paragraph
-                    Container(
-                      margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        children: <Widget>[
-                          AutoSizeText(
-                            AppLocalization.of(context).secretInfo,
-                            style: AppStyles.textStyleParagraph(context),
-                            maxLines: 5,
-                            stepGranularity: 0.5,
-                          ),
-                          Container(
-                            margin: EdgeInsetsDirectional.only(top: 15),
-                            child: AutoSizeText(
-                              AppLocalization.of(context).secretWarning,
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                              maxLines: 4,
-                              stepGranularity: 0.5,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
+                    //   alignment: Alignment.centerLeft,
+                    //   child: Column(
+                    //     children: <Widget>[
+                    //       AutoSizeText(
+                    //         AppLocalization.of(context).secretInfo,
+                    //         style: AppStyles.textStyleParagraph(context),
+                    //         maxLines: 5,
+                    //         stepGranularity: 0.5,
+                    //       ),
+                    //       Container(
+                    //         margin: EdgeInsetsDirectional.only(top: 15),
+                    //         child: AutoSizeText(
+                    //           AppLocalization.of(context).secretWarning,
+                    //           style: AppStyles.textStyleParagraphPrimary(context),
+                    //           maxLines: 4,
+                    //           stepGranularity: 0.5,
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
 
               // Next Screen Button
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).gotItButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                    Navigator.of(context).pushNamed('/intro_backup', arguments: StateContainer.of(context).encryptedSecret);
-                  }),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: <Widget>[
+              //     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).gotItButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+              //       Navigator.of(context).pushNamed('/intro_backup', arguments: StateContainer.of(context).encryptedSecret);
+              //     }),
+              //   ],
+              // ),
             ],
           ),
         ),

@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2022-01-09T20:56:32.239246",
+  "@@last_modified": "2022-01-18T02:21:26.535092",
   "cancel": "Cancel",
   "@cancel": {
     "description": "dialog_cancel",
@@ -66,9 +66,9 @@
     "type": "text",
     "placeholders": {}
   },
-  "pending": "pending",
-  "@pending": {
-    "description": "history_pending",
+  "receivable": "receivable",
+  "@receivable": {
+    "description": "history_receivable",
     "type": "text",
     "placeholders": {}
   },
@@ -318,6 +318,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "usernameInvalid": "Invalid Username",
+  "@usernameInvalid": {
+    "description": "username_invalid_name",
+    "type": "text",
+    "placeholders": {}
+  },
   "favoriteNameMissing": "Choose a Name for this Favorite",
   "@favoriteNameMissing": {
     "description": "favorite_name_missing",
@@ -522,9 +528,9 @@
     "type": "text",
     "placeholders": {}
   },
-  "buyNano": "Buy Nano",
-  "@buyNano": {
-    "description": "buy_nano",
+  "purchaseNano": "Purchase Nano",
+  "@purchaseNano": {
+    "description": "purchase_nano",
     "type": "text",
     "placeholders": {}
   },

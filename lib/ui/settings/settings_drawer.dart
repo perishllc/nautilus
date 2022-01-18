@@ -1163,7 +1163,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).buyNano, AppIcons.changerepresentative, onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).purchaseNano, AppIcons.currency, onPressed: () {
                       // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                       //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://buy.chainbits.com");
                       // }));
@@ -1173,8 +1173,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).registerUsername, AppIcons.changerepresentative,
-                        onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).registerUsername, AppIcons.at, onPressed: () {
                       // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                       //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://nano.to");
                       // }));
@@ -1184,8 +1183,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).generatePaperWallet, AppIcons.changerepresentative,
-                        onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).generatePaperWallet, AppIcons.export_icon, onPressed: () {
                       // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                       //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://tools.nanos.cc/?tool=paper");
                       // }));
@@ -1265,8 +1263,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    // TODO: replace contact icon with a heart icon
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).favoritesHeader, AppIcons.contact, onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).favoritesHeader, AppIcons.star, onPressed: () {
                       setState(() {
                         _contactsOpen = true;
                       });

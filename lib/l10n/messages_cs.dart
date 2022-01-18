@@ -142,7 +142,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordNoLongerRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Už nebudete potřebovat heslo pro otevření Nautilus."),
     "passwordWillBeRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Toto heslo bude vyžadováno k otevření Nautilus."),
     "passwordsDontMatch" : MessageLookupByLibrary.simpleMessage("Heslo se neshoduje"),
-    "pending" : MessageLookupByLibrary.simpleMessage("nevyřízený"),
     "pickFromList" : MessageLookupByLibrary.simpleMessage("Vyberte ze seznamu"),
     "pinConfirmError" : MessageLookupByLibrary.simpleMessage("Pin se neshoduje"),
     "pinConfirmTitle" : MessageLookupByLibrary.simpleMessage("Potvrdit Váš pin"),

@@ -33,6 +33,7 @@ import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:nautilus_wallet_flutter/themes.dart';
 
 class SendConfirmSheet extends StatefulWidget {
   final String amountRaw;
@@ -160,7 +161,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         text: '',
                         children: [
                           TextSpan(
-                            text: getCurrencySymbol(context) + NumberUtil.getNanoStringAsNyano(amount),
+                            text: getCurrencySymbol(context) +
+                                ((StateContainer.of(context).curTheme is NyanTheme) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary,
                               fontSize: 16.0,

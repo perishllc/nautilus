@@ -467,7 +467,11 @@ class _SendSheetState extends State<SendSheet> {
                           sl.get<DBHelper>().getUserOrContactWithName(_sendAddressController.text).then((user) {
                             if (user == null) {
                               setState(() {
-                                _addressValidationText = AppLocalization.of(context).favoriteInvalid;
+                                if (_sendAddressController.text.startsWith("★")) {
+                                  _addressValidationText = AppLocalization.of(context).favoriteInvalid;
+                                } else {
+                                  _addressValidationText = AppLocalization.of(context).usernameInvalid;
+                                }
                               });
                             } else {
                               Sheets.showAppHeightNineSheet(
@@ -910,7 +914,7 @@ class _SendSheetState extends State<SendSheet> {
         autocorrect: false,
         hintText: _addressHint == null ? "" : AppLocalization.of(context).enterAddress,
         prefixButton: TextFieldButton(
-          icon: AppIcons.at,
+          icon: AppIcons.star,
           onPressed: () {
             if (_showContactButton && _users.length == 0) {
               // Show menu

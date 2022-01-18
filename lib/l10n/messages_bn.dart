@@ -142,7 +142,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordNoLongerRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Natrium খুলতে আপনার আর পাসওয়ার্ড লাগবে না।"),
     "passwordWillBeRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Natrium খোলার জন্য এই পাসওয়ার্ডের প্রয়োজন হবে।"),
     "passwordsDontMatch" : MessageLookupByLibrary.simpleMessage("পাসওয়ার্ড মিলছে না"),
-    "pending" : MessageLookupByLibrary.simpleMessage("অনুমোদন অপেক্ষারত"),
     "pickFromList" : MessageLookupByLibrary.simpleMessage("একটি তালিকা থেকে বাছাই করুন"),
     "pinConfirmError" : MessageLookupByLibrary.simpleMessage("পিন সঠিক নই"),
     "pinConfirmTitle" : MessageLookupByLibrary.simpleMessage("আপনার পিন নিশ্চিত করুন"),

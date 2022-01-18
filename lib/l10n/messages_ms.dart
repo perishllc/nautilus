@@ -142,7 +142,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordNoLongerRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Anda tidak perlu kata laluan untuk membuka Nautilus lagi."),
     "passwordWillBeRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Kata laluan ini diperlukan untuk membuka Nautilus."),
     "passwordsDontMatch" : MessageLookupByLibrary.simpleMessage("Kata laluan tidak sepadan"),
-    "pending" : MessageLookupByLibrary.simpleMessage("belum selesai"),
     "pickFromList" : MessageLookupByLibrary.simpleMessage("Pilih Daripada Senarai"),
     "pinConfirmError" : MessageLookupByLibrary.simpleMessage("Pin tidak sempadan"),
     "pinConfirmTitle" : MessageLookupByLibrary.simpleMessage("Mengesahkan pin anda"),
