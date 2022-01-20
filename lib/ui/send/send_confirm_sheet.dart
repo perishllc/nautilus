@@ -90,11 +90,13 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     this.animationOpen = false;
     this.isMantaTransaction = widget.manta != null && widget.paymentRequest != null;
     // Derive amount from raw amount
-    if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
-      amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
-    } else {
-      amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(widget.amountRaw), digits: 6).toStringAsFixed(6) + "~";
-    }
+    // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
+    //   amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
+    // } else {
+    //   amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(widget.amountRaw), digits: 6).toStringAsFixed(6) + "~";
+    // }
+    // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
+    amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
     // Ensure nano_ prefix on destination
     destinationAltered = widget.destination.replaceAll("xrb_", "nano_");
   }

@@ -45,7 +45,39 @@ class NumberUtil {
   ///
   static String getRawAsUsableString(String raw) {
     NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: maxDecimalDigits, symbol: '');
-    String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw)));
+    String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw), digits: maxDecimalDigits));
+    var split = asString.split(".");
+    if (split.length > 1) {
+      // Remove trailing 0s from this
+      if (int.parse(split[1]) == 0) {
+        asString = split[0];
+      } else {
+        String newStr = split[0] + ".";
+        String digits = split[1];
+        int endIndex = digits.length;
+        for (int i = 1; i <= digits.length; i++) {
+          if (int.parse(digits[digits.length - i]) == 0) {
+            endIndex--;
+          } else {
+            break;
+          }
+        }
+        digits = digits.substring(0, endIndex);
+        newStr = split[0] + "." + digits;
+        asString = newStr;
+      }
+    }
+    return asString;
+  }
+
+  /// Return raw as a normal amount.
+  ///
+  /// @param raw 100000000000000000000000000000
+  /// @returns 1
+  ///
+  static String getRawAsUsableStringPrecise(String raw) {
+    NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: (maxDecimalDigits + 6), symbol: '');
+    String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw), digits: (maxDecimalDigits + 6)));
     var split = asString.split(".");
     if (split.length > 1) {
       // Remove trailing 0s from this

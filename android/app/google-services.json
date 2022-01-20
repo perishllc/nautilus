@@ -41,7 +41,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:716870170992:android:693a7e526e5dae98",
         "android_client_info": {
-          "package_name": "com.avengemedia.natrium"
+          "package_name": "dev.fwd.nautilus"
         }
       },
       "oauth_client": [

@@ -1071,11 +1071,11 @@ class AppLocalization {
 
   // TODO: LEGAL: change these URLS:
   String get eulaUrl {
-    return 'https://avengemedia.github.io/kalium/eula_nautilus.html';
+    return 'https://fosse.co/nautilus/eula.html';
   }
 
   String get privacyUrl {
-    return 'https://avengemedia.github.io/kalium/privacy.html';
+    return 'https://fosse.co/nautilus/privacy.html';
   }
 
   /// -- END NON-TRANSLATABLE ITEMS

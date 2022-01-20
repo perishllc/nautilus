@@ -36,11 +36,22 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
   void initState() {
     super.initState();
     // Indicate that this is a special amount if some digits are not displayed
-    if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
-      amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
-    } else {
-      amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(widget.amountRaw), digits: 6).toStringAsFixed(6) + "~";
-    }
+    // if ((StateContainer.of(context).curTheme is NyanTheme)) {
+    //   // if (NumberUtil.getRawAsNyanoString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsNyanoString(widget.amountRaw).toString()) {
+    //   //   print(NumberUtil.getRawAsUsableString(widget.amountRaw));
+    //   //   amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
+    //   // } else {
+    //   //   amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsNyanoDecimal(widget.amountRaw), digits: 12).toStringAsFixed(12);
+    //   // }
+    //   amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsNyanoDecimal(widget.amountRaw), digits: 12).toStringAsFixed(12);
+    // } else {
+    //   if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
+    //     amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
+    //   } else {
+    //     amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(widget.amountRaw), digits: 6).toStringAsFixed(6) + "~";
+    //   }
+    // }
+    amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
     destinationAltered = widget.destination.replaceAll("xrb_", "nano_");
     isMantaTransaction = widget.paymentRequest != null;
   }
