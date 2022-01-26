@@ -68,6 +68,10 @@ abstract class BaseTheme {
   AppIconEnum appIcon;
 }
 
+abstract class NyanTheme extends BaseTheme {
+  // just used to distinguish between the two types of themes
+}
+
 class NautilusTheme extends BaseTheme {
   static const nautilusBlue = Color(0xFF4080D7);
   static const brighterBlue = Color(0xFF80BAC7);
@@ -653,7 +657,7 @@ class PurpeliumTheme extends BaseTheme {
   AppIconEnum appIcon = AppIconEnum.PURPELIUM;
 }
 
-class NyanTheme extends BaseTheme {
+class NyanoTheme extends NyanTheme {
   static const nyanoBlue = Color(0xFF4A90E2);
   static const darkerBlue = Color(0xFF0E1032);
   // some test colors:
@@ -740,10 +744,10 @@ class NyanTheme extends BaseTheme {
   );
 
   OverlayTheme qrScanTheme = OverlayTheme.CARBON;
-  AppIconEnum appIcon = AppIconEnum.NYAN;
+  AppIconEnum appIcon = AppIconEnum.NYANO;
 }
 
-enum AppIconEnum { NAUTILUS, TITANIUM, INDIUM, NEPTUNIUM, THORIUM, CARBON, PURPELIUM, NYAN }
+enum AppIconEnum { NAUTILUS, TITANIUM, INDIUM, NEPTUNIUM, THORIUM, CARBON, PURPELIUM, NYANO }
 
 class AppIcon {
   static const _channel = const MethodChannel('fappchannel');
@@ -772,8 +776,8 @@ class AppIcon {
       case AppIconEnum.PURPELIUM:
         iconStr = "purpeleium";
         break;
-      case AppIconEnum.NYAN:
-        iconStr = "nyan";
+      case AppIconEnum.NYANO:
+        iconStr = "nyano";
         break;
       case AppIconEnum.NAUTILUS:
       default:

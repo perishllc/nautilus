@@ -591,6 +591,10 @@ class AppLocalization {
     return Intl.message("Natricon", desc: 'natricon_settings', name: 'natricon');
   }
 
+  String get nyanicon {
+    return Intl.message("Nyanicon", desc: 'nyanicon_settings', name: 'nyanicon');
+  }
+
   String get notificationTitle {
     return Intl.message("Received %1 NANO", desc: 'notification_title', name: 'notificationTitle');
   }

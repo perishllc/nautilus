@@ -1447,61 +1447,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             child: _getBalanceWidget(),
           ),
           // natricon
-          StateContainer.of(context).natriconOn
-              ? AnimatedContainer(
-                  duration: Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  width: mainCardHeight == 64 ? 60 : 74,
-                  height: mainCardHeight == 64 ? 60 : 74,
-                  margin: EdgeInsets.only(right: 2),
-                  alignment: Alignment(0, 0),
-                  child: Stack(
-                    children: <Widget>[
-                      Center(
-                        child: Container(
-                          // natricon
-                          child: Hero(
-                            tag: "avatar",
-                            child: StateContainer.of(context).selectedAccount.address != null
-                                ? SvgPicture.network(
-                                    UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                        StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
-                                    key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                        StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
-                                    placeholderBuilder: (BuildContext context) => Container(
-                                      child: FlareActor(
-                                        "legacy_assets/ntr_placeholder_animation.flr",
-                                        animation: "main",
-                                        fit: BoxFit.contain,
-                                        color: StateContainer.of(context).curTheme.primary,
-                                      ),
-                                    ),
-                                  )
-                                : SizedBox(),
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Container(
-                          color: Colors.transparent,
-                          child: FlatButton(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed('/avatar_page');
-                            },
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                            highlightColor: StateContainer.of(context).curTheme.text15,
-                            splashColor: StateContainer.of(context).curTheme.text15,
-                            padding: EdgeInsets.all(0.0),
-                            child: Container(
-                              color: Colors.transparent,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              : StateContainer.of(context).nyaniconOn
+          (StateContainer.of(context).nyanoMode)
+              ? (StateContainer.of(context).nyaniconOn
                   ? AnimatedContainer(
                       duration: Duration(milliseconds: 200),
                       curve: Curves.easeInOut,
@@ -1518,6 +1465,66 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                 tag: "avatar",
                                 child: StateContainer.of(context).selectedAccount.address != null
                                     ? Image(image: AssetImage("assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png"))
+                                    : SizedBox(),
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Container(
+                              color: Colors.transparent,
+                              child: FlatButton(
+                                onPressed: () {
+                                  // Navigator.of(context).pushNamed('/avatar_page');
+                                },
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                                highlightColor: StateContainer.of(context).curTheme.text15,
+                                splashColor: StateContainer.of(context).curTheme.text15,
+                                padding: EdgeInsets.all(0.0),
+                                child: Container(
+                                  color: Colors.transparent,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : AnimatedContainer(
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                      width: 80.0,
+                      height: mainCardHeight,
+                    ))
+              : (StateContainer.of(context).natriconOn
+                  ? AnimatedContainer(
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                      width: mainCardHeight == 64 ? 60 : 74,
+                      height: mainCardHeight == 64 ? 60 : 74,
+                      margin: EdgeInsets.only(right: 2),
+                      alignment: Alignment(0, 0),
+                      child: Stack(
+                        children: <Widget>[
+                          Center(
+                            child: Container(
+                              // natricon
+                              child: Hero(
+                                tag: "avatar",
+                                child: StateContainer.of(context).selectedAccount.address != null
+                                    ? SvgPicture.network(
+                                        UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
+                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
+                                        key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
+                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
+                                        placeholderBuilder: (BuildContext context) => Container(
+                                          child: FlareActor(
+                                            "legacy_assets/ntr_placeholder_animation.flr",
+                                            animation: "main",
+                                            fit: BoxFit.contain,
+                                            color: StateContainer.of(context).curTheme.primary,
+                                          ),
+                                        ),
+                                      )
                                     : SizedBox(),
                               ),
                             ),
@@ -1547,7 +1554,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                       curve: Curves.easeInOut,
                       width: 80.0,
                       height: mainCardHeight,
-                    ),
+                    ))
         ],
       ),
     );
@@ -1721,6 +1728,17 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             child: AutoSizeText.rich(
                               TextSpan(
                                 children: [
+                                  ((StateContainer.of(context).nyanoMode)
+                                      ? TextSpan(
+                                          text: "y",
+                                          style: _priceConversion == PriceConversion.BTC
+                                              ? AppStyles.textStyleCurrency(context, true)
+                                              : AppStyles.textStyleCurrencySmaller(
+                                                  context,
+                                                  true,
+                                                ),
+                                        )
+                                      : TextSpan()),
                                   // Main balance text
                                   TextSpan(
                                     text: getCurrencySymbol(context) + StateContainer.of(context).wallet.getAccountBalanceDisplay(context),

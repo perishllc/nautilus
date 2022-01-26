@@ -98,6 +98,7 @@ class StateContainerState extends State<StateContainer> {
   LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
   AvailableBlockExplorer curBlockExplorer = AvailableBlockExplorer(AvailableBlockExplorerEnum.NANOCRAWLER);
   BaseTheme curTheme = NautilusTheme();
+  bool nyanoMode = false;
   // Currently selected account
   Account selectedAccount = Account(id: 1, name: "AB", index: 0, lastAccess: 0, selected: true);
   // Two most recently used accounts
@@ -273,6 +274,10 @@ class StateContainerState extends State<StateContainer> {
     // Get natricon pref
     sl.get<SharedPrefsUtil>().getUseNatricon().then((useNatricon) {
       setNatriconOn(useNatricon);
+    });
+    // Get nyanicon pref
+    sl.get<SharedPrefsUtil>().getUseNyanicon().then((useNyanicon) {
+      setNyaniconOn(useNyanicon);
     });
     // make sure nano API databases are up to date
     // TODO: only call when out of date
@@ -484,8 +489,10 @@ class StateContainerState extends State<StateContainer> {
       if (curTheme is NyanTheme) {
         // TODO: make toggle-able individually later
         nyaniconOn = true;
+        nyanoMode = true;
       } else {
         nyaniconOn = false;
+        nyanoMode = false;
       }
     });
     if (setIcon) {
@@ -497,6 +504,13 @@ class StateContainerState extends State<StateContainer> {
   void setNatriconOn(bool natriconOn) {
     setState(() {
       this.natriconOn = natriconOn;
+    });
+  }
+
+  // Change natricon setting
+  void setNyaniconOn(bool nyaniconOn) {
+    setState(() {
+      this.nyaniconOn = nyaniconOn;
     });
   }
 

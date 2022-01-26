@@ -80,7 +80,7 @@ class AppWallet {
       return "0";
     }
 
-    if (StateContainer.of(context).curTheme is NyanTheme) {
+    if (StateContainer.of(context).nyanoMode) {
       return NumberUtil.getRawAsNyanoString(_accountBalance.toString());
     } else {
       return NumberUtil.getRawAsUsableString(_accountBalance.toString());

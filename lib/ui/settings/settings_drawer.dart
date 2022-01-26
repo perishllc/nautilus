@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
+import 'package:nautilus_wallet_flutter/model/nyanicon_option.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/disable_password_sheet.dart';
@@ -70,6 +71,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   AuthenticationMethod _curAuthMethod = AuthenticationMethod(AuthMethod.BIOMETRICS);
   NotificationSetting _curNotificiationSetting = NotificationSetting(NotificationOptions.ON);
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
+  NyaniconSetting _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
   UnlockSetting _curUnlockSetting = UnlockSetting(UnlockOption.NO);
   LockTimeoutSetting _curTimeoutSetting = LockTimeoutSetting(LockTimeoutOption.ONE);
   ThemeSetting _curThemeSetting = ThemeSetting(ThemeOptions.NAUTILUS);
@@ -126,6 +128,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     sl.get<SharedPrefsUtil>().getUseNatricon().then((useNatricon) {
       setState(() {
         _curNatriconSetting = useNatricon ? NatriconSetting(NatriconOptions.ON) : NatriconSetting(NatriconOptions.OFF);
+      });
+    });
+    // Get default natricon setting
+    sl.get<SharedPrefsUtil>().getUseNyanicon().then((useNyanicon) {
+      setState(() {
+        _curNyaniconSetting = useNyanicon ? NyaniconSetting(NyaniconOptions.ON) : NyaniconSetting(NyaniconOptions.OFF);
       });
     });
     // Get default theme settings
@@ -377,6 +385,63 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           setState(() {
             StateContainer.of(context).setNatriconOn(false);
             _curNatriconSetting = NatriconSetting(NatriconOptions.OFF);
+          });
+        });
+        break;
+    }
+  }
+
+  Future<void> _nyaniconDialog() async {
+    switch (await showDialog<NyaniconOptions>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            title: Text(
+              AppLocalization.of(context).nyanicon,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            children: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, NyaniconOptions.ON);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).onStr,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, NyaniconOptions.OFF);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).off,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        })) {
+      case NyaniconOptions.ON:
+        sl.get<SharedPrefsUtil>().setUseNyanicon(true).then((result) {
+          setState(() {
+            StateContainer.of(context).setNyaniconOn(true);
+            _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
+          });
+        });
+        break;
+      case NyaniconOptions.OFF:
+        sl.get<SharedPrefsUtil>().setUseNyanicon(false).then((result) {
+          setState(() {
+            StateContainer.of(context).setNyaniconOn(false);
+            _curNyaniconSetting = NyaniconSetting(NyaniconOptions.OFF);
           });
         });
         break;
@@ -1247,6 +1312,13 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
+                    // TODO: nyanicon svg
+                    (StateContainer.of(context).nyanoMode)
+                        ? (
+                            // Nyanicon on-off
+                            AppSettings.buildSettingsListItemDoubleLine(
+                                context, AppLocalization.of(context).nyanicon, _curNyaniconSetting, AppIcons.natricon, _nyaniconDialog))
+                        : (null),
                     // Natricon on-off
                     // AppSettings.buildSettingsListItemDoubleLine(
                     //     context, AppLocalization.of(context).natricon, _curNatriconSetting, AppIcons.natricon, _natriconDialog),

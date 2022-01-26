@@ -47,6 +47,8 @@ class SharedPrefsUtil {
   static const String ninja_api_cache = 'fkalium_ninja_api_cache';
   // Natricon setting
   static const String use_natricon = 'nautilus_use_natricon';
+  // Nyanicon setting
+  static const String use_nyanicon = 'nautilus_use_nyanicon';
 
   // For plain-text data
   Future<void> set(String key, value) async {
@@ -326,6 +328,14 @@ class SharedPrefsUtil {
 
   Future<bool> getUseNatricon() async {
     return await get(use_natricon, defaultValue: false);
+  }
+
+  Future<void> setUseNyanicon(bool useNyanicon) async {
+    return await set(use_nyanicon, useNyanicon);
+  }
+
+  Future<bool> getUseNyanicon() async {
+    return await get(use_nyanicon, defaultValue: false);
   }
 
   Future<void> dismissAlert(AlertResponseItem alert) async {

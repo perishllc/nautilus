@@ -321,6 +321,18 @@ class _SendSheetState extends State<SendSheet> {
                                                   fontFamily: 'NunitoSans',
                                                 ),
                                               ),
+                                              (StateContainer.of(context).nyanoMode)
+                                                  ? TextSpan(
+                                                      text: "y",
+                                                      style: TextStyle(
+                                                        color: StateContainer.of(context).curTheme.primary60,
+                                                        fontSize: 14.0,
+                                                        fontWeight: FontWeight.w700,
+                                                        fontFamily: 'NunitoSans',
+                                                        decoration: TextDecoration.lineThrough,
+                                                      ),
+                                                    )
+                                                  : TextSpan(),
                                               TextSpan(
                                                 text: _localCurrencyMode
                                                     ? StateContainer.of(context).wallet.getLocalCurrencyPrice(StateContainer.of(context).curCurrency,
@@ -480,7 +492,7 @@ class _SendSheetState extends State<SendSheet> {
                                       amountRaw: _localCurrencyMode
                                           ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
                                           : _rawAmount == null
-                                              ? (StateContainer.of(context).curTheme is NyanTheme)
+                                              ? (StateContainer.of(context).nyanoMode)
                                                   ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
                                                   : NumberUtil.getAmountAsRaw(_sendAmountController.text)
                                               : _rawAmount,
@@ -585,7 +597,7 @@ class _SendSheetState extends State<SendSheet> {
                               setState(() {
                                 _rawAmount = address.amount;
                                 // If raw amount has more precision than we support show a special indicator
-                                if ((StateContainer.of(context).curTheme is NyanTheme)) {
+                                if ((StateContainer.of(context).nyanoMode)) {
                                   _sendAmountController.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
                                 } else {
                                   if (NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "") ==

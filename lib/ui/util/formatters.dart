@@ -156,17 +156,18 @@ class LowerCaseTextFormatter extends TextInputFormatter {
 }
 
 String getCurrencySymbol(BuildContext context) {
-  if (StateContainer.of(context).curTheme is NyanTheme) {
+  if (StateContainer.of(context).nyanoMode) {
     // TODO: decide on a symbol
     // Ꞥ ꞥ Ɏ ɏ ў Ȳ
-    return "Ȳ";
+    // return "Ȳ";
+    return "";
   } else {
     return "Ӿ";
   }
 }
 
 String getRawAsThemeAwareAmount(BuildContext context, String rawString) {
-  if (StateContainer.of(context).curTheme is NyanTheme) {
+  if (StateContainer.of(context).nyanoMode) {
     return NumberUtil.getRawAsNyanoString(rawString);
   } else {
     return NumberUtil.getRawAsUsableString(rawString);
@@ -174,7 +175,7 @@ String getRawAsThemeAwareAmount(BuildContext context, String rawString) {
 }
 
 String getThemeAwareAmountAsRaw(BuildContext context, String amount) {
-  if (StateContainer.of(context).curTheme is NyanTheme) {
+  if (StateContainer.of(context).nyanoMode) {
     return NumberUtil.getNyanoAmountAsRaw(amount);
   } else {
     return NumberUtil.getAmountAsRaw(amount);

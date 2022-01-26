@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:nautilus_wallet_flutter/model/setting_item.dart';
 
-enum ThemeOptions { NAUTILUS, TITANIUM, INDIUM, NEPTUNIUM, THORIUM, CARBON, PURPELIUM, NYAN }
+enum ThemeOptions { NAUTILUS, TITANIUM, INDIUM, NEPTUNIUM, THORIUM, CARBON, PURPELIUM, NYANO }
 
 /// Represent notification on/off setting
 class ThemeSetting extends SettingSelectionItem {
@@ -16,8 +16,8 @@ class ThemeSetting extends SettingSelectionItem {
         return "Carbon";
       case ThemeOptions.PURPELIUM:
         return "Purpelium";
-      case ThemeOptions.NYAN:
-        return "Nyan";
+      case ThemeOptions.NYANO:
+        return "Nyano";
       case ThemeOptions.THORIUM:
         return "Thorium";
       case ThemeOptions.NEPTUNIUM:
@@ -38,8 +38,8 @@ class ThemeSetting extends SettingSelectionItem {
         return CarbonTheme();
       case ThemeOptions.PURPELIUM:
         return PurpeliumTheme();
-      case ThemeOptions.NYAN:
-        return NyanTheme();
+      case ThemeOptions.NYANO:
+        return NyanoTheme();
       case ThemeOptions.THORIUM:
         return ThoriumTheme();
       case ThemeOptions.NEPTUNIUM:

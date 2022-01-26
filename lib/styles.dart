@@ -141,14 +141,25 @@ class AppStyles {
   }
 
   // Text style for primary currency on home page
-  static TextStyle textStyleCurrency(BuildContext context) {
+  static TextStyle textStyleCurrency(BuildContext context, [bool strike = false]) {
     return TextStyle(
-        fontFamily: "NunitoSans", fontSize: AppFontSizes._largest, fontWeight: FontWeight.w900, color: StateContainer.of(context).curTheme.primary);
+      fontFamily: "NunitoSans",
+      fontSize: AppFontSizes._largest,
+      fontWeight: FontWeight.w900,
+      color: StateContainer.of(context).curTheme.primary,
+      decoration: strike ? TextDecoration.lineThrough : null,
+    );
   }
 
   // Text style for primary currency on home page
-  static TextStyle textStyleCurrencySmaller(BuildContext context) {
-    return TextStyle(fontFamily: "NunitoSans", fontSize: 22, fontWeight: FontWeight.w900, color: StateContainer.of(context).curTheme.primary);
+  static TextStyle textStyleCurrencySmaller(BuildContext context, [bool strike = false]) {
+    return TextStyle(
+      fontFamily: "NunitoSans",
+      fontSize: 22,
+      fontWeight: FontWeight.w900,
+      color: StateContainer.of(context).curTheme.primary,
+      decoration: strike ? TextDecoration.lineThrough : null,
+    );
   }
 
   /* Transaction cards */

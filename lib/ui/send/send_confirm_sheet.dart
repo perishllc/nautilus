@@ -162,9 +162,20 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       text: TextSpan(
                         text: '',
                         children: [
+                          ((StateContainer.of(context).nyanoMode)
+                              ? TextSpan(
+                                  text: "y",
+                                  style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans',
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                )
+                              : TextSpan()),
                           TextSpan(
-                            text: getCurrencySymbol(context) +
-                                ((StateContainer.of(context).curTheme is NyanTheme) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
+                            text: getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary,
                               fontSize: 16.0,

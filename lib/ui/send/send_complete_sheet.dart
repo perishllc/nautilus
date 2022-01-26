@@ -36,7 +36,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
   void initState() {
     super.initState();
     // Indicate that this is a special amount if some digits are not displayed
-    // if ((StateContainer.of(context).curTheme is NyanTheme)) {
+    // if ((StateContainer.of(context).nyanoMode)) {
     //   // if (NumberUtil.getRawAsNyanoString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsNyanoString(widget.amountRaw).toString()) {
     //   //   print(NumberUtil.getRawAsUsableString(widget.amountRaw));
     //   //   amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
@@ -98,9 +98,20 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                       text: TextSpan(
                         text: '',
                         children: [
+                          ((StateContainer.of(context).nyanoMode)
+                              ? TextSpan(
+                                  text: "y",
+                                  style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.success,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans',
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                )
+                              : TextSpan()),
                           TextSpan(
-                            text: getCurrencySymbol(context) +
-                                ((StateContainer.of(context).curTheme is NyanTheme) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
+                            text: getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.success,
                               fontSize: 16.0,
