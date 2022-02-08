@@ -169,14 +169,15 @@ class AppStyles {
   }
 
   // Amount
-  static TextStyle textStyleTransactionAmount(BuildContext context) {
+  static TextStyle textStyleTransactionAmount(BuildContext context, [bool strike = false]) {
     return TextStyle(
         fontFamily: "NunitoSans",
         color: (StateContainer.of(context).curTheme is NautilusTheme)
             ? StateContainer.of(context).curTheme.lighterPrimary
             : StateContainer.of(context).curTheme.primary60,
         fontSize: AppFontSizes.smallest,
-        fontWeight: FontWeight.w600);
+        fontWeight: FontWeight.w600,
+        decoration: strike ? TextDecoration.lineThrough : null);
   }
 
   // Unit (e.g. BAN)

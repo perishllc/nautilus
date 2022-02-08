@@ -3,20 +3,20 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:quiver/core.dart';
 
-// part 'user.g.dart';
+part 'user.g.dart';
 
 @JsonSerializable()
 class User {
   @JsonKey(ignore: true)
-  int id;
+  int? id;
   @JsonKey(name: 'name')
-  String username;
+  String? username;
   @JsonKey(name: 'address')
-  String address;
+  String? address;
   @JsonKey(name: 'expires')
-  String expiration;
+  String? expiration;
   @JsonKey(name: 'representative')
-  bool representative;
+  bool? representative;
   // @JsonKey(ignore: true)
   // String monkeyPath;
   // @JsonKey(ignore: true)

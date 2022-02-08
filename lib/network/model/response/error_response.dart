@@ -4,10 +4,10 @@ part 'error_response.g.dart';
 
 @JsonSerializable()
 class ErrorResponse {
-  @JsonKey(name:'error')
-  String error;
+  @JsonKey(name: 'error')
+  String? error;
 
-  ErrorResponse({String error}) {
+  ErrorResponse({String? error}) {
     this.error = error;
   }
 

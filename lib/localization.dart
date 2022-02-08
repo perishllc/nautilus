@@ -111,6 +111,14 @@ class AppLocalization {
     return Intl.message('Share Address', desc: 'receive_share_cta', name: 'addressShare');
   }
 
+  String get requestPayment {
+    return Intl.message('Request Payment', desc: 'request_payment_cta', name: 'requestPayment');
+  }
+
+  String get createQR {
+    return Intl.message('Create QR Code', desc: 'create_qr_code', name: 'createQR');
+  }
+
   String get addressHint {
     return Intl.message('Enter Address', desc: 'send_address_hint', name: 'addressHint');
   }

@@ -983,6 +983,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                 text: TextSpan(
                                   text: '',
                                   children: [
+                                    ((StateContainer.of(context).nyanoMode)
+                                        ? TextSpan(
+                                            text: "y",
+                                            style: AppStyles.textStyleTransactionAmount(
+                                              context,
+                                              true,
+                                            ),
+                                          )
+                                        : TextSpan()),
                                     TextSpan(
                                       text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, item.amount),
                                       style: AppStyles.textStyleTransactionAmount(

@@ -7,4 +7,5 @@ class Actions {
   static const String ACCOUNTS_BALANCES = 'accounts_balances';
   static const String FCM_UPDATE = 'fcm_update';
   static const String INFO = "account_info";
+  static const String REQUEST_PAYMENT = "request_payment";
 }

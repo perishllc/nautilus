@@ -109,6 +109,7 @@ class StateContainerState extends State<StateContainer> {
   bool natriconOn = false;
   bool nyaniconOn = false;
   Map<String, String> natriconNonce = Map<String, String>();
+  Map<String, String> nyaniconNonce = Map<String, String>();
 
   // Active alert
   AlertResponseItem activeAlert;
@@ -142,6 +143,12 @@ class StateContainerState extends State<StateContainer> {
   void updateNatriconNonce(String address, int nonce) {
     setState(() {
       this.natriconNonce[address] = nonce.toString();
+    });
+  }
+
+  void updateNyaniconNonce(String address, int nonce) {
+    setState(() {
+      this.nyaniconNonce[address] = nonce.toString();
     });
   }
 
@@ -283,7 +290,6 @@ class StateContainerState extends State<StateContainer> {
     // TODO: only call when out of date
     fetchNapiDatabases();
     // sl.get<DBHelper>().fetchDatabases();
-
     // sl.get<DBHelper>().populateDBFromCache();
   }
 
@@ -488,10 +494,10 @@ class StateContainerState extends State<StateContainer> {
       curTheme = theme.getTheme();
       if (curTheme is NyanTheme) {
         // TODO: make toggle-able individually later
-        nyaniconOn = true;
+        // nyaniconOn = true;
         nyanoMode = true;
       } else {
-        nyaniconOn = false;
+        // nyaniconOn = false;
         nyanoMode = false;
       }
     });
@@ -699,62 +705,62 @@ class StateContainerState extends State<StateContainer> {
       if (wallet.history != null && wallet.history.length > 1) {
         count = 50;
       }
-      try {
-        AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count);
-        _requestBalances();
-        bool postedToHome = false;
-        // Iterate list in reverse (oldest to newest block)
-        for (AccountHistoryResponseItem item in resp.history) {
-          // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
-          if (!wallet.history.contains(item)) {
-            int startIndex = 0; // Index to start inserting into the list
-            int lastIndex = resp.history.indexWhere(
-                (item) => wallet.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
-            lastIndex = lastIndex <= 0 ? resp.history.length : lastIndex;
-            setState(() {
-              wallet.history.insertAll(0, resp.history.getRange(startIndex, lastIndex));
-              // Send list to home screen
-              EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-            });
-            postedToHome = true;
-            break;
-          }
+      // try {
+      AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count);
+      _requestBalances();
+      bool postedToHome = false;
+      // Iterate list in reverse (oldest to newest block)
+      for (AccountHistoryResponseItem item in resp.history) {
+        // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
+        if (!wallet.history.contains(item)) {
+          int startIndex = 0; // Index to start inserting into the list
+          int lastIndex = resp.history.indexWhere(
+              (item) => wallet.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+          lastIndex = lastIndex <= 0 ? resp.history.length : lastIndex;
+          setState(() {
+            wallet.history.insertAll(0, resp.history.getRange(startIndex, lastIndex));
+            // Send list to home screen
+            EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+          });
+          postedToHome = true;
+          break;
         }
-        setState(() {
-          wallet.historyLoading = false;
-        });
-        if (!postedToHome) {
-          EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-        }
-        sl.get<AccountService>().pop();
-        sl.get<AccountService>().processQueue();
-        // Receive pendings
-        if (pending) {
-          pendingRequests.clear();
-          PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
-          // Initiate receive/open request for each pending
-          for (String hash in pendingResp.blocks.keys) {
-            PendingResponseItem pendingResponseItem = pendingResp.blocks[hash];
-            pendingResponseItem.hash = hash;
-            String receivedHash = await handlePendingItem(pendingResponseItem);
-            if (receivedHash != null) {
-              AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
-                  type: BlockTypes.RECEIVE, account: pendingResponseItem.source, amount: pendingResponseItem.amount, hash: receivedHash);
-              if (!wallet.history.contains(histItem)) {
-                setState(() {
-                  wallet.history.insert(0, histItem);
-                  wallet.accountBalance += BigInt.parse(pendingResponseItem.amount);
-                  // Send list to home screen
-                  EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-                });
-              }
+      }
+      setState(() {
+        wallet.historyLoading = false;
+      });
+      if (!postedToHome) {
+        EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+      }
+      sl.get<AccountService>().pop();
+      sl.get<AccountService>().processQueue();
+      // Receive pendings
+      if (pending) {
+        pendingRequests.clear();
+        PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
+        // Initiate receive/open request for each pending
+        for (String hash in pendingResp.blocks.keys) {
+          PendingResponseItem pendingResponseItem = pendingResp.blocks[hash];
+          pendingResponseItem.hash = hash;
+          String receivedHash = await handlePendingItem(pendingResponseItem);
+          if (receivedHash != null) {
+            AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
+                type: BlockTypes.RECEIVE, account: pendingResponseItem.source, amount: pendingResponseItem.amount, hash: receivedHash);
+            if (!wallet.history.contains(histItem)) {
+              setState(() {
+                wallet.history.insert(0, histItem);
+                wallet.accountBalance += BigInt.parse(pendingResponseItem.amount);
+                // Send list to home screen
+                EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+              });
             }
           }
         }
-      } catch (e) {
-        // TODO handle account history error
-        sl.get<Logger>().e("account_history e", e);
       }
+      // } catch (e) {
+      //   // TODO handle account history error
+      //   sl.get<Logger>().e("account_history e", e);
+      // }
     }
   }
 

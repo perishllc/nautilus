@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2022-01-18T02:21:26.535092",
+  "@@last_modified": "2022-02-07T19:29:24.380280",
   "cancel": "Cancel",
   "@cancel": {
     "description": "dialog_cancel",
@@ -123,6 +123,18 @@
   "addressShare": "Share Address",
   "@addressShare": {
     "description": "receive_share_cta",
+    "type": "text",
+    "placeholders": {}
+  },
+  "requestPayment": "Request Payment",
+  "@requestPayment": {
+    "description": "request_payment_cta",
+    "type": "text",
+    "placeholders": {}
+  },
+  "createQR": "Create QR Code",
+  "@createQR": {
+    "description": "create_qr_code",
     "type": "text",
     "placeholders": {}
   },
@@ -783,6 +795,12 @@
   "natricon": "Natricon",
   "@natricon": {
     "description": "natricon_settings",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "description": "nyanicon_settings",
     "type": "text",
     "placeholders": {}
   },

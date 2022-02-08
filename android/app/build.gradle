@@ -42,7 +42,8 @@ android {
 
     defaultConfig {
         applicationId "dev.fwd.nautiluswallet"
-        minSdkVersion 19
+        // minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 31
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()

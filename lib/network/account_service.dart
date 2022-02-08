@@ -40,9 +40,29 @@ import 'package:nautilus_wallet_flutter/network/model/response/process_response.
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 
 // Server Connection String
-const String _SERVER_ADDRESS = "wss://app.natrium.io";
-const String _SERVER_ADDRESS_HTTP = "https://app.natrium.io/api";
-const String _SERVER_ADDRESS_ALERTS = "https://app.natrium.io/alerts";
+// const String _SERVER_ADDRESS = "wss://app.natrium.io";
+// const String _SERVER_ADDRESS_HTTP = "https://app.natrium.io/api";
+// const String _SERVER_ADDRESS_ALERTS = "https://app.natrium.io/alerts";
+
+// const String _SERVER_ADDRESS = "wss://app.perish.co";
+// const String _SERVER_ADDRESS_HTTP = "https://app.perish.co/api";
+// const String _SERVER_ADDRESS_ALERTS = "https://app.perish.co/alerts";
+
+// const String _SERVER_ADDRESS = "ws://192.168.1.250";
+// const String _SERVER_ADDRESS_HTTP = "http://192.168.1.250/api";
+// const String _SERVER_ADDRESS_ALERTS = "http://192.168.1.250/alerts";
+
+// const String _SERVER_ADDRESS = "wss://107.199.173.141";
+// const String _SERVER_ADDRESS_HTTP = "http://107.199.173.141/api";
+// const String _SERVER_ADDRESS_ALERTS = "http://107.199.173.141/alerts";
+
+// const String _SERVER_ADDRESS = "ws://192.168.1.250";
+const String _SERVER_ADDRESS_HTTP = "http://192.168.1.250/api";
+const String _SERVER_ADDRESS_ALERTS = "http://192.168.1.250/alerts";
+
+const String _SERVER_ADDRESS = "ws://app.perish.co";
+// const String _SERVER_ADDRESS_HTTP = "http://app.perish.co/api";
+// const String _SERVER_ADDRESS_ALERTS = "http://app.perish.co/alerts";
 
 Map decodeJson(dynamic src) {
   return json.decode(src);
@@ -331,8 +351,17 @@ class AccountService {
   // HTTP API
 
   Future<dynamic> makeHttpRequest(BaseRequest request) async {
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    print(_SERVER_ADDRESS_HTTP);
+    print(request.toJson());
+
+    // await http.post(Uri.parse("http://192.168.1.250/api"), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
+
     http.Response response =
         await http.post(Uri.parse(_SERVER_ADDRESS_HTTP), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
+
+    print("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+
     if (response.statusCode != 200) {
       return null;
     }
@@ -340,6 +369,8 @@ class AccountService {
     if (decoded.containsKey("error")) {
       return ErrorResponse.fromJson(decoded);
     }
+
+    print(decoded);
     return decoded;
   }
 
@@ -454,6 +485,33 @@ class AccountService {
 
     return await requestProcess(processRequest);
   }
+
+  // new:
+  // request money from an account:
+  // Future<ProcessResponse> requestRequestSend(String representative, String previous, String sendAmount, String link, String account, String privKey,
+  //     {bool max = false}) async {
+  //   // StateBlock sendBlock = StateBlock(
+  //   //     subtype: BlockTypes.SEND,
+  //   //     previous: previous,
+  //   //     representative: representative,
+  //   //     balance: max ? "0" : sendAmount,
+  //   //     link: link,
+  //   //     account: account,
+  //   //     privKey: privKey);
+
+  //   // BlockInfoItem previousInfo = await requestBlockInfo(previous);
+  //   // StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents));
+
+  //   // // Update data on our next pending request
+  //   // sendBlock.representative = previousBlock.representative;
+  //   // sendBlock.setBalance(previousBlock.balance);
+  //   // await sendBlock.sign(privKey);
+
+  //   // // Process
+  //   // ProcessRequest processRequest = ProcessRequest(block: json.encode(sendBlock.toJson()), subType: BlockTypes.SEND);
+
+  //   // return await requestProcess(processRequest);
+  // }
 
   Future<ProcessResponse> requestOpen(String balance, String link, String account, String privKey, {String representative}) async {
     representative = representative ?? await sl.get<SharedPrefsUtil>().getRepresentative();

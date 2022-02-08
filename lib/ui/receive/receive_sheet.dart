@@ -6,6 +6,8 @@ import 'dart:math' as Math;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
@@ -19,6 +21,8 @@ import 'package:nautilus_wallet_flutter/ui/receive/share_card.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flare_flutter/flare_actor.dart';
+// request payment package:
+import 'package:nautilus_wallet_flutter/ui/request/request_sheet.dart';
 
 class ReceiveSheet extends StatefulWidget {
   final Widget qrWidget;
@@ -339,6 +343,28 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                           }
                         });
                       });
+                    }),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(
+                        context,
+                        // Share Address Button
+                        AppButtonType.PRIMARY_OUTLINE,
+                        AppLocalization.of(context).requestPayment,
+                        Dimens.BUTTON_BOTTOM_DIMENS,
+                        disabled: _showShareCard, onPressed: () {
+                      // do nothing
+                      // if (request == null) {
+                      // return;
+                      // }
+                      // Sheets.showAppHeightEightSheet(context: context, widget: request);
+                      // Remove any other screens from stack
+                      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+
+                      // Go to send with address
+                      Sheets.showAppHeightNineSheet(context: context, widget: RequestSheet());
                     }),
                   ],
                 ),

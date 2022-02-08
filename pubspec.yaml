@@ -6,10 +6,11 @@ description: Nautilus - Fast, Robust & Secure NANO Wallet.
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.1.5+06
+version: 0.1.5+207
 
 environment:
   sdk: ">=2.11.99 <3.0.0"
+  # sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -39,7 +40,8 @@ dependencies:
   device_info: ^2.0.3
 
   # JSON Serialization
-  json_annotation: ^4.3.0
+  # json_annotation: ^4.3.0
+  json_annotation: ^4.4.0
 
   # Localization
   intl: ^0.17.0
@@ -143,6 +145,9 @@ dependencies:
     git:
       url: https://github.com/bbedward/manta-dart.git
       ref: master
+
+  # paper wallet generator in js:
+  # flutter_js: ^0.5.0+5
 
   devicelocale: ^0.4.1
 

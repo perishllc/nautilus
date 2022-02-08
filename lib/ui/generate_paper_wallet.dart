@@ -7,6 +7,9 @@ import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+
 // import 'package:flare_flutter/flare_actor.dart';
 // import 'package:nautilus_wallet_flutter/dimens.dart';
 // import 'package:nautilus_wallet_flutter/localization.dart';
@@ -22,6 +25,16 @@ class GeneratePaperWalletScreen extends StatefulWidget {
 
 class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  String paper_wallet_seed;
+  String paper_wallet_account;
+
+  @override
+  void initState() {
+    super.initState();
+
+    paper_wallet_seed = NanoSeeds.generateSeed();
+    paper_wallet_account = NanoUtil.seedToAddress(paper_wallet_seed, 0);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,29 +100,24 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                       ),
                     ),
                     // The paragraph
-                    // Container(
-                    //   margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
-                    //   alignment: Alignment.centerLeft,
-                    //   child: Column(
-                    //     children: <Widget>[
-                    //       AutoSizeText(
-                    //         AppLocalization.of(context).secretInfo,
-                    //         style: AppStyles.textStyleParagraph(context),
-                    //         maxLines: 5,
-                    //         stepGranularity: 0.5,
-                    //       ),
-                    //       Container(
-                    //         margin: EdgeInsetsDirectional.only(top: 15),
-                    //         child: AutoSizeText(
-                    //           AppLocalization.of(context).secretWarning,
-                    //           style: AppStyles.textStyleParagraphPrimary(context),
-                    //           maxLines: 4,
-                    //           stepGranularity: 0.5,
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
+                    Container(
+                      margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        children: <Widget>[
+                          AutoSizeText(
+                            AppLocalization.of(context).secretInfo,
+                            style: AppStyles.textStyleParagraph(context),
+                            maxLines: 5,
+                            stepGranularity: 0.5,
+                          ),
+                          Container(
+                            margin: EdgeInsetsDirectional.only(top: 15),
+                            child: Text("$paper_wallet_seed $paper_wallet_account"),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

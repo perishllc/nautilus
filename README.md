@@ -39,15 +39,20 @@ ___
 - [ ] Auto-loading of paper wallets in the clipboard w/ confirmation on app open
 
 #### Immediate TODO
+
+#### TODO / Improvements
 - [ ] fix bug with account balance of current wallet in accounts screen being incorrectly displayed as 0
 - [ ] cache json from /reps and /known
 - [ ] set random representative for new accounts using nano.to/reps
-
-#### less important TODO
 - [ ] provide a discount for usernames registered through nautilus
-- [ ] setting that let you choose which username to display in the app if multiple are registered
+- [ ] setting that lets you choose which username to display in the app if multiple are registered
+
+## Planned features
 - [ ] paper wallet generator / sender in app
-- [ ] request / pay buttons from usernames [requires server-side work]
+- [ ] [in-progress] request / pay buttons from usernames [requires server-side work]
+   - Push notifications for requests
+
+
 
 #### Changes so far
 - [x] removed natricons
@@ -75,6 +80,9 @@ ___
 - [x] replace android/app/src/main/ic_launcher-web.png *must* be 512x512 for the play store
 - [x] fix "invalid favorite" error when sending an invalid username
 - [x] change @ to ★ on the send screen
+- [x] nyano mode, complete with unit changes
+- [x] start work on generating paper wallets
+
 
 <div style="display: flex; flex-direction: row">
    <img src="/screenshots/flutter_01.png" width="200">

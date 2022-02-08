@@ -14,7 +14,7 @@ import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 
-class SendCompleteSheet extends StatefulWidget {
+class RequestCompleteSheet extends StatefulWidget {
   final String amountRaw;
   final String destination;
   final String contactName;
@@ -22,12 +22,12 @@ class SendCompleteSheet extends StatefulWidget {
   final PaymentRequestMessage paymentRequest;
   final int natriconNonce;
 
-  SendCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.paymentRequest, this.natriconNonce}) : super();
+  RequestCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.paymentRequest, this.natriconNonce}) : super();
 
-  _SendCompleteSheetState createState() => _SendCompleteSheetState();
+  _RequestCompleteSheetState createState() => _RequestCompleteSheetState();
 }
 
-class _SendCompleteSheetState extends State<SendCompleteSheet> {
+class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
   String amount;
   String destinationAltered;
   bool isMantaTransaction;

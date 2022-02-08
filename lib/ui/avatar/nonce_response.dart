@@ -4,8 +4,8 @@ part 'nonce_response.g.dart';
 
 @JsonSerializable()
 class NonceResponse {
-  @JsonKey(name:'nonce')
-  int nonce;
+  @JsonKey(name: 'nonce')
+  int? nonce;
 
   NonceResponse({this.nonce}) : super();
 
