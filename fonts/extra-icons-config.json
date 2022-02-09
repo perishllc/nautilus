@@ -19,15 +19,33 @@
       "src": "fontawesome5"
     },
     {
-      "uid": "ca541e937b4d78aa1e6317f2f9c2a46a",
-      "css": "at",
-      "code": 61946,
-      "src": "fontawesome5"
-    },
-    {
       "uid": "c5dae27e563af547739c37198a00a389",
       "css": "wallet",
       "code": 62805,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "7fc08cf153b7ac3e49f17f1cde486995",
+      "css": "greater_than_equal",
+      "code": 62770,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "a0d1d084cadc28d45eb9d0c87dd3f350",
+      "css": "less_than_equal",
+      "code": 62775,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "c17824ded7381f0f49e44025a0205b74",
+      "css": "less_than",
+      "code": 62774,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "38ff286c876d143e85d5b19c17239193",
+      "css": "greater_than",
+      "code": 62769,
       "src": "fontawesome5"
     }
   ]

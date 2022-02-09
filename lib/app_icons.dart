@@ -80,6 +80,9 @@ class AppIcons {
   // could be done eventually, but for now I'm just including the extra font file
   static const IconData heart = IconData(0xf004, fontFamily: _eFontFam, fontPackage: _kFontPkg);
   static const IconData star = IconData(0xf005, fontFamily: _eFontFam, fontPackage: _kFontPkg);
-  // static const IconData at = IconData(0xf1fa, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData greater_than = IconData(0xf531, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData greater_than_equal = IconData(0xf532, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData less_than = IconData(0xf536, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData less_than_equal = IconData(0xf537, fontFamily: _eFontFam, fontPackage: _kFontPkg);
   static const IconData wallet = IconData(0xf555, fontFamily: _eFontFam, fontPackage: _kFontPkg);
 }

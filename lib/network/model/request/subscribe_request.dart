@@ -6,22 +6,22 @@ part 'subscribe_request.g.dart';
 
 @JsonSerializable()
 class SubscribeRequest extends BaseRequest {
-  @JsonKey(name:'action')
+  @JsonKey(name: 'action')
   String action;
 
-  @JsonKey(name:'account', includeIfNull: false)
+  @JsonKey(name: 'account', includeIfNull: false)
   String account;
 
-  @JsonKey(name:'currency', includeIfNull: false)
+  @JsonKey(name: 'currency', includeIfNull: false)
   String currency;
 
-  @JsonKey(name:'uuid', includeIfNull: false)
+  @JsonKey(name: 'uuid', includeIfNull: false)
   String uuid;
 
-  @JsonKey(name:'fcm_token_v2', includeIfNull: false)
+  @JsonKey(name: 'fcm_token_v2', includeIfNull: false)
   String fcmToken;
 
-  @JsonKey(name:'notification_enabled')
+  @JsonKey(name: 'notification_enabled')
   bool notificationEnabled;
 
   SubscribeRequest({this.action = Actions.SUBSCRIBE, this.account, this.currency, this.uuid, this.fcmToken, this.notificationEnabled}) : super();

@@ -116,6 +116,9 @@ class StateContainerState extends State<StateContainer> {
   Map<String, String> natriconNonce = Map<String, String>();
   Map<String, String> nyaniconNonce = Map<String, String>();
 
+  // min raw for receive
+  String minRawReceive = "0";
+
   // Active alert
   AlertResponseItem activeAlert;
   AlertResponseItem settingsAlert;
@@ -290,6 +293,10 @@ class StateContainerState extends State<StateContainer> {
     // Get nyanicon pref
     sl.get<SharedPrefsUtil>().getUseNyanicon().then((useNyanicon) {
       setNyaniconOn(useNyanicon);
+    });
+    // Get min raw receive pref
+    sl.get<SharedPrefsUtil>().getMinRawReceive().then((minRawReceive) {
+      setMinRawReceive(minRawReceive);
     });
     // make sure nano API databases are up to date
     // TODO: only call when out of date
@@ -521,10 +528,17 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
-  // Change natricon setting
+  // Change nyanicon setting
   void setNyaniconOn(bool nyaniconOn) {
     setState(() {
       this.nyaniconOn = nyaniconOn;
+    });
+  }
+
+  // Change natricon setting
+  void setMinRawReceive(String minRaw) {
+    setState(() {
+      this.minRawReceive = minRaw;
     });
   }
 
@@ -561,6 +575,12 @@ class StateContainerState extends State<StateContainer> {
       // Bump min receive to 0.05 NANO
       receiveThreshold = BigInt.from(5).pow(28).toString();
     }
+    // get the preference for the receive threshold:
+    sl.get<SharedPrefsUtil>().getMinRawReceive().then((String minRaw) {
+      if (minRaw != "0") {
+        receiveThreshold = minRaw;
+      }
+    });
     // Set currency locale here for the UI to access
     sl.get<SharedPrefsUtil>().getCurrency(deviceLocale).then((currency) {
       setState(() {

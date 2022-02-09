@@ -3,6 +3,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
+import 'package:nautilus_wallet_flutter/model/min_raw_setting.dart';
 import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
 import 'package:nautilus_wallet_flutter/model/nyanicon_option.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
@@ -71,6 +72,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   NotificationSetting _curNotificiationSetting = NotificationSetting(NotificationOptions.ON);
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
   NyaniconSetting _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
+  MinRawSetting _curMinRawSetting = MinRawSetting(MinRawOptions.OFF);
   UnlockSetting _curUnlockSetting = UnlockSetting(UnlockOption.NO);
   LockTimeoutSetting _curTimeoutSetting = LockTimeoutSetting(LockTimeoutOption.ONE);
   ThemeSetting _curThemeSetting = ThemeSetting(ThemeOptions.NAUTILUS);
@@ -81,6 +83,13 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   bool _contactsOpen;
 
   bool notNull(Object o) => o != null;
+
+  static const String NYANO_RAW = "1000000000000000000000000";
+  static const String TEN_NYANO = "10000000000000000000000000";
+  static const String HUNDRED_NYANO = "100000000000000000000000000";
+  static const String THOUSAND_NYANO = "1000000000000000000000000000";
+  static const String TEN_THOUSAND_NYANO = "10000000000000000000000000000";
+  static const String HUNDRED_THOUSAND_NYANO = "100000000000000000000000000000";
 
   // Called if transfer fails
   void transferError() {
@@ -133,6 +142,34 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     sl.get<SharedPrefsUtil>().getUseNyanicon().then((useNyanicon) {
       setState(() {
         _curNyaniconSetting = useNyanicon ? NyaniconSetting(NyaniconOptions.ON) : NyaniconSetting(NyaniconOptions.OFF);
+      });
+    });
+    // Get min raw setting
+    sl.get<SharedPrefsUtil>().getMinRawReceive().then((minRawReceive) {
+      setState(() {
+        switch (minRawReceive) {
+          case "0":
+            _curMinRawSetting = MinRawSetting(MinRawOptions.OFF);
+            break;
+          case NYANO_RAW:
+            _curMinRawSetting = MinRawSetting(MinRawOptions.NYANO);
+            break;
+          case TEN_NYANO:
+            _curMinRawSetting = MinRawSetting(MinRawOptions.TEN_NYANO);
+            break;
+          case HUNDRED_NYANO:
+            _curMinRawSetting = MinRawSetting(MinRawOptions.HUNDRED_NYANO);
+            break;
+          case THOUSAND_NYANO:
+            _curMinRawSetting = MinRawSetting(MinRawOptions.THOUSAND_NYANO);
+            break;
+          case TEN_THOUSAND_NYANO:
+            _curMinRawSetting = MinRawSetting(MinRawOptions.TEN_THOUSAND_NYANO);
+            break;
+          case HUNDRED_THOUSAND_NYANO:
+            _curMinRawSetting = MinRawSetting(MinRawOptions.HUNDRED_THOUSAND_NYANO);
+            break;
+        }
       });
     });
     // Get default theme settings
@@ -441,6 +478,97 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           setState(() {
             StateContainer.of(context).setNyaniconOn(false);
             _curNyaniconSetting = NyaniconSetting(NyaniconOptions.OFF);
+          });
+        });
+        break;
+    }
+  }
+
+  List<Widget> _buildMinRawOptions() {
+    List<Widget> ret = new List();
+    MinRawOptions.values.forEach((MinRawOptions value) {
+      ret.add(SimpleDialogOption(
+        onPressed: () {
+          Navigator.pop(context, value);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            MinRawSetting(value).getDisplayName(context),
+            style: AppStyles.textStyleDialogOptions(context),
+          ),
+        ),
+      ));
+    });
+    return ret;
+  }
+
+  Future<void> _minRawDialog() async {
+    switch (await showDialog<MinRawOptions>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            title: Text(
+              AppLocalization.of(context).receiveMinimum,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            children: _buildMinRawOptions(),
+          );
+        })) {
+      case MinRawOptions.OFF:
+        sl.get<SharedPrefsUtil>().setMinRawReceive("0").then((result) {
+          setState(() {
+            StateContainer.of(context).setMinRawReceive("0");
+            _curMinRawSetting = MinRawSetting(MinRawOptions.OFF);
+          });
+        });
+        break;
+      case MinRawOptions.NYANO:
+        sl.get<SharedPrefsUtil>().setMinRawReceive(NYANO_RAW).then((result) {
+          setState(() {
+            StateContainer.of(context).setMinRawReceive(NYANO_RAW);
+            _curMinRawSetting = MinRawSetting(MinRawOptions.NYANO);
+          });
+        });
+        break;
+      case MinRawOptions.TEN_NYANO:
+        sl.get<SharedPrefsUtil>().setMinRawReceive(TEN_NYANO).then((result) {
+          setState(() {
+            StateContainer.of(context).setMinRawReceive(TEN_NYANO);
+            _curMinRawSetting = MinRawSetting(MinRawOptions.TEN_NYANO);
+          });
+        });
+        break;
+      case MinRawOptions.HUNDRED_NYANO:
+        sl.get<SharedPrefsUtil>().setMinRawReceive(HUNDRED_NYANO).then((result) {
+          setState(() {
+            StateContainer.of(context).setMinRawReceive(HUNDRED_NYANO);
+            _curMinRawSetting = MinRawSetting(MinRawOptions.HUNDRED_NYANO);
+          });
+        });
+        break;
+      case MinRawOptions.THOUSAND_NYANO:
+        sl.get<SharedPrefsUtil>().setMinRawReceive(THOUSAND_NYANO).then((result) {
+          setState(() {
+            StateContainer.of(context).setMinRawReceive(THOUSAND_NYANO);
+            _curMinRawSetting = MinRawSetting(MinRawOptions.THOUSAND_NYANO);
+          });
+        });
+        break;
+      case MinRawOptions.TEN_THOUSAND_NYANO:
+        sl.get<SharedPrefsUtil>().setMinRawReceive(TEN_THOUSAND_NYANO).then((result) {
+          setState(() {
+            StateContainer.of(context).setMinRawReceive(TEN_THOUSAND_NYANO);
+            _curMinRawSetting = MinRawSetting(MinRawOptions.TEN_THOUSAND_NYANO);
+          });
+        });
+        break;
+      case MinRawOptions.HUNDRED_THOUSAND_NYANO:
+        sl.get<SharedPrefsUtil>().setMinRawReceive(HUNDRED_THOUSAND_NYANO).then((result) {
+          setState(() {
+            StateContainer.of(context).setMinRawReceive(HUNDRED_THOUSAND_NYANO);
+            _curMinRawSetting = MinRawSetting(MinRawOptions.HUNDRED_THOUSAND_NYANO);
           });
         });
         break;
@@ -1296,6 +1424,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       });
                       _securityController.forward();
                     }),
+                    Divider(
+                      height: 2,
+                      color: StateContainer.of(context).curTheme.text15,
+                    ),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context).receiveMinimum, _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,

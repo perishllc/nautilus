@@ -49,6 +49,8 @@ class SharedPrefsUtil {
   static const String use_natricon = 'nautilus_use_natricon';
   // Nyanicon setting
   static const String use_nyanicon = 'nautilus_use_nyanicon';
+  // spam prevention min-RAW for receives
+  static const String min_raw_receive = '0';
 
   // For plain-text data
   Future<void> set(String key, value) async {
@@ -336,6 +338,14 @@ class SharedPrefsUtil {
 
   Future<bool> getUseNyanicon() async {
     return await get(use_nyanicon, defaultValue: false);
+  }
+
+  Future<void> setMinRawReceive(String minRawReceive) async {
+    return await set(min_raw_receive, minRawReceive);
+  }
+
+  Future<String> getMinRawReceive() async {
+    return await get(min_raw_receive, defaultValue: "0");
   }
 
   Future<void> dismissAlert(AlertResponseItem alert) async {

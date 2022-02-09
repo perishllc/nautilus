@@ -105,12 +105,12 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                       alignment: Alignment.centerLeft,
                       child: Column(
                         children: <Widget>[
-                          AutoSizeText(
-                            AppLocalization.of(context).secretInfo,
-                            style: AppStyles.textStyleParagraph(context),
-                            maxLines: 5,
-                            stepGranularity: 0.5,
-                          ),
+                          // AutoSizeText(
+                          //   AppLocalization.of(context).secretInfo,
+                          //   style: AppStyles.textStyleParagraph(context),
+                          //   maxLines: 5,
+                          //   stepGranularity: 0.5,
+                          // ),
                           Container(
                             margin: EdgeInsetsDirectional.only(top: 15),
                             child: Text("$paper_wallet_seed $paper_wallet_account"),

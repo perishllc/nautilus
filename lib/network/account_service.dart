@@ -48,7 +48,7 @@ String _SERVER_ADDRESS_HTTP = "https://app.perish.co/api";
 String _SERVER_ADDRESS_ALERTS = "https://app.perish.co/alerts";
 
 const String _FALLBACK_SERVER_ADDRESS = "wss://app.natrium.io";
-const String _FALLBACK_SERVER_ADDRESS_HTTP = "https://app.perish.io/api";
+const String _FALLBACK_SERVER_ADDRESS_HTTP = "https://app.natrium.io/api";
 const String _FALLBACK_SERVER_ADDRESS_ALERTS = "https://app.natrium.io/alerts";
 
 Map decodeJson(dynamic src) {
@@ -125,9 +125,9 @@ class AccountService {
       socket.destroy();
     }).catchError((error) {
       // switch to fallback servers:
-      String _SERVER_ADDRESS = _FALLBACK_SERVER_ADDRESS;
-      String _SERVER_ADDRESS_HTTP = _FALLBACK_SERVER_ADDRESS_HTTP;
-      String _SERVER_ADDRESS_ALERTS = _FALLBACK_SERVER_ADDRESS_ALERTS;
+      _SERVER_ADDRESS = _FALLBACK_SERVER_ADDRESS;
+      _SERVER_ADDRESS_HTTP = _FALLBACK_SERVER_ADDRESS_HTTP;
+      _SERVER_ADDRESS_ALERTS = _FALLBACK_SERVER_ADDRESS_ALERTS;
     });
 
     try {
@@ -210,7 +210,7 @@ class AccountService {
     await _lock.synchronized(() async {
       _isConnected = true;
       _isConnecting = false;
-      //log.d("Received $message");
+      log.d("Received $message");
       Map msg = await compute(decodeJson, message);
       // Determine response type
       if (msg.containsKey("uuid") ||

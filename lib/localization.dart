@@ -436,6 +436,10 @@ class AppLocalization {
     return Intl.message("Theme", desc: 'theme_header', name: 'themeHeader');
   }
 
+  String get receiveMinimum {
+    return Intl.message("Receive Minimum", desc: 'receive_minimum', name: 'receiveMinimum');
+  }
+
   String get changeRepButton {
     return Intl.message("Change", desc: 'change_representative_change', name: 'changeRepButton');
   }
