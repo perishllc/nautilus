@@ -6,10 +6,11 @@ part of 'nonce_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NonceResponse _$NonceResponseFromJson(Map<String, dynamic> json) =>
-    NonceResponse(
-      nonce: json['nonce'] as int?,
-    );
+NonceResponse _$NonceResponseFromJson(Map<String, dynamic> json) {
+  return NonceResponse(
+    nonce: json['nonce'] as int,
+  );
+}
 
 Map<String, dynamic> _$NonceResponseToJson(NonceResponse instance) =>
     <String, dynamic>{

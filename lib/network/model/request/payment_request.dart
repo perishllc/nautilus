@@ -12,13 +12,20 @@ class PaymentRequest extends BaseRequest {
   @JsonKey(name: 'account')
   String account;
 
-  @JsonKey(name: 'count', includeIfNull: false)
-  int count;
+  @JsonKey(name: 'amount_raw')
+  String amount_raw;
 
-  PaymentRequest({String action, String account, int count}) : super() {
-    this.action = Actions.ACCOUNT_HISTORY;
+  @JsonKey(name: 'requesting_account')
+  String requesting_account;
+
+  // @JsonKey(name: 'username')
+  // String username;
+
+  PaymentRequest({String action, String account, String amount_raw, String requesting_account}) : super() {
+    this.action = Actions.REQUEST_PAYMENT;
     this.account = account ?? "";
-    this.count = count ?? 3000;
+    this.amount_raw = amount_raw ?? "";
+    this.requesting_account = requesting_account ?? "";
   }
 
   factory PaymentRequest.fromJson(Map<String, dynamic> json) => _$PaymentRequestFromJson(json);

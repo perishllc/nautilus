@@ -3,7 +3,7 @@ import 'package:decimal/decimal.dart';
 
 part 'ninja_node.g.dart';
 
-double? _toDouble(v) {
+double _toDouble(v) {
   return double.tryParse(v.toString());
 }
 
@@ -15,19 +15,19 @@ BigInt _toBigInt(v) {
 @JsonSerializable()
 class NinjaNode {
   @JsonKey(name: 'votingweight', fromJson: _toBigInt)
-  BigInt? votingWeight;
+  BigInt votingWeight;
 
   @JsonKey(name: 'uptime', fromJson: _toDouble)
-  double? uptime;
+  double uptime;
 
   @JsonKey(name: 'score')
-  int? score;
+  int score;
 
   @JsonKey(name: 'account')
-  String? account;
+  String account;
 
   @JsonKey(name: 'alias')
-  String? alias;
+  String alias;
 
   NinjaNode({this.votingWeight, this.uptime, this.score, this.account, this.alias});
 

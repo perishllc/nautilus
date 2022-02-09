@@ -6,7 +6,7 @@ part 'account_balance_item.g.dart';
 
 @JsonSerializable()
 class AccountBalanceItem {
-  @JsonKey(name:"balance")
+  @JsonKey(name: "balance")
   String balance;
 
   @JsonKey(name: "pending")

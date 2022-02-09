@@ -5,29 +5,29 @@ import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 
 part 'account_history_response_item.g.dart';
 
-int? _toInt(String v) => v == null ? 0 : int.tryParse(v);
+int _toInt(String v) => v == null ? 0 : int.tryParse(v);
 
 @JsonSerializable()
 class AccountHistoryResponseItem {
   @JsonKey(name: 'type')
-  String? type;
+  String type;
 
   @JsonKey(name: 'account')
-  String? account;
+  String account;
 
   @JsonKey(name: 'amount')
-  String? amount;
+  String amount;
 
   @JsonKey(name: 'hash')
-  String? hash;
+  String hash;
 
   @JsonKey(name: 'height', fromJson: _toInt)
-  int? height;
+  int height;
 
   @JsonKey(ignore: true)
-  bool? confirmed;
+  bool confirmed;
 
-  AccountHistoryResponseItem({String? type, String? account, String? amount, String? hash, int? height, this.confirmed}) {
+  AccountHistoryResponseItem({String type, String account, String amount, String hash, int height, this.confirmed}) {
     this.type = type;
     this.account = account;
     this.amount = amount;
@@ -35,19 +35,19 @@ class AccountHistoryResponseItem {
     this.height = height;
   }
 
-  String? getShortString() {
-    return new Address(this.account!).getShortString();
+  String getShortString() {
+    return new Address(this.account).getShortString();
   }
 
-  String? getShorterString() {
-    return new Address(this.account!).getShorterString();
+  String getShorterString() {
+    return new Address(this.account).getShorterString();
   }
 
   /**
    * Return amount formatted for use in the UI
    */
   String getFormattedAmount() {
-    return NumberUtil.getRawAsUsableString(amount!);
+    return NumberUtil.getRawAsUsableString(amount);
   }
 
   factory AccountHistoryResponseItem.fromJson(Map<String, dynamic> json) => _$AccountHistoryResponseItemFromJson(json);

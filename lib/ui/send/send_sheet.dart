@@ -140,20 +140,22 @@ class _SendSheetState extends State<SendSheet> {
           _addressValidAndUnfocused = false;
         });
         _sendAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAddressController.text.length));
-        if (_sendAddressController.text.length > 0 && !_sendAddressController.text.startsWith("nano_") && !_sendAddressController.text.startsWith("★")) {
-          sl.get<DBHelper>().getUsersWithNameLike(_sendAddressController.text).then((userList) {
-            setState(() {
-              _users = userList;
+        if (_sendAddressController.text.length > 0 && !_sendAddressController.text.startsWith("nano_")) {
+          if (_sendAddressController.text.startsWith("@")) {
+            sl.get<DBHelper>().getUsersWithNameLike(_sendAddressController.text.substring(1)).then((userList) {
+              setState(() {
+                _users = userList;
+              });
             });
-          });
-        }
-        if (_sendAddressController.text.startsWith("★")) {
-          sl.get<DBHelper>().getContactsWithNameLike(_sendAddressController.text).then((userList) {
-            setState(() {
-              _users = userList;
+          } else if (_sendAddressController.text.startsWith("★")) {
+            sl.get<DBHelper>().getContactsWithNameLike(_sendAddressController.text.substring(1)).then((userList) {
+              setState(() {
+                _users = userList;
+              });
             });
-          });
+          }
         }
+
         if (_sendAddressController.text.length == 0) {
           setState(() {
             _users = [];
@@ -167,7 +169,7 @@ class _SendSheetState extends State<SendSheet> {
             _addressValidAndUnfocused = true;
           }
         });
-        if (_sendAddressController.text.trim() == "@") {
+        if (_sendAddressController.text.trim() == "@" || _sendAddressController.text.trim() == "★") {
           _sendAddressController.text = "";
           setState(() {
             _showContactButton = true;
@@ -476,7 +478,7 @@ class _SendSheetState extends State<SendSheet> {
                         // verifyies the input is a user in the db
                         if (!_sendAddressController.text.startsWith("nano_") && validRequest) {
                           // Need to make sure its a valid contact or user
-                          sl.get<DBHelper>().getUserOrContactWithName(_sendAddressController.text).then((user) {
+                          sl.get<DBHelper>().getUserOrContactWithName(_sendAddressController.text.substring(1)).then((user) {
                             if (user == null) {
                               setState(() {
                                 if (_sendAddressController.text.startsWith("★")) {
@@ -753,7 +755,7 @@ class _SendSheetState extends State<SendSheet> {
           width: double.infinity - 5,
           child: FlatButton(
             onPressed: () {
-              _sendAddressController.text = (user is User) ? user.username : user.name;
+              _sendAddressController.text = (user is User) ? ("@" + user.username) : ("★" + user.name);
               _sendAddressFocusNode.unfocus();
               setState(() {
                 _isUser = true;
@@ -807,9 +809,9 @@ class _SendSheetState extends State<SendSheet> {
       }
     }
     // Validate address
-    // bool isUser = _sendAddressController.text.startsWith("@");
-    bool isUser = !_sendAddressController.text.startsWith("nano_") && !_sendAddressController.text.startsWith("★");
+    bool isUser = _sendAddressController.text.startsWith("@");
     bool isFavorite = _sendAddressController.text.startsWith("★");
+    bool isNano = _sendAddressController.text.startsWith("nano_");
     if (_sendAddressController.text.trim().isEmpty) {
       isValid = false;
       setState(() {
@@ -984,7 +986,7 @@ class _SendSheetState extends State<SendSheet> {
                       _pasteButtonVisible = false;
                       _showContactButton = false;
                     });
-                    _sendAddressController.text = user.username;
+                    _sendAddressController.text = "@" + user.username;
                   }
                 });
               }
@@ -999,7 +1001,17 @@ class _SendSheetState extends State<SendSheet> {
                 ? AppStyles.textStyleAddressText90(context)
                 : AppStyles.textStyleAddressPrimary(context),
         onChanged: (text) {
-          // commented so that it doesn't remove the @ symbol
+          bool isUser = text.startsWith("@");
+          bool isFavorite = text.startsWith("★");
+          bool isNano = text.startsWith("nano_");
+
+          // prevent spaces:
+          if (text.contains(" ")) {
+            text = text.replaceAll(" ", "");
+            _sendAddressController.text = text;
+            _sendAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAddressController.text.length));
+          }
+
           if (text.length > 0) {
             setState(() {
               _showContactButton = false;
@@ -1009,9 +1021,25 @@ class _SendSheetState extends State<SendSheet> {
               _showContactButton = true;
             });
           }
+          // add the @ back in:
+          if (text.length > 0 && !isUser && !isNano && !isFavorite) {
+            // add @ to the beginning of the string:
+            _sendAddressController.text = "@" + text;
+            _sendAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAddressController.text.length));
+            isUser = true;
+          }
+
+          if (text.length > 0 && text.startsWith("@nano_")) {
+            setState(() {
+              // remove the @ from the beginning of the string:
+              _sendAddressController.text = text.replaceFirst("@nano_", "nano_");
+              _sendAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAddressController.text.length));
+              isUser = false;
+            });
+          }
+
           // check if it's a real nano address:
-          bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
-          bool isFavorite = text.startsWith("★");
+          // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
           if (text.length == 0) {
             setState(() {
               _isUser = false;
@@ -1021,7 +1049,7 @@ class _SendSheetState extends State<SendSheet> {
             setState(() {
               _isUser = true;
             });
-            sl.get<DBHelper>().getUserSuggestionsWithNameLike(text).then((matchedList) {
+            sl.get<DBHelper>().getUserSuggestionsWithNameLike(text.substring(1)).then((matchedList) {
               setState(() {
                 _users = matchedList;
               });
@@ -1030,7 +1058,7 @@ class _SendSheetState extends State<SendSheet> {
             setState(() {
               _isUser = true;
             });
-            sl.get<DBHelper>().getContactsWithNameLike(text).then((matchedList) {
+            sl.get<DBHelper>().getContactsWithNameLike(text.substring(1)).then((matchedList) {
               setState(() {
                 _users = matchedList;
               });

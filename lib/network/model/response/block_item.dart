@@ -6,37 +6,37 @@ part 'block_item.g.dart';
 @JsonSerializable()
 class BlockItem {
   @JsonKey(name: "type")
-  String? type;
+  String type;
 
   @JsonKey(name: "account")
-  String? account;
+  String account;
 
   @JsonKey(name: "previous")
-  String? previous;
+  String previous;
 
   @JsonKey(name: "representative")
-  String? representative;
+  String representative;
 
   @JsonKey(name: "balance")
-  String? balance;
+  String balance;
 
   @JsonKey(name: "link")
-  String? link;
+  String link;
 
   @JsonKey(name: "link_as_account")
-  String? linkAsAccount;
+  String linkAsAccount;
 
   @JsonKey(name: "work")
-  String? work;
+  String work;
 
   @JsonKey(name: "signature")
-  String? signature;
+  String signature;
 
   @JsonKey(name: "destination")
-  String? destination;
+  String destination;
 
   @JsonKey(name: "source")
-  String? source;
+  String source;
 
   BlockItem(
       {this.type,

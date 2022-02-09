@@ -10,24 +10,24 @@ BlockInfoItem blockInfoItemFromJson(Map<dynamic, dynamic> json) {
 @JsonSerializable()
 class BlockInfoItem {
   @JsonKey(name: 'block_account')
-  String? blockAccount;
+  String blockAccount;
 
   @JsonKey(name: 'amount')
-  String? amount;
+  String amount;
 
   @JsonKey(name: 'balance')
-  String? balance;
+  String balance;
 
   @JsonKey(name: 'pending')
-  String? pending;
+  String pending;
 
   @JsonKey(name: 'source_account')
-  String? sourceAccount;
+  String sourceAccount;
 
   @JsonKey(name: 'contents')
-  String? contents;
+  String contents;
 
-  BlockInfoItem({String? blockAccount, String? amount, String? balance, String? pending, String? sourceAccount, String? contents}) {
+  BlockInfoItem({String blockAccount, String amount, String balance, String pending, String sourceAccount, String contents}) {
     this.blockAccount = blockAccount;
     this.amount = amount;
     this.balance = balance;

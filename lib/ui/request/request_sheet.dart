@@ -14,6 +14,7 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:nautilus_wallet_flutter/ui/request/request_complete_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/request/request_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
@@ -159,22 +160,22 @@ class _RequestSheetStateState extends State<RequestSheet> {
           _addressValidAndUnfocused = false;
         });
         _requestAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _requestAddressController.text.length));
-        if (_requestAddressController.text.length > 0 &&
-            !_requestAddressController.text.startsWith("nano_") &&
-            !_requestAddressController.text.startsWith("★")) {
-          sl.get<DBHelper>().getUsersWithNameLike(_requestAddressController.text).then((userList) {
-            setState(() {
-              _users = userList;
+        if (_requestAddressController.text.length > 0 && !_requestAddressController.text.startsWith("nano_")) {
+          if (_requestAddressController.text.startsWith("@")) {
+            sl.get<DBHelper>().getUsersWithNameLike(_requestAddressController.text.substring(1)).then((userList) {
+              setState(() {
+                _users = userList;
+              });
             });
-          });
-        }
-        if (_requestAddressController.text.startsWith("★")) {
-          sl.get<DBHelper>().getContactsWithNameLike(_requestAddressController.text).then((userList) {
-            setState(() {
-              _users = userList;
+          } else if (_requestAddressController.text.startsWith("★")) {
+            sl.get<DBHelper>().getContactsWithNameLike(_requestAddressController.text.substring(1)).then((userList) {
+              setState(() {
+                _users = userList;
+              });
             });
-          });
+          }
         }
+
         if (_requestAddressController.text.length == 0) {
           setState(() {
             _users = [];
@@ -188,7 +189,7 @@ class _RequestSheetStateState extends State<RequestSheet> {
             _addressValidAndUnfocused = true;
           }
         });
-        if (_requestAddressController.text.trim() == "@") {
+        if (_requestAddressController.text.trim() == "@" || _requestAddressController.text.trim() == "★") {
           _requestAddressController.text = "";
           setState(() {
             _showContactButton = true;
@@ -500,7 +501,50 @@ class _RequestSheetStateState extends State<RequestSheet> {
                         AppLocalization.of(context).requestPayment,
                         Dimens.BUTTON_BOTTOM_DIMENS,
                         disabled: _showShareCard, onPressed: () {
-                      // do nothing
+                      bool validRequest = _validateRequest();
+                      // verifyies the input is a user in the db
+                      if (!_requestAddressController.text.startsWith("nano_") && validRequest) {
+                        // Need to make sure its a valid contact or user
+                        sl.get<DBHelper>().getUserOrContactWithName(_requestAddressController.text.substring(1)).then((user) {
+                          if (user == null) {
+                            setState(() {
+                              if (_requestAddressController.text.startsWith("★")) {
+                                _addressValidationText = AppLocalization.of(context).favoriteInvalid;
+                              } else {
+                                _addressValidationText = AppLocalization.of(context).usernameInvalid;
+                              }
+                            });
+                          } else {
+                            Sheets.showAppHeightNineSheet(
+                                context: context,
+                                widget: RequestConfirmSheet(
+                                    amountRaw: _localCurrencyMode
+                                        ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                                        : _rawAmount == null
+                                            ? (StateContainer.of(context).nyanoMode)
+                                                ? NumberUtil.getNyanoAmountAsRaw(_requestAmountController.text)
+                                                : NumberUtil.getAmountAsRaw(_requestAmountController.text)
+                                            : _rawAmount,
+                                    destination: user.address,
+                                    userName: user is User ? user.username : null,
+                                    contactName: user is Contact ? user.name : null,
+                                    localCurrency: _localCurrencyMode ? _requestAmountController.text : null));
+                          }
+                        });
+                      } else if (validRequest) {
+                        Sheets.showAppHeightNineSheet(
+                            context: context,
+                            widget: RequestConfirmSheet(
+                                amountRaw: _localCurrencyMode
+                                    ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                                    : _rawAmount == null
+                                        ? (StateContainer.of(context).curTheme is NyanTheme)
+                                            ? NumberUtil.getNyanoAmountAsRaw(_requestAmountController.text)
+                                            : NumberUtil.getAmountAsRaw(_requestAmountController.text)
+                                        : _rawAmount,
+                                destination: _requestAddressController.text,
+                                localCurrency: _localCurrencyMode ? _requestAmountController.text : null));
+                      }
                     }),
                   ],
                 ),
@@ -530,43 +574,40 @@ class _RequestSheetStateState extends State<RequestSheet> {
         onPoppedCallback: () => animationOpen = false));
   }
 
-  Future<void> _doRequest() async {
-    try {
-      _showSendingAnimation(context);
-      // TODO:
-      // ProcessResponse resp = await sl.get<AccountService>().requestSend(
-      //     StateContainer.of(context).wallet.representative,
-      //     StateContainer.of(context).wallet.frontier,
-      //     widget.amountRaw,
-      //     destinationAltered,
-      //     StateContainer.of(context).wallet.address,
-      //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
-      //     max: widget.maxSend);
-      // if (widget.manta != null) {
-      //   widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
-      // }
-      // StateContainer.of(context).wallet.frontier = resp.hash;
-      // StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
-      // // Show complete
-      // // Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
-      // // String contactName = contact == null ? null : contact.name;
-      // Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-      // StateContainer.of(context).requestUpdate();
-      // if (widget.natriconNonce != null) {
-      //   setState(() {
-      //     StateContainer.of(context).updateNatriconNonce(StateContainer.of(context).selectedAccount.address, widget.natriconNonce);
-      //   });
-      // }
-      // Sheets.showAppHeightNineSheet(context: context, closeOnTap: true, removeUntilHome: true, widget: RequestCompleteSheet());
-    } catch (e) {
-      // Send failed
-      if (animationOpen) {
-        Navigator.of(context).pop();
-      }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
-      Navigator.of(context).pop();
-    }
-  }
+  // Future<void> _doRequest() async {
+  //   try {
+  //     _showSendingAnimation(context);
+  //     sl.get<AccountService>().requestPayment("nano_3bp14yai9rb16to6mk7m5kt4x8rsia6zmrak8phuo734t5mdf15odns66joo", "1000000000000000000000000");
+
+  //     // // TODO:
+  //     // ProcessResponse resp = await sl.get<AccountService>().requestSend(
+  //     //     StateContainer.of(context).wallet.representative,
+  //     //     StateContainer.of(context).wallet.frontier,
+  //     //     widget.amountRaw,
+  //     //     destinationAltered,
+  //     //     StateContainer.of(context).wallet.address,
+  //     //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
+  //     //     max: widget.maxSend);
+  //     // if (widget.manta != null) {
+  //     //   widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
+  //     // }
+  //     // StateContainer.of(context).wallet.frontier = resp.hash;
+  //     // StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
+  //     // // Show complete
+  //     // // Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
+  //     // // String contactName = contact == null ? null : contact.name;
+  //     // Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+  //     // StateContainer.of(context).requestUpdate();
+  //     // // Sheets.showAppHeightNineSheet(context: context, closeOnTap: true, removeUntilHome: true, widget: RequestCompleteSheet());
+  //   } catch (e) {
+  //     // Send failed
+  //     if (animationOpen) {
+  //       Navigator.of(context).pop();
+  //     }
+  //     UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
+  //     Navigator.of(context).pop();
+  //   }
+  // }
 
   String _convertLocalCurrencyToCrypto() {
     String convertedAmt = _requestAmountController.text.replaceAll(",", ".");
@@ -590,44 +631,6 @@ class _RequestSheetStateState extends State<RequestSheet> {
     convertedAmt = convertedAmt.replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
     convertedAmt = _localCurrencyFormat.currencySymbol + convertedAmt;
     return convertedAmt;
-  }
-
-  // Determine if this is a max send or not by comparing balances
-  bool _isMaxSend() {
-    // Sanitize commas
-    if (_requestAmountController.text.isEmpty) {
-      return false;
-    }
-    try {
-      String textField = _requestAmountController.text;
-      String balance;
-      if (_localCurrencyMode) {
-        balance =
-            StateContainer.of(context).wallet.getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
-      } else {
-        balance = StateContainer.of(context).wallet.getAccountBalanceDisplay(context).replaceAll(r",", "");
-      }
-      // Convert to Integer representations
-      int textFieldInt;
-      int balanceInt;
-      if (_localCurrencyMode) {
-        // Sanitize currency values into plain integer representations
-        textField = textField.replaceAll(",", ".");
-        String sanitizedTextField = NumberUtil.sanitizeNumber(textField);
-        balance = balance.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
-        balance = balance.replaceAll(",", ".");
-        String sanitizedBalance = NumberUtil.sanitizeNumber(balance);
-        textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toInt();
-        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toInt();
-      } else {
-        textField = textField.replaceAll(",", "");
-        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toInt();
-        balanceInt = (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toInt();
-      }
-      return textFieldInt == balanceInt;
-    } catch (e) {
-      return false;
-    }
   }
 
   void toggleLocalCurrency() {
@@ -682,7 +685,7 @@ class _RequestSheetStateState extends State<RequestSheet> {
           width: double.infinity - 5,
           child: FlatButton(
             onPressed: () {
-              _requestAddressController.text = (user is User) ? user.username : user.name;
+              _requestAddressController.text = (user is User) ? ("@" + user.username) : ("★" + user.name);
               _requestAddressFocusNode.unfocus();
               setState(() {
                 _isUser = true;
@@ -729,16 +732,17 @@ class _RequestSheetStateState extends State<RequestSheet> {
           _amountValidationText = AppLocalization.of(context).amountMissing;
         });
       } else if (sendAmount > balanceRaw) {
-        isValid = false;
-        setState(() {
-          _amountValidationText = AppLocalization.of(context).insufficientBalance;
-        });
+        // this is valid for a request
+        // isValid = false;
+        // setState(() {
+        //   _amountValidationText = AppLocalization.of(context).insufficientBalance;
+        // });
       }
     }
     // Validate address
-    // bool isUser = _requestAddressController.text.startsWith("@");
-    bool isUser = !_requestAddressController.text.startsWith("nano_") && !_requestAddressController.text.startsWith("★");
+    bool isUser = _requestAddressController.text.startsWith("@");
     bool isFavorite = _requestAddressController.text.startsWith("★");
+    bool isNano = _requestAddressController.text.startsWith("nano_");
     if (_requestAddressController.text.trim().isEmpty) {
       isValid = false;
       setState(() {
@@ -806,29 +810,7 @@ class _RequestSheetStateState extends State<RequestSheet> {
               },
             )
           : null,
-      suffixButton: TextFieldButton(
-        icon: AppIcons.max,
-        onPressed: () {
-          if (_isMaxSend()) {
-            return;
-          }
-          if (!_localCurrencyMode) {
-            _requestAmountController.text = StateContainer.of(context).wallet.getAccountBalanceDisplay(context).replaceAll(r",", "");
-            _requestAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _requestAddressController.text.length));
-          } else {
-            String localAmount = StateContainer.of(context)
-                .wallet
-                .getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
-            localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
-            localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
-            localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
-            _requestAmountController.text = _localCurrencyFormat.currencySymbol + localAmount;
-            _requestAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _requestAddressController.text.length));
-          }
-        },
-      ),
       fadeSuffixOnCondition: true,
-      suffixShowFirstCondition: !_isMaxSend(),
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       textAlign: TextAlign.center,
       onSubmitted: (text) {
@@ -913,7 +895,7 @@ class _RequestSheetStateState extends State<RequestSheet> {
                       _pasteButtonVisible = false;
                       _showContactButton = false;
                     });
-                    _requestAddressController.text = user.username;
+                    _requestAddressController.text = "@" + user.username;
                   }
                 });
               }
@@ -928,7 +910,17 @@ class _RequestSheetStateState extends State<RequestSheet> {
                 ? AppStyles.textStyleAddressText90(context)
                 : AppStyles.textStyleAddressPrimary(context),
         onChanged: (text) {
-          // commented so that it doesn't remove the @ symbol
+          bool isUser = text.startsWith("@");
+          bool isFavorite = text.startsWith("★");
+          bool isNano = text.startsWith("nano_");
+
+          // prevent spaces:
+          if (text.contains(" ")) {
+            text = text.replaceAll(" ", "");
+            _requestAddressController.text = text;
+            _requestAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _requestAddressController.text.length));
+          }
+
           if (text.length > 0) {
             setState(() {
               _showContactButton = false;
@@ -938,9 +930,25 @@ class _RequestSheetStateState extends State<RequestSheet> {
               _showContactButton = true;
             });
           }
+          // add the @ back in:
+          if (text.length > 0 && !isUser && !isNano && !isFavorite) {
+            // add @ to the beginning of the string:
+            _requestAddressController.text = "@" + text;
+            _requestAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _requestAddressController.text.length));
+            isUser = true;
+          }
+
+          if (text.length > 0 && text.startsWith("@nano_")) {
+            setState(() {
+              // remove the @ from the beginning of the string:
+              _requestAddressController.text = text.replaceFirst("@nano_", "nano_");
+              _requestAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _requestAddressController.text.length));
+              isUser = false;
+            });
+          }
+
           // check if it's a real nano address:
-          bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
-          bool isFavorite = text.startsWith("★");
+          // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
           if (text.length == 0) {
             setState(() {
               _isUser = false;
@@ -950,7 +958,7 @@ class _RequestSheetStateState extends State<RequestSheet> {
             setState(() {
               _isUser = true;
             });
-            sl.get<DBHelper>().getUserSuggestionsWithNameLike(text).then((matchedList) {
+            sl.get<DBHelper>().getUserSuggestionsWithNameLike(text.substring(1)).then((matchedList) {
               setState(() {
                 _users = matchedList;
               });
@@ -959,7 +967,7 @@ class _RequestSheetStateState extends State<RequestSheet> {
             setState(() {
               _isUser = true;
             });
-            sl.get<DBHelper>().getContactsWithNameLike(text).then((matchedList) {
+            sl.get<DBHelper>().getContactsWithNameLike(text.substring(1)).then((matchedList) {
               setState(() {
                 _users = matchedList;
               });

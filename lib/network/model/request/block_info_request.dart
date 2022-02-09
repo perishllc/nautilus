@@ -7,12 +7,12 @@ part 'block_info_request.g.dart';
 @JsonSerializable()
 class BlockInfoRequest extends BaseRequest {
   @JsonKey(name: 'action')
-  String? action;
+  String action;
 
   @JsonKey(name: 'hash')
-  String? hash;
+  String hash;
 
-  BlockInfoRequest({String? hash}) {
+  BlockInfoRequest({String hash}) {
     this.action = Actions.BLOCK_INFO;
     this.hash = hash;
   }

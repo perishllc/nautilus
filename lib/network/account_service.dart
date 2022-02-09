@@ -24,6 +24,7 @@ import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/subscribe_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/account_history_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/payment_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/accounts_balances_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/pending_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/process_request.dart';
@@ -31,6 +32,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/account_history_r
 import 'package:nautilus_wallet_flutter/network/model/response/block_info_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/payment_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/callback_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
@@ -40,29 +42,9 @@ import 'package:nautilus_wallet_flutter/network/model/response/process_response.
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 
 // Server Connection String
-// const String _SERVER_ADDRESS = "wss://app.natrium.io";
-// const String _SERVER_ADDRESS_HTTP = "https://app.natrium.io/api";
-// const String _SERVER_ADDRESS_ALERTS = "https://app.natrium.io/alerts";
-
-// const String _SERVER_ADDRESS = "wss://app.perish.co";
-// const String _SERVER_ADDRESS_HTTP = "https://app.perish.co/api";
-// const String _SERVER_ADDRESS_ALERTS = "https://app.perish.co/alerts";
-
-// const String _SERVER_ADDRESS = "ws://192.168.1.250";
-// const String _SERVER_ADDRESS_HTTP = "http://192.168.1.250/api";
-// const String _SERVER_ADDRESS_ALERTS = "http://192.168.1.250/alerts";
-
-// const String _SERVER_ADDRESS = "wss://107.199.173.141";
-// const String _SERVER_ADDRESS_HTTP = "http://107.199.173.141/api";
-// const String _SERVER_ADDRESS_ALERTS = "http://107.199.173.141/alerts";
-
-// const String _SERVER_ADDRESS = "ws://192.168.1.250";
-const String _SERVER_ADDRESS_HTTP = "http://192.168.1.250/api";
-const String _SERVER_ADDRESS_ALERTS = "http://192.168.1.250/alerts";
-
-const String _SERVER_ADDRESS = "ws://app.perish.co";
-// const String _SERVER_ADDRESS_HTTP = "http://app.perish.co/api";
-// const String _SERVER_ADDRESS_ALERTS = "http://app.perish.co/alerts";
+const String _SERVER_ADDRESS = "wss://app.perish.co";
+const String _SERVER_ADDRESS_HTTP = "https://app.perish.co/api";
+const String _SERVER_ADDRESS_ALERTS = "https://app.perish.co/alerts";
 
 Map decodeJson(dynamic src) {
   return json.decode(src);
@@ -351,16 +333,8 @@ class AccountService {
   // HTTP API
 
   Future<dynamic> makeHttpRequest(BaseRequest request) async {
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    print(_SERVER_ADDRESS_HTTP);
-    print(request.toJson());
-
-    // await http.post(Uri.parse("http://192.168.1.250/api"), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
-
     http.Response response =
         await http.post(Uri.parse(_SERVER_ADDRESS_HTTP), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
-
-    print("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
 
     if (response.statusCode != 200) {
       return null;
@@ -370,7 +344,6 @@ class AccountService {
       return ErrorResponse.fromJson(decoded);
     }
 
-    print(decoded);
     return decoded;
   }
 
@@ -419,10 +392,25 @@ class AccountService {
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
+
+    if (response == null) {
+      throw Exception("Received null for history");
+    }
+
     if (response["history"] == "") {
       response["history"] = [];
     }
     return AccountHistoryResponse.fromJson(response);
+  }
+
+  // new:
+  // request money from an account:
+  /*Future<PaymentResponse> */ Future<void> requestPayment(String account, String amount_raw, String requesting_account) async {
+    PaymentRequest request = PaymentRequest(account: account, amount_raw: amount_raw, requesting_account: requesting_account);
+    dynamic response = await makeHttpRequest(request);
+    if (response is ErrorResponse) {
+      throw Exception("Received error ${response.error}");
+    }
   }
 
   Future<AccountsBalancesResponse> requestAccountsBalances(List<String> accounts) async {
@@ -485,33 +473,6 @@ class AccountService {
 
     return await requestProcess(processRequest);
   }
-
-  // new:
-  // request money from an account:
-  // Future<ProcessResponse> requestRequestSend(String representative, String previous, String sendAmount, String link, String account, String privKey,
-  //     {bool max = false}) async {
-  //   // StateBlock sendBlock = StateBlock(
-  //   //     subtype: BlockTypes.SEND,
-  //   //     previous: previous,
-  //   //     representative: representative,
-  //   //     balance: max ? "0" : sendAmount,
-  //   //     link: link,
-  //   //     account: account,
-  //   //     privKey: privKey);
-
-  //   // BlockInfoItem previousInfo = await requestBlockInfo(previous);
-  //   // StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents));
-
-  //   // // Update data on our next pending request
-  //   // sendBlock.representative = previousBlock.representative;
-  //   // sendBlock.setBalance(previousBlock.balance);
-  //   // await sendBlock.sign(privKey);
-
-  //   // // Process
-  //   // ProcessRequest processRequest = ProcessRequest(block: json.encode(sendBlock.toJson()), subType: BlockTypes.SEND);
-
-  //   // return await requestProcess(processRequest);
-  // }
 
   Future<ProcessResponse> requestOpen(String balance, String link, String account, String privKey, {String representative}) async {
     representative = representative ?? await sl.get<SharedPrefsUtil>().getRepresentative();

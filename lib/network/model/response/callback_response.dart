@@ -13,19 +13,19 @@ CallbackResponse callbackResponseFromJson(Map<dynamic, dynamic> json) {
 @JsonSerializable()
 class CallbackResponse {
   @JsonKey(name: "account")
-  String? account;
+  String account;
 
   @JsonKey(name: "hash")
-  String? hash;
+  String hash;
 
   @JsonKey(name: "block")
-  BlockItem? block;
+  BlockItem block;
 
   @JsonKey(name: "amount")
-  String? amount;
+  String amount;
 
   @JsonKey(name: "is_send")
-  String? isSend;
+  String isSend;
 
   CallbackResponse({this.account, this.hash, this.block, this.amount, this.isSend});
 

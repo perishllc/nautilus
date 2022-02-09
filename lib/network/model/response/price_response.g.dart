@@ -6,11 +6,12 @@ part of 'price_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PriceResponse _$PriceResponseFromJson(Map<String, dynamic> json) =>
-    PriceResponse()
-      ..currency = json['currency'] as String?
-      ..price = _toDouble(json['price'])
-      ..btcPrice = _toDouble(json['btc']);
+PriceResponse _$PriceResponseFromJson(Map<String, dynamic> json) {
+  return PriceResponse()
+    ..currency = json['currency'] as String
+    ..price = _toDouble(json['price'])
+    ..btcPrice = _toDouble(json['btc']);
+}
 
 Map<String, dynamic> _$PriceResponseToJson(PriceResponse instance) =>
     <String, dynamic>{

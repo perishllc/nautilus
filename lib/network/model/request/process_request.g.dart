@@ -6,12 +6,13 @@ part of 'process_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ProcessRequest _$ProcessRequestFromJson(Map<String, dynamic> json) =>
-    ProcessRequest(
-      block: json['block'] as String,
-      doWork: json['do_work'] as bool? ?? true,
-      subType: json['subtype'] as String,
-    )..action = json['action'] as String;
+ProcessRequest _$ProcessRequestFromJson(Map<String, dynamic> json) {
+  return ProcessRequest(
+    block: json['block'] as String,
+    doWork: json['do_work'] as bool,
+    subType: json['subtype'] as String,
+  )..action = json['action'] as String;
+}
 
 Map<String, dynamic> _$ProcessRequestToJson(ProcessRequest instance) =>
     <String, dynamic>{

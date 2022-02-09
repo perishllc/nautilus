@@ -324,8 +324,16 @@ class AppLocalization {
     return Intl.message("Sending", desc: 'send_sending', name: 'sending');
   }
 
+  String get requesting {
+    return Intl.message("Requesting", desc: 'request_requesting', name: 'requesting');
+  }
+
   String get to {
     return Intl.message("To", desc: 'send_to', name: 'to');
+  }
+
+  String get from {
+    return Intl.message("From", desc: 'request_from', name: 'from');
   }
 
   String get sendAmountConfirm {
@@ -338,6 +346,10 @@ class AppLocalization {
 
   String get sendError {
     return Intl.message("An error occurred. Try again later.", desc: 'send_generic_error', name: 'sendError');
+  }
+
+  String get requestError {
+    return Intl.message("This user doesn't seem to have Nautilus installed, or has notifications disabled.", desc: 'send_generic_error', name: 'sendError');
   }
 
   String get mantaError {

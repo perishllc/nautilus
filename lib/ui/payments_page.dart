@@ -141,31 +141,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  Future<void> _processPaymentRequest(dynamic message) async {
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    if (message.containsKey("payment_request")) {
-      String amount_raw = message['amount_raw'];
-
-      print(amount_raw);
-
-      // Remove any other screens from stack
-      // Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-
-      // Go to send with address
-      Future.delayed(Duration(milliseconds: 500), () {
-        Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
-
-        Sheets.showAppHeightNineSheet(
-            context: context,
-            widget: SendSheet(
-              localCurrency: StateContainer.of(context).curCurrency,
-              address: "nano_1i4fcujt49de3mio9eb9y5jakw8o9m1za6ntidxn4nkwgnunktpy54z1ma58",
-              quickSendAmount: "1000000000000000000000000",
-            ));
-      });
-    }
-  }
-
   void getNotificationPermissions() async {
     try {
       NotificationSettings settings = await _firebaseMessaging.requestPermission(sound: true, badge: true, alert: true);
@@ -244,7 +219,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       try {
         await _chooseCorrectAccountFromNotification(message.data);
-        await _processPaymentRequest(message.data);
       } catch (e) {}
     });
     // Setup notification

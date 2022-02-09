@@ -29,6 +29,7 @@ dependencies:
 
   # Flare for animations
   flare_flutter: ^2.0.6
+  rive: ^0.8.1
 
   # Websockets
   web_socket_channel: ^2.0.0
@@ -250,6 +251,9 @@ flutter:
     - legacy_assets/pulltosend_animation.flr
     - legacy_assets/sheethandle_animation.flr
     - legacy_assets/ntr_placeholder_animation.flr
+    # animations:
+    - assets/animations/test.riv
+    # other assets
     - assets/store/known.json
     - assets/store/reps.json
     - assets/logo-square.png

@@ -7,10 +7,11 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 
+import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
+
 class AppDialogs {
-  static void showConfirmDialog(
-      var context, var title, var content, var buttonText, Function onPressed,
-      {String cancelText, Function cancelAction}) {
+  static void showConfirmDialog(var context, var title, var content, var buttonText, Function onPressed, {String cancelText, Function cancelAction}) {
     if (cancelText == null) {
       cancelText = AppLocalization.of(context).cancel.toUpperCase();
     }
@@ -25,8 +26,7 @@ class AppDialogs {
           content: Text(content, style: AppStyles.textStyleParagraph(context)),
           actions: <Widget>[
             FlatButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.0)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
               padding: EdgeInsets.all(12),
               child: Container(
                 constraints: BoxConstraints(maxWidth: 100),
@@ -43,8 +43,7 @@ class AppDialogs {
               },
             ),
             FlatButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.0)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
               padding: EdgeInsets.all(12),
               child: Container(
                 constraints: BoxConstraints(maxWidth: 100),
@@ -92,14 +91,7 @@ class AppDialogs {
   }
 }
 
-enum AnimationType {
-  SEND,
-  GENERIC,
-  TRANSFER_SEARCHING_QR,
-  TRANSFER_SEARCHING_MANUAL,
-  TRANSFER_TRANSFERRING,
-  MANTA
-}
+enum AnimationType { SEND, GENERIC, TRANSFER_SEARCHING_QR, TRANSFER_SEARCHING_MANUAL, TRANSFER_TRANSFERRING, MANTA, LOADING, SEARCHING }
 
 class AnimationLoadingOverlay extends ModalRoute<void> {
   AnimationType type;
@@ -107,8 +99,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
   Color barrier;
   Color barrierStronger;
 
-  AnimationLoadingOverlay(this.type, this.barrier, this.barrierStronger,
-      {this.onPoppedCallback});
+  AnimationLoadingOverlay(this.type, this.barrier, this.barrierStronger, {this.onPoppedCallback});
 
   @override
   Duration get transitionDuration => Duration(milliseconds: 0);
@@ -121,9 +112,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
 
   @override
   Color get barrierColor {
-    if (type == AnimationType.TRANSFER_TRANSFERRING ||
-        type == AnimationType.TRANSFER_SEARCHING_QR ||
-        type == AnimationType.TRANSFER_SEARCHING_MANUAL) {
+    if (type == AnimationType.TRANSFER_TRANSFERRING || type == AnimationType.TRANSFER_SEARCHING_QR || type == AnimationType.TRANSFER_SEARCHING_MANUAL) {
       return barrierStronger;
     }
     return barrier;
@@ -159,6 +148,8 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
 
   Widget _getAnimation(BuildContext context) {
     switch (type) {
+      case AnimationType.LOADING:
+        return Center(child: RiveAnimation.asset('assets/animations/test.riv', fit: BoxFit.contain));
       case AnimationType.SEND:
         return Center(
           child: FlareActor(
@@ -249,9 +240,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
         );
       case AnimationType.GENERIC:
       default:
-        return CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(
-                StateContainer.of(context).curTheme.primary60));
+        return CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(StateContainer.of(context).curTheme.primary60));
     }
   }
 
@@ -260,8 +249,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
       case AnimationType.TRANSFER_SEARCHING_QR:
         return Center(
           child: Container(
-            margin: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.15),
+            margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.15),
             width: MediaQuery.of(context).size.width / 1.1,
             height: MediaQuery.of(context).size.width / 1.1,
             child: _getAnimation(context),
@@ -270,8 +258,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
       case AnimationType.TRANSFER_SEARCHING_MANUAL:
         return Center(
           child: Container(
-            margin: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.15),
+            margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.15),
             width: MediaQuery.of(context).size.width / 1.1,
             height: MediaQuery.of(context).size.width / 1.1,
             child: _getAnimation(context),
@@ -289,19 +276,12 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
                 child: _getAnimation(context),
               ),
               Container(
-                margin: EdgeInsets.only(
-                    left: 10,
-                    top: 20,
-                    bottom: MediaQuery.of(context).size.height * 0.15),
+                margin: EdgeInsets.only(left: 10, top: 20, bottom: MediaQuery.of(context).size.height * 0.15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    Text(
-                        CaseChange.toUpperCase(
-                            AppLocalization.of(context).transferLoading,
-                            context),
-                        style: AppStyles.textStyleHeader2Colored(context)),
+                    Text(CaseChange.toUpperCase(AppLocalization.of(context).transferLoading, context), style: AppStyles.textStyleHeader2Colored(context)),
                     Container(
                       margin: EdgeInsets.only(bottom: 7),
                       width: 33.333,
@@ -322,8 +302,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
       case AnimationType.MANTA:
         return Center(
           child: Container(
-            margin: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.05),
+            margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.05),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.width,
             child: _getAnimation(context),
@@ -332,19 +311,13 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
       default:
         return Column(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: type == AnimationType.SEND
-              ? MainAxisAlignment.end
-              : MainAxisAlignment.center,
+          mainAxisAlignment: type == AnimationType.SEND ? MainAxisAlignment.end : MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: type == AnimationType.SEND
-                  ? EdgeInsets.only(bottom: 10.0, left: 90, right: 90)
-                  : EdgeInsets.zero,
+              margin: type == AnimationType.SEND ? EdgeInsets.only(bottom: 10.0, left: 90, right: 90) : EdgeInsets.zero,
               //Widgth/Height ratio is needed because BoxFit is not working as expected
               width: type == AnimationType.SEND ? double.infinity : 100,
-              height: type == AnimationType.SEND
-                  ? MediaQuery.of(context).size.width
-                  : 100,
+              height: type == AnimationType.SEND ? MediaQuery.of(context).size.width : 100,
               child: _getAnimation(context),
             ),
           ],
@@ -353,8 +326,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
   }
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     return child;
   }
 }
