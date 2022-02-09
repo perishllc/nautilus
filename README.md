@@ -2,7 +2,7 @@
 
 ![Cover](/assets/banner.png)
 
-### A [Natrium](https://github.com/appditto/natrium_wallet_flutter) fork, with [Nano.to](https://github.com/formsend/nano) integration, and a few other improvements.
+### A [Natrium](https://github.com/appditto/natrium_wallet_flutter) fork, with [Nano.to](https://github.com/formsend/nano) usernames, payment requests, and more.
 
 This project is in development by the team @ [Nano.to](https://nano.to/development)
 
@@ -15,8 +15,8 @@ ___
 - [x] When searching Usernames, a '@' will not be need to show list... Just start typing.
    - Usernames when displayed in full will still show an @
 - [x] Users can be favorited and will be shown in the 'Favorites' list.
-- [ ] Add Username Reservation Screen to app.
-   - Currently just a webview to nano.to
+- [ ] Username Reservations in-app.
+- [x] Request payment from any nautilus waller user.
 - [x] Payment history shows nano.to Usernames or Favorites
 - [ ] Replace all AppDitto trademarks, as to not infringe on their marks. 
    - [x] Move all appditto assets to a legacy_assets folder, to be removed as replacements are made
@@ -37,6 +37,7 @@ ___
 - [x] Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
 - [x] Advanced theming support
 - [ ] Auto-loading of paper wallets in the clipboard w/ confirmation on app open
+- [x] Payment Requests are easy to make, and make it easy to pay a request
 
 #### Immediate TODO
 
@@ -49,8 +50,10 @@ ___
 
 ## Planned features
 - [ ] paper wallet generator / sender in app
-- [ ] [in-progress] request / pay buttons from usernames [requires server-side work]
-   - Push notifications for requests
+- [ ] finish payment request feature
+- [ ] dedicated past payments screen
+- [ ] [Recurring and scheduled sends](https://github.com/appditto/natrium_wallet_flutter/issues/109) (credit: JediJiuJitsu)
+- [ ] receive screen update-able QR code
 
 
 
@@ -72,7 +75,7 @@ ___
 - [x] scaled down the QR code size on the receive screen and added usernames when available
 - [x] fix sending to local favorites
 - [x] lots of UX improvements especially with favorites / sending in general
-- [x] remove natrium logo from the center of generated QR codes
+- [x] replace natrium logo from the center of generated QR codes
 - [x] fix bug with account history not showing up
 - [x] use different star icon for the app drawer favorites
 - [x] add more icons to the app drawer
@@ -81,7 +84,9 @@ ___
 - [x] fix "invalid favorite" error when sending an invalid username
 - [x] change @ to ★ on the send screen
 - [x] nyano mode, complete with unit changes
-- [x] start work on generating paper wallets
+- [x] generating paper wallets
+- [x] request / pay buttons from usernames [requires server-side work]
+- [x] push notifications for requests that when tapped bring you to the send screen pre-filled with the request
 
 
 <div style="display: flex; flex-direction: row">

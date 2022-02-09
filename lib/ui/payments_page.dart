@@ -268,12 +268,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       if (addressExists) {
         return;
       }
-      bool nameExists = await sl.get<DBHelper>().contactExistsWithName("★NautilusDonations");
+      bool nameExists = await sl.get<DBHelper>().contactExistsWithName("NautilusDonations");
       if (nameExists) {
         return;
       }
       await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
-      Contact c = Contact(name: "★NautilusDonations", address: "nano_37y6iq8m1zx9inwkkcgqh34kqsihzpjfwgp9jir8xpb9jrcwhkmoxpo61f4o");
+      Contact c = Contact(name: "NautilusDonations", address: "nano_37y6iq8m1zx9inwkkcgqh34kqsihzpjfwgp9jir8xpb9jrcwhkmoxpo61f4o");
       await sl.get<DBHelper>().saveContact(c);
     }
   }

@@ -12,8 +12,7 @@ import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
-
-import '../../app_icons.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 
 class AvatarPage extends StatefulWidget {
   @override

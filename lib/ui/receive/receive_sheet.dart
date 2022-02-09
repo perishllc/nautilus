@@ -263,16 +263,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                               )
                             : Center(
                                 child: Container(
-                                  height: computedMaxSize / 25,
-                                  padding: EdgeInsetsDirectional.only(
-                                    end: computedMaxSize / 16,
-                                  ),
-                                  child: /*Icon(
-                                    AppIcons.nautilushorizontal,
-                                    size: computedMaxSize / 25,
-                                    color: StateContainer.of(context).curTheme.backgroundDark,
-                                  )*/
-                                      null,
+                                  height: computedMaxSize / 8,
+                                  child: Image(image: AssetImage("assets/logo-square.png")),
                                 ),
                               ),
                       ],
@@ -346,28 +338,28 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                     }),
                   ],
                 ),
-                Row(
-                  children: <Widget>[
-                    AppButton.buildAppButton(
-                        context,
-                        // Share Address Button
-                        AppButtonType.PRIMARY_OUTLINE,
-                        AppLocalization.of(context).requestPayment,
-                        Dimens.BUTTON_BOTTOM_DIMENS,
-                        disabled: _showShareCard, onPressed: () {
-                      // do nothing
-                      // if (request == null) {
-                      // return;
-                      // }
-                      // Sheets.showAppHeightEightSheet(context: context, widget: request);
-                      // Remove any other screens from stack
-                      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+                // Row(
+                //   children: <Widget>[
+                //     AppButton.buildAppButton(
+                //         context,
+                //         // Share Address Button
+                //         AppButtonType.PRIMARY_OUTLINE,
+                //         AppLocalization.of(context).requestPayment,
+                //         Dimens.BUTTON_BOTTOM_DIMENS,
+                //         disabled: _showShareCard, onPressed: () {
+                //       // do nothing
+                //       // if (request == null) {
+                //       // return;
+                //       // }
+                //       // Sheets.showAppHeightEightSheet(context: context, widget: request);
+                //       // Remove any other screens from stack
+                //       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
 
-                      // Go to send with address
-                      Sheets.showAppHeightNineSheet(context: context, widget: RequestSheet());
-                    }),
-                  ],
-                ),
+                //       // Go to send with address
+                //       Sheets.showAppHeightNineSheet(context: context, widget: RequestSheet());
+                //     }),
+                //   ],
+                // ),
               ],
             ),
           ],

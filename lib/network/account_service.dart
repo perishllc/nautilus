@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
@@ -42,9 +43,13 @@ import 'package:nautilus_wallet_flutter/network/model/response/process_response.
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 
 // Server Connection String
-const String _SERVER_ADDRESS = "wss://app.perish.co";
-const String _SERVER_ADDRESS_HTTP = "https://app.perish.co/api";
-const String _SERVER_ADDRESS_ALERTS = "https://app.perish.co/alerts";
+String _SERVER_ADDRESS = "wss://app.perish.co";
+String _SERVER_ADDRESS_HTTP = "https://app.perish.co/api";
+String _SERVER_ADDRESS_ALERTS = "https://app.perish.co/alerts";
+
+const String _FALLBACK_SERVER_ADDRESS = "wss://app.natrium.io";
+const String _FALLBACK_SERVER_ADDRESS_HTTP = "https://app.perish.io/api";
+const String _FALLBACK_SERVER_ADDRESS_ALERTS = "https://app.natrium.io/alerts";
 
 Map decodeJson(dynamic src) {
   return json.decode(src);
@@ -113,6 +118,18 @@ class AccountService {
       return;
     }
     _isConnecting = true;
+
+    // are the nautilus servers active?
+    Socket.connect("107.199.173.141", 8080, timeout: Duration(seconds: 5)).then((socket) {
+      print("Success");
+      socket.destroy();
+    }).catchError((error) {
+      // switch to fallback servers:
+      String _SERVER_ADDRESS = _FALLBACK_SERVER_ADDRESS;
+      String _SERVER_ADDRESS_HTTP = _FALLBACK_SERVER_ADDRESS_HTTP;
+      String _SERVER_ADDRESS_ALERTS = _FALLBACK_SERVER_ADDRESS_ALERTS;
+    });
+
     try {
       var packageInfo = await PackageInfo.fromPlatform();
 

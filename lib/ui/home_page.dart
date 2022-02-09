@@ -28,6 +28,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/account_history_r
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/ui/contacts/add_contact.dart';
+import 'package:nautilus_wallet_flutter/ui/request/request_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
@@ -74,6 +75,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   // Receive card instance
   ReceiveSheet receive;
+  // Request card instance
+  RequestSheet request;
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
@@ -294,12 +297,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       if (addressExists) {
         return;
       }
-      bool nameExists = await sl.get<DBHelper>().contactExistsWithName("★NautilusDonations");
+      bool nameExists = await sl.get<DBHelper>().contactExistsWithName("NautilusDonations");
       if (nameExists) {
         return;
       }
       await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
-      Contact c = Contact(name: "★NautilusDonations", address: "nano_37y6iq8m1zx9inwkkcgqh34kqsihzpjfwgp9jir8xpb9jrcwhkmoxpo61f4o");
+      Contact c = Contact(name: "NautilusDonations", address: "nano_37y6iq8m1zx9inwkkcgqh34kqsihzpjfwgp9jir8xpb9jrcwhkmoxpo61f4o");
       await sl.get<DBHelper>().saveContact(c);
     }
   }
@@ -746,6 +749,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       paintQrCode();
     }
 
+    if (request == null && StateContainer.of(context).wallet != null) {
+      request = RequestSheet();
+    }
+
     return Scaffold(
       drawerEdgeDragWidth: 200,
       resizeToAvoidBottomInset: false,
@@ -847,6 +854,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         height: 55,
                         width: (MediaQuery.of(context).size.width - 42) / 2,
                         margin: EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
+                        // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
                         child: FlatButton(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                           color: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
@@ -867,6 +875,35 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                           splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                         ),
                       ),
+                      // Container(
+                      //   decoration: BoxDecoration(
+                      //     borderRadius: BorderRadius.circular(5),
+                      //     boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
+                      //   ),
+                      //   height: 55,
+                      //   width: (MediaQuery.of(context).size.width - 42) / 3,
+                      //   // margin: EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
+                      //   margin: EdgeInsetsDirectional.only(start: 0, top: 0.0, end: 0.0),
+                      //   child: FlatButton(
+                      //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                      //     color: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
+                      //     child: AutoSizeText(
+                      //       AppLocalization.of(context).request,
+                      //       textAlign: TextAlign.center,
+                      //       style: AppStyles.textStyleButtonPrimary(context),
+                      //       maxLines: 1,
+                      //       stepGranularity: 0.5,
+                      //     ),
+                      //     onPressed: () {
+                      //       if (request == null) {
+                      //         return;
+                      //       }
+                      //       Sheets.showAppHeightEightSheet(context: context, widget: request);
+                      //     },
+                      //     highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                      //     splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                      //   ),
+                      // ),
                       AppPopupButton(),
                     ],
                   ),

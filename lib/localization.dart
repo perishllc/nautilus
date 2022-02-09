@@ -63,6 +63,10 @@ class AppLocalization {
     return Intl.message('Receive', desc: 'home_receive_cta', name: 'receive');
   }
 
+  String get request {
+    return Intl.message('Request', desc: 'home_request_cta', name: 'request');
+  }
+
   String get sent {
     return Intl.message('Sent', desc: 'history_sent', name: 'sent');
   }

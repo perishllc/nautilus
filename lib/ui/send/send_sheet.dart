@@ -22,6 +22,7 @@ import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/request/request_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
@@ -473,7 +474,7 @@ class _SendSheetState extends State<SendSheet> {
                   Row(
                     children: <Widget>[
                       // Send Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS, onPressed: () {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, [27.0, 0.0, 7.0, 24.0], onPressed: () {
                         bool validRequest = _validateRequest();
                         // verifyies the input is a user in the db
                         if (!_sendAddressController.text.startsWith("nano_") && validRequest) {
@@ -518,6 +519,53 @@ class _SendSheetState extends State<SendSheet> {
                                           : _rawAmount,
                                   destination: _sendAddressController.text,
                                   maxSend: _isMaxSend(),
+                                  localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
+                        }
+                      }),
+                      // Request Button
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).request, [7.0, 0.0, 27.0, 24.0], onPressed: () {
+                        bool validRequest = _validateRequest(isRequest: true);
+                        // verifyies the input is a user in the db
+                        if (!_sendAddressController.text.startsWith("nano_") && validRequest) {
+                          // Need to make sure its a valid contact or user
+                          sl.get<DBHelper>().getUserOrContactWithName(_sendAddressController.text.substring(1)).then((user) {
+                            if (user == null) {
+                              setState(() {
+                                if (_sendAddressController.text.startsWith("★")) {
+                                  _addressValidationText = AppLocalization.of(context).favoriteInvalid;
+                                } else {
+                                  _addressValidationText = AppLocalization.of(context).usernameInvalid;
+                                }
+                              });
+                            } else {
+                              Sheets.showAppHeightNineSheet(
+                                  context: context,
+                                  widget: RequestConfirmSheet(
+                                      amountRaw: _localCurrencyMode
+                                          ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                                          : _rawAmount == null
+                                              ? (StateContainer.of(context).nyanoMode)
+                                                  ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
+                                                  : NumberUtil.getAmountAsRaw(_sendAmountController.text)
+                                              : _rawAmount,
+                                      destination: user.address,
+                                      userName: user is User ? user.username : null,
+                                      contactName: user is Contact ? user.name : null,
+                                      localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
+                            }
+                          });
+                        } else if (validRequest) {
+                          Sheets.showAppHeightNineSheet(
+                              context: context,
+                              widget: RequestConfirmSheet(
+                                  amountRaw: _localCurrencyMode
+                                      ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                                      : _rawAmount == null
+                                          ? (StateContainer.of(context).curTheme is NyanTheme)
+                                              ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
+                                              : NumberUtil.getAmountAsRaw(_sendAmountController.text)
+                                          : _rawAmount,
+                                  destination: _sendAddressController.text,
                                   localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
                         }
                       }),
@@ -778,7 +826,7 @@ class _SendSheetState extends State<SendSheet> {
 
   /// Validate form data to see if valid
   /// @returns true if valid, false otherwise
-  bool _validateRequest() {
+  bool _validateRequest({bool isRequest = false}) {
     bool isValid = true;
     _sendAmountFocusNode.unfocus();
     _sendAddressFocusNode.unfocus();
@@ -801,7 +849,7 @@ class _SendSheetState extends State<SendSheet> {
         setState(() {
           _amountValidationText = AppLocalization.of(context).amountMissing;
         });
-      } else if (sendAmount > balanceRaw) {
+      } else if (sendAmount > balanceRaw && !isRequest) {
         isValid = false;
         setState(() {
           _amountValidationText = AppLocalization.of(context).insufficientBalance;
