@@ -736,7 +736,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     painter.toImageData(MediaQuery.of(context).size.width).then((byteData) {
       setState(() {
         receive = ReceiveSheet(
-          qrWidget: Container(width: MediaQuery.of(context).size.width / 1, child: Image.memory(byteData.buffer.asUint8List())),
+          localCurrency: StateContainer.of(context).curCurrency,
+          address: StateContainer.of(context).wallet.address,
+          qrWidget: Container(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData.buffer.asUint8List())),
         );
       });
     });
@@ -869,7 +871,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             if (receive == null) {
                               return;
                             }
-                            Sheets.showAppHeightEightSheet(context: context, widget: receive);
+                            // Sheets.showAppHeightEightSheet(context: context, widget: receive);
+                            Sheets.showAppHeightNineSheet(context: context, widget: receive);
                           },
                           highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                           splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,

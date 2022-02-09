@@ -369,8 +369,16 @@ class AppLocalization {
     return Intl.message("Enter Address", desc: 'enter_address', name: 'enterAddress');
   }
 
+  String get enterUsername {
+    return Intl.message("Enter a username", desc: 'enter_username', name: 'enterUsername');
+  }
+
   String get invalidAddress {
     return Intl.message("Address entered was invalid", desc: 'send_invalid_address', name: 'invalidAddress');
+  }
+
+  String get usernameUnavailable {
+    return Intl.message("Username unavailable", desc: 'username_unavailable', name: 'usernameUnavailable');
   }
 
   String get addressMising {
