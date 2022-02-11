@@ -95,6 +95,8 @@ class StateContainerState extends State<StateContainer> {
 
   // Minimum receive = 0.000001 NANO
   String receiveThreshold = BigInt.from(10).pow(24).toString();
+  // min raw for receive
+  // String minRawReceive = "0";
 
   AppWallet wallet;
   String currencyLocale;
@@ -115,9 +117,6 @@ class StateContainerState extends State<StateContainer> {
   bool nyaniconOn = false;
   Map<String, String> natriconNonce = Map<String, String>();
   Map<String, String> nyaniconNonce = Map<String, String>();
-
-  // min raw for receive
-  String minRawReceive = "0";
 
   // Active alert
   AlertResponseItem activeAlert;
@@ -295,8 +294,8 @@ class StateContainerState extends State<StateContainer> {
       setNyaniconOn(useNyanicon);
     });
     // Get min raw receive pref
-    sl.get<SharedPrefsUtil>().getMinRawReceive().then((minRawReceive) {
-      setMinRawReceive(minRawReceive);
+    sl.get<SharedPrefsUtil>().getMinRawReceive().then((minRaw) {
+      setMinRawReceive(minRaw);
     });
     // make sure nano API databases are up to date
     // TODO: only call when out of date
@@ -535,10 +534,10 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
-  // Change natricon setting
+  // Change min raw setting
   void setMinRawReceive(String minRaw) {
     setState(() {
-      this.minRawReceive = minRaw;
+      this.receiveThreshold = minRaw;
     });
   }
 
@@ -570,17 +569,15 @@ class StateContainerState extends State<StateContainer> {
 
   /// Handle account_subscribe response
   void handleSubscribeResponse(SubscribeResponse response) {
+    // get the preference for the receive threshold:
+    sl.get<SharedPrefsUtil>().getMinRawReceive().then((String minRaw) {
+      receiveThreshold = minRaw;
+    });
     // Combat spam by raising minimum receive if pending block count is large enough
     if (response.pendingCount != null && response.pendingCount > 50) {
       // Bump min receive to 0.05 NANO
       receiveThreshold = BigInt.from(5).pow(28).toString();
     }
-    // get the preference for the receive threshold:
-    sl.get<SharedPrefsUtil>().getMinRawReceive().then((String minRaw) {
-      if (minRaw != "0") {
-        receiveThreshold = minRaw;
-      }
-    });
     // Set currency locale here for the UI to access
     sl.get<SharedPrefsUtil>().getCurrency(deviceLocale).then((currency) {
       setState(() {

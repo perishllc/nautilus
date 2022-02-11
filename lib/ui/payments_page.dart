@@ -51,16 +51,16 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 
-class AppHomePage extends StatefulWidget {
+class PaymentsPage extends StatefulWidget {
   PriceConversion priceConversion;
 
-  AppHomePage({this.priceConversion}) : super();
+  PaymentsPage({this.priceConversion}) : super();
 
   @override
-  _AppHomePageState createState() => _AppHomePageState();
+  _PaymentsPageState createState() => _PaymentsPageState();
 }
 
-class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, SingleTickerProviderStateMixin, FlareController {
+class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver, SingleTickerProviderStateMixin, FlareController {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final Logger log = sl.get<Logger>();
 
@@ -196,8 +196,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       mainCardHeight = 64;
       settingsIconMarginTop = 7;
     }
-    _addSampleContact();
-    // _updateContacts();
     _updateUsers();
     // Setup placeholder animation and start
     _animationDisposed = false;
@@ -257,24 +255,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       _opacityAnimation.removeStatusListener(_animationStatusListener);
       _placeholderCardAnimationController.removeListener(_animationControllerListener);
       _placeholderCardAnimationController.stop();
-    }
-  }
-
-  /// Add donations contact if it hasnt already been added
-  Future<void> _addSampleContact() async {
-    bool contactAdded = await sl.get<SharedPrefsUtil>().getFirstContactAdded();
-    if (!contactAdded) {
-      bool addressExists = await sl.get<DBHelper>().contactExistsWithAddress("nano_37y6iq8m1zx9inwkkcgqh34kqsihzpjfwgp9jir8xpb9jrcwhkmoxpo61f4o");
-      if (addressExists) {
-        return;
-      }
-      bool nameExists = await sl.get<DBHelper>().contactExistsWithName("NautilusDonations");
-      if (nameExists) {
-        return;
-      }
-      await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
-      Contact c = Contact(name: "NautilusDonations", address: "nano_37y6iq8m1zx9inwkkcgqh34kqsihzpjfwgp9jir8xpb9jrcwhkmoxpo61f4o");
-      await sl.get<DBHelper>().saveContact(c);
     }
   }
 

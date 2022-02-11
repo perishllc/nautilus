@@ -9,15 +9,16 @@ This project is in development by the team @ [Nano.to](https://nano.to/developme
 
 ___
 
-#### Features
+#### Major Features
 - [x] Input nano.to usernames instead of addresses
-- [x] When you start typing in the Address input of 'Send From' screen, usernames will auto-fill / suggest.
-- [x] When searching Usernames, a '@' will not be need to show list... Just start typing.
-   - Usernames when displayed in full will still show an @
-- [x] Users can be favorited and will be shown in the 'Favorites' list.
-- [ ] Username Reservations in-app.
+- [x] Auto-fill usernames where applicable
 - [x] Request payment from any nautilus waller user.
-- [x] Payment history shows nano.to Usernames or Favorites
+- [x] Minumum receive amount is a user preference that can be changed.
+- [x] Users can be favorited and will be shown in the 'Favorites' list.
+- [x] Receive screen live update-able QR code
+- [ ] Generate paper gift cards (paper wallets) in app, to be sent either as a link or a capy-paste-able string
+- [x] Auto-loading of paper wallets found in the clipboard w/ confirmation on app open
+- [ ] Username Reservations in app
 - [ ] Replace all AppDitto trademarks, as to not infringe on their marks. 
    - [x] Move all appditto assets to a legacy_assets folder, to be removed as replacements are made
 
@@ -36,7 +37,6 @@ ___
 - [x] Change default theme to a darker color.
 - [x] Increase 'Receive' screen font size of NANO Address by 50%. Reduce QR Code size by 30%
 - [x] Advanced theming support
-- [ ] Auto-loading of paper wallets in the clipboard w/ confirmation on app open
 - [x] Payment Requests are easy to make, and make it easy to pay a request
 
 #### Immediate TODO
@@ -53,7 +53,6 @@ ___
 - [ ] finish payment request feature
 - [ ] dedicated past payments screen
 - [ ] [Recurring and scheduled sends](https://github.com/appditto/natrium_wallet_flutter/issues/109) (credit: JediJiuJitsu)
-- [ ] receive screen update-able QR code
 
 
 
@@ -87,7 +86,9 @@ ___
 - [x] generating paper wallets
 - [x] request / pay buttons from usernames [requires server-side work]
 - [x] push notifications for requests that when tapped bring you to the send screen pre-filled with the request
-
+- [x] change send button to not be disabled with an empty balance (for payment requests)
+- [x] auto detect and ask to load paper wallets from the clipboard
+- [x] receive screen update-able QR code
 
 <div style="display: flex; flex-direction: row">
    <img src="/screenshots/flutter_01.png" width="200">

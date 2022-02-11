@@ -46,6 +46,7 @@ import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 class RequestSheet extends StatefulWidget {
   final Widget qrWidget;
 
+  // if this gets used in the future, make sure to implement: localCurrency so that the currency switcher doesn't crash
   RequestSheet({this.qrWidget}) : super();
 
   _RequestSheetStateState createState() => _RequestSheetStateState();

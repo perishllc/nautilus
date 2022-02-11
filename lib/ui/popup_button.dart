@@ -201,7 +201,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
             margin: EdgeInsetsDirectional.only(start: 7, top: popupMarginBottom, end: 14.0),
             child: FlatButton(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-              color: StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero
+              color: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
                   ? isSendButtonColorPrimary
                       ? StateContainer.of(context).curTheme.primary
                       : StateContainer.of(context).curTheme.success
@@ -214,14 +214,14 @@ class _AppPopupButtonState extends State<AppPopupButton> {
                 stepGranularity: 0.5,
               ),
               onPressed: () {
-                if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero) {
+                if (StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/) {
                   Sheets.showAppHeightNineSheet(context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency));
                 }
               },
-              highlightColor: StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero
+              highlightColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
                   ? StateContainer.of(context).curTheme.background40
                   : Colors.transparent,
-              splashColor: StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero
+              splashColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
                   ? StateContainer.of(context).curTheme.background40
                   : Colors.transparent,
             ),

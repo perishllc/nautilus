@@ -42,153 +42,163 @@ class AppTransferOverviewSheet {
     _nanoUtil = NanoUtil();
   }
 
-  mainBottomSheet(BuildContext context) {
+  mainBottomSheet(BuildContext context, {String quickSeed}) {
     void manualEntryCallback(String seed) {
       Navigator.of(context).pop();
       startTransfer(context, seed, manualEntry: true);
     }
 
-    AppSheets.showAppHeightNineSheet(
-        context: context,
-        onDisposed: _onWillPop,
-        builder: (BuildContext context) {
-          return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-            return WillPopScope(
-              onWillPop: _onWillPop,
-              child: SafeArea(
-                minimum: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).size.height * 0.035,
-                ),
-                child: Container(
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      // A container for the header
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          // Emtpy SizedBox
-                          SizedBox(
-                            height: 60,
-                            width: 60,
-                          ),
-                          Column(
+    // If there's a quick seed, open the manual transfer sheet
+    if (quickSeed != null) {
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          widget: TransferManualEntrySheet(
+            quickSeed: quickSeed,
+            validSeedCallback: manualEntryCallback,
+          ));
+    } else {
+      AppSheets.showAppHeightNineSheet(
+          context: context,
+          onDisposed: _onWillPop,
+          builder: (BuildContext context) {
+            return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+              return WillPopScope(
+                onWillPop: _onWillPop,
+                child: SafeArea(
+                  minimum: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).size.height * 0.035,
+                  ),
+                  child: Container(
+                    width: double.infinity,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        // A container for the header
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            // Emtpy SizedBox
+                            SizedBox(
+                              height: 60,
+                              width: 60,
+                            ),
+                            Column(
+                              children: <Widget>[
+                                // Sheet handle
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  height: 5,
+                                  width: MediaQuery.of(context).size.width * 0.15,
+                                  decoration: BoxDecoration(
+                                    color: StateContainer.of(context).curTheme.text10,
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                ),
+                                // The header
+                                Container(
+                                  margin: EdgeInsets.only(top: 15.0),
+                                  constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                                  child: AutoSizeText(
+                                    CaseChange.toUpperCase(AppLocalization.of(context).transferHeader, context),
+                                    style: AppStyles.textStyleHeader(context),
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    stepGranularity: 0.1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            // Emtpy SizedBox
+                            SizedBox(
+                              height: 60,
+                              width: 60,
+                            ),
+                          ],
+                        ),
+
+                        // A container for the illustration and paragraphs
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              // Sheet handle
                               Container(
-                                margin: EdgeInsets.only(top: 10),
-                                height: 5,
-                                width: MediaQuery.of(context).size.width * 0.15,
-                                decoration: BoxDecoration(
-                                  color: StateContainer.of(context).curTheme.text10,
-                                  borderRadius: BorderRadius.circular(5.0),
+                                constraints:
+                                    BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.2, maxWidth: MediaQuery.of(context).size.width * 0.6),
+                                child: Stack(
+                                  children: <Widget>[
+                                    Center(
+                                      child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_paperwalletonly.svg',
+                                          color: StateContainer.of(context).curTheme.text45, width: MediaQuery.of(context).size.width),
+                                    ),
+                                    Center(
+                                      child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_nautiluswalletonly.svg',
+                                          color: StateContainer.of(context).curTheme.primary, width: MediaQuery.of(context).size.width),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              // The header
                               Container(
-                                margin: EdgeInsets.only(top: 15.0),
-                                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                                alignment: AlignmentDirectional(-1, 0),
+                                margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
                                 child: AutoSizeText(
-                                  CaseChange.toUpperCase(AppLocalization.of(context).transferHeader, context),
-                                  style: AppStyles.textStyleHeader(context),
-                                  textAlign: TextAlign.center,
-                                  maxLines: 2,
-                                  stepGranularity: 0.1,
+                                  AppLocalization.of(context).transferIntro.replaceAll("%1", AppLocalization.of(context).scanQrCode),
+                                  style: AppStyles.textStyleParagraph(context),
+                                  textAlign: TextAlign.start,
+                                  maxLines: 6,
+                                  stepGranularity: 0.5,
                                 ),
                               ),
                             ],
                           ),
-                          // Emtpy SizedBox
-                          SizedBox(
-                            height: 60,
-                            width: 60,
-                          ),
-                        ],
-                      ),
+                        ),
 
-                      // A container for the illustration and paragraphs
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        Row(
                           children: <Widget>[
-                            Container(
-                              constraints:
-                                  BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.2, maxWidth: MediaQuery.of(context).size.width * 0.6),
-                              child: Stack(
-                                children: <Widget>[
-                                  Center(
-                                    child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_paperwalletonly.svg',
-                                        color: StateContainer.of(context).curTheme.text45, width: MediaQuery.of(context).size.width),
-                                  ),
-                                  Center(
-                                    child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_nautiluswalletonly.svg',
-                                        color: StateContainer.of(context).curTheme.primary, width: MediaQuery.of(context).size.width),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              alignment: AlignmentDirectional(-1, 0),
-                              margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
-                              child: AutoSizeText(
-                                AppLocalization.of(context).transferIntro.replaceAll("%1", AppLocalization.of(context).scanQrCode),
-                                style: AppStyles.textStyleParagraph(context),
-                                textAlign: TextAlign.start,
-                                maxLines: 6,
-                                stepGranularity: 0.5,
-                              ),
+                            AppButton.buildAppButton(
+                              context,
+                              AppButtonType.PRIMARY,
+                              AppLocalization.of(context).scanQrCode,
+                              Dimens.BUTTON_TOP_DIMENS,
+                              onPressed: () {
+                                UIUtil.cancelLockEvent();
+                                BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme).then((value) {
+                                  if (!NanoSeeds.isValidSeed(value)) {
+                                    UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidSeed, context);
+                                    return;
+                                  }
+                                  startTransfer(context, value);
+                                });
+                              },
                             ),
                           ],
                         ),
-                      ),
-
-                      Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                            context,
-                            AppButtonType.PRIMARY,
-                            AppLocalization.of(context).scanQrCode,
-                            Dimens.BUTTON_TOP_DIMENS,
-                            onPressed: () {
-                              UIUtil.cancelLockEvent();
-                              BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme).then((value) {
-                                if (!NanoSeeds.isValidSeed(value)) {
-                                  UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidSeed, context);
-                                  return;
-                                }
-                                startTransfer(context, value);
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                            context,
-                            AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context).manualEntry,
-                            Dimens.BUTTON_BOTTOM_DIMENS,
-                            onPressed: () {
-                              Sheets.showAppHeightNineSheet(
-                                  context: context,
-                                  widget: TransferManualEntrySheet(
-                                    validSeedCallback: manualEntryCallback,
-                                  ));
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
+                        Row(
+                          children: <Widget>[
+                            AppButton.buildAppButton(
+                              context,
+                              AppButtonType.PRIMARY_OUTLINE,
+                              AppLocalization.of(context).manualEntry,
+                              Dimens.BUTTON_BOTTOM_DIMENS,
+                              onPressed: () {
+                                Sheets.showAppHeightNineSheet(
+                                    context: context,
+                                    widget: TransferManualEntrySheet(
+                                      validSeedCallback: manualEntryCallback,
+                                    ));
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
+              );
+            });
           });
-        });
+    }
   }
 
   Future<void> startTransfer(BuildContext context, String seed, {bool manualEntry = false}) async {

@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -16,8 +17,9 @@ import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class TransferManualEntrySheet extends StatefulWidget {
   final Function validSeedCallback;
+  final String quickSeed;
 
-  TransferManualEntrySheet({this.validSeedCallback}) : super();
+  TransferManualEntrySheet({this.validSeedCallback, this.quickSeed}) : super();
 
   _TransferManualEntrySheetState createState() => _TransferManualEntrySheetState();
 }
@@ -29,6 +31,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
   // State constants
   bool seedIsValid;
   bool hasError;
+  String quickSeed;
 
   @override
   void initState() {
@@ -37,12 +40,19 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
     this._seedInputFocusNode = FocusNode();
     this.seedIsValid = false;
     this.hasError = false;
+
+    // Set quick seed amount
+    quickSeed = widget.quickSeed;
+    if (quickSeed != null) {
+      _seedInputController.text = quickSeed;
+      this.seedIsValid = true;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return TapOutsideUnfocus(
-      child: SafeArea(
+        child: SafeArea(
       minimum: EdgeInsets.only(
         bottom: MediaQuery.of(context).size.height * 0.035,
       ),
@@ -55,9 +65,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
             Container(
               margin: EdgeInsets.only(top: 30.0, left: 70, right: 70),
               child: AutoSizeText(
-                CaseChange.toUpperCase(
-                    AppLocalization.of(context).transferHeader,
-                    context),
+                CaseChange.toUpperCase(AppLocalization.of(context).transferHeader, context),
                 style: AppStyles.textStyleHeader(context),
                 textAlign: TextAlign.center,
                 maxLines: 2,
@@ -66,34 +74,27 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
             ),
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.05),
-                child:Column(
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     // The paragraph
                     Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal:
-                              smallScreen(context) ? 50 : 60,
-                          vertical: 10),
+                      margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 50 : 60, vertical: 10),
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        AppLocalization.of(context)
-                            .transferManualHint,
-                        style:
-                            AppStyles.textStyleParagraph(context),
+                        AppLocalization.of(context).transferManualHint,
+                        style: AppStyles.textStyleParagraph(context),
                         textAlign: TextAlign.start,
                       ),
                     ),
                     // The container for the seed
                     Expanded(
                       child: KeyboardAvoider(
-                        duration: Duration(milliseconds: 0),
-                        autoScroll: true,
-                        focusPadding: 40,
-                        child: Column(
-                          children: <Widget>[
+                          duration: Duration(milliseconds: 0),
+                          autoScroll: true,
+                          focusPadding: 40,
+                          child: Column(children: <Widget>[
                             AppTextField(
                               focusNode: _seedInputFocusNode,
                               controller: _seedInputController,
@@ -112,14 +113,14 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                                       _seedInputController.text = data;
                                       setState(() {
                                         seedIsValid = true;
-                                      });                                            
+                                      });
                                     }
                                   } else {
                                     if (mounted) {
                                       setState(() {
                                         seedIsValid = false;
                                       });
-                                    }                               
+                                    }
                                   }
                                 },
                               ),
@@ -148,8 +149,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                             // "Invalid Seed" text that appears if the input is invalid
                             Container(
                               margin: EdgeInsets.only(top: 5),
-                              child: Text(
-                                  AppLocalization.of(context).seedInvalid,
+                              child: Text(AppLocalization.of(context).seedInvalid,
                                   style: TextStyle(
                                     fontSize: 14.0,
                                     color: hasError ? StateContainer.of(context).curTheme.primary : Colors.transparent,
@@ -157,14 +157,49 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                                     fontWeight: FontWeight.w600,
                                   )),
                             ),
-                          ]
-                        )
-                      ),
+                          ])),
                     ),
                   ],
                 ),
               ),
             ),
+
+            (quickSeed != null
+                ? Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.13, maxWidth: MediaQuery.of(context).size.width * 0.6),
+                          child: Stack(
+                            children: <Widget>[
+                              Center(
+                                child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_paperwalletonly.svg',
+                                    color: StateContainer.of(context).curTheme.text45, width: MediaQuery.of(context).size.width),
+                              ),
+                              Center(
+                                child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_nautiluswalletonly.svg',
+                                    color: StateContainer.of(context).curTheme.primary, width: MediaQuery.of(context).size.width),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          alignment: AlignmentDirectional(-1, 0),
+                          margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
+                          child: AutoSizeText(
+                            AppLocalization.of(context).transferIntroShort,
+                            style: AppStyles.textStyleParagraph(context),
+                            textAlign: TextAlign.start,
+                            maxLines: 4,
+                            stepGranularity: 0.5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : Container()),
 
             Row(
               children: <Widget>[

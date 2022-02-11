@@ -623,6 +623,10 @@ class AppLocalization {
     return Intl.message("Notifications", desc: 'notifications_settings', name: 'notifications');
   }
 
+  String get autoImport {
+    return Intl.message("Auto Import", desc: 'auto_import', name: 'autoImport');
+  }
+
   String get natricon {
     return Intl.message("Natricon", desc: 'natricon_settings', name: 'natricon');
   }
@@ -692,6 +696,11 @@ class AppLocalization {
   String get transferIntro {
     return Intl.message("This process will transfer the funds from a paper wallet to your Nautilus wallet.\n\nTap the \"%1\" button to start.",
         desc: 'transfer_intro', name: 'transferIntro');
+  }
+
+  String get transferIntroShort {
+    return Intl.message("This process will transfer the funds from a paper wallet to your Nautilus wallet.",
+        desc: 'transfer_intro_short', name: 'transferIntroShort');
   }
 
   String get transferQrScanHint {

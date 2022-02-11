@@ -187,45 +187,44 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                     //     ],
                     //   ),
                     // ),
-                  ],
-                ),
-              ),
-
-              // Column for Enter Address container + Enter Address Error container
-              Column(
-                children: <Widget>[
-                  Container(
-                    alignment: Alignment.topCenter,
-                    child: Stack(
-                      alignment: Alignment.topCenter,
+                    // Column for Enter Address container + Enter Address Error container
+                    Column(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                          alignment: Alignment.bottomCenter,
-                          constraints: BoxConstraints(maxHeight: 174, minHeight: 0),
+                          alignment: Alignment.topCenter,
+                          child: Stack(
+                            alignment: Alignment.topCenter,
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                alignment: Alignment.bottomCenter,
+                                constraints: BoxConstraints(maxHeight: 174, minHeight: 0),
+                              ),
+
+                              // ******* Enter Address Container ******* //
+                              getEnterAddressContainer(),
+                              // ******* Enter Address Container End ******* //
+                            ],
+                          ),
                         ),
 
-                        // ******* Enter Address Container ******* //
-                        getEnterAddressContainer(),
-                        // ******* Enter Address Container End ******* //
+                        // ******* Enter Address Error Container ******* //
+                        Container(
+                          alignment: AlignmentDirectional(0, 0),
+                          margin: EdgeInsets.only(top: 3),
+                          child: Text(_usernameValidationText,
+                              style: TextStyle(
+                                fontSize: 14.0,
+                                color: StateContainer.of(context).curTheme.primary,
+                                fontFamily: 'NunitoSans',
+                                fontWeight: FontWeight.w600,
+                              )),
+                        ),
+                        // ******* Enter Address Error Container End ******* //
                       ],
                     ),
-                  ),
-
-                  // ******* Enter Address Error Container ******* //
-                  Container(
-                    alignment: AlignmentDirectional(0, 0),
-                    margin: EdgeInsets.only(top: 3),
-                    child: Text(_usernameValidationText,
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          color: StateContainer.of(context).curTheme.primary,
-                          fontFamily: 'NunitoSans',
-                          fontWeight: FontWeight.w600,
-                        )),
-                  ),
-                  // ******* Enter Address Error Container End ******* //
-                ],
+                  ],
+                ),
               ),
 
               // Next Screen Button

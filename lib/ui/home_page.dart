@@ -33,6 +33,9 @@ import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_drawer.dart';
+import 'package:nautilus_wallet_flutter/ui/transfer/transfer_manual_entry_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
@@ -47,6 +50,7 @@ import 'package:nautilus_wallet_flutter/util/manta.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -76,7 +80,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   // Receive card instance
   ReceiveSheet receive;
   // Request card instance
-  RequestSheet request;
+  // RequestSheet request;
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
@@ -145,11 +149,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   Future<void> _processPaymentRequest(dynamic message) async {
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     if (message.containsKey("payment_request")) {
       String amount_raw = message['amount_raw'];
-
-      print(amount_raw);
+      String requesting_account = message['requesting_account'];
 
       // Remove any other screens from stack
       // Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
@@ -162,8 +164,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             context: context,
             widget: SendSheet(
               localCurrency: StateContainer.of(context).curCurrency,
-              address: "nano_1i4fcujt49de3mio9eb9y5jakw8o9m1za6ntidxn4nkwgnunktpy54z1ma58",
-              quickSendAmount: "1000000000000000000000000",
+              address: requesting_account,
+              quickSendAmount: amount_raw,
             ));
       });
     }
@@ -201,6 +203,63 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       sl.get<SharedPrefsUtil>().setNotificationsOn(false);
     }
   }
+
+  Future<void> _autoImportDialog(String seed) async {
+    switch (await showDialog<bool>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              AppLocalization.of(context).autoImport,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            content: /*AppLocalization.of(context).importMessage*/ Text(
+                "You appear to have a wallet seed in your clipboard, would you like to search it for funds to import to this wallet?"),
+            actions: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).no,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).yes,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        })) {
+      case true:
+        AppTransferOverviewSheet().mainBottomSheet(context, quickSeed: seed);
+        break;
+      case false:
+        break;
+    }
+  }
+
+  // void loadPaperWallet() async {
+  //   // check if clipboard has a paper wallet seed:
+  //   String data = await UserDataUtil.getClipboardText(DataType.SEED);
+  //   if (data != null) {
+  //     // show pop-up asking if they want to import the seed in their clipboard
+  //     _autoImportDialog(data);
+  //   }
+  // }
 
   @override
   void initState() {
@@ -252,6 +311,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     });
     // Setup notification
     getNotificationPermissions();
+
+    // check if clipboard has a paper wallet seed:
+    UserDataUtil.getClipboardText(DataType.SEED).then((data) {
+      if (data != null) {
+        // show pop-up asking if they want to import the seed in their clipboard
+        _autoImportDialog(data);
+      }
+    });
   }
 
   void _animationStatusListener(AnimationStatus status) {
@@ -751,9 +818,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       paintQrCode();
     }
 
-    if (request == null && StateContainer.of(context).wallet != null) {
-      request = RequestSheet();
-    }
+    // if (request == null && StateContainer.of(context).wallet != null) {
+    //   request = RequestSheet();
+    // }
 
     return Scaffold(
       drawerEdgeDragWidth: 200,
@@ -871,7 +938,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             if (receive == null) {
                               return;
                             }
-                            // Sheets.showAppHeightEightSheet(context: context, widget: receive);
                             Sheets.showAppHeightNineSheet(context: context, widget: receive);
                           },
                           highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
