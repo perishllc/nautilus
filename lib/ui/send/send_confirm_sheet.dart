@@ -12,6 +12,7 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/contact.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -39,7 +40,6 @@ class SendConfirmSheet extends StatefulWidget {
   final String amountRaw;
   final String destination;
   final String contactName;
-  final String userName;
   final String localCurrency;
   final bool maxSend;
   final MantaWallet manta;
@@ -47,15 +47,7 @@ class SendConfirmSheet extends StatefulWidget {
   final int natriconNonce;
 
   SendConfirmSheet(
-      {this.amountRaw,
-      this.destination,
-      this.contactName,
-      this.userName,
-      this.localCurrency,
-      this.manta,
-      this.paymentRequest,
-      this.natriconNonce,
-      this.maxSend = false})
+      {this.amountRaw, this.destination, this.contactName, this.localCurrency, this.manta, this.paymentRequest, this.natriconNonce, this.maxSend = false})
       : super();
 
   _SendConfirmSheetState createState() => _SendConfirmSheetState();
@@ -344,7 +336,16 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
       // Show complete
       Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
-      String contactName = contact == null ? null : contact.name;
+      String contactName;
+      if (contact == null) {
+        User user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
+        if (user != null) {
+          contactName = user.username;
+        }
+      } else {
+        contactName = contact.name;
+      }
+
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       StateContainer.of(context).requestUpdate();
       if (widget.natriconNonce != null) {

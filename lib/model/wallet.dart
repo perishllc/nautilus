@@ -13,6 +13,7 @@ class AppWallet {
 
   bool _loading; // Whether or not app is initially loading
   bool _historyLoading; // Whether or not we have received initial account history response
+  bool _paymentsLoading;
   String _address;
   String _username;
   BigInt _accountBalance;
@@ -40,6 +41,7 @@ class AppWallet {
       List<AccountHistoryResponseItem> history,
       bool loading,
       bool historyLoading,
+      bool paymentsLoading,
       this.confirmationHeight = -1}) {
     this._address = address;
     this._username = username;
@@ -54,6 +56,7 @@ class AppWallet {
     this._history = history ?? new List<AccountHistoryResponseItem>();
     this._loading = loading ?? true;
     this._historyLoading = historyLoading ?? true;
+    this._paymentsLoading = paymentsLoading ?? true;
   }
 
   String get address => _address;
@@ -162,5 +165,11 @@ class AppWallet {
 
   set historyLoading(bool value) {
     _historyLoading = value;
+  }
+
+  bool get paymentsLoading => _paymentsLoading;
+
+  set paymentsLoading(bool value) {
+    _paymentsLoading = value;
   }
 }

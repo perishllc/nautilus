@@ -89,6 +89,9 @@ ___
 - [x] change send button to not be disabled with an empty balance (for payment requests)
 - [x] auto detect and ask to load paper wallets from the clipboard
 - [x] receive screen update-able QR code
+- [x] fix debug mode requiring a hot-restart to work
+- [x] integration testing and automatic screenshot generation
+- [x] work on automating icon generation
 
 <div style="display: flex; flex-direction: row">
    <img src="/screenshots/flutter_01.png" width="200">

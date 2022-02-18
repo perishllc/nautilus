@@ -1,0 +1,2 @@
+flutter drive --profile --driver=test/test_driver/integration_test.dart --target=test/integration_test/screenshot_intro.dart
+flutter drive --profile --driver=test/test_driver/integration_test.dart --target=test/integration_test/screenshot_main.dart

@@ -140,7 +140,7 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
                       children: <Widget>[
                         // "SENT TO" text
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).sentTo, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).requestedFrom, context),
                           style: TextStyle(
                             fontSize: 28.0,
                             fontWeight: FontWeight.w700,

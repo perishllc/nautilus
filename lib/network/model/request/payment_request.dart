@@ -18,14 +18,22 @@ class PaymentRequest extends BaseRequest {
   @JsonKey(name: 'requesting_account')
   String requesting_account;
 
+  @JsonKey(name: 'request_signature')
+  String request_signature;
+
+  @JsonKey(name: 'request_nonce')
+  String request_nonce;
+
   // @JsonKey(name: 'username')
   // String username;
 
-  PaymentRequest({String action, String account, String amount_raw, String requesting_account}) : super() {
+  PaymentRequest({String action, String account, String amount_raw, String requesting_account, String request_signature, String request_nonce}) : super() {
     this.action = Actions.REQUEST_PAYMENT;
     this.account = account ?? "";
     this.amount_raw = amount_raw ?? "";
     this.requesting_account = requesting_account ?? "";
+    this.request_signature = request_signature ?? "";
+    this.request_nonce = request_nonce ?? "";
   }
 
   factory PaymentRequest.fromJson(Map<String, dynamic> json) => _$PaymentRequestFromJson(json);

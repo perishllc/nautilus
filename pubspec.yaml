@@ -155,19 +155,33 @@ dependencies:
 dependency_overrides:
   analyzer: ^2.7.0
   dart_style: ^2.0.0
+  # flutter_launcher_icons:
+  #   git:
+  #     url: https://github.com/knyghtryda/flutter_launcher_icons
+  #     ref: scaling
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_driver:
+    sdk: flutter
   build_runner: 2.1.5
   json_serializable: ^6.0.1
-  # the next two packages have a dependency conflict and can't both be enabled at the same time
+  
+  # the next two/three packages have a dependency conflict and can't both be enabled at the same time
   # though the second is just a command line tool for updating /changing the application icons
   intl_translation:
     git:
       url: https://github.com/bbedward/intl_translation.git
       ref: master
+  # flutter_native_splash: ^2.0.4
   # flutter_launcher_icons: "^0.9.2"
+  # flutter_launcher_icons:
+  #   git:
+  #       url: https://github.com/knyghtryda/flutter_launcher_icons
+  #       ref: scaling
 
 # to update the app icons use:
 # flutter pub get
@@ -179,12 +193,31 @@ dev_dependencies:
 
 flutter_icons:
   android: true
-  # android: "ic_launcher_round.png"
-  ios: true
-  image_path: "assets/logo-square.png"
-  remove_alpha_ios: true
+  # ios: true
+  # android: "ic_launcher_round"
+  # image_path: "assets/logo-square.png"
+  # remove_alpha_ios: true
+
+  image_path_android: "assets/logo-square.png"
+  image_path_ios: "assets/logo-square.png"
+  # icon_adaptive_foreground: "assets/foreground.png"
+  # icon_adaptive_background: "assets/background.png"
+
+
+  # fuscia:
   adaptive_icon_background: "#000000"
   adaptive_icon_foreground: "assets/logo-square.png"
+  adaptive_icon_foreground_scale_factor: 0.75
+  adaptive_icon_foreground_scale_fill_color: "#ffffff"
+  # adaptive_icon_background: "#000000"
+  # adaptive_icon_foreground: "assets/logo-square.png"
+  # adaptive_icon_background: "#965353"
+  # adaptive_icon_foreground: "#579653"
+  # adaptive_icon_foreground_scale_factor: "sdgasdfg"
+
+flutter_native_splash:
+  # color: "#42a5f5"
+  background_image: "assets/splash_image.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

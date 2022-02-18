@@ -1348,14 +1348,28 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         : null,
                     Container(
                       margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
-                      child: Text(AppLocalization.of(context).nautilusAPI,
+                      child: Text(AppLocalization.of(context).featured,
                           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
                     ),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).purchaseNano, AppIcons.currency, onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).home, AppIcons.home, onPressed: () {
+                      Navigator.of(context).pushNamed("/home_transition");
+                    }),
+                    Divider(
+                      height: 2,
+                      color: StateContainer.of(context).curTheme.text15,
+                    ),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).payments, AppIcons.money_bill_alt, onPressed: () {
+                      Navigator.of(context).pushNamed("/payments_page");
+                    }),
+                    Divider(
+                      height: 2,
+                      color: StateContainer.of(context).curTheme.text15,
+                    ),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).purchaseNano, AppIcons.coins, onPressed: () {
                       // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                       //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://buy.chainbits.com");
                       // }));

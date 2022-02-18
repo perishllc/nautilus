@@ -41,7 +41,7 @@ import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:root_checker/root_checker.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Setup Service Provide
   setupServiceLocator();
@@ -53,10 +53,16 @@ void main() async {
   }
   // Setup firebase
   await Firebase.initializeApp();
+  if (!kReleaseMode) {
+    // we have to stall for whatever reason in debug mode
+    // otherwise the app doesn't start properly (black screen)
+    await Future.delayed(Duration(seconds: 2));
+  }
   // Run app
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
-    runApp(new StateContainer(child: new App()));
-  });
+  if (kReleaseMode) {
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
+  runApp(new StateContainer(child: new App()));
 }
 
 class App extends StatefulWidget {
@@ -78,7 +84,7 @@ class _AppState extends State<App> {
       textStyle: AppStyles.textStyleSnackbar(context),
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: true,
         title: 'Nautilus',
         theme: ThemeData(
           dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -279,6 +285,11 @@ class _AppState extends State<App> {
             case '/register_username':
               return NoTransitionRoute(
                 builder: (_) => RegisterUsernameScreen(),
+                settings: settings,
+              );
+            case '/payments_page':
+              return NoPopTransitionRoute(
+                builder: (_) => PaymentsPage(),
                 settings: settings,
               );
             case '/purchase_nano':

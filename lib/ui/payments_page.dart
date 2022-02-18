@@ -733,7 +733,7 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
                         child: Row(
                           children: <Widget>[
                             Text(
-                              CaseChange.toUpperCase(AppLocalization.of(context).transactions, context),
+                              CaseChange.toUpperCase(AppLocalization.of(context).payments, context),
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontSize: 14.0,
@@ -1554,103 +1554,103 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
     if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet.loading) {
       // Placeholder for balance text
       return Container(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _priceConversion == PriceConversion.BTC
-                ? Container(
-                    child: Stack(
-                      alignment: AlignmentDirectional(0, 0),
-                      children: <Widget>[
-                        Text(
-                          "1234567",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
-                        ),
-                        Opacity(
-                          opacity: _opacityAnimation.value,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: StateContainer.of(context).curTheme.text20,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Text(
-                              "1234567",
-                              textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : SizedBox(),
-            Container(
-              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 225),
-              child: Stack(
-                alignment: AlignmentDirectional(0, 0),
-                children: <Widget>[
-                  AutoSizeText(
-                    "1234567",
-                    style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.largestc, fontWeight: FontWeight.w900, color: Colors.transparent),
-                    maxLines: 1,
-                    stepGranularity: 0.1,
-                    minFontSize: 1,
-                  ),
-                  Opacity(
-                    opacity: _opacityAnimation.value,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.primary60,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: AutoSizeText(
-                        "1234567",
-                        style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.largestc - 8, fontWeight: FontWeight.w900, color: Colors.transparent),
-                        maxLines: 1,
-                        stepGranularity: 0.1,
-                        minFontSize: 1,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            _priceConversion == PriceConversion.BTC
-                ? Container(
-                    child: Stack(
-                      alignment: AlignmentDirectional(0, 0),
-                      children: <Widget>[
-                        Text(
-                          "1234567",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
-                        ),
-                        Opacity(
-                          opacity: _opacityAnimation.value,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: StateContainer.of(context).curTheme.text20,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Text(
-                              "1234567",
-                              textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : SizedBox(),
-          ],
-        ),
-      );
+          // child: Column(
+          //   mainAxisSize: MainAxisSize.min,
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: <Widget>[
+          //     _priceConversion == PriceConversion.BTC
+          //         ? Container(
+          //             child: Stack(
+          //               alignment: AlignmentDirectional(0, 0),
+          //               children: <Widget>[
+          //                 Text(
+          //                   "1234567",
+          //                   textAlign: TextAlign.center,
+          //                   style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
+          //                 ),
+          //                 Opacity(
+          //                   opacity: _opacityAnimation.value,
+          //                   child: Container(
+          //                     decoration: BoxDecoration(
+          //                       color: StateContainer.of(context).curTheme.text20,
+          //                       borderRadius: BorderRadius.circular(5),
+          //                     ),
+          //                     child: Text(
+          //                       "1234567",
+          //                       textAlign: TextAlign.center,
+          //                       style:
+          //                           TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
+          //                     ),
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           )
+          //         : SizedBox(),
+          //     Container(
+          //       constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 225),
+          //       child: Stack(
+          //         alignment: AlignmentDirectional(0, 0),
+          //         children: <Widget>[
+          //           AutoSizeText(
+          //             "1234567",
+          //             style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.largestc, fontWeight: FontWeight.w900, color: Colors.transparent),
+          //             maxLines: 1,
+          //             stepGranularity: 0.1,
+          //             minFontSize: 1,
+          //           ),
+          //           Opacity(
+          //             opacity: _opacityAnimation.value,
+          //             child: Container(
+          //               decoration: BoxDecoration(
+          //                 color: StateContainer.of(context).curTheme.primary60,
+          //                 borderRadius: BorderRadius.circular(5),
+          //               ),
+          //               child: AutoSizeText(
+          //                 "1234567",
+          //                 style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.largestc - 8, fontWeight: FontWeight.w900, color: Colors.transparent),
+          //                 maxLines: 1,
+          //                 stepGranularity: 0.1,
+          //                 minFontSize: 1,
+          //               ),
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //     _priceConversion == PriceConversion.BTC
+          //         ? Container(
+          //             child: Stack(
+          //               alignment: AlignmentDirectional(0, 0),
+          //               children: <Widget>[
+          //                 Text(
+          //                   "1234567",
+          //                   textAlign: TextAlign.center,
+          //                   style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
+          //                 ),
+          //                 Opacity(
+          //                   opacity: _opacityAnimation.value,
+          //                   child: Container(
+          //                     decoration: BoxDecoration(
+          //                       color: StateContainer.of(context).curTheme.text20,
+          //                       borderRadius: BorderRadius.circular(5),
+          //                     ),
+          //                     child: Text(
+          //                       "1234567",
+          //                       textAlign: TextAlign.center,
+          //                       style:
+          //                           TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
+          //                     ),
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           )
+          //         : SizedBox(),
+          //   ],
+          // ),
+          );
     }
     // Balance texts
     return GestureDetector(

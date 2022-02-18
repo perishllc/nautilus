@@ -165,6 +165,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                     AppButtonType.PRIMARY,
                     AppLocalization.of(context).backupConfirmButton,
                     Dimens.BUTTON_BOTTOM_DIMENS,
+                    instanceKey: Key("backed_it_up_button"),
                     onPressed: () {
                       // Update wallet
                       sl.get<DBHelper>().dropAccounts().then((_) {

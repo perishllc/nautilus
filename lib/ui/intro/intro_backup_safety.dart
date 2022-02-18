@@ -128,7 +128,8 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).gotItButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).gotItButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                      instanceKey: Key("got_it_button"), onPressed: () {
                     Navigator.of(context).pushNamed('/intro_backup', arguments: StateContainer.of(context).encryptedSecret);
                   }),
                 ],

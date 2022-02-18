@@ -43,6 +43,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/process_response.
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 
 // Server Connection String
+String _BASE_SERVER_ADDRESS = "app.perish.co";
 String _SERVER_ADDRESS = "wss://app.perish.co";
 String _SERVER_ADDRESS_HTTP = "https://app.perish.co/api";
 String _SERVER_ADDRESS_ALERTS = "https://app.perish.co/alerts";
@@ -119,11 +120,12 @@ class AccountService {
     }
     _isConnecting = true;
 
-    // are the nautilus servers active?
-    Socket.connect("107.199.173.141", 8080, timeout: Duration(seconds: 5)).then((socket) {
-      print("Success");
+    // check if the nautilus servers are available
+    Socket.connect(_BASE_SERVER_ADDRESS, 8080, timeout: Duration(seconds: 3)).then((socket) {
+      log.d("Nautilus backend is up");
       socket.destroy();
     }).catchError((error) {
+      log.d("Nautilus backend is unreachable");
       // switch to fallback servers:
       _SERVER_ADDRESS = _FALLBACK_SERVER_ADDRESS;
       _SERVER_ADDRESS_HTTP = _FALLBACK_SERVER_ADDRESS_HTTP;
@@ -141,6 +143,7 @@ class AccountService {
       _isConnected = true;
       EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.CONNECTED));
       _channel.stream.listen(_onMessageReceived, onDone: connectionClosed, onError: connectionClosedError);
+      _send("test@@@@@@@@@@@@@@@@@@@@");
     } catch (e) {
       log.e("Error from service ${e.toString()}", e);
       _isConnected = false;
@@ -422,8 +425,10 @@ class AccountService {
 
   // new:
   // request money from an account:
-  /*Future<PaymentResponse> */ Future<void> requestPayment(String account, String amount_raw, String requesting_account) async {
-    PaymentRequest request = PaymentRequest(account: account, amount_raw: amount_raw, requesting_account: requesting_account);
+  /*Future<PaymentResponse> */ Future<void> requestPayment(
+      String account, String amount_raw, String requesting_account, String request_signature, String request_nonce) async {
+    PaymentRequest request = PaymentRequest(
+        account: account, amount_raw: amount_raw, requesting_account: requesting_account, request_signature: request_signature, request_nonce: request_nonce);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");

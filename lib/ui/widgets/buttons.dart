@@ -8,7 +8,8 @@ enum AppButtonType { PRIMARY, PRIMARY_OUTLINE, SUCCESS, SUCCESS_OUTLINE, TEXT_OU
 
 class AppButton {
   // Primary button builder
-  static Widget buildAppButton(BuildContext context, AppButtonType type, String buttonText, List<double> dimens, {Function onPressed, bool disabled = false}) {
+  static Widget buildAppButton(BuildContext context, AppButtonType type, String buttonText, List<double> dimens,
+      {Function onPressed, bool disabled = false, Key instanceKey}) {
     switch (type) {
       case AppButtonType.PRIMARY:
         return Expanded(
@@ -20,6 +21,7 @@ class AppButton {
             height: 55,
             margin: EdgeInsetsDirectional.fromSTEB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: FlatButton(
+              key: instanceKey,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
               color: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
               child: AutoSizeText(buttonText, textAlign: TextAlign.center, style: AppStyles.textStyleButtonPrimary(context), maxLines: 1, stepGranularity: 0.5),

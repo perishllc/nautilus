@@ -148,10 +148,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  Future<void> _processPaymentRequest(dynamic message) async {
-    if (message.containsKey("payment_request")) {
-      String amount_raw = message['amount_raw'];
-      String requesting_account = message['requesting_account'];
+  Future<void> _processPaymentRequestNotification(dynamic data) async {
+    log.d("Processing payment request notification");
+    if (data.containsKey("payment_request")) {
+      String amount_raw = data['amount_raw'];
+      String requesting_account = data['requesting_account'];
 
       // Remove any other screens from stack
       // Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
@@ -252,15 +253,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  // void loadPaperWallet() async {
-  //   // check if clipboard has a paper wallet seed:
-  //   String data = await UserDataUtil.getClipboardText(DataType.SEED);
-  //   if (data != null) {
-  //     // show pop-up asking if they want to import the seed in their clipboard
-  //     _autoImportDialog(data);
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -302,23 +294,24 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     );
     _opacityAnimation.addStatusListener(_animationStatusListener);
     _placeholderCardAnimationController.forward();
-    // Register push notifications
+    // Register handling of push notifications
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       try {
         await _chooseCorrectAccountFromNotification(message.data);
-        await _processPaymentRequest(message.data);
+        await _processPaymentRequestNotification(message.data);
       } catch (e) {}
     });
     // Setup notification
     getNotificationPermissions();
 
     // check if clipboard has a paper wallet seed:
-    UserDataUtil.getClipboardText(DataType.SEED).then((data) {
-      if (data != null) {
-        // show pop-up asking if they want to import the seed in their clipboard
-        _autoImportDialog(data);
-      }
-    });
+    // todo: we should ask permission before asking for clipboard data, though maybe we can do it on install?
+    // UserDataUtil.getClipboardText(DataType.SEED).then((data) {
+    //   if (data != null) {
+    //     // show pop-up asking if they want to import the seed in their clipboard
+    //     _autoImportDialog(data);
+    //   }
+    // });
   }
 
   void _animationStatusListener(AnimationStatus status) {
@@ -818,10 +811,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       paintQrCode();
     }
 
-    // if (request == null && StateContainer.of(context).wallet != null) {
-    //   request = RequestSheet();
-    // }
-
     return Scaffold(
       drawerEdgeDragWidth: 200,
       resizeToAvoidBottomInset: false,
@@ -925,6 +914,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         margin: EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
                         // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
                         child: FlatButton(
+                          key: const Key("receive_button"),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                           color: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
                           child: AutoSizeText(

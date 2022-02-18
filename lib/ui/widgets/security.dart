@@ -22,25 +22,21 @@ class ShakeCurve extends Curve {
 }
 
 class PinScreen extends StatefulWidget {
-
   final PinOverlayType type;
   final String expectedPin;
   final String description;
   final Color pinScreenBackgroundColor;
 
-  PinScreen(this.type,
-      {this.description = "", this.expectedPin = "", this.pinScreenBackgroundColor});
+  PinScreen(this.type, {this.description = "", this.expectedPin = "", this.pinScreenBackgroundColor});
 
   @override
-  _PinScreenState createState() =>
-      _PinScreenState();
+  _PinScreenState createState() => _PinScreenState();
 }
 
-class _PinScreenState extends State<PinScreen>
-    with SingleTickerProviderStateMixin {
+class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMixin {
   static const int MAX_ATTEMPTS = 5;
 
-  int _pinLength = 6; 
+  int _pinLength = 6;
   double buttonSize = 100.0;
 
   String pinEnterTitle = "";
@@ -50,8 +46,7 @@ class _PinScreenState extends State<PinScreen>
   List<IconData> _dotStates;
   String _pin;
   String _pinConfirmed;
-  bool
-      _awaitingConfirmation; // true if pin has been entered once, false if not entered once
+  bool _awaitingConfirmation; // true if pin has been entered once, false if not entered once
   String _header;
   int _failedAttempts = 0;
 
@@ -80,10 +75,8 @@ class _PinScreenState extends State<PinScreen>
       });
     });
     // Set animation
-    _controller = AnimationController(
-        duration: const Duration(milliseconds: 350), vsync: this);
-    final Animation curve =
-        CurvedAnimation(parent: _controller, curve: ShakeCurve());
+    _controller = AnimationController(duration: const Duration(milliseconds: 350), vsync: this);
+    final Animation curve = CurvedAnimation(parent: _controller, curve: ShakeCurve());
     _animation = Tween(begin: 0.0, end: 25.0).animate(curve)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
@@ -95,8 +88,7 @@ class _PinScreenState extends State<PinScreen>
                   _controller.value = 0;
                 });
                 sl.get<SharedPrefsUtil>().updateLockDate().then((_) {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/lock_screen_transition', (Route<dynamic> route) => false);
+                  Navigator.of(context).pushNamedAndRemoveUntil('/lock_screen_transition', (Route<dynamic> route) => false);
                 });
               } else {
                 setState(() {
@@ -163,8 +155,7 @@ class _PinScreenState extends State<PinScreen>
       int lastFilledIndex;
       for (int i = 0; i < _dotStates.length; i++) {
         if (_dotStates[i] == AppIcons.dotfilled) {
-          if (i == _dotStates.length ||
-              _dotStates[i + 1] == AppIcons.dotemtpy) {
+          if (i == _dotStates.length || _dotStates[i + 1] == AppIcons.dotemtpy) {
             lastFilledIndex = i;
             break;
           }
@@ -189,10 +180,10 @@ class _PinScreenState extends State<PinScreen>
         borderRadius: BorderRadius.circular(200),
         highlightColor: StateContainer.of(context).curTheme.primary15,
         splashColor: StateContainer.of(context).curTheme.primary30,
+        key: Key("pin_${buttonText}_button"),
         onTap: () {},
         onTapDown: (details) {
-          if (_controller.status == AnimationStatus.forward ||
-              _controller.status == AnimationStatus.reverse) {
+          if (_controller.status == AnimationStatus.forward || _controller.status == AnimationStatus.reverse) {
             return;
           }
           if (_setCharacter(buttonText)) {
@@ -249,10 +240,7 @@ class _PinScreenState extends State<PinScreen>
   List<Widget> _buildPinDots() {
     List<Widget> ret = List();
     for (int i = 0; i < _pinLength; i++) {
-      ret.add(Icon(
-                _dotStates[i],
-                color: StateContainer.of(context).curTheme.primary,
-                size: 20.0));
+      ret.add(Icon(_dotStates[i], color: StateContainer.of(context).curTheme.primary, size: 20.0));
     }
     return ret;
   }
@@ -285,8 +273,7 @@ class _PinScreenState extends State<PinScreen>
           child: Column(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.1),
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
                 child: Column(
                   children: <Widget>[
                     // Header
@@ -302,8 +289,7 @@ class _PinScreenState extends State<PinScreen>
                     ),
                     // Descripttion
                     Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                       child: AutoSizeText(
                         widget.description,
                         style: AppStyles.textStyleParagraph(context),
@@ -315,16 +301,11 @@ class _PinScreenState extends State<PinScreen>
                     // Dots
                     Container(
                       margin: EdgeInsetsDirectional.only(
-                        start: MediaQuery.of(context).size.width * 0.25 +
-                            _animation.value,
-                        end: MediaQuery.of(context).size.width * 0.25 -
-                            _animation.value,
+                        start: MediaQuery.of(context).size.width * 0.25 + _animation.value,
+                        end: MediaQuery.of(context).size.width * 0.25 - _animation.value,
                         top: MediaQuery.of(context).size.height * 0.02,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: _buildPinDots()
-                      ),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: _buildPinDots()),
                     ),
                   ],
                 ),
@@ -334,17 +315,14 @@ class _PinScreenState extends State<PinScreen>
                   margin: EdgeInsets.only(
                       left: MediaQuery.of(context).size.width * 0.07,
                       right: MediaQuery.of(context).size.width * 0.07,
-                      bottom: smallScreen(context)
-                          ? MediaQuery.of(context).size.height * 0.02
-                          : MediaQuery.of(context).size.height * 0.05,
+                      bottom: smallScreen(context) ? MediaQuery.of(context).size.height * 0.02 : MediaQuery.of(context).size.height * 0.05,
                       top: MediaQuery.of(context).size.height * 0.05),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).size.height * 0.01),
+                        margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.01),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
@@ -355,8 +333,7 @@ class _PinScreenState extends State<PinScreen>
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).size.height * 0.01),
+                        margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.01),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
@@ -367,8 +344,7 @@ class _PinScreenState extends State<PinScreen>
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).size.height * 0.01),
+                        margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.01),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
@@ -379,27 +355,18 @@ class _PinScreenState extends State<PinScreen>
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).size.height * 0.009),
+                        margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.009),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             SizedBox(
-                              height: smallScreen(context)
-                                  ? buttonSize - 15
-                                  : buttonSize,
-                              width: smallScreen(context)
-                                  ? buttonSize - 15
-                                  : buttonSize,
+                              height: smallScreen(context) ? buttonSize - 15 : buttonSize,
+                              width: smallScreen(context) ? buttonSize - 15 : buttonSize,
                             ),
                             _buildPinScreenButton("0", context),
                             Container(
-                              height: smallScreen(context)
-                                  ? buttonSize - 15
-                                  : buttonSize,
-                              width: smallScreen(context)
-                                  ? buttonSize - 15
-                                  : buttonSize,
+                              height: smallScreen(context) ? buttonSize - 15 : buttonSize,
+                              width: smallScreen(context) ? buttonSize - 15 : buttonSize,
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(200),
                                 highlightColor: StateContainer.of(context).curTheme.primary15,
@@ -410,8 +377,7 @@ class _PinScreenState extends State<PinScreen>
                                 },
                                 child: Container(
                                   alignment: AlignmentDirectional(0, 0),
-                                  child: Icon(Icons.backspace,
-                                      color: StateContainer.of(context).curTheme.primary, size: 20.0),
+                                  child: Icon(Icons.backspace, color: StateContainer.of(context).curTheme.primary, size: 20.0),
                                 ),
                               ),
                             ),

@@ -511,7 +511,7 @@ class _RequestSheetStateState extends State<RequestSheet> {
                             setState(() {
                               if (_requestAddressController.text.startsWith("★")) {
                                 _addressValidationText = AppLocalization.of(context).favoriteInvalid;
-                              } else {
+                              } else if (_requestAddressController.text.startsWith("@")) {
                                 _addressValidationText = AppLocalization.of(context).usernameInvalid;
                               }
                             });
@@ -527,8 +527,11 @@ class _RequestSheetStateState extends State<RequestSheet> {
                                                 : NumberUtil.getAmountAsRaw(_requestAmountController.text)
                                             : _rawAmount,
                                     destination: user.address,
-                                    userName: user is User ? user.username : null,
-                                    contactName: user is Contact ? user.name : null,
+                                    contactName: (user is User)
+                                        ? user.username
+                                        : (user is Contact)
+                                            ? user.name
+                                            : null,
                                     localCurrency: _localCurrencyMode ? _requestAmountController.text : null));
                           }
                         });

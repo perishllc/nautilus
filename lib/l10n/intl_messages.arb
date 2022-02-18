@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2022-02-07T19:29:24.380280",
+  "@@last_modified": "2022-02-16T02:07:04.782759",
   "cancel": "Cancel",
   "@cancel": {
     "description": "dialog_cancel",
@@ -51,6 +51,12 @@
   "receive": "Receive",
   "@receive": {
     "description": "home_receive_cta",
+    "type": "text",
+    "placeholders": {}
+  },
+  "request": "Request",
+  "@request": {
+    "description": "home_request_cta",
     "type": "text",
     "placeholders": {}
   },
@@ -420,9 +426,27 @@
     "type": "text",
     "placeholders": {}
   },
+  "requestedFrom": "Requested From",
+  "@requestedFrom": {
+    "description": "requested_from",
+    "type": "text",
+    "placeholders": {}
+  },
+  "requesting": "Requesting",
+  "@requesting": {
+    "description": "request_requesting",
+    "type": "text",
+    "placeholders": {}
+  },
   "to": "To",
   "@to": {
     "description": "send_to",
+    "type": "text",
+    "placeholders": {}
+  },
+  "from": "From",
+  "@from": {
+    "description": "request_from",
     "type": "text",
     "placeholders": {}
   },
@@ -434,6 +458,12 @@
   },
   "sendError": "An error occurred. Try again later.",
   "@sendError": {
+    "description": "send_generic_error",
+    "type": "text",
+    "placeholders": {}
+  },
+  "requestError": "This user doesn't seem to have Nautilus installed, or has notifications disabled.",
+  "@requestError": {
     "description": "send_generic_error",
     "type": "text",
     "placeholders": {}
@@ -456,9 +486,21 @@
     "type": "text",
     "placeholders": {}
   },
+  "enterUsername": "Enter a username",
+  "@enterUsername": {
+    "description": "enter_username",
+    "type": "text",
+    "placeholders": {}
+  },
   "invalidAddress": "Address entered was invalid",
   "@invalidAddress": {
     "description": "send_invalid_address",
+    "type": "text",
+    "placeholders": {}
+  },
+  "usernameUnavailable": "Username unavailable",
+  "@usernameUnavailable": {
+    "description": "username_unavailable",
     "type": "text",
     "placeholders": {}
   },
@@ -531,6 +573,12 @@
   "themeHeader": "Theme",
   "@themeHeader": {
     "description": "theme_header",
+    "type": "text",
+    "placeholders": {}
+  },
+  "receiveMinimum": "Receive Minimum",
+  "@receiveMinimum": {
+    "description": "receive_minimum",
     "type": "text",
     "placeholders": {}
   },
@@ -750,9 +798,9 @@
     "type": "text",
     "placeholders": {}
   },
-  "nautilusAPI": "Nautilus API",
-  "@nautilusAPI": {
-    "description": "nano_api",
+  "featured": "Featured",
+  "@featured": {
+    "description": "featured",
     "type": "text",
     "placeholders": {}
   },
@@ -789,6 +837,12 @@
   "notifications": "Notifications",
   "@notifications": {
     "description": "notifications_settings",
+    "type": "text",
+    "placeholders": {}
+  },
+  "autoImport": "Auto Import",
+  "@autoImport": {
+    "description": "auto_import",
     "type": "text",
     "placeholders": {}
   },
@@ -885,6 +939,12 @@
   "transferIntro": "This process will transfer the funds from a paper wallet to your Nautilus wallet.\n\nTap the \"%1\" button to start.",
   "@transferIntro": {
     "description": "transfer_intro",
+    "type": "text",
+    "placeholders": {}
+  },
+  "transferIntroShort": "This process will transfer the funds from a paper wallet to your Nautilus wallet.",
+  "@transferIntroShort": {
+    "description": "transfer_intro_short",
     "type": "text",
     "placeholders": {}
   },

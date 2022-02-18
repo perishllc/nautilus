@@ -162,7 +162,7 @@ class ContactDetailsSheet {
                                 borderRadius: BorderRadius.circular(25),
                               ),
                               child: Text(
-                                contact.name,
+                                "★" + contact.name,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,

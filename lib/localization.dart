@@ -328,6 +328,10 @@ class AppLocalization {
     return Intl.message("Sending", desc: 'send_sending', name: 'sending');
   }
 
+  String get requestedFrom {
+    return Intl.message("Requested From", desc: 'requested_from', name: 'requestedFrom');
+  }
+
   String get requesting {
     return Intl.message("Requesting", desc: 'request_requesting', name: 'requesting');
   }
@@ -353,7 +357,13 @@ class AppLocalization {
   }
 
   String get requestError {
-    return Intl.message("This user doesn't seem to have Nautilus installed, or has notifications disabled.", desc: 'send_generic_error', name: 'sendError');
+    return Intl.message("This user doesn't appear to have Nautilus installed, or has disabled notifications.",
+        desc: 'request_generic_error', name: 'requestError');
+  }
+
+  String get paymentRequestMessage {
+    return Intl.message("Someone has requested payment from you! check the payments page for more info.",
+        desc: 'payment_request_message', name: 'paymentRequestMessage');
   }
 
   String get mantaError {
@@ -446,6 +456,14 @@ class AppLocalization {
 
   String get purchaseNano {
     return Intl.message("Purchase Nano", desc: 'purchase_nano', name: 'purchaseNano');
+  }
+
+  String get home {
+    return Intl.message("Home", desc: 'home', name: 'home');
+  }
+
+  String get payments {
+    return Intl.message("Payments", desc: 'payments', name: 'payments');
   }
 
   String get registerUsername {
@@ -595,8 +613,8 @@ class AppLocalization {
     return Intl.message("Preferences", desc: 'settings_preferences_header', name: 'preferences');
   }
 
-  String get nautilusAPI {
-    return Intl.message("Nautilus API", desc: 'nano_api', name: 'nautilusAPI');
+  String get featured {
+    return Intl.message("Featured", desc: 'featured', name: 'featured');
   }
 
   String get manage {

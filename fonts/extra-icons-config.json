@@ -47,6 +47,42 @@
       "css": "greater_than",
       "code": 62769,
       "src": "fontawesome5"
+    },
+    {
+      "uid": "358d4afac72f9c78b0f40e7aca1ae732",
+      "css": "money_bill_wave",
+      "code": 62778,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "1d5b5e1bc01228d6b4cad17449df88f8",
+      "css": "money_bill_alt",
+      "code": 62417,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "1ea48916a85698330b3517e673187444",
+      "css": "money_bill",
+      "code": 61654,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "212ab54aac31030950fec3e2448ebee9",
+      "css": "money",
+      "code": 59392,
+      "src": "modernpics"
+    },
+    {
+      "uid": "8edaefd94639c91605b18d3183eb5b12",
+      "css": "coins",
+      "code": 62750,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "7472fe2c3787ab610355cddcf4e199ba",
+      "css": "home",
+      "code": 61461,
+      "src": "fontawesome5"
     }
   ]
 }

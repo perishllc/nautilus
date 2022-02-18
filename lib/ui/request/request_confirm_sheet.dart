@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
@@ -12,6 +14,7 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/contact.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -40,15 +43,12 @@ class RequestConfirmSheet extends StatefulWidget {
   final String amountRaw;
   final String destination;
   final String contactName;
-  final String userName;
   final String localCurrency;
   final MantaWallet manta;
   final PaymentRequestMessage paymentRequest;
   final int natriconNonce;
 
-  RequestConfirmSheet(
-      {this.amountRaw, this.destination, this.contactName, this.userName, this.localCurrency, this.manta, this.paymentRequest, this.natriconNonce})
-      : super();
+  RequestConfirmSheet({this.amountRaw, this.destination, this.contactName, this.localCurrency, this.manta, this.paymentRequest, this.natriconNonce}) : super();
 
   _RequestConfirmSheetState createState() => _RequestConfirmSheetState();
 }
@@ -306,19 +306,21 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     try {
       _showSendingAnimation(context);
 
-      // check if we have a username:
-      String name = "???";
-      if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.address != null) {
-        if (StateContainer.of(context).wallet?.username != null) {
-          name = "@" + StateContainer.of(context).wallet?.username;
-        } else {
-          name = StateContainer.of(context).wallet?.address?.substring(0, 12);
-        }
-      } else {
-        throw Exception("No wallet found!");
+      String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
+
+      // get epoch time as hex:
+      int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+      String nonce_hex = secondsSinceEpoch.toRadixString(16);
+      String signature = NanoSignatures.signBlock(nonce_hex, privKey);
+
+      // check validity locally:
+      String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet?.address);
+      bool isValid = NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+      if (!isValid) {
+        throw Exception("Invalid signature?!");
       }
 
-      await sl.get<AccountService>().requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address);
+      await sl.get<AccountService>().requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex);
 
       // // TODO:
       // ProcessResponse resp = await sl.get<AccountService>().requestSend(
@@ -332,20 +334,38 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       // if (widget.manta != null) {
       //   widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
       // }
-      // StateContainer.of(context).wallet.frontier = resp.hash;
-      // StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
-      // // Show complete
-      // // Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
-      // // String contactName = contact == null ? null : contact.name;
+
+      // Show complete
+      Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
+      String contactName;
+      if (contact == null) {
+        User user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
+        if (user != null) {
+          contactName = "@" + user.username;
+        }
+      } else {
+        contactName = "★" + contact.name;
+      }
+
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-      // StateContainer.of(context).requestUpdate();
-      Sheets.showAppHeightNineSheet(context: context, closeOnTap: true, removeUntilHome: true, widget: RequestCompleteSheet());
+      StateContainer.of(context).requestUpdate();
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          closeOnTap: true,
+          removeUntilHome: true,
+          widget: RequestCompleteSheet(
+            amountRaw: widget.amountRaw,
+            destination: destinationAltered,
+            contactName: contactName,
+            localAmount: widget.localCurrency,
+            paymentRequest: widget.paymentRequest,
+          ));
     } catch (e) {
       // Send failed
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).requestError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).requestError, context, durationMs: 3500);
       Navigator.of(context).pop();
     }
   }

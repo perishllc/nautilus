@@ -62,7 +62,7 @@ class DBHelper {
 
   initDb() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "kalium.db");
+    String path = join(documentsDirectory.path, "nautilus.db");
     var theDb = await openDatabase(path, version: DB_VERSION, onCreate: _onCreate, onUpgrade: _onUpgrade);
     return theDb;
   }
@@ -74,8 +74,6 @@ class DBHelper {
     await db.execute(REPS_SQL);
     await db.execute(ACCOUNTS_SQL);
     await db.execute(ACCOUNTS_ADD_ACCOUNT_COLUMN_SQL);
-
-    populateDBFromCache();
   }
 
   void _onUpgrade(Database db, int oldVersion, int newVersion) async {
@@ -117,10 +115,10 @@ class DBHelper {
     var users = await fetchNapiUsers(http.Client());
 
     // nuke the old databases:
-    nukeUsers();
+    await nukeUsers();
     // add the new users:
     for (var user in users) {
-      addUser(user);
+      await addUser(user);
     }
   }
 
@@ -268,6 +266,23 @@ class DBHelper {
     return null;
   }
 
+  Future<dynamic> getUserOrContactWithAddress(String address) async {
+    var dbClient = await db;
+    List<Map> list;
+    // check contacts first incase the user has a contact with the same address:
+    list = await dbClient.rawQuery('SELECT * FROM Contacts WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
+    if (list.length > 0) {
+      return Contact(id: list[0]["id"], name: list[0]["name"], address: list[0]["address"], monkeyPath: list[0]["monkey_path"]);
+    } else {
+      list = await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
+      // TODO: Handle multiple users with the same address
+      if (list.length > 0) {
+        return User(username: list[0]["username"], address: list[0]["address"]);
+      }
+    }
+    return null;
+  }
+
   Future<User> getUserWithName(String name) async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE username = ?', [name]);
@@ -279,13 +294,14 @@ class DBHelper {
 
   Future<dynamic> getUserOrContactWithName(String name) async {
     var dbClient = await db;
-    List<Map> userList = await dbClient.rawQuery('SELECT * FROM Users WHERE username = ?', [name]);
-    if (userList.length > 0) {
-      return User(username: userList[0]["username"], address: userList[0]["address"]);
+    // search through contacts first incase the user has a contact with the same name
+    List<Map> contactList = await dbClient.rawQuery('SELECT * FROM Contacts WHERE name = ?', [name]);
+    if (contactList.length > 0) {
+      return Contact(id: contactList[0]["id"], name: contactList[0]["name"], address: contactList[0]["address"]);
     } else {
-      List<Map> contactList = await dbClient.rawQuery('SELECT * FROM Contacts WHERE name = ?', [name]);
-      if (contactList.length > 0) {
-        return Contact(id: contactList[0]["id"], name: contactList[0]["name"], address: contactList[0]["address"]);
+      List<Map> userList = await dbClient.rawQuery('SELECT * FROM Users WHERE username = ?', [name]);
+      if (userList.length > 0) {
+        return User(username: userList[0]["username"], address: userList[0]["address"]);
       }
     }
     return null;

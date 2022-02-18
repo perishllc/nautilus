@@ -78,11 +78,17 @@ class AppIcons {
   // extra app icons:
   // had to include an extra font since I can't re-generate the font file without the config file
   // could be done eventually, but for now I'm just including the extra font file
+  static const IconData money = IconData(0xe800, fontFamily: _eFontFam, fontPackage: _kFontPkg);
   static const IconData heart = IconData(0xf004, fontFamily: _eFontFam, fontPackage: _kFontPkg);
   static const IconData star = IconData(0xf005, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData home = IconData(0xf015, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData money_bill = IconData(0xf0d6, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData money_bill_alt = IconData(0xf3d1, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData coins = IconData(0xf51e, fontFamily: _eFontFam, fontPackage: _kFontPkg);
   static const IconData greater_than = IconData(0xf531, fontFamily: _eFontFam, fontPackage: _kFontPkg);
   static const IconData greater_than_equal = IconData(0xf532, fontFamily: _eFontFam, fontPackage: _kFontPkg);
   static const IconData less_than = IconData(0xf536, fontFamily: _eFontFam, fontPackage: _kFontPkg);
   static const IconData less_than_equal = IconData(0xf537, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData money_bill_wave = IconData(0xf53a, fontFamily: _eFontFam, fontPackage: _kFontPkg);
   static const IconData wallet = IconData(0xf555, fontFamily: _eFontFam, fontPackage: _kFontPkg);
 }

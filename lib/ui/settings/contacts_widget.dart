@@ -378,7 +378,7 @@ class _ContactsListState extends State<ContactsList> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       //Contact name
-                      Text(contact.name, style: AppStyles.textStyleSettingItemHeader(context)),
+                      Text("★" + contact.name, style: AppStyles.textStyleSettingItemHeader(context)),
                       //Contact address
                       Text(
                         Address(contact.address).getShortString(),

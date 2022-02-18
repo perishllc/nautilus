@@ -12,6 +12,8 @@ PaymentRequest _$PaymentRequestFromJson(Map<String, dynamic> json) {
     account: json['account'] as String,
     amount_raw: json['amount_raw'] as String,
     requesting_account: json['requesting_account'] as String,
+    request_signature: json['request_signature'] as String,
+    request_nonce: json['request_nonce'] as String,
   );
 }
 
@@ -21,6 +23,8 @@ Map<String, dynamic> _$PaymentRequestToJson(PaymentRequest instance) {
     'account': instance.account,
     'amount_raw': instance.amount_raw,
     'requesting_account': instance.requesting_account,
+    'request_signature': instance.request_signature,
+    'request_nonce': instance.request_nonce,
   };
 
   void writeNotNull(String key, dynamic value) {

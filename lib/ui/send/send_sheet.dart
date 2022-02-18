@@ -128,9 +128,11 @@ class _SendSheetState extends State<SendSheet> {
           _amountHint = null;
         });
       } else {
+        // if (_sendAmountController.text.isNotEmpty) {
         setState(() {
           _amountHint = "";
         });
+        //
       }
     });
     // On address focus change
@@ -163,19 +165,37 @@ class _SendSheetState extends State<SendSheet> {
           });
         }
       } else {
+        if (_sendAddressController.text.length > 0) {
+          sl.get<DBHelper>().getUserOrContactWithName(_sendAddressController.text.substring(1)).then((user) {
+            if (user == null) {
+              setState(() {
+                _sendAddressStyle = AddressStyle.TEXT60;
+              });
+            } else {
+              setState(() {
+                _pasteButtonVisible = false;
+                _sendAddressStyle = AddressStyle.PRIMARY;
+              });
+            }
+          });
+        }
+
         setState(() {
           _addressHint = "";
           _users = [];
           if (Address(_sendAddressController.text).isValid()) {
             _addressValidAndUnfocused = true;
           }
+          if (_sendAddressController.text.length == 0) {
+            _pasteButtonVisible = true;
+          }
         });
-        if (_sendAddressController.text.trim() == "@" || _sendAddressController.text.trim() == "★") {
-          _sendAddressController.text = "";
-          setState(() {
-            _showContactButton = true;
-          });
-        }
+        // if (_sendAddressController.text.trim() == "@" || _sendAddressController.text.trim() == "★") {
+        //   _sendAddressController.text = "";
+        //   setState(() {
+        //     _showContactButton = true;
+        //   });
+        // }
       }
     });
     // Set initial currency format
@@ -500,8 +520,11 @@ class _SendSheetState extends State<SendSheet> {
                                                   : NumberUtil.getAmountAsRaw(_sendAmountController.text)
                                               : _rawAmount,
                                       destination: user.address,
-                                      userName: user is User ? user.username : null,
-                                      contactName: user is Contact ? user.name : null,
+                                      contactName: (user is User)
+                                          ? "@" + user.username
+                                          : (user is Contact)
+                                              ? "★" + user.name
+                                              : null,
                                       maxSend: _isMaxSend(),
                                       localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
                             }
@@ -549,8 +572,11 @@ class _SendSheetState extends State<SendSheet> {
                                                   : NumberUtil.getAmountAsRaw(_sendAmountController.text)
                                               : _rawAmount,
                                       destination: user.address,
-                                      userName: user is User ? user.username : null,
-                                      contactName: user is Contact ? user.name : null,
+                                      contactName: (user is User)
+                                          ? "@" + user.username
+                                          : (user is Contact)
+                                              ? "★" + user.name
+                                              : null,
                                       localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
                             }
                           });
@@ -602,10 +628,36 @@ class _SendSheetState extends State<SendSheet> {
                         } else {
                           // Is a URI
                           Address address = Address(scanResult);
-                          // See if this address belongs to a contact
-                          User user = await sl.get<DBHelper>().getUserWithAddress(address.address);
-                          if (user == null) {
-                            // Not a contact
+                          // See if this address belongs to a contact or username
+                          dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address);
+                          if (user != null) {
+                            if (user is User) {
+                              // Is a user
+                              if (mounted) {
+                                setState(() {
+                                  _isUser = true;
+                                  _addressValidationText = "";
+                                  _sendAddressStyle = AddressStyle.PRIMARY;
+                                  _pasteButtonVisible = false;
+                                  _showContactButton = false;
+                                });
+                                _sendAddressController.text = "@" + user.username;
+                              }
+                            } else if (user is Contact) {
+                              // Is a contact
+                              if (mounted) {
+                                setState(() {
+                                  _isUser = true;
+                                  _addressValidationText = "";
+                                  _sendAddressStyle = AddressStyle.PRIMARY;
+                                  _pasteButtonVisible = false;
+                                  _showContactButton = false;
+                                });
+                                _sendAddressController.text = "★" + user.name;
+                              }
+                            }
+                          } else {
+                            // Not a contact or username
                             if (mounted) {
                               setState(() {
                                 _isUser = false;
@@ -619,18 +671,6 @@ class _SendSheetState extends State<SendSheet> {
                               setState(() {
                                 _addressValidAndUnfocused = true;
                               });
-                            }
-                          } else {
-                            // Is a contact
-                            if (mounted) {
-                              setState(() {
-                                _isUser = true;
-                                _addressValidationText = "";
-                                _sendAddressStyle = AddressStyle.PRIMARY;
-                                _pasteButtonVisible = false;
-                                _showContactButton = false;
-                              });
-                              _sendAddressController.text = user.username;
                             }
                           }
                           // If amount is present, fill it and go to SendConfirm
@@ -673,7 +713,11 @@ class _SendSheetState extends State<SendSheet> {
                                               ? NumberUtil.getAmountAsRaw(_sendAmountController.text)
                                               : _rawAmount,
                                       destination: user != null ? user.address : address.address,
-                                      userName: user != null ? user.username : null,
+                                      contactName: (user is User)
+                                          ? "@" + user.username
+                                          : (user is Contact)
+                                              ? "★" + user.name
+                                              : null,
                                       maxSend: _isMaxSend(),
                                       localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
                             }
@@ -864,7 +908,6 @@ class _SendSheetState extends State<SendSheet> {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context).addressMising;
-
         _pasteButtonVisible = true;
       });
     } else if (!isFavorite && !isUser && !Address(_sendAddressController.text).isValid()) {
@@ -935,7 +978,15 @@ class _SendSheetState extends State<SendSheet> {
           }
           if (!_localCurrencyMode) {
             _sendAmountController.text = StateContainer.of(context).wallet.getAccountBalanceDisplay(context).replaceAll(r",", "");
+            _sendAmountController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAmountController.text.length));
             _sendAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAddressController.text.length));
+            // setState(() {
+            //   // force max send button to fade out
+            // });
+            // FocusScope.of(context).unfocus();
+            // if (!Address(_sendAddressController.text).isValid()) {
+            //   FocusScope.of(context).requestFocus(_sendAddressFocusNode);
+            // }
           } else {
             String localAmount = StateContainer.of(context)
                 .wallet
@@ -948,7 +999,7 @@ class _SendSheetState extends State<SendSheet> {
           }
         },
       ),
-      fadeSuffixOnCondition: true,
+      // fadeSuffixOnCondition: true,
       suffixShowFirstCondition: !_isMaxSend(),
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       textAlign: TextAlign.center,
@@ -1011,7 +1062,7 @@ class _SendSheetState extends State<SendSheet> {
               }
               Address address = Address(data.text);
               if (address.isValid()) {
-                sl.get<DBHelper>().getUserWithAddress(address.address).then((user) {
+                sl.get<DBHelper>().getUserOrContactWithAddress(address.address).then((user) {
                   if (user == null) {
                     setState(() {
                       _isUser = false;
@@ -1060,13 +1111,28 @@ class _SendSheetState extends State<SendSheet> {
             _sendAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAddressController.text.length));
           }
 
+          // remove the @ if it's the only text there:
+          if (text == "@" || text == "★" || text == "nano_") {
+            _sendAddressController.text = "";
+            _sendAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAddressController.text.length));
+            setState(() {
+              _showContactButton = true;
+              _pasteButtonVisible = true;
+              _isUser = false;
+              _users = [];
+            });
+            return;
+          }
+
           if (text.length > 0) {
             setState(() {
               _showContactButton = false;
+              _pasteButtonVisible = false;
             });
           } else {
             setState(() {
               _showContactButton = true;
+              _pasteButtonVisible = true;
             });
           }
           // add the @ back in:
@@ -1121,31 +1187,30 @@ class _SendSheetState extends State<SendSheet> {
           setState(() {
             _addressValidationText = "";
           });
-          if (!isUser && Address(text).isValid()) {
+          if (isNano && Address(text).isValid()) {
             _sendAddressFocusNode.unfocus();
             setState(() {
               _sendAddressStyle = AddressStyle.TEXT90;
               _addressValidationText = "";
               _pasteButtonVisible = false;
             });
-          } else if (!isUser) {
+          } else {
             setState(() {
               _sendAddressStyle = AddressStyle.TEXT60;
-              _pasteButtonVisible = true;
             });
-          } else {
-            sl.get<DBHelper>().getUserWithName(text).then((user) {
-              if (user == null) {
-                setState(() {
-                  _sendAddressStyle = AddressStyle.TEXT60;
-                });
-              } else {
-                setState(() {
-                  _pasteButtonVisible = false;
-                  _sendAddressStyle = AddressStyle.PRIMARY;
-                });
-              }
-            });
+            // } else {
+            // sl.get<DBHelper>().getUserWithName(text.substring(1)).then((user) {
+            //   if (user == null) {
+            //     setState(() {
+            //       _sendAddressStyle = AddressStyle.TEXT60;
+            //     });
+            //   } else {
+            //     setState(() {
+            //       _pasteButtonVisible = false;
+            //       _sendAddressStyle = AddressStyle.PRIMARY;
+            //     });
+            //   }
+            // });
           }
         },
         overrideTextFieldWidget: _addressValidAndUnfocused

@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -62,11 +63,6 @@ class _InheritedStateContainer extends InheritedWidget {
   @override
   bool updateShouldNotify(_InheritedStateContainer old) => true;
 }
-
-// Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   print("Handling a background message");
-//   print(message);
-// }
 
 class StateContainer extends StatefulWidget {
   // You must pass through a child.
@@ -191,7 +187,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> fetchNapiDatabases() async {
-    sl.get<DBHelper>().fetchDatabases();
+    await sl.get<DBHelper>().fetchDatabases();
   }
 
   Future<void> checkAndUpdateAlerts() async {
@@ -304,7 +300,8 @@ class StateContainerState extends State<StateContainer> {
     // sl.get<DBHelper>().populateDBFromCache();
 
     // todo: maybe not the correct place to do this:
-    // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
   }
 
   // Subscriptions
@@ -325,8 +322,10 @@ class StateContainerState extends State<StateContainer> {
       // PriceResponse's get pushed periodically, it wasn't a request we made so don't pop the queue
       // handle the null case in debug mode:
       setState(() {
-        wallet.btcPrice = event.response.btcPrice?.toString();
-        wallet.localCurrencyPrice = event.response.price?.toString();
+        if (wallet != null) {
+          wallet.btcPrice = event.response.btcPrice?.toString();
+          wallet.localCurrencyPrice = event.response.price?.toString();
+        }
       });
     });
     _connStatusSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((event) {
@@ -572,12 +571,13 @@ class StateContainerState extends State<StateContainer> {
     // get the preference for the receive threshold:
     sl.get<SharedPrefsUtil>().getMinRawReceive().then((String minRaw) {
       receiveThreshold = minRaw;
+      // Combat spam by raising minimum receive if pending block count is large enough
+      // only override the user preference if it was set to 0 (default)
+      if (response.pendingCount != null && response.pendingCount > 50 && minRaw == "0") {
+        // Bump min receive to 0.05 NANO
+        receiveThreshold = BigInt.from(5).pow(28).toString();
+      }
     });
-    // Combat spam by raising minimum receive if pending block count is large enough
-    if (response.pendingCount != null && response.pendingCount > 50) {
-      // Bump min receive to 0.05 NANO
-      receiveThreshold = BigInt.from(5).pow(28).toString();
-    }
     // Set currency locale here for the UI to access
     sl.get<SharedPrefsUtil>().getCurrency(deviceLocale).then((currency) {
       setState(() {
@@ -806,6 +806,33 @@ class StateContainerState extends State<StateContainer> {
           account: wallet.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().processQueue();
     }
+  }
+
+  // handle data side of payment requests and other notifications:
+
+  Future<void> handlePaymentRequest(dynamic data) async {
+    if (data.containsKey("payment_request")) {
+      String amount_raw = data['amount_raw'];
+      String requesting_account = data['requesting_account'];
+
+      // Send failed
+      // if (animationOpen) {
+      //   Navigator.of(context).pop();
+      // }
+      UIUtil.showSnackbar(AppLocalization.of(context).paymentRequestMessage, context, durationMs: 3500);
+      Navigator.of(context).pop();
+    }
+  }
+
+  Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    log.d("Handling a background message");
+    await handlePaymentRequest(message.data);
+  }
+
+  Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
+    log.d("Handling a foreground message");
+    await handlePaymentRequest(message.data);
+    log.d(message.data);
   }
 
   void logOut() {

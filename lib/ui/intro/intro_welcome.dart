@@ -70,7 +70,8 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // New Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet, Dimens.BUTTON_TOP_DIMENS, onPressed: () {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet, Dimens.BUTTON_TOP_DIMENS,
+                          instanceKey: Key("new_wallet_button"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_backup_safety');
                       }),
                     ],
