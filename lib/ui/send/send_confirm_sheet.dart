@@ -12,6 +12,7 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/contact.dart';
+import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
@@ -45,9 +46,18 @@ class SendConfirmSheet extends StatefulWidget {
   final MantaWallet manta;
   final PaymentRequestMessage paymentRequest;
   final int natriconNonce;
+  final String memo;
 
   SendConfirmSheet(
-      {this.amountRaw, this.destination, this.contactName, this.localCurrency, this.manta, this.paymentRequest, this.natriconNonce, this.maxSend = false})
+      {this.amountRaw,
+      this.destination,
+      this.contactName,
+      this.localCurrency,
+      this.manta,
+      this.paymentRequest,
+      this.natriconNonce,
+      this.maxSend = false,
+      this.memo})
       : super();
 
   _SendConfirmSheetState createState() => _SendConfirmSheetState();
@@ -328,12 +338,41 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           destinationAltered,
           StateContainer.of(context).wallet.address,
           NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
-          max: widget.maxSend);
+          max: widget.maxSend,
+          memo: widget.memo);
       if (widget.manta != null) {
         widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
       }
       StateContainer.of(context).wallet.frontier = resp.hash;
       StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
+
+      // if there's a memo to be sent, send it:
+      // TODO:
+
+      // go through and check to see if any unfulfilled payments are now fulfilled
+      List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
+      for (int i = 0; i < unfulfilledPayments.length; i++) {
+        TXData txData = unfulfilledPayments[i];
+
+        // TX is unfulfilled and in the past:
+        // int currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+        // if (currentTime - int.parse(txData.request_time) > 0) {
+        // }
+        // check destination of this request is where we're sending to:
+        // check to make sure we are the recipient of this request:
+        // check to make sure the amounts are the same:
+        if (txData.from_address == destinationAltered &&
+            txData.to_address == StateContainer.of(context).wallet.address &&
+            txData.amount_raw == widget.amountRaw) {
+          // this is the payment we're fulfilling
+          // update the TXData to be fulfilled
+          await sl.get<DBHelper>().changeTXFulfillmentStatus(txData, true);
+          // update the ui to reflect the change in the db:
+          StateContainer.of(context).restorePayments();
+          break;
+        }
+      }
+
       // Show complete
       Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
       String contactName;

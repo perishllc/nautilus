@@ -19,6 +19,20 @@ abstract class BaseTheme {
   Color successDark;
   Color successDark30;
 
+  Color warning;
+  Color warning60;
+  Color warning30;
+  Color warning15;
+  Color warningDark;
+  Color warningDark30;
+
+  Color error;
+  Color error60;
+  Color error30;
+  Color error15;
+  Color errorDark;
+  Color errorDark30;
+
   Color background;
   Color background40;
   Color background00;
@@ -92,6 +106,12 @@ class NautilusTheme extends BaseTheme {
   static const blackBlueish = Color(0xFF0D1014);
   static const blackLighter = Color(0xFF0E0F0F);
 
+  static const yellow = Color(0xFFFFB300);
+  static const yellowDark = Color(0xFFFFCB00);
+
+  static const red = Color(0xFFE80000);
+  static const redDark = Color(0xFFB20000);
+
   Color primary = nautilusBlue;
   Color primary60 = nautilusBlue.withOpacity(0.6);
   Color primary45 = nautilusBlue.withOpacity(0.45);
@@ -108,13 +128,25 @@ class NautilusTheme extends BaseTheme {
   Color successDark = greenDark;
   Color successDark30 = greenDark.withOpacity(0.3);
 
+  Color warning = yellow;
+  Color warning60 = yellow.withOpacity(0.6);
+  Color warning30 = yellow.withOpacity(0.3);
+  Color warning15 = yellow.withOpacity(0.15);
+
+  Color warningDark = yellowDark;
+  Color warningDark30 = yellowDark.withOpacity(0.3);
+
+  Color error = red;
+  Color error60 = red.withOpacity(0.6);
+  Color error30 = red.withOpacity(0.3);
+  Color error15 = red.withOpacity(0.15);
+
+  Color errorDark = redDark;
+  Color errorDark30 = redDark.withOpacity(0.3);
+
   Color background = black;
   Color background40 = black.withOpacity(0.4);
   Color background00 = black.withOpacity(0.0);
-
-  static const darkRed = Color(0xFF34151a);
-  static const darkRed2 = Color(0xFF1d181e);
-  static const brightRed = Color(0xFF852e31);
 
   Color backgroundDark = black;
   Color backgroundDark00 = black.withOpacity(0.0);
@@ -188,6 +220,14 @@ class TitaniumTheme extends BaseTheme {
 
   static const black = Color(0xFF000000);
 
+  static const yellow = Color(0xFFFFB300);
+
+  static const yellowDark = Color(0xFFFFCB00);
+
+  static const red = Color(0xFFE80000);
+
+  static const redDark = Color(0xFFB20000);
+
   Color primary = blueishGreen;
   Color primary60 = blueishGreen.withOpacity(0.6);
   Color primary45 = blueishGreen.withOpacity(0.45);
@@ -203,6 +243,22 @@ class TitaniumTheme extends BaseTheme {
 
   Color successDark = greenDark;
   Color successDark30 = greenDark.withOpacity(0.3);
+
+  Color warning = yellow;
+  Color warning60 = yellow.withOpacity(0.6);
+  Color warning30 = yellow.withOpacity(0.3);
+  Color warning15 = yellow.withOpacity(0.15);
+
+  Color warningDark = yellowDark;
+  Color warningDark30 = yellowDark.withOpacity(0.3);
+
+  Color error = red;
+  Color error60 = red.withOpacity(0.6);
+  Color error30 = red.withOpacity(0.3);
+  Color error15 = red.withOpacity(0.15);
+
+  Color errorDark = redDark;
+  Color errorDark30 = redDark.withOpacity(0.3);
 
   Color background = tealDark;
   Color background40 = tealDark.withOpacity(0.4);
@@ -266,6 +322,14 @@ class IndiumTheme extends BaseTheme {
 
   static const darkDeepBlue = Color(0xFF0050BB);
 
+  static const yellow = Color(0xFFFFB300);
+
+  static const yellowDark = Color(0xFFFFCB00);
+
+  static const red = Color(0xFFE80000);
+
+  static const redDark = Color(0xFFB20000);
+
   Color primary = deepBlue;
   Color primary60 = deepBlue.withOpacity(0.6);
   Color primary45 = deepBlue.withOpacity(0.45);
@@ -281,6 +345,22 @@ class IndiumTheme extends BaseTheme {
 
   Color successDark = greenLight;
   Color successDark30 = greenLight.withOpacity(0.3);
+
+  Color warning = yellow;
+  Color warning60 = yellow.withOpacity(0.6);
+  Color warning30 = yellow.withOpacity(0.3);
+  Color warning15 = yellow.withOpacity(0.15);
+
+  Color warningDark = yellowDark;
+  Color warningDark30 = yellowDark.withOpacity(0.3);
+
+  Color error = red;
+  Color error60 = red.withOpacity(0.6);
+  Color error30 = red.withOpacity(0.3);
+  Color error15 = red.withOpacity(0.15);
+
+  Color errorDark = redDark;
+  Color errorDark30 = redDark.withOpacity(0.3);
 
   Color background = white;
   Color background40 = white.withOpacity(0.4);
@@ -344,6 +424,14 @@ class NeptuniumTheme extends BaseTheme {
 
   static const black = Color(0xFF000000);
 
+  static const yellow = Color(0xFFFFB300);
+
+  static const yellowDark = Color(0xFFFFCB00);
+
+  static const red = Color(0xFFE80000);
+
+  static const redDark = Color(0xFFB20000);
+
   Color primary = blue;
   Color primary60 = blue.withOpacity(0.6);
   Color primary45 = blue.withOpacity(0.45);
@@ -359,6 +447,22 @@ class NeptuniumTheme extends BaseTheme {
 
   Color successDark = orangeDark;
   Color successDark30 = orangeDark.withOpacity(0.3);
+
+  Color warning = yellow;
+  Color warning60 = yellow.withOpacity(0.6);
+  Color warning30 = yellow.withOpacity(0.3);
+  Color warning15 = yellow.withOpacity(0.15);
+
+  Color warningDark = yellowDark;
+  Color warningDark30 = yellowDark.withOpacity(0.3);
+
+  Color error = red;
+  Color error60 = red.withOpacity(0.6);
+  Color error30 = red.withOpacity(0.3);
+  Color error15 = red.withOpacity(0.15);
+
+  Color errorDark = redDark;
+  Color errorDark30 = redDark.withOpacity(0.3);
 
   Color background = blueDark;
   Color background40 = blueDark.withOpacity(0.4);
@@ -422,6 +526,14 @@ class ThoriumTheme extends BaseTheme {
 
   static const black = Color(0xFF000000);
 
+  static const yellow = Color(0xFFFFB300);
+
+  static const yellowDark = Color(0xFFFFCB00);
+
+  static const red = Color(0xFFE80000);
+
+  static const redDark = Color(0xFFB20000);
+
   Color primary = teal;
   Color primary60 = teal.withOpacity(0.6);
   Color primary45 = teal.withOpacity(0.45);
@@ -437,6 +549,22 @@ class ThoriumTheme extends BaseTheme {
 
   Color successDark = orangeDark;
   Color successDark30 = orangeDark.withOpacity(0.3);
+
+  Color warning = yellow;
+  Color warning60 = yellow.withOpacity(0.6);
+  Color warning30 = yellow.withOpacity(0.3);
+  Color warning15 = yellow.withOpacity(0.15);
+
+  Color warningDark = yellowDark;
+  Color warningDark30 = yellowDark.withOpacity(0.3);
+
+  Color error = red;
+  Color error60 = red.withOpacity(0.6);
+  Color error30 = red.withOpacity(0.3);
+  Color error15 = red.withOpacity(0.15);
+
+  Color errorDark = redDark;
+  Color errorDark30 = redDark.withOpacity(0.3);
 
   Color background = purpleDark;
   Color background40 = purpleDark.withOpacity(0.4);
@@ -497,6 +625,14 @@ class CarbonTheme extends BaseTheme {
   static const blackBlueish = Color(0xFF0D1014);
   static const blackLighter = Color(0xFF0E0F0F);
 
+  static const yellow = Color(0xFFFFB300);
+
+  static const yellowDark = Color(0xFFFFCB00);
+
+  static const red = Color(0xFFE80000);
+
+  static const redDark = Color(0xFFB20000);
+
   Color primary = brightBlue;
   Color primary60 = brightBlue.withOpacity(0.6);
   Color primary45 = brightBlue.withOpacity(0.45);
@@ -512,6 +648,22 @@ class CarbonTheme extends BaseTheme {
 
   Color successDark = greenDark;
   Color successDark30 = greenDark.withOpacity(0.3);
+
+  Color warning = yellow;
+  Color warning60 = yellow.withOpacity(0.6);
+  Color warning30 = yellow.withOpacity(0.3);
+  Color warning15 = yellow.withOpacity(0.15);
+
+  Color warningDark = yellowDark;
+  Color warningDark30 = yellowDark.withOpacity(0.3);
+
+  Color error = red;
+  Color error60 = red.withOpacity(0.6);
+  Color error30 = red.withOpacity(0.3);
+  Color error15 = red.withOpacity(0.15);
+
+  Color errorDark = redDark;
+  Color errorDark30 = redDark.withOpacity(0.3);
 
   Color background = black;
   Color background40 = black.withOpacity(0.4);
@@ -586,6 +738,14 @@ class PurpeliumTheme extends BaseTheme {
   static const blackBlueish = Color(0xFF0D1014);
   static const blackLighter = Color(0xFF0E0F0F);
 
+  static const yellow = Color(0xFFFFB300);
+
+  static const yellowDark = Color(0xFFFFCB00);
+
+  static const red = Color(0xFFE80000);
+
+  static const redDark = Color(0xFFB20000);
+
   Color primary = purpeliumPurple;
   Color primary60 = purpeliumPurple.withOpacity(0.6);
   Color primary45 = purpeliumPurple.withOpacity(0.45);
@@ -601,6 +761,22 @@ class PurpeliumTheme extends BaseTheme {
 
   Color successDark = greenDark;
   Color successDark30 = greenDark.withOpacity(0.3);
+
+  Color warning = yellow;
+  Color warning60 = yellow.withOpacity(0.6);
+  Color warning30 = yellow.withOpacity(0.3);
+  Color warning15 = yellow.withOpacity(0.15);
+
+  Color warningDark = yellowDark;
+  Color warningDark30 = yellowDark.withOpacity(0.3);
+
+  Color error = red;
+  Color error60 = red.withOpacity(0.6);
+  Color error30 = red.withOpacity(0.3);
+  Color error15 = red.withOpacity(0.15);
+
+  Color errorDark = redDark;
+  Color errorDark30 = redDark.withOpacity(0.3);
 
   Color background = black;
   Color background40 = black.withOpacity(0.4);
@@ -676,6 +852,14 @@ class NyanoTheme extends NyanTheme {
   static const blackBlueish = Color(0xFF0D1014);
   static const blackLighter = Color(0xFF0E0F0F);
 
+  static const yellow = Color(0xFFFFB300);
+
+  static const yellowDark = Color(0xFFFFCB00);
+
+  static const red = Color(0xFFE80000);
+
+  static const redDark = Color(0xFFB20000);
+
   Color primary = nyanoBlue;
   Color primary60 = nyanoBlue.withOpacity(0.6);
   Color primary45 = nyanoBlue.withOpacity(0.45);
@@ -691,6 +875,22 @@ class NyanoTheme extends NyanTheme {
 
   Color successDark = greenDark;
   Color successDark30 = greenDark.withOpacity(0.3);
+
+  Color warning = yellow;
+  Color warning60 = yellow.withOpacity(0.6);
+  Color warning30 = yellow.withOpacity(0.3);
+  Color warning15 = yellow.withOpacity(0.15);
+
+  Color warningDark = yellowDark;
+  Color warningDark30 = yellowDark.withOpacity(0.3);
+
+  Color error = red;
+  Color error60 = red.withOpacity(0.6);
+  Color error30 = red.withOpacity(0.3);
+  Color error15 = red.withOpacity(0.15);
+
+  Color errorDark = redDark;
+  Color errorDark30 = redDark.withOpacity(0.3);
 
   Color background = black;
   Color background40 = black.withOpacity(0.4);

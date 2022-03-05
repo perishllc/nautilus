@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io' as io;
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
+import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
@@ -28,12 +30,21 @@ class DBHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         username TEXT, 
         address TEXT)""";
+  static const String BLOCKED_SQL =
+      """CREATE TABLE BlockedUsers( 
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        username TEXT, 
+        address TEXT)""";
   static const String REPS_SQL =
       """CREATE TABLE Reps( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         username TEXT, 
-        address TEXT)""";
+        address TEXT,
+        uptime TEXT,
+        synced TEXT,
+        website TEXT
+        )""";
   static const String ACCOUNTS_SQL =
       """CREATE TABLE Accounts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -43,6 +54,20 @@ class DBHelper {
         last_accessed INTEGER,
         private_key TEXT,
         balance TEXT)""";
+  static const String TX_DATA_SQL =
+      """CREATE TABLE Transactions( 
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        from_address TEXT,
+        to_address TEXT,
+        amount_raw TEXT,
+        is_request BOOLEAN,
+        request_time TEXT,
+        is_fulfilled BOOLEAN,
+        fulfillment_time TEXT,
+        block TEXT,
+        memo TEXT,
+        uuid TEXT,
+        is_acknowledged BOOLEAN)""";
   static const String ACCOUNTS_ADD_ACCOUNT_COLUMN_SQL = """
     ALTER TABLE Accounts ADD address TEXT
     """;
@@ -73,7 +98,9 @@ class DBHelper {
     await db.execute(USERS_SQL);
     await db.execute(REPS_SQL);
     await db.execute(ACCOUNTS_SQL);
+    await db.execute(TX_DATA_SQL);
     await db.execute(ACCOUNTS_ADD_ACCOUNT_COLUMN_SQL);
+    await db.execute(BLOCKED_SQL);
   }
 
   void _onUpgrade(Database db, int oldVersion, int newVersion) async {
@@ -111,14 +138,31 @@ class DBHelper {
     // }
   }
 
-  Future<void> fetchDatabases() async {
-    var users = await fetchNapiUsers(http.Client());
+  Future<void> loadNapiCache() async {
+    // get the json from the cache:
+    final String userData = await rootBundle.loadString("assets/store/known.json");
+    // final String repsData = await rootBundle.loadString("assets/store/reps.json");
+    final knownUsers = await json.decode(userData);
+    // final repsUsers = await json.decode(repsData);
 
+    // loop through the data and insert into the users table:
+    var users = parseUsers(knownUsers);
+    for (var user in users) {
+      await addOrReplaceUser(user);
+    }
+    // var reps = parseReps(repsUsers);
+    // for (var rep in reps) {
+    //   await addRep(rep);
+    // }
+  }
+
+  Future<void> fetchNapiUsernames() async {
+    var users = await fetchNapiKnown(http.Client());
     // nuke the old databases:
     await nukeUsers();
     // add the new users:
     for (var user in users) {
-      await addUser(user);
+      await addOrReplaceUser(user);
     }
   }
 
@@ -128,7 +172,7 @@ class DBHelper {
     return parsed.map<User>((json) => User.fromJson(json)).toList();
   }
 
-  Future<List<User>> fetchNapiUsers(http.Client client) async {
+  Future<List<User>> fetchNapiKnown(http.Client client) async {
     final response = await client.get(Uri.parse("https://nano.to/known?json=true"));
     // Use the compute function to run parseUsers in a separate isolate.
     return parseUsers(response.body);
@@ -138,6 +182,11 @@ class DBHelper {
     final response = await client.get(Uri.parse("https://nano.to/reps?json=true"));
     // Use the compute function to run parseUsers in a separate isolate.
     return parseUsers(response.body);
+  }
+
+  List<User> parseReps(String responseBody) {
+    final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+    return parsed.map<User>((json) => User.fromJson(json)).toList();
   }
 
   // Contacts
@@ -325,9 +374,233 @@ class DBHelper {
     return await dbClient.rawInsert('INSERT INTO Users (username, address) values(?, ?)', [user.username, user.address.replaceAll("xrb_", "nano_")]);
   }
 
+  Future<int> addOrReplaceUser(User user) async {
+    var dbClient = await db;
+    // check if it's already in the database:
+    bool userExists = await userExistsWithName(user.username);
+
+    if (!userExists) {
+      return await addUser(user);
+    } else {
+      return await dbClient.rawUpdate('UPDATE Users SET address = ? WHERE username = ?', [
+        user.address,
+        user.username,
+      ]);
+    }
+  }
+
   Future<bool> deleteUser(User user) async {
     var dbClient = await db;
     return await dbClient.rawDelete("DELETE FROM Users WHERE lower(username) like \'%${user.username.toLowerCase()}\'") > 0;
+  }
+
+  Future<int> addTXData(TXData txData) async {
+    var dbClient = await db;
+    // id INTEGER PRIMARY KEY AUTOINCREMENT,
+    // from_address TEXT,
+    // to_address TEXT,
+    // amount_raw TEXT,
+    // is_request BOOLEAN,
+    // request_time TEXT,
+    // is_fulfilled BOOLEAN,
+    // fulfillment_time TEXT,
+    // block TEXT,
+    // memo TEXT,
+    // uuid TEXT,
+    // return await dbClient.rawInsert('INSERT INTO Transactions (username, address) values(?, ?)', [txData.username, user.address.replaceAll("xrb_", "nano_")]);
+
+    return await dbClient.rawInsert(
+        'INSERT INTO Transactions (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, memo, uuid, is_acknowledged) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+          txData.from_address,
+          txData.to_address,
+          txData.amount_raw,
+          txData.is_request,
+          txData.request_time,
+          txData.is_fulfilled,
+          txData.fulfillment_time,
+          txData.block,
+          txData.memo,
+          txData.uuid,
+          txData.is_acknowledged,
+        ]);
+  }
+
+  Future<int> replaceTXDataByUUID(TXData txData) async {
+    var dbClient = await db;
+
+    return await dbClient.rawInsert(
+        'UPDATE Transactions SET (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, memo, uuid, is_acknowledged) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE uuid = ?',
+        [
+          txData.from_address,
+          txData.to_address,
+          txData.amount_raw,
+          txData.is_request,
+          txData.request_time,
+          txData.is_fulfilled,
+          txData.fulfillment_time,
+          txData.block,
+          txData.memo,
+          txData.uuid,
+          txData.is_acknowledged,
+          txData.uuid,
+        ]);
+  }
+
+  // txdata
+  Future<List<TXData>> getTXData() async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions ORDER BY request_time DESC');
+    List<TXData> transactions = [];
+    for (int i = 0; i < list.length; i++) {
+      transactions.add(new TXData(
+          id: list[i]["id"],
+          from_address: list[i]["from_address"],
+          to_address: list[i]["to_address"],
+          amount_raw: list[i]["amount_raw"],
+          is_request: list[i]["is_request"] == 0 ? false : true,
+          request_time: list[i]["request_time"],
+          is_fulfilled: list[i]["is_fulfilled"] == 0 ? false : true,
+          fulfillment_time: list[i]["fulfillment_time"],
+          block: list[i]["block"],
+          memo: list[i]["memo"],
+          uuid: list[i]["uuid"],
+          is_acknowledged: list[i]["is_acknowledged"] == 0 ? false : true));
+    }
+    return transactions;
+  }
+
+  Future<List<TXData>> getAccountSpecificTXData(String account) async {
+    var dbClient = await db;
+    List<Map> list =
+        await dbClient.rawQuery('SELECT * FROM Transactions WHERE from_address = ? OR to_address = ? ORDER BY request_time DESC', [account, account]);
+    // List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions ORDER BY request_time DESC');
+    List<TXData> transactions = [];
+    for (int i = 0; i < list.length; i++) {
+      // transactions.add(new TXData(username: list[i]["username"], address: list[i]["address"].replaceAll("xrb_", "nano_")));
+      transactions.add(new TXData(
+          id: list[i]["id"],
+          from_address: list[i]["from_address"],
+          to_address: list[i]["to_address"],
+          amount_raw: list[i]["amount_raw"],
+          is_request: list[i]["is_request"] == 0 ? false : true,
+          request_time: list[i]["request_time"],
+          is_fulfilled: list[i]["is_fulfilled"] == 0 ? false : true,
+          fulfillment_time: list[i]["fulfillment_time"],
+          block: list[i]["block"],
+          memo: list[i]["memo"],
+          uuid: list[i]["uuid"],
+          is_acknowledged: list[i]["is_acknowledged"] == 0 ? false : true));
+    }
+    return transactions;
+  }
+
+  Future<TXData> getBlockSpecificTXData(String block) async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE block = ? ORDER BY request_time DESC', [block]);
+    if (list.length > 0) {
+      return new TXData(
+          id: list[0]["id"],
+          from_address: list[0]["from_address"],
+          to_address: list[0]["to_address"],
+          amount_raw: list[0]["amount_raw"],
+          is_request: list[0]["is_request"] == 0 ? false : true,
+          request_time: list[0]["request_time"],
+          is_fulfilled: list[0]["is_fulfilled"] == 0 ? false : true,
+          fulfillment_time: list[0]["fulfillment_time"],
+          block: list[0]["block"],
+          memo: list[0]["memo"],
+          uuid: list[0]["uuid"],
+          is_acknowledged: list[0]["is_acknowledged"] == 0 ? false : true);
+    }
+    return null;
+  }
+
+  Future<TXData> getRequestTimeSpecificTXData(String request_time) async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE request_time = ? ORDER BY request_time DESC', [request_time]);
+    if (list.length > 0) {
+      return new TXData(
+          id: list[0]["id"],
+          from_address: list[0]["from_address"],
+          to_address: list[0]["to_address"],
+          amount_raw: list[0]["amount_raw"],
+          is_request: list[0]["is_request"] == 0 ? false : true,
+          request_time: list[0]["request_time"],
+          is_fulfilled: list[0]["is_fulfilled"] == 0 ? false : true,
+          fulfillment_time: list[0]["fulfillment_time"],
+          block: list[0]["block"],
+          memo: list[0]["memo"],
+          uuid: list[0]["uuid"],
+          is_acknowledged: list[0]["is_acknowledged"] == 0 ? false : true);
+    }
+    return null;
+  }
+
+  Future<TXData> getTXDataByUUID(String uuid) async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE uuid = ? ORDER BY request_time DESC', [uuid]);
+    if (list.length > 0) {
+      return new TXData(
+          id: list[0]["id"],
+          from_address: list[0]["from_address"],
+          to_address: list[0]["to_address"],
+          amount_raw: list[0]["amount_raw"],
+          is_request: list[0]["is_request"] == 0 ? false : true,
+          request_time: list[0]["request_time"],
+          is_fulfilled: list[0]["is_fulfilled"] == 0 ? false : true,
+          fulfillment_time: list[0]["fulfillment_time"],
+          block: list[0]["block"],
+          memo: list[0]["memo"],
+          uuid: list[0]["uuid"],
+          is_acknowledged: list[0]["is_acknowledged"] == 0 ? false : true);
+    }
+    return null;
+  }
+
+  Future<bool> deleteTXData(TXData txData) async {
+    var dbClient = await db;
+    return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(block) like \'%${txData.block.toLowerCase()}\'") > 0;
+  }
+
+  Future<List<TXData>> getUnfulfilledTXs() async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE is_fulfilled = 0 ORDER BY request_time');
+    List<TXData> transactions = [];
+    for (int i = 0; i < list.length; i++) {
+      transactions.add(new TXData(
+          id: list[i]["id"],
+          from_address: list[i]["from_address"],
+          to_address: list[i]["to_address"],
+          amount_raw: list[i]["amount_raw"],
+          is_request: list[i]["is_request"] == 0 ? false : true,
+          request_time: list[i]["request_time"],
+          is_fulfilled: list[i]["is_fulfilled"] == 0 ? false : true,
+          fulfillment_time: list[i]["fulfillment_time"],
+          block: list[i]["block"],
+          memo: list[i]["memo"],
+          uuid: list[i]["uuid"],
+          is_acknowledged: list[i]["is_acknowledged"] == 0 ? false : true));
+    }
+    return transactions;
+  }
+
+  Future<int> changeTXFulfillmentStatus(TXData txData, bool is_fulfilled) async {
+    var dbClient = await db;
+    // return await dbClient.rawUpdate('UPDATE Transactions SET is_fulfilled = ? WHERE id = ?', [is_fulfilled ? 1 : 0, txData.id]);
+    return await dbClient.rawUpdate('UPDATE Transactions SET is_fulfilled = ? WHERE uuid = ?', [
+      is_fulfilled ? 1 : 0,
+      txData.uuid,
+    ]);
+  }
+
+  Future<int> changeTXAckStatus(String uuid, bool is_acknowledged) async {
+    var dbClient = await db;
+    // return await dbClient.rawUpdate('UPDATE Transactions SET is_fulfilled = ? WHERE id = ?', [is_fulfilled ? 1 : 0, txData.id]);
+    return await dbClient.rawUpdate('UPDATE Transactions SET is_acknowledged = ? WHERE uuid = ?', [
+      is_acknowledged ? 1 : 0,
+      uuid,
+    ]);
   }
 
   Future<void> nukeUsers() async {

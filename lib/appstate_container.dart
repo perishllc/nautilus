@@ -7,6 +7,7 @@ import 'package:logger/logger.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
+import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
@@ -134,6 +135,10 @@ class StateContainerState extends State<StateContainer> {
   bool nanoNinjaUpdated = false;
   List<NinjaNode> nanoNinjaNodes;
 
+  // nano.to username db up to date?
+  bool nautilusUsernamesUpdated = false;
+  String lastUpdatedUsernames;
+
   // When wallet is encrypted
   String encryptedSecret;
 
@@ -186,8 +191,37 @@ class StateContainerState extends State<StateContainer> {
     return "";
   }
 
-  Future<void> fetchNapiDatabases() async {
-    await sl.get<DBHelper>().fetchDatabases();
+  Future<void> checkAndCacheNapiDatabases() async {
+    int currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    int lastUpdatedUsers = int.parse(await sl.get<SharedPrefsUtil>().getLastNapiUsersCheck());
+
+    // update if more than a day old:
+    if (currentTime - lastUpdatedUsers > 60 * 60 * 24) {
+      await sl.get<DBHelper>().fetchNapiUsernames();
+      await sl.get<SharedPrefsUtil>().setLastNapiUsersCheck(currentTime.toString());
+    }
+    // more than a week old?
+    // if (currentTime - lastUpdatedUsers > 60 * 60 * 24 * 7) {
+    //   await sl.get<AccountService>().fetchNapiRepresentatives();
+    //   await sl.get<SharedPrefsUtil>().setLastNapiRepsCheck(currentTime.toString());
+    // }
+    // await sl.get<DBHelper>().fetchDatabases();
+  }
+
+  Future<void> restorePayments() async {
+    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+      var payments = await sl.get<DBHelper>().getAccountSpecificTXData(wallet.address);
+
+      print("@@@@@@@@@@@@@@@@@@@@@@@@");
+      print(wallet.address);
+
+      for (var payment in payments) {
+        print(payment.from_address + "::::::" + payment.to_address);
+      }
+      setState(() {
+        this.wallet.payments = payments;
+      });
+    }
   }
 
   Future<void> checkAndUpdateAlerts() async {
@@ -295,7 +329,10 @@ class StateContainerState extends State<StateContainer> {
     });
     // make sure nano API databases are up to date
     // TODO: only call when out of date
-    fetchNapiDatabases();
+    checkAndCacheNapiDatabases();
+    // restore payments from the cache
+    restorePayments();
+
     // sl.get<DBHelper>().fetchDatabases();
     // sl.get<DBHelper>().populateDBFromCache();
 
@@ -706,6 +743,7 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> requestUpdate({bool pending = true}) async {
     if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+      restorePayments();
       String uuid = await sl.get<SharedPrefsUtil>().getUuid();
       String fcmToken;
       bool notificationsEnabled;
@@ -763,12 +801,37 @@ class StateContainerState extends State<StateContainer> {
         if (pending) {
           pendingRequests.clear();
           PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
+
+          // for unfulfilled payments:
+          List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
+
           // Initiate receive/open request for each pending
           for (String hash in pendingResp.blocks.keys) {
             PendingResponseItem pendingResponseItem = pendingResp.blocks[hash];
             pendingResponseItem.hash = hash;
             String receivedHash = await handlePendingItem(pendingResponseItem);
             if (receivedHash != null) {
+              // payments:
+              // check to see if this fulfills a payment request:
+
+              for (int i = 0; i < unfulfilledPayments.length; i++) {
+                TXData txData = unfulfilledPayments[i];
+                // check destination of this request is where we're sending to:
+                // check to make sure we made the request:
+                // check to make sure the amounts are the same:
+                if (txData.from_address == wallet.address &&
+                    txData.to_address == pendingResponseItem.source &&
+                    txData.amount_raw == pendingResponseItem.amount &&
+                    txData.is_fulfilled == false) {
+                  // this is the payment we're fulfilling
+                  // update the TXData to be fulfilled
+                  await sl.get<DBHelper>().changeTXFulfillmentStatus(txData, true);
+                  // update the ui to reflect the change in the db:
+                  restorePayments();
+                  break;
+                }
+              }
+
               AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
                   type: BlockTypes.RECEIVE, account: pendingResponseItem.source, amount: pendingResponseItem.amount, hash: receivedHash);
               if (!wallet.history.contains(histItem)) {
@@ -810,29 +873,134 @@ class StateContainerState extends State<StateContainer> {
 
   // handle data side of payment requests and other notifications:
 
-  Future<void> handlePaymentRequest(dynamic data) async {
+  Future<void> handlePayments(dynamic data) async {
     if (data.containsKey("payment_request")) {
       String amount_raw = data['amount_raw'];
       String requesting_account = data['requesting_account'];
+      String memo = data['memo'];
+      String request_time = data['request_time'];
+      String to_address = data['account'];
+      String uuid = data['uuid'];
+      String block = data['block'];
+      // String request_time = ((new DateTime.now()).millisecondsSinceEpoch ~/ 1000).toString();
+
+      print(requesting_account + "::::::" + to_address);
+
+      if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+        var txData = new TXData(
+          amount_raw: amount_raw,
+          is_request: true,
+          from_address: requesting_account,
+          to_address: to_address,
+          memo: memo,
+          is_fulfilled: false,
+          request_time: request_time,
+          fulfillment_time: "",
+          block: block,
+          uuid: uuid,
+          is_acknowledged: true,
+        );
+        sl.get<DBHelper>().addTXData(txData);
+
+        // send acknowledgement to server / requester:
+        sl.get<AccountService>().requestACK(uuid, requesting_account);
+
+        await restorePayments();
+      }
 
       // Send failed
       // if (animationOpen) {
       //   Navigator.of(context).pop();
       // }
-      UIUtil.showSnackbar(AppLocalization.of(context).paymentRequestMessage, context, durationMs: 3500);
-      Navigator.of(context).pop();
+      // UIUtil.showSnackbar(AppLocalization.of(context).paymentRequestMessage, context, durationMs: 3500);
+      // Navigator.of(context).pop();
+    }
+
+    if (data.containsKey("payment_record")) {
+      String amount_raw = data['amount_raw'];
+      String requesting_account = data['requesting_account'];
+      String memo = data['memo'];
+      String request_time = data['request_time'];
+      String to_address = data['account'];
+      String fulfillment_time = data['fulfillment_time'];
+      String block = data['block'];
+      String uuid = data['uuid'];
+
+      if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+        TXData txData;
+
+        // we have to check if this payment is already in the db:
+        if (uuid != null) {
+          var txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+          if (txData != null) {
+            log.d("updating existing txData!");
+            // this payment is already in the db:
+            await sl.get<DBHelper>().replaceTXDataByUUID(txData);
+          }
+        } else {
+          // something went wrong:
+          log.d("no uuid in payment record from server!!");
+        }
+
+        // didn't replace a txData, so add it:
+        log.d("adding txData to the database!");
+        if (txData == null) {
+          txData = new TXData(
+            amount_raw: amount_raw,
+            is_request: true,
+            from_address: requesting_account,
+            to_address: to_address,
+            memo: memo,
+            is_fulfilled: false,
+            request_time: request_time,
+            fulfillment_time: fulfillment_time,
+            block: block,
+            uuid: uuid,
+            is_acknowledged: false,
+          );
+          sl.get<DBHelper>().addTXData(txData);
+        }
+        await restorePayments();
+      }
+
+      // Send success
+      // if (animationOpen) {
+      //   Navigator.of(context).pop();
+      // }
+      // UIUtil.showSnackbar(AppLocalization.of(context).paymentRequestMessage, context, durationMs: 3500);
+      // Navigator.of(context).pop();
+    }
+
+    if (data.containsKey("payment_ack")) {
+      String amount_raw = data['amount_raw'];
+      String requesting_account = data['requesting_account'];
+      String memo = data['memo'];
+      String request_time = data['request_time'];
+      String to_address = data['account'];
+      String uuid = data['uuid'];
+      String block = data['block'];
+      String is_acknowledged = data['is_acknowledged'];
+
+      // set acknowledged to true:
+      var txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+      if (txData != null) {
+        await sl.get<DBHelper>().changeTXAckStatus(uuid, true);
+      } else {
+        log.d("we didn't have a txData for this payment ack!");
+      }
+      await restorePayments();
     }
   }
 
   Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     log.d("Handling a background message");
-    await handlePaymentRequest(message.data);
+    await handlePayments(message.data);
   }
 
   Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
     log.d("Handling a foreground message");
-    await handlePaymentRequest(message.data);
     log.d(message.data);
+    await handlePayments(message.data);
   }
 
   void logOut() {

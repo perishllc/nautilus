@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/payment_ack.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:logger/logger.dart';
@@ -143,7 +144,6 @@ class AccountService {
       _isConnected = true;
       EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.CONNECTED));
       _channel.stream.listen(_onMessageReceived, onDone: connectionClosed, onError: connectionClosedError);
-      _send("test@@@@@@@@@@@@@@@@@@@@");
     } catch (e) {
       log.e("Error from service ${e.toString()}", e);
       _isConnected = false;
@@ -213,7 +213,7 @@ class AccountService {
     await _lock.synchronized(() async {
       _isConnected = true;
       _isConnecting = false;
-      log.d("Received $message");
+      // log.d("Received $message");
       Map msg = await compute(decodeJson, message);
       // Determine response type
       if (msg.containsKey("uuid") ||
@@ -382,6 +382,9 @@ class AccountService {
 
   Future<PendingResponse> getPending(String account, int count, {String threshold, bool includeActive = false}) async {
     threshold = threshold ?? BigInt.from(10).pow(24).toString();
+    print("########################");
+    print(threshold);
+
     PendingRequest request = PendingRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
@@ -423,12 +426,24 @@ class AccountService {
     return AccountHistoryResponse.fromJson(response);
   }
 
-  // new:
   // request money from an account:
   /*Future<PaymentResponse> */ Future<void> requestPayment(
-      String account, String amount_raw, String requesting_account, String request_signature, String request_nonce) async {
+      String account, String amount_raw, String requesting_account, String request_signature, String request_nonce, String memo) async {
     PaymentRequest request = PaymentRequest(
-        account: account, amount_raw: amount_raw, requesting_account: requesting_account, request_signature: request_signature, request_nonce: request_nonce);
+        account: account,
+        amount_raw: amount_raw,
+        requesting_account: requesting_account,
+        request_signature: request_signature,
+        request_nonce: request_nonce,
+        memo: memo);
+    dynamic response = await makeHttpRequest(request);
+    if (response is ErrorResponse) {
+      throw Exception("Received error ${response.error}");
+    }
+  }
+
+  Future<void> requestACK(String request_uuid, String requesting_account) async {
+    PaymentACK request = PaymentACK(uuid: request_uuid, requesting_account: requesting_account);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
@@ -472,7 +487,7 @@ class AccountService {
   }
 
   Future<ProcessResponse> requestSend(String representative, String previous, String sendAmount, String link, String account, String privKey,
-      {bool max = false}) async {
+      {bool max = false, String memo}) async {
     StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
         previous: previous,

@@ -51,6 +51,9 @@ class SharedPrefsUtil {
   static const String use_nyanicon = 'nautilus_use_nyanicon';
   // spam prevention min-RAW for receives
   static const String min_raw_receive = '0';
+  // last time we checked for updates:
+  static const String last_napi_users_check = '0';
+  static const String last_napi_reps_check = '0';
 
   // For plain-text data
   Future<void> set(String key, value) async {
@@ -322,6 +325,22 @@ class SharedPrefsUtil {
 
   Future<void> setNinjaAPICache(String data) async {
     await set(ninja_api_cache, data);
+  }
+
+  Future<String> getLastNapiUsersCheck() async {
+    return await get(last_napi_users_check, defaultValue: "0");
+  }
+
+  Future<void> setLastNapiUsersCheck(String data) async {
+    await set(last_napi_users_check, data);
+  }
+
+  Future<String> getLastNapiRepsCheck() async {
+    return await get(last_napi_reps_check, defaultValue: "0");
+  }
+
+  Future<void> setLastNapiRepsCheck(String data) async {
+    await set(last_napi_reps_check, data);
   }
 
   Future<void> setUseNatricon(bool useNatricon) async {

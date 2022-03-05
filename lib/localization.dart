@@ -79,6 +79,10 @@ class AppLocalization {
     return Intl.message('receivable', desc: 'history_receivable', name: 'receivable');
   }
 
+  String get requested {
+    return Intl.message('Requested', desc: 'home_requested_cta', name: 'requested');
+  }
+
   String get unconfirmed {
     return Intl.message('unconfirmed', desc: 'history_unconfirmed', name: 'unconfirmed');
   }
@@ -379,6 +383,10 @@ class AppLocalization {
     return Intl.message("Enter Address", desc: 'enter_address', name: 'enterAddress');
   }
 
+  String get enterMemo {
+    return Intl.message("Optional Note", desc: 'enter_memo', name: 'enterMemo');
+  }
+
   String get enterUsername {
     return Intl.message("Enter a username", desc: 'enter_username', name: 'enterUsername');
   }
@@ -470,8 +478,8 @@ class AppLocalization {
     return Intl.message("Register Username", desc: 'register_username', name: 'registerUsername');
   }
 
-  String get generatePaperWallet {
-    return Intl.message("Generate Paper Wallet", desc: 'generate_paper_wallet', name: 'generatePaperWallet');
+  String get createGiftCard {
+    return Intl.message("Create Gift Card", desc: 'create_gift_card', name: 'createGiftCard');
   }
 
   String get changeRepAuthenticate {
@@ -866,6 +874,39 @@ class AppLocalization {
 
   String get exampleCardFrom {
     return Intl.message("from someone", desc: 'example_card_from', name: 'exampleCardFrom');
+  }
+
+  /// -- END EXAMPLE HOME SCREEN CARDS
+
+  /// -- EXAMPLE PAYMENTS SCREEN CARDS
+
+  String get examplePaymentIntro {
+    return Intl.message("Welcome to Nautilus. Once you send or receive a payment request, they'll show up like this:",
+        desc: 'example_payments_intro', name: 'examplePaymentIntro');
+  }
+
+  String get examplePaymentPending {
+    return Intl.message("A lot of", desc: 'example_payment_pending', name: 'examplePaymentPending');
+  }
+
+  String get examplePaymentFulfilled {
+    return Intl.message("Some", desc: 'example_payment_fulfilled', name: 'examplePaymentFulfilled');
+  }
+
+  String get examplePaymentPendingMemo {
+    return Intl.message("Rent", desc: 'example_payment_pending_memo', name: 'examplePaymentPendingMemo');
+  }
+
+  String get examplePaymentFulfilledMemo {
+    return Intl.message("Sushi", desc: 'example_payment_fulfilled_memo', name: 'examplePaymentFulfilledMemo');
+  }
+
+  String get examplePaymentTo {
+    return Intl.message("best friend", desc: 'example_card_to', name: 'examplePaymentTo');
+  }
+
+  String get examplePaymentFrom {
+    return Intl.message("landlord", desc: 'example_card_from', name: 'examplePaymentFrom');
   }
 
   /// -- END EXAMPLE HOME SCREEN CARDS

@@ -228,14 +228,15 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
               ),
 
               // Next Screen Button
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: <Widget>[
-              //     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).gotItButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-              //       Navigator.of(context).pushNamed('/intro_backup', arguments: StateContainer.of(context).encryptedSecret);
-              //     }),
-              //   ],
-              // ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).registerUsername, Dimens.BUTTON_BOTTOM_DIMENS,
+                      onPressed: () {
+                    // nothing for now
+                  }),
+                ],
+              ),
             ],
           ),
         ),

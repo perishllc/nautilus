@@ -10,12 +10,14 @@ import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/ui/generate/generate_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
@@ -206,20 +208,31 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                             fontWeight: FontWeight.w600,
                           )),
                     ),
+
                     // ******* Enter Amount Error Container End ******* //
                   ],
                 ),
               ),
 
-              // Next Screen Button
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: <Widget>[
-              //     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).gotItButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-              //       Navigator.of(context).pushNamed('/intro_backup', arguments: StateContainer.of(context).encryptedSecret);
-              //     }),
-              //   ],
-              // ),
+              // Button
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).createGiftCard, Dimens.BUTTON_BOTTOM_DIMENS,
+                      onPressed: () {
+                    // nothing for now
+                    Sheets.showAppHeightNineSheet(
+                        context: context,
+                        widget: GenerateConfirmSheet(
+                          // localCurrency: StateContainer.of(context).curCurrency,
+                          // contact: contact,
+                          destination: paper_wallet_account,
+                          // quickSendAmount: item.amount,
+                          amountRaw: "1000000000000000000000000",
+                        ));
+                  }),
+                ],
+              ),
             ],
           ),
         ),

@@ -18,8 +18,7 @@ StateBlock _$StateBlockFromJson(Map<String, dynamic> json) {
     ..signature = json['signature'] as String;
 }
 
-Map<String, dynamic> _$StateBlockToJson(StateBlock instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$StateBlockToJson(StateBlock instance) => <String, dynamic>{
       'type': instance.type,
       'previous': instance.previous,
       'account': instance.account,

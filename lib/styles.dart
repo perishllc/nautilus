@@ -200,6 +200,16 @@ class AppStyles {
     );
   }
 
+  // Address
+  static TextStyle textStyleTransactionMemo(BuildContext context) {
+    return TextStyle(
+      fontSize: AppFontSizes.smallest,
+      fontFamily: 'OverpassMono',
+      fontWeight: FontWeight.w100,
+      color: StateContainer.of(context).curTheme.text60,
+    );
+  }
+
   // Transaction Welcome
   static TextStyle textStyleTransactionWelcome(BuildContext context) {
     return TextStyle(

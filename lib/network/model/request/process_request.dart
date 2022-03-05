@@ -6,14 +6,14 @@ part 'process_request.g.dart';
 
 @JsonSerializable()
 class ProcessRequest extends BaseRequest {
-  @JsonKey(name:'action')
+  @JsonKey(name: 'action')
   String action;
 
-  @JsonKey(name:'block')
+  @JsonKey(name: 'block')
   String block;
 
   // Kalium/Natrium server accepts an optional do_work parameter. If true server will add work to this block for us
-  @JsonKey(name:'do_work')
+  @JsonKey(name: 'do_work')
   bool doWork;
 
   @JsonKey(name: 'subtype')

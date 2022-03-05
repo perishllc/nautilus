@@ -8,4 +8,5 @@ class Actions {
   static const String FCM_UPDATE = 'fcm_update';
   static const String INFO = "account_info";
   static const String REQUEST_PAYMENT = "request_payment";
+  static const String PAYMENT_ACK = "payment_ack";
 }

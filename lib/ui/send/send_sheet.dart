@@ -55,16 +55,20 @@ class _SendSheetState extends State<SendSheet> {
   final Logger log = sl.get<Logger>();
 
   FocusNode _sendAddressFocusNode;
-  TextEditingController _sendAddressController;
   FocusNode _sendAmountFocusNode;
+  FocusNode _sendMemoFocusNode;
+  TextEditingController _sendAddressController;
   TextEditingController _sendAmountController;
+  TextEditingController _sendMemoController;
 
   // States
   AddressStyle _sendAddressStyle;
   String _amountHint = "";
   String _addressHint = "";
+  String _memoHint = "";
   String _amountValidationText = "";
   String _addressValidationText = "";
+  String _memoValidationText = "";
   String quickSendAmount;
   List<dynamic> _users;
   bool animationOpen;
@@ -88,8 +92,10 @@ class _SendSheetState extends State<SendSheet> {
     super.initState();
     _sendAmountFocusNode = FocusNode();
     _sendAddressFocusNode = FocusNode();
+    _sendMemoFocusNode = FocusNode();
     _sendAmountController = TextEditingController();
     _sendAddressController = TextEditingController();
+    _sendMemoController = TextEditingController();
     _sendAddressStyle = AddressStyle.TEXT60;
     _users = List();
     quickSendAmount = widget.quickSendAmount;
@@ -141,6 +147,7 @@ class _SendSheetState extends State<SendSheet> {
         setState(() {
           _addressHint = null;
           _addressValidAndUnfocused = false;
+          _pasteButtonVisible = true;
         });
         _sendAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAddressController.text.length));
         if (_sendAddressController.text.length > 0 && !_sendAddressController.text.startsWith("nano_")) {
@@ -198,6 +205,19 @@ class _SendSheetState extends State<SendSheet> {
         // }
       }
     });
+    // On memo focus change
+    _sendMemoFocusNode.addListener(() {
+      if (_sendMemoFocusNode.hasFocus) {
+        setState(() {
+          _memoHint = null;
+        });
+      } else {
+        setState(() {
+          _memoHint = "";
+        });
+      }
+    });
+
     // Set initial currency format
     _localCurrencyFormat = NumberFormat.currency(locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
     // Set quick send amount
@@ -478,6 +498,44 @@ class _SendSheetState extends State<SendSheet> {
                                 // ******* Enter Address Error Container End ******* //
                               ],
                             ),
+
+                            // Column for Enter Memo container + Enter Memo Error container
+                            Column(
+                              children: <Widget>[
+                                Container(
+                                  alignment: Alignment.topCenter,
+                                  child: Stack(
+                                    alignment: Alignment.topCenter,
+                                    children: <Widget>[
+                                      Container(
+                                        margin:
+                                            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                        alignment: Alignment.bottomCenter,
+                                        constraints: BoxConstraints(maxHeight: 174, minHeight: 0),
+                                      ),
+
+                                      // ******* Enter Address Container ******* //
+                                      getEnterMemoContainer(),
+                                      // ******* Enter Address Container End ******* //
+                                    ],
+                                  ),
+                                ),
+
+                                // ******* Enter Memo Error Container ******* //
+                                Container(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  margin: EdgeInsets.only(top: 3),
+                                  child: Text(_memoValidationText,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: StateContainer.of(context).curTheme.primary,
+                                        fontFamily: 'NunitoSans',
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                ),
+                                // ******* Enter Memo Error Container End ******* //
+                              ],
+                            ),
                           ],
                         ),
                       ],
@@ -526,7 +584,8 @@ class _SendSheetState extends State<SendSheet> {
                                               ? "★" + user.name
                                               : null,
                                       maxSend: _isMaxSend(),
-                                      localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
+                                      localCurrency: _localCurrencyMode ? _sendAmountController.text : null,
+                                      memo: _sendMemoController.text));
                             }
                           });
                         } else if (validRequest) {
@@ -564,20 +623,22 @@ class _SendSheetState extends State<SendSheet> {
                               Sheets.showAppHeightNineSheet(
                                   context: context,
                                   widget: RequestConfirmSheet(
-                                      amountRaw: _localCurrencyMode
-                                          ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
-                                          : _rawAmount == null
-                                              ? (StateContainer.of(context).nyanoMode)
-                                                  ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
-                                                  : NumberUtil.getAmountAsRaw(_sendAmountController.text)
-                                              : _rawAmount,
-                                      destination: user.address,
-                                      contactName: (user is User)
-                                          ? "@" + user.username
-                                          : (user is Contact)
-                                              ? "★" + user.name
-                                              : null,
-                                      localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
+                                    amountRaw: _localCurrencyMode
+                                        ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                                        : _rawAmount == null
+                                            ? (StateContainer.of(context).nyanoMode)
+                                                ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
+                                                : NumberUtil.getAmountAsRaw(_sendAmountController.text)
+                                            : _rawAmount,
+                                    destination: user.address,
+                                    contactName: (user is User)
+                                        ? "@" + user.username
+                                        : (user is Contact)
+                                            ? "★" + user.name
+                                            : null,
+                                    localCurrency: _localCurrencyMode ? _sendAmountController.text : null,
+                                    memo: _sendMemoController.text,
+                                  ));
                             }
                           });
                         } else if (validRequest) {
@@ -592,7 +653,8 @@ class _SendSheetState extends State<SendSheet> {
                                               : NumberUtil.getAmountAsRaw(_sendAmountController.text)
                                           : _rawAmount,
                                   destination: _sendAddressController.text,
-                                  localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
+                                  localCurrency: _localCurrencyMode ? _sendAmountController.text : null,
+                                  memo: _sendMemoController.text));
                         }
                       }),
                     ],
@@ -1019,7 +1081,8 @@ class _SendSheetState extends State<SendSheet> {
     return AppTextField(
         topMargin: 124,
         padding: _addressValidAndUnfocused ? EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
-        textAlign: _isUser && false ? TextAlign.start : TextAlign.center,
+        textAlign: TextAlign.center,
+        // textAlign: (_isUser || _sendAddressController.text.length == 0) ? TextAlign.center : TextAlign.start,
         focusNode: _sendAddressFocusNode,
         controller: _sendAddressController,
         cursorColor: StateContainer.of(context).curTheme.primary,
@@ -1127,7 +1190,9 @@ class _SendSheetState extends State<SendSheet> {
           if (text.length > 0) {
             setState(() {
               _showContactButton = false;
-              _pasteButtonVisible = false;
+              if (!_addressValidAndUnfocused) {
+                _pasteButtonVisible = true;
+              }
             });
           } else {
             setState(() {
@@ -1226,5 +1291,50 @@ class _SendSheetState extends State<SendSheet> {
                 child: UIUtil.threeLineAddressText(context, _sendAddressController.text))
             : null);
   } //************ Enter Address Container Method End ************//
+  //*************************************************************//
+
+  //************ Enter Memo Container Method ************//
+  //*******************************************************//
+  getEnterMemoContainer() {
+    double margin = 200;
+    if (_sendAddressController.text.startsWith("nano_")) {
+      if (_sendAddressController.text.length > 24) {
+        margin = 217;
+      }
+      if (_sendAddressController.text.length > 48) {
+        margin = 238;
+      }
+    }
+    return AppTextField(
+      topMargin: margin,
+      padding: EdgeInsets.zero,
+      textAlign: TextAlign.center,
+      focusNode: _sendMemoFocusNode,
+      controller: _sendMemoController,
+      cursorColor: StateContainer.of(context).curTheme.primary,
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(20),
+      ],
+      textInputAction: TextInputAction.done,
+      maxLines: null,
+      autocorrect: false,
+      hintText: _memoHint == null ? "" : AppLocalization.of(context).enterMemo,
+      fadeSuffixOnCondition: true,
+      style: TextStyle(
+        // fontWeight: FontWeight.w700,
+        // fontSize: 16.0,
+        // color: StateContainer.of(context).curTheme.primary,
+        // fontFamily: 'NunitoSans',
+        color: StateContainer.of(context).curTheme.text60,
+        fontSize: AppFontSizes.small,
+        height: 1.5,
+        fontWeight: FontWeight.w100,
+        fontFamily: 'OverpassMono',
+      ),
+      onChanged: (text) {
+        // nothing for now
+      },
+    );
+  } //************ Enter Memo Container Method End ************//
   //*************************************************************//
 }

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
+import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
@@ -26,6 +27,7 @@ class AppWallet {
   int _blockCount;
   int confirmationHeight;
   List<AccountHistoryResponseItem> _history;
+  List<TXData> _payments;
 
   AppWallet(
       {String address,
@@ -39,6 +41,7 @@ class AppWallet {
       String btcPrice,
       int blockCount,
       List<AccountHistoryResponseItem> history,
+      List<TXData> payments,
       bool loading,
       bool historyLoading,
       bool paymentsLoading,
@@ -54,6 +57,7 @@ class AppWallet {
     this._btcPrice = btcPrice ?? "0";
     this._blockCount = blockCount ?? 0;
     this._history = history ?? new List<AccountHistoryResponseItem>();
+    this._payments = payments ?? new List<TXData>();
     this._loading = loading ?? true;
     this._historyLoading = historyLoading ?? true;
     this._paymentsLoading = paymentsLoading ?? true;
@@ -153,6 +157,12 @@ class AppWallet {
 
   set history(List<AccountHistoryResponseItem> value) {
     _history = value;
+  }
+
+  List<TXData> get payments => _payments;
+
+  set payments(List<TXData> value) {
+    _payments = value;
   }
 
   bool get loading => _loading;

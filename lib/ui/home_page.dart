@@ -12,6 +12,7 @@ import 'package:logger/logger.dart';
 import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
+import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -90,6 +91,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
   List<Contact> _contacts = List();
   List<User> _users = List();
+  List<TXData> _txData = List();
 
   // Price conversion state (BTC, NANO, NONE)
   PriceConversion _priceConversion;
@@ -276,8 +278,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       settingsIconMarginTop = 7;
     }
     _addSampleContact();
-    // _updateContacts();
+    _updateContacts();
     _updateUsers();
+    _updateTXData();
     // Setup placeholder animation and start
     _animationDisposed = false;
     _placeholderCardAnimationController = new AnimationController(
@@ -379,6 +382,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     sl.get<DBHelper>().getUsers().then((users) {
       setState(() {
         _users = users;
+      });
+    });
+  }
+
+  void _updateTXData() {
+    sl.get<DBHelper>().getTXData().then((txData) {
+      setState(() {
+        _txData = txData;
       });
     });
   }
@@ -581,6 +592,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           displayName = "@" + user.username;
           break;
         }
+      }
+    }
+
+    // todo: this is really inefficient, but I'm not sure of a better way with the current data structure
+    for (TXData txData in _txData) {
+      if (txData.block != null && txData.block == _historyListMap[StateContainer.of(context).wallet.address][localIndex].hash) {
+        return _buildTransactionCard(_historyListMap[StateContainer.of(context).wallet.address][localIndex], animation, displayName, context,
+            memo: txData.memo);
       }
     }
 
@@ -996,7 +1015,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   // Transaction Card/List Item
-  Widget _buildTransactionCard(AccountHistoryResponseItem item, Animation<double> animation, String displayName, BuildContext context) {
+  Widget _buildTransactionCard(AccountHistoryResponseItem item, Animation<double> animation, String displayName, BuildContext context, {String memo}) {
     String text;
     IconData icon;
     Color iconColor;
@@ -1009,6 +1028,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       icon = AppIcons.received;
       iconColor = StateContainer.of(context).curTheme.primary60;
     }
+
     return Slidable(
       delegate: SlidableScrollDelegate(),
       actionExtentRatio: 0.35,
@@ -1128,8 +1148,21 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         ),
                       ],
                     ),
+                    memo != null
+                        ? Container(
+                            // constraints: BoxConstraints(maxWidth: 105),
+                            width: MediaQuery.of(context).size.width / 4.3,
+                            child: Text(
+                              memo,
+                              textAlign: TextAlign.start,
+                              style: AppStyles.textStyleTransactionMemo(context),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )
+                        : SizedBox(),
                     Container(
-                      width: MediaQuery.of(context).size.width / 2.4,
+                      width: MediaQuery.of(context).size.width / (memo != null ? 4.0 : 2.4),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [

@@ -47,8 +47,10 @@ class RequestConfirmSheet extends StatefulWidget {
   final MantaWallet manta;
   final PaymentRequestMessage paymentRequest;
   final int natriconNonce;
+  final String memo;
 
-  RequestConfirmSheet({this.amountRaw, this.destination, this.contactName, this.localCurrency, this.manta, this.paymentRequest, this.natriconNonce}) : super();
+  RequestConfirmSheet({this.amountRaw, this.destination, this.contactName, this.localCurrency, this.manta, this.paymentRequest, this.natriconNonce, this.memo})
+      : super();
 
   _RequestConfirmSheetState createState() => _RequestConfirmSheetState();
 }
@@ -320,7 +322,9 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         throw Exception("Invalid signature?!");
       }
 
-      await sl.get<AccountService>().requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex);
+      await sl
+          .get<AccountService>()
+          .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, widget.memo);
 
       // // TODO:
       // ProcessResponse resp = await sl.get<AccountService>().requestSend(
