@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:devicelocale/devicelocale.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
@@ -91,7 +92,8 @@ class StateContainerState extends State<StateContainer> {
   final Logger log = sl.get<Logger>();
 
   // Minimum receive = 0.000001 NANO
-  String receiveThreshold = BigInt.from(10).pow(24).toString();
+  // String receiveThreshold = BigInt.from(10).pow(24).toString();
+  String receiveThreshold = "0";
   // min raw for receive
   // String minRawReceive = "0";
 
@@ -193,33 +195,35 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> checkAndCacheNapiDatabases() async {
     int currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-    int lastUpdatedUsers = int.parse(await sl.get<SharedPrefsUtil>().getLastNapiUsersCheck());
+    try {
+      int lastUpdatedUsers = int.parse(await sl.get<SharedPrefsUtil>().getLastNapiUsersCheck());
 
-    // update if more than a day old:
-    if (currentTime - lastUpdatedUsers > 60 * 60 * 24) {
+      // update if more than a day old:
+      if (currentTime - lastUpdatedUsers > 60 * 60 * 24) {
+        await sl.get<DBHelper>().fetchNapiUsernames();
+        await sl.get<SharedPrefsUtil>().setLastNapiUsersCheck(currentTime.toString());
+      }
+      // more than a week old?
+      // if (currentTime - lastUpdatedUsers > 60 * 60 * 24 * 7) {
+      //   await sl.get<AccountService>().fetchNapiRepresentatives();
+      //   await sl.get<SharedPrefsUtil>().setLastNapiRepsCheck(currentTime.toString());
+      // }
+      // await sl.get<DBHelper>().fetchDatabases();
+    } catch (e) {
+      log.e("Error checking and caching NAPI databases: $e");
+      // update now:
       await sl.get<DBHelper>().fetchNapiUsernames();
       await sl.get<SharedPrefsUtil>().setLastNapiUsersCheck(currentTime.toString());
     }
-    // more than a week old?
-    // if (currentTime - lastUpdatedUsers > 60 * 60 * 24 * 7) {
-    //   await sl.get<AccountService>().fetchNapiRepresentatives();
-    //   await sl.get<SharedPrefsUtil>().setLastNapiRepsCheck(currentTime.toString());
-    // }
-    // await sl.get<DBHelper>().fetchDatabases();
   }
 
   Future<void> restorePayments() async {
     if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
       var payments = await sl.get<DBHelper>().getAccountSpecificTXData(wallet.address);
 
-      print("@@@@@@@@@@@@@@@@@@@@@@@@");
-      print(wallet.address);
-
-      for (var payment in payments) {
-        print(payment.from_address + "::::::" + payment.to_address);
-      }
       setState(() {
         this.wallet.payments = payments;
+        EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet.payments));
       });
     }
   }
@@ -337,7 +341,11 @@ class StateContainerState extends State<StateContainer> {
     // sl.get<DBHelper>().populateDBFromCache();
 
     // todo: maybe not the correct place to do this:
-    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    try {
+      FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    } catch (e) {
+      log.e("Error registering background message handler: $e");
+    }
     FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
   }
 
@@ -610,10 +618,10 @@ class StateContainerState extends State<StateContainer> {
       receiveThreshold = minRaw;
       // Combat spam by raising minimum receive if pending block count is large enough
       // only override the user preference if it was set to 0 (default)
-      if (response.pendingCount != null && response.pendingCount > 50 && minRaw == "0") {
-        // Bump min receive to 0.05 NANO
-        receiveThreshold = BigInt.from(5).pow(28).toString();
-      }
+      // if (response.pendingCount != null && response.pendingCount > 50 && minRaw == "0") {
+      //   // Bump min receive to 0.05 NANO
+      //   receiveThreshold = BigInt.from(5).pow(28).toString();
+      // }
     });
     // Set currency locale here for the UI to access
     sl.get<SharedPrefsUtil>().getCurrency(deviceLocale).then((currency) {
@@ -743,7 +751,7 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> requestUpdate({bool pending = true}) async {
     if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-      restorePayments();
+      await restorePayments();
       String uuid = await sl.get<SharedPrefsUtil>().getUuid();
       String fcmToken;
       bool notificationsEnabled;
@@ -791,6 +799,7 @@ class StateContainerState extends State<StateContainer> {
         }
         setState(() {
           wallet.historyLoading = false;
+          wallet.paymentsLoading = false;
         });
         if (!postedToHome) {
           EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
@@ -800,6 +809,9 @@ class StateContainerState extends State<StateContainer> {
         // Receive pendings
         if (pending) {
           pendingRequests.clear();
+          print("################");
+          print(receiveThreshold);
+          print(await sl.get<SharedPrefsUtil>().getMinRawReceive());
           PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
 
           // for unfulfilled payments:
@@ -825,7 +837,7 @@ class StateContainerState extends State<StateContainer> {
                     txData.is_fulfilled == false) {
                   // this is the payment we're fulfilling
                   // update the TXData to be fulfilled
-                  await sl.get<DBHelper>().changeTXFulfillmentStatus(txData, true);
+                  await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
                   // update the ui to reflect the change in the db:
                   restorePayments();
                   break;

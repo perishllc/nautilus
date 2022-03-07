@@ -78,7 +78,7 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
-  final Map<String, GlobalKey<AnimatedListState>> _listKeyMap = Map();
+  final Map<String, GlobalKey<AnimatedListState>> _listPaymentsKeyMap = Map();
   final Map<String, ListModel<TXData>> _paymentsListMap = Map();
 
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
@@ -308,6 +308,7 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
     //   setState(() {
     //     StateContainer.of(context).wallet.loading = true;
     //     StateContainer.of(context).wallet.historyLoading = true;
+    //     StateContainer.of(context).wallet.paymentsLoading = true;
     //     _startAnimation();
     //     StateContainer.of(context).updateWallet(account: event.account);
     //     currentConfHeight = -1;
@@ -520,11 +521,11 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
           children: <Widget>[
             // REMOTE MESSAGE CARD
             StateContainer.of(context).activeAlert != null ? _buildRemoteMessageCard(StateContainer.of(context).activeAlert) : SizedBox(),
-            _buildWelcomeTransactionCard(context),
-            _buildDummyTransactionCard(AppLocalization.of(context).requested, AppLocalization.of(context).examplePaymentPending,
+            _buildWelcomePaymentCard(context),
+            _buildDummyPaymentCard(AppLocalization.of(context).requested, AppLocalization.of(context).examplePaymentPending,
                 AppLocalization.of(context).examplePaymentFrom, context,
                 isFulfilled: false, memo: AppLocalization.of(context).examplePaymentPendingMemo),
-            _buildDummyTransactionCard(
+            _buildDummyPaymentCard(
                 AppLocalization.of(context).request, AppLocalization.of(context).examplePaymentFulfilled, AppLocalization.of(context).examplePaymentTo, context,
                 isFulfilled: true, memo: AppLocalization.of(context).examplePaymentFulfilledMemo),
           ],
@@ -537,13 +538,13 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
     }
     if (StateContainer.of(context).activeAlert != null) {
       // Setup history list
-      if (!_listKeyMap.containsKey("${StateContainer.of(context).wallet.address}alert")) {
-        _listKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}alert", () => GlobalKey<AnimatedListState>());
+      if (!_paymentsListMap.containsKey("${StateContainer.of(context).wallet.address}alert")) {
+        _listPaymentsKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}alert", () => GlobalKey<AnimatedListState>());
         setState(() {
           _paymentsListMap.putIfAbsent(
             StateContainer.of(context).wallet.address,
             () => ListModel<TXData>(
-              listKey: _listKeyMap["${StateContainer.of(context).wallet.address}alert"],
+              listKey: _listPaymentsKeyMap["${StateContainer.of(context).wallet.address}alert"],
               initialItems: StateContainer.of(context).wallet.payments,
             ),
           );
@@ -552,7 +553,7 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
       return ReactiveRefreshIndicator(
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
         child: AnimatedList(
-          key: _listKeyMap["${StateContainer.of(context).wallet.address}alert"],
+          key: _listPaymentsKeyMap["${StateContainer.of(context).wallet.address}alert"],
           padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
           initialItemCount: _paymentsListMap[StateContainer.of(context).wallet.address].length + 1,
           itemBuilder: _buildItem,
@@ -562,13 +563,13 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
       );
     }
     // Setup history list
-    if (!_listKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
-      _listKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
+    if (!_listPaymentsKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
+      _listPaymentsKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
       setState(() {
         _paymentsListMap.putIfAbsent(
           StateContainer.of(context).wallet.address,
           () => ListModel<TXData>(
-            listKey: _listKeyMap["${StateContainer.of(context).wallet.address}"],
+            listKey: _listPaymentsKeyMap["${StateContainer.of(context).wallet.address}"],
             initialItems: StateContainer.of(context).wallet.payments,
           ),
         );
@@ -577,7 +578,7 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
     return ReactiveRefreshIndicator(
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       child: AnimatedList(
-        key: _listKeyMap[StateContainer.of(context).wallet.address],
+        key: _listPaymentsKeyMap[StateContainer.of(context).wallet.address],
         padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
         initialItemCount: _paymentsListMap[StateContainer.of(context).wallet.address].length,
         itemBuilder: _buildItem,
@@ -972,7 +973,7 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
             onPressed: () {
               Sheets.showAppHeightEightSheet(
                   context: context,
-                  widget: TransactionDetailsSheet(
+                  widget: PaymentDetailsSheet(
                     block: item.block,
                     from_address: item.from_address,
                     to_address: item.to_address,
@@ -1075,10 +1076,10 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
         ),
       ),
     );
-  } //Transaction Card End
+  } // Payment Card End
 
-  // Dummy Transaction Card
-  Widget _buildDummyTransactionCard(String type, String amount, String address, BuildContext context,
+  // Dummy Payment Card
+  Widget _buildDummyPaymentCard(String type, String amount, String address, BuildContext context,
       {bool isFulfilled = false, bool isRequest = false, String memo = ""}) {
     String text;
     IconData icon;
@@ -1179,7 +1180,7 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
         ),
       ),
     );
-  } //Dummy Transaction Card End
+  } //Dummy Payment Card End
 
   // Welcome Card
   TextSpan _getExampleHeaderSpan(BuildContext context) {
@@ -1222,7 +1223,7 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
     );
   }
 
-  Widget _buildWelcomeTransactionCard(BuildContext context) {
+  Widget _buildWelcomePaymentCard(BuildContext context) {
     return Container(
       margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
       decoration: BoxDecoration(
@@ -1836,7 +1837,7 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
   }
 }
 
-class TransactionDetailsSheet extends StatefulWidget {
+class PaymentDetailsSheet extends StatefulWidget {
   // final String hash;
   // final String address;
   // final String displayName;
@@ -1850,7 +1851,7 @@ class TransactionDetailsSheet extends StatefulWidget {
   final String fulfillment_time;
   final String memo;
 
-  TransactionDetailsSheet(
+  PaymentDetailsSheet(
       {this.block,
       this.amount_raw,
       this.from_address,
@@ -1862,10 +1863,10 @@ class TransactionDetailsSheet extends StatefulWidget {
       this.memo})
       : super();
 
-  _TransactionDetailsSheetState createState() => _TransactionDetailsSheetState();
+  _PaymentDetailsSheetState createState() => _PaymentDetailsSheetState();
 }
 
-class _TransactionDetailsSheetState extends State<TransactionDetailsSheet> {
+class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
   // Current state references
   bool _addressCopied = false;
   // Timer reference so we can cancel repeated events

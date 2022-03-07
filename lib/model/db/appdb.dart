@@ -585,12 +585,12 @@ class DBHelper {
     return transactions;
   }
 
-  Future<int> changeTXFulfillmentStatus(TXData txData, bool is_fulfilled) async {
+  Future<int> changeTXFulfillmentStatus(String uuid, bool is_fulfilled) async {
     var dbClient = await db;
     // return await dbClient.rawUpdate('UPDATE Transactions SET is_fulfilled = ? WHERE id = ?', [is_fulfilled ? 1 : 0, txData.id]);
     return await dbClient.rawUpdate('UPDATE Transactions SET is_fulfilled = ? WHERE uuid = ?', [
       is_fulfilled ? 1 : 0,
-      txData.uuid,
+      uuid,
     ]);
   }
 

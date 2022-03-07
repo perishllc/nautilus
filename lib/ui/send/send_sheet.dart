@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:event_taxi/event_taxi.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,9 +13,11 @@ import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
 
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/bus/fcm_update_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
+import 'package:nautilus_wallet_flutter/model/notification_settings.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
@@ -23,6 +27,7 @@ import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/request/request_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
@@ -231,6 +236,70 @@ class _SendSheetState extends State<SendSheet> {
     Navigator.of(context).push(AnimationLoadingOverlay(
         AnimationType.MANTA, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
         onPoppedCallback: () => animationOpen = false));
+  }
+
+  Future<bool> showNotificationDialog() async {
+    switch (await showDialog<NotificationOptions>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            title: Text(
+              AppLocalization.of(context).notifications,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            children: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, NotificationOptions.ON);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).onStr,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, NotificationOptions.OFF);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).off,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        })) {
+      case NotificationOptions.ON:
+        sl.get<SharedPrefsUtil>().setNotificationsOn(true).then((result) {
+          // setState(() {
+          // _curNotificiationSetting = NotificationSetting(NotificationOptions.ON);
+          // });
+          FirebaseMessaging.instance.requestPermission();
+          FirebaseMessaging.instance.getToken().then((fcmToken) {
+            EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
+          });
+        });
+        return true;
+      case NotificationOptions.OFF:
+        sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((result) {
+          // setState(() {
+          //   _curNotificiationSetting = NotificationSetting(NotificationOptions.OFF);
+          // });
+          FirebaseMessaging.instance.getToken().then((fcmToken) {
+            EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
+          });
+        });
+        return false;
+      default:
+        return false;
+    }
   }
 
   @override
@@ -605,43 +674,59 @@ class _SendSheetState extends State<SendSheet> {
                         }
                       }),
                       // Request Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).request, [7.0, 0.0, 27.0, 24.0], onPressed: () {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).request, [7.0, 0.0, 27.0, 24.0],
+                          onPressed: () async {
                         bool validRequest = _validateRequest(isRequest: true);
+
+                        // user must have notifications enabled:
+                        bool notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
+
                         // verifyies the input is a user in the db
                         if (!_sendAddressController.text.startsWith("nano_") && validRequest) {
                           // Need to make sure its a valid contact or user
-                          sl.get<DBHelper>().getUserOrContactWithName(_sendAddressController.text.substring(1)).then((user) {
-                            if (user == null) {
-                              setState(() {
-                                if (_sendAddressController.text.startsWith("★")) {
-                                  _addressValidationText = AppLocalization.of(context).favoriteInvalid;
-                                } else {
-                                  _addressValidationText = AppLocalization.of(context).usernameInvalid;
-                                }
-                              });
-                            } else {
-                              Sheets.showAppHeightNineSheet(
-                                  context: context,
-                                  widget: RequestConfirmSheet(
-                                    amountRaw: _localCurrencyMode
-                                        ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
-                                        : _rawAmount == null
-                                            ? (StateContainer.of(context).nyanoMode)
-                                                ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
-                                                : NumberUtil.getAmountAsRaw(_sendAmountController.text)
-                                            : _rawAmount,
-                                    destination: user.address,
-                                    contactName: (user is User)
-                                        ? "@" + user.username
-                                        : (user is Contact)
-                                            ? "★" + user.name
-                                            : null,
-                                    localCurrency: _localCurrencyMode ? _sendAmountController.text : null,
-                                    memo: _sendMemoController.text,
-                                  ));
+                          var user = await sl.get<DBHelper>().getUserOrContactWithName(_sendAddressController.text.substring(1));
+                          if (user == null) {
+                            setState(() {
+                              if (_sendAddressController.text.startsWith("★")) {
+                                _addressValidationText = AppLocalization.of(context).favoriteInvalid;
+                              } else {
+                                _addressValidationText = AppLocalization.of(context).usernameInvalid;
+                              }
+                            });
+                          } else {
+                            if (!notificationsEnabled) {
+                              bool notificationTurnedOn = await showNotificationDialog();
+                              if (!notificationTurnedOn) {
+                                return;
+                              }
                             }
-                          });
+                            Sheets.showAppHeightNineSheet(
+                                context: context,
+                                widget: RequestConfirmSheet(
+                                  amountRaw: _localCurrencyMode
+                                      ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                                      : _rawAmount == null
+                                          ? (StateContainer.of(context).nyanoMode)
+                                              ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
+                                              : NumberUtil.getAmountAsRaw(_sendAmountController.text)
+                                          : _rawAmount,
+                                  destination: user.address,
+                                  contactName: (user is User)
+                                      ? "@" + user.username
+                                      : (user is Contact)
+                                          ? "★" + user.name
+                                          : null,
+                                  localCurrency: _localCurrencyMode ? _sendAmountController.text : null,
+                                  memo: _sendMemoController.text,
+                                ));
+                          }
                         } else if (validRequest) {
+                          if (!notificationsEnabled) {
+                            bool notificationTurnedOn = await showNotificationDialog();
+                            if (!notificationTurnedOn) {
+                              return;
+                            }
+                          }
                           Sheets.showAppHeightNineSheet(
                               context: context,
                               widget: RequestConfirmSheet(

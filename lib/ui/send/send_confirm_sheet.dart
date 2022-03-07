@@ -366,7 +366,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             txData.amount_raw == widget.amountRaw) {
           // this is the payment we're fulfilling
           // update the TXData to be fulfilled
-          await sl.get<DBHelper>().changeTXFulfillmentStatus(txData, true);
+          await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
           // update the ui to reflect the change in the db:
           StateContainer.of(context).restorePayments();
           break;

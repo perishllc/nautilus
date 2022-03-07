@@ -172,6 +172,18 @@ class AppLocalization {
     return Intl.message("Could not Read QR Code", desc: "An unknown error occurred with the QR scanner", name: "qrUnknownError");
   }
 
+  String get markAsPaid {
+    return Intl.message("Mark as Paid", desc: "fulfill_payment", name: 'markAsPaid');
+  }
+
+  String get markAsUnpaid {
+    return Intl.message("Mark as Unpaid", desc: "unfulfill_payment", name: 'markAsUnpaid');
+  }
+
+  String get payRequest {
+    return Intl.message("Pay this request", desc: "pay_request", name: 'payRequest');
+  }
+
   /// -- END GENERIC ITEMS
 
   /// -- CONTACT ITEMS
@@ -361,7 +373,7 @@ class AppLocalization {
   }
 
   String get requestError {
-    return Intl.message("This user doesn't appear to have Nautilus installed, or has disabled notifications.",
+    return Intl.message("This user doesn't appear to have Nautilus installed, or has payment notifications disabled.",
         desc: 'request_generic_error', name: 'requestError');
   }
 
@@ -881,8 +893,15 @@ class AppLocalization {
   /// -- EXAMPLE PAYMENTS SCREEN CARDS
 
   String get examplePaymentIntro {
-    return Intl.message("Welcome to Nautilus. Once you send or receive a payment request, they'll show up like this:",
+    return Intl.message("Welcome to Nautilus. Once you send or receive a payment request, they'll show up here",
         desc: 'example_payments_intro', name: 'examplePaymentIntro');
+  }
+
+  String get examplePaymentExplainer {
+    return Intl.message(
+        "The Color of the card shows the status of the payment request. \nGreen indicates the request has been paid.\nYellow indicates the request has not been fulfilled.\nRed indicates the request has not been received.",
+        desc: 'example_payments_explainer',
+        name: 'examplePaymentExplainer');
   }
 
   String get examplePaymentPending {

@@ -382,8 +382,6 @@ class AccountService {
 
   Future<PendingResponse> getPending(String account, int count, {String threshold, bool includeActive = false}) async {
     threshold = threshold ?? BigInt.from(10).pow(24).toString();
-    print("########################");
-    print(threshold);
 
     PendingRequest request = PendingRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
     dynamic response = await makeHttpRequest(request);

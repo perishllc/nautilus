@@ -11,6 +11,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:logger/logger.dart';
 import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
+import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
@@ -88,6 +89,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   final Map<String, GlobalKey<AnimatedListState>> _listKeyMap = Map();
   final Map<String, ListModel<AccountHistoryResponseItem>> _historyListMap = Map();
 
+  // A separate unfortunate instance of this list, is a little unfortunate
+  // but seems the only way to handle the animations
+  final Map<String, GlobalKey<AnimatedListState>> _listPaymentsKeyMap = Map();
+  final Map<String, ListModel<TXData>> _paymentsListMap = Map();
+
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
   List<Contact> _contacts = List();
   List<User> _users = List();
@@ -98,6 +104,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   bool _isRefreshing = false;
 
+  bool _isPaymentsRefreshing = false;
   bool _lockDisabled = false; // whether we should avoid locking the app
   bool _lockTriggered = false;
 
@@ -396,6 +403,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   StreamSubscription<ConfirmationHeightChangedEvent> _confirmEventSub;
   StreamSubscription<HistoryHomeEvent> _historySub;
+  StreamSubscription<PaymentsHomeEvent> _paymentsSub;
   StreamSubscription<ContactModifiedEvent> _contactModifiedSub;
   StreamSubscription<DisableLockTimeoutEvent> _disableLockSub;
   StreamSubscription<AccountChangedEvent> _switchAccountSub;
@@ -410,6 +418,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         handleDeepLink(StateContainer.of(context).initialDeepLink);
         StateContainer.of(context).initialDeepLink = null;
       }
+    });
+    _paymentsSub = EventTaxiImpl.singleton().registerTo<PaymentsHomeEvent>().listen((event) {
+      diffAndUpdatePaymentList(event.items);
+      setState(() {
+        _isPaymentsRefreshing = false;
+      });
     });
     _contactModifiedSub = EventTaxiImpl.singleton().registerTo<ContactModifiedEvent>().listen((event) {
       _updateContacts();
@@ -426,6 +440,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       setState(() {
         StateContainer.of(context).wallet.loading = true;
         StateContainer.of(context).wallet.historyLoading = true;
+        StateContainer.of(context).wallet.paymentsLoading = true;
         _startAnimation();
         StateContainer.of(context).updateWallet(account: event.account);
         currentConfHeight = -1;
@@ -718,6 +733,21 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     });
   }
 
+  // payments
+  Future<void> _refresh_payments() async {
+    setState(() {
+      _isPaymentsRefreshing = true;
+    });
+    sl.get<HapticUtil>().success();
+    StateContainer.of(context).restorePayments();
+    // Hide refresh indicator after 2 seconds
+    Future.delayed(new Duration(seconds: 2), () {
+      setState(() {
+        _isPaymentsRefreshing = false;
+      });
+    });
+  }
+
   ///
   /// Because there's nothing convenient like DiffUtil, some manual logic
   /// to determine the differences between two lists and to add new items.
@@ -740,6 +770,25 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     } else {
       updateConfirmationHeights(StateContainer.of(context).wallet.confirmationHeight);
     }
+  }
+
+  void diffAndUpdatePaymentList(List<TXData> newList) {
+    if (newList == null || newList.length == 0 || _paymentsListMap[StateContainer.of(context).wallet.address] == null) return;
+
+    // setState(() {
+    //   StateContainer.of(context).wallet.loading = true;
+    //   StateContainer.of(context).wallet.paymentsLoading = true;
+    //   _startAnimation();
+    //   _paymentsListMap[StateContainer.of(context).wallet.address].items.clear();
+    // });
+    setState(() {
+      _paymentsListMap[StateContainer.of(context).wallet.address].items.clear();
+      _paymentsListMap[StateContainer.of(context).wallet.address].items.addAll(newList);
+    });
+    // setState(() {
+    //   StateContainer.of(context).wallet.paymentsLoading = false;
+    //   _disposeAnimation();
+    // });
   }
 
   Future<void> handleDeepLink(link) async {
@@ -898,7 +947,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: Container(
-                                height: 30.0,
+                                // height: 30.0,
+                                height: 10.0,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
@@ -912,6 +962,61 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                           ],
                         ),
                       ), //Transactions List End
+                      //Payments Text
+                      Container(
+                        margin: EdgeInsetsDirectional.fromSTEB(30.0, 20.0, 26.0, 0.0),
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              CaseChange.toUpperCase(AppLocalization.of(context).payments, context),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w100,
+                                color: StateContainer.of(context).curTheme.text,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ), //Payments Text End
+                      //Payments List
+                      Expanded(
+                        child: Stack(
+                          children: <Widget>[
+                            _getPaymentsListWidget(context),
+                            //List Top Gradient End
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Container(
+                                height: 10.0,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [StateContainer.of(context).curTheme.background00, StateContainer.of(context).curTheme.background],
+                                    begin: AlignmentDirectional(0.5, 1.0),
+                                    end: AlignmentDirectional(0.5, -1.0),
+                                  ),
+                                ),
+                              ),
+                            ), // List Top Gradient End
+                            //List Bottom Gradient
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                height: 30.0,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [StateContainer.of(context).curTheme.background00, StateContainer.of(context).curTheme.background],
+                                    begin: AlignmentDirectional(0.5, -1),
+                                    end: AlignmentDirectional(0.5, 0.5),
+                                  ),
+                                ),
+                              ),
+                            ), //List Bottom Gradient End
+                          ],
+                        ),
+                      ), //Payments List End
                       //Buttons background
                       SizedBox(
                         height: 55,
@@ -1319,6 +1424,43 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     );
   }
 
+  // Welcome Card
+  TextSpan _getPaymentExampleHeaderSpan(BuildContext context) {
+    String workingStr = AppLocalization.of(context).examplePaymentIntro;
+
+    if (!workingStr.contains("NANO")) {
+      return TextSpan(
+        text: workingStr,
+        style: AppStyles.textStyleTransactionWelcome(context),
+      );
+    }
+    // Colorize NANO
+    List<String> splitStr = workingStr.split("NANO");
+    if (splitStr.length != 2) {
+      return TextSpan(
+        text: workingStr,
+        style: AppStyles.textStyleTransactionWelcome(context),
+      );
+    }
+    return TextSpan(
+      text: '',
+      children: [
+        TextSpan(
+          text: splitStr[0],
+          style: AppStyles.textStyleTransactionWelcome(context),
+        ),
+        TextSpan(
+          text: "NANO",
+          style: AppStyles.textStyleTransactionWelcomePrimary(context),
+        ),
+        TextSpan(
+          text: splitStr[1],
+          style: AppStyles.textStyleTransactionWelcome(context),
+        ),
+      ],
+    );
+  }
+
   Widget _buildWelcomeTransactionCard(BuildContext context) {
     return Container(
       margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
@@ -1345,6 +1487,94 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: _getExampleHeaderSpan(context),
+                ),
+              ),
+            ),
+            Container(
+              width: 7.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                color: StateContainer.of(context).curTheme.primary,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  } // Welcome Card End
+
+  Widget _buildWelcomePaymentCard(BuildContext context) {
+    return Container(
+      margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      decoration: BoxDecoration(
+        color: StateContainer.of(context).curTheme.backgroundDark,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+      ),
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              width: 7.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                color: StateContainer.of(context).curTheme.primary,
+                boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+              ),
+            ),
+            Flexible(
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 15.0),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: _getPaymentExampleHeaderSpan(context),
+                ),
+              ),
+            ),
+            Container(
+              width: 7.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                color: StateContainer.of(context).curTheme.primary,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  } // Welcome Card End
+
+  Widget _buildWelcomePaymentCardTwo(BuildContext context) {
+    return Container(
+      margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      decoration: BoxDecoration(
+        color: StateContainer.of(context).curTheme.backgroundDark,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+      ),
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              width: 7.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                color: StateContainer.of(context).curTheme.primary,
+                boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+              ),
+            ),
+            Flexible(
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 15.0),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  // text: _getPaymentExampleHeaderSpan(context),
+                  text: TextSpan(
+                    text: AppLocalization.of(context).examplePaymentExplainer,
+                    style: AppStyles.textStyleTransactionWelcome(context),
+                  ),
                 ),
               ),
             ),
@@ -1931,6 +2161,488 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       ),
     );
   }
+
+  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  // PAYMENTS
+  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+  // Dummy Payment Card
+  Widget _buildDummyPaymentCard(String type, String amount, String address, BuildContext context,
+      {bool isFulfilled = false, bool isRequest = false, bool isAcknowleged = false, String memo = ""}) {
+    String text;
+    IconData icon;
+    Color iconColor;
+
+    bool isRecipient = type == AppLocalization.of(context).request;
+
+    if (isRecipient) {
+      text = AppLocalization.of(context).request;
+      icon = AppIcons.sent;
+    } else {
+      text = AppLocalization.of(context).requested;
+      icon = AppIcons.received;
+    }
+
+    BoxShadow setShadow;
+
+    if (!isAcknowleged && !isFulfilled) {
+      iconColor = StateContainer.of(context).curTheme.error60;
+      setShadow = BoxShadow(
+        color: StateContainer.of(context).curTheme.error60.withOpacity(0.5),
+        offset: Offset(0, 0),
+        blurRadius: 0,
+        spreadRadius: 1,
+      );
+    } else if (!isFulfilled) {
+      iconColor = StateContainer.of(context).curTheme.warning60;
+      setShadow = BoxShadow(
+        color: StateContainer.of(context).curTheme.warning60.withOpacity(0.2),
+        offset: Offset(0, 0),
+        blurRadius: 0,
+        spreadRadius: 1,
+      );
+    } else {
+      iconColor = StateContainer.of(context).curTheme.success60;
+      setShadow = BoxShadow(
+        color: StateContainer.of(context).curTheme.success60.withOpacity(0.2),
+        offset: Offset(0, 0),
+        blurRadius: 0,
+        spreadRadius: 1,
+      );
+    }
+
+    return Container(
+      margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      decoration: BoxDecoration(
+        color: StateContainer.of(context).curTheme.backgroundDark,
+        borderRadius: BorderRadius.circular(10.0),
+        // boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+        boxShadow: [setShadow],
+      ),
+      child: FlatButton(
+        onPressed: () {
+          return null;
+        },
+        highlightColor: StateContainer.of(context).curTheme.text15,
+        splashColor: StateContainer.of(context).curTheme.text15,
+        color: StateContainer.of(context).curTheme.backgroundDark,
+        padding: EdgeInsets.all(0.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Container(margin: EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            text,
+                            textAlign: TextAlign.start,
+                            style: AppStyles.textStyleTransactionType(context),
+                          ),
+                          RichText(
+                            textAlign: TextAlign.start,
+                            text: TextSpan(
+                              text: '',
+                              children: [
+                                TextSpan(
+                                  text: amount + " NANO",
+                                  style: AppStyles.textStyleTransactionAmount(
+                                    context,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 4.3,
+                  child: Text(
+                    memo,
+                    textAlign: TextAlign.start,
+                    style: AppStyles.textStyleTransactionMemo(context),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 4,
+                  child: Text(
+                    address,
+                    textAlign: TextAlign.end,
+                    style: AppStyles.textStyleTransactionAddress(context),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  } //Dummy Payment Card End
+
+// Transaction Card/List Item
+  Widget _buildPaymentCard(TXData item, Animation<double> animation, String displayName, BuildContext context) {
+    String text;
+    IconData icon;
+    Color iconColor;
+
+    bool isRecipient = StateContainer.of(context).wallet.address == item.to_address;
+
+    if (isRecipient) {
+      text = AppLocalization.of(context).request;
+      icon = AppIcons.sent;
+      iconColor = StateContainer.of(context).curTheme.text60;
+    } else {
+      text = AppLocalization.of(context).requested;
+      icon = AppIcons.received;
+      iconColor = StateContainer.of(context).curTheme.primary60;
+    }
+
+    BoxShadow setShadow;
+
+    if (!item.is_acknowledged && !item.is_fulfilled) {
+      iconColor = StateContainer.of(context).curTheme.error60;
+      setShadow = BoxShadow(
+        color: StateContainer.of(context).curTheme.error60.withOpacity(0.2),
+        offset: Offset(0, 0),
+        blurRadius: 0,
+        spreadRadius: 1,
+      );
+    } else if (!item.is_fulfilled) {
+      iconColor = StateContainer.of(context).curTheme.warning60;
+      setShadow = BoxShadow(
+        color: StateContainer.of(context).curTheme.warning60.withOpacity(0.2),
+        offset: Offset(0, 0),
+        blurRadius: 0,
+        spreadRadius: 1,
+      );
+    } else {
+      iconColor = StateContainer.of(context).curTheme.success60;
+      setShadow = BoxShadow(
+        color: StateContainer.of(context).curTheme.success60.withOpacity(0.2),
+        offset: Offset(0, 0),
+        blurRadius: 0,
+        spreadRadius: 1,
+      );
+    }
+
+    bool slideEnabled = false;
+
+    // valid wallet:
+    if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero) {
+      // does it make sense to make it slideable?
+      if (isRecipient && !item.is_fulfilled) {
+        slideEnabled = true;
+      }
+    }
+
+    return Slidable(
+      delegate: SlidableScrollDelegate(),
+      actionExtentRatio: 0.35,
+      movementDuration: Duration(milliseconds: 300),
+      enabled: slideEnabled,
+      onTriggered: (preempt) {
+        if (preempt) {
+          setState(() {
+            releaseAnimation = true;
+          });
+        } else {
+          // See if a contact
+          sl.get<DBHelper>().getContactWithAddress(item.from_address).then((contact) {
+            // Go to send with address
+            Sheets.showAppHeightNineSheet(
+                context: context,
+                widget: SendSheet(
+                  localCurrency: StateContainer.of(context).curCurrency,
+                  contact: contact,
+                  address: item.from_address,
+                  quickSendAmount: item.amount_raw,
+                ));
+          });
+        }
+      },
+      onAnimationChanged: (animation) {
+        if (animation != null) {
+          _fanimationPosition = animation.value;
+          if (animation.value == 0.0 && releaseAnimation) {
+            setState(() {
+              releaseAnimation = false;
+            });
+          }
+        }
+      },
+      secondaryActions: <Widget>[
+        SlideAction(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+            ),
+            margin: EdgeInsetsDirectional.only(end: MediaQuery.of(context).size.width * 0.15, top: 4, bottom: 4),
+            child: Container(
+              alignment: AlignmentDirectional(-0.5, 0),
+              constraints: BoxConstraints.expand(),
+              child: FlareActor("legacy_assets/pulltosend_animation.flr",
+                  animation: "pull", fit: BoxFit.contain, controller: this, color: StateContainer.of(context).curTheme.primary),
+            ),
+          ),
+        ),
+      ],
+      child: _SizeTransitionNoClip(
+        sizeFactor: animation,
+        child: Container(
+          margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+          decoration: BoxDecoration(
+            color: StateContainer.of(context).curTheme.backgroundDark,
+            borderRadius: BorderRadius.circular(10.0),
+            // boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+            boxShadow: [setShadow],
+          ),
+          child: FlatButton(
+            highlightColor: StateContainer.of(context).curTheme.text15,
+            splashColor: StateContainer.of(context).curTheme.text15,
+            color: StateContainer.of(context).curTheme.backgroundDark,
+            padding: EdgeInsets.all(0.0),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+            onPressed: () {
+              Sheets.showAppHeightEightSheet(
+                  context: context,
+                  widget: PaymentDetailsSheet(
+                    block: item.block,
+                    from_address: item.from_address,
+                    to_address: item.to_address,
+                    amount_raw: item.amount_raw,
+                    fulfillment_time: item.fulfillment_time,
+                    is_fulfilled: item.is_fulfilled,
+                    is_request: item.is_request,
+                    memo: item.memo,
+                    request_time: item.request_time,
+                    uuid: item.uuid,
+                    is_acknowledged: item.is_acknowledged,
+                  ),
+                  animationDurationMs: 175);
+            },
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Container(margin: EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
+                        Container(
+                          // constraints: BoxConstraints(maxWidth: 85),
+                          width: MediaQuery.of(context).size.width / 5,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                text,
+                                textAlign: TextAlign.start,
+                                style: AppStyles.textStyleTransactionType(context),
+                              ),
+                              RichText(
+                                textAlign: TextAlign.start,
+                                text: TextSpan(
+                                  text: '',
+                                  children: [
+                                    ((StateContainer.of(context).nyanoMode)
+                                        ? TextSpan(
+                                            text: "y",
+                                            style: AppStyles.textStyleTransactionAmount(
+                                              context,
+                                              true,
+                                            ),
+                                          )
+                                        : TextSpan()),
+                                    TextSpan(
+                                      text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, item.amount_raw),
+                                      style: AppStyles.textStyleTransactionAmount(
+                                        context,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      // constraints: BoxConstraints(maxWidth: 105),
+                      width: MediaQuery.of(context).size.width / 4.3,
+                      child: Text(
+                        item.memo,
+                        textAlign: TextAlign.start,
+                        style: AppStyles.textStyleTransactionMemo(context),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 4.0,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            displayName,
+                            textAlign: TextAlign.end,
+                            style: AppStyles.textStyleTransactionAddress(context),
+                          ),
+
+                          // TRANSACTION STATE TAG
+                          // (item.confirmed != null && !item.confirmed) || (currentConfHeight > -1 && item.height != null && item.height > currentConfHeight)
+                          //     ? Container(
+                          //         margin: EdgeInsetsDirectional.only(
+                          //           top: 4,
+                          //         ),
+                          //         child: TransactionStateTag(transactionState: TransactionStateOptions.UNCONFIRMED),
+                          //       )
+                          //     : SizedBox()
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  } // Payment Card End
+
+  // Used to build list items that haven't been removed.
+  Widget _buildPaymentItem(BuildContext context, int index, Animation<double> animation) {
+    if (index == 0 && StateContainer.of(context).activeAlert != null) {
+      return _buildRemoteMessageCard(StateContainer.of(context).activeAlert);
+    }
+    int localIndex = index;
+    if (StateContainer.of(context).activeAlert != null) {
+      localIndex -= 1;
+    }
+
+    bool isRecipient = StateContainer.of(context).wallet.address == _paymentsListMap[StateContainer.of(context).wallet.address][localIndex].to_address;
+
+    String displayName = smallScreen(context)
+        ? _paymentsListMap[StateContainer.of(context).wallet.address][localIndex].getShorterString(isRecipient)
+        : _paymentsListMap[StateContainer.of(context).wallet.address][localIndex].getShortString(isRecipient);
+    bool matched = false;
+
+    String account = isRecipient
+        ? _paymentsListMap[StateContainer.of(context).wallet.address][localIndex].from_address
+        : _paymentsListMap[StateContainer.of(context).wallet.address][localIndex].to_address;
+
+    // _contacts.forEach((contact) {
+    for (Contact contact in _contacts) {
+      if (contact.address == account.replaceAll("xrb_", "nano_")) {
+        displayName = "★" + contact.name;
+        matched = true;
+        break;
+      }
+    }
+    // if still not matched to a contact, check if it's a username
+    if (!matched) {
+      // for user in users:
+      for (User user in _users) {
+        if (user.address == account.replaceAll("xrb_", "nano_")) {
+          displayName = "@" + user.username;
+          break;
+        }
+      }
+    }
+
+    return _buildPaymentCard(_paymentsListMap[StateContainer.of(context).wallet.address][localIndex], animation, displayName, context);
+  }
+
+  // Return widget for list
+  Widget _getPaymentsListWidget(BuildContext context) {
+    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet.paymentsLoading) {
+      // Loading Animation
+      return ReactiveRefreshIndicator(
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          onRefresh: _refresh_payments,
+          isRefreshing: _isPaymentsRefreshing,
+          child: ListView(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+            children: <Widget>[
+              _buildLoadingTransactionCard("Sent", "10244000", "123456789121234", context),
+              _buildLoadingTransactionCard("Received", "100,00000", "@bbedwards1234", context),
+              _buildLoadingTransactionCard("Sent", "14500000", "12345678912345671234", context),
+              _buildLoadingTransactionCard("Sent", "12,51200", "123456789121234", context),
+              _buildLoadingTransactionCard("Received", "1,45300", "123456789121234", context),
+              _buildLoadingTransactionCard("Sent", "100,00000", "12345678912345671234", context),
+              _buildLoadingTransactionCard("Received", "24,00000", "12345678912345671234", context),
+              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
+              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
+              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
+            ],
+          ));
+    } else if (StateContainer.of(context).wallet.payments.length == 0) {
+      _disposeAnimation();
+      return ReactiveRefreshIndicator(
+        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        child: ListView(
+          padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+          children: <Widget>[
+            // REMOTE MESSAGE CARD
+            StateContainer.of(context).activeAlert != null ? _buildRemoteMessageCard(StateContainer.of(context).activeAlert) : SizedBox(),
+            _buildWelcomePaymentCard(context),
+            _buildWelcomePaymentCardTwo(context),
+            _buildDummyPaymentCard(
+                AppLocalization.of(context).request, AppLocalization.of(context).examplePaymentPending, AppLocalization.of(context).examplePaymentFrom, context,
+                isFulfilled: false, isAcknowleged: true, memo: AppLocalization.of(context).examplePaymentPendingMemo),
+            _buildDummyPaymentCard(AppLocalization.of(context).requested, AppLocalization.of(context).examplePaymentFulfilled,
+                AppLocalization.of(context).examplePaymentTo, context,
+                isFulfilled: true, memo: AppLocalization.of(context).examplePaymentFulfilledMemo),
+          ],
+        ),
+        onRefresh: _refresh_payments,
+        isRefreshing: _isPaymentsRefreshing,
+      );
+    } else {
+      _disposeAnimation();
+    }
+    // Setup history list
+    if (!_listPaymentsKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
+      _listPaymentsKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
+      setState(() {
+        _paymentsListMap.putIfAbsent(
+          StateContainer.of(context).wallet.address,
+          () => ListModel<TXData>(
+            listKey: _listPaymentsKeyMap["${StateContainer.of(context).wallet.address}"],
+            initialItems: StateContainer.of(context).wallet.payments,
+          ),
+        );
+      });
+    }
+    return ReactiveRefreshIndicator(
+      backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+      child: AnimatedList(
+        key: _listPaymentsKeyMap[StateContainer.of(context).wallet.address],
+        padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+        initialItemCount: _paymentsListMap[StateContainer.of(context).wallet.address].length,
+        itemBuilder: _buildPaymentItem,
+      ),
+      onRefresh: _refresh_payments,
+      isRefreshing: _isPaymentsRefreshing,
+    );
+  }
 }
 
 class TransactionDetailsSheet extends StatefulWidget {
@@ -2066,3 +2778,211 @@ class _SizeTransitionNoClip extends AnimatedWidget {
     );
   }
 }
+
+class PaymentDetailsSheet extends StatefulWidget {
+  // final String hash;
+  // final String address;
+  // final String displayName;
+  final String block;
+  final String amount_raw;
+  final String from_address;
+  final String to_address;
+  final bool is_fulfilled;
+  final bool is_request;
+  final String request_time;
+  final String fulfillment_time;
+  final String memo;
+  final String uuid;
+  final bool is_acknowledged;
+
+  PaymentDetailsSheet(
+      {this.block,
+      this.amount_raw,
+      this.from_address,
+      this.to_address,
+      this.is_fulfilled,
+      this.is_request,
+      this.request_time,
+      this.fulfillment_time,
+      this.memo,
+      this.uuid,
+      this.is_acknowledged})
+      : super();
+
+  _PaymentDetailsSheetState createState() => _PaymentDetailsSheetState();
+}
+
+class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
+  // Current state references
+  bool _addressCopied = false;
+  // Timer reference so we can cancel repeated events
+  Timer _addressCopiedTimer;
+
+  @override
+  Widget build(BuildContext context) {
+    // check if recipient of the request
+    // also check if the request is fulfilled
+    bool is_unfulfilled_request = false;
+    bool is_unacknowledged_request = false;
+    String walletAddress = StateContainer.of(context).wallet.address;
+    if (walletAddress == widget.to_address && widget.is_request && !widget.is_fulfilled) {
+      is_unfulfilled_request = true;
+    }
+    // if (walletAddress == widget.to_address && widget.is_request && !widget.is_acknowledged) {
+    //   is_unacknowledged_request = true;
+    // }
+
+    return SafeArea(
+      minimum: EdgeInsets.only(
+        bottom: MediaQuery.of(context).size.height * 0.035,
+      ),
+      child: Container(
+        width: double.infinity,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                // A stack for Copy Address and Add Contact buttons
+                // Stack(
+                //   children: <Widget>[
+                //     // A row for Copy Address Button
+                //     Row(
+                //       children: <Widget>[
+                //         AppButton.buildAppButton(
+                //             context,
+                //             // Share Address Button
+                //             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                //             _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
+                //             Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                //           // Clipboard.setData(new ClipboardData(text: widget.address));
+                //           if (mounted) {
+                //             setState(() {
+                //               // Set copied style
+                //               _addressCopied = true;
+                //             });
+                //           }
+                //           if (_addressCopiedTimer != null) {
+                //             _addressCopiedTimer.cancel();
+                //           }
+                //           _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                //             if (mounted) {
+                //               setState(() {
+                //                 _addressCopied = false;
+                //               });
+                //             }
+                //           });
+                //         }),
+                //       ],
+                //     ),
+                //     // A row for Add Contact Button
+                //     Row(
+                //       mainAxisAlignment: MainAxisAlignment.end,
+                //       crossAxisAlignment: CrossAxisAlignment.center,
+                //       children: <Widget>[
+                //         Container(
+                //           margin: EdgeInsetsDirectional.only(top: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[1], end: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[2]),
+                //           child: Container(
+                //               height: 55,
+                //               width: 55,
+                //               // Add Contact Button
+                //               child: FlatButton(
+                //                 onPressed: () {
+                //                   Navigator.of(context).pop();
+                //                   // Sheets.showAppHeightNineSheet(context: context, widget: AddContactSheet(address: widget.address));
+                //                 },
+                //                 splashColor: Colors.transparent,
+                //                 highlightColor: Colors.transparent,
+                //                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                //                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+                //                 child: Icon(AppIcons.addcontact,
+                //                     size: 35,
+                //                     color:
+                //                         _addressCopied ? StateContainer.of(context).curTheme.successDark : StateContainer.of(context).curTheme.backgroundDark),
+                //               )),
+                //         ),
+                //       ],
+                //     ),
+                //   ],
+                // ),
+
+                // A row for View Details button
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).viewDetails, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                        return UIUtil.showBlockExplorerWebview(context, widget.block);
+                      }));
+                    }),
+                  ],
+                ),
+
+                // Mark as paid button
+
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(
+                        context,
+                        // Share Address Button
+                        AppButtonType.PRIMARY_OUTLINE,
+                        !widget.is_fulfilled ? AppLocalization.of(context).markAsPaid : AppLocalization.of(context).markAsUnpaid,
+                        Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                      // update the tx in the db:
+                      if (widget.is_fulfilled) {
+                        sl.get<DBHelper>().changeTXFulfillmentStatus(widget.uuid, false);
+                      } else {
+                        sl.get<DBHelper>().changeTXFulfillmentStatus(widget.uuid, true);
+                      }
+                      // setState(() {});
+                      StateContainer.of(context).restorePayments();
+                      Navigator.of(context).pop();
+                    }),
+                  ],
+                ),
+                is_unfulfilled_request
+                    ? Row(
+                        children: <Widget>[
+                          AppButton.buildAppButton(
+                              context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).payRequest, Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
+                              onPressed: () {
+                            Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+
+                            Sheets.showAppHeightNineSheet(
+                                context: context,
+                                widget: SendSheet(
+                                  localCurrency: StateContainer.of(context).curCurrency,
+                                  address: widget.from_address,
+                                  quickSendAmount: widget.amount_raw,
+                                ));
+                          }),
+                        ],
+                      )
+                    : Container(),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// This is used so that the elevation of the container is kept and the
+/// drop shadow is not clipped.
+///
+// class _SizeTransitionNoClip extends AnimatedWidget {
+//   final Widget child;
+
+//   const _SizeTransitionNoClip({@required Animation<double> sizeFactor, this.child}) : super(listenable: sizeFactor);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return new Align(
+//       alignment: const AlignmentDirectional(-1.0, -1.0),
+//       widthFactor: null,
+//       heightFactor: (this.listenable as Animation<double>).value,
+//       child: child,
+//     );
+//   }
+// }
