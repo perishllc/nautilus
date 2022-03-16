@@ -18,6 +18,7 @@ TXData _$TXDataFromJson(Map<String, dynamic> json) => TXData(
       memo: json['memo'] as String?,
       uuid: json['uuid'] as String?,
       is_acknowledged: json['is_acknowledged'] as bool?,
+      height: json['height'] as int?,
     );
 
 Map<String, dynamic> _$TXDataToJson(TXData instance) => <String, dynamic>{
@@ -32,4 +33,5 @@ Map<String, dynamic> _$TXDataToJson(TXData instance) => <String, dynamic>{
       'memo': instance.memo,
       'uuid': instance.uuid,
       'is_acknowledged': instance.is_acknowledged,
+      'height': instance.height,
     };

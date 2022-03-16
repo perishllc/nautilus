@@ -61,7 +61,8 @@ class PaymentsPage extends StatefulWidget {
   _PaymentsPageState createState() => _PaymentsPageState();
 }
 
-class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver, SingleTickerProviderStateMixin, FlareController {
+class _PaymentsPageState extends State<PaymentsPage>
+    with WidgetsBindingObserver, SingleTickerProviderStateMixin, FlareController {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final Logger log = sl.get<Logger>();
 
@@ -403,7 +404,9 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
       case AppLifecycleState.resumed:
         cancelLockEvent();
         StateContainer.of(context).reconnect();
-        if (!StateContainer.of(context).wallet.loading && StateContainer.of(context).initialDeepLink != null && !_lockTriggered) {
+        if (!StateContainer.of(context).wallet.loading &&
+            StateContainer.of(context).initialDeepLink != null &&
+            !_lockTriggered) {
           handleDeepLink(StateContainer.of(context).initialDeepLink);
           StateContainer.of(context).initialDeepLink = null;
         }
@@ -419,7 +422,8 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
   StreamSubscription<dynamic> lockStreamListener;
 
   Future<void> setAppLockEvent() async {
-    if (((await sl.get<SharedPrefsUtil>().getLock()) || StateContainer.of(context).encryptedSecret != null) && !_lockDisabled) {
+    if (((await sl.get<SharedPrefsUtil>().getLock()) || StateContainer.of(context).encryptedSecret != null) &&
+        !_lockDisabled) {
       if (lockStreamListener != null) {
         lockStreamListener.cancel();
       }
@@ -456,7 +460,8 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
       localIndex -= 1;
     }
 
-    bool isRecipient = StateContainer.of(context).wallet.address == _paymentsListMap[StateContainer.of(context).wallet.address][localIndex].to_address;
+    bool isRecipient = StateContainer.of(context).wallet.address ==
+        _paymentsListMap[StateContainer.of(context).wallet.address][localIndex].to_address;
 
     String displayName = smallScreen(context)
         ? _paymentsListMap[StateContainer.of(context).wallet.address][localIndex].getShorterString(isRecipient)
@@ -486,7 +491,8 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
       }
     }
 
-    return _buildPaymentCard(_paymentsListMap[StateContainer.of(context).wallet.address][localIndex], animation, displayName, context);
+    return _buildPaymentCard(
+        _paymentsListMap[StateContainer.of(context).wallet.address][localIndex], animation, displayName, context);
   }
 
   // Return widget for list
@@ -520,14 +526,24 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
           padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
           children: <Widget>[
             // REMOTE MESSAGE CARD
-            StateContainer.of(context).activeAlert != null ? _buildRemoteMessageCard(StateContainer.of(context).activeAlert) : SizedBox(),
+            StateContainer.of(context).activeAlert != null
+                ? _buildRemoteMessageCard(StateContainer.of(context).activeAlert)
+                : SizedBox(),
             _buildWelcomePaymentCard(context),
-            _buildDummyPaymentCard(AppLocalization.of(context).requested, AppLocalization.of(context).examplePaymentPending,
-                AppLocalization.of(context).examplePaymentFrom, context,
-                isFulfilled: false, memo: AppLocalization.of(context).examplePaymentPendingMemo),
             _buildDummyPaymentCard(
-                AppLocalization.of(context).request, AppLocalization.of(context).examplePaymentFulfilled, AppLocalization.of(context).examplePaymentTo, context,
-                isFulfilled: true, memo: AppLocalization.of(context).examplePaymentFulfilledMemo),
+                AppLocalization.of(context).requested,
+                AppLocalization.of(context).examplePaymentPending,
+                AppLocalization.of(context).examplePaymentFrom,
+                context,
+                isFulfilled: false,
+                memo: AppLocalization.of(context).examplePaymentPendingMemo),
+            _buildDummyPaymentCard(
+                AppLocalization.of(context).request,
+                AppLocalization.of(context).examplePaymentFulfilled,
+                AppLocalization.of(context).examplePaymentTo,
+                context,
+                isFulfilled: true,
+                memo: AppLocalization.of(context).examplePaymentFulfilledMemo),
           ],
         ),
         onRefresh: _refresh,
@@ -539,7 +555,8 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
     if (StateContainer.of(context).activeAlert != null) {
       // Setup history list
       if (!_paymentsListMap.containsKey("${StateContainer.of(context).wallet.address}alert")) {
-        _listPaymentsKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}alert", () => GlobalKey<AnimatedListState>());
+        _listPaymentsKeyMap.putIfAbsent(
+            "${StateContainer.of(context).wallet.address}alert", () => GlobalKey<AnimatedListState>());
         setState(() {
           _paymentsListMap.putIfAbsent(
             StateContainer.of(context).wallet.address,
@@ -564,7 +581,8 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
     }
     // Setup history list
     if (!_listPaymentsKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
-      _listPaymentsKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
+      _listPaymentsKeyMap.putIfAbsent(
+          "${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
       setState(() {
         _paymentsListMap.putIfAbsent(
           StateContainer.of(context).wallet.address,
@@ -614,9 +632,12 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
   /// Required to do it this way for the animation
   ///
   void diffAndUpdateHistoryList(List<TXData> newList) {
-    if (newList == null || newList.length == 0 || _paymentsListMap[StateContainer.of(context).wallet.address] == null) return;
+    if (newList == null || newList.length == 0 || _paymentsListMap[StateContainer.of(context).wallet.address] == null)
+      return;
     // Get items not in current list, and add them from top-down
-    newList.reversed.where((item) => !_paymentsListMap[StateContainer.of(context).wallet.address].items.contains(item)).forEach((historyItem) {
+    newList.reversed
+        .where((item) => !_paymentsListMap[StateContainer.of(context).wallet.address].items.contains(item))
+        .forEach((historyItem) {
       setState(() {
         _paymentsListMap[StateContainer.of(context).wallet.address].insertAtTop(historyItem);
       });
@@ -654,7 +675,9 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       if (amount != null && sufficientBalance) {
         // Go to send confirm with amount
-        Sheets.showAppHeightNineSheet(context: context, widget: SendConfirmSheet(amountRaw: amount, destination: address.address, contactName: contactName));
+        Sheets.showAppHeightNineSheet(
+            context: context,
+            widget: SendConfirmSheet(amountRaw: amount, destination: address.address, contactName: contactName));
       } else {
         // Go to send with address
         Sheets.showAppHeightNineSheet(
@@ -688,7 +711,9 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
   void _showMantaAnimation() {
     mantaAnimationOpen = true;
     Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.MANTA, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
+        AnimationType.MANTA,
+        StateContainer.of(context).curTheme.animationOverlayStrong,
+        StateContainer.of(context).curTheme.animationOverlayMedium,
         onPoppedCallback: () => mantaAnimationOpen = false));
   }
 
@@ -702,7 +727,8 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
     painter.toImageData(MediaQuery.of(context).size.width).then((byteData) {
       setState(() {
         receive = ReceiveSheet(
-          qrWidget: Container(width: MediaQuery.of(context).size.width / 1, child: Image.memory(byteData.buffer.asUint8List())),
+          qrWidget: Container(
+              width: MediaQuery.of(context).size.width / 1, child: Image.memory(byteData.buffer.asUint8List())),
         );
       });
     });
@@ -728,7 +754,8 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
         ),
       ),
       body: SafeArea(
-        minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.045, bottom: MediaQuery.of(context).size.height * 0.035),
+        minimum: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height * 0.045, bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
             Expanded(
@@ -772,7 +799,10 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
-                                    colors: [StateContainer.of(context).curTheme.background00, StateContainer.of(context).curTheme.background],
+                                    colors: [
+                                      StateContainer.of(context).curTheme.background00,
+                                      StateContainer.of(context).curTheme.background
+                                    ],
                                     begin: AlignmentDirectional(0.5, 1.0),
                                     end: AlignmentDirectional(0.5, -1.0),
                                   ),
@@ -787,7 +817,10 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
-                                    colors: [StateContainer.of(context).curTheme.background00, StateContainer.of(context).curTheme.background],
+                                    colors: [
+                                      StateContainer.of(context).curTheme.background00,
+                                      StateContainer.of(context).curTheme.background
+                                    ],
                                     begin: AlignmentDirectional(0.5, -1),
                                     end: AlignmentDirectional(0.5, 0.5),
                                   ),
@@ -950,7 +983,10 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
               alignment: AlignmentDirectional(-0.5, 0),
               constraints: BoxConstraints.expand(),
               child: FlareActor("legacy_assets/pulltosend_animation.flr",
-                  animation: "pull", fit: BoxFit.contain, controller: this, color: StateContainer.of(context).curTheme.primary),
+                  animation: "pull",
+                  fit: BoxFit.contain,
+                  controller: this,
+                  color: StateContainer.of(context).curTheme.primary),
             ),
           ),
         ),
@@ -994,7 +1030,9 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Container(margin: EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
+                        Container(
+                            margin: EdgeInsetsDirectional.only(end: 16.0),
+                            child: Icon(icon, color: iconColor, size: 20)),
                         Container(
                           // constraints: BoxConstraints(maxWidth: 85),
                           width: MediaQuery.of(context).size.width / 5,
@@ -1021,7 +1059,8 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
                                           )
                                         : TextSpan()),
                                     TextSpan(
-                                      text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, item.amount_raw),
+                                      text: getCurrencySymbol(context) +
+                                          getRawAsThemeAwareAmount(context, item.amount_raw),
                                       style: AppStyles.textStyleTransactionAmount(
                                         context,
                                       ),
@@ -1034,17 +1073,19 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
                         ),
                       ],
                     ),
-                    Container(
-                      // constraints: BoxConstraints(maxWidth: 105),
-                      width: MediaQuery.of(context).size.width / 4.3,
-                      child: Text(
-                        item.memo,
-                        textAlign: TextAlign.start,
-                        style: AppStyles.textStyleTransactionMemo(context),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
+                    (item.memo != null)
+                        ? Container(
+                            // constraints: BoxConstraints(maxWidth: 105),
+                            width: MediaQuery.of(context).size.width / 4.3,
+                            child: Text(
+                              item.memo,
+                              textAlign: TextAlign.start,
+                              style: AppStyles.textStyleTransactionMemo(context),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )
+                        : Container(),
                     Container(
                       width: MediaQuery.of(context).size.width / 4.0,
                       child: Column(
@@ -1124,7 +1165,8 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    Container(margin: EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
+                    Container(
+                        margin: EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
                     Container(
                       width: MediaQuery.of(context).size.width / 4,
                       child: Column(
@@ -1306,7 +1348,8 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
                     // Transaction Icon
                     Opacity(
                       opacity: _opacityAnimation.value,
-                      child: Container(margin: EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
+                      child: Container(
+                          margin: EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width / 4,
@@ -1359,7 +1402,10 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
                                   amount,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
-                                      fontFamily: "NunitoSans", color: Colors.transparent, fontSize: AppFontSizes.smallest, fontWeight: FontWeight.w600),
+                                      fontFamily: "NunitoSans",
+                                      color: Colors.transparent,
+                                      fontSize: AppFontSizes.smallest,
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 Opacity(
                                   opacity: _opacityAnimation.value,
@@ -1532,7 +1578,9 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
                               child: Hero(
                                 tag: "avatar",
                                 child: StateContainer.of(context).selectedAccount.address != null
-                                    ? Image(image: AssetImage("assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png"))
+                                    ? Image(
+                                        image: AssetImage(
+                                            "assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png"))
                                     : SizedBox(),
                               ),
                             ),
@@ -1580,10 +1628,14 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
                                 tag: "avatar",
                                 child: StateContainer.of(context).selectedAccount.address != null
                                     ? SvgPicture.network(
-                                        UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
-                                        key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
+                                        UIUtil.getNatriconURL(
+                                            StateContainer.of(context).selectedAccount.address,
+                                            StateContainer.of(context)
+                                                .getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
+                                        key: Key(UIUtil.getNatriconURL(
+                                            StateContainer.of(context).selectedAccount.address,
+                                            StateContainer.of(context)
+                                                .getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
                                         placeholderBuilder: (BuildContext context) => Container(
                                           child: FlareActor(
                                             "legacy_assets/ntr_placeholder_animation.flr",
@@ -1771,7 +1823,9 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
         child: _priceConversion == PriceConversion.HIDDEN
             ?
             // Nano logo
-            Center(child: Container(child: Icon(AppIcons.nanologo, size: 32, color: StateContainer.of(context).curTheme.primary)))
+            Center(
+                child: Container(
+                    child: Icon(AppIcons.nanologo, size: 32, color: StateContainer.of(context).curTheme.primary)))
             : Container(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -1780,9 +1834,9 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
                   children: <Widget>[
                     _priceConversion == PriceConversion.BTC
                         ? Text(
-                            StateContainer.of(context)
-                                .wallet
-                                .getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale),
+                            StateContainer.of(context).wallet.getLocalCurrencyPrice(
+                                StateContainer.of(context).curCurrency,
+                                locale: StateContainer.of(context).currencyLocale),
                             textAlign: TextAlign.center,
                             style: AppStyles.textStyleCurrencyAlt(context))
                         : SizedBox(height: 0),
@@ -1809,7 +1863,8 @@ class _PaymentsPageState extends State<PaymentsPage> with WidgetsBindingObserver
                                       : TextSpan()),
                                   // Main balance text
                                   TextSpan(
-                                    text: getCurrencySymbol(context) + StateContainer.of(context).wallet.getAccountBalanceDisplay(context),
+                                    text: getCurrencySymbol(context) +
+                                        StateContainer.of(context).wallet.getAccountBalanceDisplay(context),
                                     style: _priceConversion == PriceConversion.BTC
                                         ? AppStyles.textStyleCurrency(context)
                                         : AppStyles.textStyleCurrencySmaller(
@@ -1903,7 +1958,9 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                             context,
                             // Share Address Button
                             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
+                            _addressCopied
+                                ? AppLocalization.of(context).addressCopied
+                                : AppLocalization.of(context).copyAddress,
                             Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
                           // Clipboard.setData(new ClipboardData(text: widget.address));
                           if (mounted) {
@@ -1931,7 +1988,8 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsetsDirectional.only(top: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[1], end: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[2]),
+                          margin: EdgeInsetsDirectional.only(
+                              top: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[1], end: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[2]),
                           child: Container(
                               height: 55,
                               width: 55,
@@ -1947,8 +2005,9 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
                                 child: Icon(AppIcons.addcontact,
                                     size: 35,
-                                    color:
-                                        _addressCopied ? StateContainer.of(context).curTheme.successDark : StateContainer.of(context).curTheme.backgroundDark),
+                                    color: _addressCopied
+                                        ? StateContainer.of(context).curTheme.successDark
+                                        : StateContainer.of(context).curTheme.backgroundDark),
                               )),
                         ),
                       ],
@@ -1958,8 +2017,8 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 // A row for View Details button
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).viewDetails, Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                        AppLocalization.of(context).viewDetails, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                         return UIUtil.showBlockExplorerWebview(context, widget.block);
                       }));

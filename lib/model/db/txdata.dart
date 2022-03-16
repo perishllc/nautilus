@@ -44,6 +44,8 @@ class TXData {
   String uuid;
   @JsonKey(name: 'is_acknowledged')
   bool is_acknowledged;
+  @JsonKey(name: 'height')
+  int height;
 
   TXData(
       {@required this.from_address,
@@ -57,6 +59,7 @@ class TXData {
       this.memo,
       this.uuid,
       this.is_acknowledged,
+      this.height,
       int id});
 
   String getShortString(bool isRecipient) {
@@ -87,7 +90,8 @@ class TXData {
         block: json["block"] as String,
         memo: json["memo"] as String,
         uuid: json["uuid"] as String,
-        is_acknowledged: json["is_acknowledged"] as bool);
+        is_acknowledged: json["is_acknowledged"] as bool,
+        height: json["height"] as int);
   }
 
   // bool operator ==(o) => o is User && o.username == username && o.address == address;

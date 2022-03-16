@@ -15,6 +15,7 @@ class AppWallet {
   bool _loading; // Whether or not app is initially loading
   bool _historyLoading; // Whether or not we have received initial account history response
   bool _paymentsLoading;
+  bool _unifiedLoading;
   String _address;
   String _username;
   BigInt _accountBalance;
@@ -28,6 +29,7 @@ class AppWallet {
   int confirmationHeight;
   List<AccountHistoryResponseItem> _history;
   List<TXData> _payments;
+  List<dynamic> _unified;
 
   AppWallet(
       {String address,
@@ -58,9 +60,11 @@ class AppWallet {
     this._blockCount = blockCount ?? 0;
     this._history = history ?? new List<AccountHistoryResponseItem>();
     this._payments = payments ?? new List<TXData>();
+    this._unified = unified ?? new List<dynamic>();
     this._loading = loading ?? true;
     this._historyLoading = historyLoading ?? true;
     this._paymentsLoading = paymentsLoading ?? true;
+    this._unifiedLoading = unifiedLoading ?? true;
   }
 
   String get address => _address;
@@ -95,7 +99,8 @@ class AppWallet {
   }
 
   String getLocalCurrencyPrice(AvailableCurrency currency, {String locale = "en_US"}) {
-    Decimal converted = Decimal.parse(_localCurrencyPrice) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
+    Decimal converted =
+        Decimal.parse(_localCurrencyPrice) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
     return NumberFormat.currency(locale: locale, symbol: currency.getCurrencySymbol()).format(converted.toDouble());
   }
 
@@ -165,6 +170,12 @@ class AppWallet {
     _payments = value;
   }
 
+  List<dynamic> get unified => _unified;
+
+  set unified(List<dynamic> value) {
+    _unified = value;
+  }
+
   bool get loading => _loading;
 
   set loading(bool value) {
@@ -181,5 +192,11 @@ class AppWallet {
 
   set paymentsLoading(bool value) {
     _paymentsLoading = value;
+  }
+
+  bool get unifiedLoading => _unifiedLoading;
+
+  set unifiedLoading(bool value) {
+    _unifiedLoading = value;
   }
 }

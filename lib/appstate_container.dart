@@ -6,6 +6,7 @@ import 'package:devicelocale/devicelocale.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
+import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
@@ -220,10 +221,17 @@ class StateContainerState extends State<StateContainer> {
   Future<void> restorePayments() async {
     if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
       var payments = await sl.get<DBHelper>().getAccountSpecificTXData(wallet.address);
-
       setState(() {
         this.wallet.payments = payments;
         EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet.payments));
+      });
+    }
+  }
+
+  Future<void> updateUnified() async {
+    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+      setState(() {
+        EventTaxiImpl.singleton().fire(UnifiedHomeEvent());
       });
     }
   }
@@ -339,14 +347,14 @@ class StateContainerState extends State<StateContainer> {
 
     // sl.get<DBHelper>().fetchDatabases();
     // sl.get<DBHelper>().populateDBFromCache();
-
-    // todo: maybe not the correct place to do this:
-    try {
-      FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-    } catch (e) {
-      log.e("Error registering background message handler: $e");
-    }
-    FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
+    WidgetsBinding.instance.addPostFrameCallback((_) => (context) {
+          // try {
+          // } catch (e) {
+          //   log.e("Error registering background message handler: $e");
+          // }
+          FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+          FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
+        });
   }
 
   // Subscriptions
@@ -389,7 +397,9 @@ class StateContainerState extends State<StateContainer> {
     _fcmUpdateSub = EventTaxiImpl.singleton().registerTo<FcmUpdateEvent>().listen((event) {
       if (wallet != null) {
         sl.get<SharedPrefsUtil>().getNotificationsOn().then((enabled) {
-          sl.get<AccountService>().sendRequest(FcmUpdateRequest(account: wallet.address, fcmToken: event.token, enabled: enabled));
+          sl
+              .get<AccountService>()
+              .sendRequest(FcmUpdateRequest(account: wallet.address, fcmToken: event.token, enabled: enabled));
         });
       }
     });
@@ -489,6 +499,7 @@ class StateContainerState extends State<StateContainer> {
       setState(() {
         wallet = AppWallet(address: address, username: walletUsername, loading: true);
         requestUpdate();
+        restorePayments();
       });
     });
   }
@@ -618,10 +629,10 @@ class StateContainerState extends State<StateContainer> {
       receiveThreshold = minRaw;
       // Combat spam by raising minimum receive if pending block count is large enough
       // only override the user preference if it was set to 0 (default)
-      // if (response.pendingCount != null && response.pendingCount > 50 && minRaw == "0") {
-      //   // Bump min receive to 0.05 NANO
-      //   receiveThreshold = BigInt.from(5).pow(28).toString();
-      // }
+      if (response.pendingCount != null && response.pendingCount > 50 && minRaw == "0") {
+        // Bump min receive to 0.05 NANO
+        receiveThreshold = BigInt.from(5).pow(28).toString();
+      }
     });
     // Set currency locale here for the UI to access
     sl.get<SharedPrefsUtil>().getCurrency(deviceLocale).then((currency) {
@@ -669,14 +680,15 @@ class StateContainerState extends State<StateContainer> {
     PendingResponseItem pendingItem = PendingResponseItem(hash: resp.hash, source: resp.account, amount: resp.amount);
     String receivedHash = await handlePendingItem(pendingItem);
     if (receivedHash != null) {
-      AccountHistoryResponseItem histItem =
-          AccountHistoryResponseItem(type: BlockTypes.RECEIVE, account: resp.account, amount: resp.amount, hash: receivedHash);
+      AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
+          type: BlockTypes.RECEIVE, account: resp.account, amount: resp.amount, hash: receivedHash);
       if (!wallet.history.contains(histItem)) {
         setState(() {
           wallet.history.insert(0, histItem);
           wallet.accountBalance += BigInt.parse(resp.amount);
           // Send list to home screen
           EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+          updateUnified();
         });
       }
     }
@@ -699,7 +711,8 @@ class StateContainerState extends State<StateContainer> {
       // Publish open
       sl.get<Logger>().d("Handling ${item.hash} as open");
       try {
-        ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet.address, await _getPrivKey());
+        ProcessResponse resp =
+            await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet.address, await _getPrivKey());
         wallet.openBlock = resp.hash;
         wallet.frontier = resp.hash;
         pendingRequests.remove(item.hash);
@@ -713,8 +726,8 @@ class StateContainerState extends State<StateContainer> {
       // Publish receive
       sl.get<Logger>().d("Handling ${item.hash} as receive");
       try {
-        ProcessResponse resp =
-            await sl.get<AccountService>().requestReceive(wallet.representative, wallet.frontier, item.amount, item.hash, wallet.address, await _getPrivKey());
+        ProcessResponse resp = await sl.get<AccountService>().requestReceive(
+            wallet.representative, wallet.frontier, item.amount, item.hash, wallet.address, await _getPrivKey());
         wallet.frontier = resp.hash;
         pendingRequests.remove(item.hash);
         alreadyReceived.add(item.hash);
@@ -751,7 +764,6 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> requestUpdate({bool pending = true}) async {
     if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-      await restorePayments();
       String uuid = await sl.get<SharedPrefsUtil>().getUuid();
       String fcmToken;
       bool notificationsEnabled;
@@ -764,7 +776,11 @@ class StateContainerState extends State<StateContainer> {
       }
       sl.get<AccountService>().clearQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
+          account: wallet.address,
+          currency: curCurrency.getIso4217Code(),
+          uuid: uuid,
+          fcmToken: fcmToken,
+          notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().queueRequest(AccountHistoryRequest(account: wallet.address));
       sl.get<AccountService>().processQueue();
       // Request account history
@@ -777,7 +793,8 @@ class StateContainerState extends State<StateContainer> {
         count = 50;
       }
       try {
-        AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count);
+        AccountHistoryResponse resp =
+            await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count);
         _requestBalances();
         bool postedToHome = false;
         // Iterate list in reverse (oldest to newest block)
@@ -785,14 +802,15 @@ class StateContainerState extends State<StateContainer> {
           // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
           if (!wallet.history.contains(item)) {
             int startIndex = 0; // Index to start inserting into the list
-            int lastIndex = resp.history.indexWhere(
-                (item) => wallet.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+            int lastIndex = resp.history.indexWhere((item) => wallet.history.contains(
+                item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
             lastIndex = lastIndex <= 0 ? resp.history.length : lastIndex;
             setState(() {
               wallet.history.insertAll(0, resp.history.getRange(startIndex, lastIndex));
               // Send list to home screen
               EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
             });
+            updateUnified();
             postedToHome = true;
             break;
           }
@@ -800,19 +818,20 @@ class StateContainerState extends State<StateContainer> {
         setState(() {
           wallet.historyLoading = false;
           wallet.paymentsLoading = false;
+          wallet.unifiedLoading = false;
         });
         if (!postedToHome) {
           EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+          updateUnified();
         }
         sl.get<AccountService>().pop();
         sl.get<AccountService>().processQueue();
         // Receive pendings
         if (pending) {
           pendingRequests.clear();
-          print("################");
-          print(receiveThreshold);
-          print(await sl.get<SharedPrefsUtil>().getMinRawReceive());
-          PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
+          PendingResponse pendingResp = await sl
+              .get<AccountService>()
+              .getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
 
           // for unfulfilled payments:
           List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
@@ -839,19 +858,24 @@ class StateContainerState extends State<StateContainer> {
                   // update the TXData to be fulfilled
                   await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
                   // update the ui to reflect the change in the db:
-                  restorePayments();
+                  await restorePayments();
+                  await updateUnified();
                   break;
                 }
               }
 
               AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
-                  type: BlockTypes.RECEIVE, account: pendingResponseItem.source, amount: pendingResponseItem.amount, hash: receivedHash);
+                  type: BlockTypes.RECEIVE,
+                  account: pendingResponseItem.source,
+                  amount: pendingResponseItem.amount,
+                  hash: receivedHash);
               if (!wallet.history.contains(histItem)) {
                 setState(() {
                   wallet.history.insert(0, histItem);
                   wallet.accountBalance += BigInt.parse(pendingResponseItem.amount);
                   // Send list to home screen
                   EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+                  updateUnified();
                 });
               }
             }
@@ -878,7 +902,11 @@ class StateContainerState extends State<StateContainer> {
       }
       sl.get<AccountService>().removeSubscribeHistoryPendingFromQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
+          account: wallet.address,
+          currency: curCurrency.getIso4217Code(),
+          uuid: uuid,
+          fcmToken: fcmToken,
+          notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().processQueue();
     }
   }
@@ -886,6 +914,10 @@ class StateContainerState extends State<StateContainer> {
   // handle data side of payment requests and other notifications:
 
   Future<void> handlePayments(dynamic data) async {
+    // log block height:
+    log.d(wallet.history[0].height);
+    log.d(wallet.history[wallet.history.length - 1].height);
+
     if (data.containsKey("payment_request")) {
       String amount_raw = data['amount_raw'];
       String requesting_account = data['requesting_account'];
@@ -897,6 +929,10 @@ class StateContainerState extends State<StateContainer> {
       // String request_time = ((new DateTime.now()).millisecondsSinceEpoch ~/ 1000).toString();
 
       print(requesting_account + "::::::" + to_address);
+
+      // current block height:
+      int currentBlockHeightInList = wallet.history.length > 0 ? (wallet.history[0].height + 1) : 1;
+      // int currentBlockHeightInList = 0;
 
       if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
         var txData = new TXData(
@@ -911,6 +947,7 @@ class StateContainerState extends State<StateContainer> {
           block: block,
           uuid: uuid,
           is_acknowledged: true,
+          height: currentBlockHeightInList,
         );
         sl.get<DBHelper>().addTXData(txData);
 
@@ -949,6 +986,33 @@ class StateContainerState extends State<StateContainer> {
             // this payment is already in the db:
             await sl.get<DBHelper>().replaceTXDataByUUID(txData);
           }
+
+          // is this from us? if so we need to check for the local version of this payment:
+          if (requesting_account == wallet.address) {
+            var transactions = await sl.get<DBHelper>().getAccountSpecificTXData(uuid);
+            // go through the list and see if any of them happened within the last 5 minutes:
+            // make sure all other fields match, too:
+            TXData oldTXData = null;
+            for (var tx in transactions) {
+              // check if this is a payment we made:
+              if (tx.from_address == wallet.address &&
+                  tx.to_address == to_address &&
+                  tx.amount_raw == amount_raw &&
+                  tx.is_fulfilled == false) {
+                if (DateTime.parse(tx.request_time).isAfter(DateTime.now().subtract(Duration(minutes: 5)))) {
+                  // this is a duplicate payment record, just update the time and other related info:
+                  oldTXData = tx;
+                  break;
+                }
+              }
+            }
+            if (oldTXData != null) {
+              // remove the old tx by the request_time:
+              await sl.get<DBHelper>().deleteTXDataByRequestTime(oldTXData.request_time);
+              // add the new one:
+              // happens automatically below since txData is null
+            }
+          }
         } else {
           // something went wrong:
           log.d("no uuid in payment record from server!!");
@@ -969,6 +1033,7 @@ class StateContainerState extends State<StateContainer> {
             block: block,
             uuid: uuid,
             is_acknowledged: false,
+            height: 0,
           );
           sl.get<DBHelper>().addTXData(txData);
         }
@@ -992,6 +1057,7 @@ class StateContainerState extends State<StateContainer> {
       String uuid = data['uuid'];
       String block = data['block'];
       String is_acknowledged = data['is_acknowledged'];
+      int height = data['height'];
 
       // set acknowledged to true:
       var txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);

@@ -25,7 +25,28 @@ class ListModel<E> {
     _items.insert(0, item);
     _animatedList.insertItem(0);
   }
- 
+
+  void insertAt(E item, int index) {
+    _items.insert(index, item);
+    _animatedList.insertItem(index);
+  }
+
+  void removeAt(int index, var builder) {
+    _items.removeAt(index);
+    _animatedList.removeItem(
+      index,
+      (BuildContext context, Animation<double> animation) => builder(context, index, animation),
+    );
+  }
+
+  void empty() {
+    // for (int i = _items.length; i < _items.length; i++) {
+    //   _animatedList.removeItem(i, (context, animation) => null);
+    // }
+    // _items.clear();
+    // _animatedList.
+  }
+
   int get length => _items.length;
 
   E operator [](int index) => _items[index];
