@@ -323,6 +323,21 @@ class _AppHomePageState extends State<AppHomePage>
     // Setup notification
     getNotificationPermissions();
 
+    // FirebaseMessaging.onBackgroundMessage(StateContainer.of(context).firebaseMessagingBackgroundHandler);
+    // FirebaseMessaging.onMessage.listen(StateContainer.of(context).firebaseMessagingForegroundHandler);
+
+    WidgetsFlutterBinding.ensureInitialized();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => (context) {
+          // try {
+          // } catch (e) {
+          //   log.e("Error registering background message handler: $e");
+          // }
+          FirebaseMessaging.onBackgroundMessage(StateContainer.of(context).firebaseMessagingBackgroundHandler);
+          FirebaseMessaging.onMessage.listen(StateContainer.of(context).firebaseMessagingForegroundHandler);
+        });
+    WidgetsBinding.instance.ensureVisualUpdate();
+
     // check if clipboard has a paper wallet seed:
     // todo: we should ask permission before asking for clipboard data, though maybe we can do it on install?
     // UserDataUtil.getClipboardText(DataType.SEED).then((data) {
@@ -805,7 +820,6 @@ class _AppHomePageState extends State<AppHomePage>
   /// Required to do it this way for the animation
   ///
   void diffAndUpdateHistoryList(List<AccountHistoryResponseItem> newList) {
-    print(newList);
     if (newList == null || newList.length == 0 || _historyListMap[StateContainer.of(context).wallet.address] == null) {
       return;
     }
@@ -850,6 +864,19 @@ class _AppHomePageState extends State<AppHomePage>
     } else if (propertyA > propertyB) {
       return -1;
     } else if (propertyA == propertyB) {
+      // if both are TXData, sort by request time:
+      if (a is TXData && b is TXData) {
+        int a_time = int.parse(a.request_time);
+        int b_time = int.parse(b.request_time);
+
+        if (a_time < b_time) {
+          return 1;
+        } else if (a_time > b_time) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }
       // ensure the request shows up lower in the list?:
       if (a is TXData && b is AccountHistoryResponseItem) {
         return 1;
@@ -874,8 +901,10 @@ class _AppHomePageState extends State<AppHomePage>
     List<dynamic> unifiedList = [];
 
     // combine history and payments:
-    List<AccountHistoryResponseItem> historyList = _historyListMap[StateContainer.of(context).wallet.address]?.items;
-    List<TXData> paymentsList = _paymentsListMap[StateContainer.of(context).wallet.address]?.items;
+    // List<AccountHistoryResponseItem> historyList = _historyListMap[StateContainer.of(context).wallet.address]?.items;
+    // List<TXData> paymentsList = _paymentsListMap[StateContainer.of(context).wallet.address]?.items;
+    List<AccountHistoryResponseItem> historyList = StateContainer.of(context).wallet.history;
+    List<TXData> paymentsList = StateContainer.of(context).wallet.payments;
 
     // add both to the unified list:
     unifiedList.addAll(historyList);
@@ -898,7 +927,7 @@ class _AppHomePageState extends State<AppHomePage>
       removeIndices.add(_unifiedListMap[StateContainer.of(context).wallet.address].items.indexOf(dynamicItem));
     });
 
-    print("removeIndices: ${removeIndices}");
+    // print("removeIndices: ${removeIndices}");
 
     // remove from the listmap:
     for (int i = removeIndices.length - 1; i >= 0; i--) {
@@ -932,7 +961,7 @@ class _AppHomePageState extends State<AppHomePage>
         .forEach((dynamicItem) {
       setState(() {
         int index = unifiedList.indexOf(dynamicItem);
-        if (index != -1 && dynamicItem != null) {
+        if (index > -1 && dynamicItem != null) {
           _unifiedListMap[StateContainer.of(context).wallet.address].insertAt(dynamicItem, index);
         }
         // _unifiedListMap[StateContainer.of(context).wallet.address].insertAtTop(dynamicItem);
@@ -3519,6 +3548,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                             ? AppLocalization.of(context).markAsPaid
                             : AppLocalization.of(context).markAsUnpaid,
                         Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                      print(widget.request_time);
                       // update the tx in the db:
                       if (widget.is_fulfilled) {
                         sl.get<DBHelper>().changeTXFulfillmentStatus(widget.uuid, false);

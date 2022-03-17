@@ -39,6 +39,7 @@ import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:uuid/uuid.dart';
 
 class RequestConfirmSheet extends StatefulWidget {
   final String amountRaw;
@@ -401,6 +402,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     }
 
     if (!sendFailed) {
+      var uuid = Uuid();
       int height = StateContainer.of(context).wallet.history[0].height + 1;
       // int height = 0;
       // create a local txData for the request:
@@ -408,7 +410,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         from_address: StateContainer.of(context).wallet.address,
         to_address: destinationAltered,
         amount_raw: widget.amountRaw,
-        uuid: null,
+        uuid: "LOCAL:" + uuid.v4(),
         block: null,
         is_acknowledged: false,
         is_fulfilled: false,

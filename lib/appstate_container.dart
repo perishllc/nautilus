@@ -347,14 +347,15 @@ class StateContainerState extends State<StateContainer> {
 
     // sl.get<DBHelper>().fetchDatabases();
     // sl.get<DBHelper>().populateDBFromCache();
-    WidgetsBinding.instance.addPostFrameCallback((_) => (context) {
-          // try {
-          // } catch (e) {
-          //   log.e("Error registering background message handler: $e");
-          // }
-          FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-          FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
-        });
+    // WidgetsBinding.instance.addPostFrameCallback((_) => (context) {
+    //       // try {
+    //       // } catch (e) {
+    //       //   log.e("Error registering background message handler: $e");
+    //       // }
+    //       FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    //       FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
+    //     });
+    // WidgetsBinding.instance.ensureVisualUpdate();
   }
 
   // Subscriptions
@@ -974,6 +975,7 @@ class StateContainerState extends State<StateContainer> {
       String fulfillment_time = data['fulfillment_time'];
       String block = data['block'];
       String uuid = data['uuid'];
+      log.d(data);
 
       if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
         TXData txData;
