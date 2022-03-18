@@ -30,8 +30,6 @@ class ListModel<E> {
 
   void insertAt(E item, int index) {
     if (listKey.currentState != null) {
-      // print(item);
-      // print(index);
       _items.insert(index, item);
       _animatedList.insertItem(index);
     }

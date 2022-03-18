@@ -176,7 +176,7 @@ class _AppHomePageState extends State<AppHomePage>
       // Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
 
       // Go to send with address
-      Future.delayed(Duration(milliseconds: 500), () {
+      Future.delayed(Duration(milliseconds: 1000), () {
         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
         Sheets.showAppHeightNineSheet(
@@ -323,21 +323,12 @@ class _AppHomePageState extends State<AppHomePage>
     // Setup notification
     getNotificationPermissions();
 
-    // FirebaseMessaging.onBackgroundMessage(StateContainer.of(context).firebaseMessagingBackgroundHandler);
-    // FirebaseMessaging.onMessage.listen(StateContainer.of(context).firebaseMessagingForegroundHandler);
-
-    WidgetsFlutterBinding.ensureInitialized();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => (context) {
-          // try {
-          // } catch (e) {
-          //   log.e("Error registering background message handler: $e");
-          // }
-          FirebaseMessaging.onBackgroundMessage(StateContainer.of(context).firebaseMessagingBackgroundHandler);
-          FirebaseMessaging.onMessage.listen(StateContainer.of(context).firebaseMessagingForegroundHandler);
-        });
-    WidgetsBinding.instance.ensureVisualUpdate();
-
+    // try {
+    //   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    //   FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
+    // } catch (e) {
+    //   print("Error: $e");
+    // }
     // check if clipboard has a paper wallet seed:
     // todo: we should ask permission before asking for clipboard data, though maybe we can do it on install?
     // UserDataUtil.getClipboardText(DataType.SEED).then((data) {
@@ -663,137 +654,6 @@ class _AppHomePageState extends State<AppHomePage>
         _historyListMap[StateContainer.of(context).wallet.address][localIndex], animation, displayName, context);
   }
 
-  // Return widget for list
-  Widget _getListWidget(BuildContext context) {
-    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet.historyLoading) {
-      // Loading Animation
-      return ReactiveRefreshIndicator(
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-          onRefresh: _refresh,
-          isRefreshing: _isRefreshing,
-          child: ListView(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-            children: <Widget>[
-              _buildLoadingTransactionCard("Sent", "10244000", "123456789121234", context),
-              _buildLoadingTransactionCard("Received", "100,00000", "@bbedwards1234", context),
-              _buildLoadingTransactionCard("Sent", "14500000", "12345678912345671234", context),
-              _buildLoadingTransactionCard("Sent", "12,51200", "123456789121234", context),
-              _buildLoadingTransactionCard("Received", "1,45300", "123456789121234", context),
-              _buildLoadingTransactionCard("Sent", "100,00000", "12345678912345671234", context),
-              _buildLoadingTransactionCard("Received", "24,00000", "12345678912345671234", context),
-              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
-              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
-              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
-            ],
-          ));
-    } else if (StateContainer.of(context).wallet.history.length == 0) {
-      _disposeAnimation();
-      return ReactiveRefreshIndicator(
-        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-        child: ListView(
-          padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-          children: <Widget>[
-            // REMOTE MESSAGE CARD
-            StateContainer.of(context).activeAlert != null
-                ? _buildRemoteMessageCard(StateContainer.of(context).activeAlert)
-                : SizedBox(),
-            _buildWelcomeTransactionCard(context),
-            _buildDummyTransactionCard(AppLocalization.of(context).sent, AppLocalization.of(context).exampleCardLittle,
-                AppLocalization.of(context).exampleCardTo, context),
-            _buildDummyTransactionCard(AppLocalization.of(context).received, AppLocalization.of(context).exampleCardLot,
-                AppLocalization.of(context).exampleCardFrom, context),
-          ],
-        ),
-        onRefresh: _refresh,
-        isRefreshing: _isRefreshing,
-      );
-    } else {
-      _disposeAnimation();
-    }
-    if (StateContainer.of(context).activeAlert != null) {
-      // Setup history list
-      if (!_historyListKeyMap.containsKey("${StateContainer.of(context).wallet.address}alert")) {
-        _historyListKeyMap.putIfAbsent(
-            "${StateContainer.of(context).wallet.address}alert", () => GlobalKey<AnimatedListState>());
-        setState(() {
-          _historyListMap.putIfAbsent(
-            StateContainer.of(context).wallet.address,
-            () => ListModel<AccountHistoryResponseItem>(
-              listKey: _historyListKeyMap["${StateContainer.of(context).wallet.address}alert"],
-              initialItems: StateContainer.of(context).wallet.history,
-            ),
-          );
-        });
-      }
-      return ReactiveRefreshIndicator(
-        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-        child: AnimatedList(
-          key: _historyListKeyMap["${StateContainer.of(context).wallet.address}alert"],
-          padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-          initialItemCount: _historyListMap[StateContainer.of(context).wallet.address].length + 1,
-          itemBuilder: _buildUnifiedItem,
-        ),
-        onRefresh: _refresh,
-        isRefreshing: _isRefreshing,
-      );
-    }
-    // Setup history list
-    if (!_historyListKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
-      _historyListKeyMap.putIfAbsent(
-          "${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
-      setState(() {
-        _historyListMap.putIfAbsent(
-          StateContainer.of(context).wallet.address,
-          () => ListModel<AccountHistoryResponseItem>(
-            listKey: _historyListKeyMap["${StateContainer.of(context).wallet.address}"],
-            initialItems: StateContainer.of(context).wallet.history,
-          ),
-        );
-      });
-    }
-    return ReactiveRefreshIndicator(
-      backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-      child: AnimatedList(
-        key: _historyListKeyMap[StateContainer.of(context).wallet.address],
-        padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-        initialItemCount: _historyListMap[StateContainer.of(context).wallet.address].length,
-        itemBuilder: _buildItem,
-      ),
-      onRefresh: _refresh,
-      isRefreshing: _isRefreshing,
-    );
-  }
-
-  // // Refresh list
-  // Future<void> _refresh() async {
-  //   setState(() {
-  //     _isRefreshing = true;
-  //   });
-  //   sl.get<HapticUtil>().success();
-  //   StateContainer.of(context).requestUpdate();
-  //   // Hide refresh indicator after 3 seconds if no server response
-  //   Future.delayed(new Duration(seconds: 3), () {
-  //     setState(() {
-  //       _isRefreshing = false;
-  //     });
-  //   });
-  // }
-
-  // // payments
-  // Future<void> _refresh_payments() async {
-  //   setState(() {
-  //     _isPaymentsRefreshing = true;
-  //   });
-  //   sl.get<HapticUtil>().success();
-  //   StateContainer.of(context).restorePayments();
-  //   // Hide refresh indicator after 2 seconds
-  //   Future.delayed(new Duration(seconds: 2), () {
-  //     setState(() {
-  //       _isPaymentsRefreshing = false;
-  //     });
-  //   });
-  // }
-
   Future<void> _refresh() async {
     setState(() {
       _isRefreshing = true;
@@ -859,11 +719,17 @@ class _AppHomePageState extends State<AppHomePage>
       // this shouldn't happen but it does:
       return 0;
     }
-    if (propertyA < propertyB) {
-      return 1;
-    } else if (propertyA > propertyB) {
-      return -1;
-    } else if (propertyA == propertyB) {
+
+    // both are accounthistoryresponseitems
+    if (a is AccountHistoryResponseItem && b is AccountHistoryResponseItem) {
+      if (propertyA < propertyB) {
+        return 1;
+      } else if (propertyA > propertyB) {
+        return -1;
+      } else {
+        return 0;
+      }
+    } else if (a is TXData && b is TXData) {
       // if both are TXData, sort by request time:
       if (a is TXData && b is TXData) {
         int a_time = int.parse(a.request_time);
@@ -877,6 +743,13 @@ class _AppHomePageState extends State<AppHomePage>
           return 0;
         }
       }
+    }
+
+    if (propertyA < propertyB) {
+      return 1;
+    } else if (propertyA > propertyB) {
+      return -1;
+    } else if (propertyA == propertyB) {
       // ensure the request shows up lower in the list?:
       if (a is TXData && b is AccountHistoryResponseItem) {
         return 1;
@@ -885,9 +758,8 @@ class _AppHomePageState extends State<AppHomePage>
       } else {
         return 0;
       }
-    } else {
-      return 0;
     }
+    return 0;
   }
 
   Future<void> generateUnifiedList() async {
@@ -2570,17 +2442,6 @@ class _AppHomePageState extends State<AppHomePage>
     bool isTransaction = item is AccountHistoryResponseItem;
     bool isRecipient = false;
 
-    // return _buildDummyPaymentCard(AppLocalization.of(context).request,
-    //     AppLocalization.of(context).examplePaymentPending, AppLocalization.of(context).examplePaymentFrom, context,
-    //     isFulfilled: false, isAcknowleged: true, memo: AppLocalization.of(context).examplePaymentPendingMemo);
-
-    if (isPayment) {
-      // print("aaaaaaaaaaaaaaa");
-    }
-    if (isTransaction) {
-      // print("bbbbbbbbbbbbbbb");
-    }
-
     if (isPayment) {
       isRecipient = StateContainer.of(context).wallet.address == item.to_address;
     }
@@ -3548,7 +3409,6 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                             ? AppLocalization.of(context).markAsPaid
                             : AppLocalization.of(context).markAsUnpaid,
                         Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                      print(widget.request_time);
                       // update the tx in the db:
                       if (widget.is_fulfilled) {
                         sl.get<DBHelper>().changeTXFulfillmentStatus(widget.uuid, false);

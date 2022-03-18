@@ -94,6 +94,20 @@ class TXData {
         height: json["height"] as int);
   }
 
+  bool operator ==(o) =>
+      o is TXData &&
+      o.height == height &&
+      o.uuid == uuid &&
+      o.is_fulfilled == is_fulfilled &&
+      o.is_request == is_request &&
+      o.from_address == from_address &&
+      o.to_address == to_address &&
+      o.amount_raw == amount_raw &&
+      o.request_time == request_time &&
+      o.fulfillment_time == fulfillment_time &&
+      o.block == block &&
+      o.memo == memo;
+
   // bool operator ==(o) => o is User && o.username == username && o.address == address;
   // int get hashCode => hash2(username.hashCode, address.hashCode);
 }

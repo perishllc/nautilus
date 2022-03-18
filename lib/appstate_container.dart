@@ -15,6 +15,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
@@ -48,6 +49,22 @@ import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 
 import 'util/sharedprefsutil.dart';
+
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print("Handling a background message");
+  // final Logger log = sl.get<Logger>();
+  // log.d("Handling a background message");
+  // // await handlePayments(message.data);
+  // EventTaxiImpl.singleton().fire(FcmMessageEvent(data: message.data));
+}
+
+Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
+  print("Handling a foreground message");
+  // final Logger log = sl.get<Logger>();
+  // log.d("Handling a foreground message");
+  // log.d(message.data);
+  // EventTaxiImpl.singleton().fire(FcmMessageEvent(data: message.data));
+}
 
 class _InheritedStateContainer extends InheritedWidget {
   // Data is your entire state. In our case just 'User'
@@ -356,6 +373,9 @@ class StateContainerState extends State<StateContainer> {
     //       FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
     //     });
     // WidgetsBinding.instance.ensureVisualUpdate();
+    print("ONCE");
+    // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    // FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
   }
 
   // Subscriptions
@@ -365,6 +385,7 @@ class StateContainerState extends State<StateContainer> {
   StreamSubscription<CallbackEvent> _callbackSub;
   StreamSubscription<ErrorEvent> _errorSub;
   StreamSubscription<FcmUpdateEvent> _fcmUpdateSub;
+  StreamSubscription<FcmMessageEvent> _fcmMessageSub;
   StreamSubscription<AccountModifiedEvent> _accountModifiedSub;
 
   // Register RX event listenerss
@@ -403,6 +424,9 @@ class StateContainerState extends State<StateContainer> {
               .sendRequest(FcmUpdateRequest(account: wallet.address, fcmToken: event.token, enabled: enabled));
         });
       }
+    });
+    _fcmMessageSub = EventTaxiImpl.singleton().registerTo<FcmMessageEvent>().listen((event) {
+      handleMessage(event);
     });
     // Account has been deleted or name changed
     _accountModifiedSub = EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((event) {
@@ -476,6 +500,9 @@ class StateContainerState extends State<StateContainer> {
     }
     if (_fcmUpdateSub != null) {
       _fcmUpdateSub.cancel();
+    }
+    if (_fcmMessageSub != null) {
+      _fcmMessageSub.cancel();
     }
     if (_accountModifiedSub != null) {
       _accountModifiedSub.cancel();
@@ -914,29 +941,118 @@ class StateContainerState extends State<StateContainer> {
 
   // handle data side of payment requests and other notifications:
 
-  Future<void> handlePayments(dynamic data) async {
-    // log block height:
-    log.d(wallet.history[0].height);
-    log.d(wallet.history[wallet.history.length - 1].height);
+  // Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  //   // final Logger log = sl.get<Logger>();
+  //   log.d("Handling a background message");
+  //   // await handlePayments(message.data);
+  //   handleMessage(message.data);
+  // }
 
-    if (data.containsKey("payment_request")) {
-      String amount_raw = data['amount_raw'];
-      String requesting_account = data['requesting_account'];
-      String memo = data['memo'];
-      String request_time = data['request_time'];
-      String to_address = data['account'];
-      String uuid = data['uuid'];
-      String block = data['block'];
-      // String request_time = ((new DateTime.now()).millisecondsSinceEpoch ~/ 1000).toString();
+  // Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
+  //   // final Logger log = sl.get<Logger>();
+  //   log.d("Handling a foreground message");
+  //   log.d(message.data);
+  //   handleMessage(message.data);
+  // }
 
-      print(requesting_account + "::::::" + to_address);
+  Future<void> handlePaymentRequest(dynamic data) async {
+    String amount_raw = data['amount_raw'];
+    String requesting_account = data['requesting_account'];
+    String memo = data['memo'];
+    String request_time = data['request_time'];
+    String to_address = data['account'];
+    String uuid = data['uuid'];
+    String block = data['block'];
+    // String request_time = ((new DateTime.now()).millisecondsSinceEpoch ~/ 1000).toString();
 
-      // current block height:
-      int currentBlockHeightInList = wallet.history.length > 0 ? (wallet.history[0].height + 1) : 1;
-      // int currentBlockHeightInList = 0;
+    print(requesting_account + "::::::" + to_address);
 
-      if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-        var txData = new TXData(
+    // current block height:
+    int currentBlockHeightInList = wallet.history.length > 0 ? (wallet.history[0].height + 1) : 1;
+    // int currentBlockHeightInList = 0;
+
+    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+      var txData = new TXData(
+        amount_raw: amount_raw,
+        is_request: true,
+        from_address: requesting_account,
+        to_address: to_address,
+        memo: memo,
+        is_fulfilled: false,
+        request_time: request_time,
+        fulfillment_time: "",
+        block: block,
+        uuid: uuid,
+        is_acknowledged: true,
+        height: currentBlockHeightInList,
+      );
+      sl.get<DBHelper>().addTXData(txData);
+
+      // send acknowledgement to server / requester:
+      sl.get<AccountService>().requestACK(uuid, requesting_account);
+
+      await restorePayments();
+    }
+  }
+
+  Future<void> handlePaymentRecord(dynamic data) async {
+    String amount_raw = data['amount_raw'];
+    String requesting_account = data['requesting_account'];
+    String memo = data['memo'];
+    String request_time = data['request_time'];
+    String to_address = data['account'];
+    String fulfillment_time = data['fulfillment_time'];
+    String block = data['block'];
+    String uuid = data['uuid'];
+    log.d(data);
+
+    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+      TXData txData;
+
+      // we have to check if this payment is already in the db:
+      if (uuid != null) {
+        var txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+        if (txData != null) {
+          log.d("updating existing txData!");
+          // this payment is already in the db:
+          await sl.get<DBHelper>().replaceTXDataByUUID(txData);
+        }
+
+        // is this from us? if so we need to check for the local version of this payment:
+        if (requesting_account == wallet.address) {
+          var transactions = await sl.get<DBHelper>().getAccountSpecificTXData(uuid);
+          // go through the list and see if any of them happened within the last 5 minutes:
+          // make sure all other fields match, too:
+          TXData oldTXData = null;
+          for (var tx in transactions) {
+            // check if this is a payment we made:
+            if (tx.from_address == wallet.address &&
+                tx.to_address == to_address &&
+                tx.amount_raw == amount_raw &&
+                tx.is_fulfilled == false) {
+              if (DateTime.parse(tx.request_time).isAfter(DateTime.now().subtract(Duration(minutes: 5)))) {
+                // this is a duplicate payment record, just update the time and other related info:
+                oldTXData = tx;
+                break;
+              }
+            }
+          }
+          if (oldTXData != null) {
+            // remove the old tx by the request_time:
+            await sl.get<DBHelper>().deleteTXDataByRequestTime(oldTXData.request_time);
+            // add the new one:
+            // happens automatically below since txData is null
+          }
+        }
+      } else {
+        // something went wrong:
+        log.d("no uuid in payment record from server!!");
+      }
+
+      // didn't replace a txData, so add it:
+      log.d("adding txData to the database!");
+      if (txData == null) {
+        txData = new TXData(
           amount_raw: amount_raw,
           is_request: true,
           from_address: requesting_account,
@@ -944,19 +1060,26 @@ class StateContainerState extends State<StateContainer> {
           memo: memo,
           is_fulfilled: false,
           request_time: request_time,
-          fulfillment_time: "",
+          fulfillment_time: fulfillment_time,
           block: block,
           uuid: uuid,
-          is_acknowledged: true,
-          height: currentBlockHeightInList,
+          is_acknowledged: false,
+          height: 0,
         );
         sl.get<DBHelper>().addTXData(txData);
-
-        // send acknowledgement to server / requester:
-        sl.get<AccountService>().requestACK(uuid, requesting_account);
-
-        await restorePayments();
       }
+      await restorePayments();
+    }
+  }
+
+  Future<void> handleMessage(dynamic data) async {
+    // log block height:
+    log.d(wallet.history[0].height);
+    log.d(wallet.history[wallet.history.length - 1].height);
+
+    if (data.containsKey("payment_request")) {
+      // handle payment request:
+      await handlePaymentRequest(data);
 
       // Send failed
       // if (animationOpen) {
@@ -967,80 +1090,7 @@ class StateContainerState extends State<StateContainer> {
     }
 
     if (data.containsKey("payment_record")) {
-      String amount_raw = data['amount_raw'];
-      String requesting_account = data['requesting_account'];
-      String memo = data['memo'];
-      String request_time = data['request_time'];
-      String to_address = data['account'];
-      String fulfillment_time = data['fulfillment_time'];
-      String block = data['block'];
-      String uuid = data['uuid'];
-      log.d(data);
-
-      if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-        TXData txData;
-
-        // we have to check if this payment is already in the db:
-        if (uuid != null) {
-          var txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
-          if (txData != null) {
-            log.d("updating existing txData!");
-            // this payment is already in the db:
-            await sl.get<DBHelper>().replaceTXDataByUUID(txData);
-          }
-
-          // is this from us? if so we need to check for the local version of this payment:
-          if (requesting_account == wallet.address) {
-            var transactions = await sl.get<DBHelper>().getAccountSpecificTXData(uuid);
-            // go through the list and see if any of them happened within the last 5 minutes:
-            // make sure all other fields match, too:
-            TXData oldTXData = null;
-            for (var tx in transactions) {
-              // check if this is a payment we made:
-              if (tx.from_address == wallet.address &&
-                  tx.to_address == to_address &&
-                  tx.amount_raw == amount_raw &&
-                  tx.is_fulfilled == false) {
-                if (DateTime.parse(tx.request_time).isAfter(DateTime.now().subtract(Duration(minutes: 5)))) {
-                  // this is a duplicate payment record, just update the time and other related info:
-                  oldTXData = tx;
-                  break;
-                }
-              }
-            }
-            if (oldTXData != null) {
-              // remove the old tx by the request_time:
-              await sl.get<DBHelper>().deleteTXDataByRequestTime(oldTXData.request_time);
-              // add the new one:
-              // happens automatically below since txData is null
-            }
-          }
-        } else {
-          // something went wrong:
-          log.d("no uuid in payment record from server!!");
-        }
-
-        // didn't replace a txData, so add it:
-        log.d("adding txData to the database!");
-        if (txData == null) {
-          txData = new TXData(
-            amount_raw: amount_raw,
-            is_request: true,
-            from_address: requesting_account,
-            to_address: to_address,
-            memo: memo,
-            is_fulfilled: false,
-            request_time: request_time,
-            fulfillment_time: fulfillment_time,
-            block: block,
-            uuid: uuid,
-            is_acknowledged: false,
-            height: 0,
-          );
-          sl.get<DBHelper>().addTXData(txData);
-        }
-        await restorePayments();
-      }
+      await handlePaymentRecord(data);
 
       // Send success
       // if (animationOpen) {
@@ -1070,17 +1120,6 @@ class StateContainerState extends State<StateContainer> {
       }
       await restorePayments();
     }
-  }
-
-  Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    log.d("Handling a background message");
-    await handlePayments(message.data);
-  }
-
-  Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
-    log.d("Handling a foreground message");
-    log.d(message.data);
-    await handlePayments(message.data);
   }
 
   void logOut() {

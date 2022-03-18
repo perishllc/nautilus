@@ -129,7 +129,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     // Get default notification setting
     sl.get<SharedPrefsUtil>().getNotificationsOn().then((notificationsOn) {
       setState(() {
-        _curNotificiationSetting = notificationsOn ? NotificationSetting(NotificationOptions.ON) : NotificationSetting(NotificationOptions.OFF);
+        _curNotificiationSetting = notificationsOn
+            ? NotificationSetting(NotificationOptions.ON)
+            : NotificationSetting(NotificationOptions.OFF);
       });
     });
     // Get default natricon setting
@@ -923,15 +925,20 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                       height: 64,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5.0),
-                                        border: Border.all(color: StateContainer.of(context).curTheme.primary, width: 1.5),
+                                        border:
+                                            Border.all(color: StateContainer.of(context).curTheme.primary, width: 1.5),
                                       ),
                                       alignment: AlignmentDirectional(-1, 0),
                                       // natricon
                                       child: SvgPicture.network(
-                                        UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
-                                        key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
+                                        UIUtil.getNatriconURL(
+                                            StateContainer.of(context).selectedAccount.address,
+                                            StateContainer.of(context)
+                                                .getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
+                                        key: Key(UIUtil.getNatriconURL(
+                                            StateContainer.of(context).selectedAccount.address,
+                                            StateContainer.of(context)
+                                                .getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
                                         placeholderBuilder: (BuildContext context) => Container(
                                           child: FlareActor(
                                             "legacy_assets/ntr_placeholder_animation.flr",
@@ -957,7 +964,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                           height: 60,
                                         ),
                                         onPressed: () {
-                                          AccountDetailsSheet(StateContainer.of(context).selectedAccount).mainBottomSheet(context);
+                                          AccountDetailsSheet(StateContainer.of(context).selectedAccount)
+                                              .mainBottomSheet(context);
                                         },
                                       ),
                                     ),
@@ -1002,15 +1010,18 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                       width: 60,
                                       height: 45,
                                       child: FlatButton(
-                                        highlightColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
-                                        splashColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
+                                        highlightColor:
+                                            StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
+                                        splashColor:
+                                            StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
                                         padding: EdgeInsets.all(0.0),
                                         child: SizedBox(
                                           width: 60,
                                           height: 45,
                                         ),
                                         onPressed: () {
-                                          AccountDetailsSheet(StateContainer.of(context).selectedAccount).mainBottomSheet(context);
+                                          AccountDetailsSheet(StateContainer.of(context).selectedAccount)
+                                              .mainBottomSheet(context);
                                         },
                                       ),
                                     ),
@@ -1033,10 +1044,14 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                               width: 52,
                                               // natricon
                                               child: SvgPicture.network(
-                                                UIUtil.getNatriconURL(StateContainer.of(context).recentLast.address,
-                                                    StateContainer.of(context).getNatriconNonce(StateContainer.of(context).recentLast.address)),
-                                                key: Key(UIUtil.getNatriconURL(StateContainer.of(context).recentLast.address,
-                                                    StateContainer.of(context).getNatriconNonce(StateContainer.of(context).recentLast.address))),
+                                                UIUtil.getNatriconURL(
+                                                    StateContainer.of(context).recentLast.address,
+                                                    StateContainer.of(context).getNatriconNonce(
+                                                        StateContainer.of(context).recentLast.address)),
+                                                key: Key(UIUtil.getNatriconURL(
+                                                    StateContainer.of(context).recentLast.address,
+                                                    StateContainer.of(context).getNatriconNonce(
+                                                        StateContainer.of(context).recentLast.address))),
                                                 placeholderBuilder: (BuildContext context) => Container(
                                                   child: FlareActor(
                                                     "legacy_assets/ntr_placeholder_animation.flr",
@@ -1055,9 +1070,13 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                               color: Colors.transparent,
                                               child: FlatButton(
                                                 onPressed: () {
-                                                  sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentLast).then((_) {
-                                                    EventTaxiImpl.singleton()
-                                                        .fire(AccountChangedEvent(account: StateContainer.of(context).recentLast, delayPop: true));
+                                                  sl
+                                                      .get<DBHelper>()
+                                                      .changeAccount(StateContainer.of(context).recentLast)
+                                                      .then((_) {
+                                                    EventTaxiImpl.singleton().fire(AccountChangedEvent(
+                                                        account: StateContainer.of(context).recentLast,
+                                                        delayPop: true));
                                                   });
                                                 },
                                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
@@ -1091,7 +1110,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                               width: 48,
                                               height: 36,
                                               alignment: AlignmentDirectional(0, 0.3),
-                                              child: Text(StateContainer.of(context).recentLast.getShortName().toUpperCase(),
+                                              child: Text(
+                                                  StateContainer.of(context).recentLast.getShortName().toUpperCase(),
                                                   style: TextStyle(
                                                     color: StateContainer.of(context).curTheme.backgroundDark,
                                                     fontSize: 12.0,
@@ -1106,13 +1126,23 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                               color: Colors.transparent,
                                               child: FlatButton(
                                                 onPressed: () {
-                                                  sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentLast).then((_) {
-                                                    EventTaxiImpl.singleton()
-                                                        .fire(AccountChangedEvent(account: StateContainer.of(context).recentLast, delayPop: true));
+                                                  sl
+                                                      .get<DBHelper>()
+                                                      .changeAccount(StateContainer.of(context).recentLast)
+                                                      .then((_) {
+                                                    EventTaxiImpl.singleton().fire(AccountChangedEvent(
+                                                        account: StateContainer.of(context).recentLast,
+                                                        delayPop: true));
                                                   });
                                                 },
-                                                highlightColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
-                                                splashColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
+                                                highlightColor: StateContainer.of(context)
+                                                    .curTheme
+                                                    .backgroundDark
+                                                    .withOpacity(0.75),
+                                                splashColor: StateContainer.of(context)
+                                                    .curTheme
+                                                    .backgroundDark
+                                                    .withOpacity(0.75),
                                                 padding: EdgeInsets.all(0.0),
                                                 child: Container(
                                                   width: 48,
@@ -1138,10 +1168,14 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                               width: 52,
                                               // natricon
                                               child: SvgPicture.network(
-                                                UIUtil.getNatriconURL(StateContainer.of(context).recentSecondLast.address,
-                                                    StateContainer.of(context).getNatriconNonce(StateContainer.of(context).recentSecondLast.address)),
-                                                key: Key(UIUtil.getNatriconURL(StateContainer.of(context).recentSecondLast.address,
-                                                    StateContainer.of(context).getNatriconNonce(StateContainer.of(context).recentSecondLast.address))),
+                                                UIUtil.getNatriconURL(
+                                                    StateContainer.of(context).recentSecondLast.address,
+                                                    StateContainer.of(context).getNatriconNonce(
+                                                        StateContainer.of(context).recentSecondLast.address)),
+                                                key: Key(UIUtil.getNatriconURL(
+                                                    StateContainer.of(context).recentSecondLast.address,
+                                                    StateContainer.of(context).getNatriconNonce(
+                                                        StateContainer.of(context).recentSecondLast.address))),
                                                 placeholderBuilder: (BuildContext context) => Container(
                                                   child: FlareActor(
                                                     "legacy_assets/ntr_placeholder_animation.flr",
@@ -1160,9 +1194,13 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                               color: Colors.transparent,
                                               child: FlatButton(
                                                 onPressed: () {
-                                                  sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentSecondLast).then((_) {
-                                                    EventTaxiImpl.singleton()
-                                                        .fire(AccountChangedEvent(account: StateContainer.of(context).recentSecondLast, delayPop: true));
+                                                  sl
+                                                      .get<DBHelper>()
+                                                      .changeAccount(StateContainer.of(context).recentSecondLast)
+                                                      .then((_) {
+                                                    EventTaxiImpl.singleton().fire(AccountChangedEvent(
+                                                        account: StateContainer.of(context).recentSecondLast,
+                                                        delayPop: true));
                                                   });
                                                 },
                                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
@@ -1196,7 +1234,11 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                               width: 48,
                                               height: 36,
                                               alignment: AlignmentDirectional(0, 0.3),
-                                              child: Text(StateContainer.of(context).recentSecondLast.getShortName().toUpperCase(),
+                                              child: Text(
+                                                  StateContainer.of(context)
+                                                      .recentSecondLast
+                                                      .getShortName()
+                                                      .toUpperCase(),
                                                   style: TextStyle(
                                                     color: StateContainer.of(context).curTheme.backgroundDark,
                                                     fontSize: 12.0,
@@ -1211,13 +1253,23 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                               color: Colors.transparent,
                                               child: FlatButton(
                                                 onPressed: () {
-                                                  sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentSecondLast).then((_) {
-                                                    EventTaxiImpl.singleton()
-                                                        .fire(AccountChangedEvent(account: StateContainer.of(context).recentSecondLast, delayPop: true));
+                                                  sl
+                                                      .get<DBHelper>()
+                                                      .changeAccount(StateContainer.of(context).recentSecondLast)
+                                                      .then((_) {
+                                                    EventTaxiImpl.singleton().fire(AccountChangedEvent(
+                                                        account: StateContainer.of(context).recentSecondLast,
+                                                        delayPop: true));
                                                   });
                                                 },
-                                                highlightColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
-                                                splashColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
+                                                highlightColor: StateContainer.of(context)
+                                                    .curTheme
+                                                    .backgroundDark
+                                                    .withOpacity(0.75),
+                                                splashColor: StateContainer.of(context)
+                                                    .curTheme
+                                                    .backgroundDark
+                                                    .withOpacity(0.75),
                                                 padding: EdgeInsets.all(0.0),
                                                 child: Container(
                                                   width: 48,
@@ -1257,11 +1309,15 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                               },
                               padding: EdgeInsets.all(0.0),
                               shape: CircleBorder(),
-                              splashColor: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text30,
-                              highlightColor: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text15,
+                              splashColor:
+                                  _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text30,
+                              highlightColor:
+                                  _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text15,
                               child: Icon(AppIcons.accountswitcher,
                                   size: 36,
-                                  color: _loadingAccounts ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary),
+                                  color: _loadingAccounts
+                                      ? StateContainer.of(context).curTheme.primary60
+                                      : StateContainer.of(context).curTheme.primary),
                             ),
                           ),
                         ],
@@ -1297,7 +1353,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                           // Main account address
                           Container(
                             child: Text(
-                              StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.address != null
+                              StateContainer.of(context).wallet != null &&
+                                      StateContainer.of(context).wallet.address != null
                                   ? (StateContainer.of(context).wallet?.username != null)
                                       ? "@" + StateContainer.of(context).wallet?.username
                                       : StateContainer.of(context).wallet?.address?.substring(0, 12)
@@ -1349,27 +1406,31 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     Container(
                       margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(AppLocalization.of(context).featured,
-                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w100,
+                              color: StateContainer.of(context).curTheme.text60)),
                     ),
+                    // Divider(
+                    //   height: 2,
+                    //   color: StateContainer.of(context).curTheme.text15,
+                    // ),
+                    // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).home, AppIcons.home, onPressed: () {
+                    //   Navigator.of(context).pushNamed("/home_transition");
+                    // }),
+                    // Divider(
+                    //   height: 2,
+                    //   color: StateContainer.of(context).curTheme.text15,
+                    // ),
+                    // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).payments, AppIcons.money_bill_alt, onPressed: () {
+                    //   Navigator.of(context).pushNamed("/payments_page");
+                    // }),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).home, AppIcons.home, onPressed: () {
-                      Navigator.of(context).pushNamed("/home_transition");
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).payments, AppIcons.money_bill_alt, onPressed: () {
-                      Navigator.of(context).pushNamed("/payments_page");
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).purchaseNano, AppIcons.coins, onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(
+                        context, AppLocalization.of(context).purchaseNano, AppIcons.coins, onPressed: () {
                       // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                       //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://buy.chainbits.com");
                       // }));
@@ -1379,7 +1440,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).registerUsername, AppIcons.at, onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(
+                        context, AppLocalization.of(context).registerUsername, AppIcons.at, onPressed: () {
                       // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                       //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://nano.to");
                       // }));
@@ -1389,7 +1451,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).createGiftCard, AppIcons.export_icon, onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(
+                        context, AppLocalization.of(context).createGiftCard, AppIcons.export_icon, onPressed: () {
                       // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                       //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://tools.nanos.cc/?tool=paper");
                       // }));
@@ -1402,37 +1465,41 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     Container(
                       margin: EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
                       child: Text(AppLocalization.of(context).preferences,
-                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w100,
+                              color: StateContainer.of(context).curTheme.text60)),
                     ),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).changeCurrency, StateContainer.of(context).curCurrency, AppIcons.currency, _currencyDialog),
+                    AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).changeCurrency,
+                        StateContainer.of(context).curCurrency, AppIcons.currency, _currencyDialog),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).language, StateContainer.of(context).curLanguage, AppIcons.language, _languageDialog),
+                    AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).language,
+                        StateContainer.of(context).curLanguage, AppIcons.language, _languageDialog),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).notifications, _curNotificiationSetting, AppIcons.notifications, _notificationsDialog),
+                    AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).notifications,
+                        _curNotificiationSetting, AppIcons.notifications, _notificationsDialog),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).themeHeader, _curThemeSetting, AppIcons.theme, _themeDialog),
+                    AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).themeHeader,
+                        _curThemeSetting, AppIcons.theme, _themeDialog),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).securityHeader, AppIcons.security, onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(
+                        context, AppLocalization.of(context).securityHeader, AppIcons.security, onPressed: () {
                       setState(() {
                         _securityOpen = true;
                       });
@@ -1442,8 +1509,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).receiveMinimum, _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
+                    AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).receiveMinimum,
+                        _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
@@ -1463,8 +1530,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     (StateContainer.of(context).nyanoMode)
                         ? (
                             // Nyanicon on-off
-                            AppSettings.buildSettingsListItemDoubleLine(
-                                context, AppLocalization.of(context).nyanicon, _curNyaniconSetting, AppIcons.natricon, _nyaniconDialog))
+                            AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).nyanicon,
+                                _curNyaniconSetting, AppIcons.natricon, _nyaniconDialog))
                         : (null),
                     // Natricon on-off
                     // AppSettings.buildSettingsListItemDoubleLine(
@@ -1476,13 +1543,17 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     Container(
                       margin: EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
                       child: Text(AppLocalization.of(context).manage,
-                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w100,
+                              color: StateContainer.of(context).curTheme.text60)),
                     ),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).favoritesHeader, AppIcons.star, onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(
+                        context, AppLocalization.of(context).favoritesHeader, AppIcons.star, onPressed: () {
                       setState(() {
                         _contactsOpen = true;
                       });
@@ -1492,15 +1563,17 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).backupSecretPhrase, AppIcons.backupseed,
+                    AppSettings.buildSettingsListItemSingleLine(
+                        context, AppLocalization.of(context).backupSecretPhrase, AppIcons.backupseed,
                         onPressed: () async {
                       // Authenticate
                       AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
-                          bool authenticated =
-                              await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context).fingerprintSeedBackup);
+                          bool authenticated = await sl
+                              .get<BiometricUtil>()
+                              .authenticateWithBiometrics(context, AppLocalization.of(context).fingerprintSeedBackup);
                           if (authenticated) {
                             sl.get<HapticUtil>().fingerprintSucess();
                             StateContainer.of(context).getSeed().then((seed) {
@@ -1530,14 +1603,16 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).settingsTransfer, AppIcons.transferfunds, onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(
+                        context, AppLocalization.of(context).settingsTransfer, AppIcons.transferfunds, onPressed: () {
                       AppTransferOverviewSheet().mainBottomSheet(context);
                     }),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).changeRepAuthenticate, AppIcons.changerepresentative,
+                    AppSettings.buildSettingsListItemSingleLine(
+                        context, AppLocalization.of(context).changeRepAuthenticate, AppIcons.changerepresentative,
                         onPressed: () {
                       new AppChangeRepresentativeSheet().mainBottomSheet(context);
                       if (!StateContainer.of(context).nanoNinjaUpdated) {
@@ -1552,18 +1627,26 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).shareNautilus, AppIcons.share, onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(
+                        context, AppLocalization.of(context).shareNautilus, AppIcons.share, onPressed: () {
                       Share.share("Check out Nautilus - NANO Wallet for iOS and Android" + " https://fwd.dev");
                     }),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).logout, AppIcons.logout, onPressed: () {
-                      AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
-                          AppLocalization.of(context).logoutDetail, AppLocalization.of(context).logoutAction.toUpperCase(), () {
+                    AppSettings.buildSettingsListItemSingleLine(
+                        context, AppLocalization.of(context).logout, AppIcons.logout, onPressed: () {
+                      AppDialogs.showConfirmDialog(
+                          context,
+                          CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
+                          AppLocalization.of(context).logoutDetail,
+                          AppLocalization.of(context).logoutAction.toUpperCase(), () {
                         // Show another confirm dialog
-                        AppDialogs.showConfirmDialog(context, AppLocalization.of(context).logoutAreYouSure, AppLocalization.of(context).logoutReassurance,
+                        AppDialogs.showConfirmDialog(
+                            context,
+                            AppLocalization.of(context).logoutAreYouSure,
+                            AppLocalization.of(context).logoutReassurance,
                             CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                           // Unsubscribe from notifications
                           sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((_) async {
@@ -1600,7 +1683,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                   return UIUtil.showWebview(context, AppLocalization.of(context).privacyUrl);
                                 }));
                               },
-                              child: Text(AppLocalization.of(context).privacyPolicy, style: AppStyles.textStyleVersionUnderline(context))),
+                              child: Text(AppLocalization.of(context).privacyPolicy,
+                                  style: AppStyles.textStyleVersionUnderline(context))),
                           Text(" | ", style: AppStyles.textStyleVersion(context)),
                           GestureDetector(
                               onTap: () {
@@ -1622,7 +1706,10 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     width: double.infinity,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [StateContainer.of(context).curTheme.backgroundDark, StateContainer.of(context).curTheme.backgroundDark00],
+                        colors: [
+                          StateContainer.of(context).curTheme.backgroundDark,
+                          StateContainer.of(context).curTheme.backgroundDark00
+                        ],
                         begin: AlignmentDirectional(0.5, -1.0),
                         end: AlignmentDirectional(0.5, 1.0),
                       ),
@@ -1696,7 +1783,10 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     Container(
                       margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(AppLocalization.of(context).preferences,
-                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w100,
+                              color: StateContainer.of(context).curTheme.text60)),
                     ),
                     // Authentication Method
                     _hasBiometrics
@@ -1706,15 +1796,19 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                           )
                         : null,
                     _hasBiometrics
-                        ? AppSettings.buildSettingsListItemDoubleLine(
-                            context, AppLocalization.of(context).authMethod, _curAuthMethod, AppIcons.fingerprint, _authMethodDialog)
+                        ? AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).authMethod,
+                            _curAuthMethod, AppIcons.fingerprint, _authMethodDialog)
                         : null,
                     // Authenticate on Launch
                     StateContainer.of(context).encryptedSecret == null
                         ? Column(children: <Widget>[
                             Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                             AppSettings.buildSettingsListItemDoubleLine(
-                                context, AppLocalization.of(context).lockAppSetting, _curUnlockSetting, AppIcons.lock, _lockDialog),
+                                context,
+                                AppLocalization.of(context).lockAppSetting,
+                                _curUnlockSetting,
+                                AppIcons.lock,
+                                _lockDialog),
                           ])
                         : SizedBox(),
                     // Authentication Timer
@@ -1728,13 +1822,15 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       _curTimeoutSetting,
                       AppIcons.timer,
                       _lockTimeoutDialog,
-                      disabled: _curUnlockSetting.setting == UnlockOption.NO && StateContainer.of(context).encryptedSecret == null,
+                      disabled: _curUnlockSetting.setting == UnlockOption.NO &&
+                          StateContainer.of(context).encryptedSecret == null,
                     ),
                     // Encrypt option
                     StateContainer.of(context).encryptedSecret == null
                         ? Column(children: <Widget>[
                             Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                            AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).setWalletPassword, AppIcons.walletpassword,
+                            AppSettings.buildSettingsListItemSingleLine(
+                                context, AppLocalization.of(context).setWalletPassword, AppIcons.walletpassword,
                                 onPressed: () {
                               Sheets.showAppHeightNineSheet(context: context, widget: SetPasswordSheet());
                             })
@@ -1743,7 +1839,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         Column(children: <Widget>[
                             Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                             AppSettings.buildSettingsListItemSingleLine(
-                                context, AppLocalization.of(context).disableWalletPassword, AppIcons.walletpassworddisabled, onPressed: () {
+                                context,
+                                AppLocalization.of(context).disableWalletPassword,
+                                AppIcons.walletpassworddisabled, onPressed: () {
                               Sheets.showAppHeightNineSheet(context: context, widget: DisablePasswordSheet());
                             }),
                           ]),
@@ -1758,7 +1856,10 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     width: double.infinity,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [StateContainer.of(context).curTheme.backgroundDark, StateContainer.of(context).curTheme.backgroundDark00],
+                        colors: [
+                          StateContainer.of(context).curTheme.backgroundDark,
+                          StateContainer.of(context).curTheme.backgroundDark00
+                        ],
                         begin: AlignmentDirectional(0.5, -1.0),
                         end: AlignmentDirectional(0.5, 1.0),
                       ),

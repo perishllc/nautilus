@@ -98,7 +98,7 @@ class _PaymentsPageState extends State<PaymentsPage>
   double mainCardHeight;
   double settingsIconMarginTop = 5;
   // FCM instance
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   // Animation for swiping to send
   ActorAnimation _sendSlideAnimation;
@@ -143,38 +143,7 @@ class _PaymentsPageState extends State<PaymentsPage>
     }
   }
 
-  void getNotificationPermissions() async {
-    try {
-      NotificationSettings settings = await _firebaseMessaging.requestPermission(sound: true, badge: true, alert: true);
-      if (settings.alert == AppleNotificationSetting.enabled ||
-          settings.badge == AppleNotificationSetting.enabled ||
-          settings.sound == AppleNotificationSetting.enabled ||
-          settings.authorizationStatus == AuthorizationStatus.authorized) {
-        sl.get<SharedPrefsUtil>().getNotificationsSet().then((beenSet) {
-          if (!beenSet) {
-            sl.get<SharedPrefsUtil>().setNotificationsOn(true);
-          }
-        });
-        _firebaseMessaging.getToken().then((String token) {
-          if (token != null) {
-            EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: token));
-          }
-        });
-      } else {
-        sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((_) {
-          _firebaseMessaging.getToken().then((String token) {
-            EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: token));
-          });
-        });
-      }
-      String token = await _firebaseMessaging.getToken();
-      if (token != null) {
-        EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: token));
-      }
-    } catch (e) {
-      sl.get<SharedPrefsUtil>().setNotificationsOn(false);
-    }
-  }
+  void getNotificationPermissions() async {}
 
   @override
   void initState() {
