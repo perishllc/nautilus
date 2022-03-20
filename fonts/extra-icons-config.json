@@ -83,6 +83,48 @@
       "css": "home",
       "code": 61461,
       "src": "fontawesome5"
+    },
+    {
+      "uid": "f5431cc379f3d6c163ff3f2a546ccf1b",
+      "css": "call_received",
+      "code": 59393,
+      "src": "material"
+    },
+    {
+      "uid": "98e6568e29d697815985daec65074bd3",
+      "css": "call_missed_outgoing",
+      "code": 59394,
+      "src": "material"
+    },
+    {
+      "uid": "253067d29b0c98e0db8e86e009134234",
+      "css": "call_made",
+      "code": 59395,
+      "src": "material"
+    },
+    {
+      "uid": "6a03b55511b99d7034f2907e24310f31",
+      "css": "call_missed",
+      "code": 59396,
+      "src": "material"
+    },
+    {
+      "uid": "76dfd54554c096fa154459ba2d7ae6a5",
+      "css": "call_split",
+      "code": 59397,
+      "src": "material"
+    },
+    {
+      "uid": "c1eb130e4c2e6a209e80c2c67bcd99af",
+      "css": "swap_calls",
+      "code": 59398,
+      "src": "material"
+    },
+    {
+      "uid": "ed7457e9d02cb3e04e37a4ce1e68c548",
+      "css": "call_merge",
+      "code": 59399,
+      "src": "material"
     }
   ]
 }

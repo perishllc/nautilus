@@ -485,7 +485,7 @@ class AccountService {
   }
 
   Future<ProcessResponse> requestSend(String representative, String previous, String sendAmount, String link, String account, String privKey,
-      {bool max = false, String memo}) async {
+      {bool max = false}) async {
     StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
         previous: previous,

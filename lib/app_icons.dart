@@ -79,6 +79,13 @@ class AppIcons {
   // had to include an extra font since I can't re-generate the font file without the config file
   // could be done eventually, but for now I'm just including the extra font file
   static const IconData money = IconData(0xe800, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData call_received = IconData(0xe801, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData call_missed_outgoing = IconData(0xe802, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData call_made = IconData(0xe803, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData call_missed = IconData(0xe804, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData call_split = IconData(0xe805, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData swap_calls = IconData(0xe806, fontFamily: _eFontFam, fontPackage: _kFontPkg);
+  static const IconData call_merge = IconData(0xe807, fontFamily: _eFontFam, fontPackage: _kFontPkg);
   static const IconData heart = IconData(0xf004, fontFamily: _eFontFam, fontPackage: _kFontPkg);
   static const IconData star = IconData(0xf005, fontFamily: _eFontFam, fontPackage: _kFontPkg);
   static const IconData home = IconData(0xf015, fontFamily: _eFontFam, fontPackage: _kFontPkg);

@@ -184,6 +184,10 @@ class AppLocalization {
     return Intl.message("Pay this request", desc: "pay_request", name: 'payRequest');
   }
 
+  String get deleteRequest {
+    return Intl.message("Delete this request", desc: "delete_request", name: 'deleteRequest');
+  }
+
   /// -- END GENERIC ITEMS
 
   /// -- CONTACT ITEMS

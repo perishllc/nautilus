@@ -338,8 +338,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           destinationAltered,
           StateContainer.of(context).wallet.address,
           NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
-          max: widget.maxSend,
-          memo: widget.memo);
+          max: widget.maxSend);
       if (widget.manta != null) {
         widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
       }
@@ -347,7 +346,9 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
 
       // if there's a memo to be sent, send it:
-      // TODO:
+      if (widget.memo != null && widget.memo.isNotEmpty) {
+        // TODO:
+      }
 
       // go through and check to see if any unfulfilled payments are now fulfilled
       List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();

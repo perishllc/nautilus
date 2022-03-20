@@ -92,7 +92,7 @@ class _ContactsListState extends State<ContactsList> {
   void _updateContacts() {
     sl.get<DBHelper>().getContacts().then((contacts) {
       for (Contact c in contacts) {
-        if (!_contacts.contains(c)) {
+        if (!_contacts.contains(c) && mounted) {
           setState(() {
             _contacts.add(c);
           });
