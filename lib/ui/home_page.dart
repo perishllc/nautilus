@@ -3221,9 +3221,9 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
     if (walletAddress == widget.to_address && widget.is_request && !widget.is_fulfilled) {
       is_unfulfilled_request = true;
     }
-    // if (walletAddress == widget.to_address && widget.is_request && !widget.is_acknowledged) {
-    //   is_unacknowledged_request = true;
-    // }
+    if (walletAddress == widget.to_address && widget.is_request && !widget.is_acknowledged) {
+      is_unacknowledged_request = true;
+    }
 
     return SafeArea(
       minimum: EdgeInsets.only(
@@ -3333,6 +3333,8 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                     }),
                   ],
                 ),
+
+                // pay this request button:
                 is_unfulfilled_request
                     ? Row(
                         children: <Widget>[
@@ -3348,6 +3350,35 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                                   address: widget.from_address,
                                   quickSendAmount: widget.amount_raw,
                                 ));
+                          }),
+                        ],
+                      )
+                    : Container(),
+
+                is_unacknowledged_request && is_unfulfilled_request
+                    ? Row(
+                        children: <Widget>[
+                          AppButton.buildAppButton(
+                              context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).sendRequestAgain, Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
+                              onPressed: () {
+                            // send the request again:
+                            // String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
+
+                            // // get epoch time as hex:
+                            // int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+                            // String nonce_hex = secondsSinceEpoch.toRadixString(16);
+                            // String signature = NanoSignatures.signBlock(nonce_hex, privKey);
+
+                            // // check validity locally:
+                            // String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet?.address);
+                            // bool isValid = NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+                            // if (!isValid) {
+                            //   throw Exception("Invalid signature?!");
+                            // }
+
+                            // await sl
+                            //     .get<AccountService>()
+                            //     .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, widget.memo);
                           }),
                         ],
                       )

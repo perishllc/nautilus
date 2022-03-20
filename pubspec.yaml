@@ -176,7 +176,7 @@ dev_dependencies:
     git:
       url: https://github.com/bbedward/intl_translation.git
       ref: master
-  # flutter_native_splash: ^2.0.4
+  # flutter_native_splash: ^2.1.1
   # flutter_launcher_icons: "^0.9.2"
   # flutter_launcher_icons:
   #   git:
@@ -217,7 +217,13 @@ flutter_icons:
 
 flutter_native_splash:
   # color: "#42a5f5"
-  background_image: "assets/splash_image.png"
+  color: "#000000"
+  # background_image: "assets/splash_image.png"
+  branding: "assets/logo-square.png"
+  android_12:
+    # color: "#42a5f5"
+    image: "assets/android12splash.png"
+    icon_background_color: "#000000"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

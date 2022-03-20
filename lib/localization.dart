@@ -188,6 +188,10 @@ class AppLocalization {
     return Intl.message("Delete this request", desc: "delete_request", name: 'deleteRequest');
   }
 
+  String get sendRequestAgain {
+    return Intl.message("Send Request again", desc: "request_again", name: 'sendRequestAgain');
+  }
+
   /// -- END GENERIC ITEMS
 
   /// -- CONTACT ITEMS
@@ -282,6 +286,10 @@ class AppLocalization {
 
   String get usernameInvalid {
     return Intl.message("Invalid Username", desc: 'username_invalid_name', name: 'usernameInvalid');
+  }
+
+  String get selfSendError {
+    return Intl.message("Can't request from self", desc: 'self_send_error', name: 'selfSendError');
   }
 
   String get favoriteNameMissing {

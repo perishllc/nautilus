@@ -636,41 +636,55 @@ class _SendSheetState extends State<SendSheet> {
                                 }
                               });
                             } else {
-                              Sheets.showAppHeightNineSheet(
-                                  context: context,
-                                  widget: SendConfirmSheet(
-                                      amountRaw: _localCurrencyMode
-                                          ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
-                                          : _rawAmount == null
-                                              ? (StateContainer.of(context).nyanoMode)
-                                                  ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
-                                                  : NumberUtil.getAmountAsRaw(_sendAmountController.text)
-                                              : _rawAmount,
-                                      destination: user.address,
-                                      contactName: (user is User)
-                                          ? "@" + user.username
-                                          : (user is Contact)
-                                              ? "★" + user.name
-                                              : null,
-                                      maxSend: _isMaxSend(),
-                                      localCurrency: _localCurrencyMode ? _sendAmountController.text : null,
-                                      memo: _sendMemoController.text));
+                              if (user.address == StateContainer.of(context).wallet.address) {
+                                // Can't request from self:
+                                setState(() {
+                                  _addressValidationText = AppLocalization.of(context).selfSendError;
+                                });
+                              } else {
+                                Sheets.showAppHeightNineSheet(
+                                    context: context,
+                                    widget: SendConfirmSheet(
+                                        amountRaw: _localCurrencyMode
+                                            ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                                            : _rawAmount == null
+                                                ? (StateContainer.of(context).nyanoMode)
+                                                    ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
+                                                    : NumberUtil.getAmountAsRaw(_sendAmountController.text)
+                                                : _rawAmount,
+                                        destination: user.address,
+                                        contactName: (user is User)
+                                            ? "@" + user.username
+                                            : (user is Contact)
+                                                ? "★" + user.name
+                                                : null,
+                                        maxSend: _isMaxSend(),
+                                        localCurrency: _localCurrencyMode ? _sendAmountController.text : null,
+                                        memo: _sendMemoController.text));
+                              }
                             }
                           });
                         } else if (validRequest) {
-                          Sheets.showAppHeightNineSheet(
-                              context: context,
-                              widget: SendConfirmSheet(
-                                  amountRaw: _localCurrencyMode
-                                      ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
-                                      : _rawAmount == null
-                                          ? (StateContainer.of(context).curTheme is NyanTheme)
-                                              ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
-                                              : NumberUtil.getAmountAsRaw(_sendAmountController.text)
-                                          : _rawAmount,
-                                  destination: _sendAddressController.text,
-                                  maxSend: _isMaxSend(),
-                                  localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
+                          if (_sendAddressController.text == StateContainer.of(context).wallet.address) {
+                            // Can't request from self:
+                            setState(() {
+                              _addressValidationText = AppLocalization.of(context).selfSendError;
+                            });
+                          } else {
+                            Sheets.showAppHeightNineSheet(
+                                context: context,
+                                widget: SendConfirmSheet(
+                                    amountRaw: _localCurrencyMode
+                                        ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                                        : _rawAmount == null
+                                            ? (StateContainer.of(context).curTheme is NyanTheme)
+                                                ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
+                                                : NumberUtil.getAmountAsRaw(_sendAmountController.text)
+                                            : _rawAmount,
+                                    destination: _sendAddressController.text,
+                                    maxSend: _isMaxSend(),
+                                    localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
+                          }
                         }
                       }),
                       // Request Button
@@ -1070,6 +1084,7 @@ class _SendSheetState extends State<SendSheet> {
       });
       _sendAddressFocusNode.unfocus();
     }
+    if (isRequest) {}
     return isValid;
   }
 
