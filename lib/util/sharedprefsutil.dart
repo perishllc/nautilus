@@ -32,8 +32,7 @@ class SharedPrefsUtil {
   static const String cur_language = 'fkalium_language_pref';
   static const String cur_theme = 'fkalium_theme_pref';
   static const String cur_explorer = 'fkalium_cur_explorer_pref';
-  static const String user_representative =
-      'fkalium_user_rep'; // For when non-opened accounts have set a representative
+  static const String user_representative = 'fkalium_user_rep'; // For when non-opened accounts have set a representative
   static const String firstcontact_added = 'fkalium_first_c_added';
   static const String notification_enabled = 'fkalium_notification_on';
   static const String lock_kalium = 'fkalium_lock_dev';
@@ -47,14 +46,14 @@ class SharedPrefsUtil {
   // Caching ninja API response
   static const String ninja_api_cache = 'fkalium_ninja_api_cache';
   // Natricon setting
-  static const String use_natricon = 'nautilus_use_natricon';
+  static const String use_natricon = 'fnautilus_use_natricon';
   // Nyanicon setting
-  static const String use_nyanicon = 'nautilus_use_nyanicon';
+  static const String use_nyanicon = 'fnautilus_use_nyanicon';
   // spam prevention min-RAW for receives
-  static const String min_raw_receive = 'nautilus_min_raw_receive';
+  static const String min_raw_receive = 'fnautilus_min_raw_receive';
   // last time we checked for updates:
-  static const String last_napi_users_check = 'nautilus_last_napi_users_check';
-  static const String last_napi_reps_check = 'nautilus_last_napi_reps_check';
+  static const String last_napi_users_check = 'fnautilus_last_napi_users_check';
+  static const String last_napi_reps_check = 'fnautilus_last_napi_reps_check';
 
   // For plain-text data
   Future<void> set(String key, value) async {
@@ -199,8 +198,8 @@ class SharedPrefsUtil {
   }
 
   Future<AvailableCurrency> getCurrency(Locale deviceLocale) async {
-    return AvailableCurrency(AvailableCurrencyEnum.values[
-        await get(cur_currency, defaultValue: AvailableCurrency.getBestForLocale(deviceLocale).currency.index)]);
+    return AvailableCurrency(
+        AvailableCurrencyEnum.values[await get(cur_currency, defaultValue: AvailableCurrency.getBestForLocale(deviceLocale).currency.index)]);
   }
 
   Future<void> setLanguage(LanguageSetting language) async {
@@ -208,8 +207,7 @@ class SharedPrefsUtil {
   }
 
   Future<LanguageSetting> getLanguage() async {
-    return LanguageSetting(
-        AvailableLanguage.values[await get(cur_language, defaultValue: AvailableLanguage.DEFAULT.index)]);
+    return LanguageSetting(AvailableLanguage.values[await get(cur_language, defaultValue: AvailableLanguage.DEFAULT.index)]);
   }
 
   Future<void> setTheme(ThemeSetting theme) async {
@@ -221,8 +219,7 @@ class SharedPrefsUtil {
   }
 
   Future<AvailableBlockExplorer> getBlockExplorer() async {
-    return AvailableBlockExplorer(AvailableBlockExplorerEnum
-        .values[await get(cur_explorer, defaultValue: AvailableBlockExplorerEnum.NANOCRAWLER.index)]);
+    return AvailableBlockExplorer(AvailableBlockExplorerEnum.values[await get(cur_explorer, defaultValue: AvailableBlockExplorerEnum.NANOCRAWLER.index)]);
   }
 
   Future<ThemeSetting> getTheme() async {
@@ -265,8 +262,7 @@ class SharedPrefsUtil {
   }
 
   Future<LockTimeoutSetting> getLockTimeout() async {
-    return LockTimeoutSetting(
-        LockTimeoutOption.values[await get(kalium_lock_timeout, defaultValue: LockTimeoutOption.ONE.index)]);
+    return LockTimeoutSetting(LockTimeoutOption.values[await get(kalium_lock_timeout, defaultValue: LockTimeoutOption.ONE.index)]);
   }
 
   // Locking out when max pin attempts exceeded

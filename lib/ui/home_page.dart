@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:isolate';
+import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flare_flutter/flare.dart';
 import 'package:flare_dart/math/mat2d.dart';
@@ -477,6 +479,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     _confirmEventSub = EventTaxiImpl.singleton().registerTo<ConfirmationHeightChangedEvent>().listen((event) {
       updateConfirmationHeights(event.confirmationHeight);
     });
+
+    // get pending background events:
+    ReceivePort _port = ReceivePort();
+    IsolateNameServer.registerPortWithName(_port.sendPort, "background_message");
+    _port.listen((dynamic data) {
+      StateContainer.of(context).handleMessage(data);
+    });
   }
 
   @override
@@ -558,6 +567,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           handleDeepLink(StateContainer.of(context).initialDeepLink);
           StateContainer.of(context).initialDeepLink = null;
         }
+        // handle any pending messages:
+        getPendingMessages();
+        // if (pendingMessages != null) {
+        //   print("handling background messages now!");
+        //   print(pendingMessages.length);
+        //   while (pendingMessages.length > 0) {
+        //     StateContainer.of(context).handleMessage(pendingMessages.removeAt(pendingMessages.length - 1));
+        //   }
+        // }
         super.didChangeAppLifecycleState(state);
         break;
       default:

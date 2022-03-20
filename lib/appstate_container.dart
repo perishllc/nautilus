@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:devicelocale/devicelocale.dart';
 import 'package:logger/logger.dart';
@@ -19,6 +20,7 @@ import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -48,14 +50,18 @@ import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 
-import 'util/sharedprefsutil.dart';
-
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message");
-  // final Logger log = sl.get<Logger>();
-  // log.d("Handling a background message");
-  // // await handlePayments(message.data);
-  // EventTaxiImpl.singleton().fire(FcmMessageEvent(data: message.data));
+  // dumb hack since the event bus doesn't work in the background:
+  // IsolateNameServer.lookupPortByName("background_message")?.send(message.data);
+}
+
+Future<void> getPendingMessages() async {
+  // final prefs = await SharedPreferences.getInstance();
+  // var a = await prefs.getString('pending_message');
+  // while (pendingMessages.length > 0) {
+  //   // EventTaxiImpl.singleton().fire(FcmMessageEvent(data: null));
+  // }
 }
 
 Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
@@ -376,7 +382,7 @@ class StateContainerState extends State<StateContainer> {
     //       FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
     //     });
     // WidgetsBinding.instance.ensureVisualUpdate();
-    // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
     FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
 
     // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -1072,6 +1078,7 @@ class StateContainerState extends State<StateContainer> {
     // log block height:
     // log.d(wallet.history[0].height);
     // log.d(wallet.history[wallet.history.length - 1].height);
+    log.d("handling payment message");
 
     if (data.containsKey("payment_request")) {
       // handle payment request:
