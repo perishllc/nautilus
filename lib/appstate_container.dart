@@ -2,25 +2,20 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:devicelocale/devicelocale.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:event_taxi/event_taxi.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -53,7 +48,7 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message");
   // dumb hack since the event bus doesn't work in the background:
-  // IsolateNameServer.lookupPortByName("background_message")?.send(message.data);
+  IsolateNameServer.lookupPortByName("background_message")?.send(message.data);
 }
 
 Future<void> getPendingMessages() async {
@@ -965,8 +960,6 @@ class StateContainerState extends State<StateContainer> {
     String block = data['block'];
     // String request_time = ((new DateTime.now()).millisecondsSinceEpoch ~/ 1000).toString();
 
-    print(requesting_account + "::::::" + to_address);
-
     // current block height:
     int currentBlockHeightInList = wallet.history.length > 0 ? (wallet.history[0].height + 1) : 1;
     // int currentBlockHeightInList = 0;
@@ -1068,7 +1061,7 @@ class StateContainerState extends State<StateContainer> {
           is_acknowledged: false,
           height: 0,
         );
-        sl.get<DBHelper>().addTXData(txData);
+        await sl.get<DBHelper>().addTXData(txData);
       }
       await restorePayments();
     }
@@ -1078,10 +1071,10 @@ class StateContainerState extends State<StateContainer> {
     // log block height:
     // log.d(wallet.history[0].height);
     // log.d(wallet.history[wallet.history.length - 1].height);
-    log.d("handling payment message");
 
     if (data.containsKey("payment_request")) {
       // handle payment request:
+      log.d("handling payment_request from: ${data['requesting_account']} : ${data['account']}");
       await handlePaymentRequest(data);
 
       // Send failed
@@ -1093,6 +1086,7 @@ class StateContainerState extends State<StateContainer> {
     }
 
     if (data.containsKey("payment_record")) {
+      log.d("handling payment_record from: ${data['requesting_account']} : ${data['account']}");
       await handlePaymentRecord(data);
 
       // Send success
@@ -1104,6 +1098,7 @@ class StateContainerState extends State<StateContainer> {
     }
 
     if (data.containsKey("payment_ack")) {
+      log.d("handling payment_ack from: ${data['requesting_account']} : ${data['account']}");
       String amount_raw = data['amount_raw'];
       String requesting_account = data['requesting_account'];
       String memo = data['memo'];
