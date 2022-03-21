@@ -112,7 +112,9 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   void _showSendingAnimation(BuildContext context) {
     animationOpen = true;
     Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
+        AnimationType.SEND,
+        StateContainer.of(context).curTheme.animationOverlayStrong,
+        StateContainer.of(context).curTheme.animationOverlayMedium,
         onPoppedCallback: () => animationOpen = false));
   }
 
@@ -151,7 +153,9 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                   ),
                   // Container for the amount text
                   Container(
-                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.105,
+                        right: MediaQuery.of(context).size.width * 0.105),
                     padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -177,7 +181,10 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                                 )
                               : TextSpan()),
                           TextSpan(
-                            text: getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
+                            text: getCurrencySymbol(context) +
+                                ((StateContainer.of(context).nyanoMode)
+                                    ? NumberUtil.getNanoStringAsNyano(amount)
+                                    : amount),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary,
                               fontSize: 16.0,
@@ -213,7 +220,9 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                   // Address text
                   Container(
                       padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.105,
+                          right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
@@ -288,16 +297,17 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                     children: <Widget>[
                       // CONFIRM Button
                       AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () async {
+                          context,
+                          AppButtonType.PRIMARY,
+                          CaseChange.toUpperCase(AppLocalization.of(context).confirm, context),
+                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                         // Authenticate
                         AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                         bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                         if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                           try {
-                            bool authenticated = await sl
-                                .get<BiometricUtil>()
-                                .authenticateWithBiometrics(context, AppLocalization.of(context).sendAmountConfirm.replaceAll("%1", amount));
+                            bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
+                                context, AppLocalization.of(context).sendAmountConfirm.replaceAll("%1", amount));
                             if (authenticated) {
                               sl.get<HapticUtil>().fingerprintSucess();
                               EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
@@ -315,7 +325,10 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                   Row(
                     children: <Widget>[
                       // CANCEL Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                      AppButton.buildAppButton(
+                          context,
+                          AppButtonType.PRIMARY_OUTLINE,
+                          CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pop();
                       }),
@@ -337,7 +350,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           widget.amountRaw,
           destinationAltered,
           StateContainer.of(context).wallet.address,
-          NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
+          NanoUtil.seedToPrivate(
+              await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
           max: widget.maxSend);
       if (widget.manta != null) {
         widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
@@ -348,6 +362,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       // if there's a memo to be sent, send it:
       if (widget.memo != null && widget.memo.isNotEmpty) {
         // TODO:
+        await sl.get<AccountService>().sendMemo(destinationAltered, widget.amountRaw,
+            StateContainer.of(context).wallet.address, signature, nonce_hex, widget.memo);
       }
 
       // go through and check to see if any unfulfilled payments are now fulfilled
@@ -390,7 +406,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       StateContainer.of(context).requestUpdate();
       if (widget.natriconNonce != null) {
         setState(() {
-          StateContainer.of(context).updateNatriconNonce(StateContainer.of(context).selectedAccount.address, widget.natriconNonce);
+          StateContainer.of(context)
+              .updateNatriconNonce(StateContainer.of(context).selectedAccount.address, widget.natriconNonce);
         });
       }
       Sheets.showAppHeightNineSheet(

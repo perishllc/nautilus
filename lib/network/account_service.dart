@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:nautilus_wallet_flutter/network/model/request/payment_ack.dart';
+import 'package:nautilus_wallet_flutter/network/model/payment/payment_ack.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:logger/logger.dart';
@@ -26,7 +26,8 @@ import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/subscribe_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/account_history_request.dart';
-import 'package:nautilus_wallet_flutter/network/model/request/payment_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/payment/payment_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/payment/payment_memo.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/accounts_balances_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/pending_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/process_request.dart';
@@ -138,7 +139,8 @@ class AccountService {
 
       _isConnecting = true;
       suspended = false;
-      _channel = new IOWebSocketChannel.connect(_SERVER_ADDRESS, headers: {'X-Client-Version': packageInfo.buildNumber});
+      _channel =
+          new IOWebSocketChannel.connect(_SERVER_ADDRESS, headers: {'X-Client-Version': packageInfo.buildNumber});
       log.d("Connected to service");
       _isConnecting = false;
       _isConnected = true;
@@ -268,7 +270,8 @@ class AccountService {
           String requestJson = await compute(encodeRequestItem, requestItem.request);
           //log.d("Sending: $requestJson");
           await _send(requestJson);
-        } else if (requestItem != null && (DateTime.now().difference(requestItem.expireDt).inSeconds > RequestItem.EXPIRE_TIME_S)) {
+        } else if (requestItem != null &&
+            (DateTime.now().difference(requestItem.expireDt).inSeconds > RequestItem.EXPIRE_TIME_S)) {
           pop();
           processQueue();
         }
@@ -313,7 +316,9 @@ class AccountService {
     if (_requestQueue != null && _requestQueue.length > 0) {
       List<RequestItem> toRemove = new List();
       _requestQueue.forEach((requestItem) {
-        if ((requestItem.request is SubscribeRequest || requestItem.request is AccountHistoryRequest || requestItem.request is PendingRequest) &&
+        if ((requestItem.request is SubscribeRequest ||
+                requestItem.request is AccountHistoryRequest ||
+                requestItem.request is PendingRequest) &&
             !requestItem.isProcessing) {
           toRemove.add(requestItem);
         }
@@ -353,8 +358,8 @@ class AccountService {
   // HTTP API
 
   Future<dynamic> makeHttpRequest(BaseRequest request) async {
-    http.Response response =
-        await http.post(Uri.parse(_SERVER_ADDRESS_HTTP), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
+    http.Response response = await http.post(Uri.parse(_SERVER_ADDRESS_HTTP),
+        headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
 
     if (response.statusCode != 200) {
       return null;
@@ -383,7 +388,8 @@ class AccountService {
   Future<PendingResponse> getPending(String account, int count, {String threshold, bool includeActive = false}) async {
     threshold = threshold ?? BigInt.from(10).pow(24).toString();
 
-    PendingRequest request = PendingRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
+    PendingRequest request =
+        PendingRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
@@ -425,8 +431,8 @@ class AccountService {
   }
 
   // request money from an account:
-  /*Future<PaymentResponse> */ Future<void> requestPayment(
-      String account, String amount_raw, String requesting_account, String request_signature, String request_nonce, String memo) async {
+  /*Future<PaymentResponse> */ Future<void> requestPayment(String account, String amount_raw, String requesting_account,
+      String request_signature, String request_nonce, String memo) async {
     PaymentRequest request = PaymentRequest(
         account: account,
         amount_raw: amount_raw,
@@ -440,8 +446,24 @@ class AccountService {
     }
   }
 
-  Future<void> requestACK(String request_uuid, String requesting_account) async {
-    PaymentACK request = PaymentACK(uuid: request_uuid, requesting_account: requesting_account);
+  // send payment record (memo) to an account:
+  Future<void> sendMemo(String account, String block, String requesting_account, String request_signature,
+      String request_nonce, String memo) async {
+    PaymentMemo request = PaymentMemo(
+        account: account,
+        requesting_account: requesting_account,
+        request_signature: request_signature,
+        request_nonce: request_nonce,
+        memo: memo,
+        block: block);
+    dynamic response = await makeHttpRequest(request);
+    if (response is ErrorResponse) {
+      throw Exception("Received error ${response.error}");
+    }
+  }
+
+  Future<void> requestACK(String request_uuid, String account) async {
+    PaymentACK request = PaymentACK(uuid: request_uuid, account: account);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
@@ -466,9 +488,16 @@ class AccountService {
     return item;
   }
 
-  Future<ProcessResponse> requestReceive(String representative, String previous, String balance, String link, String account, String privKey) async {
+  Future<ProcessResponse> requestReceive(
+      String representative, String previous, String balance, String link, String account, String privKey) async {
     StateBlock receiveBlock = StateBlock(
-        subtype: BlockTypes.RECEIVE, previous: previous, representative: representative, balance: balance, link: link, account: account, privKey: privKey);
+        subtype: BlockTypes.RECEIVE,
+        previous: previous,
+        representative: representative,
+        balance: balance,
+        link: link,
+        account: account,
+        privKey: privKey);
 
     BlockInfoItem previousInfo = await requestBlockInfo(previous);
     StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents));
@@ -479,12 +508,14 @@ class AccountService {
     await receiveBlock.sign(privKey);
 
     // Process
-    ProcessRequest processRequest = ProcessRequest(block: json.encode(receiveBlock.toJson()), subType: BlockTypes.RECEIVE);
+    ProcessRequest processRequest =
+        ProcessRequest(block: json.encode(receiveBlock.toJson()), subType: BlockTypes.RECEIVE);
 
     return await requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestSend(String representative, String previous, String sendAmount, String link, String account, String privKey,
+  Future<ProcessResponse> requestSend(
+      String representative, String previous, String sendAmount, String link, String account, String privKey,
       {bool max = false}) async {
     StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
@@ -509,10 +540,17 @@ class AccountService {
     return await requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestOpen(String balance, String link, String account, String privKey, {String representative}) async {
+  Future<ProcessResponse> requestOpen(String balance, String link, String account, String privKey,
+      {String representative}) async {
     representative = representative ?? await sl.get<SharedPrefsUtil>().getRepresentative();
-    StateBlock openBlock =
-        StateBlock(subtype: BlockTypes.OPEN, previous: "0", representative: representative, balance: balance, link: link, account: account, privKey: privKey);
+    StateBlock openBlock = StateBlock(
+        subtype: BlockTypes.OPEN,
+        previous: "0",
+        representative: representative,
+        balance: balance,
+        link: link,
+        account: account,
+        privKey: privKey);
 
     // Sign
     await openBlock.sign(privKey);
@@ -523,7 +561,8 @@ class AccountService {
     return await requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestChange(String account, String representative, String previous, String balance, String privKey) async {
+  Future<ProcessResponse> requestChange(
+      String account, String representative, String previous, String balance, String privKey) async {
     StateBlock chgBlock = StateBlock(
         subtype: BlockTypes.CHANGE,
         previous: previous,
@@ -547,7 +586,8 @@ class AccountService {
   }
 
   Future<AlertResponseItem> getAlert(String lang) async {
-    http.Response response = await http.get(Uri.parse(_SERVER_ADDRESS_ALERTS + "/" + lang), headers: {"Accept": "application/json"});
+    http.Response response =
+        await http.get(Uri.parse(_SERVER_ADDRESS_ALERTS + "/" + lang), headers: {"Accept": "application/json"});
     if (response.statusCode == 200) {
       List<AlertResponseItem> alerts;
       alerts = (json.decode(response.body) as List).map((i) => AlertResponseItem.fromJson(i)).toList();
