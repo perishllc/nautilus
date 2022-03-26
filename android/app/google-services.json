@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:871480363204:android:074d7635f75eab1f492191",
         "android_client_info": {
-          "package_name": "dev.fwd.nautiluswallet"
+          "package_name": "co.perish.nautiluswallet"
         }
       },
       "oauth_client": [

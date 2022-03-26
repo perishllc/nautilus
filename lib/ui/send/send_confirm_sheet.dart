@@ -362,8 +362,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       // if there's a memo to be sent, send it:
       if (widget.memo != null && widget.memo.isNotEmpty) {
         // TODO:
-        await sl.get<AccountService>().sendMemo(destinationAltered, widget.amountRaw,
-            StateContainer.of(context).wallet.address, signature, nonce_hex, widget.memo);
+        //await sl.get<AccountService>().sendMemo(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, widget.memo);
       }
 
       // go through and check to see if any unfulfilled payments are now fulfilled
