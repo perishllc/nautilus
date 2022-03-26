@@ -10,7 +10,6 @@ PaymentMemo _$PaymentMemoFromJson(Map<String, dynamic> json) {
   return PaymentMemo(
     action: json['action'] as String,
     account: json['account'] as String,
-    amount_raw: json['amount_raw'] as String,
     requesting_account: json['requesting_account'] as String,
     request_signature: json['request_signature'] as String,
     request_nonce: json['request_nonce'] as String,
