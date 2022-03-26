@@ -14,7 +14,7 @@ default_platform(:ios)
 
 TEMP_KEYCHAIN_NAME_DEFAULT = "fastlane_flutter"
 TEMP_KEYCHAN_PASSWORD_DEFAULT = "temppassword"
-SIGH_PROVISIONING_PROFILE_NAME = "dev.fwd.nautilus AppStore"
+SIGH_PROVISIONING_PROFILE_NAME = "co.perish.nautilus AppStore"
 
 def delete_temp_keychain(name)
   delete_keychain(
@@ -85,7 +85,7 @@ platform :ios do
         export_options: {
             method: "app-store",
             provisioningProfiles: { 
-              "dev.fwd.nautilus" => ENV['SIGH_PROVISIONING_PROFILE_NAME'],
+              "co.perish.nautilus" => ENV['SIGH_PROVISIONING_PROFILE_NAME'],
             }
         }
       )

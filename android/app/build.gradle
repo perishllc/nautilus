@@ -41,7 +41,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "dev.fwd.nautiluswallet"
+        applicationId "co.perish.nautiluswallet"
         // minSdkVersion 19
         minSdkVersion 21
         targetSdkVersion 31

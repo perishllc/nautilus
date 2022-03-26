@@ -1,4 +1,4 @@
-package dev.fwd.nautiluswallet;
+package co.perish.nautiluswallet;
 
 import android.os.Bundle;
 
