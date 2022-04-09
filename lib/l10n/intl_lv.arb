@@ -53,7 +53,7 @@
   "enterAmount": "Ievadiet daudzumu",
   "enterAddress": "Ievadiet adresi",
   "invalidAddress": "Ievadītā adrese nav derīga",
-  "addressMising": "Lūdzu ievadiet adresi",
+  "addressMissing": "Lūdzu ievadiet adresi",
   "amountMissing": "Lūdzu ievadiet daudzumu",
   "insufficientBalance": "Nepietiek līdzekļu",
   "sendFrom": "Sūtīt no",

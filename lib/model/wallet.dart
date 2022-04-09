@@ -58,9 +58,9 @@ class AppWallet {
     this._localCurrencyPrice = localCurrencyPrice ?? "0";
     this._btcPrice = btcPrice ?? "0";
     this._blockCount = blockCount ?? 0;
-    this._history = history ?? new List<AccountHistoryResponseItem>();
-    this._payments = payments ?? new List<TXData>();
-    this._unified = unified ?? new List<dynamic>();
+    this._history = history ?? /*new List<AccountHistoryResponseItem>()*/ [];
+    this._payments = payments ?? /*new List<TXData>()*/ [];
+    this._unified = unified ?? /*new List<dynamic>();*/ [];
     this._loading = loading ?? true;
     this._historyLoading = historyLoading ?? true;
     this._paymentsLoading = paymentsLoading ?? true;
@@ -99,8 +99,7 @@ class AppWallet {
   }
 
   String getLocalCurrencyPrice(AvailableCurrency currency, {String locale = "en_US"}) {
-    Decimal converted =
-        Decimal.parse(_localCurrencyPrice) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
+    Decimal converted = Decimal.parse(_localCurrencyPrice) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
     return NumberFormat.currency(locale: locale, symbol: currency.getCurrencySymbol()).format(converted.toDouble());
   }
 

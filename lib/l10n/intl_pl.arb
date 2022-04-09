@@ -54,7 +54,7 @@
   "enterAmount": "Wpisz Ilość",
   "enterAddress": "Wpisz Adres",
   "invalidAddress": "Wpisany Addres jest nieważny",
-  "addressMising": "Wpisz Adres",
+  "addressMissing": "Wpisz Adres",
   "amountMissing": "Wpisz ilość",
   "insufficientBalance": "Niewystarczające środki",
   "sendFrom": "Wyślij Od",

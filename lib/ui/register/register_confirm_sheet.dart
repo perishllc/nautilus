@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
@@ -12,8 +13,6 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/contact.dart';
-import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
-import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -37,33 +36,35 @@ import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 
-class SendConfirmSheet extends StatefulWidget {
+class RegisterConfirmSheet extends StatefulWidget {
   final String amountRaw;
   final String destination;
   final String contactName;
+  final String userName;
   final String localCurrency;
+  final String checkUrl;
   final bool maxSend;
   final MantaWallet manta;
   final PaymentRequestMessage paymentRequest;
   final int natriconNonce;
-  final String memo;
 
-  SendConfirmSheet(
+  RegisterConfirmSheet(
       {this.amountRaw,
       this.destination,
       this.contactName,
+      this.userName,
       this.localCurrency,
       this.manta,
       this.paymentRequest,
       this.natriconNonce,
-      this.maxSend = false,
-      this.memo})
+      this.checkUrl,
+      this.maxSend = false})
       : super();
 
-  _SendConfirmSheetState createState() => _SendConfirmSheetState();
+  _RegisterConfirmSheetState createState() => _RegisterConfirmSheetState();
 }
 
-class _SendConfirmSheetState extends State<SendConfirmSheet> {
+class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
   String amount;
   String destinationAltered;
   bool animationOpen;
@@ -342,49 +343,9 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       }
       StateContainer.of(context).wallet.frontier = resp.hash;
       StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
-
-      // if there's a memo to be sent, send it:
-      if (widget.memo != null && widget.memo.isNotEmpty) {
-        // TODO:
-        //await sl.get<AccountService>().sendMemo(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, widget.memo);
-      }
-
-      // go through and check to see if any unfulfilled payments are now fulfilled
-      List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
-      for (int i = 0; i < unfulfilledPayments.length; i++) {
-        TXData txData = unfulfilledPayments[i];
-
-        // TX is unfulfilled and in the past:
-        // int currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-        // if (currentTime - int.parse(txData.request_time) > 0) {
-        // }
-        // check destination of this request is where we're sending to:
-        // check to make sure we are the recipient of this request:
-        // check to make sure the amounts are the same:
-        if (txData.from_address == destinationAltered &&
-            txData.to_address == StateContainer.of(context).wallet.address &&
-            txData.amount_raw == widget.amountRaw) {
-          // this is the payment we're fulfilling
-          // update the TXData to be fulfilled
-          await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
-          // update the ui to reflect the change in the db:
-          StateContainer.of(context).restorePayments();
-          break;
-        }
-      }
-
       // Show complete
       Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
-      String contactName;
-      if (contact == null) {
-        User user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
-        if (user != null) {
-          contactName = user.username;
-        }
-      } else {
-        contactName = contact.name;
-      }
-
+      String contactName = contact == null ? null : contact.name;
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       StateContainer.of(context).requestUpdate();
       if (widget.natriconNonce != null) {
@@ -392,17 +353,27 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           StateContainer.of(context).updateNatriconNonce(StateContainer.of(context).selectedAccount.address, widget.natriconNonce);
         });
       }
+
+      // if we got this far the send went through:
+      // do a get on the checkUrl so nano.to can update the database:
+      try {
+        await sl.get<AccountService>().checkUsernameUrl(widget.checkUrl);
+      } catch (e) {
+        print("Error with checkUrl: $e");
+      }
+
       Sheets.showAppHeightNineSheet(
           context: context,
           closeOnTap: true,
           removeUntilHome: true,
-          widget: SendCompleteSheet(
-              amountRaw: widget.amountRaw,
-              destination: destinationAltered,
-              contactName: contactName,
-              localAmount: widget.localCurrency,
-              paymentRequest: widget.paymentRequest,
-              natriconNonce: widget.natriconNonce));
+          widget: SendCompleteSheet(amountRaw: widget.amountRaw, destination: destinationAltered, localAmount: widget.localCurrency));
+
+      // sleep for a few seconds to give the server some time to update the database:
+      await new Future.delayed(const Duration(seconds: 3));
+      // force a refresh on the username database:
+      await StateContainer.of(context).checkAndCacheNapiDatabases(true);
+      // update the wallet username:
+      await StateContainer.of(context).updateWallet(account: StateContainer.of(context).selectedAccount);
     } catch (e) {
       // Send failed
       if (animationOpen) {

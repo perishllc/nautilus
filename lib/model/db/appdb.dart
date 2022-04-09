@@ -19,7 +19,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 class DBHelper {
-  static const int DB_VERSION = 3;
+  static const int DB_VERSION = 4;
   static const String CONTACTS_SQL = """CREATE TABLE Contacts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
@@ -27,11 +27,13 @@ class DBHelper {
         monkey_path TEXT)""";
   static const String USERS_SQL = """CREATE TABLE Users( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        username TEXT, 
-        address TEXT)""";
+        username TEXT,
+        address TEXT,
+        blocked BOOLEAN)""";
   static const String BLOCKED_SQL = """CREATE TABLE BlockedUsers( 
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        username TEXT, 
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        username TEXT,
         address TEXT)""";
   static const String REPS_SQL = """CREATE TABLE Reps( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -49,7 +51,8 @@ class DBHelper {
         selected INTEGER, 
         last_accessed INTEGER,
         private_key TEXT,
-        balance TEXT)""";
+        balance TEXT,
+        address TEXT)""";
   static const String TX_DATA_SQL = """CREATE TABLE Transactions( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         from_address TEXT,
@@ -64,8 +67,8 @@ class DBHelper {
         uuid TEXT,
         is_acknowledged BOOLEAN,
         height INTEGER)""";
-  static const String ACCOUNTS_ADD_ACCOUNT_COLUMN_SQL = """
-    ALTER TABLE Accounts ADD address TEXT
+  static const String USER_ADD_BLOCKED_COLUMN_SQL = """
+    ALTER TABLE Users ADD blocked BOOLEAN
     """;
   static Database _db;
 
@@ -94,18 +97,14 @@ class DBHelper {
     await db.execute(USERS_SQL);
     await db.execute(REPS_SQL);
     await db.execute(ACCOUNTS_SQL);
-    await db.execute(TX_DATA_SQL);
-    await db.execute(ACCOUNTS_ADD_ACCOUNT_COLUMN_SQL);
     await db.execute(BLOCKED_SQL);
+    await db.execute(TX_DATA_SQL);
   }
 
   void _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    if (oldVersion == 1) {
-      // Add accounts table
-      await db.execute(ACCOUNTS_SQL);
-      await db.execute(ACCOUNTS_ADD_ACCOUNT_COLUMN_SQL);
-    } else if (oldVersion == 2) {
-      await db.execute(ACCOUNTS_ADD_ACCOUNT_COLUMN_SQL);
+    if (oldVersion == 3) {
+      // Add blocked table
+      await db.execute(BLOCKED_SQL);
     }
   }
 
@@ -289,7 +288,7 @@ class DBHelper {
   Future<List<User>> getUserSuggestionsWithNameLike(String pattern) async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE username LIKE \'%$pattern%\' ORDER BY LOWER(username)');
-    List<User> users = new List();
+    List<User> users = [];
     int maxSuggestions = 5;
     int length = list.length;
     // dart doesn't support function overloading so I can't import dart:math for the min() function
@@ -301,6 +300,31 @@ class DBHelper {
     return users;
   }
 
+  // Future<bool> blockUser(User user) async {
+  //   var dbClient = await db;
+  //   return await dbClient.rawUpdate("UPDATE users SET blocked = ? WHERE address = ?", [1, user.address]) > 0;
+  // }
+
+  // Future<bool> unblockUser(User user) async {
+  //   var dbClient = await db;
+  //   return await dbClient.rawUpdate("UPDATE users SET blocked = ? WHERE address = ?", [0, user.address]) > 0;
+  // }
+
+  Future<int> blockUser(User user) async {
+    var dbClient = await db;
+    return await dbClient.rawInsert('INSERT INTO BlockedUsers (username, address) values(?, ?)', [user.username, user.address.replaceAll("xrb_", "nano_")]);
+  }
+
+  Future<bool> unblockUser(User user) async {
+    var dbClient = await db;
+    if (user.username != null) {
+      return await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(username) like \'%${user.username.toLowerCase()}\'") > 0;
+    } else if (user.address != null) {
+      return await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(address) like \'%${user.address.toLowerCase()}\'") > 0;
+    }
+    return false;
+  }
+
   Future<User> getUserWithAddress(String address) async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
@@ -309,6 +333,26 @@ class DBHelper {
       return User(username: list[0]["username"], address: list[0]["address"]);
     }
     return null;
+  }
+
+  // Future<List<User>> getBlockedUsers() async {
+  //   var dbClient = await db;
+  //   List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE blocked = 1 ORDER BY LOWER(username)');
+  //   List<User> users = [];
+  //   for (int i = 0; i < list.length; i++) {
+  //     users.add(new User(username: list[i]["username"], address: list[i]["address"], blocked: true));
+  //   }
+  //   return null;
+  // }
+
+  Future<List<User>> getBlockedUsers() async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM BlockedUsers');
+    List<User> users = [];
+    for (int i = 0; i < list.length; i++) {
+      users.add(new User(username: list[i]["username"], address: list[i]["address"]));
+    }
+    return users;
   }
 
   Future<dynamic> getUserOrContactWithAddress(String address) async {

@@ -54,7 +54,7 @@
   "enterAmount": "Zadejte částku",
   "enterAddress": "Zadejte adresu",
   "invalidAddress": "Zadaná adresa není platná",
-  "addressMising": "Prosím zadejte adresu",
+  "addressMissing": "Prosím zadejte adresu",
   "amountMissing": "Prosím zadejte částku",
   "insufficientBalance": "Nedostatečný zůstatek",
   "sendFrom": "Odeslat z",

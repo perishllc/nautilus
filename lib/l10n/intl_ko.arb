@@ -50,7 +50,7 @@
   "sendError": "문제가 발생했습니다. 나중에 다시 시도하시오.",
   "enterAmount": "금액을 입력하세요",
   "invalidAddress": "목적지 주소가 잘못되었습니다",
-  "addressMising": "주소를 입력하세요",
+  "addressMissing": "주소를 입력하세요",
   "amountMissing": "금액을 입력하세요",
   "insufficientBalance": "잔액이 부족합니다",
   "sendFrom": "보낸 사람 ",

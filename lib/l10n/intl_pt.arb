@@ -54,7 +54,7 @@
   "enterAmount": "Digite o valor",
   "enterAddress": "Insira o endereço",
   "invalidAddress": "Endereço de Destino Inválido",
-  "addressMising": "Por favor insira um destino",
+  "addressMissing": "Por favor insira um destino",
   "amountMissing": "Por favor insira uma quantia",
   "insufficientBalance": "Saldo Insuficiente",
   "sendFrom": "Enviar de",

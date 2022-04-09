@@ -54,7 +54,7 @@
   "enterAmount": "Introduir quantitat",
   "enterAddress": "Introduir adreça",
   "invalidAddress": "L'adreça introduïda no és vàlida",
-  "addressMising": "Si us plau, introdueix una adreça",
+  "addressMissing": "Si us plau, introdueix una adreça",
   "amountMissing": "Si us plau, introdueix una quantitat",
   "insufficientBalance": "Saldo insuficient",
   "sendFrom": "Enviar des de",

@@ -29,7 +29,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addContact" : MessageLookupByLibrary.simpleMessage("Добави Контакт"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("Адрес Копиран"),
     "addressHint" : MessageLookupByLibrary.simpleMessage("Въведи Адрес\n"),
-    "addressMising" : MessageLookupByLibrary.simpleMessage("Моля въведете Адрес"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("Сподели Адрес"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Моля въведете Сума"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Метод за Удостоверяване"),

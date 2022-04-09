@@ -53,7 +53,7 @@
   "enterAmount": "Küldött Mennyiség",
   "enterAddress": "Küldés Erre A Címre",
   "invalidAddress": "Helytelen Cím",
-  "addressMising": "Adjon meg egy célt",
+  "addressMissing": "Adjon meg egy célt",
   "amountMissing": "Adjon meg egy összeget",
   "insufficientBalance": "Elégtelen Számlaegyenleg",
   "sendFrom": "Küldés Innen",

@@ -54,7 +54,7 @@
   "enterAmount": "Nhập số lượng",
   "enterAddress": "Nhập địa chỉ",
   "invalidAddress": "Địa chỉ đã nhập không hợp lệ",
-  "addressMising": "Hãy nhập một địa chỉ",
+  "addressMissing": "Hãy nhập một địa chỉ",
   "amountMissing": "Hãy nhập lượng tiền",
   "insufficientBalance": "Số dư không đủ",
   "sendFrom": "Gửi từ",

@@ -54,7 +54,7 @@
   "enterAmount": "Ange belopp",
   "enterAddress": "Ange adress",
   "invalidAddress": "Ogiltig mottagaradress",
-  "addressMising": "Ange en destination",
+  "addressMissing": "Ange en destination",
   "amountMissing": "Ange ett belopp",
   "insufficientBalance": "Otillräckligt saldo",
   "sendFrom": "Skicka från",

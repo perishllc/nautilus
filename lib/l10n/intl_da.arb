@@ -54,7 +54,7 @@
   "enterAmount": "Indtast beløb",
   "enterAddress": "Indtast adresse",
   "invalidAddress": "Den indtastede adresse er ugyldig",
-  "addressMising": "Indtast venligst en adresse",
+  "addressMissing": "Indtast venligst en adresse",
   "amountMissing": "Indtast et beløb",
   "insufficientBalance": "Saldo er utilstrækkelig",
   "sendFrom": "Send fra",

@@ -28,7 +28,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addContact" : MessageLookupByLibrary.simpleMessage("連絡先を追加する"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("アドレスをコピーしました"),
     "addressHint" : MessageLookupByLibrary.simpleMessage("アドレスを入力"),
-    "addressMising" : MessageLookupByLibrary.simpleMessage("アドレスを入力してください"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("アドレスを共有する"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("金額を入力してください"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("認証方法"),

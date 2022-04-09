@@ -54,7 +54,7 @@
   "enterAmount": "Inserisci Importo",
   "enterAddress": "Inserisci Indirizzo",
   "invalidAddress": "Indirizzo invalido",
-  "addressMising": "Inserisci un indirizzo",
+  "addressMissing": "Inserisci un indirizzo",
   "amountMissing": "Inserisci un importo",
   "insufficientBalance": "Saldo Insufficiente",
   "sendFrom": "Invia Da",

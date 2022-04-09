@@ -29,7 +29,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addContact" : MessageLookupByLibrary.simpleMessage("Afegir contacte"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("Adreça copiada"),
     "addressHint" : MessageLookupByLibrary.simpleMessage("Introduir adreça"),
-    "addressMising" : MessageLookupByLibrary.simpleMessage("Si us plau, introdueix una adreça"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("Compartir adreça"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Si us plau, introdueix una quantitat"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Mètode d\'autenticació"),

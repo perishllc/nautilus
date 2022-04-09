@@ -111,6 +111,10 @@ class AppLocalization {
     return Intl.message('Ignore', desc: 'ignore', name: 'ignore');
   }
 
+  String get refund {
+    return Intl.message('Refund', desc: 'refund', name: 'refund');
+  }
+
   String get dismiss {
     return Intl.message('Dismiss', desc: 'dismiss', name: 'dismiss');
   }
@@ -182,6 +186,10 @@ class AppLocalization {
 
   String get payRequest {
     return Intl.message("Pay this request", desc: "pay_request", name: 'payRequest');
+  }
+
+  String get blockUser {
+    return Intl.message("Block this User", desc: "block_user", name: 'blockUser');
   }
 
   String get deleteRequest {
@@ -272,8 +280,16 @@ class AppLocalization {
     return Intl.message('Favorites', desc: 'favorite_header', name: 'favoritesHeader');
   }
 
+  String get blockedHeader {
+    return Intl.message('Blocked', desc: 'blocked_header', name: 'blockedHeader');
+  }
+
   String get addFavorite {
     return Intl.message('Add Favorite', desc: 'favorite_add_button', name: 'addFavorite');
+  }
+
+  String get addBlocked {
+    return Intl.message('Block a User', desc: 'blocked_add_button', name: 'addBlocked');
   }
 
   String get favoriteNameHint {
@@ -356,12 +372,20 @@ class AppLocalization {
     return Intl.message("Sending", desc: 'send_sending', name: 'sending');
   }
 
+  String get creatingGiftCard {
+    return Intl.message("Creating Gift Card", desc: 'creating_gift_card', name: 'creatingGiftCard');
+  }
+
   String get requestedFrom {
     return Intl.message("Requested From", desc: 'requested_from', name: 'requestedFrom');
   }
 
   String get requesting {
     return Intl.message("Requesting", desc: 'request_requesting', name: 'requesting');
+  }
+
+  String get withAddress {
+    return Intl.message("With Address", desc: 'with_address', name: 'withAddress');
   }
 
   String get to {
@@ -407,8 +431,12 @@ class AppLocalization {
     return Intl.message("Enter Address", desc: 'enter_address', name: 'enterAddress');
   }
 
+  String get enterUserOrAddress {
+    return Intl.message("Enter User or Address", desc: 'enter_user_address', name: 'enterUserOrAddress');
+  }
+
   String get enterMemo {
-    return Intl.message("Optional Note", desc: 'enter_memo', name: 'enterMemo');
+    return Intl.message("Note (visible to nautilus users)", desc: 'enter_memo', name: 'enterMemo');
   }
 
   String get enterUsername {
@@ -423,8 +451,12 @@ class AppLocalization {
     return Intl.message("Username unavailable", desc: 'username_unavailable', name: 'usernameUnavailable');
   }
 
-  String get addressMising {
-    return Intl.message("Please Enter an Address", desc: 'send_enter_address', name: 'addressMising');
+  String get usernameAvailable {
+    return Intl.message("Username available!", desc: 'username_available', name: 'usernameAvailable');
+  }
+
+  String get addressMissing {
+    return Intl.message("Please Enter an Address", desc: 'send_enter_address', name: 'addressMissing');
   }
 
   String get amountMissing {
@@ -500,6 +532,10 @@ class AppLocalization {
 
   String get registerUsername {
     return Intl.message("Register Username", desc: 'register_username', name: 'registerUsername');
+  }
+
+  String get checkAvailability {
+    return Intl.message("Check Availability", desc: 'check_availability', name: 'checkAvailability');
   }
 
   String get createGiftCard {
@@ -941,6 +977,31 @@ class AppLocalization {
   }
 
   /// -- END EXAMPLE HOME SCREEN CARDS
+
+  /// GIFTS
+
+  String get importGift {
+    return Intl.message("The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?",
+        desc: 'import_gift', name: 'importGift');
+  }
+
+  String get giftAlert {
+    return Intl.message("You have a gift!", desc: 'import_gift_header', name: 'giftAlert');
+  }
+
+  String get giftMessage {
+    return Intl.message("Gift Message", desc: 'gift_message', name: 'giftMessage');
+  }
+
+  String get giftAmount {
+    return Intl.message("Gift Amount", desc: 'gift_amount', name: 'giftAmount');
+  }
+
+  String get giftFrom {
+    return Intl.message("Gift From", desc: 'gift_from', name: 'giftFrom');
+  }
+
+  /// END GIFTS
 
   /// -- START MULTI-ACCOUNT
 

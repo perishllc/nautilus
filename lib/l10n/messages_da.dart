@@ -29,7 +29,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addContact" : MessageLookupByLibrary.simpleMessage("Tilføj kontakt"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("Adresse kopieret"),
     "addressHint" : MessageLookupByLibrary.simpleMessage("Indtast adresse"),
-    "addressMising" : MessageLookupByLibrary.simpleMessage("Indtast venligst en adresse"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("Del adresse"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Indtast et beløb"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Godkendelsesmetode"),

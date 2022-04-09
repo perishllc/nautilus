@@ -6,8 +6,11 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/bus/user_added_event.dart';
+import 'package:nautilus_wallet_flutter/bus/user_modified_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
@@ -23,15 +26,15 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
-class AddContactSheet extends StatefulWidget {
+class AddBlockedSheet extends StatefulWidget {
   final String address;
 
-  AddContactSheet({this.address}) : super();
+  AddBlockedSheet({this.address}) : super();
 
-  _AddContactSheetState createState() => _AddContactSheetState();
+  _AddBlockedSheetState createState() => _AddBlockedSheetState();
 }
 
-class _AddContactSheetState extends State<AddContactSheet> {
+class _AddBlockedSheetState extends State<AddBlockedSheet> {
   FocusNode _nameFocusNode;
   FocusNode _addressFocusNode;
   TextEditingController _nameController;
@@ -128,7 +131,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 child: Column(
                   children: <Widget>[
                     AutoSizeText(
-                      CaseChange.toUpperCase(AppLocalization.of(context).addFavorite, context),
+                      CaseChange.toUpperCase(AppLocalization.of(context).addBlocked, context),
                       style: AppStyles.textStyleHeader(context),
                       textAlign: TextAlign.center,
                       maxLines: 1,
@@ -303,16 +306,20 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 Row(
                   children: <Widget>[
                     // Add Contact Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).addFavorite, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).blockUser, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       if (await validateForm()) {
-                        Contact newContact = Contact(name: _nameController.text, address: widget.address == null ? _addressController.text : widget.address);
-                        await sl.get<DBHelper>().saveContact(newContact);
-                        newContact.address = newContact.address.replaceAll("xrb_", "nano_");
-                        EventTaxiImpl.singleton().fire(ContactAddedEvent(contact: newContact));
-                        UIUtil.showSnackbar(AppLocalization.of(context).contactAdded.replaceAll("%1", newContact.name), context);
-                        EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: newContact));
-                        Navigator.of(context).pop();
+                        User newUser = User(username: _nameController.text, address: widget.address == null ? _addressController.text : widget.address);
+                        sl.get<DBHelper>().blockUser(newUser);
+                        // TODO: finish this
+
+                        // User newContact = User(username: _nameController.text, address: widget.address == null ? _addressController.text : widget.address);
+                        // await sl.get<DBHelper>().saveContact(newContact);
+                        // newContact.address = newContact.address.replaceAll("xrb_", "nano_");
+                        // EventTaxiImpl.singleton().fireUserAddedEvent(user: newUser));
+                        // UIUtil.showSnackbar(AppLocalization.of(context).contactAdded.replaceAll("%1", newContact.name), context);
+                        // EventTaxiImpl.singleton().fire(UserModifiedEvent(user: newContact));
+                        // Navigator.of(context).pop();
                       }
                     }),
                   ],

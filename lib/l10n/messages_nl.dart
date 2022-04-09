@@ -29,7 +29,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addContact" : MessageLookupByLibrary.simpleMessage("Contact toevoegen"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("Adres gekopieerd"),
     "addressHint" : MessageLookupByLibrary.simpleMessage("Voer adres in"),
-    "addressMising" : MessageLookupByLibrary.simpleMessage("Voer a.u.b. een adres in"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("Deel"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Voer a.u.b. een bedrag in"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Verificatiemethode"),

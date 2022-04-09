@@ -54,7 +54,7 @@
   "enterAmount": "পরিমান লিখুন",
   "enterAddress": "ঠিকানা লিখুন",
   "invalidAddress": "এই ঠিকানাটি অবৈধ",
-  "addressMising": "দয়া করে ঠিকানা লিখুন",
+  "addressMissing": "দয়া করে ঠিকানা লিখুন",
   "amountMissing": "অনুগ্রহ করে পরিমাণ লিখুন",
   "insufficientBalance": "অপর্যাপ্ত টাকা",
   "sendFrom": "থেকে পাঠানো",

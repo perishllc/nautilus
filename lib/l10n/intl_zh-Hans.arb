@@ -54,7 +54,7 @@
   "enterAmount": "输入金额",
   "enterAddress": "输入地址",
   "invalidAddress": "无效的目标地址",
-  "addressMising": "请输入目标地址",
+  "addressMissing": "请输入目标地址",
   "amountMissing": "请输入金额",
   "insufficientBalance": "余额不足",
   "sendFrom": "发送自",

@@ -24,7 +24,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addContact" : MessageLookupByLibrary.simpleMessage("연락처 추가"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("주소가 복사되었습니다 "),
     "addressHint" : MessageLookupByLibrary.simpleMessage("주소를 입력하세요"),
-    "addressMising" : MessageLookupByLibrary.simpleMessage("주소를 입력하세요"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("공유"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("금액을 입력하세요"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("인증 방법"),

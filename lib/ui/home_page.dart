@@ -104,6 +104,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   final Map<String, GlobalKey<AnimatedListState>> _unifiedListKeyMap = Map();
   final Map<String, ListModel<dynamic>> _unifiedListMap = Map();
 
+  // used to associate memos with blocks so we don't have search on every re-render:
+  final Map<String, String> _memoMap = Map();
+
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
   List<Contact> _contacts = List();
   List<User> _users = List();
@@ -272,6 +275,110 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
+  Future<void> _branchGiftDialog(String seed, String memo, String amountRaw, String senderAddress) async {
+    String amount = getRawAsThemeAwareAmount(context, amountRaw);
+
+    // change address to username:
+    // for (User user in _users) {
+    //   if (user.address == senderAddress) {
+    //     senderAddress = "@" + user.username;
+    //     break;
+    //   }
+    // }
+
+    switch (await showDialog<bool>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              AppLocalization.of(context).giftAlert,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(AppLocalization.of(context).importGift + "\n\n", style: AppStyles.textStyleParagraph(context)),
+                RichText(
+                  textAlign: TextAlign.start,
+                  text: TextSpan(
+                    text: AppLocalization.of(context).giftFrom + ": ",
+                    style: AppStyles.textStyleParagraph(context),
+                    children: [
+                      TextSpan(
+                        text: senderAddress + "\n",
+                        style: AppStyles.textStyleParagraphPrimary(context),
+                      ),
+                    ],
+                  ),
+                ),
+                Text(
+                  AppLocalization.of(context).giftMessage + ": " + memo + "\n",
+                  style: AppStyles.textStyleParagraph(context),
+                ),
+                RichText(
+                  textAlign: TextAlign.start,
+                  text: TextSpan(
+                    text: AppLocalization.of(context).giftAmount + ": ",
+                    style: AppStyles.textStyleParagraph(context),
+                    children: [
+                      displayCurrencyAmount(
+                          context,
+                          TextStyle(
+                            color: StateContainer.of(context).curTheme.primary,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: 'NunitoSans',
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                          includeSymbol: true),
+                      TextSpan(
+                        text: amount,
+                        style: AppStyles.textStyleParagraphPrimary(context),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).refund,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).receive,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        })) {
+      case true:
+        AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
+        break;
+      case false:
+        // TODO: refund the gift:
+        break;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -428,6 +535,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   void _registerBus() {
     _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((event) {
       diffAndUpdateHistoryList(event.items);
+      // log.d("re-making unified list2!");
+      // generateUnifiedList();
       setState(() {
         _isRefreshing = false;
       });
@@ -440,6 +549,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       diffAndUpdatePaymentList(event.items);
     });
     _unifiedSub = EventTaxiImpl.singleton().registerTo<UnifiedHomeEvent>().listen((event) {
+      log.d("re-making unified list!");
       generateUnifiedList();
       setState(() {
         _isRefreshing = false;
@@ -563,19 +673,19 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       case AppLifecycleState.resumed:
         cancelLockEvent();
         StateContainer.of(context).reconnect();
+        // handle deep links:
         if (!StateContainer.of(context).wallet.loading && StateContainer.of(context).initialDeepLink != null && !_lockTriggered) {
           handleDeepLink(StateContainer.of(context).initialDeepLink);
           StateContainer.of(context).initialDeepLink = null;
         }
+        // branch gift:
+        if (!StateContainer.of(context).wallet.loading && StateContainer.of(context).giftedWallet == true && !_lockTriggered) {
+          handleBranchGift();
+          StateContainer.of(context).giftedWallet = false;
+        }
         // handle any pending messages:
         getPendingMessages();
-        // if (pendingMessages != null) {
-        //   print("handling background messages now!");
-        //   print(pendingMessages.length);
-        //   while (pendingMessages.length > 0) {
-        //     StateContainer.of(context).handleMessage(pendingMessages.removeAt(pendingMessages.length - 1));
-        //   }
-        // }
+
         super.didChangeAppLifecycleState(state);
         break;
       default:
@@ -659,6 +769,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   Future<void> _refresh() async {
+    _branchGiftDialog("FC3CBC0574C7A950C6650E7369D47417735D206F2C8548C025A1A5CE3A6DE78F", "happy birthday! here's 5 nano!", "5000000000000000000000000000000",
+        "nano_1i4fcujt49de3mio9eb9y5jakw8o9m1za6ntidxn4nkwgnunktpy54z1ma58");
     setState(() {
       _isRefreshing = true;
     });
@@ -688,11 +800,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       return;
     }
 
-    // StateContainer.of(context).wallet.history
-
     _historyListMap[StateContainer.of(context).wallet.address].items.clear();
     _historyListMap[StateContainer.of(context).wallet.address].items.addAll(newList);
-
     // Re-subscribe if missing data
     if (StateContainer.of(context).wallet.loading) {
       StateContainer.of(context).requestSubscribe();
@@ -792,7 +901,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // print index:height
     // for (int i = 0; i < unifiedList.length; i++) {
-    //   print("${i}:${unifiedList[i].uuid}:${unifiedList[i] is TXData}");
+    //   // if (unifiedList[i].hash == "B5D90E90C8B5BB1E67A2B1D3A83B75163211ED4FD361609459D442A300D6893E") {
+    //   //   print("first");
+    //   //   print("index: ${i} height: ${unifiedList[i].height}");
+    //   // }
+    //   // if (unifiedList[i].hash == "9E1523555152ADBBE9A7E09761A170D84F9F9EA1194553B9F3637D2E9A57110A") {
+    //   //   print("2nd");
+    //   //   print("index: ${i} height: ${unifiedList[i].height}");
+    //   // }
+    //   // print("${i}:${unifiedList[i].amount}:${unifiedList[i].height}");
     //   // _unifiedListMap[StateContainer.of(context).wallet.address].insertAtTop(unifiedList[i]);
 
     // }
@@ -917,6 +1034,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         UIUtil.showSnackbar(AppLocalization.of(context).mantaError, context);
       }
     }
+  }
+
+  // branch deep link gift:
+  Future<void> handleBranchGift() async {
+    _branchGiftDialog(StateContainer.of(context).giftedWalletSeed, StateContainer.of(context).giftedWalletMemo,
+        StateContainer.of(context).giftedWalletAmountRaw, StateContainer.of(context).giftedWalletAddress);
   }
 
   void _showMantaAnimation() {
@@ -1308,15 +1431,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                 text: TextSpan(
                                   text: '',
                                   children: [
-                                    ((StateContainer.of(context).nyanoMode)
-                                        ? TextSpan(
-                                            text: "y",
-                                            style: AppStyles.textStyleTransactionAmount(
-                                              context,
-                                              true,
-                                            ),
-                                          )
-                                        : TextSpan()),
+                                    displayCurrencyAmount(
+                                      context,
+                                      AppStyles.textStyleTransactionAmount(
+                                        context,
+                                        true,
+                                      ),
+                                    ),
                                     TextSpan(
                                       text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, item.amount),
                                       style: AppStyles.textStyleTransactionAmount(
@@ -2200,17 +2321,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             child: AutoSizeText.rich(
                               TextSpan(
                                 children: [
-                                  ((StateContainer.of(context).nyanoMode)
-                                      ? TextSpan(
-                                          text: "y",
-                                          style: _priceConversion == PriceConversion.BTC
-                                              ? AppStyles.textStyleCurrency(context, true)
-                                              : AppStyles.textStyleCurrencySmaller(
-                                                  context,
-                                                  true,
-                                                ),
-                                        )
-                                      : TextSpan()),
+                                  _priceConversion == PriceConversion.BTC
+                                      ? displayCurrencyAmount(context, AppStyles.textStyleCurrency(context, true))
+                                      : displayCurrencyAmount(
+                                          context,
+                                          AppStyles.textStyleCurrencySmaller(
+                                            context,
+                                            true,
+                                          )),
                                   // Main balance text
                                   TextSpan(
                                     text: getCurrencySymbol(context) + StateContainer.of(context).wallet.getAccountBalanceDisplay(context),
@@ -2564,15 +2682,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                   text: TextSpan(
                                     text: '',
                                     children: [
-                                      ((StateContainer.of(context).nyanoMode)
-                                          ? TextSpan(
-                                              text: "y",
-                                              style: AppStyles.textStyleTransactionAmount(
-                                                context,
-                                                true,
-                                              ),
-                                            )
-                                          : TextSpan()),
+                                      displayCurrencyAmount(
+                                        context,
+                                        AppStyles.textStyleTransactionAmount(
+                                          context,
+                                          true,
+                                        ),
+                                      ),
                                       TextSpan(
                                         text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, item.amount_raw),
                                         style: AppStyles.textStyleTransactionAmount(
@@ -2728,15 +2844,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                   text: TextSpan(
                                     text: '',
                                     children: [
-                                      ((StateContainer.of(context).nyanoMode)
-                                          ? TextSpan(
-                                              text: "y",
-                                              style: AppStyles.textStyleTransactionAmount(
-                                                context,
-                                                true,
-                                              ),
-                                            )
-                                          : TextSpan()),
+                                      displayCurrencyAmount(
+                                        context,
+                                        AppStyles.textStyleTransactionAmount(
+                                          context,
+                                          true,
+                                        ),
+                                      ),
                                       TextSpan(
                                         text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, item.amount),
                                         style: AppStyles.textStyleTransactionAmount(
@@ -3355,6 +3469,26 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                       )
                     : Container(),
 
+                // block this user from sending you requests:
+                widget.is_request
+                    ? Row(
+                        children: <Widget>[
+                          AppButton.buildAppButton(
+                              context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).blockUser, Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                            Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+
+                            Sheets.showAppHeightNineSheet(
+                                context: context,
+                                widget: SendSheet(
+                                  localCurrency: StateContainer.of(context).curCurrency,
+                                  address: widget.from_address,
+                                  quickSendAmount: widget.amount_raw,
+                                ));
+                          }),
+                        ],
+                      )
+                    : Container(),
+
                 is_unacknowledged_request && is_unfulfilled_request
                     ? Row(
                         children: <Widget>[
@@ -3362,6 +3496,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                               context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).sendRequestAgain, Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
                               onPressed: () {
                             // send the request again:
+                            // TODO:
                             // String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
 
                             // // get epoch time as hex:

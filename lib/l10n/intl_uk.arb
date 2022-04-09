@@ -54,7 +54,7 @@
   "enterAmount": "Введіть суму",
   "enterAddress": "Введіть адресу",
   "invalidAddress": "Введено невірну адресу",
-  "addressMising": "Будь ласка вкажіть адресу",
+  "addressMissing": "Будь ласка вкажіть адресу",
   "amountMissing": "Будь ласка вкажіть суму",
   "insufficientBalance": "Недостатньо коштів",
   "sendFrom": "Надіслано з",

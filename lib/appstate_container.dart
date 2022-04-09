@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:ui';
 import 'package:devicelocale/devicelocale.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
@@ -148,6 +150,8 @@ class StateContainerState extends State<StateContainer> {
   String initialDeepLink;
   // Deep link changes
   StreamSubscription _deepLinkSub;
+  // branch subscription:
+  StreamSubscription<Map> _branchSub;
 
   List<String> pendingRequests = [];
   List<String> alreadyReceived = [];
@@ -157,8 +161,15 @@ class StateContainerState extends State<StateContainer> {
   List<NinjaNode> nanoNinjaNodes;
 
   // nano.to username db up to date?
-  bool nautilusUsernamesUpdated = false;
-  String lastUpdatedUsernames;
+  // bool nautilusUsernamesUpdated = false;
+  // String lastUpdatedUsernames;
+
+  // gifts!
+  bool giftedWallet = false;
+  String giftedWalletSeed;
+  String giftedWalletAddress;
+  String giftedWalletAmountRaw;
+  String giftedWalletMemo;
 
   // When wallet is encrypted
   String encryptedSecret;
@@ -484,6 +495,30 @@ class StateContainerState extends State<StateContainer> {
         initialDeepLink = link;
       });
     });
+
+    // branch deep links:
+    _branchSub = FlutterBranchSdk.initSession().listen((data) {
+      if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) {
+        //Link clicked. Add logic to get link data
+        print('Custom string: ${data["custom_string"]}');
+        print(data);
+
+        // check if they were gifted a wallet:
+        if (data.containsKey("feature") && data["feature"] == "gift") {
+          // if (data["+match_guaranteed"] == true) {
+          // setup the auto load wallet:
+          giftedWallet = true;
+          giftedWalletSeed = data["wallet_seed"];
+          giftedWalletAmountRaw = data["amount_raw"];
+          giftedWalletAddress = data["address"];
+          giftedWallet = data["memo"];
+          // }
+        }
+      }
+    }, onError: (error) {
+      PlatformException platformException = error as PlatformException;
+      print('InitSession error: ${platformException.code} - ${platformException.message}');
+    });
   }
 
   @override
@@ -519,6 +554,9 @@ class StateContainerState extends State<StateContainer> {
     }
     if (_deepLinkSub != null) {
       _deepLinkSub.cancel();
+    }
+    if (_branchSub != null) {
+      _branchSub.cancel();
     }
   }
 
@@ -720,6 +758,8 @@ class StateContainerState extends State<StateContainer> {
     if (receivedHash != null) {
       AccountHistoryResponseItem histItem =
           AccountHistoryResponseItem(type: BlockTypes.RECEIVE, account: resp.account, amount: resp.amount, hash: receivedHash);
+      // todo: not necessarily the best way to handle this, should get real height:
+      histItem.height = wallet.confirmationHeight + 1;
       if (!wallet.history.contains(histItem)) {
         setState(() {
           wallet.history.insert(0, histItem);
@@ -825,93 +865,93 @@ class StateContainerState extends State<StateContainer> {
       if (wallet.history != null && wallet.history.length > 1) {
         count = 50;
       }
-      try {
-        AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count);
-        _requestBalances();
-        bool postedToHome = false;
-        // Iterate list in reverse (oldest to newest block)
-        for (AccountHistoryResponseItem item in resp.history) {
-          // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
-          if (!wallet.history.contains(item)) {
-            int startIndex = 0; // Index to start inserting into the list
-            int lastIndex = resp.history.indexWhere(
-                (item) => wallet.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
-            lastIndex = lastIndex <= 0 ? resp.history.length : lastIndex;
-            setState(() {
-              wallet.history.insertAll(0, resp.history.getRange(startIndex, lastIndex));
-              // Send list to home screen
-              EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-            });
-            updateUnified();
-            postedToHome = true;
-            break;
-          }
-        }
-        setState(() {
-          wallet.historyLoading = false;
-          wallet.paymentsLoading = false;
-          wallet.unifiedLoading = false;
-        });
-        if (!postedToHome) {
-          EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+      // try {
+      AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count);
+      _requestBalances();
+      bool postedToHome = false;
+      // Iterate list in reverse (oldest to newest block)
+      for (AccountHistoryResponseItem item in resp.history) {
+        // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
+        if (!wallet.history.contains(item)) {
+          int startIndex = 0; // Index to start inserting into the list
+          int lastIndex = resp.history.indexWhere(
+              (item) => wallet.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+          lastIndex = lastIndex <= 0 ? resp.history.length : lastIndex;
+          setState(() {
+            wallet.history.insertAll(0, resp.history.getRange(startIndex, lastIndex));
+            // Send list to home screen
+            EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+          });
           updateUnified();
+          postedToHome = true;
+          break;
         }
-        sl.get<AccountService>().pop();
-        sl.get<AccountService>().processQueue();
-        // Receive pendings
-        if (pending) {
-          pendingRequests.clear();
-          PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
+      }
+      setState(() {
+        wallet.historyLoading = false;
+        wallet.paymentsLoading = false;
+        wallet.unifiedLoading = false;
+      });
+      if (!postedToHome) {
+        EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+        updateUnified();
+      }
+      sl.get<AccountService>().pop();
+      sl.get<AccountService>().processQueue();
+      // Receive pendings
+      if (pending) {
+        pendingRequests.clear();
+        PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
 
-          // for unfulfilled payments:
-          List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
+        // for unfulfilled payments:
+        List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
 
-          // Initiate receive/open request for each pending
-          for (String hash in pendingResp.blocks.keys) {
-            PendingResponseItem pendingResponseItem = pendingResp.blocks[hash];
-            pendingResponseItem.hash = hash;
-            String receivedHash = await handlePendingItem(pendingResponseItem);
-            if (receivedHash != null) {
-              // payments:
-              // check to see if this fulfills a payment request:
+        // Initiate receive/open request for each pending
+        for (String hash in pendingResp.blocks.keys) {
+          PendingResponseItem pendingResponseItem = pendingResp.blocks[hash];
+          pendingResponseItem.hash = hash;
+          String receivedHash = await handlePendingItem(pendingResponseItem);
+          if (receivedHash != null) {
+            // payments:
+            // check to see if this fulfills a payment request:
 
-              for (int i = 0; i < unfulfilledPayments.length; i++) {
-                TXData txData = unfulfilledPayments[i];
-                // check destination of this request is where we're sending to:
-                // check to make sure we made the request:
-                // check to make sure the amounts are the same:
-                if (txData.from_address == wallet.address &&
-                    txData.to_address == pendingResponseItem.source &&
-                    txData.amount_raw == pendingResponseItem.amount &&
-                    txData.is_fulfilled == false) {
-                  // this is the payment we're fulfilling
-                  // update the TXData to be fulfilled
-                  await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
-                  // update the ui to reflect the change in the db:
-                  await restorePayments();
-                  await updateUnified();
-                  break;
-                }
+            for (int i = 0; i < unfulfilledPayments.length; i++) {
+              TXData txData = unfulfilledPayments[i];
+              // check destination of this request is where we're sending to:
+              // check to make sure we made the request:
+              // check to make sure the amounts are the same:
+              if (txData.from_address == wallet.address &&
+                  txData.to_address == pendingResponseItem.source &&
+                  txData.amount_raw == pendingResponseItem.amount &&
+                  txData.is_fulfilled == false) {
+                // this is the payment we're fulfilling
+                // update the TXData to be fulfilled
+                await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
+                // update the ui to reflect the change in the db:
+                await restorePayments();
+                await updateUnified();
+                break;
               }
+            }
 
-              AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
-                  type: BlockTypes.RECEIVE, account: pendingResponseItem.source, amount: pendingResponseItem.amount, hash: receivedHash);
-              if (!wallet.history.contains(histItem)) {
-                setState(() {
-                  wallet.history.insert(0, histItem);
-                  wallet.accountBalance += BigInt.parse(pendingResponseItem.amount);
-                  // Send list to home screen
-                  EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-                  updateUnified();
-                });
-              }
+            AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
+                type: BlockTypes.RECEIVE, account: pendingResponseItem.source, amount: pendingResponseItem.amount, hash: receivedHash);
+            if (!wallet.history.contains(histItem)) {
+              setState(() {
+                wallet.history.insert(0, histItem);
+                wallet.accountBalance += BigInt.parse(pendingResponseItem.amount);
+                // Send list to home screen
+                EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+                updateUnified();
+              });
             }
           }
         }
-      } catch (e) {
-        // TODO handle account history error
-        sl.get<Logger>().e("account_history e", e);
       }
+      // } catch (e) {
+      //   // TODO handle account history error
+      //   sl.get<Logger>().e("account_history e", e);
+      // }
     }
   }
 

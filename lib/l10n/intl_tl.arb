@@ -54,7 +54,7 @@
   "enterAmount": "Ilagay ang Amount",
   "enterAddress": "Ilagay ang Address",
   "invalidAddress": "Hindi wasto ang Destination Address",
-  "addressMising": "Mangyaring magpasok ng patutunguhan",
+  "addressMissing": "Mangyaring magpasok ng patutunguhan",
   "amountMissing": "Mangyaring magpasok ng isang halaga",
   "insufficientBalance": "Hindi sapat ang balanse",
   "sendFrom": "Magpadala galing sa",

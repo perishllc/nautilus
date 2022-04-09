@@ -54,7 +54,7 @@
   "enterAmount": "राशि दर्ज करें",
   "enterAddress": "पता दर्ज करें",
   "invalidAddress": "गलत गंतव्य पता",
-  "addressMising": "कृपया एक पता दर्ज करें",
+  "addressMissing": "कृपया एक पता दर्ज करें",
   "amountMissing": "कृपया राशि दर्ज करें",
   "insufficientBalance": "अपर्याप्त शेष राशि (बैलेंस)",
   "sendFrom": "भेजने का पता -",

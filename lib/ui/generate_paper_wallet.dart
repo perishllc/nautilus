@@ -220,6 +220,12 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                 children: <Widget>[
                   AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).createGiftCard, Dimens.BUTTON_BOTTOM_DIMENS,
                       onPressed: () {
+                    if (_sendAmountController.text.isEmpty) {
+                      setState(() {
+                        _amountValidationText = AppLocalization.of(context).amountMissing;
+                      });
+                      return;
+                    }
                     // nothing for now
                     Sheets.showAppHeightNineSheet(
                         context: context,
@@ -228,7 +234,13 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                           // contact: contact,
                           destination: paper_wallet_account,
                           // quickSendAmount: item.amount,
-                          amountRaw: "1000000000000000000000000",
+                          amountRaw: _localCurrencyMode
+                              ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                              : _rawAmount == null
+                                  ? (StateContainer.of(context).nyanoMode)
+                                      ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
+                                      : NumberUtil.getAmountAsRaw(_sendAmountController.text)
+                                  : _rawAmount,
                         ));
                   }),
                 ],

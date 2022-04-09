@@ -5,6 +5,11 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/bus/user_added_event.dart';
+import 'package:nautilus_wallet_flutter/bus/user_removed_event.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:nautilus_wallet_flutter/ui/users/add_blocked.dart';
+import 'package:nautilus_wallet_flutter/ui/users/user_details.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:file_picker/file_picker.dart';
@@ -27,26 +32,26 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flare_flutter/flare_actor.dart';
 
-class ContactsList extends StatefulWidget {
-  final AnimationController contactsController;
-  bool contactsOpen;
+class BlockedList extends StatefulWidget {
+  final AnimationController blockedController;
+  bool blockedOpen;
 
-  ContactsList(this.contactsController, this.contactsOpen);
+  BlockedList(this.blockedController, this.blockedOpen);
 
-  _ContactsListState createState() => _ContactsListState();
+  _BlockedListState createState() => _BlockedListState();
 }
 
-class _ContactsListState extends State<ContactsList> {
+class _BlockedListState extends State<BlockedList> {
   final Logger log = sl.get<Logger>();
 
-  List<Contact> _contacts;
+  List<User> _blocked;
   String documentsDirectory;
   @override
   void initState() {
     super.initState();
     _registerBus();
     // Initial contacts list
-    _contacts = List();
+    _blocked = [];
     getApplicationDocumentsDirectory().then((directory) {
       documentsDirectory = directory.path;
       setState(() {
@@ -67,114 +72,114 @@ class _ContactsListState extends State<ContactsList> {
     super.dispose();
   }
 
-  StreamSubscription<ContactAddedEvent> _contactAddedSub;
-  StreamSubscription<ContactRemovedEvent> _contactRemovedSub;
+  StreamSubscription<UserAddedEvent> _contactAddedSub;
+  StreamSubscription<UserRemovedEvent> _contactRemovedSub;
 
   void _registerBus() {
     // Contact added bus event
-    _contactAddedSub = EventTaxiImpl.singleton().registerTo<ContactAddedEvent>().listen((event) {
+    _contactAddedSub = EventTaxiImpl.singleton().registerTo<UserAddedEvent>().listen((event) {
       setState(() {
-        _contacts.add(event.contact);
+        _blocked.add(event.user);
         //Sort by name
-        _contacts.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+        _blocked.sort((a, b) => a.username.toLowerCase().compareTo(b.username.toLowerCase()));
       });
       // Full update which includes downloading new monKey
       _updateContacts();
     });
     // Contact removed bus event
-    _contactRemovedSub = EventTaxiImpl.singleton().registerTo<ContactRemovedEvent>().listen((event) {
+    _contactRemovedSub = EventTaxiImpl.singleton().registerTo<UserRemovedEvent>().listen((event) {
       setState(() {
-        _contacts.remove(event.contact);
+        _blocked.remove(event.user);
       });
     });
   }
 
   void _updateContacts() {
-    sl.get<DBHelper>().getContacts().then((contacts) {
+    sl.get<DBHelper>().getBlockedUsers().then((contacts) {
       if (contacts == null) {
         return;
       }
-      for (Contact c in contacts) {
-        if (!_contacts.contains(c) && mounted) {
+      for (User c in contacts) {
+        if (!_blocked.contains(c) && mounted) {
           setState(() {
-            _contacts.add(c);
+            _blocked.add(c);
           });
         }
       }
       // Re-sort list
       setState(() {
-        _contacts.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+        _blocked.sort((a, b) => a.username.toLowerCase().compareTo(b.username.toLowerCase()));
       });
     });
   }
 
-  Future<void> _exportContacts() async {
-    List<Contact> contacts = await sl.get<DBHelper>().getContacts();
-    if (contacts.length == 0) {
-      UIUtil.showSnackbar(AppLocalization.of(context).noContactsExport, context);
-      return;
-    }
-    List<Map<String, dynamic>> jsonList = List();
-    contacts.forEach((contact) {
-      jsonList.add(contact.toJson());
-    });
-    DateTime exportTime = DateTime.now();
-    String filename = "nautiluscontacts_${exportTime.year}${exportTime.month}${exportTime.day}${exportTime.hour}${exportTime.minute}${exportTime.second}.txt";
-    Directory baseDirectory = await getApplicationDocumentsDirectory();
-    File contactsFile = File("${baseDirectory.path}/$filename");
-    await contactsFile.writeAsString(json.encode(jsonList));
-    UIUtil.cancelLockEvent();
-    Share.shareFile(contactsFile);
-  }
+  // Future<void> _exportContacts() async {
+  //   List<User> contacts = await sl.get<DBHelper>().getBlockedUsers();
+  //   if (contacts.length == 0) {
+  //     UIUtil.showSnackbar(AppLocalization.of(context).noContactsExport, context);
+  //     return;
+  //   }
+  //   List<Map<String, dynamic>> jsonList = [];
+  //   contacts.forEach((contact) {
+  //     jsonList.add(contact.toJson());
+  //   });
+  //   DateTime exportTime = DateTime.now();
+  //   String filename = "nautilusblocked_${exportTime.year}${exportTime.month}${exportTime.day}${exportTime.hour}${exportTime.minute}${exportTime.second}.txt";
+  //   Directory baseDirectory = await getApplicationDocumentsDirectory();
+  //   File contactsFile = File("${baseDirectory.path}/$filename");
+  //   await contactsFile.writeAsString(json.encode(jsonList));
+  //   UIUtil.cancelLockEvent();
+  //   Share.shareFile(contactsFile);
+  // }
 
-  Future<void> _importContacts() async {
-    UIUtil.cancelLockEvent();
-    FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ["txt"]);
-    if (result != null) {
-      File f = File(result.files.single.path);
-      if (!await f.exists()) {
-        UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
-        return;
-      }
-      try {
-        String contents = await f.readAsString();
-        Iterable contactsJson = json.decode(contents);
-        List<Contact> contacts = List();
-        List<Contact> contactsToAdd = List();
-        contactsJson.forEach((contact) {
-          contacts.add(Contact.fromJson(contact));
-        });
-        for (Contact contact in contacts) {
-          if (!await sl.get<DBHelper>().contactExistsWithName(contact.name) && !await sl.get<DBHelper>().contactExistsWithAddress(contact.address)) {
-            // Contact doesnt exist, make sure name and address are valid
-            if (Address(contact.address).isValid()) {
-              if (contact.name.startsWith("★") && contact.name.length <= 20) {
-                contactsToAdd.add(contact);
-              }
-            }
-          }
-        }
-        // Save all the new contacts and update states
-        int numSaved = await sl.get<DBHelper>().saveContacts(contactsToAdd);
-        if (numSaved > 0) {
-          _updateContacts();
-          EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: Contact(name: "", address: "")));
-          UIUtil.showSnackbar(AppLocalization.of(context).contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
-        } else {
-          UIUtil.showSnackbar(AppLocalization.of(context).noContactsImport, context);
-        }
-      } catch (e) {
-        log.e(e.toString(), e);
-        UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
-        return;
-      }
-    } else {
-      // Cancelled by user
-      log.e("FilePicker cancelled by user");
-      UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
-      return;
-    }
-  }
+  // Future<void> _importContacts() async {
+  //   UIUtil.cancelLockEvent();
+  //   FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ["txt"]);
+  //   if (result != null) {
+  //     File f = File(result.files.single.path);
+  //     if (!await f.exists()) {
+  //       UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
+  //       return;
+  //     }
+  //     try {
+  //       String contents = await f.readAsString();
+  //       Iterable contactsJson = json.decode(contents);
+  //       List<User> contacts = [];
+  //       List<User> contactsToAdd = List();
+  //       contactsJson.forEach((contact) {
+  //         contacts.add(User.fromJson(contact));
+  //       });
+  //       for (User contact in contacts) {
+  //         if (!await sl.get<DBHelper>().contactExistsWithName(contact.username) && !await sl.get<DBHelper>().userExistsWithAddress(contact.address)) {
+  //           // Contact doesnt exist, make sure name and address are valid
+  //           if (Address(contact.address).isValid()) {
+  //             if (contact.username.startsWith("★") && contact.username.length <= 20) {
+  //               contactsToAdd.add(contact);
+  //             }
+  //           }
+  //         }
+  //       }
+  //       // Save all the new contacts and update states
+  //       int numSaved = await sl.get<DBHelper>().saveContacts(contactsToAdd);
+  //       if (numSaved > 0) {
+  //         _updateContacts();
+  //         EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: Contact(name: "", address: "")));
+  //         UIUtil.showSnackbar(AppLocalization.of(context).contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
+  //       } else {
+  //         UIUtil.showSnackbar(AppLocalization.of(context).noContactsImport, context);
+  //       }
+  //     } catch (e) {
+  //       log.e(e.toString(), e);
+  //       UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
+  //       return;
+  //     }
+  //   } else {
+  //     // Cancelled by user
+  //     log.e("FilePicker cancelled by user");
+  //     UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
+  //     return;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -210,9 +215,9 @@ class _ContactsListState extends State<ContactsList> {
                               splashColor: StateContainer.of(context).curTheme.text15,
                               onPressed: () {
                                 setState(() {
-                                  widget.contactsOpen = false;
+                                  widget.blockedOpen = false;
                                 });
-                                widget.contactsController.reverse();
+                                widget.blockedController.reverse();
                               },
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                               padding: EdgeInsets.all(8.0),
@@ -220,7 +225,7 @@ class _ContactsListState extends State<ContactsList> {
                         ),
                         //Contacts Header Text
                         Text(
-                          AppLocalization.of(context).favoritesHeader,
+                          AppLocalization.of(context).blockedHeader,
                           style: AppStyles.textStyleSettingsHeader(context),
                         ),
                       ],
@@ -270,18 +275,18 @@ class _ContactsListState extends State<ContactsList> {
                     ListView.builder(
                       physics: const AlwaysScrollableScrollPhysics(),
                       padding: EdgeInsets.only(top: 15.0, bottom: 15),
-                      itemCount: _contacts.length,
+                      itemCount: _blocked.length,
                       itemBuilder: (context, index) {
                         // Some disaster recovery if monKey is in DB, but doesnt exist in filesystem
-                        if (_contacts[index].monkeyPath != null) {
-                          File("$documentsDirectory/${_contacts[index].monkeyPath}").exists().then((exists) {
-                            if (!exists) {
-                              sl.get<DBHelper>().setMonkeyForContact(_contacts[index], null);
-                            }
-                          });
-                        }
+                        // if (_blocked[index].monkeyPath != null) {
+                        //   File("$documentsDirectory/${_blocked[index].monkeyPath}").exists().then((exists) {
+                        //     if (!exists) {
+                        //       sl.get<DBHelper>().setMonkeyForContact(_blocked[index], null);
+                        //     }
+                        //   });
+                        // }
                         // Build contact
-                        return buildSingleContact(context, _contacts[index]);
+                        return buildSingleContact(context, _blocked[index]);
                       },
                     ),
                     //List Top Gradient End
@@ -324,9 +329,9 @@ class _ContactsListState extends State<ContactsList> {
                 margin: EdgeInsets.only(top: 10),
                 child: Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context).addFavorite, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context).addBlocked, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
-                      Sheets.showAppHeightNineSheet(context: context, widget: AddContactSheet());
+                      Sheets.showAppHeightNineSheet(context: context, widget: AddBlockedSheet());
                     }),
                   ],
                 ),
@@ -336,10 +341,10 @@ class _ContactsListState extends State<ContactsList> {
         ));
   }
 
-  Widget buildSingleContact(BuildContext context, Contact contact) {
+  Widget buildSingleContact(BuildContext context, User user) {
     return FlatButton(
       onPressed: () {
-        ContactDetailsSheet(contact, documentsDirectory).mainBottomSheet(context);
+        UserDetailsSheet(user, documentsDirectory).mainBottomSheet(context);
       },
       padding: EdgeInsets.all(0.0),
       child: Column(children: <Widget>[
@@ -359,8 +364,8 @@ class _ContactsListState extends State<ContactsList> {
                   ? Container(
                       width: 64.0,
                       height: 64.0,
-                      child: SvgPicture.network(UIUtil.getNatriconURL(contact.address, StateContainer.of(context).getNatriconNonce(contact.address)),
-                          key: Key(UIUtil.getNatriconURL(contact.address, StateContainer.of(context).getNatriconNonce(contact.address))),
+                      child: SvgPicture.network(UIUtil.getNatriconURL(user.address, StateContainer.of(context).getNatriconNonce(user.address)),
+                          key: Key(UIUtil.getNatriconURL(user.address, StateContainer.of(context).getNatriconNonce(user.address))),
                           placeholderBuilder: (BuildContext context) => Container(
                                 child: FlareActor(
                                   "legacy_assets/ntr_placeholder_animation.flr",
@@ -381,10 +386,10 @@ class _ContactsListState extends State<ContactsList> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       //Contact name
-                      Text("★" + contact.name, style: AppStyles.textStyleSettingItemHeader(context)),
+                      Text("★" + user.username, style: AppStyles.textStyleSettingItemHeader(context)),
                       //Contact address
                       Text(
-                        Address(contact.address).getShortString(),
+                        Address(user.address).getShortString(),
                         style: AppStyles.textStyleTransactionAddress(context),
                       ),
                     ],

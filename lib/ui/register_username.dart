@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/ui/register/register_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 
 import 'send/send_sheet.dart';
 
@@ -19,6 +24,18 @@ import 'send/send_sheet.dart';
 // import 'package:nautilus_wallet_flutter/service_locator.dart';
 // import 'package:nautilus_wallet_flutter/styles.dart';
 // import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+
+// class LeaseOption {
+//   final String key;
+//   final String leaseLength;
+//   final String nanoAmount;
+
+//   LeaseOption(this.key, this.leaseLength, this.nanoAmount);
+
+//   // static List<LeaseOption> get allCountries => [
+
+//   //     ];
+// }
 
 class RegisterUsernameScreen extends StatefulWidget {
   @override
@@ -35,6 +52,10 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
   String _usernameText = "";
   String _usernameHint = "";
   String _usernameValidationText = "";
+  Map _leaseDetails;
+  // int _leaseSelected = 0;
+  String _leaseSelected = "1 Day";
+  int _leaseSelectedIndex = 0;
   // Used to replace address textfield with colorized TextSpan
   bool _usernameValidAndUnfocused = false;
 
@@ -98,6 +119,101 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
     // Share card initialization
     // shareCardKey = GlobalKey();
     // _showShareCard = false;
+  }
+
+  Widget getDropdown() {
+    List<DropdownMenuItem<String>> dropdownItems = [];
+
+    if (_leaseDetails == null) {
+      return Container();
+    }
+
+    for (var i = 0; i < _leaseDetails["plans"].length; i++) {
+      dropdownItems.add(DropdownMenuItem(
+        child: Text(
+          "${_leaseDetails["plans"][i]["name"]}",
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        value: "${_leaseDetails["plans"][i]["name"]}",
+      ));
+    }
+
+    return DropdownButton(
+      value: _leaseSelected,
+      items: dropdownItems,
+      onChanged: (value) {
+        setState(() {
+          _leaseSelected = value;
+        });
+      },
+    );
+
+    // return DropdownButton(
+    //   items: _leaseDetails["plans"].forEach((dynamic item) => DropdownMenuItem<String>(child: Text(item), value: item)).toList(),
+    //   onChanged: (String value) {
+    //     setState(() {
+    //       print("previous ${this._leaseSelected}");
+    //       print("selected $value");
+    //       _leaseSelected = value;
+    //     });
+    //   },
+    //   value: _leaseSelected,
+    // );
+  }
+
+  Widget getPrice() {
+    if (_leaseDetails == null) {
+      return Container();
+    }
+
+    // go throug the plans to find the one that matches the selected duration:
+    for (var i = 0; i < _leaseDetails["plans"].length; i++) {
+      if (_leaseDetails["plans"][i]["name"] == _leaseSelected) {
+        _leaseSelectedIndex = i;
+        break;
+      }
+    }
+
+    String price;
+    if (_leaseDetails["plans"][_leaseSelectedIndex]["raw_amount"] != null) {
+      price = _leaseDetails["plans"][_leaseSelectedIndex]["raw_amount"];
+    } else if (_leaseDetails["plans"][_leaseSelectedIndex]["amount_raw"] != null) {
+      price = _leaseDetails["plans"][_leaseSelectedIndex]["amount_raw"];
+    } else {
+      return Container();
+    }
+
+    return RichText(
+      textAlign: TextAlign.start,
+      text: TextSpan(
+        text: '',
+        children: [
+          displayCurrencyAmount(
+              context,
+              AppStyles.textStyleTransactionAmount(
+                context,
+                true,
+              )),
+          TextSpan(
+            text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, price),
+            style: AppStyles.textStyleTransactionAmount(
+              context,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    // return Text(
+    //   "Price: ${_leaseDetails["plans"][selectedPlanIndex]["amount_raw"]}",
+    //   style: TextStyle(
+    //     fontSize: 14,
+    //     fontWeight: FontWeight.w600,
+    //   ),
+    // );
   }
 
   @override
@@ -226,17 +342,67 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                   ],
                 ),
               ),
+              (_usernameValidationText == AppLocalization.of(context).usernameAvailable)
+                  ? Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                      getDropdown(),
+                      getPrice(),
+                    ])
+                  : Container(),
+              (_usernameValidationText == "" || _usernameValidationText == AppLocalization.of(context).usernameUnavailable)
+                  ? // Check availability button
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).checkAvailability, Dimens.BUTTON_BOTTOM_DIMENS,
+                            onPressed: () async {
+                          String username = _usernameController.text.replaceAll("@", "");
+                          Map resp = await sl.get<AccountService>().checkUsernameAvailability(username);
+                          if (resp != null) {
+                            if (resp["available"] == true) {
+                              setState(() {
+                                _leaseDetails = resp;
+                                _usernameValidationText = AppLocalization.of(context).usernameAvailable;
+                              });
+                            } else {
+                              setState(() {
+                                _usernameValidationText = AppLocalization.of(context).usernameUnavailable;
+                              });
+                            }
+                          }
+                        }),
+                      ],
+                    )
+                  : // register username button
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).registerUsername, Dimens.BUTTON_BOTTOM_DIMENS,
+                            onPressed: () async {
+                          // String username = _usernameController.text.replaceAll("@", "");
 
-              // Next Screen Button
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).registerUsername, Dimens.BUTTON_BOTTOM_DIMENS,
-                      onPressed: () {
-                    // nothing for now
-                  }),
-                ],
-              ),
+                          String price;
+                          if (_leaseDetails["plans"][_leaseSelectedIndex]["raw_amount"] != null) {
+                            price = _leaseDetails["plans"][_leaseSelectedIndex]["raw_amount"];
+                          } else if (_leaseDetails["plans"][_leaseSelectedIndex]["amount_raw"] != null) {
+                            price = _leaseDetails["plans"][_leaseSelectedIndex]["amount_raw"];
+                          } else {
+                            return Container();
+                          }
+
+                          // build the transaction:
+                          Sheets.showAppHeightNineSheet(
+                              context: context,
+                              widget: RegisterConfirmSheet(
+                                // localCurrency: StateContainer.of(context).curCurrency,
+                                // contact: contact,
+                                destination: _leaseDetails["plans"][_leaseSelectedIndex]["address"],
+                                // quickSendAmount: item.amount,
+                                amountRaw: _leaseDetails["plans"][_leaseSelectedIndex]["raw_amount"],
+                                checkUrl: _leaseDetails["plans"][_leaseSelectedIndex]["check_url"],
+                              ));
+                        }),
+                      ],
+                    ),
             ],
           ),
         ),

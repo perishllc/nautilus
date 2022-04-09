@@ -54,7 +54,7 @@
   "enterAmount": "Saisir le montant",
   "enterAddress": "Saisir l’adresse",
   "invalidAddress": "Adresse du destinataire invalide",
-  "addressMising": "Veuillez entrer une destination",
+  "addressMissing": "Veuillez entrer une destination",
   "amountMissing": "Veuillez entrer un montant",
   "insufficientBalance": "Solde insuffisant",
   "sendFrom": "Envoyer depuis",

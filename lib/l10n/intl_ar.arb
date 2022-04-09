@@ -54,7 +54,7 @@
   "enterAmount": "أدخل المبلغ",
   "enterAddress": "أدخل العنوان",
   "invalidAddress": "العنوان المدخل غير صحيح",
-  "addressMising": "يرجى إدخال العنوان",
+  "addressMissing": "يرجى إدخال العنوان",
   "amountMissing": "يرجى إدخال المبلغ",
   "insufficientBalance": "لرصيد غير كافي",
   "sendFrom": "أرسل من",

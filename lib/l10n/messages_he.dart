@@ -26,7 +26,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addAccount" : MessageLookupByLibrary.simpleMessage("הוסף חשבון"),
     "addContact" : MessageLookupByLibrary.simpleMessage("הוסף איש קשר"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("כתובת הועתקה"),
-    "addressMising" : MessageLookupByLibrary.simpleMessage("הזן יעד"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("שתף"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("הזן סכום"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("שיטת אימות"),

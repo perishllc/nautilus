@@ -53,7 +53,7 @@
   "enterAmount": "הכנס כמות",
   "enterAddress": "הכנס כתובת",
   "invalidAddress": "כתובת יעד אינה תקינה",
-  "addressMising": "הזן יעד",
+  "addressMissing": "הזן יעד",
   "amountMissing": "הזן סכום",
   "insufficientBalance": "אין מספיק מטבעות בחשבון",
   "sendFrom": "נשלח מ",

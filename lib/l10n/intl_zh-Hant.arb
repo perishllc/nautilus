@@ -54,7 +54,7 @@
   "enterAmount": "輸入金額",
   "enterAddress": "輸入地址",
   "invalidAddress": "無效的目標地址",
-  "addressMising": "請輸入目標地址",
+  "addressMissing": "請輸入目標地址",
   "amountMissing": "請輸入金額",
   "insufficientBalance": "餘額不足",
   "sendFrom": "發送自：",

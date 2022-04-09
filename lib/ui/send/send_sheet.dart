@@ -433,18 +433,16 @@ class _SendSheetState extends State<SendSheet> {
                                                   fontFamily: 'NunitoSans',
                                                 ),
                                               ),
-                                              (StateContainer.of(context).nyanoMode)
-                                                  ? TextSpan(
-                                                      text: "y",
-                                                      style: TextStyle(
-                                                        color: StateContainer.of(context).curTheme.primary60,
-                                                        fontSize: 14.0,
-                                                        fontWeight: FontWeight.w700,
-                                                        fontFamily: 'NunitoSans',
-                                                        decoration: TextDecoration.lineThrough,
-                                                      ),
-                                                    )
-                                                  : TextSpan(),
+                                              displayCurrencyAmount(
+                                                context,
+                                                TextStyle(
+                                                  color: StateContainer.of(context).curTheme.primary60,
+                                                  fontSize: 14.0,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontFamily: 'NunitoSans',
+                                                  decoration: TextDecoration.lineThrough,
+                                                ),
+                                              ),
                                               TextSpan(
                                                 text: _localCurrencyMode
                                                     ? StateContainer.of(context).wallet.getLocalCurrencyPrice(StateContainer.of(context).curCurrency,
@@ -583,9 +581,9 @@ class _SendSheetState extends State<SendSheet> {
                                         constraints: BoxConstraints(maxHeight: 174, minHeight: 0),
                                       ),
 
-                                      // ******* Enter Address Container ******* //
+                                      // ******* Enter Memo Container ******* //
                                       getEnterMemoContainer(),
-                                      // ******* Enter Address Container End ******* //
+                                      // ******* Enter Memo Container End ******* //
                                     ],
                                   ),
                                 ),
@@ -1068,7 +1066,7 @@ class _SendSheetState extends State<SendSheet> {
     if (_sendAddressController.text.trim().isEmpty) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context).addressMising;
+        _addressValidationText = AppLocalization.of(context).addressMissing;
         _pasteButtonVisible = true;
       });
     } else if (!isFavorite && !isUser && !Address(_sendAddressController.text).isValid()) {
@@ -1192,7 +1190,7 @@ class _SendSheetState extends State<SendSheet> {
         textInputAction: TextInputAction.done,
         maxLines: null,
         autocorrect: false,
-        hintText: _addressHint == null ? "" : AppLocalization.of(context).enterAddress,
+        hintText: _addressHint == null ? "" : AppLocalization.of(context).enterUserOrAddress,
         prefixButton: TextFieldButton(
           icon: AppIcons.star,
           onPressed: () {

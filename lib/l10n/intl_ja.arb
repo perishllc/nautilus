@@ -54,7 +54,7 @@
   "enterAmount": "金額を入力する",
   "enterAddress": "アドレスを入力する",
   "invalidAddress": "入力したアドレスが無効です",
-  "addressMising": "アドレスを入力してください",
+  "addressMissing": "アドレスを入力してください",
   "amountMissing": "金額を入力してください",
   "insufficientBalance": "残高不足です",
   "sendFrom": "送金元",

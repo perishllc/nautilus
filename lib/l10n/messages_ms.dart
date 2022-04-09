@@ -29,7 +29,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addContact" : MessageLookupByLibrary.simpleMessage("Tambah Kenalan"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("Alamat disalinkan"),
     "addressHint" : MessageLookupByLibrary.simpleMessage("Masukkan Alamat"),
-    "addressMising" : MessageLookupByLibrary.simpleMessage("Sila masukkan destinasi"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("Kongsi"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Sila masukkan jumlah"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Kaedah Pengesahan"),

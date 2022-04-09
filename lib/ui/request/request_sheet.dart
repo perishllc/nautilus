@@ -347,18 +347,16 @@ class _RequestSheetStateState extends State<RequestSheet> {
                                                   fontFamily: 'NunitoSans',
                                                 ),
                                               ),
-                                              (StateContainer.of(context).nyanoMode)
-                                                  ? TextSpan(
-                                                      text: "y",
-                                                      style: TextStyle(
-                                                        color: StateContainer.of(context).curTheme.primary60,
-                                                        fontSize: 14.0,
-                                                        fontWeight: FontWeight.w700,
-                                                        fontFamily: 'NunitoSans',
-                                                        decoration: TextDecoration.lineThrough,
-                                                      ),
-                                                    )
-                                                  : TextSpan(),
+                                              displayCurrencyAmount(
+                                                context,
+                                                TextStyle(
+                                                  color: StateContainer.of(context).curTheme.primary60,
+                                                  fontSize: 14.0,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontFamily: 'NunitoSans',
+                                                  decoration: TextDecoration.lineThrough,
+                                                ),
+                                              ),
                                               TextSpan(
                                                 text: _localCurrencyMode
                                                     ? StateContainer.of(context).wallet.getLocalCurrencyPrice(StateContainer.of(context).curCurrency,
@@ -750,7 +748,7 @@ class _RequestSheetStateState extends State<RequestSheet> {
     if (_requestAddressController.text.trim().isEmpty) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context).addressMising;
+        _addressValidationText = AppLocalization.of(context).addressMissing;
 
         _pasteButtonVisible = true;
       });

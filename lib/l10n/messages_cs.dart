@@ -29,7 +29,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addContact" : MessageLookupByLibrary.simpleMessage("Přidat kontakt"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("Adresa zkopírována"),
     "addressHint" : MessageLookupByLibrary.simpleMessage("Zadejte adresu"),
-    "addressMising" : MessageLookupByLibrary.simpleMessage("Prosím zadejte adresu"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("Sdílet adresu"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Prosím zadejte částku"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Metoda ověření"),

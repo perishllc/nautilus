@@ -54,7 +54,7 @@
   "enterAmount": "Masukkan Jumlah",
   "enterAddress": "Masukkan Alamat",
   "invalidAddress": "Alamat Tujuan Tidak Valid",
-  "addressMising": "Masukkan alamat",
+  "addressMissing": "Masukkan alamat",
   "amountMissing": "Masukkan jumlah",
   "insufficientBalance": "Saldo Tidak mencukupi",
   "sendFrom": "Kirim Dari",

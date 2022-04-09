@@ -166,6 +166,18 @@ String getCurrencySymbol(BuildContext context) {
   }
 }
 
+TextSpan displayCurrencyAmount(BuildContext context, TextStyle textStyle, {bool includeSymbol = false}) {
+  if (StateContainer.of(context).nyanoMode) {
+    return TextSpan(text: "y", style: textStyle);
+  }
+
+  if (includeSymbol) {
+    return TextSpan(text: "Ӿ", style: textStyle);
+  }
+
+  return TextSpan();
+}
+
 String getRawAsThemeAwareAmount(BuildContext context, String rawString) {
   if (StateContainer.of(context).nyanoMode) {
     return NumberUtil.getRawAsNyanoString(rawString);

@@ -8,6 +8,7 @@ import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
 import 'package:nautilus_wallet_flutter/model/nyanicon_option.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accounts_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/blocked_widget.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/disable_password_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/set_password_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
@@ -59,9 +60,11 @@ class SettingsSheet extends StatefulWidget {
 }
 
 class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMixin, WidgetsBindingObserver {
-  AnimationController _controller;
-  Animation<Offset> _offsetFloat;
+  AnimationController _contactsController;
+  AnimationController _blockedController;
   AnimationController _securityController;
+  Animation<Offset> _contactsOffsetFloat;
+  Animation<Offset> _blockedOffsetFloat;
   Animation<Offset> _securityOffsetFloat;
 
   String versionString = "";
@@ -77,10 +80,11 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   LockTimeoutSetting _curTimeoutSetting = LockTimeoutSetting(LockTimeoutOption.ONE);
   ThemeSetting _curThemeSetting = ThemeSetting(ThemeOptions.NAUTILUS);
 
-  bool _securityOpen;
   bool _loadingAccounts;
 
   bool _contactsOpen;
+  bool _blockedOpen;
+  bool _securityOpen;
 
   bool notNull(Object o) => o != null;
 
@@ -101,6 +105,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   void initState() {
     super.initState();
     _contactsOpen = false;
+    _blockedOpen = false;
     _securityOpen = false;
     _loadingAccounts = false;
     // Determine if they have face or fingerprint enrolled, if not hide the setting
@@ -184,7 +189,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     // Register event bus
     _registerBus();
     // Setup animation controller
-    _controller = AnimationController(
+    _contactsController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 220),
     );
@@ -193,9 +198,15 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       vsync: this,
       duration: const Duration(milliseconds: 220),
     );
+    // For blocked menu
+    _blockedController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 220),
+    );
 
-    _offsetFloat = Tween<Offset>(begin: Offset(1.1, 0), end: Offset(0, 0)).animate(_controller);
+    _contactsOffsetFloat = Tween<Offset>(begin: Offset(1.1, 0), end: Offset(0, 0)).animate(_contactsController);
     _securityOffsetFloat = Tween<Offset>(begin: Offset(1.1, 0), end: Offset(0, 0)).animate(_securityController);
+    _blockedOffsetFloat = Tween<Offset>(begin: Offset(1.1, 0), end: Offset(0, 0)).animate(_blockedController);
     // Version string
     PackageInfo.fromPlatform().then((packageInfo) {
       setState(() {
@@ -235,8 +246,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
 
   @override
   void dispose() {
-    _controller.dispose();
+    _contactsController.dispose();
     _securityController.dispose();
+    _blockedController.dispose();
     _destroyBus();
     super.dispose();
   }
@@ -857,13 +869,19 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       setState(() {
         _contactsOpen = false;
       });
-      _controller.reverse();
+      _contactsController.reverse();
       return false;
     } else if (_securityOpen) {
       setState(() {
         _securityOpen = false;
       });
       _securityController.reverse();
+      return false;
+    } else if (_blockedOpen) {
+      setState(() {
+        _blockedOpen = false;
+      });
+      _blockedController.reverse();
       return false;
     }
     return true;
@@ -884,7 +902,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
               constraints: BoxConstraints.expand(),
             ),
             buildMainSettings(context),
-            SlideTransition(position: _offsetFloat, child: ContactsList(_controller, _contactsOpen)),
+            SlideTransition(position: _contactsOffsetFloat, child: ContactsList(_contactsController, _contactsOpen)),
+            SlideTransition(position: _blockedOffsetFloat, child: BlockedList(_blockedController, _blockedOpen)),
             SlideTransition(position: _securityOffsetFloat, child: buildSecurityMenu(context)),
           ],
         ),
@@ -1368,16 +1387,17 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).payments, AppIcons.money_bill_alt, onPressed: () {
                     //   Navigator.of(context).pushNamed("/payments_page");
                     // }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).purchaseNano, AppIcons.coins, onPressed: () {
-                      // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://buy.chainbits.com");
-                      // }));
-                      Navigator.of(context).pushNamed("/purchase_nano");
-                    }),
+                    // TODO: Add back later:
+                    // Divider(
+                    //   height: 2,
+                    //   color: StateContainer.of(context).curTheme.text15,
+                    // ),
+                    // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).purchaseNano, AppIcons.coins, onPressed: () {
+                    //   // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                    //   //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://buy.chainbits.com");
+                    //   // }));
+                    //   Navigator.of(context).pushNamed("/purchase_nano");
+                    // }),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
@@ -1489,7 +1509,17 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       setState(() {
                         _contactsOpen = true;
                       });
-                      _controller.forward();
+                      _contactsController.forward();
+                    }),
+                    Divider(
+                      height: 2,
+                      color: StateContainer.of(context).curTheme.text15,
+                    ),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).blockedHeader, AppIcons.block, onPressed: () {
+                      setState(() {
+                        _blockedOpen = true;
+                      });
+                      _blockedController.forward();
                     }),
                     Divider(
                       height: 2,
@@ -1574,6 +1604,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                               String fcmToken = await FirebaseMessaging.instance.getToken();
                               EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
                               EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
+                            } catch (e) {}
+                            try {
                               // Delete all data
                               sl.get<Vault>().deleteAll().then((_) {
                                 sl.get<SharedPrefsUtil>().deleteAll().then((result) {

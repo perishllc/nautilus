@@ -54,7 +54,7 @@
   "enterAmount": "Introdu suma",
   "enterAddress": "Introdu adresa",
   "invalidAddress": "Adresa introdusă este invalidă",
-  "addressMising": "Introduceți o destinație",
+  "addressMissing": "Introduceți o destinație",
   "amountMissing": "Introduceți o sumă",
   "insufficientBalance": "Fonduri insuficiente",
   "sendFrom": "Trimite de la",

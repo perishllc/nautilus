@@ -53,7 +53,7 @@
   "enterAmount": "Vnesite znesek",
   "enterAddress": "Vnesite naslov",
   "invalidAddress": "Naslov je neveljaven",
-  "addressMising": "Prosim vnesite naslov",
+  "addressMissing": "Prosim vnesite naslov",
   "amountMissing": "Prosim vnesite znesek",
   "insufficientBalance": "Premalo na računu",
   "sendFrom": "Pošlji iz",

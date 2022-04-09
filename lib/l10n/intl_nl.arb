@@ -54,7 +54,7 @@
   "enterAmount": "Vul bedrag in",
   "enterAddress": "Vul adres in",
   "invalidAddress": "Ongeldige ontvanger",
-  "addressMising": "Voer a.u.b. een adres in",
+  "addressMissing": "Voer a.u.b. een adres in",
   "amountMissing": "Voer a.u.b. een bedrag in",
   "insufficientBalance": "Onvoldoende saldo",
   "sendFrom": "Verstuur vanaf",

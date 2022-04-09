@@ -54,7 +54,7 @@
   "enterAmount": "Betrag eingeben",
   "enterAddress": "Adresse eingeben",
   "invalidAddress": "Ungültige Empfänger-Adresse",
-  "addressMising": "Bitte Adresse eingeben",
+  "addressMissing": "Bitte Adresse eingeben",
   "amountMissing": "Bitte Betrag eingeben",
   "insufficientBalance": "Nicht genügend Guthaben",
   "sendFrom": "Senden von",

@@ -54,7 +54,7 @@
   "enterAmount": "Введите Сумму",
   "enterAddress": "Введите Адрес",
   "invalidAddress": "Введен неверный адрес",
-  "addressMising": "Пожалуйста введите адрес",
+  "addressMissing": "Пожалуйста введите адрес",
   "amountMissing": "Пожалуйста введите сумму",
   "insufficientBalance": "Недостаточный баланс",
   "sendFrom": "Отправить из",

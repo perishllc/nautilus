@@ -336,8 +336,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "addressMising": "Please Enter an Address",
-  "@addressMising": {
+  "addressMissing": "Please Enter an Address",
+  "@addressMissing": {
     "description": "send_enter_address",
     "type": "text",
     "placeholders": {}

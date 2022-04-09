@@ -54,7 +54,7 @@
   "enterAmount": "Masukan Amaun",
   "enterAddress": "Masukan Alamat",
   "invalidAddress": "Alamat destinasi tidak sah",
-  "addressMising": "Sila masukkan destinasi",
+  "addressMissing": "Sila masukkan destinasi",
   "amountMissing": "Sila masukkan jumlah",
   "insufficientBalance": "Baki tak mencukupi",
   "sendFrom": "Dihantar dari",

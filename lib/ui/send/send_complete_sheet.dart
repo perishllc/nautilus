@@ -99,18 +99,16 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                       text: TextSpan(
                         text: '',
                         children: [
-                          ((StateContainer.of(context).nyanoMode)
-                              ? TextSpan(
-                                  text: "y",
-                                  style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.success,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: 'NunitoSans',
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                )
-                              : TextSpan()),
+                          displayCurrencyAmount(
+                            context,
+                            TextStyle(
+                              color: StateContainer.of(context).curTheme.success,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'NunitoSans',
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
                           TextSpan(
                             text: getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
                             style: TextStyle(

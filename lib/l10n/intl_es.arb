@@ -54,7 +54,7 @@
   "enterAmount": "Introducir cantidad",
   "enterAddress": "Introducir billetera",
   "invalidAddress": "Billetera de destino incorrecta",
-  "addressMising": "Por favor ingrese una billetera destino",
+  "addressMissing": "Por favor ingrese una billetera destino",
   "amountMissing": "Por favor ingrese un monto",
   "insufficientBalance": "Fondos insuficientes",
   "sendFrom": "Enviar desde",

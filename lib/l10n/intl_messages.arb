@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2022-02-16T02:07:04.782759",
+  "@@last_modified": "2022-03-30T19:27:32.037228",
   "cancel": "Cancel",
   "@cancel": {
     "description": "dialog_cancel",
@@ -75,6 +75,12 @@
   "receivable": "receivable",
   "@receivable": {
     "description": "history_receivable",
+    "type": "text",
+    "placeholders": {}
+  },
+  "requested": "Requested",
+  "@requested": {
+    "description": "home_requested_cta",
     "type": "text",
     "placeholders": {}
   },
@@ -210,6 +216,36 @@
     "type": "text",
     "placeholders": {}
   },
+  "markAsPaid": "Mark as Paid",
+  "@markAsPaid": {
+    "description": "fulfill_payment",
+    "type": "text",
+    "placeholders": {}
+  },
+  "markAsUnpaid": "Mark as Unpaid",
+  "@markAsUnpaid": {
+    "description": "unfulfill_payment",
+    "type": "text",
+    "placeholders": {}
+  },
+  "payRequest": "Pay this request",
+  "@payRequest": {
+    "description": "pay_request",
+    "type": "text",
+    "placeholders": {}
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "description": "delete_request",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sendRequestAgain": "Send Request again",
+  "@sendRequestAgain": {
+    "description": "request_again",
+    "type": "text",
+    "placeholders": {}
+  },
   "removeContact": "Remove Contact",
   "@removeContact": {
     "description": "contact_remove_btn",
@@ -342,6 +378,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "selfSendError": "Can't request from self",
+  "@selfSendError": {
+    "description": "self_send_error",
+    "type": "text",
+    "placeholders": {}
+  },
   "favoriteNameMissing": "Choose a Name for this Favorite",
   "@favoriteNameMissing": {
     "description": "favorite_name_missing",
@@ -462,9 +504,15 @@
     "type": "text",
     "placeholders": {}
   },
-  "requestError": "This user doesn't seem to have Nautilus installed, or has notifications disabled.",
+  "requestError": "This user doesn't appear to have Nautilus installed, or has payment notifications disabled.",
   "@requestError": {
-    "description": "send_generic_error",
+    "description": "request_generic_error",
+    "type": "text",
+    "placeholders": {}
+  },
+  "paymentRequestMessage": "Someone has requested payment from you! check the payments page for more info.",
+  "@paymentRequestMessage": {
+    "description": "payment_request_message",
     "type": "text",
     "placeholders": {}
   },
@@ -486,6 +534,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "enterMemo": "Optional Note",
+  "@enterMemo": {
+    "description": "enter_memo",
+    "type": "text",
+    "placeholders": {}
+  },
   "enterUsername": "Enter a username",
   "@enterUsername": {
     "description": "enter_username",
@@ -504,8 +558,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "addressMising": "Please Enter an Address",
-  "@addressMising": {
+  "usernameAvailable": "Username available!",
+  "@usernameAvailable": {
+    "description": "username_available",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addressMissing": "Please Enter an Address",
+  "@addressMissing": {
     "description": "send_enter_address",
     "type": "text",
     "placeholders": {}
@@ -594,15 +654,33 @@
     "type": "text",
     "placeholders": {}
   },
+  "home": "Home",
+  "@home": {
+    "description": "home",
+    "type": "text",
+    "placeholders": {}
+  },
+  "payments": "Payments",
+  "@payments": {
+    "description": "payments",
+    "type": "text",
+    "placeholders": {}
+  },
   "registerUsername": "Register Username",
   "@registerUsername": {
     "description": "register_username",
     "type": "text",
     "placeholders": {}
   },
-  "generatePaperWallet": "Generate Paper Wallet",
-  "@generatePaperWallet": {
-    "description": "generate_paper_wallet",
+  "checkAvailability": "Check Availability",
+  "@checkAvailability": {
+    "description": "check_availability",
+    "type": "text",
+    "placeholders": {}
+  },
+  "createGiftCard": "Create Gift Card",
+  "@createGiftCard": {
+    "description": "create_gift_card",
     "type": "text",
     "placeholders": {}
   },
@@ -1136,6 +1214,54 @@
   },
   "exampleCardFrom": "from someone",
   "@exampleCardFrom": {
+    "description": "example_card_from",
+    "type": "text",
+    "placeholders": {}
+  },
+  "examplePaymentIntro": "Welcome to Nautilus. Once you send or receive a payment request, they'll show up here",
+  "@examplePaymentIntro": {
+    "description": "example_payments_intro",
+    "type": "text",
+    "placeholders": {}
+  },
+  "examplePaymentExplainer": "The Color of the card shows the status of the payment request. \nGreen indicates the request has been paid.\nYellow indicates the request has not been fulfilled.\nRed indicates the request has not been received.",
+  "@examplePaymentExplainer": {
+    "description": "example_payments_explainer",
+    "type": "text",
+    "placeholders": {}
+  },
+  "examplePaymentPending": "A lot of",
+  "@examplePaymentPending": {
+    "description": "example_payment_pending",
+    "type": "text",
+    "placeholders": {}
+  },
+  "examplePaymentFulfilled": "Some",
+  "@examplePaymentFulfilled": {
+    "description": "example_payment_fulfilled",
+    "type": "text",
+    "placeholders": {}
+  },
+  "examplePaymentPendingMemo": "Rent",
+  "@examplePaymentPendingMemo": {
+    "description": "example_payment_pending_memo",
+    "type": "text",
+    "placeholders": {}
+  },
+  "examplePaymentFulfilledMemo": "Sushi",
+  "@examplePaymentFulfilledMemo": {
+    "description": "example_payment_fulfilled_memo",
+    "type": "text",
+    "placeholders": {}
+  },
+  "examplePaymentTo": "best friend",
+  "@examplePaymentTo": {
+    "description": "example_card_to",
+    "type": "text",
+    "placeholders": {}
+  },
+  "examplePaymentFrom": "landlord",
+  "@examplePaymentFrom": {
     "description": "example_card_from",
     "type": "text",
     "placeholders": {}

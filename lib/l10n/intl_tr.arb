@@ -54,7 +54,7 @@
   "enterAmount": "Miktar Gir",
   "enterAddress": "Adres Gir",
   "invalidAddress": "Geçersiz bir adres girdiniz",
-  "addressMising": "Lütfen bir adres girin",
+  "addressMissing": "Lütfen bir adres girin",
   "amountMissing": "Lütfen bir miktar girin",
   "insufficientBalance": "Yetersiz Bakiye",
   "sendFrom": "Gönderici",

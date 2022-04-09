@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
@@ -141,7 +142,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).sending, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).creatingGiftCard, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -162,18 +163,16 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                       text: TextSpan(
                         text: '',
                         children: [
-                          ((StateContainer.of(context).nyanoMode)
-                              ? TextSpan(
-                                  text: "y",
-                                  style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.primary,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: 'NunitoSans',
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                )
-                              : TextSpan()),
+                          displayCurrencyAmount(
+                            context,
+                            TextStyle(
+                              color: StateContainer.of(context).curTheme.primary,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'NunitoSans',
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
                           TextSpan(
                             text: getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
                             style: TextStyle(
@@ -202,7 +201,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).to, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).withAddress, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -328,41 +327,67 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
 
   Future<void> _doSend() async {
     try {
-      _showSendingAnimation(context);
-      ProcessResponse resp = await sl.get<AccountService>().requestSend(
-          StateContainer.of(context).wallet.representative,
-          StateContainer.of(context).wallet.frontier,
-          widget.amountRaw,
-          destinationAltered,
-          StateContainer.of(context).wallet.address,
-          NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
-          max: widget.maxSend);
-      if (widget.manta != null) {
-        widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
+      // _showSendingAnimation(context);
+      // ProcessResponse resp = await sl.get<AccountService>().requestSend(
+      //     StateContainer.of(context).wallet.representative,
+      //     StateContainer.of(context).wallet.frontier,
+      //     widget.amountRaw,
+      //     destinationAltered,
+      //     StateContainer.of(context).wallet.address,
+      //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
+      //     max: widget.maxSend);
+      // if (widget.manta != null) {
+      //   widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
+      // }
+      // StateContainer.of(context).wallet.frontier = resp.hash;
+      // StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
+      // // Show complete
+      // Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
+      // String contactName = contact == null ? null : contact.name;
+      // Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+      // StateContainer.of(context).requestUpdate();
+      // if (widget.natriconNonce != null) {
+      //   setState(() {
+      //     StateContainer.of(context).updateNatriconNonce(StateContainer.of(context).selectedAccount.address, widget.natriconNonce);
+      //   });
+      // }
+      // Sheets.showAppHeightNineSheet(
+      //     context: context,
+      //     closeOnTap: true,
+      //     removeUntilHome: true,
+      //     widget: SendCompleteSheet(
+      //         amountRaw: widget.amountRaw,
+      //         destination: destinationAltered,
+      //         contactName: contactName,
+      //         localAmount: widget.localCurrency,
+      //         paymentRequest: widget.paymentRequest,
+      //         natriconNonce: widget.natriconNonce));
+      BranchUniversalObject buo = BranchUniversalObject(
+          canonicalIdentifier: 'flutter/branch',
+          //canonicalUrl: '',
+          title: 'Flutter Branch Plugin',
+          imageUrl: 'https://flutter.dev/assets/flutter-lockup-4cb0ee072ab312e59784d9fbf4fb7ad42688a7fdaea1270ccf6bbf4f34b7e03f.svg',
+          contentDescription: 'Flutter Branch Description',
+          keywords: ['Nautilus'],
+          publiclyIndex: true,
+          locallyIndex: true,
+          contentMetadata: BranchContentMetaData()
+            ..addCustomMetadata('wallet_seed', await StateContainer.of(context).getSeed())
+            ..addCustomMetadata('wallet_address', destinationAltered)
+            ..addCustomMetadata('amount_raw', widget.amountRaw));
+
+      BranchLinkProperties lp = BranchLinkProperties(
+          //alias: 'flutterplugin', //define link url,
+          channel: 'nautilusapp',
+          feature: 'gift',
+          stage: 'new share');
+
+      BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+      if (response.success) {
+        print('Link generated: ${response.result}');
+      } else {
+        print('Error : ${response.errorCode} - ${response.errorMessage}');
       }
-      StateContainer.of(context).wallet.frontier = resp.hash;
-      StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
-      // Show complete
-      Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
-      String contactName = contact == null ? null : contact.name;
-      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-      StateContainer.of(context).requestUpdate();
-      if (widget.natriconNonce != null) {
-        setState(() {
-          StateContainer.of(context).updateNatriconNonce(StateContainer.of(context).selectedAccount.address, widget.natriconNonce);
-        });
-      }
-      Sheets.showAppHeightNineSheet(
-          context: context,
-          closeOnTap: true,
-          removeUntilHome: true,
-          widget: SendCompleteSheet(
-              amountRaw: widget.amountRaw,
-              destination: destinationAltered,
-              contactName: contactName,
-              localAmount: widget.localCurrency,
-              paymentRequest: widget.paymentRequest,
-              natriconNonce: widget.natriconNonce));
     } catch (e) {
       // Send failed
       if (animationOpen) {

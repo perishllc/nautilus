@@ -28,7 +28,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addContact" : MessageLookupByLibrary.simpleMessage("إضافة جهة الاتصال"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("تم نسخ العنوان"),
     "addressHint" : MessageLookupByLibrary.simpleMessage("أدخل العنوان\n"),
-    "addressMising" : MessageLookupByLibrary.simpleMessage("يرجى إدخال العنوان"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("أنشر العنوان"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("يرجى إدخال المبلغ"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("طريقة المصادقة"),

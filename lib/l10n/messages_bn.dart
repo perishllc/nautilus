@@ -29,7 +29,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "addContact" : MessageLookupByLibrary.simpleMessage("কন্টাক্ট সংরক্ষণ"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("ঠিকানা কপি করা হয়েছে"),
     "addressHint" : MessageLookupByLibrary.simpleMessage("ঠিকানা লিখুন"),
-    "addressMising" : MessageLookupByLibrary.simpleMessage("দয়া করে ঠিকানা লিখুন"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("ঠিকানা শেয়ার করুন"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("অনুগ্রহ করে পরিমাণ লিখুন"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("প্রমাণীকরণ পদ্ধতি"),
