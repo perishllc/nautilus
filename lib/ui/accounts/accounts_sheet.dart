@@ -8,6 +8,7 @@ import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -303,6 +304,14 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
   }
 
   Widget _buildAccountListItem(BuildContext context, Account account, StateSetter setState) {
+    // get username if it exists:
+    String userOrAddress;
+    if (account.username != null) {
+      userOrAddress = "@" + account.username;
+    } else {
+      userOrAddress = account.address.substring(0, 12) + "...";
+    }
+
     return Slidable(
       secondaryActions: _getSlideActionsForAccount(context, account, setState),
       actionExtentRatio: 0.2,
@@ -425,7 +434,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                       ),
                                       // Account address
                                       AutoSizeText(
-                                        account.address.substring(0, 12) + "...",
+                                        userOrAddress,
                                         style: TextStyle(
                                           fontFamily: "OverpassMono",
                                           fontWeight: FontWeight.w100,

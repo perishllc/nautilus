@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
@@ -17,6 +18,7 @@ import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -38,6 +40,7 @@ import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_drawer.dart';
+import 'package:nautilus_wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_manual_entry_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
@@ -278,104 +281,201 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   Future<void> _branchGiftDialog(String seed, String memo, String amountRaw, String senderAddress) async {
     String amount = getRawAsThemeAwareAmount(context, amountRaw);
 
-    // change address to username:
-    // for (User user in _users) {
-    //   if (user.address == senderAddress) {
-    //     senderAddress = "@" + user.username;
-    //     break;
-    //   }
-    // }
+    String userOrSendAddress;
 
-    switch (await showDialog<bool>(
-        context: context,
-        barrierColor: StateContainer.of(context).curTheme.barrier,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(
-              AppLocalization.of(context).giftAlert,
-              style: AppStyles.textStyleDialogHeader(context),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text(AppLocalization.of(context).importGift + "\n\n", style: AppStyles.textStyleParagraph(context)),
-                RichText(
-                  textAlign: TextAlign.start,
-                  text: TextSpan(
-                    text: AppLocalization.of(context).giftFrom + ": ",
-                    style: AppStyles.textStyleParagraph(context),
-                    children: [
-                      TextSpan(
-                        text: senderAddress + "\n",
-                        style: AppStyles.textStyleParagraphPrimary(context),
-                      ),
-                    ],
-                  ),
+    // change address to username if it exists:
+    User user = await sl.get<DBHelper>().getUserWithAddress(senderAddress);
+    if (user != null) {
+      userOrSendAddress = user.username;
+    } else {
+      userOrSendAddress = senderAddress;
+    }
+
+    // check if there's actually any nano to claim:
+    Map<String, AccountBalanceItem> privKeyBalanceMap = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
+    // AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
+    try {
+      if (privKeyBalanceMap != null) {
+        // show dialog with option to refund to sender:
+        switch (await showDialog<bool>(
+            context: context,
+            barrierColor: StateContainer.of(context).curTheme.barrier,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(
+                  AppLocalization.of(context).giftAlert,
+                  style: AppStyles.textStyleDialogHeader(context),
                 ),
-                Text(
-                  AppLocalization.of(context).giftMessage + ": " + memo + "\n",
-                  style: AppStyles.textStyleParagraph(context),
-                ),
-                RichText(
-                  textAlign: TextAlign.start,
-                  text: TextSpan(
-                    text: AppLocalization.of(context).giftAmount + ": ",
-                    style: AppStyles.textStyleParagraph(context),
-                    children: [
-                      displayCurrencyAmount(
-                          context,
-                          TextStyle(
-                            color: StateContainer.of(context).curTheme.primary,
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'NunitoSans',
-                            decoration: TextDecoration.lineThrough,
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Text(AppLocalization.of(context).importGift + "\n\n", style: AppStyles.textStyleParagraph(context)),
+                    RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        text: AppLocalization.of(context).giftFrom + ": ",
+                        style: AppStyles.textStyleParagraph(context),
+                        children: [
+                          TextSpan(
+                            text: userOrSendAddress + "\n",
+                            style: AppStyles.textStyleParagraphPrimary(context),
                           ),
-                          includeSymbol: true),
-                      TextSpan(
-                        text: amount,
-                        style: AppStyles.textStyleParagraphPrimary(context),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    (memo != null && memo.isNotEmpty)
+                        ? Text(
+                            AppLocalization.of(context).giftMessage + ": " + memo + "\n",
+                            style: AppStyles.textStyleParagraph(context),
+                          )
+                        : Container(),
+                    RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        text: AppLocalization.of(context).giftAmount + ": ",
+                        style: AppStyles.textStyleParagraph(context),
+                        children: [
+                          displayCurrencyAmount(
+                              context,
+                              TextStyle(
+                                color: StateContainer.of(context).curTheme.primary,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'NunitoSans',
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                              includeSymbol: true),
+                          TextSpan(
+                            text: amount,
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            actions: <Widget>[
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, false);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context).refund,
-                    style: AppStyles.textStyleDialogOptions(context),
+                actions: <Widget>[
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context).refund,
+                        style: AppStyles.textStyleDialogOptions(context),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context).receive,
-                    style: AppStyles.textStyleDialogOptions(context),
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context).receive,
+                        style: AppStyles.textStyleDialogOptions(context),
+                      ),
+                    ),
                   ),
+                ],
+              );
+            })) {
+          case true:
+            // transfer to this wallet:
+            // await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, StateContainer.of(context).wallet);
+            await AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
+            break;
+          case false:
+            // refund the gift:
+            await AppTransferOverviewSheet().startAutoRefund(
+              context,
+              seed,
+              senderAddress,
+            );
+            break;
+        }
+      } else {
+        // show alert that the gift is empty:
+        await showDialog<bool>(
+            context: context,
+            barrierColor: StateContainer.of(context).curTheme.barrier,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(
+                  AppLocalization.of(context).giftAlertEmpty,
+                  style: AppStyles.textStyleDialogHeader(context),
                 ),
-              ),
-            ],
-          );
-        })) {
-      case true:
-        AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
-        break;
-      case false:
-        // TODO: refund the gift:
-        break;
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Text(AppLocalization.of(context).importGiftEmpty + "\n\n", style: AppStyles.textStyleParagraph(context)),
+                    RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        text: AppLocalization.of(context).giftFrom + ": ",
+                        style: AppStyles.textStyleParagraph(context),
+                        children: [
+                          TextSpan(
+                            text: userOrSendAddress + "\n",
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                    (memo != null && memo.isNotEmpty)
+                        ? Text(
+                            AppLocalization.of(context).giftMessage + ": " + memo + "\n",
+                            style: AppStyles.textStyleParagraph(context),
+                          )
+                        : Container(),
+                    RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        text: AppLocalization.of(context).giftAmount + ": ",
+                        style: AppStyles.textStyleParagraph(context),
+                        children: [
+                          displayCurrencyAmount(
+                              context,
+                              TextStyle(
+                                color: StateContainer.of(context).curTheme.primary,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'NunitoSans',
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                              includeSymbol: true),
+                          TextSpan(
+                            text: amount,
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context).ok,
+                        style: AppStyles.textStyleDialogOptions(context),
+                      ),
+                    ),
+                  )
+                ],
+              );
+            });
+      }
+    } catch (e) {
+      print("Error processing gift card: $e");
     }
   }
 
@@ -430,21 +530,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     });
     // Setup notification
     getNotificationPermissions();
-
-    // try {
-    //   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-    //   FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
-    // } catch (e) {
-    //   print("Error: $e");
-    // }
-    // check if clipboard has a paper wallet seed:
-    // todo: we should ask permission before asking for clipboard data, though maybe we can do it on install?
-    // UserDataUtil.getClipboardText(DataType.SEED).then((data) {
-    //   if (data != null) {
-    //     // show pop-up asking if they want to import the seed in their clipboard
-    //     _autoImportDialog(data);
-    //   }
-    // });
   }
 
   void _animationStatusListener(AnimationStatus status) {
@@ -535,11 +620,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   void _registerBus() {
     _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((event) {
       diffAndUpdateHistoryList(event.items);
-      // log.d("re-making unified list2!");
-      // generateUnifiedList();
       setState(() {
         _isRefreshing = false;
       });
+      // handle deep links:
       if (StateContainer.of(context).initialDeepLink != null) {
         handleDeepLink(StateContainer.of(context).initialDeepLink);
         StateContainer.of(context).initialDeepLink = null;
@@ -549,7 +633,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       diffAndUpdatePaymentList(event.items);
     });
     _unifiedSub = EventTaxiImpl.singleton().registerTo<UnifiedHomeEvent>().listen((event) {
-      log.d("re-making unified list!");
       generateUnifiedList();
       setState(() {
         _isRefreshing = false;
@@ -680,8 +763,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         }
         // branch gift:
         if (!StateContainer.of(context).wallet.loading && StateContainer.of(context).giftedWallet == true && !_lockTriggered) {
-          handleBranchGift();
           StateContainer.of(context).giftedWallet = false;
+          handleBranchGift();
         }
         // handle any pending messages:
         getPendingMessages();
@@ -725,52 +808,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  // Used to build list items that haven't been removed.
-  Widget _buildItem(BuildContext context, int index, Animation<double> animation) {
-    if (index == 0 && StateContainer.of(context).activeAlert != null) {
-      return _buildRemoteMessageCard(StateContainer.of(context).activeAlert);
-    }
-    int localIndex = index;
-    if (StateContainer.of(context).activeAlert != null) {
-      localIndex -= 1;
-    }
-    String displayName = smallScreen(context)
-        ? _historyListMap[StateContainer.of(context).wallet.address][localIndex].getShorterString()
-        : _historyListMap[StateContainer.of(context).wallet.address][localIndex].getShortString();
-    bool matched = false;
-    // _contacts.forEach((contact) {
-    for (Contact contact in _contacts) {
-      if (contact.address == _historyListMap[StateContainer.of(context).wallet.address][localIndex].account.replaceAll("xrb_", "nano_")) {
-        displayName = "★" + contact.name;
-        matched = true;
-        break;
-      }
-    }
-    // if still not matched to a contact, check if it's a username
-    if (!matched) {
-      // for user in users:
-      for (User user in _users) {
-        if (user.address == _historyListMap[StateContainer.of(context).wallet.address][localIndex].account.replaceAll("xrb_", "nano_")) {
-          displayName = "@" + user.username;
-          break;
-        }
-      }
-    }
-
-    // todo: this is really inefficient, but I'm not sure of a better way with the current data structure
-    for (TXData txData in _txData) {
-      if (txData.block != null && txData.block == _historyListMap[StateContainer.of(context).wallet.address][localIndex].hash) {
-        return _buildTransactionCard(_historyListMap[StateContainer.of(context).wallet.address][localIndex], animation, displayName, context,
-            memo: txData.memo);
-      }
-    }
-
-    return _buildTransactionCard(_historyListMap[StateContainer.of(context).wallet.address][localIndex], animation, displayName, context);
-  }
-
   Future<void> _refresh() async {
-    _branchGiftDialog("FC3CBC0574C7A950C6650E7369D47417735D206F2C8548C025A1A5CE3A6DE78F", "happy birthday! here's 5 nano!", "5000000000000000000000000000000",
-        "nano_1i4fcujt49de3mio9eb9y5jakw8o9m1za6ntidxn4nkwgnunktpy54z1ma58");
     setState(() {
       _isRefreshing = true;
     });
@@ -802,6 +840,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     _historyListMap[StateContainer.of(context).wallet.address].items.clear();
     _historyListMap[StateContainer.of(context).wallet.address].items.addAll(newList);
+
     // Re-subscribe if missing data
     if (StateContainer.of(context).wallet.loading) {
       StateContainer.of(context).requestSubscribe();
@@ -829,11 +868,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     int propertyA = a.height;
     int propertyB = b.height;
     if (propertyA == null || propertyB == null) {
-      // this shouldn't happen but it does:
-      return 0;
+      // this shouldn't happen but it does if there's a bug:
+      throw new Exception("Null height in comparison");
     }
 
-    // both are accounthistoryresponseitems
+    // both are AccountHistoryResponseItems:
     if (a is AccountHistoryResponseItem && b is AccountHistoryResponseItem) {
       if (propertyA < propertyB) {
         return 1;
@@ -842,8 +881,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       } else {
         return 0;
       }
-    } else if (a is TXData && b is TXData) {
       // if both are TXData, sort by request time:
+    } else if (a is TXData && b is TXData) {
       if (a is TXData && b is TXData) {
         int a_time = int.parse(a.request_time);
         int b_time = int.parse(b.request_time);
@@ -886,8 +925,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     List<dynamic> unifiedList = [];
 
     // combine history and payments:
-    // List<AccountHistoryResponseItem> historyList = _historyListMap[StateContainer.of(context).wallet.address]?.items;
-    // List<TXData> paymentsList = _paymentsListMap[StateContainer.of(context).wallet.address]?.items;
     List<AccountHistoryResponseItem> historyList = StateContainer.of(context).wallet.history;
     List<TXData> paymentsList = StateContainer.of(context).wallet.payments;
 
@@ -911,7 +948,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     //   // }
     //   // print("${i}:${unifiedList[i].amount}:${unifiedList[i].height}");
     //   // _unifiedListMap[StateContainer.of(context).wallet.address].insertAtTop(unifiedList[i]);
-
     // }
 
     // create a list of indices to remove:
@@ -920,33 +956,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       removeIndices.add(_unifiedListMap[StateContainer.of(context).wallet.address].items.indexOf(dynamicItem));
     });
 
-    // print("removeIndices: ${removeIndices}");
-
     // remove from the listmap:
     for (int i = removeIndices.length - 1; i >= 0; i--) {
       setState(() {
         _unifiedListMap[StateContainer.of(context).wallet.address].removeAt(removeIndices[i], _buildUnifiedItem);
       });
     }
-
-    // list of indices to add:
-    // create a list of indices to remove:
-    // List<int> addIndices = [];
-    // unifiedList.reversed
-    //     .where((item) => !_unifiedListMap[StateContainer.of(context).wallet.address].items.contains(item))
-    //     .forEach((dynamicItem) {
-    //   removeIndices.add(_unifiedListMap[StateContainer.of(context).wallet.address].items.indexOf(dynamicItem));
-    // });
-
-    // for (int i = 0; i < unifiedList.length; i++) {
-    //   // get height:
-
-    //   if (unifiedList[i] is TXData) {
-    //     print("${i}:${unifiedList[i].height}: ${unifiedList[i].amount_raw}");
-    //   } else {
-    //     print("${i}:${unifiedList[i].height}: ${unifiedList[i].amount}");
-    //   }
-    // }
 
     // insert unifiedList into listmap:
     unifiedList.where((item) => !_unifiedListMap[StateContainer.of(context).wallet.address].items.contains(item)).forEach((dynamicItem) {
@@ -958,29 +973,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         // _unifiedListMap[StateContainer.of(context).wallet.address].insertAtTop(dynamicItem);
       });
     });
-
-    // print everything in unifiedList:
-    // for (int i = 0; i < 99; i++) {
-    //   print(_historyListMap[i].toString());
-    // }
-
-    // setState(() {
-    //   if (_historyListMap[StateContainer.of(context).wallet.address] != null) {
-    //     unifiedList.addAll(_historyListMap[StateContainer.of(context).wallet.address].items);
-    //   }
-    //   if (_paymentsListMap[StateContainer.of(context).wallet.address] != null) {
-    //     unifiedList.addAll(_paymentsListMap[StateContainer.of(context).wallet.address].items);
-    //   }
-
-    //   print("unifiedList2: ${unifiedList.length}");
-
-    //   // _unifiedListMap[StateContainer.of(context).wallet.address].items.clear();
-    //   // _unifiedListMap[StateContainer.of(context).wallet.address].items.addAll(unifiedList);
-    //   // print(_unifiedListMap[StateContainer.of(context).wallet.address]);
-    // });
   }
 
   Future<void> handleDeepLink(link) async {
+    log.d("handleDeepLink: $link");
     Address address = Address(link);
     if (address.isValid()) {
       String amount;
@@ -1038,8 +1034,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   // branch deep link gift:
   Future<void> handleBranchGift() async {
-    _branchGiftDialog(StateContainer.of(context).giftedWalletSeed, StateContainer.of(context).giftedWalletMemo,
-        StateContainer.of(context).giftedWalletAmountRaw, StateContainer.of(context).giftedWalletAddress);
+    if (StateContainer.of(context).giftedWallet && StateContainer.of(context).wallet != null) {
+      StateContainer.of(context).giftedWallet = false;
+      _branchGiftDialog(StateContainer.of(context).giftedWalletSeed, StateContainer.of(context).giftedWalletMemo,
+          StateContainer.of(context).giftedWalletAmountRaw, StateContainer.of(context).giftedWalletAddress);
+    }
   }
 
   void _showMantaAnimation() {
@@ -1073,6 +1072,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (receive == null && StateContainer.of(context).wallet != null) {
       paintQrCode();
     }
+
+    // handle branch gift if it exists:
+    handleBranchGift();
 
     return Scaffold(
       drawerEdgeDragWidth: 200,
@@ -2989,7 +2991,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           ? _unifiedListMap[StateContainer.of(context).wallet.address][localIndex].getShorterString()
           : _unifiedListMap[StateContainer.of(context).wallet.address][localIndex].getShortString();
     }
-    bool matched = false;
 
     if (isPayment) {
       account = isRecipient
@@ -3000,7 +3001,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       account = _unifiedListMap[StateContainer.of(context).wallet.address][localIndex].account;
     }
 
-    // _contacts.forEach((contact) {
+    bool matched = false;
     for (Contact contact in _contacts) {
       if (contact.address == account.replaceAll("xrb_", "nano_")) {
         displayName = "★" + contact.name;
@@ -3010,7 +3011,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     // if still not matched to a contact, check if it's a username
     if (!matched) {
-      // for user in users:
       for (User user in _users) {
         if (user.address == account.replaceAll("xrb_", "nano_")) {
           displayName = "@" + user.username;
@@ -3018,6 +3018,26 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         }
       }
     }
+
+    // dynamic userOrContact = sl
+    //     .get<DBHelper>()
+    //     .getUserOrContactWithAddress(_historyListMap[StateContainer.of(context).wallet.address][localIndex].account.replaceAll("xrb_", "nano_"));
+    // if (userOrContact != null) {
+    //   if (userOrContact is User) {
+    //     displayName = "@" + userOrContact.username;
+    //   } else if (userOrContact is Contact) {
+    //     displayName = "★" + userOrContact.name;
+    //   }
+    // }
+
+    // only do this is this is a regular tx:
+    // find an associated memo for this tx:
+    // if (_unifiedListMap[StateContainer.of(context).wallet.address][localIndex] is AccountHistoryResponseItem) {
+    //   dynamic txData = sl.get<DBHelper>().getTXDataByBlock(_unifiedListMap[StateContainer.of(context).wallet.address][localIndex].hash);
+    //   if (txData != null && txData.memo.isNotEmpty) {
+    //     return _buildUnifiedCard(_unifiedListMap[StateContainer.of(context).wallet.address][localIndex], animation, displayName, context);
+    //   }
+    // }
 
     return _buildUnifiedCard(_unifiedListMap[StateContainer.of(context).wallet.address][localIndex], animation, displayName, context);
   }

@@ -335,6 +335,16 @@ class DBHelper {
     return null;
   }
 
+  Future<String> getUsernameWithAddress(String address) async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
+    // TODO: Handle multiple users with the same address
+    if (list.length > 0) {
+      return list[0]["username"];
+    }
+    return null;
+  }
+
   // Future<List<User>> getBlockedUsers() async {
   //   var dbClient = await db;
   //   List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE blocked = 1 ORDER BY LOWER(username)');
@@ -518,6 +528,28 @@ class DBHelper {
     return transactions;
   }
 
+  Future<TXData> getTXDataByBlock(String block) async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE block = ? ORDER BY request_time DESC', [block]);
+    if (list.length > 0) {
+      return new TXData(
+          id: list[0]["id"],
+          from_address: list[0]["from_address"],
+          to_address: list[0]["to_address"],
+          amount_raw: list[0]["amount_raw"],
+          is_request: list[0]["is_request"] == 0 ? false : true,
+          request_time: list[0]["request_time"],
+          is_fulfilled: list[0]["is_fulfilled"] == 0 ? false : true,
+          fulfillment_time: list[0]["fulfillment_time"],
+          block: list[0]["block"],
+          memo: list[0]["memo"],
+          uuid: list[0]["uuid"],
+          is_acknowledged: list[0]["is_acknowledged"] == 0 ? false : true,
+          height: list[0]["height"]);
+    }
+    return null;
+  }
+
   Future<List<TXData>> getAccountSpecificTXData(String account) async {
     var dbClient = await db;
     List<Map> list =
@@ -685,8 +717,13 @@ class DBHelper {
           selected: list[i]["selected"] == 1 ? true : false,
           balance: list[i]["balance"]));
     }
-    accounts.forEach((a) {
+    accounts.forEach((a) async {
       a.address = NanoUtil.seedToAddress(seed, a.index);
+      // check if account has a username:
+      String username = await getUsernameWithAddress(a.address);
+      if (username != null) {
+        a.username = username;
+      }
     });
     return accounts;
   }
@@ -704,8 +741,13 @@ class DBHelper {
           selected: list[i]["selected"] == 1 ? true : false,
           balance: list[i]["balance"]));
     }
-    accounts.forEach((a) {
+    accounts.forEach((a) async {
       a.address = NanoUtil.seedToAddress(seed, a.index);
+      // check if account has a username:
+      String username = await getUsernameWithAddress(a.address);
+      if (username != null) {
+        a.username = username;
+      }
     });
     return accounts;
   }

@@ -14,10 +14,12 @@ import 'package:manta_dart/messages.dart';
 
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/fcm_update_event.dart';
+import 'package:nautilus_wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/model/notification_settings.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
@@ -249,6 +251,10 @@ class _SendSheetState extends State<SendSheet> {
               style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Text(AppLocalization.of(context).notificationInfo + "\n", style: AppStyles.textStyleParagraph(context)),
+              ),
               AppSimpleDialogOption(
                 onPressed: () {
                   Navigator.pop(context, NotificationOptions.ON);
@@ -277,29 +283,116 @@ class _SendSheetState extends State<SendSheet> {
           );
         })) {
       case NotificationOptions.ON:
-        sl.get<SharedPrefsUtil>().setNotificationsOn(true).then((result) {
-          // setState(() {
-          // _curNotificiationSetting = NotificationSetting(NotificationOptions.ON);
-          // });
-          FirebaseMessaging.instance.requestPermission();
-          FirebaseMessaging.instance.getToken().then((fcmToken) {
-            EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-          });
+        EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: true));
+        FirebaseMessaging.instance.requestPermission();
+        FirebaseMessaging.instance.getToken().then((fcmToken) {
+          EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
         });
         return true;
       case NotificationOptions.OFF:
-        sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((result) {
-          // setState(() {
-          //   _curNotificiationSetting = NotificationSetting(NotificationOptions.OFF);
-          // });
-          FirebaseMessaging.instance.getToken().then((fcmToken) {
-            EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-          });
+        EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: false));
+        FirebaseMessaging.instance.getToken().then((fcmToken) {
+          EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
         });
         return false;
       default:
         return false;
     }
+  }
+
+  Future<bool> showNeedNautilusUsernameAlert() async {
+    switch (await showDialog<bool>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              AppLocalization.of(context).needUsernameAlertHeader,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(AppLocalization.of(context).needUsernameAlert + "\n\n", style: AppStyles.textStyleParagraph(context)),
+              ],
+            ),
+            actions: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).no,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).yes,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        })) {
+      case true:
+        // go to the username registration page:
+        Navigator.of(context).pushNamed("/register_username");
+        return true;
+        break;
+      case false:
+        // close the dialog:
+        return false;
+        break;
+      default:
+        return false;
+        break;
+    }
+  }
+
+  Future<void> showFallbackConnectedAlert() async {
+    await showDialog<bool>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              AppLocalization.of(context).fallbackHeader,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(AppLocalization.of(context).fallbackInfo + "\n\n", style: AppStyles.textStyleParagraph(context)),
+              ],
+            ),
+            actions: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).ok,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
   }
 
   @override
@@ -619,10 +712,15 @@ class _SendSheetState extends State<SendSheet> {
                   Row(
                     children: <Widget>[
                       // Send Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, [27.0, 0.0, 7.0, 24.0], onPressed: () {
-                        bool validRequest = _validateRequest();
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, [27.0, 0.0, 7.0, 24.0], onPressed: () async {
+                        bool validRequest = await _validateRequest();
+
+                        if (!validRequest) {
+                          return;
+                        }
+
                         // verifyies the input is a user in the db
-                        if (!_sendAddressController.text.startsWith("nano_") && validRequest) {
+                        if (!_sendAddressController.text.startsWith("nano_")) {
                           // Need to make sure its a valid contact or user
                           sl.get<DBHelper>().getUserOrContactWithName(_sendAddressController.text.substring(1)).then((user) {
                             if (user == null) {
@@ -634,67 +732,53 @@ class _SendSheetState extends State<SendSheet> {
                                 }
                               });
                             } else {
-                              if (user.address == StateContainer.of(context).wallet.address) {
-                                // Can't request from self:
-                                setState(() {
-                                  _addressValidationText = AppLocalization.of(context).selfSendError;
-                                });
-                              } else {
-                                Sheets.showAppHeightNineSheet(
-                                    context: context,
-                                    widget: SendConfirmSheet(
-                                        amountRaw: _localCurrencyMode
-                                            ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
-                                            : _rawAmount == null
-                                                ? (StateContainer.of(context).nyanoMode)
-                                                    ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
-                                                    : NumberUtil.getAmountAsRaw(_sendAmountController.text)
-                                                : _rawAmount,
-                                        destination: user.address,
-                                        contactName: (user is User)
-                                            ? "@" + user.username
-                                            : (user is Contact)
-                                                ? "★" + user.name
-                                                : null,
-                                        maxSend: _isMaxSend(),
-                                        localCurrency: _localCurrencyMode ? _sendAmountController.text : null,
-                                        memo: _sendMemoController.text));
-                              }
+                              Sheets.showAppHeightNineSheet(
+                                  context: context,
+                                  widget: SendConfirmSheet(
+                                      amountRaw: _localCurrencyMode
+                                          ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                                          : _rawAmount == null
+                                              ? (StateContainer.of(context).nyanoMode)
+                                                  ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
+                                                  : NumberUtil.getAmountAsRaw(_sendAmountController.text)
+                                              : _rawAmount,
+                                      destination: user.address,
+                                      contactName: (user is User)
+                                          ? "@" + user.username
+                                          : (user is Contact)
+                                              ? "★" + user.name
+                                              : null,
+                                      maxSend: _isMaxSend(),
+                                      localCurrency: _localCurrencyMode ? _sendAmountController.text : null,
+                                      memo: _sendMemoController.text));
                             }
                           });
-                        } else if (validRequest) {
-                          if (_sendAddressController.text == StateContainer.of(context).wallet.address) {
-                            // Can't request from self:
-                            setState(() {
-                              _addressValidationText = AppLocalization.of(context).selfSendError;
-                            });
-                          } else {
-                            Sheets.showAppHeightNineSheet(
-                                context: context,
-                                widget: SendConfirmSheet(
-                                    amountRaw: _localCurrencyMode
-                                        ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
-                                        : _rawAmount == null
-                                            ? (StateContainer.of(context).curTheme is NyanTheme)
-                                                ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
-                                                : NumberUtil.getAmountAsRaw(_sendAmountController.text)
-                                            : _rawAmount,
-                                    destination: _sendAddressController.text,
-                                    maxSend: _isMaxSend(),
-                                    localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
-                          }
+                        } else {
+                          Sheets.showAppHeightNineSheet(
+                              context: context,
+                              widget: SendConfirmSheet(
+                                  amountRaw: _localCurrencyMode
+                                      ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                                      : _rawAmount == null
+                                          ? (StateContainer.of(context).curTheme is NyanTheme)
+                                              ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController.text)
+                                              : NumberUtil.getAmountAsRaw(_sendAmountController.text)
+                                          : _rawAmount,
+                                  destination: _sendAddressController.text,
+                                  maxSend: _isMaxSend(),
+                                  localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
                         }
                       }),
                       // Request Button
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).request, [7.0, 0.0, 27.0, 24.0],
                           onPressed: () async {
-                        bool validRequest = _validateRequest(isRequest: true);
+                        bool validRequest = await _validateRequest(isRequest: true);
 
-                        // user must have notifications enabled:
-                        bool notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
-
+                        if (!validRequest) {
+                          return;
+                        }
                         // verifyies the input is a user in the db
-                        if (!_sendAddressController.text.startsWith("nano_") && validRequest) {
+                        if (!_sendAddressController.text.startsWith("nano_")) {
                           // Need to make sure its a valid contact or user
                           var user = await sl.get<DBHelper>().getUserOrContactWithName(_sendAddressController.text.substring(1));
                           if (user == null) {
@@ -706,12 +790,6 @@ class _SendSheetState extends State<SendSheet> {
                               }
                             });
                           } else {
-                            if (!notificationsEnabled) {
-                              bool notificationTurnedOn = await showNotificationDialog();
-                              if (!notificationTurnedOn) {
-                                return;
-                              }
-                            }
                             Sheets.showAppHeightNineSheet(
                                 context: context,
                                 widget: RequestConfirmSheet(
@@ -732,13 +810,7 @@ class _SendSheetState extends State<SendSheet> {
                                   memo: _sendMemoController.text,
                                 ));
                           }
-                        } else if (validRequest) {
-                          if (!notificationsEnabled) {
-                            bool notificationTurnedOn = await showNotificationDialog();
-                            if (!notificationTurnedOn) {
-                              return;
-                            }
-                          }
+                        } else {
                           Sheets.showAppHeightNineSheet(
                               context: context,
                               widget: RequestConfirmSheet(
@@ -1029,7 +1101,7 @@ class _SendSheetState extends State<SendSheet> {
 
   /// Validate form data to see if valid
   /// @returns true if valid, false otherwise
-  bool _validateRequest({bool isRequest = false}) {
+  Future<bool> _validateRequest({bool isRequest = false}) async {
     bool isValid = true;
     _sendAmountFocusNode.unfocus();
     _sendAddressFocusNode.unfocus();
@@ -1082,7 +1154,29 @@ class _SendSheetState extends State<SendSheet> {
       });
       _sendAddressFocusNode.unfocus();
     }
-    if (isRequest) {}
+    if (isValid && isRequest) {
+      // notifications must be turned on:
+      bool notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
+      if (!notificationsEnabled) {
+        bool notificationTurnedOn = await showNotificationDialog();
+        if (!notificationTurnedOn) {
+          isValid = false;
+        } else {
+          // not sure why this is need to get it to update:
+          await sl.get<SharedPrefsUtil>().setNotificationsOn(true);
+        }
+      }
+      // still valid && you have to have a nautilus username to send requests:
+      if (isValid && StateContainer.of(context).wallet.username == null) {
+        isValid = false;
+        await showNeedNautilusUsernameAlert();
+      }
+
+      if (isValid && sl.get<AccountService>().fallbackConnected) {
+        isValid = false;
+        await showFallbackConnectedAlert();
+      }
+    }
     return isValid;
   }
 

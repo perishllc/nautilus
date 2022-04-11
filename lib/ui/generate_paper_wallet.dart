@@ -45,16 +45,20 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
   String paper_wallet_account;
 
   FocusNode _sendAddressFocusNode;
-  TextEditingController _sendAddressController;
   FocusNode _sendAmountFocusNode;
+  FocusNode _sendMemoFocusNode;
+  TextEditingController _sendAddressController;
   TextEditingController _sendAmountController;
+  TextEditingController _sendMemoController;
 
   // States
   AddressStyle _sendAddressStyle;
   String _amountHint = "";
   String _addressHint = "";
+  String _memoHint = "";
   String _amountValidationText = "";
   String _addressValidationText = "";
+  String _memoValidationText = "";
   String quickSendAmount;
   List<dynamic> _users;
   bool animationOpen;
@@ -82,6 +86,8 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
 
     _sendAmountFocusNode = FocusNode();
     _sendAmountController = TextEditingController();
+    _sendMemoFocusNode = FocusNode();
+    _sendMemoController = TextEditingController();
     _sendAddressStyle = AddressStyle.TEXT60;
 
     // On amount focus change
@@ -99,6 +105,18 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       } else {
         setState(() {
           _amountHint = "";
+        });
+      }
+    });
+    // On memo focus change
+    _sendMemoFocusNode.addListener(() {
+      if (_sendMemoFocusNode.hasFocus) {
+        setState(() {
+          _memoHint = null;
+        });
+      } else {
+        setState(() {
+          _memoHint = "";
         });
       }
     });
@@ -152,7 +170,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                         top: 15,
                       ),
                       child: Icon(
-                        AppIcons.security,
+                        AppIcons.money_bill_wave,
                         size: 60,
                         color: StateContainer.of(context).curTheme.primary,
                       ),
@@ -166,7 +184,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                       ),
                       alignment: AlignmentDirectional(-1, 0),
                       child: AutoSizeText(
-                        "TODO!",
+                        AppLocalization.of(context).createGiftHeader,
                         style: AppStyles.textStyleHeaderColored(context),
                         stepGranularity: 0.1,
                         maxLines: 1,
@@ -174,24 +192,24 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                       ),
                     ),
                     // The paragraph
-                    // Container(
-                    //   margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
-                    //   alignment: Alignment.centerLeft,
-                    //   child: Column(
-                    //     children: <Widget>[
-                    //       // AutoSizeText(
-                    //       //   AppLocalization.of(context).secretInfo,
-                    //       //   style: AppStyles.textStyleParagraph(context),
-                    //       //   maxLines: 5,
-                    //       //   stepGranularity: 0.5,
-                    //       // ),
-                    //       Container(
-                    //         margin: EdgeInsetsDirectional.only(top: 15),
-                    //         child: Text("$paper_wallet_seed $paper_wallet_account"),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
+                    Container(
+                      margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        children: <Widget>[
+                          AutoSizeText(
+                            AppLocalization.of(context).giftInfo,
+                            style: AppStyles.textStyleParagraph(context),
+                            maxLines: 10,
+                            stepGranularity: 0.5,
+                          ),
+                          // Container(
+                          //   margin: EdgeInsetsDirectional.only(top: 15),
+                          //   child: Text("$paper_wallet_seed $paper_wallet_account"),
+                          // ),
+                        ],
+                      ),
+                    ),
                     // ******* Enter Amount Container ******* //
                     getEnterAmountContainer(),
                     // ******* Enter Amount Container End ******* //
@@ -210,6 +228,42 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                     ),
 
                     // ******* Enter Amount Error Container End ******* //
+                    // Column for Enter Memo container + Enter Memo Error container
+                    Column(
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.topCenter,
+                          child: Stack(
+                            alignment: Alignment.topCenter,
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                alignment: Alignment.bottomCenter,
+                                constraints: BoxConstraints(maxHeight: 80, minHeight: 0),
+                              ),
+
+                              // ******* Enter Memo Container ******* //
+                              getEnterMemoContainer(),
+                              // ******* Enter Memo Container End ******* //
+                            ],
+                          ),
+                        ),
+
+                        // ******* Enter Memo Error Container ******* //
+                        Container(
+                          alignment: AlignmentDirectional(0, 0),
+                          margin: EdgeInsets.only(top: 3),
+                          child: Text(_memoValidationText,
+                              style: TextStyle(
+                                fontSize: 14.0,
+                                color: StateContainer.of(context).curTheme.primary,
+                                fontFamily: 'NunitoSans',
+                                fontWeight: FontWeight.w600,
+                              )),
+                        )
+                        // ******* Enter Memo Error Container End ******* //
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -230,6 +284,8 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                     Sheets.showAppHeightNineSheet(
                         context: context,
                         widget: GenerateConfirmSheet(
+                          paperWalletSeed: paper_wallet_seed,
+                          memo: _sendMemoController.text,
                           // localCurrency: StateContainer.of(context).curCurrency,
                           // contact: contact,
                           destination: paper_wallet_account,
@@ -435,4 +491,48 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
   } //************ Enter Address Container Method End ************//
   //*************************************************************//
 
+  //************ Enter Memo Container Method ************//
+  //*******************************************************//
+  getEnterMemoContainer() {
+    double margin = 10;
+    // if (_sendAddressController.text.startsWith("nano_")) {
+    //   if (_sendAddressController.text.length > 24) {
+    //     margin = 217;
+    //   }
+    //   if (_sendAddressController.text.length > 48) {
+    //     margin = 238;
+    //   }
+    // }
+    return AppTextField(
+      topMargin: margin,
+      padding: EdgeInsets.zero,
+      textAlign: TextAlign.center,
+      focusNode: _sendMemoFocusNode,
+      controller: _sendMemoController,
+      cursorColor: StateContainer.of(context).curTheme.primary,
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(20),
+      ],
+      textInputAction: TextInputAction.done,
+      maxLines: null,
+      autocorrect: false,
+      hintText: _memoHint == null ? "" : AppLocalization.of(context).enterGiftMemo,
+      fadeSuffixOnCondition: true,
+      style: TextStyle(
+        // fontWeight: FontWeight.w700,
+        // fontSize: 16.0,
+        // color: StateContainer.of(context).curTheme.primary,
+        // fontFamily: 'NunitoSans',
+        color: StateContainer.of(context).curTheme.text60,
+        fontSize: AppFontSizes.small,
+        height: 1.5,
+        fontWeight: FontWeight.w100,
+        fontFamily: 'OverpassMono',
+      ),
+      onChanged: (text) {
+        // nothing for now
+      },
+    );
+  } //************ Enter Memo Container Method End ************//
+  //*************************************************************//
 }

@@ -42,7 +42,9 @@ class RegisterConfirmSheet extends StatefulWidget {
   final String contactName;
   final String userName;
   final String localCurrency;
+  final String leaseDuration;
   final String checkUrl;
+  final String username;
   final bool maxSend;
   final MantaWallet manta;
   final PaymentRequestMessage paymentRequest;
@@ -58,6 +60,8 @@ class RegisterConfirmSheet extends StatefulWidget {
       this.paymentRequest,
       this.natriconNonce,
       this.checkUrl,
+      this.username,
+      this.leaseDuration,
       this.maxSend = false})
       : super();
 
@@ -138,13 +142,36 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  // "SENDING" TEXT
+                  // "REGISTERING" TEXT
                   Container(
                     margin: EdgeInsets.only(bottom: 10.0),
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).sending, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).registering, context),
+                          style: AppStyles.textStyleHeader(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Address text
+                  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.address, contactName: "@" + widget.username)),
+
+                  // "FOR" text
+                  Container(
+                    margin: EdgeInsets.only(top: 30.0, bottom: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          CaseChange.toUpperCase(AppLocalization.of(context).registerFor, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -163,7 +190,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        text: '',
+                        text: widget.leaseDuration + " : ",
                         children: [
                           displayCurrencyAmount(
                             context,
@@ -197,83 +224,6 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                       ),
                     ),
                   ),
-                  // "TO" text
-                  Container(
-                    margin: EdgeInsets.only(top: 30.0, bottom: 10),
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).to, context),
-                          style: AppStyles.textStyleHeader(context),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Address text
-                  Container(
-                      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: isMantaTransaction
-                          ? Column(
-                              children: <Widget>[
-                                AutoSizeText(
-                                  widget.paymentRequest.merchant.name,
-                                  minFontSize: 12,
-                                  stepGranularity: 0.1,
-                                  maxLines: 1,
-                                  textAlign: TextAlign.center,
-                                  style: AppStyles.headerPrimary(context),
-                                ),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                                AutoSizeText(
-                                  widget.paymentRequest.merchant.address,
-                                  minFontSize: 10,
-                                  maxLines: 2,
-                                  textAlign: TextAlign.center,
-                                  stepGranularity: 0.1,
-                                  style: AppStyles.addressText(context),
-                                ),
-                                Container(
-                                  margin: EdgeInsetsDirectional.only(top: 10, bottom: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Container(
-                                          height: 1,
-                                          color: StateContainer.of(context).curTheme.text30,
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsetsDirectional.only(start: 10, end: 20),
-                                        child: Icon(
-                                          AppIcons.appia,
-                                          color: StateContainer.of(context).curTheme.text30,
-                                          size: 20,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 1,
-                                          color: StateContainer.of(context).curTheme.text30,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                smallScreen(context)
-                                    ? UIUtil.oneLineAddressText(context, destinationAltered)
-                                    : UIUtil.threeLineAddressText(context, destinationAltered)
-                              ],
-                            )
-                          : UIUtil.threeLineAddressText(context, destinationAltered, contactName: widget.contactName)),
                 ],
               ),
             ),
@@ -343,37 +293,54 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
       }
       StateContainer.of(context).wallet.frontier = resp.hash;
       StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
-      // Show complete
-      Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
-      String contactName = contact == null ? null : contact.name;
-      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+
+      // Update the state with the new balance
       StateContainer.of(context).requestUpdate();
-      if (widget.natriconNonce != null) {
-        setState(() {
-          StateContainer.of(context).updateNatriconNonce(StateContainer.of(context).selectedAccount.address, widget.natriconNonce);
-        });
+
+      bool success = false;
+      // store the current time:
+      DateTime now = DateTime.now();
+
+      // try until successful or timeout:
+      while (success == false) {
+        print("checking url: ${widget.checkUrl}");
+        try {
+          Map resp = await sl.get<AccountService>().checkUsernameUrl(widget.checkUrl);
+          if (resp != null && resp["completed"] == true) {
+            success = true;
+          } else {
+            // check if it's been more than 30 seconds:
+            if (DateTime.now().difference(now).inSeconds > 30) {
+              // TODO: store for trying again later:
+              success = true;
+            }
+          }
+        } catch (e) {
+          print("Error with checkUrl: $e");
+        }
+
+        // sleep for a while before trying again:
+        await new Future.delayed(const Duration(milliseconds: 3000));
       }
 
-      // if we got this far the send went through:
-      // do a get on the checkUrl so nano.to can update the database:
-      try {
-        await sl.get<AccountService>().checkUsernameUrl(widget.checkUrl);
-      } catch (e) {
-        print("Error with checkUrl: $e");
-      }
+      // sleep for a while before updating the database:
+      await new Future.delayed(const Duration(milliseconds: 5000));
+
+      // force update the database:
+      await StateContainer.of(context).checkAndCacheNapiDatabases(true);
+
+      // refresh the wallet by just updating to the same account:
+      await StateContainer.of(context).updateWallet(account: StateContainer.of(context).selectedAccount);
+
+      // Show complete
+      // await StateContainer.of(context).requestUpdate();
+      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
 
       Sheets.showAppHeightNineSheet(
           context: context,
           closeOnTap: true,
           removeUntilHome: true,
           widget: SendCompleteSheet(amountRaw: widget.amountRaw, destination: destinationAltered, localAmount: widget.localCurrency));
-
-      // sleep for a few seconds to give the server some time to update the database:
-      await new Future.delayed(const Duration(seconds: 3));
-      // force a refresh on the username database:
-      await StateContainer.of(context).checkAndCacheNapiDatabases(true);
-      // update the wallet username:
-      await StateContainer.of(context).updateWallet(account: StateContainer.of(context).selectedAccount);
     } catch (e) {
       // Send failed
       if (animationOpen) {

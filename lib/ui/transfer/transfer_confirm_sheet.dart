@@ -347,4 +347,65 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     // }
     // Navigator.of(context).pop();
   }
+
+  Future<BigInt> refundWallets(Map<String, AccountBalanceItem> privKeyBalanceMap, String address) async {
+    BigInt totalTransferred = BigInt.zero;
+    try {
+      // state.lockCallback();
+      for (String account in privKeyBalanceMap.keys) {
+        AccountBalanceItem balanceItem = privKeyBalanceMap[account];
+        // Get frontiers first
+        AccountInfoResponse resp = await sl.get<AccountService>().getAccountInfo(account);
+        if (!resp.unopened) {
+          balanceItem.frontier = resp.frontier;
+        }
+        // Receive pending blocks
+        PendingResponse pr = await sl.get<AccountService>().getPending(account, 20);
+        Map<String, PendingResponseItem> pendingBlocks = pr.blocks;
+        for (String hash in pendingBlocks.keys) {
+          PendingResponseItem item = pendingBlocks[hash];
+          if (balanceItem.frontier != null) {
+            ProcessResponse resp = await sl
+                .get<AccountService>()
+                .requestReceive(AppWallet.defaultRepresentative, balanceItem.frontier, item.amount, hash, account, balanceItem.privKey);
+            if (resp.hash != null) {
+              balanceItem.frontier = resp.hash;
+              totalTransferred += BigInt.parse(item.amount);
+            }
+          } else {
+            ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, hash, account, balanceItem.privKey);
+            if (resp.hash != null) {
+              balanceItem.frontier = resp.hash;
+              totalTransferred += BigInt.parse(item.amount);
+            }
+          }
+          // Hack that waits for blocks to be confirmed
+          await Future.delayed(const Duration(milliseconds: 300));
+        }
+        // Process send from this account
+        resp = await sl.get<AccountService>().getAccountInfo(account);
+        ProcessResponse sendResp = await sl
+            .get<AccountService>()
+            .requestSend(AppWallet.defaultRepresentative, resp.frontier, resp.balance, address, account, balanceItem.privKey, max: true);
+        if (sendResp.hash != null) {
+          totalTransferred += BigInt.parse(balanceItem.balance);
+        }
+      }
+    } catch (e) {
+      // if (animationOpen) {
+      //   Navigator.of(context).pop();
+      // }
+      // widget.errorCallback();
+      sl.get<Logger>().e("Error processing wallet", e);
+      return BigInt.zero;
+    } finally {
+      // state.unlockCallback();
+    }
+    return totalTransferred;
+    // EventTaxiImpl.singleton().fire(TransferCompleteEvent(amount: totalTransferred));
+    // if (animationOpen) {
+    //   Navigator.of(context).pop();
+    // }
+    // Navigator.of(context).pop();
+  }
 }

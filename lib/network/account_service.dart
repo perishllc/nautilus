@@ -55,7 +55,6 @@ const String _FALLBACK_SERVER_ADDRESS_HTTP = "https://app.natrium.io/api";
 const String _FALLBACK_SERVER_ADDRESS_ALERTS = "https://app.natrium.io/alerts";
 
 const String _USERNAME_LEASE_ENDPOINT = "https://nano.to/lease";
-bool fallbackConnected = false;
 
 Map decodeJson(dynamic src) {
   return json.decode(src);
@@ -75,8 +74,9 @@ class AccountService {
   bool _isConnected;
   bool _isConnecting;
   bool suspended; // When the app explicity closes the connection
+  bool fallbackConnected = false;
 
-  // Lock instnace for synchronization
+  // Lock instance for synchronization
   Lock _lock;
 
   // Constructor
@@ -126,7 +126,7 @@ class AccountService {
     _isConnecting = true;
 
     // check if the nautilus servers are available
-    Socket.connect(_BASE_SERVER_ADDRESS, 8080, timeout: Duration(seconds: 3)).then((socket) {
+    Socket.connect(_BASE_SERVER_ADDRESS, 5076, timeout: Duration(seconds: 3)).then((socket) {
       log.d("Nautilus backend is up");
       socket.destroy();
     }).catchError((error) {
@@ -386,15 +386,15 @@ class AccountService {
   }
 
   Future<dynamic> checkUsernameUrl(String URL) async {
-    /* http.Response response = */ await http.get(Uri.parse(URL), headers: {"Accept": "application/json"});
-    // if (response.statusCode != 200) {
-    //   return null;
-    // }
-    // Map decoded = json.decode(response.body);
-    // if (decoded.containsKey("error")) {
-    //   return ErrorResponse.fromJson(decoded);
-    // }
-    // return decoded;
+    http.Response response = await http.get(Uri.parse(URL), headers: {"Accept": "application/json"});
+    if (response.statusCode != 200) {
+      return null;
+    }
+    Map decoded = json.decode(response.body);
+    if (decoded.containsKey("error")) {
+      return ErrorResponse.fromJson(decoded);
+    }
+    return decoded;
   }
 
   Future<AccountInfoResponse> getAccountInfo(String account) async {

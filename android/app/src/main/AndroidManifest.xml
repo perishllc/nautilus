@@ -60,12 +60,13 @@
 
                 <data android:scheme="manta" />
             </intent-filter>
+
             <!-- Branch URI Scheme -->
             <intent-filter>
-                <data android:scheme="nautilus" android:host="open" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="nautilus" />
             </intent-filter>
 
             <!-- Branch App Links -->
@@ -78,11 +79,27 @@
                 <data android:scheme="https" android:host="qho1r-alternate.app.link" />
                 <!-- test mode: -->
                 <data android:scheme="https" android:host="test-app.perish.co" />
+                <data android:scheme="https" android:host="qho1r.test-app.link" />
                 <data android:scheme="https" android:host="qho1r-alternate.test-app.link" />
             </intent-filter>
 
         </activity>
+
         <activity android:name="com.apptreesoftware.barcodescan.BarcodeScannerActivity" />
+
+
+        <!-- Launcher Activity to handle incoming Branch intents -->
+        <!-- <activity android:name=".LauncherActivity" android:launchMode="singleTask" android:label="@string/app_name" android:theme="@style/AppTheme.NoActionBar" android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
+        </activity> -->
+
+
         <!-- Branch init -->
         <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_gh7IyLEiWS0le1tVVblqwnilwwf70ydK" />
         <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_pk5UyHFd7H2cnWwJNfkCxblatvcWYud4" />

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/min_raw_setting.dart';
 import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
@@ -217,6 +218,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
 
   StreamSubscription<TransferConfirmEvent> _transferConfirmSub;
   StreamSubscription<TransferCompleteEvent> _transferCompleteSub;
+  StreamSubscription<NotificationSettingChangeEvent> _notificationSettingChangeSub;
 
   void _registerBus() {
     // Ready to go to transfer confirm
@@ -233,6 +235,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       StateContainer.of(context).requestUpdate();
       AppTransferCompleteSheet(NumberUtil.getRawAsUsableString(event.amount.toString())).mainBottomSheet(context);
     });
+    // notification setting changed:
+    _notificationSettingChangeSub = EventTaxiImpl.singleton().registerTo<NotificationSettingChangeEvent>().listen((event) {
+      setState(() {
+        _curNotificiationSetting = event.isOn ? NotificationSetting(NotificationOptions.ON) : NotificationSetting(NotificationOptions.OFF);
+      });
+    });
   }
 
   void _destroyBus() {
@@ -241,6 +249,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     }
     if (_transferCompleteSub != null) {
       _transferCompleteSub.cancel();
+    }
+    if (_notificationSettingChangeSub != null) {
+      _notificationSettingChangeSub.cancel();
     }
   }
 
@@ -363,9 +374,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         })) {
       case NotificationOptions.ON:
         sl.get<SharedPrefsUtil>().setNotificationsOn(true).then((result) {
-          setState(() {
-            _curNotificiationSetting = NotificationSetting(NotificationOptions.ON);
-          });
+          EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: true));
           FirebaseMessaging.instance.requestPermission();
           FirebaseMessaging.instance.getToken().then((fcmToken) {
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
@@ -374,9 +383,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         break;
       case NotificationOptions.OFF:
         sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((result) {
-          setState(() {
-            _curNotificiationSetting = NotificationSetting(NotificationOptions.OFF);
-          });
+          EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: false));
           FirebaseMessaging.instance.getToken().then((fcmToken) {
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
           });
@@ -1586,7 +1593,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       color: StateContainer.of(context).curTheme.text15,
                     ),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).shareNautilus, AppIcons.share, onPressed: () {
-                      Share.share("Check out Nautilus - NANO Wallet for iOS and Android" + " https://fwd.dev");
+                      Share.share("Check out Nautilus - NANO Wallet for iOS and Android" + " https://app.perish.co");
                     }),
                     Divider(
                       height: 2,

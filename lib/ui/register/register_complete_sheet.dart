@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:manta_dart/messages.dart';
 
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -15,21 +14,23 @@ import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 
-class GenerateCompleteSheet extends StatefulWidget {
+class RequestCompleteSheet extends StatefulWidget {
   final String amountRaw;
   final String destination;
   final String contactName;
   final String localAmount;
-  final String sharableLink;
+  final PaymentRequestMessage paymentRequest;
+  final int natriconNonce;
 
-  GenerateCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.sharableLink}) : super();
+  RequestCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.paymentRequest, this.natriconNonce}) : super();
 
-  _GenerateCompleteSheetState createState() => _GenerateCompleteSheetState();
+  _RequestCompleteSheetState createState() => _RequestCompleteSheetState();
 }
 
-class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
+class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
   String amount;
   String destinationAltered;
+  bool isMantaTransaction;
 
   @override
   void initState() {
@@ -53,6 +54,7 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
     // }
     amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
     destinationAltered = widget.destination.replaceAll("xrb_", "nano_");
+    isMantaTransaction = widget.paymentRequest != null;
   }
 
   @override
@@ -136,7 +138,7 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                       children: <Widget>[
                         // "SENT TO" text
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).loadedInto, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).requestedFrom, context),
                           style: TextStyle(
                             fontSize: 28.0,
                             fontWeight: FontWeight.w700,
@@ -156,7 +158,62 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, destinationAltered, type: ThreeLineAddressTextType.SUCCESS, contactName: widget.contactName)),
+                      child: isMantaTransaction
+                          ? Column(
+                              children: <Widget>[
+                                AutoSizeText(
+                                  widget.paymentRequest.merchant.name,
+                                  minFontSize: 12,
+                                  stepGranularity: 0.1,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.center,
+                                  style: AppStyles.headerSuccess(context),
+                                ),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                AutoSizeText(
+                                  widget.paymentRequest.merchant.address,
+                                  minFontSize: 10,
+                                  maxLines: 2,
+                                  textAlign: TextAlign.center,
+                                  stepGranularity: 0.1,
+                                  style: AppStyles.addressText(context),
+                                ),
+                                Container(
+                                  margin: EdgeInsetsDirectional.only(top: 10, bottom: 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          height: 1,
+                                          color: StateContainer.of(context).curTheme.text30,
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsetsDirectional.only(start: 10, end: 20),
+                                        child: Icon(
+                                          AppIcons.appia,
+                                          color: StateContainer.of(context).curTheme.text30,
+                                          size: 20,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          height: 1,
+                                          color: StateContainer.of(context).curTheme.text30,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                UIUtil.smallScreen(context)
+                                    ? UIUtil.oneLineAddressText(context, destinationAltered, type: OneLineAddressTextType.SUCCESS)
+                                    : UIUtil.threeLineAddressText(context, destinationAltered, type: ThreeLineAddressTextType.SUCCESS)
+                              ],
+                            )
+                          : UIUtil.threeLineAddressText(context, destinationAltered, type: ThreeLineAddressTextType.SUCCESS, contactName: widget.contactName)),
                 ],
               ),
             ),
@@ -167,10 +224,9 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).copyLink, context),
+                      AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).close, context),
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                        // Navigator.of(context).pop();
-                        Clipboard.setData(new ClipboardData(text: widget.sharableLink));
+                        Navigator.of(context).pop();
                       }),
                     ],
                   ),

@@ -47,6 +47,10 @@ class AppLocalization {
     return Intl.message('Yes', desc: 'intro_new_wallet_backup_yes', name: 'yes');
   }
 
+  String get ok {
+    return Intl.message('Ok', desc: 'ok', name: 'ok');
+  }
+
   String get onStr {
     return Intl.message('On', desc: 'generic_on', name: 'onStr');
   }
@@ -304,6 +308,10 @@ class AppLocalization {
     return Intl.message("Invalid Username", desc: 'username_invalid_name', name: 'usernameInvalid');
   }
 
+  String get usernameError {
+    return Intl.message("Username Error", desc: 'username_unknown_error', name: 'usernameError');
+  }
+
   String get selfSendError {
     return Intl.message("Can't request from self", desc: 'self_send_error', name: 'selfSendError');
   }
@@ -384,6 +392,14 @@ class AppLocalization {
     return Intl.message("Requesting", desc: 'request_requesting', name: 'requesting');
   }
 
+  String get registering {
+    return Intl.message("Registering", desc: 'register_registering', name: 'registering');
+  }
+
+  String get registerFor {
+    return Intl.message("for", desc: 'register_for', name: 'registerFor');
+  }
+
   String get withAddress {
     return Intl.message("With Address", desc: 'with_address', name: 'withAddress');
   }
@@ -439,6 +455,10 @@ class AppLocalization {
     return Intl.message("Note (visible to nautilus users)", desc: 'enter_memo', name: 'enterMemo');
   }
 
+  String get enterGiftMemo {
+    return Intl.message("Enter Gift Note", desc: 'gift_note', name: 'enterGiftMemo');
+  }
+
   String get enterUsername {
     return Intl.message("Enter a username", desc: 'enter_username', name: 'enterUsername');
   }
@@ -451,12 +471,20 @@ class AppLocalization {
     return Intl.message("Username unavailable", desc: 'username_unavailable', name: 'usernameUnavailable');
   }
 
+  String get usernameEmpty {
+    return Intl.message("Please Enter a Username", desc: 'username_empty', name: 'usernameEmpty');
+  }
+
   String get usernameAvailable {
     return Intl.message("Username available!", desc: 'username_available', name: 'usernameAvailable');
   }
 
   String get addressMissing {
     return Intl.message("Please Enter an Address", desc: 'send_enter_address', name: 'addressMissing');
+  }
+
+  String get addressOrUserMissing {
+    return Intl.message("Please Enter a Username or Address", desc: 'send_enter_user_address', name: 'addressOrUserMissing');
   }
 
   String get amountMissing {
@@ -985,8 +1013,19 @@ class AppLocalization {
         desc: 'import_gift', name: 'importGift');
   }
 
+  String get importGiftEmpty {
+    return Intl.message(
+        "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+        desc: 'import_gift_empty',
+        name: 'importGiftEmpty');
+  }
+
   String get giftAlert {
     return Intl.message("You have a gift!", desc: 'import_gift_header', name: 'giftAlert');
+  }
+
+  String get giftAlertEmpty {
+    return Intl.message("Empty Gift", desc: 'import_gift_empty_header', name: 'giftAlertEmpty');
   }
 
   String get giftMessage {
@@ -1001,7 +1040,105 @@ class AppLocalization {
     return Intl.message("Gift From", desc: 'gift_from', name: 'giftFrom');
   }
 
+  String get createGiftHeader {
+    return Intl.message("Create a Gift Card", desc: 'create_gift_header', name: 'createGiftHeader');
+  }
+
+  String get giftInfo {
+    return Intl.message('''Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n
+Once created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!
+If the recipient is already a Nautilus user the funds will instantly get a prompt to transfer the funds into their account''',
+        desc: 'Description for gift card creation', name: 'giftInfo');
+  }
+
+  String get giftWarning {
+    return Intl.message(
+        "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+        desc: 'Description for username already registered',
+        name: 'giftWarning');
+  }
+
+  String get loadedInto {
+    return Intl.message("Loaded Into", desc: 'loaded_into', name: 'loadedInto');
+  }
+
+  String get copyLink {
+    return Intl.message("Copy Link", desc: 'copy_link', name: 'copyLink');
+  }
+
   /// END GIFTS
+
+  /// USERNAMES
+
+  String get needUsernameAlert {
+    return Intl.message(
+        "This feature requires you to have a username set in your wallet. Would you like to register one now?\n\nYou'll never need a username to receive payment requests, only to send them.",
+        desc: 'username_needed_header',
+        name: 'needUsernameAlert');
+  }
+
+  String get needUsernameAlertHeader {
+    return Intl.message("Username required", desc: 'username_needed_header', name: 'needUsernameAlertHeader');
+  }
+
+  String get registerUsernameHeader {
+    return Intl.message("Register a Username", desc: 'register_username_header', name: 'registerUsernameHeader');
+  }
+
+  String get usernameInfo {
+    return Intl.message(
+        "Pick out a unique @username to make it easy for friends and family to find you!\n\nHaving a Nautilus username lets you send payment requests and updates the UI globally to reflect your new handle.",
+        desc: 'Description for username registration',
+        name: 'usernameInfo');
+  }
+
+  String get usernameAlreadyRegistered {
+    return Intl.message(
+        "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+        desc: 'Description for username already registered',
+        name: 'usernameAlreadyRegistered');
+  }
+
+  String get usernameWarning {
+    return Intl.message("Nautilus usernames are a centralized service provided by Nano.to", desc: 'Username centralization warning', name: 'usernameWarning');
+  }
+
+  // String get giftMessage {
+  //   return Intl.message("Gift Message", desc: 'gift_message', name: 'giftMessage');
+  // }
+
+  // String get giftAmount {
+  //   return Intl.message("Gift Amount", desc: 'gift_amount', name: 'giftAmount');
+  // }
+
+  // String get giftFrom {
+  //   return Intl.message("Gift From", desc: 'gift_from', name: 'giftFrom');
+  // }
+
+  /// END USERNAMES
+
+  /// FALLBACK
+
+  String get fallbackHeader {
+    return Intl.message("Nautilus Disconnected", desc: 'fallback_connected', name: 'fallbackHeader');
+  }
+
+  String get fallbackInfo {
+    return Intl.message(
+        "Nautilus Servers appear to be disconnected, Sending and Receiving should still be operational but payment requests may not go through\n\n Come back later or restart the app to try again",
+        desc: 'fallback_info',
+        name: 'fallbackInfo');
+  }
+
+  /// END FALLBACK
+
+  /// NOTIFICATIONS
+
+  String get notificationInfo {
+    return Intl.message("In order for this feature to work correctly, notifications must be enabled", desc: 'notification_info', name: 'notificationInfo');
+  }
+
+  /// END NOTIFICATION
 
   /// -- START MULTI-ACCOUNT
 
@@ -1269,13 +1406,12 @@ class AppLocalization {
     return 'https://nanocrawler.cc/explorer/account/$account';
   }
 
-  // TODO: LEGAL: change these URLS:
   String get eulaUrl {
-    return 'https://fosse.co/nautilus/eula.html';
+    return 'https://perish.co/nautilus/eula.html';
   }
 
   String get privacyUrl {
-    return 'https://fosse.co/nautilus/privacy.html';
+    return 'https://perish.co/nautilus/privacy.html';
   }
 
   /// -- END NON-TRANSLATABLE ITEMS

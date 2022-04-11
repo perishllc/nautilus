@@ -18,3 +18,5 @@
 -keep class com.bottlerocketstudios.** { *; }
 ## File picker
 -keep class androidx.lifecycle.DefaultLifecycleObserver
+## Branch SDK:
+-keep class com.google.android.gms.** { *; }

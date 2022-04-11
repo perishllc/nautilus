@@ -11,11 +11,14 @@ import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:uni_links/uni_links.dart';
@@ -63,9 +66,6 @@ Future<void> getPendingMessages() async {
 
 Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
   print("Handling a foreground message");
-  // final Logger log = sl.get<Logger>();
-  // log.d("Handling a foreground message");
-  // log.d(message.data);
   EventTaxiImpl.singleton().fire(FcmMessageEvent(data: message.data));
 }
 
@@ -500,18 +500,19 @@ class StateContainerState extends State<StateContainer> {
     _branchSub = FlutterBranchSdk.initSession().listen((data) {
       if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) {
         //Link clicked. Add logic to get link data
-        print('Custom string: ${data["custom_string"]}');
         print(data);
 
         // check if they were gifted a wallet:
-        if (data.containsKey("feature") && data["feature"] == "gift") {
+        if (data.containsKey("~feature") && data["~feature"] == "gift") {
           // if (data["+match_guaranteed"] == true) {
           // setup the auto load wallet:
-          giftedWallet = true;
-          giftedWalletSeed = data["wallet_seed"];
-          giftedWalletAmountRaw = data["amount_raw"];
-          giftedWalletAddress = data["address"];
-          giftedWallet = data["memo"];
+          setState(() {
+            giftedWallet = true;
+            giftedWalletSeed = data["seed"] ?? "";
+            giftedWalletAmountRaw = data["amount_raw"] ?? "";
+            giftedWalletAddress = data["address"] ?? "";
+            giftedWalletMemo = data["memo"] ?? "";
+          });
           // }
         }
       }
@@ -567,16 +568,15 @@ class StateContainerState extends State<StateContainer> {
     selectedAccount = account;
     updateRecentlyUsedAccounts();
     // get username if it exists:
-    sl.get<DBHelper>().getUserWithAddress(address).then((user) {
-      String walletUsername = null;
-      if (user != null && user.username != null) {
-        walletUsername = user.username;
-      }
-      setState(() {
-        wallet = AppWallet(address: address, username: walletUsername, loading: true);
-        requestUpdate();
-        restorePayments();
-      });
+    User user = await sl.get<DBHelper>().getUserWithAddress(address);
+    String walletUsername;
+    if (user != null && user.username != null) {
+      walletUsername = user.username;
+    }
+    setState(() {
+      wallet = AppWallet(address: address, username: walletUsername, loading: true);
+      requestUpdate();
+      restorePayments();
     });
   }
 
@@ -754,14 +754,15 @@ class StateContainerState extends State<StateContainer> {
       return;
     }
     PendingResponseItem pendingItem = PendingResponseItem(hash: resp.hash, source: resp.account, amount: resp.amount);
-    String receivedHash = await handlePendingItem(pendingItem);
+    String receivedHash = await handlePendingItem(pendingItem, link_as_account: resp.block.linkAsAccount);
     if (receivedHash != null) {
       AccountHistoryResponseItem histItem =
           AccountHistoryResponseItem(type: BlockTypes.RECEIVE, account: resp.account, amount: resp.amount, hash: receivedHash);
-      // todo: not necessarily the best way to handle this, should get real height:
-      histItem.height = wallet.confirmationHeight + 1;
       if (!wallet.history.contains(histItem)) {
         setState(() {
+          // TODO: not necessarily the best way to handle this, should get real height:
+          histItem.height = wallet.confirmationHeight + 1;
+          wallet.confirmationHeight += 1;
           wallet.history.insert(0, histItem);
           wallet.accountBalance += BigInt.parse(resp.amount);
           // Send list to home screen
@@ -772,7 +773,7 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  Future<String> handlePendingItem(PendingResponseItem item) async {
+  Future<String> handlePendingItem(PendingResponseItem item, {String link_as_account}) async {
     if (pendingRequests.contains(item.hash)) {
       return null;
     }
@@ -803,8 +804,53 @@ class StateContainerState extends State<StateContainer> {
       // Publish receive
       sl.get<Logger>().d("Handling ${item.hash} as receive");
       try {
-        ProcessResponse resp =
-            await sl.get<AccountService>().requestReceive(wallet.representative, wallet.frontier, item.amount, item.hash, wallet.address, await _getPrivKey());
+        ProcessResponse resp;
+        if (link_as_account != null && link_as_account != wallet.address) {
+          // we aren't on the current account for this receive:
+          log.d("Receive is for a different account: ${link_as_account}");
+          // HANDLE IT: 😔
+
+          // TODO: receive any other pendings first:
+          // // Get frontiers first
+          // AccountInfoResponse resp = await sl.get<AccountService>().getAccountInfo(account);
+          // if (!resp.unopened) {
+          //   balanceItem.frontier = resp.frontier;
+          // }
+          // // Receive pending blocks
+          // PendingResponse pr = await sl.get<AccountService>().getPending(account, 20);
+          // Map<String, PendingResponseItem> pendingBlocks = pr.blocks;
+          // for (String hash in pendingBlocks.keys) {
+          //   PendingResponseItem item = pendingBlocks[hash];
+          //   if (balanceItem.frontier != null) {
+          //     ProcessResponse resp = await sl
+          //         .get<AccountService>()
+          //         .requestReceive(AppWallet.defaultRepresentative, balanceItem.frontier, item.amount, hash, account, balanceItem.privKey);
+          //     if (resp.hash != null) {
+          //       balanceItem.frontier = resp.hash;
+          //       totalTransferred += BigInt.parse(item.amount);
+          //     }
+          //   } else {
+          //     ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, hash, account, balanceItem.privKey);
+          //     if (resp.hash != null) {
+          //       balanceItem.frontier = resp.hash;
+          //       totalTransferred += BigInt.parse(item.amount);
+          //     }
+          //   }
+          //   // Hack that waits for blocks to be confirmed
+          //   await Future.delayed(const Duration(milliseconds: 300));
+          // }
+
+          // AccountInfoResponse accountResp = await sl.get<AccountService>().getAccountInfo(link_as_account);
+
+          // resp = await sl
+          //     .get<AccountService>()
+          //     .requestReceive(wallet.representative, accountResp.frontier, item.amount, item.hash, link_as_account, await _getPrivKey());
+          throw Exception("Not on the correct account to receive this");
+        } else {
+          resp = await sl
+              .get<AccountService>()
+              .requestReceive(wallet.representative, wallet.frontier, item.amount, item.hash, wallet.address, await _getPrivKey());
+        }
         wallet.frontier = resp.hash;
         pendingRequests.remove(item.hash);
         alreadyReceived.add(item.hash);
@@ -938,6 +984,9 @@ class StateContainerState extends State<StateContainer> {
                 type: BlockTypes.RECEIVE, account: pendingResponseItem.source, amount: pendingResponseItem.amount, hash: receivedHash);
             if (!wallet.history.contains(histItem)) {
               setState(() {
+                // TODO: not necessarily the best way to handle this, should get real height:
+                histItem.height = wallet.confirmationHeight + 1;
+                wallet.confirmationHeight += 1;
                 wallet.history.insert(0, histItem);
                 wallet.accountBalance += BigInt.parse(pendingResponseItem.amount);
                 // Send list to home screen
