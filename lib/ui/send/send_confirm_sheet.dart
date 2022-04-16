@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
@@ -36,6 +37,7 @@ import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:uuid/uuid.dart';
 
 class SendConfirmSheet extends StatefulWidget {
   final String amountRaw;
@@ -327,6 +329,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   }
 
   Future<void> _doSend() async {
+    bool memoSendFailed = false;
     try {
       _showSendingAnimation(context);
       ProcessResponse resp = await sl.get<AccountService>().requestSend(
@@ -345,8 +348,48 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
       // if there's a memo to be sent, send it:
       if (widget.memo != null && widget.memo.isNotEmpty) {
-        // TODO:
-        // await sl.get<AccountService>().sendMemo(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, widget.memo);
+        String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
+        // get epoch time as hex:
+        int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+        String nonce_hex = secondsSinceEpoch.toRadixString(16);
+        String signature = NanoSignatures.signBlock(nonce_hex, privKey);
+
+        // check validity locally:
+        String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet?.address);
+        bool isValid = NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+        if (!isValid) {
+          throw Exception("Invalid signature?!");
+        }
+
+        try {
+          await sl
+              .get<AccountService>()
+              .sendTXMemo(destinationAltered, StateContainer.of(context).wallet.address, widget.amountRaw, signature, nonce_hex, widget.memo, null);
+        } catch (e) {
+          memoSendFailed = true;
+        }
+
+        if (!memoSendFailed) {
+          // create a local memo object:
+          var uuid = Uuid();
+          var newRequestTXData = new TXData(
+            from_address: StateContainer.of(context).wallet.address,
+            to_address: destinationAltered,
+            amount_raw: widget.amountRaw,
+            uuid: "LOCAL:" + uuid.v4(),
+            block: resp.hash,
+            is_acknowledged: false,
+            is_fulfilled: false,
+            is_request: false,
+            request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+            memo: widget.memo,
+            height: 0,
+          );
+          // add it to the database:
+          await sl.get<DBHelper>().addTXData(newRequestTXData);
+          // hack to get tx memo to update:
+          EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
+        }
       }
 
       // go through and check to see if any unfulfilled payments are now fulfilled
@@ -368,21 +411,24 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           // update the TXData to be fulfilled
           await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
           // update the ui to reflect the change in the db:
-          StateContainer.of(context).restorePayments();
+          StateContainer.of(context).updateRequests();
           break;
         }
       }
 
       // Show complete
-      Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
+      dynamic user = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
       String contactName;
-      if (contact == null) {
-        User user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
-        if (user != null) {
+      if (user != null) {
+        if (user is Contact) {
+          contactName = user.name;
+        } else if (user is User) {
           contactName = user.username;
         }
-      } else {
-        contactName = contact.name;
+      }
+
+      if (memoSendFailed) {
+        UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
       }
 
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
@@ -408,7 +454,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context, durationMs: 5000);
       Navigator.of(context).pop();
     }
   }

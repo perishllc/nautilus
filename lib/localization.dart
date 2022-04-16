@@ -75,6 +75,14 @@ class AppLocalization {
     return Intl.message('Sent', desc: 'history_sent', name: 'sent');
   }
 
+  String get loaded {
+    return Intl.message('Loaded', desc: 'history_loaded', name: 'loaded');
+  }
+
+  String get opened {
+    return Intl.message('Opened', desc: 'history_opened', name: 'opened');
+  }
+
   String get received {
     return Intl.message('Received', desc: 'history_received', name: 'received');
   }
@@ -89,6 +97,10 @@ class AppLocalization {
 
   String get unconfirmed {
     return Intl.message('unconfirmed', desc: 'history_unconfirmed', name: 'unconfirmed');
+  }
+
+  String get failed {
+    return Intl.message('failed', desc: 'history_failed', name: 'failed');
   }
 
   String get messageHeader {
@@ -182,6 +194,10 @@ class AppLocalization {
 
   String get markAsPaid {
     return Intl.message("Mark as Paid", desc: "fulfill_payment", name: 'markAsPaid');
+  }
+
+  String get resendMemo {
+    return Intl.message("Resend this memo", desc: "resend_memo", name: 'resendMemo');
   }
 
   String get markAsUnpaid {
@@ -320,8 +336,24 @@ class AppLocalization {
     return Intl.message("Choose a Name for this Favorite", desc: 'favorite_name_missing', name: 'favoriteNameMissing');
   }
 
+  String get blockedNameMissing {
+    return Intl.message("Choose a Nick Name", desc: 'blocked_name_missing', name: 'blockedNameMissing');
+  }
+
   String get favoriteExists {
     return Intl.message("Favorite Already Exists", desc: 'favorite_name_exists', name: 'favoriteExists');
+  }
+
+  String get blockedExists {
+    return Intl.message("User already Blocked!", desc: 'user_already_blocked', name: 'blockedExists');
+  }
+
+  String get blockedNameExists {
+    return Intl.message("Nick name already used!", desc: 'blocked_name_used', name: 'blockedNameExists');
+  }
+
+  String get usernameNotFound {
+    return Intl.message("Username not found!", desc: 'user_not_found', name: 'usernameNotFound');
   }
 
   /// -- END FAVORITE ITEMS
@@ -422,6 +454,10 @@ class AppLocalization {
 
   String get sendError {
     return Intl.message("An error occurred. Try again later.", desc: 'send_generic_error', name: 'sendError');
+  }
+
+  String get sendMemoError {
+    return Intl.message("Sending memo with transaction failed, they may not be a Nautilus user.", desc: 'send_memo_error', name: 'sendMemoError');
   }
 
   String get requestError {
@@ -1064,6 +1100,10 @@ If the recipient is already a Nautilus user the funds will instantly get a promp
 
   String get copyLink {
     return Intl.message("Copy Link", desc: 'copy_link', name: 'copyLink');
+  }
+
+  String get linkCopied {
+    return Intl.message("Link Copied", desc: 'link_copied', name: 'linkCopied');
   }
 
   /// END GIFTS

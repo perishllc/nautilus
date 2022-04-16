@@ -46,6 +46,12 @@ class TXData {
   bool is_acknowledged;
   @JsonKey(name: 'height')
   int height;
+  @JsonKey(name: 'record_type')
+  String record_type;
+  @JsonKey(name: 'metadata')
+  String metadata;
+  @JsonKey(name: 'status')
+  String status;
 
   TXData(
       {@required this.from_address,
@@ -60,6 +66,9 @@ class TXData {
       this.uuid,
       this.is_acknowledged,
       this.height,
+      this.record_type,
+      this.metadata,
+      this.status,
       int id});
 
   String getShortString(bool isRecipient) {
@@ -91,7 +100,10 @@ class TXData {
         memo: json["memo"] as String,
         uuid: json["uuid"] as String,
         is_acknowledged: json["is_acknowledged"] as bool,
-        height: json["height"] as int);
+        height: json["height"] as int,
+        record_type: json["record_type"] as String,
+        metadata: json["metadata"] as String,
+        status: json["status"] as String);
   }
 
   bool operator ==(o) =>
@@ -106,7 +118,11 @@ class TXData {
       o.request_time == request_time &&
       o.fulfillment_time == fulfillment_time &&
       o.block == block &&
-      o.memo == memo;
+      o.memo == memo &&
+      o.is_acknowledged == is_acknowledged &&
+      o.record_type == record_type &&
+      o.metadata == metadata &&
+      o.status == status;
 
   // bool operator ==(o) => o is User && o.username == username && o.address == address;
   // int get hashCode => hash2(username.hashCode, address.hashCode);

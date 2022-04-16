@@ -123,7 +123,7 @@ class StateContainerState extends State<StateContainer> {
   Locale deviceLocale = Locale('en', 'US');
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
   LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
-  AvailableBlockExplorer curBlockExplorer = AvailableBlockExplorer(AvailableBlockExplorerEnum.NANOCRAWLER);
+  AvailableBlockExplorer curBlockExplorer = AvailableBlockExplorer(AvailableBlockExplorerEnum.NANOLOOKER);
   BaseTheme curTheme = NautilusTheme();
   bool nyanoMode = false;
   // Currently selected account
@@ -250,12 +250,22 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  Future<void> restorePayments() async {
+  Future<void> updateRequests() async {
     if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-      var payments = await sl.get<DBHelper>().getAccountSpecificTXData(wallet.address);
+      var requests = await sl.get<DBHelper>().getAccountSpecificRequests(wallet.address);
       setState(() {
-        this.wallet.payments = payments;
-        EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet.payments));
+        this.wallet.requests = requests;
+        EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet.requests));
+      });
+    }
+  }
+
+  Future<void> updateTransactionData() async {
+    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+      var transactions = await sl.get<DBHelper>().getAccountSpecificTXData(wallet.address);
+      setState(() {
+        // this.wallet.transactions = transactions;
+        // EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet.transactions));
       });
     }
   }
@@ -375,7 +385,7 @@ class StateContainerState extends State<StateContainer> {
     // TODO: only call when out of date
     checkAndCacheNapiDatabases(false);
     // restore payments from the cache
-    restorePayments();
+    updateRequests();
 
     // sl.get<DBHelper>().fetchDatabases();
     // sl.get<DBHelper>().populateDBFromCache();
@@ -576,7 +586,7 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       wallet = AppWallet(address: address, username: walletUsername, loading: true);
       requestUpdate();
-      restorePayments();
+      updateRequests();
     });
   }
 
@@ -935,7 +945,7 @@ class StateContainerState extends State<StateContainer> {
       }
       setState(() {
         wallet.historyLoading = false;
-        wallet.paymentsLoading = false;
+        wallet.requestsLoading = false;
         wallet.unifiedLoading = false;
       });
       if (!postedToHome) {
@@ -974,7 +984,7 @@ class StateContainerState extends State<StateContainer> {
                 // update the TXData to be fulfilled
                 await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
                 // update the ui to reflect the change in the db:
-                await restorePayments();
+                await updateRequests();
                 await updateUnified();
                 break;
               }
@@ -1073,7 +1083,7 @@ class StateContainerState extends State<StateContainer> {
       // send acknowledgement to server / requester:
       sl.get<AccountService>().requestACK(uuid, requesting_account);
 
-      await restorePayments();
+      await updateRequests();
     }
   }
 
@@ -1101,7 +1111,7 @@ class StateContainerState extends State<StateContainer> {
 
         // is this from us? if so we need to check for the local version of this payment:
         if (requesting_account == wallet.address) {
-          var transactions = await sl.get<DBHelper>().getAccountSpecificTXData(wallet.address);
+          var transactions = await sl.get<DBHelper>().getAccountSpecificRequests(wallet.address);
           // go through the list and see if any of them happened within the last 5 minutes:
           // make sure all other fields match, too:
           TXData oldTXData = null;
@@ -1152,7 +1162,7 @@ class StateContainerState extends State<StateContainer> {
         );
         await sl.get<DBHelper>().addTXData(txData);
       }
-      await restorePayments();
+      await updateRequests();
     }
   }
 
@@ -1205,7 +1215,74 @@ class StateContainerState extends State<StateContainer> {
       } else {
         log.d("we didn't have a txData for this payment ack!");
       }
-      await restorePayments();
+      await updateRequests();
+    }
+
+    if (data.containsKey("payment_memo")) {
+      log.d("handling payment_memo from: ${data['requesting_account']} : ${data['account']}");
+      String amount_raw = data['amount_raw'];
+      String requesting_account = data['requesting_account'];
+      String memo = data['memo'];
+      String request_time = data['request_time'];
+      String to_address = data['account'];
+      String uuid = data['uuid'];
+      String block = data['block'];
+      String is_acknowledged = data['is_acknowledged'];
+      int height = data['height'];
+
+      // if there's a block just create the TXData:
+      if (block != null && block.isNotEmpty) {
+        TXData txData = new TXData(
+          amount_raw: amount_raw,
+          is_request: false,
+          from_address: requesting_account,
+          to_address: to_address,
+          memo: memo,
+          is_fulfilled: true,
+          request_time: request_time,
+          fulfillment_time: DateTime.now().toUtc().toIso8601String(),
+          block: block,
+          uuid: uuid,
+          is_acknowledged: false,
+          height: height,
+        );
+        await sl.get<DBHelper>().addTXData(txData);
+        await updateRequests();
+      } else {
+        // there's no block, so we'll just have to set the block to the most recent matching transaction:
+        TXData txData = new TXData(
+          amount_raw: amount_raw,
+          is_request: false,
+          from_address: requesting_account,
+          to_address: to_address,
+          memo: memo,
+          is_fulfilled: true,
+          block: null,
+          uuid: uuid,
+          is_acknowledged: false,
+          height: height,
+        );
+        if (to_address == wallet.address) {
+          bool found = false;
+          // loop through our tx history to find the first matching block:
+          for (var tx in wallet.history) {
+            if (tx.account == requesting_account && tx.amount == amount_raw) {
+              // found a matching transaction, so set the block to that:
+              txData.block = tx.hash;
+              found = true;
+              break;
+            }
+          }
+          if (found) {
+            await sl.get<DBHelper>().addTXData(txData);
+            // send acknowledgement to server / requester:
+            await sl.get<AccountService>().requestACK(uuid, requesting_account);
+            await updateRequests();
+            // hack to get tx memo to update:
+            EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
+          }
+        }
+      }
     }
   }
 

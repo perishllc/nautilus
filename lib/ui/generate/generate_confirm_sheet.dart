@@ -13,6 +13,7 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/contact.dart';
+import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -37,6 +38,7 @@ import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:uuid/uuid.dart';
 
 class GenerateConfirmSheet extends StatefulWidget {
   final String amountRaw;
@@ -295,6 +297,29 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
 
       BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
       if (response.success) {
+        // create a local memo object to show the gift card creation details:
+        var uuid = Uuid();
+        var newGiftTXData = new TXData(
+          from_address: StateContainer.of(context).wallet.address,
+          to_address: destinationAltered,
+          amount_raw: widget.amountRaw,
+          uuid: "LOCAL:" + uuid.v4(),
+          block: resp.hash,
+          record_type: "gift_load",
+          status: "created",
+          metadata: response.result,
+          is_acknowledged: false,
+          is_fulfilled: false,
+          is_request: false,
+          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+          memo: widget.memo,
+          height: 0,
+        );
+        // add it to the database:
+        await sl.get<DBHelper>().addTXData(newGiftTXData);
+        // hack to get tx memo to update:
+        EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
+
         // Show complete
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
         StateContainer.of(context).requestUpdate();
@@ -313,6 +338,29 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         print('Error : ${response.errorCode} - ${response.errorMessage}');
         // attempt to refund the transaction?!:
         await AppTransferOverviewSheet().startAutoTransfer(context, widget.paperWalletSeed, StateContainer.of(context).wallet);
+
+        // create a local memo object to show the gift card creation details:
+        var uuid = Uuid();
+        var newGiftTXData = new TXData(
+          from_address: StateContainer.of(context).wallet.address,
+          to_address: destinationAltered,
+          amount_raw: widget.amountRaw,
+          uuid: "LOCAL:" + uuid.v4(),
+          block: resp.hash,
+          record_type: "gift_load",
+          status: "create_failed",
+          metadata: widget.paperWalletSeed,
+          is_acknowledged: false,
+          is_fulfilled: false,
+          is_request: false,
+          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+          memo: widget.memo,
+          height: 0,
+        );
+        // add it to the database:
+        await sl.get<DBHelper>().addTXData(newGiftTXData);
+        // hack to get tx memo to update:
+        EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
       }
     } catch (e) {
       // Send failed

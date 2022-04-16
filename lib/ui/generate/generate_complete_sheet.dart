@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +32,10 @@ class GenerateCompleteSheet extends StatefulWidget {
 class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
   String amount;
   String destinationAltered;
+  // Current state references
+  bool _linkCopied = false;
+  // Timer reference so we can cancel repeated events
+  Timer _linkCopiedTimer;
 
   @override
   void initState() {
@@ -167,10 +173,26 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).copyLink, context),
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      AppButton.buildAppButton(
+                          context,
+                          // Share Address Button
+                          _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                          _linkCopied ? AppLocalization.of(context).linkCopied : AppLocalization.of(context).copyLink,
+                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
                         // Navigator.of(context).pop();
                         Clipboard.setData(new ClipboardData(text: widget.sharableLink));
+                        setState(() {
+                          // Set copied style
+                          _linkCopied = true;
+                        });
+                        if (_linkCopiedTimer != null) {
+                          _linkCopiedTimer.cancel();
+                        }
+                        _linkCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                          setState(() {
+                            _linkCopied = false;
+                          });
+                        });
                       }),
                     ],
                   ),

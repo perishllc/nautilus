@@ -4,6 +4,7 @@ import 'dart:io' as io;
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
+import 'package:nautilus_wallet_flutter/model/db/blocked.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -66,7 +67,10 @@ class DBHelper {
         memo TEXT,
         uuid TEXT,
         is_acknowledged BOOLEAN,
-        height INTEGER)""";
+        height INTEGER,
+        record_type TEXT,
+        metadata TEXT,
+        status TEXT)""";
   static const String USER_ADD_BLOCKED_COLUMN_SQL = """
     ALTER TABLE Users ADD blocked BOOLEAN
     """;
@@ -300,31 +304,6 @@ class DBHelper {
     return users;
   }
 
-  // Future<bool> blockUser(User user) async {
-  //   var dbClient = await db;
-  //   return await dbClient.rawUpdate("UPDATE users SET blocked = ? WHERE address = ?", [1, user.address]) > 0;
-  // }
-
-  // Future<bool> unblockUser(User user) async {
-  //   var dbClient = await db;
-  //   return await dbClient.rawUpdate("UPDATE users SET blocked = ? WHERE address = ?", [0, user.address]) > 0;
-  // }
-
-  Future<int> blockUser(User user) async {
-    var dbClient = await db;
-    return await dbClient.rawInsert('INSERT INTO BlockedUsers (username, address) values(?, ?)', [user.username, user.address.replaceAll("xrb_", "nano_")]);
-  }
-
-  Future<bool> unblockUser(User user) async {
-    var dbClient = await db;
-    if (user.username != null) {
-      return await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(username) like \'%${user.username.toLowerCase()}\'") > 0;
-    } else if (user.address != null) {
-      return await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(address) like \'%${user.address.toLowerCase()}\'") > 0;
-    }
-    return false;
-  }
-
   Future<User> getUserWithAddress(String address) async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
@@ -343,26 +322,6 @@ class DBHelper {
       return list[0]["username"];
     }
     return null;
-  }
-
-  // Future<List<User>> getBlockedUsers() async {
-  //   var dbClient = await db;
-  //   List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE blocked = 1 ORDER BY LOWER(username)');
-  //   List<User> users = [];
-  //   for (int i = 0; i < list.length; i++) {
-  //     users.add(new User(username: list[i]["username"], address: list[i]["address"], blocked: true));
-  //   }
-  //   return null;
-  // }
-
-  Future<List<User>> getBlockedUsers() async {
-    var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM BlockedUsers');
-    List<User> users = [];
-    for (int i = 0; i < list.length; i++) {
-      users.add(new User(username: list[i]["username"], address: list[i]["address"]));
-    }
-    return users;
   }
 
   Future<dynamic> getUserOrContactWithAddress(String address) async {
@@ -444,6 +403,56 @@ class DBHelper {
     return await dbClient.rawDelete("DELETE FROM Users WHERE lower(username) like \'%${user.username.toLowerCase()}\'") > 0;
   }
 
+  // Blocked
+  Future<List<Blocked>> getBlockedUsers() async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM BlockedUsers ORDER BY name');
+    List<Blocked> blocked = [];
+    for (int i = 0; i < list.length; i++) {
+      blocked.add(new Blocked(username: list[i]["username"], address: list[i]["address"], name: list[i]["name"]));
+    }
+    return blocked;
+  }
+
+  Future<int> blockUser(Blocked blocked) async {
+    var dbClient = await db;
+    return await dbClient.rawInsert(
+        'INSERT INTO BlockedUsers (username, address, name) values(?, ?, ?)', [blocked.username, blocked.address.replaceAll("xrb_", "nano_"), blocked.name]);
+  }
+
+  Future<bool> unblockUser(Blocked blocked) async {
+    var dbClient = await db;
+    if (blocked.username != null) {
+      return await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(username) like \'%${blocked.username.toLowerCase()}\'") > 0;
+    } else if (blocked.address != null) {
+      return await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(address) like \'%${blocked.address.toLowerCase()}\'") > 0;
+    } else if (blocked.name != null) {
+      return await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(name) like \'%${blocked.name.toLowerCase()}\'") > 0;
+    }
+    return false;
+  }
+
+  Future<bool> blockedExistsWithName(String name) async {
+    var dbClient = await db;
+    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM BlockedUsers WHERE lower(name) = ?', [name.toLowerCase()]));
+    return count > 0;
+  }
+
+  Future<bool> blockedExistsWithAddress(String address) async {
+    var dbClient = await db;
+    int count = Sqflite.firstIntValue(
+        await dbClient.rawQuery('SELECT count(*) FROM BlockedUsers WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\''));
+    return count > 0;
+  }
+
+  Future<bool> blockedExistsWithUsername(String username) async {
+    var dbClient = await db;
+    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM BlockedUsers WHERE lower(username) = ?', [username.toLowerCase()]));
+    return count > 0;
+  }
+
+  // txData
+
   Future<int> addTXData(TXData txData) async {
     var dbClient = await db;
     // id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -460,7 +469,7 @@ class DBHelper {
     // return await dbClient.rawInsert('INSERT INTO Transactions (username, address) values(?, ?)', [txData.username, user.address.replaceAll("xrb_", "nano_")]);
 
     return await dbClient.rawInsert(
-        'INSERT INTO Transactions (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, memo, uuid, is_acknowledged, height) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO Transactions (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, memo, uuid, is_acknowledged, height, record_type, metadata, status) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           txData.from_address,
           txData.to_address,
@@ -474,6 +483,9 @@ class DBHelper {
           txData.uuid,
           txData.is_acknowledged,
           txData.height,
+          txData.record_type,
+          txData.metadata,
+          txData.status,
         ]);
   }
 
@@ -486,7 +498,7 @@ class DBHelper {
 
     return await dbClient.rawUpdate(
         // 'UPDATE Transactions SET (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, memo, is_acknowledged, height) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE uuid = ?',
-        'UPDATE Transactions SET from_address = ?, to_address = ?, amount_raw = ?, is_request = ?, request_time = ?, is_fulfilled = ?, fulfillment_time = ?, block = ?, memo = ?, is_acknowledged = ?, height = ? WHERE uuid = ?',
+        'UPDATE Transactions SET from_address = ?, to_address = ?, amount_raw = ?, is_request = ?, request_time = ?, is_fulfilled = ?, fulfillment_time = ?, block = ?, memo = ?, is_acknowledged = ?, height = ?, record_type = ?, metadata = ?, status = ? WHERE uuid = ?',
         [
           txData.from_address,
           txData.to_address,
@@ -499,6 +511,9 @@ class DBHelper {
           (txData.memo == null || txData.memo.isEmpty) ? "" : txData.memo,
           txData.is_acknowledged ? 1 : 0,
           txData.height,
+          txData.record_type,
+          txData.metadata,
+          txData.status,
           // must be last:
           txData.uuid,
         ]);
@@ -523,7 +538,10 @@ class DBHelper {
           memo: list[i]["memo"],
           uuid: list[i]["uuid"],
           is_acknowledged: list[i]["is_acknowledged"] == 0 ? false : true,
-          height: list[i]["height"]));
+          height: list[i]["height"],
+          record_type: list[i]["record_type"],
+          metadata: list[i]["metadata"],
+          status: list[i]["status"]));
     }
     return transactions;
   }
@@ -545,7 +563,10 @@ class DBHelper {
           memo: list[0]["memo"],
           uuid: list[0]["uuid"],
           is_acknowledged: list[0]["is_acknowledged"] == 0 ? false : true,
-          height: list[0]["height"]);
+          height: list[0]["height"],
+          record_type: list[0]["record_type"],
+          metadata: list[0]["metadata"],
+          status: list[0]["status"]);
     }
     return null;
   }
@@ -571,7 +592,68 @@ class DBHelper {
           memo: list[i]["memo"],
           uuid: list[i]["uuid"],
           is_acknowledged: list[i]["is_acknowledged"] == 0 ? false : true,
-          height: list[i]["height"]));
+          height: list[i]["height"],
+          record_type: list[i]["record_type"],
+          metadata: list[i]["metadata"],
+          status: list[i]["status"]));
+    }
+    return transactions;
+  }
+
+  Future<List<TXData>> getAccountSpecificRequests(String account) async {
+    var dbClient = await db;
+    List<Map> list = await dbClient
+        .rawQuery('SELECT * FROM Transactions WHERE from_address = ? OR to_address = ? AND is_request = 1 ORDER BY request_time DESC', [account, account]);
+    // List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions ORDER BY request_time DESC');
+    List<TXData> transactions = [];
+    for (int i = 0; i < list.length; i++) {
+      // transactions.add(new TXData(username: list[i]["username"], address: list[i]["address"].replaceAll("xrb_", "nano_")));
+      transactions.add(new TXData(
+          id: list[i]["id"],
+          from_address: list[i]["from_address"],
+          to_address: list[i]["to_address"],
+          amount_raw: list[i]["amount_raw"],
+          is_request: list[i]["is_request"] == 0 ? false : true,
+          request_time: list[i]["request_time"],
+          is_fulfilled: list[i]["is_fulfilled"] == 0 ? false : true,
+          fulfillment_time: list[i]["fulfillment_time"],
+          block: list[i]["block"],
+          memo: list[i]["memo"],
+          uuid: list[i]["uuid"],
+          is_acknowledged: list[i]["is_acknowledged"] == 0 ? false : true,
+          height: list[i]["height"],
+          record_type: list[i]["record_type"],
+          metadata: list[i]["metadata"],
+          status: list[i]["status"]));
+    }
+    return transactions;
+  }
+
+  Future<List<TXData>> getAccountSpecificRecords(String account) async {
+    var dbClient = await db;
+    List<Map> list = await dbClient
+        .rawQuery('SELECT * FROM Transactions WHERE from_address = ? OR to_address = ? AND is_request = 0 ORDER BY request_time DESC', [account, account]);
+    // List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions ORDER BY request_time DESC');
+    List<TXData> transactions = [];
+    for (int i = 0; i < list.length; i++) {
+      // transactions.add(new TXData(username: list[i]["username"], address: list[i]["address"].replaceAll("xrb_", "nano_")));
+      transactions.add(new TXData(
+          id: list[i]["id"],
+          from_address: list[i]["from_address"],
+          to_address: list[i]["to_address"],
+          amount_raw: list[i]["amount_raw"],
+          is_request: list[i]["is_request"] == 0 ? false : true,
+          request_time: list[i]["request_time"],
+          is_fulfilled: list[i]["is_fulfilled"] == 0 ? false : true,
+          fulfillment_time: list[i]["fulfillment_time"],
+          block: list[i]["block"],
+          memo: list[i]["memo"],
+          uuid: list[i]["uuid"],
+          is_acknowledged: list[i]["is_acknowledged"] == 0 ? false : true,
+          height: list[i]["height"],
+          record_type: list[i]["record_type"],
+          metadata: list[i]["metadata"],
+          status: list[i]["status"]));
     }
     return transactions;
   }
@@ -593,7 +675,10 @@ class DBHelper {
           memo: list[0]["memo"],
           uuid: list[0]["uuid"],
           is_acknowledged: list[0]["is_acknowledged"] == 0 ? false : true,
-          height: list[0]["height"]);
+          height: list[0]["height"],
+          record_type: list[0]["record_type"],
+          metadata: list[0]["metadata"],
+          status: list[0]["status"]);
     }
     return null;
   }
@@ -615,7 +700,10 @@ class DBHelper {
           memo: list[0]["memo"],
           uuid: list[0]["uuid"],
           is_acknowledged: list[0]["is_acknowledged"] == 0 ? false : true,
-          height: list[0]["height"]);
+          height: list[0]["height"],
+          record_type: list[0]["record_type"],
+          metadata: list[0]["metadata"],
+          status: list[0]["status"]);
     }
     return null;
   }
@@ -637,7 +725,10 @@ class DBHelper {
           memo: list[0]["memo"],
           uuid: list[0]["uuid"],
           is_acknowledged: list[0]["is_acknowledged"] == 0 ? false : true,
-          height: list[0]["height"]);
+          height: list[0]["height"],
+          record_type: list[0]["record_type"],
+          metadata: list[0]["metadata"],
+          status: list[0]["status"]);
     }
     return null;
   }
@@ -675,7 +766,10 @@ class DBHelper {
           memo: list[i]["memo"],
           uuid: list[i]["uuid"],
           is_acknowledged: list[i]["is_acknowledged"] == 0 ? false : true,
-          height: list[i]["height"]));
+          height: list[i]["height"],
+          record_type: list[i]["record_type"],
+          metadata: list[i]["metadata"],
+          status: list[i]["status"]));
     }
     return transactions;
   }

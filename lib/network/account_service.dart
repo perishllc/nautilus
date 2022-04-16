@@ -128,6 +128,7 @@ class AccountService {
     // check if the nautilus servers are available
     Socket.connect(_BASE_SERVER_ADDRESS, 5076, timeout: Duration(seconds: 3)).then((socket) {
       log.d("Nautilus backend is up");
+      fallbackConnected = false;
       socket.destroy();
     }).catchError((error) {
       log.d("Nautilus backend is unreachable");
@@ -471,7 +472,8 @@ class AccountService {
   }
 
   // send payment record (memo) to an account:
-  Future<void> sendMemo(String account, String block, String requesting_account, String request_signature, String request_nonce, String memo) async {
+  Future<void> sendTXMemo(
+      String account, String requesting_account, String amount_raw, String request_signature, String request_nonce, String memo, String block) async {
     PaymentMemo request = PaymentMemo(
         account: account, requesting_account: requesting_account, request_signature: request_signature, request_nonce: request_nonce, memo: memo, block: block);
     dynamic response = await makeHttpRequest(request);

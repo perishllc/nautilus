@@ -7,6 +7,7 @@ import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
@@ -312,7 +313,10 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     }
     try {
       // state.lockCallback();
-      // Receive all new blocks to our own account
+      // Receive all new blocks to our own account? doesn't seem to work:
+      if (state != null) {
+        throw Exception("state is null, can't receive own blocks");
+      }
       PendingResponse pr = await sl.get<AccountService>().getPending(state.wallet.address, 20, includeActive: true);
       Map<String, PendingResponseItem> pendingBlocks = pr.blocks;
       for (String hash in pendingBlocks.keys) {
@@ -339,6 +343,12 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
       sl.get<Logger>().e("Error processing wallet", e);
     } finally {
       // state.unlockCallback();
+    }
+
+    if (totalTransferred != BigInt.zero) {
+      // create a txdata to be shown in place of the tx:
+      // TODO:
+      // var newWalletLoad = new TXData(from_address: from_address, to_address: to_address, amount_raw: totalTransferred.toString());
     }
     return totalTransferred;
     // EventTaxiImpl.singleton().fire(TransferCompleteEvent(amount: totalTransferred));

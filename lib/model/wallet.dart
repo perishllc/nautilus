@@ -14,7 +14,7 @@ class AppWallet {
 
   bool _loading; // Whether or not app is initially loading
   bool _historyLoading; // Whether or not we have received initial account history response
-  bool _paymentsLoading;
+  bool _requestsLoading;
   bool _unifiedLoading;
   String _address;
   String _username;
@@ -28,7 +28,7 @@ class AppWallet {
   int _blockCount;
   int confirmationHeight;
   List<AccountHistoryResponseItem> _history;
-  List<TXData> _payments;
+  List<TXData> _requests;
   List<dynamic> _unified;
 
   AppWallet(
@@ -43,10 +43,10 @@ class AppWallet {
       String btcPrice,
       int blockCount,
       List<AccountHistoryResponseItem> history,
-      List<TXData> payments,
+      List<TXData> requests,
       bool loading,
       bool historyLoading,
-      bool paymentsLoading,
+      bool requestsLoading,
       this.confirmationHeight = -1}) {
     this._address = address;
     this._username = username;
@@ -59,11 +59,11 @@ class AppWallet {
     this._btcPrice = btcPrice ?? "0";
     this._blockCount = blockCount ?? 0;
     this._history = history ?? /*new List<AccountHistoryResponseItem>()*/ [];
-    this._payments = payments ?? /*new List<TXData>()*/ [];
+    this._requests = requests ?? /*new List<TXData>()*/ [];
     this._unified = unified ?? /*new List<dynamic>();*/ [];
     this._loading = loading ?? true;
     this._historyLoading = historyLoading ?? true;
-    this._paymentsLoading = paymentsLoading ?? true;
+    this._requestsLoading = requestsLoading ?? true;
     this._unifiedLoading = unifiedLoading ?? true;
   }
 
@@ -163,10 +163,10 @@ class AppWallet {
     _history = value;
   }
 
-  List<TXData> get payments => _payments;
+  List<TXData> get requests => _requests;
 
-  set payments(List<TXData> value) {
-    _payments = value;
+  set requests(List<TXData> value) {
+    _requests = value;
   }
 
   List<dynamic> get unified => _unified;
@@ -187,10 +187,10 @@ class AppWallet {
     _historyLoading = value;
   }
 
-  bool get paymentsLoading => _paymentsLoading;
+  bool get requestsLoading => _requestsLoading;
 
-  set paymentsLoading(bool value) {
-    _paymentsLoading = value;
+  set requestsLoading(bool value) {
+    _requestsLoading = value;
   }
 
   bool get unifiedLoading => _unifiedLoading;

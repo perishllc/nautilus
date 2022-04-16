@@ -19,6 +19,9 @@ TXData _$TXDataFromJson(Map<String, dynamic> json) => TXData(
       uuid: json['uuid'] as String?,
       is_acknowledged: json['is_acknowledged'] as bool?,
       height: json['height'] as int?,
+      record_type: json['record_type'] as String?,
+      metadata: json['metadata'] as String?,
+      status: json['status'] as String?,
     );
 
 Map<String, dynamic> _$TXDataToJson(TXData instance) => <String, dynamic>{
@@ -34,4 +37,7 @@ Map<String, dynamic> _$TXDataToJson(TXData instance) => <String, dynamic>{
       'uuid': instance.uuid,
       'is_acknowledged': instance.is_acknowledged,
       'height': instance.height,
+      'record_type': instance.record_type,
+      'metadata': instance.metadata,
+      'status': instance.status,
     };

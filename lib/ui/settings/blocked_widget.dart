@@ -5,10 +5,14 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/bus/blocked_added_event.dart';
+import 'package:nautilus_wallet_flutter/bus/blocked_removed_event.dart';
 import 'package:nautilus_wallet_flutter/bus/user_added_event.dart';
 import 'package:nautilus_wallet_flutter/bus/user_removed_event.dart';
+import 'package:nautilus_wallet_flutter/model/db/blocked.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/ui/users/add_blocked.dart';
+import 'package:nautilus_wallet_flutter/ui/users/blocked_details.dart';
 import 'package:nautilus_wallet_flutter/ui/users/user_details.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:path_provider/path_provider.dart';
@@ -44,7 +48,7 @@ class BlockedList extends StatefulWidget {
 class _BlockedListState extends State<BlockedList> {
   final Logger log = sl.get<Logger>();
 
-  List<User> _blocked;
+  List<Blocked> _blocked;
   String documentsDirectory;
   @override
   void initState() {
@@ -72,24 +76,24 @@ class _BlockedListState extends State<BlockedList> {
     super.dispose();
   }
 
-  StreamSubscription<UserAddedEvent> _contactAddedSub;
-  StreamSubscription<UserRemovedEvent> _contactRemovedSub;
+  StreamSubscription<BlockedAddedEvent> _contactAddedSub;
+  StreamSubscription<BlockedRemovedEvent> _contactRemovedSub;
 
   void _registerBus() {
     // Contact added bus event
-    _contactAddedSub = EventTaxiImpl.singleton().registerTo<UserAddedEvent>().listen((event) {
+    _contactAddedSub = EventTaxiImpl.singleton().registerTo<BlockedAddedEvent>().listen((event) {
       setState(() {
-        _blocked.add(event.user);
+        _blocked.add(event.blocked);
         //Sort by name
-        _blocked.sort((a, b) => a.username.toLowerCase().compareTo(b.username.toLowerCase()));
+        _blocked.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
       });
       // Full update which includes downloading new monKey
       _updateContacts();
     });
     // Contact removed bus event
-    _contactRemovedSub = EventTaxiImpl.singleton().registerTo<UserRemovedEvent>().listen((event) {
+    _contactRemovedSub = EventTaxiImpl.singleton().registerTo<BlockedRemovedEvent>().listen((event) {
       setState(() {
-        _blocked.remove(event.user);
+        _blocked.remove(event.blocked);
       });
     });
   }
@@ -99,7 +103,7 @@ class _BlockedListState extends State<BlockedList> {
       if (contacts == null) {
         return;
       }
-      for (User c in contacts) {
+      for (Blocked c in contacts) {
         if (!_blocked.contains(c) && mounted) {
           setState(() {
             _blocked.add(c);
@@ -108,7 +112,7 @@ class _BlockedListState extends State<BlockedList> {
       }
       // Re-sort list
       setState(() {
-        _blocked.sort((a, b) => a.username.toLowerCase().compareTo(b.username.toLowerCase()));
+        _blocked.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
       });
     });
   }
@@ -341,10 +345,10 @@ class _BlockedListState extends State<BlockedList> {
         ));
   }
 
-  Widget buildSingleContact(BuildContext context, User user) {
+  Widget buildSingleContact(BuildContext context, Blocked blocked) {
     return FlatButton(
       onPressed: () {
-        UserDetailsSheet(user, documentsDirectory).mainBottomSheet(context);
+        BlockedDetailsSheet(blocked, documentsDirectory).mainBottomSheet(context);
       },
       padding: EdgeInsets.all(0.0),
       child: Column(children: <Widget>[
@@ -364,8 +368,8 @@ class _BlockedListState extends State<BlockedList> {
                   ? Container(
                       width: 64.0,
                       height: 64.0,
-                      child: SvgPicture.network(UIUtil.getNatriconURL(user.address, StateContainer.of(context).getNatriconNonce(user.address)),
-                          key: Key(UIUtil.getNatriconURL(user.address, StateContainer.of(context).getNatriconNonce(user.address))),
+                      child: SvgPicture.network(UIUtil.getNatriconURL(blocked.address, StateContainer.of(context).getNatriconNonce(blocked.address)),
+                          key: Key(UIUtil.getNatriconURL(blocked.address, StateContainer.of(context).getNatriconNonce(blocked.address))),
                           placeholderBuilder: (BuildContext context) => Container(
                                 child: FlareActor(
                                   "legacy_assets/ntr_placeholder_animation.flr",
@@ -386,10 +390,10 @@ class _BlockedListState extends State<BlockedList> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       //Contact name
-                      Text("★" + user.username, style: AppStyles.textStyleSettingItemHeader(context)),
+                      Text("★" + blocked.name, style: AppStyles.textStyleSettingItemHeader(context)),
                       //Contact address
                       Text(
-                        Address(user.address).getShortString(),
+                        Address(blocked.address).getShortString(),
                         style: AppStyles.textStyleTransactionAddress(context),
                       ),
                     ],

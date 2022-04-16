@@ -491,6 +491,7 @@ class _SendSheetState extends State<SendSheet> {
                         // Clear focus of our fields when tapped in this empty space
                         _sendAddressFocusNode.unfocus();
                         _sendAmountFocusNode.unfocus();
+                        _sendMemoFocusNode.unfocus();
                       },
                       child: Container(
                         color: Colors.transparent,
