@@ -358,6 +358,26 @@ class AppLocalization {
 
   /// -- END FAVORITE ITEMS
 
+  /// -- BLOCKED ITEMS
+
+  String get removeBlocked {
+    return Intl.message('Remove Blocked', desc: 'blocked_remove_btn', name: 'removeBlocked');
+  }
+
+  String get removeBlockedConfirmation {
+    return Intl.message('Are you sure you want to delete %1?', desc: 'blocked_remove_sure', name: 'removeBlockedConfirmation');
+  }
+
+  String get blockedAdded {
+    return Intl.message("%1 added to blocked.", desc: 'blocked_added', name: 'blockedAdded');
+  }
+
+  String get blockedRemoved {
+    return Intl.message("%1 has been removed from blocked!", desc: 'blocked_removed', name: 'blockedRemoved');
+  }
+
+  /// -- END BLOCKED ITEMS
+
   /// -- INTRO ITEMS
   String get backupYourSeed {
     return Intl.message('Backup your seed', desc: 'intro_new_wallet_seed_backup_header', name: 'backupYourSeed');
@@ -1083,7 +1103,7 @@ class AppLocalization {
   String get giftInfo {
     return Intl.message('''Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n
 Once created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!
-If the recipient is already a Nautilus user the funds will instantly get a prompt to transfer the funds into their account''',
+If the recipient is already a Nautilus user they will instantly get a prompt to transfer the funds into their account upon opening the link''',
         desc: 'Description for gift card creation', name: 'giftInfo');
   }
 
@@ -1104,6 +1124,10 @@ If the recipient is already a Nautilus user the funds will instantly get a promp
 
   String get linkCopied {
     return Intl.message("Link Copied", desc: 'link_copied', name: 'linkCopied');
+  }
+
+  String get shareLink {
+    return Intl.message("Share Link", desc: 'share_link', name: 'shareLink');
   }
 
   /// END GIFTS

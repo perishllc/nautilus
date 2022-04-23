@@ -5,6 +5,7 @@ import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
@@ -128,6 +129,37 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
     }
   }
 
+  bool _validateRequest() {
+    bool isValid = true;
+    // Validate amount
+    if (_sendAmountController.text.trim().isEmpty) {
+      isValid = false;
+      setState(() {
+        _amountValidationText = AppLocalization.of(context).amountMissing;
+      });
+    } else {
+      String bananoAmount = _localCurrencyMode
+          ? _convertLocalCurrencyToCrypto()
+          : _rawAmount == null
+              ? _sendAmountController.text
+              : NumberUtil.getRawAsUsableString(_rawAmount);
+      BigInt balanceRaw = StateContainer.of(context).wallet.accountBalance;
+      BigInt sendAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
+      if (sendAmount == null || sendAmount == BigInt.zero) {
+        isValid = false;
+        setState(() {
+          _amountValidationText = AppLocalization.of(context).amountMissing;
+        });
+      } else if (sendAmount > balanceRaw) {
+        isValid = false;
+        setState(() {
+          _amountValidationText = AppLocalization.of(context).insufficientBalance;
+        });
+      }
+    }
+    return isValid;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,130 +173,135 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
             children: <Widget>[
               // A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        // Back Button
-                        Container(
-                          margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
-                          height: 50,
-                          width: 50,
-                          child: FlatButton(
-                              highlightColor: StateContainer.of(context).curTheme.text15,
-                              splashColor: StateContainer.of(context).curTheme.text15,
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(0.0),
-                              child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
-                        ),
-                      ],
-                    ),
-                    // Safety icon
-                    Container(
-                      margin: EdgeInsetsDirectional.only(
-                        start: smallScreen(context) ? 30 : 40,
-                        top: 15,
-                      ),
-                      child: Icon(
-                        AppIcons.money_bill_wave,
-                        size: 60,
-                        color: StateContainer.of(context).curTheme.primary,
-                      ),
-                    ),
-                    // The header
-                    Container(
-                      margin: EdgeInsetsDirectional.only(
-                        start: smallScreen(context) ? 30 : 40,
-                        end: smallScreen(context) ? 30 : 40,
-                        top: 10,
-                      ),
-                      alignment: AlignmentDirectional(-1, 0),
-                      child: AutoSizeText(
-                        AppLocalization.of(context).createGiftHeader,
-                        style: AppStyles.textStyleHeaderColored(context),
-                        stepGranularity: 0.1,
-                        maxLines: 1,
-                        minFontSize: 12,
-                      ),
-                    ),
-                    // The paragraph
-                    Container(
-                      margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
-                      alignment: Alignment.centerLeft,
-                      child: Column(
+                child: KeyboardAvoider(
+                  duration: Duration(milliseconds: 0),
+                  autoScroll: true,
+                  focusPadding: 40,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
                         children: <Widget>[
-                          AutoSizeText(
-                            AppLocalization.of(context).giftInfo,
-                            style: AppStyles.textStyleParagraph(context),
-                            maxLines: 10,
-                            stepGranularity: 0.5,
+                          // Back Button
+                          Container(
+                            margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
+                            height: 50,
+                            width: 50,
+                            child: FlatButton(
+                                highlightColor: StateContainer.of(context).curTheme.text15,
+                                splashColor: StateContainer.of(context).curTheme.text15,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                padding: EdgeInsets.all(0.0),
+                                child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                           ),
-                          // Container(
-                          //   margin: EdgeInsetsDirectional.only(top: 15),
-                          //   child: Text("$paper_wallet_seed $paper_wallet_account"),
-                          // ),
                         ],
                       ),
-                    ),
-                    // ******* Enter Amount Container ******* //
-                    getEnterAmountContainer(),
-                    // ******* Enter Amount Container End ******* //
-
-                    // ******* Enter Amount Error Container ******* //
-                    Container(
-                      alignment: AlignmentDirectional(0, 0),
-                      margin: EdgeInsets.only(top: 3),
-                      child: Text(_amountValidationText,
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: StateContainer.of(context).curTheme.primary,
-                            fontFamily: 'NunitoSans',
-                            fontWeight: FontWeight.w600,
-                          )),
-                    ),
-
-                    // ******* Enter Amount Error Container End ******* //
-                    // Column for Enter Memo container + Enter Memo Error container
-                    Column(
-                      children: <Widget>[
-                        Container(
-                          alignment: Alignment.topCenter,
-                          child: Stack(
-                            alignment: Alignment.topCenter,
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                                alignment: Alignment.bottomCenter,
-                                constraints: BoxConstraints(maxHeight: 80, minHeight: 0),
-                              ),
-
-                              // ******* Enter Memo Container ******* //
-                              getEnterMemoContainer(),
-                              // ******* Enter Memo Container End ******* //
-                            ],
-                          ),
+                      // Safety icon
+                      Container(
+                        margin: EdgeInsetsDirectional.only(
+                          start: smallScreen(context) ? 30 : 40,
+                          top: 15,
                         ),
+                        child: Icon(
+                          AppIcons.money_bill_wave,
+                          size: 60,
+                          color: StateContainer.of(context).curTheme.primary,
+                        ),
+                      ),
+                      // The header
+                      Container(
+                        margin: EdgeInsetsDirectional.only(
+                          start: smallScreen(context) ? 30 : 40,
+                          end: smallScreen(context) ? 30 : 40,
+                          top: 10,
+                        ),
+                        alignment: AlignmentDirectional(-1, 0),
+                        child: AutoSizeText(
+                          AppLocalization.of(context).createGiftHeader,
+                          style: AppStyles.textStyleHeaderColored(context),
+                          stepGranularity: 0.1,
+                          maxLines: 1,
+                          minFontSize: 12,
+                        ),
+                      ),
+                      // The paragraph
+                      Container(
+                        margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          children: <Widget>[
+                            AutoSizeText(
+                              AppLocalization.of(context).giftInfo,
+                              style: AppStyles.textStyleParagraph(context),
+                              maxLines: 10,
+                              stepGranularity: 0.5,
+                            ),
+                            // Container(
+                            //   margin: EdgeInsetsDirectional.only(top: 15),
+                            //   child: Text("$paper_wallet_seed $paper_wallet_account"),
+                            // ),
+                          ],
+                        ),
+                      ),
+                      // ******* Enter Amount Container ******* //
+                      getEnterAmountContainer(),
+                      // ******* Enter Amount Container End ******* //
 
-                        // ******* Enter Memo Error Container ******* //
-                        Container(
-                          alignment: AlignmentDirectional(0, 0),
-                          margin: EdgeInsets.only(top: 3),
-                          child: Text(_memoValidationText,
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                color: StateContainer.of(context).curTheme.primary,
-                                fontFamily: 'NunitoSans',
-                                fontWeight: FontWeight.w600,
-                              )),
-                        )
-                        // ******* Enter Memo Error Container End ******* //
-                      ],
-                    ),
-                  ],
+                      // ******* Enter Amount Error Container ******* //
+                      Container(
+                        alignment: AlignmentDirectional(0, 0),
+                        margin: EdgeInsets.only(top: 3),
+                        child: Text(_amountValidationText,
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: StateContainer.of(context).curTheme.primary,
+                              fontFamily: 'NunitoSans',
+                              fontWeight: FontWeight.w600,
+                            )),
+                      ),
+
+                      // ******* Enter Amount Error Container End ******* //
+                      // Column for Enter Memo container + Enter Memo Error container
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            alignment: Alignment.topCenter,
+                            child: Stack(
+                              alignment: Alignment.topCenter,
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                  alignment: Alignment.bottomCenter,
+                                  constraints: BoxConstraints(maxHeight: 80, minHeight: 0),
+                                ),
+
+                                // ******* Enter Memo Container ******* //
+                                getEnterMemoContainer(),
+                                // ******* Enter Memo Container End ******* //
+                              ],
+                            ),
+                          ),
+
+                          // ******* Enter Memo Error Container ******* //
+                          Container(
+                            alignment: AlignmentDirectional(0, 0),
+                            margin: EdgeInsets.only(top: 3),
+                            child: Text(_memoValidationText,
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  color: StateContainer.of(context).curTheme.primary,
+                                  fontFamily: 'NunitoSans',
+                                  fontWeight: FontWeight.w600,
+                                )),
+                          )
+                          // ******* Enter Memo Error Container End ******* //
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
 
@@ -274,13 +311,11 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                 children: <Widget>[
                   AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).createGiftCard, Dimens.BUTTON_BOTTOM_DIMENS,
                       onPressed: () {
-                    if (_sendAmountController.text.isEmpty) {
-                      setState(() {
-                        _amountValidationText = AppLocalization.of(context).amountMissing;
-                      });
+                    bool isValid = _validateRequest();
+                    if (!isValid) {
                       return;
                     }
-                    // nothing for now
+
                     Sheets.showAppHeightNineSheet(
                         context: context,
                         widget: GenerateConfirmSheet(

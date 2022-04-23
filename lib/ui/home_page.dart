@@ -65,6 +65,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:share/share.dart';
 
 class AppHomePage extends StatefulWidget {
   PriceConversion priceConversion;
@@ -613,6 +614,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     });
   }
 
+  bool isEmptyOrNull(String s) {
+    if (s == null || s.isEmpty) {
+      return true;
+    }
+    return false;
+  }
+
   void _updateTXDetailsMap(String account) {
     sl.get<DBHelper>().getAccountSpecificRecords(account).then((data) {
       setState(() {
@@ -622,9 +630,35 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           if (tx.is_request) {
             continue;
           }
-          if (tx.block != null && tx.block.isNotEmpty) {
-            _txDetailsMap[tx.block] = tx;
+          // if (tx.block != null && tx.block.isNotEmpty) {
+          //   _txDetailsMap[tx.block] = tx;
+          // }
+          print("memo: ${tx.memo} send_block ${tx.send_block} recv_block ${tx.recv_block}");
+          if (isEmptyOrNull(tx.recv_block) && tx.send_block != null) {
+            // find if there's a matching recv_block:
+            for (var histItem in StateContainer.of(context).wallet.history) {
+              // print(histItem.link);
+              if (histItem.link == tx.send_block) {
+                // found match:
+                print("found match: ${tx.send_block} ${histItem.link}");
+                tx.recv_block = histItem.hash;
+                // save to db:
+                sl.get<DBHelper>().replaceTXDataByUUID(tx);
+                break;
+              }
+              // if (tx2.send_block == tx.send_block && tx2.recv_block != null) {
+              //   _txDetailsMap[tx.send_block] = tx;
+              //   break;
+              // }
+            }
           }
+
+          if (tx.send_block != null && tx.from_address == account) {
+            _txDetailsMap[tx.send_block] = tx;
+          } else if (tx.recv_block != null && tx.to_address == account) {
+            _txDetailsMap[tx.recv_block] = tx;
+          }
+
           // if (tx.memo != null && tx.memo.isNotEmpty && tx.block != null && tx.block.isNotEmpty) {
           //   _memoMap[tx.block] = tx.memo;
           // }
@@ -899,7 +933,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     int propertyB = b.height;
     if (propertyA == null || propertyB == null) {
       // this shouldn't happen but it does if there's a bug:
-      throw new Exception("Null height in comparison");
+      // throw new Exception("Null height in comparison");
+      // TODO:
+      propertyA = 0;
+      propertyB = 0;
     }
 
     // both are AccountHistoryResponseItems:
@@ -914,8 +951,18 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // if both are TXData, sort by request time:
     } else if (a is TXData && b is TXData) {
       if (a is TXData && b is TXData) {
-        int a_time = int.parse(a.request_time);
-        int b_time = int.parse(b.request_time);
+        int a_time;
+        int b_time;
+        try {
+          a_time = int.parse(a.request_time);
+        } catch (e) {
+          a_time = 0;
+        }
+        try {
+          b_time = int.parse(b.request_time);
+        } catch (e) {
+          b_time = 0;
+        }
 
         if (a_time < b_time) {
           return 1;
@@ -924,6 +971,24 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         } else {
           return 0;
         }
+      }
+    }
+
+    if (a is TXData) {
+      if (a.send_height != null && a.from_address == StateContainer.of(context).wallet.address) {
+        propertyA = a.send_height;
+      }
+      if (a.recv_height != null && a.to_address == StateContainer.of(context).wallet.address) {
+        propertyA = a.recv_height;
+      }
+    }
+
+    if (b is TXData) {
+      if (b.send_height != null && b.from_address == StateContainer.of(context).wallet.address) {
+        propertyB = b.send_height;
+      }
+      if (b.recv_height != null && b.to_address == StateContainer.of(context).wallet.address) {
+        propertyB = b.recv_height;
       }
     }
 
@@ -2458,17 +2523,18 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     }
 
-    if (isPaymentRequest) {
-      bool slideEnabled = false;
-
-      // valid wallet:
-      if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero) {
-        // does it make sense to make it slideable?
-        if (isRecipient && !item.is_fulfilled) {
-          slideEnabled = true;
-        }
+    bool slideEnabled = false;
+    // valid wallet:
+    if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero) {
+      // does it make sense to make it slideable?
+      if (isPaymentRequest && isRecipient && !item.is_fulfilled) {
+        slideEnabled = true;
+      } else if (!isGift) {
+        slideEnabled = true;
       }
+    }
 
+    if (isPaymentRequest) {
       return Slidable(
         delegate: SlidableScrollDelegate(),
         actionExtentRatio: 0.35,
@@ -2650,7 +2716,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         delegate: SlidableScrollDelegate(),
         actionExtentRatio: 0.35,
         movementDuration: Duration(milliseconds: 300),
-        enabled: StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero,
+        enabled: slideEnabled,
         onTriggered: (preempt) {
           if (preempt) {
             setState(() {
@@ -2658,16 +2724,43 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             });
           } else {
             // See if a contact
-            sl.get<DBHelper>().getContactWithAddress(item.account).then((contact) {
-              // Go to send with address
-              Sheets.showAppHeightNineSheet(
-                  context: context,
-                  widget: SendSheet(
-                    localCurrency: StateContainer.of(context).curCurrency,
-                    contact: contact,
-                    address: item.account,
-                    quickSendAmount: item.amount,
-                  ));
+            sl.get<DBHelper>().getUserOrContactWithAddress(item.account).then((user) {
+              print(item.amount);
+              String quickSendAmount = item.amount;
+              // a bit of a hack since send sheet doesn't have a way to tell if we're in nyano mode on creation:
+              if (StateContainer.of(context).nyanoMode) {
+                quickSendAmount = item.amount + "000000";
+              }
+              if (user is User) {
+                // Go to send with user
+                Sheets.showAppHeightNineSheet(
+                    context: context,
+                    widget: SendSheet(
+                      localCurrency: StateContainer.of(context).curCurrency,
+                      user: user,
+                      address: item.account,
+                      quickSendAmount: quickSendAmount,
+                    ));
+              } else if (user is Contact) {
+                // Go to send with contact
+                Sheets.showAppHeightNineSheet(
+                    context: context,
+                    widget: SendSheet(
+                      localCurrency: StateContainer.of(context).curCurrency,
+                      contact: user,
+                      address: item.account,
+                      quickSendAmount: quickSendAmount,
+                    ));
+              } else {
+                // Go to send with address
+                Sheets.showAppHeightNineSheet(
+                    context: context,
+                    widget: SendSheet(
+                      localCurrency: StateContainer.of(context).curCurrency,
+                      address: item.account,
+                      quickSendAmount: quickSendAmount,
+                    ));
+              }
             });
           }
         },
@@ -2774,7 +2867,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                         ),
                                       ),
                                       TextSpan(
-                                        text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, item.amount),
+                                        text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, item.amount ?? "0"),
                                         style: AppStyles.textStyleTransactionAmount(
                                           context,
                                         ),
@@ -3277,6 +3370,10 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
   bool _linkCopied = false;
   // Timer reference so we can cancel repeated events
   Timer _linkCopiedTimer;
+  // Current state references
+  bool _seedCopied = false;
+  // Timer reference so we can cancel repeated events
+  Timer _seedCopiedTimer;
 
   @override
   Widget build(BuildContext context) {
@@ -3300,9 +3397,16 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
       is_unacknowledged_memo = true;
     }
 
+    String walletSeed;
+    String sharableLink;
     if (widget.is_gift) {
       if (widget.record_type == "gift_load") {
         is_gift_load = true;
+
+        // Get the wallet seed by splitting the metadata by :
+        List<String> metadataList = widget.metadata.split(":");
+        walletSeed = metadataList[0];
+        sharableLink = metadataList[1];
       }
     }
 
@@ -3528,11 +3632,11 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                         children: <Widget>[
                           AppButton.buildAppButton(
                               context,
-                              // Share Address Button
+                              // copy link button
                               _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
                               _linkCopied ? AppLocalization.of(context).linkCopied : AppLocalization.of(context).copyLink,
                               Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                            Clipboard.setData(new ClipboardData(text: widget.metadata));
+                            Clipboard.setData(new ClipboardData(text: sharableLink));
                             setState(() {
                               // Set copied style
                               _linkCopied = true;
@@ -3545,6 +3649,46 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                                 _linkCopied = false;
                               });
                             });
+                          }),
+                        ],
+                      )
+                    : Container(),
+                is_gift_load
+                    ? Row(
+                        children: <Widget>[
+                          AppButton.buildAppButton(
+                              context,
+                              // copy seed button
+                              _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                              _seedCopied ? AppLocalization.of(context).seedCopied : AppLocalization.of(context).copySeed,
+                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                            Clipboard.setData(new ClipboardData(text: walletSeed));
+                            setState(() {
+                              // Set copied style
+                              _seedCopied = true;
+                            });
+                            if (_seedCopiedTimer != null) {
+                              _seedCopiedTimer.cancel();
+                            }
+                            _seedCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                              setState(() {
+                                _seedCopied = false;
+                              });
+                            });
+                          }),
+                        ],
+                      )
+                    : Container(),
+                is_gift_load
+                    ? Row(
+                        children: <Widget>[
+                          AppButton.buildAppButton(
+                              context,
+                              // share link button
+                              AppButtonType.PRIMARY,
+                              AppLocalization.of(context).shareLink,
+                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                            Share.share(sharableLink);
                           }),
                         ],
                       )

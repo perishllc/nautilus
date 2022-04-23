@@ -24,15 +24,19 @@ class AccountHistoryResponseItem {
   @JsonKey(name: 'height', fromJson: _toInt)
   int height;
 
+  @JsonKey(name: 'link')
+  String link;
+
   @JsonKey(ignore: true)
   bool confirmed;
 
-  AccountHistoryResponseItem({String type, String account, String amount, String hash, int height, this.confirmed}) {
+  AccountHistoryResponseItem({String type, String account, String amount, String hash, int height, String link, this.confirmed}) {
     this.type = type;
     this.account = account;
     this.amount = amount;
     this.hash = hash;
     this.height = height;
+    this.link = link;
   }
 
   String getShortString() {

@@ -15,10 +15,14 @@ class AccountHistoryRequest extends BaseRequest {
   @JsonKey(name: 'count', includeIfNull: false)
   int count;
 
-  AccountHistoryRequest({String action, String account, int count}) : super() {
+  @JsonKey(name: 'raw')
+  bool raw;
+
+  AccountHistoryRequest({String action, String account, int count, bool raw}) : super() {
     this.action = Actions.ACCOUNT_HISTORY;
     this.account = account ?? "";
     this.count = count ?? 3000;
+    this.raw = raw ?? false;
   }
 
   factory AccountHistoryRequest.fromJson(Map<String, dynamic> json) => _$AccountHistoryRequestFromJson(json);

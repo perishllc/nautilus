@@ -24,6 +24,12 @@ class TXData {
   int id;
   @JsonKey(name: 'block')
   String block;
+  @JsonKey(name: 'link')
+  String link;
+  @JsonKey(name: 'send_block')
+  String send_block;
+  @JsonKey(name: 'recv_block')
+  String recv_block;
   @JsonKey(name: 'from_address')
   String from_address;
   @JsonKey(name: 'to_address')
@@ -46,6 +52,10 @@ class TXData {
   bool is_acknowledged;
   @JsonKey(name: 'height')
   int height;
+  @JsonKey(name: 'send_height')
+  int send_height;
+  @JsonKey(name: 'recv_height')
+  int recv_height;
   @JsonKey(name: 'record_type')
   String record_type;
   @JsonKey(name: 'metadata')
@@ -56,16 +66,21 @@ class TXData {
   TXData(
       {@required this.from_address,
       @required this.to_address,
-      @required this.amount_raw,
+      this.amount_raw,
       this.is_request,
       this.request_time,
       this.is_fulfilled,
       this.fulfillment_time,
       this.block,
+      this.link,
+      this.send_block,
+      this.recv_block,
       this.memo,
       this.uuid,
       this.is_acknowledged,
       this.height,
+      this.send_height,
+      this.recv_height,
       this.record_type,
       this.metadata,
       this.status,
@@ -97,10 +112,15 @@ class TXData {
         is_fulfilled: json["is_fulfilled"] as bool,
         fulfillment_time: json["fulfillment_time"] as String,
         block: json["block"] as String,
+        link: json["link"] as String,
+        send_block: json["send_block"] as String,
+        recv_block: json["recv_block"] as String,
         memo: json["memo"] as String,
         uuid: json["uuid"] as String,
         is_acknowledged: json["is_acknowledged"] as bool,
         height: json["height"] as int,
+        send_height: json["send_height"] as int,
+        recv_height: json["recv_height"] as int,
         record_type: json["record_type"] as String,
         metadata: json["metadata"] as String,
         status: json["status"] as String);
@@ -109,6 +129,8 @@ class TXData {
   bool operator ==(o) =>
       o is TXData &&
       o.height == height &&
+      o.send_height == send_height &&
+      o.recv_height == recv_height &&
       o.uuid == uuid &&
       o.is_fulfilled == is_fulfilled &&
       o.is_request == is_request &&
@@ -118,6 +140,9 @@ class TXData {
       o.request_time == request_time &&
       o.fulfillment_time == fulfillment_time &&
       o.block == block &&
+      o.link == link &&
+      o.send_block == send_block &&
+      o.recv_block == recv_block &&
       o.memo == memo &&
       o.is_acknowledged == is_acknowledged &&
       o.record_type == record_type &&

@@ -16,6 +16,7 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:share/share.dart';
 
 class GenerateCompleteSheet extends StatefulWidget {
   final String amountRaw;
@@ -23,8 +24,9 @@ class GenerateCompleteSheet extends StatefulWidget {
   final String contactName;
   final String localAmount;
   final String sharableLink;
+  final String walletSeed;
 
-  GenerateCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.sharableLink}) : super();
+  GenerateCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.sharableLink, this.walletSeed}) : super();
 
   _GenerateCompleteSheetState createState() => _GenerateCompleteSheetState();
 }
@@ -36,6 +38,10 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
   bool _linkCopied = false;
   // Timer reference so we can cancel repeated events
   Timer _linkCopiedTimer;
+  // Current state references
+  bool _seedCopied = false;
+  // Timer reference so we can cancel repeated events
+  Timer _seedCopiedTimer;
 
   @override
   void initState() {
@@ -196,6 +202,42 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                       }),
                     ],
                   ),
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context,
+                          // copy seed button
+                          _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                          _seedCopied ? AppLocalization.of(context).seedCopied : AppLocalization.of(context).copySeed,
+                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                        Clipboard.setData(new ClipboardData(text: widget.walletSeed));
+                        setState(() {
+                          // Set copied style
+                          _seedCopied = true;
+                        });
+                        if (_seedCopiedTimer != null) {
+                          _seedCopiedTimer.cancel();
+                        }
+                        _seedCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                          setState(() {
+                            _seedCopied = false;
+                          });
+                        });
+                      }),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context,
+                          // share link button
+                          AppButtonType.PRIMARY,
+                          AppLocalization.of(context).shareLink,
+                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                        Share.share(widget.sharableLink);
+                      }),
+                    ],
+                  )
                 ],
               ),
             ),

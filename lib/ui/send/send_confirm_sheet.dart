@@ -361,32 +361,41 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           throw Exception("Invalid signature?!");
         }
 
+        // create a local memo object:
+        var uuid = Uuid();
+        String localUuid = "LOCAL:" + uuid.v4();
+        var newRequestTXData = new TXData(
+          from_address: StateContainer.of(context).wallet.address,
+          to_address: destinationAltered,
+          amount_raw: widget.amountRaw,
+          uuid: localUuid,
+          block: resp.hash,
+          send_block: resp.hash,
+          is_acknowledged: false,
+          is_fulfilled: false,
+          is_request: false,
+          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+          memo: widget.memo,
+          height: 0,
+        );
+        // add it to the database:
+        await sl.get<DBHelper>().addTXData(newRequestTXData);
+
         try {
+          print("sending memo now!");
           await sl
               .get<AccountService>()
-              .sendTXMemo(destinationAltered, StateContainer.of(context).wallet.address, widget.amountRaw, signature, nonce_hex, widget.memo, null);
+              .sendTXMemo(destinationAltered, StateContainer.of(context).wallet.address, widget.amountRaw, signature, nonce_hex, widget.memo, resp.hash);
         } catch (e) {
           memoSendFailed = true;
         }
 
-        if (!memoSendFailed) {
-          // create a local memo object:
-          var uuid = Uuid();
-          var newRequestTXData = new TXData(
-            from_address: StateContainer.of(context).wallet.address,
-            to_address: destinationAltered,
-            amount_raw: widget.amountRaw,
-            uuid: "LOCAL:" + uuid.v4(),
-            block: resp.hash,
-            is_acknowledged: false,
-            is_fulfilled: false,
-            is_request: false,
-            request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
-            memo: widget.memo,
-            height: 0,
-          );
-          // add it to the database:
-          await sl.get<DBHelper>().addTXData(newRequestTXData);
+        // if the memo send failed delete the object:
+        if (memoSendFailed) {
+          print("memo send failed, deleting TXData object");
+          // remove from the database:
+          await sl.get<DBHelper>().deleteTXDataByUuid(localUuid);
+        } else {
           // hack to get tx memo to update:
           EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
         }

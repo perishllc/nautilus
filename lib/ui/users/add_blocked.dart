@@ -6,6 +6,8 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/bus/blocked_added_event.dart';
+import 'package:nautilus_wallet_flutter/bus/blocked_modified_event.dart';
 import 'package:nautilus_wallet_flutter/bus/user_added_event.dart';
 import 'package:nautilus_wallet_flutter/bus/user_modified_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -581,32 +583,28 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).blockUser, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       if (await validateForm()) {
+                        Blocked newBlocked;
                         // if we're given an address with corresponding username, just block:
                         if (_correspondingUsername != null) {
-                          Blocked newUser =
-                              Blocked(name: _nameController.text.substring(1), address: _addressController.text, username: _correspondingUsername);
-                          sl.get<DBHelper>().blockUser(newUser);
+                          newBlocked = Blocked(name: _nameController.text.substring(1), address: _addressController.text, username: _correspondingUsername);
+                          sl.get<DBHelper>().blockUser(newBlocked);
                         } else if (_correspondingAddress != null) {
                           // print("Block user with address: ${_correspondingAddress} text: ${_addressController.text} and name: ${_nameController.text}");
-                          Blocked newUser =
+                          newBlocked =
                               Blocked(name: _nameController.text.substring(1), address: _correspondingAddress, username: _addressController.text.substring(1));
-                          sl.get<DBHelper>().blockUser(newUser);
+                          sl.get<DBHelper>().blockUser(newBlocked);
                           // find if the corresponding address to the username:
                           // String correspondingAddress = await sl.get<DBHelper>().getAddressFromUsername(_correspondingUsername);
                           // TODO:
+                        } else {
+                          // just an address:
+                          newBlocked = Blocked(name: _nameController.text.substring(1), address: _addressController.text);
+                          sl.get<DBHelper>().blockUser(newBlocked);
                         }
-
-                        // Blocked newUser = Blocked(username: _nameController.text, address: widget.address == null ? _addressController.text : widget.address);
-                        // sl.get<DBHelper>().blockUser(newUser);
-                        // TODO: finish this
-
-                        // User newContact = User(username: _nameController.text, address: widget.address == null ? _addressController.text : widget.address);
-                        // await sl.get<DBHelper>().saveContact(newContact);
-                        // newContact.address = newContact.address.replaceAll("xrb_", "nano_");
-                        // EventTaxiImpl.singleton().fireUserAddedEvent(user: newUser));
-                        // UIUtil.showSnackbar(AppLocalization.of(context).contactAdded.replaceAll("%1", newContact.name), context);
-                        // EventTaxiImpl.singleton().fire(UserModifiedEvent(user: newContact));
-                        // Navigator.of(context).pop();
+                        EventTaxiImpl.singleton().fire(BlockedAddedEvent(blocked: newBlocked));
+                        UIUtil.showSnackbar(AppLocalization.of(context).blockedAdded.replaceAll("%1", newBlocked.name), context);
+                        EventTaxiImpl.singleton().fire(BlockedModifiedEvent(blocked: newBlocked));
+                        Navigator.of(context).pop();
                       }
                     }),
                   ],
@@ -706,7 +704,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
         _nameValidationText = AppLocalization.of(context).blockedNameMissing;
       });
     } else {
-      bool nameExists = await sl.get<DBHelper>().blockedExistsWithName(_nameController.text);
+      bool nameExists = await sl.get<DBHelper>().blockedExistsWithName(_nameController.text.substring(1));
       if (nameExists) {
         setState(() {
           isValid = false;

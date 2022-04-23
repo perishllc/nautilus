@@ -458,18 +458,32 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                   children: [
                                     // Main balance text
                                     TextSpan(
-                                      text: (account.balance != null ? getCurrencySymbol(context) : "") +
-                                          (account.balance != null && !account.selected
-                                              ? NumberUtil.getRawAsUsableString(account.balance)
-                                              : account.selected
-                                                  ? StateContainer.of(context).wallet.getAccountBalanceDisplay(context)
-                                                  : ""),
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontFamily: "NunitoSans",
-                                        fontWeight: FontWeight.w900,
-                                        color: StateContainer.of(context).curTheme.text,
-                                      ),
+                                      text: '',
+                                      children: [
+                                        displayCurrencyAmount(
+                                          context,
+                                          TextStyle(
+                                              fontSize: 16.0,
+                                              fontFamily: "NunitoSans",
+                                              fontWeight: FontWeight.w900,
+                                              color: StateContainer.of(context).curTheme.text,
+                                              decoration: TextDecoration.lineThrough),
+                                        ),
+                                        TextSpan(
+                                          text: (account.balance != null ? getCurrencySymbol(context) : "") +
+                                              (account.balance != null && !account.selected
+                                                  ? getRawAsThemeAwareAmount(context, account.balance)
+                                                  : account.selected
+                                                      ? StateContainer.of(context).wallet.getAccountBalanceDisplay(context)
+                                                      : ""),
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                            fontFamily: "NunitoSans",
+                                            fontWeight: FontWeight.w900,
+                                            color: StateContainer.of(context).curTheme.text,
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ],
                                 ),

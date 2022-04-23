@@ -307,7 +307,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           block: resp.hash,
           record_type: "gift_load",
           status: "created",
-          metadata: response.result,
+          metadata: widget.paperWalletSeed + ":" + response.result,
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,
@@ -333,6 +333,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
               destination: destinationAltered,
               localAmount: widget.localCurrency,
               sharableLink: response.result,
+              walletSeed: widget.paperWalletSeed,
             ));
       } else {
         print('Error : ${response.errorCode} - ${response.errorMessage}');
@@ -349,7 +350,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           block: resp.hash,
           record_type: "gift_load",
           status: "create_failed",
-          metadata: widget.paperWalletSeed,
+          metadata: widget.paperWalletSeed + ":failed",
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,

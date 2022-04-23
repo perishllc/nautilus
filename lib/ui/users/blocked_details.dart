@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:nautilus_wallet_flutter/bus/blocked_modified_event.dart';
+import 'package:nautilus_wallet_flutter/bus/blocked_removed_event.dart';
 
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
@@ -62,20 +64,20 @@ class BlockedDetailsSheet {
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
-                                  AppLocalization.of(context).removeContact,
-                                  AppLocalization.of(context).removeContactConfirmation.replaceAll('%1', blocked.username),
+                                  AppLocalization.of(context).removeBlocked,
+                                  AppLocalization.of(context).removeBlockedConfirmation.replaceAll('%1', blocked.name),
                                   CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
-                                // sl.get<DBHelper>().deleteContact(user).then((deleted) {
-                                //   if (deleted) {
-                                //     // Delete image if exists
-                                //     EventTaxiImpl.singleton().fire(RemovedEvent(contact: user));
-                                //     EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: user));
-                                //     UIUtil.showSnackbar(AppLocalization.of(context).contactRemoved.replaceAll("%1", user.username), context);
-                                //     Navigator.of(context).pop();
-                                //   } else {
-                                //     // TODO - error for failing to delete contact
-                                //   }
-                                // });
+                                sl.get<DBHelper>().unblockUser(blocked).then((deleted) {
+                                  if (deleted) {
+                                    // Delete image if exists
+                                    EventTaxiImpl.singleton().fire(BlockedRemovedEvent(blocked: blocked));
+                                    EventTaxiImpl.singleton().fire(BlockedModifiedEvent(blocked: blocked));
+                                    UIUtil.showSnackbar(AppLocalization.of(context).blockedRemoved.replaceAll("%1", blocked.name), context);
+                                    Navigator.of(context).pop();
+                                  } else {
+                                    // TODO: - error for failing to delete contact
+                                  }
+                                });
                               }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
                             },
                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
@@ -91,7 +93,7 @@ class BlockedDetailsSheet {
                           child: Column(
                             children: <Widget>[
                               AutoSizeText(
-                                CaseChange.toUpperCase(AppLocalization.of(context).favoriteHeader, context),
+                                CaseChange.toUpperCase(AppLocalization.of(context).blockedHeader, context),
                                 style: AppStyles.textStyleHeader(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
@@ -164,11 +166,36 @@ class BlockedDetailsSheet {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16.0,
-                                  color: StateContainer.of(context).curTheme.primary,
+                                  color: StateContainer.of(context).curTheme.text,
                                   fontFamily: 'NunitoSans',
                                 ),
                               ),
                             ),
+                            (blocked.username != null)
+                                ? Container(
+                                    width: double.infinity,
+                                    margin: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width * 0.105,
+                                      right: MediaQuery.of(context).size.width * 0.105,
+                                      top: 15.0,
+                                    ),
+                                    padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+                                    decoration: BoxDecoration(
+                                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Text(
+                                      "@" + blocked.username,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16.0,
+                                        color: StateContainer.of(context).curTheme.primary,
+                                        fontFamily: 'NunitoSans',
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
                             // Contact Address
                             GestureDetector(
                               onTap: () {

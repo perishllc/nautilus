@@ -89,7 +89,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
 
   bool notNull(Object o) => o != null;
 
-  static const String NYANO_RAW = "1000000000000000000000000";
+  static const String NONE_NYANO = "0";
+  static const String ONE_NYANO = "1000000000000000000000000";
   static const String TEN_NYANO = "10000000000000000000000000";
   static const String HUNDRED_NYANO = "100000000000000000000000000";
   static const String THOUSAND_NYANO = "1000000000000000000000000000";
@@ -157,11 +158,11 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     sl.get<SharedPrefsUtil>().getMinRawReceive().then((minRawReceive) {
       setState(() {
         switch (minRawReceive) {
-          case "0":
+          case NONE_NYANO:
             _curMinRawSetting = MinRawSetting(MinRawOptions.OFF);
             break;
-          case NYANO_RAW:
-            _curMinRawSetting = MinRawSetting(MinRawOptions.NYANO);
+          case ONE_NYANO:
+            _curMinRawSetting = MinRawSetting(MinRawOptions.ONE_NYANO);
             break;
           case TEN_NYANO:
             _curMinRawSetting = MinRawSetting(MinRawOptions.TEN_NYANO);
@@ -539,18 +540,18 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           );
         })) {
       case MinRawOptions.OFF:
-        sl.get<SharedPrefsUtil>().setMinRawReceive("0").then((result) {
+        sl.get<SharedPrefsUtil>().setMinRawReceive(NONE_NYANO).then((result) {
           setState(() {
-            StateContainer.of(context).setMinRawReceive("0");
+            StateContainer.of(context).setMinRawReceive(NONE_NYANO);
             _curMinRawSetting = MinRawSetting(MinRawOptions.OFF);
           });
         });
         break;
-      case MinRawOptions.NYANO:
-        sl.get<SharedPrefsUtil>().setMinRawReceive(NYANO_RAW).then((result) {
+      case MinRawOptions.ONE_NYANO:
+        sl.get<SharedPrefsUtil>().setMinRawReceive(ONE_NYANO).then((result) {
           setState(() {
-            StateContainer.of(context).setMinRawReceive(NYANO_RAW);
-            _curMinRawSetting = MinRawSetting(MinRawOptions.NYANO);
+            StateContainer.of(context).setMinRawReceive(ONE_NYANO);
+            _curMinRawSetting = MinRawSetting(MinRawOptions.ONE_NYANO);
           });
         });
         break;

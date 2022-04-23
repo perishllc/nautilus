@@ -64,10 +64,15 @@ class DBHelper {
         is_fulfilled BOOLEAN,
         fulfillment_time TEXT,
         block TEXT,
+        link TEXT,
+        send_block TEXT,
+        recv_block TEXT,
         memo TEXT,
         uuid TEXT,
         is_acknowledged BOOLEAN,
         height INTEGER,
+        send_height INTEGER,
+        recv_height INTEGER,
         record_type TEXT,
         metadata TEXT,
         status TEXT)""";
@@ -115,7 +120,7 @@ class DBHelper {
   // read json and populate users table:
   Future<void> populateDBFromCache() async {
     // delete the old databases:
-    nukeUsers();
+    await nukeUsers();
     // nukeReps();
 
     // get the json from the cache:
@@ -422,14 +427,19 @@ class DBHelper {
 
   Future<bool> unblockUser(Blocked blocked) async {
     var dbClient = await db;
+    bool username = false;
+    bool address = false;
+    bool name = false;
     if (blocked.username != null) {
-      return await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(username) like \'%${blocked.username.toLowerCase()}\'") > 0;
-    } else if (blocked.address != null) {
-      return await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(address) like \'%${blocked.address.toLowerCase()}\'") > 0;
-    } else if (blocked.name != null) {
-      return await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(name) like \'%${blocked.name.toLowerCase()}\'") > 0;
+      username = await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(username) like \'%${blocked.username.toLowerCase()}\'") > 0;
     }
-    return false;
+    if (blocked.address != null) {
+      address = await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(address) like \'%${blocked.address.toLowerCase()}\'") > 0;
+    }
+    if (blocked.name != null) {
+      name = await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(name) like \'%${blocked.name.toLowerCase()}\'") > 0;
+    }
+    return username || address || name;
   }
 
   Future<bool> blockedExistsWithName(String name) async {
@@ -469,7 +479,7 @@ class DBHelper {
     // return await dbClient.rawInsert('INSERT INTO Transactions (username, address) values(?, ?)', [txData.username, user.address.replaceAll("xrb_", "nano_")]);
 
     return await dbClient.rawInsert(
-        'INSERT INTO Transactions (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, memo, uuid, is_acknowledged, height, record_type, metadata, status) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO Transactions (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, link, send_block, recv_block, memo, uuid, is_acknowledged, height, send_height, recv_height, record_type, metadata, status) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           txData.from_address,
           txData.to_address,
@@ -479,10 +489,15 @@ class DBHelper {
           txData.is_fulfilled,
           txData.fulfillment_time,
           txData.block,
+          txData.link,
+          txData.send_block,
+          txData.recv_block,
           txData.memo,
           txData.uuid,
           txData.is_acknowledged,
           txData.height,
+          txData.send_height,
+          txData.recv_height,
           txData.record_type,
           txData.metadata,
           txData.status,
@@ -498,7 +513,7 @@ class DBHelper {
 
     return await dbClient.rawUpdate(
         // 'UPDATE Transactions SET (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, memo, is_acknowledged, height) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE uuid = ?',
-        'UPDATE Transactions SET from_address = ?, to_address = ?, amount_raw = ?, is_request = ?, request_time = ?, is_fulfilled = ?, fulfillment_time = ?, block = ?, memo = ?, is_acknowledged = ?, height = ?, record_type = ?, metadata = ?, status = ? WHERE uuid = ?',
+        'UPDATE Transactions SET from_address = ?, to_address = ?, amount_raw = ?, is_request = ?, request_time = ?, is_fulfilled = ?, fulfillment_time = ?, block = ?, link = ?, send_block = ?, recv_block = ?, memo = ?, is_acknowledged = ?, height = ?, send_height = ?, recv_height = ?, record_type = ?, metadata = ?, status = ? WHERE uuid = ?',
         [
           txData.from_address,
           txData.to_address,
@@ -508,9 +523,14 @@ class DBHelper {
           txData.is_fulfilled ? 1 : 0,
           (txData.fulfillment_time == null || txData.fulfillment_time.isEmpty) ? "" : txData.fulfillment_time,
           (txData.block == null || txData.block.isEmpty) ? "" : txData.block,
+          (txData.link == null || txData.link.isEmpty) ? "" : txData.link,
+          (txData.send_block == null || txData.send_block.isEmpty) ? "" : txData.send_block,
+          (txData.recv_block == null || txData.recv_block.isEmpty) ? "" : txData.recv_block,
           (txData.memo == null || txData.memo.isEmpty) ? "" : txData.memo,
           txData.is_acknowledged ? 1 : 0,
           txData.height,
+          txData.send_height,
+          txData.recv_height,
           txData.record_type,
           txData.metadata,
           txData.status,
@@ -560,10 +580,15 @@ class DBHelper {
           is_fulfilled: list[0]["is_fulfilled"] == 0 ? false : true,
           fulfillment_time: list[0]["fulfillment_time"],
           block: list[0]["block"],
+          link: list[0]["link"],
+          send_block: list[0]["send_block"],
+          recv_block: list[0]["recv_block"],
           memo: list[0]["memo"],
           uuid: list[0]["uuid"],
           is_acknowledged: list[0]["is_acknowledged"] == 0 ? false : true,
           height: list[0]["height"],
+          send_height: list[0]["send_height"],
+          recv_height: list[0]["recv_height"],
           record_type: list[0]["record_type"],
           metadata: list[0]["metadata"],
           status: list[0]["status"]);
@@ -589,10 +614,15 @@ class DBHelper {
           is_fulfilled: list[i]["is_fulfilled"] == 0 ? false : true,
           fulfillment_time: list[i]["fulfillment_time"],
           block: list[i]["block"],
+          link: list[i]["link"],
+          send_block: list[i]["send_block"],
+          recv_block: list[i]["recv_block"],
           memo: list[i]["memo"],
           uuid: list[i]["uuid"],
           is_acknowledged: list[i]["is_acknowledged"] == 0 ? false : true,
           height: list[i]["height"],
+          send_height: list[i]["send_height"],
+          recv_height: list[i]["recv_height"],
           record_type: list[i]["record_type"],
           metadata: list[i]["metadata"],
           status: list[i]["status"]));
@@ -618,10 +648,15 @@ class DBHelper {
           is_fulfilled: list[i]["is_fulfilled"] == 0 ? false : true,
           fulfillment_time: list[i]["fulfillment_time"],
           block: list[i]["block"],
+          link: list[i]["link"],
+          send_block: list[i]["send_block"],
+          recv_block: list[i]["recv_block"],
           memo: list[i]["memo"],
           uuid: list[i]["uuid"],
           is_acknowledged: list[i]["is_acknowledged"] == 0 ? false : true,
           height: list[i]["height"],
+          send_height: list[i]["send_height"],
+          recv_height: list[i]["recv_height"],
           record_type: list[i]["record_type"],
           metadata: list[i]["metadata"],
           status: list[i]["status"]));
@@ -647,10 +682,15 @@ class DBHelper {
           is_fulfilled: list[i]["is_fulfilled"] == 0 ? false : true,
           fulfillment_time: list[i]["fulfillment_time"],
           block: list[i]["block"],
+          link: list[i]["link"],
+          send_block: list[i]["send_block"],
+          recv_block: list[i]["recv_block"],
           memo: list[i]["memo"],
           uuid: list[i]["uuid"],
           is_acknowledged: list[i]["is_acknowledged"] == 0 ? false : true,
           height: list[i]["height"],
+          send_height: list[i]["send_height"],
+          recv_height: list[i]["recv_height"],
           record_type: list[i]["record_type"],
           metadata: list[i]["metadata"],
           status: list[i]["status"]));
@@ -672,10 +712,15 @@ class DBHelper {
           is_fulfilled: list[0]["is_fulfilled"] == 0 ? false : true,
           fulfillment_time: list[0]["fulfillment_time"],
           block: list[0]["block"],
+          link: list[0]["link"],
+          send_block: list[0]["send_block"],
+          recv_block: list[0]["recv_block"],
           memo: list[0]["memo"],
           uuid: list[0]["uuid"],
           is_acknowledged: list[0]["is_acknowledged"] == 0 ? false : true,
           height: list[0]["height"],
+          send_height: list[0]["send_height"],
+          recv_height: list[0]["recv_height"],
           record_type: list[0]["record_type"],
           metadata: list[0]["metadata"],
           status: list[0]["status"]);
@@ -697,10 +742,15 @@ class DBHelper {
           is_fulfilled: list[0]["is_fulfilled"] == 0 ? false : true,
           fulfillment_time: list[0]["fulfillment_time"],
           block: list[0]["block"],
+          link: list[0]["link"],
+          send_block: list[0]["send_block"],
+          recv_block: list[0]["recv_block"],
           memo: list[0]["memo"],
           uuid: list[0]["uuid"],
           is_acknowledged: list[0]["is_acknowledged"] == 0 ? false : true,
           height: list[0]["height"],
+          send_height: list[0]["send_height"],
+          recv_height: list[0]["recv_height"],
           record_type: list[0]["record_type"],
           metadata: list[0]["metadata"],
           status: list[0]["status"]);
@@ -722,10 +772,15 @@ class DBHelper {
           is_fulfilled: list[0]["is_fulfilled"] == 0 ? false : true,
           fulfillment_time: list[0]["fulfillment_time"],
           block: list[0]["block"],
+          link: list[0]["link"],
+          send_block: list[0]["send_block"],
+          recv_block: list[0]["recv_block"],
           memo: list[0]["memo"],
           uuid: list[0]["uuid"],
           is_acknowledged: list[0]["is_acknowledged"] == 0 ? false : true,
           height: list[0]["height"],
+          send_height: list[0]["send_height"],
+          recv_height: list[0]["recv_height"],
           record_type: list[0]["record_type"],
           metadata: list[0]["metadata"],
           status: list[0]["status"]);
@@ -750,7 +805,7 @@ class DBHelper {
 
   Future<List<TXData>> getUnfulfilledTXs() async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE is_fulfilled = 0 ORDER BY request_time');
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE is_fulfilled = 0 AND is_request = 1 ORDER BY request_time');
     List<TXData> transactions = [];
     for (int i = 0; i < list.length; i++) {
       transactions.add(new TXData(
@@ -763,10 +818,15 @@ class DBHelper {
           is_fulfilled: list[i]["is_fulfilled"] == 0 ? false : true,
           fulfillment_time: list[i]["fulfillment_time"],
           block: list[i]["block"],
+          link: list[i]["link"],
+          send_block: list[i]["send_block"],
+          recv_block: list[i]["recv_block"],
           memo: list[i]["memo"],
           uuid: list[i]["uuid"],
           is_acknowledged: list[i]["is_acknowledged"] == 0 ? false : true,
           height: list[i]["height"],
+          send_height: list[i]["send_height"],
+          recv_height: list[i]["recv_height"],
           record_type: list[i]["record_type"],
           metadata: list[i]["metadata"],
           status: list[i]["status"]));

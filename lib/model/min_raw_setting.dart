@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/setting_item.dart';
 
-enum MinRawOptions { OFF, NYANO, TEN_NYANO, HUNDRED_NYANO, THOUSAND_NYANO, TEN_THOUSAND_NYANO, HUNDRED_THOUSAND_NYANO }
+enum MinRawOptions { OFF, ONE_NYANO, TEN_NYANO, HUNDRED_NYANO, THOUSAND_NYANO, TEN_THOUSAND_NYANO, HUNDRED_THOUSAND_NYANO }
 
 /// Represent natricon on/off setting
 class MinRawSetting extends SettingSelectionItem {
@@ -14,7 +14,7 @@ class MinRawSetting extends SettingSelectionItem {
     switch (setting) {
       case MinRawOptions.OFF:
         return AppLocalization.of(context).off;
-      case MinRawOptions.NYANO:
+      case MinRawOptions.ONE_NYANO:
         // todo: localize;
         return '1 nyano';
       case MinRawOptions.TEN_NYANO:

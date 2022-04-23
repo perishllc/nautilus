@@ -438,8 +438,8 @@ class AccountService {
     return item;
   }
 
-  Future<AccountHistoryResponse> requestAccountHistory(String account, {int count = 1}) async {
-    AccountHistoryRequest request = AccountHistoryRequest(account: account, count: count);
+  Future<AccountHistoryResponse> requestAccountHistory(String account, {int count = 1, bool raw = false}) async {
+    AccountHistoryRequest request = AccountHistoryRequest(account: account, count: count, raw: raw);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");

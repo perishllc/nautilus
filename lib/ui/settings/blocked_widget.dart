@@ -67,21 +67,21 @@ class _BlockedListState extends State<BlockedList> {
 
   @override
   void dispose() {
-    if (_contactAddedSub != null) {
-      _contactAddedSub.cancel();
+    if (_blockedAddedSub != null) {
+      _blockedAddedSub.cancel();
     }
-    if (_contactRemovedSub != null) {
-      _contactRemovedSub.cancel();
+    if (_blockedRemovedSub != null) {
+      _blockedRemovedSub.cancel();
     }
     super.dispose();
   }
 
-  StreamSubscription<BlockedAddedEvent> _contactAddedSub;
-  StreamSubscription<BlockedRemovedEvent> _contactRemovedSub;
+  StreamSubscription<BlockedAddedEvent> _blockedAddedSub;
+  StreamSubscription<BlockedRemovedEvent> _blockedRemovedSub;
 
   void _registerBus() {
     // Contact added bus event
-    _contactAddedSub = EventTaxiImpl.singleton().registerTo<BlockedAddedEvent>().listen((event) {
+    _blockedAddedSub = EventTaxiImpl.singleton().registerTo<BlockedAddedEvent>().listen((event) {
       setState(() {
         _blocked.add(event.blocked);
         //Sort by name
@@ -91,7 +91,7 @@ class _BlockedListState extends State<BlockedList> {
       _updateContacts();
     });
     // Contact removed bus event
-    _contactRemovedSub = EventTaxiImpl.singleton().registerTo<BlockedRemovedEvent>().listen((event) {
+    _blockedRemovedSub = EventTaxiImpl.singleton().registerTo<BlockedRemovedEvent>().listen((event) {
       setState(() {
         _blocked.remove(event.blocked);
       });
@@ -389,13 +389,23 @@ class _BlockedListState extends State<BlockedList> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      //Contact name
+                      // Blocked name
                       Text("★" + blocked.name, style: AppStyles.textStyleSettingItemHeader(context)),
-                      //Contact address
-                      Text(
-                        Address(blocked.address).getShortString(),
-                        style: AppStyles.textStyleTransactionAddress(context),
-                      ),
+
+                      (blocked.username != null)
+                          ? Text(
+                              "@" + blocked.username,
+                              style: AppStyles.textStyleTransactionAddress(context),
+                            )
+                          : Container(),
+
+                      // Blocked address
+                      (blocked.address != null)
+                          ? Text(
+                              Address(blocked.address).getShortString(),
+                              style: AppStyles.textStyleTransactionAddress(context),
+                            )
+                          : Container(),
                     ],
                   ),
                 ),
