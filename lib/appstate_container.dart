@@ -452,7 +452,9 @@ class StateContainerState extends State<StateContainer> {
     _fcmUpdateSub = EventTaxiImpl.singleton().registerTo<FcmUpdateEvent>().listen((event) {
       if (wallet != null) {
         sl.get<SharedPrefsUtil>().getNotificationsOn().then((enabled) {
-          sl.get<AccountService>().sendRequest(FcmUpdateRequest(account: wallet.address, fcmToken: event.token, enabled: enabled));
+          sl
+              .get<AccountService>()
+              .sendRequest(FcmUpdateRequest(account: wallet.address, fcmToken: event.token, enabled: enabled));
         });
       }
     });
@@ -766,8 +768,12 @@ class StateContainerState extends State<StateContainer> {
     PendingResponseItem pendingItem = PendingResponseItem(hash: resp.hash, source: resp.account, amount: resp.amount);
     String receivedHash = await handlePendingItem(pendingItem, link_as_account: resp.block.linkAsAccount);
     if (receivedHash != null) {
-      AccountHistoryResponseItem histItem =
-          AccountHistoryResponseItem(type: BlockTypes.RECEIVE, account: resp.account, amount: resp.amount, hash: receivedHash, link: resp.block.link);
+      AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
+          type: BlockTypes.RECEIVE,
+          account: resp.account,
+          amount: resp.amount,
+          hash: receivedHash,
+          link: resp.block.link);
       if (!wallet.history.contains(histItem)) {
         setState(() {
           // TODO: not necessarily the best way to handle this, should get real height:
@@ -807,7 +813,8 @@ class StateContainerState extends State<StateContainer> {
       // Publish open
       sl.get<Logger>().d("Handling ${item.hash} as open");
       try {
-        ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet.address, await _getPrivKey());
+        ProcessResponse resp =
+            await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet.address, await _getPrivKey());
         wallet.openBlock = resp.hash;
         wallet.frontier = resp.hash;
         pendingRequests.remove(item.hash);
@@ -842,15 +849,15 @@ class StateContainerState extends State<StateContainer> {
             for (String hash in pendingBlocks.keys) {
               PendingResponseItem item = pendingBlocks[hash];
               if (balanceItem.frontier != null) {
-                ProcessResponse resp = await sl
-                    .get<AccountService>()
-                    .requestReceive(AppWallet.defaultRepresentative, balanceItem.frontier, item.amount, hash, link_as_account, balanceItem.privKey);
+                ProcessResponse resp = await sl.get<AccountService>().requestReceive(AppWallet.defaultRepresentative,
+                    balanceItem.frontier, item.amount, hash, link_as_account, balanceItem.privKey);
                 if (resp.hash != null) {
                   balanceItem.frontier = resp.hash;
                   totalTransferred += BigInt.parse(item.amount);
                 }
               } else {
-                ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, hash, link_as_account, balanceItem.privKey);
+                ProcessResponse resp =
+                    await sl.get<AccountService>().requestOpen(item.amount, hash, link_as_account, balanceItem.privKey);
                 if (resp.hash != null) {
                   balanceItem.frontier = resp.hash;
                   totalTransferred += BigInt.parse(item.amount);
@@ -863,14 +870,12 @@ class StateContainerState extends State<StateContainer> {
 
           AccountInfoResponse accountResp = await sl.get<AccountService>().getAccountInfo(link_as_account);
 
-          resp = await sl
-              .get<AccountService>()
-              .requestReceive(wallet.representative, accountResp.frontier, item.amount, item.hash, link_as_account, await _getPrivKey());
+          resp = await sl.get<AccountService>().requestReceive(wallet.representative, accountResp.frontier, item.amount,
+              item.hash, link_as_account, await _getPrivKey());
           // throw Exception("Not on the correct account to receive this");
         } else {
-          resp = await sl
-              .get<AccountService>()
-              .requestReceive(wallet.representative, wallet.frontier, item.amount, item.hash, wallet.address, await _getPrivKey());
+          resp = await sl.get<AccountService>().requestReceive(
+              wallet.representative, wallet.frontier, item.amount, item.hash, wallet.address, await _getPrivKey());
         }
         wallet.frontier = resp.hash;
         pendingRequests.remove(item.hash);
@@ -920,7 +925,11 @@ class StateContainerState extends State<StateContainer> {
       }
       sl.get<AccountService>().clearQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
+          account: wallet.address,
+          currency: curCurrency.getIso4217Code(),
+          uuid: uuid,
+          fcmToken: fcmToken,
+          notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().queueRequest(AccountHistoryRequest(account: wallet.address, raw: true));
       sl.get<AccountService>().processQueue();
       // Request account history
@@ -933,7 +942,8 @@ class StateContainerState extends State<StateContainer> {
         count = 50;
       }
       // try {
-      AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count, raw: true);
+      AccountHistoryResponse resp =
+          await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count, raw: true);
       _requestBalances();
       bool postedToHome = false;
       // Iterate list in reverse (oldest to newest block)
@@ -941,8 +951,8 @@ class StateContainerState extends State<StateContainer> {
         // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
         if (!wallet.history.contains(item)) {
           int startIndex = 0; // Index to start inserting into the list
-          int lastIndex = resp.history.indexWhere(
-              (item) => wallet.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+          int lastIndex = resp.history.indexWhere((item) => wallet.history.contains(
+              item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
           lastIndex = lastIndex <= 0 ? resp.history.length : lastIndex;
           setState(() {
             wallet.history.insertAll(0, resp.history.getRange(startIndex, lastIndex));
@@ -968,7 +978,9 @@ class StateContainerState extends State<StateContainer> {
       // Receive pendings
       if (pending) {
         pendingRequests.clear();
-        PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
+        PendingResponse pendingResp = await sl
+            .get<AccountService>()
+            .getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
 
         // for unfulfilled payments:
         List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
@@ -1002,7 +1014,10 @@ class StateContainerState extends State<StateContainer> {
             }
 
             AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
-                type: BlockTypes.RECEIVE, account: pendingResponseItem.source, amount: pendingResponseItem.amount, hash: receivedHash);
+                type: BlockTypes.RECEIVE,
+                account: pendingResponseItem.source,
+                amount: pendingResponseItem.amount,
+                hash: receivedHash);
             if (!wallet.history.contains(histItem)) {
               setState(() {
                 // TODO: not necessarily the best way to handle this, should get real height:
@@ -1039,7 +1054,11 @@ class StateContainerState extends State<StateContainer> {
       }
       sl.get<AccountService>().removeSubscribeHistoryPendingFromQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
+          account: wallet.address,
+          currency: curCurrency.getIso4217Code(),
+          uuid: uuid,
+          fcmToken: fcmToken,
+          notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().processQueue();
     }
   }
@@ -1146,7 +1165,10 @@ class StateContainerState extends State<StateContainer> {
           TXData oldTXData = null;
           for (var tx in transactions) {
             // check if this is a payment we made:
-            if (tx.from_address == wallet.address && tx.to_address == to_address && tx.amount_raw == amount_raw && tx.memo == memo) {
+            if (tx.from_address == wallet.address &&
+                tx.to_address == to_address &&
+                tx.amount_raw == amount_raw &&
+                tx.memo == memo) {
               // make sure we only delete local payments that are withing the last 5 minutes:
               if (tx.uuid.contains("LOCAL")) {
                 if (DateTime.parse(tx.request_time).isAfter(DateTime.now().subtract(Duration(minutes: 5)))) {
@@ -1277,7 +1299,6 @@ class StateContainerState extends State<StateContainer> {
 
       // are we the recipient?
       if (to_address == wallet.address) {
-        // there's no block, so we'll just have to set the block to the most recent matching transaction:
         TXData txData = new TXData(
           // amount_raw: amount_raw,
           is_request: false,
@@ -1285,17 +1306,19 @@ class StateContainerState extends State<StateContainer> {
           to_address: to_address,
           memo: memo,
           is_fulfilled: true,
-          block: null,
+          block: block,
+          link: null,
           uuid: uuid,
-          is_acknowledged: false,
+          is_acknowledged: true,
           height: height,
         );
         bool found = false;
         // loop through our tx history to find the first matching block:
-        for (var hist in wallet.history) {
-          if (hist.account == requesting_account /* && hist.amount == amount_raw*/) {
+        for (var histItem in wallet.history) {
+          if (histItem.link == block) {
             // found a matching transaction, so set the block to that:
-            txData.recv_block = hist.hash;
+            txData.recv_block = histItem.hash;
+            txData.link = histItem.hash;
             found = true;
             break;
           }
@@ -1306,6 +1329,7 @@ class StateContainerState extends State<StateContainer> {
           if (existingTXData != null) {
             // update with the new info:
             existingTXData.recv_block = txData.recv_block;
+            existingTXData.link = txData.link;
             existingTXData.is_acknowledged = true;
             existingTXData.is_fulfilled = true;
             // just in case:
