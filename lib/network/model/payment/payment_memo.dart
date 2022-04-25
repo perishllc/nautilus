@@ -21,8 +21,8 @@ class PaymentMemo extends BaseRequest {
   @JsonKey(name: 'request_nonce')
   String request_nonce;
 
-  @JsonKey(name: 'memo')
-  String memo;
+  @JsonKey(name: 'memo_enc')
+  String memo_enc;
 
   @JsonKey(name: 'block')
   String block;
@@ -30,21 +30,14 @@ class PaymentMemo extends BaseRequest {
   // @JsonKey(name: 'username')
   // String username;
 
-  PaymentMemo(
-      {String action,
-      String account,
-      String requesting_account,
-      String request_signature,
-      String request_nonce,
-      String memo,
-      String block})
+  PaymentMemo({String action, String account, String requesting_account, String request_signature, String request_nonce, String memo_enc, String block})
       : super() {
     this.action = Actions.PAYMENT_MEMO;
     this.account = account ?? "";
     this.requesting_account = requesting_account ?? "";
     this.request_signature = request_signature ?? "";
     this.request_nonce = request_nonce ?? "";
-    this.memo = memo ?? "";
+    this.memo_enc = memo_enc ?? "";
     this.block = block ?? "";
   }
 

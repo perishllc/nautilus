@@ -148,10 +148,11 @@ dependencies:
       url: https://github.com/bbedward/manta-dart.git
       ref: master
 
-  # paper wallet generator in js:
-  # flutter_js: ^0.5.0+5
+  # encryption and decryption until I rewrite the library in dart:
+  flutter_js: ^0.5.0+6
 
   devicelocale: ^0.4.1
+  nanodart: ^2.0.0
 
 dependency_overrides:
   analyzer: ^2.7.0
@@ -299,6 +300,8 @@ flutter:
     - assets/logo-square.png
     # nyano assets:
     - assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png
+    # nano-lib:
+    - assets/nano-lib.js
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

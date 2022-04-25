@@ -13,7 +13,7 @@ PaymentMemo _$PaymentMemoFromJson(Map<String, dynamic> json) {
     requesting_account: json['requesting_account'] as String,
     request_signature: json['request_signature'] as String,
     request_nonce: json['request_nonce'] as String,
-    memo: json['memo'] as String,
+    memo_enc: json['memo_enc'] as String,
     block: json['block'] as String,
   );
 }
@@ -25,7 +25,7 @@ Map<String, dynamic> _$PaymentMemoToJson(PaymentMemo instance) {
     'requesting_account': instance.requesting_account,
     'request_signature': instance.request_signature,
     'request_nonce': instance.request_nonce,
-    'memo': instance.memo,
+    'memo_enc': instance.memo_enc,
     'block': instance.block,
   };
 

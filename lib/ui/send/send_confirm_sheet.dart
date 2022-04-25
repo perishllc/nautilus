@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_js/flutter_js.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
@@ -26,6 +28,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -332,19 +335,19 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     bool memoSendFailed = false;
     try {
       _showSendingAnimation(context);
-      ProcessResponse resp = await sl.get<AccountService>().requestSend(
-          StateContainer.of(context).wallet.representative,
-          StateContainer.of(context).wallet.frontier,
-          widget.amountRaw,
-          destinationAltered,
-          StateContainer.of(context).wallet.address,
-          NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
-          max: widget.maxSend);
-      if (widget.manta != null) {
-        widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
-      }
-      StateContainer.of(context).wallet.frontier = resp.hash;
-      StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
+      // ProcessResponse resp = await sl.get<AccountService>().requestSend(
+      //     StateContainer.of(context).wallet.representative,
+      //     StateContainer.of(context).wallet.frontier,
+      //     widget.amountRaw,
+      //     destinationAltered,
+      //     StateContainer.of(context).wallet.address,
+      //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
+      //     max: widget.maxSend);
+      // if (widget.manta != null) {
+      //   widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
+      // }
+      // StateContainer.of(context).wallet.frontier = resp.hash;
+      // StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
 
       // if there's a memo to be sent, send it:
       if (widget.memo != null && widget.memo.isNotEmpty) {
@@ -364,28 +367,40 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         // create a local memo object:
         var uuid = Uuid();
         String localUuid = "LOCAL:" + uuid.v4();
-        var newRequestTXData = new TXData(
-          from_address: StateContainer.of(context).wallet.address,
-          to_address: destinationAltered,
-          amount_raw: widget.amountRaw,
-          uuid: localUuid,
-          block: resp.hash,
-          send_block: resp.hash,
-          is_acknowledged: false,
-          is_fulfilled: false,
-          is_request: false,
-          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
-          memo: widget.memo,
-          height: 0,
-        );
-        // add it to the database:
-        await sl.get<DBHelper>().addTXData(newRequestTXData);
+        // // current block height:
+        // int currentBlockHeightInList = StateContainer.of(context).wallet.history.length > 0 ? (StateContainer.of(context).wallet.history[0].height + 1) : 1;
+        // var newRequestTXData = new TXData(
+        //   from_address: StateContainer.of(context).wallet.address,
+        //   to_address: destinationAltered,
+        //   amount_raw: widget.amountRaw,
+        //   uuid: localUuid,
+        //   block: resp.hash,
+        //   is_acknowledged: false,
+        //   is_fulfilled: false,
+        //   is_request: false,
+        //   request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+        //   memo: widget.memo,
+        //   height: currentBlockHeightInList,
+        // );
+        // // add it to the database:
+        // await sl.get<DBHelper>().addTXData(newRequestTXData);
 
         try {
           print("sending memo now!");
-          await sl
-              .get<AccountService>()
-              .sendTXMemo(destinationAltered, StateContainer.of(context).wallet.address, widget.amountRaw, signature, nonce_hex, widget.memo, resp.hash);
+
+          // encrypt the memo:
+          // this is easily the worst code I've ever written.
+          print("box.encrypt(\"${widget.memo}\", \"${destinationAltered}\", \"${privKey}\");");
+          String builtExpression = await rootBundle.loadString("assets/nano-lib.js") + "box.encrypt(\"${widget.memo}\", \"${destinationAltered}\", \"${privKey}\");";
+          JsEvalResult jsResult = StateContainer.of(context).flutterJs.evaluate(builtExpression);
+
+          String encryptedMemo = jsResult.stringResult;
+
+          print("encrypted memo: ${encryptedMemo}");
+
+          // await sl
+          //     .get<AccountService>()
+          //     .sendTXMemo(destinationAltered, StateContainer.of(context).wallet.address, widget.amountRaw, signature, nonce_hex, widget.memo, resp.hash);
         } catch (e) {
           memoSendFailed = true;
         }
@@ -401,63 +416,63 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         }
       }
 
-      // go through and check to see if any unfulfilled payments are now fulfilled
-      List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
-      for (int i = 0; i < unfulfilledPayments.length; i++) {
-        TXData txData = unfulfilledPayments[i];
+      // // go through and check to see if any unfulfilled payments are now fulfilled
+      // List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
+      // for (int i = 0; i < unfulfilledPayments.length; i++) {
+      //   TXData txData = unfulfilledPayments[i];
 
-        // TX is unfulfilled and in the past:
-        // int currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-        // if (currentTime - int.parse(txData.request_time) > 0) {
-        // }
-        // check destination of this request is where we're sending to:
-        // check to make sure we are the recipient of this request:
-        // check to make sure the amounts are the same:
-        if (txData.from_address == destinationAltered &&
-            txData.to_address == StateContainer.of(context).wallet.address &&
-            txData.amount_raw == widget.amountRaw) {
-          // this is the payment we're fulfilling
-          // update the TXData to be fulfilled
-          await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
-          // update the ui to reflect the change in the db:
-          StateContainer.of(context).updateRequests();
-          break;
-        }
-      }
+      //   // TX is unfulfilled and in the past:
+      //   // int currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+      //   // if (currentTime - int.parse(txData.request_time) > 0) {
+      //   // }
+      //   // check destination of this request is where we're sending to:
+      //   // check to make sure we are the recipient of this request:
+      //   // check to make sure the amounts are the same:
+      //   if (txData.from_address == destinationAltered &&
+      //       txData.to_address == StateContainer.of(context).wallet.address &&
+      //       txData.amount_raw == widget.amountRaw) {
+      //     // this is the payment we're fulfilling
+      //     // update the TXData to be fulfilled
+      //     await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
+      //     // update the ui to reflect the change in the db:
+      //     StateContainer.of(context).updateRequests();
+      //     break;
+      //   }
+      // }
 
-      // Show complete
-      dynamic user = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
-      String contactName;
-      if (user != null) {
-        if (user is Contact) {
-          contactName = user.name;
-        } else if (user is User) {
-          contactName = user.username;
-        }
-      }
+      // // Show complete
+      // dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(widget.destination);
+      // String contactName;
+      // if (user != null) {
+      //   if (user is Contact) {
+      //     contactName = "★" + user.name;
+      //   } else if (user is User) {
+      //     contactName = "@" + user.username;
+      //   }
+      // }
 
-      if (memoSendFailed) {
-        UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
-      }
+      // if (memoSendFailed) {
+      //   UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
+      // }
 
-      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-      StateContainer.of(context).requestUpdate();
-      if (widget.natriconNonce != null) {
-        setState(() {
-          StateContainer.of(context).updateNatriconNonce(StateContainer.of(context).selectedAccount.address, widget.natriconNonce);
-        });
-      }
-      Sheets.showAppHeightNineSheet(
-          context: context,
-          closeOnTap: true,
-          removeUntilHome: true,
-          widget: SendCompleteSheet(
-              amountRaw: widget.amountRaw,
-              destination: destinationAltered,
-              contactName: contactName,
-              localAmount: widget.localCurrency,
-              paymentRequest: widget.paymentRequest,
-              natriconNonce: widget.natriconNonce));
+      // Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+      // StateContainer.of(context).requestUpdate();
+      // if (widget.natriconNonce != null) {
+      //   setState(() {
+      //     StateContainer.of(context).updateNatriconNonce(StateContainer.of(context).selectedAccount.address, widget.natriconNonce);
+      //   });
+      // }
+      // Sheets.showAppHeightNineSheet(
+      //     context: context,
+      //     closeOnTap: true,
+      //     removeUntilHome: true,
+      //     widget: SendCompleteSheet(
+      //         amountRaw: widget.amountRaw,
+      //         destination: destinationAltered,
+      //         contactName: contactName,
+      //         localAmount: widget.localCurrency,
+      //         paymentRequest: widget.paymentRequest,
+      //         natriconNonce: widget.natriconNonce));
     } catch (e) {
       // Send failed
       if (animationOpen) {

@@ -12,6 +12,9 @@ class AccountHistoryResponseItem {
   @JsonKey(name: 'type')
   String type;
 
+  @JsonKey(name: 'subtype')
+  String subtype;
+
   @JsonKey(name: 'account')
   String account;
 
@@ -30,8 +33,9 @@ class AccountHistoryResponseItem {
   @JsonKey(ignore: true)
   bool confirmed;
 
-  AccountHistoryResponseItem({String type, String account, String amount, String hash, int height, String link, this.confirmed}) {
+  AccountHistoryResponseItem({String type, String subtype, String account, String amount, String hash, int height, String link, this.confirmed}) {
     this.type = type;
+    this.subtype = subtype;
     this.account = account;
     this.amount = amount;
     this.hash = hash;

@@ -64,8 +64,8 @@ class TXData {
   String status;
 
   TXData(
-      {@required this.from_address,
-      @required this.to_address,
+      {this.from_address,
+      this.to_address,
       this.amount_raw,
       this.is_request,
       this.request_time,

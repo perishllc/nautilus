@@ -49,6 +49,8 @@ import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
+// E2E Encryption
+import 'package:flutter_js/flutter_js.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message");
@@ -174,6 +176,9 @@ class StateContainerState extends State<StateContainer> {
   // When wallet is encrypted
   String encryptedSecret;
 
+  // JS run time:
+  JavascriptRuntime flutterJs;
+
   void updateNinjaNodes(List<NinjaNode> list) {
     setState(() {
       nanoNinjaNodes = list;
@@ -260,15 +265,15 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  Future<void> updateTransactionData() async {
-    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-      var transactions = await sl.get<DBHelper>().getAccountSpecificTXData(wallet.address);
-      setState(() {
-        // this.wallet.transactions = transactions;
-        // EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet.transactions));
-      });
-    }
-  }
+  // Future<void> updateTransactionData() async {
+  //   if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+  //     var transactions = await sl.get<DBHelper>().getAccountSpecificTXData(wallet.address);
+  //     setState(() {
+  //       // this.wallet.transactions = transactions;
+  //       // EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet.transactions));
+  //     });
+  //   }
+  // }
 
   Future<void> updateUnified() async {
     if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
@@ -334,6 +339,8 @@ class StateContainerState extends State<StateContainer> {
   @override
   void initState() {
     super.initState();
+    // JS runtime:
+    flutterJs = getJavascriptRuntime();
     // Register RxBus
     _registerBus();
     // Set currency locale here for the UI to access
@@ -452,9 +459,7 @@ class StateContainerState extends State<StateContainer> {
     _fcmUpdateSub = EventTaxiImpl.singleton().registerTo<FcmUpdateEvent>().listen((event) {
       if (wallet != null) {
         sl.get<SharedPrefsUtil>().getNotificationsOn().then((enabled) {
-          sl
-              .get<AccountService>()
-              .sendRequest(FcmUpdateRequest(account: wallet.address, fcmToken: event.token, enabled: enabled));
+          sl.get<AccountService>().sendRequest(FcmUpdateRequest(account: wallet.address, fcmToken: event.token, enabled: enabled));
         });
       }
     });
@@ -768,12 +773,8 @@ class StateContainerState extends State<StateContainer> {
     PendingResponseItem pendingItem = PendingResponseItem(hash: resp.hash, source: resp.account, amount: resp.amount);
     String receivedHash = await handlePendingItem(pendingItem, link_as_account: resp.block.linkAsAccount);
     if (receivedHash != null) {
-      AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
-          type: BlockTypes.RECEIVE,
-          account: resp.account,
-          amount: resp.amount,
-          hash: receivedHash,
-          link: resp.block.link);
+      AccountHistoryResponseItem histItem =
+          AccountHistoryResponseItem(type: BlockTypes.RECEIVE, account: resp.account, amount: resp.amount, hash: receivedHash, link: resp.block.link);
       if (!wallet.history.contains(histItem)) {
         setState(() {
           // TODO: not necessarily the best way to handle this, should get real height:
@@ -813,8 +814,7 @@ class StateContainerState extends State<StateContainer> {
       // Publish open
       sl.get<Logger>().d("Handling ${item.hash} as open");
       try {
-        ProcessResponse resp =
-            await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet.address, await _getPrivKey());
+        ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet.address, await _getPrivKey());
         wallet.openBlock = resp.hash;
         wallet.frontier = resp.hash;
         pendingRequests.remove(item.hash);
@@ -832,50 +832,55 @@ class StateContainerState extends State<StateContainer> {
         if (link_as_account != null && link_as_account != wallet.address) {
           // we aren't on the current account for this receive:
           log.d("Receive is for a different account: ${link_as_account}");
-          // HANDLE IT: 😔
+          // TODO: HANDLE IT: 😔
 
-          // receive any other pendings first:
-          {
-            BigInt totalTransferred = BigInt.zero;
-            AccountBalanceItem balanceItem;
-            // Get frontiers first
-            AccountInfoResponse resp = await sl.get<AccountService>().getAccountInfo(link_as_account);
-            if (!resp.unopened) {
-              balanceItem.frontier = resp.frontier;
-            }
-            // Receive pending blocks
-            PendingResponse pr = await sl.get<AccountService>().getPending(link_as_account, 20);
-            Map<String, PendingResponseItem> pendingBlocks = pr.blocks;
-            for (String hash in pendingBlocks.keys) {
-              PendingResponseItem item = pendingBlocks[hash];
-              if (balanceItem.frontier != null) {
-                ProcessResponse resp = await sl.get<AccountService>().requestReceive(AppWallet.defaultRepresentative,
-                    balanceItem.frontier, item.amount, hash, link_as_account, balanceItem.privKey);
-                if (resp.hash != null) {
-                  balanceItem.frontier = resp.hash;
-                  totalTransferred += BigInt.parse(item.amount);
-                }
-              } else {
-                ProcessResponse resp =
-                    await sl.get<AccountService>().requestOpen(item.amount, hash, link_as_account, balanceItem.privKey);
-                if (resp.hash != null) {
-                  balanceItem.frontier = resp.hash;
-                  totalTransferred += BigInt.parse(item.amount);
-                }
-              }
-              // Hack that waits for blocks to be confirmed
-              await Future.delayed(const Duration(milliseconds: 300));
-            }
-          }
+          // // receive any other pendings first:
+          // {
+          //   BigInt totalTransferred = BigInt.zero;
+          //   AccountBalanceItem balanceItem = new AccountBalanceItem();
+          //   // Get frontiers first
+          //   AccountInfoResponse resp = await sl.get<AccountService>().getAccountInfo(link_as_account);
+          //   if (!resp.unopened) {
+          //     balanceItem.frontier = resp.frontier;
+          //   }
+          //   // Receive pending blocks
+          //   PendingResponse pr = await sl.get<AccountService>().getPending(link_as_account, 20);
+          //   Map<String, PendingResponseItem> pendingBlocks = pr.blocks;
+          //   for (String hash in pendingBlocks.keys) {
+          //     PendingResponseItem item = pendingBlocks[hash];
+          //     if (balanceItem.frontier != null) {
+          //       ProcessResponse resp = await sl
+          //           .get<AccountService>()
+          //           .requestReceive(AppWallet.defaultRepresentative, balanceItem.frontier, item.amount, hash, link_as_account, balanceItem.privKey);
+          //       if (resp.hash != null) {
+          //         balanceItem.frontier = resp.hash;
+          //         totalTransferred += BigInt.parse(item.amount);
+          //       }
+          //     } else {
+          //       ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, hash, link_as_account, balanceItem.privKey);
+          //       if (resp.hash != null) {
+          //         balanceItem.frontier = resp.hash;
+          //         totalTransferred += BigInt.parse(item.amount);
+          //       }
+          //     }
+          //     // Hack that waits for blocks to be confirmed
+          //     await Future.delayed(const Duration(milliseconds: 300));
+          //   }
+          // }
 
-          AccountInfoResponse accountResp = await sl.get<AccountService>().getAccountInfo(link_as_account);
+          // AccountInfoResponse accountResp = await sl.get<AccountService>().getAccountInfo(link_as_account);
 
-          resp = await sl.get<AccountService>().requestReceive(wallet.representative, accountResp.frontier, item.amount,
-              item.hash, link_as_account, await _getPrivKey());
-          // throw Exception("Not on the correct account to receive this");
+          // resp = await sl
+          //     .get<AccountService>()
+          //     .requestReceive(wallet.representative, accountResp.frontier, item.amount, item.hash, link_as_account, await _getPrivKey());
+
+          // // don't add to the history view since we're on the wrong account:
+          // return null;
+          throw Exception("Not on the correct account to receive this");
         } else {
-          resp = await sl.get<AccountService>().requestReceive(
-              wallet.representative, wallet.frontier, item.amount, item.hash, wallet.address, await _getPrivKey());
+          resp = await sl
+              .get<AccountService>()
+              .requestReceive(wallet.representative, wallet.frontier, item.amount, item.hash, wallet.address, await _getPrivKey());
         }
         wallet.frontier = resp.hash;
         pendingRequests.remove(item.hash);
@@ -925,11 +930,7 @@ class StateContainerState extends State<StateContainer> {
       }
       sl.get<AccountService>().clearQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet.address,
-          currency: curCurrency.getIso4217Code(),
-          uuid: uuid,
-          fcmToken: fcmToken,
-          notificationEnabled: notificationsEnabled));
+          account: wallet.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().queueRequest(AccountHistoryRequest(account: wallet.address, raw: true));
       sl.get<AccountService>().processQueue();
       // Request account history
@@ -942,8 +943,7 @@ class StateContainerState extends State<StateContainer> {
         count = 50;
       }
       // try {
-      AccountHistoryResponse resp =
-          await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count, raw: true);
+      AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count, raw: true);
       _requestBalances();
       bool postedToHome = false;
       // Iterate list in reverse (oldest to newest block)
@@ -951,8 +951,8 @@ class StateContainerState extends State<StateContainer> {
         // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
         if (!wallet.history.contains(item)) {
           int startIndex = 0; // Index to start inserting into the list
-          int lastIndex = resp.history.indexWhere((item) => wallet.history.contains(
-              item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+          int lastIndex = resp.history.indexWhere(
+              (item) => wallet.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
           lastIndex = lastIndex <= 0 ? resp.history.length : lastIndex;
           setState(() {
             wallet.history.insertAll(0, resp.history.getRange(startIndex, lastIndex));
@@ -978,9 +978,7 @@ class StateContainerState extends State<StateContainer> {
       // Receive pendings
       if (pending) {
         pendingRequests.clear();
-        PendingResponse pendingResp = await sl
-            .get<AccountService>()
-            .getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
+        PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
 
         // for unfulfilled payments:
         List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
@@ -1014,10 +1012,7 @@ class StateContainerState extends State<StateContainer> {
             }
 
             AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
-                type: BlockTypes.RECEIVE,
-                account: pendingResponseItem.source,
-                amount: pendingResponseItem.amount,
-                hash: receivedHash);
+                type: BlockTypes.RECEIVE, account: pendingResponseItem.source, amount: pendingResponseItem.amount, hash: receivedHash);
             if (!wallet.history.contains(histItem)) {
               setState(() {
                 // TODO: not necessarily the best way to handle this, should get real height:
@@ -1054,11 +1049,7 @@ class StateContainerState extends State<StateContainer> {
       }
       sl.get<AccountService>().removeSubscribeHistoryPendingFromQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet.address,
-          currency: curCurrency.getIso4217Code(),
-          uuid: uuid,
-          fcmToken: fcmToken,
-          notificationEnabled: notificationsEnabled));
+          account: wallet.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().processQueue();
     }
   }
@@ -1086,14 +1077,13 @@ class StateContainerState extends State<StateContainer> {
     String request_time = data['request_time'];
     String to_address = data['account'];
     String uuid = data['uuid'];
-    String block = data['block'];
+    // String block = data['block'];
     // String request_time = ((new DateTime.now()).millisecondsSinceEpoch ~/ 1000).toString();
 
-    // current block height:
-    int currentBlockHeightInList = wallet.history.length > 0 ? (wallet.history[0].height + 1) : 1;
-    // int currentBlockHeightInList = 0;
-
     if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+      int currentBlockHeightInList = StateContainer.of(context)?.wallet?.history?.length > 0 ? (StateContainer.of(context)?.wallet?.history[0]?.height + 1) : 1;
+      String lastBlockHash = StateContainer.of(context)?.wallet?.history?.length > 0 ? StateContainer.of(context)?.wallet?.history[0]?.hash : null;
+
       var txData = new TXData(
         amount_raw: amount_raw,
         is_request: true,
@@ -1102,14 +1092,22 @@ class StateContainerState extends State<StateContainer> {
         memo: memo,
         is_fulfilled: false,
         request_time: request_time,
-        fulfillment_time: "",
-        block: block,
+        block: lastBlockHash,
         uuid: uuid,
         is_acknowledged: true,
         height: currentBlockHeightInList,
-        recv_height: currentBlockHeightInList,
       );
-      sl.get<DBHelper>().addTXData(txData);
+
+      // check if exists in db:
+      var existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+      if (existingTXData != null) {
+        // update with the new info:
+        existingTXData.is_acknowledged = true;
+        await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
+      } else {
+        // add it since it doesn't exist:
+        await sl.get<DBHelper>().addTXData(txData);
+      }
 
       // send acknowledgement to server / requester:
       sl.get<AccountService>().requestACK(uuid, requesting_account);
@@ -1128,108 +1126,177 @@ class StateContainerState extends State<StateContainer> {
     String block = data['block'];
     String uuid = data['uuid'];
 
-    int old_height;
-    int old_send_height;
-    int old_recv_height;
-    String old_block;
-    String old_send_block;
-    String old_recv_block;
-    bool old_heights_set = false;
+    if (data.containsKey("is_request")) {
+      if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+        TXData txData;
 
-    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-      TXData txData;
+        // we have to check if this payment is already in the db:
+        if (uuid != null) {
+          txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+          if (txData != null) {
+            log.d("updating existing txData!");
+            // this payment is already in the db:
+            // merge the two TXData objects;
+            TXData newTXInfo = txData;
+            newTXInfo.amount_raw = amount_raw;
+            newTXInfo.is_fulfilled = true;
+            newTXInfo.from_address = requesting_account;
+            newTXInfo.to_address = to_address;
+            newTXInfo.block = block;
+            newTXInfo.memo = memo;
+            newTXInfo.request_time = request_time;
+            await sl.get<DBHelper>().replaceTXDataByUUID(newTXInfo);
+          }
 
-      // we have to check if this payment is already in the db:
-      if (uuid != null) {
-        txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
-        if (txData != null) {
-          log.d("updating existing txData!");
-          // this payment is already in the db:
-          // merge the two TXData objects;
-          TXData newTXInfo = txData;
-          newTXInfo.amount_raw = amount_raw;
-          newTXInfo.is_fulfilled = true;
-          newTXInfo.from_address = requesting_account;
-          newTXInfo.to_address = to_address;
-          newTXInfo.block = block;
-          newTXInfo.memo = memo;
-          newTXInfo.request_time = request_time;
-          await sl.get<DBHelper>().replaceTXDataByUUID(newTXInfo);
-        }
-
-        // is this from us? if so we need to check for the local version of this payment:
-        if (requesting_account == wallet.address) {
-          var transactions = await sl.get<DBHelper>().getAccountSpecificRequests(wallet.address);
-          // go through the list and see if any of them happened within the last 5 minutes:
-          // make sure all other fields match, too:
-          TXData oldTXData = null;
-          for (var tx in transactions) {
-            // check if this is a payment we made:
-            if (tx.from_address == wallet.address &&
-                tx.to_address == to_address &&
-                tx.amount_raw == amount_raw &&
-                tx.memo == memo) {
-              // make sure we only delete local payments that are withing the last 5 minutes:
-              if (tx.uuid.contains("LOCAL")) {
-                if (DateTime.parse(tx.request_time).isAfter(DateTime.now().subtract(Duration(minutes: 5)))) {
-                  // this is a duplicate payment record, just update the time and other related info:
-                  oldTXData = tx;
-                  break;
+          // is this from us? if so we need to check for the local version of this payment:
+          if (requesting_account == wallet.address) {
+            var transactions = await sl.get<DBHelper>().getAccountSpecificRequests(wallet.address);
+            // go through the list and see if any of them happened within the last 5 minutes:
+            // make sure all other fields match, too:
+            TXData oldTXData;
+            for (var tx in transactions) {
+              // check if this is a payment we made:
+              if (tx.from_address == wallet.address && tx.to_address == to_address && tx.amount_raw == amount_raw && tx.memo == memo && tx.block == block) {
+                // make sure we only delete local payments that are withing the last 5 minutes:
+                if (tx.uuid.contains("LOCAL")) {
+                  if (DateTime.parse(tx.request_time).isAfter(DateTime.now().subtract(Duration(minutes: 5)))) {
+                    // this is a duplicate payment record, just update the time and other related info:
+                    oldTXData = tx;
+                    break;
+                  }
                 }
               }
             }
-          }
 
-          log.d("deleting duplicate txData!");
-          if (oldTXData != null) {
-            // store the old send/recv heights:
-            old_height = oldTXData.height;
-            old_send_height = oldTXData.send_height;
-            old_recv_height = oldTXData.recv_height;
-            old_block = oldTXData.block;
-            old_send_block = oldTXData.send_block;
-            old_recv_block = oldTXData.recv_block;
-            old_heights_set = true;
-            // remove the old tx by the uuid:
-            await sl.get<DBHelper>().deleteTXDataByUuid(oldTXData.uuid);
-            // add the new one:
-            // happens automatically below since txData is null
+            log.d("deleting duplicate txData!");
+            if (oldTXData != null) {
+              // remove the old tx by the uuid:
+              await sl.get<DBHelper>().deleteTXDataByUuid(oldTXData.uuid);
+              // add the new one:
+              // happens automatically below since txData is null
+            }
           }
+        } else {
+          // something went wrong:
+          log.d("no uuid in payment record from server!!");
+          return;
+        }
+
+        // didn't replace a txData, so add it:
+        if (txData == null) {
+          log.d("adding txData to the database!");
+          txData = new TXData(
+            amount_raw: amount_raw,
+            is_request: true,
+            from_address: requesting_account,
+            to_address: to_address,
+            memo: memo,
+            is_fulfilled: false,
+            request_time: request_time,
+            fulfillment_time: fulfillment_time,
+            block: block,
+            uuid: uuid,
+            is_acknowledged: false,
+            height: 0,
+          );
+          await sl.get<DBHelper>().addTXData(txData);
+        }
+        await updateRequests();
+      }
+    }
+
+    if (data.containsKey("is_memo")) {
+      // check if exists in db:
+      var existingTXData = await sl.get<DBHelper>().getTXDataByBlock(block);
+      if (existingTXData != null) {
+        // delete local version and add new one:
+        existingTXData.memo = memo;
+        existingTXData.block = block;
+        // remove the local one if it exists:
+        if (existingTXData.uuid.contains("LOCAL")) {
+          log.d("removing the local txData for this memo");
+          await sl.get<DBHelper>().deleteTXDataByUuid(existingTXData.uuid);
+          // add the new one and change the uuid to be not local:
+          existingTXData.uuid = uuid;
+          existingTXData.status = "sent";
+          await sl.get<DBHelper>().addTXData(existingTXData);
+        } else {
+          log.d("updating the txData for this memo");
+          // we updated the other fields up above, so we don't need to update them here:
+          // TODO: should check to make sure uuid matches:
+          await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
+          // send acknowledgement to server / requester:
+          // sleep for a second to make sure the txData is updated:
+          await Future.delayed(Duration(seconds: 1));
+          await sl.get<AccountService>().requestACK(uuid, requesting_account);
         }
       } else {
-        // something went wrong:
-        log.d("no uuid in payment record from server!!");
-        return;
+        throw Exception("no txData found for this memo in payment record!");
       }
+    }
+  }
 
-      // didn't replace a txData, so add it:
-      if (txData == null) {
-        log.d("adding txData to the database!");
-        txData = new TXData(
-          amount_raw: amount_raw,
-          is_request: true,
-          from_address: requesting_account,
-          to_address: to_address,
-          memo: memo,
-          is_fulfilled: false,
-          request_time: request_time,
-          fulfillment_time: fulfillment_time,
-          block: block,
-          uuid: uuid,
-          is_acknowledged: false,
-          height: 0,
-        );
-        // if (old_heights_set) {
-        //   // txData.height = old_height;
-        //   txData.send_height = old_send_height;
-        //   txData.recv_height = old_recv_height;
-        //   // txData.block = old_block;
-        //   txData.send_block = old_send_block;
-        //   txData.recv_block = old_recv_block;
-        // }
-        await sl.get<DBHelper>().addTXData(txData);
+  Future<void> handlePaymentMemo(dynamic data) async {
+    // String amount_raw = data['amount_raw'];
+    String requesting_account = data['requesting_account'];
+    String memo = data['memo'];
+    String request_time = data['request_time'];
+    String to_address = data['account'];
+    String uuid = data['uuid'];
+    String block = data['block'];
+    String is_acknowledged = data['is_acknowledged'];
+    int height = data['height'];
+
+    // are we the recipient?
+    if (to_address == wallet.address) {
+      TXData txData = new TXData(
+        // amount_raw: amount_raw,
+        is_request: false,
+        from_address: requesting_account,
+        to_address: to_address,
+        memo: memo,
+        is_fulfilled: true,
+        block: block,
+        link: null,
+        uuid: uuid,
+        is_acknowledged: true,
+        height: height,
+      );
+      bool found = false;
+      // loop through our tx history to find the first matching block:
+      for (var histItem in wallet.history) {
+        if (histItem.link == block) {
+          // found a matching transaction, so set the block to that:
+          txData.link = histItem.hash;
+          found = true;
+          break;
+        }
       }
-      await updateRequests();
+      if (found) {
+        // check if exists in db:
+        var existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+        if (existingTXData != null) {
+          // update with the new info:
+          existingTXData.recv_block = txData.recv_block;
+          existingTXData.link = txData.link;
+          existingTXData.is_acknowledged = true;
+          existingTXData.is_fulfilled = true;
+          // just in case:
+          existingTXData.to_address = txData.to_address;
+          existingTXData.from_address = txData.from_address;
+          await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
+        } else {
+          // add it since it doesn't exist:
+          await sl.get<DBHelper>().addTXData(txData);
+        }
+        // send acknowledgement to server / requester:
+        await sl.get<AccountService>().requestACK(uuid, requesting_account);
+        await updateRequests();
+        // hack to get tx memo to update:
+        EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
+      }
+    } else {
+      throw Exception("we are not the recipient of this memo!");
     }
   }
 
@@ -1238,33 +1305,26 @@ class StateContainerState extends State<StateContainer> {
     // log.d(wallet.history[0].height);
     // log.d(wallet.history[wallet.history.length - 1].height);
 
+    // handle an incoming payment request:
     if (data.containsKey("payment_request")) {
-      // handle payment request:
       log.d("handling payment_request from: ${data['requesting_account']} : ${data['account']}");
       await handlePaymentRequest(data);
-
-      // Send failed
-      // if (animationOpen) {
-      //   Navigator.of(context).pop();
-      // }
-      // UIUtil.showSnackbar(AppLocalization.of(context).paymentRequestMessage, context, durationMs: 3500);
-      // Navigator.of(context).pop();
     }
 
+    // handle an incoming memo:
+    if (data.containsKey("payment_memo")) {
+      log.d("handling payment_memo from: ${data['requesting_account']} : ${data['account']}");
+      await handlePaymentMemo(data);
+    }
+
+    // payment records are essentially server copies of local txData:
     if (data.containsKey("payment_record")) {
       log.d("handling payment_record from: ${data['requesting_account']} : ${data['account']}");
       await handlePaymentRecord(data);
-
-      // Send success
-      // if (animationOpen) {
-      //   Navigator.of(context).pop();
-      // }
-      // UIUtil.showSnackbar(AppLocalization.of(context).paymentRequestMessage, context, durationMs: 3500);
-      // Navigator.of(context).pop();
     }
 
     if (data.containsKey("payment_ack")) {
-      log.d("handling payment_ack from: ${data['requesting_account']} : ${data['account']}");
+      log.d("handling payment_ack from: ${data['account']}");
       String amount_raw = data['amount_raw'];
       String requesting_account = data['requesting_account'];
       String memo = data['memo'];
@@ -1283,133 +1343,6 @@ class StateContainerState extends State<StateContainer> {
         log.d("we didn't have a txData for this payment ack!");
       }
       await updateRequests();
-    }
-
-    if (data.containsKey("payment_memo")) {
-      log.d("handling payment_memo from: ${data['requesting_account']} : ${data['account']}");
-      // String amount_raw = data['amount_raw'];
-      String requesting_account = data['requesting_account'];
-      String memo = data['memo'];
-      String request_time = data['request_time'];
-      String to_address = data['account'];
-      String uuid = data['uuid'];
-      String block = data['block'];
-      String is_acknowledged = data['is_acknowledged'];
-      int height = data['height'];
-
-      // are we the recipient?
-      if (to_address == wallet.address) {
-        TXData txData = new TXData(
-          // amount_raw: amount_raw,
-          is_request: false,
-          from_address: requesting_account,
-          to_address: to_address,
-          memo: memo,
-          is_fulfilled: true,
-          block: block,
-          link: null,
-          uuid: uuid,
-          is_acknowledged: true,
-          height: height,
-        );
-        bool found = false;
-        // loop through our tx history to find the first matching block:
-        for (var histItem in wallet.history) {
-          if (histItem.link == block) {
-            // found a matching transaction, so set the block to that:
-            txData.recv_block = histItem.hash;
-            txData.link = histItem.hash;
-            found = true;
-            break;
-          }
-        }
-        if (found) {
-          // check if exists in db:
-          var existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
-          if (existingTXData != null) {
-            // update with the new info:
-            existingTXData.recv_block = txData.recv_block;
-            existingTXData.link = txData.link;
-            existingTXData.is_acknowledged = true;
-            existingTXData.is_fulfilled = true;
-            // just in case:
-            existingTXData.to_address = txData.to_address;
-            existingTXData.from_address = txData.from_address;
-            await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
-          } else {
-            // add it since it doesn't exist:
-            await sl.get<DBHelper>().addTXData(txData);
-          }
-          // send acknowledgement to server / requester:
-          await sl.get<AccountService>().requestACK(uuid, requesting_account);
-          await updateRequests();
-          // hack to get tx memo to update:
-          EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
-        }
-
-        // is this from us? if so we need to check for the local version of this memo:
-      } else if (requesting_account == wallet.address) {
-        // check if exists in db:
-        var existingTXData = await sl.get<DBHelper>().getTXDataByBlock(block);
-        if (existingTXData != null) {
-          // delete local version and add new one:
-          existingTXData.memo = memo;
-          existingTXData.send_block = block;
-          existingTXData.block = block;
-          // remove the local one if it exists:
-          if (existingTXData.uuid.contains("LOCAL")) {
-            log.d("removing the local txData for this memo");
-            await sl.get<DBHelper>().deleteTXDataByUuid(existingTXData.uuid);
-            // add the new one and change the uuid to be not local:
-            existingTXData.uuid = uuid;
-            await sl.get<DBHelper>().addTXData(existingTXData);
-          } else {
-            log.d("updating the txData for this memo");
-            // we updated the other fields up above, so we don't need to update them here:
-            // TODO: should check to make sure uuid matches:
-            await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
-          }
-          // somehow there wasn't a matching block? this shouldn't happen but w/e
-        } else {
-          log.d("this probably shouldn't happen, but we didn't find a matching block for this memo: ${block}");
-
-          // var transactions = await sl.get<DBHelper>().getAccountSpecificRequests(wallet.address);
-          // // go through the list and see if any of them happened within the last 5 minutes:
-          // // make sure all other fields match, too:
-          // TXData oldTXData = null;
-          // for (var tx in transactions) {
-          //   // check if this is a payment we made:
-          //   if (tx.from_address == wallet.address && tx.to_address == to_address && tx.amount_raw == amount_raw && tx.memo == memo) {
-          //     // make sure we only delete local payments that are withing the last 5 minutes:
-          //     if (tx.uuid.contains("LOCAL")) {
-          //       if (DateTime.parse(tx.request_time).isAfter(DateTime.now().subtract(Duration(minutes: 5)))) {
-          //         // this is a duplicate payment record, just update the time and other related info:
-          //         oldTXData = tx;
-          //         break;
-          //       }
-          //     }
-          //   }
-          // }
-
-          // log.d("deleting duplicate txData!");
-          // if (oldTXData != null) {
-          //   // store the old send/recv heights:
-          //   old_height = oldTXData.height;
-          //   old_send_height = oldTXData.send_height;
-          //   old_recv_height = oldTXData.recv_height;
-          //   old_block = oldTXData.block;
-          //   old_send_block = oldTXData.send_block;
-          //   old_recv_block = oldTXData.recv_block;
-          //   old_heights_set = true;
-          //   // remove the old tx by the uuid:
-          //   await sl.get<DBHelper>().deleteTXDataByUuid(oldTXData.uuid);
-          //   // add the new one:
-          //   // happens automatically below since txData is null
-          // }
-        }
-      } else {
-        log.d("this shouldn't happen: we weren't the recipient or the sender of this memo?!");
-      }
     }
   }
 

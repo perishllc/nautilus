@@ -15,6 +15,7 @@ import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/contact.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
@@ -305,7 +306,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           amount_raw: widget.amountRaw,
           uuid: "LOCAL:" + uuid.v4(),
           block: resp.hash,
-          record_type: "gift_load",
+          record_type: RecordTypes.GIFT_LOAD,
           status: "created",
           metadata: widget.paperWalletSeed + ":" + response.result,
           is_acknowledged: false,
@@ -348,7 +349,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           amount_raw: widget.amountRaw,
           uuid: "LOCAL:" + uuid.v4(),
           block: resp.hash,
-          record_type: "gift_load",
+          record_type: RecordTypes.GIFT_LOAD,
           status: "create_failed",
           metadata: widget.paperWalletSeed + ":failed",
           is_acknowledged: false,

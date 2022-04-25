@@ -51,15 +51,7 @@ class RequestConfirmSheet extends StatefulWidget {
   final int natriconNonce;
   final String memo;
 
-  RequestConfirmSheet(
-      {this.amountRaw,
-      this.destination,
-      this.contactName,
-      this.localCurrency,
-      this.manta,
-      this.paymentRequest,
-      this.natriconNonce,
-      this.memo})
+  RequestConfirmSheet({this.amountRaw, this.destination, this.contactName, this.localCurrency, this.manta, this.paymentRequest, this.natriconNonce, this.memo})
       : super();
 
   _RequestConfirmSheetState createState() => _RequestConfirmSheetState();
@@ -114,9 +106,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
   void _showSendingAnimation(BuildContext context) {
     animationOpen = true;
     Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.LOADING,
-        StateContainer.of(context).curTheme.animationOverlayStrong,
-        StateContainer.of(context).curTheme.animationOverlayMedium,
+        AnimationType.LOADING, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
         onPoppedCallback: () => animationOpen = false));
   }
 
@@ -155,9 +145,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                   ),
                   // Container for the amount text
                   Container(
-                    margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.105,
-                        right: MediaQuery.of(context).size.width * 0.105),
+                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                     padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -181,10 +169,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                             ),
                           ),
                           TextSpan(
-                            text: getCurrencySymbol(context) +
-                                ((StateContainer.of(context).nyanoMode)
-                                    ? NumberUtil.getNanoStringAsNyano(amount)
-                                    : amount),
+                            text: getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary,
                               fontSize: 16.0,
@@ -220,9 +205,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                   // Address text
                   Container(
                       padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.105,
-                          right: MediaQuery.of(context).size.width * 0.105),
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
@@ -297,10 +280,8 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                     children: <Widget>[
                       // CONFIRM Button
                       AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY,
-                          CaseChange.toUpperCase(AppLocalization.of(context).confirm, context),
-                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                          context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                          onPressed: () async {
                         // no need for auth on a request:
                         _doRequest();
                       })
@@ -310,10 +291,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                   Row(
                     children: <Widget>[
                       // CANCEL Button
-                      AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY_OUTLINE,
-                          CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pop();
                       }),
@@ -331,8 +309,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     try {
       _showSendingAnimation(context);
 
-      String privKey = NanoUtil.seedToPrivate(
-          await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
+      String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
 
       // get epoch time as hex:
       int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
@@ -341,14 +318,14 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
 
       // check validity locally:
       String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet?.address);
-      bool isValid =
-          NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+      bool isValid = NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
       if (!isValid) {
         throw Exception("Invalid signature?!");
       }
 
-      await sl.get<AccountService>().requestPayment(destinationAltered, widget.amountRaw,
-          StateContainer.of(context).wallet.address, signature, nonce_hex, widget.memo);
+      await sl
+          .get<AccountService>()
+          .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, widget.memo);
 
       // // TODO:
       // ProcessResponse resp = await sl.get<AccountService>().requestSend(
@@ -365,15 +342,14 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
 
       // Show complete
       // todo: there's a potential memory leak with contacts somewhere here?
-      Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
+      dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(widget.destination);
       String contactName;
-      if (contact == null) {
-        User user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
-        if (user != null) {
+      if (user != null) {
+        if (user is Contact) {
+          contactName = "★" + user.name;
+        } else if (user is User) {
           contactName = "@" + user.username;
         }
-      } else {
-        contactName = "★" + contact.name;
       }
 
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
@@ -401,14 +377,9 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
 
     if (!sendFailed) {
       var uuid = Uuid();
-      // todo: stop using height here:
       // current block height:
-      int currentBlockHeightInList = StateContainer.of(context).wallet.history.length > 0
-          ? (StateContainer.of(context).wallet.history[0].height + 1)
-          : 1;
-      String lastBlockHash = StateContainer.of(context).wallet.history.length > 0
-          ? StateContainer.of(context).wallet.history[0].hash
-          : null;
+      int currentBlockHeightInList = StateContainer.of(context).wallet.history.length > 0 ? (StateContainer.of(context).wallet.history[0].height + 1) : 1;
+      String lastBlockHash = StateContainer.of(context).wallet.history.length > 0 ? StateContainer.of(context).wallet.history[0].hash : null;
       // int height = 0;
       // create a local txData for the request:
       var newRequestTXData = new TXData(
