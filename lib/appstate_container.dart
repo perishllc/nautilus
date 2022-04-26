@@ -336,11 +336,25 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
+  // Future<void> executeAfterBuild() async {
+  //   // this code will get executed after the build method
+  //   // because of the way async functions are scheduled
+  //   print("??????????????????????????????");
+  //   flutterJs.evaluate(await rootBundle.loadString("assets/nano-lib.js"));
+  // }
+
   @override
   void initState() {
     super.initState();
     // JS runtime:
     flutterJs = getJavascriptRuntime();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      print("loaded JS engine");
+      flutterJs.evaluate(await rootBundle.loadString("assets/nano-lib.js"));
+      // executes after build
+    });
+    // executeAfterBuild();
+
     // Register RxBus
     _registerBus();
     // Set currency locale here for the UI to access
@@ -1073,7 +1087,7 @@ class StateContainerState extends State<StateContainer> {
   Future<void> handlePaymentRequest(dynamic data) async {
     String amount_raw = data['amount_raw'];
     String requesting_account = data['requesting_account'];
-    String memo = data['memo'];
+    String memo_enc = data['memo_enc'];
     String request_time = data['request_time'];
     String to_address = data['account'];
     String uuid = data['uuid'];
@@ -1089,7 +1103,6 @@ class StateContainerState extends State<StateContainer> {
         is_request: true,
         from_address: requesting_account,
         to_address: to_address,
-        memo: memo,
         is_fulfilled: false,
         request_time: request_time,
         block: lastBlockHash,
@@ -1097,6 +1110,11 @@ class StateContainerState extends State<StateContainer> {
         is_acknowledged: true,
         height: currentBlockHeightInList,
       );
+
+      // decrypt the memo:
+      String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
+      String memo = await decryptMessage(memo_enc, wallet.address, privKey);
+      txData.memo = memo;
 
       // check if exists in db:
       var existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
@@ -1116,10 +1134,32 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
+  Future<String> encryptMessage(String message, String address, String privateKey) async {
+    try {
+      String builtExpression = "encrypt(\"$message\", \"$address\", \"$privateKey\");";
+      JsEvalResult jsResult = StateContainer.of(context).flutterJs.evaluate(builtExpression);
+      return jsResult.stringResult;
+    } catch (e) {
+      sl.get<Logger>().e("encryptMessage error: ${e.toString()}");
+      return null;
+    }
+  }
+
+  Future<String> decryptMessage(String memo_enc, String senderAddress, String privateKey) async {
+    try {
+      String builtExpression = "decrypt(\"$memo_enc\", \"$senderAddress\", \"$privateKey\");";
+      JsEvalResult jsResult = StateContainer.of(context).flutterJs.evaluate(builtExpression);
+      return jsResult.stringResult;
+    } catch (e) {
+      sl.get<Logger>().e("decryptMessage error: ${e.toString()}");
+      return null;
+    }
+  }
+
   Future<void> handlePaymentRecord(dynamic data) async {
     String amount_raw = data['amount_raw'];
     String requesting_account = data['requesting_account'];
-    String memo = data['memo'];
+    String memo_enc = data['memo_enc'];
     String request_time = data['request_time'];
     String to_address = data['account'];
     String fulfillment_time = data['fulfillment_time'];
@@ -1143,7 +1183,7 @@ class StateContainerState extends State<StateContainer> {
             newTXInfo.from_address = requesting_account;
             newTXInfo.to_address = to_address;
             newTXInfo.block = block;
-            newTXInfo.memo = memo;
+            // newTXInfo.memo = memo;
             newTXInfo.request_time = request_time;
             await sl.get<DBHelper>().replaceTXDataByUUID(newTXInfo);
           }
@@ -1156,7 +1196,7 @@ class StateContainerState extends State<StateContainer> {
             TXData oldTXData;
             for (var tx in transactions) {
               // check if this is a payment we made:
-              if (tx.from_address == wallet.address && tx.to_address == to_address && tx.amount_raw == amount_raw && tx.memo == memo && tx.block == block) {
+              if (tx.from_address == wallet.address && tx.to_address == to_address && tx.amount_raw == amount_raw && tx.block == block) {
                 // make sure we only delete local payments that are withing the last 5 minutes:
                 if (tx.uuid.contains("LOCAL")) {
                   if (DateTime.parse(tx.request_time).isAfter(DateTime.now().subtract(Duration(minutes: 5)))) {
@@ -1184,22 +1224,23 @@ class StateContainerState extends State<StateContainer> {
 
         // didn't replace a txData, so add it:
         if (txData == null) {
-          log.d("adding txData to the database!");
-          txData = new TXData(
-            amount_raw: amount_raw,
-            is_request: true,
-            from_address: requesting_account,
-            to_address: to_address,
-            memo: memo,
-            is_fulfilled: false,
-            request_time: request_time,
-            fulfillment_time: fulfillment_time,
-            block: block,
-            uuid: uuid,
-            is_acknowledged: false,
-            height: 0,
-          );
-          await sl.get<DBHelper>().addTXData(txData);
+          // log.d("adding txData to the database!");
+          throw new Exception("this shouldn't happen");
+          // txData = new TXData(
+          //   amount_raw: amount_raw,
+          //   is_request: true,
+          //   from_address: requesting_account,
+          //   to_address: to_address,
+          //   // memo: memo,
+          //   is_fulfilled: false,
+          //   request_time: request_time,
+          //   fulfillment_time: fulfillment_time,
+          //   block: block,
+          //   uuid: uuid,
+          //   is_acknowledged: false,
+          //   height: 0,
+          // );
+          // await sl.get<DBHelper>().addTXData(txData);
         }
         await updateRequests();
       }
@@ -1210,7 +1251,7 @@ class StateContainerState extends State<StateContainer> {
       var existingTXData = await sl.get<DBHelper>().getTXDataByBlock(block);
       if (existingTXData != null) {
         // delete local version and add new one:
-        existingTXData.memo = memo;
+        // existingTXData.memo = memo;
         existingTXData.block = block;
         // remove the local one if it exists:
         if (existingTXData.uuid.contains("LOCAL")) {
@@ -1239,7 +1280,7 @@ class StateContainerState extends State<StateContainer> {
   Future<void> handlePaymentMemo(dynamic data) async {
     // String amount_raw = data['amount_raw'];
     String requesting_account = data['requesting_account'];
-    String memo = data['memo'];
+    String memo_enc = data['memo_enc'];
     String request_time = data['request_time'];
     String to_address = data['account'];
     String uuid = data['uuid'];
@@ -1254,7 +1295,6 @@ class StateContainerState extends State<StateContainer> {
         is_request: false,
         from_address: requesting_account,
         to_address: to_address,
-        memo: memo,
         is_fulfilled: true,
         block: block,
         link: null,
@@ -1262,6 +1302,12 @@ class StateContainerState extends State<StateContainer> {
         is_acknowledged: true,
         height: height,
       );
+
+      // decrypt the memo:
+      String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
+      String memo = await decryptMessage(memo_enc, wallet.address, privKey);
+      txData.memo = memo;
+
       bool found = false;
       // loop through our tx history to find the first matching block:
       for (var histItem in wallet.history) {

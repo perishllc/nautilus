@@ -323,9 +323,12 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         throw Exception("Invalid signature?!");
       }
 
+      // encrypt the memo:
+      String encryptedMemo = await StateContainer.of(context).encryptMessage(widget.memo, destinationAltered, privKey);
+
       await sl
           .get<AccountService>()
-          .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, widget.memo);
+          .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, encryptedMemo);
 
       // // TODO:
       // ProcessResponse resp = await sl.get<AccountService>().requestSend(
