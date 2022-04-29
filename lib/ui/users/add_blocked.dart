@@ -593,9 +593,6 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                           newBlocked =
                               Blocked(name: _nameController.text.substring(1), address: _correspondingAddress, username: _addressController.text.substring(1));
                           sl.get<DBHelper>().blockUser(newBlocked);
-                          // find if the corresponding address to the username:
-                          // String correspondingAddress = await sl.get<DBHelper>().getAddressFromUsername(_correspondingUsername);
-                          // TODO:
                         } else {
                           // just an address:
                           newBlocked = Blocked(name: _nameController.text.substring(1), address: _addressController.text);

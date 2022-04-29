@@ -200,6 +200,10 @@ class AppLocalization {
     return Intl.message("Resend this memo", desc: "resend_memo", name: 'resendMemo');
   }
 
+  String get decryptionError {
+    return Intl.message("Decryption Error!", desc: 'decryption_errorc', name: 'decryptionError');
+  }
+
   String get markAsUnpaid {
     return Intl.message("Mark as Unpaid", desc: "unfulfill_payment", name: 'markAsUnpaid');
   }
@@ -454,6 +458,10 @@ class AppLocalization {
 
   String get withAddress {
     return Intl.message("With Address", desc: 'with_address', name: 'withAddress');
+  }
+
+  String get withMessage {
+    return Intl.message("With Message", desc: 'with_message', name: 'withMessage');
   }
 
   String get to {
@@ -1136,9 +1144,13 @@ If the recipient is already a Nautilus user they will instantly get a prompt to 
 
   String get needUsernameAlert {
     return Intl.message(
-        "This feature requires you to have a username set in your wallet. Would you like to register one now?\n\nYou'll never need a username to receive payment requests, only to send them.",
+        "This feature requires you to have a username set in your wallet. Would you like to register one now?\n\nYou'll never need a username to receive payment requests, only to send them.\n\nAlternatively, you can show a QR code for someone to scan.",
         desc: 'username_needed_header',
         name: 'needUsernameAlert');
+  }
+
+  String get goToQRCode {
+    return Intl.message('Go to QR', desc: 'go_to_qr_code', name: 'goToQRCode');
   }
 
   String get needUsernameAlertHeader {

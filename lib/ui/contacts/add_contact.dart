@@ -306,7 +306,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).addFavorite, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       if (await validateForm()) {
-                        Contact newContact = Contact(name: _nameController.text, address: widget.address == null ? _addressController.text : widget.address);
+                        Contact newContact = Contact(name: _nameController.text.substring(1), address: widget.address == null ? _addressController.text : widget.address);
                         await sl.get<DBHelper>().saveContact(newContact);
                         newContact.address = newContact.address.replaceAll("xrb_", "nano_");
                         EventTaxiImpl.singleton().fire(ContactAddedEvent(contact: newContact));

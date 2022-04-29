@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:isolate';
 import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
+import 'package:nautilus_wallet_flutter/bus/blocked_modified_event.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
@@ -98,13 +100,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   // but seems the only way to handle the animations
   final Map<String, GlobalKey<AnimatedListState>> _historyListKeyMap = Map();
   // final Map<String, ListModel<AccountHistoryResponseItem>> _historyListMap = Map();
-  final Map<String, ListModel<dynamic>> _historyListMap = Map();
+  final Map<String, ListModel<AccountHistoryResponseItem>> _historyListMap = Map();
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
   final Map<String, GlobalKey<AnimatedListState>> _requestsListKeyMap = Map();
   // final Map<String, ListModel<TXData>> _paymentsListMap = Map();
-  final Map<String, ListModel<dynamic>> _requestsListMap = Map();
+  final Map<String, ListModel<TXData>> _requestsListMap = Map();
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
@@ -115,11 +117,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   final Map<String, TXData> _txDetailsMap = Map();
 
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
-  List<Contact> _contacts = List();
-  List<Blocked> _blocked = List();
-  List<User> _users = List();
-  List<TXData> _txData = List();
-  List<TXData> _txRecords = List();
+  List<Contact> _contacts = [];
+  List<Blocked> _blocked = [];
+  List<User> _users = [];
+  List<TXData> _txData = [];
+  List<TXData> _txRecords = [];
 
   // Price conversion state (BTC, NANO, NONE)
   PriceConversion _priceConversion;
@@ -290,9 +292,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     String userOrSendAddress;
 
     // change address to username if it exists:
-    User user = await sl.get<DBHelper>().getUserWithAddress(senderAddress);
+    dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(senderAddress);
     if (user != null) {
-      userOrSendAddress = user.username;
+      if (user is Contact) {
+        userOrSendAddress = user.name;
+      } else if (user is User) {
+        userOrSendAddress = user.username;
+      }
     } else {
       userOrSendAddress = senderAddress;
     }
@@ -509,6 +515,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     _addSampleContact();
     _updateContacts();
+    _updateBlocked();
     _updateUsers();
     _updateTXData();
     // Setup placeholder animation and start
@@ -599,6 +606,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     });
   }
 
+  void _updateBlocked() {
+    sl.get<DBHelper>().getBlocked().then((blocked) {
+      setState(() {
+        _blocked = blocked;
+      });
+    });
+  }
+
   void _updateUsers() {
     sl.get<DBHelper>().getUsers().then((users) {
       setState(() {
@@ -631,10 +646,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           if (tx.is_request) {
             continue;
           }
-          // if (tx.block != null && tx.block.isNotEmpty) {
-          //   _txDetailsMap[tx.block] = tx;
-          // }
-          print("memo: ${tx.memo} send_block ${tx.block} recv_block ${tx.link} ${tx.is_request}");
           if (tx.is_request && isEmptyOrNull(tx.block)) {
             // set to the last block:
             String lastBlockHash = StateContainer.of(context).wallet.history.length > 0 ? StateContainer.of(context).wallet.history[0].hash : null;
@@ -643,22 +654,18 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             // save to db:
             sl.get<DBHelper>().replaceTXDataByUUID(tx);
           }
-          if (!tx.is_request && isEmptyOrNull(tx.link) && !isEmptyOrNull(tx.block)) {
-            // find if there's a matching recv_block:
-            for (var histItem in StateContainer.of(context).wallet.history) {
-              // print(histItem.link);
-              if (histItem.link == tx.block) {
-                // found match:
-                print("found match: ${tx.block}");
-                tx.link = histItem.hash;
-                // save to db:
-                sl.get<DBHelper>().replaceTXDataByUUID(tx);
-                break;
+          if (tx.is_memo && isEmptyOrNull(tx.link) && !isEmptyOrNull(tx.block)) {
+            if (_historyListMap[StateContainer.of(context).wallet.address] != null) {
+              // find if there's a matching link:
+              // for (var histItem in StateContainer.of(context).wallet.history) {
+              for (var histItem in _historyListMap[StateContainer.of(context).wallet.address].items) {
+                if (histItem.link == tx.block) {
+                  tx.link = histItem.hash;
+                  // save to db:
+                  sl.get<DBHelper>().replaceTXDataByUUID(tx);
+                  break;
+                }
               }
-              // if (tx2.send_block == tx.send_block && tx2.recv_block != null) {
-              //   _txDetailsMap[tx.send_block] = tx;
-              //   break;
-              // }
             }
           }
 
@@ -667,10 +674,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           } else if (!isEmptyOrNull(tx.link) && tx.to_address == account) {
             _txDetailsMap[tx.link] = tx;
           }
-
-          // if (tx.memo != null && tx.memo.isNotEmpty && tx.block != null && tx.block.isNotEmpty) {
-          //   _memoMap[tx.block] = tx.memo;
-          // }
         }
       });
     });
@@ -681,6 +684,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   StreamSubscription<PaymentsHomeEvent> _paymentsSub;
   StreamSubscription<UnifiedHomeEvent> _unifiedSub;
   StreamSubscription<ContactModifiedEvent> _contactModifiedSub;
+  StreamSubscription<BlockedModifiedEvent> _blockedModifiedSub;
   StreamSubscription<DisableLockTimeoutEvent> _disableLockSub;
   StreamSubscription<AccountChangedEvent> _switchAccountSub;
 
@@ -712,6 +716,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     _contactModifiedSub = EventTaxiImpl.singleton().registerTo<ContactModifiedEvent>().listen((event) {
       _updateContacts();
     });
+    _blockedModifiedSub = EventTaxiImpl.singleton().registerTo<BlockedModifiedEvent>().listen((event) {
+      _updateBlocked();
+    });
     // Hackish event to block auto-lock functionality
     _disableLockSub = EventTaxiImpl.singleton().registerTo<DisableLockTimeoutEvent>().listen((event) {
       if (event.disable) {
@@ -724,7 +731,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       setState(() {
         StateContainer.of(context).wallet.loading = true;
         StateContainer.of(context).wallet.historyLoading = true;
-        StateContainer.of(context).wallet.requestsLoading = true;
         StateContainer.of(context).wallet.unifiedLoading = true;
         _startAnimation();
         StateContainer.of(context).updateWallet(account: event.account);
@@ -766,6 +772,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     if (_contactModifiedSub != null) {
       _contactModifiedSub.cancel();
+    }
+    if (_blockedModifiedSub != null) {
+      _blockedModifiedSub.cancel();
     }
     if (_disableLockSub != null) {
       _disableLockSub.cancel();
@@ -885,7 +894,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     await StateContainer.of(context).requestUpdate();
     await StateContainer.of(context).updateRequests();
     _updateTXData();
-    _updateTXDetailsMap(StateContainer.of(context).wallet.address);
+    // _updateTXDetailsMap(StateContainer.of(context).wallet.address);
     generateUnifiedList();
     setState(() {});
     // Hide refresh indicator after 2 seconds
@@ -911,6 +920,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     _historyListMap[StateContainer.of(context).wallet.address].items.clear();
     _historyListMap[StateContainer.of(context).wallet.address].items.addAll(newList);
+
+    // for (var histItem in newList) {
+    //   print("New item: ${histItem.hash} ${histItem.link}");
+    // }
 
     // Re-subscribe if missing data
     if (StateContainer.of(context).wallet.loading) {
@@ -981,24 +994,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     }
 
-    // if (a is TXData) {
-    //   if (a.send_height != null && a.from_address == StateContainer.of(context).wallet.address) {
-    //     propertyA = a.send_height;
-    //   }
-    //   if (a.recv_height != null && a.to_address == StateContainer.of(context).wallet.address) {
-    //     propertyA = a.recv_height;
-    //   }
-    // }
-
-    // if (b is TXData) {
-    //   if (b.send_height != null && b.from_address == StateContainer.of(context).wallet.address) {
-    //     propertyB = b.send_height;
-    //   }
-    //   if (b.recv_height != null && b.to_address == StateContainer.of(context).wallet.address) {
-    //     propertyB = b.recv_height;
-    //   }
-    // }
-
     if (propertyA < propertyB) {
       return 1;
     } else if (propertyA > propertyB) {
@@ -1036,6 +1031,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // add both to the unified list:
     unifiedList.addAll(historyList);
+    unifiedList = unifiedList.where((element) => element.type != BlockTypes.CHANGE).toList();
     // unifiedList.addAll(requestsList);
 
     // for (var histItem in historyList) {
@@ -1044,8 +1040,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // go through each item in the requestsList and insert it into the unifiedList at the matching block:
     for (int i = 0; i < requestsList.length; i++) {
-      int index = -1;
-      int height = -1;
+      int index;
+      int height;
+
+      // if the block is null, give it one:
+      if (requestsList[i].block == null) {
+        String lastBlockHash = StateContainer.of(context).wallet.history.length > 0 ? StateContainer.of(context).wallet.history[0].hash : null;
+        requestsList[i].block = lastBlockHash;
+        await sl.get<DBHelper>().replaceTXDataByUUID(requestsList[i]);
+      }
 
       // find the index of the item in the unifiedList:
       for (int j = 0; j < unifiedList.length; j++) {
@@ -1054,7 +1057,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           continue;
         }
         // remove from the list if it's a change block:
-        if (unifiedList[j].type == "change") {
+        if (unifiedList[j].type == BlockTypes.CHANGE) {
           unifiedList.removeAt(j);
           j--;
           continue;
@@ -1065,14 +1068,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
         if (histItemHash == requestsList[i].block || histItemHash == requestsList[i].link) {
           index = j;
-          height = unifiedList[j].height;
+          height = unifiedList[j].height + 1;
           break;
         }
       }
 
       // found an index to insert at:
-      if (index != -1) {
-        print("index: ${index}");
+      if (index != null) {
         requestsList[i].height = height;
         unifiedList.insert(index, requestsList[i]);
       } else if (isEmptyOrNull(requestsList[i].block)) {
@@ -1140,6 +1142,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         // _unifiedListMap[StateContainer.of(context).wallet.address].insertAtTop(dynamicItem);
       });
     });
+
+    // ready to be rendered:
+    if (StateContainer.of(context).wallet.unifiedLoading) {
+      setState(() {
+        StateContainer.of(context).wallet.unifiedLoading = false;
+      });
+    }
   }
 
   Future<void> handleDeepLink(link) async {
@@ -1208,8 +1217,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   Future<void> handleBranchGift() async {
     if (StateContainer.of(context).giftedWallet && StateContainer.of(context).wallet != null) {
       StateContainer.of(context).giftedWallet = false;
+
+      Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
       _branchGiftDialog(StateContainer.of(context).giftedWalletSeed, StateContainer.of(context).giftedWalletMemo,
-          StateContainer.of(context).giftedWalletAmountRaw, StateContainer.of(context).giftedWalletAddress);
+          StateContainer.of(context).giftedWalletAmountRaw, StateContainer.of(context).giftedWalletSenderAddress);
     }
   }
 
@@ -2579,12 +2590,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     } else {
       if (txDetails != null && txDetails.memo.isNotEmpty && !isGift) {
         if (txDetails.is_acknowledged) {
-          setShadow = BoxShadow(
-            color: StateContainer.of(context).curTheme.primary60.withOpacity(0.2),
-            offset: Offset(0, 0),
-            blurRadius: 0,
-            spreadRadius: 1,
-          );
+          // setShadow = BoxShadow(
+          //   color: StateContainer.of(context).curTheme.primary60.withOpacity(0.2),
+          //   offset: Offset(0, 0),
+          //   blurRadius: 0,
+          //   spreadRadius: 1,
+          // );
+          // normal transaction:
+          setShadow = StateContainer.of(context).curTheme.boxShadow;
         } else {
           // set warning color if memo isn't acknowledged
           setShadow = BoxShadow(
@@ -2612,6 +2625,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
 
     String itemAmount = isPaymentRequest ? item.amount_raw : item.amount;
+
+    TransactionStateOptions transactionState;
 
     return Slidable(
       delegate: SlidableScrollDelegate(),
@@ -2890,24 +2905,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     }
 
-    if (displayName == null) {
-      log.d(_unifiedListMap[StateContainer.of(context).wallet.address][localIndex].account);
-      log.d("displayName is null?");
-      displayName = "null?";
-    }
-
-    // dynamic userOrContact = sl
-    //     .get<DBHelper>()
-    //     .getUserOrContactWithAddress(_historyListMap[StateContainer.of(context).wallet.address][localIndex].account.replaceAll("xrb_", "nano_"));
-    // if (userOrContact != null) {
-    //   if (userOrContact is User) {
-    //     displayName = "@" + userOrContact.username;
-    //   } else if (userOrContact is Contact) {
-    //     displayName = "★" + userOrContact.name;
-    //   }
-    // }
-
-    // only do this is this is a regular tx:
+    // only do this if this is a regular tx:
     // find an associated memo for this tx:
     TXData txDetails;
     if (_unifiedListMap[StateContainer.of(context).wallet.address][localIndex] is AccountHistoryResponseItem) {
@@ -2926,7 +2924,50 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   // Return widget for list
   Widget _getUnifiedListWidget(BuildContext context) {
-    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet.unifiedLoading) {
+    if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.historyLoading == false) {
+      // Setup history list
+      if (!_historyListKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
+        _historyListKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
+        setState(() {
+          _historyListMap.putIfAbsent(
+            StateContainer.of(context).wallet.address,
+            () => ListModel<AccountHistoryResponseItem>(
+              listKey: _historyListKeyMap["${StateContainer.of(context).wallet.address}"],
+              initialItems: StateContainer.of(context).wallet.history,
+            ),
+          );
+        });
+      }
+      // Setup payments list
+      if (!_requestsListKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
+        _requestsListKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
+        setState(() {
+          _requestsListMap.putIfAbsent(
+            StateContainer.of(context).wallet.address,
+            () => ListModel<TXData>(
+              listKey: _requestsListKeyMap["${StateContainer.of(context).wallet.address}"],
+              initialItems: StateContainer.of(context).wallet.requests,
+            ),
+          );
+        });
+      }
+      // Setup unified list
+      if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
+        _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
+        setState(() {
+          _unifiedListMap.putIfAbsent(
+            StateContainer.of(context).wallet.address,
+            () => ListModel<dynamic>(
+              listKey: _unifiedListKeyMap["${StateContainer.of(context).wallet.address}"],
+              initialItems: StateContainer.of(context).wallet.unified,
+            ),
+          );
+        });
+      }
+      generateUnifiedList();
+    }
+
+    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet.loading || StateContainer.of(context).wallet.unifiedLoading) {
       // Loading Animation
       return ReactiveRefreshIndicator(
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -2961,6 +3002,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 AppLocalization.of(context).sent, AppLocalization.of(context).exampleCardLittle, AppLocalization.of(context).exampleCardTo, context),
             _buildDummyTransactionCard(
                 AppLocalization.of(context).received, AppLocalization.of(context).exampleCardLot, AppLocalization.of(context).exampleCardFrom, context),
+            _buildWelcomePaymentCard(context),
+            _buildWelcomePaymentCardTwo(context),
+            _buildDummyPaymentCard(
+                AppLocalization.of(context).sent, AppLocalization.of(context).exampleCardLittle, AppLocalization.of(context).examplePaymentTo, context),
+            _buildDummyPaymentCard(
+                AppLocalization.of(context).received, AppLocalization.of(context).exampleCardLot, AppLocalization.of(context).examplePaymentFrom, context),
           ],
         ),
         onRefresh: _refresh,
@@ -2969,6 +3016,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     } else {
       _disposeAnimation();
     }
+
     if (StateContainer.of(context).activeAlert != null) {
       // Setup history list
       if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet.address}alert")) {
@@ -2995,46 +3043,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         isRefreshing: _isRefreshing,
       );
     }
-    // Setup history list
-    if (!_historyListKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
-      _historyListKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
-      setState(() {
-        _historyListMap.putIfAbsent(
-          StateContainer.of(context).wallet.address,
-          () => ListModel<AccountHistoryResponseItem>(
-            listKey: _historyListKeyMap["${StateContainer.of(context).wallet.address}"],
-            initialItems: StateContainer.of(context).wallet.history,
-          ),
-        );
-      });
-    }
-    // Setup payments list
-    if (!_requestsListKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
-      _requestsListKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
-      setState(() {
-        _requestsListMap.putIfAbsent(
-          StateContainer.of(context).wallet.address,
-          () => ListModel<TXData>(
-            listKey: _requestsListKeyMap["${StateContainer.of(context).wallet.address}"],
-            initialItems: StateContainer.of(context).wallet.requests,
-          ),
-        );
-      });
-    }
-    // Setup unified list
-    if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
-      _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
-      setState(() {
-        _unifiedListMap.putIfAbsent(
-          StateContainer.of(context).wallet.address,
-          () => ListModel<dynamic>(
-            listKey: _unifiedListKeyMap["${StateContainer.of(context).wallet.address}"],
-            initialItems: StateContainer.of(context).wallet.unified,
-          ),
-        );
-      });
-    }
-    generateUnifiedList();
+
     return ReactiveRefreshIndicator(
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       child: AnimatedList(
@@ -3047,9 +3056,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       isRefreshing: _isRefreshing,
     );
   }
-
-  // todo: padding
-
 }
 
 class TransactionDetailsSheet extends StatefulWidget {
@@ -3224,7 +3230,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
       is_unacknowledged_request = true;
     }
 
-    if (!txDetails.is_acknowledged && !txDetails.is_request && txDetails.memo.isNotEmpty) {
+    if (!txDetails.is_acknowledged && txDetails.is_memo && txDetails.memo.isNotEmpty) {
       is_unacknowledged_memo = true;
     }
 
@@ -3236,7 +3242,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
       is_gift_load = true;
 
       // Get the wallet seed by splitting the metadata by :
-      List<String> metadataList = txDetails.metadata.split(":");
+      List<String> metadataList = txDetails.metadata.split("^");
       walletSeed = metadataList[0];
       sharableLink = metadataList[1];
     }

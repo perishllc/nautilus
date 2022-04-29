@@ -457,14 +457,14 @@ class AccountService {
 
   // request money from an account:
   /*Future<PaymentResponse> */ Future<void> requestPayment(
-      String account, String amount_raw, String requesting_account, String request_signature, String request_nonce, String memo) async {
+      String account, String amount_raw, String requesting_account, String request_signature, String request_nonce, String memo_enc) async {
     PaymentRequest request = PaymentRequest(
         account: account,
         amount_raw: amount_raw,
         requesting_account: requesting_account,
         request_signature: request_signature,
         request_nonce: request_nonce,
-        memo: memo);
+        memo_enc: memo_enc);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");

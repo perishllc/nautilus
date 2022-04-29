@@ -29,9 +29,8 @@ class DBHelper {
   static const String USERS_SQL = """CREATE TABLE Users( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         username TEXT,
-        address TEXT,
-        blocked BOOLEAN)""";
-  static const String BLOCKED_SQL = """CREATE TABLE BlockedUsers( 
+        address TEXT)""";
+  static const String BLOCKED_SQL = """CREATE TABLE Blocked( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         username TEXT,
@@ -65,8 +64,8 @@ class DBHelper {
         fulfillment_time TEXT,
         block TEXT,
         link TEXT,
-        send_block TEXT,
-        recv_block TEXT,
+        memo_enc TEXT,
+        is_memo BOOLEAN,
         memo TEXT,
         uuid TEXT,
         is_acknowledged BOOLEAN,
@@ -419,9 +418,9 @@ class DBHelper {
   }
 
   // Blocked
-  Future<List<Blocked>> getBlockedUsers() async {
+  Future<List<Blocked>> getBlocked() async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM BlockedUsers ORDER BY name');
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Blocked ORDER BY name');
     List<Blocked> blocked = [];
     for (int i = 0; i < list.length; i++) {
       blocked.add(new Blocked(username: list[i]["username"], address: list[i]["address"], name: list[i]["name"]));
@@ -432,7 +431,7 @@ class DBHelper {
   Future<int> blockUser(Blocked blocked) async {
     var dbClient = await db;
     return await dbClient.rawInsert(
-        'INSERT INTO BlockedUsers (username, address, name) values(?, ?, ?)', [blocked.username, blocked.address.replaceAll("xrb_", "nano_"), blocked.name]);
+        'INSERT INTO Blocked (username, address, name) values(?, ?, ?)', [blocked.username, blocked.address.replaceAll("xrb_", "nano_"), blocked.name]);
   }
 
   Future<bool> unblockUser(Blocked blocked) async {
@@ -441,33 +440,33 @@ class DBHelper {
     bool address = false;
     bool name = false;
     if (blocked.username != null) {
-      username = await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(username) like \'%${blocked.username.toLowerCase()}\'") > 0;
+      username = await dbClient.rawDelete("DELETE FROM Blocked WHERE lower(username) like \'%${blocked.username.toLowerCase()}\'") > 0;
     }
     if (blocked.address != null) {
-      address = await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(address) like \'%${blocked.address.toLowerCase()}\'") > 0;
+      address = await dbClient.rawDelete("DELETE FROM Blocked WHERE lower(address) like \'%${blocked.address.toLowerCase()}\'") > 0;
     }
     if (blocked.name != null) {
-      name = await dbClient.rawDelete("DELETE FROM BlockedUsers WHERE lower(name) like \'%${blocked.name.toLowerCase()}\'") > 0;
+      name = await dbClient.rawDelete("DELETE FROM Blocked WHERE lower(name) like \'%${blocked.name.toLowerCase()}\'") > 0;
     }
     return username || address || name;
   }
 
   Future<bool> blockedExistsWithName(String name) async {
     var dbClient = await db;
-    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM BlockedUsers WHERE lower(name) = ?', [name.toLowerCase()]));
+    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Blocked WHERE lower(name) = ?', [name.toLowerCase()]));
     return count > 0;
   }
 
   Future<bool> blockedExistsWithAddress(String address) async {
     var dbClient = await db;
     int count = Sqflite.firstIntValue(
-        await dbClient.rawQuery('SELECT count(*) FROM BlockedUsers WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\''));
+        await dbClient.rawQuery('SELECT count(*) FROM Blocked WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\''));
     return count > 0;
   }
 
   Future<bool> blockedExistsWithUsername(String username) async {
     var dbClient = await db;
-    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM BlockedUsers WHERE lower(username) = ?', [username.toLowerCase()]));
+    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Blocked WHERE lower(username) = ?', [username.toLowerCase()]));
     return count > 0;
   }
 
@@ -506,11 +505,11 @@ class DBHelper {
     if (dbItem["link"] != null) {
       newData.link = dbItem["link"];
     }
-    if (dbItem["send_block"] != null) {
-      newData.send_block = dbItem["send_block"];
+    if (dbItem["memo_enc"] != null) {
+      newData.memo_enc = dbItem["memo_enc"];
     }
-    if (dbItem["recv_block"] != null) {
-      newData.recv_block = dbItem["recv_block"];
+    if (dbItem["is_memo"] != null) {
+      newData.is_memo = (dbItem["is_memo"] == 0 || dbItem["is_memo"] == null) ? false : true;
     }
     if (dbItem["memo"] != null) {
       newData.memo = dbItem["memo"];
@@ -558,7 +557,7 @@ class DBHelper {
     // return await dbClient.rawInsert('INSERT INTO Transactions (username, address) values(?, ?)', [txData.username, user.address.replaceAll("xrb_", "nano_")]);
 
     return await dbClient.rawInsert(
-        'INSERT INTO Transactions (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, link, send_block, recv_block, memo, uuid, is_acknowledged, height, send_height, recv_height, record_type, metadata, status) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO Transactions (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, link, memo_enc, is_memo, memo, uuid, is_acknowledged, height, send_height, recv_height, record_type, metadata, status) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           txData.from_address,
           txData.to_address,
@@ -569,8 +568,8 @@ class DBHelper {
           txData.fulfillment_time,
           txData.block,
           txData.link,
-          txData.send_block,
-          txData.recv_block,
+          txData.memo_enc,
+          txData.is_memo,
           txData.memo,
           txData.uuid,
           txData.is_acknowledged,
@@ -592,7 +591,7 @@ class DBHelper {
 
     return await dbClient.rawUpdate(
         // 'UPDATE Transactions SET (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, memo, is_acknowledged, height) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE uuid = ?',
-        'UPDATE Transactions SET from_address = ?, to_address = ?, amount_raw = ?, is_request = ?, request_time = ?, is_fulfilled = ?, fulfillment_time = ?, block = ?, link = ?, send_block = ?, recv_block = ?, memo = ?, is_acknowledged = ?, height = ?, send_height = ?, recv_height = ?, record_type = ?, metadata = ?, status = ? WHERE uuid = ?',
+        'UPDATE Transactions SET from_address = ?, to_address = ?, amount_raw = ?, is_request = ?, request_time = ?, is_fulfilled = ?, fulfillment_time = ?, block = ?, link = ?, memo_enc = ?, is_memo = ?, memo = ?, is_acknowledged = ?, height = ?, send_height = ?, recv_height = ?, record_type = ?, metadata = ?, status = ? WHERE uuid = ?',
         [
           txData.from_address,
           txData.to_address,
@@ -603,8 +602,8 @@ class DBHelper {
           (txData.fulfillment_time == null || txData.fulfillment_time.isEmpty) ? "" : txData.fulfillment_time,
           (txData.block == null || txData.block.isEmpty) ? "" : txData.block,
           (txData.link == null || txData.link.isEmpty) ? "" : txData.link,
-          (txData.send_block == null || txData.send_block.isEmpty) ? "" : txData.send_block,
-          (txData.recv_block == null || txData.recv_block.isEmpty) ? "" : txData.recv_block,
+          (txData.memo_enc == null || txData.memo_enc.isEmpty) ? "" : txData.memo_enc,
+          txData.is_memo ? 1 : 0,
           (txData.memo == null || txData.memo.isEmpty) ? "" : txData.memo,
           txData.is_acknowledged ? 1 : 0,
           txData.height,
@@ -683,7 +682,7 @@ class DBHelper {
     return null;
   }
 
-  Future<TXData> getRequestTimeSpecificTXData(String request_time) async {
+  Future<TXData> getTXDataByRequestTime(String request_time) async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE request_time = ? ORDER BY request_time DESC', [request_time]);
     if (list.length > 0) {
@@ -694,7 +693,7 @@ class DBHelper {
 
   Future<TXData> getTXDataByUUID(String uuid) async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE lower(uuid) = ? ORDER BY request_time DESC', [uuid]);
+    List<Map> list = await dbClient.rawQuery("SELECT * FROM Transactions WHERE lower(uuid) like \'%${uuid.toLowerCase()}\'");
     if (list.length > 0) {
       return createTXDataFromDB(list[0]);
     }
@@ -709,6 +708,11 @@ class DBHelper {
   Future<bool> deleteTXDataByUuid(String uuid) async {
     var dbClient = await db;
     return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(uuid) like \'%${uuid.toLowerCase()}\'") > 0;
+  }
+
+  Future<bool> deleteTXDataByBlock(String block) async {
+    var dbClient = await db;
+    return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(block) like \'%${block.toLowerCase()}\'") > 0;
   }
 
   Future<bool> deleteTXDataByRequestTime(String request_time) async {

@@ -26,10 +26,10 @@ class TXData {
   String block;
   @JsonKey(name: 'link')
   String link;
-  @JsonKey(name: 'send_block')
-  String send_block;
-  @JsonKey(name: 'recv_block')
-  String recv_block;
+  @JsonKey(name: 'memo_enc')
+  String memo_enc;
+  @JsonKey(name: 'is_memo')
+  bool is_memo;
   @JsonKey(name: 'from_address')
   String from_address;
   @JsonKey(name: 'to_address')
@@ -73,8 +73,8 @@ class TXData {
       this.fulfillment_time,
       this.block,
       this.link,
-      this.send_block,
-      this.recv_block,
+      this.memo_enc,
+      this.is_memo,
       this.memo,
       this.uuid,
       this.is_acknowledged,
@@ -113,8 +113,8 @@ class TXData {
         fulfillment_time: json["fulfillment_time"] as String,
         block: json["block"] as String,
         link: json["link"] as String,
-        send_block: json["send_block"] as String,
-        recv_block: json["recv_block"] as String,
+        memo_enc: json["memo_enc"] as String,
+        is_memo: json["is_memo"] as bool,
         memo: json["memo"] as String,
         uuid: json["uuid"] as String,
         is_acknowledged: json["is_acknowledged"] as bool,
@@ -141,8 +141,8 @@ class TXData {
       o.fulfillment_time == fulfillment_time &&
       o.block == block &&
       o.link == link &&
-      o.send_block == send_block &&
-      o.recv_block == recv_block &&
+      o.memo_enc == memo_enc &&
+      o.is_memo == is_memo &&
       o.memo == memo &&
       o.is_acknowledged == is_acknowledged &&
       o.record_type == record_type &&

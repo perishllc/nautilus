@@ -185,28 +185,39 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                       ),
                     ),
                   ),
-                  // "TO" text
-                  Container(
-                    margin: EdgeInsets.only(top: 30.0, bottom: 10),
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).withAddress, context),
-                          style: AppStyles.textStyleHeader(context),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Address text
-                  Container(
-                      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: UIUtil.threeLineAddressText(context, destinationAltered)),
+
+                  (widget.memo != null)
+                      ? (
+                          // "TO" text
+                          Container(
+                          margin: EdgeInsets.only(top: 30.0, bottom: 10),
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                CaseChange.toUpperCase(AppLocalization.of(context).withMessage, context),
+                                style: AppStyles.textStyleHeader(context),
+                              ),
+                            ],
+                          ),
+                        ))
+                      : Container(),
+                  (widget.memo != null)
+                      ?
+                      // memo text
+                      Container(
+                          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Text(
+                            widget.memo,
+                            style: AppStyles.textStyleParagraph(context),
+                            textAlign: TextAlign.center,
+                          ))
+                      : Container(),
                 ],
               ),
             ),
@@ -308,7 +319,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           block: resp.hash,
           record_type: RecordTypes.GIFT_LOAD,
           status: "created",
-          metadata: widget.paperWalletSeed + ":" + response.result,
+          metadata: widget.paperWalletSeed + "^" + response.result,
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,
@@ -351,7 +362,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           block: resp.hash,
           record_type: RecordTypes.GIFT_LOAD,
           status: "create_failed",
-          metadata: widget.paperWalletSeed + ":failed",
+          metadata: widget.paperWalletSeed + "^" + "failed",
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,

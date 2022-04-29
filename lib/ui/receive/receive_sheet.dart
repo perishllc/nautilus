@@ -31,6 +31,27 @@ import 'package:flare_flutter/flare_actor.dart';
 // request payment package:
 import 'package:nautilus_wallet_flutter/ui/request/request_sheet.dart';
 
+class NumericalRangeFormatter extends TextInputFormatter {
+  final double min;
+  final double max;
+
+  NumericalRangeFormatter({double this.min, double this.max});
+
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    if (newValue.text == '') {
+      return newValue;
+    } else if (int.parse(newValue.text) < min) {
+      return TextEditingValue().copyWith(text: min.toStringAsFixed(2));
+    } else {
+      return int.parse(newValue.text) > max ? oldValue : newValue;
+    }
+  }
+}
+
 class ReceiveSheet extends StatefulWidget {
   final AvailableCurrency localCurrency;
   final Widget qrWidget;
@@ -523,7 +544,9 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     if (_localCurrencyMode) {
       _lastLocalCurrencyAmount = _sendAmountController.text;
       _lastCryptoAmount = _convertLocalCurrencyToCrypto();
-      raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
+      if (_lastCryptoAmount.isNotEmpty) {
+        raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
+      }
     } else {
       raw = _sendAmountController.text.length > 0 ? NumberUtil.getAmountAsRaw(_sendAmountController.text) : '';
     }
@@ -569,6 +592,23 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
             ]
           : [LengthLimitingTextInputFormatter(13)],
       onChanged: (text) {
+        if (_localCurrencyMode == false && !text.contains(".") && text.isNotEmpty && text.length > 1) {
+          // if the amount is larger than 133248297 set it to that number:
+          if (BigInt.parse(text) > BigInt.parse("133248297")) {
+            setState(() {
+              // _sendAmountController.text = "133248297";
+              // prevent the user from entering more than 13324829
+              _sendAmountController.text = _sendAmountController.text.substring(0, _sendAmountController.text.length - 1);
+              _sendAmountController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAmountController.text.length));
+            });
+          } else if (text == "133248297") {
+            setState(() {
+              // easter egg!
+              _sendAmountController.text = "TODO: Easter Egg Here!";
+              _sendAmountController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAmountController.text.length));
+            });
+          }
+        }
         // Always reset the error message to be less annoying
         setState(() {
           _amountValidationText = "";

@@ -28,6 +28,7 @@ import 'package:nautilus_wallet_flutter/model/db/contact.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/request/request_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
@@ -44,6 +45,7 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class SendSheet extends StatefulWidget {
   final AvailableCurrency localCurrency;
@@ -92,6 +94,9 @@ class _SendSheetState extends State<SendSheet> {
   String _lastLocalCurrencyAmount = "";
   String _lastCryptoAmount = "";
   NumberFormat _localCurrencyFormat;
+
+  // Receive card instance
+  ReceiveSheet receive;
 
   String _rawAmount;
 
@@ -309,7 +314,7 @@ class _SendSheetState extends State<SendSheet> {
   }
 
   Future<bool> showNeedNautilusUsernameAlert() async {
-    switch (await showDialog<bool>(
+    switch (await showDialog<int>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
@@ -328,7 +333,19 @@ class _SendSheetState extends State<SendSheet> {
             actions: <Widget>[
               AppSimpleDialogOption(
                 onPressed: () {
-                  Navigator.pop(context, false);
+                  Navigator.pop(context, 2);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).goToQRCode,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, 0);
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -340,7 +357,7 @@ class _SendSheetState extends State<SendSheet> {
               ),
               AppSimpleDialogOption(
                 onPressed: () {
-                  Navigator.pop(context, true);
+                  Navigator.pop(context, 1);
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -353,12 +370,23 @@ class _SendSheetState extends State<SendSheet> {
             ],
           );
         })) {
-      case true:
+      case 2:
+        // go to qr code
+        if (receive == null) {
+          return false;
+        }
+        Navigator.of(context).pop();
+        // TODO: BACKLOG: this is a roundabout solution to get the qr code to show up
+        // probably better to do with an event bus 
+        Sheets.showAppHeightNineSheet(context: context, widget: receive);
+        return true;
+        break;
+      case 1:
         // go to the username registration page:
         Navigator.of(context).pushNamed("/register_username");
         return true;
         break;
-      case false:
+      case 0:
         // close the dialog:
         return false;
         break;
@@ -403,8 +431,30 @@ class _SendSheetState extends State<SendSheet> {
         });
   }
 
+  void paintQrCode({String address}) {
+    QrPainter painter = QrPainter(
+      data: address == null ? StateContainer.of(context).wallet.address : address,
+      version: 6,
+      gapless: false,
+      errorCorrectionLevel: QrErrorCorrectLevel.Q,
+    );
+    painter.toImageData(MediaQuery.of(context).size.width).then((byteData) {
+      setState(() {
+        receive = ReceiveSheet(
+          localCurrency: StateContainer.of(context).curCurrency,
+          address: StateContainer.of(context).wallet.address,
+          qrWidget: Container(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData.buffer.asUint8List())),
+        );
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Create QR ahead of time because it improves performance this way
+    if (receive == null && StateContainer.of(context).wallet != null) {
+      paintQrCode();
+    }
     // The main column that holds everything
     return SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
@@ -781,7 +831,8 @@ class _SendSheetState extends State<SendSheet> {
                                           : _rawAmount,
                                   destination: _sendAddressController.text,
                                   maxSend: _isMaxSend(),
-                                  localCurrency: _localCurrencyMode ? _sendAmountController.text : null));
+                                  localCurrency: _localCurrencyMode ? _sendAmountController.text : null,
+                                  memo: _sendMemoController.text));
                         }
                       }),
                       // Request Button

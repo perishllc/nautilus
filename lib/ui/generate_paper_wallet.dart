@@ -316,11 +316,13 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                       return;
                     }
 
+                    String memo = _sendMemoController.text.isNotEmpty ? _sendMemoController.text : null;
+
                     Sheets.showAppHeightNineSheet(
                         context: context,
                         widget: GenerateConfirmSheet(
                           paperWalletSeed: paper_wallet_seed,
-                          memo: _sendMemoController.text,
+                          memo: memo,
                           // localCurrency: StateContainer.of(context).curCurrency,
                           // contact: contact,
                           destination: paper_wallet_account,

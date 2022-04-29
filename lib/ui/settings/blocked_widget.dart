@@ -99,7 +99,7 @@ class _BlockedListState extends State<BlockedList> {
   }
 
   void _updateContacts() {
-    sl.get<DBHelper>().getBlockedUsers().then((contacts) {
+    sl.get<DBHelper>().getBlocked().then((contacts) {
       if (contacts == null) {
         return;
       }

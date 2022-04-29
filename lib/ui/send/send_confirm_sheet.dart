@@ -278,6 +278,38 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                               ],
                             )
                           : UIUtil.threeLineAddressText(context, destinationAltered, contactName: widget.contactName)),
+                  (widget.memo != null && widget.memo.isNotEmpty)
+                      ? (
+                          // "WITH MESSAGE" text
+                          Container(
+                          margin: EdgeInsets.only(top: 30.0, bottom: 10),
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                CaseChange.toUpperCase(AppLocalization.of(context).withMessage, context),
+                                style: AppStyles.textStyleHeader(context),
+                              ),
+                            ],
+                          ),
+                        ))
+                      : Container(),
+                  (widget.memo != null && widget.memo.isNotEmpty)
+                      ?
+                      // memo text
+                      Container(
+                          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Text(
+                            widget.memo,
+                            style: AppStyles.textStyleParagraph(context),
+                            textAlign: TextAlign.center,
+                          ))
+                      : Container(),
                 ],
               ),
             ),
@@ -378,18 +410,17 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,
+          is_memo: true,
           request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
-          memo: widget.memo,// store unencrypted memo
+          memo: widget.memo, // store unencrypted memo
           height: currentBlockHeightInList,
         );
         // add it to the database:
         await sl.get<DBHelper>().addTXData(memoTXData);
 
         try {
-
           // encrypt the memo:
           String encryptedMemo = await StateContainer.of(context).encryptMessage(widget.memo, destinationAltered, privKey);
-
           await sl
               .get<AccountService>()
               .sendTXMemo(destinationAltered, StateContainer.of(context).wallet.address, widget.amountRaw, signature, nonce_hex, encryptedMemo, resp.hash);

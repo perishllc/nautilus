@@ -323,25 +323,51 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         throw Exception("Invalid signature?!");
       }
 
-      // encrypt the memo:
-      String encryptedMemo = await StateContainer.of(context).encryptMessage(widget.memo, destinationAltered, privKey);
+      var uuid = Uuid();
+      String localUuid = "LOCAL:" + uuid.v4();
+      // current block height:
+      int currentBlockHeightInList = StateContainer.of(context).wallet.history.length > 0 ? (StateContainer.of(context).wallet.history[0].height + 1) : 1;
+      String lastBlockHash = StateContainer.of(context).wallet.history.length > 0 ? StateContainer.of(context).wallet.history[0].hash : null;
 
-      await sl
-          .get<AccountService>()
-          .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, encryptedMemo);
+      // create a local txData for the request:
+      var newRequestTXData = new TXData(
+        from_address: StateContainer.of(context).wallet.address,
+        to_address: destinationAltered,
+        amount_raw: widget.amountRaw,
+        uuid: "LOCAL:" + uuid.v4(),
+        block: lastBlockHash,
+        is_acknowledged: false,
+        is_fulfilled: false,
+        is_request: true,
+        request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+        memo: widget.memo,
+        height: currentBlockHeightInList,
+      );
+      // add it to the database:
+      await sl.get<DBHelper>().addTXData(newRequestTXData);
 
-      // // TODO:
-      // ProcessResponse resp = await sl.get<AccountService>().requestSend(
-      //     StateContainer.of(context).wallet.representative,
-      //     StateContainer.of(context).wallet.frontier,
-      //     widget.amountRaw,
-      //     destinationAltered,
-      //     StateContainer.of(context).wallet.address,
-      //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
-      //     max: widget.maxSend);
-      // if (widget.manta != null) {
-      //   widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
-      // }
+      try {
+        // encrypt the memo:
+        String encryptedMemo;
+        if (widget.memo != null && widget.memo.isNotEmpty) {
+          print("${widget.memo} ${destinationAltered} ${privKey}");
+          encryptedMemo = await StateContainer.of(context).encryptMessage(widget.memo, destinationAltered, privKey);
+          print("${encryptedMemo}");
+        }
+
+        await sl
+            .get<AccountService>()
+            .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, encryptedMemo);
+      } catch (e) {
+        sendFailed = true;
+      }
+
+      // if the send failed delete the txData from the database:
+      if (sendFailed) {
+        await sl.get<DBHelper>().deleteTXDataByUuid(localUuid);
+      } else {
+        await StateContainer.of(context).updateRequests();
+      }
 
       // Show complete
       // todo: there's a potential memory leak with contacts somewhere here?
@@ -376,29 +402,6 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       sendFailed = true;
       UIUtil.showSnackbar(AppLocalization.of(context).requestError, context, durationMs: 3500);
       Navigator.of(context).pop();
-    }
-
-    if (!sendFailed) {
-      var uuid = Uuid();
-      // current block height:
-      int currentBlockHeightInList = StateContainer.of(context).wallet.history.length > 0 ? (StateContainer.of(context).wallet.history[0].height + 1) : 1;
-      String lastBlockHash = StateContainer.of(context).wallet.history.length > 0 ? StateContainer.of(context).wallet.history[0].hash : null;
-      // int height = 0;
-      // create a local txData for the request:
-      var newRequestTXData = new TXData(
-        from_address: StateContainer.of(context).wallet.address,
-        to_address: destinationAltered,
-        amount_raw: widget.amountRaw,
-        uuid: "LOCAL:" + uuid.v4(),
-        block: lastBlockHash,
-        is_acknowledged: false,
-        is_fulfilled: false,
-        request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
-        memo: widget.memo,
-        height: currentBlockHeightInList,
-      );
-      // add it to the database:
-      await sl.get<DBHelper>().addTXData(newRequestTXData);
     }
   }
 }
