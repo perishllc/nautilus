@@ -99,6 +99,18 @@ class AppLocalization {
     return Intl.message('unconfirmed', desc: 'history_unconfirmed', name: 'unconfirmed');
   }
 
+  String get unacknowledged {
+    return Intl.message('unacknowledged', desc: 'history_unacknowledged', name: 'unacknowledged');
+  }
+
+  String get unread {
+    return Intl.message('unread', desc: 'history_unread', name: 'unread');
+  }
+
+  String get failedMessage {
+    return Intl.message('msg failed', desc: 'failed_message', name: 'failedMessage');
+  }
+
   String get failed {
     return Intl.message('failed', desc: 'history_failed', name: 'failed');
   }
@@ -486,6 +498,10 @@ class AppLocalization {
 
   String get sendMemoError {
     return Intl.message("Sending memo with transaction failed, they may not be a Nautilus user.", desc: 'send_memo_error', name: 'sendMemoError');
+  }
+
+  String get memoSentButNotReceived {
+    return Intl.message("Memo re-sent! If still unacknowledged, the recipient's device may just be offline.", desc: 'send_memo_error', name: 'memoSentButNotReceived');
   }
 
   String get requestError {
@@ -1144,7 +1160,7 @@ If the recipient is already a Nautilus user they will instantly get a prompt to 
 
   String get needUsernameAlert {
     return Intl.message(
-        "This feature requires you to have a username set in your wallet. Would you like to register one now?\n\nYou'll never need a username to receive payment requests, only to send them.\n\nAlternatively, you can show a QR code for someone to scan.",
+        "This feature requires you to have a username set in your wallet. Would you like to register one now?\n\nThis is an artificial limitation intended to prevent spam, but is planned to be removed in a future release. You'll never need a username to receive payment requests, only to send them.\n\nAlternatively, you can show a QR code for someone to scan.",
         desc: 'username_needed_header',
         name: 'needUsernameAlert');
   }

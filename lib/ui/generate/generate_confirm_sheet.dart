@@ -299,6 +299,9 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
             ..addCustomMetadata('seed', widget.paperWalletSeed)
             ..addCustomMetadata('address', destinationAltered)
             ..addCustomMetadata('memo', widget.memo)
+            ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet.address)// TODO: sign these:
+            ..addCustomMetadata('signature', "")
+            ..addCustomMetadata('nonce', "")
             ..addCustomMetadata('amount_raw', widget.amountRaw));
 
       BranchLinkProperties lp = BranchLinkProperties(
@@ -323,6 +326,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,
+          is_memo: false,
           request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
           memo: widget.memo,
           height: 0,
@@ -366,6 +370,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,
+          is_memo: false,
           request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
           memo: widget.memo,
           height: 0,

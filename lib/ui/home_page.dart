@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
@@ -21,6 +22,7 @@ import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/blocked.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
@@ -60,6 +62,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/transaction_state_tag.dart';
 import 'package:nautilus_wallet_flutter/util/manta.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
@@ -69,6 +72,7 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:share/share.dart';
+import 'package:uuid/uuid.dart';
 
 class AppHomePage extends StatefulWidget {
   PriceConversion priceConversion;
@@ -295,9 +299,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(senderAddress);
     if (user != null) {
       if (user is Contact) {
-        userOrSendAddress = user.name;
+        userOrSendAddress = "★" + user.name;
       } else if (user is User) {
-        userOrSendAddress = user.username;
+        userOrSendAddress = "@" + user.username;
       }
     } else {
       userOrSendAddress = senderAddress;
@@ -654,13 +658,20 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             // save to db:
             sl.get<DBHelper>().replaceTXDataByUUID(tx);
           }
-          if (tx.is_memo && isEmptyOrNull(tx.link) && !isEmptyOrNull(tx.block)) {
+          if (tx.is_memo != null && tx.is_memo && isEmptyOrNull(tx.link) && !isEmptyOrNull(tx.block)) {
             if (_historyListMap[StateContainer.of(context).wallet.address] != null) {
               // find if there's a matching link:
               // for (var histItem in StateContainer.of(context).wallet.history) {
               for (var histItem in _historyListMap[StateContainer.of(context).wallet.address].items) {
                 if (histItem.link == tx.block) {
                   tx.link = histItem.hash;
+
+                  // if an unacknowledged memo and we're on the receiving side, acknowledge it:
+                  if (tx.is_memo && tx.is_acknowledged == false && tx.to_address == StateContainer.of(context).wallet.address) {
+                    tx.is_acknowledged = true;
+                    sl.get<AccountService>().requestACK(tx.uuid, tx.from_address);
+                  }
+
                   // save to db:
                   sl.get<DBHelper>().replaceTXDataByUUID(tx);
                   break;
@@ -2497,6 +2508,19 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     );
   } //Dummy Payment Card End
 
+  Widget getTransactionStateTag(TransactionStateOptions transactionState) {
+    if (transactionState != null) {
+      return Container(
+        margin: EdgeInsetsDirectional.only(
+          top: 4,
+        ),
+        child: TransactionStateTag(transactionState: transactionState),
+      );
+    } else {
+      return SizedBox();
+    }
+  }
+
 // Transaction Card/List Item
   Widget _buildUnifiedCard(dynamic item, Animation<double> animation, String displayName, BuildContext context, {TXData txDetails}) {
     String text;
@@ -2507,6 +2531,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     bool isTransaction = item is AccountHistoryResponseItem;
     bool isRecipient = false;
     bool isGift = false;
+    bool is_memo = false;
+    bool is_unacknowledged_memo = false;
+
+    if (txDetails != null && txDetails.is_memo) {
+      is_memo = true;
+    }
+
+    if (is_memo && !txDetails.is_acknowledged) {
+      is_unacknowledged_memo = true;
+    }
 
     if (isPaymentRequest) {
       isRecipient = StateContainer.of(context).wallet.address == item.to_address;
@@ -2627,6 +2661,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     String itemAmount = isPaymentRequest ? item.amount_raw : item.amount;
 
     TransactionStateOptions transactionState;
+
+    if (is_unacknowledged_memo) {
+      transactionState = TransactionStateOptions.FAILED_MSG;
+    }
+
+    if (isTransaction) {
+      if ((item.confirmed != null && !item.confirmed) || (currentConfHeight > -1 && item.height != null && item.height > currentConfHeight)) {
+        transactionState = TransactionStateOptions.UNCONFIRMED;
+      }
+    }
 
     return Slidable(
       delegate: SlidableScrollDelegate(),
@@ -2823,16 +2867,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                           ),
 
                           // TRANSACTION STATE TAG
-                          (!isPaymentRequest &&
-                                  ((item.confirmed != null && !item.confirmed) ||
-                                      (currentConfHeight > -1 && item.height != null && item.height > currentConfHeight)))
+                          (transactionState != null)
                               ? Container(
                                   margin: EdgeInsetsDirectional.only(
                                     top: 4,
                                   ),
-                                  child: TransactionStateTag(transactionState: TransactionStateOptions.UNCONFIRMED),
+                                  child: TransactionStateTag(transactionState: transactionState),
                                 )
-                              : SizedBox()
+                              : SizedBox(),
                         ],
                       ),
                     ),
@@ -3209,6 +3251,10 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
   bool _seedCopied = false;
   // Timer reference so we can cancel repeated events
   Timer _seedCopiedTimer;
+  // address copied
+  bool _addressCopied = false;
+  // Timer reference so we can cancel repeated events
+  Timer _addressCopiedTimer;
 
   @override
   Widget build(BuildContext context) {
@@ -3247,6 +3293,11 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
       sharableLink = metadataList[1];
     }
 
+    String addressToCopy = txDetails.to_address;
+    if (txDetails.to_address == StateContainer.of(context).wallet.address) {
+      addressToCopy = txDetails.from_address;
+    }
+
     return SafeArea(
       minimum: EdgeInsets.only(
         bottom: MediaQuery.of(context).size.height * 0.035,
@@ -3258,69 +3309,6 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                // A stack for Copy Address and Add Contact buttons
-                // Stack(
-                //   children: <Widget>[
-                //     // A row for Copy Address Button
-                //     Row(
-                //       children: <Widget>[
-                //         AppButton.buildAppButton(
-                //             context,
-                //             // Share Address Button
-                //             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                //             _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
-                //             Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                //           // Clipboard.setData(new ClipboardData(text: widget.address));
-                //           if (mounted) {
-                //             setState(() {
-                //               // Set copied style
-                //               _addressCopied = true;
-                //             });
-                //           }
-                //           if (_addressCopiedTimer != null) {
-                //             _addressCopiedTimer.cancel();
-                //           }
-                //           _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
-                //             if (mounted) {
-                //               setState(() {
-                //                 _addressCopied = false;
-                //               });
-                //             }
-                //           });
-                //         }),
-                //       ],
-                //     ),
-                //     // A row for Add Contact Button
-                //     Row(
-                //       mainAxisAlignment: MainAxisAlignment.end,
-                //       crossAxisAlignment: CrossAxisAlignment.center,
-                //       children: <Widget>[
-                //         Container(
-                //           margin: EdgeInsetsDirectional.only(top: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[1], end: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[2]),
-                //           child: Container(
-                //               height: 55,
-                //               width: 55,
-                //               // Add Contact Button
-                //               child: FlatButton(
-                //                 onPressed: () {
-                //                   Navigator.of(context).pop();
-                //                   // Sheets.showAppHeightNineSheet(context: context, widget: AddContactSheet(address: widget.address));
-                //                 },
-                //                 splashColor: Colors.transparent,
-                //                 highlightColor: Colors.transparent,
-                //                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                //                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-                //                 child: Icon(AppIcons.addcontact,
-                //                     size: 35,
-                //                     color:
-                //                         _addressCopied ? StateContainer.of(context).curTheme.successDark : StateContainer.of(context).curTheme.backgroundDark),
-                //               )),
-                //         ),
-                //       ],
-                //     ),
-                //   ],
-                // ),
-
                 // A row for View Details button
                 Row(
                   children: <Widget>[
@@ -3330,6 +3318,68 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                         return UIUtil.showBlockExplorerWebview(context, txDetails.block);
                       }));
                     }),
+                  ],
+                ),
+                // A stack for Copy Address and Add Contact buttons
+                Stack(
+                  children: <Widget>[
+                    // A row for Copy Address Button
+                    Row(
+                      children: <Widget>[
+                        AppButton.buildAppButton(
+                            context,
+                            // Share Address Button
+                            _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                            _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
+                            Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                          Clipboard.setData(new ClipboardData(text: addressToCopy));
+                          if (mounted) {
+                            setState(() {
+                              // Set copied style
+                              _addressCopied = true;
+                            });
+                          }
+                          if (_addressCopiedTimer != null) {
+                            _addressCopiedTimer.cancel();
+                          }
+                          _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                            if (mounted) {
+                              setState(() {
+                                _addressCopied = false;
+                              });
+                            }
+                          });
+                        }),
+                      ],
+                    ),
+                    // A row for Add Contact Button
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsetsDirectional.only(top: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[1], end: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[2]),
+                          child: Container(
+                              height: 55,
+                              width: 55,
+                              // Add Contact Button
+                              child: FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  Sheets.showAppHeightNineSheet(context: context, widget: AddContactSheet(address: addressToCopy));
+                                },
+                                splashColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+                                child: Icon(AppIcons.addcontact,
+                                    size: 35,
+                                    color:
+                                        _addressCopied ? StateContainer.of(context).curTheme.successDark : StateContainer.of(context).curTheme.backgroundDark),
+                              )),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
 
@@ -3442,11 +3492,77 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                               // Share Address Button
                               AppButtonType.PRIMARY_OUTLINE,
                               AppLocalization.of(context).resendMemo,
-                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                            // TODO:
-                            // setState(() {});
-                            // StateContainer.of(context).updateRequests();
-                            // Navigator.of(context).pop();
+                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () async {
+                            // show sending animation:
+                            bool animationOpen = true;
+                            Navigator.of(context).push(AnimationLoadingOverlay(AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong,
+                                StateContainer.of(context).curTheme.animationOverlayMedium,
+                                onPoppedCallback: () => animationOpen = false));
+
+                            bool memoSendFailed = false;
+
+                            // send the memo again:
+                            String privKey =
+                                NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
+                            // get epoch time as hex:
+                            int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+                            String nonce_hex = secondsSinceEpoch.toRadixString(16);
+                            String signature = NanoSignatures.signBlock(nonce_hex, privKey);
+
+                            // check validity locally:
+                            String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet?.address);
+                            bool isValid = NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+                            if (!isValid) {
+                              throw Exception("Invalid signature?!");
+                            }
+
+                            // create a local memo object:
+                            var uuid = Uuid();
+                            String localUuid = "LOCAL:" + uuid.v4();
+                            var memoTXData = new TXData(
+                              from_address: txDetails.from_address,
+                              to_address: txDetails.to_address,
+                              amount_raw: txDetails.amount_raw,
+                              uuid: localUuid,
+                              block: txDetails.block,
+                              is_acknowledged: false,
+                              is_fulfilled: false,
+                              is_request: false,
+                              is_memo: true,
+                              // request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+                              request_time: txDetails.request_time,
+                              memo: txDetails.memo, // store unencrypted memo
+                              height: txDetails.height,
+                            );
+                            // add it to the database:
+                            await sl.get<DBHelper>().addTXData(memoTXData);
+
+                            try {
+                              // encrypt the memo:
+                              String encryptedMemo = await StateContainer.of(context).encryptMessage(txDetails.memo, txDetails.to_address, privKey);
+                              await sl.get<AccountService>().sendTXMemo(txDetails.to_address, StateContainer.of(context).wallet.address, txDetails.amount_raw,
+                                  signature, nonce_hex, encryptedMemo, txDetails.block);
+                            } catch (e) {
+                              memoSendFailed = true;
+                            }
+
+                            // if the memo send failed delete the object:
+                            if (memoSendFailed) {
+                              print("memo send failed, deleting TXData object");
+                              // remove from the database:
+                              await sl.get<DBHelper>().deleteTXDataByUuid(localUuid);
+                              // show error:
+                              UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
+                            } else {
+                              // delete the old memo by uuid:
+                              await sl.get<DBHelper>().deleteTXDataByUuid(txDetails.uuid);
+                              // memo sent successfully, show success:
+                              UIUtil.showSnackbar(AppLocalization.of(context).memoSentButNotReceived, context, durationMs: 5000);
+                              // hack to get tx memo to update:
+                              EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
+                            }
+
+                            Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
                           }),
                         ],
                       )

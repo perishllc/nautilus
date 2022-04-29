@@ -1339,7 +1339,7 @@ class StateContainerState extends State<StateContainer> {
       // check if exists in db:
       var existingTXData = await sl.get<DBHelper>().getTXDataByBlock(block);
       if (existingTXData != null) {
-        print("memo block exists");
+        // print("memo block exists");
         // delete local version and add new one:
         // existingTXData.memo = memo;
         existingTXData.block = block;
@@ -1363,7 +1363,6 @@ class StateContainerState extends State<StateContainer> {
           await sl.get<AccountService>().requestACK(uuid, requesting_account);
         }
       } else {
-        print("except2!");
         throw Exception("no txData found for this memo in payment record!");
       }
     }

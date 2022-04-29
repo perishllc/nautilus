@@ -267,6 +267,38 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                               ],
                             )
                           : UIUtil.threeLineAddressText(context, destinationAltered, contactName: widget.contactName)),
+                  (widget.memo != null && widget.memo.isNotEmpty)
+                      ? (
+                          // "WITH MESSAGE" text
+                          Container(
+                          margin: EdgeInsets.only(top: 30.0, bottom: 10),
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                CaseChange.toUpperCase(AppLocalization.of(context).withMessage, context),
+                                style: AppStyles.textStyleHeader(context),
+                              ),
+                            ],
+                          ),
+                        ))
+                      : Container(),
+                  (widget.memo != null && widget.memo.isNotEmpty)
+                      ?
+                      // memo text
+                      Container(
+                          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Text(
+                            widget.memo,
+                            style: AppStyles.textStyleParagraph(context),
+                            textAlign: TextAlign.center,
+                          ))
+                      : Container(),
                 ],
               ),
             ),
@@ -339,6 +371,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         is_acknowledged: false,
         is_fulfilled: false,
         is_request: true,
+        is_memo: false,
         request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
         memo: widget.memo,
         height: currentBlockHeightInList,

@@ -347,8 +347,31 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
 
     if (totalTransferred != BigInt.zero) {
       // create a txdata to be shown in place of the tx:
-      // TODO:
+      // TODO: create a txdata for gift card open:
       // var newWalletLoad = new TXData(from_address: from_address, to_address: to_address, amount_raw: totalTransferred.toString());
+      // create a local memo object to show the gift card creation details:
+      // var uuid = Uuid();
+      // var newGiftTXData = new TXData(
+      //   from_address: StateContainer.of(context).wallet.address,
+      //   to_address: destinationAltered,
+      //   amount_raw: widget.amountRaw,
+      //   uuid: "LOCAL:" + uuid.v4(),
+      //   block: resp.hash,
+      //   record_type: RecordTypes.GIFT_OPEN,
+      //   status: "opened",
+      //   metadata: widget.paperWalletSeed + "^" + response.result,
+      //   is_acknowledged: false,
+      //   is_fulfilled: false,
+      //   is_request: false,
+      //   is_memo: false,
+      //   request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+      //   memo: widget.memo,
+      //   height: 0,
+      // );
+      // // add it to the database:
+      // await sl.get<DBHelper>().addTXData(newGiftTXData);
+      // // hack to get tx memo to update:
+      // EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
     }
     return totalTransferred;
     // EventTaxiImpl.singleton().fire(TransferCompleteEvent(amount: totalTransferred));
