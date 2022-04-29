@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:871480363204:android:074d7635f75eab1f492191",
+        "mobilesdk_app_id": "1:871480363204:android:9e4022cb87c00946492191",
         "android_client_info": {
           "package_name": "co.perish.nautiluswallet"
         }
@@ -29,6 +29,14 @@
             {
               "client_id": "871480363204-1nnd8banoi5vl6pfd45rshv6han9h88r.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "871480363204-bd20vmid7gk577hkioua0124o9g1ass5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co.perish.nautilus",
+                "app_store_id": "1615775960"
+              }
             }
           ]
         }
