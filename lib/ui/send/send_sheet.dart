@@ -377,7 +377,7 @@ class _SendSheetState extends State<SendSheet> {
         }
         Navigator.of(context).pop();
         // TODO: BACKLOG: this is a roundabout solution to get the qr code to show up
-        // probably better to do with an event bus 
+        // probably better to do with an event bus
         Sheets.showAppHeightNineSheet(context: context, widget: receive);
         return true;
         break;
@@ -612,161 +612,153 @@ class _SendSheetState extends State<SendSheet> {
             Expanded(
               child: Container(
                 margin: EdgeInsets.only(top: 5, bottom: 5),
-                child: Stack(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        // Clear focus of our fields when tapped in this empty space
-                        _sendAddressFocusNode.unfocus();
-                        _sendAmountFocusNode.unfocus();
-                        _sendMemoFocusNode.unfocus();
-                      },
-                      child: Container(
-                        color: Colors.transparent,
-                        child: SizedBox.expand(),
-                        constraints: BoxConstraints.expand(),
-                      ),
-                    ),
-                    // A column for Enter Amount, Enter Address, Error containers and the pop up list
-                    KeyboardAvoider(
-                      duration: Duration(milliseconds: 0),
-                      autoScroll: true,
-                      focusPadding: 40,
-                      child: Column(
-                        children: <Widget>[
-                          Stack(
-                            children: <Widget>[
-                              // Column for Balance Text, Enter Amount container + Enter Amount Error container
-                              Column(
-                                children: <Widget>[
-                                  // ******* Enter Amount Container ******* //
-                                  getEnterAmountContainer(),
-                                  // ******* Enter Amount Container End ******* //
+                child: GestureDetector(
+                  onTap: () {
+                    // Clear focus of our fields when tapped in this empty space
+                    _sendAddressFocusNode.unfocus();
+                    _sendAmountFocusNode.unfocus();
+                    _sendMemoFocusNode.unfocus();
+                  },
+                  child: KeyboardAvoider(
+                    duration: Duration(milliseconds: 0),
+                    autoScroll: true,
+                    focusPadding: 40,
+                    child: Column(
+                      children: <Widget>[
+                        Stack(
+                          children: <Widget>[
+                            // Column for Balance Text, Enter Amount container + Enter Amount Error container
+                            Column(
+                              children: <Widget>[
+                                // ******* Enter Amount Container ******* //
+                                getEnterAmountContainer(),
+                                // ******* Enter Amount Container End ******* //
 
-                                  // ******* Enter Amount Error Container ******* //
-                                  Container(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    margin: EdgeInsets.only(top: 3),
-                                    child: Text(_amountValidationText,
-                                        style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: StateContainer.of(context).curTheme.primary,
-                                          fontFamily: 'NunitoSans',
-                                          fontWeight: FontWeight.w600,
-                                        )),
-                                  ),
-                                  // ******* Enter Amount Error Container End ******* //
-                                ],
-                              ),
+                                // ******* Enter Amount Error Container ******* //
+                                Container(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  margin: EdgeInsets.only(top: 3),
+                                  child: Text(_amountValidationText,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: StateContainer.of(context).curTheme.primary,
+                                        fontFamily: 'NunitoSans',
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                ),
+                                // ******* Enter Amount Error Container End ******* //
+                              ],
+                            ),
 
-                              // Column for Enter Address container + Enter Address Error container
-                              Column(
-                                children: <Widget>[
-                                  Container(
+                            // Column for Enter Address container + Enter Address Error container
+                            Column(
+                              children: <Widget>[
+                                Container(
+                                  alignment: Alignment.topCenter,
+                                  child: Stack(
                                     alignment: Alignment.topCenter,
-                                    child: Stack(
-                                      alignment: Alignment.topCenter,
-                                      children: <Widget>[
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                                          alignment: Alignment.bottomCenter,
-                                          constraints: BoxConstraints(maxHeight: 160, minHeight: 0),
-                                          // ********************************************* //
-                                          // ********* The pop-up Contacts List ********* //
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(25),
+                                    children: <Widget>[
+                                      Container(
+                                        margin:
+                                            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                        alignment: Alignment.bottomCenter,
+                                        constraints: BoxConstraints(maxHeight: 160, minHeight: 0),
+                                        // ********************************************* //
+                                        // ********* The pop-up Contacts List ********* //
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(25),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(25),
+                                              color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                            ),
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(25),
-                                                color: StateContainer.of(context).curTheme.backgroundDarkest,
                                               ),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(25),
-                                                ),
-                                                margin: EdgeInsets.only(bottom: 50),
-                                                child: ListView.builder(
-                                                  shrinkWrap: true,
-                                                  padding: EdgeInsets.only(bottom: 0, top: 0),
-                                                  itemCount: _users.length,
-                                                  itemBuilder: (context, index) {
-                                                    return _buildUserItem(_users[index]);
-                                                  },
-                                                ), // ********* The pop-up Contacts List End ********* //
-                                                // ************************************************** //
-                                              ),
+                                              margin: EdgeInsets.only(bottom: 50),
+                                              child: ListView.builder(
+                                                shrinkWrap: true,
+                                                padding: EdgeInsets.only(bottom: 0, top: 0),
+                                                itemCount: _users.length,
+                                                itemBuilder: (context, index) {
+                                                  return _buildUserItem(_users[index]);
+                                                },
+                                              ), // ********* The pop-up Contacts List End ********* //
+                                              // ************************************************** //
                                             ),
                                           ),
                                         ),
+                                      ),
 
-                                        // ******* Enter Address Container ******* //
-                                        getEnterAddressContainer(),
-                                        // ******* Enter Address Container End ******* //
-                                      ],
-                                    ),
+                                      // ******* Enter Address Container ******* //
+                                      getEnterAddressContainer(),
+                                      // ******* Enter Address Container End ******* //
+                                    ],
                                   ),
+                                ),
 
-                                  // ******* Enter Address Error Container ******* //
-                                  Container(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    margin: EdgeInsets.only(top: 3),
-                                    child: Text(_addressValidationText,
-                                        style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: StateContainer.of(context).curTheme.primary,
-                                          fontFamily: 'NunitoSans',
-                                          fontWeight: FontWeight.w600,
-                                        )),
-                                  ),
-                                  // ******* Enter Address Error Container End ******* //
-                                ],
-                              ),
+                                // ******* Enter Address Error Container ******* //
+                                Container(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  margin: EdgeInsets.only(top: 3),
+                                  child: Text(_addressValidationText,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: StateContainer.of(context).curTheme.primary,
+                                        fontFamily: 'NunitoSans',
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                ),
+                                // ******* Enter Address Error Container End ******* //
+                              ],
+                            ),
 
-                              // Column for Enter Memo container + Enter Memo Error container
-                              Column(
-                                children: <Widget>[
-                                  Container(
+                            // Column for Enter Memo container + Enter Memo Error container
+                            Column(
+                              children: <Widget>[
+                                Container(
+                                  alignment: Alignment.topCenter,
+                                  child: Stack(
                                     alignment: Alignment.topCenter,
-                                    child: Stack(
-                                      alignment: Alignment.topCenter,
-                                      children: <Widget>[
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                                          alignment: Alignment.bottomCenter,
-                                          constraints: BoxConstraints(maxHeight: 174, minHeight: 0),
-                                        ),
+                                    children: <Widget>[
+                                      Container(
+                                        margin:
+                                            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                        alignment: Alignment.bottomCenter,
+                                        constraints: BoxConstraints(maxHeight: 174, minHeight: 0),
+                                      ),
 
-                                        // ******* Enter Memo Container ******* //
-                                        getEnterMemoContainer(),
-                                        // ******* Enter Memo Container End ******* //
-                                      ],
-                                    ),
+                                      // ******* Enter Memo Container ******* //
+                                      getEnterMemoContainer(),
+                                      // ******* Enter Memo Container End ******* //
+                                    ],
                                   ),
+                                ),
 
-                                  // ******* Enter Memo Error Container ******* //
-                                  Container(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    margin: EdgeInsets.only(top: 3),
-                                    child: Text(_memoValidationText,
-                                        style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: StateContainer.of(context).curTheme.primary,
-                                          fontFamily: 'NunitoSans',
-                                          fontWeight: FontWeight.w600,
-                                        )),
-                                  ),
-                                  // ******* Enter Memo Error Container End ******* //
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                                // ******* Enter Memo Error Container ******* //
+                                Container(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  margin: EdgeInsets.only(top: 3),
+                                  child: Text(_memoValidationText,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: StateContainer.of(context).curTheme.primary,
+                                        fontFamily: 'NunitoSans',
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                ),
+                                // ******* Enter Memo Error Container End ******* //
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
+
+                // A column for Enter Amount, Enter Address, Error containers and the pop up list
               ),
             ),
 

@@ -3047,9 +3047,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             _buildWelcomePaymentCard(context),
             _buildWelcomePaymentCardTwo(context),
             _buildDummyPaymentCard(
-                AppLocalization.of(context).sent, AppLocalization.of(context).exampleCardLittle, AppLocalization.of(context).examplePaymentTo, context),
+                AppLocalization.of(context).request, AppLocalization.of(context).exampleCardLittle, AppLocalization.of(context).examplePaymentTo, context, isAcknowleged: true, isRequest: true, isFulfilled: true),
             _buildDummyPaymentCard(
-                AppLocalization.of(context).received, AppLocalization.of(context).exampleCardLot, AppLocalization.of(context).examplePaymentFrom, context),
+                AppLocalization.of(context).requested, AppLocalization.of(context).exampleCardLot, AppLocalization.of(context).examplePaymentFrom, context, isAcknowleged: true),
           ],
         ),
         onRefresh: _refresh,
