@@ -1213,22 +1213,27 @@ class _SendSheetState extends State<SendSheet> {
       });
       _sendAddressFocusNode.unfocus();
     }
-    if (isValid && isRequest) {
-      // notifications must be turned on:
+    if (isValid) {
+      // notifications must be turned on if sending a request or memo:
       bool notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
-      if (!notificationsEnabled) {
+
+      if ((isRequest || _sendMemoController.text.isNotEmpty) && !notificationsEnabled) {
         bool notificationTurnedOn = await showNotificationDialog();
         if (!notificationTurnedOn) {
           isValid = false;
         } else {
-          // not sure why this is need to get it to update:
+          // not sure why this is needed to get it to update:
+          // probably event bus related:
           await sl.get<SharedPrefsUtil>().setNotificationsOn(true);
         }
       }
-      // still valid && you have to have a nautilus username to send requests:
-      if (isValid && StateContainer.of(context).wallet.username == null) {
-        isValid = false;
-        await showNeedNautilusUsernameAlert();
+
+      if (isRequest) {
+        // still valid && you have to have a nautilus username to send requests:
+        if (isValid && StateContainer.of(context).wallet.username == null) {
+          isValid = false;
+          await showNeedNautilusUsernameAlert();
+        }
       }
 
       if (isValid && sl.get<AccountService>().fallbackConnected) {

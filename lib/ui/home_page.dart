@@ -642,23 +642,24 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   void _updateTXDetailsMap(String account) {
-    sl.get<DBHelper>().getAccountSpecificRecords(account).then((data) {
+    sl.get<DBHelper>().getAccountSpecificTXData(account).then((data) {
       setState(() {
         _txRecords = data;
         _txDetailsMap.clear();
         for (var tx in _txRecords) {
-          if (tx.is_request) {
-            continue;
-          }
-          if (tx.is_request && isEmptyOrNull(tx.block)) {
+          if (tx.is_request && (isEmptyOrNull(tx.block) || isEmptyOrNull(tx.link))) {
             // set to the last block:
             String lastBlockHash = StateContainer.of(context).wallet.history.length > 0 ? StateContainer.of(context).wallet.history[0].hash : null;
-            tx.block = lastBlockHash;
-            tx.link = lastBlockHash;
+            if (isEmptyOrNull(tx.block) &&  StateContainer.of(context).wallet.address == tx.from_address) {
+              tx.block = lastBlockHash;
+            }
+            if (isEmptyOrNull(tx.link) && StateContainer.of(context).wallet.address == tx.to_address) {
+              tx.link = lastBlockHash;
+            }
             // save to db:
             sl.get<DBHelper>().replaceTXDataByUUID(tx);
           }
-          if (tx.is_memo != null && tx.is_memo && isEmptyOrNull(tx.link) && !isEmptyOrNull(tx.block)) {
+          if (tx.is_memo && isEmptyOrNull(tx.link) && !isEmptyOrNull(tx.block)) {
             if (_historyListMap[StateContainer.of(context).wallet.address] != null) {
               // find if there's a matching link:
               // for (var histItem in StateContainer.of(context).wallet.history) {
@@ -3047,9 +3048,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             _buildWelcomePaymentCard(context),
             _buildWelcomePaymentCardTwo(context),
             _buildDummyPaymentCard(
-                AppLocalization.of(context).request, AppLocalization.of(context).exampleCardLittle, AppLocalization.of(context).examplePaymentTo, context, isAcknowleged: true, isRequest: true, isFulfilled: true),
+                AppLocalization.of(context).request, AppLocalization.of(context).exampleCardLittle, AppLocalization.of(context).examplePaymentTo, context,
+                isAcknowleged: true, isRequest: true, isFulfilled: true),
             _buildDummyPaymentCard(
-                AppLocalization.of(context).requested, AppLocalization.of(context).exampleCardLot, AppLocalization.of(context).examplePaymentFrom, context, isAcknowleged: true),
+                AppLocalization.of(context).requested, AppLocalization.of(context).exampleCardLot, AppLocalization.of(context).examplePaymentFrom, context,
+                isAcknowleged: true),
           ],
         ),
         onRefresh: _refresh,
