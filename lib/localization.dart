@@ -532,7 +532,7 @@ class AppLocalization {
   }
 
   String get enterMemo {
-    return Intl.message("XNOte for nautilus users", desc: 'enter_memo', name: 'enterMemo');
+    return Intl.message("XNOte", desc: 'enter_memo', name: 'enterMemo');
   }
 
   String get enterGiftMemo {

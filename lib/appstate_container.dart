@@ -1432,8 +1432,9 @@ class StateContainerState extends State<StateContainer> {
       existingTXData.from_address = txData.from_address;
       await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
     } else {
-      print("did not exist!");
-      // add it since it doesn't exist:
+      print("adding memo txData to the database!");
+      // TODO: check for duplicates and remove them:
+      // add it since it doesn't exist in the db:
       await sl.get<DBHelper>().addTXData(txData);
     }
     // send acknowledgement to server / requester:
