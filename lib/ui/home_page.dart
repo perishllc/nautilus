@@ -2392,10 +2392,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     if (isRecipient) {
       text = AppLocalization.of(context).request;
-      icon = AppIcons.sent;
+      icon = AppIcons.call_made;
     } else {
       text = AppLocalization.of(context).requested;
-      icon = AppIcons.received;
+      icon = AppIcons.call_received;
     }
 
     BoxShadow setShadow;
@@ -2623,7 +2623,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         );
       }
     } else {
-      if (txDetails != null && txDetails.memo.isNotEmpty && !isGift) {
+      if (txDetails != null && txDetails.memo != null && txDetails.memo.isNotEmpty && !isGift) {
         if (txDetails.is_acknowledged) {
           // setShadow = BoxShadow(
           //   color: StateContainer.of(context).curTheme.primary60.withOpacity(0.2),
@@ -3048,11 +3048,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             _buildWelcomePaymentCard(context),
             _buildWelcomePaymentCardTwo(context),
             _buildDummyPaymentCard(
-                AppLocalization.of(context).request, AppLocalization.of(context).exampleCardLittle, AppLocalization.of(context).examplePaymentTo, context,
-                isAcknowleged: true, isRequest: true, isFulfilled: true),
+                AppLocalization.of(context).requested, AppLocalization.of(context).exampleCardLittle, AppLocalization.of(context).examplePaymentTo, context,
+                isAcknowleged: true, isRequest: true, isFulfilled: true, memo: AppLocalization.of(context).examplePaymentFulfilledMemo),
             _buildDummyPaymentCard(
-                AppLocalization.of(context).requested, AppLocalization.of(context).exampleCardLot, AppLocalization.of(context).examplePaymentFrom, context,
-                isAcknowleged: true),
+                AppLocalization.of(context).request, AppLocalization.of(context).exampleCardLot, AppLocalization.of(context).examplePaymentFrom, context,
+                isAcknowleged: true, memo: AppLocalization.of(context).examplePaymentPendingMemo),
           ],
         ),
         onRefresh: _refresh,

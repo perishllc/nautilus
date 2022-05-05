@@ -1077,11 +1077,11 @@ class AppLocalization {
   }
 
   String get examplePaymentTo {
-    return Intl.message("best friend", desc: 'example_card_to', name: 'examplePaymentTo');
+    return Intl.message("@best_friend", desc: 'example_card_to', name: 'examplePaymentTo');
   }
 
   String get examplePaymentFrom {
-    return Intl.message("landlord", desc: 'example_card_from', name: 'examplePaymentFrom');
+    return Intl.message("@landlord", desc: 'example_card_from', name: 'examplePaymentFrom');
   }
 
   /// -- END EXAMPLE HOME SCREEN CARDS
