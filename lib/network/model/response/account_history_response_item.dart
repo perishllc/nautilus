@@ -33,7 +33,15 @@ class AccountHistoryResponseItem {
   @JsonKey(ignore: true)
   bool confirmed;
 
-  AccountHistoryResponseItem({String type, String subtype, String account, String amount, String hash, int height, String link, this.confirmed}) {
+  AccountHistoryResponseItem(
+      {String type,
+      String subtype,
+      String account,
+      String amount,
+      String hash,
+      int height,
+      String link,
+      this.confirmed}) {
     this.type = type;
     this.subtype = subtype;
     this.account = account;
@@ -49,6 +57,10 @@ class AccountHistoryResponseItem {
 
   String getShorterString() {
     return new Address(this.account).getShorterString();
+  }
+
+  String getShortestString() {
+    return new Address(this.account).getShortestString();
   }
 
   /**

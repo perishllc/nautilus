@@ -12,6 +12,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       expiration: json['expires'] as String,
       representative: json['representative'] as bool,
       blocked: json['blocked'] as bool,
+      last_updated: json['last_updated'] as int,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -20,4 +21,5 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'expires': instance.expiration,
       'representative': instance.representative,
       'blocked': instance.blocked,
+      'last_updated': instance.last_updated,
     };

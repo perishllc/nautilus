@@ -19,6 +19,8 @@ class User {
   bool representative;
   @JsonKey(name: 'blocked')
   bool blocked;
+  @JsonKey(name: 'last_updated')
+  int last_updated;
   // @JsonKey(ignore: true)
   // String monkeyPath;
   // @JsonKey(ignore: true)
@@ -26,7 +28,7 @@ class User {
   // @JsonKey(ignore: true)
   // Widget monkeyWidgetLarge;
 
-  User({@required this.username, @required this.address, this.expiration, this.representative, this.blocked});
+  User({@required this.username, @required this.address, this.expiration, this.representative, this.blocked, this.last_updated});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -34,7 +36,8 @@ class User {
         address: json["address"] as String,
         expiration: json["expires"] as String,
         representative: json["representative"] as bool,
-        blocked: json["blocked"] as bool);
+        blocked: json["blocked"] as bool,
+        last_updated: json["last_updated"] as int);
   }
   Map<String, dynamic> toJson() => _$UserToJson(this);
 

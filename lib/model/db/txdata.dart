@@ -102,6 +102,14 @@ class TXData {
     }
   }
 
+  String getShortestString(isRecipient) {
+    if (isRecipient) {
+      return new Address(this.from_address).getShortestString();
+    } else {
+      return new Address(this.to_address).getShortestString();
+    }
+  }
+
   factory TXData.fromJson(Map<String, dynamic> json) {
     return TXData(
         from_address: json["from_address"] as String,

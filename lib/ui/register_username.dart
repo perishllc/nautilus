@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
@@ -232,137 +233,149 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
         builder: (context, constraints) => SafeArea(
-          minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
+          minimum: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
               //A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        (StateContainer.of(context).wallet.username == null)
-                            ?
-                            // Back Button
-                            Container(
-                                margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
-                                height: 50,
-                                width: 50,
-                                child: FlatButton(
-                                    highlightColor: StateContainer.of(context).curTheme.text15,
-                                    splashColor: StateContainer.of(context).curTheme.text15,
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                                    padding: EdgeInsets.all(0.0),
-                                    child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
-                              )
-                            : Container(),
-                      ],
-                    ),
-                    // The header
-                    Container(
-                      margin: EdgeInsetsDirectional.only(
-                        start: smallScreen(context) ? 30 : 40,
-                        end: smallScreen(context) ? 30 : 40,
-                        top: 10,
-                        bottom: 25,
-                      ),
-                      alignment: AlignmentDirectional(0, 0),
-                      child: AutoSizeText(
-                        AppLocalization.of(context).registerUsernameHeader,
-                        style: AppStyles.textStyleHeaderColored(context),
-                        stepGranularity: 0.1,
-                        maxLines: 1,
-                        minFontSize: 12,
-                      ),
-                    ),
-                    // The paragraph
-                    Container(
-                      margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
-                      alignment: Alignment.centerLeft,
-                      child: Column(
+                child: KeyboardAvoider(
+                  duration: Duration(milliseconds: 0),
+                  autoScroll: true,
+                  focusPadding: 40,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
                         children: <Widget>[
-                          AutoSizeText(
-                            AppLocalization.of(context).usernameInfo,
-                            style: AppStyles.textStyleParagraph(context),
-                            maxLines: 6,
-                            stepGranularity: 0.5,
-                          ),
-                          Container(
-                            margin: EdgeInsetsDirectional.only(top: 15),
-                            child: AutoSizeText(
-                              AppLocalization.of(context).usernameWarning,
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                              maxLines: 2,
-                              // maxFontSize: 14,
-                              stepGranularity: 0.5,
-                            ),
-                          ),
+                          (StateContainer.of(context).wallet.username == null)
+                              ?
+                              // Back Button
+                              Container(
+                                  margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
+                                  height: 50,
+                                  width: 50,
+                                  child: FlatButton(
+                                      highlightColor: StateContainer.of(context).curTheme.text15,
+                                      splashColor: StateContainer.of(context).curTheme.text15,
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                      padding: EdgeInsets.all(0.0),
+                                      child: Icon(AppIcons.back,
+                                          color: StateContainer.of(context).curTheme.text, size: 24)),
+                                )
+                              : Container(),
                         ],
                       ),
-                    ),
-
-                    (StateContainer.of(context).wallet.username != null)
-                        ? Column(
-                            children: <Widget>[
-                              // The paragraph describing we already have a username:
-                              Container(
-                                margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 45.0),
-                                alignment: Alignment.centerLeft,
-                                child: Column(
-                                  children: <Widget>[
-                                    AutoSizeText(
-                                      AppLocalization.of(context).usernameAlreadyRegistered,
-                                      style: AppStyles.textStyleParagraph(context),
-                                      maxLines: 6,
-                                      stepGranularity: 0.5,
-                                    ),
-                                  ],
-                                ),
+                      // The header
+                      Container(
+                        margin: EdgeInsetsDirectional.only(
+                          start: smallScreen(context) ? 30 : 40,
+                          end: smallScreen(context) ? 30 : 40,
+                          top: 10,
+                          bottom: 25,
+                        ),
+                        alignment: AlignmentDirectional(0, 0),
+                        child: AutoSizeText(
+                          AppLocalization.of(context).registerUsernameHeader,
+                          style: AppStyles.textStyleHeaderColored(context),
+                          stepGranularity: 0.1,
+                          maxLines: 1,
+                          minFontSize: 12,
+                        ),
+                      ),
+                      // The paragraph
+                      Container(
+                        margin: EdgeInsetsDirectional.only(
+                            start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          children: <Widget>[
+                            AutoSizeText(
+                              AppLocalization.of(context).usernameInfo,
+                              style: AppStyles.textStyleParagraph(context),
+                              maxLines: 6,
+                              stepGranularity: 0.5,
+                            ),
+                            Container(
+                              margin: EdgeInsetsDirectional.only(top: 15),
+                              child: AutoSizeText(
+                                AppLocalization.of(context).usernameWarning,
+                                style: AppStyles.textStyleParagraphPrimary(context),
+                                maxLines: 2,
+                                // maxFontSize: 14,
+                                stepGranularity: 0.5,
                               ),
-                            ],
-                          )
-                        :
-                        // Column for Enter Address container + Enter Address Error container
-                        Column(
-                            children: <Widget>[
-                              Container(
-                                alignment: Alignment.topCenter,
-                                child: Stack(
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      (StateContainer.of(context).wallet.username != null)
+                          ? Column(
+                              children: <Widget>[
+                                // The paragraph describing we already have a username:
+                                Container(
+                                  margin: EdgeInsetsDirectional.only(
+                                      start: smallScreen(context) ? 30 : 40,
+                                      end: smallScreen(context) ? 30 : 40,
+                                      top: 45.0),
+                                  alignment: Alignment.centerLeft,
+                                  child: Column(
+                                    children: <Widget>[
+                                      AutoSizeText(
+                                        AppLocalization.of(context).usernameAlreadyRegistered,
+                                        style: AppStyles.textStyleParagraph(context),
+                                        maxLines: 6,
+                                        stepGranularity: 0.5,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            )
+                          :
+                          // Column for Enter Address container + Enter Address Error container
+                          Column(
+                              children: <Widget>[
+                                Container(
                                   alignment: Alignment.topCenter,
-                                  children: <Widget>[
-                                    Container(
-                                      margin:
-                                          EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                                      alignment: Alignment.bottomCenter,
-                                    ),
+                                  child: Stack(
+                                    alignment: Alignment.topCenter,
+                                    children: <Widget>[
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            left: MediaQuery.of(context).size.width * 0.105,
+                                            right: MediaQuery.of(context).size.width * 0.105),
+                                        alignment: Alignment.bottomCenter,
+                                      ),
 
-                                    // ******* Enter Address Container ******* //
-                                    getEnterAddressContainer(),
-                                    // ******* Enter Address Container End ******* //
-                                  ],
+                                      // ******* Enter Address Container ******* //
+                                      getEnterAddressContainer(),
+                                      // ******* Enter Address Container End ******* //
+                                    ],
+                                  ),
                                 ),
-                              ),
 
-                              // ******* Enter Address Error Container ******* //
-                              Container(
-                                alignment: AlignmentDirectional(0, 0),
-                                margin: EdgeInsets.only(top: 20),
-                                child: Text(_usernameValidationText,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: 'NunitoSans',
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
-                              // ******* Enter Address Error Container End ******* //
-                            ],
-                          ),
-                  ],
+                                // ******* Enter Address Error Container ******* //
+                                Container(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  margin: EdgeInsets.only(top: 20),
+                                  child: Text(_usernameValidationText,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: StateContainer.of(context).curTheme.primary,
+                                        fontFamily: 'NunitoSans',
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                ),
+                                // ******* Enter Address Error Container End ******* //
+                              ],
+                            ),
+                    ],
+                  ),
                 ),
               ),
               (_showRegisterButton)
@@ -396,8 +409,11 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).checkAvailability, Dimens.BUTTON_BOTTOM_DIMENS,
-                                onPressed: () async {
+                            AppButton.buildAppButton(
+                                context,
+                                AppButtonType.PRIMARY,
+                                AppLocalization.of(context).checkAvailability,
+                                Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                               String username = _usernameController.text.replaceAll("@", "");
                               if (_usernameController.text.isEmpty) {
                                 setState(() {
@@ -434,8 +450,11 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).registerUsername, Dimens.BUTTON_BOTTOM_DIMENS,
-                                onPressed: () async {
+                            AppButton.buildAppButton(
+                                context,
+                                AppButtonType.PRIMARY,
+                                AppLocalization.of(context).registerUsername,
+                                Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                               String username = _usernameController.text.replaceAll("@", "");
 
                               String price;
@@ -508,7 +527,8 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
           if (text.contains(" ")) {
             text = text.replaceAll(" ", "");
             _usernameController.text = text;
-            _usernameController.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController.text.length));
+            _usernameController.selection =
+                TextSelection.fromPosition(TextPosition(offset: _usernameController.text.length));
           }
 
           if (text.length > 0) {
@@ -524,7 +544,8 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
           if (text.length > 0 && !isUser && !isNano && !isFavorite) {
             // add @ to the beginning of the string:
             _usernameController.text = "@" + text;
-            _usernameController.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController.text.length));
+            _usernameController.selection =
+                TextSelection.fromPosition(TextPosition(offset: _usernameController.text.length));
             isUser = true;
           }
 
@@ -532,7 +553,8 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
             setState(() {
               // remove the @ from the beginning of the string:
               _usernameController.text = text.replaceFirst("@nano_", "nano_");
-              _usernameController.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController.text.length));
+              _usernameController.selection =
+                  TextSelection.fromPosition(TextPosition(offset: _usernameController.text.length));
               isUser = false;
             });
           }
