@@ -487,8 +487,8 @@ class AccountService {
     }
   }
 
-  Future<void> requestACK(String request_uuid, String account) async {
-    PaymentACK request = PaymentACK(uuid: request_uuid, account: account);
+  Future<void> requestACK(String request_uuid, String account, String requesting_account) async {
+    PaymentACK request = PaymentACK(uuid: request_uuid, account: account, requesting_account: requesting_account);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");

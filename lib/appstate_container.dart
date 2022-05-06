@@ -491,9 +491,7 @@ class StateContainerState extends State<StateContainer> {
     _fcmUpdateSub = EventTaxiImpl.singleton().registerTo<FcmUpdateEvent>().listen((event) {
       if (wallet != null) {
         sl.get<SharedPrefsUtil>().getNotificationsOn().then((enabled) {
-          sl
-              .get<AccountService>()
-              .sendRequest(FcmUpdateRequest(account: wallet.address, fcmToken: event.token, enabled: enabled));
+          sl.get<AccountService>().sendRequest(FcmUpdateRequest(account: wallet.address, fcmToken: event.token, enabled: enabled));
         });
       }
     });
@@ -808,8 +806,8 @@ class StateContainerState extends State<StateContainer> {
     PendingResponseItem pendingItem = PendingResponseItem(hash: resp.hash, source: resp.account, amount: resp.amount);
     String receivedHash = await handlePendingItem(pendingItem, link_as_account: resp.block.linkAsAccount);
     if (receivedHash != null) {
-      AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
-          type: BlockTypes.RECEIVE, account: resp.account, amount: resp.amount, hash: receivedHash, link: resp.hash);
+      AccountHistoryResponseItem histItem =
+          AccountHistoryResponseItem(type: BlockTypes.RECEIVE, account: resp.account, amount: resp.amount, hash: receivedHash, link: resp.hash);
       log.d("Received histItem ${json.encode(histItem.toJson())}");
       if (!wallet.history.contains(histItem)) {
         setState(() {
@@ -876,8 +874,7 @@ class StateContainerState extends State<StateContainer> {
       if (accountResp.openBlock == null) {
         sl.get<Logger>().d("Handling ${item.hash} as open");
         try {
-          ProcessResponse resp =
-              await sl.get<AccountService>().requestOpen(item.amount, item.hash, link_as_account, privKey);
+          ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, link_as_account, privKey);
           wallet.openBlock = resp.hash;
           wallet.frontier = resp.hash;
           pendingRequests.remove(item.hash);
@@ -891,8 +888,8 @@ class StateContainerState extends State<StateContainer> {
         }
       } else {
         try {
-          ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-              wallet.representative, accountResp.frontier, item.amount, item.hash, link_as_account, privKey);
+          ProcessResponse resp =
+              await sl.get<AccountService>().requestReceive(wallet.representative, accountResp.frontier, item.amount, item.hash, link_as_account, privKey);
           // wallet.frontier = resp.hash;
           pendingRequests.remove(item.hash);
           alreadyReceived.add(item.hash);
@@ -942,8 +939,7 @@ class StateContainerState extends State<StateContainer> {
       // Publish open
       sl.get<Logger>().d("Handling ${item.hash} as open");
       try {
-        ProcessResponse resp =
-            await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet.address, await _getPrivKey());
+        ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet.address, await _getPrivKey());
         wallet.openBlock = resp.hash;
         wallet.frontier = resp.hash;
         pendingRequests.remove(item.hash);
@@ -957,8 +953,8 @@ class StateContainerState extends State<StateContainer> {
       // Publish receive
       sl.get<Logger>().d("Handling ${item.hash} as receive");
       try {
-        ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-            wallet.representative, wallet.frontier, item.amount, item.hash, wallet.address, await _getPrivKey());
+        ProcessResponse resp =
+            await sl.get<AccountService>().requestReceive(wallet.representative, wallet.frontier, item.amount, item.hash, wallet.address, await _getPrivKey());
 
         wallet.frontier = resp.hash;
         pendingRequests.remove(item.hash);
@@ -1008,11 +1004,7 @@ class StateContainerState extends State<StateContainer> {
       }
       sl.get<AccountService>().clearQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet.address,
-          currency: curCurrency.getIso4217Code(),
-          uuid: uuid,
-          fcmToken: fcmToken,
-          notificationEnabled: notificationsEnabled));
+          account: wallet.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().queueRequest(AccountHistoryRequest(account: wallet.address, raw: true));
       sl.get<AccountService>().processQueue();
       // Request account history
@@ -1025,8 +1017,7 @@ class StateContainerState extends State<StateContainer> {
         count = 50;
       }
       // try {
-      AccountHistoryResponse resp =
-          await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count, raw: true);
+      AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count, raw: true);
       _requestBalances();
       bool postedToHome = false;
       // Iterate list in reverse (oldest to newest block)
@@ -1034,8 +1025,8 @@ class StateContainerState extends State<StateContainer> {
         // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
         if (!wallet.history.contains(item)) {
           int startIndex = 0; // Index to start inserting into the list
-          int lastIndex = resp.history.indexWhere((item) => wallet.history.contains(
-              item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+          int lastIndex = resp.history.indexWhere(
+              (item) => wallet.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
           lastIndex = lastIndex <= 0 ? resp.history.length : lastIndex;
           setState(() {
             wallet.history.insertAll(0, resp.history.getRange(startIndex, lastIndex));
@@ -1060,9 +1051,7 @@ class StateContainerState extends State<StateContainer> {
       // Receive pendings
       if (pending) {
         pendingRequests.clear();
-        PendingResponse pendingResp = await sl
-            .get<AccountService>()
-            .getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
+        PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
 
         // for unfulfilled payments:
         List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
@@ -1137,11 +1126,7 @@ class StateContainerState extends State<StateContainer> {
       }
       sl.get<AccountService>().removeSubscribeHistoryPendingFromQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet.address,
-          currency: curCurrency.getIso4217Code(),
-          uuid: uuid,
-          fcmToken: fcmToken,
-          notificationEnabled: notificationsEnabled));
+          account: wallet.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().processQueue();
     }
   }
@@ -1268,7 +1253,7 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requesting_account);
+    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
 
     await updateRequests();
   }
@@ -1341,9 +1326,18 @@ class StateContainerState extends State<StateContainer> {
           }
 
           if (oldTXData != null) {
-            log.d("deleting duplicate txData!");
+            print("removing old txData!");
             // remove the old tx by the uuid:
             await sl.get<DBHelper>().deleteTXDataByUuid(oldTXData.uuid);
+
+            // if we didn't replace an existing txData, add it to the db:
+            if (txData == null) {
+              // add it since it doesn't exist:
+              print("adding payment_record to db");
+              oldTXData.uuid = uuid;
+              oldTXData.request_time = request_time;
+              await sl.get<DBHelper>().addTXData(oldTXData);
+            }
           }
         }
 
@@ -1381,7 +1375,7 @@ class StateContainerState extends State<StateContainer> {
           // send acknowledgement to server / requester:
           // sleep for a second to make sure the txData is updated:
           await Future.delayed(Duration(seconds: 1));
-          await sl.get<AccountService>().requestACK(uuid, requesting_account);
+          await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
         }
       } else {
         throw Exception("no txData found for this memo in payment record!");
@@ -1459,7 +1453,7 @@ class StateContainerState extends State<StateContainer> {
       await sl.get<DBHelper>().addTXData(txData);
     }
     // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requesting_account);
+    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
     await updateRequests();
     // hack to get tx memo to update:
     EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
@@ -1493,7 +1487,8 @@ class StateContainerState extends State<StateContainer> {
     }
 
     if (data.containsKey("payment_ack")) {
-      print("handling payment_ack from: ${data['account']}");
+      // print("handling payment_ack from: ${data['requesting_account']}");
+      print("handling payment_ack");
       String amount_raw = data['amount_raw'];
       String requesting_account = data['requesting_account'];
       String memo = data['memo'];
@@ -1507,10 +1502,10 @@ class StateContainerState extends State<StateContainer> {
       // set acknowledged to true:
       var txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
       if (txData != null) {
-        log.d("changed ack status!");
         await sl.get<DBHelper>().changeTXAckStatus(uuid, true);
+        print("changed ack status!");
       } else {
-        log.d("we didn't have a txData for this payment ack!");
+        print("we didn't have a txData for this payment ack!");
       }
       await updateRequests();
     }

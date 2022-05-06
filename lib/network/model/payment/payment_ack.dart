@@ -15,10 +15,18 @@ class PaymentACK extends BaseRequest {
   @JsonKey(name: 'account')
   String account;
 
-  PaymentACK({String action, String uuid, String account}) : super() {
+  @JsonKey(name: 'requesting_account')
+  String requesting_account;
+
+  @JsonKey(name: 'sub_action')
+  String sub_action;
+
+  PaymentACK({String action, String uuid, String account, String requesting_account, String sub_action}) : super() {
     this.action = Actions.PAYMENT_ACK;
     this.uuid = uuid ?? "";
     this.account = account ?? "";
+    this.requesting_account = requesting_account ?? "";
+    this.sub_action = sub_action ?? "";
   }
 
   factory PaymentACK.fromJson(Map<String, dynamic> json) => _$PaymentACKFromJson(json);
