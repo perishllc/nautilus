@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addContact" : MessageLookupByLibrary.simpleMessage("संपर्क डालें"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("पता कॉपी हो गया है"),
     "addressHint" : MessageLookupByLibrary.simpleMessage("पता लिखिए"),
+    "addressMissing" : MessageLookupByLibrary.simpleMessage("कृपया एक पता दर्ज करें"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("शेयर करें"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("कृपया राशि दर्ज करें"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("प्रमाणीकरण का तरीका"),

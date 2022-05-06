@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addContact" : MessageLookupByLibrary.simpleMessage("Add Contact"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("Address Copied"),
     "addressHint" : MessageLookupByLibrary.simpleMessage("Enter Address"),
+    "addressMissing" : MessageLookupByLibrary.simpleMessage("Please Enter an Address"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("Share Address"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Please Enter an Amount"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Authentication Method"),

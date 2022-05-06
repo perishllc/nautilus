@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "addContact" : MessageLookupByLibrary.simpleMessage("Kontakt Hozzáadása"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("Cím Másolva"),
+    "addressMissing" : MessageLookupByLibrary.simpleMessage("Adjon meg egy célt"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("Megosztás"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Adjon meg egy összeget"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Hitelesítési Módszer"),
