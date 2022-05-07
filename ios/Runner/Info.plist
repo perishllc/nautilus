@@ -13,53 +13,7 @@
 	<key>CFBundleIcons</key>
 	<dict>
 		<key>CFBundleAlternateIcons</key>
-		<dict>
-			<key>carbon</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>C-Icon-App</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>indium</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>In-Icon-App</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>neptunium</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Np-Icon-App</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>thorium</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Th-Icon-App</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-			<key>titanium</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Ti-Icon-App</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-		</dict>
+		<dict/>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
 			<key>CFBundleIconFiles</key>

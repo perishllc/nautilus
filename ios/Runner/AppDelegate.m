@@ -42,19 +42,19 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
                                            details:nil]);
                 return;
             }
-            if ([@"nautilus" isEqualToString:icon ]) {
-                [self lc_setAlternateIconName:nil];
-            } else if ([@"titanium" isEqualToString:icon]) {
-                [self lc_setAlternateIconName:@"titanium"];
-            } else if ([@"indium" isEqualToString:icon]) {
-                [self lc_setAlternateIconName:@"indium"];
-            } else if ([@"neptunium" isEqualToString:icon]) {
-                [self lc_setAlternateIconName:@"neptunium"];
-            } else if ([@"thorium" isEqualToString:icon]) {
-                [self lc_setAlternateIconName:@"thorium"];
-            } else if ([@"carbon" isEqualToString:icon]) {
-                [self lc_setAlternateIconName:@"carbon"];
-            }
+//            if ([@"nautilus" isEqualToString:icon ]) {
+//                [self lc_setAlternateIconName:nil];
+//            } else if ([@"titanium" isEqualToString:icon]) {
+//                [self lc_setAlternateIconName:@"titanium"];
+//            } else if ([@"indium" isEqualToString:icon]) {
+//                [self lc_setAlternateIconName:@"indium"];
+//            } else if ([@"neptunium" isEqualToString:icon]) {
+//                [self lc_setAlternateIconName:@"neptunium"];
+//            } else if ([@"thorium" isEqualToString:icon]) {
+//                [self lc_setAlternateIconName:@"thorium"];
+//            } else if ([@"carbon" isEqualToString:icon]) {
+//                [self lc_setAlternateIconName:@"carbon"];
+//            }
         } else if ([@"setSecureClipboardItem" isEqualToString:call.method]) {
             NSDictionary *arguments = [call arguments];
             NSString *value = arguments[@"value"];

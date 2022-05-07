@@ -953,40 +953,40 @@ class AppIcon {
   static const _channel = const MethodChannel('fappchannel');
 
   static Future<void> setAppIcon(AppIconEnum iconToChange) async {
-    if (!Platform.isIOS) {
+    // if (!Platform.isIOS) {
       return null;
-    }
-    String iconStr = "nautilus";
-    switch (iconToChange) {
-      case AppIconEnum.THORIUM:
-        iconStr = "thorium";
-        break;
-      case AppIconEnum.NEPTUNIUM:
-        iconStr = "neptunium";
-        break;
-      case AppIconEnum.INDIUM:
-        iconStr = "indium";
-        break;
-      case AppIconEnum.TITANIUM:
-        iconStr = "titanium";
-        break;
-      case AppIconEnum.CARBON:
-        iconStr = "carbon";
-        break;
-      case AppIconEnum.PURPELIUM:
-        iconStr = "purpeleium";
-        break;
-      case AppIconEnum.NYANO:
-        iconStr = "nyano";
-        break;
-      case AppIconEnum.NAUTILUS:
-      default:
-        iconStr = "nautilus";
-        break;
-    }
-    final Map<String, dynamic> params = <String, dynamic>{
-      'icon': iconStr,
-    };
-    return await _channel.invokeMethod('changeIcon', params);
+    // }
+    // String iconStr = "nautilus";
+    // switch (iconToChange) {
+    //   case AppIconEnum.THORIUM:
+    //     iconStr = "thorium";
+    //     break;
+    //   case AppIconEnum.NEPTUNIUM:
+    //     iconStr = "neptunium";
+    //     break;
+    //   case AppIconEnum.INDIUM:
+    //     iconStr = "indium";
+    //     break;
+    //   case AppIconEnum.TITANIUM:
+    //     iconStr = "titanium";
+    //     break;
+    //   case AppIconEnum.CARBON:
+    //     iconStr = "carbon";
+    //     break;
+    //   case AppIconEnum.PURPELIUM:
+    //     iconStr = "purpeleium";
+    //     break;
+    //   case AppIconEnum.NYANO:
+    //     iconStr = "nyano";
+    //     break;
+    //   case AppIconEnum.NAUTILUS:
+    //   default:
+    //     iconStr = "nautilus";
+    //     break;
+    // }
+    // final Map<String, dynamic> params = <String, dynamic>{
+    //   'icon': iconStr,
+    // };
+    // return await _channel.invokeMethod('changeIcon', params);
   }
 }
