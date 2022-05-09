@@ -356,7 +356,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       }
 
       var uuid = Uuid();
-      String localUuid = "LOCAL:" + uuid.v4();
+      String local_uuid = "LOCAL:" + uuid.v4();
       // current block height:
       int currentBlockHeightInList = StateContainer.of(context).wallet.history.length > 0 ? (StateContainer.of(context).wallet.history[0].height + 1) : 1;
       String lastBlockHash = StateContainer.of(context).wallet.history.length > 0 ? StateContainer.of(context).wallet.history[0].hash : null;
@@ -366,7 +366,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         from_address: StateContainer.of(context).wallet.address,
         to_address: destinationAltered,
         amount_raw: widget.amountRaw,
-        uuid: "LOCAL:" + uuid.v4(),
+        uuid: local_uuid,
         block: lastBlockHash,
         is_acknowledged: false,
         is_fulfilled: false,
@@ -390,50 +390,57 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
 
         await sl
             .get<AccountService>()
-            .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, encryptedMemo);
+            .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, encryptedMemo, local_uuid);
       } catch (e) {
         print("payment request failed: ${e.toString()}");
         sendFailed = true;
       }
 
-      // if the send failed delete the txData from the database:
+      // if the send failed:
       if (sendFailed) {
-        await sl.get<DBHelper>().deleteTXDataByUuid(localUuid);
+        // await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
         // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
         await Future.delayed(Duration(seconds: 2));
+        // update the list view:
+        await StateContainer.of(context).updateRequests();
+        await StateContainer.of(context).updateUnified();
+        // go to home and show error:
+        Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+        UIUtil.showSnackbar(AppLocalization.of(context).requestError, context, durationMs: 5500);
       } else {
         print("request succeeded");
-      }
 
-      // Show complete
-      // todo: there's a potential memory leak with contacts somewhere here?
-      dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(widget.destination);
-      String contactName;
-      if (user != null) {
-        if (user is Contact) {
-          contactName = "★" + user.name;
-        } else if (user is User) {
-          contactName = "@" + user.username;
+        // Show complete
+        // todo: there's a potential memory leak with contacts somewhere here?
+        dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(widget.destination);
+        String contactName;
+        if (user != null) {
+          if (user is Contact) {
+            contactName = "★" + user.name;
+          } else if (user is User) {
+            contactName = "@" + user.username;
+          }
         }
+
+        // update the list view:
+        await StateContainer.of(context).updateRequests();
+        await StateContainer.of(context).updateUnified();
+
+        Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+        StateContainer.of(context).requestUpdate();
+
+        Sheets.showAppHeightNineSheet(
+            context: context,
+            closeOnTap: true,
+            removeUntilHome: true,
+            widget: RequestCompleteSheet(
+              amountRaw: widget.amountRaw,
+              destination: destinationAltered,
+              contactName: contactName,
+              localAmount: widget.localCurrency,
+              paymentRequest: widget.paymentRequest,
+            ));
       }
-
-      // update the list view:
-      await StateContainer.of(context).updateRequests();
-      await StateContainer.of(context).updateUnified();
-
-      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-      StateContainer.of(context).requestUpdate();
-      Sheets.showAppHeightNineSheet(
-          context: context,
-          closeOnTap: true,
-          removeUntilHome: true,
-          widget: RequestCompleteSheet(
-            amountRaw: widget.amountRaw,
-            destination: destinationAltered,
-            contactName: contactName,
-            localAmount: widget.localCurrency,
-            paymentRequest: widget.paymentRequest,
-          ));
     } catch (e) {
       // Send failed
       if (animationOpen) {

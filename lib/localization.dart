@@ -172,8 +172,7 @@ class AppLocalization {
   }
 
   String get seedCopied {
-    return Intl.message('Seed Copied to Clipboard\nIt is pasteable for 2 minutes.',
-        desc: 'intro_new_wallet_seed_copied', name: 'seedCopied');
+    return Intl.message('Seed Copied to Clipboard\nIt is pasteable for 2 minutes.', desc: 'intro_new_wallet_seed_copied', name: 'seedCopied');
   }
 
   String get scanQrCode {
@@ -189,13 +188,11 @@ class AppLocalization {
   }
 
   String get qrInvalidSeed {
-    return Intl.message("QR code does not contain a valid seed or private key",
-        desc: "qr_invalid_seed", name: 'qrInvalidSeed');
+    return Intl.message("QR code does not contain a valid seed or private key", desc: "qr_invalid_seed", name: 'qrInvalidSeed');
   }
 
   String get qrInvalidAddress {
-    return Intl.message("QR code does not contain a valid destination",
-        desc: "qr_invalid_address", name: 'qrInvalidAddress');
+    return Intl.message("QR code does not contain a valid destination", desc: "qr_invalid_address", name: 'qrInvalidAddress');
   }
 
   String get qrInvalidPermissions {
@@ -204,8 +201,7 @@ class AppLocalization {
   }
 
   String get qrUnknownError {
-    return Intl.message("Could not Read QR Code",
-        desc: "An unknown error occurred with the QR scanner", name: "qrUnknownError");
+    return Intl.message("Could not Read QR Code", desc: "An unknown error occurred with the QR scanner", name: "qrUnknownError");
   }
 
   String get markAsPaid {
@@ -249,8 +245,7 @@ class AppLocalization {
   }
 
   String get removeContactConfirmation {
-    return Intl.message('Are you sure you want to delete %1?',
-        desc: 'contact_remove_sure', name: 'removeContactConfirmation');
+    return Intl.message('Are you sure you want to delete %1?', desc: 'contact_remove_sure', name: 'removeContactConfirmation');
   }
 
   String get contactHeader {
@@ -282,8 +277,7 @@ class AppLocalization {
   }
 
   String get contactsImportSuccess {
-    return Intl.message("Sucessfully imported %1 contacts.",
-        desc: 'contact_import_success', name: 'contactsImportSuccess');
+    return Intl.message("Sucessfully imported %1 contacts.", desc: 'contact_import_success', name: 'contactsImportSuccess');
   }
 
   String get contactAdded {
@@ -311,8 +305,7 @@ class AppLocalization {
   }
 
   String get removeFavoriteConfirmation {
-    return Intl.message('Are you sure you want to delete %1?',
-        desc: 'favorite_remove_sure', name: 'removeFavoriteConfirmation');
+    return Intl.message('Are you sure you want to delete %1?', desc: 'favorite_remove_sure', name: 'removeFavoriteConfirmation');
   }
 
   String get favoriteHeader {
@@ -388,8 +381,7 @@ class AppLocalization {
   }
 
   String get removeBlockedConfirmation {
-    return Intl.message('Are you sure you want to delete %1?',
-        desc: 'blocked_remove_sure', name: 'removeBlockedConfirmation');
+    return Intl.message('Are you sure you want to delete %1?', desc: 'blocked_remove_sure', name: 'removeBlockedConfirmation');
   }
 
   String get blockedAdded {
@@ -408,15 +400,12 @@ class AppLocalization {
   }
 
   String get backupSeedConfirm {
-    return Intl.message('Are you sure that you backed up your wallet seed?',
-        desc: 'intro_new_wallet_backup', name: 'backupSeedConfirm');
+    return Intl.message('Are you sure that you backed up your wallet seed?', desc: 'intro_new_wallet_backup', name: 'backupSeedConfirm');
   }
 
   String get seedBackupInfo {
-    return Intl.message(
-        "Below is your wallet's seed. It is crucial that you backup your seed and never store it as plaintext or a screenshot.",
-        desc: 'intro_new_wallet_seed',
-        name: 'seedBackupInfo');
+    return Intl.message("Below is your wallet's seed. It is crucial that you backup your seed and never store it as plaintext or a screenshot.",
+        desc: 'intro_new_wallet_seed', name: 'seedBackupInfo');
   }
 
   String get copySeed {
@@ -508,8 +497,7 @@ class AppLocalization {
   }
 
   String get sendMemoError {
-    return Intl.message("Sending memo with transaction failed, they may not be a Nautilus user.",
-        desc: 'send_memo_error', name: 'sendMemoError');
+    return Intl.message("Sending memo with transaction failed, they may not be a Nautilus user.", desc: 'send_memo_error', name: 'sendMemoError');
   }
 
   String get memoSentButNotReceived {
@@ -528,7 +516,7 @@ class AppLocalization {
   }
 
   String get requestError {
-    return Intl.message("This user doesn't appear to have Nautilus installed, or has payment notifications disabled.",
+    return Intl.message("Request Failed: This user doesn't appear to have Nautilus installed, or has notifications disabled.",
         desc: 'request_generic_error', name: 'requestError');
   }
 
@@ -587,8 +575,7 @@ class AppLocalization {
   }
 
   String get addressOrUserMissing {
-    return Intl.message("Please Enter a Username or Address",
-        desc: 'send_enter_user_address', name: 'addressOrUserMissing');
+    return Intl.message("Please Enter a Username or Address", desc: 'send_enter_user_address', name: 'addressOrUserMissing');
   }
 
   String get amountMissing {
@@ -679,13 +666,11 @@ class AppLocalization {
   }
 
   String get currentlyRepresented {
-    return Intl.message("Currently Represented By",
-        desc: 'change_representative_current_header', name: 'currentlyRepresented');
+    return Intl.message("Currently Represented By", desc: 'change_representative_current_header', name: 'currentlyRepresented');
   }
 
   String get changeRepSucces {
-    return Intl.message("Representative Changed Successfully",
-        desc: 'change_representative_success', name: 'changeRepSucces');
+    return Intl.message("Representative Changed Successfully", desc: 'change_representative_success', name: 'changeRepSucces');
   }
 
   String get repInfoHeader {
@@ -760,8 +745,7 @@ class AppLocalization {
   }
 
   String get shareNautilusText {
-    return Intl.message("Check out Nautilus! A premier NANO mobile wallet!",
-        desc: 'share_extra', name: 'shareNautilusText');
+    return Intl.message("Check out Nautilus! A premier NANO mobile wallet!", desc: 'share_extra', name: 'shareNautilusText');
   }
 
   String get logout {
@@ -777,8 +761,7 @@ class AppLocalization {
 
   String get iUnderstandTheRisks {
     return Intl.message("I Understand the Risks",
-        desc: "Shown to users if they have a rooted Android device or jailbroken iOS device",
-        name: 'iUnderstandTheRisks');
+        desc: "Shown to users if they have a rooted Android device or jailbroken iOS device", name: 'iUnderstandTheRisks');
   }
 
   String get exit {
@@ -830,8 +813,7 @@ class AppLocalization {
   }
 
   String get fingerprintSeedBackup {
-    return Intl.message("Authenticate to backup seed.",
-        desc: 'settings_fingerprint_title', name: 'fingerprintSeedBackup');
+    return Intl.message("Authenticate to backup seed.", desc: 'settings_fingerprint_title', name: 'fingerprintSeedBackup');
   }
 
   String get pinSeedBackup {
@@ -879,8 +861,7 @@ class AppLocalization {
   }
 
   String get transferError {
-    return Intl.message("An error has occurred during the transfer. Please try again later.",
-        desc: 'transfer_error', name: 'transferError');
+    return Intl.message("An error has occurred during the transfer. Please try again later.", desc: 'transfer_error', name: 'transferError');
   }
 
   String get paperWallet {
@@ -918,10 +899,8 @@ class AppLocalization {
   }
 
   String get transferIntro {
-    return Intl.message(
-        "This process will transfer the funds from a paper wallet to your Nautilus wallet.\n\nTap the \"%1\" button to start.",
-        desc: 'transfer_intro',
-        name: 'transferIntro');
+    return Intl.message("This process will transfer the funds from a paper wallet to your Nautilus wallet.\n\nTap the \"%1\" button to start.",
+        desc: 'transfer_intro', name: 'transferIntro');
   }
 
   String get transferIntroShort {
@@ -934,30 +913,25 @@ class AppLocalization {
   }
 
   String get transferQrScanError {
-    return Intl.message("This QR code does not contain a valid seed.",
-        desc: 'transfer_qr_scan_error', name: 'transferQrScanError');
+    return Intl.message("This QR code does not contain a valid seed.", desc: 'transfer_qr_scan_error', name: 'transferQrScanError');
   }
 
   String get transferNoFunds {
-    return Intl.message("This seed does not have any NANO on it",
-        desc: 'transfer_no_funds_toast', name: 'transferNoFunds');
+    return Intl.message("This seed does not have any NANO on it", desc: 'transfer_no_funds_toast', name: 'transferNoFunds');
   }
 
   // Confirm screen
 
   String get transferConfirmInfo {
-    return Intl.message("A wallet with a balance of %1 NANO has been detected.\n",
-        desc: 'transfer_confirm_info_first', name: 'transferConfirmInfo');
+    return Intl.message("A wallet with a balance of %1 NANO has been detected.\n", desc: 'transfer_confirm_info_first', name: 'transferConfirmInfo');
   }
 
   String get transferConfirmInfoSecond {
-    return Intl.message("Tap confirm to transfer the funds.\n",
-        desc: 'transfer_confirm_info_second', name: 'transferConfirmInfoSecond');
+    return Intl.message("Tap confirm to transfer the funds.\n", desc: 'transfer_confirm_info_second', name: 'transferConfirmInfoSecond');
   }
 
   String get transferConfirmInfoThird {
-    return Intl.message("Transfer may take several seconds to complete.",
-        desc: 'transfer_confirm_info_third', name: 'transferConfirmInfoThird');
+    return Intl.message("Transfer may take several seconds to complete.", desc: 'transfer_confirm_info_third', name: 'transferConfirmInfoThird');
   }
 
   String get transferLoading {
@@ -967,8 +941,7 @@ class AppLocalization {
   // Compelte screen
 
   String get transferComplete {
-    return Intl.message("%1 NANO successfully transferred to your Nautilus Wallet.\n",
-        desc: 'transfer_complete_text', name: 'transferComplete');
+    return Intl.message("%1 NANO successfully transferred to your Nautilus Wallet.\n", desc: 'transfer_complete_text', name: 'transferComplete');
   }
 
   String get transferClose {
@@ -1006,8 +979,7 @@ class AppLocalization {
   }
 
   String get tooManyFailedAttempts {
-    return Intl.message("Too many failed unlock attempts.",
-        desc: 'fail_toomany_attempts', name: 'tooManyFailedAttempts');
+    return Intl.message("Too many failed unlock attempts.", desc: 'fail_toomany_attempts', name: 'tooManyFailedAttempts');
   }
 
   /// -- END LOCK SCREEN
@@ -1035,8 +1007,7 @@ class AppLocalization {
   }
 
   String get setWalletPassword {
-    return Intl.message("Set Wallet Password",
-        desc: 'Allows user to encrypt wallet with a password', name: 'setWalletPassword');
+    return Intl.message("Set Wallet Password", desc: 'Allows user to encrypt wallet with a password', name: 'setWalletPassword');
   }
 
   String get setPassword {
@@ -1044,23 +1015,19 @@ class AppLocalization {
   }
 
   String get disableWalletPassword {
-    return Intl.message("Disable Wallet Password",
-        desc: 'Allows user to deencrypt wallet with a password', name: 'disableWalletPassword');
+    return Intl.message("Disable Wallet Password", desc: 'Allows user to deencrypt wallet with a password', name: 'disableWalletPassword');
   }
 
   String get encryptionFailedError {
-    return Intl.message("Failed to set a wallet password",
-        desc: 'If encrypting a wallet raised an error', name: 'encryptionFailedError');
+    return Intl.message("Failed to set a wallet password", desc: 'If encrypting a wallet raised an error', name: 'encryptionFailedError');
   }
 
   String get setPasswordSuccess {
-    return Intl.message("Password has been set successfully",
-        desc: 'Setting a Wallet Password was successful', name: 'setPasswordSuccess');
+    return Intl.message("Password has been set successfully", desc: 'Setting a Wallet Password was successful', name: 'setPasswordSuccess');
   }
 
   String get disablePasswordSuccess {
-    return Intl.message("Password has been disabled",
-        desc: 'Disabling a Wallet Password was successful', name: 'disablePasswordSuccess');
+    return Intl.message("Password has been disabled", desc: 'Disabling a Wallet Password was successful', name: 'disablePasswordSuccess');
   }
 
   /// -- END SECURITY SETTINGS SUBMENU
@@ -1093,8 +1060,7 @@ class AppLocalization {
   /// -- EXAMPLE PAYMENTS SCREEN CARDS
 
   String get examplePaymentIntro {
-    return Intl.message("Once you send or receive a payment request, they'll show up here:",
-        desc: 'example_payments_intro', name: 'examplePaymentIntro');
+    return Intl.message("Once you send or receive a payment request, they'll show up here:", desc: 'example_payments_intro', name: 'examplePaymentIntro');
   }
 
   String get examplePaymentExplainer {
@@ -1133,10 +1099,8 @@ class AppLocalization {
   /// GIFTS
 
   String get importGift {
-    return Intl.message(
-        "The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?",
-        desc: 'import_gift',
-        name: 'importGift');
+    return Intl.message("The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?",
+        desc: 'import_gift', name: 'importGift');
   }
 
   String get importGiftEmpty {
@@ -1171,8 +1135,7 @@ class AppLocalization {
   }
 
   String get giftInfo {
-    return Intl.message(
-        '''Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n
+    return Intl.message('''Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n
 Once created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n
 If the recipient is already a Nautilus user they will get a prompt to transfer the funds into their account upon opening the link''',
         desc: 'Description for gift card creation', name: 'giftInfo');
@@ -1239,8 +1202,7 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   String get usernameWarning {
-    return Intl.message("Nautilus usernames are a centralized service provided by Nano.to",
-        desc: 'Username centralization warning', name: 'usernameWarning');
+    return Intl.message("Nautilus usernames are a centralized service provided by Nano.to", desc: 'Username centralization warning', name: 'usernameWarning');
   }
 
   // String get giftMessage {
@@ -1275,8 +1237,7 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   /// NOTIFICATIONS
 
   String get notificationInfo {
-    return Intl.message("In order for this feature to work correctly, notifications must be enabled",
-        desc: 'notification_info', name: 'notificationInfo');
+    return Intl.message("In order for this feature to work correctly, notifications must be enabled", desc: 'notification_info', name: 'notificationInfo');
   }
 
   /// END NOTIFICATION
@@ -1313,10 +1274,8 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   String get removeAccountText {
-    return Intl.message(
-        "Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button.",
-        desc: "Remove account dialog body",
-        name: 'removeAccountText');
+    return Intl.message("Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button.",
+        desc: "Remove account dialog body", name: 'removeAccountText');
   }
 
   /// -- END MULTI-ACCOUNT
@@ -1345,8 +1304,7 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   String get importSecretPhrase {
-    return Intl.message("Import Secret Phrase",
-        desc: "Header for restoring using mnemonic", name: 'importSecretPhrase');
+    return Intl.message("Import Secret Phrase", desc: "Header for restoring using mnemonic", name: 'importSecretPhrase');
   }
 
   String get importSecretPhraseHint {
@@ -1355,13 +1313,11 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   String get qrMnemonicError {
-    return Intl.message("QR does not contain a valid secret phrase",
-        desc: 'When QR does not contain a valid mnemonic phrase', name: 'qrMnemonicError');
+    return Intl.message("QR does not contain a valid secret phrase", desc: 'When QR does not contain a valid mnemonic phrase', name: 'qrMnemonicError');
   }
 
   String get mnemonicInvalidWord {
-    return Intl.message("%1 is not a valid word",
-        desc: 'A word that is not part of bip39', name: 'mnemonicInvalidWord');
+    return Intl.message("%1 is not a valid word", desc: 'A word that is not part of bip39', name: 'mnemonicInvalidWord');
   }
 
   String get mnemonicSizeError {
@@ -1373,8 +1329,7 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   String get backupConfirmButton {
-    return Intl.message("I've Backed It Up",
-        desc: 'Has backed up seed confirmation button', name: 'backupConfirmButton');
+    return Intl.message("I've Backed It Up", desc: 'Has backed up seed confirmation button', name: 'backupConfirmButton');
   }
 
   String get secretInfoHeader {
@@ -1389,10 +1344,8 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   String get secretWarning {
-    return Intl.message(
-        "If you lose your device or uninstall the application, you'll need your secret phrase or seed to recover your funds!",
-        desc: 'Secret warning',
-        name: 'secretWarning');
+    return Intl.message("If you lose your device or uninstall the application, you'll need your secret phrase or seed to recover your funds!",
+        desc: 'Secret warning', name: 'secretWarning');
   }
 
   String get gotItButton {
@@ -1400,8 +1353,7 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   String get ackBackedUp {
-    return Intl.message("Are you sure that you've backed up your secret phrase or seed?",
-        desc: 'Ack backed up', name: 'ackBackedUp');
+    return Intl.message("Are you sure that you've backed up your secret phrase or seed?", desc: 'Ack backed up', name: 'ackBackedUp');
   }
 
   String get secretPhraseCopy {
@@ -1434,33 +1386,27 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
 
   /// HINTS
   String get createPasswordHint {
-    return Intl.message("Create a password",
-        desc: 'A text field hint that tells the user to create a password', name: 'createPasswordHint');
+    return Intl.message("Create a password", desc: 'A text field hint that tells the user to create a password', name: 'createPasswordHint');
   }
 
   String get confirmPasswordHint {
-    return Intl.message("Confirm the password",
-        desc: 'A text field hint that tells the user to confirm the password', name: 'confirmPasswordHint');
+    return Intl.message("Confirm the password", desc: 'A text field hint that tells the user to confirm the password', name: 'confirmPasswordHint');
   }
 
   String get enterPasswordHint {
-    return Intl.message("Enter your password",
-        desc: 'A text field hint that tells the users to enter their password', name: 'enterPasswordHint');
+    return Intl.message("Enter your password", desc: 'A text field hint that tells the users to enter their password', name: 'enterPasswordHint');
   }
 
   String get passwordsDontMatch {
-    return Intl.message("Passwords do not match",
-        desc: 'An error indicating a password has been confirmed incorrectly', name: 'passwordsDontMatch');
+    return Intl.message("Passwords do not match", desc: 'An error indicating a password has been confirmed incorrectly', name: 'passwordsDontMatch');
   }
 
   String get passwordBlank {
-    return Intl.message("Password cannot be empty",
-        desc: 'An error indicating a password has been entered incorrectly', name: 'passwordBlank');
+    return Intl.message("Password cannot be empty", desc: 'An error indicating a password has been entered incorrectly', name: 'passwordBlank');
   }
 
   String get invalidPassword {
-    return Intl.message("Invalid Password",
-        desc: 'An error indicating a password has been entered incorrectly', name: 'invalidPassword');
+    return Intl.message("Invalid Password", desc: 'An error indicating a password has been entered incorrectly', name: 'invalidPassword');
   }
 
   /// HINTS END
@@ -1468,25 +1414,21 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   /// PARAGRAPS
   String get passwordWillBeRequiredToOpenParagraph {
     return Intl.message("This password will be required to open Nautilus.",
-        desc: 'A paragraph that tells the users that the created password will be required to open Nautilus.',
-        name: 'passwordWillBeRequiredToOpenParagraph');
+        desc: 'A paragraph that tells the users that the created password will be required to open Nautilus.', name: 'passwordWillBeRequiredToOpenParagraph');
   }
 
   String get passwordNoLongerRequiredToOpenParagraph {
     return Intl.message("You will not need a password to open Nautilus anymore.",
-        desc: 'An info paragraph that tells the user a password will no longer be needed to open Nautilus',
-        name: 'passwordNoLongerRequiredToOpenParagraph');
+        desc: 'An info paragraph that tells the user a password will no longer be needed to open Nautilus', name: 'passwordNoLongerRequiredToOpenParagraph');
   }
 
   String get createPasswordFirstParagraph {
     return Intl.message("You can create a password to add additional security to your wallet.",
-        desc: 'A paragraph that tells the users that they can create a password for additional security.',
-        name: 'createPasswordFirstParagraph');
+        desc: 'A paragraph that tells the users that they can create a password for additional security.', name: 'createPasswordFirstParagraph');
   }
 
   String get createPasswordSecondParagraph {
-    return Intl.message(
-        "Password is optional, and your wallet will be protected with your PIN or biometrics regardless.",
+    return Intl.message("Password is optional, and your wallet will be protected with your PIN or biometrics regardless.",
         desc:
             'A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless.',
         name: 'createPasswordSecondParagraph');
@@ -1496,8 +1438,7 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
 
   /// HEADERS
   String get createAPasswordHeader {
-    return Intl.message("Create a password.",
-        desc: 'A paragraph that tells the users to create a password.', name: 'createAPasswordHeader');
+    return Intl.message("Create a password.", desc: 'A paragraph that tells the users to create a password.', name: 'createAPasswordHeader');
   }
 
   String get createPasswordSheetHeader {
@@ -1510,16 +1451,14 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
 
   String get requireAPasswordToOpenHeader {
     return Intl.message("Require a password to open Nautilus?",
-        desc: 'A paragraph that asks the users if they would like a password to be required to open Nautilus.',
-        name: 'requireAPasswordToOpenHeader');
+        desc: 'A paragraph that asks the users if they would like a password to be required to open Nautilus.', name: 'requireAPasswordToOpenHeader');
   }
 
   /// HEADERS END
 
   /// BUTTONS
   String get noSkipButton {
-    return Intl.message("No, Skip",
-        desc: 'A button that declines and skips the mentioned process.', name: 'noSkipButton');
+    return Intl.message("No, Skip", desc: 'A button that declines and skips the mentioned process.', name: 'noSkipButton');
   }
 
   String get yesButton {
@@ -1547,13 +1486,14 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   /// Live chat
   String get connectingHeader {
     return Intl.message("Connecting",
-        desc: 'A header to let the user now that Nautilus is currently connecting to (or loading) live chat.',
-        name: 'connectingHeader');
+        desc: 'A header to let the user now that Nautilus is currently connecting to (or loading) live chat.', name: 'connectingHeader');
   }
 
   /// -- NON-TRANSLATABLE ITEMS
   String getBlockExplorerUrl(String hash, AvailableBlockExplorer explorer) {
-    if (explorer.explorer == AvailableBlockExplorerEnum.NANOLOOKER) {
+    if (explorer.explorer == AvailableBlockExplorerEnum.NANOCOMMUNITY) {
+      return 'https://nano.community/$hash';
+    } else if (explorer.explorer == AvailableBlockExplorerEnum.NANOLOOKER) {
       return 'https://nanolooker.com/block/$hash';
     } else if (explorer.explorer == AvailableBlockExplorerEnum.NANOCAFE) {
       return 'https://nanocafe.cc/$hash';
@@ -1562,7 +1502,9 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   String getAccountExplorerUrl(String account, AvailableBlockExplorer explorer) {
-    if (explorer.explorer == AvailableBlockExplorerEnum.NANOLOOKER) {
+    if (explorer.explorer == AvailableBlockExplorerEnum.NANOCOMMUNITY) {
+      return 'https://nano.community/$account';
+    } else if (explorer.explorer == AvailableBlockExplorerEnum.NANOLOOKER) {
       return 'https://nanolooker.com/account/$account';
     } else if (explorer.explorer == AvailableBlockExplorerEnum.NANOCAFE) {
       return 'https://nanocafe.cc/$account';

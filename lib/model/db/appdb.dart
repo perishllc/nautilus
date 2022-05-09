@@ -751,7 +751,7 @@ class DBHelper {
         0;
   }
 
-  Future<bool> deleteTXDataByUuid(String uuid) async {
+  Future<bool> deleteTXDataByUUID(String uuid) async {
     var dbClient = await db;
     return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(uuid) like \'%${uuid.toLowerCase()}\'") > 0;
   }

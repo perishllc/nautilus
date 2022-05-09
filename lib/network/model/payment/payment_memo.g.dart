@@ -15,6 +15,7 @@ PaymentMemo _$PaymentMemoFromJson(Map<String, dynamic> json) {
     request_nonce: json['request_nonce'] as String,
     memo_enc: json['memo_enc'] as String,
     block: json['block'] as String,
+    local_uuid: json['local_uuid'] as String,
   );
 }
 
@@ -27,6 +28,7 @@ Map<String, dynamic> _$PaymentMemoToJson(PaymentMemo instance) {
     'request_nonce': instance.request_nonce,
     'memo_enc': instance.memo_enc,
     'block': instance.block,
+    'local_uuid': instance.local_uuid,
   };
 
   void writeNotNull(String key, dynamic value) {

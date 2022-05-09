@@ -1204,6 +1204,7 @@ class StateContainerState extends State<StateContainer> {
     String request_time = data['request_time'];
     String to_address = data['account'];
     String uuid = data['uuid'];
+    String local_uuid = data['local_uuid'];
 
     if (wallet == null || wallet.address == null || !Address(wallet.address).isValid()) {
       throw Exception("wallet or wallet.address is null!");
@@ -1252,6 +1253,15 @@ class StateContainerState extends State<StateContainer> {
       await sl.get<DBHelper>().addTXData(txData);
     }
 
+    // check for the local uuid just in case:
+    if (local_uuid != null && local_uuid.isNotEmpty && local_uuid.contains("LOCAL")) {
+      var localTXData = await sl.get<DBHelper>().getTXDataByUUID(local_uuid);
+      if (localTXData != null) {
+        // remove it:
+        await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
+      }
+    }
+
     // send acknowledgement to server / requester:
     await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
 
@@ -1268,6 +1278,7 @@ class StateContainerState extends State<StateContainer> {
     String fulfillment_time = data['fulfillment_time'];
     String block = data['block'];
     String uuid = data['uuid'];
+    String local_uuid = data['local_uuid'];
 
     if (data.containsKey("is_request")) {
       if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
@@ -1303,32 +1314,37 @@ class StateContainerState extends State<StateContainer> {
         }
 
         // is this from us? if so we need to check for the local version of this payment_request:
-        if (requesting_account == wallet.address) {
-          var transactions = await sl.get<DBHelper>().getAccountSpecificRequests(wallet.address);
-          // go through the list and see if any of them happened within the last 5 minutes:
-          // make sure all other fields match, too:
 
-          print("${wallet.address} : ${to_address} : ${amount_raw}");
-          for (var tx in transactions) {
-            // make sure we only delete local requests that were within the last 5 minutes:
-            if (tx.uuid.contains("LOCAL")) {
-              // print("${tx.from_address} : ${tx.to_address} : ${tx.amount_raw} : ${tx.uuid}");
-              // make sure this is the request we made:
-              if (tx.from_address == wallet.address && tx.to_address == to_address && tx.amount_raw == amount_raw) {
-                if (DateTime.parse(tx.request_time).isAfter(DateTime.now().subtract(Duration(minutes: 5)))) {
-                  // this is a duplicate payment record, delete it:
-                  oldTXData = tx;
-                  // print("found a local payment record that is within the last 5 minutes");
-                  break;
-                }
-              }
-            }
-          }
+        // check if this is a local payment_request:
+        if (local_uuid != null && local_uuid.isNotEmpty && local_uuid.contains("LOCAL")) {
+          oldTXData = await sl.get<DBHelper>().getTXDataByUUID(local_uuid);
+
+          // if (requesting_account == wallet.address) {
+          // var transactions = await sl.get<DBHelper>().getAccountSpecificRequests(wallet.address);
+          // // go through the list and see if any of them happened within the last 5 minutes:
+          // // make sure all other fields match, too:
+
+          // print("${wallet.address} : ${to_address} : ${amount_raw}");
+          // for (var tx in transactions) {
+          //   // make sure we only delete local requests that were within the last 5 minutes:
+          //   if (tx.uuid.contains("LOCAL")) {
+          //     // print("${tx.from_address} : ${tx.to_address} : ${tx.amount_raw} : ${tx.uuid}");
+          //     // make sure this is the request we made:
+          //     if (tx.from_address == wallet.address && tx.to_address == to_address && tx.amount_raw == amount_raw) {
+          //       if (DateTime.parse(tx.request_time).isAfter(DateTime.now().subtract(Duration(minutes: 5)))) {
+          //         // this is a duplicate payment record, delete it:
+          //         oldTXData = tx;
+          //         // print("found a local payment record that is within the last 5 minutes");
+          //         break;
+          //       }
+          //     }
+          //   }
+          // }
 
           if (oldTXData != null) {
             print("removing old txData!");
             // remove the old tx by the uuid:
-            await sl.get<DBHelper>().deleteTXDataByUuid(oldTXData.uuid);
+            await sl.get<DBHelper>().deleteTXDataByUUID(oldTXData.uuid);
 
             // if we didn't replace an existing txData, add it to the db:
             if (txData == null) {
@@ -1353,6 +1369,16 @@ class StateContainerState extends State<StateContainer> {
     if (data.containsKey("is_memo")) {
       // check if exists in db:
       var existingTXData = await sl.get<DBHelper>().getTXDataByBlock(block);
+
+      if (existingTXData == null) {
+        // check if there is a local payment_memo since we didn't find it by block:
+        // this case probably only happens on a slow network connection, if at all:
+        if (local_uuid != null && local_uuid.isNotEmpty && local_uuid.contains("LOCAL")) {
+          print("memo block wasn't found while processing payment_record!");
+          existingTXData = await sl.get<DBHelper>().getTXDataByUUID(local_uuid);
+        }
+      }
+
       if (existingTXData != null) {
         // print("memo block exists");
         // delete local version and add new one:
@@ -1361,7 +1387,7 @@ class StateContainerState extends State<StateContainer> {
         // remove the local one if it exists:
         if (existingTXData.uuid.contains("LOCAL")) {
           print("removing the local txData for this memo: ${existingTXData.uuid}");
-          await sl.get<DBHelper>().deleteTXDataByUuid(existingTXData.uuid);
+          await sl.get<DBHelper>().deleteTXDataByUUID(existingTXData.uuid);
           await sl.get<DBHelper>().deleteTXDataByBlock(existingTXData.block);
           // add the new one and change the uuid to be not local:
           existingTXData.uuid = uuid;
@@ -1390,10 +1416,11 @@ class StateContainerState extends State<StateContainer> {
     String to_address = data['account'];
     String memo_enc = data['memo_enc'];
     String request_time = data['request_time'];
-    String uuid = data['uuid'];
     String block = data['block'];
     String is_acknowledged = data['is_acknowledged'];
     int height = data['height'];
+    String uuid = data['uuid'];
+    String local_uuid = data['local_uuid'];
 
     TXData txData = new TXData(
       // amount_raw: amount_raw,
@@ -1452,18 +1479,21 @@ class StateContainerState extends State<StateContainer> {
       // add it since it doesn't exist in the db:
       await sl.get<DBHelper>().addTXData(txData);
     }
+
+    // check for local_uuid just incase:
+    if (local_uuid != null && local_uuid.isNotEmpty && local_uuid.contains("LOCAL")) {
+      // check if there is a local payment_memo:
+      var localTXData = await sl.get<DBHelper>().getTXDataByUUID(local_uuid);
+      if (localTXData != null) {
+        // delete the local one:
+        await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
+      }
+    }
     // send acknowledgement to server / requester:
     await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
     await updateRequests();
     // hack to get tx memo to update:
     EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
-
-    // are we the recipient?
-    // if (to_address == wallet.address) {
-
-    // } else {
-    //   log.d("we are not the recipient of this memo!");
-    // }
   }
 
   Future<void> handleMessage(dynamic data) async {

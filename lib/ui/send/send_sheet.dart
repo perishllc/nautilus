@@ -1570,7 +1570,7 @@ class _SendSheetState extends State<SendSheet> {
       controller: _sendMemoController,
       cursorColor: StateContainer.of(context).curTheme.primary,
       inputFormatters: [
-        LengthLimitingTextInputFormatter(20),
+        LengthLimitingTextInputFormatter(48),
       ],
       textInputAction: TextInputAction.done,
       maxLines: null,

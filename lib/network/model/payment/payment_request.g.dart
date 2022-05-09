@@ -15,6 +15,7 @@ PaymentRequest _$PaymentRequestFromJson(Map<String, dynamic> json) {
     request_signature: json['request_signature'] as String,
     request_nonce: json['request_nonce'] as String,
     memo_enc: json['memo_enc'] as String,
+    local_uuid: json['local_uuid'] as String,
   );
 }
 
@@ -27,6 +28,7 @@ Map<String, dynamic> _$PaymentRequestToJson(PaymentRequest instance) {
     'request_signature': instance.request_signature,
     'request_nonce': instance.request_nonce,
     'memo_enc': instance.memo_enc,
+    'local_uuid': instance.local_uuid,
   };
 
   void writeNotNull(String key, dynamic value) {

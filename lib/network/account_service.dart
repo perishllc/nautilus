@@ -457,14 +457,15 @@ class AccountService {
 
   // request money from an account:
   /*Future<PaymentResponse> */ Future<void> requestPayment(
-      String account, String amount_raw, String requesting_account, String request_signature, String request_nonce, String memo_enc) async {
+      String account, String amount_raw, String requesting_account, String request_signature, String request_nonce, String memo_enc, String local_uuid) async {
     PaymentRequest request = PaymentRequest(
         account: account,
         amount_raw: amount_raw,
         requesting_account: requesting_account,
         request_signature: request_signature,
         request_nonce: request_nonce,
-        memo_enc: memo_enc);
+        memo_enc: memo_enc,
+        local_uuid: local_uuid);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
@@ -473,14 +474,15 @@ class AccountService {
 
   // send payment record (memo) to an account:
   Future<void> sendTXMemo(
-      String account, String requesting_account, String amount_raw, String request_signature, String request_nonce, String memo_enc, String block) async {
+      String account, String requesting_account, String amount_raw, String request_signature, String request_nonce, String memo_enc, String block, String local_uuid) async {
     PaymentMemo request = PaymentMemo(
         account: account,
         requesting_account: requesting_account,
         request_signature: request_signature,
         request_nonce: request_nonce,
         memo_enc: memo_enc,
-        block: block);
+        block: block,
+        local_uuid: local_uuid);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");

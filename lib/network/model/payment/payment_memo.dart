@@ -27,10 +27,13 @@ class PaymentMemo extends BaseRequest {
   @JsonKey(name: 'block')
   String block;
 
+  @JsonKey(name: 'local_uuid')
+  String local_uuid;
+
   // @JsonKey(name: 'username')
   // String username;
 
-  PaymentMemo({String action, String account, String requesting_account, String request_signature, String request_nonce, String memo_enc, String block})
+  PaymentMemo({String action, String account, String requesting_account, String request_signature, String request_nonce, String memo_enc, String block, String local_uuid})
       : super() {
     this.action = Actions.PAYMENT_MEMO;
     this.account = account ?? "";
@@ -39,6 +42,7 @@ class PaymentMemo extends BaseRequest {
     this.request_nonce = request_nonce ?? "";
     this.memo_enc = memo_enc ?? "";
     this.block = block ?? "";
+    this.local_uuid = local_uuid ?? "";
   }
 
   factory PaymentMemo.fromJson(Map<String, dynamic> json) => _$PaymentMemoFromJson(json);

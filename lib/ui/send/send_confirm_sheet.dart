@@ -398,14 +398,14 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
         // create a local memo object:
         var uuid = Uuid();
-        String localUuid = "LOCAL:" + uuid.v4();
+        String local_uuid = "LOCAL:" + uuid.v4();
         // current block height:
         int currentBlockHeightInList = StateContainer.of(context).wallet.history.length > 0 ? (StateContainer.of(context).wallet.history[0].height + 1) : 1;
         var memoTXData = new TXData(
           from_address: StateContainer.of(context).wallet.address,
           to_address: destinationAltered,
           amount_raw: widget.amountRaw,
-          uuid: localUuid,
+          uuid: local_uuid,
           block: resp.hash,
           is_acknowledged: false,
           is_fulfilled: false,
@@ -421,9 +421,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         try {
           // encrypt the memo:
           String encryptedMemo = await StateContainer.of(context).encryptMessage(widget.memo, destinationAltered, privKey);
-          await sl
-              .get<AccountService>()
-              .sendTXMemo(destinationAltered, StateContainer.of(context).wallet.address, widget.amountRaw, signature, nonce_hex, encryptedMemo, resp.hash);
+          await sl.get<AccountService>().sendTXMemo(
+              destinationAltered, StateContainer.of(context).wallet.address, widget.amountRaw, signature, nonce_hex, encryptedMemo, resp.hash, local_uuid);
         } catch (e) {
           memoSendFailed = true;
         }
@@ -432,7 +431,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         if (memoSendFailed) {
           print("memo send failed, deleting TXData object");
           // remove from the database:
-          await sl.get<DBHelper>().deleteTXDataByUuid(localUuid);
+          await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
         } else {
           // hack to get tx memo to update:
           EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
