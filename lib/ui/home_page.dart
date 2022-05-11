@@ -308,7 +308,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
 
     // check if there's actually any nano to claim:
-    BigInt balance  = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
+    BigInt balance = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
     // AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
     try {
       if (balance != BigInt.zero) {
@@ -374,42 +374,44 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                   ],
                 ),
                 actions: <Widget>[
-                  AppSimpleDialogOption(
-                    onPressed: () {
-                      Navigator.pop(context, 0);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        AppLocalization.of(context).refund,
-                        style: AppStyles.textStyleDialogOptions(context),
+                  Row(children: [
+                    AppSimpleDialogOption(
+                      onPressed: () {
+                        Navigator.pop(context, 0);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          AppLocalization.of(context).refund,
+                          style: AppStyles.textStyleDialogOptions(context),
+                        ),
                       ),
                     ),
-                  ),
-                  AppSimpleDialogOption(
-                    onPressed: () {
-                      Navigator.pop(context, 1);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        AppLocalization.of(context).receive,
-                        style: AppStyles.textStyleDialogOptions(context),
+                    AppSimpleDialogOption(
+                      onPressed: () {
+                        Navigator.pop(context, 1);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          AppLocalization.of(context).receive,
+                          style: AppStyles.textStyleDialogOptions(context),
+                        ),
                       ),
                     ),
-                  ),
-                  AppSimpleDialogOption(
-                    onPressed: () {
-                      Navigator.pop(context, 2);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        AppLocalization.of(context).close,
-                        style: AppStyles.textStyleDialogOptions(context),
+                    AppSimpleDialogOption(
+                      onPressed: () {
+                        Navigator.pop(context, 2);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          AppLocalization.of(context).close,
+                          style: AppStyles.textStyleDialogOptions(context),
+                        ),
                       ),
-                    ),
-                  ),
+                    )
+                  ]),
                 ],
               );
             })) {
