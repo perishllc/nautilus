@@ -45,7 +45,10 @@
 			<string>co.perish.nautilus</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>Nautilus</string>
+				<string>nautilus</string>
+				<string>xrb</string>
+				<string>nano</string>
+				<string>manta</string>
 			</array>
 		</dict>
 	</array>
