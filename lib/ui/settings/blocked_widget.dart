@@ -99,14 +99,14 @@ class _BlockedListState extends State<BlockedList> {
   }
 
   void _updateContacts() {
-    sl.get<DBHelper>().getBlocked().then((contacts) {
-      if (contacts == null) {
+    sl.get<DBHelper>().getBlocked().then((blocked) {
+      if (blocked == null) {
         return;
       }
-      for (Blocked c in contacts) {
-        if (!_blocked.contains(c) && mounted) {
+      for (Blocked b in blocked) {
+        if (!_blocked.contains(b) && mounted) {
           setState(() {
-            _blocked.add(c);
+            _blocked.add(b);
           });
         }
       }

@@ -48,8 +48,8 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
   FocusNode _sendAddressFocusNode;
   FocusNode _sendAmountFocusNode;
   FocusNode _sendMemoFocusNode;
-  TextEditingController _sendAddressController;
   TextEditingController _sendAmountController;
+  TextEditingController _sendAddressController;
   TextEditingController _sendMemoController;
 
   // States
@@ -537,10 +537,6 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       textAlign: TextAlign.center,
       onSubmitted: (text) {
-        FocusScope.of(context).unfocus();
-        if (!Address(_sendAddressController.text).isValid()) {
-          FocusScope.of(context).requestFocus(_sendAddressFocusNode);
-        }
       },
     );
   } //************ Enter Address Container Method End ************//

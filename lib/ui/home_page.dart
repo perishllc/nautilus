@@ -291,7 +291,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   Future<void> _branchGiftDialog(String seed, String memo, String amountRaw, String senderAddress) async {
-    String amount = getRawAsThemeAwareAmount(context, amountRaw);
+    String supposedAmount = getRawAsThemeAwareAmount(context, amountRaw);
 
     String userOrSendAddress;
 
@@ -308,12 +308,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
 
     // check if there's actually any nano to claim:
-    Map<String, AccountBalanceItem> privKeyBalanceMap = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
+    BigInt balance  = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
     // AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
     try {
-      if (privKeyBalanceMap != null) {
+      if (balance != BigInt.zero) {
+        String actualAmount = getRawAsThemeAwareAmount(context, balance.toString());
         // show dialog with option to refund to sender:
-        switch (await showDialog<bool>(
+        switch (await showDialog<int>(
+            barrierDismissible: false,
             context: context,
             barrierColor: StateContainer.of(context).curTheme.barrier,
             builder: (BuildContext context) {
@@ -363,7 +365,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                               ),
                               includeSymbol: true),
                           TextSpan(
-                            text: amount,
+                            text: actualAmount,
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                         ],
@@ -374,7 +376,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 actions: <Widget>[
                   AppSimpleDialogOption(
                     onPressed: () {
-                      Navigator.pop(context, false);
+                      Navigator.pop(context, 0);
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -386,7 +388,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                   ),
                   AppSimpleDialogOption(
                     onPressed: () {
-                      Navigator.pop(context, true);
+                      Navigator.pop(context, 1);
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -396,15 +398,29 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                       ),
                     ),
                   ),
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, 2);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context).close,
+                        style: AppStyles.textStyleDialogOptions(context),
+                      ),
+                    ),
+                  ),
                 ],
               );
             })) {
-          case true:
+          case 2:
+            break;
+          case 1:
             // transfer to this wallet:
             // await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, StateContainer.of(context).wallet);
             await AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
             break;
-          case false:
+          case 0:
             // refund the gift:
             await AppTransferOverviewSheet().startAutoRefund(
               context,
@@ -465,7 +481,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                               ),
                               includeSymbol: true),
                           TextSpan(
-                            text: amount,
+                            text: supposedAmount,
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                         ],

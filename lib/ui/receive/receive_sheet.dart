@@ -153,324 +153,329 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
   Widget build(BuildContext context) {
     return SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
-        child: Column(
-          children: <Widget>[
-            // A row for the address text and close button
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+        child: GestureDetector(
+            onTap: () {
+              // Clear focus of our fields when tapped in this empty space
+              _sendAmountFocusNode.unfocus();
+            },
+            child: Column(
               children: <Widget>[
-                //Empty SizedBox
-                SizedBox(
-                  width: 60,
-                  height: 60,
+                // A row for the address text and close button
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    //Empty SizedBox
+                    SizedBox(
+                      width: 60,
+                      height: 60,
+                    ),
+                    //Container for the address text and sheet handle
+                    Column(
+                      children: <Widget>[
+                        // Sheet handle
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          height: 5,
+                          width: MediaQuery.of(context).size.width * 0.15,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.text10,
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                        ),
+                        // show napi username if available:
+                        Container(
+                          margin: (StateContainer.of(context).wallet?.username != null) ? EdgeInsets.only(top: 35.0) : EdgeInsets.only(top: 15.0),
+                          child: (StateContainer.of(context).wallet?.username != null)
+                              ? Text("@" + StateContainer.of(context).wallet?.username,
+                                  style: TextStyle(
+                                    fontFamily: "OverpassMono",
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 24.0,
+                                    color: StateContainer.of(context).curTheme.text60,
+                                  ))
+                              : UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.address, type: ThreeLineAddressTextType.PRIMARY60),
+                        ),
+                        // (StateContainer.of(context).wallet?.username != null)
+                        //     ? Container(
+                        //         margin: EdgeInsets.only(top: 15.0),
+                        //         child: Text("@" + StateContainer.of(context).wallet?.username,
+                        //             style: TextStyle(
+                        //               fontFamily: "OverpassMono",
+                        //               fontWeight: FontWeight.w100,
+                        //               fontSize: 24.0,
+                        //               color: StateContainer.of(context).curTheme.text60,
+                        //             )))
+                        //     : null,
+                        // Container(
+                        //   margin: EdgeInsets.only(top: 15.0),
+                        //   child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.address, type: ThreeLineAddressTextType.PRIMARY60),
+                        // ),
+                      ],
+                    ),
+                    //Empty SizedBox
+                    SizedBox(
+                      width: 60,
+                      height: 60,
+                    ),
+                  ],
                 ),
-                //Container for the address text and sheet handle
+                // Column for Balance Text, Enter Amount container + Enter Amount Error container WIP
                 Column(
                   children: <Widget>[
-                    // Sheet handle
+                    // ******* Enter Amount Container ******* //
+                    getEnterAmountContainer(),
+                    // ******* Enter Amount Container End ******* //
+
+                    // ******* Enter Amount Error Container ******* //
                     Container(
-                      margin: EdgeInsets.only(top: 10),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text10,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
+                      alignment: AlignmentDirectional(0, 0),
+                      margin: EdgeInsets.only(top: 3),
+                      child: Text(_amountValidationText,
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            color: StateContainer.of(context).curTheme.primary,
+                            fontFamily: 'NunitoSans',
+                            fontWeight: FontWeight.w600,
+                          )),
                     ),
-                    // show napi username if available:
-                    Container(
-                      margin: (StateContainer.of(context).wallet?.username != null) ? EdgeInsets.only(top: 35.0) : EdgeInsets.only(top: 15.0),
-                      child: (StateContainer.of(context).wallet?.username != null)
-                          ? Text("@" + StateContainer.of(context).wallet?.username,
-                              style: TextStyle(
-                                fontFamily: "OverpassMono",
-                                fontWeight: FontWeight.w100,
-                                fontSize: 24.0,
-                                color: StateContainer.of(context).curTheme.text60,
-                              ))
-                          : UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.address, type: ThreeLineAddressTextType.PRIMARY60),
+                    // ******* Enter Amount Error Container End ******* //
+                  ],
+                ),
+                // QR which takes all the available space left from the buttons & address text
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
+                    child: LayoutBuilder(builder: (context, constraints) {
+                      double availableWidth = constraints.maxWidth;
+                      double availableHeight = (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
+                      double widthDivideFactor = 1.3;
+                      double computedMaxSize = Math.min(availableWidth / widthDivideFactor, availableHeight);
+                      return Center(
+                        child: Stack(
+                          children: <Widget>[
+                            _showShareCard
+                                ? Container(
+                                    child: AppShareCard(
+                                        shareCardKey, SvgPicture.asset('legacy_assets/QR.svg'), SvgPicture.asset('legacy_assets/sharecard_logo.svg')),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                  )
+                                : SizedBox(),
+                            // This is for hiding the share card
+                            Center(
+                              child: Container(
+                                width: 260,
+                                height: 150,
+                                color: StateContainer.of(context).curTheme.backgroundDark,
+                              ),
+                            ),
+                            // Background/border part the QR
+                            Center(
+                              child: Container(
+                                width: computedMaxSize / 1.07,
+                                height: computedMaxSize / 1.07,
+                                child: SvgPicture.asset('legacy_assets/QR.svg'),
+                              ),
+                            ),
+                            // Actual QR part of the QR
+                            Center(
+                              child: Container(
+                                color: Colors.white,
+                                padding: EdgeInsets.all(computedMaxSize / 51),
+                                height: computedMaxSize / 1.53,
+                                width: computedMaxSize / 1.53,
+                                // child: widget.qrWidget,
+                                child: this.qrWidget,
+                              ),
+                            ),
+                            // Outer ring
+                            Center(
+                              child: Container(
+                                width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 1.05 : computedMaxSize,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: StateContainer.of(context).curTheme.primary, width: computedMaxSize / 90),
+                                ),
+                              ),
+                            ),
+                            // Logo Background White
+                            StateContainer.of(context).natriconOn
+                                ? Center(
+                                    child: Container(
+                                      width: computedMaxSize / 5.5,
+                                      height: computedMaxSize / 5.5,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                        border: Border.all(
+                                          width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 85 : computedMaxSize / 110,
+                                          color: (StateContainer.of(context).curTheme is IndiumTheme)
+                                              ? StateContainer.of(context).curTheme.backgroundDark
+                                              : StateContainer.of(context).curTheme.primary,
+                                        ),
+                                      ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 110 : computedMaxSize / 85,
+                                            color: (StateContainer.of(context).curTheme is IndiumTheme)
+                                                ? StateContainer.of(context).curTheme.primary
+                                                : StateContainer.of(context).curTheme.backgroundDark,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : Center(
+                                    child: Container(
+                                      width: computedMaxSize / 5.5,
+                                      height: computedMaxSize / 5.5,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                            StateContainer.of(context).natriconOn
+                                ? SizedBox()
+                                : // Logo Background Primary
+                                Center(
+                                    child: Container(
+                                      width: computedMaxSize / 6.5,
+                                      height: computedMaxSize / 6.5,
+                                      decoration: BoxDecoration(
+                                        color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                            // natricon
+                            StateContainer.of(context).natriconOn
+                                ? Center(
+                                    child: Container(
+                                      width: computedMaxSize / 6.5,
+                                      height: computedMaxSize / 6.5,
+                                      margin: EdgeInsetsDirectional.only(top: computedMaxSize / 170),
+                                      child: SvgPicture.network(
+                                        UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
+                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
+                                        key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
+                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
+                                        placeholderBuilder: (BuildContext context) => Container(
+                                          child: FlareActor(
+                                            "legacy_assets/ntr_placeholder_animation.flr",
+                                            animation: "main",
+                                            fit: BoxFit.contain,
+                                            color: StateContainer.of(context).curTheme.primary,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : Center(
+                                    child: Container(
+                                      height: computedMaxSize / 8,
+                                      child: Image(image: AssetImage("assets/logo-square.png")),
+                                    ),
+                                  ),
+                          ],
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+
+                //A column with Copy Address and Share Address buttons
+                Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        AppButton.buildAppButton(
+                            context,
+                            // Share Address Button
+                            _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                            _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
+                            Dimens.BUTTON_TOP_DIMENS, onPressed: () {
+                          Clipboard.setData(new ClipboardData(text: StateContainer.of(context).wallet.address));
+                          setState(() {
+                            // Set copied style
+                            _addressCopied = true;
+                          });
+                          if (_addressCopiedTimer != null) {
+                            _addressCopiedTimer.cancel();
+                          }
+                          _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                            setState(() {
+                              _addressCopied = false;
+                            });
+                          });
+                        }),
+                      ],
                     ),
-                    // (StateContainer.of(context).wallet?.username != null)
-                    //     ? Container(
-                    //         margin: EdgeInsets.only(top: 15.0),
-                    //         child: Text("@" + StateContainer.of(context).wallet?.username,
-                    //             style: TextStyle(
-                    //               fontFamily: "OverpassMono",
-                    //               fontWeight: FontWeight.w100,
-                    //               fontSize: 24.0,
-                    //               color: StateContainer.of(context).curTheme.text60,
-                    //             )))
-                    //     : null,
-                    // Container(
-                    //   margin: EdgeInsets.only(top: 15.0),
-                    //   child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.address, type: ThreeLineAddressTextType.PRIMARY60),
+                    Row(
+                      children: <Widget>[
+                        AppButton.buildAppButton(
+                            context,
+                            // Share Address Button
+                            AppButtonType.PRIMARY_OUTLINE,
+                            AppLocalization.of(context).addressShare,
+                            Dimens.BUTTON_BOTTOM_DIMENS,
+                            disabled: _showShareCard, onPressed: () {
+                          String receiveCardFileName = "share_${StateContainer.of(context).wallet.address}.png";
+                          getApplicationDocumentsDirectory().then((directory) {
+                            String filePath = "${directory.path}/$receiveCardFileName";
+                            File f = File(filePath);
+                            setState(() {
+                              _showShareCard = true;
+                            });
+                            Future.delayed(new Duration(milliseconds: 50), () {
+                              if (_showShareCard) {
+                                _capturePng().then((byteData) {
+                                  if (byteData != null) {
+                                    f.writeAsBytes(byteData).then((file) {
+                                      UIUtil.cancelLockEvent();
+                                      Share.shareFile(file, text: StateContainer.of(context).wallet.address);
+                                    });
+                                  } else {
+                                    // TODO - show a something went wrong message
+                                  }
+                                  setState(() {
+                                    _showShareCard = false;
+                                  });
+                                });
+                              }
+                            });
+                          });
+                        }),
+                      ],
+                    ),
+                    // Row(
+                    //   children: <Widget>[
+                    //     AppButton.buildAppButton(
+                    //         context,
+                    //         // Share Address Button
+                    //         AppButtonType.PRIMARY_OUTLINE,
+                    //         AppLocalization.of(context).requestPayment,
+                    //         Dimens.BUTTON_BOTTOM_DIMENS,
+                    //         disabled: _showShareCard, onPressed: () {
+                    //       // do nothing
+                    //       // if (request == null) {
+                    //       // return;
+                    //       // }
+                    //       // Sheets.showAppHeightEightSheet(context: context, widget: request);
+                    //       // Remove any other screens from stack
+                    //       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+
+                    //       // Go to send with address
+                    //       Sheets.showAppHeightNineSheet(context: context, widget: RequestSheet());
+                    //     }),
+                    //   ],
                     // ),
                   ],
                 ),
-                //Empty SizedBox
-                SizedBox(
-                  width: 60,
-                  height: 60,
-                ),
               ],
-            ),
-            // Column for Balance Text, Enter Amount container + Enter Amount Error container WIP
-            Column(
-              children: <Widget>[
-                // ******* Enter Amount Container ******* //
-                getEnterAmountContainer(),
-                // ******* Enter Amount Container End ******* //
-
-                // ******* Enter Amount Error Container ******* //
-                Container(
-                  alignment: AlignmentDirectional(0, 0),
-                  margin: EdgeInsets.only(top: 3),
-                  child: Text(_amountValidationText,
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        color: StateContainer.of(context).curTheme.primary,
-                        fontFamily: 'NunitoSans',
-                        fontWeight: FontWeight.w600,
-                      )),
-                ),
-                // ******* Enter Amount Error Container End ******* //
-              ],
-            ),
-            // QR which takes all the available space left from the buttons & address text
-            Expanded(
-              child: Padding(
-                padding: EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
-                child: LayoutBuilder(builder: (context, constraints) {
-                  double availableWidth = constraints.maxWidth;
-                  double availableHeight = (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
-                  double widthDivideFactor = 1.3;
-                  double computedMaxSize = Math.min(availableWidth / widthDivideFactor, availableHeight);
-                  return Center(
-                    child: Stack(
-                      children: <Widget>[
-                        _showShareCard
-                            ? Container(
-                                child:
-                                    AppShareCard(shareCardKey, SvgPicture.asset('legacy_assets/QR.svg'), SvgPicture.asset('legacy_assets/sharecard_logo.svg')),
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                              )
-                            : SizedBox(),
-                        // This is for hiding the share card
-                        Center(
-                          child: Container(
-                            width: 260,
-                            height: 150,
-                            color: StateContainer.of(context).curTheme.backgroundDark,
-                          ),
-                        ),
-                        // Background/border part the QR
-                        Center(
-                          child: Container(
-                            width: computedMaxSize / 1.07,
-                            height: computedMaxSize / 1.07,
-                            child: SvgPicture.asset('legacy_assets/QR.svg'),
-                          ),
-                        ),
-                        // Actual QR part of the QR
-                        Center(
-                          child: Container(
-                            color: Colors.white,
-                            padding: EdgeInsets.all(computedMaxSize / 51),
-                            height: computedMaxSize / 1.53,
-                            width: computedMaxSize / 1.53,
-                            // child: widget.qrWidget,
-                            child: this.qrWidget,
-                          ),
-                        ),
-                        // Outer ring
-                        Center(
-                          child: Container(
-                            width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 1.05 : computedMaxSize,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: StateContainer.of(context).curTheme.primary, width: computedMaxSize / 90),
-                            ),
-                          ),
-                        ),
-                        // Logo Background White
-                        StateContainer.of(context).natriconOn
-                            ? Center(
-                                child: Container(
-                                  width: computedMaxSize / 5.5,
-                                  height: computedMaxSize / 5.5,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                    border: Border.all(
-                                      width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 85 : computedMaxSize / 110,
-                                      color: (StateContainer.of(context).curTheme is IndiumTheme)
-                                          ? StateContainer.of(context).curTheme.backgroundDark
-                                          : StateContainer.of(context).curTheme.primary,
-                                    ),
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 110 : computedMaxSize / 85,
-                                        color: (StateContainer.of(context).curTheme is IndiumTheme)
-                                            ? StateContainer.of(context).curTheme.primary
-                                            : StateContainer.of(context).curTheme.backgroundDark,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : Center(
-                                child: Container(
-                                  width: computedMaxSize / 5.5,
-                                  height: computedMaxSize / 5.5,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                        StateContainer.of(context).natriconOn
-                            ? SizedBox()
-                            : // Logo Background Primary
-                            Center(
-                                child: Container(
-                                  width: computedMaxSize / 6.5,
-                                  height: computedMaxSize / 6.5,
-                                  decoration: BoxDecoration(
-                                    color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                        // natricon
-                        StateContainer.of(context).natriconOn
-                            ? Center(
-                                child: Container(
-                                  width: computedMaxSize / 6.5,
-                                  height: computedMaxSize / 6.5,
-                                  margin: EdgeInsetsDirectional.only(top: computedMaxSize / 170),
-                                  child: SvgPicture.network(
-                                    UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                        StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
-                                    key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                        StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
-                                    placeholderBuilder: (BuildContext context) => Container(
-                                      child: FlareActor(
-                                        "legacy_assets/ntr_placeholder_animation.flr",
-                                        animation: "main",
-                                        fit: BoxFit.contain,
-                                        color: StateContainer.of(context).curTheme.primary,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : Center(
-                                child: Container(
-                                  height: computedMaxSize / 8,
-                                  child: Image(image: AssetImage("assets/logo-square.png")),
-                                ),
-                              ),
-                      ],
-                    ),
-                  );
-                }),
-              ),
-            ),
-
-            //A column with Copy Address and Share Address buttons
-            Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    AppButton.buildAppButton(
-                        context,
-                        // Share Address Button
-                        _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
-                        Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                      Clipboard.setData(new ClipboardData(text: StateContainer.of(context).wallet.address));
-                      setState(() {
-                        // Set copied style
-                        _addressCopied = true;
-                      });
-                      if (_addressCopiedTimer != null) {
-                        _addressCopiedTimer.cancel();
-                      }
-                      _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
-                        setState(() {
-                          _addressCopied = false;
-                        });
-                      });
-                    }),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    AppButton.buildAppButton(
-                        context,
-                        // Share Address Button
-                        AppButtonType.PRIMARY_OUTLINE,
-                        AppLocalization.of(context).addressShare,
-                        Dimens.BUTTON_BOTTOM_DIMENS,
-                        disabled: _showShareCard, onPressed: () {
-                      String receiveCardFileName = "share_${StateContainer.of(context).wallet.address}.png";
-                      getApplicationDocumentsDirectory().then((directory) {
-                        String filePath = "${directory.path}/$receiveCardFileName";
-                        File f = File(filePath);
-                        setState(() {
-                          _showShareCard = true;
-                        });
-                        Future.delayed(new Duration(milliseconds: 50), () {
-                          if (_showShareCard) {
-                            _capturePng().then((byteData) {
-                              if (byteData != null) {
-                                f.writeAsBytes(byteData).then((file) {
-                                  UIUtil.cancelLockEvent();
-                                  Share.shareFile(file, text: StateContainer.of(context).wallet.address);
-                                });
-                              } else {
-                                // TODO - show a something went wrong message
-                              }
-                              setState(() {
-                                _showShareCard = false;
-                              });
-                            });
-                          }
-                        });
-                      });
-                    }),
-                  ],
-                ),
-                // Row(
-                //   children: <Widget>[
-                //     AppButton.buildAppButton(
-                //         context,
-                //         // Share Address Button
-                //         AppButtonType.PRIMARY_OUTLINE,
-                //         AppLocalization.of(context).requestPayment,
-                //         Dimens.BUTTON_BOTTOM_DIMENS,
-                //         disabled: _showShareCard, onPressed: () {
-                //       // do nothing
-                //       // if (request == null) {
-                //       // return;
-                //       // }
-                //       // Sheets.showAppHeightEightSheet(context: context, widget: request);
-                //       // Remove any other screens from stack
-                //       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-
-                //       // Go to send with address
-                //       Sheets.showAppHeightNineSheet(context: context, widget: RequestSheet());
-                //     }),
-                //   ],
-                // ),
-              ],
-            ),
-          ],
-        ));
+            )));
   }
 
   String _convertLocalCurrencyToCrypto() {

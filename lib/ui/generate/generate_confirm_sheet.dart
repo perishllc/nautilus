@@ -286,20 +286,22 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       StateContainer.of(context).wallet.frontier = resp.hash;
       StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
 
+      String memo = widget.memo != null ? widget.memo : ""; 
+
       BranchUniversalObject buo = BranchUniversalObject(
           canonicalIdentifier: 'flutter/branch',
           //canonicalUrl: '',
-          title: 'Nautilus Branch Gift Card',
+          title: 'Nautilus Gift Card',
           // imageUrl: 'https://flutter.dev/assets/flutter-lockup-4cb0ee072ab312e59784d9fbf4fb7ad42688a7fdaea1270ccf6bbf4f34b7e03f.svg',
-          contentDescription: 'Nautilus Gift Card Description',
+          contentDescription: 'Get the app to open this gift card!',
           keywords: ['Nautilus', "Gift Card"],
           publiclyIndex: true,
           locallyIndex: true,
           contentMetadata: BranchContentMetaData()
             ..addCustomMetadata('seed', widget.paperWalletSeed)
             ..addCustomMetadata('address', destinationAltered)
-            ..addCustomMetadata('memo', widget.memo)
-            ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet.address)// TODO: sign these:
+            ..addCustomMetadata('memo', widget.memo ?? "")
+            ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet.address) // TODO: sign these:
             ..addCustomMetadata('signature', "")
             ..addCustomMetadata('nonce', "")
             ..addCustomMetadata('amount_raw', widget.amountRaw));

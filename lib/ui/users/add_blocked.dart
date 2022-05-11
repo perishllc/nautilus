@@ -584,18 +584,19 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                         onPressed: () async {
                       if (await validateForm()) {
                         Blocked newBlocked;
+                        String formAddress = widget.address != null ? widget.address : _addressController.text;
                         // if we're given an address with corresponding username, just block:
                         if (_correspondingUsername != null) {
-                          newBlocked = Blocked(name: _nameController.text.substring(1), address: _addressController.text, username: _correspondingUsername);
+                          newBlocked = Blocked(name: _nameController.text.substring(1), address: formAddress, username: _correspondingUsername);
                           sl.get<DBHelper>().blockUser(newBlocked);
                         } else if (_correspondingAddress != null) {
-                          // print("Block user with address: ${_correspondingAddress} text: ${_addressController.text} and name: ${_nameController.text}");
+                          // print("Block user with address: ${_correspondingAddress} text: ${formAddress} and name: ${_nameController.text}");
                           newBlocked =
-                              Blocked(name: _nameController.text.substring(1), address: _correspondingAddress, username: _addressController.text.substring(1));
+                              Blocked(name: _nameController.text.substring(1), address: _correspondingAddress, username: formAddress.substring(1));
                           sl.get<DBHelper>().blockUser(newBlocked);
                         } else {
                           // just an address:
-                          newBlocked = Blocked(name: _nameController.text.substring(1), address: _addressController.text);
+                          newBlocked = Blocked(name: _nameController.text.substring(1), address: formAddress);
                           sl.get<DBHelper>().blockUser(newBlocked);
                         }
                         EventTaxiImpl.singleton().fire(BlockedAddedEvent(blocked: newBlocked));
@@ -627,16 +628,18 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
     bool isValid = true;
     // Address Validations
     // Don't validate address if it came pre-filled in
-    if (widget.address == null) {
-      if (_addressController.text.isEmpty) {
+    String formAddress = widget.address != null ? widget.address : _addressController.text;
+
+    // if (widget.address == null) {
+      if (formAddress.isEmpty) {
         isValid = false;
         setState(() {
           _addressValidationText = AppLocalization.of(context).addressOrUserMissing;
         });
-      } else if (_addressController.text.startsWith("nano_")) {
+      } else if (formAddress.startsWith("nano_")) {
         // we're dealing with an address:
 
-        if (!Address(_addressController.text).isValid()) {
+        if (!Address(formAddress).isValid()) {
           isValid = false;
           setState(() {
             _addressValidationText = AppLocalization.of(context).invalidAddress;
@@ -644,7 +647,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
         }
 
         _addressFocusNode.unfocus();
-        bool blockedExists = await sl.get<DBHelper>().blockedExistsWithAddress(_addressController.text);
+        bool blockedExists = await sl.get<DBHelper>().blockedExistsWithAddress(formAddress);
         if (blockedExists) {
           isValid = false;
           setState(() {
@@ -652,7 +655,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           });
         } else {
           // get the corresponding username if it exists:
-          String username = await sl.get<DBHelper>().getUsernameWithAddress(_addressController.text);
+          String username = await sl.get<DBHelper>().getUsernameWithAddress(formAddress);
           if (username != null) {
             setState(() {
               _correspondingUsername = username;
@@ -661,7 +664,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
         }
       } else {
         // we're dealing with a username:
-        bool blockedExists = await sl.get<DBHelper>().blockedExistsWithUsername(_addressController.text.substring(1));
+        bool blockedExists = await sl.get<DBHelper>().blockedExistsWithUsername(formAddress.substring(1));
         if (blockedExists) {
           isValid = false;
           setState(() {
@@ -669,7 +672,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           });
         } else {
           // check if there's a corresponding address:
-          User user = await sl.get<DBHelper>().getUserWithName(_addressController.text.substring(1));
+          User user = await sl.get<DBHelper>().getUserWithName(formAddress.substring(1));
           if (user != null) {
             setState(() {
               _correspondingAddress = user.address;
@@ -681,7 +684,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
             });
           }
         }
-      }
+      // }
       // reset corresponding username if invalid:
       if (isValid == false && _correspondingUsername != null) {
         setState(() {

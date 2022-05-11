@@ -251,7 +251,7 @@ class AppTransferOverviewSheet {
     }
   }
 
-  Future<Map<String, AccountBalanceItem>> getGiftCardBalance(BuildContext context, String seed) async {
+  Future<BigInt> getGiftCardBalance(BuildContext context, String seed) async {
     // Get accounts from seed
     List<String> accounts = await getAccountsFromSeed(context, seed);
     try {
@@ -259,7 +259,8 @@ class AppTransferOverviewSheet {
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      List<String> accountsToRemove = List();
+      List<String> accountsToRemove = [];
+      BigInt totalBalance = BigInt.zero;
       resp.balances.forEach((String account, AccountBalanceItem balItem) {
         BigInt balance = BigInt.parse(balItem.balance);
         BigInt pending = BigInt.parse(balItem.pending);
@@ -269,20 +270,23 @@ class AppTransferOverviewSheet {
           // Update balance of this item
           privKeyBalanceMap[account].balance = balItem.balance;
           privKeyBalanceMap[account].pending = balItem.pending;
+          totalBalance += balance + pending;
         }
       });
       accountsToRemove.forEach((String account) {
         privKeyBalanceMap.remove(account);
       });
       if (privKeyBalanceMap.length == 0) {
-        return null;
+        // return null;
+        return BigInt.zero;
       }
 
-      return privKeyBalanceMap;
+      // return privKeyBalanceMap;
+      return totalBalance;
     } catch (e) {
       sl.get<Logger>().e("error", e);
     }
-    return null;
+    return BigInt.zero;
   }
 
   Future<void> startAutoTransfer(BuildContext context, String seed, AppWallet wallet) async {
