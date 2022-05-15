@@ -71,7 +71,8 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
-import 'package:share/share.dart';
+import 'package:quiver/strings.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:uuid/uuid.dart';
 
 class AppHomePage extends StatefulWidget {
@@ -652,32 +653,30 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     });
   }
 
-  bool isEmptyOrNull(String s) {
-    if (s == null || s.isEmpty) {
-      return true;
-    }
-    return false;
-  }
-
   void _updateTXDetailsMap(String account) {
     sl.get<DBHelper>().getAccountSpecificTXData(account).then((data) {
       setState(() {
         _txRecords = data;
         _txDetailsMap.clear();
         for (var tx in _txRecords) {
-          if (tx.is_request && (isEmptyOrNull(tx.block) || isEmptyOrNull(tx.link))) {
+          if (tx.is_request && (isEmpty(tx.block) || isEmpty(tx.link))) {
             // set to the last block:
             String lastBlockHash = StateContainer.of(context).wallet.history.length > 0 ? StateContainer.of(context).wallet.history[0].hash : null;
-            if (isEmptyOrNull(tx.block) && StateContainer.of(context).wallet.address == tx.from_address) {
+            if (isEmpty(tx.block) && StateContainer.of(context).wallet.address == tx.from_address) {
               tx.block = lastBlockHash;
             }
-            if (isEmptyOrNull(tx.link) && StateContainer.of(context).wallet.address == tx.to_address) {
+            if (isEmpty(tx.link) && StateContainer.of(context).wallet.address == tx.to_address) {
               tx.link = lastBlockHash;
             }
             // save to db:
             sl.get<DBHelper>().replaceTXDataByUUID(tx);
           }
-          if (tx.is_memo && isEmptyOrNull(tx.link) && !isEmptyOrNull(tx.block)) {
+          // if unacknowledged, and not local, ACK it:
+          if (tx.is_acknowledged == false && tx.to_address == StateContainer.of(context).wallet.address && !tx.uuid.contains("LOCAL")) {
+            print("ACKNOWLEDGING TX_DATA: ${tx.uuid}");
+            sl.get<AccountService>().requestACK(tx.uuid, tx.from_address, tx.to_address);
+          }
+          if (tx.is_memo && isEmpty(tx.link) && isNotEmpty(tx.block)) {
             if (_historyListMap[StateContainer.of(context).wallet.address] != null) {
               // find if there's a matching link:
               // for (var histItem in StateContainer.of(context).wallet.history) {
@@ -685,11 +684,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 if (histItem.link == tx.block) {
                   tx.link = histItem.hash;
 
-                  // if an unacknowledged memo and we're on the receiving side, acknowledge it:
-                  if (tx.is_memo && tx.is_acknowledged == false && tx.to_address == StateContainer.of(context).wallet.address) {
-                    tx.is_acknowledged = true;
-                    sl.get<AccountService>().requestACK(tx.uuid, tx.from_address, tx.to_address);
-                  }
+                  // if unacknowledged and we're on the receiving side, acknowledge it:
+                  // if (tx.is_memo && tx.is_acknowledged == false && tx.to_address == StateContainer.of(context).wallet.address) {
+                  //   tx.is_acknowledged = true;
+                  //   sl.get<AccountService>().requestACK(tx.uuid, tx.from_address, tx.to_address);
+                  // }
 
                   // save to db:
                   sl.get<DBHelper>().replaceTXDataByUUID(tx);
@@ -700,9 +699,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           }
 
           if (!tx.is_request) {
-            if (!isEmptyOrNull(tx.block) && tx.from_address == account) {
+            if (isNotEmpty(tx.block) && tx.from_address == account) {
               _txDetailsMap[tx.block] = tx;
-            } else if (!isEmptyOrNull(tx.link) && tx.to_address == account) {
+            } else if (isNotEmpty(tx.link) && tx.to_address == account) {
               _txDetailsMap[tx.link] = tx;
             }
           }
@@ -985,10 +984,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     int propertyB = b.height;
     if (propertyA == null || propertyB == null) {
       // this shouldn't happen but it does if there's a bug:
-      // throw new Exception("Null height in comparison");
+      throw new Exception("Null height in comparison");
       // TODO:
-      propertyA = 0;
-      propertyB = 0;
+      // propertyA = 0;
+      // propertyB = 0;
     }
 
     // both are AccountHistoryResponseItems:
@@ -1109,7 +1108,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       if (index != null) {
         requestsList[i].height = height;
         unifiedList.insert(index, requestsList[i]);
-      } else if (isEmptyOrNull(requestsList[i].block)) {
+      } else if (isEmpty(requestsList[i].block)) {
         // block was null so just insert it at the top?:
         unifiedList.insert(0, requestsList[i]);
       }
@@ -3536,8 +3535,11 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                             await sl.get<DBHelper>().addTXData(requestTXData);
 
                             try {
-                              // encrypt the memo:
-                              String encryptedMemo = await StateContainer.of(context).encryptMessage(txDetails.memo, txDetails.to_address, privKey);
+                              // encrypt the memo if it's not empty:
+                              String encryptedMemo;
+                              if (txDetails.memo != null && txDetails.memo.isNotEmpty) {
+                                encryptedMemo = await StateContainer.of(context).encryptMessage(txDetails.memo, txDetails.to_address, privKey);
+                              }
                               await sl.get<AccountService>().requestPayment(txDetails.to_address, txDetails.amount_raw,
                                   StateContainer.of(context).wallet.address, signature, nonce_hex, encryptedMemo, local_uuid);
                             } catch (e) {

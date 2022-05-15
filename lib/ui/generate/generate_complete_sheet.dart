@@ -16,7 +16,7 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 class GenerateCompleteSheet extends StatefulWidget {
   final String amountRaw;

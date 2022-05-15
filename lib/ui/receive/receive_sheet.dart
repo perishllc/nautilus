@@ -12,7 +12,7 @@ import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:decimal/decimal.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
@@ -435,7 +435,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                   if (byteData != null) {
                                     f.writeAsBytes(byteData).then((file) {
                                       UIUtil.cancelLockEvent();
-                                      Share.shareFile(file, text: StateContainer.of(context).wallet.address);
+                                      Share.shareFiles([filePath], text: StateContainer.of(context).wallet.address);
                                     });
                                   } else {
                                     // TODO - show a something went wrong message

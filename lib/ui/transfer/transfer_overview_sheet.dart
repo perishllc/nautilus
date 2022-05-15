@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
@@ -166,7 +166,9 @@ class AppTransferOverviewSheet {
                               Dimens.BUTTON_TOP_DIMENS,
                               onPressed: () {
                                 UIUtil.cancelLockEvent();
-                                BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme).then((value) {
+                                BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((val) {
+                                  var value = val.rawContent;
+
                                   if (!NanoSeeds.isValidSeed(value)) {
                                     UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidSeed, context);
                                     return;

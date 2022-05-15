@@ -1016,99 +1016,99 @@ class StateContainerState extends State<StateContainer> {
       if (wallet.history != null && wallet.history.length > 1) {
         count = 50;
       }
-      // try {
-      AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count, raw: true);
-      _requestBalances();
-      bool postedToHome = false;
-      // Iterate list in reverse (oldest to newest block)
-      for (AccountHistoryResponseItem item in resp.history) {
-        // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
-        if (!wallet.history.contains(item)) {
-          int startIndex = 0; // Index to start inserting into the list
-          int lastIndex = resp.history.indexWhere(
-              (item) => wallet.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
-          lastIndex = lastIndex <= 0 ? resp.history.length : lastIndex;
-          setState(() {
-            wallet.history.insertAll(0, resp.history.getRange(startIndex, lastIndex));
-            // Send list to home screen
-            EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-          });
-          await updateUnified();
-          postedToHome = true;
-          break;
+      try {
+        AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count, raw: true);
+        _requestBalances();
+        bool postedToHome = false;
+        // Iterate list in reverse (oldest to newest block)
+        for (AccountHistoryResponseItem item in resp.history) {
+          // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
+          if (!wallet.history.contains(item)) {
+            int startIndex = 0; // Index to start inserting into the list
+            int lastIndex = resp.history.indexWhere(
+                (item) => wallet.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+            lastIndex = lastIndex <= 0 ? resp.history.length : lastIndex;
+            setState(() {
+              wallet.history.insertAll(0, resp.history.getRange(startIndex, lastIndex));
+              // Send list to home screen
+              EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+            });
+            await updateUnified();
+            postedToHome = true;
+            break;
+          }
         }
-      }
-      setState(() {
-        wallet.historyLoading = false;
-      });
-      if (!postedToHome) {
-        EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-        await updateUnified();
-      }
+        setState(() {
+          wallet.historyLoading = false;
+        });
+        if (!postedToHome) {
+          EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+          await updateUnified();
+        }
 
-      sl.get<AccountService>().pop();
-      sl.get<AccountService>().processQueue();
-      // Receive pendings
-      if (pending) {
-        pendingRequests.clear();
-        PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
+        sl.get<AccountService>().pop();
+        sl.get<AccountService>().processQueue();
+        // Receive pendings
+        if (pending) {
+          pendingRequests.clear();
+          PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
 
-        // for unfulfilled payments:
-        List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
+          // for unfulfilled payments:
+          List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
 
-        // Initiate receive/open request for each pending
-        for (String hash in pendingResp.blocks.keys) {
-          PendingResponseItem pendingResponseItem = pendingResp.blocks[hash];
-          pendingResponseItem.hash = hash;
-          String receivedHash = await handlePendingItem(pendingResponseItem);
-          if (receivedHash != null) {
-            // payments:
-            // check to see if this fulfills a payment request:
+          // Initiate receive/open request for each pending
+          for (String hash in pendingResp.blocks.keys) {
+            PendingResponseItem pendingResponseItem = pendingResp.blocks[hash];
+            pendingResponseItem.hash = hash;
+            String receivedHash = await handlePendingItem(pendingResponseItem);
+            if (receivedHash != null) {
+              // payments:
+              // check to see if this fulfills a payment request:
 
-            for (int i = 0; i < unfulfilledPayments.length; i++) {
-              TXData txData = unfulfilledPayments[i];
-              // check destination of this request is where we're sending to:
-              // check to make sure we made the request:
-              // check to make sure the amounts are the same:
-              if (txData.from_address == wallet.address &&
-                  txData.to_address == pendingResponseItem.source &&
-                  txData.amount_raw == pendingResponseItem.amount &&
-                  txData.is_fulfilled == false) {
-                // this is the payment we're fulfilling
-                // update the TXData to be fulfilled
-                await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
-                // update the ui to reflect the change in the db:
-                await updateRequests();
-                await updateUnified();
-                break;
+              for (int i = 0; i < unfulfilledPayments.length; i++) {
+                TXData txData = unfulfilledPayments[i];
+                // check destination of this request is where we're sending to:
+                // check to make sure we made the request:
+                // check to make sure the amounts are the same:
+                if (txData.from_address == wallet.address &&
+                    txData.to_address == pendingResponseItem.source &&
+                    txData.amount_raw == pendingResponseItem.amount &&
+                    txData.is_fulfilled == false) {
+                  // this is the payment we're fulfilling
+                  // update the TXData to be fulfilled
+                  await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
+                  // update the ui to reflect the change in the db:
+                  await updateRequests();
+                  await updateUnified();
+                  break;
+                }
               }
-            }
 
-            AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
-                type: BlockTypes.RECEIVE,
-                account: pendingResponseItem.source,
-                amount: pendingResponseItem.amount,
-                hash: receivedHash,
-                link: pendingResponseItem.hash);
-            if (!wallet.history.contains(histItem)) {
-              setState(() {
-                // TODO: not necessarily the best way to handle this, should get real height:
-                histItem.height = wallet.confirmationHeight + 1;
-                wallet.confirmationHeight += 1;
-                wallet.history.insert(0, histItem);
-                wallet.accountBalance += BigInt.parse(pendingResponseItem.amount);
-                // Send list to home screen
-                EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-                updateUnified();
-              });
+              AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
+                  type: BlockTypes.RECEIVE,
+                  account: pendingResponseItem.source,
+                  amount: pendingResponseItem.amount,
+                  hash: receivedHash,
+                  link: pendingResponseItem.hash);
+              if (!wallet.history.contains(histItem)) {
+                setState(() {
+                  // TODO: not necessarily the best way to handle this, should get real height:
+                  histItem.height = wallet.confirmationHeight + 1;
+                  wallet.confirmationHeight += 1;
+                  wallet.history.insert(0, histItem);
+                  wallet.accountBalance += BigInt.parse(pendingResponseItem.amount);
+                  // Send list to home screen
+                  EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+                  updateUnified();
+                });
+              }
             }
           }
         }
+      } catch (e) {
+        // TODO handle account history error
+        sl.get<Logger>().e("account_history e", e);
       }
-      // } catch (e) {
-      //   // TODO handle account history error
-      //   sl.get<Logger>().e("account_history e", e);
-      // }
     }
   }
 
@@ -1223,7 +1223,7 @@ class StateContainerState extends State<StateContainer> {
       request_time: request_time,
       block: lastBlockHash,
       uuid: uuid,
-      is_acknowledged: true,
+      is_acknowledged: false,
       height: currentBlockHeightInList,
     );
 
@@ -1432,7 +1432,7 @@ class StateContainerState extends State<StateContainer> {
       block: block,
       link: null,
       uuid: uuid,
-      is_acknowledged: true,
+      is_acknowledged: false,
       height: height,
     );
 
@@ -1497,6 +1497,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> handleMessage(dynamic data) async {
+    print("@@@@@@@@@@ handling FCM message @@@@@@@@@@@@@@");
     // log block height:
     // log.d(wallet.history[0].height);
     // log.d(wallet.history[wallet.history.length - 1].height);

@@ -385,7 +385,6 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         if (widget.memo != null && widget.memo.isNotEmpty) {
           print("${widget.memo} ${destinationAltered} ${privKey}");
           encryptedMemo = await StateContainer.of(context).encryptMessage(widget.memo, destinationAltered, privKey);
-          print("${encryptedMemo}");
         }
 
         await sl

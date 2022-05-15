@@ -93,7 +93,7 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
             ? Container(
                 margin: EdgeInsetsDirectional.only(top: 5),
                 padding: EdgeInsets.all(0.0),
-                child: OutlineButton(
+                child: OutlinedButton(
                   onPressed: () {
                     UserDataUtil.setSecureClipboardItem(widget.seed);
                     setState(() {
@@ -108,12 +108,13 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
                       });
                     });
                   },
-                  splashColor: _seedCopied ? Colors.transparent : StateContainer.of(context).curTheme.primary30,
-                  highlightColor: _seedCopied ? Colors.transparent : StateContainer.of(context).curTheme.primary15,
-                  highlightedBorderColor: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                  borderSide:
-                      BorderSide(color: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary, width: 1.0),
+                  // TODO:
+                  // splashColor: _seedCopied ? Colors.transparent : StateContainer.of(context).curTheme.primary30,
+                  // highlightColor: _seedCopied ? Colors.transparent : StateContainer.of(context).curTheme.primary15,
+                  // highlightedBorderColor: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
+                  // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                  // borderSide:
+                  //     BorderSide(color: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary, width: 1.0),
                   child: AutoSizeText(
                     _seedCopied ? AppLocalization.of(context).copied : AppLocalization.of(context).copy,
                     textAlign: TextAlign.center,

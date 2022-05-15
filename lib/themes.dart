@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
+
+enum OverlayTheme { KALIUM, NATRIUM, IRIDIUM, TITANIUM, BERYLLIUM, RUTHIUM, RADIUM, INDIUM, NEPTUNIUM, THORIUM, CARBON, URANIUM, BLAISE, BLAISEDARK, COPPER }
 
 abstract class BaseTheme {
   Color primary;
@@ -953,8 +955,8 @@ class AppIcon {
   static const _channel = const MethodChannel('fappchannel');
 
   static Future<void> setAppIcon(AppIconEnum iconToChange) async {
+    return null;
     // if (!Platform.isIOS) {
-      return null;
     // }
     // String iconStr = "nautilus";
     // switch (iconToChange) {

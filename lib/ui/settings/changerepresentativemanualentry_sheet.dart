@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:logger/logger.dart';
 
@@ -172,7 +172,8 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                               icon: AppIcons.scan,
                               onPressed: () {
                                 UIUtil.cancelLockEvent();
-                                BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme).then((result) {
+                                BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((res) {
+                                  var result = res.rawContent;
                                   if (result == null) {
                                     return;
                                   }

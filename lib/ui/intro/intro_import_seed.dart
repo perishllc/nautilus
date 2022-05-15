@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -159,7 +159,8 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                             }
                                             // Scan QR for seed
                                             UIUtil.cancelLockEvent();
-                                            BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme).then((result) {
+                                            BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme TODO:*/).then((res) {
+                                              var result = res.rawContent;
                                               if (result != null && NanoSeeds.isValidSeed(result)) {
                                                 _seedInputController.text = result;
                                                 setState(() {
@@ -253,7 +254,8 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                             }
                                             // Scan QR for mnemonic
                                             UIUtil.cancelLockEvent();
-                                            BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme).then((result) {
+                                            BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((res) {
+                                              var result = res.rawContent;
                                               if (result != null && NanoMnemomics.validateMnemonic(result.split(' '))) {
                                                 _mnemonicController.text = result;
                                                 setState(() {

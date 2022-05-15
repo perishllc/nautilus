@@ -74,17 +74,23 @@ dependencies:
 
   # QR Codes
   qr_flutter: ^2.0.1 # Generator
-  barcode_scan:
+  # barcode_scan:
+  #   git:
+  #     url: https://github.com/bbedward/flutter_barcode_reader.git
+  #     ref: master
+  # barcode_scan2: ^4.2.1
+  barcode_scan2:
     git:
-      url: https://github.com/bbedward/flutter_barcode_reader.git
-      ref: master
+      url: https://github.com/perishllc/barcode_scan2.git
+      ref: main
 
   # Share files
-  share:
-    git:
-      url: https://github.com/bbedward/plugins.git
-      path: packages/share
-      ref: master
+  share_plus: ^4.0.4
+  # share:
+  #   git:
+  #     url: https://github.com/bbedward/plugins.git
+  #     path: packages/share
+  #     ref: master
 
   # File picker
   file_picker: ^3.0.0-nullsafety.0
@@ -111,7 +117,8 @@ dependencies:
 
   # Push notifications
   # firebase_messaging: ^11.1.0
-  firebase_messaging: 11.2.8
+  # firebase_messaging: 11.2.8
+  firebase_messaging: 11.4.0
   firebase_core: ^1.10.0
 
   # Slidable list actions

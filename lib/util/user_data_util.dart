@@ -13,7 +13,7 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 
 import 'package:quiver/strings.dart';
 import 'package:validators/validators.dart';
-import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
 
 enum DataType { RAW, URL, ADDRESS, MANTA_ADDRESS, SEED }
 
@@ -73,13 +73,13 @@ class UserDataUtil {
   static Future<String> getQRData(DataType type, BuildContext context) async {
     UIUtil.cancelLockEvent();
     try {
-      String data = await BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme);
+      String data = (await BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/)).rawContent;
       if (isEmpty(data)) {
         return null;
       }
       return _parseData(data, type);
     } on PlatformException catch (e) {
-      if (e.code == BarcodeScanner.CameraAccessDenied) {
+      if (e.code == BarcodeScanner.cameraAccessDenied) {
         UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
         return QRScanErrs.PERMISSION_DENIED;
       } else {

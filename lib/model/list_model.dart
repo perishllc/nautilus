@@ -21,27 +21,27 @@ class ListModel<E> {
 
   AnimatedListState get _animatedList => listKey.currentState;
 
+  final INSERT_DURATION = Duration(milliseconds: 0);
+  final REMOVE_DURATION = Duration(milliseconds: 0);
+
   void insertAtTop(E item) {
     if (listKey.currentState != null) {
       _items.insert(0, item);
-      _animatedList.insertItem(0);
+      _animatedList.insertItem(0, duration: INSERT_DURATION);
     }
   }
 
   void insertAt(E item, int index) {
     if (listKey.currentState != null) {
       _items.insert(index, item);
-      _animatedList.insertItem(index);
+      _animatedList.insertItem(index, duration: INSERT_DURATION);
     }
   }
 
   void removeAt(int index, var builder) {
     if (listKey.currentState != null) {
       _items.removeAt(index);
-      _animatedList.removeItem(
-        index,
-        (BuildContext context, Animation<double> animation) => builder(context, index, animation),
-      );
+      _animatedList.removeItem(index, (BuildContext context, Animation<double> animation) => builder(context, index, animation), duration: REMOVE_DURATION);
     }
   }
 
