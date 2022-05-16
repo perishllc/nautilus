@@ -23,6 +23,7 @@ import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/blocked.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
@@ -73,7 +74,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:quiver/strings.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
+// local store:
+import 'package:localstorage/localstorage.dart';
 
 class AppHomePage extends StatefulWidget {
   PriceConversion priceConversion;
@@ -103,15 +107,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
-  final Map<String, GlobalKey<AnimatedListState>> _historyListKeyMap = Map();
+  // final Map<String, GlobalKey<AnimatedListState>> _historyListKeyMap = Map();
   // final Map<String, ListModel<AccountHistoryResponseItem>> _historyListMap = Map();
-  final Map<String, ListModel<AccountHistoryResponseItem>> _historyListMap = Map();
+  // final Map<String, ListModel<AccountHistoryResponseItem>> _historyListMap = Map();
+  final Map<String, List<AccountHistoryResponseItem>> _historyListMap = Map();
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
-  final Map<String, GlobalKey<AnimatedListState>> _requestsListKeyMap = Map();
+  // final Map<String, GlobalKey<AnimatedListState>> _requestsListKeyMap = Map();
   // final Map<String, ListModel<TXData>> _paymentsListMap = Map();
-  final Map<String, ListModel<TXData>> _requestsListMap = Map();
+  final Map<String, List<TXData>> _requestsListMap = Map();
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
@@ -558,6 +563,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     _opacityAnimation.addStatusListener(_animationStatusListener);
     _placeholderCardAnimationController.forward();
     // Register handling of push notifications
+    // *only triggers when tapped!*:
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       try {
         await _chooseCorrectAccountFromNotification(message.data);
@@ -680,7 +686,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             if (_historyListMap[StateContainer.of(context).wallet.address] != null) {
               // find if there's a matching link:
               // for (var histItem in StateContainer.of(context).wallet.history) {
-              for (var histItem in _historyListMap[StateContainer.of(context).wallet.address].items) {
+              for (var histItem in _historyListMap[StateContainer.of(context).wallet.address]) {
                 if (histItem.link == tx.block) {
                   tx.link = histItem.hash;
 
@@ -780,13 +786,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     _confirmEventSub = EventTaxiImpl.singleton().registerTo<ConfirmationHeightChangedEvent>().listen((event) {
       updateConfirmationHeights(event.confirmationHeight);
     });
-
-    // get pending background events:
-    ReceivePort _port = ReceivePort();
-    IsolateNameServer.registerPortWithName(_port.sendPort, "background_message");
-    _port.listen((dynamic data) {
-      StateContainer.of(context).handleMessage(data);
-    });
   }
 
   @override
@@ -829,7 +828,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     List<int> unconfirmedUpdate = [];
     List<int> confirmedUpdate = [];
-    for (int i = 0; i < _historyListMap[StateContainer.of(context).wallet.address].items.length; i++) {
+    for (int i = 0; i < _historyListMap[StateContainer.of(context).wallet.address].length; i++) {
       if ((_historyListMap[StateContainer.of(context).wallet.address][i].confirmed == null ||
               _historyListMap[StateContainer.of(context).wallet.address][i].confirmed) &&
           _historyListMap[StateContainer.of(context).wallet.address][i].height != null &&
@@ -876,6 +875,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         if (!StateContainer.of(context).wallet.loading && StateContainer.of(context).giftedWallet == true && !_lockTriggered) {
           StateContainer.of(context).giftedWallet = false;
           handleBranchGift();
+        }
+        // handle pending background events:
+        if (!StateContainer.of(context).wallet.loading && !_lockTriggered) {
+          handlePendingBackgroundMessages();
         }
 
         super.didChangeAppLifecycleState(state);
@@ -949,8 +952,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       return;
     }
 
-    _historyListMap[StateContainer.of(context).wallet.address].items.clear();
-    _historyListMap[StateContainer.of(context).wallet.address].items.addAll(newList);
+    // _historyListMap[StateContainer.of(context).wallet.address].clear();
+    // _historyListMap[StateContainer.of(context).wallet.address].addAll(newList);
+
+    _historyListMap[StateContainer.of(context).wallet.address] = newList;
 
     // for (var histItem in newList) {
     //   print("New item: ${histItem.hash} ${histItem.link}");
@@ -969,8 +974,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       return;
     }
 
-    _requestsListMap[StateContainer.of(context).wallet.address].items.clear();
-    _requestsListMap[StateContainer.of(context).wallet.address].items.addAll(newList);
+    // _requestsListMap[StateContainer.of(context).wallet.address].clear();
+    // _requestsListMap[StateContainer.of(context).wallet.address].addAll(newList);
+    _requestsListMap[StateContainer.of(context).wallet.address] = newList;
   }
 
   /// Desired relation | Result
@@ -1159,7 +1165,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // remove from the listmap:
     for (int i = removeIndices.length - 1; i >= 0; i--) {
       setState(() {
-        _unifiedListMap[StateContainer.of(context).wallet.address].removeAt(removeIndices[i], _buildUnifiedItem);
+        _unifiedListMap[StateContainer.of(context).wallet.address].removeAt(removeIndices[i], _buildUnifiedItem, instant: true);
       });
     }
 
@@ -1255,6 +1261,24 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
+  // handle pending messages
+  Future<void> handlePendingBackgroundMessages() async {
+    if (StateContainer.of(context).wallet != null) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.reload();
+      var list = prefs.get('background_messages');
+      if (list != null) {
+        for (var msg in list) {
+          msg = jsonDecode(msg);
+          // process the message now that we're in the foreground:
+          EventTaxiImpl.singleton().fire(FcmMessageEvent(data: msg));
+        }
+        // clear the storage since we just processed it:
+        await prefs.remove('background_messages');
+      }
+    }
+  }
+
   void _showMantaAnimation() {
     mantaAnimationOpen = true;
     Navigator.of(context).push(AnimationLoadingOverlay(
@@ -1269,7 +1293,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       gapless: false,
       errorCorrectionLevel: QrErrorCorrectLevel.Q,
     );
-    painter.toImageData(MediaQuery.of(context).size.width).then((byteData) {
+    double width = MediaQuery.of(context).size.width != null ? MediaQuery.of(context).size.width : 100;
+    painter.toImageData(width).then((byteData) {
       setState(() {
         receive = ReceiveSheet(
           localCurrency: StateContainer.of(context).curCurrency,
@@ -2355,7 +2380,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 205),
+                            constraints: BoxConstraints(maxWidth: (MediaQuery.of(context).size.width - 205).abs()),
                             child: AutoSizeText.rich(
                               TextSpan(
                                 children: [
@@ -2994,29 +3019,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   Widget _getUnifiedListWidget(BuildContext context) {
     if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.historyLoading == false) {
       // Setup history list
-      if (!_historyListKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
-        _historyListKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
+      if (!_historyListMap.containsKey("${StateContainer.of(context).wallet.address}")) {
         setState(() {
-          _historyListMap.putIfAbsent(
-            StateContainer.of(context).wallet.address,
-            () => ListModel<AccountHistoryResponseItem>(
-              listKey: _historyListKeyMap["${StateContainer.of(context).wallet.address}"],
-              initialItems: StateContainer.of(context).wallet.history,
-            ),
-          );
+          _historyListMap.putIfAbsent(StateContainer.of(context).wallet.address, () => StateContainer.of(context).wallet.history);
         });
       }
       // Setup payments list
-      if (!_requestsListKeyMap.containsKey("${StateContainer.of(context).wallet.address}")) {
-        _requestsListKeyMap.putIfAbsent("${StateContainer.of(context).wallet.address}", () => GlobalKey<AnimatedListState>());
+      if (!_requestsListMap.containsKey("${StateContainer.of(context).wallet.address}")) {
         setState(() {
-          _requestsListMap.putIfAbsent(
-            StateContainer.of(context).wallet.address,
-            () => ListModel<TXData>(
-              listKey: _requestsListKeyMap["${StateContainer.of(context).wallet.address}"],
-              initialItems: StateContainer.of(context).wallet.requests,
-            ),
-          );
+          _requestsListMap.putIfAbsent(StateContainer.of(context).wallet.address, () => StateContainer.of(context).wallet.requests);
         });
       }
       // Setup unified list

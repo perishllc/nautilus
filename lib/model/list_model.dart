@@ -21,27 +21,31 @@ class ListModel<E> {
 
   AnimatedListState get _animatedList => listKey.currentState;
 
-  final INSERT_DURATION = Duration(milliseconds: 0);
-  final REMOVE_DURATION = Duration(milliseconds: 0);
+  final INSERT_DURATION = Duration(milliseconds: 300);
+  final REMOVE_DURATION = Duration(milliseconds: 300);
 
-  void insertAtTop(E item) {
-    if (listKey.currentState != null) {
-      _items.insert(0, item);
-      _animatedList.insertItem(0, duration: INSERT_DURATION);
-    }
+  void insertAtTop(E item, {bool instant = false}) {
+    insertAt(item, 0, instant: instant);
+    // if (listKey.currentState != null) {
+    //   _items.insert(0, item);
+    //   Duration duration = instant ? Duration(milliseconds: 0) : INSERT_DURATION;
+    //   _animatedList.insertItem(0, duration: duration);
+    // }
   }
 
-  void insertAt(E item, int index) {
+  void insertAt(E item, int index, {bool instant = false}) {
     if (listKey.currentState != null) {
       _items.insert(index, item);
-      _animatedList.insertItem(index, duration: INSERT_DURATION);
+      Duration duration = instant ? Duration(milliseconds: 0) : INSERT_DURATION;
+      _animatedList.insertItem(index, duration: duration);
     }
   }
 
-  void removeAt(int index, var builder) {
+  void removeAt(int index, var builder, {bool instant = false}) {
     if (listKey.currentState != null) {
       _items.removeAt(index);
-      _animatedList.removeItem(index, (BuildContext context, Animation<double> animation) => builder(context, index, animation), duration: REMOVE_DURATION);
+      Duration duration = instant ? Duration(milliseconds: 0) : REMOVE_DURATION;
+      _animatedList.removeItem(index, (BuildContext context, Animation<double> animation) => builder(context, index, animation), duration: duration);
     }
   }
 

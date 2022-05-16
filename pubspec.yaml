@@ -86,11 +86,15 @@ dependencies:
 
   # Share files
   share_plus: ^4.0.4
-  # share:
+  # old: share:
   #   git:
   #     url: https://github.com/bbedward/plugins.git
   #     path: packages/share
   #     ref: master
+
+  # for background messages work around:
+  # localstore: ^1.2.3
+  localstorage: ^4.0.0+1
 
   # File picker
   file_picker: ^3.0.0-nullsafety.0

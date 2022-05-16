@@ -22,6 +22,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/account_balance_i
 import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -52,19 +53,19 @@ import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 // E2E Encryption
 import 'package:flutter_js/flutter_js.dart';
+// local storage:
+import 'package:localstorage/localstorage.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // print("Handling a background message");
-  // dumb hack since the event bus doesn't work in the background:
-  IsolateNameServer.lookupPortByName("background_message")?.send(message.data);
-}
-
-Future<void> getPendingMessages() async {
-  // final prefs = await SharedPreferences.getInstance();
-  // var a = await prefs.getString('pending_message');
-  // while (pendingMessages.length > 0) {
-  //   // EventTaxiImpl.singleton().fire(FcmMessageEvent(data: null));
-  // }
+  // dumb hack since the event bus doesn't work properly in background isolates or w/e:
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var list = await prefs.getStringList('background_messages');
+  if (list == null) {
+    list = [];
+  }
+  list.add(jsonEncode(message.data));
+  await prefs.setStringList('background_messages', list);
 }
 
 Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
@@ -496,6 +497,17 @@ class StateContainerState extends State<StateContainer> {
       }
     });
     _fcmMessageSub = EventTaxiImpl.singleton().registerTo<FcmMessageEvent>().listen((event) {
+      // final db = Localstore.instance;
+      // db.collection('background_messages2').get().then((messages) {
+      //   print("bbbbbbbbbbbbbbbbbbbbbbb");
+      //   for (var id in messages.keys) {
+      //     print("id: $id");
+      //     print("message: ${messages[id]}");
+      //     // delete from the list:
+      //     db.collection('background_messages2').doc(id).delete();
+      //   }
+      // });
+
       handleMessage(event.data);
     });
     // Account has been deleted or name changed
@@ -1497,11 +1509,6 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> handleMessage(dynamic data) async {
-    print("@@@@@@@@@@ handling FCM message @@@@@@@@@@@@@@");
-    // log block height:
-    // log.d(wallet.history[0].height);
-    // log.d(wallet.history[wallet.history.length - 1].height);
-
     // handle an incoming payment request:
     if (data.containsKey("payment_request")) {
       await handlePaymentRequest(data);
