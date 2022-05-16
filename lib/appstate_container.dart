@@ -279,10 +279,10 @@ class StateContainerState extends State<StateContainer> {
   //   }
   // }
 
-  Future<void> updateUnified() async {
+  Future<void> updateUnified(bool fastUpdate) async {
     if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
       setState(() {
-        EventTaxiImpl.singleton().fire(UnifiedHomeEvent());
+        EventTaxiImpl.singleton().fire(UnifiedHomeEvent(fastUpdate: fastUpdate));
       });
     }
   }
@@ -830,7 +830,7 @@ class StateContainerState extends State<StateContainer> {
           wallet.accountBalance += BigInt.parse(resp.amount);
           // Send list to home screen
           EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-          updateUnified();
+          updateUnified(false);
         });
       }
     }
@@ -1045,7 +1045,7 @@ class StateContainerState extends State<StateContainer> {
               // Send list to home screen
               EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
             });
-            await updateUnified();
+            await updateUnified(true);
             postedToHome = true;
             break;
           }
@@ -1055,7 +1055,7 @@ class StateContainerState extends State<StateContainer> {
         });
         if (!postedToHome) {
           EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-          await updateUnified();
+          await updateUnified(true);
         }
 
         sl.get<AccountService>().pop();
@@ -1091,7 +1091,7 @@ class StateContainerState extends State<StateContainer> {
                   await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
                   // update the ui to reflect the change in the db:
                   await updateRequests();
-                  await updateUnified();
+                  await updateUnified(true);
                   break;
                 }
               }
@@ -1111,7 +1111,7 @@ class StateContainerState extends State<StateContainer> {
                   wallet.accountBalance += BigInt.parse(pendingResponseItem.amount);
                   // Send list to home screen
                   EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-                  updateUnified();
+                  updateUnified(true);
                 });
               }
             }

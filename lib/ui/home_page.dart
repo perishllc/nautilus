@@ -745,7 +745,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       diffAndUpdatePaymentList(event.items);
     });
     _unifiedSub = EventTaxiImpl.singleton().registerTo<UnifiedHomeEvent>().listen((event) {
-      generateUnifiedList();
+      generateUnifiedList(fastUpdate: event.fastUpdate);
       setState(() {
         _isRefreshing = false;
       });
@@ -1048,7 +1048,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     return 0;
   }
 
-  Future<void> generateUnifiedList() async {
+  Future<void> generateUnifiedList({bool fastUpdate = false}) async {
     if (_historyListMap[StateContainer.of(context).wallet.address] == null ||
         _requestsListMap[StateContainer.of(context).wallet.address] == null ||
         _unifiedListMap[StateContainer.of(context).wallet.address] == null) {
@@ -1125,37 +1125,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // needed to sort payment requests by request time from each other:
     unifiedList.sort(mySortComparison);
 
-    // for (int i = 0; i < unifiedList.length; i++) {
-    //   int index = -1;
-    //   int height = -1;
-
-    //   String histItemHash = unifiedList[i].hash;
-
-    //   // find if this histItem has a matching request:
-    //   for (int j = 0; j < requestsList.length; j++) {
-    //     if (histItemHash == requestsList[j].block || histItemHash == requestsList[j].link) {
-    //       requestsList[j].height = unifiedList[i].height;
-    //       unifiedList.insert(index, requestsList[j]);
-    //       break;
-    //     }
-    //   }
-    //   // doesn't insert if it never found a block...
-    // }
-
-    // print index:height
-    // for (int i = 0; i < unifiedList.length; i++) {
-    //   // if (unifiedList[i].hash == "B5D90E90C8B5BB1E67A2B1D3A83B75163211ED4FD361609459D442A300D6893E") {
-    //   //   print("first");
-    //   //   print("index: ${i} height: ${unifiedList[i].height}");
-    //   // }
-    //   // if (unifiedList[i].hash == "9E1523555152ADBBE9A7E09761A170D84F9F9EA1194553B9F3637D2E9A57110A") {
-    //   //   print("2nd");
-    //   //   print("index: ${i} height: ${unifiedList[i].height}");
-    //   // }
-    //   // print("${i}:${unifiedList[i].amount}:${unifiedList[i].height}");
-    //   // _unifiedListMap[StateContainer.of(context).wallet.address].insertAtTop(unifiedList[i]);
-    // }
-
     // create a list of indices to remove:
     List<int> removeIndices = [];
     _unifiedListMap[StateContainer.of(context).wallet.address].items.where((item) => !unifiedList.contains(item)).forEach((dynamicItem) {
@@ -1174,7 +1143,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       setState(() {
         int index = unifiedList.indexOf(dynamicItem);
         if (index > -1 && dynamicItem != null) {
-          _unifiedListMap[StateContainer.of(context).wallet.address].insertAt(dynamicItem, index);
+          _unifiedListMap[StateContainer.of(context).wallet.address].insertAt(dynamicItem, index, instant: fastUpdate);
         }
         // _unifiedListMap[StateContainer.of(context).wallet.address].insertAtTop(dynamicItem);
       });
@@ -3043,7 +3012,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           );
         });
       }
-      generateUnifiedList();
+      generateUnifiedList(fastUpdate: true);
     }
 
     if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet.loading || StateContainer.of(context).wallet.unifiedLoading) {

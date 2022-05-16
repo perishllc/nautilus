@@ -3,7 +3,7 @@ import 'package:event_taxi/event_taxi.dart';
 // import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
 
 class UnifiedHomeEvent implements Event {
-  final List<dynamic> items;
+  final bool fastUpdate;
 
-  UnifiedHomeEvent({this.items});
+  UnifiedHomeEvent({this.fastUpdate});
 }
