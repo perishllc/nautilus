@@ -402,7 +402,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         await Future.delayed(Duration(seconds: 2));
         // update the list view:
         await StateContainer.of(context).updateRequests();
-        await StateContainer.of(context).updateUnified();
+        await StateContainer.of(context).updateUnified(true);
         // go to home and show error:
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
         UIUtil.showSnackbar(AppLocalization.of(context).requestError, context, durationMs: 5500);
@@ -423,7 +423,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
 
         // update the list view:
         await StateContainer.of(context).updateRequests();
-        await StateContainer.of(context).updateUnified();
+        await StateContainer.of(context).updateUnified(false);
 
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
         StateContainer.of(context).requestUpdate();
