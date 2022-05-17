@@ -8,6 +8,7 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
+import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
@@ -264,8 +265,13 @@ class StateContainerState extends State<StateContainer> {
       setState(() {
         this.wallet.requests = requests;
         EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet.requests));
-        EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
       });
+    }
+  }
+
+  Future<void> updateTXMemos() async {
+    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+      EventTaxiImpl.singleton().fire(TXUpdateEvent());
     }
   }
 
@@ -1278,6 +1284,7 @@ class StateContainerState extends State<StateContainer> {
     await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
 
     await updateRequests();
+    await updateUnified(false);
   }
 
   Future<void> handlePaymentRecord(dynamic data) async {
@@ -1375,6 +1382,7 @@ class StateContainerState extends State<StateContainer> {
           throw new Exception("\n\n@@@@@@@@this shouldn't happen!@@@@@@@@@@\n\n");
         }
         await updateRequests();
+        await updateUnified(true);
       }
     }
 
@@ -1504,8 +1512,7 @@ class StateContainerState extends State<StateContainer> {
     // send acknowledgement to server / requester:
     await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
     await updateRequests();
-    // hack to get tx memo to update:
-    EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
+    await updateTXMemos();
   }
 
   Future<void> handleMessage(dynamic data) async {

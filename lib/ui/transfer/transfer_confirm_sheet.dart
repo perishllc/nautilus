@@ -371,7 +371,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
       // // add it to the database:
       // await sl.get<DBHelper>().addTXData(newGiftTXData);
       // // hack to get tx memo to update:
-      // EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
+      // EventTaxiImpl.singleton().fire(TXUpdateEvent());
     }
     return totalTransferred;
     // EventTaxiImpl.singleton().fire(TransferCompleteEvent(amount: totalTransferred));

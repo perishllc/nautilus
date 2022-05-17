@@ -10,6 +10,7 @@ import 'package:nautilus_wallet_flutter/app_icons.dart';
 
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
+import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/contact.dart';
@@ -336,7 +337,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         // add it to the database:
         await sl.get<DBHelper>().addTXData(newGiftTXData);
         // hack to get tx memo to update:
-        EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
+        EventTaxiImpl.singleton().fire(TXUpdateEvent());
 
         // Show complete
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
@@ -380,7 +381,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         // add it to the database:
         await sl.get<DBHelper>().addTXData(newGiftTXData);
         // hack to get tx memo to update:
-        EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
+        EventTaxiImpl.singleton().fire(TXUpdateEvent());
       }
     } catch (e) {
       // Send failed

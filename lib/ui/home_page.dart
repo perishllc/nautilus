@@ -18,6 +18,7 @@ import 'package:manta_dart/manta_wallet.dart';
 import 'package:manta_dart/messages.dart';
 import 'package:nautilus_wallet_flutter/bus/blocked_modified_event.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
+import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/blocked.dart';
@@ -718,6 +719,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   StreamSubscription<ConfirmationHeightChangedEvent> _confirmEventSub;
   StreamSubscription<HistoryHomeEvent> _historySub;
+  StreamSubscription<TXUpdateEvent> _txUpdatesSub;
   StreamSubscription<PaymentsHomeEvent> _paymentsSub;
   StreamSubscription<UnifiedHomeEvent> _unifiedSub;
   StreamSubscription<ContactModifiedEvent> _contactModifiedSub;
@@ -727,22 +729,28 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   void _registerBus() {
     _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((event) {
-      diffAndUpdateHistoryList(event.items);
-      // update tx memo's
-      if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.address != null) {
-        _updateTXDetailsMap(StateContainer.of(context).wallet.address);
-      }
-      setState(() {
-        _isRefreshing = false;
-      });
+      updateHistoryList(event.items);
+      // // update tx memo's
+      // if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.address != null) {
+      //   _updateTXDetailsMap(StateContainer.of(context).wallet.address);
+      // }
       // handle deep links:
       if (StateContainer.of(context).initialDeepLink != null) {
         handleDeepLink(StateContainer.of(context).initialDeepLink);
         StateContainer.of(context).initialDeepLink = null;
       }
     });
+    _txUpdatesSub = EventTaxiImpl.singleton().registerTo<TXUpdateEvent>().listen((event) {
+      if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.address != null) {
+        _updateTXDetailsMap(StateContainer.of(context).wallet.address);
+      }
+    });
     _paymentsSub = EventTaxiImpl.singleton().registerTo<PaymentsHomeEvent>().listen((event) {
-      diffAndUpdatePaymentList(event.items);
+      var newPayments = event.items;
+      if (newPayments == null || newPayments.length == 0 || _requestsListMap[StateContainer.of(context).wallet.address] == null) {
+        return;
+      }
+      _requestsListMap[StateContainer.of(context).wallet.address] = newPayments;
     });
     _unifiedSub = EventTaxiImpl.singleton().registerTo<UnifiedHomeEvent>().listen((event) {
       generateUnifiedList(fastUpdate: event.fastUpdate);
@@ -814,6 +822,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     if (_confirmEventSub != null) {
       _confirmEventSub.cancel();
+    }
+    if (_txUpdatesSub != null) {
+      _txUpdatesSub.cancel();
+    }
+    if (_paymentsSub != null) {
+      _paymentsSub.cancel();
+    }
+    if (_unifiedSub != null) {
+      _unifiedSub.cancel();
     }
   }
 
@@ -947,19 +964,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   ///
   /// Required to do it this way for the animation
   ///
-  void diffAndUpdateHistoryList(List<AccountHistoryResponseItem> newList) {
+  void updateHistoryList(List<AccountHistoryResponseItem> newList) {
     if (newList == null || newList.length == 0 || _historyListMap[StateContainer.of(context).wallet.address] == null) {
       return;
     }
 
-    // _historyListMap[StateContainer.of(context).wallet.address].clear();
-    // _historyListMap[StateContainer.of(context).wallet.address].addAll(newList);
-
     _historyListMap[StateContainer.of(context).wallet.address] = newList;
-
-    // for (var histItem in newList) {
-    //   print("New item: ${histItem.hash} ${histItem.link}");
-    // }
 
     // Re-subscribe if missing data
     if (StateContainer.of(context).wallet.loading) {
@@ -967,16 +977,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     } else {
       updateConfirmationHeights(StateContainer.of(context).wallet.confirmationHeight);
     }
-  }
-
-  void diffAndUpdatePaymentList(List<TXData> newList) {
-    if (newList == null || newList.length == 0 || _requestsListMap[StateContainer.of(context).wallet.address] == null) {
-      return;
-    }
-
-    // _requestsListMap[StateContainer.of(context).wallet.address].clear();
-    // _requestsListMap[StateContainer.of(context).wallet.address].addAll(newList);
-    _requestsListMap[StateContainer.of(context).wallet.address] = newList;
   }
 
   /// Desired relation | Result
@@ -3544,7 +3544,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                             }
                             await StateContainer.of(context).updateRequests();
                             // hack to get tx memo to update:
-                            EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
+                            EventTaxiImpl.singleton().fire(TXUpdateEvent());
 
                             Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
                           }),
@@ -3629,7 +3629,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                               // memo sent successfully, show success:
                               UIUtil.showSnackbar(AppLocalization.of(context).memoSentButNotReceived, context, durationMs: 5000);
                               // hack to get tx memo to update:
-                              EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: null));
+                              EventTaxiImpl.singleton().fire(TXUpdateEvent());
                             }
 
                             Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
