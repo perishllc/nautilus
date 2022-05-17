@@ -9,6 +9,7 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:lottie/lottie.dart';
 
 class AppDialogs {
   static void showConfirmDialog(var context, var title, var content, var buttonText, Function onPressed, {String cancelText, Function cancelAction}) {
@@ -98,6 +99,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
   Function onPoppedCallback;
   Color barrier;
   Color barrierStronger;
+  AnimationController _controller;
 
   AnimationLoadingOverlay(this.type, this.barrier, this.barrierStronger, {this.onPoppedCallback});
 
@@ -149,7 +151,12 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
   Widget _getAnimation(BuildContext context) {
     switch (type) {
       case AnimationType.LOADING:
-        return Center(child: RiveAnimation.asset('assets/animations/test.riv', fit: BoxFit.contain));
+        // return Center(child: RiveAnimation.asset('assets/animations/diamond-loader.riv', fit: BoxFit.contain));
+        // return Center(child: RiveAnimation.asset('assets/animations/particle-loader.riv', fit: BoxFit.contain));
+        // return Center(child: RiveAnimation.asset('assets/animations/loader3.riv', fit: BoxFit.contain));
+        return Lottie.network(
+          'https://assets10.lottiefiles.com/packages/lf20_t9gkkhz4.json',
+        );
       case AnimationType.SEND:
         return Center(
           child: FlareActor(
@@ -308,7 +315,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
             child: _getAnimation(context),
           ),
         );
-      default:
+      case AnimationType.SEND:
         return Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: type == AnimationType.SEND ? MainAxisAlignment.end : MainAxisAlignment.center,
@@ -322,6 +329,8 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
             ),
           ],
         );
+      default:
+        return _getAnimation(context);
     }
   }
 

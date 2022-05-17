@@ -106,7 +106,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
   void _showSendingAnimation(BuildContext context) {
     animationOpen = true;
     Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.LOADING, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
+        AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
         onPoppedCallback: () => animationOpen = false));
   }
 
@@ -340,7 +340,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     bool sendFailed = false;
     try {
       _showSendingAnimation(context);
-
+      
       String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
 
       // get epoch time as hex:

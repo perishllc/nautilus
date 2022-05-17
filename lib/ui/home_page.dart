@@ -946,10 +946,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     await StateContainer.of(context).updateRequests();
     _updateTXData();
     // _updateTXDetailsMap(StateContainer.of(context).wallet.address);
-    await generateUnifiedList();
+    // await generateUnifiedList();
     // setState(() {});
-    // Hide refresh indicator after 3 seconds
-    Future.delayed(new Duration(seconds: 3), () {
+    // Hide refresh indicator after 2.5 seconds
+    Future.delayed(new Duration(milliseconds: 2500), () {
       setState(() {
         _isRefreshing = false;
       });
@@ -1262,8 +1262,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       gapless: false,
       errorCorrectionLevel: QrErrorCorrectLevel.Q,
     );
-    double width = MediaQuery.of(context).size.width != null ? MediaQuery.of(context).size.width : 100;
-    painter.toImageData(width).then((byteData) {
+    if (MediaQuery.of(context).size.width == 0) {
+      return;
+    }
+    painter.toImageData(MediaQuery.of(context).size.width).then((byteData) {
       setState(() {
         receive = ReceiveSheet(
           localCurrency: StateContainer.of(context).curCurrency,
@@ -1445,7 +1447,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                           boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
                         ),
                         height: 55,
-                        width: (MediaQuery.of(context).size.width - 42) / 2,
+                        width: (MediaQuery.of(context).size.width - 42).abs() / 2,
                         margin: EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
                         // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
                         child: FlatButton(
@@ -2323,7 +2325,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       },
       child: Container(
         alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width - 190,
+        width: (MediaQuery.of(context).size.width - 190).abs(),
         color: Colors.transparent,
         child: _priceConversion == PriceConversion.HIDDEN
             ?
@@ -2561,6 +2563,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     if (isPaymentRequest) {
       isRecipient = StateContainer.of(context).wallet.address == txDetails.to_address;
+      if (isRecipient && txDetails.to_address == StateContainer.of(context).wallet.address) {
+        txDetails.is_acknowledged = true;
+      }
     }
 
     if (txDetails != null) {
@@ -3277,6 +3282,11 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
     var txDetails = widget.txDetails;
 
     String walletAddress = StateContainer.of(context).wallet.address;
+
+    if (walletAddress == txDetails.to_address) {
+      txDetails.is_acknowledged = true;
+    }
+
     if (walletAddress == txDetails.to_address && txDetails.is_request && !txDetails.is_fulfilled) {
       is_unfulfilled_payable_request = true;
     }

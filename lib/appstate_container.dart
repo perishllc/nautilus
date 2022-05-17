@@ -1544,6 +1544,9 @@ class StateContainerState extends State<StateContainer> {
       String is_acknowledged = data['is_acknowledged'];
       int height = data['height'];
 
+      // sleep to prevent animations from overlapping:
+      await Future.delayed(Duration(seconds: 2));
+
       // set acknowledged to true:
       var txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
       if (txData != null) {
@@ -1553,6 +1556,7 @@ class StateContainerState extends State<StateContainer> {
         print("we didn't have a txData for this payment ack!");
       }
       await updateRequests();
+      await updateUnified(true);
     }
   }
 
