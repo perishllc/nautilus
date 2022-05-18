@@ -16,6 +16,7 @@ TEMP_KEYCHAIN_NAME_DEFAULT = "fastlane_flutter"
 TEMP_KEYCHAN_PASSWORD_DEFAULT = "temppassword"
 SIGH_PROVISIONING_PROFILE_NAME = "co.perish.nautilus AppStore"
 
+
 def delete_temp_keychain(name)
   delete_keychain(
     name: name
@@ -48,7 +49,8 @@ platform :ios do
         in_house: false
       )      
       match(
-        app_identifier: CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier),
+        # app_identifier: CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier),
+        app_identifier: ENV['APP_IDENTIFIER'],
         type: "appstore",
         keychain_name: keychain_name,
         keychain_password: keychain_password,
@@ -62,7 +64,8 @@ platform :ios do
         api_key: api_key
       )
       sigh(
-        app_identifier: CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier),
+        # app_identifier: CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier),
+        app_identifier: ENV['APP_IDENTIFIER'],
         readonly: false,
         cert_id: lane_context[SharedValues::CERT_CERTIFICATE_ID],
         provisioning_name: ENV['SIGH_PROVISIONING_PROFILE_NAME'],
@@ -106,9 +109,9 @@ platform :ios do
   desc "Upload iOS app to app store"
   lane :deploy_ios do |options|
     api_key = app_store_connect_api_key(
-      key_id: ENV['API_KEY_ID'],
-      issuer_id: ENV['API_KEY_ISSUER'],
-      key_filepath: ENV['API_KEY_FILEPATH'],
+      key_id: ENV['API_KEY_ID'] || TEMP_KEY_ID,
+      issuer_id: ENV['API_KEY_ISSUER'] || TEMP_ISSUER_ID,
+      key_filepath: ENV['API_KEY_FILEPATH'] || TEMP_KEY_FILEPATH,
       duration: 1200,
       in_house: false
     )

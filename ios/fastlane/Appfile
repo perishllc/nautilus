@@ -4,5 +4,9 @@ apple_id("perish.cicd@gmail.com") # Your Apple email address
 itc_team_id("123954789") # App Store Connect Team ID
 team_id("BZR8JDUBS8") # Developer Portal Team ID
 
+key_id "P9TV8R89N6" # The ID of the key you want to use
+# TEMP_ISSUER_ID = "75ef4943-6686-4c2d-9bbf-d02249f39b3e"
+# TEMP_KEY_FILEPATH = "/Users/fosse/development/keys/AuthKey_P9TV8R89N6.p8"")
+
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile
