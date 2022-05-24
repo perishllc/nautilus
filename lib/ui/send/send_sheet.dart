@@ -1237,8 +1237,10 @@ class _SendSheetState extends State<SendSheet> {
       }
 
       if (isValid && sl.get<AccountService>().fallbackConnected) {
-        isValid = false;
-        await showFallbackConnectedAlert();
+        if (_sendMemoController.text.trim().isNotEmpty) {
+          isValid = false;
+          await showFallbackConnectedAlert();
+        }
       }
     }
     return isValid;

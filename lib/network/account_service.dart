@@ -126,7 +126,7 @@ class AccountService {
     _isConnecting = true;
 
     // check if the nautilus servers are available
-    Socket.connect(_BASE_SERVER_ADDRESS, 5076, timeout: Duration(seconds: 3)).then((socket) {
+    Socket.connect(_BASE_SERVER_ADDRESS, 80, timeout: Duration(seconds: 3)).then((socket) {
       log.d("Nautilus backend is up");
       fallbackConnected = false;
       socket.destroy();
@@ -473,8 +473,8 @@ class AccountService {
   }
 
   // send payment record (memo) to an account:
-  Future<void> sendTXMemo(
-      String account, String requesting_account, String amount_raw, String request_signature, String request_nonce, String memo_enc, String block, String local_uuid) async {
+  Future<void> sendTXMemo(String account, String requesting_account, String amount_raw, String request_signature, String request_nonce, String memo_enc,
+      String block, String local_uuid) async {
     PaymentMemo request = PaymentMemo(
         account: account,
         requesting_account: requesting_account,

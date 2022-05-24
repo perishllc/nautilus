@@ -828,6 +828,26 @@ class AppLocalization {
     return Intl.message("Notifications", desc: 'notifications_settings', name: 'notifications');
   }
 
+  String get onramp {
+    return Intl.message("Onramp", desc: 'onramp_settings', name: 'onramp');
+  }
+
+  String get onramper {
+    return Intl.message("Onramper", desc: 'onramper_ramp', name: 'onramper');
+  }
+
+  String get moonpay {
+    return Intl.message("MoonPay", desc: 'moonpay_ramp', name: 'moonpay');
+  }
+
+  String get simplex {
+    return Intl.message("Simplex", desc: 'simplex_ramp', name: 'simplex');
+  }
+
+  String get copyWalletAddressToClipboard {
+    return Intl.message("Copy wallet address to clipboard", desc: 'onramp_copy', name: 'copyWalletAddressToClipboard');
+  }
+
   String get autoImport {
     return Intl.message("Auto Import", desc: 'auto_import', name: 'autoImport');
   }
@@ -1227,7 +1247,7 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
 
   String get fallbackInfo {
     return Intl.message(
-        "Nautilus Servers appear to be disconnected, Sending and Receiving should still be operational but payment requests may not go through\n\n Come back later or restart the app to try again",
+        "Nautilus Servers appear to be disconnected, Sending and Receiving (without memos) should still be operational but payment requests may not go through\n\n Come back later or restart the app to try again",
         desc: 'fallback_info',
         name: 'fallbackInfo');
   }

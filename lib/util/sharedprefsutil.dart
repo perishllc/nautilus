@@ -219,7 +219,7 @@ class SharedPrefsUtil {
   }
 
   Future<AvailableBlockExplorer> getBlockExplorer() async {
-    return AvailableBlockExplorer(AvailableBlockExplorerEnum.values[await get(cur_explorer, defaultValue: AvailableBlockExplorerEnum.NANOLOOKER.index)]);
+    return AvailableBlockExplorer(AvailableBlockExplorerEnum.values[await get(cur_explorer, defaultValue: AvailableBlockExplorerEnum.NANOCOMMUNITY.index)]);
   }
 
   Future<ThemeSetting> getTheme() async {

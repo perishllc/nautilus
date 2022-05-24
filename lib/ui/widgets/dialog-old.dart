@@ -1,16 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flare_flutter/flare_actor.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/themes.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-
-import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
-import 'package:lottie/lottie.dart';
-
 class AppDialogs {
   static void showConfirmDialog(var context, var title, var content, var buttonText, Function onPressed, {String cancelText, Function cancelAction}) {
     if (cancelText == null) {
@@ -92,14 +79,13 @@ class AppDialogs {
   }
 }
 
-enum AnimationType { SEND, GENERIC, TRANSFER_SEARCHING_QR, TRANSFER_SEARCHING_MANUAL, TRANSFER_TRANSFERRING, MANTA, LOADING, SEARCHING }
+enum AnimationType { SEND, GENERIC, TRANSFER_SEARCHING_QR, TRANSFER_SEARCHING_MANUAL, TRANSFER_TRANSFERRING, MANTA }
 
 class AnimationLoadingOverlay extends ModalRoute<void> {
   AnimationType type;
   Function onPoppedCallback;
   Color barrier;
   Color barrierStronger;
-  AnimationController _controller;
 
   AnimationLoadingOverlay(this.type, this.barrier, this.barrierStronger, {this.onPoppedCallback});
 
@@ -150,17 +136,10 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
 
   Widget _getAnimation(BuildContext context) {
     switch (type) {
-      case AnimationType.LOADING:
-        // return Center(child: RiveAnimation.asset('assets/animations/diamond-loader.riv', fit: BoxFit.contain));
-        // return Center(child: RiveAnimation.asset('assets/animations/particle-loader.riv', fit: BoxFit.contain));
-        // return Center(child: RiveAnimation.asset('assets/animations/loader3.riv', fit: BoxFit.contain));
-        return Lottie.network(
-          'https://assets10.lottiefiles.com/packages/lf20_t9gkkhz4.json',
-        );
       case AnimationType.SEND:
         return Center(
           child: FlareActor(
-            "legacy_assets/send_animation.flr",
+            "assets/send_animation.flr",
             animation: "main",
             fit: BoxFit.contain,
             color: StateContainer.of(context).curTheme.primary,
@@ -169,7 +148,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
       case AnimationType.MANTA:
         return Center(
           child: FlareActor(
-            "legacy_assets/manta_animation.flr",
+            "assets/manta_animation.flr",
             animation: "main",
             fit: BoxFit.contain,
           ),
@@ -179,21 +158,21 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
           children: <Widget>[
             Center(
               child: FlareActor(
-                "legacy_assets/searchseedqr_animation_qronly.flr",
+                "assets/searchseedqr_animation_qronly.flr",
                 animation: "main",
                 fit: BoxFit.contain,
               ),
             ),
             Center(
               child: FlareActor(
-                "legacy_assets/searchseedqr_animation_glassonly.flr",
+                "assets/searchseedqr_animation_glassonly.flr",
                 animation: "main",
                 fit: BoxFit.contain,
               ),
             ),
             Center(
               child: FlareActor(
-                "legacy_assets/searchseedqr_animation_magnifyingglassonly.flr",
+                "assets/searchseedqr_animation_magnifyingglassonly.flr",
                 animation: "main",
                 fit: BoxFit.contain,
                 color: StateContainer.of(context).curTheme.primary,
@@ -206,7 +185,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
           children: <Widget>[
             Center(
               child: FlareActor(
-                "legacy_assets/searchseedmanual_animation_seedonly.flr",
+                "assets/searchseedmanual_animation_seedonly.flr",
                 animation: "main",
                 fit: BoxFit.contain,
                 color: StateContainer.of(context).curTheme.primary30,
@@ -214,14 +193,14 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
             ),
             Center(
               child: FlareActor(
-                "legacy_assets/searchseedmanual_animation_glassonly.flr",
+                "assets/searchseedmanual_animation_glassonly.flr",
                 animation: "main",
                 fit: BoxFit.contain,
               ),
             ),
             Center(
               child: FlareActor(
-                "legacy_assets/searchseedmanual_animation_magnifyingglassonly.flr",
+                "assets/searchseedmanual_animation_magnifyingglassonly.flr",
                 animation: "main",
                 fit: BoxFit.contain,
                 color: StateContainer.of(context).curTheme.primary,
@@ -233,12 +212,12 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
         return Stack(
           children: <Widget>[
             FlareActor(
-              "legacy_assets/transfer_animation_paperwalletonly.flr",
+              "assets/transfer_animation_paperwalletonly.flr",
               animation: "main",
               fit: BoxFit.contain,
             ),
             FlareActor(
-              "legacy_assets/transfer_animation_nautiluswalletonly.flr",
+              "assets/transfer_animation_natriumwalletonly.flr",
               animation: "main",
               fit: BoxFit.contain,
               color: StateContainer.of(context).curTheme.primary,
@@ -294,7 +273,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
                       width: 33.333,
                       height: 8.866,
                       child: FlareActor(
-                        "legacy_assets/threedot_animation.flr",
+                        "assets/threedot_animation.flr",
                         animation: "main",
                         fit: BoxFit.contain,
                         color: StateContainer.of(context).curTheme.primary,
@@ -315,36 +294,20 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
             child: _getAnimation(context),
           ),
         );
-      case AnimationType.SEND:
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: type == AnimationType.SEND ? MainAxisAlignment.end : MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              margin: type == AnimationType.SEND ? EdgeInsets.only(bottom: 10.0, left: 90, right: 90) : EdgeInsets.zero,
-              //Widgth/Height ratio is needed because BoxFit is not working as expected
-              width: type == AnimationType.SEND ? double.infinity : 100,
-              height: type == AnimationType.SEND ? MediaQuery.of(context).size.width : 100,
-              child: _getAnimation(context),
-            ),
-          ],
-        );
-      case AnimationType.GENERIC:
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: type == AnimationType.SEND ? MainAxisAlignment.end : MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              margin: type == AnimationType.SEND ? EdgeInsets.only(bottom: 10.0, left: 90, right: 90) : EdgeInsets.zero,
-              //Widgth/Height ratio is needed because BoxFit is not working as expected
-              width: type == AnimationType.SEND ? double.infinity : 100,
-              height: type == AnimationType.SEND ? MediaQuery.of(context).size.width : 100,
-              child: _getAnimation(context),
-            ),
-          ],
-        );
       default:
-        return _getAnimation(context);
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: type == AnimationType.SEND ? MainAxisAlignment.end : MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              margin: type == AnimationType.SEND ? EdgeInsets.only(bottom: 10.0, left: 90, right: 90) : EdgeInsets.zero,
+              //Widgth/Height ratio is needed because BoxFit is not working as expected
+              width: type == AnimationType.SEND ? double.infinity : 100,
+              height: type == AnimationType.SEND ? MediaQuery.of(context).size.width : 100,
+              child: _getAnimation(context),
+            ),
+          ],
+        );
     }
   }
 

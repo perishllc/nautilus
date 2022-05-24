@@ -507,6 +507,78 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     }
   }
 
+  Future<String> _onrampDialog() async {
+    String onramper_url =
+        "https://widget.onramper.com?apiKey=pk_prod_LRutcZGkxQPghTCCXo4naleTwJh40g9NVr6gL2vq78c0&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
+    String moonpay_url = "https://buy.moonpay.com/?currencyCode=xno&colorCode=%234080D7";
+    String simplex_url = "https://buy.chainbits.com";
+    
+    String choice = await showDialog<String>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            title: Text(
+              AppLocalization.of(context).onramp,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            children: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, moonpay_url);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).moonpay,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, simplex_url);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).simplex,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, onramper_url);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).onramper,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Clipboard.setData(new ClipboardData(text: StateContainer.of(context).wallet.address));
+                  UIUtil.showSnackbar(AppLocalization.of(context).addressCopied, context, durationMs: 1500);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).copyWalletAddressToClipboard,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
+
+    return choice;
+  }
+
   List<Widget> _buildMinRawOptions() {
     List<Widget> ret = new List();
     MinRawOptions.values.forEach((MinRawOptions value) {
@@ -687,14 +759,16 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             children: _buildCurrencyOptions(),
           );
         });
-    sl.get<SharedPrefsUtil>().setCurrency(AvailableCurrency(selection)).then((result) {
-      if (StateContainer.of(context).curCurrency.currency != selection) {
-        setState(() {
-          StateContainer.of(context).curCurrency = AvailableCurrency(selection);
-        });
-        StateContainer.of(context).requestSubscribe();
-      }
-    });
+    if (selection != null) {
+      sl.get<SharedPrefsUtil>().setCurrency(AvailableCurrency(selection)).then((result) {
+        if (StateContainer.of(context).curCurrency.currency != selection) {
+          setState(() {
+            StateContainer.of(context).curCurrency = AvailableCurrency(selection);
+          });
+          StateContainer.of(context).requestSubscribe();
+        }
+      });
+    }
   }
 
   List<Widget> _buildLanguageOptions() {
@@ -1396,24 +1470,27 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     //   Navigator.of(context).pushNamed("/payments_page");
                     // }),
                     // TODO: Add back later:
-                    // Divider(
-                    //   height: 2,
-                    //   color: StateContainer.of(context).curTheme.text15,
-                    // ),
-                    // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).purchaseNano, AppIcons.coins, onPressed: () {
-                    //   // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                    //   //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://buy.chainbits.com");
-                    //   // }));
-                    //   Navigator.of(context).pushNamed("/purchase_nano");
-                    // }),
+                    Divider(
+                      height: 2,
+                      color: StateContainer.of(context).curTheme.text15,
+                    ),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).purchaseNano, AppIcons.coins, onPressed: () {
+                      _onrampDialog().then((choice) {
+                        if (choice == null) {
+                          return;
+                        }
+                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                          return UIUtil.showWebview(context, choice);
+                        }));
+                      });
+
+                      // Navigator.of(context).pushNamed("/purchase_nano");
+                    }),
                     Divider(
                       height: 2,
                       color: StateContainer.of(context).curTheme.text15,
                     ),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).registerUsername, AppIcons.at, onPressed: () {
-                      // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://nano.to");
-                      // }));
                       Navigator.of(context).pushNamed("/register_username");
                     }),
                     Divider(
@@ -1421,9 +1498,6 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       color: StateContainer.of(context).curTheme.text15,
                     ),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).createGiftCard, AppIcons.export_icon, onPressed: () {
-                      // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      //   return UIUtil.showWebview(context, /*AppLocalization.of(context).privacyUrl*/ "https://tools.nanos.cc/?tool=paper");
-                      // }));
                       Navigator.of(context).pushNamed("/generate_paper_wallet");
                     }),
                     Divider(
@@ -1594,7 +1668,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       color: StateContainer.of(context).curTheme.text15,
                     ),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).shareNautilus, AppIcons.share, onPressed: () {
-                      Share.share("Check out Nautilus - NANO Wallet for iOS and Android" + " https://app.perish.co");
+                      Share.share("Check out Nautilus - NANO Wallet for iOS and Android" + " https://nautiluswallet.app");
                     }),
                     Divider(
                       height: 2,

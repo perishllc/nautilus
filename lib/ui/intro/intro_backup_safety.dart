@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
@@ -6,10 +8,13 @@ import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
+import 'package:nautilus_wallet_flutter/util/ninja/api.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class IntroBackupSafetyPage extends StatefulWidget {
   @override
@@ -22,6 +27,18 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
   @override
   void initState() {
     super.initState();
+
+    // set random representative as the default:
+    NinjaAPI.getVerifiedNodes().then((nodes) {
+      if (nodes != null) {
+        final _random = new Random();
+        var randomNode = nodes[_random.nextInt(nodes.length)];
+        sl.get<SharedPrefsUtil>().setRepresentative(randomNode.account);
+        // StateContainer.of(context).wallet.defaultRepresentative = randomNode.account;
+        AppWallet.defaultRepresentative = randomNode.account;
+      }
+      StateContainer.of(context).requestUpdate();
+    });
 
     sl.get<Vault>().setSeed(NanoSeeds.generateSeed()).then((result) {
       // Update wallet

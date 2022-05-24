@@ -28,6 +28,7 @@ import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -2682,8 +2683,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     TransactionStateOptions transactionState;
 
-    if (is_unacknowledged_memo) {
-      transactionState = TransactionStateOptions.FAILED_MSG;
+    if (is_memo) {
+      if (!txDetails.is_acknowledged) {
+        transactionState = TransactionStateOptions.UNREAD;
+      }
+      if (txDetails.status == StatusTypes.CREATE_FAILED) {
+        transactionState = TransactionStateOptions.FAILED_MSG;
+      }
     }
 
     if (isPaymentRequest && !txDetails.is_acknowledged) {
@@ -3276,6 +3282,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
     bool is_unfulfilled_payable_request = false;
     bool is_unacknowledged_sendable_request = false;
     bool is_unacknowledged_memo = false;
+    bool resendable_memo = false;
     bool is_gift_load = false;
     bool is_gift = false;
 
@@ -3294,8 +3301,14 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
       is_unacknowledged_sendable_request = true;
     }
 
-    if (!txDetails.is_acknowledged && txDetails.is_memo && txDetails.memo.isNotEmpty) {
-      is_unacknowledged_memo = true;
+    if (txDetails.is_memo) {
+      if (txDetails.status == StatusTypes.CREATE_FAILED) {
+        resendable_memo = true;
+      }
+      if (!txDetails.is_acknowledged && txDetails.memo.isNotEmpty) {
+        is_unacknowledged_memo = true;
+        resendable_memo = true;
+      }
     }
 
     String walletSeed;
@@ -3562,7 +3575,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                       )
                     : Container(),
                 // re-send memo button
-                (is_unacknowledged_memo)
+                (resendable_memo)
                     ? Row(
                         children: <Widget>[
                           AppButton.buildAppButton(

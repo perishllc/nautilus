@@ -20,6 +20,7 @@ import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -412,6 +413,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           is_fulfilled: false,
           is_request: false,
           is_memo: true,
+          status: StatusTypes.CREATE_FAILED,
           request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
           memo: widget.memo, // store unencrypted memo
           height: currentBlockHeightInList,
@@ -432,8 +434,12 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         if (memoSendFailed) {
           print("memo send failed, deleting TXData object");
           // remove from the database:
-          await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
+          // await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
         } else {
+          // update the TXData object:
+          memoTXData.status = StatusTypes.CREATE_SUCCESS;
+          await sl.get<DBHelper>().replaceTXDataByUUID(memoTXData);
+          
           // hack to get tx memo to update:
           EventTaxiImpl.singleton().fire(TXUpdateEvent());
         }
