@@ -1730,11 +1730,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                           Text(" | ", style: AppStyles.textStyleVersion(context)),
                           GestureDetector(
                               onTap: () async {
-                                    if (await canLaunch(AppLocalization.of(context).discordUrl)) {
+                                if (await canLaunch(AppLocalization.of(context).discordUrl)) {
                                   await launch(AppLocalization.of(context).discordUrl);
-                                } else {
-                                  // throw 'Could not launch $url';
-                                  }
+                                }
                               },
                               child: Text("Discord", style: AppStyles.textStyleVersionUnderline(context))),
                         ],
