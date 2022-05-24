@@ -30,7 +30,8 @@ class DBHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         last_updated INTEGER,
         username TEXT,
-        address TEXT)""";
+        address TEXT,
+        type TEXT)""";
   static const String BLOCKED_SQL = """CREATE TABLE Blocked( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,

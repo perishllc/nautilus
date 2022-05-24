@@ -55,6 +55,7 @@ import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flare_flutter/flare_actor.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsSheet extends StatefulWidget {
   _SettingsSheetState createState() => _SettingsSheetState();
@@ -512,7 +513,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         "https://widget.onramper.com?apiKey=pk_prod_LRutcZGkxQPghTCCXo4naleTwJh40g9NVr6gL2vq78c0&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
     String moonpay_url = "https://buy.moonpay.com/?currencyCode=xno&colorCode=%234080D7";
     String simplex_url = "https://buy.chainbits.com";
-    
+
     String choice = await showDialog<String>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
@@ -1726,6 +1727,16 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                 }));
                               },
                               child: Text("EULA", style: AppStyles.textStyleVersionUnderline(context))),
+                          Text(" | ", style: AppStyles.textStyleVersion(context)),
+                          GestureDetector(
+                              onTap: () async {
+                                    if (await canLaunch(AppLocalization.of(context).discordUrl)) {
+                                  await launch(AppLocalization.of(context).discordUrl);
+                                } else {
+                                  // throw 'Could not launch $url';
+                                  }
+                              },
+                              child: Text("Discord", style: AppStyles.textStyleVersionUnderline(context))),
                         ],
                       ),
                     ),

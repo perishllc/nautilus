@@ -1532,6 +1532,10 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
     return 'https://nanocrawler.cc/explorer/account/$account';
   }
 
+  String get discordUrl {
+    return 'https://chat.perish.co';
+  }
+
   String get eulaUrl {
     return 'https://perish.co/nautilus/eula.html';
   }
