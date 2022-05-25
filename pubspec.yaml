@@ -6,7 +6,7 @@ description: Nautilus - Fast, Robust & Secure NANO Wallet.
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.2.4+19
+version: 0.2.4+20
 
 environment:
   sdk: ">=2.11.99 <3.0.0"
@@ -122,8 +122,8 @@ dependencies:
 
   # Push notifications
   # firebase_messaging: ^11.1.0
-  # firebase_messaging: 11.2.8
-  firebase_messaging: 11.4.0
+  firebase_messaging: 11.2.8
+  # firebase_messaging: 11.4.0
   firebase_core: ^1.10.0
 
   # Slidable list actions
