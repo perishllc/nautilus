@@ -1034,7 +1034,7 @@ class StateContainerState extends State<StateContainer> {
       if (wallet.history != null && wallet.history.length > 1) {
         count = 50;
       }
-      // try {
+      try {
         AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count, raw: true);
         _requestBalances();
         bool postedToHome = false;
@@ -1123,10 +1123,10 @@ class StateContainerState extends State<StateContainer> {
             }
           }
         }
-      // } catch (e) {
-      //   // TODO handle account history error
-      //   sl.get<Logger>().e("account_history e", e);
-      // }
+      } catch (e) {
+        // TODO handle account history error
+        sl.get<Logger>().e("account_history e", e);
+      }
     }
   }
 

@@ -1143,6 +1143,7 @@ class _SendSheetState extends State<SendSheet> {
                 _showContactButton = false;
                 _pasteButtonVisible = false;
                 _sendAddressStyle = AddressStyle.PRIMARY;
+                _addressValidationText = "";
               });
             },
             child: Text((user is User) ? user.username : user.name, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),

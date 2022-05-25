@@ -2562,11 +2562,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       is_unacknowledged_memo = true;
     }
 
-    if (isPaymentRequest) {
+    if (txDetails != null) {
       isRecipient = StateContainer.of(context).wallet.address == txDetails.to_address;
-      if (isRecipient && txDetails.to_address == StateContainer.of(context).wallet.address) {
-        txDetails.is_acknowledged = true;
-      }
+    }
+      
+    if (isRecipient && txDetails != null) {
+      txDetails.is_acknowledged = true;
     }
 
     if (txDetails != null) {
