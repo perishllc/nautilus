@@ -4,9 +4,6 @@
 
 ### A [Natrium](https://github.com/appditto/natrium_wallet_flutter) fork, with [Nano.to](https://github.com/formsend/nano) usernames, payment requests, and more.
 
-This project is in development by the team @ [Nano.to](https://nano.to/development)
-
-
 ___
 
 #### Major Features
