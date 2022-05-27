@@ -1188,19 +1188,19 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
 
   /// USERNAMES
 
-  String get needUsernameAlert {
+  String get needVerificationAlert {
     return Intl.message(
-        "This feature requires you to have a username set in your wallet. Would you like to register one now?\n\nThis is an artificial limitation intended to prevent spam, but is planned to be removed in a future release. You'll never need a username to receive payment requests, only to send them.\n\nAlternatively, you can show a QR code for someone to scan.",
-        desc: 'username_needed_header',
-        name: 'needUsernameAlert');
+        "This feature requires you to have a longer transaction history in order to prevent spam.\n\nAlternatively, you can show a QR code for someone to scan.",
+        desc: 'verification_needed_header',
+        name: 'needVerificationAlert');
   }
 
   String get goToQRCode {
     return Intl.message('Go to QR', desc: 'go_to_qr_code', name: 'goToQRCode');
   }
 
-  String get needUsernameAlertHeader {
-    return Intl.message("Username required", desc: 'username_needed_header', name: 'needUsernameAlertHeader');
+  String get needVerificationAlertHeader {
+    return Intl.message("Verification Needed", desc: 'verification_needed_header', name: 'needVerificationAlertHeader');
   }
 
   String get registerUsernameHeader {
@@ -1209,7 +1209,7 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
 
   String get usernameInfo {
     return Intl.message(
-        "Pick out a unique @username to make it easy for friends and family to find you!\n\nHaving a Nautilus username lets you send payment requests and updates the UI globally to reflect your new handle.",
+        "Pick out a unique @username to make it easy for friends and family to find you!\n\nHaving a Nautilus username updates the UI globally to reflect your new handle.",
         desc: 'Description for username registration',
         name: 'usernameInfo');
   }

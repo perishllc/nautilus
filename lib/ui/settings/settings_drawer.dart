@@ -524,18 +524,18 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
               style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, moonpay_url);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context).moonpay,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
+              // AppSimpleDialogOption(
+              //   onPressed: () {
+              //     Navigator.pop(context, moonpay_url);
+              //   },
+              //   child: Padding(
+              //     padding: const EdgeInsets.symmetric(vertical: 8.0),
+              //     child: Text(
+              //       AppLocalization.of(context).moonpay,
+              //       style: AppStyles.textStyleDialogOptions(context),
+              //     ),
+              //   ),
+              // ),
               AppSimpleDialogOption(
                 onPressed: () {
                   Navigator.pop(context, simplex_url);

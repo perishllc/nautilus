@@ -95,6 +95,8 @@ class _SendSheetState extends State<SendSheet> {
   String _lastCryptoAmount = "";
   NumberFormat _localCurrencyFormat;
 
+  final int _REQUIRED_CONFIRMATION_HEIGHT = 10;
+
   // Receive card instance
   ReceiveSheet receive;
 
@@ -313,27 +315,27 @@ class _SendSheetState extends State<SendSheet> {
     }
   }
 
-  Future<bool> showNeedNautilusUsernameAlert() async {
+  Future<bool> showNeedVerificationAlert() async {
     switch (await showDialog<int>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              AppLocalization.of(context).needUsernameAlertHeader,
+              AppLocalization.of(context).needVerificationAlertHeader,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text(AppLocalization.of(context).needUsernameAlert + "\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text(AppLocalization.of(context).needVerificationAlert + "\n\n", style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actions: <Widget>[
               AppSimpleDialogOption(
                 onPressed: () {
-                  Navigator.pop(context, 2);
+                  Navigator.pop(context, 1);
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -350,19 +352,7 @@ class _SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).no,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, 1);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context).yes,
+                    AppLocalization.of(context).ok,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -370,7 +360,7 @@ class _SendSheetState extends State<SendSheet> {
             ],
           );
         })) {
-      case 2:
+      case 1:
         // go to qr code
         if (receive == null) {
           return false;
@@ -380,15 +370,6 @@ class _SendSheetState extends State<SendSheet> {
         // probably better to do with an event bus
         Sheets.showAppHeightNineSheet(context: context, widget: receive);
         return true;
-        break;
-      case 1:
-        // go to the username registration page:
-        Navigator.of(context).pushNamed("/register_username");
-        return true;
-        break;
-      case 0:
-        // close the dialog:
-        return false;
         break;
       default:
         return false;
@@ -1229,11 +1210,11 @@ class _SendSheetState extends State<SendSheet> {
         }
       }
 
-      if (isRequest) {
+      if (isValid && isRequest) {
         // still valid && you have to have a nautilus username to send requests:
-        if (isValid && StateContainer.of(context).wallet.username == null) {
+        if (StateContainer.of(context).wallet.username == null && StateContainer.of(context).wallet.confirmationHeight < _REQUIRED_CONFIRMATION_HEIGHT) {
           isValid = false;
-          await showNeedNautilusUsernameAlert();
+          await showNeedVerificationAlert();
         }
       }
 

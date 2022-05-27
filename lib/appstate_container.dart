@@ -61,12 +61,13 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // print("Handling a background message");
   // dumb hack since the event bus doesn't work properly in background isolates or w/e:
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  var list = await prefs.getStringList('background_messages');
-  if (list == null) {
-    list = [];
+  await prefs.reload();
+  var background_messages = prefs.getStringList('background_messages');
+  if (background_messages == null) {
+    background_messages = [];
   }
-  list.add(jsonEncode(message.data));
-  await prefs.setStringList('background_messages', list);
+  background_messages.add(jsonEncode(message.data));
+  await prefs.setStringList('background_messages', background_messages);
 }
 
 Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
@@ -502,19 +503,32 @@ class StateContainerState extends State<StateContainer> {
         });
       }
     });
-    _fcmMessageSub = EventTaxiImpl.singleton().registerTo<FcmMessageEvent>().listen((event) {
-      // final db = Localstore.instance;
-      // db.collection('background_messages2').get().then((messages) {
-      //   print("bbbbbbbbbbbbbbbbbbbbbbb");
-      //   for (var id in messages.keys) {
-      //     print("id: $id");
-      //     print("message: ${messages[id]}");
-      //     // delete from the list:
-      //     db.collection('background_messages2').doc(id).delete();
-      //   }
-      // });
+    _fcmMessageSub = EventTaxiImpl.singleton().registerTo<FcmMessageEvent>().listen((event) async {
+      if (event.data != null) {
+        handleMessage(event.data);
+      }
 
-      handleMessage(event.data);
+      if (event.message_list != null) {
+        int max_length = 5;
+        bool delay_update = false;
+        if (event.message_list.length > max_length) {
+          delay_update = true;
+        }
+        for (var str_msg in event.message_list) {
+          var msg = jsonDecode(str_msg);
+          await handleMessage(msg, delay_update: delay_update);
+          // sleep between updates if there are more than 1 to make the UI feel snappier / show the animation:
+          if (event.message_list.length > 1 && event.message_list.length <= max_length) {
+            await Future.delayed(Duration(milliseconds: 600));
+          }
+        }
+        if (delay_update) {
+          // update the state:
+          await updateRequests();
+          await updateTXMemos();
+          await updateUnified(true);
+        }
+      }
     });
     // Account has been deleted or name changed
     _accountModifiedSub = EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((event) {
@@ -1117,7 +1131,7 @@ class StateContainerState extends State<StateContainer> {
                   wallet.accountBalance += BigInt.parse(pendingResponseItem.amount);
                   // Send list to home screen
                   EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-                  updateUnified(true);
+                  updateUnified(false);
                 });
               }
             }
@@ -1148,22 +1162,6 @@ class StateContainerState extends State<StateContainer> {
       sl.get<AccountService>().processQueue();
     }
   }
-
-  // handle data side of payment requests and other notifications:
-
-  // Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  //   // final Logger log = sl.get<Logger>();
-  //   log.d("Handling a background message");
-  //   // await handlePayments(message.data);
-  //   handleMessage(message.data);
-  // }
-
-  // Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
-  //   // final Logger log = sl.get<Logger>();
-  //   log.d("Handling a foreground message");
-  //   log.d(message.data);
-  //   handleMessage(message.data);
-  // }
 
   Future<String> encryptMessage(String message, String recipientAddress, String privateKey) async {
     try {
@@ -1214,7 +1212,7 @@ class StateContainerState extends State<StateContainer> {
     return memo;
   }
 
-  Future<void> handlePaymentRequest(dynamic data) async {
+  Future<void> handlePaymentRequest(dynamic data, {bool delay_update = false}) async {
     log.d("handling payment_request from: ${data['requesting_account']} : ${data['account']}");
     String amount_raw = data['amount_raw'];
     String requesting_account = data['requesting_account'];
@@ -1283,11 +1281,13 @@ class StateContainerState extends State<StateContainer> {
     // send acknowledgement to server / requester:
     await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
 
-    await updateRequests();
-    await updateUnified(false);
+    if (!delay_update) {
+      await updateRequests();
+      await updateUnified(false);
+    }
   }
 
-  Future<void> handlePaymentRecord(dynamic data) async {
+  Future<void> handlePaymentRecord(dynamic data, {bool delay_update = false}) async {
     print("handling payment_record from: ${data['requesting_account']} : ${data['account']}");
     String amount_raw = data['amount_raw'];
     String requesting_account = data['requesting_account'];
@@ -1381,8 +1381,10 @@ class StateContainerState extends State<StateContainer> {
           // log.d("adding txData to the database!");
           throw new Exception("\n\n@@@@@@@@this shouldn't happen!@@@@@@@@@@\n\n");
         }
-        await updateRequests();
-        await updateUnified(true);
+        if (!delay_update) {
+          await updateRequests();
+          await updateUnified(true);
+        }
       }
     }
 
@@ -1429,7 +1431,7 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  Future<void> handlePaymentMemo(dynamic data) async {
+  Future<void> handlePaymentMemo(dynamic data, {bool delay_update = false}) async {
     print("handling payment_memo from: ${data['requesting_account']} : ${data['account']}");
     // String amount_raw = data['amount_raw'];
     String requesting_account = data['requesting_account'];
@@ -1511,52 +1513,60 @@ class StateContainerState extends State<StateContainer> {
     }
     // send acknowledgement to server / requester:
     await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
-    await updateRequests();
-    await updateTXMemos();
+    if (!delay_update) {
+      await updateRequests();
+      await updateTXMemos();
+    }
   }
 
-  Future<void> handleMessage(dynamic data) async {
+  Future<void> handlePaymentACK(dynamic data, {bool delay_update = false}) async {
+    // print("handling payment_ack from: ${data['requesting_account']}");
+    print("handling payment_ack");
+    String amount_raw = data['amount_raw'];
+    String requesting_account = data['requesting_account'];
+    String memo = data['memo'];
+    String request_time = data['request_time'];
+    String to_address = data['account'];
+    String uuid = data['uuid'];
+    String block = data['block'];
+    String is_acknowledged = data['is_acknowledged'];
+    int height = data['height'];
+
+    // sleep to prevent animations from overlapping:
+    await Future.delayed(Duration(seconds: 2));
+
+    // set acknowledged to true:
+    var txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+    if (txData != null) {
+      await sl.get<DBHelper>().changeTXAckStatus(uuid, true);
+      print("changed ack status!");
+    } else {
+      print("we didn't have a txData for this payment ack!");
+    }
+    if (!delay_update) {
+      await updateRequests();
+      await updateUnified(true);
+    }
+  }
+
+  Future<void> handleMessage(dynamic data, {bool delay_update = false}) async {
     // handle an incoming payment request:
     if (data.containsKey("payment_request")) {
-      await handlePaymentRequest(data);
+      await handlePaymentRequest(data, delay_update: delay_update);
     }
 
     // handle an incoming memo:
     if (data.containsKey("payment_memo")) {
-      await handlePaymentMemo(data);
+      await handlePaymentMemo(data, delay_update: delay_update);
     }
 
     // payment records are essentially server copies of local txData:
     if (data.containsKey("payment_record")) {
-      await handlePaymentRecord(data);
+      await handlePaymentRecord(data, delay_update: delay_update);
     }
 
     if (data.containsKey("payment_ack")) {
-      // print("handling payment_ack from: ${data['requesting_account']}");
-      print("handling payment_ack");
-      String amount_raw = data['amount_raw'];
-      String requesting_account = data['requesting_account'];
-      String memo = data['memo'];
-      String request_time = data['request_time'];
-      String to_address = data['account'];
-      String uuid = data['uuid'];
-      String block = data['block'];
-      String is_acknowledged = data['is_acknowledged'];
-      int height = data['height'];
-
-      // sleep to prevent animations from overlapping:
-      await Future.delayed(Duration(seconds: 2));
-
-      // set acknowledged to true:
-      var txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
-      if (txData != null) {
-        await sl.get<DBHelper>().changeTXAckStatus(uuid, true);
-        print("changed ack status!");
-      } else {
-        print("we didn't have a txData for this payment ack!");
-      }
-      await updateRequests();
-      await updateUnified(true);
+      await handlePaymentACK(data, delay_update: delay_update);
     }
   }
 

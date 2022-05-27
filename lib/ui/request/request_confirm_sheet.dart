@@ -17,7 +17,9 @@ import 'package:nautilus_wallet_flutter/model/db/contact.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -340,7 +342,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     bool sendFailed = false;
     try {
       _showSendingAnimation(context);
-      
+
       String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
 
       // get epoch time as hex:
@@ -397,6 +399,9 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
 
       // if the send failed:
       if (sendFailed) {
+        // update the status:
+        newRequestTXData.status = StatusTypes.CREATE_FAILED;
+        await sl.get<DBHelper>().replaceTXDataByUUID(newRequestTXData);
         // await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
         // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
         await Future.delayed(Duration(seconds: 2));

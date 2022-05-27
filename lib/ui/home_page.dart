@@ -1236,13 +1236,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (StateContainer.of(context).wallet != null) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.reload();
-      var list = prefs.get('background_messages');
-      if (list != null) {
-        for (var msg in list) {
-          msg = jsonDecode(msg);
-          // process the message now that we're in the foreground:
-          EventTaxiImpl.singleton().fire(FcmMessageEvent(data: msg));
-        }
+      var background_messages = prefs.getStringList('background_messages');
+      // process the message now that we're in the foreground:
+
+      if (background_messages != null) {
+        EventTaxiImpl.singleton().fire(FcmMessageEvent(message_list: background_messages));
         // clear the storage since we just processed it:
         await prefs.remove('background_messages');
       }
@@ -2565,7 +2563,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (txDetails != null) {
       isRecipient = StateContainer.of(context).wallet.address == txDetails.to_address;
     }
-      
+
     if (isRecipient && txDetails != null) {
       txDetails.is_acknowledged = true;
     }
@@ -2616,8 +2614,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     BoxShadow setShadow;
 
     // set box shadow color:
-    if (isPaymentRequest) {
-      if (!item.is_acknowledged && !item.is_fulfilled) {
+    if (txDetails != null) {
+      if (txDetails.status == StatusTypes.CREATE_FAILED) {
         iconColor = StateContainer.of(context).curTheme.error60;
         setShadow = BoxShadow(
           color: StateContainer.of(context).curTheme.error60.withOpacity(0.2),
@@ -2625,7 +2623,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           blurRadius: 0,
           spreadRadius: 1,
         );
-      } else if (!item.is_fulfilled) {
+      } else if (!txDetails.is_fulfilled) {
         iconColor = StateContainer.of(context).curTheme.warning60;
         setShadow = BoxShadow(
           color: StateContainer.of(context).curTheme.warning60.withOpacity(0.2),
@@ -2633,7 +2631,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           blurRadius: 0,
           spreadRadius: 1,
         );
-      } else {
+      } else if (txDetails.is_fulfilled && isPaymentRequest) {
         iconColor = StateContainer.of(context).curTheme.success60;
         setShadow = BoxShadow(
           color: StateContainer.of(context).curTheme.success60.withOpacity(0.2),
@@ -2641,38 +2639,46 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           blurRadius: 0,
           spreadRadius: 1,
         );
-      }
-    } else {
-      if (txDetails != null && txDetails.memo != null && txDetails.memo.isNotEmpty && !isGift) {
-        if (txDetails.is_acknowledged) {
-          // setShadow = BoxShadow(
-          //   color: StateContainer.of(context).curTheme.primary60.withOpacity(0.2),
-          //   offset: Offset(0, 0),
-          //   blurRadius: 0,
-          //   spreadRadius: 1,
-          // );
-          // normal transaction:
-          setShadow = StateContainer.of(context).curTheme.boxShadow;
-        } else {
-          // set warning color if memo isn't acknowledged
-          setShadow = BoxShadow(
-            color: StateContainer.of(context).curTheme.warning60.withOpacity(0.2),
-            offset: Offset(0, 0),
-            blurRadius: 0,
-            spreadRadius: 1,
-          );
-        }
       } else {
         // normal transaction:
         setShadow = StateContainer.of(context).curTheme.boxShadow;
       }
+    } else {
+      // normal transaction:
+      setShadow = StateContainer.of(context).curTheme.boxShadow;
+      // if (txDetails != null && txDetails.memo != null && txDetails.memo.isNotEmpty && !isGift) {
+      //   if (txDetails.is_acknowledged) {
+      //     // setShadow = BoxShadow(
+      //     //   color: StateContainer.of(context).curTheme.primary60.withOpacity(0.2),
+      //     //   offset: Offset(0, 0),
+      //     //   blurRadius: 0,
+      //     //   spreadRadius: 1,
+      //     // );
+      //     // normal transaction:
+      //     setShadow = StateContainer.of(context).curTheme.boxShadow;
+      //   } else {
+      //     // set warning color if memo isn't acknowledged
+      //     setShadow = BoxShadow(
+      //       color: StateContainer.of(context).curTheme.warning60.withOpacity(0.2),
+      //       offset: Offset(0, 0),
+      //       blurRadius: 0,
+      //       spreadRadius: 1,
+      //     );
+      //   }
+      // } else {
+      //   // normal transaction:
+      //   setShadow = StateContainer.of(context).curTheme.boxShadow;
+      // }
     }
 
     bool slideEnabled = false;
     // valid wallet:
     if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero) {
       // does it make sense to make it slideable?
-      if (isPaymentRequest && isRecipient && !txDetails.is_fulfilled) {
+      // if (isPaymentRequest && isRecipient && !txDetails.is_fulfilled) {
+      //   slideEnabled = true;
+      // }
+      if (isPaymentRequest && !txDetails.is_fulfilled) {
         slideEnabled = true;
       }
       if (isTransaction && !isGift) {
@@ -2684,17 +2690,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     TransactionStateOptions transactionState;
 
-    if (is_memo) {
+    if (txDetails != null) {
       if (!txDetails.is_acknowledged) {
         transactionState = TransactionStateOptions.UNREAD;
       }
       if (txDetails.status == StatusTypes.CREATE_FAILED) {
         transactionState = TransactionStateOptions.FAILED_MSG;
       }
-    }
-
-    if (isPaymentRequest && !txDetails.is_acknowledged) {
-      transactionState = TransactionStateOptions.UNREAD;
     }
 
     if (isTransaction) {
