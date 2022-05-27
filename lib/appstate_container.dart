@@ -428,18 +428,7 @@ class StateContainerState extends State<StateContainer> {
     checkAndCacheNapiDatabases(false);
     // restore payments from the cache
     updateRequests();
-
-    // sl.get<DBHelper>().fetchDatabases();
-    // sl.get<DBHelper>().populateDBFromCache();
-    // WidgetsBinding.instance.addPostFrameCallback((_) => (context) {
-    //       // try {
-    //       // } catch (e) {
-    //       //   log.e("Error registering background message handler: $e");
-    //       // }
-    //       FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-    //       FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
-    //     });
-    // WidgetsBinding.instance.ensureVisualUpdate();
+    
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
     FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
     FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
@@ -447,15 +436,6 @@ class StateContainerState extends State<StateContainer> {
       badge: true,
       sound: true,
     );
-
-    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    //   print('Got a message whilst in the foreground!');
-    //   print('Message data: ${message.data}');
-
-    //   if (message.notification != null) {
-    //     print('Message also contained a notification: ${message.notification}');
-    //   }
-    // });
   }
 
   // Subscriptions
