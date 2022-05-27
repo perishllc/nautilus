@@ -107,6 +107,10 @@ class AppLocalization {
     return Intl.message('unread', desc: 'history_unread', name: 'unread');
   }
 
+  String get unfulfilled {
+    return Intl.message('unfulfilled', desc: 'history_unfulfilled', name: 'unfulfilled');
+  }
+
   String get failedMessage {
     return Intl.message('msg failed', desc: 'failed_message', name: 'failedMessage');
   }

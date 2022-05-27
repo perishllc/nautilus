@@ -679,7 +679,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             // save to db:
             sl.get<DBHelper>().replaceTXDataByUUID(tx);
           }
-          // if unacknowledged, and not local, ACK it:
+          // if unacknowledged, we're the recipient, and not local, ACK it:
           if (tx.is_acknowledged == false && tx.to_address == StateContainer.of(context).wallet.address && !tx.uuid.contains("LOCAL")) {
             print("ACKNOWLEDGING TX_DATA: ${tx.uuid}");
             sl.get<AccountService>().requestACK(tx.uuid, tx.from_address, tx.to_address);
@@ -946,7 +946,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     await StateContainer.of(context).requestUpdate();
     await StateContainer.of(context).updateRequests();
     _updateTXData();
-    // _updateTXDetailsMap(StateContainer.of(context).wallet.address);
+    _updateTXDetailsMap(StateContainer.of(context).wallet.address);
     // await generateUnifiedList();
     // setState(() {});
     // Hide refresh indicator after 2.5 seconds
@@ -1153,6 +1153,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // ready to be rendered:
     if (StateContainer.of(context).wallet.unifiedLoading) {
       setState(() {
+        _updateTXDetailsMap(StateContainer.of(context).wallet.address);
         StateContainer.of(context).wallet.unifiedLoading = false;
       });
     }
@@ -2623,18 +2624,18 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           blurRadius: 0,
           spreadRadius: 1,
         );
-      } else if (!txDetails.is_fulfilled) {
-        iconColor = StateContainer.of(context).curTheme.warning60;
-        setShadow = BoxShadow(
-          color: StateContainer.of(context).curTheme.warning60.withOpacity(0.2),
-          offset: Offset(0, 0),
-          blurRadius: 0,
-          spreadRadius: 1,
-        );
       } else if (txDetails.is_fulfilled && isPaymentRequest) {
         iconColor = StateContainer.of(context).curTheme.success60;
         setShadow = BoxShadow(
           color: StateContainer.of(context).curTheme.success60.withOpacity(0.2),
+          offset: Offset(0, 0),
+          blurRadius: 0,
+          spreadRadius: 1,
+        );
+      } else if (!txDetails.is_acknowledged || isPaymentRequest) {
+        iconColor = StateContainer.of(context).curTheme.warning60;
+        setShadow = BoxShadow(
+          color: StateContainer.of(context).curTheme.warning60.withOpacity(0.2),
           offset: Offset(0, 0),
           blurRadius: 0,
           spreadRadius: 1,
@@ -2696,6 +2697,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
       if (txDetails.status == StatusTypes.CREATE_FAILED) {
         transactionState = TransactionStateOptions.FAILED_MSG;
+      }
+      if (isPaymentRequest && !txDetails.is_fulfilled) {
+        transactionState = TransactionStateOptions.UNFULFILLED;
       }
     }
 

@@ -1525,6 +1525,7 @@ class StateContainerState extends State<StateContainer> {
     }
     if (!delay_update) {
       await updateRequests();
+      await updateTXMemos();
       await updateUnified(true);
     }
   }

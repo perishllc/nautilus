@@ -4,7 +4,7 @@ import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accounts_sheet.dart';
 
-enum TransactionStateOptions { UNCONFIRMED, CONFIRMED, FAILED, UNACKNOWLEDGED, UNREAD, FAILED_MSG }
+enum TransactionStateOptions { UNCONFIRMED, CONFIRMED, FAILED, UNACKNOWLEDGED, UNREAD, UNFULFILLED, FAILED_MSG }
 
 class TransactionStateTag extends StatelessWidget {
   final TransactionStateOptions transactionState;
@@ -23,6 +23,8 @@ class TransactionStateTag extends StatelessWidget {
         return AppLocalization.of(context).unacknowledged;
       case TransactionStateOptions.UNREAD:
         return AppLocalization.of(context).unread;
+      case TransactionStateOptions.UNFULFILLED:
+        return AppLocalization.of(context).unfulfilled;
       case TransactionStateOptions.FAILED_MSG:
         return AppLocalization.of(context).failedMessage;
       default:

@@ -439,7 +439,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           // update the TXData object:
           memoTXData.status = StatusTypes.CREATE_SUCCESS;
           await sl.get<DBHelper>().replaceTXDataByUUID(memoTXData);
-          
+
           // hack to get tx memo to update:
           EventTaxiImpl.singleton().fire(TXUpdateEvent());
         }
@@ -465,6 +465,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
           // update the ui to reflect the change in the db:
           StateContainer.of(context).updateRequests();
+          StateContainer.of(context).updateTXMemos();
           StateContainer.of(context).updateUnified(true);
           break;
         }
@@ -487,6 +488,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       StateContainer.of(context).requestUpdate();
+      StateContainer.of(context).updateTXMemos();
       if (widget.natriconNonce != null) {
         setState(() {
           StateContainer.of(context).updateNatriconNonce(StateContainer.of(context).selectedAccount.address, widget.natriconNonce);
