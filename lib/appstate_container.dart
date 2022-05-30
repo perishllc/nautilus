@@ -12,6 +12,7 @@ import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
+import 'package:nautilus_wallet_flutter/model/currency_mode_setting.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
@@ -54,8 +55,6 @@ import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 // E2E Encryption
 import 'package:flutter_js/flutter_js.dart';
-// local storage:
-import 'package:localstorage/localstorage.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // print("Handling a background message");
@@ -263,6 +262,21 @@ class StateContainerState extends State<StateContainer> {
   Future<void> updateRequests() async {
     if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
       var requests = await sl.get<DBHelper>().getAccountSpecificRequests(wallet.address);
+      // check for duplicates and remove:
+      Set uuids = Set();
+      List<int> idsToRemove = [];
+      for (var req in requests) {
+        if (!uuids.contains(req.uuid)) {
+          uuids.add(req.uuid);
+        } else {
+          log.d("detected duplicate TXData! removing...");
+          idsToRemove.add(req.id);
+          await sl.get<DBHelper>().deleteTXDataByID(req.id);
+        }
+      }
+      for (var id in idsToRemove) {
+        requests.removeWhere((element) => element.id == id);
+      }
       setState(() {
         this.wallet.requests = requests;
         EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet.requests));
@@ -428,7 +442,7 @@ class StateContainerState extends State<StateContainer> {
     checkAndCacheNapiDatabases(false);
     // restore payments from the cache
     updateRequests();
-    
+
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
     FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
     FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
@@ -731,6 +745,13 @@ class StateContainerState extends State<StateContainer> {
   void setMinRawReceive(String minRaw) {
     setState(() {
       this.receiveThreshold = minRaw;
+    });
+  }
+
+  // Change min raw setting
+  void setCurrencyMode(bool nyanoMode) {
+    setState(() {
+      this.nyanoMode = nyanoMode;
     });
   }
 

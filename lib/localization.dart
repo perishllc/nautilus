@@ -107,6 +107,10 @@ class AppLocalization {
     return Intl.message('unread', desc: 'history_unread', name: 'unread');
   }
 
+  String get fulfilled {
+    return Intl.message('fulfilled', desc: 'history_fulfilled', name: 'fulfilled');
+  }
+
   String get unfulfilled {
     return Intl.message('unfulfilled', desc: 'history_unfulfilled', name: 'unfulfilled');
   }
@@ -165,6 +169,14 @@ class AppLocalization {
 
   String get addressHint {
     return Intl.message('Enter Address', desc: 'send_address_hint', name: 'addressHint');
+  }
+
+  String get searchHint {
+    return Intl.message('Search for tx/request', desc: 'home_search_hint', name: 'searchHint');
+  }
+
+  String get noSearchResults {
+    return Intl.message('No Search Results!', desc: 'home_search_error', name: 'noSearchResults');
   }
 
   String get seed {
@@ -492,8 +504,16 @@ class AppLocalization {
     return Intl.message("Send %1 NANO", desc: 'send_pin_description', name: 'sendAmountConfirm');
   }
 
+  String get requestAmountConfirm {
+    return Intl.message("Request %1 NANO", desc: 'request_pin_description', name: 'requestAmountConfirm');
+  }
+
   String get sendAmountConfirmPin {
     return sendAmountConfirm;
+  }
+
+  String get requestAmountConfirmPin {
+    return requestAmountConfirm;
   }
 
   String get sendError {
@@ -635,6 +655,10 @@ class AppLocalization {
 
   String get receiveMinimum {
     return Intl.message("Receive Minimum", desc: 'receive_minimum', name: 'receiveMinimum');
+  }
+
+  String get currencyMode {
+    return Intl.message("Currency Mode", desc: 'currency_mode', name: 'currencyMode');
   }
 
   String get changeRepButton {

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:isolate';
+import 'dart:math';
 import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flare_flutter/flare.dart';
@@ -78,8 +79,8 @@ import 'package:quiver/strings.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
-// local store:
-import 'package:localstorage/localstorage.dart';
+import 'package:searchbar_animation/searchbar_animation.dart';
+import 'package:substring_highlight/substring_highlight.dart';
 
 class AppHomePage extends StatefulWidget {
   PriceConversion priceConversion;
@@ -127,6 +128,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   // used to associate memos with blocks so we don't have search on every re-render:
   final Map<String, TXData> _txDetailsMap = Map();
+
+  // search bar text controller:
+  TextEditingController _searchController = TextEditingController();
+  bool _searchOpen = false;
+  bool _noSearchResults = false;
+  double _searchRightPadding = 0;
+  // String _searchText = "";
 
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
   List<Contact> _contacts = [];
@@ -317,7 +325,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // check if there's actually any nano to claim:
     BigInt balance = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
-    // AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
     try {
       if (balance != BigInt.zero) {
         String actualAmount = getRawAsThemeAwareAmount(context, balance.toString());
@@ -535,7 +542,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // Main Card Size
     if (_priceConversion == PriceConversion.BTC) {
       mainCardHeight = 80;
-      settingsIconMarginTop = 7;
+      settingsIconMarginTop = 15;
     } else if (_priceConversion == PriceConversion.NONE) {
       mainCardHeight = 64;
       settingsIconMarginTop = 7;
@@ -691,13 +698,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               for (var histItem in _historyListMap[StateContainer.of(context).wallet.address]) {
                 if (histItem.link == tx.block) {
                   tx.link = histItem.hash;
-
-                  // if unacknowledged and we're on the receiving side, acknowledge it:
-                  // if (tx.is_memo && tx.is_acknowledged == false && tx.to_address == StateContainer.of(context).wallet.address) {
-                  //   tx.is_acknowledged = true;
-                  //   sl.get<AccountService>().requestACK(tx.uuid, tx.from_address, tx.to_address);
-                  // }
-
                   // save to db:
                   sl.get<DBHelper>().replaceTXDataByUUID(tx);
                   break;
@@ -986,7 +986,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   ///           a == b | Returns 0.
   ///           a > b  | Returns a positive value.
   ///
-  int mySortComparison(dynamic a, dynamic b) {
+  int defaultSortComparison(dynamic a, dynamic b) {
     int propertyA = a.height;
     int propertyB = b.height;
     if (propertyA == null || propertyB == null) {
@@ -1049,6 +1049,35 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     return 0;
   }
 
+  int amountSortComparison(dynamic a, dynamic b) {
+    String propertyA = (a is AccountHistoryResponseItem)
+        ? a.amount
+        : (a is TXData)
+            ? a.amount_raw
+            : "";
+    String propertyB = (b is AccountHistoryResponseItem)
+        ? b.amount
+        : (b is TXData)
+            ? b.amount_raw
+            : "";
+    if (propertyA == "" || propertyB == "") {
+      // this shouldn't happen but it does if there's a bug:
+      throw new Exception("Null amount in comparison2");
+    }
+
+    var numA = BigInt.parse(propertyA);
+    var numB = BigInt.parse(propertyB);
+    if (numA < numB) {
+      return 1;
+    } else if (numA > numB) {
+      return -1;
+    } else if (numA == numB) {
+      return 0;
+    }
+
+    return 0;
+  }
+
   Future<void> generateUnifiedList({bool fastUpdate = false}) async {
     if (_historyListMap[StateContainer.of(context).wallet.address] == null ||
         _requestsListMap[StateContainer.of(context).wallet.address] == null ||
@@ -1058,6 +1087,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // this isn't performant but w/e
     List<dynamic> unifiedList = [];
+    List<int> removeIndices = [];
 
     // combine history and payments:
     List<AccountHistoryResponseItem> historyList = StateContainer.of(context).wallet.history;
@@ -1067,14 +1097,25 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     //   print("memo: ${tx.memo} is_request: ${tx.is_request}");
     // }
 
-    // add both to the unified list:
-    unifiedList.addAll(historyList);
-    unifiedList = unifiedList.where((element) => element.type != BlockTypes.CHANGE).toList();
+    // add tx's to the unified list:
+    // unifiedList.addAll(historyList);
     // unifiedList.addAll(requestsList);
+    unifiedList = List<dynamic>.from(historyList.where((element) => element.type != BlockTypes.CHANGE).toList());
 
-    // for (var histItem in historyList) {
-    //   print("${histItem.height} ${histItem.amount}");
-    // }
+    Set uuids = Set();
+    List<int> idsToRemove = [];
+    for (var req in requestsList) {
+      if (!uuids.contains(req.uuid)) {
+        uuids.add(req.uuid);
+      } else {
+        log.d("detected duplicate TXData2! removing...");
+        idsToRemove.add(req.id);
+        await sl.get<DBHelper>().deleteTXDataByID(req.id);
+      }
+    }
+    for (var id in idsToRemove) {
+      requestsList.removeWhere((element) => element.id == id);
+    }
 
     // go through each item in the requestsList and insert it into the unifiedList at the matching block:
     for (int i = 0; i < requestsList.length; i++) {
@@ -1121,34 +1162,171 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     }
 
+    bool override_sort = false;
+
+    // filter by search results:
+    if (_searchController.text.isNotEmpty) {
+      removeIndices = [];
+      String lowerCaseSearch = _searchController.text.toLowerCase();
+
+      // override the sorting algo if the search involves numbers:
+      override_sort = double.parse(lowerCaseSearch, (e) => null) != null;
+
+      unifiedList.forEach((dynamicItem) {
+        bool shouldRemove = true;
+
+        String displayName;
+        String account;
+        TXData txDetails;
+        var res = getPossibleTXDetails(context, dynamicItem);
+        displayName = res[0];
+        account = res[1];
+        txDetails = res[2];
+
+        String amount_str;
+
+        if (dynamicItem is TXData) {
+          txDetails = dynamicItem;
+
+          amount_str = getRawAsThemeAwareAmount(context, dynamicItem.amount_raw);
+          if (txDetails.is_request) {
+            bool is_recipient = StateContainer.of(context).wallet.address == txDetails.to_address;
+            if (is_recipient) {
+              if (AppLocalization.of(context).request.toLowerCase().contains(lowerCaseSearch)) {
+                shouldRemove = false;
+              }
+            } else {
+              if (AppLocalization.of(context).requested.toLowerCase().contains(lowerCaseSearch)) {
+                shouldRemove = false;
+              }
+            }
+          }
+        } else if (dynamicItem is AccountHistoryResponseItem) {
+          amount_str = getRawAsThemeAwareAmount(context, dynamicItem.amount);
+          if (dynamicItem.subtype == BlockTypes.SEND) {
+            if (AppLocalization.of(context).sent.toLowerCase().contains(lowerCaseSearch)) {
+              shouldRemove = false;
+            }
+          }
+          if (dynamicItem.subtype == BlockTypes.RECEIVE) {
+            if (AppLocalization.of(context).received.toLowerCase().contains(lowerCaseSearch)) {
+              shouldRemove = false;
+            }
+          }
+        }
+
+        if (amount_str.contains(lowerCaseSearch)) {
+          shouldRemove = false;
+        }
+
+        if (txDetails != null) {
+          if (isNotEmpty(txDetails.memo)) {
+            if (txDetails.memo.toLowerCase().contains(lowerCaseSearch)) {
+              shouldRemove = false;
+            }
+          }
+
+          if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
+            if (AppLocalization.of(context).loaded.toLowerCase().contains(lowerCaseSearch)) {
+              shouldRemove = false;
+            }
+          }
+        }
+
+        if (isNotEmpty(displayName)) {
+          if (displayName.toLowerCase().contains(lowerCaseSearch)) {
+            shouldRemove = false;
+          }
+        } else if (account.toLowerCase().contains(lowerCaseSearch)) {
+          shouldRemove = false;
+        }
+
+        if (shouldRemove) {
+          removeIndices.add(unifiedList.indexOf(dynamicItem));
+        }
+      });
+
+      for (int i = removeIndices.length - 1; i >= 0; i--) {
+        unifiedList.removeAt(removeIndices[i]);
+      }
+    }
+
     // sort by timestamp
     // should already be sorted but:
     // needed to sort payment requests by request time from each other:
-    unifiedList.sort(mySortComparison);
+    if (!override_sort) {
+      unifiedList.sort(defaultSortComparison);
+    } else {
+      unifiedList.sort(amountSortComparison);
+    }
+
+    bool areThereNoSearchResults = (unifiedList.length == 0) && (_searchController.text.isNotEmpty);
+
+    if (areThereNoSearchResults != _noSearchResults) {
+      setState(() {
+        _noSearchResults = areThereNoSearchResults;
+      });
+      // not sure why this gets the state to update, but nothing else will :/
+      await sl.get<AccountService>().dummyAPICall();
+    }
 
     // create a list of indices to remove:
-    List<int> removeIndices = [];
+    removeIndices = [];
+    // mark anything out of place or not in the unified list as to be removed:
     _unifiedListMap[StateContainer.of(context).wallet.address].items.where((item) => !unifiedList.contains(item)).forEach((dynamicItem) {
       removeIndices.add(_unifiedListMap[StateContainer.of(context).wallet.address].items.indexOf(dynamicItem));
     });
+    if (_searchController.text.isNotEmpty) {
+      _unifiedListMap[StateContainer.of(context).wallet.address]
+          .items
+          .where((item) => (_unifiedListMap[StateContainer.of(context).wallet.address].items.indexOf(item) != (unifiedList.indexOf(item))))
+          .forEach((dynamicItem) {
+        removeIndices.add(_unifiedListMap[StateContainer.of(context).wallet.address].items.indexOf(dynamicItem));
+      });
+    }
+    // ensure uniqueness and must be sorted to prevent and index error:
+    removeIndices = removeIndices.toSet().toList();
+    removeIndices.sort((a, b) => a.compareTo(b));
 
     // remove from the listmap:
     for (int i = removeIndices.length - 1; i >= 0; i--) {
-      setState(() {
-        _unifiedListMap[StateContainer.of(context).wallet.address].removeAt(removeIndices[i], _buildUnifiedItem, instant: true);
-      });
+      // don't set state since we don't need it to re-render just yet:
+      // also it will throw an error because the list can be empty and the builder will get upset:
+      _unifiedListMap[StateContainer.of(context).wallet.address].removeAt(removeIndices[i], _buildUnifiedItem, instant: true);
     }
+
+    // log.d("updating whole list!");
 
     // insert unifiedList into listmap:
     unifiedList.where((item) => !_unifiedListMap[StateContainer.of(context).wallet.address].items.contains(item)).forEach((dynamicItem) {
+      int index = unifiedList.indexOf(dynamicItem);
+      if (dynamicItem == null) return;
+      index = max(min(index, _unifiedListMap[StateContainer.of(context).wallet.address].length), 0);
       setState(() {
-        int index = unifiedList.indexOf(dynamicItem);
-        if (index > -1 && dynamicItem != null) {
-          _unifiedListMap[StateContainer.of(context).wallet.address].insertAt(dynamicItem, index, instant: fastUpdate);
-        }
-        // _unifiedListMap[StateContainer.of(context).wallet.address].insertAtTop(dynamicItem);
+        _unifiedListMap[StateContainer.of(context).wallet.address].insertAt(dynamicItem, index, instant: fastUpdate);
       });
     });
+
+    // for (int i = 0; i < unifiedList.length; i++) {
+    //   var dynamicItem = unifiedList[i];
+    //   if (dynamicItem == null) {
+    //     throw Exception("dynamicItem is null");
+    //   }
+    //   if (!_unifiedListMap[StateContainer.of(context).wallet.address].items.contains(dynamicItem)) {
+    //     // int index = max(min(i, _unifiedListMap[StateContainer.of(context).wallet.address].items.length), 0);
+    //     int index = i;
+    //     if (i > _unifiedListMap[StateContainer.of(context).wallet.address].items.length) {
+    //       index = _unifiedListMap[StateContainer.of(context).wallet.address].items.length;
+    //     }
+    //     if (i < 0) {
+    //       i = 0;
+    //     }
+    //     print("inserting at index: $i : $index");
+    //     setState(() {
+    //       _unifiedListMap[StateContainer.of(context).wallet.address].insertAt(unifiedList[i], index, instant: fastUpdate);
+    //     });
+    //   }
+    // }
 
     // ready to be rendered:
     if (StateContainer.of(context).wallet.unifiedLoading) {
@@ -1531,6 +1709,51 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       ),
     );
   }
+
+  Widget _buildNoSearchResultsCard(BuildContext context) {
+    return Container(
+      margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      decoration: BoxDecoration(
+        color: StateContainer.of(context).curTheme.backgroundDark,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+      ),
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              width: 7.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                color: StateContainer.of(context).curTheme.primary,
+                boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+              ),
+            ),
+            Flexible(
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 15.0),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: AppLocalization.of(context).noSearchResults,
+                    style: AppStyles.textStyleTransactionWelcome(context),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              width: 7.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                color: StateContainer.of(context).curTheme.primary,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  } // Welcome Card End
 
   // Dummy Transaction Card
   Widget _buildDummyTransactionCard(String type, String amount, String address, BuildContext context) {
@@ -1999,6 +2222,59 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     );
   } // Loading Transaction Card End
 
+  Widget _buildSearchbarAnimation() {
+    return SearchBarAnimation(
+      isOriginalAnimation: false,
+      textEditingController: _searchController,
+      cursorColour: StateContainer.of(context).curTheme.primary,
+      isSearchBoxOnRightSide: true,
+      buttonIcon: AppIcons.search,
+      trailingIcon: AppIcons.search,
+      buttonColour: StateContainer.of(context).curTheme.backgroundDark, // icon background color
+      buttonIconColour: StateContainer.of(context).curTheme.text, // icon color
+      hintTextColour: StateContainer.of(context).curTheme.text30,
+      searchBoxColour: StateContainer.of(context).curTheme.backgroundDark, // background of the searchbox itself
+      trailingIconColour: StateContainer.of(context).curTheme.primary, // on the left after opening the search box
+      secondaryButtonIconColour: StateContainer.of(context).curTheme.text,
+      enableBoxShadow: false,
+      enableButtonBorder: false,
+      enableButtonShadow: false,
+      // textAlignToRight: StateContainer.of(context).
+      durationInMilliSeconds: 300,
+      enableKeyboardFocus: true,
+      enteredTextStyle: TextStyle(
+        fontWeight: FontWeight.w600,
+        fontSize: AppFontSizes.small,
+        color: StateContainer.of(context).curTheme.text,
+        fontFamily: 'NunitoSans',
+      ),
+      textAlignToRight: false,
+      onChanged: (String value) async {
+        setState(() {});
+        await generateUnifiedList(fastUpdate: true);
+      },
+      onCollapseComplete: () async {
+        setState(() {
+          _searchOpen = false;
+          _searchController.text = "";
+          // _searchRightPadding = 5;
+        });
+        await generateUnifiedList(fastUpdate: true);
+      },
+      onExpansionComplete: () async {
+        setState(() {
+          _searchOpen = true;
+          _searchController.text = "";
+          // _searchRightPadding = 0;
+        });
+        await generateUnifiedList(fastUpdate: true);
+      },
+      enableBoxBorder: true,
+      searchBoxBorderColour: StateContainer.of(context).curTheme.text,
+      hintText: _searchOpen ? AppLocalization.of(context).searchHint : "",
+    );
+  }
+
   //Main Card
   Widget _buildMainCard(BuildContext context, _scaffoldKey) {
     return Container(
@@ -2008,184 +2284,204 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         boxShadow: [StateContainer.of(context).curTheme.boxShadow],
       ),
       margin: EdgeInsets.only(left: 14.0, right: 14.0, top: MediaQuery.of(context).size.height * 0.005),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Stack(
         children: <Widget>[
-          AnimatedContainer(
-            duration: Duration(milliseconds: 200),
-            curve: Curves.easeInOut,
-            width: 80.0,
-            height: mainCardHeight,
-            alignment: AlignmentDirectional(-1, -1),
-            child: AnimatedContainer(
+          Row(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+            AnimatedContainer(
               duration: Duration(milliseconds: 200),
               curve: Curves.easeInOut,
-              margin: EdgeInsetsDirectional.only(top: settingsIconMarginTop, start: 5),
-              height: 50,
-              width: 50,
-              child: FlatButton(
-                highlightColor: StateContainer.of(context).curTheme.text15,
-                splashColor: StateContainer.of(context).curTheme.text15,
-                onPressed: () {
-                  _scaffoldKey.currentState.openDrawer();
-                },
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Stack(
-                  children: [
-                    Icon(
-                      AppIcons.settings,
-                      color: StateContainer.of(context).curTheme.text,
-                      size: 24,
-                    ),
-                    !StateContainer.of(context).activeAlertIsRead
-                        ?
-                        // Unread message dot
-                        Positioned(
-                            top: -3,
-                            right: -3,
-                            child: Container(
-                              padding: EdgeInsets.all(3),
-                              decoration: BoxDecoration(
-                                color: StateContainer.of(context).curTheme.backgroundDark,
-                                shape: BoxShape.circle,
-                              ),
+              width: 80.0,
+              height: mainCardHeight,
+              alignment: AlignmentDirectional(-1, -1),
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+                margin: EdgeInsetsDirectional.only(top: settingsIconMarginTop, start: 5),
+                height: 50,
+                width: 50,
+                child: FlatButton(
+                  highlightColor: StateContainer.of(context).curTheme.text15,
+                  splashColor: StateContainer.of(context).curTheme.text15,
+                  onPressed: () {
+                    _scaffoldKey.currentState.openDrawer();
+                  },
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                  padding: EdgeInsets.all(0.0),
+                  child: Stack(
+                    children: [
+                      Icon(
+                        AppIcons.settings,
+                        color: StateContainer.of(context).curTheme.text,
+                        size: 24,
+                      ),
+                      !StateContainer.of(context).activeAlertIsRead
+                          ?
+                          // Unread message dot
+                          Positioned(
+                              top: -3,
+                              right: -3,
                               child: Container(
+                                padding: EdgeInsets.all(3),
                                 decoration: BoxDecoration(
-                                  color: StateContainer.of(context).curTheme.success,
+                                  color: StateContainer.of(context).curTheme.backgroundDark,
                                   shape: BoxShape.circle,
                                 ),
-                                height: 11,
-                                width: 11,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: StateContainer.of(context).curTheme.success,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  height: 11,
+                                  width: 11,
+                                ),
                               ),
-                            ),
-                          )
-                        : SizedBox()
-                  ],
+                            )
+                          : SizedBox()
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
+            AnimatedContainer(
+              duration: Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              height: mainCardHeight,
+              child: _getBalanceWidget(),
+            ),
+            AnimatedContainer(
+              duration: Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              width: 80,
+              height: mainCardHeight,
+            ),
+          ]),
           AnimatedContainer(
             duration: Duration(milliseconds: 200),
-            height: mainCardHeight,
             curve: Curves.easeInOut,
-            child: _getBalanceWidget(),
+            height: mainCardHeight,
+            // height: mainCardHeight == 64 ? 60 : 74,
+            margin: EdgeInsets.only(
+              left: 5,
+              right: 5,
+            ),
+            // padding: EdgeInsets.all(0.0),
+            padding: EdgeInsets.only(bottom: 2), // covers the top of the balance text in the currency widget
+            child: _buildSearchbarAnimation(),
           ),
-          // natricon
-          (StateContainer.of(context).nyanoMode)
-              ? (StateContainer.of(context).nyaniconOn
-                  ? AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
-                      curve: Curves.easeInOut,
-                      width: mainCardHeight == 64 ? 60 : 74,
-                      height: mainCardHeight == 64 ? 60 : 74,
-                      margin: EdgeInsets.only(right: 2),
-                      alignment: Alignment(0, 0),
-                      child: Stack(
-                        children: <Widget>[
-                          Center(
-                            child: Container(
-                              // nyanicon
-                              child: Hero(
-                                tag: "avatar",
-                                child: StateContainer.of(context).selectedAccount.address != null
-                                    ? Image(image: AssetImage("assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png"))
-                                    : SizedBox(),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Container(
-                              color: Colors.transparent,
-                              child: FlatButton(
-                                onPressed: () {
-                                  // Navigator.of(context).pushNamed('/avatar_page');
-                                },
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                                highlightColor: StateContainer.of(context).curTheme.text15,
-                                splashColor: StateContainer.of(context).curTheme.text15,
-                                padding: EdgeInsets.all(0.0),
-                                child: Container(
-                                  color: Colors.transparent,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
-                      curve: Curves.easeInOut,
-                      width: 80.0,
-                      height: mainCardHeight,
-                    ))
-              : (StateContainer.of(context).natriconOn
-                  ? AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
-                      curve: Curves.easeInOut,
-                      width: mainCardHeight == 64 ? 60 : 74,
-                      height: mainCardHeight == 64 ? 60 : 74,
-                      margin: EdgeInsets.only(right: 2),
-                      alignment: Alignment(0, 0),
-                      child: Stack(
-                        children: <Widget>[
-                          Center(
-                            child: Container(
-                              // natricon
-                              child: Hero(
-                                tag: "avatar",
-                                child: StateContainer.of(context).selectedAccount.address != null
-                                    ? SvgPicture.network(
-                                        UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
-                                        key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
-                                        placeholderBuilder: (BuildContext context) => Container(
-                                          child: FlareActor(
-                                            "legacy_assets/ntr_placeholder_animation.flr",
-                                            animation: "main",
-                                            fit: BoxFit.contain,
-                                            color: StateContainer.of(context).curTheme.primary,
-                                          ),
-                                        ),
-                                      )
-                                    : SizedBox(),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Container(
-                              color: Colors.transparent,
-                              child: FlatButton(
-                                onPressed: () {
-                                  Navigator.of(context).pushNamed('/avatar_page');
-                                },
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                                highlightColor: StateContainer.of(context).curTheme.text15,
-                                splashColor: StateContainer.of(context).curTheme.text15,
-                                padding: EdgeInsets.all(0.0),
-                                child: Container(
-                                  color: Colors.transparent,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
-                      curve: Curves.easeInOut,
-                      width: 80.0,
-                      height: mainCardHeight,
-                    ))
         ],
       ),
     );
   } //Main Card
+
+  // // natricon
+  // (StateContainer.of(context).nyanoMode)
+  //     ? (StateContainer.of(context).nyaniconOn
+  //         ? AnimatedContainer(
+  //             duration: Duration(milliseconds: 200),
+  //             curve: Curves.easeInOut,
+  //             width: mainCardHeight == 64 ? 60 : 74,
+  //             height: mainCardHeight == 64 ? 60 : 74,
+  //             margin: EdgeInsets.only(right: 2),
+  //             alignment: Alignment(0, 0),
+  //             child: Stack(
+  //               children: <Widget>[
+  //                 Center(
+  //                   child: Container(
+  //                     // nyanicon
+  //                     child: Hero(
+  //                       tag: "avatar",
+  //                       child: StateContainer.of(context).selectedAccount.address != null
+  //                           ? Image(image: AssetImage("assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png"))
+  //                           : SizedBox(),
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 Center(
+  //                   child: Container(
+  //                     color: Colors.transparent,
+  //                     child: FlatButton(
+  //                       onPressed: () {
+  //                         // Navigator.of(context).pushNamed('/avatar_page');
+  //                       },
+  //                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+  //                       highlightColor: StateContainer.of(context).curTheme.text15,
+  //                       splashColor: StateContainer.of(context).curTheme.text15,
+  //                       padding: EdgeInsets.all(0.0),
+  //                       child: Container(
+  //                         color: Colors.transparent,
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           )
+  //         : AnimatedContainer(
+  //             duration: Duration(milliseconds: 200),
+  //             curve: Curves.easeInOut,
+  //             width: 80.0,
+  //             height: mainCardHeight,
+  //           ))
+  //     : (StateContainer.of(context).natriconOn
+  //         ? AnimatedContainer(
+  //             duration: Duration(milliseconds: 200),
+  //             curve: Curves.easeInOut,
+  //             width: mainCardHeight == 64 ? 60 : 74,
+  //             height: mainCardHeight == 64 ? 60 : 74,
+  //             margin: EdgeInsets.only(right: 2),
+  //             alignment: Alignment(0, 0),
+  //             child: Stack(
+  //               children: <Widget>[
+  //                 Center(
+  //                   child: Container(
+  //                     // natricon
+  //                     child: Hero(
+  //                       tag: "avatar",
+  //                       child: StateContainer.of(context).selectedAccount.address != null
+  //                           ? SvgPicture.network(
+  //                               UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
+  //                                   StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
+  //                               key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
+  //                                   StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
+  //                               placeholderBuilder: (BuildContext context) => Container(
+  //                                 child: FlareActor(
+  //                                   "legacy_assets/ntr_placeholder_animation.flr",
+  //                                   animation: "main",
+  //                                   fit: BoxFit.contain,
+  //                                   color: StateContainer.of(context).curTheme.primary,
+  //                                 ),
+  //                               ),
+  //                             )
+  //                           : SizedBox(),
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 Center(
+  //                   child: Container(
+  //                     color: Colors.transparent,
+  //                     child: FlatButton(
+  //                       onPressed: () {
+  //                         Navigator.of(context).pushNamed('/avatar_page');
+  //                       },
+  //                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+  //                       highlightColor: StateContainer.of(context).curTheme.text15,
+  //                       splashColor: StateContainer.of(context).curTheme.text15,
+  //                       padding: EdgeInsets.all(0.0),
+  //                       child: Container(
+  //                         color: Colors.transparent,
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           )
+  //         : AnimatedContainer(
+  //             duration: Duration(milliseconds: 200),
+  //             curve: Curves.easeInOut,
+  //             width: 80.0,
+  //             height: mainCardHeight,
+  //           ))
 
   // Get balance display
   Widget _getBalanceWidget() {
@@ -2313,7 +2609,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           // Cycle to BTC price
           setState(() {
             mainCardHeight = 80;
-            settingsIconMarginTop = 7;
+            settingsIconMarginTop = 15;
           });
           Future.delayed(Duration(milliseconds: 150), () {
             setState(() {
@@ -2616,7 +2912,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // set box shadow color:
     if (txDetails != null) {
-      if (txDetails.status == StatusTypes.CREATE_FAILED) {
+      if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
+        // normal tx:
+        setShadow = StateContainer.of(context).curTheme.boxShadow;
+      } else if (txDetails.status == StatusTypes.CREATE_FAILED) {
         iconColor = StateContainer.of(context).curTheme.error60;
         setShadow = BoxShadow(
           color: StateContainer.of(context).curTheme.error60.withOpacity(0.2),
@@ -2632,7 +2931,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           blurRadius: 0,
           spreadRadius: 1,
         );
-      } else if (!txDetails.is_acknowledged || isPaymentRequest) {
+      } else if ((!txDetails.is_acknowledged) || isPaymentRequest) {
         iconColor = StateContainer.of(context).curTheme.warning60;
         setShadow = BoxShadow(
           color: StateContainer.of(context).curTheme.warning60.withOpacity(0.2),
@@ -2691,21 +2990,27 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     TransactionStateOptions transactionState;
 
-    if (txDetails != null) {
-      if (!txDetails.is_acknowledged) {
-        transactionState = TransactionStateOptions.UNREAD;
-      }
-      if (txDetails.status == StatusTypes.CREATE_FAILED) {
-        transactionState = TransactionStateOptions.FAILED_MSG;
-      }
-      if (isPaymentRequest && !txDetails.is_fulfilled) {
-        transactionState = TransactionStateOptions.UNFULFILLED;
-      }
-    }
-
     if (isTransaction) {
       if ((item.confirmed != null && !item.confirmed) || (currentConfHeight > -1 && item.height != null && item.height > currentConfHeight)) {
         transactionState = TransactionStateOptions.UNCONFIRMED;
+      }
+    }
+
+    if (txDetails != null) {
+      if (txDetails.record_type != RecordTypes.GIFT_LOAD) {
+        if (txDetails.status == StatusTypes.CREATE_FAILED) {
+          transactionState = TransactionStateOptions.FAILED_MSG;
+        }
+        if (isPaymentRequest) {
+          if (txDetails.is_fulfilled) {
+            transactionState = TransactionStateOptions.FULFILLED;
+          } else {
+            transactionState = TransactionStateOptions.UNFULFILLED;
+          }
+        }
+        if (!txDetails.is_acknowledged) {
+          transactionState = TransactionStateOptions.UNREAD;
+        }
       }
     }
 
@@ -2844,31 +3149,50 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(
-                                text,
+                              SubstringHighlight(
+                                caseSensitive: false,
+                                words: false,
+                                term: _searchController.text,
+                                text: text,
                                 textAlign: TextAlign.start,
-                                style: AppStyles.textStyleTransactionType(context),
+                                textStyle: AppStyles.textStyleTransactionType(context),
+                                textStyleHighlight: TextStyle(
+                                    fontFamily: "NunitoSans",
+                                    fontSize: AppFontSizes.small,
+                                    fontWeight: FontWeight.w600,
+                                    color: StateContainer.of(context).curTheme.warning60),
                               ),
-                              RichText(
-                                textAlign: TextAlign.start,
-                                text: TextSpan(
-                                  text: '',
-                                  children: [
-                                    displayCurrencyAmount(
-                                      context,
-                                      AppStyles.textStyleTransactionAmount(
-                                        context,
-                                        true,
-                                      ),
+                              Row(
+                                children: <Widget>[
+                                  RichText(
+                                    textAlign: TextAlign.start,
+                                    text: TextSpan(
+                                      text: '',
+                                      children: [
+                                        displayCurrencyAmount(
+                                          context,
+                                          AppStyles.textStyleTransactionAmount(
+                                            context,
+                                            true,
+                                          ),
+                                          includeSymbol: true,
+                                        ),
+                                      ],
                                     ),
-                                    TextSpan(
-                                      text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, isPaymentRequest ? item.amount_raw : item.amount),
-                                      style: AppStyles.textStyleTransactionAmount(
-                                        context,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  SubstringHighlight(
+                                      caseSensitive: false,
+                                      words: false,
+                                      term: _searchController.text,
+                                      text: getRawAsThemeAwareAmount(context, isPaymentRequest ? item.amount_raw : item.amount),
+                                      textAlign: TextAlign.start,
+                                      textStyle: AppStyles.textStyleTransactionAmount(context),
+                                      textStyleHighlight: TextStyle(
+                                          fontFamily: "NunitoSans",
+                                          color: StateContainer.of(context).curTheme.warning60,
+                                          fontSize: AppFontSizes.smallest,
+                                          fontWeight: FontWeight.w600)),
+                                ],
                               ),
                             ],
                           ),
@@ -2881,13 +3205,27 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             // width: MediaQuery.of(context).size.width / 4.3,
                             constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 4),
                             padding: EdgeInsets.only(left: 10, right: 10),
-                            child: Text(
-                              txDetails.memo,
-                              textAlign: TextAlign.start,
-                              style: AppStyles.textStyleTransactionMemo(context),
-                              maxLines: 16,
-                              overflow: TextOverflow.visible,
-                            ),
+                            // child: Text(
+                            //   txDetails.memo,
+                            //   textAlign: TextAlign.start,
+                            //   style: AppStyles.textStyleTransactionMemo(context),
+                            //   maxLines: 16,
+                            //   overflow: TextOverflow.visible,
+                            // ),
+                            child: SubstringHighlight(
+                                caseSensitive: false,
+                                maxLines: 16,
+                                term: _searchController.text,
+                                text: txDetails.memo,
+                                textAlign: TextAlign.start,
+                                textStyle: AppStyles.textStyleTransactionMemo(context),
+                                textStyleHighlight: TextStyle(
+                                  fontSize: AppFontSizes.smallest,
+                                  fontFamily: 'OverpassMono',
+                                  fontWeight: FontWeight.w100,
+                                  color: StateContainer.of(context).curTheme.warning60,
+                                ),
+                                words: false),
                           )
                         : Container(),
                     Container(
@@ -2896,12 +3234,26 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
-                            displayName,
-                            maxLines: 5,
-                            textAlign: TextAlign.end,
-                            style: AppStyles.textStyleTransactionAddress(context),
-                          ),
+                          // Text(
+                          //   displayName,
+                          //   maxLines: 5,
+                          //   textAlign: TextAlign.end,
+                          //   style: AppStyles.textStyleTransactionAddress(context),
+                          // ),
+                          SubstringHighlight(
+                              caseSensitive: false,
+                              maxLines: 5,
+                              term: _searchController.text,
+                              text: displayName,
+                              textAlign: TextAlign.right,
+                              textStyle: AppStyles.textStyleTransactionAddress(context),
+                              textStyleHighlight: TextStyle(
+                                fontSize: AppFontSizes.smallest,
+                                fontFamily: 'OverpassMono',
+                                fontWeight: FontWeight.w100,
+                                color: StateContainer.of(context).curTheme.warning60,
+                              ),
+                              words: false),
 
                           // TRANSACTION STATE TAG
                           (transactionState != null)
@@ -2925,45 +3277,33 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     );
   } // Payment Card End
 
-  // Used to build list items that haven't been removed.
-  Widget _buildUnifiedItem(BuildContext context, int index, Animation<double> animation) {
-    if (index == 0 && StateContainer.of(context).activeAlert != null) {
-      return _buildRemoteMessageCard(StateContainer.of(context).activeAlert);
-    }
-    int localIndex = index;
-    if (StateContainer.of(context).activeAlert != null) {
-      localIndex -= 1;
-    }
-
-    dynamic indexedItem = _unifiedListMap[StateContainer.of(context).wallet.address][localIndex];
-
-    bool isPayment = indexedItem is TXData;
-
+  List<dynamic> getPossibleTXDetails(BuildContext context, dynamic item) {
+    bool isPayment = item is TXData;
     bool isRecipient = false;
     String account = "";
     String displayName;
 
     if (isPayment) {
-      isRecipient = StateContainer.of(context).wallet.address == indexedItem.to_address;
+      isRecipient = StateContainer.of(context).wallet.address == item.to_address;
     }
 
     if (isPayment) {
       // displayName =
       // smallScreen(context) ? indexedItem.getShorterString(isRecipient) : indexedItem.getShortString(isRecipient);
-      displayName = indexedItem.getShortestString(isRecipient);
+      displayName = item.getShortestString(isRecipient);
     } else {
       // slight change in structure:
       // displayName = smallScreen(context) ? indexedItem.getShorterString() : indexedItem.getShortString();
-      displayName = indexedItem.getShortestString();
+      displayName = item.getShortestString();
     }
 
     // displayName = displayName.substring(0, 5) + "\n" + displayName.substring(5, displayName.length);
 
     if (isPayment) {
-      account = isRecipient ? indexedItem.from_address : indexedItem.to_address;
+      account = isRecipient ? item.from_address : item.to_address;
     } else {
       // slight change in structure:
-      account = indexedItem.account ?? "";
+      account = item.account ?? "";
     }
 
     bool matched = false;
@@ -2988,22 +3328,54 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // only do this if this is a regular tx:
     // find an associated memo for this tx:
     TXData txDetails;
-    if (indexedItem is AccountHistoryResponseItem) {
-      txDetails = _txDetailsMap["${indexedItem.hash}"];
-      if (txDetails != null) {
-        return _buildUnifiedCard(indexedItem, animation, displayName, context, txDetails: txDetails);
-      }
-      //   dynamic txData = sl.get<DBHelper>().getTXDataByBlock(_unifiedListMap[StateContainer.of(context).wallet.address][localIndex].hash);
-      //   if (txData != null && txData.memo.isNotEmpty) {
-      //     return _buildUnifiedCard(_unifiedListMap[StateContainer.of(context).wallet.address][localIndex], animation, displayName, context);
-      //   }
+    if (item is AccountHistoryResponseItem) {
+      txDetails = _txDetailsMap[item.hash];
+      if (txDetails != null) {}
     }
 
-    return _buildUnifiedCard(indexedItem, animation, displayName, context);
+    return [displayName, account, txDetails];
+  }
+
+  // Used to build list items that haven't been removed.
+  Widget _buildUnifiedItem(BuildContext context, int index, Animation<double> animation) {
+    if (index == 0 && StateContainer.of(context).activeAlert != null) {
+      return _buildRemoteMessageCard(StateContainer.of(context).activeAlert);
+    }
+    int localIndex = index;
+    if (StateContainer.of(context).activeAlert != null) {
+      localIndex -= 1;
+    }
+
+    dynamic indexedItem = _unifiedListMap[StateContainer.of(context).wallet.address][localIndex];
+    String displayName;
+    // String account;
+    TXData txDetails;
+    var res = getPossibleTXDetails(context, indexedItem);
+    displayName = res[0];
+    // account = res[1];
+    txDetails = res[2];
+
+    return _buildUnifiedCard(indexedItem, animation, displayName, context, txDetails: txDetails);
   }
 
   // Return widget for list
   Widget _getUnifiedListWidget(BuildContext context) {
+    if (_noSearchResults) {
+      return ReactiveRefreshIndicator(
+        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        child: ListView(
+          padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+          children: <Widget>[
+            // REMOTE MESSAGE CARD
+            StateContainer.of(context).activeAlert != null ? _buildRemoteMessageCard(StateContainer.of(context).activeAlert) : SizedBox(),
+            _buildNoSearchResultsCard(context),
+          ],
+        ),
+        onRefresh: _refresh,
+        isRefreshing: _isRefreshing,
+      );
+    }
+
     if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.historyLoading == false) {
       // Setup history list
       if (!_historyListMap.containsKey("${StateContainer.of(context).wallet.address}")) {
@@ -3030,6 +3402,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           );
         });
       }
+      // TODO: move to a better location for performance:
       generateUnifiedList(fastUpdate: true);
     }
 

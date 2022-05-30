@@ -65,26 +65,26 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
   bool animationOpen;
   bool isMantaTransaction;
 
-  // StreamSubscription<AuthenticatedEvent> _authSub;
+  StreamSubscription<AuthenticatedEvent> _authSub;
 
-  // void _registerBus() {
-  //   _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((event) {
-  //     if (event.authType == AUTH_EVENT_TYPE.SEND) {
-  //       _doRequest();
-  //     }
-  //   });
-  // }
+  void _registerBus() {
+    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((event) {
+      if (event.authType == AUTH_EVENT_TYPE.REQUEST) {
+        _doRequest();
+      }
+    });
+  }
 
-  // void _destroyBus() {
-  //   if (_authSub != null) {
-  //     _authSub.cancel();
-  //   }
-  // }
+  void _destroyBus() {
+    if (_authSub != null) {
+      _authSub.cancel();
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    // _registerBus();
+    _registerBus();
     this.animationOpen = false;
     this.isMantaTransaction = widget.manta != null && widget.paymentRequest != null;
     // Derive amount from raw amount
@@ -101,7 +101,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
 
   @override
   void dispose() {
-    // _destroyBus();
+    _destroyBus();
     super.dispose();
   }
 
@@ -316,8 +316,24 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                       AppButton.buildAppButton(
                           context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
-                        // no need for auth on a request:
-                        _doRequest();
+                        // Authenticate
+                        AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                        bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                        if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+                          try {
+                            bool authenticated = await sl
+                                .get<BiometricUtil>()
+                                .authenticateWithBiometrics(context, AppLocalization.of(context).requestAmountConfirm.replaceAll("%1", amount));
+                            if (authenticated) {
+                              sl.get<HapticUtil>().fingerprintSucess();
+                              EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.REQUEST));
+                            }
+                          } catch (e) {
+                            await authenticateWithPin();
+                          }
+                        } else {
+                          await authenticateWithPin();
+                        }
                       })
                     ],
                   ),
@@ -453,6 +469,22 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       sendFailed = true;
       UIUtil.showSnackbar(AppLocalization.of(context).requestError, context, durationMs: 3500);
       Navigator.of(context).pop();
+    }
+  }
+
+  Future<void> authenticateWithPin() async {
+    // PIN Authentication
+    String expectedPin = await sl.get<Vault>().getPin();
+    bool auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+      return new PinScreen(
+        PinOverlayType.ENTER_PIN,
+        expectedPin: expectedPin,
+        description: AppLocalization.of(context).requestAmountConfirmPin.replaceAll("%1", amount),
+      );
+    }));
+    if (auth != null && auth) {
+      await Future.delayed(Duration(milliseconds: 200));
+      EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.REQUEST));
     }
   }
 }

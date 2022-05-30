@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
+import 'package:nautilus_wallet_flutter/model/currency_mode_setting.dart';
 import 'package:nautilus_wallet_flutter/model/min_raw_setting.dart';
 import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
 import 'package:nautilus_wallet_flutter/model/nyanicon_option.dart';
@@ -78,6 +79,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
   NyaniconSetting _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
   MinRawSetting _curMinRawSetting = MinRawSetting(MinRawOptions.OFF);
+  CurrencyModeSetting _curCurrencyModeSetting = CurrencyModeSetting(CurrencyModeOptions.NANO);
   UnlockSetting _curUnlockSetting = UnlockSetting(UnlockOption.NO);
   LockTimeoutSetting _curTimeoutSetting = LockTimeoutSetting(LockTimeoutOption.ONE);
   ThemeSetting _curThemeSetting = ThemeSetting(ThemeOptions.NAUTILUS);
@@ -179,6 +181,19 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             break;
           case HUNDRED_THOUSAND_NYANO:
             _curMinRawSetting = MinRawSetting(MinRawOptions.HUNDRED_THOUSAND_NYANO);
+            break;
+        }
+      });
+    });
+    // Get currency mode setting
+    sl.get<SharedPrefsUtil>().getCurrencyMode().then((currencyMode) {
+      setState(() {
+        switch (currencyMode) {
+          case "NANO":
+            _curCurrencyModeSetting = CurrencyModeSetting(CurrencyModeOptions.NANO);
+            break;
+          case "NYANO":
+            _curCurrencyModeSetting = CurrencyModeSetting(CurrencyModeOptions.NYANO);
             break;
         }
       });
@@ -599,6 +614,25 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     return ret;
   }
 
+  List<Widget> _buildCurrencyModeOptions() {
+    List<Widget> ret = new List();
+    CurrencyModeOptions.values.forEach((CurrencyModeOptions value) {
+      ret.add(SimpleDialogOption(
+        onPressed: () {
+          Navigator.pop(context, value);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            CurrencyModeSetting(value).getDisplayName(context),
+            style: AppStyles.textStyleDialogOptions(context),
+          ),
+        ),
+      ));
+    });
+    return ret;
+  }
+
   Future<void> _minRawDialog() async {
     switch (await showDialog<MinRawOptions>(
         context: context,
@@ -665,6 +699,38 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           setState(() {
             StateContainer.of(context).setMinRawReceive(HUNDRED_THOUSAND_NYANO);
             _curMinRawSetting = MinRawSetting(MinRawOptions.HUNDRED_THOUSAND_NYANO);
+          });
+        });
+        break;
+    }
+  }
+
+  Future<void> _currencyModeDialog() async {
+    switch (await showDialog<CurrencyModeOptions>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            title: Text(
+              AppLocalization.of(context).currencyMode,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            children: _buildCurrencyModeOptions(),
+          );
+        })) {
+      case CurrencyModeOptions.NANO:
+        sl.get<SharedPrefsUtil>().setCurrencyMode(CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName(context)).then((result) {
+          setState(() {
+            StateContainer.of(context).setCurrencyMode(false);
+            _curCurrencyModeSetting = CurrencyModeSetting(CurrencyModeOptions.NANO);
+          });
+        });
+        break;
+      case CurrencyModeOptions.NYANO:
+        sl.get<SharedPrefsUtil>().setCurrencyMode(CurrencyModeSetting(CurrencyModeOptions.NYANO).getDisplayName(context)).then((result) {
+          setState(() {
+            StateContainer.of(context).setCurrencyMode(true);
+            _curCurrencyModeSetting = CurrencyModeSetting(CurrencyModeOptions.NYANO);
           });
         });
         break;
@@ -806,13 +872,15 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             children: _buildLanguageOptions(),
           );
         });
-    sl.get<SharedPrefsUtil>().setLanguage(LanguageSetting(selection)).then((result) {
-      if (StateContainer.of(context).curLanguage.language != selection) {
-        setState(() {
-          StateContainer.of(context).updateLanguage(LanguageSetting(selection));
-        });
-      }
-    });
+    if (selection != null) {
+      sl.get<SharedPrefsUtil>().setLanguage(LanguageSetting(selection)).then((result) {
+        if (StateContainer.of(context).curLanguage.language != selection) {
+          setState(() {
+            StateContainer.of(context).updateLanguage(LanguageSetting(selection));
+          });
+        }
+      });
+    }
   }
 
   List<Widget> _buildExplorerOptions() {
@@ -849,13 +917,15 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             children: _buildExplorerOptions(),
           );
         });
-    sl.get<SharedPrefsUtil>().setBlockExplorer(AvailableBlockExplorer(selection)).then((result) {
-      if (StateContainer.of(context).curBlockExplorer.explorer != selection) {
-        setState(() {
-          StateContainer.of(context).updateBlockExplorer(AvailableBlockExplorer(selection));
-        });
-      }
-    });
+    if (selection != null) {
+      sl.get<SharedPrefsUtil>().setBlockExplorer(AvailableBlockExplorer(selection)).then((result) {
+        if (StateContainer.of(context).curBlockExplorer.explorer != selection) {
+          setState(() {
+            StateContainer.of(context).updateBlockExplorer(AvailableBlockExplorer(selection));
+          });
+        }
+      });
+    }
   }
 
   List<Widget> _buildLockTimeoutOptions() {
@@ -937,13 +1007,15 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             children: _buildThemeOptions(),
           );
         });
-    if (_curThemeSetting != ThemeSetting(selection)) {
-      sl.get<SharedPrefsUtil>().setTheme(ThemeSetting(selection)).then((result) {
-        setState(() {
-          StateContainer.of(context).updateTheme(ThemeSetting(selection));
-          _curThemeSetting = ThemeSetting(selection);
+    if (selection != null) {
+      if (_curThemeSetting != ThemeSetting(selection)) {
+        sl.get<SharedPrefsUtil>().setTheme(ThemeSetting(selection)).then((result) {
+          setState(() {
+            StateContainer.of(context).updateTheme(ThemeSetting(selection));
+            _curThemeSetting = ThemeSetting(selection);
+          });
         });
-      });
+      }
     }
   }
 
@@ -1555,23 +1627,29 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       color: StateContainer.of(context).curTheme.text15,
                     ),
                     AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context).currencyMode, _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),
+                    Divider(
+                      height: 2,
+                      color: StateContainer.of(context).curTheme.text15,
+                    ),
+                    AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context).blockExplorer,
                       StateContainer.of(context).curBlockExplorer,
                       AppIcons.search,
                       _explorerDialog,
                     ),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
+                    // Divider(
+                    //   height: 2,
+                    //   color: StateContainer.of(context).curTheme.text15,
+                    // ),
                     // TODO: nyanicon svg
-                    (StateContainer.of(context).nyanoMode)
-                        ? (
-                            // Nyanicon on-off
-                            AppSettings.buildSettingsListItemDoubleLine(
-                                context, AppLocalization.of(context).nyanicon, _curNyaniconSetting, AppIcons.natricon, _nyaniconDialog))
-                        : (null),
+                    // (StateContainer.of(context).nyanoMode)
+                    //     ? (
+                    //         // Nyanicon on-off
+                    //         AppSettings.buildSettingsListItemDoubleLine(
+                    //             context, AppLocalization.of(context).nyanicon, _curNyaniconSetting, AppIcons.natricon, _nyaniconDialog))
+                    //     : (null),
                     // Natricon on-off
                     // AppSettings.buildSettingsListItemDoubleLine(
                     //     context, AppLocalization.of(context).natricon, _curNatriconSetting, AppIcons.natricon, _natriconDialog),

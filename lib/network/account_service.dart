@@ -253,7 +253,7 @@ class AccountService {
 
   /* Enqueue Request */
   void queueRequest(BaseRequest request, {bool fromTransfer = false}) {
-    //log.d("requetest ${json.encode(request.toJson())}, q length: ${_requestQueue.length}");
+    //log.d("request ${json.encode(request.toJson())}, q length: ${_requestQueue.length}");
     _requestQueue.add(new RequestItem(request, fromTransfer: fromTransfer));
   }
 
@@ -384,6 +384,10 @@ class AccountService {
     }
 
     return decoded;
+  }
+
+  Future<void> dummyAPICall() async {
+    await http.get(Uri.parse(_SERVER_ADDRESS_HTTP), headers: {"Accept": "application/json"});
   }
 
   Future<dynamic> checkUsernameUrl(String URL) async {

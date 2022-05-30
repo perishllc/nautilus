@@ -49,6 +49,8 @@ class SharedPrefsUtil {
   static const String use_natricon = 'fnautilus_use_natricon';
   // Nyanicon setting
   static const String use_nyanicon = 'fnautilus_use_nyanicon';
+  // currency / nyano mode:
+  static const String currency_mode = 'fnautilus_currency_mode';
   // spam prevention min-RAW for receives
   static const String min_raw_receive = 'fnautilus_min_raw_receive';
   // last time we checked for updates:
@@ -365,6 +367,14 @@ class SharedPrefsUtil {
 
   Future<String> getMinRawReceive() async {
     return await get(min_raw_receive, defaultValue: "0");
+  }
+
+  Future<void> setCurrencyMode(String currencyMode) async {
+    return await set(currency_mode, currencyMode);
+  }
+
+  Future<String> getCurrencyMode() async {
+    return await get(currency_mode, defaultValue: "NANO");
   }
 
   Future<void> dismissAlert(AlertResponseItem alert) async {
