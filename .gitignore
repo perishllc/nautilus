@@ -15,6 +15,7 @@ android/app/release
 .svn/
 .aab
 .apk
+lib/sensitive.dart
 
 # IntelliJ related
 *.iml

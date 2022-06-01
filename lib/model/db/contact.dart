@@ -27,4 +27,8 @@ class Contact {
 
   bool operator ==(o) => o is Contact && o.name == name && o.address == address;
   int get hashCode => hash2(name.hashCode, address.hashCode);
+
+  String getDisplayName() {
+    return "★" + name;
+  }
 }

@@ -20,17 +20,19 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 class DBHelper {
-  static const int DB_VERSION = 4;
+  static const int DB_VERSION = 5;
   static const String CONTACTS_SQL = """CREATE TABLE Contacts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
         address TEXT, 
         monkey_path TEXT)""";
-  static const String USERS_SQL = """CREATE TABLE Users( 
+  static const String USERS_SQL = """CREATE TABLE Users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         last_updated INTEGER,
         username TEXT,
+        nickname TEXT,
         address TEXT,
+        blocked BOOLEAN,
         type TEXT)""";
   static const String BLOCKED_SQL = """CREATE TABLE Blocked( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -80,6 +82,12 @@ class DBHelper {
   static const String USER_ADD_BLOCKED_COLUMN_SQL = """
     ALTER TABLE Users ADD blocked BOOLEAN
     """;
+  static const String USER_ADD_NICKNAME_COLUMN_SQL = """
+    ALTER TABLE Users ADD nickname TEXT
+    """;
+  static const String USER_ADD_TYPE_COLUMN_SQL = """
+    ALTER TABLE Users ADD type TEXT
+    """;
   static Database _db;
 
   NanoUtil _nanoUtil;
@@ -116,42 +124,22 @@ class DBHelper {
       // Add blocked table
       await db.execute(BLOCKED_SQL);
     }
+    if (oldVersion == 4) {
+      // Add to Users table
+      await db.execute(USER_ADD_BLOCKED_COLUMN_SQL);
+      await db.execute(USER_ADD_NICKNAME_COLUMN_SQL);
+      await db.execute(USER_ADD_TYPE_COLUMN_SQL);
+    }
   }
 
   // read json and populate users table:
-  Future<void> populateDBFromCache() async {
-    // delete the old databases:
-    await nukeUsers();
-    // nukeReps();
-
-    // get the json from the cache:
-    final String userData = await rootBundle.loadString("assets/store/known.json");
-    final String repsData = await rootBundle.loadString("assets/store/reps.json");
-    final knownUsers = await json.decode(userData);
-    final repsUsers = await json.decode(repsData);
-
-    // loop through the data and insert into the users table:
-    var users = parseUsers(knownUsers);
-    for (var user in users) {
-      await addUser(user);
-    }
-
-    // loop through the data and insert into the users table:
-    // var reps = parseReps(repsUsers);
-    // for (var rep in reps) {
-    //   await addRep(rep);
-    // }
-  }
-
   Future<void> loadNapiCache() async {
     // get the json from the cache:
     final String userData = await rootBundle.loadString("assets/store/known.json");
-    // final String repsData = await rootBundle.loadString("assets/store/reps.json");
     final knownUsers = await json.decode(userData);
-    // final repsUsers = await json.decode(repsData);
 
     // loop through the data and insert into the users table:
-    var users = parseUsers(knownUsers);
+    var users = parseNanoToUsers(knownUsers);
     for (var user in users) {
       await addOrReplaceUser(user);
     }
@@ -172,89 +160,115 @@ class DBHelper {
   }
 
   // A function that converts a response body into a list of Users
-  List<User> parseUsers(String responseBody) {
+  List<User> parseNanoToUsers(String responseBody) {
     final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-    return parsed.map<User>((json) => User.fromJson(json)).toList();
+    return parsed.map<User>((json) {
+      var user = User.fromJson(json);
+      user.type = UserTypes.NANOTO;
+      return user;
+    }).toList();
   }
 
   Future<List<User>> fetchNapiKnown(http.Client client) async {
     final response = await client.get(Uri.parse("https://nano.to/known?json=true"));
     // Use the compute function to run parseUsers in a separate isolate.
-    return parseUsers(response.body);
+    return parseNanoToUsers(response.body);
   }
 
-  Future<List<User>> fetchNapiReps(http.Client client) async {
-    final response = await client.get(Uri.parse("https://nano.to/reps?json=true"));
-    // Use the compute function to run parseUsers in a separate isolate.
-    return parseUsers(response.body);
-  }
+  // Future<List<User>> fetchNapiReps(http.Client client) async {
+  //   final response = await client.get(Uri.parse("https://nano.to/reps?json=true"));
+  //   // Use the compute function to run parseUsers in a separate isolate.
+  //   return parseUsers(response.body);
+  // }
 
-  List<User> parseReps(String responseBody) {
-    final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-    return parsed.map<User>((json) => User.fromJson(json)).toList();
-  }
+  // List<User> parseReps(String responseBody) {
+  //   final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+  //   return parsed.map<User>((json) => User.fromJson(json)).toList();
+  // }
 
   // Contacts
-  Future<List<Contact>> getContacts() async {
+  Future<List<User>> getContacts() async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Contacts ORDER BY name');
-    List<Contact> contacts = new List();
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE nickname <> \'\' ORDER BY nickname');
+    List<User> contacts = [];
     for (int i = 0; i < list.length; i++) {
-      contacts.add(
-          new Contact(id: list[i]["id"], name: list[i]["name"], address: list[i]["address"].replaceAll("xrb_", "nano_"), monkeyPath: list[i]["monkey_path"]));
+      contacts.add(new User(
+          nickname: list[i]["nickname"], address: list[i]["address"].replaceAll("xrb_", "nano_"), type: UserTypes.CONTACT, username: list[i]["username"]));
     }
     return contacts;
   }
 
-  Future<List<Contact>> getContactsWithNameLike(String pattern) async {
+  // Future<List<Contact>> getContactsWithNameLike(String pattern) async {
+  //   var dbClient = await db;
+  //   List<Map> list = await dbClient.rawQuery('SELECT * FROM Contacts WHERE name LIKE \'%$pattern%\' ORDER BY LOWER(name)');
+  //   List<Contact> contacts = new List();
+  //   for (int i = 0; i < list.length; i++) {
+  //     contacts.add(new Contact(id: list[i]["id"], name: list[i]["name"], address: list[i]["address"], monkeyPath: list[i]["monkey_path"]));
+  //   }
+  //   return contacts;
+  // }
+
+  Future<List<User>> getContactsWithNameLike(String pattern) async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Contacts WHERE name LIKE \'%$pattern%\' ORDER BY LOWER(name)');
-    List<Contact> contacts = new List();
+    // List<Map> list =
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE nickname LIKE \'%$pattern%\' AND nickname <> \'\' ORDER BY LOWER(nickname)');
+    List<User> contacts = [];
     for (int i = 0; i < list.length; i++) {
-      contacts.add(new Contact(id: list[i]["id"], name: list[i]["name"], address: list[i]["address"], monkeyPath: list[i]["monkey_path"]));
+      contacts.add(new User(nickname: list[i]["nickname"], address: list[i]["address"], type: list[i]["type"]));
     }
     return contacts;
   }
 
-  Future<Contact> getContactWithAddress(String address) async {
+  // Future<Contact> getContactWithAddress(String address) async {
+  //   var dbClient = await db;
+  //   List<Map> list = await dbClient.rawQuery('SELECT * FROM Contacts WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
+  //   if (list.length > 0) {
+  //     return Contact(id: list[0]["id"], name: list[0]["name"], address: list[0]["address"], monkeyPath: list[0]["monkey_path"]);
+  //   }
+  //   return null;
+  // }
+
+  Future<User> getContactWithAddress(String address) async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Contacts WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
+    List<Map> list = await dbClient
+        .rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\'');
     if (list.length > 0) {
-      return Contact(id: list[0]["id"], name: list[0]["name"], address: list[0]["address"], monkeyPath: list[0]["monkey_path"]);
+      return User(nickname: list[0]["nickname"], address: list[0]["address"], type: list[0]["type"], username: list[0]["username"]);
     }
     return null;
   }
 
-  Future<Contact> getContactWithName(String name) async {
+  Future<User> getContactWithName(String name) async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Contacts WHERE name = ?', [name]);
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE nickname = ? AND nickname <> \'\'', [name]);
     if (list.length > 0) {
-      return Contact(id: list[0]["id"], name: list[0]["name"], address: list[0]["address"], monkeyPath: list[0]["monkey_path"]);
+      return User(nickname: list[0]["nickname"], address: list[0]["address"]);
     }
     return null;
   }
 
   Future<bool> contactExistsWithName(String name) async {
     var dbClient = await db;
-    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Contacts WHERE lower(name) = ?', [name.toLowerCase()]));
+    int count = Sqflite.firstIntValue(
+        await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(nickname) = ? AND nickname <> \'\'', [name.toLowerCase()]));
     return count > 0;
   }
 
   Future<bool> contactExistsWithAddress(String address) async {
     var dbClient = await db;
-    int count = Sqflite.firstIntValue(
-        await dbClient.rawQuery('SELECT count(*) FROM Contacts WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\''));
+    int count = Sqflite.firstIntValue(await dbClient.rawQuery(
+        'SELECT count(*) FROM Users WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\''));
     return count > 0;
   }
 
-  Future<int> saveContact(Contact contact) async {
+  Future<int> saveContact(User contact) async {
     var dbClient = await db;
-    return await dbClient.rawInsert('INSERT INTO Contacts (name, address) values(?, ?)', [contact.name, contact.address.replaceAll("xrb_", "nano_")]);
+    return await dbClient.rawInsert('INSERT INTO Users (nickname, address, username) values(?, ?, ?)', [contact.nickname, contact.address.replaceAll("xrb_", "nano_"), contact.username]);
   }
 
-  Future<int> saveContacts(List<Contact> contacts) async {
+  Future<int> saveContacts(List<User> contacts) async {
     int count = 0;
-    for (Contact c in contacts) {
+    for (User c in contacts) {
       if (await saveContact(c) > 0) {
         count++;
       }
@@ -262,16 +276,11 @@ class DBHelper {
     return count;
   }
 
-  Future<bool> deleteContact(Contact contact) async {
+  Future<bool> deleteContact(User contact) async {
     var dbClient = await db;
-    return await dbClient
-            .rawDelete("DELETE FROM Contacts WHERE lower(address) like \'%${contact.address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}\'") >
+    return await dbClient.rawDelete(
+            "DELETE FROM Users WHERE lower(address) like \'%${contact.address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\'") >
         0;
-  }
-
-  Future<bool> setMonkeyForContact(Contact contact, String monkeyPath) async {
-    var dbClient = await db;
-    return await dbClient.rawUpdate("UPDATE contacts SET monkey_path = ? WHERE address = ?", [monkeyPath, contact.address]) > 0;
   }
 
   // Users
@@ -280,7 +289,12 @@ class DBHelper {
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users ORDER BY username');
     List<User> users = new List();
     for (int i = 0; i < list.length; i++) {
-      users.add(new User(username: list[i]["username"], address: list[i]["address"].replaceAll("xrb_", "nano_"), last_updated: list[i]["last_updated"]));
+      users.add(new User(
+          username: list[i]["username"],
+          address: list[i]["address"].replaceAll("xrb_", "nano_"),
+          last_updated: list[i]["last_updated"],
+          type: list[i]["type"],
+          nickname: list[i]["nickname"]));
     }
     return users;
   }
@@ -288,7 +302,7 @@ class DBHelper {
   Future<List<User>> getUsersWithNameLike(String pattern) async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE username LIKE \'%$pattern%\' ORDER BY LOWER(username)');
-    List<User> users = new List();
+    List<User> users = [];
     for (int i = 0; i < list.length; i++) {
       users.add(new User(username: list[i]["username"], address: list[i]["address"], last_updated: list[i]["last_updated"]));
     }
@@ -305,7 +319,32 @@ class DBHelper {
     // which is why I'm doing this
     int minned = (maxSuggestions <= list.length) ? maxSuggestions : list.length;
     for (int i = 0; i < minned; i++) {
-      users.add(new User(username: list[i]["username"], address: list[i]["address"], last_updated: list[i]["last_updated"]));
+      users.add(new User(
+          username: list[i]["username"],
+          nickname: list[i]["nickname"],
+          address: list[i]["address"],
+          type: list[i]["type"],
+          last_updated: list[i]["last_updated"]));
+    }
+    return users;
+  }
+
+  Future<List<User>> getUserContactSuggestionsWithNameLike(String pattern) async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE username LIKE \'%$pattern%\' OR nickname LIKE \'%$pattern%\' ORDER BY LOWER(username)');
+    List<User> users = [];
+    int maxSuggestions = 5;
+    int length = list.length;
+    // dart doesn't support function overloading so I can't import dart:math for the min() function
+    // which is why I'm doing this
+    int minned = (maxSuggestions <= list.length) ? maxSuggestions : list.length;
+    for (int i = 0; i < minned; i++) {
+      users.add(new User(
+          username: list[i]["username"],
+          nickname: list[i]["nickname"],
+          address: list[i]["address"],
+          type: list[i]["type"],
+          last_updated: list[i]["last_updated"]));
     }
     return users;
   }
@@ -343,16 +382,15 @@ class DBHelper {
   Future<dynamic> getUserOrContactWithAddress(String address) async {
     var dbClient = await db;
     List<Map> list;
-    // check contacts first incase the user has a contact with the same address:
-    list = await dbClient.rawQuery('SELECT * FROM Contacts WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
+    list = await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
+    // TODO: Handle multiple users with the same address
     if (list.length > 0) {
-      return Contact(id: list[0]["id"], name: list[0]["name"], address: list[0]["address"], monkeyPath: list[0]["monkey_path"]);
-    } else {
-      list = await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
-      // TODO: Handle multiple users with the same address
-      if (list.length > 0) {
-        return User(username: list[0]["username"], address: list[0]["address"]);
-      }
+      return User(
+          username: list[0]["username"],
+          address: list[0]["address"],
+          type: list[0]["type"],
+          last_updated: list[0]["last_updated"],
+          nickname: list[0]["nickname"]);
     }
     return null;
   }
@@ -361,25 +399,46 @@ class DBHelper {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE username = ?', [name]);
     if (list.length > 0) {
-      return User(username: list[0]["username"], address: list[0]["address"], last_updated: list[0]["last_updated"]);
+      return User(
+          username: list[0]["username"],
+          address: list[0]["address"],
+          nickname: list[0]["nickname"],
+          last_updated: list[0]["last_updated"],
+          blocked: list[0]["blocked"] == 1,
+          type: list[0]["type"]);
     }
     return null;
   }
 
-  Future<dynamic> getUserOrContactWithName(String name) async {
+  Future<User> getUserOrContactWithName(String name) async {
     var dbClient = await db;
-    // search through contacts first incase the user has a contact with the same name
-    List<Map> contactList = await dbClient.rawQuery('SELECT * FROM Contacts WHERE name = ?', [name]);
-    if (contactList.length > 0) {
-      return Contact(id: contactList[0]["id"], name: contactList[0]["name"], address: contactList[0]["address"]);
-    } else {
-      List<Map> userList = await dbClient.rawQuery('SELECT * FROM Users WHERE username = ?', [name]);
-      if (userList.length > 0) {
-        return User(username: userList[0]["username"], address: userList[0]["address"]);
-      }
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE username = ? OR nickname = ?', [name, name]);
+    if (list.length > 0) {
+      return User(
+          username: list[0]["username"],
+          address: list[0]["address"],
+          nickname: list[0]["nickname"],
+          last_updated: list[0]["last_updated"],
+          blocked: list[0]["blocked"] == 1,
+          type: list[0]["type"]);
     }
     return null;
   }
+
+  // Future<dynamic> getUserOrContactWithName(String name) async {
+  //   var dbClient = await db;
+  //   // search through contacts first incase the user has a contact with the same name
+  //   List<Map> contactList = await dbClient.rawQuery('SELECT * FROM Contacts WHERE name = ?', [name]);
+  //   if (contactList.length > 0) {
+  //     return Contact(id: contactList[0]["id"], name: contactList[0]["name"], address: contactList[0]["address"]);
+  //   } else {
+  //     List<Map> userList = await dbClient.rawQuery('SELECT * FROM Users WHERE username = ?', [name]);
+  //     if (userList.length > 0) {
+  //       return User(username: userList[0]["username"], address: userList[0]["address"], nickname: userList[0]["nickname"], type: userList[0]["type"]);
+  //     }
+  //   }
+  //   return null;
+  // }
 
   Future<bool> userExistsWithName(String name) async {
     var dbClient = await db;
@@ -396,7 +455,9 @@ class DBHelper {
 
   Future<int> addUser(User user) async {
     var dbClient = await db;
-    return await dbClient.rawInsert('INSERT INTO Users (username, address) values(?, ?)', [user.username, user.address.replaceAll("xrb_", "nano_")]);
+    // return await dbClient.rawInsert('INSERT INTO Users (username, address) values(?, ?)', [user.username, user.address.replaceAll("xrb_", "nano_")]);
+    return await dbClient.rawInsert('INSERT INTO Users (username, address, nickname, type, blocked) values(?, ?, ?, ?, ?)',
+        [user.username, user.address.replaceAll("xrb_", "nano_"), user.nickname, user.type, user.blocked]);
   }
 
   Future<int> addOrReplaceUser(User user) async {
@@ -420,55 +481,73 @@ class DBHelper {
   }
 
   // Blocked
-  Future<List<Blocked>> getBlocked() async {
+  Future<List<User>> getBlocked() async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Blocked ORDER BY name');
-    List<Blocked> blocked = [];
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE blocked = 1 ORDER BY nickname');
+    List<User> blocked = [];
     for (int i = 0; i < list.length; i++) {
-      blocked.add(new Blocked(username: list[i]["username"], address: list[i]["address"], name: list[i]["name"]));
+      blocked.add(new User(
+          username: list[i]["username"], address: list[i]["address"], nickname: list[i]["nickname"], type: list[i]["type"], blocked: list[i]["blocked"] == 1));
     }
     return blocked;
   }
 
-  Future<int> blockUser(Blocked blocked) async {
+  Future<bool> blockUser(User blocked) async {
     var dbClient = await db;
-    return await dbClient.rawInsert(
-        'INSERT INTO Blocked (username, address, name) values(?, ?, ?)', [blocked.username, blocked.address.replaceAll("xrb_", "nano_"), blocked.name]);
+    // return await dbClient.rawInsert(
+    //     'INSERT INTO Blocked (username, address, name) values(?, ?, ?)', [blocked.username, blocked.address.replaceAll("xrb_", "nano_"), blocked.nickname]);
+    bool username = false;
+    bool address = false;
+    bool name = false;
+    // UPDATE by username / address / nickname:
+    if (blocked.username != null) {
+      username = await dbClient.rawUpdate('UPDATE Users SET blocked = 1 WHERE lower(username) = ?', [blocked.username.toLowerCase()]) > 0;
+    }
+    if (blocked.address != null) {
+      address =
+          await dbClient.rawUpdate('UPDATE Users SET blocked = 1 WHERE lower(address) = ?', [blocked.address.replaceAll("xrb_", "nano_").toLowerCase()]) > 0;
+    }
+    if (blocked.nickname != null) {
+      address = await dbClient.rawUpdate('UPDATE Users SET blocked = 1 WHERE lower(nickname) = ?', [blocked.nickname.toLowerCase()]) > 0;
+    }
+    return username || address || name;
   }
 
-  Future<bool> unblockUser(Blocked blocked) async {
+  Future<bool> unblockUser(User blocked) async {
     var dbClient = await db;
     bool username = false;
     bool address = false;
     bool name = false;
     if (blocked.username != null) {
-      username = await dbClient.rawDelete("DELETE FROM Blocked WHERE lower(username) like \'%${blocked.username.toLowerCase()}\'") > 0;
+      username = await dbClient.rawUpdate("UPDATE Users SET blocked = 0 WHERE lower(username) like \'%${blocked.username.toLowerCase()}\'") > 0;
     }
     if (blocked.address != null) {
-      address = await dbClient.rawDelete("DELETE FROM Blocked WHERE lower(address) like \'%${blocked.address.toLowerCase()}\'") > 0;
+      address = await dbClient.rawUpdate("UPDATE Users SET blocked = 0 WHERE lower(address) like \'%${blocked.address.toLowerCase()}\'") > 0;
     }
-    if (blocked.name != null) {
-      name = await dbClient.rawDelete("DELETE FROM Blocked WHERE lower(name) like \'%${blocked.name.toLowerCase()}\'") > 0;
+    if (blocked.nickname != null) {
+      name = await dbClient.rawUpdate("UPDATE Users SET blocked = 0 WHERE lower(nickname) like \'%${blocked.nickname.toLowerCase()}\'") > 0;
     }
     return username || address || name;
   }
 
-  Future<bool> blockedExistsWithName(String name) async {
+  Future<bool> blockedExistsWithName(String nickname) async {
     var dbClient = await db;
-    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Blocked WHERE lower(name) = ?', [name.toLowerCase()]));
+    int count =
+        Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(nickname) = ? AND blocked = 1', [nickname.toLowerCase()]));
     return count > 0;
   }
 
   Future<bool> blockedExistsWithAddress(String address) async {
     var dbClient = await db;
-    int count = Sqflite.firstIntValue(
-        await dbClient.rawQuery('SELECT count(*) FROM Blocked WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\''));
+    int count = Sqflite.firstIntValue(await dbClient
+        .rawQuery('SELECT count(*) FROM Users WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND blocked = 1'));
     return count > 0;
   }
 
   Future<bool> blockedExistsWithUsername(String username) async {
     var dbClient = await db;
-    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Blocked WHERE lower(username) = ?', [username.toLowerCase()]));
+    int count =
+        Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(username) = ? AND blocked = 1', [username.toLowerCase()]));
     return count > 0;
   }
 

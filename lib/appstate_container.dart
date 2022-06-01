@@ -438,8 +438,7 @@ class StateContainerState extends State<StateContainer> {
       setMinRawReceive(minRaw);
     });
     // make sure nano API databases are up to date
-    // TODO: only call when out of date
-    checkAndCacheNapiDatabases(false);
+    checkAndCacheNapiDatabases(true);
     // restore payments from the cache
     updateRequests();
 
@@ -713,14 +712,6 @@ class StateContainerState extends State<StateContainer> {
   void updateTheme(ThemeSetting theme, {bool setIcon = true}) {
     setState(() {
       curTheme = theme.getTheme();
-      if (curTheme is NyanTheme) {
-        // TODO: make toggle-able individually later
-        // nyaniconOn = true;
-        nyanoMode = true;
-      } else {
-        // nyaniconOn = false;
-        nyanoMode = false;
-      }
     });
     if (setIcon) {
       AppIcon.setAppIcon(theme.getTheme().appIcon);

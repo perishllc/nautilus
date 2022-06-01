@@ -48,7 +48,7 @@ class BlockedList extends StatefulWidget {
 class _BlockedListState extends State<BlockedList> {
   final Logger log = sl.get<Logger>();
 
-  List<Blocked> _blocked;
+  List<User> _blocked;
   String documentsDirectory;
   @override
   void initState() {
@@ -85,7 +85,7 @@ class _BlockedListState extends State<BlockedList> {
       setState(() {
         _blocked.add(event.blocked);
         //Sort by name
-        _blocked.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+        _blocked.sort((a, b) => a.nickname.toLowerCase().compareTo(b.nickname.toLowerCase()));
       });
       // Full update which includes downloading new monKey
       _updateContacts();
@@ -103,7 +103,7 @@ class _BlockedListState extends State<BlockedList> {
       if (blocked == null) {
         return;
       }
-      for (Blocked b in blocked) {
+      for (User b in blocked) {
         if (!_blocked.contains(b) && mounted) {
           setState(() {
             _blocked.add(b);
@@ -112,7 +112,12 @@ class _BlockedListState extends State<BlockedList> {
       }
       // Re-sort list
       setState(() {
-        _blocked.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+        // _blocked.sort((a, b) => a.nickname.toLowerCase().compareTo(b.nickname.toLowerCase()));
+        _blocked.sort((a, b) {
+          String c = a.nickname ?? a.username;
+          String d = b.nickname ?? b.username;
+          return c.toLowerCase().compareTo(d.toLowerCase());
+        });
       });
     });
   }
@@ -281,14 +286,6 @@ class _BlockedListState extends State<BlockedList> {
                       padding: EdgeInsets.only(top: 15.0, bottom: 15),
                       itemCount: _blocked.length,
                       itemBuilder: (context, index) {
-                        // Some disaster recovery if monKey is in DB, but doesnt exist in filesystem
-                        // if (_blocked[index].monkeyPath != null) {
-                        //   File("$documentsDirectory/${_blocked[index].monkeyPath}").exists().then((exists) {
-                        //     if (!exists) {
-                        //       sl.get<DBHelper>().setMonkeyForContact(_blocked[index], null);
-                        //     }
-                        //   });
-                        // }
                         // Build contact
                         return buildSingleContact(context, _blocked[index]);
                       },
@@ -335,7 +332,7 @@ class _BlockedListState extends State<BlockedList> {
                   children: <Widget>[
                     AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context).addBlocked, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
-                      Sheets.showAppHeightNineSheet(context: context, widget: AddBlockedSheet());
+                      Sheets.showAppHeightEightSheet(context: context, widget: AddBlockedSheet());
                     }),
                   ],
                 ),
@@ -345,7 +342,7 @@ class _BlockedListState extends State<BlockedList> {
         ));
   }
 
-  Widget buildSingleContact(BuildContext context, Blocked blocked) {
+  Widget buildSingleContact(BuildContext context, User blocked) {
     return FlatButton(
       onPressed: () {
         BlockedDetailsSheet(blocked, documentsDirectory).mainBottomSheet(context);
@@ -390,12 +387,13 @@ class _BlockedListState extends State<BlockedList> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       // Blocked name
-                      Text("★" + blocked.name, style: AppStyles.textStyleSettingItemHeader(context)),
+                      (blocked.nickname != null) ? Text("★" + blocked.nickname, style: AppStyles.textStyleSettingItemHeader(context)) : Container(),
 
                       (blocked.username != null)
                           ? Text(
-                              "@" + blocked.username,
-                              style: AppStyles.textStyleTransactionAddress(context),
+                              blocked.getDisplayName(),
+                              style:
+                                  (blocked.nickname == null) ? AppStyles.textStyleSettingItemHeader(context) : AppStyles.textStyleTransactionAddress(context),
                             )
                           : Container(),
 

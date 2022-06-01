@@ -95,6 +95,10 @@ class AppLocalization {
     return Intl.message('Requested', desc: 'home_requested_cta', name: 'requested');
   }
 
+  String get asked {
+    return Intl.message('Asked', desc: 'home_asked_cta', name: 'asked');
+  }
+
   String get unconfirmed {
     return Intl.message('unconfirmed', desc: 'history_unconfirmed', name: 'unconfirmed');
   }
@@ -113,6 +117,14 @@ class AppLocalization {
 
   String get unfulfilled {
     return Intl.message('unfulfilled', desc: 'history_unfulfilled', name: 'unfulfilled');
+  }
+
+  String get paid {
+    return Intl.message('paid', desc: 'history_paid', name: 'paid');
+  }
+
+  String get unpaid {
+    return Intl.message('unpaid', desc: 'history_unpaid', name: 'unpaid');
   }
 
   String get failedMessage {
@@ -346,6 +358,10 @@ class AppLocalization {
 
   String get favoriteNameHint {
     return Intl.message('Enter a Nick Name', desc: 'favorite_name_hint', name: 'favoriteNameHint');
+  }
+
+  String get domainInvalid {
+    return Intl.message("Invalid Domain Name", desc: 'domain_invalid_name', name: 'domainInvalid');
   }
 
   String get favoriteInvalid {
@@ -726,6 +742,10 @@ class AppLocalization {
 
   String get pickFromList {
     return Intl.message("Pick From a List", desc: 'pick rep from list', name: 'pickFromList');
+  }
+
+  String get useNautilusRep {
+    return Intl.message("Use Nautilus Rep", desc: 'use nautilus node as rep', name: 'useNautilusRep');
   }
 
   String get votingWeight {

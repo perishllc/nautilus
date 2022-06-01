@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
+import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 
@@ -434,8 +435,43 @@ class AppChangeRepresentativeSheet {
                                   AppButton.buildAppButton(
                                     context,
                                     AppButtonType.PRIMARY,
-                                    AppLocalization.of(context).pickFromList,
+                                    AppLocalization.of(context).useNautilusRep,
                                     Dimens.BUTTON_TOP_DIMENS,
+                                    onPressed: () async {
+                                      if (!NanoAccounts.isValid(NanoAccountType.NANO, AppWallet.nautilusRepresentative)) {
+                                        return;
+                                      }
+                                      _rep = new NinjaNode(account: AppWallet.nautilusRepresentative);
+                                      // Authenticate
+                                      AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                                      bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                                      if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+                                        try {
+                                          bool authenticated = await sl
+                                              .get<BiometricUtil>()
+                                              .authenticateWithBiometrics(context, AppLocalization.of(context).changeRepAuthenticate);
+                                          if (authenticated) {
+                                            sl.get<HapticUtil>().fingerprintSucess();
+                                            EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
+                                          }
+                                        } catch (e) {
+                                          await authenticateWithPin(AppWallet.nautilusRepresentative, context);
+                                        }
+                                      } else {
+                                        // PIN Authentication
+                                        await authenticateWithPin(AppWallet.nautilusRepresentative, context);
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  AppButton.buildAppButton(
+                                    context,
+                                    AppButtonType.PRIMARY_OUTLINE,
+                                    AppLocalization.of(context).pickFromList,
+                                    Dimens.BUTTON_BOTTOM_DIMENS,
                                     disabled: StateContainer.of(context).nanoNinjaNodes == null,
                                     onPressed: () {
                                       showDialog(

@@ -28,8 +28,6 @@ import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flare_flutter/flare_actor.dart';
-// request payment package:
-import 'package:nautilus_wallet_flutter/ui/request/request_sheet.dart';
 
 class NumericalRangeFormatter extends TextInputFormatter {
   final double min;

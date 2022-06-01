@@ -8,6 +8,7 @@ import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
@@ -306,11 +307,11 @@ class _AddContactSheetState extends State<AddContactSheet> {
                     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).addFavorite, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       if (await validateForm()) {
-                        Contact newContact = Contact(name: _nameController.text.substring(1), address: widget.address == null ? _addressController.text : widget.address);
+                        User newContact = User(nickname: _nameController.text.substring(1), address: widget.address == null ? _addressController.text : widget.address);
                         await sl.get<DBHelper>().saveContact(newContact);
                         newContact.address = newContact.address.replaceAll("xrb_", "nano_");
                         EventTaxiImpl.singleton().fire(ContactAddedEvent(contact: newContact));
-                        UIUtil.showSnackbar(AppLocalization.of(context).contactAdded.replaceAll("%1", newContact.name), context);
+                        UIUtil.showSnackbar(AppLocalization.of(context).contactAdded.replaceAll("%1", newContact.nickname), context);
                         EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: newContact));
                         Navigator.of(context).pop();
                       }

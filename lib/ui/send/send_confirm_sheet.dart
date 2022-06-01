@@ -472,13 +472,11 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       }
 
       // Show complete
-      dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(widget.destination);
-      String contactName;
-      if (user != null) {
-        if (user is Contact) {
-          contactName = "★" + user.name;
-        } else if (user is User) {
-          contactName = "@" + user.username;
+      String contactName = widget.contactName;
+      if (widget.contactName == null || widget.contactName.isEmpty) {
+        User user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
+        if (user != null) {
+          contactName = user.getDisplayName();
         }
       }
 

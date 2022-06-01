@@ -24,9 +24,9 @@ class TransactionStateTag extends StatelessWidget {
       case TransactionStateOptions.UNREAD:
         return AppLocalization.of(context).unread;
       case TransactionStateOptions.FULFILLED:
-        return AppLocalization.of(context).fulfilled;
+        return AppLocalization.of(context).paid;
       case TransactionStateOptions.UNFULFILLED:
-        return AppLocalization.of(context).unfulfilled;
+        return AppLocalization.of(context).unpaid;
       case TransactionStateOptions.FAILED_MSG:
         return AppLocalization.of(context).failedMessage;
       default:

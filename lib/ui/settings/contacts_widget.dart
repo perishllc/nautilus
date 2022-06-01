@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:file_picker/file_picker.dart';
@@ -39,7 +40,7 @@ class ContactsList extends StatefulWidget {
 class _ContactsListState extends State<ContactsList> {
   final Logger log = sl.get<Logger>();
 
-  List<Contact> _contacts;
+  List<User> _contacts;
   String documentsDirectory;
   @override
   void initState() {
@@ -76,7 +77,7 @@ class _ContactsListState extends State<ContactsList> {
       setState(() {
         _contacts.add(event.contact);
         //Sort by name
-        _contacts.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+        _contacts.sort((a, b) => a.nickname.toLowerCase().compareTo(b.nickname.toLowerCase()));
       });
       // Full update which includes downloading new monKey
       _updateContacts();
@@ -94,7 +95,7 @@ class _ContactsListState extends State<ContactsList> {
       if (contacts == null) {
         return;
       }
-      for (Contact c in contacts) {
+      for (User c in contacts) {
         if (!_contacts.contains(c) && mounted) {
           setState(() {
             _contacts.add(c);
@@ -103,13 +104,13 @@ class _ContactsListState extends State<ContactsList> {
       }
       // Re-sort list
       setState(() {
-        _contacts.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+        _contacts.sort((a, b) => a.nickname.toLowerCase().compareTo(b.nickname.toLowerCase()));
       });
     });
   }
 
   Future<void> _exportContacts() async {
-    List<Contact> contacts = await sl.get<DBHelper>().getContacts();
+    List<User> contacts = await sl.get<DBHelper>().getContacts();
     if (contacts.length == 0) {
       UIUtil.showSnackbar(AppLocalization.of(context).noContactsExport, context);
       return;
@@ -139,16 +140,16 @@ class _ContactsListState extends State<ContactsList> {
       try {
         String contents = await f.readAsString();
         Iterable contactsJson = json.decode(contents);
-        List<Contact> contacts = List();
-        List<Contact> contactsToAdd = List();
+        List<User> contacts = List();
+        List<User> contactsToAdd = List();
         contactsJson.forEach((contact) {
-          contacts.add(Contact.fromJson(contact));
+          contacts.add(User.fromJson(contact));
         });
-        for (Contact contact in contacts) {
-          if (!await sl.get<DBHelper>().contactExistsWithName(contact.name) && !await sl.get<DBHelper>().contactExistsWithAddress(contact.address)) {
+        for (User contact in contacts) {
+          if (!await sl.get<DBHelper>().contactExistsWithName(contact.nickname) && !await sl.get<DBHelper>().contactExistsWithAddress(contact.address)) {
             // Contact doesnt exist, make sure name and address are valid
             if (Address(contact.address).isValid()) {
-              if (contact.name.startsWith("★") && contact.name.length <= 20) {
+              if (contact.nickname.startsWith("★") && contact.nickname.length <= 20) {
                 contactsToAdd.add(contact);
               }
             }
@@ -158,7 +159,7 @@ class _ContactsListState extends State<ContactsList> {
         int numSaved = await sl.get<DBHelper>().saveContacts(contactsToAdd);
         if (numSaved > 0) {
           _updateContacts();
-          EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: Contact(name: "", address: "")));
+          EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: User(nickname: "", address: "")));
           UIUtil.showSnackbar(AppLocalization.of(context).contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
         } else {
           UIUtil.showSnackbar(AppLocalization.of(context).noContactsImport, context);
@@ -228,35 +229,35 @@ class _ContactsListState extends State<ContactsList> {
                     Row(
                       children: <Widget>[
                         // //Import button
-                        // Container(
-                        //   height: 40,
-                        //   width: 40,
-                        //   margin: EdgeInsetsDirectional.only(end: 5),
-                        //   child: FlatButton(
-                        //       highlightColor: StateContainer.of(context).curTheme.text15,
-                        //       splashColor: StateContainer.of(context).curTheme.text15,
-                        //       onPressed: () {
-                        //         _importContacts();
-                        //       },
-                        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                        //       padding: EdgeInsets.all(8.0),
-                        //       child: Icon(AppIcons.import_icon, color: StateContainer.of(context).curTheme.text, size: 24)),
-                        // ),
-                        // //Export button
-                        // Container(
-                        //   height: 40,
-                        //   width: 40,
-                        //   margin: EdgeInsetsDirectional.only(end: 20),
-                        //   child: FlatButton(
-                        //       highlightColor: StateContainer.of(context).curTheme.text15,
-                        //       splashColor: StateContainer.of(context).curTheme.text15,
-                        //       onPressed: () {
-                        //         _exportContacts();
-                        //       },
-                        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                        //       padding: EdgeInsets.all(8.0),
-                        //       child: Icon(AppIcons.export_icon, color: StateContainer.of(context).curTheme.text, size: 24)),
-                        // ),
+                        Container(
+                          height: 40,
+                          width: 40,
+                          margin: EdgeInsetsDirectional.only(end: 5),
+                          child: FlatButton(
+                              highlightColor: StateContainer.of(context).curTheme.text15,
+                              splashColor: StateContainer.of(context).curTheme.text15,
+                              onPressed: () {
+                                _importContacts();
+                              },
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                              padding: EdgeInsets.all(8.0),
+                              child: Icon(AppIcons.import_icon, color: StateContainer.of(context).curTheme.text, size: 24)),
+                        ),
+                        //Export button
+                        Container(
+                          height: 40,
+                          width: 40,
+                          margin: EdgeInsetsDirectional.only(end: 20),
+                          child: FlatButton(
+                              highlightColor: StateContainer.of(context).curTheme.text15,
+                              splashColor: StateContainer.of(context).curTheme.text15,
+                              onPressed: () {
+                                _exportContacts();
+                              },
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                              padding: EdgeInsets.all(8.0),
+                              child: Icon(AppIcons.export_icon, color: StateContainer.of(context).curTheme.text, size: 24)),
+                        ),
                       ],
                     ),
                   ],
@@ -272,14 +273,6 @@ class _ContactsListState extends State<ContactsList> {
                       padding: EdgeInsets.only(top: 15.0, bottom: 15),
                       itemCount: _contacts.length,
                       itemBuilder: (context, index) {
-                        // Some disaster recovery if monKey is in DB, but doesnt exist in filesystem
-                        if (_contacts[index].monkeyPath != null) {
-                          File("$documentsDirectory/${_contacts[index].monkeyPath}").exists().then((exists) {
-                            if (!exists) {
-                              sl.get<DBHelper>().setMonkeyForContact(_contacts[index], null);
-                            }
-                          });
-                        }
                         // Build contact
                         return buildSingleContact(context, _contacts[index]);
                       },
@@ -336,7 +329,7 @@ class _ContactsListState extends State<ContactsList> {
         ));
   }
 
-  Widget buildSingleContact(BuildContext context, Contact contact) {
+  Widget buildSingleContact(BuildContext context, User contact) {
     return FlatButton(
       onPressed: () {
         ContactDetailsSheet(contact, documentsDirectory).mainBottomSheet(context);
@@ -381,7 +374,7 @@ class _ContactsListState extends State<ContactsList> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       //Contact name
-                      Text("★" + contact.name, style: AppStyles.textStyleSettingItemHeader(context)),
+                      Text(contact.getDisplayName(), style: AppStyles.textStyleSettingItemHeader(context)),
                       //Contact address
                       Text(
                         Address(contact.address).getShortString(),

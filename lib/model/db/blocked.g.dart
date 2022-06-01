@@ -13,7 +13,7 @@ Blocked _$UserFromJson(Map<String, dynamic> json) => Blocked(
     );
 
 Map<String, dynamic> _$BlockedToJson(Blocked instance) => <String, dynamic>{
-      'name': instance.username,
+      'username': instance.username,
       'address': instance.address,
       'name': instance.name,
     };

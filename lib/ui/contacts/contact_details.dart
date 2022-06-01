@@ -8,6 +8,7 @@ import 'package:event_taxi/event_taxi.dart';
 
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -26,7 +27,7 @@ import 'package:flare_flutter/flare_actor.dart';
 
 // Contact Details Sheet
 class ContactDetailsSheet {
-  Contact contact;
+  User contact;
   String documentsDirectory;
 
   ContactDetailsSheet(this.contact, this.documentsDirectory);
@@ -61,19 +62,13 @@ class ContactDetailsSheet {
                               AppDialogs.showConfirmDialog(
                                   context,
                                   AppLocalization.of(context).removeContact,
-                                  AppLocalization.of(context).removeContactConfirmation.replaceAll('%1', contact.name),
+                                  AppLocalization.of(context).removeContactConfirmation.replaceAll('%1', contact.getDisplayName()),
                                   CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                                 sl.get<DBHelper>().deleteContact(contact).then((deleted) {
                                   if (deleted) {
-                                    // Delete image if exists
-                                    if (contact.monkeyPath != null) {
-                                      if (File("$documentsDirectory/${contact.monkeyPath}").existsSync()) {
-                                        File("$documentsDirectory/${contact.monkeyPath}").delete();
-                                      }
-                                    }
                                     EventTaxiImpl.singleton().fire(ContactRemovedEvent(contact: contact));
                                     EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: contact));
-                                    UIUtil.showSnackbar(AppLocalization.of(context).contactRemoved.replaceAll("%1", contact.name), context);
+                                    UIUtil.showSnackbar(AppLocalization.of(context).contactRemoved.replaceAll("%1", contact.getDisplayName()), context);
                                     Navigator.of(context).pop();
                                   } else {
                                     // TODO - error for failing to delete contact
@@ -162,7 +157,7 @@ class ContactDetailsSheet {
                                 borderRadius: BorderRadius.circular(25),
                               ),
                               child: Text(
-                                "★" + contact.name,
+                                contact.getDisplayName(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
@@ -228,7 +223,7 @@ class ContactDetailsSheet {
                                   disabled: StateContainer.of(context).wallet.accountBalance == BigInt.zero, onPressed: () {
                                 Navigator.of(context).pop();
                                 Sheets.showAppHeightNineSheet(
-                                    context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, contact: contact));
+                                    context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: contact));
                               }),
                             ],
                           ),

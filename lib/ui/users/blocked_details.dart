@@ -30,7 +30,7 @@ import 'package:flare_flutter/flare_actor.dart';
 
 // Contact Details Sheet
 class BlockedDetailsSheet {
-  Blocked blocked;
+  User blocked;
   String documentsDirectory;
 
   BlockedDetailsSheet(this.blocked, this.documentsDirectory);
@@ -65,14 +65,14 @@ class BlockedDetailsSheet {
                               AppDialogs.showConfirmDialog(
                                   context,
                                   AppLocalization.of(context).removeBlocked,
-                                  AppLocalization.of(context).removeBlockedConfirmation.replaceAll('%1', blocked.name),
+                                  AppLocalization.of(context).removeBlockedConfirmation.replaceAll('%1', blocked.getDisplayName()),
                                   CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                                 sl.get<DBHelper>().unblockUser(blocked).then((deleted) {
                                   if (deleted) {
                                     // Delete image if exists
                                     EventTaxiImpl.singleton().fire(BlockedRemovedEvent(blocked: blocked));
                                     EventTaxiImpl.singleton().fire(BlockedModifiedEvent(blocked: blocked));
-                                    UIUtil.showSnackbar(AppLocalization.of(context).blockedRemoved.replaceAll("%1", blocked.name), context);
+                                    UIUtil.showSnackbar(AppLocalization.of(context).blockedRemoved.replaceAll("%1", blocked.nickname), context);
                                     Navigator.of(context).pop();
                                   } else {
                                     // TODO: - error for failing to delete contact
@@ -148,29 +148,31 @@ class BlockedDetailsSheet {
                                     ),
                                   )
                                 : SizedBox(),
-                            // Contact Name container
-                            Container(
-                              width: double.infinity,
-                              margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width * 0.105,
-                                right: MediaQuery.of(context).size.width * 0.105,
-                              ),
-                              padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
-                              decoration: BoxDecoration(
-                                color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              child: Text(
-                                "★" + blocked.name,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16.0,
-                                  color: StateContainer.of(context).curTheme.text,
-                                  fontFamily: 'NunitoSans',
-                                ),
-                              ),
-                            ),
+                            // Contact nickname container
+                            (blocked.nickname != null)
+                                ? Container(
+                                    width: double.infinity,
+                                    margin: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width * 0.105,
+                                      right: MediaQuery.of(context).size.width * 0.105,
+                                    ),
+                                    padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+                                    decoration: BoxDecoration(
+                                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Text(
+                                      "★" + blocked.nickname,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16.0,
+                                        color: StateContainer.of(context).curTheme.text,
+                                        fontFamily: 'NunitoSans',
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
                             (blocked.username != null)
                                 ? Container(
                                     width: double.infinity,
@@ -185,7 +187,7 @@ class BlockedDetailsSheet {
                                       borderRadius: BorderRadius.circular(25),
                                     ),
                                     child: Text(
-                                      "@" + blocked.username,
+                                      blocked.getDisplayName(),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,

@@ -8,6 +8,7 @@ import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/contact.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
@@ -75,7 +76,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
         UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
       } else {
         // See if this address belongs to a contact
-        Contact contact = await sl.get<DBHelper>().getContactWithAddress(address.address);
+        User contact = await sl.get<DBHelper>().getContactWithAddress(address.address);
         // If amount is present, fill it and go to SendConfirm
         BigInt amountBigInt = address.amount != null ? BigInt.tryParse(address.amount) : null;
         bool sufficientBalance = false;
@@ -91,14 +92,14 @@ class _AppPopupButtonState extends State<AppPopupButton> {
               widget: SendConfirmSheet(
                   amountRaw: address.amount,
                   destination: contact != null ? contact.address : address.address,
-                  contactName: contact != null ? contact.name : null));
+                  contactName: contact != null ? contact.getDisplayName(): null));
         } else {
           // Go to send sheet
           Sheets.showAppHeightNineSheet(
               context: context,
               widget: SendSheet(
                   localCurrency: StateContainer.of(context).curCurrency,
-                  contact: contact,
+                  user: contact,
                   address: contact != null ? contact.address : address.address,
                   quickSendAmount: amountBigInt != null ? address.amount : null));
         }

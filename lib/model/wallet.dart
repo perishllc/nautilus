@@ -12,6 +12,7 @@ import 'package:nautilus_wallet_flutter/themes.dart';
 class AppWallet {
   // the default is randomized but in case the user is offline during account creation we still need a default:
   static String defaultRepresentative = 'nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579';
+  static String nautilusRepresentative = 'nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579';
 
   bool _loading; // Whether or not app is initially loading
   bool _historyLoading; // Whether or not we have received initial account history response

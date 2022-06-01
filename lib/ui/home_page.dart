@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:isolate';
 import 'dart:math';
-import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flare_flutter/flare.dart';
 import 'package:flare_dart/math/mat2d.dart';
@@ -22,12 +22,10 @@ import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
-import 'package:nautilus_wallet_flutter/model/db/blocked.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
@@ -37,7 +35,6 @@ import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/list_model.dart';
-import 'package:nautilus_wallet_flutter/model/db/contact.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
@@ -45,13 +42,10 @@ import 'package:nautilus_wallet_flutter/network/model/response/account_history_r
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/ui/contacts/add_contact.dart';
-import 'package:nautilus_wallet_flutter/ui/request/request_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_drawer.dart';
-import 'package:nautilus_wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/transfer/transfer_manual_entry_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/users/add_blocked.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
@@ -70,17 +64,17 @@ import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:quiver/strings.dart';
+import 'package:rate_my_app/rate_my_app.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
 import 'package:substring_highlight/substring_highlight.dart';
+import 'package:in_app_review/in_app_review.dart';
 
 class AppHomePage extends StatefulWidget {
   PriceConversion priceConversion;
@@ -133,12 +127,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   TextEditingController _searchController = TextEditingController();
   bool _searchOpen = false;
   bool _noSearchResults = false;
-  double _searchRightPadding = 0;
-  // String _searchText = "";
+
+  // in app review:
+  final InAppReview _inAppReview = InAppReview.instance;
 
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
-  List<Contact> _contacts = [];
-  List<Blocked> _blocked = [];
+  List<User> _contacts = [];
+  List<User> _blocked = [];
   List<User> _users = [];
   List<TXData> _txData = [];
   List<TXData> _txRecords = [];
@@ -163,6 +158,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   ActorAnimation _sendSlideReleaseAnimation;
   double _fanimationPosition;
   bool releaseAnimation = false;
+
+  RateMyApp rateMyApp = RateMyApp(
+    preferencesPrefix: 'rateMyApp_',
+    minDays: 3,
+    minLaunches: 10,
+    remindDays: 7,
+    remindLaunches: 10,
+    googlePlayIdentifier: 'co.perish.nautiluswallet',
+    appStoreIdentifier: '1615775960',
+  );
 
   void initialize(FlutterActorArtboard actor) {
     _fanimationPosition = 0.0;
@@ -314,11 +319,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // change address to username if it exists:
     dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(senderAddress);
     if (user != null) {
-      if (user is Contact) {
-        userOrSendAddress = "★" + user.name;
-      } else if (user is User) {
-        userOrSendAddress = "@" + user.username;
-      }
+      userOrSendAddress = user.getDisplayName();
     } else {
       userOrSendAddress = senderAddress;
     }
@@ -576,11 +577,59 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       try {
         await _chooseCorrectAccountFromNotification(message.data);
-        await _processPaymentRequestNotification(message.data);
+        // await _processPaymentRequestNotification(message.data);
       } catch (e) {}
     });
     // Setup notification
     getNotificationPermissions();
+    // ask to rate the app:
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await rateMyApp.init();
+      // if (mounted && rateMyApp.shouldOpenDialog) {
+      //   rateMyApp.showRateDialog(context);
+      // }
+
+      // if (await _inAppReview.isAvailable()) {
+      //   _inAppReview.requestReview();
+      // }
+
+      rateMyApp.showRateDialog(
+        context,
+        title: 'Rate the app',
+        message: 'If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn\'t take more than a minute.',
+        rateButton: 'RATE', // The dialog "rate" button text.
+        noButton: 'NO THANKS', // The dialog "no" button text.
+        laterButton: 'MAYBE LATER', // The dialog "later" button text.
+        listener: (button) {
+          // The button click listener (useful if you want to cancel the click event).
+          switch (button) {
+            case RateMyAppDialogButton.rate:
+              _inAppReview.isAvailable().then((available) {
+                if (available) {
+                  _inAppReview.requestReview();
+                }
+              });
+              print('Clicked on "Rate".');
+              break;
+            case RateMyAppDialogButton.later:
+              print('Clicked on "Later".');
+              break;
+            case RateMyAppDialogButton.no:
+              print('Clicked on "No".');
+              break;
+          }
+
+          return true; // Return false if you want to cancel the click event.
+        },
+        ignoreNativeDialog: Platform
+            .isAndroid, // Set to false if you want to show the Apple's native app rating dialog on iOS or Google's native app rating dialog (depends on the current Platform).
+        dialogStyle: const DialogStyle(), // Custom dialog styles.
+        onDismissed: () => rateMyApp.callEvent(
+            RateMyAppEventType.laterButtonPressed), // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
+        // contentBuilder: (context, defaultContent) => content, // This one allows you to change the default dialog content.
+        // actionsBuilder: (context) => [], // This one allows you to use your own buttons.
+      );
+    });
   }
 
   void _animationStatusListener(AnimationStatus status) {
@@ -631,7 +680,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         return;
       }
       await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
-      Contact c = Contact(name: "NautilusDonations", address: "nano_37y6iq8m1zx9inwkkcgqh34kqsihzpjfwgp9jir8xpb9jrcwhkmoxpo61f4o");
+      User c = User(nickname: "NautilusDonations", address: "nano_37y6iq8m1zx9inwkkcgqh34kqsihzpjfwgp9jir8xpb9jrcwhkmoxpo61f4o");
       await sl.get<DBHelper>().saveContact(c);
     }
   }
@@ -1196,7 +1245,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 shouldRemove = false;
               }
             } else {
-              if (AppLocalization.of(context).requested.toLowerCase().contains(lowerCaseSearch)) {
+              if (AppLocalization.of(context).asked.toLowerCase().contains(lowerCaseSearch)) {
                 shouldRemove = false;
               }
             }
@@ -1357,11 +1406,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // See if a contact
       dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address);
       if (user != null) {
-        if (user is Contact) {
-          contactName = "★" + user.name;
-        } else if (user is User) {
-          contactName = "@" + user.username;
-        }
+        contactName = user.getDisplayName();
       }
       // Remove any other screens from stack
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
@@ -1373,11 +1418,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         Sheets.showAppHeightNineSheet(
             context: context,
             widget: SendSheet(
-                localCurrency: StateContainer.of(context).curCurrency,
-                contact: user is Contact ? user : null,
-                user: user is User ? user : null,
-                address: address.address,
-                quickSendAmount: amount != null ? amount : null));
+                localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: amount != null ? amount : null));
       }
     } else if (MantaWallet.parseUrl(link) != null) {
       // Manta URI handling
@@ -2257,7 +2298,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         setState(() {
           _searchOpen = false;
           _searchController.text = "";
-          // _searchRightPadding = 5;
         });
         await generateUnifiedList(fastUpdate: true);
       },
@@ -2265,7 +2305,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         setState(() {
           _searchOpen = true;
           _searchController.text = "";
-          // _searchRightPadding = 0;
         });
         await generateUnifiedList(fastUpdate: true);
       },
@@ -2705,7 +2744,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       text = AppLocalization.of(context).request;
       icon = AppIcons.call_made;
     } else {
-      text = AppLocalization.of(context).requested;
+      text = AppLocalization.of(context).asked;
       icon = AppIcons.call_received;
     }
 
@@ -2878,7 +2917,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         icon = AppIcons.call_made;
         iconColor = StateContainer.of(context).curTheme.text60;
       } else {
-        text = AppLocalization.of(context).requested;
+        text = AppLocalization.of(context).asked;
         icon = AppIcons.call_received;
         iconColor = StateContainer.of(context).curTheme.primary60;
       }
@@ -3042,36 +3081,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             if (StateContainer.of(context).nyanoMode) {
               quickSendAmount = itemAmount + "000000";
             }
-            if (user is User) {
-              // Go to send with user
-              Sheets.showAppHeightNineSheet(
-                  context: context,
-                  widget: SendSheet(
-                    localCurrency: StateContainer.of(context).curCurrency,
-                    user: user,
-                    address: address,
-                    quickSendAmount: quickSendAmount,
-                  ));
-            } else if (user is Contact) {
-              // Go to send with contact
-              Sheets.showAppHeightNineSheet(
-                  context: context,
-                  widget: SendSheet(
-                    localCurrency: StateContainer.of(context).curCurrency,
-                    contact: user,
-                    address: address,
-                    quickSendAmount: quickSendAmount,
-                  ));
-            } else {
-              // Go to send with address
-              Sheets.showAppHeightNineSheet(
-                  context: context,
-                  widget: SendSheet(
-                    localCurrency: StateContainer.of(context).curCurrency,
-                    address: address,
-                    quickSendAmount: quickSendAmount,
-                  ));
-            }
+            // Go to send with address
+            Sheets.showAppHeightNineSheet(
+                context: context,
+                widget: SendSheet(
+                  localCurrency: StateContainer.of(context).curCurrency,
+                  address: address,
+                  quickSendAmount: quickSendAmount,
+                  user: user,
+                ));
           });
         }
       },
@@ -3306,22 +3324,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       account = item.account ?? "";
     }
 
-    bool matched = false;
-    for (Contact contact in _contacts) {
-      if (contact.address == account.replaceAll("xrb_", "nano_")) {
-        displayName = "★" + contact.name;
-        matched = true;
+    // check if there's a username:
+    for (User user in _users) {
+      if (user.address == account.replaceAll("xrb_", "nano_")) {
+        displayName = user.getDisplayName();
         break;
-      }
-    }
-    // if still not matched to a contact, check if it's a username
-    if (!matched) {
-      for (User user in _users) {
-        if (user.address == account.replaceAll("xrb_", "nano_")) {
-          displayName = "@" + user.username;
-          matched = true;
-          break;
-        }
       }
     }
 
@@ -3330,7 +3337,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     TXData txDetails;
     if (item is AccountHistoryResponseItem) {
       txDetails = _txDetailsMap[item.hash];
-      if (txDetails != null) {}
     }
 
     return [displayName, account, txDetails];
@@ -3444,7 +3450,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             // _buildWelcomePaymentCard(context),
             _buildWelcomePaymentCardTwo(context),
             _buildDummyPaymentCard(
-                AppLocalization.of(context).requested, AppLocalization.of(context).exampleCardLittle, AppLocalization.of(context).examplePaymentTo, context,
+                AppLocalization.of(context).asked, AppLocalization.of(context).exampleCardLittle, AppLocalization.of(context).examplePaymentTo, context,
                 isAcknowleged: true, isRequest: true, isFulfilled: true, memo: AppLocalization.of(context).examplePaymentFulfilledMemo),
             _buildDummyPaymentCard(
                 AppLocalization.of(context).request, AppLocalization.of(context).exampleCardLot, AppLocalization.of(context).examplePaymentFrom, context,

@@ -4,8 +4,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/network/model/payment/payment_ack.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
+import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
@@ -20,6 +22,10 @@ import 'package:package_info/package_info.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:http/http.dart' as http;
+import 'package:ens_dart/ens_dart.dart';
+import 'package:web3dart/web3dart.dart';
+import 'package:web_socket_channel/io.dart';
+import 'package:convert/convert.dart';
 
 import 'package:nautilus_wallet_flutter/model/state_block.dart';
 import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
@@ -55,6 +61,14 @@ const String _FALLBACK_SERVER_ADDRESS_HTTP = "https://app.natrium.io/api";
 const String _FALLBACK_SERVER_ADDRESS_ALERTS = "https://app.natrium.io/alerts";
 
 const String _USERNAME_LEASE_ENDPOINT = "https://nano.to/lease";
+
+// UD / ENS:
+const String _UD_ENDPOINT = "https://unstoppabledomains.g.alchemy.com/domains/";
+const String _ENS_RPC_ENDPOINT = "https://mainnet.infura.io/v3/";
+const String _ENS_WSS_ENDPOINT = "wss://mainnet.infura.io/ws/v3/";
+
+Web3Client _web3Client;
+Ens ens;
 
 Map decodeJson(dynamic src) {
   return json.decode(src);
@@ -138,6 +152,15 @@ class AccountService {
       _SERVER_ADDRESS_ALERTS = _FALLBACK_SERVER_ADDRESS_ALERTS;
       fallbackConnected = true;
     });
+
+    // ENS:
+    final rpcUrl = 'https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}';
+    final wsUrl = 'wss://mainnet.infura.io/ws/v3/${Sensitive.INFURA_API_KEY}';
+
+    _web3Client = Web3Client(rpcUrl, http.Client(), socketConnector: () {
+      return IOWebSocketChannel.connect(wsUrl).cast<String>();
+    });
+    ens = Ens(client: _web3Client);
 
     try {
       var packageInfo = await PackageInfo.fromPlatform();
@@ -373,6 +396,41 @@ class AccountService {
     return decoded;
   }
 
+  Future<String> checkUnstoppableDomain(String domain) async {
+    http.Response response =
+        await http.get(Uri.parse(_UD_ENDPOINT + domain), headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${Sensitive.UD_API_KEY}'});
+
+    if (response.statusCode != 200) {
+      return null;
+    }
+    Map decoded = json.decode(response.body);
+    String address;
+
+    if (decoded != null && decoded["records"] != null && decoded["records"]["crypto.NANO.address"] != null) {
+      address = decoded["records"]["crypto.NANO.address"];
+      if (NanoAccounts.isValid(NanoAccountType.NANO, address)) {
+        return address;
+      }
+    }
+
+    return null;
+  }
+
+  Future<String> checkENSDomain(String domain) async {
+    final pubKey = await ens.withName(domain).getCoinAddress(CoinType.NANO);
+    if (pubKey == null || pubKey.isEmpty) {
+      return null;
+    } else {
+      String address = NanoAccounts.createAccount(NanoAccountType.NANO, pubKey);
+      // Validating address
+      if (NanoAccounts.isValid(NanoAccountType.NANO, address)) {
+        return address;
+      } else {
+        return null;
+      }
+    }
+  }
+
   Future<dynamic> checkUsernameAvailability(String username) async {
     http.Response response = await http.get(Uri.parse(_USERNAME_LEASE_ENDPOINT + "/" + username), headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {
@@ -386,6 +444,7 @@ class AccountService {
     return decoded;
   }
 
+  // TODO: why is this needed?
   Future<void> dummyAPICall() async {
     await http.get(Uri.parse(_SERVER_ADDRESS_HTTP), headers: {"Accept": "application/json"});
   }

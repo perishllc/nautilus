@@ -8,6 +8,7 @@ import 'package:nautilus_wallet_flutter/model/currency_mode_setting.dart';
 import 'package:nautilus_wallet_flutter/model/min_raw_setting.dart';
 import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
 import 'package:nautilus_wallet_flutter/model/nyanicon_option.dart';
+import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/blocked_widget.dart';
@@ -524,8 +525,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   Future<String> _onrampDialog() async {
-    String onramper_url =
-        "https://widget.onramper.com?apiKey=pk_prod_LRutcZGkxQPghTCCXo4naleTwJh40g9NVr6gL2vq78c0&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
+    String onramper_url = "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
     String moonpay_url = "https://buy.moonpay.com/?currencyCode=xno&colorCode=%234080D7";
     String simplex_url = "https://buy.chainbits.com";
 
