@@ -14,6 +14,7 @@ import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/db/blocked.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
@@ -46,14 +47,11 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
 
   // State variables
   bool _addressValid;
-  bool _showPasteButton;
-  bool _showNameHint;
-  bool _showAddressHint;
+  bool _pasteButtonVisible;
   bool _addressValidAndUnfocused;
-  String _addressHint = "";
-  String _nameHint = "";
-  String _nameValidationText;
+  String _addressHint;
   String _addressValidationText;
+  String _correspondingNickname;
   String _correspondingUsername;
   String _correspondingAddress;
   AddressStyle _addressStyle;
@@ -71,41 +69,32 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
     this._addressController = TextEditingController();
     // State initializationrue;
     this._addressValid = false;
-    this._showPasteButton = true;
-    this._showNameHint = true;
-    this._showAddressHint = true;
+    this._pasteButtonVisible = true;
     this._addressValidAndUnfocused = false;
-    this._nameValidationText = "";
     this._addressValidationText = "";
     _users = [];
     // Add focus listeners
-    // On name focus change
-    _nameFocusNode.addListener(() {
-      if (_nameFocusNode.hasFocus) {
-        setState(() {
-          _showNameHint = false;
-        });
-      } else {
-        setState(() {
-          _showNameHint = true;
-        });
-      }
-    });
     // On address focus change
-    _addressFocusNode.addListener(() {
+    _addressFocusNode.addListener(() async {
       if (_addressFocusNode.hasFocus) {
         setState(() {
-          _addressHint = null;
+          _addressHint = "";
           _addressValidAndUnfocused = false;
-          _showPasteButton = true;
+          _pasteButtonVisible = true;
+          _addressStyle = AddressStyle.TEXT60;
         });
         _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
         if (_addressController.text.length > 0 && !_addressController.text.startsWith("nano_")) {
-          if (_addressController.text.startsWith("@")) {
-            sl.get<DBHelper>().getUsersWithNameLike(_addressController.text.substring(1)).then((userList) {
-              setState(() {
-                _users = userList;
-              });
+          String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
+          if (_addressController.text != formattedAddress) {
+            setState(() {
+              _addressController.text = formattedAddress;
+            });
+          }
+          var userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
+          if (userList != null) {
+            setState(() {
+              _users = userList;
             });
           }
         }
@@ -116,37 +105,62 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           });
         }
       } else {
-        if (_addressController.text.length > 0) {
-          sl.get<DBHelper>().getUserOrContactWithName(_addressController.text.substring(1)).then((user) {
-            if (user == null) {
-              setState(() {
-                _addressStyle = AddressStyle.TEXT60;
-              });
-            } else {
-              setState(() {
-                _showPasteButton = false;
-                _addressStyle = AddressStyle.PRIMARY;
-              });
-            }
-          });
-        }
-
         setState(() {
-          _addressHint = "";
+          _addressHint = null;
           _users = [];
           if (Address(_addressController.text).isValid()) {
             _addressValidAndUnfocused = true;
           }
           if (_addressController.text.length == 0) {
-            _showPasteButton = true;
+            _pasteButtonVisible = true;
           }
         });
-        // if (_sendAddressController.text.trim() == "@" || _sendAddressController.text.trim() == "★") {
-        //   _sendAddressController.text = "";
-        //   setState(() {
-        //     _showContactButton = true;
-        //   });
-        // }
+        if (_addressController.text.length > 0) {
+          String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
+          String address;
+          String type;
+          var user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+          if (user != null) {
+            type = user.type;
+            if (_addressController.text != user.getDisplayName()) {
+              setState(() {
+                _addressController.text = user.getDisplayName();
+              });
+            }
+          } else {
+            // check if UD or ENS address
+            if (_addressController.text.contains(".")) {
+              // check if UD domain:
+              address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
+              if (address != null) {
+                type = UserTypes.UD;
+              } else {
+                // check if ENS domain:
+                address = await sl.get<AccountService>().checkENSDomain(formattedAddress);
+                if (address != null) {
+                  type = UserTypes.ENS;
+                }
+              }
+            }
+          }
+
+          if (type != null) {
+            setState(() {
+              _pasteButtonVisible = false;
+              _addressStyle = AddressStyle.PRIMARY;
+            });
+
+            if (address != null && user == null) {
+              // add to the db if missing:
+              User user = new User(username: formattedAddress, address: address, type: type, blocked: false);
+              await sl.get<DBHelper>().addUser(user);
+            }
+          } else {
+            setState(() {
+              _addressStyle = AddressStyle.TEXT60;
+            });
+          }
+        }
       }
     });
   }
@@ -165,17 +179,6 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
   //*******************************************************//
   getEnterAddressContainer() {
     return AppTextField(
-      // padding: !_shouldShowTextField() ? EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
-      // focusNode: _addressFocusNode,
-      // controller: _addressController,
-      // style: _addressValid ? AppStyles.textStyleAddressText90(context) : AppStyles.textStyleAddressText60(context),
-      // inputFormatters: [
-      //   LengthLimitingTextInputFormatter(65),
-      // ],
-      // textInputAction: TextInputAction.done,
-      // maxLines: null,
-      // autocorrect: false,
-      // hintText: _showAddressHint ? AppLocalization.of(context).enterUserOrAddress : "",
       topMargin: 124,
       padding: _addressValidAndUnfocused ? EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
       textAlign: TextAlign.center,
@@ -188,7 +191,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _addressHint == null ? "" : AppLocalization.of(context).enterUserOrAddress,
+      hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
       prefixButton: TextFieldButton(
           icon: AppIcons.scan,
           onPressed: () async {
@@ -209,39 +212,40 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
             }
           }),
       fadePrefixOnCondition: true,
-      prefixShowFirstCondition: _showPasteButton,
+      prefixShowFirstCondition: _pasteButtonVisible,
       suffixButton: TextFieldButton(
         icon: AppIcons.paste,
         onPressed: () async {
-          if (!_showPasteButton) {
+          if (!_pasteButtonVisible) {
             return;
           }
           String data = await UserDataUtil.getClipboardText(DataType.ADDRESS);
           if (data != null) {
             setState(() {
               _addressValid = true;
-              _showPasteButton = false;
+              _pasteButtonVisible = false;
               _addressController.text = data;
               _addressValidAndUnfocused = true;
             });
             _addressFocusNode.unfocus();
           } else {
             setState(() {
-              _showPasteButton = true;
+              _pasteButtonVisible = true;
               _addressValid = false;
             });
           }
         },
       ),
       fadeSuffixOnCondition: true,
-      suffixShowFirstCondition: _showPasteButton,
+      suffixShowFirstCondition: _pasteButtonVisible,
       style: _addressStyle == AddressStyle.TEXT60
           ? AppStyles.textStyleAddressText60(context)
           : _addressStyle == AddressStyle.TEXT90
               ? AppStyles.textStyleAddressText90(context)
               : AppStyles.textStyleAddressPrimary(context),
-      onChanged: (text) {
-        bool isUser = text.startsWith("@");
+      onChanged: (text) async {
+        bool isUser = false;
+        bool isDomain = text.contains(".");
         bool isFavorite = text.startsWith("★");
         bool isNano = text.startsWith("nano_");
 
@@ -252,32 +256,28 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
         }
 
-        // remove the @ if it's the only text there:
-        if (text == "@" || text == "★" || text == "nano_") {
-          _addressController.text = "";
-          _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
+        if (text.length > 0) {
           setState(() {
-            _showPasteButton = true;
-            isUser = false;
-            _users = [];
+            if (!_addressValidAndUnfocused) {
+              _pasteButtonVisible = true;
+            }
           });
-          return;
+        } else {
+          setState(() {
+            _pasteButtonVisible = true;
+          });
         }
-        // add the @ back in:
-        if (text.length > 0 && !isUser && !isNano && !isFavorite) {
-          // add @ to the beginning of the string:
-          _addressController.text = "@" + text;
-          _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
+
+        if (text.length > 0 && !isUser && !isNano) {
           isUser = true;
         }
 
-        if (text.length > 0 && text.startsWith("@nano_")) {
-          setState(() {
-            // remove the @ from the beginning of the string:
-            _addressController.text = text.replaceFirst("@nano_", "nano_");
-            _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
-            isUser = false;
-          });
+        if (text.length > 0 && text.startsWith("nano_")) {
+          isUser = false;
+        }
+
+        if (text.length > 0 && text.contains(".")) {
+          isUser = false;
         }
 
         // check if it's a real nano address:
@@ -287,24 +287,20 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
             _isUser = false;
             _users = [];
           });
-        } else if (isUser) {
-          setState(() {
-            _isUser = true;
-          });
-          sl.get<DBHelper>().getUserSuggestionsWithNameLike(text.substring(1)).then((matchedList) {
-            setState(() {
-              _users = matchedList;
-            });
-          });
         } else if (isFavorite) {
-          setState(() {
-            _isUser = true;
-          });
-          sl.get<DBHelper>().getContactsWithNameLike(text.substring(1)).then((matchedList) {
+          var matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          if (matchedList != null) {
             setState(() {
               _users = matchedList;
             });
-          });
+          }
+        } else if (isUser || isDomain) {
+          var matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          if (matchedList != null) {
+            setState(() {
+              _users = matchedList;
+            });
+          }
         } else {
           setState(() {
             _isUser = false;
@@ -312,33 +308,28 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           });
         }
         // Always reset the error message to be less annoying
-        setState(() {
-          _addressValidationText = "";
-        });
+        if (_addressValidationText.length > 0) {
+          setState(() {
+            _addressValidationText = "";
+          });
+        }
         if (isNano && Address(text).isValid()) {
           _addressFocusNode.unfocus();
           setState(() {
             _addressStyle = AddressStyle.TEXT90;
             _addressValidationText = "";
-            _showPasteButton = false;
+            _pasteButtonVisible = false;
           });
         } else {
           setState(() {
             _addressStyle = AddressStyle.TEXT60;
           });
-          // } else {
-          // sl.get<DBHelper>().getUserWithName(text.substring(1)).then((user) {
-          //   if (user == null) {
-          //     setState(() {
-          //       _sendAddressStyle = AddressStyle.TEXT60;
-          //     });
-          //   } else {
-          //     setState(() {
-          //       _pasteButtonVisible = false;
-          //       _sendAddressStyle = AddressStyle.PRIMARY;
-          //     });
-          //   }
-          // });
+        }
+
+        if ((isUser || isFavorite) != _isUser) {
+          setState(() {
+            _isUser = isUser || isFavorite;
+          });
         }
       },
       overrideTextFieldWidget: !_shouldShowTextField()
@@ -360,7 +351,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
   }
 
   // Build contact items for the list
-  Widget _buildUserItem(dynamic user) {
+  Widget _buildUserItem(User user) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -373,11 +364,12 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
               _addressFocusNode.unfocus();
               setState(() {
                 _isUser = true;
-                _showPasteButton = false;
+                _pasteButtonVisible = false;
                 _addressStyle = AddressStyle.PRIMARY;
+                _addressValidationText = "";
               });
             },
-            child: Text((user is User) ? user.username : user.name, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+            child: Text(user.getDisplayName(), textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(
@@ -450,58 +442,6 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                     children: <Widget>[
                       Stack(
                         children: <Widget>[
-                          // Column for Enter name + Enter name Error container
-                          Column(
-                            children: <Widget>[
-                              // Enter Name Container
-                              AppTextField(
-                                // topMargin: MediaQuery.of(context).size.height * 0.14,
-                                topMargin: 30,
-                                // padding: EdgeInsets.symmetric(horizontal: 30),
-                                focusNode: _nameFocusNode,
-                                controller: _nameController,
-                                textInputAction: widget.address != null ? TextInputAction.done : TextInputAction.next,
-                                hintText: _showNameHint ? AppLocalization.of(context).favoriteNameHint : "",
-                                keyboardType: TextInputType.text,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16.0,
-                                  color: StateContainer.of(context).curTheme.text,
-                                  fontFamily: 'NunitoSans',
-                                ),
-                                inputFormatters: [LengthLimitingTextInputFormatter(20), ContactInputFormatter()],
-                                onSubmitted: (text) {
-                                  if (widget.address == null) {
-                                    if (!Address(_addressController.text).isValid()) {
-                                      FocusScope.of(context).requestFocus(_addressFocusNode);
-                                    } else {
-                                      FocusScope.of(context).unfocus();
-                                    }
-                                  } else {
-                                    FocusScope.of(context).unfocus();
-                                  }
-                                },
-                                onChanged: (text) {
-                                  // Always reset the error message to be less annoying
-                                  setState(() {
-                                    _nameValidationText = "";
-                                  });
-                                },
-                              ),
-                              // Enter Name Error Container
-                              Container(
-                                margin: EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(_nameValidationText,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: 'NunitoSans',
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
-                            ],
-                          ),
-
                           // Column for Enter Address container + Enter Address Error container
                           Column(
                             children: <Widget>[
@@ -587,19 +527,19 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                         String formAddress = widget.address != null ? widget.address : _addressController.text;
                         // if we're given an address with corresponding username, just block:
                         if (_correspondingUsername != null) {
-                          newBlocked = User(nickname: _nameController.text.substring(1), address: formAddress, username: _correspondingUsername);
-                          sl.get<DBHelper>().blockUser(newBlocked);
+                          newBlocked = User(nickname: _correspondingNickname ?? null, address: formAddress, username: _correspondingUsername);
+                          await sl.get<DBHelper>().blockUser(newBlocked);
                         } else if (_correspondingAddress != null) {
-                          // print("Block user with address: ${_correspondingAddress} text: ${formAddress} and name: ${_nameController.text}");
-                          newBlocked = User(nickname: _nameController.text.substring(1), address: _correspondingAddress, username: formAddress.substring(1));
-                          sl.get<DBHelper>().blockUser(newBlocked);
+                          newBlocked = User(
+                              nickname: _correspondingNickname ?? null, address: _correspondingAddress, username: SendSheetHelpers.stripPrefixes(formAddress));
+                          await sl.get<DBHelper>().blockUser(newBlocked);
                         } else {
                           // just an address:
-                          newBlocked = User(nickname: _nameController.text.substring(1), address: formAddress);
-                          sl.get<DBHelper>().blockUser(newBlocked);
+                          newBlocked = User(nickname: _correspondingNickname ?? null, address: formAddress);
+                          await sl.get<DBHelper>().blockUser(newBlocked);
                         }
                         EventTaxiImpl.singleton().fire(BlockedAddedEvent(blocked: newBlocked));
-                        UIUtil.showSnackbar(AppLocalization.of(context).blockedAdded.replaceAll("%1", newBlocked.nickname), context);
+                        UIUtil.showSnackbar(AppLocalization.of(context).blockedAdded.replaceAll("%1", newBlocked.getDisplayName()), context);
                         EventTaxiImpl.singleton().fire(BlockedModifiedEvent(blocked: newBlocked));
                         Navigator.of(context).pop();
                       }
@@ -628,6 +568,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
     // Address Validations
     // Don't validate address if it came pre-filled in
     String formAddress = widget.address != null ? widget.address : _addressController.text;
+    String formattedAddress = SendSheetHelpers.stripPrefixes(formAddress);
 
     // if (widget.address == null) {
     if (formAddress.isEmpty) {
@@ -663,7 +604,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
       }
     } else {
       // we're dealing with a username:
-      bool blockedExists = await sl.get<DBHelper>().blockedExistsWithUsername(formAddress.substring(1));
+      bool blockedExists = await sl.get<DBHelper>().blockedExistsWithUsername(formattedAddress);
       if (blockedExists) {
         isValid = false;
         setState(() {
@@ -671,15 +612,20 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
         });
       } else {
         // check if there's a corresponding address:
-        User user = await sl.get<DBHelper>().getUserOrContactWithName(formAddress.substring(1));
+        User user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
         if (user != null) {
           setState(() {
-            _correspondingAddress = user.address;
+            if (user.address != null) {
+              _correspondingAddress = user.address;
+            }
+            if (user.nickname != null) {
+              _correspondingNickname = user.nickname;
+            }
           });
         } else {
           isValid = false;
           setState(() {
-            _addressValidationText = AppLocalization.of(context).usernameNotFound;
+            _addressValidationText = AppLocalization.of(context).userNotFound;
           });
         }
       }
@@ -693,21 +639,6 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
       if (isValid == false && _correspondingAddress != null) {
         setState(() {
           _correspondingAddress = null;
-        });
-      }
-    }
-    // Name Validations
-    if (_nameController.text.isEmpty) {
-      isValid = false;
-      setState(() {
-        _nameValidationText = AppLocalization.of(context).blockedNameMissing;
-      });
-    } else {
-      bool nameExists = await sl.get<DBHelper>().blockedExistsWithName(_nameController.text.substring(1));
-      if (nameExists) {
-        setState(() {
-          isValid = false;
-          _nameValidationText = AppLocalization.of(context).blockedNameExists;
         });
       }
     }

@@ -230,8 +230,8 @@ class DBHelper {
 
   Future<User> getContactWithAddress(String address) async {
     var dbClient = await db;
-    List<Map> list = await dbClient
-        .rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\'');
+    List<Map> list =
+        await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\'');
     if (list.length > 0) {
       return User(nickname: list[0]["nickname"], address: list[0]["address"], type: list[0]["type"], username: list[0]["username"]);
     }
@@ -249,38 +249,78 @@ class DBHelper {
 
   Future<bool> contactExistsWithName(String name) async {
     var dbClient = await db;
-    int count = Sqflite.firstIntValue(
-        await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(nickname) = ? AND nickname <> \'\'', [name.toLowerCase()]));
+    int count =
+        Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(nickname) = ? AND nickname <> \'\'', [name.toLowerCase()]));
     return count > 0;
   }
 
   Future<bool> contactExistsWithAddress(String address) async {
     var dbClient = await db;
-    int count = Sqflite.firstIntValue(await dbClient.rawQuery(
-        'SELECT count(*) FROM Users WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\''));
+    int count = Sqflite.firstIntValue(await dbClient
+        .rawQuery('SELECT count(*) FROM Users WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\''));
     return count > 0;
   }
 
-  Future<int> saveContact(User contact) async {
-    var dbClient = await db;
-    return await dbClient.rawInsert('INSERT INTO Users (nickname, address, username) values(?, ?, ?)', [contact.nickname, contact.address.replaceAll("xrb_", "nano_"), contact.username]);
-  }
+  // Future<int> saveContact(User contact) async {
+  //   var dbClient = await db;
+  //   return await dbClient.rawInsert('INSERT INTO Users (nickname, address, username) values(?, ?, ?)', [contact.nickname, contact.address.replaceAll("xrb_", "nano_"), contact.username]);
+  // }
+
+  // Future<bool> deleteContact(User contact) async {
+  //   var dbClient = await db;
+  //   return await dbClient.rawDelete(
+  //           "DELETE FROM Users WHERE lower(address) like \'%${contact.address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\'") >
+  //       0;
+  // }
 
   Future<int> saveContacts(List<User> contacts) async {
     int count = 0;
     for (User c in contacts) {
-      if (await saveContact(c) > 0) {
+      if (await saveContact(c)) {
         count++;
       }
     }
     return count;
   }
 
+  Future<bool> saveContact(User contact) async {
+    var dbClient = await db;
+    // return await dbClient.rawInsert(
+    //     'INSERT INTO Blocked (username, address, name) values(?, ?, ?)', [blocked.username, blocked.address.replaceAll("xrb_", "nano_"), blocked.nickname]);
+    bool username = false;
+    bool address = false;
+    bool name = false;
+    // UPDATE by username / address / nickname:
+    if (contact.nickname != null) {
+      if (contact.username != null) {
+        username =
+            await dbClient.rawUpdate("UPDATE Users SET nickname = ? WHERE lower(username) like \'%${contact.username.toLowerCase()}\'", [contact.nickname]) > 0;
+      }
+      if (contact.address != null) {
+        address =
+            await dbClient.rawUpdate("UPDATE Users SET nickname = ? WHERE lower(address) like \'%${contact.address.toLowerCase()}\'", [contact.nickname]) > 0;
+      }
+    }
+    return username || address || name;
+  }
+
   Future<bool> deleteContact(User contact) async {
     var dbClient = await db;
-    return await dbClient.rawDelete(
-            "DELETE FROM Users WHERE lower(address) like \'%${contact.address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\'") >
-        0;
+    bool username = false;
+    bool address = false;
+    bool nickname = false;
+    if (contact.nickname != null) {
+      if (contact.nickname != null) {
+        nickname = await dbClient.rawUpdate("UPDATE Users SET nickname = \'\' WHERE lower(username) like \'%${contact.username.toLowerCase()}\'") > 0;
+      }
+      if (contact.username != null) {
+        username = await dbClient.rawUpdate("UPDATE Users SET nickname = \'\' WHERE lower(username) like \'%${contact.username.toLowerCase()}\'") > 0;
+      }
+      if (contact.address != null) {
+        address = await dbClient.rawUpdate("UPDATE Users SET nickname = \'\' WHERE lower(address) like \'%${contact.address.toLowerCase()}\'") > 0;
+      }
+    }
+    return username || address || nickname;
   }
 
   // Users
@@ -498,7 +538,7 @@ class DBHelper {
     //     'INSERT INTO Blocked (username, address, name) values(?, ?, ?)', [blocked.username, blocked.address.replaceAll("xrb_", "nano_"), blocked.nickname]);
     bool username = false;
     bool address = false;
-    bool name = false;
+    bool nickname = false;
     // UPDATE by username / address / nickname:
     if (blocked.username != null) {
       username = await dbClient.rawUpdate('UPDATE Users SET blocked = 1 WHERE lower(username) = ?', [blocked.username.toLowerCase()]) > 0;
@@ -510,14 +550,14 @@ class DBHelper {
     if (blocked.nickname != null) {
       address = await dbClient.rawUpdate('UPDATE Users SET blocked = 1 WHERE lower(nickname) = ?', [blocked.nickname.toLowerCase()]) > 0;
     }
-    return username || address || name;
+    return username || address || nickname;
   }
 
   Future<bool> unblockUser(User blocked) async {
     var dbClient = await db;
     bool username = false;
     bool address = false;
-    bool name = false;
+    bool nickname = false;
     if (blocked.username != null) {
       username = await dbClient.rawUpdate("UPDATE Users SET blocked = 0 WHERE lower(username) like \'%${blocked.username.toLowerCase()}\'") > 0;
     }
@@ -525,9 +565,9 @@ class DBHelper {
       address = await dbClient.rawUpdate("UPDATE Users SET blocked = 0 WHERE lower(address) like \'%${blocked.address.toLowerCase()}\'") > 0;
     }
     if (blocked.nickname != null) {
-      name = await dbClient.rawUpdate("UPDATE Users SET blocked = 0 WHERE lower(nickname) like \'%${blocked.nickname.toLowerCase()}\'") > 0;
+      nickname = await dbClient.rawUpdate("UPDATE Users SET blocked = 0 WHERE lower(nickname) like \'%${blocked.nickname.toLowerCase()}\'") > 0;
     }
-    return username || address || name;
+    return username || address || nickname;
   }
 
   Future<bool> blockedExistsWithName(String nickname) async {

@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flare_flutter/flare_actor.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as material;
+import 'package:markdown/markdown.dart' as md;
 import 'package:rive/rive.dart';
 import 'package:lottie/lottie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppDialogs {
   static void showConfirmDialog(var context, var title, var content, var buttonText, Function onPressed, {String cancelText, Function cancelAction}) {
@@ -89,6 +97,120 @@ class AppDialogs {
         );
       },
     );
+  }
+
+  static Future<void> showChangeLog(BuildContext context) async {
+    String changeLogMarkdown = await DefaultAssetBundle.of(context).loadString("CHANGELOG.md");
+
+    await showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext ctx) => material.Dialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              backgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(AppLocalization.of(context).changeLog, textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
+                  ),
+                  Container(
+                      constraints: BoxConstraints(minHeight: 300, maxHeight: 400),
+                      child: new Scrollbar(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                                child: MarkdownBody(
+                                  data: changeLogMarkdown,
+                                  shrinkWrap: true,
+                                  selectable: false,
+                                  onTapLink: (text, url, title) async {
+                                    Uri uri = Uri.parse(url);
+                                    if (await canLaunchUrl(uri)) {
+                                      await launchUrl(uri);
+                                    }
+                                  },
+                                  styleSheet: MarkdownStyleSheet.fromTheme(ThemeData(
+                                      textTheme: TextTheme(
+                                    bodyText2: TextStyle(
+                                      fontSize: AppFontSizes.smallText(context),
+                                      fontWeight: FontWeight.w400,
+                                      color: StateContainer.of(context).curTheme.text,
+                                    ),
+                                  ))).copyWith(
+                                    h1: TextStyle(
+                                      fontSize: AppFontSizes.large(context),
+                                      color: StateContainer.of(context).curTheme.success,
+                                    ),
+                                    h2: TextStyle(
+                                      fontSize: AppFontSizes.large(context),
+                                      color: StateContainer.of(context).curTheme.success,
+                                    ),
+                                    h2Padding: EdgeInsets.only(top: 24),
+                                    h4: TextStyle(
+                                      color: StateContainer.of(context).curTheme.warning,
+                                    ),
+                                    listBullet: TextStyle(
+                                      color: StateContainer.of(context).curTheme.text,
+                                    ),
+                                    horizontalRuleDecoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(width: 3, color: StateContainer.of(context).curTheme.text),
+                                      ),
+                                    ),
+                                  ),
+                                  extensionSet: md.ExtensionSet(
+                                    md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                                    [md.EmojiSyntax(), ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      )),
+                  Container(
+                    height: 50,
+                    alignment: Alignment.center,
+                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: <Widget>[
+                      TextButton(
+                        onPressed: () async {
+                          Navigator.of(context).pop();
+                          // Go to send with address
+                          Future.delayed(Duration(milliseconds: 1000), () {
+                            Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+
+                            Sheets.showAppHeightNineSheet(
+                                context: context,
+                                widget: SendSheet(
+                                  localCurrency: StateContainer.of(context).curCurrency,
+                                  address: AppWallet.nautilusRepresentative,
+                                  quickSendAmount: "1000000000000000000000000000000",
+                                ));
+                          });
+                        },
+                        child: Text(
+                          AppLocalization.of(context).supportTheDeveloper,
+                          style: TextStyle(
+                            fontSize: AppFontSizes.medium,
+                            color: StateContainer.of(context).curTheme.primary,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text(AppLocalization.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
+                      ),
+                    ]),
+                  ),
+                ],
+              ),
+            ));
   }
 }
 

@@ -400,8 +400,8 @@ class AppLocalization {
     return Intl.message("Nick name already used!", desc: 'blocked_name_used', name: 'blockedNameExists');
   }
 
-  String get usernameNotFound {
-    return Intl.message("Username not found!", desc: 'user_not_found', name: 'usernameNotFound');
+  String get userNotFound {
+    return Intl.message("User not found!", desc: 'user_not_found', name: 'userNotFound');
   }
 
   /// -- END FAVORITE ITEMS
@@ -409,19 +409,19 @@ class AppLocalization {
   /// -- BLOCKED ITEMS
 
   String get removeBlocked {
-    return Intl.message('Remove Blocked', desc: 'blocked_remove_btn', name: 'removeBlocked');
+    return Intl.message('Unblock', desc: 'blocked_remove_btn', name: 'removeBlocked');
   }
 
   String get removeBlockedConfirmation {
-    return Intl.message('Are you sure you want to delete %1?', desc: 'blocked_remove_sure', name: 'removeBlockedConfirmation');
+    return Intl.message('Are you sure you want to unblock %1?', desc: 'blocked_remove_sure', name: 'removeBlockedConfirmation');
   }
 
   String get blockedAdded {
-    return Intl.message("%1 added to blocked.", desc: 'blocked_added', name: 'blockedAdded');
+    return Intl.message("%1 successfully blocked.", desc: 'blocked_added', name: 'blockedAdded');
   }
 
   String get blockedRemoved {
-    return Intl.message("%1 has been removed from blocked!", desc: 'blocked_removed', name: 'blockedRemoved');
+    return Intl.message("%1 has been unblocked!", desc: 'blocked_removed', name: 'blockedRemoved');
   }
 
   /// -- END BLOCKED ITEMS
@@ -766,6 +766,14 @@ class AppLocalization {
 
   String get privacyPolicy {
     return Intl.message("Privacy Policy", desc: 'settings_privacy_policy', name: 'privacyPolicy');
+  }
+
+  String get eula {
+    return Intl.message("EULA", desc: 'settings_eula', name: 'eula');
+  }
+
+  String get nodeStatus {
+    return Intl.message("Node Status", desc: 'settings_node_status', name: 'nodeStatus');
   }
 
   String get biometricsMethod {
@@ -1340,6 +1348,14 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   String get hideAccountHeader {
     return Intl.message("Hide Account?", desc: "Confirmation dialog header", name: 'hideAccountHeader');
   }
+  
+  String get edit {
+    return Intl.message("Edit", desc: "accounts_edit_slide", name: 'edit');
+  }
+
+  String get hide {
+    return Intl.message("Hide", desc: "accounts_hide_slide", name: 'hide');
+  }
 
   String get removeAccountText {
     return Intl.message("Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button.",
@@ -1551,6 +1567,43 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
 
   /// BUTTONS END
 
+  // RATE THE APP
+
+  String get rate {
+    return Intl.message("Rate", desc: 'rate_app_button', name: 'rate');
+  }
+
+  String get maybeLater {
+    return Intl.message("Maybe Later", desc: 'maybe_app_button', name: 'maybeLater');
+  }
+
+  String get noThanks {
+    return Intl.message("No Thanks", desc: 'no_thanks_app_button', name: 'noThanks');
+  }
+
+  String get rateTheApp {
+    return Intl.message("Rate the App", desc: 'rate_app_header', name: 'rateTheApp');
+  }
+
+  String get rateTheAppDescription {
+    return Intl.message("If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn\'t take more than a minute.",
+        desc: 'rate_app_desc', name: 'rateTheAppDescription');
+  }
+
+  // RATE THE APP END
+
+  // CHANGE LOG
+
+  String get changeLog {
+    return Intl.message("Change Log", desc: 'change_log_header', name: 'changeLog');
+  }
+
+  String get supportTheDeveloper {
+    return Intl.message("Support the Developer", desc: 'change_log_support', name: 'supportTheDeveloper');
+  }
+
+  // CHANGE LOG END
+
   /// Live chat
   String get connectingHeader {
     return Intl.message("Connecting",
@@ -1582,6 +1635,14 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
 
   String get discordUrl {
     return 'https://chat.perish.co';
+  }
+
+  String get discord {
+    return 'Discord';
+  }
+
+  String get nautilusNodeUrl {
+    return 'https://node.perish.co';
   }
 
   String get eulaUrl {

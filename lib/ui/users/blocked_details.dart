@@ -40,6 +40,107 @@ class BlockedDetailsSheet {
   // Timer reference so we can cancel repeated events
   Timer _addressCopiedTimer;
 
+  List<Widget> getAliases(BuildContext context, User user) {
+    var aliases = <Widget>[];
+    if (user.aliases == null) {
+      aliases = [
+        // Contact nickname container
+        (blocked.nickname != null)
+            ? Container(
+                width: double.infinity,
+                margin: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.105,
+                  right: MediaQuery.of(context).size.width * 0.105,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+                decoration: BoxDecoration(
+                  color: StateContainer.of(context).curTheme.backgroundDarkest,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Text(
+                  "★" + blocked.nickname,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16.0,
+                    color: StateContainer.of(context).curTheme.text,
+                    fontFamily: 'NunitoSans',
+                  ),
+                ),
+              )
+            : Container(),
+        (blocked.username != null)
+            ? Container(
+                width: double.infinity,
+                margin: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.105,
+                  right: MediaQuery.of(context).size.width * 0.105,
+                  top: 15.0,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+                decoration: BoxDecoration(
+                  color: StateContainer.of(context).curTheme.backgroundDarkest,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Text(
+                  blocked.getDisplayName(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16.0,
+                    color: StateContainer.of(context).curTheme.primary,
+                    fontFamily: 'NunitoSans',
+                  ),
+                ),
+              )
+            : Container(),
+      ];
+    } else {
+      for (var i = 0; i < user.aliases.length; i += 2) {
+        String displayName = user.aliases[i];
+        switch (user.aliases[i + 1]) {
+          case UserTypes.NANOTO:
+            displayName = "@" + displayName;
+            break;
+          default:
+            break;
+        }
+        aliases.add(Container(
+          width: double.infinity,
+          margin: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width * 0.105,
+            right: MediaQuery.of(context).size.width * 0.105,
+            top: 15.0,
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+          decoration: BoxDecoration(
+            color: StateContainer.of(context).curTheme.backgroundDarkest,
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: Text(
+            displayName,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16.0,
+              color: StateContainer.of(context).curTheme.primary,
+              fontFamily: 'NunitoSans',
+            ),
+          ),
+        ));
+      }
+    }
+
+    return aliases;
+  }
+
+  List<Widget> combineLists(List<Widget> list1, List<Widget> list2) {
+    List<Widget> combinedList = [];
+    combinedList.addAll(list2);
+    combinedList.addAll(list1);
+    return combinedList;
+  }
+
   mainBottomSheet(BuildContext context) {
     AppSheets.showAppHeightEightSheet(
         context: context,
@@ -72,7 +173,7 @@ class BlockedDetailsSheet {
                                     // Delete image if exists
                                     EventTaxiImpl.singleton().fire(BlockedRemovedEvent(blocked: blocked));
                                     EventTaxiImpl.singleton().fire(BlockedModifiedEvent(blocked: blocked));
-                                    UIUtil.showSnackbar(AppLocalization.of(context).blockedRemoved.replaceAll("%1", blocked.nickname), context);
+                                    UIUtil.showSnackbar(AppLocalization.of(context).blockedRemoved.replaceAll("%1", blocked.getDisplayName()), context);
                                     Navigator.of(context).pop();
                                   } else {
                                     // TODO: - error for failing to delete contact
@@ -130,74 +231,7 @@ class BlockedDetailsSheet {
                         padding: EdgeInsetsDirectional.only(top: 4, bottom: 12),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            // natricon
-                            StateContainer.of(context).natriconOn
-                                ? Expanded(
-                                    child: SvgPicture.network(
-                                      UIUtil.getNatriconURL(blocked.address, StateContainer.of(context).getNatriconNonce(blocked.address)),
-                                      key: Key(UIUtil.getNatriconURL(blocked.address, StateContainer.of(context).getNatriconNonce(blocked.address))),
-                                      placeholderBuilder: (BuildContext context) => Container(
-                                        child: FlareActor(
-                                          "legacy_assets/ntr_placeholder_animation.flr",
-                                          animation: "main",
-                                          fit: BoxFit.contain,
-                                          color: StateContainer.of(context).curTheme.primary,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : SizedBox(),
-                            // Contact nickname container
-                            (blocked.nickname != null)
-                                ? Container(
-                                    width: double.infinity,
-                                    margin: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width * 0.105,
-                                      right: MediaQuery.of(context).size.width * 0.105,
-                                    ),
-                                    padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
-                                    decoration: BoxDecoration(
-                                      color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    child: Text(
-                                      "★" + blocked.nickname,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16.0,
-                                        color: StateContainer.of(context).curTheme.text,
-                                        fontFamily: 'NunitoSans',
-                                      ),
-                                    ),
-                                  )
-                                : Container(),
-                            (blocked.username != null)
-                                ? Container(
-                                    width: double.infinity,
-                                    margin: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width * 0.105,
-                                      right: MediaQuery.of(context).size.width * 0.105,
-                                      top: 15.0,
-                                    ),
-                                    padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
-                                    decoration: BoxDecoration(
-                                      color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    child: Text(
-                                      blocked.getDisplayName(),
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16.0,
-                                        color: StateContainer.of(context).curTheme.primary,
-                                        fontFamily: 'NunitoSans',
-                                      ),
-                                    ),
-                                  )
-                                : Container(),
+                          children: combineLists(getAliases(context, blocked), [
                             // Contact Address
                             GestureDetector(
                               onTap: () {
@@ -238,7 +272,7 @@ class BlockedDetailsSheet {
                                     fontWeight: FontWeight.w600,
                                   )),
                             ),
-                          ],
+                          ]),
                         ),
                       ),
                     ),

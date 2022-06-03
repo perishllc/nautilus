@@ -58,6 +58,7 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class SettingsSheet extends StatefulWidget {
   _SettingsSheetState createState() => _SettingsSheetState();
@@ -404,63 +405,6 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: false));
           FirebaseMessaging.instance.getToken().then((fcmToken) {
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-          });
-        });
-        break;
-    }
-  }
-
-  Future<void> _natriconDialog() async {
-    switch (await showDialog<NatriconOptions>(
-        context: context,
-        barrierColor: StateContainer.of(context).curTheme.barrier,
-        builder: (BuildContext context) {
-          return AppSimpleDialog(
-            title: Text(
-              AppLocalization.of(context).natricon,
-              style: AppStyles.textStyleDialogHeader(context),
-            ),
-            children: <Widget>[
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, NatriconOptions.ON);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context).onStr,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, NatriconOptions.OFF);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context).off,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-            ],
-          );
-        })) {
-      case NatriconOptions.ON:
-        sl.get<SharedPrefsUtil>().setUseNatricon(true).then((result) {
-          setState(() {
-            StateContainer.of(context).setNatriconOn(true);
-            _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
-          });
-        });
-        break;
-      case NatriconOptions.OFF:
-        sl.get<SharedPrefsUtil>().setUseNatricon(false).then((result) {
-          setState(() {
-            StateContainer.of(context).setNatriconOn(false);
-            _curNatriconSetting = NatriconSetting(NatriconOptions.OFF);
           });
         });
         break;
@@ -1639,24 +1583,6 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       AppIcons.search,
                       _explorerDialog,
                     ),
-                    // Divider(
-                    //   height: 2,
-                    //   color: StateContainer.of(context).curTheme.text15,
-                    // ),
-                    // TODO: nyanicon svg
-                    // (StateContainer.of(context).nyanoMode)
-                    //     ? (
-                    //         // Nyanicon on-off
-                    //         AppSettings.buildSettingsListItemDoubleLine(
-                    //             context, AppLocalization.of(context).nyanicon, _curNyaniconSetting, AppIcons.natricon, _nyaniconDialog))
-                    //     : (null),
-                    // Natricon on-off
-                    // AppSettings.buildSettingsListItemDoubleLine(
-                    //     context, AppLocalization.of(context).natricon, _curNatriconSetting, AppIcons.natricon, _natriconDialog),
-                    // Divider(
-                    //   height: 2,
-                    //   color: StateContainer.of(context).curTheme.text15,
-                    // ),
                     Container(
                       margin: EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
                       child: Text(AppLocalization.of(context).manage,
@@ -1784,38 +1710,101 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       color: StateContainer.of(context).curTheme.text15,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(versionString, style: AppStyles.textStyleVersion(context)),
-                          Text(" | ", style: AppStyles.textStyleVersion(context)),
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                                  return UIUtil.showWebview(context, AppLocalization.of(context).privacyUrl);
-                                }));
-                              },
-                              child: Text(AppLocalization.of(context).privacyPolicy, style: AppStyles.textStyleVersionUnderline(context))),
-                          Text(" | ", style: AppStyles.textStyleVersion(context)),
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                                  return UIUtil.showWebview(context, AppLocalization.of(context).eulaUrl);
-                                }));
-                              },
-                              child: Text("EULA", style: AppStyles.textStyleVersionUnderline(context))),
-                          Text(" | ", style: AppStyles.textStyleVersion(context)),
-                          GestureDetector(
-                              onTap: () async {
-                                if (await canLaunch(AppLocalization.of(context).discordUrl)) {
-                                  await launch(AppLocalization.of(context).discordUrl);
-                                }
-                              },
-                              child: Text("Discord", style: AppStyles.textStyleVersionUnderline(context))),
-                        ],
-                      ),
-                    ),
+                        padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                        child: Column(
+                          children: [
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: <Widget>[
+                            //     Text(versionString, style: AppStyles.textStyleVersion(context)),
+                            //     Text(" | ", style: AppStyles.textStyleVersion(context)),
+                            //     GestureDetector(
+                            //         onTap: () {
+                            //           Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                            //             return UIUtil.showWebview(context, AppLocalization.of(context).privacyUrl);
+                            //           }));
+                            //         },
+                            //         child: Text(AppLocalization.of(context).privacyPolicy, style: AppStyles.textStyleVersionUnderline(context))),
+                            //     Text(" | ", style: AppStyles.textStyleVersion(context)),
+                            //     GestureDetector(
+                            //         onTap: () {
+                            //           Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                            //             return UIUtil.showWebview(context, AppLocalization.of(context).eulaUrl);
+                            //           }));
+                            //         },
+                            //         child: Text(AppLocalization.of(context).eula, style: AppStyles.textStyleVersionUnderline(context))),
+                            //   ],
+                            // ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: <Widget>[
+                            //     GestureDetector(
+                            //         onTap: () async {
+                            //           Uri uri = Uri.parse(AppLocalization.of(context).discordUrl);
+                            //           if (await canLaunchUrl(uri)) {
+                            //             await launchUrl(uri);
+                            //           }
+                            //         },
+                            //         child: Text(AppLocalization.of(context).discord, style: AppStyles.textStyleVersionUnderline(context))),
+                            //     Text(" | ", style: AppStyles.textStyleVersion(context)),
+                            //     GestureDetector(
+                            //         onTap: () async {
+                            //           await AppDialogs.showChangeLog(context);
+                            //         },
+                            //         child: Text(AppLocalization.of(context).changeLog, style: AppStyles.textStyleVersionUnderline(context))),
+                            //   ],
+                            // ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(versionString, style: AppStyles.textStyleVersion(context)),
+                                Text(" | ", style: AppStyles.textStyleVersion(context)),
+                                GestureDetector(
+                                    onTap: () async {
+                                      await AppDialogs.showChangeLog(context);
+                                    },
+                                    child: Text(AppLocalization.of(context).changeLog, style: AppStyles.textStyleVersionUnderline(context))),
+                                Text(" | ", style: AppStyles.textStyleVersion(context)),
+                                GestureDetector(
+                                    onTap: () async {
+                                      Uri uri = Uri.parse(AppLocalization.of(context).discordUrl);
+                                      if (await canLaunchUrl(uri)) {
+                                        await launchUrl(uri);
+                                      }
+                                    },
+                                    child: Text(AppLocalization.of(context).discord, style: AppStyles.textStyleVersionUnderline(context))),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                                        return UIUtil.showWebview(context, AppLocalization.of(context).privacyUrl);
+                                      }));
+                                    },
+                                    child: Text(AppLocalization.of(context).privacyPolicy, style: AppStyles.textStyleVersionUnderline(context))),
+                                Text(" | ", style: AppStyles.textStyleVersion(context)),
+                                GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                                        return UIUtil.showWebview(context, AppLocalization.of(context).eulaUrl);
+                                      }));
+                                    },
+                                    child: Text(AppLocalization.of(context).eula, style: AppStyles.textStyleVersionUnderline(context))),
+                                Text(" | ", style: AppStyles.textStyleVersion(context)),
+                                GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                                        return UIUtil.showWebview(context, AppLocalization.of(context).nautilusNodeUrl);
+                                      }));
+                                    },
+                                    child: Text(AppLocalization.of(context).nodeStatus, style: AppStyles.textStyleVersionUnderline(context))),
+                              ],
+                            ),
+                          ],
+                        )),
                   ].where(notNull).toList(),
                 ),
                 //List Top Gradient End

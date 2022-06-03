@@ -168,8 +168,9 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                         children: <Widget>[
                           AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).readMore, Dimens.BUTTON_TOP_DIMENS,
                               onPressed: () async {
-                            if (await canLaunch(widget.alert.link)) {
-                              await launch(widget.alert.link);
+                              Uri uri = Uri.parse(widget.alert.link);
+                            if (await canLaunchUrl(uri)) {
+                              await launchUrl(uri);
                               await sl.get<SharedPrefsUtil>().markAlertRead(widget.alert);
                               StateContainer.of(context).setAlertRead();
                             }

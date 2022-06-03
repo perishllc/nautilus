@@ -313,9 +313,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     }
 
     return Slidable(
-      secondaryActions: _getSlideActionsForAccount(context, account, setState),
-      actionExtentRatio: 0.2,
-      actionPane: SlidableStrechActionPane(),
+      closeOnScroll: true,
+      endActionPane: _getSlideActionsForAccount(context, account, setState),
       child: FlatButton(
           highlightColor: StateContainer.of(context).curTheme.text15,
           splashColor: StateContainer.of(context).curTheme.text15,
@@ -344,13 +343,11 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     // Selected indicator
-                    StateContainer.of(context).natriconOn
-                        ? Container(
-                            height: 70,
-                            width: 6,
-                            color: account.selected ? StateContainer.of(context).curTheme.primary : Colors.transparent,
-                          )
-                        : SizedBox(),
+                    // Container(
+                    //   height: 70,
+                    //   width: 6,
+                    //   color: account.selected ? StateContainer.of(context).curTheme.primary : Colors.transparent,
+                    // ),
                     // Icon, Account Name, Address and Amount
                     Expanded(
                       child: Container(
@@ -499,13 +496,21 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                       ),
                     ),
                     // Selected indicator
-                    StateContainer.of(context).natriconOn
-                        ? Container(
-                            height: 70,
-                            width: 6,
-                            color: account.selected ? StateContainer.of(context).curTheme.primary : Colors.transparent,
-                          )
-                        : SizedBox()
+                    // Container(
+                    //         height: 70,
+                    //         width: 6,
+                    //         color: account.selected ? StateContainer.of(context).curTheme.primary : Colors.transparent,
+                    //       )
+                    // handle bars:
+                    Container(
+                      width: 4,
+                      height: 30,
+                      margin: EdgeInsets.only(right: 20),
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.primary,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -514,37 +519,26 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     );
   }
 
-  List<Widget> _getSlideActionsForAccount(BuildContext context, Account account, StateSetter setState) {
-    List<Widget> _actions = List();
-    _actions.add(SlideAction(
-        child: Container(
-          margin: EdgeInsetsDirectional.only(start: 2, top: 1, bottom: 1),
-          constraints: BoxConstraints.expand(),
-          decoration: BoxDecoration(
-            color: StateContainer.of(context).curTheme.primary,
-          ),
-          child: Icon(
-            Icons.edit,
-            color: StateContainer.of(context).curTheme.backgroundDark,
-          ),
-        ),
-        onTap: () {
+  ActionPane _getSlideActionsForAccount(BuildContext context, Account account, StateSetter setState) {
+    List<Widget> _actions = [];
+
+    _actions.add(SlidableAction(
+        borderRadius: BorderRadius.circular(5.0),
+        backgroundColor: StateContainer.of(context).curTheme.primary,
+        foregroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        icon: Icons.edit,
+        label: AppLocalization.of(context).edit,
+        onPressed: (BuildContext context) {
           AccountDetailsSheet(account).mainBottomSheet(context);
         }));
     if (account.index > 0) {
-      _actions.add(SlideAction(
-          child: Container(
-            margin: EdgeInsetsDirectional.only(start: 2, top: 1, bottom: 1),
-            constraints: BoxConstraints.expand(),
-            decoration: BoxDecoration(
-              color: StateContainer.of(context).curTheme.primary,
-            ),
-            child: Icon(
-              Icons.delete,
-              color: StateContainer.of(context).curTheme.backgroundDark,
-            ),
-          ),
-          onTap: () {
+      _actions.add(SlidableAction(
+          borderRadius: BorderRadius.circular(5.0),
+          backgroundColor: StateContainer.of(context).curTheme.error60,
+          foregroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          icon: Icons.delete,
+          label: AppLocalization.of(context).hide,
+          onPressed: (BuildContext context) {
             AppDialogs.showConfirmDialog(
                 context,
                 AppLocalization.of(context).hideAccountHeader,
@@ -560,6 +554,13 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
             }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
           }));
     }
-    return _actions;
+
+    return ActionPane(
+      // motion: const DrawerMotion(),
+      motion: const StretchMotion(),
+      extentRatio: (account.index > 0) ? 0.5 : 0.25,
+      // All actions are defined in the children parameter.
+      children: _actions,
+    );
   }
 }

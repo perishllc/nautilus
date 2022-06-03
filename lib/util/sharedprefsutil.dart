@@ -56,6 +56,8 @@ class SharedPrefsUtil {
   // last time we checked for updates:
   static const String last_napi_users_check = 'fnautilus_last_napi_users_check';
   static const String last_napi_reps_check = 'fnautilus_last_napi_reps_check';
+  // store app version (for showing the change log):
+  static const String app_version = 'fnautilus_app_version';
 
   // For plain-text data
   Future<void> set(String key, value) async {
@@ -169,6 +171,14 @@ class SharedPrefsUtil {
 
   Future<bool> getFirstContactAdded() async {
     return await get(firstcontact_added, defaultValue: false);
+  }
+
+  Future<void> setAppVersion(String value) async {
+    return await set(app_version, value);
+  }
+
+  Future<String> getAppVersion() async {
+    return await get(app_version, defaultValue: "1.0.0");
   }
 
   Future<void> setUuid(String uuid) async {

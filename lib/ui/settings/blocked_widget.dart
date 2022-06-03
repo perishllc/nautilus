@@ -82,19 +82,26 @@ class _BlockedListState extends State<BlockedList> {
   void _registerBus() {
     // Contact added bus event
     _blockedAddedSub = EventTaxiImpl.singleton().registerTo<BlockedAddedEvent>().listen((event) {
-      setState(() {
-        _blocked.add(event.blocked);
-        //Sort by name
-        _blocked.sort((a, b) => a.nickname.toLowerCase().compareTo(b.nickname.toLowerCase()));
-      });
-      // Full update which includes downloading new monKey
+      // setState(() {
+      //   _blocked.add(event.blocked);
+      //   // Sort by name
+      //   _blocked.sort((a, b) {
+      //     String c = a.nickname ?? a.username;
+      //     String d = b.nickname ?? b.username;
+      //     return c.toLowerCase().compareTo(d.toLowerCase());
+      //   });
+      // });
+      // Full update:
       _updateContacts();
     });
     // Contact removed bus event
     _blockedRemovedSub = EventTaxiImpl.singleton().registerTo<BlockedRemovedEvent>().listen((event) {
-      setState(() {
-        _blocked.remove(event.blocked);
-      });
+      // setState(() {
+      //   _blocked.remove(event.blocked);
+      // });
+
+      // Full update:
+      _updateContacts();
     });
   }
 
@@ -103,16 +110,82 @@ class _BlockedListState extends State<BlockedList> {
       if (blocked == null) {
         return;
       }
+
+      // calculate diff:
+      List<User> newState = [];
+
+      var aliasMap = Map<String, List<String>>();
+      List<String> addressesToRemove = [];
+
+      // search for duplicate address entries:
+      for (User user in blocked) {
+        if (user.address == null || user.address.isEmpty) {
+          continue;
+        }
+        if (aliasMap.containsKey(user.address)) {
+          // this entry is a duplicate, don't add it to the list:
+          if (!addressesToRemove.contains(user.address)) {
+            addressesToRemove.add(user.address);
+          }
+        } else {
+          // Create a new entry
+          aliasMap[user.address] = [];
+        }
+        // Add the aliases to the existing entry
+        if (user.nickname != null && user.nickname.isNotEmpty) {
+          aliasMap[user.address].addAll([user.nickname, user.type]);
+        }
+        if (user.username != null && user.username.isNotEmpty) {
+          aliasMap[user.address].addAll([user.username, user.type]);
+        }
+      }
+
+      // add non-duplicate entries to the list as normal:
       for (User b in blocked) {
+        if (addressesToRemove.contains(b.address)) {
+          // this entry is a duplicate, don't add it to the list:
+          continue;
+        }
         if (!_blocked.contains(b) && mounted) {
+          newState.add(b);
+        }
+      }
+
+      // construct the list of users with multiple usernames:
+      List<User> multiUsers = [];
+      for (String address in aliasMap.keys) {
+        if (!addressesToRemove.contains(address)) {
+          // we only want the flagged users
+          continue;
+        }
+        var aliases = aliasMap[address];
+        multiUsers.add(User(address: address, username: aliases[0], type: aliases[1], aliases: aliases));
+      }
+
+      // add them to the list:
+      for (User user in multiUsers) {
+        if (!_blocked.contains(user) && mounted) {
+          newState.add(user);
+        }
+      }
+
+      // remove from blocked anything that is not in the newState list:
+      setState(() {
+        _blocked.removeWhere((e) => !newState.contains(e));
+      });
+      
+      // add anything new:
+      for (User user in newState) {
+        if (!_blocked.contains(user)) {
+          // add to blocked
           setState(() {
-            _blocked.add(b);
+            _blocked.add(user);
           });
         }
       }
+
       // Re-sort list
       setState(() {
-        // _blocked.sort((a, b) => a.nickname.toLowerCase().compareTo(b.nickname.toLowerCase()));
         _blocked.sort((a, b) {
           String c = a.nickname ?? a.username;
           String d = b.nickname ?? b.username;
@@ -342,6 +415,56 @@ class _BlockedListState extends State<BlockedList> {
         ));
   }
 
+  List<Widget> buildItemTexts(User user) {
+    if (user.aliases == null) {
+      return [
+        // Blocked name
+        (user.nickname != null) ? Text("★" + user.nickname, style: AppStyles.textStyleSettingItemHeader(context)) : Container(),
+
+        (user.username != null)
+            ? Text(
+                user.getDisplayName(),
+                style: (user.nickname == null) ? AppStyles.textStyleSettingItemHeader(context) : AppStyles.textStyleTransactionAddress(context),
+              )
+            : Container(),
+
+        // Blocked address
+        (user.address != null)
+            ? Text(
+                Address(user.address).getShortString(),
+                style: AppStyles.textStyleTransactionAddress(context),
+              )
+            : Container(),
+      ];
+    } else {
+      List<Widget> entries = [
+        Text(
+          Address(user.address).getShortString(),
+          style: AppStyles.textStyleTransactionAddress(context),
+        )
+      ];
+
+      for (var i = 0; i < user.aliases.length; i += 2) {
+        String displayName = user.aliases[i];
+        switch (user.aliases[i + 1]) {
+          case UserTypes.NANOTO:
+            displayName = "@" + displayName;
+            break;
+          default:
+            break;
+        }
+        entries.add(
+          Text(
+            displayName,
+            style: AppStyles.textStyleSettingItemHeader(context),
+          ),
+        );
+      }
+
+      return entries;
+    }
+  }
+
   Widget buildSingleContact(BuildContext context, User blocked) {
     return FlatButton(
       onPressed: () {
@@ -380,31 +503,12 @@ class _BlockedListState extends State<BlockedList> {
               // Contact info
               Expanded(
                 child: Container(
-                  height: 60,
+                  // height: 60,
                   margin: EdgeInsetsDirectional.only(start: StateContainer.of(context).natriconOn ? 2.0 : 20.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      // Blocked name
-                      (blocked.nickname != null) ? Text("★" + blocked.nickname, style: AppStyles.textStyleSettingItemHeader(context)) : Container(),
-
-                      (blocked.username != null)
-                          ? Text(
-                              blocked.getDisplayName(),
-                              style:
-                                  (blocked.nickname == null) ? AppStyles.textStyleSettingItemHeader(context) : AppStyles.textStyleTransactionAddress(context),
-                            )
-                          : Container(),
-
-                      // Blocked address
-                      (blocked.address != null)
-                          ? Text(
-                              Address(blocked.address).getShortString(),
-                              style: AppStyles.textStyleTransactionAddress(context),
-                            )
-                          : Container(),
-                    ],
+                    children: buildItemTexts(blocked),
                   ),
                 ),
               ),

@@ -76,8 +76,12 @@ class _ContactsListState extends State<ContactsList> {
     _contactAddedSub = EventTaxiImpl.singleton().registerTo<ContactAddedEvent>().listen((event) {
       setState(() {
         _contacts.add(event.contact);
-        //Sort by name
-        _contacts.sort((a, b) => a.nickname.toLowerCase().compareTo(b.nickname.toLowerCase()));
+        // Sort by name
+        _contacts.sort((a, b) {
+          String c = a.nickname ?? a.username;
+          String d = b.nickname ?? b.username;
+          return c.toLowerCase().compareTo(d.toLowerCase());
+        });
       });
       // Full update which includes downloading new monKey
       _updateContacts();
@@ -104,7 +108,11 @@ class _ContactsListState extends State<ContactsList> {
       }
       // Re-sort list
       setState(() {
-        _contacts.sort((a, b) => a.nickname.toLowerCase().compareTo(b.nickname.toLowerCase()));
+        _contacts.sort((a, b) {
+          String c = a.nickname ?? a.username;
+          String d = b.nickname ?? b.username;
+          return c.toLowerCase().compareTo(d.toLowerCase());
+        });
       });
     });
   }
@@ -319,7 +327,7 @@ class _ContactsListState extends State<ContactsList> {
                   children: <Widget>[
                     AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context).addFavorite, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
-                      Sheets.showAppHeightNineSheet(context: context, widget: AddContactSheet());
+                      Sheets.showAppHeightEightSheet(context: context, widget: AddContactSheet());
                     }),
                   ],
                 ),

@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:manta_dart/manta_wallet.dart';
@@ -23,6 +24,7 @@ import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
+import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
@@ -71,10 +73,13 @@ import 'package:quiver/strings.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
 import 'package:substring_highlight/substring_highlight.dart';
-import 'package:in_app_review/in_app_review.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter/material.dart' as material;
+import 'package:markdown/markdown.dart' as md;
 
 class AppHomePage extends StatefulWidget {
   PriceConversion priceConversion;
@@ -128,9 +133,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   bool _searchOpen = false;
   bool _noSearchResults = false;
 
-  // in app review:
-  final InAppReview _inAppReview = InAppReview.instance;
-
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
   List<User> _contacts = [];
   List<User> _blocked = [];
@@ -142,8 +144,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   PriceConversion _priceConversion;
 
   bool _isRefreshing = false;
-
-  bool _isPaymentsRefreshing = false;
   bool _lockDisabled = false; // whether we should avoid locking the app
   bool _lockTriggered = false;
 
@@ -162,9 +162,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   RateMyApp rateMyApp = RateMyApp(
     preferencesPrefix: 'rateMyApp_',
     minDays: 3,
-    minLaunches: 10,
+    minLaunches: 5,
     remindDays: 7,
-    remindLaunches: 10,
+    remindLaunches: 5,
     googlePlayIdentifier: 'co.perish.nautiluswallet',
     appStoreIdentifier: '1615775960',
   );
@@ -260,54 +260,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     } catch (e) {
       sl.get<SharedPrefsUtil>().setNotificationsOn(false);
-    }
-  }
-
-  Future<void> _autoImportDialog(String seed) async {
-    switch (await showDialog<bool>(
-        context: context,
-        barrierColor: StateContainer.of(context).curTheme.barrier,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(
-              AppLocalization.of(context).autoImport,
-              style: AppStyles.textStyleDialogHeader(context),
-            ),
-            content: /*AppLocalization.of(context).importMessage*/ Text(
-                "You appear to have a wallet seed in your clipboard, would you like to search it for funds to import to this wallet?"),
-            actions: <Widget>[
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, false);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context).no,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context).yes,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-            ],
-          );
-        })) {
-      case true:
-        AppTransferOverviewSheet().mainBottomSheet(context, quickSeed: seed);
-        break;
-      case false:
-        break;
     }
   }
 
@@ -582,53 +534,49 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     });
     // Setup notification
     getNotificationPermissions();
+
     // ask to rate the app:
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await rateMyApp.init();
-      // if (mounted && rateMyApp.shouldOpenDialog) {
-      //   rateMyApp.showRateDialog(context);
-      // }
+      if (mounted && rateMyApp.shouldOpenDialog) {
+        rateMyApp.showRateDialog(
+          context,
+          title: AppLocalization.of(context).rateTheApp,
+          message: AppLocalization.of(context).rateTheAppDescription,
+          rateButton: AppLocalization.of(context).rate,
+          noButton: AppLocalization.of(context).noThanks,
+          laterButton: AppLocalization.of(context).maybeLater,
+          listener: (button) {
+            // The button click listener (useful if you want to cancel the click event).
+            switch (button) {
+              case RateMyAppDialogButton.rate:
+                break;
+              case RateMyAppDialogButton.later:
+                break;
+              case RateMyAppDialogButton.no:
+                break;
+            }
+            return true; // Return false if you want to cancel the click event.
+          },
+          ignoreNativeDialog: Platform.isAndroid,
+          dialogStyle: const DialogStyle(), // Custom dialog styles.
+          // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
+          onDismissed: () => rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed),
+          // This one allows you to change the default dialog content.
+          // contentBuilder: (context, defaultContent) => content,
+          // This one allows you to use your own buttons.
+          // actionsBuilder: (context) => [],
+        );
+      }
 
-      // if (await _inAppReview.isAvailable()) {
-      //   _inAppReview.requestReview();
-      // }
-
-      rateMyApp.showRateDialog(
-        context,
-        title: 'Rate the app',
-        message: 'If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn\'t take more than a minute.',
-        rateButton: 'RATE', // The dialog "rate" button text.
-        noButton: 'NO THANKS', // The dialog "no" button text.
-        laterButton: 'MAYBE LATER', // The dialog "later" button text.
-        listener: (button) {
-          // The button click listener (useful if you want to cancel the click event).
-          switch (button) {
-            case RateMyAppDialogButton.rate:
-              _inAppReview.isAvailable().then((available) {
-                if (available) {
-                  _inAppReview.requestReview();
-                }
-              });
-              print('Clicked on "Rate".');
-              break;
-            case RateMyAppDialogButton.later:
-              print('Clicked on "Later".');
-              break;
-            case RateMyAppDialogButton.no:
-              print('Clicked on "No".');
-              break;
-          }
-
-          return true; // Return false if you want to cancel the click event.
-        },
-        ignoreNativeDialog: Platform
-            .isAndroid, // Set to false if you want to show the Apple's native app rating dialog on iOS or Google's native app rating dialog (depends on the current Platform).
-        dialogStyle: const DialogStyle(), // Custom dialog styles.
-        onDismissed: () => rateMyApp.callEvent(
-            RateMyAppEventType.laterButtonPressed), // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
-        // contentBuilder: (context, defaultContent) => content, // This one allows you to change the default dialog content.
-        // actionsBuilder: (context) => [], // This one allows you to use your own buttons.
-      );
+      // show changelog?
+      PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      String runningVersion = packageInfo.version;
+      String lastVersion = await sl.get<SharedPrefsUtil>().getAppVersion();
+      if (runningVersion != lastVersion) {
+        await sl.get<SharedPrefsUtil>().setAppVersion(runningVersion);
+        await AppDialogs.showChangeLog(context);
+      }
     });
   }
 
@@ -943,6 +891,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           StateContainer.of(context).giftedWallet = false;
           handleBranchGift();
         }
+        // showChangeLog();
         // handle pending background events:
         if (!StateContainer.of(context).wallet.loading && !_lockTriggered) {
           handlePendingBackgroundMessages();
@@ -3783,7 +3732,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                               child: FlatButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
-                                  Sheets.showAppHeightNineSheet(context: context, widget: AddContactSheet(address: addressToCopy));
+                                  Sheets.showAppHeightEightSheet(context: context, widget: AddContactSheet(address: addressToCopy));
                                 },
                                 splashColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
