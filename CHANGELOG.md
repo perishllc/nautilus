@@ -1,8 +1,4 @@
-# v0.3.2 - [2022-06-??]
-
-#### Added
-- ??
-
+# v0.3.2 - [2022-06-07] - hotfix
 #### Changed
 - Accounts sheet colors swapped to match the home page slide buttons
 #### Fixed
@@ -10,6 +6,7 @@
   - Fixed rendering bug causing the home page to re-render unnecessarily
 - Accounts sheet visual bug when deleting a row / editing an account name
 - unpaid / paid transaction state tags were not being properly set
+- bug related to upgrading from a previous version
 
 ## v0.3.1 - [2022-06-06]
 
