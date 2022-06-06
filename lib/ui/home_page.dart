@@ -623,7 +623,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   Future<void> _addSampleContact() async {
     bool contactAdded = await sl.get<SharedPrefsUtil>().getFirstContactAdded();
     if (!contactAdded) {
-      bool addressExists = await sl.get<DBHelper>().contactExistsWithAddress("nano_37y6iq8m1zx9inwkkcgqh34kqsihzpjfwgp9jir8xpb9jrcwhkmoxpo61f4o");
+      bool addressExists = await sl.get<DBHelper>().contactExistsWithAddress("nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579");
       if (addressExists) {
         return;
       }
@@ -632,7 +632,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         return;
       }
       await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
-      User c = User(nickname: "NautilusDonations", address: "nano_37y6iq8m1zx9inwkkcgqh34kqsihzpjfwgp9jir8xpb9jrcwhkmoxpo61f4o");
+      User c = User(nickname: "NautilusDonations", address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579");
       await sl.get<DBHelper>().saveContact(c);
     }
   }
@@ -949,7 +949,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     await StateContainer.of(context).updateSolids();
     _updateTXData();
     _updateTXDetailsMap(StateContainer.of(context).wallet.address);
-    // await generateUnifiedList();
+    await generateUnifiedList(fastUpdate: false);
     // setState(() {});
     // Hide refresh indicator after 2.5 seconds
     Future.delayed(new Duration(milliseconds: 2500), () {
@@ -1310,27 +1310,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         _unifiedListMap[StateContainer.of(context).wallet.address].insertAt(dynamicItem, index, instant: fastUpdate);
       });
     });
-
-    // for (int i = 0; i < unifiedList.length; i++) {
-    //   var dynamicItem = unifiedList[i];
-    //   if (dynamicItem == null) {
-    //     throw Exception("dynamicItem is null");
-    //   }
-    //   if (!_unifiedListMap[StateContainer.of(context).wallet.address].items.contains(dynamicItem)) {
-    //     // int index = max(min(i, _unifiedListMap[StateContainer.of(context).wallet.address].items.length), 0);
-    //     int index = i;
-    //     if (i > _unifiedListMap[StateContainer.of(context).wallet.address].items.length) {
-    //       index = _unifiedListMap[StateContainer.of(context).wallet.address].items.length;
-    //     }
-    //     if (i < 0) {
-    //       i = 0;
-    //     }
-    //     print("inserting at index: $i : $index");
-    //     setState(() {
-    //       _unifiedListMap[StateContainer.of(context).wallet.address].insertAt(unifiedList[i], index, instant: fastUpdate);
-    //     });
-    //   }
-    // }
 
     // ready to be rendered:
     if (StateContainer.of(context).wallet.unifiedLoading) {
@@ -3161,9 +3140,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         }
         if (txDetails.is_request) {
           if (txDetails.is_fulfilled) {
-            transactionState = TransactionStateOptions.FULFILLED;
+            transactionState = TransactionStateOptions.PAID;
           } else {
-            transactionState = TransactionStateOptions.UNFULFILLED;
+            transactionState = TransactionStateOptions.UNPAID;
           }
         }
         if (!txDetails.is_acknowledged) {
@@ -3592,8 +3571,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           );
         });
       }
-      // TODO: move to a better location for performance:
-      generateUnifiedList(fastUpdate: true);
+
+      if (StateContainer.of(context).wallet.unifiedLoading ||
+          (_unifiedListMap[StateContainer.of(context).wallet.address] != null && _unifiedListMap[StateContainer.of(context).wallet.address].length == 0)) {
+        generateUnifiedList(fastUpdate: true);
+      }
     }
 
     if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet.loading || StateContainer.of(context).wallet.unifiedLoading) {

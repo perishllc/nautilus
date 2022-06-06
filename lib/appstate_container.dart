@@ -266,13 +266,13 @@ class StateContainerState extends State<StateContainer> {
       // check for duplicates and remove:
       Set uuids = Set();
       List<int> idsToRemove = [];
-      for (var req in solids) {
-        if (!uuids.contains(req.uuid)) {
-          uuids.add(req.uuid);
+      for (var solid in solids) {
+        if (!uuids.contains(solid.uuid)) {
+          uuids.add(solid.uuid);
         } else {
           log.d("detected duplicate TXData! removing...");
-          idsToRemove.add(req.id);
-          await sl.get<DBHelper>().deleteTXDataByID(req.id);
+          idsToRemove.add(solid.id);
+          await sl.get<DBHelper>().deleteTXDataByID(solid.id);
         }
       }
       for (var id in idsToRemove) {
@@ -377,17 +377,6 @@ class StateContainerState extends State<StateContainer> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       flutterJs.evaluate(await rootBundle.loadString("assets/nano-lib.js"));
       print("loaded nano JS lib");
-
-      // sanity check:
-      // String senderPrivateKey = "B769C123E31D9B07F46FDD7AA9D8F7EC3C11C82F2E44A8A8FD5BEB63DDCED0D1";
-      // String senderAddress = "nano_3gfgcm34otkdzarycr9pbxoq4fy7hnk3mcdsnpsmpaafpnu58itiq8zcc4kj";
-      // String message = "my message here 123456";
-      // String recipientAddress = "nano_343siwsnfs4s4es678x6ts9ocqdg75kkafm4bjktsn8ockcpnt1qdb4xdw8d";
-      // String recipientPrivateKey = "768A79E483BC6CCCDE87992BEDA64AB8AADE4A36BD39570CE2CD96B2A71C0C87";
-      // String encrypted = await encryptMessage(message, recipientAddress, senderPrivateKey);
-      // print("encrypted: ${encrypted}");
-      // String decrypted = await decryptMessage(encrypted, senderAddress, recipientPrivateKey);
-      // print("decrypted: ${decrypted}");
     });
     // executeAfterBuild();
 

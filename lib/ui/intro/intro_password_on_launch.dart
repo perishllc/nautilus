@@ -32,9 +32,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
         builder: (context, constraints) => SafeArea(
-          minimum: EdgeInsets.only(
-              bottom: MediaQuery.of(context).size.height * 0.035,
-              top: MediaQuery.of(context).size.height * 0.075),
+          minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
               //A widget that holds the header, the paragraph and Back Button
@@ -46,25 +44,18 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                       children: <Widget>[
                         // Back Button
                         Container(
-                          margin: EdgeInsetsDirectional.only(
-                              start: smallScreen(context) ? 15 : 20),
+                          margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
                           height: 50,
                           width: 50,
                           child: FlatButton(
-                              highlightColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              splashColor:
-                                  StateContainer.of(context).curTheme.text15,
+                              highlightColor: StateContainer.of(context).curTheme.text15,
+                              splashColor: StateContainer.of(context).curTheme.text15,
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                               padding: EdgeInsets.all(0.0),
-                              child: Icon(AppIcons.back,
-                                  color:
-                                      StateContainer.of(context).curTheme.text,
-                                  size: 24)),
+                              child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                       ],
                     ),
@@ -85,10 +76,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                     ),
                     // The paragraph
                     Container(
-                      margin: EdgeInsetsDirectional.only(
-                          start: smallScreen(context) ? 30 : 40,
-                          end: smallScreen(context) ? 30 : 40,
-                          top: 16.0),
+                      margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                       child: AutoSizeText(
                         AppLocalization.of(context).createPasswordFirstParagraph,
                         style: AppStyles.textStyleParagraph(context),
@@ -97,10 +85,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsetsDirectional.only(
-                          start: smallScreen(context) ? 30 : 40,
-                          end: smallScreen(context) ? 30 : 40,
-                          top: 8),
+                      margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 8),
                       child: AutoSizeText(
                         AppLocalization.of(context).createPasswordSecondParagraph,
                         style: AppStyles.textStyleParagraphPrimary(context),
@@ -118,31 +103,36 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                   Row(
                     children: <Widget>[
                       // Skip Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY,
-                          AppLocalization.of(context).noSkipButton, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).noSkipButton, Dimens.BUTTON_TOP_DIMENS,
+                          onPressed: () async {
                         if (widget.seed != null) {
-                            await sl.get<Vault>().setSeed(widget.seed);
-                            await sl.get<DBHelper>().dropAccounts();
-                            await NanoUtil().loginAccount(widget.seed, context);
+                          await sl.get<Vault>().setSeed(widget.seed);
+                          await sl.get<DBHelper>().dropAccounts();
+                          await NanoUtil().loginAccount(widget.seed, context);
+                          try {
                             StateContainer.of(context).requestUpdate();
-                            String pin = await Navigator.of(context).push(
-                                MaterialPageRoute(builder:
-                                    (BuildContext context) {
-                              return PinScreen(
-                                  PinOverlayType.NEW_PIN,
-                                  );
-                            }));
-                            if (pin != null && pin.length > 5) {
-                              _pinEnteredCallback(pin);
-                            }
+                          } catch (error) {
+                            print(error);
+                          }
+                          String pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                            return PinScreen(
+                              PinOverlayType.NEW_PIN,
+                            );
+                          }));
+                          if (pin != null && pin.length > 5) {
+                            _pinEnteredCallback(pin);
+                          }
                         } else {
                           sl.get<Vault>().setSeed(NanoSeeds.generateSeed()).then((result) {
                             // Update wallet
                             StateContainer.of(context).getSeed().then((seed) {
                               NanoUtil().loginAccount(seed, context).then((_) {
-                                StateContainer.of(context).requestUpdate();
-                                Navigator.of(context)
-                                    .pushNamed('/intro_backup_safety');
+                                try {
+                                  StateContainer.of(context).requestUpdate();
+                                } catch (error) {
+                                  print(error);
+                                }
+                                Navigator.of(context).pushNamed('/intro_backup_safety');
                               });
                             });
                           });
@@ -153,13 +143,9 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                   Row(
                     children: <Widget>[
                       // Yes BUTTON
-                      AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context).yesButton,
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                        Navigator.of(context)
-                                .pushNamed('/intro_password', arguments: widget.seed);
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).yesButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () {
+                        Navigator.of(context).pushNamed('/intro_password', arguments: widget.seed);
                       }),
                     ],
                   ),
@@ -177,7 +163,6 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
     PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
     StateContainer.of(context).requestSubscribe();
     // Update wallet
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
+    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
   }
 }

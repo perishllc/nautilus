@@ -1,4 +1,17 @@
-# v0.3.1 - [2022-06-06]
+# v0.3.2 - [2022-06-??]
+
+#### Added
+- ??
+
+#### Changed
+- Accounts sheet colors swapped to match the home page slide buttons
+#### Fixed
+- Fairly significant performance improvements to the home page
+  - Fixed rendering bug causing the home page to re-render unnecessarily
+- Accounts sheet visual bug when deleting a row / editing an account name
+- unpaid / paid transaction state tags were not being properly set
+
+## v0.3.1 - [2022-06-06]
 
 #### Added
 - Change Log (You're reading it!)
@@ -63,3 +76,5 @@
 - work on null safety ports of dependencies
 - see how hard it will be to add windows store / desktop support w/ flutter 3.0
 - update the welcome screen / example transactions and requests
+- NFC support
+- change text for receive minimum setting to use nano options in nano mode

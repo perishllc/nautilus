@@ -171,7 +171,11 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                       sl.get<DBHelper>().dropAccounts().then((_) {
                         StateContainer.of(context).getSeed().then((seed) {
                           NanoUtil().loginAccount(seed, context).then((_) {
-                            StateContainer.of(context).requestUpdate();
+                            try {
+                              StateContainer.of(context).requestUpdate();
+                            } catch (error) {
+                              print(error);
+                            }
                             Navigator.of(context).pushNamed('/intro_backup_confirm');
                           });
                         });

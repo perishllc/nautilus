@@ -523,19 +523,23 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     List<Widget> _actions = [];
 
     _actions.add(SlidableAction(
+        autoClose: false,
         borderRadius: BorderRadius.circular(5.0),
-        backgroundColor: StateContainer.of(context).curTheme.primary,
-        foregroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        foregroundColor: StateContainer.of(context).curTheme.primary,
         icon: Icons.edit,
         label: AppLocalization.of(context).edit,
-        onPressed: (BuildContext context) {
+        onPressed: (BuildContext context) async {
+          await Future.delayed(Duration(milliseconds: 250));
           AccountDetailsSheet(account).mainBottomSheet(context);
+          await Slidable.of(context).close();
         }));
     if (account.index > 0) {
       _actions.add(SlidableAction(
+          autoClose: false,
           borderRadius: BorderRadius.circular(5.0),
-          backgroundColor: StateContainer.of(context).curTheme.error60,
-          foregroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          foregroundColor: StateContainer.of(context).curTheme.error60,
           icon: Icons.delete,
           label: AppLocalization.of(context).hide,
           onPressed: (BuildContext context) {
@@ -543,14 +547,15 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                 context,
                 AppLocalization.of(context).hideAccountHeader,
                 AppLocalization.of(context).removeAccountText.replaceAll("%1", AppLocalization.of(context).addAccount),
-                CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
+              await Future.delayed(Duration(milliseconds: 250));
               // Remove account
-              sl.get<DBHelper>().deleteAccount(account).then((id) {
-                EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account, deleted: true));
-                setState(() {
-                  widget.accounts.removeWhere((a) => a.index == account.index);
-                });
+              await sl.get<DBHelper>().deleteAccount(account);
+              EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account, deleted: true));
+              setState(() {
+                widget.accounts.removeWhere((a) => a.index == account.index);
               });
+              await Slidable.of(context).close();
             }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
           }));
     }
