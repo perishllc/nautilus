@@ -3,7 +3,8 @@
 #### Added
 - Change Log (You're reading it!)
   - You can view this any time by clicking the "Change Log" button at the bottom of the settings drawer
-- Send E2EE messages without sending an amount or request
+- Send E2EE messages without sending an amount or request, no transaction required
+  - Reply button added to messages via the drawer
 - Support for ENS Domains
 - Support for Unstoppable Domains
 - Reminder to Rate the App after some time (dismissable)
@@ -66,3 +67,4 @@
 - make a UI for preferred username / display name in the case that there are multiple users with the same address
 - work on null safety ports of dependencies
 - see how hard it will be to add windows store / desktop support w/ flutter 3.0
+- update the welcome screen / example transactions and requests

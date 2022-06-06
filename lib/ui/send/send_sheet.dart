@@ -269,7 +269,7 @@ class _SendSheetState extends State<SendSheet> {
     // Set initial currency format
     _localCurrencyFormat = NumberFormat.currency(locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
     // Set quick send amount
-    if (quickSendAmount != null) {
+    if (quickSendAmount != null && quickSendAmount.isNotEmpty && quickSendAmount != "0") {
       _amountController.text = NumberUtil.getRawAsUsableString(quickSendAmount).replaceAll(",", "");
     }
   }

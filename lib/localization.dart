@@ -67,6 +67,10 @@ class AppLocalization {
     return Intl.message('Pay', desc: 'home_pay_slidable', name: 'pay');
   }
 
+  String get reply {
+    return Intl.message('Reply', desc: 'home_reply_slidable', name: 'reply');
+  }
+
   String get receive {
     return Intl.message('Receive', desc: 'home_receive_cta', name: 'receive');
   }

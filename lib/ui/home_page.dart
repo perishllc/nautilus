@@ -706,7 +706,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               }
             }
           }
-          
+
           // only applies to non-solids (i.e. memos):
           if (!tx.isSolid()) {
             if (isNotEmpty(tx.block) && tx.from_address == account) {
@@ -3037,7 +3037,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (txDetails.isRecipient(walletAddress)) {
       txDetails.is_acknowledged = true;
     }
-    
+
     if (txDetails.record_type == RecordTypes.GIFT_ACK || txDetails.record_type == RecordTypes.GIFT_OPEN || txDetails.record_type == RecordTypes.GIFT_LOAD) {
       isGift = true;
     }
@@ -3179,11 +3179,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (isTransaction) {
       label = AppLocalization.of(context).send;
     } else {
-      if (txDetails.isRecipient(walletAddress)) {
+      if (txDetails.is_request && txDetails.isRecipient(walletAddress)) {
         label = AppLocalization.of(context).pay;
       }
     }
 
+    // payment request / pay button:
     if (label != null) {
       _slideActions.add(SlidableAction(
           autoClose: false,
@@ -3199,6 +3200,24 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             await Slidable.of(context).close();
           }));
     }
+
+    // reply button:
+    if (txDetails.is_message && txDetails.isRecipient(walletAddress)) {
+      _slideActions.add(SlidableAction(
+          autoClose: false,
+          borderRadius: BorderRadius.circular(5.0),
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          foregroundColor: StateContainer.of(context).curTheme.success,
+          icon: Icons.send,
+          label: AppLocalization.of(context).reply,
+          onPressed: (BuildContext context) async {
+            // sleep for a bit to give the ripple effect time to finish
+            await Future.delayed(Duration(milliseconds: 250));
+            await payTX(context, txDetails);
+            await Slidable.of(context).close();
+          }));
+    }
+
     // retry buttons:
     if (!txDetails.is_acknowledged) {
       if (txDetails.is_request) {
