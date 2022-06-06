@@ -23,14 +23,11 @@
   - unfulfilled / fulfilled -> paid / unpaid
 - Many minor things had to be re-factored or tweaked visually to make Favorites, Blocked, and the send sheet support ENS/Unstoppable domains
 - Complete overhaul of Favorites and Blocking of users
-
 - Added text to the slidable account drawers
 - Added handlebars so that people know that they're slidable
 - drawerEdgeDragWidth: 200 -> 180 (to make it slightly easier to drag list items without opening the drawer)
 #### Fixed
 - Minor visual issues
-
-<!-- --- -->
 
 ## v0.3.0 - [2022-05-30]
 
@@ -42,8 +39,6 @@
 #### Changed
 - Moved Nyano Theme / mode to its own setting (Currency Mode)
 - Made nano.community the default block explorer
-
-<!-- --- -->
 
 ## v0.2.X - [22-01 - 22-05]
 

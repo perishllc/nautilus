@@ -1190,16 +1190,18 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         if (dynamicItem is TXData) {
           txDetails = dynamicItem;
 
-          amount_str = getRawAsThemeAwareAmount(context, dynamicItem.amount_raw);
-          if (txDetails.is_request) {
-            bool is_recipient = StateContainer.of(context).wallet.address == txDetails.to_address;
-            if (is_recipient) {
-              if (AppLocalization.of(context).request.toLowerCase().contains(lowerCaseSearch)) {
-                shouldRemove = false;
-              }
-            } else {
-              if (AppLocalization.of(context).asked.toLowerCase().contains(lowerCaseSearch)) {
-                shouldRemove = false;
+          if (dynamicItem.amount_raw != null && dynamicItem.amount_raw.isNotEmpty) {
+            amount_str = getRawAsThemeAwareAmount(context, dynamicItem.amount_raw);
+            if (txDetails.is_request) {
+              bool is_recipient = StateContainer.of(context).wallet.address == txDetails.to_address;
+              if (is_recipient) {
+                if (AppLocalization.of(context).request.toLowerCase().contains(lowerCaseSearch)) {
+                  shouldRemove = false;
+                }
+              } else {
+                if (AppLocalization.of(context).asked.toLowerCase().contains(lowerCaseSearch)) {
+                  shouldRemove = false;
+                }
               }
             }
           }
@@ -1217,7 +1219,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           }
         }
 
-        if (amount_str.contains(lowerCaseSearch)) {
+        if (amount_str != null && amount_str.contains(lowerCaseSearch)) {
           shouldRemove = false;
         }
 
