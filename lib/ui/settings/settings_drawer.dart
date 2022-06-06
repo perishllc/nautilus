@@ -14,6 +14,7 @@ import 'package:nautilus_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/blocked_widget.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/disable_password_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/set_password_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
@@ -1674,6 +1675,23 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     ),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).shareNautilus, AppIcons.share, onPressed: () {
                       Share.share("Check out Nautilus - NANO Wallet for iOS and Android" + " https://nautiluswallet.app");
+                    }),
+                    Divider(
+                      height: 2,
+                      color: StateContainer.of(context).curTheme.text15,
+                    ),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).destroyDatabase, AppIcons.trashcan, onPressed: () async {
+                      AppDialogs.showConfirmDialog(context, AppLocalization.of(context).destroyDatabase,
+                          AppLocalization.of(context).destroyDatabaseConfirmation, CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
+                        // Delete the database
+                        await sl.get<DBHelper>().nukeDatabase();
+                        // re-add account index 0 and switch the account to it:
+                        String seed = await StateContainer.of(context).getSeed();
+                        await sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context).defaultAccountName);
+                        var mainAccount = await sl.get<DBHelper>().getMainAccount(seed);
+                        await sl.get<DBHelper>().changeAccount(mainAccount);
+                        EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
+                      }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
                     }),
                     Divider(
                       height: 2,

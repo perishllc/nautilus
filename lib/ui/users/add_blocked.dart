@@ -152,7 +152,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
 
             if (address != null && user == null) {
               // add to the db if missing:
-              User user = new User(username: formattedAddress, address: address, type: type, blocked: false);
+              User user = new User(username: formattedAddress, address: address, type: type, is_blocked: false);
               await sl.get<DBHelper>().addUser(user);
             }
           } else {
@@ -295,7 +295,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
             });
           }
         } else if (isUser || isDomain) {
-          var matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          var matchedList = await sl.get<DBHelper>().getUserSuggestionsWithUsernameLike(SendSheetHelpers.stripPrefixes(text));
           if (matchedList != null) {
             setState(() {
               _users = matchedList;
@@ -360,7 +360,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           width: double.infinity - 5,
           child: FlatButton(
             onPressed: () {
-              _addressController.text = user.getDisplayName();
+              _addressController.text = user.getDisplayName(ignoreNickname: true);
               _addressFocusNode.unfocus();
               setState(() {
                 _isUser = true;
@@ -369,7 +369,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                 _addressValidationText = "";
               });
             },
-            child: Text(user.getDisplayName(), textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+            child: Text(user.getDisplayName(ignoreNickname: true), textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(
@@ -538,9 +538,9 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                           newBlocked = User(nickname: _correspondingNickname ?? null, address: formAddress);
                           await sl.get<DBHelper>().blockUser(newBlocked);
                         }
-                        EventTaxiImpl.singleton().fire(BlockedAddedEvent(blocked: newBlocked));
+                        EventTaxiImpl.singleton().fire(BlockedAddedEvent(user: newBlocked));
                         UIUtil.showSnackbar(AppLocalization.of(context).blockedAdded.replaceAll("%1", newBlocked.getDisplayName()), context);
-                        EventTaxiImpl.singleton().fire(BlockedModifiedEvent(blocked: newBlocked));
+                        EventTaxiImpl.singleton().fire(BlockedModifiedEvent(user: newBlocked));
                         Navigator.of(context).pop();
                       }
                     }),

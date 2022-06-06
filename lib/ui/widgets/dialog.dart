@@ -118,7 +118,7 @@ class AppDialogs {
                   ),
                   Container(
                       constraints: BoxConstraints(minHeight: 300, maxHeight: 400),
-                      child: new Scrollbar(
+                      child: Scrollbar(
                         child: SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -28,8 +28,8 @@ class User {
   String expiration;
   @JsonKey(name: 'representative')
   bool representative;
-  @JsonKey(name: 'blocked')
-  bool blocked;
+  @JsonKey(name: 'is_blocked')
+  bool is_blocked;
   @JsonKey(name: 'last_updated')
   int last_updated;
   @JsonKey(name: 'aliases')
@@ -41,7 +41,7 @@ class User {
   // @JsonKey(ignore: true)
   // Widget monkeyWidgetLarge;
 
-  User({this.username, @required this.address, this.expiration, this.representative, this.blocked, this.type, this.last_updated, this.nickname, this.aliases});
+  User({this.username, @required this.address, this.expiration, this.representative, this.is_blocked, this.type, this.last_updated, this.nickname, this.aliases});
 
   factory User.fromJson(Map<String, dynamic> json) {
     String username = json['username'] ?? json['name'];
@@ -52,28 +52,26 @@ class User {
         type: json["type"] as String,
         expiration: json["expires"] as String,
         representative: json["representative"] as bool,
-        blocked: json["blocked"] as bool,
+        is_blocked: json["is_blocked"] as bool,
         last_updated: json["last_updated"] as int,
         aliases: json["aliases"] as List<String>);
   }
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
-  String getDisplayName() {
-    if (nickname != null && nickname.isNotEmpty) {
+  String getDisplayName({bool ignoreNickname = false}) {
+    if (nickname != null && nickname.isNotEmpty && !ignoreNickname) {
       return "★" + nickname;
     }
 
-    if (type == UserTypes.NANOTO) {
-      return "@" + username;
-    } else {
-      return username;
-    }
+    return getDisplayNameWithType(this.username, this.type);
+  }
 
-    //     } else if (type == UserTypes.CONTACT) {
-    //   return "★" + nickname;
-    // } else {
-    //   return username;
-    // }
+  static String getDisplayNameWithType(String name, String userType) {
+    if (userType == UserTypes.NANOTO) {
+      return "@" + name;
+    } else {
+      return name;
+    }
   }
 
   bool operator ==(o) => o is User && o.username == username && o.address == address && o.type == type && o.nickname == nickname;

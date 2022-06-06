@@ -45,7 +45,7 @@ class BlockedDetailsSheet {
     if (user.aliases == null) {
       aliases = [
         // Contact nickname container
-        (blocked.nickname != null)
+        (user.nickname != null && user.nickname.isNotEmpty)
             ? Container(
                 width: double.infinity,
                 margin: EdgeInsets.only(
@@ -58,7 +58,7 @@ class BlockedDetailsSheet {
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Text(
-                  "★" + blocked.nickname,
+                  "★" + user.nickname,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -68,8 +68,8 @@ class BlockedDetailsSheet {
                   ),
                 ),
               )
-            : Container(),
-        (blocked.username != null)
+            : SizedBox(),
+        (user.username != null)
             ? Container(
                 width: double.infinity,
                 margin: EdgeInsets.only(
@@ -83,7 +83,7 @@ class BlockedDetailsSheet {
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Text(
-                  blocked.getDisplayName(),
+                  user.getDisplayName(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -93,18 +93,13 @@ class BlockedDetailsSheet {
                   ),
                 ),
               )
-            : Container(),
+            : SizedBox(),
       ];
     } else {
       for (var i = 0; i < user.aliases.length; i += 2) {
         String displayName = user.aliases[i];
-        switch (user.aliases[i + 1]) {
-          case UserTypes.NANOTO:
-            displayName = "@" + displayName;
-            break;
-          default:
-            break;
-        }
+        String userType = user.aliases[i + 1];
+        displayName = User.getDisplayNameWithType(displayName, userType);
         aliases.add(Container(
           width: double.infinity,
           margin: EdgeInsets.only(
@@ -131,7 +126,18 @@ class BlockedDetailsSheet {
       }
     }
 
-    return aliases;
+    var aliasContainer = Container(
+      constraints: BoxConstraints(minHeight: 50, maxHeight: 400),
+      child: Scrollbar(
+        child: SingleChildScrollView(
+          child: Column(
+            children: aliases,
+          ),
+        ),
+      ),
+    );
+
+    return [aliasContainer];
   }
 
   List<Widget> combineLists(List<Widget> list1, List<Widget> list2) {
@@ -171,8 +177,8 @@ class BlockedDetailsSheet {
                                 sl.get<DBHelper>().unblockUser(blocked).then((deleted) {
                                   if (deleted) {
                                     // Delete image if exists
-                                    EventTaxiImpl.singleton().fire(BlockedRemovedEvent(blocked: blocked));
-                                    EventTaxiImpl.singleton().fire(BlockedModifiedEvent(blocked: blocked));
+                                    EventTaxiImpl.singleton().fire(BlockedRemovedEvent(user: blocked));
+                                    EventTaxiImpl.singleton().fire(BlockedModifiedEvent(user: blocked));
                                     UIUtil.showSnackbar(AppLocalization.of(context).blockedRemoved.replaceAll("%1", blocked.getDisplayName()), context);
                                     Navigator.of(context).pop();
                                   } else {
@@ -231,48 +237,91 @@ class BlockedDetailsSheet {
                         padding: EdgeInsetsDirectional.only(top: 4, bottom: 12),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: combineLists(getAliases(context, blocked), [
-                            // Contact Address
-                            GestureDetector(
-                              onTap: () {
-                                Clipboard.setData(new ClipboardData(text: blocked.address));
-                                setState(() {
-                                  _addressCopied = true;
-                                });
-                                if (_addressCopiedTimer != null) {
-                                  _addressCopiedTimer.cancel();
-                                }
-                                _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                          children: combineLists(
+                            getAliases(context, blocked),
+                            [
+                              // Contact Name container
+                              (blocked.nickname != null && blocked.nickname.isNotEmpty)
+                                  ? Container(
+                                      width: double.infinity,
+                                      margin: EdgeInsets.only(
+                                        left: MediaQuery.of(context).size.width * 0.105,
+                                        right: MediaQuery.of(context).size.width * 0.105,
+                                      ),
+                                      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+                                      decoration: BoxDecoration(
+                                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      child: Text(
+                                        blocked.getDisplayName(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16.0,
+                                          color: StateContainer.of(context).curTheme.primary,
+                                          fontFamily: 'NunitoSans',
+                                        ),
+                                      ),
+                                    )
+                                  : SizedBox(),
+                              // Contact Address
+                              GestureDetector(
+                                onTap: () {
+                                  Clipboard.setData(new ClipboardData(text: blocked.address));
                                   setState(() {
-                                    _addressCopied = false;
+                                    _addressCopied = true;
                                   });
-                                });
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                margin:
-                                    EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105, top: 15),
-                                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                                decoration: BoxDecoration(
-                                  color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                  borderRadius: BorderRadius.circular(25),
+                                  if (_addressCopiedTimer != null) {
+                                    _addressCopiedTimer.cancel();
+                                  }
+                                  _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                                    setState(() {
+                                      _addressCopied = false;
+                                    });
+                                  });
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105, top: 15),
+                                  padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                                  decoration: BoxDecoration(
+                                    color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: UIUtil.threeLineAddressText(context, blocked.address,
+                                      type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
                                 ),
-                                child: UIUtil.threeLineAddressText(context, blocked.address,
-                                    type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
                               ),
-                            ),
-                            // Address Copied text container
-                            Container(
-                              margin: EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: StateContainer.of(context).curTheme.success,
-                                    fontFamily: 'NunitoSans',
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                            ),
-                          ]),
+                              // Address Copied text container
+                              Container(
+                                margin: EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: StateContainer.of(context).curTheme.success,
+                                      fontFamily: 'NunitoSans',
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ),
+                              (blocked.aliases != null)
+                                  ?
+                                  // "ALIASES" text container
+                                  Container(
+                                      margin: EdgeInsets.only(bottom: 10.0),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text(
+                                            CaseChange.toUpperCase(AppLocalization.of(context).aliases, context),
+                                            style: AppStyles.textStyleHeader(context),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : SizedBox(),
+                            ],
+                          ),
                         ),
                       ),
                     ),

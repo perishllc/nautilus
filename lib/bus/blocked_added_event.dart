@@ -3,7 +3,7 @@ import 'package:nautilus_wallet_flutter/model/db/blocked.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 
 class BlockedAddedEvent implements Event {
-  final User blocked;
+  final User user;
 
-  BlockedAddedEvent({this.blocked});
+  BlockedAddedEvent({this.user});
 }

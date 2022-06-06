@@ -359,7 +359,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
       //   block: resp.hash,
       //   record_type: RecordTypes.GIFT_OPEN,
       //   status: "opened",
-      //   metadata: widget.paperWalletSeed + "^" + response.result,
+      //   metadata: widget.paperWalletSeed + RecordTypes.SEPARATOR + response.result,
       //   is_acknowledged: false,
       //   is_fulfilled: false,
       //   is_request: false,

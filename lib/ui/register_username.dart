@@ -266,7 +266,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                                       child: Icon(AppIcons.back,
                                           color: StateContainer.of(context).curTheme.text, size: 24)),
                                 )
-                              : Container(),
+                              : SizedBox(),
                         ],
                       ),
                       // The header
@@ -385,7 +385,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                         getDropdown(),
                         getPrice(),
                       ]))
-                  : Container(),
+                  : SizedBox(),
               (StateContainer.of(context).wallet.username != null)
                   ? Container(
                       margin: EdgeInsetsDirectional.only(top: 10),

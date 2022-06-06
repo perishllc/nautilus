@@ -24,6 +24,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/account_balance_i
 import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
@@ -259,13 +260,13 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  Future<void> updateRequests() async {
+  Future<void> updateSolids() async {
     if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-      var requests = await sl.get<DBHelper>().getAccountSpecificRequests(wallet.address);
+      var solids = await sl.get<DBHelper>().getAccountSpecificSolids(wallet.address);
       // check for duplicates and remove:
       Set uuids = Set();
       List<int> idsToRemove = [];
-      for (var req in requests) {
+      for (var req in solids) {
         if (!uuids.contains(req.uuid)) {
           uuids.add(req.uuid);
         } else {
@@ -275,11 +276,11 @@ class StateContainerState extends State<StateContainer> {
         }
       }
       for (var id in idsToRemove) {
-        requests.removeWhere((element) => element.id == id);
+        solids.removeWhere((element) => element.id == id);
       }
       setState(() {
-        this.wallet.requests = requests;
-        EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet.requests));
+        this.wallet.solids = solids;
+        EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet.solids));
       });
     }
   }
@@ -438,9 +439,9 @@ class StateContainerState extends State<StateContainer> {
       setMinRawReceive(minRaw);
     });
     // make sure nano API databases are up to date
-    checkAndCacheNapiDatabases(true);
+    checkAndCacheNapiDatabases(false);
     // restore payments from the cache
-    updateRequests();
+    updateSolids();
 
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
     FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
@@ -517,7 +518,7 @@ class StateContainerState extends State<StateContainer> {
         }
         if (delay_update) {
           // update the state:
-          await updateRequests();
+          await updateSolids();
           await updateTXMemos();
           await updateUnified(true);
         }
@@ -651,7 +652,7 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       wallet = AppWallet(address: address, username: walletUsername, loading: true);
       requestUpdate();
-      updateRequests();
+      updateSolids();
     });
   }
 
@@ -1102,7 +1103,7 @@ class StateContainerState extends State<StateContainer> {
                   // update the TXData to be fulfilled
                   await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
                   // update the ui to reflect the change in the db:
-                  await updateRequests();
+                  await updateSolids();
                   await updateUnified(true);
                   break;
                 }
@@ -1274,7 +1275,83 @@ class StateContainerState extends State<StateContainer> {
     await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
 
     if (!delay_update) {
-      await updateRequests();
+      await updateSolids();
+      await updateUnified(false);
+    }
+  }
+
+  Future<void> handlePaymentMessage(dynamic data, {bool delay_update = false}) async {
+    log.d("handling payment_message from: ${data['requesting_account']} : ${data['account']}");
+    String amount_raw = data['amount_raw'];
+    String requesting_account = data['requesting_account'];
+    String memo_enc = data['memo_enc'];
+    String request_time = data['request_time'];
+    String to_address = data['account'];
+    String uuid = data['uuid'];
+    String local_uuid = data['local_uuid'];
+
+    if (wallet == null || wallet.address == null || !Address(wallet.address).isValid()) {
+      throw Exception("wallet or wallet.address is null!");
+    }
+
+    int currentBlockHeightInList = wallet.history?.length > 0 ? (wallet?.history[0]?.height + 1) : 1;
+    String lastBlockHash = wallet?.history?.length > 0 ? wallet?.history[0]?.hash : null;
+
+    var txData = new TXData(
+      amount_raw: amount_raw,
+      is_request: false,
+      is_memo: false,
+      is_message: true,
+      from_address: requesting_account,
+      to_address: to_address,
+      is_fulfilled: false,
+      request_time: request_time,
+      block: lastBlockHash,
+      uuid: uuid,
+      is_acknowledged: false,
+      height: currentBlockHeightInList,
+    );
+
+    // decrypt the memo:
+    if (memo_enc != null && memo_enc.isNotEmpty) {
+      String memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
+      if (memo != null) {
+        txData.memo = memo;
+      } else {
+        // TODO: figure out how to get localized string here:
+        txData.memo = "Decryption Error!";
+        txData.memo_enc = memo_enc;
+      }
+    }
+
+    // check if exists in db:
+    var existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+    if (existingTXData != null) {
+      // update with the new info:
+      existingTXData.is_acknowledged = true;
+      existingTXData.request_time = request_time;
+      print("replacing TXData");
+      await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
+    } else {
+      print("adding TXData to db");
+      // add it since it doesn't exist:
+      await sl.get<DBHelper>().addTXData(txData);
+    }
+
+    // check for the local uuid just in case:
+    if (local_uuid != null && local_uuid.isNotEmpty && local_uuid.contains("LOCAL")) {
+      var localTXData = await sl.get<DBHelper>().getTXDataByUUID(local_uuid);
+      if (localTXData != null) {
+        // remove it:
+        await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
+      }
+    }
+
+    // send acknowledgement to server / requester:
+    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
+
+    if (!delay_update) {
+      await updateSolids();
       await updateUnified(false);
     }
   }
@@ -1360,9 +1437,10 @@ class StateContainerState extends State<StateContainer> {
             // if we didn't replace an existing txData, add it to the db:
             if (txData == null) {
               // add it since it doesn't exist:
-              print("adding payment_record to db");
+              print("adding payment_record : request to db");
               oldTXData.uuid = uuid;
               oldTXData.request_time = request_time;
+              oldTXData.status = StatusTypes.CREATE_SUCCESS;
               await sl.get<DBHelper>().addTXData(oldTXData);
             }
           }
@@ -1374,7 +1452,75 @@ class StateContainerState extends State<StateContainer> {
           throw new Exception("\n\n@@@@@@@@this shouldn't happen!@@@@@@@@@@\n\n");
         }
         if (!delay_update) {
-          await updateRequests();
+          await updateSolids();
+          await updateUnified(true);
+        }
+      }
+    }
+
+    if (data.containsKey("is_message")) {
+      if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+        TXData txData;
+        TXData oldTXData;
+
+        // we have to check if this payment is already in the db:
+        txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+        if (txData != null) {
+          print("replacing existing txData for record!");
+          // this payment is already in the db:
+          // merge the two TXData objects;
+          TXData newTXInfo = txData;
+          newTXInfo.amount_raw = amount_raw;
+          newTXInfo.from_address = requesting_account;
+          newTXInfo.to_address = to_address;
+          // newTXInfo.block = block;// don't overwrite the block
+          // newTXInfo.memo = memo;
+          newTXInfo.request_time = request_time;
+
+          if (memo_enc != null && memo_enc.isNotEmpty) {
+            String memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
+            if (memo != null) {
+              newTXInfo.memo = memo;
+            } else {
+              // TODO: figure out how to get localized string here:
+              newTXInfo.memo = "Decryption Error!";
+              newTXInfo.memo_enc = memo_enc;
+            }
+          }
+
+          await sl.get<DBHelper>().replaceTXDataByUUID(newTXInfo);
+        }
+
+        // is this from us? if so we need to check for the local version of this payment_request:
+
+        // check if this is a local payment_request:
+        if (local_uuid != null && local_uuid.isNotEmpty && local_uuid.contains("LOCAL")) {
+          oldTXData = await sl.get<DBHelper>().getTXDataByUUID(local_uuid);
+
+          if (oldTXData != null) {
+            print("removing old txData : message");
+            // remove the old tx by the uuid:
+            await sl.get<DBHelper>().deleteTXDataByUUID(oldTXData.uuid);
+
+            // if we didn't replace an existing txData, add it to the db:
+            if (txData == null) {
+              // add it since it doesn't exist:
+              print("adding payment_record : message to db");
+              oldTXData.uuid = uuid;
+              oldTXData.request_time = request_time;
+              oldTXData.status = StatusTypes.CREATE_SUCCESS;
+              await sl.get<DBHelper>().addTXData(oldTXData);
+            }
+          }
+        }
+
+        // we didn't replace a txData??
+        if (txData == null && oldTXData == null) {
+          // log.d("adding txData to the database!");
+          throw new Exception("\n\n@@@@@@@@this shouldn't happen!@@@@@@@@@@\n\n");
+        }
+        if (!delay_update) {
+          await updateSolids();
           await updateUnified(true);
         }
       }
@@ -1506,7 +1652,7 @@ class StateContainerState extends State<StateContainer> {
     // send acknowledgement to server / requester:
     await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
     if (!delay_update) {
-      await updateRequests();
+      await updateSolids();
       await updateTXMemos();
     }
   }
@@ -1536,7 +1682,7 @@ class StateContainerState extends State<StateContainer> {
       print("we didn't have a txData for this payment ack!");
     }
     if (!delay_update) {
-      await updateRequests();
+      await updateSolids();
       await updateTXMemos();
       await updateUnified(true);
     }
@@ -1546,6 +1692,10 @@ class StateContainerState extends State<StateContainer> {
     // handle an incoming payment request:
     if (data.containsKey("payment_request")) {
       await handlePaymentRequest(data, delay_update: delay_update);
+    }
+
+    if (data.containsKey("payment_message")) {
+      await handlePaymentMessage(data, delay_update: delay_update);
     }
 
     // handle an incoming memo:

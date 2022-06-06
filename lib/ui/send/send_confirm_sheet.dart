@@ -157,52 +157,70 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                     ),
                   ),
                   // Container for the amount text
-                  Container(
-                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.backgroundDarkest,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    // Amount text
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        text: '',
-                        children: [
-                          displayCurrencyAmount(
-                            context,
-                            TextStyle(
-                              color: StateContainer.of(context).curTheme.primary,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                              decoration: TextDecoration.lineThrough,
+                  (widget.memo != null && widget.memo.isNotEmpty && (widget.amountRaw == "0"))
+                      ?
+                      // memo text
+                      Container(
+                          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Text(
+                            widget.memo,
+                            style: AppStyles.textStyleParagraph(context),
+                            textAlign: TextAlign.center,
+                          ))
+                      : Container(
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          // Amount text
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              text: '',
+                              children: [
+                                displayCurrencyAmount(
+                                  context,
+                                  TextStyle(
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans',
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text:
+                                      getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
+                                  style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans',
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
+                                  style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.primary.withOpacity(0.75),
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans',
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          TextSpan(
-                            text: getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                            ),
-                          ),
-                          TextSpan(
-                            text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary.withOpacity(0.75),
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                        ),
+
                   // "TO" text
                   Container(
                     margin: EdgeInsets.only(top: 30.0, bottom: 10),
@@ -280,7 +298,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                               ],
                             )
                           : UIUtil.threeLineAddressText(context, destinationAltered, contactName: widget.contactName)),
-                  (widget.memo != null && widget.memo.isNotEmpty)
+                  (widget.memo != null && widget.memo.isNotEmpty && (widget.amountRaw != "0"))
                       ? (
                           // "WITH MESSAGE" text
                           Container(
@@ -294,8 +312,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                             ],
                           ),
                         ))
-                      : Container(),
-                  (widget.memo != null && widget.memo.isNotEmpty)
+                      : SizedBox(),
+                  (widget.memo != null && widget.memo.isNotEmpty && (widget.amountRaw != "0"))
                       ?
                       // memo text
                       Container(
@@ -311,7 +329,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                             style: AppStyles.textStyleParagraph(context),
                             textAlign: TextAlign.center,
                           ))
-                      : Container(),
+                      : SizedBox(),
                 ],
               ),
             ),
@@ -330,11 +348,14 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         // Authenticate
                         AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                         bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+
+                        bool is_message = widget.memo != null && widget.memo.isNotEmpty && (widget.amountRaw != "0");
+                        String auth_text = is_message ? AppLocalization.of(context).sendAmountConfirm.replaceAll("%1", amount) : AppLocalization.of(context).sendMessageConfirm;
                         if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                           try {
                             bool authenticated = await sl
                                 .get<BiometricUtil>()
-                                .authenticateWithBiometrics(context, AppLocalization.of(context).sendAmountConfirm.replaceAll("%1", amount));
+                                .authenticateWithBiometrics(context, auth_text);
                             if (authenticated) {
                               sl.get<HapticUtil>().fingerprintSucess();
                               EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
@@ -369,19 +390,26 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     bool memoSendFailed = false;
     try {
       _showSendingAnimation(context);
-      ProcessResponse resp = await sl.get<AccountService>().requestSend(
-          StateContainer.of(context).wallet.representative,
-          StateContainer.of(context).wallet.frontier,
-          widget.amountRaw,
-          destinationAltered,
-          StateContainer.of(context).wallet.address,
-          NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
-          max: widget.maxSend);
-      if (widget.manta != null) {
-        widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
+
+      bool is_message = widget.amountRaw == "0";
+
+      ProcessResponse resp;
+
+      if (!is_message) {
+        resp = await sl.get<AccountService>().requestSend(
+            StateContainer.of(context).wallet.representative,
+            StateContainer.of(context).wallet.frontier,
+            widget.amountRaw,
+            destinationAltered,
+            StateContainer.of(context).wallet.address,
+            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
+            max: widget.maxSend);
+        if (widget.manta != null) {
+          widget.manta.sendPayment(transactionHash: resp.hash, cryptoCurrency: "NANO");
+        }
+        StateContainer.of(context).wallet.frontier = resp.hash;
+        StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
       }
-      StateContainer.of(context).wallet.frontier = resp.hash;
-      StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
 
       // if there's a memo to be sent, send it:
       if (widget.memo != null && widget.memo.isNotEmpty) {
@@ -408,12 +436,12 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           to_address: destinationAltered,
           amount_raw: widget.amountRaw,
           uuid: local_uuid,
-          block: resp.hash,
+          block: resp?.hash ?? null,
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,
-          is_memo: true,
-          status: StatusTypes.CREATE_FAILED,
+          is_memo: !is_message,
+          is_message: is_message,
           request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
           memo: widget.memo, // store unencrypted memo
           height: currentBlockHeightInList,
@@ -424,15 +452,28 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         try {
           // encrypt the memo:
           String encryptedMemo = await StateContainer.of(context).encryptMessage(widget.memo, destinationAltered, privKey);
-          await sl.get<AccountService>().sendTXMemo(
-              destinationAltered, StateContainer.of(context).wallet.address, widget.amountRaw, signature, nonce_hex, encryptedMemo, resp.hash, local_uuid);
+
+          if (is_message) {
+            await sl
+                .get<AccountService>()
+                .sendTXMessage(destinationAltered, StateContainer.of(context).wallet.address, signature, nonce_hex, encryptedMemo, local_uuid);
+          } else {
+            // just a memo:
+            await sl.get<AccountService>().sendTXMemo(destinationAltered, StateContainer.of(context).wallet.address, widget.amountRaw, signature, nonce_hex,
+                encryptedMemo, resp?.hash ?? null, local_uuid);
+          }
         } catch (e) {
+          print("error: $e");
           memoSendFailed = true;
         }
 
         // if the memo send failed delete the object:
         if (memoSendFailed) {
           print("memo send failed, deleting TXData object");
+
+          // update the TXData object:
+          memoTXData.status = StatusTypes.CREATE_FAILED;
+          await sl.get<DBHelper>().replaceTXDataByUUID(memoTXData);
           // remove from the database:
           // await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
         } else {
@@ -464,7 +505,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           // update the TXData to be fulfilled
           await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
           // update the ui to reflect the change in the db:
-          StateContainer.of(context).updateRequests();
+          StateContainer.of(context).updateSolids();
           StateContainer.of(context).updateTXMemos();
           StateContainer.of(context).updateUnified(true);
           break;
@@ -487,22 +528,20 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       StateContainer.of(context).requestUpdate();
       StateContainer.of(context).updateTXMemos();
-      if (widget.natriconNonce != null) {
-        setState(() {
-          StateContainer.of(context).updateNatriconNonce(StateContainer.of(context).selectedAccount.address, widget.natriconNonce);
-        });
+
+      if (!memoSendFailed) {
+        Sheets.showAppHeightNineSheet(
+            context: context,
+            closeOnTap: true,
+            removeUntilHome: true,
+            widget: SendCompleteSheet(
+                amountRaw: widget.amountRaw,
+                destination: destinationAltered,
+                contactName: contactName,
+                memo: widget.memo,
+                localAmount: widget.localCurrency,
+                paymentRequest: widget.paymentRequest));
       }
-      Sheets.showAppHeightNineSheet(
-          context: context,
-          closeOnTap: true,
-          removeUntilHome: true,
-          widget: SendCompleteSheet(
-              amountRaw: widget.amountRaw,
-              destination: destinationAltered,
-              contactName: contactName,
-              localAmount: widget.localCurrency,
-              paymentRequest: widget.paymentRequest,
-              natriconNonce: widget.natriconNonce));
     } catch (e) {
       // Send failed
       if (animationOpen) {

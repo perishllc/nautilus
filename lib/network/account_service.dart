@@ -50,6 +50,8 @@ import 'package:nautilus_wallet_flutter/network/model/response/pending_response.
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 
+import 'model/payment/payment_message.dart';
+
 // Server Connection String
 String _BASE_SERVER_ADDRESS = "nautilus.perish.co";
 String _SERVER_ADDRESS = "wss://nautilus.perish.co";
@@ -545,6 +547,20 @@ class AccountService {
         request_nonce: request_nonce,
         memo_enc: memo_enc,
         block: block,
+        local_uuid: local_uuid);
+    dynamic response = await makeHttpRequest(request);
+    if (response is ErrorResponse) {
+      throw Exception("Received error ${response.error}");
+    }
+  }
+
+  Future<void> sendTXMessage(String account, String requesting_account, String request_signature, String request_nonce, String memo_enc, String local_uuid) async {
+    PaymentMessage request = PaymentMessage(
+        account: account,
+        requesting_account: requesting_account,
+        request_signature: request_signature,
+        request_nonce: request_nonce,
+        memo_enc: memo_enc,
         local_uuid: local_uuid);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {

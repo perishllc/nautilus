@@ -13,7 +13,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       type: json['type'] as String,
       expiration: json['expires'] as String,
       representative: json['representative'] as bool,
-      blocked: json['blocked'] as bool,
+      is_blocked: json['is_blocked'] as bool,
       last_updated: json['last_updated'] as int,
       aliases: (json['aliases'] as List)?.map((e) => e as String)?.toList(),
     );
@@ -25,7 +25,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'type': instance.type,
       'expires': instance.expiration,
       'representative': instance.representative,
-      'blocked': instance.blocked,
+      'is_blocked': instance.is_blocked,
       'last_updated': instance.last_updated,
       'aliases': instance.aliases,
     };

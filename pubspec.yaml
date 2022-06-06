@@ -156,7 +156,8 @@ dependencies:
   validators: 2.0.0
 
   # Auto resize text widget
-  auto_size_text: ^2.1.0
+  # auto_size_text: ^2.1.0
+  auto_size_text: ^3.0.0
 
   # Avoid keyboard from overlapping text fields
   keyboard_avoider: ^0.1.2

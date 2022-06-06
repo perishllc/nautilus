@@ -507,7 +507,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                       height: 30,
                       margin: EdgeInsets.only(right: 20),
                       decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.primary,
+                        color: StateContainer.of(context).curTheme.text,
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
@@ -557,7 +557,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
 
     return ActionPane(
       // motion: const DrawerMotion(),
-      motion: const StretchMotion(),
+      motion: const ScrollMotion(),
       extentRatio: (account.index > 0) ? 0.5 : 0.25,
       // All actions are defined in the children parameter.
       children: _actions,

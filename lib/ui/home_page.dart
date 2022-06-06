@@ -56,7 +56,6 @@ import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/list_slidable.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
@@ -80,6 +79,8 @@ import 'package:substring_highlight/substring_highlight.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:markdown/markdown.dart' as md;
+// import 'package:nautilus_wallet_flutter/ui/widgets/list_slidable.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class AppHomePage extends StatefulWidget {
   PriceConversion priceConversion;
@@ -118,7 +119,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   // but seems the only way to handle the animations
   // final Map<String, GlobalKey<AnimatedListState>> _requestsListKeyMap = Map();
   // final Map<String, ListModel<TXData>> _paymentsListMap = Map();
-  final Map<String, List<TXData>> _requestsListMap = Map();
+  final Map<String, List<TXData>> _solidsListMap = Map();
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
@@ -315,7 +316,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             AppLocalization.of(context).giftMessage + ": " + memo + "\n",
                             style: AppStyles.textStyleParagraph(context),
                           )
-                        : Container(),
+                        : SizedBox(),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
@@ -433,7 +434,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             AppLocalization.of(context).giftMessage + ": " + memo + "\n",
                             style: AppStyles.textStyleParagraph(context),
                           )
-                        : Container(),
+                        : SizedBox(),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
@@ -576,6 +577,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       if (runningVersion != lastVersion) {
         await sl.get<SharedPrefsUtil>().setAppVersion(runningVersion);
         await AppDialogs.showChangeLog(context);
+
+        // also force a username update:
+        StateContainer.of(context).checkAndCacheNapiDatabases(true);
       }
     });
   }
@@ -671,7 +675,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         _txRecords = data;
         _txDetailsMap.clear();
         for (var tx in _txRecords) {
-          if (tx.is_request && (isEmpty(tx.block) || isEmpty(tx.link))) {
+          if (tx.isSolid() && (isEmpty(tx.block) || isEmpty(tx.link))) {
             // set to the last block:
             String lastBlockHash = StateContainer.of(context).wallet.history.length > 0 ? StateContainer.of(context).wallet.history[0].hash : null;
             if (isEmpty(tx.block) && StateContainer.of(context).wallet.address == tx.from_address) {
@@ -702,8 +706,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               }
             }
           }
-
-          if (!tx.is_request) {
+          
+          // only applies to non-solids (i.e. memos):
+          if (!tx.isSolid()) {
             if (isNotEmpty(tx.block) && tx.from_address == account) {
               _txDetailsMap[tx.block] = tx;
             } else if (isNotEmpty(tx.link) && tx.to_address == account) {
@@ -745,10 +750,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     });
     _paymentsSub = EventTaxiImpl.singleton().registerTo<PaymentsHomeEvent>().listen((event) {
       var newPayments = event.items;
-      if (newPayments == null || newPayments.length == 0 || _requestsListMap[StateContainer.of(context).wallet.address] == null) {
+      if (newPayments == null || newPayments.length == 0 || _solidsListMap[StateContainer.of(context).wallet.address] == null) {
         return;
       }
-      _requestsListMap[StateContainer.of(context).wallet.address] = newPayments;
+      _solidsListMap[StateContainer.of(context).wallet.address] = newPayments;
     });
     _unifiedSub = EventTaxiImpl.singleton().registerTo<UnifiedHomeEvent>().listen((event) {
       generateUnifiedList(fastUpdate: event.fastUpdate);
@@ -891,7 +896,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           StateContainer.of(context).giftedWallet = false;
           handleBranchGift();
         }
-        // showChangeLog();
         // handle pending background events:
         if (!StateContainer.of(context).wallet.loading && !_lockTriggered) {
           handlePendingBackgroundMessages();
@@ -942,7 +946,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     });
     sl.get<HapticUtil>().success();
     await StateContainer.of(context).requestUpdate();
-    await StateContainer.of(context).updateRequests();
+    await StateContainer.of(context).updateSolids();
     _updateTXData();
     _updateTXDetailsMap(StateContainer.of(context).wallet.address);
     // await generateUnifiedList();
@@ -1078,7 +1082,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   Future<void> generateUnifiedList({bool fastUpdate = false}) async {
     if (_historyListMap[StateContainer.of(context).wallet.address] == null ||
-        _requestsListMap[StateContainer.of(context).wallet.address] == null ||
+        _solidsListMap[StateContainer.of(context).wallet.address] == null ||
         _unifiedListMap[StateContainer.of(context).wallet.address] == null) {
       return;
     }
@@ -1089,20 +1093,20 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // combine history and payments:
     List<AccountHistoryResponseItem> historyList = StateContainer.of(context).wallet.history;
-    List<TXData> requestsList = StateContainer.of(context).wallet.requests;
+    List<TXData> solidsList = StateContainer.of(context).wallet.solids;
 
-    // for (var tx in requestsList) {
+    // for (var tx in solidsList) {
     //   print("memo: ${tx.memo} is_request: ${tx.is_request}");
     // }
 
     // add tx's to the unified list:
     // unifiedList.addAll(historyList);
-    // unifiedList.addAll(requestsList);
+    // unifiedList.addAll(solidsList);
     unifiedList = List<dynamic>.from(historyList.where((element) => element.type != BlockTypes.CHANGE).toList());
 
     Set uuids = Set();
     List<int> idsToRemove = [];
-    for (var req in requestsList) {
+    for (var req in solidsList) {
       if (!uuids.contains(req.uuid)) {
         uuids.add(req.uuid);
       } else {
@@ -1112,19 +1116,19 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     }
     for (var id in idsToRemove) {
-      requestsList.removeWhere((element) => element.id == id);
+      solidsList.removeWhere((element) => element.id == id);
     }
 
-    // go through each item in the requestsList and insert it into the unifiedList at the matching block:
-    for (int i = 0; i < requestsList.length; i++) {
+    // go through each item in the solidsList and insert it into the unifiedList at the matching block:
+    for (int i = 0; i < solidsList.length; i++) {
       int index;
       int height;
 
       // if the block is null, give it one:
-      if (requestsList[i].block == null) {
+      if (solidsList[i].block == null) {
         String lastBlockHash = StateContainer.of(context).wallet.history.length > 0 ? StateContainer.of(context).wallet.history[0].hash : null;
-        requestsList[i].block = lastBlockHash;
-        await sl.get<DBHelper>().replaceTXDataByUUID(requestsList[i]);
+        solidsList[i].block = lastBlockHash;
+        await sl.get<DBHelper>().replaceTXDataByUUID(solidsList[i]);
       }
 
       // find the index of the item in the unifiedList:
@@ -1141,9 +1145,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         }
         String histItemHash = unifiedList[j].hash;
 
-        // print("${histItemHash} ${requestsList[i].block} ${requestsList[i].link}");
+        // print("${histItemHash} ${solidsList[i].block} ${solidsList[i].link}");
 
-        if (histItemHash == requestsList[i].block || histItemHash == requestsList[i].link) {
+        if (histItemHash == solidsList[i].block || histItemHash == solidsList[i].link) {
           index = j;
           height = unifiedList[j].height + 1;
           break;
@@ -1152,11 +1156,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
       // found an index to insert at:
       if (index != null) {
-        requestsList[i].height = height;
-        unifiedList.insert(index, requestsList[i]);
-      } else if (isEmpty(requestsList[i].block)) {
+        solidsList[i].height = height;
+        unifiedList.insert(index, solidsList[i]);
+      } else if (isEmpty(solidsList[i].block)) {
         // block was null so just insert it at the top?:
-        unifiedList.insert(0, requestsList[i]);
+        unifiedList.insert(0, solidsList[i]);
       }
     }
 
@@ -1455,7 +1459,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     handleBranchGift();
 
     return Scaffold(
-      drawerEdgeDragWidth: 200,
+      drawerEdgeDragWidth: 180,
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
       backgroundColor: StateContainer.of(context).curTheme.background,
@@ -2821,63 +2825,254 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
+  // TX / Card Action functions:
+  static Future<void> resendRequest(BuildContext context, TXData txDetails) async {
+// show sending animation:
+    bool animationOpen = true;
+    Navigator.of(context).push(AnimationLoadingOverlay(
+        AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
+        onPoppedCallback: () => animationOpen = false));
+
+    bool sendFailed = false;
+
+    // send the request again:
+    String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
+    // get epoch time as hex:
+    int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+    String nonce_hex = secondsSinceEpoch.toRadixString(16);
+    String signature = NanoSignatures.signBlock(nonce_hex, privKey);
+
+    // check validity locally:
+    String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet?.address);
+    bool isValid = NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+    if (!isValid) {
+      throw Exception("Invalid signature?!");
+    }
+
+    // create a local memo object:
+    var uuid = Uuid();
+    String local_uuid = "LOCAL:" + uuid.v4();
+    var requestTXData = new TXData(
+      from_address: txDetails.from_address,
+      to_address: txDetails.to_address,
+      amount_raw: txDetails.amount_raw,
+      uuid: local_uuid,
+      block: txDetails.block,
+      is_acknowledged: false,
+      is_fulfilled: false,
+      is_request: true,
+      is_memo: false,
+      // request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+      request_time: txDetails.request_time,
+      memo: txDetails.memo, // store unencrypted memo
+      height: txDetails.height,
+    );
+    // add it to the database:
+    await sl.get<DBHelper>().addTXData(requestTXData);
+
+    try {
+      // encrypt the memo if it's not empty:
+      String encryptedMemo;
+      if (txDetails.memo != null && txDetails.memo.isNotEmpty) {
+        encryptedMemo = await StateContainer.of(context).encryptMessage(txDetails.memo, txDetails.to_address, privKey);
+      }
+      await sl.get<AccountService>().requestPayment(
+          txDetails.to_address, txDetails.amount_raw, StateContainer.of(context).wallet.address, signature, nonce_hex, encryptedMemo, local_uuid);
+    } catch (e) {
+      print(e);
+      sendFailed = true;
+    }
+
+    // if the memo send failed delete the object:
+    if (sendFailed) {
+      print("request send failed, deleting TXData object");
+      // remove failed txdata from the database:
+      await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
+      // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
+      await Future.delayed(Duration(seconds: 2));
+      // show error:
+      UIUtil.showSnackbar(AppLocalization.of(context).requestSendError, context, durationMs: 5000);
+    } else {
+      // delete the old request by uuid:
+      await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid);
+      // memo sent successfully, show success:
+      UIUtil.showSnackbar(AppLocalization.of(context).requestSentButNotReceived, context, durationMs: 5000);
+    }
+    await StateContainer.of(context).updateSolids();
+    // hack to get tx memo to update:
+    EventTaxiImpl.singleton().fire(TXUpdateEvent());
+
+    Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+  }
+
+  static Future<void> resendMemo(BuildContext context, TXData txDetails) async {
+    // show sending animation:
+    bool animationOpen = true;
+    Navigator.of(context).push(AnimationLoadingOverlay(
+        AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
+        onPoppedCallback: () => animationOpen = false));
+
+    bool memoSendFailed = false;
+
+    // send the memo again:
+    String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
+    // get epoch time as hex:
+    int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+    String nonce_hex = secondsSinceEpoch.toRadixString(16);
+    String signature = NanoSignatures.signBlock(nonce_hex, privKey);
+
+    // check validity locally:
+    String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet?.address);
+    bool isValid = NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+    if (!isValid) {
+      throw Exception("Invalid signature?!");
+    }
+
+    // create a local memo object:
+    var uuid = Uuid();
+    String local_uuid = "LOCAL:" + uuid.v4();
+    var memoTXData = new TXData(
+      from_address: txDetails.from_address,
+      to_address: txDetails.to_address,
+      amount_raw: txDetails.amount_raw,
+      uuid: local_uuid,
+      block: txDetails.block,
+      is_acknowledged: false,
+      is_fulfilled: false,
+      is_request: false,
+      is_memo: true,
+      // request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+      request_time: txDetails.request_time,
+      memo: txDetails.memo, // store unencrypted memo
+      height: txDetails.height,
+    );
+    // add it to the database:
+    await sl.get<DBHelper>().addTXData(memoTXData);
+
+    try {
+      // encrypt the memo:
+      String encryptedMemo = await StateContainer.of(context).encryptMessage(txDetails.memo, txDetails.to_address, privKey);
+      await sl.get<AccountService>().sendTXMemo(txDetails.to_address, StateContainer.of(context).wallet.address, txDetails.amount_raw, signature, nonce_hex,
+          encryptedMemo, txDetails.block, local_uuid);
+    } catch (e) {
+      memoSendFailed = true;
+    }
+
+    // if the memo send failed delete the object:
+    if (memoSendFailed) {
+      print("memo send failed, deleting TXData object");
+      // remove from the database:
+      await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
+      // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
+      await Future.delayed(Duration(seconds: 2));
+      // show error:
+      UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
+    } else {
+      // delete the old memo by uuid:
+      await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid);
+      // memo sent successfully, show success:
+      UIUtil.showSnackbar(AppLocalization.of(context).memoSentButNotReceived, context, durationMs: 5000);
+      // hack to get tx memo to update:
+      EventTaxiImpl.singleton().fire(TXUpdateEvent());
+    }
+
+    Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+  }
+
+  static Future<void> payTX(BuildContext context, TXData txDetails) async {
+    String address;
+    if (txDetails.is_request || txDetails.is_memo) {
+      if (txDetails.to_address == StateContainer.of(context).wallet.address) {
+        address = txDetails.from_address;
+      } else {
+        address = txDetails.to_address;
+      }
+    } else {
+      // address = item.account;
+      address = txDetails.from_address;
+    }
+    // See if a contact
+    var user = await sl.get<DBHelper>().getUserOrContactWithAddress(address);
+    String quickSendAmount = txDetails.amount_raw;
+    // a bit of a hack since send sheet doesn't have a way to tell if we're in nyano mode on creation:
+    if (StateContainer.of(context).nyanoMode) {
+      quickSendAmount += "000000";
+    }
+
+    // Go to send with address
+    await Sheets.showAppHeightNineSheet(
+        context: context,
+        widget: SendSheet(
+          localCurrency: StateContainer.of(context).curCurrency,
+          address: address,
+          quickSendAmount: quickSendAmount,
+          user: user,
+        ));
+  }
+
 // Transaction Card/List Item
   Widget _buildUnifiedCard(dynamic item, Animation<double> animation, String displayName, BuildContext context, {TXData txDetails}) {
-    String text;
+    String itemText;
     IconData icon;
     Color iconColor;
 
-    bool isPaymentRequest = item is TXData;
-    if (isPaymentRequest) {
+    bool isSolid = item is TXData;
+    if (isSolid) {
       txDetails = item;
     }
     bool isTransaction = item is AccountHistoryResponseItem;
-    bool isRecipient = false;
     bool isGift = false;
-    bool is_memo = false;
-    bool is_unacknowledged_memo = false;
+    String walletAddress = StateContainer.of(context).wallet.address;
 
-    if (txDetails != null && txDetails.is_memo) {
-      is_memo = true;
+    // history items:
+    if (txDetails == null) {
+      txDetails = TXData();
+      txDetails.amount_raw = item.amount;
+      txDetails.from_address = item.account;
+      txDetails.to_address = item.account;
+      txDetails.is_acknowledged = true;
+      txDetails.block = item.hash;
     }
 
-    if (is_memo && !txDetails.is_acknowledged) {
-      is_unacknowledged_memo = true;
-    }
-
-    if (txDetails != null) {
-      isRecipient = StateContainer.of(context).wallet.address == txDetails.to_address;
-    }
-
-    if (isRecipient && txDetails != null) {
+    if (txDetails.isRecipient(walletAddress)) {
       txDetails.is_acknowledged = true;
     }
-
-    if (txDetails != null) {
-      if (txDetails.record_type == RecordTypes.GIFT_ACK || txDetails.record_type == RecordTypes.GIFT_OPEN || txDetails.record_type == RecordTypes.GIFT_LOAD) {
-        isGift = true;
-      }
+    
+    if (txDetails.record_type == RecordTypes.GIFT_ACK || txDetails.record_type == RecordTypes.GIFT_OPEN || txDetails.record_type == RecordTypes.GIFT_LOAD) {
+      isGift = true;
     }
 
     // set icon color:
-    if (isPaymentRequest) {
-      if (isRecipient) {
-        text = AppLocalization.of(context).request;
-        icon = AppIcons.call_made;
-        iconColor = StateContainer.of(context).curTheme.text60;
-      } else {
-        text = AppLocalization.of(context).asked;
-        icon = AppIcons.call_received;
-        iconColor = StateContainer.of(context).curTheme.primary60;
+    if (isSolid) {
+      if (txDetails.is_request) {
+        if (txDetails.isRecipient(walletAddress)) {
+          itemText = AppLocalization.of(context).request;
+          icon = AppIcons.call_made;
+          iconColor = StateContainer.of(context).curTheme.text60;
+        } else {
+          itemText = AppLocalization.of(context).asked;
+          icon = AppIcons.call_received;
+          iconColor = StateContainer.of(context).curTheme.primary60;
+        }
+      } else if (txDetails.is_message) {
+        if (txDetails.isRecipient(walletAddress)) {
+          itemText = AppLocalization.of(context).received;
+          icon = AppIcons.call_received;
+          iconColor = StateContainer.of(context).curTheme.text60;
+        } else {
+          itemText = AppLocalization.of(context).sent;
+          icon = AppIcons.call_made;
+          iconColor = StateContainer.of(context).curTheme.primary60;
+        }
       }
     } else if (isTransaction) {
       if (isGift) {
         if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
-          text = AppLocalization.of(context).loaded;
+          itemText = AppLocalization.of(context).loaded;
           icon = AppIcons.transferfunds;
           iconColor = StateContainer.of(context).curTheme.primary60;
         } else if (txDetails.record_type == RecordTypes.GIFT_OPEN) {
-          text = AppLocalization.of(context).opened;
+          itemText = AppLocalization.of(context).opened;
           icon = AppIcons.transferfunds;
           iconColor = StateContainer.of(context).curTheme.primary60;
         } else {
@@ -2885,11 +3080,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         }
       } else {
         if (item.type == BlockTypes.SEND) {
-          text = AppLocalization.of(context).sent;
+          itemText = AppLocalization.of(context).sent;
           icon = AppIcons.sent;
           iconColor = StateContainer.of(context).curTheme.text60;
         } else {
-          text = AppLocalization.of(context).received;
+          itemText = AppLocalization.of(context).received;
           icon = AppIcons.received;
           iconColor = StateContainer.of(context).curTheme.primary60;
         }
@@ -2899,64 +3094,36 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     BoxShadow setShadow;
 
     // set box shadow color:
-    if (txDetails != null) {
-      if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
-        // normal tx:
-        setShadow = StateContainer.of(context).curTheme.boxShadow;
-      } else if (txDetails.status == StatusTypes.CREATE_FAILED) {
-        iconColor = StateContainer.of(context).curTheme.error60;
-        setShadow = BoxShadow(
-          color: StateContainer.of(context).curTheme.error60.withOpacity(0.2),
-          offset: Offset(0, 0),
-          blurRadius: 0,
-          spreadRadius: 1,
-        );
-      } else if (txDetails.is_fulfilled && isPaymentRequest) {
-        iconColor = StateContainer.of(context).curTheme.success60;
-        setShadow = BoxShadow(
-          color: StateContainer.of(context).curTheme.success60.withOpacity(0.2),
-          offset: Offset(0, 0),
-          blurRadius: 0,
-          spreadRadius: 1,
-        );
-      } else if ((!txDetails.is_acknowledged) || isPaymentRequest) {
-        iconColor = StateContainer.of(context).curTheme.warning60;
-        setShadow = BoxShadow(
-          color: StateContainer.of(context).curTheme.warning60.withOpacity(0.2),
-          offset: Offset(0, 0),
-          blurRadius: 0,
-          spreadRadius: 1,
-        );
-      } else {
-        // normal transaction:
-        setShadow = StateContainer.of(context).curTheme.boxShadow;
-      }
+    if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
+      // normal tx:
+      setShadow = StateContainer.of(context).curTheme.boxShadow;
+    } else if (txDetails.status == StatusTypes.CREATE_FAILED) {
+      iconColor = StateContainer.of(context).curTheme.error60;
+      setShadow = BoxShadow(
+        color: StateContainer.of(context).curTheme.error60.withOpacity(0.2),
+        offset: Offset(0, 0),
+        blurRadius: 0,
+        spreadRadius: 1,
+      );
+    } else if (txDetails.is_fulfilled && isSolid) {
+      iconColor = StateContainer.of(context).curTheme.success60;
+      setShadow = BoxShadow(
+        color: StateContainer.of(context).curTheme.success60.withOpacity(0.2),
+        offset: Offset(0, 0),
+        blurRadius: 0,
+        spreadRadius: 1,
+      );
+    } else if ((!txDetails.is_acknowledged) || (txDetails.is_request && !txDetails.is_fulfilled)) {
+      iconColor = StateContainer.of(context).curTheme.warning60;
+      setShadow = BoxShadow(
+        color: StateContainer.of(context).curTheme.warning60.withOpacity(0.2),
+        offset: Offset(0, 0),
+        blurRadius: 0,
+        spreadRadius: 1,
+      );
     } else {
       // normal transaction:
       setShadow = StateContainer.of(context).curTheme.boxShadow;
-      // if (txDetails != null && txDetails.memo != null && txDetails.memo.isNotEmpty && !isGift) {
-      //   if (txDetails.is_acknowledged) {
-      //     // setShadow = BoxShadow(
-      //     //   color: StateContainer.of(context).curTheme.primary60.withOpacity(0.2),
-      //     //   offset: Offset(0, 0),
-      //     //   blurRadius: 0,
-      //     //   spreadRadius: 1,
-      //     // );
-      //     // normal transaction:
-      //     setShadow = StateContainer.of(context).curTheme.boxShadow;
-      //   } else {
-      //     // set warning color if memo isn't acknowledged
-      //     setShadow = BoxShadow(
-      //       color: StateContainer.of(context).curTheme.warning60.withOpacity(0.2),
-      //       offset: Offset(0, 0),
-      //       blurRadius: 0,
-      //       spreadRadius: 1,
-      //     );
-      //   }
-      // } else {
-      //   // normal transaction:
-      //   setShadow = StateContainer.of(context).curTheme.boxShadow;
-      // }
     }
 
     bool slideEnabled = false;
@@ -2966,15 +3133,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // if (isPaymentRequest && isRecipient && !txDetails.is_fulfilled) {
       //   slideEnabled = true;
       // }
-      if (isPaymentRequest && !txDetails.is_fulfilled) {
+      if (txDetails.is_request && !txDetails.is_fulfilled) {
         slideEnabled = true;
       }
       if (isTransaction && !isGift) {
         slideEnabled = true;
       }
+      if (txDetails.is_message) {
+        slideEnabled = true;
+      }
     }
-
-    String itemAmount = isPaymentRequest ? txDetails.amount_raw : item.amount;
 
     TransactionStateOptions transactionState;
 
@@ -2989,7 +3157,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         if (txDetails.status == StatusTypes.CREATE_FAILED) {
           transactionState = TransactionStateOptions.FAILED_MSG;
         }
-        if (isPaymentRequest) {
+        if (txDetails.is_request) {
           if (txDetails.is_fulfilled) {
             transactionState = TransactionStateOptions.FULFILLED;
           } else {
@@ -2999,262 +3167,308 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         if (!txDetails.is_acknowledged) {
           transactionState = TransactionStateOptions.UNREAD;
         }
+        if (txDetails.status == StatusTypes.CREATE_FAILED) {
+          transactionState = TransactionStateOptions.NOT_SENT;
+        }
       }
     }
 
+    List<Widget> _slideActions = [];
+    // if (isTransaction) {
+    String label;
+    if (isTransaction) {
+      label = AppLocalization.of(context).send;
+    } else {
+      if (txDetails.isRecipient(walletAddress)) {
+        label = AppLocalization.of(context).pay;
+      }
+    }
+
+    if (label != null) {
+      _slideActions.add(SlidableAction(
+          autoClose: false,
+          borderRadius: BorderRadius.circular(5.0),
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          foregroundColor: StateContainer.of(context).curTheme.success,
+          icon: Icons.send,
+          label: label,
+          onPressed: (BuildContext context) async {
+            // sleep for a bit to give the ripple effect time to finish
+            await Future.delayed(Duration(milliseconds: 250));
+            await payTX(context, txDetails);
+            await Slidable.of(context).close();
+          }));
+    }
+    // retry buttons:
+    if (!txDetails.is_acknowledged) {
+      if (txDetails.is_request) {
+        _slideActions.add(SlidableAction(
+            autoClose: false,
+            borderRadius: BorderRadius.circular(5.0),
+            backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+            foregroundColor: StateContainer.of(context).curTheme.warning60,
+            icon: Icons.refresh_rounded,
+            label: AppLocalization.of(context).retry,
+            onPressed: (BuildContext context) async {
+              // sleep for a bit to give the ripple effect time to finish
+              await Future.delayed(Duration(milliseconds: 250));
+              await resendRequest(context, txDetails);
+              await Slidable.of(context).close();
+            }));
+      } else if (txDetails.is_memo) {
+        _slideActions.add(SlidableAction(
+            autoClose: false,
+            borderRadius: BorderRadius.circular(5.0),
+            backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+            foregroundColor: StateContainer.of(context).curTheme.warning60,
+            icon: Icons.refresh_rounded,
+            label: AppLocalization.of(context).retry,
+            onPressed: (BuildContext context) async {
+              // sleep for a bit to give the ripple effect time to finish
+              await Future.delayed(Duration(milliseconds: 250));
+              await resendMemo(context, txDetails);
+              await Slidable.of(context).close();
+            }));
+      } else if (txDetails.is_message) {
+        // TODO: resend message
+        // _slideActions.add(SlidableAction(
+        //     autoClose: false,
+        //     borderRadius: BorderRadius.circular(5.0),
+        //     backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        //     foregroundColor: StateContainer.of(context).curTheme.warning60,
+        //     icon: Icons.refresh_rounded,
+        //     label: AppLocalization.of(context).retry,
+        //     onPressed: (BuildContext context) async {
+        //       // sleep for a bit to give the ripple effect time to finish
+        //       await Future.delayed(Duration(milliseconds: 250));
+        //       await resendMessage(context, txDetails);
+        //       await Slidable.of(context).close();
+        //     }));
+      }
+    }
+
+    if (isSolid) {
+      _slideActions.add(SlidableAction(
+          autoClose: false,
+          borderRadius: BorderRadius.circular(5.0),
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          foregroundColor: StateContainer.of(context).curTheme.error60,
+          icon: Icons.delete,
+          label: AppLocalization.of(context).delete,
+          onPressed: (BuildContext context) async {
+            // sleep for a bit to give the ripple effect time to finish
+            await Future.delayed(Duration(milliseconds: 250));
+            await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid);
+            await Slidable.of(context).close();
+            await StateContainer.of(context).updateSolids();
+          }));
+    }
+
+    ActionPane actionPane = ActionPane(
+      // motion: const DrawerMotion(),
+      // motion: const BehindMotion(),
+      // motion: const DrawerMotion(),
+      motion: const ScrollMotion(),
+      extentRatio: _slideActions.length * 0.2,
+      children: _slideActions,
+    );
+
     return Slidable(
-      delegate: SlidableScrollDelegate(),
-      actionExtentRatio: 0.35,
-      movementDuration: Duration(milliseconds: 300),
       enabled: slideEnabled,
-      onTriggered: (preempt) {
-        if (preempt) {
-          setState(() {
-            releaseAnimation = true;
-          });
-        } else {
-          String address;
-          if (isPaymentRequest) {
-            if (isRecipient) {
-              address = txDetails.from_address;
-            } else {
-              address = txDetails.to_address;
-            }
-          } else {
-            address = item.account;
-          }
-          // See if a contact
-          sl.get<DBHelper>().getUserOrContactWithAddress(address).then((user) {
-            String quickSendAmount = itemAmount;
-            // a bit of a hack since send sheet doesn't have a way to tell if we're in nyano mode on creation:
-            if (StateContainer.of(context).nyanoMode) {
-              quickSendAmount = itemAmount + "000000";
-            }
-            // Go to send with address
-            Sheets.showAppHeightNineSheet(
-                context: context,
-                widget: SendSheet(
-                  localCurrency: StateContainer.of(context).curCurrency,
-                  address: address,
-                  quickSendAmount: quickSendAmount,
-                  user: user,
-                ));
-          });
-        }
-      },
-      onAnimationChanged: (animation) {
-        if (animation != null) {
-          _fanimationPosition = animation.value;
-          if (animation.value == 0.0 && releaseAnimation) {
-            setState(() {
-              releaseAnimation = false;
-            });
-          }
-        }
-      },
-      secondaryActions: <Widget>[
-        SlideAction(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-            ),
-            margin: EdgeInsetsDirectional.only(end: MediaQuery.of(context).size.width * 0.15, top: 4, bottom: 4),
-            child: Container(
-              alignment: AlignmentDirectional(-0.5, 0),
-              constraints: BoxConstraints.expand(),
-              child: FlareActor("legacy_assets/pulltosend_animation.flr",
-                  animation: "pull", fit: BoxFit.contain, controller: this, color: StateContainer.of(context).curTheme.primary),
-            ),
-          ),
-        ),
-      ],
+      endActionPane: actionPane,
       child: _SizeTransitionNoClip(
         sizeFactor: animation,
-        child: Container(
-          margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
-          decoration: BoxDecoration(
-            color: StateContainer.of(context).curTheme.backgroundDark,
-            borderRadius: BorderRadius.circular(10.0),
-            // boxShadow: [StateContainer.of(context).curTheme.boxShadow],
-            boxShadow: [setShadow],
-          ),
-          child: FlatButton(
-            highlightColor: StateContainer.of(context).curTheme.text15,
-            splashColor: StateContainer.of(context).curTheme.text15,
-            color: StateContainer.of(context).curTheme.backgroundDark,
-            padding: EdgeInsets.all(0.0),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-            onPressed: () {
-              if (isPaymentRequest) {
-                Sheets.showAppHeightEightSheet(
-                    context: context,
-                    widget: PaymentDetailsSheet(
-                      txDetails: item,
-                    ),
-                    animationDurationMs: 175);
-              } else if (txDetails != null) {
-                Sheets.showAppHeightEightSheet(context: context, widget: PaymentDetailsSheet(txDetails: txDetails), animationDurationMs: 175);
-              } else {
-                Sheets.showAppHeightEightSheet(
-                    context: context,
-                    widget: TransactionDetailsSheet(hash: item.hash, address: item.account, displayName: displayName),
-                    animationDurationMs: 175);
-              }
-            },
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
+        child: Stack(
+          alignment: AlignmentDirectional.centerEnd,
+          children: [
+            Container(
+              margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+              decoration: BoxDecoration(
+                color: StateContainer.of(context).curTheme.backgroundDark,
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [setShadow],
+              ),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  primary: StateContainer.of(context).curTheme.text15,
+                  backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                  padding: EdgeInsets.all(0.0),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                ),
+                onPressed: () {
+                  Sheets.showAppHeightEightSheet(context: context, widget: PaymentDetailsSheet(txDetails: txDetails), animationDurationMs: 175);
+                },
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
+                    // padding: const EdgeInsets.only(top: 14.0, bottom: 14.0, left: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Container(margin: EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
-                        Container(
-                          constraints: BoxConstraints(maxWidth: 85),
-                          // width: MediaQuery.of(context).size.width / 5,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              SubstringHighlight(
-                                caseSensitive: false,
-                                words: false,
-                                term: _searchController.text,
-                                text: text,
-                                textAlign: TextAlign.start,
-                                textStyle: AppStyles.textStyleTransactionType(context),
-                                textStyleHighlight: TextStyle(
-                                    fontFamily: "NunitoSans",
-                                    fontSize: AppFontSizes.small,
-                                    fontWeight: FontWeight.w600,
-                                    color: StateContainer.of(context).curTheme.warning60),
-                              ),
-                              Row(
+                        Row(
+                          children: <Widget>[
+                            Container(margin: EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
+                            Container(
+                              constraints: BoxConstraints(maxWidth: 85),
+                              // width: MediaQuery.of(context).size.width / 5,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  RichText(
-                                    textAlign: TextAlign.start,
-                                    text: TextSpan(
-                                      text: '',
-                                      children: [
-                                        displayCurrencyAmount(
-                                          context,
-                                          AppStyles.textStyleTransactionAmount(
-                                            context,
-                                            true,
-                                          ),
-                                          includeSymbol: true,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
                                   SubstringHighlight(
-                                      caseSensitive: false,
-                                      words: false,
-                                      term: _searchController.text,
-                                      text: getRawAsThemeAwareAmount(context, isPaymentRequest ? item.amount_raw : item.amount),
-                                      textAlign: TextAlign.start,
-                                      textStyle: AppStyles.textStyleTransactionAmount(context),
-                                      textStyleHighlight: TextStyle(
-                                          fontFamily: "NunitoSans",
-                                          color: StateContainer.of(context).curTheme.warning60,
-                                          fontSize: AppFontSizes.smallest,
-                                          fontWeight: FontWeight.w600)),
+                                    caseSensitive: false,
+                                    words: false,
+                                    term: _searchController.text,
+                                    text: itemText,
+                                    textAlign: TextAlign.start,
+                                    textStyle: AppStyles.textStyleTransactionType(context),
+                                    textStyleHighlight: TextStyle(
+                                        fontFamily: "NunitoSans",
+                                        fontSize: AppFontSizes.small,
+                                        fontWeight: FontWeight.w600,
+                                        color: StateContainer.of(context).curTheme.warning60),
+                                  ),
+                                  (!txDetails.is_message)
+                                      ? Row(
+                                          children: <Widget>[
+                                            RichText(
+                                              textAlign: TextAlign.start,
+                                              text: TextSpan(
+                                                text: '',
+                                                children: [
+                                                  displayCurrencyAmount(
+                                                    context,
+                                                    AppStyles.textStyleTransactionAmount(
+                                                      context,
+                                                      true,
+                                                    ),
+                                                    includeSymbol: true,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SubstringHighlight(
+                                                caseSensitive: false,
+                                                words: false,
+                                                term: _searchController.text,
+                                                text: getRawAsThemeAwareAmount(context, txDetails.amount_raw),
+                                                textAlign: TextAlign.start,
+                                                textStyle: AppStyles.textStyleTransactionAmount(context),
+                                                textStyleHighlight: TextStyle(
+                                                    fontFamily: "NunitoSans",
+                                                    color: StateContainer.of(context).curTheme.warning60,
+                                                    fontSize: AppFontSizes.smallest,
+                                                    fontWeight: FontWeight.w600)),
+                                          ],
+                                        )
+                                      : SizedBox(),
                                 ],
                               ),
+                            ),
+                          ],
+                        ),
+                        (txDetails != null && txDetails.memo != null)
+                            ? Container(
+                                // constraints: BoxConstraints(maxWidth: 105),
+                                // width: MediaQuery.of(context).size.width / 4.3,
+                                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 4),
+                                padding: EdgeInsets.only(left: 10, right: 10),
+                                // child: Text(
+                                //   txDetails.memo,
+                                //   textAlign: TextAlign.start,
+                                //   style: AppStyles.textStyleTransactionMemo(context),
+                                //   maxLines: 16,
+                                //   overflow: TextOverflow.visible,
+                                // ),
+                                child: SubstringHighlight(
+                                    caseSensitive: false,
+                                    maxLines: 16,
+                                    term: _searchController.text,
+                                    text: txDetails.memo,
+                                    textAlign: TextAlign.start,
+                                    textStyle: AppStyles.textStyleTransactionMemo(context),
+                                    textStyleHighlight: TextStyle(
+                                      fontSize: AppFontSizes.smallest,
+                                      fontFamily: 'OverpassMono',
+                                      fontWeight: FontWeight.w100,
+                                      color: StateContainer.of(context).curTheme.warning60,
+                                    ),
+                                    words: false),
+                              )
+                            : SizedBox(),
+                        Container(
+                          // width: MediaQuery.of(context).size.width / 4.0,
+                          constraints: BoxConstraints(maxWidth: 100),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              // Text(
+                              //   displayName,
+                              //   maxLines: 5,
+                              //   textAlign: TextAlign.end,
+                              //   style: AppStyles.textStyleTransactionAddress(context),
+                              // ),
+                              SubstringHighlight(
+                                  caseSensitive: false,
+                                  maxLines: 5,
+                                  term: _searchController.text,
+                                  text: displayName,
+                                  textAlign: TextAlign.right,
+                                  textStyle: AppStyles.textStyleTransactionAddress(context),
+                                  textStyleHighlight: TextStyle(
+                                    fontSize: AppFontSizes.smallest,
+                                    fontFamily: 'OverpassMono',
+                                    fontWeight: FontWeight.w100,
+                                    color: StateContainer.of(context).curTheme.warning60,
+                                  ),
+                                  words: false),
+
+                              // TRANSACTION STATE TAG
+                              (transactionState != null)
+                                  ? Container(
+                                      margin: EdgeInsetsDirectional.only(
+                                        top: 4,
+                                      ),
+                                      child: TransactionStateTag(transactionState: transactionState),
+                                    )
+                                  : SizedBox(),
                             ],
                           ),
                         ),
                       ],
                     ),
-                    (txDetails != null && txDetails.memo != null)
-                        ? Container(
-                            // constraints: BoxConstraints(maxWidth: 105),
-                            // width: MediaQuery.of(context).size.width / 4.3,
-                            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 4),
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            // child: Text(
-                            //   txDetails.memo,
-                            //   textAlign: TextAlign.start,
-                            //   style: AppStyles.textStyleTransactionMemo(context),
-                            //   maxLines: 16,
-                            //   overflow: TextOverflow.visible,
-                            // ),
-                            child: SubstringHighlight(
-                                caseSensitive: false,
-                                maxLines: 16,
-                                term: _searchController.text,
-                                text: txDetails.memo,
-                                textAlign: TextAlign.start,
-                                textStyle: AppStyles.textStyleTransactionMemo(context),
-                                textStyleHighlight: TextStyle(
-                                  fontSize: AppFontSizes.smallest,
-                                  fontFamily: 'OverpassMono',
-                                  fontWeight: FontWeight.w100,
-                                  color: StateContainer.of(context).curTheme.warning60,
-                                ),
-                                words: false),
-                          )
-                        : Container(),
-                    Container(
-                      // width: MediaQuery.of(context).size.width / 4.0,
-                      constraints: BoxConstraints(maxWidth: 100),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          // Text(
-                          //   displayName,
-                          //   maxLines: 5,
-                          //   textAlign: TextAlign.end,
-                          //   style: AppStyles.textStyleTransactionAddress(context),
-                          // ),
-                          SubstringHighlight(
-                              caseSensitive: false,
-                              maxLines: 5,
-                              term: _searchController.text,
-                              text: displayName,
-                              textAlign: TextAlign.right,
-                              textStyle: AppStyles.textStyleTransactionAddress(context),
-                              textStyleHighlight: TextStyle(
-                                fontSize: AppFontSizes.smallest,
-                                fontFamily: 'OverpassMono',
-                                fontWeight: FontWeight.w100,
-                                color: StateContainer.of(context).curTheme.warning60,
-                              ),
-                              words: false),
-
-                          // TRANSACTION STATE TAG
-                          (transactionState != null)
-                              ? Container(
-                                  margin: EdgeInsetsDirectional.only(
-                                    top: 4,
-                                  ),
-                                  child: TransactionStateTag(transactionState: transactionState),
-                                )
-                              : SizedBox(),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
+            // handle bars:
+            slideEnabled
+                ? Container(
+                    width: 4,
+                    height: 30,
+                    margin: EdgeInsets.only(right: 22),
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.text,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  )
+                : SizedBox(),
+          ],
         ),
       ),
     );
   } // Payment Card End
 
   List<dynamic> getPossibleTXDetails(BuildContext context, dynamic item) {
-    bool isPayment = item is TXData;
+    bool isSolid = item is TXData;
     bool isRecipient = false;
     String account = "";
     String displayName;
 
-    if (isPayment) {
+    if (isSolid) {
       isRecipient = StateContainer.of(context).wallet.address == item.to_address;
     }
 
-    if (isPayment) {
+    if (isSolid) {
       // displayName =
       // smallScreen(context) ? indexedItem.getShorterString(isRecipient) : indexedItem.getShortString(isRecipient);
       displayName = item.getShortestString(isRecipient);
@@ -3266,7 +3480,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // displayName = displayName.substring(0, 5) + "\n" + displayName.substring(5, displayName.length);
 
-    if (isPayment) {
+    if (isSolid) {
       account = isRecipient ? item.from_address : item.to_address;
     } else {
       // slight change in structure:
@@ -3339,9 +3553,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         });
       }
       // Setup payments list
-      if (!_requestsListMap.containsKey("${StateContainer.of(context).wallet.address}")) {
+      if (!_solidsListMap.containsKey("${StateContainer.of(context).wallet.address}")) {
         setState(() {
-          _requestsListMap.putIfAbsent(StateContainer.of(context).wallet.address, () => StateContainer.of(context).wallet.requests);
+          _solidsListMap.putIfAbsent(StateContainer.of(context).wallet.address, () => StateContainer.of(context).wallet.solids);
         });
       }
       // Setup unified list
@@ -3454,121 +3668,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 }
 
-class TransactionDetailsSheet extends StatefulWidget {
-  final String hash;
-  final String address;
-  final String displayName;
-
-  TransactionDetailsSheet({this.hash, this.address, this.displayName}) : super();
-
-  _TransactionDetailsSheetState createState() => _TransactionDetailsSheetState();
-}
-
-class _TransactionDetailsSheetState extends State<TransactionDetailsSheet> {
-  // Current state references
-  bool _addressCopied = false;
-  // Timer reference so we can cancel repeated events
-  Timer _addressCopiedTimer;
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      minimum: EdgeInsets.only(
-        bottom: MediaQuery.of(context).size.height * 0.035,
-      ),
-      child: Container(
-        width: double.infinity,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                // A stack for Copy Address and Add Contact buttons
-                Stack(
-                  children: <Widget>[
-                    // A row for Copy Address Button
-                    Row(
-                      children: <Widget>[
-                        AppButton.buildAppButton(
-                            context,
-                            // Share Address Button
-                            _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
-                            Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                          Clipboard.setData(new ClipboardData(text: widget.address));
-                          if (mounted) {
-                            setState(() {
-                              // Set copied style
-                              _addressCopied = true;
-                            });
-                          }
-                          if (_addressCopiedTimer != null) {
-                            _addressCopiedTimer.cancel();
-                          }
-                          _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
-                            if (mounted) {
-                              setState(() {
-                                _addressCopied = false;
-                              });
-                            }
-                          });
-                        }),
-                      ],
-                    ),
-                    // A row for Add Contact Button
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsetsDirectional.only(top: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[1], end: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[2]),
-                          child: Container(
-                            height: 55,
-                            width: 55,
-                            // Add Contact Button
-                            child: !widget.displayName.startsWith("@")
-                                ? FlatButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      Sheets.showAppHeightNineSheet(context: context, widget: AddContactSheet(address: widget.address));
-                                    },
-                                    splashColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-                                    child: Icon(AppIcons.addcontact,
-                                        size: 35,
-                                        color: _addressCopied
-                                            ? StateContainer.of(context).curTheme.successDark
-                                            : StateContainer.of(context).curTheme.backgroundDark),
-                                  )
-                                : SizedBox(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                // A row for View Details button
-                Row(
-                  children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).viewDetails, Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                        return UIUtil.showBlockExplorerWebview(context, widget.hash);
-                      }));
-                    }),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 /// This is used so that the elevation of the container is kept and the
 /// drop shadow is not clipped.
 ///
@@ -3654,7 +3753,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
       is_gift_load = true;
 
       // Get the wallet seed by splitting the metadata by :
-      List<String> metadataList = txDetails.metadata.split("^");
+      List<String> metadataList = txDetails.metadata.split(RecordTypes.SEPARATOR);
       walletSeed = metadataList[0];
       sharableLink = metadataList[1];
     }
@@ -3766,12 +3865,12 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                               sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, true);
                             }
                             // setState(() {});
-                            StateContainer.of(context).updateRequests();
+                            StateContainer.of(context).updateSolids();
                             Navigator.of(context).pop();
                           }),
                         ],
                       )
-                    : Container(),
+                    : SizedBox(),
 
                 // pay this request button:
                 is_unfulfilled_payable_request
@@ -3782,17 +3881,11 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                               onPressed: () {
                             Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
-                            Sheets.showAppHeightNineSheet(
-                                context: context,
-                                widget: SendSheet(
-                                  localCurrency: StateContainer.of(context).curCurrency,
-                                  address: txDetails.from_address,
-                                  quickSendAmount: txDetails.amount_raw,
-                                ));
+                            _AppHomePageState.payTX(context, txDetails);
                           }),
                         ],
                       )
-                    : Container(),
+                    : SizedBox(),
 
                 // block this user from sending you requests:
                 (txDetails.is_request && StateContainer.of(context).wallet.address != txDetails.from_address)
@@ -3807,18 +3900,10 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                                 widget: AddBlockedSheet(
                                   address: txDetails.from_address,
                                 ));
-
-                            // Sheets.showAppHeightNineSheet(
-                            //     context: context,
-                            //     widget: SendSheet(
-                            //       localCurrency: StateContainer.of(context).curCurrency,
-                            //       address: widget.from_address,
-                            //       quickSendAmount: widget.amount_raw,
-                            //     ));
                           }),
                         ],
                       )
-                    : Container(),
+                    : SizedBox(),
 
                 // re-send request button:
                 is_unacknowledged_sendable_request
@@ -3828,87 +3913,11 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                               context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).sendRequestAgain, Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
                               onPressed: () async {
                             // send the request again:
-                            // show sending animation:
-                            bool animationOpen = true;
-                            Navigator.of(context).push(AnimationLoadingOverlay(AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong,
-                                StateContainer.of(context).curTheme.animationOverlayMedium,
-                                onPoppedCallback: () => animationOpen = false));
-
-                            bool sendFailed = false;
-
-                            // send the request again:
-                            String privKey =
-                                NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
-                            // get epoch time as hex:
-                            int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
-                            String nonce_hex = secondsSinceEpoch.toRadixString(16);
-                            String signature = NanoSignatures.signBlock(nonce_hex, privKey);
-
-                            // check validity locally:
-                            String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet?.address);
-                            bool isValid = NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
-                            if (!isValid) {
-                              throw Exception("Invalid signature?!");
-                            }
-
-                            // create a local memo object:
-                            var uuid = Uuid();
-                            String local_uuid = "LOCAL:" + uuid.v4();
-                            var requestTXData = new TXData(
-                              from_address: txDetails.from_address,
-                              to_address: txDetails.to_address,
-                              amount_raw: txDetails.amount_raw,
-                              uuid: local_uuid,
-                              block: txDetails.block,
-                              is_acknowledged: false,
-                              is_fulfilled: false,
-                              is_request: true,
-                              is_memo: false,
-                              // request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
-                              request_time: txDetails.request_time,
-                              memo: txDetails.memo, // store unencrypted memo
-                              height: txDetails.height,
-                            );
-                            // add it to the database:
-                            await sl.get<DBHelper>().addTXData(requestTXData);
-
-                            try {
-                              // encrypt the memo if it's not empty:
-                              String encryptedMemo;
-                              if (txDetails.memo != null && txDetails.memo.isNotEmpty) {
-                                encryptedMemo = await StateContainer.of(context).encryptMessage(txDetails.memo, txDetails.to_address, privKey);
-                              }
-                              await sl.get<AccountService>().requestPayment(txDetails.to_address, txDetails.amount_raw,
-                                  StateContainer.of(context).wallet.address, signature, nonce_hex, encryptedMemo, local_uuid);
-                            } catch (e) {
-                              print(e);
-                              sendFailed = true;
-                            }
-
-                            // if the memo send failed delete the object:
-                            if (sendFailed) {
-                              print("request send failed, deleting TXData object");
-                              // remove failed txdata from the database:
-                              await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
-                              // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
-                              await Future.delayed(Duration(seconds: 2));
-                              // show error:
-                              UIUtil.showSnackbar(AppLocalization.of(context).requestSendError, context, durationMs: 5000);
-                            } else {
-                              // delete the old request by uuid:
-                              await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid);
-                              // memo sent successfully, show success:
-                              UIUtil.showSnackbar(AppLocalization.of(context).requestSentButNotReceived, context, durationMs: 5000);
-                            }
-                            await StateContainer.of(context).updateRequests();
-                            // hack to get tx memo to update:
-                            EventTaxiImpl.singleton().fire(TXUpdateEvent());
-
-                            Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+                            _AppHomePageState.resendRequest(context, txDetails);
                           }),
                         ],
                       )
-                    : Container(),
+                    : SizedBox(),
                 // re-send memo button
                 (resendable_memo)
                     ? Row(
@@ -3919,82 +3928,11 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                               AppButtonType.PRIMARY_OUTLINE,
                               AppLocalization.of(context).resendMemo,
                               Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () async {
-                            // show sending animation:
-                            bool animationOpen = true;
-                            Navigator.of(context).push(AnimationLoadingOverlay(AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong,
-                                StateContainer.of(context).curTheme.animationOverlayMedium,
-                                onPoppedCallback: () => animationOpen = false));
-
-                            bool memoSendFailed = false;
-
-                            // send the memo again:
-                            String privKey =
-                                NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
-                            // get epoch time as hex:
-                            int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
-                            String nonce_hex = secondsSinceEpoch.toRadixString(16);
-                            String signature = NanoSignatures.signBlock(nonce_hex, privKey);
-
-                            // check validity locally:
-                            String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet?.address);
-                            bool isValid = NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
-                            if (!isValid) {
-                              throw Exception("Invalid signature?!");
-                            }
-
-                            // create a local memo object:
-                            var uuid = Uuid();
-                            String local_uuid = "LOCAL:" + uuid.v4();
-                            var memoTXData = new TXData(
-                              from_address: txDetails.from_address,
-                              to_address: txDetails.to_address,
-                              amount_raw: txDetails.amount_raw,
-                              uuid: local_uuid,
-                              block: txDetails.block,
-                              is_acknowledged: false,
-                              is_fulfilled: false,
-                              is_request: false,
-                              is_memo: true,
-                              // request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
-                              request_time: txDetails.request_time,
-                              memo: txDetails.memo, // store unencrypted memo
-                              height: txDetails.height,
-                            );
-                            // add it to the database:
-                            await sl.get<DBHelper>().addTXData(memoTXData);
-
-                            try {
-                              // encrypt the memo:
-                              String encryptedMemo = await StateContainer.of(context).encryptMessage(txDetails.memo, txDetails.to_address, privKey);
-                              await sl.get<AccountService>().sendTXMemo(txDetails.to_address, StateContainer.of(context).wallet.address, txDetails.amount_raw,
-                                  signature, nonce_hex, encryptedMemo, txDetails.block, local_uuid);
-                            } catch (e) {
-                              memoSendFailed = true;
-                            }
-
-                            // if the memo send failed delete the object:
-                            if (memoSendFailed) {
-                              print("memo send failed, deleting TXData object");
-                              // remove from the database:
-                              await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
-                              // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
-                              await Future.delayed(Duration(seconds: 2));
-                              // show error:
-                              UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
-                            } else {
-                              // delete the old memo by uuid:
-                              await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid);
-                              // memo sent successfully, show success:
-                              UIUtil.showSnackbar(AppLocalization.of(context).memoSentButNotReceived, context, durationMs: 5000);
-                              // hack to get tx memo to update:
-                              EventTaxiImpl.singleton().fire(TXUpdateEvent());
-                            }
-
-                            Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+                            _AppHomePageState.resendMemo(context, txDetails);
                           }),
                         ],
                       )
-                    : Container(),
+                    : SizedBox(),
                 // delete this request button
                 txDetails.is_request
                     ? Row(
@@ -4004,11 +3942,11 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                               onPressed: () {
                             Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
                             sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid);
-                            StateContainer.of(context).updateRequests();
+                            StateContainer.of(context).updateSolids();
                           }),
                         ],
                       )
-                    : Container(),
+                    : SizedBox(),
                 is_gift_load
                     ? Row(
                         children: <Widget>[
@@ -4034,7 +3972,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           }),
                         ],
                       )
-                    : Container(),
+                    : SizedBox(),
                 is_gift_load
                     ? Row(
                         children: <Widget>[
@@ -4060,7 +3998,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           }),
                         ],
                       )
-                    : Container(),
+                    : SizedBox(),
                 is_gift_load
                     ? Row(
                         children: <Widget>[
@@ -4074,7 +4012,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           }),
                         ],
                       )
-                    : Container(),
+                    : SizedBox(),
               ],
             ),
           ],
@@ -4083,22 +4021,3 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
     );
   }
 }
-
-/// This is used so that the elevation of the container is kept and the
-/// drop shadow is not clipped.
-///
-// class _SizeTransitionNoClip extends AnimatedWidget {
-//   final Widget child;
-
-//   const _SizeTransitionNoClip({@required Animation<double> sizeFactor, this.child}) : super(listenable: sizeFactor);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Align(
-//       alignment: const AlignmentDirectional(-1.0, -1.0),
-//       widthFactor: null,
-//       heightFactor: (this.listenable as Animation<double>).value,
-//       child: child,
-//     );
-//   }
-// }

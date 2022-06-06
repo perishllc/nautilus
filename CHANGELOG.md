@@ -1,22 +1,31 @@
-# v0.3.1 - [2022-06-03]
+# v0.3.1 - [2022-06-06]
 
 #### Added
 - Change Log (You're reading it!)
   - You can view this any time by clicking the "Change Log" button at the bottom of the settings drawer
+- Send E2EE messages without sending an amount or request
 - Support for ENS Domains
 - Support for Unstoppable Domains
 - Reminder to Rate the App after some time (dismissable)
 - Button to change rep to the Nautilus Node
 - Node status page in the settings drawer
+- "not sent" transaction status tag for failed messages
+- Button to destroy the internal db (useful to simulate a fresh install)
+  - This will delete all requests, messages, and preferences
+  - This will not delete your private seed
+- Ported some outdated libraries for compatibility with flutter 3.0
+- Favorites and Blocked users show known "Aliases" for the user's address on the details page for the user
 
 #### Changed
 - Change text for clarity
   - Requested -> Asked
   - unfulfilled / fulfilled -> paid / unpaid
-- Many minor things had to be re-factored or tweaked visually to make Favorites, Blocked, and the send sheet to support ENS/Unstoppable domains
+- Many minor things had to be re-factored or tweaked visually to make Favorites, Blocked, and the send sheet support ENS/Unstoppable domains
 - Complete overhaul of Favorites and Blocking of users
+
 - Added text to the slidable account drawers
 - Added handlebars so that people know that they're slidable
+- drawerEdgeDragWidth: 200 -> 180 (to make it slightly easier to drag list items without opening the drawer)
 #### Fixed
 - Minor visual issues
 
@@ -48,3 +57,10 @@
   - Displays balances in nyano instead of NANO
 #### Changed
 - Contacts -> Favorites
+
+## TODO:
+- create a txdata for gift card open
+- check for duplicate memos and remove them (just in case)
+- make a UI for preferred username / display name in the case that there are multiple users with the same address
+- work on null safety ports of dependencies
+- see how hard it will be to add windows store / desktop support w/ flutter 3.0

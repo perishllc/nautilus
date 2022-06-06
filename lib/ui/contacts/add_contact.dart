@@ -6,6 +6,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
@@ -44,8 +45,8 @@ class _AddContactSheetState extends State<AddContactSheet> {
   bool _addressValid;
   bool _pasteButtonVisible;
   bool _addressValidAndUnfocused;
-  String _addressHint = "";
-  String _nameHint = "";
+  String _addressHint;
+  String _nameHint;
   String _nameValidationText;
   String _addressValidationText;
   String _correspondingUsername;
@@ -100,7 +101,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
               _addressController.text = formattedAddress;
             });
           }
-          var userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
+          var userList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(formattedAddress);
           if (userList != null) {
             setState(() {
               _users = userList;
@@ -162,7 +163,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
 
             if (address != null && user == null) {
               // add to the db if missing:
-              User user = new User(username: formattedAddress, address: address, type: type, blocked: false);
+              User user = new User(username: formattedAddress, address: address, type: type, is_blocked: false);
               await sl.get<DBHelper>().addUser(user);
             }
           } else {
@@ -189,7 +190,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
   //*******************************************************//
   getEnterAddressContainer() {
     return AppTextField(
-      topMargin: 124,
+      topMargin: 115,
       padding: _addressValidAndUnfocused ? EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
       textAlign: TextAlign.center,
       focusNode: _addressFocusNode,
@@ -201,7 +202,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _addressHint ?? AppLocalization.of(context).favoriteNameHint,
+      hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
       prefixButton: TextFieldButton(
           icon: AppIcons.scan,
           onPressed: () async {
@@ -297,15 +298,8 @@ class _AddContactSheetState extends State<AddContactSheet> {
             _isUser = false;
             _users = [];
           });
-        } else if (isFavorite) {
-          var matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
-          if (matchedList != null) {
-            setState(() {
-              _users = matchedList;
-            });
-          }
         } else if (isUser || isDomain) {
-          var matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          var matchedList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(SendSheetHelpers.stripPrefixes(text));
           if (matchedList != null) {
             setState(() {
               _users = matchedList;
@@ -370,7 +364,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
           width: double.infinity - 5,
           child: FlatButton(
             onPressed: () {
-              _addressController.text = user.getDisplayName();
+              _addressController.text = user.getDisplayName(ignoreNickname: true);
               _addressFocusNode.unfocus();
               setState(() {
                 _isUser = true;
@@ -379,7 +373,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 _addressValidationText = "";
               });
             },
-            child: Text(user.getDisplayName(), textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+            child: Text(user.getDisplayName(ignoreNickname: true), textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(
@@ -432,116 +426,145 @@ class _AddContactSheetState extends State<AddContactSheet> {
 
           // The main container that holds "Enter Name" and "Enter Address" text fields
           Expanded(
-            child: KeyboardAvoider(
-              duration: Duration(milliseconds: 0),
-              autoScroll: true,
-              focusPadding: 40,
-              child: Column(
-                children: <Widget>[
-                  // Enter Name Container
-                  AppTextField(
-                    topMargin: MediaQuery.of(context).size.height * 0.14,
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    focusNode: _nameFocusNode,
-                    controller: _nameController,
-                    textInputAction: widget.address != null ? TextInputAction.done : TextInputAction.next,
-                    hintText: _nameHint,
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16.0,
-                      color: StateContainer.of(context).curTheme.text,
-                      fontFamily: 'NunitoSans',
-                    ),
-                    inputFormatters: [LengthLimitingTextInputFormatter(20), ContactInputFormatter()],
-                    onSubmitted: (text) {
-                      if (widget.address == null) {
-                        if (!Address(_addressController.text).isValid()) {
-                          FocusScope.of(context).requestFocus(_addressFocusNode);
-                        } else {
-                          FocusScope.of(context).unfocus();
-                        }
-                      } else {
-                        FocusScope.of(context).unfocus();
-                      }
-                    },
-                  ),
-                  // Enter Name Error Container
-                  Container(
-                    margin: EdgeInsets.only(top: 5, bottom: 5),
-                    child: Text(_nameValidationText,
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          color: StateContainer.of(context).curTheme.primary,
-                          fontFamily: 'NunitoSans',
-                          fontWeight: FontWeight.w600,
-                        )),
-                  ),
-
-                  // Enter Address container
-                  // Column for Enter Address container + Enter Address Error container
-                  Column(
+            child: Container(
+              margin: EdgeInsets.only(top: 5, bottom: 5),
+              child: GestureDetector(
+                onTap: () {
+                  // Clear focus of our fields when tapped in this empty space
+                  _nameFocusNode.unfocus();
+                  _addressFocusNode.unfocus();
+                },
+                child: KeyboardAvoider(
+                  duration: Duration(milliseconds: 0),
+                  autoScroll: true,
+                  focusPadding: 40,
+                  child: Column(
                     children: <Widget>[
-                      Container(
-                        alignment: Alignment.topCenter,
-                        child: Stack(
-                          alignment: Alignment.topCenter,
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                              alignment: Alignment.bottomCenter,
-                              constraints: BoxConstraints(maxHeight: 174, minHeight: 0),
-                              // ********************************************* //
-                              // ********* The pop-up Contacts List ********* //
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(25),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(25),
-                                    color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(25),
+                      Stack(
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              // Enter Name Container
+                              AppTextField(
+                                focusNode: _nameFocusNode,
+                                controller: _nameController,
+                                // topMargin: MediaQuery.of(context).size.height * 0.14,
+                                topMargin: 30,
+                                padding: EdgeInsets.symmetric(horizontal: 30),
+                                textInputAction: widget.address != null ? TextInputAction.done : TextInputAction.next,
+                                hintText: _nameHint ?? AppLocalization.of(context).favoriteNameHint,
+                                keyboardType: TextInputType.text,
+
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16.0,
+                                  color: StateContainer.of(context).curTheme.text,
+                                  fontFamily: 'NunitoSans',
+                                ),
+                                inputFormatters: [LengthLimitingTextInputFormatter(20), ContactInputFormatter()],
+                                onSubmitted: (text) {
+                                  if (widget.address == null) {
+                                    if (!Address(_addressController.text).isValid()) {
+                                      FocusScope.of(context).requestFocus(_addressFocusNode);
+                                    } else {
+                                      FocusScope.of(context).unfocus();
+                                    }
+                                  } else {
+                                    FocusScope.of(context).unfocus();
+                                  }
+                                },
+                                onChanged: (text) {
+                                  // Always reset the error message to be less annoying
+                                  setState(() {
+                                    _nameValidationText = "";
+                                  });
+                                },
+                              ),
+                              // Enter Name Error Container
+                              Container(
+                                margin: EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(_nameValidationText ?? "",
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: StateContainer.of(context).curTheme.primary,
+                                      fontFamily: 'NunitoSans',
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ),
+                            ],
+                          ),
+
+                          // Enter Address container
+                          // Column for Enter Address container + Enter Address Error container
+                          Column(
+                            children: <Widget>[
+                              Container(
+                                alignment: Alignment.topCenter,
+                                child: Stack(
+                                  alignment: Alignment.topCenter,
+                                  children: <Widget>[
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                      alignment: Alignment.bottomCenter,
+                                      constraints: BoxConstraints(maxHeight: 160, minHeight: 0),
+                                      // ********************************************* //
+                                      // ********* The pop-up Contacts List ********* //
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(25),
+                                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                          ),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(25),
+                                            ),
+                                            margin: EdgeInsets.only(bottom: 50),
+                                            child: ListView.builder(
+                                              shrinkWrap: true,
+                                              padding: EdgeInsets.only(bottom: 0, top: 0),
+                                              itemCount: _users.length,
+                                              itemBuilder: (context, index) {
+                                                return _buildUserItem(_users[index]);
+                                              },
+                                            ), // ********* The pop-up Contacts List End ********* //
+                                            // ************************************************** //
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                    margin: EdgeInsets.only(bottom: 50),
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      padding: EdgeInsets.only(bottom: 0, top: 0),
-                                      itemCount: _users.length,
-                                      itemBuilder: (context, index) {
-                                        return _buildUserItem(_users[index]);
-                                      },
-                                    ), // ********* The pop-up Contacts List End ********* //
-                                    // ************************************************** //
-                                  ),
+
+                                    // ******* Enter Address Container ******* //
+                                    getEnterAddressContainer(),
+                                    // ******* Enter Address Container End ******* //
+                                  ],
                                 ),
                               ),
-                            ),
 
-                            // ******* Enter Address Container ******* //
-                            getEnterAddressContainer(),
-                            // ******* Enter Address Container End ******* //
-                          ],
-                        ),
+                              // Enter Address Error Container
+                              Container(
+                                margin: EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(_addressValidationText,
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: StateContainer.of(context).curTheme.primary,
+                                      fontFamily: 'NunitoSans',
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  // Enter Address Error Container
-                  Container(
-                    margin: EdgeInsets.only(top: 5, bottom: 5),
-                    child: Text(_addressValidationText,
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          color: StateContainer.of(context).curTheme.primary,
-                          fontFamily: 'NunitoSans',
-                          fontWeight: FontWeight.w600,
-                        )),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
+
           //A column with "Add Contact" and "Close" buttons
           Container(
             child: Column(
@@ -552,13 +575,25 @@ class _AddContactSheetState extends State<AddContactSheet> {
                     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).addFavorite, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       if (await validateForm()) {
-                        User newContact =
-                            User(nickname: _nameController.text.substring(1), address: widget.address == null ? _addressController.text : widget.address);
-                        await sl.get<DBHelper>().saveContact(newContact);
-                        newContact.address = newContact.address.replaceAll("xrb_", "nano_");
+                        User newContact;
+                        String formAddress = widget.address != null ? widget.address : _addressController.text;
+                        String formattedNickname = _nameController.text.substring(1);
+                        // if we're given an address with corresponding username, just block:
+                        if (_correspondingUsername != null) {
+                          newContact = User(nickname: formattedNickname, address: formAddress, username: _correspondingUsername);
+                          await sl.get<DBHelper>().saveContact(newContact);
+                        } else if (_correspondingAddress != null) {
+                          newContact = User(nickname: formattedNickname, address: _correspondingAddress, username: SendSheetHelpers.stripPrefixes(formAddress));
+                          await sl.get<DBHelper>().saveContact(newContact);
+                        } else {
+                          // just an address:
+                          newContact = User(nickname: formattedNickname, address: formAddress);
+                          await sl.get<DBHelper>().saveContact(newContact);
+                        }
                         EventTaxiImpl.singleton().fire(ContactAddedEvent(contact: newContact));
-                        UIUtil.showSnackbar(AppLocalization.of(context).contactAdded.replaceAll("%1", newContact.nickname), context);
+                        UIUtil.showSnackbar(AppLocalization.of(context).contactAdded.replaceAll("%1", newContact.getDisplayName()), context);
                         EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: newContact));
+                        EventTaxiImpl.singleton().fire(TXUpdateEvent());
                         Navigator.of(context).pop();
                       }
                     }),
@@ -585,28 +620,85 @@ class _AddContactSheetState extends State<AddContactSheet> {
     bool isValid = true;
     // Address Validations
     // Don't validate address if it came pre-filled in
-    if (widget.address == null) {
-      if (_addressController.text.isEmpty) {
-        isValid = false;
-        setState(() {
-          _addressValidationText = AppLocalization.of(context).addressMissing;
-        });
-      } else if (!Address(_addressController.text).isValid()) {
+    String formAddress = widget.address != null ? widget.address : _addressController.text;
+    String formattedAddress = SendSheetHelpers.stripPrefixes(formAddress);
+
+    // if (widget.address == null) {
+    if (formAddress.isEmpty) {
+      isValid = false;
+      setState(() {
+        _addressValidationText = AppLocalization.of(context).addressOrUserMissing;
+      });
+    } else if (formAddress.startsWith("nano_")) {
+      // we're dealing with an address:
+
+      if (!Address(formAddress).isValid()) {
         isValid = false;
         setState(() {
           _addressValidationText = AppLocalization.of(context).invalidAddress;
         });
+      }
+
+      _addressFocusNode.unfocus();
+      bool contactExists = await sl.get<DBHelper>().contactExistsWithAddress(formAddress);
+      if (contactExists) {
+        isValid = false;
+        setState(() {
+          _addressValidationText = AppLocalization.of(context).favoriteExists;
+        });
       } else {
-        _addressFocusNode.unfocus();
-        bool addressExists = await sl.get<DBHelper>().contactExistsWithAddress(_addressController.text);
-        if (addressExists) {
+        // get the corresponding username if it exists:
+        String username = await sl.get<DBHelper>().getUsernameWithAddress(formAddress);
+        if (username != null) {
           setState(() {
-            isValid = false;
-            _addressValidationText = AppLocalization.of(context).favoriteExists;
+            _correspondingUsername = username;
           });
         }
       }
+    } else {
+      // we're dealing with a username:
+      bool contactExists = await sl.get<DBHelper>().contactExistsWithUsername(formattedAddress);
+      if (contactExists) {
+        isValid = false;
+        setState(() {
+          _addressValidationText = AppLocalization.of(context).favoriteExists;
+        });
+      } else {
+        // check if there's a corresponding address:
+        User user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+        if (user != null) {
+          setState(() {
+            if (user.address != null) {
+              _correspondingAddress = user.address;
+            }
+            if (user.nickname != null && user.nickname.isNotEmpty) {
+              isValid = false;
+              setState(() {
+                _addressValidationText = AppLocalization.of(context).favoriteExists;
+              });
+            }
+          });
+        } else {
+          isValid = false;
+          setState(() {
+            _addressValidationText = formattedAddress.contains(".") ? AppLocalization.of(context).domainInvalid : AppLocalization.of(context).userNotFound;
+          });
+        }
+      }
+      // }
+      // reset corresponding username if invalid:
+      if (isValid == false && _correspondingUsername != null) {
+        setState(() {
+          _correspondingUsername = null;
+        });
+      }
+      if (isValid == false && _correspondingAddress != null) {
+        setState(() {
+          _correspondingAddress = null;
+        });
+      }
     }
+
     // Name Validations
     if (_nameController.text.isEmpty) {
       isValid = false;

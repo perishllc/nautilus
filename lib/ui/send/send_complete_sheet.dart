@@ -19,10 +19,10 @@ class SendCompleteSheet extends StatefulWidget {
   final String destination;
   final String contactName;
   final String localAmount;
+  final String memo;
   final PaymentRequestMessage paymentRequest;
-  final int natriconNonce;
 
-  SendCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.paymentRequest, this.natriconNonce}) : super();
+  SendCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.paymentRequest, this.memo}) : super();
 
   _SendCompleteSheetState createState() => _SendCompleteSheetState();
 }
@@ -85,52 +85,68 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                     child: Icon(AppIcons.success, size: 100, color: StateContainer.of(context).curTheme.success),
                   ),
                   // Container for the Amount Text
-                  Container(
-                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.backgroundDarkest,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    // Amount text
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        text: '',
-                        children: [
-                          displayCurrencyAmount(
-                            context,
-                            TextStyle(
-                              color: StateContainer.of(context).curTheme.success,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                              decoration: TextDecoration.lineThrough,
+                  (widget.amountRaw == "0" && widget.memo != null && widget.memo.isNotEmpty)
+                      ? // memo text
+                      Container(
+                          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Text(
+                            widget.memo,
+                            style: AppStyles.textStyleParagraph(context),
+                            textAlign: TextAlign.center,
+                          ))
+                      : Container(
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          // Amount text
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              text: '',
+                              children: [
+                                displayCurrencyAmount(
+                                  context,
+                                  TextStyle(
+                                    color: StateContainer.of(context).curTheme.success,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans',
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text:
+                                      getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
+                                  style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.success,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans',
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: widget.localAmount != null ? " (${widget.localAmount})" : "",
+                                  style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.success.withOpacity(0.75),
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans',
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          TextSpan(
-                            text: getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.success,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                            ),
-                          ),
-                          TextSpan(
-                            text: widget.localAmount != null ? " (${widget.localAmount})" : "",
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.success.withOpacity(0.75),
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                        ),
                   // Container for the "SENT TO" text
                   Container(
                     margin: EdgeInsets.only(top: 30.0, bottom: 10),

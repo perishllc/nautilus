@@ -18,6 +18,7 @@ import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -201,7 +202,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                             ],
                           ),
                         ))
-                      : Container(),
+                      : SizedBox(),
                   (widget.memo != null)
                       ?
                       // memo text
@@ -218,7 +219,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                             style: AppStyles.textStyleParagraph(context),
                             textAlign: TextAlign.center,
                           ))
-                      : Container(),
+                      : SizedBox(),
                 ],
               ),
             ),
@@ -325,7 +326,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           block: resp.hash,
           record_type: RecordTypes.GIFT_LOAD,
           status: "created",
-          metadata: widget.paperWalletSeed + "^" + response.result,
+          metadata: widget.paperWalletSeed + RecordTypes.SEPARATOR + response.result,
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,
@@ -368,8 +369,8 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           uuid: "LOCAL:" + uuid.v4(),
           block: resp.hash,
           record_type: RecordTypes.GIFT_LOAD,
-          status: "create_failed",
-          metadata: widget.paperWalletSeed + "^" + "failed",
+          status: StatusTypes.CREATE_FAILED,
+          metadata: widget.paperWalletSeed + RecordTypes.SEPARATOR + StatusTypes.CREATE_FAILED,
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,

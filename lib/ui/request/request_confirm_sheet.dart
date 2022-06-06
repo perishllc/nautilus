@@ -283,7 +283,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                             ],
                           ),
                         ))
-                      : Container(),
+                      : SizedBox(),
                   (widget.memo != null && widget.memo.isNotEmpty)
                       ?
                       // memo text
@@ -300,7 +300,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                             style: AppStyles.textStyleParagraph(context),
                             textAlign: TextAlign.center,
                           ))
-                      : Container(),
+                      : SizedBox(),
                 ],
               ),
             ),
@@ -390,6 +390,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         is_fulfilled: false,
         is_request: true,
         is_memo: false,
+        is_message: false,
         request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
         memo: widget.memo,
         height: currentBlockHeightInList,
@@ -422,13 +423,17 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
         await Future.delayed(Duration(seconds: 2));
         // update the list view:
-        await StateContainer.of(context).updateRequests();
+        await StateContainer.of(context).updateSolids();
         await StateContainer.of(context).updateUnified(true);
         // go to home and show error:
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
         UIUtil.showSnackbar(AppLocalization.of(context).requestError, context, durationMs: 5500);
       } else {
         print("request succeeded");
+
+        // update the status:
+        newRequestTXData.status = StatusTypes.CREATE_SUCCESS;
+        await sl.get<DBHelper>().replaceTXDataByUUID(newRequestTXData);
 
         // Show complete
         // todo: there's a potential memory leak with contacts somewhere here?
@@ -441,7 +446,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         }
 
         // update the list view:
-        await StateContainer.of(context).updateRequests();
+        await StateContainer.of(context).updateSolids();
         await StateContainer.of(context).updateUnified(false);
 
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));

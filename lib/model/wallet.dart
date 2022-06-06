@@ -16,7 +16,7 @@ class AppWallet {
 
   bool _loading; // Whether or not app is initially loading
   bool _historyLoading; // Whether or not we have received initial account history response
-  bool _requestsLoading;
+  bool _solidsLoading;
   bool _unifiedLoading;
   String _address;
   String _username;
@@ -30,7 +30,7 @@ class AppWallet {
   int _blockCount;
   int confirmationHeight;
   List<AccountHistoryResponseItem> _history;
-  List<TXData> _requests;
+  List<TXData> _solids;
   List<dynamic> _unified;
 
   AppWallet(
@@ -45,7 +45,7 @@ class AppWallet {
       String btcPrice,
       int blockCount,
       List<AccountHistoryResponseItem> history,
-      List<TXData> requests,
+      List<TXData> solids,
       bool loading,
       bool historyLoading,
       bool requestsLoading,
@@ -60,12 +60,12 @@ class AppWallet {
     this._localCurrencyPrice = localCurrencyPrice ?? "0";
     this._btcPrice = btcPrice ?? "0";
     this._blockCount = blockCount ?? 0;
-    this._history = history ?? /*new List<AccountHistoryResponseItem>()*/ [];
-    this._requests = requests ?? /*new List<TXData>()*/ [];
-    this._unified = unified ?? /*new List<dynamic>();*/ [];
+    this._history = history ?? [];
+    this._solids = solids ?? [];
+    this._unified = unified ?? [];
     this._loading = loading ?? true;
     this._historyLoading = historyLoading ?? true;
-    this._requestsLoading = requestsLoading ?? true;
+    this._solidsLoading = solidsLoading ?? true;
     this._unifiedLoading = unifiedLoading ?? true;
   }
 
@@ -165,10 +165,10 @@ class AppWallet {
     _history = value;
   }
 
-  List<TXData> get requests => _requests;
+  List<TXData> get solids => _solids;
 
-  set requests(List<TXData> value) {
-    _requests = value;
+  set solids(List<TXData> value) {
+    _solids = value;
   }
 
   List<dynamic> get unified => _unified;
@@ -189,10 +189,10 @@ class AppWallet {
     _historyLoading = value;
   }
 
-  bool get requestsLoading => _requestsLoading;
+  bool get solidsLoading => _solidsLoading;
 
-  set requestsLoading(bool value) {
-    _requestsLoading = value;
+  set solidsLoading(bool value) {
+    _solidsLoading = value;
   }
 
   bool get unifiedLoading => _unifiedLoading;

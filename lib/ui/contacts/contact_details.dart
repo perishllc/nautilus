@@ -37,8 +37,90 @@ class ContactDetailsSheet {
   // Timer reference so we can cancel repeated events
   Timer _addressCopiedTimer;
 
+  List<Widget> getAliases(BuildContext context, User user) {
+    var aliases = <Widget>[];
+    if (user.aliases == null) {
+      aliases = [
+        (user.username != null)
+            ? Container(
+                width: double.infinity,
+                margin: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.105,
+                  right: MediaQuery.of(context).size.width * 0.105,
+                  top: 15.0,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+                decoration: BoxDecoration(
+                  color: StateContainer.of(context).curTheme.backgroundDarkest,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Text(
+                  user.getDisplayName(ignoreNickname: true),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16.0,
+                    color: StateContainer.of(context).curTheme.primary,
+                    fontFamily: 'NunitoSans',
+                  ),
+                ),
+              )
+            : SizedBox(),
+      ];
+    } else {
+      for (var i = 0; i < user.aliases.length; i += 2) {
+        String displayName = user.aliases[i];
+        String userType = user.aliases[i + 1];
+        displayName = User.getDisplayNameWithType(displayName, userType);
+        aliases.add(Container(
+          width: double.infinity,
+          margin: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width * 0.105,
+            right: MediaQuery.of(context).size.width * 0.105,
+            top: 15.0,
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+          decoration: BoxDecoration(
+            color: StateContainer.of(context).curTheme.backgroundDarkest,
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: Text(
+            displayName,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16.0,
+              color: StateContainer.of(context).curTheme.primary,
+              fontFamily: 'NunitoSans',
+            ),
+          ),
+        ));
+      }
+    }
+
+    var aliasContainer = Container(
+      constraints: BoxConstraints(minHeight: 50, maxHeight: 400),
+      child: Scrollbar(
+        child: SingleChildScrollView(
+          child: Column(
+            children: aliases,
+          ),
+        ),
+      ),
+    );
+
+    return [aliasContainer];
+  }
+
+  List<Widget> combineLists(List<Widget> list1, List<Widget> list2) {
+    List<Widget> combinedList = [];
+    combinedList.addAll(list2);
+    combinedList.addAll(list1);
+    return combinedList;
+  }
+
   mainBottomSheet(BuildContext context) {
-    AppSheets.showAppHeightEightSheet(
+    AppSheets.showAppHeightNineSheet(
         context: context,
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
@@ -61,14 +143,14 @@ class ContactDetailsSheet {
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
-                                  AppLocalization.of(context).removeContact,
-                                  AppLocalization.of(context).removeContactConfirmation.replaceAll('%1', contact.getDisplayName()),
+                                  AppLocalization.of(context).removeFavorite,
+                                  AppLocalization.of(context).removeFavoriteConfirmation.replaceAll("%1", contact.getDisplayName()),
                                   CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                                 sl.get<DBHelper>().deleteContact(contact).then((deleted) {
                                   if (deleted) {
                                     EventTaxiImpl.singleton().fire(ContactRemovedEvent(contact: contact));
                                     EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: contact));
-                                    UIUtil.showSnackbar(AppLocalization.of(context).contactRemoved.replaceAll("%1", contact.getDisplayName()), context);
+                                    UIUtil.showSnackbar(AppLocalization.of(context).favoriteRemoved.replaceAll("%1", contact.getDisplayName()), context);
                                     Navigator.of(context).pop();
                                   } else {
                                     // TODO - error for failing to delete contact
@@ -126,88 +208,89 @@ class ContactDetailsSheet {
                         padding: EdgeInsetsDirectional.only(top: 4, bottom: 12),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            // natricon
-                            StateContainer.of(context).natriconOn
-                                ? Expanded(
-                                    child: SvgPicture.network(
-                                      UIUtil.getNatriconURL(contact.address, StateContainer.of(context).getNatriconNonce(contact.address)),
-                                      key: Key(UIUtil.getNatriconURL(contact.address, StateContainer.of(context).getNatriconNonce(contact.address))),
-                                      placeholderBuilder: (BuildContext context) => Container(
-                                        child: FlareActor(
-                                          "legacy_assets/ntr_placeholder_animation.flr",
-                                          animation: "main",
-                                          fit: BoxFit.contain,
-                                          color: StateContainer.of(context).curTheme.primary,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : SizedBox(),
-                            // Contact Name container
-                            Container(
-                              width: double.infinity,
-                              margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width * 0.105,
-                                right: MediaQuery.of(context).size.width * 0.105,
-                              ),
-                              padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
-                              decoration: BoxDecoration(
-                                color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              child: Text(
-                                contact.getDisplayName(),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16.0,
-                                  color: StateContainer.of(context).curTheme.primary,
-                                  fontFamily: 'NunitoSans',
-                                ),
-                              ),
-                            ),
-                            // Contact Address
-                            GestureDetector(
-                              onTap: () {
-                                Clipboard.setData(new ClipboardData(text: contact.address));
-                                setState(() {
-                                  _addressCopied = true;
-                                });
-                                if (_addressCopiedTimer != null) {
-                                  _addressCopiedTimer.cancel();
-                                }
-                                _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
-                                  setState(() {
-                                    _addressCopied = false;
-                                  });
-                                });
-                              },
-                              child: Container(
+                          children: combineLists(
+                            getAliases(context, contact),
+                            [
+                              // Contact Name container
+                              Container(
                                 width: double.infinity,
-                                margin:
-                                    EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105, top: 15),
-                                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                                margin: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width * 0.105,
+                                  right: MediaQuery.of(context).size.width * 0.105,
+                                ),
+                                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
                                 decoration: BoxDecoration(
                                   color: StateContainer.of(context).curTheme.backgroundDarkest,
                                   borderRadius: BorderRadius.circular(25),
                                 ),
-                                child: UIUtil.threeLineAddressText(context, contact.address,
-                                    type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
-                              ),
-                            ),
-                            // Address Copied text container
-                            Container(
-                              margin: EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
+                                child: Text(
+                                  contact.getDisplayName(),
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: StateContainer.of(context).curTheme.success,
-                                    fontFamily: 'NunitoSans',
                                     fontWeight: FontWeight.w600,
-                                  )),
-                            ),
-                          ],
+                                    fontSize: 16.0,
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    fontFamily: 'NunitoSans',
+                                  ),
+                                ),
+                              ),
+                              // Contact Address
+                              GestureDetector(
+                                onTap: () {
+                                  Clipboard.setData(new ClipboardData(text: contact.address));
+                                  setState(() {
+                                    _addressCopied = true;
+                                  });
+                                  if (_addressCopiedTimer != null) {
+                                    _addressCopiedTimer.cancel();
+                                  }
+                                  _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                                    setState(() {
+                                      _addressCopied = false;
+                                    });
+                                  });
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105, top: 15),
+                                  padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                                  decoration: BoxDecoration(
+                                    color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: UIUtil.threeLineAddressText(context, contact.address,
+                                      type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
+                                ),
+                              ),
+                              // Address Copied text container
+                              Container(
+                                margin: EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: StateContainer.of(context).curTheme.success,
+                                      fontFamily: 'NunitoSans',
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ),
+                              (contact.aliases != null)
+                                  ?
+                                  // "ALIASES" text container
+                                  Container(
+                                      margin: EdgeInsets.only(bottom: 10.0),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text(
+                                            CaseChange.toUpperCase(AppLocalization.of(context).aliases, context),
+                                            style: AppStyles.textStyleHeader(context),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : SizedBox(),
+                            ],
+                          ),
                         ),
                       ),
                     ),

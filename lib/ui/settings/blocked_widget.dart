@@ -133,7 +133,17 @@ class _BlockedListState extends State<BlockedList> {
         }
         // Add the aliases to the existing entry
         if (user.nickname != null && user.nickname.isNotEmpty) {
-          aliasMap[user.address].addAll([user.nickname, user.type]);
+          // check if the alias is already in the list:
+          var index = aliasMap[user.address].indexOf(user.nickname);
+          if (index > -1) {
+            if (aliasMap[user.address][index + 1] != UserTypes.CONTACT) {
+              // add it because the matching entry is not a contact
+              aliasMap[user.address].addAll([user.nickname, UserTypes.CONTACT]);
+            }
+          } else {
+            // add it because it is not in the list
+            aliasMap[user.address].addAll([user.nickname, UserTypes.CONTACT]);
+          }
         }
         if (user.username != null && user.username.isNotEmpty) {
           aliasMap[user.address].addAll([user.username, user.type]);
@@ -146,9 +156,7 @@ class _BlockedListState extends State<BlockedList> {
           // this entry is a duplicate, don't add it to the list:
           continue;
         }
-        if (!_blocked.contains(b) && mounted) {
-          newState.add(b);
-        }
+        newState.add(b);
       }
 
       // construct the list of users with multiple usernames:
@@ -159,30 +167,53 @@ class _BlockedListState extends State<BlockedList> {
           continue;
         }
         var aliases = aliasMap[address];
-        multiUsers.add(User(address: address, username: aliases[0], type: aliases[1], aliases: aliases));
+
+        String nickname;
+        int nickNameIndex;
+        for (int i = 0; i < aliases.length; i += 2) {
+          var alias = aliases[i];
+          var type = aliases[i + 1];
+          if (type == UserTypes.CONTACT) {
+            nickname = alias;
+            nickNameIndex = i;
+            break;
+          }
+        }
+
+        if (nickNameIndex != null) {
+          aliases.removeAt(nickNameIndex);
+          aliases.removeAt(nickNameIndex);
+          multiUsers.add(User(address: address, nickname: nickname, username: aliases[0], type: aliases[1], aliases: aliases));
+        } else {
+          multiUsers.add(User(address: address, username: aliases[0], type: aliases[1], aliases: aliases));
+        }
       }
 
       // add them to the list:
       for (User user in multiUsers) {
-        if (!_blocked.contains(user) && mounted) {
-          newState.add(user);
-        }
+        // if (!_blocked.contains(user) && mounted) {
+        newState.add(user);
+        // }
       }
 
-      // remove from blocked anything that is not in the newState list:
+      // // remove from blocked anything that is not in the newState list:
+      // setState(() {
+      //   _blocked.removeWhere((e) => !newState.contains(e));
+      // });
+
+      // // add anything new:
+      // for (User user in newState) {
+      //   if (!_blocked.contains(user)) {
+      //     // add to blocked
+      //     setState(() {
+      //       _blocked.add(user);
+      //     });
+      //   }
+      // }
+
       setState(() {
-        _blocked.removeWhere((e) => !newState.contains(e));
+        _blocked = newState;
       });
-      
-      // add anything new:
-      for (User user in newState) {
-        if (!_blocked.contains(user)) {
-          // add to blocked
-          setState(() {
-            _blocked.add(user);
-          });
-        }
-      }
 
       // Re-sort list
       setState(() {
@@ -419,14 +450,14 @@ class _BlockedListState extends State<BlockedList> {
     if (user.aliases == null) {
       return [
         // Blocked name
-        (user.nickname != null) ? Text("★" + user.nickname, style: AppStyles.textStyleSettingItemHeader(context)) : Container(),
+        (user.nickname != null && user.nickname.isNotEmpty) ? Text("★" + user.nickname, style: AppStyles.textStyleSettingItemHeader(context)) : SizedBox(),
 
         (user.username != null)
             ? Text(
-                user.getDisplayName(),
-                style: (user.nickname == null) ? AppStyles.textStyleSettingItemHeader(context) : AppStyles.textStyleTransactionAddress(context),
+                user.getDisplayName(ignoreNickname: true),
+                style: user.nickname != null ? AppStyles.textStyleTransactionAddress(context) : AppStyles.textStyleSettingItemHeader(context),
               )
-            : Container(),
+            : SizedBox(),
 
         // Blocked address
         (user.address != null)
@@ -434,29 +465,26 @@ class _BlockedListState extends State<BlockedList> {
                 Address(user.address).getShortString(),
                 style: AppStyles.textStyleTransactionAddress(context),
               )
-            : Container(),
+            : SizedBox(),
       ];
     } else {
       List<Widget> entries = [
         Text(
           Address(user.address).getShortString(),
-          style: AppStyles.textStyleTransactionAddress(context),
+          style: user.nickname != null ? AppStyles.textStyleTransactionAddress(context) : AppStyles.textStyleSettingItemHeader(context),
         )
       ];
 
+      if (user.nickname != null && user.nickname.isNotEmpty) {
+        entries.insert(0, Text(user.getDisplayName(), style: AppStyles.textStyleSettingItemHeader(context)));
+      }
+
       for (var i = 0; i < user.aliases.length; i += 2) {
-        String displayName = user.aliases[i];
-        switch (user.aliases[i + 1]) {
-          case UserTypes.NANOTO:
-            displayName = "@" + displayName;
-            break;
-          default:
-            break;
-        }
+        String displayName = User.getDisplayNameWithType(user.aliases[i], user.aliases[i + 1]);
         entries.add(
           Text(
             displayName,
-            style: AppStyles.textStyleSettingItemHeader(context),
+            style: AppStyles.textStyleTransactionAddress(context),
           ),
         );
       }
@@ -465,10 +493,10 @@ class _BlockedListState extends State<BlockedList> {
     }
   }
 
-  Widget buildSingleContact(BuildContext context, User blocked) {
+  Widget buildSingleContact(BuildContext context, User user) {
     return FlatButton(
       onPressed: () {
-        BlockedDetailsSheet(blocked, documentsDirectory).mainBottomSheet(context);
+        BlockedDetailsSheet(user, documentsDirectory).mainBottomSheet(context);
       },
       padding: EdgeInsets.all(0.0),
       child: Column(children: <Widget>[
@@ -483,23 +511,6 @@ class _BlockedListState extends State<BlockedList> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              // natricon
-              StateContainer.of(context).natriconOn
-                  ? Container(
-                      width: 64.0,
-                      height: 64.0,
-                      child: SvgPicture.network(UIUtil.getNatriconURL(blocked.address, StateContainer.of(context).getNatriconNonce(blocked.address)),
-                          key: Key(UIUtil.getNatriconURL(blocked.address, StateContainer.of(context).getNatriconNonce(blocked.address))),
-                          placeholderBuilder: (BuildContext context) => Container(
-                                child: FlareActor(
-                                  "legacy_assets/ntr_placeholder_animation.flr",
-                                  animation: "main",
-                                  fit: BoxFit.contain,
-                                  color: StateContainer.of(context).curTheme.primary,
-                                ),
-                              )),
-                    )
-                  : SizedBox(),
               // Contact info
               Expanded(
                 child: Container(
@@ -508,7 +519,7 @@ class _BlockedListState extends State<BlockedList> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: buildItemTexts(blocked),
+                    children: buildItemTexts(user),
                   ),
                 ),
               ),

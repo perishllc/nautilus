@@ -63,6 +63,10 @@ class AppLocalization {
     return Intl.message('Send', desc: 'home_send_cta', name: 'send');
   }
 
+  String get pay {
+    return Intl.message('Pay', desc: 'home_pay_slidable', name: 'pay');
+  }
+
   String get receive {
     return Intl.message('Receive', desc: 'home_receive_cta', name: 'receive');
   }
@@ -129,6 +133,10 @@ class AppLocalization {
 
   String get failedMessage {
     return Intl.message('msg failed', desc: 'failed_message', name: 'failedMessage');
+  }
+
+  String get notSent {
+    return Intl.message('not sent', desc: 'not_sent_message', name: 'notSent');
   }
 
   String get failed {
@@ -344,6 +352,10 @@ class AppLocalization {
     return Intl.message('Favorites', desc: 'favorite_header', name: 'favoritesHeader');
   }
 
+  String get favoriteRemoved {
+    return Intl.message("%1 has been removed from favorites!", desc: 'favorite_removed', name: 'favoriteRemoved');
+  }
+
   String get blockedHeader {
     return Intl.message('Blocked', desc: 'blocked_header', name: 'blockedHeader');
   }
@@ -484,6 +496,10 @@ class AppLocalization {
     return Intl.message("Creating Gift Card", desc: 'creating_gift_card', name: 'creatingGiftCard');
   }
 
+  String get aliases {
+    return Intl.message("Aliases", desc: 'card_details_aliases', name: 'aliases');
+  }
+
   String get requestedFrom {
     return Intl.message("Requested From", desc: 'requested_from', name: 'requestedFrom');
   }
@@ -518,6 +534,10 @@ class AppLocalization {
 
   String get sendAmountConfirm {
     return Intl.message("Send %1 NANO", desc: 'send_pin_description', name: 'sendAmountConfirm');
+  }
+
+  String get sendMessageConfirm {
+    return Intl.message("Sending message", desc: 'send_message_description', name: 'sendMessageConfirm');
   }
 
   String get requestAmountConfirm {
@@ -798,6 +818,14 @@ class AppLocalization {
 
   String get shareNautilus {
     return Intl.message("Share Nautilus", desc: 'settings_share', name: 'shareNautilus');
+  }
+
+  String get destroyDatabase {
+    return Intl.message("Destroy the Database", desc: 'settings_nuke_db', name: 'destroyDatabase');
+  }
+
+  String get destroyDatabaseConfirmation {
+    return Intl.message('Are you sure you want to destroy the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed. If you\'re having issues you should backup your seed, re-install the app, and if the issue persists feel free to make a bug report on github or discord.', desc: 'database_remove_sure', name: 'destroyDatabaseConfirmation');
   }
 
   String get shareNautilusText {
@@ -1348,13 +1376,21 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   String get hideAccountHeader {
     return Intl.message("Hide Account?", desc: "Confirmation dialog header", name: 'hideAccountHeader');
   }
-  
+
   String get edit {
     return Intl.message("Edit", desc: "accounts_edit_slide", name: 'edit');
   }
 
   String get hide {
     return Intl.message("Hide", desc: "accounts_hide_slide", name: 'hide');
+  }
+
+  String get delete {
+    return Intl.message("Delete", desc: "home_delete_slide", name: 'delete');
+  }
+
+  String get retry {
+    return Intl.message("Retry", desc: "home_retry_slide", name: 'retry');
   }
 
   String get removeAccountText {

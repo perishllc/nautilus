@@ -30,6 +30,8 @@ class TXData {
   String memo_enc;
   @JsonKey(name: 'is_memo')
   bool is_memo;
+  @JsonKey(name: 'is_message')
+  bool is_message;
   @JsonKey(name: 'from_address')
   String from_address;
   @JsonKey(name: 'to_address')
@@ -67,17 +69,18 @@ class TXData {
       {this.from_address,
       this.to_address,
       this.amount_raw,
-      this.is_request,
+      this.is_request = false,
       this.request_time,
-      this.is_fulfilled,
+      this.is_fulfilled = false,
       this.fulfillment_time,
       this.block,
       this.link,
       this.memo_enc,
-      this.is_memo,
+      this.is_memo = false,
+      this.is_message = false,
       this.memo,
       this.uuid,
-      this.is_acknowledged,
+      this.is_acknowledged = false,
       this.height,
       this.send_height,
       this.recv_height,
@@ -110,6 +113,14 @@ class TXData {
     }
   }
 
+  bool isRecipient(String address) {
+    return this.to_address == address;
+  }
+
+  bool isSolid() {
+    return this.is_message || this.is_request;
+  }
+
   factory TXData.fromJson(Map<String, dynamic> json) {
     return TXData(
         from_address: json["from_address"] as String,
@@ -123,6 +134,7 @@ class TXData {
         link: json["link"] as String,
         memo_enc: json["memo_enc"] as String,
         is_memo: json["is_memo"] as bool,
+        is_message: json["is_message"] as bool,
         memo: json["memo"] as String,
         uuid: json["uuid"] as String,
         is_acknowledged: json["is_acknowledged"] as bool,
@@ -151,6 +163,7 @@ class TXData {
       o.link == link &&
       o.memo_enc == memo_enc &&
       o.is_memo == is_memo &&
+      o.is_message == is_message &&
       o.memo == memo &&
       o.is_acknowledged == is_acknowledged &&
       o.record_type == record_type &&

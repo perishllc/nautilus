@@ -10,4 +10,5 @@ class Actions {
   static const String PAYMENT_REQUEST = "payment_request";
   static const String PAYMENT_ACK = "payment_ack";
   static const String PAYMENT_MEMO = "payment_memo";
+    static const String PAYMENT_MESSAGE = "payment_message";
 }
