@@ -124,11 +124,14 @@ class DBHelper {
   }
 
   void _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    if (oldVersion == 4) {
+    if (oldVersion == 3) {
       await db.execute(BLOCKED_SQL);
+      await db.execute(USER_ADD_TYPE_COLUMN_SQL);
+    }
+    
+    if (oldVersion == 4) {
       await db.execute(USER_ADD_BLOCKED_COLUMN_SQL);
       await db.execute(USER_ADD_NICKNAME_COLUMN_SQL);
-      await db.execute(USER_ADD_TYPE_COLUMN_SQL);
       await db.execute(TXDATA_ADD_MESSAGE_COLUMN_SQL);
     }
   }
@@ -862,8 +865,9 @@ class DBHelper {
 
   Future<List<TXData>> getAccountSpecificSolids(String account) async {
     var dbClient = await db;
-    List<Map> list = await dbClient
-        .rawQuery('SELECT * FROM Transactions WHERE (from_address = ? OR to_address = ?) AND (is_request = 1 OR is_message = 1) ORDER BY request_time DESC', [account, account]);
+    List<Map> list = await dbClient.rawQuery(
+        'SELECT * FROM Transactions WHERE (from_address = ? OR to_address = ?) AND (is_request = 1 OR is_message = 1) ORDER BY request_time DESC',
+        [account, account]);
     // List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions ORDER BY request_time DESC');
     List<TXData> transactions = [];
     for (int i = 0; i < list.length; i++) {
@@ -874,8 +878,9 @@ class DBHelper {
 
   Future<List<TXData>> getAccountSpecificRecords(String account) async {
     var dbClient = await db;
-    List<Map> list = await dbClient
-        .rawQuery('SELECT * FROM Transactions WHERE (from_address = ? OR to_address = ?) AND (is_request = 0 and is_message = 0) ORDER BY request_time DESC', [account, account]);
+    List<Map> list = await dbClient.rawQuery(
+        'SELECT * FROM Transactions WHERE (from_address = ? OR to_address = ?) AND (is_request = 0 and is_message = 0) ORDER BY request_time DESC',
+        [account, account]);
     // List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions ORDER BY request_time DESC');
     List<TXData> transactions = [];
     for (int i = 0; i < list.length; i++) {
