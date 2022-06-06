@@ -37,8 +37,10 @@
 - Search by Request, Address, Username, Memo, and more
 - Discord link in the settings drawer
   - https://chat.perish.co
+- Added support for nano.community block explorer
 #### Changed
 - Moved Nyano Theme / mode to its own setting (Currency Mode)
+- Made nano.community the default block explorer
 
 <!-- --- -->
 
