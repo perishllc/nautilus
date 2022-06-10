@@ -18,6 +18,7 @@ import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/pending_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/pending_response_item.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
@@ -130,12 +131,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                           context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         animationOpen = true;
-                        Navigator.of(context).push(AnimationLoadingOverlay(
-                            AnimationType.TRANSFER_TRANSFERRING,
-                            StateContainer.of(context).curTheme.animationOverlayStrong,
-                            StateContainer.of(context).curTheme.animationOverlayMedium, onPoppedCallback: () {
-                          animationOpen = false;
-                        }));
+                        AppAnimation.animationLauncher(context, AnimationType.TRANSFER_TRANSFERRING, onPoppedCallback: () => animationOpen = false);
                         await processWallets();
                       }),
                     ],

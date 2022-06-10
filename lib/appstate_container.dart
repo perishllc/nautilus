@@ -124,6 +124,9 @@ class StateContainerState extends State<StateContainer> {
   // min raw for receive
   // String minRawReceive = "0";
 
+  // maximum number of queued messages before we just instantly update the UI:
+  final int MAX_SEQUENTIAL_UPDATES = 5;
+
   AppWallet wallet;
   String currencyLocale;
   Locale deviceLocale = Locale('en', 'US');
@@ -132,6 +135,7 @@ class StateContainerState extends State<StateContainer> {
   AvailableBlockExplorer curBlockExplorer = AvailableBlockExplorer(AvailableBlockExplorerEnum.NANOLOOKER);
   BaseTheme curTheme = NautilusTheme();
   bool nyanoMode = false;
+  String currencyMode = CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName();
   // Currently selected account
   Account selectedAccount = Account(id: 1, name: "AB", index: 0, lastAccess: 0, selected: true);
   // Two most recently used accounts
@@ -427,6 +431,10 @@ class StateContainerState extends State<StateContainer> {
     sl.get<SharedPrefsUtil>().getMinRawReceive().then((minRaw) {
       setMinRawReceive(minRaw);
     });
+    // Get currency mode pref
+    sl.get<SharedPrefsUtil>().getCurrencyMode().then((currencyMode) {
+      setCurrencyMode(CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName(context));
+    });
     // make sure nano API databases are up to date
     checkAndCacheNapiDatabases(false);
     // restore payments from the cache
@@ -492,16 +500,15 @@ class StateContainerState extends State<StateContainer> {
       }
 
       if (event.message_list != null) {
-        int max_length = 5;
         bool delay_update = false;
-        if (event.message_list.length > max_length) {
+        if (event.message_list.length > MAX_SEQUENTIAL_UPDATES) {
           delay_update = true;
         }
         for (var str_msg in event.message_list) {
           var msg = jsonDecode(str_msg);
           await handleMessage(msg, delay_update: delay_update);
           // sleep between updates if there are more than 1 to make the UI feel snappier / show the animation:
-          if (event.message_list.length > 1 && event.message_list.length <= max_length) {
+          if (event.message_list.length > 1 && event.message_list.length <= MAX_SEQUENTIAL_UPDATES) {
             await Future.delayed(Duration(milliseconds: 600));
           }
         }
@@ -729,10 +736,11 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
-  // Change min raw setting
-  void setCurrencyMode(bool nyanoMode) {
+  // Change currency mode setting
+  void setCurrencyMode(String currencyMode) {
     setState(() {
-      this.nyanoMode = nyanoMode;
+      this.currencyMode = currencyMode;
+      this.nyanoMode = (this.currencyMode == CurrencyModeSetting(CurrencyModeOptions.NYANO).getDisplayName());
     });
   }
 
@@ -1047,7 +1055,11 @@ class StateContainerState extends State<StateContainer> {
               // Send list to home screen
               EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
             });
-            await updateUnified(true);
+            if ((lastIndex - startIndex) > MAX_SEQUENTIAL_UPDATES) {
+              await updateUnified(true);
+            } else {
+              await updateUnified(false);
+            }
             postedToHome = true;
             break;
           }
@@ -1055,9 +1067,10 @@ class StateContainerState extends State<StateContainer> {
         setState(() {
           wallet.historyLoading = false;
         });
+        // just in case we didn't post to home screen
         if (!postedToHome) {
           EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
-          await updateUnified(true);
+          await updateUnified(false);
         }
 
         sl.get<AccountService>().pop();

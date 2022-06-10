@@ -8,6 +8,8 @@ import 'dart:math' as math;
 import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 
 // The over-scroll distance that moves the indicator to its maximum
 // displacement, as a percentage of the scrollable's container extent.
@@ -36,11 +38,11 @@ typedef RefreshCallback = Future<void> Function();
 // The state machine moves through these modes only when the scrollable
 // identified by scrollableKey has been scrolled to its min or max limit.
 enum _RefreshIndicatorMode {
-  drag,     // Pointer is down.
-  armed,    // Dragged far enough that an up event will run the onRefresh callback.
-  snap,     // Animating to the indicator's final "displacement".
-  refresh,  // Running the refresh callback.
-  done,     // Animating the indicator's fade-out after refreshing.
+  drag, // Pointer is down.
+  armed, // Dragged far enough that an up event will run the onRefresh callback.
+  snap, // Animating to the indicator's final "displacement".
+  refresh, // Running the refresh callback.
+  done, // Animating the indicator's fade-out after refreshing.
   canceled, // Animating the indicator's fade-out after not arming.
 }
 
@@ -100,11 +102,11 @@ class ReactiveRefreshIndicator extends StatefulWidget {
     this.notificationPredicate = defaultScrollNotificationPredicate,
     this.semanticsLabel,
     this.semanticsValue,
-  }) : assert(child != null),
-       assert(onRefresh != null),
-       assert(isRefreshing != null),
-       assert(notificationPredicate != null),
-       super(key: key);
+  })  : assert(child != null),
+        assert(onRefresh != null),
+        assert(isRefreshing != null),
+        assert(notificationPredicate != null),
+        super(key: key);
 
   /// The widget below this widget in the tree.
   ///
@@ -164,6 +166,8 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
   Animation<double> _value;
   Animation<Color> _valueColor;
 
+  AnimationController _customController;
+
   _RefreshIndicatorMode _mode;
   Future<void> _pendingRefreshFuture;
   bool _isIndicatorAtTop;
@@ -173,10 +177,13 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
   static final Animatable<double> _kDragSizeFactorLimitTween = Tween<double>(begin: 0.0, end: _kDragSizeFactorLimit);
   static final Animatable<double> _oneToZeroTween = Tween<double>(begin: 1.0, end: 0.0);
 
+  String genericLoaderFilePath = AppAnimation.getAnimationFilePath(AnimationType.GENERIC);
+
   @override
   void initState() {
     super.initState();
     _positionController = AnimationController(vsync: this);
+    _customController = AnimationController(vsync: this);
     _positionFactor = _positionController.drive(_kDragSizeFactorLimitTween);
     _value = _positionController.drive(_threeQuarterTween); // The "value" of the circular progress indicator during a drag.
 
@@ -188,12 +195,8 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
   void didChangeDependencies() {
     final ThemeData theme = Theme.of(context);
     _valueColor = _positionController.drive(
-      ColorTween(
-        begin: (widget.color ?? theme.accentColor).withOpacity(0.0),
-        end: (widget.color ?? theme.accentColor).withOpacity(1.0)
-      ).chain(CurveTween(
-        curve: const Interval(0.0, 1.0 / _kDragSizeFactorLimit)
-      )),
+      ColorTween(begin: (widget.color ?? theme.accentColor).withOpacity(0.0), end: (widget.color ?? theme.accentColor).withOpacity(1.0))
+          .chain(CurveTween(curve: const Interval(0.0, 1.0 / _kDragSizeFactorLimit))),
     );
     super.didChangeDependencies();
   }
@@ -201,6 +204,7 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
   @override
   void dispose() {
     _positionController.dispose();
+    _customController.dispose();
     _scaleController.dispose();
     super.dispose();
   }
@@ -216,10 +220,8 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
   }
 
   bool _handleScrollNotification(ScrollNotification notification) {
-    if (!widget.notificationPredicate(notification))
-      return false;
-    if (notification is ScrollStartNotification && notification.metrics.extentBefore == 0.0 &&
-        _mode == null && _start(notification.metrics.axisDirection)) {
+    if (!widget.notificationPredicate(notification)) return false;
+    if (notification is ScrollStartNotification && notification.metrics.extentBefore == 0.0 && _mode == null && _start(notification.metrics.axisDirection)) {
       setState(() {
         _mode = _RefreshIndicatorMode.drag;
       });
@@ -239,8 +241,7 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
         break;
     }
     if (indicatorAtTopNow != _isIndicatorAtTop) {
-      if (_mode == _RefreshIndicatorMode.drag || _mode == _RefreshIndicatorMode.armed)
-        _dismiss(_RefreshIndicatorMode.canceled);
+      if (_mode == _RefreshIndicatorMode.drag || _mode == _RefreshIndicatorMode.armed) _dismiss(_RefreshIndicatorMode.canceled);
     } else if (notification is ScrollUpdateNotification) {
       if (_mode == _RefreshIndicatorMode.drag || _mode == _RefreshIndicatorMode.armed) {
         if (notification.metrics.extentBefore > 0.0) {
@@ -275,8 +276,7 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
   }
 
   bool _handleGlowNotification(OverscrollIndicatorNotification notification) {
-    if (notification.depth != 0 || !notification.leading)
-      return false;
+    if (notification.depth != 0 || !notification.leading) return false;
     if (_mode == _RefreshIndicatorMode.drag) {
       notification.disallowGlow();
       return true;
@@ -301,6 +301,7 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
         // we do not support horizontal scroll views.
         return false;
     }
+    genericLoaderFilePath = AppAnimation.getAnimationFilePath(AnimationType.GENERIC);
     _dragOffset = 0.0;
     _scaleController.value = 0.0;
     _positionController.value = 0.0;
@@ -310,8 +311,7 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
   void _checkDragOffset(double containerExtent) {
     assert(_mode == _RefreshIndicatorMode.drag || _mode == _RefreshIndicatorMode.armed);
     double newValue = _dragOffset / (containerExtent * _kDragContainerExtentPercentage);
-    if (_mode == _RefreshIndicatorMode.armed)
-      newValue = math.max(newValue, 1.0 / _kDragSizeFactorLimit);
+    if (_mode == _RefreshIndicatorMode.armed) newValue = math.max(newValue, 1.0 / _kDragSizeFactorLimit);
     _positionController.value = newValue.clamp(0.0, 1.0); // this triggers various rebuilds
     if (_mode == _RefreshIndicatorMode.drag && newValue >= 1.0 / _kDragSizeFactorLimit)
       //_mode = _RefreshIndicatorMode.armed;
@@ -352,19 +352,17 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
     assert(_mode != _RefreshIndicatorMode.snap);
 
     _mode = _RefreshIndicatorMode.snap;
-    _positionController
-      .animateTo(1.0 / _kDragSizeFactorLimit, duration: _kIndicatorSnapDuration)
-      .then<void>((void value) {
-        if (mounted && _mode == _RefreshIndicatorMode.snap) {
-          assert(widget.onRefresh != null);
-          setState(() {
-            // Show the indeterminate progress indicator.
-            _mode =  _RefreshIndicatorMode.refresh;
-          });
+    _positionController.animateTo(1.0 / _kDragSizeFactorLimit, duration: _kIndicatorSnapDuration).then<void>((void value) {
+      if (mounted && _mode == _RefreshIndicatorMode.snap) {
+        assert(widget.onRefresh != null);
+        setState(() {
+          // Show the indeterminate progress indicator.
+          _mode = _RefreshIndicatorMode.refresh;
+        });
 
-          widget.onRefresh();
-        }
-      });
+        widget.onRefresh();
+      }
+    });
   }
 
   /// Show the refresh indicator and run the refresh callback as if it had
@@ -383,11 +381,9 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
   /// When initiated in this manner, the refresh indicator is independent of any
   /// actual scroll view. It defaults to showing the indicator at the top. To
   /// show it at the bottom, set `atTop` to false.
-  Future<void> show({ bool atTop = true }) {
-    if (_mode != _RefreshIndicatorMode.refresh &&
-        _mode != _RefreshIndicatorMode.snap) {
-      if (_mode == null)
-        _start(atTop ? AxisDirection.down : AxisDirection.up);
+  Future<void> show({bool atTop = true}) {
+    if (_mode != _RefreshIndicatorMode.refresh && _mode != _RefreshIndicatorMode.snap) {
+      if (_mode == null) _start(atTop ? AxisDirection.down : AxisDirection.up);
       _show();
     }
     return _pendingRefreshFuture;
@@ -420,8 +416,7 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
     assert(_dragOffset != null);
     assert(_isIndicatorAtTop != null);
 
-    final bool showIndeterminateIndicator =
-      _mode == _RefreshIndicatorMode.refresh || _mode == _RefreshIndicatorMode.done;
+    final bool showIndeterminateIndicator = _mode == _RefreshIndicatorMode.refresh || _mode == _RefreshIndicatorMode.done;
 
     return Stack(
       children: <Widget>[
@@ -435,17 +430,35 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
             axisAlignment: _isIndicatorAtTop ? 1.0 : -1.0,
             sizeFactor: _positionFactor, // this is what brings it down
             child: Container(
-              padding: _isIndicatorAtTop
-                ? EdgeInsets.only(top: widget.displacement)
-                : EdgeInsets.only(bottom: widget.displacement),
-              alignment: _isIndicatorAtTop
-                ? Alignment.topCenter
-                : Alignment.bottomCenter,
+              padding: _isIndicatorAtTop ? EdgeInsets.only(top: widget.displacement) : EdgeInsets.only(bottom: widget.displacement),
+              alignment: _isIndicatorAtTop ? Alignment.topCenter : Alignment.bottomCenter,
               child: ScaleTransition(
                 scale: _scaleFactor,
                 child: AnimatedBuilder(
                   animation: _positionController,
                   builder: (BuildContext context, Widget child) {
+                    // if (!showIndeterminateIndicator) {
+                    //   return LottieBuilder.asset(
+                    //     genericLoaderFilePath,
+                    //     width: 80,
+                    //     height: 80,
+                    //     controller: _positionController,
+                    //     onLoaded: (composition) {
+                    //       _positionController.duration = composition.duration;
+                    //     },
+                    //   );
+                    // } else {
+                    //   return LottieBuilder.asset(
+                    //     'assets/animations/rocket.json',
+                    //     width: 80,
+                    //     height: 80,
+                    //     controller: _customController,
+                    //     onLoaded: (composition) {
+                    //       _customController.duration = composition.duration;
+                    //       _customController.repeat();
+                    //     },
+                    //   );
+                    // }
                     return RefreshProgressIndicator(
                       semanticsLabel: widget.semanticsLabel ?? MaterialLocalizations.of(context).refreshIndicatorSemanticLabel,
                       semanticsValue: widget.semanticsValue,

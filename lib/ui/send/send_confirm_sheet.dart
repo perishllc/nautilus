@@ -26,6 +26,7 @@ import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
@@ -116,11 +117,9 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     super.dispose();
   }
 
-  void _showSendingAnimation(BuildContext context) {
+  void _showAnimation(BuildContext context, AnimationType type) {
     animationOpen = true;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () => animationOpen = false));
+    AppAnimation.animationLauncher(context, type, onPoppedCallback: () => animationOpen = false);
   }
 
   @override
@@ -349,8 +348,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                         bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
 
-                        bool is_message = widget.memo != null && widget.memo.isNotEmpty && (widget.amountRaw != "0");
-                        String auth_text = is_message ? AppLocalization.of(context).sendAmountConfirm.replaceAll("%1", amount) : AppLocalization.of(context).sendMessageConfirm;
+                        bool is_message = widget.memo != null && widget.memo.isNotEmpty && (widget.amountRaw == "0");
+                        String auth_text = is_message ? AppLocalization.of(context).sendMessageConfirm : AppLocalization.of(context).sendAmountConfirm.replaceAll("%1", amount);
                         if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                           try {
                             bool authenticated = await sl
@@ -389,9 +388,9 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   Future<void> _doSend() async {
     bool memoSendFailed = false;
     try {
-      _showSendingAnimation(context);
-
       bool is_message = widget.amountRaw == "0";
+      
+      _showAnimation(context, is_message ? AnimationType.SEND_MESSAGE : AnimationType.SEND);
 
       ProcessResponse resp;
 

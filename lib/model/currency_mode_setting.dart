@@ -10,12 +10,14 @@ class CurrencyModeSetting extends SettingSelectionItem {
 
   CurrencyModeSetting(this.setting);
 
-  String getDisplayName(BuildContext context) {
+  String getDisplayName([BuildContext context]) {
     switch (setting) {
       case CurrencyModeOptions.NANO:
         return "NANO";
       case CurrencyModeOptions.NYANO:
         return "NYANO";
+      default:
+        return "NANO";
     }
   }
 

@@ -1,9 +1,25 @@
-# v0.3.2 - [2022-06-07] - hotfix
+# v0.3.3 - [2022-06-10]
+#### Added
+- Testing out some new animations, likely will change again
+#### Changed
+- Improved how animations are handled to not lag / be more consistent
+- Total account balance is now shown on the accounts page
+- Info icon buttons to help explain things around the app
+  - Receive minimum setting
+  - Blocked users page
+  - Currency mode setting
+  - Block explorer setting 
+- Min Raw receive setting now displays options based on whatever currency mode you're in
+#### Fixed
+- Nyano currency mode was not saving correctly
+- Deleting a payment request from the slide action didn't update until after a pull-down refresh
+- Bio auth message contained the wrong text for sends in some cases
+
+## v0.3.2 - [2022-06-07]
 #### Changed
 - Accounts sheet colors swapped to match the home page slide buttons
 #### Fixed
-- Fairly significant performance improvements to the home page
-  - Fixed rendering bug causing the home page to re-render unnecessarily
+- Fixed rendering bug causing the home page to re-render unnecessarily
 - Accounts sheet visual bug when deleting a row / editing an account name
 - unpaid / paid transaction state tags were not being properly set
 - bug related to upgrading from a previous version
@@ -71,7 +87,8 @@
 - check for duplicate memos and remove them (just in case)
 - make a UI for preferred username / display name in the case that there are multiple users with the same address
 - work on null safety ports of dependencies
-- see how hard it will be to add windows store / desktop support w/ flutter 3.0
+- port E2EE to dart
+- see how hard it will be to add windows store / desktop support
 - update the welcome screen / example transactions and requests
 - NFC support
-- change text for receive minimum setting to use nano options in nano mode
+- take new screenshots

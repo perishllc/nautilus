@@ -95,14 +95,6 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
 
   bool notNull(Object o) => o != null;
 
-  static const String NONE_NYANO = "0";
-  static const String ONE_NYANO = "1000000000000000000000000";
-  static const String TEN_NYANO = "10000000000000000000000000";
-  static const String HUNDRED_NYANO = "100000000000000000000000000";
-  static const String THOUSAND_NYANO = "1000000000000000000000000000";
-  static const String TEN_THOUSAND_NYANO = "10000000000000000000000000000";
-  static const String HUNDRED_THOUSAND_NYANO = "100000000000000000000000000000";
-
   // Called if transfer fails
   void transferError() {
     Navigator.of(context).pop();
@@ -164,25 +156,25 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     sl.get<SharedPrefsUtil>().getMinRawReceive().then((minRawReceive) {
       setState(() {
         switch (minRawReceive) {
-          case NONE_NYANO:
+          case MinRawSetting.NONE_NYANO:
             _curMinRawSetting = MinRawSetting(MinRawOptions.OFF);
             break;
-          case ONE_NYANO:
+          case MinRawSetting.ONE_NYANO:
             _curMinRawSetting = MinRawSetting(MinRawOptions.ONE_NYANO);
             break;
-          case TEN_NYANO:
+          case MinRawSetting.TEN_NYANO:
             _curMinRawSetting = MinRawSetting(MinRawOptions.TEN_NYANO);
             break;
-          case HUNDRED_NYANO:
+          case MinRawSetting.HUNDRED_NYANO:
             _curMinRawSetting = MinRawSetting(MinRawOptions.HUNDRED_NYANO);
             break;
-          case THOUSAND_NYANO:
+          case MinRawSetting.THOUSAND_NYANO:
             _curMinRawSetting = MinRawSetting(MinRawOptions.THOUSAND_NYANO);
             break;
-          case TEN_THOUSAND_NYANO:
+          case MinRawSetting.TEN_THOUSAND_NYANO:
             _curMinRawSetting = MinRawSetting(MinRawOptions.TEN_THOUSAND_NYANO);
             break;
-          case HUNDRED_THOUSAND_NYANO:
+          case MinRawSetting.HUNDRED_THOUSAND_NYANO:
             _curMinRawSetting = MinRawSetting(MinRawOptions.HUNDRED_THOUSAND_NYANO);
             break;
         }
@@ -484,18 +476,6 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
               style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
-              // AppSimpleDialogOption(
-              //   onPressed: () {
-              //     Navigator.pop(context, moonpay_url);
-              //   },
-              //   child: Padding(
-              //     padding: const EdgeInsets.symmetric(vertical: 8.0),
-              //     child: Text(
-              //       AppLocalization.of(context).moonpay,
-              //       style: AppStyles.textStyleDialogOptions(context),
-              //     ),
-              //   ),
-              // ),
               AppSimpleDialogOption(
                 onPressed: () {
                   Navigator.pop(context, simplex_url);
@@ -579,107 +559,71 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   Future<void> _minRawDialog() async {
-    switch (await showDialog<MinRawOptions>(
+    MinRawOptions chosen = await showDialog<MinRawOptions>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            title: Text(
-              AppLocalization.of(context).receiveMinimum,
-              style: AppStyles.textStyleDialogHeader(context),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  AppLocalization.of(context).receiveMinimum,
+                  style: AppStyles.textStyleDialogHeader(context),
+                ),
+                AppDialogs.infoButton(
+                  context,
+                  () {
+                    AppDialogs.showInfoDialog(context, AppLocalization.of(context).receiveMinimumHeader, AppLocalization.of(context).receiveMinimumInfo);
+                  },
+                )
+              ],
             ),
             children: _buildMinRawOptions(),
           );
-        })) {
-      case MinRawOptions.OFF:
-        sl.get<SharedPrefsUtil>().setMinRawReceive(NONE_NYANO).then((result) {
-          setState(() {
-            StateContainer.of(context).setMinRawReceive(NONE_NYANO);
-            _curMinRawSetting = MinRawSetting(MinRawOptions.OFF);
-          });
         });
-        break;
-      case MinRawOptions.ONE_NYANO:
-        sl.get<SharedPrefsUtil>().setMinRawReceive(ONE_NYANO).then((result) {
-          setState(() {
-            StateContainer.of(context).setMinRawReceive(ONE_NYANO);
-            _curMinRawSetting = MinRawSetting(MinRawOptions.ONE_NYANO);
-          });
-        });
-        break;
-      case MinRawOptions.TEN_NYANO:
-        sl.get<SharedPrefsUtil>().setMinRawReceive(TEN_NYANO).then((result) {
-          setState(() {
-            StateContainer.of(context).setMinRawReceive(TEN_NYANO);
-            _curMinRawSetting = MinRawSetting(MinRawOptions.TEN_NYANO);
-          });
-        });
-        break;
-      case MinRawOptions.HUNDRED_NYANO:
-        sl.get<SharedPrefsUtil>().setMinRawReceive(HUNDRED_NYANO).then((result) {
-          setState(() {
-            StateContainer.of(context).setMinRawReceive(HUNDRED_NYANO);
-            _curMinRawSetting = MinRawSetting(MinRawOptions.HUNDRED_NYANO);
-          });
-        });
-        break;
-      case MinRawOptions.THOUSAND_NYANO:
-        sl.get<SharedPrefsUtil>().setMinRawReceive(THOUSAND_NYANO).then((result) {
-          setState(() {
-            StateContainer.of(context).setMinRawReceive(THOUSAND_NYANO);
-            _curMinRawSetting = MinRawSetting(MinRawOptions.THOUSAND_NYANO);
-          });
-        });
-        break;
-      case MinRawOptions.TEN_THOUSAND_NYANO:
-        sl.get<SharedPrefsUtil>().setMinRawReceive(TEN_THOUSAND_NYANO).then((result) {
-          setState(() {
-            StateContainer.of(context).setMinRawReceive(TEN_THOUSAND_NYANO);
-            _curMinRawSetting = MinRawSetting(MinRawOptions.TEN_THOUSAND_NYANO);
-          });
-        });
-        break;
-      case MinRawOptions.HUNDRED_THOUSAND_NYANO:
-        sl.get<SharedPrefsUtil>().setMinRawReceive(HUNDRED_THOUSAND_NYANO).then((result) {
-          setState(() {
-            StateContainer.of(context).setMinRawReceive(HUNDRED_THOUSAND_NYANO);
-            _curMinRawSetting = MinRawSetting(MinRawOptions.HUNDRED_THOUSAND_NYANO);
-          });
-        });
-        break;
-    }
+
+    String raw_value = MinRawSetting(chosen).getRaw();
+    sl.get<SharedPrefsUtil>().setMinRawReceive(raw_value).then((result) {
+      setState(() {
+        StateContainer.of(context).setMinRawReceive(raw_value);
+        _curMinRawSetting = MinRawSetting(chosen);
+      });
+    });
   }
 
   Future<void> _currencyModeDialog() async {
-    switch (await showDialog<CurrencyModeOptions>(
+    CurrencyModeOptions chosen = await showDialog<CurrencyModeOptions>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            title: Text(
-              AppLocalization.of(context).currencyMode,
-              style: AppStyles.textStyleDialogHeader(context),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  AppLocalization.of(context).currencyMode,
+                  style: AppStyles.textStyleDialogHeader(context),
+                ),
+                AppDialogs.infoButton(
+                  context,
+                  () {
+                    AppDialogs.showInfoDialog(context, AppLocalization.of(context).currencyModeHeader, AppLocalization.of(context).currencyModeInfo);
+                  },
+                )
+              ],
             ),
             children: _buildCurrencyModeOptions(),
           );
-        })) {
-      case CurrencyModeOptions.NANO:
-        sl.get<SharedPrefsUtil>().setCurrencyMode(CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName(context)).then((result) {
-          setState(() {
-            StateContainer.of(context).setCurrencyMode(false);
-            _curCurrencyModeSetting = CurrencyModeSetting(CurrencyModeOptions.NANO);
-          });
         });
-        break;
-      case CurrencyModeOptions.NYANO:
-        sl.get<SharedPrefsUtil>().setCurrencyMode(CurrencyModeSetting(CurrencyModeOptions.NYANO).getDisplayName(context)).then((result) {
-          setState(() {
-            StateContainer.of(context).setCurrencyMode(true);
-            _curCurrencyModeSetting = CurrencyModeSetting(CurrencyModeOptions.NYANO);
-          });
-        });
-        break;
-    }
+
+    String currency_mode = CurrencyModeSetting(chosen).getDisplayName();
+    sl.get<SharedPrefsUtil>().setCurrencyMode(currency_mode).then((result) {
+      setState(() {
+        StateContainer.of(context).setCurrencyMode(currency_mode);
+        _curCurrencyModeSetting = CurrencyModeSetting(chosen);
+      });
+    });
   }
 
   Future<void> _lockDialog() async {
@@ -852,13 +796,15 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            title: Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: Text(
+            title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+              Text(
                 AppLocalization.of(context).blockExplorer,
                 style: AppStyles.textStyleDialogHeader(context),
               ),
-            ),
+              AppDialogs.infoButton(context, () {
+                AppDialogs.showInfoDialog(context, AppLocalization.of(context).blockExplorerHeader, AppLocalization.of(context).blockExplorerInfo);
+              }),
+            ]),
             children: _buildExplorerOptions(),
           );
         });

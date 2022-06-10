@@ -531,6 +531,8 @@ class AccountService {
         request_nonce: request_nonce,
         memo_enc: memo_enc,
         local_uuid: local_uuid);
+
+    // queueRequest(request);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");

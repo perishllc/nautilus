@@ -17,6 +17,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_manual_entry_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
@@ -209,12 +210,8 @@ class AppTransferOverviewSheet {
   Future<void> startTransfer(BuildContext context, String seed, {bool manualEntry = false}) async {
     // Show loading overlay
     _animationOpen = true;
-    AnimationType animation = manualEntry ? AnimationType.TRANSFER_SEARCHING_MANUAL : AnimationType.TRANSFER_SEARCHING_QR;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        animation, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () {
-      _animationOpen = false;
-    }));
+    AnimationType animationType = manualEntry ? AnimationType.TRANSFER_SEARCHING_MANUAL : AnimationType.TRANSFER_SEARCHING_QR;
+    AppAnimation.animationLauncher(context, animationType, onPoppedCallback: () => _animationOpen = false);
     // Get accounts from seed
     List<String> accounts = await getAccountsFromSeed(context, seed);
     try {
@@ -294,12 +291,7 @@ class AppTransferOverviewSheet {
   Future<void> startAutoTransfer(BuildContext context, String seed, AppWallet wallet) async {
     // Show loading overlay
     _animationOpen = true;
-    AnimationType animation = AnimationType.TRANSFER_SEARCHING_MANUAL;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        animation, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () {
-      _animationOpen = false;
-    }));
+    AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL, onPoppedCallback: () => _animationOpen = false);
 
     // sleep for a couple seconds to flex the animation:
     await Future.delayed(Duration(seconds: 3));
@@ -347,12 +339,7 @@ class AppTransferOverviewSheet {
   Future<void> startAutoRefund(BuildContext context, String seed, String refundAddress) async {
     // Show loading overlay
     _animationOpen = true;
-    AnimationType animation = AnimationType.TRANSFER_SEARCHING_MANUAL;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        animation, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () {
-      _animationOpen = false;
-    }));
+    AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL, onPoppedCallback: () => _animationOpen = false);
 
     // sleep for a couple seconds to flex the animation:
     await Future.delayed(Duration(seconds: 3));

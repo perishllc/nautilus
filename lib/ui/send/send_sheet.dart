@@ -31,6 +31,7 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/request/request_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
@@ -276,9 +277,7 @@ class _SendSheetState extends State<SendSheet> {
 
   void _showMantaAnimation() {
     animationOpen = true;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.MANTA, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () => animationOpen = false));
+    AppAnimation.animationLauncher(context, AnimationType.MANTA, onPoppedCallback: () => animationOpen = false);
   }
 
   Future<bool> showNotificationDialog() async {

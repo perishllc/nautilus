@@ -17,6 +17,7 @@ import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
@@ -311,9 +312,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
 
   Future<void> doChange(BuildContext context) async {
     _animationOpen = true;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.GENERIC, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () => _animationOpen = false));
+    AppAnimation.animationLauncher(context, AnimationType.CHANGE_REP, onPoppedCallback: () => _animationOpen = false);
     // If account isnt open, just store the account in sharedprefs
     if (StateContainer.of(context).wallet.openBlock == null) {
       await sl.get<SharedPrefsUtil>().setRepresentative(widget.repController.text);

@@ -14,6 +14,7 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
@@ -37,9 +38,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
 
   void _showMantaAnimation() {
     animationOpen = true;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.MANTA, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () => animationOpen = false));
+    AppAnimation.animationLauncher(context, AnimationType.MANTA, onPoppedCallback: () => animationOpen = false);
   }
 
   @override
@@ -92,7 +91,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
               widget: SendConfirmSheet(
                   amountRaw: address.amount,
                   destination: contact != null ? contact.address : address.address,
-                  contactName: contact != null ? contact.getDisplayName(): null));
+                  contactName: contact != null ? contact.getDisplayName() : null));
         } else {
           // Go to send sheet
           Sheets.showAppHeightNineSheet(

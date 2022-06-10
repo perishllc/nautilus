@@ -1,19 +1,14 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
-import 'dart:isolate';
 import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flare_flutter/flare.dart';
 import 'package:flare_dart/math/mat2d.dart';
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:event_taxi/event_taxi.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:manta_dart/manta_wallet.dart';
@@ -24,7 +19,6 @@ import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
-import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
@@ -50,6 +44,7 @@ import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_drawer.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/users/add_blocked.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
@@ -72,14 +67,10 @@ import 'package:quiver/strings.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:flutter/material.dart' as material;
-import 'package:markdown/markdown.dart' as md;
-// import 'package:nautilus_wallet_flutter/ui/widgets/list_slidable.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class AppHomePage extends StatefulWidget {
@@ -140,6 +131,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   List<User> _users = [];
   List<TXData> _txData = [];
   List<TXData> _txRecords = [];
+
+  // infinite scroll:
+  ScrollController _scrollController;
 
   // Price conversion state (BTC, NANO, NONE)
   PriceConversion _priceConversion;
@@ -509,6 +503,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     _updateBlocked();
     _updateUsers();
     _updateTXData();
+    // infinite scroll:
+    _scrollController = ScrollController()..addListener(_scrollListener);
     // Setup placeholder animation and start
     _animationDisposed = false;
     _placeholderCardAnimationController = new AnimationController(
@@ -749,17 +745,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     });
     _paymentsSub = EventTaxiImpl.singleton().registerTo<PaymentsHomeEvent>().listen((event) {
-      var newPayments = event.items;
-      if (newPayments == null || newPayments.length == 0 || _solidsListMap[StateContainer.of(context).wallet.address] == null) {
+      var newSolids = event.items;
+      if (newSolids == null || newSolids.length == 0 || _solidsListMap[StateContainer.of(context).wallet.address] == null) {
         return;
       }
-      _solidsListMap[StateContainer.of(context).wallet.address] = newPayments;
+      _solidsListMap[StateContainer.of(context).wallet.address] = newSolids;
     });
     _unifiedSub = EventTaxiImpl.singleton().registerTo<UnifiedHomeEvent>().listen((event) {
       generateUnifiedList(fastUpdate: event.fastUpdate);
-      setState(() {
-        _isRefreshing = false;
-      });
     });
     _contactModifiedSub = EventTaxiImpl.singleton().registerTo<ContactModifiedEvent>().listen((event) {
       _updateContacts();
@@ -803,6 +796,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   void dispose() {
     _destroyBus();
     WidgetsBinding.instance.removeObserver(this);
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
     _placeholderCardAnimationController.dispose();
     super.dispose();
   }
@@ -834,6 +829,28 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     if (_unifiedSub != null) {
       _unifiedSub.cancel();
+    }
+  }
+
+  void _scrollListener() {
+    // print(_scrollController.position.extentAfter);
+    if (_scrollController.position.extentAfter < 500) {
+      
+      // check if the oldest item is the initial block:
+      if (_historyListMap[StateContainer.of(context).wallet.address] != null && _historyListMap[StateContainer.of(context).wallet.address].length > 0) {
+        var histList = _historyListMap[StateContainer.of(context).wallet.address];
+        
+        // currentConfHeight
+        // StateContainer.of(context).wallet.history.length
+
+        // load more history if possible:
+        // StateContainer.of(context).requestUpdate(start: StateContainer.of(context).wallet.history.length, count: 50);
+      }
+      
+      // print("now");
+      // setState(() {
+      //   items.addAll(List.generate(42, (index) => 'Inserted $index'));
+      // });
     }
   }
 
@@ -952,7 +969,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     await generateUnifiedList(fastUpdate: false);
     // setState(() {});
     // Hide refresh indicator after 2.5 seconds
-    Future.delayed(new Duration(milliseconds: 2500), () {
+    Future.delayed(new Duration(milliseconds: 3000), () {
       setState(() {
         _isRefreshing = false;
       });
@@ -1325,11 +1342,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     Address address = Address(link);
     if (address.isValid()) {
       String amount;
-      String contactName;
       bool sufficientBalance = false;
       if (address.amount != null) {
         BigInt amountBigInt = BigInt.tryParse(address.amount);
-        // Require minimum 1 rai to send, and make sure sufficient balance
+        // Require minimum 1 raw to send, and make sure sufficient balance
         if (amountBigInt != null && amountBigInt >= BigInt.from(10).pow(24)) {
           if (StateContainer.of(context).wallet.accountBalance > amountBigInt) {
             sufficientBalance = true;
@@ -1339,37 +1355,17 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
       // See if a contact
       dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address);
-      if (user != null) {
-        contactName = user.getDisplayName();
-      }
       // Remove any other screens from stack
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       if (amount != null && sufficientBalance) {
         // Go to send confirm with amount
-        Sheets.showAppHeightNineSheet(context: context, widget: SendConfirmSheet(amountRaw: amount, destination: address.address, contactName: contactName));
+        Sheets.showAppHeightNineSheet(
+            context: context, widget: SendConfirmSheet(amountRaw: amount, destination: address.address, contactName: user?.getDisplayName()));
       } else {
         // Go to send with address
         Sheets.showAppHeightNineSheet(
             context: context,
-            widget: SendSheet(
-                localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: amount != null ? amount : null));
-      }
-    } else if (MantaWallet.parseUrl(link) != null) {
-      // Manta URI handling
-      try {
-        _showMantaAnimation();
-        // Get manta payment request
-        MantaWallet manta = MantaWallet(link);
-        PaymentRequestMessage paymentRequest = await MantaUtil.getPaymentDetails(manta);
-        if (mantaAnimationOpen) {
-          Navigator.of(context).pop();
-        }
-        MantaUtil.processPaymentRequest(context, manta, paymentRequest);
-      } catch (e) {
-        if (mantaAnimationOpen) {
-          Navigator.of(context).pop();
-        }
-        UIUtil.showSnackbar(AppLocalization.of(context).mantaError, context);
+            widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: amount ?? null));
       }
     }
   }
@@ -1399,13 +1395,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         await prefs.remove('background_messages');
       }
     }
-  }
-
-  void _showMantaAnimation() {
-    mantaAnimationOpen = true;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.MANTA, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () => mantaAnimationOpen = false));
   }
 
   void paintQrCode({String address}) {
@@ -1522,67 +1511,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                           ],
                         ),
                       ), //Transactions List End
-                      // //Payments Text
-                      // Container(
-                      //   margin: EdgeInsetsDirectional.fromSTEB(30.0, 20.0, 26.0, 0.0),
-                      //   child: Row(
-                      //     children: <Widget>[
-                      //       Text(
-                      //         CaseChange.toUpperCase(AppLocalization.of(context).payments, context),
-                      //         textAlign: TextAlign.start,
-                      //         style: TextStyle(
-                      //           fontSize: 14.0,
-                      //           fontWeight: FontWeight.w100,
-                      //           color: StateContainer.of(context).curTheme.text,
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ), //Payments Text End
-                      // //Payments List
-                      // Expanded(
-                      //   child: Stack(
-                      //     children: <Widget>[
-                      //       _getPaymentsListWidget(context),
-                      //       //List Top Gradient End
-                      //       Align(
-                      //         alignment: Alignment.topCenter,
-                      //         child: Container(
-                      //           height: 10.0,
-                      //           width: double.infinity,
-                      //           decoration: BoxDecoration(
-                      //             gradient: LinearGradient(
-                      //               colors: [
-                      //                 StateContainer.of(context).curTheme.background00,
-                      //                 StateContainer.of(context).curTheme.background
-                      //               ],
-                      //               begin: AlignmentDirectional(0.5, 1.0),
-                      //               end: AlignmentDirectional(0.5, -1.0),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ), // List Top Gradient End
-                      //       //List Bottom Gradient
-                      //       Align(
-                      //         alignment: Alignment.bottomCenter,
-                      //         child: Container(
-                      //           height: 30.0,
-                      //           width: double.infinity,
-                      //           decoration: BoxDecoration(
-                      //             gradient: LinearGradient(
-                      //               colors: [
-                      //                 StateContainer.of(context).curTheme.background00,
-                      //                 StateContainer.of(context).curTheme.background
-                      //               ],
-                      //               begin: AlignmentDirectional(0.5, -1),
-                      //               end: AlignmentDirectional(0.5, 0.5),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ), //List Bottom Gradient End
-                      //     ],
-                      //   ),
-                      // ), //Payments List End
                       //Buttons background
                       SizedBox(
                         height: 55,
@@ -2808,11 +2736,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   // TX / Card Action functions:
   static Future<void> resendRequest(BuildContext context, TXData txDetails) async {
-// show sending animation:
+    // show sending animation:
     bool animationOpen = true;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () => animationOpen = false));
+    AppAnimation.animationLauncher(context, AnimationType.REQUEST, onPoppedCallback: () => animationOpen = false);
 
     bool sendFailed = false;
 
@@ -2889,9 +2815,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   static Future<void> resendMemo(BuildContext context, TXData txDetails) async {
     // show sending animation:
     bool animationOpen = true;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () => animationOpen = false));
+    AppAnimation.animationLauncher(context, AnimationType.SEND_MESSAGE, onPoppedCallback: () => animationOpen = false);
 
     bool memoSendFailed = false;
 
@@ -3259,8 +3183,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             // sleep for a bit to give the ripple effect time to finish
             await Future.delayed(Duration(milliseconds: 250));
             await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid);
-            await Slidable.of(context).close();
             await StateContainer.of(context).updateSolids();
+            await StateContainer.of(context).updateUnified(false);
+            await Slidable.of(context).close();
           }));
     }
 
@@ -3647,6 +3572,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       return ReactiveRefreshIndicator(
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
         child: AnimatedList(
+          controller: _scrollController,
           key: _unifiedListKeyMap["${StateContainer.of(context).wallet.address}alert"],
           padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
           initialItemCount: _unifiedListMap[StateContainer.of(context).wallet.address].length + 1,
@@ -3660,6 +3586,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     return ReactiveRefreshIndicator(
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       child: AnimatedList(
+        controller: _scrollController,
         key: _unifiedListKeyMap[StateContainer.of(context).wallet.address],
         padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
         initialItemCount: _unifiedListMap[StateContainer.of(context).wallet.address].length,

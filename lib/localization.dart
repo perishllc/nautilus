@@ -196,7 +196,7 @@ class AppLocalization {
   }
 
   String get searchHint {
-    return Intl.message('Search for tx/request', desc: 'home_search_hint', name: 'searchHint');
+    return Intl.message('Search for anything', desc: 'home_search_hint', name: 'searchHint');
   }
 
   String get noSearchResults {
@@ -362,6 +362,15 @@ class AppLocalization {
 
   String get blockedHeader {
     return Intl.message('Blocked', desc: 'blocked_header', name: 'blockedHeader');
+  }
+
+  String get blockedInfo {
+    return Intl.message("Block a user by any known alias or address. Any messages, transactions, or requests from them will be ignored.",
+        desc: 'blocked_info', name: 'blockedInfo');
+  }
+
+  String get blockedInfoHeader {
+    return Intl.message("Blocked Info", desc: 'blocked_info', name: 'blockedInfoHeader');
   }
 
   String get addFavorite {
@@ -697,8 +706,26 @@ class AppLocalization {
     return Intl.message("Receive Minimum", desc: 'receive_minimum', name: 'receiveMinimum');
   }
 
+  String get receiveMinimumInfo {
+    return Intl.message("A minimum amount to receive. If a payment or request is received with an amount less than this, it will be ignored.",
+        desc: 'receive_minimum_info', name: 'receiveMinimumInfo');
+  }
+
+  String get receiveMinimumHeader {
+    return Intl.message("Receive Minimum Info", desc: 'receive_minimum_header', name: 'receiveMinimumHeader');
+  }
+
   String get currencyMode {
     return Intl.message("Currency Mode", desc: 'currency_mode', name: 'currencyMode');
+  }
+
+  String get currencyModeInfo {
+    return Intl.message("Choose which unit to display amounts in.\n1 nyano = 0.000001 NANO, or \n1,000,000 nyano = 1 NANO",
+        desc: 'currency_mode_info', name: 'currencyModeInfo');
+  }
+
+  String get currencyModeHeader {
+    return Intl.message("Currency Mode Info", desc: 'currency_mode_header', name: 'currencyModeHeader');
   }
 
   String get changeRepButton {
@@ -820,6 +847,14 @@ class AppLocalization {
     return Intl.message("Block Explorer", desc: 'settings_change_block_explorer', name: 'blockExplorer');
   }
 
+  String get blockExplorerInfo {
+    return Intl.message("Which block explorer to be used to display transaction information", desc: 'block_explorer_info', name: 'blockExplorerInfo');
+  }
+
+  String get blockExplorerHeader {
+    return Intl.message("Block Explorer Info", desc: 'block_explorer', name: 'blockExplorerHeader');
+  }
+
   String get shareNautilus {
     return Intl.message("Share Nautilus", desc: 'settings_share', name: 'shareNautilus');
   }
@@ -829,7 +864,10 @@ class AppLocalization {
   }
 
   String get destroyDatabaseConfirmation {
-    return Intl.message('Are you sure you want to destroy the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed. If you\'re having issues you should backup your seed, re-install the app, and if the issue persists feel free to make a bug report on github or discord.', desc: 'database_remove_sure', name: 'destroyDatabaseConfirmation');
+    return Intl.message(
+        'Are you sure you want to destroy the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed. If you\'re having issues you should backup your seed, re-install the app, and if the issue persists feel free to make a bug report on github or discord.',
+        desc: 'database_remove_sure',
+        name: 'destroyDatabaseConfirmation');
   }
 
   String get shareNautilusText {

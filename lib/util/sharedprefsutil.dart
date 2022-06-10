@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'dart:io';
 import 'dart:async';
 import 'package:intl/intl.dart';
+import 'package:nautilus_wallet_flutter/model/currency_mode_setting.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/util/random_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -379,12 +380,12 @@ class SharedPrefsUtil {
     return await get(min_raw_receive, defaultValue: "0");
   }
 
-  Future<void> setCurrencyMode(String currencyMode) async {
-    return await set(currency_mode, currencyMode);
+  Future<String> getCurrencyMode() async {
+    return await get(currency_mode, defaultValue: CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName());
   }
 
-  Future<String> getCurrencyMode() async {
-    return await get(currency_mode, defaultValue: "NANO");
+  Future<void> setCurrencyMode(String currencyMode) async {
+    return await set(currency_mode, currencyMode);
   }
 
   Future<void> dismissAlert(AlertResponseItem alert) async {

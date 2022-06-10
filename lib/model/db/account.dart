@@ -1,4 +1,6 @@
 // Represent user-account
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
+
 class Account {
   int id; // Primary Key
   int index; // Index on the seed
@@ -6,10 +8,10 @@ class Account {
   int lastAccess; // Last Accessed incrementor
   bool selected; // Whether this is the currently selected account
   String address;
-  String username;
+  User user;// used just to store the username
   String balance; // Last known balance in RAW
 
-  Account({this.id, this.index, this.name, this.lastAccess, this.selected = false, this.address, this.balance, this.username});
+  Account({this.id, this.index, this.name, this.lastAccess, this.selected = false, this.address, this.balance, this.user});
 
   String getShortName() {
     List<String> splitName = name.split(" ");
@@ -26,14 +28,6 @@ class Account {
       return name.substring(0, 2);
     } else {
       return name.substring(0, 1);
-    }
-  }
-
-  String getUsernameOrAddress() {
-    if (username != null && username.length > 0) {
-      return username;
-    } else {
-      return address;
     }
   }
 }

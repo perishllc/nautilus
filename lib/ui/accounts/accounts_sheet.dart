@@ -161,6 +161,17 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     EventTaxiImpl.singleton().fire(AccountChangedEvent(account: account, delayPop: true));
   }
 
+  // get total account balances:
+  String _getTotalBalance() {
+    BigInt totalBalance = BigInt.zero;
+    widget.accounts.forEach((account) {
+      if (account.balance != null) {
+        totalBalance += BigInt.parse(account.balance);
+      }
+    });
+    return totalBalance.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -176,11 +187,53 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
               Container(
                 margin: EdgeInsets.only(top: 30.0, bottom: 15),
                 constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
-                child: AutoSizeText(
-                  CaseChange.toUpperCase(AppLocalization.of(context).accounts, context),
-                  style: AppStyles.textStyleHeader(context),
-                  maxLines: 1,
-                  stepGranularity: 0.1,
+                child: Column(
+                  children: <Widget>[
+                    AutoSizeText(
+                      CaseChange.toUpperCase(AppLocalization.of(context).accounts, context),
+                      style: AppStyles.textStyleHeader(context),
+                      maxLines: 1,
+                      stepGranularity: 0.1,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 5.0),
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: '',
+                          children: [
+                            TextSpan(
+                              text: "(",
+                              style: TextStyle(
+                                color: StateContainer.of(context).curTheme.primary60,
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w100,
+                                fontFamily: 'NunitoSans',
+                              ),
+                            ),
+                            TextSpan(
+                              text: getRawAsThemeAwareAmount(context, _getTotalBalance()),
+                              style: TextStyle(
+                                color: StateContainer.of(context).curTheme.primary60,
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'NunitoSans',
+                              ),
+                            ),
+                            TextSpan(
+                              text: (StateContainer.of(context).nyanoMode) ? (" nyano)") : (" NANO)"),
+                              style: TextStyle(
+                                color: StateContainer.of(context).curTheme.primary60,
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w100,
+                                fontFamily: 'NunitoSans',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
 
@@ -306,8 +359,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
   Widget _buildAccountListItem(BuildContext context, Account account, StateSetter setState) {
     // get username if it exists:
     String userOrAddress;
-    if (account.username != null) {
-      userOrAddress = "@" + account.username;
+    if (account.user != null) {
+      userOrAddress = account.user.getDisplayName(ignoreNickname: true);
     } else {
       userOrAddress = account.address.substring(0, 12) + "...";
     }
@@ -315,9 +368,16 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     return Slidable(
       closeOnScroll: true,
       endActionPane: _getSlideActionsForAccount(context, account, setState),
-      child: FlatButton(
-          highlightColor: StateContainer.of(context).curTheme.text15,
-          splashColor: StateContainer.of(context).curTheme.text15,
+      child: TextButton(
+          style: TextButton.styleFrom(
+            primary: StateContainer.of(context).curTheme.text15,
+            backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+            padding: EdgeInsets.all(0.0),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          ),
+          // highlightColor: StateContainer.of(context).curTheme.text15,
+          // splashColor: StateContainer.of(context).curTheme.text15,
+          // padding: EdgeInsets.all(0.0),
           onPressed: () {
             if (!_accountIsChanging) {
               // Change account
@@ -329,7 +389,6 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
               }
             }
           },
-          padding: EdgeInsets.all(0.0),
           child: Column(
             children: <Widget>[
               Divider(
@@ -361,52 +420,32 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                // natricon
-                                StateContainer.of(context).natriconOn
-                                    ? Container(
-                                        width: 64.0,
-                                        height: 64.0,
-                                        child: SvgPicture.network(
-                                          UIUtil.getNatriconURL(account.address, StateContainer.of(context).getNatriconNonce(account.address)),
-                                          key: Key(UIUtil.getNatriconURL(account.address, StateContainer.of(context).getNatriconNonce(account.address))),
-                                          placeholderBuilder: (BuildContext context) => Container(
-                                            child: FlareActor(
-                                              "legacy_assets/ntr_placeholder_animation.flr",
-                                              animation: "main",
-                                              fit: BoxFit.contain,
-                                              color: StateContainer.of(context).curTheme.primary,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    : Container(
-                                        child: Stack(
-                                          children: <Widget>[
-                                            Center(
-                                              child: Icon(
-                                                AppIcons.accountwallet,
-                                                color: account.selected
-                                                    ? StateContainer.of(context).curTheme.success
-                                                    : StateContainer.of(context).curTheme.primary,
-                                                size: 30,
-                                              ),
-                                            ),
-                                            Center(
-                                              child: Container(
-                                                width: 40,
-                                                height: 30,
-                                                alignment: AlignmentDirectional(0, 0.3),
-                                                child: Text(account.getShortName().toUpperCase(),
-                                                    style: TextStyle(
-                                                      color: StateContainer.of(context).curTheme.backgroundDark,
-                                                      fontSize: 12.0,
-                                                      fontWeight: FontWeight.w800,
-                                                    )),
-                                              ),
-                                            ),
-                                          ],
+                                Container(
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Center(
+                                        child: Icon(
+                                          AppIcons.accountwallet,
+                                          color: account.selected ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
+                                          size: 30,
                                         ),
                                       ),
+                                      Center(
+                                        child: Container(
+                                          width: 40,
+                                          height: 30,
+                                          alignment: AlignmentDirectional(0, 0.3),
+                                          child: Text(account.getShortName().toUpperCase(),
+                                              style: TextStyle(
+                                                color: StateContainer.of(context).curTheme.backgroundDark,
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.w800,
+                                              )),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 // Account name and address
                                 Container(
                                   width: (MediaQuery.of(context).size.width - 116) * 0.5,

@@ -41,6 +41,7 @@ import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:uuid/uuid.dart';
 
 class RequestConfirmSheet extends StatefulWidget {
@@ -105,11 +106,9 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     super.dispose();
   }
 
-  void _showSendingAnimation(BuildContext context) {
+  void _showAnimation(BuildContext context) {
     animationOpen = true;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () => animationOpen = false));
+    AppAnimation.animationLauncher(context, AnimationType.REQUEST, onPoppedCallback: () => animationOpen = false);
   }
 
   @override
@@ -357,7 +356,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
   Future<void> _doRequest() async {
     bool sendFailed = false;
     try {
-      _showSendingAnimation(context);
+      _showAnimation(context);
 
       String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
 
@@ -402,7 +401,6 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         // encrypt the memo:
         String encryptedMemo;
         if (widget.memo != null && widget.memo.isNotEmpty) {
-          print("${widget.memo} ${destinationAltered} ${privKey}");
           encryptedMemo = await StateContainer.of(context).encryptMessage(widget.memo, destinationAltered, privKey);
         }
 

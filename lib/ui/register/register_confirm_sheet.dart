@@ -117,7 +117,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
   void _showSendingAnimation(BuildContext context) {
     animationOpen = true;
     Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
+        OldAnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
         onPoppedCallback: () => animationOpen = false));
   }
 

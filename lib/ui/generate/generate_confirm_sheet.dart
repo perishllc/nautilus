@@ -26,6 +26,7 @@ import 'package:nautilus_wallet_flutter/ui/generate/generate_complete_sheet.dart
 import 'package:nautilus_wallet_flutter/ui/send/send_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
@@ -100,11 +101,9 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
     super.dispose();
   }
 
-  void _showSendingAnimation(BuildContext context) {
+  void _showAnimation(BuildContext context) {
     animationOpen = true;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () => animationOpen = false));
+    AppAnimation.animationLauncher(context, AnimationType.GENERATE, onPoppedCallback: () => animationOpen = false);
   }
 
   @override
@@ -275,7 +274,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
 
   Future<void> _doSend() async {
     try {
-      _showSendingAnimation(context);
+      _showAnimation(context);
       ProcessResponse resp = await sl.get<AccountService>().requestSend(
           StateContainer.of(context).wallet.representative,
           StateContainer.of(context).wallet.frontier,

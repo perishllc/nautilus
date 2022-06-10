@@ -14,6 +14,7 @@ import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/ui/users/add_blocked.dart';
 import 'package:nautilus_wallet_flutter/ui/users/blocked_details.dart';
 import 'package:nautilus_wallet_flutter/ui/users/user_details.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:file_picker/file_picker.dart';
@@ -343,39 +344,11 @@ class _BlockedListState extends State<BlockedList> {
                         ),
                       ],
                     ),
-                    Row(
-                      children: <Widget>[
-                        // //Import button
-                        // Container(
-                        //   height: 40,
-                        //   width: 40,
-                        //   margin: EdgeInsetsDirectional.only(end: 5),
-                        //   child: FlatButton(
-                        //       highlightColor: StateContainer.of(context).curTheme.text15,
-                        //       splashColor: StateContainer.of(context).curTheme.text15,
-                        //       onPressed: () {
-                        //         _importContacts();
-                        //       },
-                        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                        //       padding: EdgeInsets.all(8.0),
-                        //       child: Icon(AppIcons.import_icon, color: StateContainer.of(context).curTheme.text, size: 24)),
-                        // ),
-                        // //Export button
-                        // Container(
-                        //   height: 40,
-                        //   width: 40,
-                        //   margin: EdgeInsetsDirectional.only(end: 20),
-                        //   child: FlatButton(
-                        //       highlightColor: StateContainer.of(context).curTheme.text15,
-                        //       splashColor: StateContainer.of(context).curTheme.text15,
-                        //       onPressed: () {
-                        //         _exportContacts();
-                        //       },
-                        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                        //       padding: EdgeInsets.all(8.0),
-                        //       child: Icon(AppIcons.export_icon, color: StateContainer.of(context).curTheme.text, size: 24)),
-                        // ),
-                      ],
+                    Container(
+                      margin: EdgeInsets.only(right: 25),
+                      child: AppDialogs.infoButton(context, () {
+                        AppDialogs.showInfoDialog(context, AppLocalization.of(context).blockedInfoHeader, AppLocalization.of(context).blockedInfo);
+                      }),
                     ),
                   ],
                 ),

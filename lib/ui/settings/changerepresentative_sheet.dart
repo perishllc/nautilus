@@ -16,6 +16,7 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
@@ -261,9 +262,7 @@ class AppChangeRepresentativeSheet {
 
   Future<void> doChange(BuildContext context) async {
     _animationOpen = true;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        AnimationType.GENERIC, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () => _animationOpen = false));
+    AppAnimation.animationLauncher(context, AnimationType.CHANGE_REP, onPoppedCallback: () => _animationOpen = false);
     // If account isnt open, just store the account in sharedprefs
     if (StateContainer.of(context).wallet.openBlock == null) {
       await sl.get<SharedPrefsUtil>().setRepresentative(_rep.account);
@@ -346,16 +345,19 @@ class AppChangeRepresentativeSheet {
                                 width: 50,
                                 height: 50,
                                 margin: EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
-                                child: FlatButton(
-                                  highlightColor: StateContainer.of(context).curTheme.text15,
-                                  splashColor: StateContainer.of(context).curTheme.text15,
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    primary: StateContainer.of(context).curTheme.text15,
+                                    backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                                    onSurface: StateContainer.of(context).curTheme.text15,
+                                    padding: EdgeInsets.all(13.0),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                                    tapTargetSize: MaterialTapTargetSize.padded,
+                                  ),
                                   onPressed: () {
                                     AppDialogs.showInfoDialog(context, AppLocalization.of(context).repInfoHeader, AppLocalization.of(context).repInfo);
                                   },
                                   child: Icon(AppIcons.info, size: 24, color: StateContainer.of(context).curTheme.text),
-                                  padding: EdgeInsets.all(13.0),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                                  materialTapTargetSize: MaterialTapTargetSize.padded,
                                 ),
                               ),
                             ],

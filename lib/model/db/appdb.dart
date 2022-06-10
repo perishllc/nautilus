@@ -128,7 +128,7 @@ class DBHelper {
       await db.execute(BLOCKED_SQL);
       await db.execute(USER_ADD_TYPE_COLUMN_SQL);
     }
-    
+
     if (oldVersion == 4) {
       await db.execute(USER_ADD_BLOCKED_COLUMN_SQL);
       await db.execute(USER_ADD_NICKNAME_COLUMN_SQL);
@@ -165,7 +165,7 @@ class DBHelper {
     final knownUsers = await json.decode(userData);
 
     // loop through the data and insert into the users table:
-    var users = parseNanoToUsers(knownUsers);
+    List<User> users = parseNanoToUsers(knownUsers);
     for (var user in users) {
       await addOrReplaceUser(user);
     }
@@ -473,7 +473,12 @@ class DBHelper {
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
     // TODO: Handle multiple users with the same address
     if (list.length > 0) {
-      return User(username: list[0]["username"], address: list[0]["address"], last_updated: list[0]["last_updated"]);
+      return User(
+          username: list[0]["username"],
+          address: list[0]["address"],
+          last_updated: list[0]["last_updated"],
+          type: list[0]["type"],
+          nickname: list[0]["nickname"]);
     }
     return null;
   }
@@ -978,7 +983,7 @@ class DBHelper {
   Future<List<Account>> getAccounts(String seed) async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Accounts ORDER BY acct_index');
-    List<Account> accounts = new List();
+    List<Account> accounts = [];
     for (int i = 0; i < list.length; i++) {
       accounts.add(Account(
           id: list[i]["id"],
@@ -990,10 +995,10 @@ class DBHelper {
     }
     accounts.forEach((a) async {
       a.address = NanoUtil.seedToAddress(seed, a.index);
-      // check if account has a username:
-      String username = await getUsernameWithAddress(a.address);
-      if (username != null) {
-        a.username = username;
+      // check if account has a user:
+      User user = await getUserWithAddress(a.address);
+      if (user != null) {
+        a.user = user;
       }
     });
     return accounts;
@@ -1002,7 +1007,7 @@ class DBHelper {
   Future<List<Account>> getRecentlyUsedAccounts(String seed, {int limit = 2}) async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Accounts WHERE selected != 1 ORDER BY last_accessed DESC, acct_index ASC LIMIT ?', [limit]);
-    List<Account> accounts = new List();
+    List<Account> accounts = [];
     for (int i = 0; i < list.length; i++) {
       accounts.add(Account(
           id: list[i]["id"],
@@ -1014,10 +1019,10 @@ class DBHelper {
     }
     accounts.forEach((a) async {
       a.address = NanoUtil.seedToAddress(seed, a.index);
-      // check if account has a username:
-      String username = await getUsernameWithAddress(a.address);
-      if (username != null) {
-        a.username = username;
+      // check if account has a user:
+      User user = await getUserWithAddress(a.address);
+      if (user != null) {
+        a.user = user;
       }
     });
     return accounts;
@@ -1043,9 +1048,9 @@ class DBHelper {
       await txn.rawInsert('INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)',
           [account.name, account.index, account.lastAccess, account.selected ? 1 : 0, account.address]);
     });
-    String username = await getUsernameWithAddress(account.address);
-    if (username != null) {
-      account.username = username;
+    User user = await getUserWithAddress(account.address);
+    if (user != null) {
+      account.user = user;
     }
     return account;
   }

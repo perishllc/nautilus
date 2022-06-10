@@ -6,7 +6,7 @@ description: Nautilus - Fast, Robust & Secure NANO Wallet.
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.3.2+28
+version: 0.3.3+30
 
 environment:
   sdk: ">=2.11.99 <3.0.0"
@@ -175,9 +175,17 @@ dependencies:
 
   # encryption and decryption until I rewrite the library in dart:
   flutter_js: ^0.5.0+6
-
   devicelocale: ^0.4.1
-  nanodart: ^2.0.0
+
+  # encryption helper:
+  # flutter_sodium: ^0.2.0
+  blake2: ^0.1.2+1
+  flutter_sodium:
+    git:
+      url: https://github.com/perishllc/flutter_sodium
+      ref: master
+
+  # search bar + text highlighting:
   searchbar_animation: ^0.0.2
   substring_highlight: ^1.0.33
 
@@ -323,10 +331,14 @@ flutter:
     - legacy_assets/sheethandle_animation.flr
     - legacy_assets/ntr_placeholder_animation.flr
     # animations:
-    - assets/animations/diamond-loader.riv
-    - assets/animations/particle-loader.riv
-    - assets/animations/loader2.riv
-    - assets/animations/loader3.riv
+    - assets/animations/load-n.json
+    - assets/animations/rocket.json
+    - assets/animations/searching.json
+    - assets/animations/loading/generic_spinner_1.json
+    - assets/animations/loading/generic_spinner_2.json
+    - assets/animations/loading/tri_circle_spinner.json
+    - assets/animations/world-lines.json
+    - assets/animations/world-plane.json
     # other assets
     - assets/store/known.json
     - assets/store/reps.json

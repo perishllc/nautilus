@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -84,9 +85,9 @@ class AppDialogs {
           ),
           content: Text(content, style: AppStyles.textStyleParagraph(context)),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text(
-                AppLocalization.of(context).cancel.toUpperCase(),
+                AppLocalization.of(context).close.toUpperCase(),
                 style: AppStyles.textStyleDialogButtonText(context),
               ),
               onPressed: () {
@@ -98,6 +99,61 @@ class AppDialogs {
       },
     );
   }
+
+  static Widget infoHeader(var context, var title, var onPressed) {
+    return Row(children: <Widget>[
+      title,
+      // A container for the info button
+      infoButton(context, onPressed),
+    ]);
+  }
+
+  static Widget infoButton(var context, var onPressed) {
+    // A container for the info button
+    return Container(
+      width: 50,
+      height: 50,
+      // margin: EdgeInsetsDirectional.only(),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          primary: StateContainer.of(context).curTheme.text15,
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          padding: EdgeInsets.all(10.0),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          tapTargetSize: MaterialTapTargetSize.padded,
+        ),
+        onPressed: onPressed,
+        child: Icon(AppIcons.info, size: 24, color: StateContainer.of(context).curTheme.text),
+      ),
+    );
+  }
+
+  // static void showDialogInfoButton(var context, var title, var content) {
+  //   showDialog(
+  //     barrierColor: StateContainer.of(context).curTheme.barrier,
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AppAlertDialog(
+  //         title: Text(
+  //           title,
+  //           style: AppStyles.textStyleButtonPrimaryOutline(context),
+  //         ),
+  //         content: content,
+  //         actions: <Widget>[
+  //           TextButton(
+  //             child: Text(
+  //               AppLocalization.of(context).close.toUpperCase(),
+  //               style: AppStyles.textStyleDialogButtonText(context),
+  //             ),
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //             },
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   static Future<void> showChangeLog(BuildContext context) async {
     String changeLogMarkdown = await DefaultAssetBundle.of(context).loadString("CHANGELOG.md");
@@ -214,10 +270,10 @@ class AppDialogs {
   }
 }
 
-enum AnimationType { SEND, GENERIC, TRANSFER_SEARCHING_QR, TRANSFER_SEARCHING_MANUAL, TRANSFER_TRANSFERRING, MANTA, LOADING, SEARCHING }
+enum OldAnimationType { SEND, GENERIC, TRANSFER_SEARCHING_QR, TRANSFER_SEARCHING_MANUAL, TRANSFER_TRANSFERRING, MANTA, LOADING, SEARCHING }
 
 class AnimationLoadingOverlay extends ModalRoute<void> {
-  AnimationType type;
+  OldAnimationType type;
   Function onPoppedCallback;
   Color barrier;
   Color barrierStronger;
@@ -236,7 +292,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
 
   @override
   Color get barrierColor {
-    if (type == AnimationType.TRANSFER_TRANSFERRING || type == AnimationType.TRANSFER_SEARCHING_QR || type == AnimationType.TRANSFER_SEARCHING_MANUAL) {
+    if (type == OldAnimationType.TRANSFER_TRANSFERRING || type == OldAnimationType.TRANSFER_SEARCHING_QR || type == OldAnimationType.TRANSFER_SEARCHING_MANUAL) {
       return barrierStronger;
     }
     return barrier;
@@ -272,14 +328,20 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
 
   Widget _getAnimation(BuildContext context) {
     switch (type) {
-      case AnimationType.LOADING:
+      case OldAnimationType.LOADING:
         // return Center(child: RiveAnimation.asset('assets/animations/diamond-loader.riv', fit: BoxFit.contain));
         // return Center(child: RiveAnimation.asset('assets/animations/particle-loader.riv', fit: BoxFit.contain));
         // return Center(child: RiveAnimation.asset('assets/animations/loader3.riv', fit: BoxFit.contain));
-        return Lottie.network(
-          'https://assets10.lottiefiles.com/packages/lf20_t9gkkhz4.json',
+        return Lottie.asset(
+          'assets/animations/load-n.json',
         );
-      case AnimationType.SEND:
+      // return Lottie.network(
+      //   // 'https://assets10.lottiefiles.com/packages/lf20_t9gkkhz4.json',
+      //   // 'https://assets2.lottiefiles.com/private_files/lf30_juqdjgia.json',
+      //   // 'https://assets9.lottiefiles.com/packages/lf20_utc4nnnj.json',
+      //   'https://assets3.lottiefiles.com/private_files/lf30_ghoL4b.json',
+      // );
+      case OldAnimationType.SEND:
         return Center(
           child: FlareActor(
             "legacy_assets/send_animation.flr",
@@ -288,70 +350,68 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
             color: StateContainer.of(context).curTheme.primary,
           ),
         );
-      case AnimationType.MANTA:
-        return Center(
-          child: FlareActor(
-            "legacy_assets/manta_animation.flr",
-            animation: "main",
-            fit: BoxFit.contain,
-          ),
+      case OldAnimationType.TRANSFER_SEARCHING_QR:
+        // return Stack(
+        //   children: <Widget>[
+        //     Center(
+        //       child: FlareActor(
+        //         "legacy_assets/searchseedqr_animation_qronly.flr",
+        //         animation: "main",
+        //         fit: BoxFit.contain,
+        //       ),
+        //     ),
+        //     Center(
+        //       child: FlareActor(
+        //         "legacy_assets/searchseedqr_animation_glassonly.flr",
+        //         animation: "main",
+        //         fit: BoxFit.contain,
+        //       ),
+        //     ),
+        //     Center(
+        //       child: FlareActor(
+        //         "legacy_assets/searchseedqr_animation_magnifyingglassonly.flr",
+        //         animation: "main",
+        //         fit: BoxFit.contain,
+        //         color: StateContainer.of(context).curTheme.primary,
+        //       ),
+        //     ),
+        //   ],
+        // );
+        return Lottie.asset(
+          "assets/animations/searching.json",
         );
-      case AnimationType.TRANSFER_SEARCHING_QR:
-        return Stack(
-          children: <Widget>[
-            Center(
-              child: FlareActor(
-                "legacy_assets/searchseedqr_animation_qronly.flr",
-                animation: "main",
-                fit: BoxFit.contain,
-              ),
-            ),
-            Center(
-              child: FlareActor(
-                "legacy_assets/searchseedqr_animation_glassonly.flr",
-                animation: "main",
-                fit: BoxFit.contain,
-              ),
-            ),
-            Center(
-              child: FlareActor(
-                "legacy_assets/searchseedqr_animation_magnifyingglassonly.flr",
-                animation: "main",
-                fit: BoxFit.contain,
-                color: StateContainer.of(context).curTheme.primary,
-              ),
-            ),
-          ],
+      case OldAnimationType.TRANSFER_SEARCHING_MANUAL:
+        // return Stack(
+        //   children: <Widget>[
+        //     Center(
+        //       child: FlareActor(
+        //         "legacy_assets/searchseedmanual_animation_seedonly.flr",
+        //         animation: "main",
+        //         fit: BoxFit.contain,
+        //         color: StateContainer.of(context).curTheme.primary30,
+        //       ),
+        //     ),
+        //     Center(
+        //       child: FlareActor(
+        //         "legacy_assets/searchseedmanual_animation_glassonly.flr",
+        //         animation: "main",
+        //         fit: BoxFit.contain,
+        //       ),
+        //     ),
+        //     Center(
+        //       child: FlareActor(
+        //         "legacy_assets/searchseedmanual_animation_magnifyingglassonly.flr",
+        //         animation: "main",
+        //         fit: BoxFit.contain,
+        //         color: StateContainer.of(context).curTheme.primary,
+        //       ),
+        //     ),
+        //   ],
+        // );
+        return Lottie.asset(
+          "assets/animations/searching.json",
         );
-      case AnimationType.TRANSFER_SEARCHING_MANUAL:
-        return Stack(
-          children: <Widget>[
-            Center(
-              child: FlareActor(
-                "legacy_assets/searchseedmanual_animation_seedonly.flr",
-                animation: "main",
-                fit: BoxFit.contain,
-                color: StateContainer.of(context).curTheme.primary30,
-              ),
-            ),
-            Center(
-              child: FlareActor(
-                "legacy_assets/searchseedmanual_animation_glassonly.flr",
-                animation: "main",
-                fit: BoxFit.contain,
-              ),
-            ),
-            Center(
-              child: FlareActor(
-                "legacy_assets/searchseedmanual_animation_magnifyingglassonly.flr",
-                animation: "main",
-                fit: BoxFit.contain,
-                color: StateContainer.of(context).curTheme.primary,
-              ),
-            ),
-          ],
-        );
-      case AnimationType.TRANSFER_TRANSFERRING:
+      case OldAnimationType.TRANSFER_TRANSFERRING:
         return Stack(
           children: <Widget>[
             FlareActor(
@@ -367,7 +427,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
             ),
           ],
         );
-      case AnimationType.GENERIC:
+      case OldAnimationType.GENERIC:
       default:
         return CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(StateContainer.of(context).curTheme.primary60));
     }
@@ -375,7 +435,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
 
   Widget _buildOverlayContent(BuildContext context) {
     switch (type) {
-      case AnimationType.TRANSFER_SEARCHING_QR:
+      case OldAnimationType.TRANSFER_SEARCHING_QR:
         return Center(
           child: Container(
             margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.15),
@@ -384,7 +444,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
             child: _getAnimation(context),
           ),
         );
-      case AnimationType.TRANSFER_SEARCHING_MANUAL:
+      case OldAnimationType.TRANSFER_SEARCHING_MANUAL:
         return Center(
           child: Container(
             margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.15),
@@ -393,7 +453,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
             child: _getAnimation(context),
           ),
         );
-      case AnimationType.TRANSFER_TRANSFERRING:
+      case OldAnimationType.TRANSFER_TRANSFERRING:
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -428,7 +488,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
             ],
           ),
         );
-      case AnimationType.MANTA:
+      case OldAnimationType.MANTA:
         return Center(
           child: Container(
             margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.05),
@@ -437,30 +497,30 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
             child: _getAnimation(context),
           ),
         );
-      case AnimationType.SEND:
+      case OldAnimationType.SEND:
         return Column(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: type == AnimationType.SEND ? MainAxisAlignment.end : MainAxisAlignment.center,
+          mainAxisAlignment: type == OldAnimationType.SEND ? MainAxisAlignment.end : MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: type == AnimationType.SEND ? EdgeInsets.only(bottom: 10.0, left: 90, right: 90) : EdgeInsets.zero,
+              margin: type == OldAnimationType.SEND ? EdgeInsets.only(bottom: 10.0, left: 90, right: 90) : EdgeInsets.zero,
               //Widgth/Height ratio is needed because BoxFit is not working as expected
-              width: type == AnimationType.SEND ? double.infinity : 100,
-              height: type == AnimationType.SEND ? MediaQuery.of(context).size.width : 100,
+              width: type == OldAnimationType.SEND ? double.infinity : 100,
+              height: type == OldAnimationType.SEND ? MediaQuery.of(context).size.width : 100,
               child: _getAnimation(context),
             ),
           ],
         );
-      case AnimationType.GENERIC:
+      case OldAnimationType.GENERIC:
         return Column(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: type == AnimationType.SEND ? MainAxisAlignment.end : MainAxisAlignment.center,
+          mainAxisAlignment: type == OldAnimationType.SEND ? MainAxisAlignment.end : MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: type == AnimationType.SEND ? EdgeInsets.only(bottom: 10.0, left: 90, right: 90) : EdgeInsets.zero,
+              margin: type == OldAnimationType.SEND ? EdgeInsets.only(bottom: 10.0, left: 90, right: 90) : EdgeInsets.zero,
               //Widgth/Height ratio is needed because BoxFit is not working as expected
-              width: type == AnimationType.SEND ? double.infinity : 100,
-              height: type == AnimationType.SEND ? MediaQuery.of(context).size.width : 100,
+              width: type == OldAnimationType.SEND ? double.infinity : 100,
+              height: type == OldAnimationType.SEND ? MediaQuery.of(context).size.width : 100,
               child: _getAnimation(context),
             ),
           ],
