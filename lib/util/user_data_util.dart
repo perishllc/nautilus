@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:manta_dart/manta_wallet.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-
 import 'package:quiver/strings.dart';
 import 'package:validators/validators.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
@@ -44,14 +42,6 @@ class UserDataUtil {
       Address address = Address(data);
       if (address.isValid()) {
         return address.address;
-      }
-    } else if (type == DataType.MANTA_ADDRESS) {
-      // Check if an address or manta result
-      Address address = Address(data);
-      if (address.isValid()) {
-        return data;
-      } else if (MantaWallet.parseUrl(data) != null) {
-        return data;
       }
     } else if (type == DataType.SEED) {
       // Check if valid seed

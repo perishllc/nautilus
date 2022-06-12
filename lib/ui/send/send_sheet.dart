@@ -10,9 +10,6 @@ import 'package:decimal/decimal.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
-import 'package:manta_dart/manta_wallet.dart';
-import 'package:manta_dart/messages.dart';
-
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/fcm_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/notification_setting_change_event.dart';
@@ -40,7 +37,6 @@ import 'package:nautilus_wallet_flutter/ui/widgets/one_or_three_address_text.dar
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:nautilus_wallet_flutter/util/manta.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -918,23 +914,8 @@ class _SendSheetState extends State<SendSheet> {
                           UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
                         } else if (QRScanErrs.ERROR_LIST.contains(scanResult)) {
                           return;
-                        } else if (MantaWallet.parseUrl(scanResult) != null) {
-                          try {
-                            _showMantaAnimation();
-                            // Get manta payment request
-                            MantaWallet manta = MantaWallet(scanResult);
-                            PaymentRequestMessage paymentRequest = await MantaUtil.getPaymentDetails(manta);
-                            if (animationOpen) {
-                              Navigator.of(context).pop();
-                            }
-                            MantaUtil.processPaymentRequest(context, manta, paymentRequest);
-                          } catch (e) {
-                            if (animationOpen) {
-                              Navigator.of(context).pop();
-                            }
-                            log.e('Failed to make manta request ${e.toString()}', e);
-                            UIUtil.showSnackbar(AppLocalization.of(context).mantaError, context);
-                          }
+                        } else if (false) {
+                          // TODO: block handoff
                         } else {
                           // Is a URI
                           Address address = Address(scanResult);
@@ -1033,7 +1014,7 @@ class _SendSheetState extends State<SendSheet> {
     }
     Decimal valueLocal = Decimal.parse(convertedAmt);
     Decimal conversion = Decimal.parse(StateContainer.of(context).wallet.localCurrencyConversion);
-    return NumberUtil.truncateDecimal(valueLocal / conversion).toString();
+    return NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal()).toString();
   }
 
   String _convertCryptoToLocalCurrency() {
@@ -1074,12 +1055,12 @@ class _SendSheetState extends State<SendSheet> {
         balance = balance.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
         balance = balance.replaceAll(",", ".");
         String sanitizedBalance = NumberUtil.sanitizeNumber(balance);
-        textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toInt();
-        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toInt();
+        textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toDouble().toInt();
+        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toDouble().toInt();
       } else {
         textField = textField.replaceAll(",", "");
-        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toInt();
-        balanceInt = (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toInt();
+        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toDouble().toInt();
+        balanceInt = (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toDouble().toInt();
       }
       return textFieldInt == balanceInt;
     } catch (e) {

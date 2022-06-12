@@ -5,10 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:manta_dart/manta_wallet.dart';
-import 'package:manta_dart/messages.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
-
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -50,12 +47,10 @@ class RequestConfirmSheet extends StatefulWidget {
   final String destination;
   final String contactName;
   final String localCurrency;
-  final MantaWallet manta;
-  final PaymentRequestMessage paymentRequest;
   final int natriconNonce;
   final String memo;
 
-  RequestConfirmSheet({this.amountRaw, this.destination, this.contactName, this.localCurrency, this.manta, this.paymentRequest, this.natriconNonce, this.memo})
+  RequestConfirmSheet({this.amountRaw, this.destination, this.contactName, this.localCurrency, this.natriconNonce, this.memo})
       : super();
 
   _RequestConfirmSheetState createState() => _RequestConfirmSheetState();
@@ -65,7 +60,6 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
   String amount;
   String destinationAltered;
   bool animationOpen;
-  bool isMantaTransaction;
 
   StreamSubscription<AuthenticatedEvent> _authSub;
 
@@ -88,7 +82,6 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     super.initState();
     _registerBus();
     this.animationOpen = false;
-    this.isMantaTransaction = widget.manta != null && widget.paymentRequest != null;
     // Derive amount from raw amount
     // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
     //   amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
@@ -213,62 +206,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: isMantaTransaction
-                          ? Column(
-                              children: <Widget>[
-                                AutoSizeText(
-                                  widget.paymentRequest.merchant.name,
-                                  minFontSize: 12,
-                                  stepGranularity: 0.1,
-                                  maxLines: 1,
-                                  textAlign: TextAlign.center,
-                                  style: AppStyles.headerPrimary(context),
-                                ),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                                AutoSizeText(
-                                  widget.paymentRequest.merchant.address,
-                                  minFontSize: 10,
-                                  maxLines: 2,
-                                  textAlign: TextAlign.center,
-                                  stepGranularity: 0.1,
-                                  style: AppStyles.addressText(context),
-                                ),
-                                Container(
-                                  margin: EdgeInsetsDirectional.only(top: 10, bottom: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Container(
-                                          height: 1,
-                                          color: StateContainer.of(context).curTheme.text30,
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsetsDirectional.only(start: 10, end: 20),
-                                        child: Icon(
-                                          AppIcons.appia,
-                                          color: StateContainer.of(context).curTheme.text30,
-                                          size: 20,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 1,
-                                          color: StateContainer.of(context).curTheme.text30,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                smallScreen(context)
-                                    ? UIUtil.oneLineAddressText(context, destinationAltered)
-                                    : UIUtil.threeLineAddressText(context, destinationAltered)
-                              ],
-                            )
-                          : UIUtil.threeLineAddressText(context, destinationAltered, contactName: widget.contactName)),
+                      child: UIUtil.threeLineAddressText(context, destinationAltered, contactName: widget.contactName)),
                   (widget.memo != null && widget.memo.isNotEmpty)
                       ? (
                           // "WITH MESSAGE" text
@@ -460,7 +398,6 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
               destination: destinationAltered,
               contactName: contactName,
               localAmount: widget.localCurrency,
-              paymentRequest: widget.paymentRequest,
             ));
       }
     } catch (e) {

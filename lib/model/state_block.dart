@@ -5,8 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:manta_dart/messages.dart';
-
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
 
 part 'state_block.g.dart';
@@ -56,9 +54,6 @@ class StateBlock {
   // Represents local currency value of this TX
   @JsonKey(ignore: true)
   String localCurrencyValue;
-  // Represents a manta TX
-  @JsonKey(ignore: true)
-  PaymentRequestMessage paymentRequest;
 
   /// StateBlock constructor.
   /// subtype is one of "send", "receive", "change", "open"
@@ -74,8 +69,7 @@ class StateBlock {
       @required String link,
       @required String account,
       this.privKey,
-      this.localCurrencyValue,
-      this.paymentRequest}) {
+      this.localCurrencyValue}) {
     this.link = link;
     this.subType = subtype;
     this.type = BlockTypes.STATE;

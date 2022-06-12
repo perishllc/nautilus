@@ -55,8 +55,8 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
 
   @override
   void didComplete(void result) {
-    if (this.onPoppedCallback != null) {
-      this.onPoppedCallback();
+    if (onPoppedCallback != null) {
+      onPoppedCallback();
     }
     super.didComplete(result);
   }

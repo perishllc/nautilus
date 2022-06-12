@@ -458,7 +458,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     }
     Decimal valueLocal = Decimal.parse(convertedAmt);
     Decimal conversion = Decimal.parse(StateContainer.of(context).wallet.localCurrencyConversion);
-    return NumberUtil.truncateDecimal(valueLocal / conversion).toString();
+    return NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal()).toString();
   }
 
   String _convertCryptoToLocalCurrency() {

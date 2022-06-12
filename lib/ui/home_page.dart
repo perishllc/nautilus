@@ -51,7 +51,6 @@ import 'package:nautilus_wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/transaction_state_tag.dart';
 import 'package:nautilus_wallet_flutter/util/box.dart';
-import 'package:nautilus_wallet_flutter/util/manta.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
@@ -86,9 +85,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   AnimationController _placeholderCardAnimationController;
   Animation<double> _opacityAnimation;
   bool _animationDisposed;
-
-  // Manta
-  bool mantaAnimationOpen;
 
   // Receive card instance
   ReceiveSheet receive;
@@ -457,7 +453,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   void initState() {
     super.initState();
     _registerBus();
-    this.mantaAnimationOpen = false;
     WidgetsBinding.instance.addObserver(this);
     if (widget.priceConversion != null) {
       _priceConversion = widget.priceConversion;

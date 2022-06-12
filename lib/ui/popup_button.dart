@@ -1,7 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:manta_dart/manta_wallet.dart';
-import 'package:manta_dart/messages.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
@@ -18,7 +16,6 @@ import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
-import 'package:nautilus_wallet_flutter/util/manta.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class AppPopupButton extends StatefulWidget {
@@ -52,22 +49,9 @@ class _AppPopupButtonState extends State<AppPopupButton> {
     // Parse scan data and route appropriately
     if (scanResult == null) {
       UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
-    } else if (!QRScanErrs.ERROR_LIST.contains(scanResult) && MantaWallet.parseUrl(scanResult) != null) {
-      try {
-        _showMantaAnimation();
-        // Get manta payment request
-        MantaWallet manta = MantaWallet(scanResult);
-        PaymentRequestMessage paymentRequest = await MantaUtil.getPaymentDetails(manta);
-        if (animationOpen) {
-          Navigator.of(context).pop();
-        }
-        MantaUtil.processPaymentRequest(context, manta, paymentRequest);
-      } catch (e) {
-        if (animationOpen) {
-          Navigator.of(context).pop();
-        }
-        UIUtil.showSnackbar(AppLocalization.of(context).mantaError, context);
-      }
+    } else if (/*!QRScanErrs.ERROR_LIST.contains(scanResult)*/false) {
+      // TODO: block handoff
+
     } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
       // Is a URI
       Address address = Address(scanResult);

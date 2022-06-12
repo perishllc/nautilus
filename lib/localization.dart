@@ -768,6 +768,10 @@ class AppLocalization {
     return Intl.message("Representative Changed Successfully", desc: 'change_representative_success', name: 'changeRepSucces');
   }
 
+  String get changeRepSame {
+    return Intl.message("This is already your representative!", desc: 'change_representative_same', name: 'changeRepSame');
+  }
+
   String get repInfoHeader {
     return Intl.message("What is a representative?", desc: 'change_representative_info_header', name: 'repInfoHeader');
   }

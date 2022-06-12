@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
 
-import 'package:vibrate/vibrate.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:device_info/device_info.dart';
 
 /// Utilities for haptic feedback

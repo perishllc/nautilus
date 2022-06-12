@@ -38,7 +38,7 @@ import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:root_checker/root_checker.dart';
+import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -345,7 +345,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     // Update session key
     await sl.get<Vault>().updateSessionKey();
     // Check if device is rooted or jailbroken, show user a warning informing them of the risks if so
-    if (!(await sl.get<SharedPrefsUtil>().getHasSeenRootWarning()) && (await RootChecker.isDeviceRooted)) {
+    if (!(await sl.get<SharedPrefsUtil>().getHasSeenRootWarning()) && await FlutterJailbreakDetection.jailbroken) {
       AppDialogs.showConfirmDialog(
           context,
           CaseChange.toUpperCase(AppLocalization.of(context).warning, context),

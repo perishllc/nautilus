@@ -261,6 +261,9 @@ class AppChangeRepresentativeSheet {
   }
 
   Future<void> doChange(BuildContext context) async {
+    if (_animationOpen) {
+      return;// not sure why it's called more than once
+    }
     _animationOpen = true;
     AppAnimation.animationLauncher(context, AnimationType.CHANGE_REP, onPoppedCallback: () => _animationOpen = false);
     // If account isnt open, just store the account in sharedprefs
@@ -269,6 +272,14 @@ class AppChangeRepresentativeSheet {
       StateContainer.of(context).wallet.representative = _rep.account;
       UIUtil.showSnackbar(AppLocalization.of(context).changeRepSucces, context);
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+    } else if (StateContainer.of(context).wallet.representative == _rep.account) {
+      // sleep for 2 seconds:
+      await Future.delayed(Duration(seconds: 2));
+      // representative is the same as the current one:
+      if (_animationOpen) {
+        Navigator.of(context).pop();
+      }
+      UIUtil.showSnackbar(AppLocalization.of(context).changeRepSame, context);
     } else {
       try {
         ProcessResponse resp = await sl.get<AccountService>().requestChange(

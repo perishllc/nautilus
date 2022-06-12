@@ -1,4 +1,11 @@
-# v0.3.3 - [2022-06-14]
+# v0.3.4 - [2022-06-20]
+#### Added
+
+#### Changed
+
+#### Fixed
+
+## v0.3.3 - [2022-06-12]
 #### Added
 - Scrollbar to make it easier to go through the transaction history
 - Testing out some new animations, likely will change again
