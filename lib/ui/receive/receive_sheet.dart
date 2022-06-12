@@ -27,7 +27,6 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flare_flutter/flare_actor.dart';
 
 class NumericalRangeFormatter extends TextInputFormatter {
   final double min;
@@ -335,48 +334,23 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                       ),
                                     ),
                                   ),
-                            StateContainer.of(context).natriconOn
-                                ? SizedBox()
-                                : // Logo Background Primary
-                                Center(
-                                    child: Container(
-                                      width: computedMaxSize / 6.5,
-                                      height: computedMaxSize / 6.5,
-                                      decoration: BoxDecoration(
-                                        color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                  ),
-                            // natricon
-                            StateContainer.of(context).natriconOn
-                                ? Center(
-                                    child: Container(
-                                      width: computedMaxSize / 6.5,
-                                      height: computedMaxSize / 6.5,
-                                      margin: EdgeInsetsDirectional.only(top: computedMaxSize / 170),
-                                      child: SvgPicture.network(
-                                        UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
-                                        key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
-                                        placeholderBuilder: (BuildContext context) => Container(
-                                          child: FlareActor(
-                                            "legacy_assets/ntr_placeholder_animation.flr",
-                                            animation: "main",
-                                            fit: BoxFit.contain,
-                                            color: StateContainer.of(context).curTheme.primary,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : Center(
-                                    child: Container(
-                                      height: computedMaxSize / 8,
-                                      child: Image(image: AssetImage("assets/logo-square.png")),
-                                    ),
-                                  ),
+                            // Logo Background Primary
+                            Center(
+                              child: Container(
+                                width: computedMaxSize / 6.5,
+                                height: computedMaxSize / 6.5,
+                                decoration: BoxDecoration(
+                                  color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Container(
+                                height: computedMaxSize / 8,
+                                child: Image(image: AssetImage("assets/logo-square.png")),
+                              ),
+                            ),
                           ],
                         ),
                       );

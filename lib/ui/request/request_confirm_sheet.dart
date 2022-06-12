@@ -30,6 +30,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -401,7 +402,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         // encrypt the memo:
         String encryptedMemo;
         if (widget.memo != null && widget.memo.isNotEmpty) {
-          encryptedMemo = await StateContainer.of(context).encryptMessage(widget.memo, destinationAltered, privKey);
+          encryptedMemo = await Box.encrypt(widget.memo, destinationAltered, privKey);
         }
 
         await sl

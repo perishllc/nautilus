@@ -848,7 +848,7 @@ class AppLocalization {
   }
 
   String get blockExplorerInfo {
-    return Intl.message("Which block explorer to be used to display transaction information", desc: 'block_explorer_info', name: 'blockExplorerInfo');
+    return Intl.message("Which block explorer to use to display transaction information", desc: 'block_explorer_info', name: 'blockExplorerInfo');
   }
 
   String get blockExplorerHeader {

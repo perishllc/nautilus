@@ -20,6 +20,7 @@ import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
@@ -116,9 +117,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
 
   void _showSendingAnimation(BuildContext context) {
     animationOpen = true;
-    Navigator.of(context).push(AnimationLoadingOverlay(
-        OldAnimationType.SEND, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
-        onPoppedCallback: () => animationOpen = false));
+    AppAnimation.animationLauncher(context, AnimationType.REGISTER_USERNAME, onPoppedCallback: () => animationOpen = false);
   }
 
   @override

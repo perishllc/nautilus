@@ -24,7 +24,6 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 
 class AppAccountsSheet {

@@ -25,6 +25,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/account_info_resp
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
+import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
@@ -54,8 +55,6 @@ import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
-// E2E Encryption
-import 'package:flutter_js/flutter_js.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // print("Handling a background message");
@@ -184,9 +183,6 @@ class StateContainerState extends State<StateContainer> {
 
   // When wallet is encrypted
   String encryptedSecret;
-
-  // JS run time:
-  JavascriptRuntime flutterJs;
 
   void updateNinjaNodes(List<NinjaNode> list) {
     setState(() {
@@ -366,23 +362,9 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  // Future<void> executeAfterBuild() async {
-  //   // this code will get executed after the build method
-  //   // because of the way async functions are scheduled
-  //   print("??????????????????????????????");
-  //   flutterJs.evaluate(await rootBundle.loadString("assets/nano-lib.js"));
-  // }
-
   @override
   void initState() {
     super.initState();
-    // JS runtime:
-    flutterJs = getJavascriptRuntime();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      flutterJs.evaluate(await rootBundle.loadString("assets/nano-lib.js"));
-      print("loaded nano JS lib");
-    });
-    // executeAfterBuild();
 
     // Register RxBus
     _registerBus();
@@ -1158,28 +1140,6 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  Future<String> encryptMessage(String message, String recipientAddress, String privateKey) async {
-    try {
-      String builtExpression = "encrypt(\"$message\", \"$recipientAddress\", \"$privateKey\");";
-      JsEvalResult jsResult = flutterJs.evaluate(builtExpression);
-      return jsResult.stringResult;
-    } catch (e) {
-      sl.get<Logger>().e("encryptMessage error: ${e.toString()}");
-      return null;
-    }
-  }
-
-  Future<String> decryptMessage(String memo_enc, String senderAddress, String privateKey) async {
-    try {
-      String builtExpression = "decrypt(\"$memo_enc\", \"$senderAddress\", \"$privateKey\");";
-      JsEvalResult jsResult = flutterJs.evaluate(builtExpression);
-      return jsResult.stringResult;
-    } catch (e) {
-      sl.get<Logger>().e("decryptMessage error: ${e.toString()}");
-      return null;
-    }
-  }
-
   Future<String> decryptMessageCurrentAccount(String memo_enc, String fromAddress, String toAddress) async {
     // decrypt the memo:
     Account correctAccount;
@@ -1203,7 +1163,7 @@ class StateContainerState extends State<StateContainer> {
     }
 
     String privKey = NanoUtil.seedToPrivate(await getSeed(), correctAccount.index);
-    String memo = await decryptMessage(memo_enc, fromAddress, privKey);
+    String memo = await Box.decrypt(memo_enc, fromAddress, privKey);
     return memo;
   }
 
@@ -1673,7 +1633,8 @@ class StateContainerState extends State<StateContainer> {
     int height = data['height'];
 
     // sleep to prevent animations from overlapping:
-    await Future.delayed(Duration(seconds: 2));
+    // TODO: is this needed?
+    // await Future.delayed(Duration(seconds: 2));
 
     // set acknowledged to true:
     var txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);

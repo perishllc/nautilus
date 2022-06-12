@@ -7,13 +7,6 @@ import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 
-// import 'package:flare_flutter/flare_actor.dart';
-// import 'package:nautilus_wallet_flutter/dimens.dart';
-// import 'package:nautilus_wallet_flutter/localization.dart';
-// import 'package:nautilus_wallet_flutter/model/vault.dart';
-// import 'package:nautilus_wallet_flutter/service_locator.dart';
-// import 'package:nautilus_wallet_flutter/styles.dart';
-// import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 
 class PurchaseNanoScreen extends StatefulWidget {
   @override

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,8 +16,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'dart:math' as math;
 
-const String NATRICON_ADDRESS =
-    "nano_3natricon9grnc8caqkht19f1fwpz39r3deeyef66m3d4fch3fau7x5q57cj";
+const String NATRICON_ADDRESS = "nano_3natricon9grnc8caqkht19f1fwpz39r3deeyef66m3d4fch3fau7x5q57cj";
 const String NATRICON_BASE_RAW = "1234567891234567891234567891";
 
 class AvatarChangePage extends StatefulWidget {
@@ -39,8 +37,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
   void initState() {
     super.initState();
     this.loading = true;
-    String url =
-        'https://natricon.com/api/v1/nano/nonce?address=${widget.curAddress}';
+    String url = 'https://natricon.com/api/v1/nano/nonce?address=${widget.curAddress}';
     http.get(Uri.parse(url), headers: {}).then((response) {
       if (mounted) {
         if (response.statusCode != 200) {
@@ -50,8 +47,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
           return;
         }
         try {
-          NonceResponse resp =
-              NonceResponse.fromJson(json.decode(response.body));
+          NonceResponse resp = NonceResponse.fromJson(json.decode(response.body));
           setState(() {
             this.loading = false;
             this.currentNonce = resp.nonce;
@@ -69,16 +65,11 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
     BigInt baseAmount = BigInt.parse(NATRICON_BASE_RAW);
     BigInt sendAmount = baseAmount + BigInt.from(nonce);
     if (StateContainer.of(context).wallet.accountBalance < sendAmount) {
-      UIUtil.showSnackbar(
-          AppLocalization.of(context).insufficientBalance, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
       return;
     }
     Sheets.showAppHeightNineSheet(
-        context: context,
-        widget: SendConfirmSheet(
-            amountRaw: sendAmount.toString(),
-            destination: NATRICON_ADDRESS,
-            natriconNonce: nonce));
+        context: context, widget: SendConfirmSheet(amountRaw: sendAmount.toString(), destination: NATRICON_ADDRESS, natriconNonce: nonce));
   }
 
   @override
@@ -89,9 +80,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
         builder: (context, constraints) => SafeArea(
-          minimum: EdgeInsets.only(
-              bottom: MediaQuery.of(context).size.height * 0.035,
-              top: MediaQuery.of(context).size.height * 0.075),
+          minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
               //A widget that holds the header, the paragraph and Back Button
@@ -103,26 +92,18 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                       children: <Widget>[
                         // Back Button
                         Container(
-                          margin: EdgeInsetsDirectional.only(
-                              start: smallScreen(context) ? 15 : 20),
+                          margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
                           height: 50,
                           width: 50,
                           child: FlatButton(
-                              highlightColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              splashColor:
-                                  StateContainer.of(context).curTheme.text15,
+                              highlightColor: StateContainer.of(context).curTheme.text15,
+                              splashColor: StateContainer.of(context).curTheme.text15,
                               onPressed: () {
-                                Navigator.of(context)
-                                    .popUntil((route) => route.isFirst);
+                                Navigator.of(context).popUntil((route) => route.isFirst);
                               },
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                               padding: EdgeInsets.all(0.0),
-                              child: Icon(AppIcons.back,
-                                  color:
-                                      StateContainer.of(context).curTheme.text,
-                                  size: 24)),
+                              child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                       ],
                     ),
@@ -143,10 +124,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                     ),
                     // The paragraph
                     Container(
-                      margin: EdgeInsetsDirectional.only(
-                          start: smallScreen(context) ? 30 : 40,
-                          end: smallScreen(context) ? 30 : 40,
-                          top: 16.0),
+                      margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                       child: AutoSizeText(
                         "You'll be asked to send 0.001~ Nano to the Natricon address to change your Natricon.",
                         style: AppStyles.textStyleParagraph(context),
@@ -155,10 +133,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsetsDirectional.only(
-                          start: smallScreen(context) ? 30 : 40,
-                          end: smallScreen(context) ? 30 : 40,
-                          top: 8),
+                      margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 8),
                       child: AutoSizeText(
                         "This amount will be automatically refunded completely.",
                         style: AppStyles.textStyleParagraphPrimary(context),
@@ -171,53 +146,8 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                       alignment: Alignment.center,
                       child: Stack(alignment: Alignment.center, children: [
                         Container(
-                          constraints: BoxConstraints(
-                              maxHeight:
-                                  MediaQuery.of(context).size.height * 0.5,
-                              maxWidth:
-                                  MediaQuery.of(context).size.width * 0.75),
-                          child: this.loading
-                              ? Container(
-                                  child: FlareActor(
-                                    "legacy_assets/ntr_placeholder_animation.flr",
-                                    animation: "main",
-                                    fit: BoxFit.contain,
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .primary,
-                                  ),
-                                )
-                              : SvgPicture.network(
-                                  UIUtil.getNatriconURL(
-                                      StateContainer.of(context)
-                                          .selectedAccount
-                                          .address,
-                                      nonce == null && currentNonce != null
-                                          ? currentNonce.toString()
-                                          : nonce == null
-                                              ? StateContainer.of(context)
-                                                  .getNatriconNonce(
-                                                      StateContainer.of(context)
-                                                          .selectedAccount
-                                                          .address)
-                                              : nonce.toString()),
-                                  placeholderBuilder: (BuildContext context) =>
-                                      Container(
-                                    child: FlareActor(
-                                      "legacy_assets/ntr_placeholder_animation.flr",
-                                      animation: "main",
-                                      fit: BoxFit.contain,
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .primary,
-                                    ),
-                                  ),
-                                  key: Key(UIUtil.getNatriconURL(
-                                      StateContainer.of(context)
-                                          .selectedAccount
-                                          .address,
-                                      nonce.toString())),
-                                ),
+                          constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.5, maxWidth: MediaQuery.of(context).size.width * 0.75),
+                          child: SizedBox(),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -232,26 +162,16 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                     width: 2,
-                                    color: nonce != null
-                                        ? StateContainer.of(context)
-                                            .curTheme
-                                            .primary
-                                        : StateContainer.of(context)
-                                            .curTheme
-                                            .primary20),
+                                    color: nonce != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary20),
                               ),
                               child: FlatButton(
-                                highlightColor:
-                                    StateContainer.of(context).curTheme.text15,
-                                splashColor:
-                                    StateContainer.of(context).curTheme.text15,
+                                highlightColor: StateContainer.of(context).curTheme.text15,
+                                splashColor: StateContainer.of(context).curTheme.text15,
                                 onPressed: nonce != null
                                     ? () {
                                         if (nonce == null || this.loading) {
                                           return;
-                                        } else if (nonce == -1 ||
-                                            (nonce == 0 &&
-                                                currentNonce == -1)) {
+                                        } else if (nonce == -1 || (nonce == 0 && currentNonce == -1)) {
                                           setState(() {
                                             nonce = null;
                                           });
@@ -266,17 +186,12 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                                         }
                                       }
                                     : null,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0)),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                                 padding: EdgeInsetsDirectional.only(end: 4),
                                 child: Icon(AppIcons.back,
                                     color: nonce != null && !this.loading
-                                        ? StateContainer.of(context)
-                                            .curTheme
-                                            .primary
-                                        : StateContainer.of(context)
-                                            .curTheme
-                                            .primary20,
+                                        ? StateContainer.of(context).curTheme.primary
+                                        : StateContainer.of(context).curTheme.primary20,
                                     size: 24),
                               ),
                             ),
@@ -287,17 +202,11 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                               margin: EdgeInsetsDirectional.only(end: 28),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: Border.all(
-                                    width: 2,
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .primary),
+                                border: Border.all(width: 2, color: StateContainer.of(context).curTheme.primary),
                               ),
                               child: FlatButton(
-                                highlightColor:
-                                    StateContainer.of(context).curTheme.text15,
-                                splashColor:
-                                    StateContainer.of(context).curTheme.text15,
+                                highlightColor: StateContainer.of(context).curTheme.text15,
+                                splashColor: StateContainer.of(context).curTheme.text15,
                                 onPressed: () {
                                   if (this.loading) {
                                     return;
@@ -315,17 +224,12 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                                     });
                                   }
                                 },
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0)),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                                 padding: EdgeInsetsDirectional.only(start: 4),
                                 child: Transform(
                                   alignment: Alignment.center,
                                   transform: Matrix4.rotationY(math.pi),
-                                  child: Icon(AppIcons.back,
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .primary,
-                                      size: 24),
+                                  child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.primary, size: 24),
                                 ),
                               ),
                             ),
@@ -345,29 +249,18 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                     child: Row(
                       children: <Widget>[
                         // I want this Button
-                        AppButton.buildAppButton(
-                            context,
-                            AppButtonType.PRIMARY,
-                            "I Want This One",
-                            Dimens.BUTTON_TOP_DIMENS, onPressed: () {
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, "I Want This One", Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                           showSendConfirmSheet();
-                        },
-                            disabled: nonce == null ||
-                                this.loading ||
-                                nonce == currentNonce),
+                        }, disabled: nonce == null || this.loading || nonce == currentNonce),
                       ],
                     ),
                   ),
                   Row(
                     children: <Widget>[
                       // Go Back Button
-                      AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context).goBackButton,
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                        Navigator.of(context)
-                            .popUntil((route) => route.isFirst);
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () {
+                        Navigator.of(context).popUntil((route) => route.isFirst);
                       }),
                     ],
                   ),

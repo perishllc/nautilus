@@ -1,9 +1,12 @@
-# v0.3.3 - [2022-06-10]
+# v0.3.3 - [2022-06-14]
 #### Added
+- Scrollbar to make it easier to go through the transaction history
 - Testing out some new animations, likely will change again
+- Converted E2EE from javascript to dart for a performance boost, (JS engine no longer needed!)
 #### Changed
 - Improved how animations are handled to not lag / be more consistent
 - Total account balance is now shown on the accounts page
+- Removed several ancient dependencies
 - Info icon buttons to help explain things around the app
   - Receive minimum setting
   - Blocked users page

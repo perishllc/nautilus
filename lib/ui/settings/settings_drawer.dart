@@ -20,6 +20,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
@@ -57,7 +58,6 @@ import 'package:nautilus_wallet_flutter/util/ninja/api.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -980,324 +980,167 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       // Main Account
-                      StateContainer.of(context).natriconOn
-                          ? Container(
-                              margin: EdgeInsetsDirectional.only(start: 4.0),
-                              child: Stack(
-                                children: <Widget>[
-                                  Center(
-                                    child: Container(
-                                      width: 64,
-                                      height: 64,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5.0),
-                                        border: Border.all(color: StateContainer.of(context).curTheme.primary, width: 1.5),
-                                      ),
-                                      alignment: AlignmentDirectional(-1, 0),
-                                      // natricon
-                                      child: SvgPicture.network(
-                                        UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
-                                        key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
-                                        placeholderBuilder: (BuildContext context) => Container(
-                                          child: FlareActor(
-                                            "legacy_assets/ntr_placeholder_animation.flr",
-                                            animation: "main",
-                                            fit: BoxFit.contain,
-                                            color: StateContainer.of(context).curTheme.primary,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                      Container(
+                        margin: EdgeInsetsDirectional.only(start: 4.0),
+                        child: Stack(
+                          children: <Widget>[
+                            Center(
+                              child: Container(
+                                  width: 60,
+                                  height: 45,
+                                  alignment: AlignmentDirectional(-1, 0),
+                                  child: Icon(
+                                    AppIcons.accountwallet,
+                                    color: StateContainer.of(context).curTheme.success,
+                                    size: 45,
+                                  )),
+                            ),
+                            Center(
+                              child: Container(
+                                width: 60,
+                                height: 45,
+                                alignment: AlignmentDirectional(0, 0.3),
+                                child: Text(
+                                  StateContainer.of(context).selectedAccount.getShortName().toUpperCase(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.backgroundDark,
+                                    fontSize: 16,
+                                    fontFamily: "NunitoSans",
+                                    fontWeight: FontWeight.w900,
                                   ),
-                                  Center(
-                                    child: Container(
-                                      width: 64,
-                                      height: 64,
-                                      child: FlatButton(
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                                        highlightColor: StateContainer.of(context).curTheme.text15,
-                                        splashColor: StateContainer.of(context).curTheme.text15,
-                                        padding: EdgeInsets.all(0.0),
-                                        child: SizedBox(
-                                          width: 60,
-                                          height: 60,
-                                        ),
-                                        onPressed: () {
-                                          AccountDetailsSheet(StateContainer.of(context).selectedAccount).mainBottomSheet(context);
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          : Container(
-                              margin: EdgeInsetsDirectional.only(start: 4.0),
-                              child: Stack(
-                                children: <Widget>[
-                                  Center(
-                                    child: Container(
-                                        width: 60,
-                                        height: 45,
-                                        alignment: AlignmentDirectional(-1, 0),
-                                        child: Icon(
-                                          AppIcons.accountwallet,
-                                          color: StateContainer.of(context).curTheme.success,
-                                          size: 45,
-                                        )),
-                                  ),
-                                  Center(
-                                    child: Container(
-                                      width: 60,
-                                      height: 45,
-                                      alignment: AlignmentDirectional(0, 0.3),
-                                      child: Text(
-                                        StateContainer.of(context).selectedAccount.getShortName().toUpperCase(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: StateContainer.of(context).curTheme.backgroundDark,
-                                          fontSize: 16,
-                                          fontFamily: "NunitoSans",
-                                          fontWeight: FontWeight.w900,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Container(
-                                      width: 60,
-                                      height: 45,
-                                      child: FlatButton(
-                                        highlightColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
-                                        splashColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
-                                        padding: EdgeInsets.all(0.0),
-                                        child: SizedBox(
-                                          width: 60,
-                                          height: 45,
-                                        ),
-                                        onPressed: () {
-                                          AccountDetailsSheet(StateContainer.of(context).selectedAccount).mainBottomSheet(context);
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
+                            Center(
+                              child: Container(
+                                width: 60,
+                                height: 45,
+                                child: FlatButton(
+                                  highlightColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
+                                  splashColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
+                                  padding: EdgeInsets.all(0.0),
+                                  child: SizedBox(
+                                    width: 60,
+                                    height: 45,
+                                  ),
+                                  onPressed: () {
+                                    AccountDetailsSheet(StateContainer.of(context).selectedAccount).mainBottomSheet(context);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       // A row for other accounts and account switcher
                       Row(
                         children: <Widget>[
                           // Second Account
                           StateContainer.of(context).recentLast != null
-                              ? StateContainer.of(context).natriconOn
-                                  ? Container(
-                                      child: Stack(
-                                        children: <Widget>[
-                                          Center(
-                                            child: Container(
-                                              height: 52,
-                                              width: 52,
-                                              // natricon
-                                              child: SvgPicture.network(
-                                                UIUtil.getNatriconURL(StateContainer.of(context).recentLast.address,
-                                                    StateContainer.of(context).getNatriconNonce(StateContainer.of(context).recentLast.address)),
-                                                key: Key(UIUtil.getNatriconURL(StateContainer.of(context).recentLast.address,
-                                                    StateContainer.of(context).getNatriconNonce(StateContainer.of(context).recentLast.address))),
-                                                placeholderBuilder: (BuildContext context) => Container(
-                                                  child: FlareActor(
-                                                    "legacy_assets/ntr_placeholder_animation.flr",
-                                                    animation: "main",
-                                                    fit: BoxFit.contain,
-                                                    color: StateContainer.of(context).curTheme.primary,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Center(
-                                            child: Container(
-                                              width: 52,
-                                              height: 52,
-                                              color: Colors.transparent,
-                                              child: FlatButton(
-                                                onPressed: () {
-                                                  sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentLast).then((_) {
-                                                    EventTaxiImpl.singleton()
-                                                        .fire(AccountChangedEvent(account: StateContainer.of(context).recentLast, delayPop: true));
-                                                  });
-                                                },
-                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                                                highlightColor: StateContainer.of(context).curTheme.text15,
-                                                splashColor: StateContainer.of(context).curTheme.text15,
-                                                padding: EdgeInsets.all(0.0),
-                                                child: Container(
-                                                  width: 52,
-                                                  height: 52,
-                                                  color: Colors.transparent,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                              ? Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Center(
+                                        child: Icon(
+                                          AppIcons.accountwallet,
+                                          color: StateContainer.of(context).curTheme.primary,
+                                          size: 36,
+                                        ),
                                       ),
-                                    )
-                                  : Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 8.0),
-                                      child: Stack(
-                                        children: <Widget>[
-                                          Center(
-                                            child: Icon(
-                                              AppIcons.accountwallet,
-                                              color: StateContainer.of(context).curTheme.primary,
-                                              size: 36,
-                                            ),
-                                          ),
-                                          Center(
-                                            child: Container(
-                                              width: 48,
-                                              height: 36,
-                                              alignment: AlignmentDirectional(0, 0.3),
-                                              child: Text(StateContainer.of(context).recentLast.getShortName().toUpperCase(),
-                                                  style: TextStyle(
-                                                    color: StateContainer.of(context).curTheme.backgroundDark,
-                                                    fontSize: 12.0,
-                                                    fontWeight: FontWeight.w800,
-                                                  )),
-                                            ),
-                                          ),
-                                          Center(
+                                      Center(
+                                        child: Container(
+                                          width: 48,
+                                          height: 36,
+                                          alignment: AlignmentDirectional(0, 0.3),
+                                          child: Text(StateContainer.of(context).recentLast.getShortName().toUpperCase(),
+                                              style: TextStyle(
+                                                color: StateContainer.of(context).curTheme.backgroundDark,
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.w800,
+                                              )),
+                                        ),
+                                      ),
+                                      Center(
+                                        child: Container(
+                                          width: 48,
+                                          height: 36,
+                                          color: Colors.transparent,
+                                          child: FlatButton(
+                                            onPressed: () {
+                                              sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentLast).then((_) {
+                                                EventTaxiImpl.singleton()
+                                                    .fire(AccountChangedEvent(account: StateContainer.of(context).recentLast, delayPop: true));
+                                              });
+                                            },
+                                            highlightColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
+                                            splashColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
+                                            padding: EdgeInsets.all(0.0),
                                             child: Container(
                                               width: 48,
                                               height: 36,
                                               color: Colors.transparent,
-                                              child: FlatButton(
-                                                onPressed: () {
-                                                  sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentLast).then((_) {
-                                                    EventTaxiImpl.singleton()
-                                                        .fire(AccountChangedEvent(account: StateContainer.of(context).recentLast, delayPop: true));
-                                                  });
-                                                },
-                                                highlightColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
-                                                splashColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
-                                                padding: EdgeInsets.all(0.0),
-                                                child: Container(
-                                                  width: 48,
-                                                  height: 36,
-                                                  color: Colors.transparent,
-                                                ),
-                                              ),
                                             ),
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                    )
+                                    ],
+                                  ),
+                                )
                               : SizedBox(),
                           // Third Account
                           StateContainer.of(context).recentSecondLast != null
-                              ? StateContainer.of(context).natriconOn
-                                  ? Container(
-                                      child: Stack(
-                                        children: <Widget>[
-                                          Center(
-                                            child: Container(
-                                              height: 52,
-                                              width: 52,
-                                              // natricon
-                                              child: SvgPicture.network(
-                                                UIUtil.getNatriconURL(StateContainer.of(context).recentSecondLast.address,
-                                                    StateContainer.of(context).getNatriconNonce(StateContainer.of(context).recentSecondLast.address)),
-                                                key: Key(UIUtil.getNatriconURL(StateContainer.of(context).recentSecondLast.address,
-                                                    StateContainer.of(context).getNatriconNonce(StateContainer.of(context).recentSecondLast.address))),
-                                                placeholderBuilder: (BuildContext context) => Container(
-                                                  child: FlareActor(
-                                                    "legacy_assets/ntr_placeholder_animation.flr",
-                                                    animation: "main",
-                                                    fit: BoxFit.contain,
-                                                    color: StateContainer.of(context).curTheme.primary,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Center(
-                                            child: Container(
-                                              width: 52,
-                                              height: 52,
-                                              color: Colors.transparent,
-                                              child: FlatButton(
-                                                onPressed: () {
-                                                  sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentSecondLast).then((_) {
-                                                    EventTaxiImpl.singleton()
-                                                        .fire(AccountChangedEvent(account: StateContainer.of(context).recentSecondLast, delayPop: true));
-                                                  });
-                                                },
-                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                                                highlightColor: StateContainer.of(context).curTheme.text15,
-                                                splashColor: StateContainer.of(context).curTheme.text15,
-                                                padding: EdgeInsets.all(0.0),
-                                                child: Container(
-                                                  width: 52,
-                                                  height: 52,
-                                                  color: Colors.transparent,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                              ? Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Center(
+                                        child: Icon(
+                                          AppIcons.accountwallet,
+                                          color: StateContainer.of(context).curTheme.primary,
+                                          size: 36,
+                                        ),
                                       ),
-                                    )
-                                  : Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 8.0),
-                                      child: Stack(
-                                        children: <Widget>[
-                                          Center(
-                                            child: Icon(
-                                              AppIcons.accountwallet,
-                                              color: StateContainer.of(context).curTheme.primary,
-                                              size: 36,
-                                            ),
-                                          ),
-                                          Center(
-                                            child: Container(
-                                              width: 48,
-                                              height: 36,
-                                              alignment: AlignmentDirectional(0, 0.3),
-                                              child: Text(StateContainer.of(context).recentSecondLast.getShortName().toUpperCase(),
-                                                  style: TextStyle(
-                                                    color: StateContainer.of(context).curTheme.backgroundDark,
-                                                    fontSize: 12.0,
-                                                    fontWeight: FontWeight.w800,
-                                                  )),
-                                            ),
-                                          ),
-                                          Center(
+                                      Center(
+                                        child: Container(
+                                          width: 48,
+                                          height: 36,
+                                          alignment: AlignmentDirectional(0, 0.3),
+                                          child: Text(StateContainer.of(context).recentSecondLast.getShortName().toUpperCase(),
+                                              style: TextStyle(
+                                                color: StateContainer.of(context).curTheme.backgroundDark,
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.w800,
+                                              )),
+                                        ),
+                                      ),
+                                      Center(
+                                        child: Container(
+                                          width: 48,
+                                          height: 36,
+                                          color: Colors.transparent,
+                                          child: FlatButton(
+                                            onPressed: () {
+                                              sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentSecondLast).then((_) {
+                                                EventTaxiImpl.singleton()
+                                                    .fire(AccountChangedEvent(account: StateContainer.of(context).recentSecondLast, delayPop: true));
+                                              });
+                                            },
+                                            highlightColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
+                                            splashColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
+                                            padding: EdgeInsets.all(0.0),
                                             child: Container(
                                               width: 48,
                                               height: 36,
                                               color: Colors.transparent,
-                                              child: FlatButton(
-                                                onPressed: () {
-                                                  sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentSecondLast).then((_) {
-                                                    EventTaxiImpl.singleton()
-                                                        .fire(AccountChangedEvent(account: StateContainer.of(context).recentSecondLast, delayPop: true));
-                                                  });
-                                                },
-                                                highlightColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
-                                                splashColor: StateContainer.of(context).curTheme.backgroundDark.withOpacity(0.75),
-                                                padding: EdgeInsets.all(0.0),
-                                                child: Container(
-                                                  width: 48,
-                                                  height: 36,
-                                                  color: Colors.transparent,
-                                                ),
-                                              ),
                                             ),
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                    )
+                                    ],
+                                  ),
+                                )
                               : SizedBox(),
                           // Account switcher
                           Container(

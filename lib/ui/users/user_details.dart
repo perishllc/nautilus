@@ -23,7 +23,6 @@ import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flare_flutter/flare_actor.dart';
 
 // Contact Details Sheet
 class UserDetailsSheet {
@@ -128,23 +127,6 @@ class UserDetailsSheet {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            // natricon
-                            StateContainer.of(context).natriconOn
-                                ? Expanded(
-                                    child: SvgPicture.network(
-                                      UIUtil.getNatriconURL(user.address, StateContainer.of(context).getNatriconNonce(user.address)),
-                                      key: Key(UIUtil.getNatriconURL(user.address, StateContainer.of(context).getNatriconNonce(user.address))),
-                                      placeholderBuilder: (BuildContext context) => Container(
-                                        child: FlareActor(
-                                          "legacy_assets/ntr_placeholder_animation.flr",
-                                          animation: "main",
-                                          fit: BoxFit.contain,
-                                          color: StateContainer.of(context).curTheme.primary,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : SizedBox(),
                             // Contact Name container
                             Container(
                               width: double.infinity,

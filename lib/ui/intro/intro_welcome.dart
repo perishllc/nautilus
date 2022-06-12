@@ -5,7 +5,6 @@ import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:flare_flutter/flare_actor.dart';
 
 class IntroWelcomePage extends StatefulWidget {
   @override

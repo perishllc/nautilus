@@ -2,17 +2,12 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flare_flutter/flare.dart';
-import 'package:flare_dart/math/mat2d.dart';
-import 'package:flare_flutter/flare_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
-import 'package:manta_dart/manta_wallet.dart';
-import 'package:manta_dart/messages.dart';
 import 'package:nautilus_wallet_flutter/bus/blocked_modified_event.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
@@ -55,6 +50,7 @@ import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/transaction_state_tag.dart';
+import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:nautilus_wallet_flutter/util/manta.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -82,7 +78,7 @@ class AppHomePage extends StatefulWidget {
   _AppHomePageState createState() => _AppHomePageState();
 }
 
-class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, SingleTickerProviderStateMixin, FlareController {
+class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final Logger log = sl.get<Logger>();
 
@@ -149,8 +145,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   // Animation for swiping to send
-  ActorAnimation _sendSlideAnimation;
-  ActorAnimation _sendSlideReleaseAnimation;
   double _fanimationPosition;
   bool releaseAnimation = false;
 
@@ -163,23 +157,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     googlePlayIdentifier: 'co.perish.nautiluswallet',
     appStoreIdentifier: '1615775960',
   );
-
-  void initialize(FlutterActorArtboard actor) {
-    _fanimationPosition = 0.0;
-    _sendSlideAnimation = actor.getAnimation("pull");
-    _sendSlideReleaseAnimation = actor.getAnimation("release");
-  }
-
-  void setViewTransform(Mat2D viewTransform) {}
-
-  bool advance(FlutterActorArtboard artboard, double elapsed) {
-    if (releaseAnimation) {
-      _sendSlideReleaseAnimation.apply(_sendSlideReleaseAnimation.duration * (1 - _fanimationPosition), artboard, 1.0);
-    } else {
-      _sendSlideAnimation.apply(_sendSlideAnimation.duration * _fanimationPosition, artboard, 1.0);
-    }
-    return true;
-  }
 
   Future<void> _switchToAccount(String account) async {
     List<Account> accounts = await sl.get<DBHelper>().getAccounts(await StateContainer.of(context).getSeed());
@@ -835,22 +812,20 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   void _scrollListener() {
     // print(_scrollController.position.extentAfter);
     if (_scrollController.position.extentAfter < 500) {
-      
       // check if the oldest item is the initial block:
       if (_historyListMap[StateContainer.of(context).wallet.address] != null && _historyListMap[StateContainer.of(context).wallet.address].length > 0) {
         var histList = _historyListMap[StateContainer.of(context).wallet.address];
-        
-        // currentConfHeight
-        // StateContainer.of(context).wallet.history.length
 
-        // load more history if possible:
-        // StateContainer.of(context).requestUpdate(start: StateContainer.of(context).wallet.history.length, count: 50);
+        // histList[0] is the most recent block with the highest height (120)
+        // histList[1] is the second most recent block with the next highest height (119)
+        // histList[120] is the oldest block with the lowest height (1)
+
+        if (histList[histList.length - 1].height > 1) {
+          // we don't have all of the blocks yet, so we need to fetch more
+          // TODO: implement this
+          // StateContainer.of(context).requestUpdate(start: StateContainer.of(context).wallet.history.length, count: 50);
+        }
       }
-      
-      // print("now");
-      // setState(() {
-      //   items.addAll(List.generate(42, (index) => 'Inserted $index'));
-      // });
     }
   }
 
@@ -969,7 +944,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     await generateUnifiedList(fastUpdate: false);
     // setState(() {});
     // Hide refresh indicator after 2.5 seconds
-    Future.delayed(new Duration(milliseconds: 3000), () {
+    Future.delayed(new Duration(milliseconds: 2500), () {
       setState(() {
         _isRefreshing = false;
       });
@@ -2781,7 +2756,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // encrypt the memo if it's not empty:
       String encryptedMemo;
       if (txDetails.memo != null && txDetails.memo.isNotEmpty) {
-        encryptedMemo = await StateContainer.of(context).encryptMessage(txDetails.memo, txDetails.to_address, privKey);
+        encryptedMemo = await Box.encrypt(txDetails.memo, txDetails.to_address, privKey);
       }
       await sl.get<AccountService>().requestPayment(
           txDetails.to_address, txDetails.amount_raw, StateContainer.of(context).wallet.address, signature, nonce_hex, encryptedMemo, local_uuid);
@@ -2856,7 +2831,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     try {
       // encrypt the memo:
-      String encryptedMemo = await StateContainer.of(context).encryptMessage(txDetails.memo, txDetails.to_address, privKey);
+      String encryptedMemo = await Box.encrypt(txDetails.memo, txDetails.to_address, privKey);
       await sl.get<AccountService>().sendTXMemo(txDetails.to_address, StateContainer.of(context).wallet.address, txDetails.amount_raw, signature, nonce_hex,
           encryptedMemo, txDetails.block, local_uuid);
     } catch (e) {
@@ -2937,6 +2912,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       txDetails.to_address = item.account;
       txDetails.is_acknowledged = true;
       txDetails.block = item.hash;
+    }
+
+    if (txDetails.is_message) {
+      // just in case:
+      txDetails.amount_raw = null;
+    } else if (txDetails.is_memo) {
+      txDetails.amount_raw = item.amount;
     }
 
     if (txDetails.isRecipient(walletAddress)) {
@@ -3252,7 +3234,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                         fontWeight: FontWeight.w600,
                                         color: StateContainer.of(context).curTheme.warning60),
                                   ),
-                                  (!txDetails.is_message)
+                                  (!txDetails.is_message && !isEmpty(txDetails.amount_raw))
                                       ? Row(
                                           children: <Widget>[
                                             RichText(
@@ -3585,12 +3567,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     return ReactiveRefreshIndicator(
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-      child: AnimatedList(
-        controller: _scrollController,
-        key: _unifiedListKeyMap[StateContainer.of(context).wallet.address],
-        padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-        initialItemCount: _unifiedListMap[StateContainer.of(context).wallet.address].length,
-        itemBuilder: _buildUnifiedItem,
+      child: Scrollbar(
+        child: AnimatedList(
+          controller: _scrollController,
+          key: _unifiedListKeyMap[StateContainer.of(context).wallet.address],
+          padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+          initialItemCount: _unifiedListMap[StateContainer.of(context).wallet.address].length,
+          itemBuilder: _buildUnifiedItem,
+        ),
       ),
       onRefresh: _refresh,
       isRefreshing: _isRefreshing,

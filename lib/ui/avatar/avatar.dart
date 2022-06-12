@@ -7,7 +7,6 @@ import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -86,23 +85,23 @@ class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateM
                                 child: Stack(
                                   alignment: Alignment.center,
                                   children: <Widget>[
-                                    Hero(
-                                      tag: "avatar",
-                                      child: SvgPicture.network(
-                                        UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
-                                        key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                            StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
-                                        placeholderBuilder: (BuildContext context) => Container(
-                                          child: FlareActor(
-                                            "legacy_assets/ntr_placeholder_animation.flr",
-                                            animation: "main",
-                                            fit: BoxFit.contain,
-                                            color: StateContainer.of(context).curTheme.primary,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    // Hero(
+                                    //   tag: "avatar",
+                                    //   child: SvgPicture.network(
+                                    //     UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
+                                    //         StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
+                                    //     key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
+                                    //         StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
+                                    //     placeholderBuilder: (BuildContext context) => Container(
+                                    //       child: FlareActor(
+                                    //         "legacy_assets/ntr_placeholder_animation.flr",
+                                    //         animation: "main",
+                                    //         fit: BoxFit.contain,
+                                    //         color: StateContainer.of(context).curTheme.primary,
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     /* // Button for the interaction
                                     FlatButton(
                                       onPressed: () {

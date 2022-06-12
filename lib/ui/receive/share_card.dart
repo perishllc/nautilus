@@ -9,7 +9,6 @@ import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flare_flutter/flare_actor.dart';
 
 class AppShareCard extends StatefulWidget {
   final GlobalKey key;
@@ -82,20 +81,11 @@ class _AppShareCardState extends State<AppShareCard> {
                     // Outer Ring
                     Center(
                       child: Container(
-                        width:
-                            (StateContainer.of(context).curTheme is IndiumTheme)
-                                ? 95
-                                : 100,
-                        height:
-                            (StateContainer.of(context).curTheme is IndiumTheme)
-                                ? 95
-                                : 100,
+                        width: (StateContainer.of(context).curTheme is IndiumTheme) ? 95 : 100,
+                        height: (StateContainer.of(context).curTheme is IndiumTheme) ? 95 : 100,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(
-                              color:
-                                  StateContainer.of(context).curTheme.primary,
-                              width: 1.3913),
+                          border: Border.all(color: StateContainer.of(context).curTheme.primary, width: 1.3913),
                         ),
                       ),
                     ),
@@ -109,36 +99,20 @@ class _AppShareCardState extends State<AppShareCard> {
                                 shape: BoxShape.circle,
                                 color: Colors.white,
                                 border: Border.all(
-                                  width: (StateContainer.of(context).curTheme
-                                          is IndiumTheme)
-                                      ? 1.44545
-                                      : 1.06,
-                                  color: (StateContainer.of(context).curTheme
-                                          is IndiumTheme)
-                                      ? StateContainer.of(context)
-                                          .curTheme
-                                          .backgroundDark
-                                      : StateContainer.of(context)
-                                          .curTheme
-                                          .primary,
+                                  width: (StateContainer.of(context).curTheme is IndiumTheme) ? 1.44545 : 1.06,
+                                  color: (StateContainer.of(context).curTheme is IndiumTheme)
+                                      ? StateContainer.of(context).curTheme.backgroundDark
+                                      : StateContainer.of(context).curTheme.primary,
                                 ),
                               ),
                               child: Container(
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    width: (StateContainer.of(context).curTheme
-                                            is IndiumTheme)
-                                        ? 1.06
-                                        : 1.44545,
-                                    color: (StateContainer.of(context).curTheme
-                                            is IndiumTheme)
-                                        ? StateContainer.of(context)
-                                            .curTheme
-                                            .primary
-                                        : StateContainer.of(context)
-                                            .curTheme
-                                            .backgroundDark,
+                                    width: (StateContainer.of(context).curTheme is IndiumTheme) ? 1.06 : 1.44545,
+                                    color: (StateContainer.of(context).curTheme is IndiumTheme)
+                                        ? StateContainer.of(context).curTheme.primary
+                                        : StateContainer.of(context).curTheme.backgroundDark,
                                   ),
                                 ),
                               ),
@@ -161,71 +135,24 @@ class _AppShareCardState extends State<AppShareCard> {
                               width: 18,
                               height: 18,
                               decoration: BoxDecoration(
-                                color:
-                                    StateContainer.of(context).curTheme.primary,
+                                color: StateContainer.of(context).curTheme.primary,
                                 shape: BoxShape.circle,
                               ),
                             ),
                           ),
-                    // natricon
-                    StateContainer.of(context).natriconOn
-                        ? Center(
-                            child: Container(
-                              width: 18.5,
-                              height: 18.5,
-                              margin: EdgeInsetsDirectional.only(top: 1.44545),
-                              child: SvgPicture.network(
-                                UIUtil.getNatriconURL(
-                                    StateContainer.of(context)
-                                        .selectedAccount
-                                        .address,
-                                    StateContainer.of(context).getNatriconNonce(
-                                        StateContainer.of(context)
-                                            .selectedAccount
-                                            .address)),
-                                key: Key(UIUtil.getNatriconURL(
-                                    StateContainer.of(context)
-                                        .selectedAccount
-                                        .address,
-                                    StateContainer.of(context).getNatriconNonce(
-                                        StateContainer.of(context)
-                                            .selectedAccount
-                                            .address))),
-                                placeholderBuilder: (BuildContext context) =>
-                                    // Logo
-                                    Center(
-                                  child: Container(
-                                    height: 4.9,
-                                    padding: EdgeInsetsDirectional.only(
-                                      end: 8,
-                                    ),
-                                    child: Icon(
-                                      AppIcons.nautilushorizontal,
-                                      size: 4.9,
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .backgroundDark,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        : Center(
-                            child: Container(
-                              height: 4.9,
-                              padding: EdgeInsetsDirectional.only(
-                                end: 8,
-                              ),
-                              child: Icon(
-                                AppIcons.nautilushorizontal,
-                                size: 4.9,
-                                color: StateContainer.of(context)
-                                    .curTheme
-                                    .backgroundDark,
-                              ),
-                            ),
-                          ),
+                    Center(
+                      child: Container(
+                        height: 4.9,
+                        padding: EdgeInsetsDirectional.only(
+                          end: 8,
+                        ),
+                        child: Icon(
+                          AppIcons.nautilushorizontal,
+                          size: 4.9,
+                          color: StateContainer.of(context).curTheme.backgroundDark,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -258,8 +185,7 @@ class _AppShareCardState extends State<AppShareCard> {
                           child: AutoSizeText(
                             "NANO",
                             style: TextStyle(
-                              color:
-                                  StateContainer.of(context).curTheme.primary,
+                              color: StateContainer.of(context).curTheme.primary,
                               fontFamily: "Comfortaa",
                               fontWeight: FontWeight.w300,
                               fontSize: 40,
@@ -286,14 +212,9 @@ class _AppShareCardState extends State<AppShareCard> {
                               children: [
                                 // Primary part of the first row
                                 TextSpan(
-                                  text: StateContainer.of(context)
-                                      .wallet
-                                      .address
-                                      .substring(0, 12),
+                                  text: StateContainer.of(context).wallet.address.substring(0, 12),
                                   style: TextStyle(
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .primary,
+                                    color: StateContainer.of(context).curTheme.primary,
                                     fontFamily: "OverpassMono",
                                     fontWeight: FontWeight.w100,
                                     fontSize: 50.0,
@@ -301,14 +222,9 @@ class _AppShareCardState extends State<AppShareCard> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: StateContainer.of(context)
-                                      .wallet
-                                      .address
-                                      .substring(12, 16),
+                                  text: StateContainer.of(context).wallet.address.substring(12, 16),
                                   style: TextStyle(
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .text,
+                                    color: StateContainer.of(context).curTheme.text,
                                     fontFamily: "OverpassMono",
                                     fontWeight: FontWeight.w100,
                                     fontSize: 50.0,
@@ -332,10 +248,7 @@ class _AppShareCardState extends State<AppShareCard> {
                         Container(
                           width: 97,
                           child: AutoSizeText(
-                            StateContainer.of(context)
-                                .wallet
-                                .address
-                                .substring(16, 32),
+                            StateContainer.of(context).wallet.address.substring(16, 32),
                             minFontSize: 1.0,
                             stepGranularity: 0.1,
                             maxFontSize: 50,
@@ -353,10 +266,7 @@ class _AppShareCardState extends State<AppShareCard> {
                         Container(
                           width: 97,
                           child: AutoSizeText(
-                            StateContainer.of(context)
-                                .wallet
-                                .address
-                                .substring(32, 48),
+                            StateContainer.of(context).wallet.address.substring(32, 48),
                             minFontSize: 1.0,
                             stepGranularity: 0.1,
                             maxFontSize: 50,
@@ -378,14 +288,9 @@ class _AppShareCardState extends State<AppShareCard> {
                               children: [
                                 // Text colored part of the last row
                                 TextSpan(
-                                  text: StateContainer.of(context)
-                                      .wallet
-                                      .address
-                                      .substring(48, 59),
+                                  text: StateContainer.of(context).wallet.address.substring(48, 59),
                                   style: TextStyle(
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .text,
+                                    color: StateContainer.of(context).curTheme.text,
                                     fontFamily: "OverpassMono",
                                     fontWeight: FontWeight.w100,
                                     fontSize: 50.0,
@@ -394,14 +299,9 @@ class _AppShareCardState extends State<AppShareCard> {
                                 ),
                                 // Primary colored part of the last row
                                 TextSpan(
-                                  text: StateContainer.of(context)
-                                      .wallet
-                                      .address
-                                      .substring(59),
+                                  text: StateContainer.of(context).wallet.address.substring(59),
                                   style: TextStyle(
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .primary,
+                                    color: StateContainer.of(context).curTheme.primary,
                                     fontFamily: "OverpassMono",
                                     fontWeight: FontWeight.w100,
                                     fontSize: 50.0,

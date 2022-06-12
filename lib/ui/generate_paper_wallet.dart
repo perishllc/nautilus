@@ -23,14 +23,6 @@ import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 
-// import 'package:flare_flutter/flare_actor.dart';
-// import 'package:nautilus_wallet_flutter/dimens.dart';
-// import 'package:nautilus_wallet_flutter/localization.dart';
-// import 'package:nautilus_wallet_flutter/model/vault.dart';
-// import 'package:nautilus_wallet_flutter/service_locator.dart';
-// import 'package:nautilus_wallet_flutter/styles.dart';
-// import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-
 class GeneratePaperWalletScreen extends StatefulWidget {
   final AvailableCurrency localCurrency;
   // needs: StateContainer.of(context).curCurrency
