@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
-
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -14,7 +13,6 @@ import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
-import 'package:nautilus_wallet_flutter/model/db/contact.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';

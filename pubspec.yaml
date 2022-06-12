@@ -96,21 +96,16 @@ dependencies:
   # Share files
   share_plus: ^4.0.4
 
-  # for background messages work around:
-  # localstore: ^1.2.3
-  # localstorage: ^4.0.0+1
-
   # File picker
-  # file_picker: ^3.0.0-nullsafety.0
   file_picker: ^4.6.1
 
   # Deep link support
   flutter_branch_sdk: ^5.0.0
-  #uni_links: ^0.2.0
-  uni_links:
-    git:
-      url: https://github.com/bbedward/uni_links.git
-      ref: master
+  uni_links: ^0.5.1
+  # uni_links:
+  #   git:
+  #     url: https://github.com/bbedward/uni_links.git
+  #     ref: master
 
   # HTTP client
   http: ^0.13.4
@@ -119,7 +114,8 @@ dependencies:
   flutter_vibrate: ^1.3.0
 
   # Toast
-  oktoast: ^3.0.0
+  # oktoast: ^3.0.0
+  oktoast: ^3.2.0
 
   # Push notifications
   # firebase_messaging: ^11.4.1
@@ -127,6 +123,7 @@ dependencies:
   # firebase_core: ^1.10.0# for sure works
   # firebase_core: ^1.13.1
   firebase_core: ^1.17.1
+  firebase_analytics: ^9.1.9
 
   # Slidable list actions
   flutter_slidable: ^1.3.0
@@ -148,7 +145,11 @@ dependencies:
   auto_size_text: ^3.0.0
 
   # Avoid keyboard from overlapping text fields
-  keyboard_avoider: ^0.1.2
+  # keyboard_avoider: ^0.1.2
+  keyboard_avoider:
+    git:
+      url: https://github.com/perishllc/keyboard_avoider
+      ref: main
 
   # Launch external URLs
   url_launcher: ^6.0.2
@@ -163,7 +164,7 @@ dependencies:
   flutter_sodium:
     git:
       url: https://github.com/perishllc/flutter_sodium
-      ref: master
+      ref: main
 
   # search bar + text highlighting:
   searchbar_animation: ^0.0.2
