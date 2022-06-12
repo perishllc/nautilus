@@ -83,11 +83,9 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
             });
           }
           var userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
-          if (userList != null) {
-            setState(() {
-              _users = userList;
-            });
-          }
+          setState(() {
+            _users = userList;
+          });
         }
 
         if (_addressController!.text.length == 0) {
@@ -190,7 +188,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
             String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context);
             if (scanResult == null) {
               UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
-            } else if (scanResult != null && !QRScanErrs.ERROR_LIST.contains(scanResult)) {
+            } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
               if (mounted) {
                 setState(() {
                   _addressController!.text = scanResult;
@@ -280,18 +278,14 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           });
         } else if (isFavorite!) {
           var matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
-          if (matchedList != null) {
-            setState(() {
-              _users = matchedList;
-            });
-          }
+          setState(() {
+            _users = matchedList;
+          });
         } else if (isUser || isDomain!) {
           var matchedList = await sl.get<DBHelper>().getUserSuggestionsWithUsernameLike(SendSheetHelpers.stripPrefixes(text));
-          if (matchedList != null) {
-            setState(() {
-              _users = matchedList;
-            });
-          }
+          setState(() {
+            _users = matchedList;
+          });
         } else {
           setState(() {
             _isUser = false;

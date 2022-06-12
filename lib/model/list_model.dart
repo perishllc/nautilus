@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 /// Keeps a Dart List in sync with an AnimatedList.
 ///
@@ -11,8 +10,7 @@ class ListModel<E> {
   ListModel({
     required this.listKey,
     Iterable<E>? initialItems,
-  })  : assert(listKey != null),
-        _items = List<E>.from(initialItems ?? <E>[]);
+  })  : _items = List<E>.from(initialItems ?? <E>[]);
 
   final GlobalKey<AnimatedListState> listKey;
   final List<E> _items;

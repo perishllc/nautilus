@@ -24,7 +24,6 @@ import 'package:nautilus_wallet_flutter/ui/contacts/add_contact.dart';
 import 'package:nautilus_wallet_flutter/ui/contacts/contact_details.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ContactsList extends StatefulWidget {
   final AnimationController? contactsController;

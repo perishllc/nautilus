@@ -100,11 +100,9 @@ class _AddContactSheetState extends State<AddContactSheet> {
             });
           }
           var userList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(formattedAddress);
-          if (userList != null) {
-            setState(() {
-              _users = userList;
-            });
-          }
+          setState(() {
+            _users = userList;
+          });
         }
 
         if (_addressController!.text.length == 0) {
@@ -208,7 +206,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
             String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context);
             if (scanResult == null) {
               UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
-            } else if (scanResult != null && !QRScanErrs.ERROR_LIST.contains(scanResult)) {
+            } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
               if (mounted) {
                 setState(() {
                   _addressController!.text = scanResult;
@@ -298,11 +296,9 @@ class _AddContactSheetState extends State<AddContactSheet> {
           });
         } else if (isUser || isDomain!) {
           var matchedList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(SendSheetHelpers.stripPrefixes(text));
-          if (matchedList != null) {
-            setState(() {
-              _users = matchedList;
-            });
-          }
+          setState(() {
+            _users = matchedList;
+          });
         } else {
           setState(() {
             _isUser = false;

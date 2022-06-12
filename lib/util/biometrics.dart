@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:logger/logger.dart';
 
 class BiometricUtil {
   ///

@@ -15,7 +15,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       representative: json['representative'] as bool?,
       is_blocked: json['is_blocked'] as bool?,
       last_updated: json['last_updated'] as int?,
-      aliases: (json['aliases'] as List?)?.map((e) => e as String)?.toList(),
+      aliases: (json['aliases'] as List?)?.map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{

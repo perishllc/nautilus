@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 
@@ -6,9 +5,9 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 class CaseChange {
   static String toUpperCase(String input, BuildContext context) {
     Locale locale = Locale(StateContainer.of(context).curLanguage.getLocaleString());
-    if (locale != null && locale.languageCode == 'tr') {
+    if (locale.languageCode == 'tr') {
       input = input.replaceAll("i", "İ");
-    } else if (locale != null && locale.languageCode == 'de') {
+    } else if (locale.languageCode == 'de') {
       input = input.replaceAll("ß", "SS");
     }
     return input.toUpperCase();

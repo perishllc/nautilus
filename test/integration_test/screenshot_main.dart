@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,7 +11,6 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 // import 'package:nautilus_wallet_flutter/main.dart';
 import 'package:nautilus_wallet_flutter/main.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 
 Future<void> pumpForSeconds(WidgetTester tester, int seconds) async {
   bool timerDone = false;

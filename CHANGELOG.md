@@ -4,9 +4,9 @@
 #### Changed
 - Upgraded a *ton* of dependencies
 - Null safety support! This improves overall security of the application and makes crashes less likely
-
+  - The migration may have broken some things I didn't quite catch, so if you notice any issues please report them
 #### Fixed
-- On the gift card creation screen the amount field's next input button wasn't working
+- On the gift card creation screen the amount field's next input button wasn't working properly
 
 ## v0.3.3 - [2022-06-12]
 #### Added

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
+import 'package:nautilus_wallet_flutter/firebase_options.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -52,13 +52,9 @@ Future<void> main() async {
   }
   // Setup firebase
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: '...',
-      appId: '...',
-      messagingSenderId: '...',
-      projectId: '...',
-    ),
+    options: DefaultFirebaseOptions.currentPlatform,
   );
+
   if (!kReleaseMode) {
     // we have to stall for whatever reason in debug mode
     // otherwise the app doesn't start properly (black screen)
@@ -86,19 +82,28 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(StateContainer.of(context).curTheme.statusBar!);
+    final ThemeData theme = ThemeData();
     return OKToast(
       textStyle: AppStyles.textStyleSnackbar(context),
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       child: MaterialApp(
         debugShowCheckedModeBanner: true,
         title: 'Nautilus',
+        // theme: ThemeData(
+        //   dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        //   primaryColor: StateContainer.of(context).curTheme.primary,
+        //   accentColor: StateContainer.of(context).curTheme.primary10,
+        //   backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        //   fontFamily: 'NunitoSans',
+        //   brightness: Brightness.dark,
+        // ),
         theme: ThemeData(
           dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           primaryColor: StateContainer.of(context).curTheme.primary,
-          accentColor: StateContainer.of(context).curTheme.primary10,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           fontFamily: 'NunitoSans',
           brightness: Brightness.dark,
+          colorScheme: ColorScheme.fromSwatch().copyWith(secondary: StateContainer.of(context).curTheme.primary10),
         ),
         localizationsDelegates: [
           AppLocalizationsDelegate(StateContainer.of(context).curLanguage),
@@ -106,9 +111,7 @@ class _AppState extends State<App> {
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
-        locale: StateContainer.of(context).curLanguage == null || StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT
-            ? null
-            : StateContainer.of(context).curLanguage.getLocale(),
+        locale: StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT ? null : StateContainer.of(context).curLanguage.getLocale(),
         supportedLocales: [
           const Locale('en', 'US'), // English
           const Locale('he', 'IL'), // Hebrew
@@ -334,9 +337,6 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
   late bool _retried;
 
   bool seedIsEncrypted(String seed) {
-    if (seed == null) {
-      return false;
-    }
     try {
       String salted = NanoHelpers.bytesToUtf8String(NanoHelpers.hexToBytes(seed.substring(0, 16)));
       if (salted == "Salted__") {
@@ -381,7 +381,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     }
     try {
       // iOS key store is persistent, so if this is first launch then we will clear the keystore
-      bool firstLaunch = await (sl.get<SharedPrefsUtil>().getFirstLaunch() as FutureOr<bool>);
+      bool firstLaunch = await (sl.get<SharedPrefsUtil>().getFirstLaunch());
       if (firstLaunch) {
         await sl.get<Vault>().deleteAll();
       }
@@ -406,7 +406,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       if (isLoggedIn) {
         if (isEncrypted) {
           Navigator.of(context).pushReplacementNamed('/password_lock_screen');
-        } else if (await (sl.get<SharedPrefsUtil>().getLock() as FutureOr<bool>) || await sl.get<SharedPrefsUtil>().shouldLock()) {
+        } else if (await (sl.get<SharedPrefsUtil>().getLock()) || await sl.get<SharedPrefsUtil>().shouldLock()) {
           Navigator.of(context).pushReplacementNamed('/lock_screen');
         } else {
           await NanoUtil().loginAccount(seed, context);
@@ -425,7 +425,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       /// It will generate a 64-byte secret using the native android "bottlerocketstudios" Vault
       /// This secret is used to encrypt sensitive data and save it in SharedPreferences
       if (Platform.isAndroid && e.toString().contains("flutter_secure")) {
-        if (!(await (sl.get<SharedPrefsUtil>().useLegacyStorage() as FutureOr<bool>))) {
+        if (!(await (sl.get<SharedPrefsUtil>().useLegacyStorage()))) {
           await sl.get<SharedPrefsUtil>().setUseLegacyStorage();
           checkLoggedIn();
         }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
 import 'dart:async';
 
 import 'package:event_taxi/event_taxi.dart';
@@ -7,18 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/bus/blocked_added_event.dart';
 import 'package:nautilus_wallet_flutter/bus/blocked_removed_event.dart';
-import 'package:nautilus_wallet_flutter/bus/user_added_event.dart';
-import 'package:nautilus_wallet_flutter/bus/user_removed_event.dart';
-import 'package:nautilus_wallet_flutter/model/db/blocked.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/ui/users/add_blocked.dart';
 import 'package:nautilus_wallet_flutter/ui/users/blocked_details.dart';
-import 'package:nautilus_wallet_flutter/ui/users/user_details.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:share_plus/share_plus.dart';
 
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -26,15 +18,9 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
-import 'package:nautilus_wallet_flutter/model/db/contact.dart';
-import 'package:nautilus_wallet_flutter/ui/contacts/add_contact.dart';
-import 'package:nautilus_wallet_flutter/ui/contacts/contact_details.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class BlockedList extends StatefulWidget {
   final AnimationController? blockedController;

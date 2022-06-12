@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
-import 'dart:ui';
 import 'package:devicelocale/devicelocale.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/currency_mode_setting.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
@@ -20,7 +18,6 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
@@ -543,7 +540,7 @@ class StateContainerState extends State<StateContainer> {
       }
     });
     // Deep link has been updated
-    _deepLinkSub = getLinksStream().listen((String? link) {
+    _deepLinkSub = linkStream.listen((String? link) {
       setState(() {
         initialDeepLink = link;
       });
@@ -636,7 +633,7 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> updateRecentlyUsedAccounts() async {
     List<Account> otherAccounts = await sl.get<DBHelper>().getRecentlyUsedAccounts(await getSeed());
-    if (otherAccounts != null && otherAccounts.length > 0) {
+    if (otherAccounts.length > 0) {
       if (otherAccounts.length > 1) {
         setState(() {
           recentLast = otherAccounts[0];
@@ -658,7 +655,7 @@ class StateContainerState extends State<StateContainer> {
 
   // Change language
   void updateLanguage(LanguageSetting language) {
-    if (language != null && curLanguage != null && curLanguage.language != language.language) {
+    if (curLanguage.language != language.language) {
       checkAndUpdateAlerts();
     }
     setState(() {
@@ -1164,7 +1161,7 @@ class StateContainerState extends State<StateContainer> {
       return null;
     }
 
-    String privKey = NanoUtil.seedToPrivate(await (getSeed() as FutureOr<String>), correctAccount.index!);
+    String privKey = NanoUtil.seedToPrivate(await (getSeed()), correctAccount.index!);
     String memo = await Box.decrypt(memo_enc, fromAddress!, privKey);
     return memo;
   }

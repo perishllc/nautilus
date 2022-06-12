@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/actions.dart';
 import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
 

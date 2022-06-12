@@ -9,7 +9,7 @@ class FileUtil {
       return false;
     }
     List<int> asBytes = await file.readAsBytes();
-    if (asBytes == null || asBytes.length < 8) {
+    if (asBytes.length < 8) {
       await file.delete();
       return false;
     }

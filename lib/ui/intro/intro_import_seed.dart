@@ -161,12 +161,12 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                             UIUtil.cancelLockEvent();
                                             BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme TODO:*/).then((res) {
                                               var result = res.rawContent;
-                                              if (result != null && NanoSeeds.isValidSeed(result)) {
+                                              if (NanoSeeds.isValidSeed(result)) {
                                                 _seedInputController.text = result;
                                                 setState(() {
                                                   _seedIsValid = true;
                                                 });
-                                              } else if (result != null && NanoMnemomics.validateMnemonic(result.split(' '))) {
+                                              } else if (NanoMnemomics.validateMnemonic(result.split(' '))) {
                                                 _mnemonicController.text = result;
                                                 _mnemonicFocusNode.unfocus();
                                                 _seedInputFocusNode.unfocus();
@@ -256,12 +256,12 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                             UIUtil.cancelLockEvent();
                                             BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((res) {
                                               var result = res.rawContent;
-                                              if (result != null && NanoMnemomics.validateMnemonic(result.split(' '))) {
+                                              if (NanoMnemomics.validateMnemonic(result.split(' '))) {
                                                 _mnemonicController.text = result;
                                                 setState(() {
                                                   _mnemonicIsValid = true;
                                                 });
-                                              } else if (result != null && NanoSeeds.isValidSeed(result)) {
+                                              } else if (NanoSeeds.isValidSeed(result)) {
                                                 _seedInputController.text = result;
                                                 _mnemonicFocusNode.unfocus();
                                                 _seedInputFocusNode.unfocus();

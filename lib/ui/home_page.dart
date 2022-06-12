@@ -589,7 +589,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   /// Add donations contact if it hasnt already been added
   Future<void> _addSampleContact() async {
-    bool contactAdded = await (sl.get<SharedPrefsUtil>().getFirstContactAdded() as FutureOr<bool>);
+    bool contactAdded = await (sl.get<SharedPrefsUtil>().getFirstContactAdded());
     if (!contactAdded) {
       bool addressExists = await sl.get<DBHelper>().contactExistsWithAddress("nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579");
       if (addressExists) {
@@ -900,7 +900,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   StreamSubscription<dynamic>? lockStreamListener;
 
   Future<void> setAppLockEvent() async {
-    if (((await (sl.get<SharedPrefsUtil>().getLock() as FutureOr<bool>)) || StateContainer.of(context).encryptedSecret != null) && !_lockDisabled!) {
+    if (((await (sl.get<SharedPrefsUtil>().getLock())) || StateContainer.of(context).encryptedSecret != null) && !_lockDisabled!) {
       if (lockStreamListener != null) {
         lockStreamListener!.cancel();
       }
@@ -3034,24 +3034,22 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     }
 
-    if (txDetails != null) {
-      if (txDetails.record_type != RecordTypes.GIFT_LOAD) {
-        if (txDetails.status == StatusTypes.CREATE_FAILED) {
-          transactionState = TransactionStateOptions.FAILED_MSG;
+    if (txDetails.record_type != RecordTypes.GIFT_LOAD) {
+      if (txDetails.status == StatusTypes.CREATE_FAILED) {
+        transactionState = TransactionStateOptions.FAILED_MSG;
+      }
+      if (txDetails.is_request!) {
+        if (txDetails.is_fulfilled!) {
+          transactionState = TransactionStateOptions.PAID;
+        } else {
+          transactionState = TransactionStateOptions.UNPAID;
         }
-        if (txDetails.is_request!) {
-          if (txDetails.is_fulfilled!) {
-            transactionState = TransactionStateOptions.PAID;
-          } else {
-            transactionState = TransactionStateOptions.UNPAID;
-          }
-        }
-        if (!txDetails.is_acknowledged!) {
-          transactionState = TransactionStateOptions.UNREAD;
-        }
-        if (txDetails.status == StatusTypes.CREATE_FAILED) {
-          transactionState = TransactionStateOptions.NOT_SENT;
-        }
+      }
+      if (!txDetails.is_acknowledged!) {
+        transactionState = TransactionStateOptions.UNREAD;
+      }
+      if (txDetails.status == StatusTypes.CREATE_FAILED) {
+        transactionState = TransactionStateOptions.NOT_SENT;
       }
     }
 
@@ -3268,7 +3266,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             ),
                           ],
                         ),
-                        (txDetails != null && txDetails.memo != null)
+                        (txDetails.memo != null)
                             ? Container(
                                 // constraints: BoxConstraints(maxWidth: 105),
                                 // width: MediaQuery.of(context).size.width / 4.3,

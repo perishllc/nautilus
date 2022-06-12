@@ -16,9 +16,7 @@ class Sheets {
       bool removeUntilHome = false,
       bool closeOnTap = false,
       Function? onDisposed}) {
-    assert(context != null);
-    assert(widget != null);
-    assert(radius != null && radius > 0.0);
+    assert(radius > 0.0);
     if (color == null) {
       color = StateContainer.of(context).curTheme.backgroundDark;
     }
@@ -52,9 +50,7 @@ class Sheets {
       double radius = 30.0,
       Color? barrier,
       int animationDurationMs = 225}) {
-    assert(context != null);
-    assert(widget != null);
-    assert(radius != null && radius > 0.0);
+    assert(radius > 0.0);
     if (color == null) {
       color = StateContainer.of(context).curTheme.backgroundDark;
     }

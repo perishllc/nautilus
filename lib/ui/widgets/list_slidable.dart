@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
@@ -74,7 +73,7 @@ abstract class SlideToDismissDelegate {
     this.crossAxisEndOffset = 0.0,
     this.onWillDismiss,
     this.closeOnCanceled = false,
-  }) : assert(dismissThresholds != null);
+  });
 
   /// The offset threshold the item has to be dragged in order to be considered
   /// dismissed.
@@ -264,7 +263,7 @@ class SlideActionBuilderDelegate extends SlideActionDelegate {
   const SlideActionBuilderDelegate({
     required this.builder,
     required this.actionCount,
-  }) : assert(actionCount != null && actionCount >= 0);
+  }) : assert(actionCount >= 0);
 
   /// Called to build slide actions.
   ///
@@ -578,7 +577,7 @@ class SlidableDrawerDelegate extends SlidableStackDelegate {
                   // For the main actions we have to reverse the order if we want the last item at the bottom of the stack.
                   int displayIndex = showActions ? count - index - 1 : index;
                   return ctx.createPositioned(
-                    position: animations[index].value as double?,
+                    position: animations[index].value,
                     extent: actionExtent,
                     child: actionDelegate!.build(context, displayIndex,
                         actionsMoveAnimation, SlidableRenderingMode.slide),
@@ -724,20 +723,14 @@ class Slidable extends StatefulWidget {
     this.controller,
     required this.onTriggered,
     this.onAnimationChanged
-  })  : assert(delegate != null),
-        assert(direction != null),
-        assert(
-            showAllActionsThreshold != null &&
-                showAllActionsThreshold >= .0 &&
+  })  : assert(
+            showAllActionsThreshold >= .0 &&
                 showAllActionsThreshold <= 1.0,
             'showAllActionsThreshold must be between 0.0 and 1.0'),
         assert(
-            actionExtentRatio != null &&
-                actionExtentRatio >= .0 &&
+            actionExtentRatio >= .0 &&
                 actionExtentRatio <= 1.0,
             'actionExtentRatio must be between 0.0 and 1.0'),
-        assert(closeOnScroll != null),
-        assert(enabled != null),
         assert(slideToDismissDelegate == null || key != null,
             'a key must be provided if slideToDismissDelegate is set'),
         super(key: key);
@@ -1101,7 +1094,6 @@ class SlidableState extends State<Slidable>
     final SlideToDismissDelegate slideToDismissDelegate =
         widget.slideToDismissDelegate!;
     if (slideToDismissDelegate.onDismissed != null) {
-      assert(actionType != null);
       slideToDismissDelegate.onDismissed!(actionType);
     }
   }
@@ -1224,8 +1216,7 @@ abstract class ClosableSlideAction extends StatelessWidget {
     Key? key,
     this.onTap,
     this.closeOnTap = _kCloseOnTap,
-  })  : assert(closeOnTap != null),
-        super(key: key);
+  })  : super(key: key);
 
   /// A tap has occurred.
   final VoidCallback? onTap;
@@ -1274,8 +1265,7 @@ class SlideAction extends ClosableSlideAction {
     Color? color,
     Decoration? decoration,
     bool closeOnTap = _kCloseOnTap,
-  })  : assert(child != null),
-        assert(decoration == null || decoration.debugAssertIsValid()),
+  })  : assert(decoration == null || decoration.debugAssertIsValid()),
         assert(
             color == null || decoration == null,
             'Cannot provide both a color and a decoration\n'

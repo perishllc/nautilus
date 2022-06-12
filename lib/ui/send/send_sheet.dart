@@ -174,11 +174,9 @@ class _SendSheetState extends State<SendSheet> {
             });
           }
           var userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
-          if (userList != null) {
-            setState(() {
-              _users = userList;
-            });
-          }
+          setState(() {
+            _users = userList;
+          });
         }
 
         if (_addressController!.text.length == 0) {
@@ -1169,7 +1167,7 @@ class _SendSheetState extends State<SendSheet> {
           : _rawAmount == null
               ? _amountController!.text
               : NumberUtil.getRawAsUsableString(_rawAmount);
-      if (bananoAmount == null || bananoAmount.isEmpty) {
+      if (bananoAmount.isEmpty) {
         bananoAmount = "0";
       }
       BigInt? balanceRaw = StateContainer.of(context).wallet!.accountBalance;
@@ -1494,22 +1492,18 @@ class _SendSheetState extends State<SendSheet> {
             });
           } else if (isFavorite!) {
             var matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
-            if (matchedList != null) {
-              final nicknames = Set();
-              matchedList.retainWhere((x) => nicknames.add(x.nickname));
-              setState(() {
-                _isFavorite = true;
-                _users = matchedList;
-              });
-            }
+            final nicknames = Set();
+            matchedList.retainWhere((x) => nicknames.add(x.nickname));
+            setState(() {
+              _isFavorite = true;
+              _users = matchedList;
+            });
           } else if (isUser || isDomain!) {
             var matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
-            if (matchedList != null) {
-              setState(() {
-                _isFavorite = false;
-                _users = matchedList;
-              });
-            }
+            setState(() {
+              _isFavorite = false;
+              _users = matchedList;
+            });
           } else {
             setState(() {
               _isUser = false;

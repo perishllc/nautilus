@@ -7,7 +7,6 @@ import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
-import 'package:nautilus_wallet_flutter/themes.dart';
 
 /// Main wallet object that's passed around the app via state
 class AppWallet {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'package:nautilus_wallet_flutter/model/setting_item.dart';
 
 enum AvailableCurrencyEnum {

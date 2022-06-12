@@ -5,10 +5,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:flutter/widgets.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 
 // The over-scroll distance that moves the indicator to its maximum
@@ -102,11 +99,7 @@ class ReactiveRefreshIndicator extends StatefulWidget {
     this.notificationPredicate = defaultScrollNotificationPredicate,
     this.semanticsLabel,
     this.semanticsValue,
-  })  : assert(child != null),
-        assert(onRefresh != null),
-        assert(isRefreshing != null),
-        assert(notificationPredicate != null),
-        super(key: key);
+  })  : super(key: key);
 
   /// The widget below this widget in the tree.
   ///
@@ -127,7 +120,7 @@ class ReactiveRefreshIndicator extends StatefulWidget {
   final RefreshCallback onRefresh;
 
   /// The progress indicator's foreground color. The current theme's
-  /// [ThemeData.accentColor] by default.
+  /// [ThemeData.colorScheme.secondary] by default.
   final Color? color;
 
   /// The progress indicator's background color. The current theme's
@@ -195,7 +188,7 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
   void didChangeDependencies() {
     final ThemeData theme = Theme.of(context);
     _valueColor = _positionController.drive(
-      ColorTween(begin: (widget.color ?? theme.accentColor).withOpacity(0.0), end: (widget.color ?? theme.accentColor).withOpacity(1.0))
+      ColorTween(begin: (widget.color ?? theme.colorScheme.secondary).withOpacity(0.0), end: (widget.color ?? theme.colorScheme.secondary).withOpacity(1.0))
           .chain(CurveTween(curve: const Interval(0.0, 1.0 / _kDragSizeFactorLimit))),
     );
     super.didChangeDependencies();
@@ -278,7 +271,7 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
   bool _handleGlowNotification(OverscrollIndicatorNotification notification) {
     if (notification.depth != 0 || !notification.leading) return false;
     if (_mode == _RefreshIndicatorMode.drag) {
-      notification.disallowGlow();
+      notification.disallowIndicator();
       return true;
     }
     return false;
@@ -354,7 +347,6 @@ class ReactiveRefreshIndicatorState extends State<ReactiveRefreshIndicator> with
     _mode = _RefreshIndicatorMode.snap;
     _positionController.animateTo(1.0 / _kDragSizeFactorLimit, duration: _kIndicatorSnapDuration).then<void>((void value) {
       if (mounted && _mode == _RefreshIndicatorMode.snap) {
-        assert(widget.onRefresh != null);
         setState(() {
           // Show the indeterminate progress indicator.
           _mode = _RefreshIndicatorMode.refresh;

@@ -16,6 +16,7 @@ android/app/release
 .aab
 .apk
 lib/sensitive.dart
+lib/firebase_options.dart
 
 # IntelliJ related
 *.iml

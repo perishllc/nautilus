@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:barcode_scan2/barcode_scan2.dart';
 
 enum OverlayTheme { KALIUM, NATRIUM, IRIDIUM, TITANIUM, BERYLLIUM, RUTHIUM, RADIUM, INDIUM, NEPTUNIUM, THORIUM, CARBON, URANIUM, BLAISE, BLAISEDARK, COPPER }
 

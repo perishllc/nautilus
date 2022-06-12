@@ -10,7 +10,6 @@ import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_i
 import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:logger/logger.dart';
-import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/account_info_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/block_info_request.dart';
@@ -24,8 +23,6 @@ import 'package:synchronized/synchronized.dart';
 import 'package:http/http.dart' as http;
 import 'package:ens_dart/ens_dart.dart';
 import 'package:web3dart/web3dart.dart';
-import 'package:web_socket_channel/io.dart';
-import 'package:convert/convert.dart';
 
 import 'package:nautilus_wallet_flutter/model/state_block.dart';
 import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
@@ -40,8 +37,6 @@ import 'package:nautilus_wallet_flutter/network/model/request/process_request.da
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/block_info_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/payment_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/callback_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
@@ -206,7 +201,7 @@ class AccountService {
   // Close connection
   void reset({bool suspend = false}) {
     suspended = suspend;
-    if (_channel != null && _channel!.sink != null) {
+    if (_channel != null) {
       _channel!.sink.close();
       _isConnected = false;
       _isConnecting = false;
@@ -217,7 +212,7 @@ class AccountService {
   Future<void> _send(String message) async {
     bool reset = false;
     try {
-      if (_channel != null && _channel!.sink != null && _isConnected) {
+      if (_channel != null && _isConnected) {
         _channel!.sink.add(message);
       } else {
         reset = true; // Re-establish connection
@@ -292,7 +287,7 @@ class AccountService {
       //log.d("Request Queue length ${_requestQueue.length}");
       if (_requestQueue != null && _requestQueue!.length > 0) {
         RequestItem requestItem = _requestQueue!.first;
-        if (requestItem != null && !requestItem.isProcessing!) {
+        if (!requestItem.isProcessing!) {
           if (!_isConnected && !_isConnecting && !suspended) {
             initCommunication();
             return;
@@ -303,7 +298,7 @@ class AccountService {
           String requestJson = await compute(encodeRequestItem, requestItem.request);
           //log.d("Sending: $requestJson");
           await _send(requestJson);
-        } else if (requestItem != null && (DateTime.now().difference(requestItem.expireDt!).inSeconds > RequestItem.EXPIRE_TIME_S)) {
+        } else if ((DateTime.now().difference(requestItem.expireDt!).inSeconds > RequestItem.EXPIRE_TIME_S)) {
           pop();
           processQueue();
         }
@@ -430,7 +425,7 @@ class AccountService {
 
   Future<String?> checkENSDomain(String domain) async {
     final pubKey = await ens.withName(domain).getCoinAddress(CoinType.NANO);
-    if (pubKey == null || pubKey.isEmpty) {
+    if (pubKey.isEmpty) {
       return null;
     } else {
       String address = NanoAccounts.createAccount(NanoAccountType.NANO, pubKey);
