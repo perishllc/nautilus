@@ -168,7 +168,7 @@ dependencies:
 
   # encryption and decryption until I rewrite the library in dart:
   # flutter_js: ^0.5.0+6
-  # devicelocale: ^0.4.1
+  devicelocale: ^0.4.1
 
   # encryption helper:
   # flutter_sodium: ^0.2.0
