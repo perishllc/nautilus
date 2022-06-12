@@ -2,17 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io' as io;
 import 'dart:io';
-import 'package:flutter/foundation.dart';
-import 'package:get_it/get_it.dart';
-import 'package:nautilus_wallet_flutter/model/db/blocked.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
-import 'package:nautilus_wallet_flutter/model/db/contact.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
+import 'package:sqflite_common/sqlite_api.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'package:flutter/services.dart';
 
@@ -107,10 +105,18 @@ class DBHelper {
   }
 
   initDb() async {
-    io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "nautilus.db");
-    var theDb = await openDatabase(path, version: DB_VERSION, onCreate: _onCreate, onUpgrade: _onUpgrade);
-    return theDb;
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+      sqfliteFfiInit();
+      var databaseFactory = databaseFactoryFfi;
+      var theDb = await databaseFactory.openDatabase(inMemoryDatabasePath,
+          options: OpenDatabaseOptions(version: DB_VERSION, onCreate: _onCreate, onUpgrade: _onUpgrade));
+      return theDb;
+    } else {
+      io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
+      String path = join(documentsDirectory.path, "nautilus.db");
+      var theDb = await openDatabase(path, version: DB_VERSION, onCreate: _onCreate, onUpgrade: _onUpgrade);
+      return theDb;
+    }
   }
 
   void _onCreate(Database db, int version) async {
@@ -176,7 +182,9 @@ class DBHelper {
   }
 
   Future<void> fetchNapiUsernames() async {
-    var users = await (fetchNapiKnown(http.Client()) as FutureOr<List<User>>);
+    var users = await fetchNapiKnown(http.Client());
+    if (users == null) return;
+
     // nuke the old databases:
     await nukeUsers();
     // add the new users:
@@ -334,7 +342,8 @@ class DBHelper {
     if (contact.nickname != null) {
       if (contact.username != null) {
         username =
-            await dbClient!.rawUpdate("UPDATE Users SET nickname = ? WHERE lower(username) like \'%${contact.username!.toLowerCase()}\'", [contact.nickname]) > 0;
+            await dbClient!.rawUpdate("UPDATE Users SET nickname = ? WHERE lower(username) like \'%${contact.username!.toLowerCase()}\'", [contact.nickname]) >
+                0;
       }
       if (contact.address != null) {
         address =

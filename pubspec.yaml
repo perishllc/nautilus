@@ -51,7 +51,6 @@ dependencies:
   intl: ^0.17.0
 
   # BigDecimal alternative
-  # decimal: ^1.3.0
   decimal: ^2.2.0
 
   # Logger
@@ -67,7 +66,7 @@ dependencies:
   webview_flutter: ^3.0.0
 
   # SQLite
-  sqflite: ^2.0.0+4
+  sqflite: ^2.0.2+1
 
   # Android/iOS path provider
   # path_provider: ^2.0.1
@@ -124,6 +123,15 @@ dependencies:
   # firebase_core: ^1.13.1
   firebase_core: ^1.17.1
   firebase_analytics: ^9.1.9
+
+
+
+  # windows plugins / ffi:
+  firebase_auth: ^3.1.5
+  firebase_auth_desktop: ^0.1.1-dev.0
+  firebase_core_desktop: ^0.1.1-dev.0
+  sqflite_common_ffi: ^2.1.1
+
 
   # Slidable list actions
   flutter_slidable: ^1.3.0

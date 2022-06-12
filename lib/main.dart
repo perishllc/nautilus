@@ -51,7 +51,14 @@ Future<void> main() async {
     Logger.level = Level.debug;
   }
   // Setup firebase
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: '...',
+      appId: '...',
+      messagingSenderId: '...',
+      projectId: '...',
+    ),
+  );
   if (!kReleaseMode) {
     // we have to stall for whatever reason in debug mode
     // otherwise the app doesn't start properly (black screen)
@@ -345,25 +352,27 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     // Update session key
     await sl.get<Vault>().updateSessionKey();
     // Check if device is rooted or jailbroken, show user a warning informing them of the risks if so
-    if (!(await (sl.get<SharedPrefsUtil>().getHasSeenRootWarning())) && await FlutterJailbreakDetection.jailbroken) {
-      AppDialogs.showConfirmDialog(
-          context,
-          CaseChange.toUpperCase(AppLocalization.of(context)!.warning, context),
-          AppLocalization.of(context)!.rootWarning,
-          AppLocalization.of(context)!.iUnderstandTheRisks.toUpperCase(),
-          () async {
-            await sl.get<SharedPrefsUtil>().setHasSeenRootWarning();
-            checkLoggedIn();
-          },
-          cancelText: AppLocalization.of(context)!.exit.toUpperCase(),
-          cancelAction: () {
-            if (Platform.isIOS) {
-              exit(0);
-            } else {
-              SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-            }
-          });
-      return;
+    if (Platform.isIOS || Platform.isAndroid) {
+      if (!(await (sl.get<SharedPrefsUtil>().getHasSeenRootWarning())) && await FlutterJailbreakDetection.jailbroken) {
+        AppDialogs.showConfirmDialog(
+            context,
+            CaseChange.toUpperCase(AppLocalization.of(context)!.warning, context),
+            AppLocalization.of(context)!.rootWarning,
+            AppLocalization.of(context)!.iUnderstandTheRisks.toUpperCase(),
+            () async {
+              await sl.get<SharedPrefsUtil>().setHasSeenRootWarning();
+              checkLoggedIn();
+            },
+            cancelText: AppLocalization.of(context)!.exit.toUpperCase(),
+            cancelAction: () {
+              if (Platform.isIOS) {
+                exit(0);
+              } else {
+                SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+              }
+            });
+        return;
+      }
     }
     if (!_hasCheckedLoggedIn) {
       _hasCheckedLoggedIn = true;
