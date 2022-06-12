@@ -7,13 +7,13 @@ part 'account_info_request.g.dart';
 @JsonSerializable()
 class AccountInfoRequest extends BaseRequest {
   @JsonKey(name:'action')
-  String action;
+  String? action;
 
   @JsonKey(name:'account')
-  String account;
+  String? account;
 
 
-  AccountInfoRequest({String action, String account}):super() {
+  AccountInfoRequest({String? action, String? account}):super() {
     this.action = Actions.INFO;
     this.account = account;
   }

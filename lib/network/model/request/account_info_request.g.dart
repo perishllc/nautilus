@@ -8,8 +8,8 @@ part of 'account_info_request.dart';
 
 AccountInfoRequest _$AccountInfoRequestFromJson(Map<String, dynamic> json) {
   return AccountInfoRequest(
-    action: json['action'] as String,
-    account: json['account'] as String,
+    action: json['action'] as String?,
+    account: json['account'] as String?,
   );
 }
 

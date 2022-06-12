@@ -43,12 +43,12 @@ import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:uuid/uuid.dart';
 
 class RequestConfirmSheet extends StatefulWidget {
-  final String amountRaw;
-  final String destination;
-  final String contactName;
-  final String localCurrency;
-  final int natriconNonce;
-  final String memo;
+  final String? amountRaw;
+  final String? destination;
+  final String? contactName;
+  final String? localCurrency;
+  final int? natriconNonce;
+  final String? memo;
 
   RequestConfirmSheet({this.amountRaw, this.destination, this.contactName, this.localCurrency, this.natriconNonce, this.memo})
       : super();
@@ -57,11 +57,11 @@ class RequestConfirmSheet extends StatefulWidget {
 }
 
 class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
-  String amount;
-  String destinationAltered;
-  bool animationOpen;
+  late String amount;
+  String? destinationAltered;
+  late bool animationOpen;
 
-  StreamSubscription<AuthenticatedEvent> _authSub;
+  StreamSubscription<AuthenticatedEvent>? _authSub;
 
   void _registerBus() {
     _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((event) {
@@ -73,7 +73,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
 
   void _destroyBus() {
     if (_authSub != null) {
-      _authSub.cancel();
+      _authSub!.cancel();
     }
   }
 
@@ -91,7 +91,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
     amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
     // Ensure nano_ prefix on destination
-    destinationAltered = widget.destination.replaceAll("xrb_", "nano_");
+    destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
 
   @override
@@ -132,7 +132,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).requesting, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context)!.requesting, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -175,7 +175,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                           TextSpan(
                             text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
                             style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary.withOpacity(0.75),
+                              color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
@@ -191,7 +191,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).from, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context)!.from, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -206,8 +206,8 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, destinationAltered, contactName: widget.contactName)),
-                  (widget.memo != null && widget.memo.isNotEmpty)
+                      child: UIUtil.threeLineAddressText(context, destinationAltered!, contactName: widget.contactName)),
+                  (widget.memo != null && widget.memo!.isNotEmpty)
                       ? (
                           // "WITH MESSAGE" text
                           Container(
@@ -215,14 +215,14 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                           child: Column(
                             children: <Widget>[
                               Text(
-                                CaseChange.toUpperCase(AppLocalization.of(context).withMessage, context),
+                                CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
                                 style: AppStyles.textStyleHeader(context),
                               ),
                             ],
                           ),
                         ))
                       : SizedBox(),
-                  (widget.memo != null && widget.memo.isNotEmpty)
+                  (widget.memo != null && widget.memo!.isNotEmpty)
                       ?
                       // memo text
                       Container(
@@ -234,7 +234,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                             borderRadius: BorderRadius.circular(25),
                           ),
                           child: Text(
-                            widget.memo,
+                            widget.memo!,
                             style: AppStyles.textStyleParagraph(context),
                             textAlign: TextAlign.center,
                           ))
@@ -252,7 +252,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                     children: <Widget>[
                       // CONFIRM Button
                       AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                          context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         // Authenticate
                         AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
@@ -261,7 +261,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                           try {
                             bool authenticated = await sl
                                 .get<BiometricUtil>()
-                                .authenticateWithBiometrics(context, AppLocalization.of(context).requestAmountConfirm.replaceAll("%1", amount));
+                                .authenticateWithBiometrics(context, AppLocalization.of(context)!.requestAmountConfirm.replaceAll("%1", amount));
                             if (authenticated) {
                               sl.get<HapticUtil>().fingerprintSucess();
                               EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.REQUEST));
@@ -279,7 +279,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                   Row(
                     children: <Widget>[
                       // CANCEL Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.cancel, context),
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pop();
                       }),
@@ -297,15 +297,14 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     try {
       _showAnimation(context);
 
-      String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index);
+      String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
 
       // get epoch time as hex:
       int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
       String nonce_hex = secondsSinceEpoch.toRadixString(16);
       String signature = NanoSignatures.signBlock(nonce_hex, privKey);
-
       // check validity locally:
-      String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet?.address);
+      String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
       bool isValid = NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
       if (!isValid) {
         throw Exception("Invalid signature?!");
@@ -314,12 +313,12 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       var uuid = Uuid();
       String local_uuid = "LOCAL:" + uuid.v4();
       // current block height:
-      int currentBlockHeightInList = StateContainer.of(context).wallet.history.length > 0 ? (StateContainer.of(context).wallet.history[0].height + 1) : 1;
-      String lastBlockHash = StateContainer.of(context).wallet.history.length > 0 ? StateContainer.of(context).wallet.history[0].hash : null;
+      int currentBlockHeightInList = StateContainer.of(context).wallet!.history!.length > 0 ? (StateContainer.of(context).wallet!.history![0].height! + 1) : 1;
+      String? lastBlockHash = StateContainer.of(context).wallet!.history!.length > 0 ? StateContainer.of(context).wallet!.history![0].hash : null;
 
       // create a local txData for the request:
       var newRequestTXData = new TXData(
-        from_address: StateContainer.of(context).wallet.address,
+        from_address: StateContainer.of(context).wallet!.address,
         to_address: destinationAltered,
         amount_raw: widget.amountRaw,
         uuid: local_uuid,
@@ -338,14 +337,14 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
 
       try {
         // encrypt the memo:
-        String encryptedMemo;
-        if (widget.memo != null && widget.memo.isNotEmpty) {
-          encryptedMemo = await Box.encrypt(widget.memo, destinationAltered, privKey);
+        String? encryptedMemo;
+        if (widget.memo != null && widget.memo!.isNotEmpty) {
+          encryptedMemo = await Box.encrypt(widget.memo!, destinationAltered!, privKey);
         }
 
         await sl
             .get<AccountService>()
-            .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet.address, signature, nonce_hex, encryptedMemo, local_uuid);
+            .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet!.address, signature, nonce_hex, encryptedMemo, local_uuid);
       } catch (e) {
         print("payment request failed: ${e.toString()}");
         sendFailed = true;
@@ -364,7 +363,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         await StateContainer.of(context).updateUnified(true);
         // go to home and show error:
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-        UIUtil.showSnackbar(AppLocalization.of(context).requestError, context, durationMs: 5500);
+        UIUtil.showSnackbar(AppLocalization.of(context)!.requestError, context, durationMs: 5500);
       } else {
         print("request succeeded");
 
@@ -374,9 +373,9 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
 
         // Show complete
         // todo: there's a potential memory leak with contacts somewhere here?
-        String contactName = widget.contactName;
-        if (widget.contactName == null || widget.contactName.isEmpty) {
-          User user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
+        String? contactName = widget.contactName;
+        if (widget.contactName == null || widget.contactName!.isEmpty) {
+          User? user = await sl.get<DBHelper>().getUserWithAddress(widget.destination!);
           if (user != null) {
             contactName = user.getDisplayName();
           }
@@ -406,19 +405,19 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         Navigator.of(context).pop();
       }
       sendFailed = true;
-      UIUtil.showSnackbar(AppLocalization.of(context).requestError, context, durationMs: 3500);
+      UIUtil.showSnackbar(AppLocalization.of(context)!.requestError, context, durationMs: 3500);
       Navigator.of(context).pop();
     }
   }
 
   Future<void> authenticateWithPin() async {
     // PIN Authentication
-    String expectedPin = await sl.get<Vault>().getPin();
-    bool auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    String? expectedPin = await sl.get<Vault>().getPin();
+    bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return new PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
-        description: AppLocalization.of(context).requestAmountConfirmPin.replaceAll("%1", amount),
+        description: AppLocalization.of(context)!.requestAmountConfirmPin.replaceAll("%1", amount),
       );
     }));
     if (auth != null && auth) {

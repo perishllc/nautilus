@@ -8,13 +8,13 @@ part 'blocked.g.dart';
 @JsonSerializable()
 class Blocked {
   @JsonKey(ignore: true)
-  int id;
+  int? id;
   @JsonKey(name: 'name')
-  String name;
+  String? name;
   @JsonKey(name: 'username')
-  String username;
+  String? username;
   @JsonKey(name: 'address')
-  String address;
+  String? address;
   // @JsonKey(ignore: true)
   // String monkeyPath;
   // @JsonKey(ignore: true)
@@ -25,7 +25,7 @@ class Blocked {
   Blocked({this.username, this.address, this.name});
 
   factory Blocked.fromJson(Map<String, dynamic> json) {
-    return Blocked(username: json["username"] as String, address: json["address"] as String, name: json["name"] as String);
+    return Blocked(username: json["username"] as String?, address: json["address"] as String?, name: json["name"] as String?);
   }
   Map<String, dynamic> toJson() => _$BlockedToJson(this);
 

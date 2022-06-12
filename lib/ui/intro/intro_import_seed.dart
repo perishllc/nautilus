@@ -35,7 +35,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
   bool _seedIsValid = false;
   bool _showSeedError = false;
   bool _mnemonicIsValid = false;
-  String _mnemonicError;
+  String? _mnemonicError;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                   Container(
                                     margin: EdgeInsetsDirectional.only(end: 8),
                                     child: Text(
-                                      _seedMode ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed,
+                                      _seedMode ? AppLocalization.of(context)!.secretPhrase : AppLocalization.of(context)!.seed,
                                       style: TextStyle(
                                         color: StateContainer.of(context).curTheme.text,
                                         fontSize: 20.0,
@@ -116,7 +116,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                         ),
                         alignment: AlignmentDirectional(-1, 0),
                         child: AutoSizeText(
-                          _seedMode ? AppLocalization.of(context).importSeed : AppLocalization.of(context).importSecretPhrase,
+                          _seedMode ? AppLocalization.of(context)!.importSeed : AppLocalization.of(context)!.importSecretPhrase,
                           style: AppStyles.textStyleHeaderColored(context),
                           maxLines: 1,
                           minFontSize: 12,
@@ -128,7 +128,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                         margin: EdgeInsets.only(left: smallScreen(context) ? 30 : 40, right: smallScreen(context) ? 30 : 40, top: 15.0),
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          _seedMode ? AppLocalization.of(context).importSeedHint : AppLocalization.of(context).importSecretPhraseHint,
+                          _seedMode ? AppLocalization.of(context)!.importSeedHint : AppLocalization.of(context)!.importSecretPhraseHint,
                           style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.start,
                         ),
@@ -176,7 +176,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                                   _mnemonicIsValid = true;
                                                 });
                                               } else {
-                                                UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidSeed, context);
+                                                UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidSeed, context);
                                               }
                                             });
                                           },
@@ -189,16 +189,16 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                             if (NanoSeeds.isValidSeed(_seedInputController.text)) {
                                               return;
                                             }
-                                            Clipboard.getData("text/plain").then((ClipboardData data) {
+                                            Clipboard.getData("text/plain").then((ClipboardData? data) {
                                               if (data == null || data.text == null) {
                                                 return;
-                                              } else if (NanoSeeds.isValidSeed(data.text)) {
-                                                _seedInputController.text = data.text;
+                                              } else if (NanoSeeds.isValidSeed(data.text!)) {
+                                                _seedInputController.text = data.text!;
                                                 setState(() {
                                                   _seedIsValid = true;
                                                 });
-                                              } else if (NanoMnemomics.validateMnemonic(data.text.split(' '))) {
-                                                _mnemonicController.text = data.text;
+                                              } else if (NanoMnemomics.validateMnemonic(data.text!.split(' '))) {
+                                                _mnemonicController.text = data.text!;
                                                 _mnemonicFocusNode.unfocus();
                                                 _seedInputFocusNode.unfocus();
                                                 setState(() {
@@ -271,7 +271,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                                   _showSeedError = false;
                                                 });
                                               } else {
-                                                UIUtil.showSnackbar(AppLocalization.of(context).qrMnemonicError, context);
+                                                UIUtil.showSnackbar(AppLocalization.of(context)!.qrMnemonicError, context);
                                               }
                                             });
                                           },
@@ -284,16 +284,16 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                             if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
                                               return;
                                             }
-                                            Clipboard.getData("text/plain").then((ClipboardData data) {
+                                            Clipboard.getData("text/plain").then((ClipboardData? data) {
                                               if (data == null || data.text == null) {
                                                 return;
-                                              } else if (NanoMnemomics.validateMnemonic(data.text.split(' '))) {
-                                                _mnemonicController.text = data.text;
+                                              } else if (NanoMnemomics.validateMnemonic(data.text!.split(' '))) {
+                                                _mnemonicController.text = data.text!;
                                                 setState(() {
                                                   _mnemonicIsValid = true;
                                                 });
-                                              } else if (NanoSeeds.isValidSeed(data.text)) {
-                                                _seedInputController.text = data.text;
+                                              } else if (NanoSeeds.isValidSeed(data.text!)) {
+                                                _seedInputController.text = data.text!;
                                                 _mnemonicFocusNode.unfocus();
                                                 _seedInputFocusNode.unfocus();
                                                 setState(() {
@@ -315,7 +315,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                               _mnemonicError = null;
                                             });
                                           } else if (_mnemonicError != null) {
-                                            if (!text.contains(_mnemonicError.split(' ')[0])) {
+                                            if (!text.contains(_mnemonicError!.split(' ')[0])) {
                                               setState(() {
                                                 _mnemonicError = null;
                                               });
@@ -334,18 +334,18 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                             });
                                             // Validate each mnemonic word
                                             if (text.endsWith(" ") && text.length > 1) {
-                                              int lastSpaceIndex = text.substring(0, text.length - 1).lastIndexOf(" ");
+                                              int? lastSpaceIndex = text.substring(0, text.length - 1).lastIndexOf(" ");
                                               if (lastSpaceIndex == -1) {
                                                 lastSpaceIndex = 0;
                                               } else {
-                                                lastSpaceIndex++;
+                                                lastSpaceIndex = lastSpaceIndex! + 1;
                                               }
                                               String lastWord = text.substring(lastSpaceIndex, text.length - 1);
                                               if (!NanoMnemomics.isValidWord(lastWord)) {
                                                 setState(() {
                                                   _mnemonicIsValid = false;
                                                   setState(() {
-                                                    _mnemonicError = AppLocalization.of(context).mnemonicInvalidWord.replaceAll("%1", lastWord);
+                                                    _mnemonicError = AppLocalization.of(context)!.mnemonicInvalidWord.replaceAll("%1", lastWord);
                                                   });
                                                 });
                                               }
@@ -360,9 +360,9 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                       !_seedMode
                                           ? _mnemonicError == null
                                               ? ""
-                                              : _mnemonicError
+                                              : _mnemonicError!
                                           : _showSeedError
-                                              ? AppLocalization.of(context).seedInvalid
+                                              ? AppLocalization.of(context)!.seedInvalid
                                               : "",
                                       style: TextStyle(
                                         fontSize: 14.0,
@@ -419,14 +419,14 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                 if (_mnemonicController.text.split(' ').length != 24) {
                                   setState(() {
                                     _mnemonicIsValid = false;
-                                    _mnemonicError = AppLocalization.of(context).mnemonicSizeError;
+                                    _mnemonicError = AppLocalization.of(context)!.mnemonicSizeError;
                                   });
                                 } else {
                                   _mnemonicController.text.split(' ').forEach((word) {
                                     if (!NanoMnemomics.isValidWord(word)) {
                                       setState(() {
                                         _mnemonicIsValid = false;
-                                        _mnemonicError = AppLocalization.of(context).mnemonicInvalidWord.replaceAll("%1", word);
+                                        _mnemonicError = AppLocalization.of(context)!.mnemonicInvalidWord.replaceAll("%1", word);
                                       });
                                     }
                                   });

@@ -152,7 +152,7 @@ class AppSettings {
   //Settings item without any dropdown option but rather a direct functionality
   static Widget buildSettingsListItemSingleLine(
       BuildContext context, String heading, IconData settingIcon,
-      {Function onPressed}) {
+      {Function? onPressed}) {
     return FlatButton(
       highlightColor: StateContainer.of(context).curTheme.text15,
       splashColor: StateContainer.of(context).curTheme.text15,

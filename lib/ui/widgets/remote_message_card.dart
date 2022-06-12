@@ -5,8 +5,8 @@ import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_i
 import 'package:nautilus_wallet_flutter/styles.dart';
 
 class RemoteMessageCard extends StatefulWidget {
-  final AlertResponseItem alert;
-  final Function onPressed;
+  final AlertResponseItem? alert;
+  final Function? onPressed;
   final bool showDesc;
   final bool showTimestamp;
   final bool hasBg;
@@ -28,55 +28,55 @@ class _RemoteMessageCardState extends State<RemoteMessageCard> {
     return Container(
       decoration: BoxDecoration(
         color: widget.hasBg
-            ? StateContainer.of(context).curTheme.success.withOpacity(0.06)
+            ? StateContainer.of(context).curTheme.success!.withOpacity(0.06)
             : Colors.transparent,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           width: 2,
-          color: StateContainer.of(context).curTheme.success,
+          color: StateContainer.of(context).curTheme.success!,
         ),
       ),
       child: FlatButton(
         padding: EdgeInsets.all(0),
         highlightColor:
-            StateContainer.of(context).curTheme.success.withOpacity(0.15),
+            StateContainer.of(context).curTheme.success!.withOpacity(0.15),
         splashColor:
-            StateContainer.of(context).curTheme.success.withOpacity(0.15),
-        onPressed: widget.onPressed,
+            StateContainer.of(context).curTheme.success!.withOpacity(0.15),
+        onPressed: widget.onPressed as void Function()?,
         child: Container(
           width: double.infinity,
           padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              widget.alert.title != null
+              widget.alert!.title != null
                   ? Container(
                       margin: EdgeInsetsDirectional.only(
-                        bottom: widget.alert.shortDescription != null &&
-                                (widget.showDesc || widget.alert.title == null)
+                        bottom: widget.alert!.shortDescription != null &&
+                                (widget.showDesc || widget.alert!.title == null)
                             ? 4
                             : 0,
                       ),
                       child: Text(
-                        widget.alert.title,
+                        widget.alert!.title!,
                         style: AppStyles.remoteMessageCardTitle(context),
                       ),
                     )
                   : SizedBox(),
-              widget.alert.shortDescription != null &&
-                      (widget.showDesc || widget.alert.title == null)
+              widget.alert!.shortDescription != null &&
+                      (widget.showDesc || widget.alert!.title == null)
                   ? Container(
                       margin: EdgeInsetsDirectional.only(
                         bottom: 4,
                       ),
                       child: Text(
-                        widget.alert.shortDescription,
+                        widget.alert!.shortDescription!,
                         style: AppStyles.remoteMessageCardShortDescription(
                             context),
                       ),
                     )
                   : SizedBox(),
-              widget.alert.timestamp != null && widget.showTimestamp
+              widget.alert!.timestamp != null && widget.showTimestamp
                   ? Container(
                       margin: EdgeInsetsDirectional.only(
                         top: 6,
@@ -90,12 +90,12 @@ class _RemoteMessageCardState extends State<RemoteMessageCard> {
                           Radius.circular(100),
                         ),
                         border: Border.all(
-                          color: StateContainer.of(context).curTheme.text10,
+                          color: StateContainer.of(context).curTheme.text10!,
                         ),
                       ),
                       child: Text(
                         DateTime.fromMillisecondsSinceEpoch(
-                                    widget.alert.timestamp)
+                                    widget.alert!.timestamp!)
                                 .toUtc()
                                 .toString()
                                 .substring(0, 16) +

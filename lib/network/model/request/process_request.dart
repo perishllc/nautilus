@@ -7,19 +7,19 @@ part 'process_request.g.dart';
 @JsonSerializable()
 class ProcessRequest extends BaseRequest {
   @JsonKey(name: 'action')
-  String action;
+  String? action;
 
   @JsonKey(name: 'block')
-  String block;
+  String? block;
 
   // Kalium/Natrium server accepts an optional do_work parameter. If true server will add work to this block for us
   @JsonKey(name: 'do_work')
-  bool doWork;
+  bool? doWork;
 
   @JsonKey(name: 'subtype')
-  String subType;
+  String? subType;
 
-  ProcessRequest({String block, bool doWork = true, String subType}) {
+  ProcessRequest({String? block, bool? doWork = true, String? subType}) {
     this.action = Actions.PROCESS;
     this.block = block;
     this.doWork = doWork;

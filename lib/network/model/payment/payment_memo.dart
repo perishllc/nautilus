@@ -7,33 +7,33 @@ part 'payment_memo.g.dart';
 @JsonSerializable()
 class PaymentMemo extends BaseRequest {
   @JsonKey(name: 'action')
-  String action;
+  String? action;
 
   @JsonKey(name: 'account')
-  String account;
+  String? account;
 
   @JsonKey(name: 'requesting_account')
-  String requesting_account;
+  String? requesting_account;
 
   @JsonKey(name: 'request_signature')
-  String request_signature;
+  String? request_signature;
 
   @JsonKey(name: 'request_nonce')
-  String request_nonce;
+  String? request_nonce;
 
   @JsonKey(name: 'memo_enc')
-  String memo_enc;
+  String? memo_enc;
 
   @JsonKey(name: 'block')
-  String block;
+  String? block;
 
   @JsonKey(name: 'local_uuid')
-  String local_uuid;
+  String? local_uuid;
 
   // @JsonKey(name: 'username')
   // String username;
 
-  PaymentMemo({String action, String account, String requesting_account, String request_signature, String request_nonce, String memo_enc, String block, String local_uuid})
+  PaymentMemo({String? action, String? account, String? requesting_account, String? request_signature, String? request_nonce, String? memo_enc, String? block, String? local_uuid})
       : super() {
     this.action = Actions.PAYMENT_MEMO;
     this.account = account ?? "";

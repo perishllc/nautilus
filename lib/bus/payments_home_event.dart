@@ -3,7 +3,7 @@ import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 // import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
 
 class PaymentsHomeEvent implements Event {
-  final List<TXData> items;
+  final List<TXData>? items;
 
   PaymentsHomeEvent({this.items});
 }

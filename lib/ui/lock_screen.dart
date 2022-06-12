@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +42,10 @@ class _AppLockScreenState extends State<AppLockScreen> {
     Navigator.of(context).pushNamedAndRemoveUntil('/home_transition', (Route<dynamic> route) => false, arguments: conversion);
   }
 
-  Widget _buildPinScreen(BuildContext context, String expectedPin) {
+  Widget _buildPinScreen(BuildContext context, String? expectedPin) {
     return PinScreen(PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
-        description: AppLocalization.of(context).unlockPin,
+        description: AppLocalization.of(context)!.unlockPin,
         pinScreenBackgroundColor: StateContainer.of(context).curTheme.backgroundDark);
   }
 
@@ -124,7 +125,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
   }
 
   Future<void> authenticateWithBiometrics() async {
-    bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context).unlockBiometrics);
+    bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.unlockBiometrics);
     if (authenticated) {
       _goHome();
     } else {
@@ -135,20 +136,20 @@ class _AppLockScreenState extends State<AppLockScreen> {
   }
 
   Future<void> authenticateWithPin({bool transitions = false}) async {
-    String expectedPin = await sl.get<Vault>().getPin();
-    bool auth = false;
+    String? expectedPin = await sl.get<Vault>().getPin();
+    bool? auth = false;
     if (transitions) {
-      auth = await Navigator.of(context).push(
+      auth = await (Navigator.of(context).push(
         MaterialPageRoute(builder: (BuildContext context) {
           return _buildPinScreen(context, expectedPin);
         }),
-      );
+      ) as FutureOr<bool>);
     } else {
-      auth = await Navigator.of(context).push(
+      auth = await (Navigator.of(context).push(
         NoPushTransitionRoute(builder: (BuildContext context) {
           return _buildPinScreen(context, expectedPin);
         }),
-      );
+      ) as FutureOr<bool>);
     }
     await Future.delayed(Duration(milliseconds: 200));
     if (mounted) {
@@ -165,7 +166,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
   Future<void> _authenticate({bool transitions = false}) async {
     // Test if user is locked out
     // Get duration of lockout
-    DateTime lockUntil = await sl.get<SharedPrefsUtil>().getLockDate();
+    DateTime? lockUntil = await sl.get<SharedPrefsUtil>().getLockDate();
     if (lockUntil == null) {
       await sl.get<SharedPrefsUtil>().resetLockAttempts();
     } else {
@@ -224,11 +225,11 @@ class _AppLockScreenState extends State<AppLockScreen> {
                           FlatButton(
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                             onPressed: () {
-                              AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
-                                  AppLocalization.of(context).logoutDetail, AppLocalization.of(context).logoutAction.toUpperCase(), () {
+                              AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(AppLocalization.of(context)!.warning, context),
+                                  AppLocalization.of(context)!.logoutDetail, AppLocalization.of(context)!.logoutAction.toUpperCase(), () {
                                 // Show another confirm dialog
-                                AppDialogs.showConfirmDialog(context, AppLocalization.of(context).logoutAreYouSure,
-                                    AppLocalization.of(context).logoutReassurance, CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                                AppDialogs.showConfirmDialog(context, AppLocalization.of(context)!.logoutAreYouSure,
+                                    AppLocalization.of(context)!.logoutReassurance, CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () {
                                   // Unsubscribe from notifications
                                   sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((_) {
                                     FirebaseMessaging.instance.getToken().then((fcmToken) {
@@ -254,7 +255,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
                                   Icon(AppIcons.logout, size: 16, color: StateContainer.of(context).curTheme.text),
                                   Container(
                                     margin: EdgeInsetsDirectional.only(start: 4),
-                                    child: Text(AppLocalization.of(context).logout, style: AppStyles.textStyleLogoutButton(context)),
+                                    child: Text(AppLocalization.of(context)!.logout, style: AppStyles.textStyleLogoutButton(context)),
                                   ),
                                 ],
                               ),
@@ -277,7 +278,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
                                 ),
                                 Container(
                                   child: Text(
-                                    CaseChange.toUpperCase(AppLocalization.of(context).locked, context),
+                                    CaseChange.toUpperCase(AppLocalization.of(context)!.locked, context),
                                     style: AppStyles.textStyleHeaderColored(context),
                                   ),
                                   margin: EdgeInsets.only(top: 10),
@@ -291,7 +292,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
                             width: MediaQuery.of(context).size.width - 100,
                             margin: EdgeInsets.symmetric(horizontal: 50),
                             child: Text(
-                              AppLocalization.of(context).tooManyFailedAttempts,
+                              AppLocalization.of(context)!.tooManyFailedAttempts,
                               style: AppStyles.textStyleErrorMedium(context),
                               textAlign: TextAlign.center,
                             ),
@@ -301,7 +302,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
                         ? Row(
                             children: <Widget>[
                               AppButton.buildAppButton(
-                                  context, AppButtonType.PRIMARY, _lockedOut ? _countDownTxt : AppLocalization.of(context).unlock, Dimens.BUTTON_BOTTOM_DIMENS,
+                                  context, AppButtonType.PRIMARY, _lockedOut ? _countDownTxt : AppLocalization.of(context)!.unlock, Dimens.BUTTON_BOTTOM_DIMENS,
                                   onPressed: () {
                                 if (!_lockedOut) {
                                   _authenticate(transitions: true);

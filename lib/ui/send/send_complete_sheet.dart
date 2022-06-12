@@ -13,11 +13,11 @@ import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 
 class SendCompleteSheet extends StatefulWidget {
-  final String amountRaw;
-  final String destination;
-  final String contactName;
-  final String localAmount;
-  final String memo;
+  final String? amountRaw;
+  final String? destination;
+  final String? contactName;
+  final String? localAmount;
+  final String? memo;
 
   SendCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.memo}) : super();
 
@@ -25,8 +25,8 @@ class SendCompleteSheet extends StatefulWidget {
 }
 
 class _SendCompleteSheetState extends State<SendCompleteSheet> {
-  String amount;
-  String destinationAltered;
+  late String amount;
+  late String destinationAltered;
 
   @override
   void initState() {
@@ -49,7 +49,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
     //   }
     // }
     amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
-    destinationAltered = widget.destination.replaceAll("xrb_", "nano_");
+    destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
 
   @override
@@ -80,7 +80,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                     child: Icon(AppIcons.success, size: 100, color: StateContainer.of(context).curTheme.success),
                   ),
                   // Container for the Amount Text
-                  (widget.amountRaw == "0" && widget.memo != null && widget.memo.isNotEmpty)
+                  (widget.amountRaw == "0" && widget.memo != null && widget.memo!.isNotEmpty)
                       ? // memo text
                       Container(
                           padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
@@ -91,7 +91,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                             borderRadius: BorderRadius.circular(25),
                           ),
                           child: Text(
-                            widget.memo,
+                            widget.memo!,
                             style: AppStyles.textStyleParagraph(context),
                             textAlign: TextAlign.center,
                           ))
@@ -132,7 +132,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                                 TextSpan(
                                   text: widget.localAmount != null ? " (${widget.localAmount})" : "",
                                   style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.success.withOpacity(0.75),
+                                    color: StateContainer.of(context).curTheme.success!.withOpacity(0.75),
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w700,
                                     fontFamily: 'NunitoSans',
@@ -149,7 +149,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                       children: <Widget>[
                         // "SENT TO" text
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).sentTo, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context)!.sentTo, context),
                           style: TextStyle(
                             fontSize: 28.0,
                             fontWeight: FontWeight.w700,
@@ -180,7 +180,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).close, context),
+                      AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.close, context),
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pop();
                       }),

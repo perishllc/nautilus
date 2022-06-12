@@ -30,21 +30,21 @@ import 'package:flutter_svg/flutter_svg.dart';
 // Contact Details Sheet
 class BlockedDetailsSheet {
   User blocked;
-  String documentsDirectory;
+  String? documentsDirectory;
 
   BlockedDetailsSheet(this.blocked, this.documentsDirectory);
 
   // State variables
   bool _addressCopied = false;
   // Timer reference so we can cancel repeated events
-  Timer _addressCopiedTimer;
+  Timer? _addressCopiedTimer;
 
   List<Widget> getAliases(BuildContext context, User user) {
     var aliases = <Widget>[];
     if (user.aliases == null) {
       aliases = [
         // Contact nickname container
-        (user.nickname != null && user.nickname.isNotEmpty)
+        (user.nickname != null && user.nickname!.isNotEmpty)
             ? Container(
                 width: double.infinity,
                 margin: EdgeInsets.only(
@@ -57,7 +57,7 @@ class BlockedDetailsSheet {
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Text(
-                  "★" + user.nickname,
+                  "★" + user.nickname!,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -82,7 +82,7 @@ class BlockedDetailsSheet {
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Text(
-                  user.getDisplayName(),
+                  user.getDisplayName()!,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -95,9 +95,9 @@ class BlockedDetailsSheet {
             : SizedBox(),
       ];
     } else {
-      for (var i = 0; i < user.aliases.length; i += 2) {
-        String displayName = user.aliases[i];
-        String userType = user.aliases[i + 1];
+      for (var i = 0; i < user.aliases!.length; i += 2) {
+        String? displayName = user.aliases![i];
+        String? userType = user.aliases![i + 1];
         displayName = User.getDisplayNameWithType(displayName, userType);
         aliases.add(Container(
           width: double.infinity,
@@ -112,7 +112,7 @@ class BlockedDetailsSheet {
             borderRadius: BorderRadius.circular(25),
           ),
           child: Text(
-            displayName,
+            displayName!,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w600,
@@ -170,21 +170,21 @@ class BlockedDetailsSheet {
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
-                                  AppLocalization.of(context).removeBlocked,
-                                  AppLocalization.of(context).removeBlockedConfirmation.replaceAll('%1', blocked.getDisplayName()),
-                                  CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                                  AppLocalization.of(context)!.removeBlocked,
+                                  AppLocalization.of(context)!.removeBlockedConfirmation.replaceAll('%1', blocked.getDisplayName()!),
+                                  CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () {
                                 sl.get<DBHelper>().unblockUser(blocked).then((deleted) {
                                   if (deleted) {
                                     // Delete image if exists
                                     EventTaxiImpl.singleton().fire(BlockedRemovedEvent(user: blocked));
                                     EventTaxiImpl.singleton().fire(BlockedModifiedEvent(user: blocked));
-                                    UIUtil.showSnackbar(AppLocalization.of(context).blockedRemoved.replaceAll("%1", blocked.getDisplayName()), context);
+                                    UIUtil.showSnackbar(AppLocalization.of(context)!.blockedRemoved.replaceAll("%1", blocked.getDisplayName()!), context);
                                     Navigator.of(context).pop();
                                   } else {
                                     // TODO: - error for failing to delete contact
                                   }
                                 });
-                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
                             },
                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
                             padding: EdgeInsets.all(13.0),
@@ -199,7 +199,7 @@ class BlockedDetailsSheet {
                           child: Column(
                             children: <Widget>[
                               AutoSizeText(
-                                CaseChange.toUpperCase(AppLocalization.of(context).blockedHeader, context),
+                                CaseChange.toUpperCase(AppLocalization.of(context)!.blockedHeader, context),
                                 style: AppStyles.textStyleHeader(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
@@ -240,7 +240,7 @@ class BlockedDetailsSheet {
                             getAliases(context, blocked),
                             [
                               // Contact Name container
-                              (blocked.nickname != null && blocked.nickname.isNotEmpty)
+                              (blocked.nickname != null && blocked.nickname!.isNotEmpty)
                                   ? Container(
                                       width: double.infinity,
                                       margin: EdgeInsets.only(
@@ -253,7 +253,7 @@ class BlockedDetailsSheet {
                                         borderRadius: BorderRadius.circular(25),
                                       ),
                                       child: Text(
-                                        blocked.getDisplayName(),
+                                        blocked.getDisplayName()!,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
@@ -272,7 +272,7 @@ class BlockedDetailsSheet {
                                     _addressCopied = true;
                                   });
                                   if (_addressCopiedTimer != null) {
-                                    _addressCopiedTimer.cancel();
+                                    _addressCopiedTimer!.cancel();
                                   }
                                   _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
                                     setState(() {
@@ -289,14 +289,14 @@ class BlockedDetailsSheet {
                                     color: StateContainer.of(context).curTheme.backgroundDarkest,
                                     borderRadius: BorderRadius.circular(25),
                                   ),
-                                  child: UIUtil.threeLineAddressText(context, blocked.address,
+                                  child: UIUtil.threeLineAddressText(context, blocked.address!,
                                       type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
                                 ),
                               ),
                               // Address Copied text container
                               Container(
                                 margin: EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
+                                child: Text(_addressCopied ? AppLocalization.of(context)!.addressCopied : "",
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: StateContainer.of(context).curTheme.success,
@@ -312,7 +312,7 @@ class BlockedDetailsSheet {
                                       child: Column(
                                         children: <Widget>[
                                           Text(
-                                            CaseChange.toUpperCase(AppLocalization.of(context).aliases, context),
+                                            CaseChange.toUpperCase(AppLocalization.of(context)!.aliases, context),
                                             style: AppStyles.textStyleHeader(context),
                                           ),
                                         ],
@@ -343,7 +343,7 @@ class BlockedDetailsSheet {
                           Row(
                             children: <Widget>[
                               // Close Button
-                              AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                              AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
                                   onPressed: () {
                                 Navigator.pop(context);
                               }),

@@ -13,10 +13,10 @@ class NatriconSetting extends SettingSelectionItem {
   String getDisplayName(BuildContext context) {
     switch (setting) {
       case NatriconOptions.ON:
-        return AppLocalization.of(context).onStr;
+        return AppLocalization.of(context)!.onStr;
       case NatriconOptions.OFF:
       default:
-        return AppLocalization.of(context).off;
+        return AppLocalization.of(context)!.off;
     }
   }
 

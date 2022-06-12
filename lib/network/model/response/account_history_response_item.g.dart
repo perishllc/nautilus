@@ -9,13 +9,13 @@ part of 'account_history_response_item.dart';
 AccountHistoryResponseItem _$AccountHistoryResponseItemFromJson(Map<String, dynamic> json) {
   return AccountHistoryResponseItem(
     // custom since response structure changes slightly depending on whether we specify raw: true
-    type: (json['subtype'] as String) ?? (json['type'] as String),
-    subtype: json['subtype'] as String,
-    account: json['account'] as String,
-    amount: json['amount'] as String,
-    hash: json['hash'] as String,
-    height: _toInt(json['height'] as String),
-    link: json['link'] as String,
+    type: (json['subtype'] as String?) ?? (json['type'] as String?),
+    subtype: json['subtype'] as String?,
+    account: json['account'] as String?,
+    amount: json['amount'] as String?,
+    hash: json['hash'] as String?,
+    height: _toInt(json['height'] as String?),
+    link: json['link'] as String?,
   );
 }
 

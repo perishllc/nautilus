@@ -8,11 +8,11 @@ part of 'account_info_response.dart';
 
 AccountInfoResponse _$AccountInfoResponseFromJson(Map<String, dynamic> json) {
   return AccountInfoResponse(
-    frontier: json['frontier'] as String,
-    openBlock: json['open_block'] as String,
-    representativeBlock: json['representative_block'] as String,
-    balance: json['balance'] as String,
-    blockCount: _toInt(json['block_count'] as String),
+    frontier: json['frontier'] as String?,
+    openBlock: json['open_block'] as String?,
+    representativeBlock: json['representative_block'] as String?,
+    balance: json['balance'] as String?,
+    blockCount: _toInt(json['block_count'] as String?),
   );
 }
 

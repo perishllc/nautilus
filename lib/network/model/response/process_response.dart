@@ -5,9 +5,9 @@ part 'process_response.g.dart';
 @JsonSerializable()
 class ProcessResponse {
   @JsonKey(name: 'hash')
-  String hash;
+  String? hash;
 
-  ProcessResponse({String hash}) {
+  ProcessResponse({String? hash}) {
     this.hash = hash;
   }
 

@@ -92,13 +92,13 @@ abstract class SlideToDismissDelegate {
   final Map<SlideActionType, double> dismissThresholds;
 
   /// Called when the widget has been dismissed, after finishing resizing.
-  final DismissSlideActionCallback onDismissed;
+  final DismissSlideActionCallback? onDismissed;
 
   /// Called before the widget is dismissed. If the call returns false, the
   /// item will not be dismissed.
   ///
   /// If null, the widget will always be dismissed.
-  final SlideActionWillBeDismissed onWillDismiss;
+  final SlideActionWillBeDismissed? onWillDismiss;
 
   /// Specifies to close this slidable after canceling dismiss.
   ///
@@ -106,7 +106,7 @@ abstract class SlideToDismissDelegate {
   final bool closeOnCanceled;
 
   /// Called when the widget changes size (i.e., when contracting before being dismissed).
-  final VoidCallback onResize;
+  final VoidCallback? onResize;
 
   /// The amount of time the widget will spend contracting before [onDismissed] is called.
   ///
@@ -140,11 +140,11 @@ class SlideToDismissDrawerDelegate extends SlideToDismissDelegate {
   const SlideToDismissDrawerDelegate({
     Map<SlideActionType, double> dismissThresholds:
         const <SlideActionType, double>{},
-    VoidCallback onResize,
-    DismissSlideActionCallback onDismissed,
+    VoidCallback? onResize,
+    DismissSlideActionCallback? onDismissed,
     Duration resizeDuration = _kResizeDuration,
     double crossAxisEndOffset = 0.0,
-    SlideActionWillBeDismissed onWillDismiss,
+    SlideActionWillBeDismissed? onWillDismiss,
     bool closeOnCanceled = false,
   }) : super(
           dismissThresholds: dismissThresholds,
@@ -199,7 +199,7 @@ class SlideToDismissDrawerDelegate extends SlideToDismissDelegate {
                           position: actionExtent *
                               (ctx.state.actionCount - index - 1),
                           extent: extentAnimations[index].value,
-                          child: ctx.state.actionDelegate.build(
+                          child: ctx.state.actionDelegate!.build(
                               context,
                               displayIndex,
                               ctx.state.overallMoveAnimation,
@@ -262,8 +262,8 @@ class SlideActionBuilderDelegate extends SlideActionDelegate {
   ///
   /// The [builder] must not be null. The [actionCount] argument must not be positive.
   const SlideActionBuilderDelegate({
-    @required this.builder,
-    @required this.actionCount,
+    required this.builder,
+    required this.actionCount,
   }) : assert(actionCount != null && actionCount >= 0);
 
   /// Called to build slide actions.
@@ -297,11 +297,11 @@ class SlideActionListDelegate extends SlideActionDelegate {
   ///
   /// The [actions] argument must not be null.
   const SlideActionListDelegate({
-    @required this.actions,
+    required this.actions,
   });
 
   /// The slide actions.
-  final List<Widget> actions;
+  final List<Widget>? actions;
 
   @override
   int get actionCount => actions?.length ?? 0;
@@ -309,7 +309,7 @@ class SlideActionListDelegate extends SlideActionDelegate {
   @override
   Widget build(BuildContext context, int index, Animation<double> animation,
           SlidableRenderingMode step) =>
-      actions[index];
+      actions![index];
 }
 
 /// A handle to various properties useful while calling [SlidableDelegate.buildActions].
@@ -331,7 +331,7 @@ class SlidableDelegateContext {
   List<Widget> buildActions(BuildContext context) {
     return List.generate(
         state.actionCount,
-        (int index) => state.actionDelegate.build(context, index,
+        (int index) => state.actionDelegate!.build(context, index,
             state.actionsMoveAnimation, SlidableRenderingMode.slide));
   }
 
@@ -347,7 +347,7 @@ class SlidableDelegateContext {
         : constraints.maxHeight;
   }
 
-  Positioned createPositioned({Widget child, double extent, double position}) {
+  Positioned createPositioned({required Widget child, double? extent, double? position}) {
     return new Positioned(
       left: state.directionIsXAxis ? (showActions ? position : null) : 0.0,
       right: state.directionIsXAxis ? (showActions ? null : position) : 0.0,
@@ -377,7 +377,7 @@ abstract class SlidableDelegate {
   ///
   /// The [fastThreshold] argument must be positive.
   const SlidableDelegate({
-    double fastThreshold,
+    double? fastThreshold,
   })  : fastThreshold = fastThreshold ?? _kFastThreshold,
         assert(fastThreshold == null || fastThreshold >= .0,
             'fastThreshold must be positive');
@@ -390,7 +390,7 @@ abstract class SlidableDelegate {
 
 abstract class SlidableStackDelegate extends SlidableDelegate {
   const SlidableStackDelegate({
-    double fastThreshold,
+    double? fastThreshold,
   }) : super(fastThreshold: fastThreshold);
 
   @override
@@ -426,7 +426,7 @@ abstract class SlidableStackDelegate extends SlidableDelegate {
 /// A delegate that creates slide actions which stretch while the item is sliding.
 class SlidableStrechDelegate extends SlidableStackDelegate {
   const SlidableStrechDelegate({
-    double fastThreshold,
+    double? fastThreshold,
   }) : super(
           fastThreshold: fastThreshold,
         );
@@ -468,7 +468,7 @@ class SlidableStrechDelegate extends SlidableStackDelegate {
 /// A delegate that creates slide actions which stay behind the item while it's sliding.
 class SlidableBehindDelegate extends SlidableStackDelegate {
   const SlidableBehindDelegate({
-    double fastThreshold,
+    double? fastThreshold,
   }) : super(
           fastThreshold: fastThreshold,
         );
@@ -501,7 +501,7 @@ class SlidableBehindDelegate extends SlidableStackDelegate {
 /// A delegate that creates slide actions which follow the item while it's sliding.
 class SlidableScrollDelegate extends SlidableStackDelegate {
   const SlidableScrollDelegate({
-    double fastThreshold,
+    double? fastThreshold,
   }) : super(
           fastThreshold: fastThreshold,
         );
@@ -545,7 +545,7 @@ class SlidableScrollDelegate extends SlidableStackDelegate {
 /// A delegate that creates slide actions which animate like drawers while the item is sliding.
 class SlidableDrawerDelegate extends SlidableStackDelegate {
   const SlidableDrawerDelegate({
-    double fastThreshold,
+    double? fastThreshold,
   }) : super(
           fastThreshold: fastThreshold,
         );
@@ -561,7 +561,7 @@ class SlidableDrawerDelegate extends SlidableStackDelegate {
             state.actionsMoveAnimation;
         final double actionExtent =
             ctx.getMaxExtent(constraints) * state.widget.actionExtentRatio;
-        final SlideActionDelegate actionDelegate = state.actionDelegate;
+        final SlideActionDelegate? actionDelegate = state.actionDelegate;
 
         final animations = Iterable.generate(count).map((index) {
           return new Tween(
@@ -578,9 +578,9 @@ class SlidableDrawerDelegate extends SlidableStackDelegate {
                   // For the main actions we have to reverse the order if we want the last item at the bottom of the stack.
                   int displayIndex = showActions ? count - index - 1 : index;
                   return ctx.createPositioned(
-                    position: animations[index].value,
+                    position: animations[index].value as double?,
                     extent: actionExtent,
-                    child: actionDelegate.build(context, displayIndex,
+                    child: actionDelegate!.build(context, displayIndex,
                         actionsMoveAnimation, SlidableRenderingMode.slide),
                   );
                 }),
@@ -599,15 +599,15 @@ class SlidableController {
     this.onSlideIsOpenChanged,
   });
 
-  final ValueChanged<Animation<double>> onSlideAnimationChanged;
-  final ValueChanged<bool> onSlideIsOpenChanged;
-  bool _isSlideOpen;
+  final ValueChanged<Animation<double>?>? onSlideAnimationChanged;
+  final ValueChanged<bool?>? onSlideIsOpenChanged;
+  bool? _isSlideOpen;
 
-  Animation<double> _slideAnimation;
+  Animation<double>? _slideAnimation;
 
-  SlidableState _activeState;
-  SlidableState get activeState => _activeState;
-  set activeState(SlidableState value) {
+  SlidableState? _activeState;
+  SlidableState? get activeState => _activeState;
+  set activeState(SlidableState? value) {
     _activeState?._flingAnimationControllers();
 
     _activeState = value;
@@ -618,19 +618,19 @@ class SlidableController {
         _slideAnimation?.addListener(_handleSlideIsOpenChanged);
         if (_slideAnimation == null) {
           _isSlideOpen = false;
-          onSlideIsOpenChanged(_isSlideOpen);
+          onSlideIsOpenChanged!(_isSlideOpen);
         }
       }
-      onSlideAnimationChanged(value?.overallMoveAnimation);
+      onSlideAnimationChanged!(value?.overallMoveAnimation);
     }
   }
 
   void _handleSlideIsOpenChanged() {
     if (onSlideIsOpenChanged != null && _slideAnimation != null) {
-      final bool isOpen = _slideAnimation.value != 0.0;
+      final bool isOpen = _slideAnimation!.value != 0.0;
       if (isOpen != _isSlideOpen) {
         _isSlideOpen = isOpen;
-        onSlideIsOpenChanged(_isSlideOpen);
+        onSlideIsOpenChanged!(_isSlideOpen);
       }
     }
   }
@@ -659,21 +659,21 @@ class Slidable extends StatefulWidget {
   /// state of the dismissed item. Using keys causes the widgets to sync
   /// according to their keys and avoids this pitfall.
   Slidable({
-    Key key,
-    @required Widget child,
-    @required SlidableDelegate delegate,
-    List<Widget> actions,
-    List<Widget> secondaryActions,
+    Key? key,
+    required Widget child,
+    required SlidableDelegate delegate,
+    List<Widget>? actions,
+    List<Widget>? secondaryActions,
     double showAllActionsThreshold = 0.5,
     double actionExtentRatio = _kActionsExtentRatio,
     Duration movementDuration = _kMovementDuration,
     Axis direction = Axis.horizontal,
     bool closeOnScroll = true,
     bool enabled = true,
-    SlideToDismissDelegate slideToDismissDelegate,
-    SlidableController controller,
-    @required Function onTriggered,
-    Function onAnimationChanged,
+    SlideToDismissDelegate? slideToDismissDelegate,
+    SlidableController? controller,
+    required Function onTriggered,
+    Function? onAnimationChanged,
   }) : this.builder(
           key: key,
           child: child,
@@ -709,9 +709,9 @@ class Slidable extends StatefulWidget {
   /// state of the dismissed item. Using keys causes the widgets to sync
   /// according to their keys and avoids this pitfall.
   Slidable.builder({
-    Key key,
-    @required this.child,
-    @required this.delegate,
+    Key? key,
+    required this.child,
+    required this.delegate,
     this.actionDelegate,
     this.secondaryActionDelegate,
     this.showAllActionsThreshold = 0.5,
@@ -722,7 +722,7 @@ class Slidable extends StatefulWidget {
     this.enabled = true,
     this.slideToDismissDelegate,
     this.controller,
-    @required this.onTriggered,
+    required this.onTriggered,
     this.onAnimationChanged
   })  : assert(delegate != null),
         assert(direction != null),
@@ -746,21 +746,21 @@ class Slidable extends StatefulWidget {
   final Widget child;
 
   /// The controller that tracks the active [Slidable] and keep only one open.
-  final SlidableController controller;
+  final SlidableController? controller;
 
   /// A delegate that builds slide actions that appears when the child has been dragged
   /// down or to the right.
-  final SlideActionDelegate actionDelegate;
+  final SlideActionDelegate? actionDelegate;
 
   /// A delegate that builds slide actions that appears when the child has been dragged
   /// up or to the left.
-  final SlideActionDelegate secondaryActionDelegate;
+  final SlideActionDelegate? secondaryActionDelegate;
 
   /// A delegate that controls how the slide actions are animated;
   final SlidableDelegate delegate;
 
   /// A delegate that controls how to dismiss the item.
-  final SlideToDismissDelegate slideToDismissDelegate;
+  final SlideToDismissDelegate? slideToDismissDelegate;
 
   /// Relative ratio between one slide action and the extent of the child.
   final double actionExtentRatio;
@@ -792,10 +792,10 @@ class Slidable extends StatefulWidget {
 
   /// Triggled callback
   final Function onTriggered;
-  final Function onAnimationChanged;
+  final Function? onAnimationChanged;
 
   /// The state from the closest instance of this class that encloses the given context.
-  static SlidableState of(BuildContext context) {
+  static SlidableState? of(BuildContext context) {
     return context.findAncestorStateOfType<SlidableState>();
   }
 
@@ -819,7 +819,7 @@ abstract class SlidableStateView {
   double get totalActionsExtent;
 
   /// The current actions that have to be shown.
-  SlideActionDelegate get actionDelegate;
+  SlideActionDelegate? get actionDelegate;
 
   bool get directionIsXAxis;
 
@@ -843,14 +843,14 @@ class SlidableState extends State<Slidable>
           ..addListener(_handleShowAllActionsChanged);
   }
 
-  AnimationController _overallMoveController;
-  Animation<double> get overallMoveAnimation => _overallMoveController.view;
+  AnimationController? _overallMoveController;
+  Animation<double> get overallMoveAnimation => _overallMoveController!.view;
 
-  AnimationController _actionsMoveController;
-  Animation<double> get actionsMoveAnimation => _actionsMoveController.view;
+  AnimationController? _actionsMoveController;
+  Animation<double> get actionsMoveAnimation => _actionsMoveController!.view;
 
-  AnimationController _resizeController;
-  Animation<double> _resizeAnimation;
+  AnimationController? _resizeController;
+  Animation<double>? _resizeAnimation;
 
   double _dragExtent = 0.0;
   double get dragSign => _dragExtent.sign == 0 ? 1.0 : _dragExtent.sign;
@@ -858,9 +858,9 @@ class SlidableState extends State<Slidable>
   SlidableRenderingMode _renderingMode = SlidableRenderingMode.none;
   SlidableRenderingMode get renderingMode => _renderingMode;
 
-  ScrollPosition _scrollPosition;
+  ScrollPosition? _scrollPosition;
   bool _dragUnderway = false;
-  Size _sizePriorToCollapse;
+  Size? _sizePriorToCollapse;
   bool _dismissing = false;
 
   SlideActionType get actionType =>
@@ -871,7 +871,7 @@ class SlidableState extends State<Slidable>
   double get totalActionsExtent => widget.actionExtentRatio * (actionCount);
 
   double get dismissThreshold =>
-      widget.slideToDismissDelegate.dismissThresholds[actionType] ??
+      widget.slideToDismissDelegate!.dismissThresholds[actionType] ??
       _kDismissThreshold;
 
   bool get dismissible =>
@@ -885,7 +885,7 @@ class SlidableState extends State<Slidable>
           _resizeController?.isAnimating == true);
 
   /// The current actions that have to be shown.
-  SlideActionDelegate get actionDelegate =>
+  SlideActionDelegate? get actionDelegate =>
       actionType == SlideActionType.primary
           ? widget.actionDelegate
           : widget.secondaryActionDelegate;
@@ -893,8 +893,8 @@ class SlidableState extends State<Slidable>
   bool get directionIsXAxis => widget.direction == Axis.horizontal;
 
   double get _overallDragAxisExtent {
-    final Size size = context.size;
-    return directionIsXAxis ? size.width : size.height;
+    final Size? size = context.size;
+    return directionIsXAxis ? size!.width : size!.height;
   }
 
   double get _actionsDragAxisExtent {
@@ -922,20 +922,20 @@ class SlidableState extends State<Slidable>
     if (widget.closeOnScroll) {
       _scrollPosition = Scrollable.of(context)?.position;
       if (_scrollPosition != null)
-        _scrollPosition.isScrollingNotifier.addListener(_isScrollingListener);
+        _scrollPosition!.isScrollingNotifier.addListener(_isScrollingListener);
     }
   }
 
   void _removeScrollingNotifierListener() {
     if (_scrollPosition != null) {
-      _scrollPosition.isScrollingNotifier.removeListener(_isScrollingListener);
+      _scrollPosition!.isScrollingNotifier.removeListener(_isScrollingListener);
     }
   }
 
   @override
   void dispose() {
-    _overallMoveController.dispose();
-    _actionsMoveController.dispose();
+    _overallMoveController!.dispose();
+    _actionsMoveController!.dispose();
     _resizeController?.dispose();
     _removeScrollingNotifierListener();
     widget.controller?._activeState = null;
@@ -943,8 +943,8 @@ class SlidableState extends State<Slidable>
   }
 
   void open() {
-    _actionsMoveController.fling(velocity: 1.0);
-    _overallMoveController.animateTo(
+    _actionsMoveController!.fling(velocity: 1.0);
+    _overallMoveController!.animateTo(
       totalActionsExtent,
       curve: Curves.easeIn,
       duration: widget.movementDuration,
@@ -958,12 +958,12 @@ class SlidableState extends State<Slidable>
 
   void _flingAnimationControllers() {
     if (!_dismissing) {
-      _actionsMoveController.fling(velocity: -1.0);
-      _overallMoveController.fling(velocity: -1.0);
+      _actionsMoveController!.fling(velocity: -1.0);
+      _overallMoveController!.fling(velocity: -1.0);
     }
   }
 
-  void dismiss({SlideActionType actionType}) {
+  void dismiss({SlideActionType? actionType}) {
     if (dismissible) {
       _dismissing = true;
       actionType ??= this.actionType;
@@ -973,7 +973,7 @@ class SlidableState extends State<Slidable>
         });
       }
 
-      _overallMoveController.fling(velocity: 1.0);
+      _overallMoveController!.fling(velocity: 1.0);
     }
   }
 
@@ -981,7 +981,7 @@ class SlidableState extends State<Slidable>
     if (!widget.closeOnScroll || _scrollPosition == null) return;
 
     // When a scroll starts close this.
-    if (_scrollPosition.isScrollingNotifier.value) {
+    if (_scrollPosition!.isScrollingNotifier.value) {
       close();
     }
   }
@@ -992,38 +992,38 @@ class SlidableState extends State<Slidable>
     }
     _dragUnderway = true;
     widget.controller?.activeState = this;
-    _dragExtent = _actionsMoveController.value *
+    _dragExtent = _actionsMoveController!.value *
         _actionsDragAxisExtent *
         _dragExtent.sign;
-    if (_overallMoveController.isAnimating) {
-      _overallMoveController.stop();
+    if (_overallMoveController!.isAnimating) {
+      _overallMoveController!.stop();
     }
 
-    if (_actionsMoveController.isAnimating) {
-      _actionsMoveController.stop();
+    if (_actionsMoveController!.isAnimating) {
+      _actionsMoveController!.stop();
     }
   }
 
   void _handleDragUpdate(DragUpdateDetails details) {
-    if (widget.controller != null && widget.controller.activeState != this) {
+    if (widget.controller != null && widget.controller!.activeState != this) {
       return;
     } else if (_callbackComplete) {
       return;
     }
 
-    final double delta = details.primaryDelta;
+    final double delta = details.primaryDelta!;
     _dragExtent += delta;
     setState(() {
-      _overallMoveController.value = _dragExtent.abs() / _overallDragAxisExtent;
-      _actionsMoveController.value = _dragExtent.abs() / _actionsDragAxisExtent;
-      _renderingMode = _overallMoveController.value > totalActionsExtent
+      _overallMoveController!.value = _dragExtent.abs() / _overallDragAxisExtent;
+      _actionsMoveController!.value = _dragExtent.abs() / _actionsDragAxisExtent;
+      _renderingMode = _overallMoveController!.value > totalActionsExtent
           ? SlidableRenderingMode.dismiss
           : SlidableRenderingMode.slide;
     });
   }
 
   void _handleDragEnd(DragEndDetails details) {
-    if (widget.controller != null && widget.controller.activeState != this) {
+    if (widget.controller != null && widget.controller!.activeState != this) {
       return;
     }
 
@@ -1031,7 +1031,7 @@ class SlidableState extends State<Slidable>
     close();
   }
 
-  StreamSubscription<dynamic> _callbackStream;
+  StreamSubscription<dynamic>? _callbackStream;
   bool _callbackComplete = false;
   void _handleShowAllActionsStatusChanged(AnimationStatus status) {
     // Make sure to rebuild a last time, otherwise the slide action could
@@ -1059,7 +1059,7 @@ class SlidableState extends State<Slidable>
         return true;
       });
       if (_callbackStream != null) {
-        _callbackStream.cancel();
+        _callbackStream!.cancel();
       }
       _callbackStream = delayed.asStream().listen((_) {
         widget.onTriggered(false);
@@ -1071,17 +1071,17 @@ class SlidableState extends State<Slidable>
 
   void _handleShowAllActionsChanged() {
     if (widget.onAnimationChanged != null) {
-      widget.onAnimationChanged(actionsMoveAnimation);
+      widget.onAnimationChanged!(actionsMoveAnimation);
     }
   }
 
   void _handleDismissStatusChanged(AnimationStatus status) async {
     if (dismissible) {
       if (status == AnimationStatus.completed &&
-          _overallMoveController.value == _overallMoveController.upperBound &&
+          _overallMoveController!.value == _overallMoveController!.upperBound &&
           !_dragUnderway) {
-        if (widget.slideToDismissDelegate.onWillDismiss == null ||
-            await widget.slideToDismissDelegate.onWillDismiss(actionType)) {
+        if (widget.slideToDismissDelegate!.onWillDismiss == null ||
+            await widget.slideToDismissDelegate!.onWillDismiss!(actionType)) {
           _startResizeAnimation();
         } else {
           _dismissing = false;
@@ -1099,20 +1099,20 @@ class SlidableState extends State<Slidable>
   void _handleDismiss() {
     widget.controller?.activeState = null;
     final SlideToDismissDelegate slideToDismissDelegate =
-        widget.slideToDismissDelegate;
+        widget.slideToDismissDelegate!;
     if (slideToDismissDelegate.onDismissed != null) {
       assert(actionType != null);
-      slideToDismissDelegate.onDismissed(actionType);
+      slideToDismissDelegate.onDismissed!(actionType);
     }
   }
 
   void _startResizeAnimation() {
     assert(_overallMoveController != null);
-    assert(_overallMoveController.isCompleted);
+    assert(_overallMoveController!.isCompleted);
     assert(_resizeController == null);
     assert(_sizePriorToCollapse == null);
     final SlideToDismissDelegate slideToDismissDelegate =
-        widget.slideToDismissDelegate;
+        widget.slideToDismissDelegate!;
     if (slideToDismissDelegate.resizeDuration == null) {
       _handleDismiss();
     } else {
@@ -1120,25 +1120,25 @@ class SlidableState extends State<Slidable>
           duration: slideToDismissDelegate.resizeDuration, vsync: this)
         ..addListener(_handleResizeProgressChanged)
         ..addStatusListener((AnimationStatus status) => updateKeepAlive());
-      _resizeController.forward();
+      _resizeController!.forward();
       setState(() {
         _renderingMode = SlidableRenderingMode.resize;
         _sizePriorToCollapse = context.size;
         _resizeAnimation = new Tween<double>(begin: 1.0, end: 0.0).animate(
             new CurvedAnimation(
-                parent: _resizeController, curve: _kResizeTimeCurve));
+                parent: _resizeController!, curve: _kResizeTimeCurve));
       });
     }
   }
 
   void _handleResizeProgressChanged() {
-    final SlideToDismissDelegate slideToDismissDelegate =
+    final SlideToDismissDelegate? slideToDismissDelegate =
         widget.slideToDismissDelegate;
-    if (_resizeController.isCompleted) {
+    if (_resizeController!.isCompleted) {
       _handleDismiss();
     } else {
-      if (slideToDismissDelegate.onResize != null)
-        slideToDismissDelegate.onResize();
+      if (slideToDismissDelegate!.onResize != null)
+        slideToDismissDelegate.onResize!();
     }
   }
 
@@ -1148,9 +1148,9 @@ class SlidableState extends State<Slidable>
 
     if (!widget.enabled ||
         ((widget.actionDelegate == null ||
-                widget.actionDelegate.actionCount == 0) &&
+                widget.actionDelegate!.actionCount == 0) &&
             (widget.secondaryActionDelegate == null ||
-                widget.secondaryActionDelegate.actionCount == 0))) {
+                widget.secondaryActionDelegate!.actionCount == 0))) {
       return widget.child;
     }
 
@@ -1158,12 +1158,12 @@ class SlidableState extends State<Slidable>
 
     if (actionType == SlideActionType.primary &&
             widget.actionDelegate != null &&
-            widget.actionDelegate.actionCount > 0 ||
+            widget.actionDelegate!.actionCount > 0 ||
         actionType == SlideActionType.secondary &&
             widget.secondaryActionDelegate != null &&
-            widget.secondaryActionDelegate.actionCount > 0) {
+            widget.secondaryActionDelegate!.actionCount > 0) {
       if (dismissible) {
-        content = widget.slideToDismissDelegate.buildActions(
+        content = widget.slideToDismissDelegate!.buildActions(
           context,
           new SlidableDelegateContext(this),
           widget.delegate,
@@ -1172,8 +1172,8 @@ class SlidableState extends State<Slidable>
         if (_resizeAnimation != null) {
           // we've been dragged aside, and are now resizing.
           assert(() {
-            if (_resizeAnimation.status != AnimationStatus.forward) {
-              assert(_resizeAnimation.status == AnimationStatus.completed);
+            if (_resizeAnimation!.status != AnimationStatus.forward) {
+              assert(_resizeAnimation!.status == AnimationStatus.completed);
               throw new FlutterError(
                   'A dismissed Slidable widget is still part of the tree.\n'
                   'Make sure to implement the onDismissed handler and to immediately remove the Slidable\n'
@@ -1183,11 +1183,11 @@ class SlidableState extends State<Slidable>
           }());
 
           return new SizeTransition(
-              sizeFactor: _resizeAnimation,
+              sizeFactor: _resizeAnimation!,
               axis: directionIsXAxis ? Axis.vertical : Axis.horizontal,
               child: new SizedBox(
-                width: _sizePriorToCollapse.width,
-                height: _sizePriorToCollapse.height,
+                width: _sizePriorToCollapse!.width,
+                height: _sizePriorToCollapse!.height,
                 child: content,
               ));
         }
@@ -1221,14 +1221,14 @@ abstract class ClosableSlideAction extends StatelessWidget {
   ///
   /// The [closeOnTap] argument must not be null.
   const ClosableSlideAction({
-    Key key,
+    Key? key,
     this.onTap,
     this.closeOnTap = _kCloseOnTap,
   })  : assert(closeOnTap != null),
         super(key: key);
 
   /// A tap has occurred.
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   /// Whether close this after tap occurred.
   ///
@@ -1239,10 +1239,10 @@ abstract class ClosableSlideAction extends StatelessWidget {
   /// that encloses the given context.
   void _handleCloseAfterTap(BuildContext context) {
     if (onTap != null) {
-      onTap();
+      onTap!();
     }
 
-    Slidable.of(context).close();
+    Slidable.of(context)!.close();
   }
 
   Widget build(BuildContext context) {
@@ -1268,11 +1268,11 @@ class SlideAction extends ClosableSlideAction {
   ///
   /// The [closeOnTap] argument must not be null.
   SlideAction({
-    Key key,
-    @required this.child,
-    VoidCallback onTap,
-    Color color,
-    Decoration decoration,
+    Key? key,
+    required this.child,
+    VoidCallback? onTap,
+    Color? color,
+    Decoration? decoration,
     bool closeOnTap = _kCloseOnTap,
   })  : assert(child != null),
         assert(decoration == null || decoration.debugAssertIsValid()),
@@ -1288,7 +1288,7 @@ class SlideAction extends ClosableSlideAction {
           closeOnTap: closeOnTap,
         );
 
-  final Decoration decoration;
+  final Decoration? decoration;
 
   final Widget child;
 
@@ -1310,12 +1310,12 @@ class IconSlideAction extends ClosableSlideAction {
   ///
   /// The [closeOnTap] argument must not be null.
   const IconSlideAction({
-    Key key,
-    @required this.icon,
+    Key? key,
+    required this.icon,
     this.caption,
-    Color color,
+    Color? color,
     this.foregroundColor,
-    VoidCallback onTap,
+    VoidCallback? onTap,
     bool closeOnTap = _kCloseOnTap,
   })  : color = color ?? Colors.white,
         super(
@@ -1326,14 +1326,14 @@ class IconSlideAction extends ClosableSlideAction {
 
   final IconData icon;
 
-  final String caption;
+  final String? caption;
 
   /// The background color.
   ///
   /// Defaults to true.
   final Color color;
 
-  final Color foregroundColor;
+  final Color? foregroundColor;
 
   @override
   Widget buildAction(BuildContext context) {
@@ -1346,7 +1346,7 @@ class IconSlideAction extends ClosableSlideAction {
       overflow: TextOverflow.ellipsis,
       style: Theme.of(context)
           .primaryTextTheme
-          .caption
+          .caption!
           .copyWith(color: foregroundColor ?? estimatedColor),
     );
     return Container(

@@ -8,7 +8,7 @@ import 'package:nautilus_wallet_flutter/util/ninja/ninja_node.dart';
 class NinjaAPI {
   static const String API_URL = 'https://mynano.ninja/api';
 
-  static Future<String> getAndCacheAPIResponse() async {
+  static Future<String?> getAndCacheAPIResponse() async {
     String url = API_URL + '/accounts/verified';
     http.Response response = await http.get(Uri.parse(url), headers: {});
     if (response.statusCode != 200) {
@@ -19,8 +19,8 @@ class NinjaAPI {
   }
 
   /// Get verified nodes, return null if an error occured
-  static Future<List<NinjaNode>> getVerifiedNodes() async {
-    String httpResponseBody = await getAndCacheAPIResponse();
+  static Future<List<NinjaNode>?> getVerifiedNodes() async {
+    String? httpResponseBody = await getAndCacheAPIResponse();
     if (httpResponseBody == null) {
       return null;
     }
@@ -30,8 +30,8 @@ class NinjaAPI {
     return ninjaNodes;
   }
 
-  static Future<List<NinjaNode>> getCachedVerifiedNodes() async {
-    String rawJson = await sl.get<SharedPrefsUtil>().getNinjaAPICache();
+  static Future<List<NinjaNode>?> getCachedVerifiedNodes() async {
+    String? rawJson = await sl.get<SharedPrefsUtil>().getNinjaAPICache();
     if (rawJson == null) {
       return null;
     }

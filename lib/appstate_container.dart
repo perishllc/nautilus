@@ -80,9 +80,9 @@ class _InheritedStateContainer extends InheritedWidget {
 
   // You must pass through a child and your state.
   _InheritedStateContainer({
-    Key key,
-    @required this.data,
-    @required Widget child,
+    Key? key,
+    required this.data,
+    required Widget child,
   }) : super(key: key, child: child);
 
   // This is a built in method which you can use to check if
@@ -96,13 +96,13 @@ class StateContainer extends StatefulWidget {
   // You must pass through a child.
   final Widget child;
 
-  StateContainer({@required this.child});
+  StateContainer({required this.child});
 
   // This is the secret sauce. Write your own 'of' method that will behave
   // Exactly like MediaQuery.of and Theme.of
   // It basically says 'get the data from the widget of this type.
   static StateContainerState of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<_InheritedStateContainer>().data;
+    return context.dependOnInheritedWidgetOfExactType<_InheritedStateContainer>()!.data;
   }
 
   @override
@@ -119,15 +119,15 @@ class StateContainerState extends State<StateContainer> {
 
   // Minimum receive = 0.000001 NANO
   // String receiveThreshold = BigInt.from(10).pow(24).toString();
-  String receiveThreshold = "0";
+  String? receiveThreshold = "0";
   // min raw for receive
   // String minRawReceive = "0";
 
   // maximum number of queued messages before we just instantly update the UI:
   final int MAX_SEQUENTIAL_UPDATES = 5;
 
-  AppWallet wallet;
-  String currencyLocale;
+  AppWallet? wallet;
+  String? currencyLocale;
   Locale deviceLocale = Locale('en', 'US');
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
   LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
@@ -136,38 +136,38 @@ class StateContainerState extends State<StateContainer> {
   bool nyanoMode = false;
   String currencyMode = CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName();
   // Currently selected account
-  Account selectedAccount = Account(id: 1, name: "AB", index: 0, lastAccess: 0, selected: true);
+  Account? selectedAccount = Account(id: 1, name: "AB", index: 0, lastAccess: 0, selected: true);
   // Two most recently used accounts
-  Account recentLast;
-  Account recentSecondLast;
+  Account? recentLast;
+  Account? recentSecondLast;
 
   // Natricon / Nyanicon settings
-  bool natriconOn = false;
-  bool nyaniconOn = false;
+  bool? natriconOn = false;
+  bool? nyaniconOn = false;
   Map<String, String> natriconNonce = Map<String, String>();
   Map<String, String> nyaniconNonce = Map<String, String>();
 
   // Active alert
-  AlertResponseItem activeAlert;
-  AlertResponseItem settingsAlert;
+  AlertResponseItem? activeAlert;
+  AlertResponseItem? settingsAlert;
   bool activeAlertIsRead = true;
 
   // If callback is locked
   bool _locked = false;
 
   // Initial deep link
-  String initialDeepLink;
+  String? initialDeepLink;
   // Deep link changes
-  StreamSubscription _deepLinkSub;
+  StreamSubscription? _deepLinkSub;
   // branch subscription:
-  StreamSubscription<Map> _branchSub;
+  StreamSubscription<Map>? _branchSub;
 
-  List<String> pendingRequests = [];
-  List<String> alreadyReceived = [];
+  List<String?> pendingRequests = [];
+  List<String?> alreadyReceived = [];
 
   // List of Verified Nano Ninja Nodes
   bool nanoNinjaUpdated = false;
-  List<NinjaNode> nanoNinjaNodes;
+  List<NinjaNode>? nanoNinjaNodes;
 
   // nano.to username db up to date?
   // bool nautilusUsernamesUpdated = false;
@@ -175,14 +175,14 @@ class StateContainerState extends State<StateContainer> {
 
   // gifts!
   bool giftedWallet = false;
-  String giftedWalletSeed;
-  String giftedWalletAddress;
-  String giftedWalletAmountRaw;
-  String giftedWalletMemo;
-  String giftedWalletSenderAddress;
+  late String giftedWalletSeed;
+  String? giftedWalletAddress;
+  String? giftedWalletAmountRaw;
+  String? giftedWalletMemo;
+  late String giftedWalletSenderAddress;
 
   // When wallet is encrypted
-  String encryptedSecret;
+  String? encryptedSecret;
 
   void updateNinjaNodes(List<NinjaNode> list) {
     setState(() {
@@ -202,7 +202,7 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
-  void updateActiveAlert(AlertResponseItem active, AlertResponseItem settingsAlert) {
+  void updateActiveAlert(AlertResponseItem? active, AlertResponseItem? settingsAlert) {
     setState(() {
       this.activeAlert = active;
       if (settingsAlert != null) {
@@ -226,7 +226,7 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
-  String getNatriconNonce(String address) {
+  String? getNatriconNonce(String address) {
     if (this.natriconNonce.containsKey(address)) {
       return this.natriconNonce[address];
     }
@@ -236,7 +236,7 @@ class StateContainerState extends State<StateContainer> {
   Future<void> checkAndCacheNapiDatabases(bool forceUpdate) async {
     int currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     try {
-      int lastUpdatedUsers = int.parse(await sl.get<SharedPrefsUtil>().getLastNapiUsersCheck());
+      int lastUpdatedUsers = int.parse(await (sl.get<SharedPrefsUtil>().getLastNapiUsersCheck()));
 
       int day_in_seconds = 60 * 60 * 24;
       int week_in_seconds = day_in_seconds * 7;
@@ -261,11 +261,11 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> updateSolids() async {
-    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-      var solids = await sl.get<DBHelper>().getAccountSpecificSolids(wallet.address);
+    if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
+      var solids = await sl.get<DBHelper>().getAccountSpecificSolids(wallet!.address);
       // check for duplicates and remove:
       Set uuids = Set();
-      List<int> idsToRemove = [];
+      List<int?> idsToRemove = [];
       for (var solid in solids) {
         if (!uuids.contains(solid.uuid)) {
           uuids.add(solid.uuid);
@@ -279,14 +279,14 @@ class StateContainerState extends State<StateContainer> {
         solids.removeWhere((element) => element.id == id);
       }
       setState(() {
-        this.wallet.solids = solids;
-        EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet.solids));
+        this.wallet!.solids = solids;
+        EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet!.solids));
       });
     }
   }
 
   Future<void> updateTXMemos() async {
-    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+    if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
       EventTaxiImpl.singleton().fire(TXUpdateEvent());
     }
   }
@@ -302,7 +302,7 @@ class StateContainerState extends State<StateContainer> {
   // }
 
   Future<void> updateUnified(bool fastUpdate) async {
-    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+    if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
       setState(() {
         EventTaxiImpl.singleton().fire(UnifiedHomeEvent(fastUpdate: fastUpdate));
       });
@@ -319,7 +319,7 @@ class StateContainerState extends State<StateContainer> {
           localeString = languageLocales[0].languageCode;
         }
       }
-      AlertResponseItem alert = await sl.get<AccountService>().getAlert(localeString);
+      AlertResponseItem? alert = await sl.get<AccountService>().getAlert(localeString);
       if (alert == null) {
         updateActiveAlert(null, null);
         return;
@@ -346,7 +346,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> checkAndCacheNinjaAPIResponse() async {
-    List<NinjaNode> nodes;
+    List<NinjaNode>? nodes;
     if ((await sl.get<SharedPrefsUtil>().getNinjaAPICache()) == null) {
       nodes = await NinjaAPI.getVerifiedNodes();
       setState(() {
@@ -432,27 +432,27 @@ class StateContainerState extends State<StateContainer> {
   }
 
   // Subscriptions
-  StreamSubscription<ConnStatusEvent> _connStatusSub;
-  StreamSubscription<SubscribeEvent> _subscribeEventSub;
-  StreamSubscription<PriceEvent> _priceEventSub;
-  StreamSubscription<CallbackEvent> _callbackSub;
-  StreamSubscription<ErrorEvent> _errorSub;
-  StreamSubscription<FcmUpdateEvent> _fcmUpdateSub;
-  StreamSubscription<FcmMessageEvent> _fcmMessageSub;
-  StreamSubscription<AccountModifiedEvent> _accountModifiedSub;
+  StreamSubscription<ConnStatusEvent>? _connStatusSub;
+  StreamSubscription<SubscribeEvent>? _subscribeEventSub;
+  StreamSubscription<PriceEvent>? _priceEventSub;
+  StreamSubscription<CallbackEvent>? _callbackSub;
+  StreamSubscription<ErrorEvent>? _errorSub;
+  StreamSubscription<FcmUpdateEvent>? _fcmUpdateSub;
+  StreamSubscription<FcmMessageEvent>? _fcmMessageSub;
+  StreamSubscription<AccountModifiedEvent>? _accountModifiedSub;
 
   // Register RX event listenerss
   void _registerBus() {
     _subscribeEventSub = EventTaxiImpl.singleton().registerTo<SubscribeEvent>().listen((event) {
-      handleSubscribeResponse(event.response);
+      handleSubscribeResponse(event.response!);
     });
     _priceEventSub = EventTaxiImpl.singleton().registerTo<PriceEvent>().listen((event) {
       // PriceResponse's get pushed periodically, it wasn't a request we made so don't pop the queue
       // handle the null case in debug mode:
       setState(() {
         if (wallet != null) {
-          wallet.btcPrice = event.response.btcPrice?.toString();
-          wallet.localCurrencyPrice = event.response.price?.toString();
+          wallet!.btcPrice = event.response!.btcPrice?.toString();
+          wallet!.localCurrencyPrice = event.response!.price?.toString();
         }
       });
     });
@@ -467,12 +467,12 @@ class StateContainerState extends State<StateContainer> {
       handleCallbackResponse(event.response);
     });
     _errorSub = EventTaxiImpl.singleton().registerTo<ErrorEvent>().listen((event) {
-      handleErrorResponse(event.response);
+      handleErrorResponse(event.response!);
     });
     _fcmUpdateSub = EventTaxiImpl.singleton().registerTo<FcmUpdateEvent>().listen((event) {
       if (wallet != null) {
         sl.get<SharedPrefsUtil>().getNotificationsOn().then((enabled) {
-          sl.get<AccountService>().sendRequest(FcmUpdateRequest(account: wallet.address, fcmToken: event.token, enabled: enabled));
+          sl.get<AccountService>().sendRequest(FcmUpdateRequest(account: wallet!.address, fcmToken: event.token, enabled: enabled));
         });
       }
     });
@@ -483,14 +483,14 @@ class StateContainerState extends State<StateContainer> {
 
       if (event.message_list != null) {
         bool delay_update = false;
-        if (event.message_list.length > MAX_SEQUENTIAL_UPDATES) {
+        if (event.message_list!.length > MAX_SEQUENTIAL_UPDATES) {
           delay_update = true;
         }
-        for (var str_msg in event.message_list) {
+        for (var str_msg in event.message_list!) {
           var msg = jsonDecode(str_msg);
           await handleMessage(msg, delay_update: delay_update);
           // sleep between updates if there are more than 1 to make the UI feel snappier / show the animation:
-          if (event.message_list.length > 1 && event.message_list.length <= MAX_SEQUENTIAL_UPDATES) {
+          if (event.message_list!.length > 1 && event.message_list!.length <= MAX_SEQUENTIAL_UPDATES) {
             await Future.delayed(Duration(milliseconds: 600));
           }
         }
@@ -505,9 +505,9 @@ class StateContainerState extends State<StateContainer> {
     // Account has been deleted or name changed
     _accountModifiedSub = EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((event) {
       if (!event.deleted) {
-        if (event.account.index == selectedAccount.index) {
+        if (event.account!.index == selectedAccount!.index) {
           setState(() {
-            selectedAccount.name = event.account.name;
+            selectedAccount!.name = event.account!.name;
           });
         } else {
           updateRecentlyUsedAccounts();
@@ -515,19 +515,19 @@ class StateContainerState extends State<StateContainer> {
       } else {
         // Remove account
         updateRecentlyUsedAccounts().then((_) {
-          if (event.account.index == selectedAccount.index && recentLast != null) {
+          if (event.account!.index == selectedAccount!.index && recentLast != null) {
             sl.get<DBHelper>().changeAccount(recentLast);
             setState(() {
               selectedAccount = recentLast;
             });
             EventTaxiImpl.singleton().fire(AccountChangedEvent(account: recentLast, noPop: true));
-          } else if (event.account.index == selectedAccount.index && recentSecondLast != null) {
+          } else if (event.account!.index == selectedAccount!.index && recentSecondLast != null) {
             sl.get<DBHelper>().changeAccount(recentSecondLast);
             setState(() {
               selectedAccount = recentSecondLast;
             });
             EventTaxiImpl.singleton().fire(AccountChangedEvent(account: recentSecondLast, noPop: true));
-          } else if (event.account.index == selectedAccount.index) {
+          } else if (event.account!.index == selectedAccount!.index) {
             getSeed().then((seed) {
               sl.get<DBHelper>().getMainAccount(seed).then((mainAccount) {
                 sl.get<DBHelper>().changeAccount(mainAccount);
@@ -543,7 +543,7 @@ class StateContainerState extends State<StateContainer> {
       }
     });
     // Deep link has been updated
-    _deepLinkSub = getLinksStream().listen((String link) {
+    _deepLinkSub = getLinksStream().listen((String? link) {
       setState(() {
         initialDeepLink = link;
       });
@@ -584,46 +584,46 @@ class StateContainerState extends State<StateContainer> {
 
   void _destroyBus() {
     if (_connStatusSub != null) {
-      _connStatusSub.cancel();
+      _connStatusSub!.cancel();
     }
     if (_subscribeEventSub != null) {
-      _subscribeEventSub.cancel();
+      _subscribeEventSub!.cancel();
     }
     if (_priceEventSub != null) {
-      _priceEventSub.cancel();
+      _priceEventSub!.cancel();
     }
     if (_callbackSub != null) {
-      _callbackSub.cancel();
+      _callbackSub!.cancel();
     }
     if (_errorSub != null) {
-      _errorSub.cancel();
+      _errorSub!.cancel();
     }
     if (_fcmUpdateSub != null) {
-      _fcmUpdateSub.cancel();
+      _fcmUpdateSub!.cancel();
     }
     if (_fcmMessageSub != null) {
-      _fcmMessageSub.cancel();
+      _fcmMessageSub!.cancel();
     }
     if (_accountModifiedSub != null) {
-      _accountModifiedSub.cancel();
+      _accountModifiedSub!.cancel();
     }
     if (_deepLinkSub != null) {
-      _deepLinkSub.cancel();
+      _deepLinkSub!.cancel();
     }
     if (_branchSub != null) {
-      _branchSub.cancel();
+      _branchSub!.cancel();
     }
   }
 
   // Update the global wallet instance with a new address
-  Future<void> updateWallet({Account account}) async {
-    String address = NanoUtil.seedToAddress(await getSeed(), account.index);
+  Future<void> updateWallet({required Account account}) async {
+    String address = NanoUtil.seedToAddress(await getSeed(), account.index!);
     account.address = address;
     selectedAccount = account;
     updateRecentlyUsedAccounts();
     // get username if it exists:
-    User user = await sl.get<DBHelper>().getUserWithAddress(address);
-    String walletUsername;
+    User? user = await sl.get<DBHelper>().getUserWithAddress(address);
+    String? walletUsername;
     if (user != null && user.username != null) {
       walletUsername = user.username;
     }
@@ -698,21 +698,21 @@ class StateContainerState extends State<StateContainer> {
   }
 
   // Change natricon setting
-  void setNatriconOn(bool natriconOn) {
+  void setNatriconOn(bool? natriconOn) {
     setState(() {
       this.natriconOn = natriconOn;
     });
   }
 
   // Change nyanicon setting
-  void setNyaniconOn(bool nyaniconOn) {
+  void setNyaniconOn(bool? nyaniconOn) {
     setState(() {
       this.nyaniconOn = nyaniconOn;
     });
   }
 
   // Change min raw setting
-  void setMinRawReceive(String minRaw) {
+  void setMinRawReceive(String? minRaw) {
     setState(() {
       this.receiveThreshold = minRaw;
     });
@@ -755,11 +755,11 @@ class StateContainerState extends State<StateContainer> {
   /// Handle account_subscribe response
   void handleSubscribeResponse(SubscribeResponse response) {
     // get the preference for the receive threshold:
-    sl.get<SharedPrefsUtil>().getMinRawReceive().then((String minRaw) {
+    sl.get<SharedPrefsUtil>().getMinRawReceive().then((String? minRaw) {
       receiveThreshold = minRaw;
       // Combat spam by raising minimum receive if pending block count is large enough
       // only override the user preference if it was set to 0 (default)
-      if (response.pendingCount != null && response.pendingCount > 50 && minRaw == "0") {
+      if (response.pendingCount != null && response.pendingCount! > 50 && minRaw == "0") {
         // Bump min receive to 0.05 NANO
         receiveThreshold = BigInt.from(5).pow(28).toString();
       }
@@ -773,24 +773,24 @@ class StateContainerState extends State<StateContainer> {
     });
     // Server gives us a UUID for future requests on subscribe
     if (response.uuid != null) {
-      sl.get<SharedPrefsUtil>().setUuid(response.uuid);
+      sl.get<SharedPrefsUtil>().setUuid(response.uuid!);
     }
     EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(confirmationHeight: response.confirmationHeight));
     setState(() {
-      wallet.loading = false;
-      wallet.frontier = response.frontier;
-      wallet.representative = response.representative;
-      wallet.representativeBlock = response.representativeBlock;
-      wallet.openBlock = response.openBlock;
-      wallet.blockCount = response.blockCount;
-      wallet.confirmationHeight = response.confirmationHeight;
+      wallet!.loading = false;
+      wallet!.frontier = response.frontier;
+      wallet!.representative = response.representative;
+      wallet!.representativeBlock = response.representativeBlock;
+      wallet!.openBlock = response.openBlock;
+      wallet!.blockCount = response.blockCount;
+      wallet!.confirmationHeight = response.confirmationHeight!;
       if (response.balance == null) {
-        wallet.accountBalance = BigInt.from(0);
+        wallet!.accountBalance = BigInt.from(0);
       } else {
-        wallet.accountBalance = BigInt.tryParse(response.balance);
+        wallet!.accountBalance = BigInt.tryParse(response.balance!)!;
       }
-      wallet.localCurrencyPrice = response.price.toString();
-      wallet.btcPrice = response.btcPrice.toString();
+      wallet!.localCurrencyPrice = response.price.toString();
+      wallet!.btcPrice = response.btcPrice.toString();
       sl.get<AccountService>().pop();
       sl.get<AccountService>().processQueue();
     });
@@ -798,51 +798,51 @@ class StateContainerState extends State<StateContainer> {
 
   /// Handle callback response
   /// Typically this means we need to pocket transactions
-  Future<void> handleCallbackResponse(CallbackResponse resp) async {
+  Future<void> handleCallbackResponse(CallbackResponse? resp) async {
     if (_locked) {
       return;
     }
-    log.d("Received callback ${json.encode(resp.toJson())}");
+    log.d("Received callback ${json.encode(resp!.toJson())}");
     if (resp.isSend != "true") {
       sl.get<AccountService>().processQueue();
       return;
     }
-    PendingResponseItem pendingItem = PendingResponseItem(hash: resp.hash, source: resp.account, amount: resp.amount);
-    String receivedHash = await handlePendingItem(pendingItem, link_as_account: resp.block.linkAsAccount);
+    PendingResponseItem pendingItem = PendingResponseItem(hash: resp.hash!, source: resp.account!, amount: resp.amount!);
+    String? receivedHash = await handlePendingItem(pendingItem, link_as_account: resp.block!.linkAsAccount);
     if (receivedHash != null) {
       AccountHistoryResponseItem histItem =
           AccountHistoryResponseItem(type: BlockTypes.RECEIVE, account: resp.account, amount: resp.amount, hash: receivedHash, link: resp.hash);
       log.d("Received histItem ${json.encode(histItem.toJson())}");
-      if (!wallet.history.contains(histItem)) {
+      if (!wallet!.history!.contains(histItem)) {
         setState(() {
           // TODO: not necessarily the best way to handle this, should get real height:
-          histItem.height = wallet.confirmationHeight + 1;
-          wallet.confirmationHeight += 1;
-          wallet.history.insert(0, histItem);
-          wallet.accountBalance += BigInt.parse(resp.amount);
+          histItem.height = wallet!.confirmationHeight + 1;
+          wallet!.confirmationHeight += 1;
+          wallet!.history!.insert(0, histItem);
+          wallet!.accountBalance += BigInt.parse(resp.amount!);
           // Send list to home screen
-          EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+          EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
           updateUnified(false);
         });
       }
     }
   }
 
-  Future<String> handlePendingItem(PendingResponseItem item, {String link_as_account}) async {
-    if (pendingRequests.contains(item.hash)) {
+  Future<String?> handlePendingItem(PendingResponseItem? item, {String? link_as_account}) async {
+    if (pendingRequests.contains(item?.hash)) {
       return null;
     }
-    pendingRequests.add(item.hash);
-    BigInt amountBigInt = BigInt.tryParse(item.amount);
+    pendingRequests.add(item?.hash);
+    BigInt? amountBigInt = BigInt.tryParse(item!.amount!);
     sl.get<Logger>().d("Handling ${item.hash} pending");
     if (amountBigInt != null) {
       // don't process if under the receive threshold:
-      if (amountBigInt < BigInt.parse(receiveThreshold)) {
+      if (amountBigInt < BigInt.parse(receiveThreshold!)) {
         pendingRequests.remove(item.hash);
         return null;
       }
       // don't process if the user / address is blocked:
-      if (await sl.get<DBHelper>().blockedExistsWithAddress(item.source)) {
+      if (await sl.get<DBHelper>().blockedExistsWithAddress(item.source!)) {
         pendingRequests.remove(item.hash);
         log.d("Blocked send from address: ${item.source}");
         return null;
@@ -850,14 +850,14 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // are we on the wrong account?
-    if (link_as_account != null && link_as_account != wallet.address) {
+    if (link_as_account != null && link_as_account != wallet!.address) {
       // we aren't on the current account for this receive:
       log.d("Receive is for a different account: ${link_as_account}");
       // HANDLE IT: 😔
 
       AccountInfoResponse accountResp = await sl.get<AccountService>().getAccountInfo(link_as_account);
       String seed = await getSeed();
-      Account correctAccount;
+      Account? correctAccount;
       List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
       for (int i = 0; i < accounts.length; i++) {
         if (accounts[i].address == link_as_account) {
@@ -872,15 +872,15 @@ class StateContainerState extends State<StateContainer> {
         return null;
       }
 
-      String privKey = NanoUtil.seedToPrivate(seed, correctAccount.index);
+      String privKey = NanoUtil.seedToPrivate(seed, correctAccount.index!);
 
       // publish open:
       if (accountResp.openBlock == null) {
         sl.get<Logger>().d("Handling ${item.hash} as open");
         try {
           ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, link_as_account, privKey);
-          wallet.openBlock = resp.hash;
-          wallet.frontier = resp.hash;
+          wallet!.openBlock = resp.hash;
+          wallet!.frontier = resp.hash;
           pendingRequests.remove(item.hash);
           alreadyReceived.add(item.hash);
           // don't add to history list since we're not on the current account
@@ -893,7 +893,7 @@ class StateContainerState extends State<StateContainer> {
       } else {
         try {
           ProcessResponse resp =
-              await sl.get<AccountService>().requestReceive(wallet.representative, accountResp.frontier, item.amount, item.hash, link_as_account, privKey);
+              await sl.get<AccountService>().requestReceive(wallet!.representative, accountResp.frontier, item.amount, item.hash, link_as_account, privKey);
           // wallet.frontier = resp.hash;
           pendingRequests.remove(item.hash);
           alreadyReceived.add(item.hash);
@@ -939,13 +939,13 @@ class StateContainerState extends State<StateContainer> {
       // don't add to the history view since we're on the wrong account:
       return null;
       // throw Exception("Not on the correct account to receive this");
-    } else if (wallet.openBlock == null) {
+    } else if (wallet!.openBlock == null) {
       // Publish open
       sl.get<Logger>().d("Handling ${item.hash} as open");
       try {
-        ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet.address, await _getPrivKey());
-        wallet.openBlock = resp.hash;
-        wallet.frontier = resp.hash;
+        ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet!.address, await _getPrivKey());
+        wallet!.openBlock = resp.hash;
+        wallet!.frontier = resp.hash;
         pendingRequests.remove(item.hash);
         alreadyReceived.add(item.hash);
         return resp.hash;
@@ -957,10 +957,11 @@ class StateContainerState extends State<StateContainer> {
       // Publish receive
       sl.get<Logger>().d("Handling ${item.hash} as receive");
       try {
-        ProcessResponse resp =
-            await sl.get<AccountService>().requestReceive(wallet.representative, wallet.frontier, item.amount, item.hash, wallet.address, await _getPrivKey());
+        ProcessResponse resp = await sl
+            .get<AccountService>()
+            .requestReceive(wallet!.representative, wallet!.frontier, item.amount, item.hash, wallet!.address, await _getPrivKey());
 
-        wallet.frontier = resp.hash;
+        wallet!.frontier = resp.hash;
         pendingRequests.remove(item.hash);
         alreadyReceived.add(item.hash);
         return resp.hash;
@@ -975,7 +976,7 @@ class StateContainerState extends State<StateContainer> {
   /// Request balances for accounts in our database
   Future<void> _requestBalances() async {
     List<Account> accounts = await sl.get<DBHelper>().getAccounts(await getSeed());
-    List<String> addressToRequest = List();
+    List<String?> addressToRequest = [];
     accounts.forEach((account) {
       if (account.address != null) {
         addressToRequest.add(account.address);
@@ -984,8 +985,8 @@ class StateContainerState extends State<StateContainer> {
     AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances(addressToRequest);
     sl.get<DBHelper>().getAccounts(await getSeed()).then((accounts) {
       accounts.forEach((account) {
-        resp.balances.forEach((address, balance) {
-          String combinedBalance = (BigInt.tryParse(balance.balance) + BigInt.tryParse(balance.pending)).toString();
+        resp.balances!.forEach((address, balance) {
+          String combinedBalance = (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.pending!)!).toString();
           if (address == account.address && combinedBalance != account.balance) {
             sl.get<DBHelper>().updateAccountBalance(account, combinedBalance);
           }
@@ -995,10 +996,10 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> requestUpdate({bool pending = true}) async {
-    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-      String uuid = await sl.get<SharedPrefsUtil>().getUuid();
-      String fcmToken;
-      bool notificationsEnabled;
+    if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
+      String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
+      String? fcmToken;
+      bool? notificationsEnabled;
       try {
         fcmToken = await FirebaseMessaging.instance.getToken();
         notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
@@ -1008,8 +1009,8 @@ class StateContainerState extends State<StateContainer> {
       }
       sl.get<AccountService>().clearQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
-      sl.get<AccountService>().queueRequest(AccountHistoryRequest(account: wallet.address, raw: true));
+          account: wallet!.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
+      sl.get<AccountService>().queueRequest(AccountHistoryRequest(account: wallet!.address, raw: true));
       sl.get<AccountService>().processQueue();
       // Request account history
 
@@ -1017,25 +1018,25 @@ class StateContainerState extends State<StateContainer> {
       // This is can still be improved because history excludes change/open, blockCount doesn't
       // Get largest count we have + 5 (just a safe-buffer)
       int count = 500;
-      if (wallet.history != null && wallet.history.length > 1) {
+      if (wallet!.history != null && wallet!.history!.length > 1) {
         count = 50;
       }
       try {
-        AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet.address, count: count, raw: true);
+        AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet!.address, count: count, raw: true);
         _requestBalances();
         bool postedToHome = false;
         // Iterate list in reverse (oldest to newest block)
-        for (AccountHistoryResponseItem item in resp.history) {
+        for (AccountHistoryResponseItem item in resp.history!) {
           // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
-          if (!wallet.history.contains(item)) {
+          if (!wallet!.history!.contains(item)) {
             int startIndex = 0; // Index to start inserting into the list
-            int lastIndex = resp.history.indexWhere(
-                (item) => wallet.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
-            lastIndex = lastIndex <= 0 ? resp.history.length : lastIndex;
+            int lastIndex = resp.history!.indexWhere(
+                (item) => wallet!.history!.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+            lastIndex = lastIndex <= 0 ? resp.history!.length : lastIndex;
             setState(() {
-              wallet.history.insertAll(0, resp.history.getRange(startIndex, lastIndex));
+              wallet!.history!.insertAll(0, resp.history!.getRange(startIndex, lastIndex));
               // Send list to home screen
-              EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+              EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
             });
             if ((lastIndex - startIndex) > MAX_SEQUENTIAL_UPDATES) {
               await updateUnified(true);
@@ -1047,11 +1048,11 @@ class StateContainerState extends State<StateContainer> {
           }
         }
         setState(() {
-          wallet.historyLoading = false;
+          wallet!.historyLoading = false;
         });
         // just in case we didn't post to home screen
         if (!postedToHome) {
-          EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+          EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
           await updateUnified(false);
         }
 
@@ -1060,16 +1061,17 @@ class StateContainerState extends State<StateContainer> {
         // Receive pendings
         if (pending) {
           pendingRequests.clear();
-          PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveThreshold);
+          PendingResponse pendingResp =
+              await sl.get<AccountService>().getPending(wallet!.address, max(wallet!.blockCount ?? 0, 10), threshold: receiveThreshold);
 
           // for unfulfilled payments:
           List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
 
           // Initiate receive/open request for each pending
-          for (String hash in pendingResp.blocks.keys) {
-            PendingResponseItem pendingResponseItem = pendingResp.blocks[hash];
-            pendingResponseItem.hash = hash;
-            String receivedHash = await handlePendingItem(pendingResponseItem);
+          for (String hash in pendingResp.blocks!.keys) {
+            PendingResponseItem? pendingResponseItem = pendingResp.blocks![hash];
+            pendingResponseItem?.hash = hash;
+            String? receivedHash = await handlePendingItem(pendingResponseItem);
             if (receivedHash != null) {
               // payments:
               // check to see if this fulfills a payment request:
@@ -1079,8 +1081,8 @@ class StateContainerState extends State<StateContainer> {
                 // check destination of this request is where we're sending to:
                 // check to make sure we made the request:
                 // check to make sure the amounts are the same:
-                if (txData.from_address == wallet.address &&
-                    txData.to_address == pendingResponseItem.source &&
+                if (txData.from_address == wallet!.address &&
+                    txData.to_address == pendingResponseItem!.source &&
                     txData.amount_raw == pendingResponseItem.amount &&
                     txData.is_fulfilled == false) {
                   // this is the payment we're fulfilling
@@ -1095,19 +1097,19 @@ class StateContainerState extends State<StateContainer> {
 
               AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
                   type: BlockTypes.RECEIVE,
-                  account: pendingResponseItem.source,
+                  account: pendingResponseItem!.source,
                   amount: pendingResponseItem.amount,
                   hash: receivedHash,
                   link: pendingResponseItem.hash);
-              if (!wallet.history.contains(histItem)) {
+              if (!wallet!.history!.contains(histItem)) {
                 setState(() {
                   // TODO: not necessarily the best way to handle this, should get real height:
-                  histItem.height = wallet.confirmationHeight + 1;
-                  wallet.confirmationHeight += 1;
-                  wallet.history.insert(0, histItem);
-                  wallet.accountBalance += BigInt.parse(pendingResponseItem.amount);
+                  histItem.height = wallet!.confirmationHeight + 1;
+                  wallet!.confirmationHeight += 1;
+                  wallet!.history!.insert(0, histItem);
+                  wallet!.accountBalance += BigInt.parse(pendingResponseItem.amount!);
                   // Send list to home screen
-                  EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+                  EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
                   updateUnified(false);
                 });
               }
@@ -1122,10 +1124,10 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> requestSubscribe() async {
-    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-      String uuid = await sl.get<SharedPrefsUtil>().getUuid();
-      String fcmToken;
-      bool notificationsEnabled;
+    if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
+      String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
+      String? fcmToken;
+      bool? notificationsEnabled;
       try {
         fcmToken = await FirebaseMessaging.instance.getToken();
         notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
@@ -1135,19 +1137,19 @@ class StateContainerState extends State<StateContainer> {
       }
       sl.get<AccountService>().removeSubscribeHistoryPendingFromQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
+          account: wallet!.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().processQueue();
     }
   }
 
-  Future<String> decryptMessageCurrentAccount(String memo_enc, String fromAddress, String toAddress) async {
+  Future<String?> decryptMessageCurrentAccount(String memo_enc, String? fromAddress, String? toAddress) async {
     // decrypt the memo:
-    Account correctAccount;
+    Account? correctAccount;
     // find the right account index:
-    if (selectedAccount.address == toAddress) {
+    if (selectedAccount!.address == toAddress) {
       correctAccount = selectedAccount;
     } else {
-      String seed = await getSeed();
+      String? seed = await getSeed();
       List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
       for (int i = 0; i < accounts.length; i++) {
         if (accounts[i].address == toAddress) {
@@ -1162,27 +1164,27 @@ class StateContainerState extends State<StateContainer> {
       return null;
     }
 
-    String privKey = NanoUtil.seedToPrivate(await getSeed(), correctAccount.index);
-    String memo = await Box.decrypt(memo_enc, fromAddress, privKey);
+    String privKey = NanoUtil.seedToPrivate(await (getSeed() as FutureOr<String>), correctAccount.index!);
+    String memo = await Box.decrypt(memo_enc, fromAddress!, privKey);
     return memo;
   }
 
   Future<void> handlePaymentRequest(dynamic data, {bool delay_update = false}) async {
     log.d("handling payment_request from: ${data['requesting_account']} : ${data['account']}");
-    String amount_raw = data['amount_raw'];
-    String requesting_account = data['requesting_account'];
-    String memo_enc = data['memo_enc'];
-    String request_time = data['request_time'];
-    String to_address = data['account'];
+    String? amount_raw = data['amount_raw'];
+    String? requesting_account = data['requesting_account'];
+    String? memo_enc = data['memo_enc'];
+    String? request_time = data['request_time'];
+    String? to_address = data['account'];
     String uuid = data['uuid'];
-    String local_uuid = data['local_uuid'];
+    String? local_uuid = data['local_uuid'];
 
-    if (wallet == null || wallet.address == null || !Address(wallet.address).isValid()) {
+    if (wallet == null || wallet!.address == null || !Address(wallet!.address).isValid()) {
       throw Exception("wallet or wallet.address is null!");
     }
 
-    int currentBlockHeightInList = wallet.history?.length > 0 ? (wallet?.history[0]?.height + 1) : 1;
-    String lastBlockHash = wallet?.history?.length > 0 ? wallet?.history[0]?.hash : null;
+    int currentBlockHeightInList = wallet!.history!.length > 0 ? (wallet!.history![0].height! + 1) : 1;
+    String? lastBlockHash = wallet!.history!.length > 0 ? wallet?.history![0].hash : null;
 
     var txData = new TXData(
       amount_raw: amount_raw,
@@ -1200,7 +1202,7 @@ class StateContainerState extends State<StateContainer> {
 
     // decrypt the memo:
     if (memo_enc != null && memo_enc.isNotEmpty) {
-      String memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
+      String? memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
       if (memo != null) {
         txData.memo = memo;
       } else {
@@ -1234,7 +1236,7 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
+    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
 
     if (!delay_update) {
       await updateSolids();
@@ -1244,20 +1246,20 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> handlePaymentMessage(dynamic data, {bool delay_update = false}) async {
     log.d("handling payment_message from: ${data['requesting_account']} : ${data['account']}");
-    String amount_raw = data['amount_raw'];
-    String requesting_account = data['requesting_account'];
-    String memo_enc = data['memo_enc'];
-    String request_time = data['request_time'];
-    String to_address = data['account'];
+    String? amount_raw = data['amount_raw'];
+    String? requesting_account = data['requesting_account'];
+    String? memo_enc = data['memo_enc'];
+    String? request_time = data['request_time'];
+    String? to_address = data['account'];
     String uuid = data['uuid'];
-    String local_uuid = data['local_uuid'];
+    String? local_uuid = data['local_uuid'];
 
-    if (wallet == null || wallet.address == null || !Address(wallet.address).isValid()) {
+    if (wallet == null || wallet!.address == null || !Address(wallet!.address).isValid()) {
       throw Exception("wallet or wallet.address is null!");
     }
 
-    int currentBlockHeightInList = wallet.history?.length > 0 ? (wallet?.history[0]?.height + 1) : 1;
-    String lastBlockHash = wallet?.history?.length > 0 ? wallet?.history[0]?.hash : null;
+    int currentBlockHeightInList = wallet!.history!.length > 0 ? (wallet!.history![0].height! + 1) : 1;
+    String? lastBlockHash = wallet!.history!.length > 0 ? wallet?.history![0].hash : null;
 
     var txData = new TXData(
       amount_raw: amount_raw,
@@ -1276,7 +1278,7 @@ class StateContainerState extends State<StateContainer> {
 
     // decrypt the memo:
     if (memo_enc != null && memo_enc.isNotEmpty) {
-      String memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
+      String? memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
       if (memo != null) {
         txData.memo = memo;
       } else {
@@ -1310,7 +1312,7 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
+    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
 
     if (!delay_update) {
       await updateSolids();
@@ -1320,23 +1322,23 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> handlePaymentRecord(dynamic data, {bool delay_update = false}) async {
     print("handling payment_record from: ${data['requesting_account']} : ${data['account']}");
-    String amount_raw = data['amount_raw'];
-    String requesting_account = data['requesting_account'];
-    String memo_enc = data['memo_enc'];
-    String request_time = data['request_time'];
-    String to_address = data['account'];
-    String fulfillment_time = data['fulfillment_time'];
-    String block = data['block'];
-    String uuid = data['uuid'];
-    String local_uuid = data['local_uuid'];
+    String? amount_raw = data['amount_raw'];
+    String? requesting_account = data['requesting_account'];
+    String? memo_enc = data['memo_enc'];
+    String? request_time = data['request_time'];
+    String? to_address = data['account'];
+    String? fulfillment_time = data['fulfillment_time'];
+    String? block = data['block'];
+    String? uuid = data['uuid'];
+    String? local_uuid = data['local_uuid'];
 
     if (data.containsKey("is_request")) {
-      if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-        TXData txData;
-        TXData oldTXData;
+      if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
+        TXData? txData;
+        TXData? oldTXData;
 
         // we have to check if this payment is already in the db:
-        txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+        txData = await sl.get<DBHelper>().getTXDataByUUID(uuid!);
         if (txData != null) {
           print("replacing existing txData for record!");
           // this payment is already in the db:
@@ -1350,7 +1352,7 @@ class StateContainerState extends State<StateContainer> {
           newTXInfo.request_time = request_time;
 
           if (memo_enc != null && memo_enc.isNotEmpty) {
-            String memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
+            String? memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
             if (memo != null) {
               newTXInfo.memo = memo;
             } else {
@@ -1394,7 +1396,7 @@ class StateContainerState extends State<StateContainer> {
           if (oldTXData != null) {
             print("removing old txData!");
             // remove the old tx by the uuid:
-            await sl.get<DBHelper>().deleteTXDataByUUID(oldTXData.uuid);
+            await sl.get<DBHelper>().deleteTXDataByUUID(oldTXData.uuid!);
 
             // if we didn't replace an existing txData, add it to the db:
             if (txData == null) {
@@ -1421,12 +1423,12 @@ class StateContainerState extends State<StateContainer> {
     }
 
     if (data.containsKey("is_message")) {
-      if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
-        TXData txData;
-        TXData oldTXData;
+      if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
+        TXData? txData;
+        TXData? oldTXData;
 
         // we have to check if this payment is already in the db:
-        txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+        txData = await sl.get<DBHelper>().getTXDataByUUID(uuid!);
         if (txData != null) {
           print("replacing existing txData for record!");
           // this payment is already in the db:
@@ -1440,7 +1442,7 @@ class StateContainerState extends State<StateContainer> {
           newTXInfo.request_time = request_time;
 
           if (memo_enc != null && memo_enc.isNotEmpty) {
-            String memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
+            String? memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
             if (memo != null) {
               newTXInfo.memo = memo;
             } else {
@@ -1462,7 +1464,7 @@ class StateContainerState extends State<StateContainer> {
           if (oldTXData != null) {
             print("removing old txData : message");
             // remove the old tx by the uuid:
-            await sl.get<DBHelper>().deleteTXDataByUUID(oldTXData.uuid);
+            await sl.get<DBHelper>().deleteTXDataByUUID(oldTXData.uuid!);
 
             // if we didn't replace an existing txData, add it to the db:
             if (txData == null) {
@@ -1507,10 +1509,10 @@ class StateContainerState extends State<StateContainer> {
         // existingTXData.memo = memo;
         existingTXData.block = block;
         // remove the local one if it exists:
-        if (existingTXData.uuid.contains("LOCAL")) {
+        if (existingTXData.uuid!.contains("LOCAL")) {
           print("removing the local txData for this memo: ${existingTXData.uuid}");
-          await sl.get<DBHelper>().deleteTXDataByUUID(existingTXData.uuid);
-          await sl.get<DBHelper>().deleteTXDataByBlock(existingTXData.block);
+          await sl.get<DBHelper>().deleteTXDataByUUID(existingTXData.uuid!);
+          await sl.get<DBHelper>().deleteTXDataByBlock(existingTXData.block!);
           // add the new one and change the uuid to be not local:
           existingTXData.uuid = uuid;
           existingTXData.status = "sent";
@@ -1523,7 +1525,7 @@ class StateContainerState extends State<StateContainer> {
           // send acknowledgement to server / requester:
           // sleep for a second to make sure the txData is updated:
           await Future.delayed(Duration(seconds: 1));
-          await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
+          await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
         }
       } else {
         throw Exception("no txData found for this memo in payment record!");
@@ -1534,15 +1536,15 @@ class StateContainerState extends State<StateContainer> {
   Future<void> handlePaymentMemo(dynamic data, {bool delay_update = false}) async {
     print("handling payment_memo from: ${data['requesting_account']} : ${data['account']}");
     // String amount_raw = data['amount_raw'];
-    String requesting_account = data['requesting_account'];
-    String to_address = data['account'];
-    String memo_enc = data['memo_enc'];
-    String request_time = data['request_time'];
-    String block = data['block'];
-    String is_acknowledged = data['is_acknowledged'];
-    int height = data['height'];
-    String uuid = data['uuid'];
-    String local_uuid = data['local_uuid'];
+    String? requesting_account = data['requesting_account'];
+    String? to_address = data['account'];
+    String? memo_enc = data['memo_enc'];
+    String? request_time = data['request_time'];
+    String? block = data['block'];
+    String? is_acknowledged = data['is_acknowledged'];
+    int? height = data['height'];
+    String? uuid = data['uuid'];
+    String? local_uuid = data['local_uuid'];
 
     TXData txData = new TXData(
       // amount_raw: amount_raw,
@@ -1560,7 +1562,7 @@ class StateContainerState extends State<StateContainer> {
 
     // attempt to decrypt the memo:
     if (memo_enc != null && memo_enc.isNotEmpty) {
-      String memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
+      String? memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
       if (memo != null) {
         txData.memo = memo;
       } else {
@@ -1572,7 +1574,7 @@ class StateContainerState extends State<StateContainer> {
 
     bool found = false;
     // loop through our tx history to find the first matching block:
-    for (var histItem in wallet.history) {
+    for (var histItem in wallet!.history!) {
       if (histItem.link == block) {
         // found a matching transaction, so set the block to that:
         txData.link = histItem.hash;
@@ -1582,7 +1584,7 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // check if exists in db:
-    var existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+    var existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid!);
     if (existingTXData != null) {
       print("memo txData exists");
       // update with the new info:
@@ -1612,7 +1614,7 @@ class StateContainerState extends State<StateContainer> {
       }
     }
     // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet.address);
+    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
     if (!delay_update) {
       await updateSolids();
       await updateTXMemos();
@@ -1622,15 +1624,15 @@ class StateContainerState extends State<StateContainer> {
   Future<void> handlePaymentACK(dynamic data, {bool delay_update = false}) async {
     // print("handling payment_ack from: ${data['requesting_account']}");
     print("handling payment_ack");
-    String amount_raw = data['amount_raw'];
-    String requesting_account = data['requesting_account'];
-    String memo = data['memo'];
-    String request_time = data['request_time'];
-    String to_address = data['account'];
+    String? amount_raw = data['amount_raw'];
+    String? requesting_account = data['requesting_account'];
+    String? memo = data['memo'];
+    String? request_time = data['request_time'];
+    String? to_address = data['account'];
     String uuid = data['uuid'];
-    String block = data['block'];
-    String is_acknowledged = data['is_acknowledged'];
-    int height = data['height'];
+    String? block = data['block'];
+    String? is_acknowledged = data['is_acknowledged'];
+    int? height = data['height'];
 
     // sleep to prevent animations from overlapping:
     // TODO: is this needed?
@@ -1687,17 +1689,17 @@ class StateContainerState extends State<StateContainer> {
 
   Future<String> _getPrivKey() async {
     String seed = await getSeed();
-    return NanoUtil.seedToPrivate(seed, selectedAccount.index);
+    return NanoUtil.seedToPrivate(seed, selectedAccount!.index!);
   }
 
   Future<String> getSeed() async {
-    String seed;
+    String? seed;
     if (encryptedSecret != null) {
       seed = NanoHelpers.byteToHex(NanoCrypt.decrypt(encryptedSecret, await sl.get<Vault>().getSessionKey()));
     } else {
       seed = await sl.get<Vault>().getSeed();
     }
-    return seed;
+    return seed!;
   }
 
   // Simple build method that just passes this state through

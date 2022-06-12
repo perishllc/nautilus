@@ -8,18 +8,18 @@ part 'fcm_update_request.g.dart';
 @JsonSerializable()
 class FcmUpdateRequest extends BaseRequest {
   @JsonKey(name:'action')
-  String action;
+  String? action;
 
   @JsonKey(name:'account', includeIfNull: false)
-  String account;
+  String? account;
 
   @JsonKey(name:'fcm_token_v2', includeIfNull: false)
-  String fcmToken;
+  String? fcmToken;
 
   @JsonKey(name:'enabled')
-  bool enabled;
+  bool? enabled;
 
-  FcmUpdateRequest({@required String account, @required String fcmToken, @required bool enabled}) : super() {
+  FcmUpdateRequest({required String? account, required String? fcmToken, required bool? enabled}) : super() {
     this.action = Actions.FCM_UPDATE;
     this.account = account;
     this.fcmToken = fcmToken;

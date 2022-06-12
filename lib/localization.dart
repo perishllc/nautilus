@@ -22,7 +22,7 @@ class AppLocalization {
     });
   }
 
-  static AppLocalization of(BuildContext context) {
+  static AppLocalization? of(BuildContext context) {
     return Localizations.of<AppLocalization>(context, AppLocalization);
   }
 
@@ -713,6 +713,15 @@ class AppLocalization {
 
   String get receiveMinimumHeader {
     return Intl.message("Receive Minimum Info", desc: 'receive_minimum_header', name: 'receiveMinimumHeader');
+  }
+
+  String get sendSheetInfo {
+    return Intl.message("Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users.\n\nYou don't need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don't use nautilus.",
+        desc: 'send_sheet_info', name: 'sendSheetInfo');
+  }
+
+  String get sendSheetInfoHeader {
+    return Intl.message("Send Sheet Info", desc: 'send_sheet_info_header', name: 'sendSheetInfoHeader');
   }
 
   String get currencyMode {
@@ -1693,7 +1702,7 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   /// -- NON-TRANSLATABLE ITEMS
-  String getBlockExplorerUrl(String hash, AvailableBlockExplorer explorer) {
+  String getBlockExplorerUrl(String? hash, AvailableBlockExplorer explorer) {
     if (explorer.explorer == AvailableBlockExplorerEnum.NANOCOMMUNITY) {
       return 'https://nano.community/$hash';
     } else if (explorer.explorer == AvailableBlockExplorerEnum.NANOLOOKER) {
@@ -1704,7 +1713,7 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
     return 'https://nanocrawler.cc/explorer/block/$hash';
   }
 
-  String getAccountExplorerUrl(String account, AvailableBlockExplorer explorer) {
+  String getAccountExplorerUrl(String? account, AvailableBlockExplorer explorer) {
     if (explorer.explorer == AvailableBlockExplorerEnum.NANOCOMMUNITY) {
       return 'https://nano.community/$account';
     } else if (explorer.explorer == AvailableBlockExplorerEnum.NANOLOOKER) {

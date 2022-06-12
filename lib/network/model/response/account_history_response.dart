@@ -6,18 +6,18 @@ part 'account_history_response.g.dart';
 
 /// For running in an isolate, needs to be top-level function
 AccountHistoryResponse accountHistoryresponseFromJson(Map<dynamic, dynamic> json) {
-  return AccountHistoryResponse.fromJson(json);
+  return AccountHistoryResponse.fromJson(json as Map<String, dynamic>);
 } 
 
 @JsonSerializable()
 class AccountHistoryResponse {
   @JsonKey(name:'history')
-  List<AccountHistoryResponseItem> history;
+  List<AccountHistoryResponseItem>? history;
 
   @JsonKey(ignore: true)
-  String account;
+  String? account;
 
-  AccountHistoryResponse({List<AccountHistoryResponseItem> history, String account}):super() {
+  AccountHistoryResponse({List<AccountHistoryResponseItem>? history, String? account}):super() {
     this.history = history;
     this.account = account;
   }

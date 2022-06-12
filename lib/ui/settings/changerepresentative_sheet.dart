@@ -42,9 +42,9 @@ class AppChangeRepresentativeSheet {
   // State variables
   bool _addressCopied = false;
   // Timer reference so we can cancel repeated events
-  Timer _addressCopiedTimer;
+  Timer? _addressCopiedTimer;
 
-  StreamSubscription<AuthenticatedEvent> _authSub;
+  StreamSubscription<AuthenticatedEvent>? _authSub;
 
   void _registerBus(BuildContext context) {
     _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((event) {
@@ -56,7 +56,7 @@ class AppChangeRepresentativeSheet {
 
   void _destroyBus() {
     if (_authSub != null) {
-      _authSub.cancel();
+      _authSub!.cancel();
     }
   }
 
@@ -65,11 +65,11 @@ class AppChangeRepresentativeSheet {
     return true;
   }
 
-  _getRepresentativeWidgets(BuildContext context, List<NinjaNode> list) {
+  _getRepresentativeWidgets(BuildContext context, List<NinjaNode>? list) {
     if (list == null) return [];
     List<Widget> ret = [];
     list.forEach((node) {
-      if (node.alias != null && node.alias.trim().length > 0) {
+      if (node.alias != null && node.alias!.trim().length > 0) {
         ret.add(_buildSingleRepresentative(
           node,
           context,
@@ -84,14 +84,14 @@ class AppChangeRepresentativeSheet {
         title: Container(
           margin: EdgeInsets.only(bottom: 10),
           child: Text(
-            AppLocalization.of(context).representatives,
+            AppLocalization.of(context)!.representatives,
             style: AppStyles.textStyleDialogHeader(context),
           ),
         ),
         children: _getRepresentativeWidgets(context, StateContainer.of(context).nanoNinjaNodes));
   }
 
-  String _sanitizeAlias(String alias) {
+  String _sanitizeAlias(String? alias) {
     if (alias != null) {
       return alias.replaceAll(RegExp(r'[^a-zA-Z_.!?_;:-]'), '');
     }
@@ -99,7 +99,7 @@ class AppChangeRepresentativeSheet {
   }
 
   bool _animationOpen = false;
-  NinjaNode _rep;
+  late NinjaNode _rep;
 
   _buildSingleRepresentative(NinjaNode rep, BuildContext context) {
     return Container(
@@ -113,7 +113,7 @@ class AppChangeRepresentativeSheet {
             highlightColor: StateContainer.of(context).curTheme.text15,
             splashColor: StateContainer.of(context).curTheme.text15,
             onPressed: () async {
-              if (!NanoAccounts.isValid(NanoAccountType.NANO, rep.account)) {
+              if (!NanoAccounts.isValid(NanoAccountType.NANO, rep.account!)) {
                 return;
               }
               _rep = rep;
@@ -122,7 +122,7 @@ class AppChangeRepresentativeSheet {
               bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
               if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                 try {
-                  bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context).changeRepAuthenticate);
+                  bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.changeRepAuthenticate);
                   if (authenticated) {
                     sl.get<HapticUtil>().fingerprintSucess();
                     EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
@@ -161,7 +161,7 @@ class AppChangeRepresentativeSheet {
                               text: '',
                               children: [
                                 TextSpan(
-                                  text: "${AppLocalization.of(context).votingWeight}: ",
+                                  text: "${AppLocalization.of(context)!.votingWeight}: ",
                                   style: TextStyle(
                                     color: StateContainer.of(context).curTheme.text,
                                     fontWeight: FontWeight.w100,
@@ -196,12 +196,12 @@ class AppChangeRepresentativeSheet {
                               text: '',
                               children: [
                                 TextSpan(
-                                  text: "${AppLocalization.of(context).uptime}: ",
+                                  text: "${AppLocalization.of(context)!.uptime}: ",
                                   style: TextStyle(
                                       color: StateContainer.of(context).curTheme.text, fontWeight: FontWeight.w100, fontSize: 14.0, fontFamily: 'Nunito Sans'),
                                 ),
                                 TextSpan(
-                                  text: (rep.uptime).toStringAsFixed(2),
+                                  text: rep.uptime!.toStringAsFixed(2),
                                   style: TextStyle(
                                       color: StateContainer.of(context).curTheme.primary,
                                       fontWeight: FontWeight.w700,
@@ -267,37 +267,37 @@ class AppChangeRepresentativeSheet {
     _animationOpen = true;
     AppAnimation.animationLauncher(context, AnimationType.CHANGE_REP, onPoppedCallback: () => _animationOpen = false);
     // If account isnt open, just store the account in sharedprefs
-    if (StateContainer.of(context).wallet.openBlock == null) {
+    if (StateContainer.of(context).wallet!.openBlock == null) {
       await sl.get<SharedPrefsUtil>().setRepresentative(_rep.account);
-      StateContainer.of(context).wallet.representative = _rep.account;
-      UIUtil.showSnackbar(AppLocalization.of(context).changeRepSucces, context);
+      StateContainer.of(context).wallet!.representative = _rep.account;
+      UIUtil.showSnackbar(AppLocalization.of(context)!.changeRepSucces, context);
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-    } else if (StateContainer.of(context).wallet.representative == _rep.account) {
+    } else if (StateContainer.of(context).wallet!.representative == _rep.account) {
       // sleep for 2 seconds:
       await Future.delayed(Duration(seconds: 2));
       // representative is the same as the current one:
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).changeRepSame, context);
+      UIUtil.showSnackbar(AppLocalization.of(context)!.changeRepSame, context);
     } else {
       try {
         ProcessResponse resp = await sl.get<AccountService>().requestChange(
-            StateContainer.of(context).wallet.address,
+            StateContainer.of(context).wallet!.address,
             _rep.account,
-            StateContainer.of(context).wallet.frontier,
-            StateContainer.of(context).wallet.accountBalance.toString(),
-            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index));
-        StateContainer.of(context).wallet.representative = _rep.account;
-        StateContainer.of(context).wallet.frontier = resp.hash;
-        UIUtil.showSnackbar(AppLocalization.of(context).changeRepSucces, context);
+            StateContainer.of(context).wallet!.frontier,
+            StateContainer.of(context).wallet!.accountBalance.toString(),
+            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!));
+        StateContainer.of(context).wallet!.representative = _rep.account;
+        StateContainer.of(context).wallet!.frontier = resp.hash;
+        UIUtil.showSnackbar(AppLocalization.of(context)!.changeRepSucces, context);
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       } catch (e) {
         sl.get<Logger>().e("Failed to change", e);
         if (_animationOpen) {
           Navigator.of(context).pop();
         }
-        UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
+        UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context);
       }
     }
   }
@@ -342,7 +342,7 @@ class AppChangeRepresentativeSheet {
                                     margin: EdgeInsets.only(top: 15),
                                     constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                                     child: AutoSizeText(
-                                      CaseChange.toUpperCase(AppLocalization.of(context).changeRepAuthenticate, context),
+                                      CaseChange.toUpperCase(AppLocalization.of(context)!.changeRepAuthenticate, context),
                                       style: AppStyles.textStyleHeader(context),
                                       textAlign: TextAlign.center,
                                       maxLines: 2,
@@ -366,7 +366,7 @@ class AppChangeRepresentativeSheet {
                                     tapTargetSize: MaterialTapTargetSize.padded,
                                   ),
                                   onPressed: () {
-                                    AppDialogs.showInfoDialog(context, AppLocalization.of(context).repInfoHeader, AppLocalization.of(context).repInfo);
+                                    AppDialogs.showInfoDialog(context, AppLocalization.of(context)!.repInfoHeader, AppLocalization.of(context)!.repInfo);
                                   },
                                   child: Icon(AppIcons.info, size: 24, color: StateContainer.of(context).curTheme.text),
                                 ),
@@ -391,18 +391,18 @@ class AppChangeRepresentativeSheet {
                                         margin:
                                             EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                                         child: Text(
-                                          AppLocalization.of(context).currentlyRepresented,
+                                          AppLocalization.of(context)!.currentlyRepresented,
                                           style: AppStyles.textStyleParagraph(context),
                                         )),
                                     // Current representative
                                     GestureDetector(
                                       onTap: () {
-                                        Clipboard.setData(new ClipboardData(text: StateContainer.of(context).wallet.representative));
+                                        Clipboard.setData(new ClipboardData(text: StateContainer.of(context).wallet!.representative));
                                         setState(() {
                                           _addressCopied = true;
                                         });
                                         if (_addressCopiedTimer != null) {
-                                          _addressCopiedTimer.cancel();
+                                          _addressCopiedTimer!.cancel();
                                         }
                                         _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
                                           setState(() {
@@ -419,14 +419,14 @@ class AppChangeRepresentativeSheet {
                                           color: StateContainer.of(context).curTheme.backgroundDarkest,
                                           borderRadius: BorderRadius.circular(25),
                                         ),
-                                        child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.representative,
+                                        child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.representative!,
                                             type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
                                       ),
                                     ),
                                     // Address Copied text container
                                     Container(
                                       margin: EdgeInsets.only(top: 5, bottom: 5),
-                                      child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
+                                      child: Text(_addressCopied ? AppLocalization.of(context)!.addressCopied : "",
                                           style: TextStyle(
                                             fontSize: 14.0,
                                             color: StateContainer.of(context).curTheme.success,
@@ -448,7 +448,7 @@ class AppChangeRepresentativeSheet {
                                   AppButton.buildAppButton(
                                     context,
                                     AppButtonType.PRIMARY,
-                                    AppLocalization.of(context).useNautilusRep,
+                                    AppLocalization.of(context)!.useNautilusRep,
                                     Dimens.BUTTON_TOP_DIMENS,
                                     onPressed: () async {
                                       if (!NanoAccounts.isValid(NanoAccountType.NANO, AppWallet.nautilusRepresentative)) {
@@ -462,7 +462,7 @@ class AppChangeRepresentativeSheet {
                                         try {
                                           bool authenticated = await sl
                                               .get<BiometricUtil>()
-                                              .authenticateWithBiometrics(context, AppLocalization.of(context).changeRepAuthenticate);
+                                              .authenticateWithBiometrics(context, AppLocalization.of(context)!.changeRepAuthenticate);
                                           if (authenticated) {
                                             sl.get<HapticUtil>().fingerprintSucess();
                                             EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
@@ -483,7 +483,7 @@ class AppChangeRepresentativeSheet {
                                   AppButton.buildAppButton(
                                     context,
                                     AppButtonType.PRIMARY_OUTLINE,
-                                    AppLocalization.of(context).pickFromList,
+                                    AppLocalization.of(context)!.pickFromList,
                                     Dimens.BUTTON_BOTTOM_DIMENS,
                                     disabled: StateContainer.of(context).nanoNinjaNodes == null,
                                     onPressed: () {
@@ -502,7 +502,7 @@ class AppChangeRepresentativeSheet {
                                   AppButton.buildAppButton(
                                     context,
                                     AppButtonType.PRIMARY_OUTLINE,
-                                    AppLocalization.of(context).manualEntry,
+                                    AppLocalization.of(context)!.manualEntry,
                                     Dimens.BUTTON_BOTTOM_DIMENS,
                                     onPressed: () {
                                       Sheets.showAppHeightEightSheet(context: context, widget: ChangeRepManualSheet(TextEditingController()));
@@ -519,14 +519,14 @@ class AppChangeRepresentativeSheet {
         });
   }
 
-  Future<void> authenticateWithPin(String rep, BuildContext context) async {
+  Future<void> authenticateWithPin(String? rep, BuildContext context) async {
     // PIN Authentication
-    String expectedPin = await sl.get<Vault>().getPin();
-    bool auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    String? expectedPin = await sl.get<Vault>().getPin();
+    bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return new PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
-        description: AppLocalization.of(context).pinRepChange,
+        description: AppLocalization.of(context)!.pinRepChange,
       );
     }));
     if (auth != null && auth) {

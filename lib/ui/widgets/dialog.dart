@@ -19,9 +19,9 @@ import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppDialogs {
-  static void showConfirmDialog(var context, var title, var content, var buttonText, Function onPressed, {String cancelText, Function cancelAction}) {
+  static void showConfirmDialog(var context, var title, var content, var buttonText, Function onPressed, {String? cancelText, Function? cancelAction}) {
     if (cancelText == null) {
-      cancelText = AppLocalization.of(context).cancel.toUpperCase();
+      cancelText = AppLocalization.of(context)!.cancel.toUpperCase();
     }
     showAppDialog(
       context: context,
@@ -39,7 +39,7 @@ class AppDialogs {
               child: Container(
                 constraints: BoxConstraints(maxWidth: 100),
                 child: Text(
-                  cancelText,
+                  cancelText!,
                   style: AppStyles.textStyleDialogButtonText(context),
                 ),
               ),
@@ -85,7 +85,7 @@ class AppDialogs {
           actions: <Widget>[
             TextButton(
               child: Text(
-                AppLocalization.of(context).close.toUpperCase(),
+                AppLocalization.of(context)!.close.toUpperCase(),
                 style: AppStyles.textStyleDialogButtonText(context),
               ),
               onPressed: () {
@@ -168,7 +168,7 @@ class AppDialogs {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(AppLocalization.of(context).changeLog, textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
+                    child: Text(AppLocalization.of(context)!.changeLog, textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
                       constraints: BoxConstraints(minHeight: 300, maxHeight: 400),
@@ -184,7 +184,7 @@ class AppDialogs {
                                   shrinkWrap: true,
                                   selectable: false,
                                   onTapLink: (text, url, title) async {
-                                    Uri uri = Uri.parse(url);
+                                    Uri uri = Uri.parse(url!);
                                     if (await canLaunchUrl(uri)) {
                                       await launchUrl(uri);
                                     }
@@ -214,7 +214,7 @@ class AppDialogs {
                                     ),
                                     horizontalRuleDecoration: BoxDecoration(
                                       border: Border(
-                                        bottom: BorderSide(width: 3, color: StateContainer.of(context).curTheme.text),
+                                        bottom: BorderSide(width: 3, color: StateContainer.of(context).curTheme.text!),
                                       ),
                                     ),
                                   ),
@@ -249,7 +249,7 @@ class AppDialogs {
                           });
                         },
                         child: Text(
-                          AppLocalization.of(context).supportTheDeveloper,
+                          AppLocalization.of(context)!.supportTheDeveloper,
                           style: TextStyle(
                             fontSize: AppFontSizes.medium,
                             color: StateContainer.of(context).curTheme.primary,
@@ -258,7 +258,7 @@ class AppDialogs {
                       ),
                       TextButton(
                         onPressed: () => Navigator.of(context).pop(),
-                        child: Text(AppLocalization.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
+                        child: Text(AppLocalization.of(context)!.dismiss, style: AppStyles.textStyleDialogOptions(context)),
                       ),
                     ]),
                   ),

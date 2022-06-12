@@ -23,10 +23,10 @@ enum AnimationType {
 
 class AnimationLoadingOverlay extends ModalRoute<void> {
   AnimationType type;
-  Function onPoppedCallback;
-  Color barrier;
-  Color barrierStronger;
-  AnimationController _controller;
+  Function? onPoppedCallback;
+  Color? barrier;
+  Color? barrierStronger;
+  AnimationController? _controller;
 
   AnimationLoadingOverlay(this.type, this.barrier, this.barrierStronger, {this.onPoppedCallback});
 
@@ -40,7 +40,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
   bool get barrierDismissible => false;
 
   @override
-  Color get barrierColor {
+  Color? get barrierColor {
     if (type == AnimationType.TRANSFER_TRANSFERRING || type == AnimationType.TRANSFER_SEARCHING_QR || type == AnimationType.TRANSFER_SEARCHING_MANUAL) {
       return barrierStronger;
     }
@@ -48,7 +48,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
   }
 
   @override
-  String get barrierLabel => null;
+  String? get barrierLabel => null;
 
   @override
   bool get maintainState => false;
@@ -56,7 +56,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
   @override
   void didComplete(void result) {
     if (onPoppedCallback != null) {
-      onPoppedCallback();
+      onPoppedCallback!();
     }
     super.didComplete(result);
   }
@@ -96,7 +96,7 @@ class AppAnimation extends StatefulWidget {
   @override
   _AppAnimationState createState() => _AppAnimationState();
 
-  static void animationLauncher(BuildContext context, AnimationType type, {Function onPoppedCallback}) {
+  static void animationLauncher(BuildContext context, AnimationType type, {Function? onPoppedCallback}) {
     Navigator.of(context).push(
       AnimationLoadingOverlay(type, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
           onPoppedCallback: onPoppedCallback),
@@ -131,8 +131,8 @@ class AppAnimation extends StatefulWidget {
 
 class _AppAnimationState extends State<AppAnimation> with SingleTickerProviderStateMixin {
   // Invalid animation
-  AnimationController _animationController;
-  Animation<double> _animation;
+  AnimationController? _animationController;
+  Animation<double>? _animation;
 
   @override
   void initState() {
@@ -142,7 +142,7 @@ class _AppAnimationState extends State<AppAnimation> with SingleTickerProviderSt
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController!.dispose();
     super.dispose();
   }
 
@@ -154,7 +154,7 @@ class _AppAnimationState extends State<AppAnimation> with SingleTickerProviderSt
     //   ..repeat();
 
     _animationController
-      ..duration = duration
+      ?..duration = duration
       ..repeat();
   }
 

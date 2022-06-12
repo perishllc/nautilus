@@ -55,7 +55,7 @@ bool compare(Uint8List lh, Uint8List rh) {
     Uint32List minusp = new Uint32List.fromList([5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 252]);
   // }
 
-  Int32List gf([List<int> init]) {
+  Int32List gf([List<int>? init]) {
     Int32List r = new Int32List(16);
     if (init != null) {
       for (int i = 0; i < init.length; i++) {
@@ -1432,7 +1432,7 @@ bool compare(Uint8List lh, Uint8List rh) {
   //   return c.sublist(16); // todo
   // }
 
-  Uint8List secretboxOpen(Uint8List box, Uint8List nonce, Uint8List key) {
+  Uint8List? secretboxOpen(Uint8List box, Uint8List nonce, Uint8List key) {
     // checkListTypes(box, nonce, key);
     checkLengths(key, nonce);
     Uint8List c = new Uint8List(16 + box.length);
@@ -1463,12 +1463,12 @@ bool compare(Uint8List lh, Uint8List rh) {
     return secretbox(msg, nonce, k);
   }
 
-  Uint8List oldBoxOpen(Uint8List msg, Uint8List nonce, Uint8List publicKey, Uint8List secretKey) {
+  Uint8List? oldBoxOpen(Uint8List msg, Uint8List nonce, Uint8List publicKey, Uint8List secretKey) {
     Uint8List k = oldBoxBefore(publicKey, secretKey);
     return secretboxOpen(msg, nonce, k);
   }
 
-  Uint8List boxOpen(Map map) {
+  Uint8List? boxOpen(Map map) {
     Uint8List publicKey = map["publicKey"];
     Uint8List secretKey = map["secretKey"];
     Uint8List msg = map["msg"];

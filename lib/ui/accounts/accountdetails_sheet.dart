@@ -26,14 +26,14 @@ import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 // Account Details Sheet
 class AccountDetailsSheet {
   Account account;
-  String originalName;
-  TextEditingController _nameController;
-  FocusNode _nameFocusNode;
-  bool deleted;
+  String? originalName;
+  TextEditingController? _nameController;
+  FocusNode? _nameFocusNode;
+  late bool deleted;
   // Address copied or not
-  bool _addressCopied;
+  late bool _addressCopied;
   // Timer reference so we can cancel repeated events
-  Timer _addressCopiedTimer;
+  Timer? _addressCopiedTimer;
 
   AccountDetailsSheet(this.account) {
     this.originalName = account.name;
@@ -42,9 +42,9 @@ class AccountDetailsSheet {
 
   Future<bool> _onWillPop() async {
     // Update name if changed and valid
-    if (originalName != _nameController.text && _nameController.text.trim().length > 0 && !deleted) {
-      sl.get<DBHelper>().changeAccountName(account, _nameController.text);
-      account.name = _nameController.text;
+    if (originalName != _nameController!.text && _nameController!.text.trim().length > 0 && !deleted) {
+      sl.get<DBHelper>().changeAccountName(account, _nameController!.text);
+      account.name = _nameController!.text;
       EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account));
     }
     return true;
@@ -83,16 +83,16 @@ class AccountDetailsSheet {
                                             onPressed: () {
                                               AppDialogs.showConfirmDialog(
                                                   context,
-                                                  AppLocalization.of(context).hideAccountHeader,
-                                                  AppLocalization.of(context).removeAccountText.replaceAll("%1", AppLocalization.of(context).addAccount),
-                                                  CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                                                  AppLocalization.of(context)!.hideAccountHeader,
+                                                  AppLocalization.of(context)!.removeAccountText.replaceAll("%1", AppLocalization.of(context)!.addAccount),
+                                                  CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () {
                                                 // Remove account
                                                 deleted = true;
                                                 sl.get<DBHelper>().deleteAccount(account).then((id) {
                                                   EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account, deleted: true));
                                                   Navigator.of(context).pop();
                                                 });
-                                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+                                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
                                             },
                                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
                                             padding: EdgeInsets.all(13.0),
@@ -106,7 +106,7 @@ class AccountDetailsSheet {
                                   child: Column(
                                     children: <Widget>[
                                       AutoSizeText(
-                                        CaseChange.toUpperCase(AppLocalization.of(context).account, context),
+                                        CaseChange.toUpperCase(AppLocalization.of(context)!.account, context),
                                         style: AppStyles.textStyleHeader(context),
                                         textAlign: TextAlign.center,
                                         maxLines: 1,
@@ -123,9 +123,9 @@ class AccountDetailsSheet {
                             Container(
                               margin: EdgeInsets.only(top: 10.0),
                               child: account.address != null
-                                  ? UIUtil.threeLineAddressText(context, account.address, type: ThreeLineAddressTextType.PRIMARY60)
+                                  ? UIUtil.threeLineAddressText(context, account.address!, type: ThreeLineAddressTextType.PRIMARY60)
                                   : account.selected
-                                      ? UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.address,
+                                      ? UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!,
                                           type: ThreeLineAddressTextType.PRIMARY60)
                                       : SizedBox(),
                             ),
@@ -149,7 +149,7 @@ class AccountDetailsSheet {
                                           ),
                                           TextSpan(
                                             text: getRawAsThemeAwareAmount(context,
-                                                account.balance == null ? StateContainer.of(context).wallet.accountBalance.toString() : account.balance),
+                                                account.balance == null ? StateContainer.of(context).wallet!.accountBalance.toString() : account.balance),
                                             style: TextStyle(
                                               color: StateContainer.of(context).curTheme.primary60,
                                               fontSize: 14.0,
@@ -208,7 +208,7 @@ class AccountDetailsSheet {
                                           context,
                                           // Share Address Button
                                           _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                                          _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
+                                          _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
                                           Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                                         Clipboard.setData(new ClipboardData(text: account.address));
                                         setState(() {
@@ -216,7 +216,7 @@ class AccountDetailsSheet {
                                           _addressCopied = true;
                                         });
                                         if (_addressCopiedTimer != null) {
-                                          _addressCopiedTimer.cancel();
+                                          _addressCopiedTimer!.cancel();
                                         }
                                         _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
                                           setState(() {
@@ -230,7 +230,7 @@ class AccountDetailsSheet {
                                     children: <Widget>[
                                       // Close Button
                                       AppButton.buildAppButton(
-                                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
                                           onPressed: () {
                                         Navigator.pop(context);
                                       }),

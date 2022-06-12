@@ -7,12 +7,12 @@ part 'accounts_balances_request.g.dart';
 @JsonSerializable()
 class AccountsBalancesRequest extends BaseRequest {
   @JsonKey(name:'action')
-  String action;
+  String? action;
 
   @JsonKey(name:'accounts')
-  List<String> accounts;
+  List<String?>? accounts;
 
-  AccountsBalancesRequest({List<String> accounts}) {
+  AccountsBalancesRequest({List<String?>? accounts}) {
     this.action = Actions.ACCOUNTS_BALANCES;
     this.accounts = accounts ?? [];
   }

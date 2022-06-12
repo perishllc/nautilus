@@ -29,9 +29,9 @@ class _AppPopupButtonState extends State<AppPopupButton> {
   bool isScrolledUpEnough = false;
   bool firstTime = true;
   bool isSendButtonColorPrimary = true;
-  Color popupColor = Colors.transparent;
+  Color? popupColor = Colors.transparent;
 
-  bool animationOpen;
+  bool? animationOpen;
 
   void _showMantaAnimation() {
     animationOpen = true;
@@ -48,7 +48,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
     dynamic scanResult = await Navigator.pushNamed(context, '/before_scan_screen');
     // Parse scan data and route appropriately
     if (scanResult == null) {
-      UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+      UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
     } else if (/*!QRScanErrs.ERROR_LIST.contains(scanResult)*/false) {
       // TODO: block handoff
 
@@ -56,16 +56,16 @@ class _AppPopupButtonState extends State<AppPopupButton> {
       // Is a URI
       Address address = Address(scanResult);
       if (address.address == null) {
-        UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+        UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
       } else {
         // See if this address belongs to a contact
-        User contact = await sl.get<DBHelper>().getContactWithAddress(address.address);
+        User? contact = await sl.get<DBHelper>().getContactWithAddress(address.address!);
         // If amount is present, fill it and go to SendConfirm
-        BigInt amountBigInt = address.amount != null ? BigInt.tryParse(address.amount) : null;
+        BigInt? amountBigInt = address.amount != null ? BigInt.tryParse(address.amount!) : null;
         bool sufficientBalance = false;
         if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
-          UIUtil.showSnackbar(AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001"), context);
-        } else if (amountBigInt != null && StateContainer.of(context).wallet.accountBalance > amountBigInt) {
+          UIUtil.showSnackbar(AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001"), context);
+        } else if (amountBigInt != null && StateContainer.of(context).wallet!.accountBalance > amountBigInt) {
           sufficientBalance = true;
         }
         if (amountBigInt != null && sufficientBalance) {
@@ -115,14 +115,14 @@ class _AppPopupButtonState extends State<AppPopupButton> {
         ),
         // Send Button
         GestureDetector(
-          onVerticalDragStart: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero)
+          onVerticalDragStart: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.accountBalance > BigInt.zero)
               ? (value) {
                   setState(() {
                     popupColor = StateContainer.of(context).curTheme.primary;
                   });
                 }
               : (value) {},
-          onVerticalDragEnd: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero)
+          onVerticalDragEnd: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.accountBalance > BigInt.zero)
               ? (value) {
                   isSendButtonColorPrimary = true;
                   firstTime = true;
@@ -138,7 +138,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
                   });
                 }
               : (value) {},
-          onVerticalDragUpdate: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero)
+          onVerticalDragUpdate: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.accountBalance > BigInt.zero)
               ? (dragUpdateDetails) {
                   if (dragUpdateDetails.localPosition.dy < -60) {
                     isScrolledUpEnough = true;
@@ -178,7 +178,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
             duration: Duration(milliseconds: 100),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
-              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
+              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
             ),
             height: 55,
             width: (MediaQuery.of(context).size.width - 42).abs() / 2,
@@ -191,7 +191,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
                       : StateContainer.of(context).curTheme.success
                   : StateContainer.of(context).curTheme.primary60,
               child: AutoSizeText(
-                AppLocalization.of(context).send,
+                AppLocalization.of(context)!.send,
                 textAlign: TextAlign.center,
                 style: AppStyles.textStyleButtonPrimary(context),
                 maxLines: 1,

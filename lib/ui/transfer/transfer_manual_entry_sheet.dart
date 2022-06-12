@@ -16,8 +16,8 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class TransferManualEntrySheet extends StatefulWidget {
-  final Function validSeedCallback;
-  final String quickSeed;
+  final Function? validSeedCallback;
+  final String? quickSeed;
 
   TransferManualEntrySheet({this.validSeedCallback, this.quickSeed}) : super();
 
@@ -25,13 +25,13 @@ class TransferManualEntrySheet extends StatefulWidget {
 }
 
 class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
-  FocusNode _seedInputFocusNode;
-  TextEditingController _seedInputController;
+  FocusNode? _seedInputFocusNode;
+  TextEditingController? _seedInputController;
 
   // State constants
-  bool seedIsValid;
-  bool hasError;
-  String quickSeed;
+  late bool seedIsValid;
+  late bool hasError;
+  String? quickSeed;
 
   @override
   void initState() {
@@ -44,7 +44,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
     // Set quick seed amount
     quickSeed = widget.quickSeed;
     if (quickSeed != null) {
-      _seedInputController.text = quickSeed;
+      _seedInputController!.text = quickSeed!;
       this.seedIsValid = true;
     }
   }
@@ -65,7 +65,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
             Container(
               margin: EdgeInsets.only(top: 30.0, left: 70, right: 70),
               child: AutoSizeText(
-                CaseChange.toUpperCase(AppLocalization.of(context).transferHeader, context),
+                CaseChange.toUpperCase(AppLocalization.of(context)!.transferHeader, context),
                 style: AppStyles.textStyleHeader(context),
                 textAlign: TextAlign.center,
                 maxLines: 2,
@@ -83,7 +83,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                       margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 50 : 60, vertical: 10),
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        AppLocalization.of(context).transferManualHint,
+                        AppLocalization.of(context)!.transferManualHint,
                         style: AppStyles.textStyleParagraph(context),
                         textAlign: TextAlign.start,
                       ),
@@ -107,10 +107,10 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                               suffixButton: TextFieldButton(
                                 icon: AppIcons.paste,
                                 onPressed: () async {
-                                  String data = await UserDataUtil.getClipboardText(DataType.SEED);
+                                  String? data = await UserDataUtil.getClipboardText(DataType.SEED);
                                   if (data != null) {
                                     if (mounted) {
-                                      _seedInputController.text = data;
+                                      _seedInputController!.text = data;
                                       setState(() {
                                         seedIsValid = true;
                                       });
@@ -125,7 +125,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                                 },
                               ),
                               fadeSuffixOnCondition: true,
-                              suffixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController.text),
+                              suffixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController!.text),
                               keyboardType: TextInputType.text,
                               style: seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
                               onChanged: (text) {
@@ -135,7 +135,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                                 });
                                 // If valid seed, clear focus/close keyboard
                                 if (NanoSeeds.isValidSeed(text) && mounted) {
-                                  _seedInputFocusNode.unfocus();
+                                  _seedInputFocusNode!.unfocus();
                                   setState(() {
                                     seedIsValid = true;
                                   });
@@ -149,7 +149,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                             // "Invalid Seed" text that appears if the input is invalid
                             Container(
                               margin: EdgeInsets.only(top: 5),
-                              child: Text(AppLocalization.of(context).seedInvalid,
+                              child: Text(AppLocalization.of(context)!.seedInvalid,
                                   style: TextStyle(
                                     fontSize: 14.0,
                                     color: hasError ? StateContainer.of(context).curTheme.primary : Colors.transparent,
@@ -189,7 +189,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                           alignment: AlignmentDirectional(-1, 0),
                           margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
                           child: AutoSizeText(
-                            AppLocalization.of(context).transferIntroShort,
+                            AppLocalization.of(context)!.transferIntroShort,
                             style: AppStyles.textStyleParagraph(context),
                             textAlign: TextAlign.start,
                             maxLines: 4,
@@ -206,11 +206,11 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                 AppButton.buildAppButton(
                   context,
                   AppButtonType.PRIMARY,
-                  AppLocalization.of(context).transfer,
+                  AppLocalization.of(context)!.transfer,
                   Dimens.BUTTON_TOP_DIMENS,
                   onPressed: () {
-                    if (NanoSeeds.isValidSeed(_seedInputController.text) && widget.validSeedCallback != null) {
-                      widget.validSeedCallback(_seedInputController.text);
+                    if (NanoSeeds.isValidSeed(_seedInputController!.text) && widget.validSeedCallback != null) {
+                      widget.validSeedCallback!(_seedInputController!.text);
                     } else if (mounted) {
                       setState(() {
                         hasError = true;
@@ -226,7 +226,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                 AppButton.buildAppButton(
                   context,
                   AppButtonType.PRIMARY_OUTLINE,
-                  AppLocalization.of(context).cancel,
+                  AppLocalization.of(context)!.cancel,
                   Dimens.BUTTON_BOTTOM_DIMENS,
                   onPressed: () {
                     Navigator.of(context).pop();

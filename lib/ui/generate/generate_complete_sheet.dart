@@ -17,12 +17,12 @@ import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:share_plus/share_plus.dart';
 
 class GenerateCompleteSheet extends StatefulWidget {
-  final String amountRaw;
-  final String destination;
-  final String contactName;
-  final String localAmount;
-  final String sharableLink;
-  final String walletSeed;
+  final String? amountRaw;
+  final String? destination;
+  final String? contactName;
+  final String? localAmount;
+  final String? sharableLink;
+  final String? walletSeed;
 
   GenerateCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.sharableLink, this.walletSeed}) : super();
 
@@ -30,16 +30,16 @@ class GenerateCompleteSheet extends StatefulWidget {
 }
 
 class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
-  String amount;
-  String destinationAltered;
+  late String amount;
+  late String destinationAltered;
   // Current state references
   bool _linkCopied = false;
   // Timer reference so we can cancel repeated events
-  Timer _linkCopiedTimer;
+  Timer? _linkCopiedTimer;
   // Current state references
   bool _seedCopied = false;
   // Timer reference so we can cancel repeated events
-  Timer _seedCopiedTimer;
+  Timer? _seedCopiedTimer;
 
   @override
   void initState() {
@@ -62,7 +62,7 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
     //   }
     // }
     amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
-    destinationAltered = widget.destination.replaceAll("xrb_", "nano_");
+    destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
 
   @override
@@ -129,7 +129,7 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                           TextSpan(
                             text: widget.localAmount != null ? " (${widget.localAmount})" : "",
                             style: TextStyle(
-                              color: StateContainer.of(context).curTheme.success.withOpacity(0.75),
+                              color: StateContainer.of(context).curTheme.success!.withOpacity(0.75),
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
@@ -146,7 +146,7 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                       children: <Widget>[
                         // "SENT TO" text
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).loadedInto, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context)!.loadedInto, context),
                           style: TextStyle(
                             fontSize: 28.0,
                             fontWeight: FontWeight.w700,
@@ -181,7 +181,7 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                           context,
                           // Share Address Button
                           _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                          _linkCopied ? AppLocalization.of(context).linkCopied : AppLocalization.of(context).copyLink,
+                          _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.copyLink,
                           Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
                         // Navigator.of(context).pop();
                         Clipboard.setData(new ClipboardData(text: widget.sharableLink));
@@ -190,7 +190,7 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                           _linkCopied = true;
                         });
                         if (_linkCopiedTimer != null) {
-                          _linkCopiedTimer.cancel();
+                          _linkCopiedTimer!.cancel();
                         }
                         _linkCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
                           setState(() {
@@ -206,7 +206,7 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                           context,
                           // copy seed button
                           _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                          _seedCopied ? AppLocalization.of(context).seedCopied : AppLocalization.of(context).copySeed,
+                          _seedCopied ? AppLocalization.of(context)!.seedCopied : AppLocalization.of(context)!.copySeed,
                           Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
                         Clipboard.setData(new ClipboardData(text: widget.walletSeed));
                         setState(() {
@@ -214,7 +214,7 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                           _seedCopied = true;
                         });
                         if (_seedCopiedTimer != null) {
-                          _seedCopiedTimer.cancel();
+                          _seedCopiedTimer!.cancel();
                         }
                         _seedCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
                           setState(() {
@@ -230,9 +230,9 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                           context,
                           // share link button
                           AppButtonType.PRIMARY,
-                          AppLocalization.of(context).shareLink,
+                          AppLocalization.of(context)!.shareLink,
                           Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                        Share.share(widget.sharableLink);
+                        Share.share(widget.sharableLink!);
                       }),
                     ],
                   )

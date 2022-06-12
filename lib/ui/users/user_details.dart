@@ -34,7 +34,7 @@ class UserDetailsSheet {
   // State variables
   bool _addressCopied = false;
   // Timer reference so we can cancel repeated events
-  Timer _addressCopiedTimer;
+  Timer? _addressCopiedTimer;
 
   mainBottomSheet(BuildContext context) {
     AppSheets.showAppHeightEightSheet(
@@ -60,9 +60,9 @@ class UserDetailsSheet {
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
-                                  AppLocalization.of(context).removeContact,
-                                  AppLocalization.of(context).removeContactConfirmation.replaceAll('%1', user.username),
-                                  CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                                  AppLocalization.of(context)!.removeContact,
+                                  AppLocalization.of(context)!.removeContactConfirmation.replaceAll('%1', user.username!),
+                                  CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () {
                                 // sl.get<DBHelper>().deleteContact(user).then((deleted) {
                                 //   if (deleted) {
                                 //     // Delete image if exists
@@ -74,7 +74,7 @@ class UserDetailsSheet {
                                 //     // TODO - error for failing to delete contact
                                 //   }
                                 // });
-                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
                             },
                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
                             padding: EdgeInsets.all(13.0),
@@ -89,7 +89,7 @@ class UserDetailsSheet {
                           child: Column(
                             children: <Widget>[
                               AutoSizeText(
-                                CaseChange.toUpperCase(AppLocalization.of(context).favoriteHeader, context),
+                                CaseChange.toUpperCase(AppLocalization.of(context)!.favoriteHeader, context),
                                 style: AppStyles.textStyleHeader(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
@@ -140,7 +140,7 @@ class UserDetailsSheet {
                                 borderRadius: BorderRadius.circular(25),
                               ),
                               child: Text(
-                                "★" + user.username,
+                                "★" + user.username!,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
@@ -158,7 +158,7 @@ class UserDetailsSheet {
                                   _addressCopied = true;
                                 });
                                 if (_addressCopiedTimer != null) {
-                                  _addressCopiedTimer.cancel();
+                                  _addressCopiedTimer!.cancel();
                                 }
                                 _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
                                   setState(() {
@@ -175,14 +175,14 @@ class UserDetailsSheet {
                                   color: StateContainer.of(context).curTheme.backgroundDarkest,
                                   borderRadius: BorderRadius.circular(25),
                                 ),
-                                child: UIUtil.threeLineAddressText(context, user.address,
+                                child: UIUtil.threeLineAddressText(context, user.address!,
                                     type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
                               ),
                             ),
                             // Address Copied text container
                             Container(
                               margin: EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
+                              child: Text(_addressCopied ? AppLocalization.of(context)!.addressCopied : "",
                                   style: TextStyle(
                                     fontSize: 14.0,
                                     color: StateContainer.of(context).curTheme.success,
@@ -202,8 +202,8 @@ class UserDetailsSheet {
                           Row(
                             children: <Widget>[
                               // Send Button
-                              AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS,
-                                  disabled: StateContainer.of(context).wallet.accountBalance == BigInt.zero, onPressed: () {
+                              AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.send, Dimens.BUTTON_TOP_DIMENS,
+                                  disabled: StateContainer.of(context).wallet!.accountBalance == BigInt.zero, onPressed: () {
                                 Navigator.of(context).pop();
                                 Sheets.showAppHeightNineSheet(
                                     context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user));
@@ -213,7 +213,7 @@ class UserDetailsSheet {
                           Row(
                             children: <Widget>[
                               // Close Button
-                              AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                              AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
                                   onPressed: () {
                                 Navigator.pop(context);
                               }),

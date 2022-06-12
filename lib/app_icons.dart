@@ -20,7 +20,7 @@ class AppIcons {
 
   static const _kFontFam = 'AppIcons';
   static const _eFontFam = 'ExtraAppIcons';
-  static const _kFontPkg = null;
+  static const dynamic _kFontPkg = null;
 
   static const IconData accountswitcher = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData accountwallet = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);

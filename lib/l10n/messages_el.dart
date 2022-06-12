@@ -18,7 +18,7 @@ typedef MessageIfAbsent(String message_str, List args);
 class MessageLookup extends MessageLookupByLibrary {
   get localeName => 'el';
 
-  final messages = _notInlinedMessages(_notInlinedMessages);
+  final Map<String, dynamic> messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
         "addContact": MessageLookupByLibrary.simpleMessage("Προσθήκη Επαφής"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("Η Διεύθυνση Αντιγράφηκε"),

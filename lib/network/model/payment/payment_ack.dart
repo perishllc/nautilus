@@ -7,21 +7,21 @@ part 'payment_ack.g.dart';
 @JsonSerializable()
 class PaymentACK extends BaseRequest {
   @JsonKey(name: 'action')
-  String action;
+  String? action;
 
   @JsonKey(name: 'uuid')
-  String uuid;
+  String? uuid;
 
   @JsonKey(name: 'account')
-  String account;
+  String? account;
 
   @JsonKey(name: 'requesting_account')
-  String requesting_account;
+  String? requesting_account;
 
   @JsonKey(name: 'sub_action')
-  String sub_action;
+  String? sub_action;
 
-  PaymentACK({String action, String uuid, String account, String requesting_account, String sub_action}) : super() {
+  PaymentACK({String? action, String? uuid, String? account, String? requesting_account, String? sub_action}) : super() {
     this.action = Actions.PAYMENT_ACK;
     this.uuid = uuid ?? "";
     this.account = account ?? "";

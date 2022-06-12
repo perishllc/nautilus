@@ -8,14 +8,14 @@ part of 'payment_request.dart';
 
 PaymentRequest _$PaymentRequestFromJson(Map<String, dynamic> json) {
   return PaymentRequest(
-    action: json['action'] as String,
-    account: json['account'] as String,
-    amount_raw: json['amount_raw'] as String,
-    requesting_account: json['requesting_account'] as String,
-    request_signature: json['request_signature'] as String,
-    request_nonce: json['request_nonce'] as String,
-    memo_enc: json['memo_enc'] as String,
-    local_uuid: json['local_uuid'] as String,
+    action: json['action'] as String?,
+    account: json['account'] as String?,
+    amount_raw: json['amount_raw'] as String?,
+    requesting_account: json['requesting_account'] as String?,
+    request_signature: json['request_signature'] as String?,
+    request_nonce: json['request_nonce'] as String?,
+    memo_enc: json['memo_enc'] as String?,
+    local_uuid: json['local_uuid'] as String?,
   );
 }
 

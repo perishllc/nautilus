@@ -6,16 +6,16 @@ part 'pending_response.g.dart';
 
 /// For running in an isolate, needs to be top-level function
 PendingResponse pendingResponseFromJson(Map<dynamic, dynamic> json) {
-  return PendingResponse.fromJson(json);
+  return PendingResponse.fromJson(json as Map<String, dynamic>);
 } 
 
 @JsonSerializable()
 class PendingResponse {
   @JsonKey(name:"blocks")
-  Map<String, PendingResponseItem> blocks;
+  Map<String, PendingResponseItem>? blocks;
 
   @JsonKey(ignore: true)
-  String account;
+  String? account;
 
   PendingResponse({this.blocks});
 

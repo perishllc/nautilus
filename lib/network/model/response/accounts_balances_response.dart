@@ -6,13 +6,13 @@ part 'accounts_balances_response.g.dart';
 
 /// For running in an isolate, needs to be top-level function
 AccountsBalancesResponse accountsBalancesResponseFromJson(Map<dynamic, dynamic> json) {
-  return AccountsBalancesResponse.fromJson(json);
+  return AccountsBalancesResponse.fromJson(json as Map<String, dynamic>);
 } 
 
 @JsonSerializable()
 class AccountsBalancesResponse {
   @JsonKey(name:'balances')
-  Map<String, AccountBalanceItem> balances;
+  Map<String, AccountBalanceItem>? balances;
 
   AccountsBalancesResponse({this.balances});
 

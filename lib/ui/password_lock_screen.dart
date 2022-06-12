@@ -25,10 +25,10 @@ class AppPasswordLockScreen extends StatefulWidget {
 }
 
 class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
-  FocusNode enterPasswordFocusNode;
-  TextEditingController enterPasswordController;
+  FocusNode? enterPasswordFocusNode;
+  TextEditingController? enterPasswordController;
 
-  String passwordError;
+  String? passwordError;
 
   @override
   void initState() {
@@ -61,11 +61,11 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                       FlatButton(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                         onPressed: () {
-                          AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
-                              AppLocalization.of(context).logoutDetail, AppLocalization.of(context).logoutAction.toUpperCase(), () {
+                          AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(AppLocalization.of(context)!.warning, context),
+                              AppLocalization.of(context)!.logoutDetail, AppLocalization.of(context)!.logoutAction.toUpperCase(), () {
                             // Show another confirm dialog
-                            AppDialogs.showConfirmDialog(context, AppLocalization.of(context).logoutAreYouSure, AppLocalization.of(context).logoutReassurance,
-                                CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                            AppDialogs.showConfirmDialog(context, AppLocalization.of(context)!.logoutAreYouSure, AppLocalization.of(context)!.logoutReassurance,
+                                CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () {
                               // Unsubscribe from notifications
                               sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((_) {
                                 FirebaseMessaging.instance.getToken().then((fcmToken) {
@@ -91,7 +91,7 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                               Icon(AppIcons.logout, size: 16, color: StateContainer.of(context).curTheme.text),
                               Container(
                                 margin: EdgeInsetsDirectional.only(start: 4),
-                                child: Text(AppLocalization.of(context).logout, style: AppStyles.textStyleLogoutButton(context)),
+                                child: Text(AppLocalization.of(context)!.logout, style: AppStyles.textStyleLogoutButton(context)),
                               ),
                             ],
                           ),
@@ -113,7 +113,7 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                     ),
                     Container(
                       child: Text(
-                        CaseChange.toUpperCase(AppLocalization.of(context).locked, context),
+                        CaseChange.toUpperCase(AppLocalization.of(context)!.locked, context),
                         style: AppStyles.textStyleHeaderColored(context),
                       ),
                       margin: EdgeInsets.only(top: 10),
@@ -143,7 +143,7 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                                   FocusScope.of(context).unfocus();
                                   await validateAndDecrypt();
                                 },
-                                hintText: AppLocalization.of(context).enterPasswordHint,
+                                hintText: AppLocalization.of(context)!.enterPasswordHint,
                                 keyboardType: TextInputType.text,
                                 obscureText: true,
                                 textAlign: TextAlign.center,
@@ -158,7 +158,7 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                               Container(
                                 alignment: AlignmentDirectional(0, 0),
                                 margin: EdgeInsets.only(top: 3),
-                                child: Text(this.passwordError == null ? "" : this.passwordError,
+                                child: Text(this.passwordError == null ? "" : this.passwordError!,
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: StateContainer.of(context).curTheme.primary,
@@ -171,7 +171,7 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                 )),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).unlock, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.unlock, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () async {
                       await validateAndDecrypt();
                     }),
@@ -185,13 +185,13 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
 
   Future<void> validateAndDecrypt() async {
     try {
-      String decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(await sl.get<Vault>().getSeed(), enterPasswordController.text));
+      String decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(await sl.get<Vault>().getSeed(), enterPasswordController!.text));
       StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(decryptedSeed, await sl.get<Vault>().getSessionKey())));
       _goHome();
     } catch (e) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context).invalidPassword;
+          passwordError = AppLocalization.of(context)!.invalidPassword;
         });
       }
     }

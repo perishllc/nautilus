@@ -9,8 +9,8 @@ import 'package:meta/meta.dart';
 /// [AnimatedListState.insertItem] and [AnimatedList.removeItem].
 class ListModel<E> {
   ListModel({
-    @required this.listKey,
-    Iterable<E> initialItems,
+    required this.listKey,
+    Iterable<E>? initialItems,
   })  : assert(listKey != null),
         _items = List<E>.from(initialItems ?? <E>[]);
 
@@ -19,7 +19,7 @@ class ListModel<E> {
 
   List<E> get items => _items;
 
-  AnimatedListState get _animatedList => listKey.currentState;
+  AnimatedListState? get _animatedList => listKey.currentState;
 
   final INSERT_DURATION = Duration(milliseconds: 300);
   final REMOVE_DURATION = Duration(milliseconds: 300);
@@ -33,11 +33,11 @@ class ListModel<E> {
     // }
   }
 
-  void insertAt(E item, int index, {bool instant = false}) {
+  void insertAt(E item, int index, {bool? instant = false}) {
     if (listKey.currentState != null) {
       _items.insert(index, item);
-      Duration duration = instant ? Duration(milliseconds: 0) : INSERT_DURATION;
-      _animatedList.insertItem(index, duration: duration);
+      Duration duration = instant! ? Duration(milliseconds: 0) : INSERT_DURATION;
+      _animatedList!.insertItem(index, duration: duration);
     }
   }
 
@@ -45,7 +45,7 @@ class ListModel<E> {
     if (listKey.currentState != null) {
       _items.removeAt(index);
       Duration duration = instant ? Duration(milliseconds: 0) : REMOVE_DURATION;
-      _animatedList.removeItem(index, (BuildContext context, Animation<double> animation) => builder(context, index, animation), duration: duration);
+      _animatedList!.removeItem(index, (BuildContext context, Animation<double> animation) => builder(context, index, animation), duration: duration);
     }
   }
 

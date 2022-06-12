@@ -20,10 +20,10 @@ class AvatarPage extends StatefulWidget {
 
 class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateMixin {
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
-  AnimationController _controller;
-  Animation<Color> bgColorAnimation;
-  Animation<Offset> offsetTween;
-  bool hasEnoughFunds;
+  AnimationController? _controller;
+  late Animation<Color?> bgColorAnimation;
+  late Animation<Offset> offsetTween;
+  late bool hasEnoughFunds;
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
   @override
   void initState() {
@@ -32,7 +32,7 @@ class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateM
       duration: const Duration(milliseconds: 200),
       vsync: this,
     );
-    _controller.forward();
+    _controller!.forward();
   }
 
   @override
@@ -43,15 +43,15 @@ class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    hasEnoughFunds = StateContainer.of(context).wallet.accountBalance > BigInt.parse("1234570000000000000000000000");
+    hasEnoughFunds = StateContainer.of(context).wallet!.accountBalance > BigInt.parse("1234570000000000000000000000");
     bgColorAnimation = ColorTween(
       begin: Colors.transparent,
       end: StateContainer.of(context).curTheme.barrier,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut, reverseCurve: Curves.easeIn));
+    ).animate(CurvedAnimation(parent: _controller!, curve: Curves.easeOut, reverseCurve: Curves.easeIn));
     offsetTween = Tween<Offset>(begin: Offset(0, 200), end: Offset(0, 0))
-        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut, reverseCurve: Curves.easeIn));
+        .animate(CurvedAnimation(parent: _controller!, curve: Curves.easeOut, reverseCurve: Curves.easeIn));
     return AnimatedBuilder(
-      animation: _controller,
+      animation: _controller!,
       builder: (context, child) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -70,7 +70,7 @@ class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateM
                         // Gesture Detector
                         Container(
                           child: GestureDetector(onTapDown: (details) {
-                            _controller.reverse();
+                            _controller!.reverse();
                             Navigator.pop(context);
                           }),
                         ),
@@ -127,7 +127,7 @@ class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateM
                         Container(
                           alignment: Alignment.bottomCenter,
                           child: AnimatedBuilder(
-                              animation: _controller,
+                              animation: _controller!,
                               builder: (context, child) {
                                 return Transform.translate(
                                   offset: offsetTween.value,
@@ -160,7 +160,7 @@ class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateM
                                                   AppButtonType.PRIMARY_OUTLINE,
                                                   "Turn Off Natricon",
                                                   Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                                                _controller.reverse();
+                                                _controller!.reverse();
                                                 sl.get<SharedPrefsUtil>().setUseNatricon(false).then((result) {
                                                   setState(() {
                                                     StateContainer.of(context).setNatriconOn(false);

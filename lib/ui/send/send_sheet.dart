@@ -33,6 +33,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
@@ -42,11 +43,11 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 class SendSheet extends StatefulWidget {
   final AvailableCurrency localCurrency;
-  final User user;
-  final String address;
-  final String quickSendAmount;
+  final User? user;
+  final String? address;
+  final String? quickSendAmount;
 
-  SendSheet({@required this.localCurrency, this.user, this.address, this.quickSendAmount}) : super();
+  SendSheet({required this.localCurrency, this.user, this.address, this.quickSendAmount}) : super();
 
   _SendSheetState createState() => _SendSheetState();
 }
@@ -62,24 +63,24 @@ class SendSheetHelpers {
 class _SendSheetState extends State<SendSheet> {
   final Logger log = sl.get<Logger>();
 
-  FocusNode _addressFocusNode;
-  FocusNode _amountFocusNode;
-  FocusNode _memoFocusNode;
-  TextEditingController _addressController;
-  TextEditingController _amountController;
-  TextEditingController _memoController;
+  FocusNode? _addressFocusNode;
+  FocusNode? _amountFocusNode;
+  FocusNode? _memoFocusNode;
+  TextEditingController? _addressController;
+  TextEditingController? _amountController;
+  TextEditingController? _memoController;
 
   // States
-  AddressStyle _addressStyle;
-  String _amountHint;
-  String _addressHint;
-  String _memoHint;
-  String _amountValidationText;
-  String _addressValidationText;
-  String _memoValidationText;
-  String quickSendAmount;
-  List<dynamic> _users;
-  bool animationOpen;
+  AddressStyle? _addressStyle;
+  String? _amountHint;
+  String? _addressHint;
+  String? _memoHint;
+  String? _amountValidationText;
+  String? _addressValidationText;
+  String? _memoValidationText;
+  String? quickSendAmount;
+  late List<dynamic> _users;
+  bool? animationOpen;
   // Used to replace address textfield with colorized TextSpan
   bool _addressValidAndUnfocused = false;
   // Set to true when a username is being entered
@@ -92,14 +93,14 @@ class _SendSheetState extends State<SendSheet> {
   bool _localCurrencyMode = false;
   String _lastLocalCurrencyAmount = "";
   String _lastCryptoAmount = "";
-  NumberFormat _localCurrencyFormat;
+  NumberFormat? _localCurrencyFormat;
 
   final int _REQUIRED_CONFIRMATION_HEIGHT = 10;
 
   // Receive card instance
-  ReceiveSheet receive;
+  ReceiveSheet? receive;
 
-  String _rawAmount;
+  String? _rawAmount;
 
   @override
   void initState() {
@@ -116,30 +117,30 @@ class _SendSheetState extends State<SendSheet> {
     this.animationOpen = false;
     if (widget.user != null) {
       // Setup initial state for contact pre-filled
-      _addressController.text = widget.user.getDisplayName();
+      _addressController!.text = widget.user!.getDisplayName()!;
       _isUser = true;
       _showContactButton = false;
       _pasteButtonVisible = false;
       _addressStyle = AddressStyle.PRIMARY;
     } else if (widget.address != null) {
       // Setup initial state with prefilled address
-      _addressController.text = widget.address;
+      _addressController!.text = widget.address!;
       _showContactButton = false;
       _pasteButtonVisible = false;
       _addressStyle = AddressStyle.TEXT90;
       _addressValidAndUnfocused = true;
     }
     // On amount focus change
-    _amountFocusNode.addListener(() {
-      if (_amountFocusNode.hasFocus) {
+    _amountFocusNode!.addListener(() {
+      if (_amountFocusNode!.hasFocus) {
         if (_rawAmount != null) {
           setState(() {
-            _amountController.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
+            _amountController!.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
             _rawAmount = null;
           });
         }
         if (quickSendAmount != null) {
-          _amountController.text = "";
+          _amountController!.text = "";
           setState(() {
             quickSendAmount = null;
           });
@@ -155,8 +156,8 @@ class _SendSheetState extends State<SendSheet> {
       }
     });
     // On address focus change
-    _addressFocusNode.addListener(() async {
-      if (_addressFocusNode.hasFocus) {
+    _addressFocusNode!.addListener(() async {
+      if (_addressFocusNode!.hasFocus) {
         setState(() {
           _addressHint = "";
           _addressValidationText = "";
@@ -164,12 +165,12 @@ class _SendSheetState extends State<SendSheet> {
           _pasteButtonVisible = true;
           _addressStyle = AddressStyle.TEXT60;
         });
-        _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
-        if (_addressController.text.length > 0 && !_addressController.text.startsWith("nano_")) {
-          String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
-          if (_addressController.text != formattedAddress) {
+        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        if (_addressController!.text.length > 0 && !_addressController!.text.startsWith("nano_")) {
+          String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
+          if (_addressController!.text != formattedAddress) {
             setState(() {
-              _addressController.text = formattedAddress;
+              _addressController!.text = formattedAddress;
             });
           }
           var userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
@@ -180,7 +181,7 @@ class _SendSheetState extends State<SendSheet> {
           }
         }
 
-        if (_addressController.text.length == 0) {
+        if (_addressController!.text.length == 0) {
           setState(() {
             _users = [];
           });
@@ -189,29 +190,29 @@ class _SendSheetState extends State<SendSheet> {
         setState(() {
           _addressHint = null;
           _users = [];
-          if (Address(_addressController.text).isValid()) {
+          if (Address(_addressController!.text).isValid()) {
             _addressValidAndUnfocused = true;
           }
-          if (_addressController.text.length == 0) {
+          if (_addressController!.text.length == 0) {
             _pasteButtonVisible = true;
           }
         });
-        if (_addressController.text.length > 0) {
-          String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
+        if (_addressController!.text.length > 0) {
+          String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           // check if in the username db:
-          String address;
-          String type;
+          String? address;
+          String? type;
           var user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
           if (user != null) {
             type = user.type;
-            if (_addressController.text != user.getDisplayName()) {
+            if (_addressController!.text != user.getDisplayName()) {
               setState(() {
-                _addressController.text = user.getDisplayName();
+                _addressController!.text = user.getDisplayName()!;
               });
             }
           } else {
             // check if UD or ENS address
-            if (_addressController.text.contains(".")) {
+            if (_addressController!.text.contains(".")) {
               // check if UD domain:
               address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
               if (address != null) {
@@ -246,8 +247,8 @@ class _SendSheetState extends State<SendSheet> {
       }
     });
     // On memo focus change
-    _memoFocusNode.addListener(() {
-      if (_memoFocusNode.hasFocus) {
+    _memoFocusNode!.addListener(() {
+      if (_memoFocusNode!.hasFocus) {
         setState(() {
           _memoHint = "";
           _memoValidationText = "";
@@ -262,8 +263,8 @@ class _SendSheetState extends State<SendSheet> {
     // Set initial currency format
     _localCurrencyFormat = NumberFormat.currency(locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
     // Set quick send amount
-    if (quickSendAmount != null && quickSendAmount.isNotEmpty && quickSendAmount != "0") {
-      _amountController.text = NumberUtil.getRawAsUsableString(quickSendAmount).replaceAll(",", "");
+    if (quickSendAmount != null && quickSendAmount!.isNotEmpty && quickSendAmount != "0") {
+      _amountController!.text = NumberUtil.getRawAsUsableString(quickSendAmount).replaceAll(",", "");
     }
   }
 
@@ -279,13 +280,13 @@ class _SendSheetState extends State<SendSheet> {
         builder: (BuildContext context) {
           return AppSimpleDialog(
             title: Text(
-              AppLocalization.of(context).notifications,
+              AppLocalization.of(context)!.notifications,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Text(AppLocalization.of(context).notificationInfo + "\n", style: AppStyles.textStyleParagraph(context)),
+                child: Text(AppLocalization.of(context)!.notificationInfo + "\n", style: AppStyles.textStyleParagraph(context)),
               ),
               AppSimpleDialogOption(
                 onPressed: () {
@@ -294,7 +295,7 @@ class _SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).onStr,
+                    AppLocalization.of(context)!.onStr,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -306,7 +307,7 @@ class _SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).off,
+                    AppLocalization.of(context)!.off,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -339,14 +340,14 @@ class _SendSheetState extends State<SendSheet> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              AppLocalization.of(context).needVerificationAlertHeader,
+              AppLocalization.of(context)!.needVerificationAlertHeader,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text(AppLocalization.of(context).needVerificationAlert + "\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text(AppLocalization.of(context)!.needVerificationAlert + "\n\n", style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actions: <Widget>[
@@ -357,7 +358,7 @@ class _SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).goToQRCode,
+                    AppLocalization.of(context)!.goToQRCode,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -369,7 +370,7 @@ class _SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).ok,
+                    AppLocalization.of(context)!.ok,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -385,7 +386,7 @@ class _SendSheetState extends State<SendSheet> {
         Navigator.of(context).pop();
         // TODO: BACKLOG: this is a roundabout solution to get the qr code to show up
         // probably better to do with an event bus
-        Sheets.showAppHeightNineSheet(context: context, widget: receive);
+        Sheets.showAppHeightNineSheet(context: context, widget: receive!);
         return true;
         break;
       default:
@@ -401,14 +402,14 @@ class _SendSheetState extends State<SendSheet> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              AppLocalization.of(context).fallbackHeader,
+              AppLocalization.of(context)!.fallbackHeader,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text(AppLocalization.of(context).fallbackInfo + "\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text(AppLocalization.of(context)!.fallbackInfo + "\n\n", style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actions: <Widget>[
@@ -419,7 +420,7 @@ class _SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).ok,
+                    AppLocalization.of(context)!.ok,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -429,9 +430,9 @@ class _SendSheetState extends State<SendSheet> {
         });
   }
 
-  void paintQrCode({String address}) {
+  void paintQrCode({String? address}) {
     QrPainter painter = QrPainter(
-      data: address == null ? StateContainer.of(context).wallet.address : address,
+      data: address == null ? StateContainer.of(context).wallet!.address! : address,
       version: 6,
       gapless: false,
       errorCorrectionLevel: QrErrorCorrectLevel.Q,
@@ -440,8 +441,8 @@ class _SendSheetState extends State<SendSheet> {
       setState(() {
         receive = ReceiveSheet(
           localCurrency: StateContainer.of(context).curCurrency,
-          address: StateContainer.of(context).wallet.address,
-          qrWidget: Container(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData.buffer.asUint8List())),
+          address: StateContainer.of(context).wallet!.address,
+          qrWidget: Container(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List())),
         );
       });
     });
@@ -489,7 +490,7 @@ class _SendSheetState extends State<SendSheet> {
                         children: <Widget>[
                           // Header
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context).sendFrom, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context)!.sendFrom, context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,
@@ -501,9 +502,20 @@ class _SendSheetState extends State<SendSheet> {
                   ],
                 ),
                 //Empty SizedBox
-                SizedBox(
+                // SizedBox(
+                //   width: 60,
+                //   height: 60,
+                // ),
+                Container(
                   width: 60,
                   height: 60,
+                  padding: EdgeInsets.only(top: 25, right: 20),
+                  child: AppDialogs.infoButton(
+                    context,
+                    () {
+                      AppDialogs.showInfoDialog(context, AppLocalization.of(context)!.sendSheetInfoHeader, AppLocalization.of(context)!.sendSheetInfo);
+                    },
+                  ),
                 ),
               ],
             ),
@@ -518,7 +530,7 @@ class _SendSheetState extends State<SendSheet> {
                     text: '',
                     children: [
                       TextSpan(
-                        text: StateContainer.of(context).selectedAccount.name,
+                        text: StateContainer.of(context).selectedAccount!.name,
                         style: TextStyle(
                           color: StateContainer.of(context).curTheme.text60,
                           fontSize: 16.0,
@@ -569,9 +581,9 @@ class _SendSheetState extends State<SendSheet> {
                           TextSpan(
                             text: _localCurrencyMode
                                 ? StateContainer.of(context)
-                                    .wallet
+                                    .wallet!
                                     .getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale)
-                                : getCurrencySymbol(context) + StateContainer.of(context).wallet.getAccountBalanceDisplay(context),
+                                : getCurrencySymbol(context) + StateContainer.of(context).wallet!.getAccountBalanceDisplay(context),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary60,
                               fontSize: 14.0,
@@ -613,9 +625,9 @@ class _SendSheetState extends State<SendSheet> {
                 child: GestureDetector(
                   onTap: () {
                     // Clear focus of our fields when tapped in this empty space
-                    _addressFocusNode.unfocus();
-                    _amountFocusNode.unfocus();
-                    _memoFocusNode.unfocus();
+                    _addressFocusNode!.unfocus();
+                    _amountFocusNode!.unfocus();
+                    _memoFocusNode!.unfocus();
                   },
                   child: KeyboardAvoider(
                     duration: Duration(milliseconds: 0),
@@ -767,41 +779,41 @@ class _SendSheetState extends State<SendSheet> {
                   Row(
                     children: <Widget>[
                       // Send Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, [27.0, 0.0, 7.0, 24.0], onPressed: () async {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.send, [27.0, 0.0, 7.0, 24.0], onPressed: () async {
                         bool validRequest = await _validateRequest();
 
                         if (!validRequest) {
                           return;
                         }
 
-                        String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
+                        String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
 
                         String amountRaw;
 
-                        if (_amountController.text.isEmpty || _amountController.text == "0") {
+                        if (_amountController!.text.isEmpty || _amountController!.text == "0") {
                           amountRaw = "0";
                         } else {
                           if (_localCurrencyMode) {
                             amountRaw = NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto());
                           } else {
-                            amountRaw = _rawAmount ?? (StateContainer.of(context).nyanoMode)
-                                ? NumberUtil.getNyanoAmountAsRaw(_amountController.text)
-                                : NumberUtil.getAmountAsRaw(_amountController.text);
+                            amountRaw = _rawAmount as bool? ?? (StateContainer.of(context).nyanoMode)
+                                ? NumberUtil.getNyanoAmountAsRaw(_amountController!.text)
+                                : NumberUtil.getAmountAsRaw(_amountController!.text);
                           }
                         }
 
                         // verifyies the input is a user in the db
-                        if (!_addressController.text.startsWith("nano_")) {
+                        if (!_addressController!.text.startsWith("nano_")) {
                           // Need to make sure its a valid contact or user
                           var user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
                           if (user == null) {
                             setState(() {
-                              if (_addressController.text.startsWith("★")) {
-                                _addressValidationText = AppLocalization.of(context).favoriteInvalid;
-                              } else if (_addressController.text.startsWith("@")) {
-                                _addressValidationText = AppLocalization.of(context).usernameInvalid;
-                              } else if (_addressController.text.contains(".")) {
-                                _addressValidationText = AppLocalization.of(context).domainInvalid;
+                              if (_addressController!.text.startsWith("★")) {
+                                _addressValidationText = AppLocalization.of(context)!.favoriteInvalid;
+                              } else if (_addressController!.text.startsWith("@")) {
+                                _addressValidationText = AppLocalization.of(context)!.usernameInvalid;
+                              } else if (_addressController!.text.contains(".")) {
+                                _addressValidationText = AppLocalization.of(context)!.domainInvalid;
                               }
                             });
                           } else {
@@ -812,54 +824,54 @@ class _SendSheetState extends State<SendSheet> {
                                     destination: user.address,
                                     contactName: user.getDisplayName(),
                                     maxSend: _isMaxSend(),
-                                    localCurrency: _localCurrencyMode ? _amountController.text : null,
-                                    memo: _memoController.text));
+                                    localCurrency: _localCurrencyMode ? _amountController!.text : null,
+                                    memo: _memoController!.text));
                           }
                         } else {
                           Sheets.showAppHeightNineSheet(
                               context: context,
                               widget: SendConfirmSheet(
                                   amountRaw: amountRaw,
-                                  destination: _addressController.text,
+                                  destination: _addressController!.text,
                                   maxSend: _isMaxSend(),
-                                  localCurrency: _localCurrencyMode ? _amountController.text : null,
-                                  memo: _memoController.text));
+                                  localCurrency: _localCurrencyMode ? _amountController!.text : null,
+                                  memo: _memoController!.text));
                         }
                       }),
                       // Request Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).request, [7.0, 0.0, 27.0, 24.0],
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.request, [7.0, 0.0, 27.0, 24.0],
                           onPressed: () async {
                         bool validRequest = await _validateRequest(isRequest: true);
 
                         if (!validRequest) {
                           return;
                         }
-                        String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
+                        String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
                         String amountRaw;
-                        if (_amountController.text.isEmpty || _amountController.text == "0") {
+                        if (_amountController!.text.isEmpty || _amountController!.text == "0") {
                           amountRaw = "0";
                         } else {
                           if (_localCurrencyMode) {
                             amountRaw = NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto());
                           } else {
-                            amountRaw = _rawAmount ?? (StateContainer.of(context).nyanoMode)
-                                ? NumberUtil.getNyanoAmountAsRaw(_amountController.text)
-                                : NumberUtil.getAmountAsRaw(_amountController.text);
+                            amountRaw = _rawAmount as bool? ?? (StateContainer.of(context).nyanoMode)
+                                ? NumberUtil.getNyanoAmountAsRaw(_amountController!.text)
+                                : NumberUtil.getAmountAsRaw(_amountController!.text);
                           }
                         }
 
                         // verifyies the input is a user in the db
-                        if (_addressController.text.startsWith("@") || _addressController.text.startsWith("★") || _addressController.text.contains(".")) {
+                        if (_addressController!.text.startsWith("@") || _addressController!.text.startsWith("★") || _addressController!.text.contains(".")) {
                           // Need to make sure its a valid contact or user
                           var user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
                           if (user == null) {
                             setState(() {
-                              if (_addressController.text.startsWith("★")) {
-                                _addressValidationText = AppLocalization.of(context).favoriteInvalid;
-                              } else if (_addressController.text.startsWith("@")) {
-                                _addressValidationText = AppLocalization.of(context).usernameInvalid;
-                              } else if (_addressController.text.contains(".")) {
-                                _addressValidationText = AppLocalization.of(context).domainInvalid;
+                              if (_addressController!.text.startsWith("★")) {
+                                _addressValidationText = AppLocalization.of(context)!.favoriteInvalid;
+                              } else if (_addressController!.text.startsWith("@")) {
+                                _addressValidationText = AppLocalization.of(context)!.usernameInvalid;
+                              } else if (_addressController!.text.contains(".")) {
+                                _addressValidationText = AppLocalization.of(context)!.domainInvalid;
                               }
                             });
                           } else {
@@ -869,32 +881,32 @@ class _SendSheetState extends State<SendSheet> {
                                   amountRaw: amountRaw,
                                   destination: user.address,
                                   contactName: user.getDisplayName(),
-                                  localCurrency: _localCurrencyMode ? _amountController.text : null,
-                                  memo: _memoController.text,
+                                  localCurrency: _localCurrencyMode ? _amountController!.text : null,
+                                  memo: _memoController!.text,
                                 ));
                           }
-                        } else if (_addressController.text.contains(".")) {
-                          String address;
+                        } else if (_addressController!.text.contains(".")) {
+                          String? address;
 
                           // check if UD domain:
-                          address = await sl.get<AccountService>().checkUnstoppableDomain(_addressController.text);
+                          address = await sl.get<AccountService>().checkUnstoppableDomain(_addressController!.text);
                           if (address != null) {
                           } else {
                             // check if ENS domain:
-                            address = await sl.get<AccountService>().checkENSDomain(_addressController.text);
+                            address = await sl.get<AccountService>().checkENSDomain(_addressController!.text);
                           }
 
                           if (address == null) {
-                            _addressValidationText = AppLocalization.of(context).domainInvalid;
+                            _addressValidationText = AppLocalization.of(context)!.domainInvalid;
                           }
                         } else {
                           Sheets.showAppHeightNineSheet(
                               context: context,
                               widget: RequestConfirmSheet(
                                   amountRaw: amountRaw,
-                                  destination: _addressController.text,
-                                  localCurrency: _localCurrencyMode ? _amountController.text : null,
-                                  memo: _memoController.text));
+                                  destination: _addressController!.text,
+                                  localCurrency: _localCurrencyMode ? _amountController!.text : null,
+                                  memo: _memoController!.text));
                         }
                       }),
                     ],
@@ -902,12 +914,12 @@ class _SendSheetState extends State<SendSheet> {
                   Row(
                     children: <Widget>[
                       // Scan QR Code Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).scanQrCode, Dimens.BUTTON_BOTTOM_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.scanQrCode, Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () async {
                         UIUtil.cancelLockEvent();
-                        String scanResult = await UserDataUtil.getQRData(DataType.MANTA_ADDRESS, context);
+                        String? scanResult = await UserDataUtil.getQRData(DataType.MANTA_ADDRESS, context);
                         if (scanResult == null) {
-                          UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+                          UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
                         } else if (QRScanErrs.ERROR_LIST.contains(scanResult)) {
                           return;
                         } else if (false) {
@@ -916,7 +928,7 @@ class _SendSheetState extends State<SendSheet> {
                           // Is a URI
                           Address address = Address(scanResult);
                           // See if this address belongs to a contact or username
-                          dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address);
+                          dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
                           if (user != null) {
                             // Is a user
                             if (mounted) {
@@ -927,7 +939,7 @@ class _SendSheetState extends State<SendSheet> {
                                 _pasteButtonVisible = false;
                                 _showContactButton = false;
                               });
-                              _addressController.text = user.getDisplayName();
+                              _addressController!.text = user.getDisplayName();
                             }
                           } else {
                             // Not a contact or username
@@ -939,8 +951,8 @@ class _SendSheetState extends State<SendSheet> {
                                 _pasteButtonVisible = false;
                                 _showContactButton = false;
                               });
-                              _addressController.text = address.address;
-                              _addressFocusNode.unfocus();
+                              _addressController!.text = address.address!;
+                              _addressFocusNode!.unfocus();
                               setState(() {
                                 _addressValidAndUnfocused = true;
                               });
@@ -949,33 +961,33 @@ class _SendSheetState extends State<SendSheet> {
                           // If amount is present, fill it and go to SendConfirm
                           if (address.amount != null) {
                             bool hasError = false;
-                            BigInt amountBigInt = BigInt.tryParse(address.amount);
+                            BigInt? amountBigInt = BigInt.tryParse(address.amount!);
                             if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
                               hasError = true;
-                              UIUtil.showSnackbar(AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001"), context);
+                              UIUtil.showSnackbar(AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001"), context);
                             } else if (_localCurrencyMode && mounted) {
                               toggleLocalCurrency();
-                              _amountController.text = getRawAsThemeAwareAmount(context, address.amount);
+                              _amountController!.text = getRawAsThemeAwareAmount(context, address.amount);
                             } else if (mounted) {
                               setState(() {
                                 _rawAmount = address.amount;
                                 // If raw amount has more precision than we support show a special indicator
                                 if ((StateContainer.of(context).nyanoMode)) {
-                                  _amountController.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
+                                  _amountController!.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
                                 } else {
                                   if (NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "") ==
                                       NumberUtil.getRawAsUsableDecimal(_rawAmount).toString()) {
-                                    _amountController.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
+                                    _amountController!.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
                                   } else {
-                                    _amountController.text =
+                                    _amountController!.text =
                                         NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(address.amount), digits: 6).toStringAsFixed(6) + "~";
                                   }
                                 }
                               });
-                              _addressFocusNode.unfocus();
+                              _addressFocusNode!.unfocus();
                             }
                             // If balance is sufficient go to SendConfirm
-                            if (!hasError && StateContainer.of(context).wallet.accountBalance > amountBigInt) {
+                            if (!hasError && StateContainer.of(context).wallet!.accountBalance > amountBigInt!) {
                               // Go to confirm sheet
                               Sheets.showAppHeightNineSheet(
                                   context: context,
@@ -983,12 +995,12 @@ class _SendSheetState extends State<SendSheet> {
                                       amountRaw: _localCurrencyMode
                                           ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
                                           : _rawAmount == null
-                                              ? NumberUtil.getAmountAsRaw(_amountController.text)
+                                              ? NumberUtil.getAmountAsRaw(_amountController!.text)
                                               : _rawAmount,
                                       destination: user != null ? user.address : address.address,
                                       contactName: user.getDisplayName(),
                                       maxSend: _isMaxSend(),
-                                      localCurrency: _localCurrencyMode ? _amountController.text : null));
+                                      localCurrency: _localCurrencyMode ? _amountController!.text : null));
                             }
                           }
                         }
@@ -1003,43 +1015,43 @@ class _SendSheetState extends State<SendSheet> {
   }
 
   String _convertLocalCurrencyToCrypto() {
-    String convertedAmt = _amountController.text.replaceAll(",", ".");
+    String convertedAmt = _amountController!.text.replaceAll(",", ".");
     convertedAmt = NumberUtil.sanitizeNumber(convertedAmt);
     if (convertedAmt.isEmpty) {
       return "";
     }
     Decimal valueLocal = Decimal.parse(convertedAmt);
-    Decimal conversion = Decimal.parse(StateContainer.of(context).wallet.localCurrencyConversion);
+    Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     return NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal()).toString();
   }
 
   String _convertCryptoToLocalCurrency() {
-    String convertedAmt = NumberUtil.sanitizeNumber(_amountController.text, maxDecimalDigits: 2);
+    String convertedAmt = NumberUtil.sanitizeNumber(_amountController!.text, maxDecimalDigits: 2);
     if (convertedAmt.isEmpty) {
       return "";
     }
     Decimal valueCrypto = Decimal.parse(convertedAmt);
-    Decimal conversion = Decimal.parse(StateContainer.of(context).wallet.localCurrencyConversion);
+    Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     convertedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2).toString();
-    convertedAmt = convertedAmt.replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
-    convertedAmt = _localCurrencyFormat.currencySymbol + convertedAmt;
+    convertedAmt = convertedAmt.replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
+    convertedAmt = _localCurrencyFormat!.currencySymbol + convertedAmt;
     return convertedAmt;
   }
 
   // Determine if this is a max send or not by comparing balances
   bool _isMaxSend() {
     // Sanitize commas
-    if (_amountController.text.isEmpty) {
+    if (_amountController!.text.isEmpty) {
       return false;
     }
     try {
-      String textField = _amountController.text;
+      String textField = _amountController!.text;
       String balance;
       if (_localCurrencyMode) {
         balance =
-            StateContainer.of(context).wallet.getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+            StateContainer.of(context).wallet!.getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
       } else {
-        balance = StateContainer.of(context).wallet.getAccountBalanceDisplay(context).replaceAll(r",", "");
+        balance = StateContainer.of(context).wallet!.getAccountBalanceDisplay(context).replaceAll(r",", "");
       }
       // Convert to Integer representations
       int textFieldInt;
@@ -1048,15 +1060,15 @@ class _SendSheetState extends State<SendSheet> {
         // Sanitize currency values into plain integer representations
         textField = textField.replaceAll(",", ".");
         String sanitizedTextField = NumberUtil.sanitizeNumber(textField);
-        balance = balance.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
+        balance = balance.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
         balance = balance.replaceAll(",", ".");
         String sanitizedBalance = NumberUtil.sanitizeNumber(balance);
-        textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toDouble().toInt();
-        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toDouble().toInt();
+        textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       } else {
         textField = textField.replaceAll(",", "");
-        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toDouble().toInt();
-        balanceInt = (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits))).toDouble().toInt();
+        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        balanceInt = (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       }
       return textFieldInt == balanceInt;
     } catch (e) {
@@ -1071,10 +1083,10 @@ class _SendSheetState extends State<SendSheet> {
       // Switching to crypto-mode
       String cryptoAmountStr;
       // Check out previous state
-      if (_amountController.text == _lastLocalCurrencyAmount) {
+      if (_amountController!.text == _lastLocalCurrencyAmount) {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
-        _lastLocalCurrencyAmount = _amountController.text;
+        _lastLocalCurrencyAmount = _amountController!.text;
         _lastCryptoAmount = _convertLocalCurrencyToCrypto();
         cryptoAmountStr = _lastCryptoAmount;
       }
@@ -1082,17 +1094,17 @@ class _SendSheetState extends State<SendSheet> {
         _localCurrencyMode = false;
       });
       Future.delayed(Duration(milliseconds: 50), () {
-        _amountController.text = cryptoAmountStr;
-        _amountController.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
+        _amountController!.text = cryptoAmountStr;
+        _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
       });
     } else {
       // Switching to local-currency mode
       String localAmountStr;
       // Check our previous state
-      if (_amountController.text == _lastCryptoAmount) {
+      if (_amountController!.text == _lastCryptoAmount) {
         localAmountStr = _lastLocalCurrencyAmount;
       } else {
-        _lastCryptoAmount = _amountController.text;
+        _lastCryptoAmount = _amountController!.text;
         _lastLocalCurrencyAmount = _convertCryptoToLocalCurrency();
         localAmountStr = _lastLocalCurrencyAmount;
       }
@@ -1100,8 +1112,8 @@ class _SendSheetState extends State<SendSheet> {
         _localCurrencyMode = true;
       });
       Future.delayed(Duration(milliseconds: 50), () {
-        _amountController.text = localAmountStr;
-        _amountController.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
+        _amountController!.text = localAmountStr;
+        _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
       });
     }
   }
@@ -1116,8 +1128,8 @@ class _SendSheetState extends State<SendSheet> {
           width: double.infinity - 5,
           child: FlatButton(
             onPressed: () {
-              _addressController.text = user.getDisplayName(ignoreNickname: !_isFavorite);
-              _addressFocusNode.unfocus();
+              _addressController!.text = user.getDisplayName(ignoreNickname: !_isFavorite)!;
+              _addressFocusNode!.unfocus();
               setState(() {
                 _isUser = true;
                 _showContactButton = false;
@@ -1126,7 +1138,7 @@ class _SendSheetState extends State<SendSheet> {
                 _addressValidationText = "";
               });
             },
-            child: Text(user.getDisplayName(ignoreNickname: !_isFavorite), textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+            child: Text(user.getDisplayName(ignoreNickname: !_isFavorite)!, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(
@@ -1142,31 +1154,31 @@ class _SendSheetState extends State<SendSheet> {
   /// @returns true if valid, false otherwise
   Future<bool> _validateRequest({bool isRequest = false}) async {
     bool isValid = true;
-    _amountFocusNode.unfocus();
-    _addressFocusNode.unfocus();
-    _memoFocusNode.unfocus();
+    _amountFocusNode!.unfocus();
+    _addressFocusNode!.unfocus();
+    _memoFocusNode!.unfocus();
     // Validate amount
-    if (_amountController.text.trim().isEmpty && isRequest && _memoController.text.trim().isNotEmpty) {
+    if (_amountController!.text.trim().isEmpty && isRequest && _memoController!.text.trim().isNotEmpty) {
       isValid = false;
       setState(() {
-        _amountValidationText = AppLocalization.of(context).amountMissing;
+        _amountValidationText = AppLocalization.of(context)!.amountMissing;
       });
     } else {
       String bananoAmount = _localCurrencyMode
           ? _convertLocalCurrencyToCrypto()
           : _rawAmount == null
-              ? _amountController.text
+              ? _amountController!.text
               : NumberUtil.getRawAsUsableString(_rawAmount);
       if (bananoAmount == null || bananoAmount.isEmpty) {
         bananoAmount = "0";
       }
-      BigInt balanceRaw = StateContainer.of(context).wallet.accountBalance;
-      BigInt sendAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
+      BigInt? balanceRaw = StateContainer.of(context).wallet!.accountBalance;
+      BigInt? sendAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
       if (sendAmount == null || sendAmount == BigInt.zero) {
-        if (_memoController.text.trim().isEmpty || isRequest) {
+        if (_memoController!.text.trim().isEmpty || isRequest) {
           isValid = false;
           setState(() {
-            _amountValidationText = AppLocalization.of(context).amountMissing;
+            _amountValidationText = AppLocalization.of(context)!.amountMissing;
           });
         } else {
           setState(() {
@@ -1176,7 +1188,7 @@ class _SendSheetState extends State<SendSheet> {
       } else if (sendAmount > balanceRaw && !isRequest) {
         isValid = false;
         setState(() {
-          _amountValidationText = AppLocalization.of(context).insufficientBalance;
+          _amountValidationText = AppLocalization.of(context)!.insufficientBalance;
         });
       } else {
         setState(() {
@@ -1185,20 +1197,20 @@ class _SendSheetState extends State<SendSheet> {
       }
     }
     // Validate address
-    bool isUser = _addressController.text.startsWith("@");
-    bool isFavorite = _addressController.text.startsWith("★");
-    bool isDomain = _addressController.text.contains(".");
-    bool isNano = _addressController.text.startsWith("nano_");
-    if (_addressController.text.trim().isEmpty) {
+    bool isUser = _addressController!.text.startsWith("@");
+    bool isFavorite = _addressController!.text.startsWith("★");
+    bool isDomain = _addressController!.text.contains(".");
+    bool isNano = _addressController!.text.startsWith("nano_");
+    if (_addressController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context).addressMissing;
+        _addressValidationText = AppLocalization.of(context)!.addressMissing;
         _pasteButtonVisible = true;
       });
-    } else if (!isFavorite && !isUser && !isDomain && !Address(_addressController.text).isValid()) {
+    } else if (!isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context).invalidAddress;
+        _addressValidationText = AppLocalization.of(context)!.invalidAddress;
         _pasteButtonVisible = true;
       });
     } else if (!isUser && !isFavorite) {
@@ -1206,13 +1218,13 @@ class _SendSheetState extends State<SendSheet> {
         _addressValidationText = "";
         _pasteButtonVisible = false;
       });
-      _addressFocusNode.unfocus();
+      _addressFocusNode!.unfocus();
     }
     if (isValid) {
       // notifications must be turned on if sending a request or memo:
       bool notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
 
-      if ((isRequest || _memoController.text.isNotEmpty) && !notificationsEnabled) {
+      if ((isRequest || _memoController!.text.isNotEmpty) && !notificationsEnabled) {
         bool notificationTurnedOn = await showNotificationDialog();
         if (!notificationTurnedOn) {
           isValid = false;
@@ -1225,14 +1237,14 @@ class _SendSheetState extends State<SendSheet> {
 
       if (isValid && isRequest) {
         // still valid && you have to have a nautilus username to send requests:
-        if (StateContainer.of(context).wallet.username == null && StateContainer.of(context).wallet.confirmationHeight < _REQUIRED_CONFIRMATION_HEIGHT) {
+        if (StateContainer.of(context).wallet!.user == null && StateContainer.of(context).wallet!.confirmationHeight < _REQUIRED_CONFIRMATION_HEIGHT) {
           isValid = false;
           await showNeedVerificationAlert();
         }
       }
 
       if (isValid && sl.get<AccountService>().fallbackConnected) {
-        if (_memoController.text.trim().isNotEmpty) {
+        if (_memoController!.text.trim().isNotEmpty) {
           isValid = false;
           await showFallbackConnectedAlert();
         }
@@ -1260,7 +1272,7 @@ class _SendSheetState extends State<SendSheet> {
               LengthLimitingTextInputFormatter(13),
               _localCurrencyMode
                   ? CurrencyFormatter(
-                      decimalSeparator: _localCurrencyFormat.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat.symbols.GROUP_SEP, maxDecimalDigits: 2)
+                      decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP, maxDecimalDigits: 2)
                   : CurrencyFormatter(maxDecimalDigits: NumberUtil.maxDecimalDigits),
               LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
             ]
@@ -1276,7 +1288,7 @@ class _SendSheetState extends State<SendSheet> {
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
-      hintText: _amountHint ?? AppLocalization.of(context).enterAmount,
+      hintText: _amountHint ?? AppLocalization.of(context)!.enterAmount,
       prefixButton: _rawAmount == null
           ? TextFieldButton(
               icon: AppIcons.swapcurrency,
@@ -1292,9 +1304,9 @@ class _SendSheetState extends State<SendSheet> {
             return;
           }
           if (!_localCurrencyMode) {
-            _amountController.text = StateContainer.of(context).wallet.getAccountBalanceDisplay(context).replaceAll(r",", "");
-            _amountController.selection = TextSelection.fromPosition(TextPosition(offset: _amountController.text.length));
-            _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
+            _amountController!.text = StateContainer.of(context).wallet!.getAccountBalanceDisplay(context).replaceAll(r",", "");
+            _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
+            _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
             // setState(() {
             //   // force max send button to fade out
             // });
@@ -1304,13 +1316,13 @@ class _SendSheetState extends State<SendSheet> {
             // }
           } else {
             String localAmount = StateContainer.of(context)
-                .wallet
+                .wallet!
                 .getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
-            localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
-            localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
-            localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
-            _amountController.text = _localCurrencyFormat.currencySymbol + localAmount;
-            _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
+            localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
+            localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
+            localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
+            _amountController!.text = _localCurrencyFormat!.currencySymbol + localAmount;
+            _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
           }
         },
       ),
@@ -1320,7 +1332,7 @@ class _SendSheetState extends State<SendSheet> {
       textAlign: TextAlign.center,
       onSubmitted: (text) {
         FocusScope.of(context).unfocus();
-        if (!Address(_addressController.text).isValid()) {
+        if (!Address(_addressController!.text).isValid()) {
           FocusScope.of(context).requestFocus(_addressFocusNode);
         }
       },
@@ -1343,20 +1355,19 @@ class _SendSheetState extends State<SendSheet> {
         inputFormatters: [
           _isUser ? LengthLimitingTextInputFormatter(20) : LengthLimitingTextInputFormatter(65),
         ],
-        // textInputAction: TextInputAction.done,
-        textInputAction: TextInputAction.next,
+        textInputAction: _memoController!.text.isEmpty ? TextInputAction.next : TextInputAction.done,
         maxLines: null,
         autocorrect: false,
-        hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
+        hintText: _addressHint ?? AppLocalization.of(context)!.enterUserOrAddress,
         prefixButton: TextFieldButton(
           icon: AppIcons.star,
           onPressed: () {
             if (_showContactButton && _users.length == 0) {
               // Show menu
               FocusScope.of(context).requestFocus(_addressFocusNode);
-              if (_addressController.text.length == 0) {
-                _addressController.text = "★";
-                _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
+              if (_addressController!.text.length == 0) {
+                _addressController!.text = "★";
+                _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
               }
               sl.get<DBHelper>().getContacts().then((userList) {
                 final nicknames = Set();
@@ -1377,13 +1388,13 @@ class _SendSheetState extends State<SendSheet> {
             if (!_pasteButtonVisible) {
               return;
             }
-            Clipboard.getData("text/plain").then((ClipboardData data) {
+            Clipboard.getData("text/plain").then((ClipboardData? data) {
               if (data == null || data.text == null) {
                 return;
               }
               Address address = Address(data.text);
               if (address.isValid()) {
-                sl.get<DBHelper>().getUserOrContactWithAddress(address.address).then((user) {
+                sl.get<DBHelper>().getUserOrContactWithAddress(address.address!).then((user) {
                   if (user == null) {
                     setState(() {
                       _isUser = false;
@@ -1392,16 +1403,16 @@ class _SendSheetState extends State<SendSheet> {
                       _pasteButtonVisible = false;
                       _showContactButton = false;
                     });
-                    _addressController.text = address.address;
-                    _addressFocusNode.unfocus();
+                    _addressController!.text = address.address!;
+                    _addressFocusNode!.unfocus();
                     setState(() {
                       _addressValidAndUnfocused = true;
                     });
                   } else {
                     // Is a user
                     setState(() {
-                      _addressController.text = user.getDisplayName();
-                      _addressFocusNode.unfocus();
+                      _addressController!.text = user.getDisplayName();
+                      _addressFocusNode!.unfocus();
                       _users = [];
                       _isUser = true;
                       _addressValidationText = "";
@@ -1424,15 +1435,15 @@ class _SendSheetState extends State<SendSheet> {
                 : AppStyles.textStyleAddressPrimary(context),
         onChanged: (text) async {
           bool isUser = false;
-          bool isDomain = text.contains(".");
-          bool isFavorite = text.startsWith("★");
+          bool? isDomain = text.contains(".");
+          bool? isFavorite = text.startsWith("★");
           bool isNano = text.startsWith("nano_");
 
           // prevent spaces:
           if (text.contains(" ")) {
             text = text.replaceAll(" ", "");
-            _addressController.text = text;
-            _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
+            _addressController!.text = text;
+            _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
           }
 
           // remove the @ if it's the only text there:
@@ -1481,7 +1492,7 @@ class _SendSheetState extends State<SendSheet> {
               _isUser = false;
               _users = [];
             });
-          } else if (isFavorite) {
+          } else if (isFavorite!) {
             var matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
             if (matchedList != null) {
               final nicknames = Set();
@@ -1491,7 +1502,7 @@ class _SendSheetState extends State<SendSheet> {
                 _users = matchedList;
               });
             }
-          } else if (isUser || isDomain) {
+          } else if (isUser || isDomain!) {
             var matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
             if (matchedList != null) {
               setState(() {
@@ -1506,13 +1517,13 @@ class _SendSheetState extends State<SendSheet> {
             });
           }
           // Always reset the error message to be less annoying
-          if (_addressValidationText?.length > 0) {
+          if (_addressValidationText!.length > 0) {
             setState(() {
               _addressValidationText = "";
             });
           }
           if (isNano && Address(text).isValid()) {
-            _addressFocusNode.unfocus();
+            _addressFocusNode!.unfocus();
             setState(() {
               _addressStyle = AddressStyle.TEXT90;
               _addressValidationText = "";
@@ -1524,10 +1535,17 @@ class _SendSheetState extends State<SendSheet> {
             });
           }
 
-          if ((isUser || isFavorite) != _isUser) {
+          if ((isUser || isFavorite!) != _isUser) {
             setState(() {
-              _isUser = isUser || isFavorite;
+              _isUser = isUser || isFavorite!;
             });
+          }
+        },
+        onSubmitted: (text) {
+          if (_memoController!.text.isEmpty) {
+            FocusScope.of(context).nextFocus();
+          } else {
+            FocusScope.of(context).unfocus();
           }
         },
         overrideTextFieldWidget: _addressValidAndUnfocused
@@ -1540,7 +1558,7 @@ class _SendSheetState extends State<SendSheet> {
                     FocusScope.of(context).requestFocus(_addressFocusNode);
                   });
                 },
-                child: UIUtil.threeLineAddressText(context, _addressController.text))
+                child: UIUtil.threeLineAddressText(context, _addressController!.text))
             : null);
   } //************ Enter Address Container Method End ************//
   //*************************************************************//
@@ -1549,11 +1567,11 @@ class _SendSheetState extends State<SendSheet> {
   //*******************************************************//
   getEnterMemoContainer() {
     double margin = 200;
-    if (_addressController.text.startsWith("nano_")) {
-      if (_addressController.text.length > 24) {
+    if (_addressController!.text.startsWith("nano_")) {
+      if (_addressController!.text.length > 24) {
         margin = 217;
       }
-      if (_addressController.text.length > 48) {
+      if (_addressController!.text.length > 48) {
         margin = 238;
       }
     }
@@ -1570,7 +1588,7 @@ class _SendSheetState extends State<SendSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _memoHint ?? AppLocalization.of(context).enterMemo,
+      hintText: _memoHint ?? AppLocalization.of(context)!.enterMemo,
       fadeSuffixOnCondition: true,
       style: TextStyle(
         // fontWeight: FontWeight.w700,
@@ -1584,6 +1602,7 @@ class _SendSheetState extends State<SendSheet> {
         fontFamily: 'OverpassMono',
       ),
       onChanged: (text) {
+        setState(() {}); // forces address container to respect the memo's status (empty or not empty)
         // nothing for now
       },
     );

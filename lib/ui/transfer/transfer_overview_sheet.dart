@@ -9,7 +9,6 @@ import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
-import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
@@ -21,7 +20,6 @@ import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
@@ -31,7 +29,7 @@ import 'package:logger/logger.dart';
 class AppTransferOverviewSheet {
   static const int NUM_SWEEP = 15; // Number of accounts to sweep from a seed
 
-  NanoUtil _nanoUtil;
+  NanoUtil? _nanoUtil;
 
   // accounts to private keys/account balances
   Map<String, AccountBalanceItem> privKeyBalanceMap = Map();
@@ -46,7 +44,7 @@ class AppTransferOverviewSheet {
     _nanoUtil = NanoUtil();
   }
 
-  mainBottomSheet(BuildContext context, {String quickSeed}) {
+  mainBottomSheet(BuildContext context, {String? quickSeed}) {
     void manualEntryCallback(String seed) {
       Navigator.of(context).pop();
       startTransfer(context, seed, manualEntry: true);
@@ -104,7 +102,7 @@ class AppTransferOverviewSheet {
                                   margin: EdgeInsets.only(top: 15.0),
                                   constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                                   child: AutoSizeText(
-                                    CaseChange.toUpperCase(AppLocalization.of(context).transferHeader, context),
+                                    CaseChange.toUpperCase(AppLocalization.of(context)!.transferHeader, context),
                                     style: AppStyles.textStyleHeader(context),
                                     textAlign: TextAlign.center,
                                     maxLines: 2,
@@ -147,7 +145,7 @@ class AppTransferOverviewSheet {
                                 alignment: AlignmentDirectional(-1, 0),
                                 margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
                                 child: AutoSizeText(
-                                  AppLocalization.of(context).transferIntro.replaceAll("%1", AppLocalization.of(context).scanQrCode),
+                                  AppLocalization.of(context)!.transferIntro.replaceAll("%1", AppLocalization.of(context)!.scanQrCode),
                                   style: AppStyles.textStyleParagraph(context),
                                   textAlign: TextAlign.start,
                                   maxLines: 6,
@@ -163,7 +161,7 @@ class AppTransferOverviewSheet {
                             AppButton.buildAppButton(
                               context,
                               AppButtonType.PRIMARY,
-                              AppLocalization.of(context).scanQrCode,
+                              AppLocalization.of(context)!.scanQrCode,
                               Dimens.BUTTON_TOP_DIMENS,
                               onPressed: () {
                                 UIUtil.cancelLockEvent();
@@ -171,7 +169,7 @@ class AppTransferOverviewSheet {
                                   var value = val.rawContent;
 
                                   if (!NanoSeeds.isValidSeed(value)) {
-                                    UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidSeed, context);
+                                    UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidSeed, context);
                                     return;
                                   }
                                   startTransfer(context, value);
@@ -185,7 +183,7 @@ class AppTransferOverviewSheet {
                             AppButton.buildAppButton(
                               context,
                               AppButtonType.PRIMARY_OUTLINE,
-                              AppLocalization.of(context).manualEntry,
+                              AppLocalization.of(context)!.manualEntry,
                               Dimens.BUTTON_BOTTOM_DIMENS,
                               onPressed: () {
                                 Sheets.showAppHeightNineSheet(
@@ -219,23 +217,23 @@ class AppTransferOverviewSheet {
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      List<String> accountsToRemove = List();
-      resp.balances.forEach((String account, AccountBalanceItem balItem) {
-        BigInt balance = BigInt.parse(balItem.balance);
-        BigInt pending = BigInt.parse(balItem.pending);
+      List<String> accountsToRemove = [];
+      resp.balances!.forEach((String account, AccountBalanceItem balItem) {
+        BigInt balance = BigInt.parse(balItem.balance!);
+        BigInt pending = BigInt.parse(balItem.pending!);
         if (balance + pending == BigInt.zero) {
           accountsToRemove.add(account);
         } else {
           // Update balance of this item
-          privKeyBalanceMap[account].balance = balItem.balance;
-          privKeyBalanceMap[account].pending = balItem.pending;
+          privKeyBalanceMap[account]!.balance = balItem.balance;
+          privKeyBalanceMap[account]!.pending = balItem.pending;
         }
       });
       accountsToRemove.forEach((String account) {
         privKeyBalanceMap.remove(account);
       });
       if (privKeyBalanceMap.length == 0) {
-        UIUtil.showSnackbar(AppLocalization.of(context).transferNoFunds, context);
+        UIUtil.showSnackbar(AppLocalization.of(context)!.transferNoFunds, context);
         return;
       }
       // Go to confirmation screen
@@ -246,7 +244,7 @@ class AppTransferOverviewSheet {
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context);
     }
   }
 
@@ -260,15 +258,15 @@ class AppTransferOverviewSheet {
       }
       List<String> accountsToRemove = [];
       BigInt totalBalance = BigInt.zero;
-      resp.balances.forEach((String account, AccountBalanceItem balItem) {
-        BigInt balance = BigInt.parse(balItem.balance);
-        BigInt pending = BigInt.parse(balItem.pending);
+      resp.balances!.forEach((String account, AccountBalanceItem balItem) {
+        BigInt balance = BigInt.parse(balItem.balance!);
+        BigInt pending = BigInt.parse(balItem.pending!);
         if (balance + pending == BigInt.zero) {
           accountsToRemove.add(account);
         } else {
           // Update balance of this item
-          privKeyBalanceMap[account].balance = balItem.balance;
-          privKeyBalanceMap[account].pending = balItem.pending;
+          privKeyBalanceMap[account]!.balance = balItem.balance;
+          privKeyBalanceMap[account]!.pending = balItem.pending;
           totalBalance += balance + pending;
         }
       });
@@ -288,7 +286,7 @@ class AppTransferOverviewSheet {
     return BigInt.zero;
   }
 
-  Future<void> startAutoTransfer(BuildContext context, String seed, AppWallet wallet) async {
+  Future<void> startAutoTransfer(BuildContext context, String seed, AppWallet? wallet) async {
     // Show loading overlay
     _animationOpen = true;
     AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL, onPoppedCallback: () => _animationOpen = false);
@@ -302,23 +300,23 @@ class AppTransferOverviewSheet {
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      List<String> accountsToRemove = List();
-      resp.balances.forEach((String account, AccountBalanceItem balItem) {
-        BigInt balance = BigInt.parse(balItem.balance);
-        BigInt pending = BigInt.parse(balItem.pending);
+      List<String> accountsToRemove = [];
+      resp.balances!.forEach((String account, AccountBalanceItem balItem) {
+        BigInt balance = BigInt.parse(balItem.balance!);
+        BigInt pending = BigInt.parse(balItem.pending!);
         if (balance + pending == BigInt.zero) {
           accountsToRemove.add(account);
         } else {
           // Update balance of this item
-          privKeyBalanceMap[account].balance = balItem.balance;
-          privKeyBalanceMap[account].pending = balItem.pending;
+          privKeyBalanceMap[account]!.balance = balItem.balance;
+          privKeyBalanceMap[account]!.pending = balItem.pending;
         }
       });
       accountsToRemove.forEach((String account) {
         privKeyBalanceMap.remove(account);
       });
       if (privKeyBalanceMap.length == 0) {
-        UIUtil.showSnackbar(AppLocalization.of(context).transferNoFunds, context);
+        UIUtil.showSnackbar(AppLocalization.of(context)!.transferNoFunds, context);
         return;
       }
 
@@ -332,7 +330,7 @@ class AppTransferOverviewSheet {
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context);
     }
   }
 
@@ -350,23 +348,23 @@ class AppTransferOverviewSheet {
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      List<String> accountsToRemove = List();
-      resp.balances.forEach((String account, AccountBalanceItem balItem) {
-        BigInt balance = BigInt.parse(balItem.balance);
-        BigInt pending = BigInt.parse(balItem.pending);
+      List<String> accountsToRemove = [];
+      resp.balances!.forEach((String account, AccountBalanceItem balItem) {
+        BigInt balance = BigInt.parse(balItem.balance!);
+        BigInt pending = BigInt.parse(balItem.pending!);
         if (balance + pending == BigInt.zero) {
           accountsToRemove.add(account);
         } else {
           // Update balance of this item
-          privKeyBalanceMap[account].balance = balItem.balance;
-          privKeyBalanceMap[account].pending = balItem.pending;
+          privKeyBalanceMap[account]!.balance = balItem.balance;
+          privKeyBalanceMap[account]!.pending = balItem.pending;
         }
       });
       accountsToRemove.forEach((String account) {
         privKeyBalanceMap.remove(account);
       });
       if (privKeyBalanceMap.length == 0) {
-        UIUtil.showSnackbar(AppLocalization.of(context).transferNoFunds, context);
+        UIUtil.showSnackbar(AppLocalization.of(context)!.transferNoFunds, context);
         return;
       }
 
@@ -380,13 +378,13 @@ class AppTransferOverviewSheet {
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context);
     }
   }
 
   /// Get NUM_SWEEP accounts from seed to request balances for
   Future<List<String>> getAccountsFromSeed(BuildContext context, String seed) async {
-    List<String> accountsToRequest = List();
+    List<String> accountsToRequest = [];
     String privKey;
     String address;
     // Get NUM_SWEEP private keys + accounts from seed
@@ -394,14 +392,14 @@ class AppTransferOverviewSheet {
       privKey = NanoUtil.seedToPrivate(seed, i);
       address = NanoUtil.seedToAddress(seed, i);
       // Don't add this if it is the currently logged in account
-      if (address != StateContainer.of(context).wallet.address) {
+      if (address != StateContainer.of(context).wallet!.address) {
         privKeyBalanceMap.putIfAbsent(address, () => AccountBalanceItem(privKey: privKey));
         accountsToRequest.add(address);
       }
     }
     // Also treat this seed as a private key
     address = NanoAccounts.createAccount(NanoAccountType.NANO, NanoKeys.createPublicKey(seed));
-    if (address != StateContainer.of(context).wallet.address) {
+    if (address != StateContainer.of(context).wallet!.address) {
       privKeyBalanceMap.putIfAbsent(address, () => AccountBalanceItem(privKey: seed));
       accountsToRequest.add(address);
     }

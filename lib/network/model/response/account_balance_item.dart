@@ -7,19 +7,19 @@ part 'account_balance_item.g.dart';
 @JsonSerializable()
 class AccountBalanceItem {
   @JsonKey(name: "balance")
-  String balance;
+  String? balance;
 
   @JsonKey(name: "pending")
-  String pending;
+  String? pending;
 
   @JsonKey(ignore: true)
-  String privKey;
+  String? privKey;
 
   @JsonKey(ignore: true)
-  String frontier;
+  String? frontier;
 
   @JsonKey(ignore: true)
-  PendingResponse pendingResponse;
+  PendingResponse? pendingResponse;
 
   AccountBalanceItem({this.balance, this.pending, this.privKey, this.frontier, this.pendingResponse});
 

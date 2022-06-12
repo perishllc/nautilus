@@ -2,56 +2,56 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'subscribe_response.g.dart';
 
-int _toInt(String v) => v == null ? 0 : int.tryParse(v);
+int? _toInt(String? v) => v == null ? 0 : int.tryParse(v);
 
-double _toDouble(v) {
+double? _toDouble(v) {
   return double.tryParse(v.toString());
 }
 
 /// For running in an isolate, needs to be top-level function
 SubscribeResponse subscribeResponseFromJson(Map<dynamic, dynamic> json) {
-  return SubscribeResponse.fromJson(json);
+  return SubscribeResponse.fromJson(json as Map<String, dynamic>);
 }
 
 @JsonSerializable()
 class SubscribeResponse {
   @JsonKey(name: 'frontier')
-  String frontier;
+  String? frontier;
 
   @JsonKey(name: 'open_block')
-  String openBlock;
+  String? openBlock;
 
   @JsonKey(name: 'representative_block')
-  String representativeBlock;
+  String? representativeBlock;
 
   @JsonKey(name: 'representative')
-  String representative;
+  String? representative;
 
   // Balance in RAW
   @JsonKey(name: 'balance')
-  String balance;
+  String? balance;
 
   @JsonKey(name: 'block_count', fromJson: _toInt)
-  int blockCount;
+  int? blockCount;
 
   @JsonKey(name: 'pending')
-  String pending;
+  String? pending;
 
   // Server provides a uuid for each connection
   @JsonKey(name: 'uuid')
-  String uuid;
+  String? uuid;
 
   @JsonKey(name: 'price', fromJson: _toDouble)
-  double price;
+  double? price;
 
   @JsonKey(name: 'btc', fromJson: _toDouble)
-  double btcPrice;
+  double? btcPrice;
 
   @JsonKey(name: 'pending_count')
-  int pendingCount;
+  int? pendingCount;
 
   @JsonKey(name: 'confirmation_height', nullable: false, fromJson: _toInt)
-  int confirmationHeight;
+  int? confirmationHeight;
 
   SubscribeResponse();
 

@@ -5,42 +5,42 @@ import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 
 part 'account_history_response_item.g.dart';
 
-int _toInt(String v) => v == null ? 0 : int.tryParse(v);
+int? _toInt(String? v) => v == null ? 0 : int.tryParse(v);
 
 @JsonSerializable()
 class AccountHistoryResponseItem {
   @JsonKey(name: 'type')
-  String type;
+  String? type;
 
   @JsonKey(name: 'subtype')
-  String subtype;
+  String? subtype;
 
   @JsonKey(name: 'account')
-  String account;
+  String? account;
 
   @JsonKey(name: 'amount')
-  String amount;
+  String? amount;
 
   @JsonKey(name: 'hash')
-  String hash;
+  String? hash;
 
   @JsonKey(name: 'height', fromJson: _toInt)
-  int height;
+  int? height;
 
   @JsonKey(name: 'link')
-  String link;
+  String? link;
 
   @JsonKey(ignore: true)
-  bool confirmed;
+  bool? confirmed;
 
   AccountHistoryResponseItem(
-      {String type,
-      String subtype,
-      String account,
-      String amount,
-      String hash,
-      int height,
-      String link,
+      {String? type,
+      String? subtype,
+      String? account,
+      String? amount,
+      String? hash,
+      int? height,
+      String? link,
       this.confirmed}) {
     this.type = type;
     this.subtype = subtype;
@@ -51,15 +51,15 @@ class AccountHistoryResponseItem {
     this.link = link;
   }
 
-  String getShortString() {
+  String? getShortString() {
     return new Address(this.account).getShortString();
   }
 
-  String getShorterString() {
+  String? getShorterString() {
     return new Address(this.account).getShorterString();
   }
 
-  String getShortestString() {
+  String? getShortestString() {
     return new Address(this.account).getShortestString();
   }
 

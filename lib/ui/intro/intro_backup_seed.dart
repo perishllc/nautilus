@@ -15,7 +15,7 @@ import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/mnemonic_display.dart';
 
 class IntroBackupSeedPage extends StatefulWidget {
-  final String encryptedSeed;
+  final String? encryptedSeed;
 
   IntroBackupSeedPage({this.encryptedSeed}) : super();
 
@@ -24,9 +24,9 @@ class IntroBackupSeedPage extends StatefulWidget {
 }
 
 class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
-  String _seed;
-  List<String> _mnemonic;
-  bool _showMnemonic;
+  String? _seed;
+  List<String>? _mnemonic;
+  late bool _showMnemonic;
 
   @override
   void initState() {
@@ -35,14 +35,14 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
       sl.get<Vault>().getSeed().then((seed) {
         setState(() {
           _seed = seed;
-          _mnemonic = NanoMnemomics.seedToMnemonic(seed);
+          _mnemonic = NanoMnemomics.seedToMnemonic(seed!);
         });
       });
     } else {
       sl.get<Vault>().getSessionKey().then((key) {
         setState(() {
           _seed = NanoHelpers.byteToHex(NanoCrypt.decrypt(widget.encryptedSeed, key));
-          _mnemonic = NanoMnemomics.seedToMnemonic(_seed);
+          _mnemonic = NanoMnemomics.seedToMnemonic(_seed!);
         });
       });
     }
@@ -100,7 +100,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                 Container(
                                   margin: EdgeInsetsDirectional.only(end: 8),
                                   child: Text(
-                                    !_showMnemonic ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed,
+                                    !_showMnemonic ? AppLocalization.of(context)!.secretPhrase : AppLocalization.of(context)!.seed,
                                     style: TextStyle(
                                       color: StateContainer.of(context).curTheme.text,
                                       fontSize: 20.0,
@@ -129,7 +129,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                           Container(
                             constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - (smallScreen(context) ? 120 : 140)),
                             child: AutoSizeText(
-                              _showMnemonic ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed,
+                              _showMnemonic ? AppLocalization.of(context)!.secretPhrase : AppLocalization.of(context)!.seed,
                               style: AppStyles.textStyleHeaderColored(context),
                               stepGranularity: 0.1,
                               minFontSize: 12.0,
@@ -163,7 +163,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY,
-                    AppLocalization.of(context).backupConfirmButton,
+                    AppLocalization.of(context)!.backupConfirmButton,
                     Dimens.BUTTON_BOTTOM_DIMENS,
                     instanceKey: Key("backed_it_up_button"),
                     onPressed: () {

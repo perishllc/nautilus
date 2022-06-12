@@ -8,14 +8,14 @@ part of 'alerts_response_item.dart';
 
 AlertResponseItem _$AlertResponseItemFromJson(Map<String, dynamic> json) {
   return AlertResponseItem(
-    id: json['id'] as int,
-    active: json['active'] as bool,
-    priority: json['priority'] as String,
-    title: json['title'] as String,
-    shortDescription: json['short_description'] as String,
-    longDescription: json['long_description'] as String,
-    link: json['link'] as String,
-    timestamp: json['timestamp'] as int,
+    id: json['id'] as int?,
+    active: json['active'] as bool?,
+    priority: json['priority'] as String?,
+    title: json['title'] as String?,
+    shortDescription: json['short_description'] as String?,
+    longDescription: json['long_description'] as String?,
+    link: json['link'] as String?,
+    timestamp: json['timestamp'] as int?,
   );
 }
 

@@ -29,10 +29,10 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NumericalRangeFormatter extends TextInputFormatter {
-  final double min;
-  final double max;
+  final double? min;
+  final double? max;
 
-  NumericalRangeFormatter({double this.min, double this.max});
+  NumericalRangeFormatter({double? this.min, double? this.max});
 
   @override
   TextEditingValue formatEditUpdate(
@@ -41,51 +41,51 @@ class NumericalRangeFormatter extends TextInputFormatter {
   ) {
     if (newValue.text == '') {
       return newValue;
-    } else if (int.parse(newValue.text) < min) {
-      return TextEditingValue().copyWith(text: min.toStringAsFixed(2));
+    } else if (int.parse(newValue.text) < min!) {
+      return TextEditingValue().copyWith(text: min!.toStringAsFixed(2));
     } else {
-      return int.parse(newValue.text) > max ? oldValue : newValue;
+      return int.parse(newValue.text) > max! ? oldValue : newValue;
     }
   }
 }
 
 class ReceiveSheet extends StatefulWidget {
   final AvailableCurrency localCurrency;
-  final Widget qrWidget;
-  final String address;
+  final Widget? qrWidget;
+  final String? address;
 
-  ReceiveSheet({@required this.localCurrency, this.address, this.qrWidget}) : super();
+  ReceiveSheet({required this.localCurrency, this.address, this.qrWidget}) : super();
 
   _ReceiveSheetStateState createState() => _ReceiveSheetStateState();
 }
 
 class _ReceiveSheetStateState extends State<ReceiveSheet> {
-  GlobalKey shareCardKey;
-  ByteData shareImageData;
+  GlobalKey? shareCardKey;
+  ByteData? shareImageData;
   // Address copied items
   // Current state references
-  bool _showShareCard;
-  bool _addressCopied;
+  bool? _showShareCard;
+  late bool _addressCopied;
   // Timer reference so we can cancel repeated events
-  Timer _addressCopiedTimer;
+  Timer? _addressCopiedTimer;
 
-  FocusNode _sendAmountFocusNode;
-  String _rawAmount;
-  TextEditingController _sendAmountController;
-  NumberFormat _localCurrencyFormat;
+  FocusNode? _sendAmountFocusNode;
+  String? _rawAmount;
+  TextEditingController? _sendAmountController;
+  NumberFormat? _localCurrencyFormat;
   bool _localCurrencyMode = false;
   String _amountValidationText = "";
-  String _amountHint = "";
+  String? _amountHint = "";
   String _lastLocalCurrencyAmount = "";
   String _lastCryptoAmount = "";
 
-  Widget qrWidget;
+  Widget? qrWidget;
 
-  Future<Uint8List> _capturePng() async {
-    if (shareCardKey != null && shareCardKey.currentContext != null) {
-      RenderRepaintBoundary boundary = shareCardKey.currentContext.findRenderObject();
+  Future<Uint8List?> _capturePng() async {
+    if (shareCardKey != null && shareCardKey!.currentContext != null) {
+      RenderRepaintBoundary boundary = shareCardKey!.currentContext!.findRenderObject() as RenderRepaintBoundary;
       ui.Image image = await boundary.toImage(pixelRatio: 5.0);
-      ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      ByteData byteData = await (image.toByteData(format: ui.ImageByteFormat.png) as FutureOr<ByteData>);
       return byteData.buffer.asUint8List();
     } else {
       return null;
@@ -106,11 +106,11 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     _sendAmountController = TextEditingController();
 
     // On amount focus change
-    _sendAmountFocusNode.addListener(() {
-      if (_sendAmountFocusNode.hasFocus) {
+    _sendAmountFocusNode!.addListener(() {
+      if (_sendAmountFocusNode!.hasFocus) {
         if (_rawAmount != null) {
           setState(() {
-            _sendAmountController.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
+            _sendAmountController!.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
             _rawAmount = null;
           });
         }
@@ -153,7 +153,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
         child: GestureDetector(
             onTap: () {
               // Clear focus of our fields when tapped in this empty space
-              _sendAmountFocusNode.unfocus();
+              _sendAmountFocusNode!.unfocus();
             },
             child: Column(
               children: <Widget>[
@@ -182,16 +182,16 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                         ),
                         // show napi username if available:
                         Container(
-                          margin: (StateContainer.of(context).wallet?.username != null) ? EdgeInsets.only(top: 35.0) : EdgeInsets.only(top: 15.0),
-                          child: (StateContainer.of(context).wallet?.username != null)
-                              ? Text("@" + StateContainer.of(context).wallet?.username,
+                          margin: (StateContainer.of(context).wallet?.user != null) ? EdgeInsets.only(top: 35.0) : EdgeInsets.only(top: 15.0),
+                          child: (StateContainer.of(context).wallet?.user != null)
+                              ? Text(StateContainer.of(context).wallet!.user!.getDisplayName()!,
                                   style: TextStyle(
                                     fontFamily: "OverpassMono",
                                     fontWeight: FontWeight.w100,
                                     fontSize: 24.0,
                                     color: StateContainer.of(context).curTheme.text60,
                                   ))
-                              : UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.address, type: ThreeLineAddressTextType.PRIMARY60),
+                              : UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!, type: ThreeLineAddressTextType.PRIMARY60),
                         ),
                         // (StateContainer.of(context).wallet?.username != null)
                         //     ? Container(
@@ -251,7 +251,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                       return Center(
                         child: Stack(
                           children: <Widget>[
-                            _showShareCard
+                            _showShareCard!
                                 ? Container(
                                     child: AppShareCard(
                                         shareCardKey, SvgPicture.asset('legacy_assets/QR.svg'), SvgPicture.asset('legacy_assets/sharecard_logo.svg')),
@@ -291,12 +291,12 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                 width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 1.05 : computedMaxSize,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: Border.all(color: StateContainer.of(context).curTheme.primary, width: computedMaxSize / 90),
+                                  border: Border.all(color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),
                                 ),
                               ),
                             ),
                             // Logo Background White
-                            StateContainer.of(context).natriconOn
+                            StateContainer.of(context).natriconOn!
                                 ? Center(
                                     child: Container(
                                       width: computedMaxSize / 5.5,
@@ -307,8 +307,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                         border: Border.all(
                                           width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 85 : computedMaxSize / 110,
                                           color: (StateContainer.of(context).curTheme is IndiumTheme)
-                                              ? StateContainer.of(context).curTheme.backgroundDark
-                                              : StateContainer.of(context).curTheme.primary,
+                                              ? StateContainer.of(context).curTheme.backgroundDark!
+                                              : StateContainer.of(context).curTheme.primary!,
                                         ),
                                       ),
                                       child: Container(
@@ -317,8 +317,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                           border: Border.all(
                                             width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 110 : computedMaxSize / 85,
                                             color: (StateContainer.of(context).curTheme is IndiumTheme)
-                                                ? StateContainer.of(context).curTheme.primary
-                                                : StateContainer.of(context).curTheme.backgroundDark,
+                                                ? StateContainer.of(context).curTheme.primary!
+                                                : StateContainer.of(context).curTheme.backgroundDark!,
                                           ),
                                         ),
                                       ),
@@ -367,15 +367,15 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             context,
                             // Share Address Button
                             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
+                            _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
                             Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                          Clipboard.setData(new ClipboardData(text: StateContainer.of(context).wallet.address));
+                          Clipboard.setData(new ClipboardData(text: StateContainer.of(context).wallet!.address));
                           setState(() {
                             // Set copied style
                             _addressCopied = true;
                           });
                           if (_addressCopiedTimer != null) {
-                            _addressCopiedTimer.cancel();
+                            _addressCopiedTimer!.cancel();
                           }
                           _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
                             setState(() {
@@ -391,10 +391,10 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             context,
                             // Share Address Button
                             AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context).addressShare,
+                            AppLocalization.of(context)!.addressShare,
                             Dimens.BUTTON_BOTTOM_DIMENS,
                             disabled: _showShareCard, onPressed: () {
-                          String receiveCardFileName = "share_${StateContainer.of(context).wallet.address}.png";
+                          String receiveCardFileName = "share_${StateContainer.of(context).wallet!.address}.png";
                           getApplicationDocumentsDirectory().then((directory) {
                             String filePath = "${directory.path}/$receiveCardFileName";
                             File f = File(filePath);
@@ -402,12 +402,12 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                               _showShareCard = true;
                             });
                             Future.delayed(new Duration(milliseconds: 50), () {
-                              if (_showShareCard) {
+                              if (_showShareCard!) {
                                 _capturePng().then((byteData) {
                                   if (byteData != null) {
                                     f.writeAsBytes(byteData).then((file) {
                                       UIUtil.cancelLockEvent();
-                                      Share.shareFiles([filePath], text: StateContainer.of(context).wallet.address);
+                                      Share.shareFiles([filePath], text: StateContainer.of(context).wallet!.address);
                                     });
                                   } else {
                                     // TODO - show a something went wrong message
@@ -451,26 +451,26 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
   }
 
   String _convertLocalCurrencyToCrypto() {
-    String convertedAmt = _sendAmountController.text.replaceAll(",", ".");
+    String convertedAmt = _sendAmountController!.text.replaceAll(",", ".");
     convertedAmt = NumberUtil.sanitizeNumber(convertedAmt);
     if (convertedAmt.isEmpty) {
       return "";
     }
     Decimal valueLocal = Decimal.parse(convertedAmt);
-    Decimal conversion = Decimal.parse(StateContainer.of(context).wallet.localCurrencyConversion);
+    Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     return NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal()).toString();
   }
 
   String _convertCryptoToLocalCurrency() {
-    String convertedAmt = NumberUtil.sanitizeNumber(_sendAmountController.text, maxDecimalDigits: 2);
+    String convertedAmt = NumberUtil.sanitizeNumber(_sendAmountController!.text, maxDecimalDigits: 2);
     if (convertedAmt.isEmpty) {
       return "";
     }
     Decimal valueCrypto = Decimal.parse(convertedAmt);
-    Decimal conversion = Decimal.parse(StateContainer.of(context).wallet.localCurrencyConversion);
+    Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     convertedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2).toString();
-    convertedAmt = convertedAmt.replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
-    convertedAmt = _localCurrencyFormat.currencySymbol + convertedAmt;
+    convertedAmt = convertedAmt.replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
+    convertedAmt = _localCurrencyFormat!.currencySymbol + convertedAmt;
     return convertedAmt;
   }
 
@@ -481,10 +481,10 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       // Switching to crypto-mode
       String cryptoAmountStr;
       // Check out previous state
-      if (_sendAmountController.text == _lastLocalCurrencyAmount) {
+      if (_sendAmountController!.text == _lastLocalCurrencyAmount) {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
-        _lastLocalCurrencyAmount = _sendAmountController.text;
+        _lastLocalCurrencyAmount = _sendAmountController!.text;
         _lastCryptoAmount = _convertLocalCurrencyToCrypto();
         cryptoAmountStr = _lastCryptoAmount;
       }
@@ -492,17 +492,17 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
         _localCurrencyMode = false;
       });
       Future.delayed(Duration(milliseconds: 50), () {
-        _sendAmountController.text = cryptoAmountStr;
-        _sendAmountController.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
+        _sendAmountController!.text = cryptoAmountStr;
+        _sendAmountController!.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
       });
     } else {
       // Switching to local-currency mode
       String localAmountStr;
       // Check our previous state
-      if (_sendAmountController.text == _lastCryptoAmount) {
+      if (_sendAmountController!.text == _lastCryptoAmount) {
         localAmountStr = _lastLocalCurrencyAmount;
       } else {
-        _lastCryptoAmount = _sendAmountController.text;
+        _lastCryptoAmount = _sendAmountController!.text;
         _lastLocalCurrencyAmount = _convertCryptoToLocalCurrency();
         localAmountStr = _lastLocalCurrencyAmount;
       }
@@ -510,36 +510,36 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
         _localCurrencyMode = true;
       });
       Future.delayed(Duration(milliseconds: 50), () {
-        _sendAmountController.text = localAmountStr;
-        _sendAmountController.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
+        _sendAmountController!.text = localAmountStr;
+        _sendAmountController!.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
       });
     }
   }
 
   void redrawQrCode() {
-    String raw;
+    String? raw;
     if (_localCurrencyMode) {
-      _lastLocalCurrencyAmount = _sendAmountController.text;
+      _lastLocalCurrencyAmount = _sendAmountController!.text;
       _lastCryptoAmount = _convertLocalCurrencyToCrypto();
       if (_lastCryptoAmount.isNotEmpty) {
         raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
       }
     } else {
-      raw = _sendAmountController.text.length > 0 ? NumberUtil.getAmountAsRaw(_sendAmountController.text) : '';
+      raw = _sendAmountController!.text.length > 0 ? NumberUtil.getAmountAsRaw(_sendAmountController!.text) : '';
     }
     this.paintQrCode(address: widget.address, amount: raw);
   }
 
-  void paintQrCode({String address, String amount}) {
+  void paintQrCode({String? address, String? amount}) {
     QrPainter painter = QrPainter(
-      data: amount != '' ? 'nano:' + address + '?amount=' + amount : address,
+      data: amount != '' ? 'nano:' + address! + '?amount=' + amount! : address!,
       version: amount != '' ? 9 : 6,
       gapless: false,
       errorCorrectionLevel: QrErrorCorrectLevel.Q,
     );
     painter.toImageData(MediaQuery.of(context).size.width).then((byteData) {
       setState(() {
-        this.qrWidget = Container(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData.buffer.asUint8List()));
+        this.qrWidget = Container(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List()));
       });
     });
   }
@@ -563,7 +563,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
               LengthLimitingTextInputFormatter(13),
               _localCurrencyMode
                   ? CurrencyFormatter(
-                      decimalSeparator: _localCurrencyFormat.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat.symbols.GROUP_SEP, maxDecimalDigits: 2)
+                      decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP, maxDecimalDigits: 2)
                   : CurrencyFormatter(maxDecimalDigits: NumberUtil.maxDecimalDigits),
               LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
             ]
@@ -575,14 +575,14 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
             setState(() {
               // _sendAmountController.text = "133248297";
               // prevent the user from entering more than 13324829
-              _sendAmountController.text = _sendAmountController.text.substring(0, _sendAmountController.text.length - 1);
-              _sendAmountController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAmountController.text.length));
+              _sendAmountController!.text = _sendAmountController!.text.substring(0, _sendAmountController!.text.length - 1);
+              _sendAmountController!.selection = TextSelection.fromPosition(TextPosition(offset: _sendAmountController!.text.length));
             });
           } else if (text == "133248297") {
             setState(() {
               // easter egg!
-              _sendAmountController.text = "TODO: Easter Egg Here!";
-              _sendAmountController.selection = TextSelection.fromPosition(TextPosition(offset: _sendAmountController.text.length));
+              _sendAmountController!.text = "TODO: Easter Egg Here!";
+              _sendAmountController!.selection = TextSelection.fromPosition(TextPosition(offset: _sendAmountController!.text.length));
             });
           }
         }
@@ -598,7 +598,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
-      hintText: _amountHint == null ? "" : AppLocalization.of(context).enterAmount,
+      hintText: _amountHint == null ? "" : AppLocalization.of(context)!.enterAmount,
       prefixButton: _rawAmount == null
           ? TextFieldButton(
               icon: AppIcons.swapcurrency,

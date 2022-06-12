@@ -8,7 +8,7 @@ part of 'nonce_response.dart';
 
 NonceResponse _$NonceResponseFromJson(Map<String, dynamic> json) {
   return NonceResponse(
-    nonce: json['nonce'] as int,
+    nonce: json['nonce'] as int?,
   );
 }
 

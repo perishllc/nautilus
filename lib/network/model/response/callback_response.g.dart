@@ -8,13 +8,13 @@ part of 'callback_response.dart';
 
 CallbackResponse _$CallbackResponseFromJson(Map<String, dynamic> json) {
   return CallbackResponse(
-    account: json['account'] as String,
-    hash: json['hash'] as String,
+    account: json['account'] as String?,
+    hash: json['hash'] as String?,
     block: json['block'] == null
         ? null
         : BlockItem.fromJson(json['block'] as Map<String, dynamic>),
-    amount: json['amount'] as String,
-    isSend: json['is_send'] as String,
+    amount: json['amount'] as String?,
+    isSend: json['is_send'] as String?,
   );
 }
 

@@ -5,10 +5,10 @@ enum AddressTextType { PRIMARY60, PRIMARY, SUCCESS }
 
 class OneOrThreeLineAddressText extends StatelessWidget {
   String address;
-  String contactName;
+  String? contactName;
   AddressTextType type;
 
-  OneOrThreeLineAddressText({@required this.address, @required this.type, this.contactName});
+  OneOrThreeLineAddressText({required this.address, required this.type, this.contactName});
 
   @override
   Widget build(BuildContext context) {

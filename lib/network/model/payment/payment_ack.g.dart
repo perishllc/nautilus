@@ -8,11 +8,11 @@ part of 'payment_ack.dart';
 
 PaymentACK _$PaymentACKFromJson(Map<String, dynamic> json) {
   return PaymentACK(
-    action: json['action'] as String,
-    uuid: json['uuid'] as String,
-    account: json['account'] as String,
-    requesting_account: json['requesting_account'] as String,
-    sub_action: json['sub_action'] as String,
+    action: json['action'] as String?,
+    uuid: json['uuid'] as String?,
+    account: json['account'] as String?,
+    requesting_account: json['requesting_account'] as String?,
+    sub_action: json['sub_action'] as String?,
   );
 }
 

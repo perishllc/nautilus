@@ -1,10 +1,5 @@
-import 'dart:ffi';
-
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:meta/meta.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
-import 'package:quiver/core.dart';
 
 // id INTEGER PRIMARY KEY AUTOINCREMENT,
 // block TEXT,
@@ -21,49 +16,49 @@ import 'package:quiver/core.dart';
 @JsonSerializable()
 class TXData {
   @JsonKey(ignore: true)
-  int id;
+  int? id;
   @JsonKey(name: 'block')
-  String block;
+  String? block;
   @JsonKey(name: 'link')
-  String link;
+  String? link;
   @JsonKey(name: 'memo_enc')
-  String memo_enc;
+  String? memo_enc;
   @JsonKey(name: 'is_memo')
-  bool is_memo;
+  bool? is_memo;
   @JsonKey(name: 'is_message')
-  bool is_message;
+  bool? is_message;
   @JsonKey(name: 'from_address')
-  String from_address;
+  String? from_address;
   @JsonKey(name: 'to_address')
-  String to_address;
+  String? to_address;
   @JsonKey(name: 'amount_raw')
-  String amount_raw;
+  String? amount_raw;
   @JsonKey(name: 'is_request')
-  bool is_request;
+  bool? is_request;
   @JsonKey(name: 'request_time')
-  String request_time;
+  String? request_time;
   @JsonKey(name: 'is_fulfilled')
-  bool is_fulfilled;
+  bool? is_fulfilled;
   @JsonKey(name: 'fulfillment_time')
-  String fulfillment_time;
+  String? fulfillment_time;
   @JsonKey(name: 'memo')
-  String memo;
+  String? memo;
   @JsonKey(name: 'uuid')
-  String uuid;
+  String? uuid;
   @JsonKey(name: 'is_acknowledged')
-  bool is_acknowledged;
+  bool? is_acknowledged;
   @JsonKey(name: 'height')
-  int height;
+  int? height;
   @JsonKey(name: 'send_height')
-  int send_height;
+  int? send_height;
   @JsonKey(name: 'recv_height')
-  int recv_height;
+  int? recv_height;
   @JsonKey(name: 'record_type')
-  String record_type;
+  String? record_type;
   @JsonKey(name: 'metadata')
-  String metadata;
+  String? metadata;
   @JsonKey(name: 'status')
-  String status;
+  String? status;
 
   TXData(
       {this.from_address,
@@ -87,9 +82,9 @@ class TXData {
       this.record_type,
       this.metadata,
       this.status,
-      int id});
+      int? id});
 
-  String getShortString(bool isRecipient) {
+  String? getShortString(bool isRecipient) {
     if (isRecipient) {
       return new Address(this.from_address).getShortString();
     } else {
@@ -97,7 +92,7 @@ class TXData {
     }
   }
 
-  String getShorterString(isRecipient) {
+  String? getShorterString(isRecipient) {
     if (isRecipient) {
       return new Address(this.from_address).getShorterString();
     } else {
@@ -105,7 +100,7 @@ class TXData {
     }
   }
 
-  String getShortestString(isRecipient) {
+  String? getShortestString(isRecipient) {
     if (isRecipient) {
       return new Address(this.from_address).getShortestString();
     } else {
@@ -113,37 +108,37 @@ class TXData {
     }
   }
 
-  bool isRecipient(String address) {
+  bool isRecipient(String? address) {
     return this.to_address == address;
   }
 
   bool isSolid() {
-    return this.is_message || this.is_request;
+    return this.is_message! || this.is_request!;
   }
 
   factory TXData.fromJson(Map<String, dynamic> json) {
     return TXData(
-        from_address: json["from_address"] as String,
-        to_address: json["to_address"] as String,
-        amount_raw: json["amount_raw"] as String,
-        is_request: json["is_request"] as bool,
-        request_time: json["request_time"] as String,
-        is_fulfilled: json["is_fulfilled"] as bool,
-        fulfillment_time: json["fulfillment_time"] as String,
-        block: json["block"] as String,
-        link: json["link"] as String,
-        memo_enc: json["memo_enc"] as String,
-        is_memo: json["is_memo"] as bool,
-        is_message: json["is_message"] as bool,
-        memo: json["memo"] as String,
-        uuid: json["uuid"] as String,
-        is_acknowledged: json["is_acknowledged"] as bool,
-        height: json["height"] as int,
-        send_height: json["send_height"] as int,
-        recv_height: json["recv_height"] as int,
-        record_type: json["record_type"] as String,
-        metadata: json["metadata"] as String,
-        status: json["status"] as String);
+        from_address: json["from_address"] as String?,
+        to_address: json["to_address"] as String?,
+        amount_raw: json["amount_raw"] as String?,
+        is_request: json["is_request"] as bool?,
+        request_time: json["request_time"] as String?,
+        is_fulfilled: json["is_fulfilled"] as bool?,
+        fulfillment_time: json["fulfillment_time"] as String?,
+        block: json["block"] as String?,
+        link: json["link"] as String?,
+        memo_enc: json["memo_enc"] as String?,
+        is_memo: json["is_memo"] as bool?,
+        is_message: json["is_message"] as bool?,
+        memo: json["memo"] as String?,
+        uuid: json["uuid"] as String?,
+        is_acknowledged: json["is_acknowledged"] as bool?,
+        height: json["height"] as int?,
+        send_height: json["send_height"] as int?,
+        recv_height: json["recv_height"] as int?,
+        record_type: json["record_type"] as String?,
+        metadata: json["metadata"] as String?,
+        status: json["status"] as String?);
   }
 
   bool operator ==(o) =>
@@ -173,3 +168,53 @@ class TXData {
   // bool operator ==(o) => o is User && o.username == username && o.address == address;
   // int get hashCode => hash2(username.hashCode, address.hashCode);
 }
+
+
+
+TXData _$TXDataFromJson(Map<String, dynamic> json) => TXData(
+      from_address: json['from_address'] as String?,
+      to_address: json['to_address'] as String?,
+      amount_raw: json['amount_raw'] as String?,
+      is_request: json['is_request'] as bool?,
+      request_time: json['request_time'] as String?,
+      is_fulfilled: json['is_fulfilled'] as bool?,
+      fulfillment_time: json['fulfillment_time'] as String?,
+      block: json['block'] as String?,
+      link: json['link'] as String?,
+      is_memo: json['is_memo'] as bool?,
+      is_message: json['is_message'] as bool?,
+      memo: json['memo'] as String?,
+      memo_enc: json['memo_enc'] as String?,
+      uuid: json['uuid'] as String?,
+      is_acknowledged: json['is_acknowledged'] as bool?,
+      height: json['height'] as int?,
+      send_height: json['send_height'] as int?,
+      recv_height: json['recv_height'] as int?,
+      record_type: json['record_type'] as String?,
+      metadata: json['metadata'] as String?,
+      status: json['status'] as String?,
+    );
+
+Map<String, dynamic> _$TXDataToJson(TXData instance) => <String, dynamic>{
+      'from_address': instance.from_address,
+      'to_address': instance.to_address,
+      'amount_raw': instance.amount_raw,
+      'is_request': instance.is_request,
+      'request_time': instance.request_time,
+      'is_fulfilled': instance.is_fulfilled,
+      'fulfillment_time': instance.fulfillment_time,
+      'block': instance.block,
+      'link': instance.link,
+      'is_memo': instance.is_memo,
+      'is_message': instance.is_message,
+      'memo': instance.memo,
+      'memo_enc': instance.memo_enc,
+      'uuid': instance.uuid,
+      'is_acknowledged': instance.is_acknowledged,
+      'height': instance.height,
+      'send_height': instance.send_height,
+      'recv_height': instance.recv_height,
+      'record_type': instance.record_type,
+      'metadata': instance.metadata,
+      'status': instance.status,
+    };

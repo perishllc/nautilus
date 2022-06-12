@@ -9,21 +9,21 @@ enum AppButtonType { PRIMARY, PRIMARY_OUTLINE, SUCCESS, SUCCESS_OUTLINE, TEXT_OU
 class AppButton {
   // Primary button builder
   static Widget buildAppButton(BuildContext context, AppButtonType type, String buttonText, List<double> dimens,
-      {Function onPressed, bool disabled = false, Key instanceKey}) {
+      {Function? onPressed, bool? disabled = false, Key? instanceKey}) {
     switch (type) {
       case AppButtonType.PRIMARY:
         return Expanded(
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
+              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
             ),
             height: 55,
             margin: EdgeInsetsDirectional.fromSTEB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: FlatButton(
               key: instanceKey,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-              color: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
+              color: disabled! ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
               child: AutoSizeText(buttonText, textAlign: TextAlign.center, style: AppStyles.textStyleButtonPrimary(context), maxLines: 1, stepGranularity: 0.5),
               onPressed: () {
                 if (onPressed != null && !disabled) {
@@ -42,14 +42,14 @@ class AppButton {
             decoration: BoxDecoration(
               color: StateContainer.of(context).curTheme.backgroundDark,
               borderRadius: BorderRadius.circular(5),
-              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
+              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
             ),
             height: 55,
             margin: EdgeInsetsDirectional.fromSTEB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
                 backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-                textStyle: TextStyle(color: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary),
+                textStyle: TextStyle(color: disabled! ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary),
               ),
               // borderSide: BorderSide(color: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary, width: 2.0),
               // highlightedBorderColor: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
@@ -84,7 +84,7 @@ class AppButton {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
+              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
             ),
             height: 55,
             margin: EdgeInsetsDirectional.fromSTEB(dimens[0], dimens[1], dimens[2], dimens[3]),
@@ -99,7 +99,7 @@ class AppButton {
                 stepGranularity: 0.5,
               ),
               onPressed: () {
-                if (onPressed != null && !disabled) {
+                if (onPressed != null && !disabled!) {
                   onPressed();
                 }
                 return;
@@ -115,7 +115,7 @@ class AppButton {
             decoration: BoxDecoration(
               color: StateContainer.of(context).curTheme.backgroundDark,
               borderRadius: BorderRadius.circular(5),
-              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
+              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
             ),
             height: 55,
             margin: EdgeInsetsDirectional.fromSTEB(dimens[0], dimens[1], dimens[2], dimens[3]),
@@ -150,7 +150,7 @@ class AppButton {
             decoration: BoxDecoration(
               color: StateContainer.of(context).curTheme.backgroundDark,
               borderRadius: BorderRadius.circular(5),
-              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
+              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
             ),
             height: 55,
             margin: EdgeInsetsDirectional.fromSTEB(dimens[0], dimens[1], dimens[2], dimens[3]),

@@ -16,7 +16,7 @@ enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
 
 class UIUtil {
   static Widget threeLineAddressText(BuildContext context, String address,
-      {ThreeLineAddressTextType type = ThreeLineAddressTextType.PRIMARY, String contactName}) {
+      {ThreeLineAddressTextType type = ThreeLineAddressTextType.PRIMARY, String? contactName}) {
     String stringPartOne = address.substring(0, 12);
     String stringPartTwo = address.substring(12, 22);
     String stringPartThree = address.substring(22, 44);
@@ -313,7 +313,7 @@ class UIUtil {
     }
   }
 
-  static Widget threeLineSeedText(BuildContext context, String address, {TextStyle textStyle}) {
+  static Widget threeLineSeedText(BuildContext context, String address, {TextStyle? textStyle}) {
     textStyle = textStyle ?? AppStyles.textStyleSeed(context);
     String stringPartOne = address.substring(0, 22);
     String stringPartTwo = address.substring(22, 44);
@@ -336,10 +336,10 @@ class UIUtil {
     );
   }
 
-  static Widget showBlockExplorerWebview(BuildContext context, String hash) {
+  static Widget showBlockExplorerWebview(BuildContext context, String? hash) {
     cancelLockEvent();
     return WebviewScaffold(
-      url: AppLocalization.of(context).getBlockExplorerUrl(hash, StateContainer.of(context).curBlockExplorer),
+      url: AppLocalization.of(context)!.getBlockExplorerUrl(hash, StateContainer.of(context).curBlockExplorer),
       appBar: new AppBar(
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
         brightness: StateContainer.of(context).curTheme.brightness,
@@ -348,10 +348,10 @@ class UIUtil {
     );
   }
 
-  static Widget showAccountWebview(BuildContext context, String account) {
+  static Widget showAccountWebview(BuildContext context, String? account) {
     cancelLockEvent();
     return WebviewScaffold(
-      url: AppLocalization.of(context).getAccountExplorerUrl(account, StateContainer.of(context).curBlockExplorer),
+      url: AppLocalization.of(context)!.getAccountExplorerUrl(account, StateContainer.of(context).curBlockExplorer),
       appBar: new AppBar(
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
         brightness: StateContainer.of(context).curTheme.brightness,
@@ -392,7 +392,7 @@ class UIUtil {
             color: StateContainer.of(context).curTheme.primary,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
-              BoxShadow(color: StateContainer.of(context).curTheme.barrier, offset: Offset(0, 15), blurRadius: 30, spreadRadius: -5),
+              BoxShadow(color: StateContainer.of(context).curTheme.barrier!, offset: Offset(0, 15), blurRadius: 30, spreadRadius: -5),
             ],
           ),
           child: Text(
@@ -407,12 +407,12 @@ class UIUtil {
     );
   }
 
-  static StreamSubscription<dynamic> _lockDisableSub;
+  static StreamSubscription<dynamic>? _lockDisableSub;
 
   static Future<void> cancelLockEvent() async {
     // Cancel auto-lock event, usually if we are launching another intent
     if (_lockDisableSub != null) {
-      _lockDisableSub.cancel();
+      _lockDisableSub!.cancel();
     }
     EventTaxiImpl.singleton().fire(DisableLockTimeoutEvent(disable: true));
     Future<dynamic> delayed = Future.delayed(Duration(seconds: 10));

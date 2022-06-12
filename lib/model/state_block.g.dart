@@ -8,14 +8,14 @@ part of 'state_block.dart';
 
 StateBlock _$StateBlockFromJson(Map<String, dynamic> json) {
   return StateBlock(
-    previous: json['previous'] as String,
-    representative: json['representative'] as String,
-    balance: json['balance'] as String,
-    link: json['link'] as String,
-    account: json['account'] as String,
+    previous: json['previous'] as String?,
+    representative: json['representative'] as String?,
+    balance: json['balance'] as String?,
+    link: json['link'] as String?,
+    account: json['account'] as String?,
   )
-    ..type = json['type'] as String
-    ..signature = json['signature'] as String;
+    ..type = json['type'] as String?
+    ..signature = json['signature'] as String?;
 }
 
 Map<String, dynamic> _$StateBlockToJson(StateBlock instance) => <String, dynamic>{

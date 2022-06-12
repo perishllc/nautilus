@@ -10,20 +10,20 @@ import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 /// A widget for displaying a mnemonic phrase
 class MnemonicDisplay extends StatefulWidget {
-  final List<String> wordList;
+  final List<String>? wordList;
   final bool obscureSeed;
   final bool showButton;
 
-  MnemonicDisplay({@required this.wordList, this.obscureSeed = false, this.showButton = true});
+  MnemonicDisplay({required this.wordList, this.obscureSeed = false, this.showButton = true});
 
   _MnemonicDisplayState createState() => _MnemonicDisplayState();
 }
 
 class _MnemonicDisplayState extends State<MnemonicDisplay> {
   static final List<String> _obscuredSeed = List.filled(24, '•' * 6);
-  bool _seedCopied;
-  bool _seedObscured;
-  Timer _seedCopiedTimer;
+  late bool _seedCopied;
+  late bool _seedObscured;
+  Timer? _seedCopiedTimer;
 
   @override
   void initState() {
@@ -61,7 +61,7 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
                   style: AppStyles.textStyleNumbersOfMnemonic(context),
                 ),
                 TextSpan(
-                  text: _seedObscured && widget.obscureSeed ? _obscuredSeed[curWord] : widget.wordList[curWord],
+                  text: _seedObscured && widget.obscureSeed ? _obscuredSeed[curWord] : widget.wordList![curWord],
                   style: _seedCopied ? AppStyles.textStyleMnemonicSuccess(context) : AppStyles.textStyleMnemonic(context),
                 )
               ]),
@@ -115,11 +115,11 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
                     margin: EdgeInsetsDirectional.only(top: 8),
                     child: _seedObscured
                         ? AutoSizeText(
-                            AppLocalization.of(context).tapToReveal,
+                            AppLocalization.of(context)!.tapToReveal,
                             style: AppStyles.textStyleParagraphThinPrimary(context),
                           )
                         : Text(
-                            AppLocalization.of(context).tapToHide,
+                            AppLocalization.of(context)!.tapToHide,
                             style: AppStyles.textStyleParagraphThinPrimary(context),
                           ),
                   )
@@ -133,12 +133,12 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
               padding: EdgeInsets.all(0.0),
               child: OutlinedButton(
                 onPressed: () {
-                  UserDataUtil.setSecureClipboardItem(widget.wordList.join(' '));
+                  UserDataUtil.setSecureClipboardItem(widget.wordList!.join(' '));
                   setState(() {
                     _seedCopied = true;
                   });
                   if (_seedCopiedTimer != null) {
-                    _seedCopiedTimer.cancel();
+                    _seedCopiedTimer!.cancel();
                   }
                   _seedCopiedTimer = new Timer(const Duration(milliseconds: 1500), () {
                     setState(() {
@@ -154,7 +154,7 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
                 // borderSide:
                 //     BorderSide(color: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary, width: 1.0),
                 child: AutoSizeText(
-                  _seedCopied ? AppLocalization.of(context).copied : AppLocalization.of(context).copy,
+                  _seedCopied ? AppLocalization.of(context)!.copied : AppLocalization.of(context)!.copy,
                   textAlign: TextAlign.center,
                   style: _seedCopied ? AppStyles.textStyleButtonSuccessSmallOutline(context) : AppStyles.textStyleButtonPrimarySmallOutline(context),
                   maxLines: 1,

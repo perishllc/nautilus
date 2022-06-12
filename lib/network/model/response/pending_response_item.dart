@@ -5,14 +5,14 @@ part 'pending_response_item.g.dart';
 @JsonSerializable()
 class PendingResponseItem {
   @JsonKey(name: "source")
-  String source;
+  String? source;
 
   // raw-value of the transaction
   @JsonKey(name: "amount")
-  String amount;
+  String? amount;
 
   @JsonKey(name: "hash")
-  String hash;
+  String? hash;
 
   PendingResponseItem({this.source, this.amount, this.hash});
 

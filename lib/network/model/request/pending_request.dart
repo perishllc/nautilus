@@ -7,22 +7,22 @@ part 'pending_request.g.dart';
 @JsonSerializable()
 class PendingRequest extends BaseRequest {
   @JsonKey(name: 'action')
-  String action;
+  String? action;
 
   @JsonKey(name: "account")
-  String account;
+  String? account;
 
   @JsonKey(name: "source")
-  bool source;
+  bool? source;
 
   @JsonKey(name: "count")
-  int count;
+  int? count;
 
   @JsonKey(name: "include_active")
-  bool includeActive;
+  bool? includeActive;
 
   @JsonKey(name: "threshold", includeIfNull: false)
-  String threshold;
+  String? threshold;
 
   PendingRequest({this.action = Actions.PENDING, this.account, this.source = true, this.count, this.threshold, this.includeActive = true});
 

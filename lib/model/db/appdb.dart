@@ -92,15 +92,15 @@ class DBHelper {
   static const String TXDATA_ADD_MESSAGE_COLUMN_SQL = """
     ALTER TABLE Transactions ADD is_message BOOLEAN
     """;
-  static Database _db;
+  static Database? _db;
 
-  NanoUtil _nanoUtil;
+  NanoUtil? _nanoUtil;
 
   DBHelper() {
     _nanoUtil = NanoUtil();
   }
 
-  Future<Database> get db async {
+  Future<Database?> get db async {
     if (_db != null) return _db;
     _db = await initDb();
     return _db;
@@ -137,7 +137,7 @@ class DBHelper {
   }
 
   Future<void> nukeDatabase() async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     // remove the tables:
     await dbClient.execute("DROP TABLE IF EXISTS Contacts");
     await dbClient.execute("DROP TABLE IF EXISTS Users");
@@ -165,7 +165,7 @@ class DBHelper {
     final knownUsers = await json.decode(userData);
 
     // loop through the data and insert into the users table:
-    List<User> users = parseNanoToUsers(knownUsers);
+    List<User> users = parseNanoToUsers(knownUsers)!;
     for (var user in users) {
       await addOrReplaceUser(user);
     }
@@ -176,7 +176,7 @@ class DBHelper {
   }
 
   Future<void> fetchNapiUsernames() async {
-    var users = await fetchNapiKnown(http.Client());
+    var users = await (fetchNapiKnown(http.Client()) as FutureOr<List<User>>);
     // nuke the old databases:
     await nukeUsers();
     // add the new users:
@@ -186,7 +186,7 @@ class DBHelper {
   }
 
   // A function that converts a response body into a list of Users
-  List<User> parseNanoToUsers(String responseBody) {
+  List<User>? parseNanoToUsers(String responseBody) {
     final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<User>((json) {
       var user = User.fromJson(json);
@@ -195,7 +195,7 @@ class DBHelper {
     }).toList();
   }
 
-  Future<List<User>> fetchNapiKnown(http.Client client) async {
+  Future<List<User>?> fetchNapiKnown(http.Client client) async {
     final response = await client.get(Uri.parse("https://nano.to/known?json=true"));
     // Use the compute function to run parseUsers in a separate isolate.
     return parseNanoToUsers(response.body);
@@ -214,7 +214,7 @@ class DBHelper {
 
   // Contacts
   Future<List<User>> getContacts() async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE nickname <> \'\' ORDER BY nickname');
     List<User> contacts = [];
     for (int i = 0; i < list.length; i++) {
@@ -227,7 +227,7 @@ class DBHelper {
   // Future<List<Contact>> getContactsWithNameLike(String pattern) async {
   //   var dbClient = await db;
   //   List<Map> list = await dbClient.rawQuery('SELECT * FROM Contacts WHERE name LIKE \'%$pattern%\' ORDER BY LOWER(name)');
-  //   List<Contact> contacts = new List();
+  //   List<Contact> contacts = [];
   //   for (int i = 0; i < list.length; i++) {
   //     contacts.add(new Contact(id: list[i]["id"], name: list[i]["name"], address: list[i]["address"], monkeyPath: list[i]["monkey_path"]));
   //   }
@@ -235,7 +235,7 @@ class DBHelper {
   // }
 
   Future<List<User>> getContactsWithNameLike(String pattern) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     // List<Map> list =
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE nickname LIKE \'%$pattern%\' AND nickname <> \'\' ORDER BY LOWER(nickname)');
     List<User> contacts = [];
@@ -254,8 +254,8 @@ class DBHelper {
   //   return null;
   // }
 
-  Future<User> getContactWithAddress(String address) async {
-    var dbClient = await db;
+  Future<User?> getContactWithAddress(String address) async {
+    Database dbClient = (await db)!;
     List<Map> list =
         await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\'');
     if (list.length > 0) {
@@ -264,8 +264,8 @@ class DBHelper {
     return null;
   }
 
-  Future<User> getContactWithName(String name) async {
-    var dbClient = await db;
+  Future<User?> getContactWithName(String name) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE nickname = ? AND nickname <> \'\'', [name]);
     if (list.length > 0) {
       return User(nickname: list[0]["nickname"], address: list[0]["address"]);
@@ -274,30 +274,30 @@ class DBHelper {
   }
 
   Future<bool> contactExistsWithName(String name) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     int count =
-        Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(nickname) = ? AND nickname <> \'\'', [name.toLowerCase()]));
+        Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(nickname) = ? AND nickname <> \'\'', [name.toLowerCase()]))!;
     return count > 0;
   }
 
   Future<bool> contactExistsWithAddress(String address) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     int count = Sqflite.firstIntValue(await dbClient
-        .rawQuery('SELECT count(*) FROM Users WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\''));
+        .rawQuery('SELECT count(*) FROM Users WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\''))!;
     return count > 0;
   }
 
   Future<bool> contactExistsWithAddressOrUser(String addressOrUsername) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     int count = Sqflite.firstIntValue(await dbClient.rawQuery(
-        'SELECT count(*) FROM Users WHERE (lower(address) like \'%${addressOrUsername.replaceAll("xrb_", "").replaceAll("nano_", "")}\' OR username like \'%${addressOrUsername.toLowerCase()}\') AND nickname <> \'\''));
+        'SELECT count(*) FROM Users WHERE (lower(address) like \'%${addressOrUsername.replaceAll("xrb_", "").replaceAll("nano_", "")}\' OR username like \'%${addressOrUsername.toLowerCase()}\') AND nickname <> \'\''))!;
     return count > 0;
   }
 
   Future<bool> contactExistsWithUsername(String username) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     int count = Sqflite.firstIntValue(
-        await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(username) like \'%${username.toLowerCase()}\' AND nickname <> \'\''));
+        await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(username) like \'%${username.toLowerCase()}\' AND nickname <> \'\''))!;
     return count > 0;
   }
 
@@ -334,11 +334,11 @@ class DBHelper {
     if (contact.nickname != null) {
       if (contact.username != null) {
         username =
-            await dbClient.rawUpdate("UPDATE Users SET nickname = ? WHERE lower(username) like \'%${contact.username.toLowerCase()}\'", [contact.nickname]) > 0;
+            await dbClient!.rawUpdate("UPDATE Users SET nickname = ? WHERE lower(username) like \'%${contact.username!.toLowerCase()}\'", [contact.nickname]) > 0;
       }
       if (contact.address != null) {
         address =
-            await dbClient.rawUpdate("UPDATE Users SET nickname = ? WHERE lower(address) like \'%${contact.address.toLowerCase()}\'", [contact.nickname]) > 0;
+            await dbClient!.rawUpdate("UPDATE Users SET nickname = ? WHERE lower(address) like \'%${contact.address!.toLowerCase()}\'", [contact.nickname]) > 0;
       }
     }
     return username || address || name;
@@ -350,7 +350,7 @@ class DBHelper {
     // bool address = false;
     bool nickname = false;
     if (contact.nickname != null) {
-      nickname = await dbClient.rawUpdate("UPDATE Users SET nickname = \'\' WHERE lower(nickname) like \'%${contact.nickname.toLowerCase()}\'") > 0;
+      nickname = await dbClient!.rawUpdate("UPDATE Users SET nickname = \'\' WHERE lower(nickname) like \'%${contact.nickname!.toLowerCase()}\'") > 0;
       // if (contact.username != null) {
       //   username = await dbClient.rawUpdate("UPDATE Users SET nickname = \'\' WHERE lower(username) like \'%${contact.username.toLowerCase()}\'") > 0;
       // }
@@ -363,9 +363,9 @@ class DBHelper {
 
   // Users
   Future<List<User>> getUsers() async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users ORDER BY username');
-    List<User> users = new List();
+    List<User> users = [];
     for (int i = 0; i < list.length; i++) {
       users.add(new User(
           username: list[i]["username"],
@@ -378,7 +378,7 @@ class DBHelper {
   }
 
   Future<List<User>> getUsersWithNameLike(String pattern) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE username LIKE \'%$pattern%\' ORDER BY LOWER(username)');
     List<User> users = [];
     for (int i = 0; i < list.length; i++) {
@@ -388,7 +388,7 @@ class DBHelper {
   }
 
   Future<List<User>> getUserSuggestionsWithNameLike(String pattern) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE username LIKE \'%$pattern%\' ORDER BY LOWER(username)');
     List<User> users = [];
     int maxSuggestions = 5;
@@ -408,7 +408,7 @@ class DBHelper {
   }
 
   Future<List<User>> getUserContactSuggestionsWithNameLike(String pattern) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE username LIKE \'%$pattern%\' OR nickname LIKE \'%$pattern%\' ORDER BY LOWER(username)');
     List<User> users = [];
     int maxSuggestions = 5;
@@ -428,7 +428,7 @@ class DBHelper {
   }
 
   Future<List<User>> getUserSuggestionsWithUsernameLike(String pattern) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE username LIKE \'%$pattern%\' ORDER BY LOWER(username)');
     List<User> users = [];
     int maxSuggestions = 5;
@@ -448,7 +448,7 @@ class DBHelper {
   }
 
   Future<List<User>> getUserSuggestionsNoContacts(String pattern) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     List<Map> list =
         await dbClient.rawQuery('SELECT * FROM Users WHERE username LIKE \'%$pattern%\' AND (nickname IS NULL OR nickname = \'\') ORDER BY LOWER(username)');
     List<User> users = [];
@@ -468,8 +468,8 @@ class DBHelper {
     return users;
   }
 
-  Future<User> getUserWithAddress(String address) async {
-    var dbClient = await db;
+  Future<User?> getUserWithAddress(String address) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
     // TODO: Handle multiple users with the same address
     if (list.length > 0) {
@@ -483,8 +483,8 @@ class DBHelper {
     return null;
   }
 
-  Future<String> getUsernameOrReturnAddress(String address) async {
-    var dbClient = await db;
+  Future<String?> getUsernameOrReturnAddress(String address) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
     // TODO: Handle multiple users with the same address
     if (list.length > 0) {
@@ -493,8 +493,8 @@ class DBHelper {
     return address;
   }
 
-  Future<String> getUsernameWithAddress(String address) async {
-    var dbClient = await db;
+  Future<String?> getUsernameWithAddress(String address) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
     // TODO: Handle multiple users with the same address
     if (list.length > 0) {
@@ -504,7 +504,7 @@ class DBHelper {
   }
 
   Future<dynamic> getUserOrContactWithAddress(String address) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     List<Map> list;
     list = await dbClient.rawQuery('SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
     // TODO: Handle multiple users with the same address
@@ -519,8 +519,8 @@ class DBHelper {
     return null;
   }
 
-  Future<User> getUserWithName(String name) async {
-    var dbClient = await db;
+  Future<User?> getUserWithName(String name) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE lower(username) = ?', [name.toLowerCase()]);
     if (list.length > 0) {
       return User(
@@ -534,8 +534,8 @@ class DBHelper {
     return null;
   }
 
-  Future<User> getUserOrContactWithName(String name) async {
-    var dbClient = await db;
+  Future<User?> getUserOrContactWithName(String name) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE lower(username) = ? OR lower(nickname) = ?', [name.toLowerCase(), name.toLowerCase()]);
     if (list.length > 0) {
       return User(
@@ -565,34 +565,34 @@ class DBHelper {
   // }
 
   Future<bool> userExistsWithName(String name) async {
-    var dbClient = await db;
-    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(username) = ?', [name.toLowerCase()]));
+    Database dbClient = (await db)!;
+    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(username) = ?', [name.toLowerCase()]))!;
     return count > 0;
   }
 
   Future<bool> userExistsWithAddress(String address) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     int count = Sqflite.firstIntValue(
-        await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\''));
+        await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\''))!;
     return count > 0;
   }
 
   Future<int> addUser(User user) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     // return await dbClient.rawInsert('INSERT INTO Users (username, address) values(?, ?)', [user.username, user.address.replaceAll("xrb_", "nano_")]);
     return await dbClient.rawInsert('INSERT INTO Users (username, address, nickname, type, is_blocked) values(?, ?, ?, ?, ?)',
-        [user.username, user.address.replaceAll("xrb_", "nano_"), user.nickname, user.type, user.is_blocked]);
+        [user.username, user.address!.replaceAll("xrb_", "nano_"), user.nickname, user.type, user.is_blocked]);
   }
 
   Future<int> addOrReplaceUser(User user) async {
     var dbClient = await db;
     // check if it's already in the database:
-    bool userExists = await userExistsWithName(user.username);
+    bool userExists = await userExistsWithName(user.username!);
 
     if (!userExists) {
       return await addUser(user);
     } else {
-      return await dbClient.rawUpdate('UPDATE Users SET address = ? WHERE username = ?', [
+      return await dbClient!.rawUpdate('UPDATE Users SET address = ? WHERE username = ?', [
         user.address,
         user.username,
       ]);
@@ -600,13 +600,13 @@ class DBHelper {
   }
 
   Future<bool> deleteUser(User user) async {
-    var dbClient = await db;
-    return await dbClient.rawDelete("DELETE FROM Users WHERE lower(username) like \'%${user.username.toLowerCase()}\'") > 0;
+    Database dbClient = (await db)!;
+    return await dbClient.rawDelete("DELETE FROM Users WHERE lower(username) like \'%${user.username!.toLowerCase()}\'") > 0;
   }
 
   // Blocked
   Future<List<User>> getBlocked() async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Users WHERE is_blocked = 1 ORDER BY nickname');
     List<User> users = [];
     for (int i = 0; i < list.length; i++) {
@@ -629,14 +629,14 @@ class DBHelper {
     bool nickname = false;
     // UPDATE by username / address / nickname:
     if (user.username != null) {
-      username = await dbClient.rawUpdate('UPDATE Users SET is_blocked = 1 WHERE lower(username) = ?', [user.username.toLowerCase()]) > 0;
+      username = await dbClient!.rawUpdate('UPDATE Users SET is_blocked = 1 WHERE lower(username) = ?', [user.username!.toLowerCase()]) > 0;
     }
     if (user.address != null) {
       address =
-          await dbClient.rawUpdate('UPDATE Users SET is_blocked = 1 WHERE lower(address) = ?', [user.address.replaceAll("xrb_", "nano_").toLowerCase()]) > 0;
+          await dbClient!.rawUpdate('UPDATE Users SET is_blocked = 1 WHERE lower(address) = ?', [user.address!.replaceAll("xrb_", "nano_").toLowerCase()]) > 0;
     }
     if (user.nickname != null) {
-      address = await dbClient.rawUpdate('UPDATE Users SET is_blocked = 1 WHERE lower(nickname) = ?', [user.nickname.toLowerCase()]) > 0;
+      address = await dbClient!.rawUpdate('UPDATE Users SET is_blocked = 1 WHERE lower(nickname) = ?', [user.nickname!.toLowerCase()]) > 0;
     }
     return username || address || nickname;
   }
@@ -647,35 +647,35 @@ class DBHelper {
     bool address = false;
     bool nickname = false;
     if (user.username != null) {
-      username = await dbClient.rawUpdate("UPDATE Users SET is_blocked = 0 WHERE lower(username) like \'%${user.username.toLowerCase()}\'") > 0;
+      username = await dbClient!.rawUpdate("UPDATE Users SET is_blocked = 0 WHERE lower(username) like \'%${user.username!.toLowerCase()}\'") > 0;
     }
     if (user.address != null) {
-      address = await dbClient.rawUpdate("UPDATE Users SET is_blocked = 0 WHERE lower(address) like \'%${user.address.toLowerCase()}\'") > 0;
+      address = await dbClient!.rawUpdate("UPDATE Users SET is_blocked = 0 WHERE lower(address) like \'%${user.address!.toLowerCase()}\'") > 0;
     }
     if (user.nickname != null) {
-      nickname = await dbClient.rawUpdate("UPDATE Users SET is_blocked = 0 WHERE lower(nickname) like \'%${user.nickname.toLowerCase()}\'") > 0;
+      nickname = await dbClient!.rawUpdate("UPDATE Users SET is_blocked = 0 WHERE lower(nickname) like \'%${user.nickname!.toLowerCase()}\'") > 0;
     }
     return username || address || nickname;
   }
 
   Future<bool> blockedExistsWithName(String nickname) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     int count =
-        Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(nickname) = ? AND is_blocked = 1', [nickname.toLowerCase()]));
+        Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(nickname) = ? AND is_blocked = 1', [nickname.toLowerCase()]))!;
     return count > 0;
   }
 
   Future<bool> blockedExistsWithAddress(String address) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     int count = Sqflite.firstIntValue(await dbClient
-        .rawQuery('SELECT count(*) FROM Users WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND is_blocked = 1'));
+        .rawQuery('SELECT count(*) FROM Users WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND is_blocked = 1'))!;
     return count > 0;
   }
 
   Future<bool> blockedExistsWithUsername(String username) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     int count =
-        Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(username) = ? AND is_blocked = 1', [username.toLowerCase()]));
+        Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(username) = ? AND is_blocked = 1', [username.toLowerCase()]))!;
     return count > 0;
   }
 
@@ -754,7 +754,7 @@ class DBHelper {
   }
 
   Future<int> addTXData(TXData txData) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     // id INTEGER PRIMARY KEY AUTOINCREMENT,
     // from_address TEXT,
     // to_address TEXT,
@@ -768,7 +768,7 @@ class DBHelper {
     // uuid TEXT,
     // return await dbClient.rawInsert('INSERT INTO Transactions (username, address) values(?, ?)', [txData.username, user.address.replaceAll("xrb_", "nano_")]);
     // check if txData already exists:
-    var existingTXData = await getTXDataByUUID(txData.uuid);
+    var existingTXData = await getTXDataByUUID(txData.uuid!);
     if (existingTXData != null) {
       throw Exception("TXData already exists");
     }
@@ -801,9 +801,9 @@ class DBHelper {
   }
 
   Future<int> replaceTXDataByUUID(TXData txData) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
 
-    if (txData.uuid.isEmpty) {
+    if (txData.uuid!.isEmpty) {
       throw "this shouldn't happen";
     }
 
@@ -813,18 +813,18 @@ class DBHelper {
         [
           txData.from_address,
           txData.to_address,
-          (txData.amount_raw == null || txData.amount_raw.isEmpty) ? "" : txData.amount_raw,
-          txData.is_request ? 1 : 0,
-          (txData.request_time == null || txData.request_time.isEmpty) ? "" : txData.request_time,
-          txData.is_fulfilled ? 1 : 0,
-          (txData.fulfillment_time == null || txData.fulfillment_time.isEmpty) ? "" : txData.fulfillment_time,
-          (txData.block == null || txData.block.isEmpty) ? "" : txData.block,
-          (txData.link == null || txData.link.isEmpty) ? "" : txData.link,
-          (txData.memo_enc == null || txData.memo_enc.isEmpty) ? "" : txData.memo_enc,
-          txData.is_memo ? 1 : 0,
-          txData.is_message ? 1 : 0,
-          (txData.memo == null || txData.memo.isEmpty) ? "" : txData.memo,
-          txData.is_acknowledged ? 1 : 0,
+          (txData.amount_raw == null || txData.amount_raw!.isEmpty) ? "" : txData.amount_raw,
+          txData.is_request! ? 1 : 0,
+          (txData.request_time == null || txData.request_time!.isEmpty) ? "" : txData.request_time,
+          txData.is_fulfilled! ? 1 : 0,
+          (txData.fulfillment_time == null || txData.fulfillment_time!.isEmpty) ? "" : txData.fulfillment_time,
+          (txData.block == null || txData.block!.isEmpty) ? "" : txData.block,
+          (txData.link == null || txData.link!.isEmpty) ? "" : txData.link,
+          (txData.memo_enc == null || txData.memo_enc!.isEmpty) ? "" : txData.memo_enc,
+          txData.is_memo! ? 1 : 0,
+          txData.is_message! ? 1 : 0,
+          (txData.memo == null || txData.memo!.isEmpty) ? "" : txData.memo,
+          txData.is_acknowledged! ? 1 : 0,
           txData.height,
           txData.send_height,
           txData.recv_height,
@@ -838,7 +838,7 @@ class DBHelper {
 
   // txdata
   Future<List<TXData>> getTXData() async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions ORDER BY request_time DESC');
     List<TXData> transactions = [];
     for (int i = 0; i < list.length; i++) {
@@ -847,8 +847,8 @@ class DBHelper {
     return transactions;
   }
 
-  Future<TXData> getTXDataByBlock(String block) async {
-    var dbClient = await db;
+  Future<TXData?> getTXDataByBlock(String? block) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE block = ? ORDER BY request_time DESC', [block]);
     if (list.length > 0) {
       return createTXDataFromDB(list[0]);
@@ -856,8 +856,8 @@ class DBHelper {
     return null;
   }
 
-  Future<List<TXData>> getAccountSpecificTXData(String account) async {
-    var dbClient = await db;
+  Future<List<TXData>> getAccountSpecificTXData(String? account) async {
+    Database dbClient = (await db)!;
     List<Map> list =
         await dbClient.rawQuery('SELECT * FROM Transactions WHERE from_address = ? OR to_address = ? ORDER BY request_time DESC', [account, account]);
     // List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions ORDER BY request_time DESC');
@@ -868,8 +868,8 @@ class DBHelper {
     return transactions;
   }
 
-  Future<List<TXData>> getAccountSpecificSolids(String account) async {
-    var dbClient = await db;
+  Future<List<TXData>> getAccountSpecificSolids(String? account) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery(
         'SELECT * FROM Transactions WHERE (from_address = ? OR to_address = ?) AND (is_request = 1 OR is_message = 1) ORDER BY request_time DESC',
         [account, account]);
@@ -882,7 +882,7 @@ class DBHelper {
   }
 
   Future<List<TXData>> getAccountSpecificRecords(String account) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery(
         'SELECT * FROM Transactions WHERE (from_address = ? OR to_address = ?) AND (is_request = 0 and is_message = 0) ORDER BY request_time DESC',
         [account, account]);
@@ -894,8 +894,8 @@ class DBHelper {
     return transactions;
   }
 
-  Future<TXData> getBlockSpecificTXData(String block) async {
-    var dbClient = await db;
+  Future<TXData?> getBlockSpecificTXData(String block) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE block = ? ORDER BY request_time DESC', [block]);
     if (list.length > 0) {
       return createTXDataFromDB(list[0]);
@@ -903,8 +903,8 @@ class DBHelper {
     return null;
   }
 
-  Future<TXData> getTXDataByRequestTime(String request_time) async {
-    var dbClient = await db;
+  Future<TXData?> getTXDataByRequestTime(String request_time) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE request_time = ? ORDER BY request_time DESC', [request_time]);
     if (list.length > 0) {
       return createTXDataFromDB(list[0]);
@@ -912,8 +912,8 @@ class DBHelper {
     return null;
   }
 
-  Future<TXData> getTXDataByUUID(String uuid) async {
-    var dbClient = await db;
+  Future<TXData?> getTXDataByUUID(String uuid) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery("SELECT * FROM Transactions WHERE lower(uuid) like \'%${uuid.toLowerCase()}\'");
     if (list.length > 0) {
       return createTXDataFromDB(list[0]);
@@ -922,32 +922,32 @@ class DBHelper {
   }
 
   Future<bool> deleteTXData(TXData txData) async {
-    var dbClient = await db;
-    return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(uuid) like \'%${txData.uuid.toLowerCase()}\'") > 0;
+    Database dbClient = (await db)!;
+    return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(uuid) like \'%${txData.uuid!.toLowerCase()}\'") > 0;
   }
 
   Future<bool> deleteTXDataByUUID(String uuid) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(uuid) like \'%${uuid.toLowerCase()}\'") > 0;
   }
 
-  Future<bool> deleteTXDataByID(int id) async {
-    var dbClient = await db;
+  Future<bool> deleteTXDataByID(int? id) async {
+    Database dbClient = (await db)!;
     return await dbClient.rawDelete("DELETE FROM Transactions WHERE id = ?", [id]) > 0;
   }
 
   Future<bool> deleteTXDataByBlock(String block) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(block) like \'%${block.toLowerCase()}\'") > 0;
   }
 
   Future<bool> deleteTXDataByRequestTime(String request_time) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     return await dbClient.rawDelete("DELETE FROM Transactions WHERE request_time = ?", [request_time]) > 0;
   }
 
   Future<List<TXData>> getUnfulfilledTXs() async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions WHERE (is_fulfilled = 0 AND is_request = 1) ORDER BY request_time');
     List<TXData> transactions = [];
     for (int i = 0; i < list.length; i++) {
@@ -956,8 +956,8 @@ class DBHelper {
     return transactions;
   }
 
-  Future<int> changeTXFulfillmentStatus(String uuid, bool is_fulfilled) async {
-    var dbClient = await db;
+  Future<int> changeTXFulfillmentStatus(String? uuid, bool is_fulfilled) async {
+    Database dbClient = (await db)!;
     // return await dbClient.rawUpdate('UPDATE Transactions SET is_fulfilled = ? WHERE id = ?', [is_fulfilled ? 1 : 0, txData.id]);
     return await dbClient.rawUpdate('UPDATE Transactions SET is_fulfilled = ? WHERE uuid = ?', [
       is_fulfilled ? 1 : 0,
@@ -966,7 +966,7 @@ class DBHelper {
   }
 
   Future<int> changeTXAckStatus(String uuid, bool is_acknowledged) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     // return await dbClient.rawUpdate('UPDATE Transactions SET is_fulfilled = ? WHERE id = ?', [is_fulfilled ? 1 : 0, txData.id]);
     return await dbClient.rawUpdate('UPDATE Transactions SET is_acknowledged = ? WHERE uuid = ?', [
       is_acknowledged ? 1 : 0,
@@ -975,13 +975,13 @@ class DBHelper {
   }
 
   Future<void> nukeUsers() async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     await dbClient.rawDelete("DELETE FROM Users");
   }
 
   // Accounts
-  Future<List<Account>> getAccounts(String seed) async {
-    var dbClient = await db;
+  Future<List<Account>> getAccounts(String? seed) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Accounts ORDER BY acct_index');
     List<Account> accounts = [];
     for (int i = 0; i < list.length; i++) {
@@ -994,9 +994,9 @@ class DBHelper {
           balance: list[i]["balance"]));
     }
     accounts.forEach((a) async {
-      a.address = NanoUtil.seedToAddress(seed, a.index);
+      a.address = NanoUtil.seedToAddress(seed!, a.index!);
       // check if account has a user:
-      User user = await getUserWithAddress(a.address);
+      User? user = await getUserWithAddress(a.address!);
       if (user != null) {
         a.user = user;
       }
@@ -1004,8 +1004,8 @@ class DBHelper {
     return accounts;
   }
 
-  Future<List<Account>> getRecentlyUsedAccounts(String seed, {int limit = 2}) async {
-    var dbClient = await db;
+  Future<List<Account>> getRecentlyUsedAccounts(String? seed, {int limit = 2}) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Accounts WHERE selected != 1 ORDER BY last_accessed DESC, acct_index ASC LIMIT ?', [limit]);
     List<Account> accounts = [];
     for (int i = 0; i < list.length; i++) {
@@ -1018,9 +1018,9 @@ class DBHelper {
           balance: list[i]["balance"]));
     }
     accounts.forEach((a) async {
-      a.address = NanoUtil.seedToAddress(seed, a.index);
+      a.address = NanoUtil.seedToAddress(seed!, a.index!);
       // check if account has a user:
-      User user = await getUserWithAddress(a.address);
+      User? user = await getUserWithAddress(a.address!);
       if (user != null) {
         a.user = user;
       }
@@ -1028,12 +1028,12 @@ class DBHelper {
     return accounts;
   }
 
-  Future<Account> addAccount(String seed, {String nameBuilder}) async {
-    var dbClient = await db;
-    Account account;
+  Future<Account?> addAccount(String? seed, {String? nameBuilder}) async {
+    Database dbClient = (await db)!;
+    Account? account;
     await dbClient.transaction((Transaction txn) async {
       int nextIndex = 0;
-      int curIndex;
+      int? curIndex;
       List<Map> accounts = await txn.rawQuery('SELECT * from Accounts WHERE acct_index >= 0 ORDER BY acct_index ASC');
       for (int i = 0; i < accounts.length; i++) {
         curIndex = accounts[i]["acct_index"];
@@ -1043,56 +1043,56 @@ class DBHelper {
         nextIndex++;
       }
       int nextID = nextIndex + 1;
-      String nextName = nameBuilder.replaceAll("%1", nextID.toString());
-      account = Account(index: nextIndex, name: nextName, lastAccess: 0, selected: false, address: NanoUtil.seedToAddress(seed, nextIndex));
+      String nextName = nameBuilder!.replaceAll("%1", nextID.toString());
+      account = Account(index: nextIndex, name: nextName, lastAccess: 0, selected: false, address: NanoUtil.seedToAddress(seed!, nextIndex));
       await txn.rawInsert('INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)',
-          [account.name, account.index, account.lastAccess, account.selected ? 1 : 0, account.address]);
+          [account!.name, account!.index, account!.lastAccess, account!.selected ? 1 : 0, account!.address]);
     });
-    User user = await getUserWithAddress(account.address);
+    User? user = await getUserWithAddress(account!.address!);
     if (user != null) {
-      account.user = user;
+      account!.user = user;
     }
     return account;
   }
 
   Future<int> deleteAccount(Account account) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     return await dbClient.rawDelete('DELETE FROM Accounts WHERE acct_index = ?', [account.index]);
   }
 
   Future<int> saveAccount(Account account) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     return await dbClient.rawInsert('INSERT INTO Accounts (name, acct_index, last_accessed, selected) values(?, ?, ?, ?)',
         [account.name, account.index, account.lastAccess, account.selected ? 1 : 0]);
   }
 
   Future<int> changeAccountName(Account account, String name) async {
-    var dbClient = await db;
+    Database dbClient = (await db)!;
     return await dbClient.rawUpdate('UPDATE Accounts SET name = ? WHERE acct_index = ?', [name, account.index]);
   }
 
-  Future<void> changeAccount(Account account) async {
-    var dbClient = await db;
+  Future<void> changeAccount(Account? account) async {
+    Database dbClient = (await db)!;
     return await dbClient.transaction((Transaction txn) async {
       await txn.rawUpdate('UPDATE Accounts set selected = 0');
       // Get access increment count
       List<Map> list = await txn.rawQuery('SELECT max(last_accessed) as last_access FROM Accounts');
-      await txn.rawUpdate('UPDATE Accounts set selected = ?, last_accessed = ? where acct_index = ?', [1, list[0]["last_access"] + 1, account.index]);
+      await txn.rawUpdate('UPDATE Accounts set selected = ?, last_accessed = ? where acct_index = ?', [1, list[0]["last_access"] + 1, account!.index]);
     });
   }
 
-  Future<void> updateAccountBalance(Account account, String balance) async {
-    var dbClient = await db;
+  Future<int> updateAccountBalance(Account account, String balance) async {
+    Database dbClient = (await db)!;
     return await dbClient.rawUpdate('UPDATE Accounts set balance = ? where acct_index = ?', [balance, account.index]);
   }
 
-  Future<Account> getSelectedAccount(String seed) async {
-    var dbClient = await db;
+  Future<Account?> getSelectedAccount(String? seed) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Accounts where selected = 1');
     if (list.length == 0) {
       return null;
     }
-    String address = NanoUtil.seedToAddress(seed, list[0]["acct_index"]);
+    String address = NanoUtil.seedToAddress(seed!, list[0]["acct_index"]);
     Account account = Account(
         id: list[0]["id"],
         name: list[0]["name"],
@@ -1104,13 +1104,13 @@ class DBHelper {
     return account;
   }
 
-  Future<Account> getMainAccount(String seed) async {
-    var dbClient = await db;
+  Future<Account?> getMainAccount(String? seed) async {
+    Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Accounts where acct_index = 0');
     if (list.length == 0) {
       return null;
     }
-    String address = NanoUtil.seedToAddress(seed, list[0]["acct_index"]);
+    String address = NanoUtil.seedToAddress(seed!, list[0]["acct_index"]);
     Account account = Account(
         id: list[0]["id"],
         name: list[0]["name"],
@@ -1122,8 +1122,8 @@ class DBHelper {
     return account;
   }
 
-  Future<void> dropAccounts() async {
-    var dbClient = await db;
+  Future<int> dropAccounts() async {
+    Database dbClient = (await db)!;
     return await dbClient.rawDelete('DELETE FROM ACCOUNTS');
   }
 }

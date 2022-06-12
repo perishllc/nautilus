@@ -78,7 +78,7 @@ class _AppState extends State<App> {
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(StateContainer.of(context).curTheme.statusBar);
+    SystemChrome.setSystemUIOverlayStyle(StateContainer.of(context).curTheme.statusBar!);
     return OKToast(
       textStyle: AppStyles.textStyleSnackbar(context),
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -210,12 +210,12 @@ class _AppState extends State<App> {
               );
             case '/home':
               return NoTransitionRoute(
-                builder: (_) => AppHomePage(priceConversion: settings.arguments),
+                builder: (_) => AppHomePage(priceConversion: settings.arguments as PriceConversion?),
                 settings: settings,
               );
             case '/home_transition':
               return NoPopTransitionRoute(
-                builder: (_) => AppHomePage(priceConversion: settings.arguments),
+                builder: (_) => AppHomePage(priceConversion: settings.arguments as PriceConversion?),
                 settings: settings,
               );
             case '/intro_welcome':
@@ -225,17 +225,17 @@ class _AppState extends State<App> {
               );
             case '/intro_password_on_launch':
               return MaterialPageRoute(
-                builder: (_) => IntroPasswordOnLaunch(seed: settings.arguments),
+                builder: (_) => IntroPasswordOnLaunch(seed: settings.arguments as String?),
                 settings: settings,
               );
             case '/intro_password':
               return MaterialPageRoute(
-                builder: (_) => IntroPassword(seed: settings.arguments),
+                builder: (_) => IntroPassword(seed: settings.arguments as String?),
                 settings: settings,
               );
             case '/intro_backup':
               return MaterialPageRoute(
-                builder: (_) => IntroBackupSeedPage(encryptedSeed: settings.arguments),
+                builder: (_) => IntroBackupSeedPage(encryptedSeed: settings.arguments as String?),
                 settings: settings,
               );
             case '/intro_backup_safety':
@@ -272,7 +272,7 @@ class _AppState extends State<App> {
               return PageRouteBuilder(pageBuilder: (context, animationIn, animationOut) => AvatarPage(), settings: settings, opaque: false);
             case '/avatar_change_page':
               return MaterialPageRoute(
-                builder: (_) => AvatarChangePage(curAddress: StateContainer.of(context).selectedAccount.address),
+                builder: (_) => AvatarChangePage(curAddress: StateContainer.of(context).selectedAccount!.address),
                 settings: settings,
               );
             case '/before_scan_screen':
@@ -323,8 +323,8 @@ class Splash extends StatefulWidget {
 }
 
 class SplashState extends State<Splash> with WidgetsBindingObserver {
-  bool _hasCheckedLoggedIn;
-  bool _retried;
+  late bool _hasCheckedLoggedIn;
+  late bool _retried;
 
   bool seedIsEncrypted(String seed) {
     if (seed == null) {
@@ -345,17 +345,17 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     // Update session key
     await sl.get<Vault>().updateSessionKey();
     // Check if device is rooted or jailbroken, show user a warning informing them of the risks if so
-    if (!(await sl.get<SharedPrefsUtil>().getHasSeenRootWarning()) && await FlutterJailbreakDetection.jailbroken) {
+    if (!(await (sl.get<SharedPrefsUtil>().getHasSeenRootWarning())) && await FlutterJailbreakDetection.jailbroken) {
       AppDialogs.showConfirmDialog(
           context,
-          CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
-          AppLocalization.of(context).rootWarning,
-          AppLocalization.of(context).iUnderstandTheRisks.toUpperCase(),
+          CaseChange.toUpperCase(AppLocalization.of(context)!.warning, context),
+          AppLocalization.of(context)!.rootWarning,
+          AppLocalization.of(context)!.iUnderstandTheRisks.toUpperCase(),
           () async {
             await sl.get<SharedPrefsUtil>().setHasSeenRootWarning();
             checkLoggedIn();
           },
-          cancelText: AppLocalization.of(context).exit.toUpperCase(),
+          cancelText: AppLocalization.of(context)!.exit.toUpperCase(),
           cancelAction: () {
             if (Platform.isIOS) {
               exit(0);
@@ -372,7 +372,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     }
     try {
       // iOS key store is persistent, so if this is first launch then we will clear the keystore
-      bool firstLaunch = await sl.get<SharedPrefsUtil>().getFirstLaunch();
+      bool firstLaunch = await (sl.get<SharedPrefsUtil>().getFirstLaunch() as FutureOr<bool>);
       if (firstLaunch) {
         await sl.get<Vault>().deleteAll();
       }
@@ -397,7 +397,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       if (isLoggedIn) {
         if (isEncrypted) {
           Navigator.of(context).pushReplacementNamed('/password_lock_screen');
-        } else if (await sl.get<SharedPrefsUtil>().getLock() || await sl.get<SharedPrefsUtil>().shouldLock()) {
+        } else if (await (sl.get<SharedPrefsUtil>().getLock() as FutureOr<bool>) || await sl.get<SharedPrefsUtil>().shouldLock()) {
           Navigator.of(context).pushReplacementNamed('/lock_screen');
         } else {
           await NanoUtil().loginAccount(seed, context);
@@ -416,7 +416,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       /// It will generate a 64-byte secret using the native android "bottlerocketstudios" Vault
       /// This secret is used to encrypt sensitive data and save it in SharedPreferences
       if (Platform.isAndroid && e.toString().contains("flutter_secure")) {
-        if (!(await sl.get<SharedPrefsUtil>().useLegacyStorage())) {
+        if (!(await (sl.get<SharedPrefsUtil>().useLegacyStorage() as FutureOr<bool>))) {
           await sl.get<SharedPrefsUtil>().setUseLegacyStorage();
           checkLoggedIn();
         }

@@ -10,9 +10,9 @@ NinjaNode _$NinjaNodeFromJson(Map<String, dynamic> json) {
   return NinjaNode(
     votingWeight: _toBigInt(json['votingweight']),
     uptime: _toDouble(json['uptime']),
-    score: json['score'] as int,
-    account: json['account'] as String,
-    alias: json['alias'] as String,
+    score: json['score'] as int?,
+    account: json['account'] as String?,
+    alias: json['alias'] as String?,
   );
 }
 

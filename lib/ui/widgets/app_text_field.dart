@@ -5,9 +5,9 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 /// TextField button
 class TextFieldButton extends StatelessWidget {
   final IconData icon;
-  final Function onPressed;
+  final Function? onPressed;
 
-  TextFieldButton({@required this.icon, this.onPressed});
+  TextFieldButton({required this.icon, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class TextFieldButton extends StatelessWidget {
             StateContainer.of(context).curTheme.primary15,
         splashColor: StateContainer.of(context).curTheme.primary30,
         onPressed: () {
-          onPressed != null ? onPressed() : null;
+          onPressed != null ? onPressed!() : null;
         },
         child: Icon(icon,
             size: 20,
@@ -35,31 +35,31 @@ class TextFieldButton extends StatelessWidget {
 /// A widget for our custom textfields
 class AppTextField extends StatefulWidget {
   final TextAlign textAlign;
-  final FocusNode focusNode;
-  final TextEditingController controller;
-  final Color cursorColor;
+  final FocusNode? focusNode;
+  final TextEditingController? controller;
+  final Color? cursorColor;
   final Brightness keyboardAppearance;
-  final List<TextInputFormatter> inputFormatters;
-  final TextInputAction textInputAction;
-  final int maxLines;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputAction? textInputAction;
+  final int? maxLines;
   final bool autocorrect;
-  final String hintText;
-  final TextFieldButton prefixButton;
-  final TextFieldButton suffixButton;
-  final bool fadePrefixOnCondition;
-  final bool prefixShowFirstCondition;
-  final bool fadeSuffixOnCondition;
-  final bool suffixShowFirstCondition;
+  final String? hintText;
+  final TextFieldButton? prefixButton;
+  final TextFieldButton? suffixButton;
+  final bool? fadePrefixOnCondition;
+  final bool? prefixShowFirstCondition;
+  final bool? fadeSuffixOnCondition;
+  final bool? suffixShowFirstCondition;
   final EdgeInsetsGeometry padding;
-  final Widget overrideTextFieldWidget;
+  final Widget? overrideTextFieldWidget;
   final int buttonFadeDurationMs;
-  final TextInputType keyboardType;
-  final Function onSubmitted;
-  final Function onChanged;
+  final TextInputType? keyboardType;
+  final Function? onSubmitted;
+  final Function? onChanged;
   final double topMargin;
-  final double leftMargin;
-  final double rightMargin;
-  final TextStyle style;
+  final double? leftMargin;
+  final double? rightMargin;
+  final TextStyle? style;
   final bool obscureText;
   final bool autofocus;
 
@@ -130,12 +130,12 @@ class _AppTextFieldState extends State<AppTextField> {
             keyboardType: widget.keyboardType,
             obscureText: widget.obscureText,
             autofocus: widget.autofocus,
-            onSubmitted: widget.onSubmitted != null ? widget.onSubmitted : (text) {
+            onSubmitted: widget.onSubmitted != null ? widget.onSubmitted as void Function(String)? : (text) {
               if (widget.textInputAction == TextInputAction.done) {
                 FocusScope.of(context).unfocus();
               }
             },
-            onChanged: widget.onChanged,
+            onChanged: widget.onChanged as void Function(String)?,
             // Style
             style: widget.style,   
             // Input decoration
@@ -168,22 +168,22 @@ class _AppTextFieldState extends State<AppTextField> {
                   widget.fadePrefixOnCondition != null && widget.prefixButton != null ?
                     AnimatedCrossFade(
                       duration: Duration(milliseconds: widget.buttonFadeDurationMs),
-                      firstChild: widget.prefixButton,
+                      firstChild: widget.prefixButton!,
                       secondChild: SizedBox(height: 48, width: 48),
-                      crossFadeState: widget.prefixShowFirstCondition ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                      crossFadeState: widget.prefixShowFirstCondition! ? CrossFadeState.showFirst : CrossFadeState.showSecond,
                     )
                   : widget.prefixButton != null
-                  ? widget.prefixButton : SizedBox(),
+                  ? widget.prefixButton! : SizedBox(),
                   // Second (suffix) button
                   widget.fadeSuffixOnCondition != null && widget.suffixButton != null ?
                     AnimatedCrossFade(
                       duration: Duration(milliseconds: widget.buttonFadeDurationMs),
-                      firstChild: widget.suffixButton,
+                      firstChild: widget.suffixButton!,
                       secondChild: SizedBox(height: 48, width: 48),
-                      crossFadeState: widget.suffixShowFirstCondition ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                      crossFadeState: widget.suffixShowFirstCondition! ? CrossFadeState.showFirst : CrossFadeState.showSecond,
                     )
                   : widget.suffixButton != null
-                  ? widget.suffixButton : SizedBox()
+                  ? widget.suffixButton! : SizedBox()
                 ]
               )
             ],

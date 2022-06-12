@@ -15,23 +15,23 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class AppSeedBackupSheet {
-  String _seed;
-  List<String> _mnemonic;
-  List<String> mnemonic;
-  bool showMnemonic;
-  bool _seedCopied;
-  Timer _seedCopiedTimer;
-  bool _mnemonicCopied;
-  Timer _mnemonicCopiedTimer;
+  String? _seed;
+  List<String>? _mnemonic;
+  List<String>? mnemonic;
+  bool? showMnemonic;
+  late bool _seedCopied;
+  Timer? _seedCopiedTimer;
+  late bool _mnemonicCopied;
+  Timer? _mnemonicCopiedTimer;
 
-  AppSeedBackupSheet(String seed) {
+  AppSeedBackupSheet(String? seed) {
     this._seed = seed;
   }
 
   mainBottomSheet(BuildContext context) {
     _seedCopied = false;
     _mnemonicCopied = false;
-    _mnemonic = NanoMnemomics.seedToMnemonic(_seed);
+    _mnemonic = NanoMnemomics.seedToMnemonic(_seed!);
     bool showMnemonic = true;
     AppSheets.showAppHeightNineSheet(
         context: context,
@@ -74,7 +74,7 @@ class AppSeedBackupSheet {
                                       children: <Widget>[
                                         AutoSizeText(
                                           CaseChange.toUpperCase(
-                                              showMnemonic ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed, context),
+                                              showMnemonic ? AppLocalization.of(context)!.secretPhrase : AppLocalization.of(context)!.seed, context),
                                           style: AppStyles.textStyleHeader(context),
                                           maxLines: 1,
                                           stepGranularity: 0.1,
@@ -135,15 +135,15 @@ class AppSeedBackupSheet {
                                     context,
                                     // Copy Mnemonic Button
                                     _mnemonicCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                                    _mnemonicCopied ? AppLocalization.of(context).secretPhraseCopied : AppLocalization.of(context).secretPhraseCopy,
+                                    _mnemonicCopied ? AppLocalization.of(context)!.secretPhraseCopied : AppLocalization.of(context)!.secretPhraseCopy,
                                     Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                                  UserDataUtil.setSecureClipboardItem(_mnemonic.join(" "));
+                                  UserDataUtil.setSecureClipboardItem(_mnemonic!.join(" "));
                                   setState(() {
                                     // Set copied style
                                     _mnemonicCopied = true;
                                   });
                                   if (_mnemonicCopiedTimer != null) {
-                                    _mnemonicCopiedTimer.cancel();
+                                    _mnemonicCopiedTimer!.cancel();
                                   }
                                   _mnemonicCopiedTimer = new Timer(const Duration(milliseconds: 1000), () {
                                     try {
@@ -161,7 +161,7 @@ class AppSeedBackupSheet {
                                     context,
                                     // Copy Seed Button
                                     _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                                    _seedCopied ? AppLocalization.of(context).seedCopiedShort : AppLocalization.of(context).copySeed,
+                                    _seedCopied ? AppLocalization.of(context)!.seedCopiedShort : AppLocalization.of(context)!.copySeed,
                                     Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                                   UserDataUtil.setSecureClipboardItem(_seed);
                                   setState(() {
@@ -169,7 +169,7 @@ class AppSeedBackupSheet {
                                     _seedCopied = true;
                                   });
                                   if (_seedCopiedTimer != null) {
-                                    _seedCopiedTimer.cancel();
+                                    _seedCopiedTimer!.cancel();
                                   }
                                   _seedCopiedTimer = new Timer(const Duration(milliseconds: 1000), () {
                                     setState(() {

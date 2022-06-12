@@ -23,9 +23,9 @@ class ShakeCurve extends Curve {
 
 class PinScreen extends StatefulWidget {
   final PinOverlayType type;
-  final String expectedPin;
+  final String? expectedPin;
   final String description;
-  final Color pinScreenBackgroundColor;
+  final Color? pinScreenBackgroundColor;
 
   PinScreen(this.type, {this.description = "", this.expectedPin = "", this.pinScreenBackgroundColor});
 
@@ -43,16 +43,16 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
   String pinCreateTitle = "";
 
   // Stateful data
-  List<IconData> _dotStates;
-  String _pin;
-  String _pinConfirmed;
-  bool _awaitingConfirmation; // true if pin has been entered once, false if not entered once
-  String _header;
+  late List<IconData> _dotStates;
+  String? _pin;
+  String? _pinConfirmed;
+  late bool _awaitingConfirmation; // true if pin has been entered once, false if not entered once
+  late String _header;
   int _failedAttempts = 0;
 
   // Invalid animation
-  AnimationController _controller;
-  Animation<double> _animation;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -60,7 +60,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
     // Initialize list all empty
     if (widget.type == PinOverlayType.ENTER_PIN) {
       _header = pinEnterTitle;
-      _pinLength = widget.expectedPin.length;
+      _pinLength = widget.expectedPin!.length;
     } else {
       _header = pinCreateTitle;
     }
@@ -77,7 +77,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
     // Set animation
     _controller = AnimationController(duration: const Duration(milliseconds: 350), vsync: this);
     final Animation curve = CurvedAnimation(parent: _controller, curve: ShakeCurve());
-    _animation = Tween(begin: 0.0, end: 25.0).animate(curve)
+    _animation = Tween(begin: 0.0, end: 25.0).animate(curve as Animation<double>)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           if (widget.type == PinOverlayType.ENTER_PIN) {
@@ -93,7 +93,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
               } else {
                 setState(() {
                   _pin = "";
-                  _header = AppLocalization.of(context).pinInvalid;
+                  _header = AppLocalization.of(context)!.pinInvalid;
                   _dotStates = List.filled(_pinLength, AppIcons.dotemtpy);
                   _controller.value = 0;
                 });
@@ -105,7 +105,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
               _dotStates = List.filled(_pinLength, AppIcons.dotemtpy);
               _pin = "";
               _pinConfirmed = "";
-              _header = AppLocalization.of(context).pinConfirmError;
+              _header = AppLocalization.of(context)!.pinConfirmError;
               _controller.value = 0;
             });
           }
@@ -129,11 +129,11 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
   bool _setCharacter(String character) {
     if (_awaitingConfirmation) {
       setState(() {
-        _pinConfirmed = _pinConfirmed + character;
+        _pinConfirmed = _pinConfirmed! + character;
       });
     } else {
       setState(() {
-        _pin = _pin + character;
+        _pin = _pin! + character;
       });
     }
     for (int i = 0; i < _dotStates.length; i++) {
@@ -152,7 +152,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
 
   void _backSpace() {
     if (_dotStates[0] != AppIcons.dotemtpy) {
-      int lastFilledIndex;
+      late int lastFilledIndex;
       for (int i = 0; i < _dotStates.length; i++) {
         if (_dotStates[i] == AppIcons.dotfilled) {
           if (i == _dotStates.length || _dotStates[i + 1] == AppIcons.dotemtpy) {
@@ -164,9 +164,9 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
       setState(() {
         _dotStates[lastFilledIndex] = AppIcons.dotemtpy;
         if (_awaitingConfirmation) {
-          _pinConfirmed = _pinConfirmed.substring(0, _pinConfirmed.length - 1);
+          _pinConfirmed = _pinConfirmed!.substring(0, _pinConfirmed!.length - 1);
         } else {
-          _pin = _pin.substring(0, _pin.length - 1);
+          _pin = _pin!.substring(0, _pin!.length - 1);
         }
       });
     }
@@ -205,7 +205,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
                   setState(() {
                     _awaitingConfirmation = true;
                     _dotStates = List.filled(_pinLength, AppIcons.dotemtpy);
-                    _header = AppLocalization.of(context).pinConfirmTitle;
+                    _header = AppLocalization.of(context)!.pinConfirmTitle;
                   });
                 } else {
                   // First and second pins match
@@ -238,7 +238,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
   }
 
   List<Widget> _buildPinDots() {
-    List<Widget> ret = List();
+    List<Widget> ret = [];
     for (int i = 0; i < _pinLength; i++) {
       ret.add(Icon(_dotStates[i], color: StateContainer.of(context).curTheme.primary, size: 20.0));
     }
@@ -249,7 +249,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     if (pinEnterTitle.isEmpty) {
       setState(() {
-        pinEnterTitle = AppLocalization.of(context).pinEnterTitle;
+        pinEnterTitle = AppLocalization.of(context)!.pinEnterTitle;
         if (widget.type == PinOverlayType.ENTER_PIN) {
           _header = pinEnterTitle;
         }
@@ -257,7 +257,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
     }
     if (pinCreateTitle.isEmpty) {
       setState(() {
-        pinCreateTitle = AppLocalization.of(context).pinCreateTitle;
+        pinCreateTitle = AppLocalization.of(context)!.pinCreateTitle;
         if (widget.type == PinOverlayType.NEW_PIN) {
           _header = pinCreateTitle;
         }

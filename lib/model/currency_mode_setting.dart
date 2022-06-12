@@ -6,11 +6,11 @@ enum CurrencyModeOptions { NANO, NYANO }
 
 /// Represent nyano/nano  setting
 class CurrencyModeSetting extends SettingSelectionItem {
-  CurrencyModeOptions setting;
+  CurrencyModeOptions? setting;
 
   CurrencyModeSetting(this.setting);
 
-  String getDisplayName([BuildContext context]) {
+  String getDisplayName([BuildContext? context]) {
     switch (setting) {
       case CurrencyModeOptions.NANO:
         return "NANO";
@@ -23,6 +23,6 @@ class CurrencyModeSetting extends SettingSelectionItem {
 
   // For saving to shared prefs
   int getIndex() {
-    return setting.index;
+    return setting!.index;
   }
 }

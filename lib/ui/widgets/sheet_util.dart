@@ -6,16 +6,16 @@ import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 
 class Sheets {
   //App Ninty Height Sheet
-  static Future<T> showAppHeightNineSheet<T>(
-      {@required BuildContext context,
-      @required Widget widget,
-      Color color,
+  static Future<T?> showAppHeightNineSheet<T>(
+      {required BuildContext context,
+      required Widget widget,
+      Color? color,
       double radius = 30.0,
-      Color barrier,
+      Color? barrier,
       int animationDurationMs = 250,
       bool removeUntilHome = false,
       bool closeOnTap = false,
-      Function onDisposed}) {
+      Function? onDisposed}) {
     assert(context != null);
     assert(widget != null);
     assert(radius != null && radius > 0.0);
@@ -45,12 +45,12 @@ class Sheets {
   }
 
   //App Height Eigth Sheet
-  static Future<T> showAppHeightEightSheet<T>(
-      {@required BuildContext context,
-      @required Widget widget,
-      Color color,
+  static Future<T?> showAppHeightEightSheet<T>(
+      {required BuildContext context,
+      required Widget widget,
+      Color? color,
       double radius = 30.0,
-      Color barrier,
+      Color? barrier,
       int animationDurationMs = 225}) {
     assert(context != null);
     assert(widget != null);
@@ -122,49 +122,49 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
       this.barrierLabel,
       this.color,
       this.radius,
-      RouteSettings settings,
+      RouteSettings? settings,
       this.barrier,
       this.animationDurationMs,
       this.closeOnTap,
       this.onDisposed})
       : super(settings: settings);
 
-  final WidgetBuilder builder;
-  final double radius;
-  final Color color;
-  final Color barrier;
-  final int animationDurationMs;
-  final bool closeOnTap;
-  final Function onDisposed;
+  final WidgetBuilder? builder;
+  final double? radius;
+  final Color? color;
+  final Color? barrier;
+  final int? animationDurationMs;
+  final bool? closeOnTap;
+  final Function? onDisposed;
 
   @override
-  Color get barrierColor => barrier;
+  Color? get barrierColor => barrier;
 
   @override
   bool get barrierDismissible => true;
 
   @override
-  String barrierLabel;
+  String? barrierLabel;
 
   @override
-  void didComplete(T result) {
+  void didComplete(T? result) {
     if (onDisposed != null) {
-      onDisposed();
+      onDisposed!();
     }
     super.didComplete(result);
   }
 
-  AnimationController _animationController;
-  CurvedAnimation appSheetAnimation;
+  AnimationController? _animationController;
+  late CurvedAnimation appSheetAnimation;
 
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
     _animationController =
-        BottomSheet.createAnimationController(navigator.overlay);
-    _animationController.duration = Duration(milliseconds: animationDurationMs);
+        BottomSheet.createAnimationController(navigator!.overlay!);
+    _animationController!.duration = Duration(milliseconds: animationDurationMs!);
     this.appSheetAnimation = CurvedAnimation(
-        parent: _animationController,
+        parent: _animationController!,
         curve: Curves.easeOut,
         reverseCurve: Curves.linear)
       ..addStatusListener((animationStatus) {
@@ -172,7 +172,7 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
           appSheetAnimation.curve = Curves.linear;
         }
       });
-    return _animationController;
+    return _animationController!;
   }
 
   @override
@@ -183,7 +183,7 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
       removeTop: true,
       child: GestureDetector(
         onTap: () {
-          if (closeOnTap) {
+          if (closeOnTap!) {
             // Close when tapped anywhere
             Navigator.of(context).pop();
           }
@@ -201,11 +201,11 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
                   decoration: BoxDecoration(
                     color: this.color,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(this.radius),
-                      topRight: Radius.circular(this.radius),
+                      topLeft: Radius.circular(this.radius!),
+                      topRight: Radius.circular(this.radius!),
                     ),
                   ),
-                  child: Builder(builder: this.builder),
+                  child: Builder(builder: this.builder!),
                 ),
               ),
             ),
@@ -223,7 +223,7 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
 
   @override
   Duration get transitionDuration =>
-      Duration(milliseconds: animationDurationMs);
+      Duration(milliseconds: animationDurationMs!);
 }
 //App Height Nine Sheet End
 
@@ -271,37 +271,37 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
       this.barrierLabel,
       this.color,
       this.radius,
-      RouteSettings settings,
+      RouteSettings? settings,
       this.barrier,
       this.animationDurationMs})
       : super(settings: settings);
 
-  final WidgetBuilder builder;
-  final double radius;
-  final Color color;
-  final Color barrier;
-  final int animationDurationMs;
+  final WidgetBuilder? builder;
+  final double? radius;
+  final Color? color;
+  final Color? barrier;
+  final int? animationDurationMs;
 
   @override
-  Color get barrierColor => barrier;
+  Color? get barrierColor => barrier;
 
   @override
   bool get barrierDismissible => true;
 
   @override
-  String barrierLabel;
+  String? barrierLabel;
 
-  AnimationController _animationController;
-  CurvedAnimation appSheetAnimation;
+  AnimationController? _animationController;
+  late CurvedAnimation appSheetAnimation;
 
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
     _animationController =
-        BottomSheet.createAnimationController(navigator.overlay);
-    _animationController.duration = Duration(milliseconds: animationDurationMs);
+        BottomSheet.createAnimationController(navigator!.overlay!);
+    _animationController!.duration = Duration(milliseconds: animationDurationMs!);
     this.appSheetAnimation = CurvedAnimation(
-        parent: _animationController,
+        parent: _animationController!,
         curve: Curves.easeOut,
         reverseCurve: Curves.linear)
       ..addStatusListener((animationStatus) {
@@ -309,7 +309,7 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
           appSheetAnimation.curve = Curves.linear;
         }
       });
-    return _animationController;
+    return _animationController!;
   }
 
   @override
@@ -331,11 +331,11 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
                 decoration: BoxDecoration(
                   color: this.color,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(this.radius),
-                    topRight: Radius.circular(this.radius),
+                    topLeft: Radius.circular(this.radius!),
+                    topRight: Radius.circular(this.radius!),
                   ),
                 ),
-                child: Builder(builder: this.builder),
+                child: Builder(builder: this.builder!),
               ),
             ),
           ),
@@ -352,6 +352,6 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
 
   @override
   Duration get transitionDuration =>
-      Duration(milliseconds: animationDurationMs);
+      Duration(milliseconds: animationDurationMs!);
 }
 //App HeightEight Sheet End

@@ -53,7 +53,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 30 : 40, vertical: 20),
                       child: AutoSizeText(
-                        AppLocalization.of(context).welcomeText,
+                        AppLocalization.of(context)!.welcomeText,
                         style: AppStyles.textStyleParagraph(context),
                         maxLines: 4,
                         stepGranularity: 0.5,
@@ -69,7 +69,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // New Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.newWallet, Dimens.BUTTON_TOP_DIMENS,
                           instanceKey: Key("new_wallet_button"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_backup_safety');
                       }),
@@ -78,7 +78,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // Import Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).importWallet, Dimens.BUTTON_BOTTOM_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.importWallet, Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () {
                         Navigator.of(context).pushNamed('/intro_import');
                       }),

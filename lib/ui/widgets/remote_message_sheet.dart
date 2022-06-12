@@ -13,7 +13,7 @@ import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RemoteMessageSheet extends StatefulWidget {
-  final AlertResponseItem alert;
+  final AlertResponseItem? alert;
   final bool hasDismissButton;
 
   RemoteMessageSheet({this.alert, this.hasDismissButton = true}) : super();
@@ -58,7 +58,7 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                         children: <Widget>[
                           // Header
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context).messageHeader, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context)!.messageHeader, context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,
@@ -86,7 +86,7 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          widget.alert.timestamp != null
+                          widget.alert!.timestamp != null
                               ? Container(
                                   margin: EdgeInsetsDirectional.only(top: 2, bottom: 6),
                                   padding: EdgeInsetsDirectional.only(start: 10, end: 10, top: 2, bottom: 2),
@@ -96,29 +96,29 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                                       Radius.circular(100),
                                     ),
                                     border: Border.all(
-                                      color: StateContainer.of(context).curTheme.text10,
+                                      color: StateContainer.of(context).curTheme.text10!,
                                     ),
                                   ),
                                   child: Text(
-                                    DateTime.fromMillisecondsSinceEpoch(widget.alert.timestamp).toUtc().toString().substring(0, 16) + " UTC",
+                                    DateTime.fromMillisecondsSinceEpoch(widget.alert!.timestamp!).toUtc().toString().substring(0, 16) + " UTC",
                                     style: AppStyles.remoteMessageCardTimestamp(context),
                                   ),
                                 )
                               : SizedBox(),
-                          widget.alert.title != null
+                          widget.alert!.title != null
                               ? Container(
                                   margin: EdgeInsetsDirectional.only(top: 2, bottom: 2),
                                   child: Text(
-                                    widget.alert.title,
+                                    widget.alert!.title!,
                                     style: AppStyles.remoteMessageCardTitle(context),
                                   ),
                                 )
                               : SizedBox(),
-                          widget.alert.longDescription != null || widget.alert.shortDescription != null
+                          widget.alert!.longDescription != null || widget.alert!.shortDescription != null
                               ? Container(
                                   margin: EdgeInsetsDirectional.only(top: 2, bottom: 2),
                                   child: Text(
-                                    widget.alert.longDescription != null ? widget.alert.longDescription : widget.alert.shortDescription,
+                                    widget.alert!.longDescription != null ? widget.alert!.longDescription! : widget.alert!.shortDescription!,
                                     style: AppStyles.remoteMessageCardShortDescription(context),
                                   ),
                                 )
@@ -134,7 +134,7 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [StateContainer.of(context).curTheme.backgroundDark00, StateContainer.of(context).curTheme.backgroundDark],
+                            colors: [StateContainer.of(context).curTheme.backgroundDark00!, StateContainer.of(context).curTheme.backgroundDark!],
                             begin: AlignmentDirectional(0.5, 1.0),
                             end: AlignmentDirectional(0.5, -1.0),
                           ),
@@ -149,7 +149,7 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [StateContainer.of(context).curTheme.backgroundDark00, StateContainer.of(context).curTheme.backgroundDark],
+                            colors: [StateContainer.of(context).curTheme.backgroundDark00!, StateContainer.of(context).curTheme.backgroundDark!],
                             begin: AlignmentDirectional(0.5, -1),
                             end: AlignmentDirectional(0.5, 0.5),
                           ),
@@ -163,15 +163,15 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
             //A column with Copy Address and Share Address buttons
             Column(
               children: <Widget>[
-                widget.alert.link != null
+                widget.alert!.link != null
                     ? Row(
                         children: <Widget>[
-                          AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).readMore, Dimens.BUTTON_TOP_DIMENS,
+                          AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.readMore, Dimens.BUTTON_TOP_DIMENS,
                               onPressed: () async {
-                              Uri uri = Uri.parse(widget.alert.link);
+                              Uri uri = Uri.parse(widget.alert!.link!);
                             if (await canLaunchUrl(uri)) {
                               await launchUrl(uri);
-                              await sl.get<SharedPrefsUtil>().markAlertRead(widget.alert);
+                              await sl.get<SharedPrefsUtil>().markAlertRead(widget.alert!);
                               StateContainer.of(context).setAlertRead();
                             }
                           }),
@@ -181,9 +181,9 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                 widget.hasDismissButton
                     ? Row(
                         children: <Widget>[
-                          AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).dismiss, Dimens.BUTTON_BOTTOM_DIMENS,
+                          AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.dismiss, Dimens.BUTTON_BOTTOM_DIMENS,
                               onPressed: () {
-                            sl.get<SharedPrefsUtil>().dismissAlert(widget.alert);
+                            sl.get<SharedPrefsUtil>().dismissAlert(widget.alert!);
                             StateContainer.of(context).updateActiveAlert(null, widget.alert);
                             Navigator.pop(context);
                           }),
@@ -191,7 +191,7 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                       )
                     : Row(
                         children: <Widget>[
-                          AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                          AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
                               onPressed: () {
                             Navigator.pop(context);
                           }),

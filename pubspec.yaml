@@ -9,7 +9,7 @@ description: Nautilus - Fast, Robust & Secure NANO Wallet.
 version: 0.3.4+31
 
 environment:
-  sdk: ">=2.11.99 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
   # sdk: ">=2.14.0 <3.0.0"
   # sdk: ">=2.12.0 <3.0.0"
 

@@ -26,7 +26,7 @@ import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class AddContactSheet extends StatefulWidget {
-  final String address;
+  final String? address;
 
   AddContactSheet({this.address}) : super();
 
@@ -34,23 +34,23 @@ class AddContactSheet extends StatefulWidget {
 }
 
 class _AddContactSheetState extends State<AddContactSheet> {
-  FocusNode _nameFocusNode;
-  FocusNode _addressFocusNode;
-  TextEditingController _nameController;
-  TextEditingController _addressController;
+  FocusNode? _nameFocusNode;
+  FocusNode? _addressFocusNode;
+  TextEditingController? _nameController;
+  TextEditingController? _addressController;
 
   // State variables
-  bool _addressValid;
-  bool _pasteButtonVisible;
-  bool _addressValidAndUnfocused;
-  String _addressHint;
-  String _nameHint;
-  String _nameValidationText;
-  String _addressValidationText;
-  String _correspondingUsername;
-  String _correspondingAddress;
-  AddressStyle _addressStyle;
-  List<dynamic> _users;
+  bool? _addressValid;
+  bool? _pasteButtonVisible;
+  late bool _addressValidAndUnfocused;
+  String? _addressHint;
+  String? _nameHint;
+  String? _nameValidationText;
+  late String _addressValidationText;
+  String? _correspondingUsername;
+  String? _correspondingAddress;
+  AddressStyle? _addressStyle;
+  late List<dynamic> _users;
   // Set to true when a username is being entered
   bool _isUser = false;
 
@@ -71,32 +71,32 @@ class _AddContactSheetState extends State<AddContactSheet> {
     _users = [];
     // Add focus listeners
     // On name focus change
-    _nameFocusNode.addListener(() {
-      if (_nameFocusNode.hasFocus) {
+    _nameFocusNode!.addListener(() {
+      if (_nameFocusNode!.hasFocus) {
         setState(() {
           _nameHint = "";
         });
       } else {
         setState(() {
-          _nameHint = AppLocalization.of(context).favoriteNameHint;
+          _nameHint = AppLocalization.of(context)!.favoriteNameHint;
         });
       }
     });
     // On address focus change
-    _addressFocusNode.addListener(() async {
-      if (_addressFocusNode.hasFocus) {
+    _addressFocusNode!.addListener(() async {
+      if (_addressFocusNode!.hasFocus) {
         setState(() {
           _addressHint = "";
           _addressValidAndUnfocused = false;
           _pasteButtonVisible = true;
           _addressStyle = AddressStyle.TEXT60;
         });
-        _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
-        if (_addressController.text.length > 0 && !_addressController.text.startsWith("nano_")) {
-          String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
-          if (_addressController.text != formattedAddress) {
+        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        if (_addressController!.text.length > 0 && !_addressController!.text.startsWith("nano_")) {
+          String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
+          if (_addressController!.text != formattedAddress) {
             setState(() {
-              _addressController.text = formattedAddress;
+              _addressController!.text = formattedAddress;
             });
           }
           var userList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(formattedAddress);
@@ -107,7 +107,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
           }
         }
 
-        if (_addressController.text.length == 0) {
+        if (_addressController!.text.length == 0) {
           setState(() {
             _users = [];
           });
@@ -116,29 +116,29 @@ class _AddContactSheetState extends State<AddContactSheet> {
         setState(() {
           _addressHint = null;
           _users = [];
-          if (Address(_addressController.text).isValid()) {
+          if (Address(_addressController!.text).isValid()) {
             _addressValidAndUnfocused = true;
           }
-          if (_addressController.text.length == 0) {
+          if (_addressController!.text.length == 0) {
             _pasteButtonVisible = true;
           }
         });
-        if (_addressController.text.length > 0) {
-          String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
+        if (_addressController!.text.length > 0) {
+          String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           // check if in the username db:
-          String address;
-          String type;
+          String? address;
+          String? type;
           var user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
           if (user != null) {
             type = user.type;
-            if (_addressController.text != user.getDisplayName()) {
+            if (_addressController!.text != user.getDisplayName()) {
               setState(() {
-                _addressController.text = user.getDisplayName();
+                _addressController!.text = user.getDisplayName()!;
               });
             }
           } else {
             // check if UD or ENS address
-            if (_addressController.text.contains(".")) {
+            if (_addressController!.text.contains(".")) {
               // check if UD domain:
               address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
               if (address != null) {
@@ -200,23 +200,23 @@ class _AddContactSheetState extends State<AddContactSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
+      hintText: _addressHint ?? AppLocalization.of(context)!.enterUserOrAddress,
       prefixButton: TextFieldButton(
           icon: AppIcons.scan,
           onPressed: () async {
             UIUtil.cancelLockEvent();
-            String scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context);
+            String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context);
             if (scanResult == null) {
-              UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+              UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
             } else if (scanResult != null && !QRScanErrs.ERROR_LIST.contains(scanResult)) {
               if (mounted) {
                 setState(() {
-                  _addressController.text = scanResult;
+                  _addressController!.text = scanResult;
                   _addressValidationText = "";
                   _addressValid = true;
                   _addressValidAndUnfocused = true;
                 });
-                _addressFocusNode.unfocus();
+                _addressFocusNode!.unfocus();
               }
             }
           }),
@@ -225,18 +225,18 @@ class _AddContactSheetState extends State<AddContactSheet> {
       suffixButton: TextFieldButton(
         icon: AppIcons.paste,
         onPressed: () async {
-          if (!_pasteButtonVisible) {
+          if (!_pasteButtonVisible!) {
             return;
           }
-          String data = await UserDataUtil.getClipboardText(DataType.ADDRESS);
+          String? data = await UserDataUtil.getClipboardText(DataType.ADDRESS);
           if (data != null) {
             setState(() {
               _addressValid = true;
               _pasteButtonVisible = false;
-              _addressController.text = data;
+              _addressController!.text = data;
               _addressValidAndUnfocused = true;
             });
-            _addressFocusNode.unfocus();
+            _addressFocusNode!.unfocus();
           } else {
             setState(() {
               _pasteButtonVisible = true;
@@ -254,15 +254,15 @@ class _AddContactSheetState extends State<AddContactSheet> {
               : AppStyles.textStyleAddressPrimary(context),
       onChanged: (text) async {
         bool isUser = false;
-        bool isDomain = text.contains(".");
-        bool isFavorite = text.startsWith("★");
+        bool? isDomain = text.contains(".");
+        bool? isFavorite = text.startsWith("★");
         bool isNano = text.startsWith("nano_");
 
         // prevent spaces:
         if (text.contains(" ")) {
           text = text.replaceAll(" ", "");
-          _addressController.text = text;
-          _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
+          _addressController!.text = text;
+          _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         }
 
         if (text.length > 0) {
@@ -296,7 +296,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
             _isUser = false;
             _users = [];
           });
-        } else if (isUser || isDomain) {
+        } else if (isUser || isDomain!) {
           var matchedList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(SendSheetHelpers.stripPrefixes(text));
           if (matchedList != null) {
             setState(() {
@@ -316,7 +316,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
           });
         }
         if (isNano && Address(text).isValid()) {
-          _addressFocusNode.unfocus();
+          _addressFocusNode!.unfocus();
           setState(() {
             _addressStyle = AddressStyle.TEXT90;
             _addressValidationText = "";
@@ -328,9 +328,9 @@ class _AddContactSheetState extends State<AddContactSheet> {
           });
         }
 
-        if ((isUser || isFavorite) != _isUser) {
+        if ((isUser || isFavorite!) != _isUser) {
           setState(() {
-            _isUser = isUser || isFavorite;
+            _isUser = isUser || isFavorite!;
           });
         }
       },
@@ -347,7 +347,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                   FocusScope.of(context).requestFocus(_addressFocusNode);
                 });
               },
-              child: UIUtil.threeLineAddressText(context, widget.address != null ? widget.address : _addressController.text))
+              child: UIUtil.threeLineAddressText(context, widget.address != null ? widget.address! : _addressController!.text))
           : null,
     );
   }
@@ -362,8 +362,8 @@ class _AddContactSheetState extends State<AddContactSheet> {
           width: double.infinity - 5,
           child: FlatButton(
             onPressed: () {
-              _addressController.text = user.getDisplayName(ignoreNickname: true);
-              _addressFocusNode.unfocus();
+              _addressController!.text = user.getDisplayName(ignoreNickname: true)!;
+              _addressFocusNode!.unfocus();
               setState(() {
                 _isUser = true;
                 _pasteButtonVisible = false;
@@ -371,7 +371,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 _addressValidationText = "";
               });
             },
-            child: Text(user.getDisplayName(ignoreNickname: true), textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+            child: Text(user.getDisplayName(ignoreNickname: true)!, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(
@@ -407,7 +407,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 child: Column(
                   children: <Widget>[
                     AutoSizeText(
-                      CaseChange.toUpperCase(AppLocalization.of(context).addFavorite, context),
+                      CaseChange.toUpperCase(AppLocalization.of(context)!.addFavorite, context),
                       style: AppStyles.textStyleHeader(context),
                       textAlign: TextAlign.center,
                       maxLines: 1,
@@ -429,8 +429,8 @@ class _AddContactSheetState extends State<AddContactSheet> {
               child: GestureDetector(
                 onTap: () {
                   // Clear focus of our fields when tapped in this empty space
-                  _nameFocusNode.unfocus();
-                  _addressFocusNode.unfocus();
+                  _nameFocusNode!.unfocus();
+                  _addressFocusNode!.unfocus();
                 },
                 child: KeyboardAvoider(
                   duration: Duration(milliseconds: 0),
@@ -450,7 +450,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                                 topMargin: 30,
                                 padding: EdgeInsets.symmetric(horizontal: 30),
                                 textInputAction: widget.address != null ? TextInputAction.done : TextInputAction.next,
-                                hintText: _nameHint ?? AppLocalization.of(context).favoriteNameHint,
+                                hintText: _nameHint ?? AppLocalization.of(context)!.favoriteNameHint,
                                 keyboardType: TextInputType.text,
 
                                 style: TextStyle(
@@ -462,7 +462,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                                 inputFormatters: [LengthLimitingTextInputFormatter(20), ContactInputFormatter()],
                                 onSubmitted: (text) {
                                   if (widget.address == null) {
-                                    if (!Address(_addressController.text).isValid()) {
+                                    if (!Address(_addressController!.text).isValid()) {
                                       FocusScope.of(context).requestFocus(_addressFocusNode);
                                     } else {
                                       FocusScope.of(context).unfocus();
@@ -570,18 +570,18 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 Row(
                   children: <Widget>[
                     // Add Contact Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).addFavorite, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.addFavorite, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       if (await validateForm()) {
                         User newContact;
-                        String formAddress = widget.address != null ? widget.address : _addressController.text;
-                        String formattedNickname = _nameController.text.substring(1);
+                        String? formAddress = widget.address != null ? widget.address : _addressController!.text;
+                        String formattedNickname = _nameController!.text.substring(1);
                         // if we're given an address with corresponding username, just block:
                         if (_correspondingUsername != null) {
                           newContact = User(nickname: formattedNickname, address: formAddress, username: _correspondingUsername);
                           await sl.get<DBHelper>().saveContact(newContact);
                         } else if (_correspondingAddress != null) {
-                          newContact = User(nickname: formattedNickname, address: _correspondingAddress, username: SendSheetHelpers.stripPrefixes(formAddress));
+                          newContact = User(nickname: formattedNickname, address: _correspondingAddress, username: SendSheetHelpers.stripPrefixes(formAddress!));
                           await sl.get<DBHelper>().saveContact(newContact);
                         } else {
                           // just an address:
@@ -589,7 +589,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                           await sl.get<DBHelper>().saveContact(newContact);
                         }
                         EventTaxiImpl.singleton().fire(ContactAddedEvent(contact: newContact));
-                        UIUtil.showSnackbar(AppLocalization.of(context).contactAdded.replaceAll("%1", newContact.getDisplayName()), context);
+                        UIUtil.showSnackbar(AppLocalization.of(context)!.contactAdded.replaceAll("%1", newContact.getDisplayName()!), context);
                         EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: newContact));
                         EventTaxiImpl.singleton().fire(TXUpdateEvent());
                         Navigator.of(context).pop();
@@ -600,7 +600,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 Row(
                   children: <Widget>[
                     // Close Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Navigator.pop(context);
                     }),
@@ -618,14 +618,14 @@ class _AddContactSheetState extends State<AddContactSheet> {
     bool isValid = true;
     // Address Validations
     // Don't validate address if it came pre-filled in
-    String formAddress = widget.address != null ? widget.address : _addressController.text;
+    String formAddress = widget.address != null ? widget.address! : _addressController!.text;
     String formattedAddress = SendSheetHelpers.stripPrefixes(formAddress);
 
     // if (widget.address == null) {
     if (formAddress.isEmpty) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context).addressOrUserMissing;
+        _addressValidationText = AppLocalization.of(context)!.addressOrUserMissing;
       });
     } else if (formAddress.startsWith("nano_")) {
       // we're dealing with an address:
@@ -633,20 +633,20 @@ class _AddContactSheetState extends State<AddContactSheet> {
       if (!Address(formAddress).isValid()) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context).invalidAddress;
+          _addressValidationText = AppLocalization.of(context)!.invalidAddress;
         });
       }
 
-      _addressFocusNode.unfocus();
+      _addressFocusNode!.unfocus();
       bool contactExists = await sl.get<DBHelper>().contactExistsWithAddress(formAddress);
       if (contactExists) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context).favoriteExists;
+          _addressValidationText = AppLocalization.of(context)!.favoriteExists;
         });
       } else {
         // get the corresponding username if it exists:
-        String username = await sl.get<DBHelper>().getUsernameWithAddress(formAddress);
+        String? username = await sl.get<DBHelper>().getUsernameWithAddress(formAddress);
         if (username != null) {
           setState(() {
             _correspondingUsername = username;
@@ -659,27 +659,27 @@ class _AddContactSheetState extends State<AddContactSheet> {
       if (contactExists) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context).favoriteExists;
+          _addressValidationText = AppLocalization.of(context)!.favoriteExists;
         });
       } else {
         // check if there's a corresponding address:
-        User user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+        User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
         if (user != null) {
           setState(() {
             if (user.address != null) {
               _correspondingAddress = user.address;
             }
-            if (user.nickname != null && user.nickname.isNotEmpty) {
+            if (user.nickname != null && user.nickname!.isNotEmpty) {
               isValid = false;
               setState(() {
-                _addressValidationText = AppLocalization.of(context).favoriteExists;
+                _addressValidationText = AppLocalization.of(context)!.favoriteExists;
               });
             }
           });
         } else {
           isValid = false;
           setState(() {
-            _addressValidationText = formattedAddress.contains(".") ? AppLocalization.of(context).domainInvalid : AppLocalization.of(context).userNotFound;
+            _addressValidationText = formattedAddress.contains(".") ? AppLocalization.of(context)!.domainInvalid : AppLocalization.of(context)!.userNotFound;
           });
         }
       }
@@ -698,17 +698,17 @@ class _AddContactSheetState extends State<AddContactSheet> {
     }
 
     // Name Validations
-    if (_nameController.text.isEmpty) {
+    if (_nameController!.text.isEmpty) {
       isValid = false;
       setState(() {
-        _nameValidationText = AppLocalization.of(context).favoriteNameMissing;
+        _nameValidationText = AppLocalization.of(context)!.favoriteNameMissing;
       });
     } else {
-      bool nameExists = await sl.get<DBHelper>().contactExistsWithName(_nameController.text);
+      bool nameExists = await sl.get<DBHelper>().contactExistsWithName(_nameController!.text);
       if (nameExists) {
         setState(() {
           isValid = false;
-          _nameValidationText = AppLocalization.of(context).favoriteExists;
+          _nameValidationText = AppLocalization.of(context)!.favoriteExists;
         });
       }
     }

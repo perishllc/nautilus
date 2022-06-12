@@ -7,18 +7,18 @@ part 'account_history_request.g.dart';
 @JsonSerializable()
 class AccountHistoryRequest extends BaseRequest {
   @JsonKey(name: 'action')
-  String action;
+  String? action;
 
   @JsonKey(name: 'account')
-  String account;
+  String? account;
 
   @JsonKey(name: 'count', includeIfNull: false)
-  int count;
+  int? count;
 
   @JsonKey(name: 'raw')
-  bool raw;
+  bool? raw;
 
-  AccountHistoryRequest({String action, String account, int count, bool raw}) : super() {
+  AccountHistoryRequest({String? action, String? account, int? count, bool? raw}) : super() {
     this.action = Actions.ACCOUNT_HISTORY;
     this.account = account ?? "";
     this.count = count ?? 3000;

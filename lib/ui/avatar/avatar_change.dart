@@ -20,7 +20,7 @@ const String NATRICON_ADDRESS = "nano_3natricon9grnc8caqkht19f1fwpz39r3deeyef66m
 const String NATRICON_BASE_RAW = "1234567891234567891234567891";
 
 class AvatarChangePage extends StatefulWidget {
-  final String curAddress;
+  final String? curAddress;
 
   AvatarChangePage({this.curAddress});
   @override
@@ -29,9 +29,9 @@ class AvatarChangePage extends StatefulWidget {
 
 class _AvatarChangePageState extends State<AvatarChangePage> {
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
-  int nonce;
-  int currentNonce;
-  bool loading;
+  int? nonce;
+  int? currentNonce;
+  late bool loading;
 
   @override
   void initState() {
@@ -63,9 +63,9 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
 
   void showSendConfirmSheet() {
     BigInt baseAmount = BigInt.parse(NATRICON_BASE_RAW);
-    BigInt sendAmount = baseAmount + BigInt.from(nonce);
-    if (StateContainer.of(context).wallet.accountBalance < sendAmount) {
-      UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
+    BigInt sendAmount = baseAmount + BigInt.from(nonce!);
+    if (StateContainer.of(context).wallet!.accountBalance < sendAmount) {
+      UIUtil.showSnackbar(AppLocalization.of(context)!.insufficientBalance, context);
       return;
     }
     Sheets.showAppHeightNineSheet(
@@ -162,30 +162,28 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                     width: 2,
-                                    color: nonce != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary20),
+                                    color: nonce != null ? StateContainer.of(context).curTheme.primary! : StateContainer.of(context).curTheme.primary20!),
                               ),
                               child: FlatButton(
                                 highlightColor: StateContainer.of(context).curTheme.text15,
                                 splashColor: StateContainer.of(context).curTheme.text15,
-                                onPressed: nonce != null
-                                    ? () {
-                                        if (nonce == null || this.loading) {
-                                          return;
-                                        } else if (nonce == -1 || (nonce == 0 && currentNonce == -1)) {
-                                          setState(() {
-                                            nonce = null;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            if (nonce - 1 == currentNonce) {
-                                              nonce -= 2;
-                                            } else {
-                                              nonce--;
-                                            }
-                                          });
-                                        }
+                                onPressed: () {
+                                  if (nonce == null || this.loading) {
+                                    return;
+                                  } else if (nonce == -1 || (nonce == 0 && currentNonce == -1)) {
+                                    setState(() {
+                                      nonce = null;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      if (nonce! - 1 == currentNonce) {
+                                        nonce = nonce! - 2;
+                                      } else {
+                                        nonce = nonce! - 1;
                                       }
-                                    : null,
+                                    });
+                                  }
+                                },
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                                 padding: EdgeInsetsDirectional.only(end: 4),
                                 child: Icon(AppIcons.back,
@@ -202,7 +200,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                               margin: EdgeInsetsDirectional.only(end: 28),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: Border.all(width: 2, color: StateContainer.of(context).curTheme.primary),
+                                border: Border.all(width: 2, color: StateContainer.of(context).curTheme.primary!),
                               ),
                               child: FlatButton(
                                 highlightColor: StateContainer.of(context).curTheme.text15,
@@ -216,10 +214,10 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                                     });
                                   } else {
                                     setState(() {
-                                      if (nonce + 1 == currentNonce) {
-                                        nonce += 2;
+                                      if (nonce! + 1 == currentNonce) {
+                                        nonce = nonce! + 2;
                                       } else {
-                                        nonce++;
+                                        nonce = nonce! + 1;
                                       }
                                     });
                                   }
@@ -258,7 +256,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                   Row(
                     children: <Widget>[
                       // Go Back Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () {
                         Navigator.of(context).popUntil((route) => route.isFirst);
                       }),

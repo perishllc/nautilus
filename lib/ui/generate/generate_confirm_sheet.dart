@@ -43,11 +43,11 @@ import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:uuid/uuid.dart';
 
 class GenerateConfirmSheet extends StatefulWidget {
-  final String amountRaw;
-  final String destination;
-  final String paperWalletSeed;
-  final String memo;
-  final String localCurrency;
+  final String? amountRaw;
+  final String? destination;
+  final String? paperWalletSeed;
+  final String? memo;
+  final String? localCurrency;
   final bool maxSend;
 
   GenerateConfirmSheet({this.amountRaw, this.destination, this.paperWalletSeed, this.memo, this.localCurrency, this.maxSend = false}) : super();
@@ -56,11 +56,11 @@ class GenerateConfirmSheet extends StatefulWidget {
 }
 
 class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
-  String amount;
-  String destinationAltered;
-  bool animationOpen;
+  late String amount;
+  String? destinationAltered;
+  late bool animationOpen;
 
-  StreamSubscription<AuthenticatedEvent> _authSub;
+  StreamSubscription<AuthenticatedEvent>? _authSub;
 
   void _registerBus() {
     _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((event) {
@@ -72,7 +72,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
 
   void _destroyBus() {
     if (_authSub != null) {
-      _authSub.cancel();
+      _authSub!.cancel();
     }
   }
 
@@ -90,7 +90,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
     // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
     amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
     // Ensure nano_ prefix on destination
-    destinationAltered = widget.destination.replaceAll("xrb_", "nano_");
+    destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
 
   @override
@@ -131,7 +131,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).creatingGiftCard, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context)!.creatingGiftCard, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -174,7 +174,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                           TextSpan(
                             text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
                             style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary.withOpacity(0.75),
+                              color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
@@ -193,7 +193,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                           child: Column(
                             children: <Widget>[
                               Text(
-                                CaseChange.toUpperCase(AppLocalization.of(context).withMessage, context),
+                                CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
                                 style: AppStyles.textStyleHeader(context),
                               ),
                             ],
@@ -212,7 +212,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                             borderRadius: BorderRadius.circular(25),
                           ),
                           child: Text(
-                            widget.memo,
+                            widget.memo!,
                             style: AppStyles.textStyleParagraph(context),
                             textAlign: TextAlign.center,
                           ))
@@ -230,7 +230,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                     children: <Widget>[
                       // CONFIRM Button
                       AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                          context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         // Authenticate
                         AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
@@ -239,7 +239,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                           try {
                             bool authenticated = await sl
                                 .get<BiometricUtil>()
-                                .authenticateWithBiometrics(context, AppLocalization.of(context).sendAmountConfirm.replaceAll("%1", amount));
+                                .authenticateWithBiometrics(context, AppLocalization.of(context)!.sendAmountConfirm.replaceAll("%1", amount));
                             if (authenticated) {
                               sl.get<HapticUtil>().fingerprintSucess();
                               EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
@@ -257,7 +257,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                   Row(
                     children: <Widget>[
                       // CANCEL Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.cancel, context),
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pop();
                       }),
@@ -274,18 +274,18 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
     try {
       _showAnimation(context);
       ProcessResponse resp = await sl.get<AccountService>().requestSend(
-          StateContainer.of(context).wallet.representative,
-          StateContainer.of(context).wallet.frontier,
+          StateContainer.of(context).wallet!.representative,
+          StateContainer.of(context).wallet!.frontier,
           widget.amountRaw,
           destinationAltered,
-          StateContainer.of(context).wallet.address,
-          NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount.index),
+          StateContainer.of(context).wallet!.address,
+          NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
           max: widget.maxSend);
 
-      StateContainer.of(context).wallet.frontier = resp.hash;
-      StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
+      StateContainer.of(context).wallet!.frontier = resp.hash;
+      StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw!);
 
-      String memo = widget.memo != null ? widget.memo : ""; 
+      String? memo = widget.memo != null ? widget.memo : ""; 
 
       BranchUniversalObject buo = BranchUniversalObject(
           canonicalIdentifier: 'flutter/branch',
@@ -300,7 +300,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
             ..addCustomMetadata('seed', widget.paperWalletSeed)
             ..addCustomMetadata('address', destinationAltered)
             ..addCustomMetadata('memo', widget.memo ?? "")
-            ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet.address) // TODO: sign these:
+            ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
             ..addCustomMetadata('signature', "")
             ..addCustomMetadata('nonce', "")
             ..addCustomMetadata('amount_raw', widget.amountRaw));
@@ -316,14 +316,14 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         // create a local memo object to show the gift card creation details:
         var uuid = Uuid();
         var newGiftTXData = new TXData(
-          from_address: StateContainer.of(context).wallet.address,
+          from_address: StateContainer.of(context).wallet!.address,
           to_address: destinationAltered,
           amount_raw: widget.amountRaw,
           uuid: "LOCAL:" + uuid.v4(),
           block: resp.hash,
           record_type: RecordTypes.GIFT_LOAD,
           status: "created",
-          metadata: widget.paperWalletSeed + RecordTypes.SEPARATOR + response.result,
+          metadata: widget.paperWalletSeed! + RecordTypes.SEPARATOR + response.result,
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,
@@ -355,19 +355,19 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       } else {
         print('Error : ${response.errorCode} - ${response.errorMessage}');
         // attempt to refund the transaction?!:
-        await AppTransferOverviewSheet().startAutoTransfer(context, widget.paperWalletSeed, StateContainer.of(context).wallet);
+        await AppTransferOverviewSheet().startAutoTransfer(context, widget.paperWalletSeed!, StateContainer.of(context).wallet);
 
         // create a local memo object to show the gift card creation details:
         var uuid = Uuid();
         var newGiftTXData = new TXData(
-          from_address: StateContainer.of(context).wallet.address,
+          from_address: StateContainer.of(context).wallet!.address,
           to_address: destinationAltered,
           amount_raw: widget.amountRaw,
           uuid: "LOCAL:" + uuid.v4(),
           block: resp.hash,
           record_type: RecordTypes.GIFT_LOAD,
           status: StatusTypes.CREATE_FAILED,
-          metadata: widget.paperWalletSeed + RecordTypes.SEPARATOR + StatusTypes.CREATE_FAILED,
+          metadata: widget.paperWalletSeed! + RecordTypes.SEPARATOR + StatusTypes.CREATE_FAILED,
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,
@@ -386,19 +386,19 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context);
       Navigator.of(context).pop();
     }
   }
 
   Future<void> authenticateWithPin() async {
     // PIN Authentication
-    String expectedPin = await sl.get<Vault>().getPin();
-    bool auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    String? expectedPin = await sl.get<Vault>().getPin();
+    bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return new PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
-        description: AppLocalization.of(context).sendAmountConfirmPin.replaceAll("%1", amount),
+        description: AppLocalization.of(context)!.sendAmountConfirmPin.replaceAll("%1", amount),
       );
     }));
     if (auth != null && auth) {

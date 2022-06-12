@@ -8,7 +8,7 @@ part of 'process_response.dart';
 
 ProcessResponse _$ProcessResponseFromJson(Map<String, dynamic> json) {
   return ProcessResponse(
-    hash: json['hash'] as String,
+    hash: json['hash'] as String?,
   );
 }
 

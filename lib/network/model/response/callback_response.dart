@@ -6,26 +6,26 @@ part 'callback_response.g.dart';
 
 /// For running in an isolate, needs to be top-level function
 CallbackResponse callbackResponseFromJson(Map<dynamic, dynamic> json) {
-  return CallbackResponse.fromJson(json);
+  return CallbackResponse.fromJson(json as Map<String, dynamic>);
 }
 
 /// Represents a callback from the node that belongs to logged in account
 @JsonSerializable()
 class CallbackResponse {
   @JsonKey(name: "account")
-  String account;
+  String? account;
 
   @JsonKey(name: "hash")
-  String hash;
+  String? hash;
 
   @JsonKey(name: "block")
-  BlockItem block;
+  BlockItem? block;
 
   @JsonKey(name: "amount")
-  String amount;
+  String? amount;
 
   @JsonKey(name: "is_send")
-  String isSend;
+  String? isSend;
 
   CallbackResponse({this.account, this.hash, this.block, this.amount, this.isSend});
 

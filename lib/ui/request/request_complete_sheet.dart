@@ -13,10 +13,10 @@ import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 
 class RequestCompleteSheet extends StatefulWidget {
-  final String amountRaw;
-  final String destination;
-  final String contactName;
-  final String localAmount;
+  final String? amountRaw;
+  final String? destination;
+  final String? contactName;
+  final String? localAmount;
 
   RequestCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount}) : super();
 
@@ -24,8 +24,8 @@ class RequestCompleteSheet extends StatefulWidget {
 }
 
 class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
-  String amount;
-  String destinationAltered;
+  late String amount;
+  late String destinationAltered;
 
   @override
   void initState() {
@@ -48,7 +48,7 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
     //   }
     // }
     amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
-    destinationAltered = widget.destination.replaceAll("xrb_", "nano_");
+    destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
 
   @override
@@ -115,7 +115,7 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
                           TextSpan(
                             text: widget.localAmount != null ? " (${widget.localAmount})" : "",
                             style: TextStyle(
-                              color: StateContainer.of(context).curTheme.success.withOpacity(0.75),
+                              color: StateContainer.of(context).curTheme.success!.withOpacity(0.75),
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
@@ -132,7 +132,7 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
                       children: <Widget>[
                         // "SENT TO" text
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).requestedFrom, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context)!.requestedFrom, context),
                           style: TextStyle(
                             fontSize: 28.0,
                             fontWeight: FontWeight.w700,
@@ -163,7 +163,7 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).close, context),
+                      AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.close, context),
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pop();
                       }),

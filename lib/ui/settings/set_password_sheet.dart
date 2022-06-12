@@ -19,14 +19,14 @@ class SetPasswordSheet extends StatefulWidget {
 }
 
 class _SetPasswordSheetState extends State<SetPasswordSheet> {
-  FocusNode createPasswordFocusNode;
-  TextEditingController createPasswordController;
-  FocusNode confirmPasswordFocusNode;
-  TextEditingController confirmPasswordController;
+  FocusNode? createPasswordFocusNode;
+  TextEditingController? createPasswordController;
+  FocusNode? confirmPasswordFocusNode;
+  TextEditingController? confirmPasswordController;
 
-  String passwordError;
+  String? passwordError;
 
-  bool passwordsMatch;
+  late bool passwordsMatch;
 
   @override
   void initState() {
@@ -67,7 +67,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                     child: Column(
                       children: <Widget>[
                         AutoSizeText(
-                          CaseChange.toUpperCase(AppLocalization.of(context).createPasswordSheetHeader, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context)!.createPasswordSheetHeader, context),
                           style: AppStyles.textStyleHeader(context),
                           minFontSize: 12,
                           stepGranularity: 0.1,
@@ -81,7 +81,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                   Container(
                     margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      AppLocalization.of(context).passwordWillBeRequiredToOpenParagraph,
+                      AppLocalization.of(context)!.passwordWillBeRequiredToOpenParagraph,
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,
@@ -108,7 +108,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                                     passwordError = null;
                                   });
                                 }
-                                if (confirmPasswordController.text == createPasswordController.text) {
+                                if (confirmPasswordController!.text == createPasswordController!.text) {
                                   if (mounted) {
                                     setState(() {
                                       passwordsMatch = true;
@@ -122,7 +122,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                                   }
                                 }
                               },
-                              hintText: AppLocalization.of(context).createPasswordHint,
+                              hintText: AppLocalization.of(context)!.createPasswordHint,
                               keyboardType: TextInputType.text,
                               obscureText: true,
                               textAlign: TextAlign.center,
@@ -133,7 +133,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                                 fontFamily: 'NunitoSans',
                               ),
                               onSubmitted: (text) {
-                                confirmPasswordFocusNode.requestFocus();
+                                confirmPasswordFocusNode!.requestFocus();
                               },
                             ),
                             // Confirm Password Text Field
@@ -151,7 +151,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                                     passwordError = null;
                                   });
                                 }
-                                if (confirmPasswordController.text == createPasswordController.text) {
+                                if (confirmPasswordController!.text == createPasswordController!.text) {
                                   if (mounted) {
                                     setState(() {
                                       passwordsMatch = true;
@@ -165,7 +165,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                                   }
                                 }
                               },
-                              hintText: AppLocalization.of(context).confirmPasswordHint,
+                              hintText: AppLocalization.of(context)!.confirmPasswordHint,
                               keyboardType: TextInputType.text,
                               obscureText: true,
                               textAlign: TextAlign.center,
@@ -180,7 +180,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                             Container(
                               alignment: AlignmentDirectional(0, 0),
                               margin: EdgeInsets.only(top: 3),
-                              child: Text(this.passwordError == null ? "" : passwordError,
+                              child: Text(this.passwordError == null ? "" : passwordError!,
                                   style: TextStyle(
                                     fontSize: 14.0,
                                     color: StateContainer.of(context).curTheme.primary,
@@ -199,7 +199,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).setPassword, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.setPassword, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         await submitAndEncrypt();
                       }),
@@ -207,7 +207,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                   ),
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () {
                         Navigator.pop(context);
                       }),
@@ -223,27 +223,27 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
   }
 
   Future<void> submitAndEncrypt() async {
-    String seed = await sl.get<Vault>().getSeed();
-    if (createPasswordController.text.isEmpty || confirmPasswordController.text.isEmpty) {
+    String? seed = await sl.get<Vault>().getSeed();
+    if (createPasswordController!.text.isEmpty || confirmPasswordController!.text.isEmpty) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context).passwordBlank;
+          passwordError = AppLocalization.of(context)!.passwordBlank;
         });
       }
-    } else if (createPasswordController.text != confirmPasswordController.text) {
+    } else if (createPasswordController!.text != confirmPasswordController!.text) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context).passwordsDontMatch;
+          passwordError = AppLocalization.of(context)!.passwordsDontMatch;
         });
       }
     } else if (seed == null || !NanoSeeds.isValidSeed(seed)) {
       Navigator.pop(context);
-      UIUtil.showSnackbar(AppLocalization.of(context).encryptionFailedError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context)!.encryptionFailedError, context);
     } else {
-      String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController.text));
+      String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
       await sl.get<Vault>().setSeed(encryptedSeed);
       StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, await sl.get<Vault>().getSessionKey())));
-      UIUtil.showSnackbar(AppLocalization.of(context).setPasswordSuccess, context);
+      UIUtil.showSnackbar(AppLocalization.of(context)!.setPasswordSuccess, context);
       Navigator.pop(context);
     }
   }

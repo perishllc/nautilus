@@ -1,14 +1,10 @@
-import 'dart:convert';
-
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_sodium/flutter_sodium.dart';
-// import 'package:blake2/blake2.dart';
 import 'dart:typed_data';
-
 import 'package:nautilus_wallet_flutter/util/blake2b.dart';
-
 import 'package:nautilus_wallet_flutter/util/curve25519.dart';
 
 String generateNonce(int length) {
@@ -81,31 +77,10 @@ class Box {
   static Future<String> encrypt(String message, String address, String privateKey) async {
     String publicKey = NanoAccounts.extractPublicKey(address);
 
-    Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(Sodium.hex2bin(publicKey));
-    Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(Sodium.hex2bin(privateKey));
-
-    print("convertedPublicKey: ${Sodium.bin2hex(convertedPublicKey)}");
-    print("convertedPrivateKey: ${Sodium.bin2hex(convertedPrivateKey)}");
-
-    // Curve25519 curve = new Curve25519();
-    // Uint8List sharedKey = curve.boxBefore(convertedPublicKey, convertedPrivateKey);
-    // Map map = Map();
-    // map['publicKey'] = convertedPublicKey;
-    // map['secretKey'] = convertedPrivateKey;
-    // print("calculating shared key");
-    // Uint8List sharedKey = await compute(boxBefore, map);
-    // print("sharedKey: ${Sodium.bin2hex(sharedKey)}");
-
-    // print(encrypted.toString());
-    // return encrypted.toString();
-
-    // print("convertedSharedKey: ${Sodium.bin2hex(sharedKey)}");
-    // print("pkLen: ${Sodium.hex2bin(publicKey).length}");
-    // print("skLen: ${Sodium.hex2bin(privateKey).length}");
-
-    // String constant_nonce = "42565937c3b257e4e094cc0e82eca63dd87587fcd18319f7";
+    Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
+    Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
     Uint8List nonce = NanoHelpers.hexToBytes(generateNonce(NONCE_LENGTH));
-    // Uint8List encrypted = curve.secretbox(utf8.encode(message), nonce, sharedKey);
+
     Map map = Map();
     map['msg'] = encodeString(message);
     map['nonce'] = nonce;
@@ -117,56 +92,27 @@ class Box {
     var full = BytesBuilder();
     full.add(nonce);
     full.add(encrypted);
+
     return Sodium.bin2base64(full.toBytes());
   }
 
   static Future<String> decrypt(String message, String address, String privateKey) async {
     String publicKey = NanoAccounts.extractPublicKey(address);
 
-    Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(Sodium.hex2bin(publicKey));
-    // Uint8List convertedPrivateKey = Sodium.cryptoSignEd25519SkToCurve25519(Sodium.hex2bin(privateKey));
-    Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(Sodium.hex2bin(privateKey));
+    Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
+    Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
 
-    // Curve25519 curve = new Curve25519();
-
-    // Uint8List sharedKey = oldBoxBefore(convertedPublicKey, convertedPrivateKey);
-
-    // Map map = Map();
-    // map['publicKey'] = convertedPublicKey;
-    // map['secretKey'] = convertedPrivateKey;
-    // print("calculating shared key");
-    // Uint8List sharedKey = await compute(boxBefore, map);
-
-    // print("sharedKey: ${Sodium.bin2hex(sharedKey)}");
-
-    // Uint8List convertedPublicKey = new Uint8List(32);
-    // Uint8List convertedPrivateKey = new Uint8List(32);
-    // TweetNaClExt.crypto_sign_ed25519_pk_to_x25519_pk(convertedPublicKey, Sodium.hex2bin(publicKey));
-    // TweetNaClExt.crypto_sign_ed25519_sk_to_x25519_sk(convertedPrivateKey, Sodium.hex2bin(privateKey));
-    // Uint8List sharedKey = Sodium.cryptoBoxBeforenm(convertedPublicKey, convertedPrivateKey);
-    // Uint8List sharedKey = X25519(convertedPublicKey, convertedPrivateKey);
-    // Uint8List sharedKey = Sodium.cryptoBoxBeforenm(Sodium.hex2bin(publicKey), Sodium.hex2bin(privateKey));
-
-    // // const decodedEncryptedMessageBytes = base64.base64ToBytes(encrypted)
     Uint8List decodedEncryptedMessageBytes = Sodium.base642bin(message);
-    // Uint8List decodedEncryptedMessageBytes = utf8.encode(message);
     Uint8List nonce = decodedEncryptedMessageBytes.sublist(0, NONCE_LENGTH);
     Uint8List encryptedMessage = decodedEncryptedMessageBytes.sublist(NONCE_LENGTH, decodedEncryptedMessageBytes.length);
 
-    // Uint8List decrypted = Sodium.cryptoBoxOpenEasy(encryptedMessage, nonce, convertedPublicKey, convertedPrivateKey);
-
-    print(message);
-    print(Sodium.bin2hex(nonce));
-    print(Sodium.bin2hex(encryptedMessage));
-
-    // Uint8List decrypted = curve.boxOpen(encryptedMessage, nonce, convertedPublicKey, convertedPrivateKey);
     Map map = Map();
-    // (encryptedMessage, nonce, convertedPublicKey, convertedPrivateKey);
     map['msg'] = encryptedMessage;
     map['nonce'] = nonce;
     map['publicKey'] = convertedPublicKey;
     map['secretKey'] = convertedPrivateKey;
-    Uint8List decrypted = await compute(boxOpen, map);
+
+    Uint8List decrypted = await compute(boxOpen as FutureOr<Uint8List> Function(dynamic), map);
 
     return decodeString(decrypted);
   }

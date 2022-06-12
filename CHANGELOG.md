@@ -1,6 +1,6 @@
 # v0.3.4 - [2022-06-20]
 #### Added
-
+- Info button on the send sheet
 #### Changed
 - Upgraded a *ton* of dependencies
 - Null safety support! This improves overall security of the application and makes crashes less likely

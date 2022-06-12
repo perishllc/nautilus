@@ -26,9 +26,9 @@ class UserDataUtil {
   static final Logger log = sl.get<Logger>();
 
   static const MethodChannel _channel = const MethodChannel('fappchannel');
-  static StreamSubscription<dynamic> setStream;
+  static StreamSubscription<dynamic>? setStream;
 
-  static String _parseData(String data, DataType type) {
+  static String? _parseData(String data, DataType type) {
     data = data.trim();
     if (type == DataType.RAW) {
       return data;
@@ -52,15 +52,15 @@ class UserDataUtil {
     return null;
   }
 
-  static Future<String> getClipboardText(DataType type) async {
-    ClipboardData data = await Clipboard.getData("text/plain");
+  static Future<String?> getClipboardText(DataType type) async {
+    ClipboardData? data = await Clipboard.getData("text/plain");
     if (data == null || data.text == null) {
       return null;
     }
-    return _parseData(data.text, type);
+    return _parseData(data.text!, type);
   }
 
-  static Future<String> getQRData(DataType type, BuildContext context) async {
+  static Future<String?> getQRData(DataType type, BuildContext context) async {
     UIUtil.cancelLockEvent();
     try {
       String data = (await BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/)).rawContent;
@@ -70,10 +70,10 @@ class UserDataUtil {
       return _parseData(data, type);
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.cameraAccessDenied) {
-        UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
+        UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidPermissions, context);
         return QRScanErrs.PERMISSION_DENIED;
       } else {
-        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+        UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
         return QRScanErrs.UNKNOWN_ERROR;
       }
     } on FormatException {
@@ -84,7 +84,7 @@ class UserDataUtil {
     }
   }
 
-  static Future<void> setSecureClipboardItem(String value) async {
+  static Future<void> setSecureClipboardItem(String? value) async {
     if (Platform.isIOS) {
       final Map<String, dynamic> params = <String, dynamic>{
         'value': value,
@@ -95,7 +95,7 @@ class UserDataUtil {
       await Clipboard.setData(new ClipboardData(text: value));
       // Auto clear it after 2 minutes
       if (setStream != null) {
-        setStream.cancel();
+        setStream!.cancel();
       }
       Future<dynamic> delayed = new Future.delayed(new Duration(minutes: 2));
       delayed.then((_) {
@@ -103,7 +103,7 @@ class UserDataUtil {
       });
       setStream = delayed.asStream().listen((_) {
         Clipboard.getData("text/plain").then((data) {
-          if (data != null && data.text != null && NanoSeeds.isValidSeed(data.text)) {
+          if (data != null && data.text != null && NanoSeeds.isValidSeed(data.text!)) {
             Clipboard.setData(ClipboardData(text: ""));
           }
         });

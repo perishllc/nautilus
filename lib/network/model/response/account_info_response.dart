@@ -4,24 +4,24 @@ import 'package:nautilus_wallet_flutter/network/model/response/account_history_r
 
 part 'account_info_response.g.dart';
 
-int _toInt(String v) => v == null ? 0 : int.tryParse(v);
+int? _toInt(String? v) => v == null ? 0 : int.tryParse(v);
 
 @JsonSerializable()
 class AccountInfoResponse {
   @JsonKey(name: 'frontier')
-  String frontier;
+  String? frontier;
 
   @JsonKey(name: 'open_block')
-  String openBlock;
+  String? openBlock;
 
   @JsonKey(name: 'representative_block')
-  String representativeBlock;
+  String? representativeBlock;
 
   @JsonKey(name: 'balance')
-  String balance;
+  String? balance;
 
   @JsonKey(name: 'block_count', fromJson: _toInt)
-  int blockCount;
+  int? blockCount;
 
   @JsonKey(ignore: true)
   bool unopened;

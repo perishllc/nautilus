@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -21,7 +23,7 @@ class Vault {
   }
 
   // Re-usable
-  Future<String> _write(String key, String value) async {
+  Future<String?> _write(String key, String? value) async {
     if (await legacy()) {
       await setEncrypted(key, value);
     } else {
@@ -30,7 +32,7 @@ class Vault {
     return value;
   }
 
-  Future<String> _read(String key, {String defaultValue}) async {
+  Future<String?> _read(String key, {String? defaultValue}) async {
     if (await legacy()) {
       return await getEncrypted(key);
     }
@@ -50,11 +52,11 @@ class Vault {
   }
 
   // Specific keys
-  Future<String> getSeed() async {
+  Future<String?> getSeed() async {
     return await _read(seedKey);
   }
 
-  Future<String> setSeed(String seed) async {
+  Future<String?> setSeed(String? seed) async {
     return await _write(seedKey, seed);
   }
 
@@ -66,17 +68,17 @@ class Vault {
     return await secureStorage.delete(key: seedKey);
   }
 
-  Future<String> getEncryptionPhrase() async {
+  Future<String?> getEncryptionPhrase() async {
     return await _read(encryptionKey);
   }
 
-  Future<String> writeEncryptionPhrase(String secret) async {
+  Future<String?> writeEncryptionPhrase(String secret) async {
     return await _write(encryptionKey, secret);
   }
 
   /// Used to keep the seed in-memory in the session without being plaintext
   Future<String> getSessionKey() async {
-    String key = await _read(sessionKey);
+    String? key = await _read(sessionKey);
     if (key == null) {
       key = await updateSessionKey();
     }
@@ -89,7 +91,7 @@ class Vault {
     return key;
   }
 
-  Future<String> writeSessionKey(String key) async {
+  Future<String?> writeSessionKey(String key) async {
     return await _write(sessionKey, key);
   }
 
@@ -101,11 +103,11 @@ class Vault {
     return await secureStorage.delete(key: encryptionKey);
   }
 
-  Future<String> getPin() async {
+  Future<String?> getPin() async {
     return await _read(pinKey);
   }
 
-  Future<String> writePin(String pin) async {
+  Future<String?> writePin(String pin) async {
     return await _write(pinKey, pin);
   }
 
@@ -118,8 +120,8 @@ class Vault {
   }
 
   // For encrypted data
-  Future<void> setEncrypted(String key, String value) async {
-    String secret = await getSecret();
+  Future<void> setEncrypted(String key, String? value) async {
+    String? secret = await getSecret();
     if (secret == null) return null;
     // Decrypt and return
     Salsa20Encryptor encrypter = new Salsa20Encryptor(
@@ -127,25 +129,25 @@ class Vault {
         secret.substring(secret.length - 8));
     // Encrypt and save
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, encrypter.encrypt(value));
+    prefs.setString(key, encrypter.encrypt(value!));
   }
 
-  Future<String> getEncrypted(String key) async {
-    String secret = await getSecret();
+  Future<String?> getEncrypted(String key) async {
+    String? secret = await getSecret();
     if (secret == null) return null;
     // Decrypt and return
     Salsa20Encryptor encrypter = new Salsa20Encryptor(
         secret.substring(0, secret.length - 8),
         secret.substring(secret.length - 8));
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String encrypted = prefs.get(key);
+    String? encrypted = prefs.get(key) as String?;
     if (encrypted == null) return null;
     return encrypter.decrypt(encrypted);
   }
 
   static const _channel = const MethodChannel('fappchannel');
 
-  Future<String> getSecret() async {
+  Future<String?> getSecret() async {
     return await _channel.invokeMethod('getSecret');
   }
 }

@@ -11,7 +11,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AppShareCard extends StatefulWidget {
-  final GlobalKey key;
+  final GlobalKey? key;
   final Widget qrSVG;
   final Widget logoSvg;
 
@@ -22,7 +22,7 @@ class AppShareCard extends StatefulWidget {
 }
 
 class _AppShareCardState extends State<AppShareCard> {
-  GlobalKey globalKey;
+  GlobalKey? globalKey;
   Widget qrSVG;
   Widget logoSvg;
 
@@ -71,7 +71,7 @@ class _AppShareCardState extends State<AppShareCard> {
                         padding: EdgeInsets.all(2),
                         child: QrImage(
                           padding: EdgeInsets.all(0.0),
-                          data: StateContainer.of(context).wallet.address,
+                          data: StateContainer.of(context).wallet!.address!,
                           version: 6,
                           gapless: false,
                           errorCorrectionLevel: QrErrorCorrectLevel.Q,
@@ -85,12 +85,12 @@ class _AppShareCardState extends State<AppShareCard> {
                         height: (StateContainer.of(context).curTheme is IndiumTheme) ? 95 : 100,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: StateContainer.of(context).curTheme.primary, width: 1.3913),
+                          border: Border.all(color: StateContainer.of(context).curTheme.primary!, width: 1.3913),
                         ),
                       ),
                     ),
                     // Logo Background White
-                    StateContainer.of(context).natriconOn
+                    StateContainer.of(context).natriconOn!
                         ? Center(
                             child: Container(
                               width: 21,
@@ -101,8 +101,8 @@ class _AppShareCardState extends State<AppShareCard> {
                                 border: Border.all(
                                   width: (StateContainer.of(context).curTheme is IndiumTheme) ? 1.44545 : 1.06,
                                   color: (StateContainer.of(context).curTheme is IndiumTheme)
-                                      ? StateContainer.of(context).curTheme.backgroundDark
-                                      : StateContainer.of(context).curTheme.primary,
+                                      ? StateContainer.of(context).curTheme.backgroundDark!
+                                      : StateContainer.of(context).curTheme.primary!,
                                 ),
                               ),
                               child: Container(
@@ -111,8 +111,8 @@ class _AppShareCardState extends State<AppShareCard> {
                                   border: Border.all(
                                     width: (StateContainer.of(context).curTheme is IndiumTheme) ? 1.06 : 1.44545,
                                     color: (StateContainer.of(context).curTheme is IndiumTheme)
-                                        ? StateContainer.of(context).curTheme.primary
-                                        : StateContainer.of(context).curTheme.backgroundDark,
+                                        ? StateContainer.of(context).curTheme.primary!
+                                        : StateContainer.of(context).curTheme.backgroundDark!,
                                   ),
                                 ),
                               ),
@@ -128,7 +128,7 @@ class _AppShareCardState extends State<AppShareCard> {
                               ),
                             ),
                           ),
-                    StateContainer.of(context).natriconOn
+                    StateContainer.of(context).natriconOn!
                         ? SizedBox()
                         : Center(
                             child: Container(
@@ -212,7 +212,7 @@ class _AppShareCardState extends State<AppShareCard> {
                               children: [
                                 // Primary part of the first row
                                 TextSpan(
-                                  text: StateContainer.of(context).wallet.address.substring(0, 12),
+                                  text: StateContainer.of(context).wallet!.address!.substring(0, 12),
                                   style: TextStyle(
                                     color: StateContainer.of(context).curTheme.primary,
                                     fontFamily: "OverpassMono",
@@ -222,7 +222,7 @@ class _AppShareCardState extends State<AppShareCard> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: StateContainer.of(context).wallet.address.substring(12, 16),
+                                  text: StateContainer.of(context).wallet!.address!.substring(12, 16),
                                   style: TextStyle(
                                     color: StateContainer.of(context).curTheme.text,
                                     fontFamily: "OverpassMono",
@@ -248,7 +248,7 @@ class _AppShareCardState extends State<AppShareCard> {
                         Container(
                           width: 97,
                           child: AutoSizeText(
-                            StateContainer.of(context).wallet.address.substring(16, 32),
+                            StateContainer.of(context).wallet!.address!.substring(16, 32),
                             minFontSize: 1.0,
                             stepGranularity: 0.1,
                             maxFontSize: 50,
@@ -266,7 +266,7 @@ class _AppShareCardState extends State<AppShareCard> {
                         Container(
                           width: 97,
                           child: AutoSizeText(
-                            StateContainer.of(context).wallet.address.substring(32, 48),
+                            StateContainer.of(context).wallet!.address!.substring(32, 48),
                             minFontSize: 1.0,
                             stepGranularity: 0.1,
                             maxFontSize: 50,
@@ -288,7 +288,7 @@ class _AppShareCardState extends State<AppShareCard> {
                               children: [
                                 // Text colored part of the last row
                                 TextSpan(
-                                  text: StateContainer.of(context).wallet.address.substring(48, 59),
+                                  text: StateContainer.of(context).wallet!.address!.substring(48, 59),
                                   style: TextStyle(
                                     color: StateContainer.of(context).curTheme.text,
                                     fontFamily: "OverpassMono",
@@ -299,7 +299,7 @@ class _AppShareCardState extends State<AppShareCard> {
                                 ),
                                 // Primary colored part of the last row
                                 TextSpan(
-                                  text: StateContainer.of(context).wallet.address.substring(59),
+                                  text: StateContainer.of(context).wallet!.address!.substring(59),
                                   style: TextStyle(
                                     color: StateContainer.of(context).curTheme.primary,
                                     fontFamily: "OverpassMono",

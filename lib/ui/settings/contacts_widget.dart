@@ -27,8 +27,8 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ContactsList extends StatefulWidget {
-  final AnimationController contactsController;
-  bool contactsOpen;
+  final AnimationController? contactsController;
+  bool? contactsOpen;
 
   ContactsList(this.contactsController, this.contactsOpen);
 
@@ -38,14 +38,14 @@ class ContactsList extends StatefulWidget {
 class _ContactsListState extends State<ContactsList> {
   final Logger log = sl.get<Logger>();
 
-  List<User> _contacts;
-  String documentsDirectory;
+  late List<User> _contacts;
+  String? documentsDirectory;
   @override
   void initState() {
     super.initState();
     _registerBus();
     // Initial contacts list
-    _contacts = List();
+    _contacts = [];
     getApplicationDocumentsDirectory().then((directory) {
       documentsDirectory = directory.path;
       setState(() {
@@ -58,16 +58,16 @@ class _ContactsListState extends State<ContactsList> {
   @override
   void dispose() {
     if (_contactAddedSub != null) {
-      _contactAddedSub.cancel();
+      _contactAddedSub!.cancel();
     }
     if (_contactRemovedSub != null) {
-      _contactRemovedSub.cancel();
+      _contactRemovedSub!.cancel();
     }
     super.dispose();
   }
 
-  StreamSubscription<ContactAddedEvent> _contactAddedSub;
-  StreamSubscription<ContactRemovedEvent> _contactRemovedSub;
+  StreamSubscription<ContactAddedEvent>? _contactAddedSub;
+  StreamSubscription<ContactRemovedEvent>? _contactRemovedSub;
 
   void _registerBus() {
     // Contact added bus event
@@ -103,12 +103,12 @@ class _ContactsListState extends State<ContactsList> {
       // calculate diff:
       List<User> newState = [];
 
-      var aliasMap = Map<String, List<String>>();
-      List<String> addressesToRemove = [];
+      var aliasMap = Map<String?, List<String?>>();
+      List<String?> addressesToRemove = [];
 
       // search for duplicate address entries:
       for (User user in contacts) {
-        if (user.address == null || user.address.isEmpty) {
+        if (user.address == null || user.address!.isEmpty) {
           continue;
         }
         if (aliasMap.containsKey(user.address)) {
@@ -121,21 +121,21 @@ class _ContactsListState extends State<ContactsList> {
           aliasMap[user.address] = [];
         }
         // Add the aliases to the existing entry
-        if (user.nickname != null && user.nickname.isNotEmpty) {
+        if (user.nickname != null && user.nickname!.isNotEmpty) {
           // check if the alias is already in the list:
-          var index = aliasMap[user.address].indexOf(user.nickname);
+          var index = aliasMap[user.address]!.indexOf(user.nickname);
           if (index > -1) {
-            if (aliasMap[user.address][index + 1] != UserTypes.CONTACT) {
+            if (aliasMap[user.address]![index + 1] != UserTypes.CONTACT) {
               // add it because the matching entry is not a contact
-              aliasMap[user.address].addAll([user.nickname, UserTypes.CONTACT]);
+              aliasMap[user.address]!.addAll([user.nickname, UserTypes.CONTACT]);
             }
           } else {
             // add it because it is not in the list
-            aliasMap[user.address].addAll([user.nickname, UserTypes.CONTACT]);
+            aliasMap[user.address]!.addAll([user.nickname, UserTypes.CONTACT]);
           }
         }
-        if (user.username != null && user.username.isNotEmpty) {
-          aliasMap[user.address].addAll([user.username, user.type]);
+        if (user.username != null && user.username!.isNotEmpty) {
+          aliasMap[user.address]!.addAll([user.username, user.type]);
         }
       }
 
@@ -150,15 +150,15 @@ class _ContactsListState extends State<ContactsList> {
 
       // construct the list of users with multiple usernames:
       List<User> multiUsers = [];
-      for (String address in aliasMap.keys) {
+      for (String? address in aliasMap.keys) {
         if (!addressesToRemove.contains(address)) {
           // we only want the flagged users
           continue;
         }
-        var aliases = aliasMap[address];
+        var aliases = aliasMap[address]!;
 
-        String nickname;
-        int nickNameIndex;
+        String? nickname;
+        int? nickNameIndex;
         for (int i = 0; i < aliases.length; i += 2) {
           var alias = aliases[i];
           var type = aliases[i + 1];
@@ -206,8 +206,8 @@ class _ContactsListState extends State<ContactsList> {
       // Re-sort list
       setState(() {
         _contacts.sort((a, b) {
-          String c = a.nickname ?? a.username;
-          String d = b.nickname ?? b.username;
+          String c = a.nickname ?? a.username!;
+          String d = b.nickname ?? b.username!;
           return c.toLowerCase().compareTo(d.toLowerCase());
         });
       });
@@ -217,10 +217,10 @@ class _ContactsListState extends State<ContactsList> {
   Future<void> _exportContacts() async {
     List<User> contacts = await sl.get<DBHelper>().getContacts();
     if (contacts.length == 0) {
-      UIUtil.showSnackbar(AppLocalization.of(context).noContactsExport, context);
+      UIUtil.showSnackbar(AppLocalization.of(context)!.noContactsExport, context);
       return;
     }
-    List<Map<String, dynamic>> jsonList = List();
+    List<Map<String, dynamic>> jsonList = [];
     contacts.forEach((contact) {
       jsonList.add(contact.toJson());
     });
@@ -235,26 +235,26 @@ class _ContactsListState extends State<ContactsList> {
 
   Future<void> _importContacts() async {
     UIUtil.cancelLockEvent();
-    FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ["txt"]);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ["txt"]);
     if (result != null) {
-      File f = File(result.files.single.path);
+      File f = File(result.files.single.path!);
       if (!await f.exists()) {
-        UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
+        UIUtil.showSnackbar(AppLocalization.of(context)!.contactsImportErr, context);
         return;
       }
       try {
         String contents = await f.readAsString();
         Iterable contactsJson = json.decode(contents);
-        List<User> contacts = List();
-        List<User> contactsToAdd = List();
+        List<User> contacts = [];
+        List<User> contactsToAdd = [];
         contactsJson.forEach((contact) {
           contacts.add(User.fromJson(contact));
         });
         for (User contact in contacts) {
-          if (!await sl.get<DBHelper>().contactExistsWithName(contact.nickname) && !await sl.get<DBHelper>().contactExistsWithAddress(contact.address)) {
+          if (!await sl.get<DBHelper>().contactExistsWithName(contact.nickname!) && !await sl.get<DBHelper>().contactExistsWithAddress(contact.address!)) {
             // Contact doesnt exist, make sure name and address are valid
             if (Address(contact.address).isValid()) {
-              if (contact.nickname.startsWith("★") && contact.nickname.length <= 20) {
+              if (contact.nickname!.startsWith("★") && contact.nickname!.length <= 20) {
                 contactsToAdd.add(contact);
               }
             }
@@ -265,19 +265,19 @@ class _ContactsListState extends State<ContactsList> {
         if (numSaved > 0) {
           _updateContacts();
           EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: User(nickname: "", address: "")));
-          UIUtil.showSnackbar(AppLocalization.of(context).contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
+          UIUtil.showSnackbar(AppLocalization.of(context)!.contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
         } else {
-          UIUtil.showSnackbar(AppLocalization.of(context).noContactsImport, context);
+          UIUtil.showSnackbar(AppLocalization.of(context)!.noContactsImport, context);
         }
       } catch (e) {
         log.e(e.toString(), e);
-        UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
+        UIUtil.showSnackbar(AppLocalization.of(context)!.contactsImportErr, context);
         return;
       }
     } else {
       // Cancelled by user
       log.e("FilePicker cancelled by user");
-      UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
+      UIUtil.showSnackbar(AppLocalization.of(context)!.contactsImportErr, context);
       return;
     }
   }
@@ -288,7 +288,7 @@ class _ContactsListState extends State<ContactsList> {
         decoration: BoxDecoration(
           color: StateContainer.of(context).curTheme.backgroundDark,
           boxShadow: [
-            BoxShadow(color: StateContainer.of(context).curTheme.barrierWeakest, offset: Offset(-5, 0), blurRadius: 20),
+            BoxShadow(color: StateContainer.of(context).curTheme.barrierWeakest!, offset: Offset(-5, 0), blurRadius: 20),
           ],
         ),
         child: SafeArea(
@@ -318,7 +318,7 @@ class _ContactsListState extends State<ContactsList> {
                                 setState(() {
                                   widget.contactsOpen = false;
                                 });
-                                widget.contactsController.reverse();
+                                widget.contactsController!.reverse();
                               },
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                               padding: EdgeInsets.all(8.0),
@@ -326,7 +326,7 @@ class _ContactsListState extends State<ContactsList> {
                         ),
                         //Contacts Header Text
                         Text(
-                          AppLocalization.of(context).favoritesHeader,
+                          AppLocalization.of(context)!.favoritesHeader,
                           style: AppStyles.textStyleSettingsHeader(context),
                         ),
                       ],
@@ -390,7 +390,7 @@ class _ContactsListState extends State<ContactsList> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [StateContainer.of(context).curTheme.backgroundDark, StateContainer.of(context).curTheme.backgroundDark00],
+                            colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
                             begin: AlignmentDirectional(0.5, -1.0),
                             end: AlignmentDirectional(0.5, 1.0),
                           ),
@@ -406,8 +406,8 @@ class _ContactsListState extends State<ContactsList> {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              StateContainer.of(context).curTheme.backgroundDark00,
-                              StateContainer.of(context).curTheme.backgroundDark,
+                              StateContainer.of(context).curTheme.backgroundDark00!,
+                              StateContainer.of(context).curTheme.backgroundDark!,
                             ],
                             begin: AlignmentDirectional(0.5, -1.0),
                             end: AlignmentDirectional(0.5, 1.0),
@@ -422,7 +422,7 @@ class _ContactsListState extends State<ContactsList> {
                 margin: EdgeInsets.only(top: 10),
                 child: Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context).addFavorite, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context)!.addFavorite, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Sheets.showAppHeightEightSheet(context: context, widget: AddContactSheet());
                     }),
@@ -438,11 +438,11 @@ class _ContactsListState extends State<ContactsList> {
     if (user.aliases == null) {
       return [
         // nickname
-        (user.nickname != null) ? Text("★" + user.nickname, style: AppStyles.textStyleSettingItemHeader(context)) : SizedBox(),
+        (user.nickname != null) ? Text("★" + user.nickname!, style: AppStyles.textStyleSettingItemHeader(context)) : SizedBox(),
 
         (user.username != null)
             ? Text(
-                user.getDisplayName(ignoreNickname: true),
+                user.getDisplayName(ignoreNickname: true)!,
                 style: user.nickname != null ? AppStyles.textStyleTransactionAddress(context) : AppStyles.textStyleSettingItemHeader(context),
               )
             : SizedBox(),
@@ -450,7 +450,7 @@ class _ContactsListState extends State<ContactsList> {
         // Blocked address
         (user.address != null)
             ? Text(
-                Address(user.address).getShortString(),
+                Address(user.address).getShortString()!,
                 style: AppStyles.textStyleTransactionAddress(context),
               )
             : SizedBox(),
@@ -458,17 +458,17 @@ class _ContactsListState extends State<ContactsList> {
     } else {
       List<Widget> entries = [
         Text(
-          user.getDisplayName(),
+          user.getDisplayName()!,
           style: AppStyles.textStyleSettingItemHeader(context),
         ),
         Text(
-          Address(user.address).getShortString(),
+          Address(user.address).getShortString()!,
           style: AppStyles.textStyleTransactionAddress(context),
         )
       ];
 
-      for (var i = 0; i < user.aliases.length; i += 2) {
-        String displayName = User.getDisplayNameWithType(user.aliases[i], user.aliases[i + 1]);
+      for (var i = 0; i < user.aliases!.length; i += 2) {
+        String displayName = User.getDisplayNameWithType(user.aliases![i], user.aliases![i + 1])!;
         entries.add(
           Text(
             displayName,
@@ -503,7 +503,7 @@ class _ContactsListState extends State<ContactsList> {
               Expanded(
                 child: Container(
                   // height: 60,
-                  margin: EdgeInsetsDirectional.only(start: StateContainer.of(context).natriconOn ? 2.0 : 20.0),
+                  margin: EdgeInsetsDirectional.only(start: StateContainer.of(context).natriconOn! ? 2.0 : 20.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,

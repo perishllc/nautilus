@@ -5,28 +5,28 @@ part 'alerts_response_item.g.dart';
 @JsonSerializable()
 class AlertResponseItem {
   @JsonKey(name: 'id')
-  int id;
+  int? id;
 
   @JsonKey(name: 'active')
-  bool active;
+  bool? active;
 
   @JsonKey(name: 'priority')
-  String priority;
+  String? priority;
 
   @JsonKey(name: 'title')
-  String title;
+  String? title;
 
   @JsonKey(name: 'short_description')
-  String shortDescription;
+  String? shortDescription;
 
   @JsonKey(name: 'long_description')
-  String longDescription;
+  String? longDescription;
 
   @JsonKey(name: 'link')
-  String link;
+  String? link;
 
   @JsonKey(name: 'timestamp')
-  int timestamp;
+  int? timestamp;
 
   AlertResponseItem({
     this.id,

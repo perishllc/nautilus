@@ -18,21 +18,21 @@ import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class IntroPassword extends StatefulWidget {
-  final String seed;
+  final String? seed;
   IntroPassword({this.seed});
   @override
   _IntroPasswordState createState() => _IntroPasswordState();
 }
 
 class _IntroPasswordState extends State<IntroPassword> {
-  FocusNode createPasswordFocusNode;
-  TextEditingController createPasswordController;
-  FocusNode confirmPasswordFocusNode;
-  TextEditingController confirmPasswordController;
+  FocusNode? createPasswordFocusNode;
+  TextEditingController? createPasswordController;
+  FocusNode? confirmPasswordFocusNode;
+  TextEditingController? confirmPasswordController;
 
-  String passwordError;
+  String? passwordError;
 
-  bool passwordsMatch;
+  late bool passwordsMatch;
 
   @override
   void initState() {
@@ -97,7 +97,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                         ),
                         alignment: AlignmentDirectional(-1, 0),
                         child: AutoSizeText(
-                          AppLocalization.of(context).createAPasswordHeader,
+                          AppLocalization.of(context)!.createAPasswordHeader,
                           maxLines: 3,
                           stepGranularity: 0.5,
                           style: AppStyles.textStyleHeaderColored(context),
@@ -110,7 +110,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                             end: smallScreen(context) ? 30 : 40,
                             top: 16.0),
                         child: AutoSizeText(
-                          AppLocalization.of(context).passwordWillBeRequiredToOpenParagraph,
+                          AppLocalization.of(context)!.passwordWillBeRequiredToOpenParagraph,
                           style: AppStyles.textStyleParagraph(context),
                           maxLines: 5,
                           stepGranularity: 0.5,
@@ -139,7 +139,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                                       passwordError = null;
                                     });
                                   }
-                                  if (confirmPasswordController.text == createPasswordController.text) {
+                                  if (confirmPasswordController!.text == createPasswordController!.text) {
                                     if (mounted) {
                                       setState(() {
                                         passwordsMatch = true;
@@ -153,7 +153,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                                     }
                                   }
                                 },
-                                hintText: AppLocalization.of(context).createPasswordHint,
+                                hintText: AppLocalization.of(context)!.createPasswordHint,
                                 keyboardType: TextInputType.text,
                                 obscureText: true,
                                 textAlign: TextAlign.center,
@@ -165,7 +165,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                                   fontFamily: 'NunitoSans',
                                 ),
                                 onSubmitted: (text) {
-                                  confirmPasswordFocusNode.requestFocus();
+                                  confirmPasswordFocusNode!.requestFocus();
                                 },
                               ),
                               // Confirm Password Text Field
@@ -183,7 +183,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                                       passwordError = null;
                                     });
                                   }
-                                  if (confirmPasswordController.text == createPasswordController.text) {
+                                  if (confirmPasswordController!.text == createPasswordController!.text) {
                                     if (mounted) {
                                       setState(() {
                                         passwordsMatch = true;
@@ -197,7 +197,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                                     }
                                   }                              
                                 },
-                                hintText: AppLocalization.of(context).confirmPasswordHint,
+                                hintText: AppLocalization.of(context)!.confirmPasswordHint,
                                 keyboardType: TextInputType.text,
                                 obscureText: true,
                                 textAlign: TextAlign.center,
@@ -213,7 +213,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                               Container(
                                 alignment: AlignmentDirectional(0, 0),
                                 margin: EdgeInsets.only(top: 3),
-                                child: Text(this.passwordError == null ? "" : passwordError,
+                                child: Text(this.passwordError == null ? "" : passwordError!,
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color:
@@ -239,7 +239,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                       children: <Widget>[
                         // Next Button
                         AppButton.buildAppButton(context, AppButtonType.PRIMARY,
-                            AppLocalization.of(context).nextButton, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                            AppLocalization.of(context)!.nextButton, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                             await submitAndEncrypt();
                         }),
                       ],
@@ -250,7 +250,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                         AppButton.buildAppButton(
                             context,
                             AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context).goBackButton,
+                            AppLocalization.of(context)!.goBackButton,
                             Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                           Navigator.of(context).pop();
                         }),
@@ -267,26 +267,26 @@ class _IntroPasswordState extends State<IntroPassword> {
   }
 
   Future<void> submitAndEncrypt() async {
-    if (createPasswordController.text.isEmpty || confirmPasswordController.text.isEmpty) {
+    if (createPasswordController!.text.isEmpty || confirmPasswordController!.text.isEmpty) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context).passwordBlank;
+          passwordError = AppLocalization.of(context)!.passwordBlank;
         });
       }
-    } else if (createPasswordController.text != confirmPasswordController.text) {
+    } else if (createPasswordController!.text != confirmPasswordController!.text) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context).passwordsDontMatch;
+          passwordError = AppLocalization.of(context)!.passwordsDontMatch;
         });
       }
     } else if (widget.seed != null) {
-      String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController.text));
+      String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
       await sl.get<Vault>().setSeed(encryptedSeed);
       StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, await sl.get<Vault>().getSessionKey())));
       await sl.get<DBHelper>().dropAccounts();
       await NanoUtil().loginAccount(widget.seed, context);
       StateContainer.of(context).requestUpdate();
-      String pin = await Navigator.of(context).push(
+      String? pin = await Navigator.of(context).push(
         MaterialPageRoute(builder: (BuildContext context) {
           return PinScreen(PinOverlayType.NEW_PIN);
       }));
@@ -296,7 +296,7 @@ class _IntroPasswordState extends State<IntroPassword> {
     } else {
       // Generate a new seed and encrypt
       String seed = NanoSeeds.generateSeed();
-      String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController.text));
+      String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
       await sl.get<Vault>().setSeed(encryptedSeed);
       // Also encrypt it with the session key, so user doesnt need password to sign blocks within the app
       StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, await sl.get<Vault>().getSessionKey())));

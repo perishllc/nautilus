@@ -7,7 +7,7 @@ enum MinRawOptions { ONE_NYANO, TEN_NYANO, HUNDRED_NYANO, THOUSAND_NYANO, TEN_TH
 
 /// Represent natricon on/off setting
 class MinRawSetting extends SettingSelectionItem {
-  MinRawOptions setting;
+  MinRawOptions? setting;
 
   MinRawSetting(this.setting);
 
@@ -56,14 +56,14 @@ class MinRawSetting extends SettingSelectionItem {
       case MinRawOptions.HUNDRED_THOUSAND_NYANO:
         return (StateContainer.of(context).nyanoMode) ? '100,000 nyano' : '0.1 NANO';
       case MinRawOptions.OFF:
-        return AppLocalization.of(context).off;
+        return AppLocalization.of(context)!.off;
       default:
-        return AppLocalization.of(context).off;
+        return AppLocalization.of(context)!.off;
     }
   }
 
   // For saving to shared prefs
   int getIndex() {
-    return setting.index;
+    return setting!.index;
   }
 }

@@ -8,19 +8,19 @@ part 'contact.g.dart';
 @JsonSerializable()
 class Contact {
   @JsonKey(ignore: true)
-  int id;
+  int? id;
   @JsonKey(name: 'name')
-  String name;
+  String? name;
   @JsonKey(name: 'address')
-  String address;
+  String? address;
   @JsonKey(ignore: true)
-  String monkeyPath;
+  String? monkeyPath;
   @JsonKey(ignore: true)
-  Widget monkeyWidget;
+  Widget? monkeyWidget;
   @JsonKey(ignore: true)
-  Widget monkeyWidgetLarge;
+  Widget? monkeyWidgetLarge;
 
-  Contact({@required this.name, @required this.address, this.monkeyPath, int id});
+  Contact({required this.name, required this.address, this.monkeyPath, int? id});
 
   factory Contact.fromJson(Map<String, dynamic> json) => _$ContactFromJson(json);
   Map<String, dynamic> toJson() => _$ContactToJson(this);
@@ -29,6 +29,6 @@ class Contact {
   int get hashCode => hash2(name.hashCode, address.hashCode);
 
   String getDisplayName() {
-    return "★" + name;
+    return "★" + name!;
   }
 }

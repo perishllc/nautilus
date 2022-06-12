@@ -17,43 +17,43 @@ StateBlock stateBlockFromJson(String contents) {
 @JsonSerializable()
 class StateBlock {
   @JsonKey(name: 'type')
-  String type;
+  String? type;
 
   @JsonKey(name: 'previous')
-  String previous;
+  String? previous;
 
   @JsonKey(name: 'account')
-  String account;
+  String? account;
 
   @JsonKey(name: 'representative')
-  String representative;
+  String? representative;
 
   @JsonKey(name: 'balance')
-  String balance;
+  String? balance;
 
   @JsonKey(name: 'link')
-  String link;
+  String? link;
 
   @JsonKey(name: 'signature')
-  String signature;
+  String? signature;
 
   @JsonKey(ignore: true)
-  String hash;
+  String? hash;
 
   // Private key is only included on this object for seed sweeping requests
   @JsonKey(ignore: true)
-  String privKey;
+  String? privKey;
 
   // Represents the amount this block intends to send
   // should be used to calculate balance after this send
   @JsonKey(ignore: true)
-  String sendAmount;
+  String? sendAmount;
   // Represents subtype of this block: send/receive/change/openm
   @JsonKey(ignore: true)
-  String subType;
+  String? subType;
   // Represents local currency value of this TX
   @JsonKey(ignore: true)
-  String localCurrencyValue;
+  String? localCurrencyValue;
 
   /// StateBlock constructor.
   /// subtype is one of "send", "receive", "change", "open"
@@ -62,12 +62,12 @@ class StateBlock {
   /// This is by design of this app, where we get previous balance in a server request
   /// and update it later before signing
   StateBlock(
-      {String subtype,
-      @required String previous,
-      @required String representative,
-      @required String balance,
-      @required String link,
-      @required String account,
+      {String? subtype,
+      required String? previous,
+      required String? representative,
+      required String? balance,
+      required String? link,
+      required String? account,
       this.privKey,
       this.localCurrencyValue}) {
     this.link = link;
@@ -84,33 +84,33 @@ class StateBlock {
   }
 
   /// Used to set balance after receiving previous balance info from server
-  void setBalance(String previousBalance) {
+  void setBalance(String? previousBalance) {
     if (this.sendAmount == null) {
       return;
     }
-    BigInt previous = BigInt.parse(previousBalance);
+    BigInt previous = BigInt.parse(previousBalance!);
     if (this.subType == BlockTypes.SEND) {
       // Subtract sendAmount from previous balance
       // If given a 0 as sendAmount, this is a special case indicating a max send
-      if (BigInt.parse(sendAmount) == BigInt.zero) {
+      if (BigInt.parse(sendAmount!) == BigInt.zero) {
         this.balance = "0";
       } else {
-        this.balance = (previous - BigInt.parse(sendAmount)).toString();
+        this.balance = (previous - BigInt.parse(sendAmount!)).toString();
       }
     } else if (this.subType == BlockTypes.RECEIVE) {
       // Add previous balance to sendAmount
-      this.balance = (previous + BigInt.parse(sendAmount)).toString();
+      this.balance = (previous + BigInt.parse(sendAmount!)).toString();
     }
   }
 
   /// Sign block with private key
   /// Returns signature if signed, null if this block is invalid and can't be signed
-  Future<String> sign(String privateKey) async {
+  Future<String?> sign(String? privateKey) async {
     if (this.balance == null) {
       return null;
     }
-    this.hash = NanoBlocks.computeStateHash(NanoAccountType.NANO, this.account, this.previous, this.representative, BigInt.parse(this.balance), this.link);
-    this.signature = NanoSignatures.signBlock(this.hash, privateKey);
+    this.hash = NanoBlocks.computeStateHash(NanoAccountType.NANO, this.account!, this.previous!, this.representative!, BigInt.parse(this.balance!), this.link!);
+    this.signature = NanoSignatures.signBlock(this.hash!, privateKey!);
     return this.signature;
   }
 

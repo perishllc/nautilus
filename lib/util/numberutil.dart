@@ -12,7 +12,7 @@ class NumberUtil {
   /// @param raw 100000000000000000000000000000
   /// @return Decimal value 1.000000000000000000000000000000
   ///
-  static Decimal getRawAsUsableDecimal(String raw) {
+  static Decimal getRawAsUsableDecimal(String? raw) {
     Decimal amount = Decimal.parse(raw.toString());
     Decimal result = (amount / Decimal.parse(rawPerNano.toString())).toDecimal();
     return result;
@@ -23,7 +23,7 @@ class NumberUtil {
   /// @param raw 100000000000000000000000000000
   /// @return Decimal value 1.000000000000000000000000000000
   ///
-  static Decimal getRawAsNyanoDecimal(String raw) {
+  static Decimal getRawAsNyanoDecimal(String? raw) {
     Decimal amount = Decimal.parse(raw.toString());
     Decimal result = (amount / Decimal.parse(rawPerNyano.toString())).toDecimal();
     return result;
@@ -35,7 +35,7 @@ class NumberUtil {
   /// @return double value 1.05
   ///
   static double truncateDecimal(Decimal input, {int digits = maxDecimalDigits}) {
-    return (input * Decimal.fromInt(pow(10, digits))).toDouble() / pow(10, digits);
+    return (input * Decimal.fromInt(pow(10, digits) as int)).toDouble() / pow(10, digits);
   }
 
   /// Return raw as a normal amount.
@@ -43,7 +43,7 @@ class NumberUtil {
   /// @param raw 100000000000000000000000000000
   /// @returns 1
   ///
-  static String getRawAsUsableString(String raw) {
+  static String getRawAsUsableString(String? raw) {
     NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: maxDecimalDigits, symbol: '');
     String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw), digits: maxDecimalDigits));
     var split = asString.split(".");
@@ -75,7 +75,7 @@ class NumberUtil {
   /// @param raw 100000000000000000000000000000
   /// @returns 1
   ///
-  static String getRawAsUsableStringPrecise(String raw) {
+  static String getRawAsUsableStringPrecise(String? raw) {
     NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: (maxDecimalDigits + 6), symbol: '');
     String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw), digits: (maxDecimalDigits + 6)));
     var split = asString.split(".");
@@ -107,7 +107,7 @@ class NumberUtil {
   /// @param raw 100000000000000000000000000000
   /// @returns 1
   ///
-  static String getRawAsNyanoString(String raw) {
+  static String getRawAsNyanoString(String? raw) {
     NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: maxDecimalDigits, symbol: '');
     String asString = nf.format(truncateDecimal(getRawAsNyanoDecimal(raw)));
     var split = asString.split(".");
@@ -163,7 +163,7 @@ class NumberUtil {
   /// Return percentage of total supploy
   /// @param amount 10020243004141
   /// @return 0.0000001%
-  static String getPercentOfTotalSupply(BigInt amount) {
+  static String getPercentOfTotalSupply(BigInt? amount) {
     Decimal totalSupply = Decimal.parse('133248290000000000000000000000000000000');
     Decimal amountRaw = Decimal.parse(amount.toString());
     return ((amountRaw / totalSupply).toDecimal() * Decimal.fromInt(100)).toStringAsFixed(4);

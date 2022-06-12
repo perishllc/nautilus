@@ -7,9 +7,9 @@ part of 'blocked.dart';
 // **************************************************************************
 
 Blocked _$UserFromJson(Map<String, dynamic> json) => Blocked(
-      username: json['name'] as String,
-      address: json['address'] as String,
-      name: json['name'] as String,
+      username: json['name'] as String?,
+      address: json['address'] as String?,
+      name: json['name'] as String?,
     );
 
 Map<String, dynamic> _$BlockedToJson(Blocked instance) => <String, dynamic>{

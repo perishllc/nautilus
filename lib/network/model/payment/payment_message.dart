@@ -7,30 +7,30 @@ part 'payment_message.g.dart';
 @JsonSerializable()
 class PaymentMessage extends BaseRequest {
   @JsonKey(name: 'action')
-  String action;
+  String? action;
 
   @JsonKey(name: 'account')
-  String account;
+  String? account;
 
   @JsonKey(name: 'requesting_account')
-  String requesting_account;
+  String? requesting_account;
 
   @JsonKey(name: 'request_signature')
-  String request_signature;
+  String? request_signature;
 
   @JsonKey(name: 'request_nonce')
-  String request_nonce;
+  String? request_nonce;
 
   @JsonKey(name: 'memo_enc')
-  String memo_enc;
+  String? memo_enc;
 
   @JsonKey(name: 'local_uuid')
-  String local_uuid;
+  String? local_uuid;
 
   // @JsonKey(name: 'username')
   // String username;
 
-  PaymentMessage({String action, String account, String requesting_account, String request_signature, String request_nonce, String memo_enc, String local_uuid})
+  PaymentMessage({String? action, String? account, String? requesting_account, String? request_signature, String? request_nonce, String? memo_enc, String? local_uuid})
       : super() {
     this.action = Actions.PAYMENT_MESSAGE;
     this.account = account ?? "";

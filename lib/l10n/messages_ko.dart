@@ -19,7 +19,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ko';
 
-  final messages = _notInlinedMessages(_notInlinedMessages);
+  final Map<String, dynamic> messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "addContact" : MessageLookupByLibrary.simpleMessage("연락처 추가"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("주소가 복사되었습니다 "),

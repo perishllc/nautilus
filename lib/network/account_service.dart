@@ -69,10 +69,10 @@ const String _UD_ENDPOINT = "https://unstoppabledomains.g.alchemy.com/domains/";
 const String _ENS_RPC_ENDPOINT = "https://mainnet.infura.io/v3/";
 const String _ENS_WSS_ENDPOINT = "wss://mainnet.infura.io/ws/v3/";
 
-Web3Client _web3Client;
-Ens ens;
+late Web3Client _web3Client;
+late Ens ens;
 
-Map decodeJson(dynamic src) {
+Map? decodeJson(dynamic src) {
   return json.decode(src);
 }
 
@@ -81,19 +81,19 @@ class AccountService {
   final Logger log = sl.get<Logger>();
 
   // For all requests we place them on a queue with expiry to be processed sequentially
-  Queue<RequestItem> _requestQueue;
+  Queue<RequestItem>? _requestQueue;
 
   // WS Client
-  IOWebSocketChannel _channel;
+  IOWebSocketChannel? _channel;
 
   // WS connection status
-  bool _isConnected;
-  bool _isConnecting;
-  bool suspended; // When the app explicity closes the connection
+  late bool _isConnected;
+  late bool _isConnecting;
+  late bool suspended; // When the app explicity closes the connection
   bool fallbackConnected = false;
 
   // Lock instance for synchronization
-  Lock _lock;
+  late Lock _lock;
 
   // Constructor
   AccountService() {
@@ -107,14 +107,14 @@ class AccountService {
 
   // Re-connect handling
   bool _isInRetryState = false;
-  StreamSubscription<dynamic> reconnectStream;
+  StreamSubscription<dynamic>? reconnectStream;
 
   /// Retry up to once per 3 seconds
   Future<void> reconnectToService() async {
     if (_isInRetryState) {
       return;
     } else if (reconnectStream != null) {
-      reconnectStream.cancel();
+      reconnectStream!.cancel();
     }
     _isInRetryState = true;
     log.d("Retrying connection in 3 seconds...");
@@ -174,7 +174,7 @@ class AccountService {
       _isConnecting = false;
       _isConnected = true;
       EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.CONNECTED));
-      _channel.stream.listen(_onMessageReceived, onDone: connectionClosed, onError: connectionClosedError);
+      _channel!.stream.listen(_onMessageReceived, onDone: connectionClosed, onError: connectionClosedError);
     } catch (e) {
       log.e("Error from service ${e.toString()}", e);
       _isConnected = false;
@@ -206,8 +206,8 @@ class AccountService {
   // Close connection
   void reset({bool suspend = false}) {
     suspended = suspend;
-    if (_channel != null && _channel.sink != null) {
-      _channel.sink.close();
+    if (_channel != null && _channel!.sink != null) {
+      _channel!.sink.close();
       _isConnected = false;
       _isConnecting = false;
     }
@@ -217,8 +217,8 @@ class AccountService {
   Future<void> _send(String message) async {
     bool reset = false;
     try {
-      if (_channel != null && _channel.sink != null && _isConnected) {
-        _channel.sink.add(message);
+      if (_channel != null && _channel!.sink != null && _isConnected) {
+        _channel!.sink.add(message);
       } else {
         reset = true; // Re-establish connection
       }
@@ -227,7 +227,7 @@ class AccountService {
     } finally {
       if (reset) {
         // Reset queue item statuses
-        _requestQueue.forEach((requestItem) {
+        _requestQueue!.forEach((requestItem) {
           requestItem.isProcessing = false;
         });
         if (!_isConnecting && !suspended) {
@@ -245,7 +245,11 @@ class AccountService {
       _isConnected = true;
       _isConnecting = false;
       // log.d("Received $message");
-      Map msg = await compute(decodeJson, message);
+      // Map msg = await compute(decodeJson as FutureOr<Map<dynamic, dynamic>> Function(dynamic), message);
+      Map? msg = await compute(decodeJson, message);
+      if (msg == null) {
+        throw Exception("Invalid JSON received");
+      }
       // Determine response type
       if (msg.containsKey("uuid") ||
           (msg.containsKey("frontier") && msg.containsKey("representative_block")) ||
@@ -256,13 +260,13 @@ class AccountService {
         EventTaxiImpl.singleton().fire(SubscribeEvent(response: resp));
       } else if (msg.containsKey("currency") && msg.containsKey("price") && msg.containsKey("btc")) {
         // Price info sent from server
-        PriceResponse resp = PriceResponse.fromJson(msg);
+        PriceResponse resp = PriceResponse.fromJson(msg as Map<String, dynamic>);
         EventTaxiImpl.singleton().fire(PriceEvent(response: resp));
       } else if (msg.containsKey("block") && msg.containsKey("hash") && msg.containsKey("account")) {
         CallbackResponse resp = await compute(callbackResponseFromJson, msg);
         EventTaxiImpl.singleton().fire(CallbackEvent(response: resp));
       } else if (msg.containsKey("error")) {
-        ErrorResponse resp = ErrorResponse.fromJson(msg);
+        ErrorResponse resp = ErrorResponse.fromJson(msg as Map<String, dynamic>);
         EventTaxiImpl.singleton().fire(ErrorEvent(response: resp));
       }
       return;
@@ -279,16 +283,16 @@ class AccountService {
   /* Enqueue Request */
   void queueRequest(BaseRequest request, {bool fromTransfer = false}) {
     //log.d("request ${json.encode(request.toJson())}, q length: ${_requestQueue.length}");
-    _requestQueue.add(new RequestItem(request, fromTransfer: fromTransfer));
+    _requestQueue!.add(new RequestItem(request, fromTransfer: fromTransfer));
   }
 
   /* Process Queue */
   Future<void> processQueue() async {
     await _lock.synchronized(() async {
       //log.d("Request Queue length ${_requestQueue.length}");
-      if (_requestQueue != null && _requestQueue.length > 0) {
-        RequestItem requestItem = _requestQueue.first;
-        if (requestItem != null && !requestItem.isProcessing) {
+      if (_requestQueue != null && _requestQueue!.length > 0) {
+        RequestItem requestItem = _requestQueue!.first;
+        if (requestItem != null && !requestItem.isProcessing!) {
           if (!_isConnected && !_isConnecting && !suspended) {
             initCommunication();
             return;
@@ -299,7 +303,7 @@ class AccountService {
           String requestJson = await compute(encodeRequestItem, requestItem.request);
           //log.d("Sending: $requestJson");
           await _send(requestJson);
-        } else if (requestItem != null && (DateTime.now().difference(requestItem.expireDt).inSeconds > RequestItem.EXPIRE_TIME_S)) {
+        } else if (requestItem != null && (DateTime.now().difference(requestItem.expireDt!).inSeconds > RequestItem.EXPIRE_TIME_S)) {
           pop();
           processQueue();
         }
@@ -309,77 +313,83 @@ class AccountService {
 
   // Queue Utilities
   bool queueContainsRequestWithHash(String hash) {
-    if (_requestQueue != null || _requestQueue.length == 0) {
+    // if (_requestQueue != null || _requestQueue!.length == 0) {
+    //   return false;
+    // }
+    // NATRIUM fix:
+    if (_requestQueue == null || _requestQueue!.length == 0) {
       return false;
     }
-    _requestQueue.forEach((requestItem) {
+
+    for (var requestItem in _requestQueue!) {
       if (requestItem.request is ProcessRequest) {
         ProcessRequest request = requestItem.request;
-        StateBlock block = StateBlock.fromJson(json.decode(request.block));
+        StateBlock block = StateBlock.fromJson(json.decode(request.block!));
         if (block.hash == hash) {
           return true;
         }
       }
-    });
+    }
     return false;
   }
 
   bool queueContainsOpenBlock() {
-    if (_requestQueue != null || _requestQueue.length == 0) {
+    // NATRIUM fix:
+    if (_requestQueue == null || _requestQueue!.length == 0) {
       return false;
     }
-    _requestQueue.forEach((requestItem) {
+    for (var requestItem in _requestQueue!) {
       if (requestItem.request is ProcessRequest) {
         ProcessRequest request = requestItem.request;
-        StateBlock block = StateBlock.fromJson(json.decode(request.block));
-        if (BigInt.tryParse(block.previous) == BigInt.zero) {
+        StateBlock block = StateBlock.fromJson(json.decode(request.block!));
+        if (BigInt.tryParse(block.previous!) == BigInt.zero) {
           return true;
         }
       }
-    });
+    }
     return false;
   }
 
   void removeSubscribeHistoryPendingFromQueue() {
-    if (_requestQueue != null && _requestQueue.length > 0) {
-      List<RequestItem> toRemove = new List();
-      _requestQueue.forEach((requestItem) {
+    if (_requestQueue != null && _requestQueue!.length > 0) {
+      List<RequestItem> toRemove = [];
+      _requestQueue!.forEach((requestItem) {
         if ((requestItem.request is SubscribeRequest || requestItem.request is AccountHistoryRequest || requestItem.request is PendingRequest) &&
-            !requestItem.isProcessing) {
+            !requestItem.isProcessing!) {
           toRemove.add(requestItem);
         }
       });
       toRemove.forEach((requestItem) {
-        _requestQueue.remove(requestItem);
+        _requestQueue!.remove(requestItem);
       });
     }
   }
 
-  RequestItem pop() {
-    return _requestQueue.length > 0 ? _requestQueue.removeFirst() : null;
+  RequestItem? pop() {
+    return _requestQueue!.length > 0 ? _requestQueue!.removeFirst() : null;
   }
 
-  RequestItem peek() {
-    return _requestQueue.length > 0 ? _requestQueue.first : null;
+  RequestItem? peek() {
+    return _requestQueue!.length > 0 ? _requestQueue!.first : null;
   }
 
   /// Clear entire queue, except for AccountsBalancesRequest
   void clearQueue() {
-    List<RequestItem> reQueue = List();
-    _requestQueue.forEach((requestItem) {
+    List<RequestItem> reQueue = [];
+    _requestQueue!.forEach((requestItem) {
       if (requestItem.request is AccountsBalancesRequest) {
         reQueue.add(requestItem);
       }
     });
-    _requestQueue.clear();
+    _requestQueue!.clear();
     // Re-queue requests
     reQueue.forEach((requestItem) {
       requestItem.isProcessing = false;
-      _requestQueue.add(requestItem);
+      _requestQueue!.add(requestItem);
     });
   }
 
-  Queue<RequestItem> get requestQueue => _requestQueue;
+  Queue<RequestItem>? get requestQueue => _requestQueue;
 
   // HTTP API
 
@@ -392,25 +402,25 @@ class AccountService {
     }
     Map decoded = json.decode(response.body);
     if (decoded.containsKey("error")) {
-      return ErrorResponse.fromJson(decoded);
+      return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
     }
 
     return decoded;
   }
 
-  Future<String> checkUnstoppableDomain(String domain) async {
+  Future<String?> checkUnstoppableDomain(String domain) async {
     http.Response response =
         await http.get(Uri.parse(_UD_ENDPOINT + domain), headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${Sensitive.UD_API_KEY}'});
 
     if (response.statusCode != 200) {
       return null;
     }
-    Map decoded = json.decode(response.body);
-    String address;
+    Map? decoded = json.decode(response.body);
+    String? address;
 
     if (decoded != null && decoded["records"] != null && decoded["records"]["crypto.NANO.address"] != null) {
       address = decoded["records"]["crypto.NANO.address"];
-      if (NanoAccounts.isValid(NanoAccountType.NANO, address)) {
+      if (NanoAccounts.isValid(NanoAccountType.NANO, address!)) {
         return address;
       }
     }
@@ -418,7 +428,7 @@ class AccountService {
     return null;
   }
 
-  Future<String> checkENSDomain(String domain) async {
+  Future<String?> checkENSDomain(String domain) async {
     final pubKey = await ens.withName(domain).getCoinAddress(CoinType.NANO);
     if (pubKey == null || pubKey.isEmpty) {
       return null;
@@ -440,7 +450,7 @@ class AccountService {
     }
     Map decoded = json.decode(response.body);
     if (decoded.containsKey("error")) {
-      return ErrorResponse.fromJson(decoded);
+      return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
     }
 
     return decoded;
@@ -458,7 +468,7 @@ class AccountService {
     }
     Map decoded = json.decode(response.body);
     if (decoded.containsKey("error")) {
-      return ErrorResponse.fromJson(decoded);
+      return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
     }
     return decoded;
   }
@@ -476,7 +486,7 @@ class AccountService {
     return infoResponse;
   }
 
-  Future<PendingResponse> getPending(String account, int count, {String threshold, bool includeActive = false}) async {
+  Future<PendingResponse> getPending(String? account, int count, {String? threshold, bool includeActive = false}) async {
     threshold = threshold ?? BigInt.from(10).pow(24).toString();
 
     PendingRequest request = PendingRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
@@ -493,7 +503,7 @@ class AccountService {
     return pr;
   }
 
-  Future<BlockInfoItem> requestBlockInfo(String hash) async {
+  Future<BlockInfoItem> requestBlockInfo(String? hash) async {
     BlockInfoRequest request = BlockInfoRequest(hash: hash);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
@@ -503,7 +513,7 @@ class AccountService {
     return item;
   }
 
-  Future<AccountHistoryResponse> requestAccountHistory(String account, {int count = 1, bool raw = false}) async {
+  Future<AccountHistoryResponse> requestAccountHistory(String? account, {int count = 1, bool raw = false}) async {
     AccountHistoryRequest request = AccountHistoryRequest(account: account, count: count, raw: raw);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
@@ -521,8 +531,8 @@ class AccountService {
   }
 
   // request money from an account:
-  /*Future<PaymentResponse> */ Future<void> requestPayment(
-      String account, String amount_raw, String requesting_account, String request_signature, String request_nonce, String memo_enc, String local_uuid) async {
+  /*Future<PaymentResponse> */ Future<void> requestPayment(String? account, String? amount_raw, String? requesting_account, String request_signature,
+      String request_nonce, String? memo_enc, String local_uuid) async {
     PaymentRequest request = PaymentRequest(
         account: account,
         amount_raw: amount_raw,
@@ -540,8 +550,8 @@ class AccountService {
   }
 
   // send payment record (memo) to an account:
-  Future<void> sendTXMemo(String account, String requesting_account, String amount_raw, String request_signature, String request_nonce, String memo_enc,
-      String block, String local_uuid) async {
+  Future<void> sendTXMemo(String? account, String? requesting_account, String? amount_raw, String request_signature, String request_nonce, String memo_enc,
+      String? block, String local_uuid) async {
     PaymentMemo request = PaymentMemo(
         account: account,
         requesting_account: requesting_account,
@@ -556,7 +566,8 @@ class AccountService {
     }
   }
 
-  Future<void> sendTXMessage(String account, String requesting_account, String request_signature, String request_nonce, String memo_enc, String local_uuid) async {
+  Future<void> sendTXMessage(
+      String? account, String? requesting_account, String request_signature, String request_nonce, String memo_enc, String local_uuid) async {
     PaymentMessage request = PaymentMessage(
         account: account,
         requesting_account: requesting_account,
@@ -570,7 +581,7 @@ class AccountService {
     }
   }
 
-  Future<void> requestACK(String request_uuid, String account, String requesting_account) async {
+  Future<void> requestACK(String? request_uuid, String? account, String? requesting_account) async {
     PaymentACK request = PaymentACK(uuid: request_uuid, account: account, requesting_account: requesting_account);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
@@ -578,7 +589,7 @@ class AccountService {
     }
   }
 
-  Future<AccountsBalancesResponse> requestAccountsBalances(List<String> accounts) async {
+  Future<AccountsBalancesResponse> requestAccountsBalances(List<String?> accounts) async {
     AccountsBalancesRequest request = AccountsBalancesRequest(accounts: accounts);
     dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
@@ -596,12 +607,12 @@ class AccountService {
     return item;
   }
 
-  Future<ProcessResponse> requestReceive(String representative, String previous, String balance, String link, String account, String privKey) async {
+  Future<ProcessResponse> requestReceive(String? representative, String? previous, String? balance, String? link, String? account, String? privKey) async {
     StateBlock receiveBlock = StateBlock(
         subtype: BlockTypes.RECEIVE, previous: previous, representative: representative, balance: balance, link: link, account: account, privKey: privKey);
 
     BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents));
+    StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!));
 
     // Update data on our next pending request
     receiveBlock.representative = previousBlock.representative;
@@ -614,7 +625,7 @@ class AccountService {
     return await requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestSend(String representative, String previous, String sendAmount, String link, String account, String privKey,
+  Future<ProcessResponse> requestSend(String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
       {bool max = false}) async {
     StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
@@ -626,7 +637,7 @@ class AccountService {
         privKey: privKey);
 
     BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents));
+    StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!));
 
     // Update data on our next pending request
     sendBlock.representative = previousBlock.representative;
@@ -639,7 +650,7 @@ class AccountService {
     return await requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestOpen(String balance, String link, String account, String privKey, {String representative}) async {
+  Future<ProcessResponse> requestOpen(String? balance, String? link, String? account, String? privKey, {String? representative}) async {
     representative = representative ?? await sl.get<SharedPrefsUtil>().getRepresentative();
     StateBlock openBlock =
         StateBlock(subtype: BlockTypes.OPEN, previous: "0", representative: representative, balance: balance, link: link, account: account, privKey: privKey);
@@ -653,7 +664,7 @@ class AccountService {
     return await requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestChange(String account, String representative, String previous, String balance, String privKey) async {
+  Future<ProcessResponse> requestChange(String? account, String? representative, String? previous, String balance, String privKey) async {
     StateBlock chgBlock = StateBlock(
         subtype: BlockTypes.CHANGE,
         previous: previous,
@@ -664,7 +675,7 @@ class AccountService {
         privKey: privKey);
 
     BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents));
+    StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!));
 
     // Update data on our next pending request
     chgBlock.setBalance(previousBlock.balance);
@@ -676,13 +687,13 @@ class AccountService {
     return await requestProcess(processRequest);
   }
 
-  Future<AlertResponseItem> getAlert(String lang) async {
+  Future<AlertResponseItem?> getAlert(String lang) async {
     http.Response response = await http.get(Uri.parse(_SERVER_ADDRESS_ALERTS + "/" + lang), headers: {"Accept": "application/json"});
     if (response.statusCode == 200) {
       List<AlertResponseItem> alerts;
       alerts = (json.decode(response.body) as List).map((i) => AlertResponseItem.fromJson(i)).toList();
       if (alerts.length > 0) {
-        if (alerts[0].active) {
+        if (alerts[0].active!) {
           return alerts[0];
         }
       }
