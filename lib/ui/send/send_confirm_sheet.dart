@@ -360,7 +360,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         var memoTXData = new TXData(
           from_address: StateContainer.of(context).wallet!.address,
           to_address: destinationAltered,
-          amount_raw: widget.amountRaw,
+          amount_raw: widget.amountRaw != "0" ? widget.amountRaw : null,
           uuid: local_uuid,
           block: resp?.hash ?? null,
           is_acknowledged: false,
@@ -368,7 +368,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           is_request: false,
           is_memo: !is_message,
           is_message: is_message,
-          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
           memo: widget.memo, // store unencrypted memo
           height: currentBlockHeightInList,
         );
@@ -406,9 +406,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           // update the TXData object:
           memoTXData.status = StatusTypes.CREATE_SUCCESS;
           await sl.get<DBHelper>().replaceTXDataByUUID(memoTXData);
-
-          // hack to get tx memo to update:
-          EventTaxiImpl.singleton().fire(TXUpdateEvent());
+          await StateContainer.of(context).updateTXMemos();
         }
       }
 

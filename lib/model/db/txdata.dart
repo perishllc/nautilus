@@ -24,9 +24,9 @@ class TXData {
   @JsonKey(name: 'memo_enc')
   String? memo_enc;
   @JsonKey(name: 'is_memo')
-  bool? is_memo;
+  bool is_memo;
   @JsonKey(name: 'is_message')
-  bool? is_message;
+  bool is_message;
   @JsonKey(name: 'from_address')
   String? from_address;
   @JsonKey(name: 'to_address')
@@ -34,19 +34,19 @@ class TXData {
   @JsonKey(name: 'amount_raw')
   String? amount_raw;
   @JsonKey(name: 'is_request')
-  bool? is_request;
+  bool is_request;
   @JsonKey(name: 'request_time')
-  String? request_time;
+  int? request_time;
   @JsonKey(name: 'is_fulfilled')
-  bool? is_fulfilled;
+  bool is_fulfilled;
   @JsonKey(name: 'fulfillment_time')
-  String? fulfillment_time;
+  int? fulfillment_time;
   @JsonKey(name: 'memo')
   String? memo;
   @JsonKey(name: 'uuid')
   String? uuid;
   @JsonKey(name: 'is_acknowledged')
-  bool? is_acknowledged;
+  bool is_acknowledged;
   @JsonKey(name: 'height')
   int? height;
   @JsonKey(name: 'send_height')
@@ -113,7 +113,7 @@ class TXData {
   }
 
   bool isSolid() {
-    return this.is_message! || this.is_request!;
+    return this.is_message || this.is_request;
   }
 
   factory TXData.fromJson(Map<String, dynamic> json) {
@@ -121,18 +121,18 @@ class TXData {
         from_address: json["from_address"] as String?,
         to_address: json["to_address"] as String?,
         amount_raw: json["amount_raw"] as String?,
-        is_request: json["is_request"] as bool?,
-        request_time: json["request_time"] as String?,
-        is_fulfilled: json["is_fulfilled"] as bool?,
-        fulfillment_time: json["fulfillment_time"] as String?,
+        is_request: json["is_request"] as bool,
+        request_time: json["request_time"] as int?,
+        is_fulfilled: json["is_fulfilled"] as bool,
+        fulfillment_time: json["fulfillment_time"] as int?,
         block: json["block"] as String?,
         link: json["link"] as String?,
         memo_enc: json["memo_enc"] as String?,
-        is_memo: json["is_memo"] as bool?,
-        is_message: json["is_message"] as bool?,
+        is_memo: json["is_memo"] as bool,
+        is_message: json["is_message"] as bool,
         memo: json["memo"] as String?,
         uuid: json["uuid"] as String?,
-        is_acknowledged: json["is_acknowledged"] as bool?,
+        is_acknowledged: json["is_acknowledged"] as bool,
         height: json["height"] as int?,
         send_height: json["send_height"] as int?,
         recv_height: json["recv_height"] as int?,
@@ -175,18 +175,18 @@ TXData _$TXDataFromJson(Map<String, dynamic> json) => TXData(
       from_address: json['from_address'] as String?,
       to_address: json['to_address'] as String?,
       amount_raw: json['amount_raw'] as String?,
-      is_request: json['is_request'] as bool?,
-      request_time: json['request_time'] as String?,
-      is_fulfilled: json['is_fulfilled'] as bool?,
-      fulfillment_time: json['fulfillment_time'] as String?,
+      is_request: json['is_request'] as bool,
+      request_time: json['request_time'] as int?,
+      is_fulfilled: json['is_fulfilled'] as bool,
+      fulfillment_time: json['fulfillment_time'] as int?,
       block: json['block'] as String?,
       link: json['link'] as String?,
-      is_memo: json['is_memo'] as bool?,
-      is_message: json['is_message'] as bool?,
+      is_memo: json['is_memo'] as bool,
+      is_message: json['is_message'] as bool,
       memo: json['memo'] as String?,
       memo_enc: json['memo_enc'] as String?,
       uuid: json['uuid'] as String?,
-      is_acknowledged: json['is_acknowledged'] as bool?,
+      is_acknowledged: json['is_acknowledged'] as bool,
       height: json['height'] as int?,
       send_height: json['send_height'] as int?,
       recv_height: json['recv_height'] as int?,

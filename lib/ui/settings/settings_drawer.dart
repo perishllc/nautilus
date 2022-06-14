@@ -16,6 +16,7 @@ import 'package:nautilus_wallet_flutter/ui/settings/disable_password_sheet.dart'
 import 'package:nautilus_wallet_flutter/ui/settings/set_password_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
@@ -66,6 +67,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   late Animation<Offset> _contactsOffsetFloat;
   late Animation<Offset> _blockedOffsetFloat;
   late Animation<Offset> _securityOffsetFloat;
+  late ScrollController _scrollController;
 
   String versionString = "";
 
@@ -210,6 +212,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       vsync: this,
       duration: const Duration(milliseconds: 220),
     );
+
+    _scrollController = ScrollController();
 
     _contactsOffsetFloat = Tween<Offset>(begin: Offset(1.1, 0), end: Offset(0, 0)).animate(_contactsController!);
     _securityOffsetFloat = Tween<Offset>(begin: Offset(1.1, 0), end: Offset(0, 0)).animate(_securityController);
@@ -951,6 +955,388 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     );
   }
 
+  Widget _buildSettingsList() {
+    return ListView(
+      padding: EdgeInsets.only(top: 15.0),
+      controller: _scrollController,
+      children: [
+        // Active Alerts, Remote Message Card
+        StateContainer.of(context).settingsAlert != null
+            ? Container(
+                padding: EdgeInsetsDirectional.only(
+                  start: 12,
+                  end: 12,
+                  bottom: 20,
+                ),
+                child: RemoteMessageCard(
+                  alert: StateContainer.of(context).settingsAlert,
+                  onPressed: () {
+                    Sheets.showAppHeightEightSheet(
+                      context: context,
+                      widget: RemoteMessageSheet(
+                        alert: StateContainer.of(context).settingsAlert,
+                        hasDismissButton: false,
+                      ),
+                    );
+                  },
+                ),
+              )
+            : SizedBox(),
+        Container(
+          margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+          child: Text(AppLocalization.of(context)!.featured,
+              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+        ),
+        // Divider(
+        //   height: 2,
+        //   color: StateContainer.of(context).curTheme.text15,
+        // ),
+        // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).home, AppIcons.home, onPressed: () {
+        //   Navigator.of(context).pushNamed("/home_transition");
+        // }),
+        // Divider(
+        //   height: 2,
+        //   color: StateContainer.of(context).curTheme.text15,
+        // ),
+        // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).payments, AppIcons.money_bill_alt, onPressed: () {
+        //   Navigator.of(context).pushNamed("/payments_page");
+        // }),
+        // TODO: Add back later:
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.purchaseNano, AppIcons.coins, onPressed: () {
+          _onrampDialog().then((choice) {
+            if (choice == null) {
+              return;
+            }
+            Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+              return UIUtil.showWebview(context, choice);
+            }));
+          });
+
+          // Navigator.of(context).pushNamed("/purchase_nano");
+        }),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.registerUsername, AppIcons.at, onPressed: () {
+          Navigator.of(context).pushNamed("/register_username");
+        }),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.createGiftCard, AppIcons.export_icon, onPressed: () {
+          Navigator.of(context).pushNamed("/generate_paper_wallet");
+        }),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        Container(
+          margin: EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
+          child: Text(AppLocalization.of(context)!.preferences,
+              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+        ),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemDoubleLine(
+            context, AppLocalization.of(context)!.changeCurrency, StateContainer.of(context).curCurrency, AppIcons.currency, _currencyDialog),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemDoubleLine(
+            context, AppLocalization.of(context)!.language, StateContainer.of(context).curLanguage, AppIcons.language, _languageDialog),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemDoubleLine(
+            context, AppLocalization.of(context)!.notifications, _curNotificiationSetting, AppIcons.notifications, _notificationsDialog),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context)!.themeHeader, _curThemeSetting, AppIcons.theme, _themeDialog),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.securityHeader, AppIcons.security, onPressed: () {
+          setState(() {
+            _securityOpen = true;
+          });
+          _securityController.forward();
+        }),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemDoubleLine(
+            context, AppLocalization.of(context)!.receiveMinimum, _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemDoubleLine(
+            context, AppLocalization.of(context)!.currencyMode, _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemDoubleLine(
+          context,
+          AppLocalization.of(context)!.blockExplorer,
+          StateContainer.of(context).curBlockExplorer,
+          AppIcons.search,
+          _explorerDialog,
+        ),
+        Container(
+          margin: EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
+          child: Text(AppLocalization.of(context)!.manage,
+              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+        ),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.favoritesHeader, AppIcons.star, onPressed: () {
+          setState(() {
+            _contactsOpen = true;
+          });
+          _contactsController!.forward();
+        }),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.blockedHeader, AppIcons.block, onPressed: () {
+          setState(() {
+            _blockedOpen = true;
+          });
+          _blockedController!.forward();
+        }),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.backupSecretPhrase, AppIcons.backupseed, onPressed: () async {
+          // Authenticate
+          AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+          bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+          if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+            try {
+              bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.fingerprintSeedBackup);
+              if (authenticated) {
+                sl.get<HapticUtil>().fingerprintSucess();
+                StateContainer.of(context).getSeed().then((seed) {
+                  AppSeedBackupSheet(seed).mainBottomSheet(context);
+                });
+              }
+            } catch (e) {
+              AppDialogs.showConfirmDialog(
+                  context,
+                  "Error",
+                  e.toString(),
+                  "Copy to clipboard",
+                  () {
+                    Clipboard.setData(ClipboardData(text: e.toString()));
+                  },
+                  cancelText: "Close",
+                  cancelAction: () {
+                    Navigator.of(context).pop();
+                  });
+              await authenticateWithPin();
+            }
+          } else {
+            await authenticateWithPin();
+          }
+        }),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.settingsTransfer, AppIcons.transferfunds, onPressed: () {
+          AppTransferOverviewSheet().mainBottomSheet(context);
+        }),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.changeRepAuthenticate, AppIcons.changerepresentative, onPressed: () {
+          new AppChangeRepresentativeSheet().mainBottomSheet(context);
+          if (!StateContainer.of(context).nanoNinjaUpdated) {
+            NinjaAPI.getVerifiedNodes().then((result) {
+              if (result != null) {
+                StateContainer.of(context).updateNinjaNodes(result);
+              }
+            });
+          }
+        }),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.shareNautilus, AppIcons.share, onPressed: () {
+          Share.share("Check out Nautilus - NANO Wallet for iOS and Android" + " https://nautiluswallet.app");
+        }),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.destroyDatabase, AppIcons.trashcan, onPressed: () async {
+          AppDialogs.showConfirmDialog(context, AppLocalization.of(context)!.destroyDatabase, AppLocalization.of(context)!.destroyDatabaseConfirmation,
+              CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () async {
+            // Delete the database
+            await sl.get<DBHelper>().nukeDatabase();
+            // re-add account index 0 and switch the account to it:
+            String? seed = await StateContainer.of(context).getSeed();
+            await sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context)!.defaultAccountName);
+            var mainAccount = await sl.get<DBHelper>().getMainAccount(seed);
+            await sl.get<DBHelper>().changeAccount(mainAccount);
+            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
+          }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
+        }),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.logout, AppIcons.logout, onPressed: () {
+          AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(AppLocalization.of(context)!.warning, context),
+              AppLocalization.of(context)!.logoutDetail, AppLocalization.of(context)!.logoutAction.toUpperCase(), () {
+            // Show another confirm dialog
+            AppDialogs.showConfirmDialog(context, AppLocalization.of(context)!.logoutAreYouSure, AppLocalization.of(context)!.logoutReassurance,
+                CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () {
+              // Unsubscribe from notifications
+              sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((_) async {
+                try {
+                  String? fcmToken = await FirebaseMessaging.instance.getToken();
+                  EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
+                  EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
+                } catch (e) {}
+                try {
+                  // Delete all data
+                  sl.get<Vault>().deleteAll().then((_) {
+                    sl.get<SharedPrefsUtil>().deleteAll().then((result) {
+                      StateContainer.of(context).logOut();
+                      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+                    });
+                  });
+                } catch (e) {}
+              });
+            });
+          });
+        }),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        Padding(
+            padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+            child: Column(
+              children: [
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: <Widget>[
+                //     Text(versionString, style: AppStyles.textStyleVersion(context)),
+                //     Text(" | ", style: AppStyles.textStyleVersion(context)),
+                //     GestureDetector(
+                //         onTap: () {
+                //           Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                //             return UIUtil.showWebview(context, AppLocalization.of(context).privacyUrl);
+                //           }));
+                //         },
+                //         child: Text(AppLocalization.of(context).privacyPolicy, style: AppStyles.textStyleVersionUnderline(context))),
+                //     Text(" | ", style: AppStyles.textStyleVersion(context)),
+                //     GestureDetector(
+                //         onTap: () {
+                //           Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                //             return UIUtil.showWebview(context, AppLocalization.of(context).eulaUrl);
+                //           }));
+                //         },
+                //         child: Text(AppLocalization.of(context).eula, style: AppStyles.textStyleVersionUnderline(context))),
+                //   ],
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: <Widget>[
+                //     GestureDetector(
+                //         onTap: () async {
+                //           Uri uri = Uri.parse(AppLocalization.of(context).discordUrl);
+                //           if (await canLaunchUrl(uri)) {
+                //             await launchUrl(uri);
+                //           }
+                //         },
+                //         child: Text(AppLocalization.of(context).discord, style: AppStyles.textStyleVersionUnderline(context))),
+                //     Text(" | ", style: AppStyles.textStyleVersion(context)),
+                //     GestureDetector(
+                //         onTap: () async {
+                //           await AppDialogs.showChangeLog(context);
+                //         },
+                //         child: Text(AppLocalization.of(context).changeLog, style: AppStyles.textStyleVersionUnderline(context))),
+                //   ],
+                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(versionString, style: AppStyles.textStyleVersion(context)),
+                    Text(" | ", style: AppStyles.textStyleVersion(context)),
+                    GestureDetector(
+                        onTap: () async {
+                          await AppDialogs.showChangeLog(context);
+                        },
+                        child: Text(AppLocalization.of(context)!.changeLog, style: AppStyles.textStyleVersionUnderline(context))),
+                    Text(" | ", style: AppStyles.textStyleVersion(context)),
+                    GestureDetector(
+                        onTap: () async {
+                          Uri uri = Uri.parse(AppLocalization.of(context)!.discordUrl);
+                          if (await canLaunchUrl(uri)) {
+                            await launchUrl(uri);
+                          }
+                        },
+                        child: Text(AppLocalization.of(context)!.discord, style: AppStyles.textStyleVersionUnderline(context))),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                            return UIUtil.showWebview(context, AppLocalization.of(context)!.privacyUrl);
+                          }));
+                        },
+                        child: Text(AppLocalization.of(context)!.privacyPolicy, style: AppStyles.textStyleVersionUnderline(context))),
+                    Text(" | ", style: AppStyles.textStyleVersion(context)),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                            return UIUtil.showWebview(context, AppLocalization.of(context)!.eulaUrl);
+                          }));
+                        },
+                        child: Text(AppLocalization.of(context)!.eula, style: AppStyles.textStyleVersionUnderline(context))),
+                    Text(" | ", style: AppStyles.textStyleVersion(context)),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                            return UIUtil.showWebview(context, AppLocalization.of(context)!.nautilusNodeUrl);
+                          }));
+                        },
+                        child: Text(AppLocalization.of(context)!.nodeStatus, style: AppStyles.textStyleVersionUnderline(context))),
+                  ],
+                ),
+              ],
+            )),
+      ],
+    );
+  }
+
   Widget buildMainSettings(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -1224,407 +1610,32 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             ),
             // Settings items
             Expanded(
-                child: Stack(
-              children: <Widget>[
-                ListView(
-                  padding: EdgeInsets.only(top: 15.0),
-                  children: [
-                    // Active Alerts, Remote Message Card
-                    StateContainer.of(context).settingsAlert != null
-                        ? Container(
-                            padding: EdgeInsetsDirectional.only(
-                              start: 12,
-                              end: 12,
-                              bottom: 20,
-                            ),
-                            child: RemoteMessageCard(
-                              alert: StateContainer.of(context).settingsAlert,
-                              onPressed: () {
-                                Sheets.showAppHeightEightSheet(
-                                  context: context,
-                                  widget: RemoteMessageSheet(
-                                    alert: StateContainer.of(context).settingsAlert,
-                                    hasDismissButton: false,
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                        : SizedBox(),
-                    Container(
-                      margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
-                      child: Text(AppLocalization.of(context)!.featured,
-                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
-                    ),
-                    // Divider(
-                    //   height: 2,
-                    //   color: StateContainer.of(context).curTheme.text15,
-                    // ),
-                    // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).home, AppIcons.home, onPressed: () {
-                    //   Navigator.of(context).pushNamed("/home_transition");
-                    // }),
-                    // Divider(
-                    //   height: 2,
-                    //   color: StateContainer.of(context).curTheme.text15,
-                    // ),
-                    // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).payments, AppIcons.money_bill_alt, onPressed: () {
-                    //   Navigator.of(context).pushNamed("/payments_page");
-                    // }),
-                    // TODO: Add back later:
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.purchaseNano, AppIcons.coins, onPressed: () {
-                      _onrampDialog().then((choice) {
-                        if (choice == null) {
-                          return;
-                        }
-                        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                          return UIUtil.showWebview(context, choice);
-                        }));
-                      });
-
-                      // Navigator.of(context).pushNamed("/purchase_nano");
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.registerUsername, AppIcons.at, onPressed: () {
-                      Navigator.of(context).pushNamed("/register_username");
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.createGiftCard, AppIcons.export_icon, onPressed: () {
-                      Navigator.of(context).pushNamed("/generate_paper_wallet");
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    Container(
-                      margin: EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
-                      child: Text(AppLocalization.of(context)!.preferences,
-                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
-                    ),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context)!.changeCurrency, StateContainer.of(context).curCurrency, AppIcons.currency, _currencyDialog),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context)!.language, StateContainer.of(context).curLanguage, AppIcons.language, _languageDialog),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context)!.notifications, _curNotificiationSetting, AppIcons.notifications, _notificationsDialog),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context)!.themeHeader, _curThemeSetting, AppIcons.theme, _themeDialog),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.securityHeader, AppIcons.security, onPressed: () {
-                      setState(() {
-                        _securityOpen = true;
-                      });
-                      _securityController.forward();
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context)!.receiveMinimum, _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context)!.currencyMode, _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                      context,
-                      AppLocalization.of(context)!.blockExplorer,
-                      StateContainer.of(context).curBlockExplorer,
-                      AppIcons.search,
-                      _explorerDialog,
-                    ),
-                    Container(
-                      margin: EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
-                      child: Text(AppLocalization.of(context)!.manage,
-                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
-                    ),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.favoritesHeader, AppIcons.star, onPressed: () {
-                      setState(() {
-                        _contactsOpen = true;
-                      });
-                      _contactsController!.forward();
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.blockedHeader, AppIcons.block, onPressed: () {
-                      setState(() {
-                        _blockedOpen = true;
-                      });
-                      _blockedController!.forward();
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.backupSecretPhrase, AppIcons.backupseed,
-                        onPressed: () async {
-                      // Authenticate
-                      AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                      bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
-                      if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
-                        try {
-                          bool authenticated =
-                              await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.fingerprintSeedBackup);
-                          if (authenticated) {
-                            sl.get<HapticUtil>().fingerprintSucess();
-                            StateContainer.of(context).getSeed().then((seed) {
-                              AppSeedBackupSheet(seed).mainBottomSheet(context);
-                            });
-                          }
-                        } catch (e) {
-                          AppDialogs.showConfirmDialog(
-                              context,
-                              "Error",
-                              e.toString(),
-                              "Copy to clipboard",
-                              () {
-                                Clipboard.setData(ClipboardData(text: e.toString()));
-                              },
-                              cancelText: "Close",
-                              cancelAction: () {
-                                Navigator.of(context).pop();
-                              });
-                          await authenticateWithPin();
-                        }
-                      } else {
-                        await authenticateWithPin();
-                      }
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.settingsTransfer, AppIcons.transferfunds, onPressed: () {
-                      AppTransferOverviewSheet().mainBottomSheet(context);
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.changeRepAuthenticate, AppIcons.changerepresentative,
-                        onPressed: () {
-                      new AppChangeRepresentativeSheet().mainBottomSheet(context);
-                      if (!StateContainer.of(context).nanoNinjaUpdated) {
-                        NinjaAPI.getVerifiedNodes().then((result) {
-                          if (result != null) {
-                            StateContainer.of(context).updateNinjaNodes(result);
-                          }
-                        });
-                      }
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.shareNautilus, AppIcons.share, onPressed: () {
-                      Share.share("Check out Nautilus - NANO Wallet for iOS and Android" + " https://nautiluswallet.app");
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.destroyDatabase, AppIcons.trashcan, onPressed: () async {
-                      AppDialogs.showConfirmDialog(context, AppLocalization.of(context)!.destroyDatabase,
-                          AppLocalization.of(context)!.destroyDatabaseConfirmation, CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () async {
-                        // Delete the database
-                        await sl.get<DBHelper>().nukeDatabase();
-                        // re-add account index 0 and switch the account to it:
-                        String? seed = await StateContainer.of(context).getSeed();
-                        await sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context)!.defaultAccountName);
-                        var mainAccount = await sl.get<DBHelper>().getMainAccount(seed);
-                        await sl.get<DBHelper>().changeAccount(mainAccount);
-                        EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
-                      }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.logout, AppIcons.logout, onPressed: () {
-                      AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(AppLocalization.of(context)!.warning, context),
-                          AppLocalization.of(context)!.logoutDetail, AppLocalization.of(context)!.logoutAction.toUpperCase(), () {
-                        // Show another confirm dialog
-                        AppDialogs.showConfirmDialog(context, AppLocalization.of(context)!.logoutAreYouSure, AppLocalization.of(context)!.logoutReassurance,
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () {
-                          // Unsubscribe from notifications
-                          sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((_) async {
-                            try {
-                              String? fcmToken = await FirebaseMessaging.instance.getToken();
-                              EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-                              EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-                            } catch (e) {}
-                            try {
-                              // Delete all data
-                              sl.get<Vault>().deleteAll().then((_) {
-                                sl.get<SharedPrefsUtil>().deleteAll().then((result) {
-                                  StateContainer.of(context).logOut();
-                                  Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
-                                });
-                              });
-                            } catch (e) {}
-                          });
-                        });
-                      });
-                    }),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                        child: Column(
-                          children: [
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: <Widget>[
-                            //     Text(versionString, style: AppStyles.textStyleVersion(context)),
-                            //     Text(" | ", style: AppStyles.textStyleVersion(context)),
-                            //     GestureDetector(
-                            //         onTap: () {
-                            //           Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                            //             return UIUtil.showWebview(context, AppLocalization.of(context).privacyUrl);
-                            //           }));
-                            //         },
-                            //         child: Text(AppLocalization.of(context).privacyPolicy, style: AppStyles.textStyleVersionUnderline(context))),
-                            //     Text(" | ", style: AppStyles.textStyleVersion(context)),
-                            //     GestureDetector(
-                            //         onTap: () {
-                            //           Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                            //             return UIUtil.showWebview(context, AppLocalization.of(context).eulaUrl);
-                            //           }));
-                            //         },
-                            //         child: Text(AppLocalization.of(context).eula, style: AppStyles.textStyleVersionUnderline(context))),
-                            //   ],
-                            // ),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: <Widget>[
-                            //     GestureDetector(
-                            //         onTap: () async {
-                            //           Uri uri = Uri.parse(AppLocalization.of(context).discordUrl);
-                            //           if (await canLaunchUrl(uri)) {
-                            //             await launchUrl(uri);
-                            //           }
-                            //         },
-                            //         child: Text(AppLocalization.of(context).discord, style: AppStyles.textStyleVersionUnderline(context))),
-                            //     Text(" | ", style: AppStyles.textStyleVersion(context)),
-                            //     GestureDetector(
-                            //         onTap: () async {
-                            //           await AppDialogs.showChangeLog(context);
-                            //         },
-                            //         child: Text(AppLocalization.of(context).changeLog, style: AppStyles.textStyleVersionUnderline(context))),
-                            //   ],
-                            // ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(versionString, style: AppStyles.textStyleVersion(context)),
-                                Text(" | ", style: AppStyles.textStyleVersion(context)),
-                                GestureDetector(
-                                    onTap: () async {
-                                      await AppDialogs.showChangeLog(context);
-                                    },
-                                    child: Text(AppLocalization.of(context)!.changeLog, style: AppStyles.textStyleVersionUnderline(context))),
-                                Text(" | ", style: AppStyles.textStyleVersion(context)),
-                                GestureDetector(
-                                    onTap: () async {
-                                      Uri uri = Uri.parse(AppLocalization.of(context)!.discordUrl);
-                                      if (await canLaunchUrl(uri)) {
-                                        await launchUrl(uri);
-                                      }
-                                    },
-                                    child: Text(AppLocalization.of(context)!.discord, style: AppStyles.textStyleVersionUnderline(context))),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                                        return UIUtil.showWebview(context, AppLocalization.of(context)!.privacyUrl);
-                                      }));
-                                    },
-                                    child: Text(AppLocalization.of(context)!.privacyPolicy, style: AppStyles.textStyleVersionUnderline(context))),
-                                Text(" | ", style: AppStyles.textStyleVersion(context)),
-                                GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                                        return UIUtil.showWebview(context, AppLocalization.of(context)!.eulaUrl);
-                                      }));
-                                    },
-                                    child: Text(AppLocalization.of(context)!.eula, style: AppStyles.textStyleVersionUnderline(context))),
-                                Text(" | ", style: AppStyles.textStyleVersion(context)),
-                                GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                                        return UIUtil.showWebview(context, AppLocalization.of(context)!.nautilusNodeUrl);
-                                      }));
-                                    },
-                                    child: Text(AppLocalization.of(context)!.nodeStatus, style: AppStyles.textStyleVersionUnderline(context))),
-                              ],
-                            ),
-                          ],
-                        )),
-                  ],
-                ),
-                //List Top Gradient End
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    height: 20.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
-                        begin: AlignmentDirectional(0.5, -1.0),
-                        end: AlignmentDirectional(0.5, 1.0),
+              child: Stack(
+                children: <Widget>[
+                  // Settings List
+                  DraggableScrollbar(
+                    controller: _scrollController,
+                    scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                    child: _buildSettingsList(),
+                  ),
+                  //List Top Gradient End
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      height: 20.0,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
+                          begin: AlignmentDirectional(0.5, -1.0),
+                          end: AlignmentDirectional(0.5, 1.0),
+                        ),
                       ),
                     ),
-                  ),
-                ), //List Top Gradient End
-              ],
-            )),
+                  ), //List Top Gradient End
+                ],
+              ),
+            ),
           ],
         ),
       ),

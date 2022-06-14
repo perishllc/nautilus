@@ -277,8 +277,8 @@ class StateContainerState extends State<StateContainer> {
       }
       setState(() {
         this.wallet!.solids = solids;
-        EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet!.solids));
       });
+      EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet!.solids));
     }
   }
 
@@ -300,9 +300,7 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> updateUnified(bool fastUpdate) async {
     if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
-      setState(() {
-        EventTaxiImpl.singleton().fire(UnifiedHomeEvent(fastUpdate: fastUpdate));
-      });
+      EventTaxiImpl.singleton().fire(UnifiedHomeEvent(fastUpdate: fastUpdate));
     }
   }
 
@@ -1018,7 +1016,7 @@ class StateContainerState extends State<StateContainer> {
       if (wallet!.history != null && wallet!.history!.length > 1) {
         count = 50;
       }
-      try {
+      // try {
         AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet!.address, count: count, raw: true);
         _requestBalances();
         bool postedToHome = false;
@@ -1113,10 +1111,10 @@ class StateContainerState extends State<StateContainer> {
             }
           }
         }
-      } catch (e) {
-        // TODO handle account history error
-        sl.get<Logger>().e("account_history e", e);
-      }
+      // } catch (e) {
+      //   // TODO handle account history error
+      //   sl.get<Logger>().e("account_history e", e);
+      // }
     }
   }
 
@@ -1171,7 +1169,7 @@ class StateContainerState extends State<StateContainer> {
     String? amount_raw = data['amount_raw'];
     String? requesting_account = data['requesting_account'];
     String? memo_enc = data['memo_enc'];
-    String? request_time = data['request_time'];
+    int request_time = int.parse(data['request_time']);
     String? to_address = data['account'];
     String uuid = data['uuid'];
     String? local_uuid = data['local_uuid'];
@@ -1187,6 +1185,7 @@ class StateContainerState extends State<StateContainer> {
       amount_raw: amount_raw,
       is_request: true,
       is_memo: false,
+      is_message: false,
       from_address: requesting_account,
       to_address: to_address,
       is_fulfilled: false,
@@ -1246,7 +1245,7 @@ class StateContainerState extends State<StateContainer> {
     String? amount_raw = data['amount_raw'];
     String? requesting_account = data['requesting_account'];
     String? memo_enc = data['memo_enc'];
-    String? request_time = data['request_time'];
+    int request_time = int.parse(data['request_time']);
     String? to_address = data['account'];
     String uuid = data['uuid'];
     String? local_uuid = data['local_uuid'];
@@ -1322,7 +1321,7 @@ class StateContainerState extends State<StateContainer> {
     String? amount_raw = data['amount_raw'];
     String? requesting_account = data['requesting_account'];
     String? memo_enc = data['memo_enc'];
-    String? request_time = data['request_time'];
+    int request_time = int.parse(data['request_time']);
     String? to_address = data['account'];
     String? fulfillment_time = data['fulfillment_time'];
     String? block = data['block'];

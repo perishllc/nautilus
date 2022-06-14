@@ -322,14 +322,13 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           is_fulfilled: false,
           is_request: false,
           is_memo: false,
-          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
           memo: widget.memo,
           height: 0,
         );
         // add it to the database:
         await sl.get<DBHelper>().addTXData(newGiftTXData);
-        // hack to get tx memo to update:
-        EventTaxiImpl.singleton().fire(TXUpdateEvent());
+        await StateContainer.of(context).updateTXMemos();
 
         // Show complete
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
@@ -366,14 +365,13 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           is_fulfilled: false,
           is_request: false,
           is_memo: false,
-          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
           memo: widget.memo,
           height: 0,
         );
         // add it to the database:
         await sl.get<DBHelper>().addTXData(newGiftTXData);
-        // hack to get tx memo to update:
-        EventTaxiImpl.singleton().fire(TXUpdateEvent());
+        await StateContainer.of(context).updateTXMemos();
       }
     } catch (e) {
       // Send failed

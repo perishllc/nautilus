@@ -319,7 +319,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         is_request: true,
         is_memo: false,
         is_message: false,
-        request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+        request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
         memo: widget.memo,
         height: currentBlockHeightInList,
       );

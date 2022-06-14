@@ -33,6 +33,9 @@ class AccountHistoryResponseItem {
   @JsonKey(ignore: true)
   bool? confirmed;
 
+  @JsonKey(name: 'local_timestamp', fromJson: _toInt)
+  int? local_timestamp;
+
   AccountHistoryResponseItem(
       {String? type,
       String? subtype,
@@ -41,6 +44,7 @@ class AccountHistoryResponseItem {
       String? hash,
       int? height,
       String? link,
+      int? local_timestamp,
       this.confirmed}) {
     this.type = type;
     this.subtype = subtype;
@@ -49,6 +53,7 @@ class AccountHistoryResponseItem {
     this.hash = hash;
     this.height = height;
     this.link = link;
+    this.local_timestamp = local_timestamp;
   }
 
   String? getShortString() {

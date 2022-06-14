@@ -1,6 +1,8 @@
 # v0.3.4 - [2022-06-20]
 #### Added
 - Info button on the send sheet
+- Completely custom draggable scrollbar, optimized to not get in the way but still be easy to use
+- Scrollbar now also on the settings drawer
 #### Changed
 - Upgraded a *ton* of dependencies
 - Null safety support! This improves overall security of the application and makes crashes less likely
@@ -99,9 +101,6 @@
 - create a txdata for gift card open
 - check for duplicate memos and remove them (just in case)
 - make a UI for preferred username / display name in the case that there are multiple users with the same address
-- work on null safety ports of dependencies
-- port E2EE to dart
-- see how hard it will be to add windows store / desktop support
 - update the welcome screen / example transactions and requests
 - NFC support
 - take new screenshots

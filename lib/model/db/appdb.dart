@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io' as io;
-import 'dart:io';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -9,7 +8,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'package:flutter/services.dart';
 
@@ -17,7 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 class DBHelper {
-  static const int DB_VERSION = 5;
+  static const int DB_VERSION = 6;
   static const String CONTACTS_SQL = """CREATE TABLE Contacts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
@@ -60,9 +58,9 @@ class DBHelper {
         to_address TEXT,
         amount_raw TEXT,
         is_request BOOLEAN,
-        request_time TEXT,
+        request_time INTEGER,
         is_fulfilled BOOLEAN,
-        fulfillment_time TEXT,
+        fulfillment_time INTEGER,
         block TEXT,
         link TEXT,
         memo_enc TEXT,
@@ -89,6 +87,29 @@ class DBHelper {
   static const String TXDATA_ADD_MESSAGE_COLUMN_SQL = """
     ALTER TABLE Transactions ADD is_message BOOLEAN
     """;
+  // static const String TXDATA_REQUEST_TIME_INT_SQL = """
+  //   ALTER TABLE Transactions DROP COLUMN request_time
+  //   ALTER TABLE Transactions ADD request_time INTEGER
+  //   """;
+  // static const String TXDATA_FULFILLMENT_TIME_INT_SQL = """
+  //   ALTER TABLE Transactions DROP COLUMN fulfillment_time
+  //   ALTER TABLE Transactions ADD fulfillment_time INTEGER
+  //   """;
+
+
+  static const String TXDATA_TIME_INT_SQL = """
+    BEGIN TRANSACTION;
+    CREATE TEMPORARY TABLE t1_backup(id, from_address, to_address, amount_raw, is_request, is_fulfilled, block, link, memo_enc, is_memo, is_message, memo, uuid, is_acknowledged, height, send_height, recv_height, record_type, metadata, status);
+    INSERT INTO t1_backup SELECT * FROM Transactions;
+    DROP TABLE Transactions;
+    CREATE TABLE Transactions(id, from_address, to_address, amount_raw, is_request, is_fulfilled, block, link, memo_enc, is_memo, is_message, memo, uuid, is_acknowledged, height, send_height, recv_height, record_type, metadata, status);
+    INSERT INTO Transactions SELECT * FROM t1_backup;
+    DROP TABLE t1_backup;
+    ALTER TABLE Transactions ADD request_time INTEGER
+    ALTER TABLE Transactions ADD fulfillment_time INTEGER
+    COMMIT;
+    """;
+
   static Database? _db;
 
   NanoUtil? _nanoUtil;
@@ -104,18 +125,11 @@ class DBHelper {
   }
 
   initDb() async {
-    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-      sqfliteFfiInit();
-      var databaseFactory = databaseFactoryFfi;
-      var theDb = await databaseFactory.openDatabase(inMemoryDatabasePath,
-          options: OpenDatabaseOptions(version: DB_VERSION, onCreate: _onCreate, onUpgrade: _onUpgrade));
-      return theDb;
-    } else {
-      io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-      String path = join(documentsDirectory.path, "nautilus.db");
-      var theDb = await openDatabase(path, version: DB_VERSION, onCreate: _onCreate, onUpgrade: _onUpgrade);
-      return theDb;
-    }
+    io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, "nautilus.db");
+    var theDb = await openDatabase(path, version: DB_VERSION, onCreate: _onCreate, onUpgrade: _onUpgrade);
+    await theDb.execute(TXDATA_TIME_INT_SQL);
+    return theDb;
   }
 
   void _onCreate(Database db, int version) async {
@@ -138,6 +152,13 @@ class DBHelper {
       await db.execute(USER_ADD_BLOCKED_COLUMN_SQL);
       await db.execute(USER_ADD_NICKNAME_COLUMN_SQL);
       await db.execute(TXDATA_ADD_MESSAGE_COLUMN_SQL);
+    }
+
+    if (oldVersion == 5) {
+      // change TXData:
+      //  request_time TEXT     -> request_time INTEGER
+      //  fulfillment_time TEXT -> fulfillment_time INTEGER
+      await db.execute(TXDATA_TIME_INT_SQL);
     }
   }
 
@@ -701,20 +722,20 @@ class DBHelper {
     if (dbItem["to_address"] != null) {
       newData.to_address = dbItem["to_address"];
     }
-    if (dbItem["amount_raw"] != null) {
+    if (dbItem["amount_raw"] != null && dbItem["amount_raw"] != "" && dbItem["amount_raw"] != "0") {
       newData.amount_raw = dbItem["amount_raw"];
     }
     if (dbItem["is_request"] != null) {
       newData.is_request = (dbItem["is_request"] == 0 || dbItem["is_request"] == null) ? false : true;
     }
     if (dbItem["request_time"] != null) {
-      newData.request_time = dbItem["request_time"];
+      newData.request_time = int.tryParse(dbItem["request_time"]) ?? null;
     }
     if (dbItem["is_fulfilled"] != null) {
       newData.is_fulfilled = (dbItem["is_fulfilled"] == 0 || dbItem["is_fulfilled"] == null) ? false : true;
     }
     if (dbItem["fulfillment_time"] != null) {
-      newData.fulfillment_time = dbItem["fulfillment_time"];
+      newData.fulfillment_time = int.tryParse(dbItem["fulfillment_time"]) ?? null;
     }
     if (dbItem["block"] != null) {
       newData.block = dbItem["block"];
@@ -822,17 +843,17 @@ class DBHelper {
           txData.from_address,
           txData.to_address,
           (txData.amount_raw == null || txData.amount_raw!.isEmpty) ? "" : txData.amount_raw,
-          txData.is_request! ? 1 : 0,
-          (txData.request_time == null || txData.request_time!.isEmpty) ? "" : txData.request_time,
-          txData.is_fulfilled! ? 1 : 0,
-          (txData.fulfillment_time == null || txData.fulfillment_time!.isEmpty) ? "" : txData.fulfillment_time,
+          txData.is_request ? 1 : 0,
+          txData.request_time,
+          txData.is_fulfilled ? 1 : 0,
+          txData.fulfillment_time,
           (txData.block == null || txData.block!.isEmpty) ? "" : txData.block,
           (txData.link == null || txData.link!.isEmpty) ? "" : txData.link,
           (txData.memo_enc == null || txData.memo_enc!.isEmpty) ? "" : txData.memo_enc,
-          txData.is_memo! ? 1 : 0,
-          txData.is_message! ? 1 : 0,
+          txData.is_memo ? 1 : 0,
+          txData.is_message ? 1 : 0,
           (txData.memo == null || txData.memo!.isEmpty) ? "" : txData.memo,
-          txData.is_acknowledged! ? 1 : 0,
+          txData.is_acknowledged ? 1 : 0,
           txData.height,
           txData.send_height,
           txData.recv_height,
@@ -882,11 +903,11 @@ class DBHelper {
         'SELECT * FROM Transactions WHERE (from_address = ? OR to_address = ?) AND (is_request = 1 OR is_message = 1) ORDER BY request_time DESC',
         [account, account]);
     // List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions ORDER BY request_time DESC');
-    List<TXData> transactions = [];
+    List<TXData> solids = [];
     for (int i = 0; i < list.length; i++) {
-      transactions.add(createTXDataFromDB(list[i]));
+      solids.add(createTXDataFromDB(list[i]));
     }
-    return transactions;
+    return solids;
   }
 
   Future<List<TXData>> getAccountSpecificRecords(String account) async {
