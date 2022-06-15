@@ -60,7 +60,7 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
 
   // if list takes 300.0 pixels of height on screen and scrollthumb height is 40.0
   // then max bar offset is 260.0
-  double get barMaxScrollExtent => context.size!.height - (widget.scrollbarHeight + widget.scrollbarBottomMargin);
+  double get barMaxScrollExtent => (context.size!.height - (widget.scrollbarHeight + widget.scrollbarBottomMargin)).abs();
   double get barMinScrollExtent => widget.scrollbarTopMargin;
 
   //this is usually length (in pixels) of list
@@ -128,7 +128,8 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
       if (_barOffsetBottom < 0) {
         _barOffsetBottom = 0;
         throw Exception("_barOffsetBottom < 0");
-      } else if (_barOffsetTop < 0) {
+      }
+      if (_barOffsetTop < 0) {
         _barOffsetTop = 0;
         throw Exception("_barOffsetTop < 0");
       }
@@ -177,10 +178,8 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
 
     if (_barOffsetBottom < 0) {
       _barOffsetBottom = 0;
-      throw Exception("_barOffsetBottom < 0");
     } else if (_barOffsetTop < 0) {
       _barOffsetTop = 0;
-      throw Exception("_barOffsetTop < 0");
     }
 
     // print(box.size);
@@ -248,7 +247,6 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
         _barOffsetBottom = barMaxScrollExtent - _barOffsetTop;
         if (_barOffsetBottom < 0) {
           _barOffsetBottom = 0;
-          throw Exception("_barOffsetBottom < 0");
         }
 
         _viewOffset += notification.scrollDelta!;
@@ -297,7 +295,7 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
                 width: widget.scrollbarInvisibleWidth,
                 height: widget.scrollbarHeight,
                 // padding: EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0),
-                margin: EdgeInsets.only(top: _barOffsetTop, bottom: _barOffsetBottom),
+                margin: EdgeInsets.only(top: _barOffsetTop >= 0 ? _barOffsetTop : 0, bottom: _barOffsetBottom >= 0 ? _barOffsetBottom : 0),
                 child: _buildScrollThumb(),
               ),
             ),

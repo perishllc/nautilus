@@ -2429,7 +2429,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                   )
                 : SizedBox(),
             Container(
-              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 225),
+              constraints: BoxConstraints(maxWidth: (MediaQuery.of(context).size.width - 225).abs()),
               child: Stack(
                 alignment: AlignmentDirectional(0, 0),
                 children: <Widget>[
