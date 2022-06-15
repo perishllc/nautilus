@@ -88,7 +88,6 @@ class DBHelper {
     ALTER TABLE Transactions ADD is_message BOOLEAN
     """;
   static const String TXDATA_TIME_INT_SQL = """
-    BEGIN TRANSACTION;
     CREATE TEMPORARY TABLE t1_backup(id, from_address, to_address, amount_raw, is_request, is_fulfilled, block, link, memo_enc, is_memo, is_message, memo, uuid, is_acknowledged, height, send_height, recv_height, record_type, metadata, status);
     INSERT INTO t1_backup SELECT * FROM Transactions;
     DROP TABLE Transactions;
@@ -97,7 +96,6 @@ class DBHelper {
     DROP TABLE t1_backup;
     ALTER TABLE Transactions ADD request_time INTEGER
     ALTER TABLE Transactions ADD fulfillment_time INTEGER
-    COMMIT;
     """;
 
   static Database? _db;
