@@ -1224,7 +1224,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
         if (local_timestamp != null) {
           String time_str = DateFormat(CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(local_timestamp * 1000));
-          if (local_timestamp.toString().contains(lowerCaseSearch)) {
+          if (time_str.toLowerCase().contains(lowerCaseSearch)) {
             shouldRemove = false;
           }
         }
@@ -1525,10 +1525,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         width: (MediaQuery.of(context).size.width - 42).abs() / 2,
                         margin: EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
                         // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
-                        child: FlatButton(
+                        child: TextButton(
                           key: const Key("receive_button"),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                          color: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
+                          style: TextButton.styleFrom(
+                            backgroundColor: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                            primary: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                            // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                            // splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                          ),
                           child: AutoSizeText(
                             AppLocalization.of(context)!.receive,
                             textAlign: TextAlign.center,
@@ -1542,8 +1547,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             }
                             Sheets.showAppHeightNineSheet(context: context, widget: receive!);
                           },
-                          highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                          splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                         ),
                       ),
                       // Container(
@@ -1673,15 +1676,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
       ),
-      child: FlatButton(
+      child: TextButton(
         onPressed: () {
           return null;
         },
-        highlightColor: StateContainer.of(context).curTheme.text15,
-        splashColor: StateContainer.of(context).curTheme.text15,
-        color: StateContainer.of(context).curTheme.backgroundDark,
-        padding: EdgeInsets.all(0.0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        style: TextButton.styleFrom(
+          primary: StateContainer.of(context).curTheme.text15,
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          padding: EdgeInsets.all(0.0),
+        ),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
@@ -1965,15 +1969,19 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
       ),
-      child: FlatButton(
+      child: TextButton(
         onPressed: () {
           return null;
         },
-        highlightColor: StateContainer.of(context).curTheme.text15,
-        splashColor: StateContainer.of(context).curTheme.text15,
-        color: StateContainer.of(context).curTheme.backgroundDark,
-        padding: EdgeInsets.all(0.0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        style: TextButton.styleFrom(
+          primary: StateContainer.of(context).curTheme.text15,
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          padding: EdgeInsets.all(0.0),
+        ),
+        // splashColor: StateContainer.of(context).curTheme.text15,
+        // highlightColor: StateContainer.of(context).curTheme.text15,
+        // splashColor: StateContainer.of(context).curTheme.text15,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
@@ -2194,14 +2202,17 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 margin: EdgeInsetsDirectional.only(top: settingsIconMarginTop, start: 5),
                 height: 50,
                 width: 50,
-                child: FlatButton(
-                  highlightColor: StateContainer.of(context).curTheme.text15,
-                  splashColor: StateContainer.of(context).curTheme.text15,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: StateContainer.of(context).curTheme.text15,
+                    backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                    // highlightColor: StateContainer.of(context).curTheme.text15,
+                    // splashColor: StateContainer.of(context).curTheme.text15,
+                  ),
                   onPressed: () {
                     _scaffoldKey.currentState.openDrawer();
                   },
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                  padding: EdgeInsets.all(0.0),
                   child: Stack(
                     children: [
                       Icon(
@@ -3092,7 +3103,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       _slideActions.add(SlidableAction(
           autoClose: false,
           borderRadius: BorderRadius.circular(5.0),
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
+          backgroundColor: StateContainer.of(context).curTheme.background!,
           foregroundColor: StateContainer.of(context).curTheme.success,
           icon: Icons.send,
           label: label,
@@ -3109,7 +3120,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       _slideActions.add(SlidableAction(
           autoClose: false,
           borderRadius: BorderRadius.circular(5.0),
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
+          backgroundColor: StateContainer.of(context).curTheme.background!,
           foregroundColor: StateContainer.of(context).curTheme.success,
           icon: Icons.send,
           label: AppLocalization.of(context)!.reply,
@@ -3127,7 +3138,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         _slideActions.add(SlidableAction(
             autoClose: false,
             borderRadius: BorderRadius.circular(5.0),
-            backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
+            backgroundColor: StateContainer.of(context).curTheme.background!,
             foregroundColor: StateContainer.of(context).curTheme.warning60,
             icon: Icons.refresh_rounded,
             label: AppLocalization.of(context)!.retry,
@@ -3141,7 +3152,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         _slideActions.add(SlidableAction(
             autoClose: false,
             borderRadius: BorderRadius.circular(5.0),
-            backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
+            backgroundColor: StateContainer.of(context).curTheme.background!,
             foregroundColor: StateContainer.of(context).curTheme.warning60,
             icon: Icons.refresh_rounded,
             label: AppLocalization.of(context)!.retry,
@@ -3156,7 +3167,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         // _slideActions.add(SlidableAction(
         //     autoClose: false,
         //     borderRadius: BorderRadius.circular(5.0),
-        //     backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        //     backgroundColor: StateContainer.of(context).curTheme.background!,
         //     foregroundColor: StateContainer.of(context).curTheme.warning60,
         //     icon: Icons.refresh_rounded,
         //     label: AppLocalization.of(context).retry,
@@ -3188,9 +3199,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
 
     ActionPane actionPane = ActionPane(
-      // motion: const DrawerMotion(),
-      // motion: const BehindMotion(),
-      // motion: const DrawerMotion(),
       motion: const ScrollMotion(),
       extentRatio: _slideActions.length * 0.2,
       children: _slideActions,
@@ -3223,69 +3231,21 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 },
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
+                    // padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
                     // padding: const EdgeInsets.only(top: 14.0, bottom: 14.0, left: 20.0),
+                    padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Container(margin: EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
-                            Container(
-                              constraints: BoxConstraints(maxWidth: /*85*/ 110),
-                              // width: MediaQuery.of(context).size.width / 5,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  SubstringHighlight(
-                                    caseSensitive: false,
-                                    words: false,
-                                    term: _searchController.text,
-                                    text: itemText,
-                                    textAlign: TextAlign.start,
-                                    textStyle: AppStyles.textStyleTransactionType(context),
-                                    textStyleHighlight: TextStyle(
-                                        fontFamily: "NunitoSans",
-                                        fontSize: AppFontSizes.small,
-                                        fontWeight: FontWeight.w600,
-                                        color: StateContainer.of(context).curTheme.warning60),
-                                  ),
-                                  (!txDetails.is_message && !isEmpty(txDetails.amount_raw))
-                                      ? Row(
-                                          children: <Widget>[
-                                            RichText(
-                                              textAlign: TextAlign.start,
-                                              text: TextSpan(
-                                                text: '',
-                                                children: [
-                                                  displayCurrencyAmount(
-                                                    context,
-                                                    AppStyles.textStyleTransactionAmount(
-                                                      context,
-                                                      true,
-                                                    ),
-                                                    includeSymbol: true,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            SubstringHighlight(
-                                                caseSensitive: false,
-                                                words: false,
-                                                term: _searchController.text,
-                                                text: getRawAsThemeAwareAmount(context, txDetails.amount_raw),
-                                                textAlign: TextAlign.start,
-                                                textStyle: AppStyles.textStyleTransactionAmount(context),
-                                                textStyleHighlight: TextStyle(
-                                                    fontFamily: "NunitoSans",
-                                                    color: StateContainer.of(context).curTheme.warning60,
-                                                    fontSize: AppFontSizes.smallest,
-                                                    fontWeight: FontWeight.w600)),
-                                          ],
-                                        )
-                                      : SizedBox(),
-                                  (txDetails.request_time != null)
-                                      ? SubstringHighlight(
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                (txDetails.request_time != null)
+                                    ? Container(
+                                        child: SubstringHighlight(
                                           caseSensitive: false,
                                           words: false,
                                           term: _searchController.text,
@@ -3295,17 +3255,78 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                               fontFamily: "NunitoSans",
                                               fontSize: AppFontSizes.smallest,
                                               fontWeight: FontWeight.w600,
-                                              color: StateContainer.of(context).curTheme.success60),
+                                              color: StateContainer.of(context).curTheme.success45),
                                           textStyleHighlight: TextStyle(
                                               fontFamily: "NunitoSans",
                                               fontSize: AppFontSizes.smallest,
                                               fontWeight: FontWeight.w600,
-                                              color: StateContainer.of(context).curTheme.warning60),
-                                        )
-                                      : SizedBox(),
-                                ],
-                              ),
-                            ),
+                                              color: StateContainer.of(context).curTheme.warning45),
+                                        ),
+                                      )
+                                    : SizedBox(),
+                                Row(
+                                  children: [
+                                    Container(margin: EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
+                                    Container(
+                                      constraints: BoxConstraints(maxWidth: /*85*/ 110),
+                                      // width: MediaQuery.of(context).size.width / 5,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          SubstringHighlight(
+                                            caseSensitive: false,
+                                            words: false,
+                                            term: _searchController.text,
+                                            text: itemText,
+                                            textAlign: TextAlign.start,
+                                            textStyle: AppStyles.textStyleTransactionType(context),
+                                            textStyleHighlight: TextStyle(
+                                                fontFamily: "NunitoSans",
+                                                fontSize: AppFontSizes.small,
+                                                fontWeight: FontWeight.w600,
+                                                color: StateContainer.of(context).curTheme.warning60),
+                                          ),
+                                          (!txDetails.is_message && !isEmpty(txDetails.amount_raw))
+                                              ? Row(
+                                                  children: <Widget>[
+                                                    RichText(
+                                                      textAlign: TextAlign.start,
+                                                      text: TextSpan(
+                                                        text: '',
+                                                        children: [
+                                                          displayCurrencyAmount(
+                                                            context,
+                                                            AppStyles.textStyleTransactionAmount(
+                                                              context,
+                                                              true,
+                                                            ),
+                                                            includeSymbol: true,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    SubstringHighlight(
+                                                        caseSensitive: false,
+                                                        words: false,
+                                                        term: _searchController.text,
+                                                        text: getRawAsThemeAwareAmount(context, txDetails.amount_raw),
+                                                        textAlign: TextAlign.start,
+                                                        textStyle: AppStyles.textStyleTransactionAmount(context),
+                                                        textStyleHighlight: TextStyle(
+                                                            fontFamily: "NunitoSans",
+                                                            color: StateContainer.of(context).curTheme.warning60,
+                                                            fontSize: AppFontSizes.smallest,
+                                                            fontWeight: FontWeight.w600)),
+                                                  ],
+                                                )
+                                              : SizedBox(),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
                           ],
                         ),
                         (txDetails.memo != null)
@@ -3599,12 +3620,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         isRefreshing: _isRefreshing,
       );
     }
-    
-    return ReactiveRefreshIndicator(
-      backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-      child: DraggableScrollbar(
-        controller: _scrollController,
-        scrollbarColor: StateContainer.of(context).curTheme.primary!,
+
+    return DraggableScrollbar(
+      controller: _scrollController,
+      scrollbarColor: StateContainer.of(context).curTheme.primary!,
+      scrollbarTopMargin: 10.0,
+      scrollbarBottomMargin: 20.0,
+      child: ReactiveRefreshIndicator(
+        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        onRefresh: _refresh,
+        isRefreshing: _isRefreshing,
         child: AnimatedList(
           controller: _scrollController,
           key: _unifiedListKeyMap[StateContainer.of(context).wallet!.address!],
@@ -3613,8 +3638,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           itemBuilder: _buildUnifiedItem,
         ),
       ),
-      onRefresh: _refresh,
-      isRefreshing: _isRefreshing,
     );
   }
 }
@@ -3725,6 +3748,100 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
           children: <Widget>[
             Column(
               children: <Widget>[
+                // // A stack for Copy Address and Add Contact buttons
+                // Stack(
+                //   children: <Widget>[
+                //     // A row for Copy Address Button
+                //     Row(
+                //       children: <Widget>[
+                //         AppButton.buildAppButton(
+                //             context,
+                //             // Copy Address Button
+                //             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                //             _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
+                //             Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                //           Clipboard.setData(new ClipboardData(text: addressToCopy));
+                //           if (mounted) {
+                //             setState(() {
+                //               // Set copied style
+                //               _addressCopied = true;
+                //             });
+                //           }
+                //           if (_addressCopiedTimer != null) {
+                //             _addressCopiedTimer!.cancel();
+                //           }
+                //           _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                //             if (mounted) {
+                //               setState(() {
+                //                 _addressCopied = false;
+                //               });
+                //             }
+                //           });
+                //         }),
+                //       ],
+                //     ),
+                //     // A row for Add Contact Button
+                //     Row(
+                //       mainAxisAlignment: MainAxisAlignment.end,
+                //       crossAxisAlignment: CrossAxisAlignment.center,
+                //       children: <Widget>[
+                //         Container(
+                //           margin: EdgeInsetsDirectional.only(top: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[1], end: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[2]),
+                //           child: Container(
+                //               height: 55,
+                //               width: 55,
+                //               // Add Contact Button
+                //               child: TextButton(
+                //                 onPressed: () {
+                //                   Navigator.of(context).pop();
+                //                   Sheets.showAppHeightEightSheet(context: context, widget: AddContactSheet(address: addressToCopy));
+                //                 },
+                //                 style: TextButton.styleFrom(
+                //                   primary: Colors.transparent,
+                //                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                //                   padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+                //                 ),
+                //                 // splashColor: Colors.transparent,
+                //                 // highlightColor: Colors.transparent,
+                //                 child: Icon(AppIcons.addcontact,
+                //                     size: 35,
+                //                     color:
+                //                         _addressCopied ? StateContainer.of(context).curTheme.successDark : StateContainer.of(context).curTheme.backgroundDark),
+                //               )),
+                //         ),
+                //       ],
+                //     ),
+                //   ],
+                // ),
+                // A row for Copy Address Button
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(
+                        context,
+                        // Copy Address Button
+                        _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                        _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
+                        Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                      Clipboard.setData(new ClipboardData(text: addressToCopy));
+                      if (mounted) {
+                        setState(() {
+                          // Set copied style
+                          _addressCopied = true;
+                        });
+                      }
+                      if (_addressCopiedTimer != null) {
+                        _addressCopiedTimer!.cancel();
+                      }
+                      _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                        if (mounted) {
+                          setState(() {
+                            _addressCopied = false;
+                          });
+                        }
+                      });
+                    }),
+                  ],
+                ),
                 // A row for View Details button
                 Row(
                   children: <Widget>[
@@ -3736,69 +3853,6 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                     }),
                   ],
                 ),
-                // A stack for Copy Address and Add Contact buttons
-                Stack(
-                  children: <Widget>[
-                    // A row for Copy Address Button
-                    Row(
-                      children: <Widget>[
-                        AppButton.buildAppButton(
-                            context,
-                            // Share Address Button
-                            _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
-                            Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                          Clipboard.setData(new ClipboardData(text: addressToCopy));
-                          if (mounted) {
-                            setState(() {
-                              // Set copied style
-                              _addressCopied = true;
-                            });
-                          }
-                          if (_addressCopiedTimer != null) {
-                            _addressCopiedTimer!.cancel();
-                          }
-                          _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
-                            if (mounted) {
-                              setState(() {
-                                _addressCopied = false;
-                              });
-                            }
-                          });
-                        }),
-                      ],
-                    ),
-                    // A row for Add Contact Button
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsetsDirectional.only(top: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[1], end: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[2]),
-                          child: Container(
-                              height: 55,
-                              width: 55,
-                              // Add Contact Button
-                              child: FlatButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  Sheets.showAppHeightEightSheet(context: context, widget: AddContactSheet(address: addressToCopy));
-                                },
-                                splashColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-                                child: Icon(AppIcons.addcontact,
-                                    size: 35,
-                                    color:
-                                        _addressCopied ? StateContainer.of(context).curTheme.successDark : StateContainer.of(context).curTheme.backgroundDark),
-                              )),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-
                 // Mark as paid / unpaid button for requests
                 txDetails.is_request
                     ? Row(

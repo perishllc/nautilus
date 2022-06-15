@@ -1615,6 +1615,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   // Settings List
                   DraggableScrollbar(
                     controller: _scrollController,
+                    scrollbarTopMargin: 20.0,
+                    scrollbarBottomMargin: 0.0,
                     scrollbarColor: StateContainer.of(context).curTheme.primary!,
                     child: _buildSettingsList(),
                   ),

@@ -227,8 +227,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
         builder: (context, constraints) => SafeArea(
-          minimum: EdgeInsets.only(
-              bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
+          minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
               //A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
@@ -240,27 +239,39 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
+                      Stack(
                         children: <Widget>[
                           (StateContainer.of(context).wallet!.username == null)
                               ?
                               // Back Button
                               Container(
-                                  margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
+                                  alignment: Alignment.centerLeft,
                                   height: 50,
                                   width: 50,
-                                  child: FlatButton(
-                                      highlightColor: StateContainer.of(context).curTheme.text15,
-                                      splashColor: StateContainer.of(context).curTheme.text15,
+                                  child: TextButton(
+                                      style: TextButton.styleFrom(
+                                        primary: StateContainer.of(context).curTheme.text15,
+                                        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                        padding: EdgeInsets.all(0.0),
+                                      ),
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                                      padding: EdgeInsets.all(0.0),
-                                      child: Icon(AppIcons.back,
-                                          color: StateContainer.of(context).curTheme.text, size: 24)),
+                                      child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                                 )
                               : SizedBox(),
+
+                          // Safety icon
+                          Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.only(bottom: 15),
+                            child: Icon(
+                              AppIcons.contact,
+                              size: 60,
+                              color: StateContainer.of(context).curTheme.primary,
+                            ),
+                          ),
                         ],
                       ),
                       // The header
@@ -282,8 +293,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                       ),
                       // The paragraph
                       Container(
-                        margin: EdgeInsetsDirectional.only(
-                            start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
+                        margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
                         alignment: Alignment.centerLeft,
                         child: Column(
                           children: <Widget>[
@@ -312,10 +322,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                               children: <Widget>[
                                 // The paragraph describing we already have a username:
                                 Container(
-                                  margin: EdgeInsetsDirectional.only(
-                                      start: smallScreen(context) ? 30 : 40,
-                                      end: smallScreen(context) ? 30 : 40,
-                                      top: 45.0),
+                                  margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 45.0),
                                   alignment: Alignment.centerLeft,
                                   child: Column(
                                     children: <Widget>[
@@ -340,9 +347,8 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                                     alignment: Alignment.topCenter,
                                     children: <Widget>[
                                       Container(
-                                        margin: EdgeInsets.only(
-                                            left: MediaQuery.of(context).size.width * 0.105,
-                                            right: MediaQuery.of(context).size.width * 0.105),
+                                        margin:
+                                            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                                         alignment: Alignment.bottomCenter,
                                       ),
 
@@ -404,10 +410,8 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             AppButton.buildAppButton(
-                                context,
-                                AppButtonType.PRIMARY,
-                                AppLocalization.of(context)!.checkAvailability,
-                                Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                                context, AppButtonType.PRIMARY, AppLocalization.of(context)!.checkAvailability, Dimens.BUTTON_BOTTOM_DIMENS,
+                                onPressed: () async {
                               String username = _usernameController!.text.replaceAll("@", "");
                               if (_usernameController!.text.isEmpty) {
                                 setState(() {
@@ -444,11 +448,8 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            AppButton.buildAppButton(
-                                context,
-                                AppButtonType.PRIMARY,
-                                AppLocalization.of(context)!.registerUsername,
-                                Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                            AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.registerUsername, Dimens.BUTTON_BOTTOM_DIMENS,
+                                onPressed: () async {
                               String username = _usernameController!.text.replaceAll("@", "");
 
                               String? price;
@@ -521,8 +522,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
           if (text.contains(" ")) {
             text = text.replaceAll(" ", "");
             _usernameController!.text = text;
-            _usernameController!.selection =
-                TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
+            _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
           }
 
           if (text.length > 0) {
@@ -538,8 +538,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
           if (text.length > 0 && !isUser! && !isNano! && !isFavorite!) {
             // add @ to the beginning of the string:
             _usernameController!.text = "@" + text;
-            _usernameController!.selection =
-                TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
+            _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
             isUser = true;
           }
 
@@ -547,8 +546,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
             setState(() {
               // remove the @ from the beginning of the string:
               _usernameController!.text = text.replaceFirst("@nano_", "nano_");
-              _usernameController!.selection =
-                  TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
+              _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
               isUser = false;
             });
           }

@@ -1,14 +1,18 @@
-# v0.3.4 - [2022-06-20]
+# v0.3.4 - [2022-06-15]
 #### Added
-- Info button on the send sheet
+- Node local_timestamps are now displayed in the transaction history
+  - These aren't guaranteed to be accurate, but in most cases they will be fairly close
 - Completely custom draggable scrollbar, optimized to not get in the way but still be easy to use
-- Scrollbar now also on the settings drawer
+  - Now also visible in the settings drawer
+- Info button on the send sheet
 #### Changed
 - Upgraded a *ton* of dependencies
 - Null safety support! This improves overall security of the application and makes crashes less likely
   - The migration may have broken some things I didn't quite catch, so if you notice any issues please report them
 #### Fixed
 - On the gift card creation screen the amount field's next input button wasn't working properly
+- Receive sheet minor visual fixes
+- Minor state management bugs
 
 ## v0.3.3 - [2022-06-12]
 #### Added
@@ -103,4 +107,4 @@
 - make a UI for preferred username / display name in the case that there are multiple users with the same address
 - update the welcome screen / example transactions and requests
 - NFC support
-- take new screenshots
+- take new screenshots for the app / play store

@@ -14,6 +14,7 @@ abstract class BaseTheme {
 
   Color? success;
   Color? success60;
+  Color? success45;
   Color? success30;
   Color? success15;
   Color? successDark;
@@ -21,6 +22,7 @@ abstract class BaseTheme {
 
   Color? warning;
   Color? warning60;
+  Color? warning45;
   Color? warning30;
   Color? warning15;
   Color? warningDark;
@@ -122,6 +124,7 @@ class NautilusTheme extends BaseTheme {
 
   Color? success = green;
   Color? success60 = green.withOpacity(0.6);
+  Color? success45 = green.withOpacity(0.45);
   Color? success30 = green.withOpacity(0.3);
   Color? success15 = green.withOpacity(0.15);
 
@@ -130,6 +133,7 @@ class NautilusTheme extends BaseTheme {
 
   Color? warning = yellow;
   Color? warning60 = yellow.withOpacity(0.6);
+  Color? warning45 = yellow.withOpacity(0.45);
   Color? warning30 = yellow.withOpacity(0.3);
   Color? warning15 = yellow.withOpacity(0.15);
 
@@ -238,6 +242,7 @@ class TitaniumTheme extends BaseTheme {
 
   Color? success = green;
   Color? success60 = green.withOpacity(0.6);
+  Color? success45 = green.withOpacity(0.45);
   Color? success30 = green.withOpacity(0.3);
   Color? success15 = green.withOpacity(0.15);
 
@@ -246,6 +251,7 @@ class TitaniumTheme extends BaseTheme {
 
   Color? warning = yellow;
   Color? warning60 = yellow.withOpacity(0.6);
+  Color? warning45 = yellow.withOpacity(0.45);
   Color? warning30 = yellow.withOpacity(0.3);
   Color? warning15 = yellow.withOpacity(0.15);
 
@@ -340,6 +346,7 @@ class IndiumTheme extends BaseTheme {
 
   Color? success = green;
   Color? success60 = green.withOpacity(0.6);
+  Color? success45 = green.withOpacity(0.45);
   Color? success30 = green.withOpacity(0.3);
   Color? success15 = green.withOpacity(0.15);
 
@@ -348,6 +355,7 @@ class IndiumTheme extends BaseTheme {
 
   Color? warning = yellow;
   Color? warning60 = yellow.withOpacity(0.6);
+  Color? warning45 = yellow.withOpacity(0.45);
   Color? warning30 = yellow.withOpacity(0.3);
   Color? warning15 = yellow.withOpacity(0.15);
 
@@ -450,6 +458,7 @@ class NeptuniumTheme extends BaseTheme {
 
   Color? warning = yellow;
   Color? warning60 = yellow.withOpacity(0.6);
+  Color? warning45 = yellow.withOpacity(0.45);
   Color? warning30 = yellow.withOpacity(0.3);
   Color? warning15 = yellow.withOpacity(0.15);
 
@@ -552,6 +561,7 @@ class ThoriumTheme extends BaseTheme {
 
   Color? warning = yellow;
   Color? warning60 = yellow.withOpacity(0.6);
+  Color? warning45 = yellow.withOpacity(0.45);
   Color? warning30 = yellow.withOpacity(0.3);
   Color? warning15 = yellow.withOpacity(0.15);
 
@@ -643,6 +653,7 @@ class CarbonTheme extends BaseTheme {
 
   Color? success = green;
   Color? success60 = green.withOpacity(0.6);
+  Color? success45 = green.withOpacity(0.45);
   Color? success30 = green.withOpacity(0.3);
   Color? success15 = green.withOpacity(0.15);
 
@@ -651,6 +662,7 @@ class CarbonTheme extends BaseTheme {
 
   Color? warning = yellow;
   Color? warning60 = yellow.withOpacity(0.6);
+  Color? warning45 = yellow.withOpacity(0.45);
   Color? warning30 = yellow.withOpacity(0.3);
   Color? warning15 = yellow.withOpacity(0.15);
 
@@ -756,6 +768,7 @@ class PurpeliumTheme extends BaseTheme {
 
   Color? success = green;
   Color? success60 = green.withOpacity(0.6);
+  Color? success45 = green.withOpacity(0.45);
   Color? success30 = green.withOpacity(0.3);
   Color? success15 = green.withOpacity(0.15);
 
@@ -764,6 +777,7 @@ class PurpeliumTheme extends BaseTheme {
 
   Color? warning = yellow;
   Color? warning60 = yellow.withOpacity(0.6);
+  Color? warning45 = yellow.withOpacity(0.45);
   Color? warning30 = yellow.withOpacity(0.3);
   Color? warning15 = yellow.withOpacity(0.15);
 
@@ -870,6 +884,7 @@ class NyanoTheme extends NyanTheme {
 
   Color? success = green;
   Color? success60 = green.withOpacity(0.6);
+  Color? success45 = green.withOpacity(0.45);
   Color? success30 = green.withOpacity(0.3);
   Color? success15 = green.withOpacity(0.15);
 
@@ -878,6 +893,7 @@ class NyanoTheme extends NyanTheme {
 
   Color? warning = yellow;
   Color? warning60 = yellow.withOpacity(0.6);
+  Color? warning45 = yellow.withOpacity(0.45);
   Color? warning30 = yellow.withOpacity(0.3);
   Color? warning15 = yellow.withOpacity(0.15);
 

@@ -86,66 +86,45 @@ class _AppShareCardState extends State<AppShareCard> {
                       ),
                     ),
                     // Logo Background White
-                    StateContainer.of(context).natriconOn!
-                        ? Center(
+                    Center(
                             child: Container(
                               width: 21,
                               height: 21,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Colors.white,
-                                border: Border.all(
-                                  width: (StateContainer.of(context).curTheme is IndiumTheme) ? 1.44545 : 1.06,
-                                  color: (StateContainer.of(context).curTheme is IndiumTheme)
-                                      ? StateContainer.of(context).curTheme.backgroundDark!
-                                      : StateContainer.of(context).curTheme.primary!,
-                                ),
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    width: (StateContainer.of(context).curTheme is IndiumTheme) ? 1.06 : 1.44545,
-                                    color: (StateContainer.of(context).curTheme is IndiumTheme)
-                                        ? StateContainer.of(context).curTheme.primary!
-                                        : StateContainer.of(context).curTheme.backgroundDark!,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        : Center(
-                            child: Container(
-                              width: 21,
-                              height: 21,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                    StateContainer.of(context).natriconOn!
-                        ? SizedBox()
-                        : Center(
-                            child: Container(
-                              width: 18,
-                              height: 18,
-                              decoration: BoxDecoration(
-                                color: StateContainer.of(context).curTheme.primary,
-                                shape: BoxShape.circle,
                               ),
                             ),
                           ),
                     Center(
+                            child: Container(
+                              width: 18,
+                              height: 18,
+                              decoration: BoxDecoration(
+                                color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ),
+                    // Center(
+                    //   child: Container(
+                    //     height: 4.9,
+                    //     padding: EdgeInsetsDirectional.only(
+                    //       end: 8,
+                    //     ),
+                    //     child: Icon(
+                    //       AppIcons.nautilushorizontal,
+                    //       size: 4.9,
+                    //       color: StateContainer.of(context).curTheme.backgroundDark,
+                    //     ),
+                    //   ),
+                    // ),
+                    Center(
                       child: Container(
-                        height: 4.9,
-                        padding: EdgeInsetsDirectional.only(
-                          end: 8,
-                        ),
-                        child: Icon(
-                          AppIcons.nautilushorizontal,
-                          size: 4.9,
-                          color: StateContainer.of(context).curTheme.backgroundDark,
+                        height: 18,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image(image: AssetImage("assets/logo-square.png")),
                         ),
                       ),
                     ),

@@ -100,7 +100,7 @@ class _AppState extends State<App> {
         theme: ThemeData(
           dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           primaryColor: StateContainer.of(context).curTheme.primary,
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          backgroundColor: StateContainer.of(context).curTheme.background,
           fontFamily: 'NunitoSans',
           brightness: Brightness.dark,
           colorScheme: ColorScheme.fromSwatch().copyWith(

@@ -805,8 +805,13 @@ class StateContainerState extends State<StateContainer> {
     PendingResponseItem pendingItem = PendingResponseItem(hash: resp.hash!, source: resp.account!, amount: resp.amount!);
     String? receivedHash = await handlePendingItem(pendingItem, link_as_account: resp.block!.linkAsAccount);
     if (receivedHash != null) {
-      AccountHistoryResponseItem histItem =
-          AccountHistoryResponseItem(type: BlockTypes.RECEIVE, account: resp.account, amount: resp.amount, hash: receivedHash, link: resp.hash);
+      AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
+          type: BlockTypes.RECEIVE,
+          account: resp.account,
+          amount: resp.amount,
+          hash: receivedHash,
+          link: resp.hash,
+          local_timestamp: (DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond));
       log.d("Received histItem ${json.encode(histItem.toJson())}");
       if (!wallet!.history!.contains(histItem)) {
         setState(() {
@@ -1016,7 +1021,7 @@ class StateContainerState extends State<StateContainer> {
       if (wallet!.history != null && wallet!.history!.length > 1) {
         count = 50;
       }
-      // try {
+      try {
         AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet!.address, count: count, raw: true);
         _requestBalances();
         bool postedToHome = false;
@@ -1095,7 +1100,8 @@ class StateContainerState extends State<StateContainer> {
                   account: pendingResponseItem!.source,
                   amount: pendingResponseItem.amount,
                   hash: receivedHash,
-                  link: pendingResponseItem.hash);
+                  link: pendingResponseItem.hash,
+                  local_timestamp: (DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond));
               if (!wallet!.history!.contains(histItem)) {
                 setState(() {
                   // TODO: not necessarily the best way to handle this, should get real height:
@@ -1111,10 +1117,10 @@ class StateContainerState extends State<StateContainer> {
             }
           }
         }
-      // } catch (e) {
-      //   // TODO handle account history error
-      //   sl.get<Logger>().e("account_history e", e);
-      // }
+      } catch (e) {
+        // TODO handle account history error
+        sl.get<Logger>().e("account_history e", e);
+      }
     }
   }
 

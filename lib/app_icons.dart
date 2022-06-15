@@ -53,7 +53,7 @@ class AppIcons {
   static const IconData nanohorizontal = IconData(0xe81c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData nanologo = IconData(0xe81d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData natricon = IconData(0xe81e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData nautilushorizontal = IconData(0xe81f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  // static const IconData natriumhorizontal = IconData(0xe81f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData newwallet = IconData(0xe820, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData notifications = IconData(0xe821, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData paste = IconData(0xe822, fontFamily: _kFontFam, fontPackage: _kFontPkg);

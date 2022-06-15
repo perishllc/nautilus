@@ -21,7 +21,7 @@ class DraggableScrollbar extends StatefulWidget {
   DraggableScrollbar(
       {this.scrollbarHeight = 60.0,
       this.scrollbarTopMargin = 10.0,
-      this.scrollbarBottomMargin = 20.0,
+      this.scrollbarBottomMargin = 10.0,
       this.scrollbarInvisibleWidth = 40.0,
       this.scrollbarWidth = 4.0,
       this.scrollbarActiveWidth = 8.0,
@@ -270,7 +270,7 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
         changePosition(notification);
         return true;
       },
-      child: new CustomStack(
+      child: CustomStack(
         children: <Widget>[
           GestureDetector(
             behavior: HitTestBehavior.translucent,

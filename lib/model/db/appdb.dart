@@ -87,16 +87,6 @@ class DBHelper {
   static const String TXDATA_ADD_MESSAGE_COLUMN_SQL = """
     ALTER TABLE Transactions ADD is_message BOOLEAN
     """;
-  // static const String TXDATA_REQUEST_TIME_INT_SQL = """
-  //   ALTER TABLE Transactions DROP COLUMN request_time
-  //   ALTER TABLE Transactions ADD request_time INTEGER
-  //   """;
-  // static const String TXDATA_FULFILLMENT_TIME_INT_SQL = """
-  //   ALTER TABLE Transactions DROP COLUMN fulfillment_time
-  //   ALTER TABLE Transactions ADD fulfillment_time INTEGER
-  //   """;
-
-
   static const String TXDATA_TIME_INT_SQL = """
     BEGIN TRANSACTION;
     CREATE TEMPORARY TABLE t1_backup(id, from_address, to_address, amount_raw, is_request, is_fulfilled, block, link, memo_enc, is_memo, is_message, memo, uuid, is_acknowledged, height, send_height, recv_height, record_type, metadata, status);
@@ -128,7 +118,6 @@ class DBHelper {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "nautilus.db");
     var theDb = await openDatabase(path, version: DB_VERSION, onCreate: _onCreate, onUpgrade: _onUpgrade);
-    await theDb.execute(TXDATA_TIME_INT_SQL);
     return theDb;
   }
 
@@ -729,13 +718,13 @@ class DBHelper {
       newData.is_request = (dbItem["is_request"] == 0 || dbItem["is_request"] == null) ? false : true;
     }
     if (dbItem["request_time"] != null) {
-      newData.request_time = int.tryParse(dbItem["request_time"]) ?? null;
+      newData.request_time = dbItem["request_time"] is int ? dbItem["request_time"] : int.tryParse(dbItem["request_time"]);
     }
     if (dbItem["is_fulfilled"] != null) {
       newData.is_fulfilled = (dbItem["is_fulfilled"] == 0 || dbItem["is_fulfilled"] == null) ? false : true;
     }
     if (dbItem["fulfillment_time"] != null) {
-      newData.fulfillment_time = int.tryParse(dbItem["fulfillment_time"]) ?? null;
+      newData.fulfillment_time = dbItem["fulfillment_time"] is int ? dbItem["fulfillment_time"] : int.tryParse(dbItem["fulfillment_time"]);
     }
     if (dbItem["block"] != null) {
       newData.block = dbItem["block"];

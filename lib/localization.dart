@@ -616,7 +616,7 @@ class AppLocalization {
   }
 
   String get enterMemo {
-    return Intl.message("XNOte", desc: 'enter_memo', name: 'enterMemo');
+    return Intl.message("Enter Message", desc: 'enter_memo', name: 'enterMemo');
   }
 
   String get enterGiftMemo {

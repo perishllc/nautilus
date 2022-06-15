@@ -240,7 +240,6 @@ class AppDialogs {
                                 widget: SendSheet(
                                   localCurrency: StateContainer.of(context).curCurrency,
                                   address: AppWallet.nautilusRepresentative,
-                                  quickSendAmount: "1000000000000000000000000000000",
                                 ));
                           });
                         },

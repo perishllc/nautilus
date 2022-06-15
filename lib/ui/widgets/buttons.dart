@@ -20,10 +20,29 @@ class AppButton {
             ),
             height: 55,
             margin: EdgeInsetsDirectional.fromSTEB(dimens[0], dimens[1], dimens[2], dimens[3]),
-            child: FlatButton(
+            // child: FlatButton(
+            //   key: instanceKey,
+            //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+            //   color: disabled! ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
+            //   child: AutoSizeText(buttonText, textAlign: TextAlign.center, style: AppStyles.textStyleButtonPrimary(context), maxLines: 1, stepGranularity: 0.5),
+            //   onPressed: () {
+            //     if (onPressed != null && !disabled) {
+            //       onPressed();
+            //     }
+            //     return;
+            //   },
+            //   highlightColor: StateContainer.of(context).curTheme.background40,
+            //   splashColor: StateContainer.of(context).curTheme.background40,
+            // ),
+            child: TextButton(
               key: instanceKey,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-              color: disabled! ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
+              style: TextButton.styleFrom(
+                primary: StateContainer.of(context).curTheme.background40,
+                // backgroundColor: StateContainer.of(context).curTheme.background40,
+                backgroundColor: disabled! ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
+                surfaceTintColor: StateContainer.of(context).curTheme.background40,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+              ),
               child: AutoSizeText(buttonText, textAlign: TextAlign.center, style: AppStyles.textStyleButtonPrimary(context), maxLines: 1, stepGranularity: 0.5),
               onPressed: () {
                 if (onPressed != null && !disabled) {
@@ -31,8 +50,6 @@ class AppButton {
                 }
                 return;
               },
-              highlightColor: StateContainer.of(context).curTheme.background40,
-              splashColor: StateContainer.of(context).curTheme.background40,
             ),
           ),
         );
@@ -50,6 +67,25 @@ class AppButton {
               style: OutlinedButton.styleFrom(
                 backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                 textStyle: TextStyle(color: disabled! ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary),
+                primary: StateContainer.of(context).curTheme.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  // side: BorderSide(color: disabled ? StateContainer.of(context).curTheme.primary60! : StateContainer.of(context).curTheme.primary!, width: 2.0),
+                ),
+              ).copyWith(
+                side: MaterialStateProperty.resolveWith<BorderSide>(
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.pressed))
+                      return BorderSide(
+                        color: StateContainer.of(context).curTheme.primary!,
+                        width: 2,
+                      );
+                    return BorderSide(
+                        color: disabled ? StateContainer.of(context).curTheme.primary60! : StateContainer.of(context).curTheme.primary!,
+                        width: 2,
+                      );
+                  },
+                ),
               ),
               // borderSide: BorderSide(color: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary, width: 2.0),
               // highlightedBorderColor: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,

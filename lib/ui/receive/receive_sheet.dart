@@ -82,7 +82,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     if (shareCardKey != null && shareCardKey!.currentContext != null) {
       RenderRepaintBoundary boundary = shareCardKey!.currentContext!.findRenderObject() as RenderRepaintBoundary;
       ui.Image image = await boundary.toImage(pixelRatio: 5.0);
-      ByteData byteData = await (image.toByteData(format: ui.ImageByteFormat.png) as FutureOr<ByteData>);
+      ByteData byteData = (await image.toByteData(format: ui.ImageByteFormat.png))!;
       return byteData.buffer.asUint8List();
     } else {
       return null;
@@ -251,7 +251,10 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             _showShareCard!
                                 ? Container(
                                     child: AppShareCard(
-                                        shareCardKey, SvgPicture.asset('legacy_assets/QR.svg'), SvgPicture.asset('legacy_assets/sharecard_logo.svg')),
+                                      shareCardKey,
+                                      SvgPicture.asset('legacy_assets/QR.svg'),
+                                      SvgPicture.asset('legacy_assets/sharecard_logo.svg'),
+                                    ),
                                     alignment: AlignmentDirectional(0.0, 0.0),
                                   )
                                 : SizedBox(),
@@ -293,44 +296,16 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                               ),
                             ),
                             // Logo Background White
-                            StateContainer.of(context).natriconOn!
-                                ? Center(
-                                    child: Container(
-                                      width: computedMaxSize / 5.5,
-                                      height: computedMaxSize / 5.5,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white,
-                                        border: Border.all(
-                                          width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 85 : computedMaxSize / 110,
-                                          color: (StateContainer.of(context).curTheme is IndiumTheme)
-                                              ? StateContainer.of(context).curTheme.backgroundDark!
-                                              : StateContainer.of(context).curTheme.primary!,
-                                        ),
-                                      ),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 110 : computedMaxSize / 85,
-                                            color: (StateContainer.of(context).curTheme is IndiumTheme)
-                                                ? StateContainer.of(context).curTheme.primary!
-                                                : StateContainer.of(context).curTheme.backgroundDark!,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : Center(
-                                    child: Container(
-                                      width: computedMaxSize / 5.5,
-                                      height: computedMaxSize / 5.5,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
+                            Center(
+                              child: Container(
+                                width: computedMaxSize / 5.5,
+                                height: computedMaxSize / 5.5,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                             // Logo Background Primary
                             Center(
                               child: Container(
@@ -345,7 +320,10 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             Center(
                               child: Container(
                                 height: computedMaxSize / 8,
-                                child: Image(image: AssetImage("assets/logo-square.png")),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image(image: AssetImage("assets/logo-square.png")),
+                                ),
                               ),
                             ),
                           ],
@@ -362,7 +340,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                       children: <Widget>[
                         AppButton.buildAppButton(
                             context,
-                            // Share Address Button
+                            // Copy Address Button
                             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
                             _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
                             Dimens.BUTTON_TOP_DIMENS, onPressed: () {

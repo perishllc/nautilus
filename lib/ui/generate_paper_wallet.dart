@@ -176,37 +176,38 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
+                      Stack(
                         children: <Widget>[
                           // Back Button
                           Container(
-                            margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
+                            alignment: Alignment.centerLeft,
                             height: 50,
                             width: 50,
-                            child: FlatButton(
-                                highlightColor: StateContainer.of(context).curTheme.text15,
-                                splashColor: StateContainer.of(context).curTheme.text15,
+                            child: TextButton(
+                                style: TextButton.styleFrom(
+                                  primary: StateContainer.of(context).curTheme.text15,
+                                  backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                  padding: EdgeInsets.all(0.0),
+                                ),
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                                padding: EdgeInsets.all(0.0),
                                 child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
+                          ),
+
+                          // Safety icon
+                          Container(
+                            alignment: Alignment.center,
+                            child: Icon(
+                              AppIcons.money_bill_wave,
+                              size: 60,
+                              color: StateContainer.of(context).curTheme.primary,
+                            ),
                           ),
                         ],
                       ),
-                      // Safety icon
-                      Container(
-                        margin: EdgeInsetsDirectional.only(
-                          start: smallScreen(context) ? 30 : 40,
-                          top: 15,
-                        ),
-                        child: Icon(
-                          AppIcons.money_bill_wave,
-                          size: 60,
-                          color: StateContainer.of(context).curTheme.primary,
-                        ),
-                      ),
+
                       // The header
                       Container(
                         margin: EdgeInsetsDirectional.only(
@@ -233,6 +234,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                               AppLocalization.of(context)!.giftInfo,
                               style: AppStyles.textStyleParagraph(context),
                               maxLines: 12,
+                              minFontSize: 12,
                               stepGranularity: 0.5,
                             ),
                             // Container(
