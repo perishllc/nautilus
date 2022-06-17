@@ -6,6 +6,7 @@
 #### Fixed
 - Bug with messages and search
 - Couple of bugs with the receive QR code / reading QR codes
+- Bug with the require auth on launch option
 ## v0.3.4 - [2022-06-15]
 #### Added
 - Node local_timestamps are now displayed in the transaction history

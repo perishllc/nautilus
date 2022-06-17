@@ -96,7 +96,7 @@ class SharedPrefsUtil {
 
   /// Get a key that has an expiry
   Future<dynamic> getWithExpiry(String key) async {
-    String? val = await (get(key, defaultValue: null) as FutureOr<String?>);
+    String? val = await (get(key, defaultValue: null));
     if (val == null) {
       return null;
     }
@@ -147,7 +147,7 @@ class SharedPrefsUtil {
   }
 
   Future<bool?> getSeedBackedUp() async {
-    return await (get(seed_backed_up_key, defaultValue: false) as FutureOr<bool?>);
+    return await (get(seed_backed_up_key, defaultValue: false));
   }
 
   Future<void> setHasSeenRootWarning() async {
@@ -322,7 +322,7 @@ class SharedPrefsUtil {
   }
 
   Future<DateTime?> getLockDate() async {
-    String? lockDateStr = await (get(pin_lock_until) as FutureOr<String?>);
+    String? lockDateStr = await (get(pin_lock_until));
     if (lockDateStr == null) {
       return null;
     }
@@ -402,12 +402,12 @@ class SharedPrefsUtil {
   }
 
   Future<bool> alertIsRead(AlertResponseItem alert) async {
-    int? exists = await (getWithExpiry("alertread_${alert.id}") as FutureOr<int?>);
+    int? exists = await (getWithExpiry("alertread_${alert.id}"));
     return exists == null ? false : true;
   }
 
   Future<bool> shouldShowAlert(AlertResponseItem alert) async {
-    int? exists = await (getWithExpiry("alert_${alert.id}") as FutureOr<int?>);
+    int? exists = await (getWithExpiry("alert_${alert.id}"));
     return exists == null ? true : false;
   }
 
