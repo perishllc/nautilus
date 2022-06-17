@@ -206,18 +206,19 @@ class BlockedDetailsSheet {
                           width: 50,
                           height: 50,
                           margin: EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
-                          child: FlatButton(
-                            highlightColor: StateContainer.of(context).curTheme.text15,
-                            splashColor: StateContainer.of(context).curTheme.text15,
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                                return UIUtil.showAccountWebview(context, blocked.address);
-                              }));
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: StateContainer.of(context).curTheme.text15,
+                              padding: EdgeInsets.all(13.0),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                              tapTargetSize: MaterialTapTargetSize.padded,
+                            ),
+                            // highlightColor: StateContainer.of(context).curTheme.text15,
+                            // splashColor: StateContainer.of(context).curTheme.text15,
+                            onPressed: () async {
+                              await UIUtil.showAccountWebview(context, blocked.address);
                             },
                             child: Icon(AppIcons.search, size: 24, color: StateContainer.of(context).curTheme.text),
-                            padding: EdgeInsets.all(13.0),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                            materialTapTargetSize: MaterialTapTargetSize.padded,
                           ),
                         ),
                       ],

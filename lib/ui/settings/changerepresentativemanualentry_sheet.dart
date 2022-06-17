@@ -203,7 +203,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                                   if (data == null || data.text == null) {
                                     return;
                                   }
-                                  Address address = new Address(data.text);
+                                  Address address = new Address(data.text!);
                                   if (address.isValid()) {
                                     setState(() {
                                       _addressValidAndUnfocused = true;

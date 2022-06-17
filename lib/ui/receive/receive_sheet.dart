@@ -9,6 +9,7 @@ import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:quiver/strings.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:decimal/decimal.dart';
@@ -190,21 +191,6 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                   ))
                               : UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!, type: ThreeLineAddressTextType.PRIMARY60),
                         ),
-                        // (StateContainer.of(context).wallet?.username != null)
-                        //     ? Container(
-                        //         margin: EdgeInsets.only(top: 15.0),
-                        //         child: Text("@" + StateContainer.of(context).wallet?.username,
-                        //             style: TextStyle(
-                        //               fontFamily: "OverpassMono",
-                        //               fontWeight: FontWeight.w100,
-                        //               fontSize: 24.0,
-                        //               color: StateContainer.of(context).curTheme.text60,
-                        //             )))
-                        //     : null,
-                        // Container(
-                        //   margin: EdgeInsets.only(top: 15.0),
-                        //   child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.address, type: ThreeLineAddressTextType.PRIMARY60),
-                        // ),
                       ],
                     ),
                     //Empty SizedBox
@@ -353,9 +339,11 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             _addressCopiedTimer!.cancel();
                           }
                           _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
-                            setState(() {
-                              _addressCopied = false;
-                            });
+                            if (mounted) {
+                              setState(() {
+                                _addressCopied = false;
+                              });
+                            }
                           });
                         }),
                       ],
@@ -506,9 +494,17 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
   }
 
   void paintQrCode({String? address, String? amount}) {
+
+    late String data;
+    if (isNotEmpty(amount)) {
+      data = "nano:" + address! + '?amount:' + amount!;
+    } else {
+      data = "nano:" + address!;
+    }
+
     QrPainter painter = QrPainter(
-      data: amount != '' ? 'nano:' + address! + '?amount=' + amount! : address!,
-      version: amount != '' ? 9 : 6,
+      data: data,
+      version: 9,
       gapless: false,
       errorCorrectionLevel: QrErrorCorrectLevel.Q,
     );

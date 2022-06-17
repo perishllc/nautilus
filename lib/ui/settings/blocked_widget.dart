@@ -304,22 +304,26 @@ class _BlockedListState extends State<BlockedList> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        //Back button
+                        // Back button
                         Container(
                           height: 40,
                           width: 40,
                           margin: EdgeInsets.only(right: 10, left: 10),
-                          child: FlatButton(
-                              highlightColor: StateContainer.of(context).curTheme.text15,
-                              splashColor: StateContainer.of(context).curTheme.text15,
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                primary: StateContainer.of(context).curTheme.text15,
+                                backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                padding: EdgeInsets.all(8.0),
+                                // splashColor: StateContainer.of(context).curTheme.text15,
+                                // highlightColor: StateContainer.of(context).curTheme.text15,
+                              ),
                               onPressed: () {
                                 setState(() {
                                   widget.blockedOpen = false;
                                 });
                                 widget.blockedController!.reverse();
                               },
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(8.0),
                               child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                         //Contacts Header Text
@@ -452,11 +456,13 @@ class _BlockedListState extends State<BlockedList> {
   }
 
   Widget buildSingleContact(BuildContext context, User user) {
-    return FlatButton(
+    return TextButton(
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.all(0.0),
+      ),
       onPressed: () {
         BlockedDetailsSheet(user, documentsDirectory).mainBottomSheet(context);
       },
-      padding: EdgeInsets.all(0.0),
       child: Column(children: <Widget>[
         Divider(
           height: 2,
@@ -473,7 +479,7 @@ class _BlockedListState extends State<BlockedList> {
               Expanded(
                 child: Container(
                   // height: 60,
-                  margin: EdgeInsetsDirectional.only(start: StateContainer.of(context).natriconOn! ? 2.0 : 20.0),
+                  margin: EdgeInsetsDirectional.only(start: 20.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,

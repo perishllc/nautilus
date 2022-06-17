@@ -6,7 +6,7 @@ description: Nautilus - Fast, Robust & Secure NANO Wallet.
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.3.4+32
+version: 0.3.5+33
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -60,9 +60,10 @@ dependencies:
   flutter_markdown: ^0.6.10+2
 
   # Native webview plugin
-  flutter_webview_plugin: ^0.4.0
+  # flutter_webview_plugin: ^0.4.0
   # new webview made by flutter:
-  webview_flutter: ^3.0.0
+  # webview_flutter: ^3.0.0
+  flutter_inappwebview: ^5.4.3+7
 
   # SQLite
   sqflite: ^2.0.2+1
@@ -167,6 +168,8 @@ dependencies:
     git:
       url: https://github.com/perishllc/flutter_sodium
       ref: main
+  x25519: ^0.1.1
+  encrypt: ^5.0.1
 
   # search bar + text highlighting:
   searchbar_animation: ^0.0.2

@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'dart:async';
+import 'dart:math';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+// import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
@@ -12,6 +14,7 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/ui/util/exceptions.dart';
 
 enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
+
 enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
 
 class UIUtil {
@@ -336,48 +339,50 @@ class UIUtil {
     );
   }
 
-  static Widget showBlockExplorerWebview(BuildContext context, String? hash) {
+  static Future<void> showBlockExplorerWebview(BuildContext context, String? hash) async {
     cancelLockEvent();
-    return WebviewScaffold(
-      url: AppLocalization.of(context)!.getBlockExplorerUrl(hash, StateContainer.of(context).curBlockExplorer),
-      appBar: new AppBar(
-        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-        brightness: StateContainer.of(context).curTheme.brightness,
-        iconTheme: IconThemeData(color: StateContainer.of(context).curTheme.text),
-      ),
-    );
+    final InAppBrowser browser = new InAppBrowser();
+    var options = InAppBrowserClassOptions(
+        crossPlatform: InAppBrowserOptions(
+          hideUrlBar: true,
+          toolbarTopBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        ),
+        inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
+    String url = AppLocalization.of(context)!.getBlockExplorerUrl(hash, StateContainer.of(context).curBlockExplorer);
+    await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
   }
 
-  static Widget showAccountWebview(BuildContext context, String? account) {
+  static Future<void> showAccountWebview(BuildContext context, String? account) async {
     cancelLockEvent();
-    return WebviewScaffold(
-      url: AppLocalization.of(context)!.getAccountExplorerUrl(account, StateContainer.of(context).curBlockExplorer),
-      appBar: new AppBar(
-        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-        brightness: StateContainer.of(context).curTheme.brightness,
-        iconTheme: IconThemeData(color: StateContainer.of(context).curTheme.text),
-      ),
-    );
+    final InAppBrowser browser = new InAppBrowser();
+    var options = InAppBrowserClassOptions(
+        crossPlatform: InAppBrowserOptions(
+          hideUrlBar: true,
+          toolbarTopBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        ),
+        inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
+    String url = AppLocalization.of(context)!.getAccountExplorerUrl(account, StateContainer.of(context).curBlockExplorer);
+    await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
   }
 
-  static Widget showWebview(BuildContext context, String url) {
+  static Future<void> showWebview(BuildContext context, String url) async {
     cancelLockEvent();
-    return WebviewScaffold(
-      resizeToAvoidBottomInset: Platform.isAndroid,
-      url: url,
-      appBar: new AppBar(
-        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-        brightness: StateContainer.of(context).curTheme.brightness,
-        iconTheme: IconThemeData(color: StateContainer.of(context).curTheme.text),
-      ),
-    );
+    final InAppBrowser browser = new InAppBrowser();
+    var options = InAppBrowserClassOptions(
+        crossPlatform: InAppBrowserOptions(
+          hideUrlBar: true,
+          toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
+        ),
+        inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
+    await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
   }
 
   static double drawerWidth(BuildContext context) {
     if (MediaQuery.of(context).size.width < 375)
       return MediaQuery.of(context).size.width * 0.94;
     else
-      return MediaQuery.of(context).size.width * 0.85;
+      // cap drawer width at 500px
+      return min(MediaQuery.of(context).size.width * 0.85, 500);
   }
 
   static void showSnackbar(String content, BuildContext context, {int durationMs = 2500}) {

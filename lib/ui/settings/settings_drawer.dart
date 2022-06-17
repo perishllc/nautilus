@@ -341,6 +341,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           });
         });
         break;
+      default:
+        break;
     }
   }
 
@@ -399,6 +401,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           });
         });
         break;
+      default:
+        break;
     }
   }
 
@@ -455,6 +459,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             _curNyaniconSetting = NyaniconSetting(NyaniconOptions.OFF);
           });
         });
+        break;
+      default:
         break;
     }
   }
@@ -675,6 +681,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             _curUnlockSetting = UnlockSetting(UnlockOption.NO);
           });
         });
+        break;
+      default:
         break;
     }
   }
@@ -1006,17 +1014,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           height: 2,
           color: StateContainer.of(context).curTheme.text15,
         ),
-        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.purchaseNano, AppIcons.coins, onPressed: () {
-          _onrampDialog().then((choice) {
-            if (choice == null) {
-              return;
-            }
-            Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-              return UIUtil.showWebview(context, choice);
-            }));
-          });
-
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.purchaseNano, AppIcons.coins, onPressed: () async {
           // Navigator.of(context).pushNamed("/purchase_nano");
+          String? choice = await _onrampDialog();
+          if (choice != null) {
+            await UIUtil.showWebview(context, choice);
+          }
         }),
         Divider(
           height: 2,
@@ -1106,7 +1109,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           height: 2,
           color: StateContainer.of(context).curTheme.text15,
         ),
-        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.favoritesHeader, AppIcons.star, onPressed: () {
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.contactsHeader, AppIcons.contact, onPressed: () {
           setState(() {
             _contactsOpen = true;
           });
@@ -1307,26 +1310,20 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                            return UIUtil.showWebview(context, AppLocalization.of(context)!.privacyUrl);
-                          }));
+                        onTap: () async {
+                          await UIUtil.showWebview(context, AppLocalization.of(context)!.privacyUrl);
                         },
                         child: Text(AppLocalization.of(context)!.privacyPolicy, style: AppStyles.textStyleVersionUnderline(context))),
                     Text(" | ", style: AppStyles.textStyleVersion(context)),
                     GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                            return UIUtil.showWebview(context, AppLocalization.of(context)!.eulaUrl);
-                          }));
+                        onTap: () async {
+                          await UIUtil.showWebview(context, AppLocalization.of(context)!.eulaUrl);
                         },
                         child: Text(AppLocalization.of(context)!.eula, style: AppStyles.textStyleVersionUnderline(context))),
                     Text(" | ", style: AppStyles.textStyleVersion(context)),
                     GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                            return UIUtil.showWebview(context, AppLocalization.of(context)!.nautilusNodeUrl);
-                          }));
+                        onTap: () async {
+                          await UIUtil.showWebview(context, AppLocalization.of(context)!.nautilusNodeUrl);
                         },
                         child: Text(AppLocalization.of(context)!.nodeStatus, style: AppStyles.textStyleVersionUnderline(context))),
                   ],
@@ -1396,10 +1393,13 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                               child: Container(
                                 width: 60,
                                 height: 45,
-                                child: FlatButton(
-                                  highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                  splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                  padding: EdgeInsets.all(0.0),
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    primary: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                    padding: EdgeInsets.all(0.0),
+                                    // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                    // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                  ),
                                   child: SizedBox(
                                     width: 60,
                                     height: 45,
@@ -1447,16 +1447,19 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                           width: 48,
                                           height: 36,
                                           color: Colors.transparent,
-                                          child: FlatButton(
+                                          child: TextButton(
+                                            style: TextButton.styleFrom(
+                                              primary: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                              padding: EdgeInsets.all(0.0),
+                                              // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                              // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                            ),
                                             onPressed: () {
                                               sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentLast).then((_) {
                                                 EventTaxiImpl.singleton()
                                                     .fire(AccountChangedEvent(account: StateContainer.of(context).recentLast, delayPop: true));
                                               });
                                             },
-                                            highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                            splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                            padding: EdgeInsets.all(0.0),
                                             child: Container(
                                               width: 48,
                                               height: 36,
@@ -1500,16 +1503,19 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                           width: 48,
                                           height: 36,
                                           color: Colors.transparent,
-                                          child: FlatButton(
+                                          child: TextButton(
+                                            style: TextButton.styleFrom(
+                                              padding: EdgeInsets.all(0.0),
+                                              primary: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                              // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                              // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                            ),
                                             onPressed: () {
                                               sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentSecondLast).then((_) {
                                                 EventTaxiImpl.singleton()
                                                     .fire(AccountChangedEvent(account: StateContainer.of(context).recentSecondLast, delayPop: true));
                                               });
                                             },
-                                            highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                            splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                            padding: EdgeInsets.all(0.0),
                                             child: Container(
                                               width: 48,
                                               height: 36,
@@ -1530,7 +1536,14 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                             ),
-                            child: FlatButton(
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.all(0.0),
+                                shape: CircleBorder(),
+                                primary: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text30,
+                                // splashColor: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text30,
+                                // highlightColor: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text15,
+                              ),
                               onPressed: () {
                                 if (!_loadingAccounts) {
                                   setState(() {
@@ -1546,10 +1559,6 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                   });
                                 }
                               },
-                              padding: EdgeInsets.all(0.0),
-                              shape: CircleBorder(),
-                              splashColor: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text30,
-                              highlightColor: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text15,
                               child: Icon(AppIcons.accountswitcher,
                                   size: 36,
                                   color: _loadingAccounts ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary),
@@ -1561,11 +1570,14 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 2),
-                    child: FlatButton(
-                      padding: EdgeInsets.all(4.0),
-                      highlightColor: StateContainer.of(context).curTheme.text15,
-                      splashColor: StateContainer.of(context).curTheme.text30,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.all(4.0),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
+                        primary: StateContainer.of(context).curTheme.text30,
+                        // highlightColor: StateContainer.of(context).curTheme.text15,
+                        // splashColor: StateContainer.of(context).curTheme.text30,
+                      ),
                       onPressed: () {
                         AccountDetailsSheet(StateContainer.of(context).selectedAccount!).mainBottomSheet(context);
                       },
@@ -1620,7 +1632,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     scrollbarColor: StateContainer.of(context).curTheme.primary!,
                     child: _buildSettingsList(),
                   ),
-                  //List Top Gradient End
+                  // List Top Gradient End
                   Align(
                     alignment: Alignment.topCenter,
                     child: Container(
@@ -1634,7 +1646,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         ),
                       ),
                     ),
-                  ), //List Top Gradient End
+                  ), // List Top Gradient End
                 ],
               ),
             ),
@@ -1666,25 +1678,29 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      //Back button
+                      // Back button
                       Container(
                         height: 40,
                         width: 40,
                         margin: EdgeInsets.only(right: 10, left: 10),
-                        child: FlatButton(
-                            highlightColor: StateContainer.of(context).curTheme.text15,
-                            splashColor: StateContainer.of(context).curTheme.text15,
+                        child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: StateContainer.of(context).curTheme.text15,
+                              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                              padding: EdgeInsets.all(8.0),
+                              // highlightColor: StateContainer.of(context).curTheme.text15,
+                              // splashColor: StateContainer.of(context).curTheme.text15,
+                            ),
                             onPressed: () {
                               setState(() {
                                 _securityOpen = false;
                               });
                               _securityController.reverse();
                             },
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                            padding: EdgeInsets.all(8.0),
                             child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                       ),
-                      //Security Header Text
+                      // Security Header Text
                       Text(
                         AppLocalization.of(context)!.securityHeader,
                         style: AppStyles.textStyleSettingsHeader(context),
@@ -1757,7 +1773,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                   ],
                 ),
-                //List Top Gradient End
+                // List Top Gradient End
                 Align(
                   alignment: Alignment.topCenter,
                   child: Container(

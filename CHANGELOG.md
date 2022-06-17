@@ -1,4 +1,12 @@
-# v0.3.4 - [2022-06-15]
+# v0.3.5 - [2022-06-XX]
+#### Added
+#### Changed
+- Visual updates to the home screen demo cards
+- Cap drawer width to 500px (to make the view on tablets look nicer)
+#### Fixed
+- Bug with messages and search
+- Couple of bugs with the receive QR code / reading QR codes
+## v0.3.4 - [2022-06-15]
 #### Added
 - Node local_timestamps are now displayed in the transaction history
   - These aren't guaranteed to be accurate, but in most cases they will be fairly close

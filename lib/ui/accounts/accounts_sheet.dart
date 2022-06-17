@@ -133,7 +133,9 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     });
     try {
       AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances(addresses);
-      await _handleAccountsBalancesResponse(resp);
+      if (mounted) {
+        await _handleAccountsBalancesResponse(resp);
+      }
     } catch (e) {
       sl.get<Logger>().e("Error", e);
     }

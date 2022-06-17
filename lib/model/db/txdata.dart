@@ -27,6 +27,8 @@ class TXData {
   bool is_memo;
   @JsonKey(name: 'is_message')
   bool is_message;
+  @JsonKey(name: 'is_tx')
+  bool is_tx;
   @JsonKey(name: 'from_address')
   String? from_address;
   @JsonKey(name: 'to_address')
@@ -55,6 +57,8 @@ class TXData {
   int? recv_height;
   @JsonKey(name: 'record_type')
   String? record_type;
+  @JsonKey(name: 'sub_type')
+  String? sub_type;
   @JsonKey(name: 'metadata')
   String? metadata;
   @JsonKey(name: 'status')
@@ -73,6 +77,7 @@ class TXData {
       this.memo_enc,
       this.is_memo = false,
       this.is_message = false,
+      this.is_tx = false,
       this.memo,
       this.uuid,
       this.is_acknowledged = false,
@@ -80,6 +85,7 @@ class TXData {
       this.send_height,
       this.recv_height,
       this.record_type,
+      this.sub_type,
       this.metadata,
       this.status,
       int? id});
@@ -113,6 +119,10 @@ class TXData {
   }
 
   bool isSolid() {
+    return this.is_message || this.is_request || this.is_tx;
+  }
+
+  bool isDeletable() {
     return this.is_message || this.is_request;
   }
 
@@ -130,6 +140,7 @@ class TXData {
         memo_enc: json["memo_enc"] as String?,
         is_memo: json["is_memo"] as bool,
         is_message: json["is_message"] as bool,
+        is_tx: json["is_tx"] as bool,
         memo: json["memo"] as String?,
         uuid: json["uuid"] as String?,
         is_acknowledged: json["is_acknowledged"] as bool,
@@ -137,6 +148,7 @@ class TXData {
         send_height: json["send_height"] as int?,
         recv_height: json["recv_height"] as int?,
         record_type: json["record_type"] as String?,
+        sub_type: json["sub_type"] as String?,
         metadata: json["metadata"] as String?,
         status: json["status"] as String?);
   }
@@ -159,9 +171,11 @@ class TXData {
       o.memo_enc == memo_enc &&
       o.is_memo == is_memo &&
       o.is_message == is_message &&
+      o.is_tx == is_tx &&
       o.memo == memo &&
       o.is_acknowledged == is_acknowledged &&
       o.record_type == record_type &&
+      o.sub_type == sub_type &&
       o.metadata == metadata &&
       o.status == status;
 
@@ -171,50 +185,52 @@ class TXData {
 
 
 
-TXData _$TXDataFromJson(Map<String, dynamic> json) => TXData(
-      from_address: json['from_address'] as String?,
-      to_address: json['to_address'] as String?,
-      amount_raw: json['amount_raw'] as String?,
-      is_request: json['is_request'] as bool,
-      request_time: json['request_time'] as int?,
-      is_fulfilled: json['is_fulfilled'] as bool,
-      fulfillment_time: json['fulfillment_time'] as int?,
-      block: json['block'] as String?,
-      link: json['link'] as String?,
-      is_memo: json['is_memo'] as bool,
-      is_message: json['is_message'] as bool,
-      memo: json['memo'] as String?,
-      memo_enc: json['memo_enc'] as String?,
-      uuid: json['uuid'] as String?,
-      is_acknowledged: json['is_acknowledged'] as bool,
-      height: json['height'] as int?,
-      send_height: json['send_height'] as int?,
-      recv_height: json['recv_height'] as int?,
-      record_type: json['record_type'] as String?,
-      metadata: json['metadata'] as String?,
-      status: json['status'] as String?,
-    );
+// TXData _$TXDataFromJson(Map<String, dynamic> json) => TXData(
+//       from_address: json['from_address'] as String?,
+//       to_address: json['to_address'] as String?,
+//       amount_raw: json['amount_raw'] as String?,
+//       is_request: json['is_request'] as bool,
+//       request_time: json['request_time'] as int?,
+//       is_fulfilled: json['is_fulfilled'] as bool,
+//       fulfillment_time: json['fulfillment_time'] as int?,
+//       block: json['block'] as String?,
+//       link: json['link'] as String?,
+//       is_memo: json['is_memo'] as bool,
+//       is_message: json['is_message'] as bool,
+//       is_tx: json['is_tx'] as bool,
+//       memo: json['memo'] as String?,
+//       memo_enc: json['memo_enc'] as String?,
+//       uuid: json['uuid'] as String?,
+//       is_acknowledged: json['is_acknowledged'] as bool,
+//       height: json['height'] as int?,
+//       send_height: json['send_height'] as int?,
+//       recv_height: json['recv_height'] as int?,
+//       record_type: json['record_type'] as String?,
+//       metadata: json['metadata'] as String?,
+//       status: json['status'] as String?,
+//     );
 
-Map<String, dynamic> _$TXDataToJson(TXData instance) => <String, dynamic>{
-      'from_address': instance.from_address,
-      'to_address': instance.to_address,
-      'amount_raw': instance.amount_raw,
-      'is_request': instance.is_request,
-      'request_time': instance.request_time,
-      'is_fulfilled': instance.is_fulfilled,
-      'fulfillment_time': instance.fulfillment_time,
-      'block': instance.block,
-      'link': instance.link,
-      'is_memo': instance.is_memo,
-      'is_message': instance.is_message,
-      'memo': instance.memo,
-      'memo_enc': instance.memo_enc,
-      'uuid': instance.uuid,
-      'is_acknowledged': instance.is_acknowledged,
-      'height': instance.height,
-      'send_height': instance.send_height,
-      'recv_height': instance.recv_height,
-      'record_type': instance.record_type,
-      'metadata': instance.metadata,
-      'status': instance.status,
-    };
+// Map<String, dynamic> _$TXDataToJson(TXData instance) => <String, dynamic>{
+//       'from_address': instance.from_address,
+//       'to_address': instance.to_address,
+//       'amount_raw': instance.amount_raw,
+//       'is_request': instance.is_request,
+//       'request_time': instance.request_time,
+//       'is_fulfilled': instance.is_fulfilled,
+//       'fulfillment_time': instance.fulfillment_time,
+//       'block': instance.block,
+//       'link': instance.link,
+//       'is_memo': instance.is_memo,
+//       'is_message': instance.is_message,
+//       'is_tx': instance.is_tx,
+//       'memo': instance.memo,
+//       'memo_enc': instance.memo_enc,
+//       'uuid': instance.uuid,
+//       'is_acknowledged': instance.is_acknowledged,
+//       'height': instance.height,
+//       'send_height': instance.send_height,
+//       'recv_height': instance.recv_height,
+//       'record_type': instance.record_type,
+//       'metadata': instance.metadata,
+//       'status': instance.status,
+//     };

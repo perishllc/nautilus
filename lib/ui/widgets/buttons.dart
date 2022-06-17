@@ -81,9 +81,9 @@ class AppButton {
                         width: 2,
                       );
                     return BorderSide(
-                        color: disabled ? StateContainer.of(context).curTheme.primary60! : StateContainer.of(context).curTheme.primary!,
-                        width: 2,
-                      );
+                      color: disabled ? StateContainer.of(context).curTheme.primary60! : StateContainer.of(context).curTheme.primary!,
+                      width: 2,
+                    );
                   },
                 ),
               ),
@@ -124,9 +124,15 @@ class AppButton {
             ),
             height: 55,
             margin: EdgeInsetsDirectional.fromSTEB(dimens[0], dimens[1], dimens[2], dimens[3]),
-            child: FlatButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-              color: StateContainer.of(context).curTheme.success,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                primary: StateContainer.of(context).curTheme.success,
+                backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                // TODO: finish this
+                // highlightColor: StateContainer.of(context).curTheme.success30,
+                // splashColor: StateContainer.of(context).curTheme.successDark,
+              ),
               child: AutoSizeText(
                 buttonText,
                 textAlign: TextAlign.center,
@@ -140,8 +146,6 @@ class AppButton {
                 }
                 return;
               },
-              highlightColor: StateContainer.of(context).curTheme.success30,
-              splashColor: StateContainer.of(context).curTheme.successDark,
             ),
           ),
         );
@@ -156,10 +160,30 @@ class AppButton {
             height: 55,
             margin: EdgeInsetsDirectional.fromSTEB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                primary: StateContainer.of(context).curTheme.text15,
+                backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                side: BorderSide(color: StateContainer.of(context).curTheme.success!, width: 2.0),
+              ) /*.copyWith(
+                side: MaterialStateProperty.resolveWith<BorderSide>(
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.pressed))
+                      return BorderSide(
+                        color: StateContainer.of(context).curTheme.primary!,
+                        width: 2,
+                      );
+                    return BorderSide(
+                      color: StateContainer.of(context).curTheme.success!,
+                      width: 2,
+                    );
+                  },
+                ),
+              )*/
+              ,
               // TODO:
               // color: StateContainer.of(context).curTheme.backgroundDark,
               // textColor: StateContainer.of(context).curTheme.success,
-              // borderSide: BorderSide(color: StateContainer.of(context).curTheme.success, width: 2.0),
               // highlightedBorderColor: StateContainer.of(context).curTheme.success,
               // splashColor: StateContainer.of(context).curTheme.success30,
               // highlightColor: StateContainer.of(context).curTheme.success15,
@@ -191,14 +215,12 @@ class AppButton {
             height: 55,
             margin: EdgeInsetsDirectional.fromSTEB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: OutlinedButton(
-              // TODO:
-              // color: StateContainer.of(context).curTheme.backgroundDark,
-              // textColor: StateContainer.of(context).curTheme.text,
-              // borderSide: BorderSide(color: StateContainer.of(context).curTheme.text, width: 2.0),
-              // highlightedBorderColor: StateContainer.of(context).curTheme.text,
-              // splashColor: StateContainer.of(context).curTheme.text30,
-              // highlightColor: StateContainer.of(context).curTheme.text15,
-              // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+              style: OutlinedButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                primary: StateContainer.of(context).curTheme.text15,
+                backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                side: BorderSide(color: StateContainer.of(context).curTheme.text!, width: 2.0),
+              ),
               child: AutoSizeText(
                 buttonText,
                 textAlign: TextAlign.center,

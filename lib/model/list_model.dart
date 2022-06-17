@@ -31,10 +31,10 @@ class ListModel<E> {
     // }
   }
 
-  void insertAt(E item, int index, {bool? instant = false}) {
+  void insertAt(E item, int index, {bool instant = false}) {
     if (listKey.currentState != null) {
       _items.insert(index, item);
-      Duration duration = instant! ? Duration(milliseconds: 0) : INSERT_DURATION;
+      Duration duration = instant ? Duration(milliseconds: 0) : INSERT_DURATION;
       _animatedList!.insertItem(index, duration: duration);
     }
   }

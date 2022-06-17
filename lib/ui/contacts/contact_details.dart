@@ -139,14 +139,14 @@ class ContactDetailsSheet {
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
-                                  AppLocalization.of(context)!.removeFavorite,
-                                  AppLocalization.of(context)!.removeFavoriteConfirmation.replaceAll("%1", contact.getDisplayName()!),
+                                  AppLocalization.of(context)!.removeContact,
+                                  AppLocalization.of(context)!.removeContactConfirmation.replaceAll("%1", contact.getDisplayName()!),
                                   CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () {
                                 sl.get<DBHelper>().deleteContact(contact).then((deleted) {
                                   if (deleted) {
                                     EventTaxiImpl.singleton().fire(ContactRemovedEvent(contact: contact));
                                     EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: contact));
-                                    UIUtil.showSnackbar(AppLocalization.of(context)!.favoriteRemoved.replaceAll("%1", contact.getDisplayName()!), context);
+                                    UIUtil.showSnackbar(AppLocalization.of(context)!.contactRemoved.replaceAll("%1", contact.getDisplayName()!), context);
                                     Navigator.of(context).pop();
                                   } else {
                                     // TODO - error for failing to delete contact
@@ -167,7 +167,7 @@ class ContactDetailsSheet {
                           child: Column(
                             children: <Widget>[
                               AutoSizeText(
-                                CaseChange.toUpperCase(AppLocalization.of(context)!.favoriteHeader, context),
+                                CaseChange.toUpperCase(AppLocalization.of(context)!.contactHeader, context),
                                 style: AppStyles.textStyleHeader(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
@@ -181,18 +181,19 @@ class ContactDetailsSheet {
                           width: 50,
                           height: 50,
                           margin: EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
-                          child: FlatButton(
-                            highlightColor: StateContainer.of(context).curTheme.text15,
-                            splashColor: StateContainer.of(context).curTheme.text15,
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                                return UIUtil.showAccountWebview(context, contact.address);
-                              }));
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: StateContainer.of(context).curTheme.text15,
+                              padding: EdgeInsets.all(13.0),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                              tapTargetSize: MaterialTapTargetSize.padded,
+                            ),
+                            // highlightColor: StateContainer.of(context).curTheme.text15,
+                            // splashColor: StateContainer.of(context).curTheme.text15,
+                            onPressed: () async {
+                              await UIUtil.showAccountWebview(context, contact.address);
                             },
                             child: Icon(AppIcons.search, size: 24, color: StateContainer.of(context).curTheme.text),
-                            padding: EdgeInsets.all(13.0),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                            materialTapTargetSize: MaterialTapTargetSize.padded,
                           ),
                         ),
                       ],

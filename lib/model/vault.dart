@@ -15,6 +15,7 @@ class Vault {
   static const String seedKey = 'fkalium_seed';
   static const String encryptionKey = 'fkalium_secret_phrase';
   static const String pinKey = 'fkalium_pin';
+  static const String plausiblePinKey = 'fnautilus_plausible_pin';
   static const String sessionKey = 'fencsess_key';
   final FlutterSecureStorage secureStorage = new FlutterSecureStorage();
 
@@ -117,6 +118,22 @@ class Vault {
       await prefs.remove(pinKey);
     }
     return await secureStorage.delete(key: pinKey);
+  }
+
+  Future<String?> getPlausiblePin() async {
+    return await _read(plausiblePinKey);
+  }
+
+  Future<String?> writePlausiblePin(String pin) async {
+    return await _write(plausiblePinKey, pin);
+  }
+
+  Future<void> deletePlausiblePin() async {
+    if (await legacy()) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove(plausiblePinKey);
+    }
+    return await secureStorage.delete(key: plausiblePinKey);
   }
 
   // For encrypted data

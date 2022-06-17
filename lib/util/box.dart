@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_sodium/flutter_sodium.dart';
 import 'dart:typed_data';
 import 'package:nautilus_wallet_flutter/util/blake2b.dart';
 import 'package:nautilus_wallet_flutter/util/curve25519.dart';
+import 'package:x25519/x25519.dart';
+import 'package:encrypt/encrypt.dart';
 
 String generateNonce(int length) {
   String result = ""; // resulting nonce
@@ -74,46 +76,86 @@ String decodeString(Uint8List bytes) {
 class Box {
   static const NONCE_LENGTH = 24;
 
-  static Future<String> encrypt(String message, String address, String privateKey) async {
+  // static Future<String> encrypt(String message, String address, String privateKey) async {
+  //   String publicKey = NanoAccounts.extractPublicKey(address);
+
+  //   Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
+  //   Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
+  //   Uint8List nonce = NanoHelpers.hexToBytes(generateNonce(NONCE_LENGTH));
+
+  //   Map map = Map();
+  //   map['msg'] = encodeString(message);
+  //   map['nonce'] = nonce;
+  //   map['publicKey'] = convertedPublicKey;
+  //   map['secretKey'] = convertedPrivateKey;
+
+  //   Uint8List encrypted = await compute(box, map);
+
+  //   var full = BytesBuilder();
+  //   full.add(nonce);
+  //   full.add(encrypted);
+
+  //   return Sodium.bin2base64(full.toBytes());
+  // }
+
+  // static Future<String> decrypt(String message, String address, String privateKey) async {
+  //   String publicKey = NanoAccounts.extractPublicKey(address);
+
+  //   Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
+  //   Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
+
+  //   Uint8List decodedEncryptedMessageBytes = Sodium.base642bin(message);
+  //   Uint8List nonce = decodedEncryptedMessageBytes.sublist(0, NONCE_LENGTH);
+  //   Uint8List encryptedMessage = decodedEncryptedMessageBytes.sublist(NONCE_LENGTH, decodedEncryptedMessageBytes.length);
+
+  //   Map map = Map();
+  //   map['msg'] = encryptedMessage;
+  //   map['nonce'] = nonce;
+  //   map['publicKey'] = convertedPublicKey;
+  //   map['secretKey'] = convertedPrivateKey;
+
+  //   Uint8List decrypted = await compute(boxOpen as FutureOr<Uint8List> Function(dynamic), map);
+
+  //   return decodeString(decrypted);
+  // }
+
+
+  static String encrypt(String message, String address, String privateKey) {
     String publicKey = NanoAccounts.extractPublicKey(address);
 
-    Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
-    Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
-    Uint8List nonce = NanoHelpers.hexToBytes(generateNonce(NONCE_LENGTH));
+    Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(
+        NanoHelpers.hexToBytes(publicKey));
+    Uint8List convertedPrivateKey =
+        convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
 
-    Map map = Map();
-    map['msg'] = encodeString(message);
-    map['nonce'] = nonce;
-    map['publicKey'] = convertedPublicKey;
-    map['secretKey'] = convertedPrivateKey;
+    var aliceSharedKey = X25519(convertedPrivateKey, convertedPublicKey);
 
-    Uint8List encrypted = await compute(box, map);
+    final key = Key(aliceSharedKey);
+    final iv = IV.fromLength(16);
 
-    var full = BytesBuilder();
-    full.add(nonce);
-    full.add(encrypted);
+    final encrypter = Encrypter(AES(key));
 
-    return Sodium.bin2base64(full.toBytes());
+    final encrypted = encrypter.encrypt(message, iv: iv);
+
+    return encrypted.base64;
   }
 
-  static Future<String> decrypt(String message, String address, String privateKey) async {
+  static String decrypt(
+      String encrypted, String address, String privateKey) {
     String publicKey = NanoAccounts.extractPublicKey(address);
 
-    Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
-    Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
+    Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(
+        NanoHelpers.hexToBytes(publicKey));
+    Uint8List convertedPrivateKey =
+        convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
 
-    Uint8List decodedEncryptedMessageBytes = Sodium.base642bin(message);
-    Uint8List nonce = decodedEncryptedMessageBytes.sublist(0, NONCE_LENGTH);
-    Uint8List encryptedMessage = decodedEncryptedMessageBytes.sublist(NONCE_LENGTH, decodedEncryptedMessageBytes.length);
+    var bobSharedKey = X25519(convertedPrivateKey, convertedPublicKey);
+    final key = Key(bobSharedKey);
+    final encrypter = Encrypter(AES(key));
+    final iv = IV.fromLength(16);
+    final decrypted = encrypter.decrypt(Encrypted.fromBase64(encrypted), iv: iv);
 
-    Map map = Map();
-    map['msg'] = encryptedMessage;
-    map['nonce'] = nonce;
-    map['publicKey'] = convertedPublicKey;
-    map['secretKey'] = convertedPrivateKey;
-
-    Uint8List decrypted = await compute(boxOpen as FutureOr<Uint8List> Function(dynamic), map);
-
-    return decodeString(decrypted);
+    return decrypted;
   }
+
 }

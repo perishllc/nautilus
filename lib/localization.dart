@@ -716,8 +716,10 @@ class AppLocalization {
   }
 
   String get sendSheetInfo {
-    return Intl.message("Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users.\n\nYou don't need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don't use nautilus.",
-        desc: 'send_sheet_info', name: 'sendSheetInfo');
+    return Intl.message(
+        "Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users.\n\nYou don't need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don't use nautilus.",
+        desc: 'send_sheet_info',
+        name: 'sendSheetInfo');
   }
 
   String get sendSheetInfoHeader {
@@ -1169,6 +1171,14 @@ class AppLocalization {
     return Intl.message("Set Wallet Password", desc: 'Allows user to encrypt wallet with a password', name: 'setWalletPassword');
   }
 
+  String get setWalletPin {
+    return Intl.message("Set Wallet Pin", desc: 'Allows user to encrypt wallet with a pin', name: 'setWalletPin');
+  }
+
+  String get setWalletPlausiblePin {
+    return Intl.message("Set Wallet Plausible Pin", desc: 'Allows user to setup a plausible deniability pin', name: 'setWalletPlausiblePin');
+  }
+
   String get setPassword {
     return Intl.message("Set Password", desc: 'A button that sets the wallet password', name: 'setPassword');
   }
@@ -1207,11 +1217,11 @@ class AppLocalization {
   }
 
   String get exampleCardTo {
-    return Intl.message("to someone", desc: 'example_card_to', name: 'exampleCardTo');
+    return Intl.message("someone", desc: 'example_card_to', name: 'exampleCardTo');
   }
 
   String get exampleCardFrom {
-    return Intl.message("from someone", desc: 'example_card_from', name: 'exampleCardFrom');
+    return Intl.message("someone", desc: 'example_card_from', name: 'exampleCardFrom');
   }
 
   /// -- END EXAMPLE HOME SCREEN CARDS
@@ -1224,7 +1234,7 @@ class AppLocalization {
 
   String get examplePaymentExplainer {
     return Intl.message(
-        "Once you send or receive a payment request, they'll show up here like this with the color of the card indicating the request's status. \nGreen indicates the request has been paid.\nYellow indicates the request has not been fulfilled.\nRed indicates the request has not been read or received.",
+        "Once you send or receive a payment request, they'll show up here like this with the color and tag of the card indicating the status. \n\nGreen indicates the request has been paid.\nYellow indicates the request / memo has not been paid / read.\nRed indicates the request has not been read or received.\n\n Neutral colored cards without an amount are just messages.",
         desc: 'example_payments_explainer',
         name: 'examplePaymentExplainer');
   }
@@ -1246,11 +1256,31 @@ class AppLocalization {
   }
 
   String get examplePaymentTo {
-    return Intl.message("@best_friend", desc: 'example_card_to', name: 'examplePaymentTo');
+    return Intl.message("@best_friend", desc: 'example_payment_to', name: 'examplePaymentTo');
+  }
+
+  String get examplePayRecipient {
+    return Intl.message("@dad", desc: 'example_pay_recipient', name: 'examplePayRecipient');
+  }
+
+  String get examplePayRecipientMessage {
+    return Intl.message("Happy Birthday!", desc: 'example_pay_recipient_message', name: 'examplePayRecipientMessage');
+  }
+
+  String get exampleRecRecipient {
+    return Intl.message("@coworker", desc: 'example_rec_recipient', name: 'exampleReceiveRecipient');
+  }
+
+  String get exampleRecRecipientMessage {
+    return Intl.message("Gas Money", desc: 'example_rec_recipient_message', name: 'exampleRecRecipientMessage');
   }
 
   String get examplePaymentFrom {
-    return Intl.message("@landlord", desc: 'example_card_from', name: 'examplePaymentFrom');
+    return Intl.message("@landlord", desc: 'example_payment_from', name: 'examplePaymentFrom');
+  }
+
+  String get examplePaymentMessage {
+    return Intl.message("Hey what's up?", desc: 'example_card_message', name: 'examplePaymentMessage');
   }
 
   /// -- END EXAMPLE HOME SCREEN CARDS

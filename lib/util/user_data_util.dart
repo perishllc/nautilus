@@ -12,7 +12,7 @@ import 'package:quiver/strings.dart';
 import 'package:validators/validators.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
 
-enum DataType { RAW, URL, ADDRESS, MANTA_ADDRESS, SEED }
+enum DataType { RAW, URL, ADDRESS, SEED, DATA }
 
 class QRScanErrs {
   static const String PERMISSION_DENIED = "qr_denied";
@@ -45,6 +45,12 @@ class UserDataUtil {
     } else if (type == DataType.SEED) {
       // Check if valid seed
       if (NanoSeeds.isValidSeed(data)) {
+        return data;
+      }
+    } else if (type == DataType.DATA) {
+      // Check if an address or manta result
+      Address address = Address(data);
+      if (address.isValid()) {
         return data;
       }
     }

@@ -47,9 +47,6 @@ class _AppPopupButtonState extends State<AppPopupButton> {
     // Parse scan data and route appropriately
     if (scanResult == null) {
       UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
-    } else if (/*!QRScanErrs.ERROR_LIST.contains(scanResult)*/false) {
-      // TODO: block handoff
-
     } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
       // Is a URI
       Address address = Address(scanResult);
@@ -57,7 +54,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
         UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
       } else {
         // See if this address belongs to a contact
-        User? contact = await sl.get<DBHelper>().getContactWithAddress(address.address!);
+        User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
         // If amount is present, fill it and go to SendConfirm
         BigInt? amountBigInt = address.amount != null ? BigInt.tryParse(address.amount!) : null;
         bool sufficientBalance = false;
@@ -69,20 +66,13 @@ class _AppPopupButtonState extends State<AppPopupButton> {
         if (amountBigInt != null && sufficientBalance) {
           // Go to confirm sheet
           Sheets.showAppHeightNineSheet(
-              context: context,
-              widget: SendConfirmSheet(
-                  amountRaw: address.amount,
-                  destination: contact != null ? contact.address : address.address,
-                  contactName: contact != null ? contact.getDisplayName() : null));
+              context: context, widget: SendConfirmSheet(amountRaw: address.amount, destination: address.address, contactName: user?.getDisplayName()));
         } else {
           // Go to send sheet
           Sheets.showAppHeightNineSheet(
               context: context,
               widget: SendSheet(
-                  localCurrency: StateContainer.of(context).curCurrency,
-                  user: contact,
-                  address: contact != null ? contact.address : address.address,
-                  quickSendAmount: amountBigInt != null ? address.amount : null));
+                  localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: address.amount ?? null));
         }
       }
     }

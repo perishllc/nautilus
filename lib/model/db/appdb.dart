@@ -15,7 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 class DBHelper {
-  static const int DB_VERSION = 6;
+  static const int DB_VERSION = 7;
   static const String CONTACTS_SQL = """CREATE TABLE Contacts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
@@ -66,6 +66,7 @@ class DBHelper {
         memo_enc TEXT,
         is_memo BOOLEAN,
         is_message BOOLEAN,
+        is_tx BOOLEAN,
         memo TEXT,
         uuid TEXT,
         is_acknowledged BOOLEAN,
@@ -73,6 +74,7 @@ class DBHelper {
         send_height INTEGER,
         recv_height INTEGER,
         record_type TEXT,
+        sub_type TEXT,
         metadata TEXT,
         status TEXT)""";
   static const String USER_ADD_BLOCKED_COLUMN_SQL = """
@@ -94,8 +96,12 @@ class DBHelper {
     CREATE TABLE Transactions(id, from_address, to_address, amount_raw, is_request, is_fulfilled, block, link, memo_enc, is_memo, is_message, memo, uuid, is_acknowledged, height, send_height, recv_height, record_type, metadata, status);
     INSERT INTO Transactions SELECT * FROM t1_backup;
     DROP TABLE t1_backup;
-    ALTER TABLE Transactions ADD request_time INTEGER
-    ALTER TABLE Transactions ADD fulfillment_time INTEGER
+    ALTER TABLE Transactions ADD request_time INTEGER;
+    ALTER TABLE Transactions ADD fulfillment_time INTEGER;
+    """;
+  static const String TXDATA_ADD_IS_TX_SUB_TYPE_COLUMN_SQL = """
+    ALTER TABLE Transactions ADD is_tx BOOLEAN;
+    ALTER TABLE Transactions ADD sub_type TEXT;
     """;
 
   static Database? _db;
@@ -146,6 +152,13 @@ class DBHelper {
       //  request_time TEXT     -> request_time INTEGER
       //  fulfillment_time TEXT -> fulfillment_time INTEGER
       await db.execute(TXDATA_TIME_INT_SQL);
+    }
+
+    if (oldVersion == 6) {
+      // change TXData:
+      //  request_time TEXT     -> request_time INTEGER
+      //  fulfillment_time TEXT -> fulfillment_time INTEGER
+      await db.execute(TXDATA_ADD_IS_TX_SUB_TYPE_COLUMN_SQL);
     }
   }
 
@@ -739,6 +752,9 @@ class DBHelper {
     if (dbItem["is_message"] != null) {
       newData.is_message = (dbItem["is_message"] == 0 || dbItem["is_message"] == null) ? false : true;
     }
+    if (dbItem["is_tx"] != null) {
+      newData.is_tx = (dbItem["is_tx"] == 0 || dbItem["is_tx"] == null) ? false : true;
+    }
     if (dbItem["memo"] != null) {
       newData.memo = dbItem["memo"];
     }
@@ -759,6 +775,9 @@ class DBHelper {
     }
     if (dbItem["record_type"] != null) {
       newData.record_type = dbItem["record_type"];
+    }
+    if (dbItem["sub_type"] != null) {
+      newData.sub_type = dbItem["sub_type"];
     }
     if (dbItem["metadata"] != null) {
       newData.metadata = dbItem["metadata"];
@@ -790,7 +809,7 @@ class DBHelper {
     }
 
     return await dbClient.rawInsert(
-        'INSERT INTO Transactions (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, link, memo_enc, is_memo, is_message, memo, uuid, is_acknowledged, height, send_height, recv_height, record_type, metadata, status) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO Transactions (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, link, memo_enc, is_memo, is_message, is_tx, memo, uuid, is_acknowledged, height, send_height, recv_height, record_type, sub_type, metadata, status) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           txData.from_address,
           txData.to_address,
@@ -804,6 +823,7 @@ class DBHelper {
           txData.memo_enc,
           txData.is_memo,
           txData.is_message,
+          txData.is_tx,
           txData.memo,
           txData.uuid,
           txData.is_acknowledged,
@@ -811,6 +831,7 @@ class DBHelper {
           txData.send_height,
           txData.recv_height,
           txData.record_type,
+          txData.sub_type,
           txData.metadata,
           txData.status,
         ]);
@@ -825,7 +846,7 @@ class DBHelper {
 
     return await dbClient.rawUpdate(
         // 'UPDATE Transactions SET (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, memo, is_acknowledged, height) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE uuid = ?',
-        'UPDATE Transactions SET from_address = ?, to_address = ?, amount_raw = ?, is_request = ?, request_time = ?, is_fulfilled = ?, fulfillment_time = ?, block = ?, link = ?, memo_enc = ?, is_memo = ?, is_message = ?, memo = ?, is_acknowledged = ?, height = ?, send_height = ?, recv_height = ?, record_type = ?, metadata = ?, status = ? WHERE uuid = ?',
+        'UPDATE Transactions SET from_address = ?, to_address = ?, amount_raw = ?, is_request = ?, request_time = ?, is_fulfilled = ?, fulfillment_time = ?, block = ?, link = ?, memo_enc = ?, is_memo = ?, is_message = ?, is_tx = ?, memo = ?, is_acknowledged = ?, height = ?, send_height = ?, recv_height = ?, record_type = ?, sub_type = ?, metadata = ?, status = ? WHERE uuid = ?',
         [
           txData.from_address,
           txData.to_address,
@@ -839,12 +860,14 @@ class DBHelper {
           (txData.memo_enc == null || txData.memo_enc!.isEmpty) ? "" : txData.memo_enc,
           txData.is_memo ? 1 : 0,
           txData.is_message ? 1 : 0,
+          txData.is_tx ? 1 : 0,
           (txData.memo == null || txData.memo!.isEmpty) ? "" : txData.memo,
           txData.is_acknowledged ? 1 : 0,
           txData.height,
           txData.send_height,
           txData.recv_height,
           txData.record_type,
+          txData.sub_type,
           txData.metadata,
           txData.status,
           // must be last:
@@ -887,7 +910,7 @@ class DBHelper {
   Future<List<TXData>> getAccountSpecificSolids(String? account) async {
     Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery(
-        'SELECT * FROM Transactions WHERE (from_address = ? OR to_address = ?) AND (is_request = 1 OR is_message = 1) ORDER BY request_time DESC',
+        'SELECT * FROM Transactions WHERE (from_address = ? OR to_address = ?) AND (is_request = 1 OR is_message = 1 OR is_tx = 1) ORDER BY request_time DESC',
         [account, account]);
     // List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions ORDER BY request_time DESC');
     List<TXData> solids = [];
@@ -900,7 +923,7 @@ class DBHelper {
   Future<List<TXData>> getAccountSpecificRecords(String account) async {
     Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery(
-        'SELECT * FROM Transactions WHERE (from_address = ? OR to_address = ?) AND (is_request = 0 and is_message = 0) ORDER BY request_time DESC',
+        'SELECT * FROM Transactions WHERE (from_address = ? OR to_address = ?) AND (is_request = 0 AND is_message = 0 AND is_tx = 0) ORDER BY request_time DESC',
         [account, account]);
     // List<Map> list = await dbClient.rawQuery('SELECT * FROM Transactions ORDER BY request_time DESC');
     List<TXData> transactions = [];

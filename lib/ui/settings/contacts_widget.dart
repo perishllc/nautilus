@@ -305,61 +305,73 @@ class _ContactsListState extends State<ContactsList> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        //Back button
+                        // Back button
                         Container(
                           height: 40,
                           width: 40,
                           margin: EdgeInsets.only(right: 10, left: 10),
-                          child: FlatButton(
-                              highlightColor: StateContainer.of(context).curTheme.text15,
-                              splashColor: StateContainer.of(context).curTheme.text15,
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                primary: StateContainer.of(context).curTheme.text15,
+                                backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                padding: EdgeInsets.all(8.0),
+                                // splashColor: StateContainer.of(context).curTheme.text15,
+                                // highlightColor: StateContainer.of(context).curTheme.text15,
+                              ),
                               onPressed: () {
                                 setState(() {
                                   widget.contactsOpen = false;
                                 });
                                 widget.contactsController!.reverse();
                               },
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(8.0),
                               child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                         //Contacts Header Text
                         Text(
-                          AppLocalization.of(context)!.favoritesHeader,
+                          AppLocalization.of(context)!.contactsHeader,
                           style: AppStyles.textStyleSettingsHeader(context),
                         ),
                       ],
                     ),
                     Row(
                       children: <Widget>[
-                        // //Import button
+                        // Import button
                         Container(
                           height: 40,
                           width: 40,
                           margin: EdgeInsetsDirectional.only(end: 5),
-                          child: FlatButton(
-                              highlightColor: StateContainer.of(context).curTheme.text15,
-                              splashColor: StateContainer.of(context).curTheme.text15,
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                primary: StateContainer.of(context).curTheme.text15,
+                                backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                padding: EdgeInsets.all(8.0),
+                                // splashColor: StateContainer.of(context).curTheme.text15,
+                                // highlightColor: StateContainer.of(context).curTheme.text15,
+                              ),
                               onPressed: () {
                                 _importContacts();
                               },
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(8.0),
                               child: Icon(AppIcons.import_icon, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
-                        //Export button
+                        // Export button
                         Container(
                           height: 40,
                           width: 40,
                           margin: EdgeInsetsDirectional.only(end: 20),
-                          child: FlatButton(
-                              highlightColor: StateContainer.of(context).curTheme.text15,
-                              splashColor: StateContainer.of(context).curTheme.text15,
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                primary: StateContainer.of(context).curTheme.text15,
+                                backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                padding: EdgeInsets.all(8.0),
+                                // splashColor: StateContainer.of(context).curTheme.text15,
+                                // highlightColor: StateContainer.of(context).curTheme.text15,
+                              ),
                               onPressed: () {
                                 _exportContacts();
                               },
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(8.0),
                               child: Icon(AppIcons.export_icon, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                       ],
@@ -421,7 +433,7 @@ class _ContactsListState extends State<ContactsList> {
                 margin: EdgeInsets.only(top: 10),
                 child: Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context)!.addFavorite, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context)!.addContact, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Sheets.showAppHeightEightSheet(context: context, widget: AddContactSheet());
                     }),
@@ -449,7 +461,7 @@ class _ContactsListState extends State<ContactsList> {
         // Blocked address
         (user.address != null)
             ? Text(
-                Address(user.address).getShortString()!,
+                Address(user.address!).getShortString()!,
                 style: AppStyles.textStyleTransactionAddress(context),
               )
             : SizedBox(),
@@ -461,7 +473,7 @@ class _ContactsListState extends State<ContactsList> {
           style: AppStyles.textStyleSettingItemHeader(context),
         ),
         Text(
-          Address(user.address).getShortString()!,
+          Address(user.address!).getShortString()!,
           style: AppStyles.textStyleTransactionAddress(context),
         )
       ];
@@ -481,11 +493,13 @@ class _ContactsListState extends State<ContactsList> {
   }
 
   Widget buildSingleContact(BuildContext context, User user) {
-    return FlatButton(
+    return TextButton(
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.all(0.0),
+      ),
       onPressed: () {
         ContactDetailsSheet(user, documentsDirectory).mainBottomSheet(context);
       },
-      padding: EdgeInsets.all(0.0),
       child: Column(children: <Widget>[
         Divider(
           height: 2,
@@ -502,7 +516,7 @@ class _ContactsListState extends State<ContactsList> {
               Expanded(
                 child: Container(
                   // height: 60,
-                  margin: EdgeInsetsDirectional.only(start: StateContainer.of(context).natriconOn! ? 2.0 : 20.0),
+                  margin: EdgeInsetsDirectional.only(start: 20.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,

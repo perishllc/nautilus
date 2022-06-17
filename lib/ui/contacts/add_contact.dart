@@ -78,7 +78,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
         });
       } else {
         setState(() {
-          _nameHint = AppLocalization.of(context)!.favoriteNameHint;
+          _nameHint = AppLocalization.of(context)!.contactNameHint;
         });
       }
     });
@@ -403,7 +403,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 child: Column(
                   children: <Widget>[
                     AutoSizeText(
-                      CaseChange.toUpperCase(AppLocalization.of(context)!.addFavorite, context),
+                      CaseChange.toUpperCase(AppLocalization.of(context)!.addContact, context),
                       style: AppStyles.textStyleHeader(context),
                       textAlign: TextAlign.center,
                       maxLines: 1,
@@ -446,7 +446,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                                 topMargin: 30,
                                 padding: EdgeInsets.symmetric(horizontal: 30),
                                 textInputAction: widget.address != null ? TextInputAction.done : TextInputAction.next,
-                                hintText: _nameHint ?? AppLocalization.of(context)!.favoriteNameHint,
+                                hintText: _nameHint ?? AppLocalization.of(context)!.contactNameHint,
                                 keyboardType: TextInputType.text,
 
                                 style: TextStyle(
@@ -566,7 +566,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 Row(
                   children: <Widget>[
                     // Add Contact Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.addFavorite, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.addContact, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       if (await validateForm()) {
                         User newContact;
@@ -638,7 +638,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
       if (contactExists) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context)!.favoriteExists;
+          _addressValidationText = AppLocalization.of(context)!.contactExists;
         });
       } else {
         // get the corresponding username if it exists:
@@ -655,7 +655,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
       if (contactExists) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context)!.favoriteExists;
+          _addressValidationText = AppLocalization.of(context)!.contactExists;
         });
       } else {
         // check if there's a corresponding address:
@@ -668,7 +668,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
             if (user.nickname != null && user.nickname!.isNotEmpty) {
               isValid = false;
               setState(() {
-                _addressValidationText = AppLocalization.of(context)!.favoriteExists;
+                _addressValidationText = AppLocalization.of(context)!.contactExists;
               });
             }
           });
@@ -697,14 +697,14 @@ class _AddContactSheetState extends State<AddContactSheet> {
     if (_nameController!.text.isEmpty) {
       isValid = false;
       setState(() {
-        _nameValidationText = AppLocalization.of(context)!.favoriteNameMissing;
+        _nameValidationText = AppLocalization.of(context)!.contactNameMissing;
       });
     } else {
       bool nameExists = await sl.get<DBHelper>().contactExistsWithName(_nameController!.text);
       if (nameExists) {
         setState(() {
           isValid = false;
-          _nameValidationText = AppLocalization.of(context)!.favoriteExists;
+          _nameValidationText = AppLocalization.of(context)!.contactExists;
         });
       }
     }

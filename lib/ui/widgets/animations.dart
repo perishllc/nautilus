@@ -115,7 +115,7 @@ class AppAnimation extends StatefulWidget {
       case AnimationType.REQUEST:
         return "assets/animations/load-n.json";
       case AnimationType.SEND_MESSAGE:
-        return "assets/animations/world-plane.json";
+        return "assets/animations/rocket.json";
       case AnimationType.SEARCHING:
         return "assets/animations/searching.json";
       case AnimationType.LOADING:

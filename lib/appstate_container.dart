@@ -131,6 +131,8 @@ class StateContainerState extends State<StateContainer> {
   AvailableBlockExplorer curBlockExplorer = AvailableBlockExplorer(AvailableBlockExplorerEnum.NANOLOOKER);
   BaseTheme curTheme = NautilusTheme();
   bool nyanoMode = false;
+  bool plausibleMode = false;
+  int plausibleOffset = 0;
   String currencyMode = CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName();
   // Currently selected account
   Account? selectedAccount = Account(id: 1, name: "AB", index: 0, lastAccess: 0, selected: true);
@@ -164,11 +166,7 @@ class StateContainerState extends State<StateContainer> {
 
   // List of Verified Nano Ninja Nodes
   bool nanoNinjaUpdated = false;
-  List<NinjaNode>? nanoNinjaNodes;
-
-  // nano.to username db up to date?
-  // bool nautilusUsernamesUpdated = false;
-  // String lastUpdatedUsernames;
+  List<NinjaNode> nanoNinjaNodes = [];
 
   // gifts!
   bool giftedWallet = false;
@@ -344,16 +342,20 @@ class StateContainerState extends State<StateContainer> {
     List<NinjaNode>? nodes;
     if ((await sl.get<SharedPrefsUtil>().getNinjaAPICache()) == null) {
       nodes = await NinjaAPI.getVerifiedNodes();
-      setState(() {
-        nanoNinjaNodes = nodes;
-        nanoNinjaUpdated = true;
-      });
+      if (nodes != null) {
+        setState(() {
+          nanoNinjaNodes = nodes!;
+          nanoNinjaUpdated = true;
+        });
+      }
     } else {
       nodes = await NinjaAPI.getCachedVerifiedNodes();
-      setState(() {
-        nanoNinjaNodes = nodes;
-        nanoNinjaUpdated = false;
-      });
+      if (nodes != null) {
+        setState(() {
+          nanoNinjaNodes = nodes!;
+          nanoNinjaUpdated = false;
+        });
+      }
     }
   }
 
@@ -1237,13 +1239,13 @@ class StateContainerState extends State<StateContainer> {
       }
     }
 
-    // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
-
     if (!delay_update) {
       await updateSolids();
       await updateUnified(false);
     }
+
+    // send acknowledgement to server / requester:
+    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
   }
 
   Future<void> handlePaymentMessage(dynamic data, {bool delay_update = false}) async {
@@ -1313,13 +1315,12 @@ class StateContainerState extends State<StateContainer> {
       }
     }
 
-    // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
-
     if (!delay_update) {
       await updateSolids();
       await updateUnified(false);
     }
+    // send acknowledgement to server / requester:
+    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
   }
 
   Future<void> handlePaymentRecord(dynamic data, {bool delay_update = false}) async {
@@ -1615,12 +1616,14 @@ class StateContainerState extends State<StateContainer> {
         await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
       }
     }
-    // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
+
     if (!delay_update) {
       await updateSolids();
       await updateTXMemos();
     }
+
+    // send acknowledgement to server / requester:
+    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
   }
 
   Future<void> handlePaymentACK(dynamic data, {bool delay_update = false}) async {
@@ -1637,7 +1640,6 @@ class StateContainerState extends State<StateContainer> {
     int? height = data['height'];
 
     // sleep to prevent animations from overlapping:
-    // TODO: is this needed?
     // await Future.delayed(Duration(seconds: 2));
 
     // set acknowledged to true:

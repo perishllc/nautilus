@@ -915,13 +915,11 @@ class _SendSheetState extends State<SendSheet> {
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.scanQrCode, Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () async {
                         UIUtil.cancelLockEvent();
-                        String? scanResult = await UserDataUtil.getQRData(DataType.MANTA_ADDRESS, context);
+                        String? scanResult = await UserDataUtil.getQRData(DataType.DATA, context);
                         if (scanResult == null) {
                           UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
                         } else if (QRScanErrs.ERROR_LIST.contains(scanResult)) {
                           return;
-                        } else if (false) {
-                          // TODO: block handoff
                         } else {
                           // Is a URI
                           Address address = Address(scanResult);
