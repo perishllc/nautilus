@@ -119,7 +119,7 @@ class TXData {
   }
 
   String getAccount(bool isRecipient) {
-    return isRecipient ? from_address! : to_address!;
+    return isRecipient ? (from_address ?? "") : (to_address ?? "");
   }
 
   bool isSolid() {

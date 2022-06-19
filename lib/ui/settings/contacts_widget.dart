@@ -215,7 +215,7 @@ class _ContactsListState extends State<ContactsList> {
 
   Future<void> _exportContacts() async {
     List<User> contacts = await sl.get<DBHelper>().getContacts();
-    if (contacts.length == 0) {
+    if (contacts.isEmpty) {
       UIUtil.showSnackbar(AppLocalization.of(context)!.noContactsExport, context);
       return;
     }

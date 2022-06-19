@@ -1255,38 +1255,34 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         String? amount_str;
         int? local_timestamp;
 
-        if (dynamicItem is TXData) {
-          txDetails = dynamicItem;
+        if (txDetails.request_time != null) {
+          local_timestamp = txDetails.request_time;
+        }
 
-          if (dynamicItem.request_time != null) {
-            local_timestamp = dynamicItem.request_time;
-          }
-
-          if (dynamicItem.amount_raw != null && dynamicItem.amount_raw!.isNotEmpty) {
-            amount_str = getRawAsThemeAwareAmount(context, dynamicItem.amount_raw);
-            if (txDetails.is_request) {
-              if (isRecipient) {
-                if (AppLocalization.of(context)!.request.toLowerCase().contains(lowerCaseSearch)) {
-                  shouldRemove = false;
-                }
-              } else {
-                if (AppLocalization.of(context)!.asked.toLowerCase().contains(lowerCaseSearch)) {
-                  shouldRemove = false;
-                }
+        if (txDetails.amount_raw != null && txDetails.amount_raw!.isNotEmpty) {
+          amount_str = getRawAsThemeAwareAmount(context, txDetails.amount_raw);
+          if (txDetails.is_request) {
+            if (isRecipient) {
+              if (AppLocalization.of(context)!.request.toLowerCase().contains(lowerCaseSearch)) {
+                shouldRemove = false;
               }
-            }
-          }
-
-          if (txDetails.is_tx) {
-            if (txDetails.record_type == BlockTypes.SEND) {
-              if (AppLocalization.of(context)!.sent.toLowerCase().contains(lowerCaseSearch)) {
+            } else {
+              if (AppLocalization.of(context)!.asked.toLowerCase().contains(lowerCaseSearch)) {
                 shouldRemove = false;
               }
             }
-            if (txDetails.record_type == BlockTypes.RECEIVE) {
-              if (AppLocalization.of(context)!.received.toLowerCase().contains(lowerCaseSearch)) {
-                shouldRemove = false;
-              }
+          }
+        }
+
+        if (txDetails.is_tx) {
+          if (txDetails.record_type == BlockTypes.SEND) {
+            if (AppLocalization.of(context)!.sent.toLowerCase().contains(lowerCaseSearch)) {
+              shouldRemove = false;
+            }
+          }
+          if (txDetails.record_type == BlockTypes.RECEIVE) {
+            if (AppLocalization.of(context)!.received.toLowerCase().contains(lowerCaseSearch)) {
+              shouldRemove = false;
             }
           }
         }
@@ -3386,14 +3382,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     converted.amount_raw ??= histItem.amount;
 
-    if (histItem.type == BlockTypes.SEND) {
-      converted.to_address ??= histItem.account;
-    } else if (histItem.type == BlockTypes.RECEIVE) {
-      converted.from_address ??= histItem.account;
-    }
+    // if (histItem.type == BlockTypes.SEND) {
+    //   converted.to_address ??= histItem.account;
+    // } else if (histItem.type == BlockTypes.RECEIVE) {
+    //   converted.from_address ??= histItem.account;
+    // }
 
-    // converted.from_address ??= histItem.account;
-    // converted.to_address ??= histItem.account;
+    converted.from_address ??= histItem.account;
+    converted.to_address ??= histItem.account;
 
     converted.block ??= histItem.hash;
     converted.request_time ??= histItem.local_timestamp!;
@@ -3431,7 +3427,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         ? indexedItem
         : convertHistItemToTXData(indexedItem, txDetails: _txDetailsMap[indexedItem.hash]);
     bool isRecipient = txDetails.isRecipient(StateContainer.of(context).wallet!.address);
-    String displayName = txDetails.getShortestString(isRecipient)!;
+    String displayName = txDetails.getShortestString(isRecipient) ?? "";
 
     // check if there's a username:
     String account = txDetails.getAccount(isRecipient);
