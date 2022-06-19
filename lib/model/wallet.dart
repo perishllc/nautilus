@@ -36,6 +36,7 @@ class AppWallet {
 
   AppWallet(
       {String? address,
+      User? user,
       String? username,
       BigInt? accountBalance,
       String? frontier,
@@ -52,6 +53,7 @@ class AppWallet {
       bool? requestsLoading,
       this.confirmationHeight = -1}) {
     this._address = address;
+    this._user = user;
     this._username = username;
     this._accountBalance = accountBalance ?? BigInt.zero;
     this._frontier = frontier;
@@ -108,7 +110,8 @@ class AppWallet {
   }
 
   String getLocalCurrencyPrice(AvailableCurrency currency, {String? locale = "en_US"}) {
-    Decimal converted = Decimal.parse(_localCurrencyPrice!) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
+    Decimal converted =
+        Decimal.parse(_localCurrencyPrice!) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
     return NumberFormat.currency(locale: locale, symbol: currency.getCurrencySymbol()).format(converted.toDouble());
   }
 

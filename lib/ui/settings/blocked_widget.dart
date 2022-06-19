@@ -68,24 +68,11 @@ class _BlockedListState extends State<BlockedList> {
   void _registerBus() {
     // Contact added bus event
     _blockedAddedSub = EventTaxiImpl.singleton().registerTo<BlockedAddedEvent>().listen((event) {
-      // setState(() {
-      //   _blocked.add(event.blocked);
-      //   // Sort by name
-      //   _blocked.sort((a, b) {
-      //     String c = a.nickname ?? a.username;
-      //     String d = b.nickname ?? b.username;
-      //     return c.toLowerCase().compareTo(d.toLowerCase());
-      //   });
-      // });
       // Full update:
       _updateContacts();
     });
     // Contact removed bus event
     _blockedRemovedSub = EventTaxiImpl.singleton().registerTo<BlockedRemovedEvent>().listen((event) {
-      // setState(() {
-      //   _blocked.remove(event.blocked);
-      // });
-
       // Full update:
       _updateContacts();
     });
@@ -169,7 +156,8 @@ class _BlockedListState extends State<BlockedList> {
         if (nickNameIndex != null) {
           aliases.removeAt(nickNameIndex);
           aliases.removeAt(nickNameIndex);
-          multiUsers.add(User(address: address, nickname: nickname, username: aliases[0], type: aliases[1], aliases: aliases));
+          multiUsers.add(
+              User(address: address, nickname: nickname, username: aliases[0], type: aliases[1], aliases: aliases));
         } else {
           multiUsers.add(User(address: address, username: aliases[0], type: aliases[1], aliases: aliases));
         }
@@ -177,38 +165,23 @@ class _BlockedListState extends State<BlockedList> {
 
       // add them to the list:
       for (User user in multiUsers) {
-        // if (!_blocked.contains(user) && mounted) {
         newState.add(user);
-        // }
       }
 
-      // // remove from blocked anything that is not in the newState list:
-      // setState(() {
-      //   _blocked.removeWhere((e) => !newState.contains(e));
-      // });
-
-      // // add anything new:
-      // for (User user in newState) {
-      //   if (!_blocked.contains(user)) {
-      //     // add to blocked
-      //     setState(() {
-      //       _blocked.add(user);
-      //     });
-      //   }
-      // }
-
-      setState(() {
-        _blocked = newState;
-      });
-
-      // Re-sort list
-      setState(() {
-        _blocked.sort((a, b) {
-          String c = a.nickname ?? a.username!;
-          String d = b.nickname ?? b.username!;
-          return c.toLowerCase().compareTo(d.toLowerCase());
+      if (mounted) {
+        setState(() {
+          _blocked = newState;
         });
-      });
+
+        // Re-sort list
+        setState(() {
+          _blocked.sort((a, b) {
+            String c = a.nickname ?? a.username!;
+            String d = b.nickname ?? b.username!;
+            return c.toLowerCase().compareTo(d.toLowerCase());
+          });
+        });
+      }
     });
   }
 
@@ -286,7 +259,8 @@ class _BlockedListState extends State<BlockedList> {
         decoration: BoxDecoration(
           color: StateContainer.of(context).curTheme.backgroundDark,
           boxShadow: [
-            BoxShadow(color: StateContainer.of(context).curTheme.barrierWeakest!, offset: Offset(-5, 0), blurRadius: 20),
+            BoxShadow(
+                color: StateContainer.of(context).curTheme.barrierWeakest!, offset: Offset(-5, 0), blurRadius: 20),
           ],
         ),
         child: SafeArea(
@@ -336,7 +310,8 @@ class _BlockedListState extends State<BlockedList> {
                     Container(
                       margin: EdgeInsets.only(right: 25),
                       child: AppDialogs.infoButton(context, () {
-                        AppDialogs.showInfoDialog(context, AppLocalization.of(context)!.blockedInfoHeader, AppLocalization.of(context)!.blockedInfo);
+                        AppDialogs.showInfoDialog(context, AppLocalization.of(context)!.blockedInfoHeader,
+                            AppLocalization.of(context)!.blockedInfo);
                       }),
                     ),
                   ],
@@ -364,7 +339,10 @@ class _BlockedListState extends State<BlockedList> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
+                            colors: [
+                              StateContainer.of(context).curTheme.backgroundDark!,
+                              StateContainer.of(context).curTheme.backgroundDark00!
+                            ],
                             begin: AlignmentDirectional(0.5, -1.0),
                             end: AlignmentDirectional(0.5, 1.0),
                           ),
@@ -396,8 +374,8 @@ class _BlockedListState extends State<BlockedList> {
                 margin: EdgeInsets.only(top: 10),
                 child: Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context)!.addBlocked, Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () {
+                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE,
+                        AppLocalization.of(context)!.addBlocked, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Sheets.showAppHeightEightSheet(context: context, widget: AddBlockedSheet());
                     }),
                   ],
@@ -412,12 +390,16 @@ class _BlockedListState extends State<BlockedList> {
     if (user.aliases == null) {
       return [
         // Blocked name
-        (user.nickname != null && user.nickname!.isNotEmpty) ? Text("★" + user.nickname!, style: AppStyles.textStyleSettingItemHeader(context)) : SizedBox(),
+        (user.nickname != null && user.nickname!.isNotEmpty)
+            ? Text("★" + user.nickname!, style: AppStyles.textStyleSettingItemHeader(context))
+            : SizedBox(),
 
         (user.username != null)
             ? Text(
                 user.getDisplayName(ignoreNickname: true)!,
-                style: user.nickname != null ? AppStyles.textStyleTransactionAddress(context) : AppStyles.textStyleSettingItemHeader(context),
+                style: user.nickname != null
+                    ? AppStyles.textStyleTransactionAddress(context)
+                    : AppStyles.textStyleSettingItemHeader(context),
               )
             : SizedBox(),
 
@@ -433,7 +415,9 @@ class _BlockedListState extends State<BlockedList> {
       List<Widget> entries = [
         Text(
           Address(user.address).getShortString()!,
-          style: user.nickname != null ? AppStyles.textStyleTransactionAddress(context) : AppStyles.textStyleSettingItemHeader(context),
+          style: user.nickname != null
+              ? AppStyles.textStyleTransactionAddress(context)
+              : AppStyles.textStyleSettingItemHeader(context),
         )
       ];
 

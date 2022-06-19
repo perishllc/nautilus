@@ -301,7 +301,7 @@ class AppLocalization {
   }
 
   String get contactNameHint {
-    return Intl.message('Enter a Name @', desc: 'contact_name_hint', name: 'contactNameHint');
+    return Intl.message('Enter a Nickname', desc: 'contact_name_hint', name: 'contactNameHint');
   }
 
   String get contactInvalid {

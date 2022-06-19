@@ -319,21 +319,21 @@ class DBHelper {
   Future<bool> contactExistsWithAddress(String address) async {
     Database dbClient = (await db)!;
     int count = Sqflite.firstIntValue(await dbClient.rawQuery(
-        'SELECT count(*) FROM Users WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\''))!;
+        'SELECT count(*) FROM Users WHERE lower(address) = \'${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND nickname <> \'\''))!;
     return count > 0;
   }
 
   Future<bool> contactExistsWithAddressOrUser(String addressOrUsername) async {
     Database dbClient = (await db)!;
     int count = Sqflite.firstIntValue(await dbClient.rawQuery(
-        'SELECT count(*) FROM Users WHERE (lower(address) like \'%${addressOrUsername.replaceAll("xrb_", "").replaceAll("nano_", "")}\' OR username like \'%${addressOrUsername.toLowerCase()}\') AND nickname <> \'\''))!;
+        'SELECT count(*) FROM Users WHERE (lower(address) = \'${addressOrUsername.replaceAll("xrb_", "").replaceAll("nano_", "")}\' OR lower(username) = \'${addressOrUsername.toLowerCase()}\') AND nickname <> \'\''))!;
     return count > 0;
   }
 
   Future<bool> contactExistsWithUsername(String username) async {
     Database dbClient = (await db)!;
     int count = Sqflite.firstIntValue(await dbClient.rawQuery(
-        'SELECT count(*) FROM Users WHERE lower(username) like \'%${username.toLowerCase()}\' AND nickname <> \'\''))!;
+        'SELECT count(*) FROM Users WHERE lower(username) = \'${username.toLowerCase()}\' AND nickname <> \'\''))!;
     return count > 0;
   }
 
@@ -370,15 +370,22 @@ class DBHelper {
     if (contact.nickname != null) {
       if (contact.username != null) {
         username = await dbClient!.rawUpdate(
-                "UPDATE Users SET nickname = ? WHERE lower(username) like \'%${contact.username!.toLowerCase()}\'",
+                "UPDATE Users SET nickname = ? WHERE lower(username) = \'${contact.username!.toLowerCase()}\'",
                 [contact.nickname]) >
             0;
       }
       if (contact.address != null) {
-        address = await dbClient!.rawUpdate(
-                "UPDATE Users SET nickname = ? WHERE lower(address) like \'%${contact.address!.toLowerCase()}\'",
-                [contact.nickname]) >
-            0;
+        // check if user with address exists, if not we have to make it:
+        if (!(await userExistsWithAddress(contact.address!))) {
+          contact.type = UserTypes.CONTACT;
+          // save the user:
+          address = await addUser(contact) > 0;
+        } else {
+          address = await dbClient!.rawUpdate(
+                  "UPDATE Users SET nickname = ? WHERE lower(address) = \'${contact.address!.toLowerCase()}\'",
+                  [contact.nickname]) >
+              0;
+        }
       }
     }
     return username || address || name;
@@ -391,14 +398,8 @@ class DBHelper {
     bool nickname = false;
     if (contact.nickname != null) {
       nickname = await dbClient!.rawUpdate(
-              "UPDATE Users SET nickname = \'\' WHERE lower(nickname) like \'%${contact.nickname!.toLowerCase()}\'") >
+              "UPDATE Users SET nickname = \'\' WHERE lower(nickname) = \'${contact.nickname!.toLowerCase()}\'") >
           0;
-      // if (contact.username != null) {
-      //   username = await dbClient.rawUpdate("UPDATE Users SET nickname = \'\' WHERE lower(username) like \'%${contact.username.toLowerCase()}\'") > 0;
-      // }
-      // if (contact.address != null) {
-      //   address = await dbClient.rawUpdate("UPDATE Users SET nickname = \'\' WHERE lower(address) like \'%${contact.address.toLowerCase()}\'") > 0;
-      // }
     }
     return /*username || address || */ nickname;
   }
@@ -534,7 +535,7 @@ class DBHelper {
   Future<String?> getUsernameOrReturnAddress(String address) async {
     Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery(
-        'SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
+        'SELECT * FROM Users WHERE lower(address) = \'${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
     // TODO: Handle multiple users with the same address
     if (list.length > 0) {
       return list[0]["username"];
@@ -545,7 +546,7 @@ class DBHelper {
   Future<String?> getUsernameWithAddress(String address) async {
     Database dbClient = (await db)!;
     List<Map> list = await dbClient.rawQuery(
-        'SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
+        'SELECT * FROM Users WHERE lower(address) = \'${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
     // TODO: Handle multiple users with the same address
     if (list.length > 0) {
       return list[0]["username"];
@@ -557,7 +558,7 @@ class DBHelper {
     Database dbClient = (await db)!;
     List<Map> list;
     list = await dbClient.rawQuery(
-        'SELECT * FROM Users WHERE address like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
+        'SELECT * FROM Users WHERE lower(address) = \'${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}\'');
     // TODO: Handle multiple users with the same address
     if (list.length > 0) {
       return User(
@@ -656,7 +657,7 @@ class DBHelper {
   Future<bool> deleteUser(User user) async {
     Database dbClient = (await db)!;
     return await dbClient
-            .rawDelete("DELETE FROM Users WHERE lower(username) like \'%${user.username!.toLowerCase()}\'") >
+            .rawDelete("DELETE FROM Users WHERE lower(username) = \'${user.username!.toLowerCase()}\'") >
         0;
   }
 
@@ -735,7 +736,7 @@ class DBHelper {
   Future<bool> blockedExistsWithAddress(String address) async {
     Database dbClient = (await db)!;
     int count = Sqflite.firstIntValue(await dbClient.rawQuery(
-        'SELECT count(*) FROM Users WHERE lower(address) like \'%${address.replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND is_blocked = 1'))!;
+        'SELECT count(*) FROM Users WHERE lower(address) = \'${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}\' AND is_blocked = 1'))!;
     return count > 0;
   }
 

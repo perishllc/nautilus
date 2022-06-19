@@ -618,14 +618,15 @@ class StateContainerState extends State<StateContainer> {
     account.address = address;
     selectedAccount = account;
     updateRecentlyUsedAccounts();
-    // get username if it exists:
+    // get user if it exists:
+    // TODO: make username a setting if there are multiple:
     User? user = await sl.get<DBHelper>().getUserWithAddress(address);
     String? walletUsername;
-    if (user != null && user.username != null) {
-      walletUsername = user.username;
+    if (user != null) {
+      walletUsername = user.getDisplayName();
     }
     setState(() {
-      wallet = AppWallet(address: address, username: walletUsername, loading: true);
+      wallet = AppWallet(address: address, user: user, username: walletUsername, loading: true);
       requestUpdate();
       updateSolids();
     });
