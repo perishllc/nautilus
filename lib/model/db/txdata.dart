@@ -98,7 +98,7 @@ class TXData {
     }
   }
 
-  String? getShorterString(isRecipient) {
+  String? getShorterString(bool isRecipient) {
     if (isRecipient) {
       return new Address(this.from_address).getShorterString();
     } else {
@@ -106,7 +106,7 @@ class TXData {
     }
   }
 
-  String? getShortestString(isRecipient) {
+  String? getShortestString(bool isRecipient) {
     if (isRecipient) {
       return new Address(this.from_address).getShortestString();
     } else {

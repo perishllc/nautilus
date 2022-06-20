@@ -1,69 +1,71 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:devicelocale/devicelocale.dart';
+import 'package:event_taxi/event_taxi.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:logger/logger.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
+import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
-import 'package:nautilus_wallet_flutter/model/currency_mode_setting.dart';
-import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
-import 'package:nautilus_wallet_flutter/model/db/user.dart';
-import 'package:nautilus_wallet_flutter/model/wallet.dart';
-import 'package:event_taxi/event_taxi.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
-import 'package:nautilus_wallet_flutter/util/box.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uni_links/uni_links.dart';
-import 'package:nautilus_wallet_flutter/themes.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/model/available_themes.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/model/available_language.dart';
-import 'package:nautilus_wallet_flutter/model/address.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
-import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/available_themes.dart';
+import 'package:nautilus_wallet_flutter/model/currency_mode_setting.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
-import 'package:nautilus_wallet_flutter/util/ninja/api.dart';
-import 'package:nautilus_wallet_flutter/util/ninja/ninja_node.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/model/wallet.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
+import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/account_history_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/fcm_update_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/subscribe_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/callback_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/pending_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/pending_response_item.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:nautilus_wallet_flutter/network/account_service.dart';
-import 'package:nautilus_wallet_flutter/bus/events.dart';
+import 'package:nautilus_wallet_flutter/util/ninja/api.dart';
+import 'package:nautilus_wallet_flutter/util/ninja/ninja_node.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uni_links/uni_links.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // print("Handling a background message");
   // dumb hack since the event bus doesn't work properly in background isolates or w/e:
-  SharedPreferences prefs = await SharedPreferences.getInstance();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.reload();
-  var background_messages = prefs.getStringList('background_messages');
-  if (background_messages == null) {
-    background_messages = [];
+  List<String>? backgroundMessages = prefs.getStringList('background_messages');
+  if (backgroundMessages == null) {
+    backgroundMessages = [];
   }
-  background_messages.add(jsonEncode(message.data));
-  await prefs.setStringList('background_messages', background_messages);
+  backgroundMessages.add(jsonEncode(message.data));
+  await prefs.setStringList('background_messages', backgroundMessages);
 }
 
 Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
@@ -93,7 +95,7 @@ class StateContainer extends StatefulWidget {
   // You must pass through a child.
   final Widget child;
 
-  StateContainer({required this.child});
+  const StateContainer({required this.child});
 
   // This is the secret sauce. Write your own 'of' method that will behave
   // Exactly like MediaQuery.of and Theme.of
@@ -143,8 +145,8 @@ class StateContainerState extends State<StateContainer> {
   // Natricon / Nyanicon settings
   bool? natriconOn = false;
   bool? nyaniconOn = false;
-  Map<String, String> natriconNonce = Map<String, String>();
-  Map<String, String> nyaniconNonce = Map<String, String>();
+  Map<String, String> natriconNonce = <String, String>{};
+  Map<String, String> nyaniconNonce = <String, String>{};
 
   // Active alert
   AlertResponseItem? activeAlert;
@@ -187,57 +189,57 @@ class StateContainerState extends State<StateContainer> {
 
   void updateNatriconNonce(String address, int nonce) {
     setState(() {
-      this.natriconNonce[address] = nonce.toString();
+      natriconNonce[address] = nonce.toString();
     });
   }
 
   void updateNyaniconNonce(String address, int nonce) {
     setState(() {
-      this.nyaniconNonce[address] = nonce.toString();
+      nyaniconNonce[address] = nonce.toString();
     });
   }
 
   void updateActiveAlert(AlertResponseItem? active, AlertResponseItem? settingsAlert) {
     setState(() {
-      this.activeAlert = active;
+      activeAlert = active;
       if (settingsAlert != null) {
         this.settingsAlert = settingsAlert;
       } else {
         this.settingsAlert = null;
-        this.activeAlertIsRead = true;
+        activeAlertIsRead = true;
       }
     });
   }
 
   void setAlertRead() {
     setState(() {
-      this.activeAlertIsRead = true;
+      activeAlertIsRead = true;
     });
   }
 
   void setAlertUnread() {
     setState(() {
-      this.activeAlertIsRead = false;
+      activeAlertIsRead = false;
     });
   }
 
   String? getNatriconNonce(String address) {
-    if (this.natriconNonce.containsKey(address)) {
-      return this.natriconNonce[address];
+    if (natriconNonce.containsKey(address)) {
+      return natriconNonce[address];
     }
     return "";
   }
 
   Future<void> checkAndCacheNapiDatabases(bool forceUpdate) async {
-    int currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    final int currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     try {
-      int lastUpdatedUsers = int.parse(await (sl.get<SharedPrefsUtil>().getLastNapiUsersCheck()));
+      final int lastUpdatedUsers = int.parse(await (sl.get<SharedPrefsUtil>().getLastNapiUsersCheck()));
 
-      int day_in_seconds = 60 * 60 * 24;
-      int week_in_seconds = day_in_seconds * 7;
+      final int dayInSeconds = 60 * 60 * 24;
+      final int weekInSeconds = dayInSeconds * 7;
 
       // update if more than a day old:
-      if (forceUpdate || currentTime - lastUpdatedUsers > day_in_seconds) {
+      if (forceUpdate || currentTime - lastUpdatedUsers > dayInSeconds) {
         await sl.get<DBHelper>().fetchNapiUsernames();
         await sl.get<SharedPrefsUtil>().setLastNapiUsersCheck(currentTime.toString());
       }
@@ -257,11 +259,11 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> updateSolids() async {
     if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
-      var solids = await sl.get<DBHelper>().getAccountSpecificSolids(wallet!.address);
+      final List<TXData> solids = await sl.get<DBHelper>().getAccountSpecificSolids(wallet!.address);
       // check for duplicates and remove:
-      Set uuids = Set();
-      List<int?> idsToRemove = [];
-      for (var solid in solids) {
+      final Set<String?> uuids = {};
+      final List<int?> idsToRemove = [];
+      for (final TXData solid in solids) {
         if (!uuids.contains(solid.uuid)) {
           uuids.add(solid.uuid);
         } else {
@@ -270,11 +272,11 @@ class StateContainerState extends State<StateContainer> {
           await sl.get<DBHelper>().deleteTXDataByID(solid.id);
         }
       }
-      for (var id in idsToRemove) {
-        solids.removeWhere((element) => element.id == id);
+      for (final int? id in idsToRemove) {
+        solids.removeWhere((TXData element) => element.id == id);
       }
       setState(() {
-        this.wallet!.solids = solids;
+        wallet!.solids = solids;
       });
       EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: wallet!.solids));
     }
@@ -307,12 +309,12 @@ class StateContainerState extends State<StateContainer> {
     try {
       String localeString = (await sl.get<SharedPrefsUtil>().getLanguage()).getLocaleString();
       if (localeString == "DEFAULT") {
-        List<Locale> languageLocales = await Devicelocale.preferredLanguagesAsLocales;
+        final List<Locale> languageLocales = await Devicelocale.preferredLanguagesAsLocales;
         if (languageLocales.length > 0) {
           localeString = languageLocales[0].languageCode;
         }
       }
-      AlertResponseItem? alert = await sl.get<AccountService>().getAlert(localeString);
+      final AlertResponseItem? alert = await sl.get<AccountService>().getAlert(localeString);
       if (alert == null) {
         updateActiveAlert(null, null);
         return;
@@ -366,30 +368,30 @@ class StateContainerState extends State<StateContainer> {
     // Register RxBus
     _registerBus();
     // Set currency locale here for the UI to access
-    sl.get<SharedPrefsUtil>().getCurrency(deviceLocale).then((currency) {
+    sl.get<SharedPrefsUtil>().getCurrency(deviceLocale).then((AvailableCurrency currency) {
       setState(() {
         currencyLocale = currency.getLocale().toString();
         curCurrency = currency;
       });
     });
     // Get default language setting
-    sl.get<SharedPrefsUtil>().getLanguage().then((language) {
+    sl.get<SharedPrefsUtil>().getLanguage().then((LanguageSetting language) {
       setState(() {
         curLanguage = language;
       });
     });
     // Get theme default
-    sl.get<SharedPrefsUtil>().getTheme().then((theme) {
+    sl.get<SharedPrefsUtil>().getTheme().then((ThemeSetting theme) {
       updateTheme(theme, setIcon: false);
     });
     // Get default block explorer
-    sl.get<SharedPrefsUtil>().getBlockExplorer().then((explorer) {
+    sl.get<SharedPrefsUtil>().getBlockExplorer().then((AvailableBlockExplorer explorer) {
       setState(() {
         curBlockExplorer = explorer;
       });
     });
     // Get initial deep link
-    getInitialLink().then((initialLink) {
+    getInitialLink().then((String? initialLink) {
       setState(() {
         initialDeepLink = initialLink;
       });
@@ -399,19 +401,19 @@ class StateContainerState extends State<StateContainer> {
     // Update alert
     checkAndUpdateAlerts();
     // Get natricon pref
-    sl.get<SharedPrefsUtil>().getUseNatricon().then((useNatricon) {
+    sl.get<SharedPrefsUtil>().getUseNatricon().then((bool useNatricon) {
       setNatriconOn(useNatricon);
     });
     // Get nyanicon pref
-    sl.get<SharedPrefsUtil>().getUseNyanicon().then((useNyanicon) {
+    sl.get<SharedPrefsUtil>().getUseNyanicon().then((bool useNyanicon) {
       setNyaniconOn(useNyanicon);
     });
     // Get min raw receive pref
-    sl.get<SharedPrefsUtil>().getMinRawReceive().then((minRaw) {
+    sl.get<SharedPrefsUtil>().getMinRawReceive().then((String minRaw) {
       setMinRawReceive(minRaw);
     });
     // Get currency mode pref
-    sl.get<SharedPrefsUtil>().getCurrencyMode().then((currencyMode) {
+    sl.get<SharedPrefsUtil>().getCurrencyMode().then((String currencyMode) {
       setCurrencyMode(CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName(context));
     });
     // make sure nano API databases are up to date
@@ -440,10 +442,10 @@ class StateContainerState extends State<StateContainer> {
 
   // Register RX event listenerss
   void _registerBus() {
-    _subscribeEventSub = EventTaxiImpl.singleton().registerTo<SubscribeEvent>().listen((event) {
+    _subscribeEventSub = EventTaxiImpl.singleton().registerTo<SubscribeEvent>().listen((SubscribeEvent event) {
       handleSubscribeResponse(event.response!);
     });
-    _priceEventSub = EventTaxiImpl.singleton().registerTo<PriceEvent>().listen((event) {
+    _priceEventSub = EventTaxiImpl.singleton().registerTo<PriceEvent>().listen((PriceEvent event) {
       // PriceResponse's get pushed periodically, it wasn't a request we made so don't pop the queue
       // handle the null case in debug mode:
       setState(() {
@@ -453,45 +455,45 @@ class StateContainerState extends State<StateContainer> {
         }
       });
     });
-    _connStatusSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((event) {
+    _connStatusSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((ConnStatusEvent event) {
       if (event.status == ConnectionStatus.CONNECTED) {
         requestUpdate();
       } else if (event.status == ConnectionStatus.DISCONNECTED && !sl.get<AccountService>().suspended) {
         sl.get<AccountService>().initCommunication();
       }
     });
-    _callbackSub = EventTaxiImpl.singleton().registerTo<CallbackEvent>().listen((event) {
+    _callbackSub = EventTaxiImpl.singleton().registerTo<CallbackEvent>().listen((CallbackEvent event) {
       handleCallbackResponse(event.response);
     });
-    _errorSub = EventTaxiImpl.singleton().registerTo<ErrorEvent>().listen((event) {
+    _errorSub = EventTaxiImpl.singleton().registerTo<ErrorEvent>().listen((ErrorEvent event) {
       handleErrorResponse(event.response!);
     });
-    _fcmUpdateSub = EventTaxiImpl.singleton().registerTo<FcmUpdateEvent>().listen((event) {
+    _fcmUpdateSub = EventTaxiImpl.singleton().registerTo<FcmUpdateEvent>().listen((FcmUpdateEvent event) {
       if (wallet != null) {
-        sl.get<SharedPrefsUtil>().getNotificationsOn().then((enabled) {
+        sl.get<SharedPrefsUtil>().getNotificationsOn().then((bool enabled) {
           sl.get<AccountService>().sendRequest(FcmUpdateRequest(account: wallet!.address, fcmToken: event.token, enabled: enabled));
         });
       }
     });
-    _fcmMessageSub = EventTaxiImpl.singleton().registerTo<FcmMessageEvent>().listen((event) async {
+    _fcmMessageSub = EventTaxiImpl.singleton().registerTo<FcmMessageEvent>().listen((FcmMessageEvent event) async {
       if (event.data != null) {
         handleMessage(event.data);
       }
 
       if (event.message_list != null) {
-        bool delay_update = false;
+        bool delayUpdate = false;
         if (event.message_list!.length > MAX_SEQUENTIAL_UPDATES) {
-          delay_update = true;
+          delayUpdate = true;
         }
-        for (var str_msg in event.message_list!) {
-          var msg = jsonDecode(str_msg);
-          await handleMessage(msg, delay_update: delay_update);
+        for (final String strMsg in event.message_list!) {
+          final msg = jsonDecode(strMsg);
+          await handleMessage(msg, delay_update: delayUpdate);
           // sleep between updates if there are more than 1 to make the UI feel snappier / show the animation:
           if (event.message_list!.length > 1 && event.message_list!.length <= MAX_SEQUENTIAL_UPDATES) {
-            await Future.delayed(Duration(milliseconds: 600));
+            await Future.delayed(const Duration(milliseconds: 600));
           }
         }
-        if (delay_update) {
+        if (delayUpdate) {
           // update the state:
           await updateSolids();
           await updateTXMemos();
@@ -500,7 +502,7 @@ class StateContainerState extends State<StateContainer> {
       }
     });
     // Account has been deleted or name changed
-    _accountModifiedSub = EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((event) {
+    _accountModifiedSub = EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
       if (!event.deleted) {
         if (event.account!.index == selectedAccount!.index) {
           setState(() {
@@ -525,8 +527,8 @@ class StateContainerState extends State<StateContainer> {
             });
             EventTaxiImpl.singleton().fire(AccountChangedEvent(account: recentSecondLast, noPop: true));
           } else if (event.account!.index == selectedAccount!.index) {
-            getSeed().then((seed) {
-              sl.get<DBHelper>().getMainAccount(seed).then((mainAccount) {
+            getSeed().then((String seed) {
+              sl.get<DBHelper>().getMainAccount(seed).then((Account? mainAccount) {
                 sl.get<DBHelper>().changeAccount(mainAccount);
                 setState(() {
                   selectedAccount = mainAccount;
@@ -547,10 +549,9 @@ class StateContainerState extends State<StateContainer> {
     });
 
     // branch deep links:
-    _branchSub = FlutterBranchSdk.initSession().listen((data) {
+    _branchSub = FlutterBranchSdk.initSession().listen((Map data) {
       if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) {
-        //Link clicked. Add logic to get link data
-        print(data);
+        // Link clicked. Add logic to get link data
 
         // check if they were gifted a wallet:
         if (data.containsKey("~feature") && data["~feature"] == "gift") {
@@ -558,18 +559,18 @@ class StateContainerState extends State<StateContainer> {
           // setup the auto load wallet:
           setState(() {
             giftedWallet = true;
-            giftedWalletSeed = data["seed"] ?? "";
-            giftedWalletAmountRaw = data["amount_raw"] ?? "";
-            giftedWalletAddress = data["address"] ?? "";
-            giftedWalletSenderAddress = data["senderAddress"] ?? "";
-            giftedWalletMemo = data["memo"] ?? "";
+            giftedWalletSeed = data["seed"] as String? ?? "";
+            giftedWalletAmountRaw = data["amount_raw"] as String? ?? "";
+            giftedWalletAddress = data["address"] as String? ?? "";
+            giftedWalletSenderAddress = data["senderAddress"] as String? ?? "";
+            giftedWalletMemo = data["memo"] as String? ?? "";
           });
           // }
         }
       }
     }, onError: (error) {
-      PlatformException platformException = error as PlatformException;
-      print('InitSession error: ${platformException.code} - ${platformException.message}');
+      final PlatformException platformException = error as PlatformException;
+      log.d('InitSession error: ${platformException.code} - ${platformException.message}');
     });
   }
 
@@ -614,13 +615,13 @@ class StateContainerState extends State<StateContainer> {
 
   // Update the global wallet instance with a new address
   Future<void> updateWallet({required Account account}) async {
-    String address = NanoUtil.seedToAddress(await getSeed(), account.index!);
+    final String address = NanoUtil.seedToAddress(await getSeed(), account.index!);
     account.address = address;
     selectedAccount = account;
     updateRecentlyUsedAccounts();
     // get user if it exists:
     // TODO: make username a setting if there are multiple:
-    User? user = await sl.get<DBHelper>().getUserWithAddress(address);
+    final User? user = await sl.get<DBHelper>().getUserWithAddress(address);
     String? walletUsername;
     if (user != null) {
       walletUsername = user.getDisplayName();
@@ -633,7 +634,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> updateRecentlyUsedAccounts() async {
-    List<Account> otherAccounts = await sl.get<DBHelper>().getRecentlyUsedAccounts(await getSeed());
+    final List<Account> otherAccounts = await sl.get<DBHelper>().getRecentlyUsedAccounts(await getSeed());
     if (otherAccounts.length > 0) {
       if (otherAccounts.length > 1) {
         setState(() {
@@ -712,7 +713,7 @@ class StateContainerState extends State<StateContainer> {
   // Change min raw setting
   void setMinRawReceive(String? minRaw) {
     setState(() {
-      this.receiveThreshold = minRaw;
+      receiveThreshold = minRaw;
     });
   }
 
@@ -720,7 +721,7 @@ class StateContainerState extends State<StateContainer> {
   void setCurrencyMode(String currencyMode) {
     setState(() {
       this.currencyMode = currencyMode;
-      this.nyanoMode = (this.currencyMode == CurrencyModeSetting(CurrencyModeOptions.NYANO).getDisplayName());
+      nyanoMode = (this.currencyMode == CurrencyModeSetting(CurrencyModeOptions.NYANO).getDisplayName());
     });
   }
 
@@ -763,7 +764,7 @@ class StateContainerState extends State<StateContainer> {
       }
     });
     // Set currency locale here for the UI to access
-    sl.get<SharedPrefsUtil>().getCurrency(deviceLocale).then((currency) {
+    sl.get<SharedPrefsUtil>().getCurrency(deviceLocale).then((AvailableCurrency currency) {
       setState(() {
         currencyLocale = currency.getLocale().toString();
         curCurrency = currency;
@@ -805,10 +806,10 @@ class StateContainerState extends State<StateContainer> {
       sl.get<AccountService>().processQueue();
       return;
     }
-    PendingResponseItem pendingItem = PendingResponseItem(hash: resp.hash!, source: resp.account!, amount: resp.amount!);
-    String? receivedHash = await handlePendingItem(pendingItem, link_as_account: resp.block!.linkAsAccount);
+    final PendingResponseItem pendingItem = PendingResponseItem(hash: resp.hash!, source: resp.account!, amount: resp.amount!);
+    final String? receivedHash = await handlePendingItem(pendingItem, link_as_account: resp.block!.linkAsAccount);
     if (receivedHash != null) {
-      AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
+      final AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
           type: BlockTypes.RECEIVE,
           account: resp.account,
           amount: resp.amount,
@@ -836,7 +837,7 @@ class StateContainerState extends State<StateContainer> {
       return null;
     }
     pendingRequests.add(item?.hash);
-    BigInt? amountBigInt = BigInt.tryParse(item!.amount!);
+    final BigInt? amountBigInt = BigInt.tryParse(item!.amount!);
     sl.get<Logger>().d("Handling ${item.hash} pending");
     if (amountBigInt != null) {
       // don't process if under the receive threshold:
@@ -858,10 +859,10 @@ class StateContainerState extends State<StateContainer> {
       log.d("Receive is for a different account: ${link_as_account}");
       // HANDLE IT: 😔
 
-      AccountInfoResponse accountResp = await sl.get<AccountService>().getAccountInfo(link_as_account);
-      String seed = await getSeed();
+      final AccountInfoResponse accountResp = await sl.get<AccountService>().getAccountInfo(link_as_account);
+      final String seed = await getSeed();
       Account? correctAccount;
-      List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
+      final List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
       for (int i = 0; i < accounts.length; i++) {
         if (accounts[i].address == link_as_account) {
           correctAccount = accounts[i];
@@ -875,13 +876,13 @@ class StateContainerState extends State<StateContainer> {
         return null;
       }
 
-      String privKey = NanoUtil.seedToPrivate(seed, correctAccount.index!);
+      final String privKey = NanoUtil.seedToPrivate(seed, correctAccount.index!);
 
       // publish open:
       if (accountResp.openBlock == null) {
         sl.get<Logger>().d("Handling ${item.hash} as open");
         try {
-          ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, link_as_account, privKey);
+          final ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, link_as_account, privKey);
           wallet!.openBlock = resp.hash;
           wallet!.frontier = resp.hash;
           pendingRequests.remove(item.hash);
@@ -895,7 +896,7 @@ class StateContainerState extends State<StateContainer> {
         }
       } else {
         try {
-          ProcessResponse resp =
+          final ProcessResponse resp =
               await sl.get<AccountService>().requestReceive(wallet!.representative, accountResp.frontier, item.amount, item.hash, link_as_account, privKey);
           // wallet.frontier = resp.hash;
           pendingRequests.remove(item.hash);
@@ -946,7 +947,7 @@ class StateContainerState extends State<StateContainer> {
       // Publish open
       sl.get<Logger>().d("Handling ${item.hash} as open");
       try {
-        ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet!.address, await _getPrivKey());
+        final ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet!.address, await _getPrivKey());
         wallet!.openBlock = resp.hash;
         wallet!.frontier = resp.hash;
         pendingRequests.remove(item.hash);
@@ -960,7 +961,7 @@ class StateContainerState extends State<StateContainer> {
       // Publish receive
       sl.get<Logger>().d("Handling ${item.hash} as receive");
       try {
-        ProcessResponse resp = await sl
+        final ProcessResponse resp = await sl
             .get<AccountService>()
             .requestReceive(wallet!.representative, wallet!.frontier, item.amount, item.hash, wallet!.address, await _getPrivKey());
 
@@ -978,18 +979,18 @@ class StateContainerState extends State<StateContainer> {
 
   /// Request balances for accounts in our database
   Future<void> _requestBalances() async {
-    List<Account> accounts = await sl.get<DBHelper>().getAccounts(await getSeed());
-    List<String?> addressToRequest = [];
-    accounts.forEach((account) {
+    final List<Account> accounts = await sl.get<DBHelper>().getAccounts(await getSeed());
+    final List<String?> addressToRequest = [];
+    accounts.forEach((Account account) {
       if (account.address != null) {
         addressToRequest.add(account.address);
       }
     });
-    AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances(addressToRequest);
-    sl.get<DBHelper>().getAccounts(await getSeed()).then((accounts) {
-      accounts.forEach((account) {
-        resp.balances!.forEach((address, balance) {
-          String combinedBalance = (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.pending!)!).toString();
+    final AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances(addressToRequest);
+    sl.get<DBHelper>().getAccounts(await getSeed()).then((List<Account> accounts) {
+      accounts.forEach((Account account) {
+        resp.balances!.forEach((String address, AccountBalanceItem balance) {
+          final String combinedBalance = (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.pending!)!).toString();
           if (address == account.address && combinedBalance != account.balance) {
             sl.get<DBHelper>().updateAccountBalance(account, combinedBalance);
           }
@@ -1000,7 +1001,7 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> requestUpdate({bool pending = true}) async {
     if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
-      String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
+      final String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
       String? fcmToken;
       bool? notificationsEnabled;
       try {
@@ -1025,16 +1026,16 @@ class StateContainerState extends State<StateContainer> {
         count = 50;
       }
       try {
-        AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet!.address, count: count, raw: true);
+        final AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet!.address, count: count, raw: true);
         _requestBalances();
         bool postedToHome = false;
         // Iterate list in reverse (oldest to newest block)
-        for (AccountHistoryResponseItem item in resp.history!) {
+        for (final AccountHistoryResponseItem item in resp.history!) {
           // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
           if (!wallet!.history!.contains(item)) {
-            int startIndex = 0; // Index to start inserting into the list
+            final int startIndex = 0; // Index to start inserting into the list
             int lastIndex = resp.history!.indexWhere(
-                (item) => wallet!.history!.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+                (AccountHistoryResponseItem item) => wallet!.history!.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
             lastIndex = lastIndex <= 0 ? resp.history!.length : lastIndex;
             setState(() {
               wallet!.history!.insertAll(0, resp.history!.getRange(startIndex, lastIndex));
@@ -1064,23 +1065,23 @@ class StateContainerState extends State<StateContainer> {
         // Receive pendings
         if (pending) {
           pendingRequests.clear();
-          PendingResponse pendingResp =
+          final PendingResponse pendingResp =
               await sl.get<AccountService>().getPending(wallet!.address, max(wallet!.blockCount ?? 0, 10), threshold: receiveThreshold);
 
           // for unfulfilled payments:
-          List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
+          final List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
 
           // Initiate receive/open request for each pending
-          for (String hash in pendingResp.blocks!.keys) {
-            PendingResponseItem? pendingResponseItem = pendingResp.blocks![hash];
+          for (final String hash in pendingResp.blocks!.keys) {
+            final PendingResponseItem? pendingResponseItem = pendingResp.blocks![hash];
             pendingResponseItem?.hash = hash;
-            String? receivedHash = await handlePendingItem(pendingResponseItem);
+            final String? receivedHash = await handlePendingItem(pendingResponseItem);
             if (receivedHash != null) {
               // payments:
               // check to see if this fulfills a payment request:
 
               for (int i = 0; i < unfulfilledPayments.length; i++) {
-                TXData txData = unfulfilledPayments[i];
+                final TXData txData = unfulfilledPayments[i];
                 // check destination of this request is where we're sending to:
                 // check to make sure we made the request:
                 // check to make sure the amounts are the same:
@@ -1098,7 +1099,7 @@ class StateContainerState extends State<StateContainer> {
                 }
               }
 
-              AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
+              final AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
                   type: BlockTypes.RECEIVE,
                   account: pendingResponseItem!.source,
                   amount: pendingResponseItem.amount,
@@ -1129,7 +1130,7 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> requestSubscribe() async {
     if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
-      String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
+      final String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
       String? fcmToken;
       bool? notificationsEnabled;
       try {
@@ -1146,15 +1147,15 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  Future<String?> decryptMessageCurrentAccount(String memo_enc, String? fromAddress, String? toAddress) async {
+  Future<String?> decryptMessageCurrentAccount(String memoEnc, String? fromAddress, String? toAddress) async {
     // decrypt the memo:
     Account? correctAccount;
     // find the right account index:
     if (selectedAccount!.address == toAddress) {
       correctAccount = selectedAccount;
     } else {
-      String? seed = await getSeed();
-      List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
+      final String? seed = await getSeed();
+      final List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
       for (int i = 0; i < accounts.length; i++) {
         if (accounts[i].address == toAddress) {
           correctAccount = accounts[i];
@@ -1168,37 +1169,37 @@ class StateContainerState extends State<StateContainer> {
       return null;
     }
 
-    String privKey = NanoUtil.seedToPrivate(await (getSeed()), correctAccount.index!);
-    String memo = await Box.decrypt(memo_enc, fromAddress!, privKey);
+    final String privKey = NanoUtil.seedToPrivate(await (getSeed()), correctAccount.index!);
+    final String memo = await Box.decrypt(memoEnc, fromAddress!, privKey);
     return memo;
   }
 
   Future<void> handlePaymentRequest(dynamic data, {bool delay_update = false}) async {
     log.d("handling payment_request from: ${data['requesting_account']} : ${data['account']}");
-    String? amount_raw = data['amount_raw'];
-    String? requesting_account = data['requesting_account'];
-    String? memo_enc = data['memo_enc'];
-    int request_time = int.parse(data['request_time']);
-    String? to_address = data['account'];
-    String uuid = data['uuid'];
-    String? local_uuid = data['local_uuid'];
+    final String? amountRaw = data['amount_raw'] as String?;
+    final String? requestingAccount = data['requesting_account'] as String?;
+    final String? memoEnc = data['memo_enc'] as String?;
+    final int? requestTime = int.tryParse(data['request_time'] as String);
+    final String? toAddress = data['account'] as String?;
+    final String uuid = data['uuid'] as String;
+    final String? localUuid = data['local_uuid'] as String?;
 
     if (wallet == null || wallet!.address == null || !Address(wallet!.address).isValid()) {
       throw Exception("wallet or wallet.address is null!");
     }
 
-    int currentBlockHeightInList = wallet!.history!.length > 0 ? (wallet!.history![0].height! + 1) : 1;
-    String? lastBlockHash = wallet!.history!.length > 0 ? wallet?.history![0].hash : null;
+    final int currentBlockHeightInList = wallet!.history!.length > 0 ? (wallet!.history![0].height! + 1) : 1;
+    final String? lastBlockHash = wallet!.history!.length > 0 ? wallet?.history![0].hash : null;
 
-    var txData = new TXData(
-      amount_raw: amount_raw,
+    final TXData txData = TXData(
+      amount_raw: amountRaw,
       is_request: true,
       is_memo: false,
       is_message: false,
-      from_address: requesting_account,
-      to_address: to_address,
+      from_address: requestingAccount,
+      to_address: toAddress,
       is_fulfilled: false,
-      request_time: request_time,
+      request_time: requestTime,
       block: lastBlockHash,
       uuid: uuid,
       is_acknowledged: false,
@@ -1206,23 +1207,23 @@ class StateContainerState extends State<StateContainer> {
     );
 
     // decrypt the memo:
-    if (memo_enc != null && memo_enc.isNotEmpty) {
-      String? memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
+    if (memoEnc != null && memoEnc.isNotEmpty) {
+      final String? memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
       if (memo != null) {
         txData.memo = memo;
       } else {
         // TODO: figure out how to get localized string here:
         txData.memo = "Decryption Error!";
-        txData.memo_enc = memo_enc;
+        txData.memo_enc = memoEnc;
       }
     }
 
     // check if exists in db:
-    var existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+    final TXData? existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
     if (existingTXData != null) {
       // update with the new info:
       existingTXData.is_acknowledged = true;
-      existingTXData.request_time = request_time;
+      existingTXData.request_time = requestTime;
       print("replacing TXData");
       await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
     } else {
@@ -1232,11 +1233,11 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // check for the local uuid just in case:
-    if (local_uuid != null && local_uuid.isNotEmpty && local_uuid.contains("LOCAL")) {
-      var localTXData = await sl.get<DBHelper>().getTXDataByUUID(local_uuid);
+    if (localUuid != null && localUuid.isNotEmpty && localUuid.contains("LOCAL")) {
+      final TXData? localTXData = await sl.get<DBHelper>().getTXDataByUUID(localUuid);
       if (localTXData != null) {
         // remove it:
-        await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
+        await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       }
     }
 
@@ -1246,35 +1247,35 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
+    await sl.get<AccountService>().requestACK(uuid, requestingAccount, wallet!.address);
   }
 
   Future<void> handlePaymentMessage(dynamic data, {bool delay_update = false}) async {
     log.d("handling payment_message from: ${data['requesting_account']} : ${data['account']}");
-    String? amount_raw = data['amount_raw'];
-    String? requesting_account = data['requesting_account'];
-    String? memo_enc = data['memo_enc'];
-    int request_time = int.parse(data['request_time']);
-    String? to_address = data['account'];
-    String uuid = data['uuid'];
-    String? local_uuid = data['local_uuid'];
+    final String? amountRaw = data['amount_raw'] as String?;
+    final String? requestingAccount = data['requesting_account'] as String?;
+    final String? memoEnc = data['memo_enc'] as String?;
+    final int? requestTime = int.tryParse(data['request_time'] as String);
+    final String? toAddress = data['account'] as String?;
+    final String uuid = data['uuid'] as String;
+    final String? localUuid = data['local_uuid'] as String?;
 
     if (wallet == null || wallet!.address == null || !Address(wallet!.address).isValid()) {
       throw Exception("wallet or wallet.address is null!");
     }
 
-    int currentBlockHeightInList = wallet!.history!.length > 0 ? (wallet!.history![0].height! + 1) : 1;
-    String? lastBlockHash = wallet!.history!.length > 0 ? wallet?.history![0].hash : null;
+    final int currentBlockHeightInList = wallet!.history!.length > 0 ? (wallet!.history![0].height! + 1) : 1;
+    final String? lastBlockHash = wallet!.history!.length > 0 ? wallet?.history![0].hash : null;
 
-    var txData = new TXData(
-      amount_raw: amount_raw,
+    final TXData txData = TXData(
+      amount_raw: amountRaw,
       is_request: false,
       is_memo: false,
       is_message: true,
-      from_address: requesting_account,
-      to_address: to_address,
+      from_address: requestingAccount,
+      to_address: toAddress,
       is_fulfilled: false,
-      request_time: request_time,
+      request_time: requestTime,
       block: lastBlockHash,
       uuid: uuid,
       is_acknowledged: false,
@@ -1282,37 +1283,37 @@ class StateContainerState extends State<StateContainer> {
     );
 
     // decrypt the memo:
-    if (memo_enc != null && memo_enc.isNotEmpty) {
-      String? memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
+    if (memoEnc != null && memoEnc.isNotEmpty) {
+      final String? memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
       if (memo != null) {
         txData.memo = memo;
       } else {
         // TODO: figure out how to get localized string here:
         txData.memo = "Decryption Error!";
-        txData.memo_enc = memo_enc;
+        txData.memo_enc = memoEnc;
       }
     }
 
     // check if exists in db:
-    var existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+    final TXData? existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
     if (existingTXData != null) {
       // update with the new info:
       existingTXData.is_acknowledged = true;
-      existingTXData.request_time = request_time;
-      print("replacing TXData");
+      existingTXData.request_time = requestTime;
+      log.v("replacing TXData");
       await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
     } else {
-      print("adding TXData to db");
+      log.v("adding TXData to db");
       // add it since it doesn't exist:
       await sl.get<DBHelper>().addTXData(txData);
     }
 
     // check for the local uuid just in case:
-    if (local_uuid != null && local_uuid.isNotEmpty && local_uuid.contains("LOCAL")) {
-      var localTXData = await sl.get<DBHelper>().getTXDataByUUID(local_uuid);
+    if (localUuid != null && localUuid.isNotEmpty && localUuid.contains("LOCAL")) {
+      final TXData? localTXData = await sl.get<DBHelper>().getTXDataByUUID(localUuid);
       if (localTXData != null) {
         // remove it:
-        await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
+        await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       }
     }
 
@@ -1321,22 +1322,21 @@ class StateContainerState extends State<StateContainer> {
       await updateUnified(false);
     }
     // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
+    await sl.get<AccountService>().requestACK(uuid, requestingAccount, wallet!.address);
   }
 
   Future<void> handlePaymentRecord(dynamic data, {bool delay_update = false}) async {
     print("handling payment_record from: ${data['requesting_account']} : ${data['account']}");
-    String? amount_raw = data['amount_raw'];
-    String? requesting_account = data['requesting_account'];
-    String? memo_enc = data['memo_enc'];
-    int request_time = int.parse(data['request_time']);
-    String? to_address = data['account'];
-    String? fulfillment_time = data['fulfillment_time'];
-    String? block = data['block'];
-    String? uuid = data['uuid'];
-    String? local_uuid = data['local_uuid'];
+    final String? amountRaw = data['amount_raw'] as String?;
+    final String? requestingAccount = data['requesting_account'] as String?;
+    final String? memoEnc = data['memo_enc'] as String?;
+    final int requestTime = int.parse(data['request_time'] as String);
+    final String? toAddress = data['account'] as String?;
+    final String? block = data['block'] as String?;
+    final String? uuid = data['uuid'] as String?;
+    final String? localUuid = data['local_uuid'] as String?;
 
-    if (data.containsKey("is_request")) {
+    if (data.containsKey("is_request") as bool) {
       if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
         TXData? txData;
         TXData? oldTXData;
@@ -1344,25 +1344,25 @@ class StateContainerState extends State<StateContainer> {
         // we have to check if this payment is already in the db:
         txData = await sl.get<DBHelper>().getTXDataByUUID(uuid!);
         if (txData != null) {
-          print("replacing existing txData for record!");
+          log.v("replacing existing txData for record!");
           // this payment is already in the db:
           // merge the two TXData objects;
-          TXData newTXInfo = txData;
-          newTXInfo.amount_raw = amount_raw;
-          newTXInfo.from_address = requesting_account;
-          newTXInfo.to_address = to_address;
+          final TXData newTXInfo = txData;
+          newTXInfo.amount_raw = amountRaw;
+          newTXInfo.from_address = requestingAccount;
+          newTXInfo.to_address = toAddress;
           // newTXInfo.block = block;// don't overwrite the block
           // newTXInfo.memo = memo;
-          newTXInfo.request_time = request_time;
+          newTXInfo.request_time = requestTime;
 
-          if (memo_enc != null && memo_enc.isNotEmpty) {
-            String? memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
+          if (memoEnc != null && memoEnc.isNotEmpty) {
+            final String? memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
             if (memo != null) {
               newTXInfo.memo = memo;
             } else {
               // TODO: figure out how to get localized string here:
               newTXInfo.memo = "Decryption Error!";
-              newTXInfo.memo_enc = memo_enc;
+              newTXInfo.memo_enc = memoEnc;
             }
           }
 
@@ -1372,8 +1372,8 @@ class StateContainerState extends State<StateContainer> {
         // is this from us? if so we need to check for the local version of this payment_request:
 
         // check if this is a local payment_request:
-        if (local_uuid != null && local_uuid.isNotEmpty && local_uuid.contains("LOCAL")) {
-          oldTXData = await sl.get<DBHelper>().getTXDataByUUID(local_uuid);
+        if (localUuid != null && localUuid.isNotEmpty && localUuid.contains("LOCAL")) {
+          oldTXData = await sl.get<DBHelper>().getTXDataByUUID(localUuid);
 
           // if (requesting_account == wallet.address) {
           // var transactions = await sl.get<DBHelper>().getAccountSpecificRequests(wallet.address);
@@ -1407,7 +1407,7 @@ class StateContainerState extends State<StateContainer> {
               // add it since it doesn't exist:
               print("adding payment_record : request to db");
               oldTXData.uuid = uuid;
-              oldTXData.request_time = request_time;
+              oldTXData.request_time = requestTime;
               oldTXData.status = StatusTypes.CREATE_SUCCESS;
               await sl.get<DBHelper>().addTXData(oldTXData);
             }
@@ -1417,7 +1417,7 @@ class StateContainerState extends State<StateContainer> {
         // we didn't replace a txData??
         if (txData == null && oldTXData == null) {
           // log.d("adding txData to the database!");
-          throw new Exception("\n\n@@@@@@@@this shouldn't happen!@@@@@@@@@@\n\n");
+          throw Exception("\n\n@@@@@@@@this shouldn't happen!@@@@@@@@@@\n\n");
         }
         if (!delay_update) {
           await updateSolids();
@@ -1426,7 +1426,7 @@ class StateContainerState extends State<StateContainer> {
       }
     }
 
-    if (data.containsKey("is_message")) {
+    if (data.containsKey("is_message") as bool) {
       if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
         TXData? txData;
         TXData? oldTXData;
@@ -1437,22 +1437,22 @@ class StateContainerState extends State<StateContainer> {
           print("replacing existing txData for record!");
           // this payment is already in the db:
           // merge the two TXData objects;
-          TXData newTXInfo = txData;
-          newTXInfo.amount_raw = amount_raw;
-          newTXInfo.from_address = requesting_account;
-          newTXInfo.to_address = to_address;
+          final TXData newTXInfo = txData;
+          newTXInfo.amount_raw = amountRaw;
+          newTXInfo.from_address = requestingAccount;
+          newTXInfo.to_address = toAddress;
           // newTXInfo.block = block;// don't overwrite the block
           // newTXInfo.memo = memo;
-          newTXInfo.request_time = request_time;
+          newTXInfo.request_time = requestTime;
 
-          if (memo_enc != null && memo_enc.isNotEmpty) {
-            String? memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
+          if (memoEnc != null && memoEnc.isNotEmpty) {
+            final String? memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
             if (memo != null) {
               newTXInfo.memo = memo;
             } else {
               // TODO: figure out how to get localized string here:
               newTXInfo.memo = "Decryption Error!";
-              newTXInfo.memo_enc = memo_enc;
+              newTXInfo.memo_enc = memoEnc;
             }
           }
 
@@ -1462,20 +1462,20 @@ class StateContainerState extends State<StateContainer> {
         // is this from us? if so we need to check for the local version of this payment_request:
 
         // check if this is a local payment_request:
-        if (local_uuid != null && local_uuid.isNotEmpty && local_uuid.contains("LOCAL")) {
-          oldTXData = await sl.get<DBHelper>().getTXDataByUUID(local_uuid);
+        if (localUuid != null && localUuid.isNotEmpty && localUuid.contains("LOCAL")) {
+          oldTXData = await sl.get<DBHelper>().getTXDataByUUID(localUuid);
 
           if (oldTXData != null) {
-            print("removing old txData : message");
+            log.v("removing old txData : message");
             // remove the old tx by the uuid:
             await sl.get<DBHelper>().deleteTXDataByUUID(oldTXData.uuid!);
 
             // if we didn't replace an existing txData, add it to the db:
             if (txData == null) {
               // add it since it doesn't exist:
-              print("adding payment_record : message to db");
+              log.v("adding payment_record : message to db");
               oldTXData.uuid = uuid;
-              oldTXData.request_time = request_time;
+              oldTXData.request_time = requestTime;
               oldTXData.status = StatusTypes.CREATE_SUCCESS;
               await sl.get<DBHelper>().addTXData(oldTXData);
             }
@@ -1494,16 +1494,16 @@ class StateContainerState extends State<StateContainer> {
       }
     }
 
-    if (data.containsKey("is_memo")) {
+    if (data.containsKey("is_memo") as bool) {
       // check if exists in db:
-      var existingTXData = await sl.get<DBHelper>().getTXDataByBlock(block);
+      TXData? existingTXData = await sl.get<DBHelper>().getTXDataByBlock(block);
 
       if (existingTXData == null) {
         // check if there is a local payment_memo since we didn't find it by block:
         // this case probably only happens on a slow network connection, if at all:
-        if (local_uuid != null && local_uuid.isNotEmpty && local_uuid.contains("LOCAL")) {
-          print("memo block wasn't found while processing payment_record!");
-          existingTXData = await sl.get<DBHelper>().getTXDataByUUID(local_uuid);
+        if (localUuid != null && localUuid.isNotEmpty && localUuid.contains("LOCAL")) {
+          log.v("memo block wasn't found while processing payment_record!");
+          existingTXData = await sl.get<DBHelper>().getTXDataByUUID(localUuid);
         }
       }
 
@@ -1514,7 +1514,7 @@ class StateContainerState extends State<StateContainer> {
         existingTXData.block = block;
         // remove the local one if it exists:
         if (existingTXData.uuid!.contains("LOCAL")) {
-          print("removing the local txData for this memo: ${existingTXData.uuid}");
+          log.d("removing the local txData for this memo: ${existingTXData.uuid}");
           await sl.get<DBHelper>().deleteTXDataByUUID(existingTXData.uuid!);
           await sl.get<DBHelper>().deleteTXDataByBlock(existingTXData.block!);
           // add the new one and change the uuid to be not local:
@@ -1522,14 +1522,14 @@ class StateContainerState extends State<StateContainer> {
           existingTXData.status = "sent";
           await sl.get<DBHelper>().addTXData(existingTXData);
         } else {
-          print("updating the txData for this memo");
+          log.d("updating the txData for this memo");
           // we updated the other fields up above, so we don't need to update them here:
           // TODO: should check to make sure uuid matches:
           await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
           // send acknowledgement to server / requester:
           // sleep for a second to make sure the txData is updated:
-          await Future.delayed(Duration(seconds: 1));
-          await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
+          await Future.delayed(const Duration(seconds: 1));
+          await sl.get<AccountService>().requestACK(uuid, requestingAccount, wallet!.address);
         }
       } else {
         throw Exception("no txData found for this memo in payment record!");
@@ -1538,24 +1538,24 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> handlePaymentMemo(dynamic data, {bool delay_update = false}) async {
-    print("handling payment_memo from: ${data['requesting_account']} : ${data['account']}");
+    log.d("handling payment_memo from: ${data['requesting_account']} : ${data['account']}");
     // String amount_raw = data['amount_raw'];
-    String? requesting_account = data['requesting_account'];
-    String? to_address = data['account'];
-    String? memo_enc = data['memo_enc'];
-    String? request_time = data['request_time'];
-    String? block = data['block'];
-    String? is_acknowledged = data['is_acknowledged'];
-    int? height = data['height'];
-    String? uuid = data['uuid'];
-    String? local_uuid = data['local_uuid'];
+    final String? requestingAccount = data['requesting_account'] as String?;
+    final String? toAddress = data['account'] as String?;
+    final String? memoEnc = data['memo_enc'] as String?;
+    final String? requestTime = data['request_time'] as String?;
+    final String? block = data['block'] as String?;
+    final String? isAcknowledged = data['is_acknowledged'] as String?;
+    final int? height = data['height'] as int?;
+    final String? uuid = data['uuid'] as String?;
+    final String? localUuid = data['local_uuid'] as String?;
 
-    TXData txData = new TXData(
+    final TXData txData = new TXData(
       // amount_raw: amount_raw,
       is_request: false,
       is_memo: true,
-      from_address: requesting_account,
-      to_address: to_address,
+      from_address: requestingAccount,
+      to_address: toAddress,
       is_fulfilled: true,
       block: block,
       link: null,
@@ -1565,20 +1565,20 @@ class StateContainerState extends State<StateContainer> {
     );
 
     // attempt to decrypt the memo:
-    if (memo_enc != null && memo_enc.isNotEmpty) {
-      String? memo = await decryptMessageCurrentAccount(memo_enc, requesting_account, to_address);
+    if (memoEnc != null && memoEnc.isNotEmpty) {
+      final String? memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
       if (memo != null) {
         txData.memo = memo;
       } else {
         // TODO: figure out how to get localized string here:
         txData.memo = "Decryption Error!";
-        txData.memo_enc = memo_enc;
+        txData.memo_enc = memoEnc;
       }
     }
 
     bool found = false;
     // loop through our tx history to find the first matching block:
-    for (var histItem in wallet!.history!) {
+    for (final AccountHistoryResponseItem histItem in wallet!.history!) {
       if (histItem.link == block) {
         // found a matching transaction, so set the block to that:
         txData.link = histItem.hash;
@@ -1588,7 +1588,7 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // check if exists in db:
-    var existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid!);
+    final TXData? existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid!);
     if (existingTXData != null) {
       print("memo txData exists");
       // update with the new info:
@@ -1609,12 +1609,12 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // check for local_uuid just incase:
-    if (local_uuid != null && local_uuid.isNotEmpty && local_uuid.contains("LOCAL")) {
+    if (localUuid != null && localUuid.isNotEmpty && localUuid.contains("LOCAL")) {
       // check if there is a local payment_memo:
-      var localTXData = await sl.get<DBHelper>().getTXDataByUUID(local_uuid);
+      final TXData? localTXData = await sl.get<DBHelper>().getTXDataByUUID(localUuid);
       if (localTXData != null) {
         // delete the local one:
-        await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
+        await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       }
     }
 
@@ -1624,27 +1624,27 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requesting_account, wallet!.address);
+    await sl.get<AccountService>().requestACK(uuid, requestingAccount, wallet!.address);
   }
 
   Future<void> handlePaymentACK(dynamic data, {bool delay_update = false}) async {
     // print("handling payment_ack from: ${data['requesting_account']}");
     print("handling payment_ack");
-    String? amount_raw = data['amount_raw'];
-    String? requesting_account = data['requesting_account'];
-    String? memo = data['memo'];
-    String? request_time = data['request_time'];
-    String? to_address = data['account'];
-    String uuid = data['uuid'];
-    String? block = data['block'];
-    String? is_acknowledged = data['is_acknowledged'];
-    int? height = data['height'];
+    final String? amountRaw = data['amount_raw'] as String?;
+    final String? requestingAccount = data['requesting_account'] as String?;
+    final String? memo = data['memo'] as String?;
+    final String? requestTime = data['request_time'] as String?;
+    final String? toAddress = data['account'] as String?;
+    final String uuid = data['uuid'] as String;
+    final String? block = data['block'] as String?;
+    final String? isAcknowledged = data['is_acknowledged'] as String?;
+    final int? height = data['height'] as int?;
 
     // sleep to prevent animations from overlapping:
     // await Future.delayed(Duration(seconds: 2));
 
     // set acknowledged to true:
-    var txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
+    final TXData? txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
     if (txData != null) {
       await sl.get<DBHelper>().changeTXAckStatus(uuid, true);
       print("changed ack status!");
@@ -1660,25 +1660,25 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> handleMessage(dynamic data, {bool delay_update = false}) async {
     // handle an incoming payment request:
-    if (data.containsKey("payment_request")) {
+    if (data.containsKey("payment_request") as bool) {
       await handlePaymentRequest(data, delay_update: delay_update);
     }
 
-    if (data.containsKey("payment_message")) {
+    if (data.containsKey("payment_message") as bool) {
       await handlePaymentMessage(data, delay_update: delay_update);
     }
 
     // handle an incoming memo:
-    if (data.containsKey("payment_memo")) {
+    if (data.containsKey("payment_memo") as bool) {
       await handlePaymentMemo(data, delay_update: delay_update);
     }
 
     // payment records are essentially server copies of local txData:
-    if (data.containsKey("payment_record")) {
+    if (data.containsKey("payment_record") as bool) {
       await handlePaymentRecord(data, delay_update: delay_update);
     }
 
-    if (data.containsKey("payment_ack")) {
+    if (data.containsKey("payment_ack") as bool) {
       await handlePaymentACK(data, delay_update: delay_update);
     }
   }
@@ -1693,7 +1693,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<String> _getPrivKey() async {
-    String seed = await getSeed();
+    final String seed = await getSeed();
     return NanoUtil.seedToPrivate(seed, selectedAccount!.index!);
   }
 

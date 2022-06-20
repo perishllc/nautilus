@@ -9,7 +9,7 @@ part 'state_block.g.dart';
 
 /// For running in an isolate, needs to be top-level function
 StateBlock stateBlockFromJson(String contents) {
-  return StateBlock.fromJson(json.decode(contents));
+  return StateBlock.fromJson(json.decode(contents) as Map<String, dynamic>);
 }
 
 @JsonSerializable()

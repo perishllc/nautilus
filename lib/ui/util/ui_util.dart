@@ -1,16 +1,15 @@
-import 'dart:io';
 import 'dart:async';
 import 'dart:math';
+
 import 'package:event_taxi/event_taxi.dart';
-import 'package:http/http.dart' as http;
-import 'package:oktoast/oktoast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/util/exceptions.dart';
+import 'package:oktoast/oktoast.dart';
 
 enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
 
@@ -19,11 +18,11 @@ enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
 class UIUtil {
   static Widget threeLineAddressText(BuildContext context, String address,
       {ThreeLineAddressTextType type = ThreeLineAddressTextType.PRIMARY, String? contactName}) {
-    String stringPartOne = address.substring(0, 12);
-    String stringPartTwo = address.substring(12, 22);
-    String stringPartThree = address.substring(22, 44);
-    String stringPartFour = address.substring(44, 59);
-    String stringPartFive = address.substring(59);
+    final String stringPartOne = address.substring(0, 12);
+    final String stringPartTwo = address.substring(12, 22);
+    final String stringPartThree = address.substring(22, 44);
+    final String stringPartFour = address.substring(44, 59);
+    final String stringPartFive = address.substring(59);
     switch (type) {
       case ThreeLineAddressTextType.PRIMARY60:
         return Column(
@@ -72,9 +71,12 @@ class UIUtil {
           ],
         );
       case ThreeLineAddressTextType.PRIMARY:
-        Widget contactWidget = contactName != null
-            ? RichText(textAlign: TextAlign.center, text: TextSpan(text: contactName, style: AppStyles.textStyleAddressPrimary(context)))
-            : SizedBox();
+        Widget contactWidget;
+        if (contactName != null) {
+          contactWidget = RichText(textAlign: TextAlign.center, text: TextSpan(text: contactName, style: AppStyles.textStyleAddressPrimary(context)));
+        } else {
+          contactWidget = const SizedBox();
+        }
         return Column(
           children: <Widget>[
             contactWidget,
@@ -125,9 +127,12 @@ class UIUtil {
           ],
         );
       case ThreeLineAddressTextType.SUCCESS:
-        Widget contactWidget = contactName != null
-            ? RichText(textAlign: TextAlign.center, text: TextSpan(text: contactName, style: AppStyles.textStyleAddressSuccess(context)))
-            : SizedBox();
+        Widget contactWidget;
+        if (contactName != null) {
+          contactWidget = RichText(textAlign: TextAlign.center, text: TextSpan(text: contactName, style: AppStyles.textStyleAddressSuccess(context)));
+        } else {
+          contactWidget = const SizedBox();
+        }
         return Column(
           children: <Widget>[
             contactWidget,
@@ -227,13 +232,13 @@ class UIUtil {
           ],
         );
       default:
-        throw new UIException("Invalid threeLineAddressText Type $type");
+        throw UIException("Invalid threeLineAddressText Type $type");
     }
   }
 
   static Widget oneLineAddressText(BuildContext context, String address, {OneLineAddressTextType type = OneLineAddressTextType.PRIMARY}) {
-    String stringPartOne = address.substring(0, 12);
-    String stringPartFive = address.substring(59);
+    final String stringPartOne = address.substring(0, 12);
+    final String stringPartFive = address.substring(59);
     switch (type) {
       case OneLineAddressTextType.PRIMARY60:
         return Column(
@@ -311,15 +316,15 @@ class UIUtil {
           ],
         );
       default:
-        throw new UIException("Invalid oneLineAddressText Type $type");
+        throw UIException("Invalid oneLineAddressText Type $type");
     }
   }
 
   static Widget threeLineSeedText(BuildContext context, String address, {TextStyle? textStyle}) {
     textStyle = textStyle ?? AppStyles.textStyleSeed(context);
-    String stringPartOne = address.substring(0, 22);
-    String stringPartTwo = address.substring(22, 44);
-    String stringPartThree = address.substring(44, 64);
+    final String stringPartOne = address.substring(0, 22);
+    final String stringPartTwo = address.substring(22, 44);
+    final String stringPartThree = address.substring(44, 64);
     return Column(
       children: <Widget>[
         Text(
@@ -340,34 +345,34 @@ class UIUtil {
 
   static Future<void> showBlockExplorerWebview(BuildContext context, String? hash) async {
     cancelLockEvent();
-    final InAppBrowser browser = new InAppBrowser();
-    var options = InAppBrowserClassOptions(
+    final InAppBrowser browser = InAppBrowser();
+    final options = InAppBrowserClassOptions(
         crossPlatform: InAppBrowserOptions(
           hideUrlBar: true,
           toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
         ),
         inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
-    String url = AppLocalization.of(context)!.getBlockExplorerUrl(hash, StateContainer.of(context).curBlockExplorer);
+    final String url = AppLocalization.of(context)!.getBlockExplorerUrl(hash, StateContainer.of(context).curBlockExplorer);
     await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
   }
 
   static Future<void> showAccountWebview(BuildContext context, String? account) async {
     cancelLockEvent();
-    final InAppBrowser browser = new InAppBrowser();
-    var options = InAppBrowserClassOptions(
+    final InAppBrowser browser = InAppBrowser();
+    final options = InAppBrowserClassOptions(
         crossPlatform: InAppBrowserOptions(
           hideUrlBar: true,
           toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
         ),
         inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
-    String url = AppLocalization.of(context)!.getAccountExplorerUrl(account, StateContainer.of(context).curBlockExplorer);
+    final String url = AppLocalization.of(context)!.getAccountExplorerUrl(account, StateContainer.of(context).curBlockExplorer);
     await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
   }
 
   static Future<void> showWebview(BuildContext context, String url) async {
     cancelLockEvent();
-    final InAppBrowser browser = new InAppBrowser();
-    var options = InAppBrowserClassOptions(
+    final InAppBrowser browser = InAppBrowser();
+    final options = InAppBrowserClassOptions(
         crossPlatform: InAppBrowserOptions(
           hideUrlBar: true,
           toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
@@ -390,13 +395,13 @@ class UIUtil {
         alignment: Alignment.topCenter,
         child: Container(
           margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.05, horizontal: 14),
-          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
           width: MediaQuery.of(context).size.width - 30,
           decoration: BoxDecoration(
             color: StateContainer.of(context).curTheme.primary,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
-              BoxShadow(color: StateContainer.of(context).curTheme.barrier!, offset: Offset(0, 15), blurRadius: 30, spreadRadius: -5),
+              BoxShadow(color: StateContainer.of(context).curTheme.barrier!, offset: const Offset(0, 15), blurRadius: 30, spreadRadius: -5),
             ],
           ),
           child: Text(
@@ -419,7 +424,7 @@ class UIUtil {
       _lockDisableSub!.cancel();
     }
     EventTaxiImpl.singleton().fire(DisableLockTimeoutEvent(disable: true));
-    Future<dynamic> delayed = Future.delayed(Duration(seconds: 10));
+    final Future<dynamic> delayed = Future.delayed(const Duration(seconds: 10));
     delayed.then((_) {
       return true;
     });
@@ -436,7 +441,7 @@ class UIUtil {
   }
 
   static String getNatriconURL(String address, String nonce) {
-    String adjustedNonce = nonce == "" ? "" : "&nonce=$nonce";
+    final String adjustedNonce = nonce == "" ? "" : "&nonce=$nonce";
     return "https://natricon.com/api/v1/nano?svc=natrium&outline=true&outlineColor=white&address=$address$adjustedNonce";
   }
 }

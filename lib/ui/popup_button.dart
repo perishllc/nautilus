@@ -43,20 +43,26 @@ class _AppPopupButtonState extends State<AppPopupButton> {
   }
 
   Future<void> scanAndHandlResult() async {
-    dynamic scanResult = await Navigator.pushNamed(context, '/before_scan_screen');
+    final dynamic? scanResult = await Navigator.pushNamed(context, '/before_scan_screen');
+    if (!mounted) {
+      return;
+    }
     // Parse scan data and route appropriately
     if (scanResult == null) {
       UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
     } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
       // Is a URI
-      Address address = Address(scanResult);
+      final Address address = Address(scanResult as String?);
       if (address.address == null) {
         UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
       } else {
         // See if this address belongs to a contact
-        User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
+        final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
+        if (!mounted) {
+          return;
+        }
         // If amount is present, fill it and go to SendConfirm
-        BigInt? amountBigInt = address.amount != null ? BigInt.tryParse(address.amount!) : null;
+        final BigInt? amountBigInt = address.amount != null ? BigInt.tryParse(address.amount!) : null;
         bool sufficientBalance = false;
         if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
           UIUtil.showSnackbar(AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001"), context);
@@ -86,7 +92,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
         Hero(
           tag: 'scanButton',
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 100),
+            duration: const Duration(milliseconds: 100),
             curve: Curves.easeOut,
             height: scanButtonSize,
             width: scanButtonSize,
@@ -104,14 +110,14 @@ class _AppPopupButtonState extends State<AppPopupButton> {
         // Send Button
         GestureDetector(
           onVerticalDragStart: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.accountBalance > BigInt.zero)
-              ? (value) {
+              ? (DragStartDetails value) {
                   setState(() {
                     popupColor = StateContainer.of(context).curTheme.primary;
                   });
                 }
-              : (value) {},
+              : (DragStartDetails value) {},
           onVerticalDragEnd: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.accountBalance > BigInt.zero)
-              ? (value) {
+              ? (DragEndDetails value) {
                   isSendButtonColorPrimary = true;
                   firstTime = true;
                   if (isScrolledUpEnough) {
@@ -125,9 +131,9 @@ class _AppPopupButtonState extends State<AppPopupButton> {
                     scanButtonSize = 0;
                   });
                 }
-              : (value) {},
+              : (DragEndDetails value) {},
           onVerticalDragUpdate: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.accountBalance > BigInt.zero)
-              ? (dragUpdateDetails) {
+              ? (DragUpdateDetails dragUpdateDetails) {
                   if (dragUpdateDetails.localPosition.dy < -60) {
                     isScrolledUpEnough = true;
                     if (firstTime) {
@@ -161,9 +167,9 @@ class _AppPopupButtonState extends State<AppPopupButton> {
                     });
                   }
                 }
-              : (dragUpdateDetails) {},
+              : (DragUpdateDetails dragUpdateDetails) {},
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 100),
+            duration: const Duration(milliseconds: 100),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
               boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
@@ -171,13 +177,29 @@ class _AppPopupButtonState extends State<AppPopupButton> {
             height: 55,
             width: (MediaQuery.of(context).size.width - 42).abs() / 2,
             margin: EdgeInsetsDirectional.only(start: 7, top: popupMarginBottom, end: 14.0),
-            child: FlatButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-              color: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
-                  ? isSendButtonColorPrimary
-                      ? StateContainer.of(context).curTheme.primary
-                      : StateContainer.of(context).curTheme.success
-                  : StateContainer.of(context).curTheme.primary60,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                backgroundColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
+                    ? isSendButtonColorPrimary
+                        ? StateContainer.of(context).curTheme.primary
+                        : StateContainer.of(context).curTheme.success
+                    : StateContainer.of(context).curTheme.primary60,
+                primary: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
+                    ? StateContainer.of(context).curTheme.background40
+                    : Colors.transparent,
+                // highlightColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
+                //     ? StateContainer.of(context).curTheme.background40
+                //     : Colors.transparent,
+                // splashColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
+                //     ? StateContainer.of(context).curTheme.background40
+                //     : Colors.transparent,
+              ),
+              onPressed: () {
+                if (StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/) {
+                  Sheets.showAppHeightNineSheet(context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency));
+                }
+              },
               child: AutoSizeText(
                 AppLocalization.of(context)!.send,
                 textAlign: TextAlign.center,
@@ -185,17 +207,6 @@ class _AppPopupButtonState extends State<AppPopupButton> {
                 maxLines: 1,
                 stepGranularity: 0.5,
               ),
-              onPressed: () {
-                if (StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/) {
-                  Sheets.showAppHeightNineSheet(context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency));
-                }
-              },
-              highlightColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
-                  ? StateContainer.of(context).curTheme.background40
-                  : Colors.transparent,
-              splashColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
-                  ? StateContainer.of(context).curTheme.background40
-                  : Colors.transparent,
             ),
           ),
         ),

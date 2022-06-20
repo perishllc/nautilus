@@ -3,47 +3,45 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ens_dart/ens_dart.dart';
+import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:nautilus_wallet_flutter/network/model/payment/payment_ack.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
-import 'package:nautilus_wallet_flutter/sensitive.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:logger/logger.dart';
-import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
-import 'package:nautilus_wallet_flutter/network/model/request/account_info_request.dart';
-import 'package:nautilus_wallet_flutter/network/model/request/block_info_request.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-
-import 'package:web_socket_channel/io.dart';
-import 'package:package_info/package_info.dart';
-import 'package:event_taxi/event_taxi.dart';
-import 'package:synchronized/synchronized.dart';
 import 'package:http/http.dart' as http;
-import 'package:ens_dart/ens_dart.dart';
-import 'package:web3dart/web3dart.dart';
-
+import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/model/state_block.dart';
 import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
-import 'package:nautilus_wallet_flutter/network/model/request_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/request/subscribe_request.dart';
-import 'package:nautilus_wallet_flutter/network/model/request/account_history_request.dart';
-import 'package:nautilus_wallet_flutter/network/model/payment/payment_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
+import 'package:nautilus_wallet_flutter/network/model/payment/payment_ack.dart';
 import 'package:nautilus_wallet_flutter/network/model/payment/payment_memo.dart';
+import 'package:nautilus_wallet_flutter/network/model/payment/payment_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/account_history_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/account_info_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/accounts_balances_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/block_info_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/pending_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/process_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/subscribe_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/request_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/block_info_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/block_info_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/callback_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/price_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/pending_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/price_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
-import 'package:nautilus_wallet_flutter/bus/events.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
+import 'package:nautilus_wallet_flutter/sensitive.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:package_info/package_info.dart';
+import 'package:synchronized/synchronized.dart';
+import 'package:web3dart/web3dart.dart';
+import 'package:web_socket_channel/io.dart';
 
 import 'model/payment/payment_message.dart';
 
@@ -68,7 +66,7 @@ late Web3Client _web3Client;
 late Ens ens;
 
 Map? decodeJson(dynamic src) {
-  return json.decode(src);
+  return json.decode(src as String) as Map?;
 }
 
 // AccountService singleton
@@ -113,7 +111,7 @@ class AccountService {
     }
     _isInRetryState = true;
     log.d("Retrying connection in 3 seconds...");
-    Future<dynamic> delayed = new Future.delayed(new Duration(seconds: 3));
+    final Future<dynamic> delayed = new Future.delayed(new Duration(seconds: 3));
     delayed.then((_) {
       return true;
     });
@@ -137,7 +135,7 @@ class AccountService {
     _isConnecting = true;
 
     // check if the nautilus servers are available
-    Socket.connect(_BASE_SERVER_ADDRESS, 80, timeout: Duration(seconds: 3)).then((socket) {
+    Socket.connect(_BASE_SERVER_ADDRESS, 80, timeout: Duration(seconds: 3)).then((Socket socket) {
       log.d("Nautilus backend is up");
       fallbackConnected = false;
       socket.destroy();
@@ -151,8 +149,8 @@ class AccountService {
     });
 
     // ENS:
-    final rpcUrl = 'https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}';
-    final wsUrl = 'wss://mainnet.infura.io/ws/v3/${Sensitive.INFURA_API_KEY}';
+    const String rpcUrl = 'https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}';
+    const String wsUrl = 'wss://mainnet.infura.io/ws/v3/${Sensitive.INFURA_API_KEY}';
 
     _web3Client = Web3Client(rpcUrl, http.Client(), socketConnector: () {
       return IOWebSocketChannel.connect(wsUrl).cast<String>();
@@ -160,7 +158,7 @@ class AccountService {
     ens = Ens(client: _web3Client);
 
     try {
-      var packageInfo = await PackageInfo.fromPlatform();
+      final PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
       _isConnecting = true;
       suspended = false;
@@ -222,7 +220,7 @@ class AccountService {
     } finally {
       if (reset) {
         // Reset queue item statuses
-        _requestQueue!.forEach((requestItem) {
+        _requestQueue!.forEach((RequestItem requestItem) {
           requestItem.isProcessing = false;
         });
         if (!_isConnecting && !suspended) {
@@ -241,7 +239,7 @@ class AccountService {
       _isConnecting = false;
       // log.d("Received $message");
       // Map msg = await compute(decodeJson as FutureOr<Map<dynamic, dynamic>> Function(dynamic), message);
-      Map? msg = await compute(decodeJson, message);
+      final Map? msg = await compute(decodeJson, message);
       if (msg == null) {
         throw Exception("Invalid JSON received");
       }
@@ -250,18 +248,18 @@ class AccountService {
           (msg.containsKey("frontier") && msg.containsKey("representative_block")) ||
           msg.containsKey("error") && msg.containsKey("currency")) {
         // Subscribe response
-        SubscribeResponse resp = await compute(subscribeResponseFromJson, msg);
+        final SubscribeResponse resp = await compute(subscribeResponseFromJson, msg);
         // Post to callbacks
         EventTaxiImpl.singleton().fire(SubscribeEvent(response: resp));
       } else if (msg.containsKey("currency") && msg.containsKey("price") && msg.containsKey("btc")) {
         // Price info sent from server
-        PriceResponse resp = PriceResponse.fromJson(msg as Map<String, dynamic>);
+        final PriceResponse resp = PriceResponse.fromJson(msg as Map<String, dynamic>);
         EventTaxiImpl.singleton().fire(PriceEvent(response: resp));
       } else if (msg.containsKey("block") && msg.containsKey("hash") && msg.containsKey("account")) {
-        CallbackResponse resp = await compute(callbackResponseFromJson, msg);
+        final CallbackResponse resp = await compute(callbackResponseFromJson, msg);
         EventTaxiImpl.singleton().fire(CallbackEvent(response: resp));
       } else if (msg.containsKey("error")) {
-        ErrorResponse resp = ErrorResponse.fromJson(msg as Map<String, dynamic>);
+        final ErrorResponse resp = ErrorResponse.fromJson(msg as Map<String, dynamic>);
         EventTaxiImpl.singleton().fire(ErrorEvent(response: resp));
       }
       return;
@@ -285,8 +283,8 @@ class AccountService {
   Future<void> processQueue() async {
     await _lock.synchronized(() async {
       //log.d("Request Queue length ${_requestQueue.length}");
-      if (_requestQueue != null && _requestQueue!.length > 0) {
-        RequestItem requestItem = _requestQueue!.first;
+      if (_requestQueue != null && _requestQueue!.isNotEmpty) {
+        final RequestItem requestItem = _requestQueue!.first;
         if (!requestItem.isProcessing!) {
           if (!_isConnected && !_isConnecting && !suspended) {
             initCommunication();
@@ -295,7 +293,7 @@ class AccountService {
             return;
           }
           requestItem.isProcessing = true;
-          String requestJson = await compute(encodeRequestItem, requestItem.request);
+          final String requestJson = await compute(encodeRequestItem, requestItem.request);
           //log.d("Sending: $requestJson");
           await _send(requestJson);
         } else if ((DateTime.now().difference(requestItem.expireDt!).inSeconds > RequestItem.EXPIRE_TIME_S)) {
@@ -312,14 +310,14 @@ class AccountService {
     //   return false;
     // }
     // NATRIUM fix:
-    if (_requestQueue == null || _requestQueue!.length == 0) {
+    if (_requestQueue == null || _requestQueue!.isEmpty) {
       return false;
     }
 
-    for (var requestItem in _requestQueue!) {
+    for (RequestItem requestItem in _requestQueue!) {
       if (requestItem.request is ProcessRequest) {
-        ProcessRequest request = requestItem.request;
-        StateBlock block = StateBlock.fromJson(json.decode(request.block!));
+        final ProcessRequest request = requestItem.request as ProcessRequest;
+        final StateBlock block = StateBlock.fromJson(json.decode(request.block!) as Map<String, dynamic>);
         if (block.hash == hash) {
           return true;
         }
@@ -330,13 +328,13 @@ class AccountService {
 
   bool queueContainsOpenBlock() {
     // NATRIUM fix:
-    if (_requestQueue == null || _requestQueue!.length == 0) {
+    if (_requestQueue == null || _requestQueue!.isEmpty) {
       return false;
     }
-    for (var requestItem in _requestQueue!) {
+    for (RequestItem requestItem in _requestQueue!) {
       if (requestItem.request is ProcessRequest) {
-        ProcessRequest request = requestItem.request;
-        StateBlock block = StateBlock.fromJson(json.decode(request.block!));
+        final ProcessRequest request = requestItem.request as ProcessRequest;
+        final StateBlock block = StateBlock.fromJson(json.decode(request.block!) as Map<String, dynamic>);
         if (BigInt.tryParse(block.previous!) == BigInt.zero) {
           return true;
         }
@@ -346,39 +344,39 @@ class AccountService {
   }
 
   void removeSubscribeHistoryPendingFromQueue() {
-    if (_requestQueue != null && _requestQueue!.length > 0) {
-      List<RequestItem> toRemove = [];
-      _requestQueue!.forEach((requestItem) {
+    if (_requestQueue != null && _requestQueue!.isNotEmpty) {
+      final List<RequestItem> toRemove = [];
+      _requestQueue!.forEach((RequestItem requestItem) {
         if ((requestItem.request is SubscribeRequest || requestItem.request is AccountHistoryRequest || requestItem.request is PendingRequest) &&
             !requestItem.isProcessing!) {
           toRemove.add(requestItem);
         }
       });
-      toRemove.forEach((requestItem) {
+      toRemove.forEach((RequestItem requestItem) {
         _requestQueue!.remove(requestItem);
       });
     }
   }
 
   RequestItem? pop() {
-    return _requestQueue!.length > 0 ? _requestQueue!.removeFirst() : null;
+    return _requestQueue!.isNotEmpty ? _requestQueue!.removeFirst() : null;
   }
 
   RequestItem? peek() {
-    return _requestQueue!.length > 0 ? _requestQueue!.first : null;
+    return _requestQueue!.isNotEmpty ? _requestQueue!.first : null;
   }
 
   /// Clear entire queue, except for AccountsBalancesRequest
   void clearQueue() {
-    List<RequestItem> reQueue = [];
-    _requestQueue!.forEach((requestItem) {
+    final List<RequestItem> reQueue = [];
+    _requestQueue!.forEach((RequestItem requestItem) {
       if (requestItem.request is AccountsBalancesRequest) {
         reQueue.add(requestItem);
       }
     });
     _requestQueue!.clear();
     // Re-queue requests
-    reQueue.forEach((requestItem) {
+    reQueue.forEach((RequestItem requestItem) {
       requestItem.isProcessing = false;
       _requestQueue!.add(requestItem);
     });
@@ -389,13 +387,13 @@ class AccountService {
   // HTTP API
 
   Future<dynamic> makeHttpRequest(BaseRequest request) async {
-    http.Response response =
+    final http.Response response =
         await http.post(Uri.parse(_SERVER_ADDRESS_HTTP), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
 
     if (response.statusCode != 200) {
       return null;
     }
-    Map decoded = json.decode(response.body);
+    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
     if (decoded.containsKey("error")) {
       return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
     }
@@ -404,17 +402,17 @@ class AccountService {
   }
 
   Future<String?> checkUnstoppableDomain(String domain) async {
-    http.Response response =
+    final http.Response response =
         await http.get(Uri.parse(_UD_ENDPOINT + domain), headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${Sensitive.UD_API_KEY}'});
 
     if (response.statusCode != 200) {
       return null;
     }
-    Map? decoded = json.decode(response.body);
+    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
     String? address;
 
     if (decoded != null && decoded["records"] != null && decoded["records"]["crypto.NANO.address"] != null) {
-      address = decoded["records"]["crypto.NANO.address"];
+      address = decoded["records"]["crypto.NANO.address"] as String?;
       if (NanoAccounts.isValid(NanoAccountType.NANO, address!)) {
         return address;
       }
@@ -424,11 +422,11 @@ class AccountService {
   }
 
   Future<String?> checkENSDomain(String domain) async {
-    final pubKey = await ens.withName(domain).getCoinAddress(CoinType.NANO);
+    final String pubKey = await ens.withName(domain).getCoinAddress(CoinType.NANO);
     if (pubKey.isEmpty) {
       return null;
     } else {
-      String address = NanoAccounts.createAccount(NanoAccountType.NANO, pubKey);
+      final String address = NanoAccounts.createAccount(NanoAccountType.NANO, pubKey);
       // Validating address
       if (NanoAccounts.isValid(NanoAccountType.NANO, address)) {
         return address;
@@ -439,11 +437,11 @@ class AccountService {
   }
 
   Future<dynamic> checkUsernameAvailability(String username) async {
-    http.Response response = await http.get(Uri.parse(_USERNAME_LEASE_ENDPOINT + "/" + username), headers: {"Accept": "application/json"});
+    final http.Response response = await http.get(Uri.parse(_USERNAME_LEASE_ENDPOINT + "/" + username), headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {
       return null;
     }
-    Map decoded = json.decode(response.body);
+    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
     if (decoded.containsKey("error")) {
       return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
     }
@@ -457,11 +455,11 @@ class AccountService {
   }
 
   Future<dynamic> checkUsernameUrl(String URL) async {
-    http.Response response = await http.get(Uri.parse(URL), headers: {"Accept": "application/json"});
+    final http.Response response = await http.get(Uri.parse(URL), headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {
       return null;
     }
-    Map decoded = json.decode(response.body);
+    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
     if (decoded.containsKey("error")) {
       return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
     }
@@ -469,23 +467,23 @@ class AccountService {
   }
 
   Future<AccountInfoResponse> getAccountInfo(String account) async {
-    AccountInfoRequest request = AccountInfoRequest(account: account);
-    dynamic response = await makeHttpRequest(request);
+    final AccountInfoRequest request = AccountInfoRequest(account: account);
+    final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       if (response.error == "Account not found") {
         return AccountInfoResponse(unopened: true);
       }
       throw Exception("Received error ${response.error}");
     }
-    AccountInfoResponse infoResponse = AccountInfoResponse.fromJson(response);
+    final AccountInfoResponse infoResponse = AccountInfoResponse.fromJson(response as Map<String, dynamic>);
     return infoResponse;
   }
 
   Future<PendingResponse> getPending(String? account, int count, {String? threshold, bool includeActive = false}) async {
     threshold = threshold ?? BigInt.from(10).pow(24).toString();
 
-    PendingRequest request = PendingRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
-    dynamic response = await makeHttpRequest(request);
+    final PendingRequest request = PendingRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
+    final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
@@ -493,24 +491,24 @@ class AccountService {
     if (response["blocks"] == "") {
       pr = PendingResponse(blocks: {});
     } else {
-      pr = PendingResponse.fromJson(response);
+      pr = PendingResponse.fromJson(response as Map<String, dynamic>);
     }
     return pr;
   }
 
   Future<BlockInfoItem> requestBlockInfo(String? hash) async {
-    BlockInfoRequest request = BlockInfoRequest(hash: hash);
-    dynamic response = await makeHttpRequest(request);
+    final BlockInfoRequest request = BlockInfoRequest(hash: hash);
+    final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
-    BlockInfoItem item = BlockInfoItem.fromJson(response);
+    final BlockInfoItem item = BlockInfoItem.fromJson(response as Map<String, dynamic>);
     return item;
   }
 
   Future<AccountHistoryResponse> requestAccountHistory(String? account, {int count = 1, bool raw = false}) async {
-    AccountHistoryRequest request = AccountHistoryRequest(account: account, count: count, raw: raw);
-    dynamic response = await makeHttpRequest(request);
+    final AccountHistoryRequest request = AccountHistoryRequest(account: account, count: count, raw: raw);
+    final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
@@ -522,92 +520,92 @@ class AccountService {
     if (response["history"] == "") {
       response["history"] = [];
     }
-    return AccountHistoryResponse.fromJson(response);
+    return AccountHistoryResponse.fromJson(response as Map<String, dynamic>);
   }
 
   // request money from an account:
-  /*Future<PaymentResponse> */ Future<void> requestPayment(String? account, String? amount_raw, String? requesting_account, String request_signature,
-      String request_nonce, String? memo_enc, String local_uuid) async {
-    PaymentRequest request = PaymentRequest(
+  /*Future<PaymentResponse> */ Future<void> requestPayment(String? account, String? amountRaw, String? requestingAccount, String requestSignature,
+      String requestNonce, String? memoEnc, String localUuid) async {
+    final PaymentRequest request = PaymentRequest(
         account: account,
-        amount_raw: amount_raw,
-        requesting_account: requesting_account,
-        request_signature: request_signature,
-        request_nonce: request_nonce,
-        memo_enc: memo_enc,
-        local_uuid: local_uuid);
+        amount_raw: amountRaw,
+        requesting_account: requestingAccount,
+        request_signature: requestSignature,
+        request_nonce: requestNonce,
+        memo_enc: memoEnc,
+        local_uuid: localUuid);
 
     // queueRequest(request);
-    dynamic response = await makeHttpRequest(request);
+    final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
   }
 
   // send payment record (memo) to an account:
-  Future<void> sendTXMemo(String? account, String? requesting_account, String? amount_raw, String request_signature, String request_nonce, String memo_enc,
-      String? block, String local_uuid) async {
-    PaymentMemo request = PaymentMemo(
+  Future<void> sendTXMemo(String? account, String? requestingAccount, String? amountRaw, String requestSignature, String requestNonce, String memoEnc,
+      String? block, String localUuid) async {
+    final PaymentMemo request = PaymentMemo(
         account: account,
-        requesting_account: requesting_account,
-        request_signature: request_signature,
-        request_nonce: request_nonce,
-        memo_enc: memo_enc,
+        requesting_account: requestingAccount,
+        request_signature: requestSignature,
+        request_nonce: requestNonce,
+        memo_enc: memoEnc,
         block: block,
-        local_uuid: local_uuid);
-    dynamic response = await makeHttpRequest(request);
+        local_uuid: localUuid);
+    final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
   }
 
   Future<void> sendTXMessage(
-      String? account, String? requesting_account, String request_signature, String request_nonce, String memo_enc, String local_uuid) async {
-    PaymentMessage request = PaymentMessage(
+      String? account, String? requestingAccount, String requestSignature, String requestNonce, String memoEnc, String localUuid) async {
+    final PaymentMessage request = PaymentMessage(
         account: account,
-        requesting_account: requesting_account,
-        request_signature: request_signature,
-        request_nonce: request_nonce,
-        memo_enc: memo_enc,
-        local_uuid: local_uuid);
-    dynamic response = await makeHttpRequest(request);
+        requesting_account: requestingAccount,
+        request_signature: requestSignature,
+        request_nonce: requestNonce,
+        memo_enc: memoEnc,
+        local_uuid: localUuid);
+    final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
   }
 
-  Future<void> requestACK(String? request_uuid, String? account, String? requesting_account) async {
-    PaymentACK request = PaymentACK(uuid: request_uuid, account: account, requesting_account: requesting_account);
-    dynamic response = await makeHttpRequest(request);
+  Future<void> requestACK(String? requestUuid, String? account, String? requestingAccount) async {
+    final PaymentACK request = PaymentACK(uuid: requestUuid, account: account, requesting_account: requestingAccount);
+    final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
   }
 
   Future<AccountsBalancesResponse> requestAccountsBalances(List<String?> accounts) async {
-    AccountsBalancesRequest request = AccountsBalancesRequest(accounts: accounts);
-    dynamic response = await makeHttpRequest(request);
+    final AccountsBalancesRequest request = AccountsBalancesRequest(accounts: accounts);
+    final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
-    return AccountsBalancesResponse.fromJson(response);
+    return AccountsBalancesResponse.fromJson(response as Map<String, dynamic>);
   }
 
   Future<ProcessResponse> requestProcess(ProcessRequest request) async {
-    dynamic response = await makeHttpRequest(request);
+    final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
-    ProcessResponse item = ProcessResponse.fromJson(response);
+    final ProcessResponse item = ProcessResponse.fromJson(response as Map<String, dynamic>);
     return item;
   }
 
   Future<ProcessResponse> requestReceive(String? representative, String? previous, String? balance, String? link, String? account, String? privKey) async {
-    StateBlock receiveBlock = StateBlock(
+    final StateBlock receiveBlock = StateBlock(
         subtype: BlockTypes.RECEIVE, previous: previous, representative: representative, balance: balance, link: link, account: account, privKey: privKey);
 
-    BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!));
+    final BlockInfoItem previousInfo = await requestBlockInfo(previous);
+    final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
 
     // Update data on our next pending request
     receiveBlock.representative = previousBlock.representative;
@@ -615,14 +613,14 @@ class AccountService {
     await receiveBlock.sign(privKey);
 
     // Process
-    ProcessRequest processRequest = ProcessRequest(block: json.encode(receiveBlock.toJson()), subType: BlockTypes.RECEIVE);
+    final ProcessRequest processRequest = ProcessRequest(block: json.encode(receiveBlock.toJson()), subType: BlockTypes.RECEIVE);
 
-    return await requestProcess(processRequest);
+    return requestProcess(processRequest);
   }
 
   Future<ProcessResponse> requestSend(String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
       {bool max = false}) async {
-    StateBlock sendBlock = StateBlock(
+    final StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
         previous: previous,
         representative: representative,
@@ -631,8 +629,8 @@ class AccountService {
         account: account,
         privKey: privKey);
 
-    BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!));
+    final BlockInfoItem previousInfo = await requestBlockInfo(previous);
+    final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
 
     // Update data on our next pending request
     sendBlock.representative = previousBlock.representative;
@@ -640,27 +638,27 @@ class AccountService {
     await sendBlock.sign(privKey);
 
     // Process
-    ProcessRequest processRequest = ProcessRequest(block: json.encode(sendBlock.toJson()), subType: BlockTypes.SEND);
+    final ProcessRequest processRequest = ProcessRequest(block: json.encode(sendBlock.toJson()), subType: BlockTypes.SEND);
 
-    return await requestProcess(processRequest);
+    return requestProcess(processRequest);
   }
 
   Future<ProcessResponse> requestOpen(String? balance, String? link, String? account, String? privKey, {String? representative}) async {
     representative = representative ?? await sl.get<SharedPrefsUtil>().getRepresentative();
-    StateBlock openBlock =
+    final StateBlock openBlock =
         StateBlock(subtype: BlockTypes.OPEN, previous: "0", representative: representative, balance: balance, link: link, account: account, privKey: privKey);
 
     // Sign
     await openBlock.sign(privKey);
 
     // Process
-    ProcessRequest processRequest = ProcessRequest(block: json.encode(openBlock.toJson()), subType: BlockTypes.OPEN);
+    final ProcessRequest processRequest = ProcessRequest(block: json.encode(openBlock.toJson()), subType: BlockTypes.OPEN);
 
-    return await requestProcess(processRequest);
+    return requestProcess(processRequest);
   }
 
   Future<ProcessResponse> requestChange(String? account, String? representative, String? previous, String balance, String privKey) async {
-    StateBlock chgBlock = StateBlock(
+    final StateBlock chgBlock = StateBlock(
         subtype: BlockTypes.CHANGE,
         previous: previous,
         representative: representative,
@@ -669,25 +667,25 @@ class AccountService {
         account: account,
         privKey: privKey);
 
-    BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!));
+    final BlockInfoItem previousInfo = await requestBlockInfo(previous);
+    final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
 
     // Update data on our next pending request
     chgBlock.setBalance(previousBlock.balance);
     await chgBlock.sign(privKey);
 
     // Process
-    ProcessRequest processRequest = ProcessRequest(block: json.encode(chgBlock.toJson()), subType: BlockTypes.CHANGE);
+    final ProcessRequest processRequest = ProcessRequest(block: json.encode(chgBlock.toJson()), subType: BlockTypes.CHANGE);
 
-    return await requestProcess(processRequest);
+    return requestProcess(processRequest);
   }
 
   Future<AlertResponseItem?> getAlert(String lang) async {
-    http.Response response = await http.get(Uri.parse(_SERVER_ADDRESS_ALERTS + "/" + lang), headers: {"Accept": "application/json"});
+    final http.Response response = await http.get(Uri.parse(_SERVER_ADDRESS_ALERTS + "/" + lang), headers: {"Accept": "application/json"});
     if (response.statusCode == 200) {
       List<AlertResponseItem> alerts;
       alerts = (json.decode(response.body) as List).map((i) => AlertResponseItem.fromJson(i)).toList();
-      if (alerts.length > 0) {
+      if (alerts.isNotEmpty) {
         if (alerts[0].active!) {
           return alerts[0];
         }

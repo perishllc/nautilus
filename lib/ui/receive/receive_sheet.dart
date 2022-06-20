@@ -40,7 +40,7 @@ class NumericalRangeFormatter extends TextInputFormatter {
     if (newValue.text == '') {
       return newValue;
     } else if (int.parse(newValue.text) < min!) {
-      return TextEditingValue().copyWith(text: min!.toStringAsFixed(2));
+      return const TextEditingValue().copyWith(text: min!.toStringAsFixed(2));
     } else {
       return int.parse(newValue.text) > max! ? oldValue : newValue;
     }
@@ -161,7 +161,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     //Empty SizedBox
-                    SizedBox(
+                    const SizedBox(
                       width: 60,
                       height: 60,
                     ),
@@ -170,7 +170,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                       children: <Widget>[
                         // Sheet handle
                         Container(
-                          margin: EdgeInsets.only(top: 10),
+                          margin: const EdgeInsets.only(top: 10),
                           height: 5,
                           width: MediaQuery.of(context).size.width * 0.15,
                           decoration: BoxDecoration(
@@ -180,7 +180,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                         ),
                         // show napi username if available:
                         Container(
-                          margin: (StateContainer.of(context).wallet?.username != null) ? EdgeInsets.only(top: 35.0) : EdgeInsets.only(top: 15.0),
+                          margin: (StateContainer.of(context).wallet?.username != null) ? const EdgeInsets.only(top: 35.0) : const EdgeInsets.only(top: 15.0),
                           child: (StateContainer.of(context).wallet?.username != null)
                               ? Text(StateContainer.of(context).wallet!.username!,
                                   style: TextStyle(
@@ -194,7 +194,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                       ],
                     ),
                     //Empty SizedBox
-                    SizedBox(
+                    const SizedBox(
                       width: 60,
                       height: 60,
                     ),
@@ -209,8 +209,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
 
                     // ******* Enter Amount Error Container ******* //
                     Container(
-                      alignment: AlignmentDirectional(0, 0),
-                      margin: EdgeInsets.only(top: 3),
+                      alignment: const AlignmentDirectional(0, 0),
+                      margin: const EdgeInsets.only(top: 3),
                       child: Text(_amountValidationText,
                           style: TextStyle(
                             fontSize: 14.0,
@@ -225,8 +225,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                 // QR which takes all the available space left from the buttons & address text
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
-                    child: LayoutBuilder(builder: (context, constraints) {
+                    padding: const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
+                    child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
                       double availableWidth = constraints.maxWidth;
                       double availableHeight = (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
                       double widthDivideFactor = 1.3;
@@ -241,9 +241,9 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                       SvgPicture.asset('legacy_assets/QR.svg'),
                                       SvgPicture.asset('legacy_assets/sharecard_logo.svg'),
                                     ),
-                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                   )
-                                : SizedBox(),
+                                : const SizedBox(),
                             // This is for hiding the share card
                             Center(
                               child: Container(
@@ -268,7 +268,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                 height: computedMaxSize / 1.53,
                                 width: computedMaxSize / 1.53,
                                 // child: widget.qrWidget,
-                                child: this.qrWidget,
+                                child: qrWidget,
                               ),
                             ),
                             // Outer ring
@@ -286,7 +286,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                               child: Container(
                                 width: computedMaxSize / 5.5,
                                 height: computedMaxSize / 5.5,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.white,
                                 ),
@@ -297,7 +297,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                               child: Container(
                                 width: computedMaxSize / 6.5,
                                 height: computedMaxSize / 6.5,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
                                   shape: BoxShape.circle,
                                 ),
@@ -308,7 +308,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                 height: computedMaxSize / 8,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  child: Image(image: AssetImage("assets/logo-square.png")),
+                                  child: const Image(image: AssetImage("assets/logo-square.png")),
                                 ),
                               ),
                             ),
@@ -358,7 +358,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             Dimens.BUTTON_BOTTOM_DIMENS,
                             disabled: _showShareCard, onPressed: () {
                           String receiveCardFileName = "share_${StateContainer.of(context).wallet!.address}.png";
-                          getApplicationDocumentsDirectory().then((directory) {
+                          getApplicationDocumentsDirectory().then((Directory directory) {
                             String filePath = "${directory.path}/$receiveCardFileName";
                             File f = File(filePath);
                             setState(() {
@@ -366,9 +366,9 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             });
                             Future.delayed(new Duration(milliseconds: 50), () {
                               if (_showShareCard!) {
-                                _capturePng().then((byteData) {
+                                _capturePng().then((Uint8List? byteData) {
                                   if (byteData != null) {
-                                    f.writeAsBytes(byteData).then((file) {
+                                    f.writeAsBytes(byteData).then((File file) {
                                       UIUtil.cancelLockEvent();
                                       Share.shareFiles([filePath], text: StateContainer.of(context).wallet!.address);
                                     });
@@ -454,7 +454,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       setState(() {
         _localCurrencyMode = false;
       });
-      Future.delayed(Duration(milliseconds: 50), () {
+      Future.delayed(const Duration(milliseconds: 50), () {
         _sendAmountController!.text = cryptoAmountStr;
         _sendAmountController!.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
       });
@@ -472,7 +472,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       setState(() {
         _localCurrencyMode = true;
       });
-      Future.delayed(Duration(milliseconds: 50), () {
+      Future.delayed(const Duration(milliseconds: 50), () {
         _sendAmountController!.text = localAmountStr;
         _sendAmountController!.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
       });
@@ -490,7 +490,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     } else {
       raw = _sendAmountController!.text.length > 0 ? NumberUtil.getAmountAsRaw(_sendAmountController!.text) : '';
     }
-    this.paintQrCode(address: widget.address, amount: raw);
+    paintQrCode(address: widget.address, amount: raw);
   }
 
   void paintQrCode({String? address, String? amount}) {
@@ -508,16 +508,16 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       gapless: false,
       errorCorrectionLevel: QrErrorCorrectLevel.Q,
     );
-    painter.toImageData(MediaQuery.of(context).size.width).then((byteData) {
+    painter.toImageData(MediaQuery.of(context).size.width).then((ByteData? byteData) {
       setState(() {
-        this.qrWidget = Container(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List()));
+        qrWidget = Container(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List()));
       });
     });
   }
 
   //************ Enter Amount Container Method ************//
   //*******************************************************//
-  getEnterAmountContainer() {
+  Widget getEnterAmountContainer() {
     return AppTextField(
       focusNode: _sendAmountFocusNode,
       controller: _sendAmountController,
@@ -539,7 +539,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
               LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
             ]
           : [LengthLimitingTextInputFormatter(13)],
-      onChanged: (text) {
+      onChanged: (String text) {
         if (_localCurrencyMode == false && !text.contains(".") && text.isNotEmpty && text.length > 1) {
           // if the amount is larger than 133248297 set it to that number:
           if (BigInt.parse(text) > BigInt.parse("133248297")) {
@@ -564,7 +564,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
           _rawAmount = null;
         });
 
-        this.redrawQrCode();
+        redrawQrCode();
       },
       textInputAction: TextInputAction.next,
       maxLines: null,
@@ -579,9 +579,9 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
             )
           : null,
       fadeSuffixOnCondition: true,
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textAlign: TextAlign.center,
-      onSubmitted: (text) {
+      onSubmitted: (String text) {
         FocusScope.of(context).unfocus();
         // if (!Address(_sendAddressController.text).isValid()) {
         //   FocusScope.of(context).requestFocus(_sendAddressFocusNode);

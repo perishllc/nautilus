@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:markdown/markdown.dart' as md;
 import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-
-import 'package:flutter/material.dart' as material;
-import 'package:markdown/markdown.dart' as md;
 import 'package:url_launcher/url_launcher.dart';
 
 class AppDialogs {
-  static void showConfirmDialog(var context, var title, var content, var buttonText, Function onPressed, {String? cancelText, Function? cancelAction}) {
-    if (cancelText == null) {
-      cancelText = AppLocalization.of(context)!.cancel.toUpperCase();
-    }
+  static void showConfirmDialog(BuildContext context, String title, String content, String buttonText, Function onPressed,
+      {String? cancelText, Function? cancelAction}) {
+    cancelText ??= AppLocalization.of(context)!.cancel.toUpperCase();
+
     showAppDialog(
       context: context,
       builder: (BuildContext context) {
@@ -29,11 +28,13 @@ class AppDialogs {
           ),
           content: Text(content, style: AppStyles.textStyleParagraph(context)),
           actions: <Widget>[
-            FlatButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
-              padding: EdgeInsets.all(12),
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+                padding: const EdgeInsets.all(12),
+              ),
               child: Container(
-                constraints: BoxConstraints(maxWidth: 100),
+                constraints: const BoxConstraints(maxWidth: 100),
                 child: Text(
                   cancelText!,
                   style: AppStyles.textStyleDialogButtonText(context),
@@ -46,11 +47,13 @@ class AppDialogs {
                 }
               },
             ),
-            FlatButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
-              padding: EdgeInsets.all(12),
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+                padding: const EdgeInsets.all(12),
+              ),
               child: Container(
-                constraints: BoxConstraints(maxWidth: 100),
+                constraints: const BoxConstraints(maxWidth: 100),
                 child: Text(
                   buttonText,
                   style: AppStyles.textStyleDialogButtonText(context),
@@ -67,7 +70,7 @@ class AppDialogs {
     );
   }
 
-  static void showInfoDialog(var context, var title, var content) {
+  static void showInfoDialog(BuildContext context, String title, String content) {
     showDialog(
       barrierColor: StateContainer.of(context).curTheme.barrier,
       context: context,
@@ -94,7 +97,7 @@ class AppDialogs {
     );
   }
 
-  static Widget infoHeader(var context, var title, var onPressed) {
+  static Widget infoHeader(BuildContext context, Widget title, void Function()? onPressed) {
     return Row(children: <Widget>[
       title,
       // A container for the info button
@@ -102,9 +105,9 @@ class AppDialogs {
     ]);
   }
 
-  static Widget infoButton(var context, var onPressed) {
+  static Widget infoButton(BuildContext context, void Function()? onPressed) {
     // A container for the info button
-    return Container(
+    return SizedBox(
       width: 50,
       height: 50,
       // margin: EdgeInsetsDirectional.only(),
@@ -112,7 +115,7 @@ class AppDialogs {
         style: TextButton.styleFrom(
           primary: StateContainer.of(context).curTheme.text15,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           tapTargetSize: MaterialTapTargetSize.padded,
         ),
@@ -150,13 +153,13 @@ class AppDialogs {
   // }
 
   static Future<void> showChangeLog(BuildContext context) async {
-    String changeLogMarkdown = await DefaultAssetBundle.of(context).loadString("CHANGELOG.md");
+    final String changeLogMarkdown = await DefaultAssetBundle.of(context).loadString("CHANGELOG.md");
 
     await showDialog(
         barrierDismissible: false,
         context: context,
         builder: (BuildContext ctx) => material.Dialog(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(20.0))),
               backgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -167,20 +170,20 @@ class AppDialogs {
                     child: Text(AppLocalization.of(context)!.changeLog, textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
-                      constraints: BoxConstraints(minHeight: 300, maxHeight: 400),
+                      constraints: const BoxConstraints(minHeight: 300, maxHeight: 400),
                       child: Scrollbar(
                         child: SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                                 child: MarkdownBody(
                                   data: changeLogMarkdown,
                                   shrinkWrap: true,
                                   selectable: false,
-                                  onTapLink: (text, url, title) async {
-                                    Uri uri = Uri.parse(url!);
+                                  onTapLink: (String text, String? url, String title) async {
+                                    final Uri uri = Uri.parse(url!);
                                     if (await canLaunchUrl(uri)) {
                                       await launchUrl(uri);
                                     }
@@ -201,7 +204,7 @@ class AppDialogs {
                                       fontSize: AppFontSizes.large(context),
                                       color: StateContainer.of(context).curTheme.success,
                                     ),
-                                    h2Padding: EdgeInsets.only(top: 24),
+                                    h2Padding: const EdgeInsets.only(top: 24),
                                     h4: TextStyle(
                                       color: StateContainer.of(context).curTheme.warning,
                                     ),
@@ -232,7 +235,7 @@ class AppDialogs {
                         onPressed: () async {
                           Navigator.of(context).pop();
                           // Go to send with address
-                          Future.delayed(Duration(milliseconds: 1000), () {
+                          Future.delayed(const Duration(milliseconds: 1000), () {
                             Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
                             Sheets.showAppHeightNineSheet(
@@ -262,269 +265,3 @@ class AppDialogs {
             ));
   }
 }
-
-// enum OldAnimationType { SEND, GENERIC, TRANSFER_SEARCHING_QR, TRANSFER_SEARCHING_MANUAL, TRANSFER_TRANSFERRING, MANTA, LOADING, SEARCHING }
-
-// class AnimationLoadingOverlay extends ModalRoute<void> {
-//   OldAnimationType type;
-//   Function onPoppedCallback;
-//   Color barrier;
-//   Color barrierStronger;
-//   AnimationController _controller;
-
-//   AnimationLoadingOverlay(this.type, this.barrier, this.barrierStronger, {this.onPoppedCallback});
-
-//   @override
-//   Duration get transitionDuration => Duration(milliseconds: 0);
-
-//   @override
-//   bool get opaque => false;
-
-//   @override
-//   bool get barrierDismissible => false;
-
-//   @override
-//   Color get barrierColor {
-//     if (type == OldAnimationType.TRANSFER_TRANSFERRING || type == OldAnimationType.TRANSFER_SEARCHING_QR || type == OldAnimationType.TRANSFER_SEARCHING_MANUAL) {
-//       return barrierStronger;
-//     }
-//     return barrier;
-//   }
-
-//   @override
-//   String get barrierLabel => null;
-
-//   @override
-//   bool get maintainState => false;
-
-//   @override
-//   void didComplete(void result) {
-//     if (this.onPoppedCallback != null) {
-//       this.onPoppedCallback();
-//     }
-//     super.didComplete(result);
-//   }
-
-//   @override
-//   Widget buildPage(
-//     BuildContext context,
-//     Animation<double> animation,
-//     Animation<double> secondaryAnimation,
-//   ) {
-//     return Material(
-//       type: MaterialType.transparency,
-//       child: SafeArea(
-//         child: _buildOverlayContent(context),
-//       ),
-//     );
-//   }
-
-//   Widget _getAnimation(BuildContext context) {
-//     switch (type) {
-//       case OldAnimationType.LOADING:
-//         // return Center(child: RiveAnimation.asset('assets/animations/diamond-loader.riv', fit: BoxFit.contain));
-//         // return Center(child: RiveAnimation.asset('assets/animations/particle-loader.riv', fit: BoxFit.contain));
-//         // return Center(child: RiveAnimation.asset('assets/animations/loader3.riv', fit: BoxFit.contain));
-//         return Lottie.asset(
-//           'assets/animations/load-n.json',
-//         );
-//       // return Lottie.network(
-//       //   // 'https://assets10.lottiefiles.com/packages/lf20_t9gkkhz4.json',
-//       //   // 'https://assets2.lottiefiles.com/private_files/lf30_juqdjgia.json',
-//       //   // 'https://assets9.lottiefiles.com/packages/lf20_utc4nnnj.json',
-//       //   'https://assets3.lottiefiles.com/private_files/lf30_ghoL4b.json',
-//       // );
-//       case OldAnimationType.SEND:
-//         return Center(
-//           child: FlareActor(
-//             "legacy_assets/send_animation.flr",
-//             animation: "main",
-//             fit: BoxFit.contain,
-//             color: StateContainer.of(context).curTheme.primary,
-//           ),
-//         );
-//       case OldAnimationType.TRANSFER_SEARCHING_QR:
-//         // return Stack(
-//         //   children: <Widget>[
-//         //     Center(
-//         //       child: FlareActor(
-//         //         "legacy_assets/searchseedqr_animation_qronly.flr",
-//         //         animation: "main",
-//         //         fit: BoxFit.contain,
-//         //       ),
-//         //     ),
-//         //     Center(
-//         //       child: FlareActor(
-//         //         "legacy_assets/searchseedqr_animation_glassonly.flr",
-//         //         animation: "main",
-//         //         fit: BoxFit.contain,
-//         //       ),
-//         //     ),
-//         //     Center(
-//         //       child: FlareActor(
-//         //         "legacy_assets/searchseedqr_animation_magnifyingglassonly.flr",
-//         //         animation: "main",
-//         //         fit: BoxFit.contain,
-//         //         color: StateContainer.of(context).curTheme.primary,
-//         //       ),
-//         //     ),
-//         //   ],
-//         // );
-//         return Lottie.asset(
-//           "assets/animations/searching.json",
-//         );
-//       case OldAnimationType.TRANSFER_SEARCHING_MANUAL:
-//         // return Stack(
-//         //   children: <Widget>[
-//         //     Center(
-//         //       child: FlareActor(
-//         //         "legacy_assets/searchseedmanual_animation_seedonly.flr",
-//         //         animation: "main",
-//         //         fit: BoxFit.contain,
-//         //         color: StateContainer.of(context).curTheme.primary30,
-//         //       ),
-//         //     ),
-//         //     Center(
-//         //       child: FlareActor(
-//         //         "legacy_assets/searchseedmanual_animation_glassonly.flr",
-//         //         animation: "main",
-//         //         fit: BoxFit.contain,
-//         //       ),
-//         //     ),
-//         //     Center(
-//         //       child: FlareActor(
-//         //         "legacy_assets/searchseedmanual_animation_magnifyingglassonly.flr",
-//         //         animation: "main",
-//         //         fit: BoxFit.contain,
-//         //         color: StateContainer.of(context).curTheme.primary,
-//         //       ),
-//         //     ),
-//         //   ],
-//         // );
-//         return Lottie.asset(
-//           "assets/animations/searching.json",
-//         );
-//       case OldAnimationType.TRANSFER_TRANSFERRING:
-//         return Stack(
-//           children: <Widget>[
-//             FlareActor(
-//               "legacy_assets/transfer_animation_paperwalletonly.flr",
-//               animation: "main",
-//               fit: BoxFit.contain,
-//             ),
-//             FlareActor(
-//               "legacy_assets/transfer_animation_nautiluswalletonly.flr",
-//               animation: "main",
-//               fit: BoxFit.contain,
-//               color: StateContainer.of(context).curTheme.primary,
-//             ),
-//           ],
-//         );
-//       case OldAnimationType.GENERIC:
-//       default:
-//         return CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(StateContainer.of(context).curTheme.primary60));
-//     }
-//   }
-
-//   Widget _buildOverlayContent(BuildContext context) {
-//     switch (type) {
-//       case OldAnimationType.TRANSFER_SEARCHING_QR:
-//         return Center(
-//           child: Container(
-//             margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.15),
-//             width: MediaQuery.of(context).size.width / 1.1,
-//             height: MediaQuery.of(context).size.width / 1.1,
-//             child: _getAnimation(context),
-//           ),
-//         );
-//       case OldAnimationType.TRANSFER_SEARCHING_MANUAL:
-//         return Center(
-//           child: Container(
-//             margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.15),
-//             width: MediaQuery.of(context).size.width / 1.1,
-//             height: MediaQuery.of(context).size.width / 1.1,
-//             child: _getAnimation(context),
-//           ),
-//         );
-//       case OldAnimationType.TRANSFER_TRANSFERRING:
-//         return Center(
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: <Widget>[
-//               Container(
-//                 alignment: AlignmentDirectional(0, -0.5),
-//                 width: MediaQuery.of(context).size.width / 1.4,
-//                 height: MediaQuery.of(context).size.width / 1.4 / 2,
-//                 child: _getAnimation(context),
-//               ),
-//               Container(
-//                 margin: EdgeInsets.only(left: 10, top: 20, bottom: MediaQuery.of(context).size.height * 0.15),
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   crossAxisAlignment: CrossAxisAlignment.end,
-//                   children: <Widget>[
-//                     Text(CaseChange.toUpperCase(AppLocalization.of(context).transferLoading, context), style: AppStyles.textStyleHeader2Colored(context)),
-//                     Container(
-//                       margin: EdgeInsets.only(bottom: 7),
-//                       width: 33.333,
-//                       height: 8.866,
-//                       child: FlareActor(
-//                         "legacy_assets/threedot_animation.flr",
-//                         animation: "main",
-//                         fit: BoxFit.contain,
-//                         color: StateContainer.of(context).curTheme.primary,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),
-//         );
-//       case OldAnimationType.MANTA:
-//         return Center(
-//           child: Container(
-//             margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.05),
-//             width: MediaQuery.of(context).size.width,
-//             height: MediaQuery.of(context).size.width,
-//             child: _getAnimation(context),
-//           ),
-//         );
-//       case OldAnimationType.SEND:
-//         return Column(
-//           mainAxisSize: MainAxisSize.min,
-//           mainAxisAlignment: type == OldAnimationType.SEND ? MainAxisAlignment.end : MainAxisAlignment.center,
-//           children: <Widget>[
-//             Container(
-//               margin: type == OldAnimationType.SEND ? EdgeInsets.only(bottom: 10.0, left: 90, right: 90) : EdgeInsets.zero,
-//               //Widgth/Height ratio is needed because BoxFit is not working as expected
-//               width: type == OldAnimationType.SEND ? double.infinity : 100,
-//               height: type == OldAnimationType.SEND ? MediaQuery.of(context).size.width : 100,
-//               child: _getAnimation(context),
-//             ),
-//           ],
-//         );
-//       case OldAnimationType.GENERIC:
-//         return Column(
-//           mainAxisSize: MainAxisSize.min,
-//           mainAxisAlignment: type == OldAnimationType.SEND ? MainAxisAlignment.end : MainAxisAlignment.center,
-//           children: <Widget>[
-//             Container(
-//               margin: type == OldAnimationType.SEND ? EdgeInsets.only(bottom: 10.0, left: 90, right: 90) : EdgeInsets.zero,
-//               //Widgth/Height ratio is needed because BoxFit is not working as expected
-//               width: type == OldAnimationType.SEND ? double.infinity : 100,
-//               height: type == OldAnimationType.SEND ? MediaQuery.of(context).size.width : 100,
-//               child: _getAnimation(context),
-//             ),
-//           ],
-//         );
-//       default:
-//         return _getAnimation(context);
-//     }
-//   }
-
-//   @override
-//   Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-//     return child;
-//   }
-// }

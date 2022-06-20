@@ -1,38 +1,37 @@
 import 'dart:async';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:keyboard_avoider/keyboard_avoider.dart';
 
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
-
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/address.dart';
+import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
-import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
+import 'package:nautilus_wallet_flutter/util/biometrics.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:nautilus_wallet_flutter/util/biometrics.dart';
-import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/model/address.dart';
-import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
 
 class ChangeRepManualSheet extends StatefulWidget {
   final TextEditingController repController;
@@ -220,7 +219,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                             suffixShowFirstCondition: _showPasteButton,
                             keyboardType: TextInputType.text,
                             style: _repAddressValid ? AppStyles.textStyleAddressText90(context) : AppStyles.textStyleAddressText60(context),
-                            onChanged: (text) {
+                            onChanged: (String text) {
                               if (Address(text).isValid()) {
                                 _repFocusNode!.unfocus();
                                 setState(() {

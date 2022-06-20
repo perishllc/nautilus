@@ -1,38 +1,40 @@
 import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
+import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
-import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
+import 'package:nautilus_wallet_flutter/util/biometrics.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/ninja/ninja_node.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:nautilus_wallet_flutter/util/biometrics.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
-import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+
 import 'changerepresentativemanualentry_sheet.dart';
 
 class AppChangeRepresentativeSheet {
@@ -62,8 +64,10 @@ class AppChangeRepresentativeSheet {
     return true;
   }
 
-  _getRepresentativeWidgets(BuildContext context, List<NinjaNode>? list) {
-    if (list == null) return [];
+  List<Widget> _getRepresentativeWidgets(BuildContext context, List<NinjaNode>? list) {
+    if (list == null) {
+      return [];
+    }
     List<Widget> ret = [];
     list.forEach((node) {
       if (node.alias != null && node.alias!.trim().length > 0) {
@@ -76,7 +80,7 @@ class AppChangeRepresentativeSheet {
     return ret;
   }
 
-  _buildRepresenativeDialog(BuildContext context) {
+  Widget _buildRepresenativeDialog(BuildContext context) {
     return AppSimpleDialog(
         title: Container(
           margin: EdgeInsets.only(bottom: 10),
@@ -98,7 +102,7 @@ class AppChangeRepresentativeSheet {
   bool _animationOpen = false;
   late NinjaNode _rep;
 
-  _buildSingleRepresentative(NinjaNode rep, BuildContext context) {
+  Widget _buildSingleRepresentative(NinjaNode rep, BuildContext context) {
     return Container(
       child: Column(
         children: <Widget>[

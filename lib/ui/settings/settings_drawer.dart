@@ -1722,24 +1722,21 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
                     ),
                     // Authentication Method
-                    _hasBiometrics
-                        ? Divider(
-                            height: 2,
-                            color: StateContainer.of(context).curTheme.text15,
-                          )
-                        : SizedBox(),
-                    _hasBiometrics
-                        ? AppSettings.buildSettingsListItemDoubleLine(
-                            context, AppLocalization.of(context)!.authMethod, _curAuthMethod, AppIcons.fingerprint, _authMethodDialog)
-                        : SizedBox(),
+                    if (_hasBiometrics)
+                      Divider(
+                        height: 2,
+                        color: StateContainer.of(context).curTheme.text15,
+                      ),
+                    if (_hasBiometrics)
+                      AppSettings.buildSettingsListItemDoubleLine(
+                          context, AppLocalization.of(context)!.authMethod, _curAuthMethod, AppIcons.fingerprint, _authMethodDialog),
                     // Authenticate on Launch
-                    StateContainer.of(context).encryptedSecret == null
-                        ? Column(children: <Widget>[
-                            Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                            AppSettings.buildSettingsListItemDoubleLine(
-                                context, AppLocalization.of(context)!.lockAppSetting, _curUnlockSetting, AppIcons.lock, _lockDialog),
-                          ])
-                        : SizedBox(),
+                    if (StateContainer.of(context).encryptedSecret == null)
+                      Column(children: <Widget>[
+                        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                        AppSettings.buildSettingsListItemDoubleLine(
+                            context, AppLocalization.of(context)!.lockAppSetting, _curUnlockSetting, AppIcons.lock, _lockDialog),
+                      ]),
                     // Authentication Timer
                     Divider(
                       height: 2,
@@ -1754,22 +1751,22 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       disabled: _curUnlockSetting.setting == UnlockOption.NO && StateContainer.of(context).encryptedSecret == null,
                     ),
                     // Encrypt option
-                    StateContainer.of(context).encryptedSecret == null
-                        ? Column(children: <Widget>[
-                            Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                            AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.setWalletPassword, AppIcons.walletpassword,
-                                onPressed: () {
-                              Sheets.showAppHeightNineSheet(context: context, widget: SetPasswordSheet());
-                            })
-                          ])
-                        : // Decrypt option
-                        Column(children: <Widget>[
-                            Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                            AppSettings.buildSettingsListItemSingleLine(
-                                context, AppLocalization.of(context)!.disableWalletPassword, AppIcons.walletpassworddisabled, onPressed: () {
-                              Sheets.showAppHeightNineSheet(context: context, widget: DisablePasswordSheet());
-                            }),
-                          ]),
+                    if (StateContainer.of(context).encryptedSecret == null)
+                      Column(children: <Widget>[
+                        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.setWalletPassword, AppIcons.walletpassword,
+                            onPressed: () {
+                          Sheets.showAppHeightNineSheet(context: context, widget: SetPasswordSheet());
+                        })
+                      ])
+                    else
+                      Column(children: <Widget>[
+                        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                        AppSettings.buildSettingsListItemSingleLine(
+                            context, AppLocalization.of(context)!.disableWalletPassword, AppIcons.walletpassworddisabled, onPressed: () {
+                          Sheets.showAppHeightNineSheet(context: context, widget: DisablePasswordSheet());
+                        }),
+                      ]),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                   ],
                 ),
@@ -1782,8 +1779,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
-                        begin: AlignmentDirectional(0.5, -1.0),
-                        end: AlignmentDirectional(0.5, 1.0),
+                        begin: const AlignmentDirectional(0.5, -1.0),
+                        end: const AlignmentDirectional(0.5, 1.0),
                       ),
                     ),
                   ),
@@ -1798,16 +1795,16 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
 
   Future<void> authenticateWithPin() async {
     // PIN Authentication
-    String? expectedPin = await sl.get<Vault>().getPin();
-    bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-      return new PinScreen(
+    final String? expectedPin = await sl.get<Vault>().getPin();
+    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+      return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         description: AppLocalization.of(context)!.pinSeedBackup,
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(Duration(milliseconds: 200));
+      await Future.delayed(const Duration(milliseconds: 200));
       Navigator.of(context).pop();
       StateContainer.of(context).getSeed().then((seed) {
         AppSeedBackupSheet(seed).mainBottomSheet(context);

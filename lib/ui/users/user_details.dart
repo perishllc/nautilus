@@ -1,14 +1,14 @@
 import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-
-import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
@@ -46,10 +46,16 @@ class UserDetailsSheet {
                         Container(
                           width: 50,
                           height: 50,
-                          margin: EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
-                          child: FlatButton(
-                            highlightColor: StateContainer.of(context).curTheme.text15,
-                            splashColor: StateContainer.of(context).curTheme.text15,
+                          margin: const EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: StateContainer.of(context).curTheme.text15,
+                              padding: const EdgeInsets.all(13.0),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                              tapTargetSize: MaterialTapTargetSize.padded,
+                              // highlightColor: StateContainer.of(context).curTheme.text15,
+                              // splashColor: StateContainer.of(context).curTheme.text15,
+                            ),
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
@@ -70,14 +76,11 @@ class UserDetailsSheet {
                               }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
                             },
                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
-                            padding: EdgeInsets.all(13.0),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                            materialTapTargetSize: MaterialTapTargetSize.padded,
                           ),
                         ),
                         // The header of the sheet
                         Container(
-                          margin: EdgeInsets.only(top: 25.0),
+                          margin: const EdgeInsets.only(top: 25.0),
                           constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                           child: Column(
                             children: <Widget>[
@@ -95,19 +98,23 @@ class UserDetailsSheet {
                         Container(
                           width: 50,
                           height: 50,
-                          margin: EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
-                          child: FlatButton(
-                            highlightColor: StateContainer.of(context).curTheme.text15,
-                            splashColor: StateContainer.of(context).curTheme.text15,
+                          margin: const EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.all(13.0),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                              primary: StateContainer.of(context).curTheme.text15,
+                              tapTargetSize: MaterialTapTargetSize.padded,
+                              // highlightColor: StateContainer.of(context).curTheme.text15,
+                              // splashColor: StateContainer.of(context).curTheme.text15,
+                            ),
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                                return UIUtil.showAccountWebview(context, user.address);
+                                UIUtil.showAccountWebview(context, user.address);
+                                return const SizedBox();
                               }));
                             },
                             child: Icon(AppIcons.search, size: 24, color: StateContainer.of(context).curTheme.text),
-                            padding: EdgeInsets.all(13.0),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                            materialTapTargetSize: MaterialTapTargetSize.padded,
                           ),
                         ),
                       ],
@@ -116,7 +123,7 @@ class UserDetailsSheet {
                     // The main container that holds Contact Name and Contact Address
                     Expanded(
                       child: Container(
-                        padding: EdgeInsetsDirectional.only(top: 4, bottom: 12),
+                        padding: const EdgeInsetsDirectional.only(top: 4, bottom: 12),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -127,7 +134,7 @@ class UserDetailsSheet {
                                 left: MediaQuery.of(context).size.width * 0.105,
                                 right: MediaQuery.of(context).size.width * 0.105,
                               ),
-                              padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
                               decoration: BoxDecoration(
                                 color: StateContainer.of(context).curTheme.backgroundDarkest,
                                 borderRadius: BorderRadius.circular(25),
@@ -163,7 +170,7 @@ class UserDetailsSheet {
                                 width: double.infinity,
                                 margin:
                                     EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105, top: 15),
-                                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                                 decoration: BoxDecoration(
                                   color: StateContainer.of(context).curTheme.backgroundDarkest,
                                   borderRadius: BorderRadius.circular(25),
@@ -174,7 +181,7 @@ class UserDetailsSheet {
                             ),
                             // Address Copied text container
                             Container(
-                              margin: EdgeInsets.only(top: 5, bottom: 5),
+                              margin: const EdgeInsets.only(top: 5, bottom: 5),
                               child: Text(_addressCopied ? AppLocalization.of(context)!.addressCopied : "",
                                   style: TextStyle(
                                     fontSize: 14.0,

@@ -19,7 +19,7 @@ bool compare(Uint8List lh, Uint8List rh) {
 
   int i;
   int d = 0;
-  int len = lh.length;
+  final int len = lh.length;
 
   for (i = 0; i < len; i++) {
     d |= lh[i] ^ rh[i];
@@ -45,18 +45,18 @@ bool compare(Uint8List lh, Uint8List rh) {
     Int32List gf1 = gf([1]);
     // Uint8List _9 = new Uint8List(32);
     // _9[0] = 9;
-    Uint8List _9 = new Uint8List.fromList([9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);// TODO: fix this
+    Uint8List _9 = Uint8List.fromList([9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);// TODO: fix this
     Int32List _121665 = gf([0xdb41, 1]);
     Int32List D = gf([0x78a3, 0x1359, 0x4dca, 0x75eb, 0xd8ab, 0x4141, 0x0a4d, 0x0070, 0xe898, 0x7779, 0x4079, 0x8cc7, 0xfe73, 0x2b6f, 0x6cee, 0x5203]);
     Int32List D2 = gf([0xf159, 0x26b2, 0x9b94, 0xebd6, 0xb156, 0x8283, 0x149a, 0x00e0, 0xd130, 0xeef3, 0x80f2, 0x198e, 0xfce7, 0x56df, 0xd9dc, 0x2406]);
     Int32List I = gf([0xa0b0, 0x4a0e, 0x1b27, 0xc4ee, 0xe478, 0xad2f, 0x1806, 0x2f43, 0xd7a7, 0x3dfb, 0x0099, 0x2b4d, 0xdf0b, 0x4fc1, 0x2480, 0x2b83]);
-    Uint8List _0 = new Uint8List(16);
-    Uint8List sigma = new Uint8List.fromList([101, 120, 112, 97, 110, 100, 32, 51, 50, 45, 98, 121, 116, 101, 32, 107]);
-    Uint32List minusp = new Uint32List.fromList([5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 252]);
+    Uint8List _0 = Uint8List(16);
+    Uint8List sigma = Uint8List.fromList([101, 120, 112, 97, 110, 100, 32, 51, 50, 45, 98, 121, 116, 101, 32, 107]);
+    Uint32List minusp = Uint32List.fromList([5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 252]);
   // }
 
   Int32List gf([List<int>? init]) {
-    Int32List r = new Int32List(16);
+    final Int32List r = Int32List(16);
     if (init != null) {
       for (int i = 0; i < init.length; i++) {
         r[i] = init[i];
@@ -945,7 +945,7 @@ bool compare(Uint8List lh, Uint8List rh) {
   // b is 0 or 1
   void sel25519(Int32List p, Int32List q, int b) {
     int i, t;
-    int c = ~(b - 1);
+    final int c = ~(b - 1);
     for (i = 0; i < 16; i++) {
       t = c & (p[i] ^ q[i]);
       p[i] ^= t;
@@ -955,7 +955,7 @@ bool compare(Uint8List lh, Uint8List rh) {
 
   void inv25519(Int32List o, Int32List i) {
     int a;
-    Int32List c = gf();
+    final Int32List c = gf();
     for (a = 0; a < 16; a++) {
       c[a] = i[a];
     }
@@ -973,21 +973,21 @@ bool compare(Uint8List lh, Uint8List rh) {
   }
 
   bool neq25519(Int32List a, Int32List b) {
-    Uint8List c = new Uint8List(32), d = new Uint8List(32);
+    Uint8List c = Uint8List(32), d = Uint8List(32);
     pack25519(c, a);
     pack25519(d, b);
     return !compare(c, d);
   }
 
   int par25519(Int32List a) {
-    Uint8List d = new Uint8List(32);
+    final Uint8List d = Uint8List(32);
     pack25519(d, a);
     return d[0] & 1;
   }
 
   void pow2523(Int32List o, Int32List i) {
     int a;
-    Int32List c = gf();
+    final Int32List c = gf();
     for (a = 0; a < 16; a++) {
       c[a] = i[a];
     }
@@ -1010,8 +1010,8 @@ bool compare(Uint8List lh, Uint8List rh) {
 
   void pack25519(Uint8List o, Int32List n) {
     int i;
-    Int32List m = gf();
-    Int32List t = gf();
+    final Int32List m = gf();
+    final Int32List t = gf();
     for (i = 0; i < 16; i++) {
       t[i] = n[i];
     }
@@ -1027,7 +1027,7 @@ bool compare(Uint8List lh, Uint8List rh) {
       }
 
       m[15] = t[15] - 0x7fff - ((m[14] >> 16) & 1);
-      int b = (m[15] >> 16) & 1;
+      final int b = (m[15] >> 16) & 1;
       m[14] &= 0xffff;
       sel25519(t, m, 1 - b);
     }
@@ -1105,7 +1105,7 @@ bool compare(Uint8List lh, Uint8List rh) {
 	 */
   void cryptoScalarmult(Uint8List q, Uint8List s, Uint8List p) {
 
-    Int32List x = new Int32List(80);
+    final Int32List x = Int32List(80);
     int r, i;
     Int32List a = gf(), b = gf(), c = gf(), d = gf(), e = gf(), f = gf();
 
@@ -1151,16 +1151,16 @@ bool compare(Uint8List lh, Uint8List rh) {
       x[i + 64] = d[i];
     }
 
-    Int32List x32 = x.sublist(32); // todo
-    Int32List x16 = x.sublist(16);
+    final Int32List x32 = x.sublist(32); // todo
+    final Int32List x16 = x.sublist(16);
     inv25519(x32, x32);
     M(x16, x16, x32);
     pack25519(q, x16);
   }
 
   int cryptoStreamSalsa20Xor(Uint8List c, int cpos, Uint8List m, int mpos, int b, Uint8List n, Uint8List k) {
-    Uint8List z = new Uint8List(16);
-    Uint8List x = new Uint8List(64);
+    final Uint8List z = Uint8List(16);
+    final Uint8List x = Uint8List(64);
     int u, i;
     for (i = 0; i < 16; i++) {
       z[i] = 0;
@@ -1192,7 +1192,7 @@ bool compare(Uint8List lh, Uint8List rh) {
   }
 
   int cryptoStreamSalsa20(Uint8List c, int cpos, int b, Uint8List n, Uint8List k) {
-    Uint8List z = new Uint8List(16), x = new Uint8List(64);
+    Uint8List z = Uint8List(16), x = Uint8List(64);
     int u, i;
     for (i = 0; i < 16; i++) z[i] = 0;
     for (i = 0; i < 8; i++) z[i] = n[i];
@@ -1233,7 +1233,7 @@ bool compare(Uint8List lh, Uint8List rh) {
   int cryptoOnetimeauth(Uint8List out, int outpos, Uint8List m, int mpos, int n, Uint8List k) {
     int s, i, j;
     int u; // todo
-    Uint32List x = new Uint32List(17), r = new Uint32List(17), h = new Uint32List(17), c = new Uint32List(17), g = new Uint32List(17);
+    Uint32List x = Uint32List(17), r = Uint32List(17), h = Uint32List(17), c = Uint32List(17), g = Uint32List(17);
     for (j = 0; j < 17; j++) {
       r[j] = h[j] = 0;
     }
@@ -1308,7 +1308,7 @@ bool compare(Uint8List lh, Uint8List rh) {
   }
 
   cryptoOnetimeauthVerify(Uint8List h, int hpos, Uint8List m, int mpos, int n, Uint8List k) {
-    Uint8List x = new Uint8List(16);
+    final Uint8List x = Uint8List(16);
     cryptoOnetimeauth(x, 0, m, mpos, n, k);
     return cryptoVerify16(h, hpos, x, 0);
   }
@@ -1318,7 +1318,7 @@ bool compare(Uint8List lh, Uint8List rh) {
   }
 
   cryptoBoxBeforenm(Uint8List k, Uint8List y, Uint8List x) {
-    Uint8List s = new Uint8List(32);
+    final Uint8List s = Uint8List(32);
     cryptoScalarmult(s, x, y);
     return coreHsalsa20(k, _0, s, sigma);
   }
@@ -1338,7 +1338,7 @@ bool compare(Uint8List lh, Uint8List rh) {
 
   int cryptoSecretboxOpen(Uint8List m, Uint8List c, int d, Uint8List n, Uint8List k) {
     int i;
-    Uint8List x = new Uint8List(32);
+    final Uint8List x = Uint8List(32);
     if (d < 32) {
       return -1;
     }
@@ -1354,9 +1354,9 @@ bool compare(Uint8List lh, Uint8List rh) {
   }
 
   int cryptoStream(Uint8List c, int cpos, int d, Uint8List n, Uint8List k) {
-    Uint8List s = new Uint8List(32);
+    final Uint8List s = Uint8List(32);
     coreHsalsa20(s, n, k, sigma);
-    Uint8List sn = new Uint8List(8);
+    final Uint8List sn = Uint8List(8);
     for (int i = 0; i < 8; i++) {
       sn[i] = n[i + 16];
     }
@@ -1364,9 +1364,9 @@ bool compare(Uint8List lh, Uint8List rh) {
   }
 
   int cryptoStreamXor(Uint8List c, int cpos, Uint8List m, int mpos, int d, Uint8List n, Uint8List k) {
-    Uint8List s = new Uint8List(32);
+    final Uint8List s = Uint8List(32);
     coreHsalsa20(s, n, k, sigma);
-    Uint8List sn = new Uint8List(8);
+    final Uint8List sn = Uint8List(8);
     for (int i = 0; i < 8; i++) {
       sn[i] = n[i + 16];
     }
@@ -1406,8 +1406,8 @@ bool compare(Uint8List lh, Uint8List rh) {
   Uint8List secretbox(Uint8List msg, Uint8List nonce, Uint8List key) {
     // checkListTypes(msg, nonce, key);
     checkLengths(key, nonce);
-    Uint8List m = new Uint8List(32 + msg.length);
-    Uint8List c = new Uint8List(m.length);
+    final Uint8List m = Uint8List(32 + msg.length);
+    final Uint8List c = Uint8List(m.length);
     for (int i = 0; i < msg.length; i++) {
       m[i + 32] = msg[i];
     }
@@ -1435,8 +1435,8 @@ bool compare(Uint8List lh, Uint8List rh) {
   Uint8List? secretboxOpen(Uint8List box, Uint8List nonce, Uint8List key) {
     // checkListTypes(box, nonce, key);
     checkLengths(key, nonce);
-    Uint8List c = new Uint8List(16 + box.length);
-    Uint8List m = new Uint8List(c.length);
+    final Uint8List c = Uint8List(16 + box.length);
+    final Uint8List m = Uint8List(c.length);
     for (int i = 0; i < box.length; i++) {
       c[i + 16] = box[i];
     }
@@ -1450,47 +1450,47 @@ bool compare(Uint8List lh, Uint8List rh) {
   }
 
   Uint8List oldBox(Uint8List msg, Uint8List nonce, Uint8List publicKey, Uint8List secretKey) {
-    Uint8List k = oldBoxBefore(publicKey, secretKey);
+    final Uint8List k = oldBoxBefore(publicKey, secretKey);
     return secretbox(msg, nonce, k);
   }
 
   Uint8List box(Map map) {
-    Uint8List msg = map["msg"];
-    Uint8List nonce = map["nonce"];
-    Uint8List publicKey = map["publicKey"];
-    Uint8List secretKey = map["secretKey"];
-    Uint8List k = oldBoxBefore(publicKey, secretKey);
+    final Uint8List msg = map["msg"] as Uint8List;
+    final Uint8List nonce = map["nonce"] as Uint8List;
+    final Uint8List publicKey = map["publicKey"] as Uint8List;
+    final Uint8List secretKey = map["secretKey"] as Uint8List;
+    final Uint8List k = oldBoxBefore(publicKey, secretKey);
     return secretbox(msg, nonce, k);
   }
 
   Uint8List? oldBoxOpen(Uint8List msg, Uint8List nonce, Uint8List publicKey, Uint8List secretKey) {
-    Uint8List k = oldBoxBefore(publicKey, secretKey);
+    final Uint8List k = oldBoxBefore(publicKey, secretKey);
     return secretboxOpen(msg, nonce, k);
   }
 
   Uint8List? boxOpen(Map map) {
-    Uint8List publicKey = map["publicKey"];
-    Uint8List secretKey = map["secretKey"];
-    Uint8List msg = map["msg"];
-    Uint8List nonce = map["nonce"];
-    Uint8List k = oldBoxBefore(publicKey, secretKey);
+    final Uint8List publicKey = map["publicKey"] as Uint8List;
+    final Uint8List secretKey = map["secretKey"] as Uint8List;
+    final Uint8List msg = map["msg"] as Uint8List;
+    final Uint8List nonce = map["nonce"] as Uint8List;
+    final Uint8List k = oldBoxBefore(publicKey, secretKey);
     return secretboxOpen(msg, nonce, k);
   }
 
   Uint8List oldBoxBefore(Uint8List publicKey, Uint8List secretKey) {
     // checkListTypes(publicKey, secretKey);
     checkBoxLengths(publicKey, secretKey);
-    Uint8List k = new Uint8List(32);
+    final Uint8List k = Uint8List(32);
     cryptoBoxBeforenm(k, publicKey, secretKey);
     return k;
   }
 
   Uint8List boxBefore(Map map /*Uint8List publicKey, Uint8List secretKey*/) {
-    Uint8List publicKey = map['publicKey'];
-    Uint8List secretKey = map['secretKey'];
+    final Uint8List publicKey = map['publicKey'] as Uint8List;
+    final Uint8List secretKey = map['secretKey'] as Uint8List;
     // checkListTypes(publicKey, secretKey);
     checkBoxLengths(publicKey, secretKey);
-    Uint8List k = new Uint8List(32);
+    final Uint8List k = Uint8List(32);
     cryptoBoxBeforenm(k, publicKey, secretKey);
     return k;
   }
@@ -1502,7 +1502,7 @@ bool compare(Uint8List lh, Uint8List rh) {
 	 * @return {Uint8List} sk * pk
 	 */
   scalarMult(Uint8List sk, Uint8List pk) {
-    Uint8List q = new Uint8List(32);
+    final Uint8List q = Uint8List(32);
     cryptoScalarmult(q, sk, pk);
     return q;
   }
@@ -1514,8 +1514,8 @@ bool compare(Uint8List lh, Uint8List rh) {
 	 */
   generateKeys(Uint8List seed) {
     // var sk = seed.slice();
-    Uint8List sk = seed;
-    Uint8List pk = new Uint8List(32);
+    final Uint8List sk = seed;
+    final Uint8List pk = Uint8List(32);
     if (sk.length != 32) {
       // throw new Error('Invalid secret key size, expected 32 bytes')
       throw Exception('Invalid secret key size, expected 32 bytes');
@@ -1538,17 +1538,17 @@ bool compare(Uint8List lh, Uint8List rh) {
 	 * Diffie-Hellman key exchange
 	 */
   convertEd25519PublicKeyToCurve25519(Uint8List pk) {
-    Uint8List z = new Uint8List(32);
-    List<Int32List> q = [gf(), gf(), gf(), gf()];
-    Int32List a = gf();
-    Int32List b = gf();
+    final Uint8List z = Uint8List(32);
+    final List<Int32List> q = [gf(), gf(), gf(), gf()];
+    final Int32List a = gf();
+    final Int32List b = gf();
 
     // TODO: check if this is correct
     if (unpackNeg(q, pk) == 0) {
       return null;
     }
 
-    Int32List y = q[1];
+    final Int32List y = q[1];
 
     A(a, gf1, y);
     Z(b, gf1, y);
@@ -1565,8 +1565,8 @@ bool compare(Uint8List lh, Uint8List rh) {
 	 * Diffie-Hellman key exchange
 	 */
   Uint8List convertEd25519SecretKeyToCurve25519(Uint8List sk) {
-    Uint8List d = new Uint8List(64);
-    Uint8List o = new Uint8List(32);
+    final Uint8List d = Uint8List(64);
+    final Uint8List o = Uint8List(32);
     int i;
 
     cryptoHash(d, sk, 32);
@@ -1586,12 +1586,12 @@ bool compare(Uint8List lh, Uint8List rh) {
   }
 
   void cryptoHash(Uint8List out, Uint8List m, int n) {
-    Uint8List input = new Uint8List(n);
+    final Uint8List input = Uint8List(n);
     for (int i = 0; i < n; ++i) {
       input[i] = m[i];
     }
 
-    Uint8List hash = blake2b(input);
+    final Uint8List hash = blake2b(input);
     for (int i = 0; i < 64; ++i) {
       out[i] = hash[i];
     }

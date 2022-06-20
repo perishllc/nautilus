@@ -36,6 +36,7 @@ dependencies:
 
   # ENS:
   ens_dart: ^1.0.0
+  web3dart: ^2.3.3
 
   # Platform-specific build info
   package_info: ^2.0.2
@@ -58,6 +59,7 @@ dependencies:
   # changelog:
   package_info_plus: ^1.4.2
   flutter_markdown: ^0.6.10+2
+  markdown: ^5.0.0
 
   # Native webview plugin
   # flutter_webview_plugin: ^0.4.0

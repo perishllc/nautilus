@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class CustomStack extends Stack {
-  CustomStack({children}) : super(children: children, alignment: Alignment.topRight);
+  CustomStack({children}) : super(children: children as List<Widget>, alignment: Alignment.topRight);
 
   @override
   CustomRenderStack createRenderObject(BuildContext context) {
@@ -16,7 +16,7 @@ class CustomStack extends Stack {
 }
 
 class CustomRenderStack extends RenderStack {
-  CustomRenderStack({alignment, textDirection, fit})
+  CustomRenderStack({required AlignmentGeometry alignment, required TextDirection textDirection, required StackFit fit})
       : super(
             alignment: alignment,
             textDirection: textDirection,
@@ -24,14 +24,14 @@ class CustomRenderStack extends RenderStack {
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {Offset position = Offset.zero}) {
-    var stackHit = false;
+    bool stackHit = false;
 
-    final children = getChildrenAsList();
+    final List<RenderBox> children = getChildrenAsList();
 
-    for (var child in children) {
+    for (final RenderBox child in children) {
       final StackParentData childParentData = child.parentData! as StackParentData;
 
-      final childHit = result.addWithPaintOffset(
+      final bool childHit = result.addWithPaintOffset(
         offset: childParentData.offset,
         position: position,
         hitTest: (BoxHitTestResult result, Offset transformed) {

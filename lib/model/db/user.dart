@@ -39,10 +39,11 @@ class User {
   // @JsonKey(ignore: true)
   // Widget monkeyWidgetLarge;
 
-  User({this.username, required this.address, this.expiration, this.representative, this.is_blocked, this.type, this.last_updated, this.nickname, this.aliases});
+  User(
+      {this.username, required this.address, this.expiration, this.representative, this.is_blocked, this.type, this.last_updated, this.nickname, this.aliases});
 
   factory User.fromJson(Map<String, dynamic> json) {
-    String? username = json['username'] ?? json['name'];
+    String? username = json['username'] as String? ?? json['name'] as String?;
     return User(
         username: username,
         nickname: json["nickname"] as String?,

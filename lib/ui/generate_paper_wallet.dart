@@ -449,7 +449,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
 
   //************ Enter Amount Container Method ************//
   //*******************************************************//
-  getEnterAmountContainer() {
+  Widget getEnterAmountContainer() {
     return AppTextField(
       focusNode: _sendAmountFocusNode,
       controller: _sendAmountController,
@@ -523,7 +523,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
 
   //************ Enter Memo Container Method ************//
   //*******************************************************//
-  getEnterMemoContainer() {
+  Widget getEnterMemoContainer() {
     double margin = 10;
     return AppTextField(
       topMargin: margin,

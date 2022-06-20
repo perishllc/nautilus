@@ -72,16 +72,15 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 
 class AppHomePage extends StatefulWidget {
-  PriceConversion? priceConversion;
-
   AppHomePage({this.priceConversion}) : super();
+  PriceConversion? priceConversion;
 
   @override
   _AppHomePageState createState() => _AppHomePageState();
 }
 
 class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, SingleTickerProviderStateMixin {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final Logger log = sl.get<Logger>();
 
   // Controller for placeholder card animations
@@ -163,7 +162,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   );
 
   Future<void> _switchToAccount(String account) async {
-    List<Account> accounts = await sl.get<DBHelper>().getAccounts(await StateContainer.of(context).getSeed());
+    final List<Account> accounts = await sl.get<DBHelper>().getAccounts(await StateContainer.of(context).getSeed());
     for (Account a in accounts) {
       if (a.address == account && a.address != StateContainer.of(context).wallet!.address) {
         await sl.get<DBHelper>().changeAccount(a);
@@ -174,8 +173,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   /// Notification includes which account its for, automatically switch to it if they're entering app from notification
   Future<void> _chooseCorrectAccountFromNotification(dynamic message) async {
-    if (message.containsKey("account")) {
-      String? account = message['account'];
+    if (message.containsKey("account") as bool) {
+      final String? account = message['account'] as String?;
       if (account != null) {
         await _switchToAccount(account);
       }
@@ -184,23 +183,23 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   Future<void> _processPaymentRequestNotification(dynamic data) async {
     log.d("Processing payment request notification");
-    if (data.containsKey("payment_request")) {
-      String? amount_raw = data['amount_raw'];
-      String? requesting_account = data['requesting_account'];
+    if (data.containsKey("payment_request") as bool) {
+      final String? amountRaw = data['amount_raw'] as String?;
+      final String? requestingAccount = data['requesting_account'] as String?;
 
       // Remove any other screens from stack
       // Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
 
       // Go to send with address
-      Future.delayed(Duration(milliseconds: 1000), () {
+      Future.delayed(const Duration(milliseconds: 1000), () {
         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
         Sheets.showAppHeightNineSheet(
             context: context,
             widget: SendSheet(
               localCurrency: StateContainer.of(context).curCurrency,
-              address: requesting_account,
-              quickSendAmount: amount_raw,
+              address: requestingAccount,
+              quickSendAmount: amountRaw,
             ));
       });
     }
@@ -208,12 +207,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   void getNotificationPermissions() async {
     try {
-      NotificationSettings settings = await _firebaseMessaging.requestPermission(sound: true, badge: true, alert: true);
+      final NotificationSettings settings = await _firebaseMessaging.requestPermission(sound: true, badge: true, alert: true);
       if (settings.alert == AppleNotificationSetting.enabled ||
           settings.badge == AppleNotificationSetting.enabled ||
           settings.sound == AppleNotificationSetting.enabled ||
           settings.authorizationStatus == AuthorizationStatus.authorized) {
-        sl.get<SharedPrefsUtil>().getNotificationsSet().then((beenSet) {
+        sl.get<SharedPrefsUtil>().getNotificationsSet().then((bool beenSet) {
           if (!beenSet) {
             sl.get<SharedPrefsUtil>().setNotificationsOn(true);
           }
@@ -230,7 +229,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           });
         });
       }
-      String? token = await _firebaseMessaging.getToken();
+      final String? token = await _firebaseMessaging.getToken();
       if (token != null) {
         EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: token));
       }
@@ -240,12 +239,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   Future<void> _branchGiftDialog(String seed, String? memo, String? amountRaw, String senderAddress) async {
-    String supposedAmount = getRawAsThemeAwareAmount(context, amountRaw);
+    final String supposedAmount = getRawAsThemeAwareAmount(context, amountRaw);
 
     String? userOrSendAddress;
 
     // change address to username if it exists:
-    dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(senderAddress);
+    final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(senderAddress);
     if (user != null) {
       userOrSendAddress = user.getDisplayName();
     } else {
@@ -253,10 +252,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
 
     // check if there's actually any nano to claim:
-    BigInt balance = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
+    final BigInt balance = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
     try {
       if (balance != BigInt.zero) {
-        String actualAmount = getRawAsThemeAwareAmount(context, balance.toString());
+        final String actualAmount = getRawAsThemeAwareAmount(context, balance.toString());
         // show dialog with option to refund to sender:
         switch (await showDialog<int>(
             barrierDismissible: false,
@@ -272,31 +271,29 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Text(AppLocalization.of(context)!.importGift + "\n\n",
-                        style: AppStyles.textStyleParagraph(context)),
+                    Text("${AppLocalization.of(context)!.importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
-                        text: AppLocalization.of(context)!.giftFrom + ": ",
+                        text: "${AppLocalization.of(context)!.giftFrom}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: [
                           TextSpan(
-                            text: userOrSendAddress! + "\n",
+                            text: "${userOrSendAddress!}\n",
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                         ],
                       ),
                     ),
-                    (memo != null && memo.isNotEmpty)
-                        ? Text(
-                            AppLocalization.of(context)!.giftMessage + ": " + memo + "\n",
-                            style: AppStyles.textStyleParagraph(context),
-                          )
-                        : SizedBox(),
+                    if (memo != null && memo.isNotEmpty)
+                      Text(
+                        "${AppLocalization.of(context)!.giftMessage}: $memo\n",
+                        style: AppStyles.textStyleParagraph(context),
+                      ),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
-                        text: AppLocalization.of(context)!.giftAmount + ": ",
+                        text: "${AppLocalization.of(context)!.giftAmount}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: [
                           displayCurrencyAmount(
@@ -377,6 +374,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             break;
         }
       } else {
+        if (!mounted) {
+          return;
+        }
         // show alert that the gift is empty:
         await showDialog<bool>(
             context: context,
@@ -391,31 +391,29 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Text(AppLocalization.of(context)!.importGiftEmpty + "\n\n",
-                        style: AppStyles.textStyleParagraph(context)),
+                    Text("${AppLocalization.of(context)!.importGiftEmpty}\n\n", style: AppStyles.textStyleParagraph(context)),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
-                        text: AppLocalization.of(context)!.giftFrom + ": ",
+                        text: "${AppLocalization.of(context)!.giftFrom}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: [
                           TextSpan(
-                            text: userOrSendAddress! + "\n",
+                            text: "${userOrSendAddress!}\n",
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                         ],
                       ),
                     ),
-                    (memo != null && memo.isNotEmpty)
-                        ? Text(
-                            AppLocalization.of(context)!.giftMessage + ": " + memo + "\n",
-                            style: AppStyles.textStyleParagraph(context),
-                          )
-                        : SizedBox(),
+                    if (memo != null && memo.isNotEmpty)
+                      Text(
+                        "${AppLocalization.of(context)!.giftMessage}: $memo\n",
+                        style: AppStyles.textStyleParagraph(context),
+                      ),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
-                        text: AppLocalization.of(context)!.giftAmount + ": ",
+                        text: "${AppLocalization.of(context)!.giftAmount}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: [
                           displayCurrencyAmount(
@@ -455,7 +453,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             });
       }
     } catch (e) {
-      print("Error processing gift card: $e");
+      log.d("Error processing gift card: $e");
     }
   }
 
@@ -489,12 +487,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     _scrollController = ScrollController()..addListener(_scrollListener);
     // Setup placeholder animation and start
     _animationDisposed = false;
-    _placeholderCardAnimationController = new AnimationController(
+    _placeholderCardAnimationController = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
     _placeholderCardAnimationController.addListener(_animationControllerListener);
-    _opacityAnimation = new Tween(begin: 1.0, end: 0.4).animate(
+    _opacityAnimation = Tween(begin: 1.0, end: 0.4).animate(
       CurvedAnimation(
         parent: _placeholderCardAnimationController,
         curve: Curves.easeIn,
@@ -502,7 +500,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       ),
     );
     // setup blank animation controller:
-    _emptyAnimation = new Tween(begin: 1.0, end: 1.0).animate(
+    _emptyAnimation = Tween(begin: 1.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _placeholderCardAnimationController,
         curve: Curves.easeIn,
@@ -533,7 +531,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           rateButton: AppLocalization.of(context)!.rate,
           noButton: AppLocalization.of(context)!.noThanks,
           laterButton: AppLocalization.of(context)!.maybeLater,
-          listener: (button) {
+          listener: (RateMyAppDialogButton button) {
             // The button click listener (useful if you want to cancel the click event).
             switch (button) {
               case RateMyAppDialogButton.rate:
@@ -557,9 +555,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
 
       // show changelog?
-      PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      String runningVersion = packageInfo.version;
-      String? lastVersion = await sl.get<SharedPrefsUtil>().getAppVersion();
+      final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      final String runningVersion = packageInfo.version;
+      final String? lastVersion = await sl.get<SharedPrefsUtil>().getAppVersion();
       if (runningVersion != lastVersion) {
         await sl.get<SharedPrefsUtil>().setAppVersion(runningVersion);
         await AppDialogs.showChangeLog(context);
@@ -579,7 +577,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         _placeholderCardAnimationController.reverse();
         break;
       default:
-        return null;
+        return;
     }
   }
 
@@ -607,27 +605,24 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   /// Add donations contact if it hasnt already been added
   Future<void> _addSampleContact() async {
-    bool contactAdded = await (sl.get<SharedPrefsUtil>().getFirstContactAdded());
+    final bool contactAdded = await (sl.get<SharedPrefsUtil>().getFirstContactAdded());
     if (!contactAdded) {
-      bool addressExists = await sl
-          .get<DBHelper>()
-          .contactExistsWithAddress("nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579");
+      final bool addressExists = await sl.get<DBHelper>().contactExistsWithAddress("nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579");
       if (addressExists) {
         return;
       }
-      bool nameExists = await sl.get<DBHelper>().contactExistsWithName("NautilusDonations");
+      final bool nameExists = await sl.get<DBHelper>().contactExistsWithName("NautilusDonations");
       if (nameExists) {
         return;
       }
       await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
-      User c = User(
-          nickname: "NautilusDonations", address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579");
+      final User c = User(nickname: "NautilusDonations", address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579");
       await sl.get<DBHelper>().saveContact(c);
     }
   }
 
   void _updateContacts() {
-    sl.get<DBHelper>().getContacts().then((contacts) {
+    sl.get<DBHelper>().getContacts().then((List<User> contacts) {
       setState(() {
         _contacts = contacts;
       });
@@ -635,7 +630,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   void _updateBlocked() {
-    sl.get<DBHelper>().getBlocked().then((blocked) {
+    sl.get<DBHelper>().getBlocked().then((List<User> blocked) {
       setState(() {
         _blocked = blocked;
       });
@@ -643,7 +638,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   void _updateUsers() {
-    sl.get<DBHelper>().getUsers().then((users) {
+    sl.get<DBHelper>().getUsers().then((List<User> users) {
       setState(() {
         _users = users;
       });
@@ -651,7 +646,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   void _updateTXData() {
-    sl.get<DBHelper>().getTXData().then((txData) {
+    sl.get<DBHelper>().getTXData().then((List<TXData> txData) {
       setState(() {
         _txData = txData;
       });
@@ -659,16 +654,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   void _updateTXDetailsMap(String? account) {
-    sl.get<DBHelper>().getAccountSpecificTXData(account).then((data) {
+    sl.get<DBHelper>().getAccountSpecificTXData(account).then((List<TXData> data) {
       setState(() {
         _txRecords = data;
         _txDetailsMap.clear();
-        for (var tx in _txRecords) {
+        for (TXData tx in _txRecords) {
           if (tx.isSolid() && (isEmpty(tx.block) || isEmpty(tx.link))) {
             // set to the last block:
-            String? lastBlockHash = StateContainer.of(context).wallet!.history!.length > 0
-                ? StateContainer.of(context).wallet!.history![0].hash
-                : null;
+            final String? lastBlockHash = StateContainer.of(context).wallet!.history!.length > 0 ? StateContainer.of(context).wallet!.history![0].hash : null;
             if (isEmpty(tx.block) && StateContainer.of(context).wallet!.address == tx.from_address) {
               tx.block = lastBlockHash;
             }
@@ -679,17 +672,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             sl.get<DBHelper>().replaceTXDataByUUID(tx);
           }
           // if unacknowledged, we're the recipient, and not local, ACK it:
-          if (tx.is_acknowledged == false &&
-              tx.to_address == StateContainer.of(context).wallet!.address &&
-              !tx.uuid!.contains("LOCAL")) {
-            print("ACKNOWLEDGING TX_DATA: ${tx.uuid}");
+          if (tx.is_acknowledged == false && tx.to_address == StateContainer.of(context).wallet!.address && !tx.uuid!.contains("LOCAL")) {
+            log.v("ACKNOWLEDGING TX_DATA: ${tx.uuid}");
             sl.get<AccountService>().requestACK(tx.uuid, tx.from_address, tx.to_address);
           }
           if (tx.is_memo && isEmpty(tx.link) && isNotEmpty(tx.block)) {
             if (_historyListMap[StateContainer.of(context).wallet!.address] != null) {
               // find if there's a matching link:
               // for (var histItem in StateContainer.of(context).wallet.history) {
-              for (var histItem in _historyListMap[StateContainer.of(context).wallet!.address]!) {
+              for (AccountHistoryResponseItem histItem in _historyListMap[StateContainer.of(context).wallet!.address]!) {
                 if (histItem.link == tx.block) {
                   tx.link = histItem.hash;
                   // save to db:
@@ -724,7 +715,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   StreamSubscription<AccountChangedEvent>? _switchAccountSub;
 
   void _registerBus() {
-    _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((event) {
+    _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((HistoryHomeEvent event) {
       updateHistoryList(event.items);
       // // update tx memo's
       // if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.address != null) {
@@ -736,40 +727,38 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         StateContainer.of(context).initialDeepLink = null;
       }
     });
-    _txUpdatesSub = EventTaxiImpl.singleton().registerTo<TXUpdateEvent>().listen((event) {
+    _txUpdatesSub = EventTaxiImpl.singleton().registerTo<TXUpdateEvent>().listen((TXUpdateEvent event) {
       if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.address != null) {
         _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
       }
     });
-    _solidsSub = EventTaxiImpl.singleton().registerTo<PaymentsHomeEvent>().listen((event) {
-      var newSolids = event.items;
-      if (newSolids == null ||
-          newSolids.length == 0 ||
-          _solidsListMap[StateContainer.of(context).wallet!.address] == null) {
+    _solidsSub = EventTaxiImpl.singleton().registerTo<PaymentsHomeEvent>().listen((PaymentsHomeEvent event) {
+      final List<TXData>? newSolids = event.items;
+      if (newSolids == null || newSolids.length == 0 || _solidsListMap[StateContainer.of(context).wallet!.address] == null) {
         return;
       }
       setState(() {
         _solidsListMap[StateContainer.of(context).wallet!.address] = newSolids;
       });
     });
-    _unifiedSub = EventTaxiImpl.singleton().registerTo<UnifiedHomeEvent>().listen((event) {
+    _unifiedSub = EventTaxiImpl.singleton().registerTo<UnifiedHomeEvent>().listen((UnifiedHomeEvent event) {
       generateUnifiedList(fastUpdate: event.fastUpdate);
     });
-    _contactModifiedSub = EventTaxiImpl.singleton().registerTo<ContactModifiedEvent>().listen((event) {
+    _contactModifiedSub = EventTaxiImpl.singleton().registerTo<ContactModifiedEvent>().listen((ContactModifiedEvent event) {
       _updateContacts();
     });
-    _blockedModifiedSub = EventTaxiImpl.singleton().registerTo<BlockedModifiedEvent>().listen((event) {
+    _blockedModifiedSub = EventTaxiImpl.singleton().registerTo<BlockedModifiedEvent>().listen((BlockedModifiedEvent event) {
       _updateBlocked();
     });
     // Hackish event to block auto-lock functionality
-    _disableLockSub = EventTaxiImpl.singleton().registerTo<DisableLockTimeoutEvent>().listen((event) {
+    _disableLockSub = EventTaxiImpl.singleton().registerTo<DisableLockTimeoutEvent>().listen((DisableLockTimeoutEvent event) {
       if (event.disable!) {
         cancelLockEvent();
       }
       _lockDisabled = event.disable!;
     });
     // User changed account
-    _switchAccountSub = EventTaxiImpl.singleton().registerTo<AccountChangedEvent>().listen((event) {
+    _switchAccountSub = EventTaxiImpl.singleton().registerTo<AccountChangedEvent>().listen((AccountChangedEvent event) {
       setState(() {
         StateContainer.of(context).wallet!.loading = true;
         StateContainer.of(context).wallet!.historyLoading = true;
@@ -780,7 +769,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       });
       paintQrCode(address: event.account!.address);
       if (event.delayPop) {
-        Future.delayed(Duration(milliseconds: 300), () {
+        Future.delayed(const Duration(milliseconds: 300), () {
           Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
         });
       } else if (!event.noPop) {
@@ -788,7 +777,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     });
     // Handle subscribe
-    _confirmEventSub = EventTaxiImpl.singleton().registerTo<ConfirmationHeightChangedEvent>().listen((event) {
+    _confirmEventSub = EventTaxiImpl.singleton().registerTo<ConfirmationHeightChangedEvent>().listen((ConfirmationHeightChangedEvent event) {
       updateConfirmationHeights(event.confirmationHeight);
     });
   }
@@ -837,9 +826,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // print(_scrollController.position.extentAfter);
     if (_scrollController.position.extentAfter < 500) {
       // check if the oldest item is the initial block:
-      if (_historyListMap[StateContainer.of(context).wallet!.address] != null &&
-          _historyListMap[StateContainer.of(context).wallet!.address]!.length > 0) {
-        var histList = _historyListMap[StateContainer.of(context).wallet!.address]!;
+      if (_historyListMap[StateContainer.of(context).wallet!.address] != null && _historyListMap[StateContainer.of(context).wallet!.address]!.length > 0) {
+        final List<AccountHistoryResponseItem> histList = _historyListMap[StateContainer.of(context).wallet!.address]!;
 
         // histList[0] is the most recent block with the highest height (120)
         // histList[1] is the second most recent block with the next highest height (119)
@@ -863,8 +851,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (!_historyListMap.containsKey(StateContainer.of(context).wallet!.address)) {
       return;
     }
-    List<int> unconfirmedUpdate = [];
-    List<int> confirmedUpdate = [];
+    final List<int> unconfirmedUpdate = [];
+    final List<int> confirmedUpdate = [];
     for (int i = 0; i < _historyListMap[StateContainer.of(context).wallet!.address]!.length; i++) {
       if ((_historyListMap[StateContainer.of(context).wallet!.address]![i].confirmed == null ||
               _historyListMap[StateContainer.of(context).wallet!.address]![i].confirmed!) &&
@@ -878,12 +866,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         confirmedUpdate.add(i);
       }
     }
-    unconfirmedUpdate.forEach((index) {
+    unconfirmedUpdate.forEach((int index) {
       setState(() {
         _historyListMap[StateContainer.of(context).wallet!.address]![index].confirmed = false;
       });
     });
-    confirmedUpdate.forEach((index) {
+    confirmedUpdate.forEach((int index) {
       setState(() {
         _historyListMap[StateContainer.of(context).wallet!.address]![index].confirmed = true;
       });
@@ -904,16 +892,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         cancelLockEvent();
         StateContainer.of(context).reconnect();
         // handle deep links:
-        if (!StateContainer.of(context).wallet!.loading! &&
-            StateContainer.of(context).initialDeepLink != null &&
-            !_lockTriggered) {
+        if (!StateContainer.of(context).wallet!.loading! && StateContainer.of(context).initialDeepLink != null && !_lockTriggered) {
           handleDeepLink(StateContainer.of(context).initialDeepLink);
           StateContainer.of(context).initialDeepLink = null;
         }
         // branch gift:
-        if (!StateContainer.of(context).wallet!.loading! &&
-            StateContainer.of(context).giftedWallet == true &&
-            !_lockTriggered) {
+        if (!StateContainer.of(context).wallet!.loading! && StateContainer.of(context).giftedWallet == true && !_lockTriggered) {
           StateContainer.of(context).giftedWallet = false;
           handleBranchGift();
         }
@@ -934,12 +918,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   StreamSubscription<dynamic>? lockStreamListener;
 
   Future<void> setAppLockEvent() async {
-    if (((await (sl.get<SharedPrefsUtil>().getLock())) || StateContainer.of(context).encryptedSecret != null) &&
-        !_lockDisabled) {
+    if (((await (sl.get<SharedPrefsUtil>().getLock())) || StateContainer.of(context).encryptedSecret != null) && !_lockDisabled) {
       if (lockStreamListener != null) {
         lockStreamListener!.cancel();
       }
-      Future<dynamic> delayed = new Future.delayed((await sl.get<SharedPrefsUtil>().getLockTimeout()).getDuration());
+      final Future<dynamic> delayed = Future.delayed((await sl.get<SharedPrefsUtil>().getLockTimeout()).getDuration());
       delayed.then((_) {
         return true;
       });
@@ -968,7 +951,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       _isRefreshing = true;
     });
     // Hide refresh indicator after 2.5 seconds
-    Future.delayed(new Duration(milliseconds: 2500), () {
+    Future.delayed(Duration(milliseconds: 2500), () {
       setState(() {
         _isRefreshing = false;
       });
@@ -1014,11 +997,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   ///           a > b  | Returns a positive value.
   ///
   int defaultSortComparison(dynamic a, dynamic b) {
-    int? propertyA = a.height;
-    int? propertyB = b.height;
+    final int? propertyA = a.height as int?;
+    final int? propertyB = b.height as int?;
     if (propertyA == null || propertyB == null) {
       // this shouldn't happen but it does if there's a bug:
-      throw new Exception("Null height in comparison");
+      throw Exception("Null height in comparison");
       // TODO:
       // propertyA = 0;
       // propertyB = 0;
@@ -1035,22 +1018,22 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
       // if both are TXData, sort by request time:
     } else if (a is TXData && b is TXData) {
-      int a_time;
-      int b_time;
+      int aTime;
+      int bTime;
       try {
-        a_time = a.request_time!;
+        aTime = a.request_time!;
       } catch (e) {
-        a_time = 0;
+        aTime = 0;
       }
       try {
-        b_time = b.request_time!;
+        bTime = b.request_time!;
       } catch (e) {
-        b_time = 0;
+        bTime = 0;
       }
 
-      if (a_time < b_time) {
+      if (aTime < bTime) {
         return 1;
-      } else if (a_time > b_time) {
+      } else if (aTime > bTime) {
         return -1;
       } else {
         return 0;
@@ -1075,15 +1058,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   int amountSortComparison(dynamic a, dynamic b) {
-    String propertyA = a?.amount ?? a?.amount_raw ?? "";
-    String propertyB = b?.amount ?? b?.amount_raw ?? "";
+    final String propertyA = a?.amount as String? ?? a?.amount_raw as String? ?? "";
+    final String propertyB = b?.amount as String? ?? b?.amount_raw as String? ?? "";
     if (propertyA == "" || propertyB == "") {
       // messages don't have amounts:
       return 0;
     }
 
-    var numA = BigInt.parse(propertyA);
-    var numB = BigInt.parse(propertyB);
+    final BigInt numA = BigInt.parse(propertyA);
+    final BigInt numB = BigInt.parse(propertyB);
     if (numA < numB) {
       return 1;
     } else if (numA > numB) {
@@ -1149,8 +1132,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // combine history and payments:
     // List<AccountHistoryResponseItem> historyList = StateContainer.of(context).wallet!.history!;
     // List<TXData> solidsList = StateContainer.of(context).wallet!.solids!;
-    List<AccountHistoryResponseItem> historyList = _historyListMap[StateContainer.of(context).wallet!.address]!;
-    List<TXData> solidsList = _solidsListMap[StateContainer.of(context).wallet!.address]!;
+    final List<AccountHistoryResponseItem> historyList = _historyListMap[StateContainer.of(context).wallet!.address]!;
+    final List<TXData> solidsList = _solidsListMap[StateContainer.of(context).wallet!.address]!;
 
     // for (var tx in solidsList) {
     //   print("memo: ${tx.memo} is_request: ${tx.is_request}");
@@ -1160,11 +1143,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // unifiedList.addAll(historyList);
     // unifiedList.addAll(solidsList);
     // don't process change blocks:
-    unifiedList = List<dynamic>.from(historyList.where((element) => element.type != BlockTypes.CHANGE).toList());
+    unifiedList = List<dynamic>.from(historyList.where((AccountHistoryResponseItem element) => element.type != BlockTypes.CHANGE).toList());
 
-    Set uuids = Set();
-    List<int?> idsToRemove = [];
-    for (var req in solidsList) {
+    final Set uuids = Set();
+    final List<int?> idsToRemove = [];
+    for (TXData req in solidsList) {
       if (!uuids.contains(req.uuid)) {
         uuids.add(req.uuid);
       } else {
@@ -1173,8 +1156,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         await sl.get<DBHelper>().deleteTXDataByID(req.id);
       }
     }
-    for (var id in idsToRemove) {
-      solidsList.removeWhere((element) => element.id == id);
+    for (int? id in idsToRemove) {
+      solidsList.removeWhere((TXData element) => element.id == id);
     }
 
     // go through each item in the solidsList and insert it into the unifiedList at the matching block:
@@ -1184,9 +1167,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
       // if the block is null, give it one:
       if (solidsList[i].block == null) {
-        String? lastBlockHash = StateContainer.of(context).wallet!.history!.length > 0
-            ? StateContainer.of(context).wallet!.history![0].hash
-            : null;
+        final String? lastBlockHash = StateContainer.of(context).wallet!.history!.length > 0 ? StateContainer.of(context).wallet!.history![0].hash : null;
         solidsList[i].block = lastBlockHash;
         await sl.get<DBHelper>().replaceTXDataByUUID(solidsList[i]);
       }
@@ -1204,11 +1185,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           j--;
           continue;
         }
-        String histItemHash = unifiedList[j].hash;
+        final String histItemHash = unifiedList[j].hash as String;
 
         if (histItemHash == solidsList[i].block || histItemHash == solidsList[i].link) {
           index = j;
-          height = unifiedList[j].height + 1;
+          height = unifiedList[j].height + 1 as int;
           break;
         }
       }
@@ -1224,27 +1205,27 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     }
 
-    bool override_sort = false;
+    bool overrideSort = false;
 
     // filter by search results:
     if (_searchController.text.isNotEmpty) {
       removeIndices = [];
-      String lowerCaseSearch = _searchController.text.toLowerCase();
+      final String lowerCaseSearch = _searchController.text.toLowerCase();
 
       // override the sorting algo if the search is numeric:
-      override_sort = double.tryParse(lowerCaseSearch) != null;
+      overrideSort = double.tryParse(lowerCaseSearch) != null;
 
       unifiedList.forEach((dynamicItem) {
         bool shouldRemove = true;
 
-        TXData txDetails = dynamicItem is TXData
+        final TXData txDetails = dynamicItem is TXData
             ? dynamicItem
-            : convertHistItemToTXData(dynamicItem, txDetails: _txDetailsMap[dynamicItem.hash]);
-        bool isRecipient = txDetails.isRecipient(StateContainer.of(context).wallet!.address);
+            : convertHistItemToTXData(dynamicItem as AccountHistoryResponseItem, txDetails: _txDetailsMap[dynamicItem.hash]);
+        final bool isRecipient = txDetails.isRecipient(StateContainer.of(context).wallet!.address);
         String displayName = txDetails.getShortestString(isRecipient)!;
 
         // check if there's a username:
-        String account = txDetails.getAccount(isRecipient);
+        final String account = txDetails.getAccount(isRecipient);
         for (User user in _users) {
           if (user.address == account.replaceAll("xrb_", "nano_")) {
             displayName = user.getDisplayName()!;
@@ -1252,15 +1233,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           }
         }
 
-        String? amount_str;
-        int? local_timestamp;
+        String? amountStr;
+        int? localTimestamp;
 
         if (txDetails.request_time != null) {
-          local_timestamp = txDetails.request_time;
+          localTimestamp = txDetails.request_time;
         }
 
         if (txDetails.amount_raw != null && txDetails.amount_raw!.isNotEmpty) {
-          amount_str = getRawAsThemeAwareAmount(context, txDetails.amount_raw);
+          amountStr = getRawAsThemeAwareAmount(context, txDetails.amount_raw);
           if (txDetails.is_request) {
             if (isRecipient) {
               if (AppLocalization.of(context)!.request.toLowerCase().contains(lowerCaseSearch)) {
@@ -1287,15 +1268,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           }
         }
 
-        if (local_timestamp != null) {
-          String time_str =
-              DateFormat(CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(local_timestamp * 1000));
-          if (time_str.toLowerCase().contains(lowerCaseSearch)) {
+        if (localTimestamp != null) {
+          final String timeStr = DateFormat(CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(localTimestamp * 1000));
+          if (timeStr.toLowerCase().contains(lowerCaseSearch)) {
             shouldRemove = false;
           }
         }
 
-        if (amount_str != null && amount_str.contains(lowerCaseSearch)) {
+        if (amountStr != null && amountStr.contains(lowerCaseSearch)) {
           shouldRemove = false;
         }
         if (isNotEmpty(txDetails.memo)) {
@@ -1331,13 +1311,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // sort by timestamp
     // should already be sorted but:
     // needed to sort payment requests by request time from each other:
-    if (!override_sort) {
+    if (!overrideSort) {
       unifiedList.sort(defaultSortComparison);
     } else {
       unifiedList.sort(amountSortComparison);
     }
 
-    bool areThereNoSearchResults = (unifiedList.isEmpty && _searchController.text.isNotEmpty);
+    final bool areThereNoSearchResults = (unifiedList.isEmpty && _searchController.text.isNotEmpty);
 
     if (areThereNoSearchResults != _noSearchResults) {
       setState(() {
@@ -1350,40 +1330,31 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // create a list of indices to remove:
     removeIndices = [];
     // remove anything that's not supposed to be there anymore:
-    _unifiedListMap[StateContainer.of(context).wallet!.address]!
-        .items
-        .where((item) => !unifiedList.contains(item))
-        .forEach((dynamicItem) {
+    _unifiedListMap[StateContainer.of(context).wallet!.address]!.items.where((item) => !unifiedList.contains(item)).forEach((dynamicItem) {
       removeIndices.add(_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.indexOf(dynamicItem));
     });
     // mark anything out of place or not in the unified list as to be removed:
     if (_searchController.text.isNotEmpty) {
       _unifiedListMap[StateContainer.of(context).wallet!.address]!
           .items
-          .where((item) => (_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.indexOf(item) !=
-              (unifiedList.indexOf(item))))
+          .where((item) => (_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.indexOf(item) != (unifiedList.indexOf(item))))
           .forEach((dynamicItem) {
         removeIndices.add(_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.indexOf(dynamicItem));
       });
     }
     // ensure uniqueness and must be sorted to prevent an index error:
     removeIndices = removeIndices.toSet().toList();
-    removeIndices.sort((a, b) => a.compareTo(b));
+    removeIndices.sort((int a, int b) => a.compareTo(b));
 
     // remove from the listmap:
     for (int i = removeIndices.length - 1; i >= 0; i--) {
       // don't set state since we don't need it to re-render just yet:
       // also it will throw an error because the list can be empty and the builder will get upset:
-      _unifiedListMap[StateContainer.of(context).wallet!.address]!
-          .removeAt(removeIndices[i], _buildUnifiedItem, instant: true);
+      _unifiedListMap[StateContainer.of(context).wallet!.address]!.removeAt(removeIndices[i], _buildUnifiedItem, instant: true);
     }
 
-    // log.d("updating whole list!");
-
     // insert unifiedList into listmap:
-    unifiedList
-        .where((item) => !_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.contains(item))
-        .forEach((dynamicItem) {
+    unifiedList.where((item) => !_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.contains(item)).forEach((dynamicItem) {
       int index = unifiedList.indexOf(dynamicItem);
       if (dynamicItem == null) return;
       index = max(min(index, _unifiedListMap[StateContainer.of(context).wallet!.address]!.length), 0);
@@ -1407,14 +1378,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  Future<void> handleDeepLink(link) async {
+  Future<void> handleDeepLink(String? link) async {
     log.d("handleDeepLink: $link");
-    Address address = Address(link);
+    final Address address = Address(link);
     if (address.isValid()) {
       String? amount;
       bool sufficientBalance = false;
       if (address.amount != null) {
-        BigInt? amountBigInt = BigInt.tryParse(address.amount!);
+        final BigInt? amountBigInt = BigInt.tryParse(address.amount!);
         // Require minimum 1 raw to send, and make sure sufficient balance
         if (amountBigInt != null && amountBigInt >= BigInt.from(10).pow(24)) {
           if (StateContainer.of(context).wallet!.accountBalance > amountBigInt) {
@@ -1424,24 +1395,18 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         }
       }
       // See if a contact
-      dynamic user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
       // Remove any other screens from stack
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       if (amount != null && sufficientBalance) {
         // Go to send confirm with amount
         Sheets.showAppHeightNineSheet(
-            context: context,
-            widget:
-                SendConfirmSheet(amountRaw: amount, destination: address.address, contactName: user?.getDisplayName()));
+            context: context, widget: SendConfirmSheet(amountRaw: amount, destination: address.address, contactName: user?.getDisplayName()));
       } else {
         // Go to send with address
         Sheets.showAppHeightNineSheet(
             context: context,
-            widget: SendSheet(
-                localCurrency: StateContainer.of(context).curCurrency,
-                user: user,
-                address: address.address,
-                quickSendAmount: amount ?? null));
+            widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: amount));
       }
     }
   }
@@ -1460,13 +1425,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   // handle pending messages
   Future<void> handlePendingBackgroundMessages() async {
     if (StateContainer.of(context).wallet != null) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.reload();
-      var background_messages = prefs.getStringList('background_messages');
+      final List<String>? backgroundMessages = prefs.getStringList('background_messages');
       // process the message now that we're in the foreground:
 
-      if (background_messages != null) {
-        EventTaxiImpl.singleton().fire(FcmMessageEvent(message_list: background_messages));
+      if (backgroundMessages != null) {
+        EventTaxiImpl.singleton().fire(FcmMessageEvent(message_list: backgroundMessages));
         // clear the storage since we just processed it:
         await prefs.remove('background_messages');
       }
@@ -1474,8 +1439,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   void paintQrCode({String? address}) {
-    QrPainter painter = QrPainter(
-      data: 'nano:' + (address ?? StateContainer.of(context).wallet!.address!),
+    final QrPainter painter = QrPainter(
+      data: 'nano:${address ?? StateContainer.of(context).wallet!.address!}',
       version: 9,
       gapless: false,
       errorCorrectionLevel: QrErrorCorrectLevel.Q,
@@ -1483,13 +1448,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (MediaQuery.of(context).size.width == 0) {
       return;
     }
-    painter.toImageData(MediaQuery.of(context).size.width).then((byteData) {
+    painter.toImageData(MediaQuery.of(context).size.width).then((ByteData? byteData) {
       setState(() {
         receive = ReceiveSheet(
           localCurrency: StateContainer.of(context).curCurrency,
           address: StateContainer.of(context).wallet!.address,
-          qrWidget: Container(
-              width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List())),
+          qrWidget: SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List())),
         );
       });
     });
@@ -1518,8 +1482,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         ),
       ),
       body: SafeArea(
-        minimum: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height * 0.045, bottom: MediaQuery.of(context).size.height * 0.035),
+        minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.045, bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
             Expanded(
@@ -1535,7 +1498,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                       //Main Card End
                       //Transactions Text
                       Container(
-                        margin: EdgeInsetsDirectional.fromSTEB(30.0, 20.0, 26.0, 0.0),
+                        margin: const EdgeInsetsDirectional.fromSTEB(30.0, 20.0, 26.0, 0.0),
                         child: Row(
                           children: <Widget>[
                             Text(
@@ -1564,12 +1527,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
-                                    colors: [
-                                      StateContainer.of(context).curTheme.background00!,
-                                      StateContainer.of(context).curTheme.background!
-                                    ],
-                                    begin: AlignmentDirectional(0.5, 1.0),
-                                    end: AlignmentDirectional(0.5, -1.0),
+                                    colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                    begin: const AlignmentDirectional(0.5, 1.0),
+                                    end: const AlignmentDirectional(0.5, -1.0),
                                   ),
                                 ),
                               ),
@@ -1582,12 +1542,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
-                                    colors: [
-                                      StateContainer.of(context).curTheme.background00!,
-                                      StateContainer.of(context).curTheme.background!
-                                    ],
-                                    begin: AlignmentDirectional(0.5, -1),
-                                    end: AlignmentDirectional(0.5, 0.5),
+                                    colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                    begin: const AlignmentDirectional(0.5, -1),
+                                    end: const AlignmentDirectional(0.5, 0.5),
                                   ),
                                 ),
                               ),
@@ -1613,17 +1570,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         ),
                         height: 55,
                         width: (MediaQuery.of(context).size.width - 42).abs() / 2,
-                        margin: EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
+                        margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
                         // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
                         child: TextButton(
                           key: const Key("receive_button"),
                           style: TextButton.styleFrom(
-                            backgroundColor: receive != null
-                                ? StateContainer.of(context).curTheme.primary
-                                : StateContainer.of(context).curTheme.primary60,
+                            backgroundColor: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                            primary:
-                                receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                            primary: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                             // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                             // splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                           ),
@@ -1685,10 +1639,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   Widget _buildRemoteMessageCard(AlertResponseItem? alert) {
     if (alert == null) {
-      return SizedBox();
+      return const SizedBox();
     }
     return Container(
-      margin: EdgeInsetsDirectional.fromSTEB(14, 4, 14, 4),
+      margin: const EdgeInsetsDirectional.fromSTEB(14, 4, 14, 4),
       child: RemoteMessageCard(
         alert: alert,
         onPressed: () {
@@ -1705,7 +1659,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   Widget _buildNoSearchResultsCard(BuildContext context) {
     return Container(
-      margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         borderRadius: BorderRadius.circular(10.0),
@@ -1718,7 +1672,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
                 boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
               ),
@@ -1738,7 +1692,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
               ),
             ),
@@ -1761,7 +1715,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       bool is_acknowledged = true,
       bool is_fulfilled = true,
       int timestamp = 0}) {
-    TXData txData = TXData();
+    final TXData txData = TXData();
 
     if (amount_raw != null) {
       txData.amount_raw = amount_raw;
@@ -1819,7 +1773,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       );
     }
     // Colorize NANO
-    List<String> splitStr = workingStr.split("NANO");
+    final List<String> splitStr = workingStr.split("NANO");
     if (splitStr.length != 2) {
       return TextSpan(
         text: workingStr,
@@ -1847,7 +1801,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   // Welcome Card
   TextSpan _getPaymentExampleHeaderSpan(BuildContext context) {
-    String workingStr = AppLocalization.of(context)!.examplePaymentIntro;
+    final String workingStr = AppLocalization.of(context)!.examplePaymentIntro;
 
     if (!workingStr.contains("NANO")) {
       return TextSpan(
@@ -1856,7 +1810,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       );
     }
     // Colorize NANO
-    List<String> splitStr = workingStr.split("NANO");
+    final List<String> splitStr = workingStr.split("NANO");
     if (splitStr.length != 2) {
       return TextSpan(
         text: workingStr,
@@ -1884,7 +1838,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   Widget _buildWelcomeTransactionCard(BuildContext context) {
     return Container(
-      margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         borderRadius: BorderRadius.circular(10.0),
@@ -1897,7 +1851,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
                 boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
               ),
@@ -1914,7 +1868,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
               ),
             ),
@@ -1926,7 +1880,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   Widget _buildWelcomePaymentCard(BuildContext context) {
     return Container(
-      margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         borderRadius: BorderRadius.circular(10.0),
@@ -1939,7 +1893,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
                 boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
               ),
@@ -1956,7 +1910,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
               ),
             ),
@@ -1968,7 +1922,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   Widget _buildWelcomePaymentCardTwo(BuildContext context) {
     return Container(
-      margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         borderRadius: BorderRadius.circular(10.0),
@@ -1981,7 +1935,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
                 boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
               ),
@@ -1990,8 +1944,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 15.0),
                 child: RichText(
-                  textAlign: TextAlign.start,
-                  // text: _getPaymentExampleHeaderSpan(context),
                   text: TextSpan(
                     text: AppLocalization.of(context)!.examplePaymentExplainer,
                     style: AppStyles.textStyleTransactionWelcome(context),
@@ -2002,7 +1954,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
               ),
             ),
@@ -2027,21 +1979,19 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       iconColor = StateContainer.of(context).curTheme.primary20;
     }
     return Container(
-      margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
       ),
       child: TextButton(
-        onPressed: () {
-          return null;
-        },
+        onPressed: () {},
         style: TextButton.styleFrom(
           primary: StateContainer.of(context).curTheme.text15,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          padding: EdgeInsets.all(0.0),
+          padding: EdgeInsets.zero,
         ),
         // splashColor: StateContainer.of(context).curTheme.text15,
         // highlightColor: StateContainer.of(context).curTheme.text15,
@@ -2057,85 +2007,74 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                     // Transaction Icon
                     Opacity(
                       opacity: _opacityAnimation.value,
-                      child: Container(
-                          margin: EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
+                      child: Container(margin: const EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
                     ),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width / 4,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           // Transaction Type Text
-                          Container(
-                            child: Stack(
-                              alignment: AlignmentDirectional(-1, 0),
-                              children: <Widget>[
-                                Text(
-                                  text,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontFamily: "NunitoSans",
-                                    fontSize: AppFontSizes.small,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.transparent,
-                                  ),
+                          Stack(
+                            alignment: AlignmentDirectional.centerStart,
+                            children: <Widget>[
+                              Text(
+                                text,
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  fontFamily: "NunitoSans",
+                                  fontSize: AppFontSizes.small,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.transparent,
                                 ),
-                                Opacity(
-                                  opacity: _opacityAnimation.value,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: StateContainer.of(context).curTheme.text45,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Text(
-                                      text,
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        fontFamily: "NunitoSans",
-                                        fontSize: AppFontSizes.small - 4,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.transparent,
-                                      ),
+                              ),
+                              Opacity(
+                                opacity: _opacityAnimation.value,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: StateContainer.of(context).curTheme.text45,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Text(
+                                    text,
+                                    textAlign: TextAlign.start,
+                                    style: const TextStyle(
+                                      fontFamily: "NunitoSans",
+                                      fontSize: AppFontSizes.small - 4,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.transparent,
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                           // Amount Text
-                          Container(
-                            child: Stack(
-                              alignment: AlignmentDirectional(-1, 0),
-                              children: <Widget>[
-                                Text(
-                                  amount,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontFamily: "NunitoSans",
-                                      color: Colors.transparent,
-                                      fontSize: AppFontSizes.smallest,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                Opacity(
-                                  opacity: _opacityAnimation.value,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: StateContainer.of(context).curTheme.primary20,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Text(
-                                      amount,
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          fontFamily: "NunitoSans",
-                                          color: Colors.transparent,
-                                          fontSize: AppFontSizes.smallest - 3,
-                                          fontWeight: FontWeight.w600),
-                                    ),
+                          Stack(
+                            alignment: AlignmentDirectional.centerStart,
+                            children: <Widget>[
+                              Text(
+                                amount,
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                    fontFamily: "NunitoSans", color: Colors.transparent, fontSize: AppFontSizes.smallest, fontWeight: FontWeight.w600),
+                              ),
+                              Opacity(
+                                opacity: _opacityAnimation.value,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: StateContainer.of(context).curTheme.primary20,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Text(
+                                    amount,
+                                    textAlign: TextAlign.start,
+                                    style: const TextStyle(
+                                        fontFamily: "NunitoSans", color: Colors.transparent, fontSize: AppFontSizes.smallest - 3, fontWeight: FontWeight.w600),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -2143,19 +2082,19 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                   ],
                 ),
                 // Address Text
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width / 2.4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Container(
                         child: Stack(
-                          alignment: AlignmentDirectional(1, 0),
+                          alignment: AlignmentDirectional.centerEnd,
                           children: <Widget>[
                             Text(
                               address,
                               textAlign: TextAlign.end,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: AppFontSizes.smallest,
                                 fontFamily: 'OverpassMono',
                                 fontWeight: FontWeight.w100,
@@ -2172,7 +2111,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                 child: Text(
                                   address,
                                   textAlign: TextAlign.end,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: AppFontSizes.smallest - 3,
                                     fontFamily: 'OverpassMono',
                                     fontWeight: FontWeight.w100,
@@ -2257,92 +2196,86 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       margin: EdgeInsets.only(left: 14.0, right: 14.0, top: MediaQuery.of(context).size.height * 0.005),
       child: Stack(
         children: <Widget>[
-          Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  width: 80.0,
-                  height: mainCardHeight,
-                  alignment: AlignmentDirectional(-1, -1),
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 200),
-                    curve: Curves.easeInOut,
-                    margin: EdgeInsetsDirectional.only(top: settingsIconMarginTop, start: 5),
-                    height: 50,
-                    width: 50,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        primary: StateContainer.of(context).curTheme.text15,
-                        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                        // highlightColor: StateContainer.of(context).curTheme.text15,
-                        // splashColor: StateContainer.of(context).curTheme.text15,
+          Row(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              width: 80.0,
+              height: mainCardHeight,
+              alignment: const AlignmentDirectional(-1, -1),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+                margin: EdgeInsetsDirectional.only(top: settingsIconMarginTop, start: 5),
+                height: 50,
+                width: 50,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: StateContainer.of(context).curTheme.text15,
+                    backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                    // highlightColor: StateContainer.of(context).curTheme.text15,
+                    // splashColor: StateContainer.of(context).curTheme.text15,
+                  ),
+                  onPressed: () {
+                    _scaffoldKey.currentState.openDrawer();
+                  },
+                  child: Stack(
+                    children: [
+                      Icon(
+                        AppIcons.settings,
+                        color: StateContainer.of(context).curTheme.text,
+                        size: 24,
                       ),
-                      onPressed: () {
-                        _scaffoldKey.currentState.openDrawer();
-                      },
-                      child: Stack(
-                        children: [
-                          Icon(
-                            AppIcons.settings,
-                            color: StateContainer.of(context).curTheme.text,
-                            size: 24,
+                      if (!StateContainer.of(context).activeAlertIsRead)
+                        Positioned(
+                          top: -3,
+                          right: -3,
+                          child: Container(
+                            padding: const EdgeInsets.all(3),
+                            decoration: BoxDecoration(
+                              color: StateContainer.of(context).curTheme.backgroundDark,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: StateContainer.of(context).curTheme.success,
+                                shape: BoxShape.circle,
+                              ),
+                              height: 11,
+                              width: 11,
+                            ),
                           ),
-                          !StateContainer.of(context).activeAlertIsRead
-                              ?
-                              // Unread message dot
-                              Positioned(
-                                  top: -3,
-                                  right: -3,
-                                  child: Container(
-                                    padding: EdgeInsets.all(3),
-                                    decoration: BoxDecoration(
-                                      color: StateContainer.of(context).curTheme.backgroundDark,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: StateContainer.of(context).curTheme.success,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      height: 11,
-                                      width: 11,
-                                    ),
-                                  ),
-                                )
-                              : SizedBox()
-                        ],
-                      ),
-                    ),
+                        )
+                    ],
                   ),
                 ),
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  height: mainCardHeight,
-                  child: _getBalanceWidget(),
-                ),
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  width: 80,
-                  height: mainCardHeight,
-                ),
-              ]),
+              ),
+            ),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              height: mainCardHeight,
+              child: _getBalanceWidget(),
+            ),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              width: 80,
+              height: mainCardHeight,
+            ),
+          ]),
           AnimatedContainer(
-            duration: Duration(milliseconds: 200),
+            duration: const Duration(milliseconds: 200),
             curve: Curves.easeInOut,
             height: mainCardHeight,
             // height: mainCardHeight == 64 ? 60 : 74,
-            margin: EdgeInsets.only(
+            margin: const EdgeInsets.only(
               left: 5,
               right: 5,
             ),
             // padding: EdgeInsets.all(0.0),
-            padding: EdgeInsets.only(bottom: 2), // covers the top of the balance text in the currency widget
+            padding: const EdgeInsets.only(bottom: 2), // covers the top of the balance text in the currency widget
             child: _buildSearchbarAnimation(),
           ),
         ],
@@ -2350,239 +2283,99 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     );
   } //Main Card
 
-  // // natricon
-  // (StateContainer.of(context).nyanoMode)
-  //     ? (StateContainer.of(context).nyaniconOn
-  //         ? AnimatedContainer(
-  //             duration: Duration(milliseconds: 200),
-  //             curve: Curves.easeInOut,
-  //             width: mainCardHeight == 64 ? 60 : 74,
-  //             height: mainCardHeight == 64 ? 60 : 74,
-  //             margin: EdgeInsets.only(right: 2),
-  //             alignment: Alignment(0, 0),
-  //             child: Stack(
-  //               children: <Widget>[
-  //                 Center(
-  //                   child: Container(
-  //                     // nyanicon
-  //                     child: Hero(
-  //                       tag: "avatar",
-  //                       child: StateContainer.of(context).selectedAccount.address != null
-  //                           ? Image(image: AssetImage("assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png"))
-  //                           : SizedBox(),
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 Center(
-  //                   child: Container(
-  //                     color: Colors.transparent,
-  //                     child: FlatButton(
-  //                       onPressed: () {
-  //                         // Navigator.of(context).pushNamed('/avatar_page');
-  //                       },
-  //                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-  //                       highlightColor: StateContainer.of(context).curTheme.text15,
-  //                       splashColor: StateContainer.of(context).curTheme.text15,
-  //                       padding: EdgeInsets.all(0.0),
-  //                       child: Container(
-  //                         color: Colors.transparent,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           )
-  //         : AnimatedContainer(
-  //             duration: Duration(milliseconds: 200),
-  //             curve: Curves.easeInOut,
-  //             width: 80.0,
-  //             height: mainCardHeight,
-  //           ))
-  //     : (StateContainer.of(context).natriconOn
-  //         ? AnimatedContainer(
-  //             duration: Duration(milliseconds: 200),
-  //             curve: Curves.easeInOut,
-  //             width: mainCardHeight == 64 ? 60 : 74,
-  //             height: mainCardHeight == 64 ? 60 : 74,
-  //             margin: EdgeInsets.only(right: 2),
-  //             alignment: Alignment(0, 0),
-  //             child: Stack(
-  //               children: <Widget>[
-  //                 Center(
-  //                   child: Container(
-  //                     // natricon
-  //                     child: Hero(
-  //                       tag: "avatar",
-  //                       child: StateContainer.of(context).selectedAccount.address != null
-  //                           ? SvgPicture.network(
-  //                               UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-  //                                   StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
-  //                               key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-  //                                   StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
-  //                               placeholderBuilder: (BuildContext context) => Container(
-  //                                 child: FlareActor(
-  //                                   "legacy_assets/ntr_placeholder_animation.flr",
-  //                                   animation: "main",
-  //                                   fit: BoxFit.contain,
-  //                                   color: StateContainer.of(context).curTheme.primary,
-  //                                 ),
-  //                               ),
-  //                             )
-  //                           : SizedBox(),
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 Center(
-  //                   child: Container(
-  //                     color: Colors.transparent,
-  //                     child: FlatButton(
-  //                       onPressed: () {
-  //                         Navigator.of(context).pushNamed('/avatar_page');
-  //                       },
-  //                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-  //                       highlightColor: StateContainer.of(context).curTheme.text15,
-  //                       splashColor: StateContainer.of(context).curTheme.text15,
-  //                       padding: EdgeInsets.all(0.0),
-  //                       child: Container(
-  //                         color: Colors.transparent,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           )
-  //         : AnimatedContainer(
-  //             duration: Duration(milliseconds: 200),
-  //             curve: Curves.easeInOut,
-  //             width: 80.0,
-  //             height: mainCardHeight,
-  //           ))
-
   // Get balance display
   Widget _getBalanceWidget() {
     if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading!) {
       // Placeholder for balance text
-      return Container(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _priceConversion == PriceConversion.BTC
-                ? Container(
-                    child: Stack(
-                      alignment: AlignmentDirectional(0, 0),
-                      children: <Widget>[
-                        Text(
-                          "1234567",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: "NunitoSans",
-                              fontSize: AppFontSizes.small,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.transparent),
-                        ),
-                        Opacity(
-                          opacity: _opacityAnimation.value,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: StateContainer.of(context).curTheme.text20,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Text(
-                              "1234567",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontFamily: "NunitoSans",
-                                  fontSize: AppFontSizes.small - 3,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.transparent),
-                            ),
-                          ),
-                        ),
-                      ],
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          if (_priceConversion == PriceConversion.BTC)
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                const Text(
+                  "1234567",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
+                ),
+                Opacity(
+                  opacity: _opacityAnimation.value,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.text20,
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                  )
-                : SizedBox(),
+                    child: const Text(
+                      "1234567",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          Container(
+            constraints: BoxConstraints(maxWidth: (MediaQuery.of(context).size.width - 225).abs()),
+            child: Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                const AutoSizeText(
+                  "1234567",
+                  style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.largestc, fontWeight: FontWeight.w900, color: Colors.transparent),
+                  maxLines: 1,
+                  stepGranularity: 0.1,
+                  minFontSize: 1,
+                ),
+                Opacity(
+                  opacity: _opacityAnimation.value,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.primary60,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: const AutoSizeText(
+                      "1234567",
+                      style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.largestc - 8, fontWeight: FontWeight.w900, color: Colors.transparent),
+                      maxLines: 1,
+                      stepGranularity: 0.1,
+                      minFontSize: 1,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (_priceConversion == PriceConversion.BTC)
             Container(
-              constraints: BoxConstraints(maxWidth: (MediaQuery.of(context).size.width - 225).abs()),
               child: Stack(
-                alignment: AlignmentDirectional(0, 0),
+                alignment: AlignmentDirectional.center,
                 children: <Widget>[
-                  AutoSizeText(
+                  const Text(
                     "1234567",
-                    style: TextStyle(
-                        fontFamily: "NunitoSans",
-                        fontSize: AppFontSizes.largestc,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.transparent),
-                    maxLines: 1,
-                    stepGranularity: 0.1,
-                    minFontSize: 1,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
                   ),
                   Opacity(
                     opacity: _opacityAnimation.value,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.primary60,
+                        color: StateContainer.of(context).curTheme.text20,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: AutoSizeText(
+                      child: const Text(
                         "1234567",
-                        style: TextStyle(
-                            fontFamily: "NunitoSans",
-                            fontSize: AppFontSizes.largestc - 8,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.transparent),
-                        maxLines: 1,
-                        stepGranularity: 0.1,
-                        minFontSize: 1,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            _priceConversion == PriceConversion.BTC
-                ? Container(
-                    child: Stack(
-                      alignment: AlignmentDirectional(0, 0),
-                      children: <Widget>[
-                        Text(
-                          "1234567",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: "NunitoSans",
-                              fontSize: AppFontSizes.small,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.transparent),
-                        ),
-                        Opacity(
-                          opacity: _opacityAnimation.value,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: StateContainer.of(context).curTheme.text20,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Text(
-                              "1234567",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontFamily: "NunitoSans",
-                                  fontSize: AppFontSizes.small - 3,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.transparent),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : SizedBox(),
-          ],
-        ),
+        ],
       );
     }
     // Balance texts
@@ -2610,7 +2403,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             mainCardHeight = 80;
             settingsIconMarginTop = 15;
           });
-          Future.delayed(Duration(milliseconds: 150), () {
+          Future.delayed(const Duration(milliseconds: 150), () {
             setState(() {
               _priceConversion = PriceConversion.BTC;
             });
@@ -2625,23 +2418,22 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         child: _priceConversion == PriceConversion.HIDDEN
             ?
             // Nano logo
-            Center(
-                child: Container(
-                    child: Icon(AppIcons.nanologo, size: 32, color: StateContainer.of(context).curTheme.primary)))
+            Center(child: Container(child: Icon(AppIcons.nanologo, size: 32, color: StateContainer.of(context).curTheme.primary)))
             : Container(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    _priceConversion == PriceConversion.BTC
-                        ? Text(
-                            StateContainer.of(context).wallet!.getLocalCurrencyPrice(
-                                StateContainer.of(context).curCurrency,
-                                locale: StateContainer.of(context).currencyLocale),
-                            textAlign: TextAlign.center,
-                            style: AppStyles.textStyleCurrencyAlt(context))
-                        : SizedBox(height: 0),
+                    if (_priceConversion == PriceConversion.BTC)
+                      Text(
+                          StateContainer.of(context)
+                              .wallet!
+                              .getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale),
+                          textAlign: TextAlign.center,
+                          style: AppStyles.textStyleCurrencyAlt(context))
+                    else
+                      const SizedBox(height: 0),
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -2652,18 +2444,18 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             child: AutoSizeText.rich(
                               TextSpan(
                                 children: [
-                                  _priceConversion == PriceConversion.BTC
-                                      ? displayCurrencyAmount(context, AppStyles.textStyleCurrency(context, true))
-                                      : displayCurrencyAmount(
+                                  if (_priceConversion == PriceConversion.BTC)
+                                    displayCurrencyAmount(context, AppStyles.textStyleCurrency(context, true))
+                                  else
+                                    displayCurrencyAmount(
+                                        context,
+                                        AppStyles.textStyleCurrencySmaller(
                                           context,
-                                          AppStyles.textStyleCurrencySmaller(
-                                            context,
-                                            true,
-                                          )),
+                                          true,
+                                        )),
                                   // Main balance text
                                   TextSpan(
-                                    text: getCurrencySymbol(context) +
-                                        StateContainer.of(context).wallet!.getAccountBalanceDisplay(context),
+                                    text: getCurrencySymbol(context) + StateContainer.of(context).wallet!.getAccountBalanceDisplay(context),
                                     style: _priceConversion == PriceConversion.BTC
                                         ? AppStyles.textStyleCurrency(context)
                                         : AppStyles.textStyleCurrencySmaller(
@@ -2682,7 +2474,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         ],
                       ),
                     ),
-                    SizedBox(height: 0),
+                    const SizedBox(height: 0),
                   ],
                 ),
               ),
@@ -2699,29 +2491,27 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     bool sendFailed = false;
 
     // send the request again:
-    String privKey = NanoUtil.seedToPrivate(
-        await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+    final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
     // get epoch time as hex:
-    int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
-    String nonce_hex = secondsSinceEpoch.toRadixString(16);
-    String signature = NanoSignatures.signBlock(nonce_hex, privKey);
+    final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+    final String nonceHex = secondsSinceEpoch.toRadixString(16);
+    final String signature = NanoSignatures.signBlock(nonceHex, privKey);
 
     // check validity locally:
-    String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    bool isValid =
-        NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+    final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+    final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
     if (!isValid) {
       throw Exception("Invalid signature?!");
     }
 
     // create a local memo object:
-    var uuid = Uuid();
-    String local_uuid = "LOCAL:" + uuid.v4();
-    var requestTXData = new TXData(
+    final Uuid uuid = const Uuid();
+    final String localUuid = "LOCAL:${uuid.v4()}";
+    final TXData requestTXData = TXData(
       from_address: txDetails.from_address,
       to_address: txDetails.to_address,
       amount_raw: txDetails.amount_raw,
-      uuid: local_uuid,
+      uuid: localUuid,
       block: txDetails.block,
       is_acknowledged: false,
       is_fulfilled: false,
@@ -2741,8 +2531,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       if (txDetails.memo != null && txDetails.memo!.isNotEmpty) {
         encryptedMemo = await Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
       }
-      await sl.get<AccountService>().requestPayment(txDetails.to_address, txDetails.amount_raw,
-          StateContainer.of(context).wallet!.address, signature, nonce_hex, encryptedMemo, local_uuid);
+      await sl.get<AccountService>().requestPayment(
+          txDetails.to_address, txDetails.amount_raw, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
     } catch (e) {
       print(e);
       sendFailed = true;
@@ -2752,9 +2542,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (sendFailed) {
       print("request send failed, deleting TXData object");
       // remove failed txdata from the database:
-      await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
+      await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       // show error:
       UIUtil.showSnackbar(AppLocalization.of(context)!.requestSendError, context, durationMs: 5000);
     } else {
@@ -2778,29 +2568,27 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     bool memoSendFailed = false;
 
     // send the memo again:
-    String privKey = NanoUtil.seedToPrivate(
-        await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+    final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
     // get epoch time as hex:
-    int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
-    String nonce_hex = secondsSinceEpoch.toRadixString(16);
-    String signature = NanoSignatures.signBlock(nonce_hex, privKey);
+    final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+    final String nonceHex = secondsSinceEpoch.toRadixString(16);
+    final String signature = NanoSignatures.signBlock(nonceHex, privKey);
 
     // check validity locally:
-    String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    bool isValid =
-        NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+    final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+    final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
     if (!isValid) {
       throw Exception("Invalid signature?!");
     }
 
     // create a local memo object:
-    var uuid = Uuid();
-    String local_uuid = "LOCAL:" + uuid.v4();
-    var memoTXData = new TXData(
+    final Uuid uuid = const Uuid();
+    final String localUuid = "LOCAL:${uuid.v4()}";
+    final TXData memoTXData = TXData(
       from_address: txDetails.from_address,
       to_address: txDetails.to_address,
       amount_raw: txDetails.amount_raw,
-      uuid: local_uuid,
+      uuid: localUuid,
       block: txDetails.block,
       is_acknowledged: false,
       is_fulfilled: false,
@@ -2816,9 +2604,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     try {
       // encrypt the memo:
-      String encryptedMemo = await Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
-      await sl.get<AccountService>().sendTXMemo(txDetails.to_address, StateContainer.of(context).wallet!.address,
-          txDetails.amount_raw, signature, nonce_hex, encryptedMemo, txDetails.block, local_uuid);
+      final String encryptedMemo = await Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
+      await sl.get<AccountService>().sendTXMemo(txDetails.to_address, StateContainer.of(context).wallet!.address, txDetails.amount_raw, signature, nonceHex,
+          encryptedMemo, txDetails.block, localUuid);
     } catch (e) {
       memoSendFailed = true;
     }
@@ -2827,9 +2615,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (memoSendFailed) {
       print("memo send failed, deleting TXData object");
       // remove from the database:
-      await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
+      await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       // show error:
       UIUtil.showSnackbar(AppLocalization.of(context)!.sendMemoError, context, durationMs: 5000);
     } else {
@@ -2856,11 +2644,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       address = txDetails.from_address;
     }
     // See if a contact
-    var user = await sl.get<DBHelper>().getUserOrContactWithAddress(address!);
+    final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address!);
     String? quickSendAmount = txDetails.amount_raw;
     // a bit of a hack since send sheet doesn't have a way to tell if we're in nyano mode on creation:
     if (StateContainer.of(context).nyanoMode) {
-      quickSendAmount = quickSendAmount! + "000000";
+      quickSendAmount = "${quickSendAmount!}000000";
     }
 
     // Go to send with address
@@ -2881,7 +2669,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     Color? iconColor;
 
     bool isGift = false;
-    String? walletAddress = StateContainer.of(context).wallet!.address;
+    final String? walletAddress = StateContainer.of(context).wallet!.address;
 
     if (txDetails.is_message) {
       // just in case:
@@ -2892,9 +2680,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       txDetails.is_acknowledged = true;
     }
 
-    if (txDetails.record_type == RecordTypes.GIFT_ACK ||
-        txDetails.record_type == RecordTypes.GIFT_OPEN ||
-        txDetails.record_type == RecordTypes.GIFT_LOAD) {
+    if (txDetails.record_type == RecordTypes.GIFT_ACK || txDetails.record_type == RecordTypes.GIFT_OPEN || txDetails.record_type == RecordTypes.GIFT_LOAD) {
       isGift = true;
     }
 
@@ -2957,7 +2743,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       iconColor = StateContainer.of(context).curTheme.error60;
       setShadow = BoxShadow(
         color: StateContainer.of(context).curTheme.error60!.withOpacity(0.2),
-        offset: Offset(0, 0),
+        offset: const Offset(0, 0),
         blurRadius: 0,
         spreadRadius: 1,
       );
@@ -2965,7 +2751,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       iconColor = StateContainer.of(context).curTheme.success60;
       setShadow = BoxShadow(
         color: StateContainer.of(context).curTheme.success60!.withOpacity(0.2),
-        offset: Offset(0, 0),
+        offset: const Offset(0, 0),
         blurRadius: 0,
         spreadRadius: 1,
       );
@@ -2973,7 +2759,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       iconColor = StateContainer.of(context).curTheme.warning60;
       setShadow = BoxShadow(
         color: StateContainer.of(context).curTheme.warning60!.withOpacity(0.2),
-        offset: Offset(0, 0),
+        offset: const Offset(0, 0),
         blurRadius: 0,
         spreadRadius: 1,
       );
@@ -3022,13 +2808,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // if ((item.confirmed != null && !item.confirmed!) || (currentConfHeight > -1 && item.height != null && item.height! > currentConfHeight)) {
       //   transactionState = TransactionStateOptions.UNCONFIRMED;
       // }
-      if ((!txDetails.is_fulfilled) ||
-          (currentConfHeight > -1 && txDetails.height != null && txDetails.height! > currentConfHeight)) {
+      if ((!txDetails.is_fulfilled) || (currentConfHeight > -1 && txDetails.height != null && txDetails.height! > currentConfHeight)) {
         transactionState = TransactionStateOptions.UNCONFIRMED;
       }
     }
 
-    List<Widget> _slideActions = [];
+    final List<Widget> _slideActions = [];
     String? label;
     if (txDetails.is_tx) {
       label = AppLocalization.of(context)!.send;
@@ -3049,7 +2834,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           label: label,
           onPressed: (BuildContext context) async {
             // sleep for a bit to give the ripple effect time to finish
-            await Future.delayed(Duration(milliseconds: 250));
+            await Future.delayed(const Duration(milliseconds: 250));
             await payTX(context, txDetails);
             await Slidable.of(context)!.close();
           }));
@@ -3066,7 +2851,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           label: AppLocalization.of(context)!.reply,
           onPressed: (BuildContext context) async {
             // sleep for a bit to give the ripple effect time to finish
-            await Future.delayed(Duration(milliseconds: 250));
+            await Future.delayed(const Duration(milliseconds: 250));
             await payTX(context, txDetails);
             await Slidable.of(context)!.close();
           }));
@@ -3084,7 +2869,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             label: AppLocalization.of(context)!.retry,
             onPressed: (BuildContext context) async {
               // sleep for a bit to give the ripple effect time to finish
-              await Future.delayed(Duration(milliseconds: 250));
+              await Future.delayed(const Duration(milliseconds: 250));
               await resendRequest(context, txDetails);
               await Slidable.of(context)!.close();
             }));
@@ -3098,7 +2883,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             label: AppLocalization.of(context)!.retry,
             onPressed: (BuildContext context) async {
               // sleep for a bit to give the ripple effect time to finish
-              await Future.delayed(Duration(milliseconds: 250));
+              await Future.delayed(const Duration(milliseconds: 250));
               await resendMemo(context, txDetails);
               await Slidable.of(context)!.close();
             }));
@@ -3130,7 +2915,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           label: AppLocalization.of(context)!.delete,
           onPressed: (BuildContext context) async {
             // sleep for a bit to give the ripple effect time to finish
-            await Future.delayed(Duration(milliseconds: 250));
+            await Future.delayed(const Duration(milliseconds: 250));
             if (txDetails.uuid != null) {
               await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
             }
@@ -3140,13 +2925,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           }));
     }
 
-    ActionPane actionPane = ActionPane(
+    final ActionPane actionPane = ActionPane(
       motion: const ScrollMotion(),
       extentRatio: _slideActions.length * 0.2,
       children: _slideActions,
     );
 
-    double card_height = 65;
+    final double cardHeight = 65;
 
     return Slidable(
       enabled: slideEnabled,
@@ -3157,7 +2942,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           alignment: AlignmentDirectional.centerEnd,
           children: [
             Container(
-              margin: EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+              margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
               decoration: BoxDecoration(
                 color: StateContainer.of(context).curTheme.backgroundDark,
                 borderRadius: BorderRadius.circular(10.0),
@@ -3167,17 +2952,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 style: TextButton.styleFrom(
                   primary: StateContainer.of(context).curTheme.text15,
                   backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-                  padding: EdgeInsets.all(0.0),
+                  padding: const EdgeInsets.all(0.0),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                 ),
                 onPressed: () {
-                  Sheets.showAppHeightEightSheet(
-                      context: context, widget: PaymentDetailsSheet(txDetails: txDetails), animationDurationMs: 175);
+                  Sheets.showAppHeightEightSheet(context: context, widget: PaymentDetailsSheet(txDetails: txDetails), animationDurationMs: 175);
                 },
                 child: Center(
                   child: Container(
                     constraints: BoxConstraints(
-                      minHeight: card_height,
+                      minHeight: cardHeight,
                     ),
                     // padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
                     // padding: const EdgeInsets.only(top: 14.0, bottom: 14.0, left: 20.0),
@@ -3189,13 +2973,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                       children: <Widget>[
                         Container(
                           constraints: BoxConstraints(
-                            maxHeight: card_height,
+                            maxHeight: cardHeight,
                           ),
-                          margin: EdgeInsetsDirectional.only(start: 20.0),
+                          margin: const EdgeInsetsDirectional.only(start: 20.0),
                           child: Row(
                             children: [
                               Container(
-                                margin: EdgeInsetsDirectional.only(end: 16.0),
+                                margin: const EdgeInsetsDirectional.only(end: 16.0),
                                 child: Icon(
                                   icon,
                                   color: iconColor,
@@ -3222,80 +3006,78 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                           fontWeight: FontWeight.w600,
                                           color: StateContainer.of(context).curTheme.warning60),
                                     ),
-                                    (!txDetails.is_message && !isEmpty(txDetails.amount_raw))
-                                        ? Row(
-                                            children: <Widget>[
-                                              RichText(
-                                                textAlign: TextAlign.start,
-                                                text: TextSpan(
-                                                  text: '',
-                                                  children: [
-                                                    displayCurrencyAmount(
-                                                      context,
-                                                      AppStyles.textStyleTransactionAmount(
-                                                        context,
-                                                        true,
-                                                      ),
-                                                      includeSymbol: true,
-                                                    ),
-                                                  ],
+                                    if (!txDetails.is_message && !isEmpty(txDetails.amount_raw))
+                                      Row(
+                                        children: <Widget>[
+                                          RichText(
+                                            textAlign: TextAlign.start,
+                                            text: TextSpan(
+                                              text: '',
+                                              children: [
+                                                displayCurrencyAmount(
+                                                  context,
+                                                  AppStyles.textStyleTransactionAmount(
+                                                    context,
+                                                    true,
+                                                  ),
+                                                  includeSymbol: true,
                                                 ),
-                                              ),
-                                              SubstringHighlight(
-                                                  caseSensitive: false,
-                                                  words: false,
-                                                  term: _searchController.text,
-                                                  text: getRawAsThemeAwareAmount(context, txDetails.amount_raw),
-                                                  textAlign: TextAlign.start,
-                                                  textStyle: AppStyles.textStyleTransactionAmount(context),
-                                                  textStyleHighlight: TextStyle(
-                                                      fontFamily: "NunitoSans",
-                                                      color: StateContainer.of(context).curTheme.warning60,
-                                                      fontSize: AppFontSizes.smallest,
-                                                      fontWeight: FontWeight.w600)),
-                                            ],
-                                          )
-                                        : SizedBox(),
+                                              ],
+                                            ),
+                                          ),
+                                          SubstringHighlight(
+                                              caseSensitive: false,
+                                              words: false,
+                                              term: _searchController.text,
+                                              text: getRawAsThemeAwareAmount(context, txDetails.amount_raw),
+                                              textAlign: TextAlign.start,
+                                              textStyle: AppStyles.textStyleTransactionAmount(context),
+                                              textStyleHighlight: TextStyle(
+                                                  fontFamily: "NunitoSans",
+                                                  color: StateContainer.of(context).curTheme.warning60,
+                                                  fontSize: AppFontSizes.smallest,
+                                                  fontWeight: FontWeight.w600)),
+                                        ],
+                                      ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        (txDetails.memo != null)
-                            ? Expanded(
-                                // constraints: BoxConstraints(maxWidth: 105),
-                                // width: MediaQuery.of(context).size.width / 4.3,
-                                // constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 4),
-                                // padding: EdgeInsets.only(left: 10, right: 10),
-                                // child: Text(
-                                //   txDetails.memo,
-                                //   textAlign: TextAlign.start,
-                                //   style: AppStyles.textStyleTransactionMemo(context),
-                                //   maxLines: 16,
-                                //   overflow: TextOverflow.visible,
-                                // ),
-                                child: SubstringHighlight(
-                                    caseSensitive: false,
-                                    maxLines: 16,
-                                    term: _searchController.text,
-                                    text: txDetails.memo!,
-                                    textAlign: TextAlign.center,
-                                    textStyle: AppStyles.textStyleTransactionMemo(context),
-                                    textStyleHighlight: TextStyle(
-                                      fontSize: AppFontSizes.smallest,
-                                      fontFamily: 'OverpassMono',
-                                      fontWeight: FontWeight.w100,
-                                      color: StateContainer.of(context).curTheme.warning60,
-                                    ),
-                                    words: false),
-                              )
-                            : SizedBox(),
+                        if (txDetails.memo != null)
+                          Expanded(
+                            // constraints: BoxConstraints(maxWidth: 105),
+                            // width: MediaQuery.of(context).size.width / 4.3,
+                            // constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 4),
+                            // padding: EdgeInsets.only(left: 10, right: 10),
+                            // child: Text(
+                            //   txDetails.memo,
+                            //   textAlign: TextAlign.start,
+                            //   style: AppStyles.textStyleTransactionMemo(context),
+                            //   maxLines: 16,
+                            //   overflow: TextOverflow.visible,
+                            // ),
+                            child: SubstringHighlight(
+                                caseSensitive: false,
+                                maxLines: 16,
+                                term: _searchController.text,
+                                text: txDetails.memo!,
+                                textAlign: TextAlign.center,
+                                textStyle: AppStyles.textStyleTransactionMemo(context),
+                                textStyleHighlight: TextStyle(
+                                  fontSize: AppFontSizes.smallest,
+                                  fontFamily: 'OverpassMono',
+                                  fontWeight: FontWeight.w100,
+                                  color: StateContainer.of(context).curTheme.warning60,
+                                ),
+                                words: false),
+                          ),
                         Container(
                           // width: MediaQuery.of(context).size.width / 4.0,
-                          constraints: BoxConstraints(maxHeight: card_height),
+                          constraints: BoxConstraints(maxHeight: cardHeight),
 
-                          margin: EdgeInsetsDirectional.only(end: 20.0),
+                          margin: const EdgeInsetsDirectional.only(end: 20.0),
 
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -3317,37 +3099,34 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                   words: false),
 
                               // TRANSACTION STATE TAG
-                              (transactionState != null)
-                                  ? Container(
-                                      margin: EdgeInsetsDirectional.only(
-                                          // top: 10,
-                                          ),
-                                      child: TransactionStateTag(transactionState: transactionState),
-                                    )
-                                  : SizedBox(),
-
-                              (txDetails.request_time != null)
-                                  ? Container(
-                                      child: SubstringHighlight(
-                                        caseSensitive: false,
-                                        words: false,
-                                        term: _searchController.text,
-                                        text: DateFormat(CARD_TIME_FORMAT).format(
-                                            DateTime.fromMillisecondsSinceEpoch(txDetails.request_time! * 1000)),
-                                        textAlign: TextAlign.start,
-                                        textStyle: TextStyle(
-                                            fontFamily: "OverpassMono",
-                                            fontSize: AppFontSizes.smallest,
-                                            fontWeight: FontWeight.w600,
-                                            color: StateContainer.of(context).curTheme.text30),
-                                        textStyleHighlight: TextStyle(
-                                            fontFamily: "OverpassMono",
-                                            fontSize: AppFontSizes.smallest,
-                                            fontWeight: FontWeight.w600,
-                                            color: StateContainer.of(context).curTheme.warning30),
+                              if (transactionState != null)
+                                Container(
+                                  margin: const EdgeInsetsDirectional.only(
+                                      // top: 10,
                                       ),
-                                    )
-                                  : SizedBox(),
+                                  child: TransactionStateTag(transactionState: transactionState),
+                                ),
+
+                              if (txDetails.request_time != null)
+                                Container(
+                                  child: SubstringHighlight(
+                                    caseSensitive: false,
+                                    words: false,
+                                    term: _searchController.text,
+                                    text: DateFormat(CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(txDetails.request_time! * 1000)),
+                                    textAlign: TextAlign.start,
+                                    textStyle: TextStyle(
+                                        fontFamily: "OverpassMono",
+                                        fontSize: AppFontSizes.smallest,
+                                        fontWeight: FontWeight.w600,
+                                        color: StateContainer.of(context).curTheme.text30),
+                                    textStyleHighlight: TextStyle(
+                                        fontFamily: "OverpassMono",
+                                        fontSize: AppFontSizes.smallest,
+                                        fontWeight: FontWeight.w600,
+                                        color: StateContainer.of(context).curTheme.warning30),
+                                  ),
+                                ),
                             ],
                           ),
                         ),
@@ -3358,17 +3137,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               ),
             ),
             // handle bars:
-            slideEnabled
-                ? Container(
-                    width: 4,
-                    height: 30,
-                    margin: EdgeInsets.only(right: 22),
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.text,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  )
-                : SizedBox(),
+            if (slideEnabled)
+              Container(
+                width: 4,
+                height: 30,
+                margin: const EdgeInsets.only(right: 22),
+                decoration: BoxDecoration(
+                  color: StateContainer.of(context).curTheme.text,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
           ],
         ),
       ),
@@ -3422,15 +3200,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       localIndex -= 1;
     }
 
-    dynamic indexedItem = _unifiedListMap[StateContainer.of(context).wallet!.address]![localIndex];
-    TXData txDetails = indexedItem is TXData
-        ? indexedItem
-        : convertHistItemToTXData(indexedItem, txDetails: _txDetailsMap[indexedItem.hash]);
-    bool isRecipient = txDetails.isRecipient(StateContainer.of(context).wallet!.address);
+    final dynamic indexedItem = _unifiedListMap[StateContainer.of(context).wallet!.address]![localIndex];
+    final TXData txDetails =
+        indexedItem is TXData ? indexedItem : convertHistItemToTXData(indexedItem as AccountHistoryResponseItem, txDetails: _txDetailsMap[indexedItem.hash]);
+    final bool isRecipient = txDetails.isRecipient(StateContainer.of(context).wallet!.address);
     String displayName = txDetails.getShortestString(isRecipient) ?? "";
 
     // check if there's a username:
-    String account = txDetails.getAccount(isRecipient);
+    final String account = txDetails.getAccount(isRecipient);
     for (User user in _users) {
       if (user.address == account.replaceAll("xrb_", "nano_")) {
         displayName = user.getDisplayName()!;
@@ -3446,19 +3223,17 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (_noSearchResults) {
       return ReactiveRefreshIndicator(
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        onRefresh: _refresh,
+        isRefreshing: _isRefreshing,
         child: ListView(
           controller: _scrollController,
-          padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
           children: <Widget>[
             // REMOTE MESSAGE CARD
-            StateContainer.of(context).activeAlert != null
-                ? _buildRemoteMessageCard(StateContainer.of(context).activeAlert)
-                : SizedBox(),
+            if (StateContainer.of(context).activeAlert != null) _buildRemoteMessageCard(StateContainer.of(context).activeAlert),
             _buildNoSearchResultsCard(context),
           ],
         ),
-        onRefresh: _refresh,
-        isRefreshing: _isRefreshing,
       );
     }
 
@@ -3466,21 +3241,18 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // Setup history list
       if (!_historyListMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
         setState(() {
-          _historyListMap.putIfAbsent(
-              StateContainer.of(context).wallet!.address, () => StateContainer.of(context).wallet!.history);
+          _historyListMap.putIfAbsent(StateContainer.of(context).wallet!.address, () => StateContainer.of(context).wallet!.history);
         });
       }
       // Setup payments list
       if (!_solidsListMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
         setState(() {
-          _solidsListMap.putIfAbsent(
-              StateContainer.of(context).wallet!.address, () => StateContainer.of(context).wallet!.solids);
+          _solidsListMap.putIfAbsent(StateContainer.of(context).wallet!.address, () => StateContainer.of(context).wallet!.solids);
         });
       }
       // Setup unified list
       if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
-        _unifiedListKeyMap.putIfAbsent(
-            "${StateContainer.of(context).wallet!.address}", () => GlobalKey<AnimatedListState>());
+        _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet!.address}", () => GlobalKey<AnimatedListState>());
         setState(() {
           _unifiedListMap.putIfAbsent(
             StateContainer.of(context).wallet!.address,
@@ -3493,15 +3265,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
 
       if (StateContainer.of(context).wallet!.unifiedLoading! ||
-          (_unifiedListMap[StateContainer.of(context).wallet!.address] != null &&
-              _unifiedListMap[StateContainer.of(context).wallet!.address]!.length == 0)) {
+          (_unifiedListMap[StateContainer.of(context).wallet!.address] != null && _unifiedListMap[StateContainer.of(context).wallet!.address]!.length == 0)) {
         generateUnifiedList(fastUpdate: true);
       }
     }
 
-    if (StateContainer.of(context).wallet == null ||
-        StateContainer.of(context).wallet!.loading! ||
-        StateContainer.of(context).wallet!.unifiedLoading!) {
+    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading! || StateContainer.of(context).wallet!.unifiedLoading!) {
       // Loading Animation
       return ReactiveRefreshIndicator(
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -3509,7 +3278,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           isRefreshing: _isRefreshing,
           child: ListView(
             controller: _scrollController,
-            padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
             children: <Widget>[
               _buildLoadingTransactionCard("Sent", "10244000", "123456789121234", context),
               _buildLoadingTransactionCard("Received", "100,00000", "@bbedwards1234", context),
@@ -3523,7 +3292,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
             ],
           ));
-    } else if (StateContainer.of(context).wallet!.history!.length == 0) {
+    } else if (StateContainer.of(context).wallet!.history!.isEmpty) {
       _disposeAnimation();
       return DraggableScrollbar(
         controller: _scrollController,
@@ -3532,14 +3301,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         scrollbarBottomMargin: 20.0,
         child: ReactiveRefreshIndicator(
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          onRefresh: _refresh,
+          isRefreshing: _isRefreshing,
           child: ListView(
             controller: _scrollController,
-            padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
             children: <Widget>[
               // REMOTE MESSAGE CARD
-              StateContainer.of(context).activeAlert != null
-                  ? _buildRemoteMessageCard(StateContainer.of(context).activeAlert)
-                  : SizedBox(),
+              if (StateContainer.of(context).activeAlert != null) _buildRemoteMessageCard(StateContainer.of(context).activeAlert),
               _buildWelcomeTransactionCard(context),
               _buildDummyTXCard(
                 context,
@@ -3592,8 +3361,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               ),
             ],
           ),
-          onRefresh: _refresh,
-          isRefreshing: _isRefreshing,
         ),
       );
     } else {
@@ -3603,8 +3370,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (StateContainer.of(context).activeAlert != null) {
       // Setup history list
       if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet!.address}alert")) {
-        _unifiedListKeyMap.putIfAbsent(
-            "${StateContainer.of(context).wallet!.address}alert", () => GlobalKey<AnimatedListState>());
+        _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet!.address}alert", () => GlobalKey<AnimatedListState>());
         setState(() {
           _unifiedListMap.putIfAbsent(
             StateContainer.of(context).wallet!.address,
@@ -3617,15 +3383,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
       return ReactiveRefreshIndicator(
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        onRefresh: _refresh,
+        isRefreshing: _isRefreshing,
         child: AnimatedList(
           controller: _scrollController,
           key: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address}alert"],
-          padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
           initialItemCount: _unifiedListMap[StateContainer.of(context).wallet!.address]!.length + 1,
           itemBuilder: _buildUnifiedItem,
         ),
-        onRefresh: _refresh,
-        isRefreshing: _isRefreshing,
       );
     }
 
@@ -3642,7 +3408,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           // physics: BouncingScrollPhysics(),// iOS
           controller: _scrollController,
           key: _unifiedListKeyMap[StateContainer.of(context).wallet!.address!],
-          padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
           initialItemCount: _unifiedListMap[StateContainer.of(context).wallet!.address]!.length,
           itemBuilder: _buildUnifiedItem,
         ),
@@ -3655,26 +3421,26 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 /// drop shadow is not clipped.
 ///
 class _SizeTransitionNoClip extends AnimatedWidget {
-  final Widget? child;
-
   const _SizeTransitionNoClip({required Animation<double> sizeFactor, this.child}) : super(listenable: sizeFactor);
+
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    return new Align(
-      alignment: const AlignmentDirectional(-1.0, -1.0),
+    return Align(
+      alignment: AlignmentDirectional.topStart,
       widthFactor: null,
-      heightFactor: (this.listenable as Animation<double>).value,
+      heightFactor: (listenable as Animation<double>).value,
       child: child,
     );
   }
 }
 
 class PaymentDetailsSheet extends StatefulWidget {
+  PaymentDetailsSheet({this.txDetails}) : super();
   final TXData? txDetails;
 
-  PaymentDetailsSheet({this.txDetails}) : super();
-
+  @override
   _PaymentDetailsSheetState createState() => _PaymentDetailsSheetState();
 }
 
@@ -3696,47 +3462,44 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
   Widget build(BuildContext context) {
     // check if recipient of the request
     // also check if the request is fulfilled
-    bool is_unfulfilled_payable_request = false;
-    bool is_unacknowledged_sendable_request = false;
-    bool is_unacknowledged_memo = false;
-    bool resendable_memo = false;
-    bool is_gift_load = false;
-    bool is_gift = false;
+    bool isUnfulfilledPayableRequest = false;
+    bool isUnacknowledgedSendableRequest = false;
+    bool resendableMemo = false;
+    bool isGiftLoad = false;
+    final bool isGift = false;
 
-    var txDetails = widget.txDetails!;
+    final TXData txDetails = widget.txDetails!;
 
-    String? walletAddress = StateContainer.of(context).wallet!.address;
+    final String? walletAddress = StateContainer.of(context).wallet!.address;
 
     if (walletAddress == txDetails.to_address) {
       txDetails.is_acknowledged = true;
     }
 
     if (walletAddress == txDetails.to_address && txDetails.is_request && !txDetails.is_fulfilled) {
-      is_unfulfilled_payable_request = true;
+      isUnfulfilledPayableRequest = true;
     }
     if (walletAddress == txDetails.from_address && txDetails.is_request && !txDetails.is_acknowledged) {
-      is_unacknowledged_sendable_request = true;
+      isUnacknowledgedSendableRequest = true;
     }
 
     if (txDetails.is_memo) {
       if (txDetails.status == StatusTypes.CREATE_FAILED) {
-        resendable_memo = true;
+        resendableMemo = true;
       }
       if (!txDetails.is_acknowledged && txDetails.memo!.isNotEmpty) {
-        is_unacknowledged_memo = true;
-        resendable_memo = true;
+        resendableMemo = true;
       }
     }
 
     String? walletSeed;
     String? sharableLink;
-    // if (widget.is_gift) {}
 
     if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
-      is_gift_load = true;
+      isGiftLoad = true;
 
       // Get the wallet seed by splitting the metadata by :
-      List<String> metadataList = txDetails.metadata!.split(RecordTypes.SEPARATOR);
+      final List<String> metadataList = txDetails.metadata!.split(RecordTypes.SEPARATOR);
       walletSeed = metadataList[0];
       sharableLink = metadataList[1];
     }
@@ -3750,7 +3513,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
       minimum: EdgeInsets.only(
         bottom: MediaQuery.of(context).size.height * 0.035,
       ),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -3764,11 +3527,9 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                         context,
                         // Copy Address Button
                         _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _addressCopied
-                            ? AppLocalization.of(context)!.addressCopied
-                            : AppLocalization.of(context)!.copyAddress,
+                        _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
                         Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                      Clipboard.setData(new ClipboardData(text: addressToCopy));
+                      Clipboard.setData(ClipboardData(text: addressToCopy));
                       if (mounted) {
                         setState(() {
                           // Set copied style
@@ -3778,7 +3539,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                       if (_addressCopiedTimer != null) {
                         _addressCopiedTimer!.cancel();
                       }
-                      _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                      _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
                         if (mounted) {
                           setState(() {
                             _addressCopied = false;
@@ -3791,192 +3552,167 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 // A row for View Details button
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                        AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () async {
                       await UIUtil.showBlockExplorerWebview(context, txDetails.block);
                     }),
                   ],
                 ),
                 // Mark as paid / unpaid button for requests
-                txDetails.is_request
-                    ? Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                              context,
-                              // Share Address Button
-                              AppButtonType.PRIMARY_OUTLINE,
-                              !txDetails.is_fulfilled
-                                  ? AppLocalization.of(context)!.markAsPaid
-                                  : AppLocalization.of(context)!.markAsUnpaid,
-                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                            // update the tx in the db:
-                            if (txDetails.is_fulfilled) {
-                              sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, false);
-                            } else {
-                              sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, true);
-                            }
-                            // setState(() {});
-                            StateContainer.of(context).updateSolids();
-                            Navigator.of(context).pop();
-                          }),
-                        ],
-                      )
-                    : SizedBox(),
+                if (txDetails.is_request)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context,
+                          // Share Address Button
+                          AppButtonType.PRIMARY_OUTLINE,
+                          !txDetails.is_fulfilled ? AppLocalization.of(context)!.markAsPaid : AppLocalization.of(context)!.markAsUnpaid,
+                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                        // update the tx in the db:
+                        if (txDetails.is_fulfilled) {
+                          sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, false);
+                        } else {
+                          sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, true);
+                        }
+                        // setState(() {});
+                        StateContainer.of(context).updateSolids();
+                        Navigator.of(context).pop();
+                      }),
+                    ],
+                  ),
 
                 // pay this request button:
-                is_unfulfilled_payable_request
-                    ? Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                              context,
-                              AppButtonType.PRIMARY_OUTLINE,
-                              AppLocalization.of(context)!.payRequest,
-                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                            Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+                if (isUnfulfilledPayableRequest)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.payRequest, Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                        Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
-                            _AppHomePageState.payTX(context, txDetails);
-                          }),
-                        ],
-                      )
-                    : SizedBox(),
+                        _AppHomePageState.payTX(context, txDetails);
+                      }),
+                    ],
+                  ),
 
                 // block this user from sending you requests:
-                (txDetails.is_request && StateContainer.of(context).wallet!.address != txDetails.from_address)
-                    ? Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                              context,
-                              AppButtonType.PRIMARY_OUTLINE,
-                              AppLocalization.of(context)!.blockUser,
-                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                            Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+                if (txDetails.is_request && StateContainer.of(context).wallet!.address != txDetails.from_address)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.blockUser, Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                        Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
-                            Sheets.showAppHeightNineSheet(
-                                context: context,
-                                widget: AddBlockedSheet(
-                                  address: txDetails.from_address,
-                                ));
-                          }),
-                        ],
-                      )
-                    : SizedBox(),
+                        Sheets.showAppHeightNineSheet(
+                            context: context,
+                            widget: AddBlockedSheet(
+                              address: txDetails.from_address,
+                            ));
+                      }),
+                    ],
+                  ),
 
                 // re-send request button:
-                is_unacknowledged_sendable_request
-                    ? Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                              context,
-                              AppButtonType.PRIMARY_OUTLINE,
-                              AppLocalization.of(context)!.sendRequestAgain,
-                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () async {
-                            // send the request again:
-                            _AppHomePageState.resendRequest(context, txDetails);
-                          }),
-                        ],
-                      )
-                    : SizedBox(),
+                if (isUnacknowledgedSendableRequest)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.sendRequestAgain, Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
+                          onPressed: () async {
+                        // send the request again:
+                        _AppHomePageState.resendRequest(context, txDetails);
+                      }),
+                    ],
+                  ),
                 // re-send memo button
-                (resendable_memo)
-                    ? Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                              context,
-                              // Share Address Button
-                              AppButtonType.PRIMARY_OUTLINE,
-                              AppLocalization.of(context)!.resendMemo,
-                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () async {
-                            _AppHomePageState.resendMemo(context, txDetails);
-                          }),
-                        ],
-                      )
-                    : SizedBox(),
+                if (resendableMemo)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context,
+                          // Share Address Button
+                          AppButtonType.PRIMARY_OUTLINE,
+                          AppLocalization.of(context)!.resendMemo,
+                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () async {
+                        _AppHomePageState.resendMemo(context, txDetails);
+                      }),
+                    ],
+                  ),
                 // delete this request button
-                txDetails.is_request
-                    ? Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                              context,
-                              AppButtonType.PRIMARY_OUTLINE,
-                              AppLocalization.of(context)!.deleteRequest,
-                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                            Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
-                            sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
-                            StateContainer.of(context).updateSolids();
-                          }),
-                        ],
-                      )
-                    : SizedBox(),
-                is_gift_load
-                    ? Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                              context,
-                              // copy link button
-                              _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                              _linkCopied
-                                  ? AppLocalization.of(context)!.linkCopied
-                                  : AppLocalization.of(context)!.copyLink,
-                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                            Clipboard.setData(new ClipboardData(text: sharableLink));
-                            setState(() {
-                              // Set copied style
-                              _linkCopied = true;
-                            });
-                            if (_linkCopiedTimer != null) {
-                              _linkCopiedTimer!.cancel();
-                            }
-                            _linkCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
-                              setState(() {
-                                _linkCopied = false;
-                              });
-                            });
-                          }),
-                        ],
-                      )
-                    : SizedBox(),
-                is_gift_load
-                    ? Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                              context,
-                              // copy seed button
-                              _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                              _seedCopied
-                                  ? AppLocalization.of(context)!.seedCopied
-                                  : AppLocalization.of(context)!.copySeed,
-                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                            Clipboard.setData(new ClipboardData(text: walletSeed));
-                            setState(() {
-                              // Set copied style
-                              _seedCopied = true;
-                            });
-                            if (_seedCopiedTimer != null) {
-                              _seedCopiedTimer!.cancel();
-                            }
-                            _seedCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
-                              setState(() {
-                                _seedCopied = false;
-                              });
-                            });
-                          }),
-                        ],
-                      )
-                    : SizedBox(),
-                is_gift_load
-                    ? Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                              context,
-                              // share link button
-                              AppButtonType.PRIMARY,
-                              AppLocalization.of(context)!.shareLink,
-                              Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                            Share.share(sharableLink!);
-                          }),
-                        ],
-                      )
-                    : SizedBox(),
+                if (txDetails.is_request)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.deleteRequest, Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
+                          onPressed: () {
+                        Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+                        sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
+                        StateContainer.of(context).updateSolids();
+                      }),
+                    ],
+                  ),
+                if (isGiftLoad)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context,
+                          // copy link button
+                          _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                          _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.copyLink,
+                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                        Clipboard.setData(ClipboardData(text: sharableLink));
+                        setState(() {
+                          // Set copied style
+                          _linkCopied = true;
+                        });
+                        if (_linkCopiedTimer != null) {
+                          _linkCopiedTimer!.cancel();
+                        }
+                        _linkCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                          setState(() {
+                            _linkCopied = false;
+                          });
+                        });
+                      }),
+                    ],
+                  ),
+                if (isGiftLoad)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context,
+                          // copy seed button
+                          _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                          _seedCopied ? AppLocalization.of(context)!.seedCopied : AppLocalization.of(context)!.copySeed,
+                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                        Clipboard.setData(ClipboardData(text: walletSeed));
+                        setState(() {
+                          // Set copied style
+                          _seedCopied = true;
+                        });
+                        if (_seedCopiedTimer != null) {
+                          _seedCopiedTimer!.cancel();
+                        }
+                        _seedCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                          setState(() {
+                            _seedCopied = false;
+                          });
+                        });
+                      }),
+                    ],
+                  ),
+                if (isGiftLoad)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context,
+                          // share link button
+                          AppButtonType.PRIMARY,
+                          AppLocalization.of(context)!.shareLink,
+                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                        Share.share(sharableLink!);
+                      }),
+                    ],
+                  ),
               ],
             ),
           ],

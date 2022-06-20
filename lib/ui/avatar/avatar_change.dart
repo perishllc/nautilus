@@ -1,19 +1,19 @@
 import 'dart:convert';
+import 'dart:math' as math;
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/avatar/nonce_response.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'dart:math' as math;
 
 const String NATRICON_ADDRESS = "nano_3natricon9grnc8caqkht19f1fwpz39r3deeyef66m3d4fch3fau7x5q57cj";
 const String NATRICON_BASE_RAW = "1234567891234567891234567891";
@@ -46,7 +46,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
           return;
         }
         try {
-          NonceResponse resp = NonceResponse.fromJson(json.decode(response.body));
+          NonceResponse resp = NonceResponse.fromJson(json.decode(response.body) as Map<String, dynamic>);
           setState(() {
             this.loading = false;
             this.currentNonce = resp.nonce;

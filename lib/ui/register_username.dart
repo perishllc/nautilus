@@ -4,18 +4,18 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/ui/register/register_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 
 import 'send/send_sheet.dart';
@@ -38,7 +38,7 @@ class RegisterUsernameScreen extends StatefulWidget {
 }
 
 class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   FocusNode? _usernameFocusNode;
   TextEditingController? _usernameController;
 
@@ -124,30 +124,30 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
       return Container();
     }
 
-    for (var i = 0; i < _leaseDetails!["plans"].length; i++) {
+    for (int i = 0; i < (_leaseDetails!["plans"] as Map).length; i++) {
       dropdownItems.add(DropdownMenuItem(
         onTap: () => {
           setState(() {
             _usernameValidationText = "";
           })
         },
+        value: "${_leaseDetails!["plans"][i]["name"]}",
         child: Text(
           "${_leaseDetails!["plans"][i]["name"]}",
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),
         ),
-        value: "${_leaseDetails!["plans"][i]["name"]}",
       ));
     }
 
     return Container(
-        margin: EdgeInsetsDirectional.only(end: 25),
+        margin: const EdgeInsetsDirectional.only(end: 25),
         child: DropdownButton(
           value: _leaseSelected,
           items: dropdownItems,
-          onChanged: (dynamic value) {
+          onChanged: (String? value) {
             setState(() {
               _leaseSelected = value;
             });
@@ -173,7 +173,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
     }
 
     // go through the plans to find the one that matches the selected duration:
-    for (var i = 0; i < _leaseDetails!["plans"].length; i++) {
+    for (int i = 0; i < (_leaseDetails!["plans"] as Map).length; i++) {
       if (_leaseDetails!["plans"][i]["name"] == _leaseSelected) {
         _leaseSelectedIndex = i;
         break;
@@ -182,9 +182,9 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
 
     String? price;
     if (_leaseDetails!["plans"][_leaseSelectedIndex]["raw_amount"] != null) {
-      price = _leaseDetails!["plans"][_leaseSelectedIndex]["raw_amount"];
+      price = _leaseDetails!["plans"][_leaseSelectedIndex]["raw_amount"] as String?;
     } else if (_leaseDetails!["plans"][_leaseSelectedIndex]["amount_raw"] != null) {
-      price = _leaseDetails!["plans"][_leaseSelectedIndex]["amount_raw"];
+      price = _leaseDetails!["plans"][_leaseSelectedIndex]["amount_raw"] as String?;
     } else {
       return Container();
     }
@@ -226,14 +226,14 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
       key: _scaffoldKey,
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
-        builder: (context, constraints) => SafeArea(
+        builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
           minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
               //A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
               Expanded(
                 child: KeyboardAvoider(
-                  duration: Duration(milliseconds: 0),
+                  duration: const Duration(milliseconds: 0),
                   autoScroll: true,
                   focusPadding: 40,
                   child: Column(
@@ -241,10 +241,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                     children: <Widget>[
                       Stack(
                         children: <Widget>[
-                          (StateContainer.of(context).wallet!.username == null)
-                              ?
-                              // Back Button
-                              Container(
+                          if (StateContainer.of(context).wallet!.username == null) Container(
                                   alignment: Alignment.centerLeft,
                                   height: 50,
                                   width: 50,
@@ -253,19 +250,18 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                                         primary: StateContainer.of(context).curTheme.text15,
                                         backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                                        padding: EdgeInsets.all(0.0),
+                                        padding: const EdgeInsets.all(0.0),
                                       ),
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
                                       child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
-                                )
-                              : SizedBox(),
+                                ) else const SizedBox(),
 
                           // Safety icon
                           Container(
                             alignment: Alignment.center,
-                            margin: EdgeInsets.only(bottom: 15),
+                            margin: const EdgeInsets.only(bottom: 15),
                             child: Icon(
                               AppIcons.contact,
                               size: 60,
@@ -282,7 +278,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                           top: 10,
                           bottom: 25,
                         ),
-                        alignment: AlignmentDirectional(0, 0),
+                        alignment: AlignmentDirectional.center,
                         child: AutoSizeText(
                           AppLocalization.of(context)!.registerUsernameHeader,
                           style: AppStyles.textStyleHeaderColored(context),
@@ -304,7 +300,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                               stepGranularity: 0.5,
                             ),
                             Container(
-                              margin: EdgeInsetsDirectional.only(top: 15),
+                              margin: const EdgeInsetsDirectional.only(top: 15),
                               child: AutoSizeText(
                                 AppLocalization.of(context)!.usernameWarning,
                                 style: AppStyles.textStyleParagraphPrimary(context),
@@ -317,8 +313,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                         ),
                       ),
 
-                      (StateContainer.of(context).wallet!.username != null)
-                          ? Column(
+                      if (StateContainer.of(context).wallet!.username != null) Column(
                               children: <Widget>[
                                 // The paragraph describing we already have a username:
                                 Container(
@@ -336,10 +331,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                                   ),
                                 ),
                               ],
-                            )
-                          :
-                          // Column for Enter Address container + Enter Address Error container
-                          Column(
+                            ) else Column(
                               children: <Widget>[
                                 Container(
                                   alignment: Alignment.topCenter,
@@ -361,8 +353,8 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
 
                                 // ******* Enter Address Error Container ******* //
                                 Container(
-                                  alignment: AlignmentDirectional(0, 0),
-                                  margin: EdgeInsets.only(top: 20),
+                                  alignment: const AlignmentDirectional(0, 0),
+                                  margin: const EdgeInsets.only(top: 20),
                                   child: Text(_usernameValidationText,
                                       style: TextStyle(
                                         fontSize: 14.0,
@@ -378,17 +370,14 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                   ),
                 ),
               ),
-              (_showRegisterButton)
-                  ? Container(
-                      margin: EdgeInsetsDirectional.only(bottom: 50),
+              if (_showRegisterButton) Container(
+                      margin: const EdgeInsetsDirectional.only(bottom: 50),
                       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
                         getDropdown(),
                         getPrice(),
-                      ]))
-                  : SizedBox(),
-              (StateContainer.of(context).wallet!.username != null)
-                  ? Container(
-                      margin: EdgeInsetsDirectional.only(top: 10),
+                      ])) else const SizedBox(),
+              if (StateContainer.of(context).wallet!.username != null) Container(
+                      margin: const EdgeInsetsDirectional.only(top: 10),
                       child: Row(
                         children: <Widget>[
                           AppButton.buildAppButton(
@@ -403,8 +392,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                           ),
                         ],
                       ),
-                    )
-                  : (!_showRegisterButton)
+                    ) else (!_showRegisterButton)
                       ? // Check availability button
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -454,9 +442,9 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
 
                               String? price;
                               if (_leaseDetails!["plans"][_leaseSelectedIndex]["raw_amount"] != null) {
-                                price = _leaseDetails!["plans"][_leaseSelectedIndex]["raw_amount"];
+                                price = _leaseDetails!["plans"][_leaseSelectedIndex]["raw_amount"] as String?;
                               } else if (_leaseDetails!["plans"][_leaseSelectedIndex]["amount_raw"] != null) {
-                                price = _leaseDetails!["plans"][_leaseSelectedIndex]["amount_raw"];
+                                price = _leaseDetails!["plans"][_leaseSelectedIndex]["amount_raw"] as String?;
                               } else {
                                 return Container();
                               }
@@ -474,12 +462,12 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                                     widget: RegisterConfirmSheet(
                                       // localCurrency: StateContainer.of(context).curCurrency,
                                       // contact: contact,
-                                      destination: _leaseDetails!["plans"][_leaseSelectedIndex]["address"],
+                                      destination: _leaseDetails!["plans"][_leaseSelectedIndex]["address"] as String?,
                                       // quickSendAmount: item.amount,
                                       amountRaw: price,
                                       username: username,
-                                      checkUrl: _leaseDetails!["plans"][_leaseSelectedIndex]["check_url"],
-                                      leaseDuration: _leaseDetails!["plans"][_leaseSelectedIndex]["name"],
+                                      checkUrl: _leaseDetails!["plans"][_leaseSelectedIndex]["check_url"] as String?,
+                                      leaseDuration: _leaseDetails!["plans"][_leaseSelectedIndex]["name"] as String?,
                                     ));
                               }
                             }),
@@ -494,10 +482,10 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
 
   //************ Enter Address Container Method ************//
   //*******************************************************//
-  getEnterAddressContainer() {
+  Widget getEnterAddressContainer() {
     return AppTextField(
         topMargin: MediaQuery.of(context).size.height * 0.05,
-        padding: _usernameValidAndUnfocused ? EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+        padding: _usernameValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
         textAlign: TextAlign.center,
         focusNode: _usernameFocusNode,
         controller: _usernameController,
@@ -513,7 +501,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
             : _usernameStyle == AddressStyle.TEXT90
                 ? AppStyles.textStyleAddressText90(context)
                 : AppStyles.textStyleAddressPrimary(context),
-        onChanged: (text) {
+        onChanged: (String text) {
           bool? isUser = text.startsWith("@");
           bool? isFavorite = text.startsWith("★");
           bool? isNano = text.startsWith("nano_");
@@ -525,7 +513,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
             _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
           }
 
-          if (text.length > 0) {
+          if (text.isNotEmpty) {
             //   setState(() {
             //     _showContactButton = false;
             //   });
@@ -535,14 +523,14 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
             //   });
           }
           // add the @ back in:
-          if (text.length > 0 && !isUser! && !isNano! && !isFavorite!) {
+          if (text.isNotEmpty && !isUser && !isNano && !isFavorite) {
             // add @ to the beginning of the string:
-            _usernameController!.text = "@" + text;
+            _usernameController!.text = "@$text";
             _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
             isUser = true;
           }
 
-          if (text.length > 0 && text.startsWith("@nano_")) {
+          if (text.isNotEmpty && text.startsWith("@nano_")) {
             setState(() {
               // remove the @ from the beginning of the string:
               _usernameController!.text = text.replaceFirst("@nano_", "nano_");
@@ -594,7 +582,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                   setState(() {
                     _usernameValidAndUnfocused = false;
                   });
-                  Future.delayed(Duration(milliseconds: 50), () {
+                  Future.delayed(const Duration(milliseconds: 50), () {
                     FocusScope.of(context).requestFocus(_usernameFocusNode);
                   });
                 },

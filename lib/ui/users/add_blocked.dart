@@ -1,25 +1,25 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:event_taxi/event_taxi.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/blocked_added_event.dart';
 import 'package:nautilus_wallet_flutter/bus/blocked_modified_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/address.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/model/address.dart';
-import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class AddBlockedSheet extends StatefulWidget {
@@ -46,7 +46,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
   String? _correspondingUsername;
   String? _correspondingAddress;
   AddressStyle? _addressStyle;
-  late List<dynamic> _users;
+  late List<User> _users;
   // Set to true when a username is being entered
   bool _isUser = false;
 
@@ -54,15 +54,15 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
   void initState() {
     super.initState();
     // Text field initialization
-    this._nameFocusNode = FocusNode();
-    this._addressFocusNode = FocusNode();
-    this._nameController = TextEditingController();
-    this._addressController = TextEditingController();
+    _nameFocusNode = FocusNode();
+    _addressFocusNode = FocusNode();
+    _nameController = TextEditingController();
+    _addressController = TextEditingController();
     // State initializationrue;
-    this._addressValid = false;
-    this._pasteButtonVisible = true;
-    this._addressValidAndUnfocused = false;
-    this._addressValidationText = "";
+    _addressValid = false;
+    _pasteButtonVisible = true;
+    _addressValidAndUnfocused = false;
+    _addressValidationText = "";
     _users = [];
     // Add focus listeners
     // On address focus change
@@ -75,20 +75,20 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           _addressStyle = AddressStyle.TEXT60;
         });
         _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-        if (_addressController!.text.length > 0 && !_addressController!.text.startsWith("nano_")) {
-          String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
+        if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith("nano_")) {
+          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           if (_addressController!.text != formattedAddress) {
             setState(() {
               _addressController!.text = formattedAddress;
             });
           }
-          var userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
+          final List<User> userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
           setState(() {
             _users = userList;
           });
         }
 
-        if (_addressController!.text.length == 0) {
+        if (_addressController!.text.isEmpty) {
           setState(() {
             _users = [];
           });
@@ -100,15 +100,15 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           if (Address(_addressController!.text).isValid()) {
             _addressValidAndUnfocused = true;
           }
-          if (_addressController!.text.length == 0) {
+          if (_addressController!.text.isEmpty) {
             _pasteButtonVisible = true;
           }
         });
-        if (_addressController!.text.length > 0) {
-          String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
+        if (_addressController!.text.isNotEmpty) {
+          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           String? address;
           String? type;
-          var user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+          final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
           if (user != null) {
             type = user.type;
             if (_addressController!.text != user.getDisplayName()) {
@@ -141,7 +141,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
 
             if (address != null && user == null) {
               // add to the db if missing:
-              User user = new User(username: formattedAddress, address: address, type: type, is_blocked: false);
+              final User user = new User(username: formattedAddress, address: address, type: type, is_blocked: false);
               await sl.get<DBHelper>().addUser(user);
             }
           } else {
@@ -166,7 +166,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
 
   //************ Enter Address Container Method ************//
   //*******************************************************//
-  getEnterAddressContainer() {
+  Widget getEnterAddressContainer() {
     return AppTextField(
       topMargin: 124,
       padding: _addressValidAndUnfocused ? EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
@@ -185,7 +185,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           icon: AppIcons.scan,
           onPressed: () async {
             UIUtil.cancelLockEvent();
-            String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context);
+            final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context);
             if (scanResult == null) {
               UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
             } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
@@ -208,7 +208,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           if (!_pasteButtonVisible!) {
             return;
           }
-          String? data = await UserDataUtil.getClipboardText(DataType.ADDRESS);
+          final String? data = await UserDataUtil.getClipboardText(DataType.ADDRESS);
           if (data != null) {
             setState(() {
               _addressValid = true;
@@ -232,11 +232,11 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           : _addressStyle == AddressStyle.TEXT90
               ? AppStyles.textStyleAddressText90(context)
               : AppStyles.textStyleAddressPrimary(context),
-      onChanged: (text) async {
+      onChanged: (String text) async {
         bool isUser = false;
-        bool? isDomain = text.contains(".");
-        bool? isFavorite = text.startsWith("★");
-        bool isNano = text.startsWith("nano_");
+        final bool isDomain = text.contains(".");
+        final bool isFavorite = text.startsWith("★");
+        final bool isNano = text.startsWith("nano_");
 
         // prevent spaces:
         if (text.contains(" ")) {
@@ -245,7 +245,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         }
 
-        if (text.length > 0) {
+        if (text.isNotEmpty) {
           setState(() {
             if (!_addressValidAndUnfocused) {
               _pasteButtonVisible = true;
@@ -257,32 +257,32 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           });
         }
 
-        if (text.length > 0 && !isUser && !isNano) {
+        if (text.isNotEmpty && !isUser && !isNano) {
           isUser = true;
         }
 
-        if (text.length > 0 && text.startsWith("nano_")) {
+        if (text.isNotEmpty && text.startsWith("nano_")) {
           isUser = false;
         }
 
-        if (text.length > 0 && text.contains(".")) {
+        if (text.isNotEmpty && text.contains(".")) {
           isUser = false;
         }
 
         // check if it's a real nano address:
         // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
-        if (text.length == 0) {
+        if (text.isEmpty) {
           setState(() {
             _isUser = false;
             _users = [];
           });
-        } else if (isFavorite!) {
-          var matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+        } else if (isFavorite) {
+          final List<User> matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
           });
-        } else if (isUser || isDomain!) {
-          var matchedList = await sl.get<DBHelper>().getUserSuggestionsWithUsernameLike(SendSheetHelpers.stripPrefixes(text));
+        } else if (isUser || isDomain) {
+          final List<User> matchedList = await sl.get<DBHelper>().getUserSuggestionsWithUsernameLike(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
           });
@@ -293,7 +293,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           });
         }
         // Always reset the error message to be less annoying
-        if (_addressValidationText.length > 0) {
+        if (_addressValidationText.isNotEmpty) {
           setState(() {
             _addressValidationText = "";
           });
@@ -311,9 +311,9 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           });
         }
 
-        if ((isUser || isFavorite!) != _isUser) {
+        if ((isUser || isFavorite) != _isUser) {
           setState(() {
-            _isUser = isUser || isFavorite!;
+            _isUser = isUser || isFavorite;
           });
         }
       },
@@ -458,7 +458,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                                               shrinkWrap: true,
                                               padding: EdgeInsets.only(bottom: 0, top: 0),
                                               itemCount: _users.length,
-                                              itemBuilder: (context, index) {
+                                              itemBuilder: (BuildContext context, int index) {
                                                 return _buildUserItem(_users[index]);
                                               },
                                             ), // ********* The pop-up Contacts List End ********* //
@@ -509,7 +509,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                         onPressed: () async {
                       if (await validateForm()) {
                         User newBlocked;
-                        String? formAddress = widget.address != null ? widget.address : _addressController!.text;
+                        final String? formAddress = widget.address != null ? widget.address : _addressController!.text;
                         // if we're given an address with corresponding username, just block:
                         if (_correspondingUsername != null) {
                           newBlocked = User(nickname: _correspondingNickname ?? null, address: formAddress, username: _correspondingUsername);
@@ -552,8 +552,8 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
     bool isValid = true;
     // Address Validations
     // Don't validate address if it came pre-filled in
-    String formAddress = widget.address != null ? widget.address! : _addressController!.text;
-    String formattedAddress = SendSheetHelpers.stripPrefixes(formAddress);
+    final String formAddress = widget.address != null ? widget.address! : _addressController!.text;
+    final String formattedAddress = SendSheetHelpers.stripPrefixes(formAddress);
 
     // if (widget.address == null) {
     if (formAddress.isEmpty) {
@@ -572,7 +572,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
       }
 
       _addressFocusNode!.unfocus();
-      bool blockedExists = await sl.get<DBHelper>().blockedExistsWithAddress(formAddress);
+      final bool blockedExists = await sl.get<DBHelper>().blockedExistsWithAddress(formAddress);
       if (blockedExists) {
         isValid = false;
         setState(() {
@@ -580,7 +580,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
         });
       } else {
         // get the corresponding username if it exists:
-        String? username = await sl.get<DBHelper>().getUsernameWithAddress(formAddress);
+        final String? username = await sl.get<DBHelper>().getUsernameWithAddress(formAddress);
         if (username != null) {
           setState(() {
             _correspondingUsername = username;
@@ -589,7 +589,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
       }
     } else {
       // we're dealing with a username:
-      bool blockedExists = await sl.get<DBHelper>().blockedExistsWithUsername(formattedAddress);
+      final bool blockedExists = await sl.get<DBHelper>().blockedExistsWithUsername(formattedAddress);
       if (blockedExists) {
         isValid = false;
         setState(() {
@@ -597,7 +597,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
         });
       } else {
         // check if there's a corresponding address:
-        User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+        final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
         if (user != null) {
           setState(() {
             if (user.address != null) {

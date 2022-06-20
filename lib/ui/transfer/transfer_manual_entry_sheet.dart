@@ -128,7 +128,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                               suffixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController!.text),
                               keyboardType: TextInputType.text,
                               style: seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
-                              onChanged: (text) {
+                              onChanged: (String text) {
                                 // Always reset the error message to be less annoying
                                 setState(() {
                                   hasError = false;

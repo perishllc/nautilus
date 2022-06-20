@@ -3,37 +3,35 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
-import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/generate/generate_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/util/biometrics.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:nautilus_wallet_flutter/util/biometrics.dart';
-import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
-import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:uuid/uuid.dart';
 
 class GenerateConfirmSheet extends StatefulWidget {
@@ -57,7 +55,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
   StreamSubscription<AuthenticatedEvent>? _authSub;
 
   void _registerBus() {
-    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((event) {
+    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((AuthenticatedEvent event) {
       if (event.authType == AUTH_EVENT_TYPE.SEND) {
         _doSend();
       }
@@ -227,11 +225,11 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                           context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         // Authenticate
-                        AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                        bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                        final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                        final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                         if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                           try {
-                            bool authenticated = await sl
+                            final bool authenticated = await sl
                                 .get<BiometricUtil>()
                                 .authenticateWithBiometrics(context, AppLocalization.of(context)!.sendAmountConfirm.replaceAll("%1", amount));
                             if (authenticated) {
@@ -267,7 +265,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
   Future<void> _doSend() async {
     try {
       _showAnimation(context);
-      ProcessResponse resp = await sl.get<AccountService>().requestSend(
+      final ProcessResponse resp = await sl.get<AccountService>().requestSend(
           StateContainer.of(context).wallet!.representative,
           StateContainer.of(context).wallet!.frontier,
           widget.amountRaw,
@@ -279,9 +277,9 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       StateContainer.of(context).wallet!.frontier = resp.hash;
       StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw!);
 
-      String? memo = widget.memo != null ? widget.memo : ""; 
+      final String? memo = widget.memo != null ? widget.memo : ""; 
 
-      BranchUniversalObject buo = BranchUniversalObject(
+      final BranchUniversalObject buo = BranchUniversalObject(
           canonicalIdentifier: 'flutter/branch',
           //canonicalUrl: '',
           title: 'Nautilus Gift Card',
@@ -299,17 +297,17 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
             ..addCustomMetadata('nonce', "")
             ..addCustomMetadata('amount_raw', widget.amountRaw));
 
-      BranchLinkProperties lp = BranchLinkProperties(
+      final BranchLinkProperties lp = BranchLinkProperties(
           //alias: 'flutterplugin', //define link url,
           channel: 'nautilusapp',
           feature: 'gift',
           stage: 'new share');
 
-      BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+      final BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
       if (response.success) {
         // create a local memo object to show the gift card creation details:
-        var uuid = Uuid();
-        var newGiftTXData = new TXData(
+        final Uuid uuid = Uuid();
+        final TXData newGiftTXData = TXData(
           from_address: StateContainer.of(context).wallet!.address,
           to_address: destinationAltered,
           amount_raw: widget.amountRaw,
@@ -317,12 +315,12 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           block: resp.hash,
           record_type: RecordTypes.GIFT_LOAD,
           status: "created",
-          metadata: widget.paperWalletSeed! + RecordTypes.SEPARATOR + response.result,
+          metadata: widget.paperWalletSeed! + RecordTypes.SEPARATOR + (response.result as String),
           is_acknowledged: false,
           is_fulfilled: false,
           is_request: false,
           is_memo: false,
-          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
+          request_time: DateTime.now().millisecondsSinceEpoch ~/ 1000,
           memo: widget.memo,
           height: 0,
         );
@@ -342,7 +340,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
               amountRaw: widget.amountRaw,
               destination: destinationAltered,
               localAmount: widget.localCurrency,
-              sharableLink: response.result,
+              sharableLink: response.result as String,
               walletSeed: widget.paperWalletSeed,
             ));
       } else {
@@ -351,8 +349,8 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         await AppTransferOverviewSheet().startAutoTransfer(context, widget.paperWalletSeed!, StateContainer.of(context).wallet);
 
         // create a local memo object to show the gift card creation details:
-        var uuid = Uuid();
-        var newGiftTXData = new TXData(
+        final Uuid uuid = Uuid();
+        final TXData newGiftTXData = TXData(
           from_address: StateContainer.of(context).wallet!.address,
           to_address: destinationAltered,
           amount_raw: widget.amountRaw,
@@ -365,7 +363,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           is_fulfilled: false,
           is_request: false,
           is_memo: false,
-          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
+          request_time: DateTime.now().millisecondsSinceEpoch ~/ 1000,
           memo: widget.memo,
           height: 0,
         );
@@ -385,8 +383,8 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
 
   Future<void> authenticateWithPin() async {
     // PIN Authentication
-    String? expectedPin = await sl.get<Vault>().getPin();
-    bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    final String? expectedPin = await sl.get<Vault>().getPin();
+    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return new PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,

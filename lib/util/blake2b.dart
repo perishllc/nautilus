@@ -9,8 +9,8 @@
 // v should be a Uint32Array
 import 'dart:typed_data';
 
-ADD64AA(var v, var a, var b) {
-  var o0 = v[a] + v[b];
+Uint32List ADD64AA(Uint32List v, int a, int b) {
+  final o0 = v[a] + v[b];
   var o1 = v[a + 1] + v[b + 1];
   if (o0 >= 0x100000000) {
     o1++;
@@ -23,13 +23,13 @@ ADD64AA(var v, var a, var b) {
 // 64-bit unsigned addition
 // Sets v[a,a+1] += b
 // b0 is the low 32 bits of b, b1 represents the high 32 bits
-ADD64AC(var v, var a, var b0, var b1) {
+Uint32List ADD64AC(Uint32List v, int a, int b0, int b1) {
   var o0 = v[a] + b0;
-  if (b0 < 0) {
+  if (b0 < 0 as bool) {
     o0 += 0x100000000;
   }
   var o1 = v[a + 1] + b1;
-  if (o0 >= 0x100000000) {
+  if (o0 >= 0x100000000 as bool) {
     o1++;
   }
   v[a] = o0;
@@ -44,18 +44,19 @@ B2B_GET32(var arr, var i) {
 
 // G Mixing function
 // The ROTRs are inlined for speed
-B2B_G(var a, var b, var c, var d, var ix, var iy) {
-  var x0 = m[ix];
-  var x1 = m[ix + 1];
-  var y0 = m[iy];
-  var y1 = m[iy + 1];
+// B2B_G(var a, var b, var c, var d, var ix, var iy) {
+B2B_G(int a, int b, int c, int d, int ix, int iy) {
+  final int x0 = m[ix];
+  final int x1 = m[ix + 1];
+  final int y0 = m[iy];
+  final int y1 = m[iy + 1];
 
   v = ADD64AA(v, a, b); // v[a,a+1] += v[b,b+1] ... in JS we must store a uint64 as two uint32s
   v = ADD64AC(v, a, x0, x1); // v[a, a+1] += x ... x0 is the low 32 bits of x, x1 is the high 32 bits
 
   // v[d,d+1] = (v[d,d+1] xor v[a,a+1]) rotated to the right by 32 bits
-  var xor0 = v[d] ^ v[a];
-  var xor1 = v[d + 1] ^ v[a + 1];
+  int xor0 = v[d] ^ v[a];
+  int xor1 = v[d + 1] ^ v[a + 1];
   v[d] = xor1;
   v[d + 1] = xor0;
 
@@ -92,7 +93,7 @@ B2B_G(var a, var b, var c, var d, var ix, var iy) {
 }
 
 // Initialization Vector
-var BLAKE2B_IV32 = new Uint32List.fromList([
+Uint32List BLAKE2B_IV32 = Uint32List.fromList([
   0xf3bcc908,
   0x6a09e667,
   0x84caa73b,
@@ -111,7 +112,7 @@ var BLAKE2B_IV32 = new Uint32List.fromList([
   0x5be0cd19
 ]);
 
-var SIGMA8 = [
+List<int> SIGMA8 = [
   0,
   1,
   2,
@@ -319,7 +320,7 @@ var SIGMA8 = [
 // }).toList());
 // var SIGMA82 = SIGMA8.map((e) => e * 2).toList();
 
-var SIGMA82 = Uint8List.fromList([
+Uint8List SIGMA82 = Uint8List.fromList([
   0,
   2,
   4,
@@ -516,32 +517,32 @@ var SIGMA82 = Uint8List.fromList([
 
 // Compression function. 'last' flag indicates last block.
 // Note we're representing 16 uint64s as 32 uint32s
-var v = new Uint32List(32);
-var m = new Uint32List(32);
+Uint32List v = Uint32List(32);
+Uint32List m = Uint32List(32);
 blake2bCompress(ctx, last) {
-  var i = 0;
+  int i = 0;
 
   // init work variables
   for (i = 0; i < 16; i++) {
-    v[i] = ctx["h"][i];
+    v[i] = ctx["h"][i] as int;
     v[i + 16] = BLAKE2B_IV32[i];
   }
 
   // low 64 bits of offset
-  v[24] = v[24] ^ ctx["t"];
+  v[24] = v[24] ^ (ctx["t"] as int);
   // v[25] = v[25] ^ (ctx["t"] / 0x100000000);
-  v[25] = v[25] ^ (ctx["t"] / 0x100000000).toInt();
+  v[25] = v[25] ^ ((ctx["t"] / 0x100000000).toInt() as int);
   // high 64 bits not supported, offset may not be higher than 2**53-1
 
   // last block flag set ?
-  if (last) {
+  if (last as bool) {
     v[28] = ~v[28];
     v[29] = ~v[29];
   }
 
   // get little-endian words
   for (i = 0; i < 32; i++) {
-    m[i] = B2B_GET32(ctx["b"], 4 * i);
+    m[i] = B2B_GET32(ctx["b"], 4 * i) as int;
   }
 
   // twelve rounds of mixing
@@ -568,7 +569,7 @@ blake2bCompress(ctx, last) {
 }
 
 // reusable parameterBlock
-var parameterBlock = Uint8List.fromList([
+Uint8List parameterBlock = Uint8List.fromList([
   0,
   0,
   0,
@@ -640,7 +641,7 @@ var parameterBlock = Uint8List.fromList([
 // Takes an optional Uint8Array key
 // Takes an optinal Uint8Array salt
 // Takes an optinal Uint8Array personal
-blake2bInit(var outlen, [var key, var salt, var personal]) {
+blake2bInit(int outlen, [Uint8List? key, Uint8List? salt, Uint8List? personal]) {
   // if (outlen === 0 || outlen > 64) {
   //   throw new Error('Illegal output length, expected 0 < length <= 64');
   // }
@@ -655,9 +656,9 @@ blake2bInit(var outlen, [var key, var salt, var personal]) {
   // }
 
   // state, 'param block'
-  var ctx = {
-    "b": new Uint8List(128),
-    "h": new Uint32List(16),
+  final Map<String, dynamic> ctx = {
+    "b": Uint8List(128),
+    "h": Uint32List(16),
     "t": 0, // input count
     "c": 0, // pointer within buffer
     "outlen": outlen // output length in bytes
@@ -665,7 +666,7 @@ blake2bInit(var outlen, [var key, var salt, var personal]) {
 
   // initialize parameterBlock before usage
   // parameterBlock.fill(0);
-  for (var i = 0; i < parameterBlock.length; i++) {
+  for (int i = 0; i < parameterBlock.length; i++) {
     parameterBlock[i] = 0;
   }
   parameterBlock[0] = outlen;
@@ -678,8 +679,8 @@ blake2bInit(var outlen, [var key, var salt, var personal]) {
   // if (personal) parameterBlock.set(personal, 48);
 
   // initialize hash state
-  for (var i = 0; i < 16; i++) {
-    ctx["h"][i] = BLAKE2B_IV32[i] ^ B2B_GET32(parameterBlock, i * 4);
+  for (int i = 0; i < 16; i++) {
+    ctx["h"][i] = BLAKE2B_IV32[i] ^ (B2B_GET32(parameterBlock, i * 4) as int);
   }
 
   // key the hash, if applicable
@@ -694,8 +695,8 @@ blake2bInit(var outlen, [var key, var salt, var personal]) {
 
 // Updates a BLAKE2b streaming hash
 // Requires hash context and Uint8Array (byte array)
-blake2bUpdate(ctx, input) {
-  for (var i = 0; i < input.length; i++) {
+blake2bUpdate(ctx, Uint8List input) {
+  for (int i = 0; i < input.length; i++) {
     if (ctx["c"] == 128) {
       // buffer full ?
       ctx["t"] += ctx.c; // add counters
@@ -711,16 +712,16 @@ blake2bUpdate(ctx, input) {
 Uint8List blake2bFinal(ctx) {
   ctx["t"] += ctx["c"]; // mark last block offset
 
-  while (ctx["c"] < 128) {
+  while (ctx["c"] < 128 as bool) {
     // fill up with zeros
     ctx["b"][ctx["c"]++] = 0;
   }
   blake2bCompress(ctx, true); // final block flag = 1
 
   // little endian convert and store
-  Uint8List out = new Uint8List(ctx["outlen"]);
-  for (var i = 0; i < ctx["outlen"]; i++) {
-    out[i] = ctx["h"][i >> 2] >> (8 * (i & 3));
+  final Uint8List out = Uint8List(ctx["outlen"] as int);
+  for (int i = 0; i < (ctx["outlen"] as num); i++) {
+    out[i] = ctx["h"][i >> 2] >> (8 * (i & 3)) as int;
   }
   return out;
 }
@@ -735,7 +736,7 @@ Uint8List blake2bFinal(ctx) {
 // - outlen - optional output length in bytes, default 64
 // - salt - optional salt bytes, string, Buffer or Uint8Array
 // - personal - optional personal bytes, string, Buffer or Uint8Array
-Uint8List blake2b(input, [key, outlen, salt, personal]) {
+Uint8List blake2b(Uint8List input, [Uint8List? key, int? outlen, Uint8List? salt, Uint8List? personal]) {
   // preprocess inputs
   // outlen = outlen || 64;
   outlen = 64;
@@ -748,7 +749,7 @@ Uint8List blake2b(input, [key, outlen, salt, personal]) {
   // }
 
   // do the math
-  var ctx = blake2bInit(outlen, key, salt, personal);
+  final ctx = blake2bInit(outlen, key, salt, personal);
   blake2bUpdate(ctx, input);
   return blake2bFinal(ctx);
 }
@@ -763,8 +764,8 @@ Uint8List blake2b(input, [key, outlen, salt, personal]) {
 // - outlen - optional output length in bytes, default 64
 // - salt - optional salt bytes, string, Buffer or Uint8Array
 // - personal - optional personal bytes, string, Buffer or Uint8Array
-blake2bHex(input, key, outlen, salt, personal) {
-  var output = blake2b(input, key, outlen, salt, personal);
+blake2bHex(Uint8List input, Uint8List key, int outlen, Uint8List salt, Uint8List personal) {
+  final Uint8List output = blake2b(input, key, outlen, salt, personal);
   // return util.toHex(output);
   return output;
 }

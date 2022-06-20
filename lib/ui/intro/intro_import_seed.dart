@@ -140,8 +140,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                               focusPadding: 40,
                               child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
                                 // The text field for the seed
-                                _seedMode
-                                    ? AppTextField(
+                                if (_seedMode) AppTextField(
                                         leftMargin: smallScreen(context) ? 30 : 40,
                                         rightMargin: smallScreen(context) ? 30 : 40,
                                         topMargin: 20,
@@ -160,7 +159,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                             // Scan QR for seed
                                             UIUtil.cancelLockEvent();
                                             BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme TODO:*/).then((res) {
-                                              var result = res.rawContent;
+                                              final result = res.rawContent;
                                               if (NanoSeeds.isValidSeed(result)) {
                                                 _seedInputController.text = result;
                                                 setState(() {
@@ -214,7 +213,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                         suffixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController.text),
                                         keyboardType: TextInputType.text,
                                         style: _seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
-                                        onChanged: (text) {
+                                        onChanged: (String text) {
                                           // Always reset the error message to be less annoying
                                           setState(() {
                                             _showSeedError = false;
@@ -230,9 +229,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                               _seedIsValid = false;
                                             });
                                           }
-                                        })
-                                    : // Mnemonic mode
-                                    AppTextField(
+                                        }) else AppTextField(
                                         leftMargin: smallScreen(context) ? 30 : 40,
                                         rightMargin: smallScreen(context) ? 30 : 40,
                                         topMargin: 20,
@@ -255,7 +252,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                             // Scan QR for mnemonic
                                             UIUtil.cancelLockEvent();
                                             BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((res) {
-                                              var result = res.rawContent;
+                                              final result = res.rawContent;
                                               if (NanoMnemomics.validateMnemonic(result.split(' '))) {
                                                 _mnemonicController.text = result;
                                                 setState(() {
@@ -309,7 +306,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                         suffixShowFirstCondition: !NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' ')),
                                         keyboardType: TextInputType.text,
                                         style: _mnemonicIsValid ? AppStyles.textStyleParagraphPrimary(context) : AppStyles.textStyleParagraph(context),
-                                        onChanged: (text) {
+                                        onChanged: (String text) {
                                           if (text.length < 3) {
                                             setState(() {
                                               _mnemonicError = null;
@@ -338,9 +335,9 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                               if (lastSpaceIndex == -1) {
                                                 lastSpaceIndex = 0;
                                               } else {
-                                                lastSpaceIndex = lastSpaceIndex! + 1;
+                                                lastSpaceIndex = lastSpaceIndex + 1;
                                               }
-                                              String lastWord = text.substring(lastSpaceIndex, text.length - 1);
+                                              final String lastWord = text.substring(lastSpaceIndex, text.length - 1);
                                               if (!NanoMnemomics.isValidWord(lastWord)) {
                                                 setState(() {
                                                   _mnemonicIsValid = false;
