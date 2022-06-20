@@ -1,75 +1,74 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:event_taxi/event_taxi.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/blocked_modified_event.dart';
+import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
-import 'package:nautilus_wallet_flutter/model/db/account.dart';
-import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
-import 'package:nautilus_wallet_flutter/network/account_service.dart';
-import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
-import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
-import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
-import 'package:nautilus_wallet_flutter/model/list_model.dart';
-import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:nautilus_wallet_flutter/model/list_model.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
+import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
+import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/ui/contacts/add_contact.dart';
-import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_drawer.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/users/add_blocked.dart';
+import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/reactive_refresh.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/transaction_state_tag.dart';
 import 'package:nautilus_wallet_flutter/util/box.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:nautilus_wallet_flutter/bus/events.dart';
-import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:quiver/strings.dart';
 import 'package:rate_my_app/rate_my_app.dart';
+import 'package:searchbar_animation/searchbar_animation.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart';
-import 'package:searchbar_animation/searchbar_animation.dart';
 import 'package:substring_highlight/substring_highlight.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
+import 'package:uuid/uuid.dart';
 
 class AppHomePage extends StatefulWidget {
   AppHomePage({this.priceConversion}) : super();
@@ -96,24 +95,21 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
-  // final Map<String, GlobalKey<AnimatedListState>> _historyListKeyMap = Map();
-  // final Map<String, ListModel<AccountHistoryResponseItem>> _historyListMap = Map();
-  // final Map<String, ListModel<AccountHistoryResponseItem>> _historyListMap = Map();
-  final Map<String?, List<AccountHistoryResponseItem>?> _historyListMap = Map();
+  final Map<String?, List<AccountHistoryResponseItem>?> _historyListMap = {};
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
-  // final Map<String, GlobalKey<AnimatedListState>> _requestsListKeyMap = Map();
-  // final Map<String, ListModel<TXData>> _paymentsListMap = Map();
-  final Map<String?, List<TXData>?> _solidsListMap = Map();
+  // final Map<String, GlobalKey<AnimatedListState>> _requestsListKeyMap = {};
+  // final Map<String, ListModel<TXData>> _paymentsListMap = {};
+  final Map<String?, List<TXData>?> _solidsListMap = {};
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
-  final Map<String, GlobalKey<AnimatedListState>> _unifiedListKeyMap = Map();
-  final Map<String?, ListModel<dynamic>> _unifiedListMap = Map();
+  final Map<String, GlobalKey<AnimatedListState>> _unifiedListKeyMap = {};
+  final Map<String?, ListModel<dynamic>> _unifiedListMap = {};
 
   // used to associate memos with blocks so we don't have search on every re-render:
-  final Map<String?, TXData> _txDetailsMap = Map();
+  final Map<String?, TXData> _txDetailsMap = {};
 
   // search bar text controller:
   TextEditingController _searchController = TextEditingController();
@@ -205,7 +201,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  void getNotificationPermissions() async {
+  Future<void> getNotificationPermissions() async {
     try {
       final NotificationSettings settings = await _firebaseMessaging.requestPermission(sound: true, badge: true, alert: true);
       if (settings.alert == AppleNotificationSetting.enabled ||
@@ -661,7 +657,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         for (TXData tx in _txRecords) {
           if (tx.isSolid() && (isEmpty(tx.block) || isEmpty(tx.link))) {
             // set to the last block:
-            final String? lastBlockHash = StateContainer.of(context).wallet!.history!.length > 0 ? StateContainer.of(context).wallet!.history![0].hash : null;
+            final String? lastBlockHash = StateContainer.of(context).wallet!.history!.isNotEmpty ? StateContainer.of(context).wallet!.history![0].hash : null;
             if (isEmpty(tx.block) && StateContainer.of(context).wallet!.address == tx.from_address) {
               tx.block = lastBlockHash;
             }
@@ -734,7 +730,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     });
     _solidsSub = EventTaxiImpl.singleton().registerTo<PaymentsHomeEvent>().listen((PaymentsHomeEvent event) {
       final List<TXData>? newSolids = event.items;
-      if (newSolids == null || newSolids.length == 0 || _solidsListMap[StateContainer.of(context).wallet!.address] == null) {
+      if (newSolids == null || _solidsListMap[StateContainer.of(context).wallet!.address] == null) {
         return;
       }
       setState(() {
@@ -826,7 +822,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // print(_scrollController.position.extentAfter);
     if (_scrollController.position.extentAfter < 500) {
       // check if the oldest item is the initial block:
-      if (_historyListMap[StateContainer.of(context).wallet!.address] != null && _historyListMap[StateContainer.of(context).wallet!.address]!.length > 0) {
+      if (_historyListMap[StateContainer.of(context).wallet!.address] != null && _historyListMap[StateContainer.of(context).wallet!.address]!.isNotEmpty) {
         final List<AccountHistoryResponseItem> histList = _historyListMap[StateContainer.of(context).wallet!.address]!;
 
         // histList[0] is the most recent block with the highest height (120)
@@ -976,7 +972,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   /// Required to do it this way for the animation
   ///
   void updateHistoryList(List<AccountHistoryResponseItem>? newList) {
-    if (newList == null || newList.length == 0 || _historyListMap[StateContainer.of(context).wallet!.address] == null) {
+    if (newList == null || newList.isEmpty || _historyListMap[StateContainer.of(context).wallet!.address] == null) {
       return;
     }
 
@@ -1145,7 +1141,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // don't process change blocks:
     unifiedList = List<dynamic>.from(historyList.where((AccountHistoryResponseItem element) => element.type != BlockTypes.CHANGE).toList());
 
-    final Set uuids = Set();
+    final Set<String?> uuids = {};
     final List<int?> idsToRemove = [];
     for (TXData req in solidsList) {
       if (!uuids.contains(req.uuid)) {
@@ -1167,7 +1163,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
       // if the block is null, give it one:
       if (solidsList[i].block == null) {
-        final String? lastBlockHash = StateContainer.of(context).wallet!.history!.length > 0 ? StateContainer.of(context).wallet!.history![0].hash : null;
+        final String? lastBlockHash = StateContainer.of(context).wallet!.history!.isNotEmpty ? StateContainer.of(context).wallet!.history![0].hash : null;
         solidsList[i].block = lastBlockHash;
         await sl.get<DBHelper>().replaceTXDataByUUID(solidsList[i]);
       }
@@ -1356,7 +1352,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // insert unifiedList into listmap:
     unifiedList.where((item) => !_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.contains(item)).forEach((dynamicItem) {
       int index = unifiedList.indexOf(dynamicItem);
-      if (dynamicItem == null) return;
+      if (dynamicItem == null) {
+        return;
+      }
       index = max(min(index, _unifiedListMap[StateContainer.of(context).wallet!.address]!.length), 0);
       setState(() {
         _unifiedListMap[StateContainer.of(context).wallet!.address]!.insertAt(dynamicItem, index, instant: fastUpdate);
@@ -2952,7 +2950,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 style: TextButton.styleFrom(
                   primary: StateContainer.of(context).curTheme.text15,
                   backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-                  padding: const EdgeInsets.all(0.0),
+                  padding: EdgeInsets.zero,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                 ),
                 onPressed: () {
@@ -2986,61 +2984,57 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                   size: 20,
                                 ),
                               ),
-                              Container(
-                                // constraints: BoxConstraints(maxWidth: /*85*/ 110),
-                                // width: MediaQuery.of(context).size.width / 5,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    SubstringHighlight(
-                                      caseSensitive: false,
-                                      words: false,
-                                      term: _searchController.text,
-                                      text: itemText,
-                                      textAlign: TextAlign.start,
-                                      textStyle: AppStyles.textStyleTransactionType(context),
-                                      textStyleHighlight: TextStyle(
-                                          fontFamily: "NunitoSans",
-                                          fontSize: AppFontSizes.small,
-                                          fontWeight: FontWeight.w600,
-                                          color: StateContainer.of(context).curTheme.warning60),
-                                    ),
-                                    if (!txDetails.is_message && !isEmpty(txDetails.amount_raw))
-                                      Row(
-                                        children: <Widget>[
-                                          RichText(
-                                            textAlign: TextAlign.start,
-                                            text: TextSpan(
-                                              text: '',
-                                              children: [
-                                                displayCurrencyAmount(
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  SubstringHighlight(
+                                    caseSensitive: false,
+                                    words: false,
+                                    term: _searchController.text,
+                                    text: itemText,
+                                    textAlign: TextAlign.start,
+                                    textStyle: AppStyles.textStyleTransactionType(context),
+                                    textStyleHighlight: TextStyle(
+                                        fontFamily: "NunitoSans",
+                                        fontSize: AppFontSizes.small,
+                                        fontWeight: FontWeight.w600,
+                                        color: StateContainer.of(context).curTheme.warning60),
+                                  ),
+                                  if (!txDetails.is_message && !isEmpty(txDetails.amount_raw))
+                                    Row(
+                                      children: <Widget>[
+                                        RichText(
+                                          textAlign: TextAlign.start,
+                                          text: TextSpan(
+                                            text: '',
+                                            children: [
+                                              displayCurrencyAmount(
+                                                context,
+                                                AppStyles.textStyleTransactionAmount(
                                                   context,
-                                                  AppStyles.textStyleTransactionAmount(
-                                                    context,
-                                                    true,
-                                                  ),
-                                                  includeSymbol: true,
+                                                  true,
                                                 ),
-                                              ],
-                                            ),
+                                                includeSymbol: true,
+                                              ),
+                                            ],
                                           ),
-                                          SubstringHighlight(
-                                              caseSensitive: false,
-                                              words: false,
-                                              term: _searchController.text,
-                                              text: getRawAsThemeAwareAmount(context, txDetails.amount_raw),
-                                              textAlign: TextAlign.start,
-                                              textStyle: AppStyles.textStyleTransactionAmount(context),
-                                              textStyleHighlight: TextStyle(
-                                                  fontFamily: "NunitoSans",
-                                                  color: StateContainer.of(context).curTheme.warning60,
-                                                  fontSize: AppFontSizes.smallest,
-                                                  fontWeight: FontWeight.w600)),
-                                        ],
-                                      ),
-                                  ],
-                                ),
+                                        ),
+                                        SubstringHighlight(
+                                            caseSensitive: false,
+                                            words: false,
+                                            term: _searchController.text,
+                                            text: getRawAsThemeAwareAmount(context, txDetails.amount_raw),
+                                            textAlign: TextAlign.start,
+                                            textStyle: AppStyles.textStyleTransactionAmount(context),
+                                            textStyleHighlight: TextStyle(
+                                                fontFamily: "NunitoSans",
+                                                color: StateContainer.of(context).curTheme.warning60,
+                                                fontSize: AppFontSizes.smallest,
+                                                fontWeight: FontWeight.w600)),
+                                      ],
+                                    ),
+                                ],
                               ),
                             ],
                           ),
@@ -3108,24 +3102,22 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                 ),
 
                               if (txDetails.request_time != null)
-                                Container(
-                                  child: SubstringHighlight(
-                                    caseSensitive: false,
-                                    words: false,
-                                    term: _searchController.text,
-                                    text: DateFormat(CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(txDetails.request_time! * 1000)),
-                                    textAlign: TextAlign.start,
-                                    textStyle: TextStyle(
-                                        fontFamily: "OverpassMono",
-                                        fontSize: AppFontSizes.smallest,
-                                        fontWeight: FontWeight.w600,
-                                        color: StateContainer.of(context).curTheme.text30),
-                                    textStyleHighlight: TextStyle(
-                                        fontFamily: "OverpassMono",
-                                        fontSize: AppFontSizes.smallest,
-                                        fontWeight: FontWeight.w600,
-                                        color: StateContainer.of(context).curTheme.warning30),
-                                  ),
+                                SubstringHighlight(
+                                  caseSensitive: false,
+                                  words: false,
+                                  term: _searchController.text,
+                                  text: DateFormat(CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(txDetails.request_time! * 1000)),
+                                  textAlign: TextAlign.start,
+                                  textStyle: TextStyle(
+                                      fontFamily: "OverpassMono",
+                                      fontSize: AppFontSizes.smallest,
+                                      fontWeight: FontWeight.w600,
+                                      color: StateContainer.of(context).curTheme.text30),
+                                  textStyleHighlight: TextStyle(
+                                      fontFamily: "OverpassMono",
+                                      fontSize: AppFontSizes.smallest,
+                                      fontWeight: FontWeight.w600,
+                                      color: StateContainer.of(context).curTheme.warning30),
                                 ),
                             ],
                           ),

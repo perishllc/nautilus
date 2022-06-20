@@ -19,6 +19,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  # uuid:
+  uuid: ^3.0.6
+
   # Securley store data in a keystore
   flutter_secure_storage: ^5.0.2
 

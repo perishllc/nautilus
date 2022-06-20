@@ -15,6 +15,59 @@ import 'package:nautilus_wallet_flutter/model/address.dart';
 
 @JsonSerializable()
 class TXData {
+
+  TXData(
+      {this.from_address,
+      this.to_address,
+      this.amount_raw,
+      this.is_request = false,
+      this.request_time,
+      this.is_fulfilled = false,
+      this.fulfillment_time,
+      this.block,
+      this.link,
+      this.memo_enc,
+      this.is_memo = false,
+      this.is_message = false,
+      this.is_tx = false,
+      this.memo,
+      this.uuid,
+      this.is_acknowledged = false,
+      this.height,
+      this.send_height,
+      this.recv_height,
+      this.record_type,
+      this.sub_type,
+      this.metadata,
+      this.status,
+      int? id});
+
+  factory TXData.fromJson(Map<String, dynamic> json) {
+    return TXData(
+        from_address: json["from_address"] as String?,
+        to_address: json["to_address"] as String?,
+        amount_raw: json["amount_raw"] as String?,
+        is_request: json["is_request"] as bool,
+        request_time: json["request_time"] as int?,
+        is_fulfilled: json["is_fulfilled"] as bool,
+        fulfillment_time: json["fulfillment_time"] as int?,
+        block: json["block"] as String?,
+        link: json["link"] as String?,
+        memo_enc: json["memo_enc"] as String?,
+        is_memo: json["is_memo"] as bool,
+        is_message: json["is_message"] as bool,
+        is_tx: json["is_tx"] as bool,
+        memo: json["memo"] as String?,
+        uuid: json["uuid"] as String?,
+        is_acknowledged: json["is_acknowledged"] as bool,
+        height: json["height"] as int?,
+        send_height: json["send_height"] as int?,
+        recv_height: json["recv_height"] as int?,
+        record_type: json["record_type"] as String?,
+        sub_type: json["sub_type"] as String?,
+        metadata: json["metadata"] as String?,
+        status: json["status"] as String?);
+  }
   @JsonKey(ignore: true)
   int? id;
   @JsonKey(name: 'block')
@@ -64,58 +117,32 @@ class TXData {
   @JsonKey(name: 'status')
   String? status;
 
-  TXData(
-      {this.from_address,
-      this.to_address,
-      this.amount_raw,
-      this.is_request = false,
-      this.request_time,
-      this.is_fulfilled = false,
-      this.fulfillment_time,
-      this.block,
-      this.link,
-      this.memo_enc,
-      this.is_memo = false,
-      this.is_message = false,
-      this.is_tx = false,
-      this.memo,
-      this.uuid,
-      this.is_acknowledged = false,
-      this.height,
-      this.send_height,
-      this.recv_height,
-      this.record_type,
-      this.sub_type,
-      this.metadata,
-      this.status,
-      int? id});
-
   String? getShortString(bool isRecipient) {
     if (isRecipient) {
-      return new Address(this.from_address).getShortString();
+      return Address(from_address).getShortString();
     } else {
-      return new Address(this.to_address).getShortString();
+      return Address(to_address).getShortString();
     }
   }
 
   String? getShorterString(bool isRecipient) {
     if (isRecipient) {
-      return new Address(this.from_address).getShorterString();
+      return Address(from_address).getShorterString();
     } else {
-      return new Address(this.to_address).getShorterString();
+      return Address(to_address).getShorterString();
     }
   }
 
   String? getShortestString(bool isRecipient) {
     if (isRecipient) {
-      return new Address(this.from_address).getShortestString();
+      return Address(from_address).getShortestString();
     } else {
-      return new Address(this.to_address).getShortestString();
+      return Address(to_address).getShortestString();
     }
   }
 
   bool isRecipient(String? address) {
-    return this.to_address == address;
+    return to_address == address;
   }
 
   String getAccount(bool isRecipient) {
@@ -123,38 +150,11 @@ class TXData {
   }
 
   bool isSolid() {
-    return this.is_message || this.is_request || this.is_tx;
+    return is_message || is_request || is_tx;
   }
 
   bool isDeletable() {
-    return this.is_message || this.is_request;
-  }
-
-  factory TXData.fromJson(Map<String, dynamic> json) {
-    return TXData(
-        from_address: json["from_address"] as String?,
-        to_address: json["to_address"] as String?,
-        amount_raw: json["amount_raw"] as String?,
-        is_request: json["is_request"] as bool,
-        request_time: json["request_time"] as int?,
-        is_fulfilled: json["is_fulfilled"] as bool,
-        fulfillment_time: json["fulfillment_time"] as int?,
-        block: json["block"] as String?,
-        link: json["link"] as String?,
-        memo_enc: json["memo_enc"] as String?,
-        is_memo: json["is_memo"] as bool,
-        is_message: json["is_message"] as bool,
-        is_tx: json["is_tx"] as bool,
-        memo: json["memo"] as String?,
-        uuid: json["uuid"] as String?,
-        is_acknowledged: json["is_acknowledged"] as bool,
-        height: json["height"] as int?,
-        send_height: json["send_height"] as int?,
-        recv_height: json["recv_height"] as int?,
-        record_type: json["record_type"] as String?,
-        sub_type: json["sub_type"] as String?,
-        metadata: json["metadata"] as String?,
-        status: json["status"] as String?);
+    return is_message || is_request;
   }
 
   bool operator ==(o) =>

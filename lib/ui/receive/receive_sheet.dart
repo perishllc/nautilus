@@ -1,30 +1,31 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math' as Math;
 import 'dart:typed_data';
 import 'dart:ui' as ui;
-import 'dart:math' as Math;
+
+import 'package:decimal/decimal.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:nautilus_wallet_flutter/ui/receive/share_card.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:quiver/strings.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:intl/intl.dart';
-import 'package:decimal/decimal.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/rendering.dart';
-import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:nautilus_wallet_flutter/ui/receive/share_card.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/util/numberutil.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class NumericalRangeFormatter extends TextInputFormatter {
   final double? min;
@@ -81,9 +82,9 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
 
   Future<Uint8List?> _capturePng() async {
     if (shareCardKey != null && shareCardKey!.currentContext != null) {
-      RenderRepaintBoundary boundary = shareCardKey!.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      ui.Image image = await boundary.toImage(pixelRatio: 5.0);
-      ByteData byteData = (await image.toByteData(format: ui.ImageByteFormat.png))!;
+      final RenderRepaintBoundary boundary = shareCardKey!.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final ui.Image image = await boundary.toImage(pixelRatio: 5.0);
+      final ByteData byteData = (await image.toByteData(format: ui.ImageByteFormat.png))!;
       return byteData.buffer.asUint8List();
     } else {
       return null;
@@ -209,7 +210,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
 
                     // ******* Enter Amount Error Container ******* //
                     Container(
-                      alignment: const AlignmentDirectional(0, 0),
+                      alignment: AlignmentDirectional.center,
                       margin: const EdgeInsets.only(top: 3),
                       child: Text(_amountValidationText,
                           style: TextStyle(
@@ -227,23 +228,21 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                   child: Padding(
                     padding: const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
                     child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-                      double availableWidth = constraints.maxWidth;
-                      double availableHeight = (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
-                      double widthDivideFactor = 1.3;
-                      double computedMaxSize = Math.min(availableWidth / widthDivideFactor, availableHeight);
+                      final double availableWidth = constraints.maxWidth;
+                      final double availableHeight = (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
+                      final double widthDivideFactor = 1.3;
+                      final double computedMaxSize = Math.min(availableWidth / widthDivideFactor, availableHeight);
                       return Center(
                         child: Stack(
                           children: <Widget>[
-                            _showShareCard!
-                                ? Container(
+                            if (_showShareCard!) Container(
                                     child: AppShareCard(
                                       shareCardKey,
                                       SvgPicture.asset('legacy_assets/QR.svg'),
                                       SvgPicture.asset('legacy_assets/sharecard_logo.svg'),
                                     ),
                                     alignment: const AlignmentDirectional(0.0, 0.0),
-                                  )
-                                : const SizedBox(),
+                                  ),
                             // This is for hiding the share card
                             Center(
                               child: Container(
@@ -357,14 +356,14 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             AppLocalization.of(context)!.addressShare,
                             Dimens.BUTTON_BOTTOM_DIMENS,
                             disabled: _showShareCard, onPressed: () {
-                          String receiveCardFileName = "share_${StateContainer.of(context).wallet!.address}.png";
+                          final String receiveCardFileName = "share_${StateContainer.of(context).wallet!.address}.png";
                           getApplicationDocumentsDirectory().then((Directory directory) {
-                            String filePath = "${directory.path}/$receiveCardFileName";
-                            File f = File(filePath);
+                            final String filePath = "${directory.path}/$receiveCardFileName";
+                            final File f = File(filePath);
                             setState(() {
                               _showShareCard = true;
                             });
-                            Future.delayed(new Duration(milliseconds: 50), () {
+                            Future.delayed(const Duration(milliseconds: 50), () {
                               if (_showShareCard!) {
                                 _capturePng().then((Uint8List? byteData) {
                                   if (byteData != null) {
@@ -419,8 +418,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     if (convertedAmt.isEmpty) {
       return "";
     }
-    Decimal valueLocal = Decimal.parse(convertedAmt);
-    Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
+    final Decimal valueLocal = Decimal.parse(convertedAmt);
+    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     return NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal()).toString();
   }
 
@@ -429,8 +428,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     if (convertedAmt.isEmpty) {
       return "";
     }
-    Decimal valueCrypto = Decimal.parse(convertedAmt);
-    Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
+    final Decimal valueCrypto = Decimal.parse(convertedAmt);
+    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     convertedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2).toString();
     convertedAmt = convertedAmt.replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
     convertedAmt = _localCurrencyFormat!.currencySymbol + convertedAmt;
@@ -502,7 +501,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       data = "nano:" + address!;
     }
 
-    QrPainter painter = QrPainter(
+    final QrPainter painter = QrPainter(
       data: data,
       version: 9,
       gapless: false,
@@ -510,7 +509,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     );
     painter.toImageData(MediaQuery.of(context).size.width).then((ByteData? byteData) {
       setState(() {
-        qrWidget = Container(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List()));
+        qrWidget = SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List()));
       });
     });
   }
@@ -532,10 +531,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       inputFormatters: _rawAmount == null
           ? [
               LengthLimitingTextInputFormatter(13),
-              _localCurrencyMode
-                  ? CurrencyFormatter(
-                      decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP, maxDecimalDigits: 2)
-                  : CurrencyFormatter(maxDecimalDigits: NumberUtil.maxDecimalDigits),
+              if (_localCurrencyMode) CurrencyFormatter(
+                      decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP, maxDecimalDigits: 2) else CurrencyFormatter(maxDecimalDigits: NumberUtil.maxDecimalDigits),
               LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
             ]
           : [LengthLimitingTextInputFormatter(13)],

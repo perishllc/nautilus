@@ -524,8 +524,8 @@ class AccountService {
   }
 
   // request money from an account:
-  /*Future<PaymentResponse> */ Future<void> requestPayment(String? account, String? amountRaw, String? requestingAccount, String requestSignature,
-      String requestNonce, String? memoEnc, String localUuid) async {
+  /*Future<PaymentResponse> */ Future<void> requestPayment(
+      String? account, String? amountRaw, String? requestingAccount, String requestSignature, String requestNonce, String? memoEnc, String localUuid) async {
     final PaymentRequest request = PaymentRequest(
         account: account,
         amount_raw: amountRaw,
@@ -559,8 +559,7 @@ class AccountService {
     }
   }
 
-  Future<void> sendTXMessage(
-      String? account, String? requestingAccount, String requestSignature, String requestNonce, String memoEnc, String localUuid) async {
+  Future<void> sendTXMessage(String? account, String? requestingAccount, String requestSignature, String requestNonce, String memoEnc, String localUuid) async {
     final PaymentMessage request = PaymentMessage(
         account: account,
         requesting_account: requestingAccount,
@@ -684,7 +683,7 @@ class AccountService {
     final http.Response response = await http.get(Uri.parse(_SERVER_ADDRESS_ALERTS + "/" + lang), headers: {"Accept": "application/json"});
     if (response.statusCode == 200) {
       List<AlertResponseItem> alerts;
-      alerts = (json.decode(response.body) as List).map((i) => AlertResponseItem.fromJson(i)).toList();
+      alerts = (json.decode(response.body) as List).map((i) => AlertResponseItem.fromJson(i as Map<String, dynamic>)).toList();
       if (alerts.isNotEmpty) {
         if (alerts[0].active!) {
           return alerts[0];

@@ -1,44 +1,45 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
-import 'package:nautilus_wallet_flutter/firebase_options.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/firebase_options.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/model/available_language.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/avatar/avatar.dart';
 import 'package:nautilus_wallet_flutter/ui/avatar/avatar_change.dart';
 import 'package:nautilus_wallet_flutter/ui/before_scan_screen.dart';
+import 'package:nautilus_wallet_flutter/ui/generate_paper_wallet.dart';
+import 'package:nautilus_wallet_flutter/ui/home_page.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_confirm.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_safety.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_seed.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_import_seed.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_password.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_password_on_launch.dart';
-import 'package:nautilus_wallet_flutter/ui/password_lock_screen.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
-import 'package:nautilus_wallet_flutter/ui/register_username.dart';
-import 'package:nautilus_wallet_flutter/ui/purchase_nano.dart';
-import 'package:nautilus_wallet_flutter/ui/generate_paper_wallet.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:oktoast/oktoast.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/ui/home_page.dart';
-import 'package:nautilus_wallet_flutter/ui/lock_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_welcome.dart';
-import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_seed.dart';
-import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_confirm.dart';
-import 'package:nautilus_wallet_flutter/ui/intro/intro_import_seed.dart';
+import 'package:nautilus_wallet_flutter/ui/lock_screen.dart';
+import 'package:nautilus_wallet_flutter/ui/password_lock_screen.dart';
+import 'package:nautilus_wallet_flutter/ui/purchase_nano.dart';
+import 'package:nautilus_wallet_flutter/ui/register_username.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
+import 'package:oktoast/oktoast.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,18 +59,18 @@ Future<void> main() async {
   if (!kReleaseMode) {
     // we have to stall for whatever reason in debug mode
     // otherwise the app doesn't start properly (black screen)
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
   }
   // Run app
   if (kReleaseMode) {
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
-  runApp(new StateContainer(child: new App()));
+  runApp(StateContainer(child: App()));
 }
 
 class App extends StatefulWidget {
   @override
-  _AppState createState() => new _AppState();
+  _AppState createState() => _AppState();
 }
 
 class _AppState extends State<App> {
@@ -116,103 +117,103 @@ class _AppState extends State<App> {
           GlobalWidgetsLocalizations.delegate
         ],
         locale: StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT ? null : StateContainer.of(context).curLanguage.getLocale(),
-        supportedLocales: [
-          const Locale('en', 'US'), // English
-          const Locale('he', 'IL'), // Hebrew
-          const Locale('de', 'DE'), // German
-          const Locale('da'), // Danish
-          const Locale('bg'), // Bulgarian
-          const Locale('es'), // Spanish
-          const Locale('hi'), // Hindi
-          const Locale('hu'), // Hungarian
-          const Locale('hi'), // Hindi
-          const Locale('id'), // Indonesian
-          const Locale('it'), // Italian
-          const Locale('ja'), // Japanese
-          const Locale('ko'), // Korean
-          const Locale('ms'), // Malay
-          const Locale('nl'), // Dutch
-          const Locale('pl'), // Polish
-          const Locale('pt'), // Portugese
-          const Locale('ro'), // Romanian
-          const Locale('ru'), // Russian
-          const Locale('sl'), // Slovenian
-          const Locale('sv'), // Swedish
-          const Locale('tl'), // Tagalog
-          const Locale('tr'), // Turkish
-          const Locale('vi'), // Vietnamese
-          const Locale('ca'), // Catalan
-          const Locale('uk'), // Ukrainian
-          const Locale('no'), // Norwegian
-          const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
-          const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'), // Chinese Traditional
-          const Locale('ar'), // Arabic
-          const Locale('lv'), // Latvian
-          const Locale('bn'), // Bengali
+        supportedLocales: const [
+          Locale('en', 'US'), // English
+          Locale('he', 'IL'), // Hebrew
+          Locale('de', 'DE'), // German
+          Locale('da'), // Danish
+          Locale('bg'), // Bulgarian
+          Locale('es'), // Spanish
+          Locale('hi'), // Hindi
+          Locale('hu'), // Hungarian
+          Locale('hi'), // Hindi
+          Locale('id'), // Indonesian
+          Locale('it'), // Italian
+          Locale('ja'), // Japanese
+          Locale('ko'), // Korean
+          Locale('ms'), // Malay
+          Locale('nl'), // Dutch
+          Locale('pl'), // Polish
+          Locale('pt'), // Portugese
+          Locale('ro'), // Romanian
+          Locale('ru'), // Russian
+          Locale('sl'), // Slovenian
+          Locale('sv'), // Swedish
+          Locale('tl'), // Tagalog
+          Locale('tr'), // Turkish
+          Locale('vi'), // Vietnamese
+          Locale('ca'), // Catalan
+          Locale('uk'), // Ukrainian
+          Locale('no'), // Norwegian
+          Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
+          Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'), // Chinese Traditional
+          Locale('ar'), // Arabic
+          Locale('lv'), // Latvian
+          Locale('bn'), // Bengali
           // Currency-default requires country included
-          const Locale("es", "AR"),
-          const Locale("en", "AU"),
-          const Locale("pt", "BR"),
-          const Locale("en", "CA"),
-          const Locale("de", "CH"),
-          const Locale("es", "CL"),
-          const Locale("zh", "CN"),
-          const Locale("cs", "CZ"),
-          const Locale("da", "DK"),
-          const Locale("fr", "FR"),
-          const Locale("en", "GB"),
-          const Locale("zh", "HK"),
-          const Locale("hu", "HU"),
-          const Locale("id", "ID"),
-          const Locale("he", "IL"),
-          const Locale("hi", "IN"),
-          const Locale("ja", "JP"),
-          const Locale("ko", "KR"),
-          const Locale("es", "MX"),
-          const Locale("ta", "MY"),
-          const Locale("en", "NZ"),
-          const Locale("tl", "PH"),
-          const Locale("ur", "PK"),
-          const Locale("pl", "PL"),
-          const Locale("ru", "RU"),
-          const Locale("sv", "SE"),
-          const Locale("zh", "SG"),
-          const Locale("th", "TH"),
-          const Locale("tr", "TR"),
-          const Locale("en", "TW"),
-          const Locale("es", "VE"),
-          const Locale("en", "ZA"),
-          const Locale("en", "US"),
-          const Locale("es", "AR"),
-          const Locale("de", "AT"),
-          const Locale("fr", "BE"),
-          const Locale("de", "BE"),
-          const Locale("nl", "BE"),
-          const Locale("tr", "CY"),
-          const Locale("et", "EE"),
-          const Locale("fi", "FI"),
-          const Locale("fr", "FR"),
-          const Locale("el", "GR"),
-          const Locale("es", "AR"),
-          const Locale("en", "IE"),
-          const Locale("it", "IT"),
-          const Locale("es", "AR"),
-          const Locale("lv", "LV"),
-          const Locale("lt", "LT"),
-          const Locale("fr", "LU"),
-          const Locale("en", "MT"),
-          const Locale("nl", "NL"),
-          const Locale("pt", "PT"),
-          const Locale("sk", "SK"),
-          const Locale("sl", "SI"),
-          const Locale("es", "ES"),
-          const Locale("ar", "AE"), // UAE
-          const Locale("ar", "SA"), // Saudi Arabia
-          const Locale("ar", "KW"), // Kuwait
-          const Locale("uk", "UA"), // Ukraine
-          const Locale("no", "NO"), // Norway
-          const Locale("bn", "BD"), // Bangladesh
-          const Locale("bn", "IN"), // India/Bengali
+          Locale("es", "AR"),
+          Locale("en", "AU"),
+          Locale("pt", "BR"),
+          Locale("en", "CA"),
+          Locale("de", "CH"),
+          Locale("es", "CL"),
+          Locale("zh", "CN"),
+          Locale("cs", "CZ"),
+          Locale("da", "DK"),
+          Locale("fr", "FR"),
+          Locale("en", "GB"),
+          Locale("zh", "HK"),
+          Locale("hu", "HU"),
+          Locale("id", "ID"),
+          Locale("he", "IL"),
+          Locale("hi", "IN"),
+          Locale("ja", "JP"),
+          Locale("ko", "KR"),
+          Locale("es", "MX"),
+          Locale("ta", "MY"),
+          Locale("en", "NZ"),
+          Locale("tl", "PH"),
+          Locale("ur", "PK"),
+          Locale("pl", "PL"),
+          Locale("ru", "RU"),
+          Locale("sv", "SE"),
+          Locale("zh", "SG"),
+          Locale("th", "TH"),
+          Locale("tr", "TR"),
+          Locale("en", "TW"),
+          Locale("es", "VE"),
+          Locale("en", "ZA"),
+          Locale("en", "US"),
+          Locale("es", "AR"),
+          Locale("de", "AT"),
+          Locale("fr", "BE"),
+          Locale("de", "BE"),
+          Locale("nl", "BE"),
+          Locale("tr", "CY"),
+          Locale("et", "EE"),
+          Locale("fi", "FI"),
+          Locale("fr", "FR"),
+          Locale("el", "GR"),
+          Locale("es", "AR"),
+          Locale("en", "IE"),
+          Locale("it", "IT"),
+          Locale("es", "AR"),
+          Locale("lv", "LV"),
+          Locale("lt", "LT"),
+          Locale("fr", "LU"),
+          Locale("en", "MT"),
+          Locale("nl", "NL"),
+          Locale("pt", "PT"),
+          Locale("sk", "SK"),
+          Locale("sl", "SI"),
+          Locale("es", "ES"),
+          Locale("ar", "AE"), // UAE
+          Locale("ar", "SA"), // Saudi Arabia
+          Locale("ar", "KW"), // Kuwait
+          Locale("uk", "UA"), // Ukraine
+          Locale("no", "NO"), // Norway
+          Locale("bn", "BD"), // Bangladesh
+          Locale("bn", "IN"), // India/Bengali
         ],
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {
@@ -283,7 +284,7 @@ class _AppState extends State<App> {
                 settings: settings,
               );
             case '/avatar_page':
-              return PageRouteBuilder(pageBuilder: (context, animationIn, animationOut) => AvatarPage(), settings: settings, opaque: false);
+              return PageRouteBuilder(pageBuilder: (BuildContext context, Animation<double> animationIn, Animation<double> animationOut) => AvatarPage(), settings: settings, opaque: false);
             case '/avatar_change_page':
               return MaterialPageRoute(
                 builder: (_) => AvatarChangePage(curAddress: StateContainer.of(context).selectedAccount!.address),
@@ -393,8 +394,8 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       // See if logged in already
       bool isLoggedIn = false;
       bool isEncrypted = false;
-      var seed = await sl.get<Vault>().getSeed();
-      var pin = await sl.get<Vault>().getPin();
+      String? seed = await sl.get<Vault>().getSeed();
+      String? pin = await sl.get<Vault>().getPin();
       // If we have a seed set, but not a pin - or vice versa
       // Then delete the seed and pin from device and start over.
       // This would mean user did not complete the intro screen completely.
@@ -483,7 +484,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     setState(() {
       StateContainer.of(context).deviceLocale = Localizations.localeOf(context);
     });
-    sl.get<SharedPrefsUtil>().getLanguage().then((setting) {
+    sl.get<SharedPrefsUtil>().getLanguage().then((LanguageSetting setting) {
       setState(() {
         StateContainer.of(context).updateLanguage(setting);
       });
@@ -494,10 +495,10 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     // This seems to be the earliest place we can retrieve the device Locale
     setLanguage();
-    sl.get<SharedPrefsUtil>().getCurrency(StateContainer.of(context).deviceLocale).then((currency) {
+    sl.get<SharedPrefsUtil>().getCurrency(StateContainer.of(context).deviceLocale).then((AvailableCurrency currency) {
       StateContainer.of(context).curCurrency = currency;
     });
-    return new Scaffold(
+    return Scaffold(
       backgroundColor: StateContainer.of(context).curTheme.background,
     );
   }

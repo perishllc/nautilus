@@ -1034,8 +1034,8 @@ class StateContainerState extends State<StateContainer> {
           // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
           if (!wallet!.history!.contains(item)) {
             final int startIndex = 0; // Index to start inserting into the list
-            int lastIndex = resp.history!.indexWhere(
-                (AccountHistoryResponseItem item) => wallet!.history!.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+            int lastIndex = resp.history!.indexWhere((AccountHistoryResponseItem item) =>
+                wallet!.history!.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
             lastIndex = lastIndex <= 0 ? resp.history!.length : lastIndex;
             setState(() {
               wallet!.history!.insertAll(0, resp.history!.getRange(startIndex, lastIndex));
