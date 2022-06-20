@@ -1,12 +1,12 @@
-# v0.3.6 - [2022-06-XX]
+# v0.3.6 - [2022-06-21]
 #### Added
 #### Changed
 #### Fixed
 - Bug with rendering usernames
 - Usernames not displaying properly throughout the app
 - Bugs related to contacts
+- Lots of null safety bugs
 ## v0.3.5 - [2022-06-18]
-#### Added
 #### Changed
 - Visual updates to the home screen demo cards
 - Cap drawer width to 500px (to make the view on tablets look nicer)

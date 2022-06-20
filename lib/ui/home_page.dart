@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
@@ -138,10 +140,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   double settingsIconMarginTop = 5;
   // FCM instance
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-
-  // Animation for swiping to send
-  double? _fanimationPosition;
-  bool releaseAnimation = false;
 
   // card time format:
   // String CARD_TIME_FORMAT = "MMM d, h:mm a";
@@ -993,15 +991,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   ///           a > b  | Returns a positive value.
   ///
   int defaultSortComparison(dynamic a, dynamic b) {
-    final int? propertyA = a.height as int?;
-    final int? propertyB = b.height as int?;
-    if (propertyA == null || propertyB == null) {
-      // this shouldn't happen but it does if there's a bug:
-      throw Exception("Null height in comparison");
-      // TODO:
-      // propertyA = 0;
-      // propertyB = 0;
-    }
+    final int propertyA = a.height as int? ?? 0;
+    final int propertyB = b.height as int? ?? 0;
 
     // both are AccountHistoryResponseItems:
     if (a is AccountHistoryResponseItem && b is AccountHistoryResponseItem) {
