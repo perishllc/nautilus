@@ -180,9 +180,9 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                         ),
                         // show napi username if available:
                         Container(
-                          margin: (StateContainer.of(context).wallet?.user != null) ? EdgeInsets.only(top: 35.0) : EdgeInsets.only(top: 15.0),
-                          child: (StateContainer.of(context).wallet?.user != null)
-                              ? Text(StateContainer.of(context).wallet!.user!.getDisplayName()!,
+                          margin: (StateContainer.of(context).wallet?.username != null) ? EdgeInsets.only(top: 35.0) : EdgeInsets.only(top: 15.0),
+                          child: (StateContainer.of(context).wallet?.username != null)
+                              ? Text(StateContainer.of(context).wallet!.username!,
                                   style: TextStyle(
                                     fontFamily: "OverpassMono",
                                     fontWeight: FontWeight.w100,

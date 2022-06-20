@@ -3,6 +3,8 @@
 #### Changed
 #### Fixed
 - Bug with rendering usernames
+- Usernames not displaying properly throughout the app
+- Bugs related to contacts
 ## v0.3.5 - [2022-06-18]
 #### Added
 #### Changed

@@ -118,6 +118,10 @@ class TXData {
     return this.to_address == address;
   }
 
+  String getAccount(bool isRecipient) {
+    return isRecipient ? (from_address ?? "") : (to_address ?? "");
+  }
+
   bool isSolid() {
     return this.is_message || this.is_request || this.is_tx;
   }
