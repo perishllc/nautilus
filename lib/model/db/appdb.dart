@@ -1140,6 +1140,11 @@ class DBHelper {
         lastAccess: list[0]["last_accessed"],
         balance: list[0]["balance"],
         address: address);
+    // check if account has a user:
+    User? user = await getUserWithAddress(account.address!);
+    if (user != null) {
+      account.user = user;
+    }
     return account;
   }
 
@@ -1158,6 +1163,11 @@ class DBHelper {
         lastAccess: list[0]["last_accessed"],
         balance: list[0]["balance"],
         address: address);
+    // check if account has a user:
+    User? user = await getUserWithAddress(account.address!);
+    if (user != null) {
+      account.user = user;
+    }
     return account;
   }
 

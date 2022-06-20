@@ -1,4 +1,9 @@
-# v0.3.5 - [2022-06-XX]
+# v0.3.6 - [2022-06-XX]
+#### Added
+#### Changed
+#### Fixed
+- Bug with rendering usernames
+## v0.3.5 - [2022-06-18]
 #### Added
 #### Changed
 - Visual updates to the home screen demo cards

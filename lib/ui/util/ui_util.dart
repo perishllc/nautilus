@@ -5,7 +5,6 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -345,7 +344,7 @@ class UIUtil {
     var options = InAppBrowserClassOptions(
         crossPlatform: InAppBrowserOptions(
           hideUrlBar: true,
-          toolbarTopBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
         ),
         inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
     String url = AppLocalization.of(context)!.getBlockExplorerUrl(hash, StateContainer.of(context).curBlockExplorer);
@@ -358,7 +357,7 @@ class UIUtil {
     var options = InAppBrowserClassOptions(
         crossPlatform: InAppBrowserOptions(
           hideUrlBar: true,
-          toolbarTopBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
         ),
         inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
     String url = AppLocalization.of(context)!.getAccountExplorerUrl(account, StateContainer.of(context).curBlockExplorer);
