@@ -10,7 +10,7 @@ class NinjaAPI {
 
   static Future<String?> getAndCacheAPIResponse() async {
     const String url = '$API_URL/accounts/verified';
-    final http.Response response = await http.get(Uri.parse(url), headers: {});
+    final http.Response response = await http.get(Uri.parse(url));
     if (response.statusCode != 200) {
       return null;
     }
@@ -24,8 +24,8 @@ class NinjaAPI {
     if (httpResponseBody == null) {
       return null;
     }
-    final List<NinjaNode> ninjaNodes = (json.decode(httpResponseBody) as List)
-        .map((e) => NinjaNode.fromJson(e as Map<String, dynamic>))
+    final List<NinjaNode> ninjaNodes = (json.decode(httpResponseBody) as List<NinjaNode>)
+        .map((NinjaNode e) => NinjaNode.fromJson(e as Map<String, dynamic>))
         .toList();
     return ninjaNodes;
   }
@@ -35,8 +35,8 @@ class NinjaAPI {
     if (rawJson == null) {
       return null;
     }
-    final List<NinjaNode> ninjaNodes = (json.decode(rawJson) as List)
-        .map((e) => NinjaNode.fromJson(e as Map<String, dynamic>))
+    final List<NinjaNode> ninjaNodes = (json.decode(rawJson) as List<NinjaNode>)
+        .map((NinjaNode e) => NinjaNode.fromJson(e as Map<String, dynamic>))
         .toList();
     return ninjaNodes;
   }

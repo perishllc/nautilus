@@ -5,9 +5,13 @@ import 'dart:io';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/contact.dart';
+import 'package:flutter_contacts/flutter_contacts.dart' as cont;
+
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/bus/contacts_setting_change_event.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
@@ -22,11 +26,13 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:path_provider/path_provider.dart';
+// import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ContactsList extends StatefulWidget {
   final AnimationController? contactsController;
   bool? contactsOpen;
+  bool contactsEnabled = false;
 
   ContactsList(this.contactsController, this.contactsOpen);
 
@@ -61,11 +67,15 @@ class _ContactsListState extends State<ContactsList> {
     if (_contactRemovedSub != null) {
       _contactRemovedSub!.cancel();
     }
+    if (_contactSettingSub != null) {
+      _contactSettingSub!.cancel();
+    }
     super.dispose();
   }
 
   StreamSubscription<ContactAddedEvent>? _contactAddedSub;
   StreamSubscription<ContactRemovedEvent>? _contactRemovedSub;
+  StreamSubscription<ContactsSettingChangeEvent>? _contactSettingSub;
 
   void _registerBus() {
     // Contact added bus event
@@ -78,16 +88,45 @@ class _ContactsListState extends State<ContactsList> {
       // Full update
       _updateContacts();
     });
+    // Contact Setting bus event
+    _contactSettingSub = EventTaxiImpl.singleton().registerTo<ContactsSettingChangeEvent>().listen((ContactsSettingChangeEvent event) {
+      setState(() {
+        widget.contactsEnabled = event.isOn;
+      });
+      // Full update
+      _updateContacts();
+    });
   }
 
-  void _updateContacts() {
+  Future<void> _updateContacts() async {
+    // start with an empty list:
+    final List<User> newState = [];
+
+    if (widget.contactsEnabled) {
+      List<Contact> contacts = [];
+      try {
+        contacts = await cont.FlutterContacts.getContacts(withProperties: true);
+      } catch (e) {
+        log.e(e.toString());
+        return;
+      }
+
+      for (Contact contact in contacts) {
+        if (contact.phones.isNotEmpty) {
+          User contactUser = User();
+          contactUser.nickname = contact.displayName;
+          contactUser.aliases = [contact.phones[0].number, "Number"];
+          newState.add(contactUser);
+        }
+      }
+    }
+
     sl.get<DBHelper>().getContacts().then((List<User> contacts) {
       if (contacts == null) {
         return;
       }
 
       // calculate diff:
-      final List<User> newState = [];
 
       final Map<String?, List<String?>> aliasMap = Map<String?, List<String?>>();
       final List<String?> addressesToRemove = [];
@@ -439,22 +478,20 @@ class _ContactsListState extends State<ContactsList> {
     if (user.aliases == null) {
       return [
         // nickname
-        (user.nickname != null) ? Text("★" + user.nickname!, style: AppStyles.textStyleSettingItemHeader(context)) : const SizedBox(),
+        if (user.nickname != null) Text("★" + user.nickname!, style: AppStyles.textStyleSettingItemHeader(context)) else const SizedBox(),
 
-        (user.username != null)
-            ? Text(
-                user.getDisplayName(ignoreNickname: true)!,
-                style: user.nickname != null ? AppStyles.textStyleTransactionAddress(context) : AppStyles.textStyleSettingItemHeader(context),
-              )
-            : const SizedBox(),
+        if (user.username != null)
+          Text(
+            user.getDisplayName(ignoreNickname: true)!,
+            style: user.nickname != null ? AppStyles.textStyleTransactionAddress(context) : AppStyles.textStyleSettingItemHeader(context),
+          ),
 
-        // Blocked address
-        (user.address != null)
-            ? Text(
-                Address(user.address!).getShortString()!,
-                style: AppStyles.textStyleTransactionAddress(context),
-              )
-            : const SizedBox(),
+        // address
+        if (user.address != null)
+          Text(
+            Address(user.address).getShortString() ?? user.address!,
+            style: AppStyles.textStyleTransactionAddress(context),
+          ),
       ];
     } else {
       final List<Widget> entries = [
@@ -462,10 +499,11 @@ class _ContactsListState extends State<ContactsList> {
           user.getDisplayName()!,
           style: AppStyles.textStyleSettingItemHeader(context),
         ),
-        Text(
-          Address(user.address!).getShortString()!,
-          style: AppStyles.textStyleTransactionAddress(context),
-        )
+        if (user.address != null)
+          Text(
+            Address(user.address).getShortString()!,
+            style: AppStyles.textStyleTransactionAddress(context),
+          )
       ];
 
       for (int i = 0; i < user.aliases!.length; i += 2) {

@@ -1,20 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class IntroPassword extends StatefulWidget {
@@ -37,24 +37,22 @@ class _IntroPasswordState extends State<IntroPassword> {
   @override
   void initState() {
     super.initState();
-    this.passwordsMatch = false;
-    this.createPasswordFocusNode = FocusNode();
-    this.confirmPasswordFocusNode = FocusNode();
-    this.createPasswordController = TextEditingController();
-    this.confirmPasswordController = TextEditingController();
+    passwordsMatch = false;
+    createPasswordFocusNode = FocusNode();
+    confirmPasswordFocusNode = FocusNode();
+    createPasswordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-      body: TapOutsideUnfocus(
-        child: LayoutBuilder(
-          builder: (context, constraints) => SafeArea(
-            minimum: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.035,
-                top: MediaQuery.of(context).size.height * 0.075),
+        resizeToAvoidBottomInset: false,
+        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        body: TapOutsideUnfocus(
+            child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
+            minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
             child: Column(
               children: <Widget>[
                 //A widget that holds the header, the paragraph and Back Button
@@ -66,25 +64,21 @@ class _IntroPasswordState extends State<IntroPassword> {
                         children: <Widget>[
                           // Back Button
                           Container(
-                            margin: EdgeInsetsDirectional.only(
-                                start: smallScreen(context) ? 15 : 20),
+                            margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
                             height: 50,
                             width: 50,
-                            child: FlatButton(
-                                highlightColor:
-                                    StateContainer.of(context).curTheme.text15,
-                                splashColor:
-                                    StateContainer.of(context).curTheme.text15,
+                            child: TextButton(
+                                style: TextButton.styleFrom(
+                                  primary: StateContainer.of(context).curTheme.text15,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                  padding: EdgeInsets.zero,
+                                  // highlightColor: StateContainer.of(context).curTheme.text15,
+                                  // splashColor: StateContainer.of(context).curTheme.text15,
+                                ),
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0)),
-                                padding: EdgeInsets.all(0.0),
-                                child: Icon(AppIcons.back,
-                                    color:
-                                        StateContainer.of(context).curTheme.text,
-                                    size: 24)),
+                                child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                           ),
                         ],
                       ),
@@ -95,7 +89,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                           end: smallScreen(context) ? 30 : 40,
                           top: 10,
                         ),
-                        alignment: AlignmentDirectional(-1, 0),
+                        alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
                           AppLocalization.of(context)!.createAPasswordHeader,
                           maxLines: 3,
@@ -105,10 +99,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                       ),
                       // The paragraph
                       Container(
-                        margin: EdgeInsetsDirectional.only(
-                            start: smallScreen(context) ? 30 : 40,
-                            end: smallScreen(context) ? 30 : 40,
-                            top: 16.0),
+                        margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                         child: AutoSizeText(
                           AppLocalization.of(context)!.passwordWillBeRequiredToOpenParagraph,
                           style: AppStyles.textStyleParagraph(context),
@@ -117,117 +108,107 @@ class _IntroPasswordState extends State<IntroPassword> {
                         ),
                       ),
                       Expanded(
-                        child: KeyboardAvoider(
-                          duration: Duration(milliseconds: 0),
-                          autoScroll: true,
-                          focusPadding: 40,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              // Create a Password Text Field
-                              AppTextField(
-                                topMargin: 30,
-                                padding: EdgeInsetsDirectional.only(start: 16, end: 16),
-                                focusNode: createPasswordFocusNode,
-                                controller: createPasswordController,
-                                textInputAction: TextInputAction.next,
-                                maxLines: 1,
-                                autocorrect: false,
-                                onChanged: (String newText) {
-                                  if (passwordError != null) {
-                                    setState(() {
-                                      passwordError = null;
-                                    });
-                                  }
-                                  if (confirmPasswordController!.text == createPasswordController!.text) {
-                                    if (mounted) {
+                          child: KeyboardAvoider(
+                              duration: Duration.zero,
+                              autoScroll: true,
+                              focusPadding: 40,
+                              child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
+                                // Create a Password Text Field
+                                AppTextField(
+                                  topMargin: 30,
+                                  padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
+                                  focusNode: createPasswordFocusNode,
+                                  controller: createPasswordController,
+                                  textInputAction: TextInputAction.next,
+                                  maxLines: 1,
+                                  autocorrect: false,
+                                  onChanged: (String newText) {
+                                    if (passwordError != null) {
                                       setState(() {
-                                        passwordsMatch = true;
+                                        passwordError = null;
                                       });
                                     }
-                                  } else {
-                                    if (mounted) {
-                                      setState(() {
-                                        passwordsMatch = false;
-                                      });
+                                    if (confirmPasswordController!.text == createPasswordController!.text) {
+                                      if (mounted) {
+                                        setState(() {
+                                          passwordsMatch = true;
+                                        });
+                                      }
+                                    } else {
+                                      if (mounted) {
+                                        setState(() {
+                                          passwordsMatch = false;
+                                        });
+                                      }
                                     }
-                                  }
-                                },
-                                hintText: AppLocalization.of(context)!.createPasswordHint,
-                                keyboardType: TextInputType.text,
-                                obscureText: true,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 16.0,
-                                  color:
-                                    this.passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
-                                  fontFamily: 'NunitoSans',
+                                  },
+                                  hintText: AppLocalization.of(context)!.createPasswordHint,
+                                  keyboardType: TextInputType.text,
+                                  obscureText: true,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16.0,
+                                    color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                    fontFamily: 'NunitoSans',
+                                  ),
+                                  onSubmitted: (String text) {
+                                    confirmPasswordFocusNode!.requestFocus();
+                                  },
                                 ),
-                                onSubmitted: (text) {
-                                  confirmPasswordFocusNode!.requestFocus();
-                                },
-                              ),
-                              // Confirm Password Text Field
-                              AppTextField(
-                                topMargin: 20,
-                                padding: EdgeInsetsDirectional.only(start: 16, end: 16),
-                                focusNode: confirmPasswordFocusNode,
-                                controller: confirmPasswordController,
-                                textInputAction: TextInputAction.done,
-                                maxLines: 1,
-                                autocorrect: false,
-                                onChanged: (String newText) {
-                                  if (passwordError != null) {
-                                    setState(() {
-                                      passwordError = null;
-                                    });
-                                  }
-                                  if (confirmPasswordController!.text == createPasswordController!.text) {
-                                    if (mounted) {
+                                // Confirm Password Text Field
+                                AppTextField(
+                                  topMargin: 20,
+                                  padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
+                                  focusNode: confirmPasswordFocusNode,
+                                  controller: confirmPasswordController,
+                                  textInputAction: TextInputAction.done,
+                                  maxLines: 1,
+                                  autocorrect: false,
+                                  onChanged: (String newText) {
+                                    if (passwordError != null) {
                                       setState(() {
-                                        passwordsMatch = true;
+                                        passwordError = null;
                                       });
                                     }
-                                  } else {
-                                    if (mounted) {
-                                      setState(() {
-                                        passwordsMatch = false;
-                                      });
+                                    if (confirmPasswordController!.text == createPasswordController!.text) {
+                                      if (mounted) {
+                                        setState(() {
+                                          passwordsMatch = true;
+                                        });
+                                      }
+                                    } else {
+                                      if (mounted) {
+                                        setState(() {
+                                          passwordsMatch = false;
+                                        });
+                                      }
                                     }
-                                  }                              
-                                },
-                                hintText: AppLocalization.of(context)!.confirmPasswordHint,
-                                keyboardType: TextInputType.text,
-                                obscureText: true,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 16.0,
-                                  color:
-                                      this.passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
-                                  fontFamily: 'NunitoSans',
+                                  },
+                                  hintText: AppLocalization.of(context)!.confirmPasswordHint,
+                                  keyboardType: TextInputType.text,
+                                  obscureText: true,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16.0,
+                                    color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                    fontFamily: 'NunitoSans',
+                                  ),
                                 ),
-                              ),
-                              // Error Text
-                              Container(
-                                alignment: AlignmentDirectional(0, 0),
-                                margin: EdgeInsets.only(top: 3),
-                                child: Text(this.passwordError == null ? "" : passwordError!,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color:
-                                          StateContainer.of(context)
-                                              .curTheme
-                                              .primary,
-                                      fontFamily: 'NunitoSans',
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
-                            ]
-                          )
-                        )
-                      )
+                                // Error Text
+                                Container(
+                                  alignment: AlignmentDirectional.center,
+                                  margin: const EdgeInsets.only(top: 3),
+                                  child: Text(passwordError == null ? "" : passwordError!,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: StateContainer.of(context).curTheme.primary,
+                                        fontFamily: 'NunitoSans',
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                ),
+                              ])))
                     ],
                   ),
                 ),
@@ -238,20 +219,17 @@ class _IntroPasswordState extends State<IntroPassword> {
                     Row(
                       children: <Widget>[
                         // Next Button
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY,
-                            AppLocalization.of(context)!.nextButton, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
-                            await submitAndEncrypt();
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.nextButton, Dimens.BUTTON_TOP_DIMENS,
+                            onPressed: () async {
+                          await submitAndEncrypt();
                         }),
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         // Go Back Button
-                        AppButton.buildAppButton(
-                            context,
-                            AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context)!.goBackButton,
-                            Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                            onPressed: () {
                           Navigator.of(context).pop();
                         }),
                       ],
@@ -261,9 +239,7 @@ class _IntroPasswordState extends State<IntroPassword> {
               ],
             ),
           ),
-        )
-      )
-    );
+        )));
   }
 
   Future<void> submitAndEncrypt() async {
@@ -285,10 +261,9 @@ class _IntroPasswordState extends State<IntroPassword> {
       StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, await sl.get<Vault>().getSessionKey())));
       await sl.get<DBHelper>().dropAccounts();
       await NanoUtil().loginAccount(widget.seed, context);
-      StateContainer.of(context).requestUpdate();
-      String? pin = await Navigator.of(context).push(
-        MaterialPageRoute(builder: (BuildContext context) {
-          return PinScreen(PinOverlayType.NEW_PIN);
+      // StateContainer.of(context).requestUpdate();// todo: is this necessary?
+      String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+        return PinScreen(PinOverlayType.NEW_PIN);
       }));
       if (pin != null && pin.length > 5) {
         _pinEnteredCallback(pin);
@@ -302,11 +277,10 @@ class _IntroPasswordState extends State<IntroPassword> {
       StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, await sl.get<Vault>().getSessionKey())));
       // Update wallet
       NanoUtil().loginAccount(await StateContainer.of(context).getSeed(), context).then((_) {
-        StateContainer.of(context).requestUpdate();
-        Navigator.of(context)
-            .pushNamed('/intro_backup_safety');
+        // StateContainer.of(context).requestUpdate();// todo: is this necessary?
+        Navigator.of(context).pushNamed('/intro_backup_safety');
       });
-    }    
+    }
   }
 
   void _pinEnteredCallback(String pin) async {
@@ -314,8 +288,6 @@ class _IntroPasswordState extends State<IntroPassword> {
     PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
     StateContainer.of(context).requestSubscribe();
     // Update wallet
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
-
+    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
   }
 }

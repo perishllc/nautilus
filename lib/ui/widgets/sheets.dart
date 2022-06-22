@@ -18,52 +18,36 @@ class AppSheets {
       bool closeOnTap = false,
       Function? onDisposed}) {
     assert(radius > 0.0);
-    if (color == null) {
-      color = StateContainer.of(context).curTheme.backgroundDark;
-    }
-    if (barrier == null) {
-      barrier = StateContainer.of(context).curTheme.barrier;
-    }
-    var route = _AppHeightNineModalRoute<T>(
+    color ??= StateContainer.of(context).curTheme.backgroundDark;
+    barrier ??= StateContainer.of(context).curTheme.barrier;
+    final _AppHeightNineModalRoute<T> route = _AppHeightNineModalRoute<T>(
         builder: builder,
         color: color,
         radius: radius,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
         barrier: barrier,
         animationDurationMs: animationDurationMs,
         closeOnTap: closeOnTap,
         onDisposed: onDisposed);
     if (removeUntilHome) {
-      return Navigator.pushAndRemoveUntil<T>(
-          context, route, RouteUtils.withNameLike('/home'));
+      return Navigator.pushAndRemoveUntil<T>(context, route, RouteUtils.withNameLike('/home'));
     }
     return Navigator.push<T>(context, route);
   }
 
   //App Height Eigth Sheet
   static Future<T?> showAppHeightEightSheet<T>(
-      {required BuildContext context,
-      required WidgetBuilder builder,
-      Color? color,
-      double radius = 30.0,
-      Color? barrier,
-      int animationDurationMs = 225}) {
+      {required BuildContext context, required WidgetBuilder builder, Color? color, double radius = 30.0, Color? barrier, int animationDurationMs = 225}) {
     assert(radius > 0.0);
-    if (color == null) {
-      color = StateContainer.of(context).curTheme.backgroundDark;
-    }
-    if (barrier == null) {
-      barrier = StateContainer.of(context).curTheme.barrier;
-    }
+    color ??= StateContainer.of(context).curTheme.backgroundDark;
+    barrier ??= StateContainer.of(context).curTheme.barrier;
     return Navigator.push<T>(
         context,
         _AppHeightEightModalRoute<T>(
             builder: builder,
             color: color,
             radius: radius,
-            barrierLabel:
-                MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
             barrier: barrier,
             animationDurationMs: animationDurationMs));
   }
@@ -77,25 +61,11 @@ class _AppHeightNineSheetLayout extends SingleChildLayoutDelegate {
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     if (constraints.maxHeight < 667)
-      return BoxConstraints(
-          minWidth: constraints.maxWidth,
-          maxWidth: constraints.maxWidth,
-          minHeight: 0.0,
-          maxHeight: constraints.maxHeight * 0.95);
-    if ((constraints.maxHeight / constraints.maxWidth > 2.1 &&
-            Platform.isAndroid) ||
-        constraints.maxHeight > 812)
-      return BoxConstraints(
-          minWidth: constraints.maxWidth,
-          maxWidth: constraints.maxWidth,
-          minHeight: 0.0,
-          maxHeight: constraints.maxHeight * 0.8);
+      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.95);
+    if ((constraints.maxHeight / constraints.maxWidth > 2.1 && Platform.isAndroid) || constraints.maxHeight > 812)
+      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.8);
     else
-      return BoxConstraints(
-          minWidth: constraints.maxWidth,
-          maxWidth: constraints.maxWidth,
-          minHeight: 0.0,
-          maxHeight: constraints.maxHeight * 0.9);
+      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.9);
   }
 
   @override
@@ -153,14 +123,10 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
-    _animationController =
-        BottomSheet.createAnimationController(navigator!.overlay!);
+    _animationController = BottomSheet.createAnimationController(navigator!.overlay!);
     _animationController!.duration = Duration(milliseconds: animationDurationMs!);
-    this.appSheetAnimation = CurvedAnimation(
-        parent: _animationController!,
-        curve: Curves.easeOut,
-        reverseCurve: Curves.linear)
-      ..addStatusListener((animationStatus) {
+    appSheetAnimation = CurvedAnimation(parent: _animationController!, curve: Curves.easeOut, reverseCurve: Curves.linear)
+      ..addStatusListener((AnimationStatus animationStatus) {
         if (animationStatus == AnimationStatus.completed) {
           appSheetAnimation.curve = Curves.linear;
         }
@@ -169,8 +135,7 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
@@ -185,20 +150,20 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
           data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
           child: AnimatedBuilder(
             animation: appSheetAnimation,
-            builder: (context, child) => CustomSingleChildLayout(
+            builder: (BuildContext context, Widget? child) => CustomSingleChildLayout(
               delegate: _AppHeightNineSheetLayout(appSheetAnimation.value),
               child: BottomSheet(
                 animationController: _animationController,
                 onClosing: () => Navigator.pop(context),
-                builder: (context) => Container(
+                builder: (BuildContext context) => Container(
                   decoration: BoxDecoration(
-                    color: this.color,
+                    color: color,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(this.radius!),
-                      topRight: Radius.circular(this.radius!),
+                      topLeft: Radius.circular(radius!),
+                      topRight: Radius.circular(radius!),
                     ),
                   ),
-                  child: Builder(builder: this.builder!),
+                  child: Builder(builder: builder!),
                 ),
               ),
             ),
@@ -215,8 +180,7 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
   bool get opaque => false;
 
   @override
-  Duration get transitionDuration =>
-      Duration(milliseconds: animationDurationMs!);
+  Duration get transitionDuration => Duration(milliseconds: animationDurationMs!);
 }
 //App Height Nine Sheet End
 
@@ -228,23 +192,11 @@ class _AppHeightEightSheetLayout extends SingleChildLayoutDelegate {
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     if (constraints.maxHeight < 667)
-      return BoxConstraints(
-          minWidth: constraints.maxWidth,
-          maxWidth: constraints.maxWidth,
-          minHeight: 0.0,
-          maxHeight: constraints.maxHeight * 0.9);
+      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.9);
     if (constraints.maxHeight / constraints.maxWidth > 2.1)
-      return BoxConstraints(
-          minWidth: constraints.maxWidth,
-          maxWidth: constraints.maxWidth,
-          minHeight: 0.0,
-          maxHeight: constraints.maxHeight * 0.7);
+      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.7);
     else
-      return BoxConstraints(
-          minWidth: constraints.maxWidth,
-          maxWidth: constraints.maxWidth,
-          minHeight: 0.0,
-          maxHeight: constraints.maxHeight * 0.8);
+      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.8);
   }
 
   @override
@@ -259,14 +211,7 @@ class _AppHeightEightSheetLayout extends SingleChildLayoutDelegate {
 }
 
 class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
-  _AppHeightEightModalRoute(
-      {this.builder,
-      this.barrierLabel,
-      this.color,
-      this.radius,
-      RouteSettings? settings,
-      this.barrier,
-      this.animationDurationMs})
+  _AppHeightEightModalRoute({this.builder, this.barrierLabel, this.color, this.radius, RouteSettings? settings, this.barrier, this.animationDurationMs})
       : super(settings: settings);
 
   final WidgetBuilder? builder;
@@ -290,14 +235,10 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
-    _animationController =
-        BottomSheet.createAnimationController(navigator!.overlay!);
+    _animationController = BottomSheet.createAnimationController(navigator!.overlay!);
     _animationController!.duration = Duration(milliseconds: animationDurationMs!);
-    this.appSheetAnimation = CurvedAnimation(
-        parent: _animationController!,
-        curve: Curves.easeOut,
-        reverseCurve: Curves.linear)
-      ..addStatusListener((animationStatus) {
+    appSheetAnimation = CurvedAnimation(parent: _animationController!, curve: Curves.easeOut, reverseCurve: Curves.linear)
+      ..addStatusListener((AnimationStatus animationStatus) {
         if (animationStatus == AnimationStatus.completed) {
           appSheetAnimation.curve = Curves.linear;
         }
@@ -306,8 +247,7 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
@@ -315,20 +255,20 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
         data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
         child: AnimatedBuilder(
           animation: appSheetAnimation,
-          builder: (context, child) => CustomSingleChildLayout(
+          builder: (BuildContext context, Widget? child) => CustomSingleChildLayout(
             delegate: _AppHeightEightSheetLayout(appSheetAnimation.value),
             child: BottomSheet(
               animationController: _animationController,
               onClosing: () => Navigator.pop(context),
-              builder: (context) => Container(
+              builder: (BuildContext context) => Container(
                 decoration: BoxDecoration(
-                  color: this.color,
+                  color: color,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(this.radius!),
-                    topRight: Radius.circular(this.radius!),
+                    topLeft: Radius.circular(radius!),
+                    topRight: Radius.circular(radius!),
                   ),
                 ),
-                child: Builder(builder: this.builder!),
+                child: Builder(builder: builder!),
               ),
             ),
           ),
@@ -344,7 +284,6 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
   bool get opaque => false;
 
   @override
-  Duration get transitionDuration =>
-      Duration(milliseconds: animationDurationMs!);
+  Duration get transitionDuration => Duration(milliseconds: animationDurationMs!);
 }
 //App HeightEight Sheet End

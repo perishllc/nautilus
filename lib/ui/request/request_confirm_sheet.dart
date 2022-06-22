@@ -3,34 +3,35 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/request/request_complete_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/util/biometrics.dart';
 import 'package:nautilus_wallet_flutter/util/box.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:nautilus_wallet_flutter/util/biometrics.dart';
-import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
-import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:uuid/uuid.dart';
 
 class RequestConfirmSheet extends StatefulWidget {
@@ -41,21 +42,19 @@ class RequestConfirmSheet extends StatefulWidget {
   final int? natriconNonce;
   final String? memo;
 
-  RequestConfirmSheet({this.amountRaw, this.destination, this.contactName, this.localCurrency, this.natriconNonce, this.memo})
-      : super();
+  RequestConfirmSheet({this.amountRaw, this.destination, this.contactName, this.localCurrency, this.natriconNonce, this.memo}) : super();
 
   _RequestConfirmSheetState createState() => _RequestConfirmSheetState();
 }
 
 class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
-  late String amount;
   String? destinationAltered;
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
 
   void _registerBus() {
-    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((event) {
+    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((AuthenticatedEvent event) {
       if (event.authType == AUTH_EVENT_TYPE.REQUEST) {
         _doRequest();
       }
@@ -72,7 +71,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
   void initState() {
     super.initState();
     _registerBus();
-    this.animationOpen = false;
+    animationOpen = false;
     // Derive amount from raw amount
     // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
     //   amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
@@ -80,7 +79,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     //   amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(widget.amountRaw), digits: 6).toStringAsFixed(6) + "~";
     // }
     // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
-    amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
+    // amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
     // Ensure nano_ prefix on destination
     destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
@@ -104,7 +103,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
           children: <Widget>[
             // Sheet handle
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               height: 5,
               width: MediaQuery.of(context).size.width * 0.15,
               decoration: BoxDecoration(
@@ -119,7 +118,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                 children: <Widget>[
                   // "REQUESTING" TEXT
                   Container(
-                    margin: EdgeInsets.only(bottom: 10.0),
+                    margin: const EdgeInsets.only(bottom: 10.0),
                     child: Column(
                       children: <Widget>[
                         Text(
@@ -132,7 +131,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                   // Container for the amount text
                   Container(
                     margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: StateContainer.of(context).curTheme.backgroundDarkest,
@@ -155,7 +154,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                             ),
                           ),
                           TextSpan(
-                            text: getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
+                            text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, widget.amountRaw),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary,
                               fontSize: 16.0,
@@ -178,7 +177,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                   ),
                   // "FROM" text
                   Container(
-                    margin: EdgeInsets.only(top: 30.0, bottom: 10),
+                    margin: const EdgeInsets.only(top: 30.0, bottom: 10),
                     child: Column(
                       children: <Widget>[
                         Text(
@@ -190,7 +189,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                   ),
                   // Address text
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                       margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -198,38 +197,32 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: UIUtil.threeLineAddressText(context, destinationAltered!, contactName: widget.contactName)),
-                  (widget.memo != null && widget.memo!.isNotEmpty)
-                      ? (
-                          // "WITH MESSAGE" text
-                          Container(
-                          margin: EdgeInsets.only(top: 30.0, bottom: 10),
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
-                                style: AppStyles.textStyleHeader(context),
-                              ),
-                            ],
+                  if (widget.memo != null && widget.memo!.isNotEmpty)
+                    Container(
+                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
+                            style: AppStyles.textStyleHeader(context),
                           ),
-                        ))
-                      : SizedBox(),
-                  (widget.memo != null && widget.memo!.isNotEmpty)
-                      ?
-                      // memo text
-                      Container(
-                          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: StateContainer.of(context).curTheme.backgroundDarkest,
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Text(
-                            widget.memo!,
-                            style: AppStyles.textStyleParagraph(context),
-                            textAlign: TextAlign.center,
-                          ))
-                      : SizedBox(),
+                        ],
+                      ),
+                    ),
+                  if (widget.memo != null && widget.memo!.isNotEmpty)
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: StateContainer.of(context).curTheme.backgroundDarkest,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Text(
+                          widget.memo!,
+                          style: AppStyles.textStyleParagraph(context),
+                          textAlign: TextAlign.center,
+                        )),
                 ],
               ),
             ),
@@ -246,13 +239,16 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                           context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         // Authenticate
-                        AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                        bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                        final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                        final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                         if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                           try {
-                            bool authenticated = await sl
-                                .get<BiometricUtil>()
-                                .authenticateWithBiometrics(context, AppLocalization.of(context)!.requestAmountConfirm.replaceAll("%1", amount));
+                            final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
+                                context,
+                                AppLocalization.of(context)!
+                                    .requestAmountConfirm
+                                    .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw!))
+                                    .replaceAll("%2", StateContainer.of(context).currencyMode));
                             if (authenticated) {
                               sl.get<HapticUtil>().fingerprintSucess();
                               EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.REQUEST));
@@ -288,31 +284,32 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     try {
       _showAnimation(context);
 
-      String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+      final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
 
       // get epoch time as hex:
-      int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
-      String nonce_hex = secondsSinceEpoch.toRadixString(16);
-      String signature = NanoSignatures.signBlock(nonce_hex, privKey);
+      final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+      final String nonceHex = secondsSinceEpoch.toRadixString(16);
+      final String signature = NanoSignatures.signBlock(nonceHex, privKey);
       // check validity locally:
-      String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-      bool isValid = NanoSignatures.validateSig(nonce_hex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+      final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+      final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
       if (!isValid) {
         throw Exception("Invalid signature?!");
       }
 
-      var uuid = Uuid();
-      String local_uuid = "LOCAL:" + uuid.v4();
+      const Uuid uuid = Uuid();
+      final String localUuid = "LOCAL:${uuid.v4()}";
       // current block height:
-      int currentBlockHeightInList = StateContainer.of(context).wallet!.history!.length > 0 ? (StateContainer.of(context).wallet!.history![0].height! + 1) : 1;
-      String? lastBlockHash = StateContainer.of(context).wallet!.history!.length > 0 ? StateContainer.of(context).wallet!.history![0].hash : null;
+      final int currentBlockHeightInList =
+          StateContainer.of(context).wallet!.history!.isNotEmpty ? (StateContainer.of(context).wallet!.history![0].height! + 1) : 1;
+      final String? lastBlockHash = StateContainer.of(context).wallet!.history!.isNotEmpty ? StateContainer.of(context).wallet!.history![0].hash : null;
 
       // create a local txData for the request:
-      var newRequestTXData = new TXData(
+      final TXData newRequestTXData = TXData(
         from_address: StateContainer.of(context).wallet!.address,
         to_address: destinationAltered,
         amount_raw: widget.amountRaw,
-        uuid: local_uuid,
+        uuid: localUuid,
         block: lastBlockHash,
         is_acknowledged: false,
         is_fulfilled: false,
@@ -335,7 +332,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
 
         await sl
             .get<AccountService>()
-            .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet!.address, signature, nonce_hex, encryptedMemo, local_uuid);
+            .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
       } catch (e) {
         print("payment request failed: ${e.toString()}");
         sendFailed = true;
@@ -348,7 +345,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         await sl.get<DBHelper>().replaceTXDataByUUID(newRequestTXData);
         // await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
         // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
-        await Future.delayed(Duration(seconds: 2));
+        await Future.delayed(const Duration(seconds: 2));
         // update the list view:
         await StateContainer.of(context).updateSolids();
         await StateContainer.of(context).updateUnified(true);
@@ -356,7 +353,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
         UIUtil.showSnackbar(AppLocalization.of(context)!.requestError, context, durationMs: 5500);
       } else {
-        print("request succeeded");
+        sl.get<Logger>().v("request succeeded");
 
         // update the status:
         newRequestTXData.status = StatusTypes.CREATE_SUCCESS;
@@ -366,7 +363,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         // todo: there's a potential memory leak with contacts somewhere here?
         String? contactName = widget.contactName;
         if (widget.contactName == null || widget.contactName!.isEmpty) {
-          User? user = await sl.get<DBHelper>().getUserWithAddress(widget.destination!);
+          final User? user = await sl.get<DBHelper>().getUserWithAddress(widget.destination!);
           if (user != null) {
             contactName = user.getDisplayName();
           }
@@ -403,16 +400,19 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
 
   Future<void> authenticateWithPin() async {
     // PIN Authentication
-    String? expectedPin = await sl.get<Vault>().getPin();
-    bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-      return new PinScreen(
+    final String? expectedPin = await sl.get<Vault>().getPin();
+    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+      return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
-        description: AppLocalization.of(context)!.requestAmountConfirmPin.replaceAll("%1", amount),
+        description: AppLocalization.of(context)!
+            .requestAmountConfirmPin
+            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw!))
+            .replaceAll("%2", StateContainer.of(context).currencyMode),
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(Duration(milliseconds: 200));
+      await Future.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.REQUEST));
     }
   }

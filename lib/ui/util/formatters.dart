@@ -185,6 +185,14 @@ String getRawAsThemeAwareAmount(BuildContext context, String? rawString) {
   }
 }
 
+String getThemeCurrencyMode(BuildContext context) {
+  if (StateContainer.of(context).nyanoMode) {
+    return "NYANO";
+  } else {
+    return "NANO";
+  }
+}
+
 String getThemeAwareAmountAsRaw(BuildContext context, String amount) {
   if (StateContainer.of(context).nyanoMode) {
     return NumberUtil.getNyanoAmountAsRaw(amount);

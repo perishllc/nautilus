@@ -35,7 +35,7 @@ class BiometricUtil {
   Future<bool> authenticateWithBiometrics(BuildContext context, String message) async {
     bool hasBiometricsEnrolled = await hasBiometrics();
     if (hasBiometricsEnrolled) {
-      LocalAuthentication localAuth = new LocalAuthentication();
+      LocalAuthentication localAuth = LocalAuthentication();
       return await localAuth.authenticate(
           localizedReason: message,
           options: const AuthenticationOptions(

@@ -16,6 +16,6 @@ class AccountsBalancesResponse {
 
   AccountsBalancesResponse({this.balances});
 
-  factory AccountsBalancesResponse.fromJson(Map<String, dynamic> json) => _$AccountsBalancesResponseFromJson(json);
+  factory AccountsBalancesResponse.fromJson(json) => _$AccountsBalancesResponseFromJson(json as Map<String, dynamic>);
   Map<String, dynamic> toJson() => _$AccountsBalancesResponseToJson(this);
 }

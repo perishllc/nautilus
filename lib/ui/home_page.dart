@@ -9,6 +9,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_contacts/flutter_contacts.dart' as flutter_contacts;
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -119,8 +120,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   bool _noSearchResults = false;
 
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
-  List<User> _contacts = [];
-  List<User> _blocked = [];
+  // List<User> _contacts = [];
+  // List<User> _blocked = [];
   List<User> _users = [];
   List<TXData> _txData = [];
   List<TXData> _txRecords = [];
@@ -157,10 +158,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   Future<void> _switchToAccount(String account) async {
     final List<Account> accounts = await sl.get<DBHelper>().getAccounts(await StateContainer.of(context).getSeed());
-    for (Account a in accounts) {
-      if (a.address == account && a.address != StateContainer.of(context).wallet!.address) {
-        await sl.get<DBHelper>().changeAccount(a);
-        EventTaxiImpl.singleton().fire(AccountChangedEvent(account: a, delayPop: true));
+    for (Account acc in accounts) {
+      if (acc.address == account && acc.address != StateContainer.of(context).wallet!.address) {
+        await sl.get<DBHelper>().changeAccount(acc);
+        EventTaxiImpl.singleton().fire(AccountChangedEvent(account: acc, delayPop: true));
       }
     }
   }
@@ -473,8 +474,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       settingsIconMarginTop = 7;
     }
     _addSampleContact();
-    _updateContacts();
-    _updateBlocked();
+    // _updateContacts();
+    // _updateBlocked();
     _updateUsers();
     _updateTXData();
     // infinite scroll:
@@ -599,7 +600,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   /// Add donations contact if it hasnt already been added
   Future<void> _addSampleContact() async {
-    final bool contactAdded = await (sl.get<SharedPrefsUtil>().getFirstContactAdded());
+    final bool contactAdded = await sl.get<SharedPrefsUtil>().getFirstContactAdded();
     if (!contactAdded) {
       final bool addressExists = await sl.get<DBHelper>().contactExistsWithAddress("nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579");
       if (addressExists) {
@@ -615,21 +616,21 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  void _updateContacts() {
-    sl.get<DBHelper>().getContacts().then((List<User> contacts) {
-      setState(() {
-        _contacts = contacts;
-      });
-    });
-  }
+  // void _updateContacts() {
+  //   sl.get<DBHelper>().getContacts().then((List<User> contacts) {
+  //     setState(() {
+  //       _contacts = contacts;
+  //     });
+  //   });
+  // }
 
-  void _updateBlocked() {
-    sl.get<DBHelper>().getBlocked().then((List<User> blocked) {
-      setState(() {
-        _blocked = blocked;
-      });
-    });
-  }
+  // void _updateBlocked() {
+  //   sl.get<DBHelper>().getBlocked().then((List<User> blocked) {
+  //     setState(() {
+  //       _blocked = blocked;
+  //     });
+  //   });
+  // }
 
   void _updateUsers() {
     sl.get<DBHelper>().getUsers().then((List<User> users) {
@@ -738,12 +739,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     _unifiedSub = EventTaxiImpl.singleton().registerTo<UnifiedHomeEvent>().listen((UnifiedHomeEvent event) {
       generateUnifiedList(fastUpdate: event.fastUpdate);
     });
-    _contactModifiedSub = EventTaxiImpl.singleton().registerTo<ContactModifiedEvent>().listen((ContactModifiedEvent event) {
-      _updateContacts();
-    });
-    _blockedModifiedSub = EventTaxiImpl.singleton().registerTo<BlockedModifiedEvent>().listen((BlockedModifiedEvent event) {
-      _updateBlocked();
-    });
+    // _contactModifiedSub = EventTaxiImpl.singleton().registerTo<ContactModifiedEvent>().listen((ContactModifiedEvent event) {
+    //   _updateContacts();
+    // });
+    // _blockedModifiedSub = EventTaxiImpl.singleton().registerTo<BlockedModifiedEvent>().listen((BlockedModifiedEvent event) {
+    //   _updateBlocked();
+    // });
     // Hackish event to block auto-lock functionality
     _disableLockSub = EventTaxiImpl.singleton().registerTo<DisableLockTimeoutEvent>().listen((DisableLockTimeoutEvent event) {
       if (event.disable!) {
@@ -912,7 +913,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   StreamSubscription<dynamic>? lockStreamListener;
 
   Future<void> setAppLockEvent() async {
-    if (((await (sl.get<SharedPrefsUtil>().getLock())) || StateContainer.of(context).encryptedSecret != null) && !_lockDisabled) {
+    if (((await sl.get<SharedPrefsUtil>().getLock()) || StateContainer.of(context).encryptedSecret != null) && !_lockDisabled) {
       if (lockStreamListener != null) {
         lockStreamListener!.cancel();
       }
@@ -1304,7 +1305,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       unifiedList.sort(amountSortComparison);
     }
 
-    final bool areThereNoSearchResults = (unifiedList.isEmpty && _searchController.text.isNotEmpty);
+    final bool areThereNoSearchResults = unifiedList.isEmpty && _searchController.text.isNotEmpty;
 
     if (areThereNoSearchResults != _noSearchResults) {
       setState(() {
@@ -1324,7 +1325,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (_searchController.text.isNotEmpty) {
       _unifiedListMap[StateContainer.of(context).wallet!.address]!
           .items
-          .where((item) => (_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.indexOf(item) != (unifiedList.indexOf(item))))
+          .where((item) => _unifiedListMap[StateContainer.of(context).wallet!.address]!.items.indexOf(item) != (unifiedList.indexOf(item)))
           .forEach((dynamicItem) {
         removeIndices.add(_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.indexOf(dynamicItem));
       });
@@ -1562,7 +1563,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
                         // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
                         child: TextButton(
-                          key: const Key("receive_button"),
+                          key: const Key("home_receive_button"),
                           style: TextButton.styleFrom(
                             backgroundColor: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
@@ -2191,7 +2192,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               curve: Curves.easeInOut,
               width: 80.0,
               height: mainCardHeight,
-              alignment: const AlignmentDirectional(-1, -1),
+              alignment: AlignmentDirectional.topStart,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 curve: Curves.easeInOut,
@@ -2199,6 +2200,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 height: 50,
                 width: 50,
                 child: TextButton(
+                  key: const Key("home_settings_button"),
                   style: TextButton.styleFrom(
                     primary: StateContainer.of(context).curTheme.text15,
                     backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -2494,7 +2496,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
 
     // create a local memo object:
-    final Uuid uuid = const Uuid();
+    const Uuid uuid = Uuid();
     final String localUuid = "LOCAL:${uuid.v4()}";
     final TXData requestTXData = TXData(
       from_address: txDetails.from_address,
@@ -2522,14 +2524,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
       await sl.get<AccountService>().requestPayment(
           txDetails.to_address, txDetails.amount_raw, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
-    } catch (e) {
-      print(e);
+    } catch (error) {
+      sl.get<Logger>().v("Error encrypting memo: $error");
       sendFailed = true;
     }
 
     // if the memo send failed delete the object:
     if (sendFailed) {
-      print("request send failed, deleting TXData object");
+      sl.get<Logger>().v("request send failed, deleting TXData object");
       // remove failed txdata from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
@@ -2571,7 +2573,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
 
     // create a local memo object:
-    final Uuid uuid = const Uuid();
+    const Uuid uuid = Uuid();
     final String localUuid = "LOCAL:${uuid.v4()}";
     final TXData memoTXData = TXData(
       from_address: txDetails.from_address,
@@ -2602,7 +2604,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // if the memo send failed delete the object:
     if (memoSendFailed) {
-      print("memo send failed, deleting TXData object");
+      sl.get<Logger>().v("memo send failed, deleting TXData object");
       // remove from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
@@ -2920,7 +2922,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       children: _slideActions,
     );
 
-    final double cardHeight = 65;
+    const double cardHeight = 65;
 
     return Slidable(
       enabled: slideEnabled,
@@ -3449,7 +3451,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
     bool isUnacknowledgedSendableRequest = false;
     bool resendableMemo = false;
     bool isGiftLoad = false;
-    final bool isGift = false;
+    const bool isGift = false;
 
     final TXData txDetails = widget.txDetails!;
 

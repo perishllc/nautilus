@@ -54,7 +54,6 @@ class RegisterConfirmSheet extends StatefulWidget {
 }
 
 class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
-  late String amount;
   String? destinationAltered;
   late bool animationOpen;
 
@@ -86,7 +85,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
     //   amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(widget.amountRaw), digits: 6).toStringAsFixed(6) + "~";
     // }
     // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
-    amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
+    // amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
     // Ensure nano_ prefix on destination
     destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
@@ -184,7 +183,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                             ),
                           ),
                           TextSpan(
-                            text: getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
+                            text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, widget.amountRaw),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary,
                               fontSize: 16.0,
@@ -225,9 +224,12 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                         bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                         if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                           try {
-                            bool authenticated = await sl
-                                .get<BiometricUtil>()
-                                .authenticateWithBiometrics(context, AppLocalization.of(context)!.sendAmountConfirm.replaceAll("%1", amount));
+                            bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
+                                context,
+                                AppLocalization.of(context)!
+                                    .sendAmountConfirm
+                                    .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
+                                    .replaceAll("%2", StateContainer.of(context).currencyMode));
                             if (authenticated) {
                               sl.get<HapticUtil>().fingerprintSucess();
                               EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
@@ -333,10 +335,13 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
     // PIN Authentication
     String? expectedPin = await sl.get<Vault>().getPin();
     bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-      return new PinScreen(
+      return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
-        description: AppLocalization.of(context)!.sendAmountConfirmPin.replaceAll("%1", amount),
+        description: AppLocalization.of(context)!
+            .sendAmountConfirmPin
+            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
+            .replaceAll("%2", StateContainer.of(context).currencyMode),
       );
     }));
     if (auth != null && auth) {

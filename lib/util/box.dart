@@ -11,8 +11,8 @@ import 'package:encrypt/encrypt.dart';
 
 String generateNonce(int length) {
   String result = ""; // resulting nonce
-  String chars = "ABCDEF1234567890"; // hex characters
-  var rng = new Random.secure();
+  final String chars = "ABCDEF1234567890"; // hex characters
+  final Random rng = Random.secure();
   // length is doubled because it takes 2 characters to represent a byte
   for (int i = 0; i < (length * 2); i++) {
     result += chars[rng.nextInt(chars.length)];
@@ -21,14 +21,14 @@ String generateNonce(int length) {
 }
 
 Uint8List convertEd25519SecretKeyToCurve25519(Uint8List sk) {
-  Uint8List o = new Uint8List(32);
+  final Uint8List o = Uint8List(32);
 
-  Uint8List d = blake2b(sk);
+  final Uint8List d = blake2b(sk);
   d[0] &= 248;
   d[31] &= 127;
   d[31] |= 64;
 
-  for (var i = 0; i < 32; i++) {
+  for (int i = 0; i < 32; i++) {
     o[i] = d[i];
   }
   return o;
@@ -36,14 +36,14 @@ Uint8List convertEd25519SecretKeyToCurve25519(Uint8List sk) {
 
 Uint8List encodeString(String source) {
   // String (Dart uses UTF-16) to bytes
-  List<int> list = [];
-  source.runes.forEach((rune) {
+  final List<int> list = [];
+  source.runes.forEach((int rune) {
     if (rune >= 0x10000) {
       rune -= 0x10000;
-      int firstWord = (rune >> 10) + 0xD800;
+      final int firstWord = (rune >> 10) + 0xD800;
       list.add(firstWord >> 8);
       list.add(firstWord & 0xFF);
-      int secondWord = (rune & 0x3FF) + 0xDC00;
+      final int secondWord = (rune & 0x3FF) + 0xDC00;
       list.add(secondWord >> 8);
       list.add(secondWord & 0xFF);
     } else {
@@ -51,17 +51,17 @@ Uint8List encodeString(String source) {
       list.add(rune & 0xFF);
     }
   });
-  Uint8List bytes = Uint8List.fromList(list);
+  final Uint8List bytes = Uint8List.fromList(list);
   return bytes;
 }
 
 String decodeString(Uint8List bytes) {
   // Bytes to UTF-16 string
-  StringBuffer buffer = new StringBuffer();
+  final StringBuffer buffer = StringBuffer();
   for (int i = 0; i < bytes.length;) {
-    int firstWord = (bytes[i] << 8) + bytes[i + 1];
+    final int firstWord = (bytes[i] << 8) + bytes[i + 1];
     if (0xD800 <= firstWord && firstWord <= 0xDBFF) {
-      int secondWord = (bytes[i + 2] << 8) + bytes[i + 3];
+      final int secondWord = (bytes[i + 2] << 8) + bytes[i + 3];
       buffer.writeCharCode(((firstWord - 0xD800) << 10) + (secondWord - 0xDC00) + 0x10000);
       i += 4;
     } else {
@@ -74,88 +74,38 @@ String decodeString(Uint8List bytes) {
 }
 
 class Box {
-  static const NONCE_LENGTH = 24;
-
-  // static Future<String> encrypt(String message, String address, String privateKey) async {
-  //   String publicKey = NanoAccounts.extractPublicKey(address);
-
-  //   Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
-  //   Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
-  //   Uint8List nonce = NanoHelpers.hexToBytes(generateNonce(NONCE_LENGTH));
-
-  //   Map map = Map();
-  //   map['msg'] = encodeString(message);
-  //   map['nonce'] = nonce;
-  //   map['publicKey'] = convertedPublicKey;
-  //   map['secretKey'] = convertedPrivateKey;
-
-  //   Uint8List encrypted = await compute(box, map);
-
-  //   var full = BytesBuilder();
-  //   full.add(nonce);
-  //   full.add(encrypted);
-
-  //   return Sodium.bin2base64(full.toBytes());
-  // }
-
-  // static Future<String> decrypt(String message, String address, String privateKey) async {
-  //   String publicKey = NanoAccounts.extractPublicKey(address);
-
-  //   Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
-  //   Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
-
-  //   Uint8List decodedEncryptedMessageBytes = Sodium.base642bin(message);
-  //   Uint8List nonce = decodedEncryptedMessageBytes.sublist(0, NONCE_LENGTH);
-  //   Uint8List encryptedMessage = decodedEncryptedMessageBytes.sublist(NONCE_LENGTH, decodedEncryptedMessageBytes.length);
-
-  //   Map map = Map();
-  //   map['msg'] = encryptedMessage;
-  //   map['nonce'] = nonce;
-  //   map['publicKey'] = convertedPublicKey;
-  //   map['secretKey'] = convertedPrivateKey;
-
-  //   Uint8List decrypted = await compute(boxOpen as FutureOr<Uint8List> Function(dynamic), map);
-
-  //   return decodeString(decrypted);
-  // }
-
+  static const int NONCE_LENGTH = 24;
 
   static String encrypt(String message, String address, String privateKey) {
-    String publicKey = NanoAccounts.extractPublicKey(address);
+    final String publicKey = NanoAccounts.extractPublicKey(address);
 
-    Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(
-        NanoHelpers.hexToBytes(publicKey));
-    Uint8List convertedPrivateKey =
-        convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
+    final Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
+    final Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
 
-    var aliceSharedKey = X25519(convertedPrivateKey, convertedPublicKey);
+    final Uint8List aliceSharedKey = X25519(convertedPrivateKey, convertedPublicKey);
 
-    final key = Key(aliceSharedKey);
-    final iv = IV.fromLength(16);
+    final Key key = Key(aliceSharedKey);
+    final IV iv = IV.fromLength(16);
 
-    final encrypter = Encrypter(AES(key));
+    final Encrypter encrypter = Encrypter(AES(key));
 
-    final encrypted = encrypter.encrypt(message, iv: iv);
+    final Encrypted encrypted = encrypter.encrypt(message, iv: iv);
 
     return encrypted.base64;
   }
 
-  static String decrypt(
-      String encrypted, String address, String privateKey) {
-    String publicKey = NanoAccounts.extractPublicKey(address);
+  static String decrypt(String encrypted, String address, String privateKey) {
+    final String publicKey = NanoAccounts.extractPublicKey(address);
 
-    Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(
-        NanoHelpers.hexToBytes(publicKey));
-    Uint8List convertedPrivateKey =
-        convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
+    final Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
+    final Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
 
-    var bobSharedKey = X25519(convertedPrivateKey, convertedPublicKey);
-    final key = Key(bobSharedKey);
-    final encrypter = Encrypter(AES(key));
-    final iv = IV.fromLength(16);
-    final decrypted = encrypter.decrypt(Encrypted.fromBase64(encrypted), iv: iv);
+    final Uint8List bobSharedKey = X25519(convertedPrivateKey, convertedPublicKey);
+    final Key key = Key(bobSharedKey);
+    final Encrypter encrypter = Encrypter(AES(key));
+    final IV iv = IV.fromLength(16);
+    final String decrypted = encrypter.decrypt(Encrypted.fromBase64(encrypted), iv: iv);
 
     return decrypted;
   }
-
 }

@@ -19,7 +19,7 @@ import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
-import 'package:nautilus_wallet_flutter/model/notification_settings.dart';
+import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -806,7 +806,7 @@ class _SendSheetState extends State<SendSheet> {
                           if (user == null) {
                             setState(() {
                               if (_addressController!.text.startsWith("★")) {
-                                _addressValidationText = AppLocalization.of(context)!.favoriteInvalid;
+                                _addressValidationText = AppLocalization.of(context)!.contactInvalid;
                               } else if (_addressController!.text.startsWith("@")) {
                                 _addressValidationText = AppLocalization.of(context)!.usernameInvalid;
                               } else if (_addressController!.text.contains(".")) {
@@ -864,7 +864,7 @@ class _SendSheetState extends State<SendSheet> {
                           if (user == null) {
                             setState(() {
                               if (_addressController!.text.startsWith("★")) {
-                                _addressValidationText = AppLocalization.of(context)!.favoriteInvalid;
+                                _addressValidationText = AppLocalization.of(context)!.contactInvalid;
                               } else if (_addressController!.text.startsWith("@")) {
                                 _addressValidationText = AppLocalization.of(context)!.usernameInvalid;
                               } else if (_addressController!.text.contains(".")) {
@@ -962,7 +962,9 @@ class _SendSheetState extends State<SendSheet> {
                             final BigInt? amountBigInt = BigInt.tryParse(address.amount!);
                             if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
                               hasError = true;
-                              UIUtil.showSnackbar(AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001"), context);
+                              UIUtil.showSnackbar(
+                                  AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),
+                                  context);
                             } else if (_localCurrencyMode && mounted) {
                               toggleLocalCurrency();
                               _amountController!.text = getRawAsThemeAwareAmount(context, address.amount);
@@ -1122,7 +1124,7 @@ class _SendSheetState extends State<SendSheet> {
         Container(
           height: 42,
           width: double.infinity - 5,
-          child: FlatButton(
+          child: TextButton(
             onPressed: () {
               _addressController!.text = user.getDisplayName(ignoreNickname: !_isFavorite)!;
               _addressFocusNode!.unfocus();
@@ -1160,11 +1162,16 @@ class _SendSheetState extends State<SendSheet> {
         _amountValidationText = AppLocalization.of(context)!.amountMissing;
       });
     } else {
-      String bananoAmount = _localCurrencyMode
-          ? _convertLocalCurrencyToCrypto()
-          : _rawAmount == null
-              ? _amountController!.text
-              : NumberUtil.getRawAsUsableString(_rawAmount);
+      String bananoAmount;
+      if (_localCurrencyMode) {
+        bananoAmount = _convertLocalCurrencyToCrypto();
+      } else {
+        if (_rawAmount == null) {
+          bananoAmount = _amountController!.text;
+        } else {
+          bananoAmount = NumberUtil.getRawAsUsableString(_rawAmount);
+        }
+      }
       if (bananoAmount.isEmpty) {
         bananoAmount = "0";
       }
@@ -1266,8 +1273,11 @@ class _SendSheetState extends State<SendSheet> {
       inputFormatters: _rawAmount == null
           ? [
               LengthLimitingTextInputFormatter(13),
-              if (_localCurrencyMode) CurrencyFormatter(
-                      decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP, maxDecimalDigits: 2) else CurrencyFormatter(maxDecimalDigits: NumberUtil.maxDecimalDigits),
+              if (_localCurrencyMode)
+                CurrencyFormatter(
+                    decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP, maxDecimalDigits: 2)
+              else
+                CurrencyFormatter(maxDecimalDigits: NumberUtil.maxDecimalDigits),
               LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
             ]
           : [LengthLimitingTextInputFormatter(13)],
@@ -1324,7 +1334,7 @@ class _SendSheetState extends State<SendSheet> {
       suffixShowFirstCondition: !_isMaxSend(),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textAlign: TextAlign.center,
-      onSubmitted: (text) {
+      onSubmitted: (String text) {
         FocusScope.of(context).unfocus();
         if (!Address(_addressController!.text).isValid()) {
           FocusScope.of(context).requestFocus(_addressFocusNode);

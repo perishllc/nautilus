@@ -119,7 +119,7 @@ class AppAnimation extends StatefulWidget {
       case AnimationType.SEARCHING:
         return "assets/animations/searching.json";
       case AnimationType.LOADING:
-        return "assets/animations/generic_spinner_1.json";
+        return "assets/animations/loading/generic_spinner_1.json";
       case AnimationType.GENERIC:
         return genericLoaders[Random().nextInt(genericLoaders.length)];
       default:

@@ -1,28 +1,29 @@
 import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/bus/events.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/pending_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/pending_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/util/numberutil.dart';
-import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
+import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 
 class AppTransferConfirmSheet extends StatefulWidget {
   final Map<String, AccountBalanceItem>? privKeyBalanceMap;

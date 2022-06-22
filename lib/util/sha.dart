@@ -10,9 +10,9 @@ class Sha {
   static Uint8List sha256(List<Uint8List> byteArrays) {
     Digest digest = Digest("SHA-256");
     Uint8List hashed = Uint8List(32);
-    byteArrays.forEach((byteArray) {
+    for (final Uint8List byteArray in byteArrays) {
       digest.update(byteArray, 0, byteArray.lengthInBytes);
-    });
+    }
     digest.doFinal(hashed, 0);
     return hashed;
   }

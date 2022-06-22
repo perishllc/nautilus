@@ -24,7 +24,7 @@ class QRScanErrs {
 class UserDataUtil {
   static final Logger log = sl.get<Logger>();
 
-  static const MethodChannel _channel = const MethodChannel('fappchannel');
+  static const MethodChannel _channel = MethodChannel('fappchannel');
   static StreamSubscription<dynamic>? setStream;
 
   static String? _parseData(String data, DataType type) {
@@ -107,7 +107,7 @@ class UserDataUtil {
         return true;
       });
       setStream = delayed.asStream().listen((_) {
-        Clipboard.getData("text/plain").then((data) {
+        Clipboard.getData("text/plain").then((ClipboardData? data) {
           if (data != null && data.text != null && NanoSeeds.isValidSeed(data.text!)) {
             Clipboard.setData(ClipboardData(text: ""));
           }

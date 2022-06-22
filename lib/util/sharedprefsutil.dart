@@ -36,6 +36,7 @@ class SharedPrefsUtil {
   static const String user_representative = 'fkalium_user_rep'; // For when non-opened accounts have set a representative
   static const String firstcontact_added = 'fkalium_first_c_added';
   static const String notification_enabled = 'fkalium_notification_on';
+  static const String contacts_enabled = 'fnautilus_contacts_on';
   static const String lock_kalium = 'fkalium_lock_dev';
   static const String kalium_lock_timeout = 'fkalium_lock_timeout';
   static const String has_shown_root_warning = 'fkalium_root_warn'; // If user has seen the root/jailbreak warning yet
@@ -61,7 +62,7 @@ class SharedPrefsUtil {
   static const String app_version = 'fnautilus_app_version';
 
   // For plain-text data
-  Future<void> set(String key, value) async {
+  Future<void> set(String key, dynamic value) async {
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (value is bool) {
       sharedPreferences.setBool(key, value);
@@ -79,6 +80,11 @@ class SharedPrefsUtil {
     return sharedPreferences.get(key) ?? defaultValue;
   }
 
+  Future<void> reload() async {
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.reload();
+  }
+
   /// Set a key with an expiry, expiry is in seconds
   Future<void> setWithExpiry(String key, dynamic value, int expiry) async {
     int expiryVal;
@@ -89,6 +95,7 @@ class SharedPrefsUtil {
     } else {
       expiryVal = expiry;
     }
+    // ignore: always_specify_types
     final Map<String, dynamic> msg = {'data': value, 'expiry': expiryVal};
     final String serialized = json.encode(msg);
     await set(key, serialized);
@@ -270,7 +277,7 @@ class SharedPrefsUtil {
     return await get(notification_enabled, defaultValue: defaultValue) as bool;
   }
 
-  /// If notifications have been set by user/app
+  // If notifications have been set by user/app
   Future<bool> getNotificationsSet() async {
     if (await get(notification_enabled, defaultValue: null) == null) {
       return false;
@@ -278,6 +285,25 @@ class SharedPrefsUtil {
       return true;
     }
   }
+
+  Future<void> setContactsOn(bool value) async {
+    return set(contacts_enabled, value);
+  }
+
+  Future<bool?> getContactsOn() async {
+    // Contacts null by default
+    return await get(contacts_enabled, defaultValue: null) as bool?;
+  }
+
+  // If contacts have been set by user/app
+  // Future<bool> getContactsSet() async {
+  //   if (await get(contacts_enabled, defaultValue: null) == null) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
+  
 
   Future<void> setLock(bool value) async {
     return set(lock_kalium, value);
@@ -442,11 +468,19 @@ class SharedPrefsUtil {
     await prefs.remove(cur_currency);
     await prefs.remove(auth_method);
     await prefs.remove(notification_enabled);
+    await prefs.remove(contacts_enabled);
     await prefs.remove(lock_kalium);
     await prefs.remove(pin_attempts);
     await prefs.remove(pin_lock_until);
     await prefs.remove(kalium_lock_timeout);
     await prefs.remove(has_shown_root_warning);
     await prefs.remove(use_natricon);
+    await prefs.remove(use_nyanicon);
+    await prefs.remove(min_raw_receive);
+    await prefs.remove(currency_mode);
+    await prefs.remove(last_napi_users_check);
+    await prefs.remove(last_napi_reps_check);
+    await prefs.remove(ninja_api_cache);
+    await prefs.remove(firstcontact_added);
   }
 }

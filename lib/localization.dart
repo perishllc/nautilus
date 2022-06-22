@@ -546,7 +546,7 @@ class AppLocalization {
   }
 
   String get sendAmountConfirm {
-    return Intl.message("Send %1 NANO", desc: 'send_pin_description', name: 'sendAmountConfirm');
+    return Intl.message("Send %1 %2", desc: 'send_pin_description', name: 'sendAmountConfirm');
   }
 
   String get sendMessageConfirm {
@@ -554,7 +554,7 @@ class AppLocalization {
   }
 
   String get requestAmountConfirm {
-    return Intl.message("Request %1 NANO", desc: 'request_pin_description', name: 'requestAmountConfirm');
+    return Intl.message("Request %1 %2", desc: 'request_pin_description', name: 'requestAmountConfirm');
   }
 
   String get sendAmountConfirmPin {
@@ -656,7 +656,7 @@ class AppLocalization {
   }
 
   String get minimumSend {
-    return Intl.message("Minimum send amount is %1 NANO", desc: 'send_minimum_error', name: 'minimumSend');
+    return Intl.message("Minimum send amount is %1 %2", desc: 'send_minimum_error', name: 'minimumSend');
   }
 
   String get insufficientBalance {
@@ -874,15 +874,15 @@ class AppLocalization {
     return Intl.message("Share Nautilus", desc: 'settings_share', name: 'shareNautilus');
   }
 
-  String get destroyDatabase {
-    return Intl.message("Destroy the Database", desc: 'settings_nuke_db', name: 'destroyDatabase');
+  String get resetDatabase {
+    return Intl.message("Reset the Database", desc: 'settings_nuke_db', name: 'resetDatabase');
   }
 
-  String get destroyDatabaseConfirmation {
+  String get resetDatabaseConfirmation {
     return Intl.message(
-        'Are you sure you want to destroy the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed. If you\'re having issues you should backup your seed, re-install the app, and if the issue persists feel free to make a bug report on github or discord.',
+        'Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed. If you\'re having issues you should backup your seed, re-install the app, and if the issue persists feel free to make a bug report on github or discord.',
         desc: 'database_remove_sure',
-        name: 'destroyDatabaseConfirmation');
+        name: 'resetDatabaseConfirmation');
   }
 
   String get shareNautilusText {
@@ -1002,7 +1002,7 @@ class AppLocalization {
   }
 
   String get notificationTitle {
-    return Intl.message("Received %1 NANO", desc: 'notification_title', name: 'notificationTitle');
+    return Intl.message("Received %1 %2", desc: 'notification_title', name: 'notificationTitle');
   }
 
   String get notificationBody {
@@ -1102,7 +1102,7 @@ class AppLocalization {
   // Compelte screen
 
   String get transferComplete {
-    return Intl.message("%1 NANO successfully transferred to your Nautilus Wallet.\n", desc: 'transfer_complete_text', name: 'transferComplete');
+    return Intl.message("%1 %2 successfully transferred to your Nautilus Wallet.\n", desc: 'transfer_complete_text', name: 'transferComplete');
   }
 
   String get transferClose {

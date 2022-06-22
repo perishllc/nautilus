@@ -14,6 +14,7 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/ninja/api.dart';
+import 'package:nautilus_wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class IntroBackupSafetyPage extends StatefulWidget {
@@ -22,17 +23,17 @@ class IntroBackupSafetyPage extends StatefulWidget {
 }
 
 class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
 
     // set random representative as the default:
-    NinjaAPI.getVerifiedNodes().then((nodes) {
+    NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? nodes) {
       if (nodes != null) {
-        final _random = new Random();
-        var randomNode = nodes[_random.nextInt(nodes.length)];
+        final Random _random = Random();
+        final NinjaNode randomNode = nodes[_random.nextInt(nodes.length)];
         sl.get<SharedPrefsUtil>().setRepresentative(randomNode.account);
         // StateContainer.of(context).wallet.defaultRepresentative = randomNode.account;
         AppWallet.defaultRepresentative = randomNode.account;
@@ -40,9 +41,9 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
       StateContainer.of(context).requestUpdate();
     });
 
-    sl.get<Vault>().setSeed(NanoSeeds.generateSeed()).then((result) {
+    sl.get<Vault>().setSeed(NanoSeeds.generateSeed()).then((String? result) {
       // Update wallet
-      StateContainer.of(context).getSeed().then((seed) {
+      StateContainer.of(context).getSeed().then((String seed) {
         NanoUtil().loginAccount(seed, context).then((_) {
           StateContainer.of(context).requestUpdate();
         });
@@ -57,7 +58,7 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
       key: _scaffoldKey,
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
-        builder: (context, constraints) => SafeArea(
+        builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
           minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
@@ -73,14 +74,17 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
                           margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
                           height: 50,
                           width: 50,
-                          child: FlatButton(
-                              highlightColor: StateContainer.of(context).curTheme.text15,
-                              splashColor: StateContainer.of(context).curTheme.text15,
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                primary: StateContainer.of(context).curTheme.text15,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                padding: EdgeInsets.zero,
+                                // highlightColor: StateContainer.of(context).curTheme.text15,
+                                // splashColor: StateContainer.of(context).curTheme.text15,
+                              ),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(0.0),
                               child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                       ],
@@ -104,7 +108,7 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
                         end: smallScreen(context) ? 30 : 40,
                         top: 10,
                       ),
-                      alignment: AlignmentDirectional(-1, 0),
+                      alignment: AlignmentDirectional.centerStart,
                       child: AutoSizeText(
                         AppLocalization.of(context)!.secretInfoHeader,
                         style: AppStyles.textStyleHeaderColored(context),
@@ -126,7 +130,7 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
                             stepGranularity: 0.5,
                           ),
                           Container(
-                            margin: EdgeInsetsDirectional.only(top: 15),
+                            margin: const EdgeInsetsDirectional.only(top: 15),
                             child: AutoSizeText(
                               AppLocalization.of(context)!.secretWarning,
                               style: AppStyles.textStyleParagraphPrimary(context),
@@ -146,7 +150,7 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.gotItButton, Dimens.BUTTON_BOTTOM_DIMENS,
-                      instanceKey: Key("got_it_button"), onPressed: () {
+                      instanceKey: const Key("got_it_button"), onPressed: () {
                     Navigator.of(context).pushNamed('/intro_backup', arguments: StateContainer.of(context).encryptedSecret);
                   }),
                 ],

@@ -32,14 +32,14 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
   void initState() {
     super.initState();
     if (widget.encryptedSeed == null) {
-      sl.get<Vault>().getSeed().then((seed) {
+      sl.get<Vault>().getSeed().then((String? seed) {
         setState(() {
           _seed = seed;
           _mnemonic = NanoMnemomics.seedToMnemonic(seed!);
         });
       });
     } else {
-      sl.get<Vault>().getSessionKey().then((key) {
+      sl.get<Vault>().getSessionKey().then((String key) {
         setState(() {
           _seed = NanoHelpers.byteToHex(NanoCrypt.decrypt(widget.encryptedSeed, key));
           _mnemonic = NanoMnemomics.seedToMnemonic(_seed!);
@@ -55,7 +55,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
       resizeToAvoidBottomInset: false,
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
-        builder: (context, constraints) => SafeArea(
+        builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
           minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
@@ -169,9 +169,9 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                     onPressed: () {
                       // Update wallet
                       sl.get<DBHelper>().dropAccounts().then((_) {
-                        StateContainer.of(context).getSeed().then((seed) {
+                        StateContainer.of(context).getSeed().then((String seed) {
                           NanoUtil().loginAccount(seed, context).then((_) {
-                            StateContainer.of(context).requestUpdate();
+                            // StateContainer.of(context).requestUpdate();// todo: is this necessary?
                             Navigator.of(context).pushNamed('/intro_backup_confirm');
                           });
                         });

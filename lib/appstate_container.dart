@@ -414,7 +414,7 @@ class StateContainerState extends State<StateContainer> {
     });
     // Get currency mode pref
     sl.get<SharedPrefsUtil>().getCurrencyMode().then((String currencyMode) {
-      setCurrencyMode(CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName(context));
+      setCurrencyMode(currencyMode);
     });
     // make sure nano API databases are up to date
     checkAndCacheNapiDatabases(false);
@@ -628,6 +628,7 @@ class StateContainerState extends State<StateContainer> {
     }
     setState(() {
       wallet = AppWallet(address: address, user: user, username: walletUsername, loading: true);
+      print("here1");
       requestUpdate();
       updateSolids();
     });
@@ -980,22 +981,28 @@ class StateContainerState extends State<StateContainer> {
   /// Request balances for accounts in our database
   Future<void> _requestBalances() async {
     final List<Account> accounts = await sl.get<DBHelper>().getAccounts(await getSeed());
-    final List<String?> addressToRequest = [];
-    accounts.forEach((Account account) {
+
+    if (accounts.isEmpty) {
+      return;
+    }
+
+    final List<String> addressToRequest = [];
+    for (final Account account in accounts) {
       if (account.address != null) {
-        addressToRequest.add(account.address);
+        addressToRequest.add(account.address!);
       }
-    });
+    }
+
     final AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances(addressToRequest);
     sl.get<DBHelper>().getAccounts(await getSeed()).then((List<Account> accounts) {
-      accounts.forEach((Account account) {
+      for (final Account account in accounts) {
         resp.balances!.forEach((String address, AccountBalanceItem balance) {
           final String combinedBalance = (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.pending!)!).toString();
           if (address == account.address && combinedBalance != account.balance) {
             sl.get<DBHelper>().updateAccountBalance(account, combinedBalance);
           }
         });
-      });
+      }
     });
   }
 
@@ -1398,14 +1405,14 @@ class StateContainerState extends State<StateContainer> {
           // }
 
           if (oldTXData != null) {
-            print("removing old txData!");
+            log.v("removing old txData!");
             // remove the old tx by the uuid:
             await sl.get<DBHelper>().deleteTXDataByUUID(oldTXData.uuid!);
 
             // if we didn't replace an existing txData, add it to the db:
             if (txData == null) {
               // add it since it doesn't exist:
-              print("adding payment_record : request to db");
+              log.v("adding payment_record : request to db");
               oldTXData.uuid = uuid;
               oldTXData.request_time = requestTime;
               oldTXData.status = StatusTypes.CREATE_SUCCESS;

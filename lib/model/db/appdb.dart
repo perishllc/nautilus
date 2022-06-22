@@ -181,9 +181,6 @@ class DBHelper {
     await dbClient.execute(ACCOUNTS_SQL);
     await dbClient.execute(BLOCKED_SQL);
     await dbClient.execute(TX_DATA_SQL);
-
-    // re-populate the users table
-    await fetchNapiUsernames();
   }
 
   // read json and populate users table:

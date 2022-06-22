@@ -1,59 +1,66 @@
 import 'dart:async';
+
 import 'package:event_taxi/event_taxi.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_contacts/flutter_contacts.dart' as cont;
 import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/bus/contacts_setting_change_event.dart';
+import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/bus/notification_setting_change_event.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
+import 'package:nautilus_wallet_flutter/model/available_currency.dart';
+import 'package:nautilus_wallet_flutter/model/available_language.dart';
+import 'package:nautilus_wallet_flutter/model/available_themes.dart';
+import 'package:nautilus_wallet_flutter/model/contacts_setting.dart';
 import 'package:nautilus_wallet_flutter/model/currency_mode_setting.dart';
+import 'package:nautilus_wallet_flutter/model/db/account.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/device_lock_timeout.dart';
+import 'package:nautilus_wallet_flutter/model/device_unlock_option.dart';
 import 'package:nautilus_wallet_flutter/model/min_raw_setting.dart';
 import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
+import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
 import 'package:nautilus_wallet_flutter/model/nyanicon_option.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/sensitive.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accounts_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/backupseed_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/blocked_widget.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/changerepresentative_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/contacts_widget.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/disable_password_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/set_password_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/settings_list_item.dart';
+import 'package:nautilus_wallet_flutter/ui/transfer/transfer_complete_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:package_info/package_info.dart';
-import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/bus/events.dart';
-import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
-import 'package:nautilus_wallet_flutter/model/available_currency.dart';
-import 'package:nautilus_wallet_flutter/model/device_unlock_option.dart';
-import 'package:nautilus_wallet_flutter/model/device_lock_timeout.dart';
-import 'package:nautilus_wallet_flutter/model/notification_settings.dart';
-import 'package:nautilus_wallet_flutter/model/available_language.dart';
-import 'package:nautilus_wallet_flutter/model/available_themes.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
-import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
-import 'package:nautilus_wallet_flutter/ui/settings/backupseed_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/settings/changerepresentative_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/settings/settings_list_item.dart';
-import 'package:nautilus_wallet_flutter/ui/settings/contacts_widget.dart';
-import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/transfer/transfer_complete_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/biometrics.dart';
-import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
-import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/ninja/api.dart';
+import 'package:nautilus_wallet_flutter/util/ninja/ninja_node.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:package_info/package_info.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsSheet extends StatefulWidget {
@@ -75,6 +82,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   bool _hasBiometrics = false;
   AuthenticationMethod _curAuthMethod = AuthenticationMethod(AuthMethod.BIOMETRICS);
   NotificationSetting _curNotificiationSetting = NotificationSetting(NotificationOptions.ON);
+  ContactsSetting _curContactsSetting = ContactsSetting(ContactsOptions.OFF);
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
   NyaniconSetting _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
   MinRawSetting _curMinRawSetting = MinRawSetting(MinRawOptions.OFF);
@@ -89,12 +97,33 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   bool? _blockedOpen;
   late bool _securityOpen;
 
-  bool notNull(Object? o) => o != null;
-
   // Called if transfer fails
   void transferError() {
     Navigator.of(context).pop();
     UIUtil.showSnackbar(AppLocalization.of(context)!.transferError, context);
+  }
+
+  Future<void> _getContactsPermissions() async {
+    bool? contactsOn = await sl.get<SharedPrefsUtil>().getContactsOn();
+
+    // ask for contacts permission if we haven't already:
+    if (contactsOn == null) {
+      // check again after reloading prefs:
+      await sl.get<SharedPrefsUtil>().reload();
+
+      contactsOn = await sl.get<SharedPrefsUtil>().getContactsOn();
+
+      // really is null:
+      if (contactsOn == null) {
+        final bool contactsEnabled = await cont.FlutterContacts.requestPermission();
+        await sl.get<SharedPrefsUtil>().setContactsOn(contactsEnabled);
+        EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
+      } else {
+        EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsOn));
+      }
+    } else {
+      EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsOn));
+    }
   }
 
   @override
@@ -114,42 +143,45 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       }
     });
     // Get default auth method setting
-    sl.get<SharedPrefsUtil>().getAuthMethod().then((authMethod) {
+    sl.get<SharedPrefsUtil>().getAuthMethod().then((AuthenticationMethod authMethod) {
       setState(() {
         _curAuthMethod = authMethod;
       });
     });
     // Get default unlock settings
-    sl.get<SharedPrefsUtil>().getLock().then((lock) {
+    sl.get<SharedPrefsUtil>().getLock().then((bool lock) {
       setState(() {
         _curUnlockSetting = lock ? UnlockSetting(UnlockOption.YES) : UnlockSetting(UnlockOption.NO);
       });
     });
-    sl.get<SharedPrefsUtil>().getLockTimeout().then((lockTimeout) {
+    sl.get<SharedPrefsUtil>().getLockTimeout().then((LockTimeoutSetting lockTimeout) {
       setState(() {
         _curTimeoutSetting = lockTimeout;
       });
     });
     // Get default notification setting
-    sl.get<SharedPrefsUtil>().getNotificationsOn().then((notificationsOn) {
+    sl.get<SharedPrefsUtil>().getNotificationsOn().then((bool notificationsOn) {
       setState(() {
         _curNotificiationSetting = notificationsOn ? NotificationSetting(NotificationOptions.ON) : NotificationSetting(NotificationOptions.OFF);
       });
     });
+    // Get default contacts setting
+    _getContactsPermissions();
+
     // Get default natricon setting
-    sl.get<SharedPrefsUtil>().getUseNatricon().then((useNatricon) {
+    sl.get<SharedPrefsUtil>().getUseNatricon().then((bool useNatricon) {
       setState(() {
         _curNatriconSetting = useNatricon ? NatriconSetting(NatriconOptions.ON) : NatriconSetting(NatriconOptions.OFF);
       });
     });
-    // Get default natricon setting
-    sl.get<SharedPrefsUtil>().getUseNyanicon().then((useNyanicon) {
+    // Get default nyanicon setting
+    sl.get<SharedPrefsUtil>().getUseNyanicon().then((bool useNyanicon) {
       setState(() {
         _curNyaniconSetting = useNyanicon ? NyaniconSetting(NyaniconOptions.ON) : NyaniconSetting(NyaniconOptions.OFF);
       });
     });
     // Get min raw setting
-    sl.get<SharedPrefsUtil>().getMinRawReceive().then((minRawReceive) {
+    sl.get<SharedPrefsUtil>().getMinRawReceive().then((String minRawReceive) {
       setState(() {
         switch (minRawReceive) {
           case MinRawSetting.NONE_NYANO:
@@ -177,7 +209,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       });
     });
     // Get currency mode setting
-    sl.get<SharedPrefsUtil>().getCurrencyMode().then((currencyMode) {
+    sl.get<SharedPrefsUtil>().getCurrencyMode().then((String currencyMode) {
       setState(() {
         switch (currencyMode) {
           case "NANO":
@@ -190,7 +222,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       });
     });
     // Get default theme settings
-    sl.get<SharedPrefsUtil>().getTheme().then((theme) {
+    sl.get<SharedPrefsUtil>().getTheme().then((ThemeSetting theme) {
       setState(() {
         _curThemeSetting = theme;
       });
@@ -215,11 +247,11 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
 
     _scrollController = ScrollController();
 
-    _contactsOffsetFloat = Tween<Offset>(begin: Offset(1.1, 0), end: Offset(0, 0)).animate(_contactsController!);
-    _securityOffsetFloat = Tween<Offset>(begin: Offset(1.1, 0), end: Offset(0, 0)).animate(_securityController);
-    _blockedOffsetFloat = Tween<Offset>(begin: Offset(1.1, 0), end: Offset(0, 0)).animate(_blockedController!);
+    _contactsOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: const Offset(0, 0)).animate(_contactsController!);
+    _securityOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: const Offset(0, 0)).animate(_securityController);
+    _blockedOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: const Offset(0, 0)).animate(_blockedController!);
     // Version string
-    PackageInfo.fromPlatform().then((packageInfo) {
+    PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       setState(() {
         versionString = "v${packageInfo.version}";
       });
@@ -229,10 +261,11 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   StreamSubscription<TransferConfirmEvent>? _transferConfirmSub;
   StreamSubscription<TransferCompleteEvent>? _transferCompleteSub;
   StreamSubscription<NotificationSettingChangeEvent>? _notificationSettingChangeSub;
+  StreamSubscription<ContactsSettingChangeEvent>? _contactsSettingChangeSub;
 
   void _registerBus() {
     // Ready to go to transfer confirm
-    _transferConfirmSub = EventTaxiImpl.singleton().registerTo<TransferConfirmEvent>().listen((event) {
+    _transferConfirmSub = EventTaxiImpl.singleton().registerTo<TransferConfirmEvent>().listen((TransferConfirmEvent event) {
       Sheets.showAppHeightNineSheet(
           context: context,
           widget: AppTransferConfirmSheet(
@@ -241,14 +274,20 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           ));
     });
     // Ready to go to transfer complete
-    _transferCompleteSub = EventTaxiImpl.singleton().registerTo<TransferCompleteEvent>().listen((event) {
+    _transferCompleteSub = EventTaxiImpl.singleton().registerTo<TransferCompleteEvent>().listen((TransferCompleteEvent event) {
       StateContainer.of(context).requestUpdate();
-      AppTransferCompleteSheet(NumberUtil.getRawAsUsableString(event.amount.toString())).mainBottomSheet(context);
+      AppTransferCompleteSheet(getRawAsThemeAwareAmount(context, event.amount.toString())).mainBottomSheet(context);
     });
     // notification setting changed:
-    _notificationSettingChangeSub = EventTaxiImpl.singleton().registerTo<NotificationSettingChangeEvent>().listen((event) {
+    _notificationSettingChangeSub = EventTaxiImpl.singleton().registerTo<NotificationSettingChangeEvent>().listen((NotificationSettingChangeEvent event) {
       setState(() {
-        _curNotificiationSetting = event.isOn! ? NotificationSetting(NotificationOptions.ON) : NotificationSetting(NotificationOptions.OFF);
+        _curNotificiationSetting = event.isOn ? NotificationSetting(NotificationOptions.ON) : NotificationSetting(NotificationOptions.OFF);
+      });
+    });
+    // contacts setting changed:
+    _contactsSettingChangeSub = EventTaxiImpl.singleton().registerTo<ContactsSettingChangeEvent>().listen((ContactsSettingChangeEvent event) {
+      setState(() {
+        _curContactsSetting = event.isOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
       });
     });
   }
@@ -262,6 +301,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     }
     if (_notificationSettingChangeSub != null) {
       _notificationSettingChangeSub!.cancel();
+    }
+    if (_contactsSettingChangeSub != null) {
+      _contactsSettingChangeSub!.cancel();
     }
   }
 
@@ -388,7 +430,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         sl.get<SharedPrefsUtil>().setNotificationsOn(true).then((result) {
           EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: true));
           FirebaseMessaging.instance.requestPermission();
-          FirebaseMessaging.instance.getToken().then((fcmToken) {
+          FirebaseMessaging.instance.getToken().then((String? fcmToken) {
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
           });
         });
@@ -396,9 +438,62 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       case NotificationOptions.OFF:
         sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((result) {
           EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: false));
-          FirebaseMessaging.instance.getToken().then((fcmToken) {
+          FirebaseMessaging.instance.getToken().then((String? fcmToken) {
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
           });
+        });
+        break;
+      default:
+        break;
+    }
+  }
+
+  Future<void> _contactsDialog() async {
+    switch (await showDialog<ContactsOptions>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            title: Text(
+              AppLocalization.of(context)!.contactsHeader,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            children: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, ContactsOptions.ON);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context)!.onStr,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, ContactsOptions.OFF);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context)!.off,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        })) {
+      case ContactsOptions.ON:
+        sl.get<SharedPrefsUtil>().setContactsOn(true).then((result) {
+          EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: true));
+        });
+        break;
+      case ContactsOptions.OFF:
+        sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((result) {
+          EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: false));
         });
         break;
       default:
@@ -506,7 +601,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
               ),
               AppSimpleDialogOption(
                 onPressed: () {
-                  Clipboard.setData(new ClipboardData(text: StateContainer.of(context).wallet!.address));
+                  Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
                   UIUtil.showSnackbar(AppLocalization.of(context)!.addressCopied, context, durationMs: 1500);
                 },
                 child: Padding(
@@ -944,14 +1039,14 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     // Drawer in flutter doesn't have a built-in way to push/pop elements
     // on top of it like our Android counterpart. So we can override back button
     // presses and replace the main settings widget with contacts based on a bool
-    return new WillPopScope(
+    return WillPopScope(
       onWillPop: _onBackButtonPressed,
       child: ClipRect(
         child: Stack(
           children: <Widget>[
             Container(
               color: StateContainer.of(context).curTheme.backgroundDark,
-              constraints: BoxConstraints.expand(),
+              constraints: const BoxConstraints.expand(),
             ),
             buildMainSettings(context),
             SlideTransition(position: _contactsOffsetFloat, child: ContactsList(_contactsController, _contactsOpen)),
@@ -965,33 +1060,34 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
 
   Widget _buildSettingsList() {
     return ListView(
-      padding: EdgeInsets.only(top: 15.0),
+      padding: const EdgeInsets.only(top: 15.0),
       controller: _scrollController,
       children: [
         // Active Alerts, Remote Message Card
-        StateContainer.of(context).settingsAlert != null
-            ? Container(
-                padding: EdgeInsetsDirectional.only(
-                  start: 12,
-                  end: 12,
-                  bottom: 20,
-                ),
-                child: RemoteMessageCard(
-                  alert: StateContainer.of(context).settingsAlert,
-                  onPressed: () {
-                    Sheets.showAppHeightEightSheet(
-                      context: context,
-                      widget: RemoteMessageSheet(
-                        alert: StateContainer.of(context).settingsAlert,
-                        hasDismissButton: false,
-                      ),
-                    );
-                  },
-                ),
-              )
-            : SizedBox(),
+        if (StateContainer.of(context).settingsAlert != null)
+          Container(
+            padding: const EdgeInsetsDirectional.only(
+              start: 12,
+              end: 12,
+              bottom: 20,
+            ),
+            child: RemoteMessageCard(
+              alert: StateContainer.of(context).settingsAlert,
+              onPressed: () {
+                Sheets.showAppHeightEightSheet(
+                  context: context,
+                  widget: RemoteMessageSheet(
+                    alert: StateContainer.of(context).settingsAlert,
+                    hasDismissButton: false,
+                  ),
+                );
+              },
+            ),
+          )
+        else
+          const SizedBox(),
         Container(
-          margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+          margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
           child: Text(AppLocalization.of(context)!.featured,
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
         ),
@@ -1040,7 +1136,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           color: StateContainer.of(context).curTheme.text15,
         ),
         Container(
-          margin: EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
+          margin: const EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
           child: Text(AppLocalization.of(context)!.preferences,
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
         ),
@@ -1062,6 +1158,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         ),
         AppSettings.buildSettingsListItemDoubleLine(
             context, AppLocalization.of(context)!.notifications, _curNotificiationSetting, AppIcons.notifications, _notificationsDialog),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemDoubleLine(
+            context, AppLocalization.of(context)!.contactsHeader, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
         Divider(
           height: 2,
           color: StateContainer.of(context).curTheme.text15,
@@ -1101,7 +1203,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           _explorerDialog,
         ),
         Container(
-          margin: EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
+          margin: const EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
           child: Text(AppLocalization.of(context)!.manage,
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
         ),
@@ -1138,15 +1240,15 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
               bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.fingerprintSeedBackup);
               if (authenticated) {
                 sl.get<HapticUtil>().fingerprintSucess();
-                StateContainer.of(context).getSeed().then((seed) {
+                StateContainer.of(context).getSeed().then((String seed) {
                   AppSeedBackupSheet(seed).mainBottomSheet(context);
                 });
               }
-            } catch (e) {
+            } catch (error) {
               AppDialogs.showConfirmDialog(
                   context,
                   "Error",
-                  e.toString(),
+                  error.toString(),
                   "Copy to clipboard",
                   () {
                     Clipboard.setData(ClipboardData(text: e.toString()));
@@ -1173,9 +1275,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           color: StateContainer.of(context).curTheme.text15,
         ),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.changeRepAuthenticate, AppIcons.changerepresentative, onPressed: () {
-          new AppChangeRepresentativeSheet().mainBottomSheet(context);
+          AppChangeRepresentativeSheet().mainBottomSheet(context);
           if (!StateContainer.of(context).nanoNinjaUpdated) {
-            NinjaAPI.getVerifiedNodes().then((result) {
+            NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? result) {
               if (result != null) {
                 StateContainer.of(context).updateNinjaNodes(result);
               }
@@ -1187,23 +1289,48 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           color: StateContainer.of(context).curTheme.text15,
         ),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.shareNautilus, AppIcons.share, onPressed: () {
-          Share.share("Check out Nautilus - NANO Wallet for iOS and Android" + " https://nautiluswallet.app");
+          Share.share("Check out Nautilus - NANO Wallet for iOS and Android https://nautiluswallet.app");
         }),
         Divider(
           height: 2,
           color: StateContainer.of(context).curTheme.text15,
         ),
-        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.destroyDatabase, AppIcons.trashcan, onPressed: () async {
-          AppDialogs.showConfirmDialog(context, AppLocalization.of(context)!.destroyDatabase, AppLocalization.of(context)!.destroyDatabaseConfirmation,
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.resetDatabase, AppIcons.trashcan, onPressed: () async {
+          AppDialogs.showConfirmDialog(context, AppLocalization.of(context)!.resetDatabase, AppLocalization.of(context)!.resetDatabaseConfirmation,
               CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () async {
+            // push animation to prevent early exit:
+            bool animationOpen = true;
+            AppAnimation.animationLauncher(context, AnimationType.GENERIC, onPoppedCallback: () => animationOpen = false);
+
+            // sleep to flex the animation a bit:
+            await Future.delayed(const Duration(milliseconds: 500));
+
             // Delete the database
-            await sl.get<DBHelper>().nukeDatabase();
+            try {
+              await sl.get<DBHelper>().nukeDatabase();
+            } catch (error) {
+              log.d("Error resetting database: $error");
+            }
+
+            // re-populate the users table
+            try {
+              await sl.get<DBHelper>().fetchNapiUsernames();
+            } catch (error) {
+              log.d("Error fetching usernames: $error");
+            }
+
+            // delete preferences:
+            await sl.get<SharedPrefsUtil>().deleteAll();
+
             // re-add account index 0 and switch the account to it:
             String? seed = await StateContainer.of(context).getSeed();
             await sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context)!.defaultAccountName);
-            var mainAccount = await sl.get<DBHelper>().getMainAccount(seed);
+            Account? mainAccount = await sl.get<DBHelper>().getMainAccount(seed);
             await sl.get<DBHelper>().changeAccount(mainAccount);
             EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
+            if (animationOpen && mounted) {
+              Navigator.of(context).pop();
+            }
           }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
         }),
         Divider(
@@ -1241,7 +1368,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           color: StateContainer.of(context).curTheme.text15,
         ),
         Padding(
-            padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+            padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
             child: Column(
               children: [
                 // Row(
@@ -1347,7 +1474,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           children: <Widget>[
             // A container for accounts area
             Container(
-              margin: EdgeInsetsDirectional.only(start: 26.0, end: 20, bottom: 15),
+              margin: const EdgeInsetsDirectional.only(start: 26.0, end: 20, bottom: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1358,14 +1485,14 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     children: <Widget>[
                       // Main Account
                       Container(
-                        margin: EdgeInsetsDirectional.only(start: 4.0),
+                        margin: const EdgeInsetsDirectional.only(start: 4.0),
                         child: Stack(
                           children: <Widget>[
                             Center(
                               child: Container(
                                   width: 60,
                                   height: 45,
-                                  alignment: AlignmentDirectional(-1, 0),
+                                  alignment: const AlignmentDirectional(-1, 0),
                                   child: Icon(
                                     AppIcons.accountwallet,
                                     color: StateContainer.of(context).curTheme.success,
@@ -1376,7 +1503,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                               child: Container(
                                 width: 60,
                                 height: 45,
-                                alignment: AlignmentDirectional(0, 0.3),
+                                alignment: const AlignmentDirectional(0, 0.3),
                                 child: Text(
                                   StateContainer.of(context).selectedAccount!.getShortName().toUpperCase(),
                                   textAlign: TextAlign.center,
@@ -1396,11 +1523,11 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                 child: TextButton(
                                   style: TextButton.styleFrom(
                                     primary: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                    padding: EdgeInsets.all(0.0),
+                                    padding: const EdgeInsets.all(0.0),
                                     // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
                                     // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
                                   ),
-                                  child: SizedBox(
+                                  child: const SizedBox(
                                     width: 60,
                                     height: 45,
                                   ),
@@ -1417,129 +1544,130 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       Row(
                         children: <Widget>[
                           // Second Account
-                          StateContainer.of(context).recentLast != null
-                              ? Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Center(
-                                        child: Icon(
-                                          AppIcons.accountwallet,
-                                          color: StateContainer.of(context).curTheme.primary,
-                                          size: 36,
+                          if (StateContainer.of(context).recentLast != null)
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Stack(
+                                children: <Widget>[
+                                  Center(
+                                    child: Icon(
+                                      AppIcons.accountwallet,
+                                      color: StateContainer.of(context).curTheme.primary,
+                                      size: 36,
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                      width: 48,
+                                      height: 36,
+                                      alignment: const AlignmentDirectional(0, 0.3),
+                                      child: Text(StateContainer.of(context).recentLast!.getShortName().toUpperCase(),
+                                          style: TextStyle(
+                                            color: StateContainer.of(context).curTheme.backgroundDark,
+                                            fontSize: 12.0,
+                                            fontWeight: FontWeight.w800,
+                                          )),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                      width: 48,
+                                      height: 36,
+                                      color: Colors.transparent,
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                          primary: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                          padding: const EdgeInsets.all(0.0),
+                                          // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                          // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
                                         ),
-                                      ),
-                                      Center(
-                                        child: Container(
-                                          width: 48,
-                                          height: 36,
-                                          alignment: AlignmentDirectional(0, 0.3),
-                                          child: Text(StateContainer.of(context).recentLast!.getShortName().toUpperCase(),
-                                              style: TextStyle(
-                                                color: StateContainer.of(context).curTheme.backgroundDark,
-                                                fontSize: 12.0,
-                                                fontWeight: FontWeight.w800,
-                                              )),
-                                        ),
-                                      ),
-                                      Center(
+                                        onPressed: () {
+                                          sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentLast).then((_) {
+                                            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: StateContainer.of(context).recentLast, delayPop: true));
+                                          });
+                                        },
                                         child: Container(
                                           width: 48,
                                           height: 36,
                                           color: Colors.transparent,
-                                          child: TextButton(
-                                            style: TextButton.styleFrom(
-                                              primary: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                              padding: EdgeInsets.all(0.0),
-                                              // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                              // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                            ),
-                                            onPressed: () {
-                                              sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentLast).then((_) {
-                                                EventTaxiImpl.singleton()
-                                                    .fire(AccountChangedEvent(account: StateContainer.of(context).recentLast, delayPop: true));
-                                              });
-                                            },
-                                            child: Container(
-                                              width: 48,
-                                              height: 36,
-                                              color: Colors.transparent,
-                                            ),
-                                          ),
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                )
-                              : SizedBox(),
+                                ],
+                              ),
+                            )
+                          else
+                            const SizedBox(),
                           // Third Account
-                          StateContainer.of(context).recentSecondLast != null
-                              ? Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Center(
-                                        child: Icon(
-                                          AppIcons.accountwallet,
-                                          color: StateContainer.of(context).curTheme.primary,
-                                          size: 36,
+                          if (StateContainer.of(context).recentSecondLast != null)
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Stack(
+                                children: <Widget>[
+                                  Center(
+                                    child: Icon(
+                                      AppIcons.accountwallet,
+                                      color: StateContainer.of(context).curTheme.primary,
+                                      size: 36,
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                      width: 48,
+                                      height: 36,
+                                      alignment: const AlignmentDirectional(0, 0.3),
+                                      child: Text(StateContainer.of(context).recentSecondLast!.getShortName().toUpperCase(),
+                                          style: TextStyle(
+                                            color: StateContainer.of(context).curTheme.backgroundDark,
+                                            fontSize: 12.0,
+                                            fontWeight: FontWeight.w800,
+                                          )),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                      width: 48,
+                                      height: 36,
+                                      color: Colors.transparent,
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                          padding: const EdgeInsets.all(0.0),
+                                          primary: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                          // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
+                                          // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
                                         ),
-                                      ),
-                                      Center(
-                                        child: Container(
-                                          width: 48,
-                                          height: 36,
-                                          alignment: AlignmentDirectional(0, 0.3),
-                                          child: Text(StateContainer.of(context).recentSecondLast!.getShortName().toUpperCase(),
-                                              style: TextStyle(
-                                                color: StateContainer.of(context).curTheme.backgroundDark,
-                                                fontSize: 12.0,
-                                                fontWeight: FontWeight.w800,
-                                              )),
-                                        ),
-                                      ),
-                                      Center(
+                                        onPressed: () {
+                                          sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentSecondLast).then((_) {
+                                            EventTaxiImpl.singleton()
+                                                .fire(AccountChangedEvent(account: StateContainer.of(context).recentSecondLast, delayPop: true));
+                                          });
+                                        },
                                         child: Container(
                                           width: 48,
                                           height: 36,
                                           color: Colors.transparent,
-                                          child: TextButton(
-                                            style: TextButton.styleFrom(
-                                              padding: EdgeInsets.all(0.0),
-                                              primary: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                              // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                              // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                            ),
-                                            onPressed: () {
-                                              sl.get<DBHelper>().changeAccount(StateContainer.of(context).recentSecondLast).then((_) {
-                                                EventTaxiImpl.singleton()
-                                                    .fire(AccountChangedEvent(account: StateContainer.of(context).recentSecondLast, delayPop: true));
-                                              });
-                                            },
-                                            child: Container(
-                                              width: 48,
-                                              height: 36,
-                                              color: Colors.transparent,
-                                            ),
-                                          ),
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                )
-                              : SizedBox(),
+                                ],
+                              ),
+                            )
+                          else
+                            const SizedBox(),
                           // Account switcher
                           Container(
                             height: 36,
                             width: 36,
-                            margin: EdgeInsets.symmetric(horizontal: 6.0),
-                            decoration: BoxDecoration(
+                            margin: const EdgeInsets.symmetric(horizontal: 6.0),
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                padding: EdgeInsets.all(0.0),
-                                shape: CircleBorder(),
+                                padding: const EdgeInsets.all(0.0),
+                                shape: const CircleBorder(),
                                 primary: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text30,
                                 // splashColor: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text30,
                                 // highlightColor: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text15,
@@ -1549,12 +1677,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                   setState(() {
                                     _loadingAccounts = true;
                                   });
-                                  StateContainer.of(context).getSeed().then((seed) {
-                                    sl.get<DBHelper>().getAccounts(seed).then((accounts) {
+                                  StateContainer.of(context).getSeed().then((String seed) {
+                                    sl.get<DBHelper>().getAccounts(seed).then((List<Account> accounts) {
                                       setState(() {
                                         _loadingAccounts = false;
                                       });
-                                      AppAccountsSheet(accounts).mainBottomSheet(context);
+                                      Sheets.showAppHeightNineSheet(context: context, widget: AppAccountsSheet(accounts: accounts));
                                     });
                                   });
                                 }
@@ -1569,10 +1697,10 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     ],
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 2),
+                    margin: const EdgeInsets.only(top: 2),
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        padding: EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.all(4.0),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
                         primary: StateContainer.of(context).curTheme.text30,
                         // highlightColor: StateContainer.of(context).curTheme.text15,
@@ -1641,8 +1769,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
-                          begin: AlignmentDirectional(0.5, -1.0),
-                          end: AlignmentDirectional(0.5, 1.0),
+                          begin: const AlignmentDirectional(0.5, -1.0),
+                          end: const AlignmentDirectional(0.5, 1.0),
                         ),
                       ),
                     ),
@@ -1661,18 +1789,18 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         boxShadow: [
-          BoxShadow(color: StateContainer.of(context).curTheme.barrierWeakest!, offset: Offset(-5, 0), blurRadius: 20),
+          BoxShadow(color: StateContainer.of(context).curTheme.barrierWeakest!, offset: const Offset(-5, 0), blurRadius: 20),
         ],
       ),
       child: SafeArea(
-        minimum: EdgeInsets.only(
+        minimum: const EdgeInsets.only(
           top: 60,
         ),
         child: Column(
           children: <Widget>[
             // Back button and Security Text
             Container(
-              margin: EdgeInsets.only(bottom: 10.0, top: 5),
+              margin: const EdgeInsets.only(bottom: 10.0, top: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -1682,13 +1810,13 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       Container(
                         height: 40,
                         width: 40,
-                        margin: EdgeInsets.only(right: 10, left: 10),
+                        margin: const EdgeInsets.only(right: 10, left: 10),
                         child: TextButton(
                             style: TextButton.styleFrom(
                               primary: StateContainer.of(context).curTheme.text15,
                               backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               // highlightColor: StateContainer.of(context).curTheme.text15,
                               // splashColor: StateContainer.of(context).curTheme.text15,
                             ),
@@ -1714,10 +1842,10 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                 child: Stack(
               children: <Widget>[
                 ListView(
-                  padding: EdgeInsets.only(top: 15.0),
+                  padding: const EdgeInsets.only(top: 15.0),
                   children: [
                     Container(
-                      margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+                      margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(AppLocalization.of(context)!.preferences,
                           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
                     ),
@@ -1806,7 +1934,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     if (auth != null && auth) {
       await Future.delayed(const Duration(milliseconds: 200));
       Navigator.of(context).pop();
-      StateContainer.of(context).getSeed().then((seed) {
+      StateContainer.of(context).getSeed().then((String seed) {
         AppSeedBackupSheet(seed).mainBottomSheet(context);
       });
     }

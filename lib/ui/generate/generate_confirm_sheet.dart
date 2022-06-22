@@ -48,7 +48,6 @@ class GenerateConfirmSheet extends StatefulWidget {
 }
 
 class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
-  late String amount;
   String? destinationAltered;
   late bool animationOpen;
 
@@ -72,7 +71,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
   void initState() {
     super.initState();
     _registerBus();
-    this.animationOpen = false;
+    animationOpen = false;
     // Derive amount from raw amount
     // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
     //   amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
@@ -80,7 +79,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
     //   amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(widget.amountRaw), digits: 6).toStringAsFixed(6) + "~";
     // }
     // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
-    amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
+    // amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
     // Ensure nano_ prefix on destination
     destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
@@ -104,7 +103,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           children: <Widget>[
             // Sheet handle
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               height: 5,
               width: MediaQuery.of(context).size.width * 0.15,
               decoration: BoxDecoration(
@@ -119,7 +118,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                 children: <Widget>[
                   // "SENDING" TEXT
                   Container(
-                    margin: EdgeInsets.only(bottom: 10.0),
+                    margin: const EdgeInsets.only(bottom: 10.0),
                     child: Column(
                       children: <Widget>[
                         Text(
@@ -132,7 +131,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                   // Container for the amount text
                   Container(
                     margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: StateContainer.of(context).curTheme.backgroundDarkest,
@@ -155,7 +154,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                             ),
                           ),
                           TextSpan(
-                            text: getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
+                            text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, widget.amountRaw),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary,
                               fontSize: 16.0,
@@ -177,38 +176,36 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                     ),
                   ),
 
-                  (widget.memo != null)
-                      ? (
-                          // "TO" text
-                          Container(
-                          margin: EdgeInsets.only(top: 30.0, bottom: 10),
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
-                                style: AppStyles.textStyleHeader(context),
-                              ),
-                            ],
+                  if (widget.memo != null)
+                    Container(
+                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
+                            style: AppStyles.textStyleHeader(context),
                           ),
+                        ],
+                      ),
+                    )
+                  else
+                    const SizedBox(),
+                  if (widget.memo != null)
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: StateContainer.of(context).curTheme.backgroundDarkest,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Text(
+                          widget.memo!,
+                          style: AppStyles.textStyleParagraph(context),
+                          textAlign: TextAlign.center,
                         ))
-                      : SizedBox(),
-                  (widget.memo != null)
-                      ?
-                      // memo text
-                      Container(
-                          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: StateContainer.of(context).curTheme.backgroundDarkest,
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Text(
-                            widget.memo!,
-                            style: AppStyles.textStyleParagraph(context),
-                            textAlign: TextAlign.center,
-                          ))
-                      : SizedBox(),
+                  else
+                    const SizedBox(),
                 ],
               ),
             ),
@@ -229,9 +226,12 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                         final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                         if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                           try {
-                            final bool authenticated = await sl
-                                .get<BiometricUtil>()
-                                .authenticateWithBiometrics(context, AppLocalization.of(context)!.sendAmountConfirm.replaceAll("%1", amount));
+                            bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
+                                context,
+                                AppLocalization.of(context)!
+                                    .sendAmountConfirm
+                                    .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
+                                    .replaceAll("%2", StateContainer.of(context).currencyMode));
                             if (authenticated) {
                               sl.get<HapticUtil>().fingerprintSucess();
                               EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
@@ -277,7 +277,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       StateContainer.of(context).wallet!.frontier = resp.hash;
       StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw!);
 
-      final String? memo = widget.memo != null ? widget.memo : ""; 
+      final String? memo = widget.memo != null ? widget.memo : "";
 
       final BranchUniversalObject buo = BranchUniversalObject(
           canonicalIdentifier: 'flutter/branch',
@@ -306,7 +306,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       final BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
       if (response.success) {
         // create a local memo object to show the gift card creation details:
-        final Uuid uuid = Uuid();
+        const Uuid uuid = Uuid();
         final TXData newGiftTXData = TXData(
           from_address: StateContainer.of(context).wallet!.address,
           to_address: destinationAltered,
@@ -349,7 +349,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         await AppTransferOverviewSheet().startAutoTransfer(context, widget.paperWalletSeed!, StateContainer.of(context).wallet);
 
         // create a local memo object to show the gift card creation details:
-        final Uuid uuid = Uuid();
+        const Uuid uuid = const Uuid();
         final TXData newGiftTXData = TXData(
           from_address: StateContainer.of(context).wallet!.address,
           to_address: destinationAltered,
@@ -385,14 +385,17 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
     final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-      return new PinScreen(
+      return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
-        description: AppLocalization.of(context)!.sendAmountConfirmPin.replaceAll("%1", amount),
+        description: AppLocalization.of(context)!
+            .sendAmountConfirmPin
+            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
+            .replaceAll("%2", StateContainer.of(context).currencyMode),
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(Duration(milliseconds: 200));
+      await Future.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
     }
   }

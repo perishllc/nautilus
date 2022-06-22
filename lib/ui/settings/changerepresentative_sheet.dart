@@ -83,7 +83,7 @@ class AppChangeRepresentativeSheet {
   Widget _buildRepresenativeDialog(BuildContext context) {
     return AppSimpleDialog(
         title: Container(
-          margin: EdgeInsets.only(bottom: 10),
+          margin: const EdgeInsets.only(bottom: 10),
           child: Text(
             AppLocalization.of(context)!.representatives,
             style: AppStyles.textStyleDialogHeader(context),
@@ -103,167 +103,155 @@ class AppChangeRepresentativeSheet {
   late NinjaNode _rep;
 
   Widget _buildSingleRepresentative(NinjaNode rep, BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Divider(
-            height: 2,
-            color: StateContainer.of(context).curTheme.text15,
+    return Column(
+      children: <Widget>[
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        TextButton(
+          style: TextButton.styleFrom(
+            primary: StateContainer.of(context).curTheme.text15,
+            padding: EdgeInsets.zero,
+            // highlightColor: StateContainer.of(context).curTheme.text15,
+            // splashColor: StateContainer.of(context).curTheme.text15,
           ),
-          FlatButton(
-            highlightColor: StateContainer.of(context).curTheme.text15,
-            splashColor: StateContainer.of(context).curTheme.text15,
-            onPressed: () async {
-              if (!NanoAccounts.isValid(NanoAccountType.NANO, rep.account!)) {
-                return;
-              }
-              _rep = rep;
-              // Authenticate
-              AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-              bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
-              if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
-                try {
-                  bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.changeRepAuthenticate);
-                  if (authenticated) {
-                    sl.get<HapticUtil>().fingerprintSucess();
-                    EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
-                  }
-                } catch (e) {
-                  await authenticateWithPin(rep.account, context);
+          onPressed: () async {
+            if (!NanoAccounts.isValid(NanoAccountType.NANO, rep.account!)) {
+              return;
+            }
+            _rep = rep;
+            // Authenticate
+            AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+            bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+            if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+              try {
+                bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.changeRepAuthenticate);
+                if (authenticated) {
+                  sl.get<HapticUtil>().fingerprintSucess();
+                  EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
                 }
-              } else {
-                // PIN Authentication
+              } catch (e) {
                 await authenticateWithPin(rep.account, context);
               }
-            },
-            padding: EdgeInsets.all(0),
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsetsDirectional.only(start: 24),
-                    width: MediaQuery.of(context).size.width * 0.50,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          _sanitizeAlias(rep.alias),
+            } else {
+              // PIN Authentication
+              await authenticateWithPin(rep.account, context);
+            }
+          },
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsetsDirectional.only(start: 24),
+                  width: MediaQuery.of(context).size.width * 0.50,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        _sanitizeAlias(rep.alias),
+                        style:
+                            TextStyle(color: StateContainer.of(context).curTheme.text, fontWeight: FontWeight.w700, fontSize: 18.0, fontFamily: 'Nunito Sans'),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 7),
+                        child: RichText(
+                          text: TextSpan(
+                            text: '',
+                            children: [
+                              TextSpan(
+                                text: "${AppLocalization.of(context)!.votingWeight}: ",
+                                style: TextStyle(
+                                  color: StateContainer.of(context).curTheme.text,
+                                  fontWeight: FontWeight.w100,
+                                  fontSize: 14.0,
+                                  fontFamily: 'Nunito Sans',
+                                ),
+                              ),
+                              TextSpan(
+                                text: NumberUtil.getPercentOfTotalSupply(rep.votingWeight),
+                                style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.primary, fontWeight: FontWeight.w700, fontSize: 14.0, fontFamily: 'Nunito Sans'),
+                              ),
+                              TextSpan(
+                                text: "%",
+                                style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.primary, fontWeight: FontWeight.w700, fontSize: 14.0, fontFamily: 'Nunito Sans'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 4),
+                        child: RichText(
+                          text: TextSpan(
+                            text: '',
+                            children: [
+                              TextSpan(
+                                text: "${AppLocalization.of(context)!.uptime}: ",
+                                style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.text, fontWeight: FontWeight.w100, fontSize: 14.0, fontFamily: 'Nunito Sans'),
+                              ),
+                              TextSpan(
+                                text: rep.uptime!.toStringAsFixed(2),
+                                style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.primary, fontWeight: FontWeight.w700, fontSize: 14.0, fontFamily: 'Nunito Sans'),
+                              ),
+                              TextSpan(
+                                text: "%",
+                                style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.primary, fontWeight: FontWeight.w700, fontSize: 14.0, fontFamily: 'Nunito Sans'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsetsDirectional.only(end: 24, start: 14),
+                  child: Stack(
+                    children: <Widget>[
+                      Icon(
+                        AppIcons.score,
+                        color: StateContainer.of(context).curTheme.primary,
+                        size: 50,
+                      ),
+                      Container(
+                        alignment: const AlignmentDirectional(-0.03, 0.03),
+                        width: 50,
+                        height: 50,
+                        child: Text(
+                          (rep.score).toString(),
+                          textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: StateContainer.of(context).curTheme.text, fontWeight: FontWeight.w700, fontSize: 18.0, fontFamily: 'Nunito Sans'),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 7),
-                          child: RichText(
-                            text: TextSpan(
-                              text: '',
-                              children: [
-                                TextSpan(
-                                  text: "${AppLocalization.of(context)!.votingWeight}: ",
-                                  style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.text,
-                                    fontWeight: FontWeight.w100,
-                                    fontSize: 14.0,
-                                    fontFamily: 'Nunito Sans',
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: NumberUtil.getPercentOfTotalSupply(rep.votingWeight),
-                                  style: TextStyle(
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 14.0,
-                                      fontFamily: 'Nunito Sans'),
-                                ),
-                                TextSpan(
-                                  text: "%",
-                                  style: TextStyle(
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 14.0,
-                                      fontFamily: 'Nunito Sans'),
-                                ),
-                              ],
-                            ),
+                            color: StateContainer.of(context).curTheme.backgroundDark,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w800,
+                            fontFamily: 'Nunito Sans',
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(top: 4),
-                          child: RichText(
-                            text: TextSpan(
-                              text: '',
-                              children: [
-                                TextSpan(
-                                  text: "${AppLocalization.of(context)!.uptime}: ",
-                                  style: TextStyle(
-                                      color: StateContainer.of(context).curTheme.text, fontWeight: FontWeight.w100, fontSize: 14.0, fontFamily: 'Nunito Sans'),
-                                ),
-                                TextSpan(
-                                  text: rep.uptime!.toStringAsFixed(2),
-                                  style: TextStyle(
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 14.0,
-                                      fontFamily: 'Nunito Sans'),
-                                ),
-                                TextSpan(
-                                  text: "%",
-                                  style: TextStyle(
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 14.0,
-                                      fontFamily: 'Nunito Sans'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    margin: EdgeInsetsDirectional.only(end: 24, start: 14),
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                            child: Icon(
-                          AppIcons.score,
-                          color: StateContainer.of(context).curTheme.primary,
-                          size: 50,
-                        )),
-                        Container(
-                          alignment: AlignmentDirectional(-0.03, 0.03),
-                          width: 50,
-                          height: 50,
-                          child: Text(
-                            (rep.score).toString(),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.backgroundDark,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w800,
-                              fontFamily: 'Nunito Sans',
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   Future<void> doChange(BuildContext context) async {
     if (_animationOpen) {
-      return;// not sure why it's called more than once
+      return; // not sure why it's called more than once
     }
     _animationOpen = true;
     AppAnimation.animationLauncher(context, AnimationType.CHANGE_REP, onPoppedCallback: () => _animationOpen = false);
@@ -275,7 +263,7 @@ class AppChangeRepresentativeSheet {
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
     } else if (StateContainer.of(context).wallet!.representative == _rep.account) {
       // sleep for 2 seconds:
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       // representative is the same as the current one:
       if (_animationOpen) {
         Navigator.of(context).pop();
@@ -315,7 +303,7 @@ class AppChangeRepresentativeSheet {
                     minimum: EdgeInsets.only(
                       bottom: MediaQuery.of(context).size.height * 0.035,
                     ),
-                    child: Container(
+                    child: SizedBox(
                       width: double.infinity,
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
@@ -325,13 +313,13 @@ class AppChangeRepresentativeSheet {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              SizedBox(height: 60, width: 60),
+                              const SizedBox(height: 60, width: 60),
                               //Container for the header
                               Column(
                                 children: <Widget>[
                                   // Sheet handle
                                   Container(
-                                    margin: EdgeInsets.only(top: 10),
+                                    margin: const EdgeInsets.only(top: 10),
                                     height: 5,
                                     width: MediaQuery.of(context).size.width * 0.15,
                                     decoration: BoxDecoration(
@@ -340,7 +328,7 @@ class AppChangeRepresentativeSheet {
                                     ),
                                   ),
                                   Container(
-                                    margin: EdgeInsets.only(top: 15),
+                                    margin: const EdgeInsets.only(top: 15),
                                     constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                                     child: AutoSizeText(
                                       CaseChange.toUpperCase(AppLocalization.of(context)!.changeRepAuthenticate, context),
@@ -356,13 +344,13 @@ class AppChangeRepresentativeSheet {
                               Container(
                                 width: 50,
                                 height: 50,
-                                margin: EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
+                                margin: const EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
                                 child: TextButton(
                                   style: TextButton.styleFrom(
                                     primary: StateContainer.of(context).curTheme.text15,
                                     backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                                     onSurface: StateContainer.of(context).curTheme.text15,
-                                    padding: EdgeInsets.all(13.0),
+                                    padding: const EdgeInsets.all(13.0),
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                                     tapTargetSize: MaterialTapTargetSize.padded,
                                   ),
@@ -382,8 +370,8 @@ class AppChangeRepresentativeSheet {
                               child: Stack(children: <Widget>[
                                 Container(
                                   color: Colors.transparent,
-                                  child: SizedBox.expand(),
-                                  constraints: BoxConstraints.expand(),
+                                  constraints: const BoxConstraints.expand(),
+                                  child: const SizedBox.expand(),
                                 ),
                                 Column(
                                   children: <Widget>[
@@ -398,14 +386,14 @@ class AppChangeRepresentativeSheet {
                                     // Current representative
                                     GestureDetector(
                                       onTap: () {
-                                        Clipboard.setData(new ClipboardData(text: StateContainer.of(context).wallet!.representative));
+                                        Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.representative));
                                         setState(() {
                                           _addressCopied = true;
                                         });
                                         if (_addressCopiedTimer != null) {
                                           _addressCopiedTimer!.cancel();
                                         }
-                                        _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                                        _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
                                           setState(() {
                                             _addressCopied = false;
                                           });
@@ -415,7 +403,7 @@ class AppChangeRepresentativeSheet {
                                         width: double.infinity,
                                         margin: EdgeInsets.only(
                                             left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105, top: 10),
-                                        padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                                         decoration: BoxDecoration(
                                           color: StateContainer.of(context).curTheme.backgroundDarkest,
                                           borderRadius: BorderRadius.circular(25),
@@ -426,7 +414,7 @@ class AppChangeRepresentativeSheet {
                                     ),
                                     // Address Copied text container
                                     Container(
-                                      margin: EdgeInsets.only(top: 5, bottom: 5),
+                                      margin: const EdgeInsets.only(top: 5, bottom: 5),
                                       child: Text(_addressCopied ? AppLocalization.of(context)!.addressCopied : "",
                                           style: TextStyle(
                                             fontSize: 14.0,
@@ -455,7 +443,7 @@ class AppChangeRepresentativeSheet {
                                       if (!NanoAccounts.isValid(NanoAccountType.NANO, AppWallet.nautilusRepresentative)) {
                                         return;
                                       }
-                                      _rep = new NinjaNode(account: AppWallet.nautilusRepresentative);
+                                      _rep = NinjaNode(account: AppWallet.nautilusRepresentative);
                                       // Authenticate
                                       AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                                       bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
@@ -524,14 +512,14 @@ class AppChangeRepresentativeSheet {
     // PIN Authentication
     String? expectedPin = await sl.get<Vault>().getPin();
     bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-      return new PinScreen(
+      return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         description: AppLocalization.of(context)!.pinRepChange,
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(Duration(milliseconds: 200));
+      await Future.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
     }
   }

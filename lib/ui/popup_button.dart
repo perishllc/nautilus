@@ -10,6 +10,7 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
@@ -65,7 +66,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
         final BigInt? amountBigInt = address.amount != null ? BigInt.tryParse(address.amount!) : null;
         bool sufficientBalance = false;
         if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
-          UIUtil.showSnackbar(AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001"), context);
+          UIUtil.showSnackbar(AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
         } else if (amountBigInt != null && StateContainer.of(context).wallet!.accountBalance > amountBigInt) {
           sufficientBalance = true;
         }
@@ -178,6 +179,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
             width: (MediaQuery.of(context).size.width - 42).abs() / 2,
             margin: EdgeInsetsDirectional.only(start: 7, top: popupMarginBottom, end: 14.0),
             child: TextButton(
+              key: const Key("home_send_button"),
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                 backgroundColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/

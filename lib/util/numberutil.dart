@@ -34,8 +34,18 @@ class NumberUtil {
   /// @param input 1.059
   /// @return double value 1.05
   ///
+  // static double truncateDecimal(Decimal input, {int digits = maxDecimalDigits}) {
+  //   print("inp: $input");
+  //   double out = (input * Decimal.fromInt(pow(10, digits) as int)).toDouble() / pow(10, digits);
+  //   print("out: $out");
+  //   return out;
+  // }
+
   static double truncateDecimal(Decimal input, {int digits = maxDecimalDigits}) {
-    return (input * Decimal.fromInt(pow(10, digits) as int)).toDouble() / pow(10, digits);
+    Decimal bigger = input.shift(maxDecimalDigits);
+    bigger = bigger.floor(); // chop off the decimal: 1.059 -> 1.05
+    bigger = bigger.shift(-maxDecimalDigits);
+    return bigger.toDouble();
   }
 
   /// Return raw as a normal amount.
@@ -44,30 +54,16 @@ class NumberUtil {
   /// @returns 1
   ///
   static String getRawAsUsableString(String? raw) {
-    NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: maxDecimalDigits, symbol: '');
-    String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw), digits: maxDecimalDigits));
-    var split = asString.split(".");
-    if (split.length > 1) {
-      // Remove trailing 0s from this
-      if (int.parse(split[1]) == 0) {
-        asString = split[0];
-      } else {
-        String newStr = split[0] + ".";
-        String digits = split[1];
-        int endIndex = digits.length;
-        for (int i = 1; i <= digits.length; i++) {
-          if (int.parse(digits[digits.length - i]) == 0) {
-            endIndex--;
-          } else {
-            break;
-          }
-        }
-        digits = digits.substring(0, endIndex);
-        newStr = split[0] + "." + digits;
-        asString = newStr;
-      }
-    }
-    return asString;
+    // String res = truncateDecimal(getRawAsUsableDecimal(raw), digits: maxDecimalDigits).toString();
+    // if (res == "0.0") {
+    //   return "~";
+    // }
+    // // remove trailing zeros
+    // if (res.endsWith(".0")) {
+    //   res = res.substring(0, res.length - 2);
+    // }
+    // return res;
+    return getRawAsUsableStringPrecise(raw);
   }
 
   /// Return raw as a normal amount.
@@ -76,30 +72,26 @@ class NumberUtil {
   /// @returns 1
   ///
   static String getRawAsUsableStringPrecise(String? raw) {
-    NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: (maxDecimalDigits + 6), symbol: '');
-    String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw), digits: (maxDecimalDigits + 6)));
-    var split = asString.split(".");
-    if (split.length > 1) {
-      // Remove trailing 0s from this
-      if (int.parse(split[1]) == 0) {
-        asString = split[0];
-      } else {
-        String newStr = split[0] + ".";
-        String digits = split[1];
-        int endIndex = digits.length;
-        for (int i = 1; i <= digits.length; i++) {
-          if (int.parse(digits[digits.length - i]) == 0) {
-            endIndex--;
-          } else {
-            break;
-          }
-        }
-        digits = digits.substring(0, endIndex);
-        newStr = split[0] + "." + digits;
-        asString = newStr;
-      }
+    String res = truncateDecimal(getRawAsUsableDecimal(raw), digits: maxDecimalDigits + 9).toString();
+
+    if (raw == null || raw == "0" || raw == "00000000000000000000000000000000") {
+      return "0";
     }
-    return asString;
+
+    // remove trailing zeros
+    if (res.endsWith(".0")) {
+      res = res.substring(0, res.length - 2);
+    }
+
+    if (res != getRawAsUsableDecimal(raw).toString()) {
+      res = "$res~";
+    }
+
+    // if (res == "0.0") {
+    //   return "0~";
+    // }
+
+    return res;
   }
 
   /// Return raw as a normal amount.
@@ -108,30 +100,41 @@ class NumberUtil {
   /// @returns 1
   ///
   static String getRawAsNyanoString(String? raw) {
-    NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: maxDecimalDigits, symbol: '');
-    String asString = nf.format(truncateDecimal(getRawAsNyanoDecimal(raw)));
-    var split = asString.split(".");
-    if (split.length > 1) {
-      // Remove trailing 0s from this
-      if (int.parse(split[1]) == 0) {
-        asString = split[0];
-      } else {
-        String newStr = split[0] + ".";
-        String digits = split[1];
-        int endIndex = digits.length;
-        for (int i = 1; i <= digits.length; i++) {
-          if (int.parse(digits[digits.length - i]) == 0) {
-            endIndex--;
-          } else {
-            break;
-          }
-        }
-        digits = digits.substring(0, endIndex);
-        newStr = split[0] + "." + digits;
-        asString = newStr;
-      }
+    String res = truncateDecimal(getRawAsNyanoDecimal(raw), digits: maxDecimalDigits + 6).toString();
+    if (res == "0.0") {
+      return "~";
     }
-    return asString;
+    // remove trailing zeros
+    if (res.endsWith(".0")) {
+      res = res.substring(0, res.length - 2);
+    }
+
+    return res;
+
+    // NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: maxDecimalDigits, symbol: '');
+    // String asString = nf.format(truncateDecimal(getRawAsNyanoDecimal(raw)));
+    // var split = asString.split(".");
+    // if (split.length > 1) {
+    //   // Remove trailing 0s from this
+    //   if (int.parse(split[1]) == 0) {
+    //     asString = split[0];
+    //   } else {
+    //     String newStr = split[0] + ".";
+    //     String digits = split[1];
+    //     int endIndex = digits.length;
+    //     for (int i = 1; i <= digits.length; i++) {
+    //       if (int.parse(digits[digits.length - i]) == 0) {
+    //         endIndex--;
+    //       } else {
+    //         break;
+    //       }
+    //     }
+    //     digits = digits.substring(0, endIndex);
+    //     newStr = split[0] + "." + digits;
+    //     asString = newStr;
+    //   }
+    // }
+    // return asString;
   }
 
   static String getNanoStringAsNyano(String amount) {

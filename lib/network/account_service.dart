@@ -580,14 +580,14 @@ class AccountService {
       throw Exception("Received error ${response.error}");
     }
   }
-
-  Future<AccountsBalancesResponse> requestAccountsBalances(List<String?> accounts) async {
+  
+  Future<AccountsBalancesResponse> requestAccountsBalances(List<String> accounts) async {
     final AccountsBalancesRequest request = AccountsBalancesRequest(accounts: accounts);
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
-    return AccountsBalancesResponse.fromJson(response as Map<String, dynamic>);
+    return AccountsBalancesResponse.fromJson(response);
   }
 
   Future<ProcessResponse> requestProcess(ProcessRequest request) async {

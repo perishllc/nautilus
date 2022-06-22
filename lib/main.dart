@@ -83,7 +83,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(StateContainer.of(context).curTheme.statusBar!);
-    final ThemeData theme = ThemeData();
+    // final ThemeData theme = ThemeData();
     return OKToast(
       textStyle: AppStyles.textStyleSnackbar(context),
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -284,7 +284,10 @@ class _AppState extends State<App> {
                 settings: settings,
               );
             case '/avatar_page':
-              return PageRouteBuilder(pageBuilder: (BuildContext context, Animation<double> animationIn, Animation<double> animationOut) => AvatarPage(), settings: settings, opaque: false);
+              return PageRouteBuilder(
+                  pageBuilder: (BuildContext context, Animation<double> animationIn, Animation<double> animationOut) => AvatarPage(),
+                  settings: settings,
+                  opaque: false);
             case '/avatar_change_page':
               return MaterialPageRoute(
                 builder: (_) => AvatarChangePage(curAddress: StateContainer.of(context).selectedAccount!.address),
@@ -334,7 +337,7 @@ class _AppState extends State<App> {
 /// Default page route that determines if user is logged in and routes them appropriately.
 class Splash extends StatefulWidget {
   @override
-  SplashState createState() => new SplashState();
+  SplashState createState() => SplashState();
 }
 
 class SplashState extends State<Splash> with WidgetsBindingObserver {
@@ -353,12 +356,12 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     }
   }
 
-  Future checkLoggedIn() async {
+  Future<void> checkLoggedIn() async {
     // Update session key
     await sl.get<Vault>().updateSessionKey();
     // Check if device is rooted or jailbroken, show user a warning informing them of the risks if so
     if (Platform.isIOS || Platform.isAndroid) {
-      if (!(await (sl.get<SharedPrefsUtil>().getHasSeenRootWarning())) && await FlutterJailbreakDetection.jailbroken) {
+      if (!(await sl.get<SharedPrefsUtil>().getHasSeenRootWarning()) && await FlutterJailbreakDetection.jailbroken) {
         AppDialogs.showConfirmDialog(
             context,
             CaseChange.toUpperCase(AppLocalization.of(context)!.warning, context),
@@ -386,7 +389,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     }
     try {
       // iOS key store is persistent, so if this is first launch then we will clear the keystore
-      bool firstLaunch = await (sl.get<SharedPrefsUtil>().getFirstLaunch());
+      bool firstLaunch = await sl.get<SharedPrefsUtil>().getFirstLaunch();
       if (firstLaunch) {
         await sl.get<Vault>().deleteAll();
       }
@@ -411,7 +414,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       if (isLoggedIn) {
         if (isEncrypted) {
           Navigator.of(context).pushReplacementNamed('/password_lock_screen');
-        } else if (await (sl.get<SharedPrefsUtil>().getLock()) || await sl.get<SharedPrefsUtil>().shouldLock()) {
+        } else if (await sl.get<SharedPrefsUtil>().getLock() || await sl.get<SharedPrefsUtil>().shouldLock()) {
           Navigator.of(context).pushReplacementNamed('/lock_screen');
         } else {
           await NanoUtil().loginAccount(seed, context);
@@ -430,7 +433,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       /// It will generate a 64-byte secret using the native android "bottlerocketstudios" Vault
       /// This secret is used to encrypt sensitive data and save it in SharedPreferences
       if (Platform.isAndroid && e.toString().contains("flutter_secure")) {
-        if (!(await (sl.get<SharedPrefsUtil>().useLegacyStorage()))) {
+        if (!(await sl.get<SharedPrefsUtil>().useLegacyStorage())) {
           await sl.get<SharedPrefsUtil>().setUseLegacyStorage();
           checkLoggedIn();
         }

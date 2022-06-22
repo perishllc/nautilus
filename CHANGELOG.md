@@ -1,6 +1,13 @@
-# v0.3.6 - [2022-06-21]
+# v0.3.7 - [2022-06-23]
 #### Added
+- Loading animation for when you reset the database
 #### Changed
+- Sheet handles on the accounts sheet
+- Refactored account sheet to use the newer class
+- Destroy the database -> Reset the database
+#### Fixed
+- bugs with Nyano mode, as well as the "max" send button
+## v0.3.6 - [2022-06-21]
 #### Fixed
 - Bug with rendering usernames
 - Usernames not displaying properly throughout the app

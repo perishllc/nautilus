@@ -182,10 +182,6 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
       _barOffsetTop = 0;
     }
 
-    // print(box.size);
-    // print(position);
-    // print(touchStartPosition);
-
     if (shouldStartDrag || widget.enableJumpScroll) {
       sl.get<HapticUtil>().success();
       setState(() {
@@ -196,7 +192,9 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
   }
 
   void _onVerticalDragEnd(DragEndDetails details) {
-    if (!_isDragInProcess) return;
+    if (!_isDragInProcess) {
+      return;
+    }
     setState(() {
       _isDragInProcess = false;
     });

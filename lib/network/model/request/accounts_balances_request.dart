@@ -10,13 +10,14 @@ class AccountsBalancesRequest extends BaseRequest {
   String? action;
 
   @JsonKey(name:'accounts')
-  List<String?>? accounts;
+  late List<String> accounts;
 
-  AccountsBalancesRequest({List<String?>? accounts}) {
+  AccountsBalancesRequest({required List<String> accounts}) {
     this.action = Actions.ACCOUNTS_BALANCES;
-    this.accounts = accounts ?? [];
+    this.accounts = accounts;
   }
 
-  factory AccountsBalancesRequest.fromJson(Map<String, dynamic> json) => _$AccountsBalancesRequestFromJson(json);
+  // factory AccountsBalancesRequest.fromJson(Map<String, dynamic> json) => _$AccountsBalancesRequestFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$AccountsBalancesRequestToJson(this);
 }

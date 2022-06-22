@@ -4,22 +4,22 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/ui/generate/generate_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 
 class GeneratePaperWalletScreen extends StatefulWidget {
@@ -32,7 +32,7 @@ class GeneratePaperWalletScreen extends StatefulWidget {
 }
 
 class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String? paper_wallet_seed;
   String? paper_wallet_account;
 
@@ -128,19 +128,19 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         _amountValidationText = AppLocalization.of(context)!.amountMissing;
       });
     } else {
-      String bananoAmount = _localCurrencyMode
+      final String bananoAmount = _localCurrencyMode
           ? _convertLocalCurrencyToCrypto()
           : _rawAmount == null
               ? _sendAmountController!.text
               : NumberUtil.getRawAsUsableString(_rawAmount);
-      BigInt? balanceRaw = StateContainer.of(context).wallet!.accountBalance;
-      BigInt? sendAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
+      final BigInt? balanceRaw = StateContainer.of(context).wallet!.accountBalance;
+      final BigInt? sendAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
       if (sendAmount == null || sendAmount == BigInt.zero) {
         isValid = false;
         setState(() {
           _amountValidationText = AppLocalization.of(context)!.amountMissing;
         });
-      } else if (sendAmount > balanceRaw) {
+      } else if (sendAmount > balanceRaw!) {
         isValid = false;
         setState(() {
           _amountValidationText = AppLocalization.of(context)!.insufficientBalance;
@@ -157,7 +157,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       key: _scaffoldKey,
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
-        builder: (context, constraints) => SafeArea(
+        builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
           minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
@@ -170,7 +170,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                   _sendMemoFocusNode!.unfocus();
                 },
                 child: KeyboardAvoider(
-                  duration: Duration(milliseconds: 0),
+                  duration: Duration.zero,
                   autoScroll: true,
                   focusPadding: 40,
                   child: Column(
@@ -188,7 +188,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                                   primary: StateContainer.of(context).curTheme.text15,
                                   backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                                  padding: EdgeInsets.all(0.0),
+                                  padding: EdgeInsets.zero,
                                 ),
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -215,7 +215,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                           end: smallScreen(context) ? 30 : 40,
                           top: 10,
                         ),
-                        alignment: AlignmentDirectional(-1, 0),
+                        alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
                           AppLocalization.of(context)!.createGiftHeader,
                           style: AppStyles.textStyleHeaderColored(context),
@@ -250,8 +250,8 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
 
                       // ******* Enter Amount Error Container ******* //
                       Container(
-                        alignment: AlignmentDirectional(0, 0),
-                        margin: EdgeInsets.only(top: 3),
+                        alignment: AlignmentDirectional.center,
+                        margin: const EdgeInsets.only(top: 3),
                         child: Text(_amountValidationText,
                             style: TextStyle(
                               fontSize: 14.0,
@@ -273,7 +273,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                                 Container(
                                   margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                                   alignment: Alignment.bottomCenter,
-                                  constraints: BoxConstraints(maxHeight: 80, minHeight: 0),
+                                  constraints: const BoxConstraints(maxHeight: 80, minHeight: 0),
                                 ),
 
                                 // ******* Enter Memo Container ******* //
@@ -285,8 +285,8 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
 
                           // ******* Enter Memo Error Container ******* //
                           Container(
-                            alignment: AlignmentDirectional(0, 0),
-                            margin: EdgeInsets.only(top: 3),
+                            alignment: AlignmentDirectional.center,
+                            margin: const EdgeInsets.only(top: 3),
                             child: Text(_memoValidationText,
                                 style: TextStyle(
                                   fontSize: 14.0,
@@ -309,12 +309,12 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                 children: <Widget>[
                   AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.createGiftCard, Dimens.BUTTON_BOTTOM_DIMENS,
                       onPressed: () {
-                    bool isValid = _validateRequest();
+                    final bool isValid = _validateRequest();
                     if (!isValid) {
                       return;
                     }
 
-                    String? memo = _sendMemoController!.text.isNotEmpty ? _sendMemoController!.text : null;
+                    final String? memo = _sendMemoController!.text.isNotEmpty ? _sendMemoController!.text : null;
 
                     Sheets.showAppHeightNineSheet(
                         context: context,
@@ -327,11 +327,9 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                           // quickSendAmount: item.amount,
                           amountRaw: _localCurrencyMode
                               ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
-                              : _rawAmount == null
-                                  ? (StateContainer.of(context).nyanoMode)
+                              : _rawAmount ?? ((StateContainer.of(context).nyanoMode)
                                       ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController!.text)
-                                      : NumberUtil.getAmountAsRaw(_sendAmountController!.text)
-                                  : _rawAmount,
+                                      : NumberUtil.getAmountAsRaw(_sendAmountController!.text)),
                         ));
                   }),
                 ],
@@ -349,8 +347,8 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
     if (convertedAmt.isEmpty) {
       return "";
     }
-    Decimal valueLocal = Decimal.parse(convertedAmt);
-    Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
+    final Decimal valueLocal = Decimal.parse(convertedAmt);
+    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     return NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal()).toString();
   }
 
@@ -359,8 +357,8 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
     if (convertedAmt.isEmpty) {
       return "";
     }
-    Decimal valueCrypto = Decimal.parse(convertedAmt);
-    Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
+    final Decimal valueCrypto = Decimal.parse(convertedAmt);
+    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     convertedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2).toString();
     convertedAmt = convertedAmt.replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
     convertedAmt = _localCurrencyFormat!.currencySymbol + convertedAmt;
@@ -388,10 +386,10 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       if (_localCurrencyMode) {
         // Sanitize currency values into plain integer representations
         textField = textField.replaceAll(",", ".");
-        String sanitizedTextField = NumberUtil.sanitizeNumber(textField);
+        final String sanitizedTextField = NumberUtil.sanitizeNumber(textField);
         balance = balance.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
         balance = balance.replaceAll(",", ".");
-        String sanitizedBalance = NumberUtil.sanitizeNumber(balance);
+        final String sanitizedBalance = NumberUtil.sanitizeNumber(balance);
         textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
         balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       } else {
@@ -422,7 +420,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       setState(() {
         _localCurrencyMode = false;
       });
-      Future.delayed(Duration(milliseconds: 50), () {
+      Future.delayed(const Duration(milliseconds: 50), () {
         _sendAmountController!.text = cryptoAmountStr;
         _sendAmountController!.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
       });
@@ -440,7 +438,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       setState(() {
         _localCurrencyMode = true;
       });
-      Future.delayed(Duration(milliseconds: 50), () {
+      Future.delayed(const Duration(milliseconds: 50), () {
         _sendAmountController!.text = localAmountStr;
         _sendAmountController!.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
       });
@@ -512,7 +510,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       ),
       fadeSuffixOnCondition: true,
       suffixShowFirstCondition: !_isMaxSend(),
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textAlign: TextAlign.center,
       onSubmitted: (text) {
         FocusScope.of(context).nextFocus();
@@ -524,7 +522,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
   //************ Enter Memo Container Method ************//
   //*******************************************************//
   Widget getEnterMemoContainer() {
-    double margin = 10;
+    final double margin = 10;
     return AppTextField(
       topMargin: margin,
       padding: EdgeInsets.zero,

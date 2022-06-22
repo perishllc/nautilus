@@ -1307,17 +1307,17 @@ bool compare(Uint8List lh, Uint8List rh) {
     return 0;
   }
 
-  cryptoOnetimeauthVerify(Uint8List h, int hpos, Uint8List m, int mpos, int n, Uint8List k) {
+  dynamic cryptoOnetimeauthVerify(Uint8List h, int hpos, Uint8List m, int mpos, int n, Uint8List k) {
     final Uint8List x = Uint8List(16);
     cryptoOnetimeauth(x, 0, m, mpos, n, k);
     return cryptoVerify16(h, hpos, x, 0);
   }
 
-  cryptoVerify16(Uint8List x, int xi, Uint8List y, int yi) {
+  int cryptoVerify16(Uint8List x, int xi, Uint8List y, int yi) {
     return vn(x, xi, y, yi, 16);
   }
 
-  cryptoBoxBeforenm(Uint8List k, Uint8List y, Uint8List x) {
+  void cryptoBoxBeforenm(Uint8List k, Uint8List y, Uint8List x) {
     final Uint8List s = Uint8List(32);
     cryptoScalarmult(s, x, y);
     return coreHsalsa20(k, _0, s, sigma);
@@ -1501,7 +1501,7 @@ bool compare(Uint8List lh, Uint8List rh) {
 	 * @param {Uint8List} pk A 32 byte public key of pair 2
 	 * @return {Uint8List} sk * pk
 	 */
-  scalarMult(Uint8List sk, Uint8List pk) {
+  Uint8List scalarMult(Uint8List sk, Uint8List pk) {
     final Uint8List q = Uint8List(32);
     cryptoScalarmult(q, sk, pk);
     return q;
@@ -1512,7 +1512,7 @@ bool compare(Uint8List lh, Uint8List rh) {
 	 * @param {Uint8List} seed A 32 byte cryptographic secure random List. is basically the secret key
 	 * @param {Object} Returns sk (Secret key) and pk (Public key) as 32 byte typed Lists
 	 */
-  generateKeys(Uint8List seed) {
+  Set<Uint8List> generateKeys(Uint8List seed) {
     // var sk = seed.slice();
     final Uint8List sk = seed;
     final Uint8List pk = Uint8List(32);
@@ -1537,7 +1537,7 @@ bool compare(Uint8List lh, Uint8List rh) {
 	 * Converts a ed25519 public key to Curve25519 to be used in
 	 * Diffie-Hellman key exchange
 	 */
-  convertEd25519PublicKeyToCurve25519(Uint8List pk) {
+  Uint8List? convertEd25519PublicKeyToCurve25519(Uint8List pk) {
     final Uint8List z = Uint8List(32);
     final List<Int32List> q = [gf(), gf(), gf(), gf()];
     final Int32List a = gf();

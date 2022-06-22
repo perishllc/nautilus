@@ -255,6 +255,7 @@ class AppDialogs {
                         ),
                       ),
                       TextButton(
+                        key: const Key("changelog_dismiss_button"),
                         onPressed: () => Navigator.of(context).pop(),
                         child: Text(AppLocalization.of(context)!.dismiss, style: AppStyles.textStyleDialogOptions(context)),
                       ),
