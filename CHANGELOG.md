@@ -1,11 +1,21 @@
-# v0.3.7 - [2022-06-23]
+# v0.3.7 - [2022-06-24]
 #### Added
+- Updated non-english translations with automatic translations
+  - I'm sure the automatic translations aren't the best, but if you spot an error feel free to join the discord and send a translation submission, Or if you'd like to contribute to the project we have it setup so we can easily add translators (through localizely) so you can translate things as they're added
+  - Over time the translations will be updated to be more accurate and future updates will contain at least machine translations
 - Loading animation for when you reset the database
+- Reliably display "~" when a transaction involves precision we can't fit on screen (too small)
+- [WIP] - Contacts permission handling for an updoming feature involving the ability to send nano to phone contacts
+  - Normally I wouldn't push out an update with half of a feature, but this release includes some important bug fixes and the feature is at a safe middle point development-wise
+- Behind the scenes: working on integration tests to automatically test the UI/UX as well as take screenshots of the UI for the app stores
+  - About 50% done, you'll probably see it in the screenshots of the next release
 #### Changed
 - Sheet handles on the accounts sheet
 - Refactored account sheet to use the newer class
 - Destroy the database -> Reset the database
 #### Fixed
+- Rounding bugs (PLEASE REPORT IF YOU NOTICE ANY)
+- Contacts not saving properly
 - bugs with Nyano mode, as well as the "max" send button
 ## v0.3.6 - [2022-06-21]
 #### Fixed

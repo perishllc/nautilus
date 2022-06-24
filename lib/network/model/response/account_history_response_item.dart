@@ -57,23 +57,23 @@ class AccountHistoryResponseItem {
   }
 
   String? getShortString() {
-    return new Address(this.account).getShortString();
+    return new Address(account).getShortString();
   }
 
   String? getShorterString() {
-    return new Address(this.account).getShorterString();
+    return new Address(account).getShorterString();
   }
 
   String? getShortestString() {
-    return new Address(this.account).getShortestString();
+    return new Address(account).getShortestString();
   }
 
   /**
    * Return amount formatted for use in the UI
    */
-  String getFormattedAmount() {
-    return NumberUtil.getRawAsUsableString(amount);
-  }
+  // String getFormattedAmount() {
+  //   return NumberUtil.getRawAsUsableString(amount);
+  // }
 
   factory AccountHistoryResponseItem.fromJson(Map<String, dynamic> json) => _$AccountHistoryResponseItemFromJson(json);
   Map<String, dynamic> toJson() => _$AccountHistoryResponseItemToJson(this);

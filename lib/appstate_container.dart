@@ -310,7 +310,7 @@ class StateContainerState extends State<StateContainer> {
       String localeString = (await sl.get<SharedPrefsUtil>().getLanguage()).getLocaleString();
       if (localeString == "DEFAULT") {
         final List<Locale> languageLocales = await Devicelocale.preferredLanguagesAsLocales;
-        if (languageLocales.length > 0) {
+        if (languageLocales.isNotEmpty) {
           localeString = languageLocales[0].languageCode;
         }
       }
@@ -450,7 +450,6 @@ class StateContainerState extends State<StateContainer> {
       // handle the null case in debug mode:
       setState(() {
         if (wallet != null) {
-          wallet!.btcPrice = event.response!.btcPrice?.toString();
           wallet!.localCurrencyPrice = event.response!.price?.toString();
         }
       });
@@ -628,7 +627,6 @@ class StateContainerState extends State<StateContainer> {
     }
     setState(() {
       wallet = AppWallet(address: address, user: user, username: walletUsername, loading: true);
-      print("here1");
       requestUpdate();
       updateSolids();
     });
@@ -636,7 +634,7 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> updateRecentlyUsedAccounts() async {
     final List<Account> otherAccounts = await sl.get<DBHelper>().getRecentlyUsedAccounts(await getSeed());
-    if (otherAccounts.length > 0) {
+    if (otherAccounts.isNotEmpty) {
       if (otherAccounts.length > 1) {
         setState(() {
           recentLast = otherAccounts[0];
@@ -790,7 +788,6 @@ class StateContainerState extends State<StateContainer> {
         wallet!.accountBalance = BigInt.tryParse(response.balance!)!;
       }
       wallet!.localCurrencyPrice = response.price.toString();
-      wallet!.btcPrice = response.btcPrice.toString();
       sl.get<AccountService>().pop();
       sl.get<AccountService>().processQueue();
     });
@@ -1195,8 +1192,8 @@ class StateContainerState extends State<StateContainer> {
       throw Exception("wallet or wallet.address is null!");
     }
 
-    final int currentBlockHeightInList = wallet!.history!.length > 0 ? (wallet!.history![0].height! + 1) : 1;
-    final String? lastBlockHash = wallet!.history!.length > 0 ? wallet?.history![0].hash : null;
+    final int currentBlockHeightInList = wallet!.history!.isNotEmpty ? (wallet!.history![0].height! + 1) : 1;
+    final String? lastBlockHash = wallet!.history!.isNotEmpty ? wallet?.history![0].hash : null;
 
     final TXData txData = TXData(
       amount_raw: amountRaw,
@@ -1271,8 +1268,8 @@ class StateContainerState extends State<StateContainer> {
       throw Exception("wallet or wallet.address is null!");
     }
 
-    final int currentBlockHeightInList = wallet!.history!.length > 0 ? (wallet!.history![0].height! + 1) : 1;
-    final String? lastBlockHash = wallet!.history!.length > 0 ? wallet?.history![0].hash : null;
+    final int currentBlockHeightInList = wallet!.history!.isNotEmpty ? (wallet!.history![0].height! + 1) : 1;
+    final String? lastBlockHash = wallet!.history!.isNotEmpty ? wallet?.history![0].hash : null;
 
     final TXData txData = TXData(
       amount_raw: amountRaw,

@@ -1,235 +1,1951 @@
 {
-  "cancel": "Avbryt",
-  "close": "Lukk",
-  "confirm": "Bekreft",
-  "no": "Nei",
-  "yes": "Ja",
-  "onStr": "Aktiver",
-  "off": "Deaktiver",
-  "send": "Send",
-  "receive": "Motta",
-  "sent": "Sendt",
-  "received": "Mottatt",
-  "transactions": "Transaksjoner",
-  "addressCopied": "Adresse kopiert",
-  "copyAddress": "Kopier adresse",
-  "addressShare": "Del adresse",
-  "addressHint": "Angi adresse",
-  "seed": "Seed",
-  "seedInvalid": "Seed er ugyldig",
-  "seedCopied": "Seed kopiert til utklippstavle\nKan limes inn i 2 minutter.",
-  "scanQrCode": "Scan QR-kode",
-  "contactsImportErr": "Kunne ikke importere kontakter",
-  "viewDetails": "Vis detaljer",
-  "qrInvalidSeed": "QR-koden inneholder ikke et gyldig Seed eller privat nøkkel",
-  "removeContact": "Fjern kontakt",
-  "removeContactConfirmation": "Er du sikker på at du vil slette %1?",
-  "contactHeader": "Kontakt",
-  "contactsHeader": "Kontakter",
-  "addContact": "Legg til kontakt",
-  "contactNameHint": "Angi navn @",
-  "contactInvalid": "Ugyldig kontaktnavn",
-  "noContactsExport": "Det er ingen kontakter å eksportere.",
-  "noContactsImport": "Ingen nye kontakter å importere.",
-  "contactsImportSuccess": "%1 kontakter importert.",
-  "contactAdded": "%1 er lagt til i kontakter.",
-  "contactRemoved": "%1 har blitt fjernet fra kontakter!",
-  "contactNameMissing": "Velg et navn til denne kontakten",
-  "contactExists": "Kontakt eksisterer allerede",
-  "backupYourSeed": "Lag sikkerhetskopi av Seed",
-  "backupSeedConfirm": "Er du sikker på at du har sikkerhetskopiert lommebokens Seed?",
-  "seedBackupInfo": "Nedenfor er din lommeboks Seed. Det er viktig at du sikkerhetskopierer dette, og aldri lagrer det som tekst eller skjermbilde.",
-  "copySeed": "Kopier Seed",
-  "seedCopiedShort": "Seed kopiert",
-  "importSeed": "Importer Seed",
-  "importSeedHint": "Angi Seed nedenfor",
-  "welcomeText": "Velkommen til Nautilus. For å starte, kan du opprette en ny lommebok eller importere en eksisterende.",
-  "newWallet": "Ny lommebok",
-  "importWallet": "Importer lommebok",
-  "sentTo": "Sendt til",
-  "sending": "Sender",
-  "to": "Til",
-  "sendAmountConfirm": "Send %1 NANO",
-  "sendError": "Det oppsto en feil. Prøv igjen senere.",
-  "enterAmount": "Tast inn beløp",
-  "enterAddress": "Angi adresse",
-  "invalidAddress": "Den angitte adressen er ugyldig",
-  "addressMissing": "Vennligst angi en adresse",
-  "amountMissing": "Vennligst tast inn et beløp",
-  "insufficientBalance": "Saldo er utilstrekkelig",
-  "sendFrom": "Send fra",
-  "pinCreateTitle": "Opprett en 6-sifret PIN-kode",
-  "pinConfirmTitle": "Bekreft din PIN-kode",
-  "pinEnterTitle": "Tast inn PIN-kode",
-  "pinConfirmError": "PIN-kodene stemmer ikke overens",
-  "pinInvalid": "Den inntastede PIN-koden er ugyldig",
-  "themeHeader": "Tema",
-  "changeRepButton": "Endre",
-  "changeRepAuthenticate": "Endre representant",
-  "currentlyRepresented": "Aktuell representant",
-  "changeRepSucces": "Representant endret",
-  "repInfoHeader": "Hva er en representant?",
-  "repInfo": "En representant er en konto, som stemmer for konsensus på nettverket. Avstemningskraft veies ut fra balanse, og du kan delegere din balanse for å øke stemmevekten til en representant som du stoler på. Din representant har ingen brukskraft over dine midler. Du bør velge en representant som er sjeldent offline og som er pålitelig.",
-  "pinRepChange": "Angi PIN-kode for å endre representant.",
-  "changeRepHint": "Angi ny representant.",
-  "representatives": "Representanter",
-  "pickFromList": "Velg en fra listen",
-  "votingWeight": "Stemmevekt",
-  "uptime": "Tid online",
-  "authMethod": "Godkjennelsesmetode",
-  "pinMethod": "PIN-kode",
-  "privacyPolicy": "Personvernpolicy",
-  "biometricsMethod": "Biometri",
-  "changeCurrency": "Endre valuta",
-  "language": "Språk",
-  "shareNautilus": "Del Nautilus",
-  "shareNautilusText": "Sjekk ut Nautilus! En ledende NANO mobil lommebok!",
-  "logout": "Logg ut",
-  "warning": "Advarsel",
-  "logoutDetail": "Når du logger ut fjernes ditt Seed og all Nautilus-relatert data fra denne enheten. Om ditt Seed ikke er sikkerhetskopiert, vil du aldri kunne få tilgang til dine midler igjen",
-  "logoutAction": "Slett Seed og logg ut",
-  "logoutAreYouSure": "Er du sikker?",
-  "logoutReassurance": "Så lenge du har sikkerhetskopiert ditt Seed, har du ingenting å bekymre deg over.",
-  "settingsHeader": "Instillinger",
-  "preferences": "Preferanser",
-  "manage": "Administrer",
-  "backupSeed": "Sikkerhetskopier Seed",
-  "fingerprintSeedBackup": "Verifiser for å sikkerhetskopiere Seed.",
-  "pinSeedBackup": "Angi PIN-kode for a sikkerhetskopiere Seed",
-  "systemDefault": "Systemstandard",
-  "notifications": "Notifikasjoner",
-  "notificationTitle": "%1 NANO mottatt",
-  "notificationBody": "Åpne Nautilus for å vise denne transaksjonen",
-  "notificationHeaderSupplement": "Tap for å åpne",
-  "settingsTransfer": "Last fra papirlommebok",
-  "transferError": "Det oppsto en feil under overføringen. Prøv igjen senere.",
-  "paperWallet": "Papirlommebok",
-  "kaliumWallet": "Kalium lommebok",
-  "manualEntry": "Manuell inntasting",
-  "mnemonicPhrase": "Mnemonisk frase",
-  "rawSeed": "Seed",
-  "transferHeader": "Overfør midler",
-  "transfer": "Overføre",
-  "transferManualHint": "Tast inn Seed nedenfor.",
-  "transferIntro": "Denne prosessen vil overføre midler fra en papirlommebok til din Nautilus lommebok.\n\nTrykk på \"%1\" knappen for å starte.",
-  "transferQrScanHint": "Scan NANO \nSeed eller privat nøkkel",
-  "transferQrScanError": "Denne QR-koden inneholder ikke et gyldig Seed.",
-  "transferNoFunds": "Det er ingen NANO i dette Seed",
-  "transferConfirmInfo": "En lommebok med en saldo på %1 NANO ble funnet.\n",
-  "transferConfirmInfoSecond": "Trykk bekreft for å overføre midlene.\n",
-  "transferConfirmInfoThird": "Det kan ta flere sekunder å gjennomføre overførselen.",
-  "transferLoading": "Overfører",
-  "transferComplete": "%1 NANO ble overført til din Nautilus lommebok.\n",
-  "transferClose": "Trykk hvor som helst for å lukke vinduet.",
-  "scanInstructions": "Scan en NANO \nadresse QR-kode",
-  "unlockPin": "Angi PIN-kode for å låse opp Nautilus",
-  "unlockBiometrics": "Verifiser for å låse opp Nautilus",
-  "lockAppSetting": "Verifiser ved oppstart",
-  "locked": "Låst",
-  "unlock": "Lås opp",
-  "tooManyFailedAttempts": "For mange forsøk på å låse opp mislyktes.",
-  "securityHeader": "Sikkerhet",
-  "autoLockHeader": "Lås automatisk",
-  "xMinutes": "Etter %1 minutter",
-  "xMinute": "Etter %1 minutt",
-  "instantly": "Øyeblikkelig",
-  "exampleCardIntro": "Velkommen til Nautilus. Når du mottar NANO, vil transaksjonene vises slik:",
-  "exampleCardLittle": "Litt",
-  "exampleCardLot": "Mange",
-  "exampleCardTo": "Til en tilfeldig",
-  "exampleCardFrom": "Fra en tilfeldig",
-  "defaultAccountName": "Hovedkonto",
-  "defaultNewAccountName": "Konto %1",
-  "newAccountIntro": "Dette er din nye konto. Når du mottar NANO vises transaksjoner slik:",
+  "@@locale": "no",
   "account": "Konto",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Kontoer",
-  "addAccount": "Legg til konto",
-  "hideAccountHeader": "Skjul konto?",
-  "removeAccountText": "Er du sikker på at du vil skjule denne kontoen? Du kan legge den til igjen senere ved å trykke på \"%1\" knappen.",
-  "tapToReveal": "Trykk for å vise",
-  "tapToHide": "Trykk for å skjule",
-  "copied": "Kopiert",
-  "copy": "Kopier",
-  "seedDescription": "Et Seed inneholder den samme informasjonen som en tilknytningskode, men på en måte som en datamaskin kan lese. Så lenge du har en sikkerhetskopi av en av dem, vil du ha tilgang til dine midler.",
-  "importSecretPhrase": "Importer tilknytningkode",
-  "importSecretPhraseHint": "Vennligst angi din 24-ords tilknytningskode nedenfor. Hvert ord skal være adskilt med et mellomrom.",
-  "qrMnemonicError": "QR-kode inneholder ikke en gyldig tilknytningskode",
-  "mnemonicInvalidWord": "%1 er ikke et gyldig ord",
-  "mnemonicSizeError": "Tilknytningskode kan kun inneholde 24 ord",
-  "secretPhrase": "Tilknytningskode",
-  "backupConfirmButton": "Jeg har laget en sikkerhetskopi",
-  "secretInfoHeader": "Sikkerhet først!",
-  "secretInfo": "På neste skjerm vil du se din Tilknytningskode, som er en adgangskode til dine midler. Det er avgjørende at du sikkerhetskopierer denne og aldri deler den med noen.",
-  "secretWarning": "Om du mister enheten din eller avinstallerer applikasjonen, trenger du din Tilknytningskode eller Seed til å gjenvinne dine midler!",
-  "gotItButton": "Jeg har forstått!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "Er du sikker på at du har sikkerhetskopiert din Tilknytningskode eller Seed?",
-  "secretPhraseCopy": "Kopier Tilknytningskode",
-  "secretPhraseCopied": "Tilknytningskode kopiert",
-  "import": "Importer",
-  "importSeedInstead": "Importer Seed i stedet",
-  "switchToSeed": "Bytt til Seed",
-  "backupSecretPhrase": "Sikkerhetskopier Tilknytningskode",
-  "qrInvalidAddress": "QR-koden inneholder ikke en gyldig adresse",
-  "qrInvalidPermissions": "Gi kameratillatelse for å scanne QR-koder",
-  "qrUnknownError": "Kunne ikke lese QR-kode",
-  "mantaError": "Kunne ikke bekrefte forespørsel",
-  "rootWarning": "Din enhet er tilsynelatende \"rooted\", \"jailbroken\", eller endret på en måte som kompromitterer din sikkerhet. Det er anbefalt at du nullstiller enheten til opprinnelig tilstand, før du fortsetter.",
-  "iUnderstandTheRisks": "Jeg forstår risikoene",
-  "exit": "Avslutt",
-  "setWalletPassword": "Velg lommebokens passord",
-  "setPassword": "Velg passord",
-  "disableWalletPassword": "Deaktiver lommebokens passord",
-  "encryptionFailedError": "Kunne ikke velge lommebokens passord",
-  "setPasswordSuccess": "Passordet er valgt",
-  "disablePasswordSuccess": "Passordet har blitt deaktivert",
-  "createPasswordHint": "Lag et passord",
-  "confirmPasswordHint": "Bekreft passordet",
-  "enterPasswordHint": "Tast inn ditt passord",
-  "passwordsDontMatch": "Passordene stemmer ikke overens",
-  "passwordBlank": "Passordet kan ikke være tomt",
-  "invalidPassword": "Ugyldig passord",
-  "passwordWillBeRequiredToOpenParagraph": "Dette passordet vil være påkrevd for å åpne Nautilus.",
-  "passwordNoLongerRequiredToOpenParagraph": "Du trenger ikke lenger et passord for å åpne Nautilus.",
-  "createPasswordFirstParagraph": "Du kan opprette et passord for ekstra sikkerhet til din lommebok.",
-  "createPasswordSecondParagraph": "Passord er valgfritt, og din lommebok vil uansett være beskyttet med din PIN-kode eller biometri.",
-  "createAPasswordHeader": "Lag et passord.",
-  "createPasswordSheetHeader": "Opprett",
-  "disablePasswordSheetHeader": "Deaktiver",
-  "requireAPasswordToOpenHeader": "Krev et passord for å åpne Nautilus?",
-  "noSkipButton": "Nei, hopp over",
-  "yesButton": "Ja",
-  "nextButton": "Neste",
-  "goBackButton": "Gå tilbake",
-  "welcomeTextKal": "Velkommen til Kalium. For å starte kan du opprette en ny lommebok eller importere en eksisterende.",
-  "sendAmountConfirmKal": "Send %1 BANANO",
-  "currency": "Valuta",
-  "shareKalium": "Del Kalium",
-  "shareKaliumText": "Sjekk ut Kalium! Bananos offisielle mobile lommebok!",
-  "logoutDetailKal": "Når du logger ut, fjernes ditt Seed og all Kaliumrelaterte data fra denne enheten. Hvis ditt Seed ikke er sikkerhetskopiert, vil du aldri kunne få tilgang til dine midler igjen",
-  "notificationTitleKal": "Mottok %1 BANANO",
-  "notificationBodyKal": "Åpne Kalium for å se denne transaksjonen",
-  "transferIntroKal": "Denne prosessen vil overføre midler fra en papirlommebok til din Kalium lommebok.\n\nTrykk på \"%1\" knappen for å starte.",
-  "transferQrScanHintKal": "Scan en Banano \nSeed eller privat nøkkel",
-  "transferNoFundsKal": "Dette Seed inneholder ingen BANANO",
-  "transferConfirmInfoKal": "En lommebok med en saldo på %1 BANANO ble funnet.\n",
-  "transferCompleteKal": "%1 BANANO ble overført til din Kalium lommebok.\n",
-  "scanInstructionsKal": "Scan en Banano \nQR-kode",
-  "unlockPinKal": "Tast inn PIN-kode for å låse opp Kalium",
-  "unlockBiometricsKal": "Verifiser for å låse opp Kalium",
-  "exampleCardIntroKal": "Velkommen til Kalium. Når du mottar BANANO, vil transaksjoner vises slik:",
-  "exampleCardToKal": "Til en tilfeldig ape",
-  "exampleCardFromKal": "Fra en tilfeldig ape",
-  "newAccountIntroKal": "Dette er din nye konto. Når du mottar BANANO, vil transaksjoner vises slik:",
-  "liveSupportButton": "Support",
-  "connectingHeader": "Kobler til",
-  "minimumSend": "Minste overførselsbeløp er %1 NANO",
-  "natricon": "Natricon",
-  "pending": "venter",
-  "unconfirmed": "ubekreftet",
-  "messageHeader": "Melding",
-  "readMore": "Les mer",
-  "ignore": "Ignorer",
-  "dismiss": "Avvis",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
   "activeMessageHeader": "Aktiv melding",
-  "blockExplorer": "Blokker Explorer"
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Legg til konto",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Blokkere en bruker",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Legg til kontakt",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Legg til favoritt",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Adresse kopiert",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Angi adresse",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Vennligst angi en adresse",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Skriv inn et brukernavn eller adresse",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Del adresse",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Aliaser",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Vennligst tast inn et beløp",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "spurte",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Godkjennelsesmetode",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Automatisk import",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Lås automatisk",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Jeg har laget en sikkerhetskopi",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Sikkerhetskopier Tilknytningskode",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Sikkerhetskopier Seed",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Er du sikker på at du har sikkerhetskopiert lommebokens Seed?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Lag sikkerhetskopi av Seed",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Biometri",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "%1 er blokkert.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "Bruker allerede blokkert!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "blokkert",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Blokker en bruker med et hvilket som helst kjent alias eller adresse. Eventuelle meldinger, transaksjoner eller forespørsler fra dem vil bli ignorert.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Blokkert info",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Kallenavn allerede brukt!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Velg et kallenavn",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "%1 har blitt blokkert!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Blokker Explorer",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Blokker Explorer",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Hvilken blokkutforsker som skal brukes til å vise transaksjonsinformasjon",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Blokker denne brukeren",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Avbryt",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Endre valuta",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Endre logg",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Endre representant",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Endre",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Angi ny representant.",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "Dette er allerede din representant!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Representant endret",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Sjekk tilgjengelighet",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Lukk",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Bekreft",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Bekreft passordet",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Kobler til",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 er lagt til i kontakter.",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Kontakt eksisterer allerede",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Kontakt",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Ugyldig kontaktnavn",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Angi navn @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Velg et navn til denne kontakten",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 har blitt fjernet fra kontakter!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Kontakter",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Kunne ikke importere kontakter",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "%1 kontakter importert.",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Kopiert",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Kopier",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Kopier adresse",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Kopier lenke",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Kopier Seed",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Kopier lommebokadresse til utklippstavlen",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Lag et passord.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Lag gavekort",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Lag et gavekort",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Du kan opprette et passord for ekstra sikkerhet til din lommebok.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Lag et passord",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Passord er valgfritt, og din lommebok vil uansett være beskyttet med din PIN-kode eller biometri.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Opprett",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Opprett QR-kode",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Opprette gavekort",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Valuta",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Valuta-modus",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Valuta Mode Info",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Velg hvilken enhet du vil vise beløp i.\n1 nyano = 0.000001 NANO, eller \n1 000,000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Aktuell representant",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Dekryptering Feil!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Hovedkonto",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Konto %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Slett",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Deaktiver",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Passordet har blitt deaktivert",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Deaktiver lommebokens passord",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Avvis",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Ugyldig domenenavn",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Kunne ikke velge lommebokens passord",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Angi adresse",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Tast inn beløp",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Skriv inn gavebrev",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Skriv inn melding",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Tast inn ditt passord",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Skriv inn et brukernavn",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Skriv inn bruker eller adresse",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "Fra en tilfeldig",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "Fra en tilfeldig ape",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Velkommen til Nautilus. Når du mottar NANO, vil transaksjonene vises slik:",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Velkommen til Kalium. Når du mottar BANANO, vil transaksjoner vises slik:",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Litt",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "Mange",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "Til en tilfeldig",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "Til en tilfeldig ape",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Når du har sendt eller mottatt en betalingsforespørsel, de vil dukke opp her slik med fargen og koden på kortet som indikerer statusen. \n\nGrønt indikerer at forespørselen er betalt.\nGul indikerer at forespørselen/notatet ikke er betalt/lest.\nRød indikerer at forespørselen ikke er lest eller mottatt.\n\n Nøytrale fargede kort uten beløp er bare meldinger.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Noen",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Sushi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Når du har sendt eller mottatt en betalingsforespørsel, vises de her:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hei, hva skjer?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "Mye",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Leie",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "Gratulerer med dagen!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Gass Penger",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Avslutt",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "mislyktes",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus frakoblet",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Nautilus-servere ser ut til å være frakoblet, Sending og mottak (uten notater) skal fortsatt være i drift, men betalingsforespørsler kan ikke gå gjennom\n\n Kom tilbake senere eller start appen på nytt for å prøve igjen",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Favoritt eksisterer",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "favoritt",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Ugyldig favorittnavn",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Skriv inn et kallenavn",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Velg et navn for denne favoritten",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "%1 er fjernet fra favoritter!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "favoritter",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Utvalgte",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Verifiser for å sikkerhetskopiere Seed.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "Fra",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "oppfylt",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "Du har en gave!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Tom gave",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Gavebeløp",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Gave fra",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Last inn et digitalt gavekort med NANO! Angi et beløp, og en valgfri melding for mottakeren å se når de åpner den!\n\nNår du er opprettet, får du en lenke som du kan sende til hvem som helst, som når den åpnes automatisk vil distribuere midlene til mottakeren etter installasjon av Nautilus!\n\nHvis mottakeren allerede er en Nautilus-bruker, vil de få beskjed om å overføre midlene til kontoen sin når lenken åpnes",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Gave Melding",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Gå tilbake",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Jeg har forstått!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Gå til QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Skjul",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Skjul konto?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Hjem",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Ignorer",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Importer",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "Koblingen du klikket inneholder noe nano, vil du importere den til denne lommeboken, eller refunder den til den som sendte den?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Importer tilknytningkode",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Vennligst angi din 24-ords tilknytningskode nedenfor. Hvert ord skal være adskilt med et mellomrom.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Importer Seed",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Angi Seed nedenfor",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Importer Seed i stedet",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Importer lommebok",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Øyeblikkelig",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Saldo er utilstrekkelig",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Den angitte adressen er ugyldig",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Ugyldig passord",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Jeg forstår risikoene",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Kalium lommebok",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Språk",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Kopiert kobling",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Support",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "lastet",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Lastet inn",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Verifiser ved oppstart",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Låst",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Logg ut",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Slett Seed og logg ut",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Er du sikker?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Når du logger ut fjernes ditt Seed og all Nautilus-relatert data fra denne enheten. Om ditt Seed ikke er sikkerhetskopiert, vil du aldri kunne få tilgang til dine midler igjen",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Når du logger ut, fjernes ditt Seed og all Kaliumrelaterte data fra denne enheten. Hvis ditt Seed ikke er sikkerhetskopiert, vil du aldri kunne få tilgang til dine midler igjen",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Så lenge du har sikkerhetskopiert ditt Seed, har du ingenting å bekymre deg over.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Administrer",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Kunne ikke bekrefte forespørsel",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Manuell inntasting",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Merk som betalt",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Merk som ubetalt",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Memo sendt på nytt! Hvis det fortsatt ikke er godkjent, kan mottakerens enhet være frakoblet.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Melding",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Minste overførselsbeløp er %1 NANO",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 er ikke et gyldig ord",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Mnemonisk frase",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "Tilknytningskode kan kun inneholde 24 ord",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Denne funksjonen krever at du har en lengre transaksjonshistorikk for å forhindre spam.\n\nAlternativt kan du vise en QR-kode for noen å skanne.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Bekreftelse nødvendig",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Dette er din nye konto. Når du mottar NANO vises transaksjoner slik:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Dette er din nye konto. Når du mottar BANANO, vil transaksjoner vises slik:",
+  "@newAccountIntroKal": {},
+  "newWallet": "Ny lommebok",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Neste",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Nei",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Det er ingen kontakter å eksportere.",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "Ingen nye kontakter å importere.",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Node Status",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Ingen søkeresultater!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "Nei, hopp over",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Åpne Nautilus for å vise denne transaksjonen",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Åpne Kalium for å se denne transaksjonen",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Tap for å åpne",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "For at denne funksjonen skal fungere riktig, må varsler være aktivert",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Notifikasjoner",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "%1 NANO mottatt",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "Mottok %1 BANANO",
+  "@notificationTitleKal": {},
+  "notSent": "ikke sendt",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Deaktiver",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Ok",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Onramp",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "Aktiver",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Åpnet",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "betalt",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Papirlommebok",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Passordet kan ikke være tomt",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Du trenger ikke lenger et passord for å åpne Nautilus.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Passordene stemmer ikke overens",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Dette passordet vil være påkrevd for å åpne Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Betale",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Noen har bedt om betaling fra deg! sjekk betalingssiden for mer info.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Betalinger",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Betal denne forespørselen",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "venter",
+  "@pending": {},
+  "pickFromList": "Velg en fra listen",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "PIN-kodene stemmer ikke overens",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Bekreft din PIN-kode",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Opprett en 6-sifret PIN-kode",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Tast inn PIN-kode",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Den inntastede PIN-koden er ugyldig",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "PIN-kode",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Angi PIN-kode for å endre representant.",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Angi PIN-kode for a sikkerhetskopiere Seed",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Preferanser",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Personvernpolicy",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Kjøp Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "QR-koden inneholder ikke en gyldig adresse",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Gi kameratillatelse for å scanne QR-koder",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "QR-koden inneholder ikke et gyldig Seed eller privat nøkkel",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "QR-kode inneholder ikke en gyldig tilknytningskode",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Kunne ikke lese QR-kode",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Vurder appen",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn't take more than a minute.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Seed",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Les mer",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "fordring",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Motta",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Mottatt",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Motta Minimum",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Motta Minimum Info",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Et minimumsbeløp å motta. Hvis en betaling eller forespørsel mottas med et beløp mindre enn dette, det vil bli ignorert.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "tilbakebetaling",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "for",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Registrering",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Registrer brukernavn",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Registrer et brukernavn",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Er du sikker på at du vil skjule denne kontoen? Du kan legge den til igjen senere ved å trykke på \"%1\" knappen.",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Opphev blokkeringen",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Er du sikker på at du vil oppheve blokkeringen av %1?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Fjern kontakt",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Er du sikker på at du vil slette %1?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Fjern favoritt",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "En representant er en konto, som stemmer for konsensus på nettverket. Avstemningskraft veies ut fra balanse, og du kan delegere din balanse for å øke stemmevekten til en representant som du stoler på. Din representant har ingen brukskraft over dine midler. Du bør velge en representant som er sjeldent offline og som er pålitelig.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Hva er en representant?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Svar",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Representanter",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Be om",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Forespørsel %1 %2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "forespurt",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Forespurt fra",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Forespørselen mislyktes: Denne brukeren ser ikke ut til å ha Nautilus installert eller har varslinger deaktivert.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Forespørsel",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Be om betaling",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Feil ved sending av betalingsforespørsel, mottakerens enhet kan være frakoblet eller utilgjengelig.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Be om sendt på nytt! Hvis det fortsatt ikke er godkjent, kan mottakerens enhet være frakoblet.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Krev et passord for å åpne Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Send dette notatet på nytt",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Tilbakestill databasen",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Er du sikker på at du vil tilbakestille den interne databasen? \n\nDette kan løse problemer knyttet til oppdatering av appen, men vil også slette alle lagrede preferanser. Dette vil IKKE slette lommebokfrøet ditt. Hvis du har problemer, bør du ta sikkerhetskopi av frøet ditt, installer appen på nytt, og hvis problemet vedvarer, kan du gjerne lage en feilrapport om github eller uenighet.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Prøv på nytt",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Din enhet er tilsynelatende \"rooted\", \"jailbroken\", eller endret på en måte som kompromitterer din sikkerhet. Det er anbefalt at du nullstiller enheten til opprinnelig tilstand, før du fortsetter.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Scan en NANO \nadresse QR-kode",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Scan en Banano \nQR-kode",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Scan QR-kode",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Søk etter hva som helst",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "På neste skjerm vil du se din Tilknytningskode, som er en adgangskode til dine midler. Det er avgjørende at du sikkerhetskopierer denne og aldri deler den med noen.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Sikkerhet først!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Tilknytningskode",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Tilknytningskode kopiert",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Kopier Tilknytningskode",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Om du mister enheten din eller avinstallerer applikasjonen, trenger du din Tilknytningskode eller Seed til å gjenvinne dine midler!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Sikkerhet",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Seed",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Nedenfor er din lommeboks Seed. Det er viktig at du sikkerhetskopierer dette, og aldri lagrer det som tekst eller skjermbilde.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Seed kopiert til utklippstavle\nKan limes inn i 2 minutter.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Seed kopiert",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Et Seed inneholder den samme informasjonen som en tilknytningskode, men på en måte som en datamaskin kan lese. Så lenge du har en sikkerhetskopi av en av dem, vil du ha tilgang til dine midler.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Seed er ugyldig",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Kan ikke be om fra meg selv",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Send",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Send %1 NANO",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Send %1 BANANO",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Det oppsto en feil. Prøv igjen senere.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Send fra",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Sender",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Sending av notat med transaksjon mislyktes, de er kanskje ikke en Nautilus-bruker.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Sende melding",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Send forespørsel på nytt",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Send eller be om betaling, med End to End-krypterte meldinger!\n\nBetalingsforespørsler, notater, og meldinger vil bare kunne mottas av andre nautilus-brukere.\n\nDu trenger ikke å ha et brukernavn for å sende eller motta betalingsforespørsler, og du kan bruke dem til din egen journalføring selv om de ikke bruker nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Send info om ark",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Sendt",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Sendt til",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Velg passord",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Passordet er valgt",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Instillinger",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Last fra papirlommebok",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Velg lommebokens passord",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "Del Kalium",
+  "@shareKalium": {},
+  "shareKaliumText": "Sjekk ut Kalium! Bananos offisielle mobile lommebok!",
+  "@shareKaliumText": {},
+  "shareLink": "Del Link",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Del Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Sjekk ut Nautilus! En ledende NANO mobil lommebok!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Vis kontakter",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simplex",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Støtt utvikleren",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Bytt til Seed",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Systemstandard",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Trykk for å skjule",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Trykk for å vise",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Tema",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "Til",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "For mange forsøk på å låse opp mislyktes.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Transaksjoner",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Overføre",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Trykk hvor som helst for å lukke vinduet.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 NANO ble overført til din Nautilus lommebok.\n",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 BANANO ble overført til din Kalium lommebok.\n",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "En lommebok med en saldo på %1 NANO ble funnet.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "En lommebok med en saldo på %1 BANANO ble funnet.\n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Trykk bekreft for å overføre midlene.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Det kan ta flere sekunder å gjennomføre overførselen.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "Det oppsto en feil under overføringen. Prøv igjen senere.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Overfør midler",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Denne prosessen vil overføre midler fra en papirlommebok til din Nautilus lommebok.\n\nTrykk på \"%1\" knappen for å starte.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Denne prosessen vil overføre midler fra en papirlommebok til din Kalium lommebok.\n\nTrykk på \"%1\" knappen for å starte.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Denne prosessen vil overføre midlene fra en papirlommebok til din Nautilus-lommebok.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Overfører",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Tast inn Seed nedenfor.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "Det er ingen NANO i dette Seed",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "Dette Seed inneholder ingen BANANO",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Denne QR-koden inneholder ikke et gyldig Seed.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Scan NANO \nSeed eller privat nøkkel",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Scan en Banano \nSeed eller privat nøkkel",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "ubekreftede",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "ubekreftet",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "uoppfylt",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Lås opp",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Verifiser for å låse opp Nautilus",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Verifiser for å låse opp Kalium",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Angi PIN-kode for å låse opp Nautilus",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Tast inn PIN-kode for å låse opp Kalium",
+  "@unlockPinKal": {},
+  "unpaid": "ubetalt",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "ulest",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Tid online",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "Du har allerede registrert et brukernavn! Det er for øyeblikket ikke mulig å endre brukernavnet ditt, men du kan registrere en ny under en annen adresse.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Brukernavn tilgjengelig!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Vennligst skriv inn et brukernavn",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Brukernavn Feil",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Velg en unik @username for å gjøre det enkelt for venner og familie å finne deg!\n\nÅ ha et Nautilus-brukernavn oppdaterer brukergrensesnittet globalt for å gjenspeile det nye håndtaket ditt.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Ugyldig brukernavn",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Brukernavn utilgjengelig",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Nautilus brukernavn er en sentralisert tjeneste levert av nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "Bruker ikke funnet!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Vis detaljer",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Stemmevekt",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "Advarsel",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Velkommen til Nautilus. For å starte, kan du opprette en ny lommebok eller importere en eksisterende.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Velkommen til Kalium. For å starte kan du opprette en ny lommebok eller importere en eksisterende.",
+  "@welcomeTextKal": {},
+  "withAddress": "Med adresse",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "Med melding",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "Etter %1 minutt",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "Etter %1 minutter",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Ja",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Ja",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

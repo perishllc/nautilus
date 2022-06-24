@@ -109,7 +109,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       if (_sendAmountFocusNode!.hasFocus) {
         if (_rawAmount != null) {
           setState(() {
-            _sendAmountController!.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
+            _sendAmountController!.text = getRawAsThemeAwareAmount(context, _rawAmount);
             _rawAmount = null;
           });
         }

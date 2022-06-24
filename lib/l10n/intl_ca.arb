@@ -1,235 +1,1951 @@
 {
-  "cancel": "Cancel·lar",
-  "close": "Tancar",
-  "confirm": "Confirmar",
-  "no": "No",
-  "yes": "Sí",
-  "onStr": "Activades",
-  "off": "Desactivades",
-  "send": "Enviar",
-  "receive": "Rebre",
-  "sent": "Enviat",
-  "received": "Rebut",
-  "transactions": "Transaccions",
-  "addressCopied": "Adreça copiada",
-  "copyAddress": "Copiar adreça",
-  "addressShare": "Compartir adreça",
-  "addressHint": "Introduir adreça",
-  "seed": "Llavor",
-  "seedInvalid": "Llavor no vàlida",
-  "seedCopied": "Llavor copiada al porta-retalls\nEs pot enganxar durant 2 minuts.",
-  "scanQrCode": "Escanejar codi QR",
-  "contactsImportErr": "Error a l'importar contactes",
-  "viewDetails": "Veure detalls",
-  "qrInvalidSeed": "El codi QR no conté una llavor o clau privada vàlida",
-  "removeContact": "Eliminar contacte",
-  "removeContactConfirmation": "N'estàs segur que vols eliminar a %1?",
-  "contactHeader": "Contacte",
-  "contactsHeader": "Contactes",
-  "addContact": "Afegir contacte",
-  "contactNameHint": "Introdueix un nom @",
-  "contactInvalid": "Nom de contacte invàlid",
-  "noContactsExport": "No hi ha contactes per exportar.",
-  "noContactsImport": "No hi ha nous contactes per importar.",
-  "contactsImportSuccess": "%1 contactes importats amb èxit.",
-  "contactAdded": "%1 s'ha afegit als contactes.",
-  "contactRemoved": "%1 s'ha eliminat dels contactes!",
-  "contactNameMissing": "Escull un nom per aquest contacte",
-  "contactExists": "El contacte ja existeix",
-  "backupYourSeed": "Copia la teva llavor",
-  "backupSeedConfirm": "N'estàs segur que has fet una còpia de seguretat de la llavor?",
-  "seedBackupInfo": "A sota tens la teva llavor. És crucial que facis una còpia de la teva llavor i no la desis mai en text sense format o en una captura de pantalla.",
-  "copySeed": "Copiar la llavor",
-  "seedCopiedShort": "Llavor copiada",
-  "importSeed": "Importa la llavor",
-  "importSeedHint": "Si us plau, introdueix la llavor a sota.",
-  "welcomeText": "Benvingut a Nautilus. Per començar, pots crear un nou moneder o importar-ne un d'existent.",
-  "newWallet": "Nou moneder",
-  "importWallet": "Importar el moneder",
-  "sentTo": "Enviar a",
-  "sending": "Enviant",
-  "to": "A",
-  "sendAmountConfirm": "Enviar %1 NANO",
-  "sendError": "S'ha produït un error. Intenta-ho més tard.",
-  "enterAmount": "Introduir quantitat",
-  "enterAddress": "Introduir adreça",
-  "invalidAddress": "L'adreça introduïda no és vàlida",
-  "addressMissing": "Si us plau, introdueix una adreça",
-  "amountMissing": "Si us plau, introdueix una quantitat",
-  "insufficientBalance": "Saldo insuficient",
-  "sendFrom": "Enviar des de",
-  "pinCreateTitle": "Crea un PIN de 6 dígits",
-  "pinConfirmTitle": "Confirma el teu PIN",
-  "pinEnterTitle": "Introdueix el PIN",
-  "pinConfirmError": "Els codis PIN no coincideixen",
-  "pinInvalid": "PIN introduït invàlid",
-  "themeHeader": "Tema",
-  "changeRepButton": "Canviar",
-  "changeRepAuthenticate": "Canviar representant",
-  "currentlyRepresented": "Actualment representat per",
-  "changeRepSucces": "Representant canviat amb èxit",
-  "repInfoHeader": "Què és un representant?",
-  "repInfo": "Un representant és un compte que vota pel consens de la xarxa, i el pes de vot està ponderat pel saldo. Pots delegar el teu saldo per incrementar el pes de vot d'un representant en el que confiïs. El teu representant no té cap capacitat de gestió ni ús sobre els teus fons. És recomanable escollir un representant que tingui una alta disponibilitat i sigui de confiança.",
-  "pinRepChange": "Introdueix el PIN per canviar el representant.",
-  "changeRepHint": "Introduir nou representant",
-  "representatives": "Representants",
-  "pickFromList": "Escollir d'una llista",
-  "votingWeight": "Pes de vot",
-  "uptime": "Disponibilitat",
-  "authMethod": "Mètode d'autenticació",
-  "pinMethod": "PIN",
-  "privacyPolicy": "Política de privadesa",
-  "biometricsMethod": "Biometria",
-  "changeCurrency": "Canviar moneda",
-  "language": "Idioma",
-  "shareNautilus": "Compartir Nautilus",
-  "shareNautilusText": "Fes una ullada a Nautilus! Un moneder mòbil NANO de primera!",
-  "logout": "Tancar la sessió",
-  "warning": "Advertència",
-  "logoutDetail": "Tancar la sessió eliminarà la llavor i totes les dades relacionades amb Nautilus emmagatzemades en aquest dispositiu. Si no disposes d'una còpia de seguretat de la teva llavor, no podràs recuperar l'accés als teus fons",
-  "logoutAction": "Eliminar llavor i tancar sessió",
-  "logoutAreYouSure": "N'estàs segur?",
-  "logoutReassurance": "Sempre que hagis fet una còpia de seguretat de la teva llavor no t'has de preocupar per res.",
-  "settingsHeader": "Configuració",
-  "preferences": "Preferències",
-  "manage": "Administrar",
-  "backupSeed": "Copiar la llavor",
-  "fingerprintSeedBackup": "Autentica't per copiar la llavor i la frase secreta.",
-  "pinSeedBackup": "Introdueix el PIN per copiar la llavor i la frase secreta",
-  "systemDefault": "Predeterminat del sistema",
-  "notifications": "Notificacions",
-  "notificationTitle": "Has rebut %1 NANO",
-  "notificationBody": "Obre Nautilus per veure aquesta transacció",
-  "notificationHeaderSupplement": "Prémer per obrir",
-  "settingsTransfer": "Carregar des d'un moneder de paper",
-  "transferError": "S'ha produït un error en la transferència. Si us plau, intenta-ho més tard.",
-  "paperWallet": "Moneder de paper",
-  "kaliumWallet": "Moneder Kalium",
-  "manualEntry": "Introduir manualment",
-  "mnemonicPhrase": "Frase mnemotècnica",
-  "rawSeed": "Llavor",
-  "transferHeader": "Transferir fons",
-  "transfer": "Transferir",
-  "transferManualHint": "Si us plau, introdueix la llavor a sota.",
-  "transferIntro": "Aquest procés transferirà els fons des d'un moneder de paper al teu moneder Nautilus.\n\nPrem el botó \"%1\" per començar.",
-  "transferQrScanHint": "Escaneja una llavor\no clau privada Nano",
-  "transferQrScanError": "Aquest codi QR no conté una llavor vàlida.",
-  "transferNoFunds": "Aquesta llavor no conté cap NANO",
-  "transferConfirmInfo": "S'ha detectat un moneder amb un saldo de %1 NANO.\n",
-  "transferConfirmInfoSecond": "La transferència pot tardar uns quants segons a completar-se.\n",
-  "transferConfirmInfoThird": "La transferència pot tardar uns quants segons a completar-se.",
-  "transferLoading": "Transferint",
-  "transferComplete": "%1 NANO han estat transferits amb èxit al teu moneder Nautilus.\n",
-  "transferClose": "Prem a qualsevol lloc per tancar la finestra.",
-  "scanInstructions": "Escaneja el codi QR\nd'una adreça Nano",
-  "unlockPin": "Introdueix el PIN per desbloquejar Nautilus",
-  "unlockBiometrics": "Autentica't per desbloquejar Nautilus",
-  "lockAppSetting": "Autenticar-se a l'inici",
-  "locked": "Bloquejat",
-  "unlock": "Desbloquejar",
-  "tooManyFailedAttempts": "Massa intents de desbloqueig fallits.",
-  "securityHeader": "Seguretat",
-  "autoLockHeader": "Bloqueig automàtic",
-  "xMinutes": "Després de %1 minuts",
-  "xMinute": "Després d'%1 minut",
-  "instantly": "A l'instant",
-  "exampleCardIntro": "Benvingut a Nautilus. Un cop hagis rebut NANO, les transaccions apareixeran així:",
-  "exampleCardLittle": "Uns pocs",
-  "exampleCardLot": "Molts",
-  "exampleCardTo": "a algú",
-  "exampleCardFrom": "d'algú",
-  "defaultAccountName": "Compte principal",
-  "defaultNewAccountName": "Compte %1",
-  "newAccountIntro": "Aquest és el teu nou compte. Un cop hagis rebut NANO, les transaccions apareixeran així:",
+  "@@locale": "ca",
   "account": "Compte",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Comptes",
-  "addAccount": "Afegir compte",
-  "hideAccountHeader": "Amagar compte?",
-  "removeAccountText": "N'estàs segur que vols amagar aquest compte? Més endavant el pots tornar a afegir prement el botó \"%1\".",
-  "tapToReveal": "Prem per mostrar",
-  "tapToHide": "Prem per amagar",
-  "copied": "Copiat",
-  "copy": "Copia",
-  "seedDescription": "Una llavor conté la mateixa informació que una frase secreta, però de forma llegible per una màquina. Mentre tinguis una còpia de seguretat de qualsevol de les dues, tindràs accés als teus fons.",
-  "importSecretPhrase": "Importar frase secreta",
-  "importSecretPhraseHint": "Si us plau, introdueix la teva frase secreta de 24 paraules a sota. Cada paraula ha d'estar separada per un espai.",
-  "qrMnemonicError": "El codi QR no conté una frase secreta vàlida",
-  "mnemonicInvalidWord": "%1 no és una paraula vàlida",
-  "mnemonicSizeError": "La frase secreta només pot contenir 24 paraules",
-  "secretPhrase": "Frase secreta",
-  "backupConfirmButton": "N'he fet una còpia de seguretat",
-  "secretInfoHeader": "Seguretat abans que res!",
-  "secretInfo": "En la següent pantalla, veuràs una frase secreta. És una contrasenya per accedir als teus fons. És crucial que en facis una còpia de seguretat i no la comparteixis amb ningú.",
-  "secretWarning": "Si perds el teu dispositiu o desinstal·les l'aplicació, necessitaràs la teva frase secreta o llavor per recuperar els teus fons!",
-  "gotItButton": "Ho entenc!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "N'estàs segur que has fet una còpia de seguretat de la teva frase secreta o llavor?",
-  "secretPhraseCopy": "Copiar frase secreta",
-  "secretPhraseCopied": "Frase secreta copiada",
-  "import": "Importar",
-  "importSeedInstead": "Canviar a importar llavor",
-  "switchToSeed": "Canviar a la llavor",
-  "backupSecretPhrase": "Copiar la frase secreta",
-  "qrInvalidAddress": "El codi QR no conté un destí vàlid",
-  "qrInvalidPermissions": "Si us plau, concedeix permisos de càmera per escanejar codis QR",
-  "qrUnknownError": "No s'ha pogut llegir el codi QR",
-  "mantaError": "No s'ha pogut verificar la sol·licitud",
-  "rootWarning": "Sembla que el teu dispositiu té accés \"root\", \"jailbreak\", o està modificat de forma que en compromet la seguretat. És recomanable que es retorni el dispositiu a l'estat original abans de continuar.",
-  "iUnderstandTheRisks": "Entenc els riscos",
-  "exit": "Sortir",
-  "setWalletPassword": "Establir contrasenya del moneder",
-  "setPassword": "Establir contrasenya",
-  "disableWalletPassword": "Desactivar contrasenya del moneder",
-  "encryptionFailedError": "Error a l'establir la contrasenya del moneder",
-  "setPasswordSuccess": "Contrasenya establerta amb èxit",
-  "disablePasswordSuccess": "La contrasenya s'ha desactivat",
-  "createPasswordHint": "Crea una contrasenya",
-  "confirmPasswordHint": "Confirma la contrasenya",
-  "enterPasswordHint": "Introdueix la teva contrasenya",
-  "passwordsDontMatch": "Les contrasenyes no coincideixen",
-  "passwordBlank": "La contrasenya no pot estar buida",
-  "invalidPassword": "Contrasenya no vàlida",
-  "passwordWillBeRequiredToOpenParagraph": "Es requerirà aquesta contrasenya per obrir Nautilus.",
-  "passwordNoLongerRequiredToOpenParagraph": "Ja no requeriràs una contrasenya per obrir Nautilus.",
-  "createPasswordFirstParagraph": "Pots establir una contrasenya per afegir protecció addicional al teu moneder.",
-  "createPasswordSecondParagraph": "La contrasenya és opcional, el teu moneder estarà protegit amb el PIN o les dades biomètriques.",
-  "createAPasswordHeader": "Crea una contrasenya.",
-  "createPasswordSheetHeader": "Crear",
-  "disablePasswordSheetHeader": "Desactivar",
-  "requireAPasswordToOpenHeader": "Vols requerir una contrasenya per obrir Nautilus?",
-  "noSkipButton": "No, ometre",
-  "yesButton": "Sí",
-  "nextButton": "Següent",
-  "goBackButton": "Tornar",
-  "welcomeTextKal": "Benvingut a Kalium. Per començar, pots crear un nou moneder o importar-ne un d'existent.",
-  "sendAmountConfirmKal": "Enviar %1 BANANO",
-  "currency": "Moneda",
-  "shareKalium": "Compartir Kalium",
-  "shareKaliumText": "Fes una ullada a Kalium! El moneder mòbil oficial de Banano!",
-  "logoutDetailKal": "Tancar la sessió eliminarà la llavor i totes les dades relacionades amb Kalium emmagatzemades en aquest dispositiu. Si no disposes d'una còpia de seguretat de la teva llavor, no podràs recuperar l'accés als teus fons",
-  "notificationTitleKal": "Has rebut %1 BANANO",
-  "notificationBodyKal": "Obre Kalium per veure aquesta transacció",
-  "transferIntroKal": "Aquest procés transferirà els fons des d'un moneder de paper al teu moneder Kalium.\n\nPrem el botó \"%1\" per començar.",
-  "transferQrScanHintKal": "Escaneja una llavor\no clau privada Banano",
-  "transferNoFundsKal": "Aquesta llavor no conté cap BANANO",
-  "transferConfirmInfoKal": "S'ha detectat un moneder amb un saldo de %1 BANANO.\n",
-  "transferCompleteKal": "%1 BANANO han estat transferits amb èxit al teu moneder Kalium.\n",
-  "scanInstructionsKal": "Escaneja el codi QR\nd'una adreça Banano",
-  "unlockPinKal": "Introdueix el PIN per desbloquejar Kalium",
-  "unlockBiometricsKal": "Autentica't per desbloquejar Kalium",
-  "exampleCardIntroKal": "Benvingut a Kalium. Un cop hagis rebut BANANO, les transaccions apareixeran així:",
-  "exampleCardToKal": "a un mico qualsevol",
-  "exampleCardFromKal": "d'un mico qualsevol",
-  "newAccountIntroKal": "Aquest és el teu nou compte. Un cop hagis rebut BANANO, les transaccions apareixeran així:",
-  "liveSupportButton": "Suport",
-  "connectingHeader": "Connectant",
-  "minimumSend": "La quanitat mínima d'enviament és %1 NANO",
-  "natricon": "Natricon",
-  "pending": "pendent",
-  "unconfirmed": "sense confirmar",
-  "messageHeader": "Missatge",
-  "readMore": "Llegir més",
-  "ignore": "Ignorar",
-  "dismiss": "Descartar",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
   "activeMessageHeader": "Missatge actiu",
-  "blockExplorer": "Explorador de blocs"
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Afegir compte",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Block a User",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Afegir contacte",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Add Favorite",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Adreça copiada",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Introduir adreça",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Si us plau, introdueix una adreça",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Please Enter a Username or Address",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Compartir adreça",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Aliases",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Si us plau, introdueix una quantitat",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Asked",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Mètode d'autenticació",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Auto Import",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Bloqueig automàtic",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "N'he fet una còpia de seguretat",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Copiar la frase secreta",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Copiar la llavor",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "N'estàs segur que has fet una còpia de seguretat de la llavor?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Copia la teva llavor",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Biometria",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "%1 successfully blocked.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "User already Blocked!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "Blocked",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Block a user by any known alias or address. Any messages, transactions, or requests from them will be ignored.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Blocked Info",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Nick name already used!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Choose a Nick Name",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "%1 has been unblocked!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Explorador de blocs",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Block Explorer Info",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Which block explorer to use to display transaction information",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Block this User",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Cancel·lar",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Canviar moneda",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Change Log",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Canviar representant",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Canviar",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Introduir nou representant",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "This is already your representative!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Representant canviat amb èxit",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Check Availability",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Tancar",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Confirmar",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Confirma la contrasenya",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Connectant",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 s'ha afegit als contactes.",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "El contacte ja existeix",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Contacte",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Nom de contacte invàlid",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Introdueix un nom @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Escull un nom per aquest contacte",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 s'ha eliminat dels contactes!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Contactes",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Error a l'importar contactes",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "%1 contactes importats amb èxit.",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Copiat",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Copia",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Copiar adreça",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Copy Link",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Copiar la llavor",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Copy wallet address to clipboard",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Crea una contrasenya.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Create Gift Card",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Create a Gift Card",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Pots establir una contrasenya per afegir protecció addicional al teu moneder.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Crea una contrasenya",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "La contrasenya és opcional, el teu moneder estarà protegit amb el PIN o les dades biomètriques.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Crear",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Create QR Code",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Creating Gift Card",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Moneda",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Currency Mode",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Currency Mode Info",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Choose which unit to display amounts in.\n1 nyano = 0.000001 NANO, or \n1,000,000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Actualment representat per",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Decryption Error!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Compte principal",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Compte %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Desactivar",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "La contrasenya s'ha desactivat",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Desactivar contrasenya del moneder",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Descartar",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Invalid Domain Name",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Error a l'establir la contrasenya del moneder",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Introduir adreça",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Introduir quantitat",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Enter Gift Note",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Enter Message",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Introdueix la teva contrasenya",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Enter a username",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Enter User or Address",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "d'algú",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "d'un mico qualsevol",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Benvingut a Nautilus. Un cop hagis rebut NANO, les transaccions apareixeran així:",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Benvingut a Kalium. Un cop hagis rebut BANANO, les transaccions apareixeran així:",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Uns pocs",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "Molts",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "a algú",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "a un mico qualsevol",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Once you send or receive a payment request, they'll show up here like this with the color and tag of the card indicating the status. \n\nGreen indicates the request has been paid.\nYellow indicates the request / memo has not been paid / read.\nRed indicates the request has not been read or received.\n\n Neutral colored cards without an amount are just messages.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Some",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Sushi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Once you send or receive a payment request, they'll show up here:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hey what's up?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "A lot of",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Rent",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "Happy Birthday!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Gas Money",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Sortir",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "failed",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus Disconnected",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Nautilus Servers appear to be disconnected, Sending and Receiving (without memos) should still be operational but payment requests may not go through\n\n Come back later or restart the app to try again",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Favorite Already Exists",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Favorite",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Invalid Favorite Name",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Enter a Nick Name",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Choose a Name for this Favorite",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "%1 has been removed from favorites!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "Favorites",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Featured",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Autentica't per copiar la llavor i la frase secreta.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "From",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "fulfilled",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "You have a gift!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Empty Gift",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Gift Amount",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Gift From",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they will get a prompt to transfer the funds into their account upon opening the link",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Gift Message",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Tornar",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Ho entenc!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Go to QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Hide",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Amagar compte?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Home",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Ignorar",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Importar",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Importar frase secreta",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Si us plau, introdueix la teva frase secreta de 24 paraules a sota. Cada paraula ha d'estar separada per un espai.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Importa la llavor",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Si us plau, introdueix la llavor a sota.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Canviar a importar llavor",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Importar el moneder",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "A l'instant",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Saldo insuficient",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "L'adreça introduïda no és vàlida",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Contrasenya no vàlida",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Entenc els riscos",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Moneder Kalium",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Idioma",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Link Copied",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Suport",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Loaded",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Loaded Into",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Autenticar-se a l'inici",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Bloquejat",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Tancar la sessió",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Eliminar llavor i tancar sessió",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "N'estàs segur?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Tancar la sessió eliminarà la llavor i totes les dades relacionades amb Nautilus emmagatzemades en aquest dispositiu. Si no disposes d'una còpia de seguretat de la teva llavor, no podràs recuperar l'accés als teus fons",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Tancar la sessió eliminarà la llavor i totes les dades relacionades amb Kalium emmagatzemades en aquest dispositiu. Si no disposes d'una còpia de seguretat de la teva llavor, no podràs recuperar l'accés als teus fons",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Sempre que hagis fet una còpia de seguretat de la teva llavor no t'has de preocupar per res.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Administrar",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "No s'ha pogut verificar la sol·licitud",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Introduir manualment",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Mark as Paid",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Mark as Unpaid",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Memo re-sent! If still unacknowledged, the recipient's device may be offline.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Missatge",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "La quanitat mínima d'enviament és %1 NANO",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 no és una paraula vàlida",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Frase mnemotècnica",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "La frase secreta només pot contenir 24 paraules",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "This feature requires you to have a longer transaction history in order to prevent spam.\n\nAlternatively, you can show a QR code for someone to scan.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Verification Needed",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Aquest és el teu nou compte. Un cop hagis rebut NANO, les transaccions apareixeran així:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Aquest és el teu nou compte. Un cop hagis rebut BANANO, les transaccions apareixeran així:",
+  "@newAccountIntroKal": {},
+  "newWallet": "Nou moneder",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Següent",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "No",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "No hi ha contactes per exportar.",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "No hi ha nous contactes per importar.",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Node Status",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "No Search Results!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "No, ometre",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Obre Nautilus per veure aquesta transacció",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Obre Kalium per veure aquesta transacció",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Prémer per obrir",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "In order for this feature to work correctly, notifications must be enabled",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Notificacions",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "Has rebut %1 NANO",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "Has rebut %1 BANANO",
+  "@notificationTitleKal": {},
+  "notSent": "not sent",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Desactivades",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Ok",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Onramp",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "Activades",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Opened",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "paid",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Moneder de paper",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "La contrasenya no pot estar buida",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Ja no requeriràs una contrasenya per obrir Nautilus.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Les contrasenyes no coincideixen",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Es requerirà aquesta contrasenya per obrir Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Pay",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Someone has requested payment from you! check the payments page for more info.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Payments",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Pay this request",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "pendent",
+  "@pending": {},
+  "pickFromList": "Escollir d'una llista",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "Els codis PIN no coincideixen",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Confirma el teu PIN",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Crea un PIN de 6 dígits",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Introdueix el PIN",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "PIN introduït invàlid",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Introdueix el PIN per canviar el representant.",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Introdueix el PIN per copiar la llavor i la frase secreta",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Preferències",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Política de privadesa",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Purchase Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "El codi QR no conté un destí vàlid",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Si us plau, concedeix permisos de càmera per escanejar codis QR",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "El codi QR no conté una llavor o clau privada vàlida",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "El codi QR no conté una frase secreta vàlida",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "No s'ha pogut llegir el codi QR",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Rate the App",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn't take more than a minute.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Llavor",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Llegir més",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "receivable",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Rebre",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Rebut",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Receive Minimum",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Receive Minimum Info",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "A minimum amount to receive. If a payment or request is received with an amount less than this, it will be ignored.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "Refund",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "for",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Registering",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Register Username",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Register a Username",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "N'estàs segur que vols amagar aquest compte? Més endavant el pots tornar a afegir prement el botó \"%1\".",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Unblock",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Are you sure you want to unblock %1?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Eliminar contacte",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "N'estàs segur que vols eliminar a %1?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Remove Favorite",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "Un representant és un compte que vota pel consens de la xarxa, i el pes de vot està ponderat pel saldo. Pots delegar el teu saldo per incrementar el pes de vot d'un representant en el que confiïs. El teu representant no té cap capacitat de gestió ni ús sobre els teus fons. És recomanable escollir un representant que tingui una alta disponibilitat i sigui de confiança.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Què és un representant?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Reply",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Representants",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Request",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Request %1 %2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Requested",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Requested From",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Request Failed: This user doesn't appear to have Nautilus installed, or has notifications disabled.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Requesting",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Request Payment",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Error sending payment request, the recipient's device may be offline or unavailable.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Request re-sent! If still unacknowledged, the recipient's device may be offline.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Vols requerir una contrasenya per obrir Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Resend this memo",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Reset the Database",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed. If you're having issues you should backup your seed, re-install the app, and if the issue persists feel free to make a bug report on github or discord.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Sembla que el teu dispositiu té accés \"root\", \"jailbreak\", o està modificat de forma que en compromet la seguretat. És recomanable que es retorni el dispositiu a l'estat original abans de continuar.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Escaneja el codi QR\nd'una adreça Nano",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Escaneja el codi QR\nd'una adreça Banano",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Escanejar codi QR",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Search for anything",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "En la següent pantalla, veuràs una frase secreta. És una contrasenya per accedir als teus fons. És crucial que en facis una còpia de seguretat i no la comparteixis amb ningú.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Seguretat abans que res!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Frase secreta",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Frase secreta copiada",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Copiar frase secreta",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Si perds el teu dispositiu o desinstal·les l'aplicació, necessitaràs la teva frase secreta o llavor per recuperar els teus fons!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Seguretat",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Llavor",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "A sota tens la teva llavor. És crucial que facis una còpia de la teva llavor i no la desis mai en text sense format o en una captura de pantalla.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Llavor copiada al porta-retalls\nEs pot enganxar durant 2 minuts.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Llavor copiada",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Una llavor conté la mateixa informació que una frase secreta, però de forma llegible per una màquina. Mentre tinguis una còpia de seguretat de qualsevol de les dues, tindràs accés als teus fons.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Llavor no vàlida",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Can't request from self",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Enviar",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Enviar %1 NANO",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Enviar %1 BANANO",
+  "@sendAmountConfirmKal": {},
+  "sendError": "S'ha produït un error. Intenta-ho més tard.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Enviar des de",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Enviant",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Sending memo with transaction failed, they may not be a Nautilus user.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Sending message",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Send Request again",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users.\n\nYou don't need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don't use nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Send Sheet Info",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Enviat",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Enviar a",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Establir contrasenya",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Contrasenya establerta amb èxit",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Configuració",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Carregar des d'un moneder de paper",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Establir contrasenya del moneder",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "Compartir Kalium",
+  "@shareKalium": {},
+  "shareKaliumText": "Fes una ullada a Kalium! El moneder mòbil oficial de Banano!",
+  "@shareKaliumText": {},
+  "shareLink": "Share Link",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Compartir Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Fes una ullada a Nautilus! Un moneder mòbil NANO de primera!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Show Contacts",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simplex",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Support the Developer",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Canviar a la llavor",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Predeterminat del sistema",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Prem per amagar",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Prem per mostrar",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Tema",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "A",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Massa intents de desbloqueig fallits.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Transaccions",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Transferir",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Prem a qualsevol lloc per tancar la finestra.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 NANO han estat transferits amb èxit al teu moneder Nautilus.\n",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 BANANO han estat transferits amb èxit al teu moneder Kalium.\n",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "S'ha detectat un moneder amb un saldo de %1 NANO.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "S'ha detectat un moneder amb un saldo de %1 BANANO.\n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "La transferència pot tardar uns quants segons a completar-se.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "La transferència pot tardar uns quants segons a completar-se.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "S'ha produït un error en la transferència. Si us plau, intenta-ho més tard.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Transferir fons",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Aquest procés transferirà els fons des d'un moneder de paper al teu moneder Nautilus.\n\nPrem el botó \"%1\" per començar.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Aquest procés transferirà els fons des d'un moneder de paper al teu moneder Kalium.\n\nPrem el botó \"%1\" per començar.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "This process will transfer the funds from a paper wallet to your Nautilus wallet.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Transferint",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Si us plau, introdueix la llavor a sota.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "Aquesta llavor no conté cap NANO",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "Aquesta llavor no conté cap BANANO",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Aquest codi QR no conté una llavor vàlida.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Escaneja una llavor\no clau privada Nano",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Escaneja una llavor\no clau privada Banano",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "unacknowledged",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "sense confirmar",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "unfulfilled",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Desbloquejar",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Autentica't per desbloquejar Nautilus",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Autentica't per desbloquejar Kalium",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Introdueix el PIN per desbloquejar Nautilus",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Introdueix el PIN per desbloquejar Kalium",
+  "@unlockPinKal": {},
+  "unpaid": "unpaid",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "unread",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Disponibilitat",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Username available!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Please Enter a Username",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Username Error",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Pick out a unique @username to make it easy for friends and family to find you!\n\nHaving a Nautilus username updates the UI globally to reflect your new handle.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Invalid Username",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Username unavailable",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Nautilus usernames are a centralized service provided by Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "User not found!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Veure detalls",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Pes de vot",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "Advertència",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Benvingut a Nautilus. Per començar, pots crear un nou moneder o importar-ne un d'existent.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Benvingut a Kalium. Per començar, pots crear un nou moneder o importar-ne un d'existent.",
+  "@welcomeTextKal": {},
+  "withAddress": "With Address",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "With Message",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "Després d'%1 minut",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "Després de %1 minuts",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Sí",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Sí",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

@@ -18,7 +18,7 @@ class AppLocalization {
 
     return initializeMessages(localeName).then((bool _) {
       Intl.defaultLocale = localeName;
-      return new AppLocalization();
+      return AppLocalization();
     });
   }
 
@@ -296,6 +296,10 @@ class AppLocalization {
     return Intl.message('Contacts', desc: 'contact_header', name: 'contactsHeader');
   }
 
+  String get showContacts {
+    return Intl.message('Show Contacts', desc: 'contacts_enabled', name: 'showContacts');
+  }
+
   String get addContact {
     return Intl.message('Add Contact', desc: 'contact_add_button', name: 'addContact');
   }
@@ -546,7 +550,7 @@ class AppLocalization {
   }
 
   String get sendAmountConfirm {
-    return Intl.message("Send %1 %2", desc: 'send_pin_description', name: 'sendAmountConfirm');
+    return Intl.message("Send %1 %2", desc: 'send_amount_confirm', name: 'sendAmountConfirm');
   }
 
   String get sendMessageConfirm {
@@ -1029,8 +1033,8 @@ class AppLocalization {
     return Intl.message("Paper Wallet", desc: 'paper_wallet', name: 'paperWallet');
   }
 
-  String get kaliumWallet {
-    return Intl.message("Nautilus Wallet", desc: 'kalium_wallet', name: 'kaliumWallet');
+  String get nautilusWallet {
+    return Intl.message("Nautilus Wallet", desc: 'nautilus_wallet', name: 'nautilusWallet');
   }
 
   String get manualEntry {
@@ -1120,11 +1124,11 @@ class AppLocalization {
   /// -- LOCK SCREEN
 
   String get unlockPin {
-    return Intl.message("Enter PIN to Unlock Nautilus", desc: 'unlock_kalium_pin', name: 'unlockPin');
+    return Intl.message("Enter PIN to Unlock Nautilus", desc: 'unlock_pin', name: 'unlockPin');
   }
 
   String get unlockBiometrics {
-    return Intl.message("Authenticate to Unlock Nautilus", desc: 'unlock_kalium_bio', name: 'unlockBiometrics');
+    return Intl.message("Authenticate to Unlock Nautilus", desc: 'unlock_bio', name: 'unlockBiometrics');
   }
 
   String get lockAppSetting {
@@ -1268,7 +1272,7 @@ class AppLocalization {
   }
 
   String get exampleRecRecipient {
-    return Intl.message("@coworker", desc: 'example_rec_recipient', name: 'exampleReceiveRecipient');
+    return Intl.message("@coworker", desc: 'example_rec_recipient', name: 'exampleRecRecipient');
   }
 
   String get exampleRecRecipientMessage {

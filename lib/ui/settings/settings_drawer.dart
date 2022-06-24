@@ -561,11 +561,11 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   Future<String?> _onrampDialog() async {
-    String onramper_url = "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
-    String moonpay_url = "https://buy.moonpay.com/?currencyCode=xno&colorCode=%234080D7";
-    String simplex_url = "https://buy.chainbits.com";
+    final String onramper_url = "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
+    final String moonpay_url = "https://buy.moonpay.com/?currencyCode=xno&colorCode=%234080D7";
+    final String simplex_url = "https://buy.chainbits.com";
 
-    String? choice = await showDialog<String>(
+    final String? choice = await showDialog<String>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
@@ -620,8 +620,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   List<Widget> _buildMinRawOptions() {
-    List<Widget> ret = [];
-    MinRawOptions.values.forEach((MinRawOptions value) {
+    final List<Widget> ret = [];
+    for (final MinRawOptions value in MinRawOptions.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
           Navigator.pop(context, value);
@@ -634,13 +634,13 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           ),
         ),
       ));
-    });
+    }
     return ret;
   }
 
   List<Widget> _buildCurrencyModeOptions() {
-    List<Widget> ret = [];
-    CurrencyModeOptions.values.forEach((CurrencyModeOptions value) {
+    final List<Widget> ret = [];
+    for (final CurrencyModeOptions value in CurrencyModeOptions.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
           Navigator.pop(context, value);
@@ -653,12 +653,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           ),
         ),
       ));
-    });
+    }
     return ret;
   }
 
   Future<void> _minRawDialog() async {
-    MinRawOptions? chosen = await showDialog<MinRawOptions>(
+    final MinRawOptions? chosen = await showDialog<MinRawOptions>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
@@ -682,7 +682,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           );
         });
 
-    String raw_value = MinRawSetting(chosen).getRaw();
+    final String raw_value = MinRawSetting(chosen).getRaw();
     sl.get<SharedPrefsUtil>().setMinRawReceive(raw_value).then((result) {
       setState(() {
         StateContainer.of(context).setMinRawReceive(raw_value);
@@ -692,7 +692,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   Future<void> _currencyModeDialog() async {
-    CurrencyModeOptions? chosen = await showDialog<CurrencyModeOptions>(
+    final CurrencyModeOptions? chosen = await showDialog<CurrencyModeOptions>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
@@ -716,7 +716,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           );
         });
 
-    String currency_mode = CurrencyModeSetting(chosen).getDisplayName();
+    final String currency_mode = CurrencyModeSetting(chosen).getDisplayName();
     sl.get<SharedPrefsUtil>().setCurrencyMode(currency_mode).then((result) {
       setState(() {
         StateContainer.of(context).setCurrencyMode(currency_mode);
@@ -783,8 +783,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   List<Widget> _buildCurrencyOptions() {
-    List<Widget> ret = [];
-    AvailableCurrencyEnum.values.forEach((AvailableCurrencyEnum value) {
+    final List<Widget> ret = [];
+    for (final AvailableCurrencyEnum value in AvailableCurrencyEnum.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
           Navigator.pop(context, value);
@@ -797,12 +797,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           ),
         ),
       ));
-    });
+    }
     return ret;
   }
 
   Future<void> _currencyDialog() async {
-    AvailableCurrencyEnum? selection = await showAppDialog<AvailableCurrencyEnum>(
+    final AvailableCurrencyEnum? selection = await showAppDialog<AvailableCurrencyEnum>(
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
@@ -829,8 +829,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   List<Widget> _buildLanguageOptions() {
-    List<Widget> ret = [];
-    AvailableLanguage.values.forEach((AvailableLanguage value) {
+    final List<Widget> ret = [];
+    for (final AvailableLanguage value in AvailableLanguage.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
           Navigator.pop(context, value);
@@ -843,12 +843,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           ),
         ),
       ));
-    });
+    }
     return ret;
   }
 
   Future<void> _languageDialog() async {
-    AvailableLanguage? selection = await showAppDialog<AvailableLanguage>(
+    final AvailableLanguage? selection = await showAppDialog<AvailableLanguage>(
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
@@ -874,8 +874,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   List<Widget> _buildExplorerOptions() {
-    List<Widget> ret = [];
-    AvailableBlockExplorerEnum.values.forEach((AvailableBlockExplorerEnum value) {
+    final List<Widget> ret = [];
+    for (final AvailableBlockExplorerEnum value in AvailableBlockExplorerEnum.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
           Navigator.pop(context, value);
@@ -888,12 +888,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           ),
         ),
       ));
-    });
+    }
     return ret;
   }
 
   Future<void> _explorerDialog() async {
-    AvailableBlockExplorerEnum? selection = await showAppDialog<AvailableBlockExplorerEnum>(
+    final AvailableBlockExplorerEnum? selection = await showAppDialog<AvailableBlockExplorerEnum>(
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
@@ -921,8 +921,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   List<Widget> _buildLockTimeoutOptions() {
-    List<Widget> ret = [];
-    LockTimeoutOption.values.forEach((LockTimeoutOption value) {
+    final List<Widget> ret = [];
+    for (final LockTimeoutOption value in LockTimeoutOption.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
           Navigator.pop(context, value);
@@ -935,12 +935,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           ),
         ),
       ));
-    });
+    }
     return ret;
   }
 
   Future<void> _lockTimeoutDialog() async {
-    LockTimeoutOption? selection = await showAppDialog<LockTimeoutOption>(
+    final LockTimeoutOption? selection = await showAppDialog<LockTimeoutOption>(
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
@@ -966,8 +966,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   List<Widget> _buildThemeOptions() {
-    List<Widget> ret = [];
-    ThemeOptions.values.forEach((ThemeOptions value) {
+    final List<Widget> ret = [];
+    for (final ThemeOptions value in ThemeOptions.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
           Navigator.pop(context, value);
@@ -980,12 +980,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           ),
         ),
       ));
-    });
+    }
     return ret;
   }
 
   Future<void> _themeDialog() async {
-    ThemeOptions? selection = await showAppDialog<ThemeOptions>(
+    final ThemeOptions? selection = await showAppDialog<ThemeOptions>(
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
@@ -1083,9 +1083,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                 );
               },
             ),
-          )
-        else
-          const SizedBox(),
+          ),
         Container(
           margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
           child: Text(AppLocalization.of(context)!.featured,
@@ -1112,7 +1110,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         ),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.purchaseNano, AppIcons.coins, onPressed: () async {
           // Navigator.of(context).pushNamed("/purchase_nano");
-          String? choice = await _onrampDialog();
+          final String? choice = await _onrampDialog();
           if (choice != null) {
             await UIUtil.showWebview(context, choice);
           }
@@ -1163,7 +1161,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           color: StateContainer.of(context).curTheme.text15,
         ),
         AppSettings.buildSettingsListItemDoubleLine(
-            context, AppLocalization.of(context)!.contactsHeader, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
+            context, AppLocalization.of(context)!.showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
         Divider(
           height: 2,
           color: StateContainer.of(context).curTheme.text15,
@@ -1233,11 +1231,11 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         ),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.backupSecretPhrase, AppIcons.backupseed, onPressed: () async {
           // Authenticate
-          AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-          bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+          final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+          final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
           if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
             try {
-              bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.fingerprintSeedBackup);
+              final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.fingerprintSeedBackup);
               if (authenticated) {
                 sl.get<HapticUtil>().fingerprintSucess();
                 StateContainer.of(context).getSeed().then((String seed) {
@@ -1251,7 +1249,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   error.toString(),
                   "Copy to clipboard",
                   () {
-                    Clipboard.setData(ClipboardData(text: e.toString()));
+                    Clipboard.setData(ClipboardData(text: error.toString()));
                   },
                   cancelText: "Close",
                   cancelAction: () {
@@ -1323,9 +1321,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             await sl.get<SharedPrefsUtil>().deleteAll();
 
             // re-add account index 0 and switch the account to it:
-            String? seed = await StateContainer.of(context).getSeed();
+            final String? seed = await StateContainer.of(context).getSeed();
             await sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context)!.defaultAccountName);
-            Account? mainAccount = await sl.get<DBHelper>().getMainAccount(seed);
+            final Account? mainAccount = await sl.get<DBHelper>().getMainAccount(seed);
             await sl.get<DBHelper>().changeAccount(mainAccount);
             EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
             if (animationOpen && mounted) {
@@ -1346,7 +1344,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
               // Unsubscribe from notifications
               sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((_) async {
                 try {
-                  String? fcmToken = await FirebaseMessaging.instance.getToken();
+                  final String? fcmToken = await FirebaseMessaging.instance.getToken();
                   EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
                   EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
                 } catch (e) {}
@@ -1425,7 +1423,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     Text(" | ", style: AppStyles.textStyleVersion(context)),
                     GestureDetector(
                         onTap: () async {
-                          Uri uri = Uri.parse(AppLocalization.of(context)!.discordUrl);
+                          final Uri uri = Uri.parse(AppLocalization.of(context)!.discordUrl);
                           if (await canLaunchUrl(uri)) {
                             await launchUrl(uri);
                           }
@@ -1517,13 +1515,13 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                               ),
                             ),
                             Center(
-                              child: Container(
+                              child: SizedBox(
                                 width: 60,
                                 height: 45,
                                 child: TextButton(
                                   style: TextButton.styleFrom(
                                     primary: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                    padding: const EdgeInsets.all(0.0),
+                                    padding: EdgeInsets.zero,
                                     // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
                                     // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
                                   ),
@@ -1596,9 +1594,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                   ),
                                 ],
                               ),
-                            )
-                          else
-                            const SizedBox(),
+                            ),
                           // Third Account
                           if (StateContainer.of(context).recentSecondLast != null)
                             Container(
@@ -1653,9 +1649,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                   ),
                                 ],
                               ),
-                            )
-                          else
-                            const SizedBox(),
+                            ),
                           // Account switcher
                           Container(
                             height: 36,
@@ -1666,7 +1660,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                             ),
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                padding: const EdgeInsets.all(0.0),
+                                padding: EdgeInsets.zero,
                                 shape: const CircleBorder(),
                                 primary: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text30,
                                 // splashColor: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text30,
@@ -1714,15 +1708,13 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           // Main account name
-                          Container(
-                            child: Text(
-                              StateContainer.of(context).selectedAccount!.name!,
-                              style: TextStyle(
-                                fontFamily: "NunitoSans",
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16.0,
-                                color: StateContainer.of(context).curTheme.text,
-                              ),
+                          Text(
+                            StateContainer.of(context).selectedAccount!.name!,
+                            style: TextStyle(
+                              fontFamily: "NunitoSans",
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16.0,
+                              color: StateContainer.of(context).curTheme.text,
                             ),
                           ),
                           // Main account address

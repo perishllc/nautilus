@@ -1,235 +1,1951 @@
 {
-  "cancel": "Annuleer",
-  "close": "Sluiten",
-  "confirm": "Bevestig",
-  "no": "Nee",
-  "yes": "Ja",
-  "onStr": "Aan",
-  "off": "Uit",
-  "send": "Verstuur",
-  "receive": "Ontvang",
-  "sent": "Verstuurd",
-  "received": "Ontvangen",
-  "transactions": "Transacties",
-  "addressCopied": "Adres gekopieerd",
-  "copyAddress": "Kopieer adres",
-  "addressShare": "Deel",
-  "addressHint": "Voer adres in",
-  "seed": "Seed",
-  "seedInvalid": "Seed is ongeldig",
-  "seedCopied": "Seed is gekopieerd naar klembord en blijft 2 minuten beschikbaar.",
-  "scanQrCode": "Scan QR Code",
-  "contactsImportErr": "Contacten importeren mislukt",
-  "viewDetails": "Bekijk details",
-  "qrInvalidSeed": "QR code bevat geen geldige seed of privé sleutel",
-  "removeContact": "Verwijder contact",
-  "removeContactConfirmation": "Weet je zeker dat je het contact %1 wil verwijderen?",
-  "contactHeader": "Contact",
-  "contactsHeader": "Contacten",
-  "addContact": "Contact toevoegen",
-  "contactNameHint": "Voer naam in @",
-  "contactInvalid": "Ongeldige contact naam",
-  "noContactsExport": "Er zijn geen contacten aanwezig om te verwijderen",
-  "noContactsImport": "Geen contacten gevonden om te importeren",
-  "contactsImportSuccess": "%1 contacten succesvol geïmporteerd",
-  "contactAdded": "%1 is toegevoegd aan contacten!",
-  "contactRemoved": "%1 is verwijderd uit contacten!",
-  "contactNameMissing": "Kies een naam voor dit contact",
-  "contactExists": "Contact bestaat al",
-  "backupYourSeed": "Maak een back-up van jouw seed",
-  "backupSeedConfirm": "Weet je zeker dat jouw wallet seed is opgeslagen?",
-  "seedBackupInfo": "Hieronder staat de seed van jouw wallet. Maak hier altijd een back-up van en sla deze veilig op.",
-  "copySeed": "Kopieer Seed",
-  "seedCopiedShort": "Seed gekopieerd",
-  "importSeed": "Importeer seed",
-  "importSeedHint": "Vul je seed in.",
-  "welcomeText": "Welkom bij Nautilus. Creëer een nieuwe wallet of importeer een bestaande wallet om verder te gaan.",
-  "newWallet": "Nieuwe wallet",
-  "importWallet": "Importeer wallet",
-  "sentTo": "Verstuurd naar",
-  "sending": "Versturen",
-  "to": "Naar",
-  "sendAmountConfirm": "Verstuur %1 Nano",
-  "sendError": "Er is een fout opgetreden. Probeer het later nog eens.",
-  "enterAmount": "Vul bedrag in",
-  "enterAddress": "Vul adres in",
-  "invalidAddress": "Ongeldige ontvanger",
-  "addressMissing": "Voer a.u.b. een adres in",
-  "amountMissing": "Voer a.u.b. een bedrag in",
-  "insufficientBalance": "Onvoldoende saldo",
-  "sendFrom": "Verstuur vanaf",
-  "pinCreateTitle": "Creëer een 6-cijferige pincode",
-  "pinConfirmTitle": "Bevestig pincode",
-  "pinEnterTitle": "Voer pincode in",
-  "pinConfirmError": "Pincodes komen niet overeen",
-  "pinInvalid": "Ongeldige pincode ingevoerd",
-  "themeHeader": "Thema",
-  "changeRepButton": "Verander",
-  "changeRepAuthenticate": "Verander van vertegenwoordiger",
-  "currentlyRepresented": "Jouw huidige vertegenwoordiger is",
-  "changeRepSucces": "Nieuwe vertegenwoordiger opgeslagen",
-  "repInfoHeader": "Wat is een vertegenwoordiger?",
-  "repInfo": "Een vertegenwoordiger stemt mee om consensus te bereiken in het netwerk. De waarde van de stem van een vertegenwoordiger wordt bepaald door het saldo van dat account. Je kunt ervoor kiezen jouw saldo toe te wijzen aan een vertegenwoordiger, zodat deze meer stemrecht krijgt. Geen zorgen, jouw saldo blijft altijd volledig in eigen beheer. Kies bij voorkeur een betrouwbare vertegenwoordiger die altijd online is.",
-  "pinRepChange": "Voer PIN in om van vertegenwoordiger te veranderen",
-  "changeRepHint": "Vul nieuwe vertegenwoordiger in",
-  "representatives": "Vertegenwoordigers",
-  "pickFromList": "Kies uit lijst",
-  "votingWeight": "Stemgewicht",
-  "uptime": "Tijd online",
-  "authMethod": "Verificatiemethode",
-  "pinMethod": "Pincode",
-  "privacyPolicy": "Privacybeleid",
-  "biometricsMethod": "Biometrie",
-  "changeCurrency": "Verander valuta",
-  "language": "Taal",
-  "shareNautilus": "Deel Nautilus",
-  "shareNautilusText": "Probeer Nautilus! Een premium mobiele Nano wallet!",
-  "logout": "Uitloggen",
-  "warning": "WAARSCHUWING",
-  "logoutDetail": "Uitloggen zorgt ervoor dat jouw seed en alle Nautilus-gerelateerde informatie van dit toestel worden verwijderd. Als je geen back-up hebt gemaakt, kan je niet meer bij de inhoud van jouw wallet.",
-  "logoutAction": "Seed verwijderen en uitloggen",
-  "logoutAreYouSure": "Weet je het zeker?",
-  "logoutReassurance": "Als je een back-up hebt gemaakt van jouw seed, is er niks aan de hand.",
-  "settingsHeader": "Instellingen",
-  "preferences": "Voorkeuren",
-  "manage": "Beheren",
-  "backupSeed": "Maak seed back-up",
-  "fingerprintSeedBackup": "Bevestig je vingerafdruk om een back-up te maken.",
-  "pinSeedBackup": "Vul je pincode in om jouw wallet seed te zien.",
-  "systemDefault": "Systeem standaard",
-  "notifications": "Notificaties",
-  "notificationTitle": "%1 NANO ontvangen",
-  "notificationBody": "Open Nautilus om de transactie te zien.",
-  "notificationHeaderSupplement": "Tik om te openen",
-  "settingsTransfer": "Van papieren wallet importeren",
-  "transferError": "Tijdens het overzetten is er een fout opgetreden. Probeer het later nog eens.",
-  "paperWallet": "Papieren wallet",
-  "kaliumWallet": "Kalium Wallet",
-  "manualEntry": "Handmatige invoer",
-  "mnemonicPhrase": "Woordvolgorde",
-  "rawSeed": "Rauwe Seed",
-  "transferHeader": "Saldo overzetten",
-  "transfer": "Overzetten",
-  "transferManualHint": "A.u.b. hieronder de seed invoeren.",
-  "transferIntro": "Met dit proces wordt het saldo van een papieren wallet overgezet naar jouw Nautilus-wallet.\n\nTik op de \"%1\" knop om te starten.",
-  "transferQrScanHint": "Scan een Nano \nseed of private key",
-  "transferQrScanError": "Deze QR-code bevat geen geldige seed.",
-  "transferNoFunds": "Deze seed bevat geen Nano.",
-  "transferConfirmInfo": "Een wallet met een saldo van %1 Nano is gedetecteerd.\n",
-  "transferConfirmInfoSecond": "Tik op bevestigen om het saldo over te zetten.\n",
-  "transferConfirmInfoThird": "Het overzetten kan enkele seconden duren om te voltooien.",
-  "transferLoading": "Overzetten",
-  "transferComplete": "%1 Nano succesvol overgezet naar jouw Nautilus wallet.",
-  "transferClose": "Tik ergens om het venster te sluiten.",
-  "scanInstructions": "Scan een Nano\nadres QR code",
-  "unlockPin": "PIN invoeren om Nautilus te ontgrendelen",
-  "unlockBiometrics": "Verifiëren om Nautilus te ontgrendelen",
-  "lockAppSetting": "Verifiëren bij starten",
-  "locked": "Vergrendeld",
-  "unlock": "Ontgrendelen",
-  "tooManyFailedAttempts": "Te veel mislukte ontgrendelpogingen.",
-  "securityHeader": "Beveiliging",
-  "autoLockHeader": "Automatisch vergrendelen",
-  "xMinutes": "Na %1 minuut",
-  "xMinute": "Na %1 minuten",
-  "instantly": "Direct",
-  "exampleCardIntro": "Welkom bij Nautilus. Zodra je NANO ontvangt zullen jouw transacties op deze manier verschijnen",
-  "exampleCardLittle": "Een paar",
-  "exampleCardLot": "Heel veel",
-  "exampleCardTo": "naar iemand",
-  "exampleCardFrom": "van iemand",
-  "defaultAccountName": "Hoofd Account",
-  "defaultNewAccountName": "Account %1",
-  "newAccountIntro": "Dit is jouw nieuwe account. Zodra je NANO ontvangt, zullen transacties op deze manier verschijnen:",
+  "@@locale": "nl",
   "account": "Account",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Accounts",
-  "addAccount": "Account toevoegen",
-  "hideAccountHeader": "Account verbergen?",
-  "removeAccountText": "Weet je zeker dat je dit account wil verbergen? Je kan het later weer terughalen door op de \"%1\" knop te klikken.",
-  "tapToReveal": "Tik om zichtbaar te maken",
-  "tapToHide": "Tik om te verbergen",
-  "copied": "Gekopieerd",
-  "copy": "Kopiëren",
-  "seedDescription": "Een seed draagt ​​dezelfde informatie als een geheime zin, maar op een voor machines leesbare manier. Zolang je een back-up hebt, heb je toegang tot je saldo.",
-  "importSecretPhrase": "Importeer geheime zin",
-  "importSecretPhraseHint": "Voer hieronder jouw geheime zin van 24 woorden in. Elk woord moet worden gescheiden door een spatie.",
-  "qrMnemonicError": "QR code bevat geen geldige geheime zin",
-  "mnemonicInvalidWord": "%1 is geen geldig woord",
-  "mnemonicSizeError": "De geheime zin mag slechts 24 woorden bevatten",
-  "secretPhrase": "Geheime zin",
-  "backupConfirmButton": "Ik heb er een back-up van gemaakt",
-  "secretInfoHeader": "Veiligheid eerst!",
-  "secretInfo": "In het volgende scherm zie je jouw geheime zin. Het is een wachtwoord voor toegang tot jouw saldo. Het is cruciaal dat je er een back-up van maakt en het nooit met iemand deelt.",
-  "secretWarning": "Als je jouw apparaat verliest of deze app verwijdert, heb je jouw geheime zin of seed nodig om je saldo te herstellen!",
-  "gotItButton": "Begrepen!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "Weet je zeker dat je een back-up hebt gemaakt van jouw geheime zin of seed?",
-  "secretPhraseCopy": "Kopieer geheime zin",
-  "secretPhraseCopied": "Geheime zin gekopieerd",
-  "import": "Importeren",
-  "importSeedInstead": "In plaats daarvan seed importeren",
-  "switchToSeed": "Schakel over naar seed",
-  "backupSecretPhrase": "Backup geheime zin",
-  "qrInvalidAddress": "QR code bevat geen geldig adres",
-  "qrInvalidPermissions": "Geef de camera toestemming om QR-codes te scannen",
-  "qrUnknownError": "Kan QR code niet lezen",
-  "mantaError": "Kan het verzoek niet verifiëren",
-  "rootWarning": "Het lijkt erop dat jouw apparaat is \"geroot\", \"gejailbreakt\" of is aangepast op een manier die de beveiliging in gevaar brengt. Het wordt aanbevolen dat je jouw apparaat in de oorspronkelijke staat reset voordat je doorgaat.",
-  "iUnderstandTheRisks": "Ik begrijp de risico's",
-  "exit": "Verlaten",
-  "setWalletPassword": "Stel een Wallet-wachtwoord in",
-  "setPassword": "Wachtwoord aanmaken",
-  "disableWalletPassword": "Wachtwoord uitschakelen",
-  "encryptionFailedError": "Kan geen Wallet-wachtwoord instellen",
-  "setPasswordSuccess": "Wachtwoord is succesvol ingesteld",
-  "disablePasswordSuccess": "Wachtwoord is uitgeschakeld",
-  "createPasswordHint": "Creëer een wachtwoord",
-  "confirmPasswordHint": "Bevestig het wachtwoord",
-  "enterPasswordHint": "Voer je wachtwoord in",
-  "passwordsDontMatch": "Wachtwoorden kom niet overeen",
-  "passwordBlank": "Wachtwoord mag niet leeg zijn",
-  "invalidPassword": "Wachtwoord ongeldig",
-  "passwordWillBeRequiredToOpenParagraph": "Dit wachtwoord is vereist om Nautilus te openen.",
-  "passwordNoLongerRequiredToOpenParagraph": "Je hebt geen wachtwoord meer nodig om Nautilus te openen.",
-  "createPasswordFirstParagraph": "Je kan een wachtwoord maken om extra beveiliging aan jouw wallet toe te voegen.",
-  "createPasswordSecondParagraph": "Wachtwoord is optioneel en jouw wallet wordt sowieso met je pincode of biometrisch beveiligd.",
-  "createAPasswordHeader": "Creëer een wachten",
-  "createPasswordSheetHeader": "Creëer",
-  "disablePasswordSheetHeader": "Uitschakelen",
-  "requireAPasswordToOpenHeader": "Wachtwoord vereisen om Nautilus te openen?",
-  "noSkipButton": "Nee, overslaan",
-  "yesButton": "Ja",
-  "nextButton": "Volgende",
-  "goBackButton": "Ga terug",
-  "welcomeTextKal": "Welkom bij Kalium. Creëer een nieuwe wallet of importeer een bestaande wallet om verder te gaan.",
-  "sendAmountConfirmKal": "Verstuur %1 Banano",
-  "currency": "Valuta",
-  "shareKalium": "Deel Kalium",
-  "shareKaliumText": "Probeer Kalium! De officiële wallet voor Banano!",
-  "logoutDetailKal": "Uitloggen zorgt ervoor dat jouw seed en alle Kalium-gerelateerde informatie van dit toestel worden verwijderd. Als je geen back-up hebt gemaakt, kan je niet meer bij de inhoud van jouw wallet.",
-  "notificationTitleKal": "%1 BANANO ontvangen",
-  "notificationBodyKal": "Open Kalium om de transactie te zien.",
-  "transferIntroKal": "Met dit proces wordt het saldo van een papieren wallet overgezet naar jouw Kalium-wallet.\n\nTik op de \"%1\" knop om te starten.",
-  "transferQrScanHintKal": "Scan een Banano \nseed of private key",
-  "transferNoFundsKal": "Deze seed bevat geen Banano.",
-  "transferConfirmInfoKal": "Een wallet met een saldo van %1 Banano is gedetecteerd.\n",
-  "transferCompleteKal": "%1 Banano succesvol overgezet naar jouw Kalium wallet.",
-  "scanInstructionsKal": "Scan een Banano\nadres QR code",
-  "unlockPinKal": "PIN invoeren om Kalium te ontgrendelen",
-  "unlockBiometricsKal": "Verifiëren om Kalium te ontgrendelen",
-  "exampleCardIntroKal": "Welkom bij Kalium. Zodra je BANANO ontvangt zullen jouw transacties op deze manier verschijnen",
-  "exampleCardToKal": "naar een willekeurige aap",
-  "exampleCardFromKal": "van een willekeurige aap",
-  "newAccountIntroKal": "Dit is jouw nieuwe account. Zodra je BANANO ontvangt, zullen transacties op deze manier verschijnen:",
-  "liveSupportButton": "Ondersteuning",
-  "connectingHeader": "Verbinden",
-  "minimumSend": "Het minimum te verzenden bedrag is %1 NANO",
-  "natricon": "Natricon",
-  "pending": "in afwachting",
-  "unconfirmed": "onbevestigd",
-  "messageHeader": "Bericht",
-  "readMore": "Lees meer",
-  "ignore": "Negeren",
-  "dismiss": "Afwijzen",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
   "activeMessageHeader": "Actief bericht",
-  "blockExplorer": "Blok verkenner"
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Account toevoegen",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Een gebruiker blokkeren",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Contact toevoegen",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Favoriet toevoegen",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Adres gekopieerd",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Voer adres in",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Voer a.u.b. een adres in",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Voer een gebruikersnaam of adres in",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Deel",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Aliassen",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Voer a.u.b. een bedrag in",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Vroeg",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Verificatiemethode",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Automatisch importeren",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Automatisch vergrendelen",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Ik heb er een back-up van gemaakt",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Backup geheime zin",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Maak seed back-up",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Weet je zeker dat jouw wallet seed is opgeslagen?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Maak een back-up van jouw seed",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Biometrie",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "%1 is succesvol geblokkeerd.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "Gebruiker is al geblokkeerd!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "Geblokkeert",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Blokkeer een gebruiker op basis van een bekende alias of adres. Alle berichten, transacties of verzoeken van hen worden genegeerd.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Geblokkeerde informatie",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Bijnaam is al gebruikt!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Kies een bijnaam",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "%1 is gedeblokkeerd!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Blok verkenner",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Block Explorer-informatie",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Welke block explorer moet worden gebruikt om transactie-informatie weer te geven",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Deze gebruiker blokkeren",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Annuleer",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Verander valuta",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Logboek wijzigen",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Verander van vertegenwoordiger",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Verander",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Vul nieuwe vertegenwoordiger in",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "Dit is al je vertegenwoordiger!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Nieuwe vertegenwoordiger opgeslagen",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Beschikbaarheid controleren",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Sluiten",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Bevestig",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Bevestig het wachtwoord",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Verbinden",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 is toegevoegd aan contacten!",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Contact bestaat al",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Contact",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Ongeldige contact naam",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Voer naam in @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Kies een naam voor dit contact",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 is verwijderd uit contacten!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Contacten",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Contacten importeren mislukt",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "%1 contacten succesvol geïmporteerd",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Gekopieerd",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Kopiëren",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Kopieer adres",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Link kopiëren",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Kopieer Seed",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Wallet-adres naar klembord kopiëren",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Creëer een wachten",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Cadeaukaart maken",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Maak een cadeaubon",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Je kan een wachtwoord maken om extra beveiliging aan jouw wallet toe te voegen.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Creëer een wachtwoord",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Wachtwoord is optioneel en jouw wallet wordt sowieso met je pincode of biometrisch beveiligd.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Creëer",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "QR-code maken",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Cadeaukaart maken",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Valuta",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Valuta-modus",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Informatie over valutamodus",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Kies in welke eenheid de bedragen moeten worden weergegeven.\n1 nyano = 0,000001 NANO, of \n1.000.000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Jouw huidige vertegenwoordiger is",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Decryption-fout!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Hoofd Account",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Account %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Verwijderen",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Uitschakelen",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Wachtwoord is uitgeschakeld",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Wachtwoord uitschakelen",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Afwijzen",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Ongeldige domeinnaam",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Bewerken",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Kan geen Wallet-wachtwoord instellen",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Vul adres in",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Vul bedrag in",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Cadeaubon invoeren",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Bericht invoeren",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Voer je wachtwoord in",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Voer een gebruikersnaam in",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Voer een gebruiker of adres in",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "van iemand",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "van een willekeurige aap",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Welkom bij Nautilus. Zodra je NANO ontvangt zullen jouw transacties op deze manier verschijnen",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Welkom bij Kalium. Zodra je BANANO ontvangt zullen jouw transacties op deze manier verschijnen",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Een paar",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "Heel veel",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "naar iemand",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "naar een willekeurige aap",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Zodra je een betalingsverzoek hebt verzonden of ontvangen, worden ze hier op deze manier weergegeven met de kleur en het label van de kaart die de status aangeeft. \n\nGroen geeft aan dat het verzoek is betaald.\nGeel geeft aan dat het verzoek/memo niet is betaald/gelezen.\nRood geeft aan dat het verzoek niet is gelezen of ontvangen.\n\n Neutraal gekleurde kaarten zonder een bedrag zijn slechts berichten.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Sommige",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Sushi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Zodra je een betalingsverzoek hebt verzonden of ontvangen, worden ze hier weergegeven:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hey wat is er aan de hand?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "Veel",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Huren",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "Fijne verjaardag!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Gasgeld",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Verlaten",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "mislukt",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus losgekoppeld",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Nautilus-servers lijken te zijn losgekoppeld, verzenden en ontvangen (zonder memo's) moet nog steeds operationeel zijn, maar betalingsverzoeken worden mogelijk niet doorgevoerd\n\n Kom later terug of start de app opnieuw om het opnieuw te proberen",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Favoriet bestaat al",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Favoriete",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Ongeldige favoriete naam",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Voer een bijnaam in",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Kies een naam voor deze favoriet",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "%1 is verwijderd uit favorieten!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "Favorites",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Uitgelicht",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Bevestig je vingerafdruk om een back-up te maken.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "Van",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "vervuld",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "Je hebt een cadeau!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Leeg cadeau",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Bedrag cadeau",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Cadeau van",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Laad een digitale cadeaukaart met NANO! Stel een bedrag in en een optioneel bericht voor de ontvanger om te zien wanneer ze het openen!\n\nEenmaal gemaakt, krijg je een link die je naar iedereen kunt sturen, die, wanneer geopend, het geld automatisch naar de ontvanger zal verdelen na het installeren van Nautilus!\n\nAls de ontvanger al Nautilus-gebruiker is, krijgt hij bij het openen van de link een prompt om het geld naar zijn rekening over te maken.",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Cadeaubericht",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Ga terug",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Begrepen!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Ga naar QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Verstoppen",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Account verbergen?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Home",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Negeren",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Importeren",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "De link waarop u hebt geklikt bevat wat nano, wilt u deze importeren in deze portemonnee of terugbetalen aan degene die het heeft verzonden?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Importeer geheime zin",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Voer hieronder jouw geheime zin van 24 woorden in. Elk woord moet worden gescheiden door een spatie.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Importeer seed",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Vul je seed in.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "In plaats daarvan seed importeren",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Importeer wallet",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Direct",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Onvoldoende saldo",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Ongeldige ontvanger",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Wachtwoord ongeldig",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Ik begrijp de risico's",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Kalium Wallet",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Taal",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Link gekopieerd",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Ondersteuning",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Geladen",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Geladen in",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Verifiëren bij starten",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Vergrendeld",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Uitloggen",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Seed verwijderen en uitloggen",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Weet je het zeker?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Uitloggen zorgt ervoor dat jouw seed en alle Nautilus-gerelateerde informatie van dit toestel worden verwijderd. Als je geen back-up hebt gemaakt, kan je niet meer bij de inhoud van jouw wallet.",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Uitloggen zorgt ervoor dat jouw seed en alle Kalium-gerelateerde informatie van dit toestel worden verwijderd. Als je geen back-up hebt gemaakt, kan je niet meer bij de inhoud van jouw wallet.",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Als je een back-up hebt gemaakt van jouw seed, is er niks aan de hand.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Beheren",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Kan het verzoek niet verifiëren",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Handmatige invoer",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Markeren als betaald",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Markeren als onbetaald",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Memo opnieuw verzonden! Als het apparaat nog steeds niet wordt bevestigd, is het apparaat van de ontvanger mogelijk offline.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Bericht",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Het minimum te verzenden bedrag is %1 NANO",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 is geen geldig woord",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Woordvolgorde",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "De geheime zin mag slechts 24 woorden bevatten",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Voor deze functie moet u een langere transactiegeschiedenis hebben om spam te voorkomen.\n\nAls alternatief kunt u een QR-code weergeven die iemand kan scannen.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Verificatie nodig",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Dit is jouw nieuwe account. Zodra je NANO ontvangt, zullen transacties op deze manier verschijnen:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Dit is jouw nieuwe account. Zodra je BANANO ontvangt, zullen transacties op deze manier verschijnen:",
+  "@newAccountIntroKal": {},
+  "newWallet": "Nieuwe wallet",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Volgende",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Nee",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Er zijn geen contacten aanwezig om te verwijderen",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "Geen contacten gevonden om te importeren",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Knoopstatus",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Geen zoekresultaten!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "Nee, overslaan",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Open Nautilus om de transactie te zien.",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Open Kalium om de transactie te zien.",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Tik om te openen",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "Om deze functie correct te laten werken, moeten meldingen zijn ingeschakeld",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Notificaties",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "%1 NANO ontvangen",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "%1 BANANO ontvangen",
+  "@notificationTitleKal": {},
+  "notSent": "niet verzonden",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Uit",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Oké",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Op de oprit",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "Aan",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Geopende",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "betaald",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Papieren wallet",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Wachtwoord mag niet leeg zijn",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Je hebt geen wachtwoord meer nodig om Nautilus te openen.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Wachtwoorden kom niet overeen",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Dit wachtwoord is vereist om Nautilus te openen.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Betalen",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Iemand heeft u om betaling gevraagd! kijk op de betaalpagina voor meer informatie.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Betalingen",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Betaal dit verzoek",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "in afwachting",
+  "@pending": {},
+  "pickFromList": "Kies uit lijst",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "Pincodes komen niet overeen",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Bevestig pincode",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Creëer een 6-cijferige pincode",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Voer pincode in",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Ongeldige pincode ingevoerd",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "Pincode",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Voer PIN in om van vertegenwoordiger te veranderen",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Vul je pincode in om jouw wallet seed te zien.",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Voorkeuren",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Privacybeleid",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Koop Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "QR code bevat geen geldig adres",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Geef de camera toestemming om QR-codes te scannen",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "QR code bevat geen geldige seed of privé sleutel",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "QR code bevat geen geldige geheime zin",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Kan QR code niet lezen",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Beoordeel de app",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "Als je de app leuk vindt, overweeg dan de tijd te nemen om deze te bekijken,\nHet helpt echt en het zou niet langer dan een minuut moeten duren.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Rauwe Seed",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Lees meer",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "aanvaardbaar",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Ontvang",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Ontvangen",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Minimaal ontvangen",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Minimale informatie ontvangen",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Een minimumbedrag om te ontvangen. Als een betaling of verzoek wordt ontvangen met een lager bedrag dan dit, wordt deze genegeerd.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "Terugbetaling",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "voor",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Registreren",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Gebruikersnaam registreren",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Registreer een gebruikersnaam",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Weet je zeker dat je dit account wil verbergen? Je kan het later weer terughalen door op de \"%1\" knop te klikken.",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Deblokkeer",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Weet u zeker dat u %1 wilt deblokkeren?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Verwijder contact",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Weet je zeker dat je het contact %1 wil verwijderen?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Favoriet verwijderen",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "Een vertegenwoordiger stemt mee om consensus te bereiken in het netwerk. De waarde van de stem van een vertegenwoordiger wordt bepaald door het saldo van dat account. Je kunt ervoor kiezen jouw saldo toe te wijzen aan een vertegenwoordiger, zodat deze meer stemrecht krijgt. Geen zorgen, jouw saldo blijft altijd volledig in eigen beheer. Kies bij voorkeur een betrouwbare vertegenwoordiger die altijd online is.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Wat is een vertegenwoordiger?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Beantwoorden",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Vertegenwoordigers",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Verzoek",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Verzoek %1 %2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Aangevraagd",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Aangevraagd van",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Verzoek mislukt: Deze gebruiker lijkt Nautilus niet te hebben geïnstalleerd of heeft meldingen uitgeschakeld.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Verzoek",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Betaling aanvragen",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Fout bij het verzenden van een betalingsverzoek, het apparaat van de ontvanger is mogelijk offline of niet beschikbaar.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Verzoek opnieuw verzonden! Als het apparaat nog steeds niet wordt bevestigd, is het apparaat van de ontvanger mogelijk offline.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Wachtwoord vereisen om Nautilus te openen?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Deze memo opnieuw verzenden",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "De database opnieuw instellen",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Weet u zeker dat u de interne database wilt resetten? \n\nHiermee kunnen problemen met betrekking tot het updaten van de app worden opgelost, maar worden ook alle opgeslagen voorkeuren verwijderd. Hiermee wordt uw wallet seed NIET verwijderd. Als u problemen ondervindt, moet u een back-up maken van uw seed, de app opnieuw installeren en als het probleem zich blijft voordoen, kunt u een bugrapport maken op github of onenigheid.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Probeer het opnieuw",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Het lijkt erop dat jouw apparaat is \"geroot\", \"gejailbreakt\" of is aangepast op een manier die de beveiliging in gevaar brengt. Het wordt aanbevolen dat je jouw apparaat in de oorspronkelijke staat reset voordat je doorgaat.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Scan een Nano\nadres QR code",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Scan een Banano\nadres QR code",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Scan QR Code",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Zoek naar alles",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "In het volgende scherm zie je jouw geheime zin. Het is een wachtwoord voor toegang tot jouw saldo. Het is cruciaal dat je er een back-up van maakt en het nooit met iemand deelt.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Veiligheid eerst!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Geheime zin",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Geheime zin gekopieerd",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Kopieer geheime zin",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Als je jouw apparaat verliest of deze app verwijdert, heb je jouw geheime zin of seed nodig om je saldo te herstellen!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Beveiliging",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Seed",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Hieronder staat de seed van jouw wallet. Maak hier altijd een back-up van en sla deze veilig op.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Seed is gekopieerd naar klembord en blijft 2 minuten beschikbaar.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Seed gekopieerd",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Een seed draagt ​​dezelfde informatie als een geheime zin, maar op een voor machines leesbare manier. Zolang je een back-up hebt, heb je toegang tot je saldo.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Seed is ongeldig",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Kan niet zelf vragen",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Verstuur",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Verstuur %1 Nano",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Verstuur %1 Banano",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Er is een fout opgetreden. Probeer het later nog eens.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Verstuur vanaf",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Versturen",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Het verzenden van memo met transactie is mislukt, ze zijn mogelijk geen Nautilus-gebruiker.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Bericht verzenden",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Verzoek opnieuw verzenden",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Verzend of vraag een betaling aan, met End-to-end versleutelde berichten!\n\nBetalingsverzoeken, memo's en berichten kunnen alleen door andere nautilus-gebruikers worden ontvangen.\n\nU hoeft geen gebruikersnaam te hebben om betalingsverzoeken te verzenden of te ontvangen, en u kunt ze gebruiken voor uw eigen administratie, zelfs als ze geen nautilus gebruiken.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Informatie over het blad verzenden",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Verstuurd",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Verstuurd naar",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Wachtwoord aanmaken",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Wachtwoord is succesvol ingesteld",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Instellingen",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Van papieren wallet importeren",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Stel een Wallet-wachtwoord in",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "Deel Kalium",
+  "@shareKalium": {},
+  "shareKaliumText": "Probeer Kalium! De officiële wallet voor Banano!",
+  "@shareKaliumText": {},
+  "shareLink": "Link delen",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Deel Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Probeer Nautilus! Een premium mobiele Nano wallet!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Contacten tonen",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simplex",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Steun de ontwikkelaar",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Schakel over naar seed",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Systeem standaard",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Tik om te verbergen",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Tik om zichtbaar te maken",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Thema",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "Naar",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Te veel mislukte ontgrendelpogingen.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Transacties",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Overzetten",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Tik ergens om het venster te sluiten.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 Nano succesvol overgezet naar jouw Nautilus wallet.",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 Banano succesvol overgezet naar jouw Kalium wallet.",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "Een wallet met een saldo van %1 Nano is gedetecteerd.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "Een wallet met een saldo van %1 Banano is gedetecteerd.\n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Tik op bevestigen om het saldo over te zetten.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Het overzetten kan enkele seconden duren om te voltooien.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "Tijdens het overzetten is er een fout opgetreden. Probeer het later nog eens.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Saldo overzetten",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Met dit proces wordt het saldo van een papieren wallet overgezet naar jouw Nautilus-wallet.\n\nTik op de \"%1\" knop om te starten.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Met dit proces wordt het saldo van een papieren wallet overgezet naar jouw Kalium-wallet.\n\nTik op de \"%1\" knop om te starten.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Dit proces zal het geld overmaken van een papieren portemonnee naar uw Nautilus-portemonnee.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Overzetten",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "A.u.b. hieronder de seed invoeren.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "Deze seed bevat geen Nano.",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "Deze seed bevat geen Banano.",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Deze QR-code bevat geen geldige seed.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Scan een Nano \nseed of private key",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Scan een Banano \nseed of private key",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "onerkend",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "onbevestigd",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "onvervulde",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Ontgrendelen",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Verifiëren om Nautilus te ontgrendelen",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Verifiëren om Kalium te ontgrendelen",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "PIN invoeren om Nautilus te ontgrendelen",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "PIN invoeren om Kalium te ontgrendelen",
+  "@unlockPinKal": {},
+  "unpaid": "onbetaald",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "ongelezen",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Tijd online",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "Je hebt al een gebruikersnaam geregistreerd! Het is momenteel niet mogelijk om je gebruikersnaam te wijzigen, maar het staat je vrij om een nieuwe te registreren onder een ander adres.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Gebruikersnaam beschikbaar!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Voer een gebruikersnaam in",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Fout bij gebruikersnaam",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Kies een unieke @username zodat vrienden en familie je gemakkelijk kunnen vinden!\n\nHet hebben van een Nautilus-gebruikersnaam werkt de gebruikersinterface wereldwijd bij om uw nieuwe handle weer te geven.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Ongeldige gebruikersnaam",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Gebruikersnaam niet beschikbaar",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Nautilus-gebruikersnamen zijn een gecentraliseerde dienst van Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "Gebruiker niet gevonden!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Bekijk details",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Stemgewicht",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "WAARSCHUWING",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Welkom bij Nautilus. Creëer een nieuwe wallet of importeer een bestaande wallet om verder te gaan.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Welkom bij Kalium. Creëer een nieuwe wallet of importeer een bestaande wallet om verder te gaan.",
+  "@welcomeTextKal": {},
+  "withAddress": "Met adres",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "Met boodschap",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "Na %1 minuten",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "Na %1 minuut",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Ja",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Ja",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

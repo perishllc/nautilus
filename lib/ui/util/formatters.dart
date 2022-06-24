@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 
-/// Input formatter for Crpto/Fiat amounts
+/// Input formatter for Crypto/Fiat amounts
 class CurrencyFormatter extends TextInputFormatter {
   String commaSeparator;
   String decimalSeparator;
@@ -31,7 +31,7 @@ class CurrencyFormatter extends TextInputFormatter {
       workingText = "0" + workingText;
     }
 
-    List<String> splitStr = workingText.split(decimalSeparator);
+    final List<String> splitStr = workingText.split(decimalSeparator);
     // If this string contains more than 1 decimal, move all characters to after the first decimal
     if (splitStr.length > 2) {
       returnOriginal = false;
@@ -48,7 +48,7 @@ class CurrencyFormatter extends TextInputFormatter {
         return newValue.copyWith(text: workingText, selection: new TextSelection.collapsed(offset: workingText.length));
       }
     }
-    String newText = splitStr[0] + decimalSeparator + splitStr[1].substring(0, maxDecimalDigits);
+    final String newText = splitStr[0] + decimalSeparator + splitStr[1].substring(0, maxDecimalDigits);
     return newValue.copyWith(text: newText, selection: new TextSelection.collapsed(offset: newText.length));
   }
 }
@@ -67,7 +67,7 @@ class LocalCurrencyFormatter extends TextInputFormatter {
     // Ensure our input is in the right formatting here
     if (active!) {
       // Make local currency = symbol + amount with correct decimal separator
-      String curText = newValue.text;
+      final String curText = newValue.text;
       String shouldBeText = NumberUtil.sanitizeNumber(curText.replaceAll(",", "."));
       shouldBeText = currencyFormat!.currencySymbol + shouldBeText.replaceAll(".", currencyFormat!.symbols.DECIMAL_SEP);
       if (shouldBeText != curText) {
@@ -75,8 +75,8 @@ class LocalCurrencyFormatter extends TextInputFormatter {
       }
     } else {
       // Make crypto amount have no symbol and formatted as US locale
-      String curText = newValue.text;
-      String shouldBeText = NumberUtil.sanitizeNumber(curText.replaceAll(",", "."));
+      final String curText = newValue.text;
+      final String shouldBeText = NumberUtil.sanitizeNumber(curText.replaceAll(",", "."));
       if (shouldBeText != curText) {
         return newValue.copyWith(text: shouldBeText, selection: TextSelection.collapsed(offset: shouldBeText.length));
       }
@@ -97,7 +97,7 @@ class ContactInputFormatter extends TextInputFormatter {
       workingText = "★" + workingText;
     }
 
-    List<String> splitStr = workingText.split('★');
+    final List<String> splitStr = workingText.split('★');
     // If this string contains more than 1 @, remove all but the first one
     if (splitStr.length > 2) {
       workingText = "★" + workingText.replaceAll(r"★", "");
@@ -154,35 +154,97 @@ class LowerCaseTextFormatter extends TextInputFormatter {
   }
 }
 
-String getCurrencySymbol(BuildContext context) {
+final BigInt rawPerNano = BigInt.from(10).pow(30);
+final BigInt rawPerNyano = BigInt.from(10).pow(24);
+
+// String getCurrencySymbol(BuildContext context) {
+//   if (StateContainer.of(context).nyanoMode) {
+//     // TODO: decide on a symbol
+//     // Ꞥ ꞥ Ɏ ɏ ў Ȳ
+//     // return "Ȳ";
+//     return "";
+//   } else {
+//     return "Ӿ";
+//   }
+// }
+
+TextSpan displayCurrencySymbol(BuildContext context, TextStyle textStyle, {String prefix = ""}) {
   if (StateContainer.of(context).nyanoMode) {
-    // TODO: decide on a symbol
-    // Ꞥ ꞥ Ɏ ɏ ў Ȳ
-    // return "Ȳ";
-    return "";
+    return TextSpan(text: "${prefix}y", style: textStyle.copyWith(decoration: TextDecoration.lineThrough));
+  }
+
+  return TextSpan(text: "$prefixӾ", style: textStyle);
+
+  // return const TextSpan();
+}
+
+List<TextSpan> displayRawFull(BuildContext context, TextStyle textStyle, String raw) {
+  return [];
+}
+
+String getRawAsThemeAwareAmount(BuildContext context, String? raw) {
+  final BigInt rawPerCur = StateContainer.of(context).nyanoMode ? rawPerNyano : rawPerNano;
+  return NumberUtil.getRawAsUsableString(raw, rawPerCur);
+}
+
+String getThemeAwareRawAccuracy(BuildContext context, String? raw) {
+  final BigInt rawPerCur = StateContainer.of(context).nyanoMode ? rawPerNyano : rawPerNano;
+  final String rawString = NumberUtil.getRawAsUsableString(raw, rawPerCur);
+  final String rawDecimalString = NumberUtil.getRawAsDecimal(raw, rawPerCur).toString();
+
+  if (raw == null || raw.isEmpty || raw == "0") {
+    return "0";
+  }
+
+  if (rawString != rawDecimalString) {
+    return "~";
+  }
+  return "";
+}
+
+// String getThemeAwareAccuracyAmount(BuildContext context, String? raw, TextStyle textStyle) {
+  
+// }
+  
+
+String getThemeAwareAmountAsRaw(BuildContext context, String amount) {
+  if (StateContainer.of(context).nyanoMode) {
+    return NumberUtil.getNyanoAmountAsRaw(amount);
   } else {
-    return "Ӿ";
+    return NumberUtil.getAmountAsRaw(amount);
   }
 }
 
-TextSpan displayCurrencyAmount(BuildContext context, TextStyle textStyle, {bool includeSymbol = false}) {
-  if (StateContainer.of(context).nyanoMode) {
-    return TextSpan(text: "y", style: textStyle);
-  }
+String getRawAsThemeAwareFormattedAmount(BuildContext context, String? raw) {
+  final String amount = getRawAsThemeAwareAmount(context, raw);
 
-  if (includeSymbol) {
-    return TextSpan(text: "Ӿ", style: textStyle);
-  }
+  if (!amount.contains(".")) {
+    // add commas to the amount:
+    final RegExp reg = RegExp(r"(\d{1,3})(?=(\d{3})+(?!\d))");
+    final String Function(Match) mathFunc = (Match match) => "${match[1]},";
+    final String result = amount.replaceAllMapped(reg, mathFunc);
+    return result;
+  } else {
+    final String numAmount = amount.split(".")[0];
+    String decAmount = amount.split(".")[1];
 
-  return TextSpan();
+    final RegExp reg = RegExp(r"(\d{1,3})(?=(\d{3})+(?!\d))");
+    final String Function(Match) mathFunc = (Match match) => "${match[1]},";
+    final String result = numAmount.replaceAllMapped(reg, mathFunc);
+
+    // truncate:
+    if (decAmount.length > NumberUtil.maxDecimalDigits) {
+      decAmount = decAmount.substring(0, NumberUtil.maxDecimalDigits);
+      // remove trailing zeros:
+      decAmount = decAmount.replaceAllMapped(RegExp(r'0+$'), (Match match) => "");
+    }
+
+    return "$result.$decAmount";
+  }
 }
 
-String getRawAsThemeAwareAmount(BuildContext context, String? rawString) {
-  if (StateContainer.of(context).nyanoMode) {
-    return NumberUtil.getRawAsNyanoString(rawString);
-  } else {
-    return NumberUtil.getRawAsUsableString(rawString);
-  }
+String getThemeAwareCombined(BuildContext context, String? raw) {
+  return getThemeAwareRawAccuracy(context, raw) + getRawAsThemeAwareAmount(context, raw);
 }
 
 String getThemeCurrencyMode(BuildContext context) {
@@ -190,13 +252,5 @@ String getThemeCurrencyMode(BuildContext context) {
     return "NYANO";
   } else {
     return "NANO";
-  }
-}
-
-String getThemeAwareAmountAsRaw(BuildContext context, String amount) {
-  if (StateContainer.of(context).nyanoMode) {
-    return NumberUtil.getNyanoAmountAsRaw(amount);
-  } else {
-    return NumberUtil.getAmountAsRaw(amount);
   }
 }

@@ -96,22 +96,24 @@ class AppWallet {
     this._accountBalance = accountBalance;
   }
 
-  // Get pretty account balance version
-  String getAccountBalanceDisplay(BuildContext context) {
-    if (accountBalance == null) {
-      return "0";
-    }
+  // // Get pretty account balance version
+  // String getAccountBalanceDisplay(BuildContext context) {
+  //   if (accountBalance == null) {
+  //     return "0";
+  //   }
 
-    if (StateContainer.of(context).nyanoMode) {
-      return NumberUtil.getRawAsNyanoString(_accountBalance.toString());
-    } else {
-      return NumberUtil.getRawAsUsableString(_accountBalance.toString());
-    }
-  }
+  //   if (StateContainer.of(context).nyanoMode) {
+  //     return NumberUtil.getRawAsNyanoString(_accountBalance.toString());
+  //   } else {
+  //     return NumberUtil.getRawAsUsableString(_accountBalance.toString());
+  //   }
+  // }
 
-  String getLocalCurrencyPrice(AvailableCurrency currency, {String? locale = "en_US"}) {
-    Decimal converted =
-        Decimal.parse(_localCurrencyPrice!) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
+  String getLocalCurrencyPrice(BuildContext context, AvailableCurrency currency, {String? locale = "en_US"}) {
+    final BigInt rawPerCur = StateContainer.of(context).nyanoMode ? rawPerNyano : rawPerNano;
+    // Decimal converted =
+    //     Decimal.parse(_localCurrencyPrice!) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
+    Decimal converted = Decimal.parse(_btcPrice!) * NumberUtil.getRawAsDecimal(_accountBalance.toString(), rawPerCur);
     return NumberFormat.currency(locale: locale, symbol: currency.getCurrencySymbol()).format(converted.toDouble());
   }
 
@@ -121,20 +123,6 @@ class AppWallet {
 
   String? get localCurrencyConversion {
     return _localCurrencyPrice;
-  }
-
-  String get btcPrice {
-    Decimal converted = Decimal.parse(_btcPrice!) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
-    // Show 4 decimal places for BTC price if its >= 0.0001 BTC, otherwise 6 decimals
-    if (converted >= Decimal.parse("0.0001")) {
-      return new NumberFormat("#,##0.0000", "en_US").format(converted.toDouble());
-    } else {
-      return new NumberFormat("#,##0.000000", "en_US").format(converted.toDouble());
-    }
-  }
-
-  set btcPrice(String? value) {
-    _btcPrice = value;
   }
 
   String? get representative {

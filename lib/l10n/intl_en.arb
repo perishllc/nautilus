@@ -1,889 +1,1951 @@
 {
-  "@@last_modified": "2019-02-11T10:10:36.898989",
-  "cancel": "Cancel",
-  "@cancel": {
-    "description": "dialog_cancel",
-    "type": "text",
-    "placeholders": {}
-  },
-  "close": "Close",
-  "@close": {
-    "description": "dialog_close",
-    "type": "text",
-    "placeholders": {}
-  },
-  "confirm": "Confirm",
-  "@confirm": {
-    "description": "dialog_confirm",
-    "type": "text",
-    "placeholders": {}
-  },
-  "no": "No",
-  "@no": {
-    "description": "intro_new_wallet_backup_no",
-    "type": "text",
-    "placeholders": {}
-  },
-  "yes": "Yes",
-  "@yes": {
-    "description": "intro_new_wallet_backup_yes",
-    "type": "text",
-    "placeholders": {}
-  },
-  "onStr": "On",
-  "@onStr": {
-    "description": "generic_on",
-    "type": "text",
-    "placeholders": {}
-  },
-  "off": "Off",
-  "@off": {
-    "description": "generic_off",
-    "type": "text",
-    "placeholders": {}
-  },
-  "send": "Send",
-  "@send": {
-    "description": "home_send_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "receive": "Receive",
-  "@receive": {
-    "description": "home_receive_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sent": "Sent",
-  "@sent": {
-    "description": "history_sent",
-    "type": "text",
-    "placeholders": {}
-  },
-  "received": "Received",
-  "@received": {
-    "description": "history_received",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transactions": "Transactions",
-  "@transactions": {
-    "description": "transaction_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addressCopied": "Address Copied",
-  "@addressCopied": {
-    "description": "receive_copied",
-    "type": "text",
-    "placeholders": {}
-  },
-  "copyAddress": "Copy Address",
-  "@copyAddress": {
-    "description": "receive_copy_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addressShare": "Share Address",
-  "@addressShare": {
-    "description": "receive_share_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addressHint": "Enter Address",
-  "@addressHint": {
-    "description": "send_address_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seed": "Seed",
-  "@seed": {
-    "description": "intro_new_wallet_seed_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedInvalid": "Seed is Invalid",
-  "@seedInvalid": {
-    "description": "intro_seed_invalid",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedCopied": "Seed Copied to Clipboard\nIt is pasteable for 2 minutes.",
-  "@seedCopied": {
-    "description": "intro_new_wallet_seed_copied",
-    "type": "text",
-    "placeholders": {}
-  },
-  "scanQrCode": "Scan QR Code",
-  "@scanQrCode": {
-    "description": "send_scan_qr",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactsImportErr": "Failed to import contacts",
-  "@contactsImportErr": {
-    "description": "contact_import_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "viewDetails": "View Details",
-  "@viewDetails": {
-    "description": "transaction_details",
-    "type": "text",
-    "placeholders": {}
-  },
-  "qrInvalidSeed": "QR code does not contain a valid seed or private key",
-  "@qrInvalidSeed": {
-    "description": "qr_invalid_seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "qrInvalidAddress": "QR code does not contain a valid address",
-  "@qrInvalidAddress": {
-    "description": "qr_invalid_address",
-    "type": "text",
-    "placeholders": {}
-  },
-  "removeContact": "Remove Contact",
-  "@removeContact": {
-    "description": "contact_remove_btn",
-    "type": "text",
-    "placeholders": {}
-  },
-  "removeContactConfirmation": "Are you sure you want to delete %1?",
-  "@removeContactConfirmation": {
-    "description": "contact_remove_sure",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactHeader": "Contact",
-  "@contactHeader": {
-    "description": "contact_view_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactsHeader": "Contacts",
-  "@contactsHeader": {
-    "description": "contact_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addContact": "Add Contact",
-  "@addContact": {
-    "description": "contact_add_button",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactNameHint": "Enter a Name @",
-  "@contactNameHint": {
-    "description": "contact_name_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactInvalid": "Invalid Contact Name",
-  "@contactInvalid": {
-    "description": "contact_invalid_name",
-    "type": "text",
-    "placeholders": {}
-  },
-  "noContactsExport": "There's no contacts to export.",
-  "@noContactsExport": {
-    "description": "contact_export_none",
-    "type": "text",
-    "placeholders": {}
-  },
-  "noContactsImport": "No new contacts to import.",
-  "@noContactsImport": {
-    "description": "contact_import_none",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactsImportSuccess": "Sucessfully imported %1 contacts.",
-  "@contactsImportSuccess": {
-    "description": "contact_import_success",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactAdded": "%1 added to contacts.",
-  "@contactAdded": {
-    "description": "contact_added",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactRemoved": "%1 has been removed from contacts!",
-  "@contactRemoved": {
-    "description": "contact_removed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactNameMissing": "Choose a Name for this Contact",
-  "@contactNameMissing": {
-    "description": "contact_name_missing",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactExists": "Contact Already Exists",
-  "@contactExists": {
-    "description": "contact_name_exists",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupYourSeed": "Backup your seed",
-  "@backupYourSeed": {
-    "description": "intro_new_wallet_seed_backup_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupSeedConfirm": "Are you sure that you backed up your wallet seed?",
-  "@backupSeedConfirm": {
-    "description": "intro_new_wallet_backup",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedBackupInfo": "Below is your wallet's seed. It is crucial that you backup your seed and never store it as plaintext or a screenshot.",
-  "@seedBackupInfo": {
-    "description": "intro_new_wallet_seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "copySeed": "Copy Seed",
-  "@copySeed": {
-    "description": "copy_seed_btn",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedCopiedShort": "Seed Copied",
-  "@seedCopiedShort": {
-    "description": "seed_copied_btn",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importSeed": "Import Seed",
-  "@importSeed": {
-    "description": "intro_seed_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importSeedHint": "Please enter your seed below.",
-  "@importSeedHint": {
-    "description": "intro_seed_info",
-    "type": "text",
-    "placeholders": {}
-  },
-  "welcomeText": "Welcome to Nautilus. To begin, you may create a new wallet or import an existing one.",
-  "@welcomeText": {
-    "description": "intro_welcome_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "newWallet": "New Wallet",
-  "@newWallet": {
-    "description": "intro_welcome_new_wallet",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importWallet": "Import Wallet",
-  "@importWallet": {
-    "description": "intro_welcome_have_wallet",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sentTo": "Sent To",
-  "@sentTo": {
-    "description": "sent_to",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sending": "Sending",
-  "@sending": {
-    "description": "send_sending",
-    "type": "text",
-    "placeholders": {}
-  },
-  "to": "To",
-  "@to": {
-    "description": "send_to",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sendAmountConfirm": "Send %1 NANO",
-  "@sendAmountConfirm": {
-    "description": "send_pin_description",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sendError": "An error occurred. Try again later.",
-  "@sendError": {
-    "description": "send_generic_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "enterAmount": "Enter Amount",
-  "@enterAmount": {
-    "description": "send_amount_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "enterAddress": "Enter Address",
-  "@enterAddress": {
-    "description": "enter_address",
-    "type": "text",
-    "placeholders": {}
-  },
-  "invalidAddress": "Address entered was invalid",
-  "@invalidAddress": {
-    "description": "send_invalid_address",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addressMissing": "Please Enter an Address",
-  "@addressMissing": {
-    "description": "send_enter_address",
-    "type": "text",
-    "placeholders": {}
-  },
-  "amountMissing": "Please Enter an Amount",
-  "@amountMissing": {
-    "description": "send_enter_amount",
-    "type": "text",
-    "placeholders": {}
-  },
-  "insufficientBalance": "Insufficient Balance",
-  "@insufficientBalance": {
-    "description": "send_insufficient_balance",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sendFrom": "Send From",
-  "@sendFrom": {
-    "description": "send_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinCreateTitle": "Create a 6-digit pin",
-  "@pinCreateTitle": {
-    "description": "pin_create_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinConfirmTitle": "Confirm your pin",
-  "@pinConfirmTitle": {
-    "description": "pin_confirm_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinEnterTitle": "Enter pin",
-  "@pinEnterTitle": {
-    "description": "pin_enter_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinConfirmError": "Pins do not match",
-  "@pinConfirmError": {
-    "description": "pin_confirm_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinInvalid": "Invalid pin entered",
-  "@pinInvalid": {
-    "description": "pin_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "themeHeader": "Theme",
-  "@themeHeader": {
-    "description": "theme_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeRepButton": "Change",
-  "@changeRepButton": {
-    "description": "change_representative_change",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeRepAuthenticate": "Change Representative",
-  "@changeRepAuthenticate": {
-    "description": "settings_change_rep",
-    "type": "text",
-    "placeholders": {}
-  },
-  "currentlyRepresented": "Currently Represented By",
-  "@currentlyRepresented": {
-    "description": "change_representative_current_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeRepSucces": "Representative Changed Successfully",
-  "@changeRepSucces": {
-    "description": "change_representative_success",
-    "type": "text",
-    "placeholders": {}
-  },
-  "repInfoHeader": "What is a representative?",
-  "@repInfoHeader": {
-    "description": "change_representative_info_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "repInfo": "A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. Your representative does not have spending power over your funds. You should choose a representative that has little downtime and is trustworthy.",
-  "@repInfo": {
-    "description": "change_representative_info",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinRepChange": "Enter PIN to change representative.",
-  "@pinRepChange": {
-    "description": "change_representative_pin",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeRepHint": "Enter New Representative",
-  "@changeRepHint": {
-    "description": "change_representative_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "authMethod": "Authentication Method",
-  "@authMethod": {
-    "description": "settings_disable_fingerprint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinMethod": "PIN",
-  "@pinMethod": {
-    "description": "settings_pin_method",
-    "type": "text",
-    "placeholders": {}
-  },
-  "privacyPolicy": "Privacy Policy",
-  "@privacyPolicy": {
-    "description": "settings_privacy_policy",
-    "type": "text",
-    "placeholders": {}
-  },
-  "biometricsMethod": "Biometrics",
-  "@biometricsMethod": {
-    "description": "settings_fingerprint_method",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeCurrency": "Change Currency",
-  "@changeCurrency": {
-    "description": "settings_local_currency",
-    "type": "text",
-    "placeholders": {}
-  },
-  "language": "Language",
-  "@language": {
-    "description": "settings_change_language",
-    "type": "text",
-    "placeholders": {}
-  },
-  "shareNautilus": "Share Nautilus",
-  "@shareNautilus": {
-    "description": "settings_share",
-    "type": "text",
-    "placeholders": {}
-  },
-  "shareNautilusText": "Check out Nautilus! A premier NANO mobile wallet!",
-  "@shareNautilusText": {
-    "description": "share_extra",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logout": "Logout",
-  "@logout": {
-    "description": "settings_logout",
-    "type": "text",
-    "placeholders": {}
-  },
-  "warning": "Warning",
-  "@warning": {
-    "description": "settings_logout_alert_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logoutDetail": "Logging out will remove your seed and all Nautilus-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
-  "@logoutDetail": {
-    "description": "settings_logout_alert_message",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logoutAction": "Delete Seed and Logout",
-  "@logoutAction": {
-    "description": "settings_logout_alert_confirm_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logoutAreYouSure": "Are you sure?",
-  "@logoutAreYouSure": {
-    "description": "settings_logout_warning_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logoutReassurance": "As long as you've backed up your seed you have nothing to worry about.",
-  "@logoutReassurance": {
-    "description": "settings_logout_warning_message",
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsHeader": "Settings",
-  "@settingsHeader": {
-    "description": "settings_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "preferences": "Preferences",
-  "@preferences": {
-    "description": "settings_preferences_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "manage": "Manage",
-  "@manage": {
-    "description": "settings_manage_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupSeed": "Backup Seed",
-  "@backupSeed": {
-    "description": "settings_backup_seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "fingerprintSeedBackup": "Authenticate to backup seed.",
-  "@fingerprintSeedBackup": {
-    "description": "settings_fingerprint_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinSeedBackup": "Enter PIN to Backup Seed",
-  "@pinSeedBackup": {
-    "description": "settings_pin_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "systemDefault": "System Default",
-  "@systemDefault": {
-    "description": "settings_default_language_string",
-    "type": "text",
-    "placeholders": {}
-  },
-  "notifications": "Notifications",
-  "@notifications": {
-    "description": "notifications_settings",
-    "type": "text",
-    "placeholders": {}
-  },
-  "notificationTitle": "Received %1 NANO",
-  "@notificationTitle": {
-    "description": "notification_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "notificationBody": "Open Nautilus to view this transaction",
-  "@notificationBody": {
-    "description": "notification_body",
-    "type": "text",
-    "placeholders": {}
-  },
-  "notificationHeaderSupplement": "Tap to open",
-  "@notificationHeaderSupplement": {
-    "description": "notificaiton_header_suplement",
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsTransfer": "Load from Paper Wallet",
-  "@settingsTransfer": {
-    "description": "settings_transfer",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferError": "An error has occurred during the transfer. Please try again later.",
-  "@transferError": {
-    "description": "transfer_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "paperWallet": "Paper Wallet",
-  "@paperWallet": {
-    "description": "paper_wallet",
-    "type": "text",
-    "placeholders": {}
-  },
-  "kaliumWallet": "Nautilus Wallet",
-  "@kaliumWallet": {
-    "description": "kalium_wallet",
-    "type": "text",
-    "placeholders": {}
-  },
-  "manualEntry": "Manual Entry",
-  "@manualEntry": {
-    "description": "transfer_manual_entry",
-    "type": "text",
-    "placeholders": {}
-  },
-  "mnemonicPhrase": "Mnemonic Phrase",
-  "@mnemonicPhrase": {
-    "description": "mnemonic_phrase",
-    "type": "text",
-    "placeholders": {}
-  },
-  "rawSeed": "Raw Seed",
-  "@rawSeed": {
-    "description": "raw_seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferHeader": "Transfer Funds",
-  "@transferHeader": {
-    "description": "transfer_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transfer": "Transfer",
-  "@transfer": {
-    "description": "transfer_btn",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferManualHint": "Please enter the seed below.",
-  "@transferManualHint": {
-    "description": "transfer_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferIntro": "This process will transfer the funds from a paper wallet to your Nautilus wallet.\n\nTap the \"%1\" button to start.",
-  "@transferIntro": {
-    "description": "transfer_intro",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferQrScanHint": "Scan a Nano \nseed or private key",
-  "@transferQrScanHint": {
-    "description": "transfer_qr_scan_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferQrScanError": "This QR code does not contain a valid seed.",
-  "@transferQrScanError": {
-    "description": "transfer_qr_scan_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferNoFunds": "This seed does not have any NANO on it",
-  "@transferNoFunds": {
-    "description": "transfer_no_funds_toast",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferConfirmInfo": "A wallet with a balance of %1 NANO has been detected.\n",
-  "@transferConfirmInfo": {
-    "description": "transfer_confirm_info_first",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferConfirmInfoSecond": "Tap confirm to transfer the funds.\n",
-  "@transferConfirmInfoSecond": {
-    "description": "transfer_confirm_info_second",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferConfirmInfoThird": "Transfer may take several seconds to complete.",
-  "@transferConfirmInfoThird": {
-    "description": "transfer_confirm_info_third",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferLoading": "Transferring",
-  "@transferLoading": {
-    "description": "transfer_loading_text",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferComplete": "%1 NANO successfully transferred to your Nautilus Wallet.\n",
-  "@transferComplete": {
-    "description": "transfer_complete_text",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferClose": "Tap anywhere to close the window.",
-  "@transferClose": {
-    "description": "transfer_close_text",
-    "type": "text",
-    "placeholders": {}
-  },
-  "scanInstructions": "Scan a Nano \naddress QR code",
-  "@scanInstructions": {
-    "description": "scan_send_instruction_label",
-    "type": "text",
-    "placeholders": {}
-  },
-  "unlockPin": "Enter PIN to Unlock Nautilus",
-  "@unlockPin": {
-    "description": "unlock_kalium_pin",
-    "type": "text",
-    "placeholders": {}
-  },
-  "unlockBiometrics": "Authenticate to Unlock Nautilus",
-  "@unlockBiometrics": {
-    "description": "unlock_kalium_bio",
-    "type": "text",
-    "placeholders": {}
-  },
-  "lockAppSetting": "Authenticate on Launch",
-  "@lockAppSetting": {
-    "description": "authenticate_on_launch",
-    "type": "text",
-    "placeholders": {}
-  },
-  "locked": "Locked",
-  "@locked": {
-    "description": "lockedtxt",
-    "type": "text",
-    "placeholders": {}
-  },
-  "unlock": "Unlock",
-  "@unlock": {
-    "description": "unlocktxt",
-    "type": "text",
-    "placeholders": {}
-  },
-  "tooManyFailedAttempts": "Too many failed unlock attempts.",
-  "@tooManyFailedAttempts": {
-    "description": "fail_toomany_attempts",
-    "type": "text",
-    "placeholders": {}
-  },
-  "securityHeader": "Security",
-  "@securityHeader": {
-    "description": "security_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "autoLockHeader": "Automatically Lock",
-  "@autoLockHeader": {
-    "description": "auto_lock_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "xMinutes": "After %1 minutes",
-  "@xMinutes": {
-    "description": "after_minutes",
-    "type": "text",
-    "placeholders": {}
-  },
-  "xMinute": "After %1 minute",
-  "@xMinute": {
-    "description": "after_minute",
-    "type": "text",
-    "placeholders": {}
-  },
-  "instantly": "Instantly",
-  "@instantly": {
-    "description": "insantly",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardIntro": "Welcome to Nautilus. Once you receive NANO, transactions will show up like this:",
-  "@exampleCardIntro": {
-    "description": "example_card_intro",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardLittle": "A little",
-  "@exampleCardLittle": {
-    "description": "example_card_little",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardLot": "A lot of",
-  "@exampleCardLot": {
-    "description": "example_card_lot",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardTo": "to someone",
-  "@exampleCardTo": {
-    "description": "example_card_to",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardFrom": "from someone",
-  "@exampleCardFrom": {
-    "description": "example_card_from",
-    "type": "text",
-    "placeholders": {}
-  },
-  "defaultAccountName": "Main Account",
-  "@defaultAccountName": {
-    "description": "Default account name",
-    "type": "text",
-    "placeholders": {}
-  },
-  "defaultNewAccountName": "Account %1",
-  "@defaultNewAccountName": {
-    "description": "Default new account name - e.g. Account 1",
-    "type": "text",
-    "placeholders": {}
-  },
-  "newAccountIntro": "This is your new account. Once you receive NANO, transactions will show up like this:",
-  "@newAccountIntro": {
-    "description": "Alternate account intro card",
-    "type": "text",
-    "placeholders": {}
-  },
+  "@@locale": "en",
   "account": "Account",
   "@account": {
-    "description": "Account text",
     "type": "text",
-    "placeholders": {}
+    "description": "Account text"
   },
   "accounts": "Accounts",
   "@accounts": {
-    "description": "Accounts header",
     "type": "text",
-    "placeholders": {}
+    "description": "Accounts header"
+  },
+  "ackBackedUp": "Are you sure that you've backed up your secret phrase or seed?",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
+  "activeMessageHeader": "Active Message",
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
   },
   "addAccount": "Add Account",
   "@addAccount": {
-    "description": "Default new account name - e.g. Account 1",
     "type": "text",
-    "placeholders": {}
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Block a User",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Add Contact",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Add Favorite",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Address Copied",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Enter Address",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Please Enter an Address",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Please Enter a Username or Address",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Share Address",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Aliases",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Please Enter an Amount",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Asked",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Authentication Method",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Auto Import",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Automatically Lock",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "I've Backed It Up",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Backup Secret Phrase",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Backup Seed",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Are you sure that you backed up your wallet seed?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Backup your seed",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Biometrics",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "%1 successfully blocked.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "User already Blocked!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "Blocked",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Block a user by any known alias or address. Any messages, transactions, or requests from them will be ignored.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Blocked Info",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Nick name already used!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Choose a Nick Name",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "%1 has been unblocked!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Block Explorer",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Block Explorer Info",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Which block explorer to use to display transaction information",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Block this User",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Change Currency",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Change Log",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Change Representative",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Change",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Enter New Representative",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "This is already your representative!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Representative Changed Successfully",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Check Availability",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Close",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Confirm the password",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Connecting",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 added to contacts.",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Contact Already Exists",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Contact",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Invalid Contact Name",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Enter a Nickname",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Choose a Name for this Contact",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 has been removed from contacts!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Contacts",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Failed to import contacts",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "Sucessfully imported %1 contacts.",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Copied",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Copy",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Copy Address",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Copy Link",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Copy Seed",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Copy wallet address to clipboard",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Create a password.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Create Gift Card",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Create a Gift Card",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "You can create a password to add additional security to your wallet.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Create a password",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Password is optional, and your wallet will be protected with your PIN or biometrics regardless.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Create",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Create QR Code",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Creating Gift Card",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Currency",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Currency Mode",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Currency Mode Info",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Choose which unit to display amounts in.\n1 nyano = 0.000001 NANO, or \n1,000,000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Currently Represented By",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Decryption Error!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Main Account",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Account %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Disable",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Password has been disabled",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Disable Wallet Password",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Dismiss",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Invalid Domain Name",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Failed to set a wallet password",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Enter Address",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Enter Amount",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Enter Gift Note",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Enter Message",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Enter your password",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Enter a username",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Enter User or Address",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "someone",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Welcome to Nautilus. Once you receive NANO, transactions will show up like this:",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "A little",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "A lot of",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "someone",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Once you send or receive a payment request, they'll show up here like this with the color and tag of the card indicating the status. \n\nGreen indicates the request has been paid.\nYellow indicates the request / memo has not been paid / read.\nRed indicates the request has not been read or received.\n\n Neutral colored cards without an amount are just messages.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Some",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Sushi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Once you send or receive a payment request, they'll show up here:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hey what's up?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "A lot of",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Rent",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "Happy Birthday!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Gas Money",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Exit",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "failed",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus Disconnected",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Nautilus Servers appear to be disconnected, Sending and Receiving (without memos) should still be operational but payment requests may not go through\n\n Come back later or restart the app to try again",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Favorite Already Exists",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Favorite",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Invalid Favorite Name",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Enter a Nick Name",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Choose a Name for this Favorite",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "%1 has been removed from favorites!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "Favorites",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Featured",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Authenticate to backup seed.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "From",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "fulfilled",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "You have a gift!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Empty Gift",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Gift Amount",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Gift From",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they will get a prompt to transfer the funds into their account upon opening the link",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Gift Message",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Go Back",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Got It!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Go to QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Hide",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
   },
   "hideAccountHeader": "Hide Account?",
   "@hideAccountHeader": {
-    "description": "Confirmation dialog header",
     "type": "text",
-    "placeholders": {}
+    "description": "Confirmation dialog header"
+  },
+  "home": "Home",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Ignore",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Import",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Import Secret Phrase",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Please enter your 24-word secret phrase below. Each word should be separated by a space.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Import Seed",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Please enter your seed below.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Import Seed Instead",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Import Wallet",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Instantly",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Insufficient Balance",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Address entered was invalid",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Invalid Password",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "I Understand the Risks",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Nautilus Wallet",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Language",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Link Copied",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Support",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Loaded",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Loaded Into",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Authenticate on Launch",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Locked",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Delete Seed and Logout",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Are you sure?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Logging out will remove your seed and all Nautilus-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "As long as you've backed up your seed you have nothing to worry about.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Manage",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Couldn't Verify Request",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Manual Entry",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Mark as Paid",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Mark as Unpaid",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Memo re-sent! If still unacknowledged, the recipient's device may be offline.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Message",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Minimum send amount is %1 %2",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 is not a valid word",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Mnemonic Phrase",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "Secret phrase may only contain 24 words",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "This feature requires you to have a longer transaction history in order to prevent spam.\n\nAlternatively, you can show a QR code for someone to scan.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Verification Needed",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "This is your new account. Once you receive NANO, transactions will show up like this:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "",
+  "@newAccountIntroKal": {},
+  "newWallet": "New Wallet",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Next",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "No",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "There's no contacts to export.",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "No new contacts to import.",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Node Status",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "No Search Results!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "No, Skip",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Open Nautilus to view this transaction",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Tap to open",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "In order for this feature to work correctly, notifications must be enabled",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "Received %1 %2",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "",
+  "@notificationTitleKal": {},
+  "notSent": "not sent",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Off",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Ok",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Onramp",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "On",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Opened",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "paid",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Paper Wallet",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Password cannot be empty",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Nautilus anymore.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Passwords do not match",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "This password will be required to open Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Pay",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Someone has requested payment from you! check the payments page for more info.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Payments",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Pay this request",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "",
+  "@pending": {},
+  "pickFromList": "Pick From a List",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "Pins do not match",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Confirm your pin",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Create a 6-digit pin",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Enter pin",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Invalid pin entered",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Enter PIN to change representative.",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Enter PIN to Backup Seed",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Preferences",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Purchase Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "QR code does not contain a valid destination",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Please Grant Camera Permissions to scan QR Codes",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "QR code does not contain a valid seed or private key",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "QR does not contain a valid secret phrase",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Could not Read QR Code",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Rate the App",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn't take more than a minute.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Raw Seed",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Read More",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "receivable",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Receive",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Received",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Receive Minimum",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Receive Minimum Info",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "A minimum amount to receive. If a payment or request is received with an amount less than this, it will be ignored.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "Refund",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "for",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Registering",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Register Username",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Register a Username",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
   },
   "removeAccountText": "Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button.",
   "@removeAccountText": {
-    "description": "Remove account dialog body",
     "type": "text",
-    "placeholders": {}
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Unblock",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Are you sure you want to unblock %1?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Remove Contact",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Are you sure you want to delete %1?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Remove Favorite",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. Your representative does not have spending power over your funds. You should choose a representative that has little downtime and is trustworthy.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "What is a representative?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Reply",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Representatives",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Request",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Request %1 %2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Requested",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Requested From",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Request Failed: This user doesn't appear to have Nautilus installed, or has notifications disabled.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Requesting",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Request Payment",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Error sending payment request, the recipient's device may be offline or unavailable.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Request re-sent! If still unacknowledged, the recipient's device may be offline.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Require a password to open Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Resend this memo",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Reset the Database",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed. If you're having issues you should backup your seed, re-install the app, and if the issue persists feel free to make a bug report on github or discord.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Scan a Nano \naddress QR code",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Scan QR Code",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Search for anything",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "In the next screen, you will see your secret phrase. It is a password to access your funds. It is crucial that you back it up and never share it with anyone.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Safety First!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Secret Phrase",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Secret Phrase Copied",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Copy Secret Phrase",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "If you lose your device or uninstall the application, you'll need your secret phrase or seed to recover your funds!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Security",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Seed",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Below is your wallet's seed. It is crucial that you backup your seed and never store it as plaintext or a screenshot.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Seed Copied to Clipboard\nIt is pasteable for 2 minutes.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Seed Copied",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "A seed bears the same information as a secret phrase, but in a machine-readable way. As long as you have one of them backed up, you'll have access to your funds.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Seed is Invalid",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Can't request from self",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Send",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Send %1 %2",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "",
+  "@sendAmountConfirmKal": {},
+  "sendError": "An error occurred. Try again later.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Send From",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Sending",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Sending memo with transaction failed, they may not be a Nautilus user.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Sending message",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Send Request again",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users.\n\nYou don't need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don't use nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Send Sheet Info",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Sent",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Sent To",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Set Password",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Password has been set successfully",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Settings",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Load from Paper Wallet",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Set Wallet Password",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "",
+  "@shareKalium": {},
+  "shareKaliumText": "",
+  "@shareKaliumText": {},
+  "shareLink": "Share Link",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Share Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Check out Nautilus! A premier NANO mobile wallet!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Show Contacts",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simplex",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Support the Developer",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Switch to Seed",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "System Default",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Tap to hide",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
   },
   "tapToReveal": "Tap to reveal",
-  "tapToHide": "Tap to hide",
-  "copied": "Copied",
-  "copy": "Copy",
-  "seedDescription": "A seed bears the same information as a secret phrase, but in a machine-readable way. As long as you have one of them backed up, you'll have access to your funds.",
-  "importSecretPhrase": "Import Secret Phrase",
-  "importSecretPhraseHint": "Please enter your 24-word secret phrase below. Each word should be separated by a space.",
-  "qrMnemonicError": "QR does not contain a valid secret phrase",
-  "mnemonicInvalidWord": "%1 is not a valid word",
-  "mnemonicSizeError": "Secret phrase may only contain 24 words",
-  "secretPhrase": "Secret Phrase",
-  "backupConfirmButton": "I've Backed It Up",
-  "secretInfoHeader": "Safety First!",
-  "secretInfo": "In the next screen, you will see your secret phrase. It is a password to access your funds. It is crucial that you back it up and never share it with anyone.",
-  "secretWarning": "If you lose your device or uninstall the application, you'll need your secret phrase or seed to recover your funds!",
-  "gotItButton": "Got It!",
-  "ackBackedUp": "Are you sure that you've backed up your secret phrase or seed?",
-  "secretPhraseCopy": "Copy Secret Phrase",
-  "secretPhraseCopied": "Secret Phrase Copied",
-  "import": "Import",
-  "importSeedInstead": "Import Seed Instead",
-  "switchToSeed": "Switch to Seed"
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Theme",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "To",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Too many failed unlock attempts.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Transactions",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Transfer",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Tap anywhere to close the window.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 %2 successfully transferred to your Nautilus Wallet.\n",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "A wallet with a balance of %1 NANO has been detected.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Tap confirm to transfer the funds.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Transfer may take several seconds to complete.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "An error has occurred during the transfer. Please try again later.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Transfer Funds",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "This process will transfer the funds from a paper wallet to your Nautilus wallet.\n\nTap the \"%1\" button to start.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "",
+  "@transferIntroKal": {},
+  "transferIntroShort": "This process will transfer the funds from a paper wallet to your Nautilus wallet.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Transferring",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Please enter the seed below.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "This seed does not have any NANO on it",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "This QR code does not contain a valid seed.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Scan a Nano \nseed or private key",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "unacknowledged",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "unconfirmed",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "unfulfilled",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Unlock",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Authenticate to Unlock Nautilus",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Enter PIN to Unlock Nautilus",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "",
+  "@unlockPinKal": {},
+  "unpaid": "unpaid",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "unread",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Uptime",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Username available!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Please Enter a Username",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Username Error",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Pick out a unique @username to make it easy for friends and family to find you!\n\nHaving a Nautilus username updates the UI globally to reflect your new handle.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Invalid Username",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Username unavailable",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Nautilus usernames are a centralized service provided by Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "User not found!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "View Details",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Voting Weight",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "Warning",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Welcome to Nautilus. To begin, you may create a new wallet or import an existing one.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "",
+  "@welcomeTextKal": {},
+  "withAddress": "With Address",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "With Message",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "After %1 minute",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "After %1 minutes",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Yes",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Yes",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

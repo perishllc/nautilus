@@ -66,7 +66,8 @@ class _AppPopupButtonState extends State<AppPopupButton> {
         final BigInt? amountBigInt = address.amount != null ? BigInt.tryParse(address.amount!) : null;
         bool sufficientBalance = false;
         if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
-          UIUtil.showSnackbar(AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
+          UIUtil.showSnackbar(
+              AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
         } else if (amountBigInt != null && StateContainer.of(context).wallet!.accountBalance > amountBigInt) {
           sufficientBalance = true;
         }
@@ -78,8 +79,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
           // Go to send sheet
           Sheets.showAppHeightNineSheet(
               context: context,
-              widget: SendSheet(
-                  localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: address.amount ?? null));
+              widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: address.amount));
         }
       }
     }

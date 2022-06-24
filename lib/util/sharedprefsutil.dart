@@ -19,7 +19,7 @@ import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 
 /// Price conversion preference values
-enum PriceConversion { BTC, NONE, HIDDEN }
+enum PriceConversion { CURRENCY, NONE, HIDDEN }
 
 /// Singleton wrapper for shared preferences
 class SharedPrefsUtil {
@@ -206,7 +206,7 @@ class SharedPrefsUtil {
   }
 
   Future<PriceConversion> getPriceConversion() async {
-    return PriceConversion.values[(await get(price_conversion, defaultValue: PriceConversion.BTC.index) as int)];
+    return PriceConversion.values[(await get(price_conversion, defaultValue: PriceConversion.CURRENCY.index) as int)];
   }
 
   Future<void> setAuthMethod(AuthenticationMethod method) async {

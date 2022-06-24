@@ -1,225 +1,1951 @@
 {
-  "cancel": "إلغاء",
-  "close": "إغلاق",
-  "confirm": "تأكيد",
-  "no": "لا",
-  "yes": "نعم",
-  "onStr": "فتح",
-  "off": "غلق",
-  "send": "إرسال",
-  "receive": "إستلام",
-  "sent": "تم الارسال",
-  "received": "تم الإستلام",
-  "transactions": "معاملات",
-  "addressCopied": "تم نسخ العنوان",
-  "copyAddress": "نسخ العنوان",
-  "addressShare": "أنشر العنوان",
-  "addressHint": "أدخل العنوان\n",
-  "seed": "مفتاح خاص",
-  "seedInvalid": "مفتاح خاص غير صحيح",
-  "seedCopied": "تم نسخ المفتاح الخاص\n لمدة دقيقتين",
-  "scanQrCode": "مسح رمز الاستجابة السريعة",
-  "contactsImportErr": "فشل استيراد جهات الاتصال",
-  "viewDetails": "عرض التفاصيل",
-  "qrInvalidSeed": "رمز الاستجابة السريعة لا يحتوي على مفتاح خاص صحيح",
-  "removeContact": "حذف بيانات جهة الاتصال",
-  "removeContactConfirmation": "هل تريد حذف %1؟",
-  "contactHeader": "جهة الاتصال",
-  "contactsHeader": "جهات الاتصال",
-  "addContact": "إضافة جهة الاتصال",
-  "contactNameHint": "أدخل اسم @",
-  "contactInvalid": "اسم جهة الاتصال خاطيء",
-  "noContactsExport": "لا توجد جهات الاتصال للنقل",
-  "noContactsImport": "لا توجد جهات اتصال جديدة للجلب.",
-  "contactsImportSuccess": "تم جلب جهات اتصال %1 بنجاح.",
-  "contactAdded": "تم إضافة %1 إلى جهات الاتصال.",
-  "contactRemoved": "تم حذف %1 من جهة الاتصال !",
-  "contactNameMissing": "إختر إسم جهة الاتصال",
-  "contactExists": "جهة الاتصال موجودة مسبقا",
-  "backupYourSeed": "حفظ المفتاح الخاص",
-  "backupSeedConfirm": "هل أنت متاكد من حفظ المفتاح الخاص؟",
-  "seedBackupInfo": "مفتاحك الخاص يوجد أسفله. يجب حفظ نسخةٌ منه في مكان أمن.  لا للقطة الشاشة أو لنص في الهاتف.",
-  "copySeed": "نسخ المفتاح الخاص",
-  "seedCopiedShort": "تم النسخ المفتاح الخاص",
-  "importSeed": "جلب المفتاح الخاص",
-  "importSeedHint": "أدخل المفتاح الخاص",
-  "welcomeText": "أهلا بك في نتريوم. لتبدأ، إحدث محفظة أو إجلب محفظة موجودة.",
-  "newWallet": "محفظة جديدة",
-  "importWallet": "إجلب محفظة",
-  "sentTo": "تم الإرسال إلى",
-  "sending": "إرسال",
-  "to": "إلى",
-  "sendAmountConfirm": "أرسل %1 NANO",
-  "sendError": "يوجد خطأ. حاول لاحقاً.",
-  "enterAmount": "أدخل المبلغ",
-  "enterAddress": "أدخل العنوان",
-  "invalidAddress": "العنوان المدخل غير صحيح",
-  "addressMissing": "يرجى إدخال العنوان",
-  "amountMissing": "يرجى إدخال المبلغ",
-  "insufficientBalance": "لرصيد غير كافي",
-  "sendFrom": "أرسل من",
-  "pinCreateTitle": "ضع 6 أرقام رمز الPIN",
-  "pinConfirmTitle": "تأكيد رمز الPIN",
-  "pinEnterTitle": "أدخل رمز الPIN",
-  "pinConfirmError": "رمز الPIN غير مطابق",
-  "pinInvalid": "رمز الPIN غير صحيح",
-  "themeHeader": "مظهر",
-  "changeRepButton": "تغير",
-  "changeRepAuthenticate": "تغير المندوب",
-  "currentlyRepresented": "المندوب الحالي",
-  "changeRepSucces": "تم تغير المندوب بنجاح",
-  "repInfoHeader": "ماهو المندوب؟",
-  "repInfo": "المندوب هو الحساب الذي يصوت لصالح توافق شبكة. يتم وزن قوة التصويت بالتوازن ، يمكنك تفويض رصيدك لزيادة وزن التصويت لمندوب تثق فيه. المندوب ليست له القدرة الشرائية لأموالك. يجب إختيار مندوب ضئيل الإنقطاع وجدير بالثقة.",
-  "pinRepChange": "أدخل رمز الPIN لتغير المندوب",
-  "changeRepHint": "أدخل مندوب جديد",
-  "representatives": "مندوب",
-  "pickFromList": "اختيار من قائمة",
-  "votingWeight": "وزن التصويت",
-  "uptime": "مدة التشغيل",
-  "authMethod": "طريقة المصادقة",
-  "pinMethod": "PIN",
-  "privacyPolicy": "سياسة الخصوصية",
-  "biometricsMethod": "القياسات الحيوية",
-  "changeCurrency": "تغيير العملة",
-  "language": "اللغة",
-  "shareNautilus": "شارك نتريوم",
-  "shareNautilusText": "راجع نتريوم! محفظة نتريوم الرسمية للهاتف",
-  "logout": "خروج",
-  "warning": "تحذير",
-  "logoutDetail": "خروجك من حساب نتريوم سوف يحذف البيانات من الجهاز. إذا مفتاحك الخاص غير محفوظ في مكان أمن، سوف تفقد رصيدك نهائيا",
-  "logoutAction": "حذف المفتاح الخاص والخروج",
-  "logoutAreYouSure": "هل أنت متأكد؟",
-  "logoutReassurance": "ليس هناك خشية إذا قمت بحفض نسخة للمفتاح الخاص",
-  "settingsHeader": "الإعدادات",
-  "preferences": "الاختيارات",
-  "manage": "إدارة",
-  "backupSeed": "نسخ احتياطي للمفتاح الخاص",
-  "fingerprintSeedBackup": "المصادقة على نسخ المفتاح الخاص.",
-  "pinSeedBackup": "أدخل الPIN للنسخ المفتاح الخاص",
-  "systemDefault": "النظام الافتراضي",
-  "notifications": "تنبيهات",
-  "notificationTitle": "تم استلام %1 NANO",
-  "notificationBody": "أفتح نتريوم للكشف عن هذا التعامل",
-  "notificationHeaderSupplement": "اضغط للفتح",
-  "settingsTransfer": "تحميل من المحفظة الورقية",
-  "transferError": "لقد حدث خطأ أثناء النقل. الرجاء إعادة المحاولة في وقت لاحق.",
-  "paperWallet": "المحفظة الورقية",
-  "kaliumWallet": "محفظة  كاليوم",
-  "manualEntry": "إدخال يدوي",
-  "mnemonicPhrase": "عبارة تذكيرية",
-  "rawSeed": "Raw Seed",
-  "transferHeader": "تحويل الرصيد",
-  "transfer": "تحويل",
-  "transferManualHint": "الرجاء إدخال المفتاح الخاص.",
-  "transferIntro": "ستقوم هذه العملية بتحويل الرصيد من المحفظة الورقية إلى محفظة نتريوم الخاصة بك. \n\n اضغط على الزر \"%1\" للبدء.",
-  "transferQrScanHint": "مسح\n المفتاح الخاص",
-  "transferQrScanError": "لا يحتوي رمز الاستجابة السريعة على مفتاح خاص صحيح.",
-  "transferNoFunds": "هذا المفتاح الخاص لا يحتوي على NANO",
-  "transferConfirmInfo": "تم كشف محفظة برصيد %1 NANO.\n",
-  "transferConfirmInfoSecond": "إضغط لتأكيد تحويل الرصيد.\n",
-  "transferConfirmInfoThird": "قد يستغرق النقل عدة ثوانيٍ.",
-  "transferLoading": "بصدد التحويل",
-  "transferComplete": "تم تحويل %1 NANO إلى محفظة نتريوم.\n",
-  "transferClose": "اضغط في أي مكان لغلق النافذة.",
-  "scanInstructions": "مسح \nعنوان رمز الاستجابة السريعة",
-  "unlockPin": "أدخل الPIN لفتح نتريوم",
-  "unlockBiometrics": "مصادقة لفتح نتريوم",
-  "lockAppSetting": "المصادقة في الاطلاق",
-  "locked": "مقفل",
-  "unlock": "فتح",
-  "tooManyFailedAttempts": "العديد من محاولات الفتح الفاشلة.",
-  "securityHeader": "تأمين",
-  "autoLockHeader": "قفل آليً",
-  "xMinutes": "بعد %1 دقائق",
-  "xMinute": "بعد %1 دقيقة",
-  "instantly": "فوراً",
-  "exampleCardIntro": "مرحبا بكم في نتريوم. بمجرد تلقي NANO ، ستظهر المعاملات كما يلي:",
-  "exampleCardLittle": "القليل",
-  "exampleCardLot": "كثيرا من",
-  "exampleCardTo": "إلى شخص ما",
-  "exampleCardFrom": "من شخص ما",
-  "defaultAccountName": "الحساب الرئيسي",
-  "defaultNewAccountName": "الحساب %1",
-  "newAccountIntro": "هذا هو حسابك الجديد بمجرد تلقي NANO ، ستظهر المعاملات كما يلي:",
+  "@@locale": "ar",
   "account": "الحساب",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "الحسابات",
-  "addAccount": "إضافة حساب",
-  "hideAccountHeader": "إخفاء الحساب؟",
-  "removeAccountText": "هل أنت متأكد أنك تريد إخفاء هذا الحساب؟ يمكنك إعادة إضافته لاحقًا بذخت على \"%1\"",
-  "tapToReveal": "اضغط للكشف",
-  "tapToHide": "إضغط للاخفاء",
-  "copied": "تم نسخ",
-  "copy": "نسخ",
-  "seedDescription": "المفتاح خاص يحتمل عل معلومات مطابقة للعبرة سارية. طالما لديك نسخة احتياطية من واحدة منها ، سيكون لديك وسيلة للحفاظ على أموالك.",
-  "importSecretPhrase": "استيراد العبارة السرية",
-  "importSecretPhraseHint": "الرجاء إدخال عبارة سرية مكونة من 24 كلمة. يجب فصل كل كلمة بمسافة.",
-  "qrMnemonicError": "لا يحتوي رمز الاستجابة السريعة على عبارة سرية صالحة",
-  "mnemonicInvalidWord": "%1 ليست كلمة صالحة",
-  "mnemonicSizeError": "العبارة السرية قد تحتوي فقط على 24 كلمة",
-  "secretPhrase": "العبارة السرية",
-  "backupConfirmButton": "لقد حفظت العبارة السرية",
-  "secretInfoHeader": "السلامة اولا!",
-  "secretInfo": "في الشاشة التالية ، سترى العبارة السرية الخاصة بك. إنها كلمة مرور للوصول إلى أموالك. من الأهمية أن تقوم بنسخه احتياطيًا وأن لا تشاركه أبدًا مع أي شخص.",
-  "secretWarning": "إذا فقدت جهازك أو قمت بحذف التطبيق ، فستحتاج إلى عباراتك السرية أو بمفتاح سري لاسترداد أموالك!",
-  "gotItButton": "موافق!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "هل أنت متأكد من أنك قمت بنسخ نسخة احتياطية من العبارة السرية أو مفتاحك الخاص؟",
-  "secretPhraseCopy": "نسخ العبارة السرية",
-  "secretPhraseCopied": "تم نسخ العبارة السرية",
-  "import": "استيراد",
-  "importSeedInstead": "بدلاً من ذلك، استيراد المفتاح الخاص",
-  "switchToSeed": "التبديل إلى المفتاح الخاص",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
+  "activeMessageHeader": "رسالة نشطة",
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "إضافة حساب",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "حظر مستخدم",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "إضافة جهة الاتصال",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "إضافة المفضلة",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "تم نسخ العنوان",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "أدخل العنوان\n",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "يرجى إدخال العنوان",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "الرجاء إدخال اسم مستخدم أو عنوان",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "أنشر العنوان",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "الأسماء المستعارة",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "يرجى إدخال المبلغ",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "طلب",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "طريقة المصادقة",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "استيراد تلقائي",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "قفل آليً",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "لقد حفظت العبارة السرية",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
   "backupSecretPhrase": "حفظ العبارة السرية الخاصة بك\n",
-  "qrInvalidAddress": "لا يحتوي رمز الاستجابة السريعة على وجهة صالحة\n",
-  "qrInvalidPermissions": "يرجى منح الكاميرا لمسح رموز QR\n",
-  "qrUnknownError": "لا يمكن قراءة رمز الاستجابة السريعة\n",
-  "mantaError": "لا يمكن التحقق من الطلب\n",
-  "rootWarning": "يبدو أن جهازك \"rooted\" أو \"jailbroken\" أو تم تعديله بطريقة تعرض الأمان للخطر. يرجى إعادة ضبط جهازك إلى حالته الأصلية قبل المتابعة.\n",
-  "iUnderstandTheRisks": "أنا أدرك المخاطر\n",
-  "exit": "خروج",
-  "setWalletPassword": "إنشاء كلمة مرور المحفظة\n",
-  "setPassword": "إنشاء كلمة مرور\n",
-  "disableWalletPassword": "تعطيل كلمة مرور المحفظة\n",
-  "encryptionFailedError": "أخفق إنشاء كلمة مرور المحفظة\n",
-  "setPasswordSuccess": "تم إنشاء كلمة مرور المحفظة بنجاح\n",
-  "disablePasswordSuccess": "تم تعطيل كلمة المرور\n",
-  "createPasswordHint": "أنشئ كلمة مرور\n",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "نسخ احتياطي للمفتاح الخاص",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "هل أنت متاكد من حفظ المفتاح الخاص؟",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "حفظ المفتاح الخاص",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "القياسات الحيوية",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "تم حظر %1 بنجاح.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "تم حظر المستخدم بالفعل!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "تم حظره",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "حظر مستخدم بواسطة أي اسم مستعار أو عنوان معروف. سيتم تجاهل أي رسائل أو معاملات أو طلبات منها.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "معلومات محظورة",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "اسم Nick مستخدم بالفعل!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "اختر اسم Nick",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "تم إلغاء حظر %1!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "بلوك إكسبلورر",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "معلومات بلوك إكسبلورر",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "مستكشف الكتلة الذي سيتم استخدامه لعرض معلومات المعاملة",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "حظر هذا المستخدم",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "إلغاء",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "تغيير العملة",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "سجل التغيير",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "تغير المندوب",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "تغير",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "أدخل مندوب جديد",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "هذا هو بالفعل ممثلك!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "تم تغير المندوب بنجاح",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "تحقق من التوفر",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "إغلاق",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "تأكيد",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
   "confirmPasswordHint": "تأكيد كلمة المرور\n",
-  "enterPasswordHint": "ادخل رقمك ادخل رقمك\n",
-  "passwordsDontMatch": "كلمة المرور غير مطابقة\n",
-  "passwordBlank": "لا يمكن أن تكون كلمة المرور فارغة\n",
-  "invalidPassword": "كلمة المرور خاطئ\n",
-  "passwordWillBeRequiredToOpenParagraph": "هناك حاجة إلى كلمة المرور لفتح نتريم",
-  "passwordNoLongerRequiredToOpenParagraph": "لن تحتاج إلى كلمة مرور لفتح  نتريم بعد الآن.\n",
-  "createPasswordFirstParagraph": "يمكنك إنشاء كلمة مرور لإضافة أمان إلى محفظتك.\n",
-  "createPasswordSecondParagraph": "كلمة المرور اختيارية ، وسيتم حماية محفظتك برقم التعريف الشخصي أو القياسات الحيوية بغض النظر.\n",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "الاتصال",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "تم إضافة %1 إلى جهات الاتصال.",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "جهة الاتصال موجودة مسبقا",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "جهة الاتصال",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "اسم جهة الاتصال خاطيء",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "أدخل اسم @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "إختر إسم جهة الاتصال",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "تم حذف %1 من جهة الاتصال !",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "جهات الاتصال",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "فشل استيراد جهات الاتصال",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "تم جلب جهات اتصال %1 بنجاح.",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "تم نسخ",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "نسخ",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "نسخ العنوان",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "نسخ الرابط",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "نسخ المفتاح الخاص",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "نسخ عنوان المحفظة إلى الحافظة",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
   "createAPasswordHeader": "أنشئ كلمة مرور.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "إنشاء بطاقة هدايا",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "إنشاء بطاقة هدايا",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "يمكنك إنشاء كلمة مرور لإضافة أمان إلى محفظتك.\n",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "أنشئ كلمة مرور\n",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "كلمة المرور اختيارية ، وسيتم حماية محفظتك برقم التعريف الشخصي أو القياسات الحيوية بغض النظر.\n",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
   "createPasswordSheetHeader": "خلق",
-  "disablePasswordSheetHeader": "تعطيل",
-  "requireAPasswordToOpenHeader": "مطالبة كلمة مرور لفتح نتريم ؟",
-  "noSkipButton": "لا ، تخطي\n",
-  "yesButton": "نعم",
-  "nextButton": "التالى",
-  "goBackButton": "عد\n",
-  "welcomeTextKal": "أهلا بك في كاليوم. لتبدأ، إحدث محفظة أو إجلب محفظة موجودة.",
-  "sendAmountConfirmKal": "أرسل %1 BANANO",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "إنشاء رمز الاستجابة السريعة",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "إنشاء بطاقة هدايا",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
   "currency": "عملة",
-  "shareKalium": "نشر كاليوم",
-  "shareKaliumText": "ألق نظرة على كاليوم !محفظة بننو !",
-  "logoutDetailKal": "خروجك من حساب كاليوم سوف يحذف البيانات من الجهاز. إذا مفتاحك الخاص غير محفوظ في مكان أمن، سوف تفقد رصيدك نهائيا.",
-  "notificationTitleKal": "تم استلام %1 BANANO",
-  "notificationBodyKal": "أفتح كاليوم للكشف عن هذا التعامل",
-  "transferIntroKal": "ستقوم هذه العملية بتحويل الرصيد من المحفظة الورقية إلى محفظة كاليوم الخاصة بك. \n\n اضغط على الزر \"%1\" للبدء.",
-  "transferQrScanHintKal": "مسح\n المفتاح الخاص",
-  "transferNoFundsKal": "هذا المفتاح الخاص لا يحتوي على BANANO",
-  "transferConfirmInfoKal": "تم كشف محفظة برصيد %1 BANANO.\n",
-  "transferCompleteKal": "تم تحويل %1 BANANO إلى محفظة كاليوم.\n",
-  "scanInstructionsKal": "مسح \nعنوان رمز الاستجابة السريعة",
-  "unlockPinKal": "أدخل الPIN لفتح كاليوم",
-  "unlockBiometricsKal": "مصادقة لفتح كاليوم",
-  "exampleCardIntroKal": "مرحبا بكم في كاليوم. بمجرد تلقي BANANO ، ستظهر المعاملات كما يلي:",
-  "exampleCardToKal": "لقرد عشوائي",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "وضع العملة",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "معلومات وضع العملة",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "اختر الوحدة التي تريد عرض الكميات بها.\n1 نيانو = 0.000001 نانو، أو \n1,000,000 نيانو = 1 نانو",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "المندوب الحالي",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "خطأ فك التشفير!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "الحساب الرئيسي",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "الحساب %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "حذف",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "تعطيل",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "تم تعطيل كلمة المرور\n",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "تعطيل كلمة مرور المحفظة\n",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "رفض",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "اسم مجال غير صالح",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "تحرير",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "أخفق إنشاء كلمة مرور المحفظة\n",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "أدخل العنوان",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "أدخل المبلغ",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "أدخل ملاحظة الهدية",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "أدخل رسالة",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "ادخل رقمك ادخل رقمك\n",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "أدخل اسم مستخدم",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "أدخل المستخدم أو العنوان",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "من شخص ما",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
   "exampleCardFromKal": "من قرد عشوائي",
-  "newAccountIntroKal": "هذا هو حسابك الجديد بمجرد تلقي BANANO ، ستظهر المعاملات كما يلي:",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "مرحبا بكم في نتريوم. بمجرد تلقي NANO ، ستظهر المعاملات كما يلي:",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "مرحبا بكم في كاليوم. بمجرد تلقي BANANO ، ستظهر المعاملات كما يلي:",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "القليل",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "كثيرا من",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "إلى شخص ما",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "لقرد عشوائي",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "بمجرد إرسال طلب دفع أو استلامه، سيظهر هنا على هذا النحو مع لون وعلامة البطاقة التي تشير إلى الحالة. \n\nيشير اللون الأخضر إلى أن الطلب قد تم دفعه.\nيشير اللون الأصفر إلى أن الطلب/المذكرة لم يتم دفع/قراءة.\nيشير اللون الأحمر إلى أن الطلب لم تتم قراءته أو استلامه.\n\n البطاقات الملونة المحايدة بدون مبلغ هي مجرد رسائل.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "بعض",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "سوشي",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "بمجرد إرسال طلب دفع أو استلامه، سيظهر هنا:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "مهلا، ما الأمر؟",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "الكثير من",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "رينت",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "عيد ميلاد سعيد!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "أموال الغاز",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "خروج",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "فشل",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "نوتيلوس غير متصل",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "يبدو أن خوادم Nautilus غير متصلة، ويجب أن يظل الإرسال والاستلام (بدون مذكرات) قيد التشغيل ولكن قد لا يتم تنفيذ طلبات الدفع\n\n ارجع لاحقًا أو أعد تشغيل التطبيق للمحاولة مرة أخرى",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "المفضلة موجودة بالفعل",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "المفضلة",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "اسم مفضل غير صالح",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "أدخل اسم Nick",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "اختر اسمًا لهذه المفضلة",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "تمت إزالة %1 من المفضلة!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "المفضلة",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "مميزة",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "المصادقة على نسخ المفتاح الخاص.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "من",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "الوفاء",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "لديك هدية!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "هدية فارغة",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "مبلغ الهدية",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "هدية من",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "قم بتحميل بطاقة هدايا رقمية باستخدام NANO! قم بتعيين مبلغ ورسالة اختيارية للمستلم ليراها عند فتحه!\n\nبمجرد الإنشاء، ستحصل على رابط يمكنك إرساله إلى أي شخص، والذي عند فتحه سيوزع الأموال تلقائيًا على المستلم بعد تثبيت Nautilus!\n\nإذا كان المستلم مستخدمًا لـ Nautilus بالفعل، فسيتلقى مطالبة بتحويل الأموال إلى حسابه عند فتح الرابط.",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "رسالة هدية",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "عد\n",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "موافق!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "انتقل إلى QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "هيدي",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "إخفاء الحساب؟",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "الصفحة الرئيسية",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "تجاهل",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "استيراد",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "يحتوي الرابط الذي نقرت عليه على بعض النانو، هل ترغب في استيراده إلى هذه المحفظة، أو إعادته إلى من أرسله؟",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "استيراد العبارة السرية",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "الرجاء إدخال عبارة سرية مكونة من 24 كلمة. يجب فصل كل كلمة بمسافة.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "جلب المفتاح الخاص",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "أدخل المفتاح الخاص",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "بدلاً من ذلك، استيراد المفتاح الخاص",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "إجلب محفظة",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "فوراً",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "لرصيد غير كافي",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "العنوان المدخل غير صحيح",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "كلمة المرور خاطئ\n",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "أنا أدرك المخاطر\n",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "محفظة  كاليوم",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "اللغة",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "تم نسخ الرابط",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
   "liveSupportButton": "مساعدة",
-  "connectingHeader": "الاتصال"
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "لوديد",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "تم تحميله في",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "المصادقة في الاطلاق",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "مقفل",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "خروج",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "حذف المفتاح الخاص والخروج",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "هل أنت متأكد؟",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "خروجك من حساب نتريوم سوف يحذف البيانات من الجهاز. إذا مفتاحك الخاص غير محفوظ في مكان أمن، سوف تفقد رصيدك نهائيا",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "خروجك من حساب كاليوم سوف يحذف البيانات من الجهاز. إذا مفتاحك الخاص غير محفوظ في مكان أمن، سوف تفقد رصيدك نهائيا.",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "ليس هناك خشية إذا قمت بحفض نسخة للمفتاح الخاص",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "إدارة",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "لا يمكن التحقق من الطلب\n",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "إدخال يدوي",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "وضع علامة على أنها مدفوعة",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "وضع علامة على أنه بدون",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "إعادة إرسال المذكرة! إذا كان لا يزال غير معترف به، فقد يكون جهاز المستلم غير متصل.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "رسالة",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "الحد الأدنى لمبلغ الإرسال هو %1 %2",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 ليست كلمة صالحة",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "عبارة تذكيرية",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "العبارة السرية قد تحتوي فقط على 24 كلمة",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "تتطلب هذه الميزة أن يكون لديك سجل معاملات أطول لمنع البريد العشوائي.\n\nبدلاً من ذلك، يمكنك إظهار رمز الاستجابة السريعة لشخص ما للمسح الضوئي.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "مطلوب التحقق",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "هذا هو حسابك الجديد بمجرد تلقي NANO ، ستظهر المعاملات كما يلي:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "هذا هو حسابك الجديد بمجرد تلقي BANANO ، ستظهر المعاملات كما يلي:",
+  "@newAccountIntroKal": {},
+  "newWallet": "محفظة جديدة",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "التالى",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "لا",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "لا توجد جهات الاتصال للنقل",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "لا توجد جهات اتصال جديدة للجلب.",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "حالة العقدة",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "لا توجد نتائج بحث!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "لا ، تخطي\n",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "أفتح نتريوم للكشف عن هذا التعامل",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "أفتح كاليوم للكشف عن هذا التعامل",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "اضغط للفتح",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "لكي تعمل هذه الميزة بشكل صحيح، يجب تمكين الإشعارات.",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "تنبيهات",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "تم استلام %1 NANO",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "تم استلام %1 BANANO",
+  "@notificationTitleKal": {},
+  "notSent": "لم يتم إرسالها",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "نيانيكون",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "غلق",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "طيب",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "أونرامب",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "فتح",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "تم افتتاحه",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "دفع",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "المحفظة الورقية",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "لا يمكن أن تكون كلمة المرور فارغة\n",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "لن تحتاج إلى كلمة مرور لفتح  نتريم بعد الآن.\n",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "كلمة المرور غير مطابقة\n",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "هناك حاجة إلى كلمة المرور لفتح نتريم",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "الدفع",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "طلب شخص ما الدفع منك! تحقق من صفحة المدفوعات لمزيد من المعلومات.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "المدفوعات",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "ادفع هذا الطلب",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "",
+  "@pending": {},
+  "pickFromList": "اختيار من قائمة",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "رمز الPIN غير مطابق",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "تأكيد رمز الPIN",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "ضع 6 أرقام رمز الPIN",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "أدخل رمز الPIN",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "رمز الPIN غير صحيح",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "أدخل رمز الPIN لتغير المندوب",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "أدخل الPIN للنسخ المفتاح الخاص",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "الاختيارات",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "سياسة الخصوصية",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "شراء نانو",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "لا يحتوي رمز الاستجابة السريعة على وجهة صالحة\n",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "يرجى منح الكاميرا لمسح رموز QR\n",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "رمز الاستجابة السريعة لا يحتوي على مفتاح خاص صحيح",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "لا يحتوي رمز الاستجابة السريعة على عبارة سرية صالحة",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "لا يمكن قراءة رمز الاستجابة السريعة\n",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "قيم التطبيق",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "إذا كنت تستمتع بالتطبيق، ففكر في تخصيص الوقت لمراجعته،\nإنه يساعد حقًا ولا يجب أن يستغرق أكثر من دقيقة.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Raw Seed",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "اقرأ المزيد",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "مستحق",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "إستلام",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "تم الإستلام",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "تلقي الحد الأدنى",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "تلقي الحد الأدنى من المعلومات",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "الحد الأدنى للمبلغ لتلقيه. إذا تم استلام دفعة أو طلب بمبلغ أقل من هذا، فسيتم تجاهله.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "استرداد",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "من أجل",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "التسجيل",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "تسجيل اسم المستخدم",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "تسجيل اسم مستخدم",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "هل أنت متأكد أنك تريد إخفاء هذا الحساب؟ يمكنك إعادة إضافته لاحقًا بذخت على \"%1\"",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "إلغاء الحظر",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "هل تريد بالتأكيد إلغاء حظر %1؟",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "حذف بيانات جهة الاتصال",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "هل تريد حذف %1؟",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "إزالة المفضلة",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "المندوب هو الحساب الذي يصوت لصالح توافق شبكة. يتم وزن قوة التصويت بالتوازن ، يمكنك تفويض رصيدك لزيادة وزن التصويت لمندوب تثق فيه. المندوب ليست له القدرة الشرائية لأموالك. يجب إختيار مندوب ضئيل الإنقطاع وجدير بالثقة.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "ماهو المندوب؟",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "رد",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "مندوب",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "طلب",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "طلب %1 %2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "طلب",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "طلب من",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "فشل الطلب: لا يبدو أن هذا المستخدم قد تم تثبيت Nautilus أو أنه تم تعطيل الإشعارات.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "طلب",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "طلب الدفع",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "خطأ في إرسال طلب الدفع، قد يكون جهاز المستلم غير متصل أو غير متوفر.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "إعادة إرسال الطلب! إذا كان لا يزال غير معترف به، فقد يكون جهاز المستلم غير متصل.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "مطالبة كلمة مرور لفتح نتريم ؟",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "إعادة إرسال هذه المذكرة",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "إعادة تعيين قاعدة البيانات",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "هل تريد بالتأكيد إعادة تعيين قاعدة البيانات الداخلية؟ \n\nقد يؤدي ذلك إلى إصلاح المشكلات المتعلقة بتحديث التطبيق، ولكنه سيؤدي أيضًا إلى حذف جميع التفضيلات المحفوظة. لن يؤدي هذا إلى حذف بذور محفظتك. إذا كنت تواجه مشكلات، فيجب عليك الاحتفاظ بنسخة احتياطية من البذور الخاصة بك، وإعادة تثبيت التطبيق، وإذا استمرت المشكلة، فلا تتردد في إنشاء تقرير خطأ على github أو discord.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "إعادة المحاولة",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "يبدو أن جهازك \"rooted\" أو \"jailbroken\" أو تم تعديله بطريقة تعرض الأمان للخطر. يرجى إعادة ضبط جهازك إلى حالته الأصلية قبل المتابعة.\n",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "مسح \nعنوان رمز الاستجابة السريعة",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "مسح \nعنوان رمز الاستجابة السريعة",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "مسح رمز الاستجابة السريعة",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "ابحث عن أي شيء",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "في الشاشة التالية ، سترى العبارة السرية الخاصة بك. إنها كلمة مرور للوصول إلى أموالك. من الأهمية أن تقوم بنسخه احتياطيًا وأن لا تشاركه أبدًا مع أي شخص.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "السلامة اولا!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "العبارة السرية",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "تم نسخ العبارة السرية",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "نسخ العبارة السرية",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "إذا فقدت جهازك أو قمت بحذف التطبيق ، فستحتاج إلى عباراتك السرية أو بمفتاح سري لاسترداد أموالك!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "تأمين",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "مفتاح خاص",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "مفتاحك الخاص يوجد أسفله. يجب حفظ نسخةٌ منه في مكان أمن.  لا للقطة الشاشة أو لنص في الهاتف.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "تم نسخ المفتاح الخاص\n لمدة دقيقتين",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "تم النسخ المفتاح الخاص",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "المفتاح خاص يحتمل عل معلومات مطابقة للعبرة سارية. طالما لديك نسخة احتياطية من واحدة منها ، سيكون لديك وسيلة للحفاظ على أموالك.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "مفتاح خاص غير صحيح",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "لا يمكن الطلب من الذات",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "إرسال",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "أرسل %1 NANO",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "أرسل %1 BANANO",
+  "@sendAmountConfirmKal": {},
+  "sendError": "يوجد خطأ. حاول لاحقاً.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "أرسل من",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "إرسال",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "فشل إرسال مذكرة مع المعاملة، قد لا يكون مستخدم Nautilus.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "إرسال رسالة",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "إرسال الطلب مرة أخرى",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "أرسل أو اطلب دفعة، مع الرسائل المشفرة من النهاية إلى النهاية!\n\nلن يتم قبول طلبات الدفع والمذكرات والرسائل إلا من قبل مستخدمي nautilus الآخرين.\n\nلا تحتاج إلى اسم مستخدم لإرسال أو استقبال طلبات الدفع، ويمكنك استخدامها لحفظ السجلات الخاصة بك حتى لو لم تستخدم nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "إرسال معلومات الورقة",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "تم الارسال",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "تم الإرسال إلى",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "إنشاء كلمة مرور\n",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "تم إنشاء كلمة مرور المحفظة بنجاح\n",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "الإعدادات",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "تحميل من المحفظة الورقية",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "إنشاء كلمة مرور المحفظة\n",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "نشر كاليوم",
+  "@shareKalium": {},
+  "shareKaliumText": "ألق نظرة على كاليوم !محفظة بننو !",
+  "@shareKaliumText": {},
+  "shareLink": "مشاركة الرابط",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "شارك نتريوم",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "راجع نتريوم! محفظة نتريوم الرسمية للهاتف",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "إظهار جهات الاتصال",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "البسيط",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "دعم المطور",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "التبديل إلى المفتاح الخاص",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "النظام الافتراضي",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "إضغط للاخفاء",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "اضغط للكشف",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "مظهر",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "إلى",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "العديد من محاولات الفتح الفاشلة.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "معاملات",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "تحويل",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "اضغط في أي مكان لغلق النافذة.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "تم تحويل %1 NANO إلى محفظة نتريوم.\n",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "تم تحويل %1 BANANO إلى محفظة كاليوم.\n",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "تم كشف محفظة برصيد %1 NANO.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "تم كشف محفظة برصيد %1 BANANO.\n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "إضغط لتأكيد تحويل الرصيد.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "قد يستغرق النقل عدة ثوانيٍ.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "لقد حدث خطأ أثناء النقل. الرجاء إعادة المحاولة في وقت لاحق.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "تحويل الرصيد",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "ستقوم هذه العملية بتحويل الرصيد من المحفظة الورقية إلى محفظة نتريوم الخاصة بك. \n\n اضغط على الزر \"%1\" للبدء.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "ستقوم هذه العملية بتحويل الرصيد من المحفظة الورقية إلى محفظة كاليوم الخاصة بك. \n\n اضغط على الزر \"%1\" للبدء.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "ستحول هذه العملية الأموال من محفظة ورقية إلى محفظة Nautilus الخاصة بك.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "بصدد التحويل",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "الرجاء إدخال المفتاح الخاص.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "هذا المفتاح الخاص لا يحتوي على NANO",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "هذا المفتاح الخاص لا يحتوي على BANANO",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "لا يحتوي رمز الاستجابة السريعة على مفتاح خاص صحيح.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "مسح\n المفتاح الخاص",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "مسح\n المفتاح الخاص",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "غير معترف به",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "غير معزز",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "لم تتحقق",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "فتح",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "مصادقة لفتح نتريوم",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "مصادقة لفتح كاليوم",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "أدخل الPIN لفتح نتريوم",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "أدخل الPIN لفتح كاليوم",
+  "@unlockPinKal": {},
+  "unpaid": "غير مدفوع",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "غير مقروء",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "مدة التشغيل",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "لديك بالفعل اسم مستخدم مسجل! ليس من الممكن حاليًا تغيير اسم المستخدم الخاص بك، ولكن لك مطلق الحرية في تسجيل اسم مستخدم جديد تحت عنوان مختلف.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "اسم المستخدم متاح!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "الرجاء إدخال اسم مستخدم",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "خطأ اسم المستخدم",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "اختر @username فريدًا ليسهل على الأصدقاء والعائلة العثور عليك!\n\nيؤدي وجود اسم مستخدم Nautilus إلى تحديث واجهة المستخدم عالميًا لتعكس مقبضك الجديد.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "اسم مستخدم صالح",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "اسم المستخدم",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "أسماء مستخدمي Nautilus هي خدمة مركزية تقدمها Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "لم يتم العثور على المستخدم!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "عرض التفاصيل",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "وزن التصويت",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "تحذير",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "أهلا بك في نتريوم. لتبدأ، إحدث محفظة أو إجلب محفظة موجودة.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "أهلا بك في كاليوم. لتبدأ، إحدث محفظة أو إجلب محفظة موجودة.",
+  "@welcomeTextKal": {},
+  "withAddress": "مع العنوان",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "مع رسالة",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "بعد %1 دقيقة",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "بعد %1 دقائق",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "نعم",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "نعم",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

@@ -1,187 +1,1951 @@
 {
-  "cancel": "Prekliči",
-  "close": "Zapri",
-  "confirm": "Potrdi",
-  "no": "Ne",
-  "yes": "Da",
-  "onStr": "Vklopi",
-  "off": "Izklopi",
-  "send": "Pošlji",
-  "receive": "Prejmi",
-  "sent": "Poslano",
-  "received": "Prejeto",
-  "transactions": "Transakcije",
-  "addressCopied": "Naslov skopiran",
-  "copyAddress": "Kopiraj naslov",
-  "addressShare": "Deli naslov",
-  "seed": "Zasebni ključ",
-  "seedInvalid": "Zasebni ključ je neveljaven",
-  "seedCopied": "Zasebni ključ skopiran\nMožno prilepiti v 2 minutah.",
-  "scanQrCode": "Zajemi QR kodo",
-  "contactsImportErr": "Ni možno uvoziti stikov",
-  "viewDetails": "Podrobnosti",
-  "qrInvalidSeed": "QR koda ne vsebuje veljavnega zasebnega ključa",
-  "removeContact": "Odstrani stik",
-  "removeContactConfirmation": "Ste prepričani, da hočete izbrisati %1?",
-  "contactHeader": "Stik",
-  "contactsHeader": "Stiki",
-  "addContact": "Dodaj stik",
-  "contactNameHint": "Vnesite ime @",
-  "contactInvalid": "Neveljavno ime",
-  "noContactsExport": "Ni stikov za izvoz.",
-  "noContactsImport": "Ni novih stikov za uvoz.",
-  "contactsImportSuccess": "Uspešen uvoz %1 stikov.",
-  "contactAdded": "%1 dodan stikom.",
-  "contactRemoved": "%1 je bil odstranjen iz stikov!",
-  "contactNameMissing": "Izberite ime za ta stik",
-  "contactExists": "Stik že obstaja",
-  "backupYourSeed": "Shrani zasebni ključ",
-  "backupSeedConfirm": "Ste prepričani, da ste shranili zasebni ključ?",
-  "seedBackupInfo": "Spodaj je prikazan zasebni ključ denarnice. Obvezno ga shranite, vendar nikoli v navadni tekstovni obliki ali s posnetkom zaslona.",
-  "copySeed": "Kopiraj ključ",
-  "seedCopiedShort": "Ključ skopiran",
-  "importSeed": "Uvozi ključ",
-  "importSeedHint": "Spodaj vnesite ključ.",
-  "welcomeText": "Dobrodošli v Nautilus. Za začetek ustvarite novo denarnico ali uvozite že obstoječo.",
-  "newWallet": "Nova denarnica",
-  "importWallet": "Uvozi denarnico",
-  "sentTo": "Poslano",
-  "sending": "Pošiljam",
-  "to": "Na",
-  "sendAmountConfirm": "Pošlji %1 NANO",
-  "sendError": "Napaka. Poskusite kasneje.",
-  "enterAmount": "Vnesite znesek",
-  "enterAddress": "Vnesite naslov",
-  "invalidAddress": "Naslov je neveljaven",
-  "addressMissing": "Prosim vnesite naslov",
-  "amountMissing": "Prosim vnesite znesek",
-  "insufficientBalance": "Premalo na računu",
-  "sendFrom": "Pošlji iz",
-  "pinCreateTitle": "Ustvari 6-mestni PIN",
-  "pinConfirmTitle": "Potrdi PIN",
-  "pinEnterTitle": "Vnesite PIN",
-  "pinConfirmError": "PIN se ne ujema",
-  "pinInvalid": "Neveljaven PIN",
-  "themeHeader": "Tema",
-  "changeRepButton": "Zamenjaj",
-  "changeRepAuthenticate": "Zamenjaj predstavnika",
-  "currentlyRepresented": "Trenutni predstavnik",
-  "changeRepSucces": "Predstavnik uspešno zamenjan",
-  "repInfoHeader": "Kaj je predstavnik?",
-  "repInfo": "Predstavnik je račun, ki glasuje za konsenz omrežja. Moč glasovanja je odvisna od zneska na računu, kateremu lahko prispevate svoj znesek za povečanje teže. Vaš predstavnik ne more upravljati z vašim zneskom. Izberite predstavnika, ki je prisoten večino časa in je zaupanja vreden.",
-  "pinRepChange": "Vnesite PIN za spremembo predstavnika.",
-  "changeRepHint": "Vnesite novega predstavnika",
-  "representatives": "Predstavniki",
-  "pickFromList": "Izberi iz seznama",
-  "votingWeight": "teža glasovanja",
-  "uptime": "prisotnost",
-  "authMethod": "Način avtentikacije",
-  "pinMethod": "PIN",
-  "privacyPolicy": "Zasebnost",
-  "biometricsMethod": "Prstni odtis",
-  "changeCurrency": "Spremeni valuto",
-  "language": "Jezik",
-  "shareNautilus": "Deli Nautilus",
-  "shareNautilusText": "Preveri Nautilus! Uradna mobilna Nano denarnica!",
-  "logout": "Odjava",
-  "warning": "Opozorilo",
-  "logoutDetail": "Odjava bo izbrisala zasebni ključ in vse podatke v povezavi z aplikacijo Nautilus. Če zasebnega ključa niste shranili, ne boste imeli več dostopa do vašega računa.",
-  "logoutAction": "Izbriši ključ in odjava",
-  "logoutAreYouSure": "Ste prepričani?",
-  "logoutReassurance": "Dokler imate shranjen zasebni ključ, ste lahko brez skrbi.",
-  "settingsHeader": "Nastavitve",
-  "preferences": "Splošno",
-  "manage": "Upravljaj",
-  "backupSeed": "Shrani ključ",
-  "fingerprintSeedBackup": "Avtenticiraj za shranitev ključa.",
-  "pinSeedBackup": "Vnesite PIN za shranitev ključa",
-  "systemDefault": "Sistemski",
-  "notifications": "Opozorila",
-  "notificationTitle": "Prejeto %1 NANO",
-  "notificationBody": "Odpri Nautilus za ogled transakcije",
-  "notificationHeaderSupplement": "Dotik za ogled",
-  "settingsTransfer": "Naloži iz papirnate denarnice",
-  "transferError": "Napaka med prenosom. Poskusite kasneje.",
-  "paperWallet": "Papirna denarnica",
-  "kaliumWallet": "Nautilus denarnica",
-  "manualEntry": "Ročni vnos",
-  "mnemonicPhrase": "Besedna fraza",
-  "rawSeed": "Surov ključ",
-  "transferHeader": "Prenesi znesek",
-  "transfer": "Prenesi",
-  "transferManualHint": "Spodaj vnesite ključ.",
-  "transferIntro": "Postopek bo prenesel znesek iz papirnate denarnice v vašo Nautilus denarnico.\n\nPritisnite \"%1\" gumb za začetek.",
-  "transferQrScanHint": "Zajemi Nano \nključ",
-  "transferQrScanError": "QR koda ne vsebuje veljavnega ključa.",
-  "transferNoFunds": "Ključ ne vsebuje nobenega NANO zneska.",
-  "transferConfirmInfo": "Denarnica z zneskom %1 NANO je bila zaznana.\n",
-  "transferConfirmInfoSecond": "Pritisni za prenos zneska.\n",
-  "transferConfirmInfoThird": "Prenos lahko traja nekaj sekund.",
-  "transferLoading": "Prenašam",
-  "transferComplete": "%1 NANO uspešno prenešenih v vašo Nautilus denarnico.\n",
-  "transferClose": "Pritisni kjerkoli za izhod.",
-  "scanInstructions": "Zajemi Nano \nnaslov QR kodo",
-  "unlockPin": "Vnesite PIN za odklep Nautilus",
-  "unlockBiometrics": "Avtenticiraj za odklep Nautilus",
-  "lockAppSetting": "Avtenticiraj ob zagonu",
-  "locked": "Zaklenjeno",
-  "unlock": "Odkleni",
-  "tooManyFailedAttempts": "Preveč neuspešnih poizkusov.",
-  "securityHeader": "Varnost",
-  "autoLockHeader": "Samodejno zakleni",
-  "xMinutes": "Po %1 minutah",
-  "xMinute": "Po %1 minuti",
-  "instantly": "Takoj",
-  "exampleCardIntro": "Dobrodošli v Nautilus. Ko boste prejeli NANO, bodo transakcije prikazane takole:",
-  "exampleCardLittle": "nekaj",
-  "exampleCardLot": "več",
-  "exampleCardTo": "nekomu",
-  "exampleCardFrom": "od nekoga",
-  "defaultAccountName": "Glavni račun",
-  "defaultNewAccountName": "Račun %1",
-  "newAccountIntro": "To je vaš nov račun. Ko boste prejeli NANO, bodo transakcije prikazane takole:",
+  "@@locale": "sl",
   "account": "Račun",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Računi",
-  "addAccount": "Dodaj račun",
-  "hideAccountHeader": "Skrij račun?",
-  "removeAccountText": "Ste prepričani, da hočete skriti ta račun? Lahko ga ponovno dodate kasneje s pritiskom na gumb \"%1\"",
-  "tapToReveal": "Pritisnite za ogled",
-  "tapToHide": "Pritisnite za skrivanje",
-  "copied": "Skopirano",
-  "copy": "Kopiraj",
-  "seedDescription": "Zasebni ključ vsebuje iste informacije kot skrivni niz, vendar v obliki, ki ga lahko bere naprava. Dokler imate vsaj enega od njiju varno shranjenega, boste imeli dostop do vašega računa.",
-  "importSecretPhrase": "Uvozi skrivni niz",
-  "importSecretPhraseHint": "Spodaj vnesite vaš skrivni 24-besedni niz. Vsaka beseda naj bo ločena s presledkom.",
-  "qrMnemonicError": "QR koda ne vsebuje veljavnega skrivnega niza",
-  "mnemonicInvalidWord": "%1 ni veljavna beseda",
-  "mnemonicSizeError": "Skrivni niz lahko vsebuje samo 24 besed",
-  "secretPhrase": "Skrivni niz",
-  "backupConfirmButton": "Varno shranjeno",
-  "secretInfoHeader": "Najprej varnost!",
-  "secretInfo": "Na naslednjem zaslonu boste videli vaš skrivni niz. Ta niz je geslo za dostop do vašega računa. Nujno je, da ga varno shranite in ne delite z nikomur.",
-  "secretWarning": "Če izgubite napravo ali odstranite aplikacijo, boste potrebovali vaš skrivni niz ali zasebni ključ za ponoven dostop do računa!",
-  "gotItButton": "Razumem!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "Ste prepričani, da ste varno shranili vaš skrivni niz ali zasebni ključ?",
-  "secretPhraseCopy": "Kopiraj skrivni niz",
-  "secretPhraseCopied": "Skrivni niz skopiran",
-  "import": "Uvozi",
-  "importSeedInstead": "Uvozi zasebni ključ",
-  "switchToSeed": "Preklopi na zasebni ključ",
-  "welcomeTextKal": "Dobrodošli v Kalium. Za začetek ustvarite novo denarnico ali uvozite že obstoječo.",
-  "sendAmountConfirmKal": "Pošlji %1 BANANO",
-  "logoutDetailKal": "Odjava bo izbrisala zasebni ključ in vse podatke v povezavi z aplikacijo Kalium. Če zasebnega ključa niste shranili, ne boste imeli več dostopa do vašega računa.",
-  "notificationTitleKal": "Prejeto %1 BANANO",
-  "notificationBodyKal": "Odpri Kalium za ogled transakcije",
-  "transferIntroKal": "Postopek bo prenesel znesek iz papirnate denarnice v vašo Kalium denarnico.\n\nPritisnite \"%1\" gumb za začetek.",
-  "transferQrScanHintKal": "Zajemi Banano \nključ",
-  "transferNoFundsKal": "Ključ ne vsebuje nobenega BANANO zneska.",
-  "transferConfirmInfoKal": "Denarnica z zneskom %1 BANANO je bila zaznana.\n",
-  "transferCompleteKal": "%1 BANANO uspešno prenešenih v vašo Kalium denarnico.\n",
-  "scanInstructionsKal": "Zajemi Banano \nnaslov QR kodo",
-  "unlockPinKal": "Vnesite PIN za odklep Kalium",
-  "unlockBiometricsKal": "Avtenticiraj za odklep Kalium",
-  "exampleCardIntroKal": "Dobrodošli v Kalium. Ko boste prejeli BANANO, bodo transakcije prikazane takole:",
-  "exampleCardToKal": "naključni opici",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
+  "activeMessageHeader": "Aktivno sporočilo",
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Dodaj račun",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Blokiraj uporabnika",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Dodaj stik",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Dodaj Favorite",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Naslov skopiran",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Vnesite naslov",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Prosim vnesite naslov",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Vnesite uporabniško ime ali naslov",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Deli naslov",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Vzdevki",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Prosim vnesite znesek",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Na vprašanje",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Način avtentikacije",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Samodejni uvoz",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Samodejno zakleni",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Varno shranjeno",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Backup Secret Phrase",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Shrani ključ",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Ste prepričani, da ste shranili zasebni ključ?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Shrani zasebni ključ",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Prstni odtis",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "% 1 uspešno blokiran.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "Uporabnik je že blokiran!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "Blokiran",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Blokirajte uporabnika po katerem koli znanem vzdevku ali naslovu. Vsa sporočila, transakcije ali zahteve od njih bodo prezrte.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Blokirane informacije",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Ime Nick že uporablja!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Izberite Nick Nick Name",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "% 1 je bil odblokiran!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Blok Explorer",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Blok Explorer Informacije",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Kateri raziskovalec blokov uporabiti za prikaz informacij o transakcijah",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Blokiraj tega uporabnika",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Prekliči",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Spremeni valuto",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Spremeni dnevnik",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Zamenjaj predstavnika",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Zamenjaj",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Vnesite novega predstavnika",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "To je že vaš predstavnik!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Predstavnik uspešno zamenjan",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Preverite razpoložljivost",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Zapri",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Potrdi",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Confirm the password",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Connecting",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 dodan stikom.",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Stik že obstaja",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Stik",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Neveljavno ime",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Vnesite ime @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Izberite ime za ta stik",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 je bil odstranjen iz stikov!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Stiki",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Ni možno uvoziti stikov",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "Uspešen uvoz %1 stikov.",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Skopirano",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Kopiraj",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Kopiraj naslov",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Kopiraj povezavo",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Kopiraj ključ",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Kopirajte naslov denarnice v odložišče",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Create a password.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Ustvarite darilno kartico",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Ustvarite darilno kartico",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "You can create a password to add additional security to your wallet.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Create a password",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Password is optional, and your wallet will be protected with your PIN or biometrics regardless.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Ustvari",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Ustvarite QR kodo",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Ustvarjanje darilne kartice",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Valuta",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Valutni način",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Informacije o valutnem načinu",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Izberite, v kateri enoti želite prikazati zneske.\n1 nyano = 0,000001 NANO, ali \n1.000.000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Trenutni predstavnik",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Napaka dešifriranja!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Glavni račun",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Račun %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Izbriši",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Disable",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Password has been disabled",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Disable Wallet Password",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Zavrni",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Neveljavno ime domene",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Uredi",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Failed to set a wallet password",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Vnesite naslov",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Vnesite znesek",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Vnesite darilno opombo",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Vnesite sporočilo",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Enter your password",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Vnesite uporabniško ime",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Vnesite uporabnika ali naslov",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "od nekoga",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
   "exampleCardFromKal": "od naključne opice",
-  "newAccountIntroKal": "To je vaš nov račun. Ko boste prejeli BANANO, bodo transakcije prikazane takole:"
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Dobrodošli v Nautilus. Ko boste prejeli NANO, bodo transakcije prikazane takole:",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Dobrodošli v Kalium. Ko boste prejeli BANANO, bodo transakcije prikazane takole:",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "nekaj",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "več",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "nekomu",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "naključni opici",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Ko pošljete ali prejmete zahtevo za plačilo, se bodo tukaj prikazali takole z barvo in oznako kartice, ki označujeta stanje. \n\nZelena označuje, da je bila zahteva plačana.\nRumena označuje zahteva/beležka ni bila plačana/branje.\nRdeča označuje, da zahteva ni bila prebrana ali prejeta.\n\n Nevtralne barvne kartice brez zneska so le sporočila.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Nekateri",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Suši",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Ko pošljete ali prejmete zahtevo za plačilo, se bodo prikazali tukaj:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hej, kaj se dogaja?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "Veliko",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Najemnina",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "Srečen rojstni dan!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Plinski denar",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Exit",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "neuspelo",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus Odklopljen",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Zdi se, da so strežniki Nautilus prekinjeni. Pošiljanje in prejemanje (brez beležk) bi moralo biti še vedno operativno, vendar zahtevki za plačilo\n\n Vrnite se pozneje ali znova zaženite aplikacijo, da poskusite znova",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Najljubši že obstaja",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Najljubši",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Neveljavno priljubljeno ime",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Vnesite Nick Nick Name",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Izberite ime za to najljubšo",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "% 1 je bil odstranjen iz priljubljenih!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "Priljubljene",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Predstavljen",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Avtenticiraj za shranitev ključa.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "Od",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "izpolnjeno",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "Imate darilo!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Prazno darilo",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Znesek darila",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Darilo Od",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Naložite digitalno darilno kartico z NANO! Nastavite znesek in izbirno sporočilo, da bo prejemnik videl, kdaj ga odpre!\n\nKo ustvarite, boste dobili povezavo, ki jo lahko pošljete vsakomur, ki bo ob odprtju samodejno razdelila sredstva prejemniku po namestitvi Nautilusa!\n\nČe je prejemnik že uporabnik Nautilusa, bo ob odprtju povezave dobil poziv za prenos sredstev na svoj račun",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Darilno sporočilo",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Go Back",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Razumem!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Pojdi na QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Skrij",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Skrij račun?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Domov",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Ignoriraj",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Uvozi",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "Povezava, ki ste jo kliknili, vsebuje nekaj nano, jo želite uvoziti v to denarnico ali vrniti tistemu, ki jo je poslal?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Uvozi skrivni niz",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Spodaj vnesite vaš skrivni 24-besedni niz. Vsaka beseda naj bo ločena s presledkom.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Uvozi ključ",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Spodaj vnesite ključ.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Uvozi zasebni ključ",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Uvozi denarnico",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Takoj",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Premalo na računu",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Naslov je neveljaven",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Invalid Password",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "I Understand the Risks",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Nautilus denarnica",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Jezik",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Povezava Kopirana",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Support",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Naložen",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Naložen v",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Avtenticiraj ob zagonu",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Zaklenjeno",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Odjava",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Izbriši ključ in odjava",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Ste prepričani?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Odjava bo izbrisala zasebni ključ in vse podatke v povezavi z aplikacijo Nautilus. Če zasebnega ključa niste shranili, ne boste imeli več dostopa do vašega računa.",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Odjava bo izbrisala zasebni ključ in vse podatke v povezavi z aplikacijo Kalium. Če zasebnega ključa niste shranili, ne boste imeli več dostopa do vašega računa.",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Dokler imate shranjen zasebni ključ, ste lahko brez skrbi.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Upravljaj",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Couldn't Verify Request",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Ročni vnos",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Označi kot plačano",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Označi kot neplačano",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Memo ponovno poslana! Če še vedno ni potrjena, je naprava prejemnika morda brez povezave.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Sporočilo",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Minimalni znesek za pošiljanje je% 1% 2",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 ni veljavna beseda",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Besedna fraza",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "Skrivni niz lahko vsebuje samo 24 besed",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Ta funkcija zahteva daljšo zgodovino transakcij, da preprečite neželeno pošto.\n\nLahko pa prikažete tudi QR kodo, ki jo lahko nekdo skenira.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Potrebno preverjanje",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "To je vaš nov račun. Ko boste prejeli NANO, bodo transakcije prikazane takole:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "To je vaš nov račun. Ko boste prejeli BANANO, bodo transakcije prikazane takole:",
+  "@newAccountIntroKal": {},
+  "newWallet": "Nova denarnica",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Next",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Ne",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Ni stikov za izvoz.",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "Ni novih stikov za uvoz.",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Stanje vozlišča",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Ni rezultatov iskanja!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "No, Skip",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Odpri Nautilus za ogled transakcije",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Odpri Kalium za ogled transakcije",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Dotik za ogled",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "Da bi ta funkcija delovala pravilno, morajo biti omogočena obvestila",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Opozorila",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "Prejeto %1 NANO",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "Prejeto %1 BANANO",
+  "@notificationTitleKal": {},
+  "notSent": "ni poslano",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Izklopi",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Ok",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Onramp",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "Vklopi",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Odprto",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "plačan",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Papirna denarnica",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Password cannot be empty",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Nautilus anymore.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Passwords do not match",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "This password will be required to open Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Plačajte",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Nekdo je od vas zahteval plačilo! preverite stran za plačila za več informacij.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Plačila",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Plačajte to zahtevo",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "",
+  "@pending": {},
+  "pickFromList": "Izberi iz seznama",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "PIN se ne ujema",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Potrdi PIN",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Ustvari 6-mestni PIN",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Vnesite PIN",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Neveljaven PIN",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Vnesite PIN za spremembo predstavnika.",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Vnesite PIN za shranitev ključa",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Splošno",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Zasebnost",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Nakup Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "QR code does not contain a valid destination",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Please Grant Camera Permissions to scan QR Codes",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "QR koda ne vsebuje veljavnega zasebnega ključa",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "QR koda ne vsebuje veljavnega skrivnega niza",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Could not Read QR Code",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Ocenite aplikacijo",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn't take more than a minute.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Surov ključ",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Preberi več",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "terjatev",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Prejmi",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Prejeto",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Prejemanje minimalnega",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Prejemanje minimalnih informacij",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Minimalni znesek za prejemanje. Če prejmete plačilo ali zahtevo z zneskom, manjšim od tega, bo to prezrto.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "Vračilo",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "za",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Registracija",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Registrirajte uporabniško ime",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Registrirajte uporabniško ime",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Ste prepričani, da hočete skriti ta račun? Lahko ga ponovno dodate kasneje s pritiskom na gumb \"%1\"",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Odblokiraj",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Ali ste prepričani, da želite odblokirati odblokiranje% 1?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Odstrani stik",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Ste prepričani, da hočete izbrisati %1?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Odstrani najljubše",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "Predstavnik je račun, ki glasuje za konsenz omrežja. Moč glasovanja je odvisna od zneska na računu, kateremu lahko prispevate svoj znesek za povečanje teže. Vaš predstavnik ne more upravljati z vašim zneskom. Izberite predstavnika, ki je prisoten večino časa in je zaupanja vreden.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Kaj je predstavnik?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Odgovori",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Predstavniki",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Zahteva",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Zahtevite% 1% 2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Zahtevano",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Zahtevano od",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Zahteva ni uspela: Zdi se, da ta uporabnik nima nameščenega Nautilusa ali da so obvestila onemogočena.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Zahteva",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Zahtevajte plačilo",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Napaka pri pošiljanju zahteve za plačilo, prejemnikova naprava je morda brez povezave ali ni na voljo.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Zahteva ponovno poslana! Če še vedno ni potrjena, je naprava prejemnika morda brez povezave.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Require a password to open Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Ponovno pošljite to beležko",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Ponastavite zbirko podatkov",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Ali ste prepričani, da želite ponastaviti notranjo bazo podatkov? \n\nTo lahko odpravi težave, povezane s posodabljanjem aplikacije, izbriše pa tudi vse shranjene nastavitve. To NE bo izbrisalo semena denarnice. Če imate težave, morate varnostno kopirati seme, znova namestiti aplikacijo in če težava še vedno obstaja, vas prosimo, da pripravite poročilo o napaki o githubu ali nesoglasju.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Poskusite znova",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Zajemi Nano \nnaslov QR kodo",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Zajemi Banano \nnaslov QR kodo",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Zajemi QR kodo",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Poiščite karkoli",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "Na naslednjem zaslonu boste videli vaš skrivni niz. Ta niz je geslo za dostop do vašega računa. Nujno je, da ga varno shranite in ne delite z nikomur.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Najprej varnost!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Skrivni niz",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Skrivni niz skopiran",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Kopiraj skrivni niz",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Če izgubite napravo ali odstranite aplikacijo, boste potrebovali vaš skrivni niz ali zasebni ključ za ponoven dostop do računa!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Varnost",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Zasebni ključ",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Spodaj je prikazan zasebni ključ denarnice. Obvezno ga shranite, vendar nikoli v navadni tekstovni obliki ali s posnetkom zaslona.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Zasebni ključ skopiran\nMožno prilepiti v 2 minutah.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Ključ skopiran",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Zasebni ključ vsebuje iste informacije kot skrivni niz, vendar v obliki, ki ga lahko bere naprava. Dokler imate vsaj enega od njiju varno shranjenega, boste imeli dostop do vašega računa.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Zasebni ključ je neveljaven",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Ne morem zahtevati od sebe",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Pošlji",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Pošlji %1 NANO",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Pošlji %1 BANANO",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Napaka. Poskusite kasneje.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Pošlji iz",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Pošiljam",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Pošiljanje beležke s transakcijo ni uspelo, morda niso uporabnik Nautilusa.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Pošiljanje sporočila",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Ponovno pošlji zahtevo",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Pošljite ali zahtevajte plačilo s šifriranimi sporočili od konca do konca!\n\nZahteve za plačilo, beležke in sporočila bodo terjali samo drugi uporabniki Nautilusa.\n\nZa pošiljanje ali prejemanje zahtevkov za plačilo vam ni treba imeti uporabniškega imena in jih lahko uporabite za lastno vodenje evidenc, tudi če ne uporabljajo nautilusa.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Pošlji informacije o listu",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Poslano",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Poslano",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Set Password",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Password has been set successfully",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Nastavitve",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Naloži iz papirnate denarnice",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Set Wallet Password",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "",
+  "@shareKalium": {},
+  "shareKaliumText": "",
+  "@shareKaliumText": {},
+  "shareLink": "Delite povezavo",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Deli Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Preveri Nautilus! Uradna mobilna Nano denarnica!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Pokaži stike",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simpleks",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Podpora razvijalcu",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Preklopi na zasebni ključ",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Sistemski",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Pritisnite za skrivanje",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Pritisnite za ogled",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Tema",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "Na",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Preveč neuspešnih poizkusov.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Transakcije",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Prenesi",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Pritisni kjerkoli za izhod.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 NANO uspešno prenešenih v vašo Nautilus denarnico.\n",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 BANANO uspešno prenešenih v vašo Kalium denarnico.\n",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "Denarnica z zneskom %1 NANO je bila zaznana.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "Denarnica z zneskom %1 BANANO je bila zaznana.\n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Pritisni za prenos zneska.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Prenos lahko traja nekaj sekund.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "Napaka med prenosom. Poskusite kasneje.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Prenesi znesek",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Postopek bo prenesel znesek iz papirnate denarnice v vašo Nautilus denarnico.\n\nPritisnite \"%1\" gumb za začetek.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Postopek bo prenesel znesek iz papirnate denarnice v vašo Kalium denarnico.\n\nPritisnite \"%1\" gumb za začetek.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Ta postopek bo prenesel sredstva iz papirnate denarnice v vašo Nautilus denarnico.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Prenašam",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Spodaj vnesite ključ.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "Ključ ne vsebuje nobenega NANO zneska.",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "Ključ ne vsebuje nobenega BANANO zneska.",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "QR koda ne vsebuje veljavnega ključa.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Zajemi Nano \nključ",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Zajemi Banano \nključ",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "nepriznano",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "nepotrjeno",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "neizpolnjena",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Odkleni",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Avtenticiraj za odklep Nautilus",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Avtenticiraj za odklep Kalium",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Vnesite PIN za odklep Nautilus",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Vnesite PIN za odklep Kalium",
+  "@unlockPinKal": {},
+  "unpaid": "neplačana",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "neprebrano",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "prisotnost",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "Že imate registrirano uporabniško ime! Trenutno ni mogoče spremeniti uporabniškega imena, vendar lahko registrirate novega pod drugim naslovom.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Uporabniško ime na voljo!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Prosimo, vnesite uporabniško ime",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Napaka uporabniškega imena",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Izberite edinstveno @username, da bi bilo enostavno za prijatelje in družino, da vas najdejo!\n\nUporabniško ime Nautilus globalno posodobi uporabniški vmesnik, da odraža vaš novi ročaj.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Neveljavno uporabniško ime",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Uporabniško ime na voljo",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Uporabniška imena Nautilus so centralizirana storitev, ki jo ponuja Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "Uporabnik ni bilo mogoče najti!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Podrobnosti",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "teža glasovanja",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "Opozorilo",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Dobrodošli v Nautilus. Za začetek ustvarite novo denarnico ali uvozite že obstoječo.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Dobrodošli v Kalium. Za začetek ustvarite novo denarnico ali uvozite že obstoječo.",
+  "@welcomeTextKal": {},
+  "withAddress": "Z naslovom",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "S sporočilom",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "Po %1 minuti",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "Po %1 minutah",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Da",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Yes",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

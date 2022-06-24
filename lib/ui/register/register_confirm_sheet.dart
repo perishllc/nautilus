@@ -54,7 +54,6 @@ class RegisterConfirmSheet extends StatefulWidget {
 }
 
 class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
-  String? destinationAltered;
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
@@ -78,16 +77,6 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
     super.initState();
     _registerBus();
     this.animationOpen = false;
-    // Derive amount from raw amount
-    // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
-    //   amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
-    // } else {
-    //   amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(widget.amountRaw), digits: 6).toStringAsFixed(6) + "~";
-    // }
-    // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
-    // amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
-    // Ensure nano_ prefix on destination
-    destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
 
   @override
@@ -109,7 +98,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
           children: <Widget>[
             // Sheet handle
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               height: 5,
               width: MediaQuery.of(context).size.width * 0.15,
               decoration: BoxDecoration(
@@ -124,7 +113,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                 children: <Widget>[
                   // "REGISTERING" TEXT
                   Container(
-                    margin: EdgeInsets.only(bottom: 10.0),
+                    margin: const EdgeInsets.only(bottom: 10.0),
                     child: Column(
                       children: <Widget>[
                         Text(
@@ -136,18 +125,18 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                   ),
                   // Address text
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                       margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!, contactName: "@" + widget.username!)),
+                      child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!, contactName: "@${widget.username!}")),
 
                   // "FOR" text
                   Container(
-                    margin: EdgeInsets.only(top: 30.0, bottom: 10),
+                    margin: const EdgeInsets.only(top: 30.0, bottom: 10),
                     child: Column(
                       children: <Widget>[
                         Text(
@@ -160,7 +149,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                   // Container for the amount text
                   Container(
                     margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: StateContainer.of(context).curTheme.backgroundDarkest,
@@ -170,34 +159,24 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        text: widget.leaseDuration! + " : ",
+                        text: "${widget.leaseDuration!} : ",
                         children: [
-                          displayCurrencyAmount(
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                            style: AppStyles.textStyleAddressPrimary(context),
+                          ),
+                          displayCurrencySymbol(
                             context,
-                            TextStyle(
-                              color: StateContainer.of(context).curTheme.primary,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                              decoration: TextDecoration.lineThrough,
-                            ),
+                            AppStyles.textStyleAddressPrimary(context),
                           ),
                           TextSpan(
-                            text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, widget.amountRaw),
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                            ),
+                            text: getRawAsThemeAwareAmount(context, widget.amountRaw),
+                            style: AppStyles.textStyleAddressPrimary(context),
                           ),
                           TextSpan(
                             text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
-                            style: TextStyle(
+                            style: AppStyles.textStyleAddressPrimary(context).copyWith(
                               color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
                             ),
                           ),
                         ],
@@ -220,11 +199,11 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                           context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         // Authenticate
-                        AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                        bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                        final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                        final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                         if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                           try {
-                            bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
+                            final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
                                 context,
                                 AppLocalization.of(context)!
                                     .sendAmountConfirm
@@ -263,11 +242,11 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
   Future<void> _doSend() async {
     try {
       _showSendingAnimation(context);
-      ProcessResponse resp = await sl.get<AccountService>().requestSend(
+      final ProcessResponse resp = await sl.get<AccountService>().requestSend(
           StateContainer.of(context).wallet!.representative,
           StateContainer.of(context).wallet!.frontier,
           widget.amountRaw,
-          destinationAltered,
+          widget.destination,
           StateContainer.of(context).wallet!.address,
           NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
           max: widget.maxSend);
@@ -279,13 +258,13 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
 
       bool success = false;
       // store the current time:
-      DateTime now = DateTime.now();
+      final DateTime now = DateTime.now();
 
       // try until successful or timeout:
       while (success == false) {
         print("checking url: ${widget.checkUrl}");
         try {
-          Map? resp = await (sl.get<AccountService>().checkUsernameUrl(widget.checkUrl!) as FutureOr<Map<dynamic, dynamic>?>);
+          final Map? resp = await (sl.get<AccountService>().checkUsernameUrl(widget.checkUrl!) as FutureOr<Map<dynamic, dynamic>?>);
           if (resp != null && resp["completed"] == true) {
             success = true;
           } else {
@@ -295,16 +274,16 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
               success = true;
             }
           }
-        } catch (e) {
-          print("Error with checkUrl: $e");
+        } catch (error) {
+          print("Error with checkUrl: $error");
         }
 
         // sleep for a while before trying again:
-        await new Future.delayed(const Duration(milliseconds: 3000));
+        await Future.delayed(const Duration(milliseconds: 3000));
       }
 
       // sleep for a while before updating the database:
-      await new Future.delayed(const Duration(milliseconds: 5000));
+      await Future.delayed(const Duration(milliseconds: 5000));
 
       // force update the database:
       await StateContainer.of(context).checkAndCacheNapiDatabases(true);
@@ -320,7 +299,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
           context: context,
           closeOnTap: true,
           removeUntilHome: true,
-          widget: SendCompleteSheet(amountRaw: widget.amountRaw, destination: destinationAltered, localAmount: widget.localCurrency));
+          widget: SendCompleteSheet(amountRaw: widget.amountRaw, destination: widget.destination, localAmount: widget.localCurrency));
     } catch (e) {
       // Send failed
       if (animationOpen) {
@@ -333,8 +312,8 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
 
   Future<void> authenticateWithPin() async {
     // PIN Authentication
-    String? expectedPin = await sl.get<Vault>().getPin();
-    bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    final String? expectedPin = await sl.get<Vault>().getPin();
+    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
@@ -345,7 +324,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(Duration(milliseconds: 200));
+      await Future.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
     }
   }

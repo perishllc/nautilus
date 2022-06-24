@@ -1,203 +1,1951 @@
 {
-  "cancel": "キャンセル",
-  "close": "閉じる",
-  "confirm": "確認しました",
-  "no": "いいえ",
-  "yes": "はい",
-  "onStr": "オン",
-  "off": "オフ",
-  "send": "送金",
-  "receive": "着金",
-  "sent": "送金した",
-  "received": "着金済み",
-  "transactions": "トランザクション履歴",
-  "addressCopied": "アドレスをコピーしました",
-  "copyAddress": "アドレスをコピーする",
-  "addressShare": "アドレスを共有する",
-  "addressHint": "アドレスを入力",
-  "seed": "シード",
-  "seedInvalid": "シードが無効です",
-  "seedCopied": "クリップボードにコピーしたシード\nは、2分間ペースト可能です。",
-  "scanQrCode": "QRコードをスキャン",
-  "contactsImportErr": "連絡先をインポートできませんでした",
-  "viewDetails": "詳細を表示する",
-  "qrInvalidSeed": "QRコードに有効なシードまたは秘密キーが含まれていません",
-  "removeContact": "連絡先を削除します",
-  "removeContactConfirmation": "％1を削除してもよろしいですか？",
-  "contactHeader": "連絡先",
-  "contactsHeader": "連絡先",
-  "addContact": "連絡先を追加する",
-  "contactNameHint": "@に続けて名前を入力",
-  "contactInvalid": "連絡先名が無効です",
-  "noContactsExport": "エクスポートする連絡先はありません。",
-  "noContactsImport": "インポートする新しい連絡先はありません。",
-  "contactsImportSuccess": "％1の連絡先を正常にインポートしました。",
-  "contactAdded": "％1が連絡先に追加されました。",
-  "contactRemoved": "％1が連絡先から削除されました！",
-  "contactNameMissing": "この連絡先の名前を入力してください",
-  "contactExists": "既に存在する連絡先です",
-  "backupYourSeed": "シードをバックアップする",
-  "backupSeedConfirm": "ウォレットシードをバックアップしましたか？",
-  "seedBackupInfo": "あなたのウォレットシードは以下の通りです。シードをバックアップし、プレーンテキストまたはスクリーンショットで保存しないでください。",
-  "copySeed": "シードをコピーする",
-  "seedCopiedShort": "シードをコピーしました",
-  "importSeed": "シードをインポートする",
-  "importSeedHint": "シードを入力してください。",
-  "welcomeText": "ナトリアムへようこそ。最初に、新しいウォレットを作成するか、既存のウォレットをインポートします。",
-  "newWallet": "新しいウォレットを作成する",
-  "importWallet": "ウォレットをインポートする",
-  "sentTo": "送金先",
-  "sending": "送金金額",
-  "to": "送金先",
-  "sendAmountConfirm": "％1 ナノを送金する",
-  "sendError": "エラーが発生しました。後で再び実行してください。",
-  "enterAmount": "金額を入力する",
-  "enterAddress": "アドレスを入力する",
-  "invalidAddress": "入力したアドレスが無効です",
-  "addressMissing": "アドレスを入力してください",
-  "amountMissing": "金額を入力してください",
-  "insufficientBalance": "残高不足です",
-  "sendFrom": "送金元",
-  "pinCreateTitle": "6桁の暗証番号を作成する",
-  "pinConfirmTitle": "暗証番号が正しいことを確認しました",
-  "pinEnterTitle": "暗証番号を入力してください",
-  "pinConfirmError": "暗証番号が一致しません",
-  "pinInvalid": "入力した暗証番号が無効です",
-  "themeHeader": "壁紙",
-  "changeRepButton": "変更する",
-  "changeRepAuthenticate": "代理人を変更する",
-  "currentlyRepresented": "現在の代理人",
-  "changeRepSucces": "代理人が変更されました",
-  "repInfoHeader": "代理人とは？",
-  "repInfo": "代理人とは、ネットワークのコンセンサスに投票するアカウントです。投票力はバランスによってウェイトが付与されています。バランスを委任することによって、信頼できる代理人の投票ウェイトを増やすことができます。あなたの代理人はあなたの資金を消費する能力を持ちません。稼働停止時間が少なく、信頼できる代理人を選択する必要があります。",
-  "pinRepChange": "暗証番号を入力して代理人を変更します。",
-  "changeRepHint": "新しい代理人を入力する",
-  "representatives": "代理人",
-  "pickFromList": "リストから選択する",
-  "votingWeight": "投票ウェイト",
-  "uptime": "稼働時間",
-  "authMethod": "認証方法",
-  "pinMethod": "ピン",
-  "privacyPolicy": "個人情報保護方針",
-  "biometricsMethod": "生体認証",
-  "changeCurrency": "通貨を変更する",
-  "language": "言語",
-  "shareNautilus": "Nautilusを共有する",
-  "shareNautilusText": "優秀なナノモバイルウォレットであるナトリアムを使ってみましょう。",
-  "logout": "ログアウト",
-  "warning": "警告",
-  "logoutDetail": "ログアウトすると、このデバイスからシードとすべてのナトリアム関連データが削除されます。シードをバックアップしていない場合、資金に再びアクセスすることができなくなります",
-  "logoutAction": "シードを削除して\nログアウトする",
-  "logoutAreYouSure": "実行してよろしいですか？",
-  "logoutReassurance": "シードをバックアップしていれば、心配する必要はありません。",
-  "settingsHeader": "設定",
-  "preferences": "設定",
-  "manage": "管理",
-  "backupSeed": "シードをバックアップする",
-  "fingerprintSeedBackup": "シードをバックアップする認証を行います。",
-  "pinSeedBackup": "シードをバックアップするため暗証番号を入力して下さい",
-  "systemDefault": "システムのデフォルト言語",
-  "notifications": "通知",
-  "notificationTitle": "％1 ナノを着金しました",
-  "notificationBody": "ナトリアムを開いてこのトランザクションを表示します",
-  "notificationHeaderSupplement": "タップして開きます",
-  "settingsTransfer": "ペーパーウォレットから読み込む",
-  "transferError": "転送中にエラーが発生しました。後で再び実行してください。",
-  "paperWallet": "ペーパーウォレット",
-  "kaliumWallet": "ナトリアムウォレット",
-  "manualEntry": "手動で入力",
-  "mnemonicPhrase": "[Obsolete] ニーモニックフレーズ",
-  "rawSeed": "[Obsolete] 元のシード",
-  "transferHeader": "資金を転送する",
-  "transfer": "転送",
-  "transferManualHint": "シードを入力してください。",
-  "transferIntro": "このプロセスにより、資金がペーパーウォレットからNautilusウォレットに転送されます。\n \n「％1」ボタンをタップして開始します。",
-  "transferQrScanHint": "ナノ \n シードまたは秘密キーをスキャンします",
-  "transferQrScanError": "このQRコードには有効なシードが含まれていません。",
-  "transferNoFunds": "このシードにはナノが含まれていません",
-  "transferConfirmInfo": "残高％1 ナノのウォレットが検出されました。\n",
-  "transferConfirmInfoSecond": "確認をタップして資金を転送します。\n",
-  "transferConfirmInfoThird": "転送が完了するまでに数秒かかる場合があります。",
-  "transferLoading": "転送中",
-  "transferComplete": "％1 ナノがナトリアムウォレットに正常に転送されました。\n",
-  "transferClose": "任意の場所をタップしてウィンドウを閉じます。",
-  "scanInstructions": "ナノ \n アドレスのQRコードをスキャンします",
-  "unlockPin": "ピンを入力してナトリアムのロックを解除する",
-  "unlockBiometrics": "ナトリアムのロックを解除するよう認証する",
-  "lockAppSetting": "起動時に認証する",
-  "locked": "ロック済み",
-  "unlock": "ロックを解除する",
-  "tooManyFailedAttempts": "既定のロック解除の失敗回数を超えています。",
-  "securityHeader": "セキュリティ",
-  "autoLockHeader": "自動的にロックする",
-  "xMinutes": "％1分後",
-  "xMinute": "％1分後",
-  "instantly": "今すぐ",
-  "exampleCardIntro": "ナトリアムへようこそ。 ナノを受け取ると、トランザクションは次のように表示されます。",
-  "exampleCardLittle": "「金額」",
-  "exampleCardLot": "「金額」",
-  "exampleCardTo": "送金先",
-  "exampleCardFrom": "送金元",
-  "defaultAccountName": "メインアカウント",
-  "defaultNewAccountName": "アカウント％1",
-  "newAccountIntro": "これは新しいアカウントです。 ナノを受け取ると、トランザクションは次のように表示されます。",
+  "@@locale": "ja",
   "account": "アカウント",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "アカウント",
-  "addAccount": "アカウントを追加する",
-  "hideAccountHeader": "アカウントを非表示にしますか？",
-  "removeAccountText": "このアカウントを非表示にしてよろしいですか？ 「％1」ボタンをタップして、後に再び追加できます。",
-  "tapToReveal": "タップして表示する",
-  "tapToHide": "タップして非表示にする",
-  "copied": "コピー済み",
-  "copy": "コピーする",
-  "seedDescription": "シードは、シークレットフレーズと同じ情報を持ちますが、機械で読み取り可能な方法です。このいずれかがバックアップされている限り、資金にアクセスすることができます。",
-  "importSecretPhrase": "シークレットフレーズをインポートする",
-  "importSecretPhraseHint": "以下に24語のシークレットフレーズを入力してください。各単語はスペースで区切ります。",
-  "qrMnemonicError": "QRに有効なシークレットフレーズが含まれていません",
-  "mnemonicInvalidWord": "％1は有効な単語ではありません",
-  "mnemonicSizeError": "シークレットフレーズには24語しか含めることができません",
-  "secretPhrase": "シークレットフレーズ",
-  "backupConfirmButton": "バックアップしました",
-  "secretInfoHeader": "安全のために",
-  "secretInfo": "次の画面で、シークレットフレーズが表示されます。資金にアクセスするためのパスワードです。バックアップして、誰とも共有しないでください。",
-  "secretWarning": "デバイスを紛失したり、アプリケーションをアンインストールした場合、資金を回収するためにシークレットフレーズまたはシードが必要になります！",
-  "gotItButton": "了解しました",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "シークレットフレーズやシードをバックアップしましたか？",
-  "secretPhraseCopy": "シークレットフレーズをコピーする",
-  "secretPhraseCopied": "シークレットフレーズをコピーしました",
-  "import": "インポート",
-  "importSeedInstead": "代わりにシードをインポートする",
-  "switchToSeed": "シードに切り替える",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
+  "activeMessageHeader": "アクティブメッセージ",
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "アカウントを追加する",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "ユーザーをブロックする",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "連絡先を追加する",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "お気に入りを追加",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "アドレスをコピーしました",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "アドレスを入力",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "アドレスを入力してください",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "ユーザー名またはアドレスを入力してください",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "アドレスを共有する",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "エイリアス",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "金額を入力してください",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "尋ねた",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "認証方法",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "[自動インポート]",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "自動的にロックする",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "バックアップしました",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
   "backupSecretPhrase": "シークレットフレーズをバックアップする",
-  "qrInvalidAddress": "QRコードに正しい送金先が含まれていません。",
-  "qrInvalidPermissions": "カメラがQRコードをスキャンするためを許可してください。",
-  "qrUnknownError": "QRコードを読み取れ出来ません",
-  "mantaError": "要求を確認できません。",
-  "rootWarning": "お使いの電子機器は制限が不正に無効化されており、セキュリティが不十分な状態です。作業を進行する前に元の状態にリセットするよう推奨します。",
-  "iUnderstandTheRisks": "リスクを理解しました。",
-  "exit": "終了する",
-  "setWalletPassword": "ウォレットのパスワードを作成する",
-  "setPassword": "ウォレットのパスワードを作成する",
-  "disableWalletPassword": "ウォレットのパスワードを無効にする",
-  "encryptionFailedError": "ウォレットパスワードの作成に失敗しました。",
-  "setPasswordSuccess": "パスワードの設定に成功しました。",
-  "disablePasswordSuccess": "パスワードの無効化に成功しました。",
-  "createPasswordHint": "パスワードを作成する",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "シードをバックアップする",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "ウォレットシードをバックアップしましたか？",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "シードをバックアップする",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "生体認証",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "%1 は正常にブロックされました。",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "ユーザーは既にブロックされています！",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "ブロック済み",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "既知のエイリアスまたはアドレスでユーザーをブロックします。それらからのメッセージ、トランザクション、または要求は無視されます。",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "ブロック情報",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "ニックネームは既に使用されています！",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "ニックネームを選ぶ",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "%1はブロック解除されました！",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "ブロックエクスプローラー",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "ブロックエクスプローラー情報",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "トランザクション情報を表示するために使用するブロックエクスプローラー",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "このユーザーをブロック",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "キャンセル",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "通貨を変更する",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "変更ログ",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "代理人を変更する",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "変更する",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "新しい代理人を入力する",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "これはすでにあなたの代表です！",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "代理人が変更されました",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "空き状況を確認する",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "閉じる",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "確認しました",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
   "confirmPasswordHint": "パスワードを確認する",
-  "enterPasswordHint": "パスワードを入力する",
-  "passwordsDontMatch": "パスワードが一致しません",
-  "passwordBlank": "パスワードは空欄にできません",
-  "invalidPassword": "パスワードが無効です",
-  "passwordWillBeRequiredToOpenParagraph": "このパスワードはNautilusを開く際に必要となります。",
-  "passwordNoLongerRequiredToOpenParagraph": "Nautilusを開く際にパスワードを必要としなくなります。",
-  "createPasswordFirstParagraph": "パスワードを設定してウォレットのセキュリティを追加することができます。",
-  "createPasswordSecondParagraph": "パスワードの設定は任意ですが、いずれにしてもウォレットはピンまたは生体認証で保護されます。",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Connecting",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "％1が連絡先に追加されました。",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "既に存在する連絡先です",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "連絡先",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "連絡先名が無効です",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "@に続けて名前を入力",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "この連絡先の名前を入力してください",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "％1が連絡先から削除されました！",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "連絡先",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "連絡先をインポートできませんでした",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "％1の連絡先を正常にインポートしました。",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "コピー済み",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "コピーする",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "アドレスをコピーする",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "リンクをコピー",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "シードをコピーする",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "ウォレットアドレスをクリップボードにコピー",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
   "createAPasswordHeader": "パスワードを作成する",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "ギフトカードを作成",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "ギフトカードを作成する",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "パスワードを設定してウォレットのセキュリティを追加することができます。",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "パスワードを作成する",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "パスワードの設定は任意ですが、いずれにしてもウォレットはピンまたは生体認証で保護されます。",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
   "createPasswordSheetHeader": "作成する",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "QR コードを作成する",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "ギフトカードを作成する",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "通貨",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "通貨モード",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "通貨モード情報",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "金額を表示する単位を選択します。\n1 ニャノ = 0.000001 ナノ、または \n1,000,000 ニャノ = 1 ナノ",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "現在の代理人",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "復号化エラー！",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "メインアカウント",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "アカウント％1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "削除",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
   "disablePasswordSheetHeader": "無効にする",
-  "requireAPasswordToOpenHeader": "Nautilusを開く際にパスワードを要求しますか?",
-  "noSkipButton": "いいえ、スキップする",
-  "yesButton": "はい",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "パスワードの無効化に成功しました。",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "ウォレットのパスワードを無効にする",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "却下",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "ドメイン名が無効です",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "編集",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "ウォレットパスワードの作成に失敗しました。",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "アドレスを入力する",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "金額を入力する",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "ギフトメモを入力",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "メッセージを入力してください",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "パスワードを入力する",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "ユーザー名を入力",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "ユーザーまたは住所を入力",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "送金元",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "ナトリアムへようこそ。 ナノを受け取ると、トランザクションは次のように表示されます。",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "「金額」",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "「金額」",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "送金先",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "支払いリクエストを送受信すると、カードの色とタグがステータスを示すようにここに表示されます。 \n\n緑色は、リクエストが支払われたことを示します。\n黄色は、リクエスト/メモが支払われていない、または読まれていないことを示します。\n赤は、要求が未読または受信されていないことを示します。\n\n 金額のないニュートラルカラーのカードは単なるメッセージです。",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "一部",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "寿司",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "支払いリクエストを送受信すると、ここに表示されます。",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "ねえ、どう？",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "たくさんの",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "家賃",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "ハッピーバースデー！",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "ガスマネー",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "終了する",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "失敗した",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "ノーチラス切断",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Nautilus サーバが切断されているように見え、送受信 (メモなし) はまだ動作しているはずですが、支払い要求が通過しない可能性があります\n\n 後で戻ってくるか、アプリを再起動してもう一度試してください",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "お気に入りは既に存在します",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "お気に入り",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "お気に入り名が無効です",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "ニックネームを入力",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "このお気に入りの名前を選んでください",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "%1はお気に入りから削除されました！",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "お気に入り",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "特集",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "シードをバックアップする認証を行います。",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "から",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "成就しました",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "おまえには贈り物がある！",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "空のギフト",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "ギフト金額",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "ギフト元",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "NANOでデジタルギフトカードを読み込もう！金額と、受信者がそれを開いたときに表示するオプションのメッセージを設定します！\n\n作成すると、誰にでも送信できるリンクが届きます。リンクを開くと、Nautilusをインストールした後に自動的に受取人に資金が分配されます！\n\n受取人がすでにNautilusユーザーの場合、リンクを開くと口座に資金を送金するように促されます。",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "ギフトメッセージ",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "戻る",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "了解しました",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "QRに移動",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "隠す",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "アカウントを非表示にしますか？",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "ホーム",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "無視",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "インポート",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "クリックしたリンクにはナノが含まれています。このウォレットにインポートしますか、それとも送信した人に返金しますか？",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "シークレットフレーズをインポートする",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "以下に24語のシークレットフレーズを入力してください。各単語はスペースで区切ります。",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "シードをインポートする",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "シードを入力してください。",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "代わりにシードをインポートする",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "ウォレットをインポートする",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "今すぐ",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "残高不足です",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "入力したアドレスが無効です",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "パスワードが無効です",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "リスクを理解しました。",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "ナトリアムウォレット",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "言語",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "リンクがコピーされました",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Support",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "ロード済み",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "ロード先へ",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "起動時に認証する",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "ロック済み",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "ログアウト",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "シードを削除して\nログアウトする",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "実行してよろしいですか？",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "ログアウトすると、このデバイスからシードとすべてのナトリアム関連データが削除されます。シードをバックアップしていない場合、資金に再びアクセスすることができなくなります",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "シードをバックアップしていれば、心配する必要はありません。",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "管理",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "要求を確認できません。",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "手動で入力",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "支払い済みとしてマークする",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "未払いとしてマークする",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "メモが再送されました！それでも確認されない場合は、受信者のデバイスがオフラインになっている可能性があります。",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "メッセージ",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "最小送信金額は %1 %2",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "％1は有効な単語ではありません",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "[Obsolete] ニーモニックフレーズ",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "シークレットフレーズには24語しか含めることができません",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "この機能では、スパムを防ぐために、より長い取引履歴が必要です。\n\nまたは、誰かがスキャンできるように QR コードを表示することもできます。",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "検証が必要",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "これは新しいアカウントです。 ナノを受け取ると、トランザクションは次のように表示されます。",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "",
+  "@newAccountIntroKal": {},
+  "newWallet": "新しいウォレットを作成する",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
   "nextButton": "次へ",
-  "goBackButton": "戻る"
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "いいえ",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "エクスポートする連絡先はありません。",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "インポートする新しい連絡先はありません。",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "ノードステータス",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "検索結果がありません！",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "いいえ、スキップする",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "ナトリアムを開いてこのトランザクションを表示します",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "タップして開きます",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "この機能を正しく動作させるには、通知を有効にする必要があります",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "通知",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "％1 ナノを着金しました",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "",
+  "@notificationTitleKal": {},
+  "notSent": "未送信",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "ニャニコン",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "オフ",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "OK",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "オンランプ",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "オン",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "開いた",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "支払った",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "ペーパーウォレット",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "パスワードは空欄にできません",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Nautilusを開く際にパスワードを必要としなくなります。",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "パスワードが一致しません",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "このパスワードはNautilusを開く際に必要となります。",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "支払う",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "誰かがあなたに支払いを要求しました！詳細については、支払いページを確認してください。",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "ペイメント",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "このリクエストを支払う",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "",
+  "@pending": {},
+  "pickFromList": "リストから選択する",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "暗証番号が一致しません",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "暗証番号が正しいことを確認しました",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "6桁の暗証番号を作成する",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "暗証番号を入力してください",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "入力した暗証番号が無効です",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "ピン",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "暗証番号を入力して代理人を変更します。",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "シードをバックアップするため暗証番号を入力して下さい",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "設定",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "個人情報保護方針",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "ナノを購入",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "QRコードに正しい送金先が含まれていません。",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "カメラがQRコードをスキャンするためを許可してください。",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "QRコードに有効なシードまたは秘密キーが含まれていません",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "QRに有効なシークレットフレーズが含まれていません",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "QRコードを読み取れ出来ません",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "アプリを評価する",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "アプリを楽しんでいるなら、時間をかけてレビューすることを検討してください。\nそれは本当に役に立ちますし、1分もかからないはずです。",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "[Obsolete] 元のシード",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "もっと読む",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "売掛金",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "着金",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "着金済み",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "最小受信",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "最低限の情報を受け取る",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "受け取る最低金額。これより少ない金額の支払いまたは要求が受領された場合、それは無視されます。",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "払い戻し",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "にとって",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "登録中",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "ユーザー名の登録",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "ユーザー名を登録する",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "このアカウントを非表示にしてよろしいですか？ 「％1」ボタンをタップして、後に再び追加できます。",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "ブロック解除",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "%1のブロックを解除してよろしいですか?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "連絡先を削除します",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "％1を削除してもよろしいですか？",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "お気に入りを削除",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "代理人とは、ネットワークのコンセンサスに投票するアカウントです。投票力はバランスによってウェイトが付与されています。バランスを委任することによって、信頼できる代理人の投票ウェイトを増やすことができます。あなたの代理人はあなたの資金を消費する能力を持ちません。稼働停止時間が少なく、信頼できる代理人を選択する必要があります。",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "代理人とは？",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "返信",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "代理人",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "要求",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "%1 %2を要求",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "リクエスト済み",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "リクエスト元",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "リクエスト失敗:このユーザーは Nautilus をインストールしていないか、通知が無効になっています。",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "リクエスト中",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "支払いをリクエスト",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "支払い請求の送信中にエラーが発生しました。受取人のデバイスがオフラインになっているか、利用できない可能性があります。",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "リクエストを再送信しました！それでも確認されない場合は、受信者のデバイスがオフラインになっている可能性があります。",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Nautilusを開く際にパスワードを要求しますか?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "このメモを再送する",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "データベースをリセットする",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "内部データベースをリセットしてよろしいですか? \n\nこれにより、アプリのアップデートに関連する問題が修正される可能性がありますが、保存されているすべての設定も削除されます。ウォレットシードは削除されません。問題が発生している場合は、シードをバックアップしてアプリを再インストールし、問題が解決しない場合は、githubまたはDiscordでバグレポートを作成してください。",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "再試行",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "お使いの電子機器は制限が不正に無効化されており、セキュリティが不十分な状態です。作業を進行する前に元の状態にリセットするよう推奨します。",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "ナノ \n アドレスのQRコードをスキャンします",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "QRコードをスキャン",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "何でも検索",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "次の画面で、シークレットフレーズが表示されます。資金にアクセスするためのパスワードです。バックアップして、誰とも共有しないでください。",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "安全のために",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "シークレットフレーズ",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "シークレットフレーズをコピーしました",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "シークレットフレーズをコピーする",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "デバイスを紛失したり、アプリケーションをアンインストールした場合、資金を回収するためにシークレットフレーズまたはシードが必要になります！",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "セキュリティ",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "シード",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "あなたのウォレットシードは以下の通りです。シードをバックアップし、プレーンテキストまたはスクリーンショットで保存しないでください。",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "クリップボードにコピーしたシード\nは、2分間ペースト可能です。",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "シードをコピーしました",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "シードは、シークレットフレーズと同じ情報を持ちますが、機械で読み取り可能な方法です。このいずれかがバックアップされている限り、資金にアクセスすることができます。",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "シードが無効です",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "自分からはリクエストできない",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "送金",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "％1 ナノを送金する",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "",
+  "@sendAmountConfirmKal": {},
+  "sendError": "エラーが発生しました。後で再び実行してください。",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "送金元",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "送金金額",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "トランザクションを含むメモの送信に失敗しました。Nautilus ユーザーではない可能性があります。",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "メッセージを送信中",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "リクエストをもう一度送る",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "エンドツーエンドの暗号化されたメッセージで、支払いを送信またはリクエストしてください！\n\n支払い要求、メモ、メッセージは、他のノーチラスユーザーのみが受領できます。\n\n支払いリクエストを送受信するためにユーザー名は必要ありません。また、ノーチラスを使用していなくても、自分の記録保持に使用できます。",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "シート情報を送る",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "送金した",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "送金先",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "ウォレットのパスワードを作成する",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "パスワードの設定に成功しました。",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "設定",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "ペーパーウォレットから読み込む",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "ウォレットのパスワードを作成する",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "",
+  "@shareKalium": {},
+  "shareKaliumText": "",
+  "@shareKaliumText": {},
+  "shareLink": "共有リンク",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Nautilusを共有する",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "優秀なナノモバイルウォレットであるナトリアムを使ってみましょう。",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "連絡先を表示",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "シンプレックス",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "開発者を支援する",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "シードに切り替える",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "システムのデフォルト言語",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "タップして非表示にする",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "タップして表示する",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "壁紙",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "送金先",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "既定のロック解除の失敗回数を超えています。",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "トランザクション履歴",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "転送",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "任意の場所をタップしてウィンドウを閉じます。",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "％1 ナノがナトリアムウォレットに正常に転送されました。\n",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "残高％1 ナノのウォレットが検出されました。\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "確認をタップして資金を転送します。\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "転送が完了するまでに数秒かかる場合があります。",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "転送中にエラーが発生しました。後で再び実行してください。",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "資金を転送する",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "このプロセスにより、資金がペーパーウォレットからNautilusウォレットに転送されます。\n \n「％1」ボタンをタップして開始します。",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "",
+  "@transferIntroKal": {},
+  "transferIntroShort": "このプロセスでは、資金が紙のウォレットからノーチラスウォレットに送金されます。",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "転送中",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "シードを入力してください。",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "このシードにはナノが含まれていません",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "このQRコードには有効なシードが含まれていません。",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "ナノ \n シードまたは秘密キーをスキャンします",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "未確認です",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "未確認",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "未履行です",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "ロックを解除する",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "ナトリアムのロックを解除するよう認証する",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "ピンを入力してナトリアムのロックを解除する",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "",
+  "@unlockPinKal": {},
+  "unpaid": "未払い",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "未読です",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "稼働時間",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "あなたはすでにユーザー名を登録しています！現在のところ、ユーザー名を変更することはできませんが、別のアドレスで新しいユーザー名を登録することは自由です。",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "ユーザー名が利用可能です！",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "ユーザー名を入力してください",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "ユーザー名エラー",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "ユニークな @username を選んで友達や家族があなたを見つけやすくしよう！\n\nNautilus のユーザー名を持つと、UI がグローバルに更新され、新しいハンドルが反映されます。",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "ユーザー名が無効です",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "ユーザー名は利用できません",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Nautilusユーザー名は、Nano.toが提供する集中型サービスです",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "ユーザーが見つかりませんでした！",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "詳細を表示する",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "投票ウェイト",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "警告",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "ナトリアムへようこそ。最初に、新しいウォレットを作成するか、既存のウォレットをインポートします。",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "",
+  "@welcomeTextKal": {},
+  "withAddress": "住所付き",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "メッセージ付き",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "％1分後",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "％1分後",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "はい",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "はい",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

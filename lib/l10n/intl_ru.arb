@@ -1,235 +1,1951 @@
 {
-  "cancel": "Отмена",
-  "close": "Закрыть",
-  "confirm": "Подтвердить",
-  "no": "Нет",
-  "yes": "Да",
-  "onStr": "Вкл.",
-  "off": "Выкл.",
-  "send": "Отправить",
-  "receive": "Получить",
-  "sent": "Отправлено",
-  "received": "Получено",
-  "transactions": "Транзакции",
-  "addressCopied": "Адрес скопирован",
-  "copyAddress": "Копировать адрес",
-  "addressShare": "Отправить",
-  "addressHint": "Введите адрес",
-  "seed": "Seed",
-  "seedInvalid": "Seed Недействительный.",
-  "seedCopied": "Seed скопирован в буфер обмена\nсохраниться в течение 2 минут.",
-  "scanQrCode": "Сканировать QR-код",
-  "contactsImportErr": "Не удалось импортировать",
-  "viewDetails": "Посмотреть Детали",
-  "qrInvalidSeed": "QR-код не содержит действительный Seed или закрытый ключ",
-  "removeContact": "Удалить Контакт",
-  "removeContactConfirmation": "Вы уверены,что хотите удалить %1?",
-  "contactHeader": "Контакт",
-  "contactsHeader": "Контакты",
-  "addContact": "Добавить Контакт",
-  "contactNameHint": "Введите имя @",
-  "contactInvalid": "Недопустимое имя",
-  "noContactsExport": "Нет контактов для экспорта",
-  "noContactsImport": "Нет контактов для импорта",
-  "contactsImportSuccess": "Успешно импортированы %1",
-  "contactAdded": "%1 добавлен в контакты!",
-  "contactRemoved": "%1 удален из контактов!",
-  "contactNameMissing": "Выберите имя для контакта",
-  "contactExists": "Контакт уже существует",
-  "backupYourSeed": "Резервное копирование Seed",
-  "backupSeedConfirm": "Вы уверены,что сохранили Seed?",
-  "seedBackupInfo": "Ниже Seed вашего кошелька.Крайне важно,чтобы Вы сохранили Seed и никогда не хранили его как обычный текст или как скриншот.",
-  "copySeed": "Копировать Seed",
-  "seedCopiedShort": "Seed скопирован",
-  "importSeed": "Импортировать  Seed",
-  "importSeedHint": "Пожалуйста, введите ваш Seed ниже.",
-  "welcomeText": "Добро пожаловать в Nautilus. Вы можете создать новый кошелек или импортировать уже существующий.",
-  "newWallet": "Новый кошелёк",
-  "importWallet": "Импортировать",
-  "sentTo": "Отправлено на",
-  "sending": "Отправить",
-  "to": "на",
-  "sendAmountConfirm": "Отправить %1 Nano",
-  "sendError": "Произошла ошибка. Попробуйте позже.",
-  "enterAmount": "Введите Сумму",
-  "enterAddress": "Введите Адрес",
-  "invalidAddress": "Введен неверный адрес",
-  "addressMissing": "Пожалуйста введите адрес",
-  "amountMissing": "Пожалуйста введите сумму",
-  "insufficientBalance": "Недостаточный баланс",
-  "sendFrom": "Отправить из",
-  "pinCreateTitle": "Создать 6-значный PIN.",
-  "pinConfirmTitle": "Подтвердите PIN",
-  "pinEnterTitle": "Введите PIN-код",
-  "pinConfirmError": "PIN не совпадают.",
-  "pinInvalid": "Введён неверный PIN код.",
-  "themeHeader": "Тема",
-  "changeRepButton": "Изменить",
-  "changeRepAuthenticate": "Сменить представителя",
-  "currentlyRepresented": "В настоящее время представлен",
-  "changeRepSucces": "Представитель успешно изменён.",
-  "repInfoHeader": "Что такое представитель?",
-  "repInfo": "Представитель-это учетная запись, счёт, который голосует за консенсус сети. Право голоса взвешивается по балансу, вы можете делегировать свой баланс, чтобы увеличить вес голоса представителя, которому вы доверяете. Ваш представитель не имеет права распоряжаться вашими средствами. Вы должны выбрать представителя, который имеет мало времени простоя и заслуживает доверия.",
-  "pinRepChange": "Введите PIN для смены представителя",
-  "changeRepHint": "Новый представитель",
-  "representatives": "Представители",
-  "pickFromList": "Выбрать из списка",
-  "votingWeight": "Вес голосования",
-  "uptime": "Онлайн время",
-  "authMethod": "Аутентификация",
-  "pinMethod": "PIN",
-  "privacyPolicy": "Политика",
-  "biometricsMethod": "Биометрия",
-  "changeCurrency": "Сменить Валюту",
-  "language": "Язык",
-  "shareNautilus": "Поделиться Nautilus",
-  "shareNautilusText": "Оцените Nautilus! Лучший Android кошелёк Nano!",
-  "logout": "Выход",
-  "warning": "Предупреждение",
-  "logoutDetail": "Выход из системы приведёт к удалению Seed и всех связанных с Nautilus данных с этого устройства.Если ваш Seed не будет скопирован,вы больше никогда не сможете получить доступ к своим средствам.",
-  "logoutAction": "Удаление Seed и выход из системы.",
-  "logoutAreYouSure": "Вы уверены?",
-  "logoutReassurance": "Если вы создали резервную копию своего Seed,вам не о чем беспокоиться",
-  "settingsHeader": "Настройки",
-  "preferences": "Предпочтения",
-  "manage": "Управление",
-  "backupSeed": "Резервное копирование Seed",
-  "fingerprintSeedBackup": "Аутентификация для резервного копирования Seed.",
-  "pinSeedBackup": "Введите PIN для резервного копирования Seed.",
-  "systemDefault": "По умолчанию",
-  "notifications": "Уведомления",
-  "notificationTitle": "Получено %1 NANO",
-  "notificationBody": "Откройте Nautilus для просмотра.",
-  "notificationHeaderSupplement": "Нажмите чтобы открыть",
-  "settingsTransfer": "Загрузить с Paper кошелька",
-  "transferError": "Во время передачи произошла ошибка.Пожалуйста, попробуйте позже.",
-  "paperWallet": "Paper кошелёк",
-  "kaliumWallet": "Kalium кошелёк",
-  "manualEntry": "Ручной ввод",
-  "mnemonicPhrase": "Мнемоническая фраза",
-  "rawSeed": "Сырой Seed",
-  "transferHeader": "Перевод Средств",
-  "transfer": "Отправить",
-  "transferManualHint": "Введите Seed ниже.",
-  "transferIntro": "Этот процесс переведёт средства с бумажного кошелька на ваш Nautilus кошелёк.\n\nНажмите кнопку \"%1\" чтобы начать.",
-  "transferQrScanHint": "Сканировать Nano \nseed или закрытый ключ",
-  "transferQrScanError": "Этот QR не содержит действительного seed",
-  "transferNoFunds": "На этом seed нет NANO.",
-  "transferConfirmInfo": "Обнаружен кошелёк с балансом %1 NANO.\n",
-  "transferConfirmInfoSecond": "Нажмите Подтвердить, чтобы перевести средства.\n",
-  "transferConfirmInfoThird": "Перевод может занять несколько секунд.",
-  "transferLoading": "Перевод",
-  "transferComplete": "%1 NANO успешно переведены в Nautilus кошелёк.\n",
-  "transferClose": "Нажмите в любом месте, чтобы закрыть окно.",
-  "scanInstructions": "Сканировать\nQR-код адрес.",
-  "unlockPin": "Введите PIN , для разблокировки Nautilus",
-  "unlockBiometrics": "Аутентификация для разблокировки Nautilus",
-  "lockAppSetting": "Аутентификация при запуске",
-  "locked": "Закрыт",
-  "unlock": "Открыть",
-  "tooManyFailedAttempts": "Много неудачных попыток разблокировки.",
-  "securityHeader": "Безопасность",
-  "autoLockHeader": "Автоблокировка",
-  "xMinutes": "Через %1 мин.",
-  "xMinute": "Через %1 мин.",
-  "instantly": "Немедленно",
-  "exampleCardIntro": "Добро пожаловать в Nautilus.Когда вы получите или отправите NANO,это будет отображено ниже.",
-  "exampleCardLittle": "Немного",
-  "exampleCardLot": "Много",
-  "exampleCardTo": "кому-то",
-  "exampleCardFrom": "от кого-то",
-  "defaultAccountName": "Основной счёт",
-  "defaultNewAccountName": "Счёт %1",
-  "newAccountIntro": "Это ваш новый аккаунт. Как только вы получите NANO, транзакции будут выглядеть так:",
+  "@@locale": "ru",
   "account": "Счёт",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Счета",
-  "addAccount": "Добавить аккаунт",
-  "hideAccountHeader": "Скрыть аккаунт?",
-  "removeAccountText": "Вы уверены, что хотите скрыть аккаунт? Вы можете добавить его снова, нажав кнопку \"%1\".",
-  "tapToReveal": "Нажмите, чтобы показать",
-  "tapToHide": "Нажмите, чтобы скрыть",
-  "copied": "Скопировано",
-  "copy": "Копировать",
-  "seedDescription": "Seed содержит ту же информацию, что и секретная фраза, но в машиночитаемом виде. Пока она у вас есть, у вас будет доступ к вашим средствам",
-  "importSecretPhrase": "Импортировать секретную фразу",
-  "importSecretPhraseHint": "Пожалуйста, введите вашу секретную фразу из 24 слов ниже, каждое слово должно быть разделено пробелом.",
-  "qrMnemonicError": "QR не содержит действительной секретной фразы",
-  "mnemonicInvalidWord": "%1 не является допустимым словом",
-  "mnemonicSizeError": "Секретная фраза может содержать только 24 слова",
-  "secretPhrase": "Секретная фраза",
-  "backupConfirmButton": "Я сделал резервную копию",
-  "secretInfoHeader": "Безопасность прежде всего!",
-  "secretInfo": "На следующем экране вы увидите свою секретную фразу. Это пароль для доступа к вашим средствам. Крайне важно, чтобы вы создали резервную копию и никогда не передавали ее никому.",
-  "secretWarning": "Если вы потеряете свое устройство или удалите приложение, вам понадобится ваша секретная фраза или Seed, чтобы вернуть свои средства!",
-  "gotItButton": "Готово!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "Вы уверены, что у вас есть копия вашей секретной фразы или Seed?",
-  "secretPhraseCopy": "Копировать секретную фразу",
-  "secretPhraseCopied": "Секретная фраза скопирована",
-  "import": "Импорт",
-  "importSeedInstead": "Импортируйте Seed",
-  "switchToSeed": "Переключиться на Seed",
-  "backupSecretPhrase": "Резервная Секретная Фраза",
-  "qrInvalidAddress": "QR-не содержит действительный адрес",
-  "qrInvalidPermissions": "Пожалуйста, предоставьте разрешения камеры для сканирования QR",
-  "qrUnknownError": "Не удалось прочитать QR-код",
-  "mantaError": "Не удалось проверить запрос",
-  "rootWarning": "Похоже, ваше устройство \"рутировано\" , \"взломано\" или модифицировано таким образом, что это ставит под угрозу безопасность. Перед продолжением рекомендуется переустановить устройство в исходное состояние.",
-  "iUnderstandTheRisks": "Я понимаю риски",
-  "exit": "Выход",
-  "setWalletPassword": "Установить пароль",
-  "setPassword": "Установка пароля",
-  "disableWalletPassword": "Отключить пароль",
-  "encryptionFailedError": "Не удалось установить пароль",
-  "setPasswordSuccess": "Пароль был успешно установлен",
-  "disablePasswordSuccess": "Пароль был отключен",
-  "createPasswordHint": "Создать пароль",
-  "confirmPasswordHint": "Подтвердите пароль",
-  "enterPasswordHint": "Введите свой пароль",
-  "passwordsDontMatch": "Пароли не совпадают",
-  "passwordBlank": "Пароль не может быть пустым",
-  "invalidPassword": "Неправильный пароль",
-  "passwordWillBeRequiredToOpenParagraph": "Этот пароль потребуется для открытия Nautilus.",
-  "passwordNoLongerRequiredToOpenParagraph": "Вам больше не понадобится пароль, чтобы открыть Nautilus.",
-  "createPasswordFirstParagraph": "Вы можете создать пароль для дополнительной безопасности кошелька.",
-  "createPasswordSecondParagraph": "Пароль не является обязательным, и ваш кошелек будет защищен вашим PIN-кодом или биометрической информацией.",
-  "createAPasswordHeader": "Создать пароль.",
-  "createPasswordSheetHeader": "Создать",
-  "disablePasswordSheetHeader": "Отключить",
-  "requireAPasswordToOpenHeader": "Требуется пароль для открытия Nautilus?",
-  "noSkipButton": "Нет, пропустить",
-  "yesButton": "Да",
-  "nextButton": "Далее",
-  "goBackButton": "Назад",
-  "welcomeTextKal": "Добро пожаловать в Kalium. Чтобы продолжить, можно создать новый кошелек или импортировать уже существующий.",
-  "sendAmountConfirmKal": "Отправить %1 Banano",
-  "currency": "Валюта",
-  "shareKalium": "Поделиться Kalium",
-  "shareKaliumText": "Проверьте Kalium! Официальный мобильный кошелек Banano!",
-  "logoutDetailKal": "Выход из системы приведёт к удалению Seed и всех связанных с Kalium данных с этого устройства.Если ваш Seed не будет скопирован,вы больше никогда не сможете получить доступ к своим средствам.",
-  "notificationTitleKal": "Получено %1 BANANO",
-  "notificationBodyKal": "Откройте Kalium для просмотра.",
-  "transferIntroKal": "Этот процесс переведёт средства с бумажного кошелька на ваш Nautilus кошелёк.\n\nНажмите кнопку \"%1\" чтобы начать.",
-  "transferQrScanHintKal": "Сканировать Banano \nseed или закрытый ключ",
-  "transferNoFundsKal": "На этом seed нет BANANO.",
-  "transferConfirmInfoKal": "Обнаружен кошелёк с балансом %1 BANANO.\n",
-  "transferCompleteKal": "%1 BANANO успешно переведены в Kalium кошелёк.",
-  "scanInstructionsKal": "Сканировать  QR-код Banano/адрес.",
-  "unlockPinKal": "Введите PIN-код, чтобы разблокировать Kalium",
-  "unlockBiometricsKal": "Аутентификация для разблокировки Kalium",
-  "exampleCardIntroKal": "Добро пожаловать в Kalium.Когда вы получите или отправите BANANO,это будет отображено ниже.",
-  "exampleCardToKal": "Случайному человеку",
-  "exampleCardFromKal": "От случайного человека",
-  "newAccountIntroKal": "Это ваш новый аккаунт. Как только вы получите BANANO, транзакции будут выглядеть так:",
-  "liveSupportButton": "Служба поддержки",
-  "connectingHeader": "Подключение",
-  "minimumSend": "Минимум сумма отправки % 1 NANO ",
-  "natricon": "Natricon",
-  "pending": "в ожидании",
-  "unconfirmed": "неподтвержденный",
-  "messageHeader": "Сообщение",
-  "readMore": "Подробнее",
-  "ignore": "Игнорировать",
-  "dismiss": "Отклонить",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
   "activeMessageHeader": "Активное сообщение",
-  "blockExplorer": "Блок-обозреватель"
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Добавить аккаунт",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Заблокировать пользователя",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Добавить Контакт",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Добавить избранное",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Адрес скопирован",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Введите адрес",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Пожалуйста введите адрес",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Пожалуйста, введите имя пользователя или адрес",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Отправить",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Псевдонимы",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Пожалуйста введите сумму",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Спросил",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Аутентификация",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Автоматический импорт",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Автоблокировка",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Я сделал резервную копию",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Резервная Секретная Фраза",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Резервное копирование Seed",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Вы уверены,что сохранили Seed?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Резервное копирование Seed",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Биометрия",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "% 1 успешно заблокирован.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "Пользователь уже заблокирован!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "Заблокировано",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Заблокировать пользователя по любому известному псевдониму или адресу. Любые сообщения, транзакции или запросы от них будут игнорироваться.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Заблокированная информация",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Ник уже используется!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Выберите псевдоним",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "% 1 разблокирован!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Блок-обозреватель",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Информация обозревателя блоков",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Какой обозреватель блоков использовать для отображения информации о транзакциях",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Заблокировать этого пользователя",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Отмена",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Сменить Валюту",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Журнал изменений",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Сменить представителя",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Изменить",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Новый представитель",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "Это уже ваш представитель!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Представитель успешно изменён.",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Проверить доступность",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Закрыть",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Подтвердить",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Подтвердите пароль",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Подключение",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 добавлен в контакты!",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Контакт уже существует",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Контакт",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Недопустимое имя",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Введите имя @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Выберите имя для контакта",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 удален из контактов!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Контакты",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Не удалось импортировать",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "Успешно импортированы %1",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Скопировано",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Копировать",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Копировать адрес",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Скопировать ссылку",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Копировать Seed",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Скопировать адрес кошелька в буфер обмена",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Создать пароль.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Создать подарочную карту",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Создайте подарочную карту",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Вы можете создать пароль для дополнительной безопасности кошелька.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Создать пароль",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Пароль не является обязательным, и ваш кошелек будет защищен вашим PIN-кодом или биометрической информацией.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Создать",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Создать QR-код",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Создание подарочной карты",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Валюта",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Режим валюты",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Информация о валютном режиме",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Выберите единицу измерения для отображения сумм.\n1 ньяно = 0,000001 НАНО, или \n1 000 000 ньяно = 1 НАНО",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "В настоящее время представлен",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Ошибка дешифрования!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Основной счёт",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Счёт %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Удалить",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Отключить",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Пароль был отключен",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Отключить пароль",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Отклонить",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Неверное доменное имя",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Редактировать",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Не удалось установить пароль",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Введите Адрес",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Введите Сумму",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Введите примечание к подарку",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Введите сообщение",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Введите свой пароль",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Введите имя пользователя",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Введите пользователя или адрес",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "от кого-то",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "От случайного человека",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Добро пожаловать в Nautilus.Когда вы получите или отправите NANO,это будет отображено ниже.",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Добро пожаловать в Kalium.Когда вы получите или отправите BANANO,это будет отображено ниже.",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Немного",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "Много",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "кому-то",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "Случайному человеку",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Как только вы отправите или получите запрос на оплату, они появятся здесь следующим образом с цветом и биркой карты, указывающими статус. \n\nЗеленый цвет означает, что запрос оплачен.\nЖелтый цвет означает, что запрос/памятка не оплачен/прочитана.\nКрасный цвет означает, что запрос не был прочитан или получен.\n\n Карточки нейтрального цвета без суммы — это просто сообщения.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Некоторые",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Суши",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Как только вы отправите или получите запрос на оплату, они появятся здесь:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Эй, что такое?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "Много",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Аренда",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "С Днем Рождения!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Газовые деньги",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Выход",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "не удалось",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "«Наутилус отключен»",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Кажется, что серверы Nautilus отключены, отправка и получение (без заметок) должны оставаться в рабочем состоянии, но запросы на оплату могут не проходить\n\n Вернитесь позже или перезапустите приложение, чтобы повторить попытку",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Избранное уже существует",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Фаворит",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Неверное имя избранного",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Введите псевдоним",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Выберите имя для этого избранного",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "% 1 удален из избранного!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "Избранное",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Рекомендуемые",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Аутентификация для резервного копирования Seed.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "От",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "выполнивших",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "У тебя есть подарок!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Пустой подарок",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Сумма подарка",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Подарок от",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Загрузите цифровую подарочную карту с NANO! Задайте сумму и необязательное сообщение, которое получатель увидит, когда откроет его!\n\nПосле создания вы получите ссылку, которую можете отправить кому угодно, которая при открытии автоматически распределит средства получателю после установки Nautilus!\n\nЕсли получатель уже является пользователем Nautilus, он получит приглашение перевести средства на свой счет при переходе по ссылке.",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Сообщение о подарке",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Назад",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Готово!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Перейти к QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Скрыть",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Скрыть аккаунт?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Главная",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Игнорировать",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Импорт",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "Ссылка, по которой вы нажали, содержит nano, хотите ли вы импортировать ее в этот кошелек или вернуть ее тому, кто ее отправил?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Импортировать секретную фразу",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Пожалуйста, введите вашу секретную фразу из 24 слов ниже, каждое слово должно быть разделено пробелом.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Импортировать  Seed",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Пожалуйста, введите ваш Seed ниже.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Импортируйте Seed",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Импортировать",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Немедленно",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Недостаточный баланс",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Введен неверный адрес",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Неправильный пароль",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Я понимаю риски",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Kalium кошелёк",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Язык",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Ссылка скопирована",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Служба поддержки",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Загружен",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Загружено в",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Аутентификация при запуске",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Закрыт",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Выход",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Удаление Seed и выход из системы.",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Вы уверены?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Выход из системы приведёт к удалению Seed и всех связанных с Nautilus данных с этого устройства.Если ваш Seed не будет скопирован,вы больше никогда не сможете получить доступ к своим средствам.",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Выход из системы приведёт к удалению Seed и всех связанных с Kalium данных с этого устройства.Если ваш Seed не будет скопирован,вы больше никогда не сможете получить доступ к своим средствам.",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Если вы создали резервную копию своего Seed,вам не о чем беспокоиться",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Управление",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Не удалось проверить запрос",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Ручной ввод",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Отметить как оплаченный",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Отметить как неопла",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Памятка отправлена повторно! Если все еще не подтверждено, устройство получателя может быть отключено.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Сообщение",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Минимум сумма отправки % 1 NANO ",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 не является допустимым словом",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Мнемоническая фраза",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "Секретная фраза может содержать только 24 слова",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Эта функция требует более длительной истории транзакций, чтобы предотвратить спам.\n\nКроме того, вы можете показать QR-код для сканирования.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Необходима верификация",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Это ваш новый аккаунт. Как только вы получите NANO, транзакции будут выглядеть так:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Это ваш новый аккаунт. Как только вы получите BANANO, транзакции будут выглядеть так:",
+  "@newAccountIntroKal": {},
+  "newWallet": "Новый кошелёк",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Далее",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Нет",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Нет контактов для экспорта",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "Нет контактов для импорта",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Статус узла",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Нет результатов поиска!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "Нет, пропустить",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Откройте Nautilus для просмотра.",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Откройте Kalium для просмотра.",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Нажмите чтобы открыть",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "Чтобы эта функция работала правильно, уведомления должны быть включены",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Уведомления",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "Получено %1 NANO",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "Получено %1 BANANO",
+  "@notificationTitleKal": {},
+  "notSent": "не отправлено",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Ньяникон",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Выкл.",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Ок",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "На рампе",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "Вкл.",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Открыт",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "оплаченный",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Paper кошелёк",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Пароль не может быть пустым",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Вам больше не понадобится пароль, чтобы открыть Nautilus.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Пароли не совпадают",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Этот пароль потребуется для открытия Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Оплатить",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Кто-то запросил у вас оплату! посетите страницу платежей для получения дополнительной информации.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Платежи",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Оплатить этот запрос",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "в ожидании",
+  "@pending": {},
+  "pickFromList": "Выбрать из списка",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "PIN не совпадают.",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Подтвердите PIN",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Создать 6-значный PIN.",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Введите PIN-код",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Введён неверный PIN код.",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Введите PIN для смены представителя",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Введите PIN для резервного копирования Seed.",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Предпочтения",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Политика",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Приобрести нано",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "QR-не содержит действительный адрес",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Пожалуйста, предоставьте разрешения камеры для сканирования QR",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "QR-код не содержит действительный Seed или закрытый ключ",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "QR не содержит действительной секретной фразы",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Не удалось прочитать QR-код",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Оцените приложение",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "Если вам нравится приложение, подумайте о том, чтобы проверить его,\nЭто действительно помогает, и это займет не больше минуты.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Сырой Seed",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Подробнее",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "приемлемый",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Получить",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Получено",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Минимум получения",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Получение минимальной информации",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Минимальная сумма для получения. Если платеж или запрос получен на сумму меньше указанной, они будут проигнорированы.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "Возврат",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "для",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Регистрация",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Зарегистрировать имя пользователя",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Зарегистрируйте имя пользователя",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Вы уверены, что хотите скрыть аккаунт? Вы можете добавить его снова, нажав кнопку \"%1\".",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Разблокировать",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Вы действительно хотите разблокировать %1?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Удалить Контакт",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Вы уверены,что хотите удалить %1?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Удалить избранное",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "Представитель-это учетная запись, счёт, который голосует за консенсус сети. Право голоса взвешивается по балансу, вы можете делегировать свой баланс, чтобы увеличить вес голоса представителя, которому вы доверяете. Ваш представитель не имеет права распоряжаться вашими средствами. Вы должны выбрать представителя, который имеет мало времени простоя и заслуживает доверия.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Что такое представитель?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Ответить",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Представители",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Запрос",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Запрос %1 %2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Запрошен",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Запрошен",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Запрос не удался: у этого пользователя, похоже, не установлен Nautilus или уведомления отключены.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Запрос",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Запросить платеж",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Ошибка при отправке запроса на оплату, устройство получателя может быть отключено или недоступно.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Запрос отправлен повторно! Если все еще не подтверждено, устройство получателя может быть отключено.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Требуется пароль для открытия Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Повторно отправить эту заметку",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Сброс базы данных",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Вы действительно хотите сбросить внутреннюю базу данных? \n\nЭто может устранить проблемы, связанные с обновлением приложения, но также удалит все сохраненные настройки. Это НЕ приведет к удалению seed вашего кошелька. Если у вас возникли проблемы, вам следует создать резервную копию seed, переустановить приложение, а если проблема не исчезнет, не стесняйтесь сообщать об ошибке на github или discord.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Повторить",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Похоже, ваше устройство \"рутировано\" , \"взломано\" или модифицировано таким образом, что это ставит под угрозу безопасность. Перед продолжением рекомендуется переустановить устройство в исходное состояние.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Сканировать\nQR-код адрес.",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Сканировать  QR-код Banano/адрес.",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Сканировать QR-код",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Ищите что угодно",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "На следующем экране вы увидите свою секретную фразу. Это пароль для доступа к вашим средствам. Крайне важно, чтобы вы создали резервную копию и никогда не передавали ее никому.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Безопасность прежде всего!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Секретная фраза",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Секретная фраза скопирована",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Копировать секретную фразу",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Если вы потеряете свое устройство или удалите приложение, вам понадобится ваша секретная фраза или Seed, чтобы вернуть свои средства!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Безопасность",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Seed",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Ниже Seed вашего кошелька.Крайне важно,чтобы Вы сохранили Seed и никогда не хранили его как обычный текст или как скриншот.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Seed скопирован в буфер обмена\nсохраниться в течение 2 минут.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Seed скопирован",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Seed содержит ту же информацию, что и секретная фраза, но в машиночитаемом виде. Пока она у вас есть, у вас будет доступ к вашим средствам",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Seed Недействительный.",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Не могу запросить у себя",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Отправить",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Отправить %1 Nano",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Отправить %1 Banano",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Произошла ошибка. Попробуйте позже.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Отправить из",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Отправить",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Отправка памятки с транзакцией не удалась, возможно, они не являются пользователем Nautilus.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Отправка сообщения",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Отправить запрос еще раз",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Отправляйте или запрашивайте платеж с помощью сообщений со сквозным шифрованием!\n\nЗапросы на оплату, записки и сообщения будут приниматься только другими пользователями nautilus.\n\nВам не нужно иметь имя пользователя для отправки или получения запросов на оплату, и вы можете использовать их для ведения собственного учета, даже если они не используют nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Отправить информацию о листе",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Отправлено",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Отправлено на",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Установка пароля",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Пароль был успешно установлен",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Настройки",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Загрузить с Paper кошелька",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Установить пароль",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "Поделиться Kalium",
+  "@shareKalium": {},
+  "shareKaliumText": "Проверьте Kalium! Официальный мобильный кошелек Banano!",
+  "@shareKaliumText": {},
+  "shareLink": "Поделиться ссылкой",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Поделиться Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Оцените Nautilus! Лучший Android кошелёк Nano!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Показать контакты",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Симплекс",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Поддержать разработчика",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Переключиться на Seed",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "По умолчанию",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Нажмите, чтобы скрыть",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Нажмите, чтобы показать",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Тема",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "на",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Много неудачных попыток разблокировки.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Транзакции",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Отправить",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Нажмите в любом месте, чтобы закрыть окно.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 NANO успешно переведены в Nautilus кошелёк.\n",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 BANANO успешно переведены в Kalium кошелёк.",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "Обнаружен кошелёк с балансом %1 NANO.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "Обнаружен кошелёк с балансом %1 BANANO.\n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Нажмите Подтвердить, чтобы перевести средства.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Перевод может занять несколько секунд.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "Во время передачи произошла ошибка.Пожалуйста, попробуйте позже.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Перевод Средств",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Этот процесс переведёт средства с бумажного кошелька на ваш Nautilus кошелёк.\n\nНажмите кнопку \"%1\" чтобы начать.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Этот процесс переведёт средства с бумажного кошелька на ваш Nautilus кошелёк.\n\nНажмите кнопку \"%1\" чтобы начать.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "В результате этого средства будут переведены с бумажного кошелька на ваш кошелек Nautilus.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Перевод",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Введите Seed ниже.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "На этом seed нет NANO.",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "На этом seed нет BANANO.",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Этот QR не содержит действительного seed",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Сканировать Nano \nseed или закрытый ключ",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Сканировать Banano \nseed или закрытый ключ",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "непризнанный",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "неподтвержденный",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "невыполненными",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Открыть",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Аутентификация для разблокировки Nautilus",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Аутентификация для разблокировки Kalium",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Введите PIN , для разблокировки Nautilus",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Введите PIN-код, чтобы разблокировать Kalium",
+  "@unlockPinKal": {},
+  "unpaid": "невыплаченных",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "непрочитанный",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Онлайн время",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "У вас уже есть зарегистрированное имя пользователя! В настоящее время изменить имя пользователя невозможно, но вы можете зарегистрировать новое имя под другим адресом.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Доступно имя пользователя!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Пожалуйста, введите имя пользователя",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Ошибка имени пользователя",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Выберите уникальный @username, чтобы друзьям и семье было легко найти вас!\n\nИмя пользователя Nautilus обновляет пользовательский интерфейс по всему миру, чтобы отразить ваш новый дескриптор.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Неверное имя пользователя",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Имя пользователя недоступно",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Имена пользователей Nautilus — это централизованная услуга, предоставляемая Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "Пользователь не найден!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Посмотреть Детали",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Вес голосования",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "Предупреждение",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Добро пожаловать в Nautilus. Вы можете создать новый кошелек или импортировать уже существующий.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Добро пожаловать в Kalium. Чтобы продолжить, можно создать новый кошелек или импортировать уже существующий.",
+  "@welcomeTextKal": {},
+  "withAddress": "С адресом",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "С сообщением",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "Через %1 мин.",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "Через %1 мин.",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Да",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Да",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

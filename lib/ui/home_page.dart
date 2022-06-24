@@ -9,7 +9,6 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_contacts/flutter_contacts.dart' as flutter_contacts;
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -291,16 +290,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         text: "${AppLocalization.of(context)!.giftAmount}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: [
-                          displayCurrencyAmount(
-                              context,
-                              TextStyle(
-                                color: StateContainer.of(context).curTheme.primary,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'NunitoSans',
-                                decoration: TextDecoration.lineThrough,
-                              ),
-                              includeSymbol: true),
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, balance.toString()),
+                            style: AppStyles.textStyleAddressPrimary(context),
+                          ),
+                          displayCurrencySymbol(
+                            context,
+                            AppStyles.textStyleAddressPrimary(context),
+                          ),
                           TextSpan(
                             text: actualAmount,
                             style: AppStyles.textStyleParagraphPrimary(context),
@@ -411,16 +408,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         text: "${AppLocalization.of(context)!.giftAmount}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: [
-                          displayCurrencyAmount(
-                              context,
-                              TextStyle(
-                                color: StateContainer.of(context).curTheme.primary,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'NunitoSans',
-                                decoration: TextDecoration.lineThrough,
-                              ),
-                              includeSymbol: true),
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, amountRaw),
+                            style: AppStyles.textStyleAddressPrimary(context),
+                          ),
+                          displayCurrencySymbol(
+                            context,
+                            AppStyles.textStyleAddressPrimary(context),
+                          ),
                           TextSpan(
                             text: supposedAmount,
                             style: AppStyles.textStyleParagraphPrimary(context),
@@ -460,10 +455,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (widget.priceConversion != null) {
       _priceConversion = widget.priceConversion;
     } else {
-      _priceConversion = PriceConversion.BTC;
+      _priceConversion = PriceConversion.CURRENCY;
     }
     // Main Card Size
-    if (_priceConversion == PriceConversion.BTC) {
+    if (_priceConversion == PriceConversion.CURRENCY) {
       mainCardHeight = 80;
       settingsIconMarginTop = 15;
     } else if (_priceConversion == PriceConversion.NONE) {
@@ -474,8 +469,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       settingsIconMarginTop = 7;
     }
     _addSampleContact();
-    // _updateContacts();
-    // _updateBlocked();
     _updateUsers();
     _updateTXData();
     // infinite scroll:
@@ -946,7 +939,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       _isRefreshing = true;
     });
     // Hide refresh indicator after 2.5 seconds
-    Future.delayed(Duration(milliseconds: 2500), () {
+    Future.delayed(const Duration(milliseconds: 2500), () {
       setState(() {
         _isRefreshing = false;
       });
@@ -1430,7 +1423,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   void paintQrCode({String? address}) {
     final QrPainter painter = QrPainter(
-      data: 'nano:${address ?? StateContainer.of(context).wallet!.address!}',
+      data: "nano:${address ?? StateContainer.of(context).wallet!.address!}",
       version: 9,
       gapless: false,
       errorCorrectionLevel: QrErrorCorrectLevel.Q,
@@ -2283,7 +2276,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          if (_priceConversion == PriceConversion.BTC)
+          if (_priceConversion == PriceConversion.CURRENCY)
             Stack(
               alignment: AlignmentDirectional.center,
               children: <Widget>[
@@ -2339,32 +2332,30 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               ],
             ),
           ),
-          if (_priceConversion == PriceConversion.BTC)
-            Container(
-              child: Stack(
-                alignment: AlignmentDirectional.center,
-                children: <Widget>[
-                  const Text(
-                    "1234567",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
-                  ),
-                  Opacity(
-                    opacity: _opacityAnimation.value,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: const Text(
-                        "1234567",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
-                      ),
+          if (_priceConversion == PriceConversion.CURRENCY)
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                const Text(
+                  "1234567",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
+                ),
+                Opacity(
+                  opacity: _opacityAnimation.value,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.text20,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: const Text(
+                      "1234567",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
         ],
       );
@@ -2372,7 +2363,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // Balance texts
     return GestureDetector(
       onTap: () {
-        if (_priceConversion == PriceConversion.BTC) {
+        if (_priceConversion == PriceConversion.CURRENCY) {
           // Hide prices
           setState(() {
             _priceConversion = PriceConversion.NONE;
@@ -2389,17 +2380,17 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           });
           sl.get<SharedPrefsUtil>().setPriceConversion(PriceConversion.HIDDEN);
         } else if (_priceConversion == PriceConversion.HIDDEN) {
-          // Cycle to BTC price
+          // Cycle to CURRENCY price
           setState(() {
             mainCardHeight = 80;
             settingsIconMarginTop = 15;
           });
           Future.delayed(const Duration(milliseconds: 150), () {
             setState(() {
-              _priceConversion = PriceConversion.BTC;
+              _priceConversion = PriceConversion.CURRENCY;
             });
           });
-          sl.get<SharedPrefsUtil>().setPriceConversion(PriceConversion.BTC);
+          sl.get<SharedPrefsUtil>().setPriceConversion(PriceConversion.CURRENCY);
         }
       },
       child: Container(
@@ -2409,65 +2400,54 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         child: _priceConversion == PriceConversion.HIDDEN
             ?
             // Nano logo
-            Center(child: Container(child: Icon(AppIcons.nanologo, size: 32, color: StateContainer.of(context).curTheme.primary)))
-            : Container(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    if (_priceConversion == PriceConversion.BTC)
-                      Text(
-                          StateContainer.of(context)
-                              .wallet!
-                              .getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale),
-                          textAlign: TextAlign.center,
-                          style: AppStyles.textStyleCurrencyAlt(context))
-                    else
-                      const SizedBox(height: 0),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            constraints: BoxConstraints(maxWidth: (MediaQuery.of(context).size.width - 205).abs()),
-                            child: AutoSizeText.rich(
+            Center(child: Icon(AppIcons.nanologo, size: 32, color: StateContainer.of(context).curTheme.primary))
+            : Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  if (_priceConversion == PriceConversion.CURRENCY)
+                    Text(
+                        StateContainer.of(context)
+                            .wallet!
+                            .getLocalCurrencyPrice(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale),
+                        textAlign: TextAlign.center,
+                        style: AppStyles.textStyleCurrencyAlt(context)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        constraints: BoxConstraints(maxWidth: (MediaQuery.of(context).size.width - 205).abs()),
+                        child: AutoSizeText.rich(
+                          TextSpan(
+                            children: [
+                              if (_priceConversion == PriceConversion.CURRENCY)
+                                displayCurrencySymbol(context, AppStyles.textStyleCurrency(context))
+                              else
+                                displayCurrencySymbol(context, AppStyles.textStyleCurrencySmaller(context)),
+                              // Main balance text
                               TextSpan(
-                                children: [
-                                  if (_priceConversion == PriceConversion.BTC)
-                                    displayCurrencyAmount(context, AppStyles.textStyleCurrency(context, true))
-                                  else
-                                    displayCurrencyAmount(
+                                text: getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet?.accountBalance.toString()),
+                                style: _priceConversion == PriceConversion.CURRENCY
+                                    ? AppStyles.textStyleCurrency(context)
+                                    : AppStyles.textStyleCurrencySmaller(
                                         context,
-                                        AppStyles.textStyleCurrencySmaller(
-                                          context,
-                                          true,
-                                        )),
-                                  // Main balance text
-                                  TextSpan(
-                                    text: getCurrencySymbol(context) + StateContainer.of(context).wallet!.getAccountBalanceDisplay(context),
-                                    style: _priceConversion == PriceConversion.BTC
-                                        ? AppStyles.textStyleCurrency(context)
-                                        : AppStyles.textStyleCurrencySmaller(
-                                            context,
-                                          ),
-                                  ),
-                                ],
+                                      ),
                               ),
-                              maxLines: 1,
-                              style: TextStyle(fontSize: _priceConversion == PriceConversion.BTC ? 28 : 22),
-                              stepGranularity: 0.1,
-                              minFontSize: 1,
-                              maxFontSize: _priceConversion == PriceConversion.BTC ? 28 : 22,
-                            ),
+                            ],
                           ),
-                        ],
+                          maxLines: 1,
+                          style: TextStyle(fontSize: _priceConversion == PriceConversion.CURRENCY ? 28 : 22),
+                          stepGranularity: 0.1,
+                          minFontSize: 1,
+                          maxFontSize: _priceConversion == PriceConversion.CURRENCY ? 28 : 22,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 0),
-                  ],
-                ),
+                    ],
+                  ),
+                  const SizedBox(height: 0),
+                ],
               ),
       ),
     );
@@ -2951,7 +2931,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 },
                 child: Center(
                   child: Container(
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       minHeight: cardHeight,
                     ),
                     // padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
@@ -2963,7 +2943,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
-                          constraints: BoxConstraints(
+                          constraints: const BoxConstraints(
                             maxHeight: cardHeight,
                           ),
                           margin: const EdgeInsetsDirectional.only(start: 20.0),
@@ -2997,18 +2977,18 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                   if (!txDetails.is_message && !isEmpty(txDetails.amount_raw))
                                     Row(
                                       children: <Widget>[
+                                        Text(
+                                          getThemeAwareRawAccuracy(context, txDetails.amount_raw),
+                                          style: AppStyles.textStyleTransactionAmount(context),
+                                        ),
                                         RichText(
                                           textAlign: TextAlign.start,
                                           text: TextSpan(
-                                            text: '',
+                                            text: "",
                                             children: [
-                                              displayCurrencyAmount(
+                                              displayCurrencySymbol(
                                                 context,
-                                                AppStyles.textStyleTransactionAmount(
-                                                  context,
-                                                  true,
-                                                ),
-                                                includeSymbol: true,
+                                                AppStyles.textStyleTransactionAmount(context),
                                               ),
                                             ],
                                           ),
@@ -3017,7 +2997,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                             caseSensitive: false,
                                             words: false,
                                             term: _searchController.text,
-                                            text: getRawAsThemeAwareAmount(context, txDetails.amount_raw),
+                                            text: getRawAsThemeAwareFormattedAmount(context, txDetails.amount_raw),
                                             textAlign: TextAlign.start,
                                             textStyle: AppStyles.textStyleTransactionAmount(context),
                                             textStyleHighlight: TextStyle(
@@ -3062,7 +3042,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                           ),
                         Container(
                           // width: MediaQuery.of(context).size.width / 4.0,
-                          constraints: BoxConstraints(maxHeight: cardHeight),
+                          constraints: const BoxConstraints(maxHeight: cardHeight),
 
                           margin: const EdgeInsetsDirectional.only(end: 20.0),
 

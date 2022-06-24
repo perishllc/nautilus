@@ -496,24 +496,30 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                                   children: [
                                     // Main balance text
                                     TextSpan(
-                                      text: '',
+                                      text: "",
                                       children: [
-                                        displayCurrencyAmount(
+                                        TextSpan(
+                                          text: getThemeAwareRawAccuracy(context, account.balance),
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              fontFamily: "NunitoSans",
+                                              fontWeight: FontWeight.w900,
+                                              color: StateContainer.of(context).curTheme.text),
+                                        ),
+                                        displayCurrencySymbol(
                                           context,
                                           TextStyle(
                                               fontSize: 16.0,
                                               fontFamily: "NunitoSans",
                                               fontWeight: FontWeight.w900,
-                                              color: StateContainer.of(context).curTheme.text,
-                                              decoration: TextDecoration.lineThrough),
+                                              color: StateContainer.of(context).curTheme.text),
                                         ),
                                         TextSpan(
-                                          text: (account.balance != null ? getCurrencySymbol(context) : "") +
-                                              (account.balance != null && !account.selected
+                                          text: account.balance != null
+                                              ? (!account.selected)
                                                   ? getRawAsThemeAwareAmount(context, account.balance)
-                                                  : account.selected
-                                                      ? StateContainer.of(context).wallet!.getAccountBalanceDisplay(context)
-                                                      : ""),
+                                                  : getRawAsThemeAwareFormattedAmount(context, account.balance)
+                                              : "",
                                           style: TextStyle(
                                             fontSize: 16.0,
                                             fontFamily: "NunitoSans",

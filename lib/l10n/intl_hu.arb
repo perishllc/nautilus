@@ -1,129 +1,1951 @@
 {
-  "cancel": "Mégse",
-  "close": "Bezárás",
-  "confirm": "Megerősít",
-  "no": "Nem",
-  "yes": "Igen",
-  "onStr": "Be",
-  "off": "Ki",
-  "send": "Küldés",
-  "receive": "Fogadás",
-  "sent": "Küldött",
-  "received": "Fogadott",
-  "transactions": "Tranzakciók",
-  "addressCopied": "Cím Másolva",
-  "copyAddress": "Cím Másolása",
-  "addressShare": "Megosztás",
-  "seed": "Seed",
-  "seedInvalid": "Helytelen Seed",
-  "seedCopied": "Seed másolva a clipboardra.\n 2 percig beilleszthető.",
-  "scanQrCode": "Olvasd be a QR Kódot",
-  "contactsImportErr": "Sikertelen kontakt importálás",
-  "viewDetails": "Részletek Mutatása",
-  "qrInvalidSeed": "QR-kód nem tartalmaz érvényes seedet vagy privát kulcsot",
-  "removeContact": "Kontakt Törlése",
-  "removeContactConfirmation": "Biztos, hogy törölni szeretnéd %1-t?",
-  "contactHeader": "Kontakt",
-  "contactsHeader": "Kontaktok",
+  "@@locale": "hu",
+  "account": "Account",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
+  "accounts": "Accounts",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
+  "ackBackedUp": "Are you sure that you've backed up your secret phrase or seed?",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
+  "activeMessageHeader": "Aktív üzenet",
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Add Account",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Felhasználó letiltása",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
   "addContact": "Kontakt Hozzáadása",
-  "contactNameHint": "Írj be egy nevet @",
-  "contactInvalid": "Helytelen kontakt név",
-  "noContactsExport": "Nincsenek exportálható kontaktok",
-  "noContactsImport": "Nincsenek importálható kontaktok",
-  "contactsImportSuccess": "Sikeresen importáltál %1 kontaktot",
-  "contactAdded": "%1 hozzá lett adva a kontaktokhoz!",
-  "contactRemoved": "Törölted %1-t a kontaktjaid közül!",
-  "contactNameMissing": "Nincsenek exportálható kontaktok",
-  "contactExists": "Ez a kontakt már létezik!",
-  "backupYourSeed": "Seed másolása",
-  "backupSeedConfirm": "Biztos vagy benne, hogy elmentetted a seeded?",
-  "seedBackupInfo": "Ez itt a tárcád seedje. Nagyon fontos, hogy megőrizd, és soha ne készíts róla screenshotot, vagy őrizd egyszerű szöveg formátumban.",
-  "copySeed": "Seed Másolása",
-  "seedCopiedShort": "Seed Másolva",
-  "importSeed": "Seed importálása",
-  "importSeedHint": "Írd be a seeded.",
-  "welcomeText": "Üdvözöllek a Nautilusban! Hozz létre egy új tárcát, vagy importálj egy létezőt.",
-  "newWallet": "Új Tárca",
-  "importWallet": "Tárca Importálása",
-  "sentTo": "Elküldve ide",
-  "sending": "Küldés folyamatban",
-  "to": "Küldés ide",
-  "sendAmountConfirm": "%1 Nano küldése?",
-  "sendError": "Hiba történt. Próbálkozz később.",
-  "enterAmount": "Küldött Mennyiség",
-  "enterAddress": "Küldés Erre A Címre",
-  "invalidAddress": "Helytelen Cím",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Kedvenc hozzáadása",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Cím Másolva",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Adja meg a címet",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
   "addressMissing": "Adjon meg egy célt",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Kérjük, adja meg felhasználónevét vagy címét",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Megosztás",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Álnevek",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
   "amountMissing": "Adjon meg egy összeget",
-  "insufficientBalance": "Elégtelen Számlaegyenleg",
-  "sendFrom": "Küldés Innen",
-  "pinCreateTitle": "Hozz létre egy 6 számjegyű PIN-kódot",
-  "pinConfirmTitle": "Erősítsd meg a PIN-kódod",
-  "pinEnterTitle": "Írd be a PIN-kódod",
-  "pinConfirmError": "PIN-kódok nem egyeznek",
-  "pinInvalid": "Helytelen PIN-kód",
-  "themeHeader": "Téma",
-  "changeRepButton": "Megváltoztat",
-  "changeRepAuthenticate": "Képviselő Megváltoztatása",
-  "currentlyRepresented": "Jelenlegi Képviselő",
-  "changeRepSucces": "Képviselő Sikeresen Kiválasztva",
-  "repInfoHeader": "Mi az a Képviselő?",
-  "repInfo": "A Képviselő egy olyan felhasználó, aki szavaz a hálózati konszenzusról, így fenntartja annak működését. A szavazati ereje a rendelkezésre álló tőkéje alapján súlyozott. A saját tőkédet delegálhatod egy Képviselőre, akiben bízol. A Képviselő nem tudja elkölteni a tőkéd. Egy olyan Képviselőt válassz, aki megbízható, és keveset szünetelteti a szolgáltatását.",
-  "pinRepChange": "Írd be a PIN-kódod, hogy megváltoztasd a Képviselőd",
-  "changeRepHint": "Új Képviselő",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Kérdezte",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
   "authMethod": "Hitelesítési Módszer",
-  "pinMethod": "PIN",
-  "privacyPolicy": "Adatvédelmi Szabályzat",
-  "biometricsMethod": "Biometria",
-  "changeCurrency": "Valuta Megváltoztatása",
-  "language": "Nyelv",
-  "shareNautilus": "Oszd meg a Nautilusot",
-  "shareNautilusText": "Próbáld ki a Nautilusot, a Nano hivatalos Androidos tárcáját!",
-  "logout": "Kijelentkezés",
-  "warning": "FIGYELEM",
-  "logoutDetail": "Ha kijelentkezel, elvész a beírt seeded, és minden Nautilushoz kapcsolódó adatod az eszközről. Ha nem őrizted meg a seeded, nem fogsz tudni hozzáférni a tőkédhez.",
-  "logoutAction": "Seed törlése és kijelentkezés",
-  "logoutAreYouSure": "Biztos, hogy kijelentkezel?",
-  "logoutReassurance": "Ha elmentetted a seeded, akkor nem lehet baj.",
-  "settingsHeader": "Beállítások",
-  "preferences": "Preferenciák",
-  "manage": "Kezelés",
-  "backupSeed": "Seed Másolása",
-  "fingerprintSeedBackup": "Erősítsd meg az ujjlenyomatoddal, hogy szeretnéd elmenteni a seeded.",
-  "pinSeedBackup": "Írd be a PIN-kódod, hogy megjelenjen a seeded.",
-  "systemDefault": "Rendszer alapértelmezett",
-  "notifications": "Értesítések",
-  "notificationTitle": "Kaptál %1 NANO-t",
-  "notificationBody": "Nyisd meg a Nautilusot, hogy megnézhesd a tranzakciót.",
-  "notificationHeaderSupplement": "Koppints a megnyitáshoz",
-  "transfer": "Küldés",
-  "transferManualHint": "Írd be a seedet.",
-  "scanInstructions": "Olvass be QR kóddal egy Nano \ncímet",
-  "unlockPin": "Írd be a PIN-t a Bejelentkezéshez a Nautilusba",
-  "unlockBiometrics": "Hitelesítés Szükséges a Nautilusba való bejelentkezéshez",
-  "lockAppSetting": "Hitelesítés az Indításnál",
-  "locked": "Lezárva",
-  "unlock": "Feloldás",
-  "tooManyFailedAttempts": "Túl sok hibás feloldási kísérlet.",
-  "securityHeader": "Biztonság",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Automatikus importálás",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
   "autoLockHeader": "Automatikus Feloldás",
-  "xMinutes": "%1 perc után",
-  "xMinute": "%1 perc után",
-  "instantly": "Azonnal",
-  "exampleCardIntro": "Üdvözöllek a Nautilusban! Így fogod látni a tranzakcióid, amikor kapsz NANO-t.",
-  "exampleCardLittle": "Egy kevés",
-  "exampleCardLot": "Rengeteg",
-  "exampleCardTo": "valakinek",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "I've Backed It Up",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Backup Secret Phrase",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Seed Másolása",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Biztos vagy benne, hogy elmentetted a seeded?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Seed másolása",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Biometria",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "% 1 sikeresen letiltva.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "A felhasználó már blokkolva van!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "blokkolt",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Blokkolja a felhasználót bármilyen ismert álnévvel vagy címmel. Minden üzenet, tranzakció, vagy tőlük érkező kéréseket figyelmen kívül hagyja.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Letiltott információ",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "A becenév már használt!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Válassz egy becenevet",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "% 1 feloldva!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Explorer blokkolása",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Intéző információ letiltása",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Melyik blokkkezelőt használja a tranzakciós információk megjelenítéséhez",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "A felhasználó letiltása",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Mégse",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Valuta Megváltoztatása",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Változási napló",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Képviselő Megváltoztatása",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Megváltoztat",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Új Képviselő",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "Ez már a képviselője!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Képviselő Sikeresen Kiválasztva",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Szabad szobák ellenőrzése",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Bezárás",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Megerősít",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Confirm the password",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Connecting",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 hozzá lett adva a kontaktokhoz!",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Ez a kontakt már létezik!",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Kontakt",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Helytelen kontakt név",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Írj be egy nevet @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Nincsenek exportálható kontaktok",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "Törölted %1-t a kontaktjaid közül!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Kontaktok",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Sikertelen kontakt importálás",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "Sikeresen importáltál %1 kontaktot",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Copied",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Copy",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Cím Másolása",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Link másolása",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Seed Másolása",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Másolja a pénztárca címét a vágólapra",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Create a password.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Ajándékkártya létrehozása",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Ajándékkártya létrehozása",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "You can create a password to add additional security to your wallet.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Create a password",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Password is optional, and your wallet will be protected with your PIN or biometrics regardless.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Hozzon létre",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "QR-kód létrehozása",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Ajándékkártya Létrehozása",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Pénznem",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Pénznem mód",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Pénznem mód információ",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Válassza ki, melyik egységben jelenítse meg az összegeket.\n1 nyano = 0,000001 NANO, vagy \n1 000 000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Jelenlegi Képviselő",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Dekódolási hiba!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Main Account",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Account %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Törlés",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Disable",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Password has been disabled",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Disable Wallet Password",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Elutasítja",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Érvénytelen domain név",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "szerkesztése",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Failed to set a wallet password",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Küldés Erre A Címre",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Küldött Mennyiség",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Adja meg az ajándékjegyet",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Írja be az üzenetet",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Enter your password",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Adjon meg egy felhasználónevet",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Felhasználó vagy cím megadása",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
   "exampleCardFrom": "valakitől",
-  "welcomeTextKal": "Üdvözöllek a Kaliumban! Hozz létre egy új tárcát, vagy importálj egy létezőt.",
-  "sendAmountConfirmKal": "%1 Banano küldése?",
-  "logoutDetailKal": "Ha kijelentkezel, elvész a beírt seeded, és minden Kaliumhoz kapcsolódó adatod az eszközről. Ha nem őrizted meg a seeded, nem fogsz tudni hozzáférni a tőkédhez.",
-  "notificationTitleKal": "Kaptál %1 BANANO-t",
-  "notificationBodyKal": "Nyisd meg a Kaliumot, hogy megnézhesd a tranzakciót.",
-  "scanInstructionsKal": "Olvass be QR kóddal egy Banano \ncímet",
-  "unlockPinKal": "Írd be a PIN-t a Bejelentkezéshez a Kaliumba",
-  "unlockBiometricsKal": "Hitelesítés Szükséges a Kaliumba való bejelentkezéshez",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "Egy random majomtól",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Üdvözöllek a Nautilusban! Így fogod látni a tranzakcióid, amikor kapsz NANO-t.",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
   "exampleCardIntroKal": "Üdvözöllek a Kaliumban! Így fogod látni a tranzakcióid, amikor kapsz BANANO-t.",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Egy kevés",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "Rengeteg",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "valakinek",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
   "exampleCardToKal": "Egy random majomnak",
-  "exampleCardFromKal": "Egy random majomtól"
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Miután elküldte vagy fogadta a fizetési kérelmet, így jelennek meg itt, a kártya színével és címkéjével, amely jelzi az állapotot. \n\nA zöld azt jelzi, hogy a kérelmet kifizették.\nSárga jelzi a kérést/emlékeztetőt nem fizették ki/olvas.\nA piros azt jelzi, hogy a kérelmet nem olvasták el vagy fogadták el.\n\n Semleges színű kártyák összeg nélkül csak üzenetek.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Néhány",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Sushi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "A fizetési kérelem elküldése vagy fogadása után itt jelennek meg:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hé, mizu?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "Sok",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Bérlés",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "Boldog születésnapot!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Gáz Pénz",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Exit",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "nem sikerült",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus leválasztva",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Úgy tűnik, hogy a Nautilus szerverek le vannak kapcsolva, a küldés és fogadás (emlékeztetők nélkül) továbbra is működőképesnek kell lennie, de előfordulhat, hogy a fizetési kérelmek nem teljesülnek\n\n Jöjjön vissza később, vagy indítsa újra az alkalmazást, hogy újra próbálkozzon",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Kedvenc már létezik",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Kedvenc",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Érvénytelen kedvenc név",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Adjon meg egy becenevet",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Válasszon nevet ennek a kedvencnek",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "% 1 el lett távolítva a kedvencek közül!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "kedvencek",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Kiemelt",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Erősítsd meg az ujjlenyomatoddal, hogy szeretnéd elmenteni a seeded.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "tól től",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "teljesítette",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "Van egy ajándékod!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Üres ajándék",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Ajándék összege",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Ajándék",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Töltsön be egy digitális ajándékkártyát NANO segítségével! Állítson be egy összeget, és választható üzenetet a címzett számára, hogy lássa, mikor nyitja meg!\n\nMiután létrehozta, kap egy linket, amelyet bárkinek elküldhet, amely megnyitásakor automatikusan elosztja a pénzeszközöket a címzettnek a Nautilus telepítése után!\n\nHa a címzett már Nautilus felhasználó, akkor a hivatkozás megnyitásakor felszólítást kap arra, hogy utalja át a pénzt számlájára",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Ajándék üzenet",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Go Back",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Got It!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Ugrás a QR-re",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "elrejtése",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Hide Account?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Otthon",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "figyelmen kívül",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Import",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "A linkre kattintott tartalmaz néhány nano-t, szeretné importálni ebbe a pénztárcába, vagy visszatéríteni annak, aki elküldte?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Import Secret Phrase",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Please enter your 24-word secret phrase below. Each word should be separated by a space.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Seed importálása",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Írd be a seeded.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Import Seed Instead",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Tárca Importálása",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Azonnal",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Elégtelen Számlaegyenleg",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Helytelen Cím",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Invalid Password",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "I Understand the Risks",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Nautilus Wallet",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Nyelv",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Link másolva",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Support",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Betöltött",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Betöltve",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Hitelesítés az Indításnál",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Lezárva",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Kijelentkezés",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Seed törlése és kijelentkezés",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Biztos, hogy kijelentkezel?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Ha kijelentkezel, elvész a beírt seeded, és minden Nautilushoz kapcsolódó adatod az eszközről. Ha nem őrizted meg a seeded, nem fogsz tudni hozzáférni a tőkédhez.",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Ha kijelentkezel, elvész a beírt seeded, és minden Kaliumhoz kapcsolódó adatod az eszközről. Ha nem őrizted meg a seeded, nem fogsz tudni hozzáférni a tőkédhez.",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Ha elmentetted a seeded, akkor nem lehet baj.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Kezelés",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Couldn't Verify Request",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Manual Entry",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Megjelölés fizetettnek",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Megjelölés kifizetetlenként",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Feljegyzés újra elküldve! Ha még mindig nem ismeri fel, előfordulhat, hogy a címzett készüléke offline állapotban van.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Üzenet",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "A minimális küldési összeg:% 1% 2",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 is not a valid word",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Mnemonic Phrase",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "Secret phrase may only contain 24 words",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Ez a funkció megköveteli, hogy hosszabb tranzakciós előzményekkel rendelkezzen a spam megelőzése érdekében.\n\nAlternatív megoldásként, megmutathat egy QR-kódot, amelyet valaki beolvashat.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Ellenőrzés szükséges",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "This is your new account. Once you receive NANO, transactions will show up like this:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "",
+  "@newAccountIntroKal": {},
+  "newWallet": "Új Tárca",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Next",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Nem",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Nincsenek exportálható kontaktok",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "Nincsenek importálható kontaktok",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Csomópont állapota",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Nincs keresési eredmény!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "No, Skip",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Nyisd meg a Nautilusot, hogy megnézhesd a tranzakciót.",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Nyisd meg a Kaliumot, hogy megnézhesd a tranzakciót.",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Koppints a megnyitáshoz",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "Annak érdekében, hogy ez a funkció megfelelően működjön, az értesítéseket engedélyezni kell",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Értesítések",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "Kaptál %1 NANO-t",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "Kaptál %1 BANANO-t",
+  "@notificationTitleKal": {},
+  "notSent": "nem küldött",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Ki",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Ok",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Onrámpa",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "Be",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Nyitott",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "fizetett",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Paper Wallet",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Password cannot be empty",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Nautilus anymore.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Passwords do not match",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "This password will be required to open Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Fizessen",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Valaki kért fizetést tőled! további információkért nézze meg a fizetési oldalt.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Fizetések",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Fizesse ezt a kérelmet",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "",
+  "@pending": {},
+  "pickFromList": "Pick From a List",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "PIN-kódok nem egyeznek",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Erősítsd meg a PIN-kódod",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Hozz létre egy 6 számjegyű PIN-kódot",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Írd be a PIN-kódod",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Helytelen PIN-kód",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Írd be a PIN-kódod, hogy megváltoztasd a Képviselőd",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Írd be a PIN-kódod, hogy megjelenjen a seeded.",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Preferenciák",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Adatvédelmi Szabályzat",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Vásárlás Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "QR code does not contain a valid destination",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Please Grant Camera Permissions to scan QR Codes",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "QR-kód nem tartalmaz érvényes seedet vagy privát kulcsot",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "QR does not contain a valid secret phrase",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Could not Read QR Code",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Értékeld az alkalmazást",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn't take more than a minute.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Raw Seed",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Olvass tovább",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "esedékes",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Fogadás",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Fogadott",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Minimális vétel",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Minimális információ",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Minimális összeg a fogadáshoz. Ha ennél kisebb összegű fizetés vagy kérés érkezik, akkor azt figyelmen kívül hagyják.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "visszatérítés",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "mert",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Regisztráció",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Regisztráció Felhasználónév",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Felhasználónév regisztrálása",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button.",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Feloldás",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Biztosan fel akarja oldani a (z)% 1 blokkolását?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Kontakt Törlése",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Biztos, hogy törölni szeretnéd %1-t?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Kedvenc eltávolítása",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "A Képviselő egy olyan felhasználó, aki szavaz a hálózati konszenzusról, így fenntartja annak működését. A szavazati ereje a rendelkezésre álló tőkéje alapján súlyozott. A saját tőkédet delegálhatod egy Képviselőre, akiben bízol. A Képviselő nem tudja elkölteni a tőkéd. Egy olyan Képviselőt válassz, aki megbízható, és keveset szünetelteti a szolgáltatását.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Mi az a Képviselő?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Válasz",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Representatives",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Kérés",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "% 1% 2 kérés",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Kért",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Kért Tól",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Kérelem sikertelen: Úgy tűnik, hogy a felhasználó nem telepítette a Nautilust, vagy letiltotta az értesítéseket.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Kérő",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Fizetés kérése",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Hiba történt a fizetési kérelem elküldésekor, előfordulhat, hogy a címzett eszköze offline vagy nem érhető el.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Kérés újra elküldve! Ha még mindig nem ismeri fel, előfordulhat, hogy a címzett készüléke offline állapotban van.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Require a password to open Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "A feljegyzés újraküldése",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Az adatbázis visszaállítása",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Biztosan vissza akarja állítani a belső adatbázist? \n\nEz megoldhatja az alkalmazás frissítésével kapcsolatos problémákat, de törli az összes mentett beállítást is. Ez NEM törli a pénztárca magját. Ha problémái vannak, készítsen biztonsági másolatot a magról, telepítse újra az alkalmazást, és ha a probléma továbbra is fennáll, készítsen hibajelentést a githubról vagy a viszályról.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Próbálja újra",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Olvass be QR kóddal egy Nano \ncímet",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Olvass be QR kóddal egy Banano \ncímet",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Olvasd be a QR Kódot",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Bármit kereshet",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "In the next screen, you will see your secret phrase. It is a password to access your funds. It is crucial that you back it up and never share it with anyone.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Safety First!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Secret Phrase",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Secret Phrase Copied",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Copy Secret Phrase",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "If you lose your device or uninstall the application, you'll need your secret phrase or seed to recover your funds!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Biztonság",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Seed",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Ez itt a tárcád seedje. Nagyon fontos, hogy megőrizd, és soha ne készíts róla screenshotot, vagy őrizd egyszerű szöveg formátumban.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Seed másolva a clipboardra.\n 2 percig beilleszthető.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Seed Másolva",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "A seed bears the same information as a secret phrase, but in a machine-readable way. As long as you have one of them backed up, you'll have access to your funds.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Helytelen Seed",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Nem kérhet önmagától",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Küldés",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "%1 Nano küldése?",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "%1 Banano küldése?",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Hiba történt. Próbálkozz később.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Küldés Innen",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Küldés folyamatban",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "A tranzakcióval kapcsolatos emlékeztető küldése sikertelen, lehet, hogy nem Nautilus felhasználó.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Üzenet küldése",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Kérés küldése újra",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Fizetés küldése vagy kérése, End to End to End Titkosított üzenetekkel!\n\nFizetési kérelmek, emlékeztetők, és az üzeneteket csak más nautilus felhasználók fogadják el.\n\nA fizetési kérelmek küldéséhez vagy fogadásához nem kell felhasználónévvel rendelkeznie, és akkor is felhasználhatja őket saját nyilvántartására, még akkor is, ha nem használják a nautilust.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Adatlap küldése",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Küldött",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Elküldve ide",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Set Password",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Password has been set successfully",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Beállítások",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Load from Paper Wallet",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Set Wallet Password",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "",
+  "@shareKalium": {},
+  "shareKaliumText": "",
+  "@shareKaliumText": {},
+  "shareLink": "Link megosztása",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Oszd meg a Nautilusot",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Próbáld ki a Nautilusot, a Nano hivatalos Androidos tárcáját!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Névjegyek megjelenítése",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simplex",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Támogatja a fejlesztőt",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Switch to Seed",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Rendszer alapértelmezett",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Tap to hide",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Tap to reveal",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Téma",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "Küldés ide",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Túl sok hibás feloldási kísérlet.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Tranzakciók",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Küldés",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Tap anywhere to close the window.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 %2 successfully transferred to your Nautilus Wallet.\n",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "A wallet with a balance of %1 NANO has been detected.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Tap confirm to transfer the funds.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Transfer may take several seconds to complete.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "An error has occurred during the transfer. Please try again later.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Transfer Funds",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "This process will transfer the funds from a paper wallet to your Nautilus wallet.\n\nTap the \"%1\" button to start.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Ez a folyamat átutalja a pénzeszközöket egy papír pénztárcából a Nautilus pénztárcájába.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Transferring",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Írd be a seedet.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "This seed does not have any NANO on it",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "This QR code does not contain a valid seed.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Scan a Nano \nseed or private key",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "nem igazolt",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "meg nem erősített",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "beteljesítetlen",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Feloldás",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Hitelesítés Szükséges a Nautilusba való bejelentkezéshez",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Hitelesítés Szükséges a Kaliumba való bejelentkezéshez",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Írd be a PIN-t a Bejelentkezéshez a Nautilusba",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Írd be a PIN-t a Bejelentkezéshez a Kaliumba",
+  "@unlockPinKal": {},
+  "unpaid": "kifizetetlen",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "olvasatlan",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Uptime",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "Már regisztrált felhasználónév! Jelenleg nem lehet megváltoztatni a felhasználónevét, de szabadon regisztrálhat egy újat egy másik cím alatt.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Felhasználónév elérhető!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Kérjük, adjon meg egy felhasználónevet",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Felhasználónév hiba",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Válasszon ki egy egyedi @username -t, hogy megkönnyítse a barátok és a család megtalálását!\n\nA Nautilus felhasználónév birtoklása globálisan frissíti a felhasználói felületet, hogy tükrözze az új kezelőfelületet.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Érvénytelen felhasználónév",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Felhasználónév nem elérhető",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "A Nautilus felhasználónevek a Nano.to által nyújtott központosított szolgáltatás",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "A felhasználó nem található!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Részletek Mutatása",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Voting Weight",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "FIGYELEM",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Üdvözöllek a Nautilusban! Hozz létre egy új tárcát, vagy importálj egy létezőt.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Üdvözöllek a Kaliumban! Hozz létre egy új tárcát, vagy importálj egy létezőt.",
+  "@welcomeTextKal": {},
+  "withAddress": "Címmel",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "Üzenettel",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "%1 perc után",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "%1 perc után",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Igen",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Yes",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

@@ -1,225 +1,1951 @@
 {
-  "cancel": "Kanselahin",
-  "close": "Isara",
-  "confirm": "Kumpirmahin",
-  "no": "Hindi",
-  "yes": "Oo",
-  "onStr": "On",
-  "off": "Off",
-  "send": "Magpadala",
-  "receive": "Tumanggap",
-  "sent": "Naipadala",
-  "received": "Natanggap",
-  "transactions": "Mga transaksyon",
-  "addressCopied": "Ang Address ay nakopya",
-  "copyAddress": "Kopyahin ang Address",
-  "addressShare": "I-share",
-  "addressHint": "Ilagay ang Address",
-  "seed": "Seed",
-  "seedInvalid": "Ang seed ay hindi wasto",
-  "seedCopied": "Ang seed ay nakopya sa clipboard.\n Pwedeng i-paste ito sa loob ng dalawang minuto.",
-  "scanQrCode": "I-scan ang QR Code",
-  "contactsImportErr": "Hindi ma-import ang mga kontak",
-  "viewDetails": "Tingnan ang detalye",
-  "qrInvalidSeed": "Ang QR code ay walang laman na valid seed o private key",
-  "removeContact": "Alisin ang kontak",
-  "removeContactConfirmation": "Sigurado ka ba gusto mong tanggalin ang %1?",
-  "contactHeader": "Kontak",
-  "contactsHeader": "Mga kontak",
-  "addContact": "Mag-add ng kontak",
-  "contactNameHint": "Ilagay ang pangalan @",
-  "contactInvalid": "Hindi tugma sa kontak",
-  "noContactsExport": "Walang kontak na ma-export",
-  "noContactsImport": "Walang kontak na ma-import",
-  "contactsImportSuccess": "Na-import na ang %1 kontak",
-  "contactAdded": "%1 ay nadagdag sa mga kontak!",
-  "contactRemoved": "%1 ay natanggal sa mga kontak!",
-  "contactNameMissing": "Walang kontak na ma-export",
-  "contactExists": "Mayroon nang kapareho",
-  "backupYourSeed": "I-back up ang iyong seed",
-  "backupSeedConfirm": "Sigurado ka ba na na-back up mo na ang iyong wallet seed?",
-  "seedBackupInfo": "Ang nasa ibaba ay ang seed ng iyong wallet. Importante na i-back up ang iyong seed at huwag i-save bilang plaintext o screenshot.",
-  "copySeed": "Kopyahin ang seed",
-  "seedCopiedShort": "Nakopya ang seed",
-  "importSeed": "I-import ang iyong seed",
-  "importSeedHint": "Ilagay ang iyong seed sa ibaba.",
-  "welcomeText": "Maligayang pagdating sa Nautilus. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet.",
-  "newWallet": "Bagong Wallet",
-  "importWallet": "Dating Wallet",
-  "sentTo": "Pinadala sa",
-  "sending": "Pinapadala",
-  "to": "Sa",
-  "sendAmountConfirm": "Magpadala ng %1 Nano?",
-  "sendError": "Nagkaroon ng error. Subukan ulit mamaya.",
-  "enterAmount": "Ilagay ang Amount",
-  "enterAddress": "Ilagay ang Address",
-  "invalidAddress": "Hindi wasto ang Destination Address",
-  "addressMissing": "Mangyaring magpasok ng patutunguhan",
-  "amountMissing": "Mangyaring magpasok ng isang halaga",
-  "insufficientBalance": "Hindi sapat ang balanse",
-  "sendFrom": "Magpadala galing sa",
-  "pinCreateTitle": "Gumawa ng 6-digit pin",
-  "pinConfirmTitle": "Kumpirmahin ang iyong pin",
-  "pinEnterTitle": "Ilagay ang pin",
-  "pinConfirmError": "Hindi magkatugma ang pins",
-  "pinInvalid": "Hindi tama ang pin na nilagay",
-  "themeHeader": "Tema",
-  "changeRepButton": "Palitan",
-  "changeRepAuthenticate": "Palitan ang Representative",
-  "currentlyRepresented": "Kasalukuyang nirerepresenta ng",
-  "changeRepSucces": "Ang Representative ay napalitan",
-  "repInfoHeader": "Ano ang representative?",
-  "repInfo": "Ang representative ay isang account na nagboboto para sa kasunduan ng network. Ang kapangyarihan ng pagboto ay tinitimbang sa pamamagitan ng balanse, pwede mong i-delegate ang iyong balanse para dagdagan ang timbang ng boto ng representative na pinagkakatiwalaan mo. Ang iyong representative ay walang kapangyarihan para gastusin ang iyong pondo. Dapat piliin mo ang representative na walang masyadong downtime at mapagkakatiwalaan.",
-  "pinRepChange": "Ilagay ang pin para palitan ang representative",
-  "changeRepHint": "Ilagay ang bagong Representative",
-  "representatives": "Kinatawan",
-  "pickFromList": "Pumili sa listahan",
-  "votingWeight": "Timbang ng boto",
-  "uptime": "Uptime",
-  "authMethod": "Pamamaraan Authentication",
-  "pinMethod": "PIN",
-  "privacyPolicy": "Patakaran sa privacy",
-  "biometricsMethod": "Biometrics",
-  "changeCurrency": "Palitan ang Currency",
-  "language": "Wika",
-  "shareNautilus": "I-share ang Nautilus",
-  "shareNautilusText": "Tingnan ang Nautilus! Ang opisyal na Android Wallet ng Nano!",
-  "logout": "Logout",
-  "warning": "BABALA",
-  "logoutDetail": "Mabubura ang iyong seed at lahat ng Nautilus-related na data sa aparato na ito kapag ikaw ay nag-logout. Kapag wala kang back up ng iyong seed, hindi mo na ulit ma-aaccess ang iyong pondo.",
-  "logoutAction": "Burahin ang seed at mag-logout",
-  "logoutAreYouSure": "Sigurado ka ba?",
-  "logoutReassurance": "Wala kang dapat ikabahala basta may back up ka ng iyong seed.",
-  "settingsHeader": "Mga setting",
-  "preferences": "Kagustuhan",
-  "manage": "Pamamahala",
-  "backupSeed": "I-back up ang Seed",
-  "fingerprintSeedBackup": "Kumpirmahin ang fingerprint para i-back up ang wallet seed.",
-  "pinSeedBackup": "Ilagay ang pin para tingnan ang wallet seed.",
-  "systemDefault": "Default na System",
-  "notifications": "Abiso",
-  "notificationTitle": "Nakatanggap ng %1 NANO",
-  "notificationBody": "Buksan ang Nautilus para tingnan ito.",
-  "notificationHeaderSupplement": "Tapikin para mabuksan",
-  "settingsTransfer": "Ilipat galing sa Paper Wallet",
-  "transferError": "Nagkaroon ng error sa paglipat. Pakiulit mamaya.",
-  "paperWallet": "Paper Wallet",
-  "kaliumWallet": "Kalium Wallet",
-  "manualEntry": "Manual na ipasok",
-  "mnemonicPhrase": "Mnemonic Phrase",
-  "rawSeed": "Raw Seed",
-  "transferHeader": "Transfer\nFunds",
-  "transfer": "Ilipat",
-  "transferManualHint": "Pakilagay seed sa ibaba.",
-  "transferIntro": "Ang prosesong ito ay ang paglipat ng pondo galing sa paper wallet.\n\nI-tap ang \"%1\" button para umpisahan.",
-  "transferQrScanHint": "Mag-scan ng Nano \nseed o private key",
-  "transferQrScanError": "Ang QR code na ito ay hindi valid na seed.",
-  "transferNoFunds": "Ang seed na ito ay walang NANO.",
-  "transferConfirmInfo": "Ang wallet na may balanse na %1 NANO ay na-detect.\n",
-  "transferConfirmInfoSecond": "I-tap ang confirm para ilipat ang pondo.\n",
-  "transferConfirmInfoThird": "Ang paglipat ay maaring tumagal ng ilang segundo.",
-  "transferLoading": "Nililipat na",
-  "transferComplete": "%1 NANO ay nalipat na sa iyong Nautilus Wallet.",
-  "transferClose": "I-tap kahit saan para isara itong window.",
-  "scanInstructions": "I-scan ang Nano \naddress QR code",
-  "unlockPin": "Ilagay ang PIN mabuksan",
-  "unlockBiometrics": "I-Authenticate para ma-unlock",
-  "lockAppSetting": "I-authenticate sa paglunsad",
-  "locked": "Nakalock",
-  "unlock": "I-unlock",
-  "tooManyFailedAttempts": "Masyadong madaming maling unlock attempts.",
-  "securityHeader": "Seguridad",
-  "autoLockHeader": "I-lock ng automatic",
-  "xMinutes": "Pagkatapos ng %1 minuto",
-  "xMinute": "Pagkatapos ng %1 minuto",
-  "instantly": "Agad",
-  "exampleCardIntro": "Maligayang pagdating sa Nautilus. Ganito ang makikita mong transaksyon pag nakatanggap ka ng NANO",
-  "exampleCardLittle": "Kakaunting",
-  "exampleCardLot": "Maraming",
-  "exampleCardTo": "para sa iba",
-  "exampleCardFrom": "galing sa iba",
-  "defaultAccountName": "Pangunahing Account",
-  "defaultNewAccountName": "Account %1",
-  "newAccountIntro": "Ito ang iyong bagong account. Pag nakareceive ka ng NANO, ganito ang makikita mo:",
+  "@@locale": "tl",
   "account": "Account",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Mga Account",
-  "addAccount": "Magdagdag ng Account",
-  "hideAccountHeader": "Itago ang Account?",
-  "removeAccountText": "Sigurado ka ba na gusto mo itong itago? Pwede mo itong i-add ulit sa pamamagitan ng \"%1\" button.",
-  "tapToReveal": "Tapikin para buksan",
-  "tapToHide": "Tapikin para itago",
-  "copied": "Nakopya",
-  "copy": "Kopyahin",
-  "seedDescription": "Ang seed ay parehong impormasyon sa secret phrase, pero sa paraan na nababasa ng makina. Hanggat mayroon kang back up ng kahit ano sa dalawang ito, ma-access mo ang iyong pondo.",
-  "importSecretPhrase": "I-import ang secret phrase",
-  "importSecretPhraseHint": "Pakilagay ang iyong 24 na salita na iyong secret phrase sa ibaba. Ang bawat salita ay dapat may ispasyo sa pagitan.",
-  "qrMnemonicError": "QR ay walang valid na secret phrase.",
-  "mnemonicInvalidWord": "%1 ay hindi valid na salita",
-  "mnemonicSizeError": "Secret phrase ay may 24 na salita lamang",
-  "secretPhrase": "Secret Phrase",
-  "backupConfirmButton": "Na-backup ko na ito",
-  "secretInfoHeader": "Maging maingat!",
-  "secretInfo": "Sa susunod na screen, makikita mo ang iyong secret phrase. Ito ay password para ma-access mo ang iyong pondo. Importante na iback-up mo ito at wag mong i-share sa iba.",
-  "secretWarning": "Pag nawala mo ang iyong device o tinanggal mo ang application, kakailanganin mo ang secret phrase o seed para marecover ang iyong pondo!",
-  "gotItButton": "Nakuha ko!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "Sigurado ka ba na naback-up mo ang iyong secret phrase or seed?",
-  "secretPhraseCopy": "Kopyahin ang Secret Phrase",
-  "secretPhraseCopied": "Nakopya na ang Secret Phrase",
-  "import": "Import",
-  "importSeedInstead": "I-import ang seed",
-  "switchToSeed": "Lumipat sa Seed",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
+  "activeMessageHeader": "Aktibong Mensahe",
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Magdagdag ng Account",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "I-block ang User",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Mag-add ng kontak",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Magdagdag ng Paboritong",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Ang Address ay nakopya",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Ilagay ang Address",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Mangyaring magpasok ng patutunguhan",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Mangyaring Magpasok ng Username o Address",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "I-share",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Aliases",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Mangyaring magpasok ng isang halaga",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Asked",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Pamamaraan Authentication",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Auto Import",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "I-lock ng automatic",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Na-backup ko na ito",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
   "backupSecretPhrase": "Backup Secret Phrase",
-  "qrInvalidAddress": "QR code ay walang wasto na destinasyon",
-  "qrInvalidPermissions": "Pakiusap bigyan ng Camera Permissions para ma-scan ang QR Codes",
-  "qrUnknownError": "Hindi mabasa ang QR Code",
-  "mantaError": "Hindi ma-verify ang Request",
-  "rootWarning": "Ang iyong device ay \"rooted\", \"jailbroken\", o nabago ang security settings. Mabuti na i-reset mo ang iyong device sa orihinal na estado bago magpatuloy.",
-  "iUnderstandTheRisks": "Naiintindihan ko ang risks",
-  "exit": "Lumabas",
-  "setWalletPassword": "Maglagay ng Wallet Password",
-  "setPassword": "Maglagay ng Password",
-  "disableWalletPassword": "I-disable ang Wallet Password",
-  "encryptionFailedError": "Nabigo sa paglagay ng wallet password",
-  "setPasswordSuccess": "Ang password ay nakalagay na",
-  "disablePasswordSuccess": "Ang password ay na-disabled",
-  "createPasswordHint": "Gumawa ng password",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "I-back up ang Seed",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Sigurado ka ba na na-back up mo na ang iyong wallet seed?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "I-back up ang iyong seed",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Biometrics",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "Matagumpay na na-block ang %1.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "Naka-block na ang User!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "Naka-block",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "I-block ang isang user sa pamamagitan ng anumang kilalang alias o address. Hindi papansinin ang anumang mga mensahe, transaksyon, o kahilingan mula sa mga ito.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Naka-block na Impormasyon",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Ginamit na ang pangalan ng Nick!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Pumili ng Nick Name",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "%1 ay na-unblock!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "block explorer",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "I-block ang Impormasyon ng Explorer",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Aling block explorer ang gagamitin upang ipakita ang impormasyon ng transaksyon",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "I-block ang User na ito",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Kanselahin",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Palitan ang Currency",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Baguhin ang Log",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Palitan ang Representative",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Palitan",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Ilagay ang bagong Representative",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "Ito ang iyong kinatawan!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Ang Representative ay napalitan",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Suriin ang Availability",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Isara",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Kumpirmahin",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
   "confirmPasswordHint": "Kumpirmahin ang password",
-  "enterPasswordHint": "Ilagay ang password",
-  "passwordsDontMatch": "Ang passwords ay hindi tugma",
-  "passwordBlank": "Ang password ay hindi pwedeng blangko",
-  "invalidPassword": "Maling Password",
-  "passwordWillBeRequiredToOpenParagraph": "Itong password ay kailangan para mabuksan ang Nautilus",
-  "passwordNoLongerRequiredToOpenParagraph": "Hindi mo na kailangan ng password para mabuksan ang Nautilus",
-  "createPasswordFirstParagraph": "Pwede kang gumawa ng password para may dagdag seguridad ang iyong wallet",
-  "createPasswordSecondParagraph": "Ang password ay opsyonal, at ang iyong wallet ay protektado ng PIN o biometrics.",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Kumokonekta",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 ay nadagdag sa mga kontak!",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Mayroon nang kapareho",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Kontak",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Hindi tugma sa kontak",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Ilagay ang pangalan @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Walang kontak na ma-export",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 ay natanggal sa mga kontak!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Mga kontak",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Hindi ma-import ang mga kontak",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "Na-import na ang %1 kontak",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Nakopya",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Kopyahin",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Kopyahin ang Address",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Kopyahin ang Link",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Kopyahin ang seed",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Kopyahin ang address ng wallet sa clipboard",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
   "createAPasswordHeader": "Gumawa ng password",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Gumawa ng Gift Card",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Gumawa ng Gift Card",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Pwede kang gumawa ng password para may dagdag seguridad ang iyong wallet",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Gumawa ng password",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Ang password ay opsyonal, at ang iyong wallet ay protektado ng PIN o biometrics.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
   "createPasswordSheetHeader": "Gumawa",
-  "disablePasswordSheetHeader": "Disable",
-  "requireAPasswordToOpenHeader": "Gumawa ng password para mabuksan ang Nautilus?",
-  "noSkipButton": "Hindi, laktawan ito.",
-  "yesButton": "Oo",
-  "nextButton": "Susunod",
-  "goBackButton": "Bumalik",
-  "welcomeTextKal": "Maligayang pagdating sa Kalium. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet.",
-  "sendAmountConfirmKal": "Magpadala ng %1 Banano?",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Lumikha ng QR Code",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Paglikha ng Gift Card",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
   "currency": "Currency",
-  "shareKalium": "I-share ang Kalium",
-  "shareKaliumText": "Tignan ang Kalium! Opisyal na mobile wallet ng Banano!",
-  "logoutDetailKal": "Mabubura ang iyong seed at lahat ng Kalium-related na data sa aparato na ito kapag ikaw ay nag-logout. Kapag wala kang back up ng iyong seed, hindi mo na ulit ma-aaccess ang iyong pondo.",
-  "notificationTitleKal": "Nakatanggap ng %1 BANANO",
-  "notificationBodyKal": "Buksan ang Kalium para tingnan ito.",
-  "transferIntroKal": "Ang prosesong ito ay ang paglipat ng pondo galing sa paper wallet.\n\nI-tap ang \"%1\" button para umpisahan.",
-  "transferQrScanHintKal": "Mag-scan ng Banano \nseed o private key",
-  "transferNoFundsKal": "Ang seed na ito ay walang BANANO.",
-  "transferConfirmInfoKal": "Ang wallet na may balanse na %1 BANANO ay na-detect.\n",
-  "transferCompleteKal": "%1 BANANO ay nalipat na sa iyong Kalium Wallet.",
-  "scanInstructionsKal": "I-scan ang Banano \naddress QR code",
-  "unlockPinKal": "Ilagay ang PIN mabuksan",
-  "unlockBiometricsKal": "I-Authenticate para ma-unlock",
-  "exampleCardIntroKal": "Maligayang pagdating sa Kalium. Ganito ang makikita mong transaksyon pag nakatanggap ka ng BANANO",
-  "exampleCardToKal": "para sa iba",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Mode ng Pera",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Impormasyon ng Mode ng Pera",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Piliin kung aling yunit ang magpapakita ng mga halaga.\n1 nyano = 0.000001 NANO, o \n1,000,000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Kasalukuyang nirerepresenta ng",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Error sa pag-decryption!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Pangunahing Account",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Account %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Tanggalin",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Disable",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Ang password ay na-disabled",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "I-disable ang Wallet Password",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "I-dismiss",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Di-wastong Pangalan ng Domain",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "I-edit",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Nabigo sa paglagay ng wallet password",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Ilagay ang Address",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Ilagay ang Amount",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Ipasok ang Tala ng Regalo",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Ipasok ang Mensahe",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Ilagay ang password",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Magpasok ng username",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Ipasok ang User o Address",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "galing sa iba",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
   "exampleCardFromKal": "galing sa iba",
-  "newAccountIntroKal": "Ito ang iyong bagong account. Pag nakareceive ka ng BANANO, ganito ang makikita mo:",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Maligayang pagdating sa Nautilus. Ganito ang makikita mong transaksyon pag nakatanggap ka ng NANO",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Maligayang pagdating sa Kalium. Ganito ang makikita mong transaksyon pag nakatanggap ka ng BANANO",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Kakaunting",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "Maraming",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "para sa iba",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "para sa iba",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Sa sandaling magpadala o makatanggap ka ng kahilingan sa pagbabayad, lalabas sila dito tulad nito na may kulay at tag ng card na nagpapahiwatig ng katayuan. \n\nGreen ay nagpapahiwatig na ang kahilingan ay binayaran.\nAng Yellow ay nagpapahiwatig ng kahilingan/memo ay hindi binabayaran/nabasa.\nIpinapahiwatig ng Red na ang kahilingan ay hindi nabasa o natanggap.\n\n Ang mga neutral na kulay na card na walang halaga ay mga mensahe lamang.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Ang ilan",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Sushi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Sa sandaling magpadala o makatanggap ka ng kahilingan sa pagbabayad, lalabas sila dito:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hey kung ano ang up?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "Ang isang pulutong ng",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Rent",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "Maligayang Kaarawan!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Gas Pera",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Lumabas",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "nabigo",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Naka-disconnect ang Nautilus",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Ang mga server ng Nautilus ay lilitaw na hindi nakakonekta, ang Pagpapadala at Pagtanggap (walang mga memo) ay dapat pa rin sa pagpapatakbo ngunit ang mga kahilingan sa pagbabayad ay hindi maaaring dumaan\n\n Bumalik sa ibang pagkakataon o i-restart ang app upang subukang muli",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Paboritong Mayroon na",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Paboritong",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Di-wastong Paboritong Pangalan",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Magpasok ng Nick Name",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Pumili ng Pangalan para sa Paboritong ito",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "%1 ay inalis mula sa mga paborito!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "Mga Paborito",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Itinatampok",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Kumpirmahin ang fingerprint para i-back up ang wallet seed.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "Mula",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "natupad",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "Mayroon kang regalo!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Walang laman na Regalo",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Halaga ng Regalo",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Regalo Mula",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Mag-load ng Digital Gift Card gamit ang NANO! Magtakda ng halaga, at opsyonal na mensahe para makita ng tatanggap kapag binuksan nila ito!\n\nSa sandaling nilikha, makakakuha ka ng isang link na maaari mong ipadala sa sinuman, na kapag binuksan ay awtomatikong ipamahagi ang mga pondo sa tatanggap pagkatapos i-install ang Nautilus!\n\nKung ang tatanggap ay isang gumagamit ng Nautilus, makakakuha sila ng prompt upang ilipat ang mga pondo sa kanilang account sa pagbubukas ng link.",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Mensahe ng Regalo",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Bumalik",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Nakuha ko!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Pumunta sa QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Itago",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Itago ang Account?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Tahanan",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Huwag pansinin",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Import",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "Ang link na iyong na-click ay naglalaman ng ilang nano, gusto mo bang i-import ito sa wallet na ito, o i-refund ito sa sinumang nagpadala nito?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "I-import ang secret phrase",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Pakilagay ang iyong 24 na salita na iyong secret phrase sa ibaba. Ang bawat salita ay dapat may ispasyo sa pagitan.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "I-import ang iyong seed",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Ilagay ang iyong seed sa ibaba.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "I-import ang seed",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Dating Wallet",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Agad",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Hindi sapat ang balanse",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Hindi wasto ang Destination Address",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Maling Password",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Naiintindihan ko ang risks",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Kalium Wallet",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Wika",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Link Kinopya",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
   "liveSupportButton": "Support",
-  "connectingHeader": "Kumokonekta"
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Na-load",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Ikinarga",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "I-authenticate sa paglunsad",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Nakalock",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Burahin ang seed at mag-logout",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Sigurado ka ba?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Mabubura ang iyong seed at lahat ng Nautilus-related na data sa aparato na ito kapag ikaw ay nag-logout. Kapag wala kang back up ng iyong seed, hindi mo na ulit ma-aaccess ang iyong pondo.",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Mabubura ang iyong seed at lahat ng Kalium-related na data sa aparato na ito kapag ikaw ay nag-logout. Kapag wala kang back up ng iyong seed, hindi mo na ulit ma-aaccess ang iyong pondo.",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Wala kang dapat ikabahala basta may back up ka ng iyong seed.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Pamamahala",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Hindi ma-verify ang Request",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Manual na ipasok",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Markahan bilang Bayad",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Markahan bilang Hindi Nabayarang",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Memo muling ipinadala! Kung hindi pa rin kinikilala, maaaring offline ang device ng tatanggap.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Mensahe",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Ang minimum na halaga ng pagpapadala ay %1 %2",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 ay hindi valid na salita",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Mnemonic Phrase",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "Secret phrase ay may 24 na salita lamang",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Ang tampok na ito ay nangangailangan sa iyo na magkaroon ng mas mahabang kasaysayan ng transaksyon upang maiwasan ang spam.\n\nBilang kahalili, maaari kang magpakita ng isang QR code para ma-scan ng isang tao.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Kinakailangan ang Pag-verify",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Ito ang iyong bagong account. Pag nakareceive ka ng NANO, ganito ang makikita mo:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Ito ang iyong bagong account. Pag nakareceive ka ng BANANO, ganito ang makikita mo:",
+  "@newAccountIntroKal": {},
+  "newWallet": "Bagong Wallet",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Susunod",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Hindi",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Walang kontak na ma-export",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "Walang kontak na ma-import",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Katayuan ng Node",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Walang Mga Resulta ng Paghahanap!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "Hindi, laktawan ito.",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Buksan ang Nautilus para tingnan ito.",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Buksan ang Kalium para tingnan ito.",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Tapikin para mabuksan",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "Upang maayos ang tampok na ito, dapat na pinagana ang mga notification",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Abiso",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "Nakatanggap ng %1 NANO",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "Nakatanggap ng %1 BANANO",
+  "@notificationTitleKal": {},
+  "notSent": "hindi ipinadala",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Off",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Ok",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Onramp",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "On",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Binuksan",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "bayad",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Paper Wallet",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Ang password ay hindi pwedeng blangko",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Hindi mo na kailangan ng password para mabuksan ang Nautilus",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Ang passwords ay hindi tugma",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Itong password ay kailangan para mabuksan ang Nautilus",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Magbayad",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "May isang tao na humiling ng pagbabayad mula sa iyo! tingnan ang pahina ng mga pagbabayad para sa karagdagang impormasyon.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Mga Pagbabayad",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Bayaran ang hiling na ito",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "",
+  "@pending": {},
+  "pickFromList": "Pumili sa listahan",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "Hindi magkatugma ang pins",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Kumpirmahin ang iyong pin",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Gumawa ng 6-digit pin",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Ilagay ang pin",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Hindi tama ang pin na nilagay",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Ilagay ang pin para palitan ang representative",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Ilagay ang pin para tingnan ang wallet seed.",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Kagustuhan",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Patakaran sa privacy",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Bumili ng Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "QR code ay walang wasto na destinasyon",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Pakiusap bigyan ng Camera Permissions para ma-scan ang QR Codes",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "Ang QR code ay walang laman na valid seed o private key",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "QR ay walang valid na secret phrase.",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Hindi mabasa ang QR Code",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "I-rate ang App",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn't take more than a minute.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Raw Seed",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Magbasa nang higit pa",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "maaaring tanggapin",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Tumanggap",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Natanggap",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Makatanggap ng Minimum",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Makatanggap ng Minimum Info",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Isang minimum na halaga na matatanggap. Kung ang isang pagbabayad o kahilingan ay natanggap na may halagang mas mababa kaysa dito, ito ay hindi papansinin.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "Refund",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "para sa",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Pagpaparehistro",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Magrehistro Username",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Magrehistro ng Username",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Sigurado ka ba na gusto mo itong itago? Pwede mo itong i-add ulit sa pamamagitan ng \"%1\" button.",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "I-unblock",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Sigurado ka bang gusto mong i-unblock ang %1?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Alisin ang kontak",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Sigurado ka ba gusto mong tanggalin ang %1?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Alisin ang Paboritong",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "Ang representative ay isang account na nagboboto para sa kasunduan ng network. Ang kapangyarihan ng pagboto ay tinitimbang sa pamamagitan ng balanse, pwede mong i-delegate ang iyong balanse para dagdagan ang timbang ng boto ng representative na pinagkakatiwalaan mo. Ang iyong representative ay walang kapangyarihan para gastusin ang iyong pondo. Dapat piliin mo ang representative na walang masyadong downtime at mapagkakatiwalaan.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Ano ang representative?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Tumugon",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Kinatawan",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Kahilingan",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Humiling ng %1 %2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Hiniling",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Hiniling Mula",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Nabigo ang Kahilingan: Hindi mukhang naka-install ang Nautilus ng user na ito, o may hindi pinagana ang mga notification.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Humihiling",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Humiling ng pagbabayad",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Error sa pagpapadala ng kahilingan sa pagbabayad, ang aparato ng tatanggap ay maaaring offline o hindi magagamit.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Humiling ng muling ipinadala! Kung hindi pa rin kinikilala, maaaring offline ang device ng tatanggap.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Gumawa ng password para mabuksan ang Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Ipadala muli ang memo",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "I-reset ang Database",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Sigurado ka bang gusto mong i-reset ang panloob na database? \n\nMaaaring ayusin nito ang mga isyu na may kaugnayan sa pag-update ng app, ngunit tatanggalin din ang lahat ng naka-save na mga kagustuhan. HINDI nito tatanggalin ang binhi ng iyong wallet. Kung mayroon kang mga isyu, dapat mong i-backup ang iyong binhi, muling i-install ang app, at kung nagpapatuloy ang isyu, huwag mag-atubiling gumawa ng ulat ng bug sa github o pagtatalo.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Subukan muli",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Ang iyong device ay \"rooted\", \"jailbroken\", o nabago ang security settings. Mabuti na i-reset mo ang iyong device sa orihinal na estado bago magpatuloy.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "I-scan ang Nano \naddress QR code",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "I-scan ang Banano \naddress QR code",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "I-scan ang QR Code",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Maghanap ng anumang bagay",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "Sa susunod na screen, makikita mo ang iyong secret phrase. Ito ay password para ma-access mo ang iyong pondo. Importante na iback-up mo ito at wag mong i-share sa iba.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Maging maingat!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Secret Phrase",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Nakopya na ang Secret Phrase",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Kopyahin ang Secret Phrase",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Pag nawala mo ang iyong device o tinanggal mo ang application, kakailanganin mo ang secret phrase o seed para marecover ang iyong pondo!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Seguridad",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Seed",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Ang nasa ibaba ay ang seed ng iyong wallet. Importante na i-back up ang iyong seed at huwag i-save bilang plaintext o screenshot.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Ang seed ay nakopya sa clipboard.\n Pwedeng i-paste ito sa loob ng dalawang minuto.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Nakopya ang seed",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Ang seed ay parehong impormasyon sa secret phrase, pero sa paraan na nababasa ng makina. Hanggat mayroon kang back up ng kahit ano sa dalawang ito, ma-access mo ang iyong pondo.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Ang seed ay hindi wasto",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Hindi maaaring hilingin mula sa sarili",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Magpadala",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Magpadala ng %1 Nano?",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Magpadala ng %1 Banano?",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Nagkaroon ng error. Subukan ulit mamaya.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Magpadala galing sa",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Pinapadala",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Nabigo ang pagpapadala ng memo na may transaksyon, maaaring hindi sila isang user ng Nautilus.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Pagpapadala ng mensahe",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Ipadala muli ang Kahilingan",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Magpadala o Humiling ng pagbabayad, na may End to End End Encrypted na mensahe!\n\nAng mga kahilingan sa pagbabayad, mga memo, at mga mensahe ay matatanggap lamang ng iba pang mga gumagamit ng nautilus.\n\nHindi mo kailangang magkaroon ng username upang makapagpadala o makatanggap ng mga kahilingan sa pagbabayad, at maaari mo itong gamitin para sa iyong sariling record keeping kahit hindi sila gumagamit ng nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Ipadala ang Info Sheet",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Naipadala",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Pinadala sa",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Maglagay ng Password",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Ang password ay nakalagay na",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Mga setting",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Ilipat galing sa Paper Wallet",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Maglagay ng Wallet Password",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "I-share ang Kalium",
+  "@shareKalium": {},
+  "shareKaliumText": "Tignan ang Kalium! Opisyal na mobile wallet ng Banano!",
+  "@shareKaliumText": {},
+  "shareLink": "Ibahagi ang Link",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "I-share ang Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Tingnan ang Nautilus! Ang opisyal na Android Wallet ng Nano!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Ipakita ang Contact",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simplex",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Suportahan ang Developer",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Lumipat sa Seed",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Default na System",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Tapikin para itago",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Tapikin para buksan",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Tema",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "Sa",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Masyadong madaming maling unlock attempts.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Mga transaksyon",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Ilipat",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "I-tap kahit saan para isara itong window.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 NANO ay nalipat na sa iyong Nautilus Wallet.",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 BANANO ay nalipat na sa iyong Kalium Wallet.",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "Ang wallet na may balanse na %1 NANO ay na-detect.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "Ang wallet na may balanse na %1 BANANO ay na-detect.\n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "I-tap ang confirm para ilipat ang pondo.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Ang paglipat ay maaring tumagal ng ilang segundo.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "Nagkaroon ng error sa paglipat. Pakiulit mamaya.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Transfer\nFunds",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Ang prosesong ito ay ang paglipat ng pondo galing sa paper wallet.\n\nI-tap ang \"%1\" button para umpisahan.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Ang prosesong ito ay ang paglipat ng pondo galing sa paper wallet.\n\nI-tap ang \"%1\" button para umpisahan.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Ang prosesong ito ay maglilipat ng mga pondo mula sa isang wallet ng papel papunta sa iyong wallet ng Nautilus.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Nililipat na",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Pakilagay seed sa ibaba.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "Ang seed na ito ay walang NANO.",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "Ang seed na ito ay walang BANANO.",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Ang QR code na ito ay hindi valid na seed.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Mag-scan ng Nano \nseed o private key",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Mag-scan ng Banano \nseed o private key",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "hindi nakikilala",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "hindi nakumpirma",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "unfulfilled",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "I-unlock",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "I-Authenticate para ma-unlock",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "I-Authenticate para ma-unlock",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Ilagay ang PIN mabuksan",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Ilagay ang PIN mabuksan",
+  "@unlockPinKal": {},
+  "unpaid": "hindi nabayarang",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "hindi pa nababasa",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Uptime",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "Mayroon ka nang isang username na nakarehistro! Sa kasalukuyan ay hindi posible na baguhin ang iyong username, ngunit libre kang magparehistro ng bago sa ilalim ng ibang address.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Magagamit ang username!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Mangyaring Magpasok ng Username",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Error sa Username",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Pumili ng isang natatanging @username upang gawing madali para sa mga kaibigan at pamilya na mahanap ka!\n\nAng pagkakaroon ng username ng Nautilus ay ina-update ang UI sa buong mundo upang ipakita ang iyong bagong hawakan.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Di-wastong Username",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Hindi available ang username",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Ang mga username ng Nautilus ay isang sentralisadong serbisyo na ibinigay ng Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "Hindi natagpuan ang user!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Tingnan ang detalye",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Timbang ng boto",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "BABALA",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Maligayang pagdating sa Nautilus. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Maligayang pagdating sa Kalium. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet.",
+  "@welcomeTextKal": {},
+  "withAddress": "Gamit ang Address",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "Gamit ang Mensahe",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "Pagkatapos ng %1 minuto",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "Pagkatapos ng %1 minuto",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Oo",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Oo",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

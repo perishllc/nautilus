@@ -1,235 +1,1951 @@
 {
-  "cancel": "İptal",
-  "close": "Kapat",
-  "confirm": "Onayla",
-  "no": "Hayır",
-  "yes": "Evet",
-  "onStr": "Açık",
-  "off": "Kapalı",
-  "send": "Gönder",
-  "receive": "İste",
-  "sent": "Gönderildi",
-  "received": "Alındı",
-  "transactions": "İşlemler",
-  "addressCopied": "Kopyalandı",
-  "copyAddress": "Adresi Kopyala",
-  "addressShare": "Paylaş",
-  "addressHint": "Adres Gir",
-  "seed": "Seed",
-  "seedInvalid": "Geçersiz seed",
-  "seedCopied": "Seed'iniz panoya kopyalandı.\n 2 dakika panoda kalacak. ",
-  "scanQrCode": "QR Kodu Tara",
-  "contactsImportErr": "Rehberi içe aktarmada sorun oluştu",
-  "viewDetails": "Ayrıntılar",
-  "qrInvalidSeed": "Bu QR kod geçerli bir seed veya private key içermiyor",
-  "removeContact": "Kişiyi Sil",
-  "removeContactConfirmation": "%1 kişisini silmek istediğine emin misin?",
-  "contactHeader": "Kişi",
-  "contactsHeader": "Rehber",
-  "addContact": "Kişi Ekle",
-  "contactNameHint": "Bir İsim Girin @",
-  "contactInvalid": "Geçersiz isim",
-  "noContactsExport": "Dışa aktarılabilecek bir kişi bulunamadı",
-  "noContactsImport": "İçe aktarılacak bir kişi bulunamadı",
-  "contactsImportSuccess": "%1 kişi içe aktarıldı",
-  "contactAdded": "%1 rehbere eklendi!",
-  "contactRemoved": "%1 rehberden silindi!",
-  "contactNameMissing": "Dışa aktarılabilecek bir kişi bulunamadı",
-  "contactExists": "Bu kişi zaten mevcut",
-  "backupYourSeed": "Seed'inizi yedekleyin",
-  "backupSeedConfirm": "Cüzdanınızın seed'ini yedeklediğinizden emin misiniz?",
-  "seedBackupInfo": "Cüzdanınızın seed'i aşağıdadır. Seed'inizi yedeklemeniz çok önemlidir. Kesinlikle ekran görüntüsü olarak saklamamalısınız.",
-  "copySeed": "Seedi Kopyala",
-  "seedCopiedShort": "Kopyalandı",
-  "importSeed": "Seed'i içe aktar",
-  "importSeedHint": "Lütfen seed'inizi girin.",
-  "welcomeText": "Nautilus'a hoşgeldiniz. Devam etmek için yeni bir cüzdan oluşturabilir veya var olanı içe aktarabilirsiniz.",
-  "newWallet": "Yeni Cüzdan",
-  "importWallet": "İçe Aktar",
-  "sentTo": "Alıcı",
-  "sending": "Miktar",
-  "to": "Adres",
-  "sendAmountConfirm": "%1 Nano gönder?",
-  "sendError": "Bir hata oluştu. Daha sonra tekrar dene.",
-  "enterAmount": "Miktar Gir",
-  "enterAddress": "Adres Gir",
-  "invalidAddress": "Geçersiz bir adres girdiniz",
-  "addressMissing": "Lütfen bir adres girin",
-  "amountMissing": "Lütfen bir miktar girin",
-  "insufficientBalance": "Yetersiz Bakiye",
-  "sendFrom": "Gönderici",
-  "pinCreateTitle": "6 haneli şifre oluşturun",
-  "pinConfirmTitle": "Şifreyi onaylayın",
-  "pinEnterTitle": "Şifre girin",
-  "pinConfirmError": "Şifreler uyuşmuyor",
-  "pinInvalid": "Geçersiz şifre girdiniz",
-  "themeHeader": "Tema",
-  "changeRepButton": "Değiştir",
-  "changeRepAuthenticate": "Temsilci Değiştir",
-  "currentlyRepresented": "Mevcut Temsilci:",
-  "changeRepSucces": "Temsilciniz Başarıyla Değiştirildi",
-  "repInfoHeader": "Temsilci nedir?",
-  "repInfo": "Temsilci, ağda oybirliğini sağlamak için oylamaya katılan bir hesaptır. Oylama gücü, hesap bakiyesine göre ağırlıklandırılır. Güvendiğiniz bir temsilcinin oy ağırlığını artırmak için bakiyenizi delege edebilirsiniz. Temsilcinizin, paranızı harcama yetkisi yoktur. Güvenilir ve olabildiğince uzun süreli aktif olan bir temsilci seçmelisiniz.",
-  "pinRepChange": "Temsilcinizi değiştirmek için pin kodunuzu girin",
-  "changeRepHint": "Yeni Temsilci Gir",
-  "representatives": "Temsilciler",
-  "pickFromList": "Listeden Seç",
-  "votingWeight": "Oy Ağırlığı",
-  "uptime": "Çevrimiçi",
-  "authMethod": "Doğrulama Metodu",
-  "pinMethod": "Pin Kodu",
-  "privacyPolicy": "Gizlilik Politikası",
-  "biometricsMethod": "Biyometrik",
-  "changeCurrency": "Para Birimi",
-  "language": "Dil",
-  "shareNautilus": "Nautilus'u Paylaş",
-  "shareNautilusText": "Nano'nun resmi Android Cüzdanı Nautilus'u denesene!",
-  "logout": "Çıkış",
-  "warning": "UYARI",
-  "logoutDetail": "Çıkış yaptığınızda seed'iniz ve Nautilus'la ilgili bütün verileriniz bu cihazdan silinecektir. Seed'inizi yedeklemediyseniz paranıza bir daha asla ulaşamazsınız.",
-  "logoutAction": "Seed'i sil ve çıkış yap",
-  "logoutAreYouSure": "Emin misiniz?",
-  "logoutReassurance": "Seed'inizi yedeklediyseniz endişe etmenize gerek yok.",
-  "settingsHeader": "Ayarlar",
-  "preferences": "Tercihler",
-  "manage": "Yönet",
-  "backupSeed": "Seed'i Yedekle",
-  "fingerprintSeedBackup": "Seed'i yedeklemek için parmak izini onaylayın.",
-  "pinSeedBackup": "Seed'i görüntülemek için şifreyi girin.",
-  "systemDefault": "Sistem Dili",
-  "notifications": "Bildirimler",
-  "notificationTitle": "%1 NANO Alındı",
-  "notificationBody": "Bu transferi görmek için Nautilus’u aç.",
-  "notificationHeaderSupplement": "Açmak için dokun",
-  "settingsTransfer": "Bakiye Transferi",
-  "transferError": "Aktarma esnasında bir problem oluştu. Lütfen daha sonra tekrar dene.",
-  "paperWallet": "Kağıt Cüzdan",
-  "kaliumWallet": "Kalium",
-  "manualEntry": "Manuel Giriş",
-  "mnemonicPhrase": "Memonik Cümle",
-  "rawSeed": "Seed",
-  "transferHeader": "Bakiye\nTransferi",
-  "transfer": "Aktar",
-  "transferManualHint": "Lütfen seedi gir.",
-  "transferIntro": "Bu işlem bir kağıt cüzdanda bulunan bakiyeyi senin Nautilus cüzdanına aktaracak.\n\nBaşlamak için \"%1\" butonuna bas.",
-  "transferQrScanHint": "Bir Nano seedi \nveya private key'i tara",
-  "transferQrScanError": "Bu QR kodu geçerli bir seed içermiyor.",
-  "transferNoFunds": "Bu seedin içinde hiç NANO yok.",
-  "transferConfirmInfo": "%1 NANO bakiyeye sahip bir cüzdan tespit edildi.\n",
-  "transferConfirmInfoSecond": "Transfer işlemini başlatmak için onayla butonuna bas.\n",
-  "transferConfirmInfoThird": "Bu işlem birkaç saniye sürebilir.",
-  "transferLoading": "Aktarılıyor",
-  "transferComplete": "%1 NANO başarıyla Nautilus cüzdanına aktarıldı.",
-  "transferClose": "Pencereyi kapatmak için herhangi bir yere dokun.",
-  "scanInstructions": "Nano Adresi'nin \n QR Kodu'nu tarayın",
-  "unlockPin": "Nautilus’u Açmak için Pin Kodunu Gir",
-  "unlockBiometrics": "Nautilus’u Açmak için Kimliğini Doğrula",
-  "lockAppSetting": "Başlangıçta Kimlik Doğrula",
-  "locked": "Kilitli",
-  "unlock": "Kilidi Aç",
-  "tooManyFailedAttempts": "Çok fazla kilit açma denemesi başarız oldu.",
-  "securityHeader": "Güvenlik",
-  "autoLockHeader": "Otomatik Kilitle",
-  "xMinutes": "%1 dakika sonra",
-  "xMinute": "%1 dakika sonra",
-  "instantly": "Hemen",
-  "exampleCardIntro": "Nautilus’a hoşgeldin. Hesabına NANO geldiğinde işlemlerin şu şekilde görünecek",
-  "exampleCardLittle": "Birazcık",
-  "exampleCardLot": "Bir sürü",
-  "exampleCardTo": "birine",
-  "exampleCardFrom": "birinden",
-  "defaultAccountName": "Ana Hesap",
-  "defaultNewAccountName": "Hesap %1",
-  "newAccountIntro": "Bu senin yeni hesabın. Hesabına NANO geldiğinde işlemlerin aşağıdaki gibi görünecek.",
+  "@@locale": "tr",
   "account": "Hesap",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Hesaplar",
-  "addAccount": "Hesap Ekle",
-  "hideAccountHeader": "Hesabı Gizle?",
-  "removeAccountText": "Hesabı gizlemek istediğine emin misin? Bu hesabı daha sonra \"%1\" butonuna basarak tekrar ekleyebilirsin.",
-  "tapToReveal": "Göstermek için dokun",
-  "tapToHide": "Gizlemek için dokun",
-  "copied": "Kopyalandı",
-  "copy": "Kopyala",
-  "seedDescription": "Seed, makinelerin daha rahat okuyabileceği bir formatta, gizli cümle ile aynı bilgiyi içeriyor. Seed veya gizli cümleden birini yedeklediğin sürece cüzdanına ve bakiyene ulaşabilirsin.",
-  "importSecretPhrase": "Gizli Cümle Aktar",
-  "importSecretPhraseHint": "Lütfen 24 kelimelik gizli cümleni, her kelime birer boşlukla ayrılmış şekilde gir.",
-  "qrMnemonicError": "QR kodu geçerli bir gizli cümle içermiyor",
-  "mnemonicInvalidWord": "%1 geçerli bir kelime değil",
-  "mnemonicSizeError": "Gizli cümle 24 kelime olmalı",
-  "secretPhrase": "Gizli Cümle",
-  "backupConfirmButton": "Yedekledim",
-  "secretInfoHeader": "Önce Güvenlik!",
-  "secretInfo": "Sonraki ekranda gizlini cümleni göreceksin. Gizli cümle, cüzdanına ve bakiyene erişmeni sağlayan bir çeşit şifre. Gizli cümleni güvenli bir yere yedeklemen ve kimseyle paylaşmaman çok önemli.",
-  "secretWarning": "Cihazını kaybedersen ya da uygulamayı silersen, bakiyene erişmenin tek yolu gizli cümleni ya da seedini tekrar girmek!",
-  "gotItButton": "Anladım!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "Gizli cümleni veya seedini yedeklediğine emin misin?",
-  "secretPhraseCopy": "Gizli Cümleyi Kopyala",
-  "secretPhraseCopied": "Gizli Cümle Kopyalandı",
-  "import": "İçe Aktar",
-  "importSeedInstead": "Seedle İçe Aktar",
-  "switchToSeed": "Seede Geç",
-  "backupSecretPhrase": "Gizli Cümleyi Yedekle",
-  "qrInvalidAddress": "QR kodu geçerli bir adres içermiyor",
-  "qrInvalidPermissions": "QR kodu tarayabilmek için lütfen kamera izni ver",
-  "qrUnknownError": "QR Kodu Okunamadı",
-  "mantaError": "İstek onaylanamadı",
-  "rootWarning": "Cihazın \"root\" veya \"jailbreak\" edilmiş gibi görünüyor. Bu durum bir güvenlik riski oluşturuyor. Devam etmeden önce cihazını sıfırlamanı ve eski haline döndürmeni tavsiye ederiz.",
-  "iUnderstandTheRisks": "Risklerin Farkındayım",
-  "exit": "Çıkış",
-  "setWalletPassword": "Cüzdan Şifresi Oluştur",
-  "setPassword": "Şifre Oluştur",
-  "disableWalletPassword": "Şifreyi Kaldır",
-  "encryptionFailedError": "Şifre oluşturma işlemi başarısız",
-  "setPasswordSuccess": "Şifre başarıyla oluşturuldu",
-  "disablePasswordSuccess": "Şifre kaldırıldı",
-  "createPasswordHint": "Şifre oluştur",
-  "confirmPasswordHint": "Şifreni onayla",
-  "enterPasswordHint": "Şifreni gir",
-  "passwordsDontMatch": "Şifreler eşleşmiyor",
-  "passwordBlank": "Şifre alanı boş olamaz",
-  "invalidPassword": "Geçersiz Şifre",
-  "passwordWillBeRequiredToOpenParagraph": "Nautilus'u açabilmek için bu şifre gerekecek.",
-  "passwordNoLongerRequiredToOpenParagraph": "Artık Nautilus'u açmak için şifre gerekmeyecek.",
-  "createPasswordFirstParagraph": "Cüzdanını daha güvenli hale getirmek için bir şifre oluşturabilirsin.",
-  "createPasswordSecondParagraph": "Şifre isteğe bağlı. Şifre koymasan da cüzdanın pin kodu veya biometrik doğrulama ile korunacak.",
-  "createAPasswordHeader": "Bir şifre oluştur.",
-  "createPasswordSheetHeader": "Oluştur",
-  "disablePasswordSheetHeader": "Kaldır",
-  "requireAPasswordToOpenHeader": "Nautilus'u açarken şifre sorulsun mu?",
-  "noSkipButton": "Hayır, Geç",
-  "yesButton": "Evet",
-  "nextButton": "İleri",
-  "goBackButton": "Geri Git",
-  "welcomeTextKal": "Kalium'a hoşgeldiniz. Devam etmek için yeni bir cüzdan oluşturabilir veya var olanı içe aktarabilirsiniz.",
-  "sendAmountConfirmKal": "%1 Banano gönder?",
-  "currency": "Para Birimi",
-  "shareKalium": "Kalium'u Paylaş",
-  "shareKaliumText": "Banano'nun resmi cüzdanı Kalium'u dene!",
-  "logoutDetailKal": "Çıkış yaptığınızda seed'iniz ve Kalium'la ilgili bütün verileriniz bu cihazdan silinecektir. Seed'inizi yedeklemediyseniz paranıza bir daha asla ulaşamazsınız.",
-  "notificationTitleKal": "%1 BANANO Alındı",
-  "notificationBodyKal": "Bu transferi görmek için Kalium’u aç.",
-  "transferIntroKal": "Bu işlem bir kağıt cüzdanda bulunan bakiyeyi senin Kalium cüzdanına aktaracak.\n\nBaşlamak için \"%1\" butonuna bas.",
-  "transferQrScanHintKal": "Bir Banano seedi \nveya private key'i tara",
-  "transferNoFundsKal": "Bu seedin içinde hiç BANANO yok.",
-  "transferConfirmInfoKal": "%1 BANANO bakiyeye sahip bir cüzdan tespit edildi.\n",
-  "transferCompleteKal": "%1 BANANO başarıyla Kalium cüzdanına aktarıldı.",
-  "scanInstructionsKal": "Banano Adresi'nin \n QR Kodu'nu tarayın",
-  "unlockPinKal": "Kalium’u Açmak için Pin Kodunu Gir",
-  "unlockBiometricsKal": "Kalium’u Açmak için Kimliğini Doğrula",
-  "exampleCardIntroKal": "Kalium’a hoşgeldin. Hesabına BANANO geldiğinde işlemlerin şu şekilde görünecek",
-  "exampleCardToKal": "rastgele bir maymuna",
-  "exampleCardFromKal": "rastgele bir maymundan",
-  "newAccountIntroKal": "Bu senin yeni hesabın. Hesabına BANANO geldiğinde işlemlerin aşağıdaki gibi görünecek.",
-  "liveSupportButton": "Destek",
-  "connectingHeader": "Bağlanıyor",
-  "minimumSend": "Minimumu Nano yollama miktarı %1",
-  "natricon": "Natricon",
-  "pending": "beklemede",
-  "unconfirmed": "onaylanmamış",
-  "messageHeader": "Mesaj",
-  "readMore": "Detaylı Bilgi",
-  "ignore": "Yoksay",
-  "dismiss": "Yoksay",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
   "activeMessageHeader": "Aktif Mesaj",
-  "blockExplorer": "Blok Tarayacı"
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Hesap Ekle",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Bir Kullanıcıyı Engelleme",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Kişi Ekle",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Favori Ekle",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Kopyalandı",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Adres Gir",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Lütfen bir adres girin",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Lütfen Kullanıcı Adı veya Adres Giriniz",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Paylaş",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Takma adlar",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Lütfen bir miktar girin",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Sordu",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Doğrulama Metodu",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Otomatik İthalat",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Otomatik Kilitle",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Yedekledim",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Gizli Cümleyi Yedekle",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Seed'i Yedekle",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Cüzdanınızın seed'ini yedeklediğinizden emin misiniz?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Seed'inizi yedekleyin",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Biyometrik",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "%1 başarıyla engellendi.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "Kullanıcı zaten Engellendi!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "Engellendi",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Bir kullanıcıyı bilinen herhangi bir takma ad veya adresle engelleyin. Herhangi bir mesaj, işlem, veya onlardan gelen istekler göz ardı edilecektir.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Engellenen Bilgi",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Takma ad zaten kullanılmış!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Bir Takma Ad Seçin",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "%1 engeli kaldırıldı!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Blok Tarayacı",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Blok Gezgini Bilgisi",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "İşlem bilgilerini görüntülemek için hangi blok gezgini kullanılacak",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Bu Kullanıcıyı Engelle",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "İptal",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Para Birimi",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Girişi değiştir",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Temsilci Değiştir",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Değiştir",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Yeni Temsilci Gir",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "Bu zaten sizin temsilciniz!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Temsilciniz Başarıyla Değiştirildi",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Durumu Kontrol Et",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Kapat",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Onayla",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Şifreni onayla",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Bağlanıyor",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 rehbere eklendi!",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Bu kişi zaten mevcut",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Kişi",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Geçersiz isim",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Bir İsim Girin @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Dışa aktarılabilecek bir kişi bulunamadı",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 rehberden silindi!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Rehber",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Rehberi içe aktarmada sorun oluştu",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "%1 kişi içe aktarıldı",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Kopyalandı",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Kopyala",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Adresi Kopyala",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Bağlantı Kopyala",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Seedi Kopyala",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Cüzdan adresini panoya kopyala",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Bir şifre oluştur.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Hediye Kartı Oluştur",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Hediye Kartı Oluşturun",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Cüzdanını daha güvenli hale getirmek için bir şifre oluşturabilirsin.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Şifre oluştur",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Şifre isteğe bağlı. Şifre koymasan da cüzdanın pin kodu veya biometrik doğrulama ile korunacak.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Oluştur",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "QR Kodu Oluştur",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Hediye Kartı Oluşturma",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Para Birimi",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Para Birimi Modu",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Para Birimi Modu Bilgisi",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Miktarları hangi birimde görüntüleneceğini seçin.\n1 nyano = 0.000001 NANO veya \n1,000.000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Mevcut Temsilci:",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Şifre Çözme Hatası!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Ana Hesap",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Hesap %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Sil",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Kaldır",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Şifre kaldırıldı",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Şifreyi Kaldır",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Yoksay",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Geçersiz Alan Adı",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Düzenle",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Şifre oluşturma işlemi başarısız",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Adres Gir",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Miktar Gir",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Hediye Notunu Girin",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Mesaj Girin",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Şifreni gir",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Bir kullanıcı adı girin",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Kullanıcı veya Adres Girin",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "birinden",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "rastgele bir maymundan",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Nautilus’a hoşgeldin. Hesabına NANO geldiğinde işlemlerin şu şekilde görünecek",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Kalium’a hoşgeldin. Hesabına BANANO geldiğinde işlemlerin şu şekilde görünecek",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Birazcık",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "Bir sürü",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "birine",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "rastgele bir maymuna",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Bir ödeme isteği gönderdikten veya aldığınızda, burada durumu belirten kartın rengi ve etiketi ile böyle görünürler. \n\nYeşil, talebin ödendiğini gösterir.\nSarı, isteğin/notun ödenmediğine /okunmadığını/okunduğunu gösterir.\nKırmızı, talebin okunmadığını veya alınmadığını gösterir.\n\n Miktarı olmayan nötr renkli kartlar sadece mesajlardır.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Bazı",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Suşi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Bir ödeme talebi gönderdikten veya aldığınızda, bunlar burada görünecektir:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hey, ne haber?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "Bir sürü",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Kira",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "Doğum günün kutlu olsun!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Gaz Para",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Çıkış",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "başarısız",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus Bağlantısı Kesildi",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Nautilus Sunucularının bağlantısı kesilmiş gibi görünüyor, Gönderme ve Alma (notlar olmadan) hala çalışır durumda olmalıdır, ancak ödeme talepleri geçmeyebilir\n\n Daha sonra tekrar gelin veya tekrar denemek için uygulamayı yeniden başlatın",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Favori Zaten Var",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Favori",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Geçersiz Favori Adı",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Bir Takma Adı Girin",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Bu Favori için bir Ad Seçin",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "%1 sık kullanılanlardan kaldırıldı!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "Favoriler",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Öne çıkan",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Seed'i yedeklemek için parmak izini onaylayın.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "Nereden",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "yerine getirildi",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "Bir yeteneğin var!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Boş Hediye",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Hediye Miktarı",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Hediye Gönderen",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "NANO ile Dijital Hediye Kartı Yükleyin! Alıcının ne zaman açtıklarını görmesi için bir miktar ve isteğe bağlı bir mesaj belirleyin!\n\nOluşturulduktan sonra, herkese gönderebileceğiniz bir bağlantı alacaksınız, bu da açıldığında Nautilus'u kurduktan sonra parayı alıcıya otomatik olarak dağıtacaktır!\n\nAlıcı zaten bir Nautilus kullanıcısıysa, bağlantıyı açtıktan sonra parayı hesabına aktarma istemi alacaktır.",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Hediye Mesajı",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Geri Git",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Anladım!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "QR'ye git",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Gizle",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Hesabı Gizle?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Ana Sayfa",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Yoksay",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "İçe Aktar",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "Tıkladığınız bağlantı biraz nano içeriyor, bu cüzdana aktarmak mı yoksa gönderen kişiye iade etmek mi istiyorsunuz?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Gizli Cümle Aktar",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Lütfen 24 kelimelik gizli cümleni, her kelime birer boşlukla ayrılmış şekilde gir.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Seed'i içe aktar",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Lütfen seed'inizi girin.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Seedle İçe Aktar",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "İçe Aktar",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Hemen",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Yetersiz Bakiye",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Geçersiz bir adres girdiniz",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Geçersiz Şifre",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Risklerin Farkındayım",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Kalium",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Dil",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Bağlantı Kopyalandı",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Destek",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Yüklü",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "İçine Yüklendi",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Başlangıçta Kimlik Doğrula",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Kilitli",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Çıkış",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Seed'i sil ve çıkış yap",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Emin misiniz?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Çıkış yaptığınızda seed'iniz ve Nautilus'la ilgili bütün verileriniz bu cihazdan silinecektir. Seed'inizi yedeklemediyseniz paranıza bir daha asla ulaşamazsınız.",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Çıkış yaptığınızda seed'iniz ve Kalium'la ilgili bütün verileriniz bu cihazdan silinecektir. Seed'inizi yedeklemediyseniz paranıza bir daha asla ulaşamazsınız.",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Seed'inizi yedeklediyseniz endişe etmenize gerek yok.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Yönet",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "İstek onaylanamadı",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Manuel Giriş",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Ücretli olarak işaretle",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Ödenmemiş olarak işaretle",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Memo yeniden gönderildi! Hala onaylanmamışsa, alıcının cihazı çevrimdışı olabilir.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Mesaj",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Minimumu Nano yollama miktarı %1",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 geçerli bir kelime değil",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Memonik Cümle",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "Gizli cümle 24 kelime olmalı",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Bu özellik, istenmeyen postaları önlemek için daha uzun bir işlem geçmişine sahip olmanızı gerektirir.\n\nAlternatif olarak, birinin taraması için bir QR kodu gösterebilirsiniz.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Doğrulama Gerekli",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Bu senin yeni hesabın. Hesabına NANO geldiğinde işlemlerin aşağıdaki gibi görünecek.",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Bu senin yeni hesabın. Hesabına BANANO geldiğinde işlemlerin aşağıdaki gibi görünecek.",
+  "@newAccountIntroKal": {},
+  "newWallet": "Yeni Cüzdan",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "İleri",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Hayır",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Dışa aktarılabilecek bir kişi bulunamadı",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "İçe aktarılacak bir kişi bulunamadı",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Düğüm Durumu",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Arama Sonarı Yok!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "Hayır, Geç",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Bu transferi görmek için Nautilus’u aç.",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Bu transferi görmek için Kalium’u aç.",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Açmak için dokun",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "Bu özelliğin düzgün çalışması için bildirimlerin etkinleştirilmesi gerekir",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Bildirimler",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "%1 NANO Alındı",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "%1 BANANO Alındı",
+  "@notificationTitleKal": {},
+  "notSent": "gönderilmedi",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Kapalı",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Tamam",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Onrampa",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "Açık",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Açıldı",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "kazanç",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Kağıt Cüzdan",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Şifre alanı boş olamaz",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Artık Nautilus'u açmak için şifre gerekmeyecek.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Şifreler eşleşmiyor",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Nautilus'u açabilmek için bu şifre gerekecek.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Öde",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Birisi sizden ödeme talep etti! Daha fazla bilgi için ödemeler sayfasını kontrol edin.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Ödemeler",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Bu talebi öde",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "beklemede",
+  "@pending": {},
+  "pickFromList": "Listeden Seç",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "Şifreler uyuşmuyor",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Şifreyi onaylayın",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "6 haneli şifre oluşturun",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Şifre girin",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Geçersiz şifre girdiniz",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "Pin Kodu",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Temsilcinizi değiştirmek için pin kodunuzu girin",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Seed'i görüntülemek için şifreyi girin.",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Tercihler",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Gizlilik Politikası",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Satın al Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "QR kodu geçerli bir adres içermiyor",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "QR kodu tarayabilmek için lütfen kamera izni ver",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "Bu QR kod geçerli bir seed veya private key içermiyor",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "QR kodu geçerli bir gizli cümle içermiyor",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "QR Kodu Okunamadı",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Uygulamayı değerlendirin",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn't take more than a minute.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Seed",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Detaylı Bilgi",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "alacak",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "İste",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Alındı",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Minimum Al",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Minimum Bilgi Al",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Alınacak minimum miktar. Bundan daha az bir miktarla bir ödeme veya talep alınırsa, göz ardı edilecektir.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "İade",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "için",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Kayıt",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Kullanıcı Adı Kaydet",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Kullanıcı Adı Kaydet",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Hesabı gizlemek istediğine emin misin? Bu hesabı daha sonra \"%1\" butonuna basarak tekrar ekleyebilirsin.",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Engellemeyi kaldır",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "%1 engelini kaldırmak istediğinizden emin misiniz?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Kişiyi Sil",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "%1 kişisini silmek istediğine emin misin?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Favori Kaldır",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "Temsilci, ağda oybirliğini sağlamak için oylamaya katılan bir hesaptır. Oylama gücü, hesap bakiyesine göre ağırlıklandırılır. Güvendiğiniz bir temsilcinin oy ağırlığını artırmak için bakiyenizi delege edebilirsiniz. Temsilcinizin, paranızı harcama yetkisi yoktur. Güvenilir ve olabildiğince uzun süreli aktif olan bir temsilci seçmelisiniz.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Temsilci nedir?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Yanıtla",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Temsilciler",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Talep",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "İstek %1% 2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "İstenen",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Talep Edilen",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "İstek Başarısız: Bu kullanıcı Nautilus yüklü görünmüyor, veya bildirimler devre dışı bırakıldı.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "İstemek",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Ödeme Talep Et",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Ödeme isteği gönderilirken hata oluştuğunda alıcının cihazı çevrimdışı olabilir veya kullanılamıyor olabilir.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "İstek yeniden gönderildi! Hala onaylanmamışsa, alıcının cihazı çevrimdışı olabilir.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Nautilus'u açarken şifre sorulsun mu?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Bu notu tekrar gönderme",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Veritabanını sıfırla",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Dahili veritabanını sıfırlamak istediğinizden emin misiniz? \n\nBu, uygulamanın güncellenmesiyle ilgili sorunları çözebilir, ancak kaydedilen tüm tercihleri de siler. Bu, cüzdan tohumunuzu silmeyecektir. Sorun yaşıyorsanız tohumunuzu yedeklemelisiniz, uygulamayı yeniden yükle, ve sorun devam ederse github veya discord hakkında bir hata raporu hazırlamaktan çekinmeyin.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Tekrar Dene",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Cihazın \"root\" veya \"jailbreak\" edilmiş gibi görünüyor. Bu durum bir güvenlik riski oluşturuyor. Devam etmeden önce cihazını sıfırlamanı ve eski haline döndürmeni tavsiye ederiz.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Nano Adresi'nin \n QR Kodu'nu tarayın",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Banano Adresi'nin \n QR Kodu'nu tarayın",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "QR Kodu Tara",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Herhangi bir şey arayın",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "Sonraki ekranda gizlini cümleni göreceksin. Gizli cümle, cüzdanına ve bakiyene erişmeni sağlayan bir çeşit şifre. Gizli cümleni güvenli bir yere yedeklemen ve kimseyle paylaşmaman çok önemli.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Önce Güvenlik!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Gizli Cümle",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Gizli Cümle Kopyalandı",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Gizli Cümleyi Kopyala",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Cihazını kaybedersen ya da uygulamayı silersen, bakiyene erişmenin tek yolu gizli cümleni ya da seedini tekrar girmek!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Güvenlik",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Seed",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Cüzdanınızın seed'i aşağıdadır. Seed'inizi yedeklemeniz çok önemlidir. Kesinlikle ekran görüntüsü olarak saklamamalısınız.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Seed'iniz panoya kopyalandı.\n 2 dakika panoda kalacak. ",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Kopyalandı",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Seed, makinelerin daha rahat okuyabileceği bir formatta, gizli cümle ile aynı bilgiyi içeriyor. Seed veya gizli cümleden birini yedeklediğin sürece cüzdanına ve bakiyene ulaşabilirsin.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Geçersiz seed",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Kendinden istek yapamıyorum",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Gönder",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "%1 Nano gönder?",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "%1 Banano gönder?",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Bir hata oluştu. Daha sonra tekrar dene.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Gönderici",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Miktar",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "İşlem ile not gönderme başarısız oldu, Nautilus kullanıcısı olmayabilirler.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Mesaj gönderme",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Tekrar İstek Gönder",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Uçtan Uca Şifreli mesajlarla ödeme gönderin veya talep edin!\n\nÖdeme istekleri, notlar, ve mesajlar yalnızca diğer nautilus kullanıcıları tarafından alınacaktır.\n\nÖdeme istekleri göndermek veya almak için bir kullanıcı adınızın olması gerekmez, ve nautilus kullanmasalar bile bunları kendi kayıt tutmanız için kullanabilirsiniz.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Sayfa Bilgisi Gönder",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Gönderildi",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Alıcı",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Şifre Oluştur",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Şifre başarıyla oluşturuldu",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Ayarlar",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Bakiye Transferi",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Cüzdan Şifresi Oluştur",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "Kalium'u Paylaş",
+  "@shareKalium": {},
+  "shareKaliumText": "Banano'nun resmi cüzdanı Kalium'u dene!",
+  "@shareKaliumText": {},
+  "shareLink": "Link Paylaş",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Nautilus'u Paylaş",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Nano'nun resmi Android Cüzdanı Nautilus'u denesene!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Kişileri Göster",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simpleks",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Geliştiriciyi Destekleyin",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Seede Geç",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Sistem Dili",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Gizlemek için dokun",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Göstermek için dokun",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Tema",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "Adres",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Çok fazla kilit açma denemesi başarız oldu.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "İşlemler",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Aktar",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Pencereyi kapatmak için herhangi bir yere dokun.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 NANO başarıyla Nautilus cüzdanına aktarıldı.",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 BANANO başarıyla Kalium cüzdanına aktarıldı.",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "%1 NANO bakiyeye sahip bir cüzdan tespit edildi.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "%1 BANANO bakiyeye sahip bir cüzdan tespit edildi.\n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Transfer işlemini başlatmak için onayla butonuna bas.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Bu işlem birkaç saniye sürebilir.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "Aktarma esnasında bir problem oluştu. Lütfen daha sonra tekrar dene.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Bakiye\nTransferi",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Bu işlem bir kağıt cüzdanda bulunan bakiyeyi senin Nautilus cüzdanına aktaracak.\n\nBaşlamak için \"%1\" butonuna bas.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Bu işlem bir kağıt cüzdanda bulunan bakiyeyi senin Kalium cüzdanına aktaracak.\n\nBaşlamak için \"%1\" butonuna bas.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Bu işlem, parayı bir kağıt cüzdandan Nautilus cüzdanınıza aktaracaktır.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Aktarılıyor",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Lütfen seedi gir.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "Bu seedin içinde hiç NANO yok.",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "Bu seedin içinde hiç BANANO yok.",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Bu QR kodu geçerli bir seed içermiyor.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Bir Nano seedi \nveya private key'i tara",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Bir Banano seedi \nveya private key'i tara",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "onaylanmamış",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "onaylanmamış",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "yerine getirilmemiş",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Kilidi Aç",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Nautilus’u Açmak için Kimliğini Doğrula",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Kalium’u Açmak için Kimliğini Doğrula",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Nautilus’u Açmak için Pin Kodunu Gir",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Kalium’u Açmak için Pin Kodunu Gir",
+  "@unlockPinKal": {},
+  "unpaid": "ödenmemiş",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "okunmamış",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Çevrimiçi",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "Zaten kayıtlı bir kullanıcı adınız var! Şu anda kullanıcı adınızı değiştirmek mümkün değil, ancak farklı bir adres altında yeni bir tane kaydetmekte özgürsünüz.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Kullanıcı adı mevcut!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Lütfen Kullanıcı Adı Giriniz",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Kullanıcı Adı Hatası",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Arkadaşlarınızın ve ailenizin sizi bulmasını kolaylaştırmak için benzersiz bir @username seçin!\n\nBir Nautilus kullanıcı adına sahip olmak, yeni tanıtıcınızı yansıtacak şekilde kullanıcı arayüzünü küresel olarak günceller.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Geçersiz Kullanıcı Adı",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Kullanıcı adı kullanılamıyor",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Nautilus kullanıcı adları Nano.to tarafından sağlanan merkezi bir hizmettir",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "Kullanıcı bulunamadı!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Ayrıntılar",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Oy Ağırlığı",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "UYARI",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Nautilus'a hoşgeldiniz. Devam etmek için yeni bir cüzdan oluşturabilir veya var olanı içe aktarabilirsiniz.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Kalium'a hoşgeldiniz. Devam etmek için yeni bir cüzdan oluşturabilir veya var olanı içe aktarabilirsiniz.",
+  "@welcomeTextKal": {},
+  "withAddress": "Adres ile",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "Mesaj ile",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "%1 dakika sonra",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "%1 dakika sonra",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Evet",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Evet",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

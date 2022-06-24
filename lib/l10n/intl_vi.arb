@@ -1,235 +1,1951 @@
 {
-  "cancel": "Hủy",
-  "close": "Đóng",
-  "confirm": "Xác nhận",
-  "no": "Không",
-  "yes": "Có",
-  "onStr": "Bật",
-  "off": "Tắt",
-  "send": "Gửi",
-  "receive": "Nhận",
-  "sent": "Đã gửi",
-  "received": "Đã nhận",
-  "transactions": "Các giao dịch",
-  "addressCopied": "Đã sao chép địa chỉ",
-  "copyAddress": "Sao chép địa chỉ",
-  "addressShare": "Chia sẻ địa chỉ",
-  "addressHint": "Nhập địa chỉ",
-  "seed": "Hạt giống",
-  "seedInvalid": "Hạt giống (seed) không hợp lệ",
-  "seedCopied": "Đã sao chép hạt giống \nSẽ được xoá khỏi bộ nhớ tạm sau 2 phút.",
-  "scanQrCode": "Quét mã QR",
-  "contactsImportErr": "Nhập liên hệ thất bại",
-  "viewDetails": "Xem chi tiết",
-  "qrInvalidSeed": "Mã QR không chứa hạt giống hoặc khoá riêng tư hợp lệ",
-  "removeContact": "Xóa liên hệ",
-  "removeContactConfirmation": "Bạn chắc chắn muốn xóa %1?",
-  "contactHeader": "Liên hệ",
-  "contactsHeader": "Danh bạ",
-  "addContact": "Thêm liên hệ",
-  "contactNameHint": "Nhập tên",
-  "contactInvalid": "Tên liên hệ không phù hợp",
-  "noContactsExport": "Không có liên hệ nào để xuất ra.",
-  "noContactsImport": "Không có liên hệ nào để nhập.",
-  "contactsImportSuccess": "Đã nhập thành công %1 liên hệ.",
-  "contactAdded": "Đã thêm %1 vào danh bạ.",
-  "contactRemoved": "Đã loại %1 khỏi danh bạ.",
-  "contactNameMissing": "Nhập tên cho liên hệ này",
-  "contactExists": "Liên hệ đã tồn tại",
-  "backupYourSeed": "Sao lưu hạt giống của bạn",
-  "backupSeedConfirm": "Bạn có chắc rằng bạn đã sao lưu hạt giống của mình?",
-  "seedBackupInfo": "Dưới đây là ví của bạn. Điều quan trọng là bạn sao lưu hạt giống này và không bao giờ lưu trữ nó dưới dạng văn bản thông thường hoặc dưới dạng ảnh chụp màn hình.",
-  "copySeed": "Sao chép hạt giống",
-  "seedCopiedShort": "Đã sao chép hạt giống",
-  "importSeed": "Nhập hạt giống",
-  "importSeedHint": "Nhập hạt giống của bạn vào phần dưới đây.",
-  "welcomeText": "Chào mừng đến với Nautilus. Để bắt đầu, bạn có thể tạo ví mới hoặc nhập ví hiện có.",
-  "newWallet": "Tạo ví mới",
-  "importWallet": "Nhập ví hiện có",
-  "sentTo": "Đã gửi tới",
-  "sending": "Đang gửi",
-  "to": "tới",
-  "sendAmountConfirm": "Gửi %1 NANO",
-  "sendError": "Đã xảy ra lỗi, vui lòng thử lại sau.",
-  "enterAmount": "Nhập số lượng",
-  "enterAddress": "Nhập địa chỉ",
-  "invalidAddress": "Địa chỉ đã nhập không hợp lệ",
-  "addressMissing": "Hãy nhập một địa chỉ",
-  "amountMissing": "Hãy nhập lượng tiền",
-  "insufficientBalance": "Số dư không đủ",
-  "sendFrom": "Gửi từ",
-  "pinCreateTitle": "Tạo mã PIN 6 chữ số",
-  "pinConfirmTitle": "Xác nhận mã PIN của bạn",
-  "pinEnterTitle": "Nhập PIN",
-  "pinConfirmError": "Mã PIN không khớp",
-  "pinInvalid": "Mã PIN đã nhập không hợp lệ",
-  "themeHeader": "Chủ đề",
-  "changeRepButton": "Thay đổi",
-  "changeRepAuthenticate": "Thay đổi đại diện",
-  "currentlyRepresented": "Hiện đang được đại diện bởi",
-  "changeRepSucces": "Đã đổi đại diện thành công",
-  "repInfoHeader": "Đại diện là gì?",
-  "repInfo": "Tài khoản đại diện là một tài khoản bỏ phiếu trong mạng lưới Banano. Sự ảnh hưởng của đại diện được đánh giá theo số dư, bạn có thể ủy quyền số dư của mình để tăng quyền lực cho một đại diện mà bạn tin cậy. Người đại diện của bạn không thể truy cập vào ví của bạn. Bạn nên chọn một đại diện có thời gian hoạt động (uptime) dài và đáng tin cậy.",
-  "pinRepChange": "Nhập mã PIN để thay đổi đại diện.",
-  "changeRepHint": "Nhập đại diện mới",
-  "representatives": "Đại diện",
-  "pickFromList": "Chọn từ danh sách",
-  "votingWeight": "Lượng bỏ phiếu",
-  "uptime": "Thời gian hoạt động (uptime)",
-  "authMethod": "Phương thức xác nhận",
-  "pinMethod": "Mã PIN",
-  "privacyPolicy": "Chính sách bảo mật",
-  "biometricsMethod": "Sinh trắc học",
-  "changeCurrency": "Đổi loại tiền pháp định",
-  "language": "Ngôn ngữ",
-  "shareNautilus": "Chia sẻ Nautilus",
-  "shareNautilusText": "Thử ngay Nautilus! Ví Nano di động hàng đầu!",
-  "logout": "Đăng xuất",
-  "warning": "CẢNH BÁO!",
-  "logoutDetail": "Đăng xuất sẽ xóa hạt giống (seed) của bạn và tất cả dữ liệu liên quan đến Nautilus khỏi thiết bị này. Nếu bạn không lưu lại hạt giống, bạn sẽ không thể truy cập vào ví của mình.",
-  "logoutAction": "Xóa hạt giống và đăng xuất",
-  "logoutAreYouSure": "Bạn có chắc không?",
-  "logoutReassurance": "Sẽ không có gì phải lo lắng nếu bạn đã sao lưu hạt giống.",
-  "settingsHeader": "Cài đặt",
-  "preferences": "Tuỳ chọn",
-  "manage": "Quản lí",
-  "backupSeed": "Sao lưu hạt giống (seed)",
-  "fingerprintSeedBackup": "Xác minh để xem hạt giống.",
-  "pinSeedBackup": "Nhập mã PIN để sao lưu hạt giống",
-  "systemDefault": "Mặc định hệ thống",
-  "notifications": "Thông báo",
-  "notificationTitle": "Đã nhận %1 BAN",
-  "notificationBody": "Mở Nautilus để xem giao dịch này",
-  "notificationHeaderSupplement": "Chạm để mở",
-  "settingsTransfer": "Nhập từ ví giấy",
-  "transferError": "Đã có lỗi trong quá trình giao dịch, vui lòng thử lại sau.",
-  "paperWallet": "Ví giấy",
-  "kaliumWallet": "Ví Kalium",
-  "manualEntry": "Nhập thủ công",
-  "mnemonicPhrase": "Cụm từ ghi nhớ",
-  "rawSeed": "Hạt giống",
-  "transferHeader": "Chuyển tiền",
-  "transfer": "Chuyển giao",
-  "transferManualHint": "Hãy nhập hạt giống dưới đây",
-  "transferIntro": "Quá trình này sẽ chuyển toàn bộ số dư từ ví giấy sang ví Nautilus của bạn.\n\nNhấn nút \"%1\" để bắt đầu.",
-  "transferQrScanHint": "Quét \nhạt giống Banano hoặc khoá riêng tư",
-  "transferQrScanError": "Mã QR này không chứa hạt giống hợp lệ.",
-  "transferNoFunds": "Hạt giống này không chứa chút Nano nào",
-  "transferConfirmInfo": "Đã tìm thấy một ví với số dư là %1 BAN. \n",
-  "transferConfirmInfoSecond": "Nhấn xác nhận để chuyển tiền.\n",
-  "transferConfirmInfoThird": "Có thể mất vài giây để hoàn thành giao dịch.",
-  "transferLoading": "Đang chuyển",
-  "transferComplete": "%1 Nano đã được chuyển vào ví Nautilus của bạn.\n",
-  "transferClose": "Chạm một chỗ bất kỳ để đóng cửa sổ.",
-  "scanInstructions": "Quét \nmã QR địa chỉ Banano",
-  "unlockPin": "Nhập mã PIN để mở khoá Nautilus",
-  "unlockBiometrics": "Xác nhận mở khoá Kalium",
-  "lockAppSetting": "Xác thực khi khởi chạy",
-  "locked": "Đã khoá",
-  "unlock": "Mở khoá",
-  "tooManyFailedAttempts": "Quá nhiều lần mở khoá thất bại.",
-  "securityHeader": "Bảo mật",
-  "autoLockHeader": "Mở khoá tự động",
-  "xMinutes": "Sau %1 phút",
-  "xMinute": "Sau %1 phút",
-  "instantly": "Ngay tức thì",
-  "exampleCardIntro": "Chào mừng đến với Nautilus. Khi bạn nhận Nano, các giao dịch sẽ được hiển thị như sau:",
-  "exampleCardLittle": "Một chút",
-  "exampleCardLot": "Khá là nhiều",
-  "exampleCardTo": "Đến ai đó",
-  "exampleCardFrom": "Từ ai đó",
-  "defaultAccountName": "Tài khoản chính",
-  "defaultNewAccountName": "Tài khoản %1",
-  "newAccountIntro": "Đây là tài khoản mới của bạn. Khi bạn nhận Nano, giao dịch sẽ được hiển thị như sau:",
+  "@@locale": "vi",
   "account": "Tài khoản",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Các tài khoản",
-  "addAccount": "Thêm tài khoản",
-  "hideAccountHeader": "Ẩn tài khoản?",
-  "removeAccountText": "Bạn có chắc muốn ẩn tài khoản này? Bạn có thể thêm lại bằng cách ấn vào nút \"%1\".",
-  "tapToReveal": "Nhấn để hiển thị",
-  "tapToHide": "Nhấn để ẩn",
-  "copied": "Đã sao chép",
-  "copy": "Sao chép",
-  "seedDescription": "Một hạt giống mang thông tin tương tự như một cụm từ bí mật, nhưng ở một dạng máy móc hơn. Bạn cần sao lưu hạt giống để có thể đảm bảo quyền truy cập ví.",
-  "importSecretPhrase": "Nhập cụm từ bí mật",
-  "importSecretPhraseHint": "Hãy nhập 24 từ bí mật vào dưới đây. Mỗi từ phải được cách nhau bởi dấu cách.",
-  "qrMnemonicError": "Mã QR không chứa cụm từ bí mật hợp lệ",
-  "mnemonicInvalidWord": "%1 không phải từ hợp lệ",
-  "mnemonicSizeError": "Cụm từ bí mật chỉ có thể gồm 24 từ",
-  "secretPhrase": "Cụm từ bí mật",
-  "backupConfirmButton": "Tôi đã sao lưu",
-  "secretInfoHeader": "An toàn là trên hết!",
-  "secretInfo": "Tiếp theo, bạn sẽ nhìn thấy một cụm từ bí mật. Nó là mật khẩu để truy cập vào ví của bạn. Đừng quên sao lưu nó lại và tuyệt đối không chia sẻ cho bất kỳ ai",
-  "secretWarning": "Nếu bạn đánh mất thiết bị hoặc gỡ cài đặt ứng dụng, bạn sẽ cần cụm từ bí mật hoặc hạt giống để khôi phục ví của bạn.",
-  "gotItButton": "Đã hiểu!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "Bạn có chắc chắn rằng đã sao lưu cụm từ bí mật hoặc hạt giống của bạn?",
-  "secretPhraseCopy": "Sao chép cụm từ bí mật",
-  "secretPhraseCopied": "Đã sao chép cụm từ bí mật",
-  "import": "Nhập vào",
-  "importSeedInstead": "Nhập hạt giống",
-  "switchToSeed": "Chuyển sang hạt giống",
-  "backupSecretPhrase": "Sao lưu cụm từ bí mật",
-  "qrInvalidAddress": "Mã QR không chứa điểm đến hợp lệ",
-  "qrInvalidPermissions": "Vui lòng cấp quyền truy cập máy ảnh để quét mã QR",
-  "qrUnknownError": "Không thể đọc mã QR",
-  "mantaError": "Không thể xác minh yêu cầu",
-  "rootWarning": "Có vẻ như thiết bị của bạn đã được \"root\", \"jailbreak\" hoặc được sửa đổi gây ảnh hưởng đến tính bảo mật. Bạn nên đặt lại thiết bị của bạn về trạng thái ban đầu trước khi tiếp tục.",
-  "iUnderstandTheRisks": "Tôi hiểu những rủi ro",
-  "exit": "Thoát",
-  "setWalletPassword": "Đặt mật khẩu ví",
-  "setPassword": "Đặt mật khẩu",
-  "disableWalletPassword": "Vô hiệu hoá mật khẩu ví",
-  "encryptionFailedError": "Đặt mật khẩu ví không thành công",
-  "setPasswordSuccess": "Đã đặt mật khẩu thành công",
-  "disablePasswordSuccess": "Đã vô hiệu hoá mật khẩu",
-  "createPasswordHint": "Tạo mật khẩu",
-  "confirmPasswordHint": "Xác nhận mật khẩu",
-  "enterPasswordHint": "Nhập mật khẩu",
-  "passwordsDontMatch": "Mật khẩu không khớp",
-  "passwordBlank": "Không thể bỏ trống mật khẩu",
-  "invalidPassword": "Mật khẩu không hợp lệ",
-  "passwordWillBeRequiredToOpenParagraph": "Mật khẩu này sẽ được yêu cầu để mở Nautilus.",
-  "passwordNoLongerRequiredToOpenParagraph": "Bạn sẽ không cần mật khẩu để mở Nautilus nữa.",
-  "createPasswordFirstParagraph": "Bạn có thể tạo mật khẩu để tăng tính bảo mật cho ví của bạn.",
-  "createPasswordSecondParagraph": "Mật khẩu là tùy chọn không bắt buộc, và ví của bạn sẽ được bảo vệ với mã PIN hoặc sinh trắc học. ",
-  "createAPasswordHeader": "Tạo mật khẩu.",
-  "createPasswordSheetHeader": "Tạo",
-  "disablePasswordSheetHeader": "Vô hiệu hoá",
-  "requireAPasswordToOpenHeader": "Yêu cầu mật khẩu để mở Nautilus?",
-  "noSkipButton": "Không, bỏ qua",
-  "yesButton": "Đồng ý",
-  "nextButton": "Tiếp theo",
-  "goBackButton": "Quay lại",
-  "welcomeTextKal": "Chào mừng đến với Kalium. Để tiếp tục, bạn có thể tạo ví mới hoặc nhập ví hiện có.",
-  "sendAmountConfirmKal": "Gửi %1 Banano?",
-  "currency": "Tiền tệ",
-  "shareKalium": "Chia sẻ Kalium",
-  "shareKaliumText": "Thử ngay Kalium! Ví Banano di động chính thức!",
-  "logoutDetailKal": "Đăng xuất sẽ xóa hạt giống (seed) của bạn và tất cả dữ liệu liên quan đến Kalium khỏi thiết bị này. Nếu bạn không lưu lại hạt giống, bạn sẽ không thể truy cập vào ví của mình.",
-  "notificationTitleKal": "Đã nhận %1 Banano",
-  "notificationBodyKal": "Mở Kalium để xem giao dịch này.",
-  "transferIntroKal": "Quá trình này sẽ chuyển quỹ từ ví giấy sang ví Kalium của bạn.\n\nNhấn nút \"%1\" để bắt đầu.",
-  "transferQrScanHintKal": "Quét \nhạt giống Banano hoặc khoá chính",
-  "transferNoFundsKal": "Hạt giống này không chứa chút Banano nào",
-  "transferConfirmInfoKal": "Đã tìm thấy một ví với số dư %1 Banano.\n",
-  "transferCompleteKal": "%1 Banano đã được chuyển vào ví Kalium của bạn. \n",
-  "scanInstructionsKal": "Quét địa chỉ Banano \nmã QR",
-  "unlockPinKal": "Nhập mã PIN để mở khoá Kalium",
-  "unlockBiometricsKal": "Xác thực để mở khoá Kalium",
-  "exampleCardIntroKal": "Chào mừng đến với Kalium. Khi bạn nhận Banano, các giao dịch sẽ được hiển thị như sau:",
-  "exampleCardToKal": "đến một người nào đó",
-  "exampleCardFromKal": "từ một ai đó",
-  "newAccountIntroKal": "Đây là tài khoản mới của bạn. Khi bạn nhận Banano, giao dịch sẽ được hiển thị như sau:",
-  "liveSupportButton": "Hỗ trợ",
-  "connectingHeader": "Đang kết nối",
-  "minimumSend": "Khoản gửi tối thiểu là %1 Nano",
-  "natricon": "Natricon",
-  "pending": "đang chờ xác nhận",
-  "unconfirmed": "chưa xác nhận",
-  "messageHeader": "Tin nhắn",
-  "readMore": "Đọc thêm",
-  "ignore": "Bỏ qua",
-  "dismiss": "Bỏ qua",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
   "activeMessageHeader": "TIn nhắn đang hoạt động",
-  "blockExplorer": "Trình khám phá khối"
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Thêm tài khoản",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Chặn người dùng",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Thêm liên hệ",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Thêm yêu thích",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Đã sao chép địa chỉ",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Nhập địa chỉ",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Hãy nhập một địa chỉ",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Vui lòng nhập tên người dùng hoặc địa chỉ",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Chia sẻ địa chỉ",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Bí danh",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Hãy nhập lượng tiền",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Đã hỏi",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Phương thức xác nhận",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Tự động nhập",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Mở khoá tự động",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Tôi đã sao lưu",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Sao lưu cụm từ bí mật",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Sao lưu hạt giống (seed)",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Bạn có chắc rằng bạn đã sao lưu hạt giống của mình?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Sao lưu hạt giống của bạn",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Sinh trắc học",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "% 1 bị chặn thành công.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "Người dùng đã bị chặn!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "Bị chặn",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Chặn người dùng bằng bất kỳ bí danh hoặc địa chỉ nào đã biết. Mọi thư, giao dịch hoặc yêu cầu từ chúng sẽ bị bỏ qua.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Thông tin bị chặn",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Tên Nick đã được sử dụng!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Chọn một Nick Name",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "% 1 đã được bỏ chặn!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Trình khám phá khối",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Thông tin chặn Explorer",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Trình thám hiểm chặn nào để sử dụng để hiển thị thông tin giao dịch",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Chặn người dùng này",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Hủy",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Đổi loại tiền pháp định",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Thay đổi Nhật ký",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Thay đổi đại diện",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Thay đổi",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Nhập đại diện mới",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "Đây đã là người đại diện của bạn!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Đã đổi đại diện thành công",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Kiểm tra tính khả dụng",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Đóng",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Xác nhận",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Xác nhận mật khẩu",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Đang kết nối",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "Đã thêm %1 vào danh bạ.",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Liên hệ đã tồn tại",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Liên hệ",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Tên liên hệ không phù hợp",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Nhập tên",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Nhập tên cho liên hệ này",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "Đã loại %1 khỏi danh bạ.",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Danh bạ",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Nhập liên hệ thất bại",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "Đã nhập thành công %1 liên hệ.",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Đã sao chép",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Sao chép",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Sao chép địa chỉ",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Sao chép liên kết",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Sao chép hạt giống",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Sao chép địa chỉ ví vào clipboard",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Tạo mật khẩu.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Tạo thẻ quà tặng",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Tạo Thẻ Quà Tặng",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Bạn có thể tạo mật khẩu để tăng tính bảo mật cho ví của bạn.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Tạo mật khẩu",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Mật khẩu là tùy chọn không bắt buộc, và ví của bạn sẽ được bảo vệ với mã PIN hoặc sinh trắc học. ",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Tạo",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Tạo mã QR",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Tạo thẻ quà tặng",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Tiền tệ",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Chế độ tiền tệ",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Thông tin về chế độ tiền tệ",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Chọn đơn vị nào để hiển thị số tiền trong đó.\n1 nyano = 0.000001 NANO, hoặc \n1.000.000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Hiện đang được đại diện bởi",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Lỗi giải mã!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Tài khoản chính",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Tài khoản %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Xoá",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Vô hiệu hoá",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Đã vô hiệu hoá mật khẩu",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Vô hiệu hoá mật khẩu ví",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Bỏ qua",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Tên miền không hợp lệ",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Chỉnh sửa",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Đặt mật khẩu ví không thành công",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Nhập địa chỉ",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Nhập số lượng",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Nhập Ghi Chú Quà Tặng",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Nhập tin nhắn",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Nhập mật khẩu",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Nhập tên người dùng",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Nhập Người dùng hoặc Địa chỉ",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "Từ ai đó",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "từ một ai đó",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Chào mừng đến với Nautilus. Khi bạn nhận Nano, các giao dịch sẽ được hiển thị như sau:",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Chào mừng đến với Kalium. Khi bạn nhận Banano, các giao dịch sẽ được hiển thị như sau:",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Một chút",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "Khá là nhiều",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "Đến ai đó",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "đến một người nào đó",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Khi bạn gửi hoặc nhận được yêu cầu thanh toán, họ sẽ hiển thị ở đây như thế này với màu sắc và thẻ của thẻ cho biết trạng thái. \n\nMàu xanh lá cây cho biết yêu cầu đã được thanh toán.\nMàu vàng cho biết yêu cầu/bản ghi nhớ chưa được thanh toán/đọc.\nMàu đỏ cho biết yêu cầu chưa được đọc hoặc nhận.\n\n Thẻ màu trung tính mà không có số tiền chỉ là tin nhắn.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Một số",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "sushi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Sau khi bạn gửi hoặc nhận được yêu cầu thanh toán, họ sẽ hiển thị ở đây:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Này, có chuyện gì vậy?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "Rất nhiều",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Thuê",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "Chúc mừng sinh nhật!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Tiền gas",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Thoát",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "thất bại",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus bị ngắt kết nối",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Máy chủ Nautilus dường như bị ngắt kết nối, Gửi và Nhận (không có ghi nhớ) vẫn phải hoạt động nhưng yêu cầu thanh toán có thể không được thông qua\n\n Quay lại sau hoặc khởi động lại ứng dụng để thử lại",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Yêu thích đã tồn tại",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Yêu thích",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Tên yêu thích không hợp lệ",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Nhập tên Nick",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Chọn tên cho mục yêu thích này",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "% 1 đã bị xóa khỏi mục yêu thích!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "Mục yêu thích",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Nổi bật",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Xác minh để xem hạt giống.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "Từ",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "hoàn thành",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "Anh có một món quà!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Quà Tặng Rỗng",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Số tiền quà tặng",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Quà Tặng Từ",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Nạp thẻ quà tặng kỹ thuật số với NANO! Đặt số tiền và một tin nhắn tùy chọn cho người nhận để xem khi họ mở nó!\n\nSau khi tạo, bạn sẽ nhận được một liên kết mà bạn có thể gửi cho bất kỳ ai, khi mở sẽ tự động phân phối tiền cho người nhận sau khi cài đặt Nautilus!\n\nNếu người nhận đã là người dùng Nautilus, họ sẽ nhận được lời nhắc để chuyển tiền vào tài khoản của họ khi mở liên kết",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Tin nhắn quà tặng",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Quay lại",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Đã hiểu!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Chuyển đến QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Ẩn",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Ẩn tài khoản?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Trang chủ",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Bỏ qua",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Nhập vào",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "Liên kết bạn nhấp vào có chứa một số nano, bạn có muốn nhập nó vào ví này, hoặc hoàn lại cho bất kỳ ai đã gửi nó?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Nhập cụm từ bí mật",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Hãy nhập 24 từ bí mật vào dưới đây. Mỗi từ phải được cách nhau bởi dấu cách.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Nhập hạt giống",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Nhập hạt giống của bạn vào phần dưới đây.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Nhập hạt giống",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Nhập ví hiện có",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Ngay tức thì",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Số dư không đủ",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Địa chỉ đã nhập không hợp lệ",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Mật khẩu không hợp lệ",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Tôi hiểu những rủi ro",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Ví Kalium",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Ngôn ngữ",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Liên kết được sao chép",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Hỗ trợ",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Đã nạp",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Nạp vào",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Xác thực khi khởi chạy",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Đã khoá",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Đăng xuất",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Xóa hạt giống và đăng xuất",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Bạn có chắc không?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Đăng xuất sẽ xóa hạt giống (seed) của bạn và tất cả dữ liệu liên quan đến Nautilus khỏi thiết bị này. Nếu bạn không lưu lại hạt giống, bạn sẽ không thể truy cập vào ví của mình.",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Đăng xuất sẽ xóa hạt giống (seed) của bạn và tất cả dữ liệu liên quan đến Kalium khỏi thiết bị này. Nếu bạn không lưu lại hạt giống, bạn sẽ không thể truy cập vào ví của mình.",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Sẽ không có gì phải lo lắng nếu bạn đã sao lưu hạt giống.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Quản lí",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Không thể xác minh yêu cầu",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Nhập thủ công",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Đánh dấu là Đã thanh toán",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Đánh dấu là chưa thanh toán",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Ghi nhớ gửi lại! Nếu vẫn chưa được xác nhận, thiết bị của người nhận có thể đang ngoại tuyến.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Tin nhắn",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Khoản gửi tối thiểu là %1 Nano",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 không phải từ hợp lệ",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Cụm từ ghi nhớ",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "Cụm từ bí mật chỉ có thể gồm 24 từ",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Tính năng này yêu cầu bạn phải có lịch sử giao dịch dài hơn để ngăn chặn thư rác.\n\nNgoài ra, bạn có thể hiển thị mã QR để ai đó quét.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Cần xác minh",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Đây là tài khoản mới của bạn. Khi bạn nhận Nano, giao dịch sẽ được hiển thị như sau:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Đây là tài khoản mới của bạn. Khi bạn nhận Banano, giao dịch sẽ được hiển thị như sau:",
+  "@newAccountIntroKal": {},
+  "newWallet": "Tạo ví mới",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Tiếp theo",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Không",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Không có liên hệ nào để xuất ra.",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "Không có liên hệ nào để nhập.",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Trạng thái nút",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Không có kết quả tìm kiếm!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "Không, bỏ qua",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Mở Nautilus để xem giao dịch này",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Mở Kalium để xem giao dịch này.",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Chạm để mở",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "Để tính năng này hoạt động chính xác, thông báo phải được bật",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Thông báo",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "Đã nhận %1 BAN",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "Đã nhận %1 Banano",
+  "@notificationTitleKal": {},
+  "notSent": "chưa được gửi",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Tắt",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Ok",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Onramp",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "Bật",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Đã mở",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "đã thanh toán",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Ví giấy",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Không thể bỏ trống mật khẩu",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Bạn sẽ không cần mật khẩu để mở Nautilus nữa.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Mật khẩu không khớp",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Mật khẩu này sẽ được yêu cầu để mở Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Thanh toán",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Ai đó đã yêu cầu thanh toán từ bạn! kiểm tra trang thanh toán để biết thêm thông tin.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Thanh toán",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Trả yêu cầu này",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "đang chờ xác nhận",
+  "@pending": {},
+  "pickFromList": "Chọn từ danh sách",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "Mã PIN không khớp",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Xác nhận mã PIN của bạn",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Tạo mã PIN 6 chữ số",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Nhập PIN",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Mã PIN đã nhập không hợp lệ",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "Mã PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Nhập mã PIN để thay đổi đại diện.",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Nhập mã PIN để sao lưu hạt giống",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Tuỳ chọn",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Chính sách bảo mật",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Mua Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "Mã QR không chứa điểm đến hợp lệ",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Vui lòng cấp quyền truy cập máy ảnh để quét mã QR",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "Mã QR không chứa hạt giống hoặc khoá riêng tư hợp lệ",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "Mã QR không chứa cụm từ bí mật hợp lệ",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Không thể đọc mã QR",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Đánh giá ứng dụng",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn't take more than a minute.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Hạt giống",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Đọc thêm",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "phải thu",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Nhận",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Đã nhận",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Nhận tối thiểu",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Nhận thông tin tối thiểu",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Một số tiền tối thiểu để nhận. Nếu nhận được thanh toán hoặc yêu cầu với số tiền nhỏ hơn số tiền này, nó sẽ bị bỏ qua.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "Hoàn tiền",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "cho",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Đăng ký",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Đăng ký tên người dùng",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Đăng ký tên người dùng",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Bạn có chắc muốn ẩn tài khoản này? Bạn có thể thêm lại bằng cách ấn vào nút \"%1\".",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Bỏ chặn",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Bạn có chắc muốn bỏ chăng% 1 không?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Xóa liên hệ",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Bạn chắc chắn muốn xóa %1?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Xóa yêu thích",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "Tài khoản đại diện là một tài khoản bỏ phiếu trong mạng lưới Banano. Sự ảnh hưởng của đại diện được đánh giá theo số dư, bạn có thể ủy quyền số dư của mình để tăng quyền lực cho một đại diện mà bạn tin cậy. Người đại diện của bạn không thể truy cập vào ví của bạn. Bạn nên chọn một đại diện có thời gian hoạt động (uptime) dài và đáng tin cậy.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Đại diện là gì?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Trả lời",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Đại diện",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Yêu cầu",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Yêu cầu% 1",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Đã yêu cầu",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Yêu cầu từ",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Yêu cầu thất bại: Người dùng này dường như không có Nautilus cài đặt hoặc đã tắt thông báo.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Yêu cầu",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Yêu cầu thanh toán",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Lỗi gửi yêu cầu thanh toán, thiết bị của người nhận có thể ngoại tuyến hoặc không khả dụng.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Yêu cầu gửi lại! Nếu vẫn chưa được xác nhận, thiết bị của người nhận có thể đang ngoại tuyến.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Yêu cầu mật khẩu để mở Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Gửi lại bản ghi nhớ này",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Đặt lại cơ sở dữ liệu",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Bạn có chắc chắn muốn đặt lại cơ sở dữ liệu nội bộ? \n\nĐiều này có thể khắc phục sự cố liên quan đến việc cập nhật ứng dụng, nhưng cũng sẽ xóa tất cả các tùy chọn đã lưu. Điều này sẽ KHÔNG xóa hạt giống ví của bạn. Nếu bạn gặp sự cố, bạn nên sao lưu hạt giống của bạn, cài đặt lại ứng dụng và nếu vấn đề vẫn còn cảm thấy tự do để thực hiện một báo cáo lỗi về github hoặc bất hòa.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Thử lại",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Có vẻ như thiết bị của bạn đã được \"root\", \"jailbreak\" hoặc được sửa đổi gây ảnh hưởng đến tính bảo mật. Bạn nên đặt lại thiết bị của bạn về trạng thái ban đầu trước khi tiếp tục.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Quét \nmã QR địa chỉ Banano",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Quét địa chỉ Banano \nmã QR",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Quét mã QR",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Tìm bất cứ điều gì",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "Tiếp theo, bạn sẽ nhìn thấy một cụm từ bí mật. Nó là mật khẩu để truy cập vào ví của bạn. Đừng quên sao lưu nó lại và tuyệt đối không chia sẻ cho bất kỳ ai",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "An toàn là trên hết!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Cụm từ bí mật",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Đã sao chép cụm từ bí mật",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Sao chép cụm từ bí mật",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Nếu bạn đánh mất thiết bị hoặc gỡ cài đặt ứng dụng, bạn sẽ cần cụm từ bí mật hoặc hạt giống để khôi phục ví của bạn.",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Bảo mật",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Hạt giống",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Dưới đây là ví của bạn. Điều quan trọng là bạn sao lưu hạt giống này và không bao giờ lưu trữ nó dưới dạng văn bản thông thường hoặc dưới dạng ảnh chụp màn hình.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Đã sao chép hạt giống \nSẽ được xoá khỏi bộ nhớ tạm sau 2 phút.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Đã sao chép hạt giống",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Một hạt giống mang thông tin tương tự như một cụm từ bí mật, nhưng ở một dạng máy móc hơn. Bạn cần sao lưu hạt giống để có thể đảm bảo quyền truy cập ví.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Hạt giống (seed) không hợp lệ",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Không thể yêu cầu từ tự",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Gửi",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Gửi %1 NANO",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Gửi %1 Banano?",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Đã xảy ra lỗi, vui lòng thử lại sau.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Gửi từ",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Đang gửi",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Gửi bản ghi nhớ với giao dịch không thành công, họ có thể không phải là người dùng Nautilus.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Gửi tin nhắn",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Gửi lại yêu cầu",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Gửi hoặc yêu cầu thanh toán, với các tin nhắn được mã hóa End to End!\n\nYêu cầu thanh toán, bản ghi nhớ và tin nhắn sẽ chỉ được chấp nhận bởi những người dùng nautilus khác.\n\nBạn không cần phải có tên người dùng để gửi hoặc nhận yêu cầu thanh toán, và bạn có thể sử dụng chúng để lưu giữ hồ sơ của riêng bạn ngay cả khi họ không sử dụng nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Gửi thông tin trang tính",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Đã gửi",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Đã gửi tới",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Đặt mật khẩu",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Đã đặt mật khẩu thành công",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Cài đặt",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Nhập từ ví giấy",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Đặt mật khẩu ví",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "Chia sẻ Kalium",
+  "@shareKalium": {},
+  "shareKaliumText": "Thử ngay Kalium! Ví Banano di động chính thức!",
+  "@shareKaliumText": {},
+  "shareLink": "Chia sẻ liên kết",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Chia sẻ Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Thử ngay Nautilus! Ví Nano di động hàng đầu!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Hiển thị danh bạ",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Đơn giản",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Hỗ trợ Nhà phát triển",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Chuyển sang hạt giống",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Mặc định hệ thống",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Nhấn để ẩn",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Nhấn để hiển thị",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Chủ đề",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "tới",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Quá nhiều lần mở khoá thất bại.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Các giao dịch",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Chuyển giao",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Chạm một chỗ bất kỳ để đóng cửa sổ.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 Nano đã được chuyển vào ví Nautilus của bạn.\n",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 Banano đã được chuyển vào ví Kalium của bạn. \n",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "Đã tìm thấy một ví với số dư là %1 BAN. \n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "Đã tìm thấy một ví với số dư %1 Banano.\n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Nhấn xác nhận để chuyển tiền.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Có thể mất vài giây để hoàn thành giao dịch.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "Đã có lỗi trong quá trình giao dịch, vui lòng thử lại sau.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Chuyển tiền",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Quá trình này sẽ chuyển toàn bộ số dư từ ví giấy sang ví Nautilus của bạn.\n\nNhấn nút \"%1\" để bắt đầu.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Quá trình này sẽ chuyển quỹ từ ví giấy sang ví Kalium của bạn.\n\nNhấn nút \"%1\" để bắt đầu.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Quá trình này sẽ chuyển tiền từ ví giấy sang ví Nautilus của bạn.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Đang chuyển",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Hãy nhập hạt giống dưới đây",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "Hạt giống này không chứa chút Nano nào",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "Hạt giống này không chứa chút Banano nào",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Mã QR này không chứa hạt giống hợp lệ.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Quét \nhạt giống Banano hoặc khoá riêng tư",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Quét \nhạt giống Banano hoặc khoá chính",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "không có trả lời",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "chưa xác nhận",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "chưa hoàn thành",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Mở khoá",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Xác nhận mở khoá Kalium",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Xác thực để mở khoá Kalium",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Nhập mã PIN để mở khoá Nautilus",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Nhập mã PIN để mở khoá Kalium",
+  "@unlockPinKal": {},
+  "unpaid": "không trả tiền",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "chưa đọc",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Thời gian hoạt động (uptime)",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "Bạn đã đăng ký tên người dùng! Hiện tại không thể thay đổi tên người dùng của bạn, nhưng bạn có thể tự do đăng ký một tên mới dưới một địa chỉ khác.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Tên người dùng có sẵn!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Vui lòng nhập tên người dùng",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Lỗi tên người dùng",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Chọn một @username độc đáo để giúp bạn bè và gia đình dễ dàng tìm thấy bạn!\n\nCó một tên người dùng Nautilus sẽ cập nhật giao diện người dùng trên toàn cầu để phản ánh xử lý mới của bạn.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Tên người dùng không hợp lệ",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Tên người dùng không có sẵn",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Tên người dùng Nautilus là một dịch vụ tập trung được cung cấp bởi Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "Không tìm thấy người dùng!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Xem chi tiết",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Lượng bỏ phiếu",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "CẢNH BÁO!",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Chào mừng đến với Nautilus. Để bắt đầu, bạn có thể tạo ví mới hoặc nhập ví hiện có.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Chào mừng đến với Kalium. Để tiếp tục, bạn có thể tạo ví mới hoặc nhập ví hiện có.",
+  "@welcomeTextKal": {},
+  "withAddress": "Với địa chỉ",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "Với tin nhắn",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "Sau %1 phút",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "Sau %1 phút",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Có",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Đồng ý",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

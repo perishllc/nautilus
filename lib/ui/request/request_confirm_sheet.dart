@@ -35,20 +35,18 @@ import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:uuid/uuid.dart';
 
 class RequestConfirmSheet extends StatefulWidget {
-  final String? amountRaw;
-  final String? destination;
+  final String amountRaw;
+  final String destination;
   final String? contactName;
   final String? localCurrency;
-  final int? natriconNonce;
   final String? memo;
 
-  RequestConfirmSheet({this.amountRaw, this.destination, this.contactName, this.localCurrency, this.natriconNonce, this.memo}) : super();
+  RequestConfirmSheet({required this.amountRaw, required this.destination, this.contactName, this.localCurrency, this.memo}) : super();
 
   _RequestConfirmSheetState createState() => _RequestConfirmSheetState();
 }
 
 class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
-  String? destinationAltered;
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
@@ -72,16 +70,6 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     super.initState();
     _registerBus();
     animationOpen = false;
-    // Derive amount from raw amount
-    // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
-    //   amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
-    // } else {
-    //   amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(widget.amountRaw), digits: 6).toStringAsFixed(6) + "~";
-    // }
-    // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
-    // amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
-    // Ensure nano_ prefix on destination
-    destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
 
   @override
@@ -141,34 +129,24 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        text: '',
+                        text: "",
                         children: [
-                          displayCurrencyAmount(
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          displayCurrencySymbol(
                             context,
-                            TextStyle(
-                              color: StateContainer.of(context).curTheme.primary,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                              decoration: TextDecoration.lineThrough,
-                            ),
+                            AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
-                            text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, widget.amountRaw),
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                            ),
+                            text: getRawAsThemeAwareAmount(context, widget.amountRaw),
+                            style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
                             text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
-                            style: TextStyle(
+                            style: AppStyles.textStyleParagraphPrimary(context).copyWith(
                               color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
                             ),
                           ),
                         ],
@@ -196,7 +174,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, destinationAltered!, contactName: widget.contactName)),
+                      child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
                   if (widget.memo != null && widget.memo!.isNotEmpty)
                     Container(
                       margin: const EdgeInsets.only(top: 30.0, bottom: 10),
@@ -247,7 +225,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                                 context,
                                 AppLocalization.of(context)!
                                     .requestAmountConfirm
-                                    .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw!))
+                                    .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                                     .replaceAll("%2", StateContainer.of(context).currencyMode));
                             if (authenticated) {
                               sl.get<HapticUtil>().fingerprintSucess();
@@ -307,7 +285,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       // create a local txData for the request:
       final TXData newRequestTXData = TXData(
         from_address: StateContainer.of(context).wallet!.address,
-        to_address: destinationAltered,
+        to_address: widget.destination,
         amount_raw: widget.amountRaw,
         uuid: localUuid,
         block: lastBlockHash,
@@ -327,12 +305,12 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         // encrypt the memo:
         String? encryptedMemo;
         if (widget.memo != null && widget.memo!.isNotEmpty) {
-          encryptedMemo = await Box.encrypt(widget.memo!, destinationAltered!, privKey);
+          encryptedMemo = await Box.encrypt(widget.memo!, widget.destination, privKey);
         }
 
         await sl
             .get<AccountService>()
-            .requestPayment(destinationAltered, widget.amountRaw, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
+            .requestPayment(widget.destination, widget.amountRaw, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
       } catch (e) {
         print("payment request failed: ${e.toString()}");
         sendFailed = true;
@@ -363,7 +341,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         // todo: there's a potential memory leak with contacts somewhere here?
         String? contactName = widget.contactName;
         if (widget.contactName == null || widget.contactName!.isEmpty) {
-          final User? user = await sl.get<DBHelper>().getUserWithAddress(widget.destination!);
+          final User? user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
           if (user != null) {
             contactName = user.getDisplayName();
           }
@@ -382,7 +360,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
             removeUntilHome: true,
             widget: RequestCompleteSheet(
               amountRaw: widget.amountRaw,
-              destination: destinationAltered,
+              destination: widget.destination,
               contactName: contactName,
               localAmount: widget.localCurrency,
             ));
@@ -407,7 +385,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         expectedPin: expectedPin,
         description: AppLocalization.of(context)!
             .requestAmountConfirmPin
-            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw!))
+            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),
       );
     }));

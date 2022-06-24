@@ -1,10 +1,9 @@
-import 'dart:math';
-import 'package:intl/intl.dart';
 import 'package:decimal/decimal.dart';
 
+final BigInt rawPerNano = BigInt.from(10).pow(30);
+final BigInt rawPerNyano = BigInt.from(10).pow(24);
+
 class NumberUtil {
-  static final BigInt rawPerNano = BigInt.from(10).pow(30);
-  static final BigInt rawPerNyano = BigInt.from(10).pow(24);
   static const int maxDecimalDigits = 6; // Max digits after decimal
 
   /// Convert raw to ban and return as BigDecimal
@@ -12,20 +11,10 @@ class NumberUtil {
   /// @param raw 100000000000000000000000000000
   /// @return Decimal value 1.000000000000000000000000000000
   ///
-  static Decimal getRawAsUsableDecimal(String? raw) {
+  static Decimal getRawAsDecimal(String? raw, BigInt? rawPerCur) {
+    rawPerCur ??= rawPerNano;
     Decimal amount = Decimal.parse(raw.toString());
-    Decimal result = (amount / Decimal.parse(rawPerNano.toString())).toDecimal();
-    return result;
-  }
-
-  /// Convert raw to ban and return as BigDecimal
-  ///
-  /// @param raw 100000000000000000000000000000
-  /// @return Decimal value 1.000000000000000000000000000000
-  ///
-  static Decimal getRawAsNyanoDecimal(String? raw) {
-    Decimal amount = Decimal.parse(raw.toString());
-    Decimal result = (amount / Decimal.parse(rawPerNyano.toString())).toDecimal();
+    Decimal result = (amount / Decimal.parse(rawPerCur.toString())).toDecimal();
     return result;
   }
 
@@ -41,105 +30,89 @@ class NumberUtil {
   //   return out;
   // }
 
-  static double truncateDecimal(Decimal input, {int digits = maxDecimalDigits}) {
-    Decimal bigger = input.shift(maxDecimalDigits);
+  static String truncateDecimal(Decimal input, {int digits = maxDecimalDigits}) {
+    Decimal bigger = input.shift(digits);
     bigger = bigger.floor(); // chop off the decimal: 1.059 -> 1.05
-    bigger = bigger.shift(-maxDecimalDigits);
-    return bigger.toDouble();
+    bigger = bigger.shift(-digits);
+    return bigger.toString();
   }
 
-  /// Return raw as a normal amount.
+  /// Return raw as a NANO amount.
   ///
   /// @param raw 100000000000000000000000000000
   /// @returns 1
   ///
-  static String getRawAsUsableString(String? raw) {
-    // String res = truncateDecimal(getRawAsUsableDecimal(raw), digits: maxDecimalDigits).toString();
-    // if (res == "0.0") {
-    //   return "~";
-    // }
-    // // remove trailing zeros
-    // if (res.endsWith(".0")) {
-    //   res = res.substring(0, res.length - 2);
-    // }
-    // return res;
-    return getRawAsUsableStringPrecise(raw);
-  }
-
-  /// Return raw as a normal amount.
-  ///
-  /// @param raw 100000000000000000000000000000
-  /// @returns 1
-  ///
-  static String getRawAsUsableStringPrecise(String? raw) {
-    String res = truncateDecimal(getRawAsUsableDecimal(raw), digits: maxDecimalDigits + 9).toString();
+  static String getRawAsUsableString(String? raw, BigInt rawPerCur) {
+    String res = truncateDecimal(getRawAsDecimal(raw, rawPerCur), digits: maxDecimalDigits + 9);
 
     if (raw == null || raw == "0" || raw == "00000000000000000000000000000000") {
       return "0";
     }
 
-    // remove trailing zeros
-    if (res.endsWith(".0")) {
-      res = res.substring(0, res.length - 2);
-    }
+    // print(res);
 
-    if (res != getRawAsUsableDecimal(raw).toString()) {
-      res = "$res~";
-    }
-
-    // if (res == "0.0") {
-    //   return "0~";
+    // // remove trailing zeros
+    // if (res.contains(".")) {
+    //   while (res.endsWith("0")) {
+    //     res = res.substring(0, res.length - 1);
+    //   }
     // }
 
-    return res;
+    if (!res.contains(".")) {
+      return res;
+    }
+
+    final String numAmount = res.split(".")[0];
+    String decAmount = res.split(".")[1];
+
+    // truncate:
+    if (decAmount.length > maxDecimalDigits) {
+      decAmount = decAmount.substring(0, NumberUtil.maxDecimalDigits);
+      // remove trailing zeros:
+      decAmount = decAmount.replaceAllMapped(RegExp(r'0+$'), (Match match) => '');
+      if (decAmount.isEmpty) {
+        return numAmount;
+      }
+    }
+
+    return "$numAmount.$decAmount";
   }
 
-  /// Return raw as a normal amount.
+  /// Return raw as a NYANO amount.
   ///
   /// @param raw 100000000000000000000000000000
   /// @returns 1
   ///
-  static String getRawAsNyanoString(String? raw) {
-    String res = truncateDecimal(getRawAsNyanoDecimal(raw), digits: maxDecimalDigits + 6).toString();
-    if (res == "0.0") {
-      return "~";
-    }
-    // remove trailing zeros
-    if (res.endsWith(".0")) {
-      res = res.substring(0, res.length - 2);
-    }
-
-    return res;
-
-    // NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: maxDecimalDigits, symbol: '');
-    // String asString = nf.format(truncateDecimal(getRawAsNyanoDecimal(raw)));
-    // var split = asString.split(".");
-    // if (split.length > 1) {
-    //   // Remove trailing 0s from this
-    //   if (int.parse(split[1]) == 0) {
-    //     asString = split[0];
-    //   } else {
-    //     String newStr = split[0] + ".";
-    //     String digits = split[1];
-    //     int endIndex = digits.length;
-    //     for (int i = 1; i <= digits.length; i++) {
-    //       if (int.parse(digits[digits.length - i]) == 0) {
-    //         endIndex--;
-    //       } else {
-    //         break;
-    //       }
-    //     }
-    //     digits = digits.substring(0, endIndex);
-    //     newStr = split[0] + "." + digits;
-    //     asString = newStr;
-    //   }
-    // }
-    // return asString;
-  }
+  // static String getRawAsNanoStringOld(String? raw) {
+  //   NumberFormat nf = new NumberFormat.currency(locale: 'en_US', decimalDigits: maxDecimalDigits, symbol: '');
+  //   String asString = nf.format(truncateDecimal(getRawAsNyanoDecimal(raw)));
+  //   var split = asString.split(".");
+  //   if (split.length > 1) {
+  //     // Remove trailing 0s from this
+  //     if (int.parse(split[1]) == 0) {
+  //       asString = split[0];
+  //     } else {
+  //       String newStr = split[0] + ".";
+  //       String digits = split[1];
+  //       int endIndex = digits.length;
+  //       for (int i = 1; i <= digits.length; i++) {
+  //         if (int.parse(digits[digits.length - i]) == 0) {
+  //           endIndex--;
+  //         } else {
+  //           break;
+  //         }
+  //       }
+  //       digits = digits.substring(0, endIndex);
+  //       newStr = split[0] + "." + digits;
+  //       asString = newStr;
+  //     }
+  //   }
+  //   return asString;
+  // }
 
   static String getNanoStringAsNyano(String amount) {
     String raw = getAmountAsRaw(amount);
-    String nyano = getRawAsNyanoString(raw);
+    String nyano = getRawAsUsableString(raw, rawPerNyano);
     return nyano;
   }
 

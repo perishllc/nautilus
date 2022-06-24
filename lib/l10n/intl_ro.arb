@@ -1,225 +1,1951 @@
 {
-  "cancel": "Renunţare",
-  "close": "Închide",
-  "confirm": "Confirmare",
-  "no": "Nu",
-  "yes": "Da",
-  "onStr": "Activate",
-  "off": "Dezactivate",
-  "send": "Trimite",
-  "receive": "Primește",
-  "sent": "Ai trimis",
-  "received": "Ai primit",
-  "transactions": "Tranzacții",
-  "addressCopied": "Adresă copiată",
-  "copyAddress": "Copiază adresa",
-  "addressShare": "Share",
-  "addressHint": "Introdu adresa",
-  "seed": "Seed",
-  "seedInvalid": "Seed invalid",
-  "seedCopied": "Seed-ul a fost copiat în clipboard. \n Opțiunea Copy-Paste este valabilă două minute.",
-  "scanQrCode": "Scanare cod QR",
-  "contactsImportErr": "Importarea contactelor a eșuat",
-  "viewDetails": "Detalii",
-  "qrInvalidSeed": "Codul QR nu conține un seed sau private key valid",
-  "removeContact": "Șterge contactul",
-  "removeContactConfirmation": "Dorești să elimini contactul %1?",
-  "contactHeader": "Contact",
-  "contactsHeader": "Contacte",
-  "addContact": "Adaugă contact",
-  "contactNameHint": "Introdu un nume @",
-  "contactInvalid": "Nume invalid",
-  "noContactsExport": "Nu există contacte pentru exportare",
-  "noContactsImport": " Nu am gasit contacte pentru importare",
-  "contactsImportSuccess": "Am importat %1 contacte",
-  "contactAdded": "%1 a fost adăugat la contacte!",
-  "contactRemoved": "%1 a fost șters din lista contactelor!",
-  "contactNameMissing": "Nu există contacte pentru exportare",
-  "contactExists": "Contact deja existent",
-  "backupYourSeed": "Salvați-vă seed-ul (backup)",
-  "backupSeedConfirm": "Sunteți sigur/ă că ați salvat seed-ul portofelului?",
-  "seedBackupInfo": "Mai jos se află seed-ul dumneavoastră. Este foarte important să îi faceți o copie de rezervă (backup). Nu fotografiați niciodată seed-ul și nu îl stocați digital.",
-  "copySeed": "Copiere seed",
-  "seedCopiedShort": "Seed-ul a fost copiat",
-  "importSeed": "Importă seed-ul",
-  "importSeedHint": "Introdu seed-ul mai jos.",
-  "welcomeText": "Bine ai venit! Pentru a continua, creează un portofel nou sau importă unul deja existent.",
-  "newWallet": "Portofel nou",
-  "importWallet": "Importă portofelul",
-  "sentTo": "Trimis către",
-  "sending": "Trimitere...",
-  "to": "Către",
-  "sendAmountConfirm": "Trimite %1 NANO",
-  "sendError": "A apărut o eroare. Încercați din nou mai târziu.",
-  "enterAmount": "Introdu suma",
-  "enterAddress": "Introdu adresa",
-  "invalidAddress": "Adresa introdusă este invalidă",
-  "addressMissing": "Introduceți o destinație",
-  "amountMissing": "Introduceți o sumă",
-  "insufficientBalance": "Fonduri insuficiente",
-  "sendFrom": "Trimite de la",
-  "pinCreateTitle": "Creați un PIN cu 6 cifre",
-  "pinConfirmTitle": "Confirmă PIN-ul",
-  "pinEnterTitle": "Introdu PIN-ul",
-  "pinConfirmError": "PIN-urile nu corespund",
-  "pinInvalid": "PIN invalid",
-  "themeHeader": "Aspect",
-  "changeRepButton": "Schimbă",
-  "changeRepAuthenticate": "Schimbă reprezentantul",
-  "currentlyRepresented": "Reprezentantul curent:",
-  "changeRepSucces": "Reprezentant schimbat cu succes",
-  "repInfoHeader": "Ce este un reprezentant?",
-  "repInfo": "Un reprezentant este un cont care votează pentru buna funcționare a rețelei. Puterea de vot este determinată de sold. Puteți delega soldul dumneavoastră pentru a mări puterea de vot a unui reprezentant de încredere. Acesta nu poate cheltui fondurile dumneavoastră. Alegeți un reprezentant activ și de încredere.",
-  "pinRepChange": "Introdu PIN-ul pentru a schimba reprezentantul",
-  "changeRepHint": "Introdu noul reprezentant",
-  "representatives": "Reprezentanți",
-  "pickFromList": "Alege din listă",
-  "votingWeight": "Putere de vot",
-  "uptime": "Timp de funcționare",
-  "authMethod": "Metoda de Autentificare",
-  "pinMethod": "PIN",
-  "privacyPolicy": "Politica de confidențialitate",
-  "biometricsMethod": "Biometria",
-  "changeCurrency": "Schimbă valuta",
-  "language": "Limba",
-  "shareNautilus": "Share Nautilus",
-  "shareNautilusText": "Încearcă Nautilus! Portofelul mobil NANO de talie mondială!",
-  "logout": "Deconectare",
-  "warning": "AVERTISMENT",
-  "logoutDetail": "Prin deconectare vom elimina seed-ul și toate datele legate de Nautilus de pe acest dispozitiv. Dacă seed-ul nu are o copie de rezervă/backup, fondurile for fi pierdute permanent.",
-  "logoutAction": "Șterge seed-ul și deconectează-mă",
-  "logoutAreYouSure": "Sunteți sigur/ă?",
-  "logoutReassurance": "Dacă aveți seed-ul salvat nu există motive de îngrijorare.",
-  "settingsHeader": "Setări",
-  "preferences": "Preferințe",
-  "manage": "Administrare",
-  "backupSeed": "Copie de rezervă pentru seed",
-  "fingerprintSeedBackup": "Confirmați cu amprenta pentru a copia seed-ul.",
-  "pinSeedBackup": "Introdu PIN-ul pentru a vedea seed-ul portofelului.",
-  "systemDefault": "Limba implicită",
-  "notifications": "Notificări",
-  "notificationTitle": "Ai primit %1 NANO",
-  "notificationBody": "Deschide Nautilus pentru a vizualiza tranzacția.",
-  "notificationHeaderSupplement": "Apasă pentru deschidere",
-  "settingsTransfer": "Încarcă din Paper Wallet",
-  "transferError": "A avut loc o eroare în timpul transferului. Vă rugăm să încercați din nou mai târziu.",
-  "paperWallet": "Paper Wallet",
-  "kaliumWallet": "Portofelul Kalium",
-  "manualEntry": "Introducere manuală",
-  "mnemonicPhrase": "Frază de memorat",
-  "rawSeed": "Seed simplu",
-  "transferHeader": "Transferă\nFonduri",
-  "transfer": "Transferă",
-  "transferManualHint": "Introduceți seed-ul mai jos.",
-  "transferIntro": "Acest proces va transfera fondurile dintr-un Paper Wallet către contul dvs. Nautilus.\n\nAtingeți butonul \"%1\" pentru a începe.",
-  "transferQrScanHint": "Scanați un seed pentru NANO\n sau un private key",
-  "transferQrScanError": "Acest cod QR nu conține un seed valid.",
-  "transferNoFunds": "Acest seed nu conține NANO.",
-  "transferConfirmInfo": "Un portofel cu un sold de %1 NANO a fost găsit.\n",
-  "transferConfirmInfoSecond": "Apăsați pentru a confirma transferul.\n",
-  "transferConfirmInfoThird": "Transferul poate dura câteva secunde.",
-  "transferLoading": "Se transferă...",
-  "transferComplete": "%1 NANO au fost transferate cu succes în portofelul dvs. Nautilus.",
-  "transferClose": "Apăsați oriunde pentru a închide această fereastră.",
-  "scanInstructions": "Scanează o adresă NANO de tip cod QR",
-  "unlockPin": "Introduceți codul PIN pentru a debloca Nautilus",
-  "unlockBiometrics": "Autentificaţi-vă pentru a debloca Nautilus",
-  "lockAppSetting": "Autentificare la deschidere",
-  "locked": "Închis",
-  "unlock": "Deblochează",
-  "tooManyFailedAttempts": "Prea multe încercări de deblocare eșuate.",
-  "securityHeader": "Securitate",
-  "autoLockHeader": "Blocare automată",
-  "xMinutes": "După %1 minute",
-  "xMinute": "După %1 minut",
-  "instantly": "Imediat",
-  "exampleCardIntro": "Bine ai venit! Odată ce primești sau trimiți NANO, tranzacțiile vor arăta astfel",
-  "exampleCardLittle": "Niște",
-  "exampleCardLot": "O mulțime de",
-  "exampleCardTo": "unui om oarecare",
-  "exampleCardFrom": "de la oricine",
-  "defaultAccountName": "Cont principal",
-  "defaultNewAccountName": "Contul nr. %1",
-  "newAccountIntro": "Acesta este noul tău cont! Odată ce primești NANO, tranzacțiile vor arată astfel:",
+  "@@locale": "ro",
   "account": "Cont",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Conturi",
-  "addAccount": "Adăugare cont",
-  "hideAccountHeader": "Ascundere cont?",
-  "removeAccountText": "Sigur doriți să ascundeți acest cont? Îl puteți reafișa mai târziu apăsând butonul \"%1\"",
-  "tapToReveal": "Apăsați pentru a afișa",
-  "tapToHide": "Apăsați pentru a ascunde",
-  "copied": "Copiat",
-  "copy": "Copiere",
-  "seedDescription": "Un seed conține aceeași informație precum o formulă secretă, dar în limbajul calculatoarelor. Va puteți accesa fondurile atâta timp cât păstrați în siguranță o copie a acestora.",
-  "importSecretPhrase": "Importare formulă secretă",
-  "importSecretPhraseHint": "Introduceți fraza de 24 de cuvinte mai jos. Fiecare cuvânt trebuie să fie separat printr-un spațiu.",
-  "qrMnemonicError": "Codul QR nu conține o formulă secretă corectă",
-  "mnemonicInvalidWord": "%1 nu este un cuvânt valid",
-  "mnemonicSizeError": "Formula secretă conține doar 24 de cuvinte",
-  "secretPhrase": "Formula secretă",
-  "backupConfirmButton": "Am pus-o într-un loc sigur",
-  "secretInfoHeader": "Siguranța înainte de toate!",
-  "secretInfo": "În continuare, veți vedea formula secretă a portofelului. Aceasta este o parolă care permite accesul la fonduri. Este vital să fie notată într-un caiet și să nu fie arătată vreodată nimănui.",
-  "secretWarning": "Dacă vă pierdeți dispozitivul sau dezinstalați aplicația, aveți nevoie de seed sau de formula secretă pentru a recupera fondurile!",
-  "gotItButton": "Am înțeles!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "Sunteți sigur/ă că ați salvat formula secretă ori seed-ul portofelului?",
-  "secretPhraseCopy": "Copiază formula secretă",
-  "secretPhraseCopied": "Formula secretă a fost copiată",
-  "import": "Import",
-  "importSeedInstead": "Introducere seed-ul în loc",
-  "switchToSeed": "Folosește seed-ul",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
+  "activeMessageHeader": "Mesaj activ",
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Adăugare cont",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Blocați un utilizator",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Adaugă contact",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Adauga Favorite",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Adresă copiată",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Introdu adresa",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Introduceți o destinație",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Introduceți un nume de utilizator sau o adresă",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Share",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Aliasuri",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Introduceți o sumă",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Întrebat",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Metoda de Autentificare",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Import automat",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Blocare automată",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Am pus-o într-un loc sigur",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
   "backupSecretPhrase": "Backup formulă secretă",
-  "qrInvalidAddress": "Codul QR este invalid",
-  "qrInvalidPermissions": "Acordați permisiunile camerei pentru a scana coduri QR",
-  "qrUnknownError": "Codul QR nu a putut fi citit",
-  "mantaError": "Nu s-a putut verifica cererea",
-  "rootWarning": "Se pare că acest dispozitiv este \"rootat\" / \"jailbroken\" sau modificat astfel încât securitatea este pusă în pericol. Recomandăm să resetați dispozitivul la starea originală înainte de a continua.",
-  "iUnderstandTheRisks": "Înțeleg riscurile",
-  "exit": "Ieșire",
-  "setWalletPassword": "Setați o parolă portofelului",
-  "setPassword": "Setează parola",
-  "disableWalletPassword": "Dezactivați parola portofelului",
-  "encryptionFailedError": "Setarea parolei a eșuat",
-  "setPasswordSuccess": "Parola a fost setată cu succes",
-  "disablePasswordSuccess": "Parola a fost dezactivată",
-  "createPasswordHint": "Creeaza parola",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Copie de rezervă pentru seed",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Sunteți sigur/ă că ați salvat seed-ul portofelului?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Salvați-vă seed-ul (backup)",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Biometria",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "% 1 a fost blocat cu succes.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "Utilizatorul este deja blocat!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "Blocată",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Blocați un utilizator după orice alias sau adresă cunoscută. Orice mesaje, tranzacții sau solicitări din partea acestora vor fi ignorate.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Informații blocate",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Numele Nick deja folosit!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Alegeți un nume Nick",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "% 1 a fost deblocat!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Bloc Explorer",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Informații despre Explorer Block",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Ce explorator de blocuri să utilizați pentru a afișa informațiile despre tranzacții",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Blocați acest utilizator",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Renunţare",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Schimbă valuta",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Schimbare jurnal",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Schimbă reprezentantul",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Schimbă",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Introdu noul reprezentant",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "Acesta este deja reprezentantul tău!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Reprezentant schimbat cu succes",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Verifică disponibilitatea",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Închide",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Confirmare",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
   "confirmPasswordHint": "Confirmă parola",
-  "enterPasswordHint": "Introduceți parola",
-  "passwordsDontMatch": "Parolele nu corespund",
-  "passwordBlank": "Parola nu poate fi goală",
-  "invalidPassword": "Parolă incorectă",
-  "passwordWillBeRequiredToOpenParagraph": "Această parolă va fi necesară pentru a deschide Nautilus.",
-  "passwordNoLongerRequiredToOpenParagraph": "Deschideți aplicația fără a mai introduce parola.",
-  "createPasswordFirstParagraph": "Puteți adauga o parolă pentru a spori securitatea portofelului.",
-  "createPasswordSecondParagraph": "Parola este opțională, portofelul este protejat indiferent de către codul PIN sau datele biometrice.",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Se încarcă",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 a fost adăugat la contacte!",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Contact deja existent",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Contact",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Nume invalid",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Introdu un nume @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Nu există contacte pentru exportare",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 a fost șters din lista contactelor!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Contacte",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Importarea contactelor a eșuat",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "Am importat %1 contacte",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Copiat",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Copiere",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Copiază adresa",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Copiază link-ul",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Copiere seed",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Copiați adresa portofelului în clipboard",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
   "createAPasswordHeader": "Creați o parolă.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Creați un card cadou",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Creați un card cadou",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Puteți adauga o parolă pentru a spori securitatea portofelului.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Creeaza parola",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Parola este opțională, portofelul este protejat indiferent de către codul PIN sau datele biometrice.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
   "createPasswordSheetHeader": "Gata",
-  "disablePasswordSheetHeader": "Dezactivare",
-  "requireAPasswordToOpenHeader": "Doriți să setați o parolă pentru a deschide Nautilus?",
-  "noSkipButton": "Sari peste",
-  "yesButton": "Da",
-  "nextButton": "Continuă",
-  "goBackButton": "Înapoi",
-  "welcomeTextKal": "Bun venit la Kalium. Pentru a continua, puteți crea un nou portofel sau puteți importa unul existent.",
-  "sendAmountConfirmKal": "Trimite %1 BANANO",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Creați cod QR",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Crearea cardului cadou",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
   "currency": "Valută",
-  "shareKalium": "Share Kalium",
-  "shareKaliumText": "Încearcă Kalium! Portofelul Banano oficial pentru mobil!",
-  "logoutDetailKal": "Prin deconectare vom elimina seed-ul și toate datele legate de Kalium de pe acest dispozitiv. Dacă seed-ul nu are o copie de rezervă/backup, fondurile for fi pierdute permanent.",
-  "notificationTitleKal": "Ai primit %1 BANANO",
-  "notificationBodyKal": "Deschide Kalium pentru a vizualiza tranzacția.",
-  "transferIntroKal": "Acest proces va transfera fondurile dintr-un Paper Wallet către contul dvs. Kalium.\n\nAtingeți butonul \"%1\" pentru a începe.",
-  "transferQrScanHintKal": "Scanați un seed pentru BANANO\n sau un private key",
-  "transferNoFundsKal": "Acest seed nu conține BANANO.",
-  "transferConfirmInfoKal": "Un portofel cu un sold de %1 BANANO a fost detectat.\n",
-  "transferCompleteKal": "%1 BANANO au fost transferate cu succes în portofelul dvs. Kalium.",
-  "scanInstructionsKal": "Scanează o adresă BANANO de tip cod QR",
-  "unlockPinKal": "Introduceți codul PIN pentru a debloca Kalium",
-  "unlockBiometricsKal": "Autentificaţi-vă pentru a debloca Kalium",
-  "exampleCardIntroKal": "Bun venit la Kalium. Odată ce primiți sau trimiteți BANANO, tranzacțiile vor arăta astfel",
-  "exampleCardToKal": "unui om oarecare",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Modul Moneda",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Informații despre modul valutar",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Alegeți în ce unitate să afișați sumele.\n1 nyano = 0.000001 NANO, sau \n1.000,000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Reprezentantul curent:",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Eroare de decriptare!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Cont principal",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Contul nr. %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Șterge",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Dezactivare",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Parola a fost dezactivată",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Dezactivați parola portofelului",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Respinge",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Nume de domeniu nevalid",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Editează",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Setarea parolei a eșuat",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Introdu adresa",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Introdu suma",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Introduceți nota cadou",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Introduceţi mesajul",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Introduceți parola",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Introduceți un nume de utilizator",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Introduceți Utilizator sau Adresă",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "de la oricine",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
   "exampleCardFromKal": "de la oricine",
-  "newAccountIntroKal": "Acesta este noul tău cont! Odată ce primești BANANO, tranzacțiile vor arată astfel:",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Bine ai venit! Odată ce primești sau trimiți NANO, tranzacțiile vor arăta astfel",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Bun venit la Kalium. Odată ce primiți sau trimiteți BANANO, tranzacțiile vor arăta astfel",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Niște",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "O mulțime de",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "unui om oarecare",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "unui om oarecare",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "După ce trimiteți sau primiți o solicitare de plată, acestea vor apărea aici astfel, cu culoarea și eticheta cardului care indică starea. \n\nVerde indică faptul că cererea a fost plătită.\nGalbenul indică cererea/nota nu a fost plătită/citită.\nRoșu indică faptul că cererea nu a fost citită sau primită.\n\n Cardurile colorate neutre fără o sumă sunt doar mesaje.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Unele",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Sushi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "După ce trimiteți sau primiți o solicitare de plată, acestea vor apărea aici:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hei ce se întâmplă?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "O mulțime de",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Chirie",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "La mulți ani!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Bani de gaz",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Ieșire",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "nu a reușit",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus Deconectat",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Serverele Nautilus par să fie deconectate, trimiterea și primirea (fără note) ar trebui să fie în continuare operaționale, dar este posibil ca cererile de plată să nu treacă prin\n\n Reveniți mai târziu sau reporniți aplicația pentru a încerca din nou",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Favoritul există deja",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Favorite",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Nume favorit nevalid",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Introduceți un nume Nick",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Alegeți un nume pentru acest favorit",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "% 1 a fost eliminat din favorite!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "Favorite",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Recomandate",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Confirmați cu amprenta pentru a copia seed-ul.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "De la",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "îndeplinit",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "Ai un cadou!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Cadou gol",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Suma cadou",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Cadou de la",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Încărcați un card cadou digital cu NANO! Setați o sumă și un mesaj opțional pe care destinatarul să îl vadă când îl deschide!\n\nOdată creat, veți primi un link pe care îl puteți trimite oricui, care, atunci când este deschis, va distribui automat fondurile destinatarului după instalarea Nautilus!\n\nDacă destinatarul este deja utilizator Nautilus, acesta va primi o solicitare de a transfera fondurile în contul său la deschiderea linkului",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Mesaj Cadou",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Înapoi",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Am înțeles!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Mergi la QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Ascunde",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Ascundere cont?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Acasă",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Ignoră",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Import",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "Linkul pe care ați făcut clic conține nano, doriți să îl importați în acest portofel sau să îl rambursați oricui l-a trimis?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Importare formulă secretă",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Introduceți fraza de 24 de cuvinte mai jos. Fiecare cuvânt trebuie să fie separat printr-un spațiu.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Importă seed-ul",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Introdu seed-ul mai jos.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Introducere seed-ul în loc",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Importă portofelul",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Imediat",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Fonduri insuficiente",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Adresa introdusă este invalidă",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Parolă incorectă",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Înțeleg riscurile",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Portofelul Kalium",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Limba",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Link Copiat",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
   "liveSupportButton": "Asistență",
-  "connectingHeader": "Se încarcă"
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Încărcat",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Încărcat în",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Autentificare la deschidere",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Închis",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Deconectare",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Șterge seed-ul și deconectează-mă",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Sunteți sigur/ă?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Prin deconectare vom elimina seed-ul și toate datele legate de Nautilus de pe acest dispozitiv. Dacă seed-ul nu are o copie de rezervă/backup, fondurile for fi pierdute permanent.",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Prin deconectare vom elimina seed-ul și toate datele legate de Kalium de pe acest dispozitiv. Dacă seed-ul nu are o copie de rezervă/backup, fondurile for fi pierdute permanent.",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Dacă aveți seed-ul salvat nu există motive de îngrijorare.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Administrare",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Nu s-a putut verifica cererea",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Introducere manuală",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Marcați ca plătit",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Marcați ca neplătit",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Memo re-trimis! Dacă încă nu este recunoscut, dispozitivul destinatarului poate fi offline.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Mesaj",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Suma minimă de trimitere este% 1% 2",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 nu este un cuvânt valid",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Frază de memorat",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "Formula secretă conține doar 24 de cuvinte",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Această caracteristică necesită să aveți un istoric de tranzacții mai lung pentru a preveni spamul.\n\nAlternativ, puteți afișa un cod QR pentru ca cineva să scaneze.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Verificarea necesară",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Acesta este noul tău cont! Odată ce primești NANO, tranzacțiile vor arată astfel:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Acesta este noul tău cont! Odată ce primești BANANO, tranzacțiile vor arată astfel:",
+  "@newAccountIntroKal": {},
+  "newWallet": "Portofel nou",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Continuă",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Nu",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Nu există contacte pentru exportare",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": " Nu am gasit contacte pentru importare",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Starea nodului",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Niciun rezultat de căutare!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "Sari peste",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Deschide Nautilus pentru a vizualiza tranzacția.",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Deschide Kalium pentru a vizualiza tranzacția.",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Apasă pentru deschidere",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "Pentru ca această caracteristică să funcționeze corect, notificările trebuie să fie activate",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Notificări",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "Ai primit %1 NANO",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "Ai primit %1 BANANO",
+  "@notificationTitleKal": {},
+  "notSent": "nu a fost trimis",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Dezactivate",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Bine",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Onrampă",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "Activate",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Deschis",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "plătit",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Paper Wallet",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Parola nu poate fi goală",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Deschideți aplicația fără a mai introduce parola.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Parolele nu corespund",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Această parolă va fi necesară pentru a deschide Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Plătiți",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Cineva a solicitat plata de la tine! verificați pagina de plăți pentru mai multe informații.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Plăți",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Plătiți această solicitare",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "",
+  "@pending": {},
+  "pickFromList": "Alege din listă",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "PIN-urile nu corespund",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Confirmă PIN-ul",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Creați un PIN cu 6 cifre",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Introdu PIN-ul",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "PIN invalid",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Introdu PIN-ul pentru a schimba reprezentantul",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Introdu PIN-ul pentru a vedea seed-ul portofelului.",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Preferințe",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Politica de confidențialitate",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Achiziționați Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "Codul QR este invalid",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Acordați permisiunile camerei pentru a scana coduri QR",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "Codul QR nu conține un seed sau private key valid",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "Codul QR nu conține o formulă secretă corectă",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Codul QR nu a putut fi citit",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Evaluează aplicația",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn't take more than a minute.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Seed simplu",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Citeste mai mult",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "de încasat",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Primește",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Ai primit",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Primiți minim",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Primiți informații minime",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "O sumă minimă de primit. Dacă se primește o plată sau o cerere cu o sumă mai mică decât aceasta, aceasta va fi ignorată.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "Rambursare",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "pentru",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Înregistrarea",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Înregistrare Nume utilizator",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Înregistrați un nume de utilizator",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Sigur doriți să ascundeți acest cont? Îl puteți reafișa mai târziu apăsând butonul \"%1\"",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Deblocați",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Sigur doriți să deblocați deblocarea% 1?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Șterge contactul",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Dorești să elimini contactul %1?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Elimină Favorite",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "Un reprezentant este un cont care votează pentru buna funcționare a rețelei. Puterea de vot este determinată de sold. Puteți delega soldul dumneavoastră pentru a mări puterea de vot a unui reprezentant de încredere. Acesta nu poate cheltui fondurile dumneavoastră. Alegeți un reprezentant activ și de încredere.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Ce este un reprezentant?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Raspunde",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Reprezentanți",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Cerere",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Cerere% 1% 2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Solicitat",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Solicitat de la",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Solicitare eșuată: Acest utilizator nu pare să aibă instalat Nautilus sau notificările sunt dezactivate.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Solicitând",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Cerere de plată",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Eroare la trimiterea cererii de plată, dispozitivul destinatarului poate fi offline sau indisponibil.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Cerere re-trimis! Dacă încă nu este recunoscut, dispozitivul destinatarului poate fi offline.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Doriți să setați o parolă pentru a deschide Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Retrimite acest memo",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Resetați baza de date",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Sigur doriți să resetați baza de date internă? \n\nAcest lucru poate rezolva problemele legate de actualizarea aplicației, dar va șterge, de asemenea, toate preferințele salvate. Acest lucru NU va șterge sămânța portofelului. Dacă aveți probleme, ar trebui să faceți o copie de rezervă a semințelor, să reinstalați aplicația și, dacă problema persistă, nu ezitați să faceți un raport de eroare pe github sau discordie.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Reîncercați",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Se pare că acest dispozitiv este \"rootat\" / \"jailbroken\" sau modificat astfel încât securitatea este pusă în pericol. Recomandăm să resetați dispozitivul la starea originală înainte de a continua.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Scanează o adresă NANO de tip cod QR",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Scanează o adresă BANANO de tip cod QR",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Scanare cod QR",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Caută orice",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "În continuare, veți vedea formula secretă a portofelului. Aceasta este o parolă care permite accesul la fonduri. Este vital să fie notată într-un caiet și să nu fie arătată vreodată nimănui.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Siguranța înainte de toate!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Formula secretă",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Formula secretă a fost copiată",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Copiază formula secretă",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Dacă vă pierdeți dispozitivul sau dezinstalați aplicația, aveți nevoie de seed sau de formula secretă pentru a recupera fondurile!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Securitate",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Seed",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Mai jos se află seed-ul dumneavoastră. Este foarte important să îi faceți o copie de rezervă (backup). Nu fotografiați niciodată seed-ul și nu îl stocați digital.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Seed-ul a fost copiat în clipboard. \n Opțiunea Copy-Paste este valabilă două minute.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Seed-ul a fost copiat",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Un seed conține aceeași informație precum o formulă secretă, dar în limbajul calculatoarelor. Va puteți accesa fondurile atâta timp cât păstrați în siguranță o copie a acestora.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Seed invalid",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Nu se poate solicita de la sine",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Trimite",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Trimite %1 NANO",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Trimite %1 BANANO",
+  "@sendAmountConfirmKal": {},
+  "sendError": "A apărut o eroare. Încercați din nou mai târziu.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Trimite de la",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Trimitere...",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Trimiterea memoriei cu tranzacția a eșuat, este posibil ca acestea să nu fie un utilizator Nautilus.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Trimiterea mesajului",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Trimite cererea din nou",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Trimiteți sau solicitați o plată, cu mesaje criptate End to End!\n\nSolicitările de plată, memoriile și mesajele vor fi primite numai de către alți utilizatori nautilus.\n\nNu este necesar să aveți un nume de utilizator pentru a trimite sau primi cereri de plată și le puteți utiliza pentru păstrarea propriei evidențe, chiar dacă nu utilizează nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Trimiteți informații despre foaie",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Ai trimis",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Trimis către",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Setează parola",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Parola a fost setată cu succes",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Setări",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Încarcă din Paper Wallet",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Setați o parolă portofelului",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "Share Kalium",
+  "@shareKalium": {},
+  "shareKaliumText": "Încearcă Kalium! Portofelul Banano oficial pentru mobil!",
+  "@shareKaliumText": {},
+  "shareLink": "Distribuiți linkul",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Share Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Încearcă Nautilus! Portofelul mobil NANO de talie mondială!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Afișați contactele",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simplex",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Sprijiniți dezvoltatorul",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Folosește seed-ul",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Limba implicită",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Apăsați pentru a ascunde",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Apăsați pentru a afișa",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Aspect",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "Către",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Prea multe încercări de deblocare eșuate.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Tranzacții",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Transferă",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Apăsați oriunde pentru a închide această fereastră.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 NANO au fost transferate cu succes în portofelul dvs. Nautilus.",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 BANANO au fost transferate cu succes în portofelul dvs. Kalium.",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "Un portofel cu un sold de %1 NANO a fost găsit.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "Un portofel cu un sold de %1 BANANO a fost detectat.\n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Apăsați pentru a confirma transferul.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Transferul poate dura câteva secunde.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "A avut loc o eroare în timpul transferului. Vă rugăm să încercați din nou mai târziu.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Transferă\nFonduri",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Acest proces va transfera fondurile dintr-un Paper Wallet către contul dvs. Nautilus.\n\nAtingeți butonul \"%1\" pentru a începe.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Acest proces va transfera fondurile dintr-un Paper Wallet către contul dvs. Kalium.\n\nAtingeți butonul \"%1\" pentru a începe.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Acest proces va transfera fondurile dintr-un portofel de hârtie în portofelul dvs. Nautilus.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Se transferă...",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Introduceți seed-ul mai jos.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "Acest seed nu conține NANO.",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "Acest seed nu conține BANANO.",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Acest cod QR nu conține un seed valid.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Scanați un seed pentru NANO\n sau un private key",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Scanați un seed pentru BANANO\n sau un private key",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "nerecunoscut",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "neconfirmat",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "neîmplinit",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Deblochează",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Autentificaţi-vă pentru a debloca Nautilus",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Autentificaţi-vă pentru a debloca Kalium",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Introduceți codul PIN pentru a debloca Nautilus",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Introduceți codul PIN pentru a debloca Kalium",
+  "@unlockPinKal": {},
+  "unpaid": "neplătit",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "necitită",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Timp de funcționare",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "Ai deja un nume de utilizator înregistrat! Momentan nu este posibil să vă schimbați numele de utilizator, dar sunteți liber să înregistrați unul nou sub o altă adresă.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Nume de utilizator disponibil!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Introduceți un nume de utilizator",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Eroare nume utilizator",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Alegeți un @username unic pentru a vă ajuta prietenii și familia să vă găsească mai ușor!\n\nAvând un nume de utilizator Nautilus actualizează interfața de utilizator la nivel global pentru a reflecta noul dvs. mâner.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Nume utilizator nevalid",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Nume utilizator indisponibil",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Numele de utilizator Nautilus sunt un serviciu centralizat furnizat de Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "Utilizatorul nu a fost găsit!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Detalii",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Putere de vot",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "AVERTISMENT",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Bine ai venit! Pentru a continua, creează un portofel nou sau importă unul deja existent.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Bun venit la Kalium. Pentru a continua, puteți crea un nou portofel sau puteți importa unul existent.",
+  "@welcomeTextKal": {},
+  "withAddress": "Cu adresa",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "Cu mesaj",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "După %1 minut",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "După %1 minute",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Da",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Da",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

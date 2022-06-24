@@ -1,235 +1,1951 @@
 {
-  "cancel": "Відмовитися",
-  "close": "Закрити",
-  "confirm": "Підтвердити",
-  "no": "Ні",
-  "yes": "Так",
-  "onStr": "Увімкнуто",
-  "off": "Вимкнуто",
-  "send": "Надіслати",
-  "receive": "Отримати",
-  "sent": "Надіслано",
-  "received": "Отримано",
-  "transactions": "Трансакції",
-  "addressCopied": "Адресу скопійовано",
-  "copyAddress": "Скопіювати адресу",
-  "addressShare": "Поділитися адресою",
-  "addressHint": "Введіть адресу",
-  "seed": "Seed",
-  "seedInvalid": "неправильний Seed",
-  "seedCopied": "Seed скопійовно до буферу \n звідти можна пастити протягом двох хвилин.",
-  "scanQrCode": "Сканувати QR код",
-  "contactsImportErr": "Не вдалося імпортувати контакти",
-  "viewDetails": "Переглянути деталі",
-  "qrInvalidSeed": "QR код не містить правильних seed чи приватного ключа",
-  "removeContact": "Видалити контакт",
-  "removeContactConfirmation": "Ви впевнені, що ви хочете видалити 1% ?",
-  "contactHeader": "Контакт",
-  "contactsHeader": "Контакти",
-  "addContact": "Додати контакт",
-  "contactNameHint": "Введіть ім'я @",
-  "contactInvalid": "Невірне ім'я контакта",
-  "noContactsExport": "Немає контактів для експорту.",
-  "noContactsImport": "Немає нових контактів для імпорту",
-  "contactsImportSuccess": "Успішно імпортовано %1 контактів.",
-  "contactAdded": "%1 додано до контактів.",
-  "contactRemoved": "%1 було видалено з контактів!",
-  "contactNameMissing": "Оберіть ім'я контакта",
-  "contactExists": "Такий контакт вже існує",
-  "backupYourSeed": "зробити резервну копію seed",
-  "backupSeedConfirm": "ви впевнені що ви зробили резервну копію seed?",
-  "seedBackupInfo": "Це seed вашого гаманця. Це НАДВАЖЛИВО зробити резервну копію вашого seed і ніколи не зберігати цю копію як звичайний текст чи знімок екрана.",
-  "copySeed": "Копіювати seed",
-  "seedCopiedShort": "Seed скопійовано",
-  "importSeed": "Імпортувати seed",
-  "importSeedHint": "Будь ласка введіть ваш seed нижче.",
-  "welcomeText": "Ласкаво просимо до Nautilus. Щоб продовжити ви можете створити новий гаманець або імпортувати існуючий.",
-  "newWallet": "Новий гаманець",
-  "importWallet": "Імпортувати гаманець",
-  "sentTo": "Надіслано для",
-  "sending": "Надсилання",
-  "to": "Для",
-  "sendAmountConfirm": "Надіслати %1 Nano",
-  "sendError": "Сталася помилка. Спробуйте ще раз пізніше.",
-  "enterAmount": "Введіть суму",
-  "enterAddress": "Введіть адресу",
-  "invalidAddress": "Введено невірну адресу",
-  "addressMissing": "Будь ласка вкажіть адресу",
-  "amountMissing": "Будь ласка вкажіть суму",
-  "insufficientBalance": "Недостатньо коштів",
-  "sendFrom": "Надіслано з",
-  "pinCreateTitle": "Придумайте пін код із 6и цифр",
-  "pinConfirmTitle": "Підтвердіть ваш пін код",
-  "pinEnterTitle": "Введіть пін код",
-  "pinConfirmError": "Пін коди не співпадають",
-  "pinInvalid": "Введено невірний пін код",
-  "themeHeader": "Тема",
-  "changeRepButton": "Зміна",
-  "changeRepAuthenticate": "Зміна представника",
-  "currentlyRepresented": "На разі представлено",
-  "changeRepSucces": "Представника змінено успішно",
-  "repInfoHeader": "Що таке представник?",
-  "repInfo": "Представник це посередник якій голосує за правила в мережі. Сила голосу вимірються балансом гаманця, ви можете віддати ваш голос представнику якому довіряєте, щоб збільшити силу його голоса. Ваш представник не може витрачати ваші кошти. Зазвичай то є розумним обирати представника, який не від'єднується від мережі і якому можна довіряти.",
-  "pinRepChange": "Введіть пін код для зміни представника.",
-  "changeRepHint": "Введіть нового представника",
-  "representatives": "Представники",
-  "pickFromList": "Оберіть із списку",
-  "votingWeight": "Сила голосу",
-  "uptime": "Час в мережі",
-  "authMethod": "Метод аутентикації",
-  "pinMethod": "Пін код",
-  "privacyPolicy": "Політика приватності",
-  "biometricsMethod": "Біометрика",
-  "changeCurrency": "Змінити валюту",
-  "language": "Мова",
-  "shareNautilus": "Поділитися Nautilus",
-  "shareNautilusText": "Спробуйте Nautilus!  Найкращий мобільний гаманець для NANO!",
-  "logout": "Вийти",
-  "warning": "Попередження",
-  "logoutDetail": "Якщо ви вийдете то ваш seed і всі Nautilus дані буде видалено з вашого пристрою . Якщо ви не зробили резервну копію seed ви НІКОЛИ не відновите гаманці",
-  "logoutAction": "Видалити seed і вийти",
-  "logoutAreYouSure": "Ви впевнені?",
-  "logoutReassurance": "Якщо ви зробили резервну копію вашої мнемонічної фрази вам не варто хвилюватися.",
-  "settingsHeader": "Установки",
-  "preferences": "Преференції",
-  "manage": "Керувати",
-  "backupSeed": "Резервна копія seed",
-  "fingerprintSeedBackup": "Введіть пароль для створення резервної копії.",
-  "pinSeedBackup": "Введіть пін код для створення резервної копії",
-  "systemDefault": "Системне значення поза запитом",
-  "notifications": "Повідомлення",
-  "notificationTitle": "Отримано %1 NANO",
-  "notificationBody": "Відкрити Nautilus щоб переглянути трансакції",
-  "notificationHeaderSupplement": "Торкніться щоб відкрити",
-  "settingsTransfer": "Завантажити з паперового гаманця",
-  "transferError": "Під час переказу трапилася помилка. Будь ласка спробуйте пізніше.",
-  "paperWallet": "Паперовий гаманець",
-  "kaliumWallet": "Гаманець Kalium",
-  "manualEntry": "Введення вручну",
-  "mnemonicPhrase": "Мнемонічна фраза",
-  "rawSeed": "Seed як є",
-  "transferHeader": "Переказати кошти",
-  "transfer": "Переказати",
-  "transferManualHint": "Будь ласка введіть ваш seed нижче.",
-  "transferIntro": "Цією дією ви перекажете кошти з паперового гаманця у ваш Nautilus гаманець. \n\n Натисніть \"%1\" конпку щоб почати.",
-  "transferQrScanHint": "Сканувати seed \n або приватний ключ",
-  "transferQrScanError": "Цей QR код не містить правильних seed.",
-  "transferNoFunds": "За цим seed знайдено лише нульовий баланс",
-  "transferConfirmInfo": "Знайдено гаманець з балансом %1 NANO . \n",
-  "transferConfirmInfoSecond": "Натисніть сюди щоб підтвердити переказ коштів. \n",
-  "transferConfirmInfoThird": "Переказ може зайняти декілька секунд.",
-  "transferLoading": "Переказується",
-  "transferComplete": "%1 NANO успішно переказано до вашого гаманця Nautilus. \n",
-  "transferClose": "Торкніться щоб закрити вікно.",
-  "scanInstructions": "Сканувати QR код \n NANO адреси",
-  "unlockPin": "Введіть пін код для входу в Nautilus",
-  "unlockBiometrics": "Введіть пароль для входу в Nautilus",
-  "lockAppSetting": "Вводити пароль після запуска",
-  "locked": "Заблоковано",
-  "unlock": "Розблокувати",
-  "tooManyFailedAttempts": "Надто багато невірних спроб розблокувати.",
-  "securityHeader": "Безпека",
-  "autoLockHeader": "Автоматичне блокування",
-  "xMinutes": "Після %1 хвилин",
-  "xMinute": "Після %1 хвилини",
-  "instantly": "Миттєво",
-  "exampleCardIntro": "Ласкаво прошу до Nautilus. Як тільки ви отримаєте NANO, трансакції буде показано отак:",
-  "exampleCardLittle": "Трохи",
-  "exampleCardLot": "Багато",
-  "exampleCardTo": "комусь",
-  "exampleCardFrom": "від когось",
-  "defaultAccountName": "Головний гаманець",
-  "defaultNewAccountName": "Гаманець %1",
-  "newAccountIntro": "Це ваш новий гаманець. Як тільки ви отримаєте NANO, трансакції буде показано отак:",
+  "@@locale": "uk",
   "account": "Гаманець",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Гаманці",
-  "addAccount": "Додати гаманець",
-  "hideAccountHeader": "Приховати гаманець?",
-  "removeAccountText": "Чи дійсно ви бажаєте приховати цей профіль? Ви зможете його побачити торкнувши кнопку \"%1\".",
-  "tapToReveal": "Торкніться щоб побачити",
-  "tapToHide": "Торкніться щоб приховати",
-  "copied": "Скопійовано",
-  "copy": "Скопіювати",
-  "seedDescription": "Seed несе туж інформацію що і секретна фраза, але у зручному для машини вигляді. Якщо ви маєте резервну копію одного з двох перелічених вище, ви зможете оперувати коштами.",
-  "importSecretPhrase": "Імпортувати секретну фразу",
-  "importSecretPhraseHint": "Будь ласка введіть секретну фразу із 24 слів. Слова мають бути розділені пробілом.",
-  "qrMnemonicError": "QR код не містить правильної секретної фрази",
-  "mnemonicInvalidWord": "%1 неправильне слово",
-  "mnemonicSizeError": "Секретна фраза складається  із точно 24х слів",
-  "secretPhrase": "Секретна фраза",
-  "backupConfirmButton": "Я зробив резервну копію",
-  "secretInfoHeader": "Перш за все - безпека!",
-  "secretInfo": "На наступному екрані ви побачите секретну фразу. Це пароль для доступа до ваших коштів. Це НАДЗВИЧАЙНО важливо зробити резервну копію фрази і ніколи не ділитися нею ні з ким.",
-  "secretWarning": "Якщо ви загубите ваш прилад, або деінсталюєте додаток, вам буде необхідна секретна фраза або seed для повернення коштів!",
-  "gotItButton": "Зрозуміло!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "Ви впевнені, що ви зробили резервну копію вашої секретної фрази або seed?",
-  "secretPhraseCopy": "Копіювати секретну фразу",
-  "secretPhraseCopied": "Секретну фразу скопійовано",
-  "import": "Імпортувати",
-  "importSeedInstead": "Замість того імпортувати seed",
-  "switchToSeed": "Перемкнутися на seed",
-  "backupSecretPhrase": "Резервна копія секретної фрази",
-  "qrInvalidAddress": "QR код не містить правильного адресата",
-  "qrInvalidPermissions": "Будь ласка дайте дозвіл камері сканувати QR коди",
-  "qrUnknownError": "Не вийшло зчитати QR код",
-  "mantaError": "Не вдалося перевірити запит",
-  "rootWarning": "Схоже що ваш прилад \"rooted\", \"jailbroken\", чи модифікований настільки, що це небезпечно. Рекомендовано повернути фабричні установки вашому приладу перед продовженням.",
-  "iUnderstandTheRisks": "Я розумію ризики",
-  "exit": "Вийти",
-  "setWalletPassword": "Установити пароль гаманця",
-  "setPassword": "Установити пароль",
-  "disableWalletPassword": "Заборонити пароль гаманця",
-  "encryptionFailedError": "Не вдалося встановити пароль гаманця",
-  "setPasswordSuccess": "Пароль було успішно встановлено",
-  "disablePasswordSuccess": "Пароль було вимкнено",
-  "createPasswordHint": "Створити пароль",
-  "confirmPasswordHint": "Підтвердити пароль",
-  "enterPasswordHint": "Введіть пароль",
-  "passwordsDontMatch": "Паролі не співпали",
-  "passwordBlank": "Пароль не може бути порожнім",
-  "invalidPassword": "Невірний пароль",
-  "passwordWillBeRequiredToOpenParagraph": "Цей пароль буде необхідним щоб відкрити Nautilus.",
-  "passwordNoLongerRequiredToOpenParagraph": "Вам більше не треба буде пароль щоб відкрити Nautilus.",
-  "createPasswordFirstParagraph": "Ви можете призначити пароль щоб ваш гаманець був у безпеці.",
-  "createPasswordSecondParagraph": "Пароль встановлювати не обов'язково, ваш гаманець буде захищено пін кодом або біометричними даними.",
-  "createAPasswordHeader": "Створити пароль.",
-  "createPasswordSheetHeader": "Створити",
-  "disablePasswordSheetHeader": "Вимкнути",
-  "requireAPasswordToOpenHeader": "Чи треба пароль щоб відкрити Nautilus?",
-  "noSkipButton": "Ні, пропустити",
-  "yesButton": "Так",
-  "nextButton": "Далі",
-  "goBackButton": "Повернутися",
-  "welcomeTextKal": "Ласкаво просимо до Kalium. Щоб продовжити створіть новий гаманець або імпортуйте існуючий.",
-  "sendAmountConfirmKal": "Надіслати %1 BANANO",
-  "currency": "Валюта",
-  "shareKalium": "Поділитися Kalium",
-  "shareKaliumText": "Спробуйте Kalium! Офіційний мобільний гаманець Banano!",
-  "logoutDetailKal": "Якщо ви продовжите це видалить ваш seed і всі дані гаманця будуть стерті з приладу. Якщо у вас нема резервної копії, ви НІКОЛИ не зможете повернути ваші кошти",
-  "notificationTitleKal": "Отримано  %1 BANANO",
-  "notificationBodyKal": "Відкрити Kalium щоб побачити цю трансакцію",
-  "transferIntroKal": "Цією дією буде переказано кошти із паперового гаманця до вашого Kalium гаманця. \n\n Торкніться \"%1\" кнопки щоб почати.",
-  "transferQrScanHintKal": "Сканувати seed або\n приватний ключ Banano",
-  "transferNoFundsKal": "За цим seed знайдено лише нульовий баланс",
-  "transferConfirmInfoKal": "Гаманець з балансом %1 BANANO було знайдено. \n",
-  "transferCompleteKal": "%1 BANANO було успішно переказано до вашого Kalium гаманця. \n",
-  "scanInstructionsKal": "Сканувати QR код \n Banano адреси",
-  "unlockPinKal": "Введіть пін код щоб розблокувати Kalium",
-  "unlockBiometricsKal": "Введіть пароль щоб розблокувати Kalium",
-  "exampleCardIntroKal": "Ласкаво просимо до Kalium. Як тільки ви отримаєте BANANO, трансакції буде показано отак:",
-  "exampleCardToKal": "випадковій мавпі",
-  "exampleCardFromKal": "від випадкової мавпи",
-  "newAccountIntroKal": "Це ваш новий профіль. Як тільки ви отримаєте BANANO, трансакції буде показано отак:",
-  "liveSupportButton": "Підтримка",
-  "connectingHeader": "З'єднання",
-  "minimumSend": "Мінімальна сума для пересилання %1 NANO",
-  "natricon": "Natricon",
-  "pending": "в процесі",
-  "unconfirmed": "непідтверджено",
-  "messageHeader": "Повідомлення",
-  "readMore": "Читати більше",
-  "ignore": "Ігнорувати",
-  "dismiss": "Зрозуміло",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
   "activeMessageHeader": "Активне повідомлення",
-  "blockExplorer": "Explorer блокчейну"
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Додати гаманець",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Блокування користувача",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Додати контакт",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Додати Улюблене",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Адресу скопійовано",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Введіть адресу",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Будь ласка вкажіть адресу",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Будь ласка, введіть ім'я користувача або адресу",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Поділитися адресою",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Псевдоніми",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Будь ласка вкажіть суму",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Запитав",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Метод аутентикації",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Авто Імпорт",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Автоматичне блокування",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Я зробив резервну копію",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Резервна копія секретної фрази",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Резервна копія seed",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "ви впевнені що ви зробили резервну копію seed?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "зробити резервну копію seed",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Біометрика",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "% 1 успішно заблоковано.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "Користувач вже заблокований!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "Заблоковано",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Блокувати користувача за будь-яким відомим псевдонімом або адресою. Будь-які повідомлення, транзакції або запити від них будуть проігноровані.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Заблокована інформація",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Ім'я псевдоніма вже використано!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Виберіть назву псевдоніма",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "% 1 розблоковано!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Explorer блокчейну",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Інформація про блок-провідник",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Який провідник блоків використовувати для відображення інформації про транзакції",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Заблокувати цього користувача",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Відмовитися",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Змінити валюту",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Журнал змін",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Зміна представника",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Зміна",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Введіть нового представника",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "Це вже ваш представник!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Представника змінено успішно",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Перевірити наявність",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Закрити",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Підтвердити",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Підтвердити пароль",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "З'єднання",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 додано до контактів.",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Такий контакт вже існує",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Контакт",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Невірне ім'я контакта",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Введіть ім'я @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Оберіть ім'я контакта",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 було видалено з контактів!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Контакти",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Не вдалося імпортувати контакти",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "Успішно імпортовано %1 контактів.",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Скопійовано",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Скопіювати",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Скопіювати адресу",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Копіювати посилання",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Копіювати seed",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Копіювати адресу торбинки до буфера",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Створити пароль.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Створити подарункову карту",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Створення подарункової картки",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Ви можете призначити пароль щоб ваш гаманець був у безпеці.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Створити пароль",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Пароль встановлювати не обов'язково, ваш гаманець буде захищено пін кодом або біометричними даними.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Створити",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Створити QR-код",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Створення подарункової картки",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Валюта",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Валютний режим",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Інформація про режим валюти",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Виберіть, в якій одиниці відображати суми.\n1 ньяно = 0,000001 НАНО, або \n1,000,000 ньяно = 1 НАНО",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "На разі представлено",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Помилка розшифровки!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Головний гаманець",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Гаманець %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Вилучити",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Вимкнути",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Пароль було вимкнено",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Заборонити пароль гаманця",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Зрозуміло",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Некоректне доменне ім'я",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Редагувати",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Не вдалося встановити пароль гаманця",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Введіть адресу",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Введіть суму",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Введіть подарункову записку",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Введіть повідомлення",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Введіть пароль",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Введіть ім'я користувача",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Введіть користувача або адресу",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "від когось",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "від випадкової мавпи",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Ласкаво прошу до Nautilus. Як тільки ви отримаєте NANO, трансакції буде показано отак:",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Ласкаво просимо до Kalium. Як тільки ви отримаєте BANANO, трансакції буде показано отак:",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Трохи",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "Багато",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "комусь",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "випадковій мавпі",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Щойно ви надішлете або отримаєте запит на оплату, вони відображатимуться тут, як це, із кольором та тегом картки, що позначають статус. \n\nЗелений колір означає, що запит був оплачений.\nЖовтим кольором вказується, що запит/пам'ятка не була оплачена/прочитана.\nЧервоний колір означає, що запит не був прочитаний або отриманий.\n\n Нейтральні кольорові картки без суми - це всього лише повідомлення.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Деякі",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Суші",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Щойно ви надішлете або отримаєте запит на оплату, вони з'являться тут:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Гей, що там?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "Багато",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Оренда",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "З Днем Народження!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Газові гроші",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Вийти",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "не вдалося",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Наутілус відключений",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Сервери Nautilus, як видається, відключені, надсилання та отримання (без нагадувань) все ще повинні працювати, але запити на оплату можуть не проходити\n\n Поверніться пізніше або перезапустіть додаток, щоб спробувати ще раз",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Улюблене вже існує",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Улюблений",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Некоректна назва обраного",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Введіть назву псевдоніма",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Виберіть назву для цього Улюбленця",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "% 1 було вилучено з обраних!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "Вибране",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Рекомендовані",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Введіть пароль для створення резервної копії.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "Від",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "виконано",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "У вас є подарунок!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Порожній подарунок",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Сума подарунка",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Подарунок від",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Завантажте цифрову подарункову карту з NANO! Встановіть суму та необов'язкове повідомлення для одержувача, щоб побачити, коли він його відкриє!\n\nПісля створення ви отримаєте посилання, яке можна відправити кожному, яка при відкритті автоматично розподілить кошти одержувачу після установки Nautilus!\n\nЯкщо одержувач вже є користувачем Nautilus, він отримає запит на переказ коштів на свій рахунок після відкриття посилання",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Подарункове повідомлення",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Повернутися",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Зрозуміло!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Перейти до QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Приховати",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Приховати гаманець?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Головна",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Ігнорувати",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Імпортувати",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "Посилання, яке ви натиснули, містить трохи нано, чи хотіли б ви імпортувати його до цього гаманця або повернути його тому, хто його надіслав?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Імпортувати секретну фразу",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Будь ласка введіть секретну фразу із 24 слів. Слова мають бути розділені пробілом.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Імпортувати seed",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Будь ласка введіть ваш seed нижче.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Замість того імпортувати seed",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Імпортувати гаманець",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Миттєво",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Недостатньо коштів",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Введено невірну адресу",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Невірний пароль",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Я розумію ризики",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Гаманець Kalium",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Мова",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Посилання скопійовано",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Підтримка",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Завантажено",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Завантажено в",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Вводити пароль після запуска",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Заблоковано",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Вийти",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Видалити seed і вийти",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Ви впевнені?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Якщо ви вийдете то ваш seed і всі Nautilus дані буде видалено з вашого пристрою . Якщо ви не зробили резервну копію seed ви НІКОЛИ не відновите гаманці",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Якщо ви продовжите це видалить ваш seed і всі дані гаманця будуть стерті з приладу. Якщо у вас нема резервної копії, ви НІКОЛИ не зможете повернути ваші кошти",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Якщо ви зробили резервну копію вашої мнемонічної фрази вам не варто хвилюватися.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Керувати",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Не вдалося перевірити запит",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Введення вручну",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Позначити як оплачений",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Позначити як неоплачені",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Пам'ятка повторно відправлена! Якщо пристрій одержувача все ще не підтверджено, пристрій одержувача може бути в автономному режимі.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Повідомлення",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Мінімальна сума для пересилання %1 NANO",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 неправильне слово",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Мнемонічна фраза",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "Секретна фраза складається  із точно 24х слів",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Ця функція вимагає, щоб у вас була довша історія транзакцій, щоб запобігти спаму.\n\nКрім того, ви можете показати QR-код комусь для сканування.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Потрібна перевірка",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Це ваш новий гаманець. Як тільки ви отримаєте NANO, трансакції буде показано отак:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Це ваш новий профіль. Як тільки ви отримаєте BANANO, трансакції буде показано отак:",
+  "@newAccountIntroKal": {},
+  "newWallet": "Новий гаманець",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Далі",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Ні",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Немає контактів для експорту.",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "Немає нових контактів для імпорту",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Статус вузла",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Немає результатів пошуку!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "Ні, пропустити",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Відкрити Nautilus щоб переглянути трансакції",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Відкрити Kalium щоб побачити цю трансакцію",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Торкніться щоб відкрити",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "Щоб ця функція працювала коректно, повідомлення повинні бути включені",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Повідомлення",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "Отримано %1 NANO",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "Отримано  %1 BANANO",
+  "@notificationTitleKal": {},
+  "notSent": "не надіслано",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Няникон",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Вимкнуто",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Гаразд",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Онрамп",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "Увімкнуто",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Відкрито",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "оплачується",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Паперовий гаманець",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Пароль не може бути порожнім",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Вам більше не треба буде пароль щоб відкрити Nautilus.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Паролі не співпали",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Цей пароль буде необхідним щоб відкрити Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Оплатити",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Хтось запросив у вас оплату! перегляньте сторінку платежів для отримання додаткової інформації.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Платежі",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Сплатити цей запит",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "в процесі",
+  "@pending": {},
+  "pickFromList": "Оберіть із списку",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "Пін коди не співпадають",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Підтвердіть ваш пін код",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Придумайте пін код із 6и цифр",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Введіть пін код",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Введено невірний пін код",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "Пін код",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Введіть пін код для зміни представника.",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Введіть пін код для створення резервної копії",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Преференції",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Політика приватності",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Придбати Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "QR код не містить правильного адресата",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Будь ласка дайте дозвіл камері сканувати QR коди",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "QR код не містить правильних seed чи приватного ключа",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "QR код не містить правильної секретної фрази",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Не вийшло зчитати QR код",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Оцініть додаток",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn't take more than a minute.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Seed як є",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Читати більше",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "дебіторської",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Отримати",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Отримано",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Отримати мінімум",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Отримати мінімальну інформацію",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Мінімальна сума для отримання. Якщо платіж або запит надійде на суму менше цієї, вона буде проігнорована.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "Повернення",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "для",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Реєстрація",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Зареєструвати Ім'я користувача",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Зареєструвати ім'я користувача",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Чи дійсно ви бажаєте приховати цей профіль? Ви зможете його побачити торкнувши кнопку \"%1\".",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Розблокувати",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Ви справді бажаєте розблокувати% 1?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Видалити контакт",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Ви впевнені, що ви хочете видалити 1% ?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Вилучити улюблені",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "Представник це посередник якій голосує за правила в мережі. Сила голосу вимірються балансом гаманця, ви можете віддати ваш голос представнику якому довіряєте, щоб збільшити силу його голоса. Ваш представник не може витрачати ваші кошти. Зазвичай то є розумним обирати представника, який не від'єднується від мережі і якому можна довіряти.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Що таке представник?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Відповісти",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Представники",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Запит",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Запит% 1% 2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Запитуваний",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Запит від",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Помилка запиту: Здається, у цього користувача не встановлено Nautilus або вимкнено сповіщення.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Запит",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Запит на оплату",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Помилка при відправці платіжного запиту, пристрій одержувача може бути в автономному режимі або недоступний.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Запит повторно відправлений! Якщо пристрій одержувача все ще не підтверджено, пристрій одержувача може бути в автономному режимі.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Чи треба пароль щоб відкрити Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Повторно надіслати цю пам'ятку",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Скидання бази даних",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Ви впевнені, що хочете скинути внутрішню базу даних? \n\nЦе може виправити проблеми, пов'язані з оновленням програми, але також видалить усі збережені налаштування. Це НЕ видалить насіння вашого гаманця. Якщо у вас виникли проблеми, вам слід створити резервну копію свого насіння, повторно встановити додаток, і якщо проблема не зникне, сміливо робіть звіт про помилку на github або discord.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Повторити спробу",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Схоже що ваш прилад \"rooted\", \"jailbroken\", чи модифікований настільки, що це небезпечно. Рекомендовано повернути фабричні установки вашому приладу перед продовженням.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Сканувати QR код \n NANO адреси",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Сканувати QR код \n Banano адреси",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Сканувати QR код",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Шукати що-небудь",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "На наступному екрані ви побачите секретну фразу. Це пароль для доступа до ваших коштів. Це НАДЗВИЧАЙНО важливо зробити резервну копію фрази і ніколи не ділитися нею ні з ким.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Перш за все - безпека!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Секретна фраза",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Секретну фразу скопійовано",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Копіювати секретну фразу",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Якщо ви загубите ваш прилад, або деінсталюєте додаток, вам буде необхідна секретна фраза або seed для повернення коштів!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Безпека",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Seed",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Це seed вашого гаманця. Це НАДВАЖЛИВО зробити резервну копію вашого seed і ніколи не зберігати цю копію як звичайний текст чи знімок екрана.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Seed скопійовно до буферу \n звідти можна пастити протягом двох хвилин.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Seed скопійовано",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Seed несе туж інформацію що і секретна фраза, але у зручному для машини вигляді. Якщо ви маєте резервну копію одного з двох перелічених вище, ви зможете оперувати коштами.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "неправильний Seed",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Не можу подати запит від себе",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Надіслати",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Надіслати %1 Nano",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Надіслати %1 BANANO",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Сталася помилка. Спробуйте ще раз пізніше.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Надіслано з",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Надсилання",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Відправка нотатки з транзакцією зазнала невдачі, вони можуть бути не користувачем Nautilus.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Відправка повідомлення",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Надіслати запит ще раз",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Надсилайте або запитуйте платіж із зашифрованими повідомленнями End to End!\n\nПлатіжні запити, замітки та повідомлення будуть отримувати лише інші користувачі nautilus.\n\nВам не потрібно мати ім'я користувача для надсилання або отримання платіжних запитів, і ви можете використовувати їх для власного ведення обліку, навіть якщо вони не використовують nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Надіслати інформацію про аркуш",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Надіслано",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Надіслано для",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Установити пароль",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Пароль було успішно встановлено",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Установки",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Завантажити з паперового гаманця",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Установити пароль гаманця",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "Поділитися Kalium",
+  "@shareKalium": {},
+  "shareKaliumText": "Спробуйте Kalium! Офіційний мобільний гаманець Banano!",
+  "@shareKaliumText": {},
+  "shareLink": "Поділитися посиланням",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Поділитися Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Спробуйте Nautilus!  Найкращий мобільний гаманець для NANO!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Показати контакти",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Симплекс",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Підтримати розробника",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Перемкнутися на seed",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Системне значення поза запитом",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Торкніться щоб приховати",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Торкніться щоб побачити",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Тема",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "Для",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Надто багато невірних спроб розблокувати.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Трансакції",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Переказати",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Торкніться щоб закрити вікно.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 NANO успішно переказано до вашого гаманця Nautilus. \n",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 BANANO було успішно переказано до вашого Kalium гаманця. \n",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "Знайдено гаманець з балансом %1 NANO . \n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "Гаманець з балансом %1 BANANO було знайдено. \n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Натисніть сюди щоб підтвердити переказ коштів. \n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Переказ може зайняти декілька секунд.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "Під час переказу трапилася помилка. Будь ласка спробуйте пізніше.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Переказати кошти",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Цією дією ви перекажете кошти з паперового гаманця у ваш Nautilus гаманець. \n\n Натисніть \"%1\" конпку щоб почати.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Цією дією буде переказано кошти із паперового гаманця до вашого Kalium гаманця. \n\n Торкніться \"%1\" кнопки щоб почати.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Цей процес дозволить перевести кошти з паперового гаманця на ваш гаманець Nautilus.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Переказується",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Будь ласка введіть ваш seed нижче.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "За цим seed знайдено лише нульовий баланс",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "За цим seed знайдено лише нульовий баланс",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Цей QR код не містить правильних seed.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Сканувати seed \n або приватний ключ",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Сканувати seed або\n приватний ключ Banano",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "не визнано",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "непідтверджено",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "невиконаний",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Розблокувати",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Введіть пароль для входу в Nautilus",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Введіть пароль щоб розблокувати Kalium",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Введіть пін код для входу в Nautilus",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Введіть пін код щоб розблокувати Kalium",
+  "@unlockPinKal": {},
+  "unpaid": "неоплачений",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "непрочитані",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Час в мережі",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "У вас вже є ім'я користувача, зареєстроване! Наразі неможливо змінити своє ім'я користувача, але ви можете зареєструвати нове під іншою адресою.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Ім'я користувача доступне!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Будь ласка, введіть ім'я користувача",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Помилка імені користувача",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Виберіть унікальний @username, щоб друзі та родина могли вас легко знайти!\n\nНаявність імені користувача Nautilus оновлює інтерфейс у всьому світі, щоб відобразити вашу нову ручку.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Неправильне ім'я користувача",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Ім'я користувача недоступне",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Nautilus імена користувачів - це централізована послуга, що надається Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "Користувача не знайдено!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Переглянути деталі",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Сила голосу",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "Попередження",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Ласкаво просимо до Nautilus. Щоб продовжити ви можете створити новий гаманець або імпортувати існуючий.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Ласкаво просимо до Kalium. Щоб продовжити створіть новий гаманець або імпортуйте існуючий.",
+  "@welcomeTextKal": {},
+  "withAddress": "З адресою",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "З повідомленням",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "Після %1 хвилини",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "Після %1 хвилин",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Так",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Так",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

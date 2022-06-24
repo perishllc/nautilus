@@ -141,24 +141,22 @@ class AppStyles {
   }
 
   // Text style for primary currency on home page
-  static TextStyle textStyleCurrency(BuildContext context, [bool strike = false]) {
+  static TextStyle textStyleCurrency(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
       fontSize: AppFontSizes._largest,
       fontWeight: FontWeight.w900,
       color: StateContainer.of(context).curTheme.primary,
-      decoration: strike ? TextDecoration.lineThrough : null,
     );
   }
 
   // Text style for primary currency on home page
-  static TextStyle textStyleCurrencySmaller(BuildContext context, [bool strike = false]) {
+  static TextStyle textStyleCurrencySmaller(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
       fontSize: 22,
       fontWeight: FontWeight.w900,
       color: StateContainer.of(context).curTheme.primary,
-      decoration: strike ? TextDecoration.lineThrough : null,
     );
   }
 
@@ -169,15 +167,14 @@ class AppStyles {
   }
 
   // Amount
-  static TextStyle textStyleTransactionAmount(BuildContext context, [bool strike = false]) {
+  static TextStyle textStyleTransactionAmount(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
         color: (StateContainer.of(context).curTheme is NautilusTheme)
             ? StateContainer.of(context).curTheme.lighterPrimary
             : StateContainer.of(context).curTheme.primary60,
         fontSize: AppFontSizes.smallest,
-        fontWeight: FontWeight.w600,
-        decoration: strike ? TextDecoration.lineThrough : null);
+        fontWeight: FontWeight.w600);
   }
 
   // Unit (e.g. BAN)

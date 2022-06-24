@@ -48,7 +48,6 @@ class GenerateConfirmSheet extends StatefulWidget {
 }
 
 class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
-  String? destinationAltered;
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
@@ -72,16 +71,6 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
     super.initState();
     _registerBus();
     animationOpen = false;
-    // Derive amount from raw amount
-    // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
-    //   amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
-    // } else {
-    //   amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(widget.amountRaw), digits: 6).toStringAsFixed(6) + "~";
-    // }
-    // if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
-    // amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
-    // Ensure nano_ prefix on destination
-    destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
 
   @override
@@ -143,24 +132,17 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                       text: TextSpan(
                         text: '',
                         children: [
-                          displayCurrencyAmount(
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                            style: AppStyles.textStyleAddressPrimary(context),
+                          ),
+                          displayCurrencySymbol(
                             context,
-                            TextStyle(
-                              color: StateContainer.of(context).curTheme.primary,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                              decoration: TextDecoration.lineThrough,
-                            ),
+                            AppStyles.textStyleAddressPrimary(context),
                           ),
                           TextSpan(
-                            text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, widget.amountRaw),
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                            ),
+                            text: getRawAsThemeAwareAmount(context, widget.amountRaw),
+                            style: AppStyles.textStyleAddressPrimary(context),
                           ),
                           TextSpan(
                             text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
@@ -269,7 +251,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           StateContainer.of(context).wallet!.representative,
           StateContainer.of(context).wallet!.frontier,
           widget.amountRaw,
-          destinationAltered,
+          widget.destination,
           StateContainer.of(context).wallet!.address,
           NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
           max: widget.maxSend);
@@ -277,7 +259,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       StateContainer.of(context).wallet!.frontier = resp.hash;
       StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw!);
 
-      final String? memo = widget.memo != null ? widget.memo : "";
+      final String memo = widget.memo ?? "";
 
       final BranchUniversalObject buo = BranchUniversalObject(
           canonicalIdentifier: 'flutter/branch',
@@ -290,7 +272,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           locallyIndex: true,
           contentMetadata: BranchContentMetaData()
             ..addCustomMetadata('seed', widget.paperWalletSeed)
-            ..addCustomMetadata('address', destinationAltered)
+            ..addCustomMetadata('address', widget.destination)
             ..addCustomMetadata('memo', widget.memo ?? "")
             ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
             ..addCustomMetadata('signature', "")
@@ -309,9 +291,9 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         const Uuid uuid = Uuid();
         final TXData newGiftTXData = TXData(
           from_address: StateContainer.of(context).wallet!.address,
-          to_address: destinationAltered,
+          to_address: widget.destination,
           amount_raw: widget.amountRaw,
-          uuid: "LOCAL:" + uuid.v4(),
+          uuid: "LOCAL:${uuid.v4()}",
           block: resp.hash,
           record_type: RecordTypes.GIFT_LOAD,
           status: "created",
@@ -338,7 +320,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
             removeUntilHome: true,
             widget: GenerateCompleteSheet(
               amountRaw: widget.amountRaw,
-              destination: destinationAltered,
+              destination: widget.destination,
               localAmount: widget.localCurrency,
               sharableLink: response.result as String,
               walletSeed: widget.paperWalletSeed,
@@ -352,9 +334,9 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         const Uuid uuid = const Uuid();
         final TXData newGiftTXData = TXData(
           from_address: StateContainer.of(context).wallet!.address,
-          to_address: destinationAltered,
+          to_address: widget.destination,
           amount_raw: widget.amountRaw,
-          uuid: "LOCAL:" + uuid.v4(),
+          uuid: "LOCAL:${uuid.v4()}",
           block: resp.hash,
           record_type: RecordTypes.GIFT_LOAD,
           status: StatusTypes.CREATE_FAILED,

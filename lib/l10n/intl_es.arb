@@ -1,225 +1,1951 @@
 {
-  "cancel": "Cancelar",
-  "close": "Cerrar",
-  "confirm": "Confirmar",
-  "no": "No",
-  "yes": "Sí",
-  "onStr": "Activadas",
-  "off": "Desactivadas",
-  "send": "Enviar",
-  "receive": "Recibir",
-  "sent": "Enviados",
-  "received": "Recibidos",
-  "transactions": "Transacciones",
-  "addressCopied": "Billetera copiada",
-  "copyAddress": "Copiar billetera",
-  "addressShare": "Compartir",
-  "addressHint": "Ingresar billetera",
-  "seed": "Semilla",
-  "seedInvalid": "La semilla no es correcta",
-  "seedCopied": "Su semilla ha sido copiada al portapapeles.\n Podrá pegarla solo durante los próximos dos minutos.",
-  "scanQrCode": "Escanear código QR",
-  "contactsImportErr": "Error al importar contactos",
-  "viewDetails": "Ver detalles",
-  "qrInvalidSeed": "El código QR no contiene una semilla válida o una clave privada",
-  "removeContact": "Eliminar Contacto",
-  "removeContactConfirmation": "¿Está seguro de querer eliminar a %1?",
-  "contactHeader": "Contacto",
-  "contactsHeader": "Contactos",
-  "addContact": "Añadir Contacto",
-  "contactNameHint": "Ingrese un nombre @",
-  "contactInvalid": "Nombre de contacto no válido",
-  "noContactsExport": "No hay contactos para exportar.",
-  "noContactsImport": "No hay contactos para importar",
-  "contactsImportSuccess": "%1 contactos importados con éxito",
-  "contactAdded": "%1 ha sido añadido",
-  "contactRemoved": "¡%1 ha sido eliminado de sus contactos!",
-  "contactNameMissing": "Elija un nombre para este contacto",
-  "contactExists": "El contacto ya existe",
-  "backupYourSeed": "Haga una copia de seguridad de su semilla",
-  "backupSeedConfirm": "¿Está seguro de haber copiado y almacenado correctamente la semilla de su billetera?",
-  "seedBackupInfo": "A continuación se encuentra la semilla de su billetera. Es importante que guarde una copia de seguridad de su semilla y que nunca la almacene como un documento de texto o como una captura de pantalla.",
-  "copySeed": "Copiar semilla",
-  "seedCopiedShort": "Semilla copiada",
-  "importSeed": "Importar semilla",
-  "importSeedHint": "Por favor ingrese su semilla a continuación.",
-  "welcomeText": "Bienvenido a Nautilus. Para continuar, debe crear una billetera nueva o importar una ya existente.",
-  "newWallet": "Nueva billetera",
-  "importWallet": "Importar billetera",
-  "sentTo": "Enviar a",
-  "sending": "Enviando",
-  "to": "A",
-  "sendAmountConfirm": "Enviar %1 NANO",
-  "sendError": "Ha ocurrido un error. Por favor, inténtelo de nuevo.",
-  "enterAmount": "Introducir cantidad",
-  "enterAddress": "Introducir billetera",
-  "invalidAddress": "Billetera de destino incorrecta",
-  "addressMissing": "Por favor ingrese una billetera destino",
-  "amountMissing": "Por favor ingrese un monto",
-  "insufficientBalance": "Fondos insuficientes",
-  "sendFrom": "Enviar desde",
-  "pinCreateTitle": "Crear un código PIN de 6 dígitos",
-  "pinConfirmTitle": "Confirmar PIN",
-  "pinEnterTitle": "Introducir PIN",
-  "pinConfirmError": "Los PIN no coinciden.",
-  "pinInvalid": "El PIN introducido no es válido.",
-  "themeHeader": "Tema",
-  "changeRepButton": "Cambiar",
-  "changeRepAuthenticate": "Cambiar representante",
-  "currentlyRepresented": "Su representante actual es",
-  "changeRepSucces": "Cuenta representativa cambiada exitosamente",
-  "repInfoHeader": "¿Qué es un representante?",
-  "repInfo": "Un representante es una cuenta que emite votaciones para el consenso de la red, y el poder de dicho voto se mide según el balance de la misma. El balance de su propia billetera se puede delegar a otro representante para incrementar su poder de votación. Su representante NO tiene ninguna capacidad de gestión sobre sus fondos. Lo ideal es elegir un representante estable y de confianza.",
-  "pinRepChange": "Introduzca su PIN para cambiar de representante",
-  "changeRepHint": "Ingrese su nuevo representante",
-  "representatives": "Representantes",
-  "pickFromList": "Elegir de la lista",
-  "votingWeight": "Peso de votación",
-  "uptime": "Tiempo en línea",
-  "authMethod": "Método de Autenticación",
-  "pinMethod": "Código PIN",
-  "privacyPolicy": "Política de privacidad",
-  "biometricsMethod": "Biometría",
-  "changeCurrency": "Cambiar moneda",
-  "language": "Idioma",
-  "shareNautilus": "Compartir Nautilus",
-  "shareNautilusText": "¡Eche un vistazo a Nautilus, la billetera oficial de Nano para Android!",
-  "logout": "Cerrar sesión",
-  "warning": "Advertencia",
-  "logoutDetail": "Cerrar la sesión eliminará su semilla, y todos los datos relacionados a Nautilus serán borrados de este dispositivo. Si no ha almacenado una copia de su semilla, nunca será capaz de volver a acceder a sus fondos.",
-  "logoutAction": "Eliminar semilla y cerrar sesión",
-  "logoutAreYouSure": "¿Está seguro?",
-  "logoutReassurance": "Si tiene una copia de seguridad de su semilla, no tiene nada de qué preocuparse.",
-  "settingsHeader": "Configuración",
-  "preferences": "Preferencias",
-  "manage": "Administrar",
-  "backupSeed": "Respaldar semilla",
-  "fingerprintSeedBackup": "Confirme con huella dactilar para hacer una copia de seguridad de su semilla.",
-  "pinSeedBackup": "Introduzca el PIN para mostrar la semilla de su billetera",
-  "systemDefault": "Sistema por defecto",
-  "notifications": "Notificaciones",
-  "notificationTitle": "%1 NANO recibidos",
-  "notificationBody": "Abra Nautilus para ver esta transacción.",
-  "notificationHeaderSupplement": "Pulse para abrir",
-  "settingsTransfer": "Cargar desde billetera de papel",
-  "transferError": "Ha ocurrido un error durante la transferencia. Por favor, inténtelo de nuevo más tarde.",
-  "paperWallet": "Billetera de Papel",
-  "kaliumWallet": "Billetera Kalium",
-  "manualEntry": "Introducir datos",
-  "mnemonicPhrase": "Frase mnemónica",
-  "rawSeed": "Semilla",
-  "transferHeader": "Transferir fondos",
-  "transfer": "Transferir",
-  "transferManualHint": "Por favor, introduzca la semilla a continuación.",
-  "transferIntro": "Este proceso transferirá los fondos de una billetera de papel a su billetera en Nautilus.\n\nPulse el botón \"%1\"  para empezar.",
-  "transferQrScanHint": "Escanear una semilla \nde NANO o clave privada",
-  "transferQrScanError": "Este código QR no contiene una semilla válida.",
-  "transferNoFunds": "Esta semilla no contiene ningún NANO.",
-  "transferConfirmInfo": "Se ha detectado una billetera con un balance de %1 NANO.\n",
-  "transferConfirmInfoSecond": "Pulse confirmar para transferir los fondos.\n",
-  "transferConfirmInfoThird": "La transferencia puede tardar varios segundos en completarse.",
-  "transferLoading": "Transfiriendo",
-  "transferComplete": "%1 NANO se han transferido con éxito a su billetera de Nautilus.",
-  "transferClose": "Pulse en cualquier lugar para cerrar esta ventana.",
-  "scanInstructions": "Escanear el código QR\n de una billetera de Nano.",
-  "unlockPin": "Introduzca el código PIN para desbloquear Nautilus",
-  "unlockBiometrics": "Autentíquese para desbloquear Nautilus",
-  "lockAppSetting": "Autenticarse al iniciar",
-  "locked": "Bloqueado",
-  "unlock": "Desbloquear",
-  "tooManyFailedAttempts": "Demasiados intentos de desbloqueo fallidos.",
-  "securityHeader": "Seguridad",
-  "autoLockHeader": "Bloquear automáticamente",
-  "xMinutes": "Tras %1 minutos",
-  "xMinute": "Tras %1 minuto",
-  "instantly": "Al instante",
-  "exampleCardIntro": "Bienvenido a Nautilus. Una vez que envíe o reciba NANO, las transacciones se verán así:",
-  "exampleCardLittle": "Algunos",
-  "exampleCardLot": "Muchos",
-  "exampleCardTo": "a alguien",
-  "exampleCardFrom": "de alguien",
-  "defaultAccountName": "Cuenta principal",
-  "defaultNewAccountName": "Cuenta %1",
-  "newAccountIntro": "Esta es su nueva cuenta. Una vez que reciba NANO, las transacciones se mostrarán así:",
+  "@@locale": "es",
   "account": "Cuenta",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Cuentas",
-  "addAccount": "Añadir cuenta",
-  "hideAccountHeader": "¿Ocultar cuenta?",
-  "removeAccountText": "¿Está seguro de querer ocultar esta cuenta? Puede volver a agregarla más tarde tocando el botón \"%1\"",
-  "tapToReveal": "Pulse para revelar",
-  "tapToHide": "Pulse para ocultar",
-  "copied": "Copiado",
-  "copy": "Copiar",
-  "seedDescription": "Una semilla contiene la misma información que una frase secreta, pero de forma legible por una máquina. Mientras tenga la copia de seguridad de alguna de ellas, tendrá acceso a sus fondos",
-  "importSecretPhrase": "Importar frase secreta",
-  "importSecretPhraseHint": "Por favor ingrese su frase secreta de 24 palabras a continuación. Cada palabra debe estar separada por un espacio",
-  "qrMnemonicError": "El código QR no contiene una frase secreta válida",
-  "mnemonicInvalidWord": "% 1 no es una palabra válida",
-  "mnemonicSizeError": "La frase secreta solo puede contener 24 palabras",
-  "secretPhrase": "Frase secreta",
-  "backupConfirmButton": "Lo he respaldado",
-  "secretInfoHeader": "¡La seguridad es lo primero!",
-  "secretInfo": "En la siguiente pantalla, verá su frase secreta. Es una contraseña para acceder a sus fondos. Es crucial que la respalde y nunca la comparta con nadie",
-  "secretWarning": "Si pierde su dispositivo o desinstala la aplicación, necesitará su frase secreta o semilla para recuperar sus fondos",
-  "gotItButton": "¡Lo tengo!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "¿Está seguro de que ha hecho una copia de seguridad de su frase secreta o semilla?",
-  "secretPhraseCopy": "Copiar frase secreta",
-  "secretPhraseCopied": "Frase secreta copiada",
-  "import": "Importar",
-  "importSeedInstead": "Importar semilla en su lugar",
-  "switchToSeed": "Cambiar a semilla",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
+  "activeMessageHeader": "Mensaje activo",
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Añadir cuenta",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Bloquear a un usuario",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Añadir Contacto",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Añadir favorito",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Billetera copiada",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Ingresar billetera",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Por favor ingrese una billetera destino",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Introduzca un nombre de usuario o una dirección",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Compartir",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Alias",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Por favor ingrese un monto",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Preguntado",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Método de Autenticación",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Importación automática",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Bloquear automáticamente",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Lo he respaldado",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
   "backupSecretPhrase": "Respaldar frase secreta",
-  "qrInvalidAddress": "El código QR no contiene una dirección válida",
-  "qrInvalidPermissions": "Por favor otorgue permisos de cámara para escanear códigos QR",
-  "qrUnknownError": "No se pudo leer el código QR",
-  "mantaError": "No se pudo verificar la solicitud",
-  "rootWarning": "Parece que su dispositivo está \"rooteado\", \"liberado\" o modificado de una manera que compromete su seguridad. Se recomienda que restablezca su dispositivo a su estado original antes de continuar.",
-  "iUnderstandTheRisks": "Comprendo los riesgos",
-  "exit": "Salir",
-  "setWalletPassword": "Configurar contraseña de la billetera",
-  "setPassword": "Configurar contraseña",
-  "disableWalletPassword": "Deshabilitar contraseña de billetera",
-  "encryptionFailedError": "Error al establecer una contraseña de billetera",
-  "setPasswordSuccess": "La contraseña ha sido configurada de forma exitosa",
-  "disablePasswordSuccess": "La contraseña ha sido deshabilitada",
-  "createPasswordHint": "Crear una contraseña",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Respaldar semilla",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "¿Está seguro de haber copiado y almacenado correctamente la semilla de su billetera?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Haga una copia de seguridad de su semilla",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Biometría",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "%1 se bloqueó correctamente.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "¡El usuario ya está bloqueado!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "Bloqueado",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Bloquear a un usuario mediante cualquier alias o dirección conocidos. Se ignorarán todos los mensajes, transacciones o solicitudes de ellos.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Información bloqueada",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "¡Ya se usó el apodo!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Elige un apodo",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "¡Se ha desbloqueado %1!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Explorador de bloques",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Información del explorador de bloques",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Qué explorador de bloques usar para mostrar la información de transacciones",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Bloquear este usuario",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Cancelar",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Cambiar moneda",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Registro de cambios",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Cambiar representante",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Cambiar",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Ingrese su nuevo representante",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "¡Este ya es tu representante!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Cuenta representativa cambiada exitosamente",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Consultar disponibilidad",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Cerrar",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Confirmar",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
   "confirmPasswordHint": "Confirme su contraseña",
-  "enterPasswordHint": "Ingrese su contraseña",
-  "passwordsDontMatch": "Las contraseñas no coinciden",
-  "passwordBlank": "La contraseña no puede estar vacía",
-  "invalidPassword": "Contraseña no válida",
-  "passwordWillBeRequiredToOpenParagraph": "Esta contraseña será necesaria para abrir Nautilus.",
-  "passwordNoLongerRequiredToOpenParagraph": "Ya no necesitará una contraseña para abrir Nautilus.",
-  "createPasswordFirstParagraph": "Puede crear una contraseña para añadir seguridad adicional a su billetera.",
-  "createPasswordSecondParagraph": "La contraseña es opcional, y su billetera estará protegida independientemente con su PIN o datos biométricos.",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Conectando",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 ha sido añadido",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "El contacto ya existe",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Contacto",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Nombre de contacto no válido",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Ingrese un nombre @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Elija un nombre para este contacto",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "¡%1 ha sido eliminado de sus contactos!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Contactos",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Error al importar contactos",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "%1 contactos importados con éxito",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Copiado",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Copiar",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Copiar billetera",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Copiar enlace",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Copiar semilla",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Copiar la dirección de la cartera en el",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
   "createAPasswordHeader": "Crear una contraseña",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Crear tarjeta regalo",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Crea una tarjeta de regalo",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Puede crear una contraseña para añadir seguridad adicional a su billetera.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Crear una contraseña",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "La contraseña es opcional, y su billetera estará protegida independientemente con su PIN o datos biométricos.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
   "createPasswordSheetHeader": "Crear",
-  "disablePasswordSheetHeader": "Deshabilitar",
-  "requireAPasswordToOpenHeader": "¿Requerir de una contraseña para abrir Nautilus?",
-  "noSkipButton": "No, omitir",
-  "yesButton": "Sí",
-  "nextButton": "Siguiente",
-  "goBackButton": "Regresar\n",
-  "welcomeTextKal": "Bienvenido a Kalium. Para comenzar, usted debe crear una nueva billetera o importar una existente.",
-  "sendAmountConfirmKal": "Enviar %1 BANANO",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Crear código QR",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Creación de tarjetas de regalo",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
   "currency": "Moneda",
-  "shareKalium": "Compartir Kalium",
-  "shareKaliumText": "¡Échale un vistazo a Kalium! ¡La billetera móvil oficial de Banano!",
-  "logoutDetailKal": "Cerrar la sesión eliminará su semilla, y todos los datos relacionados a Kalium serán borrados de este dispositivo. Si no ha almacenado una copia de su semilla, nunca será capaz de volver a acceder a sus fondos.",
-  "notificationTitleKal": "%1 BANANO Recibido \n%1 BANANO Recibidos",
-  "notificationBodyKal": "Abra Kalium para ver esta transacción",
-  "transferIntroKal": "Este proceso transferirá los fondos de una billetera de papel a su billetera en Kalium.\n\nPulse el botón \"%1\"  para empezar.",
-  "transferQrScanHintKal": "Escanear una semilla\n de Banano o clave privada",
-  "transferNoFundsKal": "Esta semilla no contiene ningún BANANO",
-  "transferConfirmInfoKal": "Una billetera con un balance de %1 BANANO ha sido detectada. \n",
-  "transferCompleteKal": "%1 BANANO se ha transferido exitosamente a su billetera Kalium.\n \n%1 BANANO se han transferido exitosamente a su billetera Kalium.\n",
-  "scanInstructionsKal": "Escanear el código QR de una billetera\n de Banano",
-  "unlockPinKal": "Ingrese su PIN para desbloquear Kalium",
-  "unlockBiometricsKal": "Autentíquese para desbloquear Kalium",
-  "exampleCardIntroKal": "Bienvenido a Kalium. Una vez que reciba BANANO, las transacciones se mostrarán así:",
-  "exampleCardToKal": "a un mono aleatorio",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Modo moneda",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Información del modo moneda",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Elige en qué unidad quieres mostrar los importes.\n1 nyano = 0.000001 NANO, o \n1.000.000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Su representante actual es",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "¡Error de descifrado!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Cuenta principal",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Cuenta %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Borrar",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Deshabilitar",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "La contraseña ha sido deshabilitada",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Deshabilitar contraseña de billetera",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Despedir",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Nombre de dominio no válido",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Editar",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Error al establecer una contraseña de billetera",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Introducir billetera",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Introducir cantidad",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Introduce la nota de regalo",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Introducir mensaje",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Ingrese su contraseña",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Introduzca un nombre de usuario",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Introduzca el usuario o la dirección",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "de alguien",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
   "exampleCardFromKal": "de un mono aleatorio",
-  "newAccountIntroKal": "Esta es su nueva cuenta. Una vez que reciba BANANO, las transacciones se mostrarán así:",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Bienvenido a Nautilus. Una vez que envíe o reciba NANO, las transacciones se verán así:",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Bienvenido a Kalium. Una vez que reciba BANANO, las transacciones se mostrarán así:",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Algunos",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "Muchos",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "a alguien",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "a un mono aleatorio",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Una vez que envíes o recibas una solicitud de pago, aparecerán aquí así con el color y la etiqueta de la tarjeta que indican el estado. \n\nEl color verde indica que se ha pagado la solicitud.\nEl amarillo indica que la solicitud/nota no ha sido pagada/leída.\nEl color rojo indica que la solicitud no se ha leído ni recibido.\n\n Las tarjetas de colores neutros sin cantidad son solo mensajes.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Algunos",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Sushi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Una vez que envíes o recibas una solicitud de pago, se mostrarán aquí:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hola, ¿qué pasa?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "Un montón de",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Alquilar",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "¡Feliz cumpleaños!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Dinero para gasolina",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Salir",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "falló",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus desconectado",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Los servidores Nautilus parecen estar desconectados, el envío y la recepción (sin notas) deberían seguir funcionando, pero es posible que las solicitudes de pago no se reciban\n\n Vuelve más tarde o reinicia la aplicación para volver a intentarlo",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "El favorito ya existe",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Favorito",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Nombre de favorito no válido",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Introduzca un apodo",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Elige un nombre para este favorito",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "¡Se ha eliminado %1 de los favoritos!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "Favoritos",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Destacado",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Confirme con huella dactilar para hacer una copia de seguridad de su semilla.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "Desde",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "cumplido",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "¡Tienes un regalo!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Regalo vacío",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Importe del regalo",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Regalo de",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "¡Carga una tarjeta regalo digital con NANO! ¡Establece una cantidad y un mensaje opcional para que el destinatario lo vea cuando lo abra!\n\nUna vez creado, recibirá un enlace que puede enviar a cualquier persona, que cuando se abra distribuirá automáticamente los fondos al destinatario después de instalar Nautilus.\n\nSi el destinatario ya es usuario de Nautilus, se le solicitará que transfiera los fondos a su cuenta al abrir el enlace.",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Mensaje de regalo",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Regresar\n",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "¡Lo tengo!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Ir a QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Ocultar",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "¿Ocultar cuenta?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Casa",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Ignorar",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Importar",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "El enlace en el que hiciste clic contiene algo de nano, ¿quieres importarlo a este monedero o reembolsarlo a quien lo haya enviado?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Importar frase secreta",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Por favor ingrese su frase secreta de 24 palabras a continuación. Cada palabra debe estar separada por un espacio",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Importar semilla",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Por favor ingrese su semilla a continuación.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Importar semilla en su lugar",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Importar billetera",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Al instante",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Fondos insuficientes",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Billetera de destino incorrecta",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Contraseña no válida",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Comprendo los riesgos",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Billetera Kalium",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Idioma",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Enlace copiado",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
   "liveSupportButton": "Soporte",
-  "connectingHeader": "Conectando"
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Forrado",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Cargado en",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Autenticarse al iniciar",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Bloqueado",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Cerrar sesión",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Eliminar semilla y cerrar sesión",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "¿Está seguro?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Cerrar la sesión eliminará su semilla, y todos los datos relacionados a Nautilus serán borrados de este dispositivo. Si no ha almacenado una copia de su semilla, nunca será capaz de volver a acceder a sus fondos.",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Cerrar la sesión eliminará su semilla, y todos los datos relacionados a Kalium serán borrados de este dispositivo. Si no ha almacenado una copia de su semilla, nunca será capaz de volver a acceder a sus fondos.",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Si tiene una copia de seguridad de su semilla, no tiene nada de qué preocuparse.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Administrar",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "No se pudo verificar la solicitud",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Introducir datos",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Marcar como pagado",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Marcar como no pagado",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "¡Memo reenviado! Si aún no se reconoce, es posible que el dispositivo del destinatario esté desconectado.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Mensaje",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "La cantidad mínima de envío es %1 %2",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "% 1 no es una palabra válida",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Frase mnemónica",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "La frase secreta solo puede contener 24 palabras",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Esta función requiere que tengas un historial de transacciones más largo para evitar el spam.\n\nTambién puedes mostrar un código QR para que alguien lo escanee.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Se necesita verificación",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Esta es su nueva cuenta. Una vez que reciba NANO, las transacciones se mostrarán así:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Esta es su nueva cuenta. Una vez que reciba BANANO, las transacciones se mostrarán así:",
+  "@newAccountIntroKal": {},
+  "newWallet": "Nueva billetera",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Siguiente",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "No",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "No hay contactos para exportar.",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "No hay contactos para importar",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Estado del nodo",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "¡Sin resultados de búsqueda!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "No, omitir",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Abra Nautilus para ver esta transacción.",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Abra Kalium para ver esta transacción",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Pulse para abrir",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "Para que esta función funcione correctamente, las notificaciones deben estar habilitadas",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Notificaciones",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "%1 NANO recibidos",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "%1 BANANO Recibido \n%1 BANANO Recibidos",
+  "@notificationTitleKal": {},
+  "notSent": "no enviado",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "icono de Nyani",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Desactivadas",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "De acuerdo",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "En rampa",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "Activadas",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Abierto",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "pagado",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Billetera de Papel",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "La contraseña no puede estar vacía",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Ya no necesitará una contraseña para abrir Nautilus.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Las contraseñas no coinciden",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Esta contraseña será necesaria para abrir Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Pagar",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "¡Alguien te ha solicitado el pago! consulta la página de pagos para obtener más información.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Pagos",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Pagar esta solicitud",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "",
+  "@pending": {},
+  "pickFromList": "Elegir de la lista",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "Los PIN no coinciden.",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Confirmar PIN",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Crear un código PIN de 6 dígitos",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Introducir PIN",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "El PIN introducido no es válido.",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "Código PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Introduzca su PIN para cambiar de representante",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Introduzca el PIN para mostrar la semilla de su billetera",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Preferencias",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Política de privacidad",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Comprar Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "El código QR no contiene una dirección válida",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Por favor otorgue permisos de cámara para escanear códigos QR",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "El código QR no contiene una semilla válida o una clave privada",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "El código QR no contiene una frase secreta válida",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "No se pudo leer el código QR",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Califica la aplicación",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "Si te gusta la aplicación, considera tomarte el tiempo para revisarla,\nRealmente ayuda y no debería tardar más de un minuto.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Semilla",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Leer más",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "cuenta por cobrar",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Recibir",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Recibidos",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Recibir mínimo",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Recibir información mínima",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Un importe mínimo a recibir. Si se recibe un pago o solicitud con un importe inferior a este, se ignorará.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "Devolución",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "para",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Registrarse",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Registrar usuario",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Registrar nombre de usuario",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "¿Está seguro de querer ocultar esta cuenta? Puede volver a agregarla más tarde tocando el botón \"%1\"",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Desbloquear",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "¿Está seguro de que desea desbloquear %1?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Eliminar Contacto",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "¿Está seguro de querer eliminar a %1?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Eliminar favorito",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "Un representante es una cuenta que emite votaciones para el consenso de la red, y el poder de dicho voto se mide según el balance de la misma. El balance de su propia billetera se puede delegar a otro representante para incrementar su poder de votación. Su representante NO tiene ninguna capacidad de gestión sobre sus fondos. Lo ideal es elegir un representante estable y de confianza.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "¿Qué es un representante?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Responder",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Representantes",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Solicitud",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Solicitud %1 %2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Solicitado",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Solicitado de",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Error en la solicitud: Parece que este usuario no tiene Nautilus instalado o tiene las notificaciones deshabilitadas.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Solicitar",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Solicitar pago",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Error al enviar la solicitud de pago; el dispositivo del destinatario puede estar desconectado o no disponible.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "¡Solicitud reenviada! Si aún no se reconoce, es posible que el dispositivo del destinatario esté desconectado.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "¿Requerir de una contraseña para abrir Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Reenviar esta nota",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Restablecer base de datos",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "¿Está seguro de que desea restablecer la base de datos interna? \n\nEsto puede solucionar problemas relacionados con la actualización de la aplicación, pero también eliminará todas las preferencias guardadas. Esto NO eliminará la semilla de tu monedero. Si tienes problemas, debes hacer una copia de seguridad de tu semilla, volver a instalar la aplicación y, si el problema persiste, no dudes en hacer un informe de errores en github o discord.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Intentar de nuevo",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Parece que su dispositivo está \"rooteado\", \"liberado\" o modificado de una manera que compromete su seguridad. Se recomienda que restablezca su dispositivo a su estado original antes de continuar.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Escanear el código QR\n de una billetera de Nano.",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Escanear el código QR de una billetera\n de Banano",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Escanear código QR",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Busca cualquier cosa",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "En la siguiente pantalla, verá su frase secreta. Es una contraseña para acceder a sus fondos. Es crucial que la respalde y nunca la comparta con nadie",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "¡La seguridad es lo primero!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Frase secreta",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Frase secreta copiada",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Copiar frase secreta",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Si pierde su dispositivo o desinstala la aplicación, necesitará su frase secreta o semilla para recuperar sus fondos",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Seguridad",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Semilla",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "A continuación se encuentra la semilla de su billetera. Es importante que guarde una copia de seguridad de su semilla y que nunca la almacene como un documento de texto o como una captura de pantalla.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Su semilla ha sido copiada al portapapeles.\n Podrá pegarla solo durante los próximos dos minutos.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Semilla copiada",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Una semilla contiene la misma información que una frase secreta, pero de forma legible por una máquina. Mientras tenga la copia de seguridad de alguna de ellas, tendrá acceso a sus fondos",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "La semilla no es correcta",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "No se puede solicitar a mí mismo",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Enviar",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Enviar %1 NANO",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Enviar %1 BANANO",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Ha ocurrido un error. Por favor, inténtelo de nuevo.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Enviar desde",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Enviando",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Envío de memorándum con transacción fallida, puede que no sea usuario de Nautilus.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Envío de mensaje",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Enviar solicitud de nuevo",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "¡Envíe o solicite un pago, con mensajes cifrados de extremo a extremo!\n\nLas solicitudes de pago, notas y mensajes solo podrán ser recibidos por otros usuarios de nautilus.\n\nNo necesita tener un nombre de usuario para enviar o recibir solicitudes de pago, y puede usarlos para llevar su propio registro incluso si no utilizan nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Enviar información de la hoja",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Enviados",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Enviar a",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Configurar contraseña",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "La contraseña ha sido configurada de forma exitosa",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Configuración",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Cargar desde billetera de papel",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Configurar contraseña de la billetera",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "Compartir Kalium",
+  "@shareKalium": {},
+  "shareKaliumText": "¡Échale un vistazo a Kalium! ¡La billetera móvil oficial de Banano!",
+  "@shareKaliumText": {},
+  "shareLink": "Compartir enlace",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Compartir Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "¡Eche un vistazo a Nautilus, la billetera oficial de Nano para Android!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Mostrar contactos",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simplex",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Apoye al desarrollador",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Cambiar a semilla",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Sistema por defecto",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Pulse para ocultar",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Pulse para revelar",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Tema",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "A",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Demasiados intentos de desbloqueo fallidos.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Transacciones",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Transferir",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Pulse en cualquier lugar para cerrar esta ventana.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 NANO se han transferido con éxito a su billetera de Nautilus.",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 BANANO se ha transferido exitosamente a su billetera Kalium.\n \n%1 BANANO se han transferido exitosamente a su billetera Kalium.\n",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "Se ha detectado una billetera con un balance de %1 NANO.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "Una billetera con un balance de %1 BANANO ha sido detectada. \n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Pulse confirmar para transferir los fondos.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "La transferencia puede tardar varios segundos en completarse.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "Ha ocurrido un error durante la transferencia. Por favor, inténtelo de nuevo más tarde.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Transferir fondos",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Este proceso transferirá los fondos de una billetera de papel a su billetera en Nautilus.\n\nPulse el botón \"%1\"  para empezar.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Este proceso transferirá los fondos de una billetera de papel a su billetera en Kalium.\n\nPulse el botón \"%1\"  para empezar.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Este proceso transferirá los fondos de un monedero de papel a tu monedero Nautilus.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Transfiriendo",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Por favor, introduzca la semilla a continuación.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "Esta semilla no contiene ningún NANO.",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "Esta semilla no contiene ningún BANANO",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Este código QR no contiene una semilla válida.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Escanear una semilla \nde NANO o clave privada",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Escanear una semilla\n de Banano o clave privada",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "no reconocido",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "sin confirmar",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "incumplido",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Desbloquear",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Autentíquese para desbloquear Nautilus",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Autentíquese para desbloquear Kalium",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Introduzca el código PIN para desbloquear Nautilus",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Ingrese su PIN para desbloquear Kalium",
+  "@unlockPinKal": {},
+  "unpaid": "impagado",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "no leídos",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Tiempo en línea",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "¡Ya tienes un nombre de usuario registrado! Actualmente no es posible cambiar tu nombre de usuario, pero puedes registrar uno nuevo con una dirección diferente.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Nombre de usuario disponible",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Introduzca un nombre de usuario",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Error de usuario",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "¡Elige una @username única para que tus amigos y familiares te encuentren fácilmente!\n\nTener un nombre de usuario de Nautilus actualiza la IU de forma global para reflejar tu nuevo nombre de usuario.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Nombre de usuario incorrecto",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Usuario no disponible",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Los nombres de usuario de Nautilus son un servicio centralizado proporcionado por Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "¡No se encontró el usuario!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Ver detalles",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Peso de votación",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "Advertencia",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Bienvenido a Nautilus. Para continuar, debe crear una billetera nueva o importar una ya existente.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Bienvenido a Kalium. Para comenzar, usted debe crear una nueva billetera o importar una existente.",
+  "@welcomeTextKal": {},
+  "withAddress": "Con dirección",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "Con mensaje",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "Tras %1 minuto",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "Tras %1 minutos",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Sí",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Sí",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

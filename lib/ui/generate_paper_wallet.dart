@@ -86,7 +86,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       if (_sendAmountFocusNode!.hasFocus) {
         if (_rawAmount != null) {
           setState(() {
-            _sendAmountController!.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
+            _sendAmountController!.text = getRawAsThemeAwareAmount(context, _rawAmount);
             _rawAmount = null;
           });
         }
@@ -114,8 +114,12 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
     // Set initial currency format
     _localCurrencyFormat = NumberFormat.currency(locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
     // Set quick send amount
-    if (quickSendAmount != null) {
-      _sendAmountController!.text = NumberUtil.getRawAsUsableString(quickSendAmount).replaceAll(",", "");
+    if (quickSendAmount != null && quickSendAmount!.isNotEmpty && quickSendAmount != "0") {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        setState(() {
+          _sendAmountController!.text = getRawAsThemeAwareAmount(context, quickSendAmount);
+        });
+      });
     }
   }
 
@@ -128,11 +132,19 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         _amountValidationText = AppLocalization.of(context)!.amountMissing;
       });
     } else {
-      final String bananoAmount = _localCurrencyMode
-          ? _convertLocalCurrencyToCrypto()
-          : _rawAmount == null
-              ? _sendAmountController!.text
-              : NumberUtil.getRawAsUsableString(_rawAmount);
+      String bananoAmount;
+      if (_localCurrencyMode) {
+        bananoAmount = _convertLocalCurrencyToCrypto();
+      } else {
+        if (_rawAmount == null) {
+          bananoAmount = _sendAmountController!.text;
+        } else {
+          bananoAmount = getRawAsThemeAwareAmount(context, _rawAmount);
+        }
+      }
+      if (bananoAmount.isEmpty) {
+        bananoAmount = "0";
+      }
       final BigInt? balanceRaw = StateContainer.of(context).wallet!.accountBalance;
       final BigInt? sendAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
       if (sendAmount == null || sendAmount == BigInt.zero) {
@@ -321,15 +333,10 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                         widget: GenerateConfirmSheet(
                           paperWalletSeed: paper_wallet_seed,
                           memo: memo,
-                          // localCurrency: StateContainer.of(context).curCurrency,
-                          // contact: contact,
                           destination: paper_wallet_account,
-                          // quickSendAmount: item.amount,
                           amountRaw: _localCurrencyMode
                               ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
-                              : _rawAmount ?? ((StateContainer.of(context).nyanoMode)
-                                      ? NumberUtil.getNyanoAmountAsRaw(_sendAmountController!.text)
-                                      : NumberUtil.getAmountAsRaw(_sendAmountController!.text)),
+                              : _rawAmount ?? getThemeAwareAmountAsRaw(context, _sendAmountController!.text),
                         ));
                   }),
                 ],
@@ -376,9 +383,9 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       String balance;
       if (_localCurrencyMode) {
         balance =
-            StateContainer.of(context).wallet!.getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+            StateContainer.of(context).wallet!.getLocalCurrencyPrice(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
       } else {
-        balance = StateContainer.of(context).wallet!.getAccountBalanceDisplay(context).replaceAll(r",", "");
+        balance = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
       }
       // Convert to Integer representations
       int textFieldInt;
@@ -496,11 +503,11 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
             return;
           }
           if (!_localCurrencyMode) {
-            _sendAmountController!.text = StateContainer.of(context).wallet!.getAccountBalanceDisplay(context).replaceAll(r",", "");
+            _sendAmountController!.text = getRawAsThemeAwareAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
           } else {
             String localAmount = StateContainer.of(context)
                 .wallet!
-                .getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+                .getLocalCurrencyPrice(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
             localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
             localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
             localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);

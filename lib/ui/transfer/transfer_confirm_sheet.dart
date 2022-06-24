@@ -19,6 +19,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/pending_response_
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
@@ -49,19 +50,18 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
   @override
   void initState() {
     super.initState();
-    this.totalToTransfer = BigInt.zero;
-    this.totalAsReadableAmount = "";
-    this.animationOpen = false;
+    totalToTransfer = BigInt.zero;
+    totalAsReadableAmount = "";
+    animationOpen = false;
     widget.privKeyBalanceMap!.forEach((String account, AccountBalanceItem accountBalanceItem) {
       totalToTransfer += BigInt.parse(accountBalanceItem.balance!) + BigInt.parse(accountBalanceItem.pending!);
     });
-    this.totalAsReadableAmount = NumberUtil.getRawAsUsableString(totalToTransfer.toString());
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    this.state = StateContainer.of(context);
+    state = StateContainer.of(context);
   }
 
   @override
@@ -70,7 +70,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
       minimum: EdgeInsets.only(
         bottom: MediaQuery.of(context).size.height * 0.035,
       ),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -98,7 +98,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                     Container(
                         margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                         child: Text(
-                          AppLocalization.of(context)!.transferConfirmInfo.replaceAll("%1", totalAsReadableAmount),
+                          AppLocalization.of(context)!.transferConfirmInfo.replaceAll("%1", getThemeAwareCombined(context, totalToTransfer.toString())),
                           style: AppStyles.textStyleParagraphPrimary(context),
                           textAlign: TextAlign.start,
                         )),
@@ -139,7 +139,8 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                     children: <Widget>[
                       // Scan QR Code Button
                       AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.cancel.toUpperCase(), Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.cancel.toUpperCase(), Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () {
                         Navigator.of(context).pop();
                       }),
                     ],
@@ -224,8 +225,8 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
       for (String hash in pendingBlocks.keys) {
         PendingResponseItem? item = pendingBlocks[hash];
         if (state!.wallet!.openBlock != null) {
-          ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-              state!.wallet!.representative, state!.wallet!.frontier, item!.amount, hash, state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!));
+          ProcessResponse resp = await sl.get<AccountService>().requestReceive(state!.wallet!.representative, state!.wallet!.frontier, item!.amount, hash,
+              state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!));
           if (resp.hash != null) {
             state!.wallet!.frontier = resp.hash;
           }
@@ -317,8 +318,8 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
       for (String hash in pendingBlocks.keys) {
         PendingResponseItem? item = pendingBlocks[hash];
         if (state!.wallet!.openBlock != null) {
-          ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-              state!.wallet!.representative, state!.wallet!.frontier, item!.amount, hash, state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!));
+          ProcessResponse resp = await sl.get<AccountService>().requestReceive(state!.wallet!.representative, state!.wallet!.frontier, item!.amount, hash,
+              state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!));
           if (resp.hash != null) {
             state!.wallet!.frontier = resp.hash;
           }

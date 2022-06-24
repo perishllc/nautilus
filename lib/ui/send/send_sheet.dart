@@ -134,7 +134,7 @@ class _SendSheetState extends State<SendSheet> {
       if (_amountFocusNode!.hasFocus) {
         if (_rawAmount != null) {
           setState(() {
-            _amountController!.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
+            _amountController!.text = getRawAsThemeAwareAmount(context, _rawAmount);
             _rawAmount = null;
           });
         }
@@ -261,7 +261,11 @@ class _SendSheetState extends State<SendSheet> {
     _localCurrencyFormat = NumberFormat.currency(locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
     // Set quick send amount
     if (quickSendAmount != null && quickSendAmount!.isNotEmpty && quickSendAmount != "0") {
-      _amountController!.text = NumberUtil.getRawAsUsableString(quickSendAmount).replaceAll(",", "");
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        setState(() {
+          _amountController!.text = getRawAsThemeAwareAmount(context, quickSendAmount);
+        });
+      });
     }
   }
 
@@ -520,23 +524,21 @@ class _SendSheetState extends State<SendSheet> {
             // account / wallet name:
             Container(
               margin: const EdgeInsets.only(top: 10.0, left: 30, right: 30),
-              child: Container(
-                child: RichText(
-                  textAlign: TextAlign.start,
-                  text: TextSpan(
-                    text: '',
-                    children: [
-                      TextSpan(
-                        text: StateContainer.of(context).selectedAccount!.name,
-                        style: TextStyle(
-                          color: StateContainer.of(context).curTheme.text60,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'NunitoSans',
-                        ),
+              child: RichText(
+                textAlign: TextAlign.start,
+                text: TextSpan(
+                  text: '',
+                  children: [
+                    TextSpan(
+                      text: StateContainer.of(context).selectedAccount!.name,
+                      style: TextStyle(
+                        color: StateContainer.of(context).curTheme.text60,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'NunitoSans',
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -550,37 +552,23 @@ class _SendSheetState extends State<SendSheet> {
               future: sl.get<SharedPrefsUtil>().getPriceConversion(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData && snapshot.data != null && snapshot.data != PriceConversion.HIDDEN) {
-                  return Container(
-                    child: RichText(
-                      textAlign: TextAlign.start,
-                      text: TextSpan(
-                        text: '',
-                        children: [
-                          TextSpan(
-                            text: "(",
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary60,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w100,
-                              fontFamily: 'NunitoSans',
-                            ),
+                  return RichText(
+                    textAlign: TextAlign.start,
+                    text: TextSpan(
+                      text: '',
+                      children: [
+                        TextSpan(
+                          text: "(",
+                          style: TextStyle(
+                            color: StateContainer.of(context).curTheme.primary60,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w100,
+                            fontFamily: 'NunitoSans',
                           ),
-                          displayCurrencyAmount(
-                            context,
-                            TextStyle(
-                              color: StateContainer.of(context).curTheme.primary60,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                              decoration: TextDecoration.lineThrough,
-                            ),
-                          ),
+                        ),
+                        if (!_localCurrencyMode)
                           TextSpan(
-                            text: _localCurrencyMode
-                                ? StateContainer.of(context)
-                                    .wallet!
-                                    .getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale)
-                                : getCurrencySymbol(context) + StateContainer.of(context).wallet!.getAccountBalanceDisplay(context),
+                            text: getThemeAwareRawAccuracy(context, StateContainer.of(context).wallet!.accountBalance.toString()),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary60,
                               fontSize: 14.0,
@@ -588,29 +576,48 @@ class _SendSheetState extends State<SendSheet> {
                               fontFamily: 'NunitoSans',
                             ),
                           ),
-                          TextSpan(
-                            text: ")",
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary60,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w100,
-                              fontFamily: 'NunitoSans',
-                            ),
+                        displayCurrencySymbol(
+                          context,
+                          TextStyle(
+                            color: StateContainer.of(context).curTheme.primary60,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: 'NunitoSans',
                           ),
-                        ],
-                      ),
+                        ),
+                        TextSpan(
+                          text: _localCurrencyMode
+                              ? StateContainer.of(context)
+                                  .wallet!
+                                  .getLocalCurrencyPrice(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale)
+                              : getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString()),
+                          style: TextStyle(
+                            color: StateContainer.of(context).curTheme.primary60,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: 'NunitoSans',
+                          ),
+                        ),
+                        TextSpan(
+                          text: ")",
+                          style: TextStyle(
+                            color: StateContainer.of(context).curTheme.primary60,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w100,
+                            fontFamily: 'NunitoSans',
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 }
-                return Container(
-                  child: const Text(
-                    "*******",
-                    style: const TextStyle(
-                      color: Colors.transparent,
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w100,
-                      fontFamily: 'NunitoSans',
-                    ),
+                return const Text(
+                  "*******",
+                  style: TextStyle(
+                    color: Colors.transparent,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w100,
+                    fontFamily: 'NunitoSans',
                   ),
                 );
               },
@@ -799,6 +806,12 @@ class _SendSheetState extends State<SendSheet> {
                           }
                         }
 
+                        bool isMaxSend = false;
+                        if (_isMaxSend()) {
+                          isMaxSend = true;
+                          amountRaw = StateContainer.of(context).wallet!.accountBalance.toString();
+                        }
+
                         // verifyies the input is a user in the db
                         if (!_addressController!.text.startsWith("nano_")) {
                           // Need to make sure its a valid contact or user
@@ -820,7 +833,7 @@ class _SendSheetState extends State<SendSheet> {
                                     amountRaw: amountRaw,
                                     destination: user.address,
                                     contactName: user.getDisplayName(),
-                                    maxSend: _isMaxSend(),
+                                    maxSend: isMaxSend,
                                     localCurrency: _localCurrencyMode ? _amountController!.text : null,
                                     memo: _memoController!.text));
                           }
@@ -830,7 +843,7 @@ class _SendSheetState extends State<SendSheet> {
                               widget: SendConfirmSheet(
                                   amountRaw: amountRaw,
                                   destination: _addressController!.text,
-                                  maxSend: _isMaxSend(),
+                                  maxSend: isMaxSend,
                                   localCurrency: _localCurrencyMode ? _amountController!.text : null,
                                   memo: _memoController!.text));
                         }
@@ -851,10 +864,14 @@ class _SendSheetState extends State<SendSheet> {
                           if (_localCurrencyMode) {
                             amountRaw = NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto());
                           } else {
-                            amountRaw = _rawAmount as bool? ?? (StateContainer.of(context).nyanoMode)
-                                ? NumberUtil.getNyanoAmountAsRaw(_amountController!.text)
-                                : NumberUtil.getAmountAsRaw(_amountController!.text);
+                            amountRaw = getThemeAwareAmountAsRaw(context, _amountController!.text);
                           }
+                        }
+
+                        bool isMaxSend = false;
+                        if (_isMaxSend()) {
+                          isMaxSend = true;
+                          amountRaw = StateContainer.of(context).wallet!.accountBalance.toString();
                         }
 
                         // verifyies the input is a user in the db
@@ -876,7 +893,7 @@ class _SendSheetState extends State<SendSheet> {
                                 context: context,
                                 widget: RequestConfirmSheet(
                                   amountRaw: amountRaw,
-                                  destination: user.address,
+                                  destination: user.address!,
                                   contactName: user.getDisplayName(),
                                   localCurrency: _localCurrencyMode ? _amountController!.text : null,
                                   memo: _memoController!.text,
@@ -963,7 +980,10 @@ class _SendSheetState extends State<SendSheet> {
                             if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
                               hasError = true;
                               UIUtil.showSnackbar(
-                                  AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),
+                                  AppLocalization.of(context)!
+                                      .minimumSend
+                                      .replaceAll("%1", "0.000001")
+                                      .replaceAll("%2", StateContainer.of(context).currencyMode),
                                   context);
                             } else if (_localCurrencyMode && mounted) {
                               toggleLocalCurrency();
@@ -972,17 +992,7 @@ class _SendSheetState extends State<SendSheet> {
                               setState(() {
                                 _rawAmount = address.amount;
                                 // If raw amount has more precision than we support show a special indicator
-                                if (StateContainer.of(context).nyanoMode) {
-                                  _amountController!.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
-                                } else {
-                                  if (NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "") ==
-                                      NumberUtil.getRawAsUsableDecimal(_rawAmount).toString()) {
-                                    _amountController!.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
-                                  } else {
-                                    _amountController!.text =
-                                        NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(address.amount), digits: 6).toStringAsFixed(6) + "~";
-                                  }
-                                }
+                                _amountController!.text = getThemeAwareCombined(context, _amountController!.text);
                               });
                               _addressFocusNode!.unfocus();
                             }
@@ -994,7 +1004,7 @@ class _SendSheetState extends State<SendSheet> {
                                   widget: SendConfirmSheet(
                                       amountRaw: _localCurrencyMode
                                           ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
-                                          : _rawAmount ?? NumberUtil.getAmountAsRaw(_amountController!.text),
+                                          : _rawAmount ?? getThemeAwareAmountAsRaw(context, _amountController!.text),
                                       destination: user != null ? user.address : address.address,
                                       contactName: user?.getDisplayName(),
                                       maxSend: _isMaxSend(),
@@ -1020,7 +1030,7 @@ class _SendSheetState extends State<SendSheet> {
     }
     final Decimal valueLocal = Decimal.parse(convertedAmt);
     final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    return NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal()).toString();
+    return NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16)).toString();
   }
 
   String _convertCryptoToLocalCurrency() {
@@ -1046,10 +1056,12 @@ class _SendSheetState extends State<SendSheet> {
       String textField = _amountController!.text;
       String balance;
       if (_localCurrencyMode) {
-        balance =
-            StateContainer.of(context).wallet!.getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+        balance = StateContainer.of(context)
+            .wallet!
+            .getLocalCurrencyPrice(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
       } else {
-        balance = StateContainer.of(context).wallet!.getAccountBalanceDisplay(context).replaceAll(r",", "");
+        // balance = StateContainer.of(context).wallet!.getAccountBalanceDisplay(context).replaceAll(r",", "");
+        balance = getRawAsThemeAwareAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
       }
       // Convert to Integer representations
       int textFieldInt;
@@ -1169,7 +1181,7 @@ class _SendSheetState extends State<SendSheet> {
         if (_rawAmount == null) {
           bananoAmount = _amountController!.text;
         } else {
-          bananoAmount = NumberUtil.getRawAsUsableString(_rawAmount);
+          bananoAmount = getRawAsThemeAwareAmount(context, _rawAmount);
         }
       }
       if (bananoAmount.isEmpty) {
@@ -1308,7 +1320,8 @@ class _SendSheetState extends State<SendSheet> {
             return;
           }
           if (!_localCurrencyMode) {
-            _amountController!.text = StateContainer.of(context).wallet!.getAccountBalanceDisplay(context).replaceAll(r",", "");
+            // _amountController!.text = StateContainer.of(context).wallet!.getAccountBalanceDisplay(context).replaceAll(r",", "");
+            _amountController!.text = getRawAsThemeAwareAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
             _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
             _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
             // setState(() {
@@ -1321,7 +1334,7 @@ class _SendSheetState extends State<SendSheet> {
           } else {
             String localAmount = StateContainer.of(context)
                 .wallet!
-                .getLocalCurrencyPrice(StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+                .getLocalCurrencyPrice(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
             localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
             localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
             localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);

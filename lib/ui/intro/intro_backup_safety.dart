@@ -31,14 +31,14 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
 
     // set random representative as the default:
     NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? nodes) {
-      if (nodes != null) {
+      if (nodes != null && nodes.isNotEmpty) {
         final Random _random = Random();
         final NinjaNode randomNode = nodes[_random.nextInt(nodes.length)];
         sl.get<SharedPrefsUtil>().setRepresentative(randomNode.account);
         // StateContainer.of(context).wallet.defaultRepresentative = randomNode.account;
         AppWallet.defaultRepresentative = randomNode.account;
+        StateContainer.of(context).requestUpdate();
       }
-      StateContainer.of(context).requestUpdate();
     });
 
     sl.get<Vault>().setSeed(NanoSeeds.generateSeed()).then((String? result) {

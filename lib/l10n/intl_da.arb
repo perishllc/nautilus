@@ -1,235 +1,1951 @@
 {
-  "cancel": "Annuler",
-  "close": "Luk",
-  "confirm": "Bekræft",
-  "no": "Nej",
-  "yes": "Ja",
-  "onStr": "Aktivér",
-  "off": "Deaktivér",
-  "send": "Send",
-  "receive": "Modtag",
-  "sent": "Sendt",
-  "received": "Modtaget",
-  "transactions": "Transaktioner",
-  "addressCopied": "Adresse kopieret",
-  "copyAddress": "Kopiér adresse",
-  "addressShare": "Del adresse",
-  "addressHint": "Indtast adresse",
-  "seed": "Seed",
-  "seedInvalid": "Seed er ugyldigt",
-  "seedCopied": "Seed kopieret til udklipsholderen\nDet er muligt at indsætte i 2 minutter.",
-  "scanQrCode": "Scan QR-kode",
-  "contactsImportErr": "Kunne ikke importere kontakter",
-  "viewDetails": "Se detaljer",
-  "qrInvalidSeed": "QR-koden indeholder ikke et gyldigt Seed eller privat nøgle",
-  "removeContact": "Fjern kontakt",
-  "removeContactConfirmation": "Er du sikker på, at du vil slette %1?",
+  "@@locale": "da",
+  "account": "Účet",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
+  "accounts": "Účty",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
+  "ackBackedUp": "Jste si jisti, že jste zálohovali svou tajnou frázi nebo semínko?",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
+  "activeMessageHeader": "Aktivní zpráva",
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Přidat účet",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Bloker en bruger",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Přidat kontakt",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Tilføj favorit",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Adresa zkopírována",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Zadejte adresu",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Prosím zadejte adresu",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Indtast venligst et brugernavn eller adresse",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Sdílet adresu",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Aliasser",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Prosím zadejte částku",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "spurgte",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Metoda ověření",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Automatisk import",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Automaticky zamknout",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Zálohoval jsem to",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Zálohovat tajnou frázi",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Zálohovat semínko",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Jste si jisti, že jste zálohovali své semínko peněženky?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Zálohujte své semínko",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Biometrie",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "% 1 blev blokeret.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "Bruger allerede blokeret!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "blokeret",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Bloker en bruger med et hvilket som helst kendt alias eller adresse. Eventuelle meddelelser, transaktioner eller anmodninger fra dem ignoreres.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Blokeret Info",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Nick navn allerede brugt!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Vælg et kaldenavn",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "% 1 er blevet blokeret!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Průzkumník bloků",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Bloker Explorer Info",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Hvilken blok explorer der skal bruges til at vise transaktionsoplysninger",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Bloker denne bruger",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Zrušit",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Změna měny",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Skift log",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Změnit zástupce",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Změnit",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Zadejte nového zástupce",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "Dette er allerede din repræsentant!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Zástupce byl úspěšně změněn",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Tjek tilgængelighed",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Zavřít",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Potvrdit",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Potvrďte heslo",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Připojování",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 přidán do kontaktů.",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Kontakt již existuje.",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
   "contactHeader": "Kontakt",
-  "contactsHeader": "Kontakter",
-  "addContact": "Tilføj kontakt",
-  "contactNameHint": "Indtast et navn @",
-  "contactInvalid": "Ugyldigt kontaktnavn",
-  "noContactsExport": "Der er ingen kontakter at eksportere.",
-  "noContactsImport": "Ingen kontakter at importere.",
-  "contactsImportSuccess": "%1 kontakter importeret.",
-  "contactAdded": "%1 er blevet føjet til kontakter.",
-  "contactRemoved": "%1 er blevet fjernet fra kontakter!",
-  "contactNameMissing": "Vælg et navn til denne kontakt",
-  "contactExists": "Kontakt eksisterer allerede",
-  "backupYourSeed": "Lav sikkerhedskopi af Seed",
-  "backupSeedConfirm": "Er du sikker på, at du har sikkerhedskopieret tegnebogens Seed?",
-  "seedBackupInfo": "Nedenfor er din tegnebog's Seed. Det er afgørende, at du sikkerhedskopierer og aldrig gemmer det som tekst eller skærmbillede.",
-  "copySeed": "Kopier Seed",
-  "seedCopiedShort": "Seed kopieret",
-  "importSeed": "Importer Seed",
-  "importSeedHint": "Indtast Seed nedenfor.",
-  "welcomeText": "Velkommen til Nautilus. For at fortsætte kan du oprette en ny tegnebog eller importere en eksisterende.",
-  "newWallet": "Ny tegnebog",
-  "importWallet": "Importer tegnebog",
-  "sentTo": "Sendt til",
-  "sending": "Sender",
-  "to": "Til",
-  "sendAmountConfirm": "Insend %1 NANO",
-  "sendError": "Der opstod en fejl. Prøv igen senere.",
-  "enterAmount": "Indtast beløb",
-  "enterAddress": "Indtast adresse",
-  "invalidAddress": "Den indtastede adresse er ugyldig",
-  "addressMissing": "Indtast venligst en adresse",
-  "amountMissing": "Indtast et beløb",
-  "insufficientBalance": "Saldo er utilstrækkelig",
-  "sendFrom": "Send fra",
-  "pinCreateTitle": "Opret en 6-cifret PIN-kode",
-  "pinConfirmTitle": "Bekræft din PIN-kode",
-  "pinEnterTitle": "Indtast PIN-kode",
-  "pinConfirmError": "PIN-koderne stemmer ikke overens",
-  "pinInvalid": "Den indtastede PIN-kode er ugyldig",
-  "themeHeader": "Tema",
-  "changeRepButton": "Skift",
-  "changeRepAuthenticate": "Skift repræsentant",
-  "currentlyRepresented": "Aktuel repræsentant",
-  "changeRepSucces": "Repræsentant ændret",
-  "repInfoHeader": "Hvad er en repræsentant?",
-  "repInfo": "En repræsentant er en konto, der stemmer for konsensus på netværket. Afstemningskraft vægtes ud fra balance, du kan delegere din balance for at øge stemmevægten for en repræsentant, du stoler på. Din repræsentant har ingen brugskraft over dine midler. Du bør vælge en repræsentant, der sjældent er offline og er pålidelig.",
-  "pinRepChange": "Indtast PIN-kode for at skifte repræsentant.",
-  "changeRepHint": "Indtast ny repræsentant",
-  "representatives": "Repræsentanter",
-  "pickFromList": "Vælg en fra listen",
-  "votingWeight": "Stemmevægt",
-  "uptime": "Online tid",
-  "authMethod": "Godkendelsesmetode",
-  "pinMethod": "PIN-kode",
-  "privacyPolicy": "Fortrolighedspolitik",
-  "biometricsMethod": "Biometri",
-  "changeCurrency": "Skift valuta",
-  "language": "Sprog",
-  "shareNautilus": "Del Natirum",
-  "shareNautilusText": "Tjek Nautilus! En førende NANO mobil tegnebog!",
-  "logout": "Log ud",
-  "warning": "Advarsel",
-  "logoutDetail": "Når du logger ud, fjernes dit Seed og alle data relateret til Nautilus fra denne enhed. Hvis dit Seed ikke er sikkerhedskopieret, vil du aldrig kunne få adgang til dine midler igen.",
-  "logoutAction": "Slet Seed og afslut",
-  "logoutAreYouSure": "Er du sikker?",
-  "logoutReassurance": "Så længe du har sikkerhedskopieret dit Seed, har du intet at bekymre dig om.",
-  "settingsHeader": "Indstillinger",
-  "preferences": "Præferencer",
-  "manage": "Administrer",
-  "backupSeed": "Sikkerhedskopier Seed",
-  "fingerprintSeedBackup": "Verificer for at sikkerhedskopiere Seed.",
-  "pinSeedBackup": "Indtast PIN-kode for at sikkerhedskopiere Seed",
-  "systemDefault": "Systemstandard",
-  "notifications": "Notifikationer",
-  "notificationTitle": "Modtaget %1 NANO",
-  "notificationBody": "Åbn Nautilus for at se denne transaktion",
-  "notificationHeaderSupplement": "Tryk for at åbne",
-  "settingsTransfer": "Hent fra Papir tegnebog",
-  "transferError": "Der opstod en fejl under overførslen. Prøv igen senere.",
-  "paperWallet": "Papir tegnebog",
-  "kaliumWallet": "Kalium tegnebog",
-  "manualEntry": "Manuel indtastning",
-  "mnemonicPhrase": "Mnemonic sætning",
-  "rawSeed": "Seed",
-  "transferHeader": "Overfør midler",
-  "transfer": "Overførsel",
-  "transferManualHint": "Indtast Seed nedenfor.",
-  "transferIntro": "Denne proces overfører midler fra en Papir tegnebog til din Nautilus tegnebog.\n\nTryk på \"%1\" knappen for at begynde.",
-  "transferQrScanHint": "Scan NANO \nSeed eller privat nøgle",
-  "transferQrScanError": "Denne QR-kode indeholder ikke et gyldigt Seed.",
-  "transferNoFunds": "Der er ingen NANO i dette Seed.",
-  "transferConfirmInfo": "En tegnebog med en saldo på %1 NANO blev fundet.\n",
-  "transferConfirmInfoSecond": "Tryk på Bekræft for at overføre midlerne.\n",
-  "transferConfirmInfoThird": "Overførslen kan tage adskillige sekunder at gennemføre.",
-  "transferLoading": "Overfører",
-  "transferComplete": "%1 NANO blev overført til din Natirum-tegnebog.\n",
-  "transferClose": "Tryk et vilkårligt sted for at lukke vinduet.",
-  "scanInstructions": "Scan en NANO \nadresse QR-kode",
-  "unlockPin": "Indtast PIN-koden for at låse Natirum op",
-  "unlockBiometrics": "Verificer for at låse Nautilus op",
-  "lockAppSetting": "Verificer ved opstart",
-  "locked": "Låst",
-  "unlock": "Lås op",
-  "tooManyFailedAttempts": "For mange oplåsningsforsøg mislykkedes.",
-  "securityHeader": "Sikkerhed",
-  "autoLockHeader": "Lås automatisk",
-  "xMinutes": "Efter %1 minutter",
-  "xMinute": "Efter %1 minut",
-  "instantly": "Straks",
-  "exampleCardIntro": "Velkommen til Nautilus. Når du modtager NANO vises transaktioner sådan:",
-  "exampleCardLittle": "Nogle",
-  "exampleCardLot": "Mange",
-  "exampleCardTo": "til en tilfældig",
-  "exampleCardFrom": "fra en tilfældig",
-  "defaultAccountName": "Hovedkonto",
-  "defaultNewAccountName": "Konto %1",
-  "newAccountIntro": "Dette er din nye konto. Når du modtager NANO vises transaktioner sådan:",
-  "account": "Konto",
-  "accounts": "Konti",
-  "addAccount": "Tilføj konto",
-  "hideAccountHeader": "Skjul konto?",
-  "removeAccountText": "Er du sikker på, at du vil skjule denne konto? Du kan tilføje den igen senere ved at trykke på \"%1\" knappen.",
-  "tapToReveal": "Tryk for at vise",
-  "tapToHide": "Tryk for at skjule",
-  "copied": "Kopieret",
-  "copy": "Kopier",
-  "seedDescription": "Et Seed indeholder de samme oplysninger som en Tilknytningskode, men på en måde som en computer kan læse. Så længe du har en sikkerhedskopi af en af dem, har du adgang til dine midler.",
-  "importSecretPhrase": "Importer Tilknytningskode",
-  "importSecretPhraseHint": "Indtast venligst din 24-ords Tilknytningskode nedenfor. Hvert ord skal være adskilt af et mellemrum.",
-  "qrMnemonicError": "QR-koden indeholder ikke en gyldig Tilknytningskode",
-  "mnemonicInvalidWord": "%1 er ikke et gyldigt ord",
-  "mnemonicSizeError": "Tilknytningskoden kan kun indeholde 24 ord",
-  "secretPhrase": "Tilknytningskode",
-  "backupConfirmButton": "Jeg har lavet en sikkerhedskopi",
-  "secretInfoHeader": "Sikkerhed frem for alt!",
-  "secretInfo": "På den næste skærm vil du se din Tilknytningskode, som er en adgangskode til dine midler. Det er afgørende, at du sikkerhedskopierer den og aldrig deler den med nogen.",
-  "secretWarning": "Hvis du mister din enhed eller afinstallerer appen, skal du bruge din Tilknytningskode eller Seed for at gendanne dine midler!",
-  "gotItButton": "Jeg har forstået!",
-  "ackBackedUp": "Er du sikker på, at du har sikkerhedskopieret din Tilknytningskode eller Seed?",
-  "secretPhraseCopy": "Kopiér Tilknytningskode",
-  "secretPhraseCopied": "Tilknytningskode kopieret til udklipsholderen",
-  "import": "Importere",
-  "importSeedInstead": "Importer Seed i stedet",
-  "switchToSeed": "Skift til Seed",
-  "backupSecretPhrase": "Sikkerhedskopier Tilknytningskode",
-  "qrInvalidAddress": "QR-koden indeholder ikke en gyldig adresse",
-  "qrInvalidPermissions": "Giv kameratilladelse for at scanne QR-koder",
-  "qrUnknownError": "Kunne ikke scanne QR-koden",
-  "mantaError": "Anmodning kunne ikke bekræftes",
-  "rootWarning": "Din enhed er tilsyneladende \"rooted\", \"jailbroken\" eller ændret på en måde, der kompromitterer din sikkerhed. Det anbefales, at du nulstiller enheden til dens oprindelige tilstand, inden du fortsætter.",
-  "iUnderstandTheRisks": "Jeg er indforstået med risiciene",
-  "exit": "Afslut",
-  "setWalletPassword": "Skift tegnebogens adgangskode",
-  "setPassword": "Skift adgangskode",
-  "disableWalletPassword": "Deaktiver tegnebogens adgangskode",
-  "encryptionFailedError": "Kunne ikke ændre tegnebogens adgangskode",
-  "setPasswordSuccess": "Adgangskoden er ændret",
-  "disablePasswordSuccess": "Adgangskoden er deaktiveret",
-  "createPasswordHint": "Lav en adgangskode",
-  "confirmPasswordHint": "Bekræft adgangskode",
-  "enterPasswordHint": "Indtast dit kodeord",
-  "passwordsDontMatch": "Adgangskoderne stemmer ikke",
-  "passwordBlank": "Adgangskoden kan ikke være tom",
-  "invalidPassword": "Ugyldig adgangskode",
-  "passwordWillBeRequiredToOpenParagraph": "Denne adgangskode vil blive påkrævet for at åbne Nautilus.",
-  "passwordNoLongerRequiredToOpenParagraph": "Du har ikke længere brug for en adgangskode for at åbne Nautilus.",
-  "createPasswordFirstParagraph": "Du kan oprette en adgangskode for at tilføje ekstra sikkerhed til din tegnebog.",
-  "createPasswordSecondParagraph": "Adgangskoden er valgfri, din tegnebog er beskyttet med din PIN-kode eller biometri uanset.",
-  "createAPasswordHeader": "Lav en adgangskode.",
-  "createPasswordSheetHeader": "Opret",
-  "disablePasswordSheetHeader": "Deaktiver",
-  "requireAPasswordToOpenHeader": "Kræv en adgangskode for at åbne Nautilus?",
-  "noSkipButton": "Nej, spring over",
-  "yesButton": "Ja",
-  "nextButton": "Næste",
-  "goBackButton": "Gå tilbage",
-  "welcomeTextKal": "Velkommen til Kalium. For at fortsætte kan du oprette en ny tegnebog eller importere en eksisterende.",
-  "sendAmountConfirmKal": "Insend %1 BANANO",
-  "currency": "Valuta",
-  "shareKalium": "Del Kalium",
-  "shareKaliumText": "Tjek Kalium! Den officielle Banano mobil tegnebog!",
-  "logoutDetailKal": "Når du logger ud, fjernes dit Seed og alle data relateret til Kalium fra denne enhed. Hvis dit Seed ikke er sikkerhedskopieret, vil du aldrig kunne få adgang til dine midler igen.",
-  "notificationTitleKal": "Modtaget %1 BANANO",
-  "notificationBodyKal": "Åbn Kalium for at se denne transaktion",
-  "transferIntroKal": "Denne proces overfører midler fra en Papir tegnebog til din Kalium tegnebog.\n\nTryk på \"%1\" knappen for at begynde.",
-  "transferQrScanHintKal": "Scan en Banano \nSeed eller privat nøgle",
-  "transferNoFundsKal": "Dette Seed indeholder ingen BANANO",
-  "transferConfirmInfoKal": "En tegnebog med en saldo på %1 BANANO blev fundet.\n",
-  "transferCompleteKal": "%1 BANANO blev overført til din Kalium tegnebog.\n",
-  "scanInstructionsKal": "Scan en Banano\n QR-kode",
-  "unlockPinKal": "Indtast PIN-kode for at låse Kalium op",
-  "unlockBiometricsKal": "Verificer for at låse Kalium op",
-  "exampleCardIntroKal": "Velkommen til Kalium. Når du modtager BANANO vises transaktioner sådan:",
-  "exampleCardToKal": "til en vilkårlig abe",
-  "exampleCardFromKal": "fra en vilkårlig abe",
-  "newAccountIntroKal": "Dette er din nye konto. Når du modtager BANANO vises transaktioner sådan:",
-  "liveSupportButton": "Support",
-  "connectingHeader": "Forbinder",
-  "minimumSend": "Mindste overførselsbeløb er %1 NANO",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Zadejte jméno kontaktu",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Zadejte jméno @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Zadejte nové jméno pro tento kontakt",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 byl úspěšně odstraněn z kontaktů!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Kontakty",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Import kontaktů se nezdařil",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "%1 kontaktů bylo úspěšně importováno.",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Zkopírováno",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Kopírovat",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Kopírovat adresu",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Kopier link",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Kopírovat semínko",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Kopier tegnebogadresse til udklipshol",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Vytvořte si heslo.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Opret gavekort",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Opret et gavekort",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Můžete si vytvořit heslo a přidat tak do své peněženky další zabezpečení.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Vytvořit heslo",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Heslo je volitelné a vaše peněženka bude bez ohledu na to chráněna vaším PIN nebo biometrickými údaji.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Vytvořit",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Opret QR-kode",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Oprettelse af gavekort",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Měna",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Valuta tilstand",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Info om valutatilstand",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Vælg, hvilken enhed der skal vises beløb i.\n1 nyano = 0.000001 NANO, eller \n1,000,000 Nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "V současné době zastupuje",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Dekryptering Fejl!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Hlavní účet",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Účet %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Slet",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Vypnout",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Heslo bylo vypnuto úspěšně",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Vypnout heslo peněženky",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Zavrhnout",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Ugyldigt domænenavn",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Rediger",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Nastavení hesla k peněžence se nezdařilo",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Zadejte adresu",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Zadejte částku",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Indtast gave note",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Indtast Besked",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Zadejte vaše heslo",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Indtast et brugernavn",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Indtast bruger eller adresse",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "od někoho",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "od náhodné opičky",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Vítejte v Natriu. Jakmile obdržíte NANO, transakce se zobrazí takto:",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Vítejte v Kalium. Jakmile obdržíte BANANO, transakce se zobrazí takto:",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Málo",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "Hodně",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "někomu",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "náhodné opičce",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Når du sender eller modtager en betalingsanmodning, vises de her sådan med kortets farve og mærke, der angiver status. \n\nGrøn angiver, at anmodningen er betalt.\nGul angiver anmodningen/notatet ikke er blevet betalt/læst.\nRød angiver, at anmodningen ikke er læst eller modtaget.\n\n Neutrale farvede kort uden et beløb er kun beskeder.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Nogle",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Sushi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Når du sender eller modtager en betalingsanmodning, vises de her:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hej, hvad sker der?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "En masse",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Leje",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "Tillykke med fødselsdagen",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Gas Penge",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Odejít",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "mislykkedes",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus frakoblet",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Nautilus-servere ser ud til at være afbrudt, afsendelse og modtagelse (uden notater) skal stadig være operationelle, men betalingsanmodninger går muligvis ikke igennem\n\n Kom tilbage senere, eller genstart appen for at prøve igen",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Favorit eksisterer",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "favorit",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Ugyldigt favoritnavn",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Indtast et kaldenavn",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Vælg et navn til denne favorit",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "% 1 er blevet fjernet fra favoritter!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "favoritter",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Fremhævede",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Ověřte se pro zálohu semínka.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "Fra",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "opfyldt",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "Du har en gave!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Tom gave",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Gave Beløb",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Gave fra",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Indlæs et digitalt gavekort med NANO! Indstil et beløb, og en valgfri meddelelse, som modtageren kan se, når de åbner den!\n\nNår du er oprettet, får du et link, som du kan sende til nogen, som når de åbnes automatisk distribuerer midlerne til modtageren efter installation af Nautilus!\n\nHvis modtageren allerede er en Nautilus-bruger, vil de få en anmodning om at overføre pengene til deres konto, når du åbner linket",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Gave besked",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Zpět",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Chápu!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Gå til QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Skjul",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Skrýt účet",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Hjem",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Ignorovat",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Importovat",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "Det link, du klikkede på, indeholder noget nano, vil du importere det til denne tegnebog, eller refundere det til den, der sendte det?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Importujte tajnou frázi",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Níže zadejte svoji 24slovnou tajnou frázi. Každé slovo by mělo být odděleno mezerou.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Importovat semínko",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Prosím, zadejte vaše semínko níže.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Místo toho importovat semínko",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Importovat pěněženku",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Ihned",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Nedostatečný zůstatek",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Zadaná adresa není platná",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Neplatné heslo",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Chápu rizika",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Kalium peněženka",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Jazyk",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Link Kopieret",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Podpora",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Indlæst",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Indlæst i",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Ověřit při spuštění",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Zamčeno",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Odhlásit",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Smazat semínko a odhlásit",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Jste si jisti?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Odhlášením odstraníte z tohoto zařízení vaše semínko a všechna data související s Nautilus. Pokud vaše semínko není zálohováno, už nikdy nebudete mít přístup ke svým prostředkům",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Odhlášením odstraníte z tohoto zařízení vaše semeno a všechna data související s Kalium. Pokud vaše semeno není zálohováno, už nikdy nebudete mít přístup ke svým finančním prostředkům",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Pokud jste zálohovali své semínko, nemusíte se ničeho obávat.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Spravovat",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Požadavek se nepodařilo ověřit",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Ruční zadání",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Markér som betalt",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Markér som Ubetalt",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Memo sendt igen! Hvis modtagerens enhed stadig ikke er anerkendt, kan modtagerens enhed være offline.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Zpráva",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Minimální částka pro odeslání je% 1 NANO",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "% 1 není platné slovo",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Mnemonická fráze",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "Tajná fráze může obsahovat pouze 24 slov",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
   "natricon": "Natricon",
-  "pending": "afventer",
-  "unconfirmed": "ubekræftet",
-  "messageHeader": "Besked",
-  "readMore": "Læs mere",
-  "ignore": "Ignorer",
-  "dismiss": "Afvis",
-  "activeMessageHeader": "Aktiv besked",
-  "blockExplorer": "Bloker Explorer"
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Denne funktion kræver, at du har en længere transaktionshistorik for at forhindre spam.\n\nAlternativt kan du vise en QR-kode, som nogen kan scanne.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Bekræftelse nødvendig",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Toto je váš nový účet. Jakmile obdržíte NANO, transakce se zobrazí takto:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Toto je váš nový účet. Jakmile obdržíte BANANO, transakce se zobrazí takto:",
+  "@newAccountIntroKal": {},
+  "newWallet": "Nová peněženka",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Další",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Ne",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Neexistují žádné kontakty k exportu.",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "Žádné nové kontakty k importu.",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Node Status",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Ingen søgeresultater!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "Ne, přeskočit",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Otevřete Nautilus pro zobrazení této transakce",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Chcete-li zobrazit tuto transakci, otevřete Kalium",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Klepnutím otevřete",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "For at denne funktion skal fungere korrekt, skal meddelelser være aktiveret",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Upozornění",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "Přijato %1 NANO",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "Přijato %1 BANANO",
+  "@notificationTitleKal": {},
+  "notSent": "ikke sendt",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Off",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Ok",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Onramp",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "On",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Åbnet",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "betalt",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Papírová Peněženka",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Heslo nemůže být prázdné",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Už nebudete potřebovat heslo pro otevření Nautilus.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Heslo se neshoduje",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Toto heslo bude vyžadováno k otevření Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Betal",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Nogen har anmodet om betaling fra dig! tjek betalingssiden for mere info.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Betalinger",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Betal denne anmodning",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "nevyřízený",
+  "@pending": {},
+  "pickFromList": "Vyberte ze seznamu",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "Pin se neshoduje",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Potvrdit Váš pin",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Vytvořte si šestimístný pin",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Zadejte pin",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Neplatný pin",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Zadejte PIN pro změnu zástupce.",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Zadejte PIN pro zálohu semínka",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Předvolby",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Zásady ochrany osobních údajů",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Køb Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "QR kód neobsahuje platnou destinaci.",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Udělte oprávnění fotoaparátu ke skenování QR kódů",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "QR kód neobsahuje platné semínko ani soukromý klíč",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "QR neobsahuje platnou tajnou frázi",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Nelze přečíst QR kód",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Bedøm appen",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "Hvis du nyder appen, overveje at tage dig tid til at gennemgå den,\nDet hjælper virkelig, og det bør ikke tage mere end et minut.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Hrubé semínko",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Více",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "kan modtages",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Přijmout",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Přijmuto",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Modtag minimum",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Modtag minimum info",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Et minimumsbeløb at modtage. Hvis en betaling eller anmodning modtages med et beløb mindre end dette, det vil blive ignoreret.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "tilbagebetaling",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "til",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Registrering",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Registrer brugernavn",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Registrer et brugernavn",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Opravdu chcete tento účet skrýt? Můžete jej znovu přidat později klepnutím na tlačítko \"%1\".",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Fjern blokeringen",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Er du sikker på at du vil fjerne blokeringen% 1?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Odstranit kontakt",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Opravdu chcete odstranit %1?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Fjern favorit",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "Zástupce je účet, který hlasuje pro konsensus sítě. Hlasovací síla je vážena rovnováhou, můžete delegovat svůj zůstatek a zvýšit hlasovací váhu zástupce, kterému důvěřujete. Váš zástupce nemá výdělečnou moc nad vašimi prostředky. Měli byste si vybrat zástupce, který má málo prostojů a je důvěryhodný.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Co je to zástupce?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Svar",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Zástupci",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Anmodning",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Anmodning% 1% 2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "anmodet",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Anmodet fra",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Anmodning mislykkedes: Denne bruger ser ikke ud til at have Nautilus installeret, eller har meddelelser deaktiveret.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Anmoder",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Anmod om betaling",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Fejl ved afsendelse af betalingsanmodning, modtagerens enhed kan være offline eller utilgængelig.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Anmodning sendt igen! Hvis modtagerens enhed stadig ikke er anerkendt, kan modtagerens enhed være offline.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Vyžadovat heslo k otevření Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Send dette notat igen",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Nulstil databasen",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Er du sikker på, at du vil nulstille den interne database? \n\nDette kan løse problemer i forbindelse med opdatering af appen, men sletter også alle gemte præferencer. Dette vil IKKE slette din tegnebog frø. Hvis du har problemer, skal du sikkerhedskopiere dit frø, geninstaller appen, og hvis problemet fortsætter, er du velkommen til at lave en fejlrapport om github eller uenighed.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Prøv igen",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Zdá se, že vaše zařízení je \"rootováno\", \"jailbroken\" nebo upraveno způsobem, který ohrožuje zabezpečení. Před pokračováním se doporučuje resetovat zařízení do původního stavu.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Naskenujte QR kód Nano \n adresy",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Naskenujte QR kód adresy Banano \n",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Oskenovat QR kód",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Søg efter noget",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "Na další obrazovce uvidíte svoji tajnou frázi. Jedná se o heslo pro přístup k vašim finančním prostředkům. Je zásadní, abyste jej zálohovali a nikdy s nikým nesdíleli.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Bezpečnost především!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Tajná fráze",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Tajná fráze byla zkopírována",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Zkopírovat tajnou frázi",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Pokud ztratíte zařízení nebo odinstalujete aplikaci, budete potřebovat tajnou frázi nebo semínko, abyste mohli získat zpět své prostředky!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Zabezpečení",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Semínko",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Níže je semínko vaší peněženky. Je zásadní, abyste zálohovali své semínko a nikdy ho neukládali jako prostý text nebo snímek obrazovky.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Semínko zkopírováno do schránky \n Je vložitelné po dobu 2 minut.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Semínko zkopírováno",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Semínko nese stejné informace jako tajná fráze, ale strojově čitelné. Pokud máte jeden z nich zálohovaný, budete mít přístup ke svým prostředkům.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Semínko není platné",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Kan ikke anmode om fra mig selv",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Poslat",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Odeslat %1 NANO",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Odeslat %1 BANANO",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Došlo k chybě. Zkuste to později.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Odeslat z",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Odesílání",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Afsendelse af memo med transaktion mislykkedes, de er muligvis ikke en Nautilus-bruger.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Afsendelse af besked",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Send forespørgsel igen",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Send eller anmod om en betaling, med End to End-krypterede meddelelser!\n\nBetalingsanmodninger, notater, og meddelelser kan kun modtages af andre nautilus-brugere.\n\nDu behøver ikke at have et brugernavn for at sende eller modtage betalingsanmodninger, og du kan bruge dem til din egen journalføring, selvom de ikke bruger nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Send oplysninger om ark",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Odesláno",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Odeslat",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Nastavit heslo",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Heslo bylo úspěšně nastaveno",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Nastavení",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Načíst z papírové penězenky",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Nastavit heslo peněženky",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "Sdílet Kalium",
+  "@shareKalium": {},
+  "shareKaliumText": "Podívejte se na Kalium! Oficiální mobilní peněženka Banano!",
+  "@shareKaliumText": {},
+  "shareLink": "Del link",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Sdílet Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Vyzkoušejte Nautilus! Špičková mobilní peněženka NANO!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Vis kontakter",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simplex",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Støt udvikleren",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Přepnout na semínko",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Výchozí systému",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Klepnutím skryjete",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Klikněte pro zobrazení",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Tématika",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "Pro",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Příliš mnoho neúspěšných pokusů o odemknutí.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Transakce",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Převod",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Klepnutím kamkoli zavřete okno.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 NANO úspěšně převedeno do vaší peněženky Nautilus. \n",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 BANANO bylo úspěšně převedeno do vaší peněženky Kalium. \n",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "Byla nalezena peněženka se zůstatkem %1 NANO. \n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "Byla nalezena peněženka se zůstatkem %1 BANANO. \n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Prostředky převedete klepnutím na potvrzení. \n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Dokončení přenosu může trvat několik sekund.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "Během přenosu došlo k chybě. Prosím zkuste to znovu později.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Převést finanční prostředky",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Tento proces přenese prostředky z papírové peněženky do vaší peněženky Nautilus. \n\n Začněte klepnutím na tlačítko \"% 1\".",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Tento proces přenese prostředky z papírové peněženky do vaší peněženky Kalium. \n \n Začněte klepnutím na tlačítko \"%1\".",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Denne proces overfører midlerne fra en papirpung til din Nautilus-tegnebog.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Přenáší se",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Zadejte semínko níže.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "Toto semínko nemá na sobě žádné NANO",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "Toto semínko nemá na sobě žádné BANANO",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Tento QR kód neobsahuje platné semínko.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Naskenujte počáteční \n nebo soukromý klíč Nano",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Naskenujte semínko \n nebo soukromý klíč Banano",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "uerkendt",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "nepotvrzený",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "uopfyldte",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Odemknout",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Ověřte a odemkněte Nautilus",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Ověřte se pro udemknutí Kalium",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Zadejte PIN pro odemčení Natria",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Chcete-li odemknout Kalium, zadejte PIN",
+  "@unlockPinKal": {},
+  "unpaid": "ubetalt",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "ulæste",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Provozuschopnost",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "Du har allerede registreret et brugernavn! Det er i øjeblikket ikke muligt at ændre dit brugernavn, men du er fri til at registrere et nyt under en anden adresse.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Brugernavn tilgængeligt!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Indtast venligst et brugernavn",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Brugernavn Fejl",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Vælg en unik @username for at gøre det nemt for venner og familie at finde dig!\n\nAt have et Nautilus-brugernavn opdaterer brugergrænsefladen globalt for at afspejle dit nye håndtag.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Ugyldigt brugernavn",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Brugernavn ikke tilgængelig",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Nautilus brugernavne er en centraliseret tjeneste leveret af Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "Bruger ikke fundet!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Zobrazit detaily",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Hlasovací síla",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "Varování",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Vítejte v Nautilus. Nejprve můžete vytvořit novou peněženku nebo importovat stávající.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Vítejte v Kalium. Nejprve můžete vytvořit novou peněženku nebo importovat stávající.",
+  "@welcomeTextKal": {},
+  "withAddress": "Med adresse",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "Med besked",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "Po %1 minutě",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "Po %1 minutách",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Ano",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Ano",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

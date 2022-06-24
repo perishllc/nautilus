@@ -1,235 +1,1951 @@
 {
-  "cancel": "Batal",
-  "close": "Tutup",
-  "confirm": "Konfirmasi",
-  "no": "Tidak",
-  "yes": "Ya",
-  "onStr": "Hidup",
-  "off": "Mati",
-  "send": "Kirim",
-  "receive": "Terima",
-  "sent": "Terkirim",
-  "received": "Diterima",
-  "transactions": "Transaksi",
-  "addressCopied": "Alamat berhasil disalin.",
-  "copyAddress": "Salin Alamat",
-  "addressShare": "Bagikan",
-  "addressHint": "Masukkan Alamat",
-  "seed": "Benih",
-  "seedInvalid": "Benih tidak sesuai",
-  "seedCopied": "Benih disalin kedalam papan klip.\n Hanya bisa ditempel dalam waktu 2 menit.",
-  "scanQrCode": "Pindai QR Code",
-  "contactsImportErr": "Gagal mengimpor kontak",
-  "viewDetails": "Lihat Rincian",
-  "qrInvalidSeed": "Kode QR tidak mengandung benih atau kunci pribadi yg valid",
-  "removeContact": "Hapus Kontak",
-  "removeContactConfirmation": "Anda yakib akan menghapus %1?",
-  "contactHeader": "Kontak",
-  "contactsHeader": "Kontak",
-  "addContact": "Tambah Kontak",
-  "contactNameHint": "Masukkan Nama @",
-  "contactInvalid": "Kontak Tidak Valid",
-  "noContactsExport": "Tidak ada kontak yg bisa di ekspor",
-  "noContactsImport": "Tidak menemukan untuk impor",
-  "contactsImportSuccess": "Berhasil mengimpor %1 kontak",
-  "contactAdded": "%1 ditambahkan ke kontak!",
-  "contactRemoved": "%1 kontak berhasil dihapus!",
-  "contactNameMissing": "Tidak ada kontak yg bisa di ekspor",
-  "contactExists": "Kontak Sudah Ada",
-  "backupYourSeed": "Simpan benih anda",
-  "backupSeedConfirm": "Apakah anda yakin sudah menyimpan benih anda dengan aman?",
-  "seedBackupInfo": "Dibawah ini adalah benih dompet anda. Sangat penting bahwa anda harus menyimpan benih dompet anda dan tidak pernah menyimpannya dalam bentuk dokumen tertulis atau tangkapan layar.",
-  "copySeed": "Salin Benih",
-  "seedCopiedShort": "Benih Disalin",
-  "importSeed": "Impor Benih",
-  "importSeedHint": "Masukkan benih dompet anda dibawah ini.",
-  "welcomeText": "Selamat datang di Nautilus. Untuk melanjutkan, anda bisa membuat dompet baru atau mengimpor dompet lama anda.",
-  "newWallet": "Buat Dompet",
-  "importWallet": "Impor Dompet",
-  "sentTo": "Terkirim Kepada",
-  "sending": "Mengirim",
-  "to": "Kepada",
-  "sendAmountConfirm": "Kirim %1 Nano?",
-  "sendError": "Terjadi kesalahan. Coba lagi nanti.",
-  "enterAmount": "Masukkan Jumlah",
-  "enterAddress": "Masukkan Alamat",
-  "invalidAddress": "Alamat Tujuan Tidak Valid",
-  "addressMissing": "Masukkan alamat",
-  "amountMissing": "Masukkan jumlah",
-  "insufficientBalance": "Saldo Tidak mencukupi",
-  "sendFrom": "Kirim Dari",
-  "pinCreateTitle": "Buat pin 6 angka",
-  "pinConfirmTitle": "Konfirmasi pin anda",
-  "pinEnterTitle": "Masukkan pin",
-  "pinConfirmError": "Pin tidak sama",
-  "pinInvalid": "Pin yang dimasukkan salah",
-  "themeHeader": "Tema",
-  "changeRepButton": "Ubah",
-  "changeRepAuthenticate": "Ubah Perwakilan",
-  "currentlyRepresented": "Saat ini diwakilkan oleh",
-  "changeRepSucces": "Perwakilan Berhasil Diubah",
-  "repInfoHeader": "Apa itu perwakilan?",
-  "repInfo": "Perwakilan adalah akun yang memberikan suara untuk konsensus jaringan. Kekuatan voting ditimbang dengan keseimbangan, Anda dapat mendelegasikan saldo Anda untuk menambah berat suara dari perwakilan yang Anda percayai. Perwakilan Anda tidak memiliki kekuasaan atas dana Anda. Anda harus memilih perwakilan yang memiliki sedikit waktu henti dan dapat dipercaya.",
-  "pinRepChange": "Masukkan pin untuk mengubah perwakilan",
-  "changeRepHint": "Masukkan perwakilan baru",
-  "representatives": "Representatif",
-  "pickFromList": "Pilih Dari Daftar",
-  "votingWeight": "Bobot HakSuara",
-  "uptime": "Uptime",
-  "authMethod": "Metode Otentikasi",
-  "pinMethod": "PIN",
-  "privacyPolicy": "Kebijakan Privasi",
-  "biometricsMethod": "Biometrik",
-  "changeCurrency": "Ubah Mata Uang",
-  "language": "Bahasa",
-  "shareNautilus": "Bagikan Nautilus",
-  "shareNautilusText": "Ayo Cek Nautilus! Nano's official Android Wallet!",
-  "logout": "Keluar",
-  "warning": "PERINGATAN",
-  "logoutDetail": "Keluar akan menghapus benih anda dan semua data terkait kalium dari perangkat ini. Jika benih anda belum disimpan, Anda tidak akan pernah bisa mengakses dana anda lagi.",
-  "logoutAction": "Hapus benih dan keluar",
-  "logoutAreYouSure": "Anda Yakin?",
-  "logoutReassurance": "Selama anda yakin sudah menyimpan benih anda dengan aman, anda tidak perlu khawatir.",
-  "settingsHeader": "Pengaturan",
-  "preferences": "Preferensi",
-  "manage": "Mengelola",
-  "backupSeed": "Simpan Benih",
-  "fingerprintSeedBackup": "Konfirmasi sidik jari untuk menyimpan benih.",
-  "pinSeedBackup": "Masukkan pin untuk melihat benih dompet Anda.",
-  "systemDefault": "Default Sistem",
-  "notifications": "Notifikasi",
-  "notificationTitle": "Menerima %1 NANO",
-  "notificationBody": "Buka Nautilus untuk melihat transaksi.",
-  "notificationHeaderSupplement": "Tekan untuk membuka",
-  "settingsTransfer": "Muat dari Dompet Kertas",
-  "transferError": "Terjadi kesalahan selama transfer. Silakan coba lagi nanti.",
-  "paperWallet": "Dompet Kertas",
-  "kaliumWallet": "Dompet Kalium",
-  "manualEntry": "Entri Manual",
-  "mnemonicPhrase": "Frase Mnemonic",
-  "rawSeed": "Benih Mentah",
-  "transferHeader": "Transfer\nDana",
-  "transfer": "Transfer",
-  "transferManualHint": "Mohon masukkan benih dibawah ini.",
-  "transferIntro": "Proses ini akan mentransfer dana dari dompet kertas ke dompet Nautilus Anda.\n\nKetuk \"%1\" tombol untuk memulai.",
-  "transferQrScanHint": "Pindai Benih\n atau kunci pribadi",
-  "transferQrScanError": "Kode QR ini tidak mengandung benih yg valid.",
-  "transferNoFunds": "Tidak ada NANO di dalam benih ini.",
-  "transferConfirmInfo": "Dompet dengan saldo %1 NANO telah terdeteksi.\n",
-  "transferConfirmInfoSecond": "Ketuk konfirmasi untuk mentransfer dana.\n",
-  "transferConfirmInfoThird": "Transfer membutuhkan beberapa detik.",
-  "transferLoading": "Mentransfer",
-  "transferComplete": "%1 NANO berhasil ditransfer ke Dompet Nautilus Anda.",
-  "transferClose": "Ketuk di mana saja untuk melanjutkan.",
-  "scanInstructions": "Pindai QR code\n alamat Nano",
-  "unlockPin": "Masukkan PIN untuk membuka KALIUM",
-  "unlockBiometrics": "Otentikasi untuk Membuka Nautilus",
-  "lockAppSetting": "Otentikasi saat diluncurkan.",
-  "locked": "Terkunci",
-  "unlock": "Terbuka",
-  "tooManyFailedAttempts": "Terlalu banyak percobaan gagal.",
-  "securityHeader": "Keamanan",
-  "autoLockHeader": "Kunci Otomatis",
-  "xMinutes": "Setelah %1 menit",
-  "xMinute": "Setelah %1 menit",
-  "instantly": "Segera",
-  "exampleCardIntro": "Hai, Saat anda mengirim dan menerima NANO, akan terlihat seperti ini",
-  "exampleCardLittle": "Sedikit",
-  "exampleCardLot": " Banyak",
-  "exampleCardTo": "untuk seseorang",
-  "exampleCardFrom": "dari seseorang",
-  "defaultAccountName": "Akun Utama",
-  "defaultNewAccountName": "Akun %1",
-  "newAccountIntro": "Ini adalah akun baru anda. Setelah menerima NANO, transaksi akan muncul seperti ini",
+  "@@locale": "id",
   "account": "Akun",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Semua Akun",
-  "addAccount": "Tambah Akun",
-  "hideAccountHeader": "Sembunyikan Akun?",
-  "removeAccountText": "Anda yakin akan menyembunyikan akun ini? Anda dapat menambahkan kembali dengan klik tombol \"%1\".",
-  "tapToReveal": "Sentuh untuk Melihat",
-  "tapToHide": "Sentuh untuk Menutup",
-  "copied": "Disalin",
-  "copy": "Salin",
-  "seedDescription": "Sebuah benih merupakan suatu susunan kata rahasia, namun dalam bahasa mesin. Selama anda menyimpannya dengan baik, hanya anda yang punya akses ke uang anda.",
-  "importSecretPhrase": "Impor Kata Rahasia",
-  "importSecretPhraseHint": "Masukkan 24 kata rahasia dibawah ini . Setiap kata harus dipisahkan dengan spasi",
-  "qrMnemonicError": "Kode QR tidak memiliki kata rahasia yang valid",
-  "mnemonicInvalidWord": "%1 bukanlah kata yang valid",
-  "mnemonicSizeError": "Kalimat rahasia hanya terdiri dari 24 kata.",
-  "secretPhrase": "Kalimat Rahasia",
-  "backupConfirmButton": "Sudah Saya Simpan",
-  "secretInfoHeader": "Keselamatan Utama!",
-  "secretInfo": "Pada layar berikutnya, anda akan melihat kalimat rahasia. Ini adalah sebuah password untuk akses uanh anda. Sangat penting untuk anda menyimpan dan jangan pernah membagikannya.",
-  "secretWarning": "Jika anda kehilangan ponsel atau menghapus aplikasi, Anda memerlukan Kalimat Rahasia untuk mengakses uang anda!",
-  "gotItButton": "Baiklah!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "Anda yakin sudah menyimpan benih / Kalimat Rahasia anda?",
-  "secretPhraseCopy": "Salin Kalimat Rahasia",
-  "secretPhraseCopied": "Kalimat Rahasia Disalin",
-  "import": "Impor",
-  "importSeedInstead": "Impor Benih Saja",
-  "switchToSeed": "Pindah Ke Benih Lain",
-  "backupSecretPhrase": "Cadangkan Frase Rahasia",
-  "qrInvalidAddress": "Kode QR tidak berisikan alamat yang benar",
-  "qrInvalidPermissions": "Mohon Berikan Izin Kamera untuk memindai Kode QR",
-  "qrUnknownError": "Tidak dapat membaca Kode QR",
-  "mantaError": "Tidak dapat memverifikasi permintaan",
-  "rootWarning": "Tampaknya perangkat Anda \"di-root\", \"jailbroken\", atau dimodifikasi dengan cara yang membahayakan keamanan. Anda disarankan untuk mereset perangkat Anda ke keadaan semula sebelum melanjutkan.",
-  "iUnderstandTheRisks": "Saya memahami resiko",
-  "exit": "Keluar",
-  "setWalletPassword": "Setel kata sandi dompet",
-  "setPassword": "Setel kata sandi",
-  "disableWalletPassword": "Nonaktifkan Kata Sandi Dompet",
-  "encryptionFailedError": "Gagal menetapkan kata sandi dompet",
-  "setPasswordSuccess": "Kata sandi berhasil ditetapkan",
-  "disablePasswordSuccess": "Kata sandi telah dinonaktifkan",
-  "createPasswordHint": "Buat kata sandi",
-  "confirmPasswordHint": "Konfirmasi kata sandi",
-  "enterPasswordHint": "Masukkan kata sandi anda",
-  "passwordsDontMatch": "Kata sandi tidak cocok",
-  "passwordBlank": "Kata sandi tidak boleh kosong",
-  "invalidPassword": "Kata sandi tidak cocok",
-  "passwordWillBeRequiredToOpenParagraph": "Kata sandi digunakan untuk membuka Nautilus.",
-  "passwordNoLongerRequiredToOpenParagraph": "Anda tidak akan memerlukan kata sandi lagi untuk membuka Nautilus.",
-  "createPasswordFirstParagraph": "Anda dapat membuat kata sandi untuk menambahkan keamanan tambahan ke dompet Anda.",
-  "createPasswordSecondParagraph": "Kata sandi adalah opsional, dan dompet Anda akan dilindungi dengan PIN atau biometrik Anda.",
-  "createAPasswordHeader": "Buat sebuah kata sandi",
-  "createPasswordSheetHeader": "Buat",
-  "disablePasswordSheetHeader": "Nonaktifkan",
-  "requireAPasswordToOpenHeader": "Membutuhkan kata sandi untuk membuka Nautilus?",
-  "noSkipButton": "Tidak, lewati",
-  "yesButton": "Ya",
-  "nextButton": "Berikutnya",
-  "goBackButton": "Kembali",
-  "welcomeTextKal": "Selamat datang di Kalium. Untuk melanjutkan, anda bisa membuat dompet baru atau mengimpor dompet lama anda.",
-  "sendAmountConfirmKal": "Kirim %1 Banano?",
-  "currency": "Mata Uang",
-  "shareKalium": "Bagikan Kalium",
-  "shareKaliumText": "Lihat Kalium! Dompet ponsel resmi Banano!",
-  "logoutDetailKal": "Keluar akan menghapus benih anda dan semua data terkait kalium dari perangkat ini. Jika benih anda belum disimpan, Anda tidak akan pernah bisa mengakses dana anda lagi.",
-  "notificationTitleKal": "Menerima %1 BANANO",
-  "notificationBodyKal": "Buka Kalium untuk melihat transaksi.",
-  "transferIntroKal": "Proses ini akan mentransfer dana dari dompet kertas ke dompet Kalium Anda.\n\nKetuk \"%1\" tombol untuk memulai.",
-  "transferQrScanHintKal": "Pindai Benih\n atau kunci pribadi",
-  "transferNoFundsKal": "Tidak ada BANANO di dalam benih ini.",
-  "transferConfirmInfoKal": "Dompet dengan saldo %1 BANANO telah terdeteksi.\n",
-  "transferCompleteKal": "%1 BANANO berhasil ditransfer ke Dompet Kalium Anda.",
-  "scanInstructionsKal": "Pindai QR code\n alamat Banano",
-  "unlockPinKal": "Masukkan PIN untuk membuka KALIUM",
-  "unlockBiometricsKal": "Otentikasi untuk Membuka Kalium",
-  "exampleCardIntroKal": "Hai, Saat anda mengirim dan menerima BANANO, akan terlihat seperti ini",
-  "exampleCardToKal": "ke monkey lain",
-  "exampleCardFromKal": "dari monkey lain",
-  "newAccountIntroKal": "Ini adalah akun baru anda. Setelah menerima BANANO, transaksi akan muncul seperti ini",
-  "liveSupportButton": "Bantuan",
-  "connectingHeader": "Menghubungkan",
-  "minimumSend": "Jumlah minimal pengiriman adalah %1 NANO",
-  "natricon": "Natricon",
-  "pending": "tertunda",
-  "unconfirmed": "belum dikonfirmasi",
-  "messageHeader": "Pesan",
-  "readMore": "Baca Selengkapnya",
-  "ignore": "Abaikan",
-  "dismiss": "Memberhentikan",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
   "activeMessageHeader": "Pesan Aktif",
-  "blockExplorer": "Penjelajah Blok"
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Tambah Akun",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Memblokir Pengguna",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Tambah Kontak",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Tambah Favorit",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Alamat berhasil disalin.",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Masukkan Alamat",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Masukkan alamat",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Harap Masukkan Nama Pengguna atau Alamat",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Bagikan",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Alias",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Masukkan jumlah",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Ditanya",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Metode Otentikasi",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Impor Otomatis",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Kunci Otomatis",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Sudah Saya Simpan",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Cadangkan Frase Rahasia",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Simpan Benih",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Apakah anda yakin sudah menyimpan benih anda dengan aman?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Simpan benih anda",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Biometrik",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "% 1 berhasil diblokir.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "Pengguna sudah Diblokir!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "Diblokir",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Blokir pengguna dengan alias atau alamat yang diketahui. Setiap pesan, transaksi, atau permintaan dari mereka akan diabaikan.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Info yang Diblokir",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Nama Nick sudah digunakan!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Pilih Nama Nick",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "% 1 telah dibuka blokir!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Penjelajah Blok",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Blokir Info Explorer",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Penjelajah blok mana yang digunakan untuk menampilkan informasi transaksi",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Blokir Pengguna ini",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Batal",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Ubah Mata Uang",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Perubahan Log",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Ubah Perwakilan",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Ubah",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Masukkan perwakilan baru",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "Ini sudah menjadi perwakilan Anda!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Perwakilan Berhasil Diubah",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Periksa Ketersediaan",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Tutup",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Konfirmasi",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Konfirmasi kata sandi",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Menghubungkan",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 ditambahkan ke kontak!",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Kontak Sudah Ada",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Kontak",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Kontak Tidak Valid",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Masukkan Nama @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Tidak ada kontak yg bisa di ekspor",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 kontak berhasil dihapus!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Kontak",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Gagal mengimpor kontak",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "Berhasil mengimpor %1 kontak",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Disalin",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Salin",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Salin Alamat",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Salin Tautan",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Salin Benih",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Salin alamat dompet ke clipboard",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Buat sebuah kata sandi",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Buat Kartu Hadiah",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Buat Kartu Hadiah",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Anda dapat membuat kata sandi untuk menambahkan keamanan tambahan ke dompet Anda.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Buat kata sandi",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Kata sandi adalah opsional, dan dompet Anda akan dilindungi dengan PIN atau biometrik Anda.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Buat",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Buat Kode QR",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Membuat Kartu Hadiah",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Mata Uang",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Mode Mata Uang",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Info Mode Mata Uang",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Pilih unit mana yang akan menampilkan jumlah.\n1 nyano = 0.000001 NANO, atau \n1,000,000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Saat ini diwakilkan oleh",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Kesalahan Dekripsi!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Akun Utama",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Akun %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Hapus",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Nonaktifkan",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Kata sandi telah dinonaktifkan",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Nonaktifkan Kata Sandi Dompet",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Memberhentikan",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Nama Domain Tidak Valid",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Mengedit",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Gagal menetapkan kata sandi dompet",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Masukkan Alamat",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Masukkan Jumlah",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Masukkan Gift Note",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Masukkan Pesan",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Masukkan kata sandi anda",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Masukkan nama pengguna",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Masukkan Pengguna atau Alamat",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "dari seseorang",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "dari monkey lain",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Hai, Saat anda mengirim dan menerima NANO, akan terlihat seperti ini",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Hai, Saat anda mengirim dan menerima BANANO, akan terlihat seperti ini",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Sedikit",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": " Banyak",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "untuk seseorang",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "ke monkey lain",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "Setelah Anda mengirim atau menerima permintaan pembayaran, mereka akan muncul di sini seperti ini dengan warna dan tag kartu yang menunjukkan status. \n\nHijau menunjukkan permintaan telah dibayarkan.\nKuning menunjukkan permintaan/memo belum dibayar/dibaca.\nMerah menunjukkan permintaan belum dibaca atau diterima.\n\n Kartu berwarna netral tanpa jumlah hanyalah pesan.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Beberapa",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "susyi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "Setelah Anda mengirim atau menerima permintaan pembayaran, mereka akan muncul di sini:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hei ada apa?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "Banyak",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Sewa",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "Selamat ulang tahun!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Uang Gas",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Keluar",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "gagal",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus Terputus",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Server Nautilus tampaknya terputus, Mengirim dan Menerima (tanpa memo) harus tetap beroperasi tetapi permintaan pembayaran mungkin tidak melalui\n\n Kembali lagi nanti atau mulai ulang aplikasi untuk mencoba lagi",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Favorit Sudah Ada",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "Favorit",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Nama Favorit Tidak Sahkan",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Masukkan Nama Nick",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Pilih Nama untuk Favorit ini",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "% 1 telah dihapus dari favorit!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "Favorit",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Unggulan",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Konfirmasi sidik jari untuk menyimpan benih.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "Dari",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "terpenuhi",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "Kau punya hadiah!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Hadiah Kosong",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Jumlah Hadiah",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Hadiah Dari",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Muat Kartu Hadiah Digital dengan NANO! Tetapkan jumlah, dan pesan opsional untuk dilihat penerima saat mereka membukanya!\n\nSetelah dibuat, Anda akan mendapatkan tautan yang dapat Anda kirim ke siapa pun, yang ketika dibuka akan secara otomatis mendistribusikan dana kepada penerima setelah menginstal Nautilus!\n\nJika penerima sudah menjadi pengguna Nautilus, mereka akan mendapatkan prompt untuk mentransfer dana ke akun mereka saat membuka tautan",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Pesan Hadiah",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Kembali",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Baiklah!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Pergi ke QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Sembunyikan",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Sembunyikan Akun?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Rumah",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Abaikan",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Impor",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "Tautan yang Anda klik berisi beberapa nano, apakah Anda ingin mengimpornya ke dompet ini, atau mengembalikannya kepada siapa pun yang mengirimnya?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Impor Kata Rahasia",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Masukkan 24 kata rahasia dibawah ini . Setiap kata harus dipisahkan dengan spasi",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Impor Benih",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Masukkan benih dompet anda dibawah ini.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Impor Benih Saja",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Impor Dompet",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Segera",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Saldo Tidak mencukupi",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Alamat Tujuan Tidak Valid",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Kata sandi tidak cocok",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Saya memahami resiko",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Dompet Kalium",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Bahasa",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Tautan Disalin",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Bantuan",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Dimuat",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Dimuat Ke",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Otentikasi saat diluncurkan.",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Terkunci",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Keluar",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Hapus benih dan keluar",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Anda Yakin?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Keluar akan menghapus benih anda dan semua data terkait kalium dari perangkat ini. Jika benih anda belum disimpan, Anda tidak akan pernah bisa mengakses dana anda lagi.",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Keluar akan menghapus benih anda dan semua data terkait kalium dari perangkat ini. Jika benih anda belum disimpan, Anda tidak akan pernah bisa mengakses dana anda lagi.",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Selama anda yakin sudah menyimpan benih anda dengan aman, anda tidak perlu khawatir.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Mengelola",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Tidak dapat memverifikasi permintaan",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Entri Manual",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Tandai sebagai Dibayar",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Tandai sebagai Belum Dibayar",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Memo dikirim kembali! Jika masih belum diketahui, perangkat penerima mungkin offline.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Pesan",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Jumlah minimal pengiriman adalah %1 NANO",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 bukanlah kata yang valid",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Frase Mnemonic",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "Kalimat rahasia hanya terdiri dari 24 kata.",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natricon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Fitur ini mengharuskan Anda memiliki riwayat transaksi yang lebih panjang untuk mencegah spam.\n\nAtau, Anda dapat menampilkan kode QR untuk dipindai seseorang.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Verifikasi Diperlukan",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Ini adalah akun baru anda. Setelah menerima NANO, transaksi akan muncul seperti ini",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Ini adalah akun baru anda. Setelah menerima BANANO, transaksi akan muncul seperti ini",
+  "@newAccountIntroKal": {},
+  "newWallet": "Buat Dompet",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Berikutnya",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Tidak",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Tidak ada kontak yg bisa di ekspor",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "Tidak menemukan untuk impor",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Status Node",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Tidak Ada Hasil Pencarian!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "Tidak, lewati",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Buka Nautilus untuk melihat transaksi.",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Buka Kalium untuk melihat transaksi.",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Tekan untuk membuka",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "Agar fitur ini berfungsi dengan benar, notifikasi harus diaktifkan",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Notifikasi",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "Menerima %1 NANO",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "Menerima %1 BANANO",
+  "@notificationTitleKal": {},
+  "notSent": "tidak terkirim",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Mati",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Oke",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Onramp",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "Hidup",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Dibuka",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "digaji",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Dompet Kertas",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Kata sandi tidak boleh kosong",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Anda tidak akan memerlukan kata sandi lagi untuk membuka Nautilus.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Kata sandi tidak cocok",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Kata sandi digunakan untuk membuka Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Bayar",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Seseorang telah meminta pembayaran dari Anda! periksa halaman pembayaran untuk info lebih lanjut.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Pembayaran",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Bayar permintaan ini",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "tertunda",
+  "@pending": {},
+  "pickFromList": "Pilih Dari Daftar",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "Pin tidak sama",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Konfirmasi pin anda",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Buat pin 6 angka",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Masukkan pin",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Pin yang dimasukkan salah",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Masukkan pin untuk mengubah perwakilan",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Masukkan pin untuk melihat benih dompet Anda.",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Preferensi",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Kebijakan Privasi",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Pembelian Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "Kode QR tidak berisikan alamat yang benar",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Mohon Berikan Izin Kamera untuk memindai Kode QR",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "Kode QR tidak mengandung benih atau kunci pribadi yg valid",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "Kode QR tidak memiliki kata rahasia yang valid",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Tidak dapat membaca Kode QR",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Nilai Aplikasi",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn't take more than a minute.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Benih Mentah",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Baca Selengkapnya",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "piutang",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Terima",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Diterima",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Terima Minimum",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Terima Info Minimum",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Jumlah minimum untuk menerima. Jika pembayaran atau permintaan diterima dengan jumlah kurang dari ini, itu akan diabaikan.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "Pengembalian",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "untuk",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Mendaftar",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Daftar Username",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Daftarkan Username",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Anda yakin akan menyembunyikan akun ini? Anda dapat menambahkan kembali dengan klik tombol \"%1\".",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Buka blokir",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Anda yakin ingin membuka blokir% 1?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Hapus Kontak",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Anda yakib akan menghapus %1?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Hapus Favorit",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "Perwakilan adalah akun yang memberikan suara untuk konsensus jaringan. Kekuatan voting ditimbang dengan keseimbangan, Anda dapat mendelegasikan saldo Anda untuk menambah berat suara dari perwakilan yang Anda percayai. Perwakilan Anda tidak memiliki kekuasaan atas dana Anda. Anda harus memilih perwakilan yang memiliki sedikit waktu henti dan dapat dipercaya.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Apa itu perwakilan?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Balas",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Representatif",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Permintaan",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Permintaan% 1% 2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Diminta",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Diminta Dari",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Permintaan Gagal: Pengguna ini tampaknya tidak menginstal Nautilus, atau menonaktifkan notifikasi.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Meminta",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Minta Pembayaran",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Kesalahan saat mengirim permintaan pembayaran, perangkat penerima mungkin offline atau tidak tersedia.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Permintaan dikirim kembali! Jika masih belum diketahui, perangkat penerima mungkin offline.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Membutuhkan kata sandi untuk membuka Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Kirim ulang memo ini",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Setel ulang Database",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Apakah Anda yakin ingin mengatur ulang database internal? \n\nIni dapat memperbaiki masalah yang terkait dengan memperbarui aplikasi, tetapi juga akan menghapus semua preferensi yang disimpan. Ini TIDAK akan menghapus benih dompet Anda. Jika Anda mengalami masalah, Anda harus membuat cadangan seed Anda, instal ulang aplikasi, dan jika masalah terus berlanjut, jangan ragu untuk membuat laporan bug di github atau perselisihan.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Coba lagi",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Tampaknya perangkat Anda \"di-root\", \"jailbroken\", atau dimodifikasi dengan cara yang membahayakan keamanan. Anda disarankan untuk mereset perangkat Anda ke keadaan semula sebelum melanjutkan.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Pindai QR code\n alamat Nano",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Pindai QR code\n alamat Banano",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Pindai QR Code",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Cari apa saja",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "Pada layar berikutnya, anda akan melihat kalimat rahasia. Ini adalah sebuah password untuk akses uanh anda. Sangat penting untuk anda menyimpan dan jangan pernah membagikannya.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Keselamatan Utama!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Kalimat Rahasia",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Kalimat Rahasia Disalin",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Salin Kalimat Rahasia",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Jika anda kehilangan ponsel atau menghapus aplikasi, Anda memerlukan Kalimat Rahasia untuk mengakses uang anda!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Keamanan",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Benih",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Dibawah ini adalah benih dompet anda. Sangat penting bahwa anda harus menyimpan benih dompet anda dan tidak pernah menyimpannya dalam bentuk dokumen tertulis atau tangkapan layar.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Benih disalin kedalam papan klip.\n Hanya bisa ditempel dalam waktu 2 menit.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Benih Disalin",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Sebuah benih merupakan suatu susunan kata rahasia, namun dalam bahasa mesin. Selama anda menyimpannya dengan baik, hanya anda yang punya akses ke uang anda.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Benih tidak sesuai",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Tidak dapat meminta dari diri sendiri",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Kirim",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Kirim %1 Nano?",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Kirim %1 Banano?",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Terjadi kesalahan. Coba lagi nanti.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Kirim Dari",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Mengirim",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Mengirim memo dengan transaksi gagal, mereka mungkin bukan pengguna Nautilus.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Mengirim pesan",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Kirim Permintaan lagi",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Kirim atau Minta pembayaran, dengan pesan End to End Encrypted!\n\nPermintaan pembayaran, memo, dan pesan hanya akan diterima oleh pengguna nautilus lainnya.\n\nAnda tidak perlu memiliki nama pengguna untuk mengirim atau menerima permintaan pembayaran, dan Anda dapat menggunakannya untuk penyimpanan catatan Anda sendiri meskipun mereka tidak menggunakan nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Kirim Info Lembar",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Terkirim",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Terkirim Kepada",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Setel kata sandi",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Kata sandi berhasil ditetapkan",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Pengaturan",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Muat dari Dompet Kertas",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Setel kata sandi dompet",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "Bagikan Kalium",
+  "@shareKalium": {},
+  "shareKaliumText": "Lihat Kalium! Dompet ponsel resmi Banano!",
+  "@shareKaliumText": {},
+  "shareLink": "Bagikan Tautan",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Bagikan Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Ayo Cek Nautilus! Nano's official Android Wallet!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Tampilkan Kontak",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simpleks",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Dukung Pengembang",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Pindah Ke Benih Lain",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Default Sistem",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Sentuh untuk Menutup",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Sentuh untuk Melihat",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Tema",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "Kepada",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "Terlalu banyak percobaan gagal.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Transaksi",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Transfer",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Ketuk di mana saja untuk melanjutkan.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 NANO berhasil ditransfer ke Dompet Nautilus Anda.",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 BANANO berhasil ditransfer ke Dompet Kalium Anda.",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "Dompet dengan saldo %1 NANO telah terdeteksi.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "Dompet dengan saldo %1 BANANO telah terdeteksi.\n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Ketuk konfirmasi untuk mentransfer dana.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Transfer membutuhkan beberapa detik.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "Terjadi kesalahan selama transfer. Silakan coba lagi nanti.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Transfer\nDana",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Proses ini akan mentransfer dana dari dompet kertas ke dompet Nautilus Anda.\n\nKetuk \"%1\" tombol untuk memulai.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Proses ini akan mentransfer dana dari dompet kertas ke dompet Kalium Anda.\n\nKetuk \"%1\" tombol untuk memulai.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Proses ini akan mentransfer dana dari dompet kertas ke dompet Nautilus Anda.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Mentransfer",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Mohon masukkan benih dibawah ini.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "Tidak ada NANO di dalam benih ini.",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "Tidak ada BANANO di dalam benih ini.",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Kode QR ini tidak mengandung benih yg valid.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Pindai Benih\n atau kunci pribadi",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Pindai Benih\n atau kunci pribadi",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "tidak diakui",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "belum dikonfirmasi",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "tidak terpenuhi",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Terbuka",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Otentikasi untuk Membuka Nautilus",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Otentikasi untuk Membuka Kalium",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Masukkan PIN untuk membuka KALIUM",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Masukkan PIN untuk membuka KALIUM",
+  "@unlockPinKal": {},
+  "unpaid": "tidak dibayar",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "belum dibaca",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Uptime",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "Anda sudah memiliki nama pengguna yang terdaftar! Saat ini tidak mungkin untuk mengubah nama pengguna Anda, tetapi Anda bebas untuk mendaftarkan yang baru di bawah alamat yang berbeda.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Username tersedia!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Silahkan Masukkan Username",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Kesalahan Username",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Pilih @username unik untuk memudahkan teman dan keluarga menemukan Anda!\n\nMemiliki nama pengguna Nautilus memperbarui UI secara global untuk mencerminkan pegangan baru Anda.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Nama Pengguna Tidak Valid",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Nama pengguna tidak tersedia",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Nama pengguna Nautilus adalah layanan terpusat yang disediakan oleh Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "Pengguna tidak ditemukan!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Lihat Rincian",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Bobot HakSuara",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "PERINGATAN",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Selamat datang di Nautilus. Untuk melanjutkan, anda bisa membuat dompet baru atau mengimpor dompet lama anda.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Selamat datang di Kalium. Untuk melanjutkan, anda bisa membuat dompet baru atau mengimpor dompet lama anda.",
+  "@welcomeTextKal": {},
+  "withAddress": "Dengan Alamat",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "Dengan Pesan",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "Setelah %1 menit",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "Setelah %1 menit",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Ya",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Ya",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

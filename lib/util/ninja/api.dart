@@ -24,9 +24,16 @@ class NinjaAPI {
     if (httpResponseBody == null) {
       return null;
     }
-    final List<NinjaNode> ninjaNodes = (json.decode(httpResponseBody) as List<NinjaNode>)
-        .map((NinjaNode e) => NinjaNode.fromJson(e as Map<String, dynamic>))
-        .toList();
+    // final List<NinjaNode> ninjaNodes =
+    //     (json.decode(httpResponseBody) as List<NinjaNode>).map((NinjaNode e) => NinjaNode.fromJson(e as Map<String, dynamic>)).toList();
+    // return ninjaNodes;
+
+    List<NinjaNode> ninjaNodes = [];
+    try {
+      json.decode(httpResponseBody) as List<NinjaNode>;
+    } catch (error) {
+      return ninjaNodes;
+    }
     return ninjaNodes;
   }
 
@@ -35,9 +42,13 @@ class NinjaAPI {
     if (rawJson == null) {
       return null;
     }
-    final List<NinjaNode> ninjaNodes = (json.decode(rawJson) as List<NinjaNode>)
-        .map((NinjaNode e) => NinjaNode.fromJson(e as Map<String, dynamic>))
-        .toList();
+    // List<NinjaNode> ninjaNodes = (json.decode(rawJson) as List<NinjaNode>).map((NinjaNode e) => NinjaNode.fromJson(e as Map<String, dynamic>)).toList();
+    List<NinjaNode> ninjaNodes = [];
+    try {
+      json.decode(rawJson) as List<NinjaNode>;
+    } catch (error) {
+      return ninjaNodes;
+    }
     return ninjaNodes;
   }
 }

@@ -1,235 +1,1951 @@
 {
-  "cancel": "Avbryt",
-  "close": "Stäng",
-  "confirm": "Bekräfta",
-  "no": "Nej",
-  "yes": "Ja",
-  "onStr": "På",
-  "off": "Av",
-  "send": "Skicka",
-  "receive": "Ta emot",
-  "sent": "Skickat",
-  "received": "Mottagit",
-  "transactions": "Transaktioner",
-  "addressCopied": "Adress kopierad",
-  "copyAddress": "Kopiera adress",
-  "addressShare": "Dela",
-  "addressHint": "Ange adress",
-  "seed": "Seed",
-  "seedInvalid": "Angivet seed är ogiltigt",
-  "seedCopied": "Ditt seed är kopierat till urklipp.\n Det går att klistra in under 2 minuter.",
-  "scanQrCode": "Skanna QR-kod",
-  "contactsImportErr": "Gick ej att importera kontakter",
-  "viewDetails": "Visa detaljer",
-  "qrInvalidSeed": "QR-koden innehåller inget giltigt seed eller privatnyckel",
-  "removeContact": "Ta bort kontakt",
-  "removeContactConfirmation": "Är du säker på att du vill radera %1?",
-  "contactHeader": "Kontakter",
-  "contactsHeader": "Kontakter",
-  "addContact": "Lägg till kontakt",
-  "contactNameHint": "Ange ett namn @",
-  "contactInvalid": "Ogiltigt kontaktnamn",
-  "noContactsExport": "Det finns inga kontakter att exportera",
-  "noContactsImport": "Hittade inga kontakter att importera",
-  "contactsImportSuccess": "Lyckad import av %1 kontakter",
-  "contactAdded": "%1 har lagts till under kontakter!",
-  "contactRemoved": "%1 har raderats från dina kontakter!",
-  "contactNameMissing": "Det finns inga kontakter att exportera",
-  "contactExists": "Kontakten existerar redan",
-  "backupYourSeed": "Säkerhetskopiera ditt seed",
-  "backupSeedConfirm": "Är du säker på att du har säkerhetskopierat din plånboks seed?",
-  "seedBackupInfo": "Detta är din plånboks seed. Det är av extrem vikt att du sparar detta seed på ett säkert sätt. Spara aldrig ditt seed i text- eller bildformat.",
-  "copySeed": "Kopiera seed",
-  "seedCopiedShort": "Seed kopierad",
-  "importSeed": "Importera seed",
-  "importSeedHint": "Ange ditt seed nedanför.",
-  "welcomeText": "Välkommen till Nautilus. För att fortsätta, behöver du skapa en ny plånbok eller importera en befintlig.",
-  "newWallet": "Ny plånbok",
-  "importWallet": "Importera plånbok",
-  "sentTo": "Skickat till",
-  "sending": "Skickar",
-  "to": "Till",
-  "sendAmountConfirm": "Skicka %1 Nano?",
-  "sendError": "Ett fel inträffade. Försök igen senare.",
-  "enterAmount": "Ange belopp",
-  "enterAddress": "Ange adress",
-  "invalidAddress": "Ogiltig mottagaradress",
-  "addressMissing": "Ange en destination",
-  "amountMissing": "Ange ett belopp",
-  "insufficientBalance": "Otillräckligt saldo",
-  "sendFrom": "Skicka från",
-  "pinCreateTitle": "Skapa en 6-siffrig PIN-kod",
-  "pinConfirmTitle": "Bekräfta din PIN-kod",
-  "pinEnterTitle": "Ange PIN-kod",
-  "pinConfirmError": "PIN-kod matchar ej",
-  "pinInvalid": "Felaktig PIN-kod angiven",
-  "themeHeader": "Tema",
-  "changeRepButton": "Ändra",
-  "changeRepAuthenticate": "Byt representant",
-  "currentlyRepresented": "Aktiv representant",
-  "changeRepSucces": "Representanten är nu ändrad",
-  "repInfoHeader": "Vad är en representant?",
-  "repInfo": "En representant är ett konto som röstar för samsyn i nätverket. Rösträtten påverkas av saldot, och du kan delegera ditt saldo för att öka din rösträtt. Din representant har ingen befogenhet över dina resurser. Du bör välja en representant som har hög drifttid och är trovärdig.",
-  "pinRepChange": "Ange PIN för att byta representant",
-  "changeRepHint": "Ange ny representant",
-  "representatives": "Representanter",
-  "pickFromList": "Välj från en lista",
-  "votingWeight": "Röstvikt",
-  "uptime": "Upptid",
-  "authMethod": "Autentiseringsmetod",
-  "pinMethod": "PIN",
-  "privacyPolicy": "Privatpolicy",
-  "biometricsMethod": "Biometrik",
-  "changeCurrency": "Ändra valuta",
-  "language": "Språk",
-  "shareNautilus": "Dela Nautilus",
-  "shareNautilusText": "Kolla in Nautilus! Nanos officiella Androidplånbok!",
-  "logout": "Logga ut",
-  "warning": "Varning",
-  "logoutDetail": "Vid utloggning raderas ditt seed och all kaliumrelaterad data från denna enhet. Om du inte har säkerhetskopierat ditt seed, kommer du aldrig att kunna komma åt dina tillgångar igen.",
-  "logoutAction": "Ta bort seed och logga ut",
-  "logoutAreYouSure": "Är du säker?",
-  "logoutReassurance": "Så länge du har säkerhetskopierat ditt seed har du inget att oroa dig över.",
-  "settingsHeader": "Inställningar",
-  "preferences": "Inställningar",
-  "manage": "Förvaltning",
-  "backupSeed": "Säkerhetskopiera seed",
-  "fingerprintSeedBackup": "Bekräfta fingeravtryck för att säkerhetskopiera plånboks-seed.",
-  "pinSeedBackup": "Ange din PIN-kod för att se ditt seed.",
-  "systemDefault": "Systemfel",
-  "notifications": "Aviseringar",
-  "notificationTitle": "Mottog %1 NANO",
-  "notificationBody": "Öppna Nautilus för att visa transaktion.",
-  "notificationHeaderSupplement": "Tryck för att öppna",
-  "settingsTransfer": "Ladda från pappersplånbok",
-  "transferError": "Ett fel uppstod vid överföringen. Försök igen senare.",
-  "paperWallet": "Pappersplånbok",
-  "kaliumWallet": "Kaliumplånbok",
-  "manualEntry": "Ange manuellt",
-  "mnemonicPhrase": "Hemlig fras",
-  "rawSeed": "Seed",
-  "transferHeader": "Överför\nmedel",
-  "transfer": "Överför",
-  "transferManualHint": "Vänligen ange PIN nedan.",
-  "transferIntro": "Den här processen kommer att överföra tillgångar från en pappersplånbok till din Nautilus-plånbok.\n\nTryck på \"%1\" knappen för att starta.",
-  "transferQrScanHint": "Skanna en Nano \nseed eller en privat nyckel",
-  "transferQrScanError": "Denna QR-kod innehåller inget giltigt seed.",
-  "transferNoFunds": "Detta seed innehåller inga NANO.",
-  "transferConfirmInfo": "En plånbok med ett saldo på %1 NANO har upptäckts.\n",
-  "transferConfirmInfoSecond": "Tryck på bekräfta för att överföra tillgångar.\n",
-  "transferConfirmInfoThird": "Överföringen kan ta upp till flera sekunder att genomföras.",
-  "transferLoading": "Överför",
-  "transferComplete": "%1 NANO har överförts till din Nautilus-plånbok.",
-  "transferClose": "Tryck någonstans för att stänga fönstret.",
-  "scanInstructions": "Skanna en Nano\nadress QR-kod",
-  "unlockPin": "Ange PIN för att låsa upp Nautilus",
-  "unlockBiometrics": "Verifiera för att låsa upp Nautilus",
-  "lockAppSetting": "Verifiera vid uppstart",
-  "locked": "Låst",
-  "unlock": "Lås upp",
-  "tooManyFailedAttempts": "För många ogiltiga försök.",
-  "securityHeader": "Säkerhet",
-  "autoLockHeader": "Lås automatiskt",
-  "xMinutes": "Efter %1 minuter",
-  "xMinute": "Efter %1 minut",
-  "instantly": "Omedelbart",
-  "exampleCardIntro": "Välkommen till Nautilus. Så snart du tar emot NANO, visas transaktionerna på detta vis",
-  "exampleCardLittle": "Lite",
-  "exampleCardLot": "Många",
-  "exampleCardTo": "till någon",
-  "exampleCardFrom": "från någon",
-  "defaultAccountName": "Huvudkonto",
-  "defaultNewAccountName": "Konto %1",
-  "newAccountIntro": "Det här är ditt nya konto. Så snart du tar emot NANO, kommer transaktioner att se ut så här:",
+  "@@locale": "sv",
   "account": "Konto",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "Konton",
-  "addAccount": "Lägg till konto",
-  "hideAccountHeader": "Dölja konto?",
-  "removeAccountText": "Är du säker på att du vill dölja kontot? Du kan lägga till det igen genom att trycka på \"%1\" knappen.",
-  "tapToReveal": "Tryck för att visa",
-  "tapToHide": "Tryck för att dölja",
-  "copied": "Kopierad",
-  "copy": "Kopiera",
-  "seedDescription": "Ett seed innehåller samma information som en hemlig fras, men på ett maskinläsbart sätt. Så länge du har en utav dem sparad, har du åtkomst till dina tillgångar.",
-  "importSecretPhrase": "Importera hemlig fras",
-  "importSecretPhraseHint": "Ange din hemliga fras på 24 ord. Varje ord ska separeras med ett mellanslag.",
-  "qrMnemonicError": "QR innehåller ingen giltig hemlig fras",
-  "mnemonicInvalidWord": "%1 är inget giltigt ord",
-  "mnemonicSizeError": "En hemlig fras kan bara innehålla 24 ord",
-  "secretPhrase": "Hemlig fras",
-  "backupConfirmButton": "Jag har sparat den",
-  "secretInfoHeader": "Säkerheten först!",
-  "secretInfo": "På nästa skärm kommer du att se din hemliga fras. Det är ett lösenord för att komma åt dina tillgångar. Det är viktigt att du sparar ner den och aldrig delar den med någon.",
-  "secretWarning": "Om du tappar bort din enhet eller avinstallerar applikationen, behöver du din hemliga fras eller ditt seed för att återfå dina tillgångar!",
-  "gotItButton": "Jag fattar!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "Är du säker på att du har sparat ner din hemliga fras eller seed?",
-  "secretPhraseCopy": "Kopera hemlig fras",
-  "secretPhraseCopied": "Hemlig fras kopierad",
-  "import": "Importera",
-  "importSeedInstead": "Importera seed istället",
-  "switchToSeed": "Byt till seed",
-  "backupSecretPhrase": "Säkerhetskopiera hemlig fras",
-  "qrInvalidAddress": "QR-koden innehåller inte en giltig destination",
-  "qrInvalidPermissions": "Bevilja kameraåtkomst för att skanna QR-koder",
-  "qrUnknownError": "Kunde inte läse QR-kod",
-  "mantaError": "Kunde inte verifiera begäran",
-  "rootWarning": "Det verkar som att din enhet har \"rootats\", \"jailbreakats\" eller modififierats på ett sätt som kan äventyra säkerheten. Det är rekommenderat att du återställer din enhet till sitt ursprungliga tillstånd.",
-  "iUnderstandTheRisks": "Jag förstår riskerna",
-  "exit": "Tillbaka",
-  "setWalletPassword": "Ställ in plånbokslösenord",
-  "setPassword": "Ställ in lösenord",
-  "disableWalletPassword": "Avaktivera plånbokslösenord",
-  "encryptionFailedError": "Misslyckades med att ställa in ett lösenord",
-  "setPasswordSuccess": "Lösenordet har ställts in",
-  "disablePasswordSuccess": "Lösenordet har avaktiverats",
-  "createPasswordHint": "Ställ in ett lösenord",
-  "confirmPasswordHint": "Bekräfta lösenordet",
-  "enterPasswordHint": "Ange ditt lösenord",
-  "passwordsDontMatch": "Lösenorden stämmer ej överens",
-  "passwordBlank": "Lösenordsfältet kan ej lämnas tomt",
-  "invalidPassword": "Ogiltigt lösenord",
-  "passwordWillBeRequiredToOpenParagraph": "Lösenordet behövs för att öppna Nautilus.",
-  "passwordNoLongerRequiredToOpenParagraph": "Du behöver inte lösenord för att öppna Nautilus längre.",
-  "createPasswordFirstParagraph": "Du kan ställa in ett lösenord för att öka säkerheten för din plånbok.",
-  "createPasswordSecondParagraph": "Lösenord är valfritt och din plånbok kommer ändå att skyddas av din PIN-kod eller biometriskt.",
-  "createAPasswordHeader": "Ställ in ett lösenord.",
-  "createPasswordSheetHeader": "Ställ in",
-  "disablePasswordSheetHeader": "Avaktivera",
-  "requireAPasswordToOpenHeader": "Kräv lösenord för att öppna Nautilus?",
-  "noSkipButton": "Nej, hoppa över",
-  "yesButton": "Ja",
-  "nextButton": "Nästa",
-  "goBackButton": "Tillbaka",
-  "welcomeTextKal": "Välkommen till Kalium. För att fortsätta, behöver du skapa en ny plånbok eller importera en befintlig.",
-  "sendAmountConfirmKal": "Skicka %1 Banano?",
-  "currency": "Valuta",
-  "shareKalium": "Dela Kalium",
-  "shareKaliumText": "Prova Kalium! Bananos officiella mobilplånbok",
-  "logoutDetailKal": "Vid utloggning raderas ditt seed och all kaliumrelaterad data från denna enhet. Om du inte har säkerhetskopierat ditt seed, kommer du aldrig att kunna komma åt dina tillgångar igen.",
-  "notificationTitleKal": "Mottog %1 BANANO",
-  "notificationBodyKal": "Öppna Kalium för att visa transaktion.",
-  "transferIntroKal": "Den här processen kommer att överföra tillgångar från en pappersplånbok till din Kalium-plånbok.\n\nTryck på \"%1\" knappen för att starta.",
-  "transferQrScanHintKal": "Skanna ett Banano \nseed eller en privat nyckel",
-  "transferNoFundsKal": "Detta seed innehåller inga BANANO.",
-  "transferConfirmInfoKal": "En plånbok med ett saldo på %1 BANANO har upptäckts.\n",
-  "transferCompleteKal": "%1 BANANO har överförts till din Kalium-plånbok.",
-  "scanInstructionsKal": "Skanna en Banano\nadress QR-kod",
-  "unlockPinKal": "Ange PIN för att låsa upp Kalium",
-  "unlockBiometricsKal": "Verifiera för att låsa upp Kalium",
-  "exampleCardIntroKal": "Välkommen till Kalium. Så snart du tar emot BANANO, visas transaktionerna på detta vis",
-  "exampleCardToKal": "Till någon apa",
-  "exampleCardFromKal": "Från någon apa",
-  "newAccountIntroKal": "Det här är ditt nya konto. Så snart du tar emot BANANO, kommer transaktioner att se ut så här:",
-  "liveSupportButton": "Support",
-  "connectingHeader": "Ansluter",
-  "minimumSend": "Minsta möjliga belopp att skicka är %1 NANO",
-  "natricon": "Natrikon",
-  "pending": "pågående",
-  "unconfirmed": "obekräftade",
-  "messageHeader": "Meddelande",
-  "readMore": "Läs mer",
-  "ignore": "Ignorera",
-  "dismiss": "Avfärda",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
   "activeMessageHeader": "Aktivt Meddelande",
-  "blockExplorer": "Block Utforskare"
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "Lägg till konto",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "Blockera en användare",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "Lägg till kontakt",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "Lägg till favorit",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "Adress kopierad",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "Ange adress",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "Ange en destination",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "Ange ett användarnamn eller adress",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "Dela",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "Alias",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "Ange ett belopp",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "Frågade",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "Autentiseringsmetod",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "Automatisk import",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "Lås automatiskt",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "Jag har sparat den",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "Säkerhetskopiera hemlig fras",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "Säkerhetskopiera seed",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "Är du säker på att du har säkerhetskopierat din plånboks seed?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "Säkerhetskopiera ditt seed",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "Biometrik",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "% 1 blockerades framgångsrikt.",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "Användaren är redan blockerad!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "blockerad",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "Blockera en användare med ett känt alias eller adress. Alla meddelanden, transaktioner eller förfrågningar från dem kommer att ignoreras.",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "Blockerad info",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "Smeknamn redan använt!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Välj ett smeknamn",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "% 1 har avblockerats!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "Block Utforskare",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "Block Explorer Info",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "Vilket block explorer som ska användas för att visa transaktionsinformation",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "Blockera denna användare",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "Avbryt",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "Ändra valuta",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "Ändra logg",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "Byt representant",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "Ändra",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "Ange ny representant",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "Det här är redan din representant!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "Representanten är nu ändrad",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "Kontrollera tillgänglighet",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "Stäng",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "Bekräfta",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "Bekräfta lösenordet",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "Ansluter",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 har lagts till under kontakter!",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "Kontakten existerar redan",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "Kontakter",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "Ogiltigt kontaktnamn",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "Ange ett namn @",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "Det finns inga kontakter att exportera",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 har raderats från dina kontakter!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "Kontakter",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "Gick ej att importera kontakter",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "Lyckad import av %1 kontakter",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "Kopierad",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "Kopiera",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "Kopiera adress",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "Kopiera länk",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "Kopiera seed",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "Kopiera plånbokens adress till Urklipp",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "Ställ in ett lösenord.",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "Skapa presentkort",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "Skapa ett presentkort",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "Du kan ställa in ett lösenord för att öka säkerheten för din plånbok.",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "Ställ in ett lösenord",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "Lösenord är valfritt och din plånbok kommer ändå att skyddas av din PIN-kod eller biometriskt.",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "Ställ in",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "Skapa QR-kod",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "Skapa presentkort",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "Valuta",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "Valuta Läge",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "Valutaläge Info",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "Välj vilken enhet som ska visas i.\n1 nyano = 0,000001 NANO, eller \n1,000,000 nyano = 1 NANO",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "Aktiv representant",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "Dekryptering Fel!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "Huvudkonto",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "Konto %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "Ta bort",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "Avaktivera",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "Lösenordet har avaktiverats",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "Avaktivera plånbokslösenord",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "Avfärda",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "Ogiltigt domännamn",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "Redigera",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "Misslyckades med att ställa in ett lösenord",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "Ange adress",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "Ange belopp",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "Ange presentanteckning",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "Ange meddelande",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "Ange ditt lösenord",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "Ange ett användarnamn",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "Ange användare eller adress",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "från någon",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "Från någon apa",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "Välkommen till Nautilus. Så snart du tar emot NANO, visas transaktionerna på detta vis",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "Välkommen till Kalium. Så snart du tar emot BANANO, visas transaktionerna på detta vis",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "Lite",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "Många",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "till någon",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "Till någon apa",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "När du skickar eller tar emot en betalningsförfrågan, de dyker upp här så här med färgen och taggen på kortet som anger status. \n\nGrön indikerar att begäran har betalats.\nGul indikerar att förfrågan/ PM inte har betalad/läst.\nRött indikerar att begäran inte har lästs eller mottagits.\n\n Neutrala färgade kort utan belopp är bara meddelanden.",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "Några",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "Sushi",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "När du har skickat eller tagit emot en betalningsförfrågan visas de här:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "Hej vad händer?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "En hel del",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "Hyra",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "Grattis på födelsedagen!",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "Gas pengar",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "Tillbaka",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "misslyckades",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "Nautilus frånkopplad",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "Nautilus-servrar verkar vara frånkopplade, skicka och ta emot (utan anteckningar) bör fortfarande vara i drift men betalningsförfrågningar kanske inte går igenom\n\n Kom tillbaka senare eller starta om appen för att försöka igen",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "Favorit redan",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "favorit",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "Ogiltigt favoritnamn",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "Ange ett smeknamn",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "Välj ett namn för den här favoriten",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "% 1 har tagits bort från favoriter!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "favoriter",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "Dagens",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "Bekräfta fingeravtryck för att säkerhetskopiera plånboks-seed.",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "Från",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "uppfyllt",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "Du har en gåva!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "Tom gåva",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "Gåva belopp",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "Gåva från",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "Ladda ett digitalt presentkort med NANO! Ange ett belopp, och ett valfritt meddelande för mottagaren att se när de öppnar det!\n\nNär du väl har skapat får du en länk som du kan skicka till vem som helst, som när den öppnas automatiskt distribuerar pengarna till mottagaren efter installationen av Nautilus!\n\nOm mottagaren redan är en Nautilus-användare kommer de att få en uppmaning att överföra pengarna till sitt konto när länken öppnas",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "Present Meddelande",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "Tillbaka",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "Jag fattar!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "Gå till QR",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "Dölj",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "Dölja konto?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "Hem",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "Ignorera",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "Importera",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "Länken du klickade på innehåller lite nano, vill du importera den till den här plånboken, eller återbetala den till den som skickade den?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "Importera hemlig fras",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "Ange din hemliga fras på 24 ord. Varje ord ska separeras med ett mellanslag.",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "Importera seed",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "Ange ditt seed nedanför.",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "Importera seed istället",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "Importera plånbok",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "Omedelbart",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "Otillräckligt saldo",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "Ogiltig mottagaradress",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "Ogiltigt lösenord",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "Jag förstår riskerna",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "Kaliumplånbok",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "Språk",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "Kopierad länk",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "Support",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "Laddad",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "Laddad i",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "Verifiera vid uppstart",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "Låst",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "Logga ut",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "Ta bort seed och logga ut",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "Är du säker?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "Vid utloggning raderas ditt seed och all kaliumrelaterad data från denna enhet. Om du inte har säkerhetskopierat ditt seed, kommer du aldrig att kunna komma åt dina tillgångar igen.",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "Vid utloggning raderas ditt seed och all kaliumrelaterad data från denna enhet. Om du inte har säkerhetskopierat ditt seed, kommer du aldrig att kunna komma åt dina tillgångar igen.",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "Så länge du har säkerhetskopierat ditt seed har du inget att oroa dig över.",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "Förvaltning",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "Kunde inte verifiera begäran",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "Ange manuellt",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "Markera som betald",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "Markera som obetald",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "Memo skickas igen! Om mottagarens enhet fortfarande inte bekräftas kan mottagarens enhet vara offline.",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "Meddelande",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "Minsta möjliga belopp att skicka är %1 NANO",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 är inget giltigt ord",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "Hemlig fras",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "En hemlig fras kan bara innehålla 24 ord",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "Natrikon",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "Den här funktionen kräver att du har en längre transaktionshistorik för att förhindra skräppost.\n\nAlternativt kan du visa en QR-kod för någon att skanna.",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "Verifiering behövs",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "Det här är ditt nya konto. Så snart du tar emot NANO, kommer transaktioner att se ut så här:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "Det här är ditt nya konto. Så snart du tar emot BANANO, kommer transaktioner att se ut så här:",
+  "@newAccountIntroKal": {},
+  "newWallet": "Ny plånbok",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "Nästa",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "Nej",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "Det finns inga kontakter att exportera",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "Hittade inga kontakter att importera",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "Nod Status",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "Inga sökresultat!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "Nej, hoppa över",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "Öppna Nautilus för att visa transaktion.",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "Öppna Kalium för att visa transaktion.",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "Tryck för att öppna",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "För att den här funktionen ska fungera korrekt måste aviseringar vara aktiverade",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "Aviseringar",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "Mottog %1 NANO",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "Mottog %1 BANANO",
+  "@notificationTitleKal": {},
+  "notSent": "inte skickat",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "Nyanicon",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "Av",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "Ok",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "Onramp",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "På",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "Öppnade",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "betald",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "Pappersplånbok",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "Lösenordsfältet kan ej lämnas tomt",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "Du behöver inte lösenord för att öppna Nautilus längre.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "Lösenorden stämmer ej överens",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "Lösenordet behövs för att öppna Nautilus.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "Betala",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "Någon har begärt betalning från dig! kolla betalningssidan för mer info.",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "Betalningar",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "Betala denna begäran",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "pågående",
+  "@pending": {},
+  "pickFromList": "Välj från en lista",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "PIN-kod matchar ej",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "Bekräfta din PIN-kod",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "Skapa en 6-siffrig PIN-kod",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "Ange PIN-kod",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "Felaktig PIN-kod angiven",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "PIN",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "Ange PIN för att byta representant",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "Ange din PIN-kod för att se ditt seed.",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "Inställningar",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "Privatpolicy",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "Köp Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "QR-koden innehåller inte en giltig destination",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "Bevilja kameraåtkomst för att skanna QR-koder",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "QR-koden innehåller inget giltigt seed eller privatnyckel",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "QR innehåller ingen giltig hemlig fras",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "Kunde inte läse QR-kod",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "Betygsätt appen",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn't take more than a minute.",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "Seed",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "Läs mer",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "fordran",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "Ta emot",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "Mottagit",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "Få Minimum",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "Få minsta information",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "Ett minimibelopp att ta emot. Om en betalning eller begäran tas emot med ett belopp som är mindre än detta, det kommer att ignoreras.",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "Återbetalning",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "för",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "Registrering",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "Registrera användarnamn",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "Registrera ett användarnamn",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "Är du säker på att du vill dölja kontot? Du kan lägga till det igen genom att trycka på \"%1\" knappen.",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "Avblockera",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "Är du säker på att du vill avblockera% 1?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "Ta bort kontakt",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "Är du säker på att du vill radera %1?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "Ta bort favorit",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "En representant är ett konto som röstar för samsyn i nätverket. Rösträtten påverkas av saldot, och du kan delegera ditt saldo för att öka din rösträtt. Din representant har ingen befogenhet över dina resurser. Du bör välja en representant som har hög drifttid och är trovärdig.",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "Vad är en representant?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "Svara",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "Representanter",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "Förfrågan",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "Begäran% 1% 2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "Begärt",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "Begärd från",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "Begäran misslyckades: Den här användaren verkar inte ha Nautilus installerat eller har aviseringar inaktiverade.",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "Begär",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "Begär betalning",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "Det gick inte att skicka betalningsförfrågan, mottagarens enhet kan vara offline eller inte tillgänglig.",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "Begäran skickas igen! Om mottagarens enhet fortfarande inte bekräftas kan mottagarens enhet vara offline.",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "Kräv lösenord för att öppna Nautilus?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "Skicka detta memo igen",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "Återställ databasen",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "Är du säker på att du vill återställa den interna databasen? \n\nDetta kan lösa problem relaterade till uppdatering av appen, men kommer också att ta bort alla sparade inställningar. Detta kommer INTE att ta bort din plånboksfrö. Om du har problem bör du säkerhetskopiera ditt frö, installera om appen, och om problemet kvarstår gör du gärna en felrapport om github eller oenighet.",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "Försök igen",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "Det verkar som att din enhet har \"rootats\", \"jailbreakats\" eller modififierats på ett sätt som kan äventyra säkerheten. Det är rekommenderat att du återställer din enhet till sitt ursprungliga tillstånd.",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "Skanna en Nano\nadress QR-kod",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "Skanna en Banano\nadress QR-kod",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "Skanna QR-kod",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "Sök efter vad som helst",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "På nästa skärm kommer du att se din hemliga fras. Det är ett lösenord för att komma åt dina tillgångar. Det är viktigt att du sparar ner den och aldrig delar den med någon.",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "Säkerheten först!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "Hemlig fras",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "Hemlig fras kopierad",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "Kopera hemlig fras",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "Om du tappar bort din enhet eller avinstallerar applikationen, behöver du din hemliga fras eller ditt seed för att återfå dina tillgångar!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "Säkerhet",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "Seed",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "Detta är din plånboks seed. Det är av extrem vikt att du sparar detta seed på ett säkert sätt. Spara aldrig ditt seed i text- eller bildformat.",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "Ditt seed är kopierat till urklipp.\n Det går att klistra in under 2 minuter.",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "Seed kopierad",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "Ett seed innehåller samma information som en hemlig fras, men på ett maskinläsbart sätt. Så länge du har en utav dem sparad, har du åtkomst till dina tillgångar.",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "Angivet seed är ogiltigt",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "Kan inte begära från sig själv",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "Skicka",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "Skicka %1 Nano?",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "Skicka %1 Banano?",
+  "@sendAmountConfirmKal": {},
+  "sendError": "Ett fel inträffade. Försök igen senare.",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "Skicka från",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "Skickar",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "Att skicka memo med transaktion misslyckades, de kanske inte är en Nautilus-användare.",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "Skicka meddelande",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "Skicka förfrågan igen",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "Skicka eller begär en betalning, med krypterade meddelanden från slut till slut!\n\nBetalningsförfrågningar, PM, och meddelanden kommer endast att tas emot av andra nautilus-användare.\n\nDu behöver inte ha ett användarnamn för att skicka eller ta emot betalningsförfrågningar, och du kan använda dem för din egen journalföring även om de inte använder nautilus.",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "Skicka arkinformation",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "Skickat",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "Skickat till",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "Ställ in lösenord",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "Lösenordet har ställts in",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "Inställningar",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "Ladda från pappersplånbok",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "Ställ in plånbokslösenord",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "Dela Kalium",
+  "@shareKalium": {},
+  "shareKaliumText": "Prova Kalium! Bananos officiella mobilplånbok",
+  "@shareKaliumText": {},
+  "shareLink": "Dela länk",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "Dela Nautilus",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "Kolla in Nautilus! Nanos officiella Androidplånbok!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "Visa kontakter",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "Simplex",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "Stöd utvecklaren",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "Byt till seed",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "Systemfel",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "Tryck för att dölja",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "Tryck för att visa",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "Tema",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "Till",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "För många ogiltiga försök.",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "Transaktioner",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "Överför",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "Tryck någonstans för att stänga fönstret.",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 NANO har överförts till din Nautilus-plånbok.",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "%1 BANANO har överförts till din Kalium-plånbok.",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "En plånbok med ett saldo på %1 NANO har upptäckts.\n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "En plånbok med ett saldo på %1 BANANO har upptäckts.\n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "Tryck på bekräfta för att överföra tillgångar.\n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "Överföringen kan ta upp till flera sekunder att genomföras.",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "Ett fel uppstod vid överföringen. Försök igen senare.",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "Överför\nmedel",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "Den här processen kommer att överföra tillgångar från en pappersplånbok till din Nautilus-plånbok.\n\nTryck på \"%1\" knappen för att starta.",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "Den här processen kommer att överföra tillgångar från en pappersplånbok till din Kalium-plånbok.\n\nTryck på \"%1\" knappen för att starta.",
+  "@transferIntroKal": {},
+  "transferIntroShort": "Denna process överför pengarna från en pappersplånbok till din Nautilus plånbok.",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "Överför",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "Vänligen ange PIN nedan.",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "Detta seed innehåller inga NANO.",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "Detta seed innehåller inga BANANO.",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "Denna QR-kod innehåller inget giltigt seed.",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "Skanna en Nano \nseed eller en privat nyckel",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "Skanna ett Banano \nseed eller en privat nyckel",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "obekräftad",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "obekräftade",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "ouppfyllda",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "Lås upp",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "Verifiera för att låsa upp Nautilus",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "Verifiera för att låsa upp Kalium",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "Ange PIN för att låsa upp Nautilus",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "Ange PIN för att låsa upp Kalium",
+  "@unlockPinKal": {},
+  "unpaid": "obetald",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "oläst",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "Upptid",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "Du har redan registrerat ett användarnamn! Det är för närvarande inte möjligt att ändra ditt användarnamn, men du är fri att registrera en ny under en annan adress.",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "Användarnamn tillgängligt!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "Ange ett användarnamn",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "Användarnamn Fel",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "Välj ut en unik @username för att göra det enkelt för vänner och familj att hitta dig!\n\nAtt ha ett Nautilus-användarnamn uppdaterar användargränssnittet globalt för att återspegla ditt nya handtag.",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "Ogiltigt användarnamn",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "Användarnamn är inte tillgängligt",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Nautilus användarnamn är en centraliserad tjänst som tillhandahålls av Nano.to",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "Användaren hittades inte!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "Visa detaljer",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "Röstvikt",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "Varning",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "Välkommen till Nautilus. För att fortsätta, behöver du skapa en ny plånbok eller importera en befintlig.",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "Välkommen till Kalium. För att fortsätta, behöver du skapa en ny plånbok eller importera en befintlig.",
+  "@welcomeTextKal": {},
+  "withAddress": "Med adress",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "Med Meddelande",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "Efter %1 minut",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "Efter %1 minuter",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "Ja",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "Ja",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

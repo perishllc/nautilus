@@ -1,235 +1,1951 @@
 {
-  "cancel": "रद्द करें",
-  "close": "बंद करें",
-  "confirm": "पुष्टि करें",
-  "no": "नहीं",
-  "yes": "हाँ",
-  "onStr": "चालू",
-  "off": "बंद",
-  "send": "भेजें",
-  "receive": "प्राप्त करें",
-  "sent": "भेजे -",
-  "received": "मिले -",
-  "transactions": "लेनदेन",
-  "addressCopied": "पता कॉपी हो गया है",
-  "copyAddress": "पता कॉपी करें",
-  "addressShare": "शेयर करें",
-  "addressHint": "पता लिखिए",
-  "seed": "सीड",
-  "seedInvalid": "सीड अमान्य है",
-  "seedCopied": "आपका सीड क्लिपबोर्ड में कॉपी हो गया है।  इसे अगले 2 मिनट तक पेस्ट किया जा सकता है।",
-  "scanQrCode": "क्यूआर कोड स्कैन करें",
-  "contactsImportErr": "संपर्क आयात नहीं हो सकें",
-  "viewDetails": "अधिक जानकारी देखें",
-  "qrInvalidSeed": "क्यूआर कोड में वैध सीड या निजी कुंजी नहीं है",
-  "removeContact": "संपर्क हटाएं",
-  "removeContactConfirmation": "क्या आप वाकई %1 को संपर्कों में से मिटाना चाहतें हैं?",
-  "contactHeader": "संपर्क -",
-  "contactsHeader": "संपर्क",
-  "addContact": "संपर्क डालें",
-  "contactNameHint": "संपर्क का @नाम डालें",
-  "contactInvalid": "संपर्क के नाम में गलती है",
-  "noContactsExport": "निर्यात करने के लिए कोई संपर्क नहीं हैं।",
-  "noContactsImport": "आयात करने के लिए कोई संपर्क नहीं मिले।",
-  "contactsImportSuccess": "%1 संपर्क सफलतापूर्वक आयात हो गए हैं।",
-  "contactAdded": "%1 अब आपके सम्पर्को में है।",
-  "contactRemoved": "%1 का नाम संपर्कों में से हट दिया गया है!",
-  "contactNameMissing": "इस संपर्क के लिए एक नाम चुनें",
-  "contactExists": "इस संपर्क का नाम पहले से मौजूद है",
-  "backupYourSeed": "सीड बैकअप करें",
-  "backupSeedConfirm": "क्या आप निश्चित है की आपने अपने वॉलेट का सीड बैकअप कर लिया है?",
-  "seedBackupInfo": "नीचे आपके वॉलेट का सीड है। इसका बैकअप करना आवश्यक है। कृपया इसे हमेशा सुरक्षित रखें और टेक्स्ट या स्क्रीनशॉट के रूप में हरगिज़ न रखें।",
-  "copySeed": "सीड कॉपी करें",
-  "seedCopiedShort": "सीड कॉपी हो गया",
-  "importSeed": "सीड इम्पोर्ट करें",
-  "importSeedHint": "कृपया नीचे अपना सीड दर्ज करें।",
-  "welcomeText": "नेट्रियम में आपका स्वागत है। आगे बढ़ने के लिए, आप एक नया वॉलेट बना सकते हैं या एक मौजूदा वॉलेट को आयात कर सकते हैं।",
-  "newWallet": "नया वॉलेट",
-  "importWallet": "वॉलेट आयात हैं",
-  "sentTo": "इसको भेजा गया -",
-  "sending": "भेजा जा रहा है -",
-  "to": "इसको -",
-  "sendAmountConfirm": "%1 बनानो भेजें ?",
-  "sendError": "एक त्रुटि पाई गई। बाद में पुन: प्रयास करें।",
-  "enterAmount": "राशि दर्ज करें",
-  "enterAddress": "पता दर्ज करें",
-  "invalidAddress": "गलत गंतव्य पता",
-  "addressMissing": "कृपया एक पता दर्ज करें",
-  "amountMissing": "कृपया राशि दर्ज करें",
-  "insufficientBalance": "अपर्याप्त शेष राशि (बैलेंस)",
-  "sendFrom": "भेजने का पता -",
-  "pinCreateTitle": "एक 6 अंकों का पिन बनाएँ",
-  "pinConfirmTitle": "अपने पिन को दोबारा लिखें",
-  "pinEnterTitle": "पिन दर्ज करें",
-  "pinConfirmError": "पिन एक दूसरे से नहीं मिल रहे",
-  "pinInvalid": "गलत पिन दर्ज किया गया",
-  "themeHeader": "थीम",
-  "changeRepButton": "बदलें",
-  "changeRepAuthenticate": "प्रतिनिधि बदलें",
-  "currentlyRepresented": "वर्तमान प्रतिनिधि ",
-  "changeRepSucces": "प्रतिनिधि सफलतापूर्वक बदल गया",
-  "repInfoHeader": "प्रतिनिधि क्या होता है?",
-  "repInfo": "प्रतिनिधि एक खाता है जो नेटवर्क सर्वसम्मति के लिए वोट देता है। हर प्रतिनिधि की मतदान शक्ति उसे चुनने वालों की कुल धनराशि पर निर्भर है। आप किसी भी समय एक भरोसेमंद प्रतिनिधि को चुन कर, अपनी धनराशि से उस प्रतिनिधि की मतदान शक्ति बढ़ा सकते हैं। आपके प्रतिनिधि को आपका धन खर्च करने का अधिकार नहीं है। आपको ऐसा प्रतिनिधि चुनना चाहिए जो भरोसेमंद हो और अधिकतर उपस्थित रहे।",
-  "pinRepChange": "प्रतिनिधि बदलने के लिए पिन दर्ज करें",
-  "changeRepHint": "नए प्रतिनिधि का पता दर्ज करें",
-  "representatives": "प्रतिनिधि",
-  "pickFromList": "सूची से चुनें",
-  "votingWeight": "मतदान भार",
-  "uptime": "सक्रिय रहने की अवधि",
-  "authMethod": "प्रमाणीकरण का तरीका",
-  "pinMethod": "पिन",
-  "privacyPolicy": "गोपनीयता नीति",
-  "biometricsMethod": "बॉयोमेट्रिक्स",
-  "changeCurrency": "मुद्रा बदलें",
-  "language": "भाषा",
-  "shareNautilus": "शेयर नैट्रियम",
-  "shareNautilusText": "नैट्रियम की जाँच करें! एक प्रमुख नैनो मोबाइल वॉलेट!",
-  "logout": "लॉगआउट करें",
-  "warning": "चेतावनी !",
-  "logoutDetail": "लॉगआउट करने पर आपके सीड और नेट्रियम से संबंधित सभी डेटा हट जाएंगे। यदि आपने अपने सीड को बैकअप नहीं किया, तो आप कभी भी अपने धन का उपयोग नहीं कर पाएंगे।",
-  "logoutAction": "सीड मिटा कर लॉगआउट करें",
-  "logoutAreYouSure": "क्या आप निश्चित हैं?",
-  "logoutReassurance": "अगर आपने अपने सीड को बैकअप कर लिया है, तो आपको चिंता करने की कोई आवश्यकता नहीं है।",
-  "settingsHeader": "सेटिंग्स",
-  "preferences": "पसंद | प्रेफरेन्सेस",
-  "manage": "प्रबंधन | मैनेज",
-  "backupSeed": "सीड बैकअप करें",
-  "fingerprintSeedBackup": "उंगली के निशान की सहायता से सीड बैकअप करें।",
-  "pinSeedBackup": "वॉलेट के सीड को बैकअप  के लिए पिन दर्ज करें।",
-  "systemDefault": "डिवाइस की भाषा",
-  "notifications": "सूचनाएं",
-  "notificationTitle": "%1 बनानो प्राप्त हुए",
-  "notificationBody": "इस लेनदेन को देखने के लिए नेट्रियम खोलें",
-  "notificationHeaderSupplement": "ऐप्प खोलने के लिए छुएं",
-  "settingsTransfer": "पेपर वॉलेट से लोड करें",
-  "transferError": "लेन-देन के दौरान एक त्रुटि हुई है। कृपया बाद में पुन: प्रयास करें।",
-  "paperWallet": "पेपर वॉलेट",
-  "kaliumWallet": "कलियम वॉलेट",
-  "manualEntry": "हस्त प्रविष्टि",
-  "mnemonicPhrase": "स्मरक वाक्यांश",
-  "rawSeed": "सीड",
-  "transferHeader": "धनराशि का ट्रांसफर",
-  "transfer": "ट्रांसफर",
-  "transferManualHint": "कृपया नीचे सीड दर्ज करें।",
-  "transferIntro": "यह प्रक्रिया एक पेपर वॉलेट से आपके नैट्रियम वॉलेट में फंड ट्रांसफर कर देगी। \n\nशुरू करने के लिए \"% 1\" बटन को दबाएँ।",
-  "transferQrScanHint": "नैनो का सीड \nया निजी कुंजी स्कैन करें",
-  "transferQrScanError": "इस क्यूआर कोड में वैध सीड नहीं है।",
-  "transferNoFunds": "इस सीड पर कोई नैनो नहीं है",
-  "transferConfirmInfo": "% 1 नैनो के बैलेंस वाले वॉलेट का पता चला है \n",
-  "transferConfirmInfoSecond": "फंड ट्रांसफर करने के लिए कन्फर्म दबाएँ \n",
-  "transferConfirmInfoThird": "स्थानांतरण को पूरा होने में कई सेकंड लग सकते हैं।",
-  "transferLoading": "ट्रांसफर हो रहा है",
-  "transferComplete": "%1 नैनो सफलतापूर्वक आपके नैट्रियम वॉलेट में स्थानांतरित कर दी गई है। \n",
-  "transferClose": "विंडो बंद करने के लिए कहीं भी टैप करें।",
-  "scanInstructions": "बनानो के पते का \nक्यू आर कोड स्कैन करें ",
-  "unlockPin": "नैट्रियम अनलॉक करने के लिए पिन दर्ज करें",
-  "unlockBiometrics": "नैट्रियम अनलॉक करने के लिए प्रमाणित करें",
-  "lockAppSetting": "लॉन्च पर प्रमाणित करें",
-  "locked": "अवरोधित",
-  "unlock": "खोले",
-  "tooManyFailedAttempts": "खोलने के बहुत से असफल प्रयास।",
-  "securityHeader": "सुरक्षा",
-  "autoLockHeader": "खुद ब खुद बंद",
-  "xMinutes": "%1 मिनट के बाद",
-  "xMinute": "%1 मिनट के बाद",
-  "instantly": "तुरन्त",
-  "exampleCardIntro": "नेट्रियम में आपका स्वागत है। बनानो प्राप्त करने पर सभी लेनदेन इस तरह नीचे दिखाई देंगे -",
-  "exampleCardLittle": "थोड़े से",
-  "exampleCardLot": "बहुत सारे",
-  "exampleCardTo": "अजनबी बंदर को",
-  "exampleCardFrom": "अजनबी बंदर से",
-  "defaultAccountName": "मुख्य खाता",
-  "defaultNewAccountName": "खाता %1",
-  "newAccountIntro": "यह आपका नया खाता है। एक बार जब आप नैनो प्राप्त कर लेते हैं, तो लेनदेन इस तरह दिखाई देंगे:",
+  "@@locale": "hi",
   "account": "खाता",
+  "@account": {
+    "type": "text",
+    "description": "Account text"
+  },
   "accounts": "खाते",
-  "addAccount": "खाता जोड़ो",
-  "hideAccountHeader": "खाता छुपाएं?",
-  "removeAccountText": "क्या आप वाकई इस खाते को छिपाना चाहते हैं? आप इसे बाद में \"%1\" बटन को दबा के फिर से जोड़ सकते हैं।",
-  "tapToReveal": "प्रकट करने के लिए दबाएँ",
-  "tapToHide": "छिपाने के लिए दबाएँ",
-  "copied": "कॉपी हो गया",
-  "copy": "कॉपी",
-  "seedDescription": "एक सीड एक गुप्त वाक्यांश के रूप में एक ही जानकारी रखता है, लेकिन एक मशीन-पठनीय तरीके से। जब तक आपने उनमें से किसी एक का बैकअप लिया है, तब तक आपके पास अपने फंड तक पहुंच होगी।",
-  "importSecretPhrase": "गुप्त वाक्यांश आयात करें",
-  "importSecretPhraseHint": "कृपया अपना 24-शब्द गुप्त वाक्यांश नीचे दर्ज करें। प्रत्येक शब्द को एक स्थान से अलग किया जाना चाहिए।",
-  "qrMnemonicError": "क्यूआर में एक वैध गुप्त वाक्यांश नहीं है",
-  "mnemonicInvalidWord": "%1 मान्य शब्द नहीं है",
-  "mnemonicSizeError": "गुप्त वाक्यांश में केवल 24 शब्द हो सकते हैं",
-  "secretPhrase": "गुप्त वाक्यांश",
-  "backupConfirmButton": "मैंने इसका बैकअप कर लिया है",
-  "secretInfoHeader": "सुरक्षा पहले!",
-  "secretInfo": "अगली स्क्रीन में, आप अपना गुप्त वाक्यांश देखेंगे। यह आपके फंड तक पहुंचने के लिए एक पासवर्ड है। यह महत्वपूर्ण है कि आप इसका बैकअप लें और इसे कभी किसी के साथ साझा न करें।",
-  "secretWarning": "यदि आप अपना उपकरण खो देते हैं या एप्लिकेशन को अनइंस्टॉल कर देते हैं, तो आपको अपने फंड को पुनर्प्राप्त करने के लिए अपने गुप्त वाक्यांश या सीड की आवश्यकता होगी!",
-  "gotItButton": "समझ गया!",
+  "@accounts": {
+    "type": "text",
+    "description": "Accounts header"
+  },
   "ackBackedUp": "क्या आप सुनिश्चित हैं कि आपने अपने गुप्त वाक्यांश या सीड का बैकअप ले लिया है?",
-  "secretPhraseCopy": "गुप्त वाक्यांश कॉपी करें",
-  "secretPhraseCopied": "गुप्त वाक्यांश कॉपी किया गया हैं",
-  "import": "आयात",
-  "importSeedInstead": "इसके बजाय सीड आयात करें",
-  "switchToSeed": "सीड पर स्विच करें",
-  "backupSecretPhrase": "गुप्त वाक्यांश बैकअप करें",
-  "qrInvalidAddress": "क्यूआर कोड में मान्य गंतव्य नहीं है",
-  "qrInvalidPermissions": "कृपया क्यूआर कोड स्कैन करने के लिए कैमरा अनुमति दें",
-  "qrUnknownError": "क्यूआर कोड नहीं पढ़ सके",
-  "mantaError": "अनुरोध सत्यापित नहीं कर सके",
-  "rootWarning": "ऐसा प्रतीत होता है कि आपका डिवाइस \"रूटेड\", \"जेलब्रोकन\" है, या सुरक्षा से समझौता करने वाले तरीके से संशोधित है। यह अनुशंसा की जाती है कि आप आगे बढ़ने से पहले अपने डिवाइस को उसकी मूल स्थिति में रीसेट कर दें।",
-  "iUnderstandTheRisks": "मैं जोखिमो को समझता हूँ",
-  "exit": "बाहर निकलें",
-  "setWalletPassword": "वॉलेट पासवर्ड सेट करें",
-  "setPassword": "पासवर्ड सेट करें",
-  "disableWalletPassword": "वॉलेट पासवर्ड अक्षम करें",
-  "encryptionFailedError": "वॉलेट पासवर्ड सेट करने में विफल",
-  "setPasswordSuccess": "पासवर्ड सफलतापूर्वक सेट कर दिया गया है",
-  "disablePasswordSuccess": "पासवर्ड अक्षम कर दिया गया है",
-  "createPasswordHint": "एक पासवर्ड बनाएं",
-  "confirmPasswordHint": "पासवर्ड की पुष्टि करें",
-  "enterPasswordHint": "अपना पासवर्ड डालें",
-  "passwordsDontMatch": "पासवर्ड मेल नहीं खाते",
-  "passwordBlank": "पासवर्ड खाली नहीं हो सकता",
-  "invalidPassword": "अवैध पासवर्ड",
-  "passwordWillBeRequiredToOpenParagraph": "नैट्रियम खोलने के लिए इस पासवर्ड की आवश्यकता होगी।",
-  "passwordNoLongerRequiredToOpenParagraph": "अब आपको नाट्रियम खोलने के लिए पासवर्ड की जरूरत नहीं पड़ेगी।",
-  "createPasswordFirstParagraph": "आप अपने वॉलेट में अतिरिक्त सुरक्षा जोड़ने के लिए एक पासवर्ड बना सकते हैं।",
-  "createPasswordSecondParagraph": "पासवर्ड वैकल्पिक है, और आपका वॉलेट आपके पिन या बायोमेट्रिक्स से सुरक्षित रहेगा ही।",
-  "createAPasswordHeader": "एक पासवर्ड बनाएं।",
-  "createPasswordSheetHeader": "बनाएं",
-  "disablePasswordSheetHeader": "अक्षम",
-  "requireAPasswordToOpenHeader": "नेट्रियम खोलने के लिए पासवर्ड की आवश्यकता रखें?",
-  "noSkipButton": "नहीं, छोड़ें",
-  "yesButton": "हाँ",
-  "nextButton": "अगला",
-  "goBackButton": "वापस जाओ",
-  "welcomeTextKal": "केलियम में आपका स्वागत है। आगे बढ़ने के लिए, आप एक नया वॉलेट बना सकते हैं या एक मौजूदा वॉलेट खोल सकते हैं।",
-  "sendAmountConfirmKal": "%1 बनानो भेजें ?",
-  "currency": "मुद्रा",
-  "shareKalium": "शेयर कलियम",
-  "shareKaliumText": "कॉलियम को देखें! बनानो का आधिकारिक मोबाइल वॉलेट!",
-  "logoutDetailKal": "लॉगआउट करने पर आपके  सीड और केलियम से संबंधित सभी डेटा हट जाएंगे। यदि आपने अपने सीड को बैकअप नहीं किया, तो आप कभी भी अपने धन का उपयोग नहीं कर पाएंगे।",
-  "notificationTitleKal": "%1 बनानो प्राप्त हुए",
-  "notificationBodyKal": "इस लेनदेन को देखने के लिए केलियम खोलें",
-  "transferIntroKal": "यह प्रक्रिया एक पेपर वॉलेट से आपके कलियम वॉलेट में धनराशि स्थानांतरित कर देगी।\n\nशुरू करने के लिए \"%1\" बटन को दबाएँ।",
-  "transferQrScanHintKal": "बनानो का सीड या \nनिजी कुंजी स्कैन करें",
-  "transferNoFundsKal": "इस सीड पर कोई बनानो नहीं है",
-  "transferConfirmInfoKal": "%1 बनानो  के बैलेंस वाले वॉलेट का पता चला है। \n",
-  "transferCompleteKal": "% 1 BANANO सफलतापूर्वक आपके कलियम वॉलेट में स्थानांतरित हो गया \n",
-  "scanInstructionsKal": "बनानो के पते का \nक्यू आर कोड स्कैन करें",
-  "unlockPinKal": "कलियम अनलॉक करने के लिए पिन दर्ज करें",
-  "unlockBiometricsKal": "कलियम अनलॉक करने के लिए प्रमाणित करें",
-  "exampleCardIntroKal": "केलियम में आपका स्वागत है। बनानो प्राप्त करने पर सभी लेनदेन इस तरह नीचे दिखाई देंगे -",
-  "exampleCardToKal": "अजनबी बंदर को",
-  "exampleCardFromKal": "अजनबी बंदर से",
-  "newAccountIntroKal": "यह आपका नया खाता है। एक बार जब आप बनानो प्राप्त कर लेते हैं, तो लेनदेन इस तरह दिखाई देंगे:",
-  "liveSupportButton": "सहायता",
-  "connectingHeader": "कनेक्ट हो रहा ह",
-  "minimumSend": "न्यूनतम प्रेषण राशि %1 नैनो है",
-  "natricon": "नैट्रिकोन",
-  "pending": "अपूर्ण",
-  "unconfirmed": "अपुष्ट",
-  "messageHeader": "संदेश",
-  "readMore": "और पढ़ें",
-  "ignore": "नज़रअंदाज़ करना",
-  "dismiss": "खारिज",
+  "@ackBackedUp": {
+    "type": "text",
+    "description": "Ack backed up"
+  },
   "activeMessageHeader": "सक्रिय संदेश",
-  "blockExplorer": "ब्लॉक एक्सप्लोरर"
+  "@activeMessageHeader": {
+    "type": "text",
+    "description": "active_message"
+  },
+  "addAccount": "खाता जोड़ो",
+  "@addAccount": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "addBlocked": "उपयोगकर्ता को अवरोधित करें",
+  "@addBlocked": {
+    "type": "text",
+    "description": "blocked_add_button"
+  },
+  "addContact": "संपर्क डालें",
+  "@addContact": {
+    "type": "text",
+    "description": "contact_add_button"
+  },
+  "addFavorite": "पसंदीदा जोड़ें",
+  "@addFavorite": {
+    "type": "text",
+    "description": "favorite_add_button"
+  },
+  "addressCopied": "पता कॉपी हो गया है",
+  "@addressCopied": {
+    "type": "text",
+    "description": "receive_copied"
+  },
+  "addressHint": "पता लिखिए",
+  "@addressHint": {
+    "type": "text",
+    "description": "send_address_hint"
+  },
+  "addressMissing": "कृपया एक पता दर्ज करें",
+  "@addressMissing": {
+    "type": "text",
+    "description": "send_enter_address"
+  },
+  "addressOrUserMissing": "कृपया उपयोगकर्ता नाम या पता दर्ज करें",
+  "@addressOrUserMissing": {
+    "type": "text",
+    "description": "send_enter_user_address"
+  },
+  "addressShare": "शेयर करें",
+  "@addressShare": {
+    "type": "text",
+    "description": "receive_share_cta"
+  },
+  "aliases": "फर्जी नाम",
+  "@aliases": {
+    "type": "text",
+    "description": "card_details_aliases"
+  },
+  "amountMissing": "कृपया राशि दर्ज करें",
+  "@amountMissing": {
+    "type": "text",
+    "description": "send_enter_amount"
+  },
+  "asked": "पूछे जाने पर",
+  "@asked": {
+    "type": "text",
+    "description": "home_asked_cta"
+  },
+  "authMethod": "प्रमाणीकरण का तरीका",
+  "@authMethod": {
+    "type": "text",
+    "description": "settings_disable_fingerprint"
+  },
+  "autoImport": "स्वतः आयात",
+  "@autoImport": {
+    "type": "text",
+    "description": "auto_import"
+  },
+  "autoLockHeader": "खुद ब खुद बंद",
+  "@autoLockHeader": {
+    "type": "text",
+    "description": "auto_lock_header"
+  },
+  "backupConfirmButton": "मैंने इसका बैकअप कर लिया है",
+  "@backupConfirmButton": {
+    "type": "text",
+    "description": "Has backed up seed confirmation button"
+  },
+  "backupSecretPhrase": "गुप्त वाक्यांश बैकअप करें",
+  "@backupSecretPhrase": {
+    "type": "text",
+    "description": "backup seed"
+  },
+  "backupSeed": "सीड बैकअप करें",
+  "@backupSeed": {
+    "type": "text",
+    "description": "settings_backup_seed"
+  },
+  "backupSeedConfirm": "क्या आप निश्चित है की आपने अपने वॉलेट का सीड बैकअप कर लिया है?",
+  "@backupSeedConfirm": {
+    "type": "text",
+    "description": "intro_new_wallet_backup"
+  },
+  "backupYourSeed": "सीड बैकअप करें",
+  "@backupYourSeed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_backup_header"
+  },
+  "biometricsMethod": "बॉयोमेट्रिक्स",
+  "@biometricsMethod": {
+    "type": "text",
+    "description": "settings_fingerprint_method"
+  },
+  "blockedAdded": "% 1 सफलतापूर्वक ब्लॉक किया गया।",
+  "@blockedAdded": {
+    "type": "text",
+    "description": "blocked_added"
+  },
+  "blockedExists": "उपयोगकर्ता पहले ही अवरुद्ध है!",
+  "@blockedExists": {
+    "type": "text",
+    "description": "user_already_blocked"
+  },
+  "blockedHeader": "अवरोधित",
+  "@blockedHeader": {
+    "type": "text",
+    "description": "blocked_header"
+  },
+  "blockedInfo": "किसी ज्ञात एलियास या पते से उपयोगकर्ता को अवरोधित करें। उनके द्वारा किए गए किसी भी संदेश, लेनदेन या अनुरोध को अनदेखा कर दिया जाएगा।",
+  "@blockedInfo": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedInfoHeader": "अवरोधित जानकारी",
+  "@blockedInfoHeader": {
+    "type": "text",
+    "description": "blocked_info"
+  },
+  "blockedNameExists": "निक नाम पहले से इस्तेमाल किया गया है!",
+  "@blockedNameExists": {
+    "type": "text",
+    "description": "blocked_name_used"
+  },
+  "blockedNameMissing": "Nick नाम चुनें",
+  "@blockedNameMissing": {
+    "type": "text",
+    "description": "blocked_name_missing"
+  },
+  "blockedRemoved": "% 1 को अनब्लॉक कर दिया गया है!",
+  "@blockedRemoved": {
+    "type": "text",
+    "description": "blocked_removed"
+  },
+  "blockExplorer": "ब्लॉक एक्सप्लोरर",
+  "@blockExplorer": {
+    "type": "text",
+    "description": "settings_change_block_explorer"
+  },
+  "blockExplorerHeader": "एक्सप्लोरर जानकारी को ब्लॉक करें",
+  "@blockExplorerHeader": {
+    "type": "text",
+    "description": "block_explorer"
+  },
+  "blockExplorerInfo": "लेनदेन की जानकारी प्रदर्शित करने के लिए किस ब्लॉक एक्सप्लोरर का उपयोग करना है",
+  "@blockExplorerInfo": {
+    "type": "text",
+    "description": "block_explorer_info"
+  },
+  "blockUser": "इस उपयोक्ता को ब्लॉक करें",
+  "@blockUser": {
+    "type": "text",
+    "description": "block_user"
+  },
+  "cancel": "रद्द करें",
+  "@cancel": {
+    "type": "text",
+    "description": "dialog_cancel"
+  },
+  "changeCurrency": "मुद्रा बदलें",
+  "@changeCurrency": {
+    "type": "text",
+    "description": "settings_local_currency"
+  },
+  "changeLog": "लॉग बदलें",
+  "@changeLog": {
+    "type": "text",
+    "description": "change_log_header"
+  },
+  "changeRepAuthenticate": "प्रतिनिधि बदलें",
+  "@changeRepAuthenticate": {
+    "type": "text",
+    "description": "settings_change_rep"
+  },
+  "changeRepButton": "बदलें",
+  "@changeRepButton": {
+    "type": "text",
+    "description": "change_representative_change"
+  },
+  "changeRepHint": "नए प्रतिनिधि का पता दर्ज करें",
+  "@changeRepHint": {
+    "type": "text",
+    "description": "change_representative_hint"
+  },
+  "changeRepSame": "यह पहले से ही आपका प्रतिनिधि है!",
+  "@changeRepSame": {
+    "type": "text",
+    "description": "change_representative_same"
+  },
+  "changeRepSucces": "प्रतिनिधि सफलतापूर्वक बदल गया",
+  "@changeRepSucces": {
+    "type": "text",
+    "description": "change_representative_success"
+  },
+  "checkAvailability": "उपलब्धता जाँचें",
+  "@checkAvailability": {
+    "type": "text",
+    "description": "check_availability"
+  },
+  "close": "बंद करें",
+  "@close": {
+    "type": "text",
+    "description": "dialog_close"
+  },
+  "confirm": "पुष्टि करें",
+  "@confirm": {
+    "type": "text",
+    "description": "dialog_confirm"
+  },
+  "confirmPasswordHint": "पासवर्ड की पुष्टि करें",
+  "@confirmPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the password"
+  },
+  "connectingHeader": "कनेक्ट हो रहा ह",
+  "@connectingHeader": {
+    "type": "text",
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "contactAdded": "%1 अब आपके सम्पर्को में है।",
+  "@contactAdded": {
+    "type": "text",
+    "description": "contact_added"
+  },
+  "contactExists": "इस संपर्क का नाम पहले से मौजूद है",
+  "@contactExists": {
+    "type": "text",
+    "description": "contact_name_exists"
+  },
+  "contactHeader": "संपर्क -",
+  "@contactHeader": {
+    "type": "text",
+    "description": "contact_view_header"
+  },
+  "contactInvalid": "संपर्क के नाम में गलती है",
+  "@contactInvalid": {
+    "type": "text",
+    "description": "contact_invalid_name"
+  },
+  "contactNameHint": "संपर्क का @नाम डालें",
+  "@contactNameHint": {
+    "type": "text",
+    "description": "contact_name_hint"
+  },
+  "contactNameMissing": "इस संपर्क के लिए एक नाम चुनें",
+  "@contactNameMissing": {
+    "type": "text",
+    "description": "contact_name_missing"
+  },
+  "contactRemoved": "%1 का नाम संपर्कों में से हट दिया गया है!",
+  "@contactRemoved": {
+    "type": "text",
+    "description": "contact_removed"
+  },
+  "contactsHeader": "संपर्क",
+  "@contactsHeader": {
+    "type": "text",
+    "description": "contact_header"
+  },
+  "contactsImportErr": "संपर्क आयात नहीं हो सकें",
+  "@contactsImportErr": {
+    "type": "text",
+    "description": "contact_import_error"
+  },
+  "contactsImportSuccess": "%1 संपर्क सफलतापूर्वक आयात हो गए हैं।",
+  "@contactsImportSuccess": {
+    "type": "text",
+    "description": "contact_import_success"
+  },
+  "copied": "कॉपी हो गया",
+  "@copied": {
+    "type": "text",
+    "description": "Copied (to clipboard)"
+  },
+  "copy": "कॉपी",
+  "@copy": {
+    "type": "text",
+    "description": "Copy (to clipboard)"
+  },
+  "copyAddress": "पता कॉपी करें",
+  "@copyAddress": {
+    "type": "text",
+    "description": "receive_copy_cta"
+  },
+  "copyLink": "लिंक कॉपी करें",
+  "@copyLink": {
+    "type": "text",
+    "description": "copy_link"
+  },
+  "copySeed": "सीड कॉपी करें",
+  "@copySeed": {
+    "type": "text",
+    "description": "copy_seed_btn"
+  },
+  "copyWalletAddressToClipboard": "वॉलेट एड्रेस को क्लिपबोर्ड पर कॉपी करें",
+  "@copyWalletAddressToClipboard": {
+    "type": "text",
+    "description": "onramp_copy"
+  },
+  "createAPasswordHeader": "एक पासवर्ड बनाएं।",
+  "@createAPasswordHeader": {
+    "type": "text",
+    "description": "A paragraph that tells the users to create a password."
+  },
+  "createGiftCard": "गिफ़्ट कार्ड बनाएं",
+  "@createGiftCard": {
+    "type": "text",
+    "description": "create_gift_card"
+  },
+  "createGiftHeader": "एक गिफ़्ट कार्ड बनाएं",
+  "@createGiftHeader": {
+    "type": "text",
+    "description": "create_gift_header"
+  },
+  "createPasswordFirstParagraph": "आप अपने वॉलेट में अतिरिक्त सुरक्षा जोड़ने के लिए एक पासवर्ड बना सकते हैं।",
+  "@createPasswordFirstParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that they can create a password for additional security."
+  },
+  "createPasswordHint": "एक पासवर्ड बनाएं",
+  "@createPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a password"
+  },
+  "createPasswordSecondParagraph": "पासवर्ड वैकल्पिक है, और आपका वॉलेट आपके पिन या बायोमेट्रिक्स से सुरक्षित रहेगा ही।",
+  "@createPasswordSecondParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless."
+  },
+  "createPasswordSheetHeader": "बनाएं",
+  "@createPasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to create a new password"
+  },
+  "createQR": "QR कोड बनाएं",
+  "@createQR": {
+    "type": "text",
+    "description": "create_qr_code"
+  },
+  "creatingGiftCard": "गिफ्ट कार्ड बनाना",
+  "@creatingGiftCard": {
+    "type": "text",
+    "description": "creating_gift_card"
+  },
+  "currency": "मुद्रा",
+  "@currency": {
+    "type": "text",
+    "description": "A settings menu item for changing currency"
+  },
+  "currencyMode": "करेंसी मोड",
+  "@currencyMode": {
+    "type": "text",
+    "description": "currency_mode"
+  },
+  "currencyModeHeader": "करेंसी मोड की जानकारी",
+  "@currencyModeHeader": {
+    "type": "text",
+    "description": "currency_mode_header"
+  },
+  "currencyModeInfo": "चुनें कि किस यूनिट में राशियों को प्रदर्शित करना है।\n1 नैनो = 0.000001 नैनो, या \n1,000,000 नैनो = 1 नैनो",
+  "@currencyModeInfo": {
+    "type": "text",
+    "description": "currency_mode_info"
+  },
+  "currentlyRepresented": "वर्तमान प्रतिनिधि ",
+  "@currentlyRepresented": {
+    "type": "text",
+    "description": "change_representative_current_header"
+  },
+  "decryptionError": "डिक्रिप्शन त्रुटि!",
+  "@decryptionError": {
+    "type": "text",
+    "description": "decryption_errorc"
+  },
+  "defaultAccountName": "मुख्य खाता",
+  "@defaultAccountName": {
+    "type": "text",
+    "description": "Default account name"
+  },
+  "defaultNewAccountName": "खाता %1",
+  "@defaultNewAccountName": {
+    "type": "text",
+    "description": "Default new account name - e.g. Account 1"
+  },
+  "delete": "मिटाएँ",
+  "@delete": {
+    "type": "text",
+    "description": "home_delete_slide"
+  },
+  "deleteRequest": "Delete this request",
+  "@deleteRequest": {
+    "type": "text",
+    "description": "delete_request"
+  },
+  "disablePasswordSheetHeader": "अक्षम",
+  "@disablePasswordSheetHeader": {
+    "type": "text",
+    "description": "Prompt user to disable their password"
+  },
+  "disablePasswordSuccess": "पासवर्ड अक्षम कर दिया गया है",
+  "@disablePasswordSuccess": {
+    "type": "text",
+    "description": "Disabling a Wallet Password was successful"
+  },
+  "disableWalletPassword": "वॉलेट पासवर्ड अक्षम करें",
+  "@disableWalletPassword": {
+    "type": "text",
+    "description": "Allows user to deencrypt wallet with a password"
+  },
+  "dismiss": "खारिज",
+  "@dismiss": {
+    "type": "text",
+    "description": "dismiss"
+  },
+  "domainInvalid": "अवैध डोमेन नाम",
+  "@domainInvalid": {
+    "type": "text",
+    "description": "domain_invalid_name"
+  },
+  "edit": "संपादित करें",
+  "@edit": {
+    "type": "text",
+    "description": "accounts_edit_slide"
+  },
+  "encryptionFailedError": "वॉलेट पासवर्ड सेट करने में विफल",
+  "@encryptionFailedError": {
+    "type": "text",
+    "description": "If encrypting a wallet raised an error"
+  },
+  "enterAddress": "पता दर्ज करें",
+  "@enterAddress": {
+    "type": "text",
+    "description": "enter_address"
+  },
+  "enterAmount": "राशि दर्ज करें",
+  "@enterAmount": {
+    "type": "text",
+    "description": "send_amount_hint"
+  },
+  "enterGiftMemo": "गिफ़्ट नोट दर्ज करें",
+  "@enterGiftMemo": {
+    "type": "text",
+    "description": "gift_note"
+  },
+  "enterMemo": "संदेश दाखिल करें",
+  "@enterMemo": {
+    "type": "text",
+    "description": "enter_memo"
+  },
+  "enterPasswordHint": "अपना पासवर्ड डालें",
+  "@enterPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the users to enter their password"
+  },
+  "enterUsername": "उपयोगकर्ता नाम दर्ज करें",
+  "@enterUsername": {
+    "type": "text",
+    "description": "enter_username"
+  },
+  "enterUserOrAddress": "उपयोगकर्ता या पता दर्ज करें",
+  "@enterUserOrAddress": {
+    "type": "text",
+    "description": "enter_user_address"
+  },
+  "eula": "EULA",
+  "@eula": {
+    "type": "text",
+    "description": "settings_eula"
+  },
+  "exampleCardFrom": "अजनबी बंदर से",
+  "@exampleCardFrom": {
+    "type": "text",
+    "description": "example_card_from"
+  },
+  "exampleCardFromKal": "अजनबी बंदर से",
+  "@exampleCardFromKal": {},
+  "exampleCardIntro": "नेट्रियम में आपका स्वागत है। बनानो प्राप्त करने पर सभी लेनदेन इस तरह नीचे दिखाई देंगे -",
+  "@exampleCardIntro": {
+    "type": "text",
+    "description": "example_card_intro"
+  },
+  "exampleCardIntroKal": "केलियम में आपका स्वागत है। बनानो प्राप्त करने पर सभी लेनदेन इस तरह नीचे दिखाई देंगे -",
+  "@exampleCardIntroKal": {},
+  "exampleCardLittle": "थोड़े से",
+  "@exampleCardLittle": {
+    "type": "text",
+    "description": "example_card_little"
+  },
+  "exampleCardLot": "बहुत सारे",
+  "@exampleCardLot": {
+    "type": "text",
+    "description": "example_card_lot"
+  },
+  "exampleCardTo": "अजनबी बंदर को",
+  "@exampleCardTo": {
+    "type": "text",
+    "description": "example_card_to"
+  },
+  "exampleCardToKal": "अजनबी बंदर को",
+  "@exampleCardToKal": {},
+  "examplePaymentExplainer": "एक बार जब आप भुगतान अनुरोध भेजते हैं या प्राप्त करते हैं, तो वे स्थिति को इंगित करने वाले कार्ड के रंग और टैग के साथ इस तरह दिखाई देंगे। \n\nहरा इंगित करता है कि अनुरोध का भुगतान किया गया है।\nपीला इंगित करता है कि अनुरोध/ज्ञापन का भुगतान नहीं किया गया है/पढ़ा गया है।\nलाल इंगित करता है कि अनुरोध पढ़ा या प्राप्त नहीं हुआ है।\n\n बिना किसी राशि के तटस्थ रंग के कार्ड सिर्फ संदेश हैं।",
+  "@examplePaymentExplainer": {
+    "type": "text",
+    "description": "example_payments_explainer"
+  },
+  "examplePaymentFrom": "@landlord",
+  "@examplePaymentFrom": {
+    "type": "text",
+    "description": "example_payment_from"
+  },
+  "examplePaymentFulfilled": "कुछ",
+  "@examplePaymentFulfilled": {
+    "type": "text",
+    "description": "example_payment_fulfilled"
+  },
+  "examplePaymentFulfilledMemo": "सुशी",
+  "@examplePaymentFulfilledMemo": {
+    "type": "text",
+    "description": "example_payment_fulfilled_memo"
+  },
+  "examplePaymentIntro": "एक बार जब आप भुगतान अनुरोध भेजते हैं या प्राप्त करते हैं, तो वे यहाँ दिखाई देंगे:",
+  "@examplePaymentIntro": {
+    "type": "text",
+    "description": "example_payments_intro"
+  },
+  "examplePaymentMessage": "अरे क्या हो रहा है?",
+  "@examplePaymentMessage": {
+    "type": "text",
+    "description": "example_card_message"
+  },
+  "examplePaymentPending": "बहुत सारे",
+  "@examplePaymentPending": {
+    "type": "text",
+    "description": "example_payment_pending"
+  },
+  "examplePaymentPendingMemo": "किराए पर लें",
+  "@examplePaymentPendingMemo": {
+    "type": "text",
+    "description": "example_payment_pending_memo"
+  },
+  "examplePaymentTo": "@best_friend",
+  "@examplePaymentTo": {
+    "type": "text",
+    "description": "example_payment_to"
+  },
+  "examplePayRecipient": "@dad",
+  "@examplePayRecipient": {
+    "type": "text",
+    "description": "example_pay_recipient"
+  },
+  "examplePayRecipientMessage": "जन्मदिन मुबारक हो",
+  "@examplePayRecipientMessage": {
+    "type": "text",
+    "description": "example_pay_recipient_message"
+  },
+  "exampleRecRecipient": "@coworker",
+  "@exampleRecRecipient": {
+    "type": "text",
+    "description": "example_rec_recipient"
+  },
+  "exampleRecRecipientMessage": "गैस मनी",
+  "@exampleRecRecipientMessage": {
+    "type": "text",
+    "description": "example_rec_recipient_message"
+  },
+  "exit": "बाहर निकलें",
+  "@exit": {
+    "type": "text",
+    "description": "Exit action, like a button"
+  },
+  "failed": "विफल रहा",
+  "@failed": {
+    "type": "text",
+    "description": "history_failed"
+  },
+  "failedMessage": "msg failed",
+  "@failedMessage": {
+    "type": "text",
+    "description": "failed_message"
+  },
+  "fallbackHeader": "नॉटिलस डिसकनेक्टेड",
+  "@fallbackHeader": {
+    "type": "text",
+    "description": "fallback_connected"
+  },
+  "fallbackInfo": "नॉटिलस सर्वर डिस्कनेक्ट किए गए प्रतीत होते हैं, भेजना और प्राप्त करना (मेमो के बिना) अभी भी चालू होना चाहिए लेकिन भुगतान अनुरोध नहीं हो सकते हैं\n\n बाद में वापस आएं या पुनः प्रयास करने के लिए ऐप को पुनरारंभ करें",
+  "@fallbackInfo": {
+    "type": "text",
+    "description": "fallback_info"
+  },
+  "favoriteExists": "पसंदीदा पहले से मौजूद है",
+  "@favoriteExists": {
+    "type": "text",
+    "description": "favorite_name_exists"
+  },
+  "favoriteHeader": "पसंदीदा",
+  "@favoriteHeader": {
+    "type": "text",
+    "description": "favorite_view_header"
+  },
+  "favoriteInvalid": "अवैध पसंदीदा नाम",
+  "@favoriteInvalid": {
+    "type": "text",
+    "description": "favorite_invalid_name"
+  },
+  "favoriteNameHint": "निक नाम दर्ज करें",
+  "@favoriteNameHint": {
+    "type": "text",
+    "description": "favorite_name_hint"
+  },
+  "favoriteNameMissing": "इस पसंदीदा के लिए एक नाम चुनें",
+  "@favoriteNameMissing": {
+    "type": "text",
+    "description": "favorite_name_missing"
+  },
+  "favoriteRemoved": "% 1 को पसंदीदा से हटा दिया गया है!",
+  "@favoriteRemoved": {
+    "type": "text",
+    "description": "favorite_removed"
+  },
+  "favoritesHeader": "पसंदीदा",
+  "@favoritesHeader": {
+    "type": "text",
+    "description": "favorite_header"
+  },
+  "featured": "फीचर्ड",
+  "@featured": {
+    "type": "text",
+    "description": "featured"
+  },
+  "fingerprintSeedBackup": "उंगली के निशान की सहायता से सीड बैकअप करें।",
+  "@fingerprintSeedBackup": {
+    "type": "text",
+    "description": "settings_fingerprint_title"
+  },
+  "from": "से",
+  "@from": {
+    "type": "text",
+    "description": "request_from"
+  },
+  "fulfilled": "पूरा",
+  "@fulfilled": {
+    "type": "text",
+    "description": "history_fulfilled"
+  },
+  "giftAlert": "आपके पास एक उपहार है!",
+  "@giftAlert": {
+    "type": "text",
+    "description": "import_gift_header"
+  },
+  "giftAlertEmpty": "खाली गिफ्ट",
+  "@giftAlertEmpty": {
+    "type": "text",
+    "description": "import_gift_empty_header"
+  },
+  "giftAmount": "गिफ़्ट राशि",
+  "@giftAmount": {
+    "type": "text",
+    "description": "gift_amount"
+  },
+  "giftFrom": "गिफ्ट फ्रॉम",
+  "@giftFrom": {
+    "type": "text",
+    "description": "gift_from"
+  },
+  "giftInfo": "NANO के साथ एक डिजिटल गिफ्ट कार्ड लोड करें! प्राप्तकर्ता को यह देखने के लिए कि वे कब खोलते हैं, राशि और एक वैकल्पिक संदेश सेट करें!\n\nएक बार बनने के बाद, आपको एक लिंक मिलेगा जिसे आप किसी को भी भेज सकते हैं, जिसे खोलने पर नॉटिलस स्थापित करने के बाद प्राप्तकर्ता को स्वचालित रूप से धन वितरित किया जाएगा!\n\nयदि प्राप्तकर्ता पहले से ही एक Nautilus उपयोगकर्ता है, तो उन्हें लिंक खोलने पर अपने खाते में धनराशि स्थानांतरित करने का संकेत मिलेगा।",
+  "@giftInfo": {
+    "type": "text",
+    "description": "Description for gift card creation"
+  },
+  "giftMessage": "गिफ्ट मैसेज",
+  "@giftMessage": {
+    "type": "text",
+    "description": "gift_message"
+  },
+  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "@giftWarning": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "goBackButton": "वापस जाओ",
+  "@goBackButton": {
+    "type": "text",
+    "description": "A button that goes to the previous screen."
+  },
+  "gotItButton": "समझ गया!",
+  "@gotItButton": {
+    "type": "text",
+    "description": "Got It! Acknowledgement button"
+  },
+  "goToQRCode": "QR पर जाएं",
+  "@goToQRCode": {
+    "type": "text",
+    "description": "go_to_qr_code"
+  },
+  "hide": "छिपाएँ",
+  "@hide": {
+    "type": "text",
+    "description": "accounts_hide_slide"
+  },
+  "hideAccountHeader": "खाता छुपाएं?",
+  "@hideAccountHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "home": "होम",
+  "@home": {
+    "type": "text",
+    "description": "home"
+  },
+  "ignore": "नज़रअंदाज़ करना",
+  "@ignore": {
+    "type": "text",
+    "description": "ignore"
+  },
+  "import": "आयात",
+  "@import": {
+    "type": "text",
+    "description": "Generic import"
+  },
+  "importGift": "आपके द्वारा क्लिक किए गए लिंक में कुछ नैनो हैं, क्या आप इसे इस वॉलेट में आयात करना चाहते हैं, या इसे भेजने वाले को वापस कर देंगे?",
+  "@importGift": {
+    "type": "text",
+    "description": "import_gift"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
+    "type": "text",
+    "description": "import_gift_empty"
+  },
+  "importSecretPhrase": "गुप्त वाक्यांश आयात करें",
+  "@importSecretPhrase": {
+    "type": "text",
+    "description": "Header for restoring using mnemonic"
+  },
+  "importSecretPhraseHint": "कृपया अपना 24-शब्द गुप्त वाक्यांश नीचे दर्ज करें। प्रत्येक शब्द को एक स्थान से अलग किया जाना चाहिए।",
+  "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSeed": "सीड इम्पोर्ट करें",
+  "@importSeed": {
+    "type": "text",
+    "description": "intro_seed_header"
+  },
+  "importSeedHint": "कृपया नीचे अपना सीड दर्ज करें।",
+  "@importSeedHint": {
+    "type": "text",
+    "description": "intro_seed_info"
+  },
+  "importSeedInstead": "इसके बजाय सीड आयात करें",
+  "@importSeedInstead": {
+    "type": "text",
+    "description": "importSeedInstead"
+  },
+  "importWallet": "वॉलेट आयात हैं",
+  "@importWallet": {
+    "type": "text",
+    "description": "intro_welcome_have_wallet"
+  },
+  "instantly": "तुरन्त",
+  "@instantly": {
+    "type": "text",
+    "description": "insantly"
+  },
+  "insufficientBalance": "अपर्याप्त शेष राशि (बैलेंस)",
+  "@insufficientBalance": {
+    "type": "text",
+    "description": "send_insufficient_balance"
+  },
+  "intro.new-key": "",
+  "@intro.new-key": {},
+  "intro.not-reviewed-text": "",
+  "@intro.not-reviewed-text": {},
+  "intro.too-long-text": "",
+  "@intro.too-long-text": {},
+  "intro.welcome": "",
+  "@intro.welcome": {
+    "description": "This is a description of a key so that the translator better understands the context"
+  },
+  "invalidAddress": "गलत गंतव्य पता",
+  "@invalidAddress": {
+    "type": "text",
+    "description": "send_invalid_address"
+  },
+  "invalidPassword": "अवैध पासवर्ड",
+  "@invalidPassword": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "iUnderstandTheRisks": "मैं जोखिमो को समझता हूँ",
+  "@iUnderstandTheRisks": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "kaliumWallet": "कलियम वॉलेट",
+  "@kaliumWallet": {
+    "type": "text",
+    "description": "kalium_wallet"
+  },
+  "language": "भाषा",
+  "@language": {
+    "type": "text",
+    "description": "settings_change_language"
+  },
+  "linkCopied": "लिंक नक़ल किया गया",
+  "@linkCopied": {
+    "type": "text",
+    "description": "link_copied"
+  },
+  "liveSupportButton": "सहायता",
+  "@liveSupportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "loaded": "लोडेड",
+  "@loaded": {
+    "type": "text",
+    "description": "history_loaded"
+  },
+  "loadedInto": "लोडेड इन",
+  "@loadedInto": {
+    "type": "text",
+    "description": "loaded_into"
+  },
+  "lockAppSetting": "लॉन्च पर प्रमाणित करें",
+  "@lockAppSetting": {
+    "type": "text",
+    "description": "authenticate_on_launch"
+  },
+  "locked": "अवरोधित",
+  "@locked": {
+    "type": "text",
+    "description": "lockedtxt"
+  },
+  "logout": "लॉगआउट करें",
+  "@logout": {
+    "type": "text",
+    "description": "settings_logout"
+  },
+  "logoutAction": "सीड मिटा कर लॉगआउट करें",
+  "@logoutAction": {
+    "type": "text",
+    "description": "settings_logout_alert_confirm_cta"
+  },
+  "logoutAreYouSure": "क्या आप निश्चित हैं?",
+  "@logoutAreYouSure": {
+    "type": "text",
+    "description": "settings_logout_warning_title"
+  },
+  "logoutDetail": "लॉगआउट करने पर आपके सीड और नेट्रियम से संबंधित सभी डेटा हट जाएंगे। यदि आपने अपने सीड को बैकअप नहीं किया, तो आप कभी भी अपने धन का उपयोग नहीं कर पाएंगे।",
+  "@logoutDetail": {
+    "type": "text",
+    "description": "settings_logout_alert_message"
+  },
+  "logoutDetailKal": "लॉगआउट करने पर आपके  सीड और केलियम से संबंधित सभी डेटा हट जाएंगे। यदि आपने अपने सीड को बैकअप नहीं किया, तो आप कभी भी अपने धन का उपयोग नहीं कर पाएंगे।",
+  "@logoutDetailKal": {},
+  "logoutReassurance": "अगर आपने अपने सीड को बैकअप कर लिया है, तो आपको चिंता करने की कोई आवश्यकता नहीं है।",
+  "@logoutReassurance": {
+    "type": "text",
+    "description": "settings_logout_warning_message"
+  },
+  "manage": "प्रबंधन | मैनेज",
+  "@manage": {
+    "type": "text",
+    "description": "settings_manage_header"
+  },
+  "mantaError": "अनुरोध सत्यापित नहीं कर सके",
+  "@mantaError": {
+    "type": "text",
+    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)"
+  },
+  "manualEntry": "हस्त प्रविष्टि",
+  "@manualEntry": {
+    "type": "text",
+    "description": "transfer_manual_entry"
+  },
+  "markAsPaid": "भुगतान के रूप में चिह्नित करें",
+  "@markAsPaid": {
+    "type": "text",
+    "description": "fulfill_payment"
+  },
+  "markAsUnpaid": "अनपेड के रूप में चिह्नित करें",
+  "@markAsUnpaid": {
+    "type": "text",
+    "description": "unfulfill_payment"
+  },
+  "maybeLater": "Maybe Later",
+  "@maybeLater": {
+    "type": "text",
+    "description": "maybe_app_button"
+  },
+  "memoSentButNotReceived": "मेमो फिर से भेजा गया! अगर अभी भी अनपेक्षित है, तो प्राप्तकर्ता का डिवाइस ऑफ़लाइन हो सकता है।",
+  "@memoSentButNotReceived": {
+    "type": "text",
+    "description": "memo_sent_again"
+  },
+  "messageHeader": "संदेश",
+  "@messageHeader": {
+    "type": "text",
+    "description": "message_header"
+  },
+  "minimumSend": "न्यूनतम प्रेषण राशि %1 नैनो है",
+  "@minimumSend": {
+    "type": "text",
+    "description": "send_minimum_error"
+  },
+  "mnemonicInvalidWord": "%1 मान्य शब्द नहीं है",
+  "@mnemonicInvalidWord": {
+    "type": "text",
+    "description": "A word that is not part of bip39"
+  },
+  "mnemonicPhrase": "स्मरक वाक्यांश",
+  "@mnemonicPhrase": {
+    "type": "text",
+    "description": "mnemonic_phrase"
+  },
+  "mnemonicSizeError": "गुप्त वाक्यांश में केवल 24 शब्द हो सकते हैं",
+  "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "moonpay": "MoonPay",
+  "@moonpay": {
+    "type": "text",
+    "description": "moonpay_ramp"
+  },
+  "natricon": "नैट्रिकोन",
+  "@natricon": {
+    "type": "text",
+    "description": "natricon_settings"
+  },
+  "needVerificationAlert": "स्पैम को रोकने के लिए इस सुविधा के लिए आपके पास एक लंबा लेनदेन इतिहास होना आवश्यक है।\n\nवैकल्पिक रूप से, आप किसी व्यक्ति को स्कैन करने के लिए QR कोड दिखा सकते हैं।",
+  "@needVerificationAlert": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "needVerificationAlertHeader": "सत्यापन की आवश्यकता है",
+  "@needVerificationAlertHeader": {
+    "type": "text",
+    "description": "verification_needed_header"
+  },
+  "newAccountIntro": "यह आपका नया खाता है। एक बार जब आप नैनो प्राप्त कर लेते हैं, तो लेनदेन इस तरह दिखाई देंगे:",
+  "@newAccountIntro": {
+    "type": "text",
+    "description": "Alternate account intro card"
+  },
+  "newAccountIntroKal": "यह आपका नया खाता है। एक बार जब आप बनानो प्राप्त कर लेते हैं, तो लेनदेन इस तरह दिखाई देंगे:",
+  "@newAccountIntroKal": {},
+  "newWallet": "नया वॉलेट",
+  "@newWallet": {
+    "type": "text",
+    "description": "intro_welcome_new_wallet"
+  },
+  "nextButton": "अगला",
+  "@nextButton": {
+    "type": "text",
+    "description": "A button that goes to the next screen."
+  },
+  "no": "नहीं",
+  "@no": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_no"
+  },
+  "noContactsExport": "निर्यात करने के लिए कोई संपर्क नहीं हैं।",
+  "@noContactsExport": {
+    "type": "text",
+    "description": "contact_export_none"
+  },
+  "noContactsImport": "आयात करने के लिए कोई संपर्क नहीं मिले।",
+  "@noContactsImport": {
+    "type": "text",
+    "description": "contact_import_none"
+  },
+  "nodeStatus": "नोड स्थिति",
+  "@nodeStatus": {
+    "type": "text",
+    "description": "settings_node_status"
+  },
+  "noSearchResults": "कोई खोज परिणाम नहीं!",
+  "@noSearchResults": {
+    "type": "text",
+    "description": "home_search_error"
+  },
+  "noSkipButton": "नहीं, छोड़ें",
+  "@noSkipButton": {
+    "type": "text",
+    "description": "A button that declines and skips the mentioned process."
+  },
+  "noThanks": "No Thanks",
+  "@noThanks": {
+    "type": "text",
+    "description": "no_thanks_app_button"
+  },
+  "notificationBody": "इस लेनदेन को देखने के लिए नेट्रियम खोलें",
+  "@notificationBody": {
+    "type": "text",
+    "description": "notification_body"
+  },
+  "notificationBodyKal": "इस लेनदेन को देखने के लिए केलियम खोलें",
+  "@notificationBodyKal": {},
+  "notificationHeaderSupplement": "ऐप्प खोलने के लिए छुएं",
+  "@notificationHeaderSupplement": {
+    "type": "text",
+    "description": "notificaiton_header_suplement"
+  },
+  "notificationInfo": "इस सुविधा को सही तरीके से काम करने के लिए, सूचनाएं सक्षम होनी चाहिए",
+  "@notificationInfo": {
+    "type": "text",
+    "description": "notification_info"
+  },
+  "notifications": "सूचनाएं",
+  "@notifications": {
+    "type": "text",
+    "description": "notifications_settings"
+  },
+  "notificationTitle": "%1 बनानो प्राप्त हुए",
+  "@notificationTitle": {
+    "type": "text",
+    "description": "notification_title"
+  },
+  "notificationTitleKal": "%1 बनानो प्राप्त हुए",
+  "@notificationTitleKal": {},
+  "notSent": "नहीं भेजा गया",
+  "@notSent": {
+    "type": "text",
+    "description": "not_sent_message"
+  },
+  "nyanicon": "न्यैनिकॉन",
+  "@nyanicon": {
+    "type": "text",
+    "description": "nyanicon_settings"
+  },
+  "off": "बंद",
+  "@off": {
+    "type": "text",
+    "description": "generic_off"
+  },
+  "ok": "ओके",
+  "@ok": {
+    "type": "text",
+    "description": "ok"
+  },
+  "onramp": "रैंप पर",
+  "@onramp": {
+    "type": "text",
+    "description": "onramp_settings"
+  },
+  "onramper": "Onramper",
+  "@onramper": {
+    "type": "text",
+    "description": "onramper_ramp"
+  },
+  "onStr": "चालू",
+  "@onStr": {
+    "type": "text",
+    "description": "generic_on"
+  },
+  "opened": "खोला गया",
+  "@opened": {
+    "type": "text",
+    "description": "history_opened"
+  },
+  "page.home.counter": "",
+  "@page.home.counter": {},
+  "page.home.title": "",
+  "@page.home.title": {},
+  "paid": "भुगतान किया है",
+  "@paid": {
+    "type": "text",
+    "description": "history_paid"
+  },
+  "paperWallet": "पेपर वॉलेट",
+  "@paperWallet": {
+    "type": "text",
+    "description": "paper_wallet"
+  },
+  "passwordBlank": "पासवर्ड खाली नहीं हो सकता",
+  "@passwordBlank": {
+    "type": "text",
+    "description": "An error indicating a password has been entered incorrectly"
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "अब आपको नाट्रियम खोलने के लिए पासवर्ड की जरूरत नहीं पड़ेगी।",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+  },
+  "passwordsDontMatch": "पासवर्ड मेल नहीं खाते",
+  "@passwordsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordWillBeRequiredToOpenParagraph": "नैट्रियम खोलने के लिए इस पासवर्ड की आवश्यकता होगी।",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "pay": "पे",
+  "@pay": {
+    "type": "text",
+    "description": "home_pay_slidable"
+  },
+  "paymentRequestMessage": "किसी ने आपसे भुगतान का अनुरोध किया है! अधिक जानकारी के लिए भुगतान पृष्ठ देखें।",
+  "@paymentRequestMessage": {
+    "type": "text",
+    "description": "payment_request_message"
+  },
+  "payments": "पेमेंट्स",
+  "@payments": {
+    "type": "text",
+    "description": "payments"
+  },
+  "payRequest": "इस अनुरोध का भुगतान करें",
+  "@payRequest": {
+    "type": "text",
+    "description": "pay_request"
+  },
+  "pending": "अपूर्ण",
+  "@pending": {},
+  "pickFromList": "सूची से चुनें",
+  "@pickFromList": {
+    "type": "text",
+    "description": "pick rep from list"
+  },
+  "pinConfirmError": "पिन एक दूसरे से नहीं मिल रहे",
+  "@pinConfirmError": {
+    "type": "text",
+    "description": "pin_confirm_error"
+  },
+  "pinConfirmTitle": "अपने पिन को दोबारा लिखें",
+  "@pinConfirmTitle": {
+    "type": "text",
+    "description": "pin_confirm_title"
+  },
+  "pinCreateTitle": "एक 6 अंकों का पिन बनाएँ",
+  "@pinCreateTitle": {
+    "type": "text",
+    "description": "pin_create_title"
+  },
+  "pinEnterTitle": "पिन दर्ज करें",
+  "@pinEnterTitle": {
+    "type": "text",
+    "description": "pin_enter_title"
+  },
+  "pinInvalid": "गलत पिन दर्ज किया गया",
+  "@pinInvalid": {
+    "type": "text",
+    "description": "pin_error"
+  },
+  "pinMethod": "पिन",
+  "@pinMethod": {
+    "type": "text",
+    "description": "settings_pin_method"
+  },
+  "pinRepChange": "प्रतिनिधि बदलने के लिए पिन दर्ज करें",
+  "@pinRepChange": {
+    "type": "text",
+    "description": "change_representative_pin"
+  },
+  "pinSeedBackup": "वॉलेट के सीड को बैकअप  के लिए पिन दर्ज करें।",
+  "@pinSeedBackup": {
+    "type": "text",
+    "description": "settings_pin_title"
+  },
+  "preferences": "पसंद | प्रेफरेन्सेस",
+  "@preferences": {
+    "type": "text",
+    "description": "settings_preferences_header"
+  },
+  "privacyPolicy": "गोपनीयता नीति",
+  "@privacyPolicy": {
+    "type": "text",
+    "description": "settings_privacy_policy"
+  },
+  "purchaseNano": "नैनो खरीदें",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
+  },
+  "qrInvalidAddress": "क्यूआर कोड में मान्य गंतव्य नहीं है",
+  "@qrInvalidAddress": {
+    "type": "text",
+    "description": "qr_invalid_address"
+  },
+  "qrInvalidPermissions": "कृपया क्यूआर कोड स्कैन करने के लिए कैमरा अनुमति दें",
+  "@qrInvalidPermissions": {
+    "type": "text",
+    "description": "User did not grant camera permissions to the app"
+  },
+  "qrInvalidSeed": "क्यूआर कोड में वैध सीड या निजी कुंजी नहीं है",
+  "@qrInvalidSeed": {
+    "type": "text",
+    "description": "qr_invalid_seed"
+  },
+  "qrMnemonicError": "क्यूआर में एक वैध गुप्त वाक्यांश नहीं है",
+  "@qrMnemonicError": {
+    "type": "text",
+    "description": "When QR does not contain a valid mnemonic phrase"
+  },
+  "qrUnknownError": "क्यूआर कोड नहीं पढ़ सके",
+  "@qrUnknownError": {
+    "type": "text",
+    "description": "An unknown error occurred with the QR scanner"
+  },
+  "rate": "Rate",
+  "@rate": {
+    "type": "text",
+    "description": "rate_app_button"
+  },
+  "rateTheApp": "ऐप को रेट करें",
+  "@rateTheApp": {
+    "type": "text",
+    "description": "rate_app_header"
+  },
+  "rateTheAppDescription": "यदि आप ऐप का आनंद लेते हैं, तो इसकी समीक्षा करने के लिए समय निकालने पर विचार करें,\nयह वास्तव में मदद करता है और इसे एक मिनट से अधिक नहीं लेना चाहिए।",
+  "@rateTheAppDescription": {
+    "type": "text",
+    "description": "rate_app_desc"
+  },
+  "rawSeed": "सीड",
+  "@rawSeed": {
+    "type": "text",
+    "description": "raw_seed"
+  },
+  "readMore": "और पढ़ें",
+  "@readMore": {
+    "type": "text",
+    "description": "read_more"
+  },
+  "receivable": "लिये जाने योग्य",
+  "@receivable": {
+    "type": "text",
+    "description": "history_receivable"
+  },
+  "receive": "प्राप्त करें",
+  "@receive": {
+    "type": "text",
+    "description": "home_receive_cta"
+  },
+  "received": "मिले -",
+  "@received": {
+    "type": "text",
+    "description": "history_received"
+  },
+  "receiveMinimum": "न्यूनतम प्राप्त करें",
+  "@receiveMinimum": {
+    "type": "text",
+    "description": "receive_minimum"
+  },
+  "receiveMinimumHeader": "न्यूनतम जानकारी प्राप्त करें",
+  "@receiveMinimumHeader": {
+    "type": "text",
+    "description": "receive_minimum_header"
+  },
+  "receiveMinimumInfo": "प्राप्त करने के लिए न्यूनतम राशि यदि इससे कम राशि के साथ भुगतान या अनुरोध प्राप्त होता है, तो इसे अनदेखा कर दिया जाएगा।",
+  "@receiveMinimumInfo": {
+    "type": "text",
+    "description": "receive_minimum_info"
+  },
+  "refund": "रिफंड",
+  "@refund": {
+    "type": "text",
+    "description": "refund"
+  },
+  "registerFor": "के लिए",
+  "@registerFor": {
+    "type": "text",
+    "description": "register_for"
+  },
+  "registering": "पंजीयन",
+  "@registering": {
+    "type": "text",
+    "description": "register_registering"
+  },
+  "registerUsername": "उपयोगकर्ता नाम रजिस्टर करें",
+  "@registerUsername": {
+    "type": "text",
+    "description": "register_username"
+  },
+  "registerUsernameHeader": "उपयोगकर्ता नाम रजिस्टर करें",
+  "@registerUsernameHeader": {
+    "type": "text",
+    "description": "register_username_header"
+  },
+  "removeAccountText": "क्या आप वाकई इस खाते को छिपाना चाहते हैं? आप इसे बाद में \"%1\" बटन को दबा के फिर से जोड़ सकते हैं।",
+  "@removeAccountText": {
+    "type": "text",
+    "description": "Remove account dialog body"
+  },
+  "removeBlocked": "अनब्लॉक करें",
+  "@removeBlocked": {
+    "type": "text",
+    "description": "blocked_remove_btn"
+  },
+  "removeBlockedConfirmation": "क्या आप वाक़ई% 1 को अनवरोधित करना चाहते हैं?",
+  "@removeBlockedConfirmation": {
+    "type": "text",
+    "description": "blocked_remove_sure"
+  },
+  "removeContact": "संपर्क हटाएं",
+  "@removeContact": {
+    "type": "text",
+    "description": "contact_remove_btn"
+  },
+  "removeContactConfirmation": "क्या आप वाकई %1 को संपर्कों में से मिटाना चाहतें हैं?",
+  "@removeContactConfirmation": {
+    "type": "text",
+    "description": "contact_remove_sure"
+  },
+  "removeFavorite": "पसंदीदा हटाएँ",
+  "@removeFavorite": {
+    "type": "text",
+    "description": "favorite_remove_btn"
+  },
+  "removeFavoriteConfirmation": "Are you sure you want to delete %1?",
+  "@removeFavoriteConfirmation": {
+    "type": "text",
+    "description": "favorite_remove_sure"
+  },
+  "repInfo": "प्रतिनिधि एक खाता है जो नेटवर्क सर्वसम्मति के लिए वोट देता है। हर प्रतिनिधि की मतदान शक्ति उसे चुनने वालों की कुल धनराशि पर निर्भर है। आप किसी भी समय एक भरोसेमंद प्रतिनिधि को चुन कर, अपनी धनराशि से उस प्रतिनिधि की मतदान शक्ति बढ़ा सकते हैं। आपके प्रतिनिधि को आपका धन खर्च करने का अधिकार नहीं है। आपको ऐसा प्रतिनिधि चुनना चाहिए जो भरोसेमंद हो और अधिकतर उपस्थित रहे।",
+  "@repInfo": {
+    "type": "text",
+    "description": "change_representative_info"
+  },
+  "repInfoHeader": "प्रतिनिधि क्या होता है?",
+  "@repInfoHeader": {
+    "type": "text",
+    "description": "change_representative_info_header"
+  },
+  "reply": "जवाब दें",
+  "@reply": {
+    "type": "text",
+    "description": "home_reply_slidable"
+  },
+  "representatives": "प्रतिनिधि",
+  "@representatives": {
+    "type": "text",
+    "description": "representatives"
+  },
+  "request": "निवेदन",
+  "@request": {
+    "type": "text",
+    "description": "home_request_cta"
+  },
+  "requestAmountConfirm": "निवेद% 1% 2",
+  "@requestAmountConfirm": {
+    "type": "text",
+    "description": "request_pin_description"
+  },
+  "requested": "अनुरोध किया गया",
+  "@requested": {
+    "type": "text",
+    "description": "home_requested_cta"
+  },
+  "requestedFrom": "से अनुरोध किया गया",
+  "@requestedFrom": {
+    "type": "text",
+    "description": "requested_from"
+  },
+  "requestError": "अनुरोध विफल: इस उपयोगकर्ता के पास Nautilus इंस्टॉल नहीं है, या उसके पास सूचनाएं अक्षम हैं।",
+  "@requestError": {
+    "type": "text",
+    "description": "request_generic_error"
+  },
+  "requesting": "निवेदन",
+  "@requesting": {
+    "type": "text",
+    "description": "request_requesting"
+  },
+  "requestPayment": "भुगतान का अनुरोध करें",
+  "@requestPayment": {
+    "type": "text",
+    "description": "request_payment_cta"
+  },
+  "requestSendError": "भुगतान अनुरोध भेजने में त्रुटि, प्राप्तकर्ता का डिवाइस ऑफ़लाइन या अनुपलब्ध हो सकता है।",
+  "@requestSendError": {
+    "type": "text",
+    "description": "request_send_error"
+  },
+  "requestSentButNotReceived": "अनुरोध फिर से भेजा गया! अगर अभी भी अनपेक्षित है, तो प्राप्तकर्ता का डिवाइस ऑफ़लाइन हो सकता है।",
+  "@requestSentButNotReceived": {
+    "type": "text",
+    "description": "request_sent_again"
+  },
+  "requireAPasswordToOpenHeader": "नेट्रियम खोलने के लिए पासवर्ड की आवश्यकता रखें?",
+  "@requireAPasswordToOpenHeader": {
+    "type": "text",
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+  },
+  "resendMemo": "इस ज्ञापन को फिर से भेजें",
+  "@resendMemo": {
+    "type": "text",
+    "description": "resend_memo"
+  },
+  "resetDatabase": "डेटाबेस को रीसेट करें",
+  "@resetDatabase": {
+    "type": "text",
+    "description": "settings_nuke_db"
+  },
+  "resetDatabaseConfirmation": "क्या आप वाकई आंतरिक डेटाबेस को रीसेट करना चाहते हैं? \n\nयह ऐप को अपडेट करने से संबंधित समस्याओं को ठीक कर सकता है, लेकिन सभी सहेजी गई प्राथमिकताओं को भी हटा देगा। यह आपके वॉलेट सीड को डिलीट नहीं करेगा। यदि आपको समस्याएं आ रही हैं तो आपको अपने बीज का बैकअप लेना चाहिए, ऐप को फिर से इंस्टॉल करना चाहिए, और यदि समस्या बनी रहती है तो जिथब या कलह पर बग रिपोर्ट करने के लिए स्वतंत्र महसूस करें।",
+  "@resetDatabaseConfirmation": {
+    "type": "text",
+    "description": "database_remove_sure"
+  },
+  "retry": "पुनः प्रयास करें",
+  "@retry": {
+    "type": "text",
+    "description": "home_retry_slide"
+  },
+  "rootWarning": "ऐसा प्रतीत होता है कि आपका डिवाइस \"रूटेड\", \"जेलब्रोकन\" है, या सुरक्षा से समझौता करने वाले तरीके से संशोधित है। यह अनुशंसा की जाती है कि आप आगे बढ़ने से पहले अपने डिवाइस को उसकी मूल स्थिति में रीसेट कर दें।",
+  "@rootWarning": {
+    "type": "text",
+    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "scanInstructions": "बनानो के पते का \nक्यू आर कोड स्कैन करें ",
+  "@scanInstructions": {
+    "type": "text",
+    "description": "scan_send_instruction_label"
+  },
+  "scanInstructionsKal": "बनानो के पते का \nक्यू आर कोड स्कैन करें",
+  "@scanInstructionsKal": {},
+  "scanQrCode": "क्यूआर कोड स्कैन करें",
+  "@scanQrCode": {
+    "type": "text",
+    "description": "send_scan_qr"
+  },
+  "searchHint": "किसी भी चीज़ की खोज करें",
+  "@searchHint": {
+    "type": "text",
+    "description": "home_search_hint"
+  },
+  "secretInfo": "अगली स्क्रीन में, आप अपना गुप्त वाक्यांश देखेंगे। यह आपके फंड तक पहुंचने के लिए एक पासवर्ड है। यह महत्वपूर्ण है कि आप इसका बैकअप लें और इसे कभी किसी के साथ साझा न करें।",
+  "@secretInfo": {
+    "type": "text",
+    "description": "Description for seed"
+  },
+  "secretInfoHeader": "सुरक्षा पहले!",
+  "@secretInfoHeader": {
+    "type": "text",
+    "description": "secret info header"
+  },
+  "secretPhrase": "गुप्त वाक्यांश",
+  "@secretPhrase": {
+    "type": "text",
+    "description": "Secret (mnemonic) phrase"
+  },
+  "secretPhraseCopied": "गुप्त वाक्यांश कॉपी किया गया हैं",
+  "@secretPhraseCopied": {
+    "type": "text",
+    "description": "Copied secret phrase to clipboard"
+  },
+  "secretPhraseCopy": "गुप्त वाक्यांश कॉपी करें",
+  "@secretPhraseCopy": {
+    "type": "text",
+    "description": "Copy secret phrase to clipboard"
+  },
+  "secretWarning": "यदि आप अपना उपकरण खो देते हैं या एप्लिकेशन को अनइंस्टॉल कर देते हैं, तो आपको अपने फंड को पुनर्प्राप्त करने के लिए अपने गुप्त वाक्यांश या सीड की आवश्यकता होगी!",
+  "@secretWarning": {
+    "type": "text",
+    "description": "Secret warning"
+  },
+  "securityHeader": "सुरक्षा",
+  "@securityHeader": {
+    "type": "text",
+    "description": "security_header"
+  },
+  "seed": "सीड",
+  "@seed": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_header"
+  },
+  "seedBackupInfo": "नीचे आपके वॉलेट का सीड है। इसका बैकअप करना आवश्यक है। कृपया इसे हमेशा सुरक्षित रखें और टेक्स्ट या स्क्रीनशॉट के रूप में हरगिज़ न रखें।",
+  "@seedBackupInfo": {
+    "type": "text",
+    "description": "intro_new_wallet_seed"
+  },
+  "seedCopied": "आपका सीड क्लिपबोर्ड में कॉपी हो गया है।  इसे अगले 2 मिनट तक पेस्ट किया जा सकता है।",
+  "@seedCopied": {
+    "type": "text",
+    "description": "intro_new_wallet_seed_copied"
+  },
+  "seedCopiedShort": "सीड कॉपी हो गया",
+  "@seedCopiedShort": {
+    "type": "text",
+    "description": "seed_copied_btn"
+  },
+  "seedDescription": "एक सीड एक गुप्त वाक्यांश के रूप में एक ही जानकारी रखता है, लेकिन एक मशीन-पठनीय तरीके से। जब तक आपने उनमें से किसी एक का बैकअप लिया है, तब तक आपके पास अपने फंड तक पहुंच होगी।",
+  "@seedDescription": {
+    "type": "text",
+    "description": "Describing what a seed is"
+  },
+  "seedInvalid": "सीड अमान्य है",
+  "@seedInvalid": {
+    "type": "text",
+    "description": "intro_seed_invalid"
+  },
+  "selfSendError": "स्वयं से अनुरोध नहीं कर सकते",
+  "@selfSendError": {
+    "type": "text",
+    "description": "self_send_error"
+  },
+  "send": "भेजें",
+  "@send": {
+    "type": "text",
+    "description": "home_send_cta"
+  },
+  "sendAmountConfirm": "%1 बनानो भेजें ?",
+  "@sendAmountConfirm": {
+    "type": "text",
+    "description": "send_amount_confirm"
+  },
+  "sendAmountConfirmKal": "%1 बनानो भेजें ?",
+  "@sendAmountConfirmKal": {},
+  "sendError": "एक त्रुटि पाई गई। बाद में पुन: प्रयास करें।",
+  "@sendError": {
+    "type": "text",
+    "description": "send_generic_error"
+  },
+  "sendFrom": "भेजने का पता -",
+  "@sendFrom": {
+    "type": "text",
+    "description": "send_title"
+  },
+  "sending": "भेजा जा रहा है -",
+  "@sending": {
+    "type": "text",
+    "description": "send_sending"
+  },
+  "sendMemoError": "लेनदेन के साथ ज्ञापन भेजना विफल रहा, वे Nautilus उपयोगकर्ता नहीं हो सकते हैं।",
+  "@sendMemoError": {
+    "type": "text",
+    "description": "send_memo_error"
+  },
+  "sendMessageConfirm": "संदेश भेज रहा है",
+  "@sendMessageConfirm": {
+    "type": "text",
+    "description": "send_message_description"
+  },
+  "sendRequestAgain": "अनुरोध फिर से भेजें",
+  "@sendRequestAgain": {
+    "type": "text",
+    "description": "request_again"
+  },
+  "sendSheetInfo": "एंड टू एंड एन्क्रिप्टेड संदेशों के साथ भुगतान भेजें या अनुरोध करें!\n\nभुगतान अनुरोध, ज्ञापन और संदेश केवल अन्य नॉटिलस उपयोगकर्ताओं द्वारा प्राप्य होंगे।\n\nभुगतान अनुरोध भेजने या प्राप्त करने के लिए आपके पास उपयोगकर्ता नाम रखने की आवश्यकता नहीं है, और आप उन्हें अपने रिकॉर्ड रखने के लिए उपयोग कर सकते हैं, भले ही वे नॉटिलस का उपयोग न करें।",
+  "@sendSheetInfo": {
+    "type": "text",
+    "description": "send_sheet_info"
+  },
+  "sendSheetInfoHeader": "शीट की जानकारी भेजें",
+  "@sendSheetInfoHeader": {
+    "type": "text",
+    "description": "send_sheet_info_header"
+  },
+  "sent": "भेजे -",
+  "@sent": {
+    "type": "text",
+    "description": "history_sent"
+  },
+  "sentTo": "इसको भेजा गया -",
+  "@sentTo": {
+    "type": "text",
+    "description": "sent_to"
+  },
+  "setPassword": "पासवर्ड सेट करें",
+  "@setPassword": {
+    "type": "text",
+    "description": "A button that sets the wallet password"
+  },
+  "setPasswordSuccess": "पासवर्ड सफलतापूर्वक सेट कर दिया गया है",
+  "@setPasswordSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Password was successful"
+  },
+  "settingsHeader": "सेटिंग्स",
+  "@settingsHeader": {
+    "type": "text",
+    "description": "settings_title"
+  },
+  "settingsTransfer": "पेपर वॉलेट से लोड करें",
+  "@settingsTransfer": {
+    "type": "text",
+    "description": "settings_transfer"
+  },
+  "setWalletPassword": "वॉलेट पासवर्ड सेट करें",
+  "@setWalletPassword": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a password"
+  },
+  "setWalletPin": "Set Wallet Pin",
+  "@setWalletPin": {
+    "type": "text",
+    "description": "Allows user to encrypt wallet with a pin"
+  },
+  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "@setWalletPlausiblePin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
+  },
+  "shareKalium": "शेयर कलियम",
+  "@shareKalium": {},
+  "shareKaliumText": "कॉलियम को देखें! बनानो का आधिकारिक मोबाइल वॉलेट!",
+  "@shareKaliumText": {},
+  "shareLink": "लिंक शेयर करें",
+  "@shareLink": {
+    "type": "text",
+    "description": "share_link"
+  },
+  "shareNatrium": "",
+  "@shareNatrium": {},
+  "shareNatriumText": "",
+  "@shareNatriumText": {},
+  "shareNautilus": "शेयर नैट्रियम",
+  "@shareNautilus": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareNautilusText": "नैट्रियम की जाँच करें! एक प्रमुख नैनो मोबाइल वॉलेट!",
+  "@shareNautilusText": {
+    "type": "text",
+    "description": "share_extra"
+  },
+  "showContacts": "संपर्क दिखाएँ",
+  "@showContacts": {
+    "type": "text",
+    "description": "contacts_enabled"
+  },
+  "simplex": "सिंप्लेक्स",
+  "@simplex": {
+    "type": "text",
+    "description": "simplex_ramp"
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "type": "text",
+    "description": "A button to open up the live support window"
+  },
+  "supportTheDeveloper": "डेवलपर का समर्थन करें",
+  "@supportTheDeveloper": {
+    "type": "text",
+    "description": "change_log_support"
+  },
+  "switchToSeed": "सीड पर स्विच करें",
+  "@switchToSeed": {
+    "type": "text",
+    "description": "switchToSeed"
+  },
+  "systemDefault": "डिवाइस की भाषा",
+  "@systemDefault": {
+    "type": "text",
+    "description": "settings_default_language_string"
+  },
+  "tapToHide": "छिपाने के लिए दबाएँ",
+  "@tapToHide": {
+    "type": "text",
+    "description": "Tap to hide content"
+  },
+  "tapToReveal": "प्रकट करने के लिए दबाएँ",
+  "@tapToReveal": {
+    "type": "text",
+    "description": "Tap to reveal hidden content"
+  },
+  "themeHeader": "थीम",
+  "@themeHeader": {
+    "type": "text",
+    "description": "theme_header"
+  },
+  "to": "इसको -",
+  "@to": {
+    "type": "text",
+    "description": "send_to"
+  },
+  "tooManyFailedAttempts": "खोलने के बहुत से असफल प्रयास।",
+  "@tooManyFailedAttempts": {
+    "type": "text",
+    "description": "fail_toomany_attempts"
+  },
+  "transactions": "लेनदेन",
+  "@transactions": {
+    "type": "text",
+    "description": "transaction_header"
+  },
+  "transfer": "ट्रांसफर",
+  "@transfer": {
+    "type": "text",
+    "description": "transfer_btn"
+  },
+  "transferClose": "विंडो बंद करने के लिए कहीं भी टैप करें।",
+  "@transferClose": {
+    "type": "text",
+    "description": "transfer_close_text"
+  },
+  "transferComplete": "%1 नैनो सफलतापूर्वक आपके नैट्रियम वॉलेट में स्थानांतरित कर दी गई है। \n",
+  "@transferComplete": {
+    "type": "text",
+    "description": "transfer_complete_text"
+  },
+  "transferCompleteKal": "% 1 BANANO सफलतापूर्वक आपके कलियम वॉलेट में स्थानांतरित हो गया \n",
+  "@transferCompleteKal": {},
+  "transferConfirmInfo": "% 1 नैनो के बैलेंस वाले वॉलेट का पता चला है \n",
+  "@transferConfirmInfo": {
+    "type": "text",
+    "description": "transfer_confirm_info_first"
+  },
+  "transferConfirmInfoKal": "%1 बनानो  के बैलेंस वाले वॉलेट का पता चला है। \n",
+  "@transferConfirmInfoKal": {},
+  "transferConfirmInfoSecond": "फंड ट्रांसफर करने के लिए कन्फर्म दबाएँ \n",
+  "@transferConfirmInfoSecond": {
+    "type": "text",
+    "description": "transfer_confirm_info_second"
+  },
+  "transferConfirmInfoThird": "स्थानांतरण को पूरा होने में कई सेकंड लग सकते हैं।",
+  "@transferConfirmInfoThird": {
+    "type": "text",
+    "description": "transfer_confirm_info_third"
+  },
+  "transferError": "लेन-देन के दौरान एक त्रुटि हुई है। कृपया बाद में पुन: प्रयास करें।",
+  "@transferError": {
+    "type": "text",
+    "description": "transfer_error"
+  },
+  "transferHeader": "धनराशि का ट्रांसफर",
+  "@transferHeader": {
+    "type": "text",
+    "description": "transfer_header"
+  },
+  "transferIntro": "यह प्रक्रिया एक पेपर वॉलेट से आपके नैट्रियम वॉलेट में फंड ट्रांसफर कर देगी। \n\nशुरू करने के लिए \"% 1\" बटन को दबाएँ।",
+  "@transferIntro": {
+    "type": "text",
+    "description": "transfer_intro"
+  },
+  "transferIntroKal": "यह प्रक्रिया एक पेपर वॉलेट से आपके कलियम वॉलेट में धनराशि स्थानांतरित कर देगी।\n\nशुरू करने के लिए \"%1\" बटन को दबाएँ।",
+  "@transferIntroKal": {},
+  "transferIntroShort": "यह प्रक्रिया एक पेपर वॉलेट से आपके Nautilus वॉलेट में धनराशि स्थानांतरित कर देगी।",
+  "@transferIntroShort": {
+    "type": "text",
+    "description": "transfer_intro_short"
+  },
+  "transferLoading": "ट्रांसफर हो रहा है",
+  "@transferLoading": {
+    "type": "text",
+    "description": "transfer_loading_text"
+  },
+  "transferManualHint": "कृपया नीचे सीड दर्ज करें।",
+  "@transferManualHint": {
+    "type": "text",
+    "description": "transfer_hint"
+  },
+  "transferNoFunds": "इस सीड पर कोई नैनो नहीं है",
+  "@transferNoFunds": {
+    "type": "text",
+    "description": "transfer_no_funds_toast"
+  },
+  "transferNoFundsKal": "इस सीड पर कोई बनानो नहीं है",
+  "@transferNoFundsKal": {},
+  "transferQrScanError": "इस क्यूआर कोड में वैध सीड नहीं है।",
+  "@transferQrScanError": {
+    "type": "text",
+    "description": "transfer_qr_scan_error"
+  },
+  "transferQrScanHint": "नैनो का सीड \nया निजी कुंजी स्कैन करें",
+  "@transferQrScanHint": {
+    "type": "text",
+    "description": "transfer_qr_scan_hint"
+  },
+  "transferQrScanHintKal": "बनानो का सीड या \nनिजी कुंजी स्कैन करें",
+  "@transferQrScanHintKal": {},
+  "unacknowledged": "क्षुद्र",
+  "@unacknowledged": {
+    "type": "text",
+    "description": "history_unacknowledged"
+  },
+  "unconfirmed": "अपुष्ट",
+  "@unconfirmed": {
+    "type": "text",
+    "description": "history_unconfirmed"
+  },
+  "unfulfilled": "अधूरी",
+  "@unfulfilled": {
+    "type": "text",
+    "description": "history_unfulfilled"
+  },
+  "unlock": "खोले",
+  "@unlock": {
+    "type": "text",
+    "description": "unlocktxt"
+  },
+  "unlockBiometrics": "नैट्रियम अनलॉक करने के लिए प्रमाणित करें",
+  "@unlockBiometrics": {
+    "type": "text",
+    "description": "unlock_kalium_bio"
+  },
+  "unlockBiometricsKal": "कलियम अनलॉक करने के लिए प्रमाणित करें",
+  "@unlockBiometricsKal": {},
+  "unlockPin": "नैट्रियम अनलॉक करने के लिए पिन दर्ज करें",
+  "@unlockPin": {
+    "type": "text",
+    "description": "unlock_kalium_pin"
+  },
+  "unlockPinKal": "कलियम अनलॉक करने के लिए पिन दर्ज करें",
+  "@unlockPinKal": {},
+  "unpaid": "अवैतनिक",
+  "@unpaid": {
+    "type": "text",
+    "description": "history_unpaid"
+  },
+  "unread": "अपठित",
+  "@unread": {
+    "type": "text",
+    "description": "history_unread"
+  },
+  "uptime": "सक्रिय रहने की अवधि",
+  "@uptime": {
+    "type": "text",
+    "description": "Rep uptime"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
+  },
+  "usernameAlreadyRegistered": "आपके पास पहले से ही एक उपयोगकर्ता नाम पंजीकृत है! वर्तमान में अपना उपयोगकर्ता नाम बदलना संभव नहीं है, लेकिन आप एक अलग पते के तहत एक नया पंजीकरण करने के लिए स्वतंत्र हैं।",
+  "@usernameAlreadyRegistered": {
+    "type": "text",
+    "description": "Description for username already registered"
+  },
+  "usernameAvailable": "उपयोगकर्ता नाम उपलब्ध है!",
+  "@usernameAvailable": {
+    "type": "text",
+    "description": "username_available"
+  },
+  "usernameEmpty": "कृपया उपयोगकर्ता नाम दर्ज करें",
+  "@usernameEmpty": {
+    "type": "text",
+    "description": "username_empty"
+  },
+  "usernameError": "उपयोगकर्ता नाम त्रुटि",
+  "@usernameError": {
+    "type": "text",
+    "description": "username_unknown_error"
+  },
+  "usernameInfo": "दोस्तों और परिवार के लिए आपको ढूंढना आसान बनाने के लिए एक अनोखा @username चुनें!\n\nNautilus उपयोगकर्ता नाम होने से आपके नए हैंडल को प्रतिबिंबित करने के लिए वैश्विक स्तर पर UI अपडेट हो जाता है।",
+  "@usernameInfo": {
+    "type": "text",
+    "description": "Description for username registration"
+  },
+  "usernameInvalid": "अवैध उपयोक्ता नाम",
+  "@usernameInvalid": {
+    "type": "text",
+    "description": "username_invalid_name"
+  },
+  "usernameUnavailable": "उपयोक्ता नाम अनुपलब्ध",
+  "@usernameUnavailable": {
+    "type": "text",
+    "description": "username_unavailable"
+  },
+  "usernameWarning": "Nautilus उपयोगकर्ता नाम Nano.to द्वारा प्रदान की जाने वाली एक केंद्रीकृत सेवा है",
+  "@usernameWarning": {
+    "type": "text",
+    "description": "Username centralization warning"
+  },
+  "userNotFound": "उपयोक्ता नहीं मिला!",
+  "@userNotFound": {
+    "type": "text",
+    "description": "user_not_found"
+  },
+  "viewDetails": "अधिक जानकारी देखें",
+  "@viewDetails": {
+    "type": "text",
+    "description": "transaction_details"
+  },
+  "votingWeight": "मतदान भार",
+  "@votingWeight": {
+    "type": "text",
+    "description": "Representative Voting Weight"
+  },
+  "warning": "चेतावनी !",
+  "@warning": {
+    "type": "text",
+    "description": "settings_logout_alert_title"
+  },
+  "welcomeText": "नेट्रियम में आपका स्वागत है। आगे बढ़ने के लिए, आप एक नया वॉलेट बना सकते हैं या एक मौजूदा वॉलेट को आयात कर सकते हैं।",
+  "@welcomeText": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
+  "welcomeTextKal": "केलियम में आपका स्वागत है। आगे बढ़ने के लिए, आप एक नया वॉलेट बना सकते हैं या एक मौजूदा वॉलेट खोल सकते हैं।",
+  "@welcomeTextKal": {},
+  "withAddress": "पते के साथ",
+  "@withAddress": {
+    "type": "text",
+    "description": "with_address"
+  },
+  "withMessage": "मैसेज के साथ",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
+  },
+  "xMinute": "%1 मिनट के बाद",
+  "@xMinute": {
+    "type": "text",
+    "description": "after_minute"
+  },
+  "xMinutes": "%1 मिनट के बाद",
+  "@xMinutes": {
+    "type": "text",
+    "description": "after_minutes"
+  },
+  "yes": "हाँ",
+  "@yes": {
+    "type": "text",
+    "description": "intro_new_wallet_backup_yes"
+  },
+  "yesButton": "हाँ",
+  "@yesButton": {
+    "type": "text",
+    "description": "A button that accepts the mentioned process."
+  }
 }

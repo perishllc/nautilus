@@ -65,10 +65,15 @@ Future<void> main() async {
   if (kReleaseMode) {
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
-  runApp(StateContainer(child: App()));
+  runApp(StateContainer(child: App(!kReleaseMode)));
 }
 
 class App extends StatefulWidget {
+
+  App(bool showDebugBanner) : super();
+
+  final bool showDebugBanner = false;
+
   @override
   _AppState createState() => _AppState();
 }
@@ -88,7 +93,7 @@ class _AppState extends State<App> {
       textStyle: AppStyles.textStyleSnackbar(context),
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       child: MaterialApp(
-        debugShowCheckedModeBanner: true,
+        debugShowCheckedModeBanner: widget.showDebugBanner,
         title: 'Nautilus',
         // theme: ThemeData(
         //   dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,

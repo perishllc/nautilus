@@ -49,7 +49,6 @@ class SendConfirmSheet extends StatefulWidget {
 }
 
 class _SendConfirmSheetState extends State<SendConfirmSheet> {
-  String? destinationAltered;
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
@@ -73,8 +72,6 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     super.initState();
     _registerBus();
     animationOpen = false;
-    // Ensure nano_ prefix on destination
-    destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
 
   @override
@@ -149,34 +146,24 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
-                          text: '',
+                          text: "",
                           children: [
-                            displayCurrencyAmount(
+                            TextSpan(
+                              text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                            displayCurrencySymbol(
                               context,
-                              TextStyle(
-                                color: StateContainer.of(context).curTheme.primary,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'NunitoSans',
-                                decoration: TextDecoration.lineThrough,
-                              ),
+                              AppStyles.textStyleParagraphPrimary(context),
                             ),
                             TextSpan(
-                              text: getCurrencySymbol(context) + getRawAsThemeAwareAmount(context, widget.amountRaw),
-                              style: TextStyle(
-                                color: StateContainer.of(context).curTheme.primary,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'NunitoSans',
-                              ),
+                              text: getRawAsThemeAwareFormattedAmount(context, widget.amountRaw),
+                              style: AppStyles.textStyleParagraphPrimary(context),
                             ),
                             TextSpan(
                               text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
-                              style: TextStyle(
+                              style: AppStyles.textStyleParagraphPrimary(context).copyWith(
                                 color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'NunitoSans',
                               ),
                             ),
                           ],
@@ -205,7 +192,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, destinationAltered!, contactName: widget.contactName)),
+                      child: UIUtil.threeLineAddressText(context, widget.destination!, contactName: widget.contactName)),
                   if (widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw != "0"))
                     Container(
                       margin: const EdgeInsets.only(top: 30.0, bottom: 10),
@@ -217,9 +204,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                           ),
                         ],
                       ),
-                    )
-                  else
-                    const SizedBox(),
+                    ),
                   if (widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw != "0"))
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
@@ -234,64 +219,60 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                           style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.center,
                         ))
-                  else
-                    const SizedBox(),
                 ],
               ),
             ),
 
             //A container for CONFIRM and CANCEL buttons
-            Container(
-              child: Column(
-                children: <Widget>[
-                  // A row for CONFIRM Button
-                  Row(
-                    children: <Widget>[
-                      // CONFIRM Button
-                      AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () async {
-                        // Authenticate
-                        final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                        final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+            Column(
+              children: <Widget>[
+                // A row for CONFIRM Button
+                Row(
+                  children: <Widget>[
+                    // CONFIRM Button
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
+                      // Authenticate
+                      final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                      final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
 
-                        final bool isMessage = widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw == "0");
+                      final bool isMessage = widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw == "0");
 
-                        final String authText = isMessage
-                            ? AppLocalization.of(context)!.sendMessageConfirm
-                            : AppLocalization.of(context)!
-                                .sendAmountConfirm
-                                .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
-                                .replaceAll("%2", StateContainer.of(context).currencyMode);
+                      final String authText = isMessage
+                          ? AppLocalization.of(context)!.sendMessageConfirm
+                          : AppLocalization.of(context)!
+                              .sendAmountConfirm
+                              .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
+                              .replaceAll("%2", StateContainer.of(context).currencyMode);
 
-                        if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
-                          try {
-                            final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, authText);
-                            if (authenticated) {
-                              sl.get<HapticUtil>().fingerprintSucess();
-                              EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
-                            }
-                          } catch (e) {
-                            await authenticateWithPin();
+                      if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+                        try {
+                          final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, authText);
+                          if (authenticated) {
+                            sl.get<HapticUtil>().fingerprintSucess();
+                            EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
                           }
-                        } else {
+                        } catch (e) {
                           await authenticateWithPin();
                         }
-                      })
-                    ],
-                  ),
-                  // A row for CANCEL Button
-                  Row(
-                    children: <Widget>[
-                      // CANCEL Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.cancel, context),
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                        Navigator.of(context).pop();
-                      }),
-                    ],
-                  ),
-                ],
-              ),
+                      } else {
+                        await authenticateWithPin();
+                      }
+                    })
+                  ],
+                ),
+                // A row for CANCEL Button
+                Row(
+                  children: <Widget>[
+                    // CANCEL Button
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.cancel, context),
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+                  ],
+                ),
+              ],
             ),
           ],
         ));
@@ -311,7 +292,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             StateContainer.of(context).wallet!.representative,
             StateContainer.of(context).wallet!.frontier,
             widget.amountRaw,
-            destinationAltered,
+            widget.destination,
             StateContainer.of(context).wallet!.address,
             NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
             max: widget.maxSend);
@@ -342,7 +323,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             StateContainer.of(context).wallet!.history!.length > 0 ? (StateContainer.of(context).wallet!.history![0].height! + 1) : 1;
         final TXData memoTXData = TXData(
           from_address: StateContainer.of(context).wallet!.address,
-          to_address: destinationAltered,
+          to_address: widget.destination,
           amount_raw: widget.amountRaw != "0" ? widget.amountRaw : null,
           uuid: localUuid,
           block: resp?.hash,
@@ -351,7 +332,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           is_request: false,
           is_memo: !isMessage,
           is_message: isMessage,
-          request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
+          request_time: DateTime.now().millisecondsSinceEpoch ~/ 1000,
           memo: widget.memo, // store unencrypted memo
           height: currentBlockHeightInList,
         );
@@ -360,15 +341,15 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
         try {
           // encrypt the memo:
-          final String encryptedMemo = await Box.encrypt(widget.memo!, destinationAltered!, privKey);
+          final String encryptedMemo = await Box.encrypt(widget.memo!, widget.destination!, privKey);
 
           if (isMessage) {
             await sl
                 .get<AccountService>()
-                .sendTXMessage(destinationAltered, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
+                .sendTXMessage(widget.destination, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
           } else {
             // just a memo:
-            await sl.get<AccountService>().sendTXMemo(destinationAltered, StateContainer.of(context).wallet!.address, widget.amountRaw, signature, nonceHex,
+            await sl.get<AccountService>().sendTXMemo(widget.destination, StateContainer.of(context).wallet!.address, widget.amountRaw, signature, nonceHex,
                 encryptedMemo, resp?.hash ?? null, localUuid);
           }
         } catch (e) {
@@ -405,7 +386,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         // check destination of this request is where we're sending to:
         // check to make sure we are the recipient of this request:
         // check to make sure the amounts are the same:
-        if (txData.from_address == destinationAltered &&
+        if (txData.from_address == widget.destination &&
             txData.to_address == StateContainer.of(context).wallet!.address &&
             txData.amount_raw == widget.amountRaw) {
           // this is the payment we're fulfilling
@@ -442,7 +423,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             closeOnTap: true,
             removeUntilHome: true,
             widget: SendCompleteSheet(
-                amountRaw: widget.amountRaw, destination: destinationAltered, contactName: contactName, memo: widget.memo, localAmount: widget.localCurrency));
+                amountRaw: widget.amountRaw, destination: widget.destination, contactName: contactName, memo: widget.memo, localAmount: widget.localCurrency));
       }
     } catch (error) {
       sl.get<Logger>().v("send_confirm_error: $error");

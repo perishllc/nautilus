@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
-import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 
 class RequestCompleteSheet extends StatefulWidget {
   final String? amountRaw;
@@ -27,25 +27,6 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
   @override
   void initState() {
     super.initState();
-    // Indicate that this is a special amount if some digits are not displayed
-    // todo: fix this:
-    // if ((StateContainer.of(context).nyanoMode)) {
-    //   // if (NumberUtil.getRawAsNyanoString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsNyanoString(widget.amountRaw).toString()) {
-    //   //   print(NumberUtil.getRawAsUsableString(widget.amountRaw));
-    //   //   amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
-    //   // } else {
-    //   //   amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsNyanoDecimal(widget.amountRaw), digits: 12).toStringAsFixed(12);
-    //   // }
-    //   amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsNyanoDecimal(widget.amountRaw), digits: 12).toStringAsFixed(12);
-    // } else {
-    //   if (NumberUtil.getRawAsUsableString(widget.amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(widget.amountRaw).toString()) {
-    //     amount = NumberUtil.getRawAsUsableString(widget.amountRaw);
-    //   } else {
-    //     amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(widget.amountRaw), digits: 6).toStringAsFixed(6) + "~";
-    //   }
-    // }
-    amount = NumberUtil.getRawAsUsableStringPrecise(widget.amountRaw);
-    destinationAltered = widget.destination!.replaceAll("xrb_", "nano_");
   }
 
   @override
@@ -56,7 +37,7 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
           children: <Widget>[
             // Sheet handle
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               height: 5,
               width: MediaQuery.of(context).size.width * 0.15,
               decoration: BoxDecoration(
@@ -71,14 +52,14 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
                 children: <Widget>[
                   // Success tick (icon)
                   Container(
-                    alignment: AlignmentDirectional(0, 0),
-                    margin: EdgeInsets.only(bottom: 25),
+                    alignment: AlignmentDirectional.center,
+                    margin: const EdgeInsets.only(bottom: 25),
                     child: Icon(AppIcons.success, size: 100, color: StateContainer.of(context).curTheme.success),
                   ),
                   // Container for the Amount Text
                   Container(
                     margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: StateContainer.of(context).curTheme.backgroundDarkest,
@@ -88,20 +69,28 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        text: '',
+                        text: "",
                         children: [
-                          displayCurrencyAmount(
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                            style: TextStyle(
+                              color: StateContainer.of(context).curTheme.success,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'NunitoSans',
+                            ),
+                          ),
+                          displayCurrencySymbol(
                             context,
                             TextStyle(
                               color: StateContainer.of(context).curTheme.success,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
-                              decoration: TextDecoration.lineThrough,
                             ),
                           ),
                           TextSpan(
-                            text: getCurrencySymbol(context) + ((StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount),
+                            text: (StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount,
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.success,
                               fontSize: 16.0,
@@ -124,7 +113,7 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
                   ),
                   // Container for the "SENT TO" text
                   Container(
-                    margin: EdgeInsets.only(top: 30.0, bottom: 10),
+                    margin: const EdgeInsets.only(top: 30.0, bottom: 10),
                     child: Column(
                       children: <Widget>[
                         // "SENT TO" text
@@ -142,7 +131,7 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
                   ),
                   // The container for the address
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                       margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -155,19 +144,17 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
             ),
 
             // CLOSE Button
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.close, context),
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                        Navigator.of(context).pop();
-                      }),
-                    ],
-                  ),
-                ],
-              ),
+            Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.close, context),
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+                  ],
+                ),
+              ],
             ),
           ],
         ));
