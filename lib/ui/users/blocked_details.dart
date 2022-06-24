@@ -37,55 +37,57 @@ class BlockedDetailsSheet {
     if (user.aliases == null) {
       aliases = [
         // Contact nickname container
-        (user.nickname != null && user.nickname!.isNotEmpty)
-            ? Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.105,
-                  right: MediaQuery.of(context).size.width * 0.105,
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
-                decoration: BoxDecoration(
-                  color: StateContainer.of(context).curTheme.backgroundDarkest,
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: Text(
-                  "★" + user.nickname!,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16.0,
-                    color: StateContainer.of(context).curTheme.text,
-                    fontFamily: 'NunitoSans',
-                  ),
-                ),
-              )
-            : SizedBox(),
-        (user.username != null)
-            ? Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.105,
-                  right: MediaQuery.of(context).size.width * 0.105,
-                  top: 15.0,
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
-                decoration: BoxDecoration(
-                  color: StateContainer.of(context).curTheme.backgroundDarkest,
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: Text(
-                  user.getDisplayName()!,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16.0,
-                    color: StateContainer.of(context).curTheme.primary,
-                    fontFamily: 'NunitoSans',
-                  ),
-                ),
-              )
-            : SizedBox(),
+        if (user.nickname != null && user.nickname!.isNotEmpty)
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.105,
+              right: MediaQuery.of(context).size.width * 0.105,
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+            decoration: BoxDecoration(
+              color: StateContainer.of(context).curTheme.backgroundDarkest,
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: Text(
+              "★" + user.nickname!,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16.0,
+                color: StateContainer.of(context).curTheme.text,
+                fontFamily: 'NunitoSans',
+              ),
+            ),
+          )
+        else
+          const SizedBox(),
+        if (user.username != null)
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.105,
+              right: MediaQuery.of(context).size.width * 0.105,
+              top: 15.0,
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+            decoration: BoxDecoration(
+              color: StateContainer.of(context).curTheme.backgroundDarkest,
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: Text(
+              user.getDisplayName()!,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16.0,
+                color: StateContainer.of(context).curTheme.primary,
+                fontFamily: 'NunitoSans',
+              ),
+            ),
+          )
+        else
+          const SizedBox(),
       ];
     } else {
       for (var i = 0; i < user.aliases!.length; i += 2) {
@@ -99,7 +101,7 @@ class BlockedDetailsSheet {
             right: MediaQuery.of(context).size.width * 0.105,
             top: 15.0,
           ),
-          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
           decoration: BoxDecoration(
             color: StateContainer.of(context).curTheme.backgroundDarkest,
             borderRadius: BorderRadius.circular(25),
@@ -119,7 +121,7 @@ class BlockedDetailsSheet {
     }
 
     var aliasContainer = Container(
-      constraints: BoxConstraints(minHeight: 50, maxHeight: 400),
+      constraints: const BoxConstraints(minHeight: 50, maxHeight: 400),
       child: Scrollbar(
         child: SingleChildScrollView(
           child: Column(
@@ -156,7 +158,7 @@ class BlockedDetailsSheet {
                         Container(
                           width: 50,
                           height: 50,
-                          margin: EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
+                          margin: const EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
                           child: FlatButton(
                             highlightColor: StateContainer.of(context).curTheme.text15,
                             splashColor: StateContainer.of(context).curTheme.text15,
@@ -180,14 +182,14 @@ class BlockedDetailsSheet {
                               }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
                             },
                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
-                            padding: EdgeInsets.all(13.0),
+                            padding: const EdgeInsets.all(13.0),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                             materialTapTargetSize: MaterialTapTargetSize.padded,
                           ),
                         ),
                         // The header of the sheet
                         Container(
-                          margin: EdgeInsets.only(top: 25.0),
+                          margin: const EdgeInsets.only(top: 25.0),
                           constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                           child: Column(
                             children: <Widget>[
@@ -205,11 +207,11 @@ class BlockedDetailsSheet {
                         Container(
                           width: 50,
                           height: 50,
-                          margin: EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
+                          margin: const EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
                           child: TextButton(
                             style: TextButton.styleFrom(
                               primary: StateContainer.of(context).curTheme.text15,
-                              padding: EdgeInsets.all(13.0),
+                              padding: const EdgeInsets.all(13.0),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                               tapTargetSize: MaterialTapTargetSize.padded,
                             ),
@@ -227,37 +229,38 @@ class BlockedDetailsSheet {
                     // The main container that holds Contact Name and Contact Address
                     Expanded(
                       child: Container(
-                        padding: EdgeInsetsDirectional.only(top: 4, bottom: 12),
+                        padding: const EdgeInsetsDirectional.only(top: 4, bottom: 12),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: combineLists(
                             getAliases(context, blocked),
                             [
                               // Contact Name container
-                              (blocked.nickname != null && blocked.nickname!.isNotEmpty)
-                                  ? Container(
-                                      width: double.infinity,
-                                      margin: EdgeInsets.only(
-                                        left: MediaQuery.of(context).size.width * 0.105,
-                                        right: MediaQuery.of(context).size.width * 0.105,
-                                      ),
-                                      padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
-                                      decoration: BoxDecoration(
-                                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                        borderRadius: BorderRadius.circular(25),
-                                      ),
-                                      child: Text(
-                                        blocked.getDisplayName()!,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16.0,
-                                          color: StateContainer.of(context).curTheme.primary,
-                                          fontFamily: 'NunitoSans',
-                                        ),
-                                      ),
-                                    )
-                                  : SizedBox(),
+                              if (blocked.nickname != null && blocked.nickname!.isNotEmpty)
+                                Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width * 0.105,
+                                    right: MediaQuery.of(context).size.width * 0.105,
+                                  ),
+                                  padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+                                  decoration: BoxDecoration(
+                                    color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: Text(
+                                    blocked.getDisplayName()!,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16.0,
+                                      color: StateContainer.of(context).curTheme.primary,
+                                      fontFamily: 'NunitoSans',
+                                    ),
+                                  ),
+                                )
+                              else
+                                const SizedBox(),
                               // Contact Address
                               GestureDetector(
                                 onTap: () {
@@ -278,7 +281,7 @@ class BlockedDetailsSheet {
                                   width: double.infinity,
                                   margin: EdgeInsets.only(
                                       left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105, top: 15),
-                                  padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                                   decoration: BoxDecoration(
                                     color: StateContainer.of(context).curTheme.backgroundDarkest,
                                     borderRadius: BorderRadius.circular(25),
@@ -289,7 +292,7 @@ class BlockedDetailsSheet {
                               ),
                               // Address Copied text container
                               Container(
-                                margin: EdgeInsets.only(top: 5, bottom: 5),
+                                margin: const EdgeInsets.only(top: 5, bottom: 5),
                                 child: Text(_addressCopied ? AppLocalization.of(context)!.addressCopied : "",
                                     style: TextStyle(
                                       fontSize: 14.0,
@@ -298,21 +301,18 @@ class BlockedDetailsSheet {
                                       fontWeight: FontWeight.w600,
                                     )),
                               ),
-                              (blocked.aliases != null)
-                                  ?
-                                  // "ALIASES" text container
-                                  Container(
-                                      margin: EdgeInsets.only(bottom: 10.0),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Text(
-                                            CaseChange.toUpperCase(AppLocalization.of(context)!.aliases, context),
-                                            style: AppStyles.textStyleHeader(context),
-                                          ),
-                                        ],
+                              if (blocked.aliases != null)
+                                Container(
+                                  margin: const EdgeInsets.only(bottom: 10.0),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Text(
+                                        CaseChange.toUpperCase(AppLocalization.of(context)!.aliases, context),
+                                        style: AppStyles.textStyleHeader(context),
                                       ),
-                                    )
-                                  : SizedBox(),
+                                    ],
+                                  ),
+                                ),
                             ],
                           ),
                         ),
@@ -320,31 +320,29 @@ class BlockedDetailsSheet {
                     ),
 
                     // A column with "Send" and "Close" buttons
-                    Container(
-                      child: Column(
-                        children: <Widget>[
-                          // Row(
-                          //   children: <Widget>[
-                          //     // TODO: unblock Button
-                          //     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS,
-                          //         disabled: StateContainer.of(context).wallet.accountBalance == BigInt.zero, onPressed: () {
-                          //       Navigator.of(context).pop();
-                          //       Sheets.showAppHeightNineSheet(
-                          //           context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user));
-                          //     }),
-                          //   ],
-                          // ),
-                          Row(
-                            children: <Widget>[
-                              // Close Button
-                              AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
-                                  onPressed: () {
-                                Navigator.pop(context);
-                              }),
-                            ],
-                          ),
-                        ],
-                      ),
+                    Column(
+                      children: <Widget>[
+                        // Row(
+                        //   children: <Widget>[
+                        //     // TODO: unblock Button
+                        //     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS,
+                        //         disabled: StateContainer.of(context).wallet.accountBalance == BigInt.zero, onPressed: () {
+                        //       Navigator.of(context).pop();
+                        //       Sheets.showAppHeightNineSheet(
+                        //           context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user));
+                        //     }),
+                        //   ],
+                        // ),
+                        Row(
+                          children: <Widget>[
+                            // Close Button
+                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
+                                onPressed: () {
+                              Navigator.pop(context);
+                            }),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ));

@@ -29,7 +29,8 @@ class AppStyles {
 
   // Text style for paragraph text with primary color.
   static TextStyle textStyleParagraphSuccess(BuildContext context) {
-    return TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w700, color: StateContainer.of(context).curTheme.success);
+    // changed to medium font-size to match the primary style
+    return TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.medium, fontWeight: FontWeight.w700, color: StateContainer.of(context).curTheme.success);
   }
 
   // For snackbar/Toast text

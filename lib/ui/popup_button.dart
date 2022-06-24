@@ -74,7 +74,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
         if (amountBigInt != null && sufficientBalance) {
           // Go to confirm sheet
           Sheets.showAppHeightNineSheet(
-              context: context, widget: SendConfirmSheet(amountRaw: address.amount, destination: address.address, contactName: user?.getDisplayName()));
+              context: context, widget: SendConfirmSheet(amountRaw: address.amount!, destination: address.address!, contactName: user?.getDisplayName()));
         } else {
           // Go to send sheet
           Sheets.showAppHeightNineSheet(

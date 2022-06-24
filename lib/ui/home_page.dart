@@ -1384,7 +1384,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       if (amount != null && sufficientBalance) {
         // Go to send confirm with amount
         Sheets.showAppHeightNineSheet(
-            context: context, widget: SendConfirmSheet(amountRaw: amount, destination: address.address, contactName: user?.getDisplayName()));
+            context: context, widget: SendConfirmSheet(amountRaw: amount, destination: address.address!, contactName: user?.getDisplayName()));
       } else {
         // Go to send with address
         Sheets.showAppHeightNineSheet(

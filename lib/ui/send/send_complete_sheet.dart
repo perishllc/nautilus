@@ -11,13 +11,13 @@ import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 
 class SendCompleteSheet extends StatefulWidget {
-  final String? amountRaw;
-  final String? destination;
+  final String amountRaw;
+  final String destination;
   final String? contactName;
   final String? localAmount;
   final String? memo;
 
-  SendCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.memo}) : super();
+  SendCompleteSheet({required this.amountRaw, required this.destination, this.contactName, this.localAmount, this.memo}) : super();
 
   _SendCompleteSheetState createState() => _SendCompleteSheetState();
 }
@@ -134,7 +134,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, widget.amountRaw!, type: ThreeLineAddressTextType.SUCCESS, contactName: widget.contactName)),
+                      child: UIUtil.threeLineAddressText(context, widget.destination, type: ThreeLineAddressTextType.SUCCESS, contactName: widget.contactName)),
                 ],
               ),
             ),

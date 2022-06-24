@@ -35,15 +35,17 @@ import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:uuid/uuid.dart';
 
 class SendConfirmSheet extends StatefulWidget {
-  final String? amountRaw;
-  final String? destination;
+  final String amountRaw;
+  final String destination;
   final String? contactName;
   final String? localCurrency;
   final bool maxSend;
   final int? natriconNonce;
   final String? memo;
 
-  SendConfirmSheet({this.amountRaw, this.destination, this.contactName, this.localCurrency, this.natriconNonce, this.maxSend = false, this.memo}) : super();
+  SendConfirmSheet(
+      {required this.amountRaw, required this.destination, this.contactName, this.localCurrency, this.natriconNonce, this.maxSend = false, this.memo})
+      : super();
 
   _SendConfirmSheetState createState() => _SendConfirmSheetState();
 }
@@ -192,7 +194,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, widget.destination!, contactName: widget.contactName)),
+                      child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
                   if (widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw != "0"))
                     Container(
                       margin: const EdgeInsets.only(top: 30.0, bottom: 10),
@@ -297,7 +299,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
             max: widget.maxSend);
         StateContainer.of(context).wallet!.frontier = resp.hash;
-        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw!);
+        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
       }
 
       // if there's a memo to be sent, send it:
@@ -341,7 +343,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
         try {
           // encrypt the memo:
-          final String encryptedMemo = await Box.encrypt(widget.memo!, widget.destination!, privKey);
+          final String encryptedMemo = await Box.encrypt(widget.memo!, widget.destination, privKey);
 
           if (isMessage) {
             await sl
@@ -403,7 +405,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       // Show complete
       String? contactName = widget.contactName;
       if (widget.contactName == null || widget.contactName!.isEmpty) {
-        final User? user = await sl.get<DBHelper>().getUserWithAddress(widget.destination!);
+        final User? user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
         if (user != null) {
           contactName = user.getDisplayName();
         }
@@ -445,7 +447,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         expectedPin: expectedPin,
         description: AppLocalization.of(context)!
             .sendAmountConfirmPin
-            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw!))
+            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),
       );
     }));

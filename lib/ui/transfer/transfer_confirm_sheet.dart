@@ -334,9 +334,9 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         }
       }
       state!.requestUpdate();
-    } catch (e) {
+    } catch (error) {
       // Less-important error
-      sl.get<Logger>().e("Error processing wallet", e);
+      sl.get<Logger>().e("Error processing wallet", error);
     } finally {
       // state.unlockCallback();
     }

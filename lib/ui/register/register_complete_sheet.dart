@@ -3,6 +3,7 @@ import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
@@ -21,9 +22,6 @@ class RequestCompleteSheet extends StatefulWidget {
 }
 
 class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
-  late String amount;
-  late String destinationAltered;
-
   @override
   void initState() {
     super.initState();
@@ -73,38 +71,20 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
                         children: [
                           TextSpan(
                             text: getThemeAwareRawAccuracy(context, widget.amountRaw),
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.success,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                            ),
+                            style: AppStyles.textStyleParagraphSuccess(context),
                           ),
                           displayCurrencySymbol(
                             context,
-                            TextStyle(
-                              color: StateContainer.of(context).curTheme.success,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                            ),
+                            AppStyles.textStyleParagraphSuccess(context),
                           ),
                           TextSpan(
-                            text: (StateContainer.of(context).nyanoMode) ? NumberUtil.getNanoStringAsNyano(amount) : amount,
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.success,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
-                            ),
+                            text: getRawAsThemeAwareAmount(context, widget.amountRaw),
+                            style: AppStyles.textStyleParagraphSuccess(context),
                           ),
                           TextSpan(
                             text: widget.localAmount != null ? " (${widget.localAmount})" : "",
-                            style: TextStyle(
+                            style: AppStyles.textStyleParagraphSuccess(context).copyWith(
                               color: StateContainer.of(context).curTheme.success!.withOpacity(0.75),
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'NunitoSans',
                             ),
                           ),
                         ],
@@ -138,7 +118,7 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, destinationAltered, type: ThreeLineAddressTextType.SUCCESS, contactName: widget.contactName)),
+                      child: UIUtil.threeLineAddressText(context, widget.destination!, type: ThreeLineAddressTextType.SUCCESS, contactName: widget.contactName)),
                 ],
               ),
             ),

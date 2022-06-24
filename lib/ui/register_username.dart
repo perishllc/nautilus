@@ -468,13 +468,17 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                                 _usernameValidationText = AppLocalization.of(context)!.insufficientBalance;
                               });
                             } else {
+                              String? destination = _leaseDetails!["plans"][_leaseSelectedIndex]["address"] as String?;
+                              if (destination == null) {
+                                return Container();
+                              }
                               // build the transaction:
                               Sheets.showAppHeightNineSheet(
                                   context: context,
                                   widget: RegisterConfirmSheet(
                                     // localCurrency: StateContainer.of(context).curCurrency,
                                     // contact: contact,
-                                    destination: _leaseDetails!["plans"][_leaseSelectedIndex]["address"] as String?,
+                                    destination: destination,
                                     // quickSendAmount: item.amount,
                                     amountRaw: price,
                                     username: username,

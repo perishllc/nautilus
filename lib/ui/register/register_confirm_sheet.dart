@@ -28,8 +28,8 @@ import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 
 class RegisterConfirmSheet extends StatefulWidget {
-  final String? amountRaw;
-  final String? destination;
+  final String amountRaw;
+  final String destination;
   final String? contactName;
   final String? userName;
   final String? localCurrency;
@@ -39,8 +39,8 @@ class RegisterConfirmSheet extends StatefulWidget {
   final bool maxSend;
 
   RegisterConfirmSheet(
-      {this.amountRaw,
-      this.destination,
+      {required this.amountRaw,
+      required this.destination,
       this.contactName,
       this.userName,
       this.localCurrency,
@@ -59,7 +59,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
   StreamSubscription<AuthenticatedEvent>? _authSub;
 
   void _registerBus() {
-    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((event) {
+    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((AuthenticatedEvent event) {
       if (event.authType == AUTH_EVENT_TYPE.SEND) {
         _doSend();
       }
@@ -76,7 +76,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
   void initState() {
     super.initState();
     _registerBus();
-    this.animationOpen = false;
+    animationOpen = false;
   }
 
   @override
@@ -188,52 +188,50 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
             ),
 
             //A container for CONFIRM and CANCEL buttons
-            Container(
-              child: Column(
-                children: <Widget>[
-                  // A row for CONFIRM Button
-                  Row(
-                    children: <Widget>[
-                      // CONFIRM Button
-                      AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () async {
-                        // Authenticate
-                        final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                        final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
-                        if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
-                          try {
-                            final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
-                                context,
-                                AppLocalization.of(context)!
-                                    .sendAmountConfirm
-                                    .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
-                                    .replaceAll("%2", StateContainer.of(context).currencyMode));
-                            if (authenticated) {
-                              sl.get<HapticUtil>().fingerprintSucess();
-                              EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
-                            }
-                          } catch (e) {
-                            await authenticateWithPin();
+            Column(
+              children: <Widget>[
+                // A row for CONFIRM Button
+                Row(
+                  children: <Widget>[
+                    // CONFIRM Button
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
+                      // Authenticate
+                      final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                      final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                      if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+                        try {
+                          final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
+                              context,
+                              AppLocalization.of(context)!
+                                  .sendAmountConfirm
+                                  .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
+                                  .replaceAll("%2", StateContainer.of(context).currencyMode));
+                          if (authenticated) {
+                            sl.get<HapticUtil>().fingerprintSucess();
+                            EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
                           }
-                        } else {
+                        } catch (e) {
                           await authenticateWithPin();
                         }
-                      })
-                    ],
-                  ),
-                  // A row for CANCEL Button
-                  Row(
-                    children: <Widget>[
-                      // CANCEL Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.cancel, context),
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                        Navigator.of(context).pop();
-                      }),
-                    ],
-                  ),
-                ],
-              ),
+                      } else {
+                        await authenticateWithPin();
+                      }
+                    })
+                  ],
+                ),
+                // A row for CANCEL Button
+                Row(
+                  children: <Widget>[
+                    // CANCEL Button
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.cancel, context),
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+                  ],
+                ),
+              ],
             ),
           ],
         ));
@@ -251,7 +249,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
           NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
           max: widget.maxSend);
       StateContainer.of(context).wallet!.frontier = resp.hash;
-      StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw!);
+      StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
 
       // Update the state with the new balance
       StateContainer.of(context).requestUpdate();

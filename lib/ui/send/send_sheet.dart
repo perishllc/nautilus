@@ -831,7 +831,7 @@ class _SendSheetState extends State<SendSheet> {
                                 context: context,
                                 widget: SendConfirmSheet(
                                     amountRaw: amountRaw,
-                                    destination: user.address,
+                                    destination: user.address!,
                                     contactName: user.getDisplayName(),
                                     maxSend: isMaxSend,
                                     localCurrency: _localCurrencyMode ? _amountController!.text : null,
@@ -1005,7 +1005,7 @@ class _SendSheetState extends State<SendSheet> {
                                       amountRaw: _localCurrencyMode
                                           ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
                                           : _rawAmount ?? getThemeAwareAmountAsRaw(context, _amountController!.text),
-                                      destination: user != null ? user.address : address.address,
+                                      destination: user?.address ?? address.address!,
                                       contactName: user?.getDisplayName(),
                                       maxSend: _isMaxSend(),
                                       localCurrency: _localCurrencyMode ? _amountController!.text : null));
