@@ -104,26 +104,26 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   Future<void> _getContactsPermissions() async {
-    bool? contactsOn = await sl.get<SharedPrefsUtil>().getContactsOn();
+    // bool? contactsOn = await sl.get<SharedPrefsUtil>().getContactsOn();
 
-    // ask for contacts permission if we haven't already:
-    if (contactsOn == null) {
-      // check again after reloading prefs:
-      await sl.get<SharedPrefsUtil>().reload();
+    // // ask for contacts permission if we haven't already:
+    // if (contactsOn == null) {
+    //   // check again after reloading prefs:
+    //   await sl.get<SharedPrefsUtil>().reload();
 
-      contactsOn = await sl.get<SharedPrefsUtil>().getContactsOn();
+    //   contactsOn = await sl.get<SharedPrefsUtil>().getContactsOn();
 
-      // really is null:
-      if (contactsOn == null) {
-        final bool contactsEnabled = await cont.FlutterContacts.requestPermission();
-        await sl.get<SharedPrefsUtil>().setContactsOn(contactsEnabled);
-        EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
-      } else {
-        EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsOn));
-      }
-    } else {
-      EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsOn));
-    }
+    //   // really is null:
+    //   if (contactsOn == null) {
+    //     final bool contactsEnabled = await cont.FlutterContacts.requestPermission();
+    //     await sl.get<SharedPrefsUtil>().setContactsOn(contactsEnabled);
+    //     EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
+    //   } else {
+    //     EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsOn));
+    //   }
+    // } else {
+    //   EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsOn));
+    // }
   }
 
   @override
