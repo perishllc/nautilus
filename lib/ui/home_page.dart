@@ -891,7 +891,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         }
         // handle pending background events:
         if (!StateContainer.of(context).wallet!.loading! && !_lockTriggered) {
-          handlePendingBackgroundMessages();
+          handleReceivableBackgroundMessages();
         }
 
         super.didChangeAppLifecycleState(state);
@@ -938,12 +938,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     setState(() {
       _isRefreshing = true;
     });
-    // Hide refresh indicator after 2.5 seconds
-    Future.delayed(const Duration(milliseconds: 2500), () {
-      setState(() {
-        _isRefreshing = false;
-      });
-    });
     sl.get<HapticUtil>().success();
     await StateContainer.of(context).requestUpdate();
     // queries the db for account specific solids:
@@ -951,6 +945,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     _updateTXData();
     // for memos:
     _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
+    // Hide refresh indicator after 2.5 seconds
+    Future.delayed(const Duration(milliseconds: 2500), () {
+      setState(() {
+        _isRefreshing = false;
+      });
+    });
     // await generateUnifiedList(fastUpdate: false);
     // setState(() {});
   }
@@ -1405,8 +1405,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  // handle pending messages
-  Future<void> handlePendingBackgroundMessages() async {
+  // handle receivable messages
+  Future<void> handleReceivableBackgroundMessages() async {
     if (StateContainer.of(context).wallet != null) {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.reload();
@@ -3194,8 +3194,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           controller: _scrollController,
           padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
           children: <Widget>[
-            // REMOTE MESSAGE CARD
-            if (StateContainer.of(context).activeAlert != null) _buildRemoteMessageCard(StateContainer.of(context).activeAlert),
             _buildNoSearchResultsCard(context),
           ],
         ),
@@ -3309,7 +3307,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 context,
                 amount_raw: "2000000000000000000000000000000000",
                 displayName: AppLocalization.of(context)!.examplePaymentFrom,
-                memo: AppLocalization.of(context)!.examplePaymentPendingMemo,
+                memo: AppLocalization.of(context)!.examplePaymentReceivableMemo,
                 is_recipient: true,
                 is_request: true,
                 is_fulfilled: false,
@@ -3333,7 +3331,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
 
     if (StateContainer.of(context).activeAlert != null) {
-      // Setup history list
+      // Setup unified list
       if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet!.address}alert")) {
         _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet!.address}alert", () => GlobalKey<AnimatedListState>());
         setState(() {
@@ -3346,16 +3344,22 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           );
         });
       }
-      return ReactiveRefreshIndicator(
-        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-        onRefresh: _refresh,
-        isRefreshing: _isRefreshing,
-        child: AnimatedList(
-          controller: _scrollController,
-          key: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address}alert"],
-          padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-          initialItemCount: _unifiedListMap[StateContainer.of(context).wallet!.address]!.length + 1,
-          itemBuilder: _buildUnifiedItem,
+      return DraggableScrollbar(
+        controller: _scrollController,
+        scrollbarColor: StateContainer.of(context).curTheme.primary!,
+        scrollbarTopMargin: 10.0,
+        scrollbarBottomMargin: 20.0,
+        child: ReactiveRefreshIndicator(
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          onRefresh: _refresh,
+          isRefreshing: _isRefreshing,
+          child: AnimatedList(
+            controller: _scrollController,
+            key: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address}alert"],
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+            initialItemCount: _unifiedListMap[StateContainer.of(context).wallet!.address]!.length + 1,
+            itemBuilder: _buildUnifiedItem,
+          ),
         ),
       );
     }

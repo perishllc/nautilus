@@ -40,8 +40,8 @@ import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/callback_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/pending_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/pending_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/receivable_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/receivable_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
@@ -163,7 +163,7 @@ class StateContainerState extends State<StateContainer> {
   // branch subscription:
   StreamSubscription<Map>? _branchSub;
 
-  List<String?> pendingRequests = [];
+  List<String?> receivableRequests = [];
   List<String?> alreadyReceived = [];
 
   // List of Verified Nano Ninja Nodes
@@ -755,9 +755,9 @@ class StateContainerState extends State<StateContainer> {
     // get the preference for the receive threshold:
     sl.get<SharedPrefsUtil>().getMinRawReceive().then((String? minRaw) {
       receiveThreshold = minRaw;
-      // Combat spam by raising minimum receive if pending block count is large enough
+      // Combat spam by raising minimum receive if receivable block count is large enough
       // only override the user preference if it was set to 0 (default)
-      if (response.pendingCount != null && response.pendingCount! > 50 && minRaw == "0") {
+      if (response.receivableCount != null && response.receivableCount! > 50 && minRaw == "0") {
         // Bump min receive to 0.05 NANO
         receiveThreshold = BigInt.from(5).pow(28).toString();
       }
@@ -804,8 +804,8 @@ class StateContainerState extends State<StateContainer> {
       sl.get<AccountService>().processQueue();
       return;
     }
-    final PendingResponseItem pendingItem = PendingResponseItem(hash: resp.hash!, source: resp.account!, amount: resp.amount!);
-    final String? receivedHash = await handlePendingItem(pendingItem, link_as_account: resp.block!.linkAsAccount);
+    final ReceivableResponseItem receivableItem = ReceivableResponseItem(hash: resp.hash!, source: resp.account!, amount: resp.amount!);
+    final String? receivedHash = await handleReceivableItem(receivableItem, link_as_account: resp.block!.linkAsAccount);
     if (receivedHash != null) {
       final AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
           type: BlockTypes.RECEIVE,
@@ -830,22 +830,22 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  Future<String?> handlePendingItem(PendingResponseItem? item, {String? link_as_account}) async {
-    if (pendingRequests.contains(item?.hash)) {
+  Future<String?> handleReceivableItem(ReceivableResponseItem? item, {String? link_as_account}) async {
+    if (receivableRequests.contains(item?.hash)) {
       return null;
     }
-    pendingRequests.add(item?.hash);
+    receivableRequests.add(item?.hash);
     final BigInt? amountBigInt = BigInt.tryParse(item!.amount!);
-    sl.get<Logger>().d("Handling ${item.hash} pending");
+    sl.get<Logger>().d("Handling ${item.hash} receivable");
     if (amountBigInt != null) {
       // don't process if under the receive threshold:
       if (amountBigInt < BigInt.parse(receiveThreshold!)) {
-        pendingRequests.remove(item.hash);
+        receivableRequests.remove(item.hash);
         return null;
       }
       // don't process if the user / address is blocked:
       if (await sl.get<DBHelper>().blockedExistsWithAddress(item.source!)) {
-        pendingRequests.remove(item.hash);
+        receivableRequests.remove(item.hash);
         log.d("Blocked send from address: ${item.source}");
         return null;
       }
@@ -870,7 +870,7 @@ class StateContainerState extends State<StateContainer> {
 
       if (correctAccount == null) {
         log.d("Could not find account for ${link_as_account}");
-        pendingRequests.remove(item.hash);
+        receivableRequests.remove(item.hash);
         return null;
       }
 
@@ -883,13 +883,13 @@ class StateContainerState extends State<StateContainer> {
           final ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, link_as_account, privKey);
           wallet!.openBlock = resp.hash;
           wallet!.frontier = resp.hash;
-          pendingRequests.remove(item.hash);
+          receivableRequests.remove(item.hash);
           alreadyReceived.add(item.hash);
           // don't add to history list since we're not on the current account
           // return resp.hash;
           return null;
         } catch (e) {
-          pendingRequests.remove(item.hash);
+          receivableRequests.remove(item.hash);
           sl.get<Logger>().e("Error creating open", e);
         }
       } else {
@@ -897,15 +897,15 @@ class StateContainerState extends State<StateContainer> {
           final ProcessResponse resp =
               await sl.get<AccountService>().requestReceive(wallet!.representative, accountResp.frontier, item.amount, item.hash, link_as_account, privKey);
           // wallet.frontier = resp.hash;
-          pendingRequests.remove(item.hash);
+          receivableRequests.remove(item.hash);
           alreadyReceived.add(item.hash);
         } catch (e) {
-          pendingRequests.remove(item.hash);
+          receivableRequests.remove(item.hash);
           sl.get<Logger>().e("Error creating receive", e);
         }
       }
 
-      // receive any other pendings first?:
+      // receive any other receivables first?:
       //{
       // BigInt totalTransferred = BigInt.zero;
       // AccountBalanceItem balanceItem = new AccountBalanceItem();
@@ -913,11 +913,11 @@ class StateContainerState extends State<StateContainer> {
       // if (!accountResp.unopened) {
       //   balanceItem.frontier = accountResp.frontier;
       // }
-      // // Receive pending blocks
-      // PendingResponse pr = await sl.get<AccountService>().getPending(link_as_account, 20);
-      // Map<String, PendingResponseItem> pendingBlocks = pr.blocks;
-      // for (String hash in pendingBlocks.keys) {
-      //   PendingResponseItem item = pendingBlocks[hash];
+      // // Receive receivable blocks
+      // ReceivableResponse pr = await sl.get<AccountService>().getReceivable(link_as_account, 20);
+      // Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks;
+      // for (String hash in receivableBlocks.keys) {
+      //   ReceivableResponseItem item = receivableBlocks[hash];
       //   if (balanceItem.frontier != null) {
       //     ProcessResponse resp = await sl
       //         .get<AccountService>()
@@ -948,11 +948,11 @@ class StateContainerState extends State<StateContainer> {
         final ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet!.address, await _getPrivKey());
         wallet!.openBlock = resp.hash;
         wallet!.frontier = resp.hash;
-        pendingRequests.remove(item.hash);
+        receivableRequests.remove(item.hash);
         alreadyReceived.add(item.hash);
         return resp.hash;
       } catch (e) {
-        pendingRequests.remove(item.hash);
+        receivableRequests.remove(item.hash);
         sl.get<Logger>().e("Error creating open", e);
       }
     } else {
@@ -964,11 +964,11 @@ class StateContainerState extends State<StateContainer> {
             .requestReceive(wallet!.representative, wallet!.frontier, item.amount, item.hash, wallet!.address, await _getPrivKey());
 
         wallet!.frontier = resp.hash;
-        pendingRequests.remove(item.hash);
+        receivableRequests.remove(item.hash);
         alreadyReceived.add(item.hash);
         return resp.hash;
       } catch (e) {
-        pendingRequests.remove(item.hash);
+        receivableRequests.remove(item.hash);
         sl.get<Logger>().e("Error creating receive", e);
       }
     }
@@ -994,7 +994,7 @@ class StateContainerState extends State<StateContainer> {
     sl.get<DBHelper>().getAccounts(await getSeed()).then((List<Account> accounts) {
       for (final Account account in accounts) {
         resp.balances!.forEach((String address, AccountBalanceItem balance) {
-          final String combinedBalance = (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.pending!)!).toString();
+          final String combinedBalance = (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.receivable!)!).toString();
           if (address == account.address && combinedBalance != account.balance) {
             sl.get<DBHelper>().updateAccountBalance(account, combinedBalance);
           }
@@ -1003,7 +1003,7 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
-  Future<void> requestUpdate({bool pending = true}) async {
+  Future<void> requestUpdate({bool receivable = true}) async {
     if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
       final String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
       String? fcmToken;
@@ -1029,7 +1029,7 @@ class StateContainerState extends State<StateContainer> {
       if (wallet!.history != null && wallet!.history!.length > 1) {
         count = 50;
       }
-      try {
+      // try {
         final AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet!.address, count: count, raw: true);
         _requestBalances();
         bool postedToHome = false;
@@ -1066,20 +1066,20 @@ class StateContainerState extends State<StateContainer> {
 
         sl.get<AccountService>().pop();
         sl.get<AccountService>().processQueue();
-        // Receive pendings
-        if (pending) {
-          pendingRequests.clear();
-          final PendingResponse pendingResp =
-              await sl.get<AccountService>().getPending(wallet!.address, max(wallet!.blockCount ?? 0, 10), threshold: receiveThreshold);
+        // Receive receivables
+        if (receivable) {
+          receivableRequests.clear();
+          final ReceivableResponse receivableResp =
+              await sl.get<AccountService>().getReceivable(wallet!.address, max(wallet!.blockCount ?? 0, 10), threshold: receiveThreshold);
 
           // for unfulfilled payments:
           final List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
 
-          // Initiate receive/open request for each pending
-          for (final String hash in pendingResp.blocks!.keys) {
-            final PendingResponseItem? pendingResponseItem = pendingResp.blocks![hash];
-            pendingResponseItem?.hash = hash;
-            final String? receivedHash = await handlePendingItem(pendingResponseItem);
+          // Initiate receive/open request for each receivable
+          for (final String hash in receivableResp.blocks!.keys) {
+            final ReceivableResponseItem? receivableResponseItem = receivableResp.blocks![hash];
+            receivableResponseItem?.hash = hash;
+            final String? receivedHash = await handleReceivableItem(receivableResponseItem);
             if (receivedHash != null) {
               // payments:
               // check to see if this fulfills a payment request:
@@ -1090,8 +1090,8 @@ class StateContainerState extends State<StateContainer> {
                 // check to make sure we made the request:
                 // check to make sure the amounts are the same:
                 if (txData.from_address == wallet!.address &&
-                    txData.to_address == pendingResponseItem!.source &&
-                    txData.amount_raw == pendingResponseItem.amount &&
+                    txData.to_address == receivableResponseItem!.source &&
+                    txData.amount_raw == receivableResponseItem.amount &&
                     txData.is_fulfilled == false) {
                   // this is the payment we're fulfilling
                   // update the TXData to be fulfilled
@@ -1105,10 +1105,10 @@ class StateContainerState extends State<StateContainer> {
 
               final AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
                   type: BlockTypes.RECEIVE,
-                  account: pendingResponseItem!.source,
-                  amount: pendingResponseItem.amount,
+                  account: receivableResponseItem!.source,
+                  amount: receivableResponseItem.amount,
                   hash: receivedHash,
-                  link: pendingResponseItem.hash,
+                  link: receivableResponseItem.hash,
                   local_timestamp: (DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond));
               if (!wallet!.history!.contains(histItem)) {
                 setState(() {
@@ -1116,7 +1116,7 @@ class StateContainerState extends State<StateContainer> {
                   histItem.height = wallet!.confirmationHeight + 1;
                   wallet!.confirmationHeight += 1;
                   wallet!.history!.insert(0, histItem);
-                  wallet!.accountBalance += BigInt.parse(pendingResponseItem.amount!);
+                  wallet!.accountBalance += BigInt.parse(receivableResponseItem.amount!);
                   // Send list to home screen
                   EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
                   updateUnified(false);
@@ -1125,10 +1125,10 @@ class StateContainerState extends State<StateContainer> {
             }
           }
         }
-      } catch (e) {
-        // TODO handle account history error
-        sl.get<Logger>().e("account_history e", e);
-      }
+      // } catch (e) {
+      //   // TODO handle account history error
+      //   sl.get<Logger>().e("account_history e", e);
+      // }
     }
   }
 
@@ -1144,7 +1144,7 @@ class StateContainerState extends State<StateContainer> {
         fcmToken = null;
         notificationsEnabled = false;
       }
-      sl.get<AccountService>().removeSubscribeHistoryPendingFromQueue();
+      sl.get<AccountService>().removeSubscribeHistoryReceivableFromQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
           account: wallet!.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().processQueue();

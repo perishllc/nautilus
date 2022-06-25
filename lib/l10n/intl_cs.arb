@@ -224,7 +224,7 @@
   "connectingHeader": "Připojování",
   "minimumSend": "Minimální částka pro odeslání je% 1 NANO",
   "natricon": "Natricon",
-  "pending": "nevyřízený",
+  "receivable": "nevyřízený",
   "unconfirmed": "nepotvrzený",
   "messageHeader": "Zpráva",
   "readMore": "Více",

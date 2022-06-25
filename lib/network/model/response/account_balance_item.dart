@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:nautilus_wallet_flutter/network/model/response/pending_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/receivable_response.dart';
 
 part 'account_balance_item.g.dart';
 
@@ -9,8 +9,8 @@ class AccountBalanceItem {
   @JsonKey(name: "balance")
   String? balance;
 
-  @JsonKey(name: "pending")
-  String? pending;
+  @JsonKey(name: "receivable")
+  String? receivable;
 
   @JsonKey(ignore: true)
   String? privKey;
@@ -19,9 +19,9 @@ class AccountBalanceItem {
   String? frontier;
 
   @JsonKey(ignore: true)
-  PendingResponse? pendingResponse;
+  ReceivableResponse? receivableResponse;
 
-  AccountBalanceItem({this.balance, this.pending, this.privKey, this.frontier, this.pendingResponse});
+  AccountBalanceItem({this.balance, this.receivable, this.privKey, this.frontier, this.receivableResponse});
 
   factory AccountBalanceItem.fromJson(Map<String, dynamic> json) => _$AccountBalanceItemFromJson(json);
   Map<String, dynamic> toJson() => _$AccountBalanceItemToJson(this);

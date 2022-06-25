@@ -34,8 +34,8 @@ class SubscribeResponse {
   @JsonKey(name: 'block_count', fromJson: _toInt)
   int? blockCount;
 
-  @JsonKey(name: 'pending')
-  String? pending;
+  @JsonKey(name: 'receivable')
+  String? receivable;
 
   // Server provides a uuid for each connection
   @JsonKey(name: 'uuid')
@@ -47,8 +47,8 @@ class SubscribeResponse {
   @JsonKey(name: 'btc', fromJson: _toDouble)
   double? btcPrice;
 
-  @JsonKey(name: 'pending_count')
-  int? pendingCount;
+  @JsonKey(name: 'receivable_count')
+  int? receivableCount;
 
   @JsonKey(name: 'confirmation_height', nullable: false, fromJson: _toInt)
   int? confirmationHeight;

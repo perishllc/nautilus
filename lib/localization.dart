@@ -1243,16 +1243,16 @@ class AppLocalization {
         name: 'examplePaymentExplainer');
   }
 
-  String get examplePaymentPending {
-    return Intl.message("A lot of", desc: 'example_payment_pending', name: 'examplePaymentPending');
+  String get examplePaymentReceivable {
+    return Intl.message("A lot of", desc: 'example_payment_receivable', name: 'examplePaymentReceivable');
   }
 
   String get examplePaymentFulfilled {
     return Intl.message("Some", desc: 'example_payment_fulfilled', name: 'examplePaymentFulfilled');
   }
 
-  String get examplePaymentPendingMemo {
-    return Intl.message("Rent", desc: 'example_payment_pending_memo', name: 'examplePaymentPendingMemo');
+  String get examplePaymentReceivableMemo {
+    return Intl.message("Rent", desc: 'example_payment_receivable_memo', name: 'examplePaymentReceivableMemo');
   }
 
   String get examplePaymentFulfilledMemo {

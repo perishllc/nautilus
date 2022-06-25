@@ -561,15 +561,15 @@
     "type": "text",
     "description": "example_card_message"
   },
-  "examplePaymentPending": "অনেক",
-  "@examplePaymentPending": {
+  "examplePaymentReceivable": "অনেক",
+  "@examplePaymentReceivable": {
     "type": "text",
-    "description": "example_payment_pending"
+    "description": "example_payment_receivable"
   },
-  "examplePaymentPendingMemo": "ভাড়া",
-  "@examplePaymentPendingMemo": {
+  "examplePaymentReceivableMemo": "ভাড়া",
+  "@examplePaymentReceivableMemo": {
     "type": "text",
-    "description": "example_payment_pending_memo"
+    "description": "example_payment_receivable_memo"
   },
   "examplePaymentTo": "@best_friend",
   "@examplePaymentTo": {
@@ -1148,8 +1148,8 @@
     "type": "text",
     "description": "pay_request"
   },
-  "pending": "অনুমোদন অপেক্ষারত",
-  "@pending": {},
+  "receivable": "অনুমোদন অপেক্ষারত",
+  "@receivable": {},
   "pickFromList": "একটি তালিকা থেকে বাছাই করুন",
   "@pickFromList": {
     "type": "text",

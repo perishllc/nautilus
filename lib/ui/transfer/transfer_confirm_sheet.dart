@@ -14,8 +14,8 @@ import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/pending_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/pending_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/receivable_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/receivable_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -40,7 +40,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
   late BigInt totalToTransfer;
   late String totalAsReadableAmount;
   // Need to be received by current account
-  PendingResponse? accountPending;
+  ReceivableResponse? accountReceivable;
   // Whether animation overlay is open
   late bool animationOpen;
 
@@ -54,7 +54,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     totalAsReadableAmount = "";
     animationOpen = false;
     widget.privKeyBalanceMap!.forEach((String account, AccountBalanceItem accountBalanceItem) {
-      totalToTransfer += BigInt.parse(accountBalanceItem.balance!) + BigInt.parse(accountBalanceItem.pending!);
+      totalToTransfer += BigInt.parse(accountBalanceItem.balance!) + BigInt.parse(accountBalanceItem.receivable!);
     });
   }
 
@@ -175,11 +175,11 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         if (!resp.unopened) {
           balanceItem.frontier = resp.frontier;
         }
-        // Receive pending blocks
-        PendingResponse pr = await sl.get<AccountService>().getPending(account, 20);
-        Map<String, PendingResponseItem> pendingBlocks = pr.blocks!;
-        for (String hash in pendingBlocks.keys) {
-          PendingResponseItem? item = pendingBlocks[hash];
+        // Receive receivable blocks
+        ReceivableResponse pr = await sl.get<AccountService>().getReceivable(account, 20);
+        Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
+        for (String hash in receivableBlocks.keys) {
+          ReceivableResponseItem? item = receivableBlocks[hash];
           if (balanceItem.frontier != null) {
             ProcessResponse resp = await sl
                 .get<AccountService>()
@@ -220,10 +220,10 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     try {
       state!.lockCallback();
       // Receive all new blocks to our own account
-      PendingResponse pr = await sl.get<AccountService>().getPending(state!.wallet!.address, 20, includeActive: true);
-      Map<String, PendingResponseItem> pendingBlocks = pr.blocks!;
-      for (String hash in pendingBlocks.keys) {
-        PendingResponseItem? item = pendingBlocks[hash];
+      ReceivableResponse pr = await sl.get<AccountService>().getReceivable(state!.wallet!.address, 20, includeActive: true);
+      Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
+      for (String hash in receivableBlocks.keys) {
+        ReceivableResponseItem? item = receivableBlocks[hash];
         if (state!.wallet!.openBlock != null) {
           ProcessResponse resp = await sl.get<AccountService>().requestReceive(state!.wallet!.representative, state!.wallet!.frontier, item!.amount, hash,
               state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!));
@@ -265,11 +265,11 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         if (!resp.unopened) {
           balanceItem.frontier = resp.frontier;
         }
-        // Receive pending blocks
-        PendingResponse pr = await sl.get<AccountService>().getPending(account, 20);
-        Map<String, PendingResponseItem> pendingBlocks = pr.blocks!;
-        for (String hash in pendingBlocks.keys) {
-          PendingResponseItem? item = pendingBlocks[hash];
+        // Receive receivable blocks
+        ReceivableResponse pr = await sl.get<AccountService>().getReceivable(account, 20);
+        Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
+        for (String hash in receivableBlocks.keys) {
+          ReceivableResponseItem? item = receivableBlocks[hash];
           if (balanceItem.frontier != null) {
             ProcessResponse resp = await sl
                 .get<AccountService>()
@@ -313,10 +313,10 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
       if (state != null) {
         throw Exception("state is null, can't receive own blocks");
       }
-      PendingResponse pr = await sl.get<AccountService>().getPending(state!.wallet!.address, 20, includeActive: true);
-      Map<String, PendingResponseItem> pendingBlocks = pr.blocks!;
-      for (String hash in pendingBlocks.keys) {
-        PendingResponseItem? item = pendingBlocks[hash];
+      ReceivableResponse pr = await sl.get<AccountService>().getReceivable(state!.wallet!.address, 20, includeActive: true);
+      Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
+      for (String hash in receivableBlocks.keys) {
+        ReceivableResponseItem? item = receivableBlocks[hash];
         if (state!.wallet!.openBlock != null) {
           ProcessResponse resp = await sl.get<AccountService>().requestReceive(state!.wallet!.representative, state!.wallet!.frontier, item!.amount, hash,
               state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!));
@@ -387,11 +387,11 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         if (!resp.unopened) {
           balanceItem.frontier = resp.frontier;
         }
-        // Receive pending blocks
-        PendingResponse pr = await sl.get<AccountService>().getPending(account, 20);
-        Map<String, PendingResponseItem> pendingBlocks = pr.blocks!;
-        for (String hash in pendingBlocks.keys) {
-          PendingResponseItem? item = pendingBlocks[hash];
+        // Receive receivable blocks
+        ReceivableResponse pr = await sl.get<AccountService>().getReceivable(account, 20);
+        Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
+        for (String hash in receivableBlocks.keys) {
+          ReceivableResponseItem? item = receivableBlocks[hash];
           if (balanceItem.frontier != null) {
             ProcessResponse resp = await sl
                 .get<AccountService>()

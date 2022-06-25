@@ -193,7 +193,7 @@ String getThemeAwareRawAccuracy(BuildContext context, String? raw) {
   final String rawDecimalString = NumberUtil.getRawAsDecimal(raw, rawPerCur).toString();
 
   if (raw == null || raw.isEmpty || raw == "0") {
-    return "0";
+    return "";
   }
 
   if (rawString != rawDecimalString) {

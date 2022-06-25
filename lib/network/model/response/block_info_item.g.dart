@@ -11,7 +11,7 @@ BlockInfoItem _$BlockInfoItemFromJson(Map<String, dynamic> json) {
     blockAccount: json['block_account'] as String?,
     amount: json['amount'] as String?,
     balance: json['balance'] as String?,
-    pending: json['pending'] as String?,
+    receivable: json['receivable'] as String?,
     sourceAccount: json['source_account'] as String?,
     contents: json['contents'] as String?,
   );
@@ -22,7 +22,7 @@ Map<String, dynamic> _$BlockInfoItemToJson(BlockInfoItem instance) =>
       'block_account': instance.blockAccount,
       'amount': instance.amount,
       'balance': instance.balance,
-      'pending': instance.pending,
+      'receivable': instance.receivable,
       'source_account': instance.sourceAccount,
       'contents': instance.contents,
     };

@@ -18,8 +18,8 @@ class BlockInfoItem {
   @JsonKey(name: 'balance')
   String? balance;
 
-  @JsonKey(name: 'pending')
-  String? pending;
+  @JsonKey(name: 'receivable')
+  String? receivable;
 
   @JsonKey(name: 'source_account')
   String? sourceAccount;
@@ -27,11 +27,11 @@ class BlockInfoItem {
   @JsonKey(name: 'contents')
   String? contents;
 
-  BlockInfoItem({String? blockAccount, String? amount, String? balance, String? pending, String? sourceAccount, String? contents}) {
+  BlockInfoItem({String? blockAccount, String? amount, String? balance, String? receivable, String? sourceAccount, String? contents}) {
     this.blockAccount = blockAccount;
     this.amount = amount;
     this.balance = balance;
-    this.pending = pending;
+    this.receivable = receivable;
     this.sourceAccount = sourceAccount;
     this.contents = contents;
   }

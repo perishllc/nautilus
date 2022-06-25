@@ -20,7 +20,7 @@ import 'package:nautilus_wallet_flutter/network/model/request/account_history_re
 import 'package:nautilus_wallet_flutter/network/model/request/account_info_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/accounts_balances_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/block_info_request.dart';
-import 'package:nautilus_wallet_flutter/network/model/request/pending_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/receivable_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/process_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/subscribe_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request_item.dart';
@@ -31,7 +31,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_i
 import 'package:nautilus_wallet_flutter/network/model/response/block_info_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/callback_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/pending_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/receivable_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/price_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
@@ -47,11 +47,11 @@ import 'model/payment/payment_message.dart';
 
 // Server Connection String
 String _BASE_SERVER_ADDRESS = "nautilus.perish.co";
-String _SERVER_ADDRESS = "wss://nautilus.perish.co";
+String _SERVER_ADDRESS_WS = "wss://nautilus.perish.co";
 String _SERVER_ADDRESS_HTTP = "https://nautilus.perish.co/api";
 String _SERVER_ADDRESS_ALERTS = "https://nautilus.perish.co/alerts";
 
-const String _FALLBACK_SERVER_ADDRESS = "wss://app.natrium.io";
+const String _FALLBACK_SERVER_ADDRESS_WS = "wss://app.natrium.io";
 const String _FALLBACK_SERVER_ADDRESS_HTTP = "https://app.natrium.io/api";
 const String _FALLBACK_SERVER_ADDRESS_ALERTS = "https://app.natrium.io/alerts";
 
@@ -111,7 +111,7 @@ class AccountService {
     }
     _isInRetryState = true;
     log.d("Retrying connection in 3 seconds...");
-    final Future<dynamic> delayed = new Future.delayed(new Duration(seconds: 3));
+    final Future<dynamic> delayed = Future.delayed(new Duration(seconds: 3));
     delayed.then((_) {
       return true;
     });
@@ -142,7 +142,7 @@ class AccountService {
     }).catchError((error) {
       log.d("Nautilus backend is unreachable");
       // switch to fallback servers:
-      _SERVER_ADDRESS = _FALLBACK_SERVER_ADDRESS;
+      _SERVER_ADDRESS_WS = _FALLBACK_SERVER_ADDRESS_WS;
       _SERVER_ADDRESS_HTTP = _FALLBACK_SERVER_ADDRESS_HTTP;
       _SERVER_ADDRESS_ALERTS = _FALLBACK_SERVER_ADDRESS_ALERTS;
       fallbackConnected = true;
@@ -162,7 +162,7 @@ class AccountService {
 
       _isConnecting = true;
       suspended = false;
-      _channel = new IOWebSocketChannel.connect(_SERVER_ADDRESS, headers: {'X-Client-Version': packageInfo.buildNumber});
+      _channel = new IOWebSocketChannel.connect(_SERVER_ADDRESS_WS, headers: {'X-Client-Version': packageInfo.buildNumber});
       log.d("Connected to service");
       _isConnecting = false;
       _isConnected = true;
@@ -343,11 +343,11 @@ class AccountService {
     return false;
   }
 
-  void removeSubscribeHistoryPendingFromQueue() {
+  void removeSubscribeHistoryReceivableFromQueue() {
     if (_requestQueue != null && _requestQueue!.isNotEmpty) {
       final List<RequestItem> toRemove = [];
       _requestQueue!.forEach((RequestItem requestItem) {
-        if ((requestItem.request is SubscribeRequest || requestItem.request is AccountHistoryRequest || requestItem.request is PendingRequest) &&
+        if ((requestItem.request is SubscribeRequest || requestItem.request is AccountHistoryRequest || requestItem.request is ReceivableRequest) &&
             !requestItem.isProcessing!) {
           toRemove.add(requestItem);
         }
@@ -437,7 +437,7 @@ class AccountService {
   }
 
   Future<dynamic> checkUsernameAvailability(String username) async {
-    final http.Response response = await http.get(Uri.parse(_USERNAME_LEASE_ENDPOINT + "/" + username), headers: {"Accept": "application/json"});
+    final http.Response response = await http.get(Uri.parse("$_USERNAME_LEASE_ENDPOINT/$username"), headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {
       return null;
     }
@@ -479,19 +479,19 @@ class AccountService {
     return infoResponse;
   }
 
-  Future<PendingResponse> getPending(String? account, int count, {String? threshold, bool includeActive = false}) async {
+  Future<ReceivableResponse> getReceivable(String? account, int count, {String? threshold, bool includeActive = false}) async {
     threshold = threshold ?? BigInt.from(10).pow(24).toString();
 
-    final PendingRequest request = PendingRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
+    final ReceivableRequest request = ReceivableRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
-    PendingResponse pr;
+    ReceivableResponse pr;
     if (response["blocks"] == "") {
-      pr = PendingResponse(blocks: {});
+      pr = ReceivableResponse(blocks: {});
     } else {
-      pr = PendingResponse.fromJson(response as Map<String, dynamic>);
+      pr = ReceivableResponse.fromJson(response as Map<String, dynamic>);
     }
     return pr;
   }
@@ -606,7 +606,7 @@ class AccountService {
     final BlockInfoItem previousInfo = await requestBlockInfo(previous);
     final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
 
-    // Update data on our next pending request
+    // Update data on our next receivable request
     receiveBlock.representative = previousBlock.representative;
     receiveBlock.setBalance(previousBlock.balance);
     await receiveBlock.sign(privKey);
@@ -631,7 +631,7 @@ class AccountService {
     final BlockInfoItem previousInfo = await requestBlockInfo(previous);
     final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
 
-    // Update data on our next pending request
+    // Update data on our next receivable request
     sendBlock.representative = previousBlock.representative;
     sendBlock.setBalance(previousBlock.balance);
     await sendBlock.sign(privKey);
@@ -669,7 +669,7 @@ class AccountService {
     final BlockInfoItem previousInfo = await requestBlockInfo(previous);
     final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
 
-    // Update data on our next pending request
+    // Update data on our next receivable request
     chgBlock.setBalance(previousBlock.balance);
     await chgBlock.sign(privKey);
 
@@ -680,7 +680,7 @@ class AccountService {
   }
 
   Future<AlertResponseItem?> getAlert(String lang) async {
-    final http.Response response = await http.get(Uri.parse(_SERVER_ADDRESS_ALERTS + "/" + lang), headers: {"Accept": "application/json"});
+    final http.Response response = await http.get(Uri.parse("$_SERVER_ADDRESS_ALERTS/$lang"), headers: {"Accept": "application/json"});
     if (response.statusCode == 200) {
       List<AlertResponseItem> alerts;
       alerts = (json.decode(response.body) as List).map((i) => AlertResponseItem.fromJson(i as Map<String, dynamic>)).toList();

@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pending_request.dart';
+part of 'receivable_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PendingRequest _$PendingRequestFromJson(Map<String, dynamic> json) {
-  return PendingRequest(
+ReceivableRequest _$ReceivableRequestFromJson(Map<String, dynamic> json) {
+  return ReceivableRequest(
     action: json['action'] as String?,
     account: json['account'] as String?,
     source: json['source'] as bool?,
@@ -17,7 +17,7 @@ PendingRequest _$PendingRequestFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$PendingRequestToJson(PendingRequest instance) {
+Map<String, dynamic> _$ReceivableRequestToJson(ReceivableRequest instance) {
   final val = <String, dynamic>{
     'action': instance.action,
     'account': instance.account,

@@ -561,15 +561,15 @@
     "type": "text",
     "description": "example_card_message"
   },
-  "examplePaymentPending": "Veel",
-  "@examplePaymentPending": {
+  "examplePaymentReceivable": "Veel",
+  "@examplePaymentReceivable": {
     "type": "text",
-    "description": "example_payment_pending"
+    "description": "example_payment_receivable"
   },
-  "examplePaymentPendingMemo": "Huren",
-  "@examplePaymentPendingMemo": {
+  "examplePaymentReceivableMemo": "Huren",
+  "@examplePaymentReceivableMemo": {
     "type": "text",
-    "description": "example_payment_pending_memo"
+    "description": "example_payment_receivable_memo"
   },
   "examplePaymentTo": "@best_friend",
   "@examplePaymentTo": {
@@ -1148,8 +1148,8 @@
     "type": "text",
     "description": "pay_request"
   },
-  "pending": "in afwachting",
-  "@pending": {},
+  "receivable": "in afwachting",
+  "@receivable": {},
   "pickFromList": "Kies uit lijst",
   "@pickFromList": {
     "type": "text",

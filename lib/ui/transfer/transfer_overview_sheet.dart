@@ -220,13 +220,13 @@ class AppTransferOverviewSheet {
       List<String> accountsToRemove = [];
       resp.balances!.forEach((String account, AccountBalanceItem balItem) {
         BigInt balance = BigInt.parse(balItem.balance!);
-        BigInt pending = BigInt.parse(balItem.pending!);
-        if (balance + pending == BigInt.zero) {
+        BigInt receivable = BigInt.parse(balItem.receivable!);
+        if (balance + receivable == BigInt.zero) {
           accountsToRemove.add(account);
         } else {
           // Update balance of this item
           privKeyBalanceMap[account]!.balance = balItem.balance;
-          privKeyBalanceMap[account]!.pending = balItem.pending;
+          privKeyBalanceMap[account]!.receivable = balItem.receivable;
         }
       });
       accountsToRemove.forEach((String account) {
@@ -260,14 +260,14 @@ class AppTransferOverviewSheet {
       BigInt totalBalance = BigInt.zero;
       resp.balances!.forEach((String account, AccountBalanceItem balItem) {
         BigInt balance = BigInt.parse(balItem.balance!);
-        BigInt pending = BigInt.parse(balItem.pending!);
-        if (balance + pending == BigInt.zero) {
+        BigInt receivable = BigInt.parse(balItem.receivable!);
+        if (balance + receivable == BigInt.zero) {
           accountsToRemove.add(account);
         } else {
           // Update balance of this item
           privKeyBalanceMap[account]!.balance = balItem.balance;
-          privKeyBalanceMap[account]!.pending = balItem.pending;
-          totalBalance += balance + pending;
+          privKeyBalanceMap[account]!.receivable = balItem.receivable;
+          totalBalance += balance + receivable;
         }
       });
       accountsToRemove.forEach((String account) {
@@ -303,13 +303,13 @@ class AppTransferOverviewSheet {
       List<String> accountsToRemove = [];
       resp.balances!.forEach((String account, AccountBalanceItem balItem) {
         BigInt balance = BigInt.parse(balItem.balance!);
-        BigInt pending = BigInt.parse(balItem.pending!);
-        if (balance + pending == BigInt.zero) {
+        BigInt receivable = BigInt.parse(balItem.receivable!);
+        if (balance + receivable == BigInt.zero) {
           accountsToRemove.add(account);
         } else {
           // Update balance of this item
           privKeyBalanceMap[account]!.balance = balItem.balance;
-          privKeyBalanceMap[account]!.pending = balItem.pending;
+          privKeyBalanceMap[account]!.receivable = balItem.receivable;
         }
       });
       accountsToRemove.forEach((String account) {
@@ -351,13 +351,13 @@ class AppTransferOverviewSheet {
       List<String> accountsToRemove = [];
       resp.balances!.forEach((String account, AccountBalanceItem balItem) {
         BigInt balance = BigInt.parse(balItem.balance!);
-        BigInt pending = BigInt.parse(balItem.pending!);
-        if (balance + pending == BigInt.zero) {
+        BigInt receivable = BigInt.parse(balItem.receivable!);
+        if (balance + receivable == BigInt.zero) {
           accountsToRemove.add(account);
         } else {
           // Update balance of this item
           privKeyBalanceMap[account]!.balance = balItem.balance;
-          privKeyBalanceMap[account]!.pending = balItem.pending;
+          privKeyBalanceMap[account]!.receivable = balItem.receivable;
         }
       });
       accountsToRemove.forEach((String account) {

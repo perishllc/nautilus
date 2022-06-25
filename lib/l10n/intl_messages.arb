@@ -1253,7 +1253,7 @@
     "placeholders_order": [],
     "placeholders": {}
   },
-  "repInfo": "A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. Your representative does not have spending power over your funds. You should choose a representative that has little downtime and is trustworthy.",
+  "repInfo": "A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. Your representative does not have sreceivable power over your funds. You should choose a representative that has little downtime and is trustworthy.",
   "@repInfo": {
     "description": "change_representative_info",
     "type": "text",
@@ -1960,9 +1960,9 @@
     "placeholders_order": [],
     "placeholders": {}
   },
-  "examplePaymentPending": "A lot of",
-  "@examplePaymentPending": {
-    "description": "example_payment_pending",
+  "examplePaymentReceivable": "A lot of",
+  "@examplePaymentReceivable": {
+    "description": "example_payment_receivable",
     "type": "text",
     "placeholders_order": [],
     "placeholders": {}
@@ -1974,9 +1974,9 @@
     "placeholders_order": [],
     "placeholders": {}
   },
-  "examplePaymentPendingMemo": "Rent",
-  "@examplePaymentPendingMemo": {
-    "description": "example_payment_pending_memo",
+  "examplePaymentReceivableMemo": "Rent",
+  "@examplePaymentReceivableMemo": {
+    "description": "example_payment_receivable_memo",
     "type": "text",
     "placeholders_order": [],
     "placeholders": {}

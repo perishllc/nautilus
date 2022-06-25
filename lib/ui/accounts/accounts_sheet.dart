@@ -22,6 +22,7 @@ import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:quiver/strings.dart';
 
 class AppAccountsSheet extends StatefulWidget {
   final List<Account> accounts;
@@ -67,7 +68,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
     for (final Account account in widget.accounts) {
       resp.balances!.forEach((String address, AccountBalanceItem balance) {
         address = address.replaceAll("xrb_", "nano_");
-        final String combinedBalance = (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.pending!)!).toString();
+        final String combinedBalance = (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.receivable!)!).toString();
         if (account.address == address && combinedBalance != account.balance) {
           sl.get<DBHelper>().updateAccountBalance(account, combinedBalance);
           setState(() {
@@ -499,7 +500,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                                       text: "",
                                       children: [
                                         TextSpan(
-                                          text: getThemeAwareRawAccuracy(context, account.balance),
+                                          text: getThemeAwareRawAccuracy(context, isEmpty(account.balance) ? "0" : account.balance),
                                           style: TextStyle(
                                               fontSize: 16.0,
                                               fontFamily: "NunitoSans",
@@ -517,7 +518,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                                         TextSpan(
                                           text: account.balance != null
                                               ? (!account.selected)
-                                                  ? getRawAsThemeAwareAmount(context, account.balance)
+                                                  ? getRawAsThemeAwareAmount(context, isEmpty(account.balance) ? "0" : account.balance)
                                                   : getRawAsThemeAwareFormattedAmount(context, account.balance)
                                               : "",
                                           style: TextStyle(
