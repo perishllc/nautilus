@@ -29,11 +29,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ContactsList extends StatefulWidget {
+
+  ContactsList(this.contactsController, this.contactsOpen);
+  
   final AnimationController? contactsController;
   bool? contactsOpen;
   bool contactsEnabled = false;
-
-  ContactsList(this.contactsController, this.contactsOpen);
 
   _ContactsListState createState() => _ContactsListState();
 }

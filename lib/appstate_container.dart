@@ -305,39 +305,39 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> checkAndUpdateAlerts() async {
-    // Get active alert
-    try {
-      String localeString = (await sl.get<SharedPrefsUtil>().getLanguage()).getLocaleString();
-      if (localeString == "DEFAULT") {
-        final List<Locale> languageLocales = await Devicelocale.preferredLanguagesAsLocales;
-        if (languageLocales.isNotEmpty) {
-          localeString = languageLocales[0].languageCode;
-        }
-      }
-      final AlertResponseItem? alert = await sl.get<AccountService>().getAlert(localeString);
-      if (alert == null) {
-        updateActiveAlert(null, null);
-        return;
-      } else if (await sl.get<SharedPrefsUtil>().shouldShowAlert(alert)) {
-        // See if we should display this one again
-        if (alert.link == null || await sl.get<SharedPrefsUtil>().alertIsRead(alert)) {
-          setAlertRead();
-        } else {
-          setAlertUnread();
-        }
-        updateActiveAlert(alert, alert);
-      } else {
-        if (alert.link == null || await sl.get<SharedPrefsUtil>().alertIsRead(alert)) {
-          setAlertRead();
-        } else {
-          setAlertUnread();
-        }
-        updateActiveAlert(null, alert);
-      }
-    } catch (e) {
-      log.e("Error retrieving alert", e);
-      return;
-    }
+    // // Get active alert
+    // try {
+    //   String localeString = (await sl.get<SharedPrefsUtil>().getLanguage()).getLocaleString();
+    //   if (localeString == "DEFAULT") {
+    //     final List<Locale> languageLocales = await Devicelocale.preferredLanguagesAsLocales;
+    //     if (languageLocales.isNotEmpty) {
+    //       localeString = languageLocales[0].languageCode;
+    //     }
+    //   }
+    //   final AlertResponseItem? alert = await sl.get<AccountService>().getAlert(localeString);
+    //   if (alert == null) {
+    //     updateActiveAlert(null, null);
+    //     return;
+    //   } else if (await sl.get<SharedPrefsUtil>().shouldShowAlert(alert)) {
+    //     // See if we should display this one again
+    //     if (alert.link == null || await sl.get<SharedPrefsUtil>().alertIsRead(alert)) {
+    //       setAlertRead();
+    //     } else {
+    //       setAlertUnread();
+    //     }
+    //     updateActiveAlert(alert, alert);
+    //   } else {
+    //     if (alert.link == null || await sl.get<SharedPrefsUtil>().alertIsRead(alert)) {
+    //       setAlertRead();
+    //     } else {
+    //       setAlertUnread();
+    //     }
+    //     updateActiveAlert(null, alert);
+    //   }
+    // } catch (e) {
+    //   log.e("Error retrieving alert", e);
+    //   return;
+    // }
   }
 
   Future<void> checkAndCacheNinjaAPIResponse() async {

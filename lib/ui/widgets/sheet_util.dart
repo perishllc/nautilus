@@ -19,7 +19,7 @@ class Sheets {
     assert(radius > 0.0);
     color ??= StateContainer.of(context).curTheme.backgroundDark;
     barrier ??= StateContainer.of(context).curTheme.barrier;
-    _AppHeightNineModalRoute<T> route = _AppHeightNineModalRoute<T>(
+    final _AppHeightNineModalRoute<T> route = _AppHeightNineModalRoute<T>(
         builder: (BuildContext context) {
           return widget;
         },
