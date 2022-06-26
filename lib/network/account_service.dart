@@ -111,7 +111,7 @@ class AccountService {
     }
     _isInRetryState = true;
     log.d("Retrying connection in 3 seconds...");
-    final Future<dynamic> delayed = Future.delayed(new Duration(seconds: 3));
+    final Future<dynamic> delayed = Future.delayed(Duration(seconds: 3));
     delayed.then((_) {
       return true;
     });
@@ -135,11 +135,12 @@ class AccountService {
     _isConnecting = true;
 
     // check if the nautilus servers are available
-    Socket.connect(_BASE_SERVER_ADDRESS, 80, timeout: Duration(seconds: 3)).then((Socket socket) {
+    Socket.connect(_BASE_SERVER_ADDRESS, 80, timeout: const Duration(seconds: 3)).then((Socket socket) {
       log.d("Nautilus backend is up");
       fallbackConnected = false;
       socket.destroy();
     }).catchError((error) {
+      log.d("Nautilus backend is down: $error");
       log.d("Nautilus backend is unreachable");
       // switch to fallback servers:
       _SERVER_ADDRESS_WS = _FALLBACK_SERVER_ADDRESS_WS;
@@ -162,7 +163,7 @@ class AccountService {
 
       _isConnecting = true;
       suspended = false;
-      _channel = new IOWebSocketChannel.connect(_SERVER_ADDRESS_WS, headers: {'X-Client-Version': packageInfo.buildNumber});
+      _channel = IOWebSocketChannel.connect(_SERVER_ADDRESS_WS, headers: {'X-Client-Version': packageInfo.buildNumber});
       log.d("Connected to service");
       _isConnecting = false;
       _isConnected = true;
@@ -237,7 +238,7 @@ class AccountService {
     await _lock.synchronized(() async {
       _isConnected = true;
       _isConnecting = false;
-      // log.d("Received $message");
+      log.v("Received $message");
       // Map msg = await compute(decodeJson as FutureOr<Map<dynamic, dynamic>> Function(dynamic), message);
       final Map? msg = await compute(decodeJson, message);
       if (msg == null) {
@@ -276,7 +277,7 @@ class AccountService {
   /* Enqueue Request */
   void queueRequest(BaseRequest request, {bool fromTransfer = false}) {
     //log.d("request ${json.encode(request.toJson())}, q length: ${_requestQueue.length}");
-    _requestQueue!.add(new RequestItem(request, fromTransfer: fromTransfer));
+    _requestQueue!.add(RequestItem(request, fromTransfer: fromTransfer));
   }
 
   /* Process Queue */

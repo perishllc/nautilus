@@ -290,19 +290,19 @@ class SharedPrefsUtil {
     return set(contacts_enabled, value);
   }
 
-  Future<bool?> getContactsOn() async {
-    // Contacts null by default
-    return await get(contacts_enabled, defaultValue: null) as bool?;
+  Future<bool> getContactsOn() async {
+    // Contacts false by default
+    return await get(contacts_enabled, defaultValue: false) as bool;
   }
 
   // If contacts have been set by user/app
-  // Future<bool> getContactsSet() async {
-  //   if (await get(contacts_enabled, defaultValue: null) == null) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
+  Future<bool> getContactsSet() async {
+    if (await get(contacts_enabled, defaultValue: null) == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
   
 
   Future<void> setLock(bool value) async {

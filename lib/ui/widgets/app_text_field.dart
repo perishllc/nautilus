@@ -57,6 +57,7 @@ class AppTextField extends StatefulWidget {
   final Function? onSubmitted;
   final Function? onChanged;
   final double topMargin;
+  final double bottomMargin;
   final double? leftMargin;
   final double? rightMargin;
   final TextStyle? style;
@@ -91,6 +92,7 @@ class AppTextField extends StatefulWidget {
     this.padding = EdgeInsets.zero,
     this.buttonFadeDurationMs = 100,
     this.topMargin = 0,
+    this.bottomMargin = 0,
     this.autofocus = false
   });
 
@@ -105,6 +107,7 @@ class _AppTextFieldState extends State<AppTextField> {
         left: widget.leftMargin ?? MediaQuery.of(context).size.width * 0.105,
         right: widget.rightMargin ?? MediaQuery.of(context).size.width * 0.105,
         top: widget.topMargin,
+        bottom: widget.bottomMargin
       ),
       padding: widget.padding,
       width: double.infinity,

@@ -109,11 +109,9 @@ class AppWallet {
   //   }
   // }
 
-  String getLocalCurrencyPrice(BuildContext context, AvailableCurrency currency, {String? locale = "en_US"}) {
+  String getLocalCurrencyBalance(BuildContext context, AvailableCurrency currency, {String? locale = "en_US"}) {
     final BigInt rawPerCur = StateContainer.of(context).nyanoMode ? rawPerNyano : rawPerNano;
-    // Decimal converted =
-    //     Decimal.parse(_localCurrencyPrice!) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
-    Decimal converted = Decimal.parse(_btcPrice!) * NumberUtil.getRawAsDecimal(_accountBalance.toString(), rawPerCur);
+    final Decimal converted = Decimal.parse(_localCurrencyPrice!) * NumberUtil.getRawAsDecimal(_accountBalance.toString(), rawPerCur);
     return NumberFormat.currency(locale: locale, symbol: currency.getCurrencySymbol()).format(converted.toDouble());
   }
 

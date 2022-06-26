@@ -1,9 +1,17 @@
 # v0.3.8 - [2022-06-27]
+#### Found a bug? Report it! - Bug Bounty
+- If you find a bug, report it on the discord server in #bug-report for a Ӿ5 reward (min) up to Ӿ100 depending on the severity of the bug
+- To be elligible for the reward:
+  - Must be reproducible / and or show the bug in some form (i.e. a screenshot or video recording)
+  - The bug must not have already been reported before, or be directly related to an already reported bug
+  - Bugs resulting from server outages and known bugs (things in the #todo channel) are not eligible
 #### Added
 #### Changed
-- Node hardware was upgraded and migrated for better performance and reliability
+- Backend hardware was migrated for better performance and reliability
 #### Fixed
 - Minor bugs related to the alerts system
+- Nano <-> local currency price display bug
+- Accounts sheet rendering fixes
 ## v0.3.7 - [2022-06-24]
 #### Added
 - Updated non-english translations with automatic translations
@@ -12,10 +20,8 @@
 - Loading animation for when you reset the database
 - Reliably display "~" when a transaction involves precision we can't fit on screen (too small)
 - Sheet handles on the accounts sheet
-- [WIP] - Contacts permission handling for an updoming feature involving the ability to send nano to phone contacts
-  - Normally I wouldn't push out an update with half of a feature, but this release includes some important bug fixes and the feature is at a safe middle point development-wise
+- [WIP] - Contacts permission handling for an upcoming feature involving the ability to send nano to phone contacts
 - Behind the scenes: working on integration tests to automatically test the UI/UX as well as take screenshots of the UI for the app stores
-  - About 50% done, you'll probably see it in the screenshots of the next release
 #### Changed
 - Refactored account sheet to use the newer class
 - Destroy the database -> Reset the database

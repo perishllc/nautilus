@@ -4,6 +4,7 @@ import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/util/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/biometrics.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -17,5 +18,6 @@ void setupServiceLocator() {
   sl.registerLazySingleton<BiometricUtil>(() => BiometricUtil());
   sl.registerLazySingleton<Vault>(() => Vault());
   sl.registerLazySingleton<SharedPrefsUtil>(() => SharedPrefsUtil());
+  sl.registerLazySingleton<GiftCards>(() => GiftCards());
   sl.registerLazySingleton<Logger>(() => Logger(printer: PrettyPrinter()));
 }

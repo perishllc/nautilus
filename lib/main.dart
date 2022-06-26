@@ -21,7 +21,7 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/avatar/avatar.dart';
 import 'package:nautilus_wallet_flutter/ui/avatar/avatar_change.dart';
 import 'package:nautilus_wallet_flutter/ui/before_scan_screen.dart';
-import 'package:nautilus_wallet_flutter/ui/generate_paper_wallet.dart';
+import 'package:nautilus_wallet_flutter/ui/generate/generate_paper_wallet.dart';
 import 'package:nautilus_wallet_flutter/ui/home_page.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_confirm.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_safety.dart';

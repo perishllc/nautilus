@@ -243,7 +243,7 @@ String getRawAsThemeAwareFormattedAmount(BuildContext context, String? raw) {
   }
 }
 
-String getThemeAwareCombined(BuildContext context, String? raw) {
+String getThemeAwareAccuracyAmount(BuildContext context, String? raw) {
   return getThemeAwareRawAccuracy(context, raw) + getRawAsThemeAwareAmount(context, raw);
 }
 

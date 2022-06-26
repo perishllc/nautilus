@@ -30,7 +30,6 @@ import 'package:nautilus_wallet_flutter/util/biometrics.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:uuid/uuid.dart';
 
@@ -208,7 +207,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                         final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                         if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                           try {
-                            bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
+                            final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
                                 context,
                                 AppLocalization.of(context)!
                                     .sendAmountConfirm

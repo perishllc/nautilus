@@ -103,27 +103,27 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     UIUtil.showSnackbar(AppLocalization.of(context)!.transferError, context);
   }
 
-  Future<void> _getContactsPermissions() async {
-    // bool? contactsOn = await sl.get<SharedPrefsUtil>().getContactsOn();
+  Future<bool> _getContactsPermissions() async {
+    // reloading prefs:
+    await sl.get<SharedPrefsUtil>().reload();
+    final bool contactsOn = await sl.get<SharedPrefsUtil>().getContactsOn();
 
-    // // ask for contacts permission if we haven't already:
-    // if (contactsOn == null) {
-    //   // check again after reloading prefs:
-    //   await sl.get<SharedPrefsUtil>().reload();
-
-    //   contactsOn = await sl.get<SharedPrefsUtil>().getContactsOn();
-
-    //   // really is null:
-    //   if (contactsOn == null) {
-    //     final bool contactsEnabled = await cont.FlutterContacts.requestPermission();
-    //     await sl.get<SharedPrefsUtil>().setContactsOn(contactsEnabled);
-    //     EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
-    //   } else {
-    //     EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsOn));
-    //   }
-    // } else {
-    //   EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsOn));
-    // }
+    // ask for contacts permission:
+    if (!contactsOn) {
+      final bool contactsEnabled = await cont.FlutterContacts.requestPermission();
+      await sl.get<SharedPrefsUtil>().setContactsOn(contactsEnabled);
+      setState(() {
+        _curContactsSetting = ContactsSetting(contactsEnabled ? ContactsOptions.ON : ContactsOptions.OFF);
+      });
+      EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
+      return contactsEnabled;
+    } else {
+      setState(() {
+        _curContactsSetting = ContactsSetting(contactsOn ? ContactsOptions.ON : ContactsOptions.OFF);
+      });
+      EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsOn));
+      return contactsOn;
+    }
   }
 
   @override
@@ -165,9 +165,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         _curNotificiationSetting = notificationsOn ? NotificationSetting(NotificationOptions.ON) : NotificationSetting(NotificationOptions.OFF);
       });
     });
-    // Get default contacts setting
-    _getContactsPermissions();
-
+    // Get contacts show setting:
+    sl.get<SharedPrefsUtil>().getContactsOn().then((bool contactsOn) {
+      setState(() {
+        _curContactsSetting = contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
+      });
+    });
     // Get default natricon setting
     sl.get<SharedPrefsUtil>().getUseNatricon().then((bool useNatricon) {
       setState(() {
@@ -449,7 +452,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   Future<void> _contactsDialog() async {
-    switch (await showDialog<ContactsOptions>(
+    ContactsOptions? picked = await showDialog<ContactsOptions>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
@@ -485,19 +488,19 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
               ),
             ],
           );
-        })) {
-      case ContactsOptions.ON:
-        sl.get<SharedPrefsUtil>().setContactsOn(true).then((result) {
-          EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: true));
         });
-        break;
-      case ContactsOptions.OFF:
-        sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((result) {
-          EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: false));
-        });
-        break;
-      default:
-        break;
+
+    if (picked == null) {
+      return;
+    }
+
+    if (picked == ContactsOptions.ON) {
+      bool contactsEnabled = await _getContactsPermissions();
+      await sl.get<SharedPrefsUtil>().setContactsOn(contactsEnabled);
+      EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
+    } else {
+      await sl.get<SharedPrefsUtil>().setContactsOn(false);
+      EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: false));
     }
   }
 
@@ -561,7 +564,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   Future<String?> _onrampDialog() async {
-    final String onramper_url = "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
+    final String onramper_url =
+        "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
     final String moonpay_url = "https://buy.moonpay.com/?currencyCode=xno&colorCode=%234080D7";
     final String simplex_url = "https://buy.chainbits.com";
 
@@ -1209,7 +1213,14 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           height: 2,
           color: StateContainer.of(context).curTheme.text15,
         ),
-        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.contactsHeader, AppIcons.contact, onPressed: () {
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.contactsHeader, AppIcons.contact, onPressed: () async {
+          // check if contacts have been asked before:
+          // reloading prefs to be sure we get the latest value:
+          await sl.get<SharedPrefsUtil>().reload();
+          final bool contactsSet = await sl.get<SharedPrefsUtil>().getContactsSet();
+          if (!contactsSet) {
+            await _getContactsPermissions();
+          }
           setState(() {
             _contactsOpen = true;
           });
@@ -1239,7 +1250,11 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
               if (authenticated) {
                 sl.get<HapticUtil>().fingerprintSucess();
                 StateContainer.of(context).getSeed().then((String seed) {
-                  AppSeedBackupSheet(seed).mainBottomSheet(context);
+                  Sheets.showAppHeightNineSheet(
+                      context: context,
+                      widget: AppSeedBackupSheet(
+                        seed: seed,
+                      ));
                 });
               }
             } catch (error) {
@@ -1927,7 +1942,11 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       await Future.delayed(const Duration(milliseconds: 200));
       Navigator.of(context).pop();
       StateContainer.of(context).getSeed().then((String seed) {
-        AppSeedBackupSheet(seed).mainBottomSheet(context);
+        Sheets.showAppHeightNineSheet(
+            context: context,
+            widget: AppSeedBackupSheet(
+              seed: seed,
+            ));
       });
     }
   }

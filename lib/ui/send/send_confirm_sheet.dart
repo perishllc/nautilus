@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
@@ -23,6 +24,7 @@ import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
@@ -32,20 +34,29 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:quiver/strings.dart';
 import 'package:uuid/uuid.dart';
 
 class SendConfirmSheet extends StatefulWidget {
+  const SendConfirmSheet(
+      {required this.amountRaw,
+      required this.destination,
+      this.contactName,
+      this.localCurrency,
+      this.natriconNonce,
+      this.maxSend = false,
+      this.phoneNumber = false,
+      this.memo})
+      : super();
+
   final String amountRaw;
   final String destination;
   final String? contactName;
   final String? localCurrency;
   final bool maxSend;
+  final bool phoneNumber;
   final int? natriconNonce;
   final String? memo;
-
-  SendConfirmSheet(
-      {required this.amountRaw, required this.destination, this.contactName, this.localCurrency, this.natriconNonce, this.maxSend = false, this.memo})
-      : super();
 
   _SendConfirmSheetState createState() => _SendConfirmSheetState();
 }
@@ -54,6 +65,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
+
+  final _textMessageController = TextEditingController();
 
   void _registerBus() {
     _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((AuthenticatedEvent event) {
@@ -74,6 +87,10 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     super.initState();
     _registerBus();
     animationOpen = false;
+
+    if (isNotEmpty(widget.memo)) {
+      _textMessageController.text = widget.memo!;
+    }
   }
 
   @override
@@ -86,6 +103,44 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     animationOpen = true;
     AppAnimation.animationLauncher(context, type, onPoppedCallback: () => animationOpen = false);
   }
+
+  //************ Enter Memo Container Method ************//
+  //*******************************************************//
+  Widget getMessageEditor() {
+    double margin = 200;
+    // if (_textMessageController!.text.startsWith("nano_")) {
+    //   if (_textMessageController!.text.length > 24) {
+    //     margin = 217;
+    //   }
+    //   if (_textMessageController!.text.length > 48) {
+    //     margin = 238;
+    //   }
+    // }
+    return AppTextField(
+      bottomMargin: 40,
+      controller: _textMessageController,
+      cursorColor: StateContainer.of(context).curTheme.primary,
+      inputFormatters: [
+        // LengthLimitingTextInputFormatter(48),
+      ],
+      textInputAction: TextInputAction.done,
+      maxLines: null,
+      autocorrect: false,
+      // hintText: _memoHint ?? AppLocalization.of(context)!.enterMemo,
+      fadeSuffixOnCondition: true,
+      style: TextStyle(
+        color: StateContainer.of(context).curTheme.text60,
+        fontSize: AppFontSizes.small,
+        height: 1.5,
+        fontWeight: FontWeight.w100,
+        fontFamily: 'OverpassMono',
+      ),
+      onChanged: (String text) {
+        setState(() {}); // forces address container to respect the memo's status (empty or not empty)
+        // nothing for now
+      },
+    );
+  } //************ Enter Memo Container Method End ************//
 
   @override
   Widget build(BuildContext context) {
@@ -105,123 +160,144 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             ),
             //The main widget that holds the text fields, "SENDING" and "TO" texts
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  // "SENDING" TEXT
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 10.0),
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context)!.sending, context),
-                          style: AppStyles.textStyleHeader(context),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Container for the amount text
-                  if (widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw == "0"))
+              child: KeyboardAvoider(
+                duration: Duration.zero,
+                autoScroll: true,
+                // focusPadding: 40,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    // "SENDING" TEXT
                     Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.backgroundDarkest,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Text(
-                          widget.memo!,
-                          style: AppStyles.textStyleParagraph(context),
-                          textAlign: TextAlign.center,
-                        ))
-                  else
-                    Container(
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      // Amount text
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          text: "",
-                          children: [
-                            TextSpan(
-                              text: getThemeAwareRawAccuracy(context, widget.amountRaw),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            displayCurrencySymbol(
-                              context,
-                              AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            TextSpan(
-                              text: getRawAsThemeAwareFormattedAmount(context, widget.amountRaw),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            TextSpan(
-                              text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
-                              style: AppStyles.textStyleParagraphPrimary(context).copyWith(
-                                color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                  // "TO" text
-                  Container(
-                    margin: const EdgeInsets.only(top: 30.0, bottom: 10),
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context)!.to, context),
-                          style: AppStyles.textStyleHeader(context),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Address text
-                  Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
-                  if (widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw != "0"))
-                    Container(
-                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                      margin: const EdgeInsets.only(bottom: 10.0),
                       child: Column(
                         children: <Widget>[
                           Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context)!.sending, context),
                             style: AppStyles.textStyleHeader(context),
                           ),
                         ],
                       ),
                     ),
-                  if (widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw != "0"))
-                    Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                    // Container for the amount text
+                    if (widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw == "0"))
+                      Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Text(
+                            widget.memo!,
+                            style: AppStyles.textStyleParagraph(context),
+                            textAlign: TextAlign.center,
+                          ))
+                    else
+                      Container(
                         margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: StateContainer.of(context).curTheme.backgroundDarkest,
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(50),
                         ),
-                        child: Text(
-                          widget.memo!,
-                          style: AppStyles.textStyleParagraph(context),
+                        // Amount text
+                        child: RichText(
                           textAlign: TextAlign.center,
-                        ))
-                ],
+                          text: TextSpan(
+                            text: "",
+                            children: [
+                              TextSpan(
+                                text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                                style: AppStyles.textStyleParagraphPrimary(context),
+                              ),
+                              displayCurrencySymbol(
+                                context,
+                                AppStyles.textStyleParagraphPrimary(context),
+                              ),
+                              TextSpan(
+                                text: getRawAsThemeAwareFormattedAmount(context, widget.amountRaw),
+                                style: AppStyles.textStyleParagraphPrimary(context),
+                              ),
+                              TextSpan(
+                                text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
+                                style: AppStyles.textStyleParagraphPrimary(context).copyWith(
+                                  color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                    // "TO" text
+                    Container(
+                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            CaseChange.toUpperCase(AppLocalization.of(context)!.to, context),
+                            style: AppStyles.textStyleHeader(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Address text
+                    if (!widget.phoneNumber)
+                      Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName))
+                    else
+                      Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Text(
+                            widget.destination.isNotEmpty ? widget.destination : "(${AppLocalization.of(context)!.someone})",
+                            style: AppStyles.textStyleParagraph(context),
+                            textAlign: TextAlign.center,
+                          )),
+                    if (widget.phoneNumber || (widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw != "0")))
+                      Container(
+                        margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
+                              style: AppStyles.textStyleHeader(context),
+                            ),
+                          ],
+                        ),
+                      ),
+                    if (!widget.phoneNumber && widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw != "0"))
+                      Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Text(
+                            widget.memo!,
+                            style: AppStyles.textStyleParagraph(context),
+                            textAlign: TextAlign.center,
+                          )),
+                    if (widget.phoneNumber) getMessageEditor(),
+                  ],
+                ),
               ),
             ),
 

@@ -25,9 +25,10 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:quiver/strings.dart';
 
 class AppAccountsSheet extends StatefulWidget {
-  final List<Account> accounts;
 
-  AppAccountsSheet({Key? key, required this.accounts}) : super(key: key);
+  const AppAccountsSheet({Key? key, required this.accounts}) : super(key: key);
+  
+  final List<Account> accounts;
 
   _AppAccountsSheetState createState() => _AppAccountsSheetState();
 }

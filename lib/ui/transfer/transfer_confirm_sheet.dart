@@ -77,7 +77,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
           children: <Widget>[
             //A container for the header
             Container(
-              margin: EdgeInsets.only(top: 30.0, left: 70, right: 70),
+              margin: const EdgeInsets.only(top: 30.0, left: 70, right: 70),
               child: AutoSizeText(
                 CaseChange.toUpperCase(AppLocalization.of(context)!.transferHeader, context),
                 style: AppStyles.textStyleHeader(context),
@@ -98,7 +98,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                     Container(
                         margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                         child: Text(
-                          AppLocalization.of(context)!.transferConfirmInfo.replaceAll("%1", getThemeAwareCombined(context, totalToTransfer.toString())),
+                          AppLocalization.of(context)!.transferConfirmInfo.replaceAll("%1", getThemeAwareAccuracyAmount(context, totalToTransfer.toString())),
                           style: AppStyles.textStyleParagraphPrimary(context),
                           textAlign: TextAlign.start,
                         )),

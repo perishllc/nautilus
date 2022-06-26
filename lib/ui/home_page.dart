@@ -114,7 +114,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   final Map<String?, TXData> _txDetailsMap = {};
 
   // search bar text controller:
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   bool _searchOpen = false;
   bool _noSearchResults = false;
 
@@ -172,30 +172,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       if (account != null) {
         await _switchToAccount(account);
       }
-    }
-  }
-
-  Future<void> _processPaymentRequestNotification(dynamic data) async {
-    log.d("Processing payment request notification");
-    if (data.containsKey("payment_request") as bool) {
-      final String? amountRaw = data['amount_raw'] as String?;
-      final String? requestingAccount = data['requesting_account'] as String?;
-
-      // Remove any other screens from stack
-      // Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-
-      // Go to send with address
-      Future.delayed(const Duration(milliseconds: 1000), () {
-        Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
-
-        Sheets.showAppHeightNineSheet(
-            context: context,
-            widget: SendSheet(
-              localCurrency: StateContainer.of(context).curCurrency,
-              address: requestingAccount,
-              quickSendAmount: amountRaw,
-            ));
-      });
     }
   }
 
@@ -503,7 +479,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       try {
         await _chooseCorrectAccountFromNotification(message.data);
         // await _processPaymentRequestNotification(message.data);
-      } catch (e) {}
+      } catch (error) {
+        log.e("Error processing push notification: $error");
+      }
     });
     // Setup notification
     getNotificationPermissions();
@@ -748,9 +726,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // User changed account
     _switchAccountSub = EventTaxiImpl.singleton().registerTo<AccountChangedEvent>().listen((AccountChangedEvent event) {
       setState(() {
-        StateContainer.of(context).wallet!.loading = true;
-        StateContainer.of(context).wallet!.historyLoading = true;
-        StateContainer.of(context).wallet!.unifiedLoading = true;
+        // todo: figure out if setState on statecontainer props does anything:
+        // StateContainer.of(context).wallet!.loading = true;
+        // StateContainer.of(context).wallet!.historyLoading = true;
+        // StateContainer.of(context).wallet!.unifiedLoading = true;
         _startAnimation();
         StateContainer.of(context).updateWallet(account: event.account!);
         currentConfHeight = -1;
@@ -939,18 +918,19 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       _isRefreshing = true;
     });
     sl.get<HapticUtil>().success();
-    await StateContainer.of(context).requestUpdate();
-    // queries the db for account specific solids:
-    await StateContainer.of(context).updateSolids();
-    _updateTXData();
-    // for memos:
-    _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
     // Hide refresh indicator after 2.5 seconds
     Future.delayed(const Duration(milliseconds: 2500), () {
       setState(() {
         _isRefreshing = false;
       });
     });
+    await StateContainer.of(context).requestUpdate();
+    // queries the db for account specific solids:
+    await StateContainer.of(context).updateSolids();
+    _updateTXData();
+    // for memos:
+    _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
+
     // await generateUnifiedList(fastUpdate: false);
     // setState(() {});
   }
@@ -1182,7 +1162,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       } else {
         // throw Exception("Couldn't find index to insert Solid at!");
         // just insert at the top?
-        // do nothing?
+        solidsList[i].height = 0;
+        unifiedList.insert(0, solidsList[i]);
       }
     }
 
@@ -2410,7 +2391,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                     Text(
                         StateContainer.of(context)
                             .wallet!
-                            .getLocalCurrencyPrice(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale),
+                            .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale),
                         textAlign: TextAlign.center,
                         style: AppStyles.textStyleCurrencyAlt(context)),
                   Row(
@@ -3255,7 +3236,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
             ],
           ));
-    } else if (StateContainer.of(context).wallet!.history!.isEmpty) {
+    } else if (StateContainer.of(context).wallet!.history!.isEmpty && StateContainer.of(context).wallet!.solids!.isEmpty) {
       _disposeAnimation();
       return DraggableScrollbar(
         controller: _scrollController,
@@ -3335,6 +3316,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet!.address}alert")) {
         _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet!.address}alert", () => GlobalKey<AnimatedListState>());
         setState(() {
+          _isRefreshing = false;
           _unifiedListMap.putIfAbsent(
             StateContainer.of(context).wallet!.address,
             () => ListModel<dynamic>(

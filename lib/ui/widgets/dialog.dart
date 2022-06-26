@@ -10,6 +10,7 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -154,6 +155,7 @@ class AppDialogs {
 
   static Future<void> showChangeLog(BuildContext context) async {
     final String changeLogMarkdown = await DefaultAssetBundle.of(context).loadString("CHANGELOG.md");
+    final scrollController = ScrollController();
 
     await showDialog(
         barrierDismissible: false,
@@ -170,63 +172,66 @@ class AppDialogs {
                     child: Text(AppLocalization.of(context)!.changeLog, textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
-                      constraints: const BoxConstraints(minHeight: 300, maxHeight: 400),
-                      child: Scrollbar(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                                child: MarkdownBody(
-                                  data: changeLogMarkdown,
-                                  shrinkWrap: true,
-                                  selectable: false,
-                                  onTapLink: (String text, String? url, String title) async {
-                                    final Uri uri = Uri.parse(url!);
-                                    if (await canLaunchUrl(uri)) {
-                                      await launchUrl(uri);
-                                    }
-                                  },
-                                  styleSheet: MarkdownStyleSheet.fromTheme(ThemeData(
-                                      textTheme: TextTheme(
-                                    bodyText2: TextStyle(
-                                      fontSize: AppFontSizes.smallText(context),
-                                      fontWeight: FontWeight.w400,
-                                      color: StateContainer.of(context).curTheme.text,
-                                    ),
-                                  ))).copyWith(
-                                    h1: TextStyle(
-                                      fontSize: AppFontSizes.large(context),
-                                      color: StateContainer.of(context).curTheme.success,
-                                    ),
-                                    h2: TextStyle(
-                                      fontSize: AppFontSizes.large(context),
-                                      color: StateContainer.of(context).curTheme.success,
-                                    ),
-                                    h2Padding: const EdgeInsets.only(top: 24),
-                                    h4: TextStyle(
-                                      color: StateContainer.of(context).curTheme.warning,
-                                    ),
-                                    listBullet: TextStyle(
-                                      color: StateContainer.of(context).curTheme.text,
-                                    ),
-                                    horizontalRuleDecoration: BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(width: 3, color: StateContainer.of(context).curTheme.text!),
-                                      ),
-                                    ),
-                                  ),
-                                  extensionSet: md.ExtensionSet(
-                                    md.ExtensionSet.gitHubFlavored.blockSyntaxes,
-                                    [md.EmojiSyntax(), ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes],
+                    constraints: const BoxConstraints(minHeight: 300, maxHeight: 400),
+                    child: DraggableScrollbar(
+                      controller: scrollController,
+                      scrollbarTopMargin: 0,
+                      scrollbarBottomMargin: 0,
+                      scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                      child: ListView(
+                        controller: scrollController,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                            child: MarkdownBody(
+                              data: changeLogMarkdown,
+                              shrinkWrap: true,
+                              selectable: false,
+                              onTapLink: (String text, String? url, String title) async {
+                                final Uri uri = Uri.parse(url!);
+                                if (await canLaunchUrl(uri)) {
+                                  await launchUrl(uri);
+                                }
+                              },
+                              styleSheet: MarkdownStyleSheet.fromTheme(ThemeData(
+                                  textTheme: TextTheme(
+                                bodyText2: TextStyle(
+                                  fontSize: AppFontSizes.smallText(context),
+                                  fontWeight: FontWeight.w400,
+                                  color: StateContainer.of(context).curTheme.text,
+                                ),
+                              ))).copyWith(
+                                h1: TextStyle(
+                                  fontSize: AppFontSizes.large(context),
+                                  color: StateContainer.of(context).curTheme.success,
+                                ),
+                                h2: TextStyle(
+                                  fontSize: AppFontSizes.large(context),
+                                  color: StateContainer.of(context).curTheme.success,
+                                ),
+                                h2Padding: const EdgeInsets.only(top: 24),
+                                h4: TextStyle(
+                                  color: StateContainer.of(context).curTheme.warning,
+                                ),
+                                listBullet: TextStyle(
+                                  color: StateContainer.of(context).curTheme.text,
+                                ),
+                                horizontalRuleDecoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(width: 3, color: StateContainer.of(context).curTheme.text!),
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                      )),
+                              ),
+                              extensionSet: md.ExtensionSet(
+                                md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                                [md.EmojiSyntax(), ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                   Container(
                     height: 50,
                     alignment: Alignment.center,

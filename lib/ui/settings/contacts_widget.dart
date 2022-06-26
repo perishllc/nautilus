@@ -25,13 +25,13 @@ import 'package:nautilus_wallet_flutter/ui/contacts/contact_details.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ContactsList extends StatefulWidget {
-
   ContactsList(this.contactsController, this.contactsOpen);
-  
+
   final AnimationController? contactsController;
   bool? contactsOpen;
   bool contactsEnabled = false;
@@ -44,6 +44,24 @@ class _ContactsListState extends State<ContactsList> {
 
   late List<User> _contacts;
   String? documentsDirectory;
+
+  Future<bool> _getContactsPermissions() async {
+    // reloading prefs:
+    await sl.get<SharedPrefsUtil>().reload();
+    final bool contactsOn = await sl.get<SharedPrefsUtil>().getContactsOn();
+
+    // ask for contacts permission:
+    if (!contactsOn) {
+      final bool contactsEnabled = await cont.FlutterContacts.requestPermission();
+      await sl.get<SharedPrefsUtil>().setContactsOn(contactsEnabled);
+      EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
+      return contactsEnabled;
+    } else {
+      EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsOn));
+      return contactsOn;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -111,7 +129,7 @@ class _ContactsListState extends State<ContactsList> {
         return;
       }
 
-      for (Contact contact in contacts) {
+      for (final Contact contact in contacts) {
         if (contact.phones.isNotEmpty) {
           User contactUser = User();
           contactUser.nickname = contact.displayName;
@@ -236,9 +254,9 @@ class _ContactsListState extends State<ContactsList> {
       return;
     }
     final List<Map<String, dynamic>> jsonList = [];
-    contacts.forEach((User contact) {
+    for (final User contact in contacts) {
       jsonList.add(contact.toJson());
-    });
+    }
     final DateTime exportTime = DateTime.now();
     final String filename =
         "nautiluscontacts_${exportTime.year}${exportTime.month}${exportTime.day}${exportTime.hour}${exportTime.minute}${exportTime.second}.txt";
@@ -478,7 +496,7 @@ class _ContactsListState extends State<ContactsList> {
     if (user.aliases == null) {
       return [
         // nickname
-        if (user.nickname != null) Text("★" + user.nickname!, style: AppStyles.textStyleSettingItemHeader(context)) else const SizedBox(),
+        if (user.nickname != null) Text("★${user.nickname!}", style: AppStyles.textStyleSettingItemHeader(context)) else const SizedBox(),
 
         if (user.username != null)
           Text(
@@ -523,7 +541,7 @@ class _ContactsListState extends State<ContactsList> {
   Widget buildSingleContact(BuildContext context, User user) {
     return TextButton(
       style: TextButton.styleFrom(
-        padding: const EdgeInsets.all(0.0),
+        padding: EdgeInsets.zero,
       ),
       onPressed: () {
         ContactDetailsSheet(user, documentsDirectory).mainBottomSheet(context);
@@ -536,7 +554,7 @@ class _ContactsListState extends State<ContactsList> {
         // Main Container
         Container(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          margin: new EdgeInsetsDirectional.only(start: 12.0, end: 20.0),
+          margin: const EdgeInsetsDirectional.only(start: 12.0, end: 20.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[

@@ -549,6 +549,10 @@ class AppLocalization {
     return Intl.message("From", desc: 'request_from', name: 'from');
   }
 
+  String get someone {
+    return Intl.message("someone", desc: 'send_someone', name: 'someone');
+  }
+
   String get sendAmountConfirm {
     return Intl.message("Send %1 %2", desc: 'send_amount_confirm', name: 'sendAmountConfirm');
   }
