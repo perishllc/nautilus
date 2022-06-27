@@ -3434,15 +3434,6 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
       isUnacknowledgedSendableRequest = true;
     }
 
-    if (txDetails.is_memo) {
-      if (txDetails.status == StatusTypes.CREATE_FAILED) {
-        resendableMemo = true;
-      }
-      if (!txDetails.is_acknowledged && txDetails.memo!.isNotEmpty) {
-        resendableMemo = true;
-      }
-    }
-
     String? walletSeed;
     String? sharableLink;
 
@@ -3460,6 +3451,15 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
       addressToCopy = txDetails.from_address;
     }
 
+    if (txDetails.is_memo) {
+      if (txDetails.status == StatusTypes.CREATE_FAILED) {
+        resendableMemo = true;
+      }
+      if (!txDetails.is_acknowledged && txDetails.memo!.isNotEmpty && !isGiftLoad) {
+        resendableMemo = true;
+      }
+    }
+
     return SafeArea(
       minimum: EdgeInsets.only(
         bottom: MediaQuery.of(context).size.height * 0.035,
@@ -3471,44 +3471,45 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                // A row for Copy Address Button
-                Row(
-                  children: <Widget>[
-                    AppButton.buildAppButton(
-                        context,
-                        // Copy Address Button
-                        _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
-                        Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                      Clipboard.setData(ClipboardData(text: addressToCopy));
-                      if (mounted) {
-                        setState(() {
-                          // Set copied style
-                          _addressCopied = true;
-                        });
-                      }
-                      if (_addressCopiedTimer != null) {
-                        _addressCopiedTimer!.cancel();
-                      }
-                      _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                        if (mounted) {
-                          setState(() {
-                            _addressCopied = false;
-                          });
-                        }
-                      });
-                    }),
-                  ],
-                ),
                 // A row for View Details button
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () async {
                       await UIUtil.showBlockExplorerWebview(context, txDetails.block);
                     }),
                   ],
                 ),
+                // A row for Copy Address Button
+                if (!isGiftLoad)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context,
+                          // Copy Address Button
+                          _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
+                          _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
+                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                        Clipboard.setData(ClipboardData(text: addressToCopy));
+                        if (mounted) {
+                          setState(() {
+                            // Set copied style
+                            _addressCopied = true;
+                          });
+                        }
+                        if (_addressCopiedTimer != null) {
+                          _addressCopiedTimer!.cancel();
+                        }
+                        _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                          if (mounted) {
+                            setState(() {
+                              _addressCopied = false;
+                            });
+                          }
+                        });
+                      }),
+                    ],
+                  ),
                 // Mark as paid / unpaid button for requests
                 if (txDetails.is_request)
                   Row(
@@ -3606,33 +3607,8 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                     children: <Widget>[
                       AppButton.buildAppButton(
                           context,
-                          // copy link button
-                          _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                          _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.copyLink,
-                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                        Clipboard.setData(ClipboardData(text: sharableLink));
-                        setState(() {
-                          // Set copied style
-                          _linkCopied = true;
-                        });
-                        if (_linkCopiedTimer != null) {
-                          _linkCopiedTimer!.cancel();
-                        }
-                        _linkCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                          setState(() {
-                            _linkCopied = false;
-                          });
-                        });
-                      }),
-                    ],
-                  ),
-                if (isGiftLoad)
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
                           // copy seed button
-                          _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                          _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
                           _seedCopied ? AppLocalization.of(context)!.seedCopied : AppLocalization.of(context)!.copySeed,
                           Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
                         Clipboard.setData(ClipboardData(text: walletSeed));
@@ -3653,13 +3629,34 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                   ),
                 if (isGiftLoad)
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       AppButton.buildAppButton(
                           context,
+                          // copy link button
+                          _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
+                          _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.copyLink,
+                          Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
+                        Clipboard.setData(ClipboardData(text: sharableLink));
+                        setState(() {
+                          // Set copied style
+                          _linkCopied = true;
+                        });
+                        if (_linkCopiedTimer != null) {
+                          _linkCopiedTimer!.cancel();
+                        }
+                        _linkCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                          setState(() {
+                            _linkCopied = false;
+                          });
+                        });
+                      }),
+                      AppButton.buildAppButton(
+                          context,
                           // share link button
-                          AppButtonType.PRIMARY,
+                          AppButtonType.PRIMARY_OUTLINE,
                           AppLocalization.of(context)!.shareLink,
-                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                          Dimens.BUTTON_COMPACT_RIGHT_DIMENS, onPressed: () {
                         Share.share(sharableLink!);
                       }),
                     ],

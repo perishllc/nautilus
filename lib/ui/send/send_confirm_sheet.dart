@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
@@ -19,22 +18,22 @@ import 'package:nautilus_wallet_flutter/network/model/response/process_response.
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/generate/generate_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/biometrics.dart';
 import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:quiver/strings.dart';
 import 'package:uuid/uuid.dart';
 
 class SendConfirmSheet extends StatefulWidget {
@@ -43,10 +42,11 @@ class SendConfirmSheet extends StatefulWidget {
       required this.destination,
       this.contactName,
       this.localCurrency,
-      this.natriconNonce,
       this.maxSend = false,
-      this.phoneNumber = false,
-      this.memo})
+      this.phoneNumber = "",
+      this.paperWalletSeed = "",
+      this.link = "",
+      this.memo = ""})
       : super();
 
   final String amountRaw;
@@ -54,9 +54,11 @@ class SendConfirmSheet extends StatefulWidget {
   final String? contactName;
   final String? localCurrency;
   final bool maxSend;
-  final bool phoneNumber;
-  final int? natriconNonce;
-  final String? memo;
+  // final bool isPhoneNumber;
+  final String phoneNumber;
+  final String link;
+  final String paperWalletSeed;
+  final String memo;
 
   _SendConfirmSheetState createState() => _SendConfirmSheetState();
 }
@@ -65,8 +67,6 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
-
-  final _textMessageController = TextEditingController();
 
   void _registerBus() {
     _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((AuthenticatedEvent event) {
@@ -87,10 +87,6 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     super.initState();
     _registerBus();
     animationOpen = false;
-
-    if (isNotEmpty(widget.memo)) {
-      _textMessageController.text = widget.memo!;
-    }
   }
 
   @override
@@ -103,44 +99,6 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     animationOpen = true;
     AppAnimation.animationLauncher(context, type, onPoppedCallback: () => animationOpen = false);
   }
-
-  //************ Enter Memo Container Method ************//
-  //*******************************************************//
-  Widget getMessageEditor() {
-    double margin = 200;
-    // if (_textMessageController!.text.startsWith("nano_")) {
-    //   if (_textMessageController!.text.length > 24) {
-    //     margin = 217;
-    //   }
-    //   if (_textMessageController!.text.length > 48) {
-    //     margin = 238;
-    //   }
-    // }
-    return AppTextField(
-      bottomMargin: 40,
-      controller: _textMessageController,
-      cursorColor: StateContainer.of(context).curTheme.primary,
-      inputFormatters: [
-        // LengthLimitingTextInputFormatter(48),
-      ],
-      textInputAction: TextInputAction.done,
-      maxLines: null,
-      autocorrect: false,
-      // hintText: _memoHint ?? AppLocalization.of(context)!.enterMemo,
-      fadeSuffixOnCondition: true,
-      style: TextStyle(
-        color: StateContainer.of(context).curTheme.text60,
-        fontSize: AppFontSizes.small,
-        height: 1.5,
-        fontWeight: FontWeight.w100,
-        fontFamily: 'OverpassMono',
-      ),
-      onChanged: (String text) {
-        setState(() {}); // forces address container to respect the memo's status (empty or not empty)
-        // nothing for now
-      },
-    );
-  } //************ Enter Memo Container Method End ************//
 
   @override
   Widget build(BuildContext context) {
@@ -160,79 +118,77 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             ),
             //The main widget that holds the text fields, "SENDING" and "TO" texts
             Expanded(
-              child: KeyboardAvoider(
-                duration: Duration.zero,
-                autoScroll: true,
-                // focusPadding: 40,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    // "SENDING" TEXT
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.sending, context),
-                            style: AppStyles.textStyleHeader(context),
-                          ),
-                        ],
-                      ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  // "SENDING" TEXT
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 10.0),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          CaseChange.toUpperCase(
+                              (widget.link.isEmpty) ? AppLocalization.of(context)!.sending : AppLocalization.of(context)!.creatingGiftCard, context),
+                          style: AppStyles.textStyleHeader(context),
+                        ),
+                      ],
                     ),
-                    // Container for the amount text
-                    if (widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw == "0"))
-                      Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: StateContainer.of(context).curTheme.backgroundDarkest,
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Text(
-                            widget.memo!,
-                            style: AppStyles.textStyleParagraph(context),
-                            textAlign: TextAlign.center,
-                          ))
-                    else
-                      Container(
+                  ),
+                  // Container for the amount text
+                  if (widget.memo.isNotEmpty && (widget.amountRaw == "0"))
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                         margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: StateContainer.of(context).curTheme.backgroundDarkest,
-                          borderRadius: BorderRadius.circular(50),
+                          borderRadius: BorderRadius.circular(25),
                         ),
-                        // Amount text
-                        child: RichText(
+                        child: Text(
+                          widget.memo,
+                          style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.center,
-                          text: TextSpan(
-                            text: "",
-                            children: [
-                              TextSpan(
-                                text: getThemeAwareRawAccuracy(context, widget.amountRaw),
-                                style: AppStyles.textStyleParagraphPrimary(context),
+                        ))
+                  else
+                    Container(
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      // Amount text
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          text: "",
+                          children: [
+                            TextSpan(
+                              text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                            displayCurrencySymbol(
+                              context,
+                              AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                            TextSpan(
+                              text: getRawAsThemeAwareFormattedAmount(context, widget.amountRaw),
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                            TextSpan(
+                              text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
+                              style: AppStyles.textStyleParagraphPrimary(context).copyWith(
+                                color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
                               ),
-                              displayCurrencySymbol(
-                                context,
-                                AppStyles.textStyleParagraphPrimary(context),
-                              ),
-                              TextSpan(
-                                text: getRawAsThemeAwareFormattedAmount(context, widget.amountRaw),
-                                style: AppStyles.textStyleParagraphPrimary(context),
-                              ),
-                              TextSpan(
-                                text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
-                                style: AppStyles.textStyleParagraphPrimary(context).copyWith(
-                                  color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
+                    ),
 
-                    // "TO" text
+                  // "TO" text
+                  if (widget.link.isEmpty)
                     Container(
                       margin: const EdgeInsets.only(top: 30.0, bottom: 10),
                       child: Column(
@@ -244,60 +200,47 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         ],
                       ),
                     ),
-                    // Address text
-                    if (!widget.phoneNumber)
-                      Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: StateContainer.of(context).curTheme.backgroundDarkest,
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName))
-                    else
-                      Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: StateContainer.of(context).curTheme.backgroundDarkest,
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Text(
-                            widget.destination.isNotEmpty ? widget.destination : "(${AppLocalization.of(context)!.someone})",
-                            style: AppStyles.textStyleParagraph(context),
-                            textAlign: TextAlign.center,
-                          )),
-                    if (widget.phoneNumber || (widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw != "0")))
-                      Container(
-                        margin: const EdgeInsets.only(top: 30.0, bottom: 10),
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
-                              style: AppStyles.textStyleHeader(context),
-                            ),
-                          ],
+                  // Address text
+                  if (widget.link.isEmpty)
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: StateContainer.of(context).curTheme.backgroundDarkest,
+                          borderRadius: BorderRadius.circular(25),
                         ),
-                      ),
-                    if (!widget.phoneNumber && widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw != "0"))
-                      Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: StateContainer.of(context).curTheme.backgroundDarkest,
-                            borderRadius: BorderRadius.circular(25),
+                        child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
+
+                  // WITH MESSAGE:
+                  if (widget.memo.isNotEmpty && (widget.amountRaw != "0"))
+                    Container(
+                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
+                            style: AppStyles.textStyleHeader(context),
                           ),
-                          child: Text(
-                            widget.memo!,
-                            style: AppStyles.textStyleParagraph(context),
-                            textAlign: TextAlign.center,
-                          )),
-                    if (widget.phoneNumber) getMessageEditor(),
-                  ],
-                ),
+                        ],
+                      ),
+                    ),
+                  // MEMO:
+                  if (widget.memo.isNotEmpty && (widget.amountRaw != "0"))
+                    Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: StateContainer.of(context).curTheme.backgroundDarkest,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Text(
+                          widget.memo,
+                          style: AppStyles.textStyleParagraph(context),
+                          textAlign: TextAlign.center,
+                        )),
+                ],
               ),
             ),
 
@@ -315,7 +258,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
 
-                      final bool isMessage = widget.memo != null && widget.memo!.isNotEmpty && (widget.amountRaw == "0");
+                      final bool isMessage = widget.memo.isNotEmpty && (widget.amountRaw == "0");
 
                       final String authText = isMessage
                           ? AppLocalization.of(context)!.sendMessageConfirm
@@ -378,8 +321,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
       }
 
-      // if there's a memo to be sent, send it:
-      if (widget.memo != null && widget.memo!.isNotEmpty) {
+      // if there's a memo to be sent, and this isn't a gift card creation, send it:
+      if (widget.memo.isNotEmpty && widget.link.isEmpty) {
         final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
         // get epoch time as hex:
         final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
@@ -419,7 +362,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
         try {
           // encrypt the memo:
-          final String encryptedMemo = await Box.encrypt(widget.memo!, widget.destination, privKey);
+          final String encryptedMemo = await Box.encrypt(widget.memo, widget.destination, privKey);
 
           if (isMessage) {
             await sl
@@ -427,8 +370,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                 .sendTXMessage(widget.destination, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
           } else {
             // just a memo:
-            await sl.get<AccountService>().sendTXMemo(widget.destination, StateContainer.of(context).wallet!.address, widget.amountRaw, signature, nonceHex,
-                encryptedMemo, resp?.hash ?? null, localUuid);
+            await sl.get<AccountService>().sendTXMemo(
+                widget.destination, StateContainer.of(context).wallet!.address, widget.amountRaw, signature, nonceHex, encryptedMemo, resp?.hash, localUuid);
           }
         } catch (e) {
           sl.get<Logger>().v("error encrypting memo: $e");
@@ -491,20 +434,51 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         UIUtil.showSnackbar(AppLocalization.of(context)!.sendMemoError, context, durationMs: 5000);
       }
 
-      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       StateContainer.of(context).requestUpdate();
       StateContainer.of(context).updateTXMemos();
 
       if (!memoSendFailed) {
-        Sheets.showAppHeightNineSheet(
-            context: context,
-            closeOnTap: true,
-            removeUntilHome: true,
-            widget: SendCompleteSheet(
-                amountRaw: widget.amountRaw, destination: widget.destination, contactName: contactName, memo: widget.memo, localAmount: widget.localCurrency));
+        if (widget.link.isEmpty) {
+          Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+          Sheets.showAppHeightNineSheet(
+              context: context,
+              closeOnTap: true,
+              removeUntilHome: true,
+              widget: SendCompleteSheet(
+                  amountRaw: widget.amountRaw,
+                  destination: widget.destination,
+                  contactName: contactName,
+                  memo: widget.memo,
+                  localAmount: widget.localCurrency));
+        } else {
+          // ignore: use_build_context_synchronously
+          await sl.get<GiftCards>().handleResponse(context,
+              success: true,
+              amountRaw: widget.amountRaw,
+              destination: widget.destination,
+              localCurrency: widget.localCurrency,
+              link: widget.link,
+              hash: resp!.hash!,
+              paperWalletSeed: widget.paperWalletSeed,
+              memo: widget.memo);
+
+          Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+
+          Sheets.showAppHeightNineSheet(
+              context: context,
+              closeOnTap: false,
+              removeUntilHome: true,
+              widget: GenerateCompleteSheet(
+                  amountRaw: widget.amountRaw,
+                  destination: widget.destination,
+                  contactName: contactName,
+                  memo: widget.memo,
+                  link: widget.link,
+                  localAmount: widget.localCurrency));
+        }
       }
     } catch (error) {
-      sl.get<Logger>().v("send_confirm_error: $error");
+      sl.get<Logger>().d("send_confirm_error: $error");
       // Send failed
       if (animationOpen) {
         Navigator.of(context).pop();

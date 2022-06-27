@@ -68,7 +68,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
       return;
     }
     Sheets.showAppHeightNineSheet(
-        context: context, widget: SendConfirmSheet(amountRaw: sendAmount.toString(), destination: NATRICON_ADDRESS, natriconNonce: nonce));
+        context: context, widget: SendConfirmSheet(amountRaw: sendAmount.toString(), destination: NATRICON_ADDRESS));
   }
 
   @override

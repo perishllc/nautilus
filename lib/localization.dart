@@ -87,6 +87,10 @@ class AppLocalization {
     return Intl.message('Loaded', desc: 'history_loaded', name: 'loaded');
   }
 
+  String get created {
+    return Intl.message('created', desc: 'gift_created', name: 'created');
+  }
+
   String get opened {
     return Intl.message('Opened', desc: 'history_opened', name: 'opened');
   }
@@ -233,6 +237,10 @@ class AppLocalization {
 
   String get qrInvalidAddress {
     return Intl.message("QR code does not contain a valid destination", desc: "qr_invalid_address", name: 'qrInvalidAddress');
+  }
+
+  String get giftCardCreationError {
+    return Intl.message("An error occured while trying to create a gift card link", desc: "create_gift_error", name: 'giftCardCreationError');
   }
 
   String get qrInvalidPermissions {
@@ -541,6 +549,10 @@ class AppLocalization {
     return Intl.message("With Message", desc: 'with_message', name: 'withMessage');
   }
 
+  String get using {
+    return Intl.message("Using", desc: 'gift_message_using', name: 'using');
+  }
+
   String get to {
     return Intl.message("To", desc: 'send_to', name: 'to');
   }
@@ -625,6 +637,10 @@ class AppLocalization {
 
   String get enterMemo {
     return Intl.message("Enter Message", desc: 'enter_memo', name: 'enterMemo');
+  }
+
+  String get defaultGiftMessage {
+    return Intl.message("Check out Nautilus! I sent you some nano with this link:", desc: 'default_gift_message', name: 'defaultGiftMessage');
   }
 
   String get enterGiftMemo {
@@ -1357,8 +1373,20 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
     return Intl.message("Link Copied", desc: 'link_copied', name: 'linkCopied');
   }
 
+  String get copyMessage {
+    return Intl.message("Copy Message", desc: 'copy_message', name: 'copyMessage');
+  }
+
+  String get messageCopied {
+    return Intl.message("Message Copied", desc: 'message_copied', name: 'messageCopied');
+  }
+
   String get shareLink {
     return Intl.message("Share Link", desc: 'share_link', name: 'shareLink');
+  }
+
+  String get shareMessage {
+    return Intl.message("Share Message", desc: 'share_message', name: 'shareMessage');
   }
 
   /// END GIFTS

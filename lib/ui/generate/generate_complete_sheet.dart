@@ -2,16 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:share_plus/share_plus.dart';
 
 class GenerateCompleteSheet extends StatefulWidget {
@@ -19,10 +19,11 @@ class GenerateCompleteSheet extends StatefulWidget {
   final String? destination;
   final String? contactName;
   final String? localAmount;
-  final String? sharableLink;
-  final String? walletSeed;
+  final String link;
+  final String walletSeed;
+  final String memo;
 
-  GenerateCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.sharableLink, this.walletSeed}) : super();
+  GenerateCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.link = "", this.walletSeed = "", this.memo = ""}) : super();
 
   _GenerateCompleteSheetState createState() => _GenerateCompleteSheetState();
 }
@@ -37,13 +38,49 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
   // Timer reference so we can cancel repeated events
   Timer? _seedCopiedTimer;
 
+  final TextEditingController _messageController = TextEditingController();
+  final FocusNode _messageFocusNode = FocusNode();
+
   @override
   void initState() {
     super.initState();
   }
 
+  //************ Enter Memo Container Method ************//
+  //*******************************************************//
+  Widget getMessageEditor() {
+    return AppTextField(
+      focusNode: _messageFocusNode,
+      bottomMargin: 20,
+      controller: _messageController,
+      cursorColor: StateContainer.of(context).curTheme.primary,
+      // inputFormatters: [
+      //   LengthLimitingTextInputFormatter(48),
+      // ],
+      textInputAction: TextInputAction.done,
+      maxLines: null,
+      autocorrect: false,
+      // hintText: _memoHint ?? AppLocalization.of(context)!.enterMemo,
+      fadeSuffixOnCondition: true,
+      style: TextStyle(
+        color: StateContainer.of(context).curTheme.text60,
+        fontSize: AppFontSizes.small,
+        height: 1.2,
+        fontWeight: FontWeight.w100,
+        fontFamily: 'OverpassMono',
+      ),
+      onChanged: (String text) {
+        setState(() {}); // forces address container to respect the memo's status (empty or not empty)
+        // nothing for now
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (widget.link.isNotEmpty && _messageController.text.isEmpty) {
+      _messageController.text = "${AppLocalization.of(context)!.defaultGiftMessage} ${widget.link}";
+    }
     return SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
@@ -58,153 +95,147 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                 borderRadius: BorderRadius.circular(5.0),
               ),
             ),
+
+            // Success tick (icon)
+            GestureDetector(
+              onTap: () {
+                // Clear focus of our fields when tapped in this empty space
+                _messageFocusNode.unfocus();
+              },
+              child: Container(
+                alignment: AlignmentDirectional.center,
+                margin: const EdgeInsets.only(bottom: 25),
+                child: Icon(AppIcons.success, size: 100, color: StateContainer.of(context).curTheme.success),
+              ),
+            ),
             //A main container that holds the amount, address and "SENT TO" texts
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  // Success tick (icon)
-                  Container(
-                    alignment: AlignmentDirectional.center,
-                    margin: const EdgeInsets.only(bottom: 25),
-                    child: Icon(AppIcons.success, size: 100, color: StateContainer.of(context).curTheme.success),
-                  ),
-                  // Container for the Amount Text
-                  Container(
-                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.backgroundDarkest,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    // Amount text
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        text: "",
-                        children: [
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
-                            style: AppStyles.textStyleParagraphSuccess(context),
-                          ),
-                          displayCurrencySymbol(
-                            context,
-                            AppStyles.textStyleParagraphSuccess(context),
-                          ),
-                          TextSpan(
-                            text: getRawAsThemeAwareAmount(context, widget.amountRaw),
-                            style: AppStyles.textStyleParagraphSuccess(context),
-                          ),
-                          TextSpan(
-                            text: widget.localAmount != null ? " (${widget.localAmount})" : "",
-                            style: AppStyles.textStyleParagraphSuccess(context).copyWith(
-                              color: StateContainer.of(context).curTheme.success!.withOpacity(0.75),
+              child: GestureDetector(
+                onTap: () {
+                  // Clear focus of our fields when tapped in this empty space
+                  _messageFocusNode.unfocus();
+                },
+                child: KeyboardAvoider(
+                  duration: Duration.zero,
+                  autoScroll: true,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      // Container for the "CREATED" text
+                      Container(
+                        margin: const EdgeInsets.only(top: 10.0, bottom: 10),
+                        child: Column(
+                          children: <Widget>[
+                            // "SENT TO" text
+                            Text(
+                              CaseChange.toUpperCase(AppLocalization.of(context)!.created, context),
+                              style: TextStyle(
+                                fontSize: 28.0,
+                                fontWeight: FontWeight.w700,
+                                color: StateContainer.of(context).curTheme.success,
+                                fontFamily: 'NunitoSans',
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                  // Container for the "SENT TO" text
-                  Container(
-                    margin: const EdgeInsets.only(top: 30.0, bottom: 10),
-                    child: Column(
-                      children: <Widget>[
-                        // "SENT TO" text
-                        Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context)!.loadedInto, context),
-                          style: TextStyle(
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.w700,
-                            color: StateContainer.of(context).curTheme.success,
-                            fontFamily: 'NunitoSans',
+                      // Container for the Amount Text
+                      Container(
+                        margin: EdgeInsets.only(top: 10.0, bottom: 10, left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: StateContainer.of(context).curTheme.backgroundDarkest,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        // Amount text
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: "",
+                            children: [
+                              TextSpan(
+                                text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                                style: AppStyles.textStyleParagraphSuccess(context),
+                              ),
+                              displayCurrencySymbol(
+                                context,
+                                AppStyles.textStyleParagraphSuccess(context),
+                              ),
+                              TextSpan(
+                                text: getRawAsThemeAwareAmount(context, widget.amountRaw),
+                                style: AppStyles.textStyleParagraphSuccess(context),
+                              ),
+                              TextSpan(
+                                text: widget.localAmount != null ? " (${widget.localAmount})" : "",
+                                style: AppStyles.textStyleParagraphSuccess(context).copyWith(
+                                  color: StateContainer.of(context).curTheme.success!.withOpacity(0.75),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  // The container for the address
-                  Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                        borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, widget.destination!, type: ThreeLineAddressTextType.SUCCESS, contactName: widget.contactName)),
-                ],
+
+                      // // The container for the address
+                      // Container(
+                      //     padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                      //     margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      //     width: double.infinity,
+                      //     decoration: BoxDecoration(
+                      //       color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      //       borderRadius: BorderRadius.circular(25),
+                      //     ),
+                      //     child:
+                      //         UIUtil.threeLineAddressText(context, widget.destination!, type: ThreeLineAddressTextType.SUCCESS, contactName: widget.contactName)),
+                      getMessageEditor(),
+                    ],
+                  ),
+                ),
               ),
             ),
 
             // CLOSE Button
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          // Share Address Button
-                          _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                          _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.copyLink,
-                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                        // Navigator.of(context).pop();
-                        Clipboard.setData(new ClipboardData(text: widget.sharableLink));
+            Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(
+                        context,
+                        // copy message Button
+                        _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                        _linkCopied ? AppLocalization.of(context)!.messageCopied : AppLocalization.of(context)!.copyMessage,
+                        Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                      // Navigator.of(context).pop();
+                      Clipboard.setData(ClipboardData(text: _messageController.text));
+                      setState(() {
+                        // Set copied style
+                        _linkCopied = true;
+                      });
+                      if (_linkCopiedTimer != null) {
+                        _linkCopiedTimer!.cancel();
+                      }
+                      _linkCopiedTimer = Timer(const Duration(milliseconds: 800), () {
                         setState(() {
-                          // Set copied style
-                          _linkCopied = true;
+                          _linkCopied = false;
                         });
-                        if (_linkCopiedTimer != null) {
-                          _linkCopiedTimer!.cancel();
-                        }
-                        _linkCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
-                          setState(() {
-                            _linkCopied = false;
-                          });
-                        });
-                      }),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          // copy seed button
-                          _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                          _seedCopied ? AppLocalization.of(context)!.seedCopied : AppLocalization.of(context)!.copySeed,
-                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                        Clipboard.setData(new ClipboardData(text: widget.walletSeed));
-                        setState(() {
-                          // Set copied style
-                          _seedCopied = true;
-                        });
-                        if (_seedCopiedTimer != null) {
-                          _seedCopiedTimer!.cancel();
-                        }
-                        _seedCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
-                          setState(() {
-                            _seedCopied = false;
-                          });
-                        });
-                      }),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          // share link button
-                          AppButtonType.PRIMARY,
-                          AppLocalization.of(context)!.shareLink,
-                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                        Share.share(widget.sharableLink!);
-                      }),
-                    ],
-                  )
-                ],
-              ),
+                      });
+                    }),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(
+                        context,
+                        // share message button
+                        AppButtonType.PRIMARY,
+                        AppLocalization.of(context)!.shareMessage,
+                        Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                      Share.share(_messageController.text);
+                    }),
+                  ],
+                )
+              ],
             ),
           ],
         ));

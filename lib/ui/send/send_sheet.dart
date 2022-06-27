@@ -6,6 +6,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
@@ -36,6 +37,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/giftcards.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
@@ -810,17 +812,31 @@ class _SendSheetState extends State<SendSheet> {
                       }
 
                       final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
-                      // we need to create a gift card and change the destination address to the gift card address:
-                      final giftCardItem = await sl<GiftCards>().createGiftCard(
-                        context,
-                        amountRaw: amountRaw,
-                        memo: _memoController!.text,
-                      );
                       String? link;
-                      if (giftCardItem.success) {
-                        link = giftCardItem.result as String;
-                        // todo: need the paper wallet address:
-                        // formattedAddress = giftCardItem.;
+                      String? phoneNumber;
+                      String? paperWalletSeed;
+                      if (isPhoneNumber) {
+                        phoneNumber = _addressController!.text;
+                      }
+                      if (isPhoneNumber || _addressController!.text.isEmpty) {
+                        // we need to create a gift card and change the destination address to the gift card address:
+                        paperWalletSeed = NanoSeeds.generateSeed();
+                        final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
+                        // final String paperWalletAccount = "nano_1i4fcujt49de3mio9eb9y5jakw8o9m1za6ntidxn4nkwgnunktpy54z1ma58";
+                        final giftCardItem = await sl<GiftCards>().createGiftCard(
+                          context,
+                          paperWalletSeed: paperWalletSeed,
+                          amountRaw: amountRaw,
+                          memo: _memoController!.text,
+                        );
+
+                        if (giftCardItem.success) {
+                          link = giftCardItem.result as String;
+                          formattedAddress = paperWalletAccount;
+                        } else {
+                          UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationError, context);
+                          return;
+                        }
                       }
 
                       bool isMaxSend = false;
@@ -830,7 +846,7 @@ class _SendSheetState extends State<SendSheet> {
                       }
 
                       // verifyies the input is a user in the db
-                      if (!_addressController!.text.startsWith("nano_") && !isPhoneNumber) {
+                      if (!_addressController!.text.startsWith("nano_") && !isPhoneNumber && _addressController!.text.isNotEmpty) {
                         // Need to make sure its a valid contact or user
                         final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
                         if (user == null) {
@@ -861,7 +877,9 @@ class _SendSheetState extends State<SendSheet> {
                                 amountRaw: amountRaw,
                                 destination: formattedAddress,
                                 maxSend: isMaxSend,
-                                phoneNumber: isPhoneNumber,
+                                phoneNumber: phoneNumber ?? "",
+                                link: link ?? "",
+                                paperWalletSeed: paperWalletSeed ?? "",
                                 localCurrency: _localCurrencyMode ? _amountController!.text : null,
                                 memo: _memoController!.text));
                       }
@@ -1100,7 +1118,7 @@ class _SendSheetState extends State<SendSheet> {
 
   bool _isPhoneNumber(String text) {
     // TODO: make more thorough:
-    return (double.tryParse(text) != null) || (text.isEmpty);
+    return double.tryParse(text) != null;
   }
 
   void toggleLocalCurrency() {
@@ -1241,7 +1259,7 @@ class _SendSheetState extends State<SendSheet> {
         _pasteButtonVisible = true;
       });
     } else */
-    if (!isPhoneNumber && !isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
+    if (_addressController!.text.isNotEmpty && !isPhoneNumber && !isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context)!.invalidAddress;
@@ -1258,7 +1276,7 @@ class _SendSheetState extends State<SendSheet> {
       // notifications must be turned on if sending a request or memo:
       final bool notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
 
-      if ((isRequest || (_memoController!.text.isNotEmpty && !isPhoneNumber)) && !notificationsEnabled) {
+      if ((isRequest || (_memoController!.text.isNotEmpty && !isPhoneNumber && _addressController!.text.isNotEmpty)) && !notificationsEnabled) {
         final bool notificationTurnedOn = await showNotificationDialog();
         if (!notificationTurnedOn) {
           isValid = false;

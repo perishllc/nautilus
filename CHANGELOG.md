@@ -5,9 +5,14 @@
   - Must be reproducible / and or show the bug in some form (i.e. a screenshot or video recording)
   - The bug must not have already been reported before, or be directly related to an already reported bug
   - Bugs resulting from server outages and known bugs (things in the #todo channel) are not eligible
+  - Minor visual inconsistencies are not elligible depending on the case
 #### Added
+- Ability to quickly create gift cards and customize them by sending without an address specified
+  - After a gift card is created you can edit and copy the message to your clipboard right from within the app
 #### Changed
 - Backend hardware was migrated for better performance and reliability
+- More consistent UI/colors for tx details (when you tap on a tx, the menu that pops up)
+- Better handling of contacts / permissions, but still a WIP / texts feature not done
 #### Fixed
 - Minor bugs related to the alerts system
 - Nano <-> local currency price display bug
@@ -146,10 +151,11 @@
 #### Changed
 - Contacts -> Favorites
 
-## TODO:
+## larger scale TODO:
 - create a txdata for gift card open
 - check for duplicate memos and remove them (just in case)
 - make a UI for preferred username / display name in the case that there are multiple users with the same address
-- update the welcome screen / example transactions and requests
 - NFC support
-- take new screenshots for the app / play store
+- Ledger Nano X support
+- local PoW solution
+- finish automated screenshots for the app / play store

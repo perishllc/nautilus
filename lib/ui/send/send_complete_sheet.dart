@@ -15,9 +15,9 @@ class SendCompleteSheet extends StatefulWidget {
   final String destination;
   final String? contactName;
   final String? localAmount;
-  final String? memo;
+  final String memo;
 
-  SendCompleteSheet({required this.amountRaw, required this.destination, this.contactName, this.localAmount, this.memo}) : super();
+  SendCompleteSheet({required this.amountRaw, required this.destination, this.contactName, this.localAmount, this.memo = ""}) : super();
 
   _SendCompleteSheetState createState() => _SendCompleteSheetState();
 }
@@ -56,7 +56,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                     child: Icon(AppIcons.success, size: 100, color: StateContainer.of(context).curTheme.success),
                   ),
                   // Container for the Amount Text
-                  if (widget.amountRaw == "0" && widget.memo != null && widget.memo!.isNotEmpty)
+                  if (widget.amountRaw == "0" && widget.memo.isNotEmpty)
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                         margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
@@ -66,7 +66,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: Text(
-                          widget.memo!,
+                          widget.memo,
                           style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.center,
                         ))
@@ -140,19 +140,17 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
             ),
 
             // CLOSE Button
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.close, context),
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                        Navigator.of(context).pop();
-                      }),
-                    ],
-                  ),
-                ],
-              ),
+            Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.close, context),
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+                  ],
+                ),
+              ],
             ),
           ],
         ));

@@ -331,8 +331,8 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                     Sheets.showAppHeightNineSheet(
                         context: context,
                         widget: GenerateConfirmSheet(
-                          paperWalletSeed: paper_wallet_seed,
-                          memo: memo,
+                          paperWalletSeed: paper_wallet_seed!,
+                          memo: memo ?? "",
                           destination: paper_wallet_account,
                           amountRaw: _localCurrencyMode
                               ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
