@@ -283,45 +283,44 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                     ),
                   ],
                 ),
+                actionsAlignment: MainAxisAlignment.end,
                 actions: <Widget>[
-                  Row(children: [
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 0);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context)!.refund,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, 0);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context)!.refund,
+                        style: AppStyles.textStyleDialogOptions(context),
                       ),
                     ),
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 1);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context)!.receive,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
+                  ),
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, 1);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context)!.receive,
+                        style: AppStyles.textStyleDialogOptions(context),
                       ),
                     ),
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 2);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context)!.close,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
+                  ),
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, 2);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context)!.close,
+                        style: AppStyles.textStyleDialogOptions(context),
                       ),
-                    )
-                  ]),
+                    ),
+                  )
                 ],
               );
             })) {
@@ -2912,9 +2911,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 },
                 child: Center(
                   child: Container(
-                    constraints: const BoxConstraints(
-                      minHeight: cardHeight,
-                    ),
+                    // constraints: const BoxConstraints(
+                    //   minHeight: cardHeight,
+                    //   maxHeight: cardHeight+10,
+                    // ),
                     // padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
                     // padding: const EdgeInsets.only(top: 14.0, bottom: 14.0, left: 20.0),
                     // padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
@@ -2925,7 +2925,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                       children: <Widget>[
                         Container(
                           constraints: const BoxConstraints(
-                            maxHeight: cardHeight,
+                            minHeight: cardHeight,
+                            // maxHeight: cardHeight+20,
                           ),
                           margin: const EdgeInsetsDirectional.only(start: 20.0),
                           child: Row(
@@ -3023,7 +3024,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                           ),
                         Container(
                           // width: MediaQuery.of(context).size.width / 4.0,
-                          constraints: const BoxConstraints(maxHeight: cardHeight),
+                          // constraints: const BoxConstraints(maxHeight: cardHeight),
 
                           margin: const EdgeInsetsDirectional.only(end: 20.0),
 
