@@ -323,12 +323,13 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
       // if there's a memo to be sent, and this isn't a gift card creation, send it:
       if (widget.memo.isNotEmpty && widget.link.isEmpty) {
-        final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+        String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
         // get epoch time as hex:
         final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
         final String nonceHex = secondsSinceEpoch.toRadixString(16);
         final String signature = NanoSignatures.signBlock(nonceHex, privKey);
-
+        privKey = ""; // clear from memory asap
+        
         // check validity locally:
         final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
         final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
@@ -362,7 +363,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
         try {
           // encrypt the memo:
-          final String encryptedMemo = await Box.encrypt(widget.memo, widget.destination, privKey);
+          final String encryptedMemo = Box.encrypt(widget.memo, widget.destination, privKey);
 
           if (isMessage) {
             await sl
@@ -476,6 +477,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                   link: widget.link,
                   localAmount: widget.localCurrency));
         }
+      } else {
+        Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       }
     } catch (error) {
       sl.get<Logger>().d("send_confirm_error: $error");

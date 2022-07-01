@@ -281,17 +281,17 @@ class _ContactsListState extends State<ContactsList> {
       }
       try {
         final String contents = await f.readAsString();
-        final Iterable<User> contactsJson = json.decode(contents) as Iterable<User>;
+        final List<dynamic> contactsJson = json.decode(contents) as List<dynamic>;
         final List<User> contacts = [];
         final List<User> contactsToAdd = [];
-        for (final User contact in contactsJson) {
+        for (final dynamic contact in contactsJson) {
           contacts.add(User.fromJson(contact as Map<String, dynamic>));
         }
         for (final User contact in contacts) {
           if (!await sl.get<DBHelper>().contactExistsWithName(contact.nickname!) && !await sl.get<DBHelper>().contactExistsWithAddress(contact.address!)) {
             // Contact doesnt exist, make sure name and address are valid
             if (Address(contact.address).isValid()) {
-              if (contact.nickname!.startsWith("★") && contact.nickname!.length <= 20) {
+              if (contact.nickname!.length <= 20) {
                 contactsToAdd.add(contact);
               }
             }
@@ -400,7 +400,7 @@ class _ContactsListState extends State<ContactsList> {
                               onPressed: () {
                                 _importContacts();
                               },
-                              child: Icon(AppIcons.import_icon, color: StateContainer.of(context).curTheme.text, size: 24)),
+                              child: Icon(AppIcons.file_import, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                         // Export button
                         Container(
@@ -419,7 +419,7 @@ class _ContactsListState extends State<ContactsList> {
                               onPressed: () {
                                 _exportContacts();
                               },
-                              child: Icon(AppIcons.export_icon, color: StateContainer.of(context).curTheme.text, size: 24)),
+                              child: Icon(AppIcons.file_export, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                       ],
                     ),

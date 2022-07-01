@@ -12,13 +12,12 @@ import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/register/register_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-
-import 'send/send_sheet.dart';
 
 // class LeaseOption {
 //   final String key;
@@ -118,13 +117,13 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
   }
 
   Widget getDropdown() {
-    List<DropdownMenuItem<String>> dropdownItems = [];
+    final List<DropdownMenuItem<String>> dropdownItems = [];
 
     if (_leaseDetails == null) {
       return Container();
     }
 
-    for (int i = 0; i < (_leaseDetails!["plans"] as Map).length; i++) {
+    for (int i = 0; i < (_leaseDetails!["plans"] as List<dynamic>).length; i++) {
       dropdownItems.add(DropdownMenuItem(
         onTap: () => {
           setState(() {
@@ -173,7 +172,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
     }
 
     // go through the plans to find the one that matches the selected duration:
-    for (int i = 0; i < (_leaseDetails!["plans"] as Map).length; i++) {
+    for (int i = 0; i < (_leaseDetails!["plans"] as List<dynamic>).length; i++) {
       if (_leaseDetails!["plans"][i]["name"] == _leaseSelected) {
         _leaseSelectedIndex = i;
         break;
@@ -235,7 +234,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
               //A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
               Expanded(
                 child: KeyboardAvoider(
-                  duration: const Duration(milliseconds: 0),
+                  duration: Duration.zero,
                   autoScroll: true,
                   focusPadding: 40,
                   child: Column(
@@ -360,7 +359,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
 
                             // ******* Enter Address Error Container ******* //
                             Container(
-                              alignment: const AlignmentDirectional(0, 0),
+                              alignment: AlignmentDirectional.center,
                               margin: const EdgeInsets.only(top: 20),
                               child: Text(_usernameValidationText,
                                   style: TextStyle(
@@ -412,14 +411,14 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                         children: <Widget>[
                           AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.checkAvailability, Dimens.BUTTON_BOTTOM_DIMENS,
                               onPressed: () async {
-                            String username = _usernameController!.text.replaceAll("@", "");
+                            final String username = _usernameController!.text.replaceAll("@", "");
                             if (_usernameController!.text.isEmpty) {
                               setState(() {
                                 _usernameValidationText = AppLocalization.of(context)!.usernameEmpty;
                               });
                               return;
                             }
-                            Map? resp = await (sl.get<AccountService>().checkUsernameAvailability(username) as FutureOr<Map<dynamic, dynamic>?>);
+                            final Map<String, dynamic> resp = await sl.get<AccountService>().checkUsernameAvailability(username) as Map<String, dynamic>;
                             if (resp != null) {
                               if (resp["available"] == true) {
                                 setState(() {
@@ -450,7 +449,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                         children: <Widget>[
                           AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.registerUsername, Dimens.BUTTON_BOTTOM_DIMENS,
                               onPressed: () async {
-                            String username = _usernameController!.text.replaceAll("@", "");
+                            final String username = _usernameController!.text.replaceAll("@", "");
 
                             String? price;
                             if (_leaseDetails!["plans"][_leaseSelectedIndex]["raw_amount"] != null) {
@@ -461,14 +460,14 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                               return Container();
                             }
 
-                            BigInt balanceRaw = StateContainer.of(context).wallet!.accountBalance;
-                            BigInt sendAmount = BigInt.tryParse(price!)!;
+                            final BigInt balanceRaw = StateContainer.of(context).wallet!.accountBalance;
+                            final BigInt sendAmount = BigInt.tryParse(price!)!;
                             if (sendAmount > balanceRaw) {
                               setState(() {
                                 _usernameValidationText = AppLocalization.of(context)!.insufficientBalance;
                               });
                             } else {
-                              String? destination = _leaseDetails!["plans"][_leaseSelectedIndex]["address"] as String?;
+                              final String? destination = _leaseDetails!["plans"][_leaseSelectedIndex]["address"] as String?;
                               if (destination == null) {
                                 return Container();
                               }
@@ -518,9 +517,9 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                 ? AppStyles.textStyleAddressText90(context)
                 : AppStyles.textStyleAddressPrimary(context),
         onChanged: (String text) {
-          bool? isUser = text.startsWith("@");
-          bool? isFavorite = text.startsWith("★");
-          bool? isNano = text.startsWith("nano_");
+          final bool isUser = text.startsWith("@");
+          final bool isFavorite = text.startsWith("★");
+          final bool isNano = text.startsWith("nano_");
 
           // prevent spaces:
           if (text.contains(" ")) {
@@ -543,7 +542,6 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
             // add @ to the beginning of the string:
             _usernameController!.text = "@$text";
             _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
-            isUser = true;
           }
 
           if (text.isNotEmpty && text.startsWith("@nano_")) {
@@ -551,7 +549,6 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
               // remove the @ from the beginning of the string:
               _usernameController!.text = text.replaceFirst("@nano_", "nano_");
               _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
-              isUser = false;
             });
           }
 

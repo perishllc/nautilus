@@ -40,9 +40,10 @@ import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/callback_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/receivable_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/receivable_response_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -61,9 +62,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.reload();
   List<String>? backgroundMessages = prefs.getStringList('background_messages');
-  if (backgroundMessages == null) {
-    backgroundMessages = [];
-  }
+  backgroundMessages ??= [];
   backgroundMessages.add(jsonEncode(message.data));
   await prefs.setStringList('background_messages', backgroundMessages);
 }
@@ -74,15 +73,14 @@ Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
 }
 
 class _InheritedStateContainer extends InheritedWidget {
-  // Data is your entire state. In our case just 'User'
-  final StateContainerState data;
-
   // You must pass through a child and your state.
   _InheritedStateContainer({
     Key? key,
     required this.data,
     required Widget child,
   }) : super(key: key, child: child);
+  // Data is your entire state. In our case just 'User'
+  final StateContainerState data;
 
   // This is a built in method which you can use to check if
   // any state has changed. If not, no reason to rebuild all the widgets
@@ -92,10 +90,9 @@ class _InheritedStateContainer extends InheritedWidget {
 }
 
 class StateContainer extends StatefulWidget {
-  // You must pass through a child.
-  final Widget child;
-
   const StateContainer({required this.child});
+
+  final Widget child;
 
   // This is the secret sauce. Write your own 'of' method that will behave
   // Exactly like MediaQuery.of and Theme.of
@@ -151,6 +148,7 @@ class StateContainerState extends State<StateContainer> {
   // Active alert
   AlertResponseItem? activeAlert;
   AlertResponseItem? settingsAlert;
+  List<FundingResponseItem>? fundingAlerts;
   bool activeAlertIsRead = true;
 
   // If callback is locked
@@ -211,6 +209,12 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
+  void updateFundingAlerts(List<FundingResponseItem>? alerts) {
+    setState(() {
+      fundingAlerts = alerts;
+    });
+  }
+
   void setAlertRead() {
     setState(() {
       activeAlertIsRead = true;
@@ -230,30 +234,21 @@ class StateContainerState extends State<StateContainer> {
     return "";
   }
 
-  Future<void> checkAndCacheNapiDatabases(bool forceUpdate) async {
+  Future<void> checkAndUpdateNanoToUsernames([bool forceUpdate = false]) async {
     final int currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     try {
-      final int lastUpdatedUsers = int.parse(await (sl.get<SharedPrefsUtil>().getLastNapiUsersCheck()));
+      final int lastUpdatedUsers = int.parse(await sl.get<SharedPrefsUtil>().getLastNapiUsersCheck());
 
-      final int dayInSeconds = 60 * 60 * 24;
-      final int weekInSeconds = dayInSeconds * 7;
+      const int dayInSeconds = 60 * 60 * 24;
+      const int weekInSeconds = dayInSeconds * 7;
 
       // update if more than a day old:
       if (forceUpdate || currentTime - lastUpdatedUsers > dayInSeconds) {
-        await sl.get<DBHelper>().fetchNapiUsernames();
+        await sl.get<DBHelper>().fetchNanoToUsernames();
         await sl.get<SharedPrefsUtil>().setLastNapiUsersCheck(currentTime.toString());
       }
-      // more than a week old?
-      // if (forceUpdate || currentTime - lastUpdatedUsers > week_in_seconds) {
-      //   await sl.get<AccountService>().fetchNapiRepresentatives();
-      //   await sl.get<SharedPrefsUtil>().setLastNapiRepsCheck(currentTime.toString());
-      // }
-      // await sl.get<DBHelper>().fetchDatabases();
     } catch (e) {
-      log.e("Error checking and caching NAPI databases: $e");
-      // update now:
-      await sl.get<DBHelper>().fetchNapiUsernames();
-      await sl.get<SharedPrefsUtil>().setLastNapiUsersCheck(currentTime.toString());
+      log.e("Error checking and caching nano.to usernames: $e");
     }
   }
 
@@ -298,6 +293,33 @@ class StateContainerState extends State<StateContainer> {
   //   }
   // }
 
+  Future<void> handleStoredMessages(FcmMessageEvent event) async {
+    if (event.data != null) {
+      handleMessage(event.data);
+    }
+
+    if (event.message_list != null) {
+      bool delayUpdate = false;
+      if (event.message_list!.length > MAX_SEQUENTIAL_UPDATES) {
+        delayUpdate = true;
+      }
+      for (final String strMsg in event.message_list!) {
+        final msg = jsonDecode(strMsg);
+        await handleMessage(msg, delay_update: delayUpdate);
+        // sleep between updates if there are more than 1 to make the UI feel snappier / show the animation:
+        if (event.message_list!.length > 1 && delayUpdate) {
+          await Future.delayed(const Duration(milliseconds: 600));
+        }
+      }
+      if (delayUpdate) {
+        // update the state:
+        await updateSolids();
+        await updateTXMemos();
+        await updateUnified(true);
+      }
+    }
+  }
+
   Future<void> updateUnified(bool fastUpdate) async {
     if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
       EventTaxiImpl.singleton().fire(UnifiedHomeEvent(fastUpdate: fastUpdate));
@@ -336,6 +358,24 @@ class StateContainerState extends State<StateContainer> {
       }
     } catch (e) {
       log.e("Error retrieving alert", e);
+      return;
+    }
+  }
+
+  Future<void> checkAndUpdateFundingAlerts() async {
+    // Get active donation alert
+    try {
+      String localeString = (await sl.get<SharedPrefsUtil>().getLanguage()).getLocaleString();
+      if (localeString == "DEFAULT") {
+        final List<Locale> languageLocales = await Devicelocale.preferredLanguagesAsLocales;
+        if (languageLocales.isNotEmpty) {
+          localeString = languageLocales[0].languageCode;
+        }
+      }
+      final List<FundingResponseItem>? fundingAlerts = await sl.get<AccountService>().getFunding(localeString);
+      updateFundingAlerts(fundingAlerts);
+    } catch (e) {
+      log.e("Error retrieving funding", e);
       return;
     }
   }
@@ -400,6 +440,8 @@ class StateContainerState extends State<StateContainer> {
     checkAndCacheNinjaAPIResponse();
     // Update alert
     checkAndUpdateAlerts();
+    // Get funding alerts
+    checkAndUpdateFundingAlerts();
     // Get natricon pref
     sl.get<SharedPrefsUtil>().getUseNatricon().then((bool useNatricon) {
       setNatriconOn(useNatricon);
@@ -417,7 +459,7 @@ class StateContainerState extends State<StateContainer> {
       setCurrencyMode(currencyMode);
     });
     // make sure nano API databases are up to date
-    checkAndCacheNapiDatabases(false);
+    checkAndUpdateNanoToUsernames();
     // restore payments from the cache
     updateSolids();
 
@@ -475,30 +517,7 @@ class StateContainerState extends State<StateContainer> {
       }
     });
     _fcmMessageSub = EventTaxiImpl.singleton().registerTo<FcmMessageEvent>().listen((FcmMessageEvent event) async {
-      if (event.data != null) {
-        handleMessage(event.data);
-      }
-
-      if (event.message_list != null) {
-        bool delayUpdate = false;
-        if (event.message_list!.length > MAX_SEQUENTIAL_UPDATES) {
-          delayUpdate = true;
-        }
-        for (final String strMsg in event.message_list!) {
-          final msg = jsonDecode(strMsg);
-          await handleMessage(msg, delay_update: delayUpdate);
-          // sleep between updates if there are more than 1 to make the UI feel snappier / show the animation:
-          if (event.message_list!.length > 1 && event.message_list!.length <= MAX_SEQUENTIAL_UPDATES) {
-            await Future.delayed(const Duration(milliseconds: 600));
-          }
-        }
-        if (delayUpdate) {
-          // update the state:
-          await updateSolids();
-          await updateTXMemos();
-          await updateUnified(true);
-        }
-      }
+      handleStoredMessages(event);
     });
     // Account has been deleted or name changed
     _accountModifiedSub = EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
@@ -658,6 +677,7 @@ class StateContainerState extends State<StateContainer> {
   void updateLanguage(LanguageSetting language) {
     if (curLanguage.language != language.language) {
       checkAndUpdateAlerts();
+      checkAndUpdateFundingAlerts();
     }
     setState(() {
       curLanguage = language;
@@ -1037,7 +1057,7 @@ class StateContainerState extends State<StateContainer> {
         for (final AccountHistoryResponseItem item in resp.history!) {
           // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
           if (!wallet!.history!.contains(item)) {
-            final int startIndex = 0; // Index to start inserting into the list
+            const int startIndex = 0; // Index to start inserting into the list
             int lastIndex = resp.history!.indexWhere((AccountHistoryResponseItem item) =>
                 wallet!.history!.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
             lastIndex = lastIndex <= 0 ? resp.history!.length : lastIndex;

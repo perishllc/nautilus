@@ -168,7 +168,7 @@ class _SendSheetState extends State<SendSheet> {
           _addressStyle = AddressStyle.TEXT60;
         });
         _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-        if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith("nano_")) {
+        if (_addressController!.text.isNotEmpty && _addressController!.text.length > 1 && !_addressController!.text.startsWith("nano_")) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           if (_addressController!.text != formattedAddress) {
             setState(() {
@@ -197,6 +197,13 @@ class _SendSheetState extends State<SendSheet> {
             _pasteButtonVisible = true;
           }
         });
+
+        if (SendSheetHelpers.stripPrefixes(_addressController!.text).isEmpty) {
+          setState(() {
+            _addressController!.text = "";
+          });
+          return;
+        }
         if (_addressController!.text.isNotEmpty) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           // check if in the username db:
@@ -1415,7 +1422,7 @@ class _SendSheetState extends State<SendSheet> {
         hintText: _addressHint ?? AppLocalization.of(context)!.enterUserOrAddress,
         prefixButton: TextFieldButton(
           icon: AppIcons.star,
-          onPressed: () {
+          onPressed: () async {
             if (_showContactButton && _users.isEmpty) {
               // Show menu
               FocusScope.of(context).requestFocus(_addressFocusNode);

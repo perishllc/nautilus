@@ -294,7 +294,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         is_request: true,
         is_memo: false,
         is_message: false,
-        request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
+        request_time: DateTime.now().millisecondsSinceEpoch ~/ 1000,
         memo: widget.memo,
         height: currentBlockHeightInList,
       );
@@ -305,7 +305,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         // encrypt the memo:
         String? encryptedMemo;
         if (widget.memo != null && widget.memo!.isNotEmpty) {
-          encryptedMemo = await Box.encrypt(widget.memo!, widget.destination, privKey);
+          encryptedMemo = Box.encrypt(widget.memo!, widget.destination, privKey);
         }
 
         await sl

@@ -3,24 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class RemoteMessageSheet extends StatefulWidget {
-  RemoteMessageSheet({this.alert, this.hasDismissButton = true}) : super();
-
-  final AlertResponseItem? alert;
+class FundingSpecificSheet extends StatefulWidget {
+  final FundingResponseItem alert;
   final bool hasDismissButton;
 
-  _RemoteMessageSheetStateState createState() => _RemoteMessageSheetStateState();
+  FundingSpecificSheet({required this.alert, this.hasDismissButton = true}) : super();
+
+  _FundingSpecificSheetStateState createState() => _FundingSpecificSheetStateState();
 }
 
-class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
+class _FundingSpecificSheetStateState extends State<FundingSpecificSheet> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -50,22 +50,22 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 15.0),
-                      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
-                      child: Column(
-                        children: <Widget>[
-                          // Header
-                          AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.messageHeader, context),
-                            style: AppStyles.textStyleHeader(context),
-                            textAlign: TextAlign.center,
-                            maxLines: 1,
-                            stepGranularity: 0.1,
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   margin: const EdgeInsets.only(top: 15.0),
+                    //   constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                    //   child: Column(
+                    //     children: <Widget>[
+                    //       // Header
+                    //       AutoSizeText(
+                    //         CaseChange.toUpperCase(AppLocalization.of(context)!.messageHeader, context),
+                    //         style: AppStyles.textStyleHeader(context),
+                    //         textAlign: TextAlign.center,
+                    //         maxLines: 1,
+                    //         stepGranularity: 0.1,
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
                 //Empty SizedBox
@@ -85,7 +85,7 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if (widget.alert!.timestamp != null)
+                          if (widget.alert.timestamp != null)
                             Container(
                               margin: const EdgeInsetsDirectional.only(top: 2, bottom: 6),
                               padding: const EdgeInsetsDirectional.only(start: 10, end: 10, top: 2, bottom: 2),
@@ -99,24 +99,24 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                                 ),
                               ),
                               child: Text(
-                                "${DateTime.fromMillisecondsSinceEpoch(widget.alert!.timestamp!).toUtc().toString().substring(0, 16)} UTC",
+                                "${DateTime.fromMillisecondsSinceEpoch(widget.alert.timestamp!).toUtc().toString().substring(0, 16)} UTC",
                                 style: AppStyles.remoteMessageCardTimestamp(context),
                               ),
                             ),
-                          if (widget.alert!.title != null)
+                          if (widget.alert.title != null)
                             Container(
                               margin: const EdgeInsetsDirectional.only(top: 2, bottom: 2),
                               child: Text(
-                                widget.alert!.title!,
+                                widget.alert.title!,
                                 style: AppStyles.remoteMessageCardTitle(context),
                               ),
                             ),
-                          if (widget.alert!.longDescription != null || widget.alert!.shortDescription != null)
+                          if (widget.alert.longDescription != null || widget.alert.shortDescription != null)
                             Container(
-                              margin: const EdgeInsetsDirectional.only(top: 2, bottom: 2),
+                              margin: const EdgeInsetsDirectional.only(top: 16, bottom: 2),
                               child: Text(
-                                widget.alert!.longDescription != null ? widget.alert!.longDescription! : widget.alert!.shortDescription!,
-                                style: AppStyles.remoteMessageCardShortDescription(context),
+                                widget.alert.longDescription != null ? widget.alert.longDescription! : widget.alert.shortDescription!,
+                                style: AppStyles.remoteMessageCardShortDescription(context).copyWith(fontSize: AppFontSizes.medium),
                               ),
                             ),
                         ],
@@ -159,40 +159,32 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
             //A column with Copy Address and Share Address buttons
             Column(
               children: <Widget>[
-                if (widget.alert!.link != null)
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.readMore, Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () async {
-                        Uri uri = Uri.parse(widget.alert!.link!);
-                        if (await canLaunchUrl(uri)) {
-                          await launchUrl(uri);
-                          await sl.get<SharedPrefsUtil>().markAlertRead(widget.alert!);
-                          StateContainer.of(context).setAlertRead();
-                        }
-                      }),
-                    ],
-                  ),
-                if (widget.hasDismissButton)
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.dismiss, Dimens.BUTTON_BOTTOM_DIMENS,
-                          onPressed: () {
-                        sl.get<SharedPrefsUtil>().dismissAlert(widget.alert!);
-                        StateContainer.of(context).updateActiveAlert(null, widget.alert);
-                        Navigator.pop(context);
-                      }),
-                    ],
-                  )
-                else
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
-                          onPressed: () {
-                        Navigator.pop(context);
-                      }),
-                    ],
-                  )
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.donateButton, Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
+                      // Go to send with address
+                      Future.delayed(const Duration(milliseconds: 1000), () async {
+                        Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+
+                        Sheets.showAppHeightNineSheet(
+                            context: context,
+                            widget: SendSheet(
+                              localCurrency: StateContainer.of(context).curCurrency,
+                              address: widget.alert.address,
+                            ));
+                      });
+                    }),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
+                      Navigator.pop(context);
+                    }),
+                  ],
+                )
               ],
             ),
           ],

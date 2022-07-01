@@ -90,8 +90,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
           _pasteButtonVisible = true;
           _addressStyle = AddressStyle.TEXT60;
         });
-        _addressController!.selection =
-            TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith("nano_")) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           if (_addressController!.text != formattedAddress) {
@@ -159,7 +158,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
 
             if (address != null && user == null) {
               // add to the db if missing:
-              final User user = new User(username: formattedAddress, address: address, type: type, is_blocked: false);
+              final User user = User(username: formattedAddress, address: address, type: type, is_blocked: false);
               await sl.get<DBHelper>().addUser(user);
             }
           } else {
@@ -187,7 +186,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
   Widget getEnterAddressContainer() {
     return AppTextField(
       topMargin: 115,
-      padding: _addressValidAndUnfocused ? EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
       textAlign: TextAlign.center,
       focusNode: _addressFocusNode,
       controller: _addressController,
@@ -260,8 +259,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
         if (text.contains(" ")) {
           text = text.replaceAll(" ", "");
           _addressController!.text = text;
-          _addressController!.selection =
-              TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+          _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         }
 
         if (text.isNotEmpty) {
@@ -340,12 +338,11 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 setState(() {
                   _addressValidAndUnfocused = false;
                 });
-                Future.delayed(Duration(milliseconds: 50), () {
+                Future.delayed(const Duration(milliseconds: 50), () {
                   FocusScope.of(context).requestFocus(_addressFocusNode);
                 });
               },
-              child: UIUtil.threeLineAddressText(
-                  context, widget.address != null ? widget.address! : _addressController!.text))
+              child: UIUtil.threeLineAddressText(context, widget.address != null ? widget.address! : _addressController!.text))
           : null,
     );
   }
@@ -369,8 +366,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 _addressValidationText = "";
               });
             },
-            child: Text(user.getDisplayName(ignoreNickname: true)!,
-                textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+            child: Text(user.getDisplayName(ignoreNickname: true)!, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(
@@ -395,7 +391,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               // Empty SizedBox
-              SizedBox(
+              const SizedBox(
                 width: 60,
                 height: 60,
               ),
@@ -417,14 +413,14 @@ class _AddContactSheetState extends State<AddContactSheet> {
               ),
 
               // Scan QR Button
-              SizedBox(width: 60, height: 60),
+              const SizedBox(width: 60, height: 60),
             ],
           ),
 
           // The main container that holds "Enter Name" and "Enter Address" text fields
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(top: 5, bottom: 5),
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
               child: GestureDetector(
                 onTap: () {
                   // Clear focus of our fields when tapped in this empty space
@@ -479,7 +475,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                               ),
                               // Enter Name Error Container
                               Container(
-                                margin: EdgeInsets.only(top: 5, bottom: 5),
+                                margin: const EdgeInsets.only(top: 5, bottom: 5),
                                 child: Text(_nameValidationText ?? "",
                                     style: TextStyle(
                                       fontSize: 14.0,
@@ -501,9 +497,8 @@ class _AddContactSheetState extends State<AddContactSheet> {
                                   alignment: Alignment.topCenter,
                                   children: <Widget>[
                                     Container(
-                                      margin: EdgeInsets.only(
-                                          left: MediaQuery.of(context).size.width * 0.105,
-                                          right: MediaQuery.of(context).size.width * 0.105),
+                                      margin:
+                                          EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                                       alignment: Alignment.bottomCenter,
                                       constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
                                       // ********************************************* //
@@ -519,10 +514,10 @@ class _AddContactSheetState extends State<AddContactSheet> {
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(25),
                                             ),
-                                            margin: EdgeInsets.only(bottom: 50),
+                                            margin: const EdgeInsets.only(bottom: 50),
                                             child: ListView.builder(
                                               shrinkWrap: true,
-                                              padding: EdgeInsets.only(bottom: 0, top: 0),
+                                              padding: const EdgeInsets.only(bottom: 0, top: 0),
                                               itemCount: _users.length,
                                               itemBuilder: (BuildContext context, int index) {
                                                 return _buildUserItem(_users[index]);
@@ -543,7 +538,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
 
                               // Enter Address Error Container
                               Container(
-                                margin: EdgeInsets.only(top: 5, bottom: 5),
+                                margin: const EdgeInsets.only(top: 5, bottom: 5),
                                 child: Text(_addressValidationText,
                                     style: TextStyle(
                                       fontSize: 14.0,
@@ -570,22 +565,19 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 Row(
                   children: <Widget>[
                     // Add Contact Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.addContact,
-                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.addContact, Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
                       if (await validateForm()) {
                         User newContact;
                         final String? formAddress = widget.address != null ? widget.address : _addressController!.text;
                         final String formattedNickname = _nameController!.text.substring(1);
                         // if we're given an address with corresponding username, just block:
                         if (_correspondingUsername != null) {
-                          newContact =
-                              User(nickname: formattedNickname, address: formAddress, username: _correspondingUsername);
+                          newContact = User(nickname: formattedNickname, address: formAddress, username: _correspondingUsername);
                           await sl.get<DBHelper>().saveContact(newContact);
                         } else if (_correspondingAddress != null) {
-                          newContact = User(
-                              nickname: formattedNickname,
-                              address: _correspondingAddress,
-                              username: SendSheetHelpers.stripPrefixes(formAddress!));
+                          newContact =
+                              User(nickname: formattedNickname, address: _correspondingAddress, username: SendSheetHelpers.stripPrefixes(formAddress!));
                           await sl.get<DBHelper>().saveContact(newContact);
                         } else {
                           // just an address:
@@ -593,9 +585,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                           await sl.get<DBHelper>().saveContact(newContact);
                         }
                         EventTaxiImpl.singleton().fire(ContactAddedEvent(contact: newContact));
-                        UIUtil.showSnackbar(
-                            AppLocalization.of(context)!.contactAdded.replaceAll("%1", newContact.getDisplayName()!),
-                            context);
+                        UIUtil.showSnackbar(AppLocalization.of(context)!.contactAdded.replaceAll("%1", newContact.getDisplayName()!), context);
                         EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: newContact));
                         EventTaxiImpl.singleton().fire(TXUpdateEvent());
                         Navigator.of(context).pop();
@@ -606,8 +596,8 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 Row(
                   children: <Widget>[
                     // Close Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close,
-                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
                       Navigator.pop(context);
                     }),
                   ],
@@ -686,9 +676,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
         } else {
           isValid = false;
           setState(() {
-            _addressValidationText = formattedAddress.contains(".")
-                ? AppLocalization.of(context)!.domainInvalid
-                : AppLocalization.of(context)!.userNotFound;
+            _addressValidationText = formattedAddress.contains(".") ? AppLocalization.of(context)!.domainInvalid : AppLocalization.of(context)!.userNotFound;
           });
         }
       }

@@ -20,8 +20,8 @@ import 'package:nautilus_wallet_flutter/network/model/request/account_history_re
 import 'package:nautilus_wallet_flutter/network/model/request/account_info_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/accounts_balances_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/block_info_request.dart';
-import 'package:nautilus_wallet_flutter/network/model/request/receivable_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/process_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/receivable_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/subscribe_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response.dart';
@@ -31,9 +31,10 @@ import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_i
 import 'package:nautilus_wallet_flutter/network/model/response/block_info_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/callback_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/receivable_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/price_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/receivable_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
 import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -47,9 +48,14 @@ import 'model/payment/payment_message.dart';
 
 // Server Connection String
 String _BASE_SERVER_ADDRESS = "nautilus.perish.co";
-String _SERVER_ADDRESS_WS = "wss://nautilus.perish.co";
-String _SERVER_ADDRESS_HTTP = "https://nautilus.perish.co/api";
-String _SERVER_ADDRESS_ALERTS = "https://nautilus.perish.co/alerts";
+String _DEV_SERVER_ADDRESS = "node-local.perish.co:5076";
+String _HTTP_PROTO = "https://";
+String _WS_PROTO = "wss://";
+
+String _SERVER_ADDRESS_WS = "$_WS_PROTO$_BASE_SERVER_ADDRESS";
+String _SERVER_ADDRESS_HTTP = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/api";
+String _SERVER_ADDRESS_ALERTS = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/alerts";
+String _SERVER_ADDRESS_FUNDING = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/funding";
 
 const String _FALLBACK_SERVER_ADDRESS_WS = "wss://app.natrium.io";
 const String _FALLBACK_SERVER_ADDRESS_HTTP = "https://app.natrium.io/api";
@@ -141,13 +147,24 @@ class AccountService {
       socket.destroy();
     }).catchError((error) {
       log.d("Nautilus backend is down: $error");
-      log.d("Nautilus backend is unreachable");
       // switch to fallback servers:
-      _SERVER_ADDRESS_WS = _FALLBACK_SERVER_ADDRESS_WS;
-      _SERVER_ADDRESS_HTTP = _FALLBACK_SERVER_ADDRESS_HTTP;
-      _SERVER_ADDRESS_ALERTS = _FALLBACK_SERVER_ADDRESS_ALERTS;
-      fallbackConnected = true;
+      // _SERVER_ADDRESS_WS = _FALLBACK_SERVER_ADDRESS_WS;
+      // _SERVER_ADDRESS_HTTP = _FALLBACK_SERVER_ADDRESS_HTTP;
+      // _SERVER_ADDRESS_ALERTS = _FALLBACK_SERVER_ADDRESS_ALERTS;
+
+      // FALLBACK CONNECTION:
+      // _HTTP_PROTO = "http://";
+      // _WS_PROTO = "ws://";
+      // _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
+
+      // fallbackConnected = true;
     });
+
+    // DEV SERVER:
+    // _HTTP_PROTO = "http://";
+    // _WS_PROTO = "ws://";
+    // _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
+    // log.d("CONNECTED TO DEV SERVER");
 
     // ENS:
     const String rpcUrl = 'https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}';
@@ -581,7 +598,7 @@ class AccountService {
       throw Exception("Received error ${response.error}");
     }
   }
-  
+
   Future<AccountsBalancesResponse> requestAccountsBalances(List<String> accounts) async {
     final AccountsBalancesRequest request = AccountsBalancesRequest(accounts: accounts);
     final dynamic response = await makeHttpRequest(request);
@@ -689,6 +706,18 @@ class AccountService {
         if (alerts[0].active!) {
           return alerts[0];
         }
+      }
+    }
+    return null;
+  }
+
+  Future<List<FundingResponseItem>?> getFunding(String lang) async {
+    final http.Response response = await http.get(Uri.parse("$_SERVER_ADDRESS_FUNDING/$lang"), headers: {"Accept": "application/json"});
+    if (response.statusCode == 200) {
+      List<FundingResponseItem> alerts;
+      alerts = (json.decode(response.body) as List).map((i) => FundingResponseItem.fromJson(i as Map<String, dynamic>)).toList();
+      if (alerts.isNotEmpty) {
+        return alerts;
       }
     }
     return null;

@@ -904,7 +904,7 @@ class AppLocalization {
 
   String get resetDatabaseConfirmation {
     return Intl.message(
-        'Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed. If you\'re having issues you should backup your seed, re-install the app, and if the issue persists feel free to make a bug report on github or discord.',
+        'Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed. If you\'re still having issues you should backup your seed, and re-install the app, and if the issue persists feel free to make a bug report on the discord (link at the bottom of the settings drawer)\nMake sure to first check if someone else already reported the issue!',
         desc: 'database_remove_sure',
         name: 'resetDatabaseConfirmation');
   }
@@ -1506,6 +1506,10 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
     return Intl.message("Hide", desc: "accounts_hide_slide", name: 'hide');
   }
 
+  String get show {
+    return Intl.message("Show", desc: "funding_show", name: 'show');
+  }
+
   String get delete {
     return Intl.message("Delete", desc: "home_delete_slide", name: 'delete');
   }
@@ -1718,10 +1722,6 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
     return Intl.message("Support", desc: 'A button to open up the live support window', name: 'supportButton');
   }
 
-  String get liveSupportButton {
-    return Intl.message("Support", desc: 'A button to open up the live support window', name: 'liveSupportButton');
-  }
-
   /// BUTTONS END
 
   // RATE THE APP
@@ -1760,6 +1760,38 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   // CHANGE LOG END
+
+  // Donations text
+
+  String get supportDevelopment {
+    return Intl.message("Support Development", desc: 'settings_support_dev', name: 'supportDevelopment');
+  }
+
+  String get donateToSupport {
+    return Intl.message("Support the Project", desc: 'settings_support_dev', name: 'donateToSupport');
+  }
+
+  String get monthlyServerCosts {
+    return Intl.message("Monthly Server Costs", desc: 'support_monthly_costs', name: 'monthlyServerCosts');
+  }
+
+  String get fundingHeader {
+    return Intl.message('Funding', desc: 'funding_header', name: 'fundingHeader');
+  }
+
+  String get fundingBannerHeader {
+    return Intl.message('Funding Banner', desc: 'funding_banner_header', name: 'fundingBannerHeader');
+  }
+
+  String get donateButton {
+    return Intl.message('Donate', desc: 'donate_button', name: 'donateButton');
+  }
+
+  String get showFunding {
+    return Intl.message('Show Funding Banner', desc: 'show_funding_banner', name: 'showFunding');
+  }
+
+  // Donations text end
 
   /// Live chat
   String get connectingHeader {

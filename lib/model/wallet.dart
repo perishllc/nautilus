@@ -110,7 +110,7 @@ class AppWallet {
   // }
 
   String getLocalCurrencyBalance(BuildContext context, AvailableCurrency currency, {String? locale = "en_US"}) {
-    final BigInt rawPerCur = StateContainer.of(context).nyanoMode ? rawPerNyano : rawPerNano;
+    final BigInt rawPerCur = rawPerNano;
     final Decimal converted = Decimal.parse(_localCurrencyPrice!) * NumberUtil.getRawAsDecimal(_accountBalance.toString(), rawPerCur);
     return NumberFormat.currency(locale: locale, symbol: currency.getCurrencySymbol()).format(converted.toDouble());
   }

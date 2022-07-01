@@ -1,4 +1,22 @@
-# v0.3.8 - [2022-06-27]
+# v0.3.9 - [2022-07-02]
+#### Added
+- Support the project banner added (don't worry, you can hide it)
+  - Breakdown of different funding goals
+  - Donations are sent to different addresses for easy tracking of what people want to support
+  - Funding Goals are just estimates at best and don't comee with any gaurantees, but I'll try my best to meet them
+  - Different funding goals will be shown as they're funded / met, and the descriptions and amounts will get updated with dev progress as well
+- Option to hide the support banner
+#### Changed
+- changed import / export contact icons to be more clear which is which
+- improvements to background message handling
+#### Fixed
+- lots of minor bugs, nyano display bugs, more contacts issues
+- bugs with gift cards
+- contacts should stay saved now, (were getting removed after a day)
+- importing and exporting of contacts, so even if they break again in the future, you can restore them
+- mark as paid button not updating the state until after refresh
+- reps list not showing up in the change rep screen
+## v0.3.8 - [2022-06-27]
 #### Found a bug? Report it! - Bug Bounty
 - If you find a bug, report it on the discord server in #bug-report for a Ӿ5 reward (min) up to Ӿ100 depending on the severity of the bug
 - To be elligible for the reward:

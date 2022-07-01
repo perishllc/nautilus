@@ -21,8 +21,10 @@ import 'package:nautilus_wallet_flutter/model/contacts_setting.dart';
 import 'package:nautilus_wallet_flutter/model/currency_mode_setting.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/device_lock_timeout.dart';
 import 'package:nautilus_wallet_flutter/model/device_unlock_option.dart';
+import 'package:nautilus_wallet_flutter/model/funding_setting.dart';
 import 'package:nautilus_wallet_flutter/model/min_raw_setting.dart';
 import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
 import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
@@ -44,11 +46,14 @@ import 'package:nautilus_wallet_flutter/ui/transfer/transfer_complete_sheet.dart
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/funding_message_card.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/funding_messages_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
@@ -85,6 +90,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   ContactsSetting _curContactsSetting = ContactsSetting(ContactsOptions.OFF);
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
   NyaniconSetting _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
+  FundingSetting _curFundingSetting = FundingSetting(FundingOptions.SHOW);
   MinRawSetting _curMinRawSetting = MinRawSetting(MinRawOptions.OFF);
   CurrencyModeSetting _curCurrencyModeSetting = CurrencyModeSetting(CurrencyModeOptions.NANO);
   UnlockSetting _curUnlockSetting = UnlockSetting(UnlockOption.NO);
@@ -169,6 +175,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     sl.get<SharedPrefsUtil>().getContactsOn().then((bool contactsOn) {
       setState(() {
         _curContactsSetting = contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
+      });
+    });
+    // Get funding setting:
+    sl.get<SharedPrefsUtil>().getFundingOn().then((bool fundingOn) {
+      setState(() {
+        _curFundingSetting = fundingOn ? FundingSetting(FundingOptions.SHOW) : FundingSetting(FundingOptions.HIDE);
       });
     });
     // Get default natricon setting
@@ -502,6 +514,61 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       await sl.get<SharedPrefsUtil>().setContactsOn(false);
       EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: false));
     }
+  }
+
+  Future<void> _fundingDialog() async {
+    FundingOptions? picked = await showDialog<FundingOptions>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            title: Text(
+              AppLocalization.of(context)!.fundingBannerHeader,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            children: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, FundingOptions.HIDE);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context)!.hide,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, FundingOptions.SHOW);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context)!.show,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
+
+    if (picked == null) {
+      return;
+    }
+
+    if (picked == FundingOptions.SHOW) {
+      await sl.get<SharedPrefsUtil>().setFundingOn(true);
+      // EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
+    } else {
+      await sl.get<SharedPrefsUtil>().setFundingOn(false);
+      // EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: false));
+    }
+    setState(() {
+      _curFundingSetting = FundingSetting(picked);
+    });
   }
 
   Future<void> _nyaniconDialog() async {
@@ -1088,6 +1155,32 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
               },
             ),
           ),
+        if (StateContainer.of(context).fundingAlerts != null &&
+            StateContainer.of(context).fundingAlerts!.length > 0 &&
+            _curFundingSetting.setting == FundingOptions.SHOW)
+          Container(
+            padding: const EdgeInsetsDirectional.only(
+              start: 12,
+              end: 12,
+              bottom: 20,
+            ),
+            child: FundingMessageCard(
+              title: AppLocalization.of(context)!.donateToSupport,
+              shortDescription: StateContainer.of(context).fundingAlerts![0].title,
+              currentAmountRaw: StateContainer.of(context).fundingAlerts![0].currentAmountRaw,
+              goalAmountRaw: StateContainer.of(context).fundingAlerts![0].goalAmountRaw,
+              hideAmounts: true,
+              onPressed: () {
+                Sheets.showAppHeightEightSheet(
+                  context: context,
+                  widget: FundingMessagesSheet(
+                    alerts: StateContainer.of(context).fundingAlerts,
+                    hasDismissButton: false,
+                  ),
+                );
+              },
+            ),
+          ),
         Container(
           margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
           child: Text(AppLocalization.of(context)!.featured,
@@ -1203,6 +1296,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           StateContainer.of(context).curBlockExplorer,
           AppIcons.search,
           _explorerDialog,
+        ),
+        AppSettings.buildSettingsListItemDoubleLine(
+            context, AppLocalization.of(context)!.showFunding, _curFundingSetting, AppIcons.money_bill_wave, _fundingDialog),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
         ),
         Container(
           margin: const EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
@@ -1327,7 +1426,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
 
             // re-populate the users table
             try {
-              await sl.get<DBHelper>().fetchNapiUsernames();
+              await sl.get<DBHelper>().fetchNanoToUsernames();
             } catch (error) {
               log.d("Error fetching usernames: $error");
             }
@@ -1335,15 +1434,28 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             // delete preferences:
             await sl.get<SharedPrefsUtil>().deleteAll();
 
+            // add the donations contact:
+            await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
+            final User donationsContact = User(
+                nickname: "NautilusDonations",
+                address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579",
+                username: "nautilus",
+                type: UserTypes.CONTACT);
+            await sl.get<DBHelper>().saveContact(donationsContact);
+
+            // set the "has asked for contacts" flag so it doesn't ask again:
+            await sl.get<SharedPrefsUtil>().setContactsOn(false);
+
             // re-add account index 0 and switch the account to it:
             final String? seed = await StateContainer.of(context).getSeed();
             await sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context)!.defaultAccountName);
             final Account? mainAccount = await sl.get<DBHelper>().getMainAccount(seed);
             await sl.get<DBHelper>().changeAccount(mainAccount);
-            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
-            if (animationOpen && mounted) {
-              Navigator.of(context).pop();
-            }
+            EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: mainAccount));
+            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: false));
+            // if (animationOpen && mounted) {
+            //   Navigator.of(context).pop();
+            // }
           }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
         }),
         Divider(

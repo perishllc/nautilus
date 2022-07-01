@@ -6,7 +6,7 @@ part 'user.g.dart';
 class UserTypes {
   static const String UD = "unstoppable_domain";
   static const String ENS = "ethereum_name_service";
-  static const String NANOTO = "nano_to";
+  static const String NANO_TO = "nano_to";
   static const String CONTACT = "contact";
 }
 
@@ -59,15 +59,15 @@ class User {
 
   String? getDisplayName({bool ignoreNickname = false}) {
     if (nickname != null && nickname!.isNotEmpty && !ignoreNickname) {
-      return "★" + nickname!;
+      return "★${nickname!}";
     }
 
     return getDisplayNameWithType(this.username, this.type);
   }
 
   static String? getDisplayNameWithType(String? name, String? userType) {
-    if (userType == UserTypes.NANOTO) {
-      return "@" + name!;
+    if (userType == UserTypes.NANO_TO) {
+      return "@${name!}";
     } else {
       return name;
     }

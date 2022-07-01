@@ -262,7 +262,8 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
       while (success == false) {
         print("checking url: ${widget.checkUrl}");
         try {
-          final Map? resp = await (sl.get<AccountService>().checkUsernameUrl(widget.checkUrl!) as FutureOr<Map<dynamic, dynamic>?>);
+          // final Map<String, dynamic> resp = await sl.get<AccountService>().checkUsernameUrl(widget.checkUrl!) as Map<String, dynamic>;
+          final resp = await sl.get<AccountService>().checkUsernameUrl(widget.checkUrl!);
           if (resp != null && resp["completed"] == true) {
             success = true;
           } else {
@@ -284,7 +285,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
       await Future.delayed(const Duration(milliseconds: 5000));
 
       // force update the database:
-      await StateContainer.of(context).checkAndCacheNapiDatabases(true);
+      await StateContainer.of(context).checkAndUpdateNanoToUsernames(true);
 
       // refresh the wallet by just updating to the same account:
       await StateContainer.of(context).updateWallet(account: StateContainer.of(context).selectedAccount!);

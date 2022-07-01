@@ -139,10 +139,10 @@ class NumberUtil {
   /// Return percentage of total supploy
   /// @param amount 10020243004141
   /// @return 0.0000001%
-  static String getPercentOfTotalSupply(BigInt? amount) {
+  static String getPercentOfTotalSupply(BigInt amount) {
     final Decimal totalSupply = Decimal.parse('133248290000000000000000000000000000000');
     final Decimal amountRaw = Decimal.parse(amount.toString());
-    return ((amountRaw / totalSupply).toDecimal() * Decimal.fromInt(100)).toStringAsFixed(4);
+    return ((amountRaw / totalSupply).toDecimal(scaleOnInfinitePrecision: maxDecimalDigits) * Decimal.fromInt(100)).toStringAsFixed(4);
   }
 
   /// Sanitize a number as something that can actually

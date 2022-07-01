@@ -37,6 +37,7 @@ class SharedPrefsUtil {
   static const String firstcontact_added = 'fkalium_first_c_added';
   static const String notification_enabled = 'fkalium_notification_on';
   static const String contacts_enabled = 'fnautilus_contacts_on';
+  static const String funding_enabled = 'fnautilus_funding_on';
   static const String lock_kalium = 'fkalium_lock_dev';
   static const String kalium_lock_timeout = 'fkalium_lock_timeout';
   static const String has_shown_root_warning = 'fkalium_root_warn'; // If user has seen the root/jailbreak warning yet
@@ -57,7 +58,6 @@ class SharedPrefsUtil {
   static const String min_raw_receive = 'fnautilus_min_raw_receive';
   // last time we checked for updates:
   static const String last_napi_users_check = 'fnautilus_last_napi_users_check';
-  static const String last_napi_reps_check = 'fnautilus_last_napi_reps_check';
   // store app version (for showing the change log):
   static const String app_version = 'fnautilus_app_version';
 
@@ -303,6 +303,15 @@ class SharedPrefsUtil {
       return true;
     }
   }
+
+  Future<void> setFundingOn(bool value) async {
+    return set(funding_enabled, value);
+  }
+
+  Future<bool> getFundingOn() async {
+    // funding false by default
+    return await get(funding_enabled, defaultValue: true) as bool;
+  }
   
 
   Future<void> setLock(bool value) async {
@@ -392,14 +401,6 @@ class SharedPrefsUtil {
     await set(last_napi_users_check, data);
   }
 
-  Future<String> getLastNapiRepsCheck() async {
-    return await get(last_napi_reps_check, defaultValue: "0") as String;
-  }
-
-  Future<void> setLastNapiRepsCheck(String data) async {
-    await set(last_napi_reps_check, data);
-  }
-
   Future<void> setUseNatricon(bool useNatricon) async {
     return await set(use_natricon, useNatricon);
   }
@@ -458,6 +459,16 @@ class SharedPrefsUtil {
     }
   }
 
+  // TODO:
+  // Future<bool> alreadyDonated( alert) async {
+  //   final int? exists = await getWithExpiry("alert_${alert.id}") as int?;
+  //   if (exists == null) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
   // For logging out
   Future<void> deleteAll() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -479,7 +490,6 @@ class SharedPrefsUtil {
     await prefs.remove(min_raw_receive);
     await prefs.remove(currency_mode);
     await prefs.remove(last_napi_users_check);
-    await prefs.remove(last_napi_reps_check);
     await prefs.remove(ninja_api_cache);
     await prefs.remove(firstcontact_added);
   }

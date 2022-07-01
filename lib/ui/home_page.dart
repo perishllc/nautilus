@@ -268,11 +268,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         children: [
                           TextSpan(
                             text: getThemeAwareRawAccuracy(context, balance.toString()),
-                            style: AppStyles.textStyleAddressPrimary(context),
+                            style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           displayCurrencySymbol(
                             context,
-                            AppStyles.textStyleAddressPrimary(context),
+                            AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
                             text: actualAmount,
@@ -385,11 +385,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         children: [
                           TextSpan(
                             text: getThemeAwareRawAccuracy(context, amountRaw),
-                            style: AppStyles.textStyleAddressPrimary(context),
+                            style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           displayCurrencySymbol(
                             context,
-                            AppStyles.textStyleAddressPrimary(context),
+                            AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
                             text: supposedAmount,
@@ -528,7 +528,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         await AppDialogs.showChangeLog(context);
 
         // also force a username update:
-        StateContainer.of(context).checkAndCacheNapiDatabases(true);
+        StateContainer.of(context).checkAndUpdateNanoToUsernames(true);
       }
     });
   }
@@ -581,8 +581,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         return;
       }
       await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
-      final User c = User(nickname: "NautilusDonations", address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579");
-      await sl.get<DBHelper>().saveContact(c);
+      final User donationsContact = User(
+          nickname: "NautilusDonations",
+          address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579",
+          username: "nautilus",
+          type: UserTypes.CONTACT);
+      await sl.get<DBHelper>().saveContact(donationsContact);
     }
   }
 
@@ -709,9 +713,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     _unifiedSub = EventTaxiImpl.singleton().registerTo<UnifiedHomeEvent>().listen((UnifiedHomeEvent event) {
       generateUnifiedList(fastUpdate: event.fastUpdate);
     });
-    // _contactModifiedSub = EventTaxiImpl.singleton().registerTo<ContactModifiedEvent>().listen((ContactModifiedEvent event) {
-    //   _updateContacts();
-    // });
+    _contactModifiedSub = EventTaxiImpl.singleton().registerTo<ContactModifiedEvent>().listen((ContactModifiedEvent event) {
+      setState(() {
+        _updateUsers();
+      });
+    });
     // _blockedModifiedSub = EventTaxiImpl.singleton().registerTo<BlockedModifiedEvent>().listen((BlockedModifiedEvent event) {
     //   _updateBlocked();
     // });
@@ -1083,7 +1089,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       return;
     }
 
-    log.d("generating unified list! fastUpdate: $fastUpdate");
+    if (_unifiedListMap[StateContainer.of(context).wallet!.address]!.length > 0) {
+      log.d("generating unified list! fastUpdate: $fastUpdate");
+    }
 
     // this isn't performant but w/e
     List<dynamic> unifiedList = [];
@@ -1388,13 +1396,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   // handle receivable messages
   Future<void> handleReceivableBackgroundMessages() async {
     if (StateContainer.of(context).wallet != null) {
+      log.d("NOW");
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.reload();
       final List<String>? backgroundMessages = prefs.getStringList('background_messages');
       // process the message now that we're in the foreground:
 
       if (backgroundMessages != null) {
-        EventTaxiImpl.singleton().fire(FcmMessageEvent(message_list: backgroundMessages));
+        // EventTaxiImpl.singleton().fire(FcmMessageEvent(message_list: backgroundMessages));
+        await StateContainer.of(context).handleStoredMessages(FcmMessageEvent(message_list: backgroundMessages));
         // clear the storage since we just processed it:
         await prefs.remove('background_messages');
       }
@@ -2694,7 +2704,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       iconColor = StateContainer.of(context).curTheme.error60;
       setShadow = BoxShadow(
         color: StateContainer.of(context).curTheme.error60!.withOpacity(0.2),
-        offset: const Offset(0, 0),
+        offset: Offset.zero,
         blurRadius: 0,
         spreadRadius: 1,
       );
@@ -2702,7 +2712,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       iconColor = StateContainer.of(context).curTheme.success60;
       setShadow = BoxShadow(
         color: StateContainer.of(context).curTheme.success60!.withOpacity(0.2),
-        offset: const Offset(0, 0),
+        offset: Offset.zero,
         blurRadius: 0,
         spreadRadius: 1,
       );
@@ -2710,7 +2720,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       iconColor = StateContainer.of(context).curTheme.warning60;
       setShadow = BoxShadow(
         color: StateContainer.of(context).curTheme.warning60!.withOpacity(0.2),
-        offset: const Offset(0, 0),
+        offset: Offset.zero,
         blurRadius: 0,
         spreadRadius: 1,
       );
@@ -2764,7 +2774,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     }
 
-    final List<Widget> _slideActions = [];
+    final List<Widget> slideActions = [];
     String? label;
     if (txDetails.is_tx) {
       label = AppLocalization.of(context)!.send;
@@ -2776,7 +2786,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // payment request / pay button:
     if (label != null) {
-      _slideActions.add(SlidableAction(
+      slideActions.add(SlidableAction(
           autoClose: false,
           borderRadius: BorderRadius.circular(5.0),
           backgroundColor: StateContainer.of(context).curTheme.background!,
@@ -2793,7 +2803,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // reply button:
     if (txDetails.is_message && txDetails.isRecipient(walletAddress)) {
-      _slideActions.add(SlidableAction(
+      slideActions.add(SlidableAction(
           autoClose: false,
           borderRadius: BorderRadius.circular(5.0),
           backgroundColor: StateContainer.of(context).curTheme.background!,
@@ -2811,7 +2821,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // retry buttons:
     if (!txDetails.is_acknowledged) {
       if (txDetails.is_request) {
-        _slideActions.add(SlidableAction(
+        slideActions.add(SlidableAction(
             autoClose: false,
             borderRadius: BorderRadius.circular(5.0),
             backgroundColor: StateContainer.of(context).curTheme.background!,
@@ -2825,7 +2835,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               await Slidable.of(context)!.close();
             }));
       } else if (txDetails.is_memo) {
-        _slideActions.add(SlidableAction(
+        slideActions.add(SlidableAction(
             autoClose: false,
             borderRadius: BorderRadius.circular(5.0),
             backgroundColor: StateContainer.of(context).curTheme.background!,
@@ -2857,7 +2867,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
 
     if (txDetails.is_request || txDetails.is_message) {
-      _slideActions.add(SlidableAction(
+      slideActions.add(SlidableAction(
           autoClose: false,
           borderRadius: BorderRadius.circular(5.0),
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
@@ -2878,8 +2888,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     final ActionPane actionPane = ActionPane(
       motion: const ScrollMotion(),
-      extentRatio: _slideActions.length * 0.2,
-      children: _slideActions,
+      extentRatio: slideActions.length * 0.2,
+      children: slideActions,
     );
 
     const double cardHeight = 65;
@@ -3520,15 +3530,16 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           // Share Address Button
                           AppButtonType.PRIMARY_OUTLINE,
                           !txDetails.is_fulfilled ? AppLocalization.of(context)!.markAsPaid : AppLocalization.of(context)!.markAsUnpaid,
-                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () async {
                         // update the tx in the db:
                         if (txDetails.is_fulfilled) {
-                          sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, false);
+                          await sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, false);
                         } else {
-                          sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, true);
+                          await sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, true);
                         }
                         // setState(() {});
-                        StateContainer.of(context).updateSolids();
+                        await StateContainer.of(context).updateSolids();
+                        await StateContainer.of(context).updateUnified(true);
                         Navigator.of(context).pop();
                       }),
                     ],

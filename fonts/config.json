@@ -131,6 +131,18 @@
       "css": "block",
       "code": 59400,
       "src": "material"
+    },
+    {
+      "uid": "71f745beee6e099c29edba9a4da4745b",
+      "css": "file_export",
+      "code": 62830,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "41512746a38431b5de2829e17d563565",
+      "css": "file_import",
+      "code": 62831,
+      "src": "fontawesome5"
     }
   ]
 }

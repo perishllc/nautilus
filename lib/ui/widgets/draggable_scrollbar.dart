@@ -25,7 +25,7 @@ class DraggableScrollbar extends StatefulWidget {
       this.scrollbarInvisibleWidth = 40.0,
       this.scrollbarWidth = 4.0,
       this.scrollbarActiveWidth = 8.0,
-      this.enableJumpScroll = true,
+      this.enableJumpScroll = false,
       this.showTouchArea = false,
       this.scrollbarHideAfterDuration = const Duration(milliseconds: 1500),
       this.scrollbarColor = Colors.white,
@@ -33,7 +33,7 @@ class DraggableScrollbar extends StatefulWidget {
       required this.controller});
 
   @override
-  _DraggableScrollbarState createState() => new _DraggableScrollbarState();
+  _DraggableScrollbarState createState() => _DraggableScrollbarState();
 }
 
 class _DraggableScrollbarState extends State<DraggableScrollbar> {

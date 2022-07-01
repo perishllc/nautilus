@@ -33,7 +33,7 @@ import 'package:nautilus_wallet_flutter/ui/intro/intro_welcome.dart';
 import 'package:nautilus_wallet_flutter/ui/lock_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/password_lock_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/purchase_nano.dart';
-import 'package:nautilus_wallet_flutter/ui/register_username.dart';
+import 'package:nautilus_wallet_flutter/ui/register/register_username.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';

@@ -24,17 +24,14 @@ class NinjaAPI {
     if (httpResponseBody == null) {
       return null;
     }
-    // final List<NinjaNode> ninjaNodes =
-    //     (json.decode(httpResponseBody) as List<NinjaNode>).map((NinjaNode e) => NinjaNode.fromJson(e as Map<String, dynamic>)).toList();
-    // return ninjaNodes;
 
-    List<NinjaNode> ninjaNodes = [];
     try {
-      json.decode(httpResponseBody) as List<NinjaNode>;
-    } catch (error) {
+      final List<NinjaNode> ninjaNodes =
+          (json.decode(httpResponseBody) as List<dynamic>).map((dynamic e) => NinjaNode.fromJson(e as Map<String, dynamic>)).toList();
       return ninjaNodes;
+    } catch (error) {
+      return null;
     }
-    return ninjaNodes;
   }
 
   static Future<List<NinjaNode>?> getCachedVerifiedNodes() async {
@@ -42,13 +39,11 @@ class NinjaAPI {
     if (rawJson == null) {
       return null;
     }
-    // List<NinjaNode> ninjaNodes = (json.decode(rawJson) as List<NinjaNode>).map((NinjaNode e) => NinjaNode.fromJson(e as Map<String, dynamic>)).toList();
-    List<NinjaNode> ninjaNodes = [];
     try {
-      json.decode(rawJson) as List<NinjaNode>;
-    } catch (error) {
+      final List<NinjaNode> ninjaNodes = (json.decode(rawJson) as List<dynamic>).map((dynamic e) => NinjaNode.fromJson(e as Map<String, dynamic>)).toList();
       return ninjaNodes;
+    } catch (error) {
+      return null;
     }
-    return ninjaNodes;
   }
 }

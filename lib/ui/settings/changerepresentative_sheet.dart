@@ -161,7 +161,7 @@ class AppChangeRepresentativeSheet {
                         margin: const EdgeInsets.only(top: 7),
                         child: RichText(
                           text: TextSpan(
-                            text: '',
+                            text: "",
                             children: [
                               TextSpan(
                                 text: "${AppLocalization.of(context)!.votingWeight}: ",
@@ -173,7 +173,7 @@ class AppChangeRepresentativeSheet {
                                 ),
                               ),
                               TextSpan(
-                                text: NumberUtil.getPercentOfTotalSupply(rep.votingWeight),
+                                text: NumberUtil.getPercentOfTotalSupply(rep.votingWeight!),
                                 style: TextStyle(
                                     color: StateContainer.of(context).curTheme.primary, fontWeight: FontWeight.w700, fontSize: 14.0, fontFamily: 'Nunito Sans'),
                               ),
