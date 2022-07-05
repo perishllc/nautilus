@@ -1,17 +1,15 @@
-import 'dart:async';
 import 'dart:math';
-// import 'package:flutter/foundation.dart';
+import 'dart:typed_data';
+
+import 'package:encrypt/encrypt.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_sodium/flutter_sodium.dart';
-import 'dart:typed_data';
 import 'package:nautilus_wallet_flutter/util/blake2b.dart';
-import 'package:nautilus_wallet_flutter/util/curve25519.dart';
 import 'package:x25519/x25519.dart';
-import 'package:encrypt/encrypt.dart';
 
 String generateNonce(int length) {
   String result = ""; // resulting nonce
-  final String chars = "ABCDEF1234567890"; // hex characters
+  const String chars = "ABCDEF1234567890"; // hex characters
   final Random rng = Random.secure();
   // length is doubled because it takes 2 characters to represent a byte
   for (int i = 0; i < (length * 2); i++) {

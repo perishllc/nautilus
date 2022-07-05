@@ -6,9 +6,12 @@ part 'error_response.g.dart';
 class ErrorResponse {
   @JsonKey(name: 'error')
   String? error;
+  @JsonKey(name: 'details')
+  String? details;
 
-  ErrorResponse({String? error}) {
+  ErrorResponse({String? error, String? details}) {
     this.error = error;
+    this.details = details;
   }
 
   factory ErrorResponse.fromJson(Map<String, dynamic> json) => _$ErrorResponseFromJson(json);

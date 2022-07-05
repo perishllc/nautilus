@@ -573,7 +573,7 @@ class AccountService {
         local_uuid: localUuid);
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
-      throw Exception("Received error ${response.error}");
+      throw Exception("Received error ${response.error} ${response.details}");
     }
   }
 
@@ -587,7 +587,7 @@ class AccountService {
         local_uuid: localUuid);
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
-      throw Exception("Received error ${response.error}");
+      throw Exception("Received error ${response.error} ${response.details}");
     }
   }
 
@@ -595,7 +595,7 @@ class AccountService {
     final PaymentACK request = PaymentACK(uuid: requestUuid, account: account, requesting_account: requestingAccount);
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
-      throw Exception("Received error ${response.error}");
+      throw Exception("Received error ${response.error} ${response.details}");
     }
   }
 
@@ -603,7 +603,7 @@ class AccountService {
     final AccountsBalancesRequest request = AccountsBalancesRequest(accounts: accounts);
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
-      throw Exception("Received error ${response.error}");
+      throw Exception("Received error ${response.error} ${response.details}");
     }
     return AccountsBalancesResponse.fromJson(response);
   }
@@ -611,7 +611,7 @@ class AccountService {
   Future<ProcessResponse> requestProcess(ProcessRequest request) async {
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
-      throw Exception("Received error ${response.error}");
+      throw Exception("Received error ${response.error} ${response.details}");
     }
     final ProcessResponse item = ProcessResponse.fromJson(response as Map<String, dynamic>);
     return item;

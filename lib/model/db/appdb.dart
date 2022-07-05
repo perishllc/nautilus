@@ -200,8 +200,36 @@ class DBHelper {
   //   // }
   // }
 
+  String lowerStripAddress(String address) {
+    return address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "");
+  }
+
+  String? formatAddress(String? address) {
+    if (address == null) {
+      return null;
+    }
+    // nano mode:
+    return "nano_${lowerStripAddress(address)}";
+  }
+
+  // List<User> formatUserList(List<User> users) {
+  //   for (int i = 0; i < users.length; i++) {
+  //     if (users[i].address != null) {
+  //       users[i].address = formatAddress(users[i].address!);
+  //     }
+  //   }
+  //   return users;
+  // }
+
+  // User formatUser(User user) {
+  //   if (user.address != null) {
+  //     user.address = formatAddress(user.address!);
+  //   }
+  //   return user;
+  // }
+
   Future<void> fetchNanoToUsernames() async {
-    final List<User>? users = await fetchNapiKnown(http.Client());
+    final List<User>? users = await fetchNanoToKnown(http.Client());
     if (users == null) {
       return;
     }
@@ -224,9 +252,9 @@ class DBHelper {
     }).toList() as List<User>;
   }
 
-  Future<List<User>?> fetchNapiKnown(http.Client client) async {
+  Future<List<User>?> fetchNanoToKnown(http.Client client) async {
     final http.Response response = await client.get(Uri.parse("https://nano.to/known?json=true"));
-    // Use the compute function to run parseUsers in a separate isolate.
+    // todo: use the compute function to run parseUsers in a separate isolate
     return parseNanoToUsers(response.body);
   }
 
@@ -264,8 +292,7 @@ class DBHelper {
 
   Future<User?> getContactWithAddress(String address) async {
     final Database dbClient = (await db)!;
-    final List<Map> list =
-        await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}' AND nickname <> ''");
+    final List<Map> list = await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${formatAddress(address)}' AND nickname <> ''");
     if (list.isNotEmpty) {
       return User(
           nickname: list[0]["nickname"] as String?,
@@ -295,15 +322,15 @@ class DBHelper {
 
   Future<bool> contactExistsWithAddress(String address) async {
     final Database dbClient = (await db)!;
-    final int count = Sqflite.firstIntValue(await dbClient
-        .rawQuery("SELECT count(*) FROM Users WHERE lower(address) = '${address.replaceAll("xrb_", "").replaceAll("nano_", "")}' AND nickname <> ''"))!;
+    final int count =
+        Sqflite.firstIntValue(await dbClient.rawQuery("SELECT count(*) FROM Users WHERE lower(address) = '${formatAddress(address)}' AND nickname <> ''"))!;
     return count > 0;
   }
 
   Future<bool> contactExistsWithAddressOrUser(String addressOrUsername) async {
     final Database dbClient = (await db)!;
     final int count = Sqflite.firstIntValue(await dbClient.rawQuery(
-        "SELECT count(*) FROM Users WHERE (lower(address) = '${addressOrUsername.replaceAll("xrb_", "").replaceAll("nano_", "")}' OR lower(username) = '${addressOrUsername.toLowerCase()}') AND nickname <> ''"))!;
+        "SELECT count(*) FROM Users WHERE (lower(address) = '${formatAddress(addressOrUsername)}' OR lower(username) = '${addressOrUsername.toLowerCase()}') AND nickname <> ''"))!;
     return count > 0;
   }
 
@@ -326,8 +353,6 @@ class DBHelper {
 
   Future<bool> saveContact(User contact) async {
     final Database? dbClient = await db;
-    // return await dbClient.rawInsert(
-    //     'INSERT INTO Blocked (username, address, name) values(?, ?, ?)', [blocked.username, blocked.address.replaceAll("xrb_", "nano_"), blocked.nickname]);
     bool username = false;
     bool address = false;
     bool name = false;
@@ -475,7 +500,7 @@ class DBHelper {
 
   Future<User?> getUserWithAddress(String address) async {
     final Database dbClient = (await db)!;
-    final List<Map> list = await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}'");
+    final List<Map> list = await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${formatAddress(address)}'");
     // TODO: Handle multiple users with the same address
     if (list.isNotEmpty) {
       return User(
@@ -490,8 +515,7 @@ class DBHelper {
 
   Future<String?> getUsernameOrReturnAddress(String address) async {
     final Database dbClient = (await db)!;
-    final List<Map> list =
-        await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}'");
+    final List<Map> list = await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${formatAddress(address)}'");
     // TODO: Handle multiple users with the same address
     if (list.isNotEmpty) {
       return list[0]["username"] as String?;
@@ -501,8 +525,7 @@ class DBHelper {
 
   Future<String?> getUsernameWithAddress(String address) async {
     final Database dbClient = (await db)!;
-    final List<Map> list =
-        await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}'");
+    final List<Map> list = await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${formatAddress(address)}'");
     // TODO: Handle multiple users with the same address
     if (list.isNotEmpty) {
       return list[0]["username"] as String?;
@@ -513,7 +536,7 @@ class DBHelper {
   Future<User?> getUserOrContactWithAddress(String address) async {
     final Database dbClient = (await db)!;
     List<Map> list;
-    list = await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}'");
+    list = await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${formatAddress(address)}'");
     // TODO: Handle multiple users with the same address
     if (list.isNotEmpty) {
       return User(
@@ -557,21 +580,6 @@ class DBHelper {
     return null;
   }
 
-  // Future<dynamic> getUserOrContactWithName(String name) async {
-  //   var dbClient = await db;
-  //   // search through contacts first incase the user has a contact with the same name
-  //   List<Map> contactList = await dbClient.rawQuery('SELECT * FROM Contacts WHERE name = ?', [name]);
-  //   if (contactList.length > 0) {
-  //     return Contact(id: contactList[0]["id"], name: contactList[0]["name"], address: contactList[0]["address"]);
-  //   } else {
-  //     List<Map> userList = await dbClient.rawQuery('SELECT * FROM Users WHERE username = ?', [name]);
-  //     if (userList.length > 0) {
-  //       return User(username: userList[0]["username"], address: userList[0]["address"], nickname: userList[0]["nickname"], type: userList[0]["type"]);
-  //     }
-  //   }
-  //   return null;
-  // }
-
   Future<bool> userExistsWithName(String name) async {
     final Database dbClient = (await db)!;
     final int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Users WHERE lower(username) = ?', [name.toLowerCase()]))!;
@@ -580,16 +588,14 @@ class DBHelper {
 
   Future<bool> userExistsWithAddress(String address) async {
     final Database dbClient = (await db)!;
-    final int count = Sqflite.firstIntValue(
-        await dbClient.rawQuery("SELECT count(*) FROM Users WHERE lower(address) = '${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}'"))!;
+    final int count = Sqflite.firstIntValue(await dbClient.rawQuery("SELECT count(*) FROM Users WHERE lower(address) = '${formatAddress(address)}'"))!;
     return count > 0;
   }
 
   Future<int> addUser(User user) async {
     final Database dbClient = (await db)!;
-    // return await dbClient.rawInsert('INSERT INTO Users (username, address) values(?, ?)', [user.username, user.address.replaceAll("xrb_", "nano_")]);
     return await dbClient.rawInsert('INSERT INTO Users (username, address, nickname, type, is_blocked) values(?, ?, ?, ?, ?)',
-        [user.username, user.address!.replaceAll("xrb_", "nano_"), user.nickname, user.type, user.is_blocked]);
+        [user.username, user.address, user.nickname, user.type, user.is_blocked]);
   }
 
   Future<int> addOrReplaceUser(User user) async {
@@ -630,8 +636,6 @@ class DBHelper {
 
   Future<bool> blockUser(User user) async {
     final Database? dbClient = await db;
-    // return await dbClient.rawInsert(
-    //     'INSERT INTO Blocked (username, address, name) values(?, ?, ?)', [blocked.username, blocked.address.replaceAll("xrb_", "nano_"), blocked.nickname]);
     bool username = false;
     bool address = false;
     final bool nickname = false;
@@ -640,8 +644,7 @@ class DBHelper {
       username = await dbClient!.rawUpdate('UPDATE Users SET is_blocked = 1 WHERE lower(username) = ?', [user.username!.toLowerCase()]) > 0;
     }
     if (user.address != null) {
-      address =
-          await dbClient!.rawUpdate('UPDATE Users SET is_blocked = 1 WHERE lower(address) = ?', [user.address!.replaceAll("xrb_", "nano_").toLowerCase()]) > 0;
+      address = await dbClient!.rawUpdate('UPDATE Users SET is_blocked = 1 WHERE lower(address) = ?', [user.address!.toLowerCase()]) > 0;
     }
     if (user.nickname != null) {
       address = await dbClient!.rawUpdate('UPDATE Users SET is_blocked = 1 WHERE lower(nickname) = ?', [user.nickname!.toLowerCase()]) > 0;
@@ -675,8 +678,8 @@ class DBHelper {
 
   Future<bool> blockedExistsWithAddress(String address) async {
     final Database dbClient = (await db)!;
-    final int count = Sqflite.firstIntValue(await dbClient.rawQuery(
-        "SELECT count(*) FROM Users WHERE lower(address) = '${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}' AND is_blocked = 1"))!;
+    final int count =
+        Sqflite.firstIntValue(await dbClient.rawQuery("SELECT count(*) FROM Users WHERE lower(address) = '${formatAddress(address)}' AND is_blocked = 1"))!;
     return count > 0;
   }
 
@@ -819,7 +822,7 @@ class DBHelper {
       throw Exception("TXData already exists");
     }
 
-    return await dbClient.rawInsert(
+    return dbClient.rawInsert(
         'INSERT INTO Transactions (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, link, memo_enc, is_memo, is_message, is_tx, memo, uuid, is_acknowledged, height, send_height, recv_height, record_type, sub_type, metadata, status) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           txData.from_address,

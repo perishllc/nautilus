@@ -10,6 +10,21 @@ class UserTypes {
   static const String CONTACT = "contact";
 }
 
+String? lowerStripAddress(String? address) {
+  if (address == null) {
+    return null;
+  }
+  return address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "").replaceAll("ban_", "");
+}
+
+String? formatAddress(String? address) {
+  if (address == null) {
+    return null;
+  }
+  // nano mode:
+  return "nano_${lowerStripAddress(address)}";
+}
+
 @JsonSerializable()
 class User {
   @JsonKey(ignore: true)
@@ -20,6 +35,13 @@ class User {
   String? nickname;
   @JsonKey(name: 'address')
   String? address;
+  // @JsonKey(name: 'address_raw')
+  // String? address_raw;
+  // String? get address => formatAddress(address_raw);
+  // set address(String? value) {
+  //   address_raw = lowerStripAddress(value);
+  // }
+
   @JsonKey(name: 'type')
   String? type;
   @JsonKey(name: 'expires')
@@ -39,15 +61,14 @@ class User {
   // @JsonKey(ignore: true)
   // Widget monkeyWidgetLarge;
 
-  User(
-      {this.username, this.address, this.expiration, this.representative, this.is_blocked, this.type, this.last_updated, this.nickname, this.aliases});
+  User({this.username, this.address, this.expiration, this.representative, this.is_blocked, this.type, this.last_updated, this.nickname, this.aliases});
 
   factory User.fromJson(Map<String, dynamic> json) {
     String? username = json['username'] as String? ?? json['name'] as String?;
     return User(
         username: username,
         nickname: json["nickname"] as String?,
-        address: json["address"] as String?,
+        address: formatAddress(json["address"] as String?),
         type: json["type"] as String?,
         expiration: json["expires"] as String?,
         representative: json["representative"] as bool?,
@@ -55,7 +76,22 @@ class User {
         last_updated: json["last_updated"] as int?,
         aliases: json["aliases"] as List<String>?);
   }
-  Map<String, dynamic> toJson() => _$UserToJson(this);
+  // Map<String, dynamic> toJson() => _$UserToJson(this);
+  // User fromJson() => _$UserFromJson(this);
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'username': username,
+      'nickname': nickname,
+      'address': address,
+      'type': type,
+      'expires': expiration,
+      'representative': representative,
+      'is_blocked': is_blocked,
+      'last_updated': last_updated,
+      'aliases': aliases,
+    };
+  }
 
   String? getDisplayName({bool ignoreNickname = false}) {
     if (nickname != null && nickname!.isNotEmpty && !ignoreNickname) {

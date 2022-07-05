@@ -1451,8 +1451,10 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             await sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context)!.defaultAccountName);
             final Account? mainAccount = await sl.get<DBHelper>().getMainAccount(seed);
             await sl.get<DBHelper>().changeAccount(mainAccount);
-            EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: mainAccount));
-            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
+            // force users list to update on the home page:
+            EventTaxiImpl.singleton().fire(ContactModifiedEvent());
+            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));// definitely include
+            // EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: mainAccount));
             // if (animationOpen && mounted) {
             //   Navigator.of(context).pop();
             // }

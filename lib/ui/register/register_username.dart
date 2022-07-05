@@ -382,9 +382,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                     child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
                       getDropdown(),
                       getPrice(),
-                    ]))
-              else
-                const SizedBox(),
+                    ])),
               if (StateContainer.of(context).wallet!.username != null)
                 Container(
                   margin: const EdgeInsetsDirectional.only(top: 10),

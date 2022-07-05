@@ -91,7 +91,7 @@ Future<void> appMain() async {
   runApp(RepaintBoundary(
     key: const ValueKey('screenshotter'),
     child: StateContainer(
-      child: app.App(false),
+      child: app.App(),
     ),
   ));
 
