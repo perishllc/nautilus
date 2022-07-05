@@ -265,7 +265,7 @@ class DBHelper {
   Future<User?> getContactWithAddress(String address) async {
     final Database dbClient = (await db)!;
     final List<Map> list =
-        await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '%${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}' AND nickname <> ''");
+        await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}' AND nickname <> ''");
     if (list.isNotEmpty) {
       return User(
           nickname: list[0]["nickname"] as String?,
@@ -475,7 +475,7 @@ class DBHelper {
 
   Future<User?> getUserWithAddress(String address) async {
     final Database dbClient = (await db)!;
-    final List<Map> list = await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '%${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}'");
+    final List<Map> list = await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}'");
     // TODO: Handle multiple users with the same address
     if (list.isNotEmpty) {
       return User(
@@ -581,7 +581,7 @@ class DBHelper {
   Future<bool> userExistsWithAddress(String address) async {
     final Database dbClient = (await db)!;
     final int count = Sqflite.firstIntValue(
-        await dbClient.rawQuery("SELECT count(*) FROM Users WHERE lower(address) = '%${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}'"))!;
+        await dbClient.rawQuery("SELECT count(*) FROM Users WHERE lower(address) = '${address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "")}'"))!;
     return count > 0;
   }
 
@@ -655,13 +655,13 @@ class DBHelper {
     bool address = false;
     bool nickname = false;
     if (user.username != null) {
-      username = await dbClient!.rawUpdate("UPDATE Users SET is_blocked = 0 WHERE lower(username) = '%${user.username!.toLowerCase()}'") > 0;
+      username = await dbClient!.rawUpdate("UPDATE Users SET is_blocked = 0 WHERE lower(username) = '${user.username!.toLowerCase()}'") > 0;
     }
     if (user.address != null) {
-      address = await dbClient!.rawUpdate("UPDATE Users SET is_blocked = 0 WHERE lower(address) = '%${user.address!.toLowerCase()}'") > 0;
+      address = await dbClient!.rawUpdate("UPDATE Users SET is_blocked = 0 WHERE lower(address) = '${user.address!.toLowerCase()}'") > 0;
     }
     if (user.nickname != null) {
-      nickname = await dbClient!.rawUpdate("UPDATE Users SET is_blocked = 0 WHERE lower(nickname) = '%${user.nickname!.toLowerCase()}'") > 0;
+      nickname = await dbClient!.rawUpdate("UPDATE Users SET is_blocked = 0 WHERE lower(nickname) = '${user.nickname!.toLowerCase()}'") > 0;
     }
     return username || address || nickname;
   }
@@ -964,7 +964,7 @@ class DBHelper {
 
   Future<TXData?> getTXDataByUUID(String uuid) async {
     final Database dbClient = (await db)!;
-    final List<Map> list = await dbClient.rawQuery("SELECT * FROM Transactions WHERE lower(uuid) = '%${uuid.toLowerCase()}'");
+    final List<Map> list = await dbClient.rawQuery("SELECT * FROM Transactions WHERE lower(uuid) = '${uuid.toLowerCase()}'");
     if (list.isNotEmpty) {
       return createTXDataFromDB(list[0]);
     }
@@ -973,12 +973,12 @@ class DBHelper {
 
   Future<bool> deleteTXData(TXData txData) async {
     final Database dbClient = (await db)!;
-    return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(uuid) = '%${txData.uuid!.toLowerCase()}'") > 0;
+    return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(uuid) = '${txData.uuid!.toLowerCase()}'") > 0;
   }
 
   Future<bool> deleteTXDataByUUID(String uuid) async {
     final Database dbClient = (await db)!;
-    return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(uuid) = '%${uuid.toLowerCase()}'") > 0;
+    return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(uuid) = '${uuid.toLowerCase()}'") > 0;
   }
 
   Future<bool> deleteTXDataByID(int? id) async {
@@ -988,7 +988,7 @@ class DBHelper {
 
   Future<bool> deleteTXDataByBlock(String block) async {
     final Database dbClient = (await db)!;
-    return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(block) = '%${block.toLowerCase()}'") > 0;
+    return await dbClient.rawDelete("DELETE FROM Transactions WHERE lower(block) = '${block.toLowerCase()}'") > 0;
   }
 
   Future<bool> deleteTXDataByRequestTime(String request_time) async {

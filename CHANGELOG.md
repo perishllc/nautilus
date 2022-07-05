@@ -1,4 +1,8 @@
-# v0.3.9 - [2022-07-02]
+# v0.4.0 - [2022-07-XX]
+#### Added
+#### Changed
+#### Fixed
+## v0.3.9 - [2022-07-02]
 #### Added
 - Support the project banner added (don't worry, you can hide it)
   - Breakdown of different funding goals
