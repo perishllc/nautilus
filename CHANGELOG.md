@@ -1,6 +1,7 @@
 # v0.4.0 - [2022-07-06]
 #### Added
 #### Changed
+- Max drawer size is even smaller now for tablets -> 325px
 #### Fixed
 - A bunch of bugs related to payment requests / message deleting created in the last release by mistake
 - Scrollbar de-sync issues (mostly on iOS)
