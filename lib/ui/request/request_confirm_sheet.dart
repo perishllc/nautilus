@@ -312,7 +312,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
             .get<AccountService>()
             .requestPayment(widget.destination, widget.amountRaw, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
       } catch (e) {
-        print("payment request failed: ${e.toString()}");
+        sl.get<Logger>().e("payment request failed: ${e.toString()}");
         sendFailed = true;
       }
 

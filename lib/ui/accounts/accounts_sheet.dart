@@ -313,7 +313,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                           StateContainer.of(context).getSeed().then((String seed) {
                             sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context)!.defaultNewAccountName).then((Account? newAccount) {
                               if (newAccount == null) {
-                                print("Error adding account: account was null");
+                                sl.get<Logger>().d("Error adding account: account was null");
                                 return;
                               }
                               _requestBalances(context, [newAccount]);

@@ -594,12 +594,12 @@ class AppLocalization {
   }
 
   String get memoSentButNotReceived {
-    return Intl.message("Memo re-sent! If still unacknowledged, the recipient's device may be offline.",
+    return Intl.message("Message re-sent! If still unread, the recipient's device may be offline.",
         desc: 'memo_sent_again', name: 'memoSentButNotReceived');
   }
 
   String get requestSentButNotReceived {
-    return Intl.message("Request re-sent! If still unacknowledged, the recipient's device may be offline.",
+    return Intl.message("Request re-sent! If still unread, the recipient's device may be offline.",
         desc: 'request_sent_again', name: 'requestSentButNotReceived');
   }
 

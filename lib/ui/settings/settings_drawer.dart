@@ -11,6 +11,7 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/contacts_setting_change_event.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/bus/notification_setting_change_event.dart';
+import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
@@ -1453,7 +1454,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             await sl.get<DBHelper>().changeAccount(mainAccount);
             // force users list to update on the home page:
             EventTaxiImpl.singleton().fire(ContactModifiedEvent());
-            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));// definitely include
+            EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: []));
+            StateContainer.of(context).updateUnified(true);
+            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true)); // definitely include
             // EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: mainAccount));
             // if (animationOpen && mounted) {
             //   Navigator.of(context).pop();

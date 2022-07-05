@@ -18,18 +18,6 @@ class NumberUtil {
     return result;
   }
 
-  /// Truncate a Decimal to a specific amount of digits
-  ///
-  /// @param input 1.059
-  /// @return double value 1.05
-  ///
-  // static double truncateDecimal(Decimal input, {int digits = maxDecimalDigits}) {
-  //   print("inp: $input");
-  //   double out = (input * Decimal.fromInt(pow(10, digits) as int)).toDouble() / pow(10, digits);
-  //   print("out: $out");
-  //   return out;
-  // }
-
   static String truncateDecimal(Decimal input, {int digits = maxDecimalDigits}) {
     Decimal bigger = input.shift(digits);
     bigger = bigger.floor(); // chop off the decimal: 1.059 -> 1.05
@@ -48,15 +36,6 @@ class NumberUtil {
     if (raw == null || raw == "0" || raw == "00000000000000000000000000000000") {
       return "0";
     }
-
-    // print(res);
-
-    // // remove trailing zeros
-    // if (res.contains(".")) {
-    //   while (res.endsWith("0")) {
-    //     res = res.substring(0, res.length - 1);
-    //   }
-    // }
 
     if (!res.contains(".")) {
       return res;

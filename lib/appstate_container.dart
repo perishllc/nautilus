@@ -1147,7 +1147,7 @@ class StateContainerState extends State<StateContainer> {
         }
       } catch (e) {
         // TODO handle account history error
-        sl.get<Logger>().e("account_history e", e);
+        log.e("account_history e", e);
       }
     }
   }
@@ -1171,7 +1171,7 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  Future<String?> decryptMessageCurrentAccount(String memoEnc, String? fromAddress, String? toAddress) async {
+  Future<String> decryptMessageCurrentAccount(String memoEnc, String? fromAddress, String? toAddress) async {
     // decrypt the memo:
     Account? correctAccount;
     // find the right account index:
@@ -1190,12 +1190,16 @@ class StateContainerState extends State<StateContainer> {
 
     if (correctAccount == null) {
       log.d("failed to decrypt memo!");
-      return null;
+      return "Decryption failed: account not found!";
     }
 
-    final String privKey = NanoUtil.seedToPrivate(await (getSeed()), correctAccount.index!);
-    final String memo = await Box.decrypt(memoEnc, fromAddress!, privKey);
-    return memo;
+    final String privKey = NanoUtil.seedToPrivate(await getSeed(), correctAccount.index!);
+    try {
+     return Box.decrypt(memoEnc, fromAddress!, privKey);
+    } catch (error) {
+      log.d("failed to decrypt memo!");
+      return "Decryption failed: ${error.toString()}";
+    }
   }
 
   Future<void> handlePaymentRequest(dynamic data, {bool delay_update = false}) async {
@@ -1232,14 +1236,7 @@ class StateContainerState extends State<StateContainer> {
 
     // decrypt the memo:
     if (memoEnc != null && memoEnc.isNotEmpty) {
-      final String? memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
-      if (memo != null) {
-        txData.memo = memo;
-      } else {
-        // TODO: figure out how to get localized string here:
-        txData.memo = "Decryption Error!";
-        txData.memo_enc = memoEnc;
-      }
+      txData.memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
     }
 
     // check if exists in db:
@@ -1248,10 +1245,10 @@ class StateContainerState extends State<StateContainer> {
       // update with the new info:
       existingTXData.is_acknowledged = true;
       existingTXData.request_time = requestTime;
-      print("replacing TXData");
+      log.v("replacing TXData");
       await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
     } else {
-      print("adding TXData to db");
+      log.v("adding TXData to db");
       // add it since it doesn't exist:
       await sl.get<DBHelper>().addTXData(txData);
     }
@@ -1509,7 +1506,7 @@ class StateContainerState extends State<StateContainer> {
         // we didn't replace a txData??
         if (txData == null && oldTXData == null) {
           // log.d("adding txData to the database!");
-          throw new Exception("\n\n@@@@@@@@this shouldn't happen!@@@@@@@@@@\n\n");
+          throw Exception("\n\n@@@@@@@@this shouldn't happen!@@@@@@@@@@\n\n");
         }
         if (!delay_update) {
           await updateSolids();
@@ -1614,7 +1611,7 @@ class StateContainerState extends State<StateContainer> {
     // check if exists in db:
     final TXData? existingTXData = await sl.get<DBHelper>().getTXDataByUUID(uuid!);
     if (existingTXData != null) {
-      print("memo txData exists");
+      sl.get<Logger>().v("memo txData exists");
       // update with the new info:
       existingTXData.block = txData.block;
       if (found) {
@@ -1671,9 +1668,9 @@ class StateContainerState extends State<StateContainer> {
     final TXData? txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
     if (txData != null) {
       await sl.get<DBHelper>().changeTXAckStatus(uuid, true);
-      print("changed ack status!");
+      sl.get<Logger>().v("changed ack status!");
     } else {
-      print("we didn't have a txData for this payment ack!");
+      sl.get<Logger>().d("we didn't have a txData for this payment ack!");
     }
     if (!delay_update) {
       await updateSolids();

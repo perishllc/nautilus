@@ -561,7 +561,7 @@ class AccountService {
   }
 
   // send payment record (memo) to an account:
-  Future<void> sendTXMemo(String? account, String? requestingAccount, String? amountRaw, String requestSignature, String requestNonce, String memoEnc,
+  Future<void> sendTXMemo(String account, String requestingAccount, String? amountRaw, String requestSignature, String requestNonce, String memoEnc,
       String? block, String localUuid) async {
     final PaymentMemo request = PaymentMemo(
         account: account,
@@ -577,7 +577,7 @@ class AccountService {
     }
   }
 
-  Future<void> sendTXMessage(String? account, String? requestingAccount, String requestSignature, String requestNonce, String memoEnc, String localUuid) async {
+  Future<void> sendTXMessage(String account, String requestingAccount, String requestSignature, String requestNonce, String memoEnc, String localUuid) async {
     final PaymentMessage request = PaymentMessage(
         account: account,
         requesting_account: requestingAccount,

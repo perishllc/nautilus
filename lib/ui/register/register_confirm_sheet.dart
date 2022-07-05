@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -260,7 +261,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
 
       // try until successful or timeout:
       while (success == false) {
-        print("checking url: ${widget.checkUrl}");
+        sl.get<Logger>().v("checking url: ${widget.checkUrl}");
         try {
           // final Map<String, dynamic> resp = await sl.get<AccountService>().checkUsernameUrl(widget.checkUrl!) as Map<String, dynamic>;
           final resp = await sl.get<AccountService>().checkUsernameUrl(widget.checkUrl!);
@@ -274,7 +275,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
             }
           }
         } catch (error) {
-          print("Error with checkUrl: $error");
+          sl.get<Logger>().e("Error with checkUrl: $error");
         }
 
         // sleep for a while before trying again:

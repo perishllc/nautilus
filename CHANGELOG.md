@@ -1,9 +1,12 @@
 # v0.4.0 - [2022-07-06]
 #### Added
+- Ability to resend messages on message failure
 #### Changed
 - Max drawer size is even smaller now for tablets -> 325px
+- Swap send and receive colors to be more consistent
 #### Fixed
 - A bunch of bugs related to payment requests / message deleting created in the last release by mistake
+- Fixes for handling memos / messages in the background
 - Scrollbar de-sync issues (mostly on iOS)
 ## v0.3.9 - [2022-07-02]
 #### Added

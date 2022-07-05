@@ -122,7 +122,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   // List<User> _contacts = [];
   // List<User> _blocked = [];
   List<User> _users = [];
-  List<TXData> _txData = [];
+  // List<TXData> _txData = [];
   List<TXData> _txRecords = [];
 
   // infinite scroll:
@@ -445,7 +445,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     _addSampleContact();
     _updateUsers();
-    _updateTXData();
+    // _updateTXData();
     // infinite scroll:
     _scrollController = ScrollController()..addListener(_scrollListener);
     // Setup placeholder animation and start
@@ -614,13 +614,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     });
   }
 
-  void _updateTXData() {
-    sl.get<DBHelper>().getTXData().then((List<TXData> txData) {
-      setState(() {
-        _txData = txData;
-      });
-    });
-  }
+  // void _updateTXData() {
+  //   sl.get<DBHelper>().getTXData().then((List<TXData> txData) {
+  //     setState(() {
+  //       _txData = txData;
+  //     });
+  //   });
+  // }
 
   void _updateTXDetailsMap(String? account) {
     sl.get<DBHelper>().getAccountSpecificTXData(account).then((List<TXData> data) {
@@ -686,6 +686,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   void _registerBus() {
     _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((HistoryHomeEvent event) {
       updateHistoryList(event.items);
+      // // update tx memo's
+      // if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.address != null) {
+      //   _updateTXDetailsMap(StateContainer.of(context).wallet.address);
+      // }
       // handle deep links:
       if (StateContainer.of(context).initialDeepLink != null) {
         handleDeepLink(StateContainer.of(context).initialDeepLink);
@@ -928,7 +932,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     await StateContainer.of(context).requestUpdate();
     // queries the db for account specific solids:
     await StateContainer.of(context).updateSolids();
-    _updateTXData();
+    // _updateTXData();
     // for memos:
     _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
 
@@ -2488,7 +2492,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // encrypt the memo if it's not empty:
       String? encryptedMemo;
       if (txDetails.memo != null && txDetails.memo!.isNotEmpty) {
-        encryptedMemo = await Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
+        encryptedMemo = Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
       }
       await sl.get<AccountService>().requestPayment(
           txDetails.to_address, txDetails.amount_raw, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
@@ -2563,8 +2567,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     try {
       // encrypt the memo:
-      final String encryptedMemo = await Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
-      await sl.get<AccountService>().sendTXMemo(txDetails.to_address, StateContainer.of(context).wallet!.address, txDetails.amount_raw, signature, nonceHex,
+      final String encryptedMemo = Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
+      await sl.get<AccountService>().sendTXMemo(txDetails.to_address!, StateContainer.of(context).wallet!.address!, txDetails.amount_raw, signature, nonceHex,
           encryptedMemo, txDetails.block, localUuid);
     } catch (e) {
       memoSendFailed = true;
@@ -2586,6 +2590,84 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       UIUtil.showSnackbar(AppLocalization.of(context)!.memoSentButNotReceived, context, durationMs: 5000);
       await StateContainer.of(context).updateTXMemos();
     }
+
+    Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+  }
+
+  static Future<void> resendMessage(BuildContext context, TXData txDetails) async {
+    // show sending animation:
+    bool animationOpen = true;
+    AppAnimation.animationLauncher(context, AnimationType.SEND_MESSAGE, onPoppedCallback: () => animationOpen = false);
+
+    bool sendFailed = false;
+
+    // send the message again:
+    final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+    // get epoch time as hex:
+    final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+    final String nonceHex = secondsSinceEpoch.toRadixString(16);
+    final String signature = NanoSignatures.signBlock(nonceHex, privKey);
+
+    // check validity locally:
+    final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+    final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+    if (!isValid) {
+      throw Exception("Invalid signature?!");
+    }
+
+    // create a local memo object:
+    const Uuid uuid = Uuid();
+    final String localUuid = "LOCAL:${uuid.v4()}";
+    final TXData messageTXData = TXData(
+      from_address: txDetails.from_address,
+      to_address: txDetails.to_address,
+      amount_raw: txDetails.amount_raw,
+      uuid: localUuid,
+      block: txDetails.block,
+      is_acknowledged: false,
+      is_fulfilled: false,
+      is_request: false,
+      is_memo: false,
+      is_message: true,
+      // request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
+      request_time: txDetails.request_time,
+      memo: txDetails.memo, // store unencrypted memo
+      height: txDetails.height,
+    );
+    // add it to the database:
+    await sl.get<DBHelper>().addTXData(messageTXData);
+
+    try {
+      // encrypt the memo if it's not empty:
+      String? encryptedMemo;
+      if (txDetails.memo != null && txDetails.memo!.isNotEmpty) {
+        encryptedMemo = Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
+      }
+      await sl
+          .get<AccountService>()
+          .sendTXMessage(txDetails.to_address!, StateContainer.of(context).wallet!.address!, signature, nonceHex, encryptedMemo!, localUuid);
+    } catch (error) {
+      sl.get<Logger>().v("Error encrypting memo: $error");
+      sendFailed = true;
+    }
+
+    // if the memo send failed delete the object:
+    if (sendFailed) {
+      sl.get<Logger>().v("request send failed, deleting TXData object");
+      // remove failed txdata from the database:
+      await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
+      // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
+      await Future.delayed(const Duration(seconds: 2));
+      // show error:
+      UIUtil.showSnackbar(AppLocalization.of(context)!.sendMemoError, context, durationMs: 5000);
+    } else {
+      // delete the old request by uuid:
+      await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
+      // memo sent successfully, show success:
+      UIUtil.showSnackbar(AppLocalization.of(context)!.memoSentButNotReceived, context, durationMs: 5000);
+    }
+    await StateContainer.of(context).updateSolids();
+    await StateContainer.of(context).updateUnified(false);
 
     Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
   }
@@ -2659,11 +2741,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         if (txDetails.isRecipient(walletAddress)) {
           itemText = AppLocalization.of(context)!.received;
           icon = AppIcons.call_received;
-          iconColor = StateContainer.of(context).curTheme.text60;
+          iconColor = StateContainer.of(context).curTheme.primary60;
         } else {
           itemText = AppLocalization.of(context)!.sent;
           icon = AppIcons.call_made;
-          iconColor = StateContainer.of(context).curTheme.primary60;
+          iconColor = StateContainer.of(context).curTheme.text60;
         }
       }
     } else if (txDetails.is_tx) {
@@ -2710,6 +2792,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       iconColor = StateContainer.of(context).curTheme.success60;
       setShadow = BoxShadow(
         color: StateContainer.of(context).curTheme.success60!.withOpacity(0.2),
+        offset: Offset.zero,
+        blurRadius: 0,
+        spreadRadius: 1,
+      );
+    } else if (!txDetails.is_acknowledged && (txDetails.is_request || txDetails.is_message)) {
+      iconColor = StateContainer.of(context).curTheme.error60;
+      setShadow = BoxShadow(
+        color: StateContainer.of(context).curTheme.error60!.withOpacity(0.2),
         offset: Offset.zero,
         blurRadius: 0,
         spreadRadius: 1,
@@ -2848,19 +2938,19 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             }));
       } else if (txDetails.is_message) {
         // TODO: resend message
-        // _slideActions.add(SlidableAction(
-        //     autoClose: false,
-        //     borderRadius: BorderRadius.circular(5.0),
-        //     backgroundColor: StateContainer.of(context).curTheme.background!,
-        //     foregroundColor: StateContainer.of(context).curTheme.warning60,
-        //     icon: Icons.refresh_rounded,
-        //     label: AppLocalization.of(context).retry,
-        //     onPressed: (BuildContext context) async {
-        //       // sleep for a bit to give the ripple effect time to finish
-        //       await Future.delayed(Duration(milliseconds: 250));
-        //       await resendMessage(context, txDetails);
-        //       await Slidable.of(context).close();
-        //     }));
+        slideActions.add(SlidableAction(
+            autoClose: false,
+            borderRadius: BorderRadius.circular(5.0),
+            backgroundColor: StateContainer.of(context).curTheme.background!,
+            foregroundColor: StateContainer.of(context).curTheme.warning60,
+            icon: Icons.refresh_rounded,
+            label: AppLocalization.of(context)!.retry,
+            onPressed: (BuildContext context) async {
+              // sleep for a bit to give the ripple effect time to finish
+              await Future.delayed(const Duration(milliseconds: 250));
+              await resendMessage(context, txDetails);
+              await Slidable.of(context)!.close();
+            }));
       }
     }
 

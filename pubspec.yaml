@@ -121,8 +121,8 @@ dependencies:
   oktoast: ^3.2.0
 
   # Push notifications
-  # firebase_messaging: ^11.4.1
-  firebase_messaging: 11.2.8
+  firebase_messaging: ^11.4.4
+  # firebase_messaging: 11.2.8
   # firebase_core: ^1.10.0# for sure works
   # firebase_core: ^1.13.1
   firebase_core: ^1.17.1
