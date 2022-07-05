@@ -810,7 +810,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   void _scrollListener() {
     // print(_scrollController.position.extentAfter);
-<<<<<<< HEAD
     // if (_scrollController.position.extentAfter < 500) {
     //   // check if the oldest item is the initial block:
     //   if (_historyListMap[StateContainer.of(context).wallet!.address] != null && _historyListMap[StateContainer.of(context).wallet!.address]!.isNotEmpty) {
@@ -827,25 +826,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     //     }
     //   }
     // }
-=======
-    if (_scrollController.position.extentAfter < 500) {
-      // check if the oldest item is the initial block:
-      if (_historyListMap[StateContainer.of(context).wallet!.address] != null &&
-          _historyListMap[StateContainer.of(context).wallet!.address]!.isNotEmpty) {
-        final List<AccountHistoryResponseItem> histList = _historyListMap[StateContainer.of(context).wallet!.address]!;
-
-        // histList[0] is the most recent block with the highest height (120)
-        // histList[1] is the second most recent block with the next highest height (119)
-        // histList[120] is the oldest block with the lowest height (1)
-
-        if (histList[histList.length - 1].height! > 1) {
-          // we don't have all of the blocks yet, so we need to fetch more
-          // TODO: implement this
-          // StateContainer.of(context).requestUpdate(start: StateContainer.of(context).wallet.history.length, count: 50);
-        }
-      }
-    }
->>>>>>> aa9c41bad5d6eb2a3a24536a45901f57373654fe
   }
 
   int currentConfHeight = -1;
@@ -3502,7 +3482,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         onRefresh: _refresh,
         isRefreshing: _isRefreshing,
         child: AnimatedList(
-          // physics: BouncingScrollPhysics(),// iOS
+          physics: BouncingScrollPhysics(),// iOS
           controller: _scrollController,
           key: _unifiedListKeyMap[StateContainer.of(context).wallet!.address!],
           padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),

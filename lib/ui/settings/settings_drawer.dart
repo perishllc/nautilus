@@ -1452,7 +1452,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             final Account? mainAccount = await sl.get<DBHelper>().getMainAccount(seed);
             await sl.get<DBHelper>().changeAccount(mainAccount);
             EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: mainAccount));
-            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: false));
+            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
             // if (animationOpen && mounted) {
             //   Navigator.of(context).pop();
             // }

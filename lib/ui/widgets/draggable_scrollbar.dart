@@ -63,10 +63,10 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
   double get barMaxScrollExtent => (context.size!.height - (widget.scrollbarHeight + widget.scrollbarBottomMargin)).abs();
   double get barMinScrollExtent => widget.scrollbarTopMargin;
 
-  //this is usually length (in pixels) of list
-  //if list has 1000 items of 100.0 pixels each, maxScrollExtent is 100,000.0 pixels
+  // this is usually length (in pixels) of list
+  // if list has 1000 items of 100.0 pixels each, maxScrollExtent is 100,000.0 pixels
   double get viewMaxScrollExtent => widget.controller.position.maxScrollExtent;
-  //this is usually 0.0
+  // this is usually 0.0
   double get viewMinScrollExtent => widget.controller.position.minScrollExtent;
 
   double getScrollViewDelta(
@@ -87,7 +87,9 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
   }
 
   void _onVerticalDragUpdate(DragUpdateDetails details, GlobalKey scrollbarKey) {
-    if (!_isDragInProcess) return;
+    if (!_isDragInProcess) {
+      return;
+    }
 
     RenderBox scrollbarBox = scrollbarKey.currentContext?.findRenderObject() as RenderBox;
     Offset touchPosition = details.globalPosition;
@@ -213,7 +215,7 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
   // by scrollController.jumpTo or scrollController.animateTo functions.
   // It can be when user scrolls, drags scrollbar (see line 139)
   // or any other manipulation with scrollController outside this widget
-  changePosition(ScrollNotification notification) {
+  void changePosition(ScrollNotification notification) {
     setState(() {
       _visible = true;
     });
@@ -226,10 +228,26 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
     }
 
     // if notification was fired when user drags we don't need to update scrollThumb position
-    if (_isDragInProcess) return;
+    if (_isDragInProcess) {
+      return;
+    }
 
     setState(() {
       if (notification is ScrollUpdateNotification) {
+        _viewOffset += notification.scrollDelta!;
+        // lines removed for bounce scroll physics:
+        // if (_viewOffset < widget.controller.position.minScrollExtent) {
+        //   _viewOffset = widget.controller.position.minScrollExtent;
+        // }
+        // if (_viewOffset > viewMaxScrollExtent) {
+        //   _viewOffset = viewMaxScrollExtent;
+        // }
+
+        if (_viewOffset < widget.controller.position.minScrollExtent || _viewOffset > viewMaxScrollExtent) {
+          // don't update the bar offset:
+          return;
+        }
+
         _barOffsetTop += getBarDelta(
           notification.scrollDelta!,
           barMaxScrollExtent,
@@ -246,21 +264,13 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
         if (_barOffsetBottom < 0) {
           _barOffsetBottom = 0;
         }
-
-        _viewOffset += notification.scrollDelta!;
-        if (_viewOffset < widget.controller.position.minScrollExtent) {
-          _viewOffset = widget.controller.position.minScrollExtent;
-        }
-        if (_viewOffset > viewMaxScrollExtent) {
-          _viewOffset = viewMaxScrollExtent;
-        }
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey scrollbarKey = GlobalKey();
+    final GlobalKey scrollbarKey = GlobalKey();
     return NotificationListener<ScrollNotification>(
       onNotification: (ScrollNotification notification) {
         changePosition(notification);
@@ -305,14 +315,14 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
   }
 
   Widget _buildScrollThumb() {
-    return new Container(
+    return Container(
       height: widget.scrollbarHeight,
       width: _isDragInProcess ? widget.scrollbarActiveWidth : widget.scrollbarWidth,
       // color: Colors.blue,
       decoration: BoxDecoration(
         // borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
         // borderRadius: BorderRadius.all(Radius.circular(10)),
-        borderRadius: _isDragInProcess ? BorderRadius.all(Radius.circular(10)) : BorderRadius.all(Radius.circular(1.5)),
+        borderRadius: _isDragInProcess ? const BorderRadius.all(Radius.circular(10)) : const BorderRadius.all(Radius.circular(1.5)),
         color: widget.scrollbarColor,
       ),
     );

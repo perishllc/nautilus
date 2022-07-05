@@ -1,7 +1,9 @@
-# v0.4.0 - [2022-07-XX]
+# v0.4.0 - [2022-07-06]
 #### Added
 #### Changed
 #### Fixed
+- A bunch of bugs related to payment requests / message deleting created in the last release by mistake
+- Scrollbar de-sync issues (mostly on iOS)
 ## v0.3.9 - [2022-07-02]
 #### Added
 - Support the project banner added (don't worry, you can hide it)

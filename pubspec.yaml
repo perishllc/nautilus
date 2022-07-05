@@ -6,7 +6,7 @@ description: Nautilus - Fast, Robust & Secure NANO Wallet.
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.3.9+41
+version: 0.4.0+41
 
 environment:
   sdk: '>=2.12.0 < 3.0.0'
@@ -169,7 +169,9 @@ dependencies:
   # async / general programming utilities
   quiver: ^3.1.0
   
-  devicelocale: ^0.5.2
+  # devicelocale: ^0.5.1
+  # 0.5.2+ requires sdk 33 and a wierd java1.8 error on android:
+  devicelocale: 0.5.1
 
   # encryption helper:
   # flutter_sodium: ^0.2.0

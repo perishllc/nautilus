@@ -37,9 +37,6 @@ android {
     ndkVersion '21.3.6528147'
     compileSdkVersion 31
 
-    lintOptions {
-        disable 'InvalidPackage'
-    }
 
     defaultConfig {
         applicationId "co.perish.nautiluswallet"
@@ -63,6 +60,10 @@ android {
         }
     }
 
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    
     buildTypes {
         release {
             if (keystorePropertiesFile.exists()) {
