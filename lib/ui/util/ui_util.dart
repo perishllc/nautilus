@@ -385,8 +385,8 @@ class UIUtil {
     if (MediaQuery.of(context).size.width < 375)
       return MediaQuery.of(context).size.width * 0.94;
     else
-      // cap drawer width at 500px
-      return min(MediaQuery.of(context).size.width * 0.85, 500);
+      // cap drawer width at 375px
+      return min(MediaQuery.of(context).size.width * 0.85, 375);
   }
 
   static void showSnackbar(String content, BuildContext context, {int durationMs = 2500}) {

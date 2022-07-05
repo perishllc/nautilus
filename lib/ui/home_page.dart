@@ -796,22 +796,22 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   void _scrollListener() {
     // print(_scrollController.position.extentAfter);
-    if (_scrollController.position.extentAfter < 500) {
-      // check if the oldest item is the initial block:
-      if (_historyListMap[StateContainer.of(context).wallet!.address] != null && _historyListMap[StateContainer.of(context).wallet!.address]!.isNotEmpty) {
-        final List<AccountHistoryResponseItem> histList = _historyListMap[StateContainer.of(context).wallet!.address]!;
+    // if (_scrollController.position.extentAfter < 500) {
+    //   // check if the oldest item is the initial block:
+    //   if (_historyListMap[StateContainer.of(context).wallet!.address] != null && _historyListMap[StateContainer.of(context).wallet!.address]!.isNotEmpty) {
+    //     final List<AccountHistoryResponseItem> histList = _historyListMap[StateContainer.of(context).wallet!.address]!;
 
-        // histList[0] is the most recent block with the highest height (120)
-        // histList[1] is the second most recent block with the next highest height (119)
-        // histList[120] is the oldest block with the lowest height (1)
+    //     // histList[0] is the most recent block with the highest height (120)
+    //     // histList[1] is the second most recent block with the next highest height (119)
+    //     // histList[120] is the oldest block with the lowest height (1)
 
-        if (histList[histList.length - 1].height! > 1) {
-          // we don't have all of the blocks yet, so we need to fetch more
-          // TODO: implement this
-          // StateContainer.of(context).requestUpdate(start: StateContainer.of(context).wallet.history.length, count: 50);
-        }
-      }
-    }
+    //     if (histList[histList.length - 1].height! > 1) {
+    //       // we don't have all of the blocks yet, so we need to fetch more
+    //       // TODO: implement this
+    //       // StateContainer.of(context).requestUpdate(start: StateContainer.of(context).wallet.history.length, count: 50);
+    //     }
+    //   }
+    // }
   }
 
   int currentConfHeight = -1;
