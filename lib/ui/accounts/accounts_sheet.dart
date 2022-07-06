@@ -25,9 +25,8 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:quiver/strings.dart';
 
 class AppAccountsSheet extends StatefulWidget {
-
   const AppAccountsSheet({Key? key, required this.accounts}) : super(key: key);
-  
+
   final List<Account> accounts;
 
   _AppAccountsSheetState createState() => _AppAccountsSheetState();
@@ -508,14 +507,15 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                                               fontWeight: FontWeight.w900,
                                               color: StateContainer.of(context).curTheme.text),
                                         ),
-                                        displayCurrencySymbol(
-                                          context,
-                                          TextStyle(
-                                              fontSize: 16.0,
-                                              fontFamily: "NunitoSans",
-                                              fontWeight: FontWeight.w900,
-                                              color: StateContainer.of(context).curTheme.text),
-                                        ),
+                                        if (account.balance != null)
+                                          displayCurrencySymbol(
+                                            context,
+                                            TextStyle(
+                                                fontSize: 16.0,
+                                                fontFamily: "NunitoSans",
+                                                fontWeight: FontWeight.w900,
+                                                color: StateContainer.of(context).curTheme.text),
+                                          ),
                                         TextSpan(
                                           text: account.balance != null
                                               ? (!account.selected)

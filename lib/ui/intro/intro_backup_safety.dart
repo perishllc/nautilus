@@ -37,16 +37,13 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
         sl.get<SharedPrefsUtil>().setRepresentative(randomNode.account);
         // StateContainer.of(context).wallet.defaultRepresentative = randomNode.account;
         AppWallet.defaultRepresentative = randomNode.account;
-        StateContainer.of(context).requestUpdate();
       }
     });
 
     sl.get<Vault>().setSeed(NanoSeeds.generateSeed()).then((String? result) {
       // Update wallet
       StateContainer.of(context).getSeed().then((String seed) {
-        NanoUtil().loginAccount(seed, context).then((_) {
-          StateContainer.of(context).requestUpdate();
-        });
+        NanoUtil().loginAccount(seed, context);
       });
     });
   }

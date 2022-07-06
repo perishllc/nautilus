@@ -38,7 +38,7 @@ class UserDataUtil {
         return data;
       }
     } else if (type == DataType.ADDRESS) {
-      Address address = Address(data);
+      final Address address = Address(data);
       if (address.isValid()) {
         return address.address;
       }
@@ -49,7 +49,7 @@ class UserDataUtil {
       }
     } else if (type == DataType.DATA) {
       // Check if an address or manta result
-      Address address = Address(data);
+      final Address address = Address(data);
       if (address.isValid()) {
         return data;
       }
@@ -58,7 +58,7 @@ class UserDataUtil {
   }
 
   static Future<String?> getClipboardText(DataType type) async {
-    ClipboardData? data = await Clipboard.getData("text/plain");
+    final ClipboardData? data = await Clipboard.getData("text/plain");
     if (data == null || data.text == null) {
       return null;
     }
@@ -68,7 +68,7 @@ class UserDataUtil {
   static Future<String?> getQRData(DataType type, BuildContext context) async {
     UIUtil.cancelLockEvent();
     try {
-      String data = (await BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/)).rawContent;
+      final String data = (await BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/)).rawContent;
       if (isEmpty(data)) {
         return null;
       }
@@ -97,19 +97,19 @@ class UserDataUtil {
       await _channel.invokeMethod("setSecureClipboardItem", params);
     } else {
       // Set item in clipboard
-      await Clipboard.setData(new ClipboardData(text: value));
+      await Clipboard.setData(ClipboardData(text: value));
       // Auto clear it after 2 minutes
       if (setStream != null) {
         setStream!.cancel();
       }
-      Future<dynamic> delayed = new Future.delayed(new Duration(minutes: 2));
+      final Future<dynamic> delayed = Future.delayed(const Duration(minutes: 2));
       delayed.then((_) {
         return true;
       });
       setStream = delayed.asStream().listen((_) {
         Clipboard.getData("text/plain").then((ClipboardData? data) {
           if (data != null && data.text != null && NanoSeeds.isValidSeed(data.text!)) {
-            Clipboard.setData(ClipboardData(text: ""));
+            Clipboard.setData(const ClipboardData(text: ""));
           }
         });
       });

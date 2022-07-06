@@ -23,7 +23,7 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
       resizeToAvoidBottomInset: false,
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
-        builder: (context, constraints) => SafeArea(
+        builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
           minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
@@ -39,14 +39,17 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                           margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
                           height: 50,
                           width: 50,
-                          child: FlatButton(
-                              highlightColor: StateContainer.of(context).curTheme.text15,
-                              splashColor: StateContainer.of(context).curTheme.text15,
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                primary: StateContainer.of(context).curTheme.text15,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                padding: EdgeInsets.zero,
+                                // highlightColor: StateContainer.of(context).curTheme.text15,
+                                // splashColor: StateContainer.of(context).curTheme.text15,
+                              ),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(0.0),
                               child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                       ],
@@ -58,7 +61,7 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                         end: smallScreen(context) ? 30 : 40,
                         top: 10,
                       ),
-                      alignment: AlignmentDirectional(-1, 0),
+                      alignment: AlignmentDirectional.centerStart,
                       child: AutoSizeText(
                         AppLocalization.of(context)!.ackBackedUp,
                         maxLines: 4,
@@ -87,9 +90,9 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                     children: <Widget>[
                       // YES Button
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.yes.toUpperCase(), Dimens.BUTTON_TOP_DIMENS,
-                          instanceKey: Key("backup_confirm_button"), onPressed: () async {
-                        String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                          return new PinScreen(
+                          instanceKey: const Key("backup_confirm_button"), onPressed: () async {
+                        final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                          return PinScreen(
                             PinOverlayType.NEW_PIN,
                           );
                         }));
@@ -120,7 +123,7 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
   void _pinEnteredCallback(String pin) async {
     await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
     await sl.get<Vault>().writePin(pin);
-    PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+    final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
     StateContainer.of(context).requestSubscribe();
     Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
   }

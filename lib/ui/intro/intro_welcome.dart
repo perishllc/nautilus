@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -28,25 +29,38 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
           ),
           child: Column(
             children: <Widget>[
-              //A widget that holds welcome animation + paragraph
+              // A widget that holds welcome animation + paragraph
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     //Container for the animation
-                    Container(
-                      //Width/Height ratio for the animation is needed because BoxFit is not working as expected
+                    SizedBox(
+                      // Width/Height ratio for the animation is needed because BoxFit is not working as expected
                       width: double.infinity,
                       height: MediaQuery.of(context).size.width * 5 / 8,
-                      child: Center(
-                        child: /*FlareActor(
-                          "legacy_assets/welcome_animation.flr",
-                          animation: "main",
-                          fit: BoxFit.contain,
-                          color: StateContainer.of(context).curTheme.primary,
-                        )*/
-                            //load image:
-                            Image(image: AssetImage("assets/logo-square.png")),
+                      child: const Center(
+                        child: Image(image: AssetImage("assets/logo-square.png")),
+                      ),
+                    ),
+                    
+                    Container(
+                      color: Colors.white,
+                      // padding: EdgeInsets.zero,
+                      padding: EdgeInsets.only(top: 5, bottom: 5),
+                      width: double.infinity,
+                      child: TextLiquidFill(
+                        text: "NAUTILUS",
+                        waveColor: Colors.blueAccent,
+                        boxBackgroundColor: Colors.black,
+                        textStyle: const TextStyle(
+                          fontSize: 60.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        boxHeight: 100.0,
+                        loadDuration: const Duration(seconds: 3),
+                        waveDuration: const Duration(seconds: 3),
+                        loadUntil: 0.5,
                       ),
                     ),
                     //Container for the paragraph
@@ -70,7 +84,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                     children: <Widget>[
                       // New Wallet Button
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.newWallet, Dimens.BUTTON_TOP_DIMENS,
-                          instanceKey: Key("new_wallet_button"), onPressed: () {
+                          instanceKey: const Key("new_wallet_button"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_backup_safety');
                       }),
                     ],

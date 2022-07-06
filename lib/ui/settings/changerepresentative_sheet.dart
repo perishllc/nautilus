@@ -100,7 +100,7 @@ class AppChangeRepresentativeSheet {
   }
 
   bool _animationOpen = false;
-  late NinjaNode _rep;
+  NinjaNode _rep = NinjaNode(account: AppWallet.nautilusRepresentative);
 
   Widget _buildSingleRepresentative(NinjaNode rep, BuildContext context) {
     return Column(

@@ -1458,152 +1458,163 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       ),
       body: SafeArea(
         minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.045, bottom: MediaQuery.of(context).size.height * 0.035),
-        child: Column(
+        child: Row(
           children: <Widget>[
-            Expanded(
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: <Widget>[
-                  //Everything else
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      //Main Card
-                      _buildMainCard(context, _scaffoldKey),
-                      //Main Card End
-                      //Transactions Text
-                      Container(
-                        margin: const EdgeInsetsDirectional.fromSTEB(30.0, 20.0, 26.0, 0.0),
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              CaseChange.toUpperCase(AppLocalization.of(context)!.transactions, context),
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w100,
-                                color: StateContainer.of(context).curTheme.text,
+            SizedBox(
+              width: UIUtil.drawerWidth(context) - 100,
+              child: Drawer(
+                child: SettingsSheet(),
+              ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.5,
+              height: MediaQuery.of(context).size.height,
+              child: Expanded(
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: <Widget>[
+                    //Everything else
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        //Main Card
+                        _buildMainCard(context, _scaffoldKey),
+                        //Main Card End
+                        //Transactions Text
+                        Container(
+                          margin: const EdgeInsetsDirectional.fromSTEB(30.0, 20.0, 26.0, 0.0),
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                CaseChange.toUpperCase(AppLocalization.of(context)!.transactions, context),
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w100,
+                                  color: StateContainer.of(context).curTheme.text,
+                                ),
                               ),
+                            ],
+                          ),
+                        ), //Transactions Text End
+                        //Transactions List
+                        Expanded(
+                          child: Stack(
+                            children: <Widget>[
+                              // _getUnifiedListWidget(context),
+                              _getUnifiedListWidget(context),
+                              //List Top Gradient End
+                              Align(
+                                alignment: Alignment.topCenter,
+                                child: Container(
+                                  height: 10.0,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                      begin: const AlignmentDirectional(0.5, 1.0),
+                                      end: const AlignmentDirectional(0.5, -1.0),
+                                    ),
+                                  ),
+                                ),
+                              ), // List Top Gradient End
+                              //List Bottom Gradient
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  height: 30.0,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                      begin: const AlignmentDirectional(0.5, -1),
+                                      end: const AlignmentDirectional(0.5, 0.5),
+                                    ),
+                                  ),
+                                ),
+                              ), //List Bottom Gradient End
+                            ],
+                          ),
+                        ), //Transactions List End
+                        //Buttons background
+                        SizedBox(
+                          height: 55,
+                          width: MediaQuery.of(context).size.width,
+                        ), //Buttons background
+                      ],
+                    ),
+
+                    // Buttons
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
+                          ),
+                          height: 55,
+                          width: (MediaQuery.of(context).size.width - 42).abs() / 2,
+                          margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
+                          // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
+                          child: TextButton(
+                            key: const Key("home_receive_button"),
+                            style: TextButton.styleFrom(
+                              backgroundColor: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                              primary: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                              // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                              // splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                             ),
-                          ],
-                        ),
-                      ), //Transactions Text End
-                      //Transactions List
-                      Expanded(
-                        child: Stack(
-                          children: <Widget>[
-                            // _getUnifiedListWidget(context),
-                            _getUnifiedListWidget(context),
-                            //List Top Gradient End
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Container(
-                                height: 10.0,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
-                                    begin: const AlignmentDirectional(0.5, 1.0),
-                                    end: const AlignmentDirectional(0.5, -1.0),
-                                  ),
-                                ),
-                              ),
-                            ), // List Top Gradient End
-                            //List Bottom Gradient
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                height: 30.0,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
-                                    begin: const AlignmentDirectional(0.5, -1),
-                                    end: const AlignmentDirectional(0.5, 0.5),
-                                  ),
-                                ),
-                              ),
-                            ), //List Bottom Gradient End
-                          ],
-                        ),
-                      ), //Transactions List End
-                      //Buttons background
-                      SizedBox(
-                        height: 55,
-                        width: MediaQuery.of(context).size.width,
-                      ), //Buttons background
-                    ],
-                  ),
-                  // Buttons
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
-                        ),
-                        height: 55,
-                        width: (MediaQuery.of(context).size.width - 42).abs() / 2,
-                        margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
-                        // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
-                        child: TextButton(
-                          key: const Key("home_receive_button"),
-                          style: TextButton.styleFrom(
-                            backgroundColor: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                            primary: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                            // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                            // splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                            child: AutoSizeText(
+                              AppLocalization.of(context)!.receive,
+                              textAlign: TextAlign.center,
+                              style: AppStyles.textStyleButtonPrimary(context),
+                              maxLines: 1,
+                              stepGranularity: 0.5,
+                            ),
+                            onPressed: () {
+                              if (receive == null) {
+                                return;
+                              }
+                              Sheets.showAppHeightNineSheet(context: context, widget: receive!);
+                            },
                           ),
-                          child: AutoSizeText(
-                            AppLocalization.of(context)!.receive,
-                            textAlign: TextAlign.center,
-                            style: AppStyles.textStyleButtonPrimary(context),
-                            maxLines: 1,
-                            stepGranularity: 0.5,
-                          ),
-                          onPressed: () {
-                            if (receive == null) {
-                              return;
-                            }
-                            Sheets.showAppHeightNineSheet(context: context, widget: receive!);
-                          },
                         ),
-                      ),
-                      // Container(
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(5),
-                      //     boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
-                      //   ),
-                      //   height: 55,
-                      //   width: (MediaQuery.of(context).size.width - 42) / 3,
-                      //   // margin: EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
-                      //   margin: EdgeInsetsDirectional.only(start: 0, top: 0.0, end: 0.0),
-                      //   child: FlatButton(
-                      //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                      //     color: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
-                      //     child: AutoSizeText(
-                      //       AppLocalization.of(context).request,
-                      //       textAlign: TextAlign.center,
-                      //       style: AppStyles.textStyleButtonPrimary(context),
-                      //       maxLines: 1,
-                      //       stepGranularity: 0.5,
-                      //     ),
-                      //     onPressed: () {
-                      //       if (request == null) {
-                      //         return;
-                      //       }
-                      //       Sheets.showAppHeightEightSheet(context: context, widget: request);
-                      //     },
-                      //     highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                      //     splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                      //   ),
-                      // ),
-                      AppPopupButton(),
-                    ],
-                  ),
-                ],
+                        // Container(
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(5),
+                        //     boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
+                        //   ),
+                        //   height: 55,
+                        //   width: (MediaQuery.of(context).size.width - 42) / 3,
+                        //   // margin: EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
+                        //   margin: EdgeInsetsDirectional.only(start: 0, top: 0.0, end: 0.0),
+                        //   child: FlatButton(
+                        //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                        //     color: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
+                        //     child: AutoSizeText(
+                        //       AppLocalization.of(context).request,
+                        //       textAlign: TextAlign.center,
+                        //       style: AppStyles.textStyleButtonPrimary(context),
+                        //       maxLines: 1,
+                        //       stepGranularity: 0.5,
+                        //     ),
+                        //     onPressed: () {
+                        //       if (request == null) {
+                        //         return;
+                        //       }
+                        //       Sheets.showAppHeightEightSheet(context: context, widget: request);
+                        //     },
+                        //     highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                        //     splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                        //   ),
+                        // ),
+                        AppPopupButton(),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -1774,43 +1785,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     );
   }
 
-  // Welcome Card
-  TextSpan _getPaymentExampleHeaderSpan(BuildContext context) {
-    final String workingStr = AppLocalization.of(context)!.examplePaymentIntro;
-
-    if (!workingStr.contains("NANO")) {
-      return TextSpan(
-        text: workingStr,
-        style: AppStyles.textStyleTransactionWelcome(context),
-      );
-    }
-    // Colorize NANO
-    final List<String> splitStr = workingStr.split("NANO");
-    if (splitStr.length != 2) {
-      return TextSpan(
-        text: workingStr,
-        style: AppStyles.textStyleTransactionWelcome(context),
-      );
-    }
-    return TextSpan(
-      text: '',
-      children: [
-        TextSpan(
-          text: splitStr[0],
-          style: AppStyles.textStyleTransactionWelcome(context),
-        ),
-        TextSpan(
-          text: "NANO",
-          style: AppStyles.textStyleTransactionWelcomePrimary(context),
-        ),
-        TextSpan(
-          text: splitStr[1],
-          style: AppStyles.textStyleTransactionWelcome(context),
-        ),
-      ],
-    );
-  }
-
   Widget _buildWelcomeTransactionCard(BuildContext context) {
     return Container(
       margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
@@ -1837,48 +1811,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: _getExampleHeaderSpan(context),
-                ),
-              ),
-            ),
-            Container(
-              width: 7.0,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
-                color: StateContainer.of(context).curTheme.primary,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  } // Welcome Card End
-
-  Widget _buildWelcomePaymentCard(BuildContext context) {
-    return Container(
-      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
-      decoration: BoxDecoration(
-        color: StateContainer.of(context).curTheme.backgroundDark,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              width: 7.0,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
-                color: StateContainer.of(context).curTheme.primary,
-                boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
-              ),
-            ),
-            Flexible(
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 15.0),
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: _getPaymentExampleHeaderSpan(context),
                 ),
               ),
             ),
@@ -2161,7 +2093,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   //Main Card
-  Widget _buildMainCard(BuildContext context, _scaffoldKey) {
+  Widget _buildMainCard(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
     return Container(
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
@@ -2194,7 +2126,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                     // splashColor: StateContainer.of(context).curTheme.text15,
                   ),
                   onPressed: () {
-                    _scaffoldKey.currentState.openDrawer();
+                    scaffoldKey.currentState?.openDrawer();
                   },
                   child: Stack(
                     children: [
@@ -3455,7 +3387,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         onRefresh: _refresh,
         isRefreshing: _isRefreshing,
         child: AnimatedList(
-          physics: BouncingScrollPhysics(), // iOS
+          // physics: BouncingScrollPhysics(), // iOS
           controller: _scrollController,
           key: _unifiedListKeyMap[StateContainer.of(context).wallet!.address!],
           padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
@@ -3487,7 +3419,7 @@ class _SizeTransitionNoClip extends AnimatedWidget {
 }
 
 class PaymentDetailsSheet extends StatefulWidget {
-  PaymentDetailsSheet({this.txDetails}) : super();
+  const PaymentDetailsSheet({this.txDetails}) : super();
   final TXData? txDetails;
 
   @override

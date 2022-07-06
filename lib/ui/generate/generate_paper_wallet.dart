@@ -32,7 +32,7 @@ class GeneratePaperWalletScreen extends StatefulWidget {
 }
 
 class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String? paper_wallet_seed;
   String? paper_wallet_account;
 

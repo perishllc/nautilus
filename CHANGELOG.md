@@ -1,4 +1,11 @@
-# v0.4.0 - [2022-07-06]
+# v0.4.1 - [2022-07-XX]
+#### Added
+#### Changed
+- changed scroll physics back to what they were before (on android only, in the main list view)
+#### Fixed
+- Rendering bug on the accounts sheet page displaying currency symbols before loading balance
+- Changing rep to your current rep caused infinite loading animation
+## v0.4.0 - [2022-07-06]
 #### Added
 - Ability to resend messages on message failure
 #### Changed

@@ -15,6 +15,9 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:share_plus/share_plus.dart';
 
 class GenerateCompleteSheet extends StatefulWidget {
+  const GenerateCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.link = "", this.walletSeed = "", this.memo = ""})
+      : super();
+
   final String? amountRaw;
   final String? destination;
   final String? contactName;
@@ -22,8 +25,6 @@ class GenerateCompleteSheet extends StatefulWidget {
   final String link;
   final String walletSeed;
   final String memo;
-
-  GenerateCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.link = "", this.walletSeed = "", this.memo = ""}) : super();
 
   _GenerateCompleteSheetState createState() => _GenerateCompleteSheetState();
 }
@@ -141,7 +142,8 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                       ),
                       // Container for the Amount Text
                       Container(
-                        margin: EdgeInsets.only(top: 10.0, bottom: 10, left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                        margin: EdgeInsets.only(
+                            top: 10.0, bottom: 10, left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                         width: double.infinity,
                         decoration: BoxDecoration(

@@ -61,35 +61,41 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                             margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
                             height: 50,
                             width: 50,
-                            child: FlatButton(
-                                highlightColor: StateContainer.of(context).curTheme.text15,
-                                splashColor: StateContainer.of(context).curTheme.text15,
+                            child: TextButton(
+                                style: TextButton.styleFrom(
+                                  primary: StateContainer.of(context).curTheme.text15,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                  padding: EdgeInsets.zero,
+                                  // highlightColor: StateContainer.of(context).curTheme.text15,
+                                  // splashColor: StateContainer.of(context).curTheme.text15,
+                                ),
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                                padding: EdgeInsets.all(0.0),
                                 child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                           ),
                           // Switch between Secret Phrase and Seed
                           Container(
                             margin: EdgeInsetsDirectional.only(end: smallScreen(context) ? 15 : 20),
-                            child: FlatButton(
-                              highlightColor: StateContainer.of(context).curTheme.text15,
-                              splashColor: StateContainer.of(context).curTheme.text15,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                primary: StateContainer.of(context).curTheme.text15,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                                padding: const EdgeInsetsDirectional.only(top: 6, bottom: 6, start: 12, end: 12),
+                                // highlightColor: StateContainer.of(context).curTheme.text15,
+                                // splashColor: StateContainer.of(context).curTheme.text15,
+                              ),
                               onPressed: () {
                                 setState(() {
                                   _seedMode = !_seedMode;
                                 });
                               },
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                              padding: EdgeInsetsDirectional.only(top: 6, bottom: 6, start: 12, end: 12),
                               child: Row(
                                 children: [
                                   Container(
-                                    margin: EdgeInsetsDirectional.only(end: 8),
+                                    margin: const EdgeInsetsDirectional.only(end: 8),
                                     child: Text(
                                       _seedMode ? AppLocalization.of(context)!.secretPhrase : AppLocalization.of(context)!.seed,
                                       style: TextStyle(
@@ -114,7 +120,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                           end: smallScreen(context) ? 30 : 40,
                           top: 10,
                         ),
-                        alignment: AlignmentDirectional(-1, 0),
+                        alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
                           _seedMode ? AppLocalization.of(context)!.importSeed : AppLocalization.of(context)!.importSecretPhrase,
                           style: AppStyles.textStyleHeaderColored(context),
@@ -135,224 +141,227 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                       ),
                       Expanded(
                           child: KeyboardAvoider(
-                              duration: Duration(milliseconds: 0),
+                              duration: Duration.zero,
                               autoScroll: true,
                               focusPadding: 40,
                               child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
                                 // The text field for the seed
-                                if (_seedMode) AppTextField(
-                                        leftMargin: smallScreen(context) ? 30 : 40,
-                                        rightMargin: smallScreen(context) ? 30 : 40,
-                                        topMargin: 20,
-                                        focusNode: _seedInputFocusNode,
-                                        controller: _seedInputController,
-                                        inputFormatters: [LengthLimitingTextInputFormatter(64), UpperCaseTextFormatter()],
-                                        textInputAction: TextInputAction.done,
-                                        maxLines: null,
-                                        autocorrect: false,
-                                        prefixButton: TextFieldButton(
-                                          icon: AppIcons.scan,
-                                          onPressed: () {
-                                            if (NanoSeeds.isValidSeed(_seedInputController.text)) {
-                                              return;
-                                            }
-                                            // Scan QR for seed
-                                            UIUtil.cancelLockEvent();
-                                            BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme TODO:*/).then((res) {
-                                              final result = res.rawContent;
-                                              if (NanoSeeds.isValidSeed(result)) {
-                                                _seedInputController.text = result;
-                                                setState(() {
-                                                  _seedIsValid = true;
-                                                });
-                                              } else if (NanoMnemomics.validateMnemonic(result.split(' '))) {
-                                                _mnemonicController.text = result;
-                                                _mnemonicFocusNode.unfocus();
-                                                _seedInputFocusNode.unfocus();
-                                                setState(() {
-                                                  _seedMode = false;
-                                                  _mnemonicError = null;
-                                                  _mnemonicIsValid = true;
-                                                });
-                                              } else {
-                                                UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidSeed, context);
-                                              }
-                                            });
-                                          },
-                                        ),
-                                        fadePrefixOnCondition: true,
-                                        prefixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController.text),
-                                        suffixButton: TextFieldButton(
-                                          icon: AppIcons.paste,
-                                          onPressed: () {
-                                            if (NanoSeeds.isValidSeed(_seedInputController.text)) {
-                                              return;
-                                            }
-                                            Clipboard.getData("text/plain").then((ClipboardData? data) {
-                                              if (data == null || data.text == null) {
-                                                return;
-                                              } else if (NanoSeeds.isValidSeed(data.text!)) {
-                                                _seedInputController.text = data.text!;
-                                                setState(() {
-                                                  _seedIsValid = true;
-                                                });
-                                              } else if (NanoMnemomics.validateMnemonic(data.text!.split(' '))) {
-                                                _mnemonicController.text = data.text!;
-                                                _mnemonicFocusNode.unfocus();
-                                                _seedInputFocusNode.unfocus();
-                                                setState(() {
-                                                  _seedMode = false;
-                                                  _mnemonicError = null;
-                                                  _mnemonicIsValid = true;
-                                                });
-                                              }
-                                            });
-                                          },
-                                        ),
-                                        fadeSuffixOnCondition: true,
-                                        suffixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController.text),
-                                        keyboardType: TextInputType.text,
-                                        style: _seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
-                                        onChanged: (String text) {
-                                          // Always reset the error message to be less annoying
-                                          setState(() {
-                                            _showSeedError = false;
-                                          });
-                                          // If valid seed, clear focus/close keyboard
-                                          if (NanoSeeds.isValidSeed(text)) {
-                                            _seedInputFocusNode.unfocus();
-                                            setState(() {
-                                              _seedIsValid = true;
-                                            });
-                                          } else {
-                                            setState(() {
-                                              _seedIsValid = false;
-                                            });
+                                if (_seedMode)
+                                  AppTextField(
+                                      leftMargin: smallScreen(context) ? 30 : 40,
+                                      rightMargin: smallScreen(context) ? 30 : 40,
+                                      topMargin: 20,
+                                      focusNode: _seedInputFocusNode,
+                                      controller: _seedInputController,
+                                      inputFormatters: [LengthLimitingTextInputFormatter(64), UpperCaseTextFormatter()],
+                                      textInputAction: TextInputAction.done,
+                                      maxLines: null,
+                                      autocorrect: false,
+                                      prefixButton: TextFieldButton(
+                                        icon: AppIcons.scan,
+                                        onPressed: () {
+                                          if (NanoSeeds.isValidSeed(_seedInputController.text)) {
+                                            return;
                                           }
-                                        }) else AppTextField(
-                                        leftMargin: smallScreen(context) ? 30 : 40,
-                                        rightMargin: smallScreen(context) ? 30 : 40,
-                                        topMargin: 20,
-                                        focusNode: _mnemonicFocusNode,
-                                        controller: _mnemonicController,
-                                        inputFormatters: [
-                                          SingleSpaceInputFormatter(),
-                                          LowerCaseTextFormatter(),
-                                          FilteringTextInputFormatter(RegExp("[a-zA-Z ]"), allow: true), // bug fix for debug mode when importing a seed
-                                        ],
-                                        textInputAction: TextInputAction.done,
-                                        maxLines: null,
-                                        autocorrect: false,
-                                        prefixButton: TextFieldButton(
-                                          icon: AppIcons.scan,
-                                          onPressed: () {
-                                            if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
-                                              return;
-                                            }
-                                            // Scan QR for mnemonic
-                                            UIUtil.cancelLockEvent();
-                                            BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((res) {
-                                              final result = res.rawContent;
-                                              if (NanoMnemomics.validateMnemonic(result.split(' '))) {
-                                                _mnemonicController.text = result;
-                                                setState(() {
-                                                  _mnemonicIsValid = true;
-                                                });
-                                              } else if (NanoSeeds.isValidSeed(result)) {
-                                                _seedInputController.text = result;
-                                                _mnemonicFocusNode.unfocus();
-                                                _seedInputFocusNode.unfocus();
-                                                setState(() {
-                                                  _seedMode = true;
-                                                  _seedIsValid = true;
-                                                  _showSeedError = false;
-                                                });
-                                              } else {
-                                                UIUtil.showSnackbar(AppLocalization.of(context)!.qrMnemonicError, context);
-                                              }
-                                            });
-                                          },
-                                        ),
-                                        fadePrefixOnCondition: true,
-                                        prefixShowFirstCondition: !NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' ')),
-                                        suffixButton: TextFieldButton(
-                                          icon: AppIcons.paste,
-                                          onPressed: () {
-                                            if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
-                                              return;
-                                            }
-                                            Clipboard.getData("text/plain").then((ClipboardData? data) {
-                                              if (data == null || data.text == null) {
-                                                return;
-                                              } else if (NanoMnemomics.validateMnemonic(data.text!.split(' '))) {
-                                                _mnemonicController.text = data.text!;
-                                                setState(() {
-                                                  _mnemonicIsValid = true;
-                                                });
-                                              } else if (NanoSeeds.isValidSeed(data.text!)) {
-                                                _seedInputController.text = data.text!;
-                                                _mnemonicFocusNode.unfocus();
-                                                _seedInputFocusNode.unfocus();
-                                                setState(() {
-                                                  _seedMode = true;
-                                                  _seedIsValid = true;
-                                                  _showSeedError = false;
-                                                });
-                                              }
-                                            });
-                                          },
-                                        ),
-                                        fadeSuffixOnCondition: true,
-                                        suffixShowFirstCondition: !NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' ')),
-                                        keyboardType: TextInputType.text,
-                                        style: _mnemonicIsValid ? AppStyles.textStyleParagraphPrimary(context) : AppStyles.textStyleParagraph(context),
-                                        onChanged: (String text) {
-                                          if (text.length < 3) {
-                                            setState(() {
-                                              _mnemonicError = null;
-                                            });
-                                          } else if (_mnemonicError != null) {
-                                            if (!text.contains(_mnemonicError!.split(' ')[0])) {
+                                          // Scan QR for seed
+                                          UIUtil.cancelLockEvent();
+                                          BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme TODO:*/).then((res) {
+                                            final result = res.rawContent;
+                                            if (NanoSeeds.isValidSeed(result)) {
+                                              _seedInputController.text = result;
                                               setState(() {
-                                                _mnemonicError = null;
+                                                _seedIsValid = true;
                                               });
+                                            } else if (NanoMnemomics.validateMnemonic(result.split(' '))) {
+                                              _mnemonicController.text = result;
+                                              _mnemonicFocusNode.unfocus();
+                                              _seedInputFocusNode.unfocus();
+                                              setState(() {
+                                                _seedMode = false;
+                                                _mnemonicError = null;
+                                                _mnemonicIsValid = true;
+                                              });
+                                            } else {
+                                              UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidSeed, context);
                                             }
-                                          }
-                                          // If valid mnemonic, clear focus/close keyboard
-                                          if (NanoMnemomics.validateMnemonic(text.split(' '))) {
-                                            _mnemonicFocusNode.unfocus();
-                                            setState(() {
-                                              _mnemonicIsValid = true;
-                                              _mnemonicError = null;
-                                            });
-                                          } else {
-                                            setState(() {
-                                              _mnemonicIsValid = false;
-                                            });
-                                            // Validate each mnemonic word
-                                            if (text.endsWith(" ") && text.length > 1) {
-                                              int? lastSpaceIndex = text.substring(0, text.length - 1).lastIndexOf(" ");
-                                              if (lastSpaceIndex == -1) {
-                                                lastSpaceIndex = 0;
-                                              } else {
-                                                lastSpaceIndex = lastSpaceIndex + 1;
-                                              }
-                                              final String lastWord = text.substring(lastSpaceIndex, text.length - 1);
-                                              if (!NanoMnemomics.isValidWord(lastWord)) {
-                                                setState(() {
-                                                  _mnemonicIsValid = false;
-                                                  setState(() {
-                                                    _mnemonicError = AppLocalization.of(context)!.mnemonicInvalidWord.replaceAll("%1", lastWord);
-                                                  });
-                                                });
-                                              }
-                                            }
-                                          }
+                                          });
                                         },
                                       ),
+                                      fadePrefixOnCondition: true,
+                                      prefixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController.text),
+                                      suffixButton: TextFieldButton(
+                                        icon: AppIcons.paste,
+                                        onPressed: () {
+                                          if (NanoSeeds.isValidSeed(_seedInputController.text)) {
+                                            return;
+                                          }
+                                          Clipboard.getData("text/plain").then((ClipboardData? data) {
+                                            if (data == null || data.text == null) {
+                                              return;
+                                            } else if (NanoSeeds.isValidSeed(data.text!)) {
+                                              _seedInputController.text = data.text!;
+                                              setState(() {
+                                                _seedIsValid = true;
+                                              });
+                                            } else if (NanoMnemomics.validateMnemonic(data.text!.split(' '))) {
+                                              _mnemonicController.text = data.text!;
+                                              _mnemonicFocusNode.unfocus();
+                                              _seedInputFocusNode.unfocus();
+                                              setState(() {
+                                                _seedMode = false;
+                                                _mnemonicError = null;
+                                                _mnemonicIsValid = true;
+                                              });
+                                            }
+                                          });
+                                        },
+                                      ),
+                                      fadeSuffixOnCondition: true,
+                                      suffixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController.text),
+                                      keyboardType: TextInputType.text,
+                                      style: _seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
+                                      onChanged: (String text) {
+                                        // Always reset the error message to be less annoying
+                                        setState(() {
+                                          _showSeedError = false;
+                                        });
+                                        // If valid seed, clear focus/close keyboard
+                                        if (NanoSeeds.isValidSeed(text)) {
+                                          _seedInputFocusNode.unfocus();
+                                          setState(() {
+                                            _seedIsValid = true;
+                                          });
+                                        } else {
+                                          setState(() {
+                                            _seedIsValid = false;
+                                          });
+                                        }
+                                      })
+                                else
+                                  AppTextField(
+                                    leftMargin: smallScreen(context) ? 30 : 40,
+                                    rightMargin: smallScreen(context) ? 30 : 40,
+                                    topMargin: 20,
+                                    focusNode: _mnemonicFocusNode,
+                                    controller: _mnemonicController,
+                                    inputFormatters: [
+                                      SingleSpaceInputFormatter(),
+                                      LowerCaseTextFormatter(),
+                                      FilteringTextInputFormatter(RegExp("[a-zA-Z ]"), allow: true), // bug fix for debug mode when importing a seed
+                                    ],
+                                    textInputAction: TextInputAction.done,
+                                    maxLines: null,
+                                    autocorrect: false,
+                                    prefixButton: TextFieldButton(
+                                      icon: AppIcons.scan,
+                                      onPressed: () {
+                                        if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
+                                          return;
+                                        }
+                                        // Scan QR for mnemonic
+                                        UIUtil.cancelLockEvent();
+                                        BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((res) {
+                                          final result = res.rawContent;
+                                          if (NanoMnemomics.validateMnemonic(result.split(' '))) {
+                                            _mnemonicController.text = result;
+                                            setState(() {
+                                              _mnemonicIsValid = true;
+                                            });
+                                          } else if (NanoSeeds.isValidSeed(result)) {
+                                            _seedInputController.text = result;
+                                            _mnemonicFocusNode.unfocus();
+                                            _seedInputFocusNode.unfocus();
+                                            setState(() {
+                                              _seedMode = true;
+                                              _seedIsValid = true;
+                                              _showSeedError = false;
+                                            });
+                                          } else {
+                                            UIUtil.showSnackbar(AppLocalization.of(context)!.qrMnemonicError, context);
+                                          }
+                                        });
+                                      },
+                                    ),
+                                    fadePrefixOnCondition: true,
+                                    prefixShowFirstCondition: !NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' ')),
+                                    suffixButton: TextFieldButton(
+                                      icon: AppIcons.paste,
+                                      onPressed: () {
+                                        if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
+                                          return;
+                                        }
+                                        Clipboard.getData("text/plain").then((ClipboardData? data) {
+                                          if (data == null || data.text == null) {
+                                            return;
+                                          } else if (NanoMnemomics.validateMnemonic(data.text!.split(' '))) {
+                                            _mnemonicController.text = data.text!;
+                                            setState(() {
+                                              _mnemonicIsValid = true;
+                                            });
+                                          } else if (NanoSeeds.isValidSeed(data.text!)) {
+                                            _seedInputController.text = data.text!;
+                                            _mnemonicFocusNode.unfocus();
+                                            _seedInputFocusNode.unfocus();
+                                            setState(() {
+                                              _seedMode = true;
+                                              _seedIsValid = true;
+                                              _showSeedError = false;
+                                            });
+                                          }
+                                        });
+                                      },
+                                    ),
+                                    fadeSuffixOnCondition: true,
+                                    suffixShowFirstCondition: !NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' ')),
+                                    keyboardType: TextInputType.text,
+                                    style: _mnemonicIsValid ? AppStyles.textStyleParagraphPrimary(context) : AppStyles.textStyleParagraph(context),
+                                    onChanged: (String text) {
+                                      if (text.length < 3) {
+                                        setState(() {
+                                          _mnemonicError = null;
+                                        });
+                                      } else if (_mnemonicError != null) {
+                                        if (!text.contains(_mnemonicError!.split(' ')[0])) {
+                                          setState(() {
+                                            _mnemonicError = null;
+                                          });
+                                        }
+                                      }
+                                      // If valid mnemonic, clear focus/close keyboard
+                                      if (NanoMnemomics.validateMnemonic(text.split(' '))) {
+                                        _mnemonicFocusNode.unfocus();
+                                        setState(() {
+                                          _mnemonicIsValid = true;
+                                          _mnemonicError = null;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          _mnemonicIsValid = false;
+                                        });
+                                        // Validate each mnemonic word
+                                        if (text.endsWith(" ") && text.length > 1) {
+                                          int? lastSpaceIndex = text.substring(0, text.length - 1).lastIndexOf(" ");
+                                          if (lastSpaceIndex == -1) {
+                                            lastSpaceIndex = 0;
+                                          } else {
+                                            lastSpaceIndex = lastSpaceIndex + 1;
+                                          }
+                                          final String lastWord = text.substring(lastSpaceIndex, text.length - 1);
+                                          if (!NanoMnemomics.isValidWord(lastWord)) {
+                                            setState(() {
+                                              _mnemonicIsValid = false;
+                                              setState(() {
+                                                _mnemonicError = AppLocalization.of(context)!.mnemonicInvalidWord.replaceAll("%1", lastWord);
+                                              });
+                                            });
+                                          }
+                                        }
+                                      }
+                                    },
+                                  ),
                                 // "Invalid Seed" text that appears if the input is invalid
                                 Container(
-                                  margin: EdgeInsets.only(top: 5),
+                                  margin: const EdgeInsets.only(top: 5),
                                   child: Text(
                                       !_seedMode
                                           ? _mnemonicError == null
@@ -383,12 +392,17 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsetsDirectional.only(end: 30),
+                      margin: const EdgeInsetsDirectional.only(end: 30),
                       height: 50,
                       width: 50,
-                      child: FlatButton(
-                          highlightColor: StateContainer.of(context).curTheme.primary15,
-                          splashColor: StateContainer.of(context).curTheme.primary30,
+                      child: TextButton(
+                          style: TextButton.styleFrom(
+                            primary: StateContainer.of(context).curTheme.primary30,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                            padding: EdgeInsets.zero,
+                            // highlightColor: StateContainer.of(context).curTheme.primary15,
+                            // splashColor: StateContainer.of(context).curTheme.primary30,
+                          ),
                           onPressed: () {
                             if (_seedMode) {
                               _seedInputFocusNode.unfocus();
@@ -431,8 +445,6 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                               }
                             }
                           },
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                          padding: EdgeInsets.all(0.0),
                           child: Icon(AppIcons.forward, color: StateContainer.of(context).curTheme.primary, size: 50)),
                     ),
                   ],

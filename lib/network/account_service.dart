@@ -140,25 +140,23 @@ class AccountService {
     }
     _isConnecting = true;
 
-    // check if the nautilus servers are available
-    Socket.connect(_BASE_SERVER_ADDRESS, 80, timeout: const Duration(seconds: 3)).then((Socket socket) {
-      log.d("Nautilus backend is up");
-      fallbackConnected = false;
-      socket.destroy();
-    }).catchError((error) {
-      log.d("Nautilus backend is down: $error");
-      // switch to fallback servers:
-      // _SERVER_ADDRESS_WS = _FALLBACK_SERVER_ADDRESS_WS;
-      // _SERVER_ADDRESS_HTTP = _FALLBACK_SERVER_ADDRESS_HTTP;
-      // _SERVER_ADDRESS_ALERTS = _FALLBACK_SERVER_ADDRESS_ALERTS;
-
-      // FALLBACK CONNECTION:
-      // _HTTP_PROTO = "http://";
-      // _WS_PROTO = "ws://";
-      // _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
-
-      // fallbackConnected = true;
-    });
+    // // check if the nautilus servers are available
+    // Socket.connect(_BASE_SERVER_ADDRESS, 80, timeout: const Duration(seconds: 3)).then((Socket socket) {
+    //   log.d("Nautilus backend is up");
+    //   fallbackConnected = false;
+    //   socket.destroy();
+    // }).catchError((error) {
+    //   log.d("Nautilus backend is down: $error");
+    //   // switch to fallback servers:
+    //   // _SERVER_ADDRESS_WS = _FALLBACK_SERVER_ADDRESS_WS;
+    //   // _SERVER_ADDRESS_HTTP = _FALLBACK_SERVER_ADDRESS_HTTP;
+    //   // _SERVER_ADDRESS_ALERTS = _FALLBACK_SERVER_ADDRESS_ALERTS;
+    //   // FALLBACK CONNECTION:
+    //   // _HTTP_PROTO = "http://";
+    //   // _WS_PROTO = "ws://";
+    //   // _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
+    //   // fallbackConnected = true;
+    // });
 
     // DEV SERVER:
     // _HTTP_PROTO = "http://";

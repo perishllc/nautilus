@@ -148,11 +148,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                       ),
                     ),
                     // Mnemonic word list
-                    _seed != null && _mnemonic != null
-                        ? _showMnemonic
-                            ? MnemonicDisplay(wordList: _mnemonic)
-                            : PlainSeedDisplay(seed: _seed)
-                        : Text('')
+                    if (_seed != null && _mnemonic != null) _showMnemonic ? MnemonicDisplay(wordList: _mnemonic) : PlainSeedDisplay(seed: _seed) else Text('')
                   ],
                 ),
               ),
@@ -165,13 +161,12 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                     AppButtonType.PRIMARY,
                     AppLocalization.of(context)!.backupConfirmButton,
                     Dimens.BUTTON_BOTTOM_DIMENS,
-                    instanceKey: Key("backed_it_up_button"),
+                    instanceKey: const Key("backed_it_up_button"),
                     onPressed: () {
                       // Update wallet
                       sl.get<DBHelper>().dropAccounts().then((_) {
                         StateContainer.of(context).getSeed().then((String seed) {
                           NanoUtil().loginAccount(seed, context).then((_) {
-                            // StateContainer.of(context).requestUpdate();// todo: is this necessary?
                             Navigator.of(context).pushNamed('/intro_backup_confirm');
                           });
                         });

@@ -23,7 +23,7 @@ class IntroPasswordOnLaunch extends StatefulWidget {
 }
 
 class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,7 +112,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                           await sl.get<Vault>().setSeed(widget.seed);
                           await sl.get<DBHelper>().dropAccounts();
                           await NanoUtil().loginAccount(widget.seed, context);
-                          StateContainer.of(context).requestUpdate();
+                          // StateContainer.of(context).requestUpdate();
                           String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                             return PinScreen(
                               PinOverlayType.NEW_PIN,
@@ -126,7 +126,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                             // Update wallet
                             StateContainer.of(context).getSeed().then((String seed) {
                               NanoUtil().loginAccount(seed, context).then((_) {
-                                StateContainer.of(context).requestUpdate();
+                                // StateContainer.of(context).requestUpdate();
                                 Navigator.of(context).pushNamed('/intro_backup_safety');
                               });
                             });
