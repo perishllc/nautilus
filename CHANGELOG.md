@@ -1,5 +1,6 @@
 # v0.4.1 - [2022-07-11]
 #### Added
+- New intro page animation!
 - Tablet mode! The settings drawer is now permanently open devices that are wide enough to display it
 #### Changed
 - Updates to the gift card completion screen, to make it clearer that the message section is editable

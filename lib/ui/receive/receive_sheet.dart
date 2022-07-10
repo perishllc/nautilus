@@ -229,20 +229,22 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                     padding: const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
                     child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
                       final double availableWidth = constraints.maxWidth;
-                      final double availableHeight = (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
-                      final double widthDivideFactor = 1.3;
+                      final double availableHeight =
+                          (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
+                      const double widthDivideFactor = 1.3;
                       final double computedMaxSize = Math.min(availableWidth / widthDivideFactor, availableHeight);
                       return Center(
                         child: Stack(
                           children: <Widget>[
-                            if (_showShareCard!) Container(
-                                    child: AppShareCard(
-                                      shareCardKey,
-                                      SvgPicture.asset('legacy_assets/QR.svg'),
-                                      SvgPicture.asset('legacy_assets/sharecard_logo.svg'),
-                                    ),
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
-                                  ),
+                            // if (_showShareCard!)
+                            //   Container(
+                            //     alignment: AlignmentDirectional.center,
+                            //     child: AppShareCard(
+                            //       shareCardKey,
+                            //       SvgPicture.asset('legacy_assets/QR.svg'),
+                            //       SvgPicture.asset('legacy_assets/sharecard_logo.svg'),
+                            //     ),
+                            //   ),
                             // This is for hiding the share card
                             Center(
                               child: Container(
@@ -252,13 +254,13 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                               ),
                             ),
                             // Background/border part the QR
-                            Center(
-                              child: Container(
-                                width: computedMaxSize / 1.07,
-                                height: computedMaxSize / 1.07,
-                                child: SvgPicture.asset('legacy_assets/QR.svg'),
-                              ),
-                            ),
+                            // Center(
+                            //   child: SizedBox(
+                            //     width: computedMaxSize / 1.07,
+                            //     height: computedMaxSize / 1.07,
+                            //     child: SvgPicture.asset('legacy_assets/QR.svg'),
+                            //   ),
+                            // ),
                             // Actual QR part of the QR
                             Center(
                               child: Container(
@@ -266,7 +268,6 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                 padding: EdgeInsets.all(computedMaxSize / 51),
                                 height: computedMaxSize / 1.53,
                                 width: computedMaxSize / 1.53,
-                                // child: widget.qrWidget,
                                 child: qrWidget,
                               ),
                             ),
@@ -303,7 +304,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                               ),
                             ),
                             Center(
-                              child: Container(
+                              child: SizedBox(
                                 height: computedMaxSize / 8,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -493,7 +494,6 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
   }
 
   void paintQrCode({String? address, String? amount}) {
-
     late String data;
     if (isNotEmpty(amount)) {
       data = "nano:" + address! + '?amount:' + amount!;
@@ -531,8 +531,11 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       inputFormatters: _rawAmount == null
           ? [
               LengthLimitingTextInputFormatter(13),
-              if (_localCurrencyMode) CurrencyFormatter(
-                      decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP, maxDecimalDigits: 2) else CurrencyFormatter(maxDecimalDigits: NumberUtil.maxDecimalDigits),
+              if (_localCurrencyMode)
+                CurrencyFormatter(
+                    decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP, maxDecimalDigits: 2)
+              else
+                CurrencyFormatter(maxDecimalDigits: NumberUtil.maxDecimalDigits),
               LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
             ]
           : [LengthLimitingTextInputFormatter(13)],

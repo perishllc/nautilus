@@ -63,7 +63,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
           children: <Widget>[
             //A container for the header
             Container(
-              margin: EdgeInsets.only(top: 30.0, left: 70, right: 70),
+              margin: const EdgeInsets.only(top: 30.0, left: 70, right: 70),
               child: AutoSizeText(
                 CaseChange.toUpperCase(AppLocalization.of(context)!.transferHeader, context),
                 style: AppStyles.textStyleHeader(context),
@@ -91,7 +91,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                     // The container for the seed
                     Expanded(
                       child: KeyboardAvoider(
-                          duration: Duration(milliseconds: 0),
+                          duration: const Duration(milliseconds: 0),
                           autoScroll: true,
                           focusPadding: 40,
                           child: Column(children: <Widget>[
@@ -107,7 +107,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                               suffixButton: TextFieldButton(
                                 icon: AppIcons.paste,
                                 onPressed: () async {
-                                  String? data = await UserDataUtil.getClipboardText(DataType.SEED);
+                                  final String? data = await UserDataUtil.getClipboardText(DataType.SEED);
                                   if (data != null) {
                                     if (mounted) {
                                       _seedInputController!.text = data;
@@ -148,7 +148,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                             ),
                             // "Invalid Seed" text that appears if the input is invalid
                             Container(
-                              margin: EdgeInsets.only(top: 5),
+                              margin: const EdgeInsets.only(top: 5),
                               child: Text(AppLocalization.of(context)!.seedInvalid,
                                   style: TextStyle(
                                     fontSize: 14.0,
@@ -164,42 +164,41 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
               ),
             ),
 
-            (quickSeed != null
-                ? Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.13, maxWidth: MediaQuery.of(context).size.width * 0.6),
-                          child: Stack(
-                            children: <Widget>[
-                              Center(
-                                child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_paperwalletonly.svg',
-                                    color: StateContainer.of(context).curTheme.text45, width: MediaQuery.of(context).size.width),
-                              ),
-                              Center(
-                                child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_nautiluswalletonly.svg',
-                                    color: StateContainer.of(context).curTheme.primary, width: MediaQuery.of(context).size.width),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          alignment: AlignmentDirectional(-1, 0),
-                          margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
-                          child: AutoSizeText(
-                            AppLocalization.of(context)!.transferIntroShort,
-                            style: AppStyles.textStyleParagraph(context),
-                            textAlign: TextAlign.start,
-                            maxLines: 4,
-                            stepGranularity: 0.5,
-                          ),
-                        ),
-                      ],
+            if (quickSeed != null)
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.13, maxWidth: MediaQuery.of(context).size.width * 0.6),
+                      // child: Stack(
+                      //   children: <Widget>[
+                      //     Center(
+                      //       child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_paperwalletonly.svg',
+                      //           color: StateContainer.of(context).curTheme.text45, width: MediaQuery.of(context).size.width),
+                      //     ),
+                      //     Center(
+                      //       child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_nautiluswalletonly.svg',
+                      //           color: StateContainer.of(context).curTheme.primary, width: MediaQuery.of(context).size.width),
+                      //     ),
+                      //   ],
+                      // ),
                     ),
-                  )
-                : Container()),
+                    Container(
+                      alignment: AlignmentDirectional.centerStart,
+                      margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
+                      child: AutoSizeText(
+                        AppLocalization.of(context)!.transferIntroShort,
+                        style: AppStyles.textStyleParagraph(context),
+                        textAlign: TextAlign.start,
+                        maxLines: 4,
+                        stepGranularity: 0.5,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
             Row(
               children: <Widget>[
