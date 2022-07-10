@@ -1544,7 +1544,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
                           ),
                           height: 55,
-                          width: (MediaQuery.of(context).size.width - 42 - UIUtil.tabletDrawerWidth(context)).abs() / 2,
+                          width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
                           margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
                           // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
                           child: TextButton(
@@ -1605,7 +1605,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width - UIUtil.tabletDrawerWidth(context),
+                width: UIUtil.getDrawerAwareScreenWidth(context),
                 height: MediaQuery.of(context).size.height,
                 child: Expanded(
                   child: Stack(
@@ -2028,7 +2028,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                       child: Container(margin: const EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
                     ),
                     SizedBox(
-                      width: (MediaQuery.of(context).size.width - UIUtil.tabletDrawerWidth(context)) / 4,
+                      width: UIUtil.getDrawerAwareScreenWidth(context) / 4,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -2101,7 +2101,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 ),
                 // Address Text
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 2.4,
+                  width: UIUtil.getDrawerAwareScreenWidth(context) / 2.4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
@@ -2337,7 +2337,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               ],
             ),
           Container(
-            constraints: BoxConstraints(maxWidth: (MediaQuery.of(context).size.width - 225 - UIUtil.tabletDrawerWidth(context)).abs()),
+            constraints: BoxConstraints(maxWidth: (UIUtil.getDrawerAwareScreenWidth(context) - 225).abs()),
             child: Stack(
               alignment: AlignmentDirectional.center,
               children: <Widget>[
@@ -2430,7 +2430,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       },
       child: Container(
         alignment: Alignment.center,
-        width: (MediaQuery.of(context).size.width - 190 - UIUtil.tabletDrawerWidth(context)).abs(),
+        width: (UIUtil.getDrawerAwareScreenWidth(context) - 190).abs(),
         color: Colors.transparent,
         child: _priceConversion == PriceConversion.HIDDEN
             ?

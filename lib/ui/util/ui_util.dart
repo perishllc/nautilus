@@ -398,8 +398,16 @@ class UIUtil {
     }
   }
 
+  static double getDrawerAwareScreenWidth(BuildContext context) {
+    if (isTablet(context)) {
+      return MediaQuery.of(context).size.width;
+    } else {
+      return MediaQuery.of(context).size.width - drawerWidth(context);
+    }
+  }
+
   static bool isTablet(BuildContext context) {
-    return MediaQuery.of(context).size.width > 768;
+    return MediaQuery.of(context).size.width >= 768;
   }
 
   static void showSnackbar(String content, BuildContext context, {int durationMs = 2500}) {

@@ -176,7 +176,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
               boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
             ),
             height: 55,
-            width: (MediaQuery.of(context).size.width - 42 - UIUtil.tabletDrawerWidth(context)).abs() / 2,
+            width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
             margin: EdgeInsetsDirectional.only(start: 7, top: popupMarginBottom, end: 14.0),
             child: TextButton(
               key: const Key("home_send_button"),
