@@ -1566,12 +1566,11 @@ class StateContainerState extends State<StateContainer> {
     final String? memoEnc = data['memo_enc'] as String?;
     final String? requestTime = data['request_time'] as String?;
     final String? block = data['block'] as String?;
-    final String? isAcknowledged = data['is_acknowledged'] as String?;
     final int? height = data['height'] as int?;
     final String? uuid = data['uuid'] as String?;
     final String? localUuid = data['local_uuid'] as String?;
 
-    final TXData txData = new TXData(
+    final TXData txData = TXData(
       // amount_raw: amount_raw,
       is_request: false,
       is_memo: true,
@@ -1587,7 +1586,7 @@ class StateContainerState extends State<StateContainer> {
 
     // attempt to decrypt the memo:
     if (memoEnc != null && memoEnc.isNotEmpty) {
-      final String? memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
+      final String memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
       if (memo != null) {
         txData.memo = memo;
       } else {

@@ -71,7 +71,8 @@ class _FundingMessageCardState extends State<FundingMessageCard> {
     }
 
     // so that the progress bar still shows something if the current amount is 0
-    double minFundedPercent = max(percentFunded, 0.1);
+    // so that the progress bar doesn't go past 100%
+    double minFundedPercent = min(max(percentFunded, 0.1), 1.0);
 
     return Container(
       decoration: BoxDecoration(
