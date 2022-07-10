@@ -1586,8 +1586,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       return Scaffold(
         resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
+        backgroundColor: StateContainer.of(context).curTheme.background,
         // drawerEdgeDragWidth: 180,
-        // backgroundColor: StateContainer.of(context).curTheme.background,
         // drawerScrimColor: StateContainer.of(context).curTheme.barrierWeaker,
         // drawer: SizedBox(
         //   width: UIUtil.tabletDrawerWidth(context),
