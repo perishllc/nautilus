@@ -18,15 +18,15 @@ ___
    - [x] Send nano to anyone via a gift card link
 
 <div style="display: flex; flex-direction: row">
-   <img src="/screenshots/home_demo_cards_screen.png" width="200">
-   <img src="/screenshots/receive_screen.png" width="200">
+   <img src="/screenshots/android/1080-2116/home_demo_cards_screen.png" width="200">
+   <img src="/screenshots/android/1080-2116/receive_screen.png" width="200">
 </div>
 <div style="display: flex; flex-direction: row">
-   <img src="/screenshots/send_screen.png" width="200">
-   <img src="/screenshots/settings_drawer_screen.png" width="200">
+   <img src="/screenshots/android/1080-2116/send_screen.png" width="200">
+   <img src="/screenshots/android/1080-2116/settings_drawer_screen.png" width="200">
 </div>
 <div style="display: flex; flex-direction: row">
-   <img src="/screenshots/welcome_intro_screen.png" width="200">
+   <img src="/screenshots/android/1080-2116/welcome_intro_screen.png" width="200">
 </div>
 
 ___
