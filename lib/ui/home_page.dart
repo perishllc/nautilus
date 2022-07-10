@@ -1589,7 +1589,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         backgroundColor: StateContainer.of(context).curTheme.background,
         drawerScrimColor: StateContainer.of(context).curTheme.barrierWeaker,
         drawer: SizedBox(
-          width: UIUtil.drawerWidth(context),
+          width: UIUtil.tabletDrawerWidth(context),
           child: Drawer(
             child: SettingsSheet(),
           ),
@@ -1605,7 +1605,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width - (UIUtil.drawerWidth(context)),
+                width: MediaQuery.of(context).size.width - UIUtil.tabletDrawerWidth(context),
                 height: MediaQuery.of(context).size.height,
                 child: Expanded(
                   child: Stack(
@@ -2028,7 +2028,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                       child: Container(margin: const EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
                     ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width / 4,
+                      width: (MediaQuery.of(context).size.width - UIUtil.tabletDrawerWidth(context)) / 4,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -2105,41 +2105,39 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Container(
-                        child: Stack(
-                          alignment: AlignmentDirectional.centerEnd,
-                          children: <Widget>[
-                            Text(
-                              address,
-                              textAlign: TextAlign.end,
-                              style: const TextStyle(
-                                fontSize: AppFontSizes.smallest,
-                                fontFamily: 'OverpassMono',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.transparent,
-                              ),
+                      Stack(
+                        alignment: AlignmentDirectional.centerEnd,
+                        children: <Widget>[
+                          Text(
+                            address,
+                            textAlign: TextAlign.end,
+                            style: const TextStyle(
+                              fontSize: AppFontSizes.smallest,
+                              fontFamily: 'OverpassMono',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.transparent,
                             ),
-                            Opacity(
-                              opacity: _opacityAnimation.value,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: StateContainer.of(context).curTheme.text20,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Text(
-                                  address,
-                                  textAlign: TextAlign.end,
-                                  style: const TextStyle(
-                                    fontSize: AppFontSizes.smallest - 3,
-                                    fontFamily: 'OverpassMono',
-                                    fontWeight: FontWeight.w100,
-                                    color: Colors.transparent,
-                                  ),
+                          ),
+                          Opacity(
+                            opacity: _opacityAnimation.value,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: StateContainer.of(context).curTheme.text20,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Text(
+                                address,
+                                textAlign: TextAlign.end,
+                                style: const TextStyle(
+                                  fontSize: AppFontSizes.smallest - 3,
+                                  fontFamily: 'OverpassMono',
+                                  fontWeight: FontWeight.w100,
+                                  color: Colors.transparent,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -3369,7 +3367,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
             children: <Widget>[
               _buildLoadingTransactionCard("Sent", "10244000", "123456789121234", context),
-              _buildLoadingTransactionCard("Received", "100,00000", "@bbedwards1234", context),
+              _buildLoadingTransactionCard("Received", "100,00000", "@fosse1234", context),
               _buildLoadingTransactionCard("Sent", "14500000", "12345678912345671234", context),
               _buildLoadingTransactionCard("Sent", "12,51200", "123456789121234", context),
               _buildLoadingTransactionCard("Received", "1,45300", "123456789121234", context),
