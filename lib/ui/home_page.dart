@@ -2227,48 +2227,50 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 margin: EdgeInsetsDirectional.only(top: settingsIconMarginTop, start: 5),
                 height: 50,
                 width: 50,
-                child: TextButton(
-                  key: const Key("home_settings_button"),
-                  style: TextButton.styleFrom(
-                    primary: StateContainer.of(context).curTheme.text15,
-                    backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                    // highlightColor: StateContainer.of(context).curTheme.text15,
-                    // splashColor: StateContainer.of(context).curTheme.text15,
-                  ),
-                  onPressed: () {
-                    scaffoldKey.currentState?.openDrawer();
-                  },
-                  child: Stack(
-                    children: [
-                      Icon(
-                        AppIcons.settings,
-                        color: StateContainer.of(context).curTheme.text,
-                        size: 24,
-                      ),
-                      if (!StateContainer.of(context).activeAlertIsRead)
-                        Positioned(
-                          top: -3,
-                          right: -3,
-                          child: Container(
-                            padding: const EdgeInsets.all(3),
-                            decoration: BoxDecoration(
-                              color: StateContainer.of(context).curTheme.backgroundDark,
-                              shape: BoxShape.circle,
+                child: !UIUtil.isTablet(context)
+                    ? TextButton(
+                        key: const Key("home_settings_button"),
+                        style: TextButton.styleFrom(
+                          primary: StateContainer.of(context).curTheme.text15,
+                          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                          // highlightColor: StateContainer.of(context).curTheme.text15,
+                          // splashColor: StateContainer.of(context).curTheme.text15,
+                        ),
+                        onPressed: () {
+                          scaffoldKey.currentState?.openDrawer();
+                        },
+                        child: Stack(
+                          children: [
+                            Icon(
+                              AppIcons.settings,
+                              color: StateContainer.of(context).curTheme.text,
+                              size: 24,
                             ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: StateContainer.of(context).curTheme.success,
-                                shape: BoxShape.circle,
-                              ),
-                              height: 11,
-                              width: 11,
-                            ),
-                          ),
-                        )
-                    ],
-                  ),
-                ),
+                            if (!StateContainer.of(context).activeAlertIsRead)
+                              Positioned(
+                                top: -3,
+                                right: -3,
+                                child: Container(
+                                  padding: const EdgeInsets.all(3),
+                                  decoration: BoxDecoration(
+                                    color: StateContainer.of(context).curTheme.backgroundDark,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: StateContainer.of(context).curTheme.success,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    height: 11,
+                                    width: 11,
+                                  ),
+                                ),
+                              )
+                          ],
+                        ),
+                      )
+                    : const SizedBox(),
               ),
             ),
             AnimatedContainer(
@@ -2802,7 +2804,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           icon = AppIcons.transferfunds;
           iconColor = StateContainer.of(context).curTheme.primary60;
         } else {
-          throw "something went wrong with gift type";
+          throw Exception("something went wrong with gift type");
         }
       } else {
         if (txDetails.record_type == BlockTypes.SEND) {

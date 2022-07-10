@@ -1,5 +1,6 @@
 # v0.4.1 - [2022-07-XX]
 #### Added
+- Tablet mode! The settings drawer is now permanently open and interactable on tablets that are wide enough to display it.
 #### Changed
 - changed scroll physics back to what they were before (on android only, in the main list view)
 #### Fixed
