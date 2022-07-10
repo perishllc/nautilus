@@ -1582,20 +1582,21 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         ),
       );
     } else {
+      /* TABLET MODE */
       return Scaffold(
-        drawerEdgeDragWidth: 180,
         resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
-        backgroundColor: StateContainer.of(context).curTheme.background,
-        drawerScrimColor: StateContainer.of(context).curTheme.barrierWeaker,
-        drawer: SizedBox(
-          width: UIUtil.tabletDrawerWidth(context),
-          child: Drawer(
-            child: SettingsSheet(),
-          ),
-        ),
+        // drawerEdgeDragWidth: 180,
+        // backgroundColor: StateContainer.of(context).curTheme.background,
+        // drawerScrimColor: StateContainer.of(context).curTheme.barrierWeaker,
+        // drawer: SizedBox(
+        //   width: UIUtil.tabletDrawerWidth(context),
+        //   child: Drawer(
+        //     child: SettingsSheet(),
+        //   ),
+        // ),
         body: SafeArea(
-          minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.045, bottom: MediaQuery.of(context).size.height * 0.035),
+          minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.045, /*bottom: MediaQuery.of(context).size.height * 0.035*/),
           child: Row(
             children: <Widget>[
               SizedBox(
@@ -1604,9 +1605,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                   child: SettingsSheet(),
                 ),
               ),
-              SizedBox(
+              Container(
                 width: UIUtil.getDrawerAwareScreenWidth(context),
                 height: MediaQuery.of(context).size.height,
+                margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.015),
                 child: Expanded(
                   child: Stack(
                     alignment: Alignment.bottomCenter,
