@@ -1692,8 +1692,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                               boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
                             ),
                             height: 55,
-                            // width: (MediaQuery.of(context).size.width - 42).abs() / 2,
-                            width: (MediaQuery.of(context).size.width - 42 - (UIUtil.drawerWidth(context))).abs() / 2,
+                            width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
                             margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
                             // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
                             child: TextButton(
@@ -2453,7 +2452,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        constraints: BoxConstraints(maxWidth: (MediaQuery.of(context).size.width - 205).abs()),
+                        constraints: BoxConstraints(maxWidth: (UIUtil.getDrawerAwareScreenWidth(context) - 205).abs()),
                         child: AutoSizeText.rich(
                           TextSpan(
                             children: [

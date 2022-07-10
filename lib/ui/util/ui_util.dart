@@ -399,7 +399,7 @@ class UIUtil {
   }
 
   static double getDrawerAwareScreenWidth(BuildContext context) {
-    if (isTablet(context)) {
+    if (!isTablet(context)) {
       return MediaQuery.of(context).size.width;
     } else {
       return MediaQuery.of(context).size.width - drawerWidth(context);
@@ -459,10 +459,5 @@ class UIUtil {
       return true;
     else
       return false;
-  }
-
-  static String getNatriconURL(String address, String nonce) {
-    final String adjustedNonce = nonce == "" ? "" : "&nonce=$nonce";
-    return "https://natricon.com/api/v1/nano?svc=natrium&outline=true&outlineColor=white&address=$address$adjustedNonce";
   }
 }
