@@ -124,7 +124,7 @@ class StateContainerState extends State<StateContainer> {
 
   AppWallet? wallet;
   String? currencyLocale;
-  Locale deviceLocale = Locale('en', 'US');
+  Locale deviceLocale = const Locale('en', 'US');
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
   LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
   AvailableBlockExplorer curBlockExplorer = AvailableBlockExplorer(AvailableBlockExplorerEnum.NANOLOOKER);
@@ -740,7 +740,7 @@ class StateContainerState extends State<StateContainer> {
   void setCurrencyMode(String currencyMode) {
     setState(() {
       this.currencyMode = currencyMode;
-      nyanoMode = (this.currencyMode == CurrencyModeSetting(CurrencyModeOptions.NYANO).getDisplayName());
+      nyanoMode = this.currencyMode == CurrencyModeSetting(CurrencyModeOptions.NYANO).getDisplayName();
     });
   }
 
@@ -833,7 +833,7 @@ class StateContainerState extends State<StateContainer> {
           amount: resp.amount,
           hash: receivedHash,
           link: resp.hash,
-          local_timestamp: (DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond));
+          local_timestamp: DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond);
       log.d("Received histItem ${json.encode(histItem.toJson())}");
       if (!wallet!.history!.contains(histItem)) {
         setState(() {
@@ -1129,7 +1129,7 @@ class StateContainerState extends State<StateContainer> {
                   amount: receivableResponseItem.amount,
                   hash: receivedHash,
                   link: receivableResponseItem.hash,
-                  local_timestamp: (DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond));
+                  local_timestamp: DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond);
               if (!wallet!.history!.contains(histItem)) {
                 setState(() {
                   // TODO: not necessarily the best way to handle this, should get real height:
