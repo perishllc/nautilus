@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
@@ -16,6 +15,11 @@ StateBlock stateBlockFromJson(String contents) {
 class StateBlock {
   @JsonKey(name: 'type')
   String? type;
+
+  // Represents subtype of this block: send/receive/change/open
+  @JsonKey(name: 'subtype')
+  String? subType;
+  
 
   @JsonKey(name: 'previous')
   String? previous;
@@ -46,9 +50,6 @@ class StateBlock {
   // should be used to calculate balance after this send
   @JsonKey(ignore: true)
   String? sendAmount;
-  // Represents subtype of this block: send/receive/change/openm
-  @JsonKey(ignore: true)
-  String? subType;
   // Represents local currency value of this TX
   @JsonKey(ignore: true)
   String? localCurrencyValue;
@@ -69,13 +70,13 @@ class StateBlock {
       this.privKey,
       this.localCurrencyValue}) {
     this.link = link;
-    this.subType = subtype;
-    this.type = BlockTypes.STATE;
+    subType = subtype;
+    type = BlockTypes.STATE;
     this.previous = previous;
     this.account = account;
     this.representative = representative;
     if (subtype == BlockTypes.SEND || subtype == BlockTypes.RECEIVE) {
-      this.sendAmount = balance;
+      sendAmount = balance;
     } else {
       this.balance = balance;
     }
@@ -83,33 +84,33 @@ class StateBlock {
 
   /// Used to set balance after receiving previous balance info from server
   void setBalance(String? previousBalance) {
-    if (this.sendAmount == null) {
+    if (sendAmount == null) {
       return;
     }
     BigInt previous = BigInt.parse(previousBalance!);
-    if (this.subType == BlockTypes.SEND) {
+    if (subType == BlockTypes.SEND) {
       // Subtract sendAmount from previous balance
       // If given a 0 as sendAmount, this is a special case indicating a max send
       if (BigInt.parse(sendAmount!) == BigInt.zero) {
-        this.balance = "0";
+        balance = "0";
       } else {
-        this.balance = (previous - BigInt.parse(sendAmount!)).toString();
+        balance = (previous - BigInt.parse(sendAmount!)).toString();
       }
-    } else if (this.subType == BlockTypes.RECEIVE) {
+    } else if (subType == BlockTypes.RECEIVE) {
       // Add previous balance to sendAmount
-      this.balance = (previous + BigInt.parse(sendAmount!)).toString();
+      balance = (previous + BigInt.parse(sendAmount!)).toString();
     }
   }
 
   /// Sign block with private key
   /// Returns signature if signed, null if this block is invalid and can't be signed
   Future<String?> sign(String? privateKey) async {
-    if (this.balance == null) {
+    if (balance == null) {
       return null;
     }
-    this.hash = NanoBlocks.computeStateHash(NanoAccountType.NANO, this.account!, this.previous!, this.representative!, BigInt.parse(this.balance!), this.link!);
-    this.signature = NanoSignatures.signBlock(this.hash!, privateKey!);
-    return this.signature;
+    hash = NanoBlocks.computeStateHash(NanoAccountType.NANO, account!, previous!, representative!, BigInt.parse(balance!), link!);
+    signature = NanoSignatures.signBlock(hash!, privateKey!);
+    return signature;
   }
 
   factory StateBlock.fromJson(Map<String, dynamic> json) => _$StateBlockFromJson(json);

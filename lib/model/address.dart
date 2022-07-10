@@ -17,17 +17,17 @@ class Address {
 
   String? getShortString() {
     if (_address == null || _address!.length < 64) return null;
-    return _address!.substring(0, 11) + "..." + _address!.substring(_address!.length - 6);
+    return "${_address!.substring(0, 11)}...${_address!.substring(_address!.length - 6)}";
   }
 
   String? getShorterString() {
     if (_address == null || _address!.length < 64) return null;
-    return _address!.substring(0, 9) + "..." + _address!.substring(_address!.length - 4);
+    return "${_address!.substring(0, 9)}...${_address!.substring(_address!.length - 4)}";
   }
 
   String? getShortestString() {
     if (_address == null || _address!.length < 64) return null;
-    return _address!.substring(0, 11) + "\n..." + _address!.substring(_address!.length - 6);
+    return "${_address!.substring(0, 11)}\n...${_address!.substring(_address!.length - 6)}";
   }
 
   bool isValid() {
@@ -38,11 +38,11 @@ class Address {
     if (value != null) {
       value = value.toLowerCase();
       _address = NanoAccounts.findAccountInString(NanoAccountType.NANO, value.replaceAll("\n", ""));
-      var split = value.split(':');
+      final split = value.split(':');
       if (split.length > 1) {
-        Uri? uri = Uri.tryParse(value);
+        final Uri? uri = Uri.tryParse(value);
         if (uri != null && uri.queryParameters['amount'] != null) {
-          BigInt? amount = BigInt.tryParse(uri.queryParameters['amount']!);
+          final BigInt? amount = BigInt.tryParse(uri.queryParameters['amount']!);
           if (amount != null) {
             _amount = amount.toString();
           }

@@ -1444,172 +1444,294 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // handle branch gift if it exists:
     handleBranchGift();
 
-    return Scaffold(
-      drawerEdgeDragWidth: 180,
-      resizeToAvoidBottomInset: false,
-      key: _scaffoldKey,
-      backgroundColor: StateContainer.of(context).curTheme.background,
-      drawerScrimColor: StateContainer.of(context).curTheme.barrierWeaker,
-      drawer: SizedBox(
-        width: UIUtil.drawerWidth(context),
-        child: Drawer(
-          child: SettingsSheet(),
+    if (!UIUtil.isTablet(context)) {
+      return Scaffold(
+        drawerEdgeDragWidth: 180,
+        resizeToAvoidBottomInset: false,
+        key: _scaffoldKey,
+        backgroundColor: StateContainer.of(context).curTheme.background,
+        drawerScrimColor: StateContainer.of(context).curTheme.barrierWeaker,
+        drawer: SizedBox(
+          width: UIUtil.drawerWidth(context),
+          child: Drawer(
+            child: SettingsSheet(),
+          ),
         ),
-      ),
-      body: SafeArea(
-        minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.045, bottom: MediaQuery.of(context).size.height * 0.035),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: <Widget>[
-                  //Everything else
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      //Main Card
-                      _buildMainCard(context, _scaffoldKey),
-                      //Main Card End
-                      //Transactions Text
-                      Container(
-                        margin: const EdgeInsetsDirectional.fromSTEB(30.0, 20.0, 26.0, 0.0),
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              CaseChange.toUpperCase(AppLocalization.of(context)!.transactions, context),
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w100,
-                                color: StateContainer.of(context).curTheme.text,
+        body: SafeArea(
+          minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.045, bottom: MediaQuery.of(context).size.height * 0.035),
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: <Widget>[
+                    //Everything else
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        //Main Card
+                        _buildMainCard(context, _scaffoldKey),
+                        //Main Card End
+                        //Transactions Text
+                        Container(
+                          margin: const EdgeInsetsDirectional.fromSTEB(30.0, 20.0, 26.0, 0.0),
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                CaseChange.toUpperCase(AppLocalization.of(context)!.transactions, context),
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w100,
+                                  color: StateContainer.of(context).curTheme.text,
+                                ),
                               ),
+                            ],
+                          ),
+                        ), //Transactions Text End
+                        //Transactions List
+                        Expanded(
+                          child: Stack(
+                            children: <Widget>[
+                              _getUnifiedListWidget(context),
+                              //List Top Gradient End
+                              Align(
+                                alignment: Alignment.topCenter,
+                                child: Container(
+                                  height: 10.0,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                      begin: const AlignmentDirectional(0.5, 1.0),
+                                      end: const AlignmentDirectional(0.5, -1.0),
+                                    ),
+                                  ),
+                                ),
+                              ), // List Top Gradient End
+                              //List Bottom Gradient
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  height: 30.0,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                      begin: const AlignmentDirectional(0.5, -1),
+                                      end: const AlignmentDirectional(0.5, 0.5),
+                                    ),
+                                  ),
+                                ),
+                              ), //List Bottom Gradient End
+                            ],
+                          ),
+                        ), //Transactions List End
+                        //Buttons background
+                        SizedBox(
+                          height: 55,
+                          width: MediaQuery.of(context).size.width,
+                        ), //Buttons background
+                      ],
+                    ),
+                    // Buttons
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
+                          ),
+                          height: 55,
+                          width: (MediaQuery.of(context).size.width - 42 - UIUtil.tabletDrawerWidth(context)).abs() / 2,
+                          margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
+                          // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
+                          child: TextButton(
+                            key: const Key("home_receive_button"),
+                            style: TextButton.styleFrom(
+                              backgroundColor: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                              primary: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                              // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                              // splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                             ),
-                          ],
-                        ),
-                      ), //Transactions Text End
-                      //Transactions List
-                      Expanded(
-                        child: Stack(
-                          children: <Widget>[
-                            // _getUnifiedListWidget(context),
-                            _getUnifiedListWidget(context),
-                            //List Top Gradient End
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Container(
-                                height: 10.0,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
-                                    begin: const AlignmentDirectional(0.5, 1.0),
-                                    end: const AlignmentDirectional(0.5, -1.0),
-                                  ),
-                                ),
-                              ),
-                            ), // List Top Gradient End
-                            //List Bottom Gradient
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                height: 30.0,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
-                                    begin: const AlignmentDirectional(0.5, -1),
-                                    end: const AlignmentDirectional(0.5, 0.5),
-                                  ),
-                                ),
-                              ),
-                            ), //List Bottom Gradient End
-                          ],
-                        ),
-                      ), //Transactions List End
-                      //Buttons background
-                      SizedBox(
-                        height: 55,
-                        width: MediaQuery.of(context).size.width,
-                      ), //Buttons background
-                    ],
-                  ),
-                  // Buttons
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
-                        ),
-                        height: 55,
-                        width: (MediaQuery.of(context).size.width - 42).abs() / 2,
-                        margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
-                        // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
-                        child: TextButton(
-                          key: const Key("home_receive_button"),
-                          style: TextButton.styleFrom(
-                            backgroundColor: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                            primary: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                            // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                            // splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                            child: AutoSizeText(
+                              AppLocalization.of(context)!.receive,
+                              textAlign: TextAlign.center,
+                              style: AppStyles.textStyleButtonPrimary(context),
+                              maxLines: 1,
+                              stepGranularity: 0.5,
+                            ),
+                            onPressed: () {
+                              if (receive == null) {
+                                return;
+                              }
+                              Sheets.showAppHeightNineSheet(context: context, widget: receive!);
+                            },
                           ),
-                          child: AutoSizeText(
-                            AppLocalization.of(context)!.receive,
-                            textAlign: TextAlign.center,
-                            style: AppStyles.textStyleButtonPrimary(context),
-                            maxLines: 1,
-                            stepGranularity: 0.5,
-                          ),
-                          onPressed: () {
-                            if (receive == null) {
-                              return;
-                            }
-                            Sheets.showAppHeightNineSheet(context: context, widget: receive!);
-                          },
                         ),
-                      ),
-                      // Container(
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(5),
-                      //     boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
-                      //   ),
-                      //   height: 55,
-                      //   width: (MediaQuery.of(context).size.width - 42) / 3,
-                      //   // margin: EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
-                      //   margin: EdgeInsetsDirectional.only(start: 0, top: 0.0, end: 0.0),
-                      //   child: FlatButton(
-                      //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                      //     color: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
-                      //     child: AutoSizeText(
-                      //       AppLocalization.of(context).request,
-                      //       textAlign: TextAlign.center,
-                      //       style: AppStyles.textStyleButtonPrimary(context),
-                      //       maxLines: 1,
-                      //       stepGranularity: 0.5,
-                      //     ),
-                      //     onPressed: () {
-                      //       if (request == null) {
-                      //         return;
-                      //       }
-                      //       Sheets.showAppHeightEightSheet(context: context, widget: request);
-                      //     },
-                      //     highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                      //     splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                      //   ),
-                      // ),
-                      AppPopupButton(),
-                    ],
-                  ),
-                ],
+                        AppPopupButton(),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Scaffold(
+        drawerEdgeDragWidth: 180,
+        resizeToAvoidBottomInset: false,
+        key: _scaffoldKey,
+        backgroundColor: StateContainer.of(context).curTheme.background,
+        drawerScrimColor: StateContainer.of(context).curTheme.barrierWeaker,
+        drawer: SizedBox(
+          width: UIUtil.drawerWidth(context),
+          child: Drawer(
+            child: SettingsSheet(),
+          ),
+        ),
+        body: SafeArea(
+          minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.045, bottom: MediaQuery.of(context).size.height * 0.035),
+          child: Row(
+            children: <Widget>[
+              SizedBox(
+                width: UIUtil.drawerWidth(context),
+                child: Drawer(
+                  child: SettingsSheet(),
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width - (UIUtil.drawerWidth(context)),
+                height: MediaQuery.of(context).size.height,
+                child: Expanded(
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: <Widget>[
+                      //Everything else
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          //Main Card
+                          _buildMainCard(context, _scaffoldKey),
+                          //Main Card End
+                          //Transactions Text
+                          Container(
+                            margin: const EdgeInsetsDirectional.fromSTEB(30.0, 20.0, 26.0, 0.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  CaseChange.toUpperCase(AppLocalization.of(context)!.transactions, context),
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w100,
+                                    color: StateContainer.of(context).curTheme.text,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ), //Transactions Text End
+                          //Transactions List
+                          Expanded(
+                            child: Stack(
+                              children: <Widget>[
+                                // _getUnifiedListWidget(context),
+                                _getUnifiedListWidget(context),
+                                //List Top Gradient End
+                                Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Container(
+                                    height: 10.0,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                        begin: const AlignmentDirectional(0.5, 1.0),
+                                        end: const AlignmentDirectional(0.5, -1.0),
+                                      ),
+                                    ),
+                                  ),
+                                ), // List Top Gradient End
+                                //List Bottom Gradient
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Container(
+                                    height: 30.0,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                        begin: const AlignmentDirectional(0.5, -1),
+                                        end: const AlignmentDirectional(0.5, 0.5),
+                                      ),
+                                    ),
+                                  ),
+                                ), //List Bottom Gradient End
+                              ],
+                            ),
+                          ), //Transactions List End
+                          //Buttons background
+                          SizedBox(
+                            height: 55,
+                            width: MediaQuery.of(context).size.width,
+                          ), //Buttons background
+                        ],
+                      ),
+
+                      // Send / Receive Buttons
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
+                            ),
+                            height: 55,
+                            // width: (MediaQuery.of(context).size.width - 42).abs() / 2,
+                            width: (MediaQuery.of(context).size.width - 42 - (UIUtil.drawerWidth(context))).abs() / 2,
+                            margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
+                            // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
+                            child: TextButton(
+                              key: const Key("home_receive_button"),
+                              style: TextButton.styleFrom(
+                                backgroundColor: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                                primary: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                                // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                                // splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                              ),
+                              child: AutoSizeText(
+                                AppLocalization.of(context)!.receive,
+                                textAlign: TextAlign.center,
+                                style: AppStyles.textStyleButtonPrimary(context),
+                                maxLines: 1,
+                                stepGranularity: 0.5,
+                              ),
+                              onPressed: () {
+                                if (receive == null) {
+                                  return;
+                                }
+                                Sheets.showAppHeightNineSheet(context: context, widget: receive!);
+                              },
+                            ),
+                          ),
+                          AppPopupButton(),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
   }
 
   Widget _buildRemoteMessageCard(AlertResponseItem? alert) {
@@ -2215,7 +2337,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               ],
             ),
           Container(
-            constraints: BoxConstraints(maxWidth: (MediaQuery.of(context).size.width - 225).abs()),
+            constraints: BoxConstraints(maxWidth: (MediaQuery.of(context).size.width - 225 - UIUtil.tabletDrawerWidth(context)).abs()),
             child: Stack(
               alignment: AlignmentDirectional.center,
               children: <Widget>[
@@ -2308,7 +2430,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       },
       child: Container(
         alignment: Alignment.center,
-        width: (MediaQuery.of(context).size.width - 190).abs(),
+        width: (MediaQuery.of(context).size.width - 190 - UIUtil.tabletDrawerWidth(context)).abs(),
         color: Colors.transparent,
         child: _priceConversion == PriceConversion.HIDDEN
             ?

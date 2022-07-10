@@ -382,11 +382,24 @@ class UIUtil {
   }
 
   static double drawerWidth(BuildContext context) {
-    if (MediaQuery.of(context).size.width < 375)
+    if (MediaQuery.of(context).size.width < 375) {
       return MediaQuery.of(context).size.width * 0.94;
-    else
+    } else {
       // cap drawer width
       return min(MediaQuery.of(context).size.width * 0.85, 325);
+    }
+  }
+
+  static double tabletDrawerWidth(BuildContext context) {
+    if (isTablet(context)) {
+      return drawerWidth(context);
+    } else {
+      return 0;
+    }
+  }
+
+  static bool isTablet(BuildContext context) {
+    return min(MediaQuery.of(context).size.width * 0.85, 300) == 300;
   }
 
   static void showSnackbar(String content, BuildContext context, {int durationMs = 2500}) {

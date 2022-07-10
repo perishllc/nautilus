@@ -15,11 +15,13 @@ StateBlock _$StateBlockFromJson(Map<String, dynamic> json) {
     account: json['account'] as String?,
   )
     ..type = json['type'] as String?
+    ..subType = json['subtype'] as String?
     ..signature = json['signature'] as String?;
 }
 
 Map<String, dynamic> _$StateBlockToJson(StateBlock instance) => <String, dynamic>{
       'type': instance.type,
+      'subtype': instance.subType,
       'previous': instance.previous,
       'account': instance.account,
       'representative': instance.representative,
