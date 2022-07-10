@@ -704,7 +704,7 @@ class _SendSheetState extends State<SendSheet> {
                                               margin: const EdgeInsets.only(bottom: 50),
                                               child: ListView.builder(
                                                 shrinkWrap: true,
-                                                padding: const EdgeInsets.only(bottom: 0, top: 0),
+                                                // padding: const EdgeInsets.only(bottom: 0, top: 0),
                                                 itemCount: _users.length,
                                                 itemBuilder: (BuildContext context, int index) {
                                                   return _buildUserItem(_users[index]);
@@ -763,7 +763,7 @@ class _SendSheetState extends State<SendSheet> {
 
                                 // ******* Enter Memo Error Container ******* //
                                 Container(
-                                  alignment: const AlignmentDirectional(0, 0),
+                                  alignment: AlignmentDirectional.center,
                                   margin: const EdgeInsets.only(top: 3),
                                   child: Text(_memoValidationText ?? "",
                                       style: TextStyle(

@@ -32,11 +32,11 @@ class GenerateCompleteSheet extends StatefulWidget {
 class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
   // Current state references
   bool _linkCopied = false;
-  // Timer reference so we can cancel repeated events
-  Timer? _linkCopiedTimer;
-  // Current state references
+  bool _messageCopied = false;
   bool _seedCopied = false;
   // Timer reference so we can cancel repeated events
+  Timer? _messageCopiedTimer;
+  Timer? _linkCopiedTimer;
   Timer? _seedCopiedTimer;
 
   final TextEditingController _messageController = TextEditingController();
@@ -178,19 +178,17 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                           ),
                         ),
                       ),
-
-                      // // The container for the address
-                      // Container(
-                      //     padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      //     margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                      //     width: double.infinity,
-                      //     decoration: BoxDecoration(
-                      //       color: StateContainer.of(context).curTheme.backgroundDarkest,
-                      //       borderRadius: BorderRadius.circular(25),
-                      //     ),
-                      //     child:
-                      //         UIUtil.threeLineAddressText(context, widget.destination!, type: ThreeLineAddressTextType.SUCCESS, contactName: widget.contactName)),
                       getMessageEditor(),
+                      Container(
+                        alignment: AlignmentDirectional.center,
+                        child: Text(AppLocalization.of(context)!.tapMessageToEdit,
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: StateContainer.of(context).curTheme.primary,
+                              fontFamily: 'NunitoSans',
+                              fontWeight: FontWeight.w600,
+                            )),
+                      ),
                     ],
                   ),
                 ),
@@ -205,11 +203,42 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                     AppButton.buildAppButton(
                         context,
                         // copy message Button
-                        _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _linkCopied ? AppLocalization.of(context)!.messageCopied : AppLocalization.of(context)!.copyMessage,
-                        Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                      // Navigator.of(context).pop();
+                        _messageCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                        _messageCopied ? AppLocalization.of(context)!.messageCopied : AppLocalization.of(context)!.copyMessage,
+                        Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
                       Clipboard.setData(ClipboardData(text: _messageController.text));
+                      setState(() {
+                        // Set copied style
+                        _messageCopied = true;
+                      });
+                      if (_messageCopiedTimer != null) {
+                        _messageCopiedTimer!.cancel();
+                      }
+                      _messageCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                        setState(() {
+                          _messageCopied = false;
+                        });
+                      });
+                    }),
+                    AppButton.buildAppButton(
+                        context,
+                        // share message button
+                        AppButtonType.PRIMARY_OUTLINE,
+                        AppLocalization.of(context)!.shareMessage,
+                        Dimens.BUTTON_COMPACT_RIGHT_DIMENS, onPressed: () {
+                      Share.share(_messageController.text);
+                    }),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(
+                        context,
+                        // copy link Button
+                        _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                        _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.copyLink,
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      Clipboard.setData(ClipboardData(text: widget.link));
                       setState(() {
                         // Set copied style
                         _linkCopied = true;
@@ -225,18 +254,6 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                     }),
                   ],
                 ),
-                Row(
-                  children: <Widget>[
-                    AppButton.buildAppButton(
-                        context,
-                        // share message button
-                        AppButtonType.PRIMARY,
-                        AppLocalization.of(context)!.shareMessage,
-                        Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
-                      Share.share(_messageController.text);
-                    }),
-                  ],
-                )
               ],
             ),
           ],

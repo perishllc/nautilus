@@ -25,19 +25,7 @@ class GiftCards {
     String? amountRaw,
     String? memo,
   }) async {
-    // final ProcessResponse resp = await sl.get<AccountService>().requestSend(
-    //     StateContainer.of(context).wallet!.representative,
-    //     StateContainer.of(context).wallet!.frontier,
-    //     widget.amountRaw,
-    //     widget.destination,
-    //     StateContainer.of(context).wallet!.address,
-    //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
-    //     max: widget.maxSend);
-
     final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
-
-    // StateContainer.of(context).wallet!.frontier = resp.hash;
-    // StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw!);
 
     final BranchUniversalObject buo = BranchUniversalObject(
         canonicalIdentifier: 'flutter/branch',
@@ -71,8 +59,8 @@ class GiftCards {
     required bool success,
     required String destination,
     required String amountRaw,
-    required String hash,
     required String paperWalletSeed,
+    String? hash,
     String? localCurrency,
     String? link,
     String? memo,
@@ -118,9 +106,6 @@ class GiftCards {
           ));
       return true;
     } else {
-      // attempt to refund the transaction?!:
-      await AppTransferOverviewSheet().startAutoTransfer(context, paperWalletSeed, StateContainer.of(context).wallet);
-
       // create a local memo object to show the gift card creation details:
       const Uuid uuid = Uuid();
       final TXData newGiftTXData = TXData(

@@ -1,11 +1,15 @@
-# v0.4.1 - [2022-07-XX]
+# v0.4.1 - [2022-07-11]
 #### Added
-- Tablet mode! The settings drawer is now permanently open and interactable on tablets that are wide enough to display it.
+- Tablet mode! The settings drawer is now permanently open devices that are wide enough to display it
 #### Changed
+- Updates to the gift card completion screen, to make it clearer that the message section is editable
+- Max drawer size is even smaller now for tablets -> 300px
 - changed scroll physics back to what they were before (on android only, in the main list view)
 #### Fixed
 - Rendering bug on the accounts sheet page displaying currency symbols before loading balance
 - Changing rep to your current rep caused infinite loading animation
+- Additional safeguards to prevent giftcards from being "lost"
+  - Now, if gift card creation fails in any way, either the funds won't be sent, or the gift card link will be copied to your clipboard
 ## v0.4.0 - [2022-07-06]
 #### Added
 - Ability to resend messages on message failure

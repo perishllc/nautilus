@@ -531,7 +531,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
   //************ Enter Memo Container Method ************//
   //*******************************************************//
   Widget getEnterMemoContainer() {
-    final double margin = 10;
+    const double margin = 10;
     return AppTextField(
       topMargin: margin,
       padding: EdgeInsets.zero,
@@ -558,9 +558,6 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         fontWeight: FontWeight.w100,
         fontFamily: 'OverpassMono',
       ),
-      onChanged: (text) {
-        // nothing for now
-      },
     );
   } //************ Enter Memo Container Method End ************//
   //*************************************************************//

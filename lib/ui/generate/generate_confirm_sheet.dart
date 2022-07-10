@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -228,20 +229,11 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
   }
 
   Future<void> _doSend() async {
+    String? branchLink;
     try {
       _showAnimation(context);
-      final ProcessResponse resp = await sl.get<AccountService>().requestSend(
-          StateContainer.of(context).wallet!.representative,
-          StateContainer.of(context).wallet!.frontier,
-          widget.amountRaw,
-          widget.destination,
-          StateContainer.of(context).wallet!.address,
-          NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
-          max: widget.maxSend);
 
-      StateContainer.of(context).wallet!.frontier = resp.hash;
-      StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw!);
-
+      // create link:
       final BranchUniversalObject buo = BranchUniversalObject(
           canonicalIdentifier: 'flutter/branch',
           //canonicalUrl: '',
@@ -266,15 +258,32 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           feature: 'gift',
           stage: 'new share');
 
-      final BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+      final BranchResponse branchResponse = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
 
+      // send funds:
+      ProcessResponse? resp;
+      if (branchResponse.success) {
+        branchLink = branchResponse.result as String;
+        resp = await sl.get<AccountService>().requestSend(
+            StateContainer.of(context).wallet!.representative,
+            StateContainer.of(context).wallet!.frontier,
+            widget.amountRaw,
+            widget.destination,
+            StateContainer.of(context).wallet!.address,
+            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+            max: widget.maxSend);
+        StateContainer.of(context).wallet!.frontier = resp.hash;
+        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw!);
+      }
+
+      // ignore: use_build_context_synchronously
       await sl.get<GiftCards>().handleResponse(context,
-          success: response.success,
+          success: branchResponse.success,
           amountRaw: widget.amountRaw!,
           destination: widget.destination!,
           localCurrency: widget.localCurrency,
-          hash: resp.hash!,
-          link: response.success ? (response.result as String) : null,
+          hash: resp?.hash,
+          link: branchLink,
           paperWalletSeed: widget.paperWalletSeed,
           memo: widget.memo);
     } catch (error) {
@@ -283,7 +292,8 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context);
+      Clipboard.setData(ClipboardData(text: branchLink));
+      UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationErrorSent, context, durationMs: 20000);
       Navigator.of(context).pop();
     }
   }

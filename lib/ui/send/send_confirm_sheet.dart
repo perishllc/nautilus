@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -464,20 +465,6 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
               hash: resp!.hash!,
               paperWalletSeed: widget.paperWalletSeed,
               memo: widget.memo);
-
-          Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-
-          Sheets.showAppHeightNineSheet(
-              context: context,
-              closeOnTap: false,
-              removeUntilHome: true,
-              widget: GenerateCompleteSheet(
-                  amountRaw: widget.amountRaw,
-                  destination: widget.destination,
-                  contactName: contactName,
-                  memo: widget.memo,
-                  link: widget.link,
-                  localAmount: widget.localCurrency));
         }
       }
     } catch (error) {
@@ -485,6 +472,12 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       // Send failed
       if (animationOpen) {
         Navigator.of(context).pop();
+      }
+      if (widget.link.isNotEmpty) {
+        Clipboard.setData(ClipboardData(text: widget.link));
+        UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationErrorSent, context, durationMs: 20000);
+        Navigator.of(context).pop();
+        return;
       }
       UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context, durationMs: 5000);
       Navigator.of(context).pop();

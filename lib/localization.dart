@@ -243,6 +243,13 @@ class AppLocalization {
     return Intl.message("An error occured while trying to create a gift card link", desc: "create_gift_error", name: 'giftCardCreationError');
   }
 
+  String get giftCardCreationErrorSent {
+    return Intl.message(
+        "An error occured while trying to create a gift card, THE GIFT CARD LINK HAS BEEN COPIED TO YOUR CLIPBOARD, YOUR FUNDS MAY BE CONTAINED WITHIN IT DEPENDING ON WHAT WENT WRONG.",
+        desc: 'gift_generic_error',
+        name: 'giftCardCreationErrorSent');
+  }
+
   String get qrInvalidPermissions {
     return Intl.message("Please Grant Camera Permissions to scan QR Codes",
         desc: "User did not grant camera permissions to the app", name: "qrInvalidPermissions");
@@ -594,8 +601,7 @@ class AppLocalization {
   }
 
   String get memoSentButNotReceived {
-    return Intl.message("Message re-sent! If still unread, the recipient's device may be offline.",
-        desc: 'memo_sent_again', name: 'memoSentButNotReceived');
+    return Intl.message("Message re-sent! If still unread, the recipient's device may be offline.", desc: 'memo_sent_again', name: 'memoSentButNotReceived');
   }
 
   String get requestSentButNotReceived {
@@ -1348,7 +1354,8 @@ class AppLocalization {
   }
 
   String get giftInfo {
-    return Intl.message('''Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n
+    return Intl.message('''
+Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n
 Once created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n
 If the recipient is already a Nautilus user they will get a prompt to transfer the funds into their account upon opening the link''',
         desc: 'Description for gift card creation', name: 'giftInfo');
@@ -1359,6 +1366,10 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
         "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
         desc: 'Description for username already registered',
         name: 'giftWarning');
+  }
+
+  String get tapMessageToEdit {
+    return Intl.message("Tap message to edit", desc: 'gift_creation_message_edit_hint', name: 'tapMessageToEdit');
   }
 
   String get loadedInto {
