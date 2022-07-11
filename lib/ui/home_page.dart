@@ -1596,7 +1596,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         //   ),
         // ),
         body: SafeArea(
-          minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.045, /*bottom: MediaQuery.of(context).size.height * 0.035*/),
+          minimum: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height * 0.045, /*bottom: MediaQuery.of(context).size.height * 0.035*/
+          ),
           child: Row(
             children: <Widget>[
               SizedBox(
@@ -2825,13 +2827,23 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // normal tx:
       setShadow = StateContainer.of(context).curTheme.boxShadow;
     } else if (txDetails.status == StatusTypes.CREATE_FAILED) {
-      iconColor = StateContainer.of(context).curTheme.error60;
-      setShadow = BoxShadow(
-        color: StateContainer.of(context).curTheme.error60!.withOpacity(0.2),
-        offset: Offset.zero,
-        blurRadius: 0,
-        spreadRadius: 1,
-      );
+      if (txDetails.is_request || txDetails.is_message) {
+        iconColor = StateContainer.of(context).curTheme.error60;
+        setShadow = BoxShadow(
+          color: StateContainer.of(context).curTheme.error60!.withOpacity(0.2),
+          offset: Offset.zero,
+          blurRadius: 0,
+          spreadRadius: 1,
+        );
+      } else {
+        iconColor = StateContainer.of(context).curTheme.warning60;
+        setShadow = BoxShadow(
+          color: StateContainer.of(context).curTheme.warning60!.withOpacity(0.2),
+          offset: Offset.zero,
+          blurRadius: 0,
+          spreadRadius: 1,
+        );
+      }
     } else if (txDetails.is_fulfilled && (txDetails.is_request || txDetails.is_message)) {
       iconColor = StateContainer.of(context).curTheme.success60;
       setShadow = BoxShadow(
@@ -2892,8 +2904,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       if (!txDetails.is_acknowledged) {
         transactionState = TransactionStateOptions.UNREAD;
       }
+
       if (txDetails.status == StatusTypes.CREATE_FAILED) {
-        transactionState = TransactionStateOptions.NOT_SENT;
+        if (txDetails.is_request || txDetails.is_message) {
+          transactionState = TransactionStateOptions.NOT_SENT;
+        } else {
+          transactionState = TransactionStateOptions.FAILED_MSG;
+        }
       }
     }
 

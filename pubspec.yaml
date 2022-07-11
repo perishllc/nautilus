@@ -314,28 +314,6 @@ flutter:
         - asset: fonts/Comfortaa-Light.ttf
           weight: 300
   assets:
-    # - legacy_assets/QR.svg
-    # - legacy_assets/welcome_animation.flr
-    # - legacy_assets/send_animation.flr
-    # - legacy_assets/manta_animation.flr
-    # - legacy_assets/transfer_animation_nautiluswalletonly.flr
-    # - legacy_assets/transfer_animation_paperwalletonly.flr
-    # - legacy_assets/searchseedqr_animation_magnifyingglassonly.flr
-    # - legacy_assets/searchseedqr_animation_glassonly.flr
-    # - legacy_assets/searchseedqr_animation_qronly.flr
-    # - legacy_assets/searchseedmanual_animation_magnifyingglassonly.flr
-    # - legacy_assets/searchseedmanual_animation_glassonly.flr
-    # - legacy_assets/searchseedmanual_animation_seedonly.flr
-    # - legacy_assets/threedot_animation.flr
-    # - legacy_assets/offline_animation.flr
-    # - legacy_assets/sharecard_logo.svg
-    # - legacy_assets/transferfunds_illustration_start_nautiluswalletonly.svg
-    # - legacy_assets/transferfunds_illustration_start_paperwalletonly.svg
-    # - legacy_assets/transferfunds_illustration_end_nautiluswalletonly.svg
-    # - legacy_assets/transferfunds_illustration_end_paperwalletonly.svg
-    # - legacy_assets/pulltosend_animation.flr
-    # - legacy_assets/sheethandle_animation.flr
-    # - legacy_assets/ntr_placeholder_animation.flr
     # animations:
     - assets/animations/load-n.json
     - assets/animations/rocket.json

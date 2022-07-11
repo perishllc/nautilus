@@ -12,6 +12,7 @@
 - Funding page would've broken if someone donated past 100% on any of the goals lmao
 - Additional safeguards to prevent giftcards from being "lost"
   - Now, if gift card creation fails in any way, either the funds won't be sent, or the gift card link will be copied to your clipboard
+- Rendering of transaction tags were incorrectly displayed in some states
 ## v0.4.0 - [2022-07-06]
 #### Added
 - Ability to resend messages on message failure
