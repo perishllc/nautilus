@@ -154,8 +154,12 @@ class AppDialogs {
   // }
 
   static Future<void> showChangeLog(BuildContext context) async {
-    final String changeLogMarkdown = await DefaultAssetBundle.of(context).loadString("CHANGELOG.md");
-    final scrollController = ScrollController();
+    String changeLogMarkdown = await DefaultAssetBundle.of(context).loadString("CHANGELOG.md");
+    final ScrollController scrollController = ScrollController();
+
+    // replace the first h2 with an h1:
+    // this is so it doesn't have the top margin of the other h2's
+    changeLogMarkdown = changeLogMarkdown.replaceFirst(RegExp(r'#'), "");
 
     await showDialog(
         barrierDismissible: false,

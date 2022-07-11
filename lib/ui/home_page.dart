@@ -1398,7 +1398,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   // handle receivable messages
   Future<void> handleReceivableBackgroundMessages() async {
     if (StateContainer.of(context).wallet != null) {
-      log.d("NOW");
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.reload();
       final List<String>? backgroundMessages = prefs.getStringList('background_messages');

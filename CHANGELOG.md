@@ -1,4 +1,8 @@
-# v0.4.1 - [2022-07-11]
+## v0.4.2 - [2022-07-XX]
+#### Added
+#### Changed
+#### Fixed
+## v0.4.1 - [2022-07-11]
 #### Added
 - New intro page animation!
 - Tablet mode! The settings drawer is now permanently open devices that are wide enough to display it

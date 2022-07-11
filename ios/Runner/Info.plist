@@ -51,6 +51,9 @@
 				<string>xrb</string>
 				<string>nano</string>
 				<string>manta</string>
+				<string>nanopay</string>
+				<string>nanosign</string>
+				<string>nanoauth</string>
 			</array>
 		</dict>
 	</array>
