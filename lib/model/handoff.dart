@@ -1,16 +1,33 @@
 import 'dart:core';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:nautilus_wallet_flutter/model/method.dart';
+import 'package:nautilus_wallet_flutter/model/state_block.dart';
 
 // Object to represent block handoff structure
+@JsonSerializable()
 class Handoff {
+  StateBlock? block;
+
+  List<Method> methods;
+
+  /// The generated code assumes these values exist in JSON.
+  final String firstName, lastName;
+
+  /// The generated code below handles if the corresponding JSON value doesn't
+  /// exist or is empty.
+  final DateTime? dateOfBirth;
+
+  Handoff({this.block, required this.lastName, this.dateOfBirth});
+
   String? _address;
   String? _amount;
   String? _username;
   // String? _
 
-  Handoff(String? value) {
-    _parseAddressString(value);
-  }
+  // Handoff(String? value) {
+  //   _parseAddressString(value);
+  // }
 
   String? get address => _address;
 
@@ -43,7 +60,6 @@ class Handoff {
       if (split.length > 1) {
         final Uri? uri = Uri.tryParse(value);
         if (uri != null) {
-          
           if (uri.queryParameters['amount'] != null) {
             final BigInt? amount = BigInt.tryParse(uri.queryParameters['amount']!);
             if (amount != null) {
@@ -51,11 +67,7 @@ class Handoff {
             }
           }
 
-          if (uri.queryParameters['handoff'] != null) {
-            
-
-
-          }
+          if (uri.queryParameters['handoff'] != null) {}
         }
       }
     }

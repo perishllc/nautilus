@@ -6,16 +6,15 @@ part of 'receivable_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ReceivableRequest _$ReceivableRequestFromJson(Map<String, dynamic> json) {
-  return ReceivableRequest(
-    action: json['action'] as String?,
-    account: json['account'] as String?,
-    source: json['source'] as bool?,
-    count: json['count'] as int?,
-    threshold: json['threshold'] as String?,
-    includeActive: json['include_active'] as bool?,
-  );
-}
+ReceivableRequest _$ReceivableRequestFromJson(Map<String, dynamic> json) =>
+    ReceivableRequest(
+      action: json['action'] as String? ?? Actions.RECEIVABLE,
+      account: json['account'] as String?,
+      source: json['source'] as bool? ?? true,
+      count: json['count'] as int?,
+      threshold: json['threshold'] as String?,
+      includeActive: json['include_active'] as bool? ?? true,
+    );
 
 Map<String, dynamic> _$ReceivableRequestToJson(ReceivableRequest instance) {
   final val = <String, dynamic>{

@@ -6,13 +6,16 @@ part of 'accounts_balances_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-// AccountsBalancesRequest _$AccountsBalancesRequestFromJson(Map<String, dynamic> json) {
-//   return AccountsBalancesRequest(
-//     accounts: (json['accounts'] as List<String>).map((e) => e as String).toList(),
-//   )..action = json['action'] as String?;
-// }
+AccountsBalancesRequest _$AccountsBalancesRequestFromJson(
+        Map<String, dynamic> json) =>
+    AccountsBalancesRequest(
+      accounts:
+          (json['accounts'] as List<dynamic>).map((e) => e as String).toList(),
+    )..action = json['action'] as String?;
 
-Map<String, dynamic> _$AccountsBalancesRequestToJson(AccountsBalancesRequest instance) => <String, dynamic>{
+Map<String, dynamic> _$AccountsBalancesRequestToJson(
+        AccountsBalancesRequest instance) =>
+    <String, dynamic>{
       'action': instance.action,
       'accounts': instance.accounts,
     };

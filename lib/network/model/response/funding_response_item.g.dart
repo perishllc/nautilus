@@ -6,23 +6,23 @@ part of 'funding_response_item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-FundingResponseItem _$FundingResponseItemFromJson(Map<String, dynamic> json) {
-  return FundingResponseItem(
-    id: json['id'] as int?,
-    active: json['active'] as bool?,
-    priority: json['priority'] as String?,
-    title: json['title'] as String?,
-    shortDescription: json['short_description'] as String?,
-    longDescription: json['long_description'] as String?,
-    goalAmountRaw: json['goal_amount_raw'] as String?,
-    currentAmountRaw: json['current_amount_raw'] as String?,
-    address: json['address'] as String?,
-    link: json['link'] as String?,
-    timestamp: json['timestamp'] as int?,
-  );
-}
+FundingResponseItem _$FundingResponseItemFromJson(Map<String, dynamic> json) =>
+    FundingResponseItem(
+      id: json['id'] as int?,
+      active: json['active'] as bool?,
+      priority: json['priority'] as String?,
+      title: json['title'] as String?,
+      shortDescription: json['short_description'] as String?,
+      longDescription: json['long_description'] as String?,
+      goalAmountRaw: json['goal_amount_raw'] as String?,
+      currentAmountRaw: json['current_amount_raw'] as String?,
+      address: json['address'] as String?,
+      link: json['link'] as String?,
+      timestamp: json['timestamp'] as int?,
+    );
 
-Map<String, dynamic> _$FundingResponseItemToJson(FundingResponseItem instance) =>
+Map<String, dynamic> _$FundingResponseItemToJson(
+        FundingResponseItem instance) =>
     <String, dynamic>{
       'id': instance.id,
       'active': instance.active,

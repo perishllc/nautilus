@@ -1,18 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 
-// id INTEGER PRIMARY KEY AUTOINCREMENT,
-// block TEXT,
-// from_address TEXT,
-// to_address TEXT,
-// amount_raw TEXT,
-// is_request BOOLEAN,
-// is_fulfilled BOOLEAN,
-// fulfillment_time TEXT,
-// memo TEXT
-
-// part 'user.g.dart';
-
 @JsonSerializable()
 class TXData {
 

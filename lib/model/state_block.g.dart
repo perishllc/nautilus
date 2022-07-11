@@ -6,20 +6,19 @@ part of 'state_block.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-StateBlock _$StateBlockFromJson(Map<String, dynamic> json) {
-  return StateBlock(
-    previous: json['previous'] as String?,
-    representative: json['representative'] as String?,
-    balance: json['balance'] as String?,
-    link: json['link'] as String?,
-    account: json['account'] as String?,
-  )
-    ..type = json['type'] as String?
-    ..subType = json['subtype'] as String?
-    ..signature = json['signature'] as String?;
-}
+StateBlock _$StateBlockFromJson(Map<String, dynamic> json) => StateBlock(
+      previous: json['previous'] as String?,
+      representative: json['representative'] as String?,
+      balance: json['balance'] as String?,
+      link: json['link'] as String?,
+      account: json['account'] as String?,
+    )
+      ..type = json['type'] as String?
+      ..subType = json['subtype'] as String?
+      ..signature = json['signature'] as String?;
 
-Map<String, dynamic> _$StateBlockToJson(StateBlock instance) => <String, dynamic>{
+Map<String, dynamic> _$StateBlockToJson(StateBlock instance) =>
+    <String, dynamic>{
       'type': instance.type,
       'subtype': instance.subType,
       'previous': instance.previous,

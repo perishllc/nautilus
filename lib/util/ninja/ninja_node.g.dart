@@ -6,15 +6,13 @@ part of 'ninja_node.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NinjaNode _$NinjaNodeFromJson(Map<String, dynamic> json) {
-  return NinjaNode(
-    votingWeight: _toBigInt(json['votingweight'] as num),
-    uptime: _toDouble(json['uptime'] as num),
-    score: json['score'] as int?,
-    account: json['account'] as String?,
-    alias: json['alias'] as String?,
-  );
-}
+NinjaNode _$NinjaNodeFromJson(Map<String, dynamic> json) => NinjaNode(
+      votingWeight: _toBigInt(json['votingweight'] as num),
+      uptime: _toDouble(json['uptime'] as num),
+      score: json['score'] as int?,
+      account: json['account'] as String?,
+      alias: json['alias'] as String?,
+    );
 
 Map<String, dynamic> _$NinjaNodeToJson(NinjaNode instance) => <String, dynamic>{
       'votingweight': instance.votingWeight?.toString(),

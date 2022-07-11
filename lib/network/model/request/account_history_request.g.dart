@@ -6,21 +6,20 @@ part of 'account_history_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AccountHistoryRequest _$AccountHistoryRequestFromJson(Map<String, dynamic> json) {
-  return AccountHistoryRequest(
-    action: json['action'] as String?,
-    account: json['account'] as String?,
-    count: json['count'] as int?,
-    raw: json['raw'] as bool?,
-  );
-}
+AccountHistoryRequest _$AccountHistoryRequestFromJson(
+        Map<String, dynamic> json) =>
+    AccountHistoryRequest(
+      action: json['action'] as String?,
+      account: json['account'] as String?,
+      count: json['count'] as int?,
+      raw: json['raw'] as bool?,
+    );
 
-Map<String, dynamic> _$AccountHistoryRequestToJson(AccountHistoryRequest instance) {
+Map<String, dynamic> _$AccountHistoryRequestToJson(
+    AccountHistoryRequest instance) {
   final val = <String, dynamic>{
     'action': instance.action,
     'account': instance.account,
-    'count': instance.count,
-    'raw': instance.raw,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -30,5 +29,6 @@ Map<String, dynamic> _$AccountHistoryRequestToJson(AccountHistoryRequest instanc
   }
 
   writeNotNull('count', instance.count);
+  val['raw'] = instance.raw;
   return val;
 }
