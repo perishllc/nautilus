@@ -44,7 +44,8 @@ Future<void> goBack(WidgetTester tester) async {
 Future<String> takeScreenshot() async {
   final RenderRepaintBoundary renderObj = find.byKey(const ValueKey('screenshotter')).evaluate().single.renderObject! as RenderRepaintBoundary;
 
-  ui.Image image = await renderObj.toImage(pixelRatio: 4);
+  double devicePixelRatio = WidgetsBinding.instance.window.devicePixelRatio;
+  ui.Image image = await renderObj.toImage(pixelRatio: devicePixelRatio);
   final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
   final Uint8List pngBytes = byteData!.buffer.asUint8List();
   final String bs64 = base64Encode(pngBytes);
