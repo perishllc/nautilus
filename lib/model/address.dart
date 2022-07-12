@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:core';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:nautilus_wallet_flutter/model/handoff.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 
 // Object to represent an account address or address URI, and provide useful utilities
 class Address {
@@ -9,7 +9,7 @@ class Address {
   String? _amount;
   // String? _
 
-  Handoff? _handoff;
+  HandoffItem? _handoffItem;
 
   Address(String? value) {
     _parseAddressString(value);
@@ -53,22 +53,19 @@ class Address {
           }
 
           print("AAAAAAAAAAAAAAAAAA");
-          print(uri.queryParameters);
-          try {
-            // if (uri.queryParameters['handoff'] != null) {
+          if (uri.queryParameters['handoff'] != null) {
+            // base64 decode the string:
             String encodedHandoff = uri.queryParameters['handoff'] as String;
             encodedHandoff = encodedHandoff.replaceAll(RegExp(r"\s+\b|\b\s"), "");
-            // base64 decode the string:
-            print(uri.queryParameters['handoff']);
-            var a = base64Url.decode(encodedHandoff);
-            print(a);
-            print(utf8.decode(a));
-            print("what");
-          } catch (error) {
-            print("err");
-            print(error);
+            String decodedHandoff = utf8.decode(base64Url.decode(encodedHandoff));
+            print(decodedHandoff);
+            try {
+              this._handoffItem = HandoffItem.fromJson(jsonDecode(decodedHandoff) as Map<String, dynamic>);
+            } catch (error) {
+              print(error);
+            }
+            print(_handoffItem?.account);
           }
-          // }
         }
       }
     }

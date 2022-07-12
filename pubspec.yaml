@@ -54,7 +54,7 @@ dependencies:
   device_info: ^2.0.3
 
   # JSON Serialization
-  json_annotation: ^4.4.0
+  json_annotation: ^4.6.0
 
   # Localization
   intl: ^0.17.0
@@ -97,6 +97,7 @@ dependencies:
 
   # QR Codes
   qr_flutter: ^4.0.0 # Generator
+  pretty_qr_code: ^2.0.2
   # barcode_scan2: ^4.2.1
   barcode_scan2:
     git:

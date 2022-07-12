@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 
+part 'txdata.g.dart';
+
 @JsonSerializable()
 class TXData {
 

@@ -710,9 +710,9 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       curTheme = theme.getTheme();
     });
-    if (setIcon) {
-      AppIcon.setAppIcon(theme.getTheme().appIcon);
-    }
+    // if (setIcon) {
+    //   AppIcon.setAppIcon(theme.getTheme().appIcon);
+    // }
   }
 
   // Change natricon setting

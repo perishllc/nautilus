@@ -32,6 +32,7 @@ import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/account_history_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
@@ -63,6 +64,7 @@ import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:quiver/strings.dart';
 import 'package:rate_my_app/rate_my_app.dart';
@@ -1111,7 +1113,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // unifiedList.addAll(historyList);
     // unifiedList.addAll(solidsList);
     // don't process change blocks:
-    unifiedList = List<dynamic>.from(historyList.where((AccountHistoryResponseItem element) => element.type != BlockTypes.CHANGE).toList());
+    unifiedList = List<dynamic>.from(historyList.where((AccountHistoryResponseItem element) => element.subtype != BlockTypes.CHANGE).toList());
 
     final Set<String?> uuids = {};
     final List<int?> idsToRemove = [];
@@ -1193,6 +1195,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             ? dynamicItem
             : convertHistItemToTXData(dynamicItem as AccountHistoryResponseItem, txDetails: _txDetailsMap[dynamicItem.hash]);
         final bool isRecipient = txDetails.isRecipient(StateContainer.of(context).wallet!.address);
+
         String displayName = txDetails.getShortestString(isRecipient)!;
 
         // check if there's a username:
@@ -1413,23 +1416,21 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   void paintQrCode({String? address}) {
-    final QrPainter painter = QrPainter(
+    final painter = PrettyQr(
+      typeNumber: 9,
       data: "nano:${address ?? StateContainer.of(context).wallet!.address!}",
-      version: 9,
-      gapless: false,
-      errorCorrectionLevel: QrErrorCorrectLevel.Q,
+      errorCorrectLevel: QrErrorCorrectLevel.M,
+      roundEdges: true,
     );
     if (MediaQuery.of(context).size.width == 0) {
       return;
     }
-    painter.toImageData(MediaQuery.of(context).size.width).then((ByteData? byteData) {
-      setState(() {
-        receive = ReceiveSheet(
-          localCurrency: StateContainer.of(context).curCurrency,
-          address: StateContainer.of(context).wallet!.address,
-          qrWidget: SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List())),
-        );
-      });
+    setState(() {
+      receive = ReceiveSheet(
+        localCurrency: StateContainer.of(context).curCurrency,
+        address: StateContainer.of(context).wallet!.address,
+        qrWidget: SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: painter),
+      );
     });
   }
 
@@ -3018,7 +3019,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       slideActions.add(SlidableAction(
           autoClose: false,
           borderRadius: BorderRadius.circular(5.0),
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
+          backgroundColor: StateContainer.of(context).curTheme.background!,
           foregroundColor: StateContainer.of(context).curTheme.error60,
           icon: Icons.delete,
           label: AppLocalization.of(context)!.delete,

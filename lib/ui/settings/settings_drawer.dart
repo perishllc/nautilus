@@ -562,10 +562,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
 
     if (picked == FundingOptions.SHOW) {
       await sl.get<SharedPrefsUtil>().setFundingOn(true);
-      // EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
     } else {
       await sl.get<SharedPrefsUtil>().setFundingOn(false);
-      // EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: false));
     }
     setState(() {
       _curFundingSetting = FundingSetting(picked);

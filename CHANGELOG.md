@@ -1,7 +1,11 @@
 ## v0.4.2 - [2022-07-XX]
 #### Added
+- New monochrome theme!
 #### Changed
+- Updated QR Code to look cleaner
 #### Fixed
+- Delete slide action was the wrong color on some themes
+- Bug regression with the search bar (change blocks)
 ## v0.4.1 - [2022-07-11]
 #### Added
 - New intro page animation!

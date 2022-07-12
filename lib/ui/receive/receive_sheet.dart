@@ -23,6 +23,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:quiver/strings.dart';
 import 'package:share_plus/share_plus.dart';
@@ -236,15 +237,17 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                       return Center(
                         child: Stack(
                           children: <Widget>[
-                            // if (_showShareCard!)
-                            //   Container(
-                            //     alignment: AlignmentDirectional.center,
-                            //     child: AppShareCard(
-                            //       shareCardKey,
-                            //       SvgPicture.asset('legacy_assets/QR.svg'),
-                            //       SvgPicture.asset('legacy_assets/sharecard_logo.svg'),
-                            //     ),
-                            //   ),
+                            if (_showShareCard!)
+                              Container(
+                                alignment: AlignmentDirectional.center,
+                                child: AppShareCard(
+                                  shareCardKey,
+                                  const SizedBox(),
+                                  const SizedBox(),
+                                  // SvgPicture.asset('legacy_assets/QR.svg'),
+                                  // SvgPicture.asset('legacy_assets/sharecard_logo.svg'),
+                                ),
+                              ),
                             // This is for hiding the share card
                             Center(
                               child: Container(
@@ -261,6 +264,23 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             //     child: SvgPicture.asset('legacy_assets/QR.svg'),
                             //   ),
                             // ),
+
+                            // Background/border part the QR P1:
+                            Center(
+                              child: Transform.translate(
+                                offset: Offset.zero,
+                                child: ClipOval(
+                                  child: Container(
+                                    color: Colors.white,
+                                    height: computedMaxSize,
+                                    width: computedMaxSize,
+                                    child: qrWidget,
+                                  ),
+                                ),
+                              ),
+                            ),
+
+
                             // Actual QR part of the QR
                             Center(
                               child: Container(
@@ -271,6 +291,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                 child: qrWidget,
                               ),
                             ),
+
                             // Outer ring
                             Center(
                               child: Container(
@@ -501,16 +522,14 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       data = "nano:" + address!;
     }
 
-    final QrPainter painter = QrPainter(
+    final painter = PrettyQr(
       data: data,
-      version: 9,
-      gapless: false,
-      errorCorrectionLevel: QrErrorCorrectLevel.Q,
+      typeNumber: 9,
+      errorCorrectLevel: QrErrorCorrectLevel.Q,
+      roundEdges: true,
     );
-    painter.toImageData(MediaQuery.of(context).size.width).then((ByteData? byteData) {
-      setState(() {
-        qrWidget = SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List()));
-      });
+    setState(() {
+      qrWidget = SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: painter);
     });
   }
 

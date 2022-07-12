@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-enum OverlayTheme { KALIUM, NATRIUM, IRIDIUM, TITANIUM, BERYLLIUM, RUTHIUM, RADIUM, INDIUM, NEPTUNIUM, THORIUM, CARBON, URANIUM, BLAISE, BLAISEDARK, COPPER }
+enum OverlayTheme {
+  KALIUM,
+  NATRIUM,
+  IRIDIUM,
+  TITANIUM,
+  BERYLLIUM,
+  RUTHIUM,
+  RADIUM,
+  INDIUM,
+  NEPTUNIUM,
+  THORIUM,
+  CARBON,
+  URANIUM,
+  BLAISE,
+  BLAISEDARK,
+  COPPER,
+  MONOCHROME
+}
 
 abstract class BaseTheme {
   Color? primary;
@@ -81,7 +98,7 @@ abstract class BaseTheme {
   // QR scanner theme
   OverlayTheme? qrScanTheme;
   // App icon (iOS only)
-  AppIconEnum? appIcon;
+  // AppIconEnum? appIcon;
 }
 
 abstract class NyanTheme extends BaseTheme {
@@ -96,17 +113,15 @@ class NautilusTheme extends BaseTheme {
   // darker: #B19CD9
   // lighter: #CCA9DD
 
-  static const green = Color(0xFF41E099);
-
-  static const greenDark = Color(0xFF148A55);
-
   static const white = Color(0xFFFFFFFF);
   static const whiteish = Color(0xFFE9E9F2);
 
-  // static const black = Color(0xFF191A1E);
   static const black = Color(0xFF000000);
   static const blackBlueish = Color(0xFF0D1014);
   static const blackLighter = Color(0xFF0E0F0F);
+
+  static const green = Color(0xFF41E099);
+  static const greenDark = Color(0xFF148A55);
 
   static const yellow = Color(0xFFFFB300);
   static const yellowDark = Color(0xFFFFCB00);
@@ -204,7 +219,7 @@ class NautilusTheme extends BaseTheme {
   );
 
   OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
-  AppIconEnum? appIcon = AppIconEnum.NAUTILUS;
+  // AppIconEnum? appIcon = AppIconEnum.CARBON;
 }
 
 class TitaniumTheme extends BaseTheme {
@@ -308,7 +323,7 @@ class TitaniumTheme extends BaseTheme {
   BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
 
   OverlayTheme? qrScanTheme = OverlayTheme.TITANIUM;
-  AppIconEnum? appIcon = AppIconEnum.TITANIUM;
+  // AppIconEnum? appIcon = AppIconEnum.TITANIUM;
 }
 
 class IndiumTheme extends BaseTheme {
@@ -412,7 +427,6 @@ class IndiumTheme extends BaseTheme {
   BoxShadow? boxShadowButton = BoxShadow(color: darkDeepBlue.withOpacity(0.2), offset: Offset(0, 5), blurRadius: 15);
 
   OverlayTheme? qrScanTheme = OverlayTheme.INDIUM;
-  AppIconEnum? appIcon = AppIconEnum.INDIUM;
 }
 
 class NeptuniumTheme extends BaseTheme {
@@ -515,7 +529,6 @@ class NeptuniumTheme extends BaseTheme {
   BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
 
   OverlayTheme? qrScanTheme = OverlayTheme.NEPTUNIUM;
-  AppIconEnum? appIcon = AppIconEnum.NEPTUNIUM;
 }
 
 class ThoriumTheme extends BaseTheme {
@@ -618,7 +631,6 @@ class ThoriumTheme extends BaseTheme {
   BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
 
   OverlayTheme? qrScanTheme = OverlayTheme.THORIUM;
-  AppIconEnum? appIcon = AppIconEnum.THORIUM;
 }
 
 class CarbonTheme extends BaseTheme {
@@ -729,7 +741,6 @@ class CarbonTheme extends BaseTheme {
   );
 
   OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
-  AppIconEnum? appIcon = AppIconEnum.CARBON;
 }
 
 class PurpeliumTheme extends BaseTheme {
@@ -844,7 +855,6 @@ class PurpeliumTheme extends BaseTheme {
   );
 
   OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
-  AppIconEnum? appIcon = AppIconEnum.PURPELIUM;
 }
 
 class NyanoTheme extends NyanTheme {
@@ -960,7 +970,103 @@ class NyanoTheme extends NyanTheme {
   );
 
   OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
-  AppIconEnum? appIcon = AppIconEnum.NYANO;
+}
+
+class MonochromeTheme extends BaseTheme {
+  static const tealLightest = Color.fromRGBO(128, 128, 128, 1);
+  static const tealLight = Color.fromRGBO(64, 64, 64, 1);
+  static const tealDark = Color.fromRGBO(16, 16, 16, 1);
+  static const tealDarkest = Color.fromRGBO(10, 10, 10, 1);
+
+  static const white = Color(0xFFFFFFFF);
+  static const black = Color(0xFF000000);
+
+
+  static const green = Color(0xFF41E099);
+  static const greenDark = Color(0xFF148A55);
+
+  static const yellow = Color(0xFFFFB300);
+  static const yellowDark = Color(0xFFFFCB00);
+
+  static const red = Color(0xFFE80000);
+  static const redDark = Color(0xFFB20000);
+
+  Color? primary = tealLightest;
+  Color? primary60 = tealLightest.withOpacity(0.6);
+  Color? primary45 = tealLightest.withOpacity(0.45);
+  Color? primary30 = tealLightest.withOpacity(0.3);
+  Color? primary20 = tealLightest.withOpacity(0.2);
+  Color? primary15 = tealLightest.withOpacity(0.15);
+  Color? primary10 = tealLightest.withOpacity(0.1);
+
+  Color? success = green;
+  Color? success60 = green.withOpacity(0.6);
+  Color? success45 = green.withOpacity(0.45);
+  Color? success30 = green.withOpacity(0.3);
+  Color? success15 = green.withOpacity(0.15);
+
+  Color? successDark = greenDark;
+  Color? successDark30 = greenDark.withOpacity(0.3);
+
+  Color? warning = yellow;
+  Color? warning60 = yellow.withOpacity(0.6);
+  Color? warning45 = yellow.withOpacity(0.45);
+  Color? warning30 = yellow.withOpacity(0.3);
+  Color? warning15 = yellow.withOpacity(0.15);
+
+  Color? warningDark = yellowDark;
+  Color? warningDark30 = yellowDark.withOpacity(0.3);
+
+  Color? error = red;
+  Color? error60 = red.withOpacity(0.6);
+  Color? error30 = red.withOpacity(0.3);
+  Color? error15 = red.withOpacity(0.15);
+
+  Color? errorDark = redDark;
+  Color? errorDark30 = redDark.withOpacity(0.3);
+
+  Color? background = tealLight;
+  Color? background40 = tealLight.withOpacity(0.4);
+  Color? background00 = tealLight.withOpacity(0.0);
+
+  Color? backgroundDark = tealDark;
+  Color? backgroundDark00 = tealDark.withOpacity(0.0);
+
+  Color? backgroundDarkest = tealDarkest;
+
+  Color? text = white.withOpacity(0.9);
+  Color? text60 = white.withOpacity(0.6);
+  Color? text45 = white.withOpacity(0.45);
+  Color? text30 = white.withOpacity(0.3);
+  Color? text20 = white.withOpacity(0.2);
+  Color? text15 = white.withOpacity(0.15);
+  Color? text10 = white.withOpacity(0.1);
+  Color? text05 = white.withOpacity(0.05);
+  Color? text03 = white.withOpacity(0.03);
+
+  Color? overlay90 = black.withOpacity(0.9);
+  Color? overlay85 = black.withOpacity(0.85);
+  Color? overlay80 = black.withOpacity(0.8);
+  Color? overlay70 = black.withOpacity(0.7);
+  Color? overlay50 = black.withOpacity(0.5);
+  Color? overlay30 = black.withOpacity(0.3);
+  Color? overlay20 = black.withOpacity(0.2);
+
+  Color? barrier = black.withOpacity(0.7);
+  Color? barrierWeaker = black.withOpacity(0.4);
+  Color? barrierWeakest = black.withOpacity(0.3);
+  Color? barrierStronger = black.withOpacity(0.85);
+
+  Color? animationOverlayMedium = black.withOpacity(0.7);
+  Color? animationOverlayStrong = black.withOpacity(0.85);
+
+  Brightness? brightness = Brightness.dark;
+  SystemUiOverlayStyle? statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
+
+  BoxShadow? boxShadow = BoxShadow(color: Colors.transparent);
+  BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
+
+  OverlayTheme? qrScanTheme = OverlayTheme.MONOCHROME;
 }
 
 enum AppIconEnum { NAUTILUS, TITANIUM, INDIUM, NEPTUNIUM, THORIUM, CARBON, PURPELIUM, NYANO }
