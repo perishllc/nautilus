@@ -7,36 +7,34 @@ part 'auth_item.g.dart';
 // Object to represent block handoff structure
 @JsonSerializable()
 class AuthItem {
-  AuthItem();
+
   factory AuthItem.fromJson(Map<String, dynamic> json) => _$AuthItemFromJson(json);
 
   @JsonKey(name: 'methods')
   late List<Method> methods;
 
-  @JsonKey(name: 'account')
-  late String account;
+  @JsonKey(name: 'label')
+  String? label;
 
-  @JsonKey(name: 'amount')
-  String? amount;
+  @JsonKey(name: 'format')
+  late List<String> format;
+
+  @JsonKey(name: 'separator')
+  late String separator;
 
   @JsonKey(name: 'reuse')
   bool reuse = false;
 
   bool isValid() {
-    if (account == null || account.isEmpty) {
-      return false;
-    }
-
-    if (amount == null || amount!.isEmpty) {
-      return false;
-    }
 
     if (methods.isEmpty) {
       return false;
     }
-    
+
+    if (separator.isEmpty) {
+      return false;
+    }
 
     return true;
-
   }
 }

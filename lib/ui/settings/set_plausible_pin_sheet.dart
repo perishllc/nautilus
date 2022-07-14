@@ -247,18 +247,21 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
 
   Future<void> submitAndEncrypt() async {
     String? seed = await sl.get<Vault>().getSeed();
+    String? currentPin = await sl.get<Vault>().getPin();
+    if (!mounted) return;
     if (createPasswordController!.text.isEmpty || confirmPasswordController!.text.isEmpty) {
-      if (mounted) {
-        setState(() {
-          passwordError = AppLocalization.of(context)!.pinBlank;
-        });
-      }
+      setState(() {
+        passwordError = AppLocalization.of(context)!.pinBlank;
+      });
     } else if (createPasswordController!.text != confirmPasswordController!.text) {
-      if (mounted) {
-        setState(() {
-          passwordError = AppLocalization.of(context)!.pinsDontMatch;
-        });
-      }
+      setState(() {
+        passwordError = AppLocalization.of(context)!.pinsDontMatch;
+      });
+    } else if (currentPin != null && currentPin.isNotEmpty && currentPin == confirmPasswordController!.text) {
+      // prevent the user from setting the plausible pin to the same thing as their real pin:
+      setState(() {
+        passwordError = AppLocalization.of(context)!.invalidPin;
+      });
     } else {
       await sl.get<Vault>().writePlausiblePin(confirmPasswordController!.text);
       if (!mounted) return;

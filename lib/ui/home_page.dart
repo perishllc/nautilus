@@ -34,6 +34,8 @@ import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -1354,9 +1356,19 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   Future<void> handleDeepLink(String? link) async {
-    log.d("handleDeepLink: $link");
-    final Address address = Address(link);
-    if (address.isValid()) {
+    log.d("handling deep link: $link");
+    if (link == null || link.isEmpty) {
+      return;
+    }
+
+    final dynamic result = uriParser(link);
+
+    if (result == null) {
+      return;
+    }
+
+    if (result is Address && result.isValid()) {
+      final Address address = result;
       String? amount;
       bool sufficientBalance = false;
       if (address.amount != null) {
@@ -1383,6 +1395,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             context: context,
             widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: amount));
       }
+    } else if (result is HandoffItem) {
+      // handle block handoff:
+    } else if (result is AuthItem) {
+      // handle auth handoff:
+      
     }
   }
 

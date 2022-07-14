@@ -971,13 +971,15 @@ class _SendSheetState extends State<SendSheet> {
                         onPressed: () async {
                       UIUtil.cancelLockEvent();
                       final dynamic scanResult = await UserDataUtil.getQRData(DataType.DATA, context);
-                      if (!mounted) {
-                        return;
-                      }
-                      print("Scan Result: $scanResult");
+                      if (!mounted) return;
                       if (scanResult == null) {
-                        UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
+                        UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
                       } else if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
+                        if (scanResult == QRScanErrs.PERMISSION_DENIED) {
+                          UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidPermissions, context);
+                        } else if (scanResult == QRScanErrs.UNKNOWN_ERROR) {
+                          UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
+                        }
                         return;
                       } else if (scanResult is Address) {
                         // Is a URI
@@ -1013,7 +1015,7 @@ class _SendSheetState extends State<SendSheet> {
                             });
                           }
                         }
-                        
+
                         // If amount is present, fill it and go to SendConfirm
                         if (mounted && address.amount != null) {
                           final BigInt? amountBigInt = BigInt.tryParse(address.amount!);

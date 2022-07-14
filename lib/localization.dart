@@ -584,6 +584,10 @@ class AppLocalization {
     return Intl.message("Request %1 %2", desc: 'request_pin_description', name: 'requestAmountConfirm');
   }
 
+  String get authConfirm {
+    return Intl.message("Authenticating", desc: 'auth_confirm_message', name: 'sendMessageConfirm');
+  }
+
   String get sendAmountConfirmPin {
     return sendAmountConfirm;
   }

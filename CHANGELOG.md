@@ -1,3 +1,8 @@
+## v0.4.3 - [2022-07-XX]
+#### Added
+#### Changed
+#### Fixed
+- Bug with QR code scanning when done through the swipe up action on the send button
 ## v0.4.2 - [2022-07-15]
 #### Added
 - New monochrome theme!

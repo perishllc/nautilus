@@ -7,10 +7,11 @@ import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart'; 
+import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:nautilus_wallet_flutter/model/method.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
@@ -18,6 +19,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/handoff_response.
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/auth/auth_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/handoff/handoff_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
@@ -253,26 +255,20 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
 
       _showAnimation(context, AnimationType.SEND);
 
-      ProcessResponse? resp = await sl.get<AccountService>().requestSend(
-          StateContainer.of(context).wallet!.representative,
-          StateContainer.of(context).wallet!.frontier,
-          widget.handoffItem.amount,
-          widget.destination,
-          StateContainer.of(context).wallet!.address,
-          NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
-          max: widget.maxSend);
-      StateContainer.of(context).wallet!.frontier = resp.hash;
-      StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.handoffItem.amount!);
-
-      // check if we need to generate the PoW first:
-      if (!widget.handoffItem.work) {
-        // we must provide our own PoW:
-        // TODO:
-      }
+      // ProcessResponse? resp = await sl.get<AccountService>().requestSend(
+      //     StateContainer.of(context).wallet!.representative,
+      //     StateContainer.of(context).wallet!.frontier,
+      //     widget.authItem.amount,
+      //     widget.destination,
+      //     StateContainer.of(context).wallet!.address,
+      //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+      //     max: widget.maxSend);
+      // StateContainer.of(context).wallet!.frontier = resp.hash;
+      // StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.authItem.amount!);
 
       // construct the response to the server:
       String? url;
-      for (var method in widget.handoffItem.methods) {
+      for (final Method method in widget.authItem.methods) {
         if (method.type == "http") {
           url = method.url;
         }
@@ -280,7 +276,7 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
 
       if (url != null) {
         // found a method we support:
-        
+
       }
 
       // HandoffResponse? = await sl.get<AccountService>.requestHandoff(
@@ -291,7 +287,6 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
       //     StateContainer.of(context).wallet!.address,
       //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
       //     max: widget.maxSend);
-
 
       // Show complete
       String? contactName = widget.contactName;
@@ -311,12 +306,9 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
           context: context,
           closeOnTap: true,
           removeUntilHome: true,
-          widget: HandoffCompleteSheet(
-              amountRaw: widget.handoffItem.amount!,
-              destination: widget.destination,
-              contactName: contactName,
-              memo: widget.memo,
-              localAmount: widget.localCurrency));
+          widget: AuthCompleteSheet(
+            label: widget.authItem.label,
+          ));
     } catch (error) {
       sl.get<Logger>().d("send_confirm_error: $error");
       // Send failed
@@ -336,22 +328,19 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
 
   Future<void> authenticateWithPin() async {
     // PIN Authentication
-    // final String? expectedPin = await sl.get<Vault>().getPin();
-    // final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
-    // final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-    //   return PinScreen(
-    //     PinOverlayType.ENTER_PIN,
-    //     expectedPin: expectedPin,
-    //     plausiblePin: plausiblePin,
-    //     description: AppLocalization.of(context)!
-    //         .sendAmountConfirmPin
-    //         .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
-    //         .replaceAll("%2", StateContainer.of(context).currencyMode),
-    //   );
-    // }));
-    // if (auth != null && auth) {
-    //   await Future.delayed(const Duration(milliseconds: 200));
-    //   EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
-    // }
+    final String? expectedPin = await sl.get<Vault>().getPin();
+    final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
+    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+      return PinScreen(
+        PinOverlayType.ENTER_PIN,
+        expectedPin: expectedPin,
+        plausiblePin: plausiblePin,
+        description: AppLocalization.of(context)!.authConfirm,
+      );
+    }));
+    if (auth != null && auth) {
+      await Future.delayed(const Duration(milliseconds: 200));
+      EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
+    }
   }
 }
