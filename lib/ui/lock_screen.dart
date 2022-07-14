@@ -43,9 +43,11 @@ class _AppLockScreenState extends State<AppLockScreen> {
     Navigator.of(context).pushNamedAndRemoveUntil('/home_transition', (Route<dynamic> route) => false, arguments: conversion);
   }
 
-  Widget _buildPinScreen(BuildContext context, String? expectedPin) {
+  Widget _buildPinScreen(BuildContext context, String? expectedPin, [String? plausiblePin]) {
     return PinScreen(PinOverlayType.ENTER_PIN,
+        isUnlockAction: true,
         expectedPin: expectedPin,
+        plausiblePin: plausiblePin,
         description: AppLocalization.of(context)!.unlockPin,
         pinScreenBackgroundColor: StateContainer.of(context).curTheme.backgroundDark);
   }
@@ -136,21 +138,24 @@ class _AppLockScreenState extends State<AppLockScreen> {
     }
   }
 
-  Future<void> authenticateWithPin({bool transitions = false}) async {
+  Future<void> authenticateWithPinOrPlausible({bool transitions = false}) async {
     final String? expectedPin = await sl.get<Vault>().getPin();
-    bool? auth = false;
+    final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
+    bool auth = false;
     if (transitions) {
-      auth = await (Navigator.of(context).push(
-        MaterialPageRoute(builder: (BuildContext context) {
-          return _buildPinScreen(context, expectedPin);
-        }),
-      ) as FutureOr<bool>);
+      auth = await Navigator.of(context).push(
+            MaterialPageRoute<bool>(builder: (BuildContext context) {
+              return _buildPinScreen(context, expectedPin, plausiblePin);
+            }),
+          ) ??
+          false;
     } else {
-      auth = await (Navigator.of(context).push(
-        NoPushTransitionRoute(builder: (BuildContext context) {
-          return _buildPinScreen(context, expectedPin);
-        }),
-      ) as FutureOr<bool>);
+      auth = await Navigator.of(context).push(
+            NoPushTransitionRoute<bool>(builder: (BuildContext context) {
+              return _buildPinScreen(context, expectedPin, plausiblePin);
+            }),
+          ) ??
+          false;
     }
     await Future.delayed(const Duration(milliseconds: 200));
     if (mounted) {
@@ -191,10 +196,10 @@ class _AppLockScreenState extends State<AppLockScreen> {
       try {
         await authenticateWithBiometrics();
       } catch (e) {
-        await authenticateWithPin(transitions: transitions);
+        await authenticateWithPinOrPlausible(transitions: transitions);
       }
     } else {
-      await authenticateWithPin(transitions: transitions);
+      await authenticateWithPinOrPlausible(transitions: transitions);
     }
   }
 

@@ -20,6 +20,7 @@ import 'package:nautilus_wallet_flutter/network/model/request/account_history_re
 import 'package:nautilus_wallet_flutter/network/model/request/account_info_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/accounts_balances_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/block_info_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/handoff_reply_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/process_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/receivable_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/subscribe_request.dart';
@@ -32,6 +33,8 @@ import 'package:nautilus_wallet_flutter/network/model/response/block_info_item.d
 import 'package:nautilus_wallet_flutter/network/model/response/callback_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/handoff_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/handoff_work_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/price_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/receivable_response.dart';
@@ -56,10 +59,6 @@ String _SERVER_ADDRESS_WS = "$_WS_PROTO$_BASE_SERVER_ADDRESS";
 String _SERVER_ADDRESS_HTTP = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/api";
 String _SERVER_ADDRESS_ALERTS = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/alerts";
 String _SERVER_ADDRESS_FUNDING = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/funding";
-
-const String _FALLBACK_SERVER_ADDRESS_WS = "wss://app.natrium.io";
-const String _FALLBACK_SERVER_ADDRESS_HTTP = "https://app.natrium.io/api";
-const String _FALLBACK_SERVER_ADDRESS_ALERTS = "https://app.natrium.io/alerts";
 
 const String _USERNAME_LEASE_ENDPOINT = "https://nano.to/lease";
 
@@ -254,7 +253,6 @@ class AccountService {
       _isConnected = true;
       _isConnecting = false;
       log.v("Received $message");
-      // Map msg = await compute(decodeJson as FutureOr<Map<dynamic, dynamic>> Function(dynamic), message);
       final Map? msg = await compute(decodeJson, message);
       if (msg == null) {
         throw Exception("Invalid JSON received");
@@ -312,7 +310,7 @@ class AccountService {
           final String requestJson = await compute(encodeRequestItem, requestItem.request);
           //log.d("Sending: $requestJson");
           await _send(requestJson);
-        } else if ((DateTime.now().difference(requestItem.expireDt!).inSeconds > RequestItem.EXPIRE_TIME_S)) {
+        } else if (DateTime.now().difference(requestItem.expireDt!).inSeconds > RequestItem.EXPIRE_TIME_S) {
           pop();
           processQueue();
         }
@@ -615,6 +613,15 @@ class AccountService {
     return item;
   }
 
+  Future<HandoffResponse> requestHandoff(HandoffReplyRequest request) async {
+    final dynamic response = await makeHttpRequest(request);
+    if (response is ErrorResponse) {
+      throw Exception("Received error ${response.error} ${response.details}");
+    }
+    final HandoffResponse item = HandoffResponse.fromJson(response as Map<String, dynamic>);
+    return item;
+  }
+
   Future<ProcessResponse> requestReceive(String? representative, String? previous, String? balance, String? link, String? account, String? privKey) async {
     final StateBlock receiveBlock = StateBlock(
         subtype: BlockTypes.RECEIVE, previous: previous, representative: representative, balance: balance, link: link, account: account, privKey: privKey);
@@ -657,6 +664,36 @@ class AccountService {
 
     return requestProcess(processRequest);
   }
+
+  Future<HandoffResponse> requestHandoffHTTP(String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
+      {bool max = false, String? work}) async {
+    final StateBlock sendBlock = StateBlock(
+        subtype: BlockTypes.SEND,
+        previous: previous,
+        representative: representative,
+        balance: max ? "0" : sendAmount,
+        link: link,
+        work: work,
+        account: account,
+        privKey: privKey);
+
+    final BlockInfoItem previousInfo = await requestBlockInfo(previous);
+    final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
+
+    // Update data on our next receivable request
+    sendBlock.representative = previousBlock.representative;
+    sendBlock.setBalance(previousBlock.balance);
+    await sendBlock.sign(privKey);
+
+    // Process
+    final HandoffReplyRequest handoffReplyRequest = HandoffReplyRequest(block: sendBlock);
+
+    return requestHandoff(handoffReplyRequest);
+  }
+
+  // Future<HandoffWorkResponse> requestWork(String url, String hash) async {
+    
+  // }
 
   Future<ProcessResponse> requestOpen(String? balance, String? link, String? account, String? privKey, {String? representative}) async {
     representative = representative ?? await sl.get<SharedPrefsUtil>().getRepresentative();

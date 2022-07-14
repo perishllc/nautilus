@@ -42,12 +42,12 @@ import 'package:nautilus_wallet_flutter/ui/settings/changerepresentative_sheet.d
 import 'package:nautilus_wallet_flutter/ui/settings/contacts_widget.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/disable_password_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/set_password_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/set_plausible_pin_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_list_item.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
-import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
@@ -62,6 +62,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/biometrics.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/ninja/api.dart';
 import 'package:nautilus_wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -1216,7 +1217,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           color: StateContainer.of(context).curTheme.text15,
         ),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.registerUsername, AppIcons.at, onPressed: () {
-          Navigator.of(context).pushNamed("/register_username");
+          // Navigator.of(context).pushNamed("/register_username");
+          // TODO:
+          Navigator.of(context).pushNamed("/lock_screen");
         }),
         Divider(
           height: 2,
@@ -1446,15 +1449,17 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             await sl.get<SharedPrefsUtil>().setContactsOn(false);
 
             // re-add account index 0 and switch the account to it:
-            final String? seed = await StateContainer.of(context).getSeed();
-            await sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context)!.defaultAccountName);
-            final Account? mainAccount = await sl.get<DBHelper>().getMainAccount(seed);
-            await sl.get<DBHelper>().changeAccount(mainAccount);
+            final String seed = await StateContainer.of(context).getSeed();
+            await NanoUtil().loginAccount(seed, context);
+            await StateContainer.of(context).resetRecentlyUsedAccounts();
+            final Account? mainAccount = await sl.get<DBHelper>().getSelectedAccount(seed);
+            StateContainer.of(context).updateWallet(account: mainAccount!);
             // force users list to update on the home page:
             EventTaxiImpl.singleton().fire(ContactModifiedEvent());
             EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: []));
             StateContainer.of(context).updateUnified(true);
-            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true)); // definitely include
+            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
+
             // EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: mainAccount));
             // if (animationOpen && mounted) {
             //   Navigator.of(context).pop();
@@ -1620,7 +1625,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                               child: Container(
                                   width: 60,
                                   height: 45,
-                                  alignment: const AlignmentDirectional(-1, 0),
+                                  alignment: AlignmentDirectional.centerStart,
                                   child: Icon(
                                     AppIcons.accountwallet,
                                     color: StateContainer.of(context).curTheme.success,
@@ -1705,7 +1710,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                       child: TextButton(
                                         style: TextButton.styleFrom(
                                           primary: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
-                                          padding: const EdgeInsets.all(0.0),
+                                          padding: EdgeInsets.zero,
                                           // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
                                           // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
                                         ),
@@ -1758,7 +1763,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                       color: Colors.transparent,
                                       child: TextButton(
                                         style: TextButton.styleFrom(
-                                          padding: const EdgeInsets.all(0.0),
+                                          padding: EdgeInsets.zero,
                                           primary: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
                                           // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
                                           // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
@@ -1848,19 +1853,17 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                             ),
                           ),
                           // Main account address
-                          Container(
-                            child: Text(
-                              StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.address != null
-                                  ? ((StateContainer.of(context).wallet?.username != null)
-                                      ? StateContainer.of(context).wallet?.username
-                                      : StateContainer.of(context).wallet?.address?.substring(0, 12))!
-                                  : "",
-                              style: TextStyle(
-                                fontFamily: "OverpassMono",
-                                fontWeight: FontWeight.w100,
-                                fontSize: 14.0,
-                                color: StateContainer.of(context).curTheme.text60,
-                              ),
+                          Text(
+                            StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.address != null
+                                ? ((StateContainer.of(context).wallet?.username != null)
+                                    ? StateContainer.of(context).wallet?.username
+                                    : StateContainer.of(context).wallet?.address?.substring(0, 12))!
+                                : "",
+                            style: TextStyle(
+                              fontFamily: "OverpassMono",
+                              fontWeight: FontWeight.w100,
+                              fontSize: 14.0,
+                              color: StateContainer.of(context).curTheme.text60,
                             ),
                           ),
                         ],
@@ -2018,6 +2021,14 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         }),
                       ]),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    Column(children: <Widget>[
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.setPlausibleDeniabilityPin, AppIcons.walletpassword,
+                          onPressed: () {
+                        Sheets.showAppHeightNineSheet(context: context, widget: SetPlausiblePinSheet());
+                      }, disabled: _curAuthMethod.method != AuthMethod.PIN || StateContainer.of(context).encryptedSecret != null),
+                    ]),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                   ],
                 ),
                 // List Top Gradient End
@@ -2046,10 +2057,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   Future<void> authenticateWithPin() async {
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
+    final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
     final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
+        plausiblePin: plausiblePin,
         description: AppLocalization.of(context)!.pinSeedBackup,
       );
     }));

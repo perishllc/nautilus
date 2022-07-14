@@ -4,7 +4,6 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 
-
 class PurchaseNanoScreen extends StatefulWidget {
   @override
   _PurchaseNanoScreenState createState() => _PurchaseNanoScreenState();
@@ -36,14 +35,17 @@ class _PurchaseNanoScreenState extends State<PurchaseNanoScreen> {
                           margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
                           height: 50,
                           width: 50,
-                          child: FlatButton(
-                              highlightColor: StateContainer.of(context).curTheme.text15,
-                              splashColor: StateContainer.of(context).curTheme.text15,
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                primary: StateContainer.of(context).curTheme.text15,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                padding: EdgeInsets.zero,
+                                // highlightColor: StateContainer.of(context).curTheme.text15,
+                                // splashColor: StateContainer.of(context).curTheme.text15,
+                              ),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(0.0),
                               child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                       ],

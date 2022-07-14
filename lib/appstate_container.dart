@@ -130,8 +130,6 @@ class StateContainerState extends State<StateContainer> {
   AvailableBlockExplorer curBlockExplorer = AvailableBlockExplorer(AvailableBlockExplorerEnum.NANOLOOKER);
   BaseTheme curTheme = NautilusTheme();
   bool nyanoMode = false;
-  bool plausibleMode = false;
-  int plausibleOffset = 0;
   String currencyMode = CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName();
   // Currently selected account
   Account? selectedAccount = Account(id: 1, name: "AB", index: 0, lastAccess: 0, selected: true);
@@ -673,6 +671,13 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
+  Future<void> resetRecentlyUsedAccounts() async {
+    setState(() {
+      recentLast = null;
+      recentSecondLast = null;
+    });
+  }
+
   // Change language
   void updateLanguage(LanguageSetting language) {
     if (curLanguage.language != language.language) {
@@ -1195,7 +1200,7 @@ class StateContainerState extends State<StateContainer> {
 
     final String privKey = NanoUtil.seedToPrivate(await getSeed(), correctAccount.index!);
     try {
-     return Box.decrypt(memoEnc, fromAddress!, privKey);
+      return Box.decrypt(memoEnc, fromAddress!, privKey);
     } catch (error) {
       log.d("failed to decrypt memo!");
       return "Decryption failed: ${error.toString()}";

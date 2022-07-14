@@ -26,83 +26,68 @@ class _RemoteMessageCardState extends State<RemoteMessageCard> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: widget.hasBg
-            ? StateContainer.of(context).curTheme.success!.withOpacity(0.06)
-            : Colors.transparent,
+        color: widget.hasBg ? StateContainer.of(context).curTheme.success!.withOpacity(0.06) : Colors.transparent,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           width: 2,
           color: StateContainer.of(context).curTheme.success!,
         ),
       ),
-      child: FlatButton(
-        padding: EdgeInsets.all(0),
-        highlightColor:
-            StateContainer.of(context).curTheme.success!.withOpacity(0.15),
-        splashColor:
-            StateContainer.of(context).curTheme.success!.withOpacity(0.15),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          primary: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
+          padding: EdgeInsets.zero,
+          // highlightColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
+          // splashColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
+        ),
         onPressed: widget.onPressed as void Function()?,
         child: Container(
           width: double.infinity,
-          padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
+          padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              widget.alert!.title != null
-                  ? Container(
-                      margin: EdgeInsetsDirectional.only(
-                        bottom: widget.alert!.shortDescription != null &&
-                                (widget.showDesc || widget.alert!.title == null)
-                            ? 4
-                            : 0,
-                      ),
-                      child: Text(
-                        widget.alert!.title!,
-                        style: AppStyles.remoteMessageCardTitle(context),
-                      ),
-                    )
-                  : SizedBox(),
-              widget.alert!.shortDescription != null &&
-                      (widget.showDesc || widget.alert!.title == null)
-                  ? Container(
-                      margin: EdgeInsetsDirectional.only(
-                        bottom: 4,
-                      ),
-                      child: Text(
-                        widget.alert!.shortDescription!,
-                        style: AppStyles.remoteMessageCardShortDescription(
-                            context),
-                      ),
-                    )
-                  : SizedBox(),
-              widget.alert!.timestamp != null && widget.showTimestamp
-                  ? Container(
-                      margin: EdgeInsetsDirectional.only(
-                        top: 6,
-                        bottom: 2,
-                      ),
-                      padding: EdgeInsetsDirectional.only(
-                          start: 10, end: 10, top: 2, bottom: 2),
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text05,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(100),
-                        ),
-                        border: Border.all(
-                          color: StateContainer.of(context).curTheme.text10!,
-                        ),
-                      ),
-                      child: Text(
-                        DateTime.fromMillisecondsSinceEpoch(
-                                    widget.alert!.timestamp!)
-                                .toUtc()
-                                .toString()
-                                .substring(0, 16) +
-                            " UTC",
-                        style: AppStyles.remoteMessageCardTimestamp(context),
-                      ),
-                    )
-                  : SizedBox(),
+              if (widget.alert!.title != null)
+                Container(
+                  margin: EdgeInsetsDirectional.only(
+                    bottom: widget.alert!.shortDescription != null && (widget.showDesc || widget.alert!.title == null) ? 4 : 0,
+                  ),
+                  child: Text(
+                    widget.alert!.title!,
+                    style: AppStyles.remoteMessageCardTitle(context),
+                  ),
+                ),
+              if (widget.alert!.shortDescription != null && (widget.showDesc || widget.alert!.title == null))
+                Container(
+                  margin: const EdgeInsetsDirectional.only(
+                    bottom: 4,
+                  ),
+                  child: Text(
+                    widget.alert!.shortDescription!,
+                    style: AppStyles.remoteMessageCardShortDescription(context),
+                  ),
+                ),
+              if (widget.alert!.timestamp != null && widget.showTimestamp)
+                Container(
+                  margin: const EdgeInsetsDirectional.only(
+                    top: 6,
+                    bottom: 2,
+                  ),
+                  padding: const EdgeInsetsDirectional.only(start: 10, end: 10, top: 2, bottom: 2),
+                  decoration: BoxDecoration(
+                    color: StateContainer.of(context).curTheme.text05,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                    border: Border.all(
+                      color: StateContainer.of(context).curTheme.text10!,
+                    ),
+                  ),
+                  child: Text(
+                    "${DateTime.fromMillisecondsSinceEpoch(widget.alert!.timestamp!).toUtc().toString().substring(0, 16)} UTC",
+                    style: AppStyles.remoteMessageCardTimestamp(context),
+                  ),
+                ),
             ],
           ),
         ),

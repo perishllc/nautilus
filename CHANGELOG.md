@@ -2,10 +2,11 @@
 #### Added
 - New monochrome theme!
 #### Changed
-- Updated QR Code to look cleaner
+- Updated QR Code Receive screen to look much cleaner
 #### Fixed
 - Delete slide action was the wrong color on some themes
 - Bug regression with the search bar (change blocks)
+- QR Code scanning fixes
 ## v0.4.1 - [2022-07-11]
 #### Added
 - New intro page animation!

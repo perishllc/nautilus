@@ -39,7 +39,7 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
     List<Widget> ret = [];
     for (int i = 0; i < nRows; i++) {
       ret.add(Container(
-        width: (MediaQuery.of(context).size.width),
+        width: MediaQuery.of(context).size.width,
         height: 1,
         color: StateContainer.of(context).curTheme.text05,
       ));
@@ -74,13 +74,13 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
         Padding(
             padding: EdgeInsets.symmetric(vertical: smallScreen(context) ? 6.0 : 9.0),
             child: Container(
-              margin: EdgeInsetsDirectional.only(start: 5),
+              margin: const EdgeInsetsDirectional.only(start: 5),
               child: Row(mainAxisAlignment: MainAxisAlignment.center, children: items),
             )),
       );
       if (curWord == itemsPerRow * nRows) {
         ret.add(Container(
-          width: (MediaQuery.of(context).size.width),
+          width: MediaQuery.of(context).size.width,
           height: 1,
           color: StateContainer.of(context).curTheme.text05,
         ));
@@ -104,65 +104,63 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
         child: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: 15),
+              margin: const EdgeInsets.only(top: 15),
               child: Column(
                 children: _buildMnemonicRows(),
               ),
             ),
             // Tap to reveal or hide
-            widget.obscureSeed
-                ? Container(
-                    margin: EdgeInsetsDirectional.only(top: 8),
-                    child: _seedObscured
-                        ? AutoSizeText(
-                            AppLocalization.of(context)!.tapToReveal,
-                            style: AppStyles.textStyleParagraphThinPrimary(context),
-                          )
-                        : Text(
-                            AppLocalization.of(context)!.tapToHide,
-                            style: AppStyles.textStyleParagraphThinPrimary(context),
-                          ),
-                  )
-                : SizedBox(),
+            if (widget.obscureSeed)
+              Container(
+                margin: const EdgeInsetsDirectional.only(top: 8),
+                child: _seedObscured
+                    ? AutoSizeText(
+                        AppLocalization.of(context)!.tapToReveal,
+                        style: AppStyles.textStyleParagraphThinPrimary(context),
+                      )
+                    : Text(
+                        AppLocalization.of(context)!.tapToHide,
+                        style: AppStyles.textStyleParagraphThinPrimary(context),
+                      ),
+              ),
           ],
         ),
       ),
-      widget.showButton
-          ? Container(
-              margin: EdgeInsetsDirectional.only(top: 5),
-              padding: EdgeInsets.all(0.0),
-              child: OutlinedButton(
-                onPressed: () {
-                  UserDataUtil.setSecureClipboardItem(widget.wordList!.join(' '));
-                  setState(() {
-                    _seedCopied = true;
-                  });
-                  if (_seedCopiedTimer != null) {
-                    _seedCopiedTimer!.cancel();
-                  }
-                  _seedCopiedTimer = new Timer(const Duration(milliseconds: 1500), () {
-                    setState(() {
-                      _seedCopied = false;
-                    });
-                  });
-                },
-                // TODO:
-                // splashColor: _seedCopied ? Colors.transparent : StateContainer.of(context).curTheme.primary30,
-                // highlightColor: _seedCopied ? Colors.transparent : StateContainer.of(context).curTheme.primary15,
-                // highlightedBorderColor: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
-                // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                // borderSide:
-                //     BorderSide(color: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary, width: 1.0),
-                child: AutoSizeText(
-                  _seedCopied ? AppLocalization.of(context)!.copied : AppLocalization.of(context)!.copy,
-                  textAlign: TextAlign.center,
-                  style: _seedCopied ? AppStyles.textStyleButtonSuccessSmallOutline(context) : AppStyles.textStyleButtonPrimarySmallOutline(context),
-                  maxLines: 1,
-                  stepGranularity: 0.5,
-                ),
-              ),
-            )
-          : SizedBox(),
+      if (widget.showButton)
+        Container(
+          margin: const EdgeInsetsDirectional.only(top: 5),
+          padding: EdgeInsets.zero,
+          child: OutlinedButton(
+            onPressed: () {
+              UserDataUtil.setSecureClipboardItem(widget.wordList!.join(' '));
+              setState(() {
+                _seedCopied = true;
+              });
+              if (_seedCopiedTimer != null) {
+                _seedCopiedTimer!.cancel();
+              }
+              _seedCopiedTimer = Timer(const Duration(milliseconds: 1500), () {
+                setState(() {
+                  _seedCopied = false;
+                });
+              });
+            },
+            // TODO:
+            // splashColor: _seedCopied ? Colors.transparent : StateContainer.of(context).curTheme.primary30,
+            // highlightColor: _seedCopied ? Colors.transparent : StateContainer.of(context).curTheme.primary15,
+            // highlightedBorderColor: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
+            // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+            // borderSide:
+            //     BorderSide(color: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary, width: 1.0),
+            child: AutoSizeText(
+              _seedCopied ? AppLocalization.of(context)!.copied : AppLocalization.of(context)!.copy,
+              textAlign: TextAlign.center,
+              style: _seedCopied ? AppStyles.textStyleButtonSuccessSmallOutline(context) : AppStyles.textStyleButtonPrimarySmallOutline(context),
+              maxLines: 1,
+              stepGranularity: 0.5,
+            ),
+          ),
+        ),
     ]);
   }
 }

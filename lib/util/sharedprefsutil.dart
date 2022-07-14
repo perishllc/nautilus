@@ -222,8 +222,6 @@ class SharedPrefsUtil {
   }
 
   Future<AvailableCurrency> getCurrency(Locale deviceLocale) async {
-    // return AvailableCurrency(
-    //     AvailableCurrencyEnum.values[await (get(cur_currency, defaultValue: AvailableCurrency.getBestForLocale(deviceLocale).currency.index) as FutureOr<int>)]);
     return AvailableCurrency(
         AvailableCurrencyEnum.values[(await get(cur_currency, defaultValue: AvailableCurrency.getBestForLocale(deviceLocale).currency.index) as int)]);
   }
@@ -233,7 +231,6 @@ class SharedPrefsUtil {
   }
 
   Future<LanguageSetting> getLanguage() async {
-    // return LanguageSetting(AvailableLanguage.values[await (get(cur_language, defaultValue: AvailableLanguage.DEFAULT.index) as FutureOr<int>)]);
     return LanguageSetting(AvailableLanguage.values[await get(cur_language, defaultValue: AvailableLanguage.DEFAULT.index) as int]);
   }
 
@@ -327,7 +324,6 @@ class SharedPrefsUtil {
   }
 
   Future<LockTimeoutSetting> getLockTimeout() async {
-    // return LockTimeoutSetting(LockTimeoutOption.values[await (get(kalium_lock_timeout, defaultValue: LockTimeoutOption.ONE.index) as FutureOr<int>)]);
     return LockTimeoutSetting(LockTimeoutOption.values[await get(kalium_lock_timeout, defaultValue: LockTimeoutOption.ONE.index) as int]);
   }
 

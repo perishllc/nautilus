@@ -19,7 +19,6 @@ import 'package:nautilus_wallet_flutter/network/model/response/process_response.
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/generate/generate_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
@@ -487,10 +486,12 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   Future<void> authenticateWithPin() async {
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
+    final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
     final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
+        plausiblePin: plausiblePin,
         description: AppLocalization.of(context)!
             .sendAmountConfirmPin
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))

@@ -11,9 +11,8 @@ import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 /// A widget for displaying a mnemonic phrase
 class PlainSeedDisplay extends StatefulWidget {
-
   const PlainSeedDisplay({required this.seed, this.obscureSeed = false, this.showButton = true});
-  
+
   final String? seed;
   final bool obscureSeed;
   final bool showButton;
@@ -85,9 +84,7 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
                             AppLocalization.of(context)!.tapToHide,
                             style: AppStyles.textStyleParagraphThinPrimary(context),
                           ),
-                  )
-                else
-                  const SizedBox(),
+                  ),
               ],
             )),
         // Container for the copy button

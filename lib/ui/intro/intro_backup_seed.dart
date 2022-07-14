@@ -1,18 +1,18 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/mnemonic_display.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/plainseed_display.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/mnemonic_display.dart';
 
 class IntroBackupSeedPage extends StatefulWidget {
   final String? encryptedSeed;
@@ -72,33 +72,39 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                           margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
                           height: 50,
                           width: 50,
-                          child: FlatButton(
-                              highlightColor: StateContainer.of(context).curTheme.text15,
-                              splashColor: StateContainer.of(context).curTheme.text15,
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                primary: StateContainer.of(context).curTheme.text15,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                padding: EdgeInsets.zero,
+                                // highlightColor: StateContainer.of(context).curTheme.text15,
+                                // splashColor: StateContainer.of(context).curTheme.text15,
+                              ),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(0.0),
                               child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                         // Switch between Secret Phrase and Seed
                         Container(
                           margin: EdgeInsetsDirectional.only(end: smallScreen(context) ? 15 : 20),
-                          child: FlatButton(
-                            highlightColor: StateContainer.of(context).curTheme.text15,
-                            splashColor: StateContainer.of(context).curTheme.text15,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: StateContainer.of(context).curTheme.text15,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                              padding: const EdgeInsetsDirectional.only(top: 6, bottom: 6, start: 12, end: 12),
+                              // highlightColor: StateContainer.of(context).curTheme.text15,
+                              // splashColor: StateContainer.of(context).curTheme.text15,
+                            ),
                             onPressed: () {
                               setState(() {
                                 _showMnemonic = !_showMnemonic;
                               });
                             },
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                            padding: EdgeInsetsDirectional.only(top: 6, bottom: 6, start: 12, end: 12),
                             child: Row(
                               children: [
                                 Container(
-                                  margin: EdgeInsetsDirectional.only(end: 8),
+                                  margin: const EdgeInsetsDirectional.only(end: 8),
                                   child: Text(
                                     !_showMnemonic ? AppLocalization.of(context)!.secretPhrase : AppLocalization.of(context)!.seed,
                                     style: TextStyle(
@@ -123,7 +129,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                         end: smallScreen(context) ? 30 : 40,
                         top: 10,
                       ),
-                      alignment: AlignmentDirectional(-1, 0),
+                      alignment: AlignmentDirectional.centerStart,
                       child: Row(
                         children: <Widget>[
                           Container(
@@ -137,7 +143,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsetsDirectional.only(start: 10, end: 10),
+                            margin: const EdgeInsetsDirectional.only(start: 10, end: 10),
                             child: Icon(
                               _showMnemonic ? Icons.vpn_key : AppIcons.seed,
                               size: _showMnemonic ? 36 : 24,
@@ -148,7 +154,10 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                       ),
                     ),
                     // Mnemonic word list
-                    if (_seed != null && _mnemonic != null) _showMnemonic ? MnemonicDisplay(wordList: _mnemonic) : PlainSeedDisplay(seed: _seed) else Text('')
+                    if (_seed != null && _mnemonic != null)
+                      _showMnemonic ? MnemonicDisplay(wordList: _mnemonic) : PlainSeedDisplay(seed: _seed)
+                    else
+                      const Text('')
                   ],
                 ),
               ),

@@ -855,7 +855,7 @@ class DBHelper {
     final Database dbClient = (await db)!;
 
     if (txData.uuid!.isEmpty) {
-      throw "this shouldn't happen";
+      throw Exception("this shouldn't happen");
     }
 
     return await dbClient.rawUpdate(
@@ -1103,6 +1103,25 @@ class DBHelper {
       final int nextID = nextIndex + 1;
       final String nextName = nameBuilder!.replaceAll("%1", nextID.toString());
       account = Account(index: nextIndex, name: nextName, lastAccess: 0, selected: false, address: NanoUtil.seedToAddress(seed!, nextIndex));
+      await txn.rawInsert('INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)',
+          [account!.name, account!.index, account!.lastAccess, if (account!.selected) 1 else 0, account!.address]);
+    });
+    // check if account has a user:
+    final User? user = await getUserWithAddress(account!.address!);
+    if (user != null) {
+      account!.user = user;
+    }
+    return account;
+  }
+
+  Future<Account?> addNewMainAccount(String? seed, {String? nameBuilder, int offset = 0}) async {
+    final Database dbClient = (await db)!;
+    Account? account;
+    await dbClient.transaction((Transaction txn) async {
+      int nextIndex = offset;
+      final int nextID = nextIndex + 1;
+      final String nextName = nameBuilder!.replaceAll("%1", nextID.toString());
+      account = Account(index: nextIndex, name: nextName, lastAccess: 0, selected: true, address: NanoUtil.seedToAddress(seed!, nextIndex));
       await txn.rawInsert('INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)',
           [account!.name, account!.index, account!.lastAccess, if (account!.selected) 1 else 0, account!.address]);
     });

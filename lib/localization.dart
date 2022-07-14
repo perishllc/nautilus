@@ -1205,12 +1205,31 @@ class AppLocalization {
     return Intl.message("Set Wallet Pin", desc: 'Allows user to encrypt wallet with a pin', name: 'setWalletPin');
   }
 
-  String get setWalletPlausiblePin {
-    return Intl.message("Set Wallet Plausible Pin", desc: 'Allows user to setup a plausible deniability pin', name: 'setWalletPlausiblePin');
+  String get setPlausibleDeniabilityPin {
+    return Intl.message("Set Plausible Pin", desc: 'Allows user to setup a plausible deniability pin', name: 'setPlausibleDeniabilityPin');
+  }
+
+  String get plausibleSheetInfo {
+    return Intl.message(
+        "Set a secondary pin for plausible deniability mode.\n\nIf your wallet is unlocked using this secondary pin, your seed will be replaced with a hash of the existing seed. This is a security feature intended to be used in the event you are forced to open your wallet.\n\nThis pin will act like a normal (correct) pin EXCEPT when unlocking your wallet, which is when plausible deniability mode will activate.\n\nYour funds WILL BE LOST upon entering plausible deniability mode if you have not backed up your seed!",
+        desc: 'plausible_sheet_info',
+        name: 'plausibleSheetInfo');
+  }
+
+  String get plausibleInfoHeader {
+    return Intl.message("Plausible Deniability Info", desc: 'plausible_info_header', name: 'plausibleInfoHeader');
   }
 
   String get setPassword {
     return Intl.message("Set Password", desc: 'A button that sets the wallet password', name: 'setPassword');
+  }
+
+  String get setPin {
+    return Intl.message("Set Pin", desc: 'A button that sets the plausible deniability password', name: 'setPlausiblePin');
+  }
+
+  String get setPinSuccess {
+    return Intl.message("Pin has been set successfully", desc: 'Setting a Wallet Pin was successful', name: 'setPinSuccess');
   }
 
   String get disableWalletPassword {
@@ -1401,6 +1420,18 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   /// END GIFTS
+
+  /// HANDOFF
+
+  String get handoffSupportedMethodNotFound {
+    return Intl.message("A supported handoff method couldn't be found!", desc: 'handoff_method_not_found', name: 'handoffSupportedMethodNotFound');
+  }
+
+  String get handoff {
+    return Intl.message("handoff", desc: 'send_handoff', name: 'handoff');
+  }
+
+  /// END HANDOFF
 
   /// USERNAMES
 
@@ -1641,6 +1672,28 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   /// -- END SEED PROCESS
 
   /// HINTS
+
+
+  String get createPinHint {
+    return Intl.message("Create a pin", desc: 'A text field hint that tells the user to create a pin', name: 'createPinHint');
+  }
+
+  String get confirmPinHint {
+    return Intl.message("Confirm the pin", desc: 'A text field hint that tells the user to confirm the pin', name: 'confirmPinHint');
+  }
+  
+  String get pinsDontMatch {
+    return Intl.message("Pins do not match", desc: 'An error indicating a pin has been confirmed incorrectly', name: 'pinsDontMatch');
+  }
+
+  String get pinBlank {
+    return Intl.message("Pin cannot be empty", desc: 'An error indicating a pin has been entered incorrectly', name: 'pinBlank');
+  }
+
+  String get invalidPin {
+    return Intl.message("Invalid Pin", desc: 'An error indicating a pin has been entered incorrectly', name: 'invalidPin');
+  }
+
   String get createPasswordHint {
     return Intl.message("Create a password", desc: 'A text field hint that tells the user to create a password', name: 'createPasswordHint');
   }
@@ -1649,16 +1702,16 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
     return Intl.message("Confirm the password", desc: 'A text field hint that tells the user to confirm the password', name: 'confirmPasswordHint');
   }
 
-  String get enterPasswordHint {
-    return Intl.message("Enter your password", desc: 'A text field hint that tells the users to enter their password', name: 'enterPasswordHint');
-  }
-
   String get passwordsDontMatch {
     return Intl.message("Passwords do not match", desc: 'An error indicating a password has been confirmed incorrectly', name: 'passwordsDontMatch');
   }
 
   String get passwordBlank {
     return Intl.message("Password cannot be empty", desc: 'An error indicating a password has been entered incorrectly', name: 'passwordBlank');
+  }
+
+  String get enterPasswordHint {
+    return Intl.message("Enter your password", desc: 'A text field hint that tells the users to enter their password', name: 'enterPasswordHint');
   }
 
   String get invalidPassword {
@@ -1671,6 +1724,11 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   String get passwordWillBeRequiredToOpenParagraph {
     return Intl.message("This password will be required to open Nautilus.",
         desc: 'A paragraph that tells the users that the created password will be required to open Nautilus.', name: 'passwordWillBeRequiredToOpenParagraph');
+  }
+
+  String get plausibleDeniabilityParagraph {
+    return Intl.message("This is NOT the same pin you used to create your wallet. Press the info button for more information.",
+        desc: 'A paragraph that tells warns the user this is plausible deniability pin.', name: 'plausibleDeniabilityParagraph');
   }
 
   String get passwordNoLongerRequiredToOpenParagraph {

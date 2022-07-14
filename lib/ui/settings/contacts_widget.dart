@@ -496,7 +496,7 @@ class _ContactsListState extends State<ContactsList> {
     if (user.aliases == null) {
       return [
         // nickname
-        if (user.nickname != null) Text("★${user.nickname!}", style: AppStyles.textStyleSettingItemHeader(context)) else const SizedBox(),
+        if (user.nickname != null) Text("★${user.nickname!}", style: AppStyles.textStyleSettingItemHeader(context)),
 
         if (user.username != null)
           Text(

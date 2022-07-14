@@ -8,6 +8,7 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:quiver/strings.dart';
@@ -28,7 +29,7 @@ class UserDataUtil {
   static const MethodChannel _channel = MethodChannel('fappchannel');
   static StreamSubscription<dynamic>? setStream;
 
-  static String? _parseData(String data, DataType type) {
+  static dynamic _parseData(String data, DataType type) {
     data = data.trim();
     if (type == DataType.RAW) {
       return data;
@@ -49,10 +50,17 @@ class UserDataUtil {
         return data;
       }
     } else if (type == DataType.DATA) {
-      // Check if an address or manta result
-      final Address address = Address(data);
-      if (address.isValid()) {
-        return data;
+      // Check if an address / URI scheme:
+      dynamic fin;
+      try {
+        fin = uriParser(data);
+      } catch (e) {
+        print(e);
+      }
+      if (fin is Address && fin.isValid()) {
+        return fin;
+      } else if (fin is HandoffItem && fin.isValid()) {
+        return fin;
       }
     }
     return null;
@@ -63,13 +71,18 @@ class UserDataUtil {
     if (data == null || data.text == null) {
       return null;
     }
-    return _parseData(data.text!, type);
+
+    if (type == DataType.DATA) {
+      throw Exception("getClipboard called with datatype: DATA!");
+    }
+
+    return _parseData(data.text!, type) as String?;
   }
 
-  static Future<String?> getQRData(DataType type, BuildContext context) async {
+  static Future<dynamic> getQRData(DataType type, BuildContext context) async {
     UIUtil.cancelLockEvent();
     try {
-      final String data = (await BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/)).rawContent;
+      final String data = (await BarcodeScanner.scan()).rawContent;
       if (isEmpty(data)) {
         return null;
       }

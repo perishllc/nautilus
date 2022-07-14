@@ -59,9 +59,7 @@ class BlockedDetailsSheet {
                 fontFamily: 'NunitoSans',
               ),
             ),
-          )
-        else
-          const SizedBox(),
+          ),
         if (user.username != null)
           Container(
             width: double.infinity,
@@ -85,9 +83,7 @@ class BlockedDetailsSheet {
                 fontFamily: 'NunitoSans',
               ),
             ),
-          )
-        else
-          const SizedBox(),
+          ),
       ];
     } else {
       for (var i = 0; i < user.aliases!.length; i += 2) {
@@ -159,9 +155,15 @@ class BlockedDetailsSheet {
                           width: 50,
                           height: 50,
                           margin: const EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
-                          child: FlatButton(
-                            highlightColor: StateContainer.of(context).curTheme.text15,
-                            splashColor: StateContainer.of(context).curTheme.text15,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: StateContainer.of(context).curTheme.text15,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                              padding: const EdgeInsets.all(13.0),
+                              tapTargetSize: MaterialTapTargetSize.padded,
+                              // highlightColor: StateContainer.of(context).curTheme.text15,
+                              // splashColor: StateContainer.of(context).curTheme.text15,
+                            ),
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
@@ -182,9 +184,6 @@ class BlockedDetailsSheet {
                               }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
                             },
                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
-                            padding: const EdgeInsets.all(13.0),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                            materialTapTargetSize: MaterialTapTargetSize.padded,
                           ),
                         ),
                         // The header of the sheet
@@ -258,20 +257,18 @@ class BlockedDetailsSheet {
                                       fontFamily: 'NunitoSans',
                                     ),
                                   ),
-                                )
-                              else
-                                const SizedBox(),
+                                ),
                               // Contact Address
                               GestureDetector(
                                 onTap: () {
-                                  Clipboard.setData(new ClipboardData(text: blocked.address));
+                                  Clipboard.setData(ClipboardData(text: blocked.address));
                                   setState(() {
                                     _addressCopied = true;
                                   });
                                   if (_addressCopiedTimer != null) {
                                     _addressCopiedTimer!.cancel();
                                   }
-                                  _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                                  _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
                                     setState(() {
                                       _addressCopied = false;
                                     });

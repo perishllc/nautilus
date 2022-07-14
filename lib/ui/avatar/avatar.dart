@@ -71,47 +71,13 @@ class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateM
                         Container(
                           margin: EdgeInsetsDirectional.only(bottom: MediaQuery.of(context).size.height * 0.2),
                           child: ClipOval(
-                            child: Container(
+                            child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.8,
                               height: MediaQuery.of(context).size.width * 0.8,
                               child: ClipOval(
                                 child: Stack(
                                   alignment: Alignment.center,
-                                  children: <Widget>[
-                                    // Hero(
-                                    //   tag: "avatar",
-                                    //   child: SvgPicture.network(
-                                    //     UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                    //         StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address)),
-                                    //     key: Key(UIUtil.getNatriconURL(StateContainer.of(context).selectedAccount.address,
-                                    //         StateContainer.of(context).getNatriconNonce(StateContainer.of(context).selectedAccount.address))),
-                                    //     placeholderBuilder: (BuildContext context) => Container(
-                                    //       child: FlareActor(
-                                    //         "legacy_assets/ntr_placeholder_animation.flr",
-                                    //         animation: "main",
-                                    //         fit: BoxFit.contain,
-                                    //         color: StateContainer.of(context).curTheme.primary,
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    /* // Button for the interaction
-                                    FlatButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(2000.0)),
-                                      highlightColor:
-                                          StateContainer.of(context).curTheme.text15,
-                                      splashColor:
-                                          StateContainer.of(context).curTheme.text15,
-                                      padding: EdgeInsets.all(0.0),
-                                      child: Container(
-                                        color: Colors.transparent,
-                                      ),
-                                    ) */
-                                  ],
+                                  children: <Widget>[],
                                 ),
                               ),
                             ),
@@ -135,16 +101,15 @@ class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateM
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: <Widget>[
                                           // If balance if below 0.0123457 Nano, don't display this button
-                                          hasEnoughFunds
-                                              ? Row(
-                                                  children: <Widget>[
-                                                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, "Change My Natricon", Dimens.BUTTON_TOP_DIMENS,
-                                                        onPressed: () {
-                                                      Navigator.of(context).pushNamed('/avatar_change_page');
-                                                    }),
-                                                  ],
-                                                )
-                                              : SizedBox(),
+                                          if (hasEnoughFunds)
+                                            Row(
+                                              children: <Widget>[
+                                                AppButton.buildAppButton(context, AppButtonType.PRIMARY, "Change My Natricon", Dimens.BUTTON_TOP_DIMENS,
+                                                    onPressed: () {
+                                                  Navigator.of(context).pushNamed('/avatar_change_page');
+                                                }),
+                                              ],
+                                            ),
                                           Row(
                                             children: <Widget>[
                                               AppButton.buildAppButton(

@@ -3,44 +3,63 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/handoff_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/handoff/handoff_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/biometrics.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
-class GenerateConfirmSheet extends StatefulWidget {
-  final String? amountRaw;
-  final String? destination;
-  final String paperWalletSeed;
-  final String memo;
+class HandoffConfirmSheet extends StatefulWidget {
+  const HandoffConfirmSheet(
+      {required this.handoffItem,
+      required this.destination,
+      this.contactName,
+      this.localCurrency,
+      this.maxSend = false,
+      this.phoneNumber = "",
+      this.paperWalletSeed = "",
+      this.link = "",
+      this.memo = ""})
+      : super();
+
+  final HandoffItem handoffItem;
+  final String destination;
+  final String? contactName;
   final String? localCurrency;
   final bool maxSend;
+  // final bool isPhoneNumber;
+  final String phoneNumber;
+  final String link;
+  final String paperWalletSeed;
+  final String memo;
 
-  GenerateConfirmSheet({this.amountRaw, this.destination, this.paperWalletSeed = "", this.memo = "", this.localCurrency, this.maxSend = false}) : super();
-
-  _GenerateConfirmSheetState createState() => _GenerateConfirmSheetState();
+  _HandoffConfirmSheetState createState() => _HandoffConfirmSheetState();
 }
 
-class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
+class _HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
@@ -72,9 +91,9 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
     super.dispose();
   }
 
-  void _showAnimation(BuildContext context) {
+  void _showAnimation(BuildContext context, AnimationType type) {
     animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.GENERATE, onPoppedCallback: () => animationOpen = false);
+    AppAnimation.animationLauncher(context, type, onPoppedCallback: () => animationOpen = false);
   }
 
   @override
@@ -98,19 +117,18 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  // "SENDING" TEXT
+                  // "HANDOFF" TEXT
                   Container(
                     margin: const EdgeInsets.only(bottom: 10.0),
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context)!.creatingGiftCard, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context)!.handoff, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
                     ),
                   ),
-                  // Container for the amount text
                   Container(
                     margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
@@ -126,7 +144,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                         text: "",
                         children: [
                           TextSpan(
-                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                            text: getThemeAwareRawAccuracy(context, widget.handoffItem.amount),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           displayCurrencySymbol(
@@ -134,7 +152,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                             AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
-                            text: getRawAsThemeAwareAmount(context, widget.amountRaw),
+                            text: getRawAsThemeAwareFormattedAmount(context, widget.handoffItem.amount),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
@@ -148,19 +166,21 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                     ),
                   ),
 
-                  if (widget.memo.isNotEmpty)
+                  // "TO" text
+                  if (widget.link.isEmpty)
                     Container(
                       margin: const EdgeInsets.only(top: 30.0, bottom: 10),
                       child: Column(
                         children: <Widget>[
                           Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context)!.to, context),
                             style: AppStyles.textStyleHeader(context),
                           ),
                         ],
                       ),
                     ),
-                  if (widget.memo.isNotEmpty)
+                  // Address text
+                  if (widget.link.isEmpty)
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                         margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
@@ -169,11 +189,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                           color: StateContainer.of(context).curTheme.backgroundDarkest,
                           borderRadius: BorderRadius.circular(25),
                         ),
-                        child: Text(
-                          widget.memo,
-                          style: AppStyles.textStyleParagraph(context),
-                          textAlign: TextAlign.center,
-                        )),
+                        child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
                 ],
               ),
             ),
@@ -191,14 +207,15 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+
+                      final String authText = AppLocalization.of(context)!
+                          .sendAmountConfirm
+                          .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.handoffItem.amount))
+                          .replaceAll("%2", StateContainer.of(context).currencyMode);
+
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
-                          final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
-                              context,
-                              AppLocalization.of(context)!
-                                  .sendAmountConfirm
-                                  .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
-                                  .replaceAll("%2", StateContainer.of(context).currencyMode));
+                          final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, authText);
                           if (authenticated) {
                             sl.get<HapticUtil>().fingerprintSucess();
                             EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
@@ -229,71 +246,101 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
   }
 
   Future<void> _doSend() async {
-    String? branchLink;
+    bool memoSendFailed = false;
+    String? poppedError;
     try {
-      _showAnimation(context);
+      final String walletAddress = StateContainer.of(context).wallet!.address!;
 
-      // create link:
-      final BranchUniversalObject buo = BranchUniversalObject(
-          canonicalIdentifier: 'flutter/branch',
-          //canonicalUrl: '',
-          title: 'Nautilus Gift Card',
-          // imageUrl: 'https://flutter.dev/assets/flutter-lockup-4cb0ee072ab312e59784d9fbf4fb7ad42688a7fdaea1270ccf6bbf4f34b7e03f.svg',
-          contentDescription: 'Get the app to open this gift card!',
-          keywords: ['Nautilus', "Gift Card"],
-          publiclyIndex: true,
-          locallyIndex: true,
-          contentMetadata: BranchContentMetaData()
-            ..addCustomMetadata('seed', widget.paperWalletSeed)
-            ..addCustomMetadata('address', widget.destination)
-            ..addCustomMetadata('memo', widget.memo)
-            ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
-            ..addCustomMetadata('signature', "")
-            ..addCustomMetadata('nonce', "")
-            ..addCustomMetadata('amount_raw', widget.amountRaw));
+      _showAnimation(context, AnimationType.SEND);
 
-      final BranchLinkProperties lp = BranchLinkProperties(
-          //alias: 'flutterplugin', //define link url,
-          channel: 'nautilusapp',
-          feature: 'gift',
-          stage: 'new share');
+      // ProcessResponse? resp = await sl.get<AccountService>().requestSend(
+      //     StateContainer.of(context).wallet!.representative,
+      //     StateContainer.of(context).wallet!.frontier,
+      //     widget.handoffItem.amount,
+      //     widget.destination,
+      //     StateContainer.of(context).wallet!.address,
+      //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+      //     max: widget.maxSend);
+      // StateContainer.of(context).wallet!.frontier = resp.hash;
+      // StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.handoffItem.amount!);
 
-      final BranchResponse branchResponse = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-
-      // send funds:
-      ProcessResponse? resp;
-      if (branchResponse.success) {
-        branchLink = branchResponse.result as String;
-        resp = await sl.get<AccountService>().requestSend(
-            StateContainer.of(context).wallet!.representative,
-            StateContainer.of(context).wallet!.frontier,
-            widget.amountRaw,
-            widget.destination,
-            StateContainer.of(context).wallet!.address,
-            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
-            max: widget.maxSend);
-        StateContainer.of(context).wallet!.frontier = resp.hash;
-        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw!);
+      // check if we need to generate the PoW first:
+      if (!widget.handoffItem.work) {
+        // we must provide our own PoW:
+        // TODO:
       }
 
-      // ignore: use_build_context_synchronously
-      await sl.get<GiftCards>().handleResponse(context,
-          success: branchResponse.success,
-          amountRaw: widget.amountRaw!,
-          destination: widget.destination!,
-          localCurrency: widget.localCurrency,
-          hash: resp?.hash,
-          link: branchLink,
-          paperWalletSeed: widget.paperWalletSeed,
-          memo: widget.memo);
+      // construct the response to the server:
+      String? url;
+
+      for (var method in widget.handoffItem.methods) {
+        if (method.type == "http") {
+          url = method.url;
+        }
+      }
+
+      if (url == null) {
+        // no method we support:
+        poppedError = AppLocalization.of(context)!.handoffSupportedMethodNotFound;
+        throw Exception("No supported method found");
+      }
+
+      // construct the request:
+
+      // HandoffResponse? = await sl.get<AccountService>.requestHandoff(
+      //     StateContainer.of(context).wallet!.representative,
+      //     StateContainer.of(context).wallet!.frontier,
+      //     widget.handoffItem.amount,
+      //     widget.destination,
+      //     StateContainer.of(context).wallet!.address,
+      //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+      //     max: widget.maxSend);
+
+      if (!mounted) {
+        return;
+      }
+
+      // Show complete
+      String? contactName = widget.contactName;
+      if (widget.contactName == null || widget.contactName!.isEmpty) {
+        final User? user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
+        if (user != null) {
+          contactName = user.getDisplayName();
+        }
+      }
+
+      StateContainer.of(context).requestUpdate();
+      StateContainer.of(context).updateTXMemos();
+      StateContainer.of(context).updateUnified(true);
+
+      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          closeOnTap: true,
+          removeUntilHome: true,
+          widget: HandoffCompleteSheet(
+              amountRaw: widget.handoffItem.amount!,
+              destination: widget.destination,
+              contactName: contactName,
+              memo: widget.memo,
+              localAmount: widget.localCurrency));
     } catch (error) {
-      sl.get<Logger>().d("generate_confirm_error: $error");
+      sl.get<Logger>().d("handoff_confirm_error: $error");
       // Send failed
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      Clipboard.setData(ClipboardData(text: branchLink));
-      UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationErrorSent, context, durationMs: 20000);
+      if (poppedError != null) {
+        UIUtil.showSnackbar(poppedError, context, durationMs: 5000);
+        Navigator.of(context).pop();
+      }
+      if (widget.link.isNotEmpty) {
+        Clipboard.setData(ClipboardData(text: widget.link));
+        UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationErrorSent, context, durationMs: 20000);
+        Navigator.of(context).pop();
+        return;
+      }
+      UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context, durationMs: 5000);
       Navigator.of(context).pop();
     }
   }
@@ -309,7 +356,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         plausiblePin: plausiblePin,
         description: AppLocalization.of(context)!
             .sendAmountConfirmPin
-            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
+            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.handoffItem.amount))
             .replaceAll("%2", StateContainer.of(context).currencyMode),
       );
     }));

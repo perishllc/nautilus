@@ -68,7 +68,7 @@ class AppChangeRepresentativeSheet {
     if (list == null) {
       return [];
     }
-    List<Widget> ret = [];
+    final List<Widget> ret = [];
     list.forEach((node) {
       if (node.alias != null && node.alias!.trim().length > 0) {
         ret.add(_buildSingleRepresentative(
@@ -122,11 +122,12 @@ class AppChangeRepresentativeSheet {
             }
             _rep = rep;
             // Authenticate
-            AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-            bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+            final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+            final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
             if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
               try {
-                bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.changeRepAuthenticate);
+                final bool authenticated =
+                    await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.changeRepAuthenticate);
                 if (authenticated) {
                   sl.get<HapticUtil>().fingerprintSucess();
                   EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
@@ -271,7 +272,7 @@ class AppChangeRepresentativeSheet {
       UIUtil.showSnackbar(AppLocalization.of(context)!.changeRepSame, context);
     } else {
       try {
-        ProcessResponse resp = await sl.get<AccountService>().requestChange(
+        final ProcessResponse resp = await sl.get<AccountService>().requestChange(
             StateContainer.of(context).wallet!.address,
             _rep.account,
             StateContainer.of(context).wallet!.frontier,
@@ -445,11 +446,11 @@ class AppChangeRepresentativeSheet {
                                       }
                                       _rep = NinjaNode(account: AppWallet.nautilusRepresentative);
                                       // Authenticate
-                                      AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                                      bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                                      final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                                      final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                                         try {
-                                          bool authenticated = await sl
+                                          final bool authenticated = await sl
                                               .get<BiometricUtil>()
                                               .authenticateWithBiometrics(context, AppLocalization.of(context)!.changeRepAuthenticate);
                                           if (authenticated) {
@@ -510,11 +511,13 @@ class AppChangeRepresentativeSheet {
 
   Future<void> authenticateWithPin(String? rep, BuildContext context) async {
     // PIN Authentication
-    String? expectedPin = await sl.get<Vault>().getPin();
-    bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    final String? expectedPin = await sl.get<Vault>().getPin();
+    final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
+    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
+        plausiblePin: plausiblePin,
         description: AppLocalization.of(context)!.pinRepChange,
       );
     }));

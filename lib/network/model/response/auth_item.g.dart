@@ -1,29 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'handoff_item.dart';
+part of 'auth_item.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-HandoffItem _$HandoffItemFromJson(Map<String, dynamic> json) => HandoffItem()
+AuthItem _$AuthItemFromJson(Map<String, dynamic> json) => AuthItem()
   ..methods = (json['methods'] as List<dynamic>)
       .map((e) => Method.fromJson(e as Map<String, dynamic>))
       .toList()
   ..account = json['account'] as String
   ..amount = json['amount'] as String?
-  ..label = json['label'] as String?
-  ..exact = json['exact'] as bool? ?? true
-  ..work = json['work'] as bool? ?? true
-  ..reuse = json['reuse'] as bool? ?? false;
+  ..reuse = json['reuse'] as bool;
 
-Map<String, dynamic> _$HandoffItemToJson(HandoffItem instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AuthItemToJson(AuthItem instance) => <String, dynamic>{
       'methods': instance.methods,
       'account': instance.account,
       'amount': instance.amount,
-      'label': instance.label,
-      'exact': instance.exact,
-      'work': instance.work,
       'reuse': instance.reuse,
     };

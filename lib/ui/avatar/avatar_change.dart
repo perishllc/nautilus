@@ -67,8 +67,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
       UIUtil.showSnackbar(AppLocalization.of(context)!.insufficientBalance, context);
       return;
     }
-    Sheets.showAppHeightNineSheet(
-        context: context, widget: SendConfirmSheet(amountRaw: sendAmount.toString(), destination: NATRICON_ADDRESS));
+    Sheets.showAppHeightNineSheet(context: context, widget: SendConfirmSheet(amountRaw: sendAmount.toString(), destination: NATRICON_ADDRESS));
   }
 
   @override
@@ -94,14 +93,17 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                           margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 15 : 20),
                           height: 50,
                           width: 50,
-                          child: FlatButton(
-                              highlightColor: StateContainer.of(context).curTheme.text15,
-                              splashColor: StateContainer.of(context).curTheme.text15,
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                primary: StateContainer.of(context).curTheme.text15,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                                padding: EdgeInsets.zero,
+                                // highlightColor: StateContainer.of(context).curTheme.text15,
+                                // splashColor: StateContainer.of(context).curTheme.text15,
+                              ),
                               onPressed: () {
                                 Navigator.of(context).popUntil((route) => route.isFirst);
                               },
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(0.0),
                               child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
                       ],
@@ -113,7 +115,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                         end: smallScreen(context) ? 30 : 40,
                         top: 10,
                       ),
-                      alignment: AlignmentDirectional(-1, 0),
+                      alignment: AlignmentDirectional.centerStart,
                       child: AutoSizeText(
                         "Change Natricon",
                         maxLines: 3,
@@ -146,7 +148,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                       child: Stack(alignment: Alignment.center, children: [
                         Container(
                           constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.5, maxWidth: MediaQuery.of(context).size.width * 0.75),
-                          child: SizedBox(),
+                          child: const SizedBox(),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -156,7 +158,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                             Container(
                               height: 50,
                               width: 50,
-                              margin: EdgeInsetsDirectional.only(start: 28),
+                              margin: const EdgeInsetsDirectional.only(start: 28),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
@@ -184,7 +186,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                                   }
                                 },
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                                padding: EdgeInsetsDirectional.only(end: 4),
+                                padding: const EdgeInsetsDirectional.only(end: 4),
                                 child: Icon(AppIcons.back,
                                     color: nonce != null && !this.loading
                                         ? StateContainer.of(context).curTheme.primary
@@ -196,7 +198,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                             Container(
                               height: 50,
                               width: 50,
-                              margin: EdgeInsetsDirectional.only(end: 28),
+                              margin: const EdgeInsetsDirectional.only(end: 28),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(width: 2, color: StateContainer.of(context).curTheme.primary!),
@@ -222,7 +224,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                                   }
                                 },
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                                padding: EdgeInsetsDirectional.only(start: 4),
+                                padding: const EdgeInsetsDirectional.only(start: 4),
                                 child: Transform(
                                   alignment: Alignment.center,
                                   transform: Matrix4.rotationY(math.pi),

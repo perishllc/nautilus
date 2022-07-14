@@ -1,14 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:nautilus_wallet_flutter/util/random_util.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/util/encrypt.dart';
+import 'package:nautilus_wallet_flutter/util/random_util.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Singleton for keystore access methods in android/iOS
 class Vault {
@@ -17,7 +15,7 @@ class Vault {
   static const String pinKey = 'fkalium_pin';
   static const String plausiblePinKey = 'fnautilus_plausible_pin';
   static const String sessionKey = 'fencsess_key';
-  final FlutterSecureStorage secureStorage = new FlutterSecureStorage();
+  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
   Future<bool> legacy() async {
     return await sl.get<SharedPrefsUtil>().useLegacyStorage();
@@ -46,6 +44,7 @@ class Vault {
       await prefs.remove(encryptionKey);
       await prefs.remove(seedKey);
       await prefs.remove(pinKey);
+      await prefs.remove(plausiblePinKey);
       await prefs.remove(sessionKey);
       return;
     }

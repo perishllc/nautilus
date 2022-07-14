@@ -1,4 +1,3 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
@@ -7,22 +6,20 @@ import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class AppShareCard extends StatefulWidget {
+  AppShareCard(this.key, this.qrSVG, this.logoSvg);
   final GlobalKey? key;
   final Widget qrSVG;
   final Widget logoSvg;
-
-  AppShareCard(this.key, this.qrSVG, this.logoSvg);
 
   @override
   _AppShareCardState createState() => _AppShareCardState(key, qrSVG, logoSvg);
 }
 
 class _AppShareCardState extends State<AppShareCard> {
+  _AppShareCardState(this.globalKey, this.qrSVG, this.logoSvg);
   GlobalKey? globalKey;
   Widget qrSVG;
   Widget logoSvg;
-
-  _AppShareCardState(this.globalKey, this.qrSVG, this.logoSvg);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +33,8 @@ class _AppShareCardState extends State<AppShareCard> {
           borderRadius: BorderRadius.circular(12.5),
         ),
         child: Container(
-          margin: EdgeInsets.only(left: 12.5, right: 12.5, top: 12.5),
-          constraints: BoxConstraints.expand(),
+          margin: const EdgeInsets.only(left: 12.5, right: 12.5, top: 12.5),
+          constraints: const BoxConstraints.expand(),
           // The main row that holds QR, logo, the address, ticker and the website text
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,14 +42,14 @@ class _AppShareCardState extends State<AppShareCard> {
             children: <Widget>[
               // A container for QR
               Container(
-                margin: EdgeInsets.only(bottom: 12.5),
+                margin: const EdgeInsets.only(bottom: 12.5),
                 width: 100,
                 height: 100.0,
                 child: Stack(
                   children: <Widget>[
                     // Background QR
                     Center(
-                      child: Container(
+                      child: SizedBox(
                         width: 91.954,
                         height: 91.954,
                         child: qrSVG,
@@ -64,9 +61,9 @@ class _AppShareCardState extends State<AppShareCard> {
                         color: Colors.white,
                         height: 64.6,
                         width: 64.6,
-                        padding: EdgeInsets.all(2),
+                        padding: const EdgeInsets.all(2),
                         child: QrImage(
-                          padding: EdgeInsets.all(0.0),
+                          padding: EdgeInsets.zero,
                           data: StateContainer.of(context).wallet!.address!,
                           version: 6,
                           gapless: false,
@@ -77,8 +74,8 @@ class _AppShareCardState extends State<AppShareCard> {
                     // Outer Ring
                     Center(
                       child: Container(
-                        width: (StateContainer.of(context).curTheme is IndiumTheme) ? 95 : 100,
-                        height: (StateContainer.of(context).curTheme is IndiumTheme) ? 95 : 100,
+                        width: 100,
+                        height: 100,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(color: StateContainer.of(context).curTheme.primary!, width: 1.3913),
@@ -87,25 +84,25 @@ class _AppShareCardState extends State<AppShareCard> {
                     ),
                     // Logo Background White
                     Center(
-                            child: Container(
-                              width: 21,
-                              height: 21,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                      child: Container(
+                        width: 21,
+                        height: 21,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                     Center(
-                            child: Container(
-                              width: 18,
-                              height: 18,
-                              decoration: BoxDecoration(
-                                color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                          ),
+                      child: Container(
+                        width: 18,
+                        height: 18,
+                        decoration: const BoxDecoration(
+                          color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
                     // Center(
                     //   child: Container(
                     //     height: 4.9,
@@ -120,11 +117,11 @@ class _AppShareCardState extends State<AppShareCard> {
                     //   ),
                     // ),
                     Center(
-                      child: Container(
+                      child: SizedBox(
                         height: 18,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
-                          child: Image(image: AssetImage("assets/logo-square.png")),
+                          child: logoSvg,
                         ),
                       ),
                     ),
@@ -140,13 +137,13 @@ class _AppShareCardState extends State<AppShareCard> {
                   Container(
                     width: 96,
                     height: 20,
-                    margin: EdgeInsetsDirectional.only(start: 1),
+                    margin: const EdgeInsetsDirectional.only(start: 1),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         // Currency Icon
-                        Container(
+                        SizedBox(
                           width: 29,
                           child: Icon(
                             AppIcons.nanohorizontal,
@@ -156,7 +153,7 @@ class _AppShareCardState extends State<AppShareCard> {
                         ),
                         Container(
                           width: 60,
-                          margin: EdgeInsets.only(top: 1),
+                          margin: const EdgeInsets.only(top: 1),
                           child: AutoSizeText(
                             "NANO",
                             style: TextStyle(
@@ -176,11 +173,11 @@ class _AppShareCardState extends State<AppShareCard> {
                   ),
                   // Address
                   Container(
-                    padding: EdgeInsets.only(bottom: 7),
+                    padding: const EdgeInsets.only(bottom: 7),
                     child: Column(
                       children: <Widget>[
                         // First row of the address
-                        Container(
+                        SizedBox(
                           width: 97,
                           child: AutoSizeText.rich(
                             TextSpan(
@@ -211,7 +208,7 @@ class _AppShareCardState extends State<AppShareCard> {
                             maxLines: 1,
                             stepGranularity: 0.1,
                             minFontSize: 1,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 50.0,
                               fontFamily: "OverpassMono",
                               fontWeight: FontWeight.w100,
@@ -220,7 +217,7 @@ class _AppShareCardState extends State<AppShareCard> {
                           ),
                         ),
                         // Second row of the address
-                        Container(
+                        SizedBox(
                           width: 97,
                           child: AutoSizeText(
                             StateContainer.of(context).wallet!.address!.substring(16, 32),
@@ -238,7 +235,7 @@ class _AppShareCardState extends State<AppShareCard> {
                           ),
                         ),
                         // Third row of the address
-                        Container(
+                        SizedBox(
                           width: 97,
                           child: AutoSizeText(
                             StateContainer.of(context).wallet!.address!.substring(32, 48),
@@ -256,7 +253,7 @@ class _AppShareCardState extends State<AppShareCard> {
                           ),
                         ),
                         // Fourth(last) row of the address
-                        Container(
+                        SizedBox(
                           width: 97,
                           child: AutoSizeText.rich(
                             TextSpan(
@@ -288,7 +285,7 @@ class _AppShareCardState extends State<AppShareCard> {
                             maxLines: 1,
                             stepGranularity: 0.1,
                             minFontSize: 1,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 50,
                               fontFamily: "OverpassMono",
                               fontWeight: FontWeight.w100,
@@ -302,7 +299,7 @@ class _AppShareCardState extends State<AppShareCard> {
                   // Ticker & Website
                   Container(
                     width: 97,
-                    margin: EdgeInsets.only(bottom: 12.5),
+                    margin: const EdgeInsets.only(bottom: 12.5),
                     child: AutoSizeText(
                       "\$XNO      NANO.ORG",
                       minFontSize: 0.1,

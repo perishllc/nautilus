@@ -2,15 +2,13 @@ import 'dart:core';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:nautilus_wallet_flutter/model/method.dart';
 
-part 'handoff_item.g.dart';
+part 'auth_item.g.dart';
 
 // Object to represent block handoff structure
 @JsonSerializable()
-class HandoffItem {
-  
-  HandoffItem();
-
-  factory HandoffItem.fromJson(Map<String, dynamic> json) => _$HandoffItemFromJson(json);
+class AuthItem {
+  AuthItem();
+  factory AuthItem.fromJson(Map<String, dynamic> json) => _$AuthItemFromJson(json);
 
   @JsonKey(name: 'methods')
   late List<Method> methods;
@@ -21,17 +19,8 @@ class HandoffItem {
   @JsonKey(name: 'amount')
   String? amount;
 
-  @JsonKey(name: 'label')
-  String? label;
-
-  @JsonKey(name: 'exact', defaultValue: true)
-  late bool exact;
-
-  @JsonKey(name: 'work', defaultValue: true)
-  late bool work;
-
-  @JsonKey(name: 'reuse', defaultValue: false)
-  late bool reuse;
+  @JsonKey(name: 'reuse')
+  bool reuse = false;
 
   bool isValid() {
     if (account == null || account.isEmpty) {

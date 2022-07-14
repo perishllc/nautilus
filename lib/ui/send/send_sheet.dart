@@ -22,8 +22,10 @@ import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/request/request_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
@@ -513,11 +515,6 @@ class _SendSheetState extends State<SendSheet> {
                     ),
                   ],
                 ),
-                //Empty SizedBox
-                // SizedBox(
-                //   width: 60,
-                //   height: 60,
-                // ),
                 Container(
                   width: 60,
                   height: 60,
@@ -973,17 +970,18 @@ class _SendSheetState extends State<SendSheet> {
                     AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.scanQrCode, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () async {
                       UIUtil.cancelLockEvent();
-                      final String? scanResult = await UserDataUtil.getQRData(DataType.DATA, context);
+                      final dynamic scanResult = await UserDataUtil.getQRData(DataType.DATA, context);
                       if (!mounted) {
                         return;
                       }
+                      print("Scan Result: $scanResult");
                       if (scanResult == null) {
                         UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
-                      } else if (QRScanErrs.ERROR_LIST.contains(scanResult)) {
+                      } else if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
                         return;
-                      } else {
+                      } else if (scanResult is Address) {
                         // Is a URI
-                        final Address address = Address(scanResult);
+                        final Address address = scanResult;
                         // See if this address belongs to a contact or username
                         final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
                         if (user != null) {
@@ -1015,15 +1013,15 @@ class _SendSheetState extends State<SendSheet> {
                             });
                           }
                         }
+                        
                         // If amount is present, fill it and go to SendConfirm
                         if (mounted && address.amount != null) {
-                          bool hasError = false;
                           final BigInt? amountBigInt = BigInt.tryParse(address.amount!);
                           if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
-                            hasError = true;
                             UIUtil.showSnackbar(
                                 AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),
                                 context);
+                            return;
                           } else if (_localCurrencyMode && mounted) {
                             toggleLocalCurrency();
                             _amountController!.text = getRawAsThemeAwareAmount(context, address.amount);
@@ -1031,25 +1029,67 @@ class _SendSheetState extends State<SendSheet> {
                             setState(() {
                               _rawAmount = address.amount;
                               // If raw amount has more precision than we support show a special indicator
-                              _amountController!.text = getThemeAwareAccuracyAmount(context, _amountController!.text);
+                              _amountController!.text = getThemeAwareAccuracyAmount(context, address.amount);
                             });
                             _addressFocusNode!.unfocus();
                           }
-                          // If balance is sufficient go to SendConfirm
-                          if (!hasError && StateContainer.of(context).wallet!.accountBalance > amountBigInt!) {
-                            // Go to confirm sheet
-                            Sheets.showAppHeightNineSheet(
-                                context: context,
-                                widget: SendConfirmSheet(
-                                    amountRaw: _localCurrencyMode
-                                        ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
-                                        : _rawAmount ?? getThemeAwareAmountAsRaw(context, _amountController!.text),
-                                    destination: user?.address ?? address.address!,
-                                    contactName: user?.getDisplayName(),
-                                    maxSend: _isMaxSend(),
-                                    localCurrency: _localCurrencyMode ? _amountController!.text : null));
+
+                          // If balance is insufficient show error:
+                          if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
+                            UIUtil.showSnackbar(AppLocalization.of(context)!.insufficientBalance, context);
+                            return;
                           }
+
+                          // Go to confirm sheet
+                          Sheets.showAppHeightNineSheet(
+                              context: context,
+                              widget: SendConfirmSheet(
+                                  amountRaw: _localCurrencyMode
+                                      ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                                      : _rawAmount ?? getThemeAwareAmountAsRaw(context, _amountController!.text),
+                                  destination: user?.address ?? address.address!,
+                                  contactName: user?.getDisplayName(),
+                                  maxSend: _isMaxSend(),
+                                  localCurrency: _localCurrencyMode ? _amountController!.text : null));
                         }
+                      } else if (scanResult is HandoffItem) {
+                        // block handoff item:
+                        final HandoffItem handoffItem = scanResult;
+
+                        // See if this address belongs to a contact or username
+                        final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(handoffItem.account);
+
+                        // check if the user has enough balance to send this amount:
+                        // If balance is insufficient show error:
+                        final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount!);
+                        if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
+                          UIUtil.showSnackbar(
+                              AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),
+                              context);
+                          return;
+                        } else if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
+                          UIUtil.showSnackbar(AppLocalization.of(context)!.insufficientBalance, context);
+                          return;
+                        }
+
+                        // if handoffItem.exact is false, we should allow the user to change the amount to send to >= amount
+                        if (!handoffItem.exact && mounted) {
+                          // TODO:
+                          log.d("HandoffItem exact is false: unsupported handoff flow!");
+                          return;
+                        }
+
+                        // Go to confirm sheet:
+                        Sheets.showAppHeightNineSheet(
+                            context: context,
+                            widget: HandoffConfirmSheet(
+                                handoffItem: handoffItem,
+                                destination: user?.address ?? handoffItem.account,
+                                contactName: user?.getDisplayName(),
+                                localCurrency: _localCurrencyMode ? _convertCryptoToLocalCurrencyFromString(handoffItem.amount!) : null));
+                      } else {
+                        // something went wrong, show generic error:
+                        UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
                       }
                     })
                   ],
@@ -1073,6 +1113,19 @@ class _SendSheetState extends State<SendSheet> {
 
   String _convertCryptoToLocalCurrency() {
     String convertedAmt = NumberUtil.sanitizeNumber(_amountController!.text, maxDecimalDigits: 2);
+    if (convertedAmt.isEmpty) {
+      return "";
+    }
+    final Decimal valueCrypto = Decimal.parse(convertedAmt);
+    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
+    convertedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2).toString();
+    convertedAmt = convertedAmt.replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
+    convertedAmt = _localCurrencyFormat!.currencySymbol + convertedAmt;
+    return convertedAmt;
+  }
+
+  String _convertCryptoToLocalCurrencyFromString(String amount) {
+    String convertedAmt = NumberUtil.sanitizeNumber(amount, maxDecimalDigits: 2);
     if (convertedAmt.isEmpty) {
       return "";
     }

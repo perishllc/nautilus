@@ -242,10 +242,20 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                 alignment: AlignmentDirectional.center,
                                 child: AppShareCard(
                                   shareCardKey,
-                                  const SizedBox(),
-                                  const SizedBox(),
-                                  // SvgPicture.asset('legacy_assets/QR.svg'),
-                                  // SvgPicture.asset('legacy_assets/sharecard_logo.svg'),
+                                  Center(
+                                    child: Transform.translate(
+                                      offset: Offset.zero,
+                                      child: ClipOval(
+                                        child: Container(
+                                          color: Colors.white,
+                                          height: computedMaxSize,
+                                          width: computedMaxSize,
+                                          child: qrWidget,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const Image(image: AssetImage("assets/logo-square.png")),
                                 ),
                               ),
                             // This is for hiding the share card
@@ -265,7 +275,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             //   ),
                             // ),
 
-                            // Background/border part the QR P1:
+                            // Background/border part the QR:
                             Center(
                               child: Transform.translate(
                                 offset: Offset.zero,
@@ -279,7 +289,6 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                 ),
                               ),
                             ),
-
 
                             // Actual QR part of the QR
                             Center(
@@ -295,7 +304,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             // Outer ring
                             Center(
                               child: Container(
-                                width: (StateContainer.of(context).curTheme is IndiumTheme) ? computedMaxSize / 1.05 : computedMaxSize,
+                                width: computedMaxSize,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),

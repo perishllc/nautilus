@@ -258,9 +258,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                                     Navigator.pop(context);
                                   },
                                   child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
-                            )
-                          else
-                            const SizedBox(),
+                            ),
 
                           // Safety icon
                           Container(

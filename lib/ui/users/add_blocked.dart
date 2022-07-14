@@ -169,7 +169,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
   Widget getEnterAddressContainer() {
     return AppTextField(
       topMargin: 124,
-      padding: _addressValidAndUnfocused ? EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
       textAlign: TextAlign.center,
       focusNode: _addressFocusNode,
       controller: _addressController,
@@ -326,7 +326,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                 setState(() {
                   _addressValidAndUnfocused = false;
                 });
-                Future.delayed(Duration(milliseconds: 50), () {
+                Future.delayed(const Duration(milliseconds: 50), () {
                   FocusScope.of(context).requestFocus(_addressFocusNode);
                 });
               },
@@ -340,10 +340,10 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Container(
+        SizedBox(
           height: 42,
           width: double.infinity - 5,
-          child: FlatButton(
+          child: TextButton(
             onPressed: () {
               _addressController!.text = user.getDisplayName(ignoreNickname: true)!;
               _addressFocusNode!.unfocus();
@@ -358,7 +358,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           ),
         ),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 25),
+          margin: const EdgeInsets.symmetric(horizontal: 25),
           height: 1,
           color: StateContainer.of(context).curTheme.text03,
         ),
@@ -379,13 +379,13 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               // Empty SizedBox
-              SizedBox(
+              const SizedBox(
                 width: 60,
                 height: 60,
               ),
               // The header of the sheet
               Container(
-                margin: EdgeInsets.only(top: 30.0),
+                margin: const EdgeInsets.only(top: 30.0),
                 constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                 child: Column(
                   children: <Widget>[
@@ -401,14 +401,14 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
               ),
 
               // Scan QR Button
-              SizedBox(width: 60, height: 60),
+              const SizedBox(width: 60, height: 60),
             ],
           ),
 
           // The main container that holds "Enter Name" and "Enter Address" text fields
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(top: 5, bottom: 5),
+              margin: const EdgeInsets.only(top: 5, bottom: 5),
               child: Stack(
                 children: <Widget>[
                   GestureDetector(
@@ -419,8 +419,8 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                     },
                     child: Container(
                       color: Colors.transparent,
-                      child: SizedBox.expand(),
-                      constraints: BoxConstraints.expand(),
+                      child: const SizedBox.expand(),
+                      constraints: const BoxConstraints.expand(),
                     ),
                   ),
                   Column(
@@ -439,7 +439,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                                       margin:
                                           EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                                       alignment: Alignment.bottomCenter,
-                                      constraints: BoxConstraints(maxHeight: 174, minHeight: 0),
+                                      constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
                                       // ********************************************* //
                                       // ********* The pop-up Contacts List ********* //
                                       child: ClipRRect(
@@ -453,10 +453,10 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(25),
                                             ),
-                                            margin: EdgeInsets.only(bottom: 50),
+                                            margin: const EdgeInsets.only(bottom: 50),
                                             child: ListView.builder(
                                               shrinkWrap: true,
-                                              padding: EdgeInsets.only(bottom: 0, top: 0),
+                                              padding: const EdgeInsets.only(bottom: 0, top: 0),
                                               itemCount: _users.length,
                                               itemBuilder: (BuildContext context, int index) {
                                                 return _buildUserItem(_users[index]);
@@ -477,8 +477,8 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
 
                               // ******* Enter Address Error Container ******* //
                               Container(
-                                alignment: AlignmentDirectional(0, 0),
-                                margin: EdgeInsets.only(top: 3),
+                                alignment: const AlignmentDirectional(0, 0),
+                                margin: const EdgeInsets.only(top: 3),
                                 child: Text(_addressValidationText,
                                     style: TextStyle(
                                       fontSize: 14.0,

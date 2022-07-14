@@ -19,7 +19,6 @@ class StateBlock {
   // Represents subtype of this block: send/receive/change/open
   @JsonKey(name: 'subtype')
   String? subType;
-  
 
   @JsonKey(name: 'previous')
   String? previous;
@@ -38,6 +37,9 @@ class StateBlock {
 
   @JsonKey(name: 'signature')
   String? signature;
+
+  @JsonKey(name: 'work', includeIfNull: false)
+  String? work;
 
   @JsonKey(ignore: true)
   String? hash;
@@ -67,11 +69,13 @@ class StateBlock {
       required String? balance,
       required String? link,
       required String? account,
+      this.work,
       this.privKey,
       this.localCurrencyValue}) {
     this.link = link;
     subType = subtype;
     type = BlockTypes.STATE;
+    this.work = work;
     this.previous = previous;
     this.account = account;
     this.representative = representative;

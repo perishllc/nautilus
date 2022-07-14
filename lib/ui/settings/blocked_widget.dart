@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class _BlockedListState extends State<BlockedList> {
     _registerBus();
     // Initial contacts list
     _blocked = [];
-    getApplicationDocumentsDirectory().then((directory) {
+    getApplicationDocumentsDirectory().then((Directory directory) {
       documentsDirectory = directory.path;
       setState(() {
         documentsDirectory = directory.path;
@@ -67,28 +68,28 @@ class _BlockedListState extends State<BlockedList> {
 
   void _registerBus() {
     // Contact added bus event
-    _blockedAddedSub = EventTaxiImpl.singleton().registerTo<BlockedAddedEvent>().listen((event) {
+    _blockedAddedSub = EventTaxiImpl.singleton().registerTo<BlockedAddedEvent>().listen((BlockedAddedEvent event) {
       // Full update:
       _updateContacts();
     });
     // Contact removed bus event
-    _blockedRemovedSub = EventTaxiImpl.singleton().registerTo<BlockedRemovedEvent>().listen((event) {
+    _blockedRemovedSub = EventTaxiImpl.singleton().registerTo<BlockedRemovedEvent>().listen((BlockedRemovedEvent event) {
       // Full update:
       _updateContacts();
     });
   }
 
   void _updateContacts() {
-    sl.get<DBHelper>().getBlocked().then((blocked) {
+    sl.get<DBHelper>().getBlocked().then((List<User> blocked) {
       if (blocked == null) {
         return;
       }
 
       // calculate diff:
-      List<User> newState = [];
+      final List<User> newState = [];
 
-      var aliasMap = Map<String?, List<String?>>();
-      List<String?> addressesToRemove = [];
+      final Map<String?, List<String?>> aliasMap = Map<String?, List<String?>>();
+      final List<String?> addressesToRemove = [];
 
       // search for duplicate address entries:
       for (User user in blocked) {
@@ -107,7 +108,7 @@ class _BlockedListState extends State<BlockedList> {
         // Add the aliases to the existing entry
         if (user.nickname != null && user.nickname!.isNotEmpty) {
           // check if the alias is already in the list:
-          var index = aliasMap[user.address]!.indexOf(user.nickname);
+          final int index = aliasMap[user.address]!.indexOf(user.nickname);
           if (index > -1) {
             if (aliasMap[user.address]![index + 1] != UserTypes.CONTACT) {
               // add it because the matching entry is not a contact
@@ -133,19 +134,19 @@ class _BlockedListState extends State<BlockedList> {
       }
 
       // construct the list of users with multiple usernames:
-      List<User> multiUsers = [];
+      final List<User> multiUsers = [];
       for (String? address in aliasMap.keys) {
         if (!addressesToRemove.contains(address)) {
           // we only want the flagged users
           continue;
         }
-        var aliases = aliasMap[address]!;
+        final List<String?> aliases = aliasMap[address]!;
 
         String? nickname;
         int? nickNameIndex;
         for (int i = 0; i < aliases.length; i += 2) {
-          var alias = aliases[i];
-          var type = aliases[i + 1];
+          final String? alias = aliases[i];
+          final String? type = aliases[i + 1];
           if (type == UserTypes.CONTACT) {
             nickname = alias;
             nickNameIndex = i;
@@ -156,8 +157,7 @@ class _BlockedListState extends State<BlockedList> {
         if (nickNameIndex != null) {
           aliases.removeAt(nickNameIndex);
           aliases.removeAt(nickNameIndex);
-          multiUsers.add(
-              User(address: address, nickname: nickname, username: aliases[0], type: aliases[1], aliases: aliases));
+          multiUsers.add(User(address: address, nickname: nickname, username: aliases[0], type: aliases[1], aliases: aliases));
         } else {
           multiUsers.add(User(address: address, username: aliases[0], type: aliases[1], aliases: aliases));
         }
@@ -175,9 +175,9 @@ class _BlockedListState extends State<BlockedList> {
 
         // Re-sort list
         setState(() {
-          _blocked.sort((a, b) {
-            String c = a.nickname ?? a.username!;
-            String d = b.nickname ?? b.username!;
+          _blocked.sort((User a, User b) {
+            final String c = a.nickname ?? a.username!;
+            final String d = b.nickname ?? b.username!;
             return c.toLowerCase().compareTo(d.toLowerCase());
           });
         });
@@ -259,8 +259,7 @@ class _BlockedListState extends State<BlockedList> {
         decoration: BoxDecoration(
           color: StateContainer.of(context).curTheme.backgroundDark,
           boxShadow: [
-            BoxShadow(
-                color: StateContainer.of(context).curTheme.barrierWeakest!, offset: Offset(-5, 0), blurRadius: 20),
+            BoxShadow(color: StateContainer.of(context).curTheme.barrierWeakest!, offset: const Offset(-5, 0), blurRadius: 20),
           ],
         ),
         child: SafeArea(
@@ -272,7 +271,7 @@ class _BlockedListState extends State<BlockedList> {
             children: <Widget>[
               // Back button and Contacts Text
               Container(
-                margin: EdgeInsets.only(bottom: 10.0, top: 5),
+                margin: const EdgeInsets.only(bottom: 10.0, top: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -282,13 +281,13 @@ class _BlockedListState extends State<BlockedList> {
                         Container(
                           height: 40,
                           width: 40,
-                          margin: EdgeInsets.only(right: 10, left: 10),
+                          margin: const EdgeInsets.only(right: 10, left: 10),
                           child: TextButton(
                               style: TextButton.styleFrom(
                                 primary: StateContainer.of(context).curTheme.text15,
                                 backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 // splashColor: StateContainer.of(context).curTheme.text15,
                                 // highlightColor: StateContainer.of(context).curTheme.text15,
                               ),
@@ -308,10 +307,9 @@ class _BlockedListState extends State<BlockedList> {
                       ],
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 25),
+                      margin: const EdgeInsets.only(right: 25),
                       child: AppDialogs.infoButton(context, () {
-                        AppDialogs.showInfoDialog(context, AppLocalization.of(context)!.blockedInfoHeader,
-                            AppLocalization.of(context)!.blockedInfo);
+                        AppDialogs.showInfoDialog(context, AppLocalization.of(context)!.blockedInfoHeader, AppLocalization.of(context)!.blockedInfo);
                       }),
                     ),
                   ],
@@ -324,9 +322,9 @@ class _BlockedListState extends State<BlockedList> {
                     // Contacts list
                     ListView.builder(
                       physics: const AlwaysScrollableScrollPhysics(),
-                      padding: EdgeInsets.only(top: 15.0, bottom: 15),
+                      padding: const EdgeInsets.only(top: 15.0, bottom: 15),
                       itemCount: _blocked.length,
-                      itemBuilder: (context, index) {
+                      itemBuilder: (BuildContext context, int index) {
                         // Build contact
                         return buildSingleContact(context, _blocked[index]);
                       },
@@ -339,12 +337,9 @@ class _BlockedListState extends State<BlockedList> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [
-                              StateContainer.of(context).curTheme.backgroundDark!,
-                              StateContainer.of(context).curTheme.backgroundDark00!
-                            ],
-                            begin: AlignmentDirectional(0.5, -1.0),
-                            end: AlignmentDirectional(0.5, 1.0),
+                            colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
+                            begin: const AlignmentDirectional(0.5, -1.0),
+                            end: const AlignmentDirectional(0.5, 1.0),
                           ),
                         ),
                       ),
@@ -361,8 +356,8 @@ class _BlockedListState extends State<BlockedList> {
                               StateContainer.of(context).curTheme.backgroundDark00!,
                               StateContainer.of(context).curTheme.backgroundDark!,
                             ],
-                            begin: AlignmentDirectional(0.5, -1.0),
-                            end: AlignmentDirectional(0.5, 1.0),
+                            begin: const AlignmentDirectional(0.5, -1.0),
+                            end: const AlignmentDirectional(0.5, 1.0),
                           ),
                         ),
                       ),
@@ -371,11 +366,11 @@ class _BlockedListState extends State<BlockedList> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 child: Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE,
-                        AppLocalization.of(context)!.addBlocked, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context)!.addBlocked, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
                       Sheets.showAppHeightEightSheet(context: context, widget: AddBlockedSheet());
                     }),
                   ],
@@ -390,34 +385,26 @@ class _BlockedListState extends State<BlockedList> {
     if (user.aliases == null) {
       return [
         // Blocked name
-        (user.nickname != null && user.nickname!.isNotEmpty)
-            ? Text("★" + user.nickname!, style: AppStyles.textStyleSettingItemHeader(context))
-            : SizedBox(),
+        if (user.nickname != null && user.nickname!.isNotEmpty) Text("★" + user.nickname!, style: AppStyles.textStyleSettingItemHeader(context)),
 
-        (user.username != null)
-            ? Text(
-                user.getDisplayName(ignoreNickname: true)!,
-                style: user.nickname != null
-                    ? AppStyles.textStyleTransactionAddress(context)
-                    : AppStyles.textStyleSettingItemHeader(context),
-              )
-            : SizedBox(),
+        if (user.username != null)
+          Text(
+            user.getDisplayName(ignoreNickname: true)!,
+            style: user.nickname != null ? AppStyles.textStyleTransactionAddress(context) : AppStyles.textStyleSettingItemHeader(context),
+          ),
 
         // Blocked address
-        (user.address != null)
-            ? Text(
-                Address(user.address).getShortString()!,
-                style: AppStyles.textStyleTransactionAddress(context),
-              )
-            : SizedBox(),
+        if (user.address != null)
+          Text(
+            Address(user.address).getShortString()!,
+            style: AppStyles.textStyleTransactionAddress(context),
+          ),
       ];
     } else {
-      List<Widget> entries = [
+      final List<Widget> entries = [
         Text(
           Address(user.address).getShortString()!,
-          style: user.nickname != null
-              ? AppStyles.textStyleTransactionAddress(context)
-              : AppStyles.textStyleSettingItemHeader(context),
+          style: user.nickname != null ? AppStyles.textStyleTransactionAddress(context) : AppStyles.textStyleSettingItemHeader(context),
         )
       ];
 
@@ -425,8 +412,8 @@ class _BlockedListState extends State<BlockedList> {
         entries.insert(0, Text(user.getDisplayName()!, style: AppStyles.textStyleSettingItemHeader(context)));
       }
 
-      for (var i = 0; i < user.aliases!.length; i += 2) {
-        String displayName = User.getDisplayNameWithType(user.aliases![i], user.aliases![i + 1])!;
+      for (int i = 0; i < user.aliases!.length; i += 2) {
+        final String displayName = User.getDisplayNameWithType(user.aliases![i], user.aliases![i + 1])!;
         entries.add(
           Text(
             displayName,
@@ -442,7 +429,7 @@ class _BlockedListState extends State<BlockedList> {
   Widget buildSingleContact(BuildContext context, User user) {
     return TextButton(
       style: TextButton.styleFrom(
-        padding: EdgeInsets.all(0.0),
+        padding: const EdgeInsets.all(0.0),
       ),
       onPressed: () {
         BlockedDetailsSheet(user, documentsDirectory).mainBottomSheet(context);
@@ -454,7 +441,7 @@ class _BlockedListState extends State<BlockedList> {
         ),
         // Main Container
         Container(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
           margin: new EdgeInsetsDirectional.only(start: 12.0, end: 20.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -463,7 +450,7 @@ class _BlockedListState extends State<BlockedList> {
               Expanded(
                 child: Container(
                   // height: 60,
-                  margin: EdgeInsetsDirectional.only(start: 20.0),
+                  margin: const EdgeInsetsDirectional.only(start: 20.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,

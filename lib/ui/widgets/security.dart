@@ -1,14 +1,24 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
-
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/bus/contact_modified_event.dart';
+import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
+import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/db/account.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/util/blake2b.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 enum PinOverlayType { NEW_PIN, ENTER_PIN }
@@ -24,10 +34,12 @@ class ShakeCurve extends Curve {
 class PinScreen extends StatefulWidget {
   final PinOverlayType type;
   final String? expectedPin;
+  final String? plausiblePin;
   final String description;
   final Color? pinScreenBackgroundColor;
+  final bool isUnlockAction;
 
-  PinScreen(this.type, {this.description = "", this.expectedPin = "", this.pinScreenBackgroundColor});
+  PinScreen(this.type, {this.description = "", this.expectedPin = "", this.plausiblePin = "", this.pinScreenBackgroundColor, this.isUnlockAction = false});
 
   @override
   _PinScreenState createState() => _PinScreenState();
@@ -69,7 +81,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
     _pin = "";
     _pinConfirmed = "";
     // Get adjusted failed attempts
-    sl.get<SharedPrefsUtil>().getLockAttempts().then((attempts) {
+    sl.get<SharedPrefsUtil>().getLockAttempts().then((int attempts) {
       setState(() {
         _failedAttempts = attempts % MAX_ATTEMPTS;
       });
@@ -78,7 +90,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
     _controller = AnimationController(duration: const Duration(milliseconds: 350), vsync: this);
     final Animation curve = CurvedAnimation(parent: _controller, curve: ShakeCurve());
     _animation = Tween(begin: 0.0, end: 25.0).animate(curve as Animation<double>)
-      ..addStatusListener((status) {
+      ..addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.completed) {
           if (widget.type == PinOverlayType.ENTER_PIN) {
             sl.get<SharedPrefsUtil>().incrementLockAttempts().then((_) {
@@ -173,7 +185,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
   }
 
   Widget _buildPinScreenButton(String buttonText, BuildContext context) {
-    return Container(
+    return SizedBox(
       height: smallScreen(context) ? buttonSize - 15 : buttonSize,
       width: smallScreen(context) ? buttonSize - 15 : buttonSize,
       child: InkWell(
@@ -182,22 +194,53 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
         splashColor: StateContainer.of(context).curTheme.primary30,
         key: Key("pin_${buttonText}_button"),
         onTap: () {},
-        onTapDown: (details) {
+        onTapDown: (TapDownDetails details) {
           if (_controller.status == AnimationStatus.forward || _controller.status == AnimationStatus.reverse) {
             return;
           }
           if (_setCharacter(buttonText)) {
             // Mild delay so they can actually see the last dot get filled
-            Future.delayed(Duration(milliseconds: 50), () {
+            Future.delayed(const Duration(milliseconds: 50), () async {
               if (widget.type == PinOverlayType.ENTER_PIN) {
-                // Pin is not what was expected
-                if (_pin != widget.expectedPin) {
-                  sl.get<HapticUtil>().error();
-                  _controller.forward();
-                } else {
+                // normal pin:
+                if (_pin == widget.expectedPin || (_pin == widget.plausiblePin && !widget.isUnlockAction)) {
                   sl.get<SharedPrefsUtil>().resetLockAttempts().then((_) {
                     Navigator.of(context).pop(true);
                   });
+                } else if (_pin == widget.plausiblePin && widget.isUnlockAction) {
+                  // plausible deniability mode:
+                  try {
+                    await sl.get<DBHelper>().dropAccounts();
+                    if (!mounted) return;
+                    // re-add account index 0 and switch the account to it:
+                    final String seed = await StateContainer.of(context).getSeed();
+                    // hash the current seed:
+                    final String hashedSeed = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(seed))).substring(0, 64);
+                    // logout:
+                    StateContainer.of(context).logOut();
+                    if (!mounted) return;
+                    await sl.get<Vault>().deleteSeed();
+                    await sl.get<Vault>().setSeed(hashedSeed);
+                    if (!mounted) return;
+                    await NanoUtil().loginAccount(hashedSeed, context, offset: 0);
+                    await sl.get<Vault>().updateSessionKey();
+                    if (!mounted) return;
+                    await StateContainer.of(context).resetRecentlyUsedAccounts();
+                    // print(mainAccount!.address);
+                    // await sl.get<DBHelper>().changeAccount(mainAccount);
+                    // force users list to update on the home page:
+                    EventTaxiImpl.singleton().fire(ContactModifiedEvent());
+                    EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: []));
+                    // StateContainer.of(context).updateUnified(true);
+                    await sl.get<SharedPrefsUtil>().resetLockAttempts();
+                    if (!mounted) return;
+                    Navigator.of(context).pop(true);
+                  } catch (error) {
+                    sl.get<Logger>().d("Error: plausible deniability: $error");
+                  }
+                } else {
+                  sl.get<HapticUtil>().error();
+                  _controller.forward();
                 }
               } else {
                 if (!_awaitingConfirmation) {
@@ -221,7 +264,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
           }
         },
         child: Container(
-          alignment: AlignmentDirectional(0, 0),
+          alignment: AlignmentDirectional.center,
           child: Text(
             buttonText,
             textAlign: TextAlign.center,
@@ -267,9 +310,9 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        constraints: BoxConstraints.expand(),
+        constraints: const BoxConstraints.expand(),
         child: Material(
-          color: widget.pinScreenBackgroundColor == null ? StateContainer.of(context).curTheme.backgroundDark : widget.pinScreenBackgroundColor,
+          color: widget.pinScreenBackgroundColor ?? StateContainer.of(context).curTheme.backgroundDark,
           child: Column(
             children: <Widget>[
               Container(
@@ -278,7 +321,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
                   children: <Widget>[
                     // Header
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 40),
+                      margin: const EdgeInsets.symmetric(horizontal: 40),
                       child: AutoSizeText(
                         _header,
                         style: AppStyles.textStylePinScreenHeaderColored(context),
@@ -289,7 +332,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
                     ),
                     // Descripttion
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                      margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                       child: AutoSizeText(
                         widget.description,
                         style: AppStyles.textStyleParagraph(context),
@@ -364,7 +407,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
                               width: smallScreen(context) ? buttonSize - 15 : buttonSize,
                             ),
                             _buildPinScreenButton("0", context),
-                            Container(
+                            SizedBox(
                               height: smallScreen(context) ? buttonSize - 15 : buttonSize,
                               width: smallScreen(context) ? buttonSize - 15 : buttonSize,
                               child: InkWell(
@@ -372,11 +415,11 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
                                 highlightColor: StateContainer.of(context).curTheme.primary15,
                                 splashColor: StateContainer.of(context).curTheme.primary30,
                                 onTap: () {},
-                                onTapDown: (details) {
+                                onTapDown: (TapDownDetails details) {
                                   _backSpace();
                                 },
                                 child: Container(
-                                  alignment: AlignmentDirectional(0, 0),
+                                  alignment: AlignmentDirectional.center,
                                   child: Icon(Icons.backspace, color: StateContainer.of(context).curTheme.primary, size: 20.0),
                                 ),
                               ),

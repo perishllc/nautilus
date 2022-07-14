@@ -130,66 +130,69 @@ class AppSettings {
   }
 
   //Settings item without any dropdown option but rather a direct functionality
-  static Widget buildSettingsListItemSingleLine(BuildContext context, String heading, IconData settingIcon, {Function? onPressed}) {
-    return TextButton(
-      style: TextButton.styleFrom(
-        padding: EdgeInsets.zero,
-        primary: StateContainer.of(context).curTheme.text15,
-        // highlightColor: StateContainer.of(context).curTheme.text15,
-        // splashColor: StateContainer.of(context).curTheme.text15,
-      ),
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed();
-        } else {
-          return;
-        }
-      },
-      child: Container(
-        height: 60.0,
-        margin: const EdgeInsetsDirectional.only(start: 30.0),
-        child: Row(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsetsDirectional.only(end: 13.0),
-              child: Container(
-                margin: EdgeInsetsDirectional.only(
-                  top: 3,
-                  start: settingIcon == AppIcons.logout
-                      ? 6
-                      : settingIcon == AppIcons.changerepresentative
-                          ? 0
-                          : settingIcon == AppIcons.backupseed
-                              ? 1
-                              : settingIcon == AppIcons.transferfunds
-                                  ? 2
-                                  : 3,
-                  bottom: 3,
-                  end: settingIcon == AppIcons.logout
-                      ? 0
-                      : settingIcon == AppIcons.changerepresentative
-                          ? 6
-                          : settingIcon == AppIcons.backupseed
-                              ? 5
-                              : settingIcon == AppIcons.transferfunds
-                                  ? 4
-                                  : 3,
-                ),
-                child: Icon(
-                  settingIcon,
-                  color: StateContainer.of(context).curTheme.primary,
-                  size: 24,
+  static Widget buildSettingsListItemSingleLine(BuildContext context, String heading, IconData settingIcon, {Function? onPressed, bool disabled = false}) {
+    return IgnorePointer(
+      ignoring: disabled,
+      child: TextButton(
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+          primary: StateContainer.of(context).curTheme.text15,
+          // highlightColor: StateContainer.of(context).curTheme.text15,
+          // splashColor: StateContainer.of(context).curTheme.text15,
+        ),
+        onPressed: () {
+          if (onPressed != null) {
+            onPressed();
+          } else {
+            return;
+          }
+        },
+        child: Container(
+          height: 60.0,
+          margin: const EdgeInsetsDirectional.only(start: 30.0),
+          child: Row(
+            children: <Widget>[
+              Container(
+                margin: const EdgeInsetsDirectional.only(end: 13.0),
+                child: Container(
+                  margin: EdgeInsetsDirectional.only(
+                    top: 3,
+                    start: settingIcon == AppIcons.logout
+                        ? 6
+                        : settingIcon == AppIcons.changerepresentative
+                            ? 0
+                            : settingIcon == AppIcons.backupseed
+                                ? 1
+                                : settingIcon == AppIcons.transferfunds
+                                    ? 2
+                                    : 3,
+                    bottom: 3,
+                    end: settingIcon == AppIcons.logout
+                        ? 0
+                        : settingIcon == AppIcons.changerepresentative
+                            ? 6
+                            : settingIcon == AppIcons.backupseed
+                                ? 5
+                                : settingIcon == AppIcons.transferfunds
+                                    ? 4
+                                    : 3,
+                  ),
+                  child: Icon(
+                    settingIcon,
+                    color: disabled ? StateContainer.of(context).curTheme.primary45 : StateContainer.of(context).curTheme.primary,
+                    size: 24,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: UIUtil.drawerWidth(context) - 100,
-              child: Text(
-                heading,
-                style: AppStyles.textStyleSettingItemHeader(context),
+              SizedBox(
+                width: UIUtil.drawerWidth(context) - 100,
+                child: Text(
+                  heading,
+                  style: disabled ? AppStyles.textStyleSettingItemHeader45(context) : AppStyles.textStyleSettingItemHeader(context),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

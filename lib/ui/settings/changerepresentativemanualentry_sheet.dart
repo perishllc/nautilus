@@ -112,13 +112,13 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      SizedBox(width: 60, height: 60),
+                      const SizedBox(width: 60, height: 60),
                       //Container for the header
                       Column(
                         children: <Widget>[
                           // Sheet handle
                           Container(
-                            margin: EdgeInsets.only(top: 10),
+                            margin: const EdgeInsets.only(top: 10),
                             height: 5,
                             width: MediaQuery.of(context).size.width * 0.15,
                             decoration: BoxDecoration(
@@ -127,7 +127,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 15),
+                            margin: const EdgeInsets.only(top: 15),
                             constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                             child: AutoSizeText(
                               CaseChange.toUpperCase(AppLocalization.of(context)!.changeRepAuthenticate, context),
@@ -140,14 +140,14 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                         ],
                       ),
                       // Empty sized box
-                      SizedBox(width: 60, height: 60),
+                      const SizedBox(width: 60, height: 60),
                     ],
                   ),
 
                   //A expanded section for current representative and new representative fields
                   Expanded(
                     child: KeyboardAvoider(
-                      duration: Duration(milliseconds: 0),
+                      duration: const Duration(milliseconds: 0),
                       autoScroll: true,
                       focusPadding: 40,
                       child: Column(
@@ -155,7 +155,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                           // New representative
                           AppTextField(
                             topMargin: MediaQuery.of(context).size.height * 0.05,
-                            padding: _addressValidAndUnfocused ? EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+                            padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
                             focusNode: _repFocusNode,
                             controller: widget.repController,
                             textAlign: TextAlign.center,
@@ -171,11 +171,11 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                               onPressed: () {
                                 UIUtil.cancelLockEvent();
                                 BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((res) {
-                                  var result = res.rawContent;
+                                  final result = res.rawContent;
                                   if (result == null) {
                                     return;
                                   }
-                                  Address address = new Address(result);
+                                  final Address address = Address(result);
                                   if (address.isValid()) {
                                     setState(() {
                                       _addressValidAndUnfocused = true;
@@ -202,7 +202,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                                   if (data == null || data.text == null) {
                                     return;
                                   }
-                                  Address address = new Address(data.text!);
+                                  final Address address = Address(data.text!);
                                   if (address.isValid()) {
                                     setState(() {
                                       _addressValidAndUnfocused = true;
@@ -239,7 +239,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                                       setState(() {
                                         _addressValidAndUnfocused = false;
                                       });
-                                      Future.delayed(Duration(milliseconds: 50), () {
+                                      Future.delayed(const Duration(milliseconds: 50), () {
                                         FocusScope.of(context).requestFocus(_repFocusNode);
                                       });
                                     },
@@ -267,11 +267,11 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                                 return;
                               }
                               // Authenticate
-                              AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                              bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                              final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                              final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                               if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                                 try {
-                                  bool authenticated =
+                                  final bool authenticated =
                                       await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.changeRepAuthenticate);
                                   if (authenticated) {
                                     sl.get<HapticUtil>().fingerprintSucess();
@@ -318,7 +318,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
     } else {
       try {
-        ProcessResponse resp = await sl.get<AccountService>().requestChange(
+        final ProcessResponse resp = await sl.get<AccountService>().requestChange(
             StateContainer.of(context).wallet!.address,
             widget.repController.text,
             StateContainer.of(context).wallet!.frontier,
@@ -340,16 +340,18 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
 
   Future<void> authenticateWithPin(BuildContext context) async {
     // PIN Authentication
-    String? expectedPin = await sl.get<Vault>().getPin();
-    bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-      return new PinScreen(
+    final String? expectedPin = await sl.get<Vault>().getPin();
+    final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
+    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+      return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
+        plausiblePin: plausiblePin,
         description: AppLocalization.of(context)!.pinRepChange,
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(Duration(milliseconds: 200));
+      await Future.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE_MANUAL));
     }
   }

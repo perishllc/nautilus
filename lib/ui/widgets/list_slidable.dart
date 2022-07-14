@@ -46,7 +46,7 @@ typedef void DismissSlideActionCallback(SlideActionType actionType);
 /// given [actionType].
 ///
 /// Used by [SlideToDismissDelegate.onWillDismiss].
-typedef FutureOr<bool> SlideActionWillBeDismissed(SlideActionType actionType);
+typedef Future<bool> SlideActionWillBeDismissed(SlideActionType actionType);
 
 /// Signature for the builder callback used to create slide actions.
 typedef Widget SlideActionBuilder(BuildContext context, int index,

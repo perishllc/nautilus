@@ -379,10 +379,12 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
   Future<void> authenticateWithPin() async {
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
+    final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
     final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
+        plausiblePin: plausiblePin,
         description: AppLocalization.of(context)!
             .requestAmountConfirmPin
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
