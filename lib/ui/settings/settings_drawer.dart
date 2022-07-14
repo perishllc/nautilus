@@ -1217,9 +1217,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           color: StateContainer.of(context).curTheme.text15,
         ),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.registerUsername, AppIcons.at, onPressed: () {
-          // Navigator.of(context).pushNamed("/register_username");
-          // TODO:
-          Navigator.of(context).pushNamed("/lock_screen");
+          Navigator.of(context).pushNamed("/register_username");
         }),
         Divider(
           height: 2,

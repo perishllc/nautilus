@@ -1,12 +1,19 @@
-## v0.4.2 - [2022-07-XX]
+## v0.4.2 - [2022-07-15]
 #### Added
 - New monochrome theme!
+- Plausible Deniability Mode!
+  - Setup a secondary pin which when entered will trigger Plausible Deniability Mode
+  - Plausible Deniability Mode is identical to the normal mode except that when triggered, your seed is wiped and replaced with a hash of your seed
+  - This is security feature designed to give you a plausible excuse in the event that you're forced to open your wallet
+  - The seed hash is deterministic (i.e. the same every time, so you can load it with a "plausible" balance)
+  - Entering plausible deniability mode is NOT reversible without logging out and logging back in, so be sure to backup your seed before trying it out in the security menu
 #### Changed
 - Updated QR Code Receive screen to look much cleaner
 #### Fixed
 - Delete slide action was the wrong color on some themes
 - Bug regression with the search bar (change blocks)
 - QR Code scanning fixes
+- Share address button on the receive screen was not working
 ## v0.4.1 - [2022-07-11]
 #### Added
 - New intro page animation!
