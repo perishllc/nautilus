@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 // import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
 
-// part 'payment_response.g.dart';
+part 'payment_response.g.dart';
 
 /// For running in an isolate, needs to be top-level function
 // PaymentResponse accountHistoryresponseFromJson(Map<dynamic, dynamic> json) {

@@ -7,7 +7,7 @@ part 'auth_item.g.dart';
 // Object to represent block handoff structure
 @JsonSerializable()
 class AuthItem {
-
+  AuthItem();
   factory AuthItem.fromJson(Map<String, dynamic> json) => _$AuthItemFromJson(json);
 
   @JsonKey(name: 'methods')
@@ -26,7 +26,6 @@ class AuthItem {
   bool reuse = false;
 
   bool isValid() {
-
     if (methods.isEmpty) {
       return false;
     }
