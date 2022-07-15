@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -47,7 +49,7 @@ class _FundingMessagesSheetStateState extends State<FundingMessagesSheet> {
                       height: 5,
                       width: MediaQuery.of(context).size.width * 0.15,
                       decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text10,
+                        color: StateContainer.of(context).curTheme.text20,
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
@@ -136,7 +138,7 @@ class _FundingMessagesSheetStateState extends State<FundingMessagesSheet> {
     if (alerts == null) {
       return [];
     }
-    
+
     for (final FundingResponseItem alert in alerts) {
       ret.add(
         Container(
@@ -163,6 +165,21 @@ class _FundingMessagesSheetStateState extends State<FundingMessagesSheet> {
         ),
       );
     }
+
+    if (Platform.isIOS) {
+      // add text saying we can't show more alerts on iOS:
+      ret.add(
+        Container(
+          padding: const EdgeInsetsDirectional.only(
+            start: 12,
+            end: 12,
+            bottom: 20,
+          ),
+          child: Text(AppLocalization.of(context)!.iosFundingMessage),
+        ),
+      );
+    }
+
     return ret;
   }
 }

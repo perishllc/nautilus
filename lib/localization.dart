@@ -1677,7 +1677,6 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
 
   /// HINTS
 
-
   String get createPinHint {
     return Intl.message("Create a pin", desc: 'A text field hint that tells the user to create a pin', name: 'createPinHint');
   }
@@ -1685,7 +1684,7 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   String get confirmPinHint {
     return Intl.message("Confirm the pin", desc: 'A text field hint that tells the user to confirm the pin', name: 'confirmPinHint');
   }
-  
+
   String get pinsDontMatch {
     return Intl.message("Pins do not match", desc: 'An error indicating a pin has been confirmed incorrectly', name: 'pinsDontMatch');
   }
@@ -1837,11 +1836,11 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   // Donations text
 
   String get supportDevelopment {
-    return Intl.message("Support Development", desc: 'settings_support_dev', name: 'supportDevelopment');
+    return Intl.message("Help Support Development", desc: 'settings_support_development', name: 'supportDevelopment');
   }
 
   String get donateToSupport {
-    return Intl.message("Support the Project", desc: 'settings_support_dev', name: 'donateToSupport');
+    return Intl.message("Support the Project", desc: 'settings_support_donate', name: 'donateToSupport');
   }
 
   String get monthlyServerCosts {
@@ -1854,6 +1853,13 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
 
   String get fundingBannerHeader {
     return Intl.message('Funding Banner', desc: 'funding_banner_header', name: 'fundingBannerHeader');
+  }
+
+  String get iosFundingMessage {
+    return Intl.message(
+        "Due to iOS App Store guidelines and restrictions, we can't show any of the specific donation categories that would otherwise be here, if you'd like to contribute to the project, we suggest doing so using the Nautilus Node's address.",
+        desc: 'ios_funding_message',
+        name: 'iosFundingMessage');
   }
 
   String get donateButton {

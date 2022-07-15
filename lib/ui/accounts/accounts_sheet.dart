@@ -178,7 +178,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                       height: 5,
                       width: MediaQuery.of(context).size.width * 0.15,
                       decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text10,
+                        color: StateContainer.of(context).curTheme.text20,
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
@@ -556,7 +556,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                       height: 30,
                       margin: const EdgeInsets.only(right: 20),
                       decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text,
+                        color: StateContainer.of(context).curTheme.text45,
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),

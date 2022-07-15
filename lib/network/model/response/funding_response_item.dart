@@ -37,6 +37,9 @@ class FundingResponseItem {
   @JsonKey(name: 'timestamp')
   int? timestamp;
 
+  @JsonKey(name: 'show_on_ios')
+  bool? showOnIos;
+
   FundingResponseItem({
     this.id,
     this.active,
@@ -49,6 +52,7 @@ class FundingResponseItem {
     this.address,
     this.link,
     this.timestamp,
+    this.showOnIos
   });
 
   factory FundingResponseItem.fromJson(Map<String, dynamic> json) =>

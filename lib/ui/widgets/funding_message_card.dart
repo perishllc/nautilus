@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
@@ -20,6 +19,7 @@ class FundingMessageCard extends StatefulWidget {
   final String? shortDescription;
   final String? title;
   final bool hideAmounts;
+  final bool hideProgressBar;
 
   FundingMessageCard({
     this.alert,
@@ -32,6 +32,7 @@ class FundingMessageCard extends StatefulWidget {
     this.showTimestamp = true,
     this.hasBg = true,
     this.hideAmounts = false,
+    this.hideProgressBar = false,
   });
 
   _FundingMessageCardState createState() => _FundingMessageCardState();
@@ -117,7 +118,7 @@ class _FundingMessageCardState extends State<FundingMessageCard> {
                     style: AppStyles.remoteMessageCardShortDescription(context),
                   ),
                 ),
-              if (widget.currentAmountRaw != null && widget.goalAmountRaw != null && !widget.hideAmounts)
+              if (!widget.hideAmounts && widget.currentAmountRaw != null && widget.goalAmountRaw != null)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -125,39 +126,40 @@ class _FundingMessageCardState extends State<FundingMessageCard> {
                     getAmountWidget(widget.goalAmountRaw!),
                   ],
                 ),
-              LinearPercentIndicator(
-                // width: 200.0,
-                lineHeight: 24.0,
-                curve: Curves.easeOut,
-                percent: minFundedPercent,
-                center: Text(
-                  "${(percentFunded * 100).toStringAsFixed(2)}%",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: AppFontSizes.small,
-                    color: StateContainer.of(context).curTheme.text,
-                    fontWeight: FontWeight.w900,
+              if (!widget.hideProgressBar)
+                LinearPercentIndicator(
+                  // width: 200.0,
+                  lineHeight: 24.0,
+                  curve: Curves.easeOut,
+                  percent: minFundedPercent,
+                  center: Text(
+                    "${(percentFunded * 100).toStringAsFixed(2)}%",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: AppFontSizes.small,
+                      color: StateContainer.of(context).curTheme.text,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
+                  backgroundColor: StateContainer.of(context).curTheme.text15,
+                  // progressColor: StateContainer.of(context).curTheme.success,
+                  linearGradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    stops: [0.2, 0.5, 0.9].map((e) => e * (1 / minFundedPercent)).toList(),
+                    colors: [
+                      StateContainer.of(context).curTheme.error!,
+                      StateContainer.of(context).curTheme.warning!,
+                      StateContainer.of(context).curTheme.success!,
+                    ],
+                  ),
+                  // trailing: getAmountWidget(widget.goalAmountRaw ?? "0"),
+                  barRadius: const Radius.circular(100),
+                  padding: EdgeInsets.zero,
+                  animateFromLastPercent: true,
+                  animation: true,
+                  animationDuration: 2500,
                 ),
-                backgroundColor: StateContainer.of(context).curTheme.text15,
-                // progressColor: StateContainer.of(context).curTheme.success,
-                linearGradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  stops: [0.2, 0.5, 0.9].map((e) => e * (1 / minFundedPercent)).toList(),
-                  colors: [
-                    StateContainer.of(context).curTheme.error!,
-                    StateContainer.of(context).curTheme.warning!,
-                    StateContainer.of(context).curTheme.success!,
-                  ],
-                ),
-                // trailing: getAmountWidget(widget.goalAmountRaw ?? "0"),
-                barRadius: const Radius.circular(100),
-                padding: EdgeInsets.zero,
-                animateFromLastPercent: true,
-                animation: true,
-                animationDuration: 2500,
-              ),
               // if (widget.alert!.timestamp != null && widget.showTimestamp)
               //   Container(
               //     margin: const EdgeInsetsDirectional.only(

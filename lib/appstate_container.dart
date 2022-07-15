@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:devicelocale/devicelocale.dart';
@@ -208,6 +209,12 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void updateFundingAlerts(List<FundingResponseItem>? alerts) {
+    if (Platform.isIOS) {
+      // filter out alerts that can't be shown on iOS:
+      alerts = alerts?.where((FundingResponseItem item) {
+        return item.showOnIos ?? false;
+      }).toList();
+    }
     setState(() {
       fundingAlerts = alerts;
     });

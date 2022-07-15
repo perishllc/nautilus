@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -31,6 +32,7 @@ import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
 import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
 import 'package:nautilus_wallet_flutter/model/nyanicon_option.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
 import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -466,7 +468,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   Future<void> _contactsDialog() async {
-    ContactsOptions? picked = await showDialog<ContactsOptions>(
+    final ContactsOptions? picked = await showDialog<ContactsOptions>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
@@ -509,7 +511,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     }
 
     if (picked == ContactsOptions.ON) {
-      bool contactsEnabled = await _getContactsPermissions();
+      final bool contactsEnabled = await _getContactsPermissions();
       await sl.get<SharedPrefsUtil>().setContactsOn(contactsEnabled);
       EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
     } else {
@@ -519,7 +521,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   Future<void> _fundingDialog() async {
-    FundingOptions? picked = await showDialog<FundingOptions>(
+    final FundingOptions? picked = await showDialog<FundingOptions>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
@@ -1130,6 +1132,34 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   }
 
   Widget _buildSettingsList() {
+    int currentFundingIndex = 0;
+
+    // go through and find the first active funding alert that hasn't met it's goal yet:
+    if (StateContainer.of(context).fundingAlerts != null && StateContainer.of(context).fundingAlerts!.isNotEmpty) {
+      for (int i = 0; i < StateContainer.of(context).fundingAlerts!.length; i++) {
+        if (StateContainer.of(context).fundingAlerts![i] == null) {
+          continue;
+        }
+
+        final FundingResponseItem fundingAlert = StateContainer.of(context).fundingAlerts![i];
+
+        if (fundingAlert.currentAmountRaw == null || fundingAlert.goalAmountRaw == null) {
+          continue;
+        }
+
+        final BigInt? currentAmountRaw = BigInt.tryParse(fundingAlert.currentAmountRaw!);
+        final BigInt? goalAmountRaw = BigInt.tryParse(fundingAlert.goalAmountRaw!);
+        if (currentAmountRaw == null || goalAmountRaw == null) {
+          continue;
+        }
+
+        if (currentAmountRaw < goalAmountRaw) {
+          currentFundingIndex = i;
+          break;
+        }
+      }
+    }
+
     return ListView(
       padding: const EdgeInsets.only(top: 15.0),
       controller: _scrollController,
@@ -1155,8 +1185,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
               },
             ),
           ),
-        if (StateContainer.of(context).fundingAlerts != null &&
-            StateContainer.of(context).fundingAlerts!.length > 0 &&
+        if (!Platform.isIOS &&
+            StateContainer.of(context).fundingAlerts != null &&
+            StateContainer.of(context).fundingAlerts!.isNotEmpty &&
             _curFundingSetting.setting == FundingOptions.SHOW)
           Container(
             padding: const EdgeInsetsDirectional.only(
@@ -1166,10 +1197,33 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             ),
             child: FundingMessageCard(
               title: AppLocalization.of(context)!.donateToSupport,
-              shortDescription: StateContainer.of(context).fundingAlerts![0].title,
-              currentAmountRaw: StateContainer.of(context).fundingAlerts![0].currentAmountRaw,
-              goalAmountRaw: StateContainer.of(context).fundingAlerts![0].goalAmountRaw,
+              shortDescription: StateContainer.of(context).fundingAlerts![currentFundingIndex].title,
+              currentAmountRaw: StateContainer.of(context).fundingAlerts![currentFundingIndex].currentAmountRaw,
+              goalAmountRaw: StateContainer.of(context).fundingAlerts![currentFundingIndex].goalAmountRaw,
               hideAmounts: true,
+              onPressed: () {
+                Sheets.showAppHeightEightSheet(
+                  context: context,
+                  widget: FundingMessagesSheet(
+                    alerts: StateContainer.of(context).fundingAlerts,
+                    hasDismissButton: false,
+                  ),
+                );
+              },
+            ),
+          ),
+        if (Platform.isIOS && StateContainer.of(context).fundingAlerts != null && _curFundingSetting.setting == FundingOptions.SHOW)
+          Container(
+            padding: const EdgeInsetsDirectional.only(
+              start: 12,
+              end: 12,
+              bottom: 20,
+            ),
+            child: FundingMessageCard(
+              title: AppLocalization.of(context)!.donateToSupport,
+              shortDescription: AppLocalization.of(context)!.supportDevelopment,
+              hideAmounts: true,
+              hideProgressBar: true,
               onPressed: () {
                 Sheets.showAppHeightEightSheet(
                   context: context,

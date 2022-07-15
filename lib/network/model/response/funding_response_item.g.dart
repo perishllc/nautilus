@@ -19,6 +19,7 @@ FundingResponseItem _$FundingResponseItemFromJson(Map<String, dynamic> json) =>
       address: json['address'] as String?,
       link: json['link'] as String?,
       timestamp: json['timestamp'] as int?,
+      showOnIos: json['show_on_ios'] as bool?,
     );
 
 Map<String, dynamic> _$FundingResponseItemToJson(
@@ -35,4 +36,5 @@ Map<String, dynamic> _$FundingResponseItemToJson(
       'address': instance.address,
       'link': instance.link,
       'timestamp': instance.timestamp,
+      'show_on_ios': instance.showOnIos,
     };

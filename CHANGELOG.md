@@ -1,8 +1,13 @@
-## v0.4.3 - [2022-07-XX]
+## v0.4.3 - [2022-07-16]
 #### Added
+- Sheet handle on the more details section of transactions
 #### Changed
+- Sheet handles consistency
+- Funding Structure Changes for the iOS App Store
 #### Fixed
 - Bug with QR code scanning when done through the swipe up action on the send button
+- Tablet mode was not working properly
+- More QR code scanning bugs
 ## v0.4.2 - [2022-07-15]
 #### Added
 - New monochrome theme!

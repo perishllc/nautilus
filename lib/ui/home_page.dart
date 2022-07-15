@@ -1432,7 +1432,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   void paintQrCode({String? address}) {
-    final painter = PrettyQr(
+    final PrettyQr painter = PrettyQr(
       typeNumber: 9,
       data: "nano:${address ?? StateContainer.of(context).wallet!.address!}",
       errorCorrectLevel: QrErrorCorrectLevel.M,
@@ -3262,7 +3262,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                 height: 30,
                 margin: const EdgeInsets.only(right: 22),
                 decoration: BoxDecoration(
-                  color: StateContainer.of(context).curTheme.text,
+                  color: StateContainer.of(context).curTheme.text45,
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
@@ -3644,10 +3644,20 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
           children: <Widget>[
             Column(
               children: <Widget>[
+                // Sheet handle
+                Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  height: 5,
+                  width: MediaQuery.of(context).size.width * 0.15,
+                  decoration: BoxDecoration(
+                    color: StateContainer.of(context).curTheme.text20,
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
                 // A row for View Details button
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
                         onPressed: () async {
                       await UIUtil.showBlockExplorerWebview(context, txDetails.block);
                     }),
@@ -3662,7 +3672,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           // Copy Address Button
                           _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
                           _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
-                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Clipboard.setData(ClipboardData(text: addressToCopy));
                         if (mounted) {
                           setState(() {

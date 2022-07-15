@@ -53,7 +53,7 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
               height: 5,
               width: MediaQuery.of(context).size.width * 0.15,
               decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text10,
+                color: StateContainer.of(context).curTheme.text20,
                 borderRadius: BorderRadius.circular(5.0),
               ),
             ),
