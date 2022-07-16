@@ -1,3 +1,10 @@
+## v0.4.4 - [2022-07-17]
+#### Added
+#### Changed
+#### Fixed
+- All tx's were showing as receives lol
+- Send sheet showing currency symbols incorrectly in local currency mode
+-
 ## v0.4.3 - [2022-07-16]
 #### Added
 - Sheet handle on the more details section of transactions
