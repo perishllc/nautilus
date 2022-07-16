@@ -3298,7 +3298,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     converted.height ??= histItem.height!; // block height
     converted.record_type ??= histItem.type; // transaction type
-    converted.sub_type ??= histItem.type; // transaction subtype
+    converted.sub_type ??= (histItem.subtype ?? histItem.type); // transaction subtype
 
     if (isNotEmpty(txDetails?.memo)) {
       converted.is_memo = true;
