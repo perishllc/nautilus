@@ -1,6 +1,7 @@
 ## v0.4.4 - [2022-07-17]
 #### Added
 #### Changed
+- Default tx viewer reverted back to nanolooker
 #### Fixed
 - All tx's were showing as receives lol
 - Send sheet showing currency symbols incorrectly in local currency mode
