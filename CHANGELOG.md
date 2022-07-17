@@ -1,11 +1,14 @@
-## v0.4.4 - [2022-07-17]
+## v0.4.5 - [2022-07-XX]
 #### Added
+#### Changed
+#### Fixed
+## v0.4.4 - [2022-07-17]
 #### Changed
 - Default tx viewer reverted back to nanolooker
 #### Fixed
 - All tx's were showing as receives lol
 - Send sheet showing currency symbols incorrectly in local currency mode
--
+- Donation contact (NautilusDonations) wasn't being added on a fresh install
 ## v0.4.3 - [2022-07-16]
 #### Added
 - Sheet handle on the more details section of transactions
