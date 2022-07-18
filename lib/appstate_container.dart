@@ -173,6 +173,7 @@ class StateContainerState extends State<StateContainer> {
   String? giftedWalletAddress;
   String? giftedWalletAmountRaw;
   String? giftedWalletMemo;
+  String? giftedWalletSplitAmountRaw;
   late String giftedWalletSenderAddress;
 
   // When wallet is encrypted
@@ -587,6 +588,7 @@ class StateContainerState extends State<StateContainer> {
             giftedWalletAddress = data["address"] as String? ?? "";
             giftedWalletSenderAddress = data["senderAddress"] as String? ?? "";
             giftedWalletMemo = data["memo"] as String? ?? "";
+            giftedWalletSplitAmountRaw = data["split_amount_raw"] as String? ?? "";
           });
           // }
         }
