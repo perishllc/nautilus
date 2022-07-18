@@ -14,7 +14,12 @@ String? lowerStripAddress(String? address) {
   if (address == null) {
     return null;
   }
-  return address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "").replaceAll("ban_", "");
+  return address
+      .toLowerCase()
+      .replaceAll("xrb_", "")
+      .replaceAll("nano_", "")
+      .replaceAll("ban_", "")
+      .replaceAll(" ", "");
 }
 
 String? formatAddress(String? address) {
@@ -61,7 +66,16 @@ class User {
   // @JsonKey(ignore: true)
   // Widget monkeyWidgetLarge;
 
-  User({this.username, this.address, this.expiration, this.representative, this.is_blocked, this.type, this.last_updated, this.nickname, this.aliases});
+  User(
+      {this.username,
+      this.address,
+      this.expiration,
+      this.representative,
+      this.is_blocked,
+      this.type,
+      this.last_updated,
+      this.nickname,
+      this.aliases});
 
   factory User.fromJson(Map<String, dynamic> json) {
     String? username = json['username'] as String? ?? json['name'] as String?;
@@ -109,6 +123,7 @@ class User {
     }
   }
 
-  bool operator ==(o) => o is User && o.username == username && o.address == address && o.type == type && o.nickname == nickname;
+  bool operator ==(o) =>
+      o is User && o.username == username && o.address == address && o.type == type && o.nickname == nickname;
   int get hashCode => hash2(username.hashCode, address.hashCode);
 }

@@ -1152,7 +1152,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         }
         // remove from the list if it's a change block:
         // just in case:
-        if (![BlockTypes.CHANGE, BlockTypes.OPEN].contains(unifiedList[j].subtype)) {
+        if ([BlockTypes.CHANGE, BlockTypes.OPEN].contains(unifiedList[j].subtype)) {
           unifiedList.removeAt(j);
           j--;
           continue;
@@ -2831,9 +2831,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address!);
     String? quickSendAmount = txDetails.amount_raw;
     // a bit of a hack since send sheet doesn't have a way to tell if we're in nyano mode on creation:
-    if (StateContainer.of(context).nyanoMode) {
-      quickSendAmount = "${quickSendAmount!}000000";
-    }
+    // if (StateContainer.of(context).nyanoMode) {
+    //   quickSendAmount = "${quickSendAmount!}000000";
+    // }
 
     // Go to send with address
     await Sheets.showAppHeightNineSheet(
