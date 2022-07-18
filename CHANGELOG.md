@@ -1,7 +1,3 @@
-## v0.4.5 - [2022-07-XX]
-#### Added
-#### Changed
-#### Fixed
 ## v0.4.4 - [2022-07-17]
 #### Changed
 - Default tx viewer reverted back to nanolooker

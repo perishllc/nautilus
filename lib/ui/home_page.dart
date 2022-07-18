@@ -689,7 +689,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       final User donationsContact = User(
           nickname: nautilusDonationsNickname,
           address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579",
-          username: "nautilus",
+          // username: "nautilus",
           type: UserTypes.CONTACT);
       await sl.get<DBHelper>().saveContact(donationsContact);
     }
