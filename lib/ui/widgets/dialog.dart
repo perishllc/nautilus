@@ -11,11 +11,13 @@ import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/funding_messages_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppDialogs {
-  static void showConfirmDialog(BuildContext context, String title, String content, String buttonText, Function onPressed,
+  static void showConfirmDialog(
+      BuildContext context, String title, String content, String buttonText, Function onPressed,
       {String? cancelText, Function? cancelAction}) {
     cancelText ??= AppLocalization.of(context)!.cancel.toUpperCase();
 
@@ -173,7 +175,8 @@ class AppDialogs {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(AppLocalization.of(context)!.changeLog, textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
+                    child: Text(AppLocalization.of(context)!.changeLog,
+                        textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
                     constraints: const BoxConstraints(minHeight: 300, maxHeight: 400),
@@ -249,10 +252,8 @@ class AppDialogs {
 
                             Sheets.showAppHeightNineSheet(
                                 context: context,
-                                widget: SendSheet(
-                                  localCurrency: StateContainer.of(context).curCurrency,
-                                  address: AppWallet.nautilusRepresentative,
-                                ));
+                                widget: FundingMessagesSheet(
+                                    alerts: StateContainer.of(context).fundingAlerts, hasDismissButton: false));
                           });
                         },
                         child: Text(
@@ -266,7 +267,8 @@ class AppDialogs {
                       TextButton(
                         key: const Key("changelog_dismiss_button"),
                         onPressed: () => Navigator.of(context).pop(),
-                        child: Text(AppLocalization.of(context)!.dismiss, style: AppStyles.textStyleDialogOptions(context)),
+                        child: Text(AppLocalization.of(context)!.dismiss,
+                            style: AppStyles.textStyleDialogOptions(context)),
                       ),
                     ]),
                   ),
