@@ -1,6 +1,8 @@
 ## v0.4.5 - [2022-07-XX]
 #### Added
+- Watch only addresses
 #### Changed
+- Updates to local currency displays
 #### Fixed
 - Ensure the local currency symbol always shows in local currency mode (i.e. on the send screen)
 - Sped up receive screen QR code screen by pre-caching the QR image on load

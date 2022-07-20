@@ -1540,6 +1540,10 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
     return Intl.message("Add Account", desc: "Default new account name - e.g. Account 1", name: 'addAccount');
   }
 
+  String get addWatchOnlyAccount {
+    return Intl.message("Add Watch Only Account", desc: "watch_only_add", name: 'addWatchOnlyAccount');
+  }
+
   String get hideAccountHeader {
     return Intl.message("Hide Account?", desc: "Confirmation dialog header", name: 'hideAccountHeader');
   }

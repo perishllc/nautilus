@@ -57,15 +57,15 @@ class AccountHistoryResponseItem {
   }
 
   String? getShortString() {
-    return new Address(account).getShortString();
+    return Address(account).getShortString();
   }
 
   String? getShorterString() {
-    return new Address(account).getShorterString();
+    return Address(account).getShorterString();
   }
 
   String? getShortestString() {
-    return new Address(account).getShortestString();
+    return Address(account).getShortestString();
   }
 
   factory AccountHistoryResponseItem.fromJson(Map<String, dynamic> json) => _$AccountHistoryResponseItemFromJson(json);
