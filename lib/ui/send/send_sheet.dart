@@ -813,6 +813,9 @@ class _SendSheetState extends State<SendSheet> {
                       }
 
                       String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
+                      String formattedAmount = _amountController!.text
+                          .replaceAll(_localCurrencyFormat!.currencySymbol, "")
+                          .replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
 
                       String amountRaw;
 
@@ -825,7 +828,7 @@ class _SendSheetState extends State<SendSheet> {
                           if (_rawAmount != null) {
                             amountRaw = _rawAmount!;
                           } else {
-                            amountRaw = getThemeAwareAmountAsRaw(context, _amountController!.text);
+                            amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
                           }
                         }
                       }
@@ -1115,9 +1118,8 @@ class _SendSheetState extends State<SendSheet> {
                                 handoffItem: handoffItem,
                                 destination: user?.address ?? handoffItem.account,
                                 contactName: user?.getDisplayName(),
-                                localCurrency: _localCurrencyMode
-                                    ? _convertCryptoToLocalCurrencyFromString(handoffItem.amount!)
-                                    : null));
+                                localCurrency:
+                                    _localCurrencyMode ? _convertCryptoToLocalCurrency(handoffItem.amount!) : null));
                       } else {
                         // something went wrong, show generic error:
                         UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
@@ -1132,40 +1134,50 @@ class _SendSheetState extends State<SendSheet> {
   }
 
   String _convertLocalCurrencyToCrypto() {
-    String convertedAmt = _amountController!.text.replaceAll(",", ".");
+    String convertedAmt = _amountController!.text
+        .replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "")
+        .replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
     convertedAmt = NumberUtil.sanitizeNumber(convertedAmt);
     if (convertedAmt.isEmpty) {
       return "";
     }
     final Decimal valueLocal = Decimal.parse(convertedAmt);
     final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    return NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16)).toString();
+    String nanoAmount = NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
+    return nanoAmount;
   }
 
-  String _convertCryptoToLocalCurrency() {
-    String convertedAmt = NumberUtil.sanitizeNumber(_amountController!.text, maxDecimalDigits: 2);
-    if (convertedAmt.isEmpty) {
-      return "";
-    }
-    final Decimal valueCrypto = Decimal.parse(convertedAmt);
-    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    convertedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2).toString();
-    convertedAmt = convertedAmt.replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
-    convertedAmt = _localCurrencyFormat!.currencySymbol + convertedAmt;
-    return convertedAmt;
-  }
+  String _convertCryptoToLocalCurrency(String amount) {
+    // String sanitizedAmt = amount
+    //     .replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "")
+    //     .replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
+    // sanitizedAmt = NumberUtil.sanitizeNumber(sanitizedAmt);
+    // if (sanitizedAmt.isEmpty) {
+    //   return "";
+    // }
+    // final Decimal valueCrypto = Decimal.parse(sanitizedAmt);
+    // final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
+    // sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
 
-  String _convertCryptoToLocalCurrencyFromString(String amount) {
-    String convertedAmt = NumberUtil.sanitizeNumber(amount, maxDecimalDigits: 2);
-    if (convertedAmt.isEmpty) {
-      return "";
-    }
-    final Decimal valueCrypto = Decimal.parse(convertedAmt);
-    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    convertedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2).toString();
-    convertedAmt = convertedAmt.replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
-    convertedAmt = _localCurrencyFormat!.currencySymbol + convertedAmt;
-    return convertedAmt;
+    // final List<String> splitStrs = sanitizedAmt.split(".");
+    // final String firstPart = splitStrs[0].trim();
+    // String secondPart = splitStrs.length > 1 ? splitStrs[1].trim() : "";
+
+    // if (secondPart.isNotEmpty) {
+    //   secondPart = _localCurrencyFormat!.symbols.DECIMAL_SEP + secondPart;
+    // }
+
+    // final NumberFormat formatCurrency = NumberFormat.simpleCurrency(
+    //     decimalDigits: _localCurrencyFormat!.decimalDigits,
+    //     locale: _localCurrencyFormat!.locale,
+    //     name: _localCurrencyFormat!.currencyName);
+    // String formattedCurrency = formatCurrency.format(int.parse(firstPart));
+    // formattedCurrency = formattedCurrency
+    //         .substring(0, formattedCurrency.length - (_localCurrencyFormat!.decimalDigits! + 1))
+    //         .replaceAll(" ", "") +
+    //     secondPart;
+    return (_localCurrencyFormat!.currencySymbol + convertCryptoToLocalAmount(amount, _localCurrencyFormat))
+        .replaceAll(" ", "");
   }
 
   // Determine if this is a max send or not by comparing balances
@@ -1247,9 +1259,12 @@ class _SendSheetState extends State<SendSheet> {
       // Check our previous state
       if (_amountController!.text == _lastCryptoAmount) {
         localAmountStr = _lastLocalCurrencyAmount;
+        if (!_lastLocalCurrencyAmount.startsWith(_localCurrencyFormat!.currencySymbol)) {
+          _lastLocalCurrencyAmount = _localCurrencyFormat!.currencySymbol + _lastLocalCurrencyAmount;
+        }
       } else {
         _lastCryptoAmount = _amountController!.text;
-        _lastLocalCurrencyAmount = _convertCryptoToLocalCurrency();
+        _lastLocalCurrencyAmount = _convertCryptoToLocalCurrency(_amountController!.text);
         localAmountStr = _lastLocalCurrencyAmount;
       }
       setState(() {
@@ -1314,7 +1329,9 @@ class _SendSheetState extends State<SendSheet> {
         bananoAmount = _convertLocalCurrencyToCrypto();
       } else {
         if (_rawAmount == null) {
-          bananoAmount = _amountController!.text;
+          bananoAmount = _amountController!.text
+              .replaceAll(_localCurrencyFormat!.currencySymbol, "")
+              .replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
         } else {
           bananoAmount = getRawAsThemeAwareAmount(context, _rawAmount);
         }
@@ -1336,10 +1353,10 @@ class _SendSheetState extends State<SendSheet> {
           });
         }
       } else if (sendAmount > balanceRaw && !isRequest) {
-        isValid = false;
-        setState(() {
-          _amountValidationText = AppLocalization.of(context)!.insufficientBalance;
-        });
+        // isValid = false;
+        // setState(() {
+        //   _amountValidationText = AppLocalization.of(context)!.insufficientBalance;
+        // });
       } else {
         setState(() {
           _amountValidationText = "";
@@ -1428,14 +1445,17 @@ class _SendSheetState extends State<SendSheet> {
       ),
       inputFormatters: _rawAmount == null
           ? [
-              LengthLimitingTextInputFormatter(13),
+              // LengthLimitingTextInputFormatter(13),
               if (_localCurrencyMode)
                 CurrencyFormatter(
                     decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP,
                     commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP,
                     maxDecimalDigits: 2)
               else
-                CurrencyFormatter(maxDecimalDigits: NumberUtil.maxDecimalDigits),
+                CurrencyFormatter(
+                    decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP,
+                    commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP,
+                    maxDecimalDigits: NumberUtil.maxDecimalDigits),
               LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
             ]
           : [LengthLimitingTextInputFormatter(13)],

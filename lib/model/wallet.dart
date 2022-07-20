@@ -96,19 +96,6 @@ class AppWallet {
     this._accountBalance = accountBalance;
   }
 
-  // // Get pretty account balance version
-  // String getAccountBalanceDisplay(BuildContext context) {
-  //   if (accountBalance == null) {
-  //     return "0";
-  //   }
-
-  //   if (StateContainer.of(context).nyanoMode) {
-  //     return NumberUtil.getRawAsNyanoString(_accountBalance.toString());
-  //   } else {
-  //     return NumberUtil.getRawAsUsableString(_accountBalance.toString());
-  //   }
-  // }
-
   String getLocalCurrencyBalance(BuildContext context, AvailableCurrency currency, {String? locale = "en_US"}) {
     final BigInt rawPerCur = rawPerNano;
     final Decimal converted = Decimal.parse(_localCurrencyPrice!) * NumberUtil.getRawAsDecimal(_accountBalance.toString(), rawPerCur);

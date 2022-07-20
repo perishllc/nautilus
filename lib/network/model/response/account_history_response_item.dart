@@ -68,13 +68,6 @@ class AccountHistoryResponseItem {
     return new Address(account).getShortestString();
   }
 
-  /**
-   * Return amount formatted for use in the UI
-   */
-  // String getFormattedAmount() {
-  //   return NumberUtil.getRawAsUsableString(amount);
-  // }
-
   factory AccountHistoryResponseItem.fromJson(Map<String, dynamic> json) => _$AccountHistoryResponseItemFromJson(json);
   Map<String, dynamic> toJson() => _$AccountHistoryResponseItemToJson(this);
 

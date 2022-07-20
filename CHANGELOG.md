@@ -1,3 +1,9 @@
+## v0.4.5 - [2022-07-XX]
+#### Added
+#### Changed
+#### Fixed
+- Ensure the local currency symbol always shows in local currency mode (i.e. on the send screen)
+- Sped up receive screen QR code screen by pre-caching the QR image on load
 ## v0.4.4 - [2022-07-17]
 #### Changed
 - Default tx viewer reverted back to nanolooker

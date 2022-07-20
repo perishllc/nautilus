@@ -70,7 +70,7 @@ class AppChangeRepresentativeSheet {
     }
     final List<Widget> ret = [];
     list.forEach((node) {
-      if (node.alias != null && node.alias!.trim().length > 0) {
+      if (node.alias != null && node.alias!.trim().isNotEmpty) {
         ret.add(_buildSingleRepresentative(
           node,
           context,

@@ -41,7 +41,7 @@ class AccountDetailsSheet {
 
   Future<bool> _onWillPop() async {
     // Update name if changed and valid
-    if (originalName != _nameController!.text && _nameController!.text.trim().length > 0 && !deleted) {
+    if (originalName != _nameController!.text && _nameController!.text.trim().isNotEmpty && !deleted) {
       sl.get<DBHelper>().changeAccountName(account, _nameController!.text);
       account.name = _nameController!.text;
       EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account));

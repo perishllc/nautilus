@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
-
+import 'dart:ui' as ui;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -1555,23 +1555,56 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  void paintQrCode({String? address}) {
-    final PrettyQr painter = PrettyQr(
-      typeNumber: 9,
+  void paintQrCode({String? address}) async {
+    // final PrettyQr painter = PrettyQr(
+    //   data: "nano:${address ?? StateContainer.of(context).wallet!.address!}",
+    //   errorCorrectLevel: QrErrorCorrectLevel.M,
+    //   roundEdges: true,
+    //   typeNumber: 9,
+    // );
+    final PrettyQrCodePainter painter = PrettyQrCodePainter(
       data: "nano:${address ?? StateContainer.of(context).wallet!.address!}",
       errorCorrectLevel: QrErrorCorrectLevel.M,
       roundEdges: true,
+      typeNumber: 9,
     );
     if (MediaQuery.of(context).size.width == 0) {
       return;
     }
+
+    final ui.PictureRecorder recorder = ui.PictureRecorder();
+    final ui.Canvas canvas = Canvas(recorder);
+    final double qrSize = MediaQuery.of(context).size.width;
+    painter.paint(canvas, Size(qrSize, qrSize));
+    final ui.Picture pic = recorder.endRecording();
+    final ui.Image image = await pic.toImage(qrSize.toInt(), qrSize.toInt());
+    final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     setState(() {
       receive = ReceiveSheet(
         localCurrency: StateContainer.of(context).curCurrency,
         address: StateContainer.of(context).wallet!.address,
-        qrWidget: SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: painter),
+        qrWidget: SizedBox(width: qrSize, child: Image.memory(byteData!.buffer.asUint8List())),
       );
     });
+
+    // setState(() {
+    //   receive = ReceiveSheet(
+    //     localCurrency: StateContainer.of(context).curCurrency,
+    //     address: StateContainer.of(context).wallet!.address,
+    //     qrWidget: SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: painter),
+    //   );
+    // });
+
+    // painter.toImageData(MediaQuery.of(context).size.width).then((ByteData? byteData) {
+    //   setState(() {
+    //     receive = ReceiveSheet(
+    //       localCurrency: StateContainer.of(context).curCurrency,
+    //       address: StateContainer.of(context).wallet!.address,
+    //       qrWidget: SizedBox(
+    //           width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List())),
+    //     );
+    //   });
+    // });
   }
 
   @override
@@ -2936,7 +2969,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     // See if a contact
     final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address!);
-    String? quickSendAmount = txDetails.amount_raw;
+    final String? quickSendAmount = txDetails.amount_raw;
     // a bit of a hack since send sheet doesn't have a way to tell if we're in nyano mode on creation:
     // if (StateContainer.of(context).nyanoMode) {
     //   quickSendAmount = "${quickSendAmount!}000000";
