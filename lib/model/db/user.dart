@@ -59,13 +59,7 @@ class User {
   int? last_updated;
   @JsonKey(name: 'aliases')
   List<String?>? aliases;
-  // @JsonKey(ignore: true)
-  // String monkeyPath;
-  // @JsonKey(ignore: true)
-  // Widget monkeyWidget;
-  // @JsonKey(ignore: true)
-  // Widget monkeyWidgetLarge;
-
+  
   User(
       {this.username,
       this.address,
@@ -77,12 +71,15 @@ class User {
       this.nickname,
       this.aliases});
 
+  // Map<String, dynamic> toJson() => _$UserToJson(this);
+  // User fromJson() => _$UserFromJson(this);
+
   factory User.fromJson(Map<String, dynamic> json) {
     String? username = json['username'] as String? ?? json['name'] as String?;
     return User(
         username: username,
-        nickname: json["nickname"] as String?,
-        address: formatAddress(json["address"] as String?),
+        nickname: (json["nickname"] ?? json["name"]) as String?,
+        address: formatAddress((json["address"] ?? json["account"]) as String?),
         type: json["type"] as String?,
         expiration: json["expires"] as String?,
         representative: json["representative"] as bool?,
@@ -90,8 +87,6 @@ class User {
         last_updated: json["last_updated"] as int?,
         aliases: json["aliases"] as List<String>?);
   }
-  // Map<String, dynamic> toJson() => _$UserToJson(this);
-  // User fromJson() => _$UserFromJson(this);
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{

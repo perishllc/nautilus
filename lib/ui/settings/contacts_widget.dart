@@ -259,7 +259,7 @@ class _ContactsListState extends State<ContactsList> {
     }
     final DateTime exportTime = DateTime.now();
     final String filename =
-        "nautiluscontacts_${exportTime.year}${exportTime.month}${exportTime.day}${exportTime.hour}${exportTime.minute}${exportTime.second}.txt";
+        "nautilus_contacts_${exportTime.year}${exportTime.month}${exportTime.day}${exportTime.hour}${exportTime.minute}${exportTime.second}.json";
     final Directory baseDirectory = await getApplicationDocumentsDirectory();
     final File contactsFile = File("${baseDirectory.path}/$filename");
     await contactsFile.writeAsString(json.encode(jsonList));
@@ -269,7 +269,7 @@ class _ContactsListState extends State<ContactsList> {
 
   Future<void> _importContacts() async {
     UIUtil.cancelLockEvent();
-    final FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ["txt"]);
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ["txt", "json"]);
     if (result != null) {
       final File f = File(result.files.single.path!);
       if (!await f.exists()) {
@@ -289,7 +289,7 @@ class _ContactsListState extends State<ContactsList> {
         }
         for (final User contact in contacts) {
           if (!await sl.get<DBHelper>().contactExistsWithName(contact.nickname!) && !await sl.get<DBHelper>().contactExistsWithAddress(contact.address!)) {
-            // Contact doesnt exist, make sure name and address are valid
+            // Contact doesn't exist, make sure name and address are valid
             if (Address(contact.address).isValid()) {
               if (contact.nickname!.length <= 20) {
                 contactsToAdd.add(contact);

@@ -102,6 +102,13 @@ class Address {
     return "${address!.substring(0, 11)}\n...${address!.substring(address!.length - 6)}";
   }
 
+  String? getShortFirstPart() {
+    if (address == null || address!.length < 64) {
+      return null;
+    }
+    return address!.substring(0, 12);
+  }
+
   bool isValid() {
     return address == null ? false : NanoAccounts.isValid(NanoAccountType.NANO, address!);
   }

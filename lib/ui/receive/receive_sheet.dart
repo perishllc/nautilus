@@ -61,7 +61,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
   ByteData? shareImageData;
   // Address copied items
   // Current state references
-  bool? _showShareCard;
+  bool _showShareCard = false;
   late bool _addressCopied;
   // Timer reference so we can cancel repeated events
   Timer? _addressCopiedTimer;
@@ -239,7 +239,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                       return Center(
                         child: Stack(
                           children: <Widget>[
-                            if (_showShareCard!)
+                            if (_showShareCard)
                               Container(
                                 alignment: AlignmentDirectional.center,
                                 child: AppShareCard(
@@ -397,7 +397,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                               _showShareCard = true;
                             });
                             Future.delayed(const Duration(milliseconds: 50), () {
-                              if (_showShareCard!) {
+                              if (_showShareCard) {
                                 _capturePng().then((Uint8List? byteData) {
                                   if (byteData != null) {
                                     f.writeAsBytes(byteData).then((File file) {

@@ -10,8 +10,9 @@ class Account {
   String? address;
   User? user;// used just to store the username
   String? balance; // Last known balance in RAW
+  late bool watchOnly; // Whether this is a watch-only account
 
-  Account({this.id, this.index, this.name, this.lastAccess, this.selected = false, this.address, this.balance, this.user});
+  Account({this.id, this.index, this.name, this.lastAccess, this.selected = false, this.address, this.balance, this.user, this.watchOnly = false});
 
   String getShortName() {
     List<String> splitName = name!.split(" ");

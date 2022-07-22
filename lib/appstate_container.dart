@@ -641,18 +641,22 @@ class StateContainerState extends State<StateContainer> {
   // Update the global wallet instance with a new address
   Future<void> updateWallet({required Account account}) async {
     final String address = NanoUtil.seedToAddress(await getSeed(), account.index!);
-    account.address = address;
+    account.address = account.address ?? address;
+    bool watchOnly = false;
+    if (account.address != address) {
+      watchOnly = true;
+    }
     selectedAccount = account;
     updateRecentlyUsedAccounts();
     // get user if it exists:
     // TODO: make username a setting if there are multiple:
-    final User? user = await sl.get<DBHelper>().getUserWithAddress(address);
+    final User? user = await sl.get<DBHelper>().getUserWithAddress(account.address!);
     String? walletUsername;
     if (user != null) {
       walletUsername = user.getDisplayName();
     }
     setState(() {
-      wallet = AppWallet(address: address, user: user, username: walletUsername, loading: true);
+      wallet = AppWallet(address: account.address, user: user, username: walletUsername, watchOnly: watchOnly, loading: true);
       requestUpdate();
       updateSolids();
     });
@@ -1096,6 +1100,10 @@ class StateContainerState extends State<StateContainer> {
         if (!postedToHome) {
           EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
           await updateUnified(false);
+        }
+
+        if (wallet!.watchOnly) {
+          return;
         }
 
         sl.get<AccountService>().pop();

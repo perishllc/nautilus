@@ -3,31 +3,33 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter/services.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:quiver/strings.dart';
+import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class AddWatchOnlyAccountSheet extends StatefulWidget {
-  const AddWatchOnlyAccountSheet({Key? key, required this.accounts}) : super(key: key);
+  const AddWatchOnlyAccountSheet({Key? key}) : super(key: key);
 
-  final List<Account> accounts;
+  // final List<Account> accounts;
 
   _AddWatchOnlyAccountSheetState createState() => _AddWatchOnlyAccountSheetState();
 }
@@ -35,8 +37,27 @@ class AddWatchOnlyAccountSheet extends StatefulWidget {
 class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
   static const int MAX_ACCOUNTS = 50;
   final GlobalKey expandedKey = GlobalKey();
+  FocusNode? _nameFocusNode;
+  FocusNode? _addressFocusNode;
+  TextEditingController? _nameController;
+  TextEditingController? _addressController;
 
-  bool? _addingAccount;
+  // State variables
+  bool? _addressValid;
+  bool? _pasteButtonVisible;
+  late bool _addressValidAndUnfocused;
+  String? _addressHint;
+  String? _nameHint;
+  String? _nameValidationText;
+  late String _addressValidationText;
+  String? _correspondingUsername;
+  String? _correspondingAddress;
+  AddressStyle? _addressStyle;
+  late List<User> _users;
+  // Set to true when a username is being entered
+  bool _isUser = false;
+
+  bool _addingAccount = false;
   final ScrollController _scrollController = ScrollController();
 
   StreamSubscription<AccountModifiedEvent>? _accountModifiedSub;
@@ -55,6 +76,118 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
     _registerBus();
     // _addingAccount = false;
     // _accountIsChanging = false;
+    // Text field initialization
+    _nameFocusNode = FocusNode();
+    _addressFocusNode = FocusNode();
+    _nameController = TextEditingController();
+    _addressController = TextEditingController();
+    // State initializationrue;
+    _addressValid = false;
+    _pasteButtonVisible = true;
+    _addressValidAndUnfocused = false;
+    _nameValidationText = "";
+    _addressValidationText = "";
+    _users = [];
+    // On name focus change
+    _nameFocusNode!.addListener(() {
+      if (_nameFocusNode!.hasFocus) {
+        setState(() {
+          _nameHint = "";
+        });
+      } else {
+        setState(() {
+          _nameHint = AppLocalization.of(context)!.contactNameHint;
+        });
+      }
+    });
+    // On address focus change
+    _addressFocusNode!.addListener(() async {
+      if (_addressFocusNode!.hasFocus) {
+        setState(() {
+          _addressHint = "";
+          _addressValidAndUnfocused = false;
+          _pasteButtonVisible = true;
+          _addressStyle = AddressStyle.TEXT60;
+        });
+        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith("nano_")) {
+          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
+          if (_addressController!.text != formattedAddress) {
+            setState(() {
+              _addressController!.text = formattedAddress;
+            });
+          }
+          final List<User> userList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(formattedAddress);
+          setState(() {
+            _users = userList;
+          });
+        }
+
+        if (_addressController!.text.isEmpty) {
+          setState(() {
+            _users = [];
+          });
+        }
+      } else {
+        setState(() {
+          _addressHint = null;
+          _users = [];
+          if (Address(_addressController!.text).isValid()) {
+            _addressValidAndUnfocused = true;
+          }
+          if (_addressController!.text.isEmpty) {
+            _pasteButtonVisible = true;
+          }
+        });
+        if (_addressController!.text.isNotEmpty) {
+          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
+          // check if in the username db:
+          String? address;
+          String? type;
+          final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+          if (user != null) {
+            type = user.type;
+            if (_addressController!.text != user.getDisplayName()) {
+              setState(() {
+                _addressController!.text = user.getDisplayName()!;
+              });
+            }
+          } else {
+            // check if UD or ENS address
+            if (_addressController!.text.contains(".")) {
+              // check if UD domain:
+              address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
+              if (address != null) {
+                type = UserTypes.UD;
+              } else {
+                // check if ENS domain:
+                address = await sl.get<AccountService>().checkENSDomain(formattedAddress);
+                if (address != null) {
+                  type = UserTypes.ENS;
+                }
+              }
+            }
+          }
+
+          if (type != null) {
+            setState(() {
+              _pasteButtonVisible = false;
+              _addressStyle = AddressStyle.PRIMARY;
+            });
+
+            if (address != null && user == null) {
+              // add to the db if missing:
+              final User user = User(username: formattedAddress, address: address, type: type, is_blocked: false);
+              await sl.get<DBHelper>().addUser(user);
+            }
+          } else {
+            setState(() {
+              _addressStyle = AddressStyle.TEXT60;
+            });
+          }
+        }
+      }
+    });
   }
 
   @override
@@ -64,30 +197,27 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
   }
 
   void _registerBus() {
-    _accountModifiedSub =
-        EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
+    _accountModifiedSub = EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
       if (event.deleted) {
-        if (event.account!.selected) {
-          Future.delayed(const Duration(milliseconds: 50), () {
-            setState(() {
-              widget.accounts
-                  .where((Account a) => a.index == StateContainer.of(context).selectedAccount!.index)
-                  .forEach((Account account) {
-                account.selected = true;
-              });
-            });
-          });
-        }
-        setState(() {
-          widget.accounts.removeWhere((Account a) => a.index == event.account!.index);
-        });
+        // if (event.account!.selected) {
+        //   Future.delayed(const Duration(milliseconds: 50), () {
+        //     setState(() {
+        //       widget.accounts.where((Account a) => a.index == StateContainer.of(context).selectedAccount!.index).forEach((Account account) {
+        //         account.selected = true;
+        //       });
+        //     });
+        //   });
+        // }
+        // setState(() {
+        //   widget.accounts.removeWhere((Account a) => a.index == event.account!.index);
+        // });
       } else {
         // Name change
-        setState(() {
-          widget.accounts.removeWhere((Account a) => a.index == event.account!.index);
-          widget.accounts.add(event.account!);
-          widget.accounts.sort((Account a, Account b) => a.index!.compareTo(b.index!));
-        });
+        // setState(() {
+        //   widget.accounts.removeWhere((Account a) => a.index == event.account!.index);
+        //   widget.accounts.add(event.account!);
+        //   widget.accounts.sort((Account a, Account b) => a.index!.compareTo(b.index!));
+        // });
       }
     });
   }
@@ -99,31 +229,313 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
   }
 
   Future<void> _changeAccount(Account account, StateSetter setState) async {
-    // Change account
-    for (final Account acc in widget.accounts) {
-      if (acc.selected) {
-        setState(() {
-          acc.selected = false;
-        });
-      } else if (account.index == acc.index) {
-        setState(() {
-          acc.selected = true;
-        });
-      }
-    }
-    await sl.get<DBHelper>().changeAccount(account);
-    EventTaxiImpl.singleton().fire(AccountChangedEvent(account: account, delayPop: true));
+    // // Change account
+    // for (final Account acc in widget.accounts) {
+    //   if (acc.selected) {
+    //     setState(() {
+    //       acc.selected = false;
+    //     });
+    //   } else if (account.index == acc.index) {
+    //     setState(() {
+    //       acc.selected = true;
+    //     });
+    //   }
+    // }
+    // await sl.get<DBHelper>().changeAccount(account);
+    // EventTaxiImpl.singleton().fire(AccountChangedEvent(account: account, delayPop: true));
   }
 
-  // get total account balances:
-  String _getTotalBalance() {
-    BigInt totalBalance = BigInt.zero;
-    for (final Account account in widget.accounts) {
-      if (account.balance != null) {
-        totalBalance += BigInt.parse(account.balance!);
+  // Build contact items for the list
+  Widget _buildUserItem(User user) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        SizedBox(
+          height: 42,
+          width: double.infinity - 5,
+          child: TextButton(
+            onPressed: () {
+              _addressController!.text = user.getDisplayName(ignoreNickname: true)!;
+              _addressFocusNode!.unfocus();
+              setState(() {
+                _isUser = true;
+                _pasteButtonVisible = false;
+                _addressStyle = AddressStyle.PRIMARY;
+                _addressValidationText = "";
+              });
+            },
+            child: Text(user.getDisplayName(ignoreNickname: true)!, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 25),
+          height: 1,
+          color: StateContainer.of(context).curTheme.text03,
+        ),
+      ],
+    );
+  }
+
+  /// Return true if textfield should be shown, false if colorized should be shown
+  bool _shouldShowTextField() {
+    return !_addressValidAndUnfocused;
+  }
+
+  //************ Enter Address Container Method ************//
+  //*******************************************************//
+  Widget getEnterAddressContainer() {
+    return AppTextField(
+      topMargin: 115,
+      padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      textAlign: TextAlign.center,
+      focusNode: _addressFocusNode,
+      controller: _addressController,
+      cursorColor: StateContainer.of(context).curTheme.primary,
+      inputFormatters: [
+        if (_isUser) LengthLimitingTextInputFormatter(20) else LengthLimitingTextInputFormatter(65),
+      ],
+      textInputAction: TextInputAction.done,
+      maxLines: null,
+      autocorrect: false,
+      hintText: _addressHint ?? AppLocalization.of(context)!.enterUserOrAddress,
+      prefixButton: TextFieldButton(
+          icon: AppIcons.scan,
+          onPressed: () async {
+            UIUtil.cancelLockEvent();
+            final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
+            if (scanResult == null) {
+              UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
+            } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
+              if (mounted) {
+                setState(() {
+                  _addressController!.text = scanResult;
+                  _addressValidationText = "";
+                  _addressValid = true;
+                  _addressValidAndUnfocused = true;
+                });
+                _addressFocusNode!.unfocus();
+              }
+            }
+          }),
+      fadePrefixOnCondition: true,
+      prefixShowFirstCondition: _pasteButtonVisible,
+      suffixButton: TextFieldButton(
+        icon: AppIcons.paste,
+        onPressed: () async {
+          if (!_pasteButtonVisible!) {
+            return;
+          }
+          final String? data = await UserDataUtil.getClipboardText(DataType.ADDRESS);
+          if (data != null) {
+            setState(() {
+              _addressValid = true;
+              _pasteButtonVisible = false;
+              _addressController!.text = data;
+              _addressValidAndUnfocused = true;
+            });
+            _addressFocusNode!.unfocus();
+          } else {
+            setState(() {
+              _pasteButtonVisible = true;
+              _addressValid = false;
+            });
+          }
+        },
+      ),
+      fadeSuffixOnCondition: true,
+      suffixShowFirstCondition: _pasteButtonVisible,
+      style: _addressStyle == AddressStyle.TEXT60
+          ? AppStyles.textStyleAddressText60(context)
+          : _addressStyle == AddressStyle.TEXT90
+              ? AppStyles.textStyleAddressText90(context)
+              : AppStyles.textStyleAddressPrimary(context),
+      onChanged: (String text) async {
+        bool isUser = false;
+        final bool? isDomain = text.contains(".");
+        final bool? isFavorite = text.startsWith("★");
+        final bool isNano = text.startsWith("nano_");
+
+        // prevent spaces:
+        if (text.contains(" ")) {
+          text = text.replaceAll(" ", "");
+          _addressController!.text = text;
+          _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        }
+
+        if (text.isNotEmpty) {
+          setState(() {
+            if (!_addressValidAndUnfocused) {
+              _pasteButtonVisible = true;
+            }
+          });
+        } else {
+          setState(() {
+            _pasteButtonVisible = true;
+          });
+        }
+
+        if (text.isNotEmpty && !isUser && !isNano) {
+          isUser = true;
+        }
+
+        if (text.isNotEmpty && text.startsWith("nano_")) {
+          isUser = false;
+        }
+
+        if (text.isNotEmpty && text.contains(".")) {
+          isUser = false;
+        }
+
+        // check if it's a real nano address:
+        // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
+        if (text.isEmpty) {
+          setState(() {
+            _isUser = false;
+            _users = [];
+          });
+        } else if (isUser || isDomain!) {
+          final List<User> matchedList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(SendSheetHelpers.stripPrefixes(text));
+          setState(() {
+            _users = matchedList;
+          });
+        } else {
+          setState(() {
+            _isUser = false;
+            _users = [];
+          });
+        }
+        // Always reset the error message to be less annoying
+        if (_addressValidationText.isNotEmpty) {
+          setState(() {
+            _addressValidationText = "";
+          });
+        }
+        if (isNano && Address(text).isValid()) {
+          _addressFocusNode!.unfocus();
+          setState(() {
+            _addressStyle = AddressStyle.TEXT90;
+            _addressValidationText = "";
+            _pasteButtonVisible = false;
+          });
+        } else {
+          setState(() {
+            _addressStyle = AddressStyle.TEXT60;
+          });
+        }
+
+        if ((isUser || isFavorite!) != _isUser) {
+          setState(() {
+            _isUser = isUser || isFavorite!;
+          });
+        }
+      },
+      overrideTextFieldWidget: !_shouldShowTextField()
+          ? GestureDetector(
+              onTap: () {
+                setState(() {
+                  _addressValidAndUnfocused = false;
+                });
+                Future.delayed(const Duration(milliseconds: 50), () {
+                  FocusScope.of(context).requestFocus(_addressFocusNode);
+                });
+              },
+              child: UIUtil.threeLineAddressText(context, _addressController!.text))
+          : null,
+    );
+  }
+
+  Future<bool> validateForm() async {
+    bool isValid = true;
+    // Address Validations
+    // Don't validate address if it came pre-filled in
+    final String formAddress = _addressController!.text;
+    final String formattedAddress = SendSheetHelpers.stripPrefixes(formAddress);
+    final String formattedNickname = SendSheetHelpers.stripPrefixes(_nameController!.text);
+
+    // if (widget.address == null) {
+    if (formAddress.isEmpty) {
+      isValid = false;
+      setState(() {
+        _addressValidationText = AppLocalization.of(context)!.addressOrUserMissing;
+      });
+    } else if (formAddress.startsWith("nano_")) {
+      // we're dealing with an address:
+
+      if (!Address(formAddress).isValid()) {
+        isValid = false;
+        setState(() {
+          _addressValidationText = AppLocalization.of(context)!.invalidAddress;
+        });
+      }
+
+      _addressFocusNode!.unfocus();
+      final bool contactExists = await sl.get<DBHelper>().contactExistsWithAddress(formAddress);
+      if (contactExists) {
+        isValid = false;
+        setState(() {
+          _addressValidationText = AppLocalization.of(context)!.contactExists;
+        });
+      } else {
+        // get the corresponding username if it exists:
+        final String? username = await sl.get<DBHelper>().getUsernameWithAddress(formAddress);
+        if (username != null) {
+          setState(() {
+            _correspondingUsername = username;
+          });
+        }
+      }
+    } else {
+      // we're dealing with a username:
+      final bool contactExists = await sl.get<DBHelper>().contactExistsWithUsername(formattedAddress);
+      if (contactExists) {
+        isValid = false;
+        setState(() {
+          _addressValidationText = AppLocalization.of(context)!.contactExists;
+        });
+      } else {
+        // check if there's a corresponding address:
+        final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+        if (user != null) {
+          setState(() {
+            if (user.address != null) {
+              _correspondingAddress = user.address;
+            }
+            if (user.nickname != null && user.nickname!.isNotEmpty) {
+              isValid = false;
+              setState(() {
+                _addressValidationText = AppLocalization.of(context)!.contactExists;
+              });
+            }
+          });
+        } else {
+          isValid = false;
+          setState(() {
+            _addressValidationText = formattedAddress.contains(".") ? AppLocalization.of(context)!.domainInvalid : AppLocalization.of(context)!.userNotFound;
+          });
+        }
+      }
+      // }
+      // reset corresponding username if invalid:
+      if (isValid == false && _correspondingUsername != null) {
+        setState(() {
+          _correspondingUsername = null;
+        });
+      }
+      if (isValid == false && _correspondingAddress != null) {
+        setState(() {
+          _correspondingAddress = null;
+        });
       }
     }
-    return totalBalance.toString();
+
+    // Name Validations
+    if (_nameController!.text.isEmpty) {
+      isValid = false;
+      setState(() {
+        _nameValidationText = AppLocalization.of(context)!.accountNameMissing;
+      });
+    }
+    return isValid;
   }
 
   @override
@@ -158,7 +570,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                       child: Column(
                         children: <Widget>[
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.addWatchOnlyAccount, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context)!.watchOnlyAccount, context),
                             style: AppStyles.textStyleHeader(context),
                             maxLines: 1,
                             stepGranularity: 0.1,
@@ -170,7 +582,142 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                 ),
               ),
 
-              // enter address:
+              // The main container that holds "Enter Name" and "Enter Address" text fields
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Clear focus of our fields when tapped in this empty space
+                      _nameFocusNode!.unfocus();
+                      _addressFocusNode!.unfocus();
+                    },
+                    child: KeyboardAvoider(
+                      duration: Duration.zero,
+                      autoScroll: true,
+                      focusPadding: 40,
+                      child: Column(
+                        children: <Widget>[
+                          Stack(
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  // Enter Name Container
+                                  AppTextField(
+                                    focusNode: _nameFocusNode,
+                                    controller: _nameController,
+                                    // topMargin: MediaQuery.of(context).size.height * 0.14,
+                                    topMargin: 30,
+                                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                                    textInputAction: TextInputAction.next,
+                                    hintText: _nameHint ?? AppLocalization.of(context)!.accountNameHint,
+                                    keyboardType: TextInputType.text,
+
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16.0,
+                                      color: StateContainer.of(context).curTheme.text,
+                                      fontFamily: 'NunitoSans',
+                                    ),
+                                    inputFormatters: [LengthLimitingTextInputFormatter(20)],
+                                    onSubmitted: (text) {
+                                      if (!Address(_addressController!.text).isValid()) {
+                                        FocusScope.of(context).requestFocus(_addressFocusNode);
+                                      } else {
+                                        FocusScope.of(context).unfocus();
+                                      }
+                                    },
+                                    onChanged: (text) {
+                                      // Always reset the error message to be less annoying
+                                      setState(() {
+                                        _nameValidationText = "";
+                                      });
+                                    },
+                                  ),
+                                  // Enter Name Error Container
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 5, bottom: 5),
+                                    child: Text(_nameValidationText ?? "",
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          color: StateContainer.of(context).curTheme.primary,
+                                          fontFamily: 'NunitoSans',
+                                          fontWeight: FontWeight.w600,
+                                        )),
+                                  ),
+                                ],
+                              ),
+
+                              // Enter Address container
+                              // Column for Enter Address container + Enter Address Error container
+                              Column(
+                                children: <Widget>[
+                                  Container(
+                                    alignment: Alignment.topCenter,
+                                    child: Stack(
+                                      alignment: Alignment.topCenter,
+                                      children: <Widget>[
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                          alignment: Alignment.bottomCenter,
+                                          constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
+                                          // ********************************************* //
+                                          // ********* The pop-up Contacts List ********* //
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(25),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(25),
+                                                color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                              ),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(25),
+                                                ),
+                                                margin: const EdgeInsets.only(bottom: 50),
+                                                child: ListView.builder(
+                                                  shrinkWrap: true,
+                                                  padding: EdgeInsets.zero,
+                                                  itemCount: _users.length,
+                                                  itemBuilder: (BuildContext context, int index) {
+                                                    return _buildUserItem(_users[index]);
+                                                  },
+                                                ), // ********* The pop-up Contacts List End ********* //
+                                                // ************************************************** //
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        // ******* Enter Address Container ******* //
+                                        getEnterAddressContainer(),
+                                        // ******* Enter Address Container End ******* //
+                                      ],
+                                    ),
+                                  ),
+
+                                  // Enter Address Error Container
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 5, bottom: 5),
+                                    child: Text(_addressValidationText,
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          color: StateContainer.of(context).curTheme.primary,
+                                          fontFamily: 'NunitoSans',
+                                          fontWeight: FontWeight.w600,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
 
               const SizedBox(
                 height: 15,
@@ -178,15 +725,37 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
               //A row with Add Account button
               Row(
                 children: <Widget>[
-                  if (widget.accounts.length < MAX_ACCOUNTS)
-                    AppButton.buildAppButton(
-                      context,
-                      AppButtonType.PRIMARY,
-                      AppLocalization.of(context)!.addAccount,
-                      Dimens.BUTTON_TOP_DIMENS,
-                      disabled: _addingAccount,
-                      onPressed: () {},
-                    ),
+                  AppButton.buildAppButton(
+                    context,
+                    AppButtonType.PRIMARY,
+                    AppLocalization.of(context)!.addWatchOnlyAccount,
+                    Dimens.BUTTON_TOP_DIMENS,
+                    disabled: _addingAccount,
+                    onPressed: () async {
+                      if (await validateForm()) {
+                        final String formAddress = _addressController!.text;
+                        final String formattedNickname = _nameController!.text;
+                        Account? newAccount;
+                        if (_correspondingUsername != null) {
+                          newAccount = await sl.get<DBHelper>().addWatchOnlyAccount(formattedNickname, formAddress);
+                        } else if (_correspondingAddress != null) {
+                          newAccount = await sl.get<DBHelper>().addWatchOnlyAccount(formattedNickname, _correspondingAddress!);
+                        } else {
+                          // just an address:
+                          newAccount = await sl.get<DBHelper>().addWatchOnlyAccount(formattedNickname, formAddress);
+                        }
+
+                        if (newAccount == null) {
+                          UIUtil.showSnackbar(AppLocalization.of(context)!.addWatchOnlyAccount, context, durationMs: 5000);
+                          return;
+                        }
+                        StateContainer.of(context).updateRecentlyUsedAccounts();
+                        EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: newAccount, created: true));
+                        UIUtil.showSnackbar(AppLocalization.of(context)!.addWatchOnlyAccountSuccess, context, durationMs: 5000);
+                        Navigator.of(context).pop();
+                      }
+                    },
+                  ),
                 ],
               ),
               //A row with Close button

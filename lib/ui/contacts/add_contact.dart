@@ -192,7 +192,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
       controller: _addressController,
       cursorColor: StateContainer.of(context).curTheme.primary,
       inputFormatters: [
-        _isUser ? LengthLimitingTextInputFormatter(20) : LengthLimitingTextInputFormatter(65),
+        if (_isUser) LengthLimitingTextInputFormatter(20) else LengthLimitingTextInputFormatter(65),
       ],
       textInputAction: TextInputAction.done,
       maxLines: null,
@@ -202,7 +202,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
           icon: AppIcons.scan,
           onPressed: () async {
             UIUtil.cancelLockEvent();
-            final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context);
+            final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
             if (scanResult == null) {
               UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
             } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
@@ -352,7 +352,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Container(
+        SizedBox(
           height: 42,
           width: double.infinity - 5,
           child: TextButton(
@@ -428,7 +428,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                   _addressFocusNode!.unfocus();
                 },
                 child: KeyboardAvoider(
-                  duration: const Duration(milliseconds: 0),
+                  duration: Duration.zero,
                   autoScroll: true,
                   focusPadding: 40,
                   child: Column(

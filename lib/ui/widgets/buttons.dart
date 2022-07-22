@@ -9,7 +9,7 @@ enum AppButtonType { PRIMARY, PRIMARY_OUTLINE, SUCCESS, SUCCESS_OUTLINE, TEXT_OU
 class AppButton {
   // Primary button builder
   static Widget buildAppButton(BuildContext context, AppButtonType type, String buttonText, List<double> dimens,
-      {Function? onPressed, bool? disabled = false, Key? instanceKey}) {
+      {Function? onPressed, bool disabled = false, Key? instanceKey}) {
     switch (type) {
       case AppButtonType.PRIMARY:
         return Expanded(
@@ -39,7 +39,7 @@ class AppButton {
               style: TextButton.styleFrom(
                 primary: StateContainer.of(context).curTheme.background40,
                 // backgroundColor: StateContainer.of(context).curTheme.background40,
-                backgroundColor: disabled! ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
+                backgroundColor: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
                 surfaceTintColor: StateContainer.of(context).curTheme.background40,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
               ),
@@ -66,7 +66,7 @@ class AppButton {
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
                 backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-                textStyle: TextStyle(color: disabled! ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary),
+                textStyle: TextStyle(color: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary),
                 primary: StateContainer.of(context).curTheme.primary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0),
@@ -141,7 +141,7 @@ class AppButton {
                 stepGranularity: 0.5,
               ),
               onPressed: () {
-                if (onPressed != null && !disabled!) {
+                if (onPressed != null && !disabled) {
                   onPressed();
                 }
                 return;

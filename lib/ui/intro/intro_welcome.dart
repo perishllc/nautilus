@@ -58,6 +58,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                           fontWeight: FontWeight.bold,
                         ),
                         boxHeight: 100.0,
+                        boxWidth: double.infinity,
                         loadDuration: const Duration(seconds: 3),
                         waveDuration: const Duration(seconds: 3),
                         loadUntil: 0.5,

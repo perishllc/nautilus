@@ -1,11 +1,14 @@
-## v0.4.5 - [2022-07-XX]
+## v0.4.5 - [2022-07-23]
 #### Added
 - Watch only addresses
+- Ability to import contacts from both natrium and nault
+- Localized currency displays
 #### Changed
-- Updates to local currency displays
+- Use a better short form of account address on the accounts screen
 #### Fixed
 - Ensure the local currency symbol always shows in local currency mode (i.e. on the send screen)
 - Sped up receive screen QR code screen by pre-caching the QR image on load
+- Accounts sheet was not reliably showing usernames / aliases
 ## v0.4.4 - [2022-07-17]
 #### Changed
 - Default tx viewer reverted back to nanolooker

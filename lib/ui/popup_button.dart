@@ -128,6 +128,8 @@ class _AppPopupButtonState extends State<AppPopupButton> {
 
   @override
   Widget build(BuildContext context) {
+    bool disableSend = (StateContainer.of(context).wallet?.watchOnly) ?? false;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
@@ -223,7 +225,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
               key: const Key("home_send_button"),
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                backgroundColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
+                backgroundColor: StateContainer.of(context).wallet != null && !disableSend /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
                     ? isSendButtonColorPrimary
                         ? StateContainer.of(context).curTheme.primary
                         : StateContainer.of(context).curTheme.success
@@ -239,8 +241,11 @@ class _AppPopupButtonState extends State<AppPopupButton> {
                 //     : Colors.transparent,
               ),
               onPressed: () {
-                if (StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/) {
+                if (StateContainer.of(context).wallet != null && !disableSend) {
                   Sheets.showAppHeightNineSheet(context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency));
+                }
+                if (disableSend) {
+                  UIUtil.showSnackbar(AppLocalization.of(context)!.watchOnlySendDisabled, context);
                 }
               },
               child: AutoSizeText(

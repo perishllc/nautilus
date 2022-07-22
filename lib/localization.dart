@@ -501,7 +501,7 @@ class AppLocalization {
   }
 
   String get welcomeText {
-    return Intl.message("Welcome to Nautilus. To begin, you may create a new wallet or import an existing one.",
+    return Intl.message("Welcome to Nautilus. To start, create a new wallet or import an existing one.",
         desc: 'intro_welcome_title', name: 'welcomeText');
   }
 
@@ -1540,8 +1540,32 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
     return Intl.message("Add Account", desc: "Default new account name - e.g. Account 1", name: 'addAccount');
   }
 
+  String get watchOnlyAccount {
+    return Intl.message("Watch Only Account", desc: "watch_only_account", name: 'watchOnlyAccount');
+  }
+
   String get addWatchOnlyAccount {
     return Intl.message("Add Watch Only Account", desc: "watch_only_add", name: 'addWatchOnlyAccount');
+  }
+
+  String get accountNameHint {
+    return Intl.message("Enter a Name", desc: 'enter_name_hint', name: 'accountNameHint');
+  }
+
+  String get accountNameMissing {
+    return Intl.message("Choose an Account Name", desc: 'account_name_missing', name: 'accountNameMissing');
+  }
+
+  String get addWatchOnlyAccountError {
+    return Intl.message("Error adding Watch Only Account: Account was null", desc: "watch_only_add_error", name: 'addWatchOnlyAccountError');
+  }
+
+  String get addWatchOnlyAccountSuccess {
+    return Intl.message("Successfully created watch only account!", desc: "watch_only_add_success", name: 'addWatchOnlyAccountSuccess');
+  }
+
+  String get watchOnlySendDisabled {
+    return Intl.message("Sends are disabled on watch only addresses", desc: "watch_only_send_disabled", name: 'watchOnlySendDisabled');
   }
 
   String get hideAccountHeader {
@@ -1860,10 +1884,8 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   String get iosFundingMessage {
-    return Intl.message(
-        "Due to iOS App Store guidelines and restrictions, we can't show any of the specific donation categories that would otherwise be here, if you'd like to contribute to the project, we suggest doing so using the Nautilus Node's address.",
-        desc: 'ios_funding_message',
-        name: 'iosFundingMessage');
+    return Intl.message("Due to iOS App Store guidelines and restrictions, we can't show the content that would otherwise be here.",
+        desc: 'ios_funding_message', name: 'iosFundingMessage');
   }
 
   String get donateButton {

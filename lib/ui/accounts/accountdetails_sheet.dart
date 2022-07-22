@@ -150,8 +150,8 @@ class AccountDetailsSheet {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            getRawAsThemeAwareAmount(context, account.balance ?? StateContainer.of(context).wallet!.accountBalance.toString()),
+                                        text: getRawAsThemeAwareFormattedAmount(
+                                            context, account.balance ?? StateContainer.of(context).wallet!.accountBalance.toString()),
                                         style: TextStyle(
                                           color: StateContainer.of(context).curTheme.primary60,
                                           fontSize: 14.0,

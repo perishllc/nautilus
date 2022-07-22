@@ -14,6 +14,7 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
@@ -1679,28 +1680,29 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                   height: 45,
                                   alignment: AlignmentDirectional.centerStart,
                                   child: Icon(
-                                    AppIcons.accountwallet,
+                                    StateContainer.of(context).wallet!.watchOnly ? AppIcons.search : AppIcons.accountwallet,
                                     color: StateContainer.of(context).curTheme.success,
                                     size: 45,
                                   )),
                             ),
-                            Center(
-                              child: Container(
-                                width: 60,
-                                height: 45,
-                                alignment: const AlignmentDirectional(0, 0.3),
-                                child: Text(
-                                  StateContainer.of(context).selectedAccount!.getShortName().toUpperCase(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.backgroundDark,
-                                    fontSize: 16,
-                                    fontFamily: "NunitoSans",
-                                    fontWeight: FontWeight.w900,
+                            if (!StateContainer.of(context).wallet!.watchOnly)
+                              Center(
+                                child: Container(
+                                  width: 60,
+                                  height: 45,
+                                  alignment: const AlignmentDirectional(0, 0.3),
+                                  child: Text(
+                                    StateContainer.of(context).selectedAccount!.getShortName().toUpperCase(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: StateContainer.of(context).curTheme.backgroundDark,
+                                      fontSize: 16,
+                                      fontFamily: "NunitoSans",
+                                      fontWeight: FontWeight.w900,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
                             Center(
                               child: SizedBox(
                                 width: 60,
@@ -1736,24 +1738,39 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                 children: <Widget>[
                                   Center(
                                     child: Icon(
-                                      AppIcons.accountwallet,
+                                      StateContainer.of(context).recentLast!.watchOnly ? AppIcons.search : AppIcons.accountwallet,
                                       color: StateContainer.of(context).curTheme.primary,
                                       size: 36,
                                     ),
                                   ),
-                                  Center(
-                                    child: Container(
-                                      width: 48,
-                                      height: 36,
-                                      alignment: const AlignmentDirectional(0, 0.3),
-                                      child: Text(StateContainer.of(context).recentLast!.getShortName().toUpperCase(),
-                                          style: TextStyle(
-                                            color: StateContainer.of(context).curTheme.backgroundDark,
-                                            fontSize: 12.0,
-                                            fontWeight: FontWeight.w800,
-                                          )),
+                                  if (StateContainer.of(context).recentLast!.watchOnly)
+                                    Center(
+                                      child: Container(
+                                        width: 48,
+                                        height: 36,
+                                        alignment: const AlignmentDirectional(0, 3),
+                                        child: Text(StateContainer.of(context).recentLast!.getShortName().toUpperCase(),
+                                            style: TextStyle(
+                                              color: StateContainer.of(context).curTheme.text,
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.w800,
+                                            )),
+                                      ),
+                                    )
+                                  else
+                                    Center(
+                                      child: Container(
+                                        width: 48,
+                                        height: 36,
+                                        alignment: const AlignmentDirectional(0, 0.3),
+                                        child: Text(StateContainer.of(context).recentLast!.getShortName().toUpperCase(),
+                                            style: TextStyle(
+                                              color: StateContainer.of(context).curTheme.backgroundDark,
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.w800,
+                                            )),
+                                      ),
                                     ),
-                                  ),
                                   Center(
                                     child: Container(
                                       width: 48,
@@ -1790,24 +1807,39 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                 children: <Widget>[
                                   Center(
                                     child: Icon(
-                                      AppIcons.accountwallet,
+                                      StateContainer.of(context).recentSecondLast!.watchOnly ? AppIcons.search : AppIcons.accountwallet,
                                       color: StateContainer.of(context).curTheme.primary,
                                       size: 36,
                                     ),
                                   ),
-                                  Center(
-                                    child: Container(
-                                      width: 48,
-                                      height: 36,
-                                      alignment: const AlignmentDirectional(0, 0.3),
-                                      child: Text(StateContainer.of(context).recentSecondLast!.getShortName().toUpperCase(),
-                                          style: TextStyle(
-                                            color: StateContainer.of(context).curTheme.backgroundDark,
-                                            fontSize: 12.0,
-                                            fontWeight: FontWeight.w800,
-                                          )),
+                                  if (!StateContainer.of(context).recentSecondLast!.watchOnly)
+                                    Center(
+                                      child: Container(
+                                        width: 48,
+                                        height: 36,
+                                        alignment: const AlignmentDirectional(0, 0.3),
+                                        child: Text(StateContainer.of(context).recentSecondLast!.getShortName().toUpperCase(),
+                                            style: TextStyle(
+                                              color: StateContainer.of(context).curTheme.backgroundDark,
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.w800,
+                                            )),
+                                      ),
+                                    )
+                                  else
+                                    Center(
+                                      child: Container(
+                                        width: 48,
+                                        height: 36,
+                                        alignment: const AlignmentDirectional(0, 3),
+                                        child: Text(StateContainer.of(context).recentSecondLast!.getShortName().toUpperCase(),
+                                            style: TextStyle(
+                                              color: StateContainer.of(context).curTheme.text,
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.w800,
+                                            )),
+                                      ),
                                     ),
-                                  ),
                                   Center(
                                     child: Container(
                                       width: 48,
@@ -1853,19 +1885,17 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                                 // splashColor: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text30,
                                 // highlightColor: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text15,
                               ),
-                              onPressed: () {
+                              onPressed: () async {
                                 if (!_loadingAccounts) {
                                   setState(() {
                                     _loadingAccounts = true;
                                   });
-                                  StateContainer.of(context).getSeed().then((String seed) {
-                                    sl.get<DBHelper>().getAccounts(seed).then((List<Account> accounts) {
-                                      setState(() {
-                                        _loadingAccounts = false;
-                                      });
-                                      Sheets.showAppHeightNineSheet(context: context, widget: AppAccountsSheet(accounts: accounts));
-                                    });
+                                  String seed = await StateContainer.of(context).getSeed();
+                                  List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
+                                  setState(() {
+                                    _loadingAccounts = false;
                                   });
+                                  Sheets.showAppHeightNineSheet(context: context, widget: AppAccountsSheet(accounts: accounts));
                                 }
                               },
                               child: Icon(AppIcons.accountswitcher,
@@ -1906,11 +1936,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                           ),
                           // Main account address
                           Text(
-                            StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.address != null
-                                ? ((StateContainer.of(context).wallet?.username != null)
-                                    ? StateContainer.of(context).wallet?.username
-                                    : StateContainer.of(context).wallet?.address?.substring(0, 12))!
-                                : "",
+                            StateContainer.of(context).wallet?.username ?? Address(StateContainer.of(context).wallet!.address).getShortFirstPart() ?? "",
                             style: TextStyle(
                               fontFamily: "OverpassMono",
                               fontWeight: FontWeight.w100,

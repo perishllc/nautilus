@@ -10,6 +10,7 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
@@ -18,9 +19,11 @@ import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/accounts/add_watch_only_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:quiver/strings.dart';
 
@@ -36,7 +39,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
   static const int MAX_ACCOUNTS = 50;
   final GlobalKey expandedKey = GlobalKey();
 
-  bool? _addingAccount;
+  bool _addingAccount = false;
   final ScrollController _scrollController = ScrollController();
 
   StreamSubscription<AccountModifiedEvent>? _accountModifiedSub;
@@ -93,6 +96,11 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
         }
         setState(() {
           widget.accounts.removeWhere((Account a) => a.index == event.account!.index);
+        });
+      } else if (event.created && event.account != null) {
+        setState(() {
+          widget.accounts.add(event.account!);
+          _requestBalances(context, widget.accounts);
         });
       } else {
         // Name change
@@ -213,7 +221,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                               ),
                             ),
                             TextSpan(
-                              text: getRawAsThemeAwareAmount(context, _getTotalBalance()),
+                              text: getRawAsThemeAwareFormattedAmount(context, _getTotalBalance()),
                               style: TextStyle(
                                 color: StateContainer.of(context).curTheme.primary60,
                                 fontSize: 14.0,
@@ -295,9 +303,9 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                 height: 15,
               ),
               //A row with Add Account button
-              Row(
-                children: <Widget>[
-                  if (widget.accounts.length < MAX_ACCOUNTS)
+              if (widget.accounts.length < MAX_ACCOUNTS)
+                Row(
+                  children: <Widget>[
                     AppButton.buildAppButton(
                       context,
                       AppButtonType.PRIMARY,
@@ -305,7 +313,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                       Dimens.BUTTON_TOP_DIMENS,
                       disabled: _addingAccount,
                       onPressed: () {
-                        if (!_addingAccount!) {
+                        if (!_addingAccount) {
                           setState(() {
                             _addingAccount = true;
                           });
@@ -340,6 +348,22 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                         }
                       },
                     ),
+                  ],
+                ),
+              // A row with the add watch only account button:
+              Row(
+                children: [
+                  AppButton.buildAppButton(
+                    context,
+                    AppButtonType.PRIMARY,
+                    AppLocalization.of(context)!.addWatchOnlyAccount,
+                    Dimens.BUTTON_TOP_DIMENS,
+                    // disabled: _addingAccount,
+                    onPressed: () {
+                      // Go to send confirm with amount
+                      Sheets.showAppHeightEightSheet(context: context, widget: const AddWatchOnlyAccountSheet());
+                    },
+                  ),
                 ],
               ),
               //A row with Close button
@@ -367,7 +391,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
     if (account.user != null) {
       userOrAddress = account.user!.getDisplayName(ignoreNickname: true);
     } else {
-      userOrAddress = "${account.address!.substring(0, 12)}...";
+      userOrAddress = Address(account.address).getShortString();
     }
 
     return Slidable(
@@ -429,24 +453,25 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                                   children: <Widget>[
                                     Center(
                                       child: Icon(
-                                        AppIcons.accountwallet,
+                                        account.watchOnly ? AppIcons.search : AppIcons.accountwallet,
                                         color: account.selected ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
                                         size: 30,
                                       ),
                                     ),
-                                    Center(
-                                      child: Container(
-                                        width: 40,
-                                        height: 30,
-                                        alignment: const AlignmentDirectional(0, 0.3),
-                                        child: Text(account.getShortName().toUpperCase(),
-                                            style: TextStyle(
-                                              color: StateContainer.of(context).curTheme.backgroundDark,
-                                              fontSize: 12.0,
-                                              fontWeight: FontWeight.w800,
-                                            )),
+                                    if (!account.watchOnly)
+                                      Center(
+                                        child: Container(
+                                          width: 40,
+                                          height: 30,
+                                          alignment: const AlignmentDirectional(0, 0.3),
+                                          child: Text(account.getShortName().toUpperCase(),
+                                              style: TextStyle(
+                                                color: StateContainer.of(context).curTheme.backgroundDark,
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.w800,
+                                              )),
+                                        ),
                                       ),
-                                    ),
                                   ],
                                 ),
                                 // Account name and address
@@ -519,7 +544,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                                         TextSpan(
                                           text: account.balance != null
                                               ? (!account.selected)
-                                                  ? getRawAsThemeAwareAmount(context, isEmpty(account.balance) ? "0" : account.balance)
+                                                  ? getRawAsThemeAwareFormattedAmount(context, isEmpty(account.balance) ? "0" : account.balance)
                                                   : getRawAsThemeAwareFormattedAmount(context, account.balance)
                                               : "",
                                           style: TextStyle(
