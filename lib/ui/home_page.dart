@@ -3053,6 +3053,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       if ((!txDetails.is_fulfilled) || (currentConfHeight > -1 && txDetails.height != null && txDetails.height! > currentConfHeight)) {
         transactionState = TransactionStateOptions.UNCONFIRMED;
       }
+
+      // watch only: receivable:
+      if (txDetails.record_type == BlockTypes.RECEIVE) {
+        transactionState = TransactionStateOptions.RECEIVABLE;
+      }
     }
 
     final List<Widget> slideActions = [];

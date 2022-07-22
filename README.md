@@ -10,6 +10,7 @@ ___
 - [x] Payment Requests to any Nautilus user
 - [x] E2EE Messages & Memos
 - [x] Editable Receive Screen
+- [x] Watch only addresses
 - [x] Username Support
    - [x] Nano.to Usernames
    - [x] Unstoppable Domain addresses

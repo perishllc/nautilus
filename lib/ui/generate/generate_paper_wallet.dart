@@ -112,8 +112,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       }
     });
     // Set initial currency format
-    _localCurrencyFormat = NumberFormat.currency(
-        locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
+    _localCurrencyFormat = NumberFormat.currency(locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
     // Set quick send amount
     if (quickSendAmount != null && quickSendAmount!.isNotEmpty && quickSendAmount != "0") {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -171,8 +170,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
-          minimum: EdgeInsets.only(
-              bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
+          minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
               // A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
@@ -240,8 +238,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                       ),
                       // The paragraph
                       Container(
-                        margin: EdgeInsetsDirectional.only(
-                            start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
+                        margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
                         alignment: Alignment.centerLeft,
                         child: Column(
                           children: <Widget>[
@@ -286,9 +283,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                               alignment: Alignment.topCenter,
                               children: <Widget>[
                                 Container(
-                                  margin: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width * 0.105,
-                                      right: MediaQuery.of(context).size.width * 0.105),
+                                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                                   alignment: Alignment.bottomCenter,
                                   constraints: const BoxConstraints(maxHeight: 80, minHeight: 0),
                                 ),
@@ -324,8 +319,8 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.createGiftCard,
-                      Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.createGiftCard, Dimens.BUTTON_BOTTOM_DIMENS,
+                      onPressed: () {
                     final bool isValid = _validateRequest();
                     if (!isValid) {
                       return;
@@ -354,20 +349,20 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
   }
 
   String _convertLocalCurrencyToCrypto() {
-    String convertedAmt = _sendAmountController!.text.replaceAll(",", ".");
+    String convertedAmt =
+        _sendAmountController!.text.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "").replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
     convertedAmt = NumberUtil.sanitizeNumber(convertedAmt);
     if (convertedAmt.isEmpty) {
       return "";
     }
     final Decimal valueLocal = Decimal.parse(convertedAmt);
     final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    return NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal()).toString();
+    final String nanoAmount = NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
+    return convertCryptoToLocalAmount(nanoAmount, _localCurrencyFormat);
   }
 
   String _convertCryptoToLocalCurrency(String amount) {
-    String sanitizedAmt = amount
-        .replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "")
-        .replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
+    String sanitizedAmt = amount.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "").replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
     sanitizedAmt = NumberUtil.sanitizeNumber(sanitizedAmt);
     if (sanitizedAmt.isEmpty) {
       return "";
@@ -376,24 +371,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
     final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
 
-    final List<String> splitStrs = sanitizedAmt.split(".");
-    final String firstPart = splitStrs[0].trim();
-    String secondPart = splitStrs.length > 1 ? splitStrs[1].trim() : "";
-
-    if (secondPart.isNotEmpty) {
-      secondPart = _localCurrencyFormat!.symbols.DECIMAL_SEP + secondPart;
-    }
-
-    final NumberFormat formatCurrency = NumberFormat.simpleCurrency(
-        decimalDigits: _localCurrencyFormat!.decimalDigits,
-        locale: _localCurrencyFormat!.locale,
-        name: _localCurrencyFormat!.currencyName);
-    String formattedCurrency = formatCurrency.format(int.parse(firstPart));
-    formattedCurrency = formattedCurrency
-            .substring(0, formattedCurrency.length - (_localCurrencyFormat!.decimalDigits! + 1))
-            .replaceAll(" ", "") +
-        secondPart;
-    return formattedCurrency;
+    return (_localCurrencyFormat!.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, _localCurrencyFormat)).replaceAll(" ", "");
   }
 
   // Determine if this is a max send or not by comparing balances
@@ -406,12 +384,11 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       String textField = _sendAmountController!.text;
       String balance;
       if (_localCurrencyMode) {
-        balance = StateContainer.of(context).wallet!.getLocalCurrencyBalance(
-            context, StateContainer.of(context).curCurrency,
-            locale: StateContainer.of(context).currencyLocale);
+        balance = StateContainer.of(context)
+            .wallet!
+            .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
       } else {
-        balance =
-            getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
+        balance = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
       }
       // Convert to Integer representations
       int textFieldInt;
@@ -423,20 +400,12 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         balance = balance.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
         balance = balance.replaceAll(",", ".");
         final String sanitizedBalance = NumberUtil.sanitizeNumber(balance);
-        textFieldInt =
-            (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
-                .toDouble()
-                .toInt();
-        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
-            .toDouble()
-            .toInt();
+        textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       } else {
         textField = textField.replaceAll(",", "");
-        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
-            .toDouble()
-            .toInt();
-        balanceInt =
-            (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        balanceInt = (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       }
       return textFieldInt == balanceInt;
     } catch (e) {
@@ -508,9 +477,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
               LengthLimitingTextInputFormatter(13),
               if (_localCurrencyMode)
                 CurrencyFormatter(
-                    decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP,
-                    commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP,
-                    maxDecimalDigits: 2)
+                    decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP, maxDecimalDigits: 2)
               else
                 CurrencyFormatter(maxDecimalDigits: NumberUtil.maxDecimalDigits),
               LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
@@ -543,16 +510,14 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
             return;
           }
           if (!_localCurrencyMode) {
-            _sendAmountController!.text =
-                getRawAsThemeAwareAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
+            _sendAmountController!.text = getRawAsThemeAwareAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
           } else {
-            String localAmount = StateContainer.of(context).wallet!.getLocalCurrencyBalance(
-                context, StateContainer.of(context).curCurrency,
-                locale: StateContainer.of(context).currencyLocale);
+            String localAmount = StateContainer.of(context)
+                .wallet!
+                .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
             localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
             localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
-            localAmount =
-                NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
+            localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
             _sendAmountController!.text = _localCurrencyFormat!.currencySymbol + localAmount;
           }
         },

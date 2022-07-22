@@ -892,7 +892,7 @@ class StateContainerState extends State<StateContainer> {
     // are we on the wrong account?
     if (link_as_account != null && link_as_account != wallet!.address) {
       // we aren't on the current account for this receive:
-      log.d("Receive is for a different account: ${link_as_account}");
+      log.d("Receive is for a different account: $link_as_account");
       // HANDLE IT: 😔
 
       final AccountInfoResponse accountResp = await sl.get<AccountService>().getAccountInfo(link_as_account);
@@ -1008,6 +1008,25 @@ class StateContainerState extends State<StateContainer> {
       } catch (e) {
         receivableRequests.remove(item.hash);
         sl.get<Logger>().e("Error creating receive", e);
+
+        if (wallet!.watchOnly) {
+          // add to home screen anyways:
+          AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
+              account: wallet!.address,
+              amount: item.amount,
+              confirmed: true,
+              local_timestamp: DateTime.now().millisecondsSinceEpoch ~/ 1000,
+              hash: item.hash,
+              height: wallet!.confirmationHeight + 1,
+              subtype: BlockTypes.RECEIVE,
+              type: BlockTypes.RECEIVE); // special to watch only mode -> tx.record_type
+          setState(() {
+            wallet!.confirmationHeight += 1;
+            wallet!.history!.insert(0, histItem);
+            EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
+            updateUnified(false);
+          });
+        }
       }
     }
     return null;

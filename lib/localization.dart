@@ -500,9 +500,9 @@ class AppLocalization {
     return Intl.message("Please enter your seed below.", desc: 'intro_seed_info', name: 'importSeedHint');
   }
 
-  String get welcomeText {
+  String get welcomeTextUpdated {
     return Intl.message("Welcome to Nautilus. To start, create a new wallet or import an existing one.",
-        desc: 'intro_welcome_title', name: 'welcomeText');
+        desc: 'intro_welcome_title', name: 'welcomeTextUpdated');
   }
 
   String get newWallet {

@@ -357,10 +357,8 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                     context,
                     AppButtonType.PRIMARY,
                     AppLocalization.of(context)!.addWatchOnlyAccount,
-                    Dimens.BUTTON_TOP_DIMENS,
-                    // disabled: _addingAccount,
+                    Dimens.BUTTON_BOTTOM_DIMENS,
                     onPressed: () {
-                      // Go to send confirm with amount
                       Sheets.showAppHeightEightSheet(context: context, widget: const AddWatchOnlyAccountSheet());
                     },
                   ),

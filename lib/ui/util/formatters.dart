@@ -8,15 +8,14 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 
 /// Input formatter for Crypto/Fiat amounts
 class CurrencyFormatter extends TextInputFormatter {
+  
+  CurrencyFormatter({this.commaSeparator = ",", this.decimalSeparator = ".", this.maxDecimalDigits = NumberUtil.maxDecimalDigits});
   String commaSeparator;
   String decimalSeparator;
   int maxDecimalDigits;
 
-  CurrencyFormatter(
-      {this.commaSeparator = ",", this.decimalSeparator = ".", this.maxDecimalDigits = NumberUtil.maxDecimalDigits});
-
+  @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    bool returnOriginal = true;
     if (!newValue.text.contains(decimalSeparator) && !newValue.text.contains(commaSeparator)) {
       return newValue;
     }
@@ -81,15 +80,13 @@ class CurrencyFormatter extends TextInputFormatter {
 }
 
 class LocalCurrencyFormatter extends TextInputFormatter {
+  LocalCurrencyFormatter({this.currencyFormat, this.active});
+
   NumberFormat? currencyFormat;
   bool? active;
 
-  LocalCurrencyFormatter({this.currencyFormat, this.active});
-
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.trim() == currencyFormat!.currencySymbol.trim() ||
-        newValue.text.isEmpty ||
-        newValue.text == " ") {
+    if (newValue.text.trim() == currencyFormat!.currencySymbol.trim() || newValue.text.isEmpty || newValue.text == " ") {
       // Return empty string
       return newValue.copyWith(text: "", selection: const TextSelection.collapsed(offset: 0));
     }
@@ -111,7 +108,7 @@ class LocalCurrencyFormatter extends TextInputFormatter {
         // if (newValue.text.startsWith(decimalSeparator)) {
         //   offset = 1;
         // }
-        int diff = shouldBeText.length - oldValue.text.length;
+        final int diff = shouldBeText.length - oldValue.text.length;
         // move the cursor back by one if this was a backspace:
         if (shouldBeText.length > oldValue.text.length) {
           offset = diff;
@@ -143,8 +140,7 @@ String convertLocalToCrypto(String cryptoAmount, NumberFormat? currencyFormat) {
 
 String convertCryptoToLocalAmount(String localAmount, NumberFormat? currencyFormat) {
   // Make local currency = symbol + amount with correct decimal separator
-  final String sanitizedText =
-      localAmount.replaceAll(currencyFormat!.symbols.GROUP_SEP, "").replaceAll(currencyFormat.currencySymbol, "");
+  final String sanitizedText = localAmount.replaceAll(currencyFormat!.symbols.GROUP_SEP, "").replaceAll(currencyFormat.currencySymbol, "");
   final List<String> splitStrs = sanitizedText.split(currencyFormat.symbols.DECIMAL_SEP);
   final String firstPart = splitStrs[0].trim();
   String secondPart = sanitizedText.split(currencyFormat.symbols.DECIMAL_SEP).length > 1 ? splitStrs[1].trim() : "";
@@ -158,28 +154,22 @@ String convertCryptoToLocalAmount(String localAmount, NumberFormat? currencyForm
 
   // group separator: currencyFormat!.symbols.GROUP_SEP
   // decimal separator: currencyFormat!.symbols.DECIMAL_SEP
-  print("newValue: " + localAmount);
-  print("sanitizedText: " + sanitizedText);
-  print("firstPart: " + firstPart);
-  print("secondPart: " + secondPart);
+  // print("newValue: " + localAmount);
+  // print("sanitizedText: " + sanitizedText);
+  // print("firstPart: " + firstPart);
+  // print("secondPart: " + secondPart);
 
-  // add commas to the first part:
-  // final value = NumberFormat("#,##0.00", "en_US");
-  // final value =
-  //     NumberFormat("#${currencyFormat!.symbols.GROUP_SEP}##0${currencyFormat!.symbols.DECIMAL_SEP}00", "en_US");
-  // var formatted = value.format(int.parse(firstPart));
-  final NumberFormat formatCurrency = NumberFormat.simpleCurrency(
-      decimalDigits: currencyFormat.decimalDigits, locale: currencyFormat.locale, name: currencyFormat.currencyName);
+  final NumberFormat formatCurrency =
+      NumberFormat.simpleCurrency(decimalDigits: currencyFormat.decimalDigits, locale: currencyFormat.locale, name: currencyFormat.currencyName);
   String formattedCurrency = formatCurrency.format(int.parse(firstPart));
-  formattedCurrency = formattedCurrency
-      .substring(0, formattedCurrency.length - (currencyFormat.decimalDigits! + 1))
-      .replaceAll(currencyFormat.currencySymbol, "")
-      .trim();
+  formattedCurrency =
+      formattedCurrency.substring(0, formattedCurrency.length - (currencyFormat.decimalDigits! + 1)).replaceAll(currencyFormat.currencySymbol, "").trim();
   return formattedCurrency + secondPart;
 }
 
 /// Input formatter that ensures text starts with @
 class ContactInputFormatter extends TextInputFormatter {
+  @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
     if (newValue.selection.baseOffset == 0) {
       return newValue;
@@ -215,7 +205,7 @@ class SingleSpaceInputFormatter extends TextInputFormatter {
     // Don't allow first character to be a space
     if (newValue.text.length < oldValue.text.length) {
       return newValue;
-    } else if (oldValue.text.length == 0 && newValue.text == " ") {
+    } else if (oldValue.text.isEmpty && newValue.text == " ") {
       return oldValue;
     } else if (oldValue.text.endsWith(" ") && newValue.text.endsWith("  ")) {
       return oldValue;
@@ -333,22 +323,19 @@ String getRawAsThemeAwareFormattedAmount(BuildContext context, String? raw) {
   //   return "$result.$decAmount";
   // }
 
-  NumberFormat currencyFormat = NumberFormat.currency(
-      locale: StateContainer.of(context).curCurrency.getLocale().toString(),
-      symbol: StateContainer.of(context).curCurrency.getCurrencySymbol());
+  final NumberFormat currencyFormat = NumberFormat.currency(
+      locale: StateContainer.of(context).curCurrency.getLocale().toString(), symbol: StateContainer.of(context).curCurrency.getCurrencySymbol());
 
-  String formattedAmount = currencyFormat
-      .format(double.parse(amountStr))
-      .replaceAll(StateContainer.of(context).curCurrency.getCurrencySymbol(), "")
-      .trim();
+  final String formattedAmount =
+      currencyFormat.format(double.parse(amountStr)).replaceAll(StateContainer.of(context).curCurrency.getCurrencySymbol(), "").trim();
 
-  String decimalSeparator = currencyFormat.symbols.DECIMAL_SEP;
+  final String decimalSeparator = currencyFormat.symbols.DECIMAL_SEP;
   // split by the decimal separator:
-  List<String> splitStrs = formattedAmount.split(decimalSeparator);
-  String firstPart = splitStrs[0];
+  final List<String> splitStrs = formattedAmount.split(decimalSeparator);
+  final String firstPart = splitStrs[0];
   if (amountStr.contains(".")) {
-    String secondPart = amountStr.split(".")[1];
-    return "$firstPart${decimalSeparator}$secondPart";
+    final String secondPart = amountStr.split(".")[1];
+    return "$firstPart$decimalSeparator$secondPart";
   }
   return firstPart;
 }
