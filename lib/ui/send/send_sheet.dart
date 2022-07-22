@@ -1378,7 +1378,7 @@ class _SendSheetState extends State<SendSheet> {
       ),
       inputFormatters: _rawAmount == null
           ? [
-              // LengthLimitingTextInputFormatter(13),
+              LengthLimitingTextInputFormatter(13),
               if (_localCurrencyMode)
                 CurrencyFormatter(
                     decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP, maxDecimalDigits: 2)

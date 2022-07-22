@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:ens_dart/ens_dart.dart';
 import 'package:event_taxi/event_taxi.dart';
@@ -34,7 +33,6 @@ import 'package:nautilus_wallet_flutter/network/model/response/callback_response
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/handoff_work_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/price_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/receivable_response.dart';
@@ -76,10 +74,20 @@ Map? decodeJson(dynamic src) {
 
 // AccountService singleton
 class AccountService {
+  // Constructor
+  AccountService() {
+    _requestQueue = Queue();
+    _isConnected = false;
+    _isConnecting = false;
+    suspended = false;
+    _lock = Lock();
+    initCommunication(unsuspend: true);
+  }
+
   final Logger log = sl.get<Logger>();
 
   // For all requests we place them on a queue with expiry to be processed sequentially
-  Queue<RequestItem>? _requestQueue;
+  Queue<RequestItem<dynamic>>? _requestQueue;
 
   // WS Client
   IOWebSocketChannel? _channel;
@@ -92,16 +100,6 @@ class AccountService {
 
   // Lock instance for synchronization
   late Lock _lock;
-
-  // Constructor
-  AccountService() {
-    _requestQueue = Queue();
-    _isConnected = false;
-    _isConnecting = false;
-    suspended = false;
-    _lock = Lock();
-    initCommunication(unsuspend: true);
-  }
 
   // Re-connect handling
   bool _isInRetryState = false;
@@ -116,7 +114,7 @@ class AccountService {
     }
     _isInRetryState = true;
     log.d("Retrying connection in 3 seconds...");
-    final Future<dynamic> delayed = Future.delayed(Duration(seconds: 3));
+    final Future<dynamic> delayed = Future.delayed(const Duration(seconds: 3));
     delayed.then((_) {
       return true;
     });
@@ -235,9 +233,9 @@ class AccountService {
     } finally {
       if (reset) {
         // Reset queue item statuses
-        _requestQueue!.forEach((RequestItem requestItem) {
+        for (final RequestItem<dynamic> requestItem in _requestQueue!) {
           requestItem.isProcessing = false;
-        });
+        }
         if (!_isConnecting && !suspended) {
           initCommunication();
         }
@@ -328,7 +326,7 @@ class AccountService {
       return false;
     }
 
-    for (RequestItem requestItem in _requestQueue!) {
+    for (final RequestItem requestItem in _requestQueue!) {
       if (requestItem.request is ProcessRequest) {
         final ProcessRequest request = requestItem.request as ProcessRequest;
         final StateBlock block = StateBlock.fromJson(json.decode(request.block!) as Map<String, dynamic>);
@@ -345,7 +343,7 @@ class AccountService {
     if (_requestQueue == null || _requestQueue!.isEmpty) {
       return false;
     }
-    for (RequestItem requestItem in _requestQueue!) {
+    for (final RequestItem requestItem in _requestQueue!) {
       if (requestItem.request is ProcessRequest) {
         final ProcessRequest request = requestItem.request as ProcessRequest;
         final StateBlock block = StateBlock.fromJson(json.decode(request.block!) as Map<String, dynamic>);
@@ -359,16 +357,17 @@ class AccountService {
 
   void removeSubscribeHistoryReceivableFromQueue() {
     if (_requestQueue != null && _requestQueue!.isNotEmpty) {
-      final List<RequestItem> toRemove = [];
-      _requestQueue!.forEach((RequestItem requestItem) {
+      final List<RequestItem<dynamic>> toRemove = [];
+      for (final RequestItem<dynamic> requestItem in _requestQueue!) {
         if ((requestItem.request is SubscribeRequest || requestItem.request is AccountHistoryRequest || requestItem.request is ReceivableRequest) &&
             !requestItem.isProcessing!) {
           toRemove.add(requestItem);
         }
-      });
-      toRemove.forEach((RequestItem requestItem) {
-        _requestQueue!.remove(requestItem);
-      });
+      }
+      // toRemove.forEach((RequestItem requestItem) {
+      //   _requestQueue!.remove(requestItem);
+      // });
+      toRemove.forEach(_requestQueue!.remove);
     }
   }
 
@@ -383,17 +382,17 @@ class AccountService {
   /// Clear entire queue, except for AccountsBalancesRequest
   void clearQueue() {
     final List<RequestItem> reQueue = [];
-    _requestQueue!.forEach((RequestItem requestItem) {
+    for (final RequestItem requestItem in _requestQueue!) {
       if (requestItem.request is AccountsBalancesRequest) {
         reQueue.add(requestItem);
       }
-    });
+    }
     _requestQueue!.clear();
     // Re-queue requests
-    reQueue.forEach((RequestItem requestItem) {
+    for (final RequestItem requestItem in reQueue) {
       requestItem.isProcessing = false;
       _requestQueue!.add(requestItem);
-    });
+    }
   }
 
   Queue<RequestItem>? get requestQueue => _requestQueue;
@@ -538,7 +537,7 @@ class AccountService {
   }
 
   // request money from an account:
-  /*Future<PaymentResponse> */ Future<void> requestPayment(
+  Future<void> requestPayment(
       String? account, String? amountRaw, String? requestingAccount, String requestSignature, String requestNonce, String? memoEnc, String localUuid) async {
     final PaymentRequest request = PaymentRequest(
         account: account,
@@ -635,7 +634,7 @@ class AccountService {
     await receiveBlock.sign(privKey);
 
     // Process
-    final ProcessRequest processRequest = ProcessRequest(block: json.encode(receiveBlock.toJson()), subType: BlockTypes.RECEIVE);
+    final ProcessRequest processRequest = ProcessRequest(block: json.encode(receiveBlock.toJson()), subtype: BlockTypes.RECEIVE);
 
     return requestProcess(processRequest);
   }
@@ -660,7 +659,7 @@ class AccountService {
     await sendBlock.sign(privKey);
 
     // Process
-    final ProcessRequest processRequest = ProcessRequest(block: json.encode(sendBlock.toJson()), subType: BlockTypes.SEND);
+    final ProcessRequest processRequest = ProcessRequest(block: json.encode(sendBlock.toJson()), subtype: BlockTypes.SEND);
 
     return requestProcess(processRequest);
   }
@@ -692,7 +691,7 @@ class AccountService {
   }
 
   // Future<HandoffWorkResponse> requestWork(String url, String hash) async {
-    
+
   // }
 
   Future<ProcessResponse> requestOpen(String? balance, String? link, String? account, String? privKey, {String? representative}) async {
@@ -704,7 +703,7 @@ class AccountService {
     await openBlock.sign(privKey);
 
     // Process
-    final ProcessRequest processRequest = ProcessRequest(block: json.encode(openBlock.toJson()), subType: BlockTypes.OPEN);
+    final ProcessRequest processRequest = ProcessRequest(block: json.encode(openBlock.toJson()), subtype: BlockTypes.OPEN);
 
     return requestProcess(processRequest);
   }
@@ -727,7 +726,7 @@ class AccountService {
     await chgBlock.sign(privKey);
 
     // Process
-    final ProcessRequest processRequest = ProcessRequest(block: json.encode(chgBlock.toJson()), subType: BlockTypes.CHANGE);
+    final ProcessRequest processRequest = ProcessRequest(block: json.encode(chgBlock.toJson()), subtype: BlockTypes.CHANGE);
 
     return requestProcess(processRequest);
   }

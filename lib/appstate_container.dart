@@ -842,11 +842,12 @@ class StateContainerState extends State<StateContainer> {
       sl.get<AccountService>().processQueue();
       return;
     }
-    final ReceivableResponseItem receivableItem = ReceivableResponseItem(hash: resp.hash!, source: resp.account!, amount: resp.amount!);
+    final ReceivableResponseItem receivableItem = ReceivableResponseItem(hash: resp.hash, source: resp.account, amount: resp.amount);
     final String? receivedHash = await handleReceivableItem(receivableItem, link_as_account: resp.block!.linkAsAccount);
     if (receivedHash != null) {
       final AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
-          type: BlockTypes.RECEIVE,
+          type: BlockTypes.STATE,
+          subtype: BlockTypes.RECEIVE,
           account: resp.account,
           amount: resp.amount,
           hash: receivedHash,
@@ -879,14 +880,37 @@ class StateContainerState extends State<StateContainer> {
       // don't process if under the receive threshold:
       if (amountBigInt < BigInt.parse(receiveThreshold!)) {
         receivableRequests.remove(item.hash);
+        log.d("Blocked send from address: ${item.source} because it's below the receive threshold");
         return null;
       }
       // don't process if the user / address is blocked:
       if (await sl.get<DBHelper>().blockedExistsWithAddress(item.source!)) {
         receivableRequests.remove(item.hash);
-        log.d("Blocked send from address: ${item.source}");
+        log.d("Blocked send from address: ${item.source} because they're blocked");
         return null;
       }
+    }
+
+    if (wallet!.watchOnly && link_as_account != null && link_as_account == wallet!.address) {
+      // add to home screen w/o trying to receive it:
+      final AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
+          account: wallet!.address,
+          amount: item.amount,
+          confirmed: true,
+          local_timestamp: DateTime.now().millisecondsSinceEpoch ~/ 1000,
+          hash: item.hash,
+          height: wallet!.confirmationHeight + 1,
+          subtype: BlockTypes.RECEIVE,
+          type: BlockTypes.RECEIVE); // special to watch only mode -> tx.record_type
+      if (!wallet!.history!.contains(histItem)) {
+        setState(() {
+          wallet!.confirmationHeight += 1;
+          wallet!.history!.insert(0, histItem);
+          EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
+          updateUnified(false);
+        });
+      }
+      return null;
     }
 
     // are we on the wrong account?
@@ -996,6 +1020,7 @@ class StateContainerState extends State<StateContainer> {
     } else {
       // Publish receive
       sl.get<Logger>().d("Handling ${item.hash} as receive");
+
       try {
         final ProcessResponse resp = await sl
             .get<AccountService>()
@@ -1008,25 +1033,6 @@ class StateContainerState extends State<StateContainer> {
       } catch (e) {
         receivableRequests.remove(item.hash);
         sl.get<Logger>().e("Error creating receive", e);
-
-        if (wallet!.watchOnly) {
-          // add to home screen anyways:
-          AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
-              account: wallet!.address,
-              amount: item.amount,
-              confirmed: true,
-              local_timestamp: DateTime.now().millisecondsSinceEpoch ~/ 1000,
-              hash: item.hash,
-              height: wallet!.confirmationHeight + 1,
-              subtype: BlockTypes.RECEIVE,
-              type: BlockTypes.RECEIVE); // special to watch only mode -> tx.record_type
-          setState(() {
-            wallet!.confirmationHeight += 1;
-            wallet!.history!.insert(0, histItem);
-            EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
-            updateUnified(false);
-          });
-        }
       }
     }
     return null;
@@ -1121,9 +1127,42 @@ class StateContainerState extends State<StateContainer> {
           await updateUnified(false);
         }
 
-        if (wallet!.watchOnly) {
-          return;
-        }
+        // if (wallet!.watchOnly) {
+        //   // check for duplacates in the wallet history:
+        //   final List<String?> histHashes = [];
+        //   final List<String?> toRemove = [];
+        //   for (final AccountHistoryResponseItem histItem in wallet!.history!) {
+        //     print(histItem.hash);
+        //     if (histHashes.contains(histItem.hash)) {
+        //       toRemove.add(histItem.hash);
+        //     } else {
+        //       histHashes.add(histItem.hash);
+        //     }
+        //   }
+        //   print(toRemove);
+        //   print("aaaaaaa");
+
+        //   bool shouldPost = toRemove.isNotEmpty;
+
+        //   for (final AccountHistoryResponseItem histItem in wallet!.history!) {
+        //     if (toRemove.contains(histItem.hash)) {
+        //       if (histItem.type == BlockTypes.RECEIVE) {
+        //         // this is a duplicate receivable, remove it:
+        //         setState(() {
+        //           wallet!.history!.remove(histItem);
+        //         });
+        //         toRemove.remove(histItem.hash);
+        //         if (toRemove.isEmpty) {
+        //           break;
+        //         }
+        //       }
+        //     }
+        //   }
+        //   if (shouldPost) {
+        //     EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
+        //     await updateUnified(false);
+        //   }
+        // }
 
         sl.get<AccountService>().pop();
         sl.get<AccountService>().processQueue();
@@ -1132,6 +1171,27 @@ class StateContainerState extends State<StateContainer> {
           receivableRequests.clear();
           final ReceivableResponse receivableResp =
               await sl.get<AccountService>().getReceivable(wallet!.address, max(wallet!.blockCount ?? 0, 10), threshold: receiveThreshold);
+
+          // remove any receivables in the wallet history that are not in the receivable response:
+          if (wallet!.watchOnly) {
+            // check for duplicates in the wallet history:
+            final List<String?> receivableHashes = receivableResp.blocks!.values.map((ReceivableResponseItem block) => block.hash).toList();
+            final List<AccountHistoryResponseItem> toRemove = [];
+            for (final AccountHistoryResponseItem histItem in wallet!.history!) {
+              if (histItem.type == BlockTypes.RECEIVE) {
+                if (!receivableHashes.contains(histItem.hash)) {
+                  toRemove.add(histItem);
+                }
+              }
+            }
+            if (toRemove.isNotEmpty) {
+              setState(() {
+                toRemove.forEach(wallet!.history!.remove);
+              });
+              EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
+              await updateUnified(false);
+            }
+          }
 
           // for unfulfilled payments:
           final List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
@@ -1165,7 +1225,8 @@ class StateContainerState extends State<StateContainer> {
               }
 
               final AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
-                  type: BlockTypes.RECEIVE,
+                  type: BlockTypes.STATE,
+                  subtype: BlockTypes.RECEIVE,
                   account: receivableResponseItem!.source,
                   amount: receivableResponseItem.amount,
                   hash: receivedHash,

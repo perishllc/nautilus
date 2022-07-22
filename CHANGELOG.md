@@ -238,12 +238,3 @@
   - Displays balances in nyano instead of NANO
 #### Changed
 - Contacts -> Favorites
-
-## larger scale TODO:
-- create a txdata for gift card open
-- check for duplicate memos and remove them (just in case)
-- make a UI for preferred username / display name in the case that there are multiple users with the same address
-- NFC support
-- Ledger Nano X support
-- local PoW solution
-- finish automated screenshots for the app / play store

@@ -66,7 +66,6 @@ import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:quiver/strings.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
@@ -3403,11 +3402,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     converted.amount_raw ??= histItem.amount;
 
-    // if (histItem.type == BlockTypes.SEND) {
-    //   converted.to_address ??= histItem.account;
-    // } else if (histItem.type == BlockTypes.RECEIVE) {
-    //   converted.from_address ??= histItem.account;
-    // }
+    if (histItem.subtype == BlockTypes.SEND) {
+      converted.to_address ??= histItem.account;
+    } else if (histItem.subtype == BlockTypes.RECEIVE) {
+      converted.from_address ??= histItem.account;
+    }
 
     converted.from_address ??= histItem.account;
     converted.to_address ??= histItem.account;
@@ -3422,7 +3421,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
     converted.height ??= histItem.height!; // block height
     converted.record_type ??= histItem.type; // transaction type
-    converted.sub_type ??= histItem.subtype ?? histItem.type; // transaction subtype
+    converted.sub_type ??= histItem.subtype; // transaction subtype
 
     if (isNotEmpty(txDetails?.memo)) {
       converted.is_memo = true;

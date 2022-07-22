@@ -165,7 +165,7 @@ void main() {
       await tester.tap(find.byKey(const Key("changelog_dismiss_button")));
       await pumpSettleWait(tester, halfSecond);
     } catch (error) {
-      print("there was no changlog dialog to press");
+      print("there was no changelog dialog to press");
     }
 
     await pumpSettleWait(tester, halfSecond);

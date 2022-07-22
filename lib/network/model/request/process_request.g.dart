@@ -10,7 +10,7 @@ ProcessRequest _$ProcessRequestFromJson(Map<String, dynamic> json) =>
     ProcessRequest(
       block: json['block'] as String?,
       doWork: json['do_work'] as bool? ?? true,
-      subType: json['subtype'] as String?,
+      subtype: json['subtype'] as String?,
     )..action = json['action'] as String?;
 
 Map<String, dynamic> _$ProcessRequestToJson(ProcessRequest instance) =>
@@ -18,5 +18,5 @@ Map<String, dynamic> _$ProcessRequestToJson(ProcessRequest instance) =>
       'action': instance.action,
       'block': instance.block,
       'do_work': instance.doWork,
-      'subtype': instance.subType,
+      'subtype': instance.subtype,
     };
