@@ -37,14 +37,13 @@ class RegisterUsernameScreen extends StatefulWidget {
 }
 
 class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   FocusNode? _usernameFocusNode;
   TextEditingController? _usernameController;
 
   // States
   AddressStyle? _usernameStyle;
-  String _usernameText = "";
-  String _usernameHint = "";
+  final String _usernameHint = "";
   String _usernameValidationText = "";
   bool _showRegisterButton = false;
   Map? _leaseDetails;

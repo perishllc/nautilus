@@ -259,7 +259,7 @@ class AppChangeRepresentativeSheet {
     // If account isnt open, just store the account in sharedprefs
     if (StateContainer.of(context).wallet!.openBlock == null) {
       await sl.get<SharedPrefsUtil>().setRepresentative(_rep.account);
-      StateContainer.of(context).wallet!.representative = _rep.account;
+      StateContainer.of(context).wallet!.representative = _rep.account!;
       UIUtil.showSnackbar(AppLocalization.of(context)!.changeRepSucces, context);
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
     } else if (StateContainer.of(context).wallet!.representative == _rep.account) {
@@ -278,7 +278,7 @@ class AppChangeRepresentativeSheet {
             StateContainer.of(context).wallet!.frontier,
             StateContainer.of(context).wallet!.accountBalance.toString(),
             NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!));
-        StateContainer.of(context).wallet!.representative = _rep.account;
+        StateContainer.of(context).wallet!.representative = _rep.account!;
         StateContainer.of(context).wallet!.frontier = resp.hash;
         UIUtil.showSnackbar(AppLocalization.of(context)!.changeRepSucces, context);
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
@@ -409,7 +409,7 @@ class AppChangeRepresentativeSheet {
                                           color: StateContainer.of(context).curTheme.backgroundDarkest,
                                           borderRadius: BorderRadius.circular(25),
                                         ),
-                                        child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.representative!,
+                                        child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.representative,
                                             type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
                                       ),
                                     ),

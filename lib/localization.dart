@@ -1884,7 +1884,7 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
   }
 
   String get iosFundingMessage {
-    return Intl.message("Due to iOS App Store guidelines and restrictions, we can't show the content that would otherwise be here.",
+    return Intl.message("Due to iOS App Store guidelines and restrictions, we can't link you to our donations page. If you'd like to support the project, consider sending to the nautilus node's address.",
         desc: 'ios_funding_message', name: 'iosFundingMessage');
   }
 

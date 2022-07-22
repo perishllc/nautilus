@@ -75,7 +75,7 @@ class StateBlock {
     this.link = link;
     subType = subtype;
     type = BlockTypes.STATE;
-    this.work = work;
+    work = work;
     this.previous = previous;
     this.account = account;
     this.representative = representative;

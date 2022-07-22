@@ -153,14 +153,14 @@ class UserDetailsSheet {
                             // Contact Address
                             GestureDetector(
                               onTap: () {
-                                Clipboard.setData(new ClipboardData(text: user.address));
+                                Clipboard.setData(ClipboardData(text: user.address));
                                 setState(() {
                                   _addressCopied = true;
                                 });
                                 if (_addressCopiedTimer != null) {
                                   _addressCopiedTimer!.cancel();
                                 }
-                                _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                                _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
                                   setState(() {
                                     _addressCopied = false;
                                   });

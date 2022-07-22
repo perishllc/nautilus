@@ -1291,7 +1291,7 @@ bool compare(Uint8List lh, Uint8List rh) {
       g[j] = h[j];
     }
     add1305(h, minusp);
-    s = (-(h[16] >> 7) | 0);
+    s = -(h[16] >> 7) | 0;
     for (j = 0; j < 17; j++) {
       h[j] ^= s & (g[j] ^ h[j]);
     }

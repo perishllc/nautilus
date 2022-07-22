@@ -120,33 +120,31 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                 ),
               ),
             ),
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      // Send Button
-                      AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () async {
-                        animationOpen = true;
-                        AppAnimation.animationLauncher(context, AnimationType.TRANSFER_TRANSFERRING, onPoppedCallback: () => animationOpen = false);
-                        await processWallets();
-                      }),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      // Scan QR Code Button
-                      AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.cancel.toUpperCase(), Dimens.BUTTON_BOTTOM_DIMENS,
-                          onPressed: () {
-                        Navigator.of(context).pop();
-                      }),
-                    ],
-                  ),
-                ],
-              ),
+            Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    // Send Button
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
+                      animationOpen = true;
+                      AppAnimation.animationLauncher(context, AnimationType.TRANSFER_TRANSFERRING, onPoppedCallback: () => animationOpen = false);
+                      await processWallets();
+                    }),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    // Scan QR Code Button
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.cancel.toUpperCase(), Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

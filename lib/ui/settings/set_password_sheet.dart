@@ -31,18 +31,18 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
   @override
   void initState() {
     super.initState();
-    this.passwordsMatch = false;
-    this.createPasswordFocusNode = FocusNode();
-    this.confirmPasswordFocusNode = FocusNode();
-    this.createPasswordController = TextEditingController();
-    this.confirmPasswordController = TextEditingController();
+    passwordsMatch = false;
+    createPasswordFocusNode = FocusNode();
+    confirmPasswordFocusNode = FocusNode();
+    createPasswordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     return TapOutsideUnfocus(
         child: LayoutBuilder(
-      builder: (context, constraints) => SafeArea(
+      builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
@@ -129,10 +129,10 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
-                                color: this.passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
                                 fontFamily: 'NunitoSans',
                               ),
-                              onSubmitted: (text) {
+                              onSubmitted: (String text) {
                                 confirmPasswordFocusNode!.requestFocus();
                               },
                             ),
@@ -172,15 +172,15 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
-                                color: this.passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
                                 fontFamily: 'NunitoSans',
                               ),
                             ),
                             // Error Text
                             Container(
-                              alignment: AlignmentDirectional(0, 0),
-                              margin: EdgeInsets.only(top: 3),
-                              child: Text(this.passwordError == null ? "" : passwordError!,
+                              alignment: AlignmentDirectional.center,
+                              margin: const EdgeInsets.only(top: 3),
+                              child: Text(passwordError == null ? "" : passwordError!,
                                   style: TextStyle(
                                     fontSize: 14.0,
                                     color: StateContainer.of(context).curTheme.primary,
@@ -194,27 +194,25 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
             ),
 
             // Set Password Button
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.setPassword, Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () async {
-                        await submitAndEncrypt();
-                      }),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
-                          onPressed: () {
-                        Navigator.pop(context);
-                      }),
-                    ],
-                  ),
-                ],
-              ),
+            Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.setPassword, Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
+                      await submitAndEncrypt();
+                    }),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
+                      Navigator.pop(context);
+                    }),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

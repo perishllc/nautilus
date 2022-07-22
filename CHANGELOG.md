@@ -1,3 +1,6 @@
+## v0.4.6 - [2022-07-24]
+#### Fixed
+- Fixed loading animation when switching between accounts
 ## v0.4.5 - [2022-07-23]
 #### Added
 - Watch only addresses

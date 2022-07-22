@@ -167,7 +167,7 @@ class AppDialogs {
         barrierDismissible: false,
         context: context,
         builder: (BuildContext ctx) => material.Dialog(
-              shape: const RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(20.0))),
+              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
               backgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
               child: Column(
                 mainAxisSize: MainAxisSize.min,

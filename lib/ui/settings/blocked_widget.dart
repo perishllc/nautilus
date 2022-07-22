@@ -429,7 +429,7 @@ class _BlockedListState extends State<BlockedList> {
   Widget buildSingleContact(BuildContext context, User user) {
     return TextButton(
       style: TextButton.styleFrom(
-        padding: const EdgeInsets.all(0.0),
+        padding: EdgeInsets.zero,
       ),
       onPressed: () {
         BlockedDetailsSheet(user, documentsDirectory).mainBottomSheet(context);
@@ -442,7 +442,7 @@ class _BlockedListState extends State<BlockedList> {
         // Main Container
         Container(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          margin: new EdgeInsetsDirectional.only(start: 12.0, end: 20.0),
+          margin: const EdgeInsetsDirectional.only(start: 12.0, end: 20.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[

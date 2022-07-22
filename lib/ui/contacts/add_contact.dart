@@ -251,8 +251,8 @@ class _AddContactSheetState extends State<AddContactSheet> {
               : AppStyles.textStyleAddressPrimary(context),
       onChanged: (String text) async {
         bool isUser = false;
-        final bool? isDomain = text.contains(".");
-        final bool? isFavorite = text.startsWith("★");
+        final bool isDomain = text.contains(".");
+        final bool isFavorite = text.startsWith("★");
         final bool isNano = text.startsWith("nano_");
 
         // prevent spaces:
@@ -293,7 +293,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
             _isUser = false;
             _users = [];
           });
-        } else if (isUser || isDomain!) {
+        } else if (isUser || isDomain) {
           final List<User> matchedList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
@@ -323,9 +323,9 @@ class _AddContactSheetState extends State<AddContactSheet> {
           });
         }
 
-        if ((isUser || isFavorite!) != _isUser) {
+        if ((isUser || isFavorite) != _isUser) {
           setState(() {
-            _isUser = isUser || isFavorite!;
+            _isUser = isUser || isFavorite;
           });
         }
       },
@@ -517,7 +517,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                                             margin: const EdgeInsets.only(bottom: 50),
                                             child: ListView.builder(
                                               shrinkWrap: true,
-                                              padding: const EdgeInsets.only(bottom: 0, top: 0),
+                                              padding: EdgeInsets.zero,
                                               itemCount: _users.length,
                                               itemBuilder: (BuildContext context, int index) {
                                                 return _buildUserItem(_users[index]);
@@ -559,51 +559,49 @@ class _AddContactSheetState extends State<AddContactSheet> {
           ),
 
           //A column with "Add Contact" and "Close" buttons
-          Container(
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    // Add Contact Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.addContact, Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
-                      if (await validateForm()) {
-                        User newContact;
-                        final String? formAddress = widget.address != null ? widget.address : _addressController!.text;
-                        final String formattedNickname = _nameController!.text.substring(1);
-                        // if we're given an address with corresponding username, just block:
-                        if (_correspondingUsername != null) {
-                          newContact = User(nickname: formattedNickname, address: formAddress, username: _correspondingUsername);
-                          await sl.get<DBHelper>().saveContact(newContact);
-                        } else if (_correspondingAddress != null) {
-                          newContact =
-                              User(nickname: formattedNickname, address: _correspondingAddress, username: SendSheetHelpers.stripPrefixes(formAddress!));
-                          await sl.get<DBHelper>().saveContact(newContact);
-                        } else {
-                          // just an address:
-                          newContact = User(nickname: formattedNickname, address: formAddress);
-                          await sl.get<DBHelper>().saveContact(newContact);
-                        }
-                        EventTaxiImpl.singleton().fire(ContactAddedEvent(contact: newContact));
-                        UIUtil.showSnackbar(AppLocalization.of(context)!.contactAdded.replaceAll("%1", newContact.getDisplayName()!), context);
-                        EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: newContact));
-                        EventTaxiImpl.singleton().fire(TXUpdateEvent());
-                        Navigator.of(context).pop();
+          Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  // Add Contact Button
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.addContact, Dimens.BUTTON_TOP_DIMENS,
+                      onPressed: () async {
+                    if (await validateForm()) {
+                      User newContact;
+                      final String formAddress = widget.address ?? _addressController!.text;
+                      final String formattedNickname = _nameController!.text.substring(1);
+                      // if we're given an address with corresponding username, just block:
+                      if (_correspondingUsername != null) {
+                        newContact = User(nickname: formattedNickname, address: formAddress, username: _correspondingUsername);
+                        await sl.get<DBHelper>().saveContact(newContact);
+                      } else if (_correspondingAddress != null) {
+                        newContact =
+                            User(nickname: formattedNickname, address: _correspondingAddress, username: SendSheetHelpers.stripPrefixes(formAddress));
+                        await sl.get<DBHelper>().saveContact(newContact);
+                      } else {
+                        // just an address:
+                        newContact = User(nickname: formattedNickname, address: formAddress);
+                        await sl.get<DBHelper>().saveContact(newContact);
                       }
-                    }),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    // Close Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () {
-                      Navigator.pop(context);
-                    }),
-                  ],
-                ),
-              ],
-            ),
+                      EventTaxiImpl.singleton().fire(ContactAddedEvent(contact: newContact));
+                      UIUtil.showSnackbar(AppLocalization.of(context)!.contactAdded.replaceAll("%1", newContact.getDisplayName()!), context);
+                      EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: newContact));
+                      EventTaxiImpl.singleton().fire(TXUpdateEvent());
+                      Navigator.of(context).pop();
+                    }
+                  }),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  // Close Button
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
+                      onPressed: () {
+                    Navigator.pop(context);
+                  }),
+                ],
+              ),
+            ],
           ),
         ],
       ),

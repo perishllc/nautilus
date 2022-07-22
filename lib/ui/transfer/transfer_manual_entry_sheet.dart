@@ -16,11 +16,12 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class TransferManualEntrySheet extends StatefulWidget {
+  const TransferManualEntrySheet({this.validSeedCallback, this.quickSeed}) : super();
+
   final Function? validSeedCallback;
   final String? quickSeed;
 
-  TransferManualEntrySheet({this.validSeedCallback, this.quickSeed}) : super();
-
+  @override
   _TransferManualEntrySheetState createState() => _TransferManualEntrySheetState();
 }
 
@@ -36,16 +37,16 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
   @override
   void initState() {
     super.initState();
-    this._seedInputController = TextEditingController();
-    this._seedInputFocusNode = FocusNode();
-    this.seedIsValid = false;
-    this.hasError = false;
+    _seedInputController = TextEditingController();
+    _seedInputFocusNode = FocusNode();
+    seedIsValid = false;
+    hasError = false;
 
     // Set quick seed amount
     quickSeed = widget.quickSeed;
     if (quickSeed != null) {
       _seedInputController!.text = quickSeed!;
-      this.seedIsValid = true;
+      seedIsValid = true;
     }
   }
 

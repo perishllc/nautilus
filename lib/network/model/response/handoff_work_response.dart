@@ -1,6 +1,5 @@
 import 'dart:core';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:nautilus_wallet_flutter/model/method.dart';
 
 part 'handoff_work_response.g.dart';
 

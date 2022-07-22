@@ -10,7 +10,7 @@ class PurchaseNanoScreen extends StatefulWidget {
 }
 
 class _PurchaseNanoScreenState extends State<PurchaseNanoScreen> {
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {

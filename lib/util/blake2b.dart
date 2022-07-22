@@ -25,11 +25,11 @@ Uint32List ADD64AA(Uint32List v, int a, int b) {
 // b0 is the low 32 bits of b, b1 represents the high 32 bits
 Uint32List ADD64AC(Uint32List v, int a, int b0, int b1) {
   var o0 = v[a] + b0;
-  if (b0 < 0 as bool) {
+  if (b0 < 0) {
     o0 += 0x100000000;
   }
   var o1 = v[a + 1] + b1;
-  if (o0 >= 0x100000000 as bool) {
+  if (o0 >= 0x100000000) {
     o1++;
   }
   v[a] = o0;

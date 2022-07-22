@@ -107,7 +107,7 @@ class User {
       return "★${nickname!}";
     }
 
-    return getDisplayNameWithType(this.username, this.type);
+    return getDisplayNameWithType(username, type);
   }
 
   static String? getDisplayNameWithType(String? name, String? userType) {

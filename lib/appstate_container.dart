@@ -124,7 +124,7 @@ class StateContainerState extends State<StateContainer> {
   final int MAX_SEQUENTIAL_UPDATES = 5;
 
   AppWallet? wallet;
-  String? currencyLocale;
+  String currencyLocale = "en_US";
   Locale deviceLocale = const Locale('en', 'US');
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
   LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
@@ -246,7 +246,6 @@ class StateContainerState extends State<StateContainer> {
       final int lastUpdatedUsers = int.parse(await sl.get<SharedPrefsUtil>().getLastNapiUsersCheck());
 
       const int dayInSeconds = 60 * 60 * 24;
-      const int weekInSeconds = dayInSeconds * 7;
 
       // update if more than a day old:
       if (forceUpdate || currentTime - lastUpdatedUsers > dayInSeconds) {
@@ -442,8 +441,10 @@ class StateContainerState extends State<StateContainer> {
         initialDeepLink = initialLink;
       });
     });
-    // Cache ninja API if don't already have it
+    // Cache ninja API if we don't already have it
     checkAndCacheNinjaAPIResponse();
+    // make sure nano.to username database is up to date
+    checkAndUpdateNanoToUsernames();
     // Update alert
     checkAndUpdateAlerts();
     // Get funding alerts
@@ -464,8 +465,6 @@ class StateContainerState extends State<StateContainer> {
     sl.get<SharedPrefsUtil>().getCurrencyMode().then((String currencyMode) {
       setCurrencyMode(currencyMode);
     });
-    // make sure nano API databases are up to date
-    checkAndUpdateNanoToUsernames();
     // restore payments from the cache
     updateSolids();
 
@@ -498,7 +497,7 @@ class StateContainerState extends State<StateContainer> {
       // handle the null case in debug mode:
       setState(() {
         if (wallet != null) {
-          wallet!.localCurrencyPrice = event.response!.price?.toString();
+          wallet!.localCurrencyPrice = event.response!.price?.toString() ?? wallet!.localCurrencyPrice;
         }
       });
     });
@@ -815,7 +814,7 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       wallet!.loading = false;
       wallet!.frontier = response.frontier;
-      wallet!.representative = response.representative;
+      wallet!.representative = response.representative!;
       wallet!.representativeBlock = response.representativeBlock;
       wallet!.openBlock = response.openBlock;
       wallet!.blockCount = response.blockCount;
@@ -854,12 +853,12 @@ class StateContainerState extends State<StateContainer> {
           link: resp.hash,
           local_timestamp: DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond);
       log.d("Received histItem ${json.encode(histItem.toJson())}");
-      if (!wallet!.history!.contains(histItem)) {
+      if (!wallet!.history.contains(histItem)) {
         setState(() {
           // TODO: not necessarily the best way to handle this, should get real height:
           histItem.height = wallet!.confirmationHeight + 1;
           wallet!.confirmationHeight += 1;
-          wallet!.history!.insert(0, histItem);
+          wallet!.history.insert(0, histItem);
           wallet!.accountBalance += BigInt.parse(resp.amount!);
           // Send list to home screen
           EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
@@ -902,10 +901,10 @@ class StateContainerState extends State<StateContainer> {
           height: wallet!.confirmationHeight + 1,
           subtype: BlockTypes.RECEIVE,
           type: BlockTypes.RECEIVE); // special to watch only mode -> tx.record_type
-      if (!wallet!.history!.contains(histItem)) {
+      if (!wallet!.history.contains(histItem)) {
         setState(() {
           wallet!.confirmationHeight += 1;
-          wallet!.history!.insert(0, histItem);
+          wallet!.history.insert(0, histItem);
           EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
           updateUnified(false);
         });
@@ -1089,7 +1088,7 @@ class StateContainerState extends State<StateContainer> {
       // This is can still be improved because history excludes change/open, blockCount doesn't
       // Get largest count we have + 5 (just a safe-buffer)
       int count = 500;
-      if (wallet!.history != null && wallet!.history!.length > 1) {
+      if (wallet!.history != null && wallet!.history.length > 1) {
         count = 50;
       }
       try {
@@ -1099,13 +1098,13 @@ class StateContainerState extends State<StateContainer> {
         // Iterate list in reverse (oldest to newest block)
         for (final AccountHistoryResponseItem item in resp.history!) {
           // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
-          if (!wallet!.history!.contains(item)) {
+          if (!wallet!.history.contains(item)) {
             const int startIndex = 0; // Index to start inserting into the list
             int lastIndex = resp.history!.indexWhere((AccountHistoryResponseItem item) =>
-                wallet!.history!.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+                wallet!.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
             lastIndex = lastIndex <= 0 ? resp.history!.length : lastIndex;
             setState(() {
-              wallet!.history!.insertAll(0, resp.history!.getRange(startIndex, lastIndex));
+              wallet!.history.insertAll(0, resp.history!.getRange(startIndex, lastIndex));
               // Send list to home screen
               EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
             });
@@ -1177,7 +1176,7 @@ class StateContainerState extends State<StateContainer> {
             // check for duplicates in the wallet history:
             final List<String?> receivableHashes = receivableResp.blocks!.values.map((ReceivableResponseItem block) => block.hash).toList();
             final List<AccountHistoryResponseItem> toRemove = [];
-            for (final AccountHistoryResponseItem histItem in wallet!.history!) {
+            for (final AccountHistoryResponseItem histItem in wallet!.history) {
               if (histItem.type == BlockTypes.RECEIVE) {
                 if (!receivableHashes.contains(histItem.hash)) {
                   toRemove.add(histItem);
@@ -1186,7 +1185,7 @@ class StateContainerState extends State<StateContainer> {
             }
             if (toRemove.isNotEmpty) {
               setState(() {
-                toRemove.forEach(wallet!.history!.remove);
+                toRemove.forEach(wallet!.history.remove);
               });
               EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
               await updateUnified(false);
@@ -1232,12 +1231,12 @@ class StateContainerState extends State<StateContainer> {
                   hash: receivedHash,
                   link: receivableResponseItem.hash,
                   local_timestamp: DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond);
-              if (!wallet!.history!.contains(histItem)) {
+              if (!wallet!.history.contains(histItem)) {
                 setState(() {
                   // TODO: not necessarily the best way to handle this, should get real height:
                   histItem.height = wallet!.confirmationHeight + 1;
                   wallet!.confirmationHeight += 1;
-                  wallet!.history!.insert(0, histItem);
+                  wallet!.history.insert(0, histItem);
                   wallet!.accountBalance += BigInt.parse(receivableResponseItem.amount!);
                   // Send list to home screen
                   EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
@@ -1318,8 +1317,8 @@ class StateContainerState extends State<StateContainer> {
       throw Exception("wallet or wallet.address is null!");
     }
 
-    final int currentBlockHeightInList = wallet!.history!.isNotEmpty ? (wallet!.history![0].height! + 1) : 1;
-    final String? lastBlockHash = wallet!.history!.isNotEmpty ? wallet?.history![0].hash : null;
+    final int currentBlockHeightInList = wallet!.history.isNotEmpty ? (wallet!.history[0].height! + 1) : 1;
+    final String? lastBlockHash = wallet!.history.isNotEmpty ? wallet?.history[0].hash : null;
 
     final TXData txData = TXData(
       amount_raw: amountRaw,
@@ -1387,8 +1386,8 @@ class StateContainerState extends State<StateContainer> {
       throw Exception("wallet or wallet.address is null!");
     }
 
-    final int currentBlockHeightInList = wallet!.history!.isNotEmpty ? (wallet!.history![0].height! + 1) : 1;
-    final String? lastBlockHash = wallet!.history!.isNotEmpty ? wallet?.history![0].hash : null;
+    final int currentBlockHeightInList = wallet!.history.isNotEmpty ? (wallet!.history[0].height! + 1) : 1;
+    final String? lastBlockHash = wallet!.history.isNotEmpty ? wallet?.history[0].hash : null;
 
     final TXData txData = TXData(
       amount_raw: amountRaw,
@@ -1700,7 +1699,7 @@ class StateContainerState extends State<StateContainer> {
 
     bool found = false;
     // loop through our tx history to find the first matching block:
-    for (final AccountHistoryResponseItem histItem in wallet!.history!) {
+    for (final AccountHistoryResponseItem histItem in wallet!.history) {
       if (histItem.link == block) {
         // found a matching transaction, so set the block to that:
         txData.link = histItem.hash;

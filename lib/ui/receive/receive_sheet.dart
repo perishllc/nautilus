@@ -354,7 +354,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
                             _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
                             Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                          Clipboard.setData(new ClipboardData(text: StateContainer.of(context).wallet!.address));
+                          Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
                           setState(() {
                             // Set copied style
                             _addressCopied = true;
@@ -362,7 +362,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                           if (_addressCopiedTimer != null) {
                             _addressCopiedTimer!.cancel();
                           }
-                          _addressCopiedTimer = new Timer(const Duration(milliseconds: 800), () {
+                          _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
                             if (mounted) {
                               setState(() {
                                 _addressCopied = false;

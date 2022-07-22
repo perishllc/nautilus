@@ -99,21 +99,19 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
-  final Map<String?, List<AccountHistoryResponseItem>?> _historyListMap = {};
+  final Map<String, List<AccountHistoryResponseItem>> _historyListMap = {};
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
-  // final Map<String, GlobalKey<AnimatedListState>> _requestsListKeyMap = {};
-  // final Map<String, ListModel<TXData>> _paymentsListMap = {};
-  final Map<String?, List<TXData>?> _solidsListMap = {};
+  final Map<String, List<TXData>> _solidsListMap = {};
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
   final Map<String, GlobalKey<AnimatedListState>> _unifiedListKeyMap = {};
-  final Map<String?, ListModel<dynamic>> _unifiedListMap = {};
+  final Map<String, ListModel<dynamic>> _unifiedListMap = {};
 
   // used to associate memos with blocks so we don't have search on every re-render:
-  final Map<String?, TXData> _txDetailsMap = {};
+  final Map<String, TXData> _txDetailsMap = {};
 
   // search bar text controller:
   final TextEditingController _searchController = TextEditingController();
@@ -159,7 +157,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   Future<void> _switchToAccount(String account) async {
     final List<Account> accounts = await sl.get<DBHelper>().getAccounts(await StateContainer.of(context).getSeed());
-    for (Account acc in accounts) {
+    for (final Account acc in accounts) {
       if (acc.address == account && acc.address != StateContainer.of(context).wallet!.address) {
         await sl.get<DBHelper>().changeAccount(acc);
         EventTaxiImpl.singleton().fire(AccountChangedEvent(account: acc, delayPop: true));
@@ -710,10 +708,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       setState(() {
         _txRecords = data;
         _txDetailsMap.clear();
-        for (TXData tx in _txRecords) {
+        for (final TXData tx in _txRecords) {
           if (tx.isSolid() && (isEmpty(tx.block) || isEmpty(tx.link))) {
             // set to the last block:
-            final String? lastBlockHash = StateContainer.of(context).wallet!.history!.isNotEmpty ? StateContainer.of(context).wallet!.history![0].hash : null;
+            final String? lastBlockHash = StateContainer.of(context).wallet!.history.isNotEmpty ? StateContainer.of(context).wallet!.history[0].hash : null;
             if (isEmpty(tx.block) && StateContainer.of(context).wallet!.address == tx.from_address) {
               tx.block = lastBlockHash;
             }
@@ -732,7 +730,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             if (_historyListMap[StateContainer.of(context).wallet!.address] != null) {
               // find if there's a matching link:
               // for (var histItem in StateContainer.of(context).wallet.history) {
-              for (AccountHistoryResponseItem histItem in _historyListMap[StateContainer.of(context).wallet!.address]!) {
+              for (final AccountHistoryResponseItem histItem in _historyListMap[StateContainer.of(context).wallet!.address]!) {
                 if (histItem.link == tx.block) {
                   tx.link = histItem.hash;
                   // save to db:
@@ -746,9 +744,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           // only applies to non-solids (i.e. memos):
           if (!tx.isSolid()) {
             if (isNotEmpty(tx.block) && tx.from_address == account) {
-              _txDetailsMap[tx.block] = tx;
+              _txDetailsMap[tx.block!] = tx;
             } else if (isNotEmpty(tx.link) && tx.to_address == account) {
-              _txDetailsMap[tx.link] = tx;
+              _txDetailsMap[tx.link!] = tx;
             }
           }
         }
@@ -790,7 +788,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         return;
       }
       setState(() {
-        _solidsListMap[StateContainer.of(context).wallet!.address] = newSolids;
+        _solidsListMap[StateContainer.of(context).wallet!.address!] = newSolids;
       });
     });
     _unifiedSub = EventTaxiImpl.singleton().registerTo<UnifiedHomeEvent>().listen((UnifiedHomeEvent event) {
@@ -814,11 +812,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // User changed account
     _switchAccountSub = EventTaxiImpl.singleton().registerTo<AccountChangedEvent>().listen((AccountChangedEvent event) {
       setState(() {
-        // todo: figure out if setState on statecontainer props does anything:
-        // StateContainer.of(context).wallet!.loading = true;
-        // StateContainer.of(context).wallet!.historyLoading = true;
-        // StateContainer.of(context).wallet!.unifiedLoading = true;
         _startAnimation();
+        StateContainer.of(context).wallet!.loading = true;
         StateContainer.of(context).updateWallet(account: event.account!);
         currentConfHeight = -1;
       });
@@ -921,15 +916,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         confirmedUpdate.add(i);
       }
     }
-    unconfirmedUpdate.forEach((int index) {
-      setState(() {
+    setState(() {
+      for (final int index in unconfirmedUpdate) {
         _historyListMap[StateContainer.of(context).wallet!.address]![index].confirmed = false;
-      });
-    });
-    confirmedUpdate.forEach((int index) {
-      setState(() {
+      }
+      for (final int index in confirmedUpdate) {
         _historyListMap[StateContainer.of(context).wallet!.address]![index].confirmed = true;
-      });
+      }
     });
   }
 
@@ -947,17 +940,17 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         cancelLockEvent();
         StateContainer.of(context).reconnect();
         // handle deep links:
-        if (!StateContainer.of(context).wallet!.loading! && StateContainer.of(context).initialDeepLink != null && !_lockTriggered) {
+        if (!StateContainer.of(context).wallet!.loading && StateContainer.of(context).initialDeepLink != null && !_lockTriggered) {
           handleDeepLink(StateContainer.of(context).initialDeepLink);
           StateContainer.of(context).initialDeepLink = null;
         }
         // branch gift:
-        if (!StateContainer.of(context).wallet!.loading! && StateContainer.of(context).giftedWallet == true && !_lockTriggered) {
+        if (!StateContainer.of(context).wallet!.loading && StateContainer.of(context).giftedWallet == true && !_lockTriggered) {
           StateContainer.of(context).giftedWallet = false;
           handleBranchGift();
         }
         // handle pending background events:
-        if (!StateContainer.of(context).wallet!.loading! && !_lockTriggered) {
+        if (!StateContainer.of(context).wallet!.loading && !_lockTriggered) {
           handleReceivableBackgroundMessages();
         }
 
@@ -1036,10 +1029,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       return;
     }
 
-    _historyListMap[StateContainer.of(context).wallet!.address] = newList;
+    _historyListMap[StateContainer.of(context).wallet!.address!] = newList;
 
     // Re-subscribe if missing data
-    if (StateContainer.of(context).wallet!.loading!) {
+    if (StateContainer.of(context).wallet!.loading) {
       StateContainer.of(context).requestSubscribe();
     } else {
       updateConfirmationHeights(StateContainer.of(context).wallet!.confirmationHeight);
@@ -1199,7 +1192,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     final Set<String?> uuids = {};
     final List<int?> idsToRemove = [];
-    for (TXData req in solidsList) {
+    for (final TXData req in solidsList) {
       if (!uuids.contains(req.uuid)) {
         uuids.add(req.uuid);
       } else {
@@ -1208,7 +1201,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         await sl.get<DBHelper>().deleteTXDataByID(req.id);
       }
     }
-    for (int? id in idsToRemove) {
+    for (final int? id in idsToRemove) {
       solidsList.removeWhere((TXData element) => element.id == id);
     }
 
@@ -1219,7 +1212,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
       // if the block is null, give it one:
       if (solidsList[i].block == null) {
-        final String? lastBlockHash = StateContainer.of(context).wallet!.history!.isNotEmpty ? StateContainer.of(context).wallet!.history![0].hash : null;
+        final String? lastBlockHash = StateContainer.of(context).wallet!.history.isNotEmpty ? StateContainer.of(context).wallet!.history[0].hash : null;
         solidsList[i].block = lastBlockHash;
         await sl.get<DBHelper>().replaceTXDataByUUID(solidsList[i]);
       }
@@ -1282,7 +1275,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
         // check if there's a username:
         final String account = txDetails.getAccount(isRecipient);
-        for (User user in _users) {
+        for (final User user in _users) {
           if (user.address == account.replaceAll("xrb_", "nano_")) {
             displayName = user.getDisplayName()!;
             break;
@@ -1516,7 +1509,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  void paintQrCode({String? address}) async {
+  Future<void> paintQrCode({String? address}) async {
     // final PrettyQr painter = PrettyQr(
     //   data: "nano:${address ?? StateContainer.of(context).wallet!.address!}",
     //   errorCorrectLevel: QrErrorCorrectLevel.M,
@@ -1524,7 +1517,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     //   typeNumber: 9,
     // );
     final PrettyQrCodePainter painter = PrettyQrCodePainter(
-      data: "nano:${address ?? StateContainer.of(context).wallet!.address!}",
+      data: "nano:${address ?? StateContainer.of(context).wallet!.address}",
       errorCorrectLevel: QrErrorCorrectLevel.M,
       roundEdges: true,
       typeNumber: 9,
@@ -2438,7 +2431,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   // Get balance display
   Widget _getBalanceWidget() {
-    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading!) {
+    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading) {
       // Placeholder for balance text
       return Column(
         mainAxisSize: MainAxisSize.min,
@@ -3450,7 +3443,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // check if there's a username:
     final String account = txDetails.getAccount(isRecipient);
-    for (User user in _users) {
+    for (final User user in _users) {
       if (user.address == account.replaceAll("xrb_", "nano_")) {
         displayName = user.getDisplayName()!;
         break;
@@ -3481,13 +3474,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // Setup history list
       if (!_historyListMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
         setState(() {
-          _historyListMap.putIfAbsent(StateContainer.of(context).wallet!.address, () => StateContainer.of(context).wallet!.history);
+          _historyListMap.putIfAbsent(StateContainer.of(context).wallet!.address!, () => StateContainer.of(context).wallet!.history);
         });
       }
       // Setup payments list
       if (!_solidsListMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
         setState(() {
-          _solidsListMap.putIfAbsent(StateContainer.of(context).wallet!.address, () => StateContainer.of(context).wallet!.solids);
+          _solidsListMap.putIfAbsent(StateContainer.of(context).wallet!.address!, () => StateContainer.of(context).wallet!.solids);
         });
       }
       // Setup unified list
@@ -3495,7 +3488,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet!.address}", () => GlobalKey<AnimatedListState>());
         setState(() {
           _unifiedListMap.putIfAbsent(
-            StateContainer.of(context).wallet!.address,
+            StateContainer.of(context).wallet!.address!,
             () => ListModel<dynamic>(
               listKey: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address}"]!,
               initialItems: StateContainer.of(context).wallet!.unified,
@@ -3510,7 +3503,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     }
 
-    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading! || StateContainer.of(context).wallet!.unifiedLoading) {
+    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading || StateContainer.of(context).wallet!.unifiedLoading) {
       // Loading Animation
       return ReactiveRefreshIndicator(
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -3532,7 +3525,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
             ],
           ));
-    } else if (StateContainer.of(context).wallet!.history!.isEmpty && StateContainer.of(context).wallet!.solids!.isEmpty) {
+    } else if (StateContainer.of(context).wallet!.history.isEmpty && StateContainer.of(context).wallet!.solids.isEmpty) {
       _disposeAnimation();
       return DraggableScrollbar(
         controller: _scrollController,
@@ -3614,9 +3607,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         setState(() {
           _isRefreshing = false;
           _unifiedListMap.putIfAbsent(
-            StateContainer.of(context).wallet!.address,
+            StateContainer.of(context).wallet!.address!,
             () => ListModel<dynamic>(
-              listKey: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address}alert"]!,
+              listKey: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address!}alert"]!,
               initialItems: StateContainer.of(context).wallet!.unified,
             ),
           );

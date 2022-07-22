@@ -27,7 +27,7 @@ class AvatarChangePage extends StatefulWidget {
 }
 
 class _AvatarChangePageState extends State<AvatarChangePage> {
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int? nonce;
   int? currentNonce;
   late bool loading;
@@ -35,25 +35,25 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
   @override
   void initState() {
     super.initState();
-    this.loading = true;
+    loading = true;
     String url = 'https://natricon.com/api/v1/nano/nonce?address=${widget.curAddress}';
-    http.get(Uri.parse(url), headers: {}).then((response) {
+    http.get(Uri.parse(url), headers: {}).then((http.Response response) {
       if (mounted) {
         if (response.statusCode != 200) {
           setState(() {
-            this.loading = false;
+            loading = false;
           });
           return;
         }
         try {
           NonceResponse resp = NonceResponse.fromJson(json.decode(response.body) as Map<String, dynamic>);
           setState(() {
-            this.loading = false;
-            this.currentNonce = resp.nonce;
+            loading = false;
+            currentNonce = resp.nonce;
           });
         } catch (e) {
           setState(() {
-            this.loading = false;
+            loading = false;
           });
         }
       }
@@ -77,7 +77,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
       key: _scaffoldKey,
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
-        builder: (context, constraints) => SafeArea(
+        builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
           minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
@@ -102,7 +102,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                                 // splashColor: StateContainer.of(context).curTheme.text15,
                               ),
                               onPressed: () {
-                                Navigator.of(context).popUntil((route) => route.isFirst);
+                                Navigator.of(context).popUntil((Route route) => route.isFirst);
                               },
                               child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),
@@ -169,7 +169,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                                 highlightColor: StateContainer.of(context).curTheme.text15,
                                 splashColor: StateContainer.of(context).curTheme.text15,
                                 onPressed: () {
-                                  if (nonce == null || this.loading) {
+                                  if (nonce == null || loading) {
                                     return;
                                   } else if (nonce == -1 || (nonce == 0 && currentNonce == -1)) {
                                     setState(() {
@@ -188,7 +188,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                                 padding: const EdgeInsetsDirectional.only(end: 4),
                                 child: Icon(AppIcons.back,
-                                    color: nonce != null && !this.loading
+                                    color: nonce != null && !loading
                                         ? StateContainer.of(context).curTheme.primary
                                         : StateContainer.of(context).curTheme.primary20,
                                     size: 24),
@@ -207,7 +207,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                                 highlightColor: StateContainer.of(context).curTheme.text15,
                                 splashColor: StateContainer.of(context).curTheme.text15,
                                 onPressed: () {
-                                  if (this.loading) {
+                                  if (loading) {
                                     return;
                                   } else if (nonce == null) {
                                     setState(() {
@@ -244,13 +244,13 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
               Column(
                 children: <Widget>[
                   Opacity(
-                    opacity: nonce != null && !this.loading ? 1 : 0,
+                    opacity: nonce != null && !loading ? 1 : 0,
                     child: Row(
                       children: <Widget>[
                         // I want this Button
                         AppButton.buildAppButton(context, AppButtonType.PRIMARY, "I Want This One", Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                           showSendConfirmSheet();
-                        }, disabled: nonce == null || this.loading || nonce == currentNonce),
+                        }, disabled: nonce == null || loading || nonce == currentNonce),
                       ],
                     ),
                   ),
@@ -259,7 +259,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                       // Go Back Button
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () {
-                        Navigator.of(context).popUntil((route) => route.isFirst);
+                        Navigator.of(context).popUntil((Route route) => route.isFirst);
                       }),
                     ],
                   ),

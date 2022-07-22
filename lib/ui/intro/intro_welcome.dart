@@ -13,7 +13,7 @@ class IntroWelcomePage extends StatefulWidget {
 }
 
 class _IntroWelcomePageState extends State<IntroWelcomePage> {
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
       key: _scaffoldKey,
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
-        builder: (context, constraints) => SafeArea(
+        builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
           minimum: EdgeInsets.only(
             bottom: MediaQuery.of(context).size.height * 0.035,
             top: MediaQuery.of(context).size.height * 0.10,
@@ -47,7 +47,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                     Container(
                       color: Colors.white,
                       // padding: EdgeInsets.zero,
-                      padding: EdgeInsets.only(top: 5, bottom: 5),
+                      padding: const EdgeInsets.only(top: 5, bottom: 5),
                       width: double.infinity,
                       child: TextLiquidFill(
                         text: "NAUTILUS",

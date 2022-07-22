@@ -30,7 +30,6 @@ import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:uuid/uuid.dart';
 
@@ -279,8 +278,8 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       final String localUuid = "LOCAL:${uuid.v4()}";
       // current block height:
       final int currentBlockHeightInList =
-          StateContainer.of(context).wallet!.history!.isNotEmpty ? (StateContainer.of(context).wallet!.history![0].height! + 1) : 1;
-      final String? lastBlockHash = StateContainer.of(context).wallet!.history!.isNotEmpty ? StateContainer.of(context).wallet!.history![0].hash : null;
+          StateContainer.of(context).wallet!.history.isNotEmpty ? (StateContainer.of(context).wallet!.history[0].height! + 1) : 1;
+      final String? lastBlockHash = StateContainer.of(context).wallet!.history.isNotEmpty ? StateContainer.of(context).wallet!.history[0].hash : null;
 
       // create a local txData for the request:
       final TXData newRequestTXData = TXData(

@@ -12,7 +12,7 @@ class AvatarPage extends StatefulWidget {
 }
 
 class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateMixin {
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   AnimationController? _controller;
   late Animation<Color?> bgColorAnimation;
   late Animation<Offset> offsetTween;
@@ -41,7 +41,7 @@ class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateM
       begin: Colors.transparent,
       end: StateContainer.of(context).curTheme.barrier,
     ).animate(CurvedAnimation(parent: _controller!, curve: Curves.easeOut, reverseCurve: Curves.easeIn));
-    offsetTween = Tween<Offset>(begin: Offset(0, 200), end: Offset(0, 0))
+    offsetTween = Tween<Offset>(begin: const Offset(0, 200), end: const Offset(0, 0))
         .animate(CurvedAnimation(parent: _controller!, curve: Curves.easeOut, reverseCurve: Curves.easeIn));
     return AnimatedBuilder(
       animation: _controller!,
@@ -61,12 +61,10 @@ class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateM
                       alignment: Alignment.center,
                       children: <Widget>[
                         // Gesture Detector
-                        Container(
-                          child: GestureDetector(onTapDown: (details) {
-                            _controller!.reverse();
-                            Navigator.pop(context);
-                          }),
-                        ),
+                        GestureDetector(onTapDown: (details) {
+                          _controller!.reverse();
+                          Navigator.pop(context);
+                        }),
                         // Avatar
                         Container(
                           margin: EdgeInsetsDirectional.only(bottom: MediaQuery.of(context).size.height * 0.2),
@@ -93,7 +91,7 @@ class _AvatarPageState extends State<AvatarPage> with SingleTickerProviderStateM
                                   child: Container(
                                     decoration: BoxDecoration(
                                         color: StateContainer.of(context).curTheme.backgroundDark,
-                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+                                        borderRadius: const BorderRadius.only(topLeft: const Radius.circular(30), topRight: const Radius.circular(30))),
                                     child: SafeArea(
                                       minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: hasEnoughFunds ? 24 : 16),
                                       child: Column(

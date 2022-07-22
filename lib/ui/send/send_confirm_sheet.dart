@@ -342,7 +342,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         final String localUuid = "LOCAL:${uuid.v4()}";
         // current block height:
         final int currentBlockHeightInList =
-            StateContainer.of(context).wallet!.history!.isNotEmpty ? (StateContainer.of(context).wallet!.history![0].height! + 1) : 1;
+            StateContainer.of(context).wallet!.history.isNotEmpty ? (StateContainer.of(context).wallet!.history[0].height! + 1) : 1;
         final TXData memoTXData = TXData(
           from_address: walletAddress,
           to_address: widget.destination,

@@ -141,7 +141,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
 
             if (address != null && user == null) {
               // add to the db if missing:
-              final User user = new User(username: formattedAddress, address: address, type: type, is_blocked: false);
+              final User user = User(username: formattedAddress, address: address, type: type, is_blocked: false);
               await sl.get<DBHelper>().addUser(user);
             }
           } else {
@@ -419,8 +419,8 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                     },
                     child: Container(
                       color: Colors.transparent,
-                      child: const SizedBox.expand(),
                       constraints: const BoxConstraints.expand(),
+                      child: const SizedBox.expand(),
                     ),
                   ),
                   Column(
@@ -512,7 +512,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                         final String? formAddress = widget.address != null ? widget.address : _addressController!.text;
                         // if we're given an address with corresponding username, just block:
                         if (_correspondingUsername != null) {
-                          newBlocked = User(nickname: _correspondingNickname ?? null, address: formAddress, username: _correspondingUsername);
+                          newBlocked = User(nickname: _correspondingNickname, address: formAddress, username: _correspondingUsername);
                           await sl.get<DBHelper>().blockUser(newBlocked);
                         } else if (_correspondingAddress != null) {
                           newBlocked = User(
@@ -520,7 +520,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                           await sl.get<DBHelper>().blockUser(newBlocked);
                         } else {
                           // just an address:
-                          newBlocked = User(nickname: _correspondingNickname ?? null, address: formAddress);
+                          newBlocked = User(nickname: _correspondingNickname, address: formAddress);
                           await sl.get<DBHelper>().blockUser(newBlocked);
                         }
                         EventTaxiImpl.singleton().fire(BlockedAddedEvent(user: newBlocked));

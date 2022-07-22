@@ -602,7 +602,7 @@ class DBHelper {
 
   Future<int> addUser(User user) async {
     final Database dbClient = (await db)!;
-    return await dbClient.rawInsert('INSERT INTO Users (username, address, nickname, type, is_blocked) values(?, ?, ?, ?, ?)',
+    return dbClient.rawInsert('INSERT INTO Users (username, address, nickname, type, is_blocked) values(?, ?, ?, ?, ?)',
         [user.username, user.address, user.nickname, user.type, user.is_blocked]);
   }
 
@@ -612,9 +612,9 @@ class DBHelper {
     final bool userExists = await userExistsWithName(user.username!);
 
     if (!userExists) {
-      return await addUser(user);
+      return addUser(user);
     } else {
-      return await dbClient!.rawUpdate('UPDATE Users SET address = ? WHERE username = ?', [
+      return dbClient!.rawUpdate('UPDATE Users SET address = ? WHERE username = ?', [
         user.address,
         user.username,
       ]);
@@ -866,7 +866,7 @@ class DBHelper {
       throw Exception("this shouldn't happen");
     }
 
-    return await dbClient.rawUpdate(
+    return dbClient.rawUpdate(
         // 'UPDATE Transactions SET (from_address, to_address, amount_raw, is_request, request_time, is_fulfilled, fulfillment_time, block, memo, is_acknowledged, height) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE uuid = ?',
         'UPDATE Transactions SET from_address = ?, to_address = ?, amount_raw = ?, is_request = ?, request_time = ?, is_fulfilled = ?, fulfillment_time = ?, block = ?, link = ?, memo_enc = ?, is_memo = ?, is_message = ?, is_tx = ?, memo = ?, is_acknowledged = ?, height = ?, send_height = ?, recv_height = ?, record_type = ?, sub_type = ?, metadata = ?, status = ? WHERE uuid = ?',
         [
@@ -1020,7 +1020,7 @@ class DBHelper {
   Future<int> changeTXFulfillmentStatus(String? uuid, bool is_fulfilled) async {
     final Database dbClient = (await db)!;
     // return await dbClient.rawUpdate('UPDATE Transactions SET is_fulfilled = ? WHERE id = ?', [is_fulfilled ? 1 : 0, txData.id]);
-    return await dbClient.rawUpdate('UPDATE Transactions SET is_fulfilled = ? WHERE uuid = ?', [
+    return dbClient.rawUpdate('UPDATE Transactions SET is_fulfilled = ? WHERE uuid = ?', [
       if (is_fulfilled) 1 else 0,
       uuid,
     ]);
@@ -1029,7 +1029,7 @@ class DBHelper {
   Future<int> changeTXAckStatus(String uuid, bool is_acknowledged) async {
     final Database dbClient = (await db)!;
     // return await dbClient.rawUpdate('UPDATE Transactions SET is_fulfilled = ? WHERE id = ?', [is_fulfilled ? 1 : 0, txData.id]);
-    return await dbClient.rawUpdate('UPDATE Transactions SET is_acknowledged = ? WHERE uuid = ?', [
+    return dbClient.rawUpdate('UPDATE Transactions SET is_acknowledged = ? WHERE uuid = ?', [
       if (is_acknowledged) 1 else 0,
       uuid,
     ]);
@@ -1174,7 +1174,7 @@ class DBHelper {
 
   Future<int> deleteAccount(Account account) async {
     final Database dbClient = (await db)!;
-    return await dbClient.rawDelete('DELETE FROM Accounts WHERE acct_index = ?', [account.index]);
+    return dbClient.rawDelete('DELETE FROM Accounts WHERE acct_index = ?', [account.index]);
   }
 
   Future<int> saveAccount(Account account) async {
@@ -1190,7 +1190,7 @@ class DBHelper {
 
   Future<void> changeAccount(Account? account) async {
     final Database dbClient = (await db)!;
-    return await dbClient.transaction((Transaction txn) async {
+    return dbClient.transaction((Transaction txn) async {
       await txn.rawUpdate('UPDATE Accounts set selected = 0');
       // Get access increment count
       final List<Map> list = await txn.rawQuery('SELECT max(last_accessed) as last_access FROM Accounts');

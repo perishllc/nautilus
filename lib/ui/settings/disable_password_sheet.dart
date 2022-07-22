@@ -28,8 +28,8 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
   @override
   void initState() {
     super.initState();
-    this.passwordFocusNode = FocusNode();
-    this.passwordController = TextEditingController();
+    passwordFocusNode = FocusNode();
+    passwordController = TextEditingController();
   }
 
   @override
@@ -42,7 +42,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
           children: <Widget>[
             // Sheet handle
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               height: 5,
               width: MediaQuery.of(context).size.width * 0.15,
               decoration: BoxDecoration(
@@ -57,7 +57,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                 children: <Widget>[
                   // The header
                   Container(
-                    margin: EdgeInsetsDirectional.only(top: 10, start: 60, end: 60),
+                    margin: const EdgeInsetsDirectional.only(top: 10, start: 60, end: 60),
                     child: Column(
                       children: <Widget>[
                         AutoSizeText(
@@ -84,13 +84,13 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                   // Text field
                   Expanded(
                       child: KeyboardAvoider(
-                          duration: Duration(milliseconds: 0),
+                          duration: Duration.zero,
                           autoScroll: true,
                           focusPadding: 40,
                           child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
                             AppTextField(
                               topMargin: 30,
-                              padding: EdgeInsetsDirectional.only(start: 16, end: 16),
+                              padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
                               focusNode: passwordFocusNode,
                               controller: passwordController,
                               textInputAction: TextInputAction.done,
@@ -115,9 +115,9 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                             ),
                             // Error Text
                             Container(
-                              alignment: AlignmentDirectional(0, 0),
-                              margin: EdgeInsets.only(top: 3),
-                              child: Text(this.passwordError == null ? "" : passwordError!,
+                              alignment: AlignmentDirectional.center,
+                              margin: const EdgeInsets.only(top: 3),
+                              child: Text(passwordError == null ? "" : passwordError!,
                                   style: TextStyle(
                                     fontSize: 14.0,
                                     color: StateContainer.of(context).curTheme.primary,
@@ -170,7 +170,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
     } else {
       try {
         String decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(encryptedSeed, passwordController!.text));
-        throwIf(!NanoSeeds.isValidSeed(decryptedSeed), FormatException());
+        throwIf(!NanoSeeds.isValidSeed(decryptedSeed), const FormatException());
         await sl.get<Vault>().setSeed(decryptedSeed);
         StateContainer.of(context).resetEncryptedSecret();
         UIUtil.showSnackbar(AppLocalization.of(context)!.disablePasswordSuccess, context);
