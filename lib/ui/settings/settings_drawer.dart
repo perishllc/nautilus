@@ -1279,7 +1279,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           color: StateContainer.of(context).curTheme.text15,
         ),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.createGiftCard, AppIcons.export_icon, onPressed: () {
-          Navigator.of(context).pushNamed("/generate_paper_wallet");
+          Navigator.of(context).pushNamed("/gift_paper_wallet");
         }),
         Divider(
           height: 2,

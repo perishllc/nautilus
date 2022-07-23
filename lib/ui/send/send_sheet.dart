@@ -1293,10 +1293,10 @@ class _SendSheetState extends State<SendSheet> {
           });
         }
       } else if (sendAmount > balanceRaw && !isRequest) {
-        // isValid = false;
-        // setState(() {
-        //   _amountValidationText = AppLocalization.of(context)!.insufficientBalance;
-        // });
+        isValid = false;
+        setState(() {
+          _amountValidationText = AppLocalization.of(context)!.insufficientBalance;
+        });
       } else {
         setState(() {
           _amountValidationText = "";

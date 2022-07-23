@@ -47,6 +47,8 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
   bool _visible = false;
   bool _invisibleTimerQueued = false;
 
+  bool hideAfterDuration = true;
+
   @override
   void initState() {
     super.initState();
@@ -54,8 +56,9 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
     _barOffsetBottom = 0.0;
     _viewOffset = 0.0;
     _isDragInProcess = false;
-    _visible = false;
     _invisibleTimerQueued = false;
+    hideAfterDuration = widget.scrollbarHideAfterDuration != Duration.zero;
+    _visible = !hideAfterDuration;
   }
 
   // if list takes 300.0 pixels of height on screen and scrollthumb height is 40.0
@@ -220,7 +223,7 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
       _visible = true;
     });
     // set a timer to hide the scrollbar after some time:
-    if (!_invisibleTimerQueued) {
+    if (!_invisibleTimerQueued && hideAfterDuration) {
       setState(() {
         _invisibleTimerQueued = true;
         Timer(widget.scrollbarHideAfterDuration, hideScrollbar);

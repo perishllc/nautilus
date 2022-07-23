@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/ui/generate/generate_complete_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/gift/gift_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:uuid/uuid.dart';
@@ -19,11 +17,12 @@ final BigInt rawPerNano = BigInt.from(10).pow(30);
 final BigInt rawPerNyano = BigInt.from(10).pow(24);
 
 class GiftCards {
-  Future<BranchResponse> createGiftCard(
+  Future<BranchResponse<dynamic>> createGiftCard(
     BuildContext context, {
     required String paperWalletSeed,
     String? amountRaw,
     String? memo,
+    String? splitAmountRaw,
   }) async {
     final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
 
@@ -39,6 +38,7 @@ class GiftCards {
           ..addCustomMetadata('seed', paperWalletSeed)
           ..addCustomMetadata('address', paperWalletAccount)
           ..addCustomMetadata('memo', memo ?? "")
+          ..addCustomMetadata('split_amount_raw', splitAmountRaw ?? "")
           ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
           ..addCustomMetadata('signature', "")
           ..addCustomMetadata('nonce', "")
@@ -60,6 +60,7 @@ class GiftCards {
     required String destination,
     required String amountRaw,
     required String paperWalletSeed,
+    String splitAmountRaw = "",
     String? hash,
     String? localCurrency,
     String? link,

@@ -528,6 +528,10 @@ class AppLocalization {
     return Intl.message("Creating Gift Card", desc: 'creating_gift_card', name: 'creatingGiftCard');
   }
 
+  String get splitBy {
+    return Intl.message("Split By", desc: 'gift_card_split_by', name: 'splitBy');
+  }
+
   String get aliases {
     return Intl.message("Aliases", desc: 'card_details_aliases', name: 'aliases');
   }
@@ -637,6 +641,10 @@ class AppLocalization {
     return Intl.message("Enter Amount", desc: 'send_amount_hint', name: 'enterAmount');
   }
 
+  String get enterSplitAmount {
+    return Intl.message("Enter Split Amount", desc: 'gift_split_amount_hint', name: 'enterSplitAmount');
+  }
+
   String get enterAddress {
     return Intl.message("Enter Address", desc: 'enter_address', name: 'enterAddress');
   }
@@ -695,6 +703,10 @@ class AppLocalization {
 
   String get insufficientBalance {
     return Intl.message("Insufficient Balance", desc: 'send_insufficient_balance', name: 'insufficientBalance');
+  }
+
+  String get amountGiftGreaterError {
+    return Intl.message("Split Amount can't be greater than gift balance", desc: 'gift_split_greater_error', name: 'amountGiftGreaterError');
   }
 
   String get sendFrom {
@@ -914,7 +926,7 @@ class AppLocalization {
 
   String get resetDatabaseConfirmation {
     return Intl.message(
-        'Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed. If you\'re still having issues you should backup your seed, and re-install the app, and if the issue persists feel free to make a bug report on the discord (link at the bottom of the settings drawer)\nMake sure to first check if someone else already reported the issue!',
+        'Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed, but you should still back it up beforehand. If the issue persists feel free to make a bug report on the discord (link at the bottom of the settings drawer)\nMake sure to first check if someone else already reported the issue!',
         desc: 'database_remove_sure',
         name: 'resetDatabaseConfirmation');
   }
@@ -1380,7 +1392,8 @@ class AppLocalization {
     return Intl.message('''
 Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n
 Once created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n
-If the recipient is already a Nautilus user they will get a prompt to transfer the funds into their account upon opening the link''',
+If the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n
+You can also set a Split amount to distribute from the gift card rather than the entire balance,''',
         desc: 'Description for gift card creation', name: 'giftInfo');
   }
 
@@ -1397,6 +1410,10 @@ If the recipient is already a Nautilus user they will get a prompt to transfer t
 
   String get loadedInto {
     return Intl.message("Loaded Into", desc: 'loaded_into', name: 'loadedInto');
+  }
+
+  String get showLinkQR {
+    return Intl.message("Show Link QR", desc: 'show_link_qr', name: 'showGiftQR');
   }
 
   String get copyLink {

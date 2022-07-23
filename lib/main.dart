@@ -21,7 +21,7 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/avatar/avatar.dart';
 import 'package:nautilus_wallet_flutter/ui/avatar/avatar_change.dart';
 import 'package:nautilus_wallet_flutter/ui/before_scan_screen.dart';
-import 'package:nautilus_wallet_flutter/ui/generate/generate_paper_wallet.dart';
+import 'package:nautilus_wallet_flutter/ui/gift/gift_paper_wallet.dart';
 import 'package:nautilus_wallet_flutter/ui/home_page.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_confirm.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_safety.dart';
@@ -318,7 +318,7 @@ class _AppState extends State<App> {
                 builder: (_) => PurchaseNanoScreen(),
                 settings: settings,
               );
-            case '/generate_paper_wallet':
+            case '/gift_paper_wallet':
               return NoTransitionRoute(
                 builder: (_) => GeneratePaperWalletScreen(localCurrency: StateContainer.of(context).curCurrency),
                 settings: settings,

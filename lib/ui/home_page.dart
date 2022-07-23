@@ -39,6 +39,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/gift/gift_qr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
@@ -622,7 +623,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // show changelog?
       final PackageInfo packageInfo = await PackageInfo.fromPlatform();
       final String runningVersion = packageInfo.version;
-      final String? lastVersion = await sl.get<SharedPrefsUtil>().getAppVersion();
+      final String lastVersion = await sl.get<SharedPrefsUtil>().getAppVersion();
       if (runningVersion != lastVersion) {
         await sl.get<SharedPrefsUtil>().setAppVersion(runningVersion);
         await AppDialogs.showChangeLog(context);
@@ -3771,14 +3772,15 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                   ),
                 ),
                 // A row for View Details button
-                Row(
-                  children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
-                        onPressed: () async {
-                      await UIUtil.showBlockExplorerWebview(context, txDetails.block);
-                    }),
-                  ],
-                ),
+                if (!isGiftLoad)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
+                          onPressed: () async {
+                        await UIUtil.showBlockExplorerWebview(context, txDetails.block);
+                      }),
+                    ],
+                  ),
                 // A row for Copy Address Button
                 if (!isGiftLoad)
                   Row(
@@ -3904,13 +3906,27 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                   ),
                 if (isGiftLoad)
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context,
+                          // copy link button
+                          _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                          _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.showLinkQR,
+                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                        Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: sharableLink!));
+                      }),
+                    ],
+                  ),
+                if (isGiftLoad)
+                  Row(
                     children: <Widget>[
                       AppButton.buildAppButton(
                           context,
                           // copy seed button
                           _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
                           _seedCopied ? AppLocalization.of(context)!.seedCopied : AppLocalization.of(context)!.copySeed,
-                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Clipboard.setData(ClipboardData(text: walletSeed));
                         setState(() {
                           // Set copied style
@@ -3927,40 +3943,40 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                       }),
                     ],
                   ),
-                if (isGiftLoad)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          // copy link button
-                          _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
-                          _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.copyLink,
-                          Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
-                        Clipboard.setData(ClipboardData(text: sharableLink));
-                        setState(() {
-                          // Set copied style
-                          _linkCopied = true;
-                        });
-                        if (_linkCopiedTimer != null) {
-                          _linkCopiedTimer!.cancel();
-                        }
-                        _linkCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                          setState(() {
-                            _linkCopied = false;
-                          });
-                        });
-                      }),
-                      AppButton.buildAppButton(
-                          context,
-                          // share link button
-                          AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context)!.shareLink,
-                          Dimens.BUTTON_COMPACT_RIGHT_DIMENS, onPressed: () {
-                        Share.share(sharableLink!);
-                      }),
-                    ],
-                  ),
+                // if (isGiftLoad)
+                //   Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: <Widget>[
+                //       AppButton.buildAppButton(
+                //           context,
+                //           // copy link button
+                //           _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
+                //           _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.copyLink,
+                //           Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
+                //         Clipboard.setData(ClipboardData(text: sharableLink));
+                //         setState(() {
+                //           // Set copied style
+                //           _linkCopied = true;
+                //         });
+                //         if (_linkCopiedTimer != null) {
+                //           _linkCopiedTimer!.cancel();
+                //         }
+                //         _linkCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                //           setState(() {
+                //             _linkCopied = false;
+                //           });
+                //         });
+                //       }),
+                //       AppButton.buildAppButton(
+                //           context,
+                //           // share link button
+                //           AppButtonType.PRIMARY_OUTLINE,
+                //           AppLocalization.of(context)!.shareLink,
+                //           Dimens.BUTTON_COMPACT_RIGHT_DIMENS, onPressed: () {
+                //         Share.share(sharableLink!);
+                //       }),
+                //     ],
+                //   ),
               ],
             ),
           ],

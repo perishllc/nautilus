@@ -28,14 +28,23 @@ import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class GenerateConfirmSheet extends StatefulWidget {
-  final String? amountRaw;
-  final String? destination;
+  const GenerateConfirmSheet(
+      {this.amountRaw = "",
+      this.splitAmountRaw = "",
+      this.destination = "",
+      this.paperWalletSeed = "",
+      this.memo = "",
+      this.localCurrency,
+      this.maxSend = false})
+      : super();
+
+  final String amountRaw;
+  final String splitAmountRaw;
+  final String destination;
   final String paperWalletSeed;
   final String memo;
   final String? localCurrency;
   final bool maxSend;
-
-  GenerateConfirmSheet({this.amountRaw, this.destination, this.paperWalletSeed = "", this.memo = "", this.localCurrency, this.maxSend = false}) : super();
 
   _GenerateConfirmSheetState createState() => _GenerateConfirmSheetState();
 }
@@ -148,6 +157,59 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                     ),
                   ),
 
+                  // "SPLIT BY" TEXT
+                  if (widget.splitAmountRaw.isNotEmpty)
+                    Container(
+                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            CaseChange.toUpperCase(AppLocalization.of(context)!.splitBy, context),
+                            style: AppStyles.textStyleHeader(context),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                  if (widget.splitAmountRaw.isNotEmpty)
+                    // Container for the split amount text
+                    Container(
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      // Split Amount text
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          text: "",
+                          children: [
+                            TextSpan(
+                              text: getThemeAwareRawAccuracy(context, widget.splitAmountRaw),
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                            displayCurrencySymbol(
+                              context,
+                              AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                            TextSpan(
+                              text: getRawAsThemeAwareAmount(context, widget.splitAmountRaw),
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                            TextSpan(
+                              text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
+                              style: AppStyles.textStyleParagraphPrimary(context).copyWith(
+                                color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
                   if (widget.memo.isNotEmpty)
                     Container(
                       margin: const EdgeInsets.only(top: 30.0, bottom: 10),
@@ -193,6 +255,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
+                          if (!mounted) return;
                           final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
                               context,
                               AppLocalization.of(context)!
@@ -236,9 +299,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       // create link:
       final BranchUniversalObject buo = BranchUniversalObject(
           canonicalIdentifier: 'flutter/branch',
-          //canonicalUrl: '',
           title: 'Nautilus Gift Card',
-          // imageUrl: 'https://flutter.dev/assets/flutter-lockup-4cb0ee072ab312e59784d9fbf4fb7ad42688a7fdaea1270ccf6bbf4f34b7e03f.svg',
           contentDescription: 'Get the app to open this gift card!',
           keywords: ['Nautilus', "Gift Card"],
           publiclyIndex: true,
@@ -250,6 +311,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
             ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
             ..addCustomMetadata('signature', "")
             ..addCustomMetadata('nonce', "")
+            ..addCustomMetadata('split_amount_raw', widget.splitAmountRaw)
             ..addCustomMetadata('amount_raw', widget.amountRaw));
 
       final BranchLinkProperties lp = BranchLinkProperties(
@@ -273,21 +335,21 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
             NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
             max: widget.maxSend);
         StateContainer.of(context).wallet!.frontier = resp.hash;
-        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw!);
+        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
       }
 
       // ignore: use_build_context_synchronously
       await sl.get<GiftCards>().handleResponse(context,
           success: branchResponse.success,
-          amountRaw: widget.amountRaw!,
-          destination: widget.destination!,
+          amountRaw: widget.amountRaw,
+          destination: widget.destination,
           localCurrency: widget.localCurrency,
           hash: resp?.hash,
           link: branchLink,
           paperWalletSeed: widget.paperWalletSeed,
           memo: widget.memo);
     } catch (error) {
-      sl.get<Logger>().d("generate_confirm_error: $error");
+      sl.get<Logger>().d("gift_confirm_error: $error");
       // Send failed
       if (animationOpen) {
         Navigator.of(context).pop();

@@ -1,3 +1,12 @@
+## v0.4.7 - [2022-07-25]
+#### Added
+- The ability to show a QR code with a gift link on the completion page and gift details menu
+- The ability to split Gift Cards so that they can be dispensed to multiple people
+#### Changed
+- Re-worked the gift card completion screen
+#### Fixed
+- Re-enabled insufficent balance check on the send screen
+- Fixes for gift card creation
 ## v0.4.6 - [2022-07-24]
 #### Fixed
 - Fixed loading animation when switching between accounts
@@ -142,7 +151,7 @@
 ## v0.3.4 - [2022-06-15]
 #### Added
 - Node local_timestamps are now displayed in the transaction history
-  - These aren't guaranteed to be accurate, but in most cases they will be fairly close
+  - These aren't guaranteed to be accurate, but in most cases they'll be fairly close
 - Completely custom draggable scrollbar, optimized to not get in the way but still be easy to use
   - Now also visible in the settings drawer
 - Info button on the send sheet
