@@ -413,7 +413,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                               : getThemeAwareAmountAsRaw(context, _amountController!.text),
                           splitAmountRaw: _localCurrencyMode
                               ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto(_splitAmountController!.text))
-                              : getThemeAwareAmountAsRaw(context, _amountController!.text),
+                              : getThemeAwareAmountAsRaw(context, _splitAmountController!.text),
                         ));
                   }),
                 ],

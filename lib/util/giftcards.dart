@@ -38,7 +38,41 @@ class GiftCards {
           ..addCustomMetadata('seed', paperWalletSeed)
           ..addCustomMetadata('address', paperWalletAccount)
           ..addCustomMetadata('memo', memo ?? "")
-          ..addCustomMetadata('split_amount_raw', splitAmountRaw ?? "")
+          ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
+          ..addCustomMetadata('signature', "")
+          ..addCustomMetadata('nonce', "")
+          ..addCustomMetadata('amount_raw', amountRaw));
+
+    final BranchLinkProperties lp = BranchLinkProperties(
+        //alias: 'flutterplugin', //define link url,
+        channel: 'nautilusapp',
+        feature: 'gift',
+        stage: 'new share');
+
+    final BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+    return response;
+  }
+
+  Future<BranchResponse<dynamic>> createSplitGiftCard(
+    BuildContext context, {
+    required String paperWalletSeed,
+    String? amountRaw,
+    String? memo
+  }) async {
+    final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
+
+    final BranchUniversalObject buo = BranchUniversalObject(
+        canonicalIdentifier: 'flutter/branch',
+        //canonicalUrl: '',
+        title: 'Nautilus Gift Card',
+        contentDescription: 'Get the app to open this gift card!',
+        keywords: ['Nautilus', "Gift Card"],
+        publiclyIndex: true,
+        locallyIndex: true,
+        contentMetadata: BranchContentMetaData()
+          ..addCustomMetadata('seed', paperWalletSeed)
+          ..addCustomMetadata('address', paperWalletAccount)
+          ..addCustomMetadata('memo', memo ?? "")
           ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
           ..addCustomMetadata('signature', "")
           ..addCustomMetadata('nonce', "")

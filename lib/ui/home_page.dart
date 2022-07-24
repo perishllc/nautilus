@@ -209,7 +209,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  Future<void> _branchGiftDialog(String seed, String? memo, String? amountRaw, String senderAddress, String? giftedWalletSplitAmountRaw) async {
+  Future<void> _branchGiftDialog({required String seed, String memo = "", String amountRaw = "", String senderAddress = "", String splitAmountRaw = ""}) async {
     final String supposedAmount = getRawAsThemeAwareAmount(context, amountRaw);
 
     String? userOrSendAddress;
@@ -224,11 +224,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // check if there's actually any nano to claim:
     final BigInt balance = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
+    if (!mounted) return;
     try {
       if (balance != BigInt.zero) {
-        final String actualAmount = getRawAsThemeAwareAmount(context, balance.toString());
+        String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
+        print(splitAmountRaw);
 
-        if (isEmpty(giftedWalletSplitAmountRaw)) {
+        if (splitAmountRaw.isEmpty) {
           // show dialog with option to refund to sender:
           switch (await showDialog<int>(
               barrierDismissible: false,
@@ -258,7 +260,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                           ],
                         ),
                       ),
-                      if (memo != null && memo.isNotEmpty)
+                      if (memo.isNotEmpty)
                         Text(
                           "${AppLocalization.of(context)!.giftMessage}: $memo\n",
                           style: AppStyles.textStyleParagraph(context),
@@ -345,6 +347,15 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           }
         } else {
           // split the gift:
+          final BigInt? splitAmount = BigInt.tryParse(splitAmountRaw);
+          String amountToSend = splitAmountRaw;
+          // send the remainder if the split amount is greater than the actual gift balance:
+          if (splitAmount == null || splitAmount > balance) {
+            amountToSend = balance.toString();
+          } else {
+            amountToSend = splitAmountRaw;
+            actualAmount = getRawAsThemeAwareFormattedAmount(context, splitAmountRaw);
+          }
 
           // show dialog with option to refund to sender:
           switch (await showDialog<int>(
@@ -375,7 +386,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                           ],
                         ),
                       ),
-                      if (memo != null && memo.isNotEmpty)
+                      if (memo.isNotEmpty)
                         Text(
                           "${AppLocalization.of(context)!.giftMessage}: $memo\n",
                           style: AppStyles.textStyleParagraph(context),
@@ -442,9 +453,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           }
         }
       } else {
-        if (!mounted) {
-          return;
-        }
+        if (!mounted) return;
         // show alert that the gift is empty:
         await showDialog<bool>(
             context: context,
@@ -473,7 +482,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         ],
                       ),
                     ),
-                    if (memo != null && memo.isNotEmpty)
+                    if (memo.isNotEmpty)
                       Text(
                         "${AppLocalization.of(context)!.giftMessage}: $memo\n",
                         style: AppStyles.textStyleParagraph(context),
@@ -1485,11 +1494,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
       Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
       _branchGiftDialog(
-          StateContainer.of(context).giftedWalletSeed,
-          StateContainer.of(context).giftedWalletMemo,
-          StateContainer.of(context).giftedWalletAmountRaw,
-          StateContainer.of(context).giftedWalletSenderAddress,
-          StateContainer.of(context).giftedWalletSplitAmountRaw);
+          seed: StateContainer.of(context).giftedWalletSeed,
+          memo: StateContainer.of(context).giftedWalletMemo,
+          amountRaw: StateContainer.of(context).giftedWalletAmountRaw,
+          senderAddress: StateContainer.of(context).giftedWalletSenderAddress,
+          splitAmountRaw: StateContainer.of(context).giftedWalletSplitAmountRaw);
     }
   }
 

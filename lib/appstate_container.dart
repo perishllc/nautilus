@@ -169,11 +169,11 @@ class StateContainerState extends State<StateContainer> {
 
   // gifts!
   bool giftedWallet = false;
-  late String giftedWalletSeed;
-  String? giftedWalletAddress;
-  String? giftedWalletAmountRaw;
-  String? giftedWalletMemo;
-  String? giftedWalletSplitAmountRaw;
+  String giftedWalletSeed = "";
+  String giftedWalletAddress = "";
+  String giftedWalletAmountRaw = "";
+  String giftedWalletMemo = "";
+  String giftedWalletSplitAmountRaw = "";
   late String giftedWalletSenderAddress;
 
   // When wallet is encrypted
@@ -570,6 +570,9 @@ class StateContainerState extends State<StateContainer> {
         initialDeepLink = link;
       });
     });
+
+    // disable tracking:
+    FlutterBranchSdk.disableTracking(true);
 
     // branch deep links:
     _branchSub = FlutterBranchSdk.initSession().listen((Map data) {

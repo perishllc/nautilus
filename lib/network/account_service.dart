@@ -57,6 +57,7 @@ String _SERVER_ADDRESS_WS = "$_WS_PROTO$_BASE_SERVER_ADDRESS";
 String _SERVER_ADDRESS_HTTP = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/api";
 String _SERVER_ADDRESS_ALERTS = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/alerts";
 String _SERVER_ADDRESS_FUNDING = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/funding";
+String _SERVER_ADDRESS_GIFT = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/gift";
 
 const String _USERNAME_LEASE_ENDPOINT = "https://nano.to/lease";
 
@@ -156,10 +157,10 @@ class AccountService {
     // });
 
     // DEV SERVER:
-    // _HTTP_PROTO = "http://";
-    // _WS_PROTO = "ws://";
-    // _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
-    // log.d("CONNECTED TO DEV SERVER");
+    _HTTP_PROTO = "http://";
+    _WS_PROTO = "ws://";
+    _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
+    log.d("CONNECTED TO DEV SERVER");
 
     // ENS:
     const String rpcUrl = 'https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}';
@@ -356,19 +357,17 @@ class AccountService {
   }
 
   void removeSubscribeHistoryReceivableFromQueue() {
-    if (_requestQueue != null && _requestQueue!.isNotEmpty) {
-      final List<RequestItem<dynamic>> toRemove = [];
-      for (final RequestItem<dynamic> requestItem in _requestQueue!) {
-        if ((requestItem.request is SubscribeRequest || requestItem.request is AccountHistoryRequest || requestItem.request is ReceivableRequest) &&
-            !requestItem.isProcessing!) {
-          toRemove.add(requestItem);
-        }
-      }
-      // toRemove.forEach((RequestItem requestItem) {
-      //   _requestQueue!.remove(requestItem);
-      // });
-      toRemove.forEach(_requestQueue!.remove);
+    if (_requestQueue == null || _requestQueue!.isEmpty) {
+      return;
     }
+    final List<RequestItem<dynamic>> toRemove = [];
+    for (final RequestItem<dynamic> requestItem in _requestQueue!) {
+      if ((requestItem.request is SubscribeRequest || requestItem.request is AccountHistoryRequest || requestItem.request is ReceivableRequest) &&
+          !requestItem.isProcessing!) {
+        toRemove.add(requestItem);
+      }
+    }
+    toRemove.forEach(_requestQueue!.remove);
   }
 
   RequestItem? pop() {
@@ -535,6 +534,25 @@ class AccountService {
     }
     return AccountHistoryResponse.fromJson(response as Map<String, dynamic>);
   }
+
+  // Future<void> createGiftCard({
+  //   String? seed,
+  //   String? account,
+  // }) async {
+  //   final http.Response response = await http.post(Uri.parse("$_SERVER_ADDRESS_GIFT"),
+  //       headers: {"Accept": "application/json"},
+  //       body: json.encode(
+  //         {"seed": seed, "requesting_account": account, },
+  //       ));
+  //   if (response.statusCode == 200) {
+  //     List<FundingResponseItem> alerts;
+  //     alerts = (json.decode(response.body) as List).map((i) => FundingResponseItem.fromJson(i as Map<String, dynamic>)).toList();
+  //     if (alerts.isNotEmpty) {
+  //       return alerts;
+  //     }
+  //   }
+  //   return;
+  // }
 
   // request money from an account:
   Future<void> requestPayment(
