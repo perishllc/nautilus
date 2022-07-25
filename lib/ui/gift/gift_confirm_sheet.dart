@@ -324,19 +324,17 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       BranchResponse<dynamic>? branchResponse;
 
       if (widget.splitAmountRaw.isNotEmpty) {
-        if (animationOpen) {
-          Navigator.of(context).pop();
+        final String paperWalletAccount = NanoUtil.seedToAddress(widget.paperWalletSeed, 0);
+        Map resp = await sl<AccountService>().createSplitGiftCard(
+          seed: widget.paperWalletSeed,
+          requestingAccount: paperWalletAccount,
+          memo: widget.memo,
+          splitAmountRaw: widget.splitAmountRaw,
+        ) as Map;
+
+        if (resp.containsKey("success")) {
+          branchLink = resp["link"] as String;
         }
-        Navigator.of(context).pop();
-        UIUtil.showSnackbar("Split Gift Cards are still a WIP!", context, durationMs: 5000);
-        return;
-        // var resp = await sl<GiftCards>().createSplitGiftCardLink(
-        //   context,
-        //   paperWalletSeed: widget.paperWalletSeed,
-        //   amountRaw: widget.amountRaw,
-        //   splitAmountRaw: widget.splitAmountRaw,
-        //   memo: widget.memo,
-        // );
       } else {
         branchResponse = await sl<GiftCards>().createGiftCard(
           context,
@@ -344,12 +342,15 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           amountRaw: widget.amountRaw,
           memo: widget.memo,
         );
+        if (branchResponse.success) {
+          branchLink = branchResponse.result as String;
+        }
       }
 
       // send funds:
       ProcessResponse? resp;
-      if (branchResponse.success) {
-        branchLink = branchResponse.result as String;
+      final bool linkCreationSuccess = branchLink != null;
+      if (linkCreationSuccess) {
         resp = await sl.get<AccountService>().requestSend(
             StateContainer.of(context).wallet!.representative,
             StateContainer.of(context).wallet!.frontier,
@@ -364,7 +365,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
 
       // ignore: use_build_context_synchronously
       await sl.get<GiftCards>().handleResponse(context,
-          success: branchResponse.success,
+          success: linkCreationSuccess,
           amountRaw: widget.amountRaw,
           destination: widget.destination,
           localCurrency: widget.localCurrency,

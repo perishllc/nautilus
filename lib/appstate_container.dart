@@ -576,7 +576,7 @@ class StateContainerState extends State<StateContainer> {
         // Link clicked. Add logic to get link data
 
         // check if they were gifted a wallet:
-        if (data.containsKey("~feature") && data["~feature"] == "gift") {
+        if (data.containsKey("~feature") && (data["~feature"] == "gift" || data["~feature"] == "splitgift")) {
           // if (data["+match_guaranteed"] == true) {
           // setup the auto load wallet:
           setState(() {
@@ -812,7 +812,7 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       wallet!.loading = false;
       wallet!.frontier = response.frontier;
-      wallet!.representative = response.representative!;
+      wallet!.representative = response.representative ?? AppWallet.defaultRepresentative;
       wallet!.representativeBlock = response.representativeBlock;
       wallet!.openBlock = response.openBlock;
       wallet!.blockCount = response.blockCount;

@@ -3811,8 +3811,12 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           // copy link button
                           _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
                           _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.showLinkQR,
-                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                          Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () async {
                         Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: sharableLink!));
+                      }),
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                          onPressed: () async {
+                        await UIUtil.showBlockExplorerWebview(context, txDetails.block);
                       }),
                     ],
                   ),

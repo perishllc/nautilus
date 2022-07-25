@@ -1,3 +1,9 @@
+## v0.4.8 - [2022-07-XX]
+#### Added
+- Split Gift Cards, working this time
+#### Changed
+- Minor UI tweaks to gift cards
+#### Fixed
 ## v0.4.7 - [2022-07-25]
 #### Added
 - The ability to show a QR code with a gift link on the completion page and gift details menu

@@ -535,7 +535,7 @@ class AccountService {
     return AccountHistoryResponse.fromJson(response as Map<String, dynamic>);
   }
 
-  Future<void> createGiftCard({
+  Future<dynamic> createSplitGiftCard({
     String? seed,
     String? requestingAccount,
     String? splitAmountRaw,
@@ -553,11 +553,10 @@ class AccountService {
           },
         ));
     if (response.statusCode == 200) {
-      print(response);
+      return jsonDecode(response.body);
+    } else {
+      return {"success": false};
     }
-    print(response.body);
-    print(response.statusCode);
-    return;
   }
 
   // request money from an account:

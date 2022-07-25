@@ -832,26 +832,20 @@ class _SendSheetState extends State<SendSheet> {
                         final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
                         // final String paperWalletAccount = "nano_1i4fcujt49de3mio9eb9y5jakw8o9m1za6ntidxn4nkwgnunktpy54z1ma58";
                         if (!mounted) return;
-                        // final BranchResponse<dynamic> giftCardItem = await sl<GiftCards>().createGiftCard(
-                        //   context,
-                        //   paperWalletSeed: paperWalletSeed,
-                        //   amountRaw: amountRaw,
-                        //   memo: _memoController!.text,
-                        // );
-
-                        // if (giftCardItem.success) {
-                        //   link = giftCardItem.result as String;
-                        //   formattedAddress = paperWalletAccount;
-                        // } else {
-                        //   UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationError, context);
-                        //   return;
-                        // }
-                        var giftCardItem = await sl<GiftCards>().createSplitGiftCardLink(
+                        final BranchResponse<dynamic> giftCardItem = await sl<GiftCards>().createGiftCard(
                           context,
                           paperWalletSeed: paperWalletSeed,
                           amountRaw: amountRaw,
                           memo: _memoController!.text,
                         );
+
+                        if (giftCardItem.success) {
+                          link = giftCardItem.result as String;
+                          formattedAddress = paperWalletAccount;
+                        } else {
+                          UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationError, context);
+                          return;
+                        }
                       }
 
                       bool isMaxSend = false;
