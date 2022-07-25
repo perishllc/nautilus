@@ -55,7 +55,7 @@ class UserDataUtil {
       try {
         fin = uriParser(data);
       } catch (e) {
-        print(e);
+        sl.get<Logger>().e(e);
       }
       if (fin is Address && fin.isValid()) {
         return fin;

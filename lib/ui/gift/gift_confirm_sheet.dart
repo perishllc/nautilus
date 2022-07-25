@@ -297,30 +297,54 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       _showAnimation(context);
 
       // create link:
-      final BranchUniversalObject buo = BranchUniversalObject(
-          canonicalIdentifier: 'flutter/branch',
-          title: 'Nautilus Gift Card',
-          contentDescription: 'Get the app to open this gift card!',
-          keywords: ['Nautilus', "Gift Card"],
-          publiclyIndex: true,
-          locallyIndex: true,
-          contentMetadata: BranchContentMetaData()
-            ..addCustomMetadata('seed', widget.paperWalletSeed)
-            ..addCustomMetadata('address', widget.destination)
-            ..addCustomMetadata('memo', widget.memo)
-            ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
-            ..addCustomMetadata('signature', "")
-            ..addCustomMetadata('nonce', "")
-            ..addCustomMetadata('split_amount_raw', widget.splitAmountRaw)
-            ..addCustomMetadata('amount_raw', widget.amountRaw));
+      // final BranchUniversalObject buo = BranchUniversalObject(
+      //     canonicalIdentifier: 'flutter/branch',
+      //     title: 'Nautilus Gift Card',
+      //     contentDescription: 'Get the app to open this gift card!',
+      //     keywords: ['Nautilus', "Gift Card"],
+      //     publiclyIndex: true,
+      //     locallyIndex: true,
+      //     contentMetadata: BranchContentMetaData()
+      //       ..addCustomMetadata('seed', widget.paperWalletSeed)
+      //       ..addCustomMetadata('address', widget.destination)
+      //       ..addCustomMetadata('memo', widget.memo)
+      //       ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
+      //       ..addCustomMetadata('signature', "")
+      //       ..addCustomMetadata('nonce', "")
+      //       ..addCustomMetadata('amount_raw', widget.amountRaw));
 
-      final BranchLinkProperties lp = BranchLinkProperties(
-          //alias: 'flutterplugin', //define link url,
-          channel: 'nautilusapp',
-          feature: 'gift',
-          stage: 'new share');
+      // final BranchLinkProperties lp = BranchLinkProperties(
+      //     //alias: 'flutterplugin', //define link url,
+      //     channel: 'nautilusapp',
+      //     feature: 'gift',
+      //     stage: 'new share');
 
-      final BranchResponse branchResponse = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+      // final BranchResponse branchResponse = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+
+      BranchResponse<dynamic>? branchResponse;
+
+      if (widget.splitAmountRaw.isNotEmpty) {
+        if (animationOpen) {
+          Navigator.of(context).pop();
+        }
+        Navigator.of(context).pop();
+        UIUtil.showSnackbar("Split Gift Cards are still a WIP!", context, durationMs: 5000);
+        return;
+        // var resp = await sl<GiftCards>().createSplitGiftCardLink(
+        //   context,
+        //   paperWalletSeed: widget.paperWalletSeed,
+        //   amountRaw: widget.amountRaw,
+        //   splitAmountRaw: widget.splitAmountRaw,
+        //   memo: widget.memo,
+        // );
+      } else {
+        branchResponse = await sl<GiftCards>().createGiftCard(
+          context,
+          paperWalletSeed: widget.paperWalletSeed,
+          amountRaw: widget.amountRaw,
+          memo: widget.memo,
+        );
+      }
 
       // send funds:
       ProcessResponse? resp;

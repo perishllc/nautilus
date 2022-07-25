@@ -6,6 +6,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_branch_sdk/src/objects/branch_universal_object.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
@@ -830,20 +831,27 @@ class _SendSheetState extends State<SendSheet> {
                         paperWalletSeed = NanoSeeds.generateSeed();
                         final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
                         // final String paperWalletAccount = "nano_1i4fcujt49de3mio9eb9y5jakw8o9m1za6ntidxn4nkwgnunktpy54z1ma58";
-                        final giftCardItem = await sl<GiftCards>().createGiftCard(
+                        if (!mounted) return;
+                        // final BranchResponse<dynamic> giftCardItem = await sl<GiftCards>().createGiftCard(
+                        //   context,
+                        //   paperWalletSeed: paperWalletSeed,
+                        //   amountRaw: amountRaw,
+                        //   memo: _memoController!.text,
+                        // );
+
+                        // if (giftCardItem.success) {
+                        //   link = giftCardItem.result as String;
+                        //   formattedAddress = paperWalletAccount;
+                        // } else {
+                        //   UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationError, context);
+                        //   return;
+                        // }
+                        var giftCardItem = await sl<GiftCards>().createSplitGiftCardLink(
                           context,
                           paperWalletSeed: paperWalletSeed,
                           amountRaw: amountRaw,
                           memo: _memoController!.text,
                         );
-
-                        if (giftCardItem.success) {
-                          link = giftCardItem.result as String;
-                          formattedAddress = paperWalletAccount;
-                        } else {
-                          UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationError, context);
-                          return;
-                        }
                       }
 
                       bool isMaxSend = false;

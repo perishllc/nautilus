@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
@@ -107,7 +108,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
       // if handoffItem.exact is false, we should allow the user to change the amount to send to >= amount
       if (!handoffItem.exact && mounted) {
         // TODO:
-        print("HandoffItem exact is false: unsupported handoff flow!");
+        sl.get<Logger>().e("HandoffItem exact is false: unsupported handoff flow!");
         return;
       }
 

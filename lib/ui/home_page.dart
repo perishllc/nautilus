@@ -209,7 +209,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  Future<void> _branchGiftDialog({required String seed, String memo = "", String amountRaw = "", String senderAddress = "", String splitAmountRaw = ""}) async {
+  Future<void> _branchGiftDialog({required String seed, String memo = "", String amountRaw = "", String senderAddress = ""}) async {
     final String supposedAmount = getRawAsThemeAwareAmount(context, amountRaw);
 
     String? userOrSendAddress;
@@ -228,229 +228,119 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     try {
       if (balance != BigInt.zero) {
         String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
-        print(splitAmountRaw);
-
-        if (splitAmountRaw.isEmpty) {
-          // show dialog with option to refund to sender:
-          switch (await showDialog<int>(
-              barrierDismissible: false,
-              context: context,
-              barrierColor: StateContainer.of(context).curTheme.barrier,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(
-                    AppLocalization.of(context)!.giftAlert,
-                    style: AppStyles.textStyleDialogHeader(context),
-                  ),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Text("${AppLocalization.of(context)!.importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: "${AppLocalization.of(context)!.giftFrom}: ",
-                          style: AppStyles.textStyleParagraph(context),
-                          children: [
-                            TextSpan(
-                              text: "${userOrSendAddress!}\n",
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (memo.isNotEmpty)
-                        Text(
-                          "${AppLocalization.of(context)!.giftMessage}: $memo\n",
-                          style: AppStyles.textStyleParagraph(context),
-                        ),
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: "${AppLocalization.of(context)!.giftAmount}: ",
-                          style: AppStyles.textStyleParagraph(context),
-                          children: [
-                            TextSpan(
-                              text: getThemeAwareRawAccuracy(context, balance.toString()),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            displayCurrencySymbol(
-                              context,
-                              AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            TextSpan(
-                              text: actualAmount,
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  actionsAlignment: MainAxisAlignment.end,
-                  actions: <Widget>[
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 0);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context)!.refund,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
+        // show dialog with option to refund to sender:
+        switch (await showDialog<int>(
+            barrierDismissible: false,
+            context: context,
+            barrierColor: StateContainer.of(context).curTheme.barrier,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(
+                  AppLocalization.of(context)!.giftAlert,
+                  style: AppStyles.textStyleDialogHeader(context),
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Text("${AppLocalization.of(context)!.importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
+                    RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        text: "${AppLocalization.of(context)!.giftFrom}: ",
+                        style: AppStyles.textStyleParagraph(context),
+                        children: [
+                          TextSpan(
+                            text: "${userOrSendAddress!}\n",
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                        ],
                       ),
                     ),
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 1);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context)!.receive,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
+                    if (memo.isNotEmpty)
+                      Text(
+                        "${AppLocalization.of(context)!.giftMessage}: $memo\n",
+                        style: AppStyles.textStyleParagraph(context),
+                      ),
+                    RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        text: "${AppLocalization.of(context)!.giftAmount}: ",
+                        style: AppStyles.textStyleParagraph(context),
+                        children: [
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, balance.toString()),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          displayCurrencySymbol(
+                            context,
+                            AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          TextSpan(
+                            text: actualAmount,
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                        ],
                       ),
                     ),
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 2);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context)!.close,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
-                      ),
-                    )
                   ],
-                );
-              })) {
-            case 2:
-              break;
-            case 1:
-              // transfer to this wallet:
-              // await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, StateContainer.of(context).wallet);
-              await AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
-              break;
-            case 0:
-              // refund the gift:
-              await AppTransferOverviewSheet().startAutoRefund(
-                context,
-                seed,
-                senderAddress,
+                ),
+                actionsAlignment: MainAxisAlignment.end,
+                actions: <Widget>[
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, 0);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context)!.refund,
+                        style: AppStyles.textStyleDialogOptions(context),
+                      ),
+                    ),
+                  ),
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, 1);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context)!.receive,
+                        style: AppStyles.textStyleDialogOptions(context),
+                      ),
+                    ),
+                  ),
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, 2);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context)!.close,
+                        style: AppStyles.textStyleDialogOptions(context),
+                      ),
+                    ),
+                  )
+                ],
               );
-              break;
-          }
-        } else {
-          // split the gift:
-          final BigInt? splitAmount = BigInt.tryParse(splitAmountRaw);
-          String amountToSend = splitAmountRaw;
-          // send the remainder if the split amount is greater than the actual gift balance:
-          if (splitAmount == null || splitAmount > balance) {
-            amountToSend = balance.toString();
-          } else {
-            amountToSend = splitAmountRaw;
-            actualAmount = getRawAsThemeAwareFormattedAmount(context, splitAmountRaw);
-          }
-
-          // show dialog with option to refund to sender:
-          switch (await showDialog<int>(
-              barrierDismissible: false,
-              context: context,
-              barrierColor: StateContainer.of(context).curTheme.barrier,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(
-                    AppLocalization.of(context)!.giftAlert,
-                    style: AppStyles.textStyleDialogHeader(context),
-                  ),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Text("${AppLocalization.of(context)!.importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: "${AppLocalization.of(context)!.giftFrom}: ",
-                          style: AppStyles.textStyleParagraph(context),
-                          children: [
-                            TextSpan(
-                              text: "${userOrSendAddress!}\n",
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (memo.isNotEmpty)
-                        Text(
-                          "${AppLocalization.of(context)!.giftMessage}: $memo\n",
-                          style: AppStyles.textStyleParagraph(context),
-                        ),
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: "${AppLocalization.of(context)!.giftAmount}: ",
-                          style: AppStyles.textStyleParagraph(context),
-                          children: [
-                            TextSpan(
-                              text: getThemeAwareRawAccuracy(context, balance.toString()),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            displayCurrencySymbol(
-                              context,
-                              AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            TextSpan(
-                              text: actualAmount,
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  actionsAlignment: MainAxisAlignment.end,
-                  actions: <Widget>[
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 1);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context)!.receive,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
-                      ),
-                    ),
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 2);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context)!.close,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
-                      ),
-                    )
-                  ],
-                );
-              })) {
-            case 2:
-              break;
-            case 1:
-              // transfer to this wallet:
-              // await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, StateContainer.of(context).wallet);
-              await AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
-              break;
-          }
+            })) {
+          case 2:
+            break;
+          case 1:
+            // transfer to this wallet:
+            // await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, StateContainer.of(context).wallet);
+            await AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
+            break;
+          case 0:
+            // refund the gift:
+            await AppTransferOverviewSheet().startAutoRefund(
+              context,
+              seed,
+              senderAddress,
+            );
+            break;
         }
       } else {
         if (!mounted) return;
@@ -1497,8 +1387,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           seed: StateContainer.of(context).giftedWalletSeed,
           memo: StateContainer.of(context).giftedWalletMemo,
           amountRaw: StateContainer.of(context).giftedWalletAmountRaw,
-          senderAddress: StateContainer.of(context).giftedWalletSenderAddress,
-          splitAmountRaw: StateContainer.of(context).giftedWalletSplitAmountRaw);
+          senderAddress: StateContainer.of(context).giftedWalletSenderAddress);
     }
   }
 

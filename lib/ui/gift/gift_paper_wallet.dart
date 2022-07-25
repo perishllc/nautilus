@@ -153,7 +153,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
     } else {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = _convertLocalCurrencyToCrypto(_amountController!.text);
+        bananoAmount = _convertLocalCurrencyToCrypto(_amountController!.text).replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
       } else {
         bananoAmount = _amountController!.text.replaceAll(_localCurrencyFormat!.currencySymbol, "").replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
       }
@@ -179,7 +179,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
     if (_splitAmountController!.text.trim().isNotEmpty) {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = _convertLocalCurrencyToCrypto(_splitAmountController!.text);
+        bananoAmount = _convertLocalCurrencyToCrypto(_splitAmountController!.text).replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
       } else {
         bananoAmount =
             _splitAmountController!.text.replaceAll(_localCurrencyFormat!.currencySymbol, "").replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
@@ -401,6 +401,15 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                     }
 
                     final String? memo = _memoController!.text.isNotEmpty ? _memoController!.text : null;
+                    String splitAmountRaw = "";
+
+                    if (_splitAmountController!.text.isNotEmpty) {
+                      if (_localCurrencyMode) {
+                        splitAmountRaw = NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto(_splitAmountController!.text));
+                      } else {
+                        splitAmountRaw = getThemeAwareAmountAsRaw(context, _splitAmountController!.text);
+                      }
+                    }
 
                     Sheets.showAppHeightNineSheet(
                         context: context,
@@ -411,9 +420,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                           amountRaw: _localCurrencyMode
                               ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto(_amountController!.text))
                               : getThemeAwareAmountAsRaw(context, _amountController!.text),
-                          splitAmountRaw: _localCurrencyMode
-                              ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto(_splitAmountController!.text))
-                              : getThemeAwareAmountAsRaw(context, _splitAmountController!.text),
+                          splitAmountRaw: splitAmountRaw,
                         ));
                   }),
                 ],
@@ -607,6 +614,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
           }
           if (!_localCurrencyMode) {
             _amountController!.text = getRawAsThemeAwareAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
+            _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
           } else {
             String localAmount = StateContainer.of(context)
                 .wallet!
@@ -615,6 +623,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
             localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
             localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
             _amountController!.text = _localCurrencyFormat!.currencySymbol + localAmount;
+            _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
           }
         },
       ),

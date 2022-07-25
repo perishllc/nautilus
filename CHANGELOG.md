@@ -1,12 +1,13 @@
 ## v0.4.7 - [2022-07-25]
 #### Added
 - The ability to show a QR code with a gift link on the completion page and gift details menu
-- The ability to split Gift Cards so that they can be dispensed to multiple people
+- WIP: The ability to split Gift Cards so that they can be dispensed to multiple people
 #### Changed
 - Re-worked the gift card completion screen
 #### Fixed
 - Re-enabled insufficent balance check on the send screen
 - Fixes for gift card creation
+- Fixed QR code scanning raw address
 ## v0.4.6 - [2022-07-24]
 #### Fixed
 - Fixed loading animation when switching between accounts

@@ -3,6 +3,7 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -22,7 +23,6 @@ class GiftCards {
     required String paperWalletSeed,
     String? amountRaw,
     String? memo,
-    String? splitAmountRaw,
   }) async {
     final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
 
@@ -53,39 +53,39 @@ class GiftCards {
     return response;
   }
 
-  Future<BranchResponse<dynamic>> createSplitGiftCard(
-    BuildContext context, {
-    required String paperWalletSeed,
-    String? amountRaw,
-    String? memo
-  }) async {
+  Future<String> createSplitGiftCardLink(BuildContext context,
+      {required String paperWalletSeed, String? amountRaw, String? splitAmountRaw, String? memo}) async {
     final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
+    sl<AccountService>().createGiftCard(seed: paperWalletSeed, requestingAccount: paperWalletAccount, memo: memo, splitAmountRaw: splitAmountRaw);
 
-    final BranchUniversalObject buo = BranchUniversalObject(
-        canonicalIdentifier: 'flutter/branch',
-        //canonicalUrl: '',
-        title: 'Nautilus Gift Card',
-        contentDescription: 'Get the app to open this gift card!',
-        keywords: ['Nautilus', "Gift Card"],
-        publiclyIndex: true,
-        locallyIndex: true,
-        contentMetadata: BranchContentMetaData()
-          ..addCustomMetadata('seed', paperWalletSeed)
-          ..addCustomMetadata('address', paperWalletAccount)
-          ..addCustomMetadata('memo', memo ?? "")
-          ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
-          ..addCustomMetadata('signature', "")
-          ..addCustomMetadata('nonce', "")
-          ..addCustomMetadata('amount_raw', amountRaw));
+    // final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
 
-    final BranchLinkProperties lp = BranchLinkProperties(
-        //alias: 'flutterplugin', //define link url,
-        channel: 'nautilusapp',
-        feature: 'gift',
-        stage: 'new share');
+    // final BranchUniversalObject buo = BranchUniversalObject(
+    //     canonicalIdentifier: 'flutter/branch',
+    //     //canonicalUrl: '',
+    //     title: 'Nautilus Gift Card',
+    //     contentDescription: 'Get the app to open this gift card!',
+    //     keywords: ['Nautilus', "Gift Card"],
+    //     publiclyIndex: true,
+    //     locallyIndex: true,
+    //     contentMetadata: BranchContentMetaData()
+    //       ..addCustomMetadata('seed', paperWalletSeed)
+    //       ..addCustomMetadata('address', paperWalletAccount)
+    //       ..addCustomMetadata('memo', memo ?? "")
+    //       ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
+    //       ..addCustomMetadata('signature', "")
+    //       ..addCustomMetadata('nonce', "")
+    //       ..addCustomMetadata('amount_raw', amountRaw));
 
-    final BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-    return response;
+    // final BranchLinkProperties lp = BranchLinkProperties(
+    //     //alias: 'flutterplugin', //define link url,
+    //     channel: 'nautilusapp',
+    //     feature: 'gift',
+    //     stage: 'new share');
+
+    // final BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+    // return response;
+    return "";
   }
 
   Future<bool> handleResponse(
@@ -94,7 +94,6 @@ class GiftCards {
     required String destination,
     required String amountRaw,
     required String paperWalletSeed,
-    String splitAmountRaw = "",
     String? hash,
     String? localCurrency,
     String? link,

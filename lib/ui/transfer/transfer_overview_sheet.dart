@@ -329,48 +329,6 @@ class AppTransferOverviewSheet {
     }
   }
 
-  Future<void> startSplitTransfer(BuildContext context, String seed, AppWallet? wallet, String splitAmountRaw) async {
-    // Show loading overlay
-    _animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL, onPoppedCallback: () => _animationOpen = false);
-
-    // sleep for a couple seconds to flex the animation:
-    await Future.delayed(const Duration(seconds: 3));
-    // Get accounts from seed
-    final List<String> accounts = await getAccountsFromSeed(context, seed);
-    try {
-      final AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances(accounts);
-      if (_animationOpen) {
-        Navigator.of(context).pop();
-      }
-      final List<String> accountsToRemove = [];
-      resp.balances!.forEach((String account, AccountBalanceItem balItem) {
-        final BigInt balance = BigInt.parse(balItem.balance!);
-        final BigInt receivable = BigInt.parse(balItem.receivable!);
-        if (balance + receivable == BigInt.zero) {
-          accountsToRemove.add(account);
-        } else {
-          // Update balance of this item
-          privKeyBalanceMap[account]!.balance = balItem.balance;
-          privKeyBalanceMap[account]!.receivable = balItem.receivable;
-        }
-      });
-      accountsToRemove.forEach(privKeyBalanceMap.remove);
-      if (privKeyBalanceMap.isEmpty) {
-        UIUtil.showSnackbar(AppLocalization.of(context)!.transferNoFunds, context);
-        return;
-      }
-
-      await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, wallet);
-    } catch (e) {
-      sl.get<Logger>().e("error", e);
-      if (_animationOpen) {
-        Navigator.of(context).pop();
-      }
-      UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context);
-    }
-  }
-
   Future<void> startAutoRefund(BuildContext context, String seed, String refundAddress) async {
     // Show loading overlay
     _animationOpen = true;

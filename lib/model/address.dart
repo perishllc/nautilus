@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:core';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
 
 // Object to represent an account address or address URI, and provide useful utilities
 
@@ -33,7 +35,7 @@ dynamic uriParser(String value) {
         try {
           finHandoffItem = HandoffItem.fromJson(jsonDecode(decodedHandoff) as Map<String, dynamic>);
         } catch (error) {
-          print(error);
+          sl.get<Logger>().e(error);
         }
       }
 
@@ -49,7 +51,7 @@ dynamic uriParser(String value) {
         try {
           finHandoffItem = HandoffItem.fromJson(jsonDecode(decodedHandoff) as Map<String, dynamic>);
         } catch (error) {
-          print(error);
+          sl.get<Logger>().e(error);
         }
       }
     }
@@ -61,14 +63,14 @@ dynamic uriParser(String value) {
       }
       return finHandoffItem;
     }
-
-    if (finAddress != null) {
-      return Address.fromFields(address: finAddress, amount: finAmount);
-    }
-
-    // something went wrong, return null:
-    return null;
   }
+
+  if (finAddress != null) {
+    return Address.fromFields(address: finAddress, amount: finAmount);
+  }
+
+  // something went wrong, return null:
+  return null;
 }
 
 class Address {

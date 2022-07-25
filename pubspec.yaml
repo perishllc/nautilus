@@ -111,7 +111,7 @@ dependencies:
   file_picker: ^4.6.1
 
   # Deep link support
-  flutter_branch_sdk: ^5.0.0
+  flutter_branch_sdk: ^6.0.0
   uni_links: ^0.5.1
 
   # HTTP client

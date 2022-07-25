@@ -157,10 +157,10 @@ class AccountService {
     // });
 
     // DEV SERVER:
-    _HTTP_PROTO = "http://";
-    _WS_PROTO = "ws://";
-    _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
-    log.d("CONNECTED TO DEV SERVER");
+    // _HTTP_PROTO = "http://";
+    // _WS_PROTO = "ws://";
+    // _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
+    // log.d("CONNECTED TO DEV SERVER");
 
     // ENS:
     const String rpcUrl = 'https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}';
@@ -535,24 +535,30 @@ class AccountService {
     return AccountHistoryResponse.fromJson(response as Map<String, dynamic>);
   }
 
-  // Future<void> createGiftCard({
-  //   String? seed,
-  //   String? account,
-  // }) async {
-  //   final http.Response response = await http.post(Uri.parse("$_SERVER_ADDRESS_GIFT"),
-  //       headers: {"Accept": "application/json"},
-  //       body: json.encode(
-  //         {"seed": seed, "requesting_account": account, },
-  //       ));
-  //   if (response.statusCode == 200) {
-  //     List<FundingResponseItem> alerts;
-  //     alerts = (json.decode(response.body) as List).map((i) => FundingResponseItem.fromJson(i as Map<String, dynamic>)).toList();
-  //     if (alerts.isNotEmpty) {
-  //       return alerts;
-  //     }
-  //   }
-  //   return;
-  // }
+  Future<void> createGiftCard({
+    String? seed,
+    String? requestingAccount,
+    String? splitAmountRaw,
+    String? memo,
+  }) async {
+    final http.Response response = await http.post(Uri.parse(_SERVER_ADDRESS_HTTP),
+        headers: {"Accept": "application/json"},
+        body: json.encode(
+          {
+            "action": "gift_split_create",
+            "seed": seed,
+            "requesting_account": requestingAccount,
+            "split_amount_raw": splitAmountRaw,
+            "memo": memo,
+          },
+        ));
+    if (response.statusCode == 200) {
+      print(response);
+    }
+    print(response.body);
+    print(response.statusCode);
+    return;
+  }
 
   // request money from an account:
   Future<void> requestPayment(

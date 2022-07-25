@@ -173,7 +173,6 @@ class StateContainerState extends State<StateContainer> {
   String giftedWalletAddress = "";
   String giftedWalletAmountRaw = "";
   String giftedWalletMemo = "";
-  String giftedWalletSplitAmountRaw = "";
   late String giftedWalletSenderAddress;
 
   // When wallet is encrypted
@@ -571,9 +570,6 @@ class StateContainerState extends State<StateContainer> {
       });
     });
 
-    // disable tracking:
-    FlutterBranchSdk.disableTracking(true);
-
     // branch deep links:
     _branchSub = FlutterBranchSdk.initSession().listen((Map data) {
       if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) {
@@ -590,7 +586,6 @@ class StateContainerState extends State<StateContainer> {
             giftedWalletAddress = data["address"] as String? ?? "";
             giftedWalletSenderAddress = data["senderAddress"] as String? ?? "";
             giftedWalletMemo = data["memo"] as String? ?? "";
-            giftedWalletSplitAmountRaw = data["split_amount_raw"] as String? ?? "";
           });
           // }
         }
@@ -1451,7 +1446,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> handlePaymentRecord(dynamic data, {bool delay_update = false}) async {
-    print("handling payment_record from: ${data['requesting_account']} : ${data['account']}");
+    sl.get<Logger>().v("handling payment_record from: ${data['requesting_account']} : ${data['account']}");
     final String? amountRaw = data['amount_raw'] as String?;
     final String? requestingAccount = data['requesting_account'] as String?;
     final String? memoEnc = data['memo_enc'] as String?;
@@ -1559,7 +1554,7 @@ class StateContainerState extends State<StateContainer> {
         // we have to check if this payment is already in the db:
         txData = await sl.get<DBHelper>().getTXDataByUUID(uuid!);
         if (txData != null) {
-          print("replacing existing txData for record!");
+          sl.get<Logger>().v("replacing existing txData for record!");
           // this payment is already in the db:
           // merge the two TXData objects;
           final TXData newTXInfo = txData;
@@ -1726,7 +1721,7 @@ class StateContainerState extends State<StateContainer> {
       existingTXData.from_address = txData.from_address;
       await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
     } else {
-      print("adding memo txData to the database!");
+      sl.get<Logger>().v("adding memo txData to the database!");
       // TODO: check for duplicates and remove them:
       // add it since it doesn't exist in the db:
       await sl.get<DBHelper>().addTXData(txData);
@@ -1753,7 +1748,7 @@ class StateContainerState extends State<StateContainer> {
 
   Future<void> handlePaymentACK(dynamic data, {bool delay_update = false}) async {
     // print("handling payment_ack from: ${data['requesting_account']}");
-    print("handling payment_ack");
+    sl.get<Logger>().v("handling payment_ack");
     final String? amountRaw = data['amount_raw'] as String?;
     final String? requestingAccount = data['requesting_account'] as String?;
     final String? memo = data['memo'] as String?;
