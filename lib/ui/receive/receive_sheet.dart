@@ -560,12 +560,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       ),
       inputFormatters: _rawAmount == null
           ? [
-              LengthLimitingTextInputFormatter(13),
-              if (_localCurrencyMode)
-                CurrencyFormatter(
-                    decimalSeparator: _localCurrencyFormat!.symbols.DECIMAL_SEP, commaSeparator: _localCurrencyFormat!.symbols.GROUP_SEP, maxDecimalDigits: 2)
-              else
-                CurrencyFormatter(maxDecimalDigits: NumberUtil.maxDecimalDigits),
+              CurrencyFormatter(currencyFormat: _localCurrencyFormat!),
               LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
             ]
           : [LengthLimitingTextInputFormatter(13)],

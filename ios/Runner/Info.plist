@@ -111,12 +111,12 @@
 	<key>branch_universal_link_domains</key>
 	<array>
 		<string>app.perish.co</string>
-		<string>qho1r-alternate.app.link</string>
+		<string>nautilus-alternate.app.link</string>
 	</array>
 	<key>branch_universal_link_test_domains</key>
 	<array>
 		<string>test-app.perish.co</string>
-		<string>qho1r-alternate.test-app.link</string>
+		<string>nautilus-alternate.test-app.link</string>
 	</array>
 	<key>NSContactsUsageDescription</key>
 	<string>Allow sending to contacts</string>

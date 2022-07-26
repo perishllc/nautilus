@@ -118,11 +118,11 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="app.perish.co" />
                 <!-- example-alternate domain is required for App Links when the Journeys/Web SDK and Deepviews are used inside your website.  -->
-                <data android:scheme="https" android:host="qho1r-alternate.app.link" />
+                <data android:scheme="https" android:host="nautilus-alternate.app.link" />
                 <!-- test mode: -->
                 <data android:scheme="https" android:host="test-app.perish.co" />
-                <data android:scheme="https" android:host="qho1r.test-app.link" />
-                <data android:scheme="https" android:host="qho1r-alternate.test-app.link" />
+                <data android:scheme="https" android:host="nautilus.test-app.link" />
+                <data android:scheme="https" android:host="nautilus-alternate.test-app.link" />
             </intent-filter>
 
         </activity>

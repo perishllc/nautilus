@@ -8,14 +8,17 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 
 /// Input formatter for Crypto/Fiat amounts
 class CurrencyFormatter extends TextInputFormatter {
-  
-  CurrencyFormatter({this.commaSeparator = ",", this.decimalSeparator = ".", this.maxDecimalDigits = NumberUtil.maxDecimalDigits});
-  String commaSeparator;
-  String decimalSeparator;
+  CurrencyFormatter({required this.currencyFormat, this.maxDecimalDigits = NumberUtil.maxDecimalDigits});
+
+  NumberFormat currencyFormat;
   int maxDecimalDigits;
 
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    final String commaSeparator = currencyFormat.symbols.GROUP_SEP;
+    final String decimalSeparator = currencyFormat.symbols.DECIMAL_SEP;
+    // final int maxDecimalDigits = currencyFormat.decimalDigits!;
+
     if (!newValue.text.contains(decimalSeparator) && !newValue.text.contains(commaSeparator)) {
       return newValue;
     }
@@ -56,6 +59,10 @@ class CurrencyFormatter extends TextInputFormatter {
       newText = newValue.text;
     }
 
+    if (splitStr[0].length > 13) {
+      return newValue.copyWith(text: oldValue.text, selection: oldValue.selection);
+    }
+
     // selection:
     final TextSelection oldSelection = oldValue.selection;
     TextSelection newSelection;
@@ -86,7 +93,9 @@ class LocalCurrencyFormatter extends TextInputFormatter {
   bool? active;
 
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.trim() == currencyFormat!.currencySymbol.trim() || newValue.text.isEmpty || newValue.text == " ") {
+    if (newValue.text.trim() == currencyFormat!.currencySymbol.trim() ||
+        newValue.text.isEmpty ||
+        newValue.text == " ") {
       // Return empty string
       return newValue.copyWith(text: "", selection: const TextSelection.collapsed(offset: 0));
     }
@@ -95,7 +104,6 @@ class LocalCurrencyFormatter extends TextInputFormatter {
     if (active!) {
       shouldBeText = currencyFormat!.currencySymbol + shouldBeText;
     }
-    // shouldBeText = shouldBeText.replaceAll(".", currencyFormat!.symbols.DECIMAL_SEP).replaceAll(",", currencyFormat!.symbols.GROUP_SEP);
 
     if (shouldBeText != newValue.text) {
       // find selection:
@@ -140,7 +148,10 @@ String convertLocalToCrypto(String cryptoAmount, NumberFormat? currencyFormat) {
 
 String convertCryptoToLocalAmount(String localAmount, NumberFormat? currencyFormat) {
   // Make local currency = symbol + amount with correct decimal separator
-  final String sanitizedText = localAmount.replaceAll(currencyFormat!.symbols.GROUP_SEP, "").replaceAll(currencyFormat.currencySymbol, "");
+  final String sanitizedText = localAmount
+      .replaceAll(currencyFormat!.symbols.GROUP_SEP, "")
+      .replaceAll(currencyFormat.currencySymbol, "")
+      .replaceAll(" ", "");
   final List<String> splitStrs = sanitizedText.split(currencyFormat.symbols.DECIMAL_SEP);
   final String firstPart = splitStrs[0].trim();
   String secondPart = sanitizedText.split(currencyFormat.symbols.DECIMAL_SEP).length > 1 ? splitStrs[1].trim() : "";
@@ -159,11 +170,14 @@ String convertCryptoToLocalAmount(String localAmount, NumberFormat? currencyForm
   // print("firstPart: " + firstPart);
   // print("secondPart: " + secondPart);
 
-  final NumberFormat formatCurrency =
-      NumberFormat.simpleCurrency(decimalDigits: currencyFormat.decimalDigits, locale: currencyFormat.locale, name: currencyFormat.currencyName);
+  final NumberFormat formatCurrency = NumberFormat.simpleCurrency(
+      decimalDigits: currencyFormat.decimalDigits, locale: currencyFormat.locale, name: currencyFormat.currencyName);
   String formattedCurrency = formatCurrency.format(int.parse(firstPart));
-  formattedCurrency =
-      formattedCurrency.substring(0, formattedCurrency.length - (currencyFormat.decimalDigits! + 1)).replaceAll(currencyFormat.currencySymbol, "").trim();
+
+  formattedCurrency = formattedCurrency
+      .split(currencyFormat.symbols.DECIMAL_SEP)[0]
+      .replaceAll(currencyFormat.currencySymbol, "")
+      .replaceAll(" ", "");
   return formattedCurrency + secondPart;
 }
 
@@ -324,10 +338,13 @@ String getRawAsThemeAwareFormattedAmount(BuildContext context, String? raw) {
   // }
 
   final NumberFormat currencyFormat = NumberFormat.currency(
-      locale: StateContainer.of(context).curCurrency.getLocale().toString(), symbol: StateContainer.of(context).curCurrency.getCurrencySymbol());
+      locale: StateContainer.of(context).curCurrency.getLocale().toString(),
+      symbol: StateContainer.of(context).curCurrency.getCurrencySymbol());
 
-  final String formattedAmount =
-      currencyFormat.format(double.parse(amountStr)).replaceAll(StateContainer.of(context).curCurrency.getCurrencySymbol(), "").trim();
+  final String formattedAmount = currencyFormat
+      .format(double.parse(amountStr))
+      .replaceAll(StateContainer.of(context).curCurrency.getCurrencySymbol(), "")
+      .replaceAll(" ", "");
 
   final String decimalSeparator = currencyFormat.symbols.DECIMAL_SEP;
   // split by the decimal separator:
