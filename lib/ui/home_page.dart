@@ -227,7 +227,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (!mounted) return;
     try {
       if (balance != BigInt.zero) {
-        String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
+        final String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
         // show dialog with option to refund to sender:
         switch (await showDialog<int>(
             barrierDismissible: false,

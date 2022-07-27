@@ -1,7 +1,6 @@
 ## v0.4.9 - [2022-07-28]
-#### Added
-#### Changed
 #### Fixed
+- Local currency fixes
 ## v0.4.8 - [2022-07-26]
 #### Added
 - Split Gift Cards, still unstable but only backend work left to do
