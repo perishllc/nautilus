@@ -295,6 +295,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
     String? branchLink;
     try {
       _showAnimation(context);
+      final String walletAddress = StateContainer.of(context).wallet!.address!;
 
       // create link:
       // final BranchUniversalObject buo = BranchUniversalObject(
@@ -327,7 +328,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         final String paperWalletAccount = NanoUtil.seedToAddress(widget.paperWalletSeed, 0);
         Map resp = await sl<AccountService>().createSplitGiftCard(
           seed: widget.paperWalletSeed,
-          requestingAccount: paperWalletAccount,
+          requestingAccount: walletAddress,
           memo: widget.memo,
           splitAmountRaw: widget.splitAmountRaw,
         ) as Map;

@@ -96,7 +96,7 @@ abstract class BaseTheme {
   BoxShadow? boxShadowButton;
 
   // QR scanner theme
-  OverlayTheme? qrScanTheme;
+  // OverlayTheme? qrScanTheme;
   // App icon (iOS only)
   // AppIconEnum? appIcon;
 }
@@ -106,8 +106,8 @@ abstract class NyanTheme extends BaseTheme {
 }
 
 class NautilusTheme extends BaseTheme {
-  static const nautilusBlue = Color(0xFF4080D7);
-  static const brighterBlue = Color(0xFF80BAC7);
+  static const Color nautilusBlue = Color(0xFF4080D7);
+  static const Color brighterBlue = Color(0xFF80BAC7);
   // some test colors:
   // current: #B999F0
   // darker: #B19CD9
@@ -218,7 +218,7 @@ class NautilusTheme extends BaseTheme {
     spreadRadius: 0,
   );
 
-  OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
+  // OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
   // AppIconEnum? appIcon = AppIconEnum.CARBON;
 }
 
@@ -322,7 +322,7 @@ class TitaniumTheme extends BaseTheme {
   BoxShadow? boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
 
-  OverlayTheme? qrScanTheme = OverlayTheme.TITANIUM;
+  // OverlayTheme? qrScanTheme = OverlayTheme.TITANIUM;
   // AppIconEnum? appIcon = AppIconEnum.TITANIUM;
 }
 
@@ -426,7 +426,7 @@ class IndiumTheme extends BaseTheme {
   BoxShadow? boxShadow = BoxShadow(color: darkDeepBlue.withOpacity(0.1), offset: Offset(0, 5), blurRadius: 15);
   BoxShadow? boxShadowButton = BoxShadow(color: darkDeepBlue.withOpacity(0.2), offset: Offset(0, 5), blurRadius: 15);
 
-  OverlayTheme? qrScanTheme = OverlayTheme.INDIUM;
+  // OverlayTheme? qrScanTheme = OverlayTheme.INDIUM;
 }
 
 class NeptuniumTheme extends BaseTheme {
@@ -528,7 +528,7 @@ class NeptuniumTheme extends BaseTheme {
   BoxShadow? boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
 
-  OverlayTheme? qrScanTheme = OverlayTheme.NEPTUNIUM;
+  // OverlayTheme? qrScanTheme = OverlayTheme.NEPTUNIUM;
 }
 
 class ThoriumTheme extends BaseTheme {
@@ -630,7 +630,7 @@ class ThoriumTheme extends BaseTheme {
   BoxShadow? boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
 
-  OverlayTheme? qrScanTheme = OverlayTheme.THORIUM;
+  // OverlayTheme? qrScanTheme = OverlayTheme.THORIUM;
 }
 
 class CarbonTheme extends BaseTheme {
@@ -740,7 +740,7 @@ class CarbonTheme extends BaseTheme {
     spreadRadius: 0,
   );
 
-  OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
+  // OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
 }
 
 class PurpeliumTheme extends BaseTheme {
@@ -854,7 +854,7 @@ class PurpeliumTheme extends BaseTheme {
     spreadRadius: 0,
   );
 
-  OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
+  // OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
 }
 
 class NyanoTheme extends NyanTheme {
@@ -969,7 +969,7 @@ class NyanoTheme extends NyanTheme {
     spreadRadius: 0,
   );
 
-  OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
+  // OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
 }
 
 class MonochromeTheme extends BaseTheme {
@@ -1066,7 +1066,7 @@ class MonochromeTheme extends BaseTheme {
   BoxShadow? boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
 
-  OverlayTheme? qrScanTheme = OverlayTheme.MONOCHROME;
+  // OverlayTheme? qrScanTheme = OverlayTheme.MONOCHROME;
 }
 
 enum AppIconEnum { NAUTILUS, TITANIUM, INDIUM, NEPTUNIUM, THORIUM, CARBON, PURPELIUM, NYANO }

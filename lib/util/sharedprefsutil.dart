@@ -37,6 +37,7 @@ class SharedPrefsUtil {
   static const String firstcontact_added = 'fkalium_first_c_added';
   static const String notification_enabled = 'fkalium_notification_on';
   static const String contacts_enabled = 'fnautilus_contacts_on';
+  static const String unopened_warning = 'fnautilus_unopened_warning';
   static const String funding_enabled = 'fnautilus_funding_on';
   static const String lock_kalium = 'fkalium_lock_dev';
   static const String kalium_lock_timeout = 'fkalium_lock_timeout';
@@ -301,6 +302,24 @@ class SharedPrefsUtil {
     }
   }
 
+  Future<void> setUnopenedWarningOn(bool value) async {
+    return set(unopened_warning, value);
+  }
+
+  Future<bool> getUnopenedWarningOn() async {
+    // Contacts false by default
+    return await get(unopened_warning, defaultValue: true) as bool;
+  }
+
+  // If contacts have been set by user/app
+  Future<bool> getUnopenedWarningSet() async {
+    if (await get(unopened_warning, defaultValue: null) == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   Future<void> setFundingOn(bool value) async {
     return set(funding_enabled, value);
   }
@@ -476,6 +495,8 @@ class SharedPrefsUtil {
     await prefs.remove(auth_method);
     await prefs.remove(notification_enabled);
     await prefs.remove(contacts_enabled);
+    await prefs.remove(unopened_warning);
+    await prefs.remove(funding_enabled);
     await prefs.remove(lock_kalium);
     await prefs.remove(pin_attempts);
     await prefs.remove(pin_lock_until);

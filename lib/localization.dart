@@ -75,6 +75,14 @@ class AppLocalization {
     return Intl.message('Receive', desc: 'home_receive_cta', name: 'receive');
   }
 
+  String get address {
+    return Intl.message('Address', desc: 'send_warning_address', name: 'address');
+  }
+
+  String get imSure {
+    return Intl.message("I'm Sure", desc: 'send_confirm_warning', name: 'imSure');
+  }
+
   String get request {
     return Intl.message('Request', desc: 'home_request_cta', name: 'request');
   }
@@ -622,6 +630,16 @@ class AppLocalization {
         desc: 'request_send_error', name: 'requestSendError');
   }
 
+  String get errorProcessingGiftCard {
+    return Intl.message("There was an error while processing this gift card, it may not be valid, expired, or empty.",
+        desc: 'gift_process_error', name: 'errorProcessingGiftCard');
+  }
+
+  String get giftProcessSuccess {
+    return Intl.message("Gift Successfully Received, it may take a moment to appear in your wallet.",
+        desc: 'gift_process_success', name: 'giftProcessSuccess');
+  }
+
   String get requestError {
     return Intl.message("Request Failed: This user doesn't appear to have Nautilus installed, or has notifications disabled.",
         desc: 'request_generic_error', name: 'requestError');
@@ -957,6 +975,26 @@ class AppLocalization {
 
   String get warning {
     return Intl.message("Warning", desc: 'settings_logout_alert_title', name: 'warning');
+  }
+
+  String get showUnopenedWarning {
+    return Intl.message('Unopened Warning', desc: 'warn_unsafe_send', name: 'showUnopenedWarning');
+  }
+
+  String get unopenedWarningHeader {
+    return Intl.message('Show Unopened Warning', desc: 'unopened_warning_header', name: 'unopenedWarningHeader');
+  }
+
+  String get unopenedWarningInfo {
+    return Intl.message('Show a warning when sending funds to an unopened account, this is useful because most of the time addresses you send to will have a balance, and sending to a new address may be the result of a typo.', desc: 'unopened_warning_info', name: 'unopenedWarningInfo');
+  }
+
+  String get unopenedWarningWarningHeader {
+    return Intl.message('Account Unopened', desc: 'unopened_warning_warning_header', name: 'unopenedWarningWarningHeader');
+  }
+
+  String get unopenedWarningWarning {
+    return Intl.message('Are you sure this is the right address?\nThis account appears to be unopened\n\nYou can disable this warning in the settings drawer under "Unopened Warning"', desc: 'unopened_warning_warning', name: 'unopenedWarningWarning');
   }
 
   String get logoutDetail {
@@ -1414,6 +1452,10 @@ You can also set a Split amount to distribute from the gift card rather than the
 
   String get showLinkQR {
     return Intl.message("Show Link QR", desc: 'show_link_qr', name: 'showGiftQR');
+  }
+
+  String get showQR {
+    return Intl.message("Show QR Code", desc: 'show_qr', name: 'showQR');
   }
 
   String get copyLink {

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:math' as math;
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -14,22 +13,19 @@ import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/share_card.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
-import 'package:share_plus/share_plus.dart';
 
-class GiftQRSheet extends StatefulWidget {
-  const GiftQRSheet({required this.link}) : super();
+class BackupSeedQRSheet extends StatefulWidget {
+  const BackupSeedQRSheet({required this.data}) : super();
   // final Widget? qrWidget;
-  final String link;
+  final String data;
 
-  _GiftQRSheetStateState createState() => _GiftQRSheetStateState();
+  _BackupSeedQRSheetStateState createState() => _BackupSeedQRSheetStateState();
 }
 
-class _GiftQRSheetStateState extends State<GiftQRSheet> {
+class _BackupSeedQRSheetStateState extends State<BackupSeedQRSheet> {
   GlobalKey? shareCardKey;
   ByteData? shareImageData;
   // Address copied items
@@ -74,48 +70,12 @@ class _GiftQRSheetStateState extends State<GiftQRSheet> {
 
     _sendAmountFocusNode = FocusNode();
     _sendAmountController = TextEditingController();
-
-    // On amount focus change
-    _sendAmountFocusNode!.addListener(() {
-      if (_sendAmountFocusNode!.hasFocus) {
-        if (_rawAmount != null) {
-          setState(() {
-            _sendAmountController!.text = getRawAsThemeAwareAmount(context, _rawAmount);
-            _rawAmount = null;
-          });
-        }
-        // if (quickSendAmount != null) {
-        //   _sendAmountController.text = "";
-        //   setState(() {
-        //     quickSendAmount = null;
-        //   });
-        // }
-        setState(() {
-          _amountHint = null;
-        });
-      } else {
-        setState(() {
-          _amountHint = "";
-        });
-
-        // // Redraw QR?
-        // String raw;
-        // if (_localCurrencyMode) {
-        //   _lastLocalCurrencyAmount = _sendAmountController.text;
-        //   _lastCryptoAmount = _convertLocalCurrencyToCrypto();
-        //   raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
-        // } else {
-        //   raw = _sendAmountController.text.length > 0 ? NumberUtil.getAmountAsRaw(_sendAmountController.text) : '';
-        // }
-        // this.paintQrCode(address: widget.address, amount: raw);
-      }
-    });
     // qrWidget = widget.qrWidget;
   }
 
   @override
   Widget build(BuildContext context) {
-    paintQrCode(widget.link);
+    paintQrCode(widget.data);
     return SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: GestureDetector(
@@ -288,9 +248,9 @@ class _GiftQRSheetStateState extends State<GiftQRSheet> {
                             context,
                             // Copy Address Button
                             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.copyLink,
+                            _addressCopied ? AppLocalization.of(context)!.seedCopiedShort : AppLocalization.of(context)!.copySeed,
                             Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                          Clipboard.setData(ClipboardData(text: widget.link));
+                          Clipboard.setData(ClipboardData(text: widget.data));
                           setState(() {
                             // Set copied style
                             _addressCopied = true;
@@ -314,35 +274,11 @@ class _GiftQRSheetStateState extends State<GiftQRSheet> {
                             context,
                             // Share Address Button
                             AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context)!.shareLink,
+                            AppLocalization.of(context)!.close,
                             Dimens.BUTTON_BOTTOM_DIMENS,
-                            disabled: _showShareCard, onPressed: () {
-                          final String receiveCardFileName = "share_${widget.link.hashCode}.png";
-                          getApplicationDocumentsDirectory().then((Directory directory) {
-                            final String filePath = "${directory.path}/$receiveCardFileName";
-                            final File f = File(filePath);
-                            setState(() {
-                              _showShareCard = true;
-                            });
-                            Future.delayed(const Duration(milliseconds: 50), () {
-                              if (_showShareCard) {
-                                _capturePng().then((Uint8List? byteData) {
-                                  if (byteData != null) {
-                                    f.writeAsBytes(byteData).then((File file) {
-                                      UIUtil.cancelLockEvent();
-                                      Share.shareFiles([filePath], text: StateContainer.of(context).wallet!.address);
-                                    });
-                                  } else {
-                                    // TODO - show a something went wrong message
-                                  }
-                                  setState(() {
-                                    _showShareCard = false;
-                                  });
-                                });
-                              }
-                            });
-                          });
-                        }),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            }),
                       ],
                     ),
                     // Row(

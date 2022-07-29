@@ -6,7 +6,7 @@ description: Nautilus - Fast, Robust & Secure NANO Wallet.
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.4.9+56
+version: 0.5.0+57
 
 environment:
   sdk: '>=2.12.0 < 3.0.0'
@@ -51,7 +51,8 @@ dependencies:
   package_info: ^2.0.2
 
   # Device-specific info
-  device_info: ^2.0.3
+  # device_info: ^2.0.3
+  device_info_plus: ^3.2.4
 
   # JSON Serialization
   json_annotation: ^4.6.0
@@ -190,7 +191,8 @@ dependencies:
   searchbar_animation: ^0.0.2
   substring_highlight: ^1.0.33
 
-# dependency_overrides:
+dependency_overrides:
+  ffi: ^2.0.1
   # analyzer: ^4.1.0
   # dart_style: ^2.2.3
   # flutter_launcher_icons:
@@ -215,6 +217,7 @@ dev_dependencies:
   # screenshot generation:
   path: ^1.8.1
   file: ^6.1.2
+  flutter_launcher_icons: ^0.9.3
   
   # the next two/three packages have a dependency conflict and can't both be enabled at the same time
   # though the second is just a command line tool for updating /changing the application icons
@@ -325,9 +328,10 @@ flutter:
     - assets/animations/world-lines.json
     - assets/animations/world-plane.json
     # other assets
-    - assets/store/known.json
-    - assets/store/reps.json
-    - assets/logo-square.png
+    # - assets/store/known.json
+    # - assets/store/reps.json
+    # - assets/logo-square.png
+    - assets/logo.png
     # nyano assets:
     - assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png
     # changelog:

@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -35,19 +36,22 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     //Container for the animation
-                    SizedBox(
+                    Container(
+                      margin: const EdgeInsets.only(
+                        bottom: 30,
+                      ),
                       // Width/Height ratio for the animation is needed because BoxFit is not working as expected
                       width: double.infinity,
-                      height: MediaQuery.of(context).size.width * 5 / 8,
+                      height: MediaQuery.of(context).size.width * 4 / 8,
                       child: const Center(
-                        child: Image(image: AssetImage("assets/logo-square.png")),
+                        child: Image(image: AssetImage("assets/logo.png")),
                       ),
                     ),
-                    
+
                     Container(
                       color: Colors.white,
                       // padding: EdgeInsets.zero,
-                      padding: const EdgeInsets.only(top: 5, bottom: 5),
+                      // padding: const EdgeInsets.only(top: 5, bottom: 5),
                       width: double.infinity,
                       child: TextLiquidFill(
                         text: "NAUTILUS",

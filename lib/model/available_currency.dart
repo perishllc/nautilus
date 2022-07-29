@@ -281,7 +281,7 @@ class AvailableCurrency extends SettingSelectionItem {
       case "SEK":
         return Locale("sv", "SE");
       case "SGD":
-        return Locale("zh", "SG");
+        return Locale("en", "SG");
       case "THB":
         return Locale("th", "TH");
       case "TRY":

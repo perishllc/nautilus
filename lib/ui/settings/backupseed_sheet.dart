@@ -8,9 +8,11 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/backupseed_qr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/mnemonic_display.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/plainseed_display.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
@@ -189,6 +191,18 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                     }),
                   ],
                 ),
+              Row(
+                children: <Widget>[
+                  AppButton.buildAppButton(
+                      context,
+                      // Show QR Button
+                      AppButtonType.PRIMARY_OUTLINE,
+                      AppLocalization.of(context)!.showQR,
+                      Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                    Sheets.showAppHeightEightSheet(context: context, widget: BackupSeedQRSheet(data: _seed!));
+                  }),
+                ],
+              ),
             ],
           ),
         ));

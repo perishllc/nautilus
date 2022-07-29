@@ -31,15 +31,16 @@ class GiftCards {
         title: 'Nautilus Gift Card',
         contentDescription: 'Get the app to open this gift card!',
         keywords: ['Nautilus', "Gift Card"],
-        publiclyIndex: true,
+        publiclyIndex: false,
         locallyIndex: true,
         contentMetadata: BranchContentMetaData()
           ..addCustomMetadata('seed', paperWalletSeed)
           ..addCustomMetadata('address', paperWalletAccount)
           ..addCustomMetadata('memo', memo ?? "")
-          ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
+          ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: remove this line
           ..addCustomMetadata('signature', "")
           ..addCustomMetadata('nonce', "")
+          ..addCustomMetadata('sender_address', StateContainer.of(context).wallet!.address) // TODO: sign these:
           ..addCustomMetadata('amount_raw', amountRaw));
 
     final BranchLinkProperties lp = BranchLinkProperties(

@@ -9,7 +9,6 @@ import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/gift/gift_qr_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/gift/gift_qr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
@@ -59,9 +58,9 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
       bottomMargin: 20,
       controller: _messageController,
       cursorColor: StateContainer.of(context).curTheme.primary,
-      // inputFormatters: [
-      //   LengthLimitingTextInputFormatter(48),
-      // ],
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(64),
+      ],
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
@@ -234,30 +233,6 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                     }),
                   ],
                 ),
-                // Row(
-                //   children: <Widget>[
-                //     AppButton.buildAppButton(
-                //         context,
-                //         // copy link Button
-                //         _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                //         _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.copyLink,
-                //         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                //       Clipboard.setData(ClipboardData(text: widget.link));
-                //       setState(() {
-                //         // Set copied style
-                //         _linkCopied = true;
-                //       });
-                //       if (_linkCopiedTimer != null) {
-                //         _linkCopiedTimer!.cancel();
-                //       }
-                //       _linkCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                //         setState(() {
-                //           _linkCopied = false;
-                //         });
-                //       });
-                //     }),
-                //   ],
-                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -266,7 +241,7 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                         // copy link button
                         _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
                         _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.showLinkQR,
-                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                        Dimens.BUTTON_BOTTOM_EXCEPTION_DIMENS, onPressed: () async {
                       Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: widget.link));
                     }),
                   ],

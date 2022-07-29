@@ -1,8 +1,7 @@
 import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_vibrate/flutter_vibrate.dart';
-import 'package:device_info/device_info.dart';
 
 /// Utilities for haptic feedback
 class HapticUtil {
@@ -11,8 +10,9 @@ class HapticUtil {
     if (!Platform.isIOS) {
       return false;
     }
-    IosDeviceInfo deviceInfo = await DeviceInfoPlugin().iosInfo;
-    String deviceIdentifier = deviceInfo.utsname.machine;
+    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+    final String? deviceIdentifier = iosInfo.utsname.machine;
     switch (deviceIdentifier) {
       case 'iPhone5,1': // iPhone 5
       case 'iPhone5,2': // iPhone 5
@@ -62,7 +62,7 @@ class HapticUtil {
   /// iOS-only, since Android already gives us feedback on success
   Future<void> fingerprintSucess() async {
     if (Platform.isIOS) {
-      Future.delayed(Duration(milliseconds: 50), () => success());
+      Future.delayed(const Duration(milliseconds: 50), () => success());
     }
   }
 }

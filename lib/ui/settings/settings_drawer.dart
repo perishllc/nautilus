@@ -93,6 +93,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   AuthenticationMethod _curAuthMethod = AuthenticationMethod(AuthMethod.BIOMETRICS);
   NotificationSetting _curNotificiationSetting = NotificationSetting(NotificationOptions.ON);
   ContactsSetting _curContactsSetting = ContactsSetting(ContactsOptions.OFF);
+  ContactsSetting _curUnopenedWarningSetting = ContactsSetting(ContactsOptions.ON);
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
   NyaniconSetting _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
   FundingSetting _curFundingSetting = FundingSetting(FundingOptions.SHOW);
@@ -519,6 +520,70 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       await sl.get<SharedPrefsUtil>().setContactsOn(false);
       EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: false));
     }
+  }
+
+  Future<void> _unopenedWarningDialog() async {
+    final ContactsOptions? picked = await showDialog<ContactsOptions>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            title:             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  AppLocalization.of(context)!.unopenedWarningHeader,
+                  style: AppStyles.textStyleDialogHeader(context),
+                ),
+                AppDialogs.infoButton(
+                  context,
+                  () {
+                    AppDialogs.showInfoDialog(context, AppLocalization.of(context)!.unopenedWarningHeader, AppLocalization.of(context)!.unopenedWarningInfo);
+                  },
+                )
+              ],
+            ),
+            children: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, ContactsOptions.ON);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context)!.onStr,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, ContactsOptions.OFF);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context)!.off,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
+
+    if (picked == null) {
+      return;
+    }
+
+    if (picked == ContactsOptions.ON) {
+      await sl.get<SharedPrefsUtil>().setUnopenedWarningOn(true);
+    } else {
+      await sl.get<SharedPrefsUtil>().setUnopenedWarningOn(false);
+    }
+    setState(() {
+      _curUnopenedWarningSetting = ContactsSetting(picked);
+    });
   }
 
   Future<void> _fundingDialog() async {
@@ -1314,6 +1379,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         ),
         AppSettings.buildSettingsListItemDoubleLine(
             context, AppLocalization.of(context)!.showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        AppSettings.buildSettingsListItemDoubleLine(
+            context, AppLocalization.of(context)!.showUnopenedWarning, _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
         Divider(
           height: 2,
           color: StateContainer.of(context).curTheme.text15,

@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:ens_dart/ens_dart.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
@@ -157,10 +159,10 @@ class AccountService {
     // });
 
     // DEV SERVER:
-    // _HTTP_PROTO = "http://";
-    // _WS_PROTO = "ws://";
-    // _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
-    // log.d("CONNECTED TO DEV SERVER");
+    _HTTP_PROTO = "http://";
+    _WS_PROTO = "ws://";
+    _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
+    log.d("CONNECTED TO DEV SERVER");
 
     // ENS:
     const String rpcUrl = 'https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}';
@@ -461,11 +463,6 @@ class AccountService {
     return decoded;
   }
 
-  // TODO: why is this needed?
-  Future<void> dummyAPICall() async {
-    await http.get(Uri.parse(_SERVER_ADDRESS_HTTP), headers: {"Accept": "application/json"});
-  }
-
   Future<dynamic> checkUsernameUrl(String URL) async {
     final http.Response response = await http.get(Uri.parse(URL), headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {
@@ -556,6 +553,60 @@ class AccountService {
       return jsonDecode(response.body);
     } else {
       return {"success": false};
+    }
+  }
+
+  Future<String?> _getDeviceUUID() async {
+    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if (Platform.isIOS) {
+      final IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+      return iosDeviceInfo.identifierForVendor;
+    } else if (Platform.isAndroid) {
+      final AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
+      return androidDeviceInfo.androidId;
+    }
+    return null;
+  }
+
+  Future<dynamic> giftCardInfo({
+    String? giftUUID,
+    String? requestingAccount,
+  }) async {
+    final http.Response response = await http.post(Uri.parse(_SERVER_ADDRESS_HTTP),
+        headers: {"Accept": "application/json"},
+        body: json.encode(
+          {
+            "action": "gift_info",
+            "gift_uuid": giftUUID,
+            "requesting_account": requestingAccount,
+            "requesting_device_uuid": await _getDeviceUUID(),
+          },
+        ));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      return {"error": "something went wrong"};
+    }
+  }
+
+  Future<dynamic> giftCardClaim({
+    String? giftUUID,
+    String? requestingAccount,
+  }) async {
+    final http.Response response = await http.post(Uri.parse(_SERVER_ADDRESS_HTTP),
+        headers: {"Accept": "application/json"},
+        body: json.encode(
+          {
+            "action": "gift_claim",
+            "gift_uuid": giftUUID,
+            "requesting_account": requestingAccount,
+            "requesting_device_uuid": await _getDeviceUUID(),
+          },
+        ));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      return {"error": "something went wrong"};
     }
   }
 

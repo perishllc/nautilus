@@ -70,7 +70,6 @@ import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:quiver/strings.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 import 'package:uuid/uuid.dart';
@@ -209,216 +208,371 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  Future<void> _branchGiftDialog({required String seed, String memo = "", String amountRaw = "", String senderAddress = ""}) async {
+  Future<void> _branchGiftDialog({String seed = "", String memo = "", String amountRaw = "", String fromAddress = "", String giftUUID = ""}) async {
     final String supposedAmount = getRawAsThemeAwareAmount(context, amountRaw);
 
-    String? userOrSendAddress;
+    String? userOrFromAddress;
 
     // change address to username if it exists:
-    final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(senderAddress);
+    final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(fromAddress);
     if (user != null) {
-      userOrSendAddress = user.getDisplayName();
+      userOrFromAddress = user.getDisplayName();
     } else {
-      userOrSendAddress = senderAddress;
+      userOrFromAddress = fromAddress;
     }
 
-    // check if there's actually any nano to claim:
-    final BigInt balance = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
-    if (!mounted) return;
+    bool shouldShowEmptyDialog = false;
+    bool shouldShowErrorDialog = false;
+
     try {
-      if (balance != BigInt.zero) {
-        final String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
-        // show dialog with option to refund to sender:
-        switch (await showDialog<int>(
-            barrierDismissible: false,
-            context: context,
-            barrierColor: StateContainer.of(context).curTheme.barrier,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(
-                  AppLocalization.of(context)!.giftAlert,
-                  style: AppStyles.textStyleDialogHeader(context),
-                ),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Text("${AppLocalization.of(context)!.importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
-                    RichText(
-                      textAlign: TextAlign.start,
-                      text: TextSpan(
-                        text: "${AppLocalization.of(context)!.giftFrom}: ",
-                        style: AppStyles.textStyleParagraph(context),
-                        children: [
-                          TextSpan(
-                            text: "${userOrSendAddress!}\n",
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                        ],
+      BigInt balance = BigInt.parse(amountRaw);
+
+      if (giftUUID.isEmpty) {
+        // check if there's actually any nano to claim:
+        if (seed.isNotEmpty) {
+          balance = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
+        }
+        if (!mounted) return;
+
+        if (balance != BigInt.zero) {
+          final String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
+          // show dialog with option to refund to sender:
+          switch (await showDialog<int>(
+              barrierDismissible: false,
+              context: context,
+              barrierColor: StateContainer.of(context).curTheme.barrier,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(
+                    AppLocalization.of(context)!.giftAlert,
+                    style: AppStyles.textStyleDialogHeader(context),
+                  ),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text("${AppLocalization.of(context)!.importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
+                      RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: "${AppLocalization.of(context)!.giftFrom}: ",
+                          style: AppStyles.textStyleParagraph(context),
+                          children: [
+                            TextSpan(
+                              text: "${userOrFromAddress!}\n",
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (memo.isNotEmpty)
+                        Text(
+                          "${AppLocalization.of(context)!.giftMessage}: $memo\n",
+                          style: AppStyles.textStyleParagraph(context),
+                        ),
+                      RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: "${AppLocalization.of(context)!.giftAmount}: ",
+                          style: AppStyles.textStyleParagraph(context),
+                          children: [
+                            TextSpan(
+                              text: getThemeAwareRawAccuracy(context, balance.toString()),
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                            displayCurrencySymbol(
+                              context,
+                              AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                            TextSpan(
+                              text: actualAmount,
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  actionsAlignment: MainAxisAlignment.end,
+                  actions: <Widget>[
+                    AppSimpleDialogOption(
+                      onPressed: () {
+                        Navigator.pop(context, 0);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          AppLocalization.of(context)!.refund,
+                          style: AppStyles.textStyleDialogOptions(context),
+                        ),
                       ),
                     ),
-                    if (memo.isNotEmpty)
-                      Text(
-                        "${AppLocalization.of(context)!.giftMessage}: $memo\n",
-                        style: AppStyles.textStyleParagraph(context),
-                      ),
-                    RichText(
-                      textAlign: TextAlign.start,
-                      text: TextSpan(
-                        text: "${AppLocalization.of(context)!.giftAmount}: ",
-                        style: AppStyles.textStyleParagraph(context),
-                        children: [
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, balance.toString()),
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                          displayCurrencySymbol(
-                            context,
-                            AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                          TextSpan(
-                            text: actualAmount,
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                        ],
+                    AppSimpleDialogOption(
+                      onPressed: () {
+                        Navigator.pop(context, 1);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          AppLocalization.of(context)!.receive,
+                          style: AppStyles.textStyleDialogOptions(context),
+                        ),
                       ),
                     ),
+                    AppSimpleDialogOption(
+                      onPressed: () {
+                        Navigator.pop(context, 2);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          AppLocalization.of(context)!.close,
+                          style: AppStyles.textStyleDialogOptions(context),
+                        ),
+                      ),
+                    )
                   ],
-                ),
-                actionsAlignment: MainAxisAlignment.end,
-                actions: <Widget>[
-                  AppSimpleDialogOption(
-                    onPressed: () {
-                      Navigator.pop(context, 0);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        AppLocalization.of(context)!.refund,
-                        style: AppStyles.textStyleDialogOptions(context),
-                      ),
-                    ),
-                  ),
-                  AppSimpleDialogOption(
-                    onPressed: () {
-                      Navigator.pop(context, 1);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        AppLocalization.of(context)!.receive,
-                        style: AppStyles.textStyleDialogOptions(context),
-                      ),
-                    ),
-                  ),
-                  AppSimpleDialogOption(
-                    onPressed: () {
-                      Navigator.pop(context, 2);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        AppLocalization.of(context)!.close,
-                        style: AppStyles.textStyleDialogOptions(context),
-                      ),
-                    ),
-                  )
-                ],
+                );
+              })) {
+            case 2:
+              break;
+            case 1:
+              // transfer to this wallet:
+              // await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, StateContainer.of(context).wallet);
+              await AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
+              break;
+            case 0:
+              // refund the gift:
+              await AppTransferOverviewSheet().startAutoRefund(
+                context,
+                seed,
+                fromAddress,
               );
-            })) {
-          case 2:
-            break;
-          case 1:
-            // transfer to this wallet:
-            // await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, StateContainer.of(context).wallet);
-            await AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
-            break;
-          case 0:
-            // refund the gift:
-            await AppTransferOverviewSheet().startAutoRefund(
-              context,
-              seed,
-              senderAddress,
-            );
-            break;
+              break;
+          }
+          return;
+        } else {
+          shouldShowEmptyDialog = true;
         }
       } else {
+        // GIFT UUID is not empty, so we're dealing with gift card v2:
+        // check if there's actually any nano to claim:
+        final String requestingAccount = StateContainer.of(context).wallet!.address!;
+        dynamic res = await sl.get<AccountService>().giftCardInfo(giftUUID: giftUUID, requestingAccount: requestingAccount);
+        final String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
         if (!mounted) return;
-        // show alert that the gift is empty:
-        await showDialog<bool>(
-            context: context,
-            barrierColor: StateContainer.of(context).curTheme.barrier,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(
-                  AppLocalization.of(context)!.giftAlertEmpty,
-                  style: AppStyles.textStyleDialogHeader(context),
-                ),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Text("${AppLocalization.of(context)!.importGiftEmpty}\n\n", style: AppStyles.textStyleParagraph(context)),
-                    RichText(
-                      textAlign: TextAlign.start,
-                      text: TextSpan(
-                        text: "${AppLocalization.of(context)!.giftFrom}: ",
-                        style: AppStyles.textStyleParagraph(context),
-                        children: [
-                          TextSpan(
-                            text: "${userOrSendAddress!}\n",
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                        ],
+        if (res["error"] != null) {
+          shouldShowEmptyDialog = true;
+        } else if (res["success"] != null) {
+          // show alert:
+          // show dialog with option to refund to sender:
+          switch (await showDialog<int>(
+              barrierDismissible: false,
+              context: context,
+              barrierColor: StateContainer.of(context).curTheme.barrier,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(
+                    AppLocalization.of(context)!.giftAlert,
+                    style: AppStyles.textStyleDialogHeader(context),
+                  ),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text("${AppLocalization.of(context)!.importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
+                      RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: "${AppLocalization.of(context)!.giftFrom}: ",
+                          style: AppStyles.textStyleParagraph(context),
+                          children: [
+                            TextSpan(
+                              text: "${userOrFromAddress!}\n",
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (memo.isNotEmpty)
+                        Text(
+                          "${AppLocalization.of(context)!.giftMessage}: $memo\n",
+                          style: AppStyles.textStyleParagraph(context),
+                        ),
+                      RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: "${AppLocalization.of(context)!.giftAmount}: ",
+                          style: AppStyles.textStyleParagraph(context),
+                          children: [
+                            TextSpan(
+                              text: getThemeAwareRawAccuracy(context, balance.toString()),
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                            displayCurrencySymbol(
+                              context,
+                              AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                            TextSpan(
+                              text: actualAmount,
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  actionsAlignment: MainAxisAlignment.end,
+                  actions: <Widget>[
+                    AppSimpleDialogOption(
+                      onPressed: () {
+                        Navigator.pop(context, 0);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          AppLocalization.of(context)!.receive,
+                          style: AppStyles.textStyleDialogOptions(context),
+                        ),
                       ),
                     ),
-                    if (memo.isNotEmpty)
-                      Text(
-                        "${AppLocalization.of(context)!.giftMessage}: $memo\n",
-                        style: AppStyles.textStyleParagraph(context),
+                    AppSimpleDialogOption(
+                      onPressed: () {
+                        Navigator.pop(context, 1);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          AppLocalization.of(context)!.close,
+                          style: AppStyles.textStyleDialogOptions(context),
+                        ),
                       ),
-                    RichText(
-                      textAlign: TextAlign.start,
-                      text: TextSpan(
-                        text: "${AppLocalization.of(context)!.giftAmount}: ",
-                        style: AppStyles.textStyleParagraph(context),
-                        children: [
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, amountRaw),
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                          displayCurrencySymbol(
-                            context,
-                            AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                          TextSpan(
-                            text: supposedAmount,
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                        ],
-                      ),
-                    ),
+                    )
                   ],
-                ),
-                actions: <Widget>[
-                  AppSimpleDialogOption(
-                    onPressed: () {
-                      Navigator.pop(context, false);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        AppLocalization.of(context)!.ok,
-                        style: AppStyles.textStyleDialogOptions(context),
-                      ),
-                    ),
-                  )
-                ],
-              );
-            });
+                );
+              })) {
+            case 0:
+              // transfer to this wallet:
+
+              
+              // show loading animation for ~5 seconds:
+              // push animation to prevent early exit:
+              bool animationOpen = true;
+              AppAnimation.animationLauncher(context, AnimationType.GENERIC, onPoppedCallback: () => animationOpen = false);
+              // sleep to flex the animation a bit:
+              await Future.delayed(const Duration(milliseconds: 500));
+
+              dynamic res = await sl.get<AccountService>().giftCardClaim(giftUUID: giftUUID, requestingAccount: requestingAccount);
+              if (!mounted) return;
+
+              if (res["error"] != null) {
+                // something went wrong, show error:
+                UIUtil.showSnackbar(AppLocalization.of(context)!.errorProcessingGiftCard, context, durationMs: 2000);
+              } else if (res["success"] != null) {
+                // show success:
+                UIUtil.showSnackbar(AppLocalization.of(context)!.giftProcessSuccess, context, durationMs: 2000);
+              }
+
+              if (animationOpen) {
+                // animation is still open, so we need to close it:
+                if (!mounted) return;
+                Navigator.pop(context);
+              }
+
+              break;
+            case 1:
+              // close
+              break;
+          }
+          return;
+        }
       }
-    } catch (e) {
-      log.d("Error processing gift card: $e");
+
+      // if (balance == BigInt.zero && )
+
+    } catch (err) {
+      log.d("Error processing gift card: $err");
+      shouldShowErrorDialog = true;
+    }
+
+    // show alert that the gift is empty:
+    if (shouldShowEmptyDialog) {
+      await showDialog<bool>(
+          context: context,
+          barrierColor: StateContainer.of(context).curTheme.barrier,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(
+                AppLocalization.of(context)!.giftAlertEmpty,
+                style: AppStyles.textStyleDialogHeader(context),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Text("${AppLocalization.of(context)!.importGiftEmpty}\n\n", style: AppStyles.textStyleParagraph(context)),
+                  RichText(
+                    textAlign: TextAlign.start,
+                    text: TextSpan(
+                      text: "${AppLocalization.of(context)!.giftFrom}: ",
+                      style: AppStyles.textStyleParagraph(context),
+                      children: [
+                        TextSpan(
+                          text: "${userOrFromAddress!}\n",
+                          style: AppStyles.textStyleParagraphPrimary(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (memo.isNotEmpty)
+                    Text(
+                      "${AppLocalization.of(context)!.giftMessage}: $memo\n",
+                      style: AppStyles.textStyleParagraph(context),
+                    ),
+                  RichText(
+                    textAlign: TextAlign.start,
+                    text: TextSpan(
+                      text: "${AppLocalization.of(context)!.giftAmount}: ",
+                      style: AppStyles.textStyleParagraph(context),
+                      children: [
+                        TextSpan(
+                          text: getThemeAwareRawAccuracy(context, amountRaw),
+                          style: AppStyles.textStyleParagraphPrimary(context),
+                        ),
+                        displayCurrencySymbol(
+                          context,
+                          AppStyles.textStyleParagraphPrimary(context),
+                        ),
+                        TextSpan(
+                          text: supposedAmount,
+                          style: AppStyles.textStyleParagraphPrimary(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              actions: <Widget>[
+                AppSimpleDialogOption(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                      AppLocalization.of(context)!.ok,
+                      style: AppStyles.textStyleDialogOptions(context),
+                    ),
+                  ),
+                )
+              ],
+            );
+          });
+    }
+
+    if (shouldShowErrorDialog) {
+      if (!mounted) return;
+      UIUtil.showSnackbar(AppLocalization.of(context)!.errorProcessingGiftCard, context, durationMs: 5000);
     }
   }
 
@@ -568,15 +722,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
-  /// Add donations contact if it hasnt already been added
+  // Add donations contact if it hasnt already been added
   Future<void> _addSampleContact() async {
     final bool contactAdded = await sl.get<SharedPrefsUtil>().getFirstContactAdded();
     if (!contactAdded) {
       const String nautilusDonationsNickname = "NautilusDonations";
-      final bool nameExists = await sl.get<DBHelper>().contactExistsWithName(nautilusDonationsNickname);
-      if (nameExists) {
-        return;
-      }
       await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
       final User donationsContact = User(
           nickname: nautilusDonationsNickname,
@@ -1268,12 +1418,14 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     final bool areThereNoSearchResults = unifiedList.isEmpty && _searchController.text.isNotEmpty;
 
+    if (areThereNoSearchResults) {
+      unifiedList.add(const SizedBox());
+    }
+
     if (areThereNoSearchResults != _noSearchResults) {
       setState(() {
         _noSearchResults = areThereNoSearchResults;
       });
-      // not sure why this gets the state to update, but nothing else will :/
-      await sl.get<AccountService>().dummyAPICall();
     }
 
     // create a list of indices to remove:
@@ -1387,7 +1539,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           seed: StateContainer.of(context).giftedWalletSeed,
           memo: StateContainer.of(context).giftedWalletMemo,
           amountRaw: StateContainer.of(context).giftedWalletAmountRaw,
-          senderAddress: StateContainer.of(context).giftedWalletSenderAddress);
+          fromAddress: StateContainer.of(context).giftedWalletFromAddress,
+          giftUUID: StateContainer.of(context).giftedWalletUUID);
+      StateContainer.of(context).giftedWalletUUID = "";
+      StateContainer.of(context).giftedWalletSeed = "";
+      StateContainer.of(context).giftedWalletAmountRaw = "";
+      StateContainer.of(context).giftedWalletMemo = "";
+      StateContainer.of(context).giftedWalletFromAddress = "";
     }
   }
 
@@ -1869,12 +2027,12 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (is_recipient) {
       txData.to_address = StateContainer.of(context).wallet!.address;
       if (txData.is_tx) {
-        txData.record_type = BlockTypes.RECEIVE;
+        txData.sub_type = BlockTypes.RECEIVE;
       }
     } else {
       txData.to_address = "";
       if (txData.is_tx) {
-        txData.record_type = BlockTypes.SEND;
+        txData.sub_type = BlockTypes.SEND;
       }
     }
 
@@ -3329,6 +3487,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     if (index == 0 && StateContainer.of(context).activeAlert != null) {
       return _buildRemoteMessageCard(StateContainer.of(context).activeAlert);
     }
+    if (index == 0 && _noSearchResults) {
+      return _buildNoSearchResultsCard(context);
+    }
+
     int localIndex = index;
     if (StateContainer.of(context).activeAlert != null) {
       localIndex -= 1;
@@ -3354,21 +3516,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
   // Return widget for list
   Widget _getUnifiedListWidget(BuildContext context) {
-    if (_noSearchResults) {
-      return ReactiveRefreshIndicator(
-        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-        onRefresh: _refresh,
-        isRefreshing: _isRefreshing,
-        child: ListView(
-          controller: _scrollController,
-          padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-          children: <Widget>[
-            _buildNoSearchResultsCard(context),
-          ],
-        ),
-      );
-    }
-
     if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.historyLoading == false) {
       // Setup history list
       if (!_historyListMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
@@ -3605,7 +3752,6 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
     bool isUnacknowledgedSendableRequest = false;
     bool resendableMemo = false;
     bool isGiftLoad = false;
-    const bool isGift = false;
 
     final TXData txDetails = widget.txDetails!;
 
@@ -3661,7 +3807,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
               children: <Widget>[
                 // Sheet handle
                 Container(
-                  margin: const EdgeInsets.only(top: 10),
+                  margin: const EdgeInsets.only(top: 10, bottom: 24),
                   height: 5,
                   width: MediaQuery.of(context).size.width * 0.15,
                   decoration: BoxDecoration(
@@ -3673,7 +3819,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (!isGiftLoad)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         await UIUtil.showBlockExplorerWebview(context, txDetails.block);
                       }),
@@ -3718,7 +3864,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           // Share Address Button
                           AppButtonType.PRIMARY_OUTLINE,
                           !txDetails.is_fulfilled ? AppLocalization.of(context)!.markAsPaid : AppLocalization.of(context)!.markAsUnpaid,
-                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () async {
+                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                         // update the tx in the db:
                         if (txDetails.is_fulfilled) {
                           await sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, false);
@@ -3737,8 +3883,8 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (isUnfulfilledPayableRequest)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.payRequest, Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.payRequest, Dimens.BUTTON_TOP_DIMENS,
+                          onPressed: () {
                         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
                         _AppHomePageState.payTX(context, txDetails);
@@ -3750,8 +3896,8 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (txDetails.is_request && StateContainer.of(context).wallet!.address != txDetails.from_address)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.blockUser, Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.blockUser, Dimens.BUTTON_TOP_DIMENS,
+                          onPressed: () {
                         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
                         Sheets.showAppHeightNineSheet(
@@ -3767,8 +3913,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (isUnacknowledgedSendableRequest)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.sendRequestAgain, Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.sendRequestAgain, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         // send the request again:
                         _AppHomePageState.resendRequest(context, txDetails);
@@ -3784,7 +3929,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           // Share Address Button
                           AppButtonType.PRIMARY_OUTLINE,
                           AppLocalization.of(context)!.resendMemo,
-                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () async {
+                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                         _AppHomePageState.resendMemo(context, txDetails);
                       }),
                     ],
@@ -3793,8 +3938,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (txDetails.is_request)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.deleteRequest, Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.deleteRequest, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () {
                         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
                         sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
@@ -3827,9 +3971,10 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           context,
                           // copy seed button
                           _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
-                          _seedCopied ? AppLocalization.of(context)!.seedCopied : AppLocalization.of(context)!.copySeed,
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                          _seedCopied ? AppLocalization.of(context)!.seedCopiedShort : AppLocalization.of(context)!.copySeed,
+                          Dimens.BUTTON_BOTTOM_EXCEPTION_DIMENS, onPressed: () {
                         Clipboard.setData(ClipboardData(text: walletSeed));
+                        if (!mounted) return;
                         setState(() {
                           // Set copied style
                           _seedCopied = true;
@@ -3838,6 +3983,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           _seedCopiedTimer!.cancel();
                         }
                         _seedCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                          if (!mounted) return;
                           setState(() {
                             _seedCopied = false;
                           });

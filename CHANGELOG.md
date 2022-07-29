@@ -1,4 +1,13 @@
-## v0.4.9 - [2022-07-28]
+## v0.5.0 - [2022-07-30]
+#### Added
+- New logo!
+- Show QR button on the backup seed screen
+- Warning when sending to an unopenned account
+#### Changed
+- Re-worked how split gift cards work on the backend
+#### Fixed
+- Fixed some minor bugs with the new account screen
+## v0.4.9 - [2022-07-27]
 #### Fixed
 - Local currency fixes
 ## v0.4.8 - [2022-07-26]
