@@ -131,7 +131,7 @@ void main() {
 
     // await tester.pumpAndSettle();
     // sleep for a bit to let the app load
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 6));
 
     bool loggedIn = false;
 
