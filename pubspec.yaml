@@ -217,7 +217,6 @@ dev_dependencies:
   # screenshot generation:
   path: ^1.8.1
   file: ^6.1.2
-  flutter_launcher_icons: ^0.9.3
   
   # the next two/three packages have a dependency conflict and can't both be enabled at the same time
   # though the second is just a command line tool for updating /changing the application icons
@@ -241,39 +240,15 @@ dev_dependencies:
 # flutter pub pub run intl_translation:extract_to_arb --output-dir=lib/l10n lib/localization.dart
 # flutter pub pub run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/localization.dart lib/l10n/intl_*.arb
 
-flutter_icons:
-  android: true
-  # ios: true
-  # android: "ic_launcher_round"
-  # image_path: "assets/logo-square.png"
-  # remove_alpha_ios: true
-
-  image_path_android: "assets/logo-square.png"
-  image_path_ios: "assets/logo-square.png"
-  # icon_adaptive_foreground: "assets/foreground.png"
-  # icon_adaptive_background: "assets/background.png"
-
-
-  # fuscia:
-  adaptive_icon_background: "#000000"
-  adaptive_icon_foreground: "assets/logo-square.png"
-  adaptive_icon_foreground_scale_factor: 0.75
-  adaptive_icon_foreground_scale_fill_color: "#ffffff"
-  # adaptive_icon_background: "#000000"
-  # adaptive_icon_foreground: "assets/logo-square.png"
-  # adaptive_icon_background: "#965353"
-  # adaptive_icon_foreground: "#579653"
-  # adaptive_icon_foreground_scale_factor: "sdgasdfg"
-
-flutter_native_splash:
-  # color: "#42a5f5"
-  color: "#000000"
-  # background_image: "assets/splash_image.png"
-  branding: "assets/logo-square.png"
-  android_12:
-    # color: "#42a5f5"
-    image: "assets/android12splash.png"
-    icon_background_color: "#000000"
+# flutter_native_splash:
+#   # color: "#42a5f5"
+#   color: "#000000"
+#   # background_image: "assets/splash_image.png"
+#   branding: "assets/logo-square.png"
+#   android_12:
+#     # color: "#42a5f5"
+#     image: "assets/android12splash.png"
+#     icon_background_color: "#000000"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
