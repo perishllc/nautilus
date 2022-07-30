@@ -148,7 +148,7 @@ class _BackupSeedQRSheetStateState extends State<BackupSeedQRSheet> {
                                       ),
                                     ),
                                   ),
-                                  const Image(image: AssetImage("assets/logo-square.png")),
+                                  const Image(image: AssetImage("assets/logo.png")),
                                 ),
                               ),
                             // This is for hiding the share card
@@ -228,7 +228,7 @@ class _BackupSeedQRSheetStateState extends State<BackupSeedQRSheet> {
                                 height: computedMaxSize / 8,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  child: const Image(image: AssetImage("assets/logo-square.png")),
+                                  child: const Image(image: AssetImage("assets/logo.png")),
                                 ),
                               ),
                             ),

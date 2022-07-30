@@ -385,7 +385,7 @@ class _SendSheetState extends State<SendSheet> {
                     style: AppStyles.textStyleParagraph(context),
                     children: [
                       TextSpan(
-                        text: "${address}\n",
+                        text: "$address\n",
                         style: AppStyles.textStyleParagraphPrimary(context),
                       ),
                     ],
