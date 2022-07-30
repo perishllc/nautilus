@@ -2,7 +2,7 @@
 #### Added
 - New logo!
 - Show QR button on the backup seed screen
-- Warning when sending to an unopenned account
+- Warning when sending to an unopened account
 #### Changed
 - Re-worked how split gift cards work on the backend
 #### Fixed
