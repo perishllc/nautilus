@@ -454,7 +454,6 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             case 0:
               // transfer to this wallet:
 
-              
               // show loading animation for ~5 seconds:
               // push animation to prevent early exit:
               bool animationOpen = true;
@@ -1567,55 +1566,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   }
 
   Future<void> paintQrCode({String? address}) async {
-    // final PrettyQr painter = PrettyQr(
-    //   data: "nano:${address ?? StateContainer.of(context).wallet!.address!}",
-    //   errorCorrectLevel: QrErrorCorrectLevel.M,
-    //   roundEdges: true,
-    //   typeNumber: 9,
-    // );
-    final PrettyQrCodePainter painter = PrettyQrCodePainter(
-      data: "nano:${address ?? StateContainer.of(context).wallet!.address}",
-      errorCorrectLevel: QrErrorCorrectLevel.M,
-      roundEdges: true,
-      typeNumber: 9,
-    );
-    if (MediaQuery.of(context).size.width == 0) {
-      return;
-    }
-
-    final ui.PictureRecorder recorder = ui.PictureRecorder();
-    final ui.Canvas canvas = Canvas(recorder);
     final double qrSize = MediaQuery.of(context).size.width;
-    painter.paint(canvas, Size(qrSize, qrSize));
-    final ui.Picture pic = recorder.endRecording();
-    final ui.Image image = await pic.toImage(qrSize.toInt(), qrSize.toInt());
-    final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final String data = "nano:${address ?? StateContainer.of(context).wallet!.address}";
+    final Widget? qrWidget = await UIUtil.getQRImage(context, data);
     setState(() {
       receive = ReceiveSheet(
         localCurrency: StateContainer.of(context).curCurrency,
         address: StateContainer.of(context).wallet!.address,
-        qrWidget: SizedBox(width: qrSize, child: Image.memory(byteData!.buffer.asUint8List())),
+        qrWidget: SizedBox(width: qrSize, child: qrWidget),
       );
     });
-
-    // setState(() {
-    //   receive = ReceiveSheet(
-    //     localCurrency: StateContainer.of(context).curCurrency,
-    //     address: StateContainer.of(context).wallet!.address,
-    //     qrWidget: SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: painter),
-    //   );
-    // });
-
-    // painter.toImageData(MediaQuery.of(context).size.width).then((ByteData? byteData) {
-    //   setState(() {
-    //     receive = ReceiveSheet(
-    //       localCurrency: StateContainer.of(context).curCurrency,
-    //       address: StateContainer.of(context).wallet!.address,
-    //       qrWidget: SizedBox(
-    //           width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List())),
-    //     );
-    //   });
-    // });
   }
 
   @override
@@ -3034,9 +2994,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         spreadRadius: 1,
       );
     } else if (!txDetails.is_acknowledged && (txDetails.is_request || txDetails.is_message)) {
-      iconColor = StateContainer.of(context).curTheme.error60;
+      iconColor = StateContainer.of(context).curTheme.warning60;
       setShadow = BoxShadow(
-        color: StateContainer.of(context).curTheme.error60!.withOpacity(0.2),
+        color: StateContainer.of(context).curTheme.warning60!.withOpacity(0.2),
         offset: Offset.zero,
         blurRadius: 0,
         spreadRadius: 1,
@@ -3131,7 +3091,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           onPressed: (BuildContext context) async {
             // sleep for a bit to give the ripple effect time to finish
             await Future.delayed(const Duration(milliseconds: 250));
+            if (!mounted) return;
             await payTX(context, txDetails);
+            if (!mounted) return;
             await Slidable.of(context)!.close();
           }));
     }
@@ -3148,7 +3110,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           onPressed: (BuildContext context) async {
             // sleep for a bit to give the ripple effect time to finish
             await Future.delayed(const Duration(milliseconds: 250));
+            if (!mounted) return;
             await payTX(context, txDetails);
+            if (!mounted) return;
             await Slidable.of(context)!.close();
           }));
     }
@@ -3166,7 +3130,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             onPressed: (BuildContext context) async {
               // sleep for a bit to give the ripple effect time to finish
               await Future.delayed(const Duration(milliseconds: 250));
+              if (!mounted) return;
               await resendRequest(context, txDetails);
+              if (!mounted) return;
               await Slidable.of(context)!.close();
             }));
       } else if (txDetails.is_memo) {
@@ -3180,7 +3146,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             onPressed: (BuildContext context) async {
               // sleep for a bit to give the ripple effect time to finish
               await Future.delayed(const Duration(milliseconds: 250));
+              if (!mounted) return;
               await resendMemo(context, txDetails);
+              if (!mounted) return;
               await Slidable.of(context)!.close();
             }));
       } else if (txDetails.is_message) {
@@ -3195,7 +3163,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             onPressed: (BuildContext context) async {
               // sleep for a bit to give the ripple effect time to finish
               await Future.delayed(const Duration(milliseconds: 250));
+              if (!mounted) return;
               await resendMessage(context, txDetails);
+              if (!mounted) return;
               await Slidable.of(context)!.close();
             }));
       }
@@ -3215,8 +3185,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             if (txDetails.uuid != null) {
               await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
             }
+            if (!mounted) return;
             await StateContainer.of(context).updateSolids();
+            if (!mounted) return;
             await StateContainer.of(context).updateUnified(false);
+            if (!mounted) return;
             await Slidable.of(context)!.close();
           }));
     }
@@ -3339,40 +3312,36 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             ],
                           ),
                         ),
-                        if (txDetails.memo != null)
+                        if (txDetails.memo != null && txDetails.memo!.isNotEmpty)
                           Expanded(
-                            // constraints: BoxConstraints(maxWidth: 105),
-                            // width: MediaQuery.of(context).size.width / 4.3,
-                            // constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 4),
-                            // padding: EdgeInsets.only(left: 10, right: 10),
-                            // child: Text(
-                            //   txDetails.memo,
-                            //   textAlign: TextAlign.start,
-                            //   style: AppStyles.textStyleTransactionMemo(context),
-                            //   maxLines: 16,
-                            //   overflow: TextOverflow.visible,
-                            // ),
-                            child: SubstringHighlight(
-                                caseSensitive: false,
-                                maxLines: 16,
-                                term: _searchController.text,
-                                text: txDetails.memo!,
-                                textAlign: TextAlign.center,
-                                textStyle: AppStyles.textStyleTransactionMemo(context),
-                                textStyleHighlight: TextStyle(
-                                  fontSize: AppFontSizes.smallest,
-                                  fontFamily: 'OverpassMono',
-                                  fontWeight: FontWeight.w100,
-                                  color: StateContainer.of(context).curTheme.warning60,
-                                ),
-                                words: false),
+                            child: Container(
+                              constraints: const BoxConstraints(
+                                minHeight: 10,
+                                maxHeight: 100,
+                              ),
+                              child: SingleChildScrollView(
+                                child: Column(children: <Widget>[
+                                  SubstringHighlight(
+                                      caseSensitive: false,
+                                      term: _searchController.text,
+                                      text: txDetails.memo!,
+                                      textAlign: TextAlign.center,
+                                      textStyle: AppStyles.textStyleTransactionMemo(context),
+                                      textStyleHighlight: TextStyle(
+                                        fontSize: AppFontSizes.smallest,
+                                        fontFamily: 'OverpassMono',
+                                        fontWeight: FontWeight.w100,
+                                        color: StateContainer.of(context).curTheme.warning60,
+                                      ),
+                                      words: false),
+                                ]),
+                              ),
+                            ),
                           ),
                         Container(
                           // width: MediaQuery.of(context).size.width / 4.0,
                           // constraints: const BoxConstraints(maxHeight: cardHeight),
-
                           margin: const EdgeInsetsDirectional.only(end: 20.0),
-
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -3731,10 +3700,10 @@ class PaymentDetailsSheet extends StatefulWidget {
 }
 
 class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
-  // Current state references
-  bool _linkCopied = false;
-  // Timer reference so we can cancel repeated events
-  Timer? _linkCopiedTimer;
+  // // Current state references
+  // bool _linkCopied = false;
+  // // Timer reference so we can cancel repeated events
+  // Timer? _linkCopiedTimer;
   // Current state references
   bool _seedCopied = false;
   // Timer reference so we can cancel repeated events
@@ -3816,10 +3785,10 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                   ),
                 ),
                 // A row for View Details button
-                if (!isGiftLoad)
+                if (!isGiftLoad && !txDetails.is_message)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.viewTX, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         await UIUtil.showBlockExplorerWebview(context, txDetails.block);
                       }),
@@ -3834,7 +3803,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           // Copy Address Button
                           _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
                           _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                          Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                         Clipboard.setData(ClipboardData(text: addressToCopy));
                         if (mounted) {
                           setState(() {
@@ -3952,13 +3921,14 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                     children: <Widget>[
                       AppButton.buildAppButton(
                           context,
-                          // copy link button
-                          _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                          _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.showLinkQR,
+                          // show link QR
+                          AppButtonType.PRIMARY,
+                          AppLocalization.of(context)!.showLinkQR,
                           Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () async {
-                        Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: sharableLink!));
+                        final Widget qrWidget = SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, sharableLink!));
+                        Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: sharableLink, qrWidget: qrWidget));
                       }),
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.viewDetails, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.viewTX, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
                           onPressed: () async {
                         await UIUtil.showBlockExplorerWebview(context, txDetails.block);
                       }),

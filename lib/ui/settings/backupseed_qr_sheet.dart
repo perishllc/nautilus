@@ -18,8 +18,8 @@ import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 class BackupSeedQRSheet extends StatefulWidget {
-  const BackupSeedQRSheet({required this.data}) : super();
-  // final Widget? qrWidget;
+  const BackupSeedQRSheet({required this.data, required this.qrWidget}) : super();
+  final Widget? qrWidget;
   final String data;
 
   _BackupSeedQRSheetStateState createState() => _BackupSeedQRSheetStateState();
@@ -70,12 +70,11 @@ class _BackupSeedQRSheetStateState extends State<BackupSeedQRSheet> {
 
     _sendAmountFocusNode = FocusNode();
     _sendAmountController = TextEditingController();
-    // qrWidget = widget.qrWidget;
+    qrWidget = widget.qrWidget;
   }
 
   @override
   Widget build(BuildContext context) {
-    paintQrCode(widget.data);
     return SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: GestureDetector(

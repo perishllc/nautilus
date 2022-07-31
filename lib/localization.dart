@@ -239,6 +239,10 @@ class AppLocalization {
     return Intl.message("View Details", desc: "transaction_details", name: 'viewDetails');
   }
 
+  String get viewTX {
+    return Intl.message("View Transaction", desc: "transaction_transaction", name: 'viewTX');
+  }
+
   String get qrInvalidSeed {
     return Intl.message("QR code does not contain a valid seed or private key", desc: "qr_invalid_seed", name: 'qrInvalidSeed');
   }

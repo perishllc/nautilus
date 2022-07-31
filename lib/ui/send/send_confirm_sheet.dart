@@ -15,6 +15,7 @@ import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -24,6 +25,7 @@ import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
@@ -267,6 +269,11 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                               .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                               .replaceAll("%2", StateContainer.of(context).currencyMode);
 
+                      // show warning dialog if this is a send:
+                      if ((widget.amountRaw != "0") && widget.link.isEmpty && !await showUnopenedWarning(widget.destination)) {
+                        return;
+                      }
+
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
                           final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, authText);
@@ -297,6 +304,81 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             ),
           ],
         ));
+  }
+
+  Future<bool> showUnopenedWarning(String address) async {
+    // if we have the warn setting on, and the account isn't open, show the dialog:
+    final bool warningOn = await sl.get<SharedPrefsUtil>().getUnopenedWarningOn();
+    if (!warningOn) {
+      return true;
+    }
+    // check if the address is open:
+    final AccountInfoResponse accountInfo = await sl.get<AccountService>().getAccountInfo(address);
+    if (!accountInfo.unopened) {
+      return true;
+    }
+
+    final bool? option = await showDialog<bool>(
+        context: context,
+        barrierDismissible: false,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              AppLocalization.of(context)!.unopenedWarningWarningHeader,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text("${AppLocalization.of(context)!.unopenedWarningWarning}\n\n", style: AppStyles.textStyleParagraph(context)),
+                RichText(
+                  textAlign: TextAlign.start,
+                  text: TextSpan(
+                    text: "${AppLocalization.of(context)!.address}:\n",
+                    style: AppStyles.textStyleParagraph(context),
+                    children: [
+                      TextSpan(
+                        text: "$address\n",
+                        style: AppStyles.textStyleParagraphPrimary(context),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            actionsAlignment: MainAxisAlignment.spaceBetween,
+            actions: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context)!.imSure,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context)!.goBackButton,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              )
+            ],
+          );
+        });
+
+    return option ?? false;
   }
 
   Future<void> _doSend() async {

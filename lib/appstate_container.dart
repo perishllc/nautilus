@@ -427,7 +427,7 @@ class StateContainerState extends State<StateContainer> {
     });
     // Get theme default
     sl.get<SharedPrefsUtil>().getTheme().then((ThemeSetting theme) {
-      updateTheme(theme, setIcon: false);
+      updateTheme(theme);
     });
     // Get default block explorer
     sl.get<SharedPrefsUtil>().getBlockExplorer().then((AvailableBlockExplorer explorer) {
@@ -585,7 +585,7 @@ class StateContainerState extends State<StateContainer> {
             giftedWalletSeed = data["seed"] as String? ?? "";
             giftedWalletAmountRaw = data["amount_raw"] as String? ?? "";
             giftedWalletAddress = data["address"] as String? ?? "";
-            giftedWalletFromAddress = data["from_address"] as String? ?? data["senderAddress"] as String? ?? "";// TODO: edit by 0.5.2
+            giftedWalletFromAddress = data["from_address"] as String? ?? data["senderAddress"] as String? ?? ""; // TODO: edit by 0.5.2
             giftedWalletMemo = data["memo"] as String? ?? "";
             giftedWalletUUID = data["gift_uuid"] as String? ?? "";
           });
@@ -642,7 +642,7 @@ class StateContainerState extends State<StateContainer> {
     final String address = NanoUtil.seedToAddress(await getSeed(), account.index!);
     account.address = account.address ?? address;
     bool watchOnly = false;
-    if (account.address != address) {
+    if (account.address != address || account.watchOnly) {
       watchOnly = true;
     }
     selectedAccount = account;
@@ -723,7 +723,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   // Change theme
-  void updateTheme(ThemeSetting theme, {bool setIcon = true}) {
+  void updateTheme(ThemeSetting theme) {
     setState(() {
       curTheme = theme.getTheme();
     });
@@ -1406,7 +1406,7 @@ class StateContainerState extends State<StateContainer> {
 
     // decrypt the memo:
     if (memoEnc != null && memoEnc.isNotEmpty) {
-      final String? memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
+      final String memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
       if (memo != null) {
         txData.memo = memo;
       } else {
@@ -1568,7 +1568,7 @@ class StateContainerState extends State<StateContainer> {
           newTXInfo.request_time = requestTime;
 
           if (memoEnc != null && memoEnc.isNotEmpty) {
-            final String? memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
+            final String memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
             if (memo != null) {
               newTXInfo.memo = memo;
             } else {
@@ -1607,7 +1607,7 @@ class StateContainerState extends State<StateContainer> {
         // we didn't replace a txData??
         if (txData == null && oldTXData == null) {
           // log.d("adding txData to the database!");
-          throw Exception("\n\n@@@@@@@@this shouldn't happen!@@@@@@@@@@\n\n");
+          log.e("\@@@@@@@@this shouldn't happen!@@@@@@@@@@");
         }
         if (!delay_update) {
           await updateSolids();
@@ -1648,10 +1648,6 @@ class StateContainerState extends State<StateContainer> {
           // we updated the other fields up above, so we don't need to update them here:
           // TODO: should check to make sure uuid matches:
           await sl.get<DBHelper>().replaceTXDataByUUID(existingTXData);
-          // send acknowledgement to server / requester:
-          // sleep for a second to make sure the txData is updated:
-          await Future.delayed(const Duration(seconds: 1));
-          await sl.get<AccountService>().requestACK(uuid, requestingAccount, wallet!.address);
         }
       } else {
         throw Exception("no txData found for this memo in payment record!");
@@ -1749,7 +1745,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> handlePaymentACK(dynamic data, {bool delay_update = false}) async {
-    // print("handling payment_ack from: ${data['requesting_account']}");
+    print("handling payment_ack from: ${data['requesting_account']}");
     sl.get<Logger>().v("handling payment_ack");
     final String? amountRaw = data['amount_raw'] as String?;
     final String? requestingAccount = data['requesting_account'] as String?;
@@ -1768,9 +1764,9 @@ class StateContainerState extends State<StateContainer> {
     final TXData? txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);
     if (txData != null) {
       await sl.get<DBHelper>().changeTXAckStatus(uuid, true);
-      sl.get<Logger>().v("changed ack status!");
+      sl.get<Logger>().v("changed ack status!: $uuid");
     } else {
-      sl.get<Logger>().d("we didn't have a txData for this payment ack!");
+      sl.get<Logger>().d("we didn't have a txData for this payment ack!: $uuid");
     }
     if (!delay_update) {
       await updateSolids();

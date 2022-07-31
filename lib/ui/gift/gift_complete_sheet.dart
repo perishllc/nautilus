@@ -10,6 +10,7 @@ import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/gift/gift_qr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
@@ -238,11 +239,12 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                   children: <Widget>[
                     AppButton.buildAppButton(
                         context,
-                        // copy link button
-                        _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _linkCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.showLinkQR,
+                        // show link QR
+                        AppButtonType.PRIMARY,
+                        AppLocalization.of(context)!.showLinkQR,
                         Dimens.BUTTON_BOTTOM_EXCEPTION_DIMENS, onPressed: () async {
-                      Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: widget.link));
+                      final Widget qrWidget = SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, widget.link));
+                      Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: widget.link, qrWidget: qrWidget));
                     }),
                   ],
                 ),

@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/util/exceptions.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
 
@@ -408,6 +411,27 @@ class UIUtil {
 
   static bool isTablet(BuildContext context) {
     return MediaQuery.of(context).size.width >= 768;
+  }
+
+  static Future<Image?> getQRImage(BuildContext context, String data) async {
+    final PrettyQrCodePainter painter = PrettyQrCodePainter(
+      data: data,
+      errorCorrectLevel: QrErrorCorrectLevel.M,
+      roundEdges: true,
+      typeNumber: 9,
+    );
+    if (MediaQuery.of(context).size.width == 0) {
+      return null;
+    }
+
+    final ui.PictureRecorder recorder = ui.PictureRecorder();
+    final ui.Canvas canvas = Canvas(recorder);
+    final double qrSize = MediaQuery.of(context).size.width;
+    painter.paint(canvas, Size(qrSize, qrSize));
+    final ui.Picture pic = recorder.endRecording();
+    final ui.Image image = await pic.toImage(qrSize.toInt(), qrSize.toInt());
+    final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    return Image.memory(byteData!.buffer.asUint8List());
   }
 
   static void showSnackbar(String content, BuildContext context, {int durationMs = 2500}) {

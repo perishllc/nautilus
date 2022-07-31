@@ -159,10 +159,12 @@ class AccountService {
     // });
 
     // DEV SERVER:
-    // _HTTP_PROTO = "http://";
-    // _WS_PROTO = "ws://";
-    // _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
-    // log.d("CONNECTED TO DEV SERVER");
+    // if (kDebugMode) {
+    //   _HTTP_PROTO = "http://";
+    //   _WS_PROTO = "ws://";
+    //   _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
+    //   log.d("CONNECTED TO DEV SERVER");
+    // }
 
     // ENS:
     const String rpcUrl = 'https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}';

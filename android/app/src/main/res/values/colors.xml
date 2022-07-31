@@ -2,4 +2,5 @@
 <resources>
     <color name="ic_launcher_background">#000000</color>
     <color name="colorAccent">#4080D7</color>
+    <color name="perishOrange">#ff9966</color>
 </resources>

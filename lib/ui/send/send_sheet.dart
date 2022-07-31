@@ -351,117 +351,6 @@ class _SendSheetState extends State<SendSheet> {
     }
   }
 
-  Future<bool> showUnopenedWarning(String address) async {
-    // if we have the warn setting on, and the account isn't open, show the dialog:
-    final bool warningOn = await sl.get<SharedPrefsUtil>().getUnopenedWarningOn();
-    if (!warningOn) {
-      return true;
-    }
-    // check if the address is open:
-    final AccountInfoResponse accountInfo = await sl.get<AccountService>().getAccountInfo(address);
-    if (!accountInfo.unopened) {
-      return true;
-    }
-
-    final bool? option = await showDialog<bool>(
-        context: context,
-        barrierDismissible: false,
-        barrierColor: StateContainer.of(context).curTheme.barrier,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(
-              AppLocalization.of(context)!.unopenedWarningWarningHeader,
-              style: AppStyles.textStyleDialogHeader(context),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text("${AppLocalization.of(context)!.unopenedWarningWarning}\n\n", style: AppStyles.textStyleParagraph(context)),
-                RichText(
-                  textAlign: TextAlign.start,
-                  text: TextSpan(
-                    text: "${AppLocalization.of(context)!.address}:\n",
-                    style: AppStyles.textStyleParagraph(context),
-                    children: [
-                      TextSpan(
-                        text: "$address\n",
-                        style: AppStyles.textStyleParagraphPrimary(context),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            actionsAlignment: MainAxisAlignment.spaceBetween,
-            actions: <Widget>[
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context)!.imSure,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, false);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context)!.goBackButton,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              )
-            ],
-          );
-          // return AppSimpleDialog(
-          //   title: Text(
-          //     AppLocalization.of(context)!.unopenedWarningWarningHeader,
-          //     style: AppStyles.textStyleDialogHeader(context),
-          //   ),
-          //   children: <Widget>[
-          //     Padding(
-          //       padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          //       child: Text("${AppLocalization.of(context)!.unopenedWarningWarning}\n", style: AppStyles.textStyleParagraph(context)),
-          //     ),
-          //     AppSimpleDialogOption(
-          //       onPressed: () {
-          //         Navigator.pop(context, true);
-          //       },
-          //       child: Padding(
-          //         padding: const EdgeInsets.symmetric(vertical: 8.0),
-          //         child: Text(
-          //           AppLocalization.of(context)!.onStr,
-          //           style: AppStyles.textStyleDialogOptions(context),
-          //         ),
-          //       ),
-          //     ),
-          //     AppSimpleDialogOption(
-          //       onPressed: () {
-          //         Navigator.pop(context, false);
-          //       },
-          //       child: Padding(
-          //         padding: const EdgeInsets.symmetric(vertical: 8.0),
-          //         child: Text(
-          //           AppLocalization.of(context)!.off,
-          //           style: AppStyles.textStyleDialogOptions(context),
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // );
-        });
-
-    return option ?? false;
-  }
-
   Future<bool> showNeedVerificationAlert() async {
     switch (await showDialog<int>(
         context: context,
@@ -983,10 +872,6 @@ class _SendSheetState extends State<SendSheet> {
                             }
                           });
                         } else {
-                          // show warning dialog if necessary:
-                          if (!await showUnopenedWarning(user.address!)) {
-                            return;
-                          }
 
                           Sheets.showAppHeightNineSheet(
                               context: context,
@@ -999,10 +884,6 @@ class _SendSheetState extends State<SendSheet> {
                                   memo: _memoController!.text));
                         }
                       } else {
-                        // show warning dialog if necessary:
-                        if (!await showUnopenedWarning(formattedAddress)) {
-                          return;
-                        }
                         Sheets.showAppHeightNineSheet(
                             context: context,
                             widget: SendConfirmSheet(
@@ -1813,7 +1694,7 @@ class _SendSheetState extends State<SendSheet> {
       controller: _memoController,
       cursorColor: StateContainer.of(context).curTheme.primary,
       inputFormatters: [
-        LengthLimitingTextInputFormatter(48),
+        LengthLimitingTextInputFormatter(255),
       ],
       textInputAction: TextInputAction.done,
       maxLines: null,

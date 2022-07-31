@@ -525,22 +525,17 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     paintQrCode(address: widget.address, amount: raw);
   }
 
-  void paintQrCode({String? address, String? amount}) {
+  Future<void> paintQrCode({String? address, String? amount}) async {
     late String data;
     if (isNotEmpty(amount)) {
       data = "nano:${address!}?amount:${amount!}";
     } else {
       data = "nano:${address!}";
     }
-
-    final PrettyQr painter = PrettyQr(
-      data: data,
-      typeNumber: 9,
-      errorCorrectLevel: QrErrorCorrectLevel.Q,
-      roundEdges: true,
-    );
+    
+    final Widget qr = SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: await UIUtil.getQRImage(context, data));
     setState(() {
-      qrWidget = SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: painter);
+      qrWidget = qr;
     });
   }
 
@@ -559,10 +554,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
         fontFamily: 'NunitoSans',
       ),
       inputFormatters: _rawAmount == null
-          ? [
-              CurrencyFormatter(currencyFormat: _localCurrencyFormat!),
-              LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
-            ]
+          ? [CurrencyFormatter(currencyFormat: _localCurrencyFormat!), LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)]
           : [LengthLimitingTextInputFormatter(13)],
       onChanged: (String text) {
         if (_localCurrencyMode == false && !text.contains(".") && text.isNotEmpty && text.length > 1) {

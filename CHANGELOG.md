@@ -1,3 +1,13 @@
+## v0.5.1 - [2022-07-31]
+#### Changed
+- Update the character limit on memos / messages to 255 characters
+- Memos / Messages now scroll if too long to display
+- Move unopened send warning to the confirmation page, and only warn on sends instead of requests or messages
+- Renamed "View Details" button to "View Transaction"
+#### Fixed
+- Fixes for handling ACK'd memos
+- Significant performance improvements for sheets that display QR codes (previously drawing each frame, now cached)
+- Minor styling changes on tx details page
 ## v0.5.0 - [2022-07-30]
 #### Added
 - New logo!
@@ -7,6 +17,7 @@
 - Re-worked how split gift cards work on the backend
 #### Fixed
 - Fixed some minor bugs with the new account screen
+- Fixes to how the search bar works
 ## v0.4.9 - [2022-07-27]
 #### Fixed
 - Local currency fixes
