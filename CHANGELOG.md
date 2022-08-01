@@ -1,3 +1,8 @@
+## v0.5.2 - [2022-08-XX]
+#### Added
+#### Changed
+#### Fixed
+- Fixes on the send screen with local currencies and requests
 ## v0.5.1 - [2022-07-31]
 #### Changed
 - Update the character limit on memos / messages to 255 characters

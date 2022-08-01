@@ -199,6 +199,10 @@ class AppLocalization {
     return Intl.message('Request Payment', desc: 'request_payment_cta', name: 'requestPayment');
   }
 
+  String get shareViaNFC {
+    return Intl.message('Share Via NFC', desc: 'request_payment_nfc', name: 'shareViaNFC');
+  }
+
   String get createQR {
     return Intl.message('Create QR Code', desc: 'create_qr_code', name: 'createQR');
   }
@@ -640,8 +644,7 @@ class AppLocalization {
   }
 
   String get giftProcessSuccess {
-    return Intl.message("Gift Successfully Received, it may take a moment to appear in your wallet.",
-        desc: 'gift_process_success', name: 'giftProcessSuccess');
+    return Intl.message("Gift Successfully Received, it may take a moment to appear in your wallet.", desc: 'gift_process_success', name: 'giftProcessSuccess');
   }
 
   String get requestError {
@@ -990,7 +993,10 @@ class AppLocalization {
   }
 
   String get unopenedWarningInfo {
-    return Intl.message('Show a warning when sending funds to an unopened account, this is useful because most of the time addresses you send to will have a balance, and sending to a new address may be the result of a typo.', desc: 'unopened_warning_info', name: 'unopenedWarningInfo');
+    return Intl.message(
+        'Show a warning when sending funds to an unopened account, this is useful because most of the time addresses you send to will have a balance, and sending to a new address may be the result of a typo.',
+        desc: 'unopened_warning_info',
+        name: 'unopenedWarningInfo');
   }
 
   String get unopenedWarningWarningHeader {
@@ -998,7 +1004,10 @@ class AppLocalization {
   }
 
   String get unopenedWarningWarning {
-    return Intl.message('Are you sure this is the right address?\nThis account appears to be unopened\n\nYou can disable this warning in the settings drawer under "Unopened Warning"', desc: 'unopened_warning_warning', name: 'unopenedWarningWarning');
+    return Intl.message(
+        'Are you sure this is the right address?\nThis account appears to be unopened\n\nYou can disable this warning in the settings drawer under "Unopened Warning"',
+        desc: 'unopened_warning_warning',
+        name: 'unopenedWarningWarning');
   }
 
   String get logoutDetail {
@@ -1611,6 +1620,10 @@ You can also set a Split amount to distribute from the gift card rather than the
     return Intl.message("Add Watch Only Account", desc: "watch_only_add", name: 'addWatchOnlyAccount');
   }
 
+  String get hideEmptyAccounts {
+    return Intl.message("Hide Empty Accounts", desc: "hide_empty_accounts", name: 'hideEmptyAccounts');
+  }
+
   String get accountNameHint {
     return Intl.message("Enter a Name", desc: 'enter_name_hint', name: 'accountNameHint');
   }
@@ -1633,6 +1646,14 @@ You can also set a Split amount to distribute from the gift card rather than the
 
   String get hideAccountHeader {
     return Intl.message("Hide Account?", desc: "Confirmation dialog header", name: 'hideAccountHeader');
+  }
+
+  String get hideAccountsHeader {
+    return Intl.message("Hide Accounts?", desc: "Confirmation dialog header", name: 'hideAccountsHeader');
+  }
+
+  String get hideAccountsConfirmation {
+    return Intl.message('Are you sure you want to hide empty accounts?\n\nThis will hide all accounts with a balance of exactly 0 (excluding watch only addresses and your main account), but you can always re-add them later by tapping the "Add Account" button', desc: "hide accounts confirmation info", name: 'hideAccountsConfirmation');
   }
 
   String get edit {
@@ -1947,8 +1968,10 @@ You can also set a Split amount to distribute from the gift card rather than the
   }
 
   String get iosFundingMessage {
-    return Intl.message("Due to iOS App Store guidelines and restrictions, we can't link you to our donations page. If you'd like to support the project, consider sending to the nautilus node's address.",
-        desc: 'ios_funding_message', name: 'iosFundingMessage');
+    return Intl.message(
+        "Due to iOS App Store guidelines and restrictions, we can't link you to our donations page. If you'd like to support the project, consider sending to the nautilus node's address.",
+        desc: 'ios_funding_message',
+        name: 'iosFundingMessage');
   }
 
   String get donateButton {

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math' as Math;
 import 'dart:typed_data';
@@ -21,9 +22,10 @@ import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:quiver/strings.dart';
 import 'package:share_plus/share_plus.dart';
+// import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
+// import 'package:ndef/ndef.dart' as ndef;
 
 class NumericalRangeFormatter extends TextInputFormatter {
   final double? min;
@@ -409,28 +411,56 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                         }),
                       ],
                     ),
-                    // Row(
-                    //   children: <Widget>[
-                    //     AppButton.buildAppButton(
-                    //         context,
-                    //         // Share Address Button
-                    //         AppButtonType.PRIMARY_OUTLINE,
-                    //         AppLocalization.of(context).requestPayment,
-                    //         Dimens.BUTTON_BOTTOM_DIMENS,
-                    //         disabled: _showShareCard, onPressed: () {
-                    //       // do nothing
-                    //       // if (request == null) {
-                    //       // return;
-                    //       // }
-                    //       // Sheets.showAppHeightEightSheet(context: context, widget: request);
-                    //       // Remove any other screens from stack
-                    //       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+                    Row(
+                      children: <Widget>[
+                        AppButton.buildAppButton(
+                          context,
+                          // Share Address Button
+                          AppButtonType.PRIMARY_OUTLINE,
+                          AppLocalization.of(context)!.shareViaNFC,
+                          Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () async {
 
-                    //       // Go to send with address
-                    //       Sheets.showAppHeightNineSheet(context: context, widget: RequestSheet());
-                    //     }),
-                    //   ],
-                    // ),
+                            // final availability = await FlutterNfcKit.nfcAvailability;
+                            // print("ok");
+                            // if (availability != NFCAvailability.available) {
+                            //   // oh-no
+                            //   print("NFC is not available");
+                            // }
+
+                            // // timeout only works on Android, while the latter two messages are only for iOS
+                            // var tag = await FlutterNfcKit.poll(
+                            //     timeout: Duration(seconds: 10), iosMultipleTagMessage: "Multiple tags found!", iosAlertMessage: "Scan your tag");
+                            // print(jsonEncode(tag));
+                            // // if (tag.type == NFCTagType.iso7816) {
+                            // //   var result = await FlutterNfcKit.transceive("00B0950000",
+                            // //       timeout: Duration(seconds: 5)); // timeout is still Android-only, persist until next change
+                            // //   print(result);
+                            // // }
+                            // // // read NDEF records if available
+                            // if (tag.ndefAvailable!) {
+                            //   /// decoded NDEF records (see [ndef.NDEFRecord] for details)
+                            //   /// `UriRecord: id=(empty) typeNameFormat=TypeNameFormat.nfcWellKnown type=U uri=https://github.com/nfcim/ndef`
+                            //   for (var record in await FlutterNfcKit.readNDEFRecords(cached: false)) {
+                            //     print(record.toString());
+                            //   }
+
+                            // //   /// raw NDEF records (data in hex string)
+                            // //   /// `{identifier: "", payload: "00010203", type: "0001", typeNameFormat: "nfcWellKnown"}`
+                            // //   for (var record in await FlutterNfcKit.readNDEFRawRecords(cached: false)) {
+                            // //     print(jsonEncode(record).toString());
+                            // //   }
+                            // }
+
+                            // write NDEF record:
+                            // decoded NDEF records
+                            // await FlutterNfcKit.writeNDEFRecords([new ndef.UriRecord.fromUriString("https://github.com/nfcim/flutter_nfc_kit")]);
+                            // raw NDEF records
+                            // await FlutterNfcKit.writeNDEFRawRecords([new NDEFRawRecord("0001", "0002", "0003", ndef.TypeNameFormat.unknown)]);
+                          },
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ],
@@ -532,7 +562,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     } else {
       data = "nano:${address!}";
     }
-    
+
     final Widget qr = SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: await UIUtil.getQRImage(context, data));
     setState(() {
       qrWidget = qr;

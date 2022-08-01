@@ -149,6 +149,20 @@
         <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_pk5UyHFd7H2cnWwJNfkCxblatvcWYud4" />
         <!-- Set to true to use Branch_Test_Key (useful when simulating installs and/or switching between debug and production flavors) -->
         <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
+
+        <!-- NFC -->
+        <!-- <service
+            android:name="io.flutter.plugins.nfc_emulator.NfcEmulatorService"
+            android:exported="true"
+            android:permission="android.permission.BIND_NFC_SERVICE">
+            <intent-filter>
+                <action android:name="android.nfc.cardemulation.action.HOST_APDU_SERVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="android.nfc.cardemulation.host_apdu_service"
+                android:resource="@xml/aid_list" />
+        </service> -->
     </application>
     <queries>
         <intent>

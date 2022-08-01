@@ -310,7 +310,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                       context,
                       AppButtonType.PRIMARY,
                       AppLocalization.of(context)!.addAccount,
-                      Dimens.BUTTON_TOP_DIMENS,
+                      Dimens.BUTTON_COMPACT_LEFT_DIMENS,
                       disabled: _addingAccount,
                       onPressed: () {
                         if (!_addingAccount) {
@@ -348,20 +348,52 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                         }
                       },
                     ),
+                    AppButton.buildAppButton(
+                      context,
+                      AppButtonType.PRIMARY,
+                      AppLocalization.of(context)!.addWatchOnlyAccount,
+                      Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                      onPressed: () {
+                        Sheets.showAppHeightEightSheet(context: context, widget: const AddWatchOnlyAccountSheet());
+                      },
+                    ),
                   ],
                 ),
-              // A row with the add watch only account button:
+
               Row(
                 children: [
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY,
-                    AppLocalization.of(context)!.addWatchOnlyAccount,
+                    AppLocalization.of(context)!.hideEmptyAccounts,
                     Dimens.BUTTON_BOTTOM_DIMENS,
-                    onPressed: () {
-                      Sheets.showAppHeightEightSheet(context: context, widget: const AddWatchOnlyAccountSheet());
+                    onPressed: () async {
+                      AppDialogs.showConfirmDialog(
+                          context,
+                          AppLocalization.of(context)!.hideAccountsHeader,
+                          AppLocalization.of(context)!.hideAccountsConfirmation,
+                          CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () async {
+                        await Future.delayed(const Duration(milliseconds: 250));
+                        final List<Account> accountsToRemove = <Account>[];
+                        for (final Account account in widget.accounts) {
+                          if (account.selected || account.index == 0 || account.watchOnly || account.balance == null) {
+                            continue;
+                          }
+
+                          if (BigInt.tryParse(account.balance!) == BigInt.zero) {
+                            accountsToRemove.add(account);
+                          }
+                        }
+                        for (final Account account in accountsToRemove) {
+                          await sl.get<DBHelper>().deleteAccount(account);
+                          EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account, deleted: true));
+                          setState(() {
+                            widget.accounts.removeWhere((Account acc) => acc.index == account.index);
+                          });
+                        }
+                      }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
                     },
-                  ),
+                  )
                 ],
               ),
               //A row with Close button

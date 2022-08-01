@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -46,6 +47,7 @@ import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:uni_links/uni_links.dart';
 
 class SendSheet extends StatefulWidget {
   final AvailableCurrency localCurrency;
@@ -817,6 +819,7 @@ class _SendSheetState extends State<SendSheet> {
                           if (_rawAmount != null) {
                             amountRaw = _rawAmount!;
                           } else {
+                            if (!mounted) return;
                             amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
                           }
                         }
@@ -872,7 +875,6 @@ class _SendSheetState extends State<SendSheet> {
                             }
                           });
                         } else {
-
                           Sheets.showAppHeightNineSheet(
                               context: context,
                               widget: SendConfirmSheet(
@@ -905,6 +907,12 @@ class _SendSheetState extends State<SendSheet> {
                         return;
                       }
                       final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
+
+                      final String formattedAmount = _amountController!.text
+                          .replaceAll(_localCurrencyFormat!.currencySymbol, "")
+                          .replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "")
+                          .replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
+
                       String amountRaw;
                       if (_amountController!.text.isEmpty || _amountController!.text == "0") {
                         amountRaw = "0";
@@ -912,7 +920,8 @@ class _SendSheetState extends State<SendSheet> {
                         if (_localCurrencyMode) {
                           amountRaw = NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto());
                         } else {
-                          amountRaw = getThemeAwareAmountAsRaw(context, _amountController!.text);
+                          if (!mounted) return;
+                          amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
                         }
                       }
 
@@ -1101,6 +1110,20 @@ class _SendSheetState extends State<SendSheet> {
                       } else {
                         // something went wrong, show generic error:
                         UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
+                      }
+                    })
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    // scan for nfc
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.shareViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () async {
+                      try {
+                        UIUtil.cancelLockEvent();
+                        startNFCSession("");
+                      } catch (e) {
+                        stopNFCSession();
                       }
                     })
                   ],
@@ -1318,14 +1341,13 @@ class _SendSheetState extends State<SendSheet> {
     final bool isDomain = _addressController!.text.contains(".");
     final bool isNano = _addressController!.text.startsWith("nano_");
     final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
-    /*if (_addressController!.text.trim().isEmpty) {
+    if (_addressController!.text.trim().isEmpty && isRequest) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context)!.addressMissing;
         _pasteButtonVisible = true;
       });
-    } else */
-    if (_addressController!.text.isNotEmpty && !isPhoneNumber && !isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
+    } else if (_addressController!.text.isNotEmpty && !isPhoneNumber && !isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context)!.invalidAddress;
@@ -1420,17 +1442,12 @@ class _SendSheetState extends State<SendSheet> {
             return;
           }
           if (!_localCurrencyMode) {
-            // _amountController!.text = StateContainer.of(context).wallet!.getAccountBalanceDisplay(context).replaceAll(r",", "");
-            _amountController!.text = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
-            _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
-            _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-            // setState(() {
-            //   // force max send button to fade out
-            // });
-            // FocusScope.of(context).unfocus();
-            // if (!Address(_addressController.text).isValid()) {
-            //   FocusScope.of(context).requestFocus(_addressFocusNode);
-            // }
+            setState(() {
+              _amountValidationText = "";
+              _amountController!.text = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
+              _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
+              _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+            });
           } else {
             String localAmount = StateContainer.of(context)
                 .wallet!
@@ -1438,8 +1455,11 @@ class _SendSheetState extends State<SendSheet> {
             localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
             localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
             localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
-            _amountController!.text = _localCurrencyFormat!.currencySymbol + localAmount;
-            _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+            setState(() {
+              _amountValidationText = "";
+              _amountController!.text = _localCurrencyFormat!.currencySymbol + localAmount;
+              _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+            });
           }
         },
       ),
