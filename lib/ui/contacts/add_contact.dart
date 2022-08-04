@@ -134,8 +134,14 @@ class _AddContactSheetState extends State<AddContactSheet> {
               });
             }
           } else {
-            // check if UD or ENS address
-            if (_addressController!.text.contains(".")) {
+            // check if UD / ENS / opencap address
+            if (_addressController!.text.contains(r"$")) {
+              // check if opencap address:
+              address = await sl.get<AccountService>().checkOpencapDomain(formattedAddress);
+              if (address != null) {
+                type = UserTypes.OPENCAP;
+              }
+            } else if (_addressController!.text.contains(".")) {
               // check if UD domain:
               address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
               if (address != null) {
@@ -251,7 +257,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
               : AppStyles.textStyleAddressPrimary(context),
       onChanged: (String text) async {
         bool isUser = false;
-        final bool isDomain = text.contains(".");
+        final bool isDomain = text.contains(".") || text.contains(r"$");
         final bool isFavorite = text.startsWith("★");
         final bool isNano = text.startsWith("nano_");
 

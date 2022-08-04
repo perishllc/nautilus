@@ -3,7 +3,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
-import 'dart:ui' as ui;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -33,6 +32,7 @@ import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
@@ -66,7 +66,6 @@ import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:quiver/strings.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
@@ -358,7 +357,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         // GIFT UUID is not empty, so we're dealing with gift card v2:
         // check if there's actually any nano to claim:
         final String requestingAccount = StateContainer.of(context).wallet!.address!;
-        dynamic res = await sl.get<AccountService>().giftCardInfo(giftUUID: giftUUID, requestingAccount: requestingAccount);
+        final dynamic res = await sl.get<AccountService>().giftCardInfo(giftUUID: giftUUID, requestingAccount: requestingAccount);
         final String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
         if (!mounted) return;
         if (res["error"] != null) {
@@ -461,7 +460,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               // sleep to flex the animation a bit:
               await Future.delayed(const Duration(milliseconds: 500));
 
-              dynamic res = await sl.get<AccountService>().giftCardClaim(giftUUID: giftUUID, requestingAccount: requestingAccount);
+              final dynamic res = await sl.get<AccountService>().giftCardClaim(giftUUID: giftUUID, requestingAccount: requestingAccount);
               if (!mounted) return;
 
               if (res["error"] != null) {
@@ -767,55 +766,84 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
   //   });
   // }
 
-  void _updateTXDetailsMap(String? account) {
-    sl.get<DBHelper>().getAccountSpecificTXData(account).then((List<TXData> data) {
-      setState(() {
-        _txRecords = data;
-        _txDetailsMap.clear();
-        for (final TXData tx in _txRecords) {
-          if (tx.isSolid() && (isEmpty(tx.block) || isEmpty(tx.link))) {
-            // set to the last block:
-            final String? lastBlockHash = StateContainer.of(context).wallet!.history.isNotEmpty ? StateContainer.of(context).wallet!.history[0].hash : null;
-            if (isEmpty(tx.block) && StateContainer.of(context).wallet!.address == tx.from_address) {
-              tx.block = lastBlockHash;
-            }
-            if (isEmpty(tx.link) && StateContainer.of(context).wallet!.address == tx.to_address) {
-              tx.link = lastBlockHash;
-            }
-            // save to db:
-            sl.get<DBHelper>().replaceTXDataByUUID(tx);
-          }
-          // if unacknowledged, we're the recipient, and not local, ACK it:
-          if (tx.is_acknowledged == false && tx.to_address == StateContainer.of(context).wallet!.address && !tx.uuid!.contains("LOCAL")) {
-            log.v("ACKNOWLEDGING TX_DATA: ${tx.uuid}");
-            sl.get<AccountService>().requestACK(tx.uuid, tx.from_address, tx.to_address);
-          }
-          if (tx.is_memo && isEmpty(tx.link) && isNotEmpty(tx.block)) {
-            if (_historyListMap[StateContainer.of(context).wallet!.address] != null) {
-              // find if there's a matching link:
-              // for (var histItem in StateContainer.of(context).wallet.history) {
-              for (final AccountHistoryResponseItem histItem in _historyListMap[StateContainer.of(context).wallet!.address]!) {
-                if (histItem.link == tx.block) {
-                  tx.link = histItem.hash;
-                  // save to db:
-                  sl.get<DBHelper>().replaceTXDataByUUID(tx);
-                  break;
-                }
-              }
-            }
-          }
-
-          // only applies to non-solids (i.e. memos):
-          if (!tx.isSolid()) {
-            if (isNotEmpty(tx.block) && tx.from_address == account) {
-              _txDetailsMap[tx.block!] = tx;
-            } else if (isNotEmpty(tx.link) && tx.to_address == account) {
-              _txDetailsMap[tx.link!] = tx;
+  Future<void> _updateTXDetailsMap(String? account) async {
+    final List<TXData> data = await sl.get<DBHelper>().getAccountSpecificTXData(account);
+    if (!mounted) return;
+    setState(() {
+      _txRecords = data;
+      _txDetailsMap.clear();
+    });
+    for (final TXData tx in _txRecords) {
+      if (tx.isSolid() && (isEmpty(tx.block) || isEmpty(tx.link))) {
+        // set to the last block:
+        final String? lastBlockHash = StateContainer.of(context).wallet!.history.isNotEmpty ? StateContainer.of(context).wallet!.history[0].hash : null;
+        if (isEmpty(tx.block) && StateContainer.of(context).wallet!.address == tx.from_address) {
+          tx.block = lastBlockHash;
+        }
+        if (isEmpty(tx.link) && StateContainer.of(context).wallet!.address == tx.to_address) {
+          tx.link = lastBlockHash;
+        }
+        // save to db:
+        sl.get<DBHelper>().replaceTXDataByUUID(tx);
+      }
+      // if unacknowledged, we're the recipient, and not local, ACK it:
+      if (tx.is_acknowledged == false && tx.to_address == StateContainer.of(context).wallet!.address && !tx.uuid!.contains("LOCAL")) {
+        log.v("ACKNOWLEDGING TX_DATA: ${tx.uuid}");
+        sl.get<AccountService>().requestACK(tx.uuid, tx.from_address, tx.to_address);
+      }
+      if (tx.is_memo && isEmpty(tx.link) && isNotEmpty(tx.block)) {
+        if (_historyListMap[StateContainer.of(context).wallet!.address] != null) {
+          // find if there's a matching link:
+          // for (var histItem in StateContainer.of(context).wallet.history) {
+          for (final AccountHistoryResponseItem histItem in _historyListMap[StateContainer.of(context).wallet!.address]!) {
+            if (histItem.link == tx.block) {
+              tx.link = histItem.hash;
+              // save to db:
+              sl.get<DBHelper>().replaceTXDataByUUID(tx);
+              break;
             }
           }
         }
-      });
-    });
+      }
+
+      if (tx.record_type == RecordTypes.GIFT_LOAD) {
+        if (isNotEmpty(tx.metadata)) {
+          bool shouldUpdate = false;
+          if (tx.request_time == null) {
+            shouldUpdate = true;
+          } else if (DateTime.fromMillisecondsSinceEpoch(tx.request_time! * 1000).isBefore(DateTime.now().subtract(const Duration(minutes: 1)))) {
+            shouldUpdate = true;
+          }
+          if (shouldUpdate) {
+            tx.request_time = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+            final String balanceRaw = await getGiftBalance(tx.to_address);
+
+            if (balanceRaw.isNotEmpty) {
+              final List<String> metadata = tx.metadata!.split(RecordTypes.SEPARATOR);
+              if (metadata.length > 2) {
+                metadata[2] = balanceRaw;
+              } else if (metadata.length == 2) {
+                metadata.add(balanceRaw);
+              }
+              tx.metadata = metadata.join(RecordTypes.SEPARATOR);
+              // save to db:
+              sl.get<DBHelper>().replaceTXDataByUUID(tx);
+            }
+          }
+        }
+      }
+
+      // only applies to non-solids (i.e. memos / gifts):
+      if (!tx.isSolid()) {
+        setState(() {
+          if (isNotEmpty(tx.block) && tx.from_address == account) {
+            _txDetailsMap[tx.block!] = tx;
+          } else if (isNotEmpty(tx.link) && tx.to_address == account) {
+            _txDetailsMap[tx.link!] = tx;
+          }
+        });
+      }
+    }
   }
 
   StreamSubscription<ConfirmationHeightChangedEvent>? _confirmEventSub;
@@ -2913,6 +2941,31 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
         ));
   }
 
+  Future<String> getGiftBalance(String? address) async {
+    if (address == null) {
+      return "";
+    }
+
+    try {
+      final AccountsBalancesResponse res = await sl<AccountService>().requestAccountsBalances([address]);
+      if (res.balances?[address]?.balance == null) {
+        return "";
+      }
+
+      BigInt? balance = BigInt.tryParse(res.balances![address]!.balance!);
+      final BigInt? receivable = BigInt.tryParse(res.balances![address]!.receivable!);
+
+      if (balance == null || receivable == null) {
+        return "";
+      }
+      balance = balance + receivable;
+      return balance.toString();
+    } catch (e) {
+      sl<Logger>().e("Error getting gift balance: $e");
+      return "";
+    }
+  }
+
 // Transaction Card/List Item
   Widget _buildUnifiedCard(TXData txDetails, Animation<double> animation, String displayName, BuildContext context) {
     late String itemText;
@@ -3328,6 +3381,37 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                                                 color: StateContainer.of(context).curTheme.warning60,
                                                 fontSize: AppFontSizes.smallest,
                                                 fontWeight: FontWeight.w600)),
+                                        if (isGift &&
+                                            txDetails.record_type == RecordTypes.GIFT_LOAD &&
+                                            txDetails.metadata!.split(RecordTypes.SEPARATOR).length > 2)
+                                          Row(
+                                            children: <Widget>[
+                                              Text(
+                                                " : ",
+                                                style: AppStyles.textStyleTransactionAmount(context),
+                                              ),
+                                              Text(
+                                                getThemeAwareRawAccuracy(context, txDetails.metadata!.split(RecordTypes.SEPARATOR)[2]),
+                                                style: AppStyles.textStyleTransactionAmount(context),
+                                              ),
+                                              RichText(
+                                                textAlign: TextAlign.start,
+                                                text: TextSpan(
+                                                  text: "",
+                                                  children: [
+                                                    displayCurrencySymbol(
+                                                      context,
+                                                      AppStyles.textStyleTransactionAmount(context),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Text(
+                                                getRawAsThemeAwareFormattedAmount(context, txDetails.metadata!.split(RecordTypes.SEPARATOR)[2]),
+                                                style: AppStyles.textStyleTransactionAmount(context),
+                                              ),
+                                            ],
+                                          ),
                                       ],
                                     ),
                                 ],
@@ -3335,6 +3419,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                             ],
                           ),
                         ),
+                        // Container(
+                        //   constraints: const BoxConstraints(
+                        //     minHeight: 10,
+                        //     maxHeight: 100,
+                        //   ),
+                        //   child: Text(
+                        //     "asdadad",
+                        //     style: AppStyles.textStyleTransactionAmount(context),
+                        //   ),
+                        // ),
                         if (txDetails.memo != null && txDetails.memo!.isNotEmpty)
                           Expanded(
                             child: Container(

@@ -151,8 +151,14 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
               });
             }
           } else {
-            // check if UD or ENS address
-            if (_addressController!.text.contains(".")) {
+            // check if UD / ENS / opencap address
+            if (_addressController!.text.contains(r"$")) {
+              // check if opencap address:
+              address = await sl.get<AccountService>().checkOpencapDomain(formattedAddress);
+              if (address != null) {
+                type = UserTypes.OPENCAP;
+              }
+            } else if (_addressController!.text.contains(".")) {
               // check if UD domain:
               address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
               if (address != null) {
@@ -349,8 +355,8 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
               : AppStyles.textStyleAddressPrimary(context),
       onChanged: (String text) async {
         bool isUser = false;
-        final bool? isDomain = text.contains(".");
-        final bool? isFavorite = text.startsWith("★");
+        final bool isDomain = text.contains(".") || text.contains(r"$");
+        final bool isFavorite = text.startsWith("★");
         final bool isNano = text.startsWith("nano_");
 
         // prevent spaces:
@@ -391,7 +397,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
             _isUser = false;
             _users = [];
           });
-        } else if (isUser || isDomain!) {
+        } else if (isUser || isDomain) {
           final List<User> matchedList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
@@ -421,9 +427,9 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
           });
         }
 
-        if ((isUser || isFavorite!) != _isUser) {
+        if ((isUser || isFavorite) != _isUser) {
           setState(() {
-            _isUser = isUser || isFavorite!;
+            _isUser = isUser || isFavorite;
           });
         }
       },

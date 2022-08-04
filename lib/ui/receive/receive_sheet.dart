@@ -243,8 +243,14 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
               });
             }
           } else {
-            // check if UD or ENS address
-            if (_addressController!.text.contains(".")) {
+            // check if UD / ENS / opencap address
+            if (_addressController!.text.contains(r"$")) {
+              // check if opencap address:
+              address = await sl.get<AccountService>().checkOpencapDomain(formattedAddress);
+              if (address != null) {
+                type = UserTypes.OPENCAP;
+              }
+            } else if (_addressController!.text.contains(".")) {
               // check if UD domain:
               address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
               if (address != null) {
@@ -752,8 +758,11 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                         amountRaw = StateContainer.of(context).wallet!.accountBalance.toString();
                       }
 
-                      // verifyies the input is a user in the db
-                      if (_addressController!.text.startsWith("@") || _addressController!.text.startsWith("★") || _addressController!.text.contains(".")) {
+                      // verifies the input is a user in the db
+                      if (_addressController!.text.startsWith("@") ||
+                          _addressController!.text.startsWith("★") ||
+                          _addressController!.text.contains(".") ||
+                          _addressController!.text.contains(r"$")) {
                         // Need to make sure its a valid contact or user
                         final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
                         if (user == null) {
@@ -762,7 +771,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                               _addressValidationText = AppLocalization.of(context)!.contactInvalid;
                             } else if (_addressController!.text.startsWith("@")) {
                               _addressValidationText = AppLocalization.of(context)!.usernameInvalid;
-                            } else if (_addressController!.text.contains(".")) {
+                            } else if (_addressController!.text.contains(".") || _addressController!.text.contains(r"$")) {
                               _addressValidationText = AppLocalization.of(context)!.domainInvalid;
                             }
                           });
@@ -777,16 +786,15 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                                 memo: _memoController!.text,
                               ));
                         }
-                      } else if (_addressController!.text.contains(".")) {
+                      } else if (_addressController!.text.contains(".") || _addressController!.text.contains(r"$")) {
                         String? address;
 
                         // check if UD domain:
                         address = await sl.get<AccountService>().checkUnstoppableDomain(_addressController!.text);
-                        if (address != null) {
-                        } else {
-                          // check if ENS domain:
-                          address = await sl.get<AccountService>().checkENSDomain(_addressController!.text);
-                        }
+                        address ??= await sl.get<AccountService>().checkENSDomain(_addressController!.text);
+                        address ??= await sl.get<AccountService>().checkOpencapDomain(_addressController!.text);
+
+                        if (!mounted) return;
 
                         if (address == null) {
                           _addressValidationText = AppLocalization.of(context)!.domainInvalid;
@@ -821,526 +829,6 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
             ),
           ],
         ));
-  }
-
-  Widget build2(BuildContext context) {
-    return SafeArea(
-        minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
-        child: GestureDetector(
-            onTap: () {
-              // Clear focus of our fields when tapped in this empty space
-              _amountFocusNode!.unfocus();
-            },
-            child: Column(
-              children: <Widget>[
-                // A row for the address text and close button
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    //Empty SizedBox
-                    const SizedBox(
-                      width: 60,
-                      height: 60,
-                    ),
-                    //Container for the address text and sheet handle
-                    Column(
-                      children: <Widget>[
-                        // Sheet handle
-                        Container(
-                          margin: const EdgeInsets.only(top: 10),
-                          height: 5,
-                          width: MediaQuery.of(context).size.width * 0.15,
-                          decoration: BoxDecoration(
-                            color: StateContainer.of(context).curTheme.text20,
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                        ),
-                        // show napi username if available:
-                        Container(
-                          margin: (StateContainer.of(context).wallet?.username != null) ? const EdgeInsets.only(top: 35.0) : const EdgeInsets.only(top: 15.0),
-                          child: (StateContainer.of(context).wallet?.username != null)
-                              ? Text(StateContainer.of(context).wallet!.username!,
-                                  style: TextStyle(
-                                    fontFamily: "OverpassMono",
-                                    fontWeight: FontWeight.w100,
-                                    fontSize: 24.0,
-                                    color: StateContainer.of(context).curTheme.text60,
-                                  ))
-                              : UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!, type: ThreeLineAddressTextType.PRIMARY60),
-                        ),
-                      ],
-                    ),
-                    //Empty SizedBox
-                    const SizedBox(
-                      width: 60,
-                      height: 60,
-                    ),
-                  ],
-                ),
-
-                // Column for Enter Amount container + Enter Amount Error container
-                Column(
-                  children: <Widget>[
-                    // ******* Enter Amount Container ******* //
-                    getEnterAmountContainer(),
-                    // ******* Enter Amount Container End ******* //
-
-                    // ******* Enter Amount Error Container ******* //
-                    Container(
-                      alignment: AlignmentDirectional.center,
-                      margin: const EdgeInsets.only(top: 3),
-                      child: Text(_amountValidationText,
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: StateContainer.of(context).curTheme.primary,
-                            fontFamily: 'NunitoSans',
-                            fontWeight: FontWeight.w600,
-                          )),
-                    ),
-                    // ******* Enter Amount Error Container End ******* //
-                  ],
-                ),
-
-                // Column for Enter Address container + Enter Address Error container
-                Column(
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.topCenter,
-                      child: Stack(
-                        alignment: Alignment.topCenter,
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                            alignment: Alignment.bottomCenter,
-                            constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
-                            // ********************************************* //
-                            // ********* The pop-up Contacts List ********* //
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(25),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25),
-                                  color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  margin: const EdgeInsets.only(bottom: 50),
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    // padding: const EdgeInsets.only(bottom: 0, top: 0),
-                                    itemCount: _users.length,
-                                    itemBuilder: (BuildContext context, int index) {
-                                      return _buildUserItem(_users[index]);
-                                    },
-                                  ), // ********* The pop-up Contacts List End ********* //
-                                  // ************************************************** //
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          // ******* Enter Address Container ******* //
-                          getEnterAddressContainer(),
-                          // ******* Enter Address Container End ******* //
-                        ],
-                      ),
-                    ),
-
-                    // ******* Enter Address Error Container ******* //
-                    Container(
-                      alignment: AlignmentDirectional.center,
-                      margin: const EdgeInsets.only(top: 3),
-                      child: Text(_addressValidationText,
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: StateContainer.of(context).curTheme.primary,
-                            fontFamily: 'NunitoSans',
-                            fontWeight: FontWeight.w600,
-                          )),
-                    ),
-                    // ******* Enter Address Error Container End ******* //
-                  ],
-                ),
-
-                // Column for Enter Memo container + Enter Memo Error container
-                Column(
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.topCenter,
-                      child: Stack(
-                        alignment: Alignment.topCenter,
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                            alignment: Alignment.bottomCenter,
-                            constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
-                          ),
-
-                          // ******* Enter Memo Container ******* //
-                          getEnterMemoContainer(),
-                          // ******* Enter Memo Container End ******* //
-                        ],
-                      ),
-                    ),
-
-                    // ******* Enter Memo Error Container ******* //
-                    Container(
-                      alignment: AlignmentDirectional.center,
-                      margin: const EdgeInsets.only(top: 3),
-                      child: Text(_memoValidationText,
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: StateContainer.of(context).curTheme.primary,
-                            fontFamily: 'NunitoSans',
-                            fontWeight: FontWeight.w600,
-                          )),
-                    ),
-                    // ******* Enter Memo Error Container End ******* //
-                  ],
-                ),
-
-                // QR which takes all the available space left from the buttons & address text
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
-                    child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-                      final double availableWidth = constraints.maxWidth;
-                      final double availableHeight =
-                          (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
-                      const double widthDivideFactor = 1.3;
-                      final double computedMaxSize = Math.min(availableWidth / widthDivideFactor, availableHeight);
-                      return Center(
-                        child: Stack(
-                          children: <Widget>[
-                            if (_showShareCard)
-                              Container(
-                                alignment: AlignmentDirectional.center,
-                                child: AppShareCard(
-                                  shareCardKey,
-                                  Center(
-                                    child: Transform.translate(
-                                      offset: Offset.zero,
-                                      child: ClipOval(
-                                        child: Container(
-                                          color: Colors.white,
-                                          height: computedMaxSize,
-                                          width: computedMaxSize,
-                                          child: qrWidget,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const Image(image: AssetImage("assets/logo.png")),
-                                ),
-                              ),
-                            // This is for hiding the share card
-                            Center(
-                              child: Container(
-                                width: 260,
-                                height: 150,
-                                color: StateContainer.of(context).curTheme.backgroundDark,
-                              ),
-                            ),
-                            // Background/border part the QR
-                            // Center(
-                            //   child: SizedBox(
-                            //     width: computedMaxSize / 1.07,
-                            //     height: computedMaxSize / 1.07,
-                            //     child: SvgPicture.asset('legacy_assets/QR.svg'),
-                            //   ),
-                            // ),
-
-                            // Background/border part the QR:
-                            Center(
-                              child: ClipOval(
-                                child: Container(
-                                  color: Colors.white,
-                                  height: computedMaxSize,
-                                  width: computedMaxSize,
-                                  child: qrWidget,
-                                ),
-                              ),
-                            ),
-
-                            // Actual QR part of the QR
-                            Center(
-                              child: Container(
-                                color: Colors.white,
-                                padding: EdgeInsets.all(computedMaxSize / 51),
-                                height: computedMaxSize / 1.53,
-                                width: computedMaxSize / 1.53,
-                                child: qrWidget,
-                              ),
-                            ),
-
-                            // Outer ring
-                            Center(
-                              child: Container(
-                                width: computedMaxSize,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),
-                                ),
-                              ),
-                            ),
-                            // Logo Background White
-                            Center(
-                              child: Container(
-                                width: computedMaxSize / 5.5,
-                                height: computedMaxSize / 5.5,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            // Logo Background Primary
-                            Center(
-                              child: Container(
-                                width: computedMaxSize / 6.5,
-                                height: computedMaxSize / 6.5,
-                                decoration: const BoxDecoration(
-                                  color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: SizedBox(
-                                height: computedMaxSize / 8,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: const Image(image: AssetImage("assets/logo.png")),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }),
-                  ),
-                ),
-
-                //A column with Copy Address and Share Address buttons
-                Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        AppButton.buildAppButton(
-                            context,
-                            // Copy Address Button
-                            _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
-                            Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
-                          Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
-                          setState(() {
-                            // Set copied style
-                            _addressCopied = true;
-                          });
-                          if (_addressCopiedTimer != null) {
-                            _addressCopiedTimer!.cancel();
-                          }
-                          _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                            if (mounted) {
-                              setState(() {
-                                _addressCopied = false;
-                              });
-                            }
-                          });
-                        }),
-                        AppButton.buildAppButton(
-                            context,
-                            // Share Address Button
-                            AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context)!.addressShare,
-                            Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
-                            disabled: _showShareCard, onPressed: () {
-                          final String receiveCardFileName = "share_${StateContainer.of(context).wallet!.address}.png";
-                          getApplicationDocumentsDirectory().then((Directory directory) {
-                            final String filePath = "${directory.path}/$receiveCardFileName";
-                            final File f = File(filePath);
-                            setState(() {
-                              _showShareCard = true;
-                            });
-                            Future.delayed(const Duration(milliseconds: 50), () {
-                              if (_showShareCard) {
-                                _capturePng().then((Uint8List? byteData) {
-                                  if (byteData != null) {
-                                    f.writeAsBytes(byteData).then((File file) {
-                                      UIUtil.cancelLockEvent();
-                                      Share.shareFiles([filePath], text: StateContainer.of(context).wallet!.address);
-                                    });
-                                  } else {
-                                    // TODO - show a something went wrong message
-                                  }
-                                  setState(() {
-                                    _showShareCard = false;
-                                  });
-                                });
-                              }
-                            });
-                          });
-                        }),
-                      ],
-                    ),
-                    // Row(
-                    //   children: <Widget>[
-                    //     AppButton.buildAppButton(
-                    //       context,
-                    //       // Share Address Button
-                    //       AppButtonType.PRIMARY_OUTLINE,
-                    //       AppLocalization.of(context)!.shareViaNFC,
-                    //       Dimens.BUTTON_BOTTOM_DIMENS,
-                    //       onPressed: () async {
-                    //         // final availability = await FlutterNfcKit.nfcAvailability;
-                    //         // print("ok");
-                    //         // if (availability != NFCAvailability.available) {
-                    //         //   // oh-no
-                    //         //   print("NFC is not available");
-                    //         // }
-
-                    //         // // timeout only works on Android, while the latter two messages are only for iOS
-                    //         // var tag = await FlutterNfcKit.poll(
-                    //         //     timeout: Duration(seconds: 10), iosMultipleTagMessage: "Multiple tags found!", iosAlertMessage: "Scan your tag");
-                    //         // print(jsonEncode(tag));
-                    //         // // if (tag.type == NFCTagType.iso7816) {
-                    //         // //   var result = await FlutterNfcKit.transceive("00B0950000",
-                    //         // //       timeout: Duration(seconds: 5)); // timeout is still Android-only, persist until next change
-                    //         // //   print(result);
-                    //         // // }
-                    //         // // // read NDEF records if available
-                    //         // if (tag.ndefAvailable!) {
-                    //         //   /// decoded NDEF records (see [ndef.NDEFRecord] for details)
-                    //         //   /// `UriRecord: id=(empty) typeNameFormat=TypeNameFormat.nfcWellKnown type=U uri=https://github.com/nfcim/ndef`
-                    //         //   for (var record in await FlutterNfcKit.readNDEFRecords(cached: false)) {
-                    //         //     print(record.toString());
-                    //         //   }
-
-                    //         // //   /// raw NDEF records (data in hex string)
-                    //         // //   /// `{identifier: "", payload: "00010203", type: "0001", typeNameFormat: "nfcWellKnown"}`
-                    //         // //   for (var record in await FlutterNfcKit.readNDEFRawRecords(cached: false)) {
-                    //         // //     print(jsonEncode(record).toString());
-                    //         // //   }
-                    //         // }
-
-                    //         // write NDEF record:
-                    //         // decoded NDEF records
-                    //         // await FlutterNfcKit.writeNDEFRecords([new ndef.UriRecord.fromUriString("https://github.com/nfcim/flutter_nfc_kit")]);
-                    //         // raw NDEF records
-                    //         // await FlutterNfcKit.writeNDEFRawRecords([new NDEFRawRecord("0001", "0002", "0003", ndef.TypeNameFormat.unknown)]);
-                    //       },
-                    //     ),
-                    //   ],
-                    // ),
-                    // Row(
-                    //   children: <Widget>[
-                    //     AppButton.buildAppButton(
-                    //       context,
-                    //       // Share Address Button
-                    //       AppButtonType.PRIMARY_OUTLINE,
-                    //       AppLocalization.of(context)!.nearby,
-                    //       Dimens.BUTTON_BOTTOM_DIMENS,
-                    //       onPressed: () async {
-                    //         Sheets.showAppHeightNineSheet(
-                    //           context: context,
-                    //           widget: const NearbyDevicesSheet(),
-                    //         );
-                    //       },
-                    //     ),
-                    //   ],
-                    // ),
-                    Row(
-                      children: <Widget>[
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.request, Dimens.BUTTON_BOTTOM_DIMENS,
-                            onPressed: () async {
-                          // final bool validRequest = await _validateRequest(isRequest: true);
-
-                          // if (!validRequest) {
-                          //   return;
-                          // }
-                          // final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
-
-                          // final String formattedAmount = _amountController!.text
-                          //     .replaceAll(_localCurrencyFormat!.currencySymbol, "")
-                          //     .replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "")
-                          //     .replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
-
-                          // String amountRaw;
-                          // if (_amountController!.text.isEmpty || _amountController!.text == "0") {
-                          //   amountRaw = "0";
-                          // } else {
-                          //   if (_localCurrencyMode) {
-                          //     amountRaw = NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto());
-                          //   } else {
-                          //     if (!mounted) return;
-                          //     amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
-                          //   }
-                          // }
-
-                          // bool isMaxSend = false;
-                          // if (_isMaxSend()) {
-                          //   isMaxSend = true;
-                          //   amountRaw = StateContainer.of(context).wallet!.accountBalance.toString();
-                          // }
-
-                          // // verifyies the input is a user in the db
-                          // if (_addressController!.text.startsWith("@") || _addressController!.text.startsWith("★") || _addressController!.text.contains(".")) {
-                          //   // Need to make sure its a valid contact or user
-                          //   final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
-                          //   if (user == null) {
-                          //     setState(() {
-                          //       if (_addressController!.text.startsWith("★")) {
-                          //         _addressValidationText = AppLocalization.of(context)!.contactInvalid;
-                          //       } else if (_addressController!.text.startsWith("@")) {
-                          //         _addressValidationText = AppLocalization.of(context)!.usernameInvalid;
-                          //       } else if (_addressController!.text.contains(".")) {
-                          //         _addressValidationText = AppLocalization.of(context)!.domainInvalid;
-                          //       }
-                          //     });
-                          //   } else {
-                          //     Sheets.showAppHeightNineSheet(
-                          //         context: context,
-                          //         widget: RequestConfirmSheet(
-                          //           amountRaw: amountRaw,
-                          //           destination: user.address!,
-                          //           contactName: user.getDisplayName(),
-                          //           localCurrency: _localCurrencyMode ? _amountController!.text : null,
-                          //           memo: _memoController!.text,
-                          //         ));
-                          //   }
-                          // } else if (_addressController!.text.contains(".")) {
-                          //   String? address;
-
-                          //   // check if UD domain:
-                          //   address = await sl.get<AccountService>().checkUnstoppableDomain(_addressController!.text);
-                          //   if (address != null) {
-                          //   } else {
-                          //     // check if ENS domain:
-                          //     address = await sl.get<AccountService>().checkENSDomain(_addressController!.text);
-                          //   }
-
-                          //   if (address == null) {
-                          //     _addressValidationText = AppLocalization.of(context)!.domainInvalid;
-                          //   }
-                          // } else {
-                          //   Sheets.showAppHeightNineSheet(
-                          //       context: context,
-                          //       widget: RequestConfirmSheet(
-                          //           amountRaw: amountRaw,
-                          //           destination: _addressController!.text,
-                          //           localCurrency: _localCurrencyMode ? _amountController!.text : null,
-                          //           memo: _memoController!.text));
-                          // }
-                        }),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            )));
   }
 
   String _convertLocalCurrencyToCrypto() {
@@ -1685,7 +1173,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     // Validate address
     final bool isUser = _addressController!.text.startsWith("@");
     final bool isFavorite = _addressController!.text.startsWith("★");
-    final bool isDomain = _addressController!.text.contains(".");
+    final bool isDomain = _addressController!.text.contains(".") || _addressController!.text.contains(r"$");
     final bool isNano = _addressController!.text.startsWith("nano_");
     // final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
     if (_addressController!.text.trim().isEmpty && isRequest) {
@@ -1896,7 +1384,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                 : AppStyles.textStyleAddressPrimary(context),
         onChanged: (String text) async {
           bool isUser = false;
-          final bool isDomain = text.contains(".");
+          final bool isDomain = text.contains(".") || text.contains(r"$");
           final bool isFavorite = text.startsWith("★");
           final bool isNano = text.startsWith("nano_");
 

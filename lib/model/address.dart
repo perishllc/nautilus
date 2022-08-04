@@ -66,8 +66,8 @@ dynamic uriParser(String value) {
         }
         final String decodedAuth = utf8.decode(base64Url.decode(encodedAuth));
         try {
-          var decoded = jsonDecode(decodedAuth);
-          print(JsonEncoder.withIndent("  ").convert(decoded));
+          // var decoded = jsonDecode(decodedAuth);
+          // print(JsonEncoder.withIndent("  ").convert(decoded));
           finAuthItem = AuthItem.fromJson(jsonDecode(decodedAuth) as Map<String, dynamic>);
         } catch (error) {
           sl.get<Logger>().e(error);

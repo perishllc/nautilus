@@ -1,8 +1,8 @@
-## v0.5.2 - [2022-08-XX]
+## v0.5.2 - [2022-08-05]
 #### Added
 - Hide empty accounts button on the accounts sheet
 - Usernames on send / receive sheets
-- Opencap address support
+- Gift cards now show their current balances that update ~every minute (requires a pull to refresh)
 #### Changed
 - Re-worked request button into the receive sheet
 #### Fixed

@@ -117,8 +117,14 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
               });
             }
           } else {
-            // check if UD or ENS address
-            if (_addressController!.text.contains(".")) {
+            // check if UD / ENS / opencap address
+            if (_addressController!.text.contains(r"$")) {
+              // check if opencap address:
+              address = await sl.get<AccountService>().checkOpencapDomain(formattedAddress);
+              if (address != null) {
+                type = UserTypes.OPENCAP;
+              }
+            } else if (_addressController!.text.contains(".")) {
               // check if UD domain:
               address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
               if (address != null) {
@@ -175,7 +181,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
       controller: _addressController,
       cursorColor: StateContainer.of(context).curTheme.primary,
       inputFormatters: [
-        _isUser ? LengthLimitingTextInputFormatter(20) : LengthLimitingTextInputFormatter(65),
+        if (_isUser) LengthLimitingTextInputFormatter(20) else LengthLimitingTextInputFormatter(65),
       ],
       textInputAction: TextInputAction.done,
       maxLines: null,
@@ -185,19 +191,18 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
           icon: AppIcons.scan,
           onPressed: () async {
             UIUtil.cancelLockEvent();
-            final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context);
+            final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
+            if (!mounted) return;
             if (scanResult == null) {
               UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
             } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
-              if (mounted) {
-                setState(() {
-                  _addressController!.text = scanResult;
-                  _addressValidationText = "";
-                  _addressValid = true;
-                  _addressValidAndUnfocused = true;
-                });
-                _addressFocusNode!.unfocus();
-              }
+              setState(() {
+                _addressController!.text = scanResult;
+                _addressValidationText = "";
+                _addressValid = true;
+                _addressValidAndUnfocused = true;
+              });
+              _addressFocusNode!.unfocus();
             }
           }),
       fadePrefixOnCondition: true,
@@ -234,7 +239,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
               : AppStyles.textStyleAddressPrimary(context),
       onChanged: (String text) async {
         bool isUser = false;
-        final bool isDomain = text.contains(".");
+        final bool isDomain = text.contains(".") || text.contains(r"$");
         final bool isFavorite = text.startsWith("★");
         final bool isNano = text.startsWith("nano_");
 

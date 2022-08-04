@@ -12,6 +12,7 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
+import 'package:multicast_dns/multicast_dns.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/model/state_block.dart';
 import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
@@ -479,10 +480,25 @@ class AccountService {
   Future<String?> checkOpencapDomain(String domain) async {
     // get the SRV record:
     String tld = domain.split(r"$").last;
-    // TODO:
+
+    final MDnsClient client = MDnsClient();
+    // Start the client with default options.
+    await client.start();
+
+    String resolvedDomain = "";
+
+    // Look for SRV records for the given domain.
+    await for (final SrvResourceRecord srv in client.lookup<SrvResourceRecord>(ResourceRecordQuery.service(tld))) {
+      resolvedDomain = "${srv.target}:${srv.port}";
+    }
+    client.stop();
+
+    if (resolvedDomain.isEmpty) {
+      return null;
+    }
 
     // GET /v1/addresses?alias=alice$domain.tld&address_type=100
-    String resolvedDomain = "opencap.nano.to";
+    
     final http.Response response =
         await http.get(Uri.parse("$resolvedDomain/v1/addresses?alias=$domain&address_type=300"), headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {

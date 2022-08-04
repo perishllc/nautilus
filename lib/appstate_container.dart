@@ -1127,7 +1127,7 @@ class StateContainerState extends State<StateContainer> {
         }
 
         // if (wallet!.watchOnly) {
-        //   // check for duplacates in the wallet history:
+        //   // check for duplicates in the wallet history:
         //   final List<String?> histHashes = [];
         //   final List<String?> toRemove = [];
         //   for (final AccountHistoryResponseItem histItem in wallet!.history!) {
@@ -1745,7 +1745,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> handlePaymentACK(dynamic data, {bool delay_update = false}) async {
-    print("handling payment_ack from: ${data['requesting_account']}");
+    sl.get<Logger>().v("handling payment_ack from: ${data['requesting_account']}");
     sl.get<Logger>().v("handling payment_ack");
     final String? amountRaw = data['amount_raw'] as String?;
     final String? requestingAccount = data['requesting_account'] as String?;

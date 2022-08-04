@@ -31,6 +31,17 @@ class DeviceUtil {
     }
   }
 
+  static Future<bool> isIpad() async {
+    if (!Platform.isIOS) {
+      return false;
+    }
+    final IosDeviceInfo deviceInfo = await DeviceInfoPlugin().iosInfo;
+    if (deviceInfo.model != null && deviceInfo.model!.toLowerCase().contains("ipad")) {
+      return true;
+    }
+    return false;
+  }
+
   static Future<bool> isIOS11OrGreater() async {
     if (!Platform.isIOS) {
       return false;

@@ -1118,7 +1118,6 @@ bool compare(Uint8List lh, Uint8List rh) {
 
     a[0] = d[0] = 1;
     for (i = 254; i >= 0; --i) {
-      // print("here5.01: $i");
       r = (s[i >> 3] >> (i & 7)) & 1;
       sel25519(a, b, r);
       sel25519(c, d, r);

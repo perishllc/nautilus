@@ -38,6 +38,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/deviceutil.dart';
 import 'package:nautilus_wallet_flutter/util/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
@@ -47,14 +48,14 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:uni_links/uni_links.dart';
 
 class SendSheet extends StatefulWidget {
+  const SendSheet({required this.localCurrency, this.user, this.address, this.quickSendAmount}) : super();
+
   final AvailableCurrency localCurrency;
   final User? user;
   final String? address;
   final String? quickSendAmount;
 
-  SendSheet({required this.localCurrency, this.user, this.address, this.quickSendAmount}) : super();
-
-  _SendSheetState createState() => _SendSheetState();
+  SendSheetState createState() => SendSheetState();
 }
 
 enum AddressStyle { TEXT60, TEXT90, PRIMARY }
@@ -65,7 +66,7 @@ mixin SendSheetHelpers {
   }
 }
 
-class _SendSheetState extends State<SendSheet> {
+class SendSheetState extends State<SendSheet> {
   final Logger log = sl.get<Logger>();
 
   FocusNode? _addressFocusNode;
@@ -99,6 +100,8 @@ class _SendSheetState extends State<SendSheet> {
   String _lastLocalCurrencyAmount = "";
   String _lastCryptoAmount = "";
   NumberFormat? _localCurrencyFormat;
+
+  bool isIpad = false;
 
   final int _REQUIRED_CONFIRMATION_HEIGHT = 10;
 
@@ -226,8 +229,14 @@ class _SendSheetState extends State<SendSheet> {
               });
             }
           } else {
-            // check if UD or ENS address
-            if (_addressController!.text.contains(".")) {
+            // check if UD / ENS / opencap address
+            if (_addressController!.text.contains(r"$")) {
+              // check if opencap address:
+              address = await sl.get<AccountService>().checkOpencapDomain(formattedAddress);
+              if (address != null) {
+                type = UserTypes.OPENCAP;
+              }
+            } else if (_addressController!.text.contains(".")) {
               // check if UD domain:
               address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
               if (address != null) {
@@ -285,6 +294,15 @@ class _SendSheetState extends State<SendSheet> {
         });
       });
     }
+
+    // kind of a hack but w/e
+    DeviceUtil.isIpad().then((bool value) {
+      if (value) {
+        setState(() {
+          isIpad = true;
+        });
+      }
+    });
   }
 
   Future<bool> showNotificationDialog() async {
@@ -892,7 +910,7 @@ class _SendSheetState extends State<SendSheet> {
                         amountRaw = StateContainer.of(context).wallet!.accountBalance.toString();
                       }
 
-                      // verifyies the input is a user in the db
+                      // verifies the input is a user in the db
                       if (!_addressController!.text.startsWith("nano_") && !isPhoneNumber && _addressController!.text.isNotEmpty) {
                         // Need to make sure its a valid contact or user
                         final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
@@ -902,7 +920,7 @@ class _SendSheetState extends State<SendSheet> {
                               _addressValidationText = AppLocalization.of(context)!.contactInvalid;
                             } else if (_addressController!.text.startsWith("@")) {
                               _addressValidationText = AppLocalization.of(context)!.usernameInvalid;
-                            } else if (_addressController!.text.contains(".")) {
+                            } else if (_addressController!.text.contains(".") || _addressController!.text.contains(r"$")) {
                               _addressValidationText = AppLocalization.of(context)!.domainInvalid;
                             }
                           });
@@ -1065,7 +1083,7 @@ class _SendSheetState extends State<SendSheet> {
                     })
                   ],
                 ),
-                if (Platform.isIOS)
+                if (Platform.isIOS && !isIpad)
                   Row(
                     children: <Widget>[
                       // scan for nfc
@@ -1290,7 +1308,7 @@ class _SendSheetState extends State<SendSheet> {
     // Validate address
     final bool isUser = _addressController!.text.startsWith("@");
     final bool isFavorite = _addressController!.text.startsWith("★");
-    final bool isDomain = _addressController!.text.contains(".");
+    final bool isDomain = _addressController!.text.contains(".") || _addressController!.text.contains(r"$");
     final bool isNano = _addressController!.text.startsWith("nano_");
     final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
     if (_addressController!.text.trim().isEmpty && isRequest) {
@@ -1524,7 +1542,7 @@ class _SendSheetState extends State<SendSheet> {
                 : AppStyles.textStyleAddressPrimary(context),
         onChanged: (String text) async {
           bool isUser = false;
-          final bool isDomain = text.contains(".");
+          final bool isDomain = text.contains(".") || text.contains(r"$");
           final bool isFavorite = text.startsWith("★");
           final bool isNano = text.startsWith("nano_");
 

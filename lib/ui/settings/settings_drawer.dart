@@ -2125,6 +2125,39 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
                     ),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context)!.showUnopenedWarning, _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context)!.showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context)!.showFunding, _curFundingSetting, AppIcons.money_bill_wave, _fundingDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context)!.currencyMode, _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context)!.receiveMinimum, _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    Container(
+                      margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+                      child: Text(AppLocalization.of(context)!.manage,
+                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                    ),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.changeRepAuthenticate, AppIcons.changerepresentative,
+                        onPressed: () {
+                      AppChangeRepresentativeSheet().mainBottomSheet(context);
+                      if (!StateContainer.of(context).nanoNinjaUpdated) {
+                        NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? result) {
+                          if (result != null) {
+                            StateContainer.of(context).updateNinjaNodes(result);
+                          }
+                        });
+                      }
+                    }),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.resetDatabase, AppIcons.trashcan, onPressed: () async {
                       AppDialogs.showConfirmDialog(context, AppLocalization.of(context)!.resetDatabase, AppLocalization.of(context)!.resetDatabaseConfirmation,
                           CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () async {
@@ -2181,33 +2214,6 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         //   Navigator.of(context).pop();
                         // }
                       }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
-                    }),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context)!.showFunding, _curFundingSetting, AppIcons.money_bill_wave, _fundingDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context)!.showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context)!.currencyMode, _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context)!.showUnopenedWarning, _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context)!.receiveMinimum, _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.changeRepAuthenticate, AppIcons.changerepresentative,
-                        onPressed: () {
-                      AppChangeRepresentativeSheet().mainBottomSheet(context);
-                      if (!StateContainer.of(context).nanoNinjaUpdated) {
-                        NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? result) {
-                          if (result != null) {
-                            StateContainer.of(context).updateNinjaNodes(result);
-                          }
-                        });
-                      }
                     }),
                   ],
                 ),
