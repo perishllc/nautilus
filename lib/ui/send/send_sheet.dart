@@ -1083,22 +1083,22 @@ class SendSheetState extends State<SendSheet> {
                     })
                   ],
                 ),
-                if (Platform.isIOS && !isIpad)
-                  Row(
-                    children: <Widget>[
-                      // scan for nfc
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.sendViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
-                          onPressed: () async {
-                        try {
-                          UIUtil.cancelLockEvent();
-                          startNFCSession("");
-                        } catch (e) {
-                          stopNFCSession();
-                        }
-                      })
-                    ],
-                  ),
-              ],
+              //   if (Platform.isIOS && !isIpad)
+              //     Row(
+              //       children: <Widget>[
+              //         // scan for nfc
+              //         AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.sendViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
+              //             onPressed: () async {
+              //           try {
+              //             UIUtil.cancelLockEvent();
+              //             startNFCSession("");
+              //           } catch (e) {
+              //             stopNFCSession();
+              //           }
+              //         })
+              //       ],
+              //     ),
+              // ],
             ),
           ],
         ));

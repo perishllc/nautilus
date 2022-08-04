@@ -3,8 +3,10 @@
 - Hide empty accounts button on the accounts sheet
 - Usernames on send / receive sheets
 - Gift cards now show their current balances that update ~every minute (requires a pull to refresh)
+- Message when the backend fails to connect for more than ~8 seconds
 #### Changed
 - Re-worked request button into the receive sheet
+- Moved a bunch of settings to a new "More Settings" section
 #### Fixed
 - Fixes on the send screen with local currencies and requests
 ## v0.5.1 - [2022-07-31]
