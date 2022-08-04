@@ -3,12 +3,14 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:ens_dart/ens_dart.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/model/state_block.dart';
@@ -16,6 +18,7 @@ import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/payment/payment_ack.dart';
 import 'package:nautilus_wallet_flutter/network/model/payment/payment_memo.dart';
+import 'package:nautilus_wallet_flutter/network/model/payment/payment_message.dart';
 import 'package:nautilus_wallet_flutter/network/model/payment/payment_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/account_history_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/account_info_request.dart';
@@ -46,8 +49,6 @@ import 'package:package_info/package_info.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
-
-import 'model/payment/payment_message.dart';
 
 // Server Connection String
 String _BASE_SERVER_ADDRESS = "nautilus.perish.co";
@@ -212,6 +213,29 @@ class AccountService {
     log.w("disconnected from service with error ${e.toString()}");
     // Send disconnected message
     EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
+  }
+
+  // are we connected?
+  // Future<bool> isConnected() async {
+  //   try {
+  //     final List<InternetAddress> result = await InternetAddress.lookup(_BASE_SERVER_ADDRESS);
+  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+  //       print(result[0].rawAddress);
+  //       return true;
+  //     }
+  //   } on SocketException catch (_) {
+  //     log.d('not connected to the internet!');
+  //   }
+  //   return false;
+  // }
+
+  Future<bool> isConnected() async {
+    final ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult != ConnectivityResult.bluetooth && connectivityResult != ConnectivityResult.none) {
+      // I am connected to some network, make sure there is actually a net connection.
+      return InternetConnectionChecker().hasConnection;
+    }
+    return false;
   }
 
   // Close connection
@@ -450,6 +474,25 @@ class AccountService {
         return null;
       }
     }
+  }
+
+  Future<String?> checkOpencapDomain(String domain) async {
+    // get the SRV record:
+    String tld = domain.split(r"$").last;
+    // TODO:
+
+    // GET /v1/addresses?alias=alice$domain.tld&address_type=100
+    String resolvedDomain = "opencap.nano.to";
+    final http.Response response =
+        await http.get(Uri.parse("$resolvedDomain/v1/addresses?alias=$domain&address_type=300"), headers: {"Accept": "application/json"});
+    if (response.statusCode != 200) {
+      return null;
+    }
+    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
+    if (decoded.containsKey("address")) {
+      return decoded["address"] as String?;
+    }
+    return null;
   }
 
   Future<dynamic> checkUsernameAvailability(String username) async {

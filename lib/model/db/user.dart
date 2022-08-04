@@ -7,6 +7,7 @@ class UserTypes {
   static const String UD = "unstoppable_domain";
   static const String ENS = "ethereum_name_service";
   static const String NANO_TO = "nano_to";
+  static const String OPENCAP = "opencap";
   static const String CONTACT = "contact";
 }
 

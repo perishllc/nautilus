@@ -143,6 +143,12 @@
       "css": "file_import",
       "code": 62831,
       "src": "fontawesome5"
+    },
+    {
+      "uid": "d1f738181afef6e0fc564368153dadcf",
+      "css": "more_horiz",
+      "code": 59401,
+      "src": "material"
     }
   ]
 }

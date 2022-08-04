@@ -1,6 +1,10 @@
 ## v0.5.2 - [2022-08-XX]
 #### Added
+- Hide empty accounts button on the accounts sheet
+- Usernames on send / receive sheets
+- Opencap address support
 #### Changed
+- Re-worked request button into the receive sheet
 #### Fixed
 - Fixes on the send screen with local currencies and requests
 ## v0.5.1 - [2022-07-31]

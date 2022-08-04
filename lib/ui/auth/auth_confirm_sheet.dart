@@ -127,42 +127,42 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.backgroundDarkest,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    // Amount text
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        text: "",
-                        children: [
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, widget.handoffItem.amount),
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                          displayCurrencySymbol(
-                            context,
-                            AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                          TextSpan(
-                            text: getRawAsThemeAwareFormattedAmount(context, widget.handoffItem.amount),
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                          TextSpan(
-                            text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
-                            style: AppStyles.textStyleParagraphPrimary(context).copyWith(
-                              color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                  //   padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  //   width: double.infinity,
+                  //   decoration: BoxDecoration(
+                  //     color: StateContainer.of(context).curTheme.backgroundDarkest,
+                  //     borderRadius: BorderRadius.circular(50),
+                  //   ),
+                  //   // Amount text
+                  //   child: RichText(
+                  //     textAlign: TextAlign.center,
+                  //     text: TextSpan(
+                  //       text: "",
+                  //       children: [
+                  //         TextSpan(
+                  //           text: getThemeAwareRawAccuracy(context, widget.authItem.amount),
+                  //           style: AppStyles.textStyleParagraphPrimary(context),
+                  //         ),
+                  //         displayCurrencySymbol(
+                  //           context,
+                  //           AppStyles.textStyleParagraphPrimary(context),
+                  //         ),
+                  //         TextSpan(
+                  //           text: getRawAsThemeAwareFormattedAmount(context, widget.authItem.amount),
+                  //           style: AppStyles.textStyleParagraphPrimary(context),
+                  //         ),
+                  //         TextSpan(
+                  //           text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
+                  //           style: AppStyles.textStyleParagraphPrimary(context).copyWith(
+                  //             color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
 
                   // "TO" text
                   if (widget.link.isEmpty)

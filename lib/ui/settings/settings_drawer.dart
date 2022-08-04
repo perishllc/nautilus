@@ -81,9 +81,11 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   AnimationController? _contactsController;
   AnimationController? _blockedController;
   late AnimationController _securityController;
+  late AnimationController _moreSettingsController;
   late Animation<Offset> _contactsOffsetFloat;
   late Animation<Offset> _blockedOffsetFloat;
   late Animation<Offset> _securityOffsetFloat;
+  late Animation<Offset> _moreSettingsOffsetFloat;
   late ScrollController _scrollController;
 
   String versionString = "";
@@ -108,6 +110,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   bool? _contactsOpen;
   bool? _blockedOpen;
   late bool _securityOpen;
+  late bool _moreSettingsOpen;
 
   // Called if transfer fails
   void transferError() {
@@ -144,6 +147,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     _contactsOpen = false;
     _blockedOpen = false;
     _securityOpen = false;
+    _moreSettingsOpen = false;
     _loadingAccounts = false;
     // Determine if they have face or fingerprint enrolled, if not hide the setting
     sl.get<BiometricUtil>().hasBiometrics().then((bool hasBiometrics) {
@@ -265,12 +269,18 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       vsync: this,
       duration: const Duration(milliseconds: 220),
     );
+    // For more settings menu
+    _moreSettingsController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 220),
+    );
 
     _scrollController = ScrollController();
 
-    _contactsOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: const Offset(0, 0)).animate(_contactsController!);
-    _securityOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: const Offset(0, 0)).animate(_securityController);
-    _blockedOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: const Offset(0, 0)).animate(_blockedController!);
+    _contactsOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_contactsController!);
+    _securityOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_securityController);
+    _blockedOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_blockedController!);
+    _moreSettingsOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_moreSettingsController);
     // Version string
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       setState(() {
@@ -528,7 +538,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            title:             Row(
+            title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
@@ -821,10 +831,10 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           );
         });
 
-    final String raw_value = MinRawSetting(chosen).getRaw();
-    sl.get<SharedPrefsUtil>().setMinRawReceive(raw_value).then((result) {
+    final String rawValue = MinRawSetting(chosen).getRaw();
+    sl.get<SharedPrefsUtil>().setMinRawReceive(rawValue).then((result) {
       setState(() {
-        StateContainer.of(context).setMinRawReceive(raw_value);
+        StateContainer.of(context).setMinRawReceive(rawValue);
         _curMinRawSetting = MinRawSetting(chosen);
       });
     });
@@ -1169,6 +1179,12 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       });
       _blockedController!.reverse();
       return false;
+    } else if (_moreSettingsOpen) {
+      setState(() {
+        _moreSettingsOpen = false;
+      });
+      _moreSettingsController.reverse();
+      return false;
     }
     return true;
   }
@@ -1191,6 +1207,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             SlideTransition(position: _contactsOffsetFloat, child: ContactsList(_contactsController, _contactsOpen)),
             SlideTransition(position: _blockedOffsetFloat, child: BlockedList(_blockedController, _blockedOpen)),
             SlideTransition(position: _securityOffsetFloat, child: buildSecurityMenu(context)),
+            SlideTransition(position: _moreSettingsOffsetFloat, child: buildMoreSettingsMenu(context)),
           ],
         ),
       ),
@@ -1306,25 +1323,16 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           child: Text(AppLocalization.of(context)!.featured,
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
         ),
-        // Divider(
-        //   height: 2,
-        //   color: StateContainer.of(context).curTheme.text15,
-        // ),
+        // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).home, AppIcons.home, onPressed: () {
         //   Navigator.of(context).pushNamed("/home_transition");
         // }),
-        // Divider(
-        //   height: 2,
-        //   color: StateContainer.of(context).curTheme.text15,
-        // ),
+        // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).payments, AppIcons.money_bill_alt, onPressed: () {
         //   Navigator.of(context).pushNamed("/payments_page");
         // }),
         // TODO: Add back later:
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.purchaseNano, AppIcons.coins, onPressed: () async {
           // Navigator.of(context).pushNamed("/purchase_nano");
           final String? choice = await _onrampDialog();
@@ -1332,90 +1340,32 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             await UIUtil.showWebview(context, choice);
           }
         }),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.registerUsername, AppIcons.at, onPressed: () {
           Navigator.of(context).pushNamed("/register_username");
         }),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.createGiftCard, AppIcons.export_icon, onPressed: () {
           Navigator.of(context).pushNamed("/gift_paper_wallet");
         }),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         Container(
           margin: const EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
           child: Text(AppLocalization.of(context)!.preferences,
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
         ),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemDoubleLine(
             context, AppLocalization.of(context)!.changeCurrency, StateContainer.of(context).curCurrency, AppIcons.currency, _currencyDialog),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemDoubleLine(
             context, AppLocalization.of(context)!.language, StateContainer.of(context).curLanguage, AppIcons.language, _languageDialog),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemDoubleLine(
             context, AppLocalization.of(context)!.notifications, _curNotificiationSetting, AppIcons.notifications, _notificationsDialog),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
-        AppSettings.buildSettingsListItemDoubleLine(
-            context, AppLocalization.of(context)!.showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
-        AppSettings.buildSettingsListItemDoubleLine(
-            context, AppLocalization.of(context)!.showUnopenedWarning, _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context)!.themeHeader, _curThemeSetting, AppIcons.theme, _themeDialog),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
-        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.securityHeader, AppIcons.security, onPressed: () {
-          setState(() {
-            _securityOpen = true;
-          });
-          _securityController.forward();
-        }),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
-        AppSettings.buildSettingsListItemDoubleLine(
-            context, AppLocalization.of(context)!.receiveMinimum, _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
-        AppSettings.buildSettingsListItemDoubleLine(
-            context, AppLocalization.of(context)!.currencyMode, _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemDoubleLine(
           context,
           AppLocalization.of(context)!.blockExplorer,
@@ -1423,21 +1373,20 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           AppIcons.search,
           _explorerDialog,
         ),
-        AppSettings.buildSettingsListItemDoubleLine(
-            context, AppLocalization.of(context)!.showFunding, _curFundingSetting, AppIcons.money_bill_wave, _fundingDialog),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.securityHeader, AppIcons.security, onPressed: () {
+          setState(() {
+            _securityOpen = true;
+          });
+          _securityController.forward();
+        }),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         Container(
           margin: const EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
           child: Text(AppLocalization.of(context)!.manage,
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
         ),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.contactsHeader, AppIcons.contact, onPressed: () async {
           // check if contacts have been asked before:
           // reloading prefs to be sure we get the latest value:
@@ -1451,20 +1400,14 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           });
           _contactsController!.forward();
         }),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.blockedHeader, AppIcons.block, onPressed: () {
           setState(() {
             _blockedOpen = true;
           });
           _blockedController!.forward();
         }),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.backupSecretPhrase, AppIcons.backupseed, onPressed: () async {
           // Authenticate
           final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
@@ -1501,99 +1444,22 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             await authenticateWithPin();
           }
         }),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.settingsTransfer, AppIcons.transferfunds, onPressed: () {
           AppTransferOverviewSheet().mainBottomSheet(context);
         }),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
-        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.changeRepAuthenticate, AppIcons.changerepresentative, onPressed: () {
-          AppChangeRepresentativeSheet().mainBottomSheet(context);
-          if (!StateContainer.of(context).nanoNinjaUpdated) {
-            NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? result) {
-              if (result != null) {
-                StateContainer.of(context).updateNinjaNodes(result);
-              }
-            });
-          }
-        }),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.shareNautilus, AppIcons.share, onPressed: () {
           Share.share("Check out Nautilus - NANO Wallet for iOS and Android https://nautiluswallet.app");
         }),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
-        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.resetDatabase, AppIcons.trashcan, onPressed: () async {
-          AppDialogs.showConfirmDialog(context, AppLocalization.of(context)!.resetDatabase, AppLocalization.of(context)!.resetDatabaseConfirmation,
-              CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () async {
-            // push animation to prevent early exit:
-            bool animationOpen = true;
-            AppAnimation.animationLauncher(context, AnimationType.GENERIC, onPoppedCallback: () => animationOpen = false);
-
-            // sleep to flex the animation a bit:
-            await Future.delayed(const Duration(milliseconds: 500));
-
-            // Delete the database
-            try {
-              await sl.get<DBHelper>().nukeDatabase();
-            } catch (error) {
-              log.d("Error resetting database: $error");
-            }
-
-            // re-populate the users table
-            try {
-              await sl.get<DBHelper>().fetchNanoToUsernames();
-            } catch (error) {
-              log.d("Error fetching usernames: $error");
-            }
-
-            // delete preferences:
-            await sl.get<SharedPrefsUtil>().deleteAll();
-
-            // add the donations contact:
-            await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
-            final User donationsContact = User(
-                nickname: "NautilusDonations",
-                address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579",
-                username: "nautilus",
-                type: UserTypes.CONTACT);
-            await sl.get<DBHelper>().saveContact(donationsContact);
-
-            // set the "has asked for contacts" flag so it doesn't ask again:
-            await sl.get<SharedPrefsUtil>().setContactsOn(false);
-
-            // re-add account index 0 and switch the account to it:
-            final String seed = await StateContainer.of(context).getSeed();
-            await NanoUtil().loginAccount(seed, context);
-            await StateContainer.of(context).resetRecentlyUsedAccounts();
-            final Account? mainAccount = await sl.get<DBHelper>().getSelectedAccount(seed);
-            StateContainer.of(context).updateWallet(account: mainAccount!);
-            // force users list to update on the home page:
-            EventTaxiImpl.singleton().fire(ContactModifiedEvent());
-            EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: []));
-            StateContainer.of(context).updateUnified(true);
-            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
-
-            // EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: mainAccount));
-            // if (animationOpen && mounted) {
-            //   Navigator.of(context).pop();
-            // }
-          }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.moreSettings, AppIcons.more_horiz, onPressed: () async {
+          setState(() {
+            _moreSettingsOpen = true;
+          });
+          _moreSettingsController.forward();
         }),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.logout, AppIcons.logout, onPressed: () {
           AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(AppLocalization.of(context)!.warning, context),
               AppLocalization.of(context)!.logoutDetail, AppLocalization.of(context)!.logoutAction.toUpperCase(), () {
@@ -1620,10 +1486,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             });
           });
         }),
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
             child: Column(
@@ -2124,11 +1987,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
                     ),
                     // Authentication Method
-                    if (_hasBiometrics)
-                      Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15,
-                      ),
+                    if (_hasBiometrics) Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     if (_hasBiometrics)
                       AppSettings.buildSettingsListItemDoubleLine(
                           context, AppLocalization.of(context)!.authMethod, _curAuthMethod, AppIcons.fingerprint, _authMethodDialog),
@@ -2140,10 +1999,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                             context, AppLocalization.of(context)!.lockAppSetting, _curUnlockSetting, AppIcons.lock, _lockDialog),
                       ]),
                     // Authentication Timer
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
-                    ),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context)!.autoLockHeader,
@@ -2178,6 +2034,181 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                       }, disabled: _curAuthMethod.method != AuthMethod.PIN || StateContainer.of(context).encryptedSecret != null),
                     ]),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                  ],
+                ),
+                // List Top Gradient End
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    height: 20.0,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
+                        begin: const AlignmentDirectional(0.5, -1.0),
+                        end: const AlignmentDirectional(0.5, 1.0),
+                      ),
+                    ),
+                  ),
+                ), //List Top Gradient End
+              ],
+            )),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildMoreSettingsMenu(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: StateContainer.of(context).curTheme.backgroundDark,
+        boxShadow: [
+          BoxShadow(color: StateContainer.of(context).curTheme.barrierWeakest!, offset: const Offset(-5, 0), blurRadius: 20),
+        ],
+      ),
+      child: SafeArea(
+        minimum: const EdgeInsets.only(
+          top: 60,
+        ),
+        child: Column(
+          children: <Widget>[
+            // Back button and Security Text
+            Container(
+              margin: const EdgeInsets.only(bottom: 10.0, top: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      // Back button
+                      Container(
+                        height: 40,
+                        width: 40,
+                        margin: const EdgeInsets.only(right: 10, left: 10),
+                        child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: StateContainer.of(context).curTheme.text15,
+                              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                              padding: const EdgeInsets.all(8.0),
+                              // highlightColor: StateContainer.of(context).curTheme.text15,
+                              // splashColor: StateContainer.of(context).curTheme.text15,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _moreSettingsOpen = false;
+                              });
+                              _moreSettingsController.reverse();
+                            },
+                            child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
+                      ),
+                      // Security Header Text
+                      Text(
+                        AppLocalization.of(context)!.moreSettings,
+                        style: AppStyles.textStyleSettingsHeader(context),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+                child: Stack(
+              children: <Widget>[
+                ListView(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  children: [
+                    Container(
+                      margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+                      child: Text(AppLocalization.of(context)!.preferences,
+                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                    ),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.resetDatabase, AppIcons.trashcan, onPressed: () async {
+                      AppDialogs.showConfirmDialog(context, AppLocalization.of(context)!.resetDatabase, AppLocalization.of(context)!.resetDatabaseConfirmation,
+                          CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () async {
+                        // push animation to prevent early exit:
+                        bool animationOpen = true;
+                        AppAnimation.animationLauncher(context, AnimationType.GENERIC, onPoppedCallback: () => animationOpen = false);
+
+                        // sleep to flex the animation a bit:
+                        await Future.delayed(const Duration(milliseconds: 500));
+
+                        // Delete the database
+                        try {
+                          await sl.get<DBHelper>().nukeDatabase();
+                        } catch (error) {
+                          log.d("Error resetting database: $error");
+                        }
+
+                        // re-populate the users table
+                        try {
+                          await sl.get<DBHelper>().fetchNanoToUsernames();
+                        } catch (error) {
+                          log.d("Error fetching usernames: $error");
+                        }
+
+                        // delete preferences:
+                        await sl.get<SharedPrefsUtil>().deleteAll();
+
+                        // add the donations contact:
+                        await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
+                        final User donationsContact = User(
+                            nickname: "NautilusDonations",
+                            address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579",
+                            username: "nautilus",
+                            type: UserTypes.CONTACT);
+                        await sl.get<DBHelper>().saveContact(donationsContact);
+
+                        // set the "has asked for contacts" flag so it doesn't ask again:
+                        await sl.get<SharedPrefsUtil>().setContactsOn(false);
+
+                        // re-add account index 0 and switch the account to it:
+                        final String seed = await StateContainer.of(context).getSeed();
+                        await NanoUtil().loginAccount(seed, context);
+                        await StateContainer.of(context).resetRecentlyUsedAccounts();
+                        final Account? mainAccount = await sl.get<DBHelper>().getSelectedAccount(seed);
+                        StateContainer.of(context).updateWallet(account: mainAccount!);
+                        // force users list to update on the home page:
+                        EventTaxiImpl.singleton().fire(ContactModifiedEvent());
+                        EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: []));
+                        StateContainer.of(context).updateUnified(true);
+                        EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
+
+                        // EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: mainAccount));
+                        // if (animationOpen && mounted) {
+                        //   Navigator.of(context).pop();
+                        // }
+                      }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
+                    }),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context)!.showFunding, _curFundingSetting, AppIcons.money_bill_wave, _fundingDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context)!.showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context)!.currencyMode, _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context)!.showUnopenedWarning, _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context)!.receiveMinimum, _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context)!.changeRepAuthenticate, AppIcons.changerepresentative,
+                        onPressed: () {
+                      AppChangeRepresentativeSheet().mainBottomSheet(context);
+                      if (!StateContainer.of(context).nanoNinjaUpdated) {
+                        NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? result) {
+                          if (result != null) {
+                            StateContainer.of(context).updateNinjaNodes(result);
+                          }
+                        });
+                      }
+                    }),
                   ],
                 ),
                 // List Top Gradient End

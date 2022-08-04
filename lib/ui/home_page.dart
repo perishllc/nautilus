@@ -641,7 +641,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // ask to rate the app:
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await rateMyApp.init();
-      if (mounted && rateMyApp.shouldOpenDialog) {
+      if (!mounted) return;
+      if (rateMyApp.shouldOpenDialog) {
         rateMyApp.showRateDialog(
           context,
           title: AppLocalization.of(context)!.rateTheApp,
@@ -678,12 +679,26 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       final String lastVersion = await sl.get<SharedPrefsUtil>().getAppVersion();
       if (runningVersion != lastVersion) {
         await sl.get<SharedPrefsUtil>().setAppVersion(runningVersion);
+        if (!mounted) return;
         await AppDialogs.showChangeLog(context);
+        if (!mounted) return;
 
         // also force a username update:
         StateContainer.of(context).checkAndUpdateNanoToUsernames(true);
       }
+
+      // are we not connected after ~5 seconds?
+      await Future.delayed(const Duration(seconds: 8));
+      final bool connected = await sl.get<AccountService>().isConnected();
+      if (!connected) {
+        showConnectionWarning();
+      }
     });
+  }
+
+  void showConnectionWarning() {
+    AppDialogs.showInfoDialog(context, AppLocalization.of(context)!.connectionWarning, AppLocalization.of(context)!.connectionWarningBody);
+    return;
   }
 
   void _animationStatusListener(AnimationStatus status) {
@@ -1060,6 +1075,13 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     // _updateTXData();
     // for memos:
     _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
+
+    // are we not connected after ~5 seconds?
+    await Future.delayed(const Duration(seconds: 8));
+    final bool connected = await sl.get<AccountService>().isConnected();
+    if (!connected) {
+      showConnectionWarning();
+    }
 
     // await generateUnifiedList(fastUpdate: false);
     // setState(() {});
@@ -1509,6 +1531,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // See if a contact
       final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
       // Remove any other screens from stack
+      if (!mounted) return;
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       if (amount != null && sufficientBalance) {
         // Go to send confirm with amount

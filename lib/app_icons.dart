@@ -86,6 +86,7 @@ class AppIcons {
   static const IconData swap_calls = IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData call_merge = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData block = IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData more_horiz = IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData heart = IconData(0xf004, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData star = IconData(0xf005, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData home = IconData(0xf015, fontFamily: _kFontFam, fontPackage: _kFontPkg);

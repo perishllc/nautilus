@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 
@@ -11,8 +12,9 @@ dynamic uriParser(String value) {
   String? finAmount;
   final String? finAddress = NanoAccounts.findAccountInString(NanoAccountType.NANO, value.toLowerCase().replaceAll("\n", ""));
   HandoffItem? finHandoffItem;
+  AuthItem? finAuthItem;
 
-  final split = value.split(':');
+  final List<String> split = value.split(':');
   if (split.length > 1) {
     final Uri? uri = Uri.tryParse(value);
 
@@ -54,6 +56,39 @@ dynamic uriParser(String value) {
           sl.get<Logger>().e(error);
         }
       }
+
+      if (uri.scheme == "nanoauth") {
+        String encodedAuth = split[1];
+        encodedAuth = encodedAuth.replaceAll(RegExp(r"\s+\b|\b\s"), "");
+        // attempt to recover from bad base64 encoding:
+        if (encodedAuth.length % 4 != 0) {
+          encodedAuth += "=" * (4 - encodedAuth.length % 4);
+        }
+        final String decodedAuth = utf8.decode(base64Url.decode(encodedAuth));
+        try {
+          var decoded = jsonDecode(decodedAuth);
+          print(JsonEncoder.withIndent("  ").convert(decoded));
+          finAuthItem = AuthItem.fromJson(jsonDecode(decodedAuth) as Map<String, dynamic>);
+        } catch (error) {
+          sl.get<Logger>().e(error);
+        }
+      }
+
+      if (uri.queryParameters['auth'] != null) {
+        // base64 decode the string:
+        String encodedAuth = uri.queryParameters['auth'] as String;
+        encodedAuth = encodedAuth.replaceAll(RegExp(r"\s+\b|\b\s"), "");
+        // attempt to recover from bad base64 encoding:
+        if (encodedAuth.length % 4 != 0) {
+          encodedAuth += "=" * (4 - encodedAuth.length % 4);
+        }
+        final String decodedAuth = utf8.decode(base64Url.decode(encodedAuth));
+        try {
+          finAuthItem = AuthItem.fromJson(jsonDecode(decodedAuth) as Map<String, dynamic>);
+        } catch (error) {
+          sl.get<Logger>().e(error);
+        }
+      }
     }
 
     if (finHandoffItem != null) {
@@ -61,6 +96,9 @@ dynamic uriParser(String value) {
       if (finAmount != null && finHandoffItem.amount == null) {
         finHandoffItem.amount = finAmount;
       }
+      return finHandoffItem;
+    }
+    if (finAuthItem != null) {
       return finHandoffItem;
     }
   }

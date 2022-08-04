@@ -163,6 +163,9 @@
                 android:name="android.nfc.cardemulation.host_apdu_service"
                 android:resource="@xml/aid_list" />
         </service> -->
+    
+        <!-- google nearby API -->
+        <meta-data android:name="com.google.android.nearby.messages.API_KEY" android:value="AIzaSyCLWb9o4vQ6wD8WWpHK7LjWF2ouyMsKE8o" />
     </application>
     <queries>
         <intent>

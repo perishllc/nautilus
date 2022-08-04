@@ -24,17 +24,14 @@ import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/request/request_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
@@ -83,10 +80,10 @@ class _SendSheetState extends State<SendSheet> {
   String? _amountHint;
   String? _addressHint;
   String? _memoHint;
-  String? _amountValidationText;
-  String? _addressValidationText;
-  String? _memoValidationText;
-  String? quickSendAmount;
+  String _amountValidationText = "";
+  String _addressValidationText = "";
+  String _memoValidationText = "";
+  String? quickSendAmount = "";
   late List<User> _users;
   bool? animationOpen;
   // Used to replace address textfield with colorized TextSpan
@@ -123,6 +120,11 @@ class _SendSheetState extends State<SendSheet> {
     _users = [];
     quickSendAmount = widget.quickSendAmount;
     animationOpen = false;
+
+    // _amountHint = AppLocalization.of(context)!.enterAmount;
+    // _addressHint = AppLocalization.of(context)!.enterUserOrAddress;
+    // _memoHint = AppLocalization.of(context)!.enterMemo;
+
     if (widget.user != null) {
       // Setup initial state for contact pre-filled
       _addressController!.text = widget.user!.getDisplayName()!;
@@ -159,7 +161,7 @@ class _SendSheetState extends State<SendSheet> {
         });
       } else {
         setState(() {
-          _amountHint = null;
+          _amountHint = AppLocalization.of(context)!.enterAmount;
         });
       }
     });
@@ -194,7 +196,7 @@ class _SendSheetState extends State<SendSheet> {
         }
       } else {
         setState(() {
-          _addressHint = null;
+          _addressHint = AppLocalization.of(context)!.enterUserOrAddress;
           _users = [];
           if (Address(_addressController!.text).isValid()) {
             _addressValidAndUnfocused = true;
@@ -268,7 +270,7 @@ class _SendSheetState extends State<SendSheet> {
         });
       } else {
         setState(() {
-          _memoHint = null;
+          _memoHint = AppLocalization.of(context)!.enterMemo;
         });
       }
     });
@@ -283,11 +285,6 @@ class _SendSheetState extends State<SendSheet> {
         });
       });
     }
-  }
-
-  void _showMantaAnimation() {
-    animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.MANTA, onPoppedCallback: () => animationOpen = false);
   }
 
   Future<bool> showNotificationDialog() async {
@@ -472,6 +469,7 @@ class _SendSheetState extends State<SendSheet> {
     if (receive == null && StateContainer.of(context).wallet != null) {
       paintQrCode();
     }
+
     // The main column that holds everything
     return SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
@@ -533,32 +531,64 @@ class _SendSheetState extends State<SendSheet> {
               ],
             ),
 
-            // account / wallet name:
             Container(
-              margin: const EdgeInsets.only(top: 10.0, left: 30, right: 30),
-              child: RichText(
-                textAlign: TextAlign.start,
-                text: TextSpan(
-                  text: '',
-                  children: [
-                    TextSpan(
-                      text: StateContainer.of(context).selectedAccount!.name,
-                      style: TextStyle(
-                        color: StateContainer.of(context).curTheme.text60,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'NunitoSans',
+              margin: const EdgeInsets.only(top: 10.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: '',
+                          children: [
+                            TextSpan(
+                              text: StateContainer.of(context).selectedAccount!.name,
+                              style: TextStyle(
+                                color: StateContainer.of(context).curTheme.text60,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'NunitoSans',
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    width: 40,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text("|", textAlign: TextAlign.center),
+                    ),
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: '',
+                          children: [
+                            TextSpan(
+                              text: StateContainer.of(context).wallet?.username ?? Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
+                              style: TextStyle(
+                                color: StateContainer.of(context).curTheme.text60,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'NunitoSans',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            // Address Text
-            // Container(
-            //   margin: EdgeInsets.symmetric(horizontal: 30),
-            //   child: OneOrThreeLineAddressText(address: StateContainer.of(context).wallet.address, type: AddressTextType.PRIMARY60),
-            // ),
             // Balance Text
             FutureBuilder(
               future: sl.get<SharedPrefsUtil>().getPriceConversion(),
@@ -665,7 +695,7 @@ class _SendSheetState extends State<SendSheet> {
                                 Container(
                                   alignment: const AlignmentDirectional(0, 0),
                                   margin: const EdgeInsets.only(top: 3),
-                                  child: Text(_amountValidationText ?? "",
+                                  child: Text(_amountValidationText,
                                       style: TextStyle(
                                         fontSize: 14.0,
                                         color: StateContainer.of(context).curTheme.primary,
@@ -729,7 +759,7 @@ class _SendSheetState extends State<SendSheet> {
                                 Container(
                                   alignment: AlignmentDirectional.center,
                                   margin: const EdgeInsets.only(top: 3),
-                                  child: Text(_addressValidationText ?? "",
+                                  child: Text(_addressValidationText,
                                       style: TextStyle(
                                         fontSize: 14.0,
                                         color: StateContainer.of(context).curTheme.primary,
@@ -767,7 +797,7 @@ class _SendSheetState extends State<SendSheet> {
                                 Container(
                                   alignment: AlignmentDirectional.center,
                                   margin: const EdgeInsets.only(top: 3),
-                                  child: Text(_memoValidationText ?? "",
+                                  child: Text(_memoValidationText,
                                       style: TextStyle(
                                         fontSize: 14.0,
                                         color: StateContainer.of(context).curTheme.primary,
@@ -795,7 +825,7 @@ class _SendSheetState extends State<SendSheet> {
                 Row(
                   children: <Widget>[
                     // Send Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.send, [27.0, 0.0, 7.0, 8.0], onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.send, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       final bool validRequest = await _validateRequest();
 
                       if (!validRequest) {
@@ -849,6 +879,7 @@ class _SendSheetState extends State<SendSheet> {
                           link = giftCardItem.result as String;
                           formattedAddress = paperWalletAccount;
                         } else {
+                          if (!mounted) return;
                           UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationError, context);
                           return;
                         }
@@ -857,6 +888,7 @@ class _SendSheetState extends State<SendSheet> {
                       bool isMaxSend = false;
                       if (_isMaxSend()) {
                         isMaxSend = true;
+                        if (!mounted) return;
                         amountRaw = StateContainer.of(context).wallet!.accountBalance.toString();
                       }
 
@@ -895,87 +927,6 @@ class _SendSheetState extends State<SendSheet> {
                                 phoneNumber: phoneNumber ?? "",
                                 link: link ?? "",
                                 paperWalletSeed: paperWalletSeed ?? "",
-                                localCurrency: _localCurrencyMode ? _amountController!.text : null,
-                                memo: _memoController!.text));
-                      }
-                    }),
-                    // Request Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.request, [7.0, 0.0, 27.0, 8.0], onPressed: () async {
-                      final bool validRequest = await _validateRequest(isRequest: true);
-
-                      if (!validRequest) {
-                        return;
-                      }
-                      final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
-
-                      final String formattedAmount = _amountController!.text
-                          .replaceAll(_localCurrencyFormat!.currencySymbol, "")
-                          .replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "")
-                          .replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
-
-                      String amountRaw;
-                      if (_amountController!.text.isEmpty || _amountController!.text == "0") {
-                        amountRaw = "0";
-                      } else {
-                        if (_localCurrencyMode) {
-                          amountRaw = NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto());
-                        } else {
-                          if (!mounted) return;
-                          amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
-                        }
-                      }
-
-                      bool isMaxSend = false;
-                      if (_isMaxSend()) {
-                        isMaxSend = true;
-                        amountRaw = StateContainer.of(context).wallet!.accountBalance.toString();
-                      }
-
-                      // verifyies the input is a user in the db
-                      if (_addressController!.text.startsWith("@") || _addressController!.text.startsWith("★") || _addressController!.text.contains(".")) {
-                        // Need to make sure its a valid contact or user
-                        final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
-                        if (user == null) {
-                          setState(() {
-                            if (_addressController!.text.startsWith("★")) {
-                              _addressValidationText = AppLocalization.of(context)!.contactInvalid;
-                            } else if (_addressController!.text.startsWith("@")) {
-                              _addressValidationText = AppLocalization.of(context)!.usernameInvalid;
-                            } else if (_addressController!.text.contains(".")) {
-                              _addressValidationText = AppLocalization.of(context)!.domainInvalid;
-                            }
-                          });
-                        } else {
-                          Sheets.showAppHeightNineSheet(
-                              context: context,
-                              widget: RequestConfirmSheet(
-                                amountRaw: amountRaw,
-                                destination: user.address!,
-                                contactName: user.getDisplayName(),
-                                localCurrency: _localCurrencyMode ? _amountController!.text : null,
-                                memo: _memoController!.text,
-                              ));
-                        }
-                      } else if (_addressController!.text.contains(".")) {
-                        String? address;
-
-                        // check if UD domain:
-                        address = await sl.get<AccountService>().checkUnstoppableDomain(_addressController!.text);
-                        if (address != null) {
-                        } else {
-                          // check if ENS domain:
-                          address = await sl.get<AccountService>().checkENSDomain(_addressController!.text);
-                        }
-
-                        if (address == null) {
-                          _addressValidationText = AppLocalization.of(context)!.domainInvalid;
-                        }
-                      } else {
-                        Sheets.showAppHeightNineSheet(
-                            context: context,
-                            widget: RequestConfirmSheet(
-                                amountRaw: amountRaw,
-                                destination: _addressController!.text,
                                 localCurrency: _localCurrencyMode ? _amountController!.text : null,
                                 memo: _memoController!.text));
                       }
@@ -1114,20 +1065,21 @@ class _SendSheetState extends State<SendSheet> {
                     })
                   ],
                 ),
-                Row(
-                  children: <Widget>[
-                    // scan for nfc
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.shareViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () async {
-                      try {
-                        UIUtil.cancelLockEvent();
-                        startNFCSession("");
-                      } catch (e) {
-                        stopNFCSession();
-                      }
-                    })
-                  ],
-                ),
+                if (Platform.isIOS)
+                  Row(
+                    children: <Widget>[
+                      // scan for nfc
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.sendViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () async {
+                        try {
+                          UIUtil.cancelLockEvent();
+                          startNFCSession("");
+                        } catch (e) {
+                          stopNFCSession();
+                        }
+                      })
+                    ],
+                  ),
               ],
             ),
           ],
@@ -1650,7 +1602,7 @@ class _SendSheetState extends State<SendSheet> {
             });
           }
           // Always reset the error message to be less annoying
-          if (_addressValidationText!.isNotEmpty) {
+          if (_addressValidationText.isNotEmpty) {
             setState(() {
               _addressValidationText = "";
             });

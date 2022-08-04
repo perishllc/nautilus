@@ -199,8 +199,12 @@ class AppLocalization {
     return Intl.message('Request Payment', desc: 'request_payment_cta', name: 'requestPayment');
   }
 
-  String get shareViaNFC {
-    return Intl.message('Share Via NFC', desc: 'request_payment_nfc', name: 'shareViaNFC');
+  String get sendViaNFC {
+    return Intl.message('Send via NFC', desc: 'send_payment_nfc', name: 'sendViaNFC');
+  }
+
+  String get nearby {
+    return Intl.message('Nearby', desc: 'nearby_devices', name: 'nearby');
   }
 
   String get createQR {
@@ -738,6 +742,10 @@ class AppLocalization {
     return Intl.message("Send From", desc: 'send_title', name: 'sendFrom');
   }
 
+  String get requestFrom {
+    return Intl.message("Request From", desc: 'request_title', name: 'requestFrom');
+  }
+
   /// -- END SEND ITEMS
 
   /// -- PIN SCREEN
@@ -795,6 +803,17 @@ class AppLocalization {
 
   String get sendSheetInfoHeader {
     return Intl.message("Send Sheet Info", desc: 'send_sheet_info_header', name: 'sendSheetInfoHeader');
+  }
+
+  String get requestSheetInfo {
+    return Intl.message(
+        "Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users, but you can use them for your own record keeping even if the recipient doesn't use nautilus.",
+        desc: 'request_sheet_info',
+        name: 'requestSheetInfo');
+  }
+
+  String get requestSheetInfoHeader {
+    return Intl.message("Request Sheet Info", desc: 'request_sheet_info_header', name: 'requestSheetInfoHeader');
   }
 
   String get currencyMode {
@@ -954,6 +973,21 @@ class AppLocalization {
         'Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed, but you should still back it up beforehand. If the issue persists feel free to make a bug report on the discord (link at the bottom of the settings drawer)\nMake sure to first check if someone else already reported the issue!',
         desc: 'database_remove_sure',
         name: 'resetDatabaseConfirmation');
+  }
+
+  String get connectionWarning {
+    return Intl.message("Can't Connect", desc: 'home_connection_warning', name: 'connectionWarning');
+  }
+
+  String get connectionWarningBody {
+    return Intl.message(
+        "We can't seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it's been more than an hour and you're still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co",
+        desc: 'connection_warning_body',
+        name: 'connectionWarningBody');
+  }
+
+  String get moreSettings {
+    return Intl.message("More Settings", desc: 'settings_more', name: 'moreSettings');
   }
 
   String get shareNautilusText {
@@ -1469,6 +1503,10 @@ You can also set a Split amount to distribute from the gift card rather than the
 
   String get showQR {
     return Intl.message("Show QR Code", desc: 'show_qr', name: 'showQR');
+  }
+
+  String get showAccountQR {
+    return Intl.message("Show Account QR Code", desc: 'show_account_qr', name: 'showAccountQR');
   }
 
   String get copyLink {

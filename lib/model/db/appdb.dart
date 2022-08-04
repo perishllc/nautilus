@@ -190,23 +190,6 @@ class DBHelper {
     await dbClient.execute(TX_DATA_SQL);
   }
 
-  // // read json and populate users table:
-  // Future<void> loadNanoToUsernameCache() async {
-  //   // get the json from the cache:
-  //   final String userData = await rootBundle.loadString("assets/store/known.json");
-  //   final String knownUsers = await json.decode(userData) as String;
-
-  //   // loop through the data and insert into the users table:
-  //   final List<User> users = parseNanoToUsers(knownUsers)!;
-  //   for (final User user in users) {
-  //     await addOrReplaceUser(user);
-  //   }
-  //   // var reps = parseReps(repsUsers);
-  //   // for (var rep in reps) {
-  //   //   await addRep(rep);
-  //   // }
-  // }
-
   String lowerStripAddress(String address) {
     return address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "");
   }
@@ -261,7 +244,10 @@ class DBHelper {
   }
 
   Future<List<User>?> fetchNanoToKnown(http.Client client) async {
-    final http.Response response = await client.get(Uri.parse("https://nano.to/known?json=true"));
+    http.Response response = await client.get(Uri.parse("https://xno.to/known.json"));
+    if (response.statusCode != 200) {
+      response = await client.get(Uri.parse("https://nano.to/known.json"));
+    }
     // todo: use the compute function to run parseUsers in a separate isolate
     return parseNanoToUsers(response.body);
   }

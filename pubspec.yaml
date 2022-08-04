@@ -46,12 +46,13 @@ dependencies:
   # ENS:
   ens_dart: ^1.0.0
   web3dart: ^2.3.3
+  # opencap: (srv lookup):
+  multicast_dns: ^0.3.2+1
 
   # Platform-specific build info
   package_info: ^2.0.2
 
   # Device-specific info
-  # device_info: ^2.0.3
   device_info_plus: ^3.2.4
 
   # JSON Serialization
@@ -101,7 +102,11 @@ dependencies:
   # flutter_nearby_connections: ^1.1.1
 
   # nearby messages (google / crossplatform API):
-  flutter_nearby_messages_api: ^0.0.8
+  # flutter_nearby_messages_api: ^0.0.8
+
+  # reliably check connection status:
+  internet_connection_checker: ^0.0.1+4
+  connectivity_plus: ^2.3.6
 
   # ask users to rate the app:
   rate_my_app: ^1.1.3
@@ -220,11 +225,6 @@ dependency_overrides:
       url: https://github.com/perishllc/uni_links.git
       path: uni_links_platform_interface
       ref: main
-uni_links_platform_interface:
-  git:
-    url: https://github.com/perishllc/uni_links.git
-    path: uni_links_platform_interface
-    ref: main
 
 dev_dependencies:
   flutter_test:
