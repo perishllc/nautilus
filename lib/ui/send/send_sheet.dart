@@ -1098,7 +1098,7 @@ class SendSheetState extends State<SendSheet> {
               //         })
               //       ],
               //     ),
-              // ],
+              ],
             ),
           ],
         ));
