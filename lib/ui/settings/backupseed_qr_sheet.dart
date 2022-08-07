@@ -38,7 +38,6 @@ class _BackupSeedQRSheetStateState extends State<BackupSeedQRSheet> {
   FocusNode? _sendAmountFocusNode;
   String? _rawAmount;
   TextEditingController? _sendAmountController;
-  NumberFormat? _localCurrencyFormat;
   bool _localCurrencyMode = false;
   String _amountValidationText = "";
   String? _amountHint = "";
@@ -307,78 +306,7 @@ class _BackupSeedQRSheetStateState extends State<BackupSeedQRSheet> {
               ],
             )));
   }
-
-  String _convertLocalCurrencyToCrypto() {
-    String convertedAmt =
-        _sendAmountController!.text.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "").replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
-    convertedAmt = NumberUtil.sanitizeNumber(convertedAmt);
-    if (convertedAmt.isEmpty) {
-      return "";
-    }
-    final Decimal valueLocal = Decimal.parse(convertedAmt);
-    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    final String nanoAmount = NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
-    return convertCryptoToLocalAmount(nanoAmount, _localCurrencyFormat);
-  }
-
-  String _convertCryptoToLocalCurrency(String amount) {
-    String sanitizedAmt = amount.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "").replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
-    sanitizedAmt = NumberUtil.sanitizeNumber(sanitizedAmt);
-    if (sanitizedAmt.isEmpty) {
-      return "";
-    }
-    final Decimal valueCrypto = Decimal.parse(sanitizedAmt);
-    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
-
-    return (_localCurrencyFormat!.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, _localCurrencyFormat)).replaceAll(" ", "");
-  }
-
-  void toggleLocalCurrency() {
-    // Keep a cache of previous amounts because, it's kinda nice to see approx what nano is worth
-    // this way you can tap button and tap back and not end up with X.9993451 NANO
-    if (_localCurrencyMode) {
-      // Switching to crypto-mode
-      String cryptoAmountStr;
-      // Check out previous state
-      if (_sendAmountController!.text == _lastLocalCurrencyAmount) {
-        cryptoAmountStr = _lastCryptoAmount;
-      } else {
-        _lastLocalCurrencyAmount = _sendAmountController!.text;
-        _lastCryptoAmount = _convertLocalCurrencyToCrypto();
-        cryptoAmountStr = _lastCryptoAmount;
-      }
-      setState(() {
-        _localCurrencyMode = false;
-      });
-      Future.delayed(const Duration(milliseconds: 50), () {
-        _sendAmountController!.text = cryptoAmountStr;
-        _sendAmountController!.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
-      });
-    } else {
-      // Switching to local-currency mode
-      String localAmountStr;
-      // Check our previous state
-      if (_sendAmountController!.text == _lastCryptoAmount) {
-        localAmountStr = _lastLocalCurrencyAmount;
-        if (!_lastLocalCurrencyAmount.startsWith(_localCurrencyFormat!.currencySymbol)) {
-          _lastLocalCurrencyAmount = _localCurrencyFormat!.currencySymbol + _lastLocalCurrencyAmount;
-        }
-      } else {
-        _lastCryptoAmount = _sendAmountController!.text;
-        _lastLocalCurrencyAmount = _convertCryptoToLocalCurrency(_sendAmountController!.text);
-        localAmountStr = _lastLocalCurrencyAmount;
-      }
-      setState(() {
-        _localCurrencyMode = true;
-      });
-      Future.delayed(const Duration(milliseconds: 50), () {
-        _sendAmountController!.text = localAmountStr;
-        _sendAmountController!.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
-      });
-    }
-  }
-
+  
   void paintQrCode(String data) {
     final PrettyQr painter = PrettyQr(
       data: data,

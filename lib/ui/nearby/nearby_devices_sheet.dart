@@ -1,16 +1,16 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_nearby_messages_api/flutter_nearby_messages_api.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:nautilus_wallet_flutter/sensitive.dart';
+// import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:flutter_nearby_messages_api/flutter_nearby_messages_api.dart';
-import 'dart:math';
 
 class NearbyDevicesSheet extends StatefulWidget {
   const NearbyDevicesSheet({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class NearbyDevicesSheet extends StatefulWidget {
 
 class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
   final GlobalKey expandedKey = GlobalKey();
-  FlutterNearbyMessagesApi nearbyMessagesApi = FlutterNearbyMessagesApi();
+  // FlutterNearbyMessagesApi nearbyMessagesApi = FlutterNearbyMessagesApi();
 
   final ScrollController _scrollController = ScrollController();
 
@@ -44,10 +44,10 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
   Future<void> dispose() async {
     _destroyBus();
     super.dispose();
-    // unPublish
-    await nearbyMessagesApi.unPublish();
-    // backgroundUnsubscribe
-    await nearbyMessagesApi.backgroundUnsubscribe();
+    // // unPublish
+    // await nearbyMessagesApi.unPublish();
+    // // backgroundUnsubscribe
+    // await nearbyMessagesApi.backgroundUnsubscribe();
   }
 
   void _registerBus() {}
@@ -60,41 +60,41 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    // For iOS
-    await nearbyMessagesApi.setAPIKey(Sensitive.MESSAGES_API_KEY);
+    // // For iOS
+    // await nearbyMessagesApi.setAPIKey(Sensitive.MESSAGES_API_KEY);
 
-    nearbyMessagesApi.onFound = (message) {
-      print('~~~onFound : $message');
-    };
+    // nearbyMessagesApi.onFound = (message) {
+    //   print('~~~onFound : $message');
+    // };
 
-    nearbyMessagesApi.onLost = (message) {
-      print('~~~onLost : $message');
-    };
+    // nearbyMessagesApi.onLost = (message) {
+    //   print('~~~onLost : $message');
+    // };
 
-    nearbyMessagesApi.statusHandler = (status) {
-      print('~~~statusHandler : $status');
-    };
+    // nearbyMessagesApi.statusHandler = (status) {
+    //   print('~~~statusHandler : $status');
+    // };
 
-    nearbyMessagesApi.setPermissionAlert('Your title', 'Your message', 'Deny', 'Grant');
+    // nearbyMessagesApi.setPermissionAlert('Your title', 'Your message', 'Deny', 'Grant');
 
-    nearbyMessagesApi.permissionHandler = (status) {
-      print(status);
-    };
+    // nearbyMessagesApi.permissionHandler = (status) {
+    //   print(status);
+    // };
 
-    nearbyMessagesApi.bluetoothPowerErrorHandler = (args) {
-      print('~~~ bluetoothPowerErrorHandler');
-    };
+    // nearbyMessagesApi.bluetoothPowerErrorHandler = (args) {
+    //   print('~~~ bluetoothPowerErrorHandler');
+    // };
 
-    nearbyMessagesApi.bluetoothPermissionErrorHandler = (args) {
-      print('~~~ bluetoothPermissionErrorHandler');
-    };
+    // nearbyMessagesApi.bluetoothPermissionErrorHandler = (args) {
+    //   print('~~~ bluetoothPermissionErrorHandler');
+    // };
 
-    nearbyMessagesApi.microphonePermissionErrorHandler = (args) {
-      print('~~~ microphonePermissionErrorHandler');
-    };
+    // nearbyMessagesApi.microphonePermissionErrorHandler = (args) {
+    //   print('~~~ microphonePermissionErrorHandler');
+    // };
 
-    // Do not use it if you have not learned it carefully
-    nearbyMessagesApi.setNearbyAccessPermission(true);
+    // // Do not use it if you have not learned it carefully
+    // nearbyMessagesApi.setNearbyAccessPermission(true);
   }
 
   @override
@@ -178,34 +178,34 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
                   ],
                 ),
               ),
-              Column(children: [
-                TextButton(
-                    onPressed: () async {
-                      var rng = Random();
-                      await nearbyMessagesApi.publish('Hello world!: rng: ' + rng.nextInt(10000).toString());
-                    },
-                    child: const Text("publish")),
-                TextButton(
-                    onPressed: () async {
-                      await nearbyMessagesApi.publish('Something else!');
-                    },
-                    child: const Text("publish2")),
-                TextButton(
-                    onPressed: () async {
-                      await nearbyMessagesApi.unPublish();
-                    },
-                    child: const Text("unPublish")),
-                TextButton(
-                    onPressed: () async {
-                      await nearbyMessagesApi.backgroundSubscribe();
-                    },
-                    child: const Text("backgroundSubscribe")),
-                TextButton(
-                    onPressed: () async {
-                      await nearbyMessagesApi.backgroundUnsubscribe();
-                    },
-                    child: const Text("unSubscribe"))
-              ]),
+              // Column(children: [
+              //   TextButton(
+              //       onPressed: () async {
+              //         var rng = Random();
+              //         await nearbyMessagesApi.publish('Hello world!: rng: ' + rng.nextInt(10000).toString());
+              //       },
+              //       child: const Text("publish")),
+              //   TextButton(
+              //       onPressed: () async {
+              //         await nearbyMessagesApi.publish('Something else!');
+              //       },
+              //       child: const Text("publish2")),
+              //   TextButton(
+              //       onPressed: () async {
+              //         await nearbyMessagesApi.unPublish();
+              //       },
+              //       child: const Text("unPublish")),
+              //   TextButton(
+              //       onPressed: () async {
+              //         await nearbyMessagesApi.backgroundSubscribe();
+              //       },
+              //       child: const Text("backgroundSubscribe")),
+              //   TextButton(
+              //       onPressed: () async {
+              //         await nearbyMessagesApi.backgroundUnsubscribe();
+              //       },
+              //       child: const Text("unSubscribe"))
+              // ]),
               // //A list containing accounts
               // Expanded(
               //     key: expandedKey,

@@ -1,3 +1,10 @@
+## v0.5.3 - [2022-08-XX]
+#### Added
+#### Changed
+- Removed the intro step asking to set a password when importing a seed
+- Complete overhaul of local currencies written from scratch since it was a mess to keep patching edge cases before
+#### Fixed
+- More local currency fixes
 ## v0.5.2 - [2022-08-05]
 #### Added
 - Hide empty accounts button on the accounts sheet

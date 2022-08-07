@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nautilus_wallet_flutter/util/numberutil.dart';
+import 'package:intl/intl.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 
 /// Input formatter for Crypto/Fiat amounts
 class CurrencyFormatter extends TextInputFormatter {
@@ -87,22 +87,20 @@ class CurrencyFormatter extends TextInputFormatter {
 }
 
 class LocalCurrencyFormatter extends TextInputFormatter {
-  LocalCurrencyFormatter({this.currencyFormat, this.active});
+  LocalCurrencyFormatter({required this.currencyFormat, this.active});
 
-  NumberFormat? currencyFormat;
+  late NumberFormat currencyFormat;
   bool? active;
 
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.trim() == currencyFormat!.currencySymbol.trim() ||
-        newValue.text.isEmpty ||
-        newValue.text == " ") {
+    if (newValue.text.trim() == currencyFormat.currencySymbol.trim() || newValue.text.isEmpty || newValue.text == " ") {
       // Return empty string
       return newValue.copyWith(text: "", selection: const TextSelection.collapsed(offset: 0));
     }
 
     String shouldBeText = convertCryptoToLocalAmount(newValue.text, currencyFormat);
     if (active!) {
-      shouldBeText = currencyFormat!.currencySymbol + shouldBeText;
+      shouldBeText = currencyFormat.currencySymbol + shouldBeText;
     }
 
     if (shouldBeText != newValue.text) {
@@ -142,19 +140,178 @@ class LocalCurrencyFormatter extends TextInputFormatter {
   }
 }
 
+/// Input formatter for Crypto/Fiat amounts
+class CurrencyFormatter2 extends TextInputFormatter {
+  CurrencyFormatter2({required this.currencyFormat, this.maxDecimalDigits = NumberUtil.maxDecimalDigits, this.active = false});
+
+  NumberFormat currencyFormat;
+  int maxDecimalDigits;
+  bool active;
+
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    final String commaSeparator = currencyFormat.symbols.GROUP_SEP;
+    final String decimalSeparator = currencyFormat.symbols.DECIMAL_SEP;
+    final String currencySymbol = currencyFormat.currencySymbol;
+    // final int maxDecimalDigits = currencyFormat.decimalDigits!;
+
+    final TextEditingValue same = newValue.copyWith(text: oldValue.text, selection: oldValue.selection);
+    String workingText = newValue.text;
+    int workingOffset = 0;
+    final String oldText = oldValue.text;
+    final int oldSelectionOffset = oldValue.selection.baseOffset;
+    final TextSelection oldSelection = oldValue.selection;
+
+    // deny illegal moves:
+    if (workingText == "") {
+      return newValue;
+    }
+
+    // deny if trying to add a 2nd GroupSeparator:
+    if (decimalSeparator.allMatches(workingText).length > 1) {
+      return same;
+    }
+
+    workingOffset += newValue.text.length - oldValue.text.length;
+
+    // we added 1 character:
+    if (workingText.length == oldValue.text.length + 1) {
+      // we added a comma, deny:
+      if (commaSeparator.allMatches(workingText).length > commaSeparator.allMatches(oldValue.text).length) {
+        return same;
+      }
+    }
+
+    // we deleted 1 character:
+    if (workingText.length == oldValue.text.length - 1) {
+      // we deleted a comma, remove the number behind it instead:
+      if (commaSeparator.allMatches(workingText).length < commaSeparator.allMatches(oldValue.text).length) {
+        // get the pos of the comma - 1:
+        final int commaPos = oldText.indexOf(commaSeparator) - 1;
+        // remove the number behind the comma and the comma:
+        if (commaPos >= 0) {
+          workingText = oldText.substring(0, commaPos + 1) + oldText.substring(commaPos + 1);
+          workingOffset -= 1;
+        }
+      }
+      // // we deleted a decimal, remove the number behind it instead:
+      // if (decimalSeparator.allMatches(workingText).length < decimalSeparator.allMatches(oldValue.text).length) {
+      //   // get the pos of the decimal - 1:
+      //   final int decimalPos = workingText.indexOf(decimalSeparator) - 1;
+      //   if (decimalPos >= 0) {
+      //     workingText = workingText.substring(0, decimalPos) + workingText.substring(decimalPos + 1);
+      //   }
+      // }
+    }
+
+    if (workingText.startsWith(commaSeparator)) {
+      return same;
+    }
+
+    if (workingText.length == 1) {
+      if (workingText != decimalSeparator && workingText != currencySymbol && !["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].contains(workingText)) {
+        return same;
+      }
+    }
+
+    // prevent numbers from starting with a decimal:
+    if (workingText.startsWith(decimalSeparator)) {
+      workingText = "0$workingText";
+      workingOffset += 1;
+    }
+
+    // make sure that the text follows the format of the local currency:
+    String localizedAmount = convertCryptoToLocalAmount(workingText.replaceAll(commaSeparator, "").replaceAll(currencySymbol, ""), currencyFormat);
+    if (active) {
+      localizedAmount = currencySymbol + localizedAmount.trim();
+    } else {
+      localizedAmount = localizedAmount.trim();
+    }
+    int amountLengthChanged = 0;
+    amountLengthChanged = localizedAmount.length - workingText.length;
+    workingOffset += amountLengthChanged;
+
+    // edge case:
+    if (amountLengthChanged < 0 && newValue.text.startsWith(decimalSeparator)) {
+      workingOffset += 1;
+    }
+
+    workingText = localizedAmount;
+
+    // split into parts:
+    final List<String> splitStr = workingText.split(decimalSeparator);
+
+    // cap the number of decimal digits if necessary:
+    if (splitStr.length > 1 && newValue.text.contains(decimalSeparator)) {
+      // workingText = splitStr[0] + decimalSeparator + splitStr[1].substring(0, min(maxDecimalDigits, splitStr[1].length));
+      if (splitStr[1].length > maxDecimalDigits) {
+        return same;
+      }
+    }
+
+    if (splitStr[0].length > 13) {
+      return same;
+    }
+
+    // selection:
+    workingOffset += oldSelectionOffset;
+    // print("oldSel: $oldSelectionOffset");
+    // print("newSel: $workingOffset");
+
+    // if (workingText == oldValue.text) {
+    //   newSelection = oldSelection;
+    // } else if (oldSelection.baseOffset < workingText.length - 1) {
+    //   if (newValue.text.startsWith(decimalSeparator)) {
+    //     offset = 1;
+    //   }
+    //   // move the cursor back by one if this was a backspace:
+    //   if (newValue.text.length == oldValue.text.length - 1) {
+    //     offset = -2;
+    //   }
+    //   newSelection = TextSelection.collapsed(offset: oldSelection.baseOffset + 1 + offset);
+    // } else {
+    //   newSelection = TextSelection.collapsed(offset: workingText.length);
+    // }
+    TextSelection newSelection;
+    if (workingText == oldValue.text || workingText.length == oldValue.text.length) {
+      newSelection = oldSelection;
+    } else {
+      newSelection = TextSelection.collapsed(offset: workingOffset);
+    }
+
+    return newValue.copyWith(text: workingText, selection: newSelection);
+  }
+}
+
 String convertLocalToCrypto(String cryptoAmount, NumberFormat? currencyFormat) {
   return "";
 }
 
-String convertCryptoToLocalAmount(String localAmount, NumberFormat? currencyFormat) {
+// formats to 1,456,789.123456:
+String normalizedAmount(NumberFormat currencyFormat, String amount) {
+  amount = amount.replaceAll(currencyFormat.symbols.GROUP_SEP, "G");
+  amount = amount.replaceAll(currencyFormat.symbols.DECIMAL_SEP, "D");
+  amount = amount.replaceAll("D", ".").replaceAll("G", ",");
+  return amount;
+}
+
+// ONLY the format of: 1234.12345
+// MUST be parseable
+String sanitizedAmount(NumberFormat currencyFormat, String amount) {
+  amount = normalizedAmount(currencyFormat, amount);
+  amount = amount.replaceAll(",", "").replaceAll(currencyFormat.currencySymbol, "").replaceAll(" ", "").trim();
+  if (amount.endsWith(".")) {
+    amount = amount.substring(0, amount.length - 1);
+  }
+  return amount;
+}
+
+String convertCryptoToLocalAmount(String localAmount, NumberFormat currencyFormat) {
   // Make local currency = symbol + amount with correct decimal separator
-  final String sanitizedText = localAmount
-      .replaceAll(currencyFormat!.symbols.GROUP_SEP, "")
-      .replaceAll(currencyFormat.currencySymbol, "")
-      .replaceAll(" ", "");
-  final List<String> splitStrs = sanitizedText.split(currencyFormat.symbols.DECIMAL_SEP);
+  final String sanitizedText = sanitizedAmount(currencyFormat, localAmount);
+  final List<String> splitStrs = sanitizedText.split(".");
   final String firstPart = splitStrs[0].trim();
-  String secondPart = sanitizedText.split(currencyFormat.symbols.DECIMAL_SEP).length > 1 ? splitStrs[1].trim() : "";
+  String secondPart = sanitizedText.split(".").length > 1 ? splitStrs[1].trim() : "";
 
   if (secondPart.isNotEmpty || localAmount.contains(currencyFormat.symbols.DECIMAL_SEP)) {
     secondPart = currencyFormat.symbols.DECIMAL_SEP + secondPart;
@@ -170,14 +327,11 @@ String convertCryptoToLocalAmount(String localAmount, NumberFormat? currencyForm
   // print("firstPart: " + firstPart);
   // print("secondPart: " + secondPart);
 
-  final NumberFormat formatCurrency = NumberFormat.simpleCurrency(
-      decimalDigits: currencyFormat.decimalDigits, locale: currencyFormat.locale, name: currencyFormat.currencyName);
+  final NumberFormat formatCurrency =
+      NumberFormat.simpleCurrency(decimalDigits: currencyFormat.decimalDigits, locale: currencyFormat.locale, name: currencyFormat.currencyName);
   String formattedCurrency = formatCurrency.format(int.parse(firstPart));
 
-  formattedCurrency = formattedCurrency
-      .split(currencyFormat.symbols.DECIMAL_SEP)[0]
-      .replaceAll(currencyFormat.currencySymbol, "")
-      .replaceAll(" ", "");
+  formattedCurrency = formattedCurrency.split(currencyFormat.symbols.DECIMAL_SEP)[0].replaceAll(currencyFormat.currencySymbol, "").replaceAll(" ", "");
   return formattedCurrency + secondPart;
 }
 
@@ -338,13 +492,10 @@ String getRawAsThemeAwareFormattedAmount(BuildContext context, String? raw) {
   // }
 
   final NumberFormat currencyFormat = NumberFormat.currency(
-      locale: StateContainer.of(context).curCurrency.getLocale().toString(),
-      symbol: StateContainer.of(context).curCurrency.getCurrencySymbol());
+      locale: StateContainer.of(context).curCurrency.getLocale().toString(), symbol: StateContainer.of(context).curCurrency.getCurrencySymbol());
 
-  final String formattedAmount = currencyFormat
-      .format(double.parse(amountStr))
-      .replaceAll(StateContainer.of(context).curCurrency.getCurrencySymbol(), "")
-      .replaceAll(" ", "");
+  final String formattedAmount =
+      currencyFormat.format(double.parse(amountStr)).replaceAll(StateContainer.of(context).curCurrency.getCurrencySymbol(), "").replaceAll(" ", "");
 
   final String decimalSeparator = currencyFormat.symbols.DECIMAL_SEP;
   // split by the decimal separator:

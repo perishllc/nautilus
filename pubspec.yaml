@@ -6,7 +6,7 @@ description: Nautilus - Fast, Robust & Secure NANO Wallet.
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.5.2+62
+version: 0.5.3+65
 
 environment:
   sdk: '>=2.12.0 < 3.0.0'
@@ -60,7 +60,6 @@ dependencies:
 
   # Localization
   intl: ^0.17.0
-
   # BigDecimal alternative
   decimal: ^2.2.0
 
@@ -98,12 +97,9 @@ dependencies:
   # flutter_nfc_kit: ^3.3.1
   # nfc_manager: ^3.1.1
   # ndef: ^0.3.1
-
   # flutter_nearby_connections: ^1.1.1
-
   # nearby messages (google / crossplatform API):
   # flutter_nearby_messages_api: ^0.0.8
-
   # reliably check connection status:
   internet_connection_checker: ^0.0.1+4
   connectivity_plus: ^2.3.6
@@ -154,7 +150,6 @@ dependencies:
   firebase_core: ^1.17.1
   firebase_analytics: ^9.1.9
 
-
   # windows plugins / ffi:
   # firebase_auth: ^3.1.5
   # firebase_auth_desktop: ^0.1.1-dev.0
@@ -194,7 +189,7 @@ dependencies:
 
   # async / general programming utilities
   quiver: ^3.1.0
-  
+
   # devicelocale: ^0.5.1
   # 0.5.2+ requires sdk 33 and a wierd java1.8 error on android:
   devicelocale: 0.5.1
@@ -211,6 +206,19 @@ dependencies:
   # search bar + text highlighting:
   searchbar_animation: ^0.0.2
   substring_highlight: ^1.0.33
+
+  # localization:
+  intl_utils: ^2.7.0
+
+flutter_intl:
+  enabled: true
+  class_name: AppLocalization
+  main_locale: en
+  arb_dir: lib/l10n
+  output_dir: lib/generated
+  use_deferred_loading: false
+  localizely:
+    project_id: 6991a0b2-4aa6-49c1-82d8-fcd38488d8b4
 
 dependency_overrides:
   ffi: ^2.0.1
@@ -235,49 +243,12 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.1.11
   json_serializable: ^6.3.1
-
-  intl_generator: ^0.3.0
   analyzer: ^4.1.0
   dart_style: ^2.2.3
 
   # screenshot generation:
   path: ^1.8.1
   file: ^6.1.2
-  
-  # the next two/three packages have a dependency conflict and can't both be enabled at the same time
-  # though the second is just a command line tool for updating /changing the application icons
-  # intl_translation:
-  #   git:
-  #     url: https://github.com/bbedward/intl_translation.git
-  #     ref: master
-  # intl_translation: ^0.17.10+1
-  # flutter_native_splash: ^2.1.1
-  # flutter_launcher_icons: "^0.9.2"
-  # flutter_launcher_icons:
-  #   git:
-  #       url: https://github.com/knyghtryda/flutter_launcher_icons
-  #       ref: scaling
-
-# to update the app icons use:
-# flutter pub get
-# flutter pub run flutter_launcher_icons:main
-
-# to update the translations use:
-# flutter pub pub run intl_translation:extract_to_arb --output-dir=lib/l10n lib/localization.dart
-# flutter pub pub run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/localization.dart lib/l10n/intl_*.arb
-
-# flutter_native_splash:
-#   # color: "#42a5f5"
-#   color: "#000000"
-#   # background_image: "assets/splash_image.png"
-#   branding: "assets/logo-square.png"
-#   android_12:
-#     # color: "#42a5f5"
-#     image: "assets/android12splash.png"
-#     icon_background_color: "#000000"
-
-# For information on the generic Dart part of this file, see the
-# following page: https://www.dartlang.org/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:

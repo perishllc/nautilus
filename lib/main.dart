@@ -40,6 +40,7 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -120,105 +121,106 @@ class _AppState extends State<App> {
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
+        
         locale: StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT ? null : StateContainer.of(context).curLanguage.getLocale(),
-        supportedLocales: const [
-          Locale('en', 'US'), // English
-          Locale('he', 'IL'), // Hebrew
-          Locale('de', 'DE'), // German
-          Locale('da'), // Danish
-          Locale('bg'), // Bulgarian
-          Locale('es'), // Spanish
-          Locale('hi'), // Hindi
-          Locale('hu'), // Hungarian
-          Locale('hi'), // Hindi
-          Locale('id'), // Indonesian
-          Locale('it'), // Italian
-          Locale('ja'), // Japanese
-          Locale('ko'), // Korean
-          Locale('ms'), // Malay
-          Locale('nl'), // Dutch
-          Locale('pl'), // Polish
-          Locale('pt'), // Portugese
-          Locale('ro'), // Romanian
-          Locale('ru'), // Russian
-          Locale('sl'), // Slovenian
-          Locale('sv'), // Swedish
-          Locale('tl'), // Tagalog
-          Locale('tr'), // Turkish
-          Locale('vi'), // Vietnamese
-          Locale('ca'), // Catalan
-          Locale('uk'), // Ukrainian
-          Locale('no'), // Norwegian
-          Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
-          Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'), // Chinese Traditional
-          Locale('ar'), // Arabic
-          Locale('lv'), // Latvian
-          Locale('bn'), // Bengali
-          // Currency-default requires country included
-          Locale("es", "AR"),
-          Locale("en", "AU"),
-          Locale("pt", "BR"),
-          Locale("en", "CA"),
-          Locale("de", "CH"),
-          Locale("es", "CL"),
-          Locale("zh", "CN"),
-          Locale("cs", "CZ"),
-          Locale("da", "DK"),
-          Locale("fr", "FR"),
-          Locale("en", "GB"),
-          Locale("zh", "HK"),
-          Locale("hu", "HU"),
-          Locale("id", "ID"),
-          Locale("he", "IL"),
-          Locale("hi", "IN"),
-          Locale("ja", "JP"),
-          Locale("ko", "KR"),
-          Locale("es", "MX"),
-          Locale("ta", "MY"),
-          Locale("en", "NZ"),
-          Locale("tl", "PH"),
-          Locale("ur", "PK"),
-          Locale("pl", "PL"),
-          Locale("ru", "RU"),
-          Locale("sv", "SE"),
-          Locale("zh", "SG"),
-          Locale("th", "TH"),
-          Locale("tr", "TR"),
-          Locale("en", "TW"),
-          Locale("es", "VE"),
-          Locale("en", "ZA"),
-          Locale("en", "US"),
-          Locale("es", "AR"),
-          Locale("de", "AT"),
-          Locale("fr", "BE"),
-          Locale("de", "BE"),
-          Locale("nl", "BE"),
-          Locale("tr", "CY"),
-          Locale("et", "EE"),
-          Locale("fi", "FI"),
-          Locale("fr", "FR"),
-          Locale("el", "GR"),
-          Locale("es", "AR"),
-          Locale("en", "IE"),
-          Locale("it", "IT"),
-          Locale("es", "AR"),
-          Locale("lv", "LV"),
-          Locale("lt", "LT"),
-          Locale("fr", "LU"),
-          Locale("en", "MT"),
-          Locale("nl", "NL"),
-          Locale("pt", "PT"),
-          Locale("sk", "SK"),
-          Locale("sl", "SI"),
-          Locale("es", "ES"),
-          Locale("ar", "AE"), // UAE
-          Locale("ar", "SA"), // Saudi Arabia
-          Locale("ar", "KW"), // Kuwait
-          Locale("uk", "UA"), // Ukraine
-          Locale("no", "NO"), // Norway
-          Locale("bn", "BD"), // Bangladesh
-          Locale("bn", "IN"), // India/Bengali
-        ],
+        // supportedLocales: const [
+        //   Locale('en', 'US'), // English
+        //   Locale('he', 'IL'), // Hebrew
+        //   Locale('de', 'DE'), // German
+        //   Locale('da'), // Danish
+        //   Locale('bg'), // Bulgarian
+        //   Locale('es'), // Spanish
+        //   Locale('hi'), // Hindi
+        //   Locale('hu'), // Hungarian
+        //   Locale('hi'), // Hindi
+        //   Locale('id'), // Indonesian
+        //   Locale('it'), // Italian
+        //   Locale('ja'), // Japanese
+        //   Locale('ko'), // Korean
+        //   Locale('ms'), // Malay
+        //   Locale('nl'), // Dutch
+        //   Locale('pl'), // Polish
+        //   Locale('pt'), // Portugese
+        //   Locale('ro'), // Romanian
+        //   Locale('ru'), // Russian
+        //   Locale('sl'), // Slovenian
+        //   Locale('sv'), // Swedish
+        //   Locale('tl'), // Tagalog
+        //   Locale('tr'), // Turkish
+        //   Locale('vi'), // Vietnamese
+        //   Locale('ca'), // Catalan
+        //   Locale('uk'), // Ukrainian
+        //   Locale('no'), // Norwegian
+        //   Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
+        //   Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'), // Chinese Traditional
+        //   Locale('ar'), // Arabic
+        //   Locale('lv'), // Latvian
+        //   Locale('bn'), // Bengali
+        //   // Currency-default requires country included
+        //   Locale("es", "AR"),
+        //   Locale("en", "AU"),
+        //   Locale("pt", "BR"),
+        //   Locale("en", "CA"),
+        //   Locale("de", "CH"),
+        //   Locale("es", "CL"),
+        //   Locale("zh", "CN"),
+        //   Locale("cs", "CZ"),
+        //   Locale("da", "DK"),
+        //   Locale("fr", "FR"),
+        //   Locale("en", "GB"),
+        //   Locale("zh", "HK"),
+        //   Locale("hu", "HU"),
+        //   Locale("id", "ID"),
+        //   Locale("he", "IL"),
+        //   Locale("hi", "IN"),
+        //   Locale("ja", "JP"),
+        //   Locale("ko", "KR"),
+        //   Locale("es", "MX"),
+        //   Locale("ta", "MY"),
+        //   Locale("en", "NZ"),
+        //   Locale("tl", "PH"),
+        //   Locale("ur", "PK"),
+        //   Locale("pl", "PL"),
+        //   Locale("ru", "RU"),
+        //   Locale("sv", "SE"),
+        //   Locale("zh", "SG"),
+        //   Locale("th", "TH"),
+        //   Locale("tr", "TR"),
+        //   Locale("en", "TW"),
+        //   Locale("es", "VE"),
+        //   Locale("en", "ZA"),
+        //   Locale("en", "US"),
+        //   Locale("es", "AR"),
+        //   Locale("de", "AT"),
+        //   Locale("fr", "BE"),
+        //   Locale("de", "BE"),
+        //   Locale("nl", "BE"),
+        //   Locale("tr", "CY"),
+        //   Locale("et", "EE"),
+        //   Locale("fi", "FI"),
+        //   Locale("fr", "FR"),
+        //   Locale("el", "GR"),
+        //   Locale("es", "AR"),
+        //   Locale("en", "IE"),
+        //   Locale("it", "IT"),
+        //   Locale("es", "AR"),
+        //   Locale("lv", "LV"),
+        //   Locale("lt", "LT"),
+        //   Locale("fr", "LU"),
+        //   Locale("en", "MT"),
+        //   Locale("nl", "NL"),
+        //   Locale("pt", "PT"),
+        //   Locale("sk", "SK"),
+        //   Locale("sl", "SI"),
+        //   Locale("es", "ES"),
+        //   Locale("ar", "AE"), // UAE
+        //   Locale("ar", "SA"), // Saudi Arabia
+        //   Locale("ar", "KW"), // Kuwait
+        //   Locale("uk", "UA"), // Ukraine
+        //   Locale("no", "NO"), // Norway
+        //   Locale("bn", "BD"), // Bangladesh
+        //   Locale("bn", "IN"), // India/Bengali
+        // ],
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {

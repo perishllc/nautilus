@@ -12,6 +12,7 @@ import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -380,7 +381,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      Clipboard.setData(ClipboardData(text: branchLink));
+      Clipboard.setData(ClipboardData(text: (branchLink ?? "") + RecordTypes.SEPARATOR + widget.paperWalletSeed));
       UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationErrorSent, context, durationMs: 20000);
       Navigator.of(context).pop();
     }

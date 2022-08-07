@@ -94,7 +94,7 @@ class AccountDetailsSheet {
                                                   CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () {
                                                 // Remove account
                                                 deleted = true;
-                                                sl.get<DBHelper>().deleteAccount(account).then((id) {
+                                                sl.get<DBHelper>().deleteAccount(account).then((int id) {
                                                   EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account, deleted: true));
                                                   Navigator.of(context).pop();
                                                 });

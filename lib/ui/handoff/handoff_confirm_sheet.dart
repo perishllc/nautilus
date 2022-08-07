@@ -330,12 +330,6 @@ class _HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
         UIUtil.showSnackbar(poppedError, context, durationMs: 5000);
         Navigator.of(context).pop();
       }
-      if (widget.link.isNotEmpty) {
-        Clipboard.setData(ClipboardData(text: widget.link));
-        UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationErrorSent, context, durationMs: 20000);
-        Navigator.of(context).pop();
-        return;
-      }
       UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context, durationMs: 5000);
       Navigator.of(context).pop();
     }

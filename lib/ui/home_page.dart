@@ -20,7 +20,7 @@ import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
@@ -464,6 +464,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
               if (!mounted) return;
 
               if (res["error"] != null) {
+                log.d(res);
                 // something went wrong, show error:
                 UIUtil.showSnackbar(AppLocalization.of(context)!.errorProcessingGiftCard, context, durationMs: 2000);
               } else if (res["success"] != null) {

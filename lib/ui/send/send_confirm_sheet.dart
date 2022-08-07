@@ -15,6 +15,7 @@ import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
@@ -511,7 +512,6 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           contactName = user.getDisplayName();
         }
       }
-
       StateContainer.of(context).requestUpdate();
       StateContainer.of(context).updateTXMemos();
       if (isMessage) {
@@ -555,7 +555,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         Navigator.of(context).pop();
       }
       if (widget.link.isNotEmpty) {
-        Clipboard.setData(ClipboardData(text: widget.link));
+        Clipboard.setData(ClipboardData(text: widget.link + RecordTypes.SEPARATOR + widget.paperWalletSeed));
         UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationErrorSent, context, durationMs: 20000);
         Navigator.of(context).pop();
         return;

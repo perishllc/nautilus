@@ -99,7 +99,7 @@ class SendSheetState extends State<SendSheet> {
   bool _localCurrencyMode = false;
   String _lastLocalCurrencyAmount = "";
   String _lastCryptoAmount = "";
-  NumberFormat? _localCurrencyFormat;
+  late NumberFormat _localCurrencyFormat;
 
   bool isIpad = false;
 
@@ -851,10 +851,7 @@ class SendSheetState extends State<SendSheet> {
                       }
 
                       String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
-                      final String formattedAmount = _amountController!.text
-                          .replaceAll(_localCurrencyFormat!.currencySymbol, "")
-                          .replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "")
-                          .replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
+                      final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
 
                       String amountRaw;
 
@@ -862,7 +859,8 @@ class SendSheetState extends State<SendSheet> {
                         amountRaw = "0";
                       } else {
                         if (_localCurrencyMode) {
-                          amountRaw = NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto());
+                          amountRaw =
+                              NumberUtil.getAmountAsRaw(sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text)));
                         } else {
                           if (_rawAmount != null) {
                             amountRaw = _rawAmount!;
@@ -1034,7 +1032,8 @@ class SendSheetState extends State<SendSheet> {
                               context: context,
                               widget: SendConfirmSheet(
                                   amountRaw: _localCurrencyMode
-                                      ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto())
+                                      ? NumberUtil.getAmountAsRaw(
+                                          sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text)))
                                       : _rawAmount ?? getThemeAwareAmountAsRaw(context, _amountController!.text),
                                   destination: user?.address ?? address.address!,
                                   contactName: user?.getDisplayName(),
@@ -1083,43 +1082,40 @@ class SendSheetState extends State<SendSheet> {
                     })
                   ],
                 ),
-              //   if (Platform.isIOS && !isIpad)
-              //     Row(
-              //       children: <Widget>[
-              //         // scan for nfc
-              //         AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.sendViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
-              //             onPressed: () async {
-              //           try {
-              //             UIUtil.cancelLockEvent();
-              //             startNFCSession("");
-              //           } catch (e) {
-              //             stopNFCSession();
-              //           }
-              //         })
-              //       ],
-              //     ),
+                //   if (Platform.isIOS && !isIpad)
+                //     Row(
+                //       children: <Widget>[
+                //         // scan for nfc
+                //         AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.sendViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
+                //             onPressed: () async {
+                //           try {
+                //             UIUtil.cancelLockEvent();
+                //             startNFCSession("");
+                //           } catch (e) {
+                //             stopNFCSession();
+                //           }
+                //         })
+                //       ],
+                //     ),
               ],
             ),
           ],
         ));
   }
 
-  String _convertLocalCurrencyToCrypto() {
-    String convertedAmt =
-        _amountController!.text.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "").replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
-    convertedAmt = NumberUtil.sanitizeNumber(convertedAmt);
-    if (convertedAmt.isEmpty) {
+  String _convertLocalCurrencyToLocalizedCrypto(String amount) {
+    final String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
+    if (sanitizedAmt.isEmpty) {
       return "";
     }
-    final Decimal valueLocal = Decimal.parse(convertedAmt);
+    final Decimal valueLocal = Decimal.parse(sanitizedAmt);
     final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     final String nanoAmount = NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
     return convertCryptoToLocalAmount(nanoAmount, _localCurrencyFormat);
   }
 
   String _convertCryptoToLocalCurrency(String amount) {
-    String sanitizedAmt = amount.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "").replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
-    sanitizedAmt = NumberUtil.sanitizeNumber(sanitizedAmt);
+    String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
     if (sanitizedAmt.isEmpty) {
       return "";
     }
@@ -1127,7 +1123,7 @@ class SendSheetState extends State<SendSheet> {
     final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
 
-    return (_localCurrencyFormat!.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, _localCurrencyFormat)).replaceAll(" ", "");
+    return (_localCurrencyFormat.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, _localCurrencyFormat)).replaceAll(" ", "");
   }
 
   // Determine if this is a max send or not by comparing balances
@@ -1152,14 +1148,12 @@ class SendSheetState extends State<SendSheet> {
       if (_localCurrencyMode) {
         // Sanitize currency values into plain integer representations
         textField = textField.replaceAll(",", ".");
-        final String sanitizedTextField = NumberUtil.sanitizeNumber(textField);
-        balance = balance.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
-        balance = balance.replaceAll(",", ".");
-        final String sanitizedBalance = NumberUtil.sanitizeNumber(balance);
+        final String sanitizedTextField = sanitizedAmount(_localCurrencyFormat, textField);
+        final String sanitizedBalance = sanitizedAmount(_localCurrencyFormat, balance);
         textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
         balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       } else {
-        textField = textField.replaceAll(",", "");
+        textField = sanitizedAmount(_localCurrencyFormat, textField);
         textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
         balanceInt = (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       }
@@ -1185,7 +1179,7 @@ class SendSheetState extends State<SendSheet> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount = _convertLocalCurrencyToCrypto();
+        _lastCryptoAmount = _convertLocalCurrencyToLocalizedCrypto(_amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       setState(() {
@@ -1201,8 +1195,8 @@ class SendSheetState extends State<SendSheet> {
       // Check our previous state
       if (_amountController!.text == _lastCryptoAmount) {
         localAmountStr = _lastLocalCurrencyAmount;
-        if (!_lastLocalCurrencyAmount.startsWith(_localCurrencyFormat!.currencySymbol)) {
-          _lastLocalCurrencyAmount = _localCurrencyFormat!.currencySymbol + _lastLocalCurrencyAmount;
+        if (!_lastLocalCurrencyAmount.startsWith(_localCurrencyFormat.currencySymbol)) {
+          _lastLocalCurrencyAmount = _localCurrencyFormat.currencySymbol + _lastLocalCurrencyAmount;
         }
       } else {
         _lastCryptoAmount = _amountController!.text;
@@ -1259,7 +1253,7 @@ class SendSheetState extends State<SendSheet> {
     _addressFocusNode!.unfocus();
     _memoFocusNode!.unfocus();
     // Validate amount
-    if (_amountController!.text.trim().isEmpty && isRequest && _memoController!.text.trim().isNotEmpty) {
+    if (_amountController!.text.trim().isEmpty && _memoController!.text.trim().isNotEmpty) {
       isValid = false;
       setState(() {
         _amountValidationText = AppLocalization.of(context)!.amountMissing;
@@ -1267,13 +1261,10 @@ class SendSheetState extends State<SendSheet> {
     } else {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = _convertLocalCurrencyToCrypto();
+        bananoAmount = sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text));
       } else {
         if (_rawAmount == null) {
-          bananoAmount = _amountController!.text
-              .replaceAll(_localCurrencyFormat!.currencySymbol, "")
-              .replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "")
-              .replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
+          bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
         } else {
           bananoAmount = getRawAsThemeAwareAmount(context, _rawAmount);
         }
@@ -1346,7 +1337,7 @@ class SendSheetState extends State<SendSheet> {
       }
 
       if (isValid && isRequest) {
-        // still valid && you have to have a nautilus username to send requests:
+        // still valid && you have to meet requirements to send requests:
         if (StateContainer.of(context).wallet!.user == null && StateContainer.of(context).wallet!.confirmationHeight < _REQUIRED_CONFIRMATION_HEIGHT) {
           isValid = false;
           await showNeedVerificationAlert();
@@ -1377,14 +1368,13 @@ class SendSheetState extends State<SendSheet> {
         color: StateContainer.of(context).curTheme.primary,
         fontFamily: 'NunitoSans',
       ),
-      inputFormatters: _rawAmount == null
-          ? [
-              CurrencyFormatter(
-                  currencyFormat: _localCurrencyFormat!,
-                  maxDecimalDigits: _localCurrencyMode ? _localCurrencyFormat!.maximumFractionDigits : NumberUtil.maxDecimalDigits),
-              LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
-            ]
-          : [LengthLimitingTextInputFormatter(13)],
+      inputFormatters: [
+        CurrencyFormatter2(
+          active: _localCurrencyMode,
+          currencyFormat: _localCurrencyFormat,
+          maxDecimalDigits: _localCurrencyMode ? _localCurrencyFormat.decimalDigits ?? 2 : NumberUtil.maxDecimalDigits,
+        ),
+      ],
       onChanged: (String text) {
         // Always reset the error message to be less annoying
         setState(() {
@@ -1422,12 +1412,12 @@ class SendSheetState extends State<SendSheet> {
             String localAmount = StateContainer.of(context)
                 .wallet!
                 .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
-            localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
-            localAmount = localAmount.replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
-            localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat!.symbols.DECIMAL_SEP);
+            localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
+            localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
+            localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
             setState(() {
               _amountValidationText = "";
-              _amountController!.text = _localCurrencyFormat!.currencySymbol + localAmount;
+              _amountController!.text = _localCurrencyFormat.currencySymbol + localAmount;
               _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
             });
           }

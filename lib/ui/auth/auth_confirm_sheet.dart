@@ -13,6 +13,7 @@ import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/method.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -206,10 +207,13 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
 
-                      final String authText = AppLocalization.of(context)!
-                          .sendAmountConfirm
-                          .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.handoffItem.amount))
-                          .replaceAll("%2", StateContainer.of(context).currencyMode);
+                      // final String authText = AppLocalization.of(context)!
+                      //     .sendAmountConfirm
+                      //     .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.authItem.amount))
+                      //     .replaceAll("%2", StateContainer.of(context).currencyMode);
+                      
+                      // TODO:
+                      final String authText = AppLocalization.of(context)!.sendAmountConfirm;
 
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
@@ -309,12 +313,6 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
       // Send failed
       if (animationOpen) {
         Navigator.of(context).pop();
-      }
-      if (widget.link.isNotEmpty) {
-        Clipboard.setData(ClipboardData(text: widget.link));
-        UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationErrorSent, context, durationMs: 20000);
-        Navigator.of(context).pop();
-        return;
       }
       UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context, durationMs: 5000);
       Navigator.of(context).pop();

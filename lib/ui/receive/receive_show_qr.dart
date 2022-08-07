@@ -25,9 +25,8 @@ import 'package:quiver/strings.dart';
 import 'package:share_plus/share_plus.dart';
 
 class NumericalRangeFormatter extends TextInputFormatter {
-
   NumericalRangeFormatter({this.min, this.max});
-  
+
   final double? min;
   final double? max;
 
@@ -47,7 +46,6 @@ class NumericalRangeFormatter extends TextInputFormatter {
 }
 
 class ReceiveShowQRSheet extends StatefulWidget {
-
   ReceiveShowQRSheet({required this.localCurrency, this.address, this.qrWidget}) : super();
 
   final AvailableCurrency localCurrency;
@@ -70,7 +68,7 @@ class ReceiveShowQRSheetStateState extends State<ReceiveShowQRSheet> {
   FocusNode? _amountFocusNode;
   String? _rawAmount;
   TextEditingController? _amountController;
-  NumberFormat? _localCurrencyFormat;
+  late NumberFormat _localCurrencyFormat;
   bool _localCurrencyMode = false;
   String _amountValidationText = "";
   String? _amountHint = "";
@@ -362,22 +360,19 @@ class ReceiveShowQRSheetStateState extends State<ReceiveShowQRSheet> {
             )));
   }
 
-  String _convertLocalCurrencyToCrypto() {
-    String convertedAmt =
-        _amountController!.text.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "").replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
-    convertedAmt = NumberUtil.sanitizeNumber(convertedAmt);
-    if (convertedAmt.isEmpty) {
+  String _convertLocalCurrencyToLocalizedCrypto(String amount) {
+    final String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
+    if (sanitizedAmt.isEmpty) {
       return "";
     }
-    final Decimal valueLocal = Decimal.parse(convertedAmt);
+    final Decimal valueLocal = Decimal.parse(sanitizedAmt);
     final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     final String nanoAmount = NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
     return convertCryptoToLocalAmount(nanoAmount, _localCurrencyFormat);
   }
 
   String _convertCryptoToLocalCurrency(String amount) {
-    String sanitizedAmt = amount.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "").replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
-    sanitizedAmt = NumberUtil.sanitizeNumber(sanitizedAmt);
+    String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
     if (sanitizedAmt.isEmpty) {
       return "";
     }
@@ -385,7 +380,7 @@ class ReceiveShowQRSheetStateState extends State<ReceiveShowQRSheet> {
     final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
 
-    return (_localCurrencyFormat!.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, _localCurrencyFormat)).replaceAll(" ", "");
+    return (_localCurrencyFormat.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, _localCurrencyFormat)).replaceAll(" ", "");
   }
 
   void toggleLocalCurrency() {
@@ -399,7 +394,7 @@ class ReceiveShowQRSheetStateState extends State<ReceiveShowQRSheet> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount = _convertLocalCurrencyToCrypto();
+        _lastCryptoAmount = _convertLocalCurrencyToLocalizedCrypto(_amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       setState(() {
@@ -415,8 +410,8 @@ class ReceiveShowQRSheetStateState extends State<ReceiveShowQRSheet> {
       // Check our previous state
       if (_amountController!.text == _lastCryptoAmount) {
         localAmountStr = _lastLocalCurrencyAmount;
-        if (!_lastLocalCurrencyAmount.startsWith(_localCurrencyFormat!.currencySymbol)) {
-          _lastLocalCurrencyAmount = _localCurrencyFormat!.currencySymbol + _lastLocalCurrencyAmount;
+        if (!_lastLocalCurrencyAmount.startsWith(_localCurrencyFormat.currencySymbol)) {
+          _lastLocalCurrencyAmount = _localCurrencyFormat.currencySymbol + _lastLocalCurrencyAmount;
         }
       } else {
         _lastCryptoAmount = _amountController!.text;
@@ -437,14 +432,14 @@ class ReceiveShowQRSheetStateState extends State<ReceiveShowQRSheet> {
     String? raw;
     if (_localCurrencyMode) {
       _lastLocalCurrencyAmount = _amountController!.text;
-      _lastCryptoAmount = _convertLocalCurrencyToCrypto();
+      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text));
       if (_lastCryptoAmount.isNotEmpty) {
         raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
       }
     } else {
       raw = _amountController!.text.isNotEmpty
           ? NumberUtil.getAmountAsRaw(
-              _amountController!.text.trim().replaceAll(_localCurrencyFormat!.currencySymbol, "").replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, ""))
+              _amountController!.text.trim().replaceAll(_localCurrencyFormat.currencySymbol, "").replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, ""))
           : "";
     }
     paintQrCode(address: widget.address, amount: raw);
@@ -478,13 +473,17 @@ class ReceiveShowQRSheetStateState extends State<ReceiveShowQRSheet> {
         color: StateContainer.of(context).curTheme.primary,
         fontFamily: 'NunitoSans',
       ),
-      inputFormatters: _rawAmount == null
-          ? [CurrencyFormatter(currencyFormat: _localCurrencyFormat!), LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)]
-          : [LengthLimitingTextInputFormatter(13)],
+      inputFormatters: [
+        CurrencyFormatter2(
+          active: _localCurrencyMode,
+          currencyFormat: _localCurrencyFormat,
+          maxDecimalDigits: _localCurrencyMode ? _localCurrencyFormat.decimalDigits ?? 2 : NumberUtil.maxDecimalDigits,
+        ),
+      ],
       onChanged: (String text) {
         if (_localCurrencyMode == false && !text.contains(".") && text.isNotEmpty && text.length > 1) {
           // if the amount is larger than 133248297 set it to that number:
-          if (BigInt.parse(text.replaceAll(_localCurrencyFormat!.currencySymbol, "").replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "")) >
+          if (BigInt.parse(text.replaceAll(_localCurrencyFormat.currencySymbol, "").replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "")) >
               BigInt.parse("133248297")) {
             setState(() {
               // _amountController.text = "133248297";

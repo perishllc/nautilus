@@ -124,7 +124,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
   bool _localCurrencyMode = false;
   String _lastLocalCurrencyAmount = "";
   String _lastCryptoAmount = "";
-  NumberFormat? _localCurrencyFormat;
+  late NumberFormat _localCurrencyFormat;
 
   final int _REQUIRED_CONFIRMATION_HEIGHT = 10;
 
@@ -736,17 +736,15 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                       }
                       final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
 
-                      final String formattedAmount = _amountController!.text
-                          .replaceAll(_localCurrencyFormat!.currencySymbol, "")
-                          .replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "")
-                          .replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
+                      final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
 
                       String amountRaw;
                       if (_amountController!.text.isEmpty || _amountController!.text == "0") {
                         amountRaw = "0";
                       } else {
                         if (_localCurrencyMode) {
-                          amountRaw = NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto());
+                          amountRaw =
+                              NumberUtil.getAmountAsRaw(sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text)));
                         } else {
                           if (!mounted) return;
                           amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
@@ -831,22 +829,19 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
         ));
   }
 
-  String _convertLocalCurrencyToCrypto() {
-    String convertedAmt =
-        _amountController!.text.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "").replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
-    convertedAmt = NumberUtil.sanitizeNumber(convertedAmt);
-    if (convertedAmt.isEmpty) {
+  String _convertLocalCurrencyToLocalizedCrypto(String amount) {
+    final String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
+    if (sanitizedAmt.isEmpty) {
       return "";
     }
-    final Decimal valueLocal = Decimal.parse(convertedAmt);
+    final Decimal valueLocal = Decimal.parse(sanitizedAmt);
     final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     final String nanoAmount = NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
     return convertCryptoToLocalAmount(nanoAmount, _localCurrencyFormat);
   }
 
   String _convertCryptoToLocalCurrency(String amount) {
-    String sanitizedAmt = amount.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "").replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
-    sanitizedAmt = NumberUtil.sanitizeNumber(sanitizedAmt);
+    String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
     if (sanitizedAmt.isEmpty) {
       return "";
     }
@@ -854,7 +849,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
     sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
 
-    return (_localCurrencyFormat!.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, _localCurrencyFormat)).replaceAll(" ", "");
+    return (_localCurrencyFormat.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, _localCurrencyFormat)).replaceAll(" ", "");
   }
 
   // Determine if this is a max send or not by comparing balances
@@ -879,14 +874,12 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       if (_localCurrencyMode) {
         // Sanitize currency values into plain integer representations
         textField = textField.replaceAll(",", ".");
-        final String sanitizedTextField = NumberUtil.sanitizeNumber(textField);
-        balance = balance.replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "");
-        balance = balance.replaceAll(",", ".");
-        final String sanitizedBalance = NumberUtil.sanitizeNumber(balance);
+        final String sanitizedTextField = sanitizedAmount(_localCurrencyFormat, textField);
+        final String sanitizedBalance = sanitizedAmount(_localCurrencyFormat, balance);
         textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
         balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       } else {
-        textField = textField.replaceAll(",", "");
+        textField = sanitizedAmount(_localCurrencyFormat, textField);
         textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
         balanceInt = (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       }
@@ -907,7 +900,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount = _convertLocalCurrencyToCrypto();
+        _lastCryptoAmount = _convertLocalCurrencyToLocalizedCrypto(_amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       setState(() {
@@ -923,8 +916,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       // Check our previous state
       if (_amountController!.text == _lastCryptoAmount) {
         localAmountStr = _lastLocalCurrencyAmount;
-        if (!_lastLocalCurrencyAmount.startsWith(_localCurrencyFormat!.currencySymbol)) {
-          _lastLocalCurrencyAmount = _localCurrencyFormat!.currencySymbol + _lastLocalCurrencyAmount;
+        if (!_lastLocalCurrencyAmount.startsWith(_localCurrencyFormat.currencySymbol)) {
+          _lastLocalCurrencyAmount = _localCurrencyFormat.currencySymbol + _lastLocalCurrencyAmount;
         }
       } else {
         _lastCryptoAmount = _amountController!.text;
@@ -945,14 +938,14 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     String? raw;
     if (_localCurrencyMode) {
       _lastLocalCurrencyAmount = _amountController!.text;
-      _lastCryptoAmount = _convertLocalCurrencyToCrypto();
+      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text));
       if (_lastCryptoAmount.isNotEmpty) {
         raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
       }
     } else {
       raw = _amountController!.text.isNotEmpty
           ? NumberUtil.getAmountAsRaw(
-              _amountController!.text.trim().replaceAll(_localCurrencyFormat!.currencySymbol, "").replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, ""))
+              _amountController!.text.trim().replaceAll(_localCurrencyFormat.currencySymbol, "").replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, ""))
           : "";
     }
     paintQrCode(address: widget.address, amount: raw);
@@ -1132,13 +1125,10 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     } else {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = _convertLocalCurrencyToCrypto();
+        bananoAmount = sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text));
       } else {
         if (_rawAmount == null) {
-          bananoAmount = _amountController!.text
-              .replaceAll(_localCurrencyFormat!.currencySymbol, "")
-              .replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "")
-              .replaceAll(_localCurrencyFormat!.symbols.DECIMAL_SEP, ".");
+          bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
         } else {
           bananoAmount = getRawAsThemeAwareAmount(context, _rawAmount);
         }
@@ -1242,13 +1232,17 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
         color: StateContainer.of(context).curTheme.primary,
         fontFamily: 'NunitoSans',
       ),
-      inputFormatters: _rawAmount == null
-          ? [CurrencyFormatter(currencyFormat: _localCurrencyFormat!), LocalCurrencyFormatter(active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)]
-          : [LengthLimitingTextInputFormatter(13)],
+      inputFormatters: [
+        CurrencyFormatter2(
+          active: _localCurrencyMode,
+          currencyFormat: _localCurrencyFormat,
+          maxDecimalDigits: _localCurrencyMode ? _localCurrencyFormat.decimalDigits ?? 2 : NumberUtil.maxDecimalDigits,
+        ),
+      ],
       onChanged: (String text) {
         if (_localCurrencyMode == false && !text.contains(".") && text.isNotEmpty && text.length > 1) {
           // if the amount is larger than 133248297 set it to that number:
-          if (BigInt.parse(text.replaceAll(_localCurrencyFormat!.currencySymbol, "").replaceAll(_localCurrencyFormat!.symbols.GROUP_SEP, "")) >
+          if (BigInt.parse(text.replaceAll(_localCurrencyFormat.currencySymbol, "").replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "")) >
               BigInt.parse("133248297")) {
             setState(() {
               // _amountController.text = "133248297";

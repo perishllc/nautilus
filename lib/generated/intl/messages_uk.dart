@@ -1,0 +1,663 @@
+// DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
+// This is a library that provides messages for a uk locale. All the
+// messages from the main program should be duplicated here with the same
+// function name.
+
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
+// ignore_for_file:unnecessary_string_interpolations, unnecessary_string_escapes
+
+import 'package:intl/intl.dart';
+import 'package:intl/message_lookup_by_library.dart';
+
+final messages = new MessageLookup();
+
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
+
+class MessageLookup extends MessageLookupByLibrary {
+  String get localeName => 'uk';
+
+  final messages = _notInlinedMessages(_notInlinedMessages);
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account": MessageLookupByLibrary.simpleMessage("Гаманець"),
+        "accounts": MessageLookupByLibrary.simpleMessage("Гаманці"),
+        "ackBackedUp": MessageLookupByLibrary.simpleMessage(
+            "Ви впевнені, що ви зробили резервну копію вашої секретної фрази або seed?"),
+        "activeMessageHeader":
+            MessageLookupByLibrary.simpleMessage("Активне повідомлення"),
+        "addAccount": MessageLookupByLibrary.simpleMessage("Додати гаманець"),
+        "addBlocked":
+            MessageLookupByLibrary.simpleMessage("Блокування користувача"),
+        "addContact": MessageLookupByLibrary.simpleMessage("Додати контакт"),
+        "addFavorite": MessageLookupByLibrary.simpleMessage("Додати Улюблене"),
+        "addressCopied":
+            MessageLookupByLibrary.simpleMessage("Адресу скопійовано"),
+        "addressHint": MessageLookupByLibrary.simpleMessage("Введіть адресу"),
+        "addressMissing":
+            MessageLookupByLibrary.simpleMessage("Будь ласка вкажіть адресу"),
+        "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
+            "Будь ласка, введіть ім\'я користувача або адресу"),
+        "addressShare":
+            MessageLookupByLibrary.simpleMessage("Поділитися адресою"),
+        "aliases": MessageLookupByLibrary.simpleMessage("Псевдоніми"),
+        "amountMissing":
+            MessageLookupByLibrary.simpleMessage("Будь ласка вкажіть суму"),
+        "asked": MessageLookupByLibrary.simpleMessage("Запитав"),
+        "authMethod":
+            MessageLookupByLibrary.simpleMessage("Метод аутентикації"),
+        "autoImport": MessageLookupByLibrary.simpleMessage("Авто Імпорт"),
+        "autoLockHeader":
+            MessageLookupByLibrary.simpleMessage("Автоматичне блокування"),
+        "backupConfirmButton":
+            MessageLookupByLibrary.simpleMessage("Я зробив резервну копію"),
+        "backupSecretPhrase": MessageLookupByLibrary.simpleMessage(
+            "Резервна копія секретної фрази"),
+        "backupSeed":
+            MessageLookupByLibrary.simpleMessage("Резервна копія seed"),
+        "backupSeedConfirm": MessageLookupByLibrary.simpleMessage(
+            "ви впевнені що ви зробили резервну копію seed?"),
+        "backupYourSeed":
+            MessageLookupByLibrary.simpleMessage("зробити резервну копію seed"),
+        "biometricsMethod": MessageLookupByLibrary.simpleMessage("Біометрика"),
+        "blockExplorer":
+            MessageLookupByLibrary.simpleMessage("Explorer блокчейну"),
+        "blockExplorerHeader": MessageLookupByLibrary.simpleMessage(
+            "Інформація про блок-провідник"),
+        "blockExplorerInfo": MessageLookupByLibrary.simpleMessage(
+            "Який провідник блоків використовувати для відображення інформації про транзакції"),
+        "blockUser": MessageLookupByLibrary.simpleMessage(
+            "Заблокувати цього користувача"),
+        "blockedAdded":
+            MessageLookupByLibrary.simpleMessage("% 1 успішно заблоковано."),
+        "blockedExists": MessageLookupByLibrary.simpleMessage(
+            "Користувач вже заблокований!"),
+        "blockedHeader": MessageLookupByLibrary.simpleMessage("Заблоковано"),
+        "blockedInfo": MessageLookupByLibrary.simpleMessage(
+            "Блокувати користувача за будь-яким відомим псевдонімом або адресою. Будь-які повідомлення, транзакції або запити від них будуть проігноровані."),
+        "blockedInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Заблокована інформація"),
+        "blockedNameExists": MessageLookupByLibrary.simpleMessage(
+            "Ім\'я псевдоніма вже використано!"),
+        "blockedNameMissing":
+            MessageLookupByLibrary.simpleMessage("Виберіть назву псевдоніма"),
+        "blockedRemoved":
+            MessageLookupByLibrary.simpleMessage("% 1 розблоковано!"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Відмовитися"),
+        "changeCurrency":
+            MessageLookupByLibrary.simpleMessage("Змінити валюту"),
+        "changeLog": MessageLookupByLibrary.simpleMessage("Журнал змін"),
+        "changeRepAuthenticate":
+            MessageLookupByLibrary.simpleMessage("Зміна представника"),
+        "changeRepButton": MessageLookupByLibrary.simpleMessage("Зміна"),
+        "changeRepHint":
+            MessageLookupByLibrary.simpleMessage("Введіть нового представника"),
+        "changeRepSame":
+            MessageLookupByLibrary.simpleMessage("Це вже ваш представник!"),
+        "changeRepSucces": MessageLookupByLibrary.simpleMessage(
+            "Представника змінено успішно"),
+        "checkAvailability":
+            MessageLookupByLibrary.simpleMessage("Перевірити наявність"),
+        "close": MessageLookupByLibrary.simpleMessage("Закрити"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Підтвердити"),
+        "confirmPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Підтвердити пароль"),
+        "connectingHeader": MessageLookupByLibrary.simpleMessage("З\'єднання"),
+        "contactAdded":
+            MessageLookupByLibrary.simpleMessage("%1 додано до контактів."),
+        "contactExists":
+            MessageLookupByLibrary.simpleMessage("Такий контакт вже існує"),
+        "contactHeader": MessageLookupByLibrary.simpleMessage("Контакт"),
+        "contactInvalid":
+            MessageLookupByLibrary.simpleMessage("Невірне ім\'я контакта"),
+        "contactNameHint":
+            MessageLookupByLibrary.simpleMessage("Введіть ім\'я @"),
+        "contactNameMissing":
+            MessageLookupByLibrary.simpleMessage("Оберіть ім\'я контакта"),
+        "contactRemoved": MessageLookupByLibrary.simpleMessage(
+            "%1 було видалено з контактів!"),
+        "contactsHeader": MessageLookupByLibrary.simpleMessage("Контакти"),
+        "contactsImportErr": MessageLookupByLibrary.simpleMessage(
+            "Не вдалося імпортувати контакти"),
+        "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
+            "Успішно імпортовано %1 контактів."),
+        "copied": MessageLookupByLibrary.simpleMessage("Скопійовано"),
+        "copy": MessageLookupByLibrary.simpleMessage("Скопіювати"),
+        "copyAddress":
+            MessageLookupByLibrary.simpleMessage("Скопіювати адресу"),
+        "copyLink": MessageLookupByLibrary.simpleMessage("Копіювати посилання"),
+        "copySeed": MessageLookupByLibrary.simpleMessage("Копіювати seed"),
+        "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
+            "Копіювати адресу торбинки до буфера"),
+        "createAPasswordHeader":
+            MessageLookupByLibrary.simpleMessage("Створити пароль."),
+        "createGiftCard":
+            MessageLookupByLibrary.simpleMessage("Створити подарункову карту"),
+        "createGiftHeader": MessageLookupByLibrary.simpleMessage(
+            "Створення подарункової картки"),
+        "createPasswordFirstParagraph": MessageLookupByLibrary.simpleMessage(
+            "Ви можете призначити пароль щоб ваш гаманець був у безпеці."),
+        "createPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Створити пароль"),
+        "createPasswordSecondParagraph": MessageLookupByLibrary.simpleMessage(
+            "Пароль встановлювати не обов\'язково, ваш гаманець буде захищено пін кодом або біометричними даними."),
+        "createPasswordSheetHeader":
+            MessageLookupByLibrary.simpleMessage("Створити"),
+        "createQR": MessageLookupByLibrary.simpleMessage("Створити QR-код"),
+        "creatingGiftCard": MessageLookupByLibrary.simpleMessage(
+            "Створення подарункової картки"),
+        "currency": MessageLookupByLibrary.simpleMessage("Валюта"),
+        "currencyMode": MessageLookupByLibrary.simpleMessage("Валютний режим"),
+        "currencyModeHeader":
+            MessageLookupByLibrary.simpleMessage("Інформація про режим валюти"),
+        "currencyModeInfo": MessageLookupByLibrary.simpleMessage(
+            "Виберіть, в якій одиниці відображати суми.\n1 ньяно = 0,000001 НАНО, або \n1,000,000 ньяно = 1 НАНО"),
+        "currentlyRepresented":
+            MessageLookupByLibrary.simpleMessage("На разі представлено"),
+        "decryptionError":
+            MessageLookupByLibrary.simpleMessage("Помилка розшифровки!"),
+        "defaultAccountName":
+            MessageLookupByLibrary.simpleMessage("Головний гаманець"),
+        "defaultNewAccountName":
+            MessageLookupByLibrary.simpleMessage("Гаманець %1"),
+        "delete": MessageLookupByLibrary.simpleMessage("Вилучити"),
+        "deleteRequest":
+            MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "disablePasswordSheetHeader":
+            MessageLookupByLibrary.simpleMessage("Вимкнути"),
+        "disablePasswordSuccess":
+            MessageLookupByLibrary.simpleMessage("Пароль було вимкнено"),
+        "disableWalletPassword":
+            MessageLookupByLibrary.simpleMessage("Заборонити пароль гаманця"),
+        "dismiss": MessageLookupByLibrary.simpleMessage("Зрозуміло"),
+        "domainInvalid":
+            MessageLookupByLibrary.simpleMessage("Некоректне доменне ім\'я"),
+        "edit": MessageLookupByLibrary.simpleMessage("Редагувати"),
+        "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
+            "Не вдалося встановити пароль гаманця"),
+        "enterAddress": MessageLookupByLibrary.simpleMessage("Введіть адресу"),
+        "enterAmount": MessageLookupByLibrary.simpleMessage("Введіть суму"),
+        "enterGiftMemo":
+            MessageLookupByLibrary.simpleMessage("Введіть подарункову записку"),
+        "enterMemo":
+            MessageLookupByLibrary.simpleMessage("Введіть повідомлення"),
+        "enterPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Введіть пароль"),
+        "enterUserOrAddress": MessageLookupByLibrary.simpleMessage(
+            "Введіть користувача або адресу"),
+        "enterUsername":
+            MessageLookupByLibrary.simpleMessage("Введіть ім\'я користувача"),
+        "eula": MessageLookupByLibrary.simpleMessage("EULA"),
+        "exampleCardFrom": MessageLookupByLibrary.simpleMessage("від когось"),
+        "exampleCardFromKal":
+            MessageLookupByLibrary.simpleMessage("від випадкової мавпи"),
+        "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
+            "Ласкаво прошу до Nautilus. Як тільки ви отримаєте NANO, трансакції буде показано отак:"),
+        "exampleCardIntroKal": MessageLookupByLibrary.simpleMessage(
+            "Ласкаво просимо до Kalium. Як тільки ви отримаєте BANANO, трансакції буде показано отак:"),
+        "exampleCardLittle": MessageLookupByLibrary.simpleMessage("Трохи"),
+        "exampleCardLot": MessageLookupByLibrary.simpleMessage("Багато"),
+        "exampleCardTo": MessageLookupByLibrary.simpleMessage("комусь"),
+        "exampleCardToKal":
+            MessageLookupByLibrary.simpleMessage("випадковій мавпі"),
+        "examplePayRecipient": MessageLookupByLibrary.simpleMessage("@dad"),
+        "examplePayRecipientMessage":
+            MessageLookupByLibrary.simpleMessage("З Днем Народження!"),
+        "examplePaymentExplainer": MessageLookupByLibrary.simpleMessage(
+            "Щойно ви надішлете або отримаєте запит на оплату, вони відображатимуться тут, як це, із кольором та тегом картки, що позначають статус. \n\nЗелений колір означає, що запит був оплачений.\nЖовтим кольором вказується, що запит/пам\'ятка не була оплачена/прочитана.\nЧервоний колір означає, що запит не був прочитаний або отриманий.\n\n Нейтральні кольорові картки без суми - це всього лише повідомлення."),
+        "examplePaymentFrom": MessageLookupByLibrary.simpleMessage("@landlord"),
+        "examplePaymentFulfilled":
+            MessageLookupByLibrary.simpleMessage("Деякі"),
+        "examplePaymentFulfilledMemo":
+            MessageLookupByLibrary.simpleMessage("Суші"),
+        "examplePaymentIntro": MessageLookupByLibrary.simpleMessage(
+            "Щойно ви надішлете або отримаєте запит на оплату, вони з\'являться тут:"),
+        "examplePaymentMessage":
+            MessageLookupByLibrary.simpleMessage("Гей, що там?"),
+        "examplePaymentReceivable":
+            MessageLookupByLibrary.simpleMessage("Багато"),
+        "examplePaymentReceivableMemo":
+            MessageLookupByLibrary.simpleMessage("Оренда"),
+        "examplePaymentTo":
+            MessageLookupByLibrary.simpleMessage("@best_friend"),
+        "exampleRecRecipient":
+            MessageLookupByLibrary.simpleMessage("@coworker"),
+        "exampleRecRecipientMessage":
+            MessageLookupByLibrary.simpleMessage("Газові гроші"),
+        "exit": MessageLookupByLibrary.simpleMessage("Вийти"),
+        "failed": MessageLookupByLibrary.simpleMessage("не вдалося"),
+        "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
+        "fallbackHeader":
+            MessageLookupByLibrary.simpleMessage("Наутілус відключений"),
+        "fallbackInfo": MessageLookupByLibrary.simpleMessage(
+            "Сервери Nautilus, як видається, відключені, надсилання та отримання (без нагадувань) все ще повинні працювати, але запити на оплату можуть не проходити\n\n Поверніться пізніше або перезапустіть додаток, щоб спробувати ще раз"),
+        "favoriteExists":
+            MessageLookupByLibrary.simpleMessage("Улюблене вже існує"),
+        "favoriteHeader": MessageLookupByLibrary.simpleMessage("Улюблений"),
+        "favoriteInvalid":
+            MessageLookupByLibrary.simpleMessage("Некоректна назва обраного"),
+        "favoriteNameHint":
+            MessageLookupByLibrary.simpleMessage("Введіть назву псевдоніма"),
+        "favoriteNameMissing": MessageLookupByLibrary.simpleMessage(
+            "Виберіть назву для цього Улюбленця"),
+        "favoriteRemoved": MessageLookupByLibrary.simpleMessage(
+            "% 1 було вилучено з обраних!"),
+        "favoritesHeader": MessageLookupByLibrary.simpleMessage("Вибране"),
+        "featured": MessageLookupByLibrary.simpleMessage("Рекомендовані"),
+        "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
+            "Введіть пароль для створення резервної копії."),
+        "from": MessageLookupByLibrary.simpleMessage("Від"),
+        "fulfilled": MessageLookupByLibrary.simpleMessage("виконано"),
+        "giftAlert": MessageLookupByLibrary.simpleMessage("У вас є подарунок!"),
+        "giftAlertEmpty":
+            MessageLookupByLibrary.simpleMessage("Порожній подарунок"),
+        "giftAmount": MessageLookupByLibrary.simpleMessage("Сума подарунка"),
+        "giftFrom": MessageLookupByLibrary.simpleMessage("Подарунок від"),
+        "giftInfo": MessageLookupByLibrary.simpleMessage(
+            "Завантажте цифрову подарункову карту з NANO! Встановіть суму та необов\'язкове повідомлення для одержувача, щоб побачити, коли він його відкриє!\n\nПісля створення ви отримаєте посилання, яке можна відправити кожному, яка при відкритті автоматично розподілить кошти одержувачу після установки Nautilus!\n\nЯкщо одержувач вже є користувачем Nautilus, він отримає запит на переказ коштів на свій рахунок після відкриття посилання"),
+        "giftMessage":
+            MessageLookupByLibrary.simpleMessage("Подарункове повідомлення"),
+        "giftWarning": MessageLookupByLibrary.simpleMessage(
+            "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
+        "goBackButton": MessageLookupByLibrary.simpleMessage("Повернутися"),
+        "goToQRCode": MessageLookupByLibrary.simpleMessage("Перейти до QR"),
+        "gotItButton": MessageLookupByLibrary.simpleMessage("Зрозуміло!"),
+        "hide": MessageLookupByLibrary.simpleMessage("Приховати"),
+        "hideAccountHeader":
+            MessageLookupByLibrary.simpleMessage("Приховати гаманець?"),
+        "home": MessageLookupByLibrary.simpleMessage("Головна"),
+        "iUnderstandTheRisks":
+            MessageLookupByLibrary.simpleMessage("Я розумію ризики"),
+        "ignore": MessageLookupByLibrary.simpleMessage("Ігнорувати"),
+        "import": MessageLookupByLibrary.simpleMessage("Імпортувати"),
+        "importGift": MessageLookupByLibrary.simpleMessage(
+            "Посилання, яке ви натиснули, містить трохи нано, чи хотіли б ви імпортувати його до цього гаманця або повернути його тому, хто його надіслав?"),
+        "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
+            "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+        "importSecretPhrase":
+            MessageLookupByLibrary.simpleMessage("Імпортувати секретну фразу"),
+        "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
+            "Будь ласка введіть секретну фразу із 24 слів. Слова мають бути розділені пробілом."),
+        "importSeed": MessageLookupByLibrary.simpleMessage("Імпортувати seed"),
+        "importSeedHint": MessageLookupByLibrary.simpleMessage(
+            "Будь ласка введіть ваш seed нижче."),
+        "importSeedInstead": MessageLookupByLibrary.simpleMessage(
+            "Замість того імпортувати seed"),
+        "importWallet":
+            MessageLookupByLibrary.simpleMessage("Імпортувати гаманець"),
+        "instantly": MessageLookupByLibrary.simpleMessage("Миттєво"),
+        "insufficientBalance":
+            MessageLookupByLibrary.simpleMessage("Недостатньо коштів"),
+        "invalidAddress":
+            MessageLookupByLibrary.simpleMessage("Введено невірну адресу"),
+        "invalidPassword":
+            MessageLookupByLibrary.simpleMessage("Невірний пароль"),
+        "kaliumWallet": MessageLookupByLibrary.simpleMessage("Гаманець Kalium"),
+        "language": MessageLookupByLibrary.simpleMessage("Мова"),
+        "linkCopied":
+            MessageLookupByLibrary.simpleMessage("Посилання скопійовано"),
+        "liveSupportButton": MessageLookupByLibrary.simpleMessage("Підтримка"),
+        "loaded": MessageLookupByLibrary.simpleMessage("Завантажено"),
+        "loadedInto": MessageLookupByLibrary.simpleMessage("Завантажено в"),
+        "lockAppSetting": MessageLookupByLibrary.simpleMessage(
+            "Вводити пароль після запуска"),
+        "locked": MessageLookupByLibrary.simpleMessage("Заблоковано"),
+        "logout": MessageLookupByLibrary.simpleMessage("Вийти"),
+        "logoutAction":
+            MessageLookupByLibrary.simpleMessage("Видалити seed і вийти"),
+        "logoutAreYouSure":
+            MessageLookupByLibrary.simpleMessage("Ви впевнені?"),
+        "logoutDetail": MessageLookupByLibrary.simpleMessage(
+            "Якщо ви вийдете то ваш seed і всі Nautilus дані буде видалено з вашого пристрою . Якщо ви не зробили резервну копію seed ви НІКОЛИ не відновите гаманці"),
+        "logoutDetailKal": MessageLookupByLibrary.simpleMessage(
+            "Якщо ви продовжите це видалить ваш seed і всі дані гаманця будуть стерті з приладу. Якщо у вас нема резервної копії, ви НІКОЛИ не зможете повернути ваші кошти"),
+        "logoutReassurance": MessageLookupByLibrary.simpleMessage(
+            "Якщо ви зробили резервну копію вашої мнемонічної фрази вам не варто хвилюватися."),
+        "manage": MessageLookupByLibrary.simpleMessage("Керувати"),
+        "mantaError":
+            MessageLookupByLibrary.simpleMessage("Не вдалося перевірити запит"),
+        "manualEntry": MessageLookupByLibrary.simpleMessage("Введення вручну"),
+        "markAsPaid":
+            MessageLookupByLibrary.simpleMessage("Позначити як оплачений"),
+        "markAsUnpaid":
+            MessageLookupByLibrary.simpleMessage("Позначити як неоплачені"),
+        "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
+        "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
+            "Пам\'ятка повторно відправлена! Якщо пристрій одержувача все ще не підтверджено, пристрій одержувача може бути в автономному режимі."),
+        "messageHeader": MessageLookupByLibrary.simpleMessage("Повідомлення"),
+        "minimumSend": MessageLookupByLibrary.simpleMessage(
+            "Мінімальна сума для пересилання %1 NANO"),
+        "mnemonicInvalidWord":
+            MessageLookupByLibrary.simpleMessage("%1 неправильне слово"),
+        "mnemonicPhrase":
+            MessageLookupByLibrary.simpleMessage("Мнемонічна фраза"),
+        "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
+            "Секретна фраза складається  із точно 24х слів"),
+        "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
+        "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
+            "Ця функція вимагає, щоб у вас була довша історія транзакцій, щоб запобігти спаму.\n\nКрім того, ви можете показати QR-код комусь для сканування."),
+        "needVerificationAlertHeader":
+            MessageLookupByLibrary.simpleMessage("Потрібна перевірка"),
+        "newAccountIntro": MessageLookupByLibrary.simpleMessage(
+            "Це ваш новий гаманець. Як тільки ви отримаєте NANO, трансакції буде показано отак:"),
+        "newAccountIntroKal": MessageLookupByLibrary.simpleMessage(
+            "Це ваш новий профіль. Як тільки ви отримаєте BANANO, трансакції буде показано отак:"),
+        "newWallet": MessageLookupByLibrary.simpleMessage("Новий гаманець"),
+        "nextButton": MessageLookupByLibrary.simpleMessage("Далі"),
+        "no": MessageLookupByLibrary.simpleMessage("Ні"),
+        "noContactsExport": MessageLookupByLibrary.simpleMessage(
+            "Немає контактів для експорту."),
+        "noContactsImport": MessageLookupByLibrary.simpleMessage(
+            "Немає нових контактів для імпорту"),
+        "noSearchResults":
+            MessageLookupByLibrary.simpleMessage("Немає результатів пошуку!"),
+        "noSkipButton": MessageLookupByLibrary.simpleMessage("Ні, пропустити"),
+        "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "nodeStatus": MessageLookupByLibrary.simpleMessage("Статус вузла"),
+        "notSent": MessageLookupByLibrary.simpleMessage("не надіслано"),
+        "notificationBody": MessageLookupByLibrary.simpleMessage(
+            "Відкрити Nautilus щоб переглянути трансакції"),
+        "notificationBodyKal": MessageLookupByLibrary.simpleMessage(
+            "Відкрити Kalium щоб побачити цю трансакцію"),
+        "notificationHeaderSupplement":
+            MessageLookupByLibrary.simpleMessage("Торкніться щоб відкрити"),
+        "notificationInfo": MessageLookupByLibrary.simpleMessage(
+            "Щоб ця функція працювала коректно, повідомлення повинні бути включені"),
+        "notificationTitle":
+            MessageLookupByLibrary.simpleMessage("Отримано %1 NANO"),
+        "notificationTitleKal":
+            MessageLookupByLibrary.simpleMessage("Отримано  %1 BANANO"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Повідомлення"),
+        "nyanicon": MessageLookupByLibrary.simpleMessage("Няникон"),
+        "off": MessageLookupByLibrary.simpleMessage("Вимкнуто"),
+        "ok": MessageLookupByLibrary.simpleMessage("Гаразд"),
+        "onStr": MessageLookupByLibrary.simpleMessage("Увімкнуто"),
+        "onramp": MessageLookupByLibrary.simpleMessage("Онрамп"),
+        "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
+        "opened": MessageLookupByLibrary.simpleMessage("Відкрито"),
+        "paid": MessageLookupByLibrary.simpleMessage("оплачується"),
+        "paperWallet":
+            MessageLookupByLibrary.simpleMessage("Паперовий гаманець"),
+        "passwordBlank": MessageLookupByLibrary.simpleMessage(
+            "Пароль не може бути порожнім"),
+        "passwordNoLongerRequiredToOpenParagraph":
+            MessageLookupByLibrary.simpleMessage(
+                "Вам більше не треба буде пароль щоб відкрити Nautilus."),
+        "passwordWillBeRequiredToOpenParagraph":
+            MessageLookupByLibrary.simpleMessage(
+                "Цей пароль буде необхідним щоб відкрити Nautilus."),
+        "passwordsDontMatch":
+            MessageLookupByLibrary.simpleMessage("Паролі не співпали"),
+        "pay": MessageLookupByLibrary.simpleMessage("Оплатити"),
+        "payRequest":
+            MessageLookupByLibrary.simpleMessage("Сплатити цей запит"),
+        "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
+            "Хтось запросив у вас оплату! перегляньте сторінку платежів для отримання додаткової інформації."),
+        "payments": MessageLookupByLibrary.simpleMessage("Платежі"),
+        "pickFromList":
+            MessageLookupByLibrary.simpleMessage("Оберіть із списку"),
+        "pinConfirmError":
+            MessageLookupByLibrary.simpleMessage("Пін коди не співпадають"),
+        "pinConfirmTitle":
+            MessageLookupByLibrary.simpleMessage("Підтвердіть ваш пін код"),
+        "pinCreateTitle": MessageLookupByLibrary.simpleMessage(
+            "Придумайте пін код із 6и цифр"),
+        "pinEnterTitle":
+            MessageLookupByLibrary.simpleMessage("Введіть пін код"),
+        "pinInvalid":
+            MessageLookupByLibrary.simpleMessage("Введено невірний пін код"),
+        "pinMethod": MessageLookupByLibrary.simpleMessage("Пін код"),
+        "pinRepChange": MessageLookupByLibrary.simpleMessage(
+            "Введіть пін код для зміни представника."),
+        "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
+            "Введіть пін код для створення резервної копії"),
+        "preferences": MessageLookupByLibrary.simpleMessage("Преференції"),
+        "privacyPolicy":
+            MessageLookupByLibrary.simpleMessage("Політика приватності"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("Придбати Nano"),
+        "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
+            "QR код не містить правильного адресата"),
+        "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
+            "Будь ласка дайте дозвіл камері сканувати QR коди"),
+        "qrInvalidSeed": MessageLookupByLibrary.simpleMessage(
+            "QR код не містить правильних seed чи приватного ключа"),
+        "qrMnemonicError": MessageLookupByLibrary.simpleMessage(
+            "QR код не містить правильної секретної фрази"),
+        "qrUnknownError":
+            MessageLookupByLibrary.simpleMessage("Не вийшло зчитати QR код"),
+        "rate": MessageLookupByLibrary.simpleMessage("Rate"),
+        "rateTheApp": MessageLookupByLibrary.simpleMessage("Оцініть додаток"),
+        "rateTheAppDescription": MessageLookupByLibrary.simpleMessage(
+            "If you enjoy the app, consider taking the time to review it,\nIt really helps and it shouldn\'t take more than a minute."),
+        "rawSeed": MessageLookupByLibrary.simpleMessage("Seed як є"),
+        "readMore": MessageLookupByLibrary.simpleMessage("Читати більше"),
+        "receivable": MessageLookupByLibrary.simpleMessage("дебіторської"),
+        "receive": MessageLookupByLibrary.simpleMessage("Отримати"),
+        "receiveMinimum":
+            MessageLookupByLibrary.simpleMessage("Отримати мінімум"),
+        "receiveMinimumHeader": MessageLookupByLibrary.simpleMessage(
+            "Отримати мінімальну інформацію"),
+        "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
+            "Мінімальна сума для отримання. Якщо платіж або запит надійде на суму менше цієї, вона буде проігнорована."),
+        "received": MessageLookupByLibrary.simpleMessage("Отримано"),
+        "refund": MessageLookupByLibrary.simpleMessage("Повернення"),
+        "registerFor": MessageLookupByLibrary.simpleMessage("для"),
+        "registerUsername": MessageLookupByLibrary.simpleMessage(
+            "Зареєструвати Ім\'я користувача"),
+        "registerUsernameHeader": MessageLookupByLibrary.simpleMessage(
+            "Зареєструвати ім\'я користувача"),
+        "registering": MessageLookupByLibrary.simpleMessage("Реєстрація"),
+        "removeAccountText": MessageLookupByLibrary.simpleMessage(
+            "Чи дійсно ви бажаєте приховати цей профіль? Ви зможете його побачити торкнувши кнопку \"%1\"."),
+        "removeBlocked": MessageLookupByLibrary.simpleMessage("Розблокувати"),
+        "removeBlockedConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Ви справді бажаєте розблокувати% 1?"),
+        "removeContact":
+            MessageLookupByLibrary.simpleMessage("Видалити контакт"),
+        "removeContactConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Ви впевнені, що ви хочете видалити 1% ?"),
+        "removeFavorite":
+            MessageLookupByLibrary.simpleMessage("Вилучити улюблені"),
+        "removeFavoriteConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete %1?"),
+        "repInfo": MessageLookupByLibrary.simpleMessage(
+            "Представник це посередник якій голосує за правила в мережі. Сила голосу вимірються балансом гаманця, ви можете віддати ваш голос представнику якому довіряєте, щоб збільшити силу його голоса. Ваш представник не може витрачати ваші кошти. Зазвичай то є розумним обирати представника, який не від\'єднується від мережі і якому можна довіряти."),
+        "repInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Що таке представник?"),
+        "reply": MessageLookupByLibrary.simpleMessage("Відповісти"),
+        "representatives": MessageLookupByLibrary.simpleMessage("Представники"),
+        "request": MessageLookupByLibrary.simpleMessage("Запит"),
+        "requestAmountConfirm":
+            MessageLookupByLibrary.simpleMessage("Запит% 1% 2"),
+        "requestError": MessageLookupByLibrary.simpleMessage(
+            "Помилка запиту: Здається, у цього користувача не встановлено Nautilus або вимкнено сповіщення."),
+        "requestPayment":
+            MessageLookupByLibrary.simpleMessage("Запит на оплату"),
+        "requestSendError": MessageLookupByLibrary.simpleMessage(
+            "Помилка при відправці платіжного запиту, пристрій одержувача може бути в автономному режимі або недоступний."),
+        "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
+            "Запит повторно відправлений! Якщо пристрій одержувача все ще не підтверджено, пристрій одержувача може бути в автономному режимі."),
+        "requested": MessageLookupByLibrary.simpleMessage("Запитуваний"),
+        "requestedFrom": MessageLookupByLibrary.simpleMessage("Запит від"),
+        "requesting": MessageLookupByLibrary.simpleMessage("Запит"),
+        "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
+            "Чи треба пароль щоб відкрити Nautilus?"),
+        "resendMemo": MessageLookupByLibrary.simpleMessage(
+            "Повторно надіслати цю пам\'ятку"),
+        "resetDatabase":
+            MessageLookupByLibrary.simpleMessage("Скидання бази даних"),
+        "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Ви впевнені, що хочете скинути внутрішню базу даних? \n\nЦе може виправити проблеми, пов\'язані з оновленням програми, але також видалить усі збережені налаштування. Це НЕ видалить насіння вашого гаманця. Якщо у вас виникли проблеми, вам слід створити резервну копію свого насіння, повторно встановити додаток, і якщо проблема не зникне, сміливо робіть звіт про помилку на github або discord."),
+        "retry": MessageLookupByLibrary.simpleMessage("Повторити спробу"),
+        "rootWarning": MessageLookupByLibrary.simpleMessage(
+            "Схоже що ваш прилад \"rooted\", \"jailbroken\", чи модифікований настільки, що це небезпечно. Рекомендовано повернути фабричні установки вашому приладу перед продовженням."),
+        "scanInstructions": MessageLookupByLibrary.simpleMessage(
+            "Сканувати QR код \n NANO адреси"),
+        "scanInstructionsKal": MessageLookupByLibrary.simpleMessage(
+            "Сканувати QR код \n Banano адреси"),
+        "scanQrCode": MessageLookupByLibrary.simpleMessage("Сканувати QR код"),
+        "searchHint": MessageLookupByLibrary.simpleMessage("Шукати що-небудь"),
+        "secretInfo": MessageLookupByLibrary.simpleMessage(
+            "На наступному екрані ви побачите секретну фразу. Це пароль для доступа до ваших коштів. Це НАДЗВИЧАЙНО важливо зробити резервну копію фрази і ніколи не ділитися нею ні з ким."),
+        "secretInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Перш за все - безпека!"),
+        "secretPhrase": MessageLookupByLibrary.simpleMessage("Секретна фраза"),
+        "secretPhraseCopied":
+            MessageLookupByLibrary.simpleMessage("Секретну фразу скопійовано"),
+        "secretPhraseCopy":
+            MessageLookupByLibrary.simpleMessage("Копіювати секретну фразу"),
+        "secretWarning": MessageLookupByLibrary.simpleMessage(
+            "Якщо ви загубите ваш прилад, або деінсталюєте додаток, вам буде необхідна секретна фраза або seed для повернення коштів!"),
+        "securityHeader": MessageLookupByLibrary.simpleMessage("Безпека"),
+        "seed": MessageLookupByLibrary.simpleMessage("Seed"),
+        "seedBackupInfo": MessageLookupByLibrary.simpleMessage(
+            "Це seed вашого гаманця. Це НАДВАЖЛИВО зробити резервну копію вашого seed і ніколи не зберігати цю копію як звичайний текст чи знімок екрана."),
+        "seedCopied": MessageLookupByLibrary.simpleMessage(
+            "Seed скопійовно до буферу \n звідти можна пастити протягом двох хвилин."),
+        "seedCopiedShort":
+            MessageLookupByLibrary.simpleMessage("Seed скопійовано"),
+        "seedDescription": MessageLookupByLibrary.simpleMessage(
+            "Seed несе туж інформацію що і секретна фраза, але у зручному для машини вигляді. Якщо ви маєте резервну копію одного з двох перелічених вище, ви зможете оперувати коштами."),
+        "seedInvalid":
+            MessageLookupByLibrary.simpleMessage("неправильний Seed"),
+        "selfSendError": MessageLookupByLibrary.simpleMessage(
+            "Не можу подати запит від себе"),
+        "send": MessageLookupByLibrary.simpleMessage("Надіслати"),
+        "sendAmountConfirm":
+            MessageLookupByLibrary.simpleMessage("Надіслати %1 Nano"),
+        "sendAmountConfirmKal":
+            MessageLookupByLibrary.simpleMessage("Надіслати %1 BANANO"),
+        "sendError": MessageLookupByLibrary.simpleMessage(
+            "Сталася помилка. Спробуйте ще раз пізніше."),
+        "sendFrom": MessageLookupByLibrary.simpleMessage("Надіслано з"),
+        "sendMemoError": MessageLookupByLibrary.simpleMessage(
+            "Відправка нотатки з транзакцією зазнала невдачі, вони можуть бути не користувачем Nautilus."),
+        "sendMessageConfirm":
+            MessageLookupByLibrary.simpleMessage("Відправка повідомлення"),
+        "sendRequestAgain":
+            MessageLookupByLibrary.simpleMessage("Надіслати запит ще раз"),
+        "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Надсилайте або запитуйте платіж із зашифрованими повідомленнями End to End!\n\nПлатіжні запити, замітки та повідомлення будуть отримувати лише інші користувачі nautilus.\n\nВам не потрібно мати ім\'я користувача для надсилання або отримання платіжних запитів, і ви можете використовувати їх для власного ведення обліку, навіть якщо вони не використовують nautilus."),
+        "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Надіслати інформацію про аркуш"),
+        "sending": MessageLookupByLibrary.simpleMessage("Надсилання"),
+        "sent": MessageLookupByLibrary.simpleMessage("Надіслано"),
+        "sentTo": MessageLookupByLibrary.simpleMessage("Надіслано для"),
+        "setPassword":
+            MessageLookupByLibrary.simpleMessage("Установити пароль"),
+        "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
+            "Пароль було успішно встановлено"),
+        "setWalletPassword":
+            MessageLookupByLibrary.simpleMessage("Установити пароль гаманця"),
+        "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
+        "setWalletPlausiblePin":
+            MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "settingsHeader": MessageLookupByLibrary.simpleMessage("Установки"),
+        "settingsTransfer": MessageLookupByLibrary.simpleMessage(
+            "Завантажити з паперового гаманця"),
+        "shareLink":
+            MessageLookupByLibrary.simpleMessage("Поділитися посиланням"),
+        "shareNautilus":
+            MessageLookupByLibrary.simpleMessage("Поділитися Nautilus"),
+        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
+            "Спробуйте Nautilus!  Найкращий мобільний гаманець для NANO!"),
+        "showContacts":
+            MessageLookupByLibrary.simpleMessage("Показати контакти"),
+        "simplex": MessageLookupByLibrary.simpleMessage("Симплекс"),
+        "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
+        "supportTheDeveloper":
+            MessageLookupByLibrary.simpleMessage("Підтримати розробника"),
+        "switchToSeed":
+            MessageLookupByLibrary.simpleMessage("Перемкнутися на seed"),
+        "systemDefault": MessageLookupByLibrary.simpleMessage(
+            "Системне значення поза запитом"),
+        "tapToHide":
+            MessageLookupByLibrary.simpleMessage("Торкніться щоб приховати"),
+        "tapToReveal":
+            MessageLookupByLibrary.simpleMessage("Торкніться щоб побачити"),
+        "themeHeader": MessageLookupByLibrary.simpleMessage("Тема"),
+        "to": MessageLookupByLibrary.simpleMessage("Для"),
+        "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
+            "Надто багато невірних спроб розблокувати."),
+        "transactions": MessageLookupByLibrary.simpleMessage("Трансакції"),
+        "transfer": MessageLookupByLibrary.simpleMessage("Переказати"),
+        "transferClose": MessageLookupByLibrary.simpleMessage(
+            "Торкніться щоб закрити вікно."),
+        "transferComplete": MessageLookupByLibrary.simpleMessage(
+            "%1 NANO успішно переказано до вашого гаманця Nautilus. \n"),
+        "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Знайдено гаманець з балансом %1 NANO . \n"),
+        "transferConfirmInfoSecond": MessageLookupByLibrary.simpleMessage(
+            "Натисніть сюди щоб підтвердити переказ коштів. \n"),
+        "transferConfirmInfoThird": MessageLookupByLibrary.simpleMessage(
+            "Переказ може зайняти декілька секунд."),
+        "transferError": MessageLookupByLibrary.simpleMessage(
+            "Під час переказу трапилася помилка. Будь ласка спробуйте пізніше."),
+        "transferHeader":
+            MessageLookupByLibrary.simpleMessage("Переказати кошти"),
+        "transferIntro": MessageLookupByLibrary.simpleMessage(
+            "Цією дією ви перекажете кошти з паперового гаманця у ваш Nautilus гаманець. \n\n Натисніть \"%1\" конпку щоб почати."),
+        "transferIntroShort": MessageLookupByLibrary.simpleMessage(
+            "Цей процес дозволить перевести кошти з паперового гаманця на ваш гаманець Nautilus."),
+        "transferLoading":
+            MessageLookupByLibrary.simpleMessage("Переказується"),
+        "transferManualHint": MessageLookupByLibrary.simpleMessage(
+            "Будь ласка введіть ваш seed нижче."),
+        "transferNoFunds": MessageLookupByLibrary.simpleMessage(
+            "За цим seed знайдено лише нульовий баланс"),
+        "transferQrScanError": MessageLookupByLibrary.simpleMessage(
+            "Цей QR код не містить правильних seed."),
+        "transferQrScanHint": MessageLookupByLibrary.simpleMessage(
+            "Сканувати seed \n або приватний ключ"),
+        "unacknowledged": MessageLookupByLibrary.simpleMessage("не визнано"),
+        "unconfirmed": MessageLookupByLibrary.simpleMessage("непідтверджено"),
+        "unfulfilled": MessageLookupByLibrary.simpleMessage("невиконаний"),
+        "unlock": MessageLookupByLibrary.simpleMessage("Розблокувати"),
+        "unlockBiometrics": MessageLookupByLibrary.simpleMessage(
+            "Введіть пароль для входу в Nautilus"),
+        "unlockPin": MessageLookupByLibrary.simpleMessage(
+            "Введіть пін код для входу в Nautilus"),
+        "unlockPinKal": MessageLookupByLibrary.simpleMessage(
+            "Введіть пін код щоб розблокувати Kalium"),
+        "unpaid": MessageLookupByLibrary.simpleMessage("неоплачений"),
+        "unread": MessageLookupByLibrary.simpleMessage("непрочитані"),
+        "uptime": MessageLookupByLibrary.simpleMessage("Час в мережі"),
+        "useNautilusRep":
+            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("Користувача не знайдено!"),
+        "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
+            "У вас вже є ім\'я користувача, зареєстроване! Наразі неможливо змінити своє ім\'я користувача, але ви можете зареєструвати нове під іншою адресою."),
+        "usernameAvailable":
+            MessageLookupByLibrary.simpleMessage("Ім\'я користувача доступне!"),
+        "usernameEmpty": MessageLookupByLibrary.simpleMessage(
+            "Будь ласка, введіть ім\'я користувача"),
+        "usernameError":
+            MessageLookupByLibrary.simpleMessage("Помилка імені користувача"),
+        "usernameInfo": MessageLookupByLibrary.simpleMessage(
+            "Виберіть унікальний @username, щоб друзі та родина могли вас легко знайти!\n\nНаявність імені користувача Nautilus оновлює інтерфейс у всьому світі, щоб відобразити вашу нову ручку."),
+        "usernameInvalid": MessageLookupByLibrary.simpleMessage(
+            "Неправильне ім\'я користувача"),
+        "usernameUnavailable": MessageLookupByLibrary.simpleMessage(
+            "Ім\'я користувача недоступне"),
+        "usernameWarning": MessageLookupByLibrary.simpleMessage(
+            "Nautilus імена користувачів - це централізована послуга, що надається Nano.to"),
+        "viewDetails":
+            MessageLookupByLibrary.simpleMessage("Переглянути деталі"),
+        "votingWeight": MessageLookupByLibrary.simpleMessage("Сила голосу"),
+        "warning": MessageLookupByLibrary.simpleMessage("Попередження"),
+        "welcomeText": MessageLookupByLibrary.simpleMessage(
+            "Ласкаво просимо до Nautilus. Щоб продовжити ви можете створити новий гаманець або імпортувати існуючий."),
+        "welcomeTextKal": MessageLookupByLibrary.simpleMessage(
+            "Ласкаво просимо до Kalium. Щоб продовжити створіть новий гаманець або імпортуйте існуючий."),
+        "withAddress": MessageLookupByLibrary.simpleMessage("З адресою"),
+        "withMessage": MessageLookupByLibrary.simpleMessage("З повідомленням"),
+        "xMinute": MessageLookupByLibrary.simpleMessage("Після %1 хвилини"),
+        "xMinutes": MessageLookupByLibrary.simpleMessage("Після %1 хвилин"),
+        "yes": MessageLookupByLibrary.simpleMessage("Так"),
+        "yesButton": MessageLookupByLibrary.simpleMessage("Так")
+      };
+}

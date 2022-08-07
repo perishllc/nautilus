@@ -10,12 +10,17 @@ class NinjaAPI {
 
   static Future<String?> getAndCacheAPIResponse() async {
     const String url = '$API_URL/accounts/verified';
-    final http.Response response = await http.get(Uri.parse(url));
-    if (response.statusCode != 200) {
+    try {
+      final http.Response response = await http.get(Uri.parse(url));
+      if (response.statusCode != 200) {
+        return null;
+      }
+      await sl.get<SharedPrefsUtil>().setNinjaAPICache(response.body);
+      return response.body;
+    } catch (e) {
+      print("MyNanoNinja API error: $e");
       return null;
     }
-    await sl.get<SharedPrefsUtil>().setNinjaAPICache(response.body);
-    return response.body;
   }
 
   /// Get verified nodes, return null if an error occured

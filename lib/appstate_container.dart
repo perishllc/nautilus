@@ -1279,7 +1279,7 @@ class StateContainerState extends State<StateContainer> {
     if (selectedAccount!.address == toAddress) {
       correctAccount = selectedAccount;
     } else {
-      final String? seed = await getSeed();
+      final String seed = await getSeed();
       final List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
       for (int i = 0; i < accounts.length; i++) {
         if (accounts[i].address == toAddress) {
@@ -1661,7 +1661,6 @@ class StateContainerState extends State<StateContainer> {
     final String? requestingAccount = data['requesting_account'] as String?;
     final String? toAddress = data['account'] as String?;
     final String? memoEnc = data['memo_enc'] as String?;
-    final String? requestTime = data['request_time'] as String?;
     final String? block = data['block'] as String?;
     final int? height = data['height'] as int?;
     final String? uuid = data['uuid'] as String?;
@@ -1750,7 +1749,6 @@ class StateContainerState extends State<StateContainer> {
     final String? amountRaw = data['amount_raw'] as String?;
     final String? requestingAccount = data['requesting_account'] as String?;
     final String? memo = data['memo'] as String?;
-    final String? requestTime = data['request_time'] as String?;
     final String? toAddress = data['account'] as String?;
     final String uuid = data['uuid'] as String;
     final String? block = data['block'] as String?;

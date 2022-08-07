@@ -1629,19 +1629,11 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
-  "shareKalium": "",
-  "@shareKalium": {},
-  "shareKaliumText": "",
-  "@shareKaliumText": {},
   "shareLink": "Share Link",
   "@shareLink": {
     "type": "text",
     "description": "share_link"
   },
-  "shareNatrium": "",
-  "@shareNatrium": {},
-  "shareNatriumText": "",
-  "@shareNatriumText": {},
   "shareNautilus": "Share Nautilus",
   "@shareNautilus": {
     "type": "text",
@@ -1727,15 +1719,11 @@
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferCompleteKal": "",
-  "@transferCompleteKal": {},
   "transferConfirmInfo": "A wallet with a balance of %1 NANO has been detected.\n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"
   },
-  "transferConfirmInfoKal": "",
-  "@transferConfirmInfoKal": {},
   "transferConfirmInfoSecond": "Tap confirm to transfer the funds.\n",
   "@transferConfirmInfoSecond": {
     "type": "text",
@@ -1761,8 +1749,6 @@
     "type": "text",
     "description": "transfer_intro"
   },
-  "transferIntroKal": "",
-  "@transferIntroKal": {},
   "transferIntroShort": "This process will transfer the funds from a paper wallet to your Nautilus wallet.",
   "@transferIntroShort": {
     "type": "text",
@@ -1783,8 +1769,6 @@
     "type": "text",
     "description": "transfer_no_funds_toast"
   },
-  "transferNoFundsKal": "",
-  "@transferNoFundsKal": {},
   "transferQrScanError": "This QR code does not contain a valid seed.",
   "@transferQrScanError": {
     "type": "text",
@@ -1795,8 +1779,6 @@
     "type": "text",
     "description": "transfer_qr_scan_hint"
   },
-  "transferQrScanHintKal": "",
-  "@transferQrScanHintKal": {},
   "unacknowledged": "unacknowledged",
   "@unacknowledged": {
     "type": "text",
@@ -1822,8 +1804,6 @@
     "type": "text",
     "description": "unlock_kalium_bio"
   },
-  "unlockBiometricsKal": "",
-  "@unlockBiometricsKal": {},
   "unlockPin": "Enter PIN to Unlock Nautilus",
   "@unlockPin": {
     "type": "text",

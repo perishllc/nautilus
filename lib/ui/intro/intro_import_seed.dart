@@ -1,26 +1,30 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:barcode_scan2/barcode_scan2.dart';
-import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/localization.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class IntroImportSeedPage extends StatefulWidget {
   @override
-  _IntroImportSeedState createState() => _IntroImportSeedState();
+  IntroImportSeedState createState() => IntroImportSeedState();
 }
 
-class _IntroImportSeedState extends State<IntroImportSeedPage> {
+class IntroImportSeedState extends State<IntroImportSeedPage> {
   GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
 
   // Plaintext seed
@@ -45,7 +49,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
         body: TapOutsideUnfocus(
             child: LayoutBuilder(
-          builder: (context, constraints) => SafeArea(
+          builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
             minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
             child: Column(
               children: <Widget>[
@@ -165,8 +169,8 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                           }
                                           // Scan QR for seed
                                           UIUtil.cancelLockEvent();
-                                          BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme TODO:*/).then((res) {
-                                            final result = res.rawContent;
+                                          BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme TODO:*/).then((ScanResult res) {
+                                            final String result = res.rawContent;
                                             if (NanoSeeds.isValidSeed(result)) {
                                               _seedInputController.text = result;
                                               setState(() {
@@ -260,8 +264,8 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                         }
                                         // Scan QR for mnemonic
                                         UIUtil.cancelLockEvent();
-                                        BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((res) {
-                                          final result = res.rawContent;
+                                        BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((ScanResult res) {
+                                          final String result = res.rawContent;
                                           if (NanoMnemomics.validateMnemonic(result.split(' '))) {
                                             _mnemonicController.text = result;
                                             setState(() {
@@ -408,8 +412,21 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                               _seedInputFocusNode.unfocus();
                               // If seed valid, log them in
                               if (NanoSeeds.isValidSeed(_seedInputController.text)) {
-                                sl.get<SharedPrefsUtil>().setSeedBackedUp(true).then((result) {
-                                  Navigator.pushNamed(context, '/intro_password_on_launch', arguments: _seedInputController.text);
+                                sl.get<SharedPrefsUtil>().setSeedBackedUp(true).then((result) async {
+                                  // Navigator.pushNamed(context, '/intro_password_on_launch', arguments: _seedInputController.text);
+                                  await sl.get<Vault>().setSeed(_seedInputController.text);
+                                  await sl.get<DBHelper>().dropAccounts();
+                                  if (!mounted) return;
+                                  await NanoUtil().loginAccount(_seedInputController.text, context);
+                                  if (!mounted) return;
+                                  final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                                    return PinScreen(
+                                      PinOverlayType.NEW_PIN,
+                                    );
+                                  }));
+                                  if (pin != null && pin.length > 5) {
+                                    _pinEnteredCallback(pin);
+                                  }
                                 });
                               } else {
                                 // Display error
@@ -421,9 +438,23 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                               // mnemonic mode
                               _mnemonicFocusNode.unfocus();
                               if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
-                                sl.get<SharedPrefsUtil>().setSeedBackedUp(true).then((result) {
-                                  Navigator.pushNamed(context, '/intro_password_on_launch',
-                                      arguments: NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' ')));
+                                sl.get<SharedPrefsUtil>().setSeedBackedUp(true).then((result) async {
+                                  // Navigator.pushNamed(context, '/intro_password_on_launch',
+                                  //     arguments: NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' ')));
+                                  final String seed = NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' '));
+                                  await sl.get<Vault>().setSeed(seed);
+                                  await sl.get<DBHelper>().dropAccounts();
+                                  if (!mounted) return;
+                                  await NanoUtil().loginAccount(seed, context);
+                                  if (!mounted) return;
+                                  final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                                    return PinScreen(
+                                      PinOverlayType.NEW_PIN,
+                                    );
+                                  }));
+                                  if (pin != null && pin.length > 5) {
+                                    _pinEnteredCallback(pin);
+                                  }
                                 });
                               } else {
                                 // Show mnemonic error
@@ -433,7 +464,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                     _mnemonicError = AppLocalization.of(context)!.mnemonicSizeError;
                                   });
                                 } else {
-                                  _mnemonicController.text.split(' ').forEach((word) {
+                                  _mnemonicController.text.split(' ').forEach((String word) {
                                     if (!NanoMnemomics.isValidWord(word)) {
                                       setState(() {
                                         _mnemonicIsValid = false;
@@ -453,5 +484,14 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
             ),
           ),
         )));
+  }
+
+  void _pinEnteredCallback(String pin) async {
+    await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+    await sl.get<Vault>().writePin(pin);
+    final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+    if (!mounted) return;
+    StateContainer.of(context).requestSubscribe();
+    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
   }
 }
