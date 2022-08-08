@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("חשבון"),
+        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
         "accounts": MessageLookupByLibrary.simpleMessage("חשבונות"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Are you sure that you\'ve backed up your secret phrase or seed?"),
@@ -32,6 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("חסימת משתמש"),
         "addContact": MessageLookupByLibrary.simpleMessage("הוסף איש קשר"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("הוסף מועדף"),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "address": MessageLookupByLibrary.simpleMessage(""),
         "addressCopied": MessageLookupByLibrary.simpleMessage("כתובת הועתקה"),
         "addressHint": MessageLookupByLibrary.simpleMessage("הזן כתובת"),
         "addressMissing": MessageLookupByLibrary.simpleMessage("הזן יעד"),
@@ -39,8 +45,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("אנא הזן שם משתמש או כתובת"),
         "addressShare": MessageLookupByLibrary.simpleMessage("שתף"),
         "aliases": MessageLookupByLibrary.simpleMessage("כינויים"),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
         "amountMissing": MessageLookupByLibrary.simpleMessage("הזן סכום"),
         "asked": MessageLookupByLibrary.simpleMessage("נשאל"),
+        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
         "authMethod": MessageLookupByLibrary.simpleMessage("שיטת אימות"),
         "autoImport": MessageLookupByLibrary.simpleMessage("ייבוא אוטומטי"),
         "autoLockHeader":
@@ -93,7 +101,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("אשר"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Confirm the password"),
+        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Connecting"),
+        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("  !נוסף לאנשי הקשר %1 "),
         "contactExists":
@@ -115,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("העתק כתובת"),
         "copyLink": MessageLookupByLibrary.simpleMessage("העתק קישור"),
+        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
         "copySeed": MessageLookupByLibrary.simpleMessage("העתק סיד"),
         "copyWalletAddressToClipboard":
             MessageLookupByLibrary.simpleMessage("העתק את כתובת הארנק ללוח"),
@@ -132,7 +144,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password is optional, and your wallet will be protected with your PIN or biometrics regardless."),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("צור"),
+        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
         "createQR": MessageLookupByLibrary.simpleMessage("צור קוד QR"),
+        "created": MessageLookupByLibrary.simpleMessage(""),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("יצירת כרטיס מתנה"),
         "currency": MessageLookupByLibrary.simpleMessage("מטבע"),
@@ -146,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "decryptionError": MessageLookupByLibrary.simpleMessage("שגיאת פענוח!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("חשבון ראשי"),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("חשבון %1"),
         "delete": MessageLookupByLibrary.simpleMessage("מחיקה"),
@@ -160,6 +175,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("לפטר"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("שם תחום לא חוקי"),
+        "donateButton": MessageLookupByLibrary.simpleMessage(""),
+        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
         "edit": MessageLookupByLibrary.simpleMessage("ערוך"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
@@ -169,22 +186,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("הזן הודעה"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
+        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
         "enterUserOrAddress":
             MessageLookupByLibrary.simpleMessage("הזן משתמש או כתובת"),
         "enterUsername": MessageLookupByLibrary.simpleMessage("הזן שם משתמש"),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("ממישהו"),
-        "exampleCardFromKal":
-            MessageLookupByLibrary.simpleMessage("מקוף רנדומלי"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
             "ברוך הבא לנאטריום. בכדי להמשיך, אתה רשאי לייצר ארנק חדש או לייבא אחד קיים"),
-        "exampleCardIntroKal": MessageLookupByLibrary.simpleMessage(
-            "ברוך הבא לקאליום. ברגע שתקבל באנאנו, הטרנסקציות יופיעו כך"),
         "exampleCardLittle": MessageLookupByLibrary.simpleMessage("קצת"),
         "exampleCardLot": MessageLookupByLibrary.simpleMessage("הרבה"),
         "exampleCardTo": MessageLookupByLibrary.simpleMessage("למישהו"),
-        "exampleCardToKal":
-            MessageLookupByLibrary.simpleMessage("לקוף רנדומלי"),
         "examplePayRecipient": MessageLookupByLibrary.simpleMessage("@dad"),
         "examplePayRecipientMessage":
             MessageLookupByLibrary.simpleMessage("יום הולדת שמח!"),
@@ -231,25 +244,37 @@ class MessageLookup extends MessageLookupByLibrary {
             "אשר טביעות אצבע בכדי לגבות סיד."),
         "from": MessageLookupByLibrary.simpleMessage("מ"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("התגשם"),
+        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert": MessageLookupByLibrary.simpleMessage("יש לך כישרון!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("מתנה ריקה"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("סכום מתנה"),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
         "giftFrom": MessageLookupByLibrary.simpleMessage("מתנה מ"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "טען כרטיס מתנה דיגיטלי עם NANO! הגדר סכום, והודעה אופציונלית עבור הנמען כדי לראות מתי הוא פותח אותו!\n\nלאחר שנוצר, תקבל קישור שאתה יכול לשלוח לכל אחד, אשר כאשר נפתח באופן אוטומטי להפיץ את הכספים לנמען לאחר התקנת נאוטילוס!\n\nאם הנמען הוא כבר משתמש Nautilus הם יקבלו הנחיה להעביר את הכספים לחשבון שלהם עם פתיחת הקישור"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("הודעת מתנה"),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Go Back"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("עבור אל QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Got It!"),
+        "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffSupportedMethodNotFound":
+            MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("הסתר"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("הסתר חשבון?"),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
+        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
         "home": MessageLookupByLibrary.simpleMessage("דף הבית"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
         "ignore": MessageLookupByLibrary.simpleMessage("התעלם"),
+        "imSure": MessageLookupByLibrary.simpleMessage(""),
         "import": MessageLookupByLibrary.simpleMessage("Import"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "הקישור שלחצת מכיל כמה ננו, האם תרצה לייבא אותו לארנק זה, או להחזיר אותו למי ששלח אותו?"),
@@ -272,10 +297,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("כתובת יעד אינה תקינה"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),
-        "kaliumWallet": MessageLookupByLibrary.simpleMessage("ארנק נאטריום"),
+        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
         "language": MessageLookupByLibrary.simpleMessage("שפה"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("קישור מועתק"),
-        "liveSupportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "loaded": MessageLookupByLibrary.simpleMessage("טעון"),
         "loadedInto": MessageLookupByLibrary.simpleMessage("נטען לתוך"),
         "lockAppSetting":
@@ -286,8 +311,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "logoutAreYouSure": MessageLookupByLibrary.simpleMessage("אתה בטוח?"),
         "logoutDetail": MessageLookupByLibrary.simpleMessage(
             "Logging out will remove your seed and all Nautilus-related data from this device. If your seed is not backed up, you will never be able to access your funds again"),
-        "logoutDetailKal": MessageLookupByLibrary.simpleMessage(
-            ".התנתקות תוביל להסרת הסיד וכל המידע הקשור לקאליום מהמכשיר. אם הסיד שלך אינו מגובה, אתה לעולם לא תוכל לקבל גישה לכספים שלך יותר."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "כל עוד גיבית את הסיד שלך, אין לך מה לדאוג."),
         "manage": MessageLookupByLibrary.simpleMessage("נהל"),
@@ -299,6 +322,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "תזכיר נשלח מחדש! אם עדיין לא הודה, ייתכן שהמכשיר של הנמען במצב לא מקוון."),
+        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
         "messageHeader": MessageLookupByLibrary.simpleMessage("הודעה"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "כמות השליחה המינימלית היא% 1"),
@@ -307,16 +331,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("פתגם זכרון"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Secret phrase may only contain 24 words"),
+        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
+        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
+        "nearby": MessageLookupByLibrary.simpleMessage(""),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "תכונה זו דורשת ממך היסטוריית עסקאות ארוכה יותר כדי למנוע דואר זבל.\n\nלחלופין, אתה יכול להציג קוד QR עבור מישהו לסרוק."),
         "needVerificationAlertHeader":
             MessageLookupByLibrary.simpleMessage("נדרש אימות"),
         "newAccountIntro": MessageLookupByLibrary.simpleMessage(
             "זה החשבון החדש שלך. ברגע שתקבל נאנו, הטראנזקציות יראו כך:"),
-        "newAccountIntroKal": MessageLookupByLibrary.simpleMessage(
-            "ברוך הבא לקאליום. ברגע שתקבל באנאנו, הטרנסקציות יופיעו כך"),
         "newWallet": MessageLookupByLibrary.simpleMessage("ארנק חדש"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
         "no": MessageLookupByLibrary.simpleMessage("לא"),
@@ -332,16 +358,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "notSent": MessageLookupByLibrary.simpleMessage("לא נשלח"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "פתח את נאטריום בשביל לצפות בטרנסקציה."),
-        "notificationBodyKal": MessageLookupByLibrary.simpleMessage(
-            "פתח את קאליום בשביל לצפות בטרנסקציה."),
         "notificationHeaderSupplement":
             MessageLookupByLibrary.simpleMessage("לחץ בשביל לפתוח"),
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "על מנת שתכונה זו תפעל כראוי, יש להפעיל התראות"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("%1 נאנו התקבלו"),
-        "notificationTitleKal":
-            MessageLookupByLibrary.simpleMessage("%1 באנאנו התקבלו"),
         "notifications": MessageLookupByLibrary.simpleMessage("התראות"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("ניאניקון"),
         "off": MessageLookupByLibrary.simpleMessage("כבוי"),
@@ -368,6 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "מישהו ביקש ממך תשלום! בדוק את דף התשלומים לקבלת מידע נוסף."),
         "payments": MessageLookupByLibrary.simpleMessage("תשלומים"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("בחר מרשימה"),
+        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("הקודים אינם תואמים"),
         "pinConfirmTitle": MessageLookupByLibrary.simpleMessage("אשר את הקוד"),
@@ -380,6 +403,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("הכנס קוד בכדי לשנות נציג"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "הכנס קוד בכדי לראות את הסיד של הארנק."),
+        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleDeniabilityParagraph":
+            MessageLookupByLibrary.simpleMessage(""),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences": MessageLookupByLibrary.simpleMessage("העדפות"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("פרטיות"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("רכישת ננו"),
@@ -434,11 +462,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestAmountConfirm": MessageLookupByLibrary.simpleMessage("בקשה% 1"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "הבקשה נכשלה: נראה שלמשתמש זה לא מותקן נאוטילוס או שההודעות מושבתות."),
+        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
         "requestPayment": MessageLookupByLibrary.simpleMessage("בקש תשלום"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "שגיאה בשליחת בקשת תשלום, ייתכן שהמכשיר של הנמען אינו מקוון או אינו זמין."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "בקשה נשלחה מחדש! אם עדיין לא הודה, ייתכן שהמכשיר של הנמען במצב לא מקוון."),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
         "requested": MessageLookupByLibrary.simpleMessage("התבקש"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("התבקש מ"),
         "requesting": MessageLookupByLibrary.simpleMessage("מבקש"),
@@ -454,8 +485,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding."),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("סרוק כתובת ברקוד \n של נאנו"),
-        "scanInstructionsKal": MessageLookupByLibrary.simpleMessage(
-            "סרוק כתובת ברקוד \n של באנאנו"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("סרוק ברקוד"),
         "searchHint": MessageLookupByLibrary.simpleMessage("חפש כל דבר"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -484,8 +513,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("שלח"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("שלח %1 נאנו?"),
-        "sendAmountConfirmKal":
-            MessageLookupByLibrary.simpleMessage("שלח %1 באנאנו?"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "קרתה תקלה. נסה שוב מאוחר יותר"),
         "sendFrom": MessageLookupByLibrary.simpleMessage("נשלח מ"),
@@ -499,12 +526,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "שלח או בקש תשלום, עם הודעות מוצפנות מקצה לקצה!\n\nבקשות תשלום, תזכירים והודעות יהיו חייבים רק על ידי משתמשי נאוטילוס אחרים.\n\nאתה לא צריך שם משתמש כדי לשלוח או לקבל בקשות תשלום, ואתה יכול להשתמש בהם לצורך שמירת רשומות משלך גם אם הם לא משתמשים בנאוטילוס."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("שלח פרטי גיליון"),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
         "sending": MessageLookupByLibrary.simpleMessage("נשלח"),
         "sent": MessageLookupByLibrary.simpleMessage("נשלח"),
         "sentTo": MessageLookupByLibrary.simpleMessage("נשלח ל"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
+        "setPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Set Wallet Password"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -514,17 +545,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("טען מארנק נייר"),
         "shareLink": MessageLookupByLibrary.simpleMessage("שתף קישור"),
+        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Share Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Check out Nautilus! A premier NANO mobile wallet!"),
+        "show": MessageLookupByLibrary.simpleMessage(""),
+        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
         "showContacts": MessageLookupByLibrary.simpleMessage("הצג אנשי קשר"),
+        "showFunding": MessageLookupByLibrary.simpleMessage(""),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
+        "showQR": MessageLookupByLibrary.simpleMessage(""),
+        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("סימפלקס"),
+        "someone": MessageLookupByLibrary.simpleMessage(""),
+        "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
+        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("תמיכה במפתח"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Switch to Seed"),
         "systemDefault":
             MessageLookupByLibrary.simpleMessage("בְּרִירַת מֶחדָל"),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
         "tapToHide": MessageLookupByLibrary.simpleMessage("Tap to hide"),
         "tapToReveal": MessageLookupByLibrary.simpleMessage("Tap to reveal"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("נושא"),
@@ -567,8 +609,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "בצע אימות בכדי לשחרר את נאטריום מנעילה"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "הכנס קוד בשביל לשחרר את נאטריום מנעילה"),
-        "unlockPinKal": MessageLookupByLibrary.simpleMessage(
-            "הכנס קוד בשביל לשחרר את קאליום מנעילה"),
+        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarningHeader":
+            MessageLookupByLibrary.simpleMessage(""),
         "unpaid": MessageLookupByLibrary.simpleMessage("ללא תשלום"),
         "unread": MessageLookupByLibrary.simpleMessage("שלא נקראו"),
         "uptime": MessageLookupByLibrary.simpleMessage("זמן אונליין"),
@@ -590,13 +635,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("שם משתמש זמין"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "שמות משתמש של נאוטילוס הם שירות מרכזי המסופק על ידי nano.to"),
+        "using": MessageLookupByLibrary.simpleMessage(""),
         "viewDetails": MessageLookupByLibrary.simpleMessage("ראה פרטים"),
+        "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("משקל הצבעה"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),
+        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "ברוך הבא לנאטריום. בכדי להמשיך, אתה רשאי לייצר ארנק חדש או לייבא אחד קיים."),
-        "welcomeTextKal": MessageLookupByLibrary.simpleMessage(
-            "\tברוך הבא לקאליום. בכדי להמשיך, אתה רשאי לייצר ארנק חדש או לייבא אחד קיים."),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
         "withAddress": MessageLookupByLibrary.simpleMessage("עם כתובת"),
         "withMessage": MessageLookupByLibrary.simpleMessage("עם הודעה"),
         "xMinute": MessageLookupByLibrary.simpleMessage("אחרי דקה %1"),

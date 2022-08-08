@@ -9,7 +9,7 @@ import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
@@ -196,7 +196,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                       child: Column(
                         children: <Widget>[
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.accounts, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).accounts, context),
                             style: AppStyles.textStyleHeader(context),
                             maxLines: 1,
                             stepGranularity: 0.1,
@@ -309,7 +309,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                     AppButton.buildAppButton(
                       context,
                       AppButtonType.PRIMARY,
-                      AppLocalization.of(context)!.addAccount,
+                      AppLocalization.of(context).addAccount,
                       Dimens.BUTTON_COMPACT_LEFT_DIMENS,
                       disabled: _addingAccount,
                       onPressed: () {
@@ -318,7 +318,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                             _addingAccount = true;
                           });
                           StateContainer.of(context).getSeed().then((String seed) {
-                            sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context)!.defaultNewAccountName).then((Account? newAccount) {
+                            sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context).defaultNewAccountName).then((Account? newAccount) {
                               if (newAccount == null) {
                                 sl.get<Logger>().d("Error adding account: account was null");
                                 return;
@@ -351,7 +351,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                     AppButton.buildAppButton(
                       context,
                       AppButtonType.PRIMARY,
-                      AppLocalization.of(context)!.addWatchOnlyAccount,
+                      AppLocalization.of(context).addWatchOnlyAccount,
                       Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
                       onPressed: () {
                         Sheets.showAppHeightEightSheet(context: context, widget: const AddWatchOnlyAccountSheet());
@@ -365,14 +365,14 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY,
-                    AppLocalization.of(context)!.hideEmptyAccounts,
+                    AppLocalization.of(context).hideEmptyAccounts,
                     Dimens.BUTTON_BOTTOM_DIMENS,
                     onPressed: () async {
                       AppDialogs.showConfirmDialog(
                           context,
-                          AppLocalization.of(context)!.hideAccountsHeader,
-                          AppLocalization.of(context)!.hideAccountsConfirmation,
-                          CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () async {
+                          AppLocalization.of(context).hideAccountsHeader,
+                          AppLocalization.of(context).hideAccountsConfirmation,
+                          CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
                         await Future.delayed(const Duration(milliseconds: 250));
                         final List<Account> accountsToRemove = <Account>[];
                         for (final Account account in widget.accounts) {
@@ -391,7 +391,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                             widget.accounts.removeWhere((Account acc) => acc.index == account.index);
                           });
                         }
-                      }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
+                      }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
                     },
                   )
                 ],
@@ -402,7 +402,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY_OUTLINE,
-                    AppLocalization.of(context)!.close,
+                    AppLocalization.of(context).close,
                     Dimens.BUTTON_BOTTOM_DIMENS,
                     onPressed: () {
                       Navigator.pop(context);
@@ -632,7 +632,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
         foregroundColor: StateContainer.of(context).curTheme.primary,
         icon: Icons.edit,
-        label: AppLocalization.of(context)!.edit,
+        label: AppLocalization.of(context).edit,
         onPressed: (BuildContext context) async {
           await Future.delayed(const Duration(milliseconds: 250));
           AccountDetailsSheet(account).mainBottomSheet(context);
@@ -645,13 +645,13 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
           foregroundColor: StateContainer.of(context).curTheme.error60,
           icon: Icons.delete,
-          label: AppLocalization.of(context)!.hide,
+          label: AppLocalization.of(context).hide,
           onPressed: (BuildContext context) {
             AppDialogs.showConfirmDialog(
                 context,
-                AppLocalization.of(context)!.hideAccountHeader,
-                AppLocalization.of(context)!.removeAccountText.replaceAll("%1", AppLocalization.of(context)!.addAccount),
-                CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () async {
+                AppLocalization.of(context).hideAccountHeader,
+                AppLocalization.of(context).removeAccountText.replaceAll("%1", AppLocalization.of(context).addAccount),
+                CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
               await Future.delayed(const Duration(milliseconds: 250));
               // Remove account
               await sl.get<DBHelper>().deleteAccount(account);
@@ -660,7 +660,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                 widget.accounts.removeWhere((Account acc) => acc.index == account.index);
               });
               await Slidable.of(context)!.close();
-            }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
+            }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
           }));
     }
 

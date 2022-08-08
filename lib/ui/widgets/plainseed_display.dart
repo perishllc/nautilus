@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
@@ -43,7 +43,7 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
           margin: EdgeInsets.only(left: smallScreen(context) ? 30 : 40, right: smallScreen(context) ? 30 : 40, top: 15.0),
           alignment: Alignment.centerLeft,
           child: AutoSizeText(
-            AppLocalization.of(context)!.seedDescription,
+            AppLocalization.of(context).seedDescription,
             style: AppStyles.textStyleParagraph(context),
             maxLines: 5,
             stepGranularity: 0.5,
@@ -77,11 +77,11 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
                     margin: const EdgeInsetsDirectional.only(top: 8),
                     child: _seedObscured
                         ? AutoSizeText(
-                            AppLocalization.of(context)!.tapToReveal,
+                            AppLocalization.of(context).tapToReveal,
                             style: AppStyles.textStyleParagraphThinPrimary(context),
                           )
                         : Text(
-                            AppLocalization.of(context)!.tapToHide,
+                            AppLocalization.of(context).tapToHide,
                             style: AppStyles.textStyleParagraphThinPrimary(context),
                           ),
                   ),
@@ -115,7 +115,7 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
               // borderSide:
               //     BorderSide(color: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary, width: 1.0),
               child: AutoSizeText(
-                _seedCopied ? AppLocalization.of(context)!.copied : AppLocalization.of(context)!.copy,
+                _seedCopied ? AppLocalization.of(context).copied : AppLocalization.of(context).copy,
                 textAlign: TextAlign.center,
                 style: _seedCopied ? AppStyles.textStyleButtonSuccessSmallOutline(context) : AppStyles.textStyleButtonPrimarySmallOutline(context),
                 maxLines: 1,

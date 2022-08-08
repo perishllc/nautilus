@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 
 enum TransactionStateOptions { UNCONFIRMED, CONFIRMED, FAILED, UNACKNOWLEDGED, UNREAD, FULFILLED, UNFULFILLED, PAID, UNPAID, FAILED_MSG, NOT_SENT, RECEIVABLE }
@@ -13,25 +13,25 @@ class TransactionStateTag extends StatelessWidget {
   String getStateText(BuildContext context, TransactionStateOptions? state) {
     switch (state) {
       case TransactionStateOptions.UNCONFIRMED:
-        return AppLocalization.of(context)!.unconfirmed;
+        return AppLocalization.of(context).unconfirmed;
       case TransactionStateOptions.CONFIRMED:
         return "tag";
       case TransactionStateOptions.FAILED:
-        return AppLocalization.of(context)!.failed;
+        return AppLocalization.of(context).failed;
       case TransactionStateOptions.UNACKNOWLEDGED:
-        return AppLocalization.of(context)!.unacknowledged;
+        return AppLocalization.of(context).unacknowledged;
       case TransactionStateOptions.UNREAD:
-        return AppLocalization.of(context)!.unread;
+        return AppLocalization.of(context).unread;
       case TransactionStateOptions.PAID:
-        return AppLocalization.of(context)!.paid;
+        return AppLocalization.of(context).paid;
       case TransactionStateOptions.UNPAID:
-        return AppLocalization.of(context)!.unpaid;
+        return AppLocalization.of(context).unpaid;
       case TransactionStateOptions.FAILED_MSG:
-        return AppLocalization.of(context)!.failedMessage;
+        return AppLocalization.of(context).failedMessage;
       case TransactionStateOptions.NOT_SENT:
-        return AppLocalization.of(context)!.notSent;
+        return AppLocalization.of(context).notSent;
       case TransactionStateOptions.RECEIVABLE:
-        return AppLocalization.of(context)!.receivable;
+        return AppLocalization.of(context).receivable;
       default:
         return "";
     }

@@ -14,7 +14,7 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/contacts_setting_change_event.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
@@ -250,7 +250,7 @@ class _ContactsListState extends State<ContactsList> {
       return;
     }
     if (contacts.isEmpty) {
-      UIUtil.showSnackbar(AppLocalization.of(context)!.noContactsExport, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).noContactsExport, context);
       return;
     }
     final List<Map<String, dynamic>> jsonList = [];
@@ -276,7 +276,7 @@ class _ContactsListState extends State<ContactsList> {
         if (!mounted) {
           return;
         }
-        UIUtil.showSnackbar(AppLocalization.of(context)!.contactsImportErr, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
         return;
       }
       try {
@@ -305,16 +305,16 @@ class _ContactsListState extends State<ContactsList> {
         if (numSaved > 0) {
           _updateContacts();
           EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: User(nickname: "", address: "")));
-          UIUtil.showSnackbar(AppLocalization.of(context)!.contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
+          UIUtil.showSnackbar(AppLocalization.of(context).contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
         } else {
-          UIUtil.showSnackbar(AppLocalization.of(context)!.noContactsImport, context);
+          UIUtil.showSnackbar(AppLocalization.of(context).noContactsImport, context);
         }
       } catch (e) {
         log.e(e.toString(), e);
         if (!mounted) {
           return;
         }
-        UIUtil.showSnackbar(AppLocalization.of(context)!.contactsImportErr, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
         return;
       }
     } else {
@@ -323,7 +323,7 @@ class _ContactsListState extends State<ContactsList> {
       if (!mounted) {
         return;
       }
-      UIUtil.showSnackbar(AppLocalization.of(context)!.contactsImportErr, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
       return;
     }
   }
@@ -376,7 +376,7 @@ class _ContactsListState extends State<ContactsList> {
                         ),
                         //Contacts Header Text
                         Text(
-                          AppLocalization.of(context)!.contactsHeader,
+                          AppLocalization.of(context).contactsHeader,
                           style: AppStyles.textStyleSettingsHeader(context),
                         ),
                       ],
@@ -480,7 +480,7 @@ class _ContactsListState extends State<ContactsList> {
                 margin: const EdgeInsets.only(top: 10),
                 child: Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context)!.addContact, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context).addContact, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Sheets.showAppHeightEightSheet(context: context, widget: AddContactSheet());
                     }),

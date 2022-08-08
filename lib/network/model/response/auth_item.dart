@@ -22,8 +22,8 @@ class AuthItem {
   @JsonKey(name: 'timestamp', required: true)
   late int timestamp;
 
-  @JsonKey(name: 'address', required: true)
-  late String address;
+  @JsonKey(name: 'account', required: true)
+  late String account;
 
   @JsonKey(name: 'format', required: true)
   late List<String> format;

@@ -17,7 +17,7 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/fcm_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
@@ -124,9 +124,9 @@ class SendSheetState extends State<SendSheet> {
     quickSendAmount = widget.quickSendAmount;
     animationOpen = false;
 
-    // _amountHint = AppLocalization.of(context)!.enterAmount;
-    // _addressHint = AppLocalization.of(context)!.enterUserOrAddress;
-    // _memoHint = AppLocalization.of(context)!.enterMemo;
+    // _amountHint = AppLocalization.of(context).enterAmount;
+    // _addressHint = AppLocalization.of(context).enterUserOrAddress;
+    // _memoHint = AppLocalization.of(context).enterMemo;
 
     if (widget.user != null) {
       // Setup initial state for contact pre-filled
@@ -164,7 +164,7 @@ class SendSheetState extends State<SendSheet> {
         });
       } else {
         setState(() {
-          _amountHint = AppLocalization.of(context)!.enterAmount;
+          _amountHint = AppLocalization.of(context).enterAmount;
         });
       }
     });
@@ -199,7 +199,7 @@ class SendSheetState extends State<SendSheet> {
         }
       } else {
         setState(() {
-          _addressHint = AppLocalization.of(context)!.enterUserOrAddress;
+          _addressHint = AppLocalization.of(context).enterUserOrAddress;
           _users = [];
           if (Address(_addressController!.text).isValid()) {
             _addressValidAndUnfocused = true;
@@ -279,7 +279,7 @@ class SendSheetState extends State<SendSheet> {
         });
       } else {
         setState(() {
-          _memoHint = AppLocalization.of(context)!.enterMemo;
+          _memoHint = AppLocalization.of(context).enterMemo;
         });
       }
     });
@@ -312,13 +312,13 @@ class SendSheetState extends State<SendSheet> {
         builder: (BuildContext context) {
           return AppSimpleDialog(
             title: Text(
-              AppLocalization.of(context)!.notifications,
+              AppLocalization.of(context).notifications,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Text("${AppLocalization.of(context)!.notificationInfo}\n", style: AppStyles.textStyleParagraph(context)),
+                child: Text("${AppLocalization.of(context).notificationInfo}\n", style: AppStyles.textStyleParagraph(context)),
               ),
               AppSimpleDialogOption(
                 onPressed: () {
@@ -327,7 +327,7 @@ class SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context)!.onStr,
+                    AppLocalization.of(context).onStr,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -339,7 +339,7 @@ class SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context)!.off,
+                    AppLocalization.of(context).off,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -375,14 +375,14 @@ class SendSheetState extends State<SendSheet> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              AppLocalization.of(context)!.needVerificationAlertHeader,
+              AppLocalization.of(context).needVerificationAlertHeader,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context)!.needVerificationAlert}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${AppLocalization.of(context).needVerificationAlert}\n\n", style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actions: <Widget>[
@@ -393,7 +393,7 @@ class SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context)!.goToQRCode,
+                    AppLocalization.of(context).goToQRCode,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -405,7 +405,7 @@ class SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context)!.ok,
+                    AppLocalization.of(context).ok,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -435,14 +435,14 @@ class SendSheetState extends State<SendSheet> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              AppLocalization.of(context)!.fallbackHeader,
+              AppLocalization.of(context).fallbackHeader,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text(AppLocalization.of(context)!.fallbackInfo + "\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text(AppLocalization.of(context).fallbackInfo + "\n\n", style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actions: <Widget>[
@@ -453,7 +453,7 @@ class SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context)!.ok,
+                    AppLocalization.of(context).ok,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -524,7 +524,7 @@ class SendSheetState extends State<SendSheet> {
                         children: <Widget>[
                           // Header
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.sendFrom, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).sendFrom, context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,
@@ -542,7 +542,7 @@ class SendSheetState extends State<SendSheet> {
                   child: AppDialogs.infoButton(
                     context,
                     () {
-                      AppDialogs.showInfoDialog(context, AppLocalization.of(context)!.sendSheetInfoHeader, AppLocalization.of(context)!.sendSheetInfo);
+                      AppDialogs.showInfoDialog(context, AppLocalization.of(context).sendSheetInfoHeader, AppLocalization.of(context).sendSheetInfo);
                     },
                   ),
                 ),
@@ -843,7 +843,7 @@ class SendSheetState extends State<SendSheet> {
                 Row(
                   children: <Widget>[
                     // Send Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.send, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       final bool validRequest = await _validateRequest();
 
                       if (!validRequest) {
@@ -896,7 +896,7 @@ class SendSheetState extends State<SendSheet> {
                           formattedAddress = paperWalletAccount;
                         } else {
                           if (!mounted) return;
-                          UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationError, context);
+                          UIUtil.showSnackbar(AppLocalization.of(context).giftCardCreationError, context);
                           return;
                         }
                       }
@@ -915,11 +915,11 @@ class SendSheetState extends State<SendSheet> {
                         if (user == null) {
                           setState(() {
                             if (_addressController!.text.startsWith("★")) {
-                              _addressValidationText = AppLocalization.of(context)!.contactInvalid;
+                              _addressValidationText = AppLocalization.of(context).contactInvalid;
                             } else if (_addressController!.text.startsWith("@")) {
-                              _addressValidationText = AppLocalization.of(context)!.usernameInvalid;
+                              _addressValidationText = AppLocalization.of(context).usernameInvalid;
                             } else if (_addressController!.text.contains(".") || _addressController!.text.contains(r"$")) {
-                              _addressValidationText = AppLocalization.of(context)!.domainInvalid;
+                              _addressValidationText = AppLocalization.of(context).domainInvalid;
                             }
                           });
                         } else {
@@ -952,18 +952,18 @@ class SendSheetState extends State<SendSheet> {
                 Row(
                   children: <Widget>[
                     // Scan QR Code Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.scanQrCode, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).scanQrCode, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () async {
                       UIUtil.cancelLockEvent();
                       final dynamic scanResult = await UserDataUtil.getQRData(DataType.DATA, context);
                       if (!mounted) return;
                       if (scanResult == null) {
-                        UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
+                        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
                       } else if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
                         if (scanResult == QRScanErrs.PERMISSION_DENIED) {
-                          UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidPermissions, context);
+                          UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
                         } else if (scanResult == QRScanErrs.UNKNOWN_ERROR) {
-                          UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
+                          UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
                         }
                         return;
                       } else if (scanResult is Address) {
@@ -1006,7 +1006,7 @@ class SendSheetState extends State<SendSheet> {
                           final BigInt? amountBigInt = BigInt.tryParse(address.amount!);
                           if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
                             UIUtil.showSnackbar(
-                                AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),
+                                AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),
                                 context);
                             return;
                           } else if (_localCurrencyMode && mounted) {
@@ -1023,7 +1023,7 @@ class SendSheetState extends State<SendSheet> {
 
                           // If balance is insufficient show error:
                           if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-                            UIUtil.showSnackbar(AppLocalization.of(context)!.insufficientBalance, context);
+                            UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
                             return;
                           }
 
@@ -1052,11 +1052,11 @@ class SendSheetState extends State<SendSheet> {
                         final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount!);
                         if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
                           UIUtil.showSnackbar(
-                              AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),
+                              AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),
                               context);
                           return;
                         } else if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-                          UIUtil.showSnackbar(AppLocalization.of(context)!.insufficientBalance, context);
+                          UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
                           return;
                         }
 
@@ -1071,13 +1071,13 @@ class SendSheetState extends State<SendSheet> {
                         Sheets.showAppHeightNineSheet(
                             context: context,
                             widget: HandoffConfirmSheet(
-                                handoffItem: handoffItem,
-                                destination: user?.address ?? handoffItem.account,
-                                contactName: user?.getDisplayName(),
-                                localCurrency: _localCurrencyMode ? _convertCryptoToLocalCurrency(handoffItem.amount!) : null));
+                              handoffItem: handoffItem,
+                              destination: user?.address ?? handoffItem.account,
+                              contactName: user?.getDisplayName(),
+                            ));
                       } else {
                         // something went wrong, show generic error:
-                        UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
+                        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
                       }
                     })
                   ],
@@ -1086,7 +1086,7 @@ class SendSheetState extends State<SendSheet> {
                 //     Row(
                 //       children: <Widget>[
                 //         // scan for nfc
-                //         AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.sendViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
+                //         AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).sendViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
                 //             onPressed: () async {
                 //           try {
                 //             UIUtil.cancelLockEvent();
@@ -1256,7 +1256,7 @@ class SendSheetState extends State<SendSheet> {
     if (_amountController!.text.trim().isEmpty && _memoController!.text.trim().isNotEmpty) {
       isValid = false;
       setState(() {
-        _amountValidationText = AppLocalization.of(context)!.amountMissing;
+        _amountValidationText = AppLocalization.of(context).amountMissing;
       });
     } else {
       String bananoAmount;
@@ -1278,7 +1278,7 @@ class SendSheetState extends State<SendSheet> {
         if (_memoController!.text.trim().isEmpty || isRequest) {
           isValid = false;
           setState(() {
-            _amountValidationText = AppLocalization.of(context)!.amountMissing;
+            _amountValidationText = AppLocalization.of(context).amountMissing;
           });
         } else {
           setState(() {
@@ -1288,7 +1288,7 @@ class SendSheetState extends State<SendSheet> {
       } else if (sendAmount > balanceRaw && !isRequest) {
         isValid = false;
         setState(() {
-          _amountValidationText = AppLocalization.of(context)!.insufficientBalance;
+          _amountValidationText = AppLocalization.of(context).insufficientBalance;
         });
       } else {
         setState(() {
@@ -1305,13 +1305,13 @@ class SendSheetState extends State<SendSheet> {
     if (_addressController!.text.trim().isEmpty && isRequest) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context)!.addressMissing;
+        _addressValidationText = AppLocalization.of(context).addressMissing;
         _pasteButtonVisible = true;
       });
     } else if (_addressController!.text.isNotEmpty && !isPhoneNumber && !isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context)!.invalidAddress;
+        _addressValidationText = AppLocalization.of(context).invalidAddress;
         _pasteButtonVisible = true;
       });
     } else if (!isUser && !isFavorite) {
@@ -1386,7 +1386,7 @@ class SendSheetState extends State<SendSheet> {
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
-      hintText: _amountHint ?? AppLocalization.of(context)!.enterAmount,
+      hintText: _amountHint ?? AppLocalization.of(context).enterAmount,
       prefixButton: _rawAmount == null
           ? TextFieldButton(
               icon: AppIcons.swapcurrency,
@@ -1455,7 +1455,7 @@ class SendSheetState extends State<SendSheet> {
         textInputAction: _memoController!.text.isEmpty ? TextInputAction.next : TextInputAction.done,
         maxLines: null,
         autocorrect: false,
-        hintText: _addressHint ?? AppLocalization.of(context)!.enterUserOrAddress,
+        hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
         prefixButton: TextFieldButton(
           icon: AppIcons.star,
           onPressed: () async {
@@ -1679,7 +1679,7 @@ class SendSheetState extends State<SendSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _memoHint ?? AppLocalization.of(context)!.enterMemo,
+      hintText: _memoHint ?? AppLocalization.of(context).enterMemo,
       fadeSuffixOnCondition: true,
       style: TextStyle(
         color: StateContainer.of(context).curTheme.text60,

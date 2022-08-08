@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/setting_item.dart';
 
 enum AuthMethod { PIN, BIOMETRICS }
@@ -13,11 +13,11 @@ class AuthenticationMethod extends SettingSelectionItem {
   String getDisplayName(BuildContext context) {
     switch (method) {
       case AuthMethod.BIOMETRICS:
-        return AppLocalization.of(context)!.biometricsMethod;
+        return AppLocalization.of(context).biometricsMethod;
       case AuthMethod.PIN:
-        return AppLocalization.of(context)!.pinMethod;
+        return AppLocalization.of(context).pinMethod;
       default:
-        return AppLocalization.of(context)!.pinMethod;
+        return AppLocalization.of(context).pinMethod;
     }
   }
 

@@ -5,6 +5,16 @@
     "type": "text",
     "description": "Account text"
   },
+  "accountNameHint": "",
+  "@accountNameHint": {
+    "type": "text",
+    "description": "enter_name_hint"
+  },
+  "accountNameMissing": "",
+  "@accountNameMissing": {
+    "type": "text",
+    "description": "account_name_missing"
+  },
   "accounts": "Kontoer",
   "@accounts": {
     "type": "text",
@@ -40,6 +50,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "address": "",
+  "@address": {
+    "type": "text",
+    "description": "send_warning_address"
+  },
   "addressCopied": "Adresse kopiert",
   "@addressCopied": {
     "type": "text",
@@ -65,10 +80,30 @@
     "type": "text",
     "description": "receive_share_cta"
   },
+  "addWatchOnlyAccount": "",
+  "@addWatchOnlyAccount": {
+    "type": "text",
+    "description": "watch_only_add"
+  },
+  "addWatchOnlyAccountError": "",
+  "@addWatchOnlyAccountError": {
+    "type": "text",
+    "description": "watch_only_add_error"
+  },
+  "addWatchOnlyAccountSuccess": "",
+  "@addWatchOnlyAccountSuccess": {
+    "type": "text",
+    "description": "watch_only_add_success"
+  },
   "aliases": "Aliaser",
   "@aliases": {
     "type": "text",
     "description": "card_details_aliases"
+  },
+  "amountGiftGreaterError": "",
+  "@amountGiftGreaterError": {
+    "type": "text",
+    "description": "gift_split_greater_error"
   },
   "amountMissing": "Vennligst tast inn et beløp",
   "@amountMissing": {
@@ -79,6 +114,11 @@
   "@asked": {
     "type": "text",
     "description": "home_asked_cta"
+  },
+  "authConfirm": "",
+  "@authConfirm": {
+    "type": "text",
+    "description": "auth_confirm_message"
   },
   "authMethod": "Godkjennelsesmetode",
   "@authMethod": {
@@ -245,10 +285,25 @@
     "type": "text",
     "description": "A text field hint that tells the user to confirm the password"
   },
+  "confirmPinHint": "",
+  "@confirmPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the pin"
+  },
   "connectingHeader": "Kobler til",
   "@connectingHeader": {
     "type": "text",
     "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "connectionWarning": "",
+  "@connectionWarning": {
+    "type": "text",
+    "description": "home_connection_warning"
+  },
+  "connectionWarningBody": "",
+  "@connectionWarningBody": {
+    "type": "text",
+    "description": "connection_warning_body"
   },
   "contactAdded": "%1 er lagt til i kontakter.",
   "@contactAdded": {
@@ -320,6 +375,11 @@
     "type": "text",
     "description": "copy_link"
   },
+  "copyMessage": "",
+  "@copyMessage": {
+    "type": "text",
+    "description": "copy_message"
+  },
   "copySeed": "Kopier Seed",
   "@copySeed": {
     "type": "text",
@@ -334,6 +394,11 @@
   "@createAPasswordHeader": {
     "type": "text",
     "description": "A paragraph that tells the users to create a password."
+  },
+  "created": "",
+  "@created": {
+    "type": "text",
+    "description": "gift_created"
   },
   "createGiftCard": "Lag gavekort",
   "@createGiftCard": {
@@ -364,6 +429,11 @@
   "@createPasswordSheetHeader": {
     "type": "text",
     "description": "Prompt user to create a new password"
+  },
+  "createPinHint": "",
+  "@createPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a pin"
   },
   "createQR": "Opprett QR-kode",
   "@createQR": {
@@ -410,6 +480,11 @@
     "type": "text",
     "description": "Default account name"
   },
+  "defaultGiftMessage": "",
+  "@defaultGiftMessage": {
+    "type": "text",
+    "description": "default_gift_message"
+  },
   "defaultNewAccountName": "Konto %1",
   "@defaultNewAccountName": {
     "type": "text",
@@ -450,6 +525,16 @@
     "type": "text",
     "description": "domain_invalid_name"
   },
+  "donateButton": "",
+  "@donateButton": {
+    "type": "text",
+    "description": "donate_button"
+  },
+  "donateToSupport": "",
+  "@donateToSupport": {
+    "type": "text",
+    "description": "settings_support_donate"
+  },
   "edit": "Edit",
   "@edit": {
     "type": "text",
@@ -485,6 +570,11 @@
     "type": "text",
     "description": "A text field hint that tells the users to enter their password"
   },
+  "enterSplitAmount": "",
+  "@enterSplitAmount": {
+    "type": "text",
+    "description": "gift_split_amount_hint"
+  },
   "enterUsername": "Skriv inn et brukernavn",
   "@enterUsername": {
     "type": "text",
@@ -494,6 +584,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "errorProcessingGiftCard": "",
+  "@errorProcessingGiftCard": {
+    "type": "text",
+    "description": "gift_process_error"
   },
   "eula": "EULA",
   "@eula": {
@@ -505,15 +600,11 @@
     "type": "text",
     "description": "example_card_from"
   },
-  "exampleCardFromKal": "Fra en tilfeldig ape",
-  "@exampleCardFromKal": {},
   "exampleCardIntro": "Velkommen til Nautilus. Når du mottar NANO, vil transaksjonene vises slik:",
   "@exampleCardIntro": {
     "type": "text",
     "description": "example_card_intro"
   },
-  "exampleCardIntroKal": "Velkommen til Kalium. Når du mottar BANANO, vil transaksjoner vises slik:",
-  "@exampleCardIntroKal": {},
   "exampleCardLittle": "Litt",
   "@exampleCardLittle": {
     "type": "text",
@@ -529,8 +620,6 @@
     "type": "text",
     "description": "example_card_to"
   },
-  "exampleCardToKal": "Til en tilfeldig ape",
-  "@exampleCardToKal": {},
   "examplePaymentExplainer": "Når du har sendt eller mottatt en betalingsforespørsel, de vil dukke opp her slik med fargen og koden på kortet som indikerer statusen. \n\nGrønt indikerer at forespørselen er betalt.\nGul indikerer at forespørselen/notatet ikke er betalt/lest.\nRød indikerer at forespørselen ikke er lest eller mottatt.\n\n Nøytrale fargede kort uten beløp er bare meldinger.",
   "@examplePaymentExplainer": {
     "type": "text",
@@ -676,6 +765,16 @@
     "type": "text",
     "description": "history_fulfilled"
   },
+  "fundingBannerHeader": "",
+  "@fundingBannerHeader": {
+    "type": "text",
+    "description": "funding_banner_header"
+  },
+  "fundingHeader": "",
+  "@fundingHeader": {
+    "type": "text",
+    "description": "funding_header"
+  },
   "giftAlert": "Du har en gave!",
   "@giftAlert": {
     "type": "text",
@@ -691,6 +790,16 @@
     "type": "text",
     "description": "gift_amount"
   },
+  "giftCardCreationError": "",
+  "@giftCardCreationError": {
+    "type": "text",
+    "description": "create_gift_error"
+  },
+  "giftCardCreationErrorSent": "",
+  "@giftCardCreationErrorSent": {
+    "type": "text",
+    "description": "gift_generic_error"
+  },
   "giftFrom": "Gave fra",
   "@giftFrom": {
     "type": "text",
@@ -705,6 +814,11 @@
   "@giftMessage": {
     "type": "text",
     "description": "gift_message"
+  },
+  "giftProcessSuccess": "",
+  "@giftProcessSuccess": {
+    "type": "text",
+    "description": "gift_process_success"
   },
   "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
   "@giftWarning": {
@@ -726,6 +840,16 @@
     "type": "text",
     "description": "go_to_qr_code"
   },
+  "handoff": "",
+  "@handoff": {
+    "type": "text",
+    "description": "send_handoff"
+  },
+  "handoffSupportedMethodNotFound": "",
+  "@handoffSupportedMethodNotFound": {
+    "type": "text",
+    "description": "handoff_method_not_found"
+  },
   "hide": "Skjul",
   "@hide": {
     "type": "text",
@@ -735,6 +859,21 @@
   "@hideAccountHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
+  },
+  "hideAccountsConfirmation": "",
+  "@hideAccountsConfirmation": {
+    "type": "text",
+    "description": "hide accounts confirmation info"
+  },
+  "hideAccountsHeader": "",
+  "@hideAccountsHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "hideEmptyAccounts": "",
+  "@hideEmptyAccounts": {
+    "type": "text",
+    "description": "hide_empty_accounts"
   },
   "home": "Hjem",
   "@home": {
@@ -791,6 +930,11 @@
     "type": "text",
     "description": "intro_welcome_have_wallet"
   },
+  "imSure": "",
+  "@imSure": {
+    "type": "text",
+    "description": "send_confirm_warning"
+  },
   "instantly": "Øyeblikkelig",
   "@instantly": {
     "type": "text",
@@ -800,16 +944,6 @@
   "@insufficientBalance": {
     "type": "text",
     "description": "send_insufficient_balance"
-  },
-  "intro.new-key": "",
-  "@intro.new-key": {},
-  "intro.not-reviewed-text": "",
-  "@intro.not-reviewed-text": {},
-  "intro.too-long-text": "",
-  "@intro.too-long-text": {},
-  "intro.welcome": "",
-  "@intro.welcome": {
-    "description": "This is a description of a key so that the translator better understands the context"
   },
   "invalidAddress": "Den angitte adressen er ugyldig",
   "@invalidAddress": {
@@ -821,15 +955,20 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
+  "invalidPin": "",
+  "@invalidPin": {
+    "type": "text",
+    "description": "An error indicating a pin has been entered incorrectly"
+  },
+  "iosFundingMessage": "",
+  "@iosFundingMessage": {
+    "type": "text",
+    "description": "ios_funding_message"
+  },
   "iUnderstandTheRisks": "Jeg forstår risikoene",
   "@iUnderstandTheRisks": {
     "type": "text",
     "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
-  },
-  "kaliumWallet": "Kalium lommebok",
-  "@kaliumWallet": {
-    "type": "text",
-    "description": "kalium_wallet"
   },
   "language": "Språk",
   "@language": {
@@ -840,11 +979,6 @@
   "@linkCopied": {
     "type": "text",
     "description": "link_copied"
-  },
-  "liveSupportButton": "Support",
-  "@liveSupportButton": {
-    "type": "text",
-    "description": "A button to open up the live support window"
   },
   "loaded": "lastet",
   "@loaded": {
@@ -886,8 +1020,6 @@
     "type": "text",
     "description": "settings_logout_alert_message"
   },
-  "logoutDetailKal": "Når du logger ut, fjernes ditt Seed og all Kaliumrelaterte data fra denne enheten. Hvis ditt Seed ikke er sikkerhetskopiert, vil du aldri kunne få tilgang til dine midler igjen",
-  "@logoutDetailKal": {},
   "logoutReassurance": "Så lenge du har sikkerhetskopiert ditt Seed, har du ingenting å bekymre deg over.",
   "@logoutReassurance": {
     "type": "text",
@@ -928,6 +1060,11 @@
     "type": "text",
     "description": "memo_sent_again"
   },
+  "messageCopied": "",
+  "@messageCopied": {
+    "type": "text",
+    "description": "message_copied"
+  },
   "messageHeader": "Melding",
   "@messageHeader": {
     "type": "text",
@@ -953,15 +1090,35 @@
     "type": "text",
     "description": "err"
   },
+  "monthlyServerCosts": "",
+  "@monthlyServerCosts": {
+    "type": "text",
+    "description": "support_monthly_costs"
+  },
   "moonpay": "MoonPay",
   "@moonpay": {
     "type": "text",
     "description": "moonpay_ramp"
   },
+  "moreSettings": "",
+  "@moreSettings": {
+    "type": "text",
+    "description": "settings_more"
+  },
   "natricon": "Natricon",
   "@natricon": {
     "type": "text",
     "description": "natricon_settings"
+  },
+  "nautilusWallet": "",
+  "@nautilusWallet": {
+    "type": "text",
+    "description": "nautilus_wallet"
+  },
+  "nearby": "",
+  "@nearby": {
+    "type": "text",
+    "description": "nearby_devices"
   },
   "needVerificationAlert": "Denne funksjonen krever at du har en lengre transaksjonshistorikk for å forhindre spam.\n\nAlternativt kan du vise en QR-kode for noen å skanne.",
   "@needVerificationAlert": {
@@ -978,8 +1135,6 @@
     "type": "text",
     "description": "Alternate account intro card"
   },
-  "newAccountIntroKal": "Dette er din nye konto. Når du mottar BANANO, vil transaksjoner vises slik:",
-  "@newAccountIntroKal": {},
   "newWallet": "Ny lommebok",
   "@newWallet": {
     "type": "text",
@@ -1030,8 +1185,6 @@
     "type": "text",
     "description": "notification_body"
   },
-  "notificationBodyKal": "Åpne Kalium for å se denne transaksjonen",
-  "@notificationBodyKal": {},
   "notificationHeaderSupplement": "Tap for å åpne",
   "@notificationHeaderSupplement": {
     "type": "text",
@@ -1052,8 +1205,6 @@
     "type": "text",
     "description": "notification_title"
   },
-  "notificationTitleKal": "Mottok %1 BANANO",
-  "@notificationTitleKal": {},
   "notSent": "ikke sendt",
   "@notSent": {
     "type": "text",
@@ -1094,10 +1245,6 @@
     "type": "text",
     "description": "history_opened"
   },
-  "page.home.counter": "",
-  "@page.home.counter": {},
-  "page.home.title": "",
-  "@page.home.title": {},
   "paid": "betalt",
   "@paid": {
     "type": "text",
@@ -1148,12 +1295,15 @@
     "type": "text",
     "description": "pay_request"
   },
-  "receivable": "venter",
-  "@receivable": {},
   "pickFromList": "Velg en fra listen",
   "@pickFromList": {
     "type": "text",
     "description": "pick rep from list"
+  },
+  "pinBlank": "",
+  "@pinBlank": {
+    "type": "text",
+    "description": "An error indicating a pin has been entered incorrectly"
   },
   "pinConfirmError": "PIN-kodene stemmer ikke overens",
   "@pinConfirmError": {
@@ -1190,10 +1340,30 @@
     "type": "text",
     "description": "change_representative_pin"
   },
+  "pinsDontMatch": "",
+  "@pinsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a pin has been confirmed incorrectly"
+  },
   "pinSeedBackup": "Angi PIN-kode for a sikkerhetskopiere Seed",
   "@pinSeedBackup": {
     "type": "text",
     "description": "settings_pin_title"
+  },
+  "plausibleDeniabilityParagraph": "",
+  "@plausibleDeniabilityParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells warns the user this is plausible deniability pin."
+  },
+  "plausibleInfoHeader": "",
+  "@plausibleInfoHeader": {
+    "type": "text",
+    "description": "plausible_info_header"
+  },
+  "plausibleSheetInfo": "",
+  "@plausibleSheetInfo": {
+    "type": "text",
+    "description": "plausible_sheet_info"
   },
   "preferences": "Preferanser",
   "@preferences": {
@@ -1395,6 +1565,11 @@
     "type": "text",
     "description": "request_generic_error"
   },
+  "requestFrom": "",
+  "@requestFrom": {
+    "type": "text",
+    "description": "request_title"
+  },
   "requesting": "Forespørsel",
   "@requesting": {
     "type": "text",
@@ -1414,6 +1589,16 @@
   "@requestSentButNotReceived": {
     "type": "text",
     "description": "request_sent_again"
+  },
+  "requestSheetInfo": "",
+  "@requestSheetInfo": {
+    "type": "text",
+    "description": "request_sheet_info"
+  },
+  "requestSheetInfoHeader": "",
+  "@requestSheetInfoHeader": {
+    "type": "text",
+    "description": "request_sheet_info_header"
   },
   "requireAPasswordToOpenHeader": "Krev et passord for å åpne Nautilus?",
   "@requireAPasswordToOpenHeader": {
@@ -1450,8 +1635,6 @@
     "type": "text",
     "description": "scan_send_instruction_label"
   },
-  "scanInstructionsKal": "Scan en Banano \nQR-kode",
-  "@scanInstructionsKal": {},
   "scanQrCode": "Scan QR-kode",
   "@scanQrCode": {
     "type": "text",
@@ -1542,8 +1725,6 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
-  "sendAmountConfirmKal": "Send %1 BANANO",
-  "@sendAmountConfirmKal": {},
   "sendError": "Det oppsto en feil. Prøv igjen senere.",
   "@sendError": {
     "type": "text",
@@ -1584,6 +1765,11 @@
     "type": "text",
     "description": "send_sheet_info_header"
   },
+  "sendViaNFC": "",
+  "@sendViaNFC": {
+    "type": "text",
+    "description": "send_payment_nfc"
+  },
   "sent": "Sendt",
   "@sent": {
     "type": "text",
@@ -1603,6 +1789,21 @@
   "@setPasswordSuccess": {
     "type": "text",
     "description": "Setting a Wallet Password was successful"
+  },
+  "setPin": "",
+  "@setPin": {
+    "type": "text",
+    "description": "A button that sets the plausible deniability password"
+  },
+  "setPinSuccess": "",
+  "@setPinSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Pin was successful"
+  },
+  "setPlausibleDeniabilityPin": "",
+  "@setPlausibleDeniabilityPin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
   },
   "settingsHeader": "Instillinger",
   "@settingsHeader": {
@@ -1629,19 +1830,16 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
-  "shareKalium": "Del Kalium",
-  "@shareKalium": {},
-  "shareKaliumText": "Sjekk ut Kalium! Bananos offisielle mobile lommebok!",
-  "@shareKaliumText": {},
   "shareLink": "Del Link",
   "@shareLink": {
     "type": "text",
     "description": "share_link"
   },
-  "shareNatrium": "",
-  "@shareNatrium": {},
-  "shareNatriumText": "",
-  "@shareNatriumText": {},
+  "shareMessage": "",
+  "@shareMessage": {
+    "type": "text",
+    "description": "share_message"
+  },
   "shareNautilus": "Del Nautilus",
   "@shareNautilus": {
     "type": "text",
@@ -1652,20 +1850,65 @@
     "type": "text",
     "description": "share_extra"
   },
+  "show": "",
+  "@show": {
+    "type": "text",
+    "description": "funding_show"
+  },
+  "showAccountQR": "",
+  "@showAccountQR": {
+    "type": "text",
+    "description": "show_account_qr"
+  },
   "showContacts": "Vis kontakter",
   "@showContacts": {
     "type": "text",
     "description": "contacts_enabled"
+  },
+  "showFunding": "",
+  "@showFunding": {
+    "type": "text",
+    "description": "show_funding_banner"
+  },
+  "showLinkQR": "",
+  "@showLinkQR": {
+    "type": "text",
+    "description": "show_link_qr"
+  },
+  "showQR": "",
+  "@showQR": {
+    "type": "text",
+    "description": "show_qr"
+  },
+  "showUnopenedWarning": "",
+  "@showUnopenedWarning": {
+    "type": "text",
+    "description": "warn_unsafe_send"
   },
   "simplex": "Simplex",
   "@simplex": {
     "type": "text",
     "description": "simplex_ramp"
   },
+  "someone": "",
+  "@someone": {
+    "type": "text",
+    "description": "send_someone"
+  },
+  "splitBy": "",
+  "@splitBy": {
+    "type": "text",
+    "description": "gift_card_split_by"
+  },
   "supportButton": "Support",
   "@supportButton": {
     "type": "text",
     "description": "A button to open up the live support window"
+  },
+  "supportDevelopment": "",
+  "@supportDevelopment": {
+    "type": "text",
+    "description": "settings_support_development"
   },
   "supportTheDeveloper": "Støtt utvikleren",
   "@supportTheDeveloper": {
@@ -1681,6 +1924,11 @@
   "@systemDefault": {
     "type": "text",
     "description": "settings_default_language_string"
+  },
+  "tapMessageToEdit": "",
+  "@tapMessageToEdit": {
+    "type": "text",
+    "description": "gift_creation_message_edit_hint"
   },
   "tapToHide": "Trykk for å skjule",
   "@tapToHide": {
@@ -1727,15 +1975,11 @@
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferCompleteKal": "%1 BANANO ble overført til din Kalium lommebok.\n",
-  "@transferCompleteKal": {},
   "transferConfirmInfo": "En lommebok med en saldo på %1 NANO ble funnet.\n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"
   },
-  "transferConfirmInfoKal": "En lommebok med en saldo på %1 BANANO ble funnet.\n",
-  "@transferConfirmInfoKal": {},
   "transferConfirmInfoSecond": "Trykk bekreft for å overføre midlene.\n",
   "@transferConfirmInfoSecond": {
     "type": "text",
@@ -1761,8 +2005,6 @@
     "type": "text",
     "description": "transfer_intro"
   },
-  "transferIntroKal": "Denne prosessen vil overføre midler fra en papirlommebok til din Kalium lommebok.\n\nTrykk på \"%1\" knappen for å starte.",
-  "@transferIntroKal": {},
   "transferIntroShort": "Denne prosessen vil overføre midlene fra en papirlommebok til din Nautilus-lommebok.",
   "@transferIntroShort": {
     "type": "text",
@@ -1783,8 +2025,6 @@
     "type": "text",
     "description": "transfer_no_funds_toast"
   },
-  "transferNoFundsKal": "Dette Seed inneholder ingen BANANO",
-  "@transferNoFundsKal": {},
   "transferQrScanError": "Denne QR-koden inneholder ikke et gyldig Seed.",
   "@transferQrScanError": {
     "type": "text",
@@ -1795,8 +2035,6 @@
     "type": "text",
     "description": "transfer_qr_scan_hint"
   },
-  "transferQrScanHintKal": "Scan en Banano \nSeed eller privat nøkkel",
-  "@transferQrScanHintKal": {},
   "unacknowledged": "ubekreftede",
   "@unacknowledged": {
     "type": "text",
@@ -1820,17 +2058,33 @@
   "unlockBiometrics": "Verifiser for å låse opp Nautilus",
   "@unlockBiometrics": {
     "type": "text",
-    "description": "unlock_kalium_bio"
+    "description": "unlock_bio"
   },
-  "unlockBiometricsKal": "Verifiser for å låse opp Kalium",
-  "@unlockBiometricsKal": {},
   "unlockPin": "Angi PIN-kode for å låse opp Nautilus",
   "@unlockPin": {
     "type": "text",
-    "description": "unlock_kalium_pin"
+    "description": "unlock_pin"
   },
-  "unlockPinKal": "Tast inn PIN-kode for å låse opp Kalium",
-  "@unlockPinKal": {},
+  "unopenedWarningHeader": "",
+  "@unopenedWarningHeader": {
+    "type": "text",
+    "description": "unopened_warning_header"
+  },
+  "unopenedWarningInfo": "",
+  "@unopenedWarningInfo": {
+    "type": "text",
+    "description": "unopened_warning_info"
+  },
+  "unopenedWarningWarning": "",
+  "@unopenedWarningWarning": {
+    "type": "text",
+    "description": "unopened_warning_warning"
+  },
+  "unopenedWarningWarningHeader": "",
+  "@unopenedWarningWarningHeader": {
+    "type": "text",
+    "description": "unopened_warning_warning_header"
+  },
   "unpaid": "ubetalt",
   "@unpaid": {
     "type": "text",
@@ -1896,10 +2150,20 @@
     "type": "text",
     "description": "user_not_found"
   },
+  "using": "",
+  "@using": {
+    "type": "text",
+    "description": "gift_message_using"
+  },
   "viewDetails": "Vis detaljer",
   "@viewDetails": {
     "type": "text",
     "description": "transaction_details"
+  },
+  "viewTX": "",
+  "@viewTX": {
+    "type": "text",
+    "description": "transaction_transaction"
   },
   "votingWeight": "Stemmevekt",
   "@votingWeight": {
@@ -1911,13 +2175,26 @@
     "type": "text",
     "description": "settings_logout_alert_title"
   },
+  "watchOnlyAccount": "",
+  "@watchOnlyAccount": {
+    "type": "text",
+    "description": "watch_only_account"
+  },
+  "watchOnlySendDisabled": "",
+  "@watchOnlySendDisabled": {
+    "type": "text",
+    "description": "watch_only_send_disabled"
+  },
   "welcomeText": "Velkommen til Nautilus. For å starte, kan du opprette en ny lommebok eller importere en eksisterende.",
   "@welcomeText": {
     "type": "text",
     "description": "intro_welcome_title"
   },
-  "welcomeTextKal": "Velkommen til Kalium. For å starte kan du opprette en ny lommebok eller importere en eksisterende.",
-  "@welcomeTextKal": {},
+  "welcomeTextUpdated": "",
+  "@welcomeTextUpdated": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
   "withAddress": "Med adresse",
   "@withAddress": {
     "type": "text",

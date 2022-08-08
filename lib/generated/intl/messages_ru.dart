@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Счёт"),
+        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
         "accounts": MessageLookupByLibrary.simpleMessage("Счета"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Вы уверены, что у вас есть копия вашей секретной фразы или Seed?"),
@@ -34,6 +36,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Добавить Контакт"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Добавить избранное"),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "address": MessageLookupByLibrary.simpleMessage(""),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Адрес скопирован"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Введите адрес"),
@@ -43,9 +49,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Пожалуйста, введите имя пользователя или адрес"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Отправить"),
         "aliases": MessageLookupByLibrary.simpleMessage("Псевдонимы"),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Пожалуйста введите сумму"),
         "asked": MessageLookupByLibrary.simpleMessage("Спросил"),
+        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
         "authMethod": MessageLookupByLibrary.simpleMessage("Аутентификация"),
         "autoImport":
             MessageLookupByLibrary.simpleMessage("Автоматический импорт"),
@@ -104,7 +112,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Подтвердить"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Подтвердите пароль"),
+        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Подключение"),
+        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("%1 добавлен в контакты!"),
         "contactExists":
@@ -127,6 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("Копировать"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Копировать адрес"),
         "copyLink": MessageLookupByLibrary.simpleMessage("Скопировать ссылку"),
+        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
         "copySeed": MessageLookupByLibrary.simpleMessage("Копировать Seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Скопировать адрес кошелька в буфер обмена"),
@@ -144,7 +156,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Пароль не является обязательным, и ваш кошелек будет защищен вашим PIN-кодом или биометрической информацией."),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Создать"),
+        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
         "createQR": MessageLookupByLibrary.simpleMessage("Создать QR-код"),
+        "created": MessageLookupByLibrary.simpleMessage(""),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Создание подарочной карты"),
         "currency": MessageLookupByLibrary.simpleMessage("Валюта"),
@@ -159,6 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ошибка дешифрования!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Основной счёт"),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Счёт %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
@@ -173,6 +188,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("Отклонить"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Неверное доменное имя"),
+        "donateButton": MessageLookupByLibrary.simpleMessage(""),
+        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
         "edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Не удалось установить пароль"),
@@ -183,23 +200,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Введите сообщение"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Введите свой пароль"),
+        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage(
             "Введите пользователя или адрес"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Введите имя пользователя"),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("от кого-то"),
-        "exampleCardFromKal":
-            MessageLookupByLibrary.simpleMessage("От случайного человека"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
             "Добро пожаловать в Nautilus.Когда вы получите или отправите NANO,это будет отображено ниже."),
-        "exampleCardIntroKal": MessageLookupByLibrary.simpleMessage(
-            "Добро пожаловать в Kalium.Когда вы получите или отправите BANANO,это будет отображено ниже."),
         "exampleCardLittle": MessageLookupByLibrary.simpleMessage("Немного"),
         "exampleCardLot": MessageLookupByLibrary.simpleMessage("Много"),
         "exampleCardTo": MessageLookupByLibrary.simpleMessage("кому-то"),
-        "exampleCardToKal":
-            MessageLookupByLibrary.simpleMessage("Случайному человеку"),
         "examplePayRecipient": MessageLookupByLibrary.simpleMessage("@dad"),
         "examplePayRecipientMessage":
             MessageLookupByLibrary.simpleMessage("С Днем Рождения!"),
@@ -248,28 +261,40 @@ class MessageLookup extends MessageLookupByLibrary {
             "Аутентификация для резервного копирования Seed."),
         "from": MessageLookupByLibrary.simpleMessage("От"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("выполнивших"),
+        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("У тебя есть подарок!"),
         "giftAlertEmpty":
             MessageLookupByLibrary.simpleMessage("Пустой подарок"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Сумма подарка"),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Подарок от"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Загрузите цифровую подарочную карту с NANO! Задайте сумму и необязательное сообщение, которое получатель увидит, когда откроет его!\n\nПосле создания вы получите ссылку, которую можете отправить кому угодно, которая при открытии автоматически распределит средства получателю после установки Nautilus!\n\nЕсли получатель уже является пользователем Nautilus, он получит приглашение перевести средства на свой счет при переходе по ссылке."),
         "giftMessage":
             MessageLookupByLibrary.simpleMessage("Сообщение о подарке"),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Назад"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Перейти к QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Готово!"),
+        "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffSupportedMethodNotFound":
+            MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("Скрыть"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Скрыть аккаунт?"),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
+        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
         "home": MessageLookupByLibrary.simpleMessage("Главная"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Я понимаю риски"),
         "ignore": MessageLookupByLibrary.simpleMessage("Игнорировать"),
+        "imSure": MessageLookupByLibrary.simpleMessage(""),
         "import": MessageLookupByLibrary.simpleMessage("Импорт"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "Ссылка, по которой вы нажали, содержит nano, хотите ли вы импортировать ее в этот кошелек или вернуть ее тому, кто ее отправил?"),
@@ -293,12 +318,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Введен неверный адрес"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Неправильный пароль"),
-        "kaliumWallet": MessageLookupByLibrary.simpleMessage("Kalium кошелёк"),
+        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "linkCopied":
             MessageLookupByLibrary.simpleMessage("Ссылка скопирована"),
-        "liveSupportButton":
-            MessageLookupByLibrary.simpleMessage("Служба поддержки"),
         "loaded": MessageLookupByLibrary.simpleMessage("Загружен"),
         "loadedInto": MessageLookupByLibrary.simpleMessage("Загружено в"),
         "lockAppSetting":
@@ -310,8 +334,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "logoutAreYouSure": MessageLookupByLibrary.simpleMessage("Вы уверены?"),
         "logoutDetail": MessageLookupByLibrary.simpleMessage(
             "Выход из системы приведёт к удалению Seed и всех связанных с Nautilus данных с этого устройства.Если ваш Seed не будет скопирован,вы больше никогда не сможете получить доступ к своим средствам."),
-        "logoutDetailKal": MessageLookupByLibrary.simpleMessage(
-            "Выход из системы приведёт к удалению Seed и всех связанных с Kalium данных с этого устройства.Если ваш Seed не будет скопирован,вы больше никогда не сможете получить доступ к своим средствам."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Если вы создали резервную копию своего Seed,вам не о чем беспокоиться"),
         "manage": MessageLookupByLibrary.simpleMessage("Управление"),
@@ -325,6 +347,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Памятка отправлена повторно! Если все еще не подтверждено, устройство получателя может быть отключено."),
+        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Сообщение"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Минимум сумма отправки % 1 NANO "),
@@ -334,16 +357,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Мнемоническая фраза"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Секретная фраза может содержать только 24 слова"),
+        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
+        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
+        "nearby": MessageLookupByLibrary.simpleMessage(""),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Эта функция требует более длительной истории транзакций, чтобы предотвратить спам.\n\nКроме того, вы можете показать QR-код для сканирования."),
         "needVerificationAlertHeader":
             MessageLookupByLibrary.simpleMessage("Необходима верификация"),
         "newAccountIntro": MessageLookupByLibrary.simpleMessage(
             "Это ваш новый аккаунт. Как только вы получите NANO, транзакции будут выглядеть так:"),
-        "newAccountIntroKal": MessageLookupByLibrary.simpleMessage(
-            "Это ваш новый аккаунт. Как только вы получите BANANO, транзакции будут выглядеть так:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Новый кошелёк"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Далее"),
         "no": MessageLookupByLibrary.simpleMessage("Нет"),
@@ -359,16 +384,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "notSent": MessageLookupByLibrary.simpleMessage("не отправлено"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Откройте Nautilus для просмотра."),
-        "notificationBodyKal": MessageLookupByLibrary.simpleMessage(
-            "Откройте Kalium для просмотра."),
         "notificationHeaderSupplement":
             MessageLookupByLibrary.simpleMessage("Нажмите чтобы открыть"),
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "Чтобы эта функция работала правильно, уведомления должны быть включены"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Получено %1 NANO"),
-        "notificationTitleKal":
-            MessageLookupByLibrary.simpleMessage("Получено %1 BANANO"),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Ньяникон"),
         "off": MessageLookupByLibrary.simpleMessage("Выкл."),
@@ -397,6 +418,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payments": MessageLookupByLibrary.simpleMessage("Платежи"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Выбрать из списка"),
+        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("PIN не совпадают."),
         "pinConfirmTitle":
@@ -412,6 +434,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Введите PIN для смены представителя"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Введите PIN для резервного копирования Seed."),
+        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleDeniabilityParagraph":
+            MessageLookupByLibrary.simpleMessage(""),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences": MessageLookupByLibrary.simpleMessage("Предпочтения"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Политика"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Приобрести нано"),
@@ -473,12 +500,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Запрос %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Запрос не удался: у этого пользователя, похоже, не установлен Nautilus или уведомления отключены."),
+        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("Запросить платеж"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "Ошибка при отправке запроса на оплату, устройство получателя может быть отключено или недоступно."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Запрос отправлен повторно! Если все еще не подтверждено, устройство получателя может быть отключено."),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
         "requested": MessageLookupByLibrary.simpleMessage("Запрошен"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("Запрошен"),
         "requesting": MessageLookupByLibrary.simpleMessage("Запрос"),
@@ -495,8 +525,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Похоже, ваше устройство \"рутировано\" , \"взломано\" или модифицировано таким образом, что это ставит под угрозу безопасность. Перед продолжением рекомендуется переустановить устройство в исходное состояние."),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("Сканировать\nQR-код адрес."),
-        "scanInstructionsKal": MessageLookupByLibrary.simpleMessage(
-            "Сканировать  QR-код Banano/адрес."),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("Сканировать QR-код"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Ищите что угодно"),
@@ -528,8 +556,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Отправить"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Отправить %1 Nano"),
-        "sendAmountConfirmKal":
-            MessageLookupByLibrary.simpleMessage("Отправить %1 Banano"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Произошла ошибка. Попробуйте позже."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Отправить из"),
@@ -543,12 +569,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Отправляйте или запрашивайте платеж с помощью сообщений со сквозным шифрованием!\n\nЗапросы на оплату, записки и сообщения будут приниматься только другими пользователями nautilus.\n\nВам не нужно иметь имя пользователя для отправки или получения запросов на оплату, и вы можете использовать их для ведения собственного учета, даже если они не используют nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Отправить информацию о листе"),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
         "sending": MessageLookupByLibrary.simpleMessage("Отправить"),
         "sent": MessageLookupByLibrary.simpleMessage("Отправлено"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Отправлено на"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Установка пароля"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Пароль был успешно установлен"),
+        "setPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Установить пароль"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -558,19 +588,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Загрузить с Paper кошелька"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Поделиться ссылкой"),
+        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
         "shareNautilus":
             MessageLookupByLibrary.simpleMessage("Поделиться Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Оцените Nautilus! Лучший Android кошелёк Nano!"),
+        "show": MessageLookupByLibrary.simpleMessage(""),
+        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Показать контакты"),
+        "showFunding": MessageLookupByLibrary.simpleMessage(""),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
+        "showQR": MessageLookupByLibrary.simpleMessage(""),
+        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("Симплекс"),
+        "someone": MessageLookupByLibrary.simpleMessage(""),
+        "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
+        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Поддержать разработчика"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Переключиться на Seed"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("По умолчанию"),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
         "tapToHide":
             MessageLookupByLibrary.simpleMessage("Нажмите, чтобы скрыть"),
         "tapToReveal":
@@ -616,8 +657,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Аутентификация для разблокировки Nautilus"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "Введите PIN , для разблокировки Nautilus"),
-        "unlockPinKal": MessageLookupByLibrary.simpleMessage(
-            "Введите PIN-код, чтобы разблокировать Kalium"),
+        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarningHeader":
+            MessageLookupByLibrary.simpleMessage(""),
         "unpaid": MessageLookupByLibrary.simpleMessage("невыплаченных"),
         "unread": MessageLookupByLibrary.simpleMessage("непрочитанный"),
         "uptime": MessageLookupByLibrary.simpleMessage("Онлайн время"),
@@ -641,14 +685,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Имя пользователя недоступно"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "Имена пользователей Nautilus — это централизованная услуга, предоставляемая Nano.to"),
+        "using": MessageLookupByLibrary.simpleMessage(""),
         "viewDetails":
             MessageLookupByLibrary.simpleMessage("Посмотреть Детали"),
+        "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Вес голосования"),
         "warning": MessageLookupByLibrary.simpleMessage("Предупреждение"),
+        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Добро пожаловать в Nautilus. Вы можете создать новый кошелек или импортировать уже существующий."),
-        "welcomeTextKal": MessageLookupByLibrary.simpleMessage(
-            "Добро пожаловать в Kalium. Чтобы продолжить, можно создать новый кошелек или импортировать уже существующий."),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
         "withAddress": MessageLookupByLibrary.simpleMessage("С адресом"),
         "withMessage": MessageLookupByLibrary.simpleMessage("С сообщением"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Через %1 мин."),

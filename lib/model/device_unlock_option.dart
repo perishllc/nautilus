@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/setting_item.dart';
 
 enum UnlockOption { YES, NO }
@@ -13,10 +13,10 @@ class UnlockSetting extends SettingSelectionItem {
   String getDisplayName(BuildContext context) {
     switch (setting) {
       case UnlockOption.YES:
-        return AppLocalization.of(context)!.yes;
+        return AppLocalization.of(context).yes;
       case UnlockOption.NO:
       default:
-        return AppLocalization.of(context)!.no;
+        return AppLocalization.of(context).no;
     }
   }
 

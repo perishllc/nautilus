@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/share_card.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
@@ -260,7 +260,7 @@ class _GiftQRSheetStateState extends State<GiftQRSheet> {
                         context,
                         // Copy Address Button
                         _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _addressCopied ? AppLocalization.of(context)!.linkCopied : AppLocalization.of(context)!.copyLink,
+                        _addressCopied ? AppLocalization.of(context).linkCopied : AppLocalization.of(context).copyLink,
                         Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                       Clipboard.setData(ClipboardData(text: widget.link));
                       setState(() {
@@ -286,7 +286,7 @@ class _GiftQRSheetStateState extends State<GiftQRSheet> {
                         context,
                         // Share Address Button
                         AppButtonType.PRIMARY_OUTLINE,
-                        AppLocalization.of(context)!.shareLink,
+                        AppLocalization.of(context).shareLink,
                         Dimens.BUTTON_BOTTOM_DIMENS,
                         disabled: _showShareCard, onPressed: () {
                       final String receiveCardFileName = "share_${widget.link.hashCode}.png";

@@ -18,7 +18,7 @@ import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
@@ -301,7 +301,7 @@ class _BlockedListState extends State<BlockedList> {
                         ),
                         //Contacts Header Text
                         Text(
-                          AppLocalization.of(context)!.blockedHeader,
+                          AppLocalization.of(context).blockedHeader,
                           style: AppStyles.textStyleSettingsHeader(context),
                         ),
                       ],
@@ -309,7 +309,7 @@ class _BlockedListState extends State<BlockedList> {
                     Container(
                       margin: const EdgeInsets.only(right: 25),
                       child: AppDialogs.infoButton(context, () {
-                        AppDialogs.showInfoDialog(context, AppLocalization.of(context)!.blockedInfoHeader, AppLocalization.of(context)!.blockedInfo);
+                        AppDialogs.showInfoDialog(context, AppLocalization.of(context).blockedInfoHeader, AppLocalization.of(context).blockedInfo);
                       }),
                     ),
                   ],
@@ -369,7 +369,7 @@ class _BlockedListState extends State<BlockedList> {
                 margin: const EdgeInsets.only(top: 10),
                 child: Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context)!.addBlocked, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context).addBlocked, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Sheets.showAppHeightEightSheet(context: context, widget: AddBlockedSheet());
                     }),

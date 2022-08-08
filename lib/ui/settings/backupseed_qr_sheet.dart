@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/share_card.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
@@ -246,7 +246,7 @@ class _BackupSeedQRSheetStateState extends State<BackupSeedQRSheet> {
                             context,
                             // Copy Address Button
                             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied ? AppLocalization.of(context)!.seedCopiedShort : AppLocalization.of(context)!.copySeed,
+                            _addressCopied ? AppLocalization.of(context).seedCopiedShort : AppLocalization.of(context).copySeed,
                             Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                           Clipboard.setData(ClipboardData(text: widget.data));
                           setState(() {
@@ -272,7 +272,7 @@ class _BackupSeedQRSheetStateState extends State<BackupSeedQRSheet> {
                             context,
                             // Share Address Button
                             AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context)!.close,
+                            AppLocalization.of(context).close,
                             Dimens.BUTTON_BOTTOM_DIMENS,
                             onPressed: () {
                               Navigator.pop(context);

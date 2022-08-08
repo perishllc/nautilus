@@ -5,6 +5,16 @@
     "type": "text",
     "description": "Account text"
   },
+  "accountNameHint": "",
+  "@accountNameHint": {
+    "type": "text",
+    "description": "enter_name_hint"
+  },
+  "accountNameMissing": "",
+  "@accountNameMissing": {
+    "type": "text",
+    "description": "account_name_missing"
+  },
   "accounts": "Mga Account",
   "@accounts": {
     "type": "text",
@@ -40,6 +50,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "address": "",
+  "@address": {
+    "type": "text",
+    "description": "send_warning_address"
+  },
   "addressCopied": "Ang Address ay nakopya",
   "@addressCopied": {
     "type": "text",
@@ -65,10 +80,30 @@
     "type": "text",
     "description": "receive_share_cta"
   },
+  "addWatchOnlyAccount": "",
+  "@addWatchOnlyAccount": {
+    "type": "text",
+    "description": "watch_only_add"
+  },
+  "addWatchOnlyAccountError": "",
+  "@addWatchOnlyAccountError": {
+    "type": "text",
+    "description": "watch_only_add_error"
+  },
+  "addWatchOnlyAccountSuccess": "",
+  "@addWatchOnlyAccountSuccess": {
+    "type": "text",
+    "description": "watch_only_add_success"
+  },
   "aliases": "Aliases",
   "@aliases": {
     "type": "text",
     "description": "card_details_aliases"
+  },
+  "amountGiftGreaterError": "",
+  "@amountGiftGreaterError": {
+    "type": "text",
+    "description": "gift_split_greater_error"
   },
   "amountMissing": "Mangyaring magpasok ng isang halaga",
   "@amountMissing": {
@@ -79,6 +114,11 @@
   "@asked": {
     "type": "text",
     "description": "home_asked_cta"
+  },
+  "authConfirm": "",
+  "@authConfirm": {
+    "type": "text",
+    "description": "auth_confirm_message"
   },
   "authMethod": "Pamamaraan Authentication",
   "@authMethod": {
@@ -245,10 +285,25 @@
     "type": "text",
     "description": "A text field hint that tells the user to confirm the password"
   },
+  "confirmPinHint": "",
+  "@confirmPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the pin"
+  },
   "connectingHeader": "Kumokonekta",
   "@connectingHeader": {
     "type": "text",
     "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "connectionWarning": "",
+  "@connectionWarning": {
+    "type": "text",
+    "description": "home_connection_warning"
+  },
+  "connectionWarningBody": "",
+  "@connectionWarningBody": {
+    "type": "text",
+    "description": "connection_warning_body"
   },
   "contactAdded": "%1 ay nadagdag sa mga kontak!",
   "@contactAdded": {
@@ -320,6 +375,11 @@
     "type": "text",
     "description": "copy_link"
   },
+  "copyMessage": "",
+  "@copyMessage": {
+    "type": "text",
+    "description": "copy_message"
+  },
   "copySeed": "Kopyahin ang seed",
   "@copySeed": {
     "type": "text",
@@ -334,6 +394,11 @@
   "@createAPasswordHeader": {
     "type": "text",
     "description": "A paragraph that tells the users to create a password."
+  },
+  "created": "",
+  "@created": {
+    "type": "text",
+    "description": "gift_created"
   },
   "createGiftCard": "Gumawa ng Gift Card",
   "@createGiftCard": {
@@ -364,6 +429,11 @@
   "@createPasswordSheetHeader": {
     "type": "text",
     "description": "Prompt user to create a new password"
+  },
+  "createPinHint": "",
+  "@createPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a pin"
   },
   "createQR": "Lumikha ng QR Code",
   "@createQR": {
@@ -410,6 +480,11 @@
     "type": "text",
     "description": "Default account name"
   },
+  "defaultGiftMessage": "",
+  "@defaultGiftMessage": {
+    "type": "text",
+    "description": "default_gift_message"
+  },
   "defaultNewAccountName": "Account %1",
   "@defaultNewAccountName": {
     "type": "text",
@@ -450,6 +525,16 @@
     "type": "text",
     "description": "domain_invalid_name"
   },
+  "donateButton": "",
+  "@donateButton": {
+    "type": "text",
+    "description": "donate_button"
+  },
+  "donateToSupport": "",
+  "@donateToSupport": {
+    "type": "text",
+    "description": "settings_support_donate"
+  },
   "edit": "I-edit",
   "@edit": {
     "type": "text",
@@ -485,6 +570,11 @@
     "type": "text",
     "description": "A text field hint that tells the users to enter their password"
   },
+  "enterSplitAmount": "",
+  "@enterSplitAmount": {
+    "type": "text",
+    "description": "gift_split_amount_hint"
+  },
   "enterUsername": "Magpasok ng username",
   "@enterUsername": {
     "type": "text",
@@ -494,6 +584,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "errorProcessingGiftCard": "",
+  "@errorProcessingGiftCard": {
+    "type": "text",
+    "description": "gift_process_error"
   },
   "eula": "EULA",
   "@eula": {
@@ -505,15 +600,11 @@
     "type": "text",
     "description": "example_card_from"
   },
-  "exampleCardFromKal": "galing sa iba",
-  "@exampleCardFromKal": {},
   "exampleCardIntro": "Maligayang pagdating sa Nautilus. Ganito ang makikita mong transaksyon pag nakatanggap ka ng NANO",
   "@exampleCardIntro": {
     "type": "text",
     "description": "example_card_intro"
   },
-  "exampleCardIntroKal": "Maligayang pagdating sa Kalium. Ganito ang makikita mong transaksyon pag nakatanggap ka ng BANANO",
-  "@exampleCardIntroKal": {},
   "exampleCardLittle": "Kakaunting",
   "@exampleCardLittle": {
     "type": "text",
@@ -529,8 +620,6 @@
     "type": "text",
     "description": "example_card_to"
   },
-  "exampleCardToKal": "para sa iba",
-  "@exampleCardToKal": {},
   "examplePaymentExplainer": "Sa sandaling magpadala o makatanggap ka ng kahilingan sa pagbabayad, lalabas sila dito tulad nito na may kulay at tag ng card na nagpapahiwatig ng katayuan. \n\nGreen ay nagpapahiwatig na ang kahilingan ay binayaran.\nAng Yellow ay nagpapahiwatig ng kahilingan/memo ay hindi binabayaran/nabasa.\nIpinapahiwatig ng Red na ang kahilingan ay hindi nabasa o natanggap.\n\n Ang mga neutral na kulay na card na walang halaga ay mga mensahe lamang.",
   "@examplePaymentExplainer": {
     "type": "text",
@@ -676,6 +765,16 @@
     "type": "text",
     "description": "history_fulfilled"
   },
+  "fundingBannerHeader": "",
+  "@fundingBannerHeader": {
+    "type": "text",
+    "description": "funding_banner_header"
+  },
+  "fundingHeader": "",
+  "@fundingHeader": {
+    "type": "text",
+    "description": "funding_header"
+  },
   "giftAlert": "Mayroon kang regalo!",
   "@giftAlert": {
     "type": "text",
@@ -691,6 +790,16 @@
     "type": "text",
     "description": "gift_amount"
   },
+  "giftCardCreationError": "",
+  "@giftCardCreationError": {
+    "type": "text",
+    "description": "create_gift_error"
+  },
+  "giftCardCreationErrorSent": "",
+  "@giftCardCreationErrorSent": {
+    "type": "text",
+    "description": "gift_generic_error"
+  },
   "giftFrom": "Regalo Mula",
   "@giftFrom": {
     "type": "text",
@@ -705,6 +814,11 @@
   "@giftMessage": {
     "type": "text",
     "description": "gift_message"
+  },
+  "giftProcessSuccess": "",
+  "@giftProcessSuccess": {
+    "type": "text",
+    "description": "gift_process_success"
   },
   "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
   "@giftWarning": {
@@ -726,6 +840,16 @@
     "type": "text",
     "description": "go_to_qr_code"
   },
+  "handoff": "",
+  "@handoff": {
+    "type": "text",
+    "description": "send_handoff"
+  },
+  "handoffSupportedMethodNotFound": "",
+  "@handoffSupportedMethodNotFound": {
+    "type": "text",
+    "description": "handoff_method_not_found"
+  },
   "hide": "Itago",
   "@hide": {
     "type": "text",
@@ -735,6 +859,21 @@
   "@hideAccountHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
+  },
+  "hideAccountsConfirmation": "",
+  "@hideAccountsConfirmation": {
+    "type": "text",
+    "description": "hide accounts confirmation info"
+  },
+  "hideAccountsHeader": "",
+  "@hideAccountsHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "hideEmptyAccounts": "",
+  "@hideEmptyAccounts": {
+    "type": "text",
+    "description": "hide_empty_accounts"
   },
   "home": "Tahanan",
   "@home": {
@@ -791,6 +930,11 @@
     "type": "text",
     "description": "intro_welcome_have_wallet"
   },
+  "imSure": "",
+  "@imSure": {
+    "type": "text",
+    "description": "send_confirm_warning"
+  },
   "instantly": "Agad",
   "@instantly": {
     "type": "text",
@@ -800,16 +944,6 @@
   "@insufficientBalance": {
     "type": "text",
     "description": "send_insufficient_balance"
-  },
-  "intro.new-key": "",
-  "@intro.new-key": {},
-  "intro.not-reviewed-text": "",
-  "@intro.not-reviewed-text": {},
-  "intro.too-long-text": "",
-  "@intro.too-long-text": {},
-  "intro.welcome": "",
-  "@intro.welcome": {
-    "description": "This is a description of a key so that the translator better understands the context"
   },
   "invalidAddress": "Hindi wasto ang Destination Address",
   "@invalidAddress": {
@@ -821,15 +955,20 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
+  "invalidPin": "",
+  "@invalidPin": {
+    "type": "text",
+    "description": "An error indicating a pin has been entered incorrectly"
+  },
+  "iosFundingMessage": "",
+  "@iosFundingMessage": {
+    "type": "text",
+    "description": "ios_funding_message"
+  },
   "iUnderstandTheRisks": "Naiintindihan ko ang risks",
   "@iUnderstandTheRisks": {
     "type": "text",
     "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
-  },
-  "kaliumWallet": "Kalium Wallet",
-  "@kaliumWallet": {
-    "type": "text",
-    "description": "kalium_wallet"
   },
   "language": "Wika",
   "@language": {
@@ -840,11 +979,6 @@
   "@linkCopied": {
     "type": "text",
     "description": "link_copied"
-  },
-  "liveSupportButton": "Support",
-  "@liveSupportButton": {
-    "type": "text",
-    "description": "A button to open up the live support window"
   },
   "loaded": "Na-load",
   "@loaded": {
@@ -886,8 +1020,6 @@
     "type": "text",
     "description": "settings_logout_alert_message"
   },
-  "logoutDetailKal": "Mabubura ang iyong seed at lahat ng Kalium-related na data sa aparato na ito kapag ikaw ay nag-logout. Kapag wala kang back up ng iyong seed, hindi mo na ulit ma-aaccess ang iyong pondo.",
-  "@logoutDetailKal": {},
   "logoutReassurance": "Wala kang dapat ikabahala basta may back up ka ng iyong seed.",
   "@logoutReassurance": {
     "type": "text",
@@ -928,6 +1060,11 @@
     "type": "text",
     "description": "memo_sent_again"
   },
+  "messageCopied": "",
+  "@messageCopied": {
+    "type": "text",
+    "description": "message_copied"
+  },
   "messageHeader": "Mensahe",
   "@messageHeader": {
     "type": "text",
@@ -953,15 +1090,35 @@
     "type": "text",
     "description": "err"
   },
+  "monthlyServerCosts": "",
+  "@monthlyServerCosts": {
+    "type": "text",
+    "description": "support_monthly_costs"
+  },
   "moonpay": "MoonPay",
   "@moonpay": {
     "type": "text",
     "description": "moonpay_ramp"
   },
+  "moreSettings": "",
+  "@moreSettings": {
+    "type": "text",
+    "description": "settings_more"
+  },
   "natricon": "Natricon",
   "@natricon": {
     "type": "text",
     "description": "natricon_settings"
+  },
+  "nautilusWallet": "",
+  "@nautilusWallet": {
+    "type": "text",
+    "description": "nautilus_wallet"
+  },
+  "nearby": "",
+  "@nearby": {
+    "type": "text",
+    "description": "nearby_devices"
   },
   "needVerificationAlert": "Ang tampok na ito ay nangangailangan sa iyo na magkaroon ng mas mahabang kasaysayan ng transaksyon upang maiwasan ang spam.\n\nBilang kahalili, maaari kang magpakita ng isang QR code para ma-scan ng isang tao.",
   "@needVerificationAlert": {
@@ -978,8 +1135,6 @@
     "type": "text",
     "description": "Alternate account intro card"
   },
-  "newAccountIntroKal": "Ito ang iyong bagong account. Pag nakareceive ka ng BANANO, ganito ang makikita mo:",
-  "@newAccountIntroKal": {},
   "newWallet": "Bagong Wallet",
   "@newWallet": {
     "type": "text",
@@ -1030,8 +1185,6 @@
     "type": "text",
     "description": "notification_body"
   },
-  "notificationBodyKal": "Buksan ang Kalium para tingnan ito.",
-  "@notificationBodyKal": {},
   "notificationHeaderSupplement": "Tapikin para mabuksan",
   "@notificationHeaderSupplement": {
     "type": "text",
@@ -1052,8 +1205,6 @@
     "type": "text",
     "description": "notification_title"
   },
-  "notificationTitleKal": "Nakatanggap ng %1 BANANO",
-  "@notificationTitleKal": {},
   "notSent": "hindi ipinadala",
   "@notSent": {
     "type": "text",
@@ -1094,10 +1245,6 @@
     "type": "text",
     "description": "history_opened"
   },
-  "page.home.counter": "",
-  "@page.home.counter": {},
-  "page.home.title": "",
-  "@page.home.title": {},
   "paid": "bayad",
   "@paid": {
     "type": "text",
@@ -1148,12 +1295,15 @@
     "type": "text",
     "description": "pay_request"
   },
-  "receivable": "",
-  "@receivable": {},
   "pickFromList": "Pumili sa listahan",
   "@pickFromList": {
     "type": "text",
     "description": "pick rep from list"
+  },
+  "pinBlank": "",
+  "@pinBlank": {
+    "type": "text",
+    "description": "An error indicating a pin has been entered incorrectly"
   },
   "pinConfirmError": "Hindi magkatugma ang pins",
   "@pinConfirmError": {
@@ -1190,10 +1340,30 @@
     "type": "text",
     "description": "change_representative_pin"
   },
+  "pinsDontMatch": "",
+  "@pinsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a pin has been confirmed incorrectly"
+  },
   "pinSeedBackup": "Ilagay ang pin para tingnan ang wallet seed.",
   "@pinSeedBackup": {
     "type": "text",
     "description": "settings_pin_title"
+  },
+  "plausibleDeniabilityParagraph": "",
+  "@plausibleDeniabilityParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells warns the user this is plausible deniability pin."
+  },
+  "plausibleInfoHeader": "",
+  "@plausibleInfoHeader": {
+    "type": "text",
+    "description": "plausible_info_header"
+  },
+  "plausibleSheetInfo": "",
+  "@plausibleSheetInfo": {
+    "type": "text",
+    "description": "plausible_sheet_info"
   },
   "preferences": "Kagustuhan",
   "@preferences": {
@@ -1395,6 +1565,11 @@
     "type": "text",
     "description": "request_generic_error"
   },
+  "requestFrom": "",
+  "@requestFrom": {
+    "type": "text",
+    "description": "request_title"
+  },
   "requesting": "Humihiling",
   "@requesting": {
     "type": "text",
@@ -1414,6 +1589,16 @@
   "@requestSentButNotReceived": {
     "type": "text",
     "description": "request_sent_again"
+  },
+  "requestSheetInfo": "",
+  "@requestSheetInfo": {
+    "type": "text",
+    "description": "request_sheet_info"
+  },
+  "requestSheetInfoHeader": "",
+  "@requestSheetInfoHeader": {
+    "type": "text",
+    "description": "request_sheet_info_header"
   },
   "requireAPasswordToOpenHeader": "Gumawa ng password para mabuksan ang Nautilus?",
   "@requireAPasswordToOpenHeader": {
@@ -1450,8 +1635,6 @@
     "type": "text",
     "description": "scan_send_instruction_label"
   },
-  "scanInstructionsKal": "I-scan ang Banano \naddress QR code",
-  "@scanInstructionsKal": {},
   "scanQrCode": "I-scan ang QR Code",
   "@scanQrCode": {
     "type": "text",
@@ -1542,8 +1725,6 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
-  "sendAmountConfirmKal": "Magpadala ng %1 Banano?",
-  "@sendAmountConfirmKal": {},
   "sendError": "Nagkaroon ng error. Subukan ulit mamaya.",
   "@sendError": {
     "type": "text",
@@ -1584,6 +1765,11 @@
     "type": "text",
     "description": "send_sheet_info_header"
   },
+  "sendViaNFC": "",
+  "@sendViaNFC": {
+    "type": "text",
+    "description": "send_payment_nfc"
+  },
   "sent": "Naipadala",
   "@sent": {
     "type": "text",
@@ -1603,6 +1789,21 @@
   "@setPasswordSuccess": {
     "type": "text",
     "description": "Setting a Wallet Password was successful"
+  },
+  "setPin": "",
+  "@setPin": {
+    "type": "text",
+    "description": "A button that sets the plausible deniability password"
+  },
+  "setPinSuccess": "",
+  "@setPinSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Pin was successful"
+  },
+  "setPlausibleDeniabilityPin": "",
+  "@setPlausibleDeniabilityPin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
   },
   "settingsHeader": "Mga setting",
   "@settingsHeader": {
@@ -1629,19 +1830,16 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
-  "shareKalium": "I-share ang Kalium",
-  "@shareKalium": {},
-  "shareKaliumText": "Tignan ang Kalium! Opisyal na mobile wallet ng Banano!",
-  "@shareKaliumText": {},
   "shareLink": "Ibahagi ang Link",
   "@shareLink": {
     "type": "text",
     "description": "share_link"
   },
-  "shareNatrium": "",
-  "@shareNatrium": {},
-  "shareNatriumText": "",
-  "@shareNatriumText": {},
+  "shareMessage": "",
+  "@shareMessage": {
+    "type": "text",
+    "description": "share_message"
+  },
   "shareNautilus": "I-share ang Nautilus",
   "@shareNautilus": {
     "type": "text",
@@ -1652,20 +1850,65 @@
     "type": "text",
     "description": "share_extra"
   },
+  "show": "",
+  "@show": {
+    "type": "text",
+    "description": "funding_show"
+  },
+  "showAccountQR": "",
+  "@showAccountQR": {
+    "type": "text",
+    "description": "show_account_qr"
+  },
   "showContacts": "Ipakita ang Contact",
   "@showContacts": {
     "type": "text",
     "description": "contacts_enabled"
+  },
+  "showFunding": "",
+  "@showFunding": {
+    "type": "text",
+    "description": "show_funding_banner"
+  },
+  "showLinkQR": "",
+  "@showLinkQR": {
+    "type": "text",
+    "description": "show_link_qr"
+  },
+  "showQR": "",
+  "@showQR": {
+    "type": "text",
+    "description": "show_qr"
+  },
+  "showUnopenedWarning": "",
+  "@showUnopenedWarning": {
+    "type": "text",
+    "description": "warn_unsafe_send"
   },
   "simplex": "Simplex",
   "@simplex": {
     "type": "text",
     "description": "simplex_ramp"
   },
+  "someone": "",
+  "@someone": {
+    "type": "text",
+    "description": "send_someone"
+  },
+  "splitBy": "",
+  "@splitBy": {
+    "type": "text",
+    "description": "gift_card_split_by"
+  },
   "supportButton": "Support",
   "@supportButton": {
     "type": "text",
     "description": "A button to open up the live support window"
+  },
+  "supportDevelopment": "",
+  "@supportDevelopment": {
+    "type": "text",
+    "description": "settings_support_development"
   },
   "supportTheDeveloper": "Suportahan ang Developer",
   "@supportTheDeveloper": {
@@ -1681,6 +1924,11 @@
   "@systemDefault": {
     "type": "text",
     "description": "settings_default_language_string"
+  },
+  "tapMessageToEdit": "",
+  "@tapMessageToEdit": {
+    "type": "text",
+    "description": "gift_creation_message_edit_hint"
   },
   "tapToHide": "Tapikin para itago",
   "@tapToHide": {
@@ -1727,15 +1975,11 @@
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferCompleteKal": "%1 BANANO ay nalipat na sa iyong Kalium Wallet.",
-  "@transferCompleteKal": {},
   "transferConfirmInfo": "Ang wallet na may balanse na %1 NANO ay na-detect.\n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"
   },
-  "transferConfirmInfoKal": "Ang wallet na may balanse na %1 BANANO ay na-detect.\n",
-  "@transferConfirmInfoKal": {},
   "transferConfirmInfoSecond": "I-tap ang confirm para ilipat ang pondo.\n",
   "@transferConfirmInfoSecond": {
     "type": "text",
@@ -1761,8 +2005,6 @@
     "type": "text",
     "description": "transfer_intro"
   },
-  "transferIntroKal": "Ang prosesong ito ay ang paglipat ng pondo galing sa paper wallet.\n\nI-tap ang \"%1\" button para umpisahan.",
-  "@transferIntroKal": {},
   "transferIntroShort": "Ang prosesong ito ay maglilipat ng mga pondo mula sa isang wallet ng papel papunta sa iyong wallet ng Nautilus.",
   "@transferIntroShort": {
     "type": "text",
@@ -1783,8 +2025,6 @@
     "type": "text",
     "description": "transfer_no_funds_toast"
   },
-  "transferNoFundsKal": "Ang seed na ito ay walang BANANO.",
-  "@transferNoFundsKal": {},
   "transferQrScanError": "Ang QR code na ito ay hindi valid na seed.",
   "@transferQrScanError": {
     "type": "text",
@@ -1795,8 +2035,6 @@
     "type": "text",
     "description": "transfer_qr_scan_hint"
   },
-  "transferQrScanHintKal": "Mag-scan ng Banano \nseed o private key",
-  "@transferQrScanHintKal": {},
   "unacknowledged": "hindi nakikilala",
   "@unacknowledged": {
     "type": "text",
@@ -1820,17 +2058,33 @@
   "unlockBiometrics": "I-Authenticate para ma-unlock",
   "@unlockBiometrics": {
     "type": "text",
-    "description": "unlock_kalium_bio"
+    "description": "unlock_bio"
   },
-  "unlockBiometricsKal": "I-Authenticate para ma-unlock",
-  "@unlockBiometricsKal": {},
   "unlockPin": "Ilagay ang PIN mabuksan",
   "@unlockPin": {
     "type": "text",
-    "description": "unlock_kalium_pin"
+    "description": "unlock_pin"
   },
-  "unlockPinKal": "Ilagay ang PIN mabuksan",
-  "@unlockPinKal": {},
+  "unopenedWarningHeader": "",
+  "@unopenedWarningHeader": {
+    "type": "text",
+    "description": "unopened_warning_header"
+  },
+  "unopenedWarningInfo": "",
+  "@unopenedWarningInfo": {
+    "type": "text",
+    "description": "unopened_warning_info"
+  },
+  "unopenedWarningWarning": "",
+  "@unopenedWarningWarning": {
+    "type": "text",
+    "description": "unopened_warning_warning"
+  },
+  "unopenedWarningWarningHeader": "",
+  "@unopenedWarningWarningHeader": {
+    "type": "text",
+    "description": "unopened_warning_warning_header"
+  },
   "unpaid": "hindi nabayarang",
   "@unpaid": {
     "type": "text",
@@ -1896,10 +2150,20 @@
     "type": "text",
     "description": "user_not_found"
   },
+  "using": "",
+  "@using": {
+    "type": "text",
+    "description": "gift_message_using"
+  },
   "viewDetails": "Tingnan ang detalye",
   "@viewDetails": {
     "type": "text",
     "description": "transaction_details"
+  },
+  "viewTX": "",
+  "@viewTX": {
+    "type": "text",
+    "description": "transaction_transaction"
   },
   "votingWeight": "Timbang ng boto",
   "@votingWeight": {
@@ -1911,13 +2175,26 @@
     "type": "text",
     "description": "settings_logout_alert_title"
   },
+  "watchOnlyAccount": "",
+  "@watchOnlyAccount": {
+    "type": "text",
+    "description": "watch_only_account"
+  },
+  "watchOnlySendDisabled": "",
+  "@watchOnlySendDisabled": {
+    "type": "text",
+    "description": "watch_only_send_disabled"
+  },
   "welcomeText": "Maligayang pagdating sa Nautilus. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet.",
   "@welcomeText": {
     "type": "text",
     "description": "intro_welcome_title"
   },
-  "welcomeTextKal": "Maligayang pagdating sa Kalium. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet.",
-  "@welcomeTextKal": {},
+  "welcomeTextUpdated": "",
+  "@welcomeTextUpdated": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
   "withAddress": "Gamit ang Address",
   "@withAddress": {
     "type": "text",

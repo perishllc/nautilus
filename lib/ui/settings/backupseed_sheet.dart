@@ -6,7 +6,7 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/backupseed_qr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
@@ -83,7 +83,7 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                             child: Column(
                               children: <Widget>[
                                 AutoSizeText(
-                                  CaseChange.toUpperCase(showMnemonic ? AppLocalization.of(context)!.secretPhrase : AppLocalization.of(context)!.seed, context),
+                                  CaseChange.toUpperCase(showMnemonic ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed, context),
                                   style: AppStyles.textStyleHeader(context),
                                   maxLines: 1,
                                   stepGranularity: 0.1,
@@ -147,7 +147,7 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                         context,
                         // Copy Mnemonic Button
                         _mnemonicCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _mnemonicCopied ? AppLocalization.of(context)!.secretPhraseCopied : AppLocalization.of(context)!.secretPhraseCopy,
+                        _mnemonicCopied ? AppLocalization.of(context).secretPhraseCopied : AppLocalization.of(context).secretPhraseCopy,
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       UserDataUtil.setSecureClipboardItem(_mnemonic!.join(" "));
                       setState(() {
@@ -174,7 +174,7 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                         context,
                         // Copy Seed Button
                         _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _seedCopied ? AppLocalization.of(context)!.seedCopiedShort : AppLocalization.of(context)!.copySeed,
+                        _seedCopied ? AppLocalization.of(context).seedCopiedShort : AppLocalization.of(context).copySeed,
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       UserDataUtil.setSecureClipboardItem(_seed);
                       setState(() {
@@ -198,7 +198,7 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                       context,
                       // Show QR Button
                       AppButtonType.PRIMARY_OUTLINE,
-                      AppLocalization.of(context)!.showQR,
+                      AppLocalization.of(context).showQR,
                       Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                     final Widget qrWidget = SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, _seed!));
                     Sheets.showAppHeightEightSheet(

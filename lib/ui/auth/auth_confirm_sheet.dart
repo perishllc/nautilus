@@ -7,7 +7,7 @@ import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
@@ -122,7 +122,7 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
                       children: <Widget>[
                         Text(
                           CaseChange.toUpperCase(
-                              (widget.link.isEmpty) ? AppLocalization.of(context)!.sending : AppLocalization.of(context)!.creatingGiftCard, context),
+                              (widget.link.isEmpty) ? AppLocalization.of(context).sending : AppLocalization.of(context).creatingGiftCard, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -172,7 +172,7 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.to, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).to, context),
                             style: AppStyles.textStyleHeader(context),
                           ),
                         ],
@@ -201,7 +201,7 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
@@ -213,7 +213,7 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
                       //     .replaceAll("%2", StateContainer.of(context).currencyMode);
                       
                       // TODO:
-                      final String authText = AppLocalization.of(context)!.sendAmountConfirm;
+                      final String authText = AppLocalization.of(context).sendAmountConfirm;
 
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
@@ -235,7 +235,7 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.cancel, context),
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -314,7 +314,7 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context, durationMs: 5000);
+      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context, durationMs: 5000);
       Navigator.of(context).pop();
     }
   }
@@ -328,7 +328,7 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: AppLocalization.of(context)!.authConfirm,
+        description: AppLocalization.of(context).authConfirm,
       );
     }));
     if (auth != null && auth) {

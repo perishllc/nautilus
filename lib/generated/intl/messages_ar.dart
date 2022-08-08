@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("الحساب"),
+        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
         "accounts": MessageLookupByLibrary.simpleMessage("الحسابات"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد من أنك قمت بنسخ نسخة احتياطية من العبارة السرية أو مفتاحك الخاص؟"),
@@ -32,6 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("حظر مستخدم"),
         "addContact": MessageLookupByLibrary.simpleMessage("إضافة جهة الاتصال"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("إضافة المفضلة"),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "address": MessageLookupByLibrary.simpleMessage(""),
         "addressCopied": MessageLookupByLibrary.simpleMessage("تم نسخ العنوان"),
         "addressHint": MessageLookupByLibrary.simpleMessage("أدخل العنوان\n"),
         "addressMissing":
@@ -40,9 +46,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "الرجاء إدخال اسم مستخدم أو عنوان"),
         "addressShare": MessageLookupByLibrary.simpleMessage("أنشر العنوان"),
         "aliases": MessageLookupByLibrary.simpleMessage("الأسماء المستعارة"),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("يرجى إدخال المبلغ"),
         "asked": MessageLookupByLibrary.simpleMessage("طلب"),
+        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
         "authMethod": MessageLookupByLibrary.simpleMessage("طريقة المصادقة"),
         "autoImport": MessageLookupByLibrary.simpleMessage("استيراد تلقائي"),
         "autoLockHeader": MessageLookupByLibrary.simpleMessage("قفل آليً"),
@@ -97,7 +105,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور\n"),
+        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("الاتصال"),
+        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded": MessageLookupByLibrary.simpleMessage(
             "تم إضافة %1 إلى جهات الاتصال."),
         "contactExists":
@@ -119,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("نسخ"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("نسخ العنوان"),
         "copyLink": MessageLookupByLibrary.simpleMessage("نسخ الرابط"),
+        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
         "copySeed": MessageLookupByLibrary.simpleMessage("نسخ المفتاح الخاص"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "نسخ عنوان المحفظة إلى الحافظة"),
@@ -136,8 +148,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "كلمة المرور اختيارية ، وسيتم حماية محفظتك برقم التعريف الشخصي أو القياسات الحيوية بغض النظر.\n"),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("خلق"),
+        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
         "createQR":
             MessageLookupByLibrary.simpleMessage("إنشاء رمز الاستجابة السريعة"),
+        "created": MessageLookupByLibrary.simpleMessage(""),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("إنشاء بطاقة هدايا"),
         "currency": MessageLookupByLibrary.simpleMessage("عملة"),
@@ -152,6 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("خطأ فك التشفير!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("الحساب الرئيسي"),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("الحساب %1"),
         "delete": MessageLookupByLibrary.simpleMessage("حذف"),
@@ -166,6 +181,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("رفض"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("اسم مجال غير صالح"),
+        "donateButton": MessageLookupByLibrary.simpleMessage(""),
+        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
         "edit": MessageLookupByLibrary.simpleMessage("تحرير"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "أخفق إنشاء كلمة مرور المحفظة\n"),
@@ -176,22 +193,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("أدخل رسالة"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("ادخل رقمك ادخل رقمك\n"),
+        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
         "enterUserOrAddress":
             MessageLookupByLibrary.simpleMessage("أدخل المستخدم أو العنوان"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("أدخل اسم مستخدم"),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("من شخص ما"),
-        "exampleCardFromKal":
-            MessageLookupByLibrary.simpleMessage("من قرد عشوائي"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
             "مرحبا بكم في نتريوم. بمجرد تلقي NANO ، ستظهر المعاملات كما يلي:"),
-        "exampleCardIntroKal": MessageLookupByLibrary.simpleMessage(
-            "مرحبا بكم في كاليوم. بمجرد تلقي BANANO ، ستظهر المعاملات كما يلي:"),
         "exampleCardLittle": MessageLookupByLibrary.simpleMessage("القليل"),
         "exampleCardLot": MessageLookupByLibrary.simpleMessage("كثيرا من"),
         "exampleCardTo": MessageLookupByLibrary.simpleMessage("إلى شخص ما"),
-        "exampleCardToKal": MessageLookupByLibrary.simpleMessage("لقرد عشوائي"),
         "examplePayRecipient": MessageLookupByLibrary.simpleMessage("@dad"),
         "examplePayRecipientMessage":
             MessageLookupByLibrary.simpleMessage("عيد ميلاد سعيد!"),
@@ -239,25 +253,37 @@ class MessageLookup extends MessageLookupByLibrary {
             "المصادقة على نسخ المفتاح الخاص."),
         "from": MessageLookupByLibrary.simpleMessage("من"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("الوفاء"),
+        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert": MessageLookupByLibrary.simpleMessage("لديك هدية!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("هدية فارغة"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("مبلغ الهدية"),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
         "giftFrom": MessageLookupByLibrary.simpleMessage("هدية من"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "قم بتحميل بطاقة هدايا رقمية باستخدام NANO! قم بتعيين مبلغ ورسالة اختيارية للمستلم ليراها عند فتحه!\n\nبمجرد الإنشاء، ستحصل على رابط يمكنك إرساله إلى أي شخص، والذي عند فتحه سيوزع الأموال تلقائيًا على المستلم بعد تثبيت Nautilus!\n\nإذا كان المستلم مستخدمًا لـ Nautilus بالفعل، فسيتلقى مطالبة بتحويل الأموال إلى حسابه عند فتح الرابط."),
         "giftMessage": MessageLookupByLibrary.simpleMessage("رسالة هدية"),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("عد\n"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("انتقل إلى QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("موافق!"),
+        "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffSupportedMethodNotFound":
+            MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("هيدي"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("إخفاء الحساب؟"),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
+        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
         "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("أنا أدرك المخاطر\n"),
         "ignore": MessageLookupByLibrary.simpleMessage("تجاهل"),
+        "imSure": MessageLookupByLibrary.simpleMessage(""),
         "import": MessageLookupByLibrary.simpleMessage("استيراد"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "يحتوي الرابط الذي نقرت عليه على بعض النانو، هل ترغب في استيراده إلى هذه المحفظة، أو إعادته إلى من أرسله؟"),
@@ -280,10 +306,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("العنوان المدخل غير صحيح"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("كلمة المرور خاطئ\n"),
-        "kaliumWallet": MessageLookupByLibrary.simpleMessage("محفظة  كاليوم"),
+        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("تم نسخ الرابط"),
-        "liveSupportButton": MessageLookupByLibrary.simpleMessage("مساعدة"),
         "loaded": MessageLookupByLibrary.simpleMessage("لوديد"),
         "loadedInto": MessageLookupByLibrary.simpleMessage("تم تحميله في"),
         "lockAppSetting":
@@ -296,8 +322,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("هل أنت متأكد؟"),
         "logoutDetail": MessageLookupByLibrary.simpleMessage(
             "خروجك من حساب نتريوم سوف يحذف البيانات من الجهاز. إذا مفتاحك الخاص غير محفوظ في مكان أمن، سوف تفقد رصيدك نهائيا"),
-        "logoutDetailKal": MessageLookupByLibrary.simpleMessage(
-            "خروجك من حساب كاليوم سوف يحذف البيانات من الجهاز. إذا مفتاحك الخاص غير محفوظ في مكان أمن، سوف تفقد رصيدك نهائيا."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "ليس هناك خشية إذا قمت بحفض نسخة للمفتاح الخاص"),
         "manage": MessageLookupByLibrary.simpleMessage("إدارة"),
@@ -311,6 +335,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "إعادة إرسال المذكرة! إذا كان لا يزال غير معترف به، فقد يكون جهاز المستلم غير متصل."),
+        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
         "messageHeader": MessageLookupByLibrary.simpleMessage("رسالة"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "الحد الأدنى لمبلغ الإرسال هو %1 %2"),
@@ -319,16 +344,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("عبارة تذكيرية"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "العبارة السرية قد تحتوي فقط على 24 كلمة"),
+        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
+        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
+        "nearby": MessageLookupByLibrary.simpleMessage(""),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "تتطلب هذه الميزة أن يكون لديك سجل معاملات أطول لمنع البريد العشوائي.\n\nبدلاً من ذلك، يمكنك إظهار رمز الاستجابة السريعة لشخص ما للمسح الضوئي."),
         "needVerificationAlertHeader":
             MessageLookupByLibrary.simpleMessage("مطلوب التحقق"),
         "newAccountIntro": MessageLookupByLibrary.simpleMessage(
             "هذا هو حسابك الجديد بمجرد تلقي NANO ، ستظهر المعاملات كما يلي:"),
-        "newAccountIntroKal": MessageLookupByLibrary.simpleMessage(
-            "هذا هو حسابك الجديد بمجرد تلقي BANANO ، ستظهر المعاملات كما يلي:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("محفظة جديدة"),
         "nextButton": MessageLookupByLibrary.simpleMessage("التالى"),
         "no": MessageLookupByLibrary.simpleMessage("لا"),
@@ -344,16 +371,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "notSent": MessageLookupByLibrary.simpleMessage("لم يتم إرسالها"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "أفتح نتريوم للكشف عن هذا التعامل"),
-        "notificationBodyKal": MessageLookupByLibrary.simpleMessage(
-            "أفتح كاليوم للكشف عن هذا التعامل"),
         "notificationHeaderSupplement":
             MessageLookupByLibrary.simpleMessage("اضغط للفتح"),
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "لكي تعمل هذه الميزة بشكل صحيح، يجب تمكين الإشعارات."),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("تم استلام %1 NANO"),
-        "notificationTitleKal":
-            MessageLookupByLibrary.simpleMessage("تم استلام %1 BANANO"),
         "notifications": MessageLookupByLibrary.simpleMessage("تنبيهات"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("نيانيكون"),
         "off": MessageLookupByLibrary.simpleMessage("غلق"),
@@ -380,6 +403,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "طلب شخص ما الدفع منك! تحقق من صفحة المدفوعات لمزيد من المعلومات."),
         "payments": MessageLookupByLibrary.simpleMessage("المدفوعات"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("اختيار من قائمة"),
+        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("رمز الPIN غير مطابق"),
         "pinConfirmTitle":
@@ -394,6 +418,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "أدخل رمز الPIN لتغير المندوب"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "أدخل الPIN للنسخ المفتاح الخاص"),
+        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleDeniabilityParagraph":
+            MessageLookupByLibrary.simpleMessage(""),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences": MessageLookupByLibrary.simpleMessage("الاختيارات"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("شراء نانو"),
@@ -451,11 +480,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("طلب %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "فشل الطلب: لا يبدو أن هذا المستخدم قد تم تثبيت Nautilus أو أنه تم تعطيل الإشعارات."),
+        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
         "requestPayment": MessageLookupByLibrary.simpleMessage("طلب الدفع"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "خطأ في إرسال طلب الدفع، قد يكون جهاز المستلم غير متصل أو غير متوفر."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "إعادة إرسال الطلب! إذا كان لا يزال غير معترف به، فقد يكون جهاز المستلم غير متصل."),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
         "requested": MessageLookupByLibrary.simpleMessage("طلب"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("طلب من"),
         "requesting": MessageLookupByLibrary.simpleMessage("طلب"),
@@ -471,8 +503,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "يبدو أن جهازك \"rooted\" أو \"jailbroken\" أو تم تعديله بطريقة تعرض الأمان للخطر. يرجى إعادة ضبط جهازك إلى حالته الأصلية قبل المتابعة.\n"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
-            "مسح \nعنوان رمز الاستجابة السريعة"),
-        "scanInstructionsKal": MessageLookupByLibrary.simpleMessage(
             "مسح \nعنوان رمز الاستجابة السريعة"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("مسح رمز الاستجابة السريعة"),
@@ -505,8 +535,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("إرسال"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("أرسل %1 NANO"),
-        "sendAmountConfirmKal":
-            MessageLookupByLibrary.simpleMessage("أرسل %1 BANANO"),
         "sendError":
             MessageLookupByLibrary.simpleMessage("يوجد خطأ. حاول لاحقاً."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("أرسل من"),
@@ -520,6 +548,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "أرسل أو اطلب دفعة، مع الرسائل المشفرة من النهاية إلى النهاية!\n\nلن يتم قبول طلبات الدفع والمذكرات والرسائل إلا من قبل مستخدمي nautilus الآخرين.\n\nلا تحتاج إلى اسم مستخدم لإرسال أو استقبال طلبات الدفع، ويمكنك استخدامها لحفظ السجلات الخاصة بك حتى لو لم تستخدم nautilus."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("إرسال معلومات الورقة"),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
         "sending": MessageLookupByLibrary.simpleMessage("إرسال"),
         "sent": MessageLookupByLibrary.simpleMessage("تم الارسال"),
         "sentTo": MessageLookupByLibrary.simpleMessage("تم الإرسال إلى"),
@@ -527,6 +556,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إنشاء كلمة مرور\n"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "تم إنشاء كلمة مرور المحفظة بنجاح\n"),
+        "setPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("إنشاء كلمة مرور المحفظة\n"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -536,19 +568,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("تحميل من المحفظة الورقية"),
         "shareLink": MessageLookupByLibrary.simpleMessage("مشاركة الرابط"),
+        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("شارك نتريوم"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "راجع نتريوم! محفظة نتريوم الرسمية للهاتف"),
+        "show": MessageLookupByLibrary.simpleMessage(""),
+        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("إظهار جهات الاتصال"),
+        "showFunding": MessageLookupByLibrary.simpleMessage(""),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
+        "showQR": MessageLookupByLibrary.simpleMessage(""),
+        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("البسيط"),
+        "someone": MessageLookupByLibrary.simpleMessage(""),
+        "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
+        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("دعم المطور"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("التبديل إلى المفتاح الخاص"),
         "systemDefault":
             MessageLookupByLibrary.simpleMessage("النظام الافتراضي"),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
         "tapToHide": MessageLookupByLibrary.simpleMessage("إضغط للاخفاء"),
         "tapToReveal": MessageLookupByLibrary.simpleMessage("اضغط للكشف"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("مظهر"),
@@ -591,8 +634,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("مصادقة لفتح نتريوم"),
         "unlockPin":
             MessageLookupByLibrary.simpleMessage("أدخل الPIN لفتح نتريوم"),
-        "unlockPinKal":
-            MessageLookupByLibrary.simpleMessage("أدخل الPIN لفتح كاليوم"),
+        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarningHeader":
+            MessageLookupByLibrary.simpleMessage(""),
         "unpaid": MessageLookupByLibrary.simpleMessage("غير مدفوع"),
         "unread": MessageLookupByLibrary.simpleMessage("غير مقروء"),
         "uptime": MessageLookupByLibrary.simpleMessage("مدة التشغيل"),
@@ -616,13 +662,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "أسماء مستخدمي Nautilus هي خدمة مركزية تقدمها Nano.to"),
+        "using": MessageLookupByLibrary.simpleMessage(""),
         "viewDetails": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
+        "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("وزن التصويت"),
         "warning": MessageLookupByLibrary.simpleMessage("تحذير"),
+        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "أهلا بك في نتريوم. لتبدأ، إحدث محفظة أو إجلب محفظة موجودة."),
-        "welcomeTextKal": MessageLookupByLibrary.simpleMessage(
-            "أهلا بك في كاليوم. لتبدأ، إحدث محفظة أو إجلب محفظة موجودة."),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
         "withAddress": MessageLookupByLibrary.simpleMessage("مع العنوان"),
         "withMessage": MessageLookupByLibrary.simpleMessage("مع رسالة"),
         "xMinute": MessageLookupByLibrary.simpleMessage("بعد %1 دقيقة"),

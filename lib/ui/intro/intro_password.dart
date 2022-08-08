@@ -5,7 +5,7 @@ import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -91,7 +91,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                         ),
                         alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
-                          AppLocalization.of(context)!.createAPasswordHeader,
+                          AppLocalization.of(context).createAPasswordHeader,
                           maxLines: 3,
                           stepGranularity: 0.5,
                           style: AppStyles.textStyleHeaderColored(context),
@@ -101,7 +101,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                       Container(
                         margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                         child: AutoSizeText(
-                          AppLocalization.of(context)!.passwordWillBeRequiredToOpenParagraph,
+                          AppLocalization.of(context).passwordWillBeRequiredToOpenParagraph,
                           style: AppStyles.textStyleParagraph(context),
                           maxLines: 5,
                           stepGranularity: 0.5,
@@ -142,7 +142,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                                       }
                                     }
                                   },
-                                  hintText: AppLocalization.of(context)!.createPasswordHint,
+                                  hintText: AppLocalization.of(context).createPasswordHint,
                                   keyboardType: TextInputType.text,
                                   obscureText: true,
                                   textAlign: TextAlign.center,
@@ -185,7 +185,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                                       }
                                     }
                                   },
-                                  hintText: AppLocalization.of(context)!.confirmPasswordHint,
+                                  hintText: AppLocalization.of(context).confirmPasswordHint,
                                   keyboardType: TextInputType.text,
                                   obscureText: true,
                                   textAlign: TextAlign.center,
@@ -219,7 +219,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                     Row(
                       children: <Widget>[
                         // Next Button
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.nextButton, Dimens.BUTTON_TOP_DIMENS,
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).nextButton, Dimens.BUTTON_TOP_DIMENS,
                             onPressed: () async {
                           await submitAndEncrypt();
                         }),
@@ -228,7 +228,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                     Row(
                       children: <Widget>[
                         // Go Back Button
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
                             onPressed: () {
                           Navigator.of(context).pop();
                         }),
@@ -246,13 +246,13 @@ class _IntroPasswordState extends State<IntroPassword> {
     if (createPasswordController!.text.isEmpty || confirmPasswordController!.text.isEmpty) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context)!.passwordBlank;
+          passwordError = AppLocalization.of(context).passwordBlank;
         });
       }
     } else if (createPasswordController!.text != confirmPasswordController!.text) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context)!.passwordsDontMatch;
+          passwordError = AppLocalization.of(context).passwordsDontMatch;
         });
       }
     } else if (widget.seed != null) {
@@ -283,7 +283,7 @@ class _IntroPasswordState extends State<IntroPassword> {
     }
   }
 
-  void _pinEnteredCallback(String pin) async {
+  Future<void> _pinEnteredCallback(String pin) async {
     await sl.get<Vault>().writePin(pin);
     PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
     StateContainer.of(context).requestSubscribe();

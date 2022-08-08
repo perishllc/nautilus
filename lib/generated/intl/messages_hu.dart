@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
         "accounts": MessageLookupByLibrary.simpleMessage("Accounts"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Are you sure that you\'ve backed up your secret phrase or seed?"),
@@ -35,6 +37,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Kontakt Hozzáadása"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Kedvenc hozzáadása"),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "address": MessageLookupByLibrary.simpleMessage(""),
         "addressCopied": MessageLookupByLibrary.simpleMessage("Cím Másolva"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Adja meg a címet"),
         "addressMissing":
@@ -43,9 +49,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kérjük, adja meg felhasználónevét vagy címét"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Megosztás"),
         "aliases": MessageLookupByLibrary.simpleMessage("Álnevek"),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Adjon meg egy összeget"),
         "asked": MessageLookupByLibrary.simpleMessage("Kérdezte"),
+        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("Hitelesítési Módszer"),
         "autoImport":
@@ -101,7 +109,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Megerősít"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Confirm the password"),
+        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Connecting"),
+        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded": MessageLookupByLibrary.simpleMessage(
             "%1 hozzá lett adva a kontaktokhoz!"),
         "contactExists":
@@ -124,6 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Cím Másolása"),
         "copyLink": MessageLookupByLibrary.simpleMessage("Link másolása"),
+        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
         "copySeed": MessageLookupByLibrary.simpleMessage("Seed Másolása"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Másolja a pénztárca címét a vágólapra"),
@@ -141,7 +153,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password is optional, and your wallet will be protected with your PIN or biometrics regardless."),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Hozzon létre"),
+        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
         "createQR": MessageLookupByLibrary.simpleMessage("QR-kód létrehozása"),
+        "created": MessageLookupByLibrary.simpleMessage(""),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Ajándékkártya Létrehozása"),
         "currency": MessageLookupByLibrary.simpleMessage("Pénznem"),
@@ -156,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Dekódolási hiba!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Main Account"),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Törlés"),
@@ -170,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("Elutasítja"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Érvénytelen domain név"),
+        "donateButton": MessageLookupByLibrary.simpleMessage(""),
+        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
         "edit": MessageLookupByLibrary.simpleMessage("szerkesztése"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
@@ -183,23 +200,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Írja be az üzenetet"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
+        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage(
             "Felhasználó vagy cím megadása"),
         "enterUsername": MessageLookupByLibrary.simpleMessage(
             "Adjon meg egy felhasználónevet"),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("valakitől"),
-        "exampleCardFromKal":
-            MessageLookupByLibrary.simpleMessage("Egy random majomtól"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
             "Üdvözöllek a Nautilusban! Így fogod látni a tranzakcióid, amikor kapsz NANO-t."),
-        "exampleCardIntroKal": MessageLookupByLibrary.simpleMessage(
-            "Üdvözöllek a Kaliumban! Így fogod látni a tranzakcióid, amikor kapsz BANANO-t."),
         "exampleCardLittle": MessageLookupByLibrary.simpleMessage("Egy kevés"),
         "exampleCardLot": MessageLookupByLibrary.simpleMessage("Rengeteg"),
         "exampleCardTo": MessageLookupByLibrary.simpleMessage("valakinek"),
-        "exampleCardToKal":
-            MessageLookupByLibrary.simpleMessage("Egy random majomnak"),
         "examplePayRecipient": MessageLookupByLibrary.simpleMessage("@dad"),
         "examplePayRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Boldog születésnapot!"),
@@ -247,25 +260,37 @@ class MessageLookup extends MessageLookupByLibrary {
             "Erősítsd meg az ujjlenyomatoddal, hogy szeretnéd elmenteni a seeded."),
         "from": MessageLookupByLibrary.simpleMessage("tól től"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("teljesítette"),
+        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Van egy ajándékod!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Üres ajándék"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Ajándék összege"),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Ajándék"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Töltsön be egy digitális ajándékkártyát NANO segítségével! Állítson be egy összeget, és választható üzenetet a címzett számára, hogy lássa, mikor nyitja meg!\n\nMiután létrehozta, kap egy linket, amelyet bárkinek elküldhet, amely megnyitásakor automatikusan elosztja a pénzeszközöket a címzettnek a Nautilus telepítése után!\n\nHa a címzett már Nautilus felhasználó, akkor a hivatkozás megnyitásakor felszólítást kap arra, hogy utalja át a pénzt számlájára"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Ajándék üzenet"),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Go Back"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Ugrás a QR-re"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Got It!"),
+        "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffSupportedMethodNotFound":
+            MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("elrejtése"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Hide Account?"),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
+        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
         "home": MessageLookupByLibrary.simpleMessage("Otthon"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
         "ignore": MessageLookupByLibrary.simpleMessage("figyelmen kívül"),
+        "imSure": MessageLookupByLibrary.simpleMessage(""),
         "import": MessageLookupByLibrary.simpleMessage("Import"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "A linkre kattintott tartalmaz néhány nano-t, szeretné importálni ebbe a pénztárcába, vagy visszatéríteni annak, aki elküldte?"),
@@ -288,10 +313,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidAddress": MessageLookupByLibrary.simpleMessage("Helytelen Cím"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),
-        "kaliumWallet": MessageLookupByLibrary.simpleMessage("Nautilus Wallet"),
+        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
         "language": MessageLookupByLibrary.simpleMessage("Nyelv"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("Link másolva"),
-        "liveSupportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "loaded": MessageLookupByLibrary.simpleMessage("Betöltött"),
         "loadedInto": MessageLookupByLibrary.simpleMessage("Betöltve"),
         "lockAppSetting":
@@ -304,8 +329,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Biztos, hogy kijelentkezel?"),
         "logoutDetail": MessageLookupByLibrary.simpleMessage(
             "Ha kijelentkezel, elvész a beírt seeded, és minden Nautilushoz kapcsolódó adatod az eszközről. Ha nem őrizted meg a seeded, nem fogsz tudni hozzáférni a tőkédhez."),
-        "logoutDetailKal": MessageLookupByLibrary.simpleMessage(
-            "Ha kijelentkezel, elvész a beírt seeded, és minden Kaliumhoz kapcsolódó adatod az eszközről. Ha nem őrizted meg a seeded, nem fogsz tudni hozzáférni a tőkédhez."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Ha elmentetted a seeded, akkor nem lehet baj."),
         "manage": MessageLookupByLibrary.simpleMessage("Kezelés"),
@@ -319,6 +342,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Feljegyzés újra elküldve! Ha még mindig nem ismeri fel, előfordulhat, hogy a címzett készüléke offline állapotban van."),
+        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Üzenet"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "A minimális küldési összeg:% 1% 2"),
@@ -328,15 +352,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mnemonic Phrase"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Secret phrase may only contain 24 words"),
+        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
+        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
+        "nearby": MessageLookupByLibrary.simpleMessage(""),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Ez a funkció megköveteli, hogy hosszabb tranzakciós előzményekkel rendelkezzen a spam megelőzése érdekében.\n\nAlternatív megoldásként, megmutathat egy QR-kódot, amelyet valaki beolvashat."),
         "needVerificationAlertHeader":
             MessageLookupByLibrary.simpleMessage("Ellenőrzés szükséges"),
         "newAccountIntro": MessageLookupByLibrary.simpleMessage(
             "This is your new account. Once you receive NANO, transactions will show up like this:"),
-        "newAccountIntroKal": MessageLookupByLibrary.simpleMessage(""),
         "newWallet": MessageLookupByLibrary.simpleMessage("Új Tárca"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
         "no": MessageLookupByLibrary.simpleMessage("Nem"),
@@ -353,16 +380,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "notSent": MessageLookupByLibrary.simpleMessage("nem küldött"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Nyisd meg a Nautilusot, hogy megnézhesd a tranzakciót."),
-        "notificationBodyKal": MessageLookupByLibrary.simpleMessage(
-            "Nyisd meg a Kaliumot, hogy megnézhesd a tranzakciót."),
         "notificationHeaderSupplement":
             MessageLookupByLibrary.simpleMessage("Koppints a megnyitáshoz"),
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "Annak érdekében, hogy ez a funkció megfelelően működjön, az értesítéseket engedélyezni kell"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Kaptál %1 NANO-t"),
-        "notificationTitleKal":
-            MessageLookupByLibrary.simpleMessage("Kaptál %1 BANANO-t"),
         "notifications": MessageLookupByLibrary.simpleMessage("Értesítések"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Ki"),
@@ -391,6 +414,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payments": MessageLookupByLibrary.simpleMessage("Fizetések"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Pick From a List"),
+        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("PIN-kódok nem egyeznek"),
         "pinConfirmTitle":
@@ -405,6 +429,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Írd be a PIN-kódod, hogy megváltoztasd a Képviselőd"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Írd be a PIN-kódod, hogy megjelenjen a seeded."),
+        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleDeniabilityParagraph":
+            MessageLookupByLibrary.simpleMessage(""),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferenciák"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Adatvédelmi Szabályzat"),
@@ -467,12 +496,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("% 1% 2 kérés"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Kérelem sikertelen: Úgy tűnik, hogy a felhasználó nem telepítette a Nautilust, vagy letiltotta az értesítéseket."),
+        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("Fizetés kérése"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "Hiba történt a fizetési kérelem elküldésekor, előfordulhat, hogy a címzett eszköze offline vagy nem érhető el."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Kérés újra elküldve! Ha még mindig nem ismeri fel, előfordulhat, hogy a címzett készüléke offline állapotban van."),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
         "requested": MessageLookupByLibrary.simpleMessage("Kért"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("Kért Tól"),
         "requesting": MessageLookupByLibrary.simpleMessage("Kérő"),
@@ -489,8 +521,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding."),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Olvass be QR kóddal egy Nano \ncímet"),
-        "scanInstructionsKal": MessageLookupByLibrary.simpleMessage(
-            "Olvass be QR kóddal egy Banano \ncímet"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("Olvasd be a QR Kódot"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Bármit kereshet"),
@@ -520,8 +550,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Küldés"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("%1 Nano küldése?"),
-        "sendAmountConfirmKal":
-            MessageLookupByLibrary.simpleMessage("%1 Banano küldése?"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Hiba történt. Próbálkozz később."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Küldés Innen"),
@@ -535,12 +563,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fizetés küldése vagy kérése, End to End to End Titkosított üzenetekkel!\n\nFizetési kérelmek, emlékeztetők, és az üzeneteket csak más nautilus felhasználók fogadják el.\n\nA fizetési kérelmek küldéséhez vagy fogadásához nem kell felhasználónévvel rendelkeznie, és akkor is felhasználhatja őket saját nyilvántartására, még akkor is, ha nem használják a nautilust."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Adatlap küldése"),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
         "sending": MessageLookupByLibrary.simpleMessage("Küldés folyamatban"),
         "sent": MessageLookupByLibrary.simpleMessage("Küldött"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Elküldve ide"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
+        "setPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Set Wallet Password"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -550,19 +582,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Load from Paper Wallet"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Link megosztása"),
+        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
         "shareNautilus":
             MessageLookupByLibrary.simpleMessage("Oszd meg a Nautilusot"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Próbáld ki a Nautilusot, a Nano hivatalos Androidos tárcáját!"),
+        "show": MessageLookupByLibrary.simpleMessage(""),
+        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Névjegyek megjelenítése"),
+        "showFunding": MessageLookupByLibrary.simpleMessage(""),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
+        "showQR": MessageLookupByLibrary.simpleMessage(""),
+        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "someone": MessageLookupByLibrary.simpleMessage(""),
+        "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
+        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Támogatja a fejlesztőt"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Switch to Seed"),
         "systemDefault":
             MessageLookupByLibrary.simpleMessage("Rendszer alapértelmezett"),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
         "tapToHide": MessageLookupByLibrary.simpleMessage("Tap to hide"),
         "tapToReveal": MessageLookupByLibrary.simpleMessage("Tap to reveal"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Téma"),
@@ -607,8 +650,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hitelesítés Szükséges a Nautilusba való bejelentkezéshez"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "Írd be a PIN-t a Bejelentkezéshez a Nautilusba"),
-        "unlockPinKal": MessageLookupByLibrary.simpleMessage(
-            "Írd be a PIN-t a Bejelentkezéshez a Kaliumba"),
+        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarningHeader":
+            MessageLookupByLibrary.simpleMessage(""),
         "unpaid": MessageLookupByLibrary.simpleMessage("kifizetetlen"),
         "unread": MessageLookupByLibrary.simpleMessage("olvasatlan"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
@@ -632,14 +678,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Felhasználónév nem elérhető"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "A Nautilus felhasználónevek a Nano.to által nyújtott központosított szolgáltatás"),
+        "using": MessageLookupByLibrary.simpleMessage(""),
         "viewDetails":
             MessageLookupByLibrary.simpleMessage("Részletek Mutatása"),
+        "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Voting Weight"),
         "warning": MessageLookupByLibrary.simpleMessage("FIGYELEM"),
+        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Üdvözöllek a Nautilusban! Hozz létre egy új tárcát, vagy importálj egy létezőt."),
-        "welcomeTextKal": MessageLookupByLibrary.simpleMessage(
-            "Üdvözöllek a Kaliumban! Hozz létre egy új tárcát, vagy importálj egy létezőt."),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
         "withAddress": MessageLookupByLibrary.simpleMessage("Címmel"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Üzenettel"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 perc után"),

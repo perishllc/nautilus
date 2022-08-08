@@ -4,7 +4,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
@@ -19,7 +19,7 @@ class AppDialogs {
   static void showConfirmDialog(
       BuildContext context, String title, String content, String buttonText, Function onPressed,
       {String? cancelText, Function? cancelAction}) {
-    cancelText ??= AppLocalization.of(context)!.cancel.toUpperCase();
+    cancelText ??= AppLocalization.of(context).cancel.toUpperCase();
 
     showAppDialog(
       context: context,
@@ -87,7 +87,7 @@ class AppDialogs {
           actions: <Widget>[
             TextButton(
               child: Text(
-                AppLocalization.of(context)!.close.toUpperCase(),
+                AppLocalization.of(context).close.toUpperCase(),
                 style: AppStyles.textStyleDialogButtonText(context),
               ),
               onPressed: () {
@@ -175,7 +175,7 @@ class AppDialogs {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(AppLocalization.of(context)!.changeLog,
+                    child: Text(AppLocalization.of(context).changeLog,
                         textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
@@ -257,7 +257,7 @@ class AppDialogs {
                           });
                         },
                         child: Text(
-                          AppLocalization.of(context)!.supportTheDeveloper,
+                          AppLocalization.of(context).supportTheDeveloper,
                           style: TextStyle(
                             fontSize: AppFontSizes.medium,
                             color: StateContainer.of(context).curTheme.primary,
@@ -267,7 +267,7 @@ class AppDialogs {
                       TextButton(
                         key: const Key("changelog_dismiss_button"),
                         onPressed: () => Navigator.of(context).pop(),
-                        child: Text(AppLocalization.of(context)!.dismiss,
+                        child: Text(AppLocalization.of(context).dismiss,
                             style: AppStyles.textStyleDialogOptions(context)),
                       ),
                     ]),

@@ -9,7 +9,7 @@ import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -89,16 +89,16 @@ class AccountDetailsSheet {
                                             onPressed: () {
                                               AppDialogs.showConfirmDialog(
                                                   context,
-                                                  AppLocalization.of(context)!.hideAccountHeader,
-                                                  AppLocalization.of(context)!.removeAccountText.replaceAll("%1", AppLocalization.of(context)!.addAccount),
-                                                  CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () {
+                                                  AppLocalization.of(context).hideAccountHeader,
+                                                  AppLocalization.of(context).removeAccountText.replaceAll("%1", AppLocalization.of(context).addAccount),
+                                                  CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                                                 // Remove account
                                                 deleted = true;
                                                 sl.get<DBHelper>().deleteAccount(account).then((int id) {
                                                   EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account, deleted: true));
                                                   Navigator.of(context).pop();
                                                 });
-                                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
+                                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
                                             },
                                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
                                           )),
@@ -109,7 +109,7 @@ class AccountDetailsSheet {
                                   child: Column(
                                     children: <Widget>[
                                       AutoSizeText(
-                                        CaseChange.toUpperCase(AppLocalization.of(context)!.account, context),
+                                        CaseChange.toUpperCase(AppLocalization.of(context).account, context),
                                         style: AppStyles.textStyleHeader(context),
                                         textAlign: TextAlign.center,
                                         maxLines: 1,
@@ -209,7 +209,7 @@ class AccountDetailsSheet {
                                         context,
                                         // Share Address Button
                                         _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                                        _addressCopied ? AppLocalization.of(context)!.addressCopied : AppLocalization.of(context)!.copyAddress,
+                                        _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
                                         Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                                       Clipboard.setData(ClipboardData(text: account.address));
                                       setState(() {
@@ -231,7 +231,7 @@ class AccountDetailsSheet {
                                   children: <Widget>[
                                     // Close Button
                                     AppButton.buildAppButton(
-                                        context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                                        context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                                       Navigator.pop(context);
                                     }),
                                   ],

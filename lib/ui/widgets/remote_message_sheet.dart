@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -57,7 +57,7 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                         children: <Widget>[
                           // Header
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.messageHeader, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).messageHeader, context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,
@@ -162,7 +162,7 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                 if (widget.alert!.link != null)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.readMore, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).readMore, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         Uri uri = Uri.parse(widget.alert!.link!);
                         if (await canLaunchUrl(uri)) {
@@ -176,7 +176,7 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                 if (widget.hasDismissButton)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.dismiss, Dimens.BUTTON_BOTTOM_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).dismiss, Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () {
                         sl.get<SharedPrefsUtil>().dismissAlert(widget.alert!);
                         StateContainer.of(context).updateActiveAlert(null, widget.alert);
@@ -187,7 +187,7 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                 else
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () {
                         Navigator.pop(context);
                       }),

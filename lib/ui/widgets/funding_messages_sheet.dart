@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
@@ -60,7 +60,7 @@ class _FundingMessagesSheetStateState extends State<FundingMessagesSheet> {
                         children: <Widget>[
                           // Header
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.fundingHeader, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).fundingHeader, context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,
@@ -175,7 +175,7 @@ class _FundingMessagesSheetStateState extends State<FundingMessagesSheet> {
             end: 12,
             bottom: 20,
           ),
-          child: Text(AppLocalization.of(context)!.iosFundingMessage),
+          child: Text(AppLocalization.of(context).iosFundingMessage),
         ),
       );
     }

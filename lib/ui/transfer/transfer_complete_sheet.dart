@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
@@ -59,7 +59,7 @@ class AppTransferCompleteSheet {
                               alignment: AlignmentDirectional.centerStart,
                               margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                               child: Text(
-                                AppLocalization.of(context)!.transferComplete.replaceAll("%1", transferAmount).replaceAll("%2", StateContainer.of(context).currencyMode),
+                                AppLocalization.of(context).transferComplete.replaceAll("%1", transferAmount).replaceAll("%2", StateContainer.of(context).currencyMode),
                                 style: AppStyles.textStyleParagraphSuccess(context),
                                 textAlign: TextAlign.start,
                               )),
@@ -67,7 +67,7 @@ class AppTransferCompleteSheet {
                               alignment: AlignmentDirectional.centerStart,
                               margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                               child: Text(
-                                AppLocalization.of(context)!.transferClose,
+                                AppLocalization.of(context).transferClose,
                                 style: AppStyles.textStyleParagraph(context),
                                 textAlign: TextAlign.start,
                               )),
@@ -80,7 +80,7 @@ class AppTransferCompleteSheet {
                         AppButton.buildAppButton(
                           context,
                           AppButtonType.SUCCESS_OUTLINE,
-                          AppLocalization.of(context)!.close.toUpperCase(),
+                          AppLocalization.of(context).close.toUpperCase(),
                           Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () {
                             Navigator.of(context).pop();

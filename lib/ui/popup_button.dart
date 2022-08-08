@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
@@ -21,10 +21,10 @@ import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class AppPopupButton extends StatefulWidget {
   @override
-  _AppPopupButtonState createState() => _AppPopupButtonState();
+  AppPopupButtonState createState() => AppPopupButtonState();
 }
 
-class _AppPopupButtonState extends State<AppPopupButton> {
+class AppPopupButtonState extends State<AppPopupButton> {
   double scanButtonSize = 0;
   double popupMarginBottom = 0;
   bool isScrolledUpEnough = false;
@@ -49,19 +49,19 @@ class _AppPopupButtonState extends State<AppPopupButton> {
     final dynamic? scanResult = await Navigator.pushNamed(context, '/before_scan_screen');
     if (!mounted) return;
     if (scanResult == null) {
-      UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
     } else if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
       if (scanResult == QRScanErrs.PERMISSION_DENIED) {
-        UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidPermissions, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
       } else if (scanResult == QRScanErrs.UNKNOWN_ERROR) {
-        UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
       }
       return;
     } else if (scanResult is Address) {
       // Is a URI
       final Address address = scanResult;
       if (address.address == null) {
-        UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
       } else {
         // See if this address belongs to a contact
         final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
@@ -71,7 +71,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
         bool sufficientBalance = false;
         if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
           UIUtil.showSnackbar(
-              AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
+              AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
         } else if (amountBigInt != null && StateContainer.of(context).wallet!.accountBalance > amountBigInt) {
           sufficientBalance = true;
         }
@@ -98,10 +98,10 @@ class _AppPopupButtonState extends State<AppPopupButton> {
       final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount!);
       if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
         UIUtil.showSnackbar(
-            AppLocalization.of(context)!.minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
+            AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
         return;
       } else if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-        UIUtil.showSnackbar(AppLocalization.of(context)!.insufficientBalance, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
         return;
       }
 
@@ -122,7 +122,7 @@ class _AppPopupButtonState extends State<AppPopupButton> {
           ));
     } else {
       // something went wrong, show generic error:
-      UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
     }
   }
 
@@ -245,11 +245,11 @@ class _AppPopupButtonState extends State<AppPopupButton> {
                   Sheets.showAppHeightNineSheet(context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency));
                 }
                 if (disableSend) {
-                  UIUtil.showSnackbar(AppLocalization.of(context)!.watchOnlySendDisabled, context);
+                  UIUtil.showSnackbar(AppLocalization.of(context).watchOnlySendDisabled, context);
                 }
               },
               child: AutoSizeText(
-                AppLocalization.of(context)!.send,
+                AppLocalization.of(context).send,
                 textAlign: TextAlign.center,
                 style: AppStyles.textStyleButtonPrimary(context),
                 maxLines: 1,

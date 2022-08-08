@@ -12,7 +12,8 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/firebase_options.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
+import 'package:nautilus_wallet_flutter/localize.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/model/available_language.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
@@ -40,7 +41,6 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -117,12 +117,14 @@ class _AppState extends State<App> {
         ),
         localizationsDelegates: [
           AppLocalizationsDelegate(StateContainer.of(context).curLanguage),
+          // AppLocalization.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
         
         locale: StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT ? null : StateContainer.of(context).curLanguage.getLocale(),
+        supportedLocales: AppLocalization.delegate.supportedLocales,
         // supportedLocales: const [
         //   Locale('en', 'US'), // English
         //   Locale('he', 'IL'), // Hebrew
@@ -370,14 +372,14 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       if (!(await sl.get<SharedPrefsUtil>().getHasSeenRootWarning()) && await FlutterJailbreakDetection.jailbroken) {
         AppDialogs.showConfirmDialog(
             context,
-            CaseChange.toUpperCase(AppLocalization.of(context)!.warning, context),
-            AppLocalization.of(context)!.rootWarning,
-            AppLocalization.of(context)!.iUnderstandTheRisks.toUpperCase(),
+            CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
+            AppLocalization.of(context).rootWarning,
+            AppLocalization.of(context).iUnderstandTheRisks.toUpperCase(),
             () async {
               await sl.get<SharedPrefsUtil>().setHasSeenRootWarning();
               checkLoggedIn();
             },
-            cancelText: AppLocalization.of(context)!.exit.toUpperCase(),
+            cancelText: AppLocalization.of(context).exit.toUpperCase(),
             cancelAction: () {
               if (Platform.isIOS) {
                 exit(0);

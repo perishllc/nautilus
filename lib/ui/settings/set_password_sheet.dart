@@ -4,7 +4,7 @@ import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -67,7 +67,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                     child: Column(
                       children: <Widget>[
                         AutoSizeText(
-                          CaseChange.toUpperCase(AppLocalization.of(context)!.createPasswordSheetHeader, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).createPasswordSheetHeader, context),
                           style: AppStyles.textStyleHeader(context),
                           minFontSize: 12,
                           stepGranularity: 0.1,
@@ -81,7 +81,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                   Container(
                     margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      AppLocalization.of(context)!.passwordWillBeRequiredToOpenParagraph,
+                      AppLocalization.of(context).passwordWillBeRequiredToOpenParagraph,
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,
@@ -122,7 +122,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                                   }
                                 }
                               },
-                              hintText: AppLocalization.of(context)!.createPasswordHint,
+                              hintText: AppLocalization.of(context).createPasswordHint,
                               keyboardType: TextInputType.text,
                               obscureText: true,
                               textAlign: TextAlign.center,
@@ -165,7 +165,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                                   }
                                 }
                               },
-                              hintText: AppLocalization.of(context)!.confirmPasswordHint,
+                              hintText: AppLocalization.of(context).confirmPasswordHint,
                               keyboardType: TextInputType.text,
                               obscureText: true,
                               textAlign: TextAlign.center,
@@ -198,7 +198,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.setPassword, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).setPassword, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       await submitAndEncrypt();
                     }),
@@ -206,7 +206,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Navigator.pop(context);
                     }),
@@ -225,23 +225,23 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
     if (createPasswordController!.text.isEmpty || confirmPasswordController!.text.isEmpty) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context)!.passwordBlank;
+          passwordError = AppLocalization.of(context).passwordBlank;
         });
       }
     } else if (createPasswordController!.text != confirmPasswordController!.text) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context)!.passwordsDontMatch;
+          passwordError = AppLocalization.of(context).passwordsDontMatch;
         });
       }
     } else if (seed == null || !NanoSeeds.isValidSeed(seed)) {
       Navigator.pop(context);
-      UIUtil.showSnackbar(AppLocalization.of(context)!.encryptionFailedError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).encryptionFailedError, context);
     } else {
       String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
       await sl.get<Vault>().setSeed(encryptedSeed);
       StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, await sl.get<Vault>().getSessionKey())));
-      UIUtil.showSnackbar(AppLocalization.of(context)!.setPasswordSuccess, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).setPasswordSuccess, context);
       Navigator.pop(context);
     }
   }

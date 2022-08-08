@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/setting_item.dart';
 
 enum AvailableLanguage {
@@ -111,7 +111,7 @@ class LanguageSetting extends SettingSelectionItem {
       case AvailableLanguage.BENGALI:
         return "Bengali (bn)";
       default:
-        return AppLocalization.of(context)!.systemDefault;
+        return AppLocalization.of(context).systemDefault;
     }
   }
 

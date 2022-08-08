@@ -171,9 +171,7 @@ class AppStyles {
   static TextStyle textStyleTransactionAmount(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        color: (StateContainer.of(context).curTheme is NautilusTheme)
-            ? StateContainer.of(context).curTheme.lighterPrimary
-            : StateContainer.of(context).curTheme.primary60,
+        color: StateContainer.of(context).curTheme.primary60,
         fontSize: AppFontSizes.smallest,
         fontWeight: FontWeight.w600);
   }

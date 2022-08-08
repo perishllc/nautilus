@@ -1,19 +1,18 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 
 class IntroWelcomePage extends StatefulWidget {
   @override
-  _IntroWelcomePageState createState() => _IntroWelcomePageState();
+  IntroWelcomePageState createState() => IntroWelcomePageState();
 }
 
-class _IntroWelcomePageState extends State<IntroWelcomePage> {
+class IntroWelcomePageState extends State<IntroWelcomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -43,6 +42,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                       // Width/Height ratio for the animation is needed because BoxFit is not working as expected
                       width: double.infinity,
                       height: MediaQuery.of(context).size.width * 4 / 8,
+                      // width: MediaQuery.of(context).size.width,
                       child: const Center(
                         child: Image(image: AssetImage("assets/logo.png")),
                       ),
@@ -52,7 +52,8 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                       color: Colors.white,
                       // padding: EdgeInsets.zero,
                       // padding: const EdgeInsets.only(top: 5, bottom: 5),
-                      width: double.infinity,
+                      // width: double.infinity,
+                      width: MediaQuery.of(context).size.width,
                       child: TextLiquidFill(
                         text: "NAUTILUS",
                         waveColor: Colors.blueAccent,
@@ -72,7 +73,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 30 : 40, vertical: 20),
                       child: AutoSizeText(
-                        AppLocalization.of(context)!.welcomeTextUpdated,
+                        AppLocalization.of(context).welcomeTextUpdated,
                         style: AppStyles.textStyleParagraph(context),
                         maxLines: 4,
                         stepGranularity: 0.5,
@@ -88,7 +89,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // New Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.newWallet, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet, Dimens.BUTTON_TOP_DIMENS,
                           instanceKey: const Key("new_wallet_button"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_backup_safety');
                       }),
@@ -97,7 +98,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // Import Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.importWallet, Dimens.BUTTON_BOTTOM_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).importWallet, Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () {
                         Navigator.of(context).pushNamed('/intro_import');
                       }),

@@ -60,6 +60,26 @@ class AppLocalization {
     );
   }
 
+  /// `Enter a Name`
+  String get accountNameHint {
+    return Intl.message(
+      'Enter a Name',
+      name: 'accountNameHint',
+      desc: 'enter_name_hint',
+      args: [],
+    );
+  }
+
+  /// `Choose an Account Name`
+  String get accountNameMissing {
+    return Intl.message(
+      'Choose an Account Name',
+      name: 'accountNameMissing',
+      desc: 'account_name_missing',
+      args: [],
+    );
+  }
+
   /// `Accounts`
   String get accounts {
     return Intl.message(
@@ -130,6 +150,16 @@ class AppLocalization {
     );
   }
 
+  /// `Address`
+  String get address {
+    return Intl.message(
+      'Address',
+      name: 'address',
+      desc: 'send_warning_address',
+      args: [],
+    );
+  }
+
   /// `Address Copied`
   String get addressCopied {
     return Intl.message(
@@ -180,12 +210,52 @@ class AppLocalization {
     );
   }
 
+  /// `Add Watch Only Account`
+  String get addWatchOnlyAccount {
+    return Intl.message(
+      'Add Watch Only Account',
+      name: 'addWatchOnlyAccount',
+      desc: 'watch_only_add',
+      args: [],
+    );
+  }
+
+  /// `Error adding Watch Only Account: Account was null`
+  String get addWatchOnlyAccountError {
+    return Intl.message(
+      'Error adding Watch Only Account: Account was null',
+      name: 'addWatchOnlyAccountError',
+      desc: 'watch_only_add_error',
+      args: [],
+    );
+  }
+
+  /// `Successfully created watch only account!`
+  String get addWatchOnlyAccountSuccess {
+    return Intl.message(
+      'Successfully created watch only account!',
+      name: 'addWatchOnlyAccountSuccess',
+      desc: 'watch_only_add_success',
+      args: [],
+    );
+  }
+
   /// `Aliases`
   String get aliases {
     return Intl.message(
       'Aliases',
       name: 'aliases',
       desc: 'card_details_aliases',
+      args: [],
+    );
+  }
+
+  /// `Split Amount can't be greater than gift balance`
+  String get amountGiftGreaterError {
+    return Intl.message(
+      'Split Amount can\'t be greater than gift balance',
+      name: 'amountGiftGreaterError',
+      desc: 'gift_split_greater_error',
       args: [],
     );
   }
@@ -206,6 +276,16 @@ class AppLocalization {
       'Asked',
       name: 'asked',
       desc: 'home_asked_cta',
+      args: [],
+    );
+  }
+
+  /// `Authenticating`
+  String get authConfirm {
+    return Intl.message(
+      'Authenticating',
+      name: 'authConfirm',
+      desc: 'auth_confirm_message',
       args: [],
     );
   }
@@ -540,6 +620,16 @@ class AppLocalization {
     );
   }
 
+  /// `Confirm the pin`
+  String get confirmPinHint {
+    return Intl.message(
+      'Confirm the pin',
+      name: 'confirmPinHint',
+      desc: 'A text field hint that tells the user to confirm the pin',
+      args: [],
+    );
+  }
+
   /// `Connecting`
   String get connectingHeader {
     return Intl.message(
@@ -547,6 +637,26 @@ class AppLocalization {
       name: 'connectingHeader',
       desc:
           'A header to let the user now that Nautilus is currently connecting to (or loading) live chat.',
+      args: [],
+    );
+  }
+
+  /// `Can't Connect`
+  String get connectionWarning {
+    return Intl.message(
+      'Can\'t Connect',
+      name: 'connectionWarning',
+      desc: 'home_connection_warning',
+      args: [],
+    );
+  }
+
+  /// `We can't seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it's been more than an hour and you're still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co`
+  String get connectionWarningBody {
+    return Intl.message(
+      'We can\'t seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it\'s been more than an hour and you\'re still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co',
+      name: 'connectionWarningBody',
+      desc: 'connection_warning_body',
       args: [],
     );
   }
@@ -567,6 +677,16 @@ class AppLocalization {
       'Contact Already Exists',
       name: 'contactExists',
       desc: 'contact_name_exists',
+      args: [],
+    );
+  }
+
+  /// `Account already added!`
+  String get watchAccountExists {
+    return Intl.message(
+      'Account already added!',
+      name: 'watchAccountExists',
+      desc: 'account_entry_exists',
       args: [],
     );
   }
@@ -691,6 +811,16 @@ class AppLocalization {
     );
   }
 
+  /// `Copy Message`
+  String get copyMessage {
+    return Intl.message(
+      'Copy Message',
+      name: 'copyMessage',
+      desc: 'copy_message',
+      args: [],
+    );
+  }
+
   /// `Copy Seed`
   String get copySeed {
     return Intl.message(
@@ -717,6 +847,16 @@ class AppLocalization {
       'Create a password.',
       name: 'createAPasswordHeader',
       desc: 'A paragraph that tells the users to create a password.',
+      args: [],
+    );
+  }
+
+  /// `created`
+  String get created {
+    return Intl.message(
+      'created',
+      name: 'created',
+      desc: 'gift_created',
       args: [],
     );
   }
@@ -779,6 +919,16 @@ class AppLocalization {
       'Create',
       name: 'createPasswordSheetHeader',
       desc: 'Prompt user to create a new password',
+      args: [],
+    );
+  }
+
+  /// `Create a pin`
+  String get createPinHint {
+    return Intl.message(
+      'Create a pin',
+      name: 'createPinHint',
+      desc: 'A text field hint that tells the user to create a pin',
       args: [],
     );
   }
@@ -873,6 +1023,16 @@ class AppLocalization {
     );
   }
 
+  /// `Check out Nautilus! I sent you some nano with this link:`
+  String get defaultGiftMessage {
+    return Intl.message(
+      'Check out Nautilus! I sent you some nano with this link:',
+      name: 'defaultGiftMessage',
+      desc: 'default_gift_message',
+      args: [],
+    );
+  }
+
   /// `Account %1`
   String get defaultNewAccountName {
     return Intl.message(
@@ -953,6 +1113,26 @@ class AppLocalization {
     );
   }
 
+  /// `Donate`
+  String get donateButton {
+    return Intl.message(
+      'Donate',
+      name: 'donateButton',
+      desc: 'donate_button',
+      args: [],
+    );
+  }
+
+  /// `Support the Project`
+  String get donateToSupport {
+    return Intl.message(
+      'Support the Project',
+      name: 'donateToSupport',
+      desc: 'settings_support_donate',
+      args: [],
+    );
+  }
+
   /// `Edit`
   String get edit {
     return Intl.message(
@@ -1023,6 +1203,16 @@ class AppLocalization {
     );
   }
 
+  /// `Enter Split Amount`
+  String get enterSplitAmount {
+    return Intl.message(
+      'Enter Split Amount',
+      name: 'enterSplitAmount',
+      desc: 'gift_split_amount_hint',
+      args: [],
+    );
+  }
+
   /// `Enter a username`
   String get enterUsername {
     return Intl.message(
@@ -1039,6 +1229,16 @@ class AppLocalization {
       'Enter User or Address',
       name: 'enterUserOrAddress',
       desc: 'enter_user_address',
+      args: [],
+    );
+  }
+
+  /// `There was an error while processing this gift card, it may not be valid, expired, or empty.`
+  String get errorProcessingGiftCard {
+    return Intl.message(
+      'There was an error while processing this gift card, it may not be valid, expired, or empty.',
+      name: 'errorProcessingGiftCard',
+      desc: 'gift_process_error',
       args: [],
     );
   }
@@ -1063,32 +1263,12 @@ class AppLocalization {
     );
   }
 
-  /// ``
-  String get exampleCardFromKal {
-    return Intl.message(
-      '',
-      name: 'exampleCardFromKal',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Welcome to Nautilus. Once you receive NANO, transactions will show up like this:`
   String get exampleCardIntro {
     return Intl.message(
       'Welcome to Nautilus. Once you receive NANO, transactions will show up like this:',
       name: 'exampleCardIntro',
       desc: 'example_card_intro',
-      args: [],
-    );
-  }
-
-  /// ``
-  String get exampleCardIntroKal {
-    return Intl.message(
-      '',
-      name: 'exampleCardIntroKal',
-      desc: '',
       args: [],
     );
   }
@@ -1119,16 +1299,6 @@ class AppLocalization {
       'someone',
       name: 'exampleCardTo',
       desc: 'example_card_to',
-      args: [],
-    );
-  }
-
-  /// ``
-  String get exampleCardToKal {
-    return Intl.message(
-      '',
-      name: 'exampleCardToKal',
-      desc: '',
       args: [],
     );
   }
@@ -1423,6 +1593,26 @@ class AppLocalization {
     );
   }
 
+  /// `Funding Banner`
+  String get fundingBannerHeader {
+    return Intl.message(
+      'Funding Banner',
+      name: 'fundingBannerHeader',
+      desc: 'funding_banner_header',
+      args: [],
+    );
+  }
+
+  /// `Funding`
+  String get fundingHeader {
+    return Intl.message(
+      'Funding',
+      name: 'fundingHeader',
+      desc: 'funding_header',
+      args: [],
+    );
+  }
+
   /// `You have a gift!`
   String get giftAlert {
     return Intl.message(
@@ -1453,6 +1643,26 @@ class AppLocalization {
     );
   }
 
+  /// `An error occured while trying to create a gift card link`
+  String get giftCardCreationError {
+    return Intl.message(
+      'An error occured while trying to create a gift card link',
+      name: 'giftCardCreationError',
+      desc: 'create_gift_error',
+      args: [],
+    );
+  }
+
+  /// `An error occured while trying to create a gift card, THE GIFT CARD LINK OR SEED HAS BEEN COPIED TO YOUR CLIPBOARD, YOUR FUNDS MAY BE CONTAINED WITHIN IT DEPENDING ON WHAT WENT WRONG.`
+  String get giftCardCreationErrorSent {
+    return Intl.message(
+      'An error occured while trying to create a gift card, THE GIFT CARD LINK OR SEED HAS BEEN COPIED TO YOUR CLIPBOARD, YOUR FUNDS MAY BE CONTAINED WITHIN IT DEPENDING ON WHAT WENT WRONG.',
+      name: 'giftCardCreationErrorSent',
+      desc: 'gift_generic_error',
+      args: [],
+    );
+  }
+
   /// `Gift From`
   String get giftFrom {
     return Intl.message(
@@ -1463,10 +1673,10 @@ class AppLocalization {
     );
   }
 
-  /// `Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they will get a prompt to transfer the funds into their account upon opening the link`
+  /// `Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,`
   String get giftInfo {
     return Intl.message(
-      'Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they will get a prompt to transfer the funds into their account upon opening the link',
+      'Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,',
       name: 'giftInfo',
       desc: 'Description for gift card creation',
       args: [],
@@ -1479,6 +1689,16 @@ class AppLocalization {
       'Gift Message',
       name: 'giftMessage',
       desc: 'gift_message',
+      args: [],
+    );
+  }
+
+  /// `Gift Successfully Received, it may take a moment to appear in your wallet.`
+  String get giftProcessSuccess {
+    return Intl.message(
+      'Gift Successfully Received, it may take a moment to appear in your wallet.',
+      name: 'giftProcessSuccess',
+      desc: 'gift_process_success',
       args: [],
     );
   }
@@ -1523,6 +1743,26 @@ class AppLocalization {
     );
   }
 
+  /// `handoff`
+  String get handoff {
+    return Intl.message(
+      'handoff',
+      name: 'handoff',
+      desc: 'send_handoff',
+      args: [],
+    );
+  }
+
+  /// `A supported handoff method couldn't be found!`
+  String get handoffSupportedMethodNotFound {
+    return Intl.message(
+      'A supported handoff method couldn\'t be found!',
+      name: 'handoffSupportedMethodNotFound',
+      desc: 'handoff_method_not_found',
+      args: [],
+    );
+  }
+
   /// `Hide`
   String get hide {
     return Intl.message(
@@ -1539,6 +1779,36 @@ class AppLocalization {
       'Hide Account?',
       name: 'hideAccountHeader',
       desc: 'Confirmation dialog header',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to hide empty accounts?\n\nThis will hide all accounts with a balance of exactly 0 (excluding watch only addresses and your main account), but you can always re-add them later by tapping the "Add Account" button`
+  String get hideAccountsConfirmation {
+    return Intl.message(
+      'Are you sure you want to hide empty accounts?\n\nThis will hide all accounts with a balance of exactly 0 (excluding watch only addresses and your main account), but you can always re-add them later by tapping the "Add Account" button',
+      name: 'hideAccountsConfirmation',
+      desc: 'hide accounts confirmation info',
+      args: [],
+    );
+  }
+
+  /// `Hide Accounts?`
+  String get hideAccountsHeader {
+    return Intl.message(
+      'Hide Accounts?',
+      name: 'hideAccountsHeader',
+      desc: 'Confirmation dialog header',
+      args: [],
+    );
+  }
+
+  /// `Hide Empty Accounts`
+  String get hideEmptyAccounts {
+    return Intl.message(
+      'Hide Empty Accounts',
+      name: 'hideEmptyAccounts',
+      desc: 'hide_empty_accounts',
       args: [],
     );
   }
@@ -1653,6 +1923,16 @@ class AppLocalization {
     );
   }
 
+  /// `I'm Sure`
+  String get imSure {
+    return Intl.message(
+      'I\'m Sure',
+      name: 'imSure',
+      desc: 'send_confirm_warning',
+      args: [],
+    );
+  }
+
   /// `Instantly`
   String get instantly {
     return Intl.message(
@@ -1672,14 +1952,6 @@ class AppLocalization {
       args: [],
     );
   }
-
-  // skipped getter for the 'intro.new-key' key
-
-  // skipped getter for the 'intro.not-reviewed-text' key
-
-  // skipped getter for the 'intro.too-long-text' key
-
-  // skipped getter for the 'intro.welcome' key
 
   /// `Address entered was invalid`
   String get invalidAddress {
@@ -1701,6 +1973,26 @@ class AppLocalization {
     );
   }
 
+  /// `Invalid Pin`
+  String get invalidPin {
+    return Intl.message(
+      'Invalid Pin',
+      name: 'invalidPin',
+      desc: 'An error indicating a pin has been entered incorrectly',
+      args: [],
+    );
+  }
+
+  /// `Due to iOS App Store guidelines and restrictions, we can't link you to our donations page. If you'd like to support the project, consider sending to the nautilus node's address.`
+  String get iosFundingMessage {
+    return Intl.message(
+      'Due to iOS App Store guidelines and restrictions, we can\'t link you to our donations page. If you\'d like to support the project, consider sending to the nautilus node\'s address.',
+      name: 'iosFundingMessage',
+      desc: 'ios_funding_message',
+      args: [],
+    );
+  }
+
   /// `I Understand the Risks`
   String get iUnderstandTheRisks {
     return Intl.message(
@@ -1708,16 +2000,6 @@ class AppLocalization {
       name: 'iUnderstandTheRisks',
       desc:
           'Shown to users if they have a rooted Android device or jailbroken iOS device',
-      args: [],
-    );
-  }
-
-  /// `Nautilus Wallet`
-  String get kaliumWallet {
-    return Intl.message(
-      'Nautilus Wallet',
-      name: 'kaliumWallet',
-      desc: 'kalium_wallet',
       args: [],
     );
   }
@@ -1738,16 +2020,6 @@ class AppLocalization {
       'Link Copied',
       name: 'linkCopied',
       desc: 'link_copied',
-      args: [],
-    );
-  }
-
-  /// `Support`
-  String get liveSupportButton {
-    return Intl.message(
-      'Support',
-      name: 'liveSupportButton',
-      desc: 'A button to open up the live support window',
       args: [],
     );
   }
@@ -1832,16 +2104,6 @@ class AppLocalization {
     );
   }
 
-  /// ``
-  String get logoutDetailKal {
-    return Intl.message(
-      '',
-      name: 'logoutDetailKal',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `As long as you've backed up your seed you have nothing to worry about.`
   String get logoutReassurance {
     return Intl.message(
@@ -1913,12 +2175,22 @@ class AppLocalization {
     );
   }
 
-  /// `Memo re-sent! If still unacknowledged, the recipient's device may be offline.`
+  /// `Message re-sent! If still unread, the recipient's device may be offline.`
   String get memoSentButNotReceived {
     return Intl.message(
-      'Memo re-sent! If still unacknowledged, the recipient\'s device may be offline.',
+      'Message re-sent! If still unread, the recipient\'s device may be offline.',
       name: 'memoSentButNotReceived',
       desc: 'memo_sent_again',
+      args: [],
+    );
+  }
+
+  /// `Message Copied`
+  String get messageCopied {
+    return Intl.message(
+      'Message Copied',
+      name: 'messageCopied',
+      desc: 'message_copied',
       args: [],
     );
   }
@@ -1973,6 +2245,16 @@ class AppLocalization {
     );
   }
 
+  /// `Monthly Server Costs`
+  String get monthlyServerCosts {
+    return Intl.message(
+      'Monthly Server Costs',
+      name: 'monthlyServerCosts',
+      desc: 'support_monthly_costs',
+      args: [],
+    );
+  }
+
   /// `MoonPay`
   String get moonpay {
     return Intl.message(
@@ -1983,12 +2265,42 @@ class AppLocalization {
     );
   }
 
+  /// `More Settings`
+  String get moreSettings {
+    return Intl.message(
+      'More Settings',
+      name: 'moreSettings',
+      desc: 'settings_more',
+      args: [],
+    );
+  }
+
   /// `Natricon`
   String get natricon {
     return Intl.message(
       'Natricon',
       name: 'natricon',
       desc: 'natricon_settings',
+      args: [],
+    );
+  }
+
+  /// `Nautilus Wallet`
+  String get nautilusWallet {
+    return Intl.message(
+      'Nautilus Wallet',
+      name: 'nautilusWallet',
+      desc: 'nautilus_wallet',
+      args: [],
+    );
+  }
+
+  /// `Nearby`
+  String get nearby {
+    return Intl.message(
+      'Nearby',
+      name: 'nearby',
+      desc: 'nearby_devices',
       args: [],
     );
   }
@@ -2019,16 +2331,6 @@ class AppLocalization {
       'This is your new account. Once you receive NANO, transactions will show up like this:',
       name: 'newAccountIntro',
       desc: 'Alternate account intro card',
-      args: [],
-    );
-  }
-
-  /// ``
-  String get newAccountIntroKal {
-    return Intl.message(
-      '',
-      name: 'newAccountIntroKal',
-      desc: '',
       args: [],
     );
   }
@@ -2133,16 +2435,6 @@ class AppLocalization {
     );
   }
 
-  /// ``
-  String get notificationBodyKal {
-    return Intl.message(
-      '',
-      name: 'notificationBodyKal',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Tap to open`
   String get notificationHeaderSupplement {
     return Intl.message(
@@ -2179,16 +2471,6 @@ class AppLocalization {
       'Received %1 %2',
       name: 'notificationTitle',
       desc: 'notification_title',
-      args: [],
-    );
-  }
-
-  /// ``
-  String get notificationTitleKal {
-    return Intl.message(
-      '',
-      name: 'notificationTitleKal',
-      desc: '',
       args: [],
     );
   }
@@ -2272,10 +2554,6 @@ class AppLocalization {
       args: [],
     );
   }
-
-  // skipped getter for the 'page.home.counter' key
-
-  // skipped getter for the 'page.home.title' key
 
   /// `paid`
   String get paid {
@@ -2379,22 +2657,22 @@ class AppLocalization {
     );
   }
 
-  /// `receivable`
-  String get receivable {
-    return Intl.message(
-      'receivable',
-      name: 'receivable',
-      desc: 'history_receivable',
-      args: [],
-    );
-  }
-
   /// `Pick From a List`
   String get pickFromList {
     return Intl.message(
       'Pick From a List',
       name: 'pickFromList',
       desc: 'pick rep from list',
+      args: [],
+    );
+  }
+
+  /// `Pin cannot be empty`
+  String get pinBlank {
+    return Intl.message(
+      'Pin cannot be empty',
+      name: 'pinBlank',
+      desc: 'An error indicating a pin has been entered incorrectly',
       args: [],
     );
   }
@@ -2469,12 +2747,53 @@ class AppLocalization {
     );
   }
 
+  /// `Pins do not match`
+  String get pinsDontMatch {
+    return Intl.message(
+      'Pins do not match',
+      name: 'pinsDontMatch',
+      desc: 'An error indicating a pin has been confirmed incorrectly',
+      args: [],
+    );
+  }
+
   /// `Enter PIN to Backup Seed`
   String get pinSeedBackup {
     return Intl.message(
       'Enter PIN to Backup Seed',
       name: 'pinSeedBackup',
       desc: 'settings_pin_title',
+      args: [],
+    );
+  }
+
+  /// `This is NOT the same pin you used to create your wallet. Press the info button for more information.`
+  String get plausibleDeniabilityParagraph {
+    return Intl.message(
+      'This is NOT the same pin you used to create your wallet. Press the info button for more information.',
+      name: 'plausibleDeniabilityParagraph',
+      desc:
+          'A paragraph that tells warns the user this is plausible deniability pin.',
+      args: [],
+    );
+  }
+
+  /// `Plausible Deniability Info`
+  String get plausibleInfoHeader {
+    return Intl.message(
+      'Plausible Deniability Info',
+      name: 'plausibleInfoHeader',
+      desc: 'plausible_info_header',
+      args: [],
+    );
+  }
+
+  /// `Set a secondary pin for plausible deniability mode.\n\nIf your wallet is unlocked using this secondary pin, your seed will be replaced with a hash of the existing seed. This is a security feature intended to be used in the event you are forced to open your wallet.\n\nThis pin will act like a normal (correct) pin EXCEPT when unlocking your wallet, which is when plausible deniability mode will activate.\n\nYour funds WILL BE LOST upon entering plausible deniability mode if you have not backed up your seed!`
+  String get plausibleSheetInfo {
+    return Intl.message(
+      'Set a secondary pin for plausible deniability mode.\n\nIf your wallet is unlocked using this secondary pin, your seed will be replaced with a hash of the existing seed. This is a security feature intended to be used in the event you are forced to open your wallet.\n\nThis pin will act like a normal (correct) pin EXCEPT when unlocking your wallet, which is when plausible deniability mode will activate.\n\nYour funds WILL BE LOST upon entering plausible deniability mode if you have not backed up your seed!',
+      name: 'plausibleSheetInfo',
+      desc: 'plausible_sheet_info',
       args: [],
     );
   }
@@ -2499,10 +2818,10 @@ class AppLocalization {
     );
   }
 
-  /// `Purchase Nano`
+  /// `Purchase NANO`
   String get purchaseNano {
     return Intl.message(
-      'Purchase Nano',
+      'Purchase NANO',
       name: 'purchaseNano',
       desc: 'purchase_nano',
       args: [],
@@ -2605,6 +2924,16 @@ class AppLocalization {
       'Read More',
       name: 'readMore',
       desc: 'read_more',
+      args: [],
+    );
+  }
+
+  /// `receivable`
+  String get receivable {
+    return Intl.message(
+      'receivable',
+      name: 'receivable',
+      desc: 'history_receivable',
       args: [],
     );
   }
@@ -2779,10 +3108,10 @@ class AppLocalization {
     );
   }
 
-  /// `A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. Your representative does not have sreceivable power over your funds. You should choose a representative that has little downtime and is trustworthy.`
+  /// `A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. Your representative does not have spending power over your funds. You should choose a representative that has little downtime and is trustworthy.`
   String get repInfo {
     return Intl.message(
-      'A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. Your representative does not have sreceivable power over your funds. You should choose a representative that has little downtime and is trustworthy.',
+      'A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. Your representative does not have spending power over your funds. You should choose a representative that has little downtime and is trustworthy.',
       name: 'repInfo',
       desc: 'change_representative_info',
       args: [],
@@ -2869,6 +3198,16 @@ class AppLocalization {
     );
   }
 
+  /// `Request From`
+  String get requestFrom {
+    return Intl.message(
+      'Request From',
+      name: 'requestFrom',
+      desc: 'request_title',
+      args: [],
+    );
+  }
+
   /// `Requesting`
   String get requesting {
     return Intl.message(
@@ -2899,12 +3238,32 @@ class AppLocalization {
     );
   }
 
-  /// `Request re-sent! If still unacknowledged, the recipient's device may be offline.`
+  /// `Request re-sent! If still unread, the recipient's device may be offline.`
   String get requestSentButNotReceived {
     return Intl.message(
-      'Request re-sent! If still unacknowledged, the recipient\'s device may be offline.',
+      'Request re-sent! If still unread, the recipient\'s device may be offline.',
       name: 'requestSentButNotReceived',
       desc: 'request_sent_again',
+      args: [],
+    );
+  }
+
+  /// `Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users, but you can use them for your own record keeping even if the recipient doesn't use nautilus.`
+  String get requestSheetInfo {
+    return Intl.message(
+      'Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users, but you can use them for your own record keeping even if the recipient doesn\'t use nautilus.',
+      name: 'requestSheetInfo',
+      desc: 'request_sheet_info',
+      args: [],
+    );
+  }
+
+  /// `Request Sheet Info`
+  String get requestSheetInfoHeader {
+    return Intl.message(
+      'Request Sheet Info',
+      name: 'requestSheetInfoHeader',
+      desc: 'request_sheet_info_header',
       args: [],
     );
   }
@@ -2940,10 +3299,10 @@ class AppLocalization {
     );
   }
 
-  /// `Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed. If you're having issues you should backup your seed, re-install the app, and if the issue persists feel free to make a bug report on github or discord.`
+  /// `Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed, but you should still back it up beforehand. If the issue persists feel free to make a bug report on the discord (link at the bottom of the settings drawer)\nMake sure to first check if someone else already reported the issue!`
   String get resetDatabaseConfirmation {
     return Intl.message(
-      'Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed. If you\'re having issues you should backup your seed, re-install the app, and if the issue persists feel free to make a bug report on github or discord.',
+      'Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed, but you should still back it up beforehand. If the issue persists feel free to make a bug report on the discord (link at the bottom of the settings drawer)\nMake sure to first check if someone else already reported the issue!',
       name: 'resetDatabaseConfirmation',
       desc: 'database_remove_sure',
       args: [],
@@ -2977,16 +3336,6 @@ class AppLocalization {
       'Scan a Nano \naddress QR code',
       name: 'scanInstructions',
       desc: 'scan_send_instruction_label',
-      args: [],
-    );
-  }
-
-  /// ``
-  String get scanInstructionsKal {
-    return Intl.message(
-      '',
-      name: 'scanInstructionsKal',
-      desc: '',
       args: [],
     );
   }
@@ -3171,16 +3520,6 @@ class AppLocalization {
     );
   }
 
-  /// ``
-  String get sendAmountConfirmKal {
-    return Intl.message(
-      '',
-      name: 'sendAmountConfirmKal',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `An error occurred. Try again later.`
   String get sendError {
     return Intl.message(
@@ -3261,6 +3600,16 @@ class AppLocalization {
     );
   }
 
+  /// `Send via NFC`
+  String get sendViaNFC {
+    return Intl.message(
+      'Send via NFC',
+      name: 'sendViaNFC',
+      desc: 'send_payment_nfc',
+      args: [],
+    );
+  }
+
   /// `Sent`
   String get sent {
     return Intl.message(
@@ -3297,6 +3646,36 @@ class AppLocalization {
       'Password has been set successfully',
       name: 'setPasswordSuccess',
       desc: 'Setting a Wallet Password was successful',
+      args: [],
+    );
+  }
+
+  /// `Set Pin`
+  String get setPin {
+    return Intl.message(
+      'Set Pin',
+      name: 'setPin',
+      desc: 'A button that sets the plausible deniability password',
+      args: [],
+    );
+  }
+
+  /// `Pin has been set successfully`
+  String get setPinSuccess {
+    return Intl.message(
+      'Pin has been set successfully',
+      name: 'setPinSuccess',
+      desc: 'Setting a Wallet Pin was successful',
+      args: [],
+    );
+  }
+
+  /// `Set Plausible Pin`
+  String get setPlausibleDeniabilityPin {
+    return Intl.message(
+      'Set Plausible Pin',
+      name: 'setPlausibleDeniabilityPin',
+      desc: 'Allows user to setup a plausible deniability pin',
       args: [],
     );
   }
@@ -3341,10 +3720,10 @@ class AppLocalization {
     );
   }
 
-  /// `Set Wallet Plausible Pin`
+  /// ``
   String get setWalletPlausiblePin {
     return Intl.message(
-      'Set Wallet Plausible Pin',
+      '',
       name: 'setWalletPlausiblePin',
       desc: 'Allows user to setup a plausible deniability pin',
       args: [],
@@ -3357,6 +3736,16 @@ class AppLocalization {
       'Share Link',
       name: 'shareLink',
       desc: 'share_link',
+      args: [],
+    );
+  }
+
+  /// `Share Message`
+  String get shareMessage {
+    return Intl.message(
+      'Share Message',
+      name: 'shareMessage',
+      desc: 'share_message',
       args: [],
     );
   }
@@ -3381,12 +3770,72 @@ class AppLocalization {
     );
   }
 
+  /// `Show`
+  String get show {
+    return Intl.message(
+      'Show',
+      name: 'show',
+      desc: 'funding_show',
+      args: [],
+    );
+  }
+
+  /// `Show Account QR Code`
+  String get showAccountQR {
+    return Intl.message(
+      'Show Account QR Code',
+      name: 'showAccountQR',
+      desc: 'show_account_qr',
+      args: [],
+    );
+  }
+
   /// `Show Contacts`
   String get showContacts {
     return Intl.message(
       'Show Contacts',
       name: 'showContacts',
       desc: 'contacts_enabled',
+      args: [],
+    );
+  }
+
+  /// `Show Funding Banner`
+  String get showFunding {
+    return Intl.message(
+      'Show Funding Banner',
+      name: 'showFunding',
+      desc: 'show_funding_banner',
+      args: [],
+    );
+  }
+
+  /// `Show Link QR`
+  String get showLinkQR {
+    return Intl.message(
+      'Show Link QR',
+      name: 'showLinkQR',
+      desc: 'show_link_qr',
+      args: [],
+    );
+  }
+
+  /// `Show QR Code`
+  String get showQR {
+    return Intl.message(
+      'Show QR Code',
+      name: 'showQR',
+      desc: 'show_qr',
+      args: [],
+    );
+  }
+
+  /// `Unopened Warning`
+  String get showUnopenedWarning {
+    return Intl.message(
+      'Unopened Warning',
+      name: 'showUnopenedWarning',
+      desc: 'warn_unsafe_send',
       args: [],
     );
   }
@@ -3401,12 +3850,42 @@ class AppLocalization {
     );
   }
 
+  /// `someone`
+  String get someone {
+    return Intl.message(
+      'someone',
+      name: 'someone',
+      desc: 'send_someone',
+      args: [],
+    );
+  }
+
+  /// `Split By`
+  String get splitBy {
+    return Intl.message(
+      'Split By',
+      name: 'splitBy',
+      desc: 'gift_card_split_by',
+      args: [],
+    );
+  }
+
   /// `Support`
   String get supportButton {
     return Intl.message(
       'Support',
       name: 'supportButton',
       desc: 'A button to open up the live support window',
+      args: [],
+    );
+  }
+
+  /// `Help Support Development`
+  String get supportDevelopment {
+    return Intl.message(
+      'Help Support Development',
+      name: 'supportDevelopment',
+      desc: 'settings_support_development',
       args: [],
     );
   }
@@ -3437,6 +3916,16 @@ class AppLocalization {
       'System Default',
       name: 'systemDefault',
       desc: 'settings_default_language_string',
+      args: [],
+    );
+  }
+
+  /// `Tap message to edit`
+  String get tapMessageToEdit {
+    return Intl.message(
+      'Tap message to edit',
+      name: 'tapMessageToEdit',
+      desc: 'gift_creation_message_edit_hint',
       args: [],
     );
   }
@@ -3696,7 +4185,7 @@ class AppLocalization {
     return Intl.message(
       'Authenticate to Unlock Nautilus',
       name: 'unlockBiometrics',
-      desc: 'unlock_kalium_bio',
+      desc: 'unlock_bio',
       args: [],
     );
   }
@@ -3706,17 +4195,47 @@ class AppLocalization {
     return Intl.message(
       'Enter PIN to Unlock Nautilus',
       name: 'unlockPin',
-      desc: 'unlock_kalium_pin',
+      desc: 'unlock_pin',
       args: [],
     );
   }
 
-  /// ``
-  String get unlockPinKal {
+  /// `Show Unopened Warning`
+  String get unopenedWarningHeader {
     return Intl.message(
-      '',
-      name: 'unlockPinKal',
-      desc: '',
+      'Show Unopened Warning',
+      name: 'unopenedWarningHeader',
+      desc: 'unopened_warning_header',
+      args: [],
+    );
+  }
+
+  /// `Show a warning when sending funds to an unopened account, this is useful because most of the time addresses you send to will have a balance, and sending to a new address may be the result of a typo.`
+  String get unopenedWarningInfo {
+    return Intl.message(
+      'Show a warning when sending funds to an unopened account, this is useful because most of the time addresses you send to will have a balance, and sending to a new address may be the result of a typo.',
+      name: 'unopenedWarningInfo',
+      desc: 'unopened_warning_info',
+      args: [],
+    );
+  }
+
+  /// `Are you sure this is the right address?\nThis account appears to be unopened\n\nYou can disable this warning in the settings drawer under "Unopened Warning"`
+  String get unopenedWarningWarning {
+    return Intl.message(
+      'Are you sure this is the right address?\nThis account appears to be unopened\n\nYou can disable this warning in the settings drawer under "Unopened Warning"',
+      name: 'unopenedWarningWarning',
+      desc: 'unopened_warning_warning',
+      args: [],
+    );
+  }
+
+  /// `Account Unopened`
+  String get unopenedWarningWarningHeader {
+    return Intl.message(
+      'Account Unopened',
+      name: 'unopenedWarningWarningHeader',
+      desc: 'unopened_warning_warning_header',
       args: [],
     );
   }
@@ -3851,12 +4370,32 @@ class AppLocalization {
     );
   }
 
+  /// `Using`
+  String get using {
+    return Intl.message(
+      'Using',
+      name: 'using',
+      desc: 'gift_message_using',
+      args: [],
+    );
+  }
+
   /// `View Details`
   String get viewDetails {
     return Intl.message(
       'View Details',
       name: 'viewDetails',
       desc: 'transaction_details',
+      args: [],
+    );
+  }
+
+  /// `View Transaction`
+  String get viewTX {
+    return Intl.message(
+      'View Transaction',
+      name: 'viewTX',
+      desc: 'transaction_transaction',
       args: [],
     );
   }
@@ -3881,22 +4420,42 @@ class AppLocalization {
     );
   }
 
-  /// `Welcome to Nautilus. To begin, you may create a new wallet or import an existing one.`
+  /// `Watch Only Account`
+  String get watchOnlyAccount {
+    return Intl.message(
+      'Watch Only Account',
+      name: 'watchOnlyAccount',
+      desc: 'watch_only_account',
+      args: [],
+    );
+  }
+
+  /// `Sends are disabled on watch only addresses`
+  String get watchOnlySendDisabled {
+    return Intl.message(
+      'Sends are disabled on watch only addresses',
+      name: 'watchOnlySendDisabled',
+      desc: 'watch_only_send_disabled',
+      args: [],
+    );
+  }
+
+  /// ``
   String get welcomeText {
     return Intl.message(
-      'Welcome to Nautilus. To begin, you may create a new wallet or import an existing one.',
+      '',
       name: 'welcomeText',
       desc: 'intro_welcome_title',
       args: [],
     );
   }
 
-  /// ``
-  String get welcomeTextKal {
+  /// `Welcome to Nautilus. To start, create a new wallet or import an existing one.`
+  String get welcomeTextUpdated {
     return Intl.message(
-      '',
-      name: 'welcomeTextKal',
-      desc: '',
+      'Welcome to Nautilus. To start, create a new wallet or import an existing one.',
+      name: 'welcomeTextUpdated',
+      desc: 'intro_welcome_title',
       args: [],
     );
   }
@@ -3972,7 +4531,6 @@ class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
       Locale.fromSubtags(languageCode: 'bg'),
       Locale.fromSubtags(languageCode: 'bn'),
       Locale.fromSubtags(languageCode: 'ca'),
-      Locale.fromSubtags(languageCode: 'cs'),
       Locale.fromSubtags(languageCode: 'da'),
       Locale.fromSubtags(languageCode: 'de'),
       Locale.fromSubtags(languageCode: 'es'),
@@ -3985,7 +4543,6 @@ class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
       Locale.fromSubtags(languageCode: 'ja'),
       Locale.fromSubtags(languageCode: 'ko'),
       Locale.fromSubtags(languageCode: 'lv'),
-      Locale.fromSubtags(languageCode: 'messages'),
       Locale.fromSubtags(languageCode: 'ms'),
       Locale.fromSubtags(languageCode: 'nl'),
       Locale.fromSubtags(languageCode: 'no'),
@@ -3999,8 +4556,6 @@ class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
       Locale.fromSubtags(languageCode: 'tr'),
       Locale.fromSubtags(languageCode: 'uk'),
       Locale.fromSubtags(languageCode: 'vi'),
-      Locale.fromSubtags(languageCode: 'zh-Hans'),
-      Locale.fromSubtags(languageCode: 'zh-Hant'),
       Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
       Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
     ];

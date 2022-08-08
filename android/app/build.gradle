@@ -35,14 +35,13 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     ndkVersion '21.3.6528147'
-    compileSdkVersion 31
+    compileSdkVersion 33
 
 
     defaultConfig {
         applicationId "co.perish.nautiluswallet"
-        // minSdkVersion 19
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

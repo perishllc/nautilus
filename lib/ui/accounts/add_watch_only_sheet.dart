@@ -9,7 +9,7 @@ import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
@@ -94,7 +94,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
         });
       } else {
         setState(() {
-          _nameHint = AppLocalization.of(context)!.contactNameHint;
+          _nameHint = AppLocalization.of(context).contactNameHint;
         });
       }
     });
@@ -301,14 +301,14 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _addressHint ?? AppLocalization.of(context)!.enterUserOrAddress,
+      hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
       prefixButton: TextFieldButton(
           icon: AppIcons.scan,
           onPressed: () async {
             UIUtil.cancelLockEvent();
             final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
             if (scanResult == null) {
-              UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
+              UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
             } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
               if (mounted) {
                 setState(() {
@@ -398,7 +398,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
             _users = [];
           });
         } else if (isUser || isDomain) {
-          final List<User> matchedList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(SendSheetHelpers.stripPrefixes(text));
+          final List<User> matchedList = await sl.get<DBHelper>().getUserSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
           });
@@ -460,7 +460,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
     if (formAddress.isEmpty) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context)!.addressOrUserMissing;
+        _addressValidationText = AppLocalization.of(context).addressOrUserMissing;
       });
     } else if (formAddress.startsWith("nano_")) {
       // we're dealing with an address:
@@ -468,16 +468,16 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
       if (!Address(formAddress).isValid()) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context)!.invalidAddress;
+          _addressValidationText = AppLocalization.of(context).invalidAddress;
         });
       }
 
       _addressFocusNode!.unfocus();
-      final bool contactExists = await sl.get<DBHelper>().contactExistsWithAddress(formAddress);
-      if (contactExists) {
+      final bool accountExists = await sl.get<DBHelper>().watchAccountExistsWithAddress(formAddress);
+      if (accountExists) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context)!.contactExists;
+          _addressValidationText = AppLocalization.of(context).watchAccountExists;
         });
       } else {
         // get the corresponding username if it exists:
@@ -490,11 +490,11 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
       }
     } else {
       // we're dealing with a username:
-      final bool contactExists = await sl.get<DBHelper>().contactExistsWithUsername(formattedAddress);
-      if (contactExists) {
+      final bool accountExists = await sl.get<DBHelper>().watchAccountExistsWithAddress(formattedAddress);
+      if (accountExists) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context)!.contactExists;
+          _addressValidationText = AppLocalization.of(context).watchAccountExists;
         });
       } else {
         // check if there's a corresponding address:
@@ -507,14 +507,16 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
             if (user.nickname != null && user.nickname!.isNotEmpty) {
               isValid = false;
               setState(() {
-                _addressValidationText = AppLocalization.of(context)!.contactExists;
+                _addressValidationText = AppLocalization.of(context).watchAccountExists;
               });
             }
           });
         } else {
           isValid = false;
           setState(() {
-            _addressValidationText = formattedAddress.contains(".") ? AppLocalization.of(context)!.domainInvalid : AppLocalization.of(context)!.userNotFound;
+            _addressValidationText = (formattedAddress.contains(".") || formattedAddress.contains(r"$"))
+                ? AppLocalization.of(context).domainInvalid
+                : AppLocalization.of(context).userNotFound;
           });
         }
       }
@@ -536,7 +538,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
     if (_nameController!.text.isEmpty) {
       isValid = false;
       setState(() {
-        _nameValidationText = AppLocalization.of(context)!.accountNameMissing;
+        _nameValidationText = AppLocalization.of(context).accountNameMissing;
       });
     }
     return isValid;
@@ -574,7 +576,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                       child: Column(
                         children: <Widget>[
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.watchOnlyAccount, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).watchOnlyAccount, context),
                             style: AppStyles.textStyleHeader(context),
                             maxLines: 1,
                             stepGranularity: 0.1,
@@ -614,7 +616,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                                     topMargin: 30,
                                     padding: const EdgeInsets.symmetric(horizontal: 30),
                                     textInputAction: TextInputAction.next,
-                                    hintText: _nameHint ?? AppLocalization.of(context)!.accountNameHint,
+                                    hintText: _nameHint ?? AppLocalization.of(context).accountNameHint,
                                     keyboardType: TextInputType.text,
 
                                     style: TextStyle(
@@ -732,7 +734,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY,
-                    AppLocalization.of(context)!.addWatchOnlyAccount,
+                    AppLocalization.of(context).addWatchOnlyAccount,
                     Dimens.BUTTON_TOP_DIMENS,
                     disabled: _addingAccount,
                     onPressed: () async {
@@ -750,12 +752,12 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                         }
 
                         if (newAccount == null) {
-                          UIUtil.showSnackbar(AppLocalization.of(context)!.addWatchOnlyAccount, context, durationMs: 5000);
+                          UIUtil.showSnackbar(AppLocalization.of(context).addWatchOnlyAccount, context, durationMs: 5000);
                           return;
                         }
                         StateContainer.of(context).updateRecentlyUsedAccounts();
                         EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: newAccount, created: true));
-                        UIUtil.showSnackbar(AppLocalization.of(context)!.addWatchOnlyAccountSuccess, context, durationMs: 5000);
+                        UIUtil.showSnackbar(AppLocalization.of(context).addWatchOnlyAccountSuccess, context, durationMs: 5000);
                         Navigator.of(context).pop();
                       }
                     },
@@ -768,7 +770,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY_OUTLINE,
-                    AppLocalization.of(context)!.close,
+                    AppLocalization.of(context).close,
                     Dimens.BUTTON_BOTTOM_DIMENS,
                     onPressed: () {
                       Navigator.pop(context);

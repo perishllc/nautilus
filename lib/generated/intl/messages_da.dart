@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Účet"),
+        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
         "accounts": MessageLookupByLibrary.simpleMessage("Účty"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Jste si jisti, že jste zálohovali svou tajnou frázi nebo semínko?"),
@@ -32,6 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("Bloker en bruger"),
         "addContact": MessageLookupByLibrary.simpleMessage("Přidat kontakt"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Tilføj favorit"),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "address": MessageLookupByLibrary.simpleMessage(""),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Adresa zkopírována"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Zadejte adresu"),
@@ -41,9 +47,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Indtast venligst et brugernavn eller adresse"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Sdílet adresu"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliasser"),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Prosím zadejte částku"),
         "asked": MessageLookupByLibrary.simpleMessage("spurgte"),
+        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
         "authMethod": MessageLookupByLibrary.simpleMessage("Metoda ověření"),
         "autoImport": MessageLookupByLibrary.simpleMessage("Automatisk import"),
         "autoLockHeader":
@@ -99,7 +107,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Potvrdit"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Potvrďte heslo"),
+        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Připojování"),
+        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("%1 přidán do kontaktů."),
         "contactExists":
@@ -122,6 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("Kopírovat"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Kopírovat adresu"),
         "copyLink": MessageLookupByLibrary.simpleMessage("Kopier link"),
+        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
         "copySeed": MessageLookupByLibrary.simpleMessage("Kopírovat semínko"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Kopier tegnebogadresse til udklipshol"),
@@ -139,7 +151,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Heslo je volitelné a vaše peněženka bude bez ohledu na to chráněna vaším PIN nebo biometrickými údaji."),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Vytvořit"),
+        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
         "createQR": MessageLookupByLibrary.simpleMessage("Opret QR-kode"),
+        "created": MessageLookupByLibrary.simpleMessage(""),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Oprettelse af gavekort"),
         "currency": MessageLookupByLibrary.simpleMessage("Měna"),
@@ -154,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Dekryptering Fejl!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Hlavní účet"),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Účet %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Slet"),
@@ -168,6 +183,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("Zavrhnout"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Ugyldigt domænenavn"),
+        "donateButton": MessageLookupByLibrary.simpleMessage(""),
+        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
         "edit": MessageLookupByLibrary.simpleMessage("Rediger"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Nastavení hesla k peněžence se nezdařilo"),
@@ -178,23 +195,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Indtast Besked"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Zadejte vaše heslo"),
+        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage(
             "Indtast bruger eller adresse"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Indtast et brugernavn"),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("od někoho"),
-        "exampleCardFromKal":
-            MessageLookupByLibrary.simpleMessage("od náhodné opičky"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
             "Vítejte v Natriu. Jakmile obdržíte NANO, transakce se zobrazí takto:"),
-        "exampleCardIntroKal": MessageLookupByLibrary.simpleMessage(
-            "Vítejte v Kalium. Jakmile obdržíte BANANO, transakce se zobrazí takto:"),
         "exampleCardLittle": MessageLookupByLibrary.simpleMessage("Málo"),
         "exampleCardLot": MessageLookupByLibrary.simpleMessage("Hodně"),
         "exampleCardTo": MessageLookupByLibrary.simpleMessage("někomu"),
-        "exampleCardToKal":
-            MessageLookupByLibrary.simpleMessage("náhodné opičce"),
         "examplePayRecipient": MessageLookupByLibrary.simpleMessage("@dad"),
         "examplePayRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Tillykke med fødselsdagen"),
@@ -243,24 +256,36 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ověřte se pro zálohu semínka."),
         "from": MessageLookupByLibrary.simpleMessage("Fra"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("opfyldt"),
+        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Du har en gave!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Tom gave"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Gave Beløb"),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Gave fra"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Indlæs et digitalt gavekort med NANO! Indstil et beløb, og en valgfri meddelelse, som modtageren kan se, når de åbner den!\n\nNår du er oprettet, får du et link, som du kan sende til nogen, som når de åbnes automatisk distribuerer midlerne til modtageren efter installation af Nautilus!\n\nHvis modtageren allerede er en Nautilus-bruger, vil de få en anmodning om at overføre pengene til deres konto, når du åbner linket"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Gave besked"),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Zpět"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Gå til QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Chápu!"),
+        "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffSupportedMethodNotFound":
+            MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("Skjul"),
         "hideAccountHeader": MessageLookupByLibrary.simpleMessage("Skrýt účet"),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
+        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
         "home": MessageLookupByLibrary.simpleMessage("Hjem"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Chápu rizika"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignorovat"),
+        "imSure": MessageLookupByLibrary.simpleMessage(""),
         "import": MessageLookupByLibrary.simpleMessage("Importovat"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "Det link, du klikkede på, indeholder noget nano, vil du importere det til denne tegnebog, eller refundere det til den, der sendte det?"),
@@ -285,11 +310,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Zadaná adresa není platná"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Neplatné heslo"),
-        "kaliumWallet":
-            MessageLookupByLibrary.simpleMessage("Kalium peněženka"),
+        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
         "language": MessageLookupByLibrary.simpleMessage("Jazyk"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("Link Kopieret"),
-        "liveSupportButton": MessageLookupByLibrary.simpleMessage("Podpora"),
         "loaded": MessageLookupByLibrary.simpleMessage("Indlæst"),
         "loadedInto": MessageLookupByLibrary.simpleMessage("Indlæst i"),
         "lockAppSetting":
@@ -302,8 +326,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Jste si jisti?"),
         "logoutDetail": MessageLookupByLibrary.simpleMessage(
             "Odhlášením odstraníte z tohoto zařízení vaše semínko a všechna data související s Nautilus. Pokud vaše semínko není zálohováno, už nikdy nebudete mít přístup ke svým prostředkům"),
-        "logoutDetailKal": MessageLookupByLibrary.simpleMessage(
-            "Odhlášením odstraníte z tohoto zařízení vaše semeno a všechna data související s Kalium. Pokud vaše semeno není zálohováno, už nikdy nebudete mít přístup ke svým finančním prostředkům"),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Pokud jste zálohovali své semínko, nemusíte se ničeho obávat."),
         "manage": MessageLookupByLibrary.simpleMessage("Spravovat"),
@@ -316,6 +338,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Memo sendt igen! Hvis modtagerens enhed stadig ikke er anerkendt, kan modtagerens enhed være offline."),
+        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Zpráva"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Minimální částka pro odeslání je% 1 NANO"),
@@ -325,16 +348,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mnemonická fráze"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Tajná fráze může obsahovat pouze 24 slov"),
+        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
+        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
+        "nearby": MessageLookupByLibrary.simpleMessage(""),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Denne funktion kræver, at du har en længere transaktionshistorik for at forhindre spam.\n\nAlternativt kan du vise en QR-kode, som nogen kan scanne."),
         "needVerificationAlertHeader":
             MessageLookupByLibrary.simpleMessage("Bekræftelse nødvendig"),
         "newAccountIntro": MessageLookupByLibrary.simpleMessage(
             "Toto je váš nový účet. Jakmile obdržíte NANO, transakce se zobrazí takto:"),
-        "newAccountIntroKal": MessageLookupByLibrary.simpleMessage(
-            "Toto je váš nový účet. Jakmile obdržíte BANANO, transakce se zobrazí takto:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Nová peněženka"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Další"),
         "no": MessageLookupByLibrary.simpleMessage("Ne"),
@@ -350,16 +375,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "notSent": MessageLookupByLibrary.simpleMessage("ikke sendt"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Otevřete Nautilus pro zobrazení této transakce"),
-        "notificationBodyKal": MessageLookupByLibrary.simpleMessage(
-            "Chcete-li zobrazit tuto transakci, otevřete Kalium"),
         "notificationHeaderSupplement":
             MessageLookupByLibrary.simpleMessage("Klepnutím otevřete"),
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "For at denne funktion skal fungere korrekt, skal meddelelser være aktiveret"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Přijato %1 NANO"),
-        "notificationTitleKal":
-            MessageLookupByLibrary.simpleMessage("Přijato %1 BANANO"),
         "notifications": MessageLookupByLibrary.simpleMessage("Upozornění"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Off"),
@@ -389,6 +410,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payments": MessageLookupByLibrary.simpleMessage("Betalinger"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Vyberte ze seznamu"),
+        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("Pin se neshoduje"),
         "pinConfirmTitle":
@@ -402,6 +424,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Zadejte PIN pro změnu zástupce."),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Zadejte PIN pro zálohu semínka"),
+        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleDeniabilityParagraph":
+            MessageLookupByLibrary.simpleMessage(""),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences": MessageLookupByLibrary.simpleMessage("Předvolby"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage(
             "Zásady ochrany osobních údajů"),
@@ -462,12 +489,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Anmodning% 1% 2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Anmodning mislykkedes: Denne bruger ser ikke ud til at have Nautilus installeret, eller har meddelelser deaktiveret."),
+        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("Anmod om betaling"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "Fejl ved afsendelse af betalingsanmodning, modtagerens enhed kan være offline eller utilgængelig."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Anmodning sendt igen! Hvis modtagerens enhed stadig ikke er anerkendt, kan modtagerens enhed være offline."),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
         "requested": MessageLookupByLibrary.simpleMessage("anmodet"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("Anmodet fra"),
         "requesting": MessageLookupByLibrary.simpleMessage("Anmoder"),
@@ -484,8 +514,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Zdá se, že vaše zařízení je \"rootováno\", \"jailbroken\" nebo upraveno způsobem, který ohrožuje zabezpečení. Před pokračováním se doporučuje resetovat zařízení do původního stavu."),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Naskenujte QR kód Nano \n adresy"),
-        "scanInstructionsKal": MessageLookupByLibrary.simpleMessage(
-            "Naskenujte QR kód adresy Banano \n"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Oskenovat QR kód"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Søg efter noget"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -516,8 +544,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Poslat"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Odeslat %1 NANO"),
-        "sendAmountConfirmKal":
-            MessageLookupByLibrary.simpleMessage("Odeslat %1 BANANO"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Došlo k chybě. Zkuste to později."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Odeslat z"),
@@ -531,12 +557,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Send eller anmod om en betaling, med End to End-krypterede meddelelser!\n\nBetalingsanmodninger, notater, og meddelelser kan kun modtages af andre nautilus-brugere.\n\nDu behøver ikke at have et brugernavn for at sende eller modtage betalingsanmodninger, og du kan bruge dem til din egen journalføring, selvom de ikke bruger nautilus."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Send oplysninger om ark"),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
         "sending": MessageLookupByLibrary.simpleMessage("Odesílání"),
         "sent": MessageLookupByLibrary.simpleMessage("Odesláno"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Odeslat"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Nastavit heslo"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Heslo bylo úspěšně nastaveno"),
+        "setPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Nastavit heslo peněženky"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -546,19 +576,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Načíst z papírové penězenky"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Del link"),
+        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
         "shareNautilus":
             MessageLookupByLibrary.simpleMessage("Sdílet Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Vyzkoušejte Nautilus! Špičková mobilní peněženka NANO!"),
+        "show": MessageLookupByLibrary.simpleMessage(""),
+        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
         "showContacts": MessageLookupByLibrary.simpleMessage("Vis kontakter"),
+        "showFunding": MessageLookupByLibrary.simpleMessage(""),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
+        "showQR": MessageLookupByLibrary.simpleMessage(""),
+        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "someone": MessageLookupByLibrary.simpleMessage(""),
+        "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
+        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Støt udvikleren"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Přepnout na semínko"),
         "systemDefault":
             MessageLookupByLibrary.simpleMessage("Výchozí systému"),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
         "tapToHide": MessageLookupByLibrary.simpleMessage("Klepnutím skryjete"),
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Klikněte pro zobrazení"),
@@ -603,8 +644,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ověřte a odemkněte Nautilus"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "Zadejte PIN pro odemčení Natria"),
-        "unlockPinKal": MessageLookupByLibrary.simpleMessage(
-            "Chcete-li odemknout Kalium, zadejte PIN"),
+        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarningHeader":
+            MessageLookupByLibrary.simpleMessage(""),
         "unpaid": MessageLookupByLibrary.simpleMessage("ubetalt"),
         "unread": MessageLookupByLibrary.simpleMessage("ulæste"),
         "uptime": MessageLookupByLibrary.simpleMessage("Provozuschopnost"),
@@ -628,13 +672,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Brugernavn ikke tilgængelig"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "Nautilus brugernavne er en centraliseret tjeneste leveret af Nano.to"),
+        "using": MessageLookupByLibrary.simpleMessage(""),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Zobrazit detaily"),
+        "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Hlasovací síla"),
         "warning": MessageLookupByLibrary.simpleMessage("Varování"),
+        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Vítejte v Nautilus. Nejprve můžete vytvořit novou peněženku nebo importovat stávající."),
-        "welcomeTextKal": MessageLookupByLibrary.simpleMessage(
-            "Vítejte v Kalium. Nejprve můžete vytvořit novou peněženku nebo importovat stávající."),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
         "withAddress": MessageLookupByLibrary.simpleMessage("Med adresse"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Med besked"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Po %1 minutě"),

@@ -5,6 +5,16 @@
     "type": "text",
     "description": "Account text"
   },
+  "accountNameHint": "",
+  "@accountNameHint": {
+    "type": "text",
+    "description": "enter_name_hint"
+  },
+  "accountNameMissing": "",
+  "@accountNameMissing": {
+    "type": "text",
+    "description": "account_name_missing"
+  },
   "accounts": "账户",
   "@accounts": {
     "type": "text",
@@ -40,6 +50,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "address": "",
+  "@address": {
+    "type": "text",
+    "description": "send_warning_address"
+  },
   "addressCopied": "地址已复制",
   "@addressCopied": {
     "type": "text",
@@ -65,10 +80,30 @@
     "type": "text",
     "description": "receive_share_cta"
   },
+  "addWatchOnlyAccount": "",
+  "@addWatchOnlyAccount": {
+    "type": "text",
+    "description": "watch_only_add"
+  },
+  "addWatchOnlyAccountError": "",
+  "@addWatchOnlyAccountError": {
+    "type": "text",
+    "description": "watch_only_add_error"
+  },
+  "addWatchOnlyAccountSuccess": "",
+  "@addWatchOnlyAccountSuccess": {
+    "type": "text",
+    "description": "watch_only_add_success"
+  },
   "aliases": "别名",
   "@aliases": {
     "type": "text",
     "description": "card_details_aliases"
+  },
+  "amountGiftGreaterError": "",
+  "@amountGiftGreaterError": {
+    "type": "text",
+    "description": "gift_split_greater_error"
   },
   "amountMissing": "请输入金额",
   "@amountMissing": {
@@ -79,6 +114,11 @@
   "@asked": {
     "type": "text",
     "description": "home_asked_cta"
+  },
+  "authConfirm": "",
+  "@authConfirm": {
+    "type": "text",
+    "description": "auth_confirm_message"
   },
   "authMethod": "验证方法",
   "@authMethod": {
@@ -245,10 +285,25 @@
     "type": "text",
     "description": "A text field hint that tells the user to confirm the password"
   },
+  "confirmPinHint": "",
+  "@confirmPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the pin"
+  },
   "connectingHeader": "连接中",
   "@connectingHeader": {
     "type": "text",
     "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "connectionWarning": "",
+  "@connectionWarning": {
+    "type": "text",
+    "description": "home_connection_warning"
+  },
+  "connectionWarningBody": "",
+  "@connectionWarningBody": {
+    "type": "text",
+    "description": "connection_warning_body"
   },
   "contactAdded": "%1已被添加到联系人！",
   "@contactAdded": {
@@ -320,6 +375,11 @@
     "type": "text",
     "description": "copy_link"
   },
+  "copyMessage": "",
+  "@copyMessage": {
+    "type": "text",
+    "description": "copy_message"
+  },
   "copySeed": "复制种子",
   "@copySeed": {
     "type": "text",
@@ -334,6 +394,11 @@
   "@createAPasswordHeader": {
     "type": "text",
     "description": "A paragraph that tells the users to create a password."
+  },
+  "created": "",
+  "@created": {
+    "type": "text",
+    "description": "gift_created"
   },
   "createGiftCard": "创建礼品卡",
   "@createGiftCard": {
@@ -364,6 +429,11 @@
   "@createPasswordSheetHeader": {
     "type": "text",
     "description": "Prompt user to create a new password"
+  },
+  "createPinHint": "",
+  "@createPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a pin"
   },
   "createQR": "创建二维码",
   "@createQR": {
@@ -410,6 +480,11 @@
     "type": "text",
     "description": "Default account name"
   },
+  "defaultGiftMessage": "",
+  "@defaultGiftMessage": {
+    "type": "text",
+    "description": "default_gift_message"
+  },
   "defaultNewAccountName": "账户 %1",
   "@defaultNewAccountName": {
     "type": "text",
@@ -450,6 +525,16 @@
     "type": "text",
     "description": "domain_invalid_name"
   },
+  "donateButton": "",
+  "@donateButton": {
+    "type": "text",
+    "description": "donate_button"
+  },
+  "donateToSupport": "",
+  "@donateToSupport": {
+    "type": "text",
+    "description": "settings_support_donate"
+  },
   "edit": "编辑",
   "@edit": {
     "type": "text",
@@ -485,6 +570,11 @@
     "type": "text",
     "description": "A text field hint that tells the users to enter their password"
   },
+  "enterSplitAmount": "",
+  "@enterSplitAmount": {
+    "type": "text",
+    "description": "gift_split_amount_hint"
+  },
   "enterUsername": "输入用户名",
   "@enterUsername": {
     "type": "text",
@@ -494,6 +584,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "errorProcessingGiftCard": "",
+  "@errorProcessingGiftCard": {
+    "type": "text",
+    "description": "gift_process_error"
   },
   "eula": "EULA",
   "@eula": {
@@ -505,15 +600,11 @@
     "type": "text",
     "description": "example_card_from"
   },
-  "exampleCardFromKal": "来自一只未知的猴子",
-  "@exampleCardFromKal": {},
   "exampleCardIntro": "欢迎来到Nautilus。当您收到或发送NANO时，交易将如下出现。",
   "@exampleCardIntro": {
     "type": "text",
     "description": "example_card_intro"
   },
-  "exampleCardIntroKal": "欢迎来到Kalium。当您收到或发送BANANO时，它将显示在下面.",
-  "@exampleCardIntroKal": {},
   "exampleCardLittle": "一点",
   "@exampleCardLittle": {
     "type": "text",
@@ -529,8 +620,6 @@
     "type": "text",
     "description": "example_card_to"
   },
-  "exampleCardToKal": "给一只未知的猴子",
-  "@exampleCardToKal": {},
   "examplePaymentExplainer": "一旦你发送或收到付款请求，它们就会像这样显示在这里，卡片的颜色和标签表示状态。 \n\n绿色表示请求已付款。\n黄色表示请求/备忘录尚未付款/已读。\n红色表示请求尚未被读取或接收。\n\n 没有金额的中性色卡片只是信息。",
   "@examplePaymentExplainer": {
     "type": "text",
@@ -676,6 +765,16 @@
     "type": "text",
     "description": "history_fulfilled"
   },
+  "fundingBannerHeader": "",
+  "@fundingBannerHeader": {
+    "type": "text",
+    "description": "funding_banner_header"
+  },
+  "fundingHeader": "",
+  "@fundingHeader": {
+    "type": "text",
+    "description": "funding_header"
+  },
   "giftAlert": "你有天赋！",
   "@giftAlert": {
     "type": "text",
@@ -691,6 +790,16 @@
     "type": "text",
     "description": "gift_amount"
   },
+  "giftCardCreationError": "",
+  "@giftCardCreationError": {
+    "type": "text",
+    "description": "create_gift_error"
+  },
+  "giftCardCreationErrorSent": "",
+  "@giftCardCreationErrorSent": {
+    "type": "text",
+    "description": "gift_generic_error"
+  },
   "giftFrom": "礼物来自",
   "@giftFrom": {
     "type": "text",
@@ -705,6 +814,11 @@
   "@giftMessage": {
     "type": "text",
     "description": "gift_message"
+  },
+  "giftProcessSuccess": "",
+  "@giftProcessSuccess": {
+    "type": "text",
+    "description": "gift_process_success"
   },
   "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
   "@giftWarning": {
@@ -726,6 +840,16 @@
     "type": "text",
     "description": "go_to_qr_code"
   },
+  "handoff": "",
+  "@handoff": {
+    "type": "text",
+    "description": "send_handoff"
+  },
+  "handoffSupportedMethodNotFound": "",
+  "@handoffSupportedMethodNotFound": {
+    "type": "text",
+    "description": "handoff_method_not_found"
+  },
   "hide": "隐藏",
   "@hide": {
     "type": "text",
@@ -735,6 +859,21 @@
   "@hideAccountHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
+  },
+  "hideAccountsConfirmation": "",
+  "@hideAccountsConfirmation": {
+    "type": "text",
+    "description": "hide accounts confirmation info"
+  },
+  "hideAccountsHeader": "",
+  "@hideAccountsHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "hideEmptyAccounts": "",
+  "@hideEmptyAccounts": {
+    "type": "text",
+    "description": "hide_empty_accounts"
   },
   "home": "家",
   "@home": {
@@ -791,6 +930,11 @@
     "type": "text",
     "description": "intro_welcome_have_wallet"
   },
+  "imSure": "",
+  "@imSure": {
+    "type": "text",
+    "description": "send_confirm_warning"
+  },
   "instantly": "立刻",
   "@instantly": {
     "type": "text",
@@ -800,16 +944,6 @@
   "@insufficientBalance": {
     "type": "text",
     "description": "send_insufficient_balance"
-  },
-  "intro.new-key": "",
-  "@intro.new-key": {},
-  "intro.not-reviewed-text": "",
-  "@intro.not-reviewed-text": {},
-  "intro.too-long-text": "",
-  "@intro.too-long-text": {},
-  "intro.welcome": "",
-  "@intro.welcome": {
-    "description": "This is a description of a key so that the translator better understands the context"
   },
   "invalidAddress": "无效的目标地址",
   "@invalidAddress": {
@@ -821,15 +955,20 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
+  "invalidPin": "",
+  "@invalidPin": {
+    "type": "text",
+    "description": "An error indicating a pin has been entered incorrectly"
+  },
+  "iosFundingMessage": "",
+  "@iosFundingMessage": {
+    "type": "text",
+    "description": "ios_funding_message"
+  },
   "iUnderstandTheRisks": "我已明白风险",
   "@iUnderstandTheRisks": {
     "type": "text",
     "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
-  },
-  "kaliumWallet": "Kalium钱包",
-  "@kaliumWallet": {
-    "type": "text",
-    "description": "kalium_wallet"
   },
   "language": "语言",
   "@language": {
@@ -840,11 +979,6 @@
   "@linkCopied": {
     "type": "text",
     "description": "link_copied"
-  },
-  "liveSupportButton": "技术支持",
-  "@liveSupportButton": {
-    "type": "text",
-    "description": "A button to open up the live support window"
   },
   "loaded": "已加载",
   "@loaded": {
@@ -886,8 +1020,6 @@
     "type": "text",
     "description": "settings_logout_alert_message"
   },
-  "logoutDetailKal": "注销将从此设备中删除您的种子和所有与Kalium相关的数据。如果您的种子没有备份，您将永远无法再次访问您的帐户",
-  "@logoutDetailKal": {},
   "logoutReassurance": "只要您有备份您的种子，就没有什么可担心的。",
   "@logoutReassurance": {
     "type": "text",
@@ -928,6 +1060,11 @@
     "type": "text",
     "description": "memo_sent_again"
   },
+  "messageCopied": "",
+  "@messageCopied": {
+    "type": "text",
+    "description": "message_copied"
+  },
   "messageHeader": "留言",
   "@messageHeader": {
     "type": "text",
@@ -953,15 +1090,35 @@
     "type": "text",
     "description": "err"
   },
+  "monthlyServerCosts": "",
+  "@monthlyServerCosts": {
+    "type": "text",
+    "description": "support_monthly_costs"
+  },
   "moonpay": "MoonPay",
   "@moonpay": {
     "type": "text",
     "description": "moonpay_ramp"
   },
+  "moreSettings": "",
+  "@moreSettings": {
+    "type": "text",
+    "description": "settings_more"
+  },
   "natricon": "Natricon",
   "@natricon": {
     "type": "text",
     "description": "natricon_settings"
+  },
+  "nautilusWallet": "",
+  "@nautilusWallet": {
+    "type": "text",
+    "description": "nautilus_wallet"
+  },
+  "nearby": "",
+  "@nearby": {
+    "type": "text",
+    "description": "nearby_devices"
   },
   "needVerificationAlert": "此功能要求您具有更长的交易历史记录，以防止垃圾邮件。\n\n或者，您可以显示二维码供他人扫描。",
   "@needVerificationAlert": {
@@ -978,8 +1135,6 @@
     "type": "text",
     "description": "Alternate account intro card"
   },
-  "newAccountIntroKal": "这是您的新账户。当您收到 BANANO 时, 交易会如下出现：",
-  "@newAccountIntroKal": {},
   "newWallet": "创建新钱包",
   "@newWallet": {
     "type": "text",
@@ -1030,8 +1185,6 @@
     "type": "text",
     "description": "notification_body"
   },
-  "notificationBodyKal": "打开Kalium查看此交易",
-  "@notificationBodyKal": {},
   "notificationHeaderSupplement": "点击打开",
   "@notificationHeaderSupplement": {
     "type": "text",
@@ -1052,8 +1205,6 @@
     "type": "text",
     "description": "notification_title"
   },
-  "notificationTitleKal": "收到 %1 BANANO",
-  "@notificationTitleKal": {},
   "notSent": "未发送",
   "@notSent": {
     "type": "text",
@@ -1094,10 +1245,6 @@
     "type": "text",
     "description": "history_opened"
   },
-  "page.home.counter": "",
-  "@page.home.counter": {},
-  "page.home.title": "",
-  "@page.home.title": {},
   "paid": "已支付",
   "@paid": {
     "type": "text",
@@ -1148,12 +1295,15 @@
     "type": "text",
     "description": "pay_request"
   },
-  "receivable": "",
-  "@receivable": {},
   "pickFromList": "从代表名单选择",
   "@pickFromList": {
     "type": "text",
     "description": "pick rep from list"
+  },
+  "pinBlank": "",
+  "@pinBlank": {
+    "type": "text",
+    "description": "An error indicating a pin has been entered incorrectly"
   },
   "pinConfirmError": "识别码不匹配",
   "@pinConfirmError": {
@@ -1190,10 +1340,30 @@
     "type": "text",
     "description": "change_representative_pin"
   },
+  "pinsDontMatch": "",
+  "@pinsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a pin has been confirmed incorrectly"
+  },
   "pinSeedBackup": "输入识别码以查看钱包种子。",
   "@pinSeedBackup": {
     "type": "text",
     "description": "settings_pin_title"
+  },
+  "plausibleDeniabilityParagraph": "",
+  "@plausibleDeniabilityParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells warns the user this is plausible deniability pin."
+  },
+  "plausibleInfoHeader": "",
+  "@plausibleInfoHeader": {
+    "type": "text",
+    "description": "plausible_info_header"
+  },
+  "plausibleSheetInfo": "",
+  "@plausibleSheetInfo": {
+    "type": "text",
+    "description": "plausible_sheet_info"
   },
   "preferences": "偏好",
   "@preferences": {
@@ -1395,6 +1565,11 @@
     "type": "text",
     "description": "request_generic_error"
   },
+  "requestFrom": "",
+  "@requestFrom": {
+    "type": "text",
+    "description": "request_title"
+  },
   "requesting": "正在申请",
   "@requesting": {
     "type": "text",
@@ -1414,6 +1589,16 @@
   "@requestSentButNotReceived": {
     "type": "text",
     "description": "request_sent_again"
+  },
+  "requestSheetInfo": "",
+  "@requestSheetInfo": {
+    "type": "text",
+    "description": "request_sheet_info"
+  },
+  "requestSheetInfoHeader": "",
+  "@requestSheetInfoHeader": {
+    "type": "text",
+    "description": "request_sheet_info_header"
   },
   "requireAPasswordToOpenHeader": "需要密码来打开Nautilus吗？",
   "@requireAPasswordToOpenHeader": {
@@ -1450,8 +1635,6 @@
     "type": "text",
     "description": "scan_send_instruction_label"
   },
-  "scanInstructionsKal": "扫描BANANO二维码地址",
-  "@scanInstructionsKal": {},
   "scanQrCode": "扫描二维码",
   "@scanQrCode": {
     "type": "text",
@@ -1542,8 +1725,6 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
-  "sendAmountConfirmKal": "发送 %1 Banano",
-  "@sendAmountConfirmKal": {},
   "sendError": "发生错误。请稍后再试。",
   "@sendError": {
     "type": "text",
@@ -1584,6 +1765,11 @@
     "type": "text",
     "description": "send_sheet_info_header"
   },
+  "sendViaNFC": "",
+  "@sendViaNFC": {
+    "type": "text",
+    "description": "send_payment_nfc"
+  },
   "sent": "发送",
   "@sent": {
     "type": "text",
@@ -1603,6 +1789,21 @@
   "@setPasswordSuccess": {
     "type": "text",
     "description": "Setting a Wallet Password was successful"
+  },
+  "setPin": "",
+  "@setPin": {
+    "type": "text",
+    "description": "A button that sets the plausible deniability password"
+  },
+  "setPinSuccess": "",
+  "@setPinSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Pin was successful"
+  },
+  "setPlausibleDeniabilityPin": "",
+  "@setPlausibleDeniabilityPin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
   },
   "settingsHeader": "设置",
   "@settingsHeader": {
@@ -1629,19 +1830,16 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
-  "shareKalium": "分享Kalium",
-  "@shareKalium": {},
-  "shareKaliumText": "来看看Kalium！Banano的官方钱包！",
-  "@shareKaliumText": {},
   "shareLink": "分享链接",
   "@shareLink": {
     "type": "text",
     "description": "share_link"
   },
-  "shareNatrium": "",
-  "@shareNatrium": {},
-  "shareNatriumText": "",
-  "@shareNatriumText": {},
+  "shareMessage": "",
+  "@shareMessage": {
+    "type": "text",
+    "description": "share_message"
+  },
   "shareNautilus": "分享Nautilus",
   "@shareNautilus": {
     "type": "text",
@@ -1652,20 +1850,65 @@
     "type": "text",
     "description": "share_extra"
   },
+  "show": "",
+  "@show": {
+    "type": "text",
+    "description": "funding_show"
+  },
+  "showAccountQR": "",
+  "@showAccountQR": {
+    "type": "text",
+    "description": "show_account_qr"
+  },
   "showContacts": "显示联系人",
   "@showContacts": {
     "type": "text",
     "description": "contacts_enabled"
+  },
+  "showFunding": "",
+  "@showFunding": {
+    "type": "text",
+    "description": "show_funding_banner"
+  },
+  "showLinkQR": "",
+  "@showLinkQR": {
+    "type": "text",
+    "description": "show_link_qr"
+  },
+  "showQR": "",
+  "@showQR": {
+    "type": "text",
+    "description": "show_qr"
+  },
+  "showUnopenedWarning": "",
+  "@showUnopenedWarning": {
+    "type": "text",
+    "description": "warn_unsafe_send"
   },
   "simplex": "Simplex",
   "@simplex": {
     "type": "text",
     "description": "simplex_ramp"
   },
+  "someone": "",
+  "@someone": {
+    "type": "text",
+    "description": "send_someone"
+  },
+  "splitBy": "",
+  "@splitBy": {
+    "type": "text",
+    "description": "gift_card_split_by"
+  },
   "supportButton": "Support",
   "@supportButton": {
     "type": "text",
     "description": "A button to open up the live support window"
+  },
+  "supportDevelopment": "",
+  "@supportDevelopment": {
+    "type": "text",
+    "description": "settings_support_development"
   },
   "supportTheDeveloper": "支持开发者",
   "@supportTheDeveloper": {
@@ -1681,6 +1924,11 @@
   "@systemDefault": {
     "type": "text",
     "description": "settings_default_language_string"
+  },
+  "tapMessageToEdit": "",
+  "@tapMessageToEdit": {
+    "type": "text",
+    "description": "gift_creation_message_edit_hint"
   },
   "tapToHide": "点击隐藏",
   "@tapToHide": {
@@ -1727,15 +1975,11 @@
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferCompleteKal": "%1 BANANO 成功传送到您的 Kalium 钱包。\n",
-  "@transferCompleteKal": {},
   "transferConfirmInfo": "检测到一个包含 %1 NANO 的钱包。\n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"
   },
-  "transferConfirmInfoKal": "检测到一个包含 %1 BANANO 的钱包。\n",
-  "@transferConfirmInfoKal": {},
   "transferConfirmInfoSecond": "按键确定传送钱币。\n",
   "@transferConfirmInfoSecond": {
     "type": "text",
@@ -1761,8 +2005,6 @@
     "type": "text",
     "description": "transfer_intro"
   },
-  "transferIntroKal": "这个过程会将纸钱包的钱币转移到您的 Kalium 钱包。\n\n请按 \"%1\" 键开始。",
-  "@transferIntroKal": {},
   "transferIntroShort": "此过程会将资金从纸质钱包转移到您的Nautilus钱包。",
   "@transferIntroShort": {
     "type": "text",
@@ -1783,8 +2025,6 @@
     "type": "text",
     "description": "transfer_no_funds_toast"
   },
-  "transferNoFundsKal": "这个种子没有包含任何 BANANO",
-  "@transferNoFundsKal": {},
   "transferQrScanError": "这个二维码没有包含任何有效的种子。",
   "@transferQrScanError": {
     "type": "text",
@@ -1795,8 +2035,6 @@
     "type": "text",
     "description": "transfer_qr_scan_hint"
   },
-  "transferQrScanHintKal": "请扫描 Banano \n种子或私匙",
-  "@transferQrScanHintKal": {},
   "unacknowledged": "未被承认",
   "@unacknowledged": {
     "type": "text",
@@ -1820,17 +2058,33 @@
   "unlockBiometrics": "验证并解锁 Nautilus",
   "@unlockBiometrics": {
     "type": "text",
-    "description": "unlock_kalium_bio"
+    "description": "unlock_bio"
   },
-  "unlockBiometricsKal": "以生物特征解锁 Kalium",
-  "@unlockBiometricsKal": {},
   "unlockPin": "请输入识别码来解锁 Nautilus",
   "@unlockPin": {
     "type": "text",
-    "description": "unlock_kalium_pin"
+    "description": "unlock_pin"
   },
-  "unlockPinKal": "请输入识别码码解锁 Kalium",
-  "@unlockPinKal": {},
+  "unopenedWarningHeader": "",
+  "@unopenedWarningHeader": {
+    "type": "text",
+    "description": "unopened_warning_header"
+  },
+  "unopenedWarningInfo": "",
+  "@unopenedWarningInfo": {
+    "type": "text",
+    "description": "unopened_warning_info"
+  },
+  "unopenedWarningWarning": "",
+  "@unopenedWarningWarning": {
+    "type": "text",
+    "description": "unopened_warning_warning"
+  },
+  "unopenedWarningWarningHeader": "",
+  "@unopenedWarningWarningHeader": {
+    "type": "text",
+    "description": "unopened_warning_warning_header"
+  },
   "unpaid": "未付款",
   "@unpaid": {
     "type": "text",
@@ -1896,10 +2150,20 @@
     "type": "text",
     "description": "user_not_found"
   },
+  "using": "",
+  "@using": {
+    "type": "text",
+    "description": "gift_message_using"
+  },
   "viewDetails": "查看详情",
   "@viewDetails": {
     "type": "text",
     "description": "transaction_details"
+  },
+  "viewTX": "",
+  "@viewTX": {
+    "type": "text",
+    "description": "transaction_transaction"
   },
   "votingWeight": "投票比重",
   "@votingWeight": {
@@ -1911,13 +2175,26 @@
     "type": "text",
     "description": "settings_logout_alert_title"
   },
+  "watchOnlyAccount": "",
+  "@watchOnlyAccount": {
+    "type": "text",
+    "description": "watch_only_account"
+  },
+  "watchOnlySendDisabled": "",
+  "@watchOnlySendDisabled": {
+    "type": "text",
+    "description": "watch_only_send_disabled"
+  },
   "welcomeText": "欢迎来到Nautilus。下一步，您可以创建新钱包或导入已有钱包。",
   "@welcomeText": {
     "type": "text",
     "description": "intro_welcome_title"
   },
-  "welcomeTextKal": "欢迎来到Kalium。下一步，您可以创建新钱包或导入现有钱包。",
-  "@welcomeTextKal": {},
+  "welcomeTextUpdated": "",
+  "@welcomeTextUpdated": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
   "withAddress": "有地址",
   "@withAddress": {
     "type": "text",

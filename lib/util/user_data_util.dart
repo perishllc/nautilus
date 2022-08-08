@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -89,10 +89,10 @@ class UserDataUtil {
       return _parseData(data, type);
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.cameraAccessDenied) {
-        UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidPermissions, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
         return QRScanErrs.PERMISSION_DENIED;
       } else {
-        UIUtil.showSnackbar(AppLocalization.of(context)!.qrUnknownError, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
         return QRScanErrs.UNKNOWN_ERROR;
       }
     } on FormatException {

@@ -11,7 +11,7 @@ import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
@@ -167,21 +167,21 @@ class BlockedDetailsSheet {
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
-                                  AppLocalization.of(context)!.removeBlocked,
-                                  AppLocalization.of(context)!.removeBlockedConfirmation.replaceAll('%1', blocked.getDisplayName()!),
-                                  CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () {
+                                  AppLocalization.of(context).removeBlocked,
+                                  AppLocalization.of(context).removeBlockedConfirmation.replaceAll('%1', blocked.getDisplayName()!),
+                                  CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                                 sl.get<DBHelper>().unblockUser(blocked).then((deleted) {
                                   if (deleted) {
                                     // Delete image if exists
                                     EventTaxiImpl.singleton().fire(BlockedRemovedEvent(user: blocked));
                                     EventTaxiImpl.singleton().fire(BlockedModifiedEvent(user: blocked));
-                                    UIUtil.showSnackbar(AppLocalization.of(context)!.blockedRemoved.replaceAll("%1", blocked.getDisplayName()!), context);
+                                    UIUtil.showSnackbar(AppLocalization.of(context).blockedRemoved.replaceAll("%1", blocked.getDisplayName()!), context);
                                     Navigator.of(context).pop();
                                   } else {
                                     // TODO: - error for failing to delete contact
                                   }
                                 });
-                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
+                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
                             },
                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
                           ),
@@ -193,7 +193,7 @@ class BlockedDetailsSheet {
                           child: Column(
                             children: <Widget>[
                               AutoSizeText(
-                                CaseChange.toUpperCase(AppLocalization.of(context)!.blockedHeader, context),
+                                CaseChange.toUpperCase(AppLocalization.of(context).blockedHeader, context),
                                 style: AppStyles.textStyleHeader(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
@@ -290,7 +290,7 @@ class BlockedDetailsSheet {
                               // Address Copied text container
                               Container(
                                 margin: const EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(_addressCopied ? AppLocalization.of(context)!.addressCopied : "",
+                                child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: StateContainer.of(context).curTheme.success,
@@ -304,7 +304,7 @@ class BlockedDetailsSheet {
                                   child: Column(
                                     children: <Widget>[
                                       Text(
-                                        CaseChange.toUpperCase(AppLocalization.of(context)!.aliases, context),
+                                        CaseChange.toUpperCase(AppLocalization.of(context).aliases, context),
                                         style: AppStyles.textStyleHeader(context),
                                       ),
                                     ],
@@ -333,7 +333,7 @@ class BlockedDetailsSheet {
                         Row(
                           children: <Widget>[
                             // Close Button
-                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
+                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                                 onPressed: () {
                               Navigator.pop(context);
                             }),

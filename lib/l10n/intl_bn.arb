@@ -5,6 +5,16 @@
     "type": "text",
     "description": "Account text"
   },
+  "accountNameHint": "",
+  "@accountNameHint": {
+    "type": "text",
+    "description": "enter_name_hint"
+  },
+  "accountNameMissing": "",
+  "@accountNameMissing": {
+    "type": "text",
+    "description": "account_name_missing"
+  },
   "accounts": "অ্যাকাউন্টস",
   "@accounts": {
     "type": "text",
@@ -40,6 +50,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "address": "",
+  "@address": {
+    "type": "text",
+    "description": "send_warning_address"
+  },
   "addressCopied": "ঠিকানা কপি করা হয়েছে",
   "@addressCopied": {
     "type": "text",
@@ -65,10 +80,30 @@
     "type": "text",
     "description": "receive_share_cta"
   },
+  "addWatchOnlyAccount": "",
+  "@addWatchOnlyAccount": {
+    "type": "text",
+    "description": "watch_only_add"
+  },
+  "addWatchOnlyAccountError": "",
+  "@addWatchOnlyAccountError": {
+    "type": "text",
+    "description": "watch_only_add_error"
+  },
+  "addWatchOnlyAccountSuccess": "",
+  "@addWatchOnlyAccountSuccess": {
+    "type": "text",
+    "description": "watch_only_add_success"
+  },
   "aliases": "ছদ্মনাম",
   "@aliases": {
     "type": "text",
     "description": "card_details_aliases"
+  },
+  "amountGiftGreaterError": "",
+  "@amountGiftGreaterError": {
+    "type": "text",
+    "description": "gift_split_greater_error"
   },
   "amountMissing": "অনুগ্রহ করে পরিমাণ লিখুন",
   "@amountMissing": {
@@ -79,6 +114,11 @@
   "@asked": {
     "type": "text",
     "description": "home_asked_cta"
+  },
+  "authConfirm": "",
+  "@authConfirm": {
+    "type": "text",
+    "description": "auth_confirm_message"
   },
   "authMethod": "প্রমাণীকরণ পদ্ধতি",
   "@authMethod": {
@@ -245,10 +285,25 @@
     "type": "text",
     "description": "A text field hint that tells the user to confirm the password"
   },
+  "confirmPinHint": "",
+  "@confirmPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to confirm the pin"
+  },
   "connectingHeader": "সংযোগ হচ্ছে ",
   "@connectingHeader": {
     "type": "text",
     "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+  },
+  "connectionWarning": "",
+  "@connectionWarning": {
+    "type": "text",
+    "description": "home_connection_warning"
+  },
+  "connectionWarningBody": "",
+  "@connectionWarningBody": {
+    "type": "text",
+    "description": "connection_warning_body"
   },
   "contactAdded": "%1 কন্টাক্ট সংরক্ষণ সফল",
   "@contactAdded": {
@@ -320,6 +375,11 @@
     "type": "text",
     "description": "copy_link"
   },
+  "copyMessage": "",
+  "@copyMessage": {
+    "type": "text",
+    "description": "copy_message"
+  },
   "copySeed": "কপি সীড",
   "@copySeed": {
     "type": "text",
@@ -334,6 +394,11 @@
   "@createAPasswordHeader": {
     "type": "text",
     "description": "A paragraph that tells the users to create a password."
+  },
+  "created": "",
+  "@created": {
+    "type": "text",
+    "description": "gift_created"
   },
   "createGiftCard": "উপহার কার্ড তৈরি করুন",
   "@createGiftCard": {
@@ -364,6 +429,11 @@
   "@createPasswordSheetHeader": {
     "type": "text",
     "description": "Prompt user to create a new password"
+  },
+  "createPinHint": "",
+  "@createPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to create a pin"
   },
   "createQR": "QR কোড তৈরি করুন",
   "@createQR": {
@@ -410,6 +480,11 @@
     "type": "text",
     "description": "Default account name"
   },
+  "defaultGiftMessage": "",
+  "@defaultGiftMessage": {
+    "type": "text",
+    "description": "default_gift_message"
+  },
   "defaultNewAccountName": "অ্যাকাউন্ট %1",
   "@defaultNewAccountName": {
     "type": "text",
@@ -450,6 +525,16 @@
     "type": "text",
     "description": "domain_invalid_name"
   },
+  "donateButton": "",
+  "@donateButton": {
+    "type": "text",
+    "description": "donate_button"
+  },
+  "donateToSupport": "",
+  "@donateToSupport": {
+    "type": "text",
+    "description": "settings_support_donate"
+  },
   "edit": "সম্পাদনা",
   "@edit": {
     "type": "text",
@@ -485,6 +570,11 @@
     "type": "text",
     "description": "A text field hint that tells the users to enter their password"
   },
+  "enterSplitAmount": "",
+  "@enterSplitAmount": {
+    "type": "text",
+    "description": "gift_split_amount_hint"
+  },
   "enterUsername": "একটি ইউজারনেম লিখুন",
   "@enterUsername": {
     "type": "text",
@@ -494,6 +584,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "errorProcessingGiftCard": "",
+  "@errorProcessingGiftCard": {
+    "type": "text",
+    "description": "gift_process_error"
   },
   "eula": "EULA",
   "@eula": {
@@ -505,15 +600,11 @@
     "type": "text",
     "description": "example_card_from"
   },
-  "exampleCardFromKal": "এলোমেলো বানরের প্রতীক এর থেকে",
-  "@exampleCardFromKal": {},
   "exampleCardIntro": "নাট্রিয়ামে স্বাগতম। আপনি ন্যানো পেয়ে গেলে, লেনদেন এইভাবে দেখাবে:",
   "@exampleCardIntro": {
     "type": "text",
     "description": "example_card_intro"
   },
-  "exampleCardIntroKal": "Kalium এ  স্বাগতম। একবার আপনি BANANO পান, লেনদেনগুলি এইভাবে দেখাবে:",
-  "@exampleCardIntroKal": {},
   "exampleCardLittle": "একটু",
   "@exampleCardLittle": {
     "type": "text",
@@ -529,8 +620,6 @@
     "type": "text",
     "description": "example_card_to"
   },
-  "exampleCardToKal": "এলোমেলো বানরের প্রতীক এর কাছে",
-  "@exampleCardToKal": {},
   "examplePaymentExplainer": "একবার আপনি একটি পেমেন্ট অনুরোধ পাঠান বা গ্রহণ করলে, তারা স্ট্যাটাস নির্দেশ করে কার্ডের রঙ এবং ট্যাগের সাথে এখানে এইরকম দেখাবে। \n\nসবুজ নির্দেশ করে অনুরোধ দেওয়া হয়েছে।\nহলুদ নির্দেশ করে যে অনুরোধ/মেমো পরিশোধ করা হয়নি/পড়া।\nলাল ইঙ্গিত করে যে অনুরোধটি পড়েনি বা গ্রহণ করা হয়নি।\n\n একটি পরিমাণ ছাড়া নিরপেক্ষ রঙিন কার্ড শুধু বার্তা।",
   "@examplePaymentExplainer": {
     "type": "text",
@@ -676,6 +765,16 @@
     "type": "text",
     "description": "history_fulfilled"
   },
+  "fundingBannerHeader": "",
+  "@fundingBannerHeader": {
+    "type": "text",
+    "description": "funding_banner_header"
+  },
+  "fundingHeader": "",
+  "@fundingHeader": {
+    "type": "text",
+    "description": "funding_header"
+  },
   "giftAlert": "তোমার কাছে একটা উপহার আছে!",
   "@giftAlert": {
     "type": "text",
@@ -691,6 +790,16 @@
     "type": "text",
     "description": "gift_amount"
   },
+  "giftCardCreationError": "",
+  "@giftCardCreationError": {
+    "type": "text",
+    "description": "create_gift_error"
+  },
+  "giftCardCreationErrorSent": "",
+  "@giftCardCreationErrorSent": {
+    "type": "text",
+    "description": "gift_generic_error"
+  },
   "giftFrom": "উপহার থেকে",
   "@giftFrom": {
     "type": "text",
@@ -705,6 +814,11 @@
   "@giftMessage": {
     "type": "text",
     "description": "gift_message"
+  },
+  "giftProcessSuccess": "",
+  "@giftProcessSuccess": {
+    "type": "text",
+    "description": "gift_process_success"
   },
   "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
   "@giftWarning": {
@@ -726,6 +840,16 @@
     "type": "text",
     "description": "go_to_qr_code"
   },
+  "handoff": "",
+  "@handoff": {
+    "type": "text",
+    "description": "send_handoff"
+  },
+  "handoffSupportedMethodNotFound": "",
+  "@handoffSupportedMethodNotFound": {
+    "type": "text",
+    "description": "handoff_method_not_found"
+  },
   "hide": "লুকান",
   "@hide": {
     "type": "text",
@@ -735,6 +859,21 @@
   "@hideAccountHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
+  },
+  "hideAccountsConfirmation": "",
+  "@hideAccountsConfirmation": {
+    "type": "text",
+    "description": "hide accounts confirmation info"
+  },
+  "hideAccountsHeader": "",
+  "@hideAccountsHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "hideEmptyAccounts": "",
+  "@hideEmptyAccounts": {
+    "type": "text",
+    "description": "hide_empty_accounts"
   },
   "home": "হোম",
   "@home": {
@@ -791,6 +930,11 @@
     "type": "text",
     "description": "intro_welcome_have_wallet"
   },
+  "imSure": "",
+  "@imSure": {
+    "type": "text",
+    "description": "send_confirm_warning"
+  },
   "instantly": "তাত্ক্ষণিকভাবে",
   "@instantly": {
     "type": "text",
@@ -800,16 +944,6 @@
   "@insufficientBalance": {
     "type": "text",
     "description": "send_insufficient_balance"
-  },
-  "intro.new-key": "",
-  "@intro.new-key": {},
-  "intro.not-reviewed-text": "",
-  "@intro.not-reviewed-text": {},
-  "intro.too-long-text": "",
-  "@intro.too-long-text": {},
-  "intro.welcome": "",
-  "@intro.welcome": {
-    "description": "This is a description of a key so that the translator better understands the context"
   },
   "invalidAddress": "এই ঠিকানাটি অবৈধ",
   "@invalidAddress": {
@@ -821,15 +955,20 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
+  "invalidPin": "",
+  "@invalidPin": {
+    "type": "text",
+    "description": "An error indicating a pin has been entered incorrectly"
+  },
+  "iosFundingMessage": "",
+  "@iosFundingMessage": {
+    "type": "text",
+    "description": "ios_funding_message"
+  },
   "iUnderstandTheRisks": "আমি ঝুঁকির কারণগুলি বুঝতে পারছি",
   "@iUnderstandTheRisks": {
     "type": "text",
     "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
-  },
-  "kaliumWallet": "Kalium ওয়ালেট",
-  "@kaliumWallet": {
-    "type": "text",
-    "description": "kalium_wallet"
   },
   "language": "ভাষা",
   "@language": {
@@ -840,11 +979,6 @@
   "@linkCopied": {
     "type": "text",
     "description": "link_copied"
-  },
-  "liveSupportButton": "সহায়তা",
-  "@liveSupportButton": {
-    "type": "text",
-    "description": "A button to open up the live support window"
   },
   "loaded": "লোড করা হয়েছে",
   "@loaded": {
@@ -886,8 +1020,6 @@
     "type": "text",
     "description": "settings_logout_alert_message"
   },
-  "logoutDetailKal": "লগ আউট করলে এখান থেকে আপনার সীড এবং ক্যালিয়াম সম্পর্কিত সমস্ত ডেটা মুছে যাবে। যদি আপনার বীসীড ব্যাক আপ না করা হয়, আপনি আর কখনও আপনার তহবিল অ্যাক্সেস করতে সক্ষম হবেন না",
-  "@logoutDetailKal": {},
   "logoutReassurance": "যেহেতু আপনি আপনার সিড ব্যাকআপ করেছেন ততক্ষণ আপনার চিন্তার কিছু নেই।",
   "@logoutReassurance": {
     "type": "text",
@@ -928,6 +1060,11 @@
     "type": "text",
     "description": "memo_sent_again"
   },
+  "messageCopied": "",
+  "@messageCopied": {
+    "type": "text",
+    "description": "message_copied"
+  },
   "messageHeader": "বার্তা",
   "@messageHeader": {
     "type": "text",
@@ -953,15 +1090,35 @@
     "type": "text",
     "description": "err"
   },
+  "monthlyServerCosts": "",
+  "@monthlyServerCosts": {
+    "type": "text",
+    "description": "support_monthly_costs"
+  },
   "moonpay": "MoonPay",
   "@moonpay": {
     "type": "text",
     "description": "moonpay_ramp"
   },
+  "moreSettings": "",
+  "@moreSettings": {
+    "type": "text",
+    "description": "settings_more"
+  },
   "natricon": "নাট্রিকন",
   "@natricon": {
     "type": "text",
     "description": "natricon_settings"
+  },
+  "nautilusWallet": "",
+  "@nautilusWallet": {
+    "type": "text",
+    "description": "nautilus_wallet"
+  },
+  "nearby": "",
+  "@nearby": {
+    "type": "text",
+    "description": "nearby_devices"
   },
   "needVerificationAlert": "স্প্যাম প্রতিরোধ করার জন্য এই বৈশিষ্ট্যটির জন্য আপনাকে একটি দীর্ঘ লেনদেনের ইতিহাস থাকতে হবে।\n\nবিকল্পভাবে, আপনি কাউকে স্ক্যান করার জন্য একটি QR কোড দেখাতে পারেন।",
   "@needVerificationAlert": {
@@ -978,8 +1135,6 @@
     "type": "text",
     "description": "Alternate account intro card"
   },
-  "newAccountIntroKal": "এটি আপনার নতুন অ্যাকাউন্ট। একবার আপনি BANANO পান, লেনদেনগুলি এইভাবে দেখাবে:",
-  "@newAccountIntroKal": {},
   "newWallet": "নুতন ওয়ালেট",
   "@newWallet": {
     "type": "text",
@@ -1030,8 +1185,6 @@
     "type": "text",
     "description": "notification_body"
   },
-  "notificationBodyKal": "এই লেনদেন দেখতে Kalium খুলুন",
-  "@notificationBodyKal": {},
   "notificationHeaderSupplement": "খুলতে আলতো চাপুন",
   "@notificationHeaderSupplement": {
     "type": "text",
@@ -1052,8 +1205,6 @@
     "type": "text",
     "description": "notification_title"
   },
-  "notificationTitleKal": "প্রাপ্ত %1 BANANO",
-  "@notificationTitleKal": {},
   "notSent": "পাঠানো হয়নি",
   "@notSent": {
     "type": "text",
@@ -1094,10 +1245,6 @@
     "type": "text",
     "description": "history_opened"
   },
-  "page.home.counter": "",
-  "@page.home.counter": {},
-  "page.home.title": "",
-  "@page.home.title": {},
   "paid": "অর্থ প্রদান",
   "@paid": {
     "type": "text",
@@ -1148,12 +1295,15 @@
     "type": "text",
     "description": "pay_request"
   },
-  "receivable": "অনুমোদন অপেক্ষারত",
-  "@receivable": {},
   "pickFromList": "একটি তালিকা থেকে বাছাই করুন",
   "@pickFromList": {
     "type": "text",
     "description": "pick rep from list"
+  },
+  "pinBlank": "",
+  "@pinBlank": {
+    "type": "text",
+    "description": "An error indicating a pin has been entered incorrectly"
   },
   "pinConfirmError": "পিন সঠিক নই",
   "@pinConfirmError": {
@@ -1190,10 +1340,30 @@
     "type": "text",
     "description": "change_representative_pin"
   },
+  "pinsDontMatch": "",
+  "@pinsDontMatch": {
+    "type": "text",
+    "description": "An error indicating a pin has been confirmed incorrectly"
+  },
   "pinSeedBackup": "ব্যাকআপ সীড, পিন লিখুন",
   "@pinSeedBackup": {
     "type": "text",
     "description": "settings_pin_title"
+  },
+  "plausibleDeniabilityParagraph": "",
+  "@plausibleDeniabilityParagraph": {
+    "type": "text",
+    "description": "A paragraph that tells warns the user this is plausible deniability pin."
+  },
+  "plausibleInfoHeader": "",
+  "@plausibleInfoHeader": {
+    "type": "text",
+    "description": "plausible_info_header"
+  },
+  "plausibleSheetInfo": "",
+  "@plausibleSheetInfo": {
+    "type": "text",
+    "description": "plausible_sheet_info"
   },
   "preferences": "পছন্দ",
   "@preferences": {
@@ -1395,6 +1565,11 @@
     "type": "text",
     "description": "request_generic_error"
   },
+  "requestFrom": "",
+  "@requestFrom": {
+    "type": "text",
+    "description": "request_title"
+  },
   "requesting": "অনুরোধ করা",
   "@requesting": {
     "type": "text",
@@ -1414,6 +1589,16 @@
   "@requestSentButNotReceived": {
     "type": "text",
     "description": "request_sent_again"
+  },
+  "requestSheetInfo": "",
+  "@requestSheetInfo": {
+    "type": "text",
+    "description": "request_sheet_info"
+  },
+  "requestSheetInfoHeader": "",
+  "@requestSheetInfoHeader": {
+    "type": "text",
+    "description": "request_sheet_info_header"
   },
   "requireAPasswordToOpenHeader": "Natrium খুলতে একটি পাসওয়ার্ড প্রয়োজন?",
   "@requireAPasswordToOpenHeader": {
@@ -1450,8 +1635,6 @@
     "type": "text",
     "description": "scan_send_instruction_label"
   },
-  "scanInstructionsKal": "একটি Banano <নুতন লাইন> ঠিকানা QR কোড স্ক্যান করুন",
-  "@scanInstructionsKal": {},
   "scanQrCode": "QR কোড স্ক্যান করুন",
   "@scanQrCode": {
     "type": "text",
@@ -1542,8 +1725,6 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
-  "sendAmountConfirmKal": "%1 বানানো পাঠান",
-  "@sendAmountConfirmKal": {},
   "sendError": "একটি ত্রুটি ঘটেছে. পরে আবার চেষ্টা করুন।",
   "@sendError": {
     "type": "text",
@@ -1584,6 +1765,11 @@
     "type": "text",
     "description": "send_sheet_info_header"
   },
+  "sendViaNFC": "",
+  "@sendViaNFC": {
+    "type": "text",
+    "description": "send_payment_nfc"
+  },
   "sent": "পাঠানো হয়েছে",
   "@sent": {
     "type": "text",
@@ -1603,6 +1789,21 @@
   "@setPasswordSuccess": {
     "type": "text",
     "description": "Setting a Wallet Password was successful"
+  },
+  "setPin": "",
+  "@setPin": {
+    "type": "text",
+    "description": "A button that sets the plausible deniability password"
+  },
+  "setPinSuccess": "",
+  "@setPinSuccess": {
+    "type": "text",
+    "description": "Setting a Wallet Pin was successful"
+  },
+  "setPlausibleDeniabilityPin": "",
+  "@setPlausibleDeniabilityPin": {
+    "type": "text",
+    "description": "Allows user to setup a plausible deniability pin"
   },
   "settingsHeader": "সেটিংস",
   "@settingsHeader": {
@@ -1629,19 +1830,16 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
-  "shareKalium": "Kalium শেয়ার করুন",
-  "@shareKalium": {},
-  "shareKaliumText": "Kalium দেখুন! বনানোর অফিসিয়াল মোবাইল ওয়ালেট!",
-  "@shareKaliumText": {},
   "shareLink": "লিংক শেয়ার করুন",
   "@shareLink": {
     "type": "text",
     "description": "share_link"
   },
-  "shareNatrium": "নাট্রিয়াম শেয়ার করুন",
-  "@shareNatrium": {},
-  "shareNatriumText": "নাট্রিয়াম দেখুন! একটি প্রিমিয়ার ন্যানো মোবাইল ওয়ালেট!",
-  "@shareNatriumText": {},
+  "shareMessage": "",
+  "@shareMessage": {
+    "type": "text",
+    "description": "share_message"
+  },
   "shareNautilus": "Share Nautilus",
   "@shareNautilus": {
     "type": "text",
@@ -1652,20 +1850,65 @@
     "type": "text",
     "description": "share_extra"
   },
+  "show": "",
+  "@show": {
+    "type": "text",
+    "description": "funding_show"
+  },
+  "showAccountQR": "",
+  "@showAccountQR": {
+    "type": "text",
+    "description": "show_account_qr"
+  },
   "showContacts": "পরিচিতি দেখাও",
   "@showContacts": {
     "type": "text",
     "description": "contacts_enabled"
+  },
+  "showFunding": "",
+  "@showFunding": {
+    "type": "text",
+    "description": "show_funding_banner"
+  },
+  "showLinkQR": "",
+  "@showLinkQR": {
+    "type": "text",
+    "description": "show_link_qr"
+  },
+  "showQR": "",
+  "@showQR": {
+    "type": "text",
+    "description": "show_qr"
+  },
+  "showUnopenedWarning": "",
+  "@showUnopenedWarning": {
+    "type": "text",
+    "description": "warn_unsafe_send"
   },
   "simplex": "সিমপ্লেক্স",
   "@simplex": {
     "type": "text",
     "description": "simplex_ramp"
   },
+  "someone": "",
+  "@someone": {
+    "type": "text",
+    "description": "send_someone"
+  },
+  "splitBy": "",
+  "@splitBy": {
+    "type": "text",
+    "description": "gift_card_split_by"
+  },
   "supportButton": "Support",
   "@supportButton": {
     "type": "text",
     "description": "A button to open up the live support window"
+  },
+  "supportDevelopment": "",
+  "@supportDevelopment": {
+    "type": "text",
+    "description": "settings_support_development"
   },
   "supportTheDeveloper": "ডেভেলপারকে সহায়তা করুন",
   "@supportTheDeveloper": {
@@ -1681,6 +1924,11 @@
   "@systemDefault": {
     "type": "text",
     "description": "settings_default_language_string"
+  },
+  "tapMessageToEdit": "",
+  "@tapMessageToEdit": {
+    "type": "text",
+    "description": "gift_creation_message_edit_hint"
   },
   "tapToHide": "লুকানোর জন্য আলতো চাপুন",
   "@tapToHide": {
@@ -1727,15 +1975,11 @@
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferCompleteKal": "%1 BANANO সফলভাবে আপনার Kalium ওয়ালেটে স্থানান্তরিত হয়েছে। <নতুন লাইন>",
-  "@transferCompleteKal": {},
   "transferConfirmInfo": "%1 NANO ব্যালেন্স সহ একটি মানিব্যাগ সনাক্ত করা হয়েছে। <নতুন লাইন>",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"
   },
-  "transferConfirmInfoKal": "%1 BANANO ব্যালেন্স সহ একটি ওয়ালেট সনাক্ত করা হয়েছে। <নতুন লাইন>",
-  "@transferConfirmInfoKal": {},
   "transferConfirmInfoSecond": "ফান্ড ট্রান্সফার করতে কনফার্ম ট্যাপ করুন। <নতুন লাইন>",
   "@transferConfirmInfoSecond": {
     "type": "text",
@@ -1761,8 +2005,6 @@
     "type": "text",
     "description": "transfer_intro"
   },
-  "transferIntroKal": "এই প্রক্রিয়াটি পেপার ওয়ালেট  থেকে আপনার ক্যালিয়াম ওয়ালেট এ  অর্থ স্থানান্তর করবে। <নুতন লাইন> <নুতন লাইন> শুরু করতে \"%1\" বোতামটি আলতো চাপুন।",
-  "@transferIntroKal": {},
   "transferIntroShort": "এই প্রক্রিয়াটি একটি কাগজের মানিব্যাগ থেকে আপনার নটিলাস ওয়ালেটে অর্থ স্থানান্তর করবে।",
   "@transferIntroShort": {
     "type": "text",
@@ -1783,8 +2025,6 @@
     "type": "text",
     "description": "transfer_no_funds_toast"
   },
-  "transferNoFundsKal": "এই সীড এ কোন Banano নেই",
-  "@transferNoFundsKal": {},
   "transferQrScanError": "এই QR কোডে বৈধ সিড নেই।",
   "@transferQrScanError": {
     "type": "text",
@@ -1795,8 +2035,6 @@
     "type": "text",
     "description": "transfer_qr_scan_hint"
   },
-  "transferQrScanHintKal": "একটি Banano <নুতন লাইন> সিড বা ব্যক্তিগত কী স্ক্যান করুন",
-  "@transferQrScanHintKal": {},
   "unacknowledged": "অস্বীকৃত",
   "@unacknowledged": {
     "type": "text",
@@ -1820,17 +2058,33 @@
   "unlockBiometrics": "Natrium আনলক করার জন্য প্রমাণীকরণ করুন",
   "@unlockBiometrics": {
     "type": "text",
-    "description": "unlock_kalium_bio"
+    "description": "unlock_bio"
   },
-  "unlockBiometricsKal": "Kalium আনলক করার জন্য প্রমাণীকরণ করুন",
-  "@unlockBiometricsKal": {},
   "unlockPin": "Natrium আনলক করতে PIN লিখুন",
   "@unlockPin": {
     "type": "text",
-    "description": "unlock_kalium_pin"
+    "description": "unlock_pin"
   },
-  "unlockPinKal": "Kalium আনলক করতে পিন লিখুন",
-  "@unlockPinKal": {},
+  "unopenedWarningHeader": "",
+  "@unopenedWarningHeader": {
+    "type": "text",
+    "description": "unopened_warning_header"
+  },
+  "unopenedWarningInfo": "",
+  "@unopenedWarningInfo": {
+    "type": "text",
+    "description": "unopened_warning_info"
+  },
+  "unopenedWarningWarning": "",
+  "@unopenedWarningWarning": {
+    "type": "text",
+    "description": "unopened_warning_warning"
+  },
+  "unopenedWarningWarningHeader": "",
+  "@unopenedWarningWarningHeader": {
+    "type": "text",
+    "description": "unopened_warning_warning_header"
+  },
   "unpaid": "অবৈতনিক",
   "@unpaid": {
     "type": "text",
@@ -1896,10 +2150,20 @@
     "type": "text",
     "description": "user_not_found"
   },
+  "using": "",
+  "@using": {
+    "type": "text",
+    "description": "gift_message_using"
+  },
   "viewDetails": "বিস্তারিত দেখুন",
   "@viewDetails": {
     "type": "text",
     "description": "transaction_details"
+  },
+  "viewTX": "",
+  "@viewTX": {
+    "type": "text",
+    "description": "transaction_transaction"
   },
   "votingWeight": "ভোটের ওজন",
   "@votingWeight": {
@@ -1911,13 +2175,26 @@
     "type": "text",
     "description": "settings_logout_alert_title"
   },
+  "watchOnlyAccount": "",
+  "@watchOnlyAccount": {
+    "type": "text",
+    "description": "watch_only_account"
+  },
+  "watchOnlySendDisabled": "",
+  "@watchOnlySendDisabled": {
+    "type": "text",
+    "description": "watch_only_send_disabled"
+  },
   "welcomeText": "নাট্রিয়ামে স্বাগতম। শুরু করার জন্য, আপনি একটি নতুন ওয়ালেট তৈরি করতে পারেন অথবা বিদ্যমান একটি ব্যবহার করতে পারেন।",
   "@welcomeText": {
     "type": "text",
     "description": "intro_welcome_title"
   },
-  "welcomeTextKal": "কালিয়ামে স্বাগতম। শুরু করার জন্য আপনি একটি নতুন মানিব্যাগ তৈরি করতে পারেন অথবা বিদ্যমান একটি আমদানি করতে পারেন।",
-  "@welcomeTextKal": {},
+  "welcomeTextUpdated": "",
+  "@welcomeTextUpdated": {
+    "type": "text",
+    "description": "intro_welcome_title"
+  },
   "withAddress": "ঠিকানা সহ",
   "@withAddress": {
     "type": "text",

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/setting_item.dart';
 
 enum ContactsOptions { ON, OFF }
@@ -13,10 +13,10 @@ class ContactsSetting extends SettingSelectionItem {
   String getDisplayName(BuildContext context) {
     switch (setting) {
       case ContactsOptions.ON:
-        return AppLocalization.of(context)!.onStr;
+        return AppLocalization.of(context).onStr;
       case ContactsOptions.OFF:
       default:
-        return AppLocalization.of(context)!.off;
+        return AppLocalization.of(context).off;
     }
   }
 

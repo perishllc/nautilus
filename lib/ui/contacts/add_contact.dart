@@ -8,7 +8,7 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
@@ -77,7 +77,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
         });
       } else {
         setState(() {
-          _nameHint = AppLocalization.of(context)!.contactNameHint;
+          _nameHint = AppLocalization.of(context).contactNameHint;
         });
       }
     });
@@ -203,14 +203,14 @@ class _AddContactSheetState extends State<AddContactSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _addressHint ?? AppLocalization.of(context)!.enterUserOrAddress,
+      hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
       prefixButton: TextFieldButton(
           icon: AppIcons.scan,
           onPressed: () async {
             UIUtil.cancelLockEvent();
             final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
             if (scanResult == null) {
-              UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
+              UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
             } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
               if (mounted) {
                 setState(() {
@@ -408,7 +408,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                 child: Column(
                   children: <Widget>[
                     AutoSizeText(
-                      CaseChange.toUpperCase(AppLocalization.of(context)!.addContact, context),
+                      CaseChange.toUpperCase(AppLocalization.of(context).addContact, context),
                       style: AppStyles.textStyleHeader(context),
                       textAlign: TextAlign.center,
                       maxLines: 1,
@@ -451,7 +451,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                                 topMargin: 30,
                                 padding: const EdgeInsets.symmetric(horizontal: 30),
                                 textInputAction: widget.address != null ? TextInputAction.done : TextInputAction.next,
-                                hintText: _nameHint ?? AppLocalization.of(context)!.contactNameHint,
+                                hintText: _nameHint ?? AppLocalization.of(context).contactNameHint,
                                 keyboardType: TextInputType.text,
 
                                 style: TextStyle(
@@ -570,7 +570,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
               Row(
                 children: <Widget>[
                   // Add Contact Button
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.addContact, Dimens.BUTTON_TOP_DIMENS,
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).addContact, Dimens.BUTTON_TOP_DIMENS,
                       onPressed: () async {
                     if (await validateForm()) {
                       User newContact;
@@ -590,7 +590,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                         await sl.get<DBHelper>().saveContact(newContact);
                       }
                       EventTaxiImpl.singleton().fire(ContactAddedEvent(contact: newContact));
-                      UIUtil.showSnackbar(AppLocalization.of(context)!.contactAdded.replaceAll("%1", newContact.getDisplayName()!), context);
+                      UIUtil.showSnackbar(AppLocalization.of(context).contactAdded.replaceAll("%1", newContact.getDisplayName()!), context);
                       EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: newContact));
                       EventTaxiImpl.singleton().fire(TXUpdateEvent());
                       Navigator.of(context).pop();
@@ -601,7 +601,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
               Row(
                 children: <Widget>[
                   // Close Button
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                       onPressed: () {
                     Navigator.pop(context);
                   }),
@@ -626,7 +626,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
     if (formAddress.isEmpty) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context)!.addressOrUserMissing;
+        _addressValidationText = AppLocalization.of(context).addressOrUserMissing;
       });
     } else if (formAddress.startsWith("nano_")) {
       // we're dealing with an address:
@@ -634,7 +634,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
       if (!Address(formAddress).isValid()) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context)!.invalidAddress;
+          _addressValidationText = AppLocalization.of(context).invalidAddress;
         });
       }
 
@@ -643,7 +643,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
       if (contactExists) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context)!.contactExists;
+          _addressValidationText = AppLocalization.of(context).contactExists;
         });
       } else {
         // get the corresponding username if it exists:
@@ -660,7 +660,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
       if (contactExists) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context)!.contactExists;
+          _addressValidationText = AppLocalization.of(context).contactExists;
         });
       } else {
         // check if there's a corresponding address:
@@ -673,14 +673,14 @@ class _AddContactSheetState extends State<AddContactSheet> {
             if (user.nickname != null && user.nickname!.isNotEmpty) {
               isValid = false;
               setState(() {
-                _addressValidationText = AppLocalization.of(context)!.contactExists;
+                _addressValidationText = AppLocalization.of(context).contactExists;
               });
             }
           });
         } else {
           isValid = false;
           setState(() {
-            _addressValidationText = formattedAddress.contains(".") ? AppLocalization.of(context)!.domainInvalid : AppLocalization.of(context)!.userNotFound;
+            _addressValidationText = formattedAddress.contains(".") ? AppLocalization.of(context).domainInvalid : AppLocalization.of(context).userNotFound;
           });
         }
       }
@@ -702,14 +702,14 @@ class _AddContactSheetState extends State<AddContactSheet> {
     if (_nameController!.text.isEmpty) {
       isValid = false;
       setState(() {
-        _nameValidationText = AppLocalization.of(context)!.contactNameMissing;
+        _nameValidationText = AppLocalization.of(context).contactNameMissing;
       });
     } else {
       final bool nameExists = await sl.get<DBHelper>().contactExistsWithName(formattedNickname);
       if (nameExists) {
         setState(() {
           isValid = false;
-          _nameValidationText = AppLocalization.of(context)!.contactExists;
+          _nameValidationText = AppLocalization.of(context).contactExists;
         });
       }
     }

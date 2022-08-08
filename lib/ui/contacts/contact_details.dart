@@ -8,7 +8,7 @@ import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -144,20 +144,20 @@ class ContactDetailsSheet {
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
-                                  AppLocalization.of(context)!.removeContact,
-                                  AppLocalization.of(context)!.removeContactConfirmation.replaceAll("%1", contact.getDisplayName()!),
-                                  CaseChange.toUpperCase(AppLocalization.of(context)!.yes, context), () {
+                                  AppLocalization.of(context).removeContact,
+                                  AppLocalization.of(context).removeContactConfirmation.replaceAll("%1", contact.getDisplayName()!),
+                                  CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                                 sl.get<DBHelper>().deleteContact(contact).then((bool deleted) {
                                   if (deleted) {
                                     EventTaxiImpl.singleton().fire(ContactRemovedEvent(contact: contact));
                                     EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: contact));
-                                    UIUtil.showSnackbar(AppLocalization.of(context)!.contactRemoved.replaceAll("%1", contact.getDisplayName()!), context);
+                                    UIUtil.showSnackbar(AppLocalization.of(context).contactRemoved.replaceAll("%1", contact.getDisplayName()!), context);
                                     Navigator.of(context).pop();
                                   } else {
                                     // TODO - error for failing to delete contact
                                   }
                                 });
-                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context)!.no, context));
+                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
                             },
                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
                           ),
@@ -169,7 +169,7 @@ class ContactDetailsSheet {
                           child: Column(
                             children: <Widget>[
                               AutoSizeText(
-                                CaseChange.toUpperCase(AppLocalization.of(context)!.contactHeader, context),
+                                CaseChange.toUpperCase(AppLocalization.of(context).contactHeader, context),
                                 style: AppStyles.textStyleHeader(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
@@ -266,7 +266,7 @@ class ContactDetailsSheet {
                               // Address Copied text container
                               Container(
                                 margin: const EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(_addressCopied ? AppLocalization.of(context)!.addressCopied : "",
+                                child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: StateContainer.of(context).curTheme.success,
@@ -280,7 +280,7 @@ class ContactDetailsSheet {
                                   child: Column(
                                     children: <Widget>[
                                       Text(
-                                        CaseChange.toUpperCase(AppLocalization.of(context)!.aliases, context),
+                                        CaseChange.toUpperCase(AppLocalization.of(context).aliases, context),
                                         style: AppStyles.textStyleHeader(context),
                                       ),
                                     ],
@@ -298,7 +298,7 @@ class ContactDetailsSheet {
                         Row(
                           children: <Widget>[
                             // Send Button
-                            AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.send, Dimens.BUTTON_TOP_DIMENS,
+                            AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS,
                                 disabled: StateContainer.of(context).wallet!.accountBalance == BigInt.zero, onPressed: () {
                               Navigator.of(context).pop();
                               Sheets.showAppHeightNineSheet(
@@ -309,7 +309,7 @@ class ContactDetailsSheet {
                         Row(
                           children: <Widget>[
                             // Close Button
-                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
+                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                                 onPressed: () {
                               Navigator.pop(context);
                             }),

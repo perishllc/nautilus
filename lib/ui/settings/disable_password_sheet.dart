@@ -5,7 +5,7 @@ import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -61,7 +61,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                     child: Column(
                       children: <Widget>[
                         AutoSizeText(
-                          CaseChange.toUpperCase(AppLocalization.of(context)!.disablePasswordSheetHeader, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).disablePasswordSheetHeader, context),
                           style: AppStyles.textStyleHeader(context),
                           minFontSize: 12,
                           stepGranularity: 0.1,
@@ -75,7 +75,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                   Container(
                     margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      AppLocalization.of(context)!.passwordNoLongerRequiredToOpenParagraph,
+                      AppLocalization.of(context).passwordNoLongerRequiredToOpenParagraph,
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,
@@ -103,7 +103,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                                   });
                                 }
                               },
-                              hintText: AppLocalization.of(context)!.enterPasswordHint,
+                              hintText: AppLocalization.of(context).enterPasswordHint,
                               keyboardType: TextInputType.text,
                               obscureText: true,
                               style: TextStyle(
@@ -131,27 +131,25 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
             ),
 
             // Set Password Button
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.disablePasswordSheetHeader, Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () async {
-                        await submitAndDecrypt();
-                      }),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
-                          onPressed: () {
-                        Navigator.pop(context);
-                      }),
-                    ],
-                  ),
-                ],
-              ),
+            Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).disablePasswordSheetHeader, Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
+                      await submitAndDecrypt();
+                    }),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
+                      Navigator.pop(context);
+                    }),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
@@ -164,7 +162,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
     if (passwordController!.text.isEmpty) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context)!.passwordBlank;
+          passwordError = AppLocalization.of(context).passwordBlank;
         });
       }
     } else {
@@ -173,12 +171,12 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
         throwIf(!NanoSeeds.isValidSeed(decryptedSeed), const FormatException());
         await sl.get<Vault>().setSeed(decryptedSeed);
         StateContainer.of(context).resetEncryptedSecret();
-        UIUtil.showSnackbar(AppLocalization.of(context)!.disablePasswordSuccess, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).disablePasswordSuccess, context);
         Navigator.pop(context);
       } catch (e) {
         if (mounted) {
           setState(() {
-            passwordError = AppLocalization.of(context)!.invalidPassword;
+            passwordError = AppLocalization.of(context).invalidPassword;
           });
         }
       }

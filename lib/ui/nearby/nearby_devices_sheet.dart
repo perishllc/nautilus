@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_nearby_messages_api/flutter_nearby_messages_api.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 // import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
@@ -129,7 +129,7 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
                       child: Column(
                         children: <Widget>[
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.accounts, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).accounts, context),
                             style: AppStyles.textStyleHeader(context),
                             maxLines: 1,
                             stepGranularity: 0.1,
@@ -267,7 +267,7 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY_OUTLINE,
-                    AppLocalization.of(context)!.nearby,
+                    AppLocalization.of(context).nearby,
                     Dimens.BUTTON_BOTTOM_DIMENS,
                     onPressed: () async {},
                   ),
@@ -279,7 +279,7 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY_OUTLINE,
-                    AppLocalization.of(context)!.close,
+                    AppLocalization.of(context).close,
                     Dimens.BUTTON_BOTTOM_DIMENS,
                     onPressed: () {
                       Navigator.pop(context);

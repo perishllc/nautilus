@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("账户"),
+        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
         "accounts": MessageLookupByLibrary.simpleMessage("账户"),
         "ackBackedUp":
             MessageLookupByLibrary.simpleMessage("您确定已经将您的种子或秘密词语备份了吗？"),
@@ -31,6 +33,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("屏蔽用户"),
         "addContact": MessageLookupByLibrary.simpleMessage("添加联系人"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("添加收藏夹"),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "address": MessageLookupByLibrary.simpleMessage(""),
         "addressCopied": MessageLookupByLibrary.simpleMessage("地址已复制"),
         "addressHint": MessageLookupByLibrary.simpleMessage("输入地址"),
         "addressMissing": MessageLookupByLibrary.simpleMessage("请输入目标地址"),
@@ -38,8 +44,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("请输入用户名或地址"),
         "addressShare": MessageLookupByLibrary.simpleMessage("分享地址"),
         "aliases": MessageLookupByLibrary.simpleMessage("别名"),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
         "amountMissing": MessageLookupByLibrary.simpleMessage("请输入金额"),
         "asked": MessageLookupByLibrary.simpleMessage("问"),
+        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
         "authMethod": MessageLookupByLibrary.simpleMessage("验证方法"),
         "autoImport": MessageLookupByLibrary.simpleMessage("自动导入"),
         "autoLockHeader": MessageLookupByLibrary.simpleMessage("自动锁定"),
@@ -76,7 +84,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "close": MessageLookupByLibrary.simpleMessage("关闭"),
         "confirm": MessageLookupByLibrary.simpleMessage("确认"),
         "confirmPasswordHint": MessageLookupByLibrary.simpleMessage("确认密码"),
+        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("连接中"),
+        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded": MessageLookupByLibrary.simpleMessage("%1已被添加到联系人！"),
         "contactExists": MessageLookupByLibrary.simpleMessage("联系人已存在"),
         "contactHeader": MessageLookupByLibrary.simpleMessage("联系人"),
@@ -92,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("复制"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("复制地址"),
         "copyLink": MessageLookupByLibrary.simpleMessage("复制链接"),
+        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
         "copySeed": MessageLookupByLibrary.simpleMessage("复制种子"),
         "copyWalletAddressToClipboard":
             MessageLookupByLibrary.simpleMessage("将钱包地址复制到剪贴板"),
@@ -105,7 +117,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "createPasswordSecondParagraph": MessageLookupByLibrary.simpleMessage(
             "密码是可选的，无论如何您的钱包仍会被识别码或生物识别技术保护。"),
         "createPasswordSheetHeader": MessageLookupByLibrary.simpleMessage("创建"),
+        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
         "createQR": MessageLookupByLibrary.simpleMessage("创建二维码"),
+        "created": MessageLookupByLibrary.simpleMessage(""),
         "creatingGiftCard": MessageLookupByLibrary.simpleMessage("创建礼品卡"),
         "currency": MessageLookupByLibrary.simpleMessage("货币"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("货币模式"),
@@ -115,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage("当前代表"),
         "decryptionError": MessageLookupByLibrary.simpleMessage("解密错误！"),
         "defaultAccountName": MessageLookupByLibrary.simpleMessage("主要账户"),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
         "defaultNewAccountName": MessageLookupByLibrary.simpleMessage("账户 %1"),
         "delete": MessageLookupByLibrary.simpleMessage("删除"),
         "deleteRequest":
@@ -126,6 +141,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword": MessageLookupByLibrary.simpleMessage("解除钱包密码"),
         "dismiss": MessageLookupByLibrary.simpleMessage("解雇"),
         "domainInvalid": MessageLookupByLibrary.simpleMessage("域名无效"),
+        "donateButton": MessageLookupByLibrary.simpleMessage(""),
+        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
         "edit": MessageLookupByLibrary.simpleMessage("编辑"),
         "encryptionFailedError":
             MessageLookupByLibrary.simpleMessage("钱包密码设置失败"),
@@ -134,19 +151,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("输入礼品备注"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("输入消息"),
         "enterPasswordHint": MessageLookupByLibrary.simpleMessage("输入您的密码"),
+        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage("输入用户或地址"),
         "enterUsername": MessageLookupByLibrary.simpleMessage("输入用户名"),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("来自某人"),
-        "exampleCardFromKal": MessageLookupByLibrary.simpleMessage("来自一只未知的猴子"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
             "欢迎来到Nautilus。当您收到或发送NANO时，交易将如下出现。"),
-        "exampleCardIntroKal": MessageLookupByLibrary.simpleMessage(
-            "欢迎来到Kalium。当您收到或发送BANANO时，它将显示在下面."),
         "exampleCardLittle": MessageLookupByLibrary.simpleMessage("一点"),
         "exampleCardLot": MessageLookupByLibrary.simpleMessage("很多"),
         "exampleCardTo": MessageLookupByLibrary.simpleMessage("发给某人"),
-        "exampleCardToKal": MessageLookupByLibrary.simpleMessage("给一只未知的猴子"),
         "examplePayRecipient": MessageLookupByLibrary.simpleMessage("@dad"),
         "examplePayRecipientMessage":
             MessageLookupByLibrary.simpleMessage("生日快乐！"),
@@ -187,23 +202,35 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("确认指纹，备份钱包种子。"),
         "from": MessageLookupByLibrary.simpleMessage("来自"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("完成"),
+        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert": MessageLookupByLibrary.simpleMessage("你有天赋！"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("空礼物"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("礼物金额"),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
         "giftFrom": MessageLookupByLibrary.simpleMessage("礼物来自"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "使用 NANO 加载一张数字礼品卡！设置金额和一条可选消息，供收件人打开时查看！\n\n创建后，您将获得一个可以发送给任何人的链接，该链接打开后将在安装Nautilus后自动将资金分配给收款人！\n\n如果收款人已经是Nautilus用户，他们将在打开链接时收到将资金转入其账户的提示。"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("礼物留言"),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("返回"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("前往二维码"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("明白！"),
+        "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffSupportedMethodNotFound":
+            MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("隐藏"),
         "hideAccountHeader": MessageLookupByLibrary.simpleMessage("隐藏账户？"),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
+        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
         "home": MessageLookupByLibrary.simpleMessage("家"),
         "iUnderstandTheRisks": MessageLookupByLibrary.simpleMessage("我已明白风险"),
         "ignore": MessageLookupByLibrary.simpleMessage("忽略"),
+        "imSure": MessageLookupByLibrary.simpleMessage(""),
         "import": MessageLookupByLibrary.simpleMessage("导入"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "你点击的链接包含一些 nano，你想把它导入这个钱包，还是退款给发送它的人？"),
@@ -220,10 +247,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "insufficientBalance": MessageLookupByLibrary.simpleMessage("余额不足"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage("无效的目标地址"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("无效密码"),
-        "kaliumWallet": MessageLookupByLibrary.simpleMessage("Kalium钱包"),
+        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("链接已复制"),
-        "liveSupportButton": MessageLookupByLibrary.simpleMessage("技术支持"),
         "loaded": MessageLookupByLibrary.simpleMessage("已加载"),
         "loadedInto": MessageLookupByLibrary.simpleMessage("已加载到"),
         "lockAppSetting": MessageLookupByLibrary.simpleMessage("启动时要求验证"),
@@ -233,8 +260,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "logoutAreYouSure": MessageLookupByLibrary.simpleMessage("您确定？"),
         "logoutDetail": MessageLookupByLibrary.simpleMessage(
             "注销将从此设备中删除您的种子和所有与Nautilus相关的数据。如果您的种子代码没有备份，您将永远无法再次访问您的帐户"),
-        "logoutDetailKal": MessageLookupByLibrary.simpleMessage(
-            "注销将从此设备中删除您的种子和所有与Kalium相关的数据。如果您的种子没有备份，您将永远无法再次访问您的帐户"),
         "logoutReassurance":
             MessageLookupByLibrary.simpleMessage("只要您有备份您的种子，就没有什么可担心的。"),
         "manage": MessageLookupByLibrary.simpleMessage("管理"),
@@ -245,6 +270,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "备忘录已重新发送！如果仍未确认，则收件人的设备可能处于脱机状态。"),
+        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
         "messageHeader": MessageLookupByLibrary.simpleMessage("留言"),
         "minimumSend": MessageLookupByLibrary.simpleMessage("最小发送金额为 %1 %2"),
         "mnemonicInvalidWord":
@@ -252,16 +278,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("秘密短语"),
         "mnemonicSizeError":
             MessageLookupByLibrary.simpleMessage("秘密词语一定要包含 24 个词语"),
+        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
+        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
+        "nearby": MessageLookupByLibrary.simpleMessage(""),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "此功能要求您具有更长的交易历史记录，以防止垃圾邮件。\n\n或者，您可以显示二维码供他人扫描。"),
         "needVerificationAlertHeader":
             MessageLookupByLibrary.simpleMessage("需要验证"),
         "newAccountIntro": MessageLookupByLibrary.simpleMessage(
             "这是您的新账户。当您收到 NANO 时, 交易会如下出现："),
-        "newAccountIntroKal": MessageLookupByLibrary.simpleMessage(
-            "这是您的新账户。当您收到 BANANO 时, 交易会如下出现："),
         "newWallet": MessageLookupByLibrary.simpleMessage("创建新钱包"),
         "nextButton": MessageLookupByLibrary.simpleMessage("继续"),
         "no": MessageLookupByLibrary.simpleMessage("否认"),
@@ -274,15 +302,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "notSent": MessageLookupByLibrary.simpleMessage("未发送"),
         "notificationBody":
             MessageLookupByLibrary.simpleMessage("打开Nautilus查看此交易"),
-        "notificationBodyKal":
-            MessageLookupByLibrary.simpleMessage("打开Kalium查看此交易"),
         "notificationHeaderSupplement":
             MessageLookupByLibrary.simpleMessage("点击打开"),
         "notificationInfo":
             MessageLookupByLibrary.simpleMessage("为了使此功能正常工作，必须启用通知"),
         "notificationTitle": MessageLookupByLibrary.simpleMessage("收到 %1 NANO"),
-        "notificationTitleKal":
-            MessageLookupByLibrary.simpleMessage("收到 %1 BANANO"),
         "notifications": MessageLookupByLibrary.simpleMessage("通知"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("关闭"),
@@ -305,6 +329,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("有人要求你付款！查看付款页面了解更多信息。"),
         "payments": MessageLookupByLibrary.simpleMessage("付款"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("从代表名单选择"),
+        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
         "pinConfirmError": MessageLookupByLibrary.simpleMessage("识别码不匹配"),
         "pinConfirmTitle": MessageLookupByLibrary.simpleMessage("确认您的识别码"),
         "pinCreateTitle": MessageLookupByLibrary.simpleMessage("创建一个6位数的识别码"),
@@ -313,6 +338,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinMethod": MessageLookupByLibrary.simpleMessage("识别码"),
         "pinRepChange": MessageLookupByLibrary.simpleMessage("输入识别码以更改代表。"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage("输入识别码以查看钱包种子。"),
+        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleDeniabilityParagraph":
+            MessageLookupByLibrary.simpleMessage(""),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences": MessageLookupByLibrary.simpleMessage("偏好"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("隐私政策"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("购买 Nano"),
@@ -365,11 +395,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("请求 %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "请求失败：此用户似乎没有安装 Nautilus，或者禁用了通知。"),
+        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
         "requestPayment": MessageLookupByLibrary.simpleMessage("申请付款"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "发送付款请求时出错，收款人的设备可能处于离线状态或不可用。"),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "请求重新发送！如果仍未确认，则收件人的设备可能处于脱机状态。"),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
         "requested": MessageLookupByLibrary.simpleMessage("已请求"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("请求自"),
         "requesting": MessageLookupByLibrary.simpleMessage("正在申请"),
@@ -383,8 +416,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "您的设备似乎被“越狱”或被修改，从而存在安全隐患。建议您在继续之前把设备还原到初始状态。"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage("扫描NANO二维码地址"),
-        "scanInstructionsKal":
-            MessageLookupByLibrary.simpleMessage("扫描BANANO二维码地址"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("扫描二维码"),
         "searchHint": MessageLookupByLibrary.simpleMessage("搜索任何东西"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -407,8 +438,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "selfSendError": MessageLookupByLibrary.simpleMessage("无法向自己申请"),
         "send": MessageLookupByLibrary.simpleMessage("发送"),
         "sendAmountConfirm": MessageLookupByLibrary.simpleMessage("发送 %1 NANO"),
-        "sendAmountConfirmKal":
-            MessageLookupByLibrary.simpleMessage("发送 %1 Banano"),
         "sendError": MessageLookupByLibrary.simpleMessage("发生错误。请稍后再试。"),
         "sendFrom": MessageLookupByLibrary.simpleMessage("发送自"),
         "sendMemoError": MessageLookupByLibrary.simpleMessage(
@@ -418,11 +447,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "使用端到端加密消息发送或请求付款！\n\n付款请求、备忘录和消息只能由其他 nautilus 用户接收。\n\n您无需拥有用户名即可发送或接收付款请求，即使他们不使用nautilus，您也可以将其用于自己的记录保存。"),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage("发送工作表信息"),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
         "sending": MessageLookupByLibrary.simpleMessage("发出"),
         "sent": MessageLookupByLibrary.simpleMessage("发送"),
         "sentTo": MessageLookupByLibrary.simpleMessage("发给"),
         "setPassword": MessageLookupByLibrary.simpleMessage("设置密码"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage("密码设置成功"),
+        "setPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
         "setWalletPassword": MessageLookupByLibrary.simpleMessage("设置钱包密码"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
@@ -430,15 +463,26 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("设置"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage("用纸钱包充值"),
         "shareLink": MessageLookupByLibrary.simpleMessage("分享链接"),
+        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("分享Nautilus"),
         "shareNautilusText":
             MessageLookupByLibrary.simpleMessage("来试试Nautilus！ 一个卓越的NANO手机钱包！"),
+        "show": MessageLookupByLibrary.simpleMessage(""),
+        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
         "showContacts": MessageLookupByLibrary.simpleMessage("显示联系人"),
+        "showFunding": MessageLookupByLibrary.simpleMessage(""),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
+        "showQR": MessageLookupByLibrary.simpleMessage(""),
+        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "someone": MessageLookupByLibrary.simpleMessage(""),
+        "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
+        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("支持开发者"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("转换成种子"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("系统默认"),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
         "tapToHide": MessageLookupByLibrary.simpleMessage("点击隐藏"),
         "tapToReveal": MessageLookupByLibrary.simpleMessage("点击揭示"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("主题"),
@@ -478,8 +522,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "unlockBiometrics":
             MessageLookupByLibrary.simpleMessage("验证并解锁 Nautilus"),
         "unlockPin": MessageLookupByLibrary.simpleMessage("请输入识别码来解锁 Nautilus"),
-        "unlockPinKal":
-            MessageLookupByLibrary.simpleMessage("请输入识别码码解锁 Kalium"),
+        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarningHeader":
+            MessageLookupByLibrary.simpleMessage(""),
         "unpaid": MessageLookupByLibrary.simpleMessage("未付款"),
         "unread": MessageLookupByLibrary.simpleMessage("未读"),
         "uptime": MessageLookupByLibrary.simpleMessage("上线时间"),
@@ -497,13 +544,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "usernameUnavailable": MessageLookupByLibrary.simpleMessage("用户名不可用"),
         "usernameWarning":
             MessageLookupByLibrary.simpleMessage("鹦鹉螺用户名是由 nano.to 提供的集中式服务"),
+        "using": MessageLookupByLibrary.simpleMessage(""),
         "viewDetails": MessageLookupByLibrary.simpleMessage("查看详情"),
+        "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("投票比重"),
         "warning": MessageLookupByLibrary.simpleMessage("警告"),
+        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "欢迎来到Nautilus。下一步，您可以创建新钱包或导入已有钱包。"),
-        "welcomeTextKal": MessageLookupByLibrary.simpleMessage(
-            "欢迎来到Kalium。下一步，您可以创建新钱包或导入现有钱包。"),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
         "withAddress": MessageLookupByLibrary.simpleMessage("有地址"),
         "withMessage": MessageLookupByLibrary.simpleMessage("带消息"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 分钟后"),

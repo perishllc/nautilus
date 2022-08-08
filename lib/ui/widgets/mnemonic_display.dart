@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
@@ -115,11 +115,11 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
                 margin: const EdgeInsetsDirectional.only(top: 8),
                 child: _seedObscured
                     ? AutoSizeText(
-                        AppLocalization.of(context)!.tapToReveal,
+                        AppLocalization.of(context).tapToReveal,
                         style: AppStyles.textStyleParagraphThinPrimary(context),
                       )
                     : Text(
-                        AppLocalization.of(context)!.tapToHide,
+                        AppLocalization.of(context).tapToHide,
                         style: AppStyles.textStyleParagraphThinPrimary(context),
                       ),
               ),
@@ -153,7 +153,7 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
             // borderSide:
             //     BorderSide(color: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary, width: 1.0),
             child: AutoSizeText(
-              _seedCopied ? AppLocalization.of(context)!.copied : AppLocalization.of(context)!.copy,
+              _seedCopied ? AppLocalization.of(context).copied : AppLocalization.of(context).copy,
               textAlign: TextAlign.center,
               style: _seedCopied ? AppStyles.textStyleButtonSuccessSmallOutline(context) : AppStyles.textStyleButtonPrimarySmallOutline(context),
               maxLines: 1,

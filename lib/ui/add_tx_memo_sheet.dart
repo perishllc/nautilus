@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
@@ -70,7 +70,7 @@ class _AddMemoSheetState extends State<AddMemoSheet> {
                       child: Column(
                         children: <Widget>[
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.watchOnlyAccount, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).watchOnlyAccount, context),
                             style: AppStyles.textStyleHeader(context),
                             maxLines: 1,
                             stepGranularity: 0.1,
@@ -109,7 +109,7 @@ class _AddMemoSheetState extends State<AddMemoSheet> {
                                     topMargin: 30,
                                     padding: const EdgeInsets.symmetric(horizontal: 30),
                                     textInputAction: TextInputAction.next,
-                                    hintText: AppLocalization.of(context)!.enterMemo,
+                                    hintText: AppLocalization.of(context).enterMemo,
                                     keyboardType: TextInputType.text,
 
                                     style: TextStyle(
@@ -160,7 +160,7 @@ class _AddMemoSheetState extends State<AddMemoSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY,
-                    AppLocalization.of(context)!.addWatchOnlyAccount,
+                    AppLocalization.of(context).addWatchOnlyAccount,
                     Dimens.BUTTON_TOP_DIMENS,
                     // disabled: _addingAccount,
                     onPressed: () async {
@@ -175,7 +175,7 @@ class _AddMemoSheetState extends State<AddMemoSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY_OUTLINE,
-                    AppLocalization.of(context)!.close,
+                    AppLocalization.of(context).close,
                     Dimens.BUTTON_BOTTOM_DIMENS,
                     onPressed: () {
                       Navigator.pop(context);

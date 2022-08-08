@@ -994,7 +994,7 @@ class SlidableState extends State<Slidable> with TickerProviderStateMixin, Autom
     }
   }
 
-  void _handleDismissStatusChanged(AnimationStatus status) async {
+  Future<void> _handleDismissStatusChanged(AnimationStatus status) async {
     if (dismissible) {
       if (status == AnimationStatus.completed && _overallMoveController!.value == _overallMoveController!.upperBound && !_dragUnderway) {
         if (widget.slideToDismissDelegate!.onWillDismiss == null || await widget.slideToDismissDelegate!.onWillDismiss!(actionType)) {

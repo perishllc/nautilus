@@ -6,7 +6,7 @@ import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
@@ -117,7 +117,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context)!.registering, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).registering, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -140,7 +140,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context)!.registerFor, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).registerFor, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -195,16 +195,17 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+                        if (!mounted) return;
                         try {
                           final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
                               context,
-                              AppLocalization.of(context)!
+                              AppLocalization.of(context)
                                   .sendAmountConfirm
                                   .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                                   .replaceAll("%2", StateContainer.of(context).currencyMode));
@@ -225,7 +226,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.cancel, context),
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -304,7 +305,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
       Navigator.of(context).pop();
     }
   }
@@ -318,8 +319,8 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: AppLocalization.of(context)!
-            .sendAmountConfirmPin
+        description: AppLocalization.of(context)
+            .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),
       );

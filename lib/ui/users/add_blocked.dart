@@ -7,7 +7,7 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/blocked_added_event.dart';
 import 'package:nautilus_wallet_flutter/bus/blocked_modified_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
@@ -186,7 +186,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _addressHint ?? AppLocalization.of(context)!.enterUserOrAddress,
+      hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
       prefixButton: TextFieldButton(
           icon: AppIcons.scan,
           onPressed: () async {
@@ -194,7 +194,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
             final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
             if (!mounted) return;
             if (scanResult == null) {
-              UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
+              UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
             } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
               setState(() {
                 _addressController!.text = scanResult;
@@ -395,7 +395,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                 child: Column(
                   children: <Widget>[
                     AutoSizeText(
-                      CaseChange.toUpperCase(AppLocalization.of(context)!.addBlocked, context),
+                      CaseChange.toUpperCase(AppLocalization.of(context).addBlocked, context),
                       style: AppStyles.textStyleHeader(context),
                       textAlign: TextAlign.center,
                       maxLines: 1,
@@ -504,49 +504,48 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
             ),
           ),
           //A column with "Add Contact" and "Close" buttons
-          Container(
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    // Add Contact Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.blockUser, Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
-                      if (await validateForm()) {
-                        User newBlocked;
-                        final String? formAddress = widget.address != null ? widget.address : _addressController!.text;
-                        // if we're given an address with corresponding username, just block:
-                        if (_correspondingUsername != null) {
-                          newBlocked = User(nickname: _correspondingNickname, address: formAddress, username: _correspondingUsername);
-                          await sl.get<DBHelper>().blockUser(newBlocked);
-                        } else if (_correspondingAddress != null) {
-                          newBlocked = User(
-                              nickname: _correspondingNickname ?? null, address: _correspondingAddress, username: SendSheetHelpers.stripPrefixes(formAddress!));
-                          await sl.get<DBHelper>().blockUser(newBlocked);
-                        } else {
-                          // just an address:
-                          newBlocked = User(nickname: _correspondingNickname, address: formAddress);
-                          await sl.get<DBHelper>().blockUser(newBlocked);
-                        }
-                        EventTaxiImpl.singleton().fire(BlockedAddedEvent(user: newBlocked));
-                        UIUtil.showSnackbar(AppLocalization.of(context)!.blockedAdded.replaceAll("%1", newBlocked.getDisplayName()!), context);
-                        EventTaxiImpl.singleton().fire(BlockedModifiedEvent(user: newBlocked));
-                        Navigator.of(context).pop();
+          Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  // Add Contact Button
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).blockUser, Dimens.BUTTON_TOP_DIMENS,
+                      onPressed: () async {
+                    if (await validateForm()) {
+                      User newBlocked;
+                      final String formAddress = widget.address ?? _addressController!.text;
+                      // if we're given an address with corresponding username, just block:
+                      if (_correspondingUsername != null) {
+                        newBlocked = User(nickname: _correspondingNickname, address: formAddress, username: _correspondingUsername);
+                        await sl.get<DBHelper>().blockUser(newBlocked);
+                      } else if (_correspondingAddress != null) {
+                        newBlocked =
+                            User(nickname: _correspondingNickname, address: _correspondingAddress, username: SendSheetHelpers.stripPrefixes(formAddress));
+                        await sl.get<DBHelper>().blockUser(newBlocked);
+                      } else {
+                        // just an address:
+                        newBlocked = User(nickname: _correspondingNickname, address: formAddress);
+                        await sl.get<DBHelper>().blockUser(newBlocked);
                       }
-                    }),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    // Close Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.close, Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () {
-                      Navigator.pop(context);
-                    }),
-                  ],
-                ),
-              ],
-            ),
+                      EventTaxiImpl.singleton().fire(BlockedAddedEvent(user: newBlocked));
+                      if (!mounted) return;
+                      UIUtil.showSnackbar(AppLocalization.of(context).blockedAdded.replaceAll("%1", newBlocked.getDisplayName()!), context);
+                      EventTaxiImpl.singleton().fire(BlockedModifiedEvent(user: newBlocked));
+                      Navigator.of(context).pop();
+                    }
+                  }),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  // Close Button
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                      onPressed: () {
+                    Navigator.pop(context);
+                  }),
+                ],
+              ),
+            ],
           ),
         ],
       ),
@@ -564,7 +563,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
     if (formAddress.isEmpty) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context)!.addressOrUserMissing;
+        _addressValidationText = AppLocalization.of(context).addressOrUserMissing;
       });
     } else if (formAddress.startsWith("nano_")) {
       // we're dealing with an address:
@@ -572,7 +571,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
       if (!Address(formAddress).isValid()) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context)!.invalidAddress;
+          _addressValidationText = AppLocalization.of(context).invalidAddress;
         });
       }
 
@@ -581,7 +580,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
       if (blockedExists) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context)!.blockedExists;
+          _addressValidationText = AppLocalization.of(context).blockedExists;
         });
       } else {
         // get the corresponding username if it exists:
@@ -598,7 +597,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
       if (blockedExists) {
         isValid = false;
         setState(() {
-          _addressValidationText = AppLocalization.of(context)!.blockedExists;
+          _addressValidationText = AppLocalization.of(context).blockedExists;
         });
       } else {
         // check if there's a corresponding address:
@@ -615,7 +614,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
         } else {
           isValid = false;
           setState(() {
-            _addressValidationText = AppLocalization.of(context)!.userNotFound;
+            _addressValidationText = AppLocalization.of(context).userNotFound;
           });
         }
       }

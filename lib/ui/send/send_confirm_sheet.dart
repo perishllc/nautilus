@@ -8,7 +8,7 @@ import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
@@ -131,7 +131,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       children: <Widget>[
                         Text(
                           CaseChange.toUpperCase(
-                              (widget.link.isEmpty) ? AppLocalization.of(context)!.sending : AppLocalization.of(context)!.creatingGiftCard, context),
+                              (widget.link.isEmpty) ? AppLocalization.of(context).sending : AppLocalization.of(context).creatingGiftCard, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -197,7 +197,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.to, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).to, context),
                             style: AppStyles.textStyleHeader(context),
                           ),
                         ],
@@ -222,7 +222,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).withMessage, context),
                             style: AppStyles.textStyleHeader(context),
                           ),
                         ],
@@ -255,7 +255,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
@@ -264,8 +264,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       final bool isMessage = widget.memo.isNotEmpty && (widget.amountRaw == "0");
 
                       final String authText = isMessage
-                          ? AppLocalization.of(context)!.sendMessageConfirm
-                          : AppLocalization.of(context)!
+                          ? AppLocalization.of(context).sendMessageConfirm
+                          : AppLocalization.of(context)
                               .sendAmountConfirm
                               .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                               .replaceAll("%2", StateContainer.of(context).currencyMode);
@@ -295,7 +295,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.cancel, context),
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -326,18 +326,18 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              AppLocalization.of(context)!.unopenedWarningWarningHeader,
+              AppLocalization.of(context).unopenedWarningWarningHeader,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context)!.unopenedWarningWarning}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${AppLocalization.of(context).unopenedWarningWarning}\n\n", style: AppStyles.textStyleParagraph(context)),
                 RichText(
                   textAlign: TextAlign.start,
                   text: TextSpan(
-                    text: "${AppLocalization.of(context)!.address}:\n",
+                    text: "${AppLocalization.of(context).address}:\n",
                     style: AppStyles.textStyleParagraph(context),
                     children: [
                       TextSpan(
@@ -358,7 +358,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context)!.imSure,
+                    AppLocalization.of(context).imSure,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -370,7 +370,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context)!.goBackButton,
+                    AppLocalization.of(context).goBackButton,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -521,7 +521,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
       if (memoSendFailed) {
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-        UIUtil.showSnackbar(AppLocalization.of(context)!.sendMemoError, context, durationMs: 5000);
+        UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
       } else {
         if (widget.link.isEmpty) {
           Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
@@ -556,11 +556,11 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       }
       if (widget.link.isNotEmpty) {
         Clipboard.setData(ClipboardData(text: widget.link + RecordTypes.SEPARATOR + widget.paperWalletSeed));
-        UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationErrorSent, context, durationMs: 20000);
+        UIUtil.showSnackbar(AppLocalization.of(context).giftCardCreationErrorSent, context, durationMs: 20000);
         Navigator.of(context).pop();
         return;
       }
-      UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context, durationMs: 5000);
+      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context, durationMs: 5000);
       Navigator.of(context).pop();
     }
   }
@@ -574,8 +574,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: AppLocalization.of(context)!
-            .sendAmountConfirmPin
+        description: AppLocalization.of(context)
+            .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),
       );

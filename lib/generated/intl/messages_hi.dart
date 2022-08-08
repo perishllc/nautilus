@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("खाता"),
+        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
         "accounts": MessageLookupByLibrary.simpleMessage("खाते"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "क्या आप सुनिश्चित हैं कि आपने अपने गुप्त वाक्यांश या सीड का बैकअप ले लिया है?"),
@@ -33,6 +35,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("उपयोगकर्ता को अवरोधित करें"),
         "addContact": MessageLookupByLibrary.simpleMessage("संपर्क डालें"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("पसंदीदा जोड़ें"),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "address": MessageLookupByLibrary.simpleMessage(""),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("पता कॉपी हो गया है"),
         "addressHint": MessageLookupByLibrary.simpleMessage("पता लिखिए"),
@@ -42,9 +48,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "कृपया उपयोगकर्ता नाम या पता दर्ज करें"),
         "addressShare": MessageLookupByLibrary.simpleMessage("शेयर करें"),
         "aliases": MessageLookupByLibrary.simpleMessage("फर्जी नाम"),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("कृपया राशि दर्ज करें"),
         "asked": MessageLookupByLibrary.simpleMessage("पूछे जाने पर"),
+        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("प्रमाणीकरण का तरीका"),
         "autoImport": MessageLookupByLibrary.simpleMessage("स्वतः आयात"),
@@ -101,8 +109,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("पुष्टि करें"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("पासवर्ड की पुष्टि करें"),
+        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
         "connectingHeader":
             MessageLookupByLibrary.simpleMessage("कनेक्ट हो रहा ह"),
+        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("%1 अब आपके सम्पर्को में है।"),
         "contactExists": MessageLookupByLibrary.simpleMessage(
@@ -125,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("कॉपी"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("पता कॉपी करें"),
         "copyLink": MessageLookupByLibrary.simpleMessage("लिंक कॉपी करें"),
+        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
         "copySeed": MessageLookupByLibrary.simpleMessage("सीड कॉपी करें"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "वॉलेट एड्रेस को क्लिपबोर्ड पर कॉपी करें"),
@@ -142,7 +154,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "पासवर्ड वैकल्पिक है, और आपका वॉलेट आपके पिन या बायोमेट्रिक्स से सुरक्षित रहेगा ही।"),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("बनाएं"),
+        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
         "createQR": MessageLookupByLibrary.simpleMessage("QR कोड बनाएं"),
+        "created": MessageLookupByLibrary.simpleMessage(""),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("गिफ्ट कार्ड बनाना"),
         "currency": MessageLookupByLibrary.simpleMessage("मुद्रा"),
@@ -157,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("डिक्रिप्शन त्रुटि!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("मुख्य खाता"),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("खाता %1"),
         "delete": MessageLookupByLibrary.simpleMessage("मिटाएँ"),
@@ -170,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("वॉलेट पासवर्ड अक्षम करें"),
         "dismiss": MessageLookupByLibrary.simpleMessage("खारिज"),
         "domainInvalid": MessageLookupByLibrary.simpleMessage("अवैध डोमेन नाम"),
+        "donateButton": MessageLookupByLibrary.simpleMessage(""),
+        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
         "edit": MessageLookupByLibrary.simpleMessage("संपादित करें"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "वॉलेट पासवर्ड सेट करने में विफल"),
@@ -180,24 +197,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("संदेश दाखिल करें"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("अपना पासवर्ड डालें"),
+        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
         "enterUserOrAddress":
             MessageLookupByLibrary.simpleMessage("उपयोगकर्ता या पता दर्ज करें"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("उपयोगकर्ता नाम दर्ज करें"),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom":
             MessageLookupByLibrary.simpleMessage("अजनबी बंदर से"),
-        "exampleCardFromKal":
-            MessageLookupByLibrary.simpleMessage("अजनबी बंदर से"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
             "नेट्रियम में आपका स्वागत है। बनानो प्राप्त करने पर सभी लेनदेन इस तरह नीचे दिखाई देंगे -"),
-        "exampleCardIntroKal": MessageLookupByLibrary.simpleMessage(
-            "केलियम में आपका स्वागत है। बनानो प्राप्त करने पर सभी लेनदेन इस तरह नीचे दिखाई देंगे -"),
         "exampleCardLittle": MessageLookupByLibrary.simpleMessage("थोड़े से"),
         "exampleCardLot": MessageLookupByLibrary.simpleMessage("बहुत सारे"),
         "exampleCardTo": MessageLookupByLibrary.simpleMessage("अजनबी बंदर को"),
-        "exampleCardToKal":
-            MessageLookupByLibrary.simpleMessage("अजनबी बंदर को"),
         "examplePayRecipient": MessageLookupByLibrary.simpleMessage("@dad"),
         "examplePayRecipientMessage":
             MessageLookupByLibrary.simpleMessage("जन्मदिन मुबारक हो"),
@@ -245,26 +258,38 @@ class MessageLookup extends MessageLookupByLibrary {
             "उंगली के निशान की सहायता से सीड बैकअप करें।"),
         "from": MessageLookupByLibrary.simpleMessage("से"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("पूरा"),
+        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("आपके पास एक उपहार है!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("खाली गिफ्ट"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("गिफ़्ट राशि"),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
         "giftFrom": MessageLookupByLibrary.simpleMessage("गिफ्ट फ्रॉम"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "NANO के साथ एक डिजिटल गिफ्ट कार्ड लोड करें! प्राप्तकर्ता को यह देखने के लिए कि वे कब खोलते हैं, राशि और एक वैकल्पिक संदेश सेट करें!\n\nएक बार बनने के बाद, आपको एक लिंक मिलेगा जिसे आप किसी को भी भेज सकते हैं, जिसे खोलने पर नॉटिलस स्थापित करने के बाद प्राप्तकर्ता को स्वचालित रूप से धन वितरित किया जाएगा!\n\nयदि प्राप्तकर्ता पहले से ही एक Nautilus उपयोगकर्ता है, तो उन्हें लिंक खोलने पर अपने खाते में धनराशि स्थानांतरित करने का संकेत मिलेगा।"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("गिफ्ट मैसेज"),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("वापस जाओ"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("QR पर जाएं"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("समझ गया!"),
+        "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffSupportedMethodNotFound":
+            MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("छिपाएँ"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("खाता छुपाएं?"),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
+        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
         "home": MessageLookupByLibrary.simpleMessage("होम"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("मैं जोखिमो को समझता हूँ"),
         "ignore": MessageLookupByLibrary.simpleMessage("नज़रअंदाज़ करना"),
+        "imSure": MessageLookupByLibrary.simpleMessage(""),
         "import": MessageLookupByLibrary.simpleMessage("आयात"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "आपके द्वारा क्लिक किए गए लिंक में कुछ नैनो हैं, क्या आप इसे इस वॉलेट में आयात करना चाहते हैं, या इसे भेजने वाले को वापस कर देंगे?"),
@@ -286,11 +311,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("गलत गंतव्य पता"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("अवैध पासवर्ड"),
-        "kaliumWallet": MessageLookupByLibrary.simpleMessage("कलियम वॉलेट"),
+        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
         "language": MessageLookupByLibrary.simpleMessage("भाषा"),
         "linkCopied":
             MessageLookupByLibrary.simpleMessage("लिंक नक़ल किया गया"),
-        "liveSupportButton": MessageLookupByLibrary.simpleMessage("सहायता"),
         "loaded": MessageLookupByLibrary.simpleMessage("लोडेड"),
         "loadedInto": MessageLookupByLibrary.simpleMessage("लोडेड इन"),
         "lockAppSetting":
@@ -303,8 +328,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("क्या आप निश्चित हैं?"),
         "logoutDetail": MessageLookupByLibrary.simpleMessage(
             "लॉगआउट करने पर आपके सीड और नेट्रियम से संबंधित सभी डेटा हट जाएंगे। यदि आपने अपने सीड को बैकअप नहीं किया, तो आप कभी भी अपने धन का उपयोग नहीं कर पाएंगे।"),
-        "logoutDetailKal": MessageLookupByLibrary.simpleMessage(
-            "लॉगआउट करने पर आपके  सीड और केलियम से संबंधित सभी डेटा हट जाएंगे। यदि आपने अपने सीड को बैकअप नहीं किया, तो आप कभी भी अपने धन का उपयोग नहीं कर पाएंगे।"),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "अगर आपने अपने सीड को बैकअप कर लिया है, तो आपको चिंता करने की कोई आवश्यकता नहीं है।"),
         "manage": MessageLookupByLibrary.simpleMessage("प्रबंधन | मैनेज"),
@@ -318,6 +341,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "मेमो फिर से भेजा गया! अगर अभी भी अनपेक्षित है, तो प्राप्तकर्ता का डिवाइस ऑफ़लाइन हो सकता है।"),
+        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
         "messageHeader": MessageLookupByLibrary.simpleMessage("संदेश"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "न्यूनतम प्रेषण राशि %1 नैनो है"),
@@ -327,16 +351,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("स्मरक वाक्यांश"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "गुप्त वाक्यांश में केवल 24 शब्द हो सकते हैं"),
+        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
+        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
         "natricon": MessageLookupByLibrary.simpleMessage("नैट्रिकोन"),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
+        "nearby": MessageLookupByLibrary.simpleMessage(""),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "स्पैम को रोकने के लिए इस सुविधा के लिए आपके पास एक लंबा लेनदेन इतिहास होना आवश्यक है।\n\nवैकल्पिक रूप से, आप किसी व्यक्ति को स्कैन करने के लिए QR कोड दिखा सकते हैं।"),
         "needVerificationAlertHeader":
             MessageLookupByLibrary.simpleMessage("सत्यापन की आवश्यकता है"),
         "newAccountIntro": MessageLookupByLibrary.simpleMessage(
             "यह आपका नया खाता है। एक बार जब आप नैनो प्राप्त कर लेते हैं, तो लेनदेन इस तरह दिखाई देंगे:"),
-        "newAccountIntroKal": MessageLookupByLibrary.simpleMessage(
-            "यह आपका नया खाता है। एक बार जब आप बनानो प्राप्त कर लेते हैं, तो लेनदेन इस तरह दिखाई देंगे:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("नया वॉलेट"),
         "nextButton": MessageLookupByLibrary.simpleMessage("अगला"),
         "no": MessageLookupByLibrary.simpleMessage("नहीं"),
@@ -352,15 +378,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "notSent": MessageLookupByLibrary.simpleMessage("नहीं भेजा गया"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "इस लेनदेन को देखने के लिए नेट्रियम खोलें"),
-        "notificationBodyKal": MessageLookupByLibrary.simpleMessage(
-            "इस लेनदेन को देखने के लिए केलियम खोलें"),
         "notificationHeaderSupplement":
             MessageLookupByLibrary.simpleMessage("ऐप्प खोलने के लिए छुएं"),
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "इस सुविधा को सही तरीके से काम करने के लिए, सूचनाएं सक्षम होनी चाहिए"),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("%1 बनानो प्राप्त हुए"),
-        "notificationTitleKal":
             MessageLookupByLibrary.simpleMessage("%1 बनानो प्राप्त हुए"),
         "notifications": MessageLookupByLibrary.simpleMessage("सूचनाएं"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("न्यैनिकॉन"),
@@ -389,6 +411,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "किसी ने आपसे भुगतान का अनुरोध किया है! अधिक जानकारी के लिए भुगतान पृष्ठ देखें।"),
         "payments": MessageLookupByLibrary.simpleMessage("पेमेंट्स"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("सूची से चुनें"),
+        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
         "pinConfirmError": MessageLookupByLibrary.simpleMessage(
             "पिन एक दूसरे से नहीं मिल रहे"),
         "pinConfirmTitle":
@@ -403,6 +426,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "प्रतिनिधि बदलने के लिए पिन दर्ज करें"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "वॉलेट के सीड को बैकअप  के लिए पिन दर्ज करें।"),
+        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleDeniabilityParagraph":
+            MessageLookupByLibrary.simpleMessage(""),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences":
             MessageLookupByLibrary.simpleMessage("पसंद | प्रेफरेन्सेस"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("गोपनीयता नीति"),
@@ -461,12 +489,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("निवेद% 1% 2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "अनुरोध विफल: इस उपयोगकर्ता के पास Nautilus इंस्टॉल नहीं है, या उसके पास सूचनाएं अक्षम हैं।"),
+        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("भुगतान का अनुरोध करें"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "भुगतान अनुरोध भेजने में त्रुटि, प्राप्तकर्ता का डिवाइस ऑफ़लाइन या अनुपलब्ध हो सकता है।"),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "अनुरोध फिर से भेजा गया! अगर अभी भी अनपेक्षित है, तो प्राप्तकर्ता का डिवाइस ऑफ़लाइन हो सकता है।"),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
         "requested": MessageLookupByLibrary.simpleMessage("अनुरोध किया गया"),
         "requestedFrom":
             MessageLookupByLibrary.simpleMessage("से अनुरोध किया गया"),
@@ -484,8 +515,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "ऐसा प्रतीत होता है कि आपका डिवाइस \"रूटेड\", \"जेलब्रोकन\" है, या सुरक्षा से समझौता करने वाले तरीके से संशोधित है। यह अनुशंसा की जाती है कि आप आगे बढ़ने से पहले अपने डिवाइस को उसकी मूल स्थिति में रीसेट कर दें।"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "बनानो के पते का \nक्यू आर कोड स्कैन करें "),
-        "scanInstructionsKal": MessageLookupByLibrary.simpleMessage(
-            "बनानो के पते का \nक्यू आर कोड स्कैन करें"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("क्यूआर कोड स्कैन करें"),
         "searchHint":
@@ -517,8 +546,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("भेजें"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("%1 बनानो भेजें ?"),
-        "sendAmountConfirmKal":
-            MessageLookupByLibrary.simpleMessage("%1 बनानो भेजें ?"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "एक त्रुटि पाई गई। बाद में पुन: प्रयास करें।"),
         "sendFrom": MessageLookupByLibrary.simpleMessage("भेजने का पता -"),
@@ -532,12 +559,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "एंड टू एंड एन्क्रिप्टेड संदेशों के साथ भुगतान भेजें या अनुरोध करें!\n\nभुगतान अनुरोध, ज्ञापन और संदेश केवल अन्य नॉटिलस उपयोगकर्ताओं द्वारा प्राप्य होंगे।\n\nभुगतान अनुरोध भेजने या प्राप्त करने के लिए आपके पास उपयोगकर्ता नाम रखने की आवश्यकता नहीं है, और आप उन्हें अपने रिकॉर्ड रखने के लिए उपयोग कर सकते हैं, भले ही वे नॉटिलस का उपयोग न करें।"),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("शीट की जानकारी भेजें"),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
         "sending": MessageLookupByLibrary.simpleMessage("भेजा जा रहा है -"),
         "sent": MessageLookupByLibrary.simpleMessage("भेजे -"),
         "sentTo": MessageLookupByLibrary.simpleMessage("इसको भेजा गया -"),
         "setPassword": MessageLookupByLibrary.simpleMessage("पासवर्ड सेट करें"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "पासवर्ड सफलतापूर्वक सेट कर दिया गया है"),
+        "setPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("वॉलेट पासवर्ड सेट करें"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -547,17 +578,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("पेपर वॉलेट से लोड करें"),
         "shareLink": MessageLookupByLibrary.simpleMessage("लिंक शेयर करें"),
+        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("शेयर नैट्रियम"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "नैट्रियम की जाँच करें! एक प्रमुख नैनो मोबाइल वॉलेट!"),
+        "show": MessageLookupByLibrary.simpleMessage(""),
+        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
         "showContacts": MessageLookupByLibrary.simpleMessage("संपर्क दिखाएँ"),
+        "showFunding": MessageLookupByLibrary.simpleMessage(""),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
+        "showQR": MessageLookupByLibrary.simpleMessage(""),
+        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("सिंप्लेक्स"),
+        "someone": MessageLookupByLibrary.simpleMessage(""),
+        "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
+        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("डेवलपर का समर्थन करें"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("सीड पर स्विच करें"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("डिवाइस की भाषा"),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
         "tapToHide":
             MessageLookupByLibrary.simpleMessage("छिपाने के लिए दबाएँ"),
         "tapToReveal":
@@ -604,8 +646,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "नैट्रियम अनलॉक करने के लिए प्रमाणित करें"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "नैट्रियम अनलॉक करने के लिए पिन दर्ज करें"),
-        "unlockPinKal": MessageLookupByLibrary.simpleMessage(
-            "कलियम अनलॉक करने के लिए पिन दर्ज करें"),
+        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarningHeader":
+            MessageLookupByLibrary.simpleMessage(""),
         "unpaid": MessageLookupByLibrary.simpleMessage("अवैतनिक"),
         "unread": MessageLookupByLibrary.simpleMessage("अपठित"),
         "uptime": MessageLookupByLibrary.simpleMessage("सक्रिय रहने की अवधि"),
@@ -629,14 +674,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("उपयोक्ता नाम अनुपलब्ध"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "Nautilus उपयोगकर्ता नाम Nano.to द्वारा प्रदान की जाने वाली एक केंद्रीकृत सेवा है"),
+        "using": MessageLookupByLibrary.simpleMessage(""),
         "viewDetails":
             MessageLookupByLibrary.simpleMessage("अधिक जानकारी देखें"),
+        "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("मतदान भार"),
         "warning": MessageLookupByLibrary.simpleMessage("चेतावनी !"),
+        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "नेट्रियम में आपका स्वागत है। आगे बढ़ने के लिए, आप एक नया वॉलेट बना सकते हैं या एक मौजूदा वॉलेट को आयात कर सकते हैं।"),
-        "welcomeTextKal": MessageLookupByLibrary.simpleMessage(
-            "केलियम में आपका स्वागत है। आगे बढ़ने के लिए, आप एक नया वॉलेट बना सकते हैं या एक मौजूदा वॉलेट खोल सकते हैं।"),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
         "withAddress": MessageLookupByLibrary.simpleMessage("पते के साथ"),
         "withMessage": MessageLookupByLibrary.simpleMessage("मैसेज के साथ"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 मिनट के बाद"),

@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/avatar/nonce_response.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
@@ -64,7 +64,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
     BigInt baseAmount = BigInt.parse(NATRICON_BASE_RAW);
     BigInt sendAmount = baseAmount + BigInt.from(nonce!);
     if (StateContainer.of(context).wallet!.accountBalance < sendAmount) {
-      UIUtil.showSnackbar(AppLocalization.of(context)!.insufficientBalance, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
       return;
     }
     Sheets.showAppHeightNineSheet(context: context, widget: SendConfirmSheet(amountRaw: sendAmount.toString(), destination: NATRICON_ADDRESS));
@@ -257,7 +257,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                   Row(
                     children: <Widget>[
                       // Go Back Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context)!.goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () {
                         Navigator.of(context).popUntil((Route route) => route.isFirst);
                       }),

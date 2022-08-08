@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -19,10 +19,10 @@ import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class IntroBackupSafetyPage extends StatefulWidget {
   @override
-  _IntroBackupSafetyState createState() => _IntroBackupSafetyState();
+  IntroBackupSafetyState createState() => IntroBackupSafetyState();
 }
 
-class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
+class IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -107,7 +107,7 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
                       ),
                       alignment: AlignmentDirectional.centerStart,
                       child: AutoSizeText(
-                        AppLocalization.of(context)!.secretInfoHeader,
+                        AppLocalization.of(context).secretInfoHeader,
                         style: AppStyles.textStyleHeaderColored(context),
                         stepGranularity: 0.1,
                         maxLines: 1,
@@ -121,7 +121,7 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
                       child: Column(
                         children: <Widget>[
                           AutoSizeText(
-                            AppLocalization.of(context)!.secretInfo,
+                            AppLocalization.of(context).secretInfo,
                             style: AppStyles.textStyleParagraph(context),
                             maxLines: 5,
                             stepGranularity: 0.5,
@@ -129,7 +129,7 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
                           Container(
                             margin: const EdgeInsetsDirectional.only(top: 15),
                             child: AutoSizeText(
-                              AppLocalization.of(context)!.secretWarning,
+                              AppLocalization.of(context).secretWarning,
                               style: AppStyles.textStyleParagraphPrimary(context),
                               maxLines: 4,
                               stepGranularity: 0.5,
@@ -146,7 +146,7 @@ class _IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context)!.gotItButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).gotItButton, Dimens.BUTTON_BOTTOM_DIMENS,
                       instanceKey: const Key("got_it_button"), onPressed: () {
                     Navigator.of(context).pushNamed('/intro_backup', arguments: StateContainer.of(context).encryptedSecret);
                   }),

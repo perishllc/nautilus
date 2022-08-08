@@ -9,14 +9,14 @@ part of 'auth_item.dart';
 AuthItem _$AuthItemFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['nonce', 'timestamp', 'address', 'format', 'methods'],
+    requiredKeys: const ['nonce', 'timestamp', 'account', 'format', 'methods'],
   );
   return AuthItem()
     ..label = json['label'] as String? ?? ''
     ..message = json['message'] as String? ?? ''
     ..nonce = json['nonce'] as String
     ..timestamp = json['timestamp'] as int
-    ..address = json['address'] as String
+    ..account = json['account'] as String
     ..format =
         (json['format'] as List<dynamic>).map((e) => e as String).toList()
     ..methods = (json['methods'] as List<dynamic>)
@@ -30,7 +30,7 @@ Map<String, dynamic> _$AuthItemToJson(AuthItem instance) => <String, dynamic>{
       'message': instance.message,
       'nonce': instance.nonce,
       'timestamp': instance.timestamp,
-      'address': instance.address,
+      'account': instance.account,
       'format': instance.format,
       'methods': instance.methods,
       'separator': instance.separator,

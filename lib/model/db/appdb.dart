@@ -129,6 +129,7 @@ class DBHelper {
     return theDb;
   }
 
+  // ignore: avoid_void_async
   void _onCreate(Database db, int version) async {
     // When creating the db, create the tables
     await db.execute(CONTACTS_SQL);
@@ -139,6 +140,7 @@ class DBHelper {
     await db.execute(TX_DATA_SQL);
   }
 
+  // ignore: avoid_void_async
   void _onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion == 3) {
       await db.execute(BLOCKED_SQL);
@@ -318,6 +320,13 @@ class DBHelper {
     final Database dbClient = (await db)!;
     final int count =
         Sqflite.firstIntValue(await dbClient.rawQuery("SELECT count(*) FROM Users WHERE lower(address) = '${formatAddress(address)}' AND nickname <> ''"))!;
+    return count > 0;
+  }
+
+  Future<bool> watchAccountExistsWithAddress(String address) async {
+    final Database dbClient = (await db)!;
+    final int count =
+        Sqflite.firstIntValue(await dbClient.rawQuery("SELECT count(*) FROM Accounts WHERE lower(address) = '${formatAddress(address)}' AND watch_only = 1"))!;
     return count > 0;
   }
 

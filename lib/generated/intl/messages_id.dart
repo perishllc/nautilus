@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Akun"),
+        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
         "accounts": MessageLookupByLibrary.simpleMessage("Semua Akun"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Anda yakin sudah menyimpan benih / Kalimat Rahasia anda?"),
@@ -33,6 +35,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Memblokir Pengguna"),
         "addContact": MessageLookupByLibrary.simpleMessage("Tambah Kontak"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Tambah Favorit"),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "address": MessageLookupByLibrary.simpleMessage(""),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Alamat berhasil disalin."),
         "addressHint": MessageLookupByLibrary.simpleMessage("Masukkan Alamat"),
@@ -42,9 +48,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Harap Masukkan Nama Pengguna atau Alamat"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Bagikan"),
         "aliases": MessageLookupByLibrary.simpleMessage("Alias"),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Masukkan jumlah"),
         "asked": MessageLookupByLibrary.simpleMessage("Ditanya"),
+        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
         "authMethod": MessageLookupByLibrary.simpleMessage("Metode Otentikasi"),
         "autoImport": MessageLookupByLibrary.simpleMessage("Impor Otomatis"),
         "autoLockHeader":
@@ -101,8 +109,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Konfirmasi"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Konfirmasi kata sandi"),
+        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
         "connectingHeader":
             MessageLookupByLibrary.simpleMessage("Menghubungkan"),
+        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("%1 ditambahkan ke kontak!"),
         "contactExists":
@@ -125,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("Salin"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Salin Alamat"),
         "copyLink": MessageLookupByLibrary.simpleMessage("Salin Tautan"),
+        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
         "copySeed": MessageLookupByLibrary.simpleMessage("Salin Benih"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Salin alamat dompet ke clipboard"),
@@ -142,7 +154,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kata sandi adalah opsional, dan dompet Anda akan dilindungi dengan PIN atau biometrik Anda."),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Buat"),
+        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
         "createQR": MessageLookupByLibrary.simpleMessage("Buat Kode QR"),
+        "created": MessageLookupByLibrary.simpleMessage(""),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Membuat Kartu Hadiah"),
         "currency": MessageLookupByLibrary.simpleMessage("Mata Uang"),
@@ -157,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Kesalahan Dekripsi!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Akun Utama"),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Akun %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Hapus"),
@@ -171,6 +186,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("Memberhentikan"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Nama Domain Tidak Valid"),
+        "donateButton": MessageLookupByLibrary.simpleMessage(""),
+        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
         "edit": MessageLookupByLibrary.simpleMessage("Mengedit"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Gagal menetapkan kata sandi dompet"),
@@ -181,25 +198,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Masukkan Pesan"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Masukkan kata sandi anda"),
+        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage(
             "Masukkan Pengguna atau Alamat"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Masukkan nama pengguna"),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom":
             MessageLookupByLibrary.simpleMessage("dari seseorang"),
-        "exampleCardFromKal":
-            MessageLookupByLibrary.simpleMessage("dari monkey lain"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
             "Hai, Saat anda mengirim dan menerima NANO, akan terlihat seperti ini"),
-        "exampleCardIntroKal": MessageLookupByLibrary.simpleMessage(
-            "Hai, Saat anda mengirim dan menerima BANANO, akan terlihat seperti ini"),
         "exampleCardLittle": MessageLookupByLibrary.simpleMessage("Sedikit"),
         "exampleCardLot": MessageLookupByLibrary.simpleMessage(" Banyak"),
         "exampleCardTo":
             MessageLookupByLibrary.simpleMessage("untuk seseorang"),
-        "exampleCardToKal":
-            MessageLookupByLibrary.simpleMessage("ke monkey lain"),
         "examplePayRecipient": MessageLookupByLibrary.simpleMessage("@dad"),
         "examplePayRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Selamat ulang tahun!"),
@@ -248,25 +261,37 @@ class MessageLookup extends MessageLookupByLibrary {
             "Konfirmasi sidik jari untuk menyimpan benih."),
         "from": MessageLookupByLibrary.simpleMessage("Dari"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("terpenuhi"),
+        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Kau punya hadiah!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Hadiah Kosong"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Jumlah Hadiah"),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Hadiah Dari"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Muat Kartu Hadiah Digital dengan NANO! Tetapkan jumlah, dan pesan opsional untuk dilihat penerima saat mereka membukanya!\n\nSetelah dibuat, Anda akan mendapatkan tautan yang dapat Anda kirim ke siapa pun, yang ketika dibuka akan secara otomatis mendistribusikan dana kepada penerima setelah menginstal Nautilus!\n\nJika penerima sudah menjadi pengguna Nautilus, mereka akan mendapatkan prompt untuk mentransfer dana ke akun mereka saat membuka tautan"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Pesan Hadiah"),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Kembali"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Pergi ke QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Baiklah!"),
+        "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffSupportedMethodNotFound":
+            MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("Sembunyikan"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Sembunyikan Akun?"),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
+        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
         "home": MessageLookupByLibrary.simpleMessage("Rumah"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Saya memahami resiko"),
         "ignore": MessageLookupByLibrary.simpleMessage("Abaikan"),
+        "imSure": MessageLookupByLibrary.simpleMessage(""),
         "import": MessageLookupByLibrary.simpleMessage("Impor"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "Tautan yang Anda klik berisi beberapa nano, apakah Anda ingin mengimpornya ke dompet ini, atau mengembalikannya kepada siapa pun yang mengirimnya?"),
@@ -289,10 +314,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Alamat Tujuan Tidak Valid"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Kata sandi tidak cocok"),
-        "kaliumWallet": MessageLookupByLibrary.simpleMessage("Dompet Kalium"),
+        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
         "language": MessageLookupByLibrary.simpleMessage("Bahasa"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("Tautan Disalin"),
-        "liveSupportButton": MessageLookupByLibrary.simpleMessage("Bantuan"),
         "loaded": MessageLookupByLibrary.simpleMessage("Dimuat"),
         "loadedInto": MessageLookupByLibrary.simpleMessage("Dimuat Ke"),
         "lockAppSetting": MessageLookupByLibrary.simpleMessage(
@@ -303,8 +328,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hapus benih dan keluar"),
         "logoutAreYouSure": MessageLookupByLibrary.simpleMessage("Anda Yakin?"),
         "logoutDetail": MessageLookupByLibrary.simpleMessage(
-            "Keluar akan menghapus benih anda dan semua data terkait kalium dari perangkat ini. Jika benih anda belum disimpan, Anda tidak akan pernah bisa mengakses dana anda lagi."),
-        "logoutDetailKal": MessageLookupByLibrary.simpleMessage(
             "Keluar akan menghapus benih anda dan semua data terkait kalium dari perangkat ini. Jika benih anda belum disimpan, Anda tidak akan pernah bisa mengakses dana anda lagi."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Selama anda yakin sudah menyimpan benih anda dengan aman, anda tidak perlu khawatir."),
@@ -319,6 +342,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Memo dikirim kembali! Jika masih belum diketahui, perangkat penerima mungkin offline."),
+        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Pesan"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Jumlah minimal pengiriman adalah %1 NANO"),
@@ -328,16 +352,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Frase Mnemonic"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Kalimat rahasia hanya terdiri dari 24 kata."),
+        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
+        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
+        "nearby": MessageLookupByLibrary.simpleMessage(""),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Fitur ini mengharuskan Anda memiliki riwayat transaksi yang lebih panjang untuk mencegah spam.\n\nAtau, Anda dapat menampilkan kode QR untuk dipindai seseorang."),
         "needVerificationAlertHeader":
             MessageLookupByLibrary.simpleMessage("Verifikasi Diperlukan"),
         "newAccountIntro": MessageLookupByLibrary.simpleMessage(
             "Ini adalah akun baru anda. Setelah menerima NANO, transaksi akan muncul seperti ini"),
-        "newAccountIntroKal": MessageLookupByLibrary.simpleMessage(
-            "Ini adalah akun baru anda. Setelah menerima BANANO, transaksi akan muncul seperti ini"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Buat Dompet"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Berikutnya"),
         "no": MessageLookupByLibrary.simpleMessage("Tidak"),
@@ -353,16 +379,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "notSent": MessageLookupByLibrary.simpleMessage("tidak terkirim"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Buka Nautilus untuk melihat transaksi."),
-        "notificationBodyKal": MessageLookupByLibrary.simpleMessage(
-            "Buka Kalium untuk melihat transaksi."),
         "notificationHeaderSupplement":
             MessageLookupByLibrary.simpleMessage("Tekan untuk membuka"),
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "Agar fitur ini berfungsi dengan benar, notifikasi harus diaktifkan"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Menerima %1 NANO"),
-        "notificationTitleKal":
-            MessageLookupByLibrary.simpleMessage("Menerima %1 BANANO"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifikasi"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Mati"),
@@ -391,6 +413,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payments": MessageLookupByLibrary.simpleMessage("Pembayaran"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Pilih Dari Daftar"),
+        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("Pin tidak sama"),
         "pinConfirmTitle":
@@ -405,6 +428,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Masukkan pin untuk mengubah perwakilan"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Masukkan pin untuk melihat benih dompet Anda."),
+        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleDeniabilityParagraph":
+            MessageLookupByLibrary.simpleMessage(""),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferensi"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Kebijakan Privasi"),
@@ -464,12 +492,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Permintaan% 1% 2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Permintaan Gagal: Pengguna ini tampaknya tidak menginstal Nautilus, atau menonaktifkan notifikasi."),
+        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("Minta Pembayaran"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "Kesalahan saat mengirim permintaan pembayaran, perangkat penerima mungkin offline atau tidak tersedia."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Permintaan dikirim kembali! Jika masih belum diketahui, perangkat penerima mungkin offline."),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
         "requested": MessageLookupByLibrary.simpleMessage("Diminta"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("Diminta Dari"),
         "requesting": MessageLookupByLibrary.simpleMessage("Meminta"),
@@ -486,8 +517,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tampaknya perangkat Anda \"di-root\", \"jailbroken\", atau dimodifikasi dengan cara yang membahayakan keamanan. Anda disarankan untuk mereset perangkat Anda ke keadaan semula sebelum melanjutkan."),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Pindai QR code\n alamat Nano"),
-        "scanInstructionsKal": MessageLookupByLibrary.simpleMessage(
-            "Pindai QR code\n alamat Banano"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Pindai QR Code"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Cari apa saja"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -518,8 +547,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Kirim"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Kirim %1 Nano?"),
-        "sendAmountConfirmKal":
-            MessageLookupByLibrary.simpleMessage("Kirim %1 Banano?"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Terjadi kesalahan. Coba lagi nanti."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Kirim Dari"),
@@ -533,12 +560,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kirim atau Minta pembayaran, dengan pesan End to End Encrypted!\n\nPermintaan pembayaran, memo, dan pesan hanya akan diterima oleh pengguna nautilus lainnya.\n\nAnda tidak perlu memiliki nama pengguna untuk mengirim atau menerima permintaan pembayaran, dan Anda dapat menggunakannya untuk penyimpanan catatan Anda sendiri meskipun mereka tidak menggunakan nautilus."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Kirim Info Lembar"),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
         "sending": MessageLookupByLibrary.simpleMessage("Mengirim"),
         "sent": MessageLookupByLibrary.simpleMessage("Terkirim"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Terkirim Kepada"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Setel kata sandi"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Kata sandi berhasil ditetapkan"),
+        "setPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Setel kata sandi dompet"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -548,19 +579,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Muat dari Dompet Kertas"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Bagikan Tautan"),
+        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
         "shareNautilus":
             MessageLookupByLibrary.simpleMessage("Bagikan Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Ayo Cek Nautilus! Nano\'s official Android Wallet!"),
+        "show": MessageLookupByLibrary.simpleMessage(""),
+        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Tampilkan Kontak"),
+        "showFunding": MessageLookupByLibrary.simpleMessage(""),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
+        "showQR": MessageLookupByLibrary.simpleMessage(""),
+        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
+        "someone": MessageLookupByLibrary.simpleMessage(""),
+        "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
+        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Dukung Pengembang"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Pindah Ke Benih Lain"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Default Sistem"),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
         "tapToHide":
             MessageLookupByLibrary.simpleMessage("Sentuh untuk Menutup"),
         "tapToReveal":
@@ -607,8 +649,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Otentikasi untuk Membuka Nautilus"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "Masukkan PIN untuk membuka KALIUM"),
-        "unlockPinKal": MessageLookupByLibrary.simpleMessage(
-            "Masukkan PIN untuk membuka KALIUM"),
+        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningWarningHeader":
+            MessageLookupByLibrary.simpleMessage(""),
         "unpaid": MessageLookupByLibrary.simpleMessage("tidak dibayar"),
         "unread": MessageLookupByLibrary.simpleMessage("belum dibaca"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
@@ -632,13 +677,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nama pengguna tidak tersedia"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "Nama pengguna Nautilus adalah layanan terpusat yang disediakan oleh Nano.to"),
+        "using": MessageLookupByLibrary.simpleMessage(""),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Lihat Rincian"),
+        "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Bobot HakSuara"),
         "warning": MessageLookupByLibrary.simpleMessage("PERINGATAN"),
+        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Selamat datang di Nautilus. Untuk melanjutkan, anda bisa membuat dompet baru atau mengimpor dompet lama anda."),
-        "welcomeTextKal": MessageLookupByLibrary.simpleMessage(
-            "Selamat datang di Kalium. Untuk melanjutkan, anda bisa membuat dompet baru atau mengimpor dompet lama anda."),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
         "withAddress": MessageLookupByLibrary.simpleMessage("Dengan Alamat"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Dengan Pesan"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Setelah %1 menit"),

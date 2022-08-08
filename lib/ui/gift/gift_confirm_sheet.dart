@@ -8,7 +8,7 @@ import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
@@ -114,7 +114,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context)!.creatingGiftCard, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).creatingGiftCard, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -165,7 +165,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.splitBy, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).splitBy, context),
                             style: AppStyles.textStyleHeader(context),
                           ),
                         ],
@@ -217,7 +217,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).withMessage, context),
                             style: AppStyles.textStyleHeader(context),
                           ),
                         ],
@@ -249,7 +249,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
@@ -259,7 +259,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                           if (!mounted) return;
                           final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
                               context,
-                              AppLocalization.of(context)!
+                              AppLocalization.of(context)
                                   .sendAmountConfirm
                                   .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                                   .replaceAll("%2", StateContainer.of(context).currencyMode));
@@ -280,7 +280,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.cancel, context),
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -382,7 +382,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         Navigator.of(context).pop();
       }
       Clipboard.setData(ClipboardData(text: (branchLink ?? "") + RecordTypes.SEPARATOR + widget.paperWalletSeed));
-      UIUtil.showSnackbar(AppLocalization.of(context)!.giftCardCreationErrorSent, context, durationMs: 20000);
+      UIUtil.showSnackbar(AppLocalization.of(context).giftCardCreationErrorSent, context, durationMs: 20000);
       Navigator.of(context).pop();
     }
   }
@@ -396,8 +396,8 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: AppLocalization.of(context)!
-            .sendAmountConfirmPin
+        description: AppLocalization.of(context)
+            .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),
       );

@@ -12,7 +12,7 @@ import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
@@ -130,7 +130,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                             margin: const EdgeInsets.only(top: 15),
                             constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                             child: AutoSizeText(
-                              CaseChange.toUpperCase(AppLocalization.of(context)!.changeRepAuthenticate, context),
+                              CaseChange.toUpperCase(AppLocalization.of(context).changeRepAuthenticate, context),
                               style: AppStyles.textStyleHeader(context),
                               textAlign: TextAlign.center,
                               maxLines: 2,
@@ -165,7 +165,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                             textInputAction: TextInputAction.done,
                             maxLines: null,
                             autocorrect: false,
-                            hintText: _showChangeRepHint ? AppLocalization.of(context)!.changeRepHint : "",
+                            hintText: _showChangeRepHint ? AppLocalization.of(context).changeRepHint : "",
                             prefixButton: TextFieldButton(
                               icon: AppIcons.scan,
                               onPressed: () {
@@ -185,7 +185,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                                     widget.repController.text = address.address!;
                                     _repFocusNode!.unfocus();
                                   } else {
-                                    UIUtil.showSnackbar(AppLocalization.of(context)!.qrInvalidAddress, context);
+                                    UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
                                   }
                                 });
                               },
@@ -260,7 +260,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                           AppButton.buildAppButton(
                             context,
                             AppButtonType.PRIMARY,
-                            AppLocalization.of(context)!.changeRepButton.toUpperCase(),
+                            AppLocalization.of(context).changeRepButton.toUpperCase(),
                             Dimens.BUTTON_TOP_DIMENS,
                             onPressed: () async {
                               if (!NanoAccounts.isValid(NanoAccountType.NANO, widget.repController.text)) {
@@ -272,7 +272,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                               if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                                 try {
                                   final bool authenticated =
-                                      await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context)!.changeRepAuthenticate);
+                                      await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context).changeRepAuthenticate);
                                   if (authenticated) {
                                     sl.get<HapticUtil>().fingerprintSucess();
                                     EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE_MANUAL));
@@ -292,7 +292,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                           AppButton.buildAppButton(
                             context,
                             AppButtonType.PRIMARY_OUTLINE,
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.close, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).close, context),
                             Dimens.BUTTON_BOTTOM_DIMENS,
                             onPressed: () {
                               Navigator.pop(context);
@@ -314,7 +314,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
     if (StateContainer.of(context).wallet!.openBlock == null) {
       await sl.get<SharedPrefsUtil>().setRepresentative(widget.repController.text);
       StateContainer.of(context).wallet!.representative = widget.repController.text;
-      UIUtil.showSnackbar(AppLocalization.of(context)!.changeRepSucces, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).changeRepSucces, context);
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
     } else {
       try {
@@ -326,14 +326,14 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
             NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!));
         StateContainer.of(context).wallet!.representative = widget.repController.text;
         StateContainer.of(context).wallet!.frontier = resp.hash;
-        UIUtil.showSnackbar(AppLocalization.of(context)!.changeRepSucces, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).changeRepSucces, context);
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       } catch (e) {
         sl.get<Logger>().e("Failed to change", e);
         if (_animationOpen) {
           Navigator.of(context).pop();
         }
-        UIUtil.showSnackbar(AppLocalization.of(context)!.sendError, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
       }
     }
   }
@@ -347,7 +347,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: AppLocalization.of(context)!.pinRepChange,
+        description: AppLocalization.of(context).pinRepChange,
       );
     }));
     if (auth != null && auth) {

@@ -7,7 +7,7 @@ import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/localization.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
@@ -109,7 +109,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context)!.requesting, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).requesting, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -158,7 +158,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context)!.from, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).from, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -180,7 +180,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context)!.withMessage, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).withMessage, context),
                             style: AppStyles.textStyleHeader(context),
                           ),
                         ],
@@ -205,52 +205,51 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
             ),
 
             //A container for CONFIRM and CANCEL buttons
-            Container(
-              child: Column(
-                children: <Widget>[
-                  // A row for CONFIRM Button
-                  Row(
-                    children: <Widget>[
-                      // CONFIRM Button
-                      AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context)!.confirm, context), Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () async {
-                        // Authenticate
-                        final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                        final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
-                        if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
-                          try {
-                            final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
-                                context,
-                                AppLocalization.of(context)!
-                                    .requestAmountConfirm
-                                    .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
-                                    .replaceAll("%2", StateContainer.of(context).currencyMode));
-                            if (authenticated) {
-                              sl.get<HapticUtil>().fingerprintSucess();
-                              EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.REQUEST));
-                            }
-                          } catch (e) {
-                            await authenticateWithPin();
+            Column(
+              children: <Widget>[
+                // A row for CONFIRM Button
+                Row(
+                  children: <Widget>[
+                    // CONFIRM Button
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
+                      // Authenticate
+                      final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                      final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                      if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+                        if (!mounted) return;
+                        try {
+                          final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
+                              context,
+                              AppLocalization.of(context)
+                                  .requestAmountConfirm
+                                  .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
+                                  .replaceAll("%2", StateContainer.of(context).currencyMode));
+                          if (authenticated) {
+                            sl.get<HapticUtil>().fingerprintSucess();
+                            EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.REQUEST));
                           }
-                        } else {
+                        } catch (e) {
                           await authenticateWithPin();
                         }
-                      })
-                    ],
-                  ),
-                  // A row for CANCEL Button
-                  Row(
-                    children: <Widget>[
-                      // CANCEL Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context)!.cancel, context),
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                        Navigator.of(context).pop();
-                      }),
-                    ],
-                  ),
-                ],
-              ),
+                      } else {
+                        await authenticateWithPin();
+                      }
+                    })
+                  ],
+                ),
+                // A row for CANCEL Button
+                Row(
+                  children: <Widget>[
+                    // CANCEL Button
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+                  ],
+                ),
+              ],
             ),
           ],
         ));
@@ -328,7 +327,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         await StateContainer.of(context).updateUnified(true);
         // go to home and show error:
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-        UIUtil.showSnackbar(AppLocalization.of(context)!.requestError, context, durationMs: 5500);
+        UIUtil.showSnackbar(AppLocalization.of(context).requestError, context, durationMs: 5500);
       } else {
         sl.get<Logger>().v("request succeeded");
 
@@ -370,7 +369,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         Navigator.of(context).pop();
       }
       sendFailed = true;
-      UIUtil.showSnackbar(AppLocalization.of(context)!.requestError, context, durationMs: 3500);
+      UIUtil.showSnackbar(AppLocalization.of(context).requestError, context, durationMs: 3500);
       Navigator.of(context).pop();
     }
   }
@@ -384,8 +383,8 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: AppLocalization.of(context)!
-            .requestAmountConfirmPin
+        description: AppLocalization.of(context)
+            .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),
       );

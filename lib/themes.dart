@@ -1,3 +1,5 @@
+// ignore_for_file: annotate_overrides, overridden_fields
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -17,7 +19,8 @@ enum OverlayTheme {
   BLAISE,
   BLAISEDARK,
   COPPER,
-  MONOCHROME
+  MONOCHROME,
+  PERISHABLE,
 }
 
 abstract class BaseTheme {
@@ -60,8 +63,6 @@ abstract class BaseTheme {
   Color? backgroundDark00;
 
   Color? backgroundDarkest;
-
-  Color? lighterPrimary;
 
   Color? text;
   Color? text60;
@@ -113,21 +114,21 @@ class NautilusTheme extends BaseTheme {
   // darker: #B19CD9
   // lighter: #CCA9DD
 
-  static const white = Color(0xFFFFFFFF);
-  static const whiteish = Color(0xFFE9E9F2);
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color whiteish = Color(0xFFE9E9F2);
 
-  static const black = Color(0xFF000000);
-  static const blackBlueish = Color(0xFF0D1014);
-  static const blackLighter = Color(0xFF0E0F0F);
+  static const Color black = Color(0xFF000000);
+  static const Color blackBlueish = Color(0xFF0D1014);
+  static const Color blackLighter = Color(0xFF0E0F0F);
 
-  static const green = Color(0xFF41E099);
-  static const greenDark = Color(0xFF148A55);
+  static const Color green = Color(0xFF41E099);
+  static const Color greenDark = Color(0xFF148A55);
 
-  static const yellow = Color(0xFFFFB300);
-  static const yellowDark = Color(0xFFFFCB00);
+  static const Color yellow = Color(0xFFFFB300);
+  static const Color yellowDark = Color(0xFFFFCB00);
 
-  static const red = Color(0xFFE80000);
-  static const redDark = Color(0xFFB20000);
+  static const Color red = Color(0xFFE80000);
+  static const Color redDark = Color(0xFFB20000);
 
   Color? primary = nautilusBlue;
   Color? primary60 = nautilusBlue.withOpacity(0.6);
@@ -171,8 +172,6 @@ class NautilusTheme extends BaseTheme {
   Color? backgroundDark00 = black.withOpacity(0.0);
 
   Color? backgroundDarkest = blackLighter;
-
-  Color? lighterPrimary = nautilusBlue;
 
   Color? text = whiteish.withOpacity(0.9);
   Color? text60 = whiteish.withOpacity(0.6);
@@ -223,29 +222,29 @@ class NautilusTheme extends BaseTheme {
 }
 
 class TitaniumTheme extends BaseTheme {
-  static const blueishGreen = Color(0xFF61C6AD);
+  static const Color blueishGreen = Color(0xFF61C6AD);
 
-  static const green = Color(0xFFB5ED88);
+  static const Color green = Color(0xFFB5ED88);
 
-  static const greenDark = Color(0xFF5F893D);
+  static const Color greenDark = Color(0xFF5F893D);
 
-  static const tealDark = Color(0xFF041920);
+  static const Color tealDark = Color(0xFF041920);
 
-  static const tealLight = Color(0xFF052029);
+  static const Color tealLight = Color(0xFF052029);
 
-  static const tealDarkest = Color(0xFF041920);
+  static const Color tealDarkest = Color(0xFF041920);
 
-  static const white = Color(0xFFFFFFFF);
+  static const Color white = Color(0xFFFFFFFF);
 
-  static const black = Color(0xFF000000);
+  static const Color black = Color(0xFF000000);
 
-  static const yellow = Color(0xFFFFB300);
+  static const Color yellow = Color(0xFFFFB300);
 
-  static const yellowDark = Color(0xFFFFCB00);
+  static const Color yellowDark = Color(0xFFFFCB00);
 
-  static const red = Color(0xFFE80000);
+  static const Color red = Color(0xFFE80000);
 
-  static const redDark = Color(0xFFB20000);
+  static const Color redDark = Color(0xFFB20000);
 
   Color? primary = blueishGreen;
   Color? primary60 = blueishGreen.withOpacity(0.6);
@@ -327,29 +326,29 @@ class TitaniumTheme extends BaseTheme {
 }
 
 class IndiumTheme extends BaseTheme {
-  static const deepBlue = Color(0xFF0050BB);
+  static const Color deepBlue = Color(0xFF0050BB);
 
-  static const green = Color(0xFF00A873);
+  static const Color green = Color(0xFF00A873);
 
-  static const greenLight = Color(0xFF9EEDD4);
+  static const Color greenLight = Color(0xFF9EEDD4);
 
-  static const white = Color(0xFFFFFFFF);
+  static const Color white = Color(0xFFFFFFFF);
 
-  static const whiteishDark = Color(0xFFE8F0FA);
+  static const Color whiteishDark = Color(0xFFE8F0FA);
 
-  static const grey = Color(0xFF454868);
+  static const Color grey = Color(0xFF454868);
 
-  static const black = Color(0xFF000000);
+  static const Color black = Color(0xFF000000);
 
-  static const darkDeepBlue = Color(0xFF0050BB);
+  static const Color darkDeepBlue = Color(0xFF0050BB);
 
-  static const yellow = Color(0xFFFFB300);
+  static const Color yellow = Color(0xFFFFB300);
 
-  static const yellowDark = Color(0xFFFFCB00);
+  static const Color yellowDark = Color(0xFFFFCB00);
 
-  static const red = Color(0xFFE80000);
+  static const Color red = Color(0xFFE80000);
 
-  static const redDark = Color(0xFFB20000);
+  static const Color redDark = Color(0xFFB20000);
 
   Color? primary = deepBlue;
   Color? primary60 = deepBlue.withOpacity(0.6);
@@ -430,29 +429,29 @@ class IndiumTheme extends BaseTheme {
 }
 
 class NeptuniumTheme extends BaseTheme {
-  static const blue = Color(0xFF4A90E2);
+  static const Color blue = Color(0xFF4A90E2);
 
-  static const orange = Color(0xFFF9AE42);
+  static const Color orange = Color(0xFFF9AE42);
 
-  static const orangeDark = Color(0xFF9C671E);
+  static const Color orangeDark = Color(0xFF9C671E);
 
-  static const blueDark = Color(0xFF000034);
+  static const Color blueDark = Color(0xFF000034);
 
-  static const blueLightish = Color(0xFF080840);
+  static const Color blueLightish = Color(0xFF080840);
 
-  static const blueDarkest = Color(0xFF000034);
+  static const Color blueDarkest = Color(0xFF000034);
 
-  static const white = Color(0xFFFFFFFF);
+  static const Color white = Color(0xFFFFFFFF);
 
-  static const black = Color(0xFF000000);
+  static const Color black = Color(0xFF000000);
 
-  static const yellow = Color(0xFFFFB300);
+  static const Color yellow = Color(0xFFFFB300);
 
-  static const yellowDark = Color(0xFFFFCB00);
+  static const Color yellowDark = Color(0xFFFFCB00);
 
-  static const red = Color(0xFFE80000);
+  static const Color red = Color(0xFFE80000);
 
-  static const redDark = Color(0xFFB20000);
+  static const Color redDark = Color(0xFFB20000);
 
   Color? primary = blue;
   Color? primary60 = blue.withOpacity(0.6);
@@ -532,29 +531,29 @@ class NeptuniumTheme extends BaseTheme {
 }
 
 class ThoriumTheme extends BaseTheme {
-  static const teal = Color(0xFF75F3FF);
+  static const Color teal = Color(0xFF75F3FF);
 
-  static const orange = Color(0xFFFFBA59);
+  static const Color orange = Color(0xFFFFBA59);
 
-  static const orangeDark = Color(0xFFBF8026);
+  static const Color orangeDark = Color(0xFFBF8026);
 
-  static const purpleDark = Color(0xFF200A40);
+  static const Color purpleDark = Color(0xFF200A40);
 
-  static const purpleLight = Color(0xFF2A1052);
+  static const Color purpleLight = Color(0xFF2A1052);
 
-  static const purpleDarkest = Color(0xFF200A40);
+  static const Color purpleDarkest = Color(0xFF200A40);
 
-  static const white = Color(0xFFFFFFFF);
+  static const Color white = Color(0xFFFFFFFF);
 
-  static const black = Color(0xFF000000);
+  static const Color black = Color(0xFF000000);
 
-  static const yellow = Color(0xFFFFB300);
+  static const Color yellow = Color(0xFFFFB300);
 
-  static const yellowDark = Color(0xFFFFCB00);
+  static const Color yellowDark = Color(0xFFFFCB00);
 
-  static const red = Color(0xFFE80000);
+  static const Color red = Color(0xFFE80000);
 
-  static const redDark = Color(0xFFB20000);
+  static const Color redDark = Color(0xFFB20000);
 
   Color? primary = teal;
   Color? primary60 = teal.withOpacity(0.6);
@@ -634,26 +633,26 @@ class ThoriumTheme extends BaseTheme {
 }
 
 class CarbonTheme extends BaseTheme {
-  static const brightBlue = Color(0xFF99C1F0);
+  static const Color brightBlue = Color(0xFF99C1F0);
 
-  static const green = Color(0xFF41E099);
+  static const Color green = Color(0xFF41E099);
 
-  static const greenDark = Color(0xFF148A55);
+  static const Color greenDark = Color(0xFF148A55);
 
-  static const white = Color(0xFFFFFFFF);
-  static const whiteish = Color(0xFFE9E9F2);
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color whiteish = Color(0xFFE9E9F2);
 
-  static const black = Color(0xFF000000);
-  static const blackBlueish = Color(0xFF0D1014);
-  static const blackLighter = Color(0xFF0E0F0F);
+  static const Color black = Color(0xFF000000);
+  static const Color blackBlueish = Color(0xFF0D1014);
+  static const Color blackLighter = Color(0xFF0E0F0F);
 
-  static const yellow = Color(0xFFFFB300);
+  static const Color yellow = Color(0xFFFFB300);
 
-  static const yellowDark = Color(0xFFFFCB00);
+  static const Color yellowDark = Color(0xFFFFCB00);
 
-  static const red = Color(0xFFE80000);
+  static const Color red = Color(0xFFE80000);
 
-  static const redDark = Color(0xFFB20000);
+  static const Color redDark = Color(0xFFB20000);
 
   Color? primary = brightBlue;
   Color? primary60 = brightBlue.withOpacity(0.6);
@@ -744,30 +743,30 @@ class CarbonTheme extends BaseTheme {
 }
 
 class PurpeliumTheme extends BaseTheme {
-  static const purpeliumPurple = Color(0xFFB999F0);
+  static const Color purpeliumPurple = Color(0xFFB999F0);
   // some test colors:
   // current: #B999F0
   // darker: #B19CD9
   // lighter: #CCA9DD
 
-  static const green = Color(0xFF41E099);
+  static const Color green = Color(0xFF41E099);
 
-  static const greenDark = Color(0xFF148A55);
+  static const Color greenDark = Color(0xFF148A55);
 
-  static const white = Color(0xFFFFFFFF);
-  static const whiteish = Color(0xFFE9E9F2);
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color whiteish = Color(0xFFE9E9F2);
 
-  static const black = Color(0xFF000000);
-  static const blackBlueish = Color(0xFF0D1014);
-  static const blackLighter = Color(0xFF0E0F0F);
+  static const Color black = Color(0xFF000000);
+  static const Color blackBlueish = Color(0xFF0D1014);
+  static const Color blackLighter = Color(0xFF0E0F0F);
 
-  static const yellow = Color(0xFFFFB300);
+  static const Color yellow = Color(0xFFFFB300);
 
-  static const yellowDark = Color(0xFFFFCB00);
+  static const Color yellowDark = Color(0xFFFFCB00);
 
-  static const red = Color(0xFFE80000);
+  static const Color red = Color(0xFFE80000);
 
-  static const redDark = Color(0xFFB20000);
+  static const Color redDark = Color(0xFFB20000);
 
   Color? primary = purpeliumPurple;
   Color? primary60 = purpeliumPurple.withOpacity(0.6);
@@ -858,31 +857,31 @@ class PurpeliumTheme extends BaseTheme {
 }
 
 class NyanoTheme extends NyanTheme {
-  static const nyanoBlue = Color(0xFF4A90E2);
-  static const darkerBlue = Color(0xFF0E1032);
+  static const Color nyanoBlue = Color(0xFF4A90E2);
+  static const Color darkerBlue = Color(0xFF0E1032);
   // some test colors:
   // current: #B999F0
   // darker: #B19CD9
   // lighter: #CCA9DD
 
-  static const green = Color(0xFF41E099);
+  static const Color green = Color(0xFF41E099);
 
-  static const greenDark = Color(0xFF148A55);
+  static const Color greenDark = Color(0xFF148A55);
 
-  static const white = Color(0xFFFFFFFF);
-  static const whiteish = Color(0xFFE9E9F2);
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color whiteish = Color(0xFFE9E9F2);
 
-  static const black = Color(0xFF000000);
-  static const blackBlueish = Color(0xFF0D1014);
-  static const blackLighter = Color(0xFF0E0F0F);
+  static const Color black = Color(0xFF000000);
+  static const Color blackBlueish = Color(0xFF0D1014);
+  static const Color blackLighter = Color(0xFF0E0F0F);
 
-  static const yellow = Color(0xFFFFB300);
+  static const Color yellow = Color(0xFFFFB300);
 
-  static const yellowDark = Color(0xFFFFCB00);
+  static const Color yellowDark = Color(0xFFFFCB00);
 
-  static const red = Color(0xFFE80000);
+  static const Color red = Color(0xFFE80000);
 
-  static const redDark = Color(0xFFB20000);
+  static const Color redDark = Color(0xFFB20000);
 
   Color? primary = nyanoBlue;
   Color? primary60 = nyanoBlue.withOpacity(0.6);
@@ -973,23 +972,23 @@ class NyanoTheme extends NyanTheme {
 }
 
 class MonochromeTheme extends BaseTheme {
-  static const tealLightest = Color.fromRGBO(128, 128, 128, 1);
-  static const tealLight = Color.fromRGBO(64, 64, 64, 1);
-  static const tealDark = Color.fromRGBO(16, 16, 16, 1);
-  static const tealDarkest = Color.fromRGBO(10, 10, 10, 1);
+  static const Color tealLightest = Color.fromRGBO(128, 128, 128, 1);
+  static const Color tealLight = Color.fromRGBO(64, 64, 64, 1);
+  static const Color tealDark = Color.fromRGBO(16, 16, 16, 1);
+  static const Color tealDarkest = Color.fromRGBO(10, 10, 10, 1);
 
-  static const white = Color(0xFFFFFFFF);
-  static const black = Color(0xFF000000);
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0xFF000000);
 
 
-  static const green = Color(0xFF41E099);
-  static const greenDark = Color(0xFF148A55);
+  static const Color green = Color(0xFF41E099);
+  static const Color greenDark = Color(0xFF148A55);
 
-  static const yellow = Color(0xFFFFB300);
-  static const yellowDark = Color(0xFFFFCB00);
+  static const Color yellow = Color(0xFFFFB300);
+  static const Color yellowDark = Color(0xFFFFCB00);
 
-  static const red = Color(0xFFE80000);
-  static const redDark = Color(0xFFB20000);
+  static const Color red = Color(0xFFE80000);
+  static const Color redDark = Color(0xFFB20000);
 
   Color? primary = tealLightest;
   Color? primary60 = tealLightest.withOpacity(0.6);
@@ -1066,16 +1065,154 @@ class MonochromeTheme extends BaseTheme {
   BoxShadow? boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
 
-  // OverlayTheme? qrScanTheme = OverlayTheme.MONOCHROME;
+}
+
+
+class PerishableTheme extends BaseTheme {
+  static const Color nautilusBlue = Color(0xFF4080D7);
+
+
+  // static const Color perishPurple = Color(0xFF9A5EFC);
+  // // static const Color perishPurple = Color(0xFF6305fa);
+  // // static const Color perishOrange = Color(0xFFff9966);
+  // // static const Color perishYellow = Color(0xFFffcc00);
+  // static const Color perishRed = Color.fromRGBO(34, 24, 22, 1);
+  // static const Color perishOrange = Color(0xFFFF9966);
+
+
+  static const Color perishPurple = Color(0xFF9A5EFC);
+  static const Color perishOrange = Color(0xFFff9966);
+  // static const Color perishPurple = Color(0xFF6305fa);
+  // static const Color perishYellow = Color(0xFFffcc00);
+  static const Color perishRed = Color.fromRGBO(34, 24, 22, 1);
+  // static const Color perishOrange = Color(0xFFFF9966);
+
+  static const Color purpleLight = Color(0xFF2A1052);
+  static const Color purpleDarkest = Color(0xFF200A40);
+
+
+  
+
+  static const Color brighterBlue = Color(0xFF80BAC7);
+  // some test colors:
+  // current: #B999F0
+  // darker: #B19CD9
+  // lighter: #CCA9DD
+
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color whiteish = Color(0xFFE9E9F2);
+
+  static const Color black = Color(0xFF000000);
+  static const Color blackBlueish = Color(0xFF0D1014);
+  static const Color blackLighter = Color.fromRGBO(47, 44, 54, 1);
+
+  static const Color green = Color(0xFF41E099);
+  static const Color greenDark = Color(0xFF148A55);
+
+  static const Color yellow = Color(0xFFFFB300);
+  static const Color yellowDark = Color(0xFFFFCB00);
+
+  static const Color red = Color(0xFFE80000);
+  static const Color redDark = Color(0xFFB20000);
+
+  Color? primary = perishOrange;
+  Color? primary60 = perishOrange.withOpacity(0.6);
+  Color? primary45 = perishOrange.withOpacity(0.45);
+  Color? primary30 = perishOrange.withOpacity(0.3);
+  Color? primary20 = perishOrange.withOpacity(0.2);
+  Color? primary15 = perishOrange.withOpacity(0.15);
+  Color? primary10 = perishOrange.withOpacity(0.1);
+
+  Color? success = green;
+  Color? success60 = green.withOpacity(0.6);
+  Color? success45 = green.withOpacity(0.45);
+  Color? success30 = green.withOpacity(0.3);
+  Color? success15 = green.withOpacity(0.15);
+
+  Color? successDark = greenDark;
+  Color? successDark30 = greenDark.withOpacity(0.3);
+
+  Color? warning = yellow;
+  Color? warning60 = yellow.withOpacity(0.6);
+  Color? warning45 = yellow.withOpacity(0.45);
+  Color? warning30 = yellow.withOpacity(0.3);
+  Color? warning15 = yellow.withOpacity(0.15);
+
+  Color? warningDark = yellowDark;
+  Color? warningDark30 = yellowDark.withOpacity(0.3);
+
+  Color? error = red;
+  Color? error60 = red.withOpacity(0.6);
+  Color? error30 = red.withOpacity(0.3);
+  Color? error15 = red.withOpacity(0.15);
+
+  Color? errorDark = redDark;
+  Color? errorDark30 = redDark.withOpacity(0.3);
+
+
+  Color? background = purpleLight;
+  Color? background40 = purpleLight.withOpacity(0.4);
+  Color? background00 = purpleLight.withOpacity(0.0);
+
+  // tx color:
+  Color? backgroundDark = perishPurple;
+  Color? backgroundDark00 = perishPurple.withOpacity(0.0);
+
+  Color? backgroundDarkest = purpleDarkest;
+
+  Color? text = whiteish.withOpacity(0.9);
+  Color? text60 = whiteish.withOpacity(0.6);
+  Color? text45 = whiteish.withOpacity(0.45);
+  Color? text30 = whiteish.withOpacity(0.3);
+  Color? text20 = whiteish.withOpacity(0.2);
+  Color? text15 = whiteish.withOpacity(0.15);
+  Color? text10 = whiteish.withOpacity(0.1);
+  Color? text05 = whiteish.withOpacity(0.05);
+  Color? text03 = whiteish.withOpacity(0.03);
+
+  Color? overlay90 = blackLighter.withOpacity(0.9);
+  Color? overlay85 = blackLighter.withOpacity(0.85);
+  Color? overlay80 = blackLighter.withOpacity(0.8);
+  Color? overlay70 = blackLighter.withOpacity(0.7);
+  Color? overlay50 = blackLighter.withOpacity(0.5);
+  Color? overlay30 = blackLighter.withOpacity(0.3);
+  Color? overlay20 = blackLighter.withOpacity(0.2);
+
+  Color? barrier = blackBlueish.withOpacity(0.8);
+  Color? barrierWeaker = blackBlueish.withOpacity(0.7);
+  Color? barrierWeakest = blackBlueish.withOpacity(0.35);
+  Color? barrierStronger = blackBlueish.withOpacity(0.9);
+
+  Color? animationOverlayMedium = blackBlueish.withOpacity(0.8);
+  Color? animationOverlayStrong = blackBlueish.withOpacity(0.9);
+
+  Brightness? brightness = Brightness.dark;
+  SystemUiOverlayStyle? statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
+
+  BoxShadow? boxShadow = BoxShadow(
+    color: white.withOpacity(0.14),
+    // color: black.withOpacity(0.5),
+    offset: Offset(0, 0),
+    blurRadius: 0,
+    spreadRadius: 1,
+  );
+  BoxShadow? boxShadowButton = BoxShadow(
+    // color: brightRed,
+    color: nautilusBlue.withOpacity(0.24),
+    offset: Offset(0, 0),
+    blurRadius: 0,
+    spreadRadius: 0,
+  );
+
 }
 
 enum AppIconEnum { NAUTILUS, TITANIUM, INDIUM, NEPTUNIUM, THORIUM, CARBON, PURPELIUM, NYANO }
 
 class AppIcon {
-  static const _channel = const MethodChannel('fappchannel');
+  static const MethodChannel _channel = MethodChannel('fappchannel');
 
   static Future<void> setAppIcon(AppIconEnum? iconToChange) async {
-    return null;
+    return;
     // if (!Platform.isIOS) {
     // }
     // String iconStr = "nautilus";
