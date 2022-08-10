@@ -41,9 +41,10 @@ dynamic uriParser(String value) {
         }
       }
 
-      if (uri.queryParameters['handoff'] != null) {
+      if (uri.queryParameters["handoff"] != null) {
         // base64 decode the string:
-        String encodedHandoff = uri.queryParameters['handoff'] as String;
+        String? encodedHandoff = uri.queryParameters["handoff"];
+        if (encodedHandoff == null) return;
         encodedHandoff = encodedHandoff.replaceAll(RegExp(r"\s+\b|\b\s"), "");
         // attempt to recover from bad base64 encoding:
         if (encodedHandoff.length % 4 != 0) {
@@ -74,9 +75,10 @@ dynamic uriParser(String value) {
         }
       }
 
-      if (uri.queryParameters['auth'] != null) {
+      if (uri.queryParameters["auth"] != null) {
         // base64 decode the string:
-        String encodedAuth = uri.queryParameters['auth'] as String;
+        String? encodedAuth = uri.queryParameters["auth"];
+        if (encodedAuth == null) return;
         encodedAuth = encodedAuth.replaceAll(RegExp(r"\s+\b|\b\s"), "");
         // attempt to recover from bad base64 encoding:
         if (encodedAuth.length % 4 != 0) {
@@ -99,7 +101,7 @@ dynamic uriParser(String value) {
       return finHandoffItem;
     }
     if (finAuthItem != null) {
-      return finHandoffItem;
+      return finAuthItem;
     }
   }
 

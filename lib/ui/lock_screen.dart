@@ -157,7 +157,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
           ) ??
           false;
     }
-    await Future.delayed(const Duration(milliseconds: 200));
+    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
     if (mounted) {
       setState(() {
         _showUnlockButton = true;

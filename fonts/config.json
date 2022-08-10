@@ -149,6 +149,12 @@
       "css": "more_horiz",
       "code": 59401,
       "src": "material"
+    },
+    {
+      "uid": "110b93e88659c2a0334544814b677090",
+      "css": "clipboard",
+      "code": 62248,
+      "src": "fontawesome5"
     }
   ]
 }

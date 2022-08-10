@@ -403,7 +403,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
     }
   }

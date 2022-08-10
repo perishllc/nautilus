@@ -410,7 +410,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences": MessageLookupByLibrary.simpleMessage("העדפות"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("פרטיות"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("רכישת ננו"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(

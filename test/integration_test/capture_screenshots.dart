@@ -82,7 +82,7 @@ Future<void> appMain() async {
   if (!kReleaseMode) {
     // we have to stall for whatever reason in debug mode
     // otherwise the app doesn't start properly (black screen)
-    await Future.delayed(const Duration(seconds: 2));
+    await Future<dynamic>.delayed(const Duration(seconds: 2));
   }
   // Run app
   if (kReleaseMode) {
@@ -131,7 +131,7 @@ void main() {
 
     // await tester.pumpAndSettle();
     // sleep for a bit to let the app load
-    await Future.delayed(Duration(seconds: 6));
+    await Future<dynamic>.delayed(Duration(seconds: 6));
 
     bool loggedIn = false;
 
@@ -203,6 +203,6 @@ void main() {
     await pumpSettleWait(tester, halfSecond);
 
     // sleep for 10 seconds
-    // await Future.delayed(const Duration(seconds: 200000));
+    // await Future<dynamic>.delayed(const Duration(seconds: 200000));
   });
 }

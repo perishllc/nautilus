@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as cont;
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -75,18 +76,24 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsSheet extends StatefulWidget {
-  _SettingsSheetState createState() => _SettingsSheetState();
+  SettingsSheetState createState() => SettingsSheetState();
 }
 
-class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMixin, WidgetsBindingObserver {
+class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMixin, WidgetsBindingObserver {
   AnimationController? _contactsController;
   AnimationController? _blockedController;
   late AnimationController _securityController;
   late AnimationController _moreSettingsController;
+  // late AnimationController _getNanoController;
+  // late AnimationController _spendNanoController;
+  late AnimationController _useNanoController;
   late Animation<Offset> _contactsOffsetFloat;
   late Animation<Offset> _blockedOffsetFloat;
   late Animation<Offset> _securityOffsetFloat;
   late Animation<Offset> _moreSettingsOffsetFloat;
+  // late Animation<Offset> _getNanoOffsetFloat;
+  // late Animation<Offset> _spendNanoOffsetFloat;
+  late Animation<Offset> _useNanoOffsetFloat;
   late ScrollController _scrollController;
 
   String versionString = "";
@@ -112,6 +119,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
   bool? _blockedOpen;
   late bool _securityOpen;
   late bool _moreSettingsOpen;
+  // late bool _getNanoOpen;
+  // late bool _spendNanoOpen;
+  late bool _useNanoOpen;
 
   // Called if transfer fails
   void transferError() {
@@ -149,6 +159,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     _blockedOpen = false;
     _securityOpen = false;
     _moreSettingsOpen = false;
+    // _getNanoOpen = false;
+    // _spendNanoOpen = false;
+    _useNanoOpen = false;
     _loadingAccounts = false;
     // Determine if they have face or fingerprint enrolled, if not hide the setting
     sl.get<BiometricUtil>().hasBiometrics().then((bool hasBiometrics) {
@@ -275,6 +288,21 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       vsync: this,
       duration: const Duration(milliseconds: 220),
     );
+    // // For get nano menu
+    // _getNanoController = AnimationController(
+    //   vsync: this,
+    //   duration: const Duration(milliseconds: 220),
+    // );
+    // // For spend nano menu
+    // _spendNanoController = AnimationController(
+    //   vsync: this,
+    //   duration: const Duration(milliseconds: 220),
+    // );
+    // For use nano menu
+    _useNanoController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 220),
+    );
 
     _scrollController = ScrollController();
 
@@ -282,6 +310,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     _securityOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_securityController);
     _blockedOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_blockedController!);
     _moreSettingsOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_moreSettingsController);
+    _useNanoOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_useNanoController);
     // Version string
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       setState(() {
@@ -379,7 +408,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, AuthMethod.BIOMETRICS);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).biometricsMethod,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -391,7 +420,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, AuthMethod.PIN);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).pinMethod,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -436,7 +465,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, NotificationOptions.ON);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).onStr,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -448,7 +477,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, NotificationOptions.OFF);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).off,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -496,7 +525,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, ContactsOptions.ON);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).onStr,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -508,7 +537,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, ContactsOptions.OFF);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).off,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -560,7 +589,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, ContactsOptions.ON);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).onStr,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -572,7 +601,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, ContactsOptions.OFF);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).off,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -613,7 +642,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, FundingOptions.HIDE);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).hide,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -625,7 +654,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, FundingOptions.SHOW);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).show,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -666,7 +695,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, NyaniconOptions.ON);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).onStr,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -678,7 +707,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, NyaniconOptions.OFF);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).off,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -730,7 +759,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, simplex_url);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).simplex,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -742,7 +771,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, onramper_url);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).onramper,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -755,7 +784,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   UIUtil.showSnackbar(AppLocalization.of(context).addressCopied, context, durationMs: 1500);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).copyWalletAddressToClipboard,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -777,7 +806,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           Navigator.pop(context, value);
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           child: Text(
             MinRawSetting(value).getDisplayName(context),
             style: AppStyles.textStyleDialogOptions(context),
@@ -796,7 +825,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           Navigator.pop(context, value);
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           child: Text(
             CurrencyModeSetting(value).getDisplayName(context),
             style: AppStyles.textStyleDialogOptions(context),
@@ -866,10 +895,10 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           );
         });
 
-    final String currency_mode = CurrencyModeSetting(chosen).getDisplayName();
-    sl.get<SharedPrefsUtil>().setCurrencyMode(currency_mode).then((result) {
+    final String currencyMode = CurrencyModeSetting(chosen).getDisplayName();
+    sl.get<SharedPrefsUtil>().setCurrencyMode(currencyMode).then((result) {
       setState(() {
-        StateContainer.of(context).setCurrencyMode(currency_mode);
+        StateContainer.of(context).setCurrencyMode(currencyMode);
         _curCurrencyModeSetting = CurrencyModeSetting(chosen);
       });
     });
@@ -891,7 +920,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, UnlockOption.NO);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).no,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -903,7 +932,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                   Navigator.pop(context, UnlockOption.YES);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     AppLocalization.of(context).yes,
                     style: AppStyles.textStyleDialogOptions(context),
@@ -940,7 +969,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           Navigator.pop(context, value);
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           child: Text(
             AvailableCurrency(value).getDisplayName(context),
             style: AppStyles.textStyleDialogOptions(context),
@@ -957,7 +986,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         builder: (BuildContext context) {
           return AppSimpleDialog(
             title: Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
+              padding: const EdgeInsets.only(bottom: 10),
               child: Text(
                 AppLocalization.of(context).currency,
                 style: AppStyles.textStyleDialogHeader(context),
@@ -986,7 +1015,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           Navigator.pop(context, value);
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           child: Text(
             LanguageSetting(value).getDisplayName(context),
             style: AppStyles.textStyleDialogOptions(context),
@@ -1003,7 +1032,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         builder: (BuildContext context) {
           return AppSimpleDialog(
             title: Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
+              padding: const EdgeInsets.only(bottom: 10),
               child: Text(
                 AppLocalization.of(context).language,
                 style: AppStyles.textStyleDialogHeader(context),
@@ -1031,7 +1060,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           Navigator.pop(context, value);
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           child: Text(
             AvailableBlockExplorer(value).getDisplayName(context),
             style: AppStyles.textStyleDialogOptions(context),
@@ -1078,7 +1107,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           Navigator.pop(context, value);
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           child: Text(
             LockTimeoutSetting(value).getDisplayName(context),
             style: AppStyles.textStyleDialogOptions(context),
@@ -1095,7 +1124,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         builder: (BuildContext context) {
           return AppSimpleDialog(
             title: Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
+              padding: const EdgeInsets.only(bottom: 10),
               child: Text(
                 AppLocalization.of(context).autoLockHeader,
                 style: AppStyles.textStyleDialogHeader(context),
@@ -1123,7 +1152,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           Navigator.pop(context, value);
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           child: Text(
             ThemeSetting(value).getDisplayName(context),
             style: AppStyles.textStyleDialogOptions(context),
@@ -1140,7 +1169,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         builder: (BuildContext context) {
           return AppSimpleDialog(
             title: Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
+              padding: const EdgeInsets.only(bottom: 10),
               child: Text(
                 AppLocalization.of(context).themeHeader,
                 style: AppStyles.textStyleDialogHeader(context),
@@ -1186,6 +1215,25 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       });
       _moreSettingsController.reverse();
       return false;
+      /*} else if (_getNanoOpen) {
+      setState(() {
+        _getNanoOpen = false;
+      });
+      _getNanoController.reverse();
+      return false;
+    } else if (_spendNanoOpen) {
+      setState(() {
+        _spendNanoOpen = false;
+      });
+      _spendNanoController.reverse();
+      return false;
+    */
+    } else if (_useNanoOpen) {
+      setState(() {
+        _useNanoOpen = false;
+      });
+      _useNanoController.reverse();
+      return false;
     }
     return true;
   }
@@ -1209,6 +1257,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
             SlideTransition(position: _blockedOffsetFloat, child: BlockedList(_blockedController, _blockedOpen)),
             SlideTransition(position: _securityOffsetFloat, child: buildSecurityMenu(context)),
             SlideTransition(position: _moreSettingsOffsetFloat, child: buildMoreSettingsMenu(context)),
+            SlideTransition(position: _useNanoOffsetFloat, child: buildUseNanoMenu(context)),
           ],
         ),
       ),
@@ -1332,16 +1381,23 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).payments, AppIcons.money_bill_alt, onPressed: () {
         //   Navigator.of(context).pushNamed("/payments_page");
         // }),
-        // TODO: Add back later:
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).purchaseNano, AppIcons.coins, onPressed: () async {
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).useNano, AppIcons.coins, onPressed: () async {
           // Navigator.of(context).pushNamed("/purchase_nano");
-          final String? choice = await _onrampDialog();
-          if (choice != null) {
-            await UIUtil.showWebview(context, choice);
-          }
+          // final String? choice = await _onrampDialog();
+          // if (choice != null) {
+          //   await UIUtil.showWebview(context, choice);
+          // }
+          setState(() {
+            _useNanoOpen = true;
+          });
+          _useNanoController.forward();
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).spendNano, AppIcons.coins, onPressed: () async {
+        //   Navigator.of(context).pushNamed("/spend_nano");
+        // }),
+        // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).registerUsername, AppIcons.at, onPressed: () {
           Navigator.of(context).pushNamed("/register_username");
         }),
@@ -1383,7 +1439,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         Container(
-          margin: const EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
+          margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
           child: Text(AppLocalization.of(context).manage,
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
         ),
@@ -1462,8 +1518,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).logout, AppIcons.logout, onPressed: () {
-          AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
-              AppLocalization.of(context).logoutDetail, AppLocalization.of(context).logoutAction.toUpperCase(), () {
+          AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(AppLocalization.of(context).warning, context), AppLocalization.of(context).logoutDetail,
+              AppLocalization.of(context).logoutAction.toUpperCase(), () {
             // Show another confirm dialog
             AppDialogs.showConfirmDialog(context, AppLocalization.of(context).logoutAreYouSure, AppLocalization.of(context).logoutReassurance,
                 CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
@@ -1489,7 +1545,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         Padding(
-            padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
             child: Column(
               children: [
                 // Row(
@@ -1668,7 +1724,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                           // Second Account
                           if (StateContainer.of(context).recentLast != null)
                             Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
                               child: Stack(
                                 children: <Widget>[
                                   Center(
@@ -1737,7 +1793,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                           // Third Account
                           if (StateContainer.of(context).recentSecondLast != null)
                             Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
                               child: Stack(
                                 children: <Widget>[
                                   Center(
@@ -1938,7 +1994,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           children: <Widget>[
             // Back button and Security Text
             Container(
-              margin: const EdgeInsets.only(bottom: 10.0, top: 5),
+              margin: const EdgeInsets.only(bottom: 10, top: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -1954,7 +2010,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                               primary: StateContainer.of(context).curTheme.text15,
                               backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8),
                               // highlightColor: StateContainer.of(context).curTheme.text15,
                               // splashColor: StateContainer.of(context).curTheme.text15,
                             ),
@@ -2021,8 +2077,8 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                     else
                       Column(children: <Widget>[
                         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                        AppSettings.buildSettingsListItemSingleLine(
-                            context, AppLocalization.of(context).disableWalletPassword, AppIcons.walletpassworddisabled, onPressed: () {
+                        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).disableWalletPassword, AppIcons.walletpassworddisabled,
+                            onPressed: () {
                           Sheets.showAppHeightNineSheet(context: context, widget: DisablePasswordSheet());
                         }),
                       ]),
@@ -2076,7 +2132,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
           children: <Widget>[
             // Back button and Security Text
             Container(
-              margin: const EdgeInsets.only(bottom: 10.0, top: 5),
+              margin: const EdgeInsets.only(bottom: 10, top: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -2092,7 +2148,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                               primary: StateContainer.of(context).curTheme.text15,
                               backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8),
                               // highlightColor: StateContainer.of(context).curTheme.text15,
                               // splashColor: StateContainer.of(context).curTheme.text15,
                             ),
@@ -2142,9 +2198,9 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         context, AppLocalization.of(context).receiveMinimum, _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     Container(
-                      margin: const EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
+                      margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
                       child: Text(AppLocalization.of(context).manage,
-                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
                     ),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).changeRepAuthenticate, AppIcons.changerepresentative,
@@ -2167,7 +2223,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         AppAnimation.animationLauncher(context, AnimationType.GENERIC, onPoppedCallback: () => animationOpen = false);
 
                         // sleep to flex the animation a bit:
-                        await Future.delayed(const Duration(milliseconds: 500));
+                        await Future<dynamic>.delayed(const Duration(milliseconds: 500));
 
                         // Delete the database
                         try {
@@ -2199,14 +2255,19 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
                         await sl.get<SharedPrefsUtil>().setContactsOn(false);
 
                         // re-add account index 0 and switch the account to it:
+                        if (!mounted) return;
                         final String seed = await StateContainer.of(context).getSeed();
+                        if (!mounted) return;
                         await NanoUtil().loginAccount(seed, context);
+                        if (!mounted) return;
                         await StateContainer.of(context).resetRecentlyUsedAccounts();
                         final Account? mainAccount = await sl.get<DBHelper>().getSelectedAccount(seed);
+                        if (!mounted) return;
                         StateContainer.of(context).updateWallet(account: mainAccount!);
                         // force users list to update on the home page:
                         EventTaxiImpl.singleton().fire(ContactModifiedEvent());
                         EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: []));
+
                         StateContainer.of(context).updateUnified(true);
                         EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
 
@@ -2241,6 +2302,174 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
     );
   }
 
+  Widget buildUseNanoMenu(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: StateContainer.of(context).curTheme.backgroundDark,
+        boxShadow: [
+          BoxShadow(color: StateContainer.of(context).curTheme.barrierWeakest!, offset: const Offset(-5, 0), blurRadius: 20),
+        ],
+      ),
+      child: SafeArea(
+        minimum: const EdgeInsets.only(
+          top: 60,
+        ),
+        child: Column(
+          children: <Widget>[
+            // Back button and Security Text
+            Container(
+              margin: const EdgeInsets.only(bottom: 10, top: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      // Back button
+                      Container(
+                        height: 40,
+                        width: 40,
+                        margin: const EdgeInsets.only(right: 10, left: 10),
+                        child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: StateContainer.of(context).curTheme.text15,
+                              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                              padding: const EdgeInsets.all(8),
+                              // highlightColor: StateContainer.of(context).curTheme.text15,
+                              // splashColor: StateContainer.of(context).curTheme.text15,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _useNanoOpen = false;
+                              });
+                              _useNanoController.reverse();
+                            },
+                            child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
+                      ),
+                      // Security Header Text
+                      Text(
+                        AppLocalization.of(context).useNano,
+                        style: AppStyles.textStyleSettingsHeader(context),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+                child: Stack(
+              children: <Widget>[
+                ListView(
+                  padding: const EdgeInsets.only(top: 15),
+                  children: [
+                    Container(
+                      margin: const EdgeInsetsDirectional.only(start: 30, bottom: 10),
+                      child: Text(AppLocalization.of(context).getNano,
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                    ),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemSingleLine(
+                      context,
+                      AppLocalization.of(context).onramper,
+                      AppIcons.coins,
+                      onPressed: () async {
+                        const String url =
+                            "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
+                        await UIUtil.showWebview(context, url);
+                      },
+                      iconOverride: const SizedBox(
+                        width: 24,
+                        child: Image(
+                          fit: BoxFit.fitWidth,
+                          image: AssetImage("assets/logos/onramper.png"),
+                        ),
+                      ),
+                    ),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemSingleLine(
+                      context,
+                      NonTranslatable.nanocafe,
+                      AppIcons.coins,
+                      onPressed: () async {
+                        const String url = "https://nanocafe.cc";
+                        await UIUtil.showWebview(context, url);
+                      },
+                      iconOverride: const SizedBox(
+                        width: 24,
+                        child: Image(
+                          fit: BoxFit.fitWidth,
+                          image: AssetImage("assets/logos/nanocafe.png"),
+                        ),
+                      ),
+                    ),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).copyWalletAddressToClipboard, AppIcons.clipboard,
+                        onPressed: () {
+                      Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
+                      UIUtil.showSnackbar(AppLocalization.of(context).addressCopied, context, durationMs: 1500);
+                    }),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    // AppSimpleDialogOption(
+                    //   onPressed: () {
+                    //     Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
+                    //     UIUtil.showSnackbar(AppLocalization.of(context).addressCopied, context, durationMs: 1500);
+                    //   },
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.symmetric(vertical: 8),
+                    //     child: Text(
+                    //       AppLocalization.of(context).copyWalletAddressToClipboard,
+                    //       style: AppStyles.textStyleDialogOptions(context),
+                    //     ),
+                    //   ),
+                    // ),
+                    Container(
+                      margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
+                      child: Text(AppLocalization.of(context).spendNano,
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                    ),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemSingleLine(
+                      context,
+                      NonTranslatable.redeemforme,
+                      AppIcons.coins,
+                      onPressed: () async {
+                        const String url = "https://redeemfor.me";
+                        await UIUtil.showWebview(context, url);
+                      },
+                      iconOverride: const SizedBox(
+                        width: 24,
+                        child: Image(
+                          fit: BoxFit.fitWidth,
+                          image: AssetImage("assets/logos/redeemforme.png"),
+                        ),
+                      ),
+                    ),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                  ],
+                ),
+                // List Top Gradient End
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    height: 20,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
+                        begin: const AlignmentDirectional(0.5, -1.0),
+                        end: const AlignmentDirectional(0.5, 1.0),
+                      ),
+                    ),
+                  ),
+                ), //List Top Gradient End
+              ],
+            )),
+          ],
+        ),
+      ),
+    );
+  }
+
   Future<void> authenticateWithPin() async {
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
@@ -2254,7 +2483,7 @@ class _SettingsSheetState extends State<SettingsSheet> with TickerProviderStateM
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 200));
       Navigator.of(context).pop();
       StateContainer.of(context).getSeed().then((String seed) {
         Sheets.showAppHeightNineSheet(

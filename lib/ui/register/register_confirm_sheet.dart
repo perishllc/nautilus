@@ -279,11 +279,11 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
         }
 
         // sleep for a while before trying again:
-        await Future.delayed(const Duration(milliseconds: 3000));
+        await Future<dynamic>.delayed(const Duration(milliseconds: 3000));
       }
 
       // sleep for a while before updating the database:
-      await Future.delayed(const Duration(milliseconds: 5000));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 5000));
 
       // force update the database:
       await StateContainer.of(context).checkAndUpdateNanoToUsernames(true);
@@ -326,7 +326,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
     }
   }

@@ -321,7 +321,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         await sl.get<DBHelper>().replaceTXDataByUUID(newRequestTXData);
         // await sl.get<DBHelper>().deleteTXDataByUUID(local_uuid);
         // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
-        await Future.delayed(const Duration(seconds: 2));
+        await Future<dynamic>.delayed(const Duration(seconds: 2));
         // update the list view:
         await StateContainer.of(context).updateSolids();
         await StateContainer.of(context).updateUnified(true);
@@ -390,7 +390,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.REQUEST));
     }
   }

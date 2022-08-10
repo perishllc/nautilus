@@ -1,9 +1,11 @@
 // ignore_for_file: avoid_dynamic_calls
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:confetti/confetti.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -63,10 +65,10 @@ import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/transaction_state_tag.dart';
 import 'package:nautilus_wallet_flutter/util/box.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+// import 'package:nfc_manager/nfc_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:quiver/strings.dart';
 import 'package:rate_my_app/rate_my_app.dart';
@@ -80,10 +82,10 @@ class AppHomePage extends StatefulWidget {
   PriceConversion? priceConversion;
 
   @override
-  _AppHomePageState createState() => _AppHomePageState();
+  AppHomePageState createState() => AppHomePageState();
 }
 
-class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, SingleTickerProviderStateMixin {
+class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final Logger log = sl.get<Logger>();
 
@@ -157,6 +159,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     appStoreIdentifier: '1615775960',
   );
 
+  // confetti:
+  late ConfettiController _confettiControllerLeft;
+  late ConfettiController _confettiControllerRight;
+
   Future<void> _switchToAccount(String account) async {
     final List<Account> accounts = await sl.get<DBHelper>().getAccounts(await StateContainer.of(context).getSeed());
     for (final Account acc in accounts) {
@@ -210,6 +216,16 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
   }
 
+  Future<void> _introSkippedMessage() async {
+    StateContainer.of(context).introSkiped = false;
+    AppDialogs.showInfoDialog(
+      context,
+      AppLocalization.of(context).introSkippedWarningHeader,
+      AppLocalization.of(context).introSkippedWarningContent,
+      barrierDismissible: false,
+    );
+  }
+
   Future<void> _branchGiftDialog({String seed = "", String memo = "", String amountRaw = "", String fromAddress = "", String giftUUID = ""}) async {
     final String supposedAmount = getRawAsThemeAwareAmount(context, amountRaw);
 
@@ -225,278 +241,288 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
 
     bool shouldShowEmptyDialog = false;
-    bool shouldShowErrorDialog = false;
 
-    try {
-      BigInt balance = BigInt.parse(amountRaw);
+    // try {
+    BigInt balance = BigInt.parse(amountRaw);
 
-      if (giftUUID.isEmpty) {
-        // check if there's actually any nano to claim:
-        if (seed.isNotEmpty) {
-          balance = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
-        }
-        if (!mounted) return;
-
-        if (balance != BigInt.zero) {
-          final String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
-          // show dialog with option to refund to sender:
-          switch (await showDialog<int>(
-              barrierDismissible: false,
-              context: context,
-              barrierColor: StateContainer.of(context).curTheme.barrier,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(
-                    AppLocalization.of(context).giftAlert,
-                    style: AppStyles.textStyleDialogHeader(context),
-                  ),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Text("${AppLocalization.of(context).importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: "${AppLocalization.of(context).giftFrom}: ",
-                          style: AppStyles.textStyleParagraph(context),
-                          children: [
-                            TextSpan(
-                              text: "${userOrFromAddress!}\n",
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (memo.isNotEmpty)
-                        Text(
-                          "${AppLocalization.of(context).giftMessage}: $memo\n",
-                          style: AppStyles.textStyleParagraph(context),
-                        ),
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: "${AppLocalization.of(context).giftAmount}: ",
-                          style: AppStyles.textStyleParagraph(context),
-                          children: [
-                            TextSpan(
-                              text: getThemeAwareRawAccuracy(context, balance.toString()),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            displayCurrencySymbol(
-                              context,
-                              AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            TextSpan(
-                              text: actualAmount,
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  actionsAlignment: MainAxisAlignment.end,
-                  actions: <Widget>[
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 0);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context).refund,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
-                      ),
-                    ),
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 1);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context).receive,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
-                      ),
-                    ),
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 2);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context).close,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
-                      ),
-                    )
-                  ],
-                );
-              })) {
-            case 2:
-              break;
-            case 1:
-              // transfer to this wallet:
-              // await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, StateContainer.of(context).wallet);
-              await AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
-              break;
-            case 0:
-              // refund the gift:
-              await AppTransferOverviewSheet().startAutoRefund(
-                context,
-                seed,
-                fromAddress,
-              );
-              break;
-          }
-          return;
-        } else {
-          shouldShowEmptyDialog = true;
-        }
-      } else {
-        // GIFT UUID is not empty, so we're dealing with gift card v2:
-        // check if there's actually any nano to claim:
-        final String requestingAccount = StateContainer.of(context).wallet!.address!;
-        final dynamic res = await sl.get<AccountService>().giftCardInfo(giftUUID: giftUUID, requestingAccount: requestingAccount);
-        final String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
-        if (!mounted) return;
-        if (res["error"] != null) {
-          shouldShowEmptyDialog = true;
-        } else if (res["success"] != null) {
-          // show alert:
-          // show dialog with option to refund to sender:
-          switch (await showDialog<int>(
-              barrierDismissible: false,
-              context: context,
-              barrierColor: StateContainer.of(context).curTheme.barrier,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(
-                    AppLocalization.of(context).giftAlert,
-                    style: AppStyles.textStyleDialogHeader(context),
-                  ),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Text("${AppLocalization.of(context).importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: "${AppLocalization.of(context).giftFrom}: ",
-                          style: AppStyles.textStyleParagraph(context),
-                          children: [
-                            TextSpan(
-                              text: "${userOrFromAddress!}\n",
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (memo.isNotEmpty)
-                        Text(
-                          "${AppLocalization.of(context).giftMessage}: $memo\n",
-                          style: AppStyles.textStyleParagraph(context),
-                        ),
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: "${AppLocalization.of(context).giftAmount}: ",
-                          style: AppStyles.textStyleParagraph(context),
-                          children: [
-                            TextSpan(
-                              text: getThemeAwareRawAccuracy(context, balance.toString()),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            displayCurrencySymbol(
-                              context,
-                              AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            TextSpan(
-                              text: actualAmount,
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  actionsAlignment: MainAxisAlignment.end,
-                  actions: <Widget>[
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 0);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context).receive,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
-                      ),
-                    ),
-                    AppSimpleDialogOption(
-                      onPressed: () {
-                        Navigator.pop(context, 1);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          AppLocalization.of(context).close,
-                          style: AppStyles.textStyleDialogOptions(context),
-                        ),
-                      ),
-                    )
-                  ],
-                );
-              })) {
-            case 0:
-              // transfer to this wallet:
-
-              // show loading animation for ~5 seconds:
-              // push animation to prevent early exit:
-              bool animationOpen = true;
-              AppAnimation.animationLauncher(context, AnimationType.GENERIC, onPoppedCallback: () => animationOpen = false);
-              // sleep to flex the animation a bit:
-              await Future.delayed(const Duration(milliseconds: 500));
-
-              final dynamic res = await sl.get<AccountService>().giftCardClaim(giftUUID: giftUUID, requestingAccount: requestingAccount);
-              if (!mounted) return;
-
-              if (res["error"] != null) {
-                log.d(res);
-                // something went wrong, show error:
-                UIUtil.showSnackbar(AppLocalization.of(context).errorProcessingGiftCard, context, durationMs: 2000);
-              } else if (res["success"] != null) {
-                // show success:
-                UIUtil.showSnackbar(AppLocalization.of(context).giftProcessSuccess, context, durationMs: 2000);
-              }
-
-              if (animationOpen) {
-                // animation is still open, so we need to close it:
-                if (!mounted) return;
-                Navigator.pop(context);
-              }
-
-              break;
-            case 1:
-              // close
-              break;
-          }
-          return;
-        }
+    if (giftUUID.isEmpty) {
+      // check if there's actually any nano to claim:
+      if (seed.isNotEmpty) {
+        balance = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
       }
+      if (!mounted) return;
 
-      // if (balance == BigInt.zero && )
+      if (balance != BigInt.zero) {
+        final String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
+        // show dialog with option to refund to sender:
+        switch (await showDialog<int>(
+            barrierDismissible: false,
+            context: context,
+            barrierColor: StateContainer.of(context).curTheme.barrier,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(
+                  AppLocalization.of(context).giftAlert,
+                  style: AppStyles.textStyleDialogHeader(context),
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Text("${AppLocalization.of(context).importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
+                    RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        text: "${AppLocalization.of(context).giftFrom}: ",
+                        style: AppStyles.textStyleParagraph(context),
+                        children: [
+                          TextSpan(
+                            text: "${userOrFromAddress!}\n",
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (memo.isNotEmpty)
+                      Text(
+                        "${AppLocalization.of(context).giftMessage}: $memo\n",
+                        style: AppStyles.textStyleParagraph(context),
+                      ),
+                    RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        text: "${AppLocalization.of(context).giftAmount}: ",
+                        style: AppStyles.textStyleParagraph(context),
+                        children: <InlineSpan>[
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, balance.toString()),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          displayCurrencySymbol(
+                            context,
+                            AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          TextSpan(
+                            text: actualAmount,
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                actionsAlignment: MainAxisAlignment.end,
+                actions: <Widget>[
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, 0);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context).refund,
+                        style: AppStyles.textStyleDialogOptions(context),
+                      ),
+                    ),
+                  ),
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, 1);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context).receive,
+                        style: AppStyles.textStyleDialogOptions(context),
+                      ),
+                    ),
+                  ),
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, 2);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context).close,
+                        style: AppStyles.textStyleDialogOptions(context),
+                      ),
+                    ),
+                  )
+                ],
+              );
+            })) {
+          case 2:
+            break;
+          case 1:
+            // transfer to this wallet:
+            // await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, StateContainer.of(context).wallet);
+            await AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
+            break;
+          case 0:
+            // refund the gift:
+            await AppTransferOverviewSheet().startAutoRefund(
+              context,
+              seed,
+              fromAddress,
+            );
+            break;
+        }
+        if (!mounted) return;
+        if (StateContainer.of(context).introSkiped) {
+          _introSkippedMessage();
+        }
+        return;
+      } else {
+        shouldShowEmptyDialog = true;
+      }
+    } else {
+      // GIFT UUID is not empty, so we're dealing with gift card v2:
+      // check if there's actually any nano to claim:
+      final String requestingAccount = StateContainer.of(context).wallet!.address!;
+      final dynamic res = await sl.get<AccountService>().giftCardInfo(giftUUID: giftUUID, requestingAccount: requestingAccount);
+      if (!mounted) return;
+      final String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
+      if (!mounted) return;
+      if (res["error"] != null) {
+        shouldShowEmptyDialog = true;
+      } else if (res["success"] != null) {
+        // show alert:
+        // show dialog with option to refund to sender:
+        switch (await showDialog<int>(
+            barrierDismissible: false,
+            context: context,
+            barrierColor: StateContainer.of(context).curTheme.barrier,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(
+                  AppLocalization.of(context).giftAlert,
+                  style: AppStyles.textStyleDialogHeader(context),
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Text("${AppLocalization.of(context).importGiftv2}\n\n", style: AppStyles.textStyleParagraph(context)),
+                    RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        text: "${AppLocalization.of(context).giftFrom}: ",
+                        style: AppStyles.textStyleParagraph(context),
+                        children: [
+                          TextSpan(
+                            text: "${userOrFromAddress!}\n",
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (memo.isNotEmpty)
+                      Text(
+                        "${AppLocalization.of(context).giftMessage}: $memo\n",
+                        style: AppStyles.textStyleParagraph(context),
+                      ),
+                    RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        text: "${AppLocalization.of(context).giftAmount}: ",
+                        style: AppStyles.textStyleParagraph(context),
+                        children: [
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, balance.toString()),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          displayCurrencySymbol(
+                            context,
+                            AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          TextSpan(
+                            text: actualAmount,
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                actionsAlignment: MainAxisAlignment.end,
+                actions: <Widget>[
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, 0);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context).receive,
+                        style: AppStyles.textStyleDialogOptions(context),
+                      ),
+                    ),
+                  ),
+                  AppSimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, 1);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        AppLocalization.of(context).close,
+                        style: AppStyles.textStyleDialogOptions(context),
+                      ),
+                    ),
+                  )
+                ],
+              );
+            })) {
+          case 0:
+            // transfer to this wallet:
 
-    } catch (err) {
-      log.d("Error processing gift card: $err");
-      shouldShowErrorDialog = true;
+            // show loading animation for ~5 seconds:
+            // push animation to prevent early exit:
+            bool animationOpen = true;
+            AppAnimation.animationLauncher(context, AnimationType.GENERIC, onPoppedCallback: () => animationOpen = false);
+            // sleep to flex the animation a bit:
+            await Future<dynamic>.delayed(const Duration(milliseconds: 1500));
+
+            final dynamic res = await sl.get<AccountService>().giftCardClaim(giftUUID: giftUUID, requestingAccount: requestingAccount);
+            if (!mounted) return;
+
+            if (res["error"] != null) {
+              log.d(res);
+              // something went wrong, show error:
+              UIUtil.showSnackbar(AppLocalization.of(context).errorProcessingGiftCard, context, durationMs: 4000);
+            } else if (res["success"] != null) {
+              // show success:
+              UIUtil.showSnackbar(AppLocalization.of(context).giftProcessSuccess, context, durationMs: 4000);
+            }
+
+            if (animationOpen) {
+              // animation is still open, so we need to close it:
+              if (!mounted) return;
+              Navigator.pop(context);
+            }
+
+            break;
+          case 1:
+            // close
+            break;
+        }
+        if (!mounted) return;
+        if (StateContainer.of(context).introSkiped) {
+          // sleep for a few seconds so it doesn't feel too jarring:
+          await Future<dynamic>.delayed(const Duration(milliseconds: 4000));
+          _introSkippedMessage();
+        }
+        return;
+      }
     }
+
+    // if (balance == BigInt.zero && )
+
+    // } catch (err) {
+    //   log.d("Error processing gift card: $err");
+    //   shouldShowErrorDialog = true;
+    // }
 
     // show alert that the gift is empty:
     if (shouldShowEmptyDialog) {
@@ -572,10 +598,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             );
           });
     }
-
-    if (shouldShowErrorDialog) {
-      if (!mounted) return;
-      UIUtil.showSnackbar(AppLocalization.of(context).errorProcessingGiftCard, context, durationMs: 5000);
+    if (StateContainer.of(context).introSkiped) {
+      // sleep for a few seconds so it doesn't feel too jarring:
+      await Future<dynamic>.delayed(const Duration(milliseconds: 4000));
+      _introSkippedMessage();
     }
   }
 
@@ -612,7 +638,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       vsync: this,
     );
     _placeholderCardAnimationController.addListener(_animationControllerListener);
-    _opacityAnimation = Tween(begin: 1.0, end: 0.4).animate(
+    _opacityAnimation = Tween<double>(begin: 1.0, end: 0.4).animate(
       CurvedAnimation(
         parent: _placeholderCardAnimationController,
         curve: Curves.easeIn,
@@ -620,7 +646,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       ),
     );
     // setup blank animation controller:
-    _emptyAnimation = Tween(begin: 1.0, end: 1.0).animate(
+    _emptyAnimation = Tween<double>(begin: 1.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _placeholderCardAnimationController,
         curve: Curves.easeIn,
@@ -692,12 +718,27 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
 
       // are we not connected after ~5 seconds?
-      await Future.delayed(const Duration(seconds: 8));
+      await Future<dynamic>.delayed(const Duration(seconds: 8));
       final bool connected = await sl.get<AccountService>().isConnected();
       if (!connected) {
         showConnectionWarning();
       }
+
+      // // Check availability
+      // bool isAvailable = await NfcManager.instance.isAvailable();
+      // // Start Session
+      // NfcManager.instance.startSession(
+      //   onDiscovered: (NfcTag tag) async {
+      //     // Do something with an NfcTag instance.
+      //     // log.d("NfcTag: $tag");
+      //     _confettiControllerLeft.play();
+      //     _confettiControllerRight.play();
+      //   },
+      // );
     });
+    // confetti:
+    _confettiControllerLeft = ConfettiController(duration: const Duration(milliseconds: 150));
+    _confettiControllerRight = ConfettiController(duration: const Duration(milliseconds: 150));
   }
 
   void showConnectionWarning() {
@@ -794,6 +835,8 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // if unacknowledged, we're the recipient, and not local, ACK it:
       if (tx.is_acknowledged == false && tx.to_address == StateContainer.of(context).wallet!.address && !tx.uuid!.contains("LOCAL")) {
         log.v("ACKNOWLEDGING TX_DATA: ${tx.uuid}");
+        tx.is_acknowledged = true;
+        sl.get<DBHelper>().replaceTXDataByUUID(tx);
         sl.get<AccountService>().requestACK(tx.uuid, tx.from_address, tx.to_address);
       }
       if (tx.is_memo && isEmpty(tx.link) && isNotEmpty(tx.block)) {
@@ -936,6 +979,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
     _placeholderCardAnimationController.dispose();
+    // confetti:
+    _confettiControllerLeft.dispose();
+    _confettiControllerRight.dispose();
     super.dispose();
   }
 
@@ -1107,10 +1153,10 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     await StateContainer.of(context).updateSolids();
     // _updateTXData();
     // for memos:
-    _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
+    await _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
 
     // are we not connected after ~5 seconds?
-    await Future.delayed(const Duration(seconds: 8));
+    await Future<dynamic>.delayed(const Duration(seconds: 8));
     final bool connected = await sl.get<AccountService>().isConnected();
     if (!connected) {
       showConnectionWarning();
@@ -1490,8 +1536,9 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
 
     // create a list of indices to remove:
     removeIndices = [];
+
     // remove anything that's not supposed to be there anymore:
-    _unifiedListMap[StateContainer.of(context).wallet!.address]!.items.where((item) => !unifiedList.contains(item)).forEach((dynamicItem) {
+    _unifiedListMap[StateContainer.of(context).wallet!.address]!.items.where((dynamic item) => !unifiedList.contains(item)).forEach((dynamic dynamicItem) {
       removeIndices.add(_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.indexOf(dynamicItem));
     });
     // mark anything out of place or not in the unified list as to be removed:
@@ -1515,7 +1562,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     }
 
     // insert unifiedList into listmap:
-    unifiedList.where((item) => !_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.contains(item)).forEach((dynamicItem) {
+    unifiedList.where((dynamic item) => !_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.contains(item)).forEach((dynamic dynamicItem) {
       int index = unifiedList.indexOf(dynamicItem);
       if (dynamicItem == null) {
         return;
@@ -1545,6 +1592,11 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
     log.d("handling deep link: $link");
     if (link == null || link.isEmpty) {
       return;
+    }
+
+    if (link.contains("confetti")) {
+      _confettiControllerLeft.play();
+      _confettiControllerRight.play();
     }
 
     final dynamic result = uriParser(link);
@@ -1808,6 +1860,38 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
                         ),
                         AppPopupButton(),
                       ],
+                    ),
+
+                    // confetti: LEFT
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: ConfettiWidget(
+                        blastDirectionality: BlastDirectionality.explosive,
+                        confettiController: _confettiControllerLeft,
+                        blastDirection: -pi / 3,
+                        emissionFrequency: 0.02,
+                        // numberOfParticles: 30,
+                        numberOfParticles: 40,
+                        maxBlastForce: 60,
+                        minBlastForce: 10,
+                        // strokeWidth: 1,
+                        gravity: 0.3,
+                      ),
+                    ),
+                    // confetti: RIGHT
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: ConfettiWidget(
+                        blastDirectionality: BlastDirectionality.explosive,
+                        confettiController: _confettiControllerRight,
+                        blastDirection: -2 * pi / 3,
+                        emissionFrequency: 0.02,
+                        // numberOfParticles: 30,
+                        numberOfParticles: 40,
+                        maxBlastForce: 60,
+                        minBlastForce: 10,
+                        gravity: 0.3,
+                      ),
                     ),
                   ],
                 ),
@@ -2771,7 +2855,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // remove failed txdata from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
-      await Future.delayed(const Duration(seconds: 2));
+      await Future<dynamic>.delayed(const Duration(seconds: 2));
       // show error:
       UIUtil.showSnackbar(AppLocalization.of(context).requestSendError, context, durationMs: 5000);
     } else {
@@ -2844,7 +2928,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // remove from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
-      await Future.delayed(const Duration(seconds: 2));
+      await Future<dynamic>.delayed(const Duration(seconds: 2));
       // show error:
       UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
     } else {
@@ -2921,7 +3005,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       // remove failed txdata from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
-      await Future.delayed(const Duration(seconds: 2));
+      await Future<dynamic>.delayed(const Duration(seconds: 2));
       // show error:
       UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
     } else {
@@ -3192,7 +3276,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           label: label,
           onPressed: (BuildContext context) async {
             // sleep for a bit to give the ripple effect time to finish
-            await Future.delayed(const Duration(milliseconds: 250));
+            await Future<dynamic>.delayed(const Duration(milliseconds: 250));
             if (!mounted) return;
             await payTX(context, txDetails);
             if (!mounted) return;
@@ -3211,7 +3295,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           label: AppLocalization.of(context).reply,
           onPressed: (BuildContext context) async {
             // sleep for a bit to give the ripple effect time to finish
-            await Future.delayed(const Duration(milliseconds: 250));
+            await Future<dynamic>.delayed(const Duration(milliseconds: 250));
             if (!mounted) return;
             await payTX(context, txDetails);
             if (!mounted) return;
@@ -3231,7 +3315,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             label: AppLocalization.of(context).retry,
             onPressed: (BuildContext context) async {
               // sleep for a bit to give the ripple effect time to finish
-              await Future.delayed(const Duration(milliseconds: 250));
+              await Future<dynamic>.delayed(const Duration(milliseconds: 250));
               if (!mounted) return;
               await resendRequest(context, txDetails);
               if (!mounted) return;
@@ -3247,7 +3331,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             label: AppLocalization.of(context).retry,
             onPressed: (BuildContext context) async {
               // sleep for a bit to give the ripple effect time to finish
-              await Future.delayed(const Duration(milliseconds: 250));
+              await Future<dynamic>.delayed(const Duration(milliseconds: 250));
               if (!mounted) return;
               await resendMemo(context, txDetails);
               if (!mounted) return;
@@ -3264,7 +3348,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
             label: AppLocalization.of(context).retry,
             onPressed: (BuildContext context) async {
               // sleep for a bit to give the ripple effect time to finish
-              await Future.delayed(const Duration(milliseconds: 250));
+              await Future<dynamic>.delayed(const Duration(milliseconds: 250));
               if (!mounted) return;
               await resendMessage(context, txDetails);
               if (!mounted) return;
@@ -3283,7 +3367,7 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
           label: AppLocalization.of(context).delete,
           onPressed: (BuildContext context) async {
             // sleep for a bit to give the ripple effect time to finish
-            await Future.delayed(const Duration(milliseconds: 250));
+            await Future<dynamic>.delayed(const Duration(milliseconds: 250));
             if (txDetails.uuid != null) {
               await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
             }
@@ -3625,6 +3709,22 @@ class _AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, 
       }
     }
 
+    // make an invisible container so we can still scroll even with only 1 item:
+    final int listLen = _unifiedListMap[StateContainer.of(context).wallet!.address]!.length;
+    if (listLen > 0 && listLen < 10) {
+      if (index == listLen - 1) {
+        return Column(
+          children: <Widget>[
+            _buildUnifiedCard(txDetails, animation, displayName, context),
+            SizedBox(
+              height: MediaQuery.of(context).size.height - 200 - (listLen * 80),
+              width: 0,
+            ),
+          ],
+        );
+      }
+    }
+
     return _buildUnifiedCard(txDetails, animation, displayName, context);
   }
 
@@ -3841,10 +3941,10 @@ class PaymentDetailsSheet extends StatefulWidget {
   final TXData? txDetails;
 
   @override
-  _PaymentDetailsSheetState createState() => _PaymentDetailsSheetState();
+  PaymentDetailsSheetState createState() => PaymentDetailsSheetState();
 }
 
-class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
+class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
   // // Current state references
   // bool _linkCopied = false;
   // // Timer reference so we can cancel repeated events
@@ -3986,8 +4086,11 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           await sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, true);
                         }
                         // setState(() {});
+                        if (!mounted) return;
                         await StateContainer.of(context).updateSolids();
+                        if (!mounted) return;
                         await StateContainer.of(context).updateUnified(true);
+                        if (!mounted) return;
                         Navigator.of(context).pop();
                       }),
                     ],
@@ -4001,7 +4104,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           onPressed: () {
                         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
-                        _AppHomePageState.payTX(context, txDetails);
+                        AppHomePageState.payTX(context, txDetails);
                       }),
                     ],
                   ),
@@ -4030,7 +4133,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).sendRequestAgain, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         // send the request again:
-                        _AppHomePageState.resendRequest(context, txDetails);
+                        AppHomePageState.resendRequest(context, txDetails);
                       }),
                     ],
                   ),
@@ -4044,7 +4147,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           AppButtonType.PRIMARY_OUTLINE,
                           AppLocalization.of(context).resendMemo,
                           Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
-                        _AppHomePageState.resendMemo(context, txDetails);
+                        AppHomePageState.resendMemo(context, txDetails);
                       }),
                     ],
                   ),
@@ -4057,6 +4160,7 @@ class _PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
                         sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
                         StateContainer.of(context).updateSolids();
+                        StateContainer.of(context).updateUnified(false);
                       }),
                     ],
                   ),

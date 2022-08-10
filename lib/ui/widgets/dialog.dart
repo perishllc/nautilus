@@ -73,10 +73,11 @@ class AppDialogs {
     );
   }
 
-  static void showInfoDialog(BuildContext context, String title, String content) {
+  static void showInfoDialog(BuildContext context, String title, String content, {bool barrierDismissible = true}) {
     showDialog(
       barrierColor: StateContainer.of(context).curTheme.barrier,
       context: context,
+      barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return AppAlertDialog(
           title: Text(

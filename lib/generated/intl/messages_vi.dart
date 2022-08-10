@@ -438,7 +438,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Tuỳ chọn"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Chính sách bảo mật"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Mua Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "Mã QR không chứa điểm đến hợp lệ"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(

@@ -401,6 +401,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             StateContainer.of(context).wallet!.address,
             NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
             max: widget.maxSend);
+        if (!mounted) return;
         StateContainer.of(context).wallet!.frontier = resp.hash;
         StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
       }
@@ -581,7 +582,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
     }
   }

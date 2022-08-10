@@ -193,7 +193,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
             }
           }
           // Hack that waits for blocks to be confirmed
-          await Future.delayed(const Duration(milliseconds: 300));
+          await Future<dynamic>.delayed(const Duration(milliseconds: 300));
         }
         // Process send from this account
         resp = await sl.get<AccountService>().getAccountInfo(account);
@@ -283,7 +283,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
             }
           }
           // Hack that waits for blocks to be confirmed
-          await Future.delayed(const Duration(milliseconds: 300));
+          await Future<dynamic>.delayed(const Duration(milliseconds: 300));
         }
         // Process send from this account
         resp = await sl.get<AccountService>().getAccountInfo(account);
@@ -405,7 +405,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
             }
           }
           // Hack that waits for blocks to be confirmed
-          await Future.delayed(const Duration(milliseconds: 300));
+          await Future<dynamic>.delayed(const Duration(milliseconds: 300));
         }
         // Process send from this account
         resp = await sl.get<AccountService>().getAccountInfo(account);

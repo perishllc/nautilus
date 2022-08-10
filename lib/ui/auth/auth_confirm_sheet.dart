@@ -13,6 +13,7 @@ import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/method.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/network/model/auth_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -54,10 +55,10 @@ class AuthConfirmSheet extends StatefulWidget {
   final String paperWalletSeed;
   final String memo;
 
-  _AuthConfirmSheetState createState() => _AuthConfirmSheetState();
+  AuthConfirmSheetState createState() => AuthConfirmSheetState();
 }
 
-class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
+class AuthConfirmSheetState extends State<AuthConfirmSheet> {
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
@@ -96,6 +97,9 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
 
   @override
   Widget build(BuildContext context) {
+    // construct the signature:
+    String signature = "";
+
     return SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
@@ -121,49 +125,74 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(
-                              (widget.link.isEmpty) ? AppLocalization.of(context).sending : AppLocalization.of(context).creatingGiftCard, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).authenticating, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
                     ),
                   ),
-                  // Container(
-                  //   margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                  //   padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                  //   width: double.infinity,
-                  //   decoration: BoxDecoration(
-                  //     color: StateContainer.of(context).curTheme.backgroundDarkest,
-                  //     borderRadius: BorderRadius.circular(50),
-                  //   ),
-                  //   // Amount text
-                  //   child: RichText(
-                  //     textAlign: TextAlign.center,
-                  //     text: TextSpan(
-                  //       text: "",
-                  //       children: [
-                  //         TextSpan(
-                  //           text: getThemeAwareRawAccuracy(context, widget.authItem.amount),
-                  //           style: AppStyles.textStyleParagraphPrimary(context),
-                  //         ),
-                  //         displayCurrencySymbol(
-                  //           context,
-                  //           AppStyles.textStyleParagraphPrimary(context),
-                  //         ),
-                  //         TextSpan(
-                  //           text: getRawAsThemeAwareFormattedAmount(context, widget.authItem.amount),
-                  //           style: AppStyles.textStyleParagraphPrimary(context),
-                  //         ),
-                  //         TextSpan(
-                  //           text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
-                  //           style: AppStyles.textStyleParagraphPrimary(context).copyWith(
-                  //             color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
+                  Container(
+                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    // Amount text
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: "",
+                        children: [
+                          TextSpan(
+                            text: widget.authItem.label,
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    // Amount text
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: "",
+                        children: [
+                          TextSpan(
+                            text: widget.authItem.message,
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    // Amount text
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: widget.authItem.account,
+                        style: AppStyles.textStyleParagraphPrimary(context),
+                      ),
+                    ),
+                  ),
 
                   // "TO" text
                   if (widget.link.isEmpty)
@@ -179,16 +208,15 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
                       ),
                     ),
                   // Address text
-                  if (widget.link.isEmpty)
-                    Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.backgroundDarkest,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
+                  Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
                 ],
               ),
             ),
@@ -211,7 +239,7 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
                       //     .sendAmountConfirm
                       //     .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.authItem.amount))
                       //     .replaceAll("%2", StateContainer.of(context).currencyMode);
-                      
+
                       // TODO:
                       final String authText = AppLocalization.of(context).sendAmountConfirm;
 
@@ -296,6 +324,8 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
         }
       }
 
+      if (!mounted) return;
+
       StateContainer.of(context).requestUpdate();
       StateContainer.of(context).updateTXMemos();
       StateContainer.of(context).updateUnified(true);
@@ -309,7 +339,7 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
             label: widget.authItem.label,
           ));
     } catch (error) {
-      sl.get<Logger>().d("send_confirm_error: $error");
+      sl.get<Logger>().d("auth_confirm_error: $error");
       // Send failed
       if (animationOpen) {
         Navigator.of(context).pop();
@@ -332,7 +362,7 @@ class _AuthConfirmSheetState extends State<AuthConfirmSheet> {
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
     }
   }

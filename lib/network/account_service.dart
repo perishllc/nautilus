@@ -142,31 +142,13 @@ class AccountService {
     }
     _isConnecting = true;
 
-    // // check if the nautilus servers are available
-    // Socket.connect(_BASE_SERVER_ADDRESS, 80, timeout: const Duration(seconds: 3)).then((Socket socket) {
-    //   log.d("Nautilus backend is up");
-    //   fallbackConnected = false;
-    //   socket.destroy();
-    // }).catchError((error) {
-    //   log.d("Nautilus backend is down: $error");
-    //   // switch to fallback servers:
-    //   // _SERVER_ADDRESS_WS = _FALLBACK_SERVER_ADDRESS_WS;
-    //   // _SERVER_ADDRESS_HTTP = _FALLBACK_SERVER_ADDRESS_HTTP;
-    //   // _SERVER_ADDRESS_ALERTS = _FALLBACK_SERVER_ADDRESS_ALERTS;
-    //   // FALLBACK CONNECTION:
-    //   // _HTTP_PROTO = "http://";
-    //   // _WS_PROTO = "ws://";
-    //   // _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
-    //   // fallbackConnected = true;
-    // });
-
     // DEV SERVER:
-    // if (kDebugMode) {
-    //   _HTTP_PROTO = "http://";
-    //   _WS_PROTO = "ws://";
-    //   _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
-    //   log.d("CONNECTED TO DEV SERVER");
-    // }
+    if (kDebugMode) {
+      _HTTP_PROTO = "http://";
+      _WS_PROTO = "ws://";
+      _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
+      log.d("CONNECTED TO DEV SERVER");
+    }
 
     // ENS:
     const String rpcUrl = 'https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}';
@@ -479,7 +461,7 @@ class AccountService {
 
   Future<String?> checkOpencapDomain(String domain) async {
     // get the SRV record:
-    String tld = domain.split(r"$").last;
+    final String tld = domain.split(r"$").last;
 
     final MDnsClient client = MDnsClient();
     // Start the client with default options.
@@ -498,7 +480,7 @@ class AccountService {
     }
 
     // GET /v1/addresses?alias=alice$domain.tld&address_type=100
-    
+
     final http.Response response =
         await http.get(Uri.parse("$resolvedDomain/v1/addresses?alias=$domain&address_type=300"), headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {
@@ -747,14 +729,21 @@ class AccountService {
     return item;
   }
 
-  Future<HandoffResponse> requestHandoff(HandoffReplyRequest request) async {
-    final dynamic response = await makeHttpRequest(request);
-    if (response is ErrorResponse) {
-      throw Exception("Received error ${response.error} ${response.details}");
-    }
-    final HandoffResponse item = HandoffResponse.fromJson(response as Map<String, dynamic>);
-    return item;
-  }
+  // Future<HandoffResponse?> requestHandoff(String URI, HandoffReplyRequest request) async {
+  //   final http.Response response = await http.post(Uri.parse(URI), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
+
+  //   if (response.statusCode != 200) {
+  //     return null;
+  //   }
+  //   final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
+
+  //   if (decoded.containsKey("error")) {
+  //     final ErrorResponse err = ErrorResponse.fromJson(decoded as Map<String, dynamic>);
+  //     throw Exception("Received error ${err.error} ${err.details}");
+  //   }
+  //   final HandoffResponse item = HandoffResponse.fromJson(response as Map<String, dynamic>);
+  //   return item;
+  // }
 
   Future<ProcessResponse> requestReceive(String? representative, String? previous, String? balance, String? link, String? account, String? privKey) async {
     final StateBlock receiveBlock = StateBlock(
@@ -799,7 +788,8 @@ class AccountService {
     return requestProcess(processRequest);
   }
 
-  Future<HandoffResponse> requestHandoffHTTP(String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
+  Future<HandoffResponse> requestHandoffHTTP(
+      String URI, String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
       {bool max = false, String? work}) async {
     final StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
@@ -822,7 +812,22 @@ class AccountService {
     // Process
     final HandoffReplyRequest handoffReplyRequest = HandoffReplyRequest(block: sendBlock);
 
-    return requestHandoff(handoffReplyRequest);
+    // return requestHandoff(handoffReplyRequest);
+
+    final http.Response response =
+        await http.post(Uri.parse(URI), headers: {'Content-type': 'application/json'}, body: json.encode(handoffReplyRequest.toJson()));
+
+    if (response.statusCode != 200) {
+      throw Exception("Received error ${response.statusCode}");
+    }
+    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
+
+    if (decoded.containsKey("error")) {
+      final ErrorResponse err = ErrorResponse.fromJson(decoded as Map<String, dynamic>);
+      throw Exception("Received error ${err.error} ${err.details}");
+    }
+    final HandoffResponse item = HandoffResponse.fromJson(response as Map<String, dynamic>);
+    return item;
   }
 
   // Future<HandoffWorkResponse> requestWork(String url, String hash) async {

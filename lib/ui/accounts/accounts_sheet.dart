@@ -373,7 +373,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                           AppLocalization.of(context).hideAccountsHeader,
                           AppLocalization.of(context).hideAccountsConfirmation,
                           CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
-                        await Future.delayed(const Duration(milliseconds: 250));
+                        await Future<dynamic>.delayed(const Duration(milliseconds: 250));
                         final List<Account> accountsToRemove = <Account>[];
                         for (final Account account in widget.accounts) {
                           if (account.selected || account.index == 0 || account.watchOnly || account.balance == null) {
@@ -634,7 +634,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
         icon: Icons.edit,
         label: AppLocalization.of(context).edit,
         onPressed: (BuildContext context) async {
-          await Future.delayed(const Duration(milliseconds: 250));
+          await Future<dynamic>.delayed(const Duration(milliseconds: 250));
           AccountDetailsSheet(account).mainBottomSheet(context);
           await Slidable.of(context)!.close();
         }));
@@ -652,7 +652,7 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                 AppLocalization.of(context).hideAccountHeader,
                 AppLocalization.of(context).removeAccountText.replaceAll("%1", AppLocalization.of(context).addAccount),
                 CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
-              await Future.delayed(const Duration(milliseconds: 250));
+              await Future<dynamic>.delayed(const Duration(milliseconds: 250));
               // Remove account
               await sl.get<DBHelper>().deleteAccount(account);
               EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account, deleted: true));

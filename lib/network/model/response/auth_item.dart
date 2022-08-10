@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:nautilus_wallet_flutter/model/method.dart';
+import 'package:nautilus_wallet_flutter/network/model/auth_types.dart';
 
 part 'auth_item.g.dart';
 
@@ -42,10 +43,49 @@ class AuthItem {
       return false;
     }
 
+    if (format.isEmpty) {
+      return false;
+    }
+    
+    // make sure format contains a nonce and timestamp:
+    if (!format.contains(AuthTypes.NONCE) || !format.contains(AuthTypes.TIMESTAMP)) {
+      return false;
+    }
+
     if (separator.isEmpty) {
       return false;
     }
 
     return true;
+  }
+
+  String constructSignature() {
+    String signature = "";
+
+    for (final String authType in format) {
+      switch (authType) {
+        case AuthTypes.ACCOUNT:
+          signature += account + separator;
+          break;
+        case AuthTypes.MESSAGE:
+          signature += message + separator;
+          break;
+        case AuthTypes.LABEL:
+          signature += label + separator;
+          break;
+        case AuthTypes.TIMESTAMP:
+          final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+          signature += secondsSinceEpoch.toString() + separator;
+          break;
+        case AuthTypes.NONCE:
+          signature += nonce + separator;
+          break;
+      }
+    }
+
+    // remove the last separator:
+    signature = signature.substring(0, signature.length - separator.length);
+
+    return signature;
   }
 }

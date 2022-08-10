@@ -61,7 +61,7 @@ Future<void> main() async {
   if (!kReleaseMode) {
     // we have to stall for whatever reason in debug mode
     // otherwise the app doesn't start properly (black screen)
-    await Future.delayed(const Duration(seconds: 2));
+    await Future<dynamic>.delayed(const Duration(seconds: 2));
   }
   // Run app
   if (kReleaseMode) {
@@ -71,7 +71,6 @@ Future<void> main() async {
 }
 
 class App extends StatefulWidget {
-
   App() : super();
 
   @override
@@ -122,107 +121,107 @@ class _AppState extends State<App> {
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
-        
+
         locale: StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT ? null : StateContainer.of(context).curLanguage.getLocale(),
-        supportedLocales: AppLocalization.delegate.supportedLocales,
-        // supportedLocales: const [
-        //   Locale('en', 'US'), // English
-        //   Locale('he', 'IL'), // Hebrew
-        //   Locale('de', 'DE'), // German
-        //   Locale('da'), // Danish
-        //   Locale('bg'), // Bulgarian
-        //   Locale('es'), // Spanish
-        //   Locale('hi'), // Hindi
-        //   Locale('hu'), // Hungarian
-        //   Locale('hi'), // Hindi
-        //   Locale('id'), // Indonesian
-        //   Locale('it'), // Italian
-        //   Locale('ja'), // Japanese
-        //   Locale('ko'), // Korean
-        //   Locale('ms'), // Malay
-        //   Locale('nl'), // Dutch
-        //   Locale('pl'), // Polish
-        //   Locale('pt'), // Portugese
-        //   Locale('ro'), // Romanian
-        //   Locale('ru'), // Russian
-        //   Locale('sl'), // Slovenian
-        //   Locale('sv'), // Swedish
-        //   Locale('tl'), // Tagalog
-        //   Locale('tr'), // Turkish
-        //   Locale('vi'), // Vietnamese
-        //   Locale('ca'), // Catalan
-        //   Locale('uk'), // Ukrainian
-        //   Locale('no'), // Norwegian
-        //   Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
-        //   Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'), // Chinese Traditional
-        //   Locale('ar'), // Arabic
-        //   Locale('lv'), // Latvian
-        //   Locale('bn'), // Bengali
-        //   // Currency-default requires country included
-        //   Locale("es", "AR"),
-        //   Locale("en", "AU"),
-        //   Locale("pt", "BR"),
-        //   Locale("en", "CA"),
-        //   Locale("de", "CH"),
-        //   Locale("es", "CL"),
-        //   Locale("zh", "CN"),
-        //   Locale("cs", "CZ"),
-        //   Locale("da", "DK"),
-        //   Locale("fr", "FR"),
-        //   Locale("en", "GB"),
-        //   Locale("zh", "HK"),
-        //   Locale("hu", "HU"),
-        //   Locale("id", "ID"),
-        //   Locale("he", "IL"),
-        //   Locale("hi", "IN"),
-        //   Locale("ja", "JP"),
-        //   Locale("ko", "KR"),
-        //   Locale("es", "MX"),
-        //   Locale("ta", "MY"),
-        //   Locale("en", "NZ"),
-        //   Locale("tl", "PH"),
-        //   Locale("ur", "PK"),
-        //   Locale("pl", "PL"),
-        //   Locale("ru", "RU"),
-        //   Locale("sv", "SE"),
-        //   Locale("zh", "SG"),
-        //   Locale("th", "TH"),
-        //   Locale("tr", "TR"),
-        //   Locale("en", "TW"),
-        //   Locale("es", "VE"),
-        //   Locale("en", "ZA"),
-        //   Locale("en", "US"),
-        //   Locale("es", "AR"),
-        //   Locale("de", "AT"),
-        //   Locale("fr", "BE"),
-        //   Locale("de", "BE"),
-        //   Locale("nl", "BE"),
-        //   Locale("tr", "CY"),
-        //   Locale("et", "EE"),
-        //   Locale("fi", "FI"),
-        //   Locale("fr", "FR"),
-        //   Locale("el", "GR"),
-        //   Locale("es", "AR"),
-        //   Locale("en", "IE"),
-        //   Locale("it", "IT"),
-        //   Locale("es", "AR"),
-        //   Locale("lv", "LV"),
-        //   Locale("lt", "LT"),
-        //   Locale("fr", "LU"),
-        //   Locale("en", "MT"),
-        //   Locale("nl", "NL"),
-        //   Locale("pt", "PT"),
-        //   Locale("sk", "SK"),
-        //   Locale("sl", "SI"),
-        //   Locale("es", "ES"),
-        //   Locale("ar", "AE"), // UAE
-        //   Locale("ar", "SA"), // Saudi Arabia
-        //   Locale("ar", "KW"), // Kuwait
-        //   Locale("uk", "UA"), // Ukraine
-        //   Locale("no", "NO"), // Norway
-        //   Locale("bn", "BD"), // Bangladesh
-        //   Locale("bn", "IN"), // India/Bengali
-        // ],
+        // supportedLocales: AppLocalization.delegate.supportedLocales,
+        supportedLocales: const [
+          Locale('en', 'US'), // English
+          Locale('he', 'IL'), // Hebrew
+          Locale('de', 'DE'), // German
+          Locale('da'), // Danish
+          Locale('bg'), // Bulgarian
+          Locale('es'), // Spanish
+          Locale('hi'), // Hindi
+          Locale('hu'), // Hungarian
+          Locale('hi'), // Hindi
+          Locale('id'), // Indonesian
+          Locale('it'), // Italian
+          Locale('ja'), // Japanese
+          Locale('ko'), // Korean
+          Locale('ms'), // Malay
+          Locale('nl'), // Dutch
+          Locale('pl'), // Polish
+          Locale('pt'), // Portugese
+          Locale('ro'), // Romanian
+          Locale('ru'), // Russian
+          Locale('sl'), // Slovenian
+          Locale('sv'), // Swedish
+          Locale('tl'), // Tagalog
+          Locale('tr'), // Turkish
+          Locale('vi'), // Vietnamese
+          Locale('ca'), // Catalan
+          Locale('uk'), // Ukrainian
+          Locale('no'), // Norwegian
+          Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
+          Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'), // Chinese Traditional
+          Locale('ar'), // Arabic
+          Locale('lv'), // Latvian
+          Locale('bn'), // Bengali
+          // Currency-default requires country included
+          Locale("es", "AR"),
+          Locale("en", "AU"),
+          Locale("pt", "BR"),
+          Locale("en", "CA"),
+          Locale("de", "CH"),
+          Locale("es", "CL"),
+          Locale("zh", "CN"),
+          Locale("cs", "CZ"),
+          Locale("da", "DK"),
+          Locale("fr", "FR"),
+          Locale("en", "GB"),
+          Locale("zh", "HK"),
+          Locale("hu", "HU"),
+          Locale("id", "ID"),
+          Locale("he", "IL"),
+          Locale("hi", "IN"),
+          Locale("ja", "JP"),
+          Locale("ko", "KR"),
+          Locale("es", "MX"),
+          Locale("ta", "MY"),
+          Locale("en", "NZ"),
+          Locale("tl", "PH"),
+          Locale("ur", "PK"),
+          Locale("pl", "PL"),
+          Locale("ru", "RU"),
+          Locale("sv", "SE"),
+          Locale("zh", "SG"),
+          Locale("th", "TH"),
+          Locale("tr", "TR"),
+          Locale("en", "TW"),
+          Locale("es", "VE"),
+          Locale("en", "ZA"),
+          Locale("en", "US"),
+          Locale("es", "AR"),
+          Locale("de", "AT"),
+          Locale("fr", "BE"),
+          Locale("de", "BE"),
+          Locale("nl", "BE"),
+          Locale("tr", "CY"),
+          Locale("et", "EE"),
+          Locale("fi", "FI"),
+          Locale("fr", "FR"),
+          Locale("el", "GR"),
+          Locale("es", "AR"),
+          Locale("en", "IE"),
+          Locale("it", "IT"),
+          Locale("es", "AR"),
+          Locale("lv", "LV"),
+          Locale("lt", "LT"),
+          Locale("fr", "LU"),
+          Locale("en", "MT"),
+          Locale("nl", "NL"),
+          Locale("pt", "PT"),
+          Locale("sk", "SK"),
+          Locale("sl", "SI"),
+          Locale("es", "ES"),
+          Locale("ar", "AE"), // UAE
+          Locale("ar", "SA"), // Saudi Arabia
+          Locale("ar", "KW"), // Kuwait
+          Locale("uk", "UA"), // Ukraine
+          Locale("no", "NO"), // Norway
+          Locale("bn", "BD"), // Bangladesh
+          Locale("bn", "IN"), // India/Bengali
+        ],
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
@@ -354,7 +353,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
 
   bool seedIsEncrypted(String seed) {
     try {
-      String salted = NanoHelpers.bytesToUtf8String(NanoHelpers.hexToBytes(seed.substring(0, 16)));
+      final String salted = NanoHelpers.bytesToUtf8String(NanoHelpers.hexToBytes(seed.substring(0, 16)));
       if (salted == "Salted__") {
         return true;
       }
@@ -370,6 +369,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     // Check if device is rooted or jailbroken, show user a warning informing them of the risks if so
     if (Platform.isIOS || Platform.isAndroid) {
       if (!(await sl.get<SharedPrefsUtil>().getHasSeenRootWarning()) && await FlutterJailbreakDetection.jailbroken) {
+        if (!mounted) return;
         AppDialogs.showConfirmDialog(
             context,
             CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
@@ -397,7 +397,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     }
     try {
       // iOS key store is persistent, so if this is first launch then we will clear the keystore
-      bool firstLaunch = await sl.get<SharedPrefsUtil>().getFirstLaunch();
+      final bool firstLaunch = await sl.get<SharedPrefsUtil>().getFirstLaunch();
       if (firstLaunch) {
         await sl.get<Vault>().deleteAll();
       }
@@ -405,8 +405,8 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       // See if logged in already
       bool isLoggedIn = false;
       bool isEncrypted = false;
-      String? seed = await sl.get<Vault>().getSeed();
-      String? pin = await sl.get<Vault>().getPin();
+      final String? seed = await sl.get<Vault>().getSeed();
+      final String? pin = await sl.get<Vault>().getPin();
       // If we have a seed set, but not a pin - or vice versa
       // Then delete the seed and pin from device and start over.
       // This would mean user did not complete the intro screen completely.
@@ -426,7 +426,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
           Navigator.of(context).pushReplacementNamed('/lock_screen');
         } else {
           await NanoUtil().loginAccount(seed, context);
-          PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+          final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
           Navigator.of(context).pushReplacementNamed('/home', arguments: conversion);
         }
       } else {

@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/model/setting_item.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 
 class AppSettings {
@@ -20,6 +20,7 @@ class AppSettings {
           // splashColor: StateContainer.of(context).curTheme.text15,
         ),
         onPressed: () {
+          // ignore: avoid_dynamic_calls
           onPressed();
         },
         child: Container(
@@ -81,6 +82,7 @@ class AppSettings {
           // splashColor: StateContainer.of(context).curTheme.text15,
         ),
         onPressed: () {
+          // ignore: avoid_dynamic_calls
           onPressed();
         },
         child: Container(
@@ -130,7 +132,7 @@ class AppSettings {
   }
 
   //Settings item without any dropdown option but rather a direct functionality
-  static Widget buildSettingsListItemSingleLine(BuildContext context, String heading, IconData settingIcon, {Function? onPressed, bool disabled = false}) {
+  static Widget buildSettingsListItemSingleLine(BuildContext context, String heading, IconData settingIcon, {Function? onPressed, bool disabled = false, Widget? iconOverride}) {
     return IgnorePointer(
       ignoring: disabled,
       child: TextButton(
@@ -142,6 +144,7 @@ class AppSettings {
         ),
         onPressed: () {
           if (onPressed != null) {
+            // ignore: avoid_dynamic_calls
             onPressed();
           } else {
             return;
@@ -177,7 +180,7 @@ class AppSettings {
                                     ? 4
                                     : 3,
                   ),
-                  child: Icon(
+                  child: iconOverride ?? Icon(
                     settingIcon,
                     color: disabled ? StateContainer.of(context).curTheme.primary45 : StateContainer.of(context).curTheme.primary,
                     size: 24,

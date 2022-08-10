@@ -293,7 +293,8 @@ class AppTransferOverviewSheet {
     AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL, onPoppedCallback: () => _animationOpen = false);
 
     // sleep for a couple seconds to flex the animation:
-    await Future.delayed(const Duration(seconds: 3));
+    await Future<dynamic>.delayed(const Duration(seconds: 5));
+
     // Get accounts from seed
     final List<String> accounts = await getAccountsFromSeed(context, seed);
     try {
@@ -327,6 +328,7 @@ class AppTransferOverviewSheet {
       }
       UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
     }
+    UIUtil.showSnackbar(AppLocalization.of(context).giftProcessSuccess, context);
   }
 
   Future<void> startAutoRefund(BuildContext context, String seed, String refundAddress) async {
@@ -335,7 +337,7 @@ class AppTransferOverviewSheet {
     AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL, onPoppedCallback: () => _animationOpen = false);
 
     // sleep for a couple seconds to flex the animation:
-    await Future.delayed(const Duration(seconds: 3));
+    await Future<dynamic>.delayed(const Duration(seconds: 3));
     // Get accounts from seed
     final List<String> accounts = await getAccountsFromSeed(context, seed);
     try {

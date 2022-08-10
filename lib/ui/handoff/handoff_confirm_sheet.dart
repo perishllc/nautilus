@@ -11,8 +11,13 @@ import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:nautilus_wallet_flutter/model/method.dart';
+import 'package:nautilus_wallet_flutter/model/state_block.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/handoff_reply_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/handoff_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/handoff/handoff_complete_sheet.dart';
@@ -26,6 +31,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/biometrics.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class HandoffConfirmSheet extends StatefulWidget {
@@ -52,10 +58,10 @@ class HandoffConfirmSheet extends StatefulWidget {
   final String paperWalletSeed;
   final String memo;
 
-  _HandoffConfirmSheetState createState() => _HandoffConfirmSheetState();
+  HandoffConfirmSheetState createState() => HandoffConfirmSheetState();
 }
 
-class _HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
+class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
@@ -163,29 +169,96 @@ class _HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                   ),
 
                   // "TO" text
-                  if (widget.link.isEmpty)
-                    Container(
-                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context).to, context),
-                            style: AppStyles.textStyleHeader(context),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20.0, bottom: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          CaseChange.toUpperCase(AppLocalization.of(context).to, context),
+                          style: AppStyles.textStyleHeader(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Address text
+                  Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
+
+                  // "FOR" TEXT
+                  Container(
+                    margin: const EdgeInsets.only(top: 20.0, bottom: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          CaseChange.toUpperCase(AppLocalization.of(context).registerFor, context),
+                          style: AppStyles.textStyleHeader(context),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Container(
+                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    // label text
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: "",
+                        children: [
+                          TextSpan(
+                            text: widget.handoffItem.label,
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          TextSpan(
+                            text: "\n",
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          TextSpan(
+                            text: widget.handoffItem.message,
+                            style: AppStyles.textStyleParagraphPrimary(context).copyWith(fontSize: AppFontSizes.small),
                           ),
                         ],
                       ),
                     ),
-                  // Address text
-                  if (widget.link.isEmpty)
-                    Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.backgroundDarkest,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
+                  ),
+
+                  // Container(
+                  //   margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                  //   padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  //   width: double.infinity,
+                  //   decoration: BoxDecoration(
+                  //     color: StateContainer.of(context).curTheme.backgroundDarkest,
+                  //     borderRadius: BorderRadius.circular(50),
+                  //   ),
+                  //   // message text
+                  //   child: RichText(
+                  //     textAlign: TextAlign.center,
+                  //     text: TextSpan(
+                  //       text: widget.handoffItem.message,
+                  //       style: AppStyles.textStyleParagraphPrimary(context),
+                  //     ),
+                  //   ),
+                  // ),
+                  // RichText(
+                  //   textAlign: TextAlign.center,
+                  //   text: TextSpan(
+                  //     text: widget.handoffItem.message,
+                  //     style: AppStyles.textStyleParagraphPrimary(context),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -203,6 +276,8 @@ class _HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+
+                      if (!mounted) return;
 
                       final String authText = AppLocalization.of(context)
                           .sendAmountConfirm
@@ -269,7 +344,7 @@ class _HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
       // construct the response to the server:
       String? url;
 
-      for (var method in widget.handoffItem.methods) {
+      for (final Method method in widget.handoffItem.methods) {
         if (method.type == "http") {
           url = method.url;
         }
@@ -283,18 +358,23 @@ class _HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
 
       // construct the request:
 
-      // HandoffResponse? = await sl.get<AccountService>.requestHandoff(
-      //     StateContainer.of(context).wallet!.representative,
-      //     StateContainer.of(context).wallet!.frontier,
-      //     widget.handoffItem.amount,
-      //     widget.destination,
-      //     StateContainer.of(context).wallet!.address,
-      //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
-      //     max: widget.maxSend);
+      // print(url);
+      url = "http://node-local.perish.co:5076/handoff";
+      final HandoffResponse resp = await sl.get<AccountService>().requestHandoffHTTP(
+            url,
+            StateContainer.of(context).wallet!.representative,
+            StateContainer.of(context).wallet!.frontier,
+            widget.handoffItem.amount,
+            widget.destination,
+            StateContainer.of(context).wallet!.address,
+            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+          );
 
-      if (!mounted) {
-        return;
-      }
+      if (!mounted) return;
+      // StateContainer.of(context).wallet!.frontier = resp.hash;
+      StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.handoffItem.amount!);
+
+      print(resp);
 
       // Show complete
       String? contactName = widget.contactName;
@@ -304,6 +384,8 @@ class _HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
           contactName = user.getDisplayName();
         }
       }
+
+      if (!mounted) return;
 
       StateContainer.of(context).requestUpdate();
       StateContainer.of(context).updateTXMemos();
@@ -351,7 +433,7 @@ class _HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
     }
   }

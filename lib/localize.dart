@@ -75,4 +75,12 @@ class NonTranslatable {
   static String get privacyUrl {
     return 'https://perish.co/nautilus/privacy.html';
   }
+
+  static String get nanocafe {
+    return 'nanocafe.cc';
+  }
+
+  static String get redeemforme {
+    return 'redeemfor.me';
+  }
 }

@@ -15,15 +15,14 @@ import 'package:nautilus_wallet_flutter/ui/widgets/plainseed_display.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 
 class IntroBackupSeedPage extends StatefulWidget {
+  const IntroBackupSeedPage({this.encryptedSeed}) : super();
   final String? encryptedSeed;
 
-  IntroBackupSeedPage({this.encryptedSeed}) : super();
-
   @override
-  _IntroBackupSeedState createState() => _IntroBackupSeedState();
+  IntroBackupSeedState createState() => IntroBackupSeedState();
 }
 
-class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
+class IntroBackupSeedState extends State<IntroBackupSeedPage> {
   String? _seed;
   List<String>? _mnemonic;
   late bool _showMnemonic;

@@ -434,7 +434,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences":
             MessageLookupByLibrary.simpleMessage("पसंद | प्रेफरेन्सेस"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("गोपनीयता नीति"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("नैनो खरीदें"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "क्यूआर कोड में मान्य गंतव्य नहीं है"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(

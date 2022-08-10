@@ -434,7 +434,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Предпочитания"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Декларация за Поверителност"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Покупка Нано"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR кода не съдържа валидна дестинация "),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(

@@ -91,6 +91,7 @@ class AppIcons {
   static const IconData star = IconData(0xf005, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData home = IconData(0xf015, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData money_bill = IconData(0xf0d6, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData clipboard = IconData(0xf328, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData money_bill_alt = IconData(0xf3d1, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData coins = IconData(0xf51e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData greater_than = IconData(0xf531, fontFamily: _kFontFam, fontPackage: _kFontPkg);

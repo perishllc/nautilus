@@ -7,9 +7,11 @@ import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
@@ -34,11 +36,6 @@ class AppPopupButtonState extends State<AppPopupButton> {
 
   bool? animationOpen;
 
-  void _showMantaAnimation() {
-    animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.MANTA, onPoppedCallback: () => animationOpen = false);
-  }
-
   @override
   void initState() {
     super.initState();
@@ -46,7 +43,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
   }
 
   Future<void> scanAndHandlResult() async {
-    final dynamic? scanResult = await Navigator.pushNamed(context, '/before_scan_screen');
+    final dynamic scanResult = await Navigator.pushNamed(context, '/before_scan_screen');
     if (!mounted) return;
     if (scanResult == null) {
       UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
@@ -120,7 +117,29 @@ class AppPopupButtonState extends State<AppPopupButton> {
             destination: user?.address ?? handoffItem.account,
             contactName: user?.getDisplayName(),
           ));
+    } else if (scanResult is AuthItem) {
+      // handle auth handoff:
+      final AuthItem authItem = scanResult;
+      // See if this address belongs to a contact or username
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
+
+      // Go to confirm sheet:
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          widget: AuthConfirmSheet(
+            authItem: authItem,
+            destination: user?.address ?? authItem.account,
+            contactName: user?.getDisplayName(),
+          ));
     } else {
+      try {
+        setState(() {
+          StateContainer.of(context).initialDeepLink = scanResult as String?;
+        });
+      } catch (error) {
+        // pass
+      }
+
       // something went wrong, show generic error:
       UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
     }
@@ -128,7 +147,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
 
   @override
   Widget build(BuildContext context) {
-    bool disableSend = (StateContainer.of(context).wallet?.watchOnly) ?? false;
+    final bool disableSend = (StateContainer.of(context).wallet?.watchOnly) ?? false;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -153,14 +172,14 @@ class AppPopupButtonState extends State<AppPopupButton> {
         ),
         // Send Button
         GestureDetector(
-          onVerticalDragStart: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.accountBalance > BigInt.zero)
+          onVerticalDragStart: (StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet!.accountBalance > BigInt.zero*/)
               ? (DragStartDetails value) {
                   setState(() {
                     popupColor = StateContainer.of(context).curTheme.primary;
                   });
                 }
               : (DragStartDetails value) {},
-          onVerticalDragEnd: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.accountBalance > BigInt.zero)
+          onVerticalDragEnd: (StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet!.accountBalance > BigInt.zero*/)
               ? (DragEndDetails value) {
                   isSendButtonColorPrimary = true;
                   firstTime = true;
@@ -176,7 +195,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
                   });
                 }
               : (DragEndDetails value) {},
-          onVerticalDragUpdate: (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.accountBalance > BigInt.zero)
+          onVerticalDragUpdate: (StateContainer.of(context).wallet != null /* && StateContainer.of(context).wallet!.accountBalance > BigInt.zero*/)
               ? (DragUpdateDetails dragUpdateDetails) {
                   if (dragUpdateDetails.localPosition.dy < -60) {
                     isScrolledUpEnough = true;

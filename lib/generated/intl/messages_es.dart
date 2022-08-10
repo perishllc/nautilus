@@ -444,7 +444,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferencias"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Política de privacidad"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Comprar Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "El código QR no contiene una dirección válida"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(

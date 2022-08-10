@@ -1,11 +1,20 @@
+import 'dart:async';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class IntroWelcomePage extends StatefulWidget {
   @override
@@ -14,6 +23,31 @@ class IntroWelcomePage extends StatefulWidget {
 
 class IntroWelcomePageState extends State<IntroWelcomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  Timer? timer;
+
+  @override
+  void initState() {
+    super.initState();
+    // post frame callback:
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      bool openedDialog = false;
+      // check every 500ms if there's a giftcard:
+      timer = Timer.periodic(const Duration(milliseconds: 500), (Timer t) async {
+        if (!mounted) return;
+        if (!openedDialog && StateContainer.of(context).giftedWallet) {
+          openedDialog = true;
+          timer?.cancel();
+
+          setState(() {
+            StateContainer.of(context).introSkiped = true;
+          });
+          
+          await skipIntro();
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,5 +145,115 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> skipIntro() async {
+    // set random representative as the default:
+    // TODO: disabled because mynano.ninja is down:
+    // final List<NinjaNode>? nodes = await NinjaAPI.getVerifiedNodes();
+    // if (nodes != null && nodes.isNotEmpty) {
+    //   final Random random = Random();
+    //   final NinjaNode randomNode = nodes[random.nextInt(nodes.length)];
+    //   sl.get<SharedPrefsUtil>().setRepresentative(randomNode.account);
+    //   AppWallet.defaultRepresentative = randomNode.account!;
+    // }
+    await sl.get<DBHelper>().dropAccounts();
+    await sl.get<Vault>().setSeed(NanoSeeds.generateSeed());
+    if (!mounted) return;
+    // Update wallet
+    final String seed = await StateContainer.of(context).getSeed();
+    if (!mounted) return;
+    await NanoUtil().loginAccount(seed, context);
+
+    const String DEFAULT_PIN = "000000";
+
+    await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+    await sl.get<Vault>().writePin(DEFAULT_PIN);
+    final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+    if (!mounted) return;
+    StateContainer.of(context).requestSubscribe();
+    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
+  }
+
+  Future<void> handleBranchGift() async {
+    await showDialog<int>(
+        barrierDismissible: false,
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              AppLocalization.of(context).giftAlert,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text("${AppLocalization.of(context).importGiftIntro}\n\n", style: AppStyles.textStyleParagraph(context)),
+                // RichText(
+                //   textAlign: TextAlign.start,
+                //   text: TextSpan(
+                //     text: "${AppLocalization.of(context).giftFrom}: ",
+                //     style: AppStyles.textStyleParagraph(context),
+                //     children: [
+                //       TextSpan(
+                //         text: "${userOrFromAddress}\n",
+                //         style: AppStyles.textStyleParagraphPrimary(context),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                // if (memo.isNotEmpty)
+                //   Text(
+                //     "${AppLocalization.of(context).giftMessage}: $memo\n",
+                //     style: AppStyles.textStyleParagraph(context),
+                //   ),
+                // RichText(
+                //   textAlign: TextAlign.start,
+                //   text: TextSpan(
+                //     text: "${AppLocalization.of(context).giftAmount}: ",
+                //     style: AppStyles.textStyleParagraph(context),
+                //     children: [
+                //       TextSpan(
+                //         text: getThemeAwareRawAccuracy(context, balance.toString()),
+                //         style: AppStyles.textStyleParagraphPrimary(context),
+                //       ),
+                //       displayCurrencySymbol(
+                //         context,
+                //         AppStyles.textStyleParagraphPrimary(context),
+                //       ),
+                //       TextSpan(
+                //         text: actualAmount,
+                //         style: AppStyles.textStyleParagraphPrimary(context),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+              ],
+            ),
+            actionsAlignment: MainAxisAlignment.end,
+            actions: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, 2);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).close,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              )
+            ],
+          );
+        });
   }
 }

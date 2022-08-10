@@ -175,6 +175,7 @@ class StateContainerState extends State<StateContainer> {
   String giftedWalletMemo = "";
   String giftedWalletFromAddress = "";
   String giftedWalletUUID = "";
+  bool introSkiped = false;
 
   // When wallet is encrypted
   String? encryptedSecret;
@@ -313,7 +314,7 @@ class StateContainerState extends State<StateContainer> {
         await handleMessage(msg, delay_update: delayUpdate);
         // sleep between updates if there are more than 1 to make the UI feel snappier / show the animation:
         if (event.message_list!.length > 1 && delayUpdate) {
-          await Future.delayed(const Duration(milliseconds: 600));
+          await Future<dynamic>.delayed(const Duration(milliseconds: 600));
         }
       }
       if (delayUpdate) {
@@ -585,7 +586,7 @@ class StateContainerState extends State<StateContainer> {
             giftedWalletSeed = data["seed"] as String? ?? "";
             giftedWalletAmountRaw = data["amount_raw"] as String? ?? "";
             giftedWalletAddress = data["address"] as String? ?? "";
-            giftedWalletFromAddress = data["from_address"] as String? ?? data["senderAddress"] as String? ?? ""; // TODO: edit by 0.5.2
+            giftedWalletFromAddress = data["from_address"] as String? ?? "";
             giftedWalletMemo = data["memo"] as String? ?? "";
             giftedWalletUUID = data["gift_uuid"] as String? ?? "";
           });
@@ -995,7 +996,7 @@ class StateContainerState extends State<StateContainer> {
       //     }
       //   }
       //   // Hack that waits for blocks to be confirmed
-      //   await Future.delayed(const Duration(milliseconds: 300));
+      //   await Future<dynamic>.delayed(const Duration(milliseconds: 300));
       // }
       //}
 
@@ -1473,12 +1474,13 @@ class StateContainerState extends State<StateContainer> {
           newTXInfo.amount_raw = amountRaw;
           newTXInfo.from_address = requestingAccount;
           newTXInfo.to_address = toAddress;
+
           // newTXInfo.block = block;// don't overwrite the block
           // newTXInfo.memo = memo;
           newTXInfo.request_time = requestTime;
 
           if (memoEnc != null && memoEnc.isNotEmpty) {
-            final String? memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
+            final String memo = await decryptMessageCurrentAccount(memoEnc, requestingAccount, toAddress);
             if (memo != null) {
               newTXInfo.memo = memo;
             } else {
@@ -1756,7 +1758,7 @@ class StateContainerState extends State<StateContainer> {
     final int? height = data['height'] as int?;
 
     // sleep to prevent animations from overlapping:
-    // await Future.delayed(Duration(seconds: 2));
+    // await Future<dynamic>.delayed(Duration(seconds: 2));
 
     // set acknowledged to true:
     final TXData? txData = await sl.get<DBHelper>().getTXDataByUUID(uuid);

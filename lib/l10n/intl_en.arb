@@ -390,7 +390,7 @@
     "type": "text",
     "description": "copy_seed_btn"
   },
-  "copyWalletAddressToClipboard": "Copy wallet address to clipboard",
+  "copyWalletAddressToClipboard": "Copy address to clipboard",
   "@copyWalletAddressToClipboard": {
     "type": "text",
     "description": "onramp_copy"
@@ -810,7 +810,7 @@
     "type": "text",
     "description": "gift_from"
   },
-  "giftInfo": "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,",
+  "giftInfo": "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance.",
   "@giftInfo": {
     "type": "text",
     "description": "Description for gift card creation"
@@ -895,15 +895,35 @@
     "type": "text",
     "description": "Generic import"
   },
-  "importGift": "The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?",
+  "importGift": "The link you clicked contains some NANO, would you like to import it to this wallet, or refund it to whoever sent it?",
   "@importGift": {
     "type": "text",
     "description": "import_gift"
   },
-  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "importGiftv2": "The link you clicked contains some NANO, would you like to import it to this wallet?",
+  "@importGiftv2": {
+    "type": "text",
+    "description": "import_gift_v2"
+  },
+  "importGiftIntro": "It looks like you clicked a link that contains some NANO, in order to receive these funds we just need for you to finish setting up your wallet.",
+  "@importGiftIntro": {
+    "type": "text",
+    "description": "import_gift_intro"
+  },
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some NANO appears to be empty or has already been redeemed, but you can still see the amount and associated message.",
   "@importGiftEmpty": {
     "type": "text",
     "description": "import_gift_empty"
+  },
+  "introSkippedWarningHeader": "Backup your seed!",
+  "@introSkippedWarningHeader": {
+    "type": "text",
+    "description": "intro_skipped_warning_header"
+  },
+  "introSkippedWarningContent": "We skipped the intro process to save you time, but you should backup your newly created seed immediately.\n\nIf you lose your seed you will lose access to your funds.\n\nAdditionally, your passcode has been set to \"000000\" which you should also change immediately.",
+  "@introSkippedWarningContent": {
+    "type": "text",
+    "description": "intro_skipped_warning_content"
   },
   "importSecretPhrase": "Import Secret Phrase",
   "@importSecretPhrase": {
@@ -1380,10 +1400,20 @@
     "type": "text",
     "description": "settings_privacy_policy"
   },
-  "purchaseNano": "Purchase NANO",
-  "@purchaseNano": {
+  "getNano": "Get NANO",
+  "@getNano": {
     "type": "text",
-    "description": "purchase_nano"
+    "description": "get_nano"
+  },
+  "spendNano": "Spend NANO",
+  "@spendNano": {
+    "type": "text",
+    "description": "spend_nano"
+  },
+  "useNano": "Use NANO",
+  "@useNano": {
+    "type": "text",
+    "description": "use_nano"
   },
   "qrInvalidAddress": "QR code does not contain a valid destination",
   "@qrInvalidAddress": {
@@ -1735,6 +1765,11 @@
     "type": "text",
     "description": "send_generic_error"
   },
+  "authError": "An error occurred while authenticating. Try again later.",
+  "@authError": {
+    "type": "text",
+    "description": "auth_generic_error"
+  },
   "sendFrom": "Send From",
   "@sendFrom": {
     "type": "text",
@@ -1744,6 +1779,11 @@
   "@sending": {
     "type": "text",
     "description": "send_sending"
+  },
+  "authenticating": "Authenticating",
+  "@authenticating": {
+    "type": "text",
+    "description": "auth_authenticating"
   },
   "sendMemoError": "Sending memo with transaction failed, they may not be a Nautilus user.",
   "@sendMemoError": {

@@ -831,10 +831,10 @@ class AppLocalization {
     );
   }
 
-  /// `Copy wallet address to clipboard`
+  /// `Copy address to clipboard`
   String get copyWalletAddressToClipboard {
     return Intl.message(
-      'Copy wallet address to clipboard',
+      'Copy address to clipboard',
       name: 'copyWalletAddressToClipboard',
       desc: 'onramp_copy',
       args: [],
@@ -1673,10 +1673,10 @@ class AppLocalization {
     );
   }
 
-  /// `Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,`
+  /// `Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance.`
   String get giftInfo {
     return Intl.message(
-      'Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,',
+      'Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance.',
       name: 'giftInfo',
       desc: 'Description for gift card creation',
       args: [],
@@ -1843,22 +1843,62 @@ class AppLocalization {
     );
   }
 
-  /// `The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?`
+  /// `The link you clicked contains some NANO, would you like to import it to this wallet, or refund it to whoever sent it?`
   String get importGift {
     return Intl.message(
-      'The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?',
+      'The link you clicked contains some NANO, would you like to import it to this wallet, or refund it to whoever sent it?',
       name: 'importGift',
       desc: 'import_gift',
       args: [],
     );
   }
 
-  /// `Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.`
+  /// `The link you clicked contains some NANO, would you like to import it to this wallet?`
+  String get importGiftv2 {
+    return Intl.message(
+      'The link you clicked contains some NANO, would you like to import it to this wallet?',
+      name: 'importGiftv2',
+      desc: 'import_gift_v2',
+      args: [],
+    );
+  }
+
+  /// `It looks like you clicked a link that contains some NANO, in order to receive these funds we just need for you to finish setting up your wallet.`
+  String get importGiftIntro {
+    return Intl.message(
+      'It looks like you clicked a link that contains some NANO, in order to receive these funds we just need for you to finish setting up your wallet.',
+      name: 'importGiftIntro',
+      desc: 'import_gift_intro',
+      args: [],
+    );
+  }
+
+  /// `Unfortunately the link you clicked that contained some NANO appears to be empty or has already been redeemed, but you can still see the amount and associated message.`
   String get importGiftEmpty {
     return Intl.message(
-      'Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.',
+      'Unfortunately the link you clicked that contained some NANO appears to be empty or has already been redeemed, but you can still see the amount and associated message.',
       name: 'importGiftEmpty',
       desc: 'import_gift_empty',
+      args: [],
+    );
+  }
+
+  /// `Backup your seed!`
+  String get introSkippedWarningHeader {
+    return Intl.message(
+      'Backup your seed!',
+      name: 'introSkippedWarningHeader',
+      desc: 'intro_skipped_warning_header',
+      args: [],
+    );
+  }
+
+  /// `We skipped the intro process to save you time, but you should backup your newly created seed immediately.\n\nIf you lose your seed you will lose access to your funds.\n\nAdditionally, your passcode has been set to "000000" which you should also change immediately.`
+  String get introSkippedWarningContent {
+    return Intl.message(
+      'We skipped the intro process to save you time, but you should backup your newly created seed immediately.\n\nIf you lose your seed you will lose access to your funds.\n\nAdditionally, your passcode has been set to "000000" which you should also change immediately.',
+      name: 'introSkippedWarningContent',
+      desc: 'intro_skipped_warning_content',
       args: [],
     );
   }
@@ -2818,12 +2858,32 @@ class AppLocalization {
     );
   }
 
-  /// `Purchase NANO`
-  String get purchaseNano {
+  /// `Get NANO`
+  String get getNano {
     return Intl.message(
-      'Purchase NANO',
-      name: 'purchaseNano',
-      desc: 'purchase_nano',
+      'Get NANO',
+      name: 'getNano',
+      desc: 'get_nano',
+      args: [],
+    );
+  }
+
+  /// `Spend NANO`
+  String get spendNano {
+    return Intl.message(
+      'Spend NANO',
+      name: 'spendNano',
+      desc: 'spend_nano',
+      args: [],
+    );
+  }
+
+  /// `Use NANO`
+  String get useNano {
+    return Intl.message(
+      'Use NANO',
+      name: 'useNano',
+      desc: 'use_nano',
       args: [],
     );
   }
@@ -3530,6 +3590,16 @@ class AppLocalization {
     );
   }
 
+  /// `An error occurred while authenticating. Try again later.`
+  String get authError {
+    return Intl.message(
+      'An error occurred while authenticating. Try again later.',
+      name: 'authError',
+      desc: 'auth_generic_error',
+      args: [],
+    );
+  }
+
   /// `Send From`
   String get sendFrom {
     return Intl.message(
@@ -3546,6 +3616,16 @@ class AppLocalization {
       'Sending',
       name: 'sending',
       desc: 'send_sending',
+      args: [],
+    );
+  }
+
+  /// `Authenticating`
+  String get authenticating {
+    return Intl.message(
+      'Authenticating',
+      name: 'authenticating',
+      desc: 'auth_authenticating',
       args: [],
     );
   }

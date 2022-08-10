@@ -436,7 +436,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferanser"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Personvernpolicy"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Kjøp Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR-koden inneholder ikke en gyldig adresse"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(

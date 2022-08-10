@@ -6,7 +6,7 @@ description: Nautilus - Fast, Robust & Secure NANO Wallet.
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.5.3+65
+version: 0.5.4+67
 
 environment:
   sdk: '>=2.12.0 < 3.0.0'
@@ -91,7 +91,7 @@ dependencies:
   event_taxi: ^1.0.0
 
   # SVG
-  flutter_svg: ^1.1.0
+  flutter_svg: ^1.1.3
 
   # nfc:
   # flutter_nfc_kit: ^3.3.1
@@ -209,6 +209,7 @@ dependencies:
 
   # localization:
   intl_utils: ^2.7.0
+  confetti: ^0.7.0
 
 flutter_intl:
   enabled: true
@@ -239,6 +240,7 @@ dependency_overrides:
     git:
       url: https://github.com/rshrc/flutter_inappwebview
       ref: master
+  device_info_plus_platform_interface: 2.3.0+1
 
 dev_dependencies:
   flutter_test:
@@ -310,6 +312,10 @@ flutter:
     # - assets/store/reps.json
     # - assets/logo-square.png
     - assets/logo.png
+    - assets/logos/nanocafe.png
+    - assets/logos/redeemforme.png
+    - assets/logos/onramper.png
+    # - assets/logos/redeemforme.svg
     # nyano assets:
     - assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png
     # changelog:

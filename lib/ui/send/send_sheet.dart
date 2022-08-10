@@ -24,9 +24,11 @@ import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
@@ -1073,6 +1075,20 @@ class SendSheetState extends State<SendSheet> {
                             widget: HandoffConfirmSheet(
                               handoffItem: handoffItem,
                               destination: user?.address ?? handoffItem.account,
+                              contactName: user?.getDisplayName(),
+                            ));
+                      } else if (scanResult is AuthItem) {
+                        // handle auth handoff:
+                        final AuthItem authItem = scanResult;
+                        // See if this address belongs to a contact or username
+                        final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
+
+                        // Go to confirm sheet:
+                        Sheets.showAppHeightNineSheet(
+                            context: context,
+                            widget: AuthConfirmSheet(
+                              authItem: authItem,
+                              destination: user?.address ?? authItem.account,
                               contactName: user?.getDisplayName(),
                             ));
                       } else {

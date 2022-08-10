@@ -264,7 +264,7 @@ class AppChangeRepresentativeSheet {
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
     } else if (StateContainer.of(context).wallet!.representative == _rep.account) {
       // sleep for 2 seconds:
-      await Future.delayed(const Duration(seconds: 2));
+      await Future<dynamic>.delayed(const Duration(seconds: 2));
       // representative is the same as the current one:
       if (_animationOpen) {
         Navigator.of(context).pop();
@@ -522,7 +522,7 @@ class AppChangeRepresentativeSheet {
       );
     }));
     if (auth != null && auth) {
-      await Future.delayed(const Duration(milliseconds: 200));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
     }
   }

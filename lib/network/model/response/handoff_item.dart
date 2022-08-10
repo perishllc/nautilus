@@ -24,6 +24,9 @@ class HandoffItem {
   @JsonKey(name: 'label')
   String? label;
 
+  @JsonKey(name: 'message')
+  String? message;
+
   @JsonKey(name: 'exact', defaultValue: true)
   late bool exact;
 

@@ -1,0 +1,17 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1024" width="1280" height="1024">
+	<title>logo_dark-svg</title>
+	<defs>
+		<image width="1080" height="1080" id="img1" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTA4MCIgaGVpZ2h0PSIxMDgwIiB2aWV3Qm94PSIwIDAgMTA4MCAxMDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNNzc3LjM5IDkzOS4yMkg4MzkuNTlMNjc0LjkgNjgwLjEzSDc4Mi42NFY2MzQuNjdINjQ2TDU4OC4yMSA1NDMuNzZINzgyLjYyVjQ5OC4zMUg1ODkuMThMODIxLjQgMTQwSDc2MS45MUw1NDIuMzUgNDc2LjU4TDMyNy4zNCAxNDBIMjYzLjkzTDQ5MyA0OTguMzFIMjk5VjU0My43Nkg0OTVMNDM2LjM4IDYzNC42N0gyOTlWNjgwLjEzSDQwNy4wNkwyNDAgOTM5LjIySDMwMS42OUw0NzAuNTYgNjgwLjEzSDYxMS4wNkw3NzcuMzkgOTM5LjIyWk01MDAuMTggNjM0LjY3TDU0MS4zNCA1NzEuNTNMNTgxLjg4IDYzNC42N0g1MDAuMThaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K"/>
+	</defs>
+	<style>
+		.s0 { fill: #ffffff } 
+		.s1 { fill: #616161 } 
+	</style>
+	<g id="Cup">
+		<path id="steam" class="s0" d="m690.1 114.9v0.5l-0.1 16.8c-0.2 21.6 17.3 39.2 38.9 39.2h17.2c31.2 0 56.5 25.2 56.5 56.4 0 31.2-25.3 56.5-56.5 56.5l-21.5-0.2c-19.3-0.1-34.9 15.4-34.9 34.6v21.6c0 31.1-25.3 56.4-56.5 56.4-31.1 0-56.4-25.3-56.4-56.4 0-31.2 25.3-56.5 56.4-56.5h0.5l16.8 0.2c21.6 0.1 39.2-17.3 39.2-38.9l0.1-38.8c0.2-19.2-15.4-34.9-34.6-34.9h-21.5c-31.2 0-56.5-25.3-56.5-56.5 0-31.1 25.3-56.4 56.5-56.4 31.1 0 56.4 25.3 56.4 56.4z"/>
+		<path id="Layer" fill-rule="evenodd" class="s1" d="m1080.4 473.9c1.4 57.1-44.5 103.7-101.2 103.7-18.3 0-35.3-4.8-50.1-13.2-5.2-3-11.6 0.7-11.8 6.7-0.6 18.2-1.9 44-5.3 61.3-5.8 29.2-17.5 69-41.1 111-25.5 45.5-51.2 69.3-69.3 81.6-12.1 8.1-26.3 12.4-40.9 12.4h-251.4c-14.6 0-28.8-4.3-40.9-12.4-18.1-12.3-43.8-36.1-69.3-81.6-23.6-42-35.3-81.8-41-111-5.8-29.3-5.7-83-5.7-83v-199.7c0-10.2 8.3-18.4 18.4-18.4h528.4c10.2 0 18.4 8.2 18.4 18.4v29c0 7.1 7.6 11.7 13.8 8.4 15.2-8.2 32.8-12.6 51.5-12 53.3 2 96.3 45.6 97.5 98.8zm-44.6 2.5c0-31.3-25.3-56.7-56.6-56.7-31.3 0-56.7 25.4-56.7 56.7 0 31.2 25.4 56.6 56.7 56.6 31.3 0 56.6-25.4 56.6-56.6z"/>
+	</g>
+	<g id="Nano">
+		<use id="nano-symbol-white" href="#img1" transform="matrix(.406,0,0,.406,420,345)"/>
+	</g>
+</svg>

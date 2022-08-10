@@ -437,7 +437,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferenciák"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Adatvédelmi Szabályzat"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Vásárlás Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(

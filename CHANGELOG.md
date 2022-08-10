@@ -1,3 +1,14 @@
+## v0.5.4 - [2022-08-11]
+#### Added
+- New Use NANO section replacing the old purchase NANO button
+- Links to nanocafe.cc and redeemfor.me
+- Block Handoff implementation (WIP)
+- Something special for those who see me at the meetup
+#### Changed
+- Purchase NANO -> get NANO
+- Fastest possible onboarding through gift card links
+- Remove balance requirement to be able to scan QR codes via the swipe up on send gesture
+#### Fixed
 ## v0.5.3 - [2022-08-09]
 #### Added
 - New WIP Perishable theme

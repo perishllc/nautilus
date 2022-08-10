@@ -56,8 +56,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please Enter an Amount"),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Authenticating"),
+        "authError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while authenticating. Try again later."),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("Authentication Method"),
+        "authenticating":
+            MessageLookupByLibrary.simpleMessage("Authenticating"),
         "autoImport": MessageLookupByLibrary.simpleMessage("Auto Import"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Automatically Lock"),
@@ -142,8 +146,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copyLink": MessageLookupByLibrary.simpleMessage("Copy Link"),
         "copyMessage": MessageLookupByLibrary.simpleMessage("Copy Message"),
         "copySeed": MessageLookupByLibrary.simpleMessage("Copy Seed"),
-        "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
-            "Copy wallet address to clipboard"),
+        "copyWalletAddressToClipboard":
+            MessageLookupByLibrary.simpleMessage("Copy address to clipboard"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Create a password."),
         "createGiftCard":
@@ -269,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Funding Banner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Funding"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Get NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("You have a gift!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Empty Gift"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Gift Amount"),
@@ -278,7 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "An error occured while trying to create a gift card, THE GIFT CARD LINK OR SEED HAS BEEN COPIED TO YOUR CLIPBOARD, YOUR FUNDS MAY BE CONTAINED WITHIN IT DEPENDING ON WHAT WENT WRONG."),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Gift From"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
-            "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,"),
+            "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance."),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Gift Message"),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Gift Successfully Received, it may take a moment to appear in your wallet."),
@@ -306,9 +311,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "imSure": MessageLookupByLibrary.simpleMessage("I\'m Sure"),
         "import": MessageLookupByLibrary.simpleMessage("Import"),
         "importGift": MessageLookupByLibrary.simpleMessage(
-            "The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?"),
+            "The link you clicked contains some NANO, would you like to import it to this wallet, or refund it to whoever sent it?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
-            "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+            "Unfortunately the link you clicked that contained some NANO appears to be empty or has already been redeemed, but you can still see the amount and associated message."),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(
+            "It looks like you clicked a link that contains some NANO, in order to receive these funds we just need for you to finish setting up your wallet."),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(
+            "The link you clicked contains some NANO, would you like to import it to this wallet?"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Import Secret Phrase"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -322,6 +331,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("Instantly"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("Insufficient Balance"),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(
+            "We skipped the intro process to save you time, but you should backup your newly created seed immediately.\n\nIf you lose your seed you will lose access to your funds.\n\nAdditionally, your passcode has been set to \"000000\" which you should also change immediately."),
+        "introSkippedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("Backup your seed!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Address entered was invalid"),
         "invalidPassword":
@@ -451,7 +464,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Set a secondary pin for plausible deniability mode.\n\nIf your wallet is unlocked using this secondary pin, your seed will be replaced with a hash of the existing seed. This is a security feature intended to be used in the event you are forced to open your wallet.\n\nThis pin will act like a normal (correct) pin EXCEPT when unlocking your wallet, which is when plausible deniability mode will activate.\n\nYour funds WILL BE LOST upon entering plausible deniability mode if you have not backed up your seed!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferences"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Purchase NANO"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -611,6 +623,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Unopened Warning"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("someone"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Spend NANO"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Split By"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -676,6 +689,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("unpaid"),
         "unread": MessageLookupByLibrary.simpleMessage("unread"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
+        "useNano": MessageLookupByLibrary.simpleMessage("Use NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found!"),
