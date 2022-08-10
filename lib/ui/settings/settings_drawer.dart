@@ -95,6 +95,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   // late Animation<Offset> _spendNanoOffsetFloat;
   late Animation<Offset> _useNanoOffsetFloat;
   late ScrollController _scrollController;
+  double _slideOffset = 0.0;
 
   String versionString = "";
 
@@ -115,8 +116,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
 
   late bool _loadingAccounts;
 
-  bool? _contactsOpen;
-  bool? _blockedOpen;
+  late bool _contactsOpen;
+  late bool _blockedOpen;
   late bool _securityOpen;
   late bool _moreSettingsOpen;
   // late bool _getNanoOpen;
@@ -1191,7 +1192,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   }
 
   Future<bool> _onBackButtonPressed() async {
-    if (_contactsOpen!) {
+    if (_contactsOpen) {
       setState(() {
         _contactsOpen = false;
       });
@@ -1203,7 +1204,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       });
       _securityController.reverse();
       return false;
-    } else if (_blockedOpen!) {
+    } else if (_blockedOpen) {
       setState(() {
         _blockedOpen = false;
       });
@@ -1246,19 +1247,82 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     return WillPopScope(
       onWillPop: _onBackButtonPressed,
       child: ClipRect(
-        child: Stack(
-          children: <Widget>[
-            Container(
-              color: StateContainer.of(context).curTheme.backgroundDark,
-              constraints: const BoxConstraints.expand(),
-            ),
-            buildMainSettings(context),
-            SlideTransition(position: _contactsOffsetFloat, child: ContactsList(_contactsController, _contactsOpen)),
-            SlideTransition(position: _blockedOffsetFloat, child: BlockedList(_blockedController, _blockedOpen)),
-            SlideTransition(position: _securityOffsetFloat, child: buildSecurityMenu(context)),
-            SlideTransition(position: _moreSettingsOffsetFloat, child: buildMoreSettingsMenu(context)),
-            SlideTransition(position: _useNanoOffsetFloat, child: buildUseNanoMenu(context)),
-          ],
+        child: GestureDetector(
+          onHorizontalDragStart: (DragStartDetails details) {
+            if (_moreSettingsOpen || _useNanoOpen || _securityOpen || _blockedOpen || _contactsOpen) {
+              _slideOffset = 1.1;
+            } else {
+              _slideOffset = 0;
+            }
+          },
+          onHorizontalDragUpdate: (DragUpdateDetails details) {
+            if (_moreSettingsOpen) {
+              _moreSettingsController.value = _slideOffset;
+            } else if (_useNanoOpen) {
+              _useNanoController.value = _slideOffset;
+            } else if (_blockedOpen) {
+              _blockedController!.value = _slideOffset;
+            } else if (_securityOpen) {
+              _securityController.value = _slideOffset;
+            } else if (_contactsOpen) {
+              _contactsController!.value = _slideOffset;
+            }
+            _slideOffset -= details.delta.dx / 250;
+          },
+          onHorizontalDragEnd: (DragEndDetails details) {
+            // don't call setstate since it will trigger a re-render and we don't want that
+            final bool forward = _slideOffset > 0.7;
+
+            AnimationController? controller;
+            if (_moreSettingsOpen) {
+              controller = _moreSettingsController;
+            } else if (_useNanoOpen) {
+              controller = _useNanoController;
+            } else if (_blockedOpen) {
+              controller = _blockedController;
+            } else if (_securityOpen) {
+              controller = _securityController;
+            } else if (_contactsOpen) {
+              controller = _contactsController;
+            }
+            
+            // no menus are open, so don't do anything:
+            if (controller == null) {
+              return;
+            }
+
+            if (_slideOffset > 0.7) {
+              controller.forward(from: controller.value);
+            } else {
+              controller.reverse();
+              // we don't call setState since it will trigger a re-render which will cause the animation to be reset before it completes:
+              if (_moreSettingsOpen) {
+                _moreSettingsOpen = false;
+              } else if (_useNanoOpen) {
+                _useNanoOpen = false;
+              } else if (_blockedOpen) {
+                _blockedOpen = false;
+              } else if (_securityOpen) {
+                _securityOpen = false;
+              } else if (_contactsOpen) {
+                _contactsOpen = false;
+              }
+            }
+          },
+          child: Stack(
+            children: <Widget>[
+              Container(
+                color: StateContainer.of(context).curTheme.backgroundDark,
+                constraints: const BoxConstraints.expand(),
+              ),
+              buildMainSettings(context),
+              SlideTransition(position: _contactsOffsetFloat, child: ContactsList(_contactsController, _contactsOpen)),
+              SlideTransition(position: _blockedOffsetFloat, child: BlockedList(_blockedController, _blockedOpen)),
+              SlideTransition(position: _securityOffsetFloat, child: buildSecurityMenu(context)),
+              SlideTransition(position: _moreSettingsOffsetFloat, child: buildMoreSettingsMenu(context)),
+              SlideTransition(position: _useNanoOffsetFloat, child: buildUseNanoMenu(context)),
+            ],
+          ),
         ),
       ),
     );
@@ -1881,8 +1945,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                                   setState(() {
                                     _loadingAccounts = true;
                                   });
-                                  String seed = await StateContainer.of(context).getSeed();
-                                  List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
+                                  final String seed = await StateContainer.of(context).getSeed();
+                                  final List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
                                   setState(() {
                                     _loadingAccounts = false;
                                   });
@@ -2403,7 +2467,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       ),
                     ),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).copyWalletAddressToClipboard, AppIcons.clipboard,
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).copyWalletAddressToClipboard, AppIcons.paste,
                         onPressed: () {
                       Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
                       UIUtil.showSnackbar(AppLocalization.of(context).addressCopied, context, durationMs: 1500);

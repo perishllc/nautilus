@@ -32,10 +32,10 @@ class AppAccountsSheet extends StatefulWidget {
 
   final List<Account> accounts;
 
-  _AppAccountsSheetState createState() => _AppAccountsSheetState();
+  AppAccountsSheetState createState() => AppAccountsSheetState();
 }
 
-class _AppAccountsSheetState extends State<AppAccountsSheet> {
+class AppAccountsSheetState extends State<AppAccountsSheet> {
   static const int MAX_ACCOUNTS = 50;
   final GlobalKey expandedKey = GlobalKey();
 
@@ -302,77 +302,16 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
               const SizedBox(
                 height: 15,
               ),
-              //A row with Add Account button
-              if (widget.accounts.length < MAX_ACCOUNTS)
-                Row(
-                  children: <Widget>[
-                    AppButton.buildAppButton(
-                      context,
-                      AppButtonType.PRIMARY,
-                      AppLocalization.of(context).addAccount,
-                      Dimens.BUTTON_COMPACT_LEFT_DIMENS,
-                      disabled: _addingAccount,
-                      onPressed: () {
-                        if (!_addingAccount) {
-                          setState(() {
-                            _addingAccount = true;
-                          });
-                          StateContainer.of(context).getSeed().then((String seed) {
-                            sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context).defaultNewAccountName).then((Account? newAccount) {
-                              if (newAccount == null) {
-                                sl.get<Logger>().d("Error adding account: account was null");
-                                return;
-                              }
-                              _requestBalances(context, [newAccount]);
-                              StateContainer.of(context).updateRecentlyUsedAccounts();
-                              widget.accounts.add(newAccount);
-                              setState(() {
-                                _addingAccount = false;
-                                widget.accounts.sort((Account a, Account b) => a.index!.compareTo(b.index!));
-                                // Scroll if list is full
-                                if (expandedKey.currentContext != null) {
-                                  final RenderBox box = expandedKey.currentContext!.findRenderObject() as RenderBox;
-                                  if (widget.accounts.length * 72.0 >= box.size.height) {
-                                    _scrollController.animateTo(
-                                      newAccount.index! * 72.0 > _scrollController.position.maxScrollExtent
-                                          ? _scrollController.position.maxScrollExtent + 72.0
-                                          : newAccount.index! * 72.0,
-                                      curve: Curves.easeOut,
-                                      duration: const Duration(milliseconds: 200),
-                                    );
-                                  }
-                                }
-                              });
-                            });
-                          });
-                        }
-                      },
-                    ),
-                    AppButton.buildAppButton(
-                      context,
-                      AppButtonType.PRIMARY,
-                      AppLocalization.of(context).addWatchOnlyAccount,
-                      Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
-                      onPressed: () {
-                        Sheets.showAppHeightEightSheet(context: context, widget: const AddWatchOnlyAccountSheet());
-                      },
-                    ),
-                  ],
-                ),
-
               Row(
                 children: [
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY,
                     AppLocalization.of(context).hideEmptyAccounts,
-                    Dimens.BUTTON_BOTTOM_DIMENS,
+                    Dimens.BUTTON_COMPACT_LEFT_DIMENS,
                     onPressed: () async {
-                      AppDialogs.showConfirmDialog(
-                          context,
-                          AppLocalization.of(context).hideAccountsHeader,
-                          AppLocalization.of(context).hideAccountsConfirmation,
-                          CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
+                      AppDialogs.showConfirmDialog(context, AppLocalization.of(context).hideAccountsHeader,
+                          AppLocalization.of(context).hideAccountsConfirmation, CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
                         await Future<dynamic>.delayed(const Duration(milliseconds: 250));
                         final List<Account> accountsToRemove = <Account>[];
                         for (final Account account in widget.accounts) {
@@ -393,9 +332,67 @@ class _AppAccountsSheetState extends State<AppAccountsSheet> {
                         }
                       }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
                     },
-                  )
+                  ),
+                  AppButton.buildAppButton(
+                    context,
+                    AppButtonType.PRIMARY,
+                    AppLocalization.of(context).addWatchOnlyAccount,
+                    Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                    onPressed: () {
+                      Sheets.showAppHeightEightSheet(context: context, widget: const AddWatchOnlyAccountSheet());
+                    },
+                  ),
                 ],
               ),
+              //A row with Add Account button
+              if (widget.accounts.length < MAX_ACCOUNTS)
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(
+                      context,
+                      AppButtonType.PRIMARY,
+                      AppLocalization.of(context).addAccount,
+                      Dimens.BUTTON_BOTTOM_DIMENS,
+                      disabled: _addingAccount,
+                      onPressed: () {
+                        if (!_addingAccount) {
+                          setState(() {
+                            _addingAccount = true;
+                          });
+                          StateContainer.of(context).getSeed().then((String seed) {
+                            sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context).defaultNewAccountName).then((Account? newAccount) {
+                              if (newAccount == null) {
+                                sl.get<Logger>().d("Error adding account: account was null");
+                                return;
+                              }
+                              _requestBalances(context, [newAccount]);
+                              StateContainer.of(context).updateRecentlyUsedAccounts();
+                              widget.accounts.add(newAccount);
+                              setState(() {
+                                _addingAccount = false;
+                                widget.accounts.sort((Account a, Account b) => a.index!.compareTo(b.index!));
+                                // Scroll if list is full
+                                if (expandedKey.currentContext != null) {
+                                  final RenderBox? box = expandedKey.currentContext!.findRenderObject() as RenderBox?;
+                                  if (box == null) return;
+                                  if (widget.accounts.length * 72.0 >= box.size.height) {
+                                    _scrollController.animateTo(
+                                      newAccount.index! * 72.0 > _scrollController.position.maxScrollExtent
+                                          ? _scrollController.position.maxScrollExtent + 72.0
+                                          : newAccount.index! * 72.0,
+                                      curve: Curves.easeOut,
+                                      duration: const Duration(milliseconds: 200),
+                                    );
+                                  }
+                                }
+                              });
+                            });
+                          });
+                        }
+                      },
+                    ),
+                  ],
+                ),
               //A row with Close button
               Row(
                 children: <Widget>[
