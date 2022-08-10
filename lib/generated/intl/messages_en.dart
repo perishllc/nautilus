@@ -293,6 +293,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Go to QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Got It!"),
         "handoff": MessageLookupByLibrary.simpleMessage("handoff"),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(
+            "Something went wrong while trying to handoff block!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "A supported handoff method couldn\'t be found!"),
         "hide": MessageLookupByLibrary.simpleMessage("Hide"),

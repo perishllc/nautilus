@@ -359,8 +359,9 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
       // construct the request:
 
       // print(url);
-      url = "http://node-local.perish.co:5076/handoff";
-      final HandoffResponse resp = await sl.get<AccountService>().requestHandoffHTTP(
+      // debug:
+      // url = "http://node-local.perish.co:5076/handoff";
+      final HandoffResponse handoffResponse = await sl.get<AccountService>().requestHandoffHTTP(
             url,
             StateContainer.of(context).wallet!.representative,
             StateContainer.of(context).wallet!.frontier,
@@ -374,7 +375,10 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
       // StateContainer.of(context).wallet!.frontier = resp.hash;
       StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.handoffItem.amount!);
 
-      print(resp);
+      if (handoffResponse.status != 0) {
+        poppedError = handoffResponse.message;
+        throw Exception("Handoff failed");
+      }
 
       // Show complete
       String? contactName = widget.contactName;

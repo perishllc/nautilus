@@ -1216,19 +1216,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       });
       _moreSettingsController.reverse();
       return false;
-      /*} else if (_getNanoOpen) {
-      setState(() {
-        _getNanoOpen = false;
-      });
-      _getNanoController.reverse();
-      return false;
-    } else if (_spendNanoOpen) {
-      setState(() {
-        _spendNanoOpen = false;
-      });
-      _spendNanoController.reverse();
-      return false;
-    */
     } else if (_useNanoOpen) {
       setState(() {
         _useNanoOpen = false;

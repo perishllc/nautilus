@@ -855,6 +855,11 @@
     "type": "text",
     "description": "handoff_method_not_found"
   },
+  "handoffFailed": "Something went wrong while trying to handoff block!",
+  "@handoffFailed": {
+    "type": "text",
+    "description": "handoff_failed"
+  },
   "hide": "Hide",
   "@hide": {
     "type": "text",

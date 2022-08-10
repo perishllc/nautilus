@@ -1763,6 +1763,16 @@ class AppLocalization {
     );
   }
 
+  /// `Something went wrong while trying to handoff block!`
+  String get handoffFailed {
+    return Intl.message(
+      'Something went wrong while trying to handoff block!',
+      name: 'handoffFailed',
+      desc: 'handoff_failed',
+      args: [],
+    );
+  }
+
   /// `Hide`
   String get hide {
     return Intl.message(

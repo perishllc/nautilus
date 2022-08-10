@@ -143,12 +143,12 @@ class AccountService {
     _isConnecting = true;
 
     // DEV SERVER:
-    if (kDebugMode) {
-      _HTTP_PROTO = "http://";
-      _WS_PROTO = "ws://";
-      _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
-      log.d("CONNECTED TO DEV SERVER");
-    }
+    // if (kDebugMode) {
+    //   _HTTP_PROTO = "http://";
+    //   _WS_PROTO = "ws://";
+    //   _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
+    //   log.d("CONNECTED TO DEV SERVER");
+    // }
 
     // ENS:
     const String rpcUrl = 'https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}';
@@ -826,7 +826,7 @@ class AccountService {
       final ErrorResponse err = ErrorResponse.fromJson(decoded as Map<String, dynamic>);
       throw Exception("Received error ${err.error} ${err.details}");
     }
-    final HandoffResponse item = HandoffResponse.fromJson(response as Map<String, dynamic>);
+    final HandoffResponse item = HandoffResponse.fromJson(decoded as Map<String, dynamic>);
     return item;
   }
 
