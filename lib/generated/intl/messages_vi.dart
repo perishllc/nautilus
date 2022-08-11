@@ -23,8 +23,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
-        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
-        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameHint": MessageLookupByLibrary.simpleMessage("Nhập tên"),
+        "accountNameMissing":
+            MessageLookupByLibrary.simpleMessage("Chọn một tên tài khoản"),
         "accounts": MessageLookupByLibrary.simpleMessage("Các tài khoản"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn rằng đã sao lưu cụm từ bí mật hoặc hạt giống của bạn?"),
@@ -34,10 +35,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("Chặn người dùng"),
         "addContact": MessageLookupByLibrary.simpleMessage("Thêm liên hệ"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Thêm yêu thích"),
-        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "address": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccount":
+            MessageLookupByLibrary.simpleMessage("Thêm tài khoản chỉ xem"),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
+            "Lỗi khi thêm Tài khoản Chỉ Xem: Tài khoản không có giá trị"),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
+            "Đã tạo thành công tài khoản chỉ xem!"),
+        "address": MessageLookupByLibrary.simpleMessage("Địa chỉ nhà"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Đã sao chép địa chỉ"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Nhập địa chỉ"),
@@ -47,15 +51,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vui lòng nhập tên người dùng hoặc địa chỉ"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Chia sẻ địa chỉ"),
         "aliases": MessageLookupByLibrary.simpleMessage("Bí danh"),
-        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
+            "Số tiền Chia tách không được lớn hơn số dư quà tặng"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Hãy nhập lượng tiền"),
         "asked": MessageLookupByLibrary.simpleMessage("Đã hỏi"),
-        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
-        "authError": MessageLookupByLibrary.simpleMessage(""),
+        "authConfirm": MessageLookupByLibrary.simpleMessage("Xác thực"),
+        "authError": MessageLookupByLibrary.simpleMessage(
+            "Đã xảy ra lỗi khi xác thực. Thử lại sau."),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("Phương thức xác nhận"),
-        "authenticating": MessageLookupByLibrary.simpleMessage(""),
+        "authenticating": MessageLookupByLibrary.simpleMessage("Xác thực"),
         "autoImport": MessageLookupByLibrary.simpleMessage("Tự động nhập"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Mở khoá tự động"),
@@ -94,8 +100,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chọn một Nick Name"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("% 1 đã được bỏ chặn!"),
-        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
-        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi dường như không thể truy cập API Chi nhánh, điều này thường là do một số loại sự cố mạng hoặc VPN chặn kết nối.\n\n Bạn vẫn có thể sử dụng ứng dụng như bình thường, tuy nhiên, việc gửi và nhận thẻ quà tặng có thể không hoạt động."),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
+            "Lỗi: không thể truy cập API chi nhánh"),
+        "branchConnectErrorTitle":
+            MessageLookupByLibrary.simpleMessage("Cảnh báo kết nối"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Đổi loại tiền pháp định"),
@@ -115,10 +125,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
-        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "confirmPinHint":
+            MessageLookupByLibrary.simpleMessage("Xác nhận mã pin"),
         "connectingHeader":
             MessageLookupByLibrary.simpleMessage("Đang kết nối"),
-        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarning":
+            MessageLookupByLibrary.simpleMessage("Không thể kết nối"),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi dường như không thể kết nối với chương trình phụ trợ, đây có thể chỉ là kết nối của bạn hoặc nếu sự cố vẫn tiếp diễn, chương trình phụ trợ có thể ngừng hoạt động để bảo trì hoặc thậm chí là ngừng hoạt động. Nếu đã hơn một giờ mà bạn vẫn gặp sự cố, vui lòng gửi báo cáo trong # bug-report trong máy chủ bất hòa @ chat.perish.co"),
+        "connectionWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi dường như không thể kết nối với chương trình phụ trợ, đây có thể chỉ là kết nối của bạn hoặc nếu sự cố vẫn tiếp diễn, chương trình phụ trợ có thể ngừng hoạt động để bảo trì hoặc thậm chí là ngừng hoạt động. Nếu đã hơn một giờ mà bạn vẫn gặp sự cố, vui lòng gửi báo cáo trong # bug-report trong máy chủ bất hòa @ chat.perish.co"),
+        "connectionWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi dường như không thể kết nối với chương trình phụ trợ"),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("Đã thêm %1 vào danh bạ."),
         "contactExists":
@@ -140,7 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("Sao chép"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Sao chép địa chỉ"),
         "copyLink": MessageLookupByLibrary.simpleMessage("Sao chép liên kết"),
-        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
+        "copyMessage":
+            MessageLookupByLibrary.simpleMessage("Sao chép tin nhắn"),
         "copySeed": MessageLookupByLibrary.simpleMessage("Sao chép hạt giống"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Sao chép địa chỉ ví vào clipboard"),
@@ -158,9 +177,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mật khẩu là tùy chọn không bắt buộc, và ví của bạn sẽ được bảo vệ với mã PIN hoặc sinh trắc học. "),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Tạo"),
-        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "createPinHint": MessageLookupByLibrary.simpleMessage("Tạo ghim"),
         "createQR": MessageLookupByLibrary.simpleMessage("Tạo mã QR"),
-        "created": MessageLookupByLibrary.simpleMessage(""),
+        "created": MessageLookupByLibrary.simpleMessage("tạo"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Tạo thẻ quà tặng"),
         "currency": MessageLookupByLibrary.simpleMessage("Tiền tệ"),
@@ -174,7 +193,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "decryptionError": MessageLookupByLibrary.simpleMessage("Lỗi giải mã!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Tài khoản chính"),
-        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
+            "Kiểm tra Nautilus! Tôi đã gửi cho bạn một số nano với liên kết này:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Tài khoản %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Xoá"),
@@ -189,8 +209,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Tên miền không hợp lệ"),
-        "donateButton": MessageLookupByLibrary.simpleMessage(""),
-        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
+        "donateButton": MessageLookupByLibrary.simpleMessage("Quyên tặng"),
+        "donateToSupport": MessageLookupByLibrary.simpleMessage("Hỗ trợ dự án"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Đặt mật khẩu ví không thành công"),
@@ -201,12 +221,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Nhập tin nhắn"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Nhập mật khẩu"),
-        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
+        "enterSplitAmount":
+            MessageLookupByLibrary.simpleMessage("Nhập số tiền chia nhỏ"),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage(
             "Nhập Người dùng hoặc Địa chỉ"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Nhập tên người dùng"),
-        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
+            "Đã xảy ra lỗi khi xử lý thẻ quà tặng này, thẻ này có thể không hợp lệ, hết hạn hoặc trống."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("Từ ai đó"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
@@ -263,48 +285,58 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xác minh để xem hạt giống."),
         "from": MessageLookupByLibrary.simpleMessage("Từ"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("hoàn thành"),
-        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
-        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
-        "getNano": MessageLookupByLibrary.simpleMessage(""),
+        "fundingBannerHeader":
+            MessageLookupByLibrary.simpleMessage("Biểu ngữ tài trợ"),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage("Kinh phí"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Nhận NANO"),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("Anh có một món quà!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Quà Tặng Rỗng"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Số tiền quà tặng"),
-        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
-        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(
+            "Đã xảy ra lỗi khi cố gắng tạo liên kết thẻ quà tặng"),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
+            "Đã xảy ra lỗi khi cố gắng tạo thẻ quà tặng, LIÊN KẾT THẺ QUÀ TẶNG HOẶC GIỐNG ĐÃ ĐƯỢC SAO CHÉP VÀO BẢNG ĐIỂM CỦA BẠN, QUỸ CỦA BẠN CÓ THỂ ĐƯỢC CHỨA TRONG VẬY PHỤ THUỘC VÀO ĐIỀU GÌ SAI."),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Quà Tặng Từ"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Nạp thẻ quà tặng kỹ thuật số với NANO! Đặt số tiền và một tin nhắn tùy chọn cho người nhận để xem khi họ mở nó!\n\nSau khi tạo, bạn sẽ nhận được một liên kết mà bạn có thể gửi cho bất kỳ ai, khi mở sẽ tự động phân phối tiền cho người nhận sau khi cài đặt Nautilus!\n\nNếu người nhận đã là người dùng Nautilus, họ sẽ nhận được lời nhắc để chuyển tiền vào tài khoản của họ khi mở liên kết"),
         "giftMessage":
             MessageLookupByLibrary.simpleMessage("Tin nhắn quà tặng"),
-        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
+            "Quà đã nhận thành công, có thể mất một lúc để xuất hiện trong ví của bạn."),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Quay lại"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Chuyển đến QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Đã hiểu!"),
-        "handoff": MessageLookupByLibrary.simpleMessage(""),
-        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
-        "handoffSupportedMethodNotFound":
-            MessageLookupByLibrary.simpleMessage(""),
+        "handoff": MessageLookupByLibrary.simpleMessage("ra tay"),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(
+            "Đã xảy ra sự cố khi cố gắng xử lý khối!"),
+        "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
+            "Không thể tìm thấy phương pháp chuyển giao được hỗ trợ!"),
         "hide": MessageLookupByLibrary.simpleMessage("Ẩn"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Ẩn tài khoản?"),
-        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
-        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
-        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn ẩn các tài khoản trống không?\n\nThao tác này sẽ ẩn tất cả các tài khoản có số dư chính xác bằng 0 (không bao gồm địa chỉ chỉ xem và tài khoản chính của bạn), nhưng bạn luôn có thể thêm lại chúng sau này bằng cách nhấn vào nút \"Thêm tài khoản\""),
+        "hideAccountsHeader":
+            MessageLookupByLibrary.simpleMessage("Ẩn tài khoản?"),
+        "hideEmptyAccounts":
+            MessageLookupByLibrary.simpleMessage("Ẩn tài khoản trống"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Tôi hiểu những rủi ro"),
         "ignore": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
-        "imSure": MessageLookupByLibrary.simpleMessage(""),
+        "imSure": MessageLookupByLibrary.simpleMessage("Tôi chắc chắn"),
         "import": MessageLookupByLibrary.simpleMessage("Nhập vào"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "Liên kết bạn nhấp vào có chứa một số nano, bạn có muốn nhập nó vào ví này, hoặc hoàn lại cho bất kỳ ai đã gửi nó?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
-        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
-        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(
+            "Có vẻ như bạn đã nhấp vào một liên kết có chứa một số NANO, để nhận được những khoản tiền này, chúng tôi chỉ cần bạn hoàn tất việc thiết lập ví của mình."),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(
+            "Liên kết bạn đã nhấp vào chứa một số NANO, bạn có muốn nhập nó vào ví này không?"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Nhập cụm từ bí mật"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -318,14 +350,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("Ngay tức thì"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("Số dư không đủ"),
-        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
-        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi đã bỏ qua quá trình giới thiệu để tiết kiệm thời gian cho bạn, nhưng bạn nên sao lưu hạt giống mới tạo của mình ngay lập tức.\n\nNếu bạn mất hạt giống, bạn sẽ mất quyền truy cập vào tiền của mình.\n\nNgoài ra, mật mã của bạn đã được đặt thành \"000000\", bạn cũng nên thay đổi ngay lập tức."),
+        "introSkippedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("Sao lưu hạt giống của bạn!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Địa chỉ đã nhập không hợp lệ"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Mật khẩu không hợp lệ"),
-        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
-        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
+        "invalidPin": MessageLookupByLibrary.simpleMessage("Ghim không hợp lệ"),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(
+            "Do các nguyên tắc và hạn chế của iOS App Store, chúng tôi không thể liên kết bạn với trang quyên góp của chúng tôi. Nếu bạn muốn hỗ trợ dự án, hãy cân nhắc gửi đến địa chỉ của nút nautilus."),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "linkCopied":
             MessageLookupByLibrary.simpleMessage("Liên kết được sao chép"),
@@ -354,7 +389,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Ghi nhớ gửi lại! Nếu vẫn chưa được xác nhận, thiết bị của người nhận có thể đang ngoại tuyến."),
-        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
+        "messageCopied":
+            MessageLookupByLibrary.simpleMessage("Đã sao chép tin nhắn"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Tin nhắn"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Khoản gửi tối thiểu là %1 Nano"),
@@ -364,12 +400,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cụm từ ghi nhớ"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Cụm từ bí mật chỉ có thể gồm 24 từ"),
-        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
+        "monthlyServerCosts":
+            MessageLookupByLibrary.simpleMessage("Chi phí máy chủ hàng tháng"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
-        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
+        "moreSettings": MessageLookupByLibrary.simpleMessage("Cài đặt khác"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
-        "nearby": MessageLookupByLibrary.simpleMessage(""),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage("Ví Nautilus"),
+        "nearby": MessageLookupByLibrary.simpleMessage("Lân cận"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Tính năng này yêu cầu bạn phải có lịch sử giao dịch dài hơn để ngăn chặn thư rác.\n\nNgoài ra, bạn có thể hiển thị mã QR để ai đó quét."),
         "needVerificationAlertHeader":
@@ -424,7 +461,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "payments": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Chọn từ danh sách"),
-        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
+        "pinBlank":
+            MessageLookupByLibrary.simpleMessage("Ghim không được để trống"),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("Mã PIN không khớp"),
         "pinConfirmTitle":
@@ -439,11 +477,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nhập mã PIN để thay đổi đại diện."),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Nhập mã PIN để sao lưu hạt giống"),
-        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleDeniabilityParagraph":
-            MessageLookupByLibrary.simpleMessage(""),
-        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "pinsDontMatch":
+            MessageLookupByLibrary.simpleMessage("Ghim không khớp"),
+        "plausibleDeniabilityParagraph": MessageLookupByLibrary.simpleMessage(
+            "Đây KHÔNG phải là mã pin bạn đã sử dụng để tạo ví của mình. Nhấn nút thông tin để biết thêm thông tin."),
+        "plausibleInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Thông tin từ chối hợp lý"),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Đặt chân phụ cho chế độ từ chối hợp lý.\n\nNếu ví của bạn được mở khóa bằng cách sử dụng mã pin phụ này, hạt giống của bạn sẽ được thay thế bằng một mã băm của hạt giống hiện có. Đây là một tính năng bảo mật nhằm mục đích sử dụng trong trường hợp bạn buộc phải mở ví của mình.\n\nGhim này sẽ hoạt động giống như một ghim bình thường (đúng) NGOẠI TRỪ khi mở khóa ví của bạn, đó là khi chế độ từ chối hợp lý sẽ kích hoạt.\n\nTiền của bạn SẼ BỊ MẤT khi vào chế độ từ chối hợp lý nếu bạn chưa sao lưu hạt giống của mình!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Tuỳ chọn"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Chính sách bảo mật"),
@@ -502,15 +543,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Yêu cầu% 1"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Yêu cầu thất bại: Người dùng này dường như không có Nautilus cài đặt hoặc đã tắt thông báo."),
-        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
+        "requestFrom": MessageLookupByLibrary.simpleMessage("Yêu cầu từ"),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("Yêu cầu thanh toán"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "Lỗi gửi yêu cầu thanh toán, thiết bị của người nhận có thể ngoại tuyến hoặc không khả dụng."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Yêu cầu gửi lại! Nếu vẫn chưa được xác nhận, thiết bị của người nhận có thể đang ngoại tuyến."),
-        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
-        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Yêu cầu thanh toán, với tin nhắn được mã hóa từ đầu đến cuối!\n\nYêu cầu thanh toán, bản ghi nhớ và tin nhắn sẽ chỉ có những người dùng nautilus khác mới có thể nhận được, nhưng bạn có thể sử dụng chúng để lưu trữ hồ sơ của riêng mình ngay cả khi người nhận không sử dụng nautilus."),
+        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Yêu cầu thông tin trang tính"),
         "requested": MessageLookupByLibrary.simpleMessage("Đã yêu cầu"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("Yêu cầu từ"),
         "requesting": MessageLookupByLibrary.simpleMessage("Yêu cầu"),
@@ -571,16 +614,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Gửi hoặc yêu cầu thanh toán, với các tin nhắn được mã hóa End to End!\n\nYêu cầu thanh toán, bản ghi nhớ và tin nhắn sẽ chỉ được chấp nhận bởi những người dùng nautilus khác.\n\nBạn không cần phải có tên người dùng để gửi hoặc nhận yêu cầu thanh toán, và bạn có thể sử dụng chúng để lưu giữ hồ sơ của riêng bạn ngay cả khi họ không sử dụng nautilus."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Gửi thông tin trang tính"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage("Gửi qua NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Đang gửi"),
         "sent": MessageLookupByLibrary.simpleMessage("Đã gửi"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Đã gửi tới"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Đặt mật khẩu"),
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Đã đặt mật khẩu thành công"),
-        "setPin": MessageLookupByLibrary.simpleMessage(""),
-        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPin": MessageLookupByLibrary.simpleMessage("Đặt mã pin"),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(
+            "Mã pin đã được đặt thành công"),
+        "setPlausibleDeniabilityPin":
+            MessageLookupByLibrary.simpleMessage("Đặt ghim hợp lý"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Đặt mật khẩu ví"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -590,32 +635,39 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Nhập từ ví giấy"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Chia sẻ liên kết"),
-        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
+        "shareMessage":
+            MessageLookupByLibrary.simpleMessage("Chia sẻ tin nhắn"),
         "shareNautilus":
             MessageLookupByLibrary.simpleMessage("Chia sẻ Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Thử ngay Nautilus! Ví Nano di động hàng đầu!"),
-        "show": MessageLookupByLibrary.simpleMessage(""),
-        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
+        "show": MessageLookupByLibrary.simpleMessage("Trình diễn"),
+        "showAccountQR":
+            MessageLookupByLibrary.simpleMessage("Hiển thị mã QR tài khoản"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Hiển thị danh bạ"),
-        "showFunding": MessageLookupByLibrary.simpleMessage(""),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
-        "showQR": MessageLookupByLibrary.simpleMessage(""),
-        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
+        "showFunding":
+            MessageLookupByLibrary.simpleMessage("Hiển thị biểu ngữ tài trợ"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("Hiển thị liên kết QR"),
+        "showQR": MessageLookupByLibrary.simpleMessage("Hiển thị mã QR"),
+        "showUnopenedWarning":
+            MessageLookupByLibrary.simpleMessage("Cảnh báo chưa mở"),
         "simplex": MessageLookupByLibrary.simpleMessage("Đơn giản"),
-        "someone": MessageLookupByLibrary.simpleMessage(""),
-        "spendNano": MessageLookupByLibrary.simpleMessage(""),
-        "splitBy": MessageLookupByLibrary.simpleMessage(""),
+        "someone": MessageLookupByLibrary.simpleMessage("người nào"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Tiêu NANO"),
+        "splitBy": MessageLookupByLibrary.simpleMessage("Chia theo"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
-        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
+        "supportDevelopment":
+            MessageLookupByLibrary.simpleMessage("Trợ giúp Hỗ trợ Phát triển"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Hỗ trợ Nhà phát triển"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Chuyển sang hạt giống"),
         "systemDefault":
             MessageLookupByLibrary.simpleMessage("Mặc định hệ thống"),
-        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(
+            "Nhấn vào tin nhắn để chỉnh sửa"),
         "tapToHide": MessageLookupByLibrary.simpleMessage("Nhấn để ẩn"),
         "tapToReveal": MessageLookupByLibrary.simpleMessage("Nhấn để hiển thị"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Chủ đề"),
@@ -659,16 +711,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xác nhận mở khoá Kalium"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "Nhập mã PIN để mở khoá Nautilus"),
-        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("Hiển thị cảnh báo chưa mở"),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(
+            "Hiển thị cảnh báo khi gửi tiền vào một tài khoản chưa mở, điều này rất hữu ích vì hầu hết các địa chỉ bạn gửi đến sẽ có số dư và việc gửi đến một địa chỉ mới có thể do lỗi đánh máy."),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc đây là địa chỉ phù hợp?\nTài khoản này dường như chưa được mở\n\nBạn có thể tắt cảnh báo này trong ngăn cài đặt trong \"Cảnh báo chưa mở\""),
         "unopenedWarningWarningHeader":
-            MessageLookupByLibrary.simpleMessage(""),
+            MessageLookupByLibrary.simpleMessage("Tài khoản chưa được mở"),
         "unpaid": MessageLookupByLibrary.simpleMessage("không trả tiền"),
         "unread": MessageLookupByLibrary.simpleMessage("chưa đọc"),
         "uptime": MessageLookupByLibrary.simpleMessage(
             "Thời gian hoạt động (uptime)"),
-        "useNano": MessageLookupByLibrary.simpleMessage(""),
+        "useNano": MessageLookupByLibrary.simpleMessage("Sử dụng NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound":
@@ -689,17 +744,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tên người dùng không có sẵn"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "Tên người dùng Nautilus là một dịch vụ tập trung được cung cấp bởi Nano.to"),
-        "using": MessageLookupByLibrary.simpleMessage(""),
+        "using": MessageLookupByLibrary.simpleMessage("Sử dụng"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Xem chi tiết"),
-        "viewTX": MessageLookupByLibrary.simpleMessage(""),
+        "viewTX": MessageLookupByLibrary.simpleMessage("Xem giao dịch"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Lượng bỏ phiếu"),
         "warning": MessageLookupByLibrary.simpleMessage("CẢNH BÁO!"),
-        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
+        "watchAccountExists":
+            MessageLookupByLibrary.simpleMessage("Tài khoản đã được thêm vào!"),
+        "watchOnlyAccount":
+            MessageLookupByLibrary.simpleMessage("Tài khoản Chỉ Xem"),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
+            "Tính năng gửi bị tắt trên các địa chỉ chỉ xem"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Chào mừng đến với Nautilus. Để bắt đầu, bạn có thể tạo ví mới hoặc nhập ví hiện có."),
-        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
+            "Chào mừng đến với Nautilus. Để bắt đầu, hãy tạo một ví mới hoặc nhập một ví hiện có."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Với địa chỉ"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Với tin nhắn"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Sau %1 phút"),

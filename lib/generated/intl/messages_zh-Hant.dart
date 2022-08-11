@@ -23,8 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("帳戶"),
-        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
-        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameHint": MessageLookupByLibrary.simpleMessage("輸入名稱"),
+        "accountNameMissing": MessageLookupByLibrary.simpleMessage("選擇一個帳戶名稱"),
         "accounts": MessageLookupByLibrary.simpleMessage("帳戶"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage("確定已備份您的種子或秘密詞語嗎？"),
         "activeMessageHeader": MessageLookupByLibrary.simpleMessage("作用中訊息"),
@@ -32,10 +32,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("封鎖使用者"),
         "addContact": MessageLookupByLibrary.simpleMessage("新增聯絡人"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("加入我的最愛"),
-        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "address": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage("添加僅觀看帳戶"),
+        "addWatchOnlyAccountError":
+            MessageLookupByLibrary.simpleMessage("添加僅觀看帳戶時出錯：帳戶為空"),
+        "addWatchOnlyAccountSuccess":
+            MessageLookupByLibrary.simpleMessage("已成功創建僅限觀看的帳戶！"),
+        "address": MessageLookupByLibrary.simpleMessage("地址"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("地址已複製"),
         "addressHint": MessageLookupByLibrary.simpleMessage("輸入地址"),
         "addressMissing": MessageLookupByLibrary.simpleMessage("請輸入目標地址"),
@@ -43,13 +45,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("請輸入使用者名稱或地址"),
         "addressShare": MessageLookupByLibrary.simpleMessage("分享地址"),
         "aliases": MessageLookupByLibrary.simpleMessage("別名"),
-        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
+        "amountGiftGreaterError":
+            MessageLookupByLibrary.simpleMessage("分割金額不能大於禮物餘額"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("請輸入金額"),
         "asked": MessageLookupByLibrary.simpleMessage("詢問"),
-        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
-        "authError": MessageLookupByLibrary.simpleMessage(""),
+        "authConfirm": MessageLookupByLibrary.simpleMessage("認證"),
+        "authError": MessageLookupByLibrary.simpleMessage("驗證時出錯。稍後再試。"),
         "authMethod": MessageLookupByLibrary.simpleMessage("驗證機制"),
-        "authenticating": MessageLookupByLibrary.simpleMessage(""),
+        "authenticating": MessageLookupByLibrary.simpleMessage("認證"),
         "autoImport": MessageLookupByLibrary.simpleMessage("自動匯入"),
         "autoLockHeader": MessageLookupByLibrary.simpleMessage("自動鎖定"),
         "backupConfirmButton": MessageLookupByLibrary.simpleMessage("已備份"),
@@ -73,8 +76,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedNameExists": MessageLookupByLibrary.simpleMessage("暱稱已使用！"),
         "blockedNameMissing": MessageLookupByLibrary.simpleMessage("選擇暱稱"),
         "blockedRemoved": MessageLookupByLibrary.simpleMessage("% 1 已解除封鎖！"),
-        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
-        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
+            "我們似乎無法訪問 Branch API，這通常是由某種網絡問題或 VPN 阻止連接引起的。\n\n 您應該仍然可以正常使用該應用程序，但發送和接收禮品卡可能無法正常工作。"),
+        "branchConnectErrorShortDesc":
+            MessageLookupByLibrary.simpleMessage("錯誤：無法訪問分支 API"),
+        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage("連接警告"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("變更貨幣單位"),
         "changeLog": MessageLookupByLibrary.simpleMessage("更改日誌"),
@@ -87,9 +93,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "close": MessageLookupByLibrary.simpleMessage("關閉"),
         "confirm": MessageLookupByLibrary.simpleMessage("確認"),
         "confirmPasswordHint": MessageLookupByLibrary.simpleMessage("確認密碼"),
-        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "confirmPinHint": MessageLookupByLibrary.simpleMessage("確認引腳"),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("連線中"),
-        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarning": MessageLookupByLibrary.simpleMessage("無法連接"),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(
+            "我們似乎無法連接到後端，這可能只是您的連接，或者如果問題仍然存在，後端可能會因維護甚至中斷而停機。如果一個多小時後仍然有問題，請在 discord 服務器@chat.perish.co 的#bug-reports 中提交報告"),
+        "connectionWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "我們似乎無法連接到後端，這可能只是您的連接，或者如果問題仍然存在，後端可能會因維護甚至中斷而停機。如果一個多小時後仍然有問題，請在 discord 服務器@chat.perish.co 的#bug-reports 中提交報告"),
+        "connectionWarningBodyShort":
+            MessageLookupByLibrary.simpleMessage("我們似乎無法連接到後端"),
         "contactAdded": MessageLookupByLibrary.simpleMessage("%1 已新增為聯絡人！"),
         "contactExists": MessageLookupByLibrary.simpleMessage("聯絡人已存在"),
         "contactHeader": MessageLookupByLibrary.simpleMessage("聯絡人"),
@@ -106,7 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("複製"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("複製地址"),
         "copyLink": MessageLookupByLibrary.simpleMessage("複製連結"),
-        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
+        "copyMessage": MessageLookupByLibrary.simpleMessage("複製消息"),
         "copySeed": MessageLookupByLibrary.simpleMessage("複製種子"),
         "copyWalletAddressToClipboard":
             MessageLookupByLibrary.simpleMessage("將錢包地址複製到剪貼板"),
@@ -120,9 +132,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "createPasswordSecondParagraph": MessageLookupByLibrary.simpleMessage(
             "密碼並非必要，無論如何您的錢包仍會被辨識碼或生物辨識技術保護。"),
         "createPasswordSheetHeader": MessageLookupByLibrary.simpleMessage("建立"),
-        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "createPinHint": MessageLookupByLibrary.simpleMessage("創建圖釘"),
         "createQR": MessageLookupByLibrary.simpleMessage("建立二維碼"),
-        "created": MessageLookupByLibrary.simpleMessage(""),
+        "created": MessageLookupByLibrary.simpleMessage("創建"),
         "creatingGiftCard": MessageLookupByLibrary.simpleMessage("建立禮品卡"),
         "currency": MessageLookupByLibrary.simpleMessage("貨幣"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("貨幣模式"),
@@ -132,7 +144,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage("目前代表為"),
         "decryptionError": MessageLookupByLibrary.simpleMessage("解密錯誤！"),
         "defaultAccountName": MessageLookupByLibrary.simpleMessage("主要帳戶"),
-        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
+        "defaultGiftMessage":
+            MessageLookupByLibrary.simpleMessage("看看鸚鵡螺！我用這個鏈接給你發了一些 nano："),
         "defaultNewAccountName": MessageLookupByLibrary.simpleMessage("帳戶 %1"),
         "delete": MessageLookupByLibrary.simpleMessage("刪除"),
         "deleteRequest":
@@ -144,8 +157,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword": MessageLookupByLibrary.simpleMessage("解除錢包密碼"),
         "dismiss": MessageLookupByLibrary.simpleMessage("解僱"),
         "domainInvalid": MessageLookupByLibrary.simpleMessage("無效的網域名稱"),
-        "donateButton": MessageLookupByLibrary.simpleMessage(""),
-        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
+        "donateButton": MessageLookupByLibrary.simpleMessage("捐"),
+        "donateToSupport": MessageLookupByLibrary.simpleMessage("支持項目"),
         "edit": MessageLookupByLibrary.simpleMessage("編輯"),
         "encryptionFailedError":
             MessageLookupByLibrary.simpleMessage("無法設定錢包密碼"),
@@ -154,10 +167,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("輸入禮品備註"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("輸入訊息"),
         "enterPasswordHint": MessageLookupByLibrary.simpleMessage("輸入您的密碼"),
-        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
+        "enterSplitAmount": MessageLookupByLibrary.simpleMessage("輸入分割金額"),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage("輸入使用者或地址"),
         "enterUsername": MessageLookupByLibrary.simpleMessage("輸入使用者名稱"),
-        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
+        "errorProcessingGiftCard":
+            MessageLookupByLibrary.simpleMessage("處理此禮品卡時出錯，它可能無效、過期或為空。"),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("來自某人"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
@@ -205,44 +219,50 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("確認指紋或 Face ID，備份錢包種子。"),
         "from": MessageLookupByLibrary.simpleMessage("從"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("履行"),
-        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
-        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
-        "getNano": MessageLookupByLibrary.simpleMessage(""),
+        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage("資金橫幅"),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage("資金"),
+        "getNano": MessageLookupByLibrary.simpleMessage("獲取納米"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("你有禮物！"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("空, 禮物"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("禮品金額"),
-        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
-        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationError":
+            MessageLookupByLibrary.simpleMessage("嘗試創建禮品卡鏈接時出錯"),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
+            "嘗試創建禮品卡時發生錯誤，禮品卡鏈接或種子已復製到您的剪貼板，您的資金可能包含在其中，具體取決於出現的問題。"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("禮物來自"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "使用 NANO 加載數字禮品卡！設置金額，並為收件人查看何時打開它的可選消息！\n\n創建完成後，您將獲得一個可以發送給任何人的鏈接，打開後會在安裝 Nautilus 後自動將資金分配給收件人！\n\n如果收款人已經是 Nautilus 用戶，他們將在打開鏈接時提示將資金轉入他們的帳戶"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("禮物訊息"),
-        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "giftProcessSuccess":
+            MessageLookupByLibrary.simpleMessage("禮物已成功收到，可能需要一點時間才會出現在您的錢包中。"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("返回"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("前往 QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("已理解"),
-        "handoff": MessageLookupByLibrary.simpleMessage(""),
-        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
+        "handoff": MessageLookupByLibrary.simpleMessage("不可觸摸"),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage("嘗試切換塊時出現問題！"),
         "handoffSupportedMethodNotFound":
-            MessageLookupByLibrary.simpleMessage(""),
+            MessageLookupByLibrary.simpleMessage("找不到受支持的切換方法！"),
         "hide": MessageLookupByLibrary.simpleMessage("隱藏"),
         "hideAccountHeader": MessageLookupByLibrary.simpleMessage("隱藏帳戶？"),
-        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
-        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
-        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(
+            "您確定要隱藏空帳戶嗎？\n\n這將隱藏所有餘額為 0 的帳戶（不包括僅觀看地址和您的主帳戶），但您以後可以隨時通過點擊“添加帳戶”按鈕重新添加它們"),
+        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage("隱藏帳戶？"),
+        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage("隱藏空賬戶"),
         "home": MessageLookupByLibrary.simpleMessage("首頁"),
         "iUnderstandTheRisks": MessageLookupByLibrary.simpleMessage("我已理解風險"),
         "ignore": MessageLookupByLibrary.simpleMessage("忽略"),
-        "imSure": MessageLookupByLibrary.simpleMessage(""),
+        "imSure": MessageLookupByLibrary.simpleMessage("我確定"),
         "import": MessageLookupByLibrary.simpleMessage("匯入"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "您點擊的鏈接包含一些納米，您要將其導入此錢包，還是將其退還給發送的人？"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
-        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
-        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(
+            "看起來你點擊了一個包含一些 NANO 的鏈接，為了接收這些資金，我們只需要你完成設置你的錢包。"),
+        "importGiftv2":
+            MessageLookupByLibrary.simpleMessage("您點擊的鏈接包含一些 NANO，您想將其導入此錢包嗎？"),
         "importSecretPhrase": MessageLookupByLibrary.simpleMessage("輸入秘密詞語"),
         "importSecretPhraseHint":
             MessageLookupByLibrary.simpleMessage("請輸入您的 24 個秘密詞語。每個詞應用空格分隔。"),
@@ -252,12 +272,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "importWallet": MessageLookupByLibrary.simpleMessage("匯入現有錢包"),
         "instantly": MessageLookupByLibrary.simpleMessage("立刻"),
         "insufficientBalance": MessageLookupByLibrary.simpleMessage("餘額不足"),
-        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
-        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(
+            "我們跳過了介紹過程以節省您的時間，但您應該立即備份新創建的種子。\n\n如果您失去種子，您將無法使用您的資金。\n\n此外，您的密碼已設置為“000000”，您也應立即更改。"),
+        "introSkippedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("備份你的種子！"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage("無效的目標地址"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("無效的密碼"),
-        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
-        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
+        "invalidPin": MessageLookupByLibrary.simpleMessage("無效引腳"),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(
+            "由於 iOS App Store 指南和限制，我們無法將您鏈接到我們的捐贈頁面。如果您想支持該項目，請考慮發送到 nautilus 節點的地址。"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("連結已複製"),
         "loaded": MessageLookupByLibrary.simpleMessage("已載入"),
@@ -279,7 +302,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "備忘錄重新發送！如果仍未確認，則收件者的裝置可能處於離線狀態。"),
-        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
+        "messageCopied": MessageLookupByLibrary.simpleMessage("消息已復制"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("留言"),
         "minimumSend": MessageLookupByLibrary.simpleMessage("最低發送金額是 %1 NANO"),
         "mnemonicInvalidWord":
@@ -287,12 +310,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("助記詞"),
         "mnemonicSizeError":
             MessageLookupByLibrary.simpleMessage("秘密詞語一定要包含 24 個詞語"),
-        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
+        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage("每月服務器成本"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
-        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
+        "moreSettings": MessageLookupByLibrary.simpleMessage("更多設置"),
         "natricon": MessageLookupByLibrary.simpleMessage("卡通圖示"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
-        "nearby": MessageLookupByLibrary.simpleMessage(""),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage("鸚鵡螺錢包"),
+        "nearby": MessageLookupByLibrary.simpleMessage("附近"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "此功能要求您擁有更長的交易歷史記錄，以防止垃圾郵件。\n\n或者，您可以顯示 QR 碼供某人掃描。"),
         "needVerificationAlertHeader":
@@ -337,7 +360,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("有人要求您付款！查看付款頁面以獲取更多信息。"),
         "payments": MessageLookupByLibrary.simpleMessage("付款"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("自代表名單選擇"),
-        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
+        "pinBlank": MessageLookupByLibrary.simpleMessage("引腳不能為空"),
         "pinConfirmError": MessageLookupByLibrary.simpleMessage("識別碼不匹配"),
         "pinConfirmTitle": MessageLookupByLibrary.simpleMessage("確認您的識別碼"),
         "pinCreateTitle":
@@ -347,11 +370,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinMethod": MessageLookupByLibrary.simpleMessage("識別碼"),
         "pinRepChange": MessageLookupByLibrary.simpleMessage("輸入識別碼以變更代表。"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage("輸入識別碼以查看錢包種子"),
-        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
+        "pinsDontMatch": MessageLookupByLibrary.simpleMessage("引腳不匹配"),
         "plausibleDeniabilityParagraph":
-            MessageLookupByLibrary.simpleMessage(""),
-        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+            MessageLookupByLibrary.simpleMessage("這與您用於創建錢包的密碼不同。按信息按鈕了解更多信息。"),
+        "plausibleInfoHeader":
+            MessageLookupByLibrary.simpleMessage("似是而非的否認信息"),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "為似是而非的否認模式設置輔助引腳。\n\n如果您的錢包使用此輔助密碼解鎖，您的種子將替換為現有種子的哈希值。這是一項安全功能，旨在在您被迫打開錢包的情況下使用。\n\n除了解鎖你的錢包時，這個密碼就像一個正常的（正確的）密碼，這是在合理的否認模式將激活的時候。\n\n如果您沒有備份您的種子，您的資金將在進入合理否認模式時丟失！"),
         "preferences": MessageLookupByLibrary.simpleMessage("個人偏好"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("隱私政策"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("購買納米"),
@@ -400,14 +425,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestAmountConfirm": MessageLookupByLibrary.simpleMessage("請求% 1"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "要求失敗：此使用者似乎沒有安裝 Nautilus，或已停用通知。"),
-        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
+        "requestFrom": MessageLookupByLibrary.simpleMessage("請求來自"),
         "requestPayment": MessageLookupByLibrary.simpleMessage("請求付款"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "傳送付款要求時發生錯誤，收件人的裝置可能離線或無法使用。"),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "請求重新發送！如果仍未確認，則收件者的裝置可能處於離線狀態。"),
-        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
-        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "使用端到端加密消息請求付款！\n\n付款請求、備忘錄和消息只能由其他 nautilus 用戶接收，但即使收件人不使用 nautilus，您也可以將它們用於自己的記錄保存。"),
+        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage("請求表信息"),
         "requested": MessageLookupByLibrary.simpleMessage("要求"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("要求來源"),
         "requesting": MessageLookupByLibrary.simpleMessage("要求"),
@@ -455,15 +481,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "發送或請求付款，帶有端到端加密消息！\n\n付款請求，備忘錄和消息僅由其他 Nautilus 用戶應收。\n\n您無需擁有用戶名即可發送或接收付款請求，即使他們不使用鸚鵡螺，也可以將它們用於自己的記錄保存。"),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage("傳送工作表資訊"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage("通過 NFC 發送"),
         "sending": MessageLookupByLibrary.simpleMessage("傳送"),
         "sent": MessageLookupByLibrary.simpleMessage("發送"),
         "sentTo": MessageLookupByLibrary.simpleMessage("發送給："),
         "setPassword": MessageLookupByLibrary.simpleMessage("設定密碼"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage("順利設定密碼"),
-        "setPin": MessageLookupByLibrary.simpleMessage(""),
-        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPin": MessageLookupByLibrary.simpleMessage("設置引腳"),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage("已成功設置引腳"),
+        "setPlausibleDeniabilityPin":
+            MessageLookupByLibrary.simpleMessage("設置合理的引腳"),
         "setWalletPassword": MessageLookupByLibrary.simpleMessage("設定錢包密碼"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
@@ -471,27 +498,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("設定"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage("透過紙錢包儲值"),
         "shareLink": MessageLookupByLibrary.simpleMessage("分享連結"),
-        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
+        "shareMessage": MessageLookupByLibrary.simpleMessage("分享訊息"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("分享 Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "請試試 Nautilus —— 針對行動裝置的 NANO 錢包！"),
-        "show": MessageLookupByLibrary.simpleMessage(""),
-        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
+        "show": MessageLookupByLibrary.simpleMessage("節目"),
+        "showAccountQR": MessageLookupByLibrary.simpleMessage("顯示賬戶二維碼"),
         "showContacts": MessageLookupByLibrary.simpleMessage("顯示聯絡人"),
-        "showFunding": MessageLookupByLibrary.simpleMessage(""),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
-        "showQR": MessageLookupByLibrary.simpleMessage(""),
-        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
+        "showFunding": MessageLookupByLibrary.simpleMessage("顯示資金橫幅"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("顯示鏈接二維碼"),
+        "showQR": MessageLookupByLibrary.simpleMessage("顯示二維碼"),
+        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("未開封警告"),
         "simplex": MessageLookupByLibrary.simpleMessage("單面"),
-        "someone": MessageLookupByLibrary.simpleMessage(""),
-        "spendNano": MessageLookupByLibrary.simpleMessage(""),
-        "splitBy": MessageLookupByLibrary.simpleMessage(""),
+        "someone": MessageLookupByLibrary.simpleMessage("某人"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("花費 NANO"),
+        "splitBy": MessageLookupByLibrary.simpleMessage("拆分依據"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
-        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
+        "supportDevelopment": MessageLookupByLibrary.simpleMessage("幫助支持發展"),
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("支持開發人員"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("轉換為種子"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("系統預設"),
-        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage("點按消息進行編輯"),
         "tapToHide": MessageLookupByLibrary.simpleMessage("輕觸以隱藏"),
         "tapToReveal": MessageLookupByLibrary.simpleMessage("輕觸以揭露"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("佈景主題"),
@@ -531,15 +558,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "unlockBiometrics":
             MessageLookupByLibrary.simpleMessage("經由生物辨識解鎖 Nautilus"),
         "unlockPin": MessageLookupByLibrary.simpleMessage("請輸入識別碼以解鎖 Nautilus"),
-        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("顯示未打開的警告"),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(
+            "在向未開立的賬戶發送資金時顯示警告，這很有用，因為您發送到的大多數時間地址都會有餘額，而發送到新地址可能是拼寫錯誤的結果。"),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(
+            "你確定這是正確的地址嗎？\n此帳戶似乎未打開\n\n您可以在“未打開警告”下的設置抽屜中禁用此警告"),
         "unopenedWarningWarningHeader":
-            MessageLookupByLibrary.simpleMessage(""),
+            MessageLookupByLibrary.simpleMessage("未開戶"),
         "unpaid": MessageLookupByLibrary.simpleMessage("未付"),
         "unread": MessageLookupByLibrary.simpleMessage("未讀"),
         "uptime": MessageLookupByLibrary.simpleMessage("上線時間"),
-        "useNano": MessageLookupByLibrary.simpleMessage(""),
+        "useNano": MessageLookupByLibrary.simpleMessage("使用納米"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("找不到用戶！"),
@@ -554,17 +584,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "usernameUnavailable": MessageLookupByLibrary.simpleMessage("用戶名不可用"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "Nautilus 用戶名是 Nano.by 提供的集中式服務"),
-        "using": MessageLookupByLibrary.simpleMessage(""),
+        "using": MessageLookupByLibrary.simpleMessage("使用"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("更多資訊"),
-        "viewTX": MessageLookupByLibrary.simpleMessage(""),
+        "viewTX": MessageLookupByLibrary.simpleMessage("查看交易"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("投票比重"),
         "warning": MessageLookupByLibrary.simpleMessage("警告"),
-        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
+        "watchAccountExists": MessageLookupByLibrary.simpleMessage("帳號已添加！"),
+        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage("僅觀看帳戶"),
+        "watchOnlySendDisabled":
+            MessageLookupByLibrary.simpleMessage("僅監視地址上禁用發送"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "歡迎來到 Nautilus。接著您可建立新錢包或匯入現有錢包"),
-        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
+        "welcomeTextUpdated":
+            MessageLookupByLibrary.simpleMessage("歡迎來到鸚鵡螺。首先，創建一個新錢包或導入現有錢包。"),
         "withAddress": MessageLookupByLibrary.simpleMessage("有地址"),
         "withMessage": MessageLookupByLibrary.simpleMessage("有訊息"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 分鐘後"),

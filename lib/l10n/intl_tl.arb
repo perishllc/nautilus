@@ -5,12 +5,12 @@
     "type": "text",
     "description": "Account text"
   },
-  "accountNameHint": "",
+  "accountNameHint": "Maglagay ng Pangalan",
   "@accountNameHint": {
     "type": "text",
     "description": "enter_name_hint"
   },
-  "accountNameMissing": "",
+  "accountNameMissing": "Pumili ng Pangalan ng Account",
   "@accountNameMissing": {
     "type": "text",
     "description": "account_name_missing"
@@ -50,7 +50,7 @@
     "type": "text",
     "description": "favorite_add_button"
   },
-  "address": "",
+  "address": "Address",
   "@address": {
     "type": "text",
     "description": "send_warning_address"
@@ -80,17 +80,17 @@
     "type": "text",
     "description": "receive_share_cta"
   },
-  "addWatchOnlyAccount": "",
+  "addWatchOnlyAccount": "Magdagdag ng Watch Only Account",
   "@addWatchOnlyAccount": {
     "type": "text",
     "description": "watch_only_add"
   },
-  "addWatchOnlyAccountError": "",
+  "addWatchOnlyAccountError": "Error sa pagdaragdag ng Watch Only Account: Null ang account",
   "@addWatchOnlyAccountError": {
     "type": "text",
     "description": "watch_only_add_error"
   },
-  "addWatchOnlyAccountSuccess": "",
+  "addWatchOnlyAccountSuccess": "Matagumpay na nagawa ang watch only na account!",
   "@addWatchOnlyAccountSuccess": {
     "type": "text",
     "description": "watch_only_add_success"
@@ -100,7 +100,7 @@
     "type": "text",
     "description": "card_details_aliases"
   },
-  "amountGiftGreaterError": "",
+  "amountGiftGreaterError": "Ang Hati na Halaga ay hindi maaaring mas malaki kaysa sa balanse ng regalo",
   "@amountGiftGreaterError": {
     "type": "text",
     "description": "gift_split_greater_error"
@@ -115,17 +115,17 @@
     "type": "text",
     "description": "home_asked_cta"
   },
-  "authConfirm": "",
+  "authConfirm": "Nagpapatotoo",
   "@authConfirm": {
     "type": "text",
     "description": "auth_confirm_message"
   },
-  "authenticating": "",
+  "authenticating": "Nagpapatotoo",
   "@authenticating": {
     "type": "text",
     "description": "auth_authenticating"
   },
-  "authError": "",
+  "authError": "May naganap na error habang nagpapatotoo. Subukan ulit mamaya.",
   "@authError": {
     "type": "text",
     "description": "auth_generic_error"
@@ -235,12 +235,17 @@
     "type": "text",
     "description": "block_user"
   },
-  "branchConnectErrorShortDesc": "",
+  "branchConnectErrorLongDesc": "Mukhang hindi namin maabot ang Branch API, kadalasang sanhi ito ng ilang uri ng isyu sa network o pagharang ng VPN sa koneksyon.\n\n Dapat mo pa ring magamit ang app bilang normal, gayunpaman ang pagpapadala at pagtanggap ng mga gift card ay maaaring hindi gumana.",
+  "@branchConnectErrorLongDesc": {
+    "type": "text",
+    "description": "branch_connection_error_long_desc"
+  },
+  "branchConnectErrorShortDesc": "Error: hindi maabot ang Branch API",
   "@branchConnectErrorShortDesc": {
     "type": "text",
     "description": "branch_connection_error_short_desc"
   },
-  "branchConnectErrorTitle": "",
+  "branchConnectErrorTitle": "Babala sa Koneksyon",
   "@branchConnectErrorTitle": {
     "type": "text",
     "description": "branch_connection_error_title"
@@ -305,7 +310,7 @@
     "type": "text",
     "description": "A text field hint that tells the user to confirm the password"
   },
-  "confirmPinHint": "",
+  "confirmPinHint": "Kumpirmahin ang pin",
   "@confirmPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to confirm the pin"
@@ -315,15 +320,25 @@
     "type": "text",
     "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
   },
-  "connectionWarning": "",
+  "connectionWarning": "Hindi Makakonekta",
   "@connectionWarning": {
     "type": "text",
     "description": "home_connection_warning"
   },
-  "connectionWarningBody": "",
+  "connectionWarningBody": "Mukhang hindi kami makakonekta sa backend, maaaring ito lang ang iyong koneksyon o kung magpapatuloy ang isyu, maaaring hindi na mapanatili ang backend para sa pagpapanatili o kahit na isang outage. Kung mahigit isang oras na at nagkakaroon ka pa rin ng mga isyu, mangyaring magsumite ng ulat sa #bug-reports sa discord server @ chat.perish.co",
   "@connectionWarningBody": {
     "type": "text",
     "description": "connection_warning_body"
+  },
+  "connectionWarningBodyLong": "Mukhang hindi kami makakonekta sa backend, maaaring ito lang ang iyong koneksyon o kung magpapatuloy ang isyu, maaaring hindi na mapanatili ang backend para sa pagpapanatili o kahit na isang outage. Kung mahigit isang oras na at nagkakaroon ka pa rin ng mga isyu, mangyaring magsumite ng ulat sa #bug-reports sa discord server @ chat.perish.co",
+  "@connectionWarningBodyLong": {
+    "type": "text",
+    "description": "connection_warning_body_long"
+  },
+  "connectionWarningBodyShort": "Mukhang hindi kami makakonekta sa backend",
+  "@connectionWarningBodyShort": {
+    "type": "text",
+    "description": "connection_warning_body_short"
   },
   "contactAdded": "%1 ay nadagdag sa mga kontak!",
   "@contactAdded": {
@@ -395,7 +410,7 @@
     "type": "text",
     "description": "copy_link"
   },
-  "copyMessage": "",
+  "copyMessage": "Kopyahin ang Mensahe",
   "@copyMessage": {
     "type": "text",
     "description": "copy_message"
@@ -415,7 +430,7 @@
     "type": "text",
     "description": "A paragraph that tells the users to create a password."
   },
-  "created": "",
+  "created": "nilikha",
   "@created": {
     "type": "text",
     "description": "gift_created"
@@ -450,7 +465,7 @@
     "type": "text",
     "description": "Prompt user to create a new password"
   },
-  "createPinHint": "",
+  "createPinHint": "Gumawa ng pin",
   "@createPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to create a pin"
@@ -500,7 +515,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "",
+  "defaultGiftMessage": "Tingnan ang Nautilus! Nagpadala ako sa iyo ng ilang nano gamit ang link na ito:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -545,12 +560,12 @@
     "type": "text",
     "description": "domain_invalid_name"
   },
-  "donateButton": "",
+  "donateButton": "Mag-donate",
   "@donateButton": {
     "type": "text",
     "description": "donate_button"
   },
-  "donateToSupport": "",
+  "donateToSupport": "Suportahan ang Proyekto",
   "@donateToSupport": {
     "type": "text",
     "description": "settings_support_donate"
@@ -590,7 +605,7 @@
     "type": "text",
     "description": "A text field hint that tells the users to enter their password"
   },
-  "enterSplitAmount": "",
+  "enterSplitAmount": "Ilagay ang Split na Halaga",
   "@enterSplitAmount": {
     "type": "text",
     "description": "gift_split_amount_hint"
@@ -605,7 +620,7 @@
     "type": "text",
     "description": "enter_user_address"
   },
-  "errorProcessingGiftCard": "",
+  "errorProcessingGiftCard": "Nagkaroon ng error habang pinoproseso ang gift card na ito, maaaring hindi ito wasto, nag-expire, o walang laman.",
   "@errorProcessingGiftCard": {
     "type": "text",
     "description": "gift_process_error"
@@ -785,17 +800,17 @@
     "type": "text",
     "description": "history_fulfilled"
   },
-  "fundingBannerHeader": "",
+  "fundingBannerHeader": "Banner ng Pagpopondo",
   "@fundingBannerHeader": {
     "type": "text",
     "description": "funding_banner_header"
   },
-  "fundingHeader": "",
+  "fundingHeader": "Pagpopondo",
   "@fundingHeader": {
     "type": "text",
     "description": "funding_header"
   },
-  "getNano": "",
+  "getNano": "Kumuha ng NANO",
   "@getNano": {
     "type": "text",
     "description": "get_nano"
@@ -815,12 +830,12 @@
     "type": "text",
     "description": "gift_amount"
   },
-  "giftCardCreationError": "",
+  "giftCardCreationError": "May naganap na error habang sinusubukang gumawa ng link ng gift card",
   "@giftCardCreationError": {
     "type": "text",
     "description": "create_gift_error"
   },
-  "giftCardCreationErrorSent": "",
+  "giftCardCreationErrorSent": "May naganap na error habang sinusubukang gumawa ng gift card, ANG GIFT CARD LINK O SEED AY NAKOPYA SA IYONG CLIPBOARD, ANG IYONG PONDO AY MAAARING NILALAMAN SA LOOB NITO DEPENDE SA KUNG ANO ANG NAGING MALI.",
   "@giftCardCreationErrorSent": {
     "type": "text",
     "description": "gift_generic_error"
@@ -840,7 +855,7 @@
     "type": "text",
     "description": "gift_message"
   },
-  "giftProcessSuccess": "",
+  "giftProcessSuccess": "Matagumpay na Natanggap ang Regalo, maaaring tumagal ng ilang sandali upang lumitaw sa iyong wallet.",
   "@giftProcessSuccess": {
     "type": "text",
     "description": "gift_process_success"
@@ -865,17 +880,17 @@
     "type": "text",
     "description": "go_to_qr_code"
   },
-  "handoff": "",
+  "handoff": "handoff",
   "@handoff": {
     "type": "text",
     "description": "send_handoff"
   },
-  "handoffFailed": "",
+  "handoffFailed": "Nagkaproblema habang sinusubukang i-handoff block!",
   "@handoffFailed": {
     "type": "text",
     "description": "handoff_failed"
   },
-  "handoffSupportedMethodNotFound": "",
+  "handoffSupportedMethodNotFound": "Hindi mahanap ang isang sinusuportahang paraan ng handoff!",
   "@handoffSupportedMethodNotFound": {
     "type": "text",
     "description": "handoff_method_not_found"
@@ -890,17 +905,17 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "hideAccountsConfirmation": "",
+  "hideAccountsConfirmation": "Sigurado ka bang gusto mong itago ang mga walang laman na account?\n\nItatago nito ang lahat ng account na may balanseng eksaktong 0 (hindi kasama ang mga address sa panonood lamang at iyong pangunahing account), ngunit maaari mong idagdag muli ang mga ito anumang oras sa ibang pagkakataon sa pamamagitan ng pag-tap sa button na \"Magdagdag ng Account\"",
   "@hideAccountsConfirmation": {
     "type": "text",
     "description": "hide accounts confirmation info"
   },
-  "hideAccountsHeader": "",
+  "hideAccountsHeader": "Itago ang Mga Account?",
   "@hideAccountsHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "hideEmptyAccounts": "",
+  "hideEmptyAccounts": "Itago ang Mga Walang Lamang Account",
   "@hideEmptyAccounts": {
     "type": "text",
     "description": "hide_empty_accounts"
@@ -930,12 +945,12 @@
     "type": "text",
     "description": "import_gift_empty"
   },
-  "importGiftIntro": "",
+  "importGiftIntro": "Mukhang nag-click ka sa isang link na naglalaman ng ilang NANO, para matanggap ang mga pondong ito kailangan lang namin para matapos mo ang pag-set up ng iyong wallet.",
   "@importGiftIntro": {
     "type": "text",
     "description": "import_gift_intro"
   },
-  "importGiftv2": "",
+  "importGiftv2": "Ang link na iyong na-click ay naglalaman ng ilang NANO, gusto mo bang i-import ito sa wallet na ito?",
   "@importGiftv2": {
     "type": "text",
     "description": "import_gift_v2"
@@ -970,7 +985,7 @@
     "type": "text",
     "description": "intro_welcome_have_wallet"
   },
-  "imSure": "",
+  "imSure": "Sigurado ako",
   "@imSure": {
     "type": "text",
     "description": "send_confirm_warning"
@@ -985,12 +1000,12 @@
     "type": "text",
     "description": "send_insufficient_balance"
   },
-  "introSkippedWarningContent": "",
+  "introSkippedWarningContent": "Nilaktawan namin ang proseso ng intro para makatipid ka ng oras, ngunit dapat mong i-backup kaagad ang iyong bagong likhang binhi.\n\nKung nawala mo ang iyong binhi, mawawalan ka ng access sa iyong mga pondo.\n\nBilang karagdagan, ang iyong passcode ay naitakda sa \"000000\" na dapat mo ring baguhin kaagad.",
   "@introSkippedWarningContent": {
     "type": "text",
     "description": "intro_skipped_warning_content"
   },
-  "introSkippedWarningHeader": "",
+  "introSkippedWarningHeader": "I-backup ang iyong binhi!",
   "@introSkippedWarningHeader": {
     "type": "text",
     "description": "intro_skipped_warning_header"
@@ -1005,12 +1020,12 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
-  "invalidPin": "",
+  "invalidPin": "Di-wastong Pin",
   "@invalidPin": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
   },
-  "iosFundingMessage": "",
+  "iosFundingMessage": "Dahil sa mga alituntunin at paghihigpit ng iOS App Store, hindi ka namin mai-link sa aming page ng mga donasyon. Kung gusto mong suportahan ang proyekto, isaalang-alang ang pagpapadala sa address ng nautilus node.",
   "@iosFundingMessage": {
     "type": "text",
     "description": "ios_funding_message"
@@ -1110,7 +1125,7 @@
     "type": "text",
     "description": "memo_sent_again"
   },
-  "messageCopied": "",
+  "messageCopied": "Nakopya ang Mensahe",
   "@messageCopied": {
     "type": "text",
     "description": "message_copied"
@@ -1140,7 +1155,7 @@
     "type": "text",
     "description": "err"
   },
-  "monthlyServerCosts": "",
+  "monthlyServerCosts": "Buwanang Mga Gastos sa Server",
   "@monthlyServerCosts": {
     "type": "text",
     "description": "support_monthly_costs"
@@ -1150,7 +1165,7 @@
     "type": "text",
     "description": "moonpay_ramp"
   },
-  "moreSettings": "",
+  "moreSettings": "Higit pang Mga Setting",
   "@moreSettings": {
     "type": "text",
     "description": "settings_more"
@@ -1160,12 +1175,12 @@
     "type": "text",
     "description": "natricon_settings"
   },
-  "nautilusWallet": "",
+  "nautilusWallet": "Nautilus Wallet",
   "@nautilusWallet": {
     "type": "text",
     "description": "nautilus_wallet"
   },
-  "nearby": "",
+  "nearby": "Malapit",
   "@nearby": {
     "type": "text",
     "description": "nearby_devices"
@@ -1350,7 +1365,7 @@
     "type": "text",
     "description": "pick rep from list"
   },
-  "pinBlank": "",
+  "pinBlank": "Hindi maaaring walang laman ang pin",
   "@pinBlank": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
@@ -1390,7 +1405,7 @@
     "type": "text",
     "description": "change_representative_pin"
   },
-  "pinsDontMatch": "",
+  "pinsDontMatch": "Hindi tugma ang mga pin",
   "@pinsDontMatch": {
     "type": "text",
     "description": "An error indicating a pin has been confirmed incorrectly"
@@ -1400,17 +1415,17 @@
     "type": "text",
     "description": "settings_pin_title"
   },
-  "plausibleDeniabilityParagraph": "",
+  "plausibleDeniabilityParagraph": "HINDI ito ang parehong pin na ginamit mo sa paggawa ng iyong wallet. Pindutin ang pindutan ng impormasyon para sa higit pang impormasyon.",
   "@plausibleDeniabilityParagraph": {
     "type": "text",
     "description": "A paragraph that tells warns the user this is plausible deniability pin."
   },
-  "plausibleInfoHeader": "",
+  "plausibleInfoHeader": "Posibleng Pagkakaila na Impormasyon",
   "@plausibleInfoHeader": {
     "type": "text",
     "description": "plausible_info_header"
   },
-  "plausibleSheetInfo": "",
+  "plausibleSheetInfo": "Magtakda ng pangalawang pin para sa posibleng deniability mode.\n\nKung ang iyong wallet ay na-unlock gamit ang pangalawang pin na ito, ang iyong binhi ay papalitan ng isang hash ng umiiral na binhi. Ito ay isang tampok na panseguridad na nilalayon na gamitin kung sakaling mapilitan kang buksan ang iyong wallet.\n\nAng pin na ito ay gagana bilang isang normal (tama) na pin MALIBAN kapag ina-unlock ang iyong wallet, na kung saan ay mag-a-activate ang plausible deniability mode.\n\nMAWAWALA ang iyong mga pondo sa pagpasok sa moda ng mapagkakatiwalaang deniability kung hindi mo pa nai-back up ang iyong binhi!",
   "@plausibleSheetInfo": {
     "type": "text",
     "description": "plausible_sheet_info"
@@ -1615,7 +1630,7 @@
     "type": "text",
     "description": "request_generic_error"
   },
-  "requestFrom": "",
+  "requestFrom": "Kahilingan Mula sa",
   "@requestFrom": {
     "type": "text",
     "description": "request_title"
@@ -1640,12 +1655,12 @@
     "type": "text",
     "description": "request_sent_again"
   },
-  "requestSheetInfo": "",
+  "requestSheetInfo": "Humiling ng pagbabayad, gamit ang End to End Encrypted na mga mensahe!\n\nAng mga kahilingan sa pagbabayad, memo, at mensahe ay matatanggap lamang ng ibang mga user ng nautilus, ngunit maaari mong gamitin ang mga ito para sa iyong sariling pag-iingat ng rekord kahit na ang tatanggap ay hindi gumagamit ng nautilus.",
   "@requestSheetInfo": {
     "type": "text",
     "description": "request_sheet_info"
   },
-  "requestSheetInfoHeader": "",
+  "requestSheetInfoHeader": "Humiling ng Impormasyon sa Sheet",
   "@requestSheetInfoHeader": {
     "type": "text",
     "description": "request_sheet_info_header"
@@ -1815,7 +1830,7 @@
     "type": "text",
     "description": "send_sheet_info_header"
   },
-  "sendViaNFC": "",
+  "sendViaNFC": "Ipadala sa pamamagitan ng NFC",
   "@sendViaNFC": {
     "type": "text",
     "description": "send_payment_nfc"
@@ -1840,17 +1855,17 @@
     "type": "text",
     "description": "Setting a Wallet Password was successful"
   },
-  "setPin": "",
+  "setPin": "Itakda ang Pin",
   "@setPin": {
     "type": "text",
     "description": "A button that sets the plausible deniability password"
   },
-  "setPinSuccess": "",
+  "setPinSuccess": "Matagumpay na naitakda ang pin",
   "@setPinSuccess": {
     "type": "text",
     "description": "Setting a Wallet Pin was successful"
   },
-  "setPlausibleDeniabilityPin": "",
+  "setPlausibleDeniabilityPin": "Itakda ang Plausible Pin",
   "@setPlausibleDeniabilityPin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
@@ -1885,7 +1900,7 @@
     "type": "text",
     "description": "share_link"
   },
-  "shareMessage": "",
+  "shareMessage": "Ibahagi ang Mensahe",
   "@shareMessage": {
     "type": "text",
     "description": "share_message"
@@ -1900,12 +1915,12 @@
     "type": "text",
     "description": "share_extra"
   },
-  "show": "",
+  "show": "Ipakita",
   "@show": {
     "type": "text",
     "description": "funding_show"
   },
-  "showAccountQR": "",
+  "showAccountQR": "Ipakita ang Account QR Code",
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
@@ -1915,22 +1930,22 @@
     "type": "text",
     "description": "contacts_enabled"
   },
-  "showFunding": "",
+  "showFunding": "Ipakita ang Funding Banner",
   "@showFunding": {
     "type": "text",
     "description": "show_funding_banner"
   },
-  "showLinkQR": "",
+  "showLinkQR": "Ipakita ang Link QR",
   "@showLinkQR": {
     "type": "text",
     "description": "show_link_qr"
   },
-  "showQR": "",
+  "showQR": "Ipakita ang QR Code",
   "@showQR": {
     "type": "text",
     "description": "show_qr"
   },
-  "showUnopenedWarning": "",
+  "showUnopenedWarning": "Hindi Nabuksang Babala",
   "@showUnopenedWarning": {
     "type": "text",
     "description": "warn_unsafe_send"
@@ -1940,17 +1955,17 @@
     "type": "text",
     "description": "simplex_ramp"
   },
-  "someone": "",
+  "someone": "isang tao",
   "@someone": {
     "type": "text",
     "description": "send_someone"
   },
-  "spendNano": "",
+  "spendNano": "Gumastos ng NANO",
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
   },
-  "splitBy": "",
+  "splitBy": "Hatiin Ni",
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
@@ -1960,7 +1975,7 @@
     "type": "text",
     "description": "A button to open up the live support window"
   },
-  "supportDevelopment": "",
+  "supportDevelopment": "Tulong sa Pag-unlad ng Suporta",
   "@supportDevelopment": {
     "type": "text",
     "description": "settings_support_development"
@@ -1980,7 +1995,7 @@
     "type": "text",
     "description": "settings_default_language_string"
   },
-  "tapMessageToEdit": "",
+  "tapMessageToEdit": "I-tap ang mensahe para i-edit",
   "@tapMessageToEdit": {
     "type": "text",
     "description": "gift_creation_message_edit_hint"
@@ -2120,22 +2135,22 @@
     "type": "text",
     "description": "unlock_pin"
   },
-  "unopenedWarningHeader": "",
+  "unopenedWarningHeader": "Ipakita ang Hindi Nabuksang Babala",
   "@unopenedWarningHeader": {
     "type": "text",
     "description": "unopened_warning_header"
   },
-  "unopenedWarningInfo": "",
+  "unopenedWarningInfo": "Magpakita ng babala kapag nagpapadala ng mga pondo sa isang hindi pa nabubuksang account, ito ay kapaki-pakinabang dahil kadalasan ang mga address na iyong pinadalhan ay magkakaroon ng balanse, at ang pagpapadala sa isang bagong address ay maaaring resulta ng isang typo.",
   "@unopenedWarningInfo": {
     "type": "text",
     "description": "unopened_warning_info"
   },
-  "unopenedWarningWarning": "",
+  "unopenedWarningWarning": "Sigurado ka bang ito ang tamang address?\nMukhang hindi pa nabubuksan ang account na ito\n\nMaaari mong hindi paganahin ang babalang ito sa drawer ng mga setting sa ilalim ng \"Hindi Nabuksang Babala\"",
   "@unopenedWarningWarning": {
     "type": "text",
     "description": "unopened_warning_warning"
   },
-  "unopenedWarningWarningHeader": "",
+  "unopenedWarningWarningHeader": "Hindi Nabuksan ang Account",
   "@unopenedWarningWarningHeader": {
     "type": "text",
     "description": "unopened_warning_warning_header"
@@ -2155,7 +2170,7 @@
     "type": "text",
     "description": "Rep uptime"
   },
-  "useNano": "",
+  "useNano": "Gumamit ng NANO",
   "@useNano": {
     "type": "text",
     "description": "use_nano"
@@ -2210,7 +2225,7 @@
     "type": "text",
     "description": "user_not_found"
   },
-  "using": "",
+  "using": "Gamit",
   "@using": {
     "type": "text",
     "description": "gift_message_using"
@@ -2220,7 +2235,7 @@
     "type": "text",
     "description": "transaction_details"
   },
-  "viewTX": "",
+  "viewTX": "Tingnan ang Transaksyon",
   "@viewTX": {
     "type": "text",
     "description": "transaction_transaction"
@@ -2235,17 +2250,17 @@
     "type": "text",
     "description": "settings_logout_alert_title"
   },
-  "watchAccountExists": "",
+  "watchAccountExists": "Naidagdag na ang account!",
   "@watchAccountExists": {
     "type": "text",
     "description": "account_entry_exists"
   },
-  "watchOnlyAccount": "",
+  "watchOnlyAccount": "Watch Only Account",
   "@watchOnlyAccount": {
     "type": "text",
     "description": "watch_only_account"
   },
-  "watchOnlySendDisabled": "",
+  "watchOnlySendDisabled": "Naka-disable ang mga pagpapadala sa mga address na relo lang",
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
@@ -2255,7 +2270,7 @@
     "type": "text",
     "description": "intro_welcome_title"
   },
-  "welcomeTextUpdated": "",
+  "welcomeTextUpdated": "Maligayang pagdating sa Nautilus. Para magsimula, gumawa ng bagong wallet o mag-import ng dati.",
   "@welcomeTextUpdated": {
     "type": "text",
     "description": "intro_welcome_title"

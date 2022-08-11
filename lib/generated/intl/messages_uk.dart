@@ -23,8 +23,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Гаманець"),
-        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
-        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameHint":
+            MessageLookupByLibrary.simpleMessage("Введіть ім\'я"),
+        "accountNameMissing": MessageLookupByLibrary.simpleMessage(
+            "Виберіть назву облікового запису"),
         "accounts": MessageLookupByLibrary.simpleMessage("Гаманці"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Ви впевнені, що ви зробили резервну копію вашої секретної фрази або seed?"),
@@ -35,10 +37,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Блокування користувача"),
         "addContact": MessageLookupByLibrary.simpleMessage("Додати контакт"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Додати Улюблене"),
-        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "address": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
+            "Додати обліковий запис лише для перегляду"),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
+            "Помилка додавання облікового запису лише для перегляду: обліковий запис був нульовим"),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
+            "Успішно створено обліковий запис лише для перегляду!"),
+        "address": MessageLookupByLibrary.simpleMessage("Адреса"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Адресу скопійовано"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Введіть адресу"),
@@ -49,15 +54,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare":
             MessageLookupByLibrary.simpleMessage("Поділитися адресою"),
         "aliases": MessageLookupByLibrary.simpleMessage("Псевдоніми"),
-        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
+            "Розділена сума не може перевищувати баланс подарунку"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Будь ласка вкажіть суму"),
         "asked": MessageLookupByLibrary.simpleMessage("Запитав"),
-        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
-        "authError": MessageLookupByLibrary.simpleMessage(""),
+        "authConfirm": MessageLookupByLibrary.simpleMessage("Автентифікація"),
+        "authError": MessageLookupByLibrary.simpleMessage(
+            "Під час автентифікації сталася помилка. Спробуйте ще раз пізніше."),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("Метод аутентикації"),
-        "authenticating": MessageLookupByLibrary.simpleMessage(""),
+        "authenticating":
+            MessageLookupByLibrary.simpleMessage("Автентифікація"),
         "autoImport": MessageLookupByLibrary.simpleMessage("Авто Імпорт"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Автоматичне блокування"),
@@ -95,8 +103,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Виберіть назву псевдоніма"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("% 1 розблоковано!"),
-        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
-        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
+            "Здається, ми не можемо отримати доступ до Branch API, зазвичай це спричинено якоюсь проблемою з мережею або VPN, що блокує з’єднання.\n\n Ви все ще зможете користуватися програмою як зазвичай, однак надсилання й отримання подарункових карток може не працювати."),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
+            "Помилка: неможливо отримати доступ до Branch API"),
+        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(
+            "Попередження про підключення"),
         "cancel": MessageLookupByLibrary.simpleMessage("Відмовитися"),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Змінити валюту"),
@@ -116,9 +128,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Підтвердити"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Підтвердити пароль"),
-        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "confirmPinHint":
+            MessageLookupByLibrary.simpleMessage("Підтвердьте пін-код"),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("З\'єднання"),
-        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarning":
+            MessageLookupByLibrary.simpleMessage("Не вдається підключитися"),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Схоже, ми не можемо підключитися до серверної частини. Можливо, це лише ваше з’єднання, або якщо проблема не зникне, серверна частина не працює на технічне обслуговування або навіть збій. Якщо минуло більше години, а у вас усе ще виникають проблеми, будь ласка, надішліть звіт у #bug-reports на сервері Discord @ chat.perish.co"),
+        "connectionWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Схоже, ми не можемо підключитися до серверної частини. Можливо, це лише ваше з’єднання, або якщо проблема не зникне, серверна частина не працює на технічне обслуговування або навіть збій. Якщо минуло більше години, а у вас усе ще виникають проблеми, будь ласка, надішліть звіт у #bug-reports на сервері Discord @ chat.perish.co"),
+        "connectionWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Здається, ми не можемо підключитися до серверної частини"),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("%1 додано до контактів."),
         "contactExists":
@@ -142,7 +162,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copyAddress":
             MessageLookupByLibrary.simpleMessage("Скопіювати адресу"),
         "copyLink": MessageLookupByLibrary.simpleMessage("Копіювати посилання"),
-        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
+        "copyMessage":
+            MessageLookupByLibrary.simpleMessage("Копіювати повідомлення"),
         "copySeed": MessageLookupByLibrary.simpleMessage("Копіювати seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Копіювати адресу торбинки до буфера"),
@@ -160,9 +181,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Пароль встановлювати не обов\'язково, ваш гаманець буде захищено пін кодом або біометричними даними."),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Створити"),
-        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "createPinHint":
+            MessageLookupByLibrary.simpleMessage("Створіть шпильку"),
         "createQR": MessageLookupByLibrary.simpleMessage("Створити QR-код"),
-        "created": MessageLookupByLibrary.simpleMessage(""),
+        "created": MessageLookupByLibrary.simpleMessage("створений"),
         "creatingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Створення подарункової картки"),
         "currency": MessageLookupByLibrary.simpleMessage("Валюта"),
@@ -177,7 +199,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Помилка розшифровки!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Головний гаманець"),
-        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
+            "Перевірте Nautilus! Я надіслав вам нано за цим посиланням:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Гаманець %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Вилучити"),
@@ -192,8 +215,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("Зрозуміло"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Некоректне доменне ім\'я"),
-        "donateButton": MessageLookupByLibrary.simpleMessage(""),
-        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
+        "donateButton": MessageLookupByLibrary.simpleMessage("Пожертвуйте"),
+        "donateToSupport":
+            MessageLookupByLibrary.simpleMessage("Підтримайте проект"),
         "edit": MessageLookupByLibrary.simpleMessage("Редагувати"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Не вдалося встановити пароль гаманця"),
@@ -205,12 +229,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Введіть повідомлення"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Введіть пароль"),
-        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
+        "enterSplitAmount":
+            MessageLookupByLibrary.simpleMessage("Введіть розділену суму"),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage(
             "Введіть користувача або адресу"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Введіть ім\'я користувача"),
-        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
+            "Під час обробки цієї подарункової картки сталася помилка. Можливо, вона недійсна, термін дії закінчився або порожня."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("від когось"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
@@ -266,48 +292,58 @@ class MessageLookup extends MessageLookupByLibrary {
             "Введіть пароль для створення резервної копії."),
         "from": MessageLookupByLibrary.simpleMessage("Від"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("виконано"),
-        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
-        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
-        "getNano": MessageLookupByLibrary.simpleMessage(""),
+        "fundingBannerHeader":
+            MessageLookupByLibrary.simpleMessage("Банер фінансування"),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage("Фінансування"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Отримати NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("У вас є подарунок!"),
         "giftAlertEmpty":
             MessageLookupByLibrary.simpleMessage("Порожній подарунок"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Сума подарунка"),
-        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
-        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(
+            "Під час спроби створити посилання на подарункову картку сталася помилка"),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
+            "Під час спроби створити подарункову картку сталася помилка. ПОСИЛАННЯ НА ПОДАРУНКОВУ КАРТКУ АБО НАСІННЯ БУЛО СКОПІЙОВАНО У БУФЕР ОБМІНУ, ВАШІ КОШТИ МОЖУТЬ БУТИ В НЬОМУ ЗАЛЕЖНО ВІД ТЕГО, ЩО ПІШЛО НЕ БУДЬ."),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Подарунок від"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Завантажте цифрову подарункову карту з NANO! Встановіть суму та необов\'язкове повідомлення для одержувача, щоб побачити, коли він його відкриє!\n\nПісля створення ви отримаєте посилання, яке можна відправити кожному, яка при відкритті автоматично розподілить кошти одержувачу після установки Nautilus!\n\nЯкщо одержувач вже є користувачем Nautilus, він отримає запит на переказ коштів на свій рахунок після відкриття посилання"),
         "giftMessage":
             MessageLookupByLibrary.simpleMessage("Подарункове повідомлення"),
-        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
+            "Подарунок успішно отримано, може знадобитися деякий час, перш ніж він з’явиться у вашому гаманці."),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Повернутися"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Перейти до QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Зрозуміло!"),
-        "handoff": MessageLookupByLibrary.simpleMessage(""),
-        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
-        "handoffSupportedMethodNotFound":
-            MessageLookupByLibrary.simpleMessage(""),
+        "handoff": MessageLookupByLibrary.simpleMessage("руки геть"),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(
+            "Під час блокування передачі сталася помилка!"),
+        "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
+            "Не вдалося знайти підтримуваний метод передачі!"),
         "hide": MessageLookupByLibrary.simpleMessage("Приховати"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Приховати гаманець?"),
-        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
-        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
-        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Ви впевнені, що хочете приховати порожні облікові записи?\n\nЦе приховає всі облікові записи з балансом рівним 0 (за винятком адрес лише для спостереження та вашого основного облікового запису), але ви завжди можете знову додати їх пізніше, натиснувши кнопку «Додати обліковий запис»."),
+        "hideAccountsHeader":
+            MessageLookupByLibrary.simpleMessage("Приховати облікові записи?"),
+        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(
+            "Приховати порожні облікові записи"),
         "home": MessageLookupByLibrary.simpleMessage("Головна"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Я розумію ризики"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ігнорувати"),
-        "imSure": MessageLookupByLibrary.simpleMessage(""),
+        "imSure": MessageLookupByLibrary.simpleMessage("Я впевнений"),
         "import": MessageLookupByLibrary.simpleMessage("Імпортувати"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "Посилання, яке ви натиснули, містить трохи нано, чи хотіли б ви імпортувати його до цього гаманця або повернути його тому, хто його надіслав?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
-        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
-        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(
+            "Схоже, ви натиснули посилання, яке містить частину NANO. Щоб отримати ці кошти, нам потрібно лише завершити налаштування свого гаманця."),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(
+            "Посилання, яке ви клацнули, містить трохи NANO, чи хочете ви імпортувати його в цей гаманець?"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Імпортувати секретну фразу"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -322,14 +358,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("Миттєво"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("Недостатньо коштів"),
-        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
-        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(
+            "Ми пропустили вступний процес, щоб заощадити ваш час, але вам слід негайно створити резервну копію свого щойно створеного початкового коду.\n\nЯкщо ви втратите початкове значення, ви втратите доступ до своїх коштів.\n\nКрім того, ваш пароль встановлено на \"000000\", який також слід негайно змінити."),
+        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(
+            "Зробіть резервну копію свого насіння!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Введено невірну адресу"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Невірний пароль"),
-        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
-        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
+        "invalidPin": MessageLookupByLibrary.simpleMessage("Недійсний PIN-код"),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(
+            "Через правила й обмеження iOS App Store ми не можемо зв’язати вас із нашою сторінкою пожертв. Якщо ви хочете підтримати проект, надішліть на адресу вузла nautilus."),
         "language": MessageLookupByLibrary.simpleMessage("Мова"),
         "linkCopied":
             MessageLookupByLibrary.simpleMessage("Посилання скопійовано"),
@@ -358,7 +397,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Пам\'ятка повторно відправлена! Якщо пристрій одержувача все ще не підтверджено, пристрій одержувача може бути в автономному режимі."),
-        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
+        "messageCopied":
+            MessageLookupByLibrary.simpleMessage("Повідомлення скопійовано"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Повідомлення"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Мінімальна сума для пересилання %1 NANO"),
@@ -368,12 +408,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Мнемонічна фраза"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Секретна фраза складається  із точно 24х слів"),
-        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
+        "monthlyServerCosts":
+            MessageLookupByLibrary.simpleMessage("Щомісячні витрати на сервер"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
-        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
+        "moreSettings":
+            MessageLookupByLibrary.simpleMessage("Більше налаштувань"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
-        "nearby": MessageLookupByLibrary.simpleMessage(""),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Гаманець Nautilus"),
+        "nearby": MessageLookupByLibrary.simpleMessage("Поруч"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Ця функція вимагає, щоб у вас була довша історія транзакцій, щоб запобігти спаму.\n\nКрім того, ви можете показати QR-код комусь для сканування."),
         "needVerificationAlertHeader":
@@ -430,7 +473,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "payments": MessageLookupByLibrary.simpleMessage("Платежі"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Оберіть із списку"),
-        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
+        "pinBlank": MessageLookupByLibrary.simpleMessage(
+            "PIN-код не може бути порожнім"),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("Пін коди не співпадають"),
         "pinConfirmTitle":
@@ -446,11 +490,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Введіть пін код для зміни представника."),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Введіть пін код для створення резервної копії"),
-        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleDeniabilityParagraph":
-            MessageLookupByLibrary.simpleMessage(""),
-        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "pinsDontMatch":
+            MessageLookupByLibrary.simpleMessage("Піни не збігаються"),
+        "plausibleDeniabilityParagraph": MessageLookupByLibrary.simpleMessage(
+            "Це НЕ той самий пін-код, який ви використовували для створення свого гаманця. Щоб дізнатися більше, натисніть кнопку інформації."),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Правдоподібна інформація про заперечення"),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Встановіть вторинний пін для правдоподібного режиму заперечення.\n\nЯкщо ваш гаманець розблоковано за допомогою цього додаткового пін-коду, ваш початковий код буде замінено хешем існуючого початкового коду. Це функція безпеки, призначена для використання у випадку, якщо ви змушені відкрити свій гаманець.\n\nЦей пін-код діятиме як звичайний (правильний) пін-код, КРІМ під час розблокування вашого гаманця, коли активується правдоподібний режим заперечення.\n\nВаші кошти БУДУТЬ ВТРАЧЕНІ після переходу в режим правдоподібної відмови, якщо ви не створили резервну копію початкового коду!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Преференції"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Політика приватності"),
@@ -511,15 +558,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Запит% 1% 2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Помилка запиту: Здається, у цього користувача не встановлено Nautilus або вимкнено сповіщення."),
-        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
+        "requestFrom": MessageLookupByLibrary.simpleMessage("Запит від"),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("Запит на оплату"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "Помилка при відправці платіжного запиту, пристрій одержувача може бути в автономному режимі або недоступний."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Запит повторно відправлений! Якщо пристрій одержувача все ще не підтверджено, пристрій одержувача може бути в автономному режимі."),
-        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
-        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Подайте запит на платіж із наскрізним шифруванням повідомлень!\n\nПлатіжні запити, нагадування та повідомлення будуть прийматися лише іншими користувачами nautilus, але ви можете використовувати їх для ведення власних записів, навіть якщо одержувач не використовує nautilus."),
+        "requestSheetInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Інформацію про аркуш запиту"),
         "requested": MessageLookupByLibrary.simpleMessage("Запитуваний"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("Запит від"),
         "requesting": MessageLookupByLibrary.simpleMessage("Запит"),
@@ -579,7 +628,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Надсилайте або запитуйте платіж із зашифрованими повідомленнями End to End!\n\nПлатіжні запити, замітки та повідомлення будуть отримувати лише інші користувачі nautilus.\n\nВам не потрібно мати ім\'я користувача для надсилання або отримання платіжних запитів, і ви можете використовувати їх для власного ведення обліку, навіть якщо вони не використовують nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Надіслати інформацію про аркуш"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
+        "sendViaNFC":
+            MessageLookupByLibrary.simpleMessage("Надіслати через NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Надсилання"),
         "sent": MessageLookupByLibrary.simpleMessage("Надіслано"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Надіслано для"),
@@ -587,9 +637,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Установити пароль"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Пароль було успішно встановлено"),
-        "setPin": MessageLookupByLibrary.simpleMessage(""),
-        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPin": MessageLookupByLibrary.simpleMessage("Встановити PIN-код"),
+        "setPinSuccess":
+            MessageLookupByLibrary.simpleMessage("PIN-код встановлено успішно"),
+        "setPlausibleDeniabilityPin":
+            MessageLookupByLibrary.simpleMessage("Встановіть вірогідний пін"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Установити пароль гаманця"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -600,32 +652,39 @@ class MessageLookup extends MessageLookupByLibrary {
             "Завантажити з паперового гаманця"),
         "shareLink":
             MessageLookupByLibrary.simpleMessage("Поділитися посиланням"),
-        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
+        "shareMessage":
+            MessageLookupByLibrary.simpleMessage("Поділитися повідомленням"),
         "shareNautilus":
             MessageLookupByLibrary.simpleMessage("Поділитися Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Спробуйте Nautilus!  Найкращий мобільний гаманець для NANO!"),
-        "show": MessageLookupByLibrary.simpleMessage(""),
-        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
+        "show": MessageLookupByLibrary.simpleMessage("Показати"),
+        "showAccountQR": MessageLookupByLibrary.simpleMessage(
+            "Показати QR-код облікового запису"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Показати контакти"),
-        "showFunding": MessageLookupByLibrary.simpleMessage(""),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
-        "showQR": MessageLookupByLibrary.simpleMessage(""),
-        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
+        "showFunding":
+            MessageLookupByLibrary.simpleMessage("Показати банер фінансування"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("Показати посилання QR"),
+        "showQR": MessageLookupByLibrary.simpleMessage("Показати QR-код"),
+        "showUnopenedWarning":
+            MessageLookupByLibrary.simpleMessage("Невідкрите попередження"),
         "simplex": MessageLookupByLibrary.simpleMessage("Симплекс"),
-        "someone": MessageLookupByLibrary.simpleMessage(""),
-        "spendNano": MessageLookupByLibrary.simpleMessage(""),
-        "splitBy": MessageLookupByLibrary.simpleMessage(""),
+        "someone": MessageLookupByLibrary.simpleMessage("хтось"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Витрати НАНО"),
+        "splitBy": MessageLookupByLibrary.simpleMessage("Розділити за"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
-        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
+        "supportDevelopment":
+            MessageLookupByLibrary.simpleMessage("Допомога Підтримка розвитку"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Підтримати розробника"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Перемкнутися на seed"),
         "systemDefault": MessageLookupByLibrary.simpleMessage(
             "Системне значення поза запитом"),
-        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(
+            "Натисніть повідомлення, щоб відредагувати"),
         "tapToHide":
             MessageLookupByLibrary.simpleMessage("Торкніться щоб приховати"),
         "tapToReveal":
@@ -672,15 +731,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Введіть пароль для входу в Nautilus"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "Введіть пін код для входу в Nautilus"),
-        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(
+            "Показати невідкрите попередження"),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(
+            "Відображати попередження під час надсилання коштів на невідкритий рахунок. Це корисно, оскільки в більшості випадків адреси, на які ви надсилаєте, мають баланс, а надсилання на нову адресу може бути результатом друкарської помилки."),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(
+            "Ви впевнені, що це правильна адреса?\nЗдається, цей обліковий запис не відкрито\n\nВи можете вимкнути це попередження в панелі налаштувань у розділі «Невідкрите попередження»"),
         "unopenedWarningWarningHeader":
-            MessageLookupByLibrary.simpleMessage(""),
+            MessageLookupByLibrary.simpleMessage("Рахунок не відкрито"),
         "unpaid": MessageLookupByLibrary.simpleMessage("неоплачений"),
         "unread": MessageLookupByLibrary.simpleMessage("непрочитані"),
         "uptime": MessageLookupByLibrary.simpleMessage("Час в мережі"),
-        "useNano": MessageLookupByLibrary.simpleMessage(""),
+        "useNano": MessageLookupByLibrary.simpleMessage("Використовуйте NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound":
@@ -701,18 +763,23 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ім\'я користувача недоступне"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "Nautilus імена користувачів - це централізована послуга, що надається Nano.to"),
-        "using": MessageLookupByLibrary.simpleMessage(""),
+        "using": MessageLookupByLibrary.simpleMessage("Використання"),
         "viewDetails":
             MessageLookupByLibrary.simpleMessage("Переглянути деталі"),
-        "viewTX": MessageLookupByLibrary.simpleMessage(""),
+        "viewTX":
+            MessageLookupByLibrary.simpleMessage("Переглянути трансакцію"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Сила голосу"),
         "warning": MessageLookupByLibrary.simpleMessage("Попередження"),
-        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
+        "watchAccountExists":
+            MessageLookupByLibrary.simpleMessage("Обліковий запис уже додано!"),
+        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(
+            "Обліковий запис лише для перегляду"),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
+            "Надсилання вимкнено на адресах лише для перегляду"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Ласкаво просимо до Nautilus. Щоб продовжити ви можете створити новий гаманець або імпортувати існуючий."),
-        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
+            "Ласкаво просимо до Наутілуса. Для початку створіть новий гаманець або імпортуйте наявний."),
         "withAddress": MessageLookupByLibrary.simpleMessage("З адресою"),
         "withMessage": MessageLookupByLibrary.simpleMessage("З повідомленням"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Після %1 хвилини"),

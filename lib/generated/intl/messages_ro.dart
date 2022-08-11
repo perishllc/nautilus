@@ -23,8 +23,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Cont"),
-        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
-        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameHint":
+            MessageLookupByLibrary.simpleMessage("Introduceți un Nume"),
+        "accountNameMissing":
+            MessageLookupByLibrary.simpleMessage("Alegeți un nume de cont"),
         "accounts": MessageLookupByLibrary.simpleMessage("Conturi"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Sunteți sigur/ă că ați salvat formula secretă ori seed-ul portofelului?"),
@@ -35,10 +37,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Blocați un utilizator"),
         "addContact": MessageLookupByLibrary.simpleMessage("Adaugă contact"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Adauga Favorite"),
-        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "address": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
+            "Adăugați un cont numai pentru vizionare"),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
+            "Eroare la adăugarea contului numai pentru vizionare: contul a fost nul"),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
+            "Cont doar pentru ceas creat cu succes!"),
+        "address": MessageLookupByLibrary.simpleMessage("Abordare"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("Adresă copiată"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Introdu adresa"),
         "addressMissing":
@@ -47,15 +52,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Introduceți un nume de utilizator sau o adresă"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Share"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliasuri"),
-        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
+            "Suma împărțită nu poate fi mai mare decât soldul cadou"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Introduceți o sumă"),
         "asked": MessageLookupByLibrary.simpleMessage("Întrebat"),
-        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
-        "authError": MessageLookupByLibrary.simpleMessage(""),
+        "authConfirm": MessageLookupByLibrary.simpleMessage("Autentificare"),
+        "authError": MessageLookupByLibrary.simpleMessage(
+            "A apărut o eroare la autentificare. Încercați mai târziu."),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("Metoda de Autentificare"),
-        "authenticating": MessageLookupByLibrary.simpleMessage(""),
+        "authenticating": MessageLookupByLibrary.simpleMessage("Autentificare"),
         "autoImport": MessageLookupByLibrary.simpleMessage("Import automat"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Blocare automată"),
@@ -92,8 +99,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Alegeți un nume Nick"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("% 1 a fost deblocat!"),
-        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
-        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
+            "Se pare că nu putem ajunge la API-ul Branch, acest lucru este de obicei cauzat de un fel de problemă de rețea sau de blocarea conexiunii prin VPN.\n\n Ar trebui să puteți folosi aplicația ca de obicei, dar este posibil ca trimiterea și primirea cardurilor cadou să nu funcționeze."),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
+            "Eroare: nu se poate accesa Branch API"),
+        "branchConnectErrorTitle":
+            MessageLookupByLibrary.simpleMessage("Avertisment de conectare"),
         "cancel": MessageLookupByLibrary.simpleMessage("Renunţare"),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Schimbă valuta"),
@@ -113,9 +124,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Confirmare"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Confirmă parola"),
-        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "confirmPinHint":
+            MessageLookupByLibrary.simpleMessage("Confirmați pinul"),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Se încarcă"),
-        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarning":
+            MessageLookupByLibrary.simpleMessage("Nu se poate conecta"),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Se pare că nu ne putem conecta la backend, aceasta ar putea fi doar conexiunea dvs. sau, dacă problema persistă, backend-ul ar putea fi oprit pentru întreținere sau chiar o întrerupere. Dacă a trecut mai mult de o oră și mai aveți probleme, vă rugăm să trimiteți un raport în #bug-reports pe serverul Discord @ chat.perish.co"),
+        "connectionWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Se pare că nu ne putem conecta la backend, aceasta ar putea fi doar conexiunea dvs. sau, dacă problema persistă, backend-ul ar putea fi oprit pentru întreținere sau chiar o întrerupere. Dacă a trecut mai mult de o oră și mai aveți probleme, vă rugăm să trimiteți un raport în #bug-reports pe serverul Discord @ chat.perish.co"),
+        "connectionWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Se pare că nu ne putem conecta la backend"),
         "contactAdded": MessageLookupByLibrary.simpleMessage(
             "%1 a fost adăugat la contacte!"),
         "contactExists":
@@ -137,7 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("Copiere"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Copiază adresa"),
         "copyLink": MessageLookupByLibrary.simpleMessage("Copiază link-ul"),
-        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
+        "copyMessage": MessageLookupByLibrary.simpleMessage("Copiați mesajul"),
         "copySeed": MessageLookupByLibrary.simpleMessage("Copiere seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Copiați adresa portofelului în clipboard"),
@@ -155,9 +174,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Parola este opțională, portofelul este protejat indiferent de către codul PIN sau datele biometrice."),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Gata"),
-        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "createPinHint": MessageLookupByLibrary.simpleMessage("Creați un pin"),
         "createQR": MessageLookupByLibrary.simpleMessage("Creați cod QR"),
-        "created": MessageLookupByLibrary.simpleMessage(""),
+        "created": MessageLookupByLibrary.simpleMessage("creată"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Crearea cardului cadou"),
         "currency": MessageLookupByLibrary.simpleMessage("Valută"),
@@ -172,7 +191,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Eroare de decriptare!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Cont principal"),
-        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
+            "Vezi Nautilus! Ți-am trimis niște nano cu acest link:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Contul nr. %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Șterge"),
@@ -187,8 +207,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("Respinge"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Nume de domeniu nevalid"),
-        "donateButton": MessageLookupByLibrary.simpleMessage(""),
-        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
+        "donateButton": MessageLookupByLibrary.simpleMessage("Donează"),
+        "donateToSupport":
+            MessageLookupByLibrary.simpleMessage("Susține proiectul"),
         "edit": MessageLookupByLibrary.simpleMessage("Editează"),
         "encryptionFailedError":
             MessageLookupByLibrary.simpleMessage("Setarea parolei a eșuat"),
@@ -200,12 +221,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introduceţi mesajul"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Introduceți parola"),
-        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
+        "enterSplitAmount":
+            MessageLookupByLibrary.simpleMessage("Introduceți suma împărțită"),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage(
             "Introduceți Utilizator sau Adresă"),
         "enterUsername": MessageLookupByLibrary.simpleMessage(
             "Introduceți un nume de utilizator"),
-        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
+            "A apărut o eroare la procesarea acestui card cadou, este posibil să nu fie valid, să fie expirat sau gol."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom":
             MessageLookupByLibrary.simpleMessage("de la oricine"),
@@ -263,46 +286,56 @@ class MessageLookup extends MessageLookupByLibrary {
             "Confirmați cu amprenta pentru a copia seed-ul."),
         "from": MessageLookupByLibrary.simpleMessage("De la"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("îndeplinit"),
-        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
-        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
-        "getNano": MessageLookupByLibrary.simpleMessage(""),
+        "fundingBannerHeader":
+            MessageLookupByLibrary.simpleMessage("Banner de finanțare"),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage("Finanțarea"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Ia NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Ai un cadou!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Cadou gol"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Suma cadou"),
-        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
-        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(
+            "A apărut o eroare la încercarea de a crea un link pentru cardul cadou"),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
+            "A apărut o eroare în timpul încercării de a crea un card cadou, LINKUL CARDULUI CADOU SAU SEMÂNȚA A FOST COPIAT ÎN CLIPBOARD, FONDIILE DVS. POT FI CONȚINUTE ÎN ACEA ÎN FUNȚIE DE CE S-A GREUT."),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Cadou de la"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Încărcați un card cadou digital cu NANO! Setați o sumă și un mesaj opțional pe care destinatarul să îl vadă când îl deschide!\n\nOdată creat, veți primi un link pe care îl puteți trimite oricui, care, atunci când este deschis, va distribui automat fondurile destinatarului după instalarea Nautilus!\n\nDacă destinatarul este deja utilizator Nautilus, acesta va primi o solicitare de a transfera fondurile în contul său la deschiderea linkului"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Mesaj Cadou"),
-        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
+            "Cadou primit cu succes, poate dura un moment până când apare în portofel."),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Înapoi"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Mergi la QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Am înțeles!"),
-        "handoff": MessageLookupByLibrary.simpleMessage(""),
-        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
-        "handoffSupportedMethodNotFound":
-            MessageLookupByLibrary.simpleMessage(""),
+        "handoff": MessageLookupByLibrary.simpleMessage("ia mâna"),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(
+            "Ceva a mers prost la încercarea de a transfera blocarea!"),
+        "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
+            "O metodă de transfer acceptată nu a putut fi găsită!"),
         "hide": MessageLookupByLibrary.simpleMessage("Ascunde"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Ascundere cont?"),
-        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
-        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
-        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Sigur doriți să ascundeți conturile goale?\n\nAcest lucru va ascunde toate conturile cu un sold de exact 0 (excluzând adresele numai pentru ceas și contul dvs. principal), dar puteți oricând să le adăugați din nou mai târziu atingând butonul „Adăugați cont”"),
+        "hideAccountsHeader":
+            MessageLookupByLibrary.simpleMessage("Ascundeți conturile?"),
+        "hideEmptyAccounts":
+            MessageLookupByLibrary.simpleMessage("Ascunde conturile goale"),
         "home": MessageLookupByLibrary.simpleMessage("Acasă"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Înțeleg riscurile"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignoră"),
-        "imSure": MessageLookupByLibrary.simpleMessage(""),
+        "imSure": MessageLookupByLibrary.simpleMessage("Sunt sigur"),
         "import": MessageLookupByLibrary.simpleMessage("Import"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "Linkul pe care ați făcut clic conține nano, doriți să îl importați în acest portofel sau să îl rambursați oricui l-a trimis?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
-        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
-        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(
+            "Se pare că ați dat clic pe un link care conține niște NANO, pentru a primi aceste fonduri avem nevoie doar pentru a finaliza configurarea portofelului."),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(
+            "Linkul pe care ați dat clic conține niște NANO, doriți să îl importați în acest portofel?"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importare formulă secretă"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -317,14 +350,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("Imediat"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("Fonduri insuficiente"),
-        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
-        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(
+            "Am omis procesul de introducere pentru a vă economisi timp, dar ar trebui să faceți imediat backup pentru semințele nou create.\n\nDacă vă pierdeți sămânța, veți pierde accesul la fonduri.\n\nÎn plus, parola dvs. a fost setată la „000000”, pe care ar trebui să o modificați imediat."),
+        "introSkippedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("Fă-ți o rezervă de semințe!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Adresa introdusă este invalidă"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Parolă incorectă"),
-        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
-        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
+        "invalidPin": MessageLookupByLibrary.simpleMessage("PIN nevalid"),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(
+            "Din cauza regulilor și restricțiilor iOS App Store, nu vă putem conecta la pagina noastră de donații. Dacă doriți să susțineți proiectul, luați în considerare trimiterea la adresa nodului nautilus."),
         "language": MessageLookupByLibrary.simpleMessage("Limba"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("Link Copiat"),
         "loaded": MessageLookupByLibrary.simpleMessage("Încărcat"),
@@ -352,7 +388,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Memo re-trimis! Dacă încă nu este recunoscut, dispozitivul destinatarului poate fi offline."),
-        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
+        "messageCopied": MessageLookupByLibrary.simpleMessage("Mesaj copiat"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Mesaj"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Suma minimă de trimitere este% 1% 2"),
@@ -362,12 +398,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Frază de memorat"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Formula secretă conține doar 24 de cuvinte"),
-        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
+        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(
+            "Costuri lunare ale serverului"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
-        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
+        "moreSettings":
+            MessageLookupByLibrary.simpleMessage("Mai multe setari"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
-        "nearby": MessageLookupByLibrary.simpleMessage(""),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Portofel Nautilus"),
+        "nearby": MessageLookupByLibrary.simpleMessage("Din apropiere"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Această caracteristică necesită să aveți un istoric de tranzacții mai lung pentru a preveni spamul.\n\nAlternativ, puteți afișa un cod QR pentru ca cineva să scaneze."),
         "needVerificationAlertHeader":
@@ -422,7 +461,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Cineva a solicitat plata de la tine! verificați pagina de plăți pentru mai multe informații."),
         "payments": MessageLookupByLibrary.simpleMessage("Plăți"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("Alege din listă"),
-        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
+        "pinBlank":
+            MessageLookupByLibrary.simpleMessage("Pinul nu poate fi gol"),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("PIN-urile nu corespund"),
         "pinConfirmTitle":
@@ -436,11 +476,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Introdu PIN-ul pentru a schimba reprezentantul"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Introdu PIN-ul pentru a vedea seed-ul portofelului."),
-        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleDeniabilityParagraph":
-            MessageLookupByLibrary.simpleMessage(""),
-        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "pinsDontMatch":
+            MessageLookupByLibrary.simpleMessage("Pinurile nu se potrivesc"),
+        "plausibleDeniabilityParagraph": MessageLookupByLibrary.simpleMessage(
+            "Acesta NU este același cod pe care l-ați folosit pentru a vă crea portofelul. Apăsați butonul de informații pentru mai multe informații."),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informații plauzibile privind negarea"),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Setați un pin secundar pentru modul de negație plauzibil.\n\nDacă portofelul tău este deblocat folosind acest cod secundar, sămânța ta va fi înlocuită cu un hash din sămânța existentă. Aceasta este o caracteristică de securitate destinată a fi utilizată în cazul în care sunteți forțat să vă deschideți portofelul.\n\nAcest pin va acționa ca un cod normal (corec) CU EXCEPȚIA când vă deblocați portofelul, care este momentul în care modul de negație plauzibil se va activa.\n\nFondurile dvs. VOR FI PIERDUTE la intrarea în modul de negație plauzibil dacă nu v-ați făcut o copie de rezervă!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferințe"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage(
             "Politica de confidențialitate"),
@@ -503,15 +546,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cerere% 1% 2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Solicitare eșuată: Acest utilizator nu pare să aibă instalat Nautilus sau notificările sunt dezactivate."),
-        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
+        "requestFrom": MessageLookupByLibrary.simpleMessage("O cerere de la"),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("Cerere de plată"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "Eroare la trimiterea cererii de plată, dispozitivul destinatarului poate fi offline sau indisponibil."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Cerere re-trimis! Dacă încă nu este recunoscut, dispozitivul destinatarului poate fi offline."),
-        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
-        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Solicitați o plată, cu mesaje criptate End to End!\n\nSolicitările de plată, notele și mesajele vor fi primite numai de alți utilizatori nautilus, dar le puteți utiliza pentru a vă păstra propria evidență chiar dacă destinatarul nu folosește nautilus."),
+        "requestSheetInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Solicitați Fișa Informații"),
         "requested": MessageLookupByLibrary.simpleMessage("Solicitat"),
         "requestedFrom":
             MessageLookupByLibrary.simpleMessage("Solicitat de la"),
@@ -571,16 +616,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Trimiteți sau solicitați o plată, cu mesaje criptate End to End!\n\nSolicitările de plată, memoriile și mesajele vor fi primite numai de către alți utilizatori nautilus.\n\nNu este necesar să aveți un nume de utilizator pentru a trimite sau primi cereri de plată și le puteți utiliza pentru păstrarea propriei evidențe, chiar dacă nu utilizează nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Trimiteți informații despre foaie"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage("Trimite prin NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Trimitere..."),
         "sent": MessageLookupByLibrary.simpleMessage("Ai trimis"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Trimis către"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Setează parola"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Parola a fost setată cu succes"),
-        "setPin": MessageLookupByLibrary.simpleMessage(""),
-        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPin": MessageLookupByLibrary.simpleMessage("Setați PIN"),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(
+            "Pinul a fost setat cu succes"),
+        "setPlausibleDeniabilityPin":
+            MessageLookupByLibrary.simpleMessage("Setați PIN plauzibil"),
         "setWalletPassword": MessageLookupByLibrary.simpleMessage(
             "Setați o parolă portofelului"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -590,31 +637,37 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Încarcă din Paper Wallet"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Distribuiți linkul"),
-        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
+        "shareMessage":
+            MessageLookupByLibrary.simpleMessage("Partajați mesajul"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Share Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Încearcă Nautilus! Portofelul mobil NANO de talie mondială!"),
-        "show": MessageLookupByLibrary.simpleMessage(""),
-        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
+        "show": MessageLookupByLibrary.simpleMessage("Spectacol"),
+        "showAccountQR":
+            MessageLookupByLibrary.simpleMessage("Afișați codul QR contului"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Afișați contactele"),
-        "showFunding": MessageLookupByLibrary.simpleMessage(""),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
-        "showQR": MessageLookupByLibrary.simpleMessage(""),
-        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
+        "showFunding": MessageLookupByLibrary.simpleMessage(
+            "Afișați bannerul de finanțare"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("Afișați linkul QR"),
+        "showQR": MessageLookupByLibrary.simpleMessage("Afișați codul QR"),
+        "showUnopenedWarning":
+            MessageLookupByLibrary.simpleMessage("Avertisment nedeschis"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
-        "someone": MessageLookupByLibrary.simpleMessage(""),
-        "spendNano": MessageLookupByLibrary.simpleMessage(""),
-        "splitBy": MessageLookupByLibrary.simpleMessage(""),
+        "someone": MessageLookupByLibrary.simpleMessage("cineva"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Cheltuiește NANO"),
+        "splitBy": MessageLookupByLibrary.simpleMessage("Split By"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
-        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
+        "supportDevelopment": MessageLookupByLibrary.simpleMessage(
+            "Ajută la sprijinirea dezvoltării"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Sprijiniți dezvoltatorul"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Folosește seed-ul"),
         "systemDefault":
             MessageLookupByLibrary.simpleMessage("Limba implicită"),
-        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(
+            "Atingeți mesaj pentru a edita"),
         "tapToHide":
             MessageLookupByLibrary.simpleMessage("Apăsați pentru a ascunde"),
         "tapToReveal":
@@ -661,15 +714,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Autentificaţi-vă pentru a debloca Nautilus"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "Introduceți codul PIN pentru a debloca Nautilus"),
-        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(
+            "Afișați avertisment nedeschis"),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(
+            "Afișați un avertisment atunci când trimiteți fonduri către un cont nedeschis, acest lucru este util deoarece de cele mai multe ori adresele către care trimiteți vor avea un sold, iar trimiterea către o nouă adresă poate fi rezultatul unei greșeli de scriere."),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(
+            "Ești sigur că aceasta este adresa corectă?\nAcest cont pare a fi nedeschis\n\nPuteți dezactiva acest avertisment în sertarul de setări sub „Avertisment nedeschis”"),
         "unopenedWarningWarningHeader":
-            MessageLookupByLibrary.simpleMessage(""),
+            MessageLookupByLibrary.simpleMessage("Cont nedeschis"),
         "unpaid": MessageLookupByLibrary.simpleMessage("neplătit"),
         "unread": MessageLookupByLibrary.simpleMessage("necitită"),
         "uptime": MessageLookupByLibrary.simpleMessage("Timp de funcționare"),
-        "useNano": MessageLookupByLibrary.simpleMessage(""),
+        "useNano": MessageLookupByLibrary.simpleMessage("Folosește NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
@@ -690,17 +746,22 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nume utilizator indisponibil"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "Numele de utilizator Nautilus sunt un serviciu centralizat furnizat de Nano.to"),
-        "using": MessageLookupByLibrary.simpleMessage(""),
+        "using": MessageLookupByLibrary.simpleMessage("Folosind"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Detalii"),
-        "viewTX": MessageLookupByLibrary.simpleMessage(""),
+        "viewTX":
+            MessageLookupByLibrary.simpleMessage("Vizualizați tranzacția"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Putere de vot"),
         "warning": MessageLookupByLibrary.simpleMessage("AVERTISMENT"),
-        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
+        "watchAccountExists":
+            MessageLookupByLibrary.simpleMessage("Cont deja adăugat!"),
+        "watchOnlyAccount":
+            MessageLookupByLibrary.simpleMessage("Cont numai pentru vizionare"),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
+            "Trimiterile sunt dezactivate numai pe adresele de ceas"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Bine ai venit! Pentru a continua, creează un portofel nou sau importă unul deja existent."),
-        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
+            "Bun venit la Nautilus. Pentru a începe, creați un portofel nou sau importați unul existent."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Cu adresa"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Cu mesaj"),
         "xMinute": MessageLookupByLibrary.simpleMessage("După %1 minut"),

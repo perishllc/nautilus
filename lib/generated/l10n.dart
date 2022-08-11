@@ -520,22 +520,22 @@ class AppLocalization {
     );
   }
 
-  /// `Error: can't reach Gift Card API`
-  String get branchConnectErrorShortDesc {
+  /// `We can't seem to reach the Branch API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work.`
+  String get branchConnectErrorLongDesc {
     return Intl.message(
-      'Error: can\'t reach Gift Card API',
-      name: 'branchConnectErrorShortDesc',
-      desc: 'branch_connection_error_short_desc',
+      'We can\'t seem to reach the Branch API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work.',
+      name: 'branchConnectErrorLongDesc',
+      desc: 'branch_connection_error_long_desc',
       args: [],
     );
   }
 
-  /// `We can't seem to reach the Branch (Gift Card) API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work.`
-  String get branchConnectErrorLongDesc {
+  /// `Error: can't reach Branch API`
+  String get branchConnectErrorShortDesc {
     return Intl.message(
-      'We can\'t seem to reach the Branch (Gift Card) API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work.',
-      name: 'branchConnectErrorLongDesc',
-      desc: 'branch_connection_error_long_desc',
+      'Error: can\'t reach Branch API',
+      name: 'branchConnectErrorShortDesc',
+      desc: 'branch_connection_error_short_desc',
       args: [],
     );
   }
@@ -691,22 +691,22 @@ class AppLocalization {
     );
   }
 
-  /// `Connection Warning`
+  /// `Can't Connect`
   String get connectionWarning {
     return Intl.message(
-      'Connection Warning',
+      'Can\'t Connect',
       name: 'connectionWarning',
       desc: 'home_connection_warning',
       args: [],
     );
   }
 
-  /// `We can't seem to connect to the backend`
-  String get connectionWarningBodyShort {
+  /// `We can't seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it's been more than an hour and you're still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co`
+  String get connectionWarningBody {
     return Intl.message(
-      'We can\'t seem to connect to the backend',
-      name: 'connectionWarningBodyShort',
-      desc: 'connection_warning_body_short',
+      'We can\'t seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it\'s been more than an hour and you\'re still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co',
+      name: 'connectionWarningBody',
+      desc: 'connection_warning_body',
       args: [],
     );
   }
@@ -717,6 +717,16 @@ class AppLocalization {
       'We can\'t seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it\'s been more than an hour and you\'re still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co',
       name: 'connectionWarningBodyLong',
       desc: 'connection_warning_body_long',
+      args: [],
+    );
+  }
+
+  /// `We can't seem to connect to the backend`
+  String get connectionWarningBodyShort {
+    return Intl.message(
+      'We can\'t seem to connect to the backend',
+      name: 'connectionWarningBodyShort',
+      desc: 'connection_warning_body_short',
       args: [],
     );
   }

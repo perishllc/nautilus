@@ -1,3 +1,6 @@
+## v0.5.6 - [2022-08-12]
+#### Changed
+- Updated translations
 ## v0.5.5 - [2022-08-11]
 #### Added
 - Error message for when the wallet can't reach branch.io servers

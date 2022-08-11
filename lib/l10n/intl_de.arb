@@ -5,12 +5,12 @@
     "type": "text",
     "description": "Account text"
   },
-  "accountNameHint": "",
+  "accountNameHint": "Geben Sie einen Namen ein",
   "@accountNameHint": {
     "type": "text",
     "description": "enter_name_hint"
   },
-  "accountNameMissing": "",
+  "accountNameMissing": "Wählen Sie einen Kontonamen",
   "@accountNameMissing": {
     "type": "text",
     "description": "account_name_missing"
@@ -50,7 +50,7 @@
     "type": "text",
     "description": "favorite_add_button"
   },
-  "address": "",
+  "address": "Adresse",
   "@address": {
     "type": "text",
     "description": "send_warning_address"
@@ -80,17 +80,17 @@
     "type": "text",
     "description": "receive_share_cta"
   },
-  "addWatchOnlyAccount": "",
+  "addWatchOnlyAccount": "Fügen Sie ein Watch Only-Konto hinzu",
   "@addWatchOnlyAccount": {
     "type": "text",
     "description": "watch_only_add"
   },
-  "addWatchOnlyAccountError": "",
+  "addWatchOnlyAccountError": "Fehler beim Hinzufügen des Watch Only-Kontos: Das Konto war null",
   "@addWatchOnlyAccountError": {
     "type": "text",
     "description": "watch_only_add_error"
   },
-  "addWatchOnlyAccountSuccess": "",
+  "addWatchOnlyAccountSuccess": "Nur-Uhr-Konto erfolgreich erstellt!",
   "@addWatchOnlyAccountSuccess": {
     "type": "text",
     "description": "watch_only_add_success"
@@ -100,7 +100,7 @@
     "type": "text",
     "description": "card_details_aliases"
   },
-  "amountGiftGreaterError": "",
+  "amountGiftGreaterError": "Der Aufteilungsbetrag darf nicht größer als das Geschenkguthaben sein",
   "@amountGiftGreaterError": {
     "type": "text",
     "description": "gift_split_greater_error"
@@ -115,17 +115,17 @@
     "type": "text",
     "description": "home_asked_cta"
   },
-  "authConfirm": "",
+  "authConfirm": "Authentifizieren",
   "@authConfirm": {
     "type": "text",
     "description": "auth_confirm_message"
   },
-  "authenticating": "",
+  "authenticating": "Authentifizieren",
   "@authenticating": {
     "type": "text",
     "description": "auth_authenticating"
   },
-  "authError": "",
+  "authError": "Bei der Authentifizierung ist ein Fehler aufgetreten. Versuchen Sie es später noch einmal.",
   "@authError": {
     "type": "text",
     "description": "auth_generic_error"
@@ -235,12 +235,17 @@
     "type": "text",
     "description": "block_user"
   },
-  "branchConnectErrorShortDesc": "",
+  "branchConnectErrorLongDesc": "Wir können die Branch-API anscheinend nicht erreichen, dies wird normalerweise durch ein Netzwerkproblem oder ein VPN verursacht, das die Verbindung blockiert.\n\n Sie sollten die App weiterhin wie gewohnt verwenden können, das Senden und Empfangen von Geschenkkarten funktioniert jedoch möglicherweise nicht.",
+  "@branchConnectErrorLongDesc": {
+    "type": "text",
+    "description": "branch_connection_error_long_desc"
+  },
+  "branchConnectErrorShortDesc": "Fehler: Verzweigungs-API kann nicht erreicht werden",
   "@branchConnectErrorShortDesc": {
     "type": "text",
     "description": "branch_connection_error_short_desc"
   },
-  "branchConnectErrorTitle": "",
+  "branchConnectErrorTitle": "Verbindungswarnung",
   "@branchConnectErrorTitle": {
     "type": "text",
     "description": "branch_connection_error_title"
@@ -305,7 +310,7 @@
     "type": "text",
     "description": "A text field hint that tells the user to confirm the password"
   },
-  "confirmPinHint": "",
+  "confirmPinHint": "Bestätigen Sie die PIN",
   "@confirmPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to confirm the pin"
@@ -315,15 +320,25 @@
     "type": "text",
     "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
   },
-  "connectionWarning": "",
+  "connectionWarning": "Verbindung nicht möglich",
   "@connectionWarning": {
     "type": "text",
     "description": "home_connection_warning"
   },
-  "connectionWarningBody": "",
+  "connectionWarningBody": "Wir können anscheinend keine Verbindung zum Back-End herstellen, dies könnte nur Ihre Verbindung sein, oder wenn das Problem weiterhin besteht, ist das Back-End möglicherweise wegen Wartungsarbeiten oder sogar ausgefallen. Wenn es mehr als eine Stunde her ist und du immer noch Probleme hast, sende bitte einen Bericht unter #bug-reports auf dem Discord-Server @ chat.perish.co",
   "@connectionWarningBody": {
     "type": "text",
     "description": "connection_warning_body"
+  },
+  "connectionWarningBodyLong": "Wir können anscheinend keine Verbindung zum Back-End herstellen, dies könnte nur Ihre Verbindung sein, oder wenn das Problem weiterhin besteht, ist das Back-End möglicherweise wegen Wartungsarbeiten oder sogar ausgefallen. Wenn es mehr als eine Stunde her ist und du immer noch Probleme hast, sende bitte einen Bericht unter #bug-reports auf dem Discord-Server @ chat.perish.co",
+  "@connectionWarningBodyLong": {
+    "type": "text",
+    "description": "connection_warning_body_long"
+  },
+  "connectionWarningBodyShort": "Wir können anscheinend keine Verbindung zum Backend herstellen",
+  "@connectionWarningBodyShort": {
+    "type": "text",
+    "description": "connection_warning_body_short"
   },
   "contactAdded": "%1 zu Kontakten hinzugefügt!",
   "@contactAdded": {
@@ -395,7 +410,7 @@
     "type": "text",
     "description": "copy_link"
   },
-  "copyMessage": "",
+  "copyMessage": "Nachricht kopieren",
   "@copyMessage": {
     "type": "text",
     "description": "copy_message"
@@ -415,7 +430,7 @@
     "type": "text",
     "description": "A paragraph that tells the users to create a password."
   },
-  "created": "",
+  "created": "erstellt",
   "@created": {
     "type": "text",
     "description": "gift_created"
@@ -450,7 +465,7 @@
     "type": "text",
     "description": "Prompt user to create a new password"
   },
-  "createPinHint": "",
+  "createPinHint": "Erstellen Sie eine Stecknadel",
   "@createPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to create a pin"
@@ -500,7 +515,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "",
+  "defaultGiftMessage": "Schauen Sie sich Nautilus an! Ich habe dir Nano mit diesem Link geschickt:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -545,12 +560,12 @@
     "type": "text",
     "description": "domain_invalid_name"
   },
-  "donateButton": "",
+  "donateButton": "Spenden",
   "@donateButton": {
     "type": "text",
     "description": "donate_button"
   },
-  "donateToSupport": "",
+  "donateToSupport": "Unterstützen Sie das Projekt",
   "@donateToSupport": {
     "type": "text",
     "description": "settings_support_donate"
@@ -590,7 +605,7 @@
     "type": "text",
     "description": "A text field hint that tells the users to enter their password"
   },
-  "enterSplitAmount": "",
+  "enterSplitAmount": "Splitbetrag eingeben",
   "@enterSplitAmount": {
     "type": "text",
     "description": "gift_split_amount_hint"
@@ -605,7 +620,7 @@
     "type": "text",
     "description": "enter_user_address"
   },
-  "errorProcessingGiftCard": "",
+  "errorProcessingGiftCard": "Bei der Verarbeitung dieser Geschenkkarte ist ein Fehler aufgetreten. Sie ist möglicherweise ungültig, abgelaufen oder leer.",
   "@errorProcessingGiftCard": {
     "type": "text",
     "description": "gift_process_error"
@@ -785,17 +800,17 @@
     "type": "text",
     "description": "history_fulfilled"
   },
-  "fundingBannerHeader": "",
+  "fundingBannerHeader": "Finanzierungsbanner",
   "@fundingBannerHeader": {
     "type": "text",
     "description": "funding_banner_header"
   },
-  "fundingHeader": "",
+  "fundingHeader": "Finanzierung",
   "@fundingHeader": {
     "type": "text",
     "description": "funding_header"
   },
-  "getNano": "",
+  "getNano": "Holen Sie sich Nano",
   "@getNano": {
     "type": "text",
     "description": "get_nano"
@@ -815,12 +830,12 @@
     "type": "text",
     "description": "gift_amount"
   },
-  "giftCardCreationError": "",
+  "giftCardCreationError": "Beim Versuch, einen Geschenkkarten-Link zu erstellen, ist ein Fehler aufgetreten",
   "@giftCardCreationError": {
     "type": "text",
     "description": "create_gift_error"
   },
-  "giftCardCreationErrorSent": "",
+  "giftCardCreationErrorSent": "Beim Versuch, eine Geschenkkarte zu erstellen, ist ein Fehler aufgetreten. DER LINK ODER SEED DER GESCHENKKARTE WURDE IN IHRE ZWISCHENABLAGE KOPIERT. IHRE GELDKÖNNEN DARIN ENTHALTEN SEIN, JE NACHDEM, WAS FEHLERGEHEN IST.",
   "@giftCardCreationErrorSent": {
     "type": "text",
     "description": "gift_generic_error"
@@ -840,7 +855,7 @@
     "type": "text",
     "description": "gift_message"
   },
-  "giftProcessSuccess": "",
+  "giftProcessSuccess": "Geschenk erfolgreich erhalten, es kann einen Moment dauern, bis es in Ihrer Brieftasche erscheint.",
   "@giftProcessSuccess": {
     "type": "text",
     "description": "gift_process_success"
@@ -865,17 +880,17 @@
     "type": "text",
     "description": "go_to_qr_code"
   },
-  "handoff": "",
+  "handoff": "weiterleiten",
   "@handoff": {
     "type": "text",
     "description": "send_handoff"
   },
-  "handoffFailed": "",
+  "handoffFailed": "Beim Versuch, die Sperre zu übergeben, ist etwas schief gelaufen!",
   "@handoffFailed": {
     "type": "text",
     "description": "handoff_failed"
   },
-  "handoffSupportedMethodNotFound": "",
+  "handoffSupportedMethodNotFound": "Eine unterstützte Übergabemethode konnte nicht gefunden werden!",
   "@handoffSupportedMethodNotFound": {
     "type": "text",
     "description": "handoff_method_not_found"
@@ -890,17 +905,17 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "hideAccountsConfirmation": "",
+  "hideAccountsConfirmation": "Möchten Sie leere Konten wirklich ausblenden?\n\nDadurch werden alle Konten mit einem Kontostand von genau 0 ausgeblendet (mit Ausnahme von Watch-Only-Adressen und Ihrem Hauptkonto), aber Sie können sie später jederzeit wieder hinzufügen, indem Sie auf die Schaltfläche \"Konto hinzufügen\" tippen",
   "@hideAccountsConfirmation": {
     "type": "text",
     "description": "hide accounts confirmation info"
   },
-  "hideAccountsHeader": "",
+  "hideAccountsHeader": "Konten verstecken?",
   "@hideAccountsHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "hideEmptyAccounts": "",
+  "hideEmptyAccounts": "Leere Konten ausblenden",
   "@hideEmptyAccounts": {
     "type": "text",
     "description": "hide_empty_accounts"
@@ -930,12 +945,12 @@
     "type": "text",
     "description": "import_gift_empty"
   },
-  "importGiftIntro": "",
+  "importGiftIntro": "Es sieht so aus, als hätten Sie auf einen Link geklickt, der etwas NANO enthält, um diese Gelder zu erhalten, die wir nur benötigen, damit Sie die Einrichtung Ihres Wallets abschließen können.",
   "@importGiftIntro": {
     "type": "text",
     "description": "import_gift_intro"
   },
-  "importGiftv2": "",
+  "importGiftv2": "Der Link, auf den Sie geklickt haben, enthält etwas NANO, möchten Sie es in dieses Wallet importieren?",
   "@importGiftv2": {
     "type": "text",
     "description": "import_gift_v2"
@@ -970,7 +985,7 @@
     "type": "text",
     "description": "intro_welcome_have_wallet"
   },
-  "imSure": "",
+  "imSure": "Ich bin sicher",
   "@imSure": {
     "type": "text",
     "description": "send_confirm_warning"
@@ -985,12 +1000,12 @@
     "type": "text",
     "description": "send_insufficient_balance"
   },
-  "introSkippedWarningContent": "",
+  "introSkippedWarningContent": "Wir haben den Einführungsprozess übersprungen, um Ihnen Zeit zu sparen, aber Sie sollten Ihren neu erstellten Seed sofort sichern.\n\nWenn Sie Ihren Seed verlieren, verlieren Sie den Zugriff auf Ihre Gelder.\n\nAußerdem wurde Ihr Passcode auf „000000“ gesetzt, den Sie ebenfalls sofort ändern sollten.",
   "@introSkippedWarningContent": {
     "type": "text",
     "description": "intro_skipped_warning_content"
   },
-  "introSkippedWarningHeader": "",
+  "introSkippedWarningHeader": "Sichern Sie Ihren Seed!",
   "@introSkippedWarningHeader": {
     "type": "text",
     "description": "intro_skipped_warning_header"
@@ -1005,12 +1020,12 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
-  "invalidPin": "",
+  "invalidPin": "Ungültige PIN",
   "@invalidPin": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
   },
-  "iosFundingMessage": "",
+  "iosFundingMessage": "Aufgrund der Richtlinien und Einschränkungen des iOS App Store können wir Sie nicht mit unserer Spendenseite verlinken. Wenn Sie das Projekt unterstützen möchten, senden Sie es bitte an die Adresse des Nautilus-Knotens.",
   "@iosFundingMessage": {
     "type": "text",
     "description": "ios_funding_message"
@@ -1110,7 +1125,7 @@
     "type": "text",
     "description": "memo_sent_again"
   },
-  "messageCopied": "",
+  "messageCopied": "Nachricht kopiert",
   "@messageCopied": {
     "type": "text",
     "description": "message_copied"
@@ -1140,7 +1155,7 @@
     "type": "text",
     "description": "err"
   },
-  "monthlyServerCosts": "",
+  "monthlyServerCosts": "Monatliche Serverkosten",
   "@monthlyServerCosts": {
     "type": "text",
     "description": "support_monthly_costs"
@@ -1150,7 +1165,7 @@
     "type": "text",
     "description": "moonpay_ramp"
   },
-  "moreSettings": "",
+  "moreSettings": "Mehr Einstellungen",
   "@moreSettings": {
     "type": "text",
     "description": "settings_more"
@@ -1160,12 +1175,12 @@
     "type": "text",
     "description": "natricon_settings"
   },
-  "nautilusWallet": "",
+  "nautilusWallet": "Nautilus-Geldbörse",
   "@nautilusWallet": {
     "type": "text",
     "description": "nautilus_wallet"
   },
-  "nearby": "",
+  "nearby": "In der Nähe",
   "@nearby": {
     "type": "text",
     "description": "nearby_devices"
@@ -1350,7 +1365,7 @@
     "type": "text",
     "description": "pick rep from list"
   },
-  "pinBlank": "",
+  "pinBlank": "Pin darf nicht leer sein",
   "@pinBlank": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
@@ -1390,7 +1405,7 @@
     "type": "text",
     "description": "change_representative_pin"
   },
-  "pinsDontMatch": "",
+  "pinsDontMatch": "Stifte stimmen nicht überein",
   "@pinsDontMatch": {
     "type": "text",
     "description": "An error indicating a pin has been confirmed incorrectly"
@@ -1400,17 +1415,17 @@
     "type": "text",
     "description": "settings_pin_title"
   },
-  "plausibleDeniabilityParagraph": "",
+  "plausibleDeniabilityParagraph": "Dies ist NICHT dieselbe PIN, die Sie zum Erstellen Ihrer Brieftasche verwendet haben. Drücken Sie die Info-Taste für weitere Informationen.",
   "@plausibleDeniabilityParagraph": {
     "type": "text",
     "description": "A paragraph that tells warns the user this is plausible deniability pin."
   },
-  "plausibleInfoHeader": "",
+  "plausibleInfoHeader": "Plausible Deniability Info",
   "@plausibleInfoHeader": {
     "type": "text",
     "description": "plausible_info_header"
   },
-  "plausibleSheetInfo": "",
+  "plausibleSheetInfo": "Legen Sie einen sekundären Pin für den plausiblen Deniability-Modus fest.\n\nWenn Ihre Brieftasche mit dieser sekundären PIN entsperrt wird, wird Ihr Seed durch einen Hash des vorhandenen Seeds ersetzt. Dies ist eine Sicherheitsfunktion, die verwendet werden soll, falls Sie gezwungen sind, Ihre Brieftasche zu öffnen.\n\nDiese PIN verhält sich wie eine normale (korrekte) PIN, AUSSER beim Entsperren Ihrer Brieftasche, wenn der Plausible Deniability-Modus aktiviert wird.\n\nIhr Geld WIRD VERLOREN, wenn Sie in den Plausible Deniability-Modus wechseln, wenn Sie Ihren Seed nicht gesichert haben!",
   "@plausibleSheetInfo": {
     "type": "text",
     "description": "plausible_sheet_info"
@@ -1615,7 +1630,7 @@
     "type": "text",
     "description": "request_generic_error"
   },
-  "requestFrom": "",
+  "requestFrom": "Anfrage von",
   "@requestFrom": {
     "type": "text",
     "description": "request_title"
@@ -1640,12 +1655,12 @@
     "type": "text",
     "description": "request_sent_again"
   },
-  "requestSheetInfo": "",
+  "requestSheetInfo": "Fordern Sie eine Zahlung mit End-to-End-verschlüsselten Nachrichten an!\n\nZahlungsaufforderungen, Memos und Nachrichten können nur von anderen Nautilus-Benutzern empfangen werden, aber Sie können sie für Ihre eigenen Aufzeichnungen verwenden, auch wenn der Empfänger Nautilus nicht verwendet.",
   "@requestSheetInfo": {
     "type": "text",
     "description": "request_sheet_info"
   },
-  "requestSheetInfoHeader": "",
+  "requestSheetInfoHeader": "Blattinfo anfordern",
   "@requestSheetInfoHeader": {
     "type": "text",
     "description": "request_sheet_info_header"
@@ -1815,7 +1830,7 @@
     "type": "text",
     "description": "send_sheet_info_header"
   },
-  "sendViaNFC": "",
+  "sendViaNFC": "Über NFC senden",
   "@sendViaNFC": {
     "type": "text",
     "description": "send_payment_nfc"
@@ -1840,17 +1855,17 @@
     "type": "text",
     "description": "Setting a Wallet Password was successful"
   },
-  "setPin": "",
+  "setPin": "Pin setzen",
   "@setPin": {
     "type": "text",
     "description": "A button that sets the plausible deniability password"
   },
-  "setPinSuccess": "",
+  "setPinSuccess": "Pin wurde erfolgreich gesetzt",
   "@setPinSuccess": {
     "type": "text",
     "description": "Setting a Wallet Pin was successful"
   },
-  "setPlausibleDeniabilityPin": "",
+  "setPlausibleDeniabilityPin": "Plausiblen Pin setzen",
   "@setPlausibleDeniabilityPin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
@@ -1885,7 +1900,7 @@
     "type": "text",
     "description": "share_link"
   },
-  "shareMessage": "",
+  "shareMessage": "Nachricht teilen",
   "@shareMessage": {
     "type": "text",
     "description": "share_message"
@@ -1900,12 +1915,12 @@
     "type": "text",
     "description": "share_extra"
   },
-  "show": "",
+  "show": "Zeigen",
   "@show": {
     "type": "text",
     "description": "funding_show"
   },
-  "showAccountQR": "",
+  "showAccountQR": "Konto-QR-Code anzeigen",
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
@@ -1915,22 +1930,22 @@
     "type": "text",
     "description": "contacts_enabled"
   },
-  "showFunding": "",
+  "showFunding": "Finanzierungsbanner anzeigen",
   "@showFunding": {
     "type": "text",
     "description": "show_funding_banner"
   },
-  "showLinkQR": "",
+  "showLinkQR": "Link-QR anzeigen",
   "@showLinkQR": {
     "type": "text",
     "description": "show_link_qr"
   },
-  "showQR": "",
+  "showQR": "QR-Code anzeigen",
   "@showQR": {
     "type": "text",
     "description": "show_qr"
   },
-  "showUnopenedWarning": "",
+  "showUnopenedWarning": "Ungeöffnete Warnung",
   "@showUnopenedWarning": {
     "type": "text",
     "description": "warn_unsafe_send"
@@ -1940,17 +1955,17 @@
     "type": "text",
     "description": "simplex_ramp"
   },
-  "someone": "",
+  "someone": "jemand",
   "@someone": {
     "type": "text",
     "description": "send_someone"
   },
-  "spendNano": "",
+  "spendNano": "NANO ausgeben",
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
   },
-  "splitBy": "",
+  "splitBy": "Geteilt durch",
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
@@ -1960,7 +1975,7 @@
     "type": "text",
     "description": "A button to open up the live support window"
   },
-  "supportDevelopment": "",
+  "supportDevelopment": "Helfen Sie mit, die Entwicklung zu unterstützen",
   "@supportDevelopment": {
     "type": "text",
     "description": "settings_support_development"
@@ -1980,7 +1995,7 @@
     "type": "text",
     "description": "settings_default_language_string"
   },
-  "tapMessageToEdit": "",
+  "tapMessageToEdit": "Tippen Sie auf die Nachricht, um sie zu bearbeiten",
   "@tapMessageToEdit": {
     "type": "text",
     "description": "gift_creation_message_edit_hint"
@@ -2120,22 +2135,22 @@
     "type": "text",
     "description": "unlock_pin"
   },
-  "unopenedWarningHeader": "",
+  "unopenedWarningHeader": "Ungeöffnete Warnung anzeigen",
   "@unopenedWarningHeader": {
     "type": "text",
     "description": "unopened_warning_header"
   },
-  "unopenedWarningInfo": "",
+  "unopenedWarningInfo": "Zeigen Sie eine Warnung an, wenn Sie Geld an ein ungeöffnetes Konto senden. Dies ist nützlich, da die meisten Adressen, an die Sie senden, einen Saldo haben und das Senden an eine neue Adresse das Ergebnis eines Tippfehlers sein kann.",
   "@unopenedWarningInfo": {
     "type": "text",
     "description": "unopened_warning_info"
   },
-  "unopenedWarningWarning": "",
+  "unopenedWarningWarning": "Sind Sie sicher, dass dies die richtige Adresse ist?\nDieses Konto scheint ungeöffnet zu sein\n\nSie können diese Warnung im Einstellungsfach unter \"Ungeöffnete Warnung\" deaktivieren.",
   "@unopenedWarningWarning": {
     "type": "text",
     "description": "unopened_warning_warning"
   },
-  "unopenedWarningWarningHeader": "",
+  "unopenedWarningWarningHeader": "Konto ungeöffnet",
   "@unopenedWarningWarningHeader": {
     "type": "text",
     "description": "unopened_warning_warning_header"
@@ -2155,7 +2170,7 @@
     "type": "text",
     "description": "Rep uptime"
   },
-  "useNano": "",
+  "useNano": "NANO verwenden",
   "@useNano": {
     "type": "text",
     "description": "use_nano"
@@ -2210,7 +2225,7 @@
     "type": "text",
     "description": "user_not_found"
   },
-  "using": "",
+  "using": "Verwenden",
   "@using": {
     "type": "text",
     "description": "gift_message_using"
@@ -2220,7 +2235,7 @@
     "type": "text",
     "description": "transaction_details"
   },
-  "viewTX": "",
+  "viewTX": "Transaktion anzeigen",
   "@viewTX": {
     "type": "text",
     "description": "transaction_transaction"
@@ -2235,17 +2250,17 @@
     "type": "text",
     "description": "settings_logout_alert_title"
   },
-  "watchAccountExists": "",
+  "watchAccountExists": "Konto bereits hinzugefügt!",
   "@watchAccountExists": {
     "type": "text",
     "description": "account_entry_exists"
   },
-  "watchOnlyAccount": "",
+  "watchOnlyAccount": "Nur Konto ansehen",
   "@watchOnlyAccount": {
     "type": "text",
     "description": "watch_only_account"
   },
-  "watchOnlySendDisabled": "",
+  "watchOnlySendDisabled": "Versendungen sind an Nur-Überwachungs-Adressen deaktiviert",
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
@@ -2255,7 +2270,7 @@
     "type": "text",
     "description": "intro_welcome_title"
   },
-  "welcomeTextUpdated": "",
+  "welcomeTextUpdated": "Willkommen bei Nautilus. Erstellen Sie zunächst eine neue Brieftasche oder importieren Sie eine vorhandene.",
   "@welcomeTextUpdated": {
     "type": "text",
     "description": "intro_welcome_title"

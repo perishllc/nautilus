@@ -5,12 +5,12 @@
     "type": "text",
     "description": "Account text"
   },
-  "accountNameHint": "",
+  "accountNameHint": "Masukkan Nama",
   "@accountNameHint": {
     "type": "text",
     "description": "enter_name_hint"
   },
-  "accountNameMissing": "",
+  "accountNameMissing": "Pilih Nama Akun",
   "@accountNameMissing": {
     "type": "text",
     "description": "account_name_missing"
@@ -50,7 +50,7 @@
     "type": "text",
     "description": "favorite_add_button"
   },
-  "address": "",
+  "address": "Alamat",
   "@address": {
     "type": "text",
     "description": "send_warning_address"
@@ -80,17 +80,17 @@
     "type": "text",
     "description": "receive_share_cta"
   },
-  "addWatchOnlyAccount": "",
+  "addWatchOnlyAccount": "Tambahkan Akun Hanya Tonton",
   "@addWatchOnlyAccount": {
     "type": "text",
     "description": "watch_only_add"
   },
-  "addWatchOnlyAccountError": "",
+  "addWatchOnlyAccountError": "Terjadi kesalahan saat menambahkan Akun Hanya Tontonan: Akunnya nol",
   "@addWatchOnlyAccountError": {
     "type": "text",
     "description": "watch_only_add_error"
   },
-  "addWatchOnlyAccountSuccess": "",
+  "addWatchOnlyAccountSuccess": "Berhasil membuat akun hanya tontonan!",
   "@addWatchOnlyAccountSuccess": {
     "type": "text",
     "description": "watch_only_add_success"
@@ -100,7 +100,7 @@
     "type": "text",
     "description": "card_details_aliases"
   },
-  "amountGiftGreaterError": "",
+  "amountGiftGreaterError": "Jumlah Split tidak boleh lebih besar dari saldo hadiah",
   "@amountGiftGreaterError": {
     "type": "text",
     "description": "gift_split_greater_error"
@@ -115,17 +115,17 @@
     "type": "text",
     "description": "home_asked_cta"
   },
-  "authConfirm": "",
+  "authConfirm": "Otentikasi",
   "@authConfirm": {
     "type": "text",
     "description": "auth_confirm_message"
   },
-  "authenticating": "",
+  "authenticating": "Otentikasi",
   "@authenticating": {
     "type": "text",
     "description": "auth_authenticating"
   },
-  "authError": "",
+  "authError": "Terjadi kesalahan saat mengautentikasi. Coba lagi nanti.",
   "@authError": {
     "type": "text",
     "description": "auth_generic_error"
@@ -235,12 +235,17 @@
     "type": "text",
     "description": "block_user"
   },
-  "branchConnectErrorShortDesc": "",
+  "branchConnectErrorLongDesc": "Kami sepertinya tidak dapat menjangkau API Cabang, ini biasanya disebabkan oleh semacam masalah jaringan atau VPN yang memblokir koneksi.\n\n Anda masih dapat menggunakan aplikasi seperti biasa, namun mengirim dan menerima kartu hadiah mungkin tidak berfungsi.",
+  "@branchConnectErrorLongDesc": {
+    "type": "text",
+    "description": "branch_connection_error_long_desc"
+  },
+  "branchConnectErrorShortDesc": "Kesalahan: tidak dapat mencapai API Cabang",
   "@branchConnectErrorShortDesc": {
     "type": "text",
     "description": "branch_connection_error_short_desc"
   },
-  "branchConnectErrorTitle": "",
+  "branchConnectErrorTitle": "Peringatan Koneksi",
   "@branchConnectErrorTitle": {
     "type": "text",
     "description": "branch_connection_error_title"
@@ -305,7 +310,7 @@
     "type": "text",
     "description": "A text field hint that tells the user to confirm the password"
   },
-  "confirmPinHint": "",
+  "confirmPinHint": "Konfirmasi pin",
   "@confirmPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to confirm the pin"
@@ -315,15 +320,25 @@
     "type": "text",
     "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
   },
-  "connectionWarning": "",
+  "connectionWarning": "Tidak Dapat Terhubung",
   "@connectionWarning": {
     "type": "text",
     "description": "home_connection_warning"
   },
-  "connectionWarningBody": "",
+  "connectionWarningBody": "Sepertinya kami tidak dapat terhubung ke backend, ini bisa jadi hanya koneksi Anda atau jika masalah berlanjut, backend mungkin sedang down untuk pemeliharaan atau bahkan pemadaman. Jika sudah lebih dari satu jam dan Anda masih mengalami masalah, harap kirimkan laporan di #bug-reports di server discord @ chat.perish.co",
   "@connectionWarningBody": {
     "type": "text",
     "description": "connection_warning_body"
+  },
+  "connectionWarningBodyLong": "Sepertinya kami tidak dapat terhubung ke backend, ini bisa jadi hanya koneksi Anda atau jika masalah berlanjut, backend mungkin sedang down untuk pemeliharaan atau bahkan pemadaman. Jika sudah lebih dari satu jam dan Anda masih mengalami masalah, harap kirimkan laporan di #bug-reports di server discord @ chat.perish.co",
+  "@connectionWarningBodyLong": {
+    "type": "text",
+    "description": "connection_warning_body_long"
+  },
+  "connectionWarningBodyShort": "Kami sepertinya tidak dapat terhubung ke backend",
+  "@connectionWarningBodyShort": {
+    "type": "text",
+    "description": "connection_warning_body_short"
   },
   "contactAdded": "%1 ditambahkan ke kontak!",
   "@contactAdded": {
@@ -395,7 +410,7 @@
     "type": "text",
     "description": "copy_link"
   },
-  "copyMessage": "",
+  "copyMessage": "Salin Pesan",
   "@copyMessage": {
     "type": "text",
     "description": "copy_message"
@@ -415,7 +430,7 @@
     "type": "text",
     "description": "A paragraph that tells the users to create a password."
   },
-  "created": "",
+  "created": "dibuat",
   "@created": {
     "type": "text",
     "description": "gift_created"
@@ -450,7 +465,7 @@
     "type": "text",
     "description": "Prompt user to create a new password"
   },
-  "createPinHint": "",
+  "createPinHint": "Buat pin",
   "@createPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to create a pin"
@@ -500,7 +515,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "",
+  "defaultGiftMessage": "Lihat Nautilus! Saya mengirimi Anda beberapa nano dengan tautan ini:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -545,12 +560,12 @@
     "type": "text",
     "description": "domain_invalid_name"
   },
-  "donateButton": "",
+  "donateButton": "Menyumbangkan",
   "@donateButton": {
     "type": "text",
     "description": "donate_button"
   },
-  "donateToSupport": "",
+  "donateToSupport": "Dukung Proyek",
   "@donateToSupport": {
     "type": "text",
     "description": "settings_support_donate"
@@ -590,7 +605,7 @@
     "type": "text",
     "description": "A text field hint that tells the users to enter their password"
   },
-  "enterSplitAmount": "",
+  "enterSplitAmount": "Masukkan Jumlah Terpisah",
   "@enterSplitAmount": {
     "type": "text",
     "description": "gift_split_amount_hint"
@@ -605,7 +620,7 @@
     "type": "text",
     "description": "enter_user_address"
   },
-  "errorProcessingGiftCard": "",
+  "errorProcessingGiftCard": "Terjadi kesalahan saat memproses kartu hadiah ini, mungkin tidak valid, kedaluwarsa, atau kosong.",
   "@errorProcessingGiftCard": {
     "type": "text",
     "description": "gift_process_error"
@@ -785,17 +800,17 @@
     "type": "text",
     "description": "history_fulfilled"
   },
-  "fundingBannerHeader": "",
+  "fundingBannerHeader": "Spanduk Pendanaan",
   "@fundingBannerHeader": {
     "type": "text",
     "description": "funding_banner_header"
   },
-  "fundingHeader": "",
+  "fundingHeader": "Pendanaan",
   "@fundingHeader": {
     "type": "text",
     "description": "funding_header"
   },
-  "getNano": "",
+  "getNano": "Dapatkan NANO",
   "@getNano": {
     "type": "text",
     "description": "get_nano"
@@ -815,12 +830,12 @@
     "type": "text",
     "description": "gift_amount"
   },
-  "giftCardCreationError": "",
+  "giftCardCreationError": "Terjadi kesalahan saat mencoba membuat tautan kartu hadiah",
   "@giftCardCreationError": {
     "type": "text",
     "description": "create_gift_error"
   },
-  "giftCardCreationErrorSent": "",
+  "giftCardCreationErrorSent": "Terjadi kesalahan saat mencoba membuat kartu hadiah, TAUTAN KARTU HADIAH ATAU SEED TELAH DISALINKAN KE CLIPBOARD ANDA, DANA ANDA MUNGKIN TERMASUK DI DALAMNYA TERGANTUNG APA YANG SALAH.",
   "@giftCardCreationErrorSent": {
     "type": "text",
     "description": "gift_generic_error"
@@ -840,7 +855,7 @@
     "type": "text",
     "description": "gift_message"
   },
-  "giftProcessSuccess": "",
+  "giftProcessSuccess": "Hadiah Berhasil Diterima, mungkin perlu beberapa saat untuk muncul di dompet Anda.",
   "@giftProcessSuccess": {
     "type": "text",
     "description": "gift_process_success"
@@ -865,17 +880,17 @@
     "type": "text",
     "description": "go_to_qr_code"
   },
-  "handoff": "",
+  "handoff": "lepaskan",
   "@handoff": {
     "type": "text",
     "description": "send_handoff"
   },
-  "handoffFailed": "",
+  "handoffFailed": "Terjadi kesalahan saat mencoba melakukan handoff block!",
   "@handoffFailed": {
     "type": "text",
     "description": "handoff_failed"
   },
-  "handoffSupportedMethodNotFound": "",
+  "handoffSupportedMethodNotFound": "Metode handoff yang didukung tidak dapat ditemukan!",
   "@handoffSupportedMethodNotFound": {
     "type": "text",
     "description": "handoff_method_not_found"
@@ -890,17 +905,17 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "hideAccountsConfirmation": "",
+  "hideAccountsConfirmation": "Apakah Anda yakin ingin menyembunyikan akun kosong?\n\nIni akan menyembunyikan semua akun dengan saldo persis 0 (tidak termasuk alamat khusus jam tangan dan akun utama Anda), tetapi Anda selalu dapat menambahkannya kembali nanti dengan mengetuk tombol \"Tambah Akun\"",
   "@hideAccountsConfirmation": {
     "type": "text",
     "description": "hide accounts confirmation info"
   },
-  "hideAccountsHeader": "",
+  "hideAccountsHeader": "Sembunyikan Akun?",
   "@hideAccountsHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "hideEmptyAccounts": "",
+  "hideEmptyAccounts": "Sembunyikan Akun Kosong",
   "@hideEmptyAccounts": {
     "type": "text",
     "description": "hide_empty_accounts"
@@ -930,12 +945,12 @@
     "type": "text",
     "description": "import_gift_empty"
   },
-  "importGiftIntro": "",
+  "importGiftIntro": "Sepertinya Anda mengklik tautan yang berisi beberapa NANO, untuk menerima dana ini kami hanya perlu menyelesaikan pengaturan dompet Anda.",
   "@importGiftIntro": {
     "type": "text",
     "description": "import_gift_intro"
   },
-  "importGiftv2": "",
+  "importGiftv2": "Tautan yang Anda klik mengandung beberapa NANO, apakah Anda ingin mengimpornya ke dompet ini?",
   "@importGiftv2": {
     "type": "text",
     "description": "import_gift_v2"
@@ -970,7 +985,7 @@
     "type": "text",
     "description": "intro_welcome_have_wallet"
   },
-  "imSure": "",
+  "imSure": "Saya yakin",
   "@imSure": {
     "type": "text",
     "description": "send_confirm_warning"
@@ -985,12 +1000,12 @@
     "type": "text",
     "description": "send_insufficient_balance"
   },
-  "introSkippedWarningContent": "",
+  "introSkippedWarningContent": "Kami melewatkan proses intro untuk menghemat waktu Anda, tetapi Anda harus segera mencadangkan benih yang baru dibuat.\n\nJika Anda kehilangan benih Anda, Anda akan kehilangan akses ke dana Anda.\n\nSelain itu, kode sandi Anda telah disetel ke \"000000\" yang juga harus segera Anda ubah.",
   "@introSkippedWarningContent": {
     "type": "text",
     "description": "intro_skipped_warning_content"
   },
-  "introSkippedWarningHeader": "",
+  "introSkippedWarningHeader": "Cadangkan benih Anda!",
   "@introSkippedWarningHeader": {
     "type": "text",
     "description": "intro_skipped_warning_header"
@@ -1005,12 +1020,12 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
-  "invalidPin": "",
+  "invalidPin": "Pin tidak valid",
   "@invalidPin": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
   },
-  "iosFundingMessage": "",
+  "iosFundingMessage": "Karena pedoman dan batasan iOS App Store, kami tidak dapat menautkan Anda ke halaman donasi kami. Jika Anda ingin mendukung proyek, pertimbangkan untuk mengirim ke alamat simpul nautilus.",
   "@iosFundingMessage": {
     "type": "text",
     "description": "ios_funding_message"
@@ -1110,7 +1125,7 @@
     "type": "text",
     "description": "memo_sent_again"
   },
-  "messageCopied": "",
+  "messageCopied": "Pesan Disalin",
   "@messageCopied": {
     "type": "text",
     "description": "message_copied"
@@ -1140,7 +1155,7 @@
     "type": "text",
     "description": "err"
   },
-  "monthlyServerCosts": "",
+  "monthlyServerCosts": "Biaya Server Bulanan",
   "@monthlyServerCosts": {
     "type": "text",
     "description": "support_monthly_costs"
@@ -1150,7 +1165,7 @@
     "type": "text",
     "description": "moonpay_ramp"
   },
-  "moreSettings": "",
+  "moreSettings": "Lebih Banyak Pengaturan",
   "@moreSettings": {
     "type": "text",
     "description": "settings_more"
@@ -1160,12 +1175,12 @@
     "type": "text",
     "description": "natricon_settings"
   },
-  "nautilusWallet": "",
+  "nautilusWallet": "Dompet Nautilus",
   "@nautilusWallet": {
     "type": "text",
     "description": "nautilus_wallet"
   },
-  "nearby": "",
+  "nearby": "Di dekat sini",
   "@nearby": {
     "type": "text",
     "description": "nearby_devices"
@@ -1350,7 +1365,7 @@
     "type": "text",
     "description": "pick rep from list"
   },
-  "pinBlank": "",
+  "pinBlank": "Pin tidak boleh kosong",
   "@pinBlank": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
@@ -1390,7 +1405,7 @@
     "type": "text",
     "description": "change_representative_pin"
   },
-  "pinsDontMatch": "",
+  "pinsDontMatch": "Pin tidak cocok",
   "@pinsDontMatch": {
     "type": "text",
     "description": "An error indicating a pin has been confirmed incorrectly"
@@ -1400,17 +1415,17 @@
     "type": "text",
     "description": "settings_pin_title"
   },
-  "plausibleDeniabilityParagraph": "",
+  "plausibleDeniabilityParagraph": "Ini BUKAN pin yang sama yang Anda gunakan untuk membuat dompet Anda. Tekan tombol info untuk informasi lebih lanjut.",
   "@plausibleDeniabilityParagraph": {
     "type": "text",
     "description": "A paragraph that tells warns the user this is plausible deniability pin."
   },
-  "plausibleInfoHeader": "",
+  "plausibleInfoHeader": "Info Penyangkalan yang Masuk akal",
   "@plausibleInfoHeader": {
     "type": "text",
     "description": "plausible_info_header"
   },
-  "plausibleSheetInfo": "",
+  "plausibleSheetInfo": "Tetapkan pin sekunder untuk mode penyangkalan yang masuk akal.\n\nJika dompet Anda tidak terkunci menggunakan pin sekunder ini, benih Anda akan diganti dengan hash dari benih yang ada. Ini adalah fitur keamanan yang dimaksudkan untuk digunakan jika Anda terpaksa membuka dompet Anda.\n\nPin ini akan berfungsi seperti pin normal (benar) KECUALI saat membuka dompet Anda, yaitu saat mode penyangkalan yang masuk akal akan diaktifkan.\n\nDana Anda AKAN HILANG saat memasuki mode penyangkalan yang masuk akal jika Anda belum mencadangkan benih Anda!",
   "@plausibleSheetInfo": {
     "type": "text",
     "description": "plausible_sheet_info"
@@ -1615,7 +1630,7 @@
     "type": "text",
     "description": "request_generic_error"
   },
-  "requestFrom": "",
+  "requestFrom": "Permintaan Dari",
   "@requestFrom": {
     "type": "text",
     "description": "request_title"
@@ -1640,12 +1655,12 @@
     "type": "text",
     "description": "request_sent_again"
   },
-  "requestSheetInfo": "",
+  "requestSheetInfo": "Minta pembayaran, dengan pesan terenkripsi ujung ke ujung!\n\nPermintaan pembayaran, memo, dan pesan hanya akan diterima oleh pengguna nautilus lain, tetapi Anda dapat menggunakannya untuk penyimpanan catatan Anda sendiri meskipun penerima tidak menggunakan nautilus.",
   "@requestSheetInfo": {
     "type": "text",
     "description": "request_sheet_info"
   },
-  "requestSheetInfoHeader": "",
+  "requestSheetInfoHeader": "Info Lembar Permintaan",
   "@requestSheetInfoHeader": {
     "type": "text",
     "description": "request_sheet_info_header"
@@ -1815,7 +1830,7 @@
     "type": "text",
     "description": "send_sheet_info_header"
   },
-  "sendViaNFC": "",
+  "sendViaNFC": "Kirim melalui NFC",
   "@sendViaNFC": {
     "type": "text",
     "description": "send_payment_nfc"
@@ -1840,17 +1855,17 @@
     "type": "text",
     "description": "Setting a Wallet Password was successful"
   },
-  "setPin": "",
+  "setPin": "Setel Pin",
   "@setPin": {
     "type": "text",
     "description": "A button that sets the plausible deniability password"
   },
-  "setPinSuccess": "",
+  "setPinSuccess": "Pin telah berhasil disetel",
   "@setPinSuccess": {
     "type": "text",
     "description": "Setting a Wallet Pin was successful"
   },
-  "setPlausibleDeniabilityPin": "",
+  "setPlausibleDeniabilityPin": "Setel Pin yang Masuk akal",
   "@setPlausibleDeniabilityPin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
@@ -1885,7 +1900,7 @@
     "type": "text",
     "description": "share_link"
   },
-  "shareMessage": "",
+  "shareMessage": "Bagikan Pesan",
   "@shareMessage": {
     "type": "text",
     "description": "share_message"
@@ -1900,12 +1915,12 @@
     "type": "text",
     "description": "share_extra"
   },
-  "show": "",
+  "show": "Menunjukkan",
   "@show": {
     "type": "text",
     "description": "funding_show"
   },
-  "showAccountQR": "",
+  "showAccountQR": "Tampilkan Kode QR Akun",
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
@@ -1915,22 +1930,22 @@
     "type": "text",
     "description": "contacts_enabled"
   },
-  "showFunding": "",
+  "showFunding": "Tampilkan Spanduk Pendanaan",
   "@showFunding": {
     "type": "text",
     "description": "show_funding_banner"
   },
-  "showLinkQR": "",
+  "showLinkQR": "Tampilkan Tautan QR",
   "@showLinkQR": {
     "type": "text",
     "description": "show_link_qr"
   },
-  "showQR": "",
+  "showQR": "Tampilkan Kode QR",
   "@showQR": {
     "type": "text",
     "description": "show_qr"
   },
-  "showUnopenedWarning": "",
+  "showUnopenedWarning": "Peringatan Belum Dibuka",
   "@showUnopenedWarning": {
     "type": "text",
     "description": "warn_unsafe_send"
@@ -1940,17 +1955,17 @@
     "type": "text",
     "description": "simplex_ramp"
   },
-  "someone": "",
+  "someone": "seseorang",
   "@someone": {
     "type": "text",
     "description": "send_someone"
   },
-  "spendNano": "",
+  "spendNano": "Habiskan NANO",
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
   },
-  "splitBy": "",
+  "splitBy": "Dibagi Oleh",
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
@@ -1960,7 +1975,7 @@
     "type": "text",
     "description": "A button to open up the live support window"
   },
-  "supportDevelopment": "",
+  "supportDevelopment": "Bantuan Dukungan Pengembangan",
   "@supportDevelopment": {
     "type": "text",
     "description": "settings_support_development"
@@ -1980,7 +1995,7 @@
     "type": "text",
     "description": "settings_default_language_string"
   },
-  "tapMessageToEdit": "",
+  "tapMessageToEdit": "Ketuk pesan untuk mengedit",
   "@tapMessageToEdit": {
     "type": "text",
     "description": "gift_creation_message_edit_hint"
@@ -2120,22 +2135,22 @@
     "type": "text",
     "description": "unlock_pin"
   },
-  "unopenedWarningHeader": "",
+  "unopenedWarningHeader": "Tampilkan Peringatan Belum Dibuka",
   "@unopenedWarningHeader": {
     "type": "text",
     "description": "unopened_warning_header"
   },
-  "unopenedWarningInfo": "",
+  "unopenedWarningInfo": "Tampilkan peringatan saat mengirim dana ke akun yang belum dibuka, ini berguna karena sebagian besar alamat yang Anda kirimi akan memiliki saldo, dan pengiriman ke alamat baru mungkin merupakan hasil dari kesalahan ketik.",
   "@unopenedWarningInfo": {
     "type": "text",
     "description": "unopened_warning_info"
   },
-  "unopenedWarningWarning": "",
+  "unopenedWarningWarning": "Apakah Anda yakin ini alamat yang benar?\nAkun ini tampaknya belum dibuka\n\nAnda dapat menonaktifkan peringatan ini di laci pengaturan di bawah \"Peringatan Belum Dibuka\"",
   "@unopenedWarningWarning": {
     "type": "text",
     "description": "unopened_warning_warning"
   },
-  "unopenedWarningWarningHeader": "",
+  "unopenedWarningWarningHeader": "Akun Belum Dibuka",
   "@unopenedWarningWarningHeader": {
     "type": "text",
     "description": "unopened_warning_warning_header"
@@ -2155,7 +2170,7 @@
     "type": "text",
     "description": "Rep uptime"
   },
-  "useNano": "",
+  "useNano": "Gunakan NANO",
   "@useNano": {
     "type": "text",
     "description": "use_nano"
@@ -2210,7 +2225,7 @@
     "type": "text",
     "description": "user_not_found"
   },
-  "using": "",
+  "using": "Menggunakan",
   "@using": {
     "type": "text",
     "description": "gift_message_using"
@@ -2220,7 +2235,7 @@
     "type": "text",
     "description": "transaction_details"
   },
-  "viewTX": "",
+  "viewTX": "Lihat Transaksi",
   "@viewTX": {
     "type": "text",
     "description": "transaction_transaction"
@@ -2235,17 +2250,17 @@
     "type": "text",
     "description": "settings_logout_alert_title"
   },
-  "watchAccountExists": "",
+  "watchAccountExists": "Akun sudah ditambahkan!",
   "@watchAccountExists": {
     "type": "text",
     "description": "account_entry_exists"
   },
-  "watchOnlyAccount": "",
+  "watchOnlyAccount": "Tonton Saja Akun",
   "@watchOnlyAccount": {
     "type": "text",
     "description": "watch_only_account"
   },
-  "watchOnlySendDisabled": "",
+  "watchOnlySendDisabled": "Pengiriman dinonaktifkan di alamat khusus jam tangan",
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
@@ -2255,7 +2270,7 @@
     "type": "text",
     "description": "intro_welcome_title"
   },
-  "welcomeTextUpdated": "",
+  "welcomeTextUpdated": "Selamat datang di Nautilus. Untuk memulai, buat dompet baru atau impor dompet yang sudah ada.",
   "@welcomeTextUpdated": {
     "type": "text",
     "description": "intro_welcome_title"

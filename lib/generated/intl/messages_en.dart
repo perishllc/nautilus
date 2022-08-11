@@ -97,9 +97,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("%1 has been unblocked!"),
         "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
-            "We can\'t seem to reach the Branch (Gift Card) API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work."),
+            "We can\'t seem to reach the Branch API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work."),
         "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
-            "Error: can\'t reach Gift Card API"),
+            "Error: can\'t reach Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Connection Warning"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -125,7 +125,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm the pin"),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Connecting"),
         "connectionWarning":
-            MessageLookupByLibrary.simpleMessage("Connection Warning"),
+            MessageLookupByLibrary.simpleMessage("Can\'t Connect"),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(
+            "We can\'t seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it\'s been more than an hour and you\'re still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co"),
         "connectionWarningBodyLong": MessageLookupByLibrary.simpleMessage(
             "We can\'t seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it\'s been more than an hour and you\'re still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co"),
         "connectionWarningBodyShort": MessageLookupByLibrary.simpleMessage(

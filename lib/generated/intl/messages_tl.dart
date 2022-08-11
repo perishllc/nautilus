@@ -23,8 +23,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Account"),
-        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
-        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameHint":
+            MessageLookupByLibrary.simpleMessage("Maglagay ng Pangalan"),
+        "accountNameMissing": MessageLookupByLibrary.simpleMessage(
+            "Pumili ng Pangalan ng Account"),
         "accounts": MessageLookupByLibrary.simpleMessage("Mga Account"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Sigurado ka ba na naback-up mo ang iyong secret phrase or seed?"),
@@ -36,10 +38,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Mag-add ng kontak"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Magdagdag ng Paboritong"),
-        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "address": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
+            "Magdagdag ng Watch Only Account"),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
+            "Error sa pagdaragdag ng Watch Only Account: Null ang account"),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
+            "Matagumpay na nagawa ang watch only na account!"),
+        "address": MessageLookupByLibrary.simpleMessage("Address"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Ang Address ay nakopya"),
         "addressHint":
@@ -50,15 +55,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mangyaring Magpasok ng Username o Address"),
         "addressShare": MessageLookupByLibrary.simpleMessage("I-share"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
-        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
+            "Ang Hati na Halaga ay hindi maaaring mas malaki kaysa sa balanse ng regalo"),
         "amountMissing": MessageLookupByLibrary.simpleMessage(
             "Mangyaring magpasok ng isang halaga"),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
-        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
-        "authError": MessageLookupByLibrary.simpleMessage(""),
+        "authConfirm": MessageLookupByLibrary.simpleMessage("Nagpapatotoo"),
+        "authError": MessageLookupByLibrary.simpleMessage(
+            "May naganap na error habang nagpapatotoo. Subukan ulit mamaya."),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("Pamamaraan Authentication"),
-        "authenticating": MessageLookupByLibrary.simpleMessage(""),
+        "authenticating": MessageLookupByLibrary.simpleMessage("Nagpapatotoo"),
         "autoImport": MessageLookupByLibrary.simpleMessage("Auto Import"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("I-lock ng automatic"),
@@ -95,8 +102,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pumili ng Nick Name"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("%1 ay na-unblock!"),
-        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
-        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
+            "Mukhang hindi namin maabot ang Branch API, kadalasang sanhi ito ng ilang uri ng isyu sa network o pagharang ng VPN sa koneksyon.\n\n Dapat mo pa ring magamit ang app bilang normal, gayunpaman ang pagpapadala at pagtanggap ng mga gift card ay maaaring hindi gumana."),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
+            "Error: hindi maabot ang Branch API"),
+        "branchConnectErrorTitle":
+            MessageLookupByLibrary.simpleMessage("Babala sa Koneksyon"),
         "cancel": MessageLookupByLibrary.simpleMessage("Kanselahin"),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Palitan ang Currency"),
@@ -116,9 +127,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Kumpirmahin"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Kumpirmahin ang password"),
-        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "confirmPinHint":
+            MessageLookupByLibrary.simpleMessage("Kumpirmahin ang pin"),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Kumokonekta"),
-        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarning":
+            MessageLookupByLibrary.simpleMessage("Hindi Makakonekta"),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Mukhang hindi kami makakonekta sa backend, maaaring ito lang ang iyong koneksyon o kung magpapatuloy ang isyu, maaaring hindi na mapanatili ang backend para sa pagpapanatili o kahit na isang outage. Kung mahigit isang oras na at nagkakaroon ka pa rin ng mga isyu, mangyaring magsumite ng ulat sa #bug-reports sa discord server @ chat.perish.co"),
+        "connectionWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Mukhang hindi kami makakonekta sa backend, maaaring ito lang ang iyong koneksyon o kung magpapatuloy ang isyu, maaaring hindi na mapanatili ang backend para sa pagpapanatili o kahit na isang outage. Kung mahigit isang oras na at nagkakaroon ka pa rin ng mga isyu, mangyaring magsumite ng ulat sa #bug-reports sa discord server @ chat.perish.co"),
+        "connectionWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Mukhang hindi kami makakonekta sa backend"),
         "contactAdded": MessageLookupByLibrary.simpleMessage(
             "%1 ay nadagdag sa mga kontak!"),
         "contactExists":
@@ -142,7 +161,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copyAddress":
             MessageLookupByLibrary.simpleMessage("Kopyahin ang Address"),
         "copyLink": MessageLookupByLibrary.simpleMessage("Kopyahin ang Link"),
-        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
+        "copyMessage":
+            MessageLookupByLibrary.simpleMessage("Kopyahin ang Mensahe"),
         "copySeed": MessageLookupByLibrary.simpleMessage("Kopyahin ang seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Kopyahin ang address ng wallet sa clipboard"),
@@ -160,9 +180,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ang password ay opsyonal, at ang iyong wallet ay protektado ng PIN o biometrics."),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Gumawa"),
-        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "createPinHint": MessageLookupByLibrary.simpleMessage("Gumawa ng pin"),
         "createQR": MessageLookupByLibrary.simpleMessage("Lumikha ng QR Code"),
-        "created": MessageLookupByLibrary.simpleMessage(""),
+        "created": MessageLookupByLibrary.simpleMessage("nilikha"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Paglikha ng Gift Card"),
         "currency": MessageLookupByLibrary.simpleMessage("Currency"),
@@ -177,7 +197,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Error sa pag-decryption!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Pangunahing Account"),
-        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
+            "Tingnan ang Nautilus! Nagpadala ako sa iyo ng ilang nano gamit ang link na ito:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Tanggalin"),
@@ -192,8 +213,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("I-dismiss"),
         "domainInvalid": MessageLookupByLibrary.simpleMessage(
             "Di-wastong Pangalan ng Domain"),
-        "donateButton": MessageLookupByLibrary.simpleMessage(""),
-        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
+        "donateButton": MessageLookupByLibrary.simpleMessage("Mag-donate"),
+        "donateToSupport":
+            MessageLookupByLibrary.simpleMessage("Suportahan ang Proyekto"),
         "edit": MessageLookupByLibrary.simpleMessage("I-edit"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Nabigo sa paglagay ng wallet password"),
@@ -206,12 +228,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Ipasok ang Mensahe"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Ilagay ang password"),
-        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
+        "enterSplitAmount":
+            MessageLookupByLibrary.simpleMessage("Ilagay ang Split na Halaga"),
         "enterUserOrAddress":
             MessageLookupByLibrary.simpleMessage("Ipasok ang User o Address"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Magpasok ng username"),
-        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
+            "Nagkaroon ng error habang pinoproseso ang gift card na ito, maaaring hindi ito wasto, nag-expire, o walang laman."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom":
             MessageLookupByLibrary.simpleMessage("galing sa iba"),
@@ -268,49 +292,59 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kumpirmahin ang fingerprint para i-back up ang wallet seed."),
         "from": MessageLookupByLibrary.simpleMessage("Mula"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("natupad"),
-        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
-        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
-        "getNano": MessageLookupByLibrary.simpleMessage(""),
+        "fundingBannerHeader":
+            MessageLookupByLibrary.simpleMessage("Banner ng Pagpopondo"),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage("Pagpopondo"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Kumuha ng NANO"),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("Mayroon kang regalo!"),
         "giftAlertEmpty":
             MessageLookupByLibrary.simpleMessage("Walang laman na Regalo"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Halaga ng Regalo"),
-        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
-        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(
+            "May naganap na error habang sinusubukang gumawa ng link ng gift card"),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
+            "May naganap na error habang sinusubukang gumawa ng gift card, ANG GIFT CARD LINK O SEED AY NAKOPYA SA IYONG CLIPBOARD, ANG IYONG PONDO AY MAAARING NILALAMAN SA LOOB NITO DEPENDE SA KUNG ANO ANG NAGING MALI."),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Regalo Mula"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Mag-load ng Digital Gift Card gamit ang NANO! Magtakda ng halaga, at opsyonal na mensahe para makita ng tatanggap kapag binuksan nila ito!\n\nSa sandaling nilikha, makakakuha ka ng isang link na maaari mong ipadala sa sinuman, na kapag binuksan ay awtomatikong ipamahagi ang mga pondo sa tatanggap pagkatapos i-install ang Nautilus!\n\nKung ang tatanggap ay isang gumagamit ng Nautilus, makakakuha sila ng prompt upang ilipat ang mga pondo sa kanilang account sa pagbubukas ng link."),
         "giftMessage":
             MessageLookupByLibrary.simpleMessage("Mensahe ng Regalo"),
-        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
+            "Matagumpay na Natanggap ang Regalo, maaaring tumagal ng ilang sandali upang lumitaw sa iyong wallet."),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Bumalik"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Pumunta sa QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Nakuha ko!"),
-        "handoff": MessageLookupByLibrary.simpleMessage(""),
-        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
-        "handoffSupportedMethodNotFound":
-            MessageLookupByLibrary.simpleMessage(""),
+        "handoff": MessageLookupByLibrary.simpleMessage("handoff"),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(
+            "Nagkaproblema habang sinusubukang i-handoff block!"),
+        "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
+            "Hindi mahanap ang isang sinusuportahang paraan ng handoff!"),
         "hide": MessageLookupByLibrary.simpleMessage("Itago"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Itago ang Account?"),
-        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
-        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
-        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Sigurado ka bang gusto mong itago ang mga walang laman na account?\n\nItatago nito ang lahat ng account na may balanseng eksaktong 0 (hindi kasama ang mga address sa panonood lamang at iyong pangunahing account), ngunit maaari mong idagdag muli ang mga ito anumang oras sa ibang pagkakataon sa pamamagitan ng pag-tap sa button na \"Magdagdag ng Account\""),
+        "hideAccountsHeader":
+            MessageLookupByLibrary.simpleMessage("Itago ang Mga Account?"),
+        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(
+            "Itago ang Mga Walang Lamang Account"),
         "home": MessageLookupByLibrary.simpleMessage("Tahanan"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Naiintindihan ko ang risks"),
         "ignore": MessageLookupByLibrary.simpleMessage("Huwag pansinin"),
-        "imSure": MessageLookupByLibrary.simpleMessage(""),
+        "imSure": MessageLookupByLibrary.simpleMessage("Sigurado ako"),
         "import": MessageLookupByLibrary.simpleMessage("Import"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "Ang link na iyong na-click ay naglalaman ng ilang nano, gusto mo bang i-import ito sa wallet na ito, o i-refund ito sa sinumang nagpadala nito?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
-        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
-        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(
+            "Mukhang nag-click ka sa isang link na naglalaman ng ilang NANO, para matanggap ang mga pondong ito kailangan lang namin para matapos mo ang pag-set up ng iyong wallet."),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(
+            "Ang link na iyong na-click ay naglalaman ng ilang NANO, gusto mo bang i-import ito sa wallet na ito?"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("I-import ang secret phrase"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -325,14 +359,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("Agad"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("Hindi sapat ang balanse"),
-        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
-        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(
+            "Nilaktawan namin ang proseso ng intro para makatipid ka ng oras, ngunit dapat mong i-backup kaagad ang iyong bagong likhang binhi.\n\nKung nawala mo ang iyong binhi, mawawalan ka ng access sa iyong mga pondo.\n\nBilang karagdagan, ang iyong passcode ay naitakda sa \"000000\" na dapat mo ring baguhin kaagad."),
+        "introSkippedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("I-backup ang iyong binhi!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Hindi wasto ang Destination Address"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Maling Password"),
-        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
-        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
+        "invalidPin": MessageLookupByLibrary.simpleMessage("Di-wastong Pin"),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(
+            "Dahil sa mga alituntunin at paghihigpit ng iOS App Store, hindi ka namin mai-link sa aming page ng mga donasyon. Kung gusto mong suportahan ang proyekto, isaalang-alang ang pagpapadala sa address ng nautilus node."),
         "language": MessageLookupByLibrary.simpleMessage("Wika"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("Link Kinopya"),
         "loaded": MessageLookupByLibrary.simpleMessage("Na-load"),
@@ -360,7 +397,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Memo muling ipinadala! Kung hindi pa rin kinikilala, maaaring offline ang device ng tatanggap."),
-        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
+        "messageCopied":
+            MessageLookupByLibrary.simpleMessage("Nakopya ang Mensahe"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Mensahe"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Ang minimum na halaga ng pagpapadala ay %1 %2"),
@@ -370,12 +408,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mnemonic Phrase"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Secret phrase ay may 24 na salita lamang"),
-        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
+        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(
+            "Buwanang Mga Gastos sa Server"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
-        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
+        "moreSettings":
+            MessageLookupByLibrary.simpleMessage("Higit pang Mga Setting"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
-        "nearby": MessageLookupByLibrary.simpleMessage(""),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Nautilus Wallet"),
+        "nearby": MessageLookupByLibrary.simpleMessage("Malapit"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Ang tampok na ito ay nangangailangan sa iyo na magkaroon ng mas mahabang kasaysayan ng transaksyon upang maiwasan ang spam.\n\nBilang kahalili, maaari kang magpakita ng isang QR code para ma-scan ng isang tao."),
         "needVerificationAlertHeader": MessageLookupByLibrary.simpleMessage(
@@ -432,7 +473,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "payments": MessageLookupByLibrary.simpleMessage("Mga Pagbabayad"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Pumili sa listahan"),
-        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
+        "pinBlank": MessageLookupByLibrary.simpleMessage(
+            "Hindi maaaring walang laman ang pin"),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("Hindi magkatugma ang pins"),
         "pinConfirmTitle":
@@ -447,11 +489,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ilagay ang pin para palitan ang representative"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Ilagay ang pin para tingnan ang wallet seed."),
-        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleDeniabilityParagraph":
-            MessageLookupByLibrary.simpleMessage(""),
-        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "pinsDontMatch":
+            MessageLookupByLibrary.simpleMessage("Hindi tugma ang mga pin"),
+        "plausibleDeniabilityParagraph": MessageLookupByLibrary.simpleMessage(
+            "HINDI ito ang parehong pin na ginamit mo sa paggawa ng iyong wallet. Pindutin ang pindutan ng impormasyon para sa higit pang impormasyon."),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Posibleng Pagkakaila na Impormasyon"),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Magtakda ng pangalawang pin para sa posibleng deniability mode.\n\nKung ang iyong wallet ay na-unlock gamit ang pangalawang pin na ito, ang iyong binhi ay papalitan ng isang hash ng umiiral na binhi. Ito ay isang tampok na panseguridad na nilalayon na gamitin kung sakaling mapilitan kang buksan ang iyong wallet.\n\nAng pin na ito ay gagana bilang isang normal (tama) na pin MALIBAN kapag ina-unlock ang iyong wallet, na kung saan ay mag-a-activate ang plausible deniability mode.\n\nMAWAWALA ang iyong mga pondo sa pagpasok sa moda ng mapagkakatiwalaang deniability kung hindi mo pa nai-back up ang iyong binhi!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Kagustuhan"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Patakaran sa privacy"),
@@ -514,15 +559,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Humiling ng %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Nabigo ang Kahilingan: Hindi mukhang naka-install ang Nautilus ng user na ito, o may hindi pinagana ang mga notification."),
-        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
+        "requestFrom":
+            MessageLookupByLibrary.simpleMessage("Kahilingan Mula sa"),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("Humiling ng pagbabayad"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "Error sa pagpapadala ng kahilingan sa pagbabayad, ang aparato ng tatanggap ay maaaring offline o hindi magagamit."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Humiling ng muling ipinadala! Kung hindi pa rin kinikilala, maaaring offline ang device ng tatanggap."),
-        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
-        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Humiling ng pagbabayad, gamit ang End to End Encrypted na mga mensahe!\n\nAng mga kahilingan sa pagbabayad, memo, at mensahe ay matatanggap lamang ng ibang mga user ng nautilus, ngunit maaari mong gamitin ang mga ito para sa iyong sariling pag-iingat ng rekord kahit na ang tatanggap ay hindi gumagamit ng nautilus."),
+        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Humiling ng Impormasyon sa Sheet"),
         "requested": MessageLookupByLibrary.simpleMessage("Hiniling"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("Hiniling Mula"),
         "requesting": MessageLookupByLibrary.simpleMessage("Humihiling"),
@@ -584,7 +632,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Magpadala o Humiling ng pagbabayad, na may End to End End Encrypted na mensahe!\n\nAng mga kahilingan sa pagbabayad, mga memo, at mga mensahe ay matatanggap lamang ng iba pang mga gumagamit ng nautilus.\n\nHindi mo kailangang magkaroon ng username upang makapagpadala o makatanggap ng mga kahilingan sa pagbabayad, at maaari mo itong gamitin para sa iyong sariling record keeping kahit hindi sila gumagamit ng nautilus."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Ipadala ang Info Sheet"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage(
+            "Ipadala sa pamamagitan ng NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Pinapadala"),
         "sent": MessageLookupByLibrary.simpleMessage("Naipadala"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Pinadala sa"),
@@ -592,9 +641,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Maglagay ng Password"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Ang password ay nakalagay na"),
-        "setPin": MessageLookupByLibrary.simpleMessage(""),
-        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPin": MessageLookupByLibrary.simpleMessage("Itakda ang Pin"),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(
+            "Matagumpay na naitakda ang pin"),
+        "setPlausibleDeniabilityPin":
+            MessageLookupByLibrary.simpleMessage("Itakda ang Plausible Pin"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Maglagay ng Wallet Password"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -604,31 +655,38 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer": MessageLookupByLibrary.simpleMessage(
             "Ilipat galing sa Paper Wallet"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Ibahagi ang Link"),
-        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
+        "shareMessage":
+            MessageLookupByLibrary.simpleMessage("Ibahagi ang Mensahe"),
         "shareNautilus":
             MessageLookupByLibrary.simpleMessage("I-share ang Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Tingnan ang Nautilus! Ang opisyal na Android Wallet ng Nano!"),
-        "show": MessageLookupByLibrary.simpleMessage(""),
-        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
+        "show": MessageLookupByLibrary.simpleMessage("Ipakita"),
+        "showAccountQR":
+            MessageLookupByLibrary.simpleMessage("Ipakita ang Account QR Code"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Ipakita ang Contact"),
-        "showFunding": MessageLookupByLibrary.simpleMessage(""),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
-        "showQR": MessageLookupByLibrary.simpleMessage(""),
-        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
+        "showFunding":
+            MessageLookupByLibrary.simpleMessage("Ipakita ang Funding Banner"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("Ipakita ang Link QR"),
+        "showQR": MessageLookupByLibrary.simpleMessage("Ipakita ang QR Code"),
+        "showUnopenedWarning":
+            MessageLookupByLibrary.simpleMessage("Hindi Nabuksang Babala"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
-        "someone": MessageLookupByLibrary.simpleMessage(""),
-        "spendNano": MessageLookupByLibrary.simpleMessage(""),
-        "splitBy": MessageLookupByLibrary.simpleMessage(""),
+        "someone": MessageLookupByLibrary.simpleMessage("isang tao"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Gumastos ng NANO"),
+        "splitBy": MessageLookupByLibrary.simpleMessage("Hatiin Ni"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
-        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
+        "supportDevelopment": MessageLookupByLibrary.simpleMessage(
+            "Tulong sa Pag-unlad ng Suporta"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Suportahan ang Developer"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Lumipat sa Seed"),
         "systemDefault":
             MessageLookupByLibrary.simpleMessage("Default na System"),
-        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(
+            "I-tap ang mensahe para i-edit"),
         "tapToHide": MessageLookupByLibrary.simpleMessage("Tapikin para itago"),
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Tapikin para buksan"),
@@ -674,15 +732,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "I-Authenticate para ma-unlock"),
         "unlockPin":
             MessageLookupByLibrary.simpleMessage("Ilagay ang PIN mabuksan"),
-        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(
+            "Ipakita ang Hindi Nabuksang Babala"),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(
+            "Magpakita ng babala kapag nagpapadala ng mga pondo sa isang hindi pa nabubuksang account, ito ay kapaki-pakinabang dahil kadalasan ang mga address na iyong pinadalhan ay magkakaroon ng balanse, at ang pagpapadala sa isang bagong address ay maaaring resulta ng isang typo."),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(
+            "Sigurado ka bang ito ang tamang address?\nMukhang hindi pa nabubuksan ang account na ito\n\nMaaari mong hindi paganahin ang babalang ito sa drawer ng mga setting sa ilalim ng \"Hindi Nabuksang Babala\""),
         "unopenedWarningWarningHeader":
-            MessageLookupByLibrary.simpleMessage(""),
+            MessageLookupByLibrary.simpleMessage("Hindi Nabuksan ang Account"),
         "unpaid": MessageLookupByLibrary.simpleMessage("hindi nabayarang"),
         "unread": MessageLookupByLibrary.simpleMessage("hindi pa nababasa"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
-        "useNano": MessageLookupByLibrary.simpleMessage(""),
+        "useNano": MessageLookupByLibrary.simpleMessage("Gumamit ng NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound":
@@ -703,18 +764,23 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hindi available ang username"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "Ang mga username ng Nautilus ay isang sentralisadong serbisyo na ibinigay ng Nano.to"),
-        "using": MessageLookupByLibrary.simpleMessage(""),
+        "using": MessageLookupByLibrary.simpleMessage("Gamit"),
         "viewDetails":
             MessageLookupByLibrary.simpleMessage("Tingnan ang detalye"),
-        "viewTX": MessageLookupByLibrary.simpleMessage(""),
+        "viewTX":
+            MessageLookupByLibrary.simpleMessage("Tingnan ang Transaksyon"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Timbang ng boto"),
         "warning": MessageLookupByLibrary.simpleMessage("BABALA"),
-        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
+        "watchAccountExists":
+            MessageLookupByLibrary.simpleMessage("Naidagdag na ang account!"),
+        "watchOnlyAccount":
+            MessageLookupByLibrary.simpleMessage("Watch Only Account"),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
+            "Naka-disable ang mga pagpapadala sa mga address na relo lang"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Maligayang pagdating sa Nautilus. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet."),
-        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
+            "Maligayang pagdating sa Nautilus. Para magsimula, gumawa ng bagong wallet o mag-import ng dati."),
         "withAddress":
             MessageLookupByLibrary.simpleMessage("Gamit ang Address"),
         "withMessage":

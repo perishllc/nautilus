@@ -5,12 +5,12 @@
     "type": "text",
     "description": "Account text"
   },
-  "accountNameHint": "",
+  "accountNameHint": "Vnesite ime",
   "@accountNameHint": {
     "type": "text",
     "description": "enter_name_hint"
   },
-  "accountNameMissing": "",
+  "accountNameMissing": "Izberite ime računa",
   "@accountNameMissing": {
     "type": "text",
     "description": "account_name_missing"
@@ -50,7 +50,7 @@
     "type": "text",
     "description": "favorite_add_button"
   },
-  "address": "",
+  "address": "Naslov",
   "@address": {
     "type": "text",
     "description": "send_warning_address"
@@ -80,17 +80,17 @@
     "type": "text",
     "description": "receive_share_cta"
   },
-  "addWatchOnlyAccount": "",
+  "addWatchOnlyAccount": "Dodaj račun samo za ogled",
   "@addWatchOnlyAccount": {
     "type": "text",
     "description": "watch_only_add"
   },
-  "addWatchOnlyAccountError": "",
+  "addWatchOnlyAccountError": "Napaka pri dodajanju računa samo za ogled: račun je bil ničelni",
   "@addWatchOnlyAccountError": {
     "type": "text",
     "description": "watch_only_add_error"
   },
-  "addWatchOnlyAccountSuccess": "",
+  "addWatchOnlyAccountSuccess": "Uspešno ustvarjen račun samo za gledanje!",
   "@addWatchOnlyAccountSuccess": {
     "type": "text",
     "description": "watch_only_add_success"
@@ -100,7 +100,7 @@
     "type": "text",
     "description": "card_details_aliases"
   },
-  "amountGiftGreaterError": "",
+  "amountGiftGreaterError": "Razdeljeni znesek ne sme biti večji od darilnega stanja",
   "@amountGiftGreaterError": {
     "type": "text",
     "description": "gift_split_greater_error"
@@ -115,17 +115,17 @@
     "type": "text",
     "description": "home_asked_cta"
   },
-  "authConfirm": "",
+  "authConfirm": "Preverjanje pristnosti",
   "@authConfirm": {
     "type": "text",
     "description": "auth_confirm_message"
   },
-  "authenticating": "",
+  "authenticating": "Preverjanje pristnosti",
   "@authenticating": {
     "type": "text",
     "description": "auth_authenticating"
   },
-  "authError": "",
+  "authError": "Med preverjanjem pristnosti je prišlo do napake. Poskusi znova kasneje.",
   "@authError": {
     "type": "text",
     "description": "auth_generic_error"
@@ -235,12 +235,17 @@
     "type": "text",
     "description": "block_user"
   },
-  "branchConnectErrorShortDesc": "",
+  "branchConnectErrorLongDesc": "Zdi se, da ne moremo doseči vmesnika Branch API, običajno je to posledica neke vrste težave z omrežjem ali VPN, ki blokira povezavo.\n\n Aplikacijo bi morali še vedno uporabljati kot običajno, vendar pošiljanje in prejemanje darilnih kartic morda ne bo delovalo.",
+  "@branchConnectErrorLongDesc": {
+    "type": "text",
+    "description": "branch_connection_error_long_desc"
+  },
+  "branchConnectErrorShortDesc": "Napaka: Branch API ni mogoč",
   "@branchConnectErrorShortDesc": {
     "type": "text",
     "description": "branch_connection_error_short_desc"
   },
-  "branchConnectErrorTitle": "",
+  "branchConnectErrorTitle": "Opozorilo o povezavi",
   "@branchConnectErrorTitle": {
     "type": "text",
     "description": "branch_connection_error_title"
@@ -305,7 +310,7 @@
     "type": "text",
     "description": "A text field hint that tells the user to confirm the password"
   },
-  "confirmPinHint": "",
+  "confirmPinHint": "Potrdite pin",
   "@confirmPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to confirm the pin"
@@ -315,15 +320,25 @@
     "type": "text",
     "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
   },
-  "connectionWarning": "",
+  "connectionWarning": "Ni mogoče vzpostaviti povezave",
   "@connectionWarning": {
     "type": "text",
     "description": "home_connection_warning"
   },
-  "connectionWarningBody": "",
+  "connectionWarningBody": "Zdi se, da se ne moremo povezati z zaledjem, to je lahko samo vaša povezava ali če se težava ponovi, je zaledje morda nedosegljivo zaradi vzdrževanja ali celo izpada. Če je minilo več kot eno uro in imate še vedno težave, pošljite poročilo v #bug-reports v strežniku discord @ chat.perish.co",
   "@connectionWarningBody": {
     "type": "text",
     "description": "connection_warning_body"
+  },
+  "connectionWarningBodyLong": "Zdi se, da se ne moremo povezati z zaledjem, to je lahko samo vaša povezava ali če se težava ponovi, je zaledje morda nedosegljivo zaradi vzdrževanja ali celo izpada. Če je minilo več kot eno uro in imate še vedno težave, pošljite poročilo v #bug-reports v strežniku discord @ chat.perish.co",
+  "@connectionWarningBodyLong": {
+    "type": "text",
+    "description": "connection_warning_body_long"
+  },
+  "connectionWarningBodyShort": "Zdi se, da se ne moremo povezati z zaledjem",
+  "@connectionWarningBodyShort": {
+    "type": "text",
+    "description": "connection_warning_body_short"
   },
   "contactAdded": "%1 dodan stikom.",
   "@contactAdded": {
@@ -395,7 +410,7 @@
     "type": "text",
     "description": "copy_link"
   },
-  "copyMessage": "",
+  "copyMessage": "Kopiraj sporočilo",
   "@copyMessage": {
     "type": "text",
     "description": "copy_message"
@@ -415,7 +430,7 @@
     "type": "text",
     "description": "A paragraph that tells the users to create a password."
   },
-  "created": "",
+  "created": "ustvarili",
   "@created": {
     "type": "text",
     "description": "gift_created"
@@ -450,7 +465,7 @@
     "type": "text",
     "description": "Prompt user to create a new password"
   },
-  "createPinHint": "",
+  "createPinHint": "Ustvarite žebljiček",
   "@createPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to create a pin"
@@ -500,7 +515,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "",
+  "defaultGiftMessage": "Oglejte si Nautilus! Poslal sem ti nekaj nano s to povezavo:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -545,12 +560,12 @@
     "type": "text",
     "description": "domain_invalid_name"
   },
-  "donateButton": "",
+  "donateButton": "Donirajte",
   "@donateButton": {
     "type": "text",
     "description": "donate_button"
   },
-  "donateToSupport": "",
+  "donateToSupport": "Podprite projekt",
   "@donateToSupport": {
     "type": "text",
     "description": "settings_support_donate"
@@ -590,7 +605,7 @@
     "type": "text",
     "description": "A text field hint that tells the users to enter their password"
   },
-  "enterSplitAmount": "",
+  "enterSplitAmount": "Vnesite delni znesek",
   "@enterSplitAmount": {
     "type": "text",
     "description": "gift_split_amount_hint"
@@ -605,7 +620,7 @@
     "type": "text",
     "description": "enter_user_address"
   },
-  "errorProcessingGiftCard": "",
+  "errorProcessingGiftCard": "Med obdelavo te darilne kartice je prišlo do napake. Morda ni veljavna, je potekla ali je prazna.",
   "@errorProcessingGiftCard": {
     "type": "text",
     "description": "gift_process_error"
@@ -785,17 +800,17 @@
     "type": "text",
     "description": "history_fulfilled"
   },
-  "fundingBannerHeader": "",
+  "fundingBannerHeader": "Banner za financiranje",
   "@fundingBannerHeader": {
     "type": "text",
     "description": "funding_banner_header"
   },
-  "fundingHeader": "",
+  "fundingHeader": "financiranje",
   "@fundingHeader": {
     "type": "text",
     "description": "funding_header"
   },
-  "getNano": "",
+  "getNano": "Pridobite NANO",
   "@getNano": {
     "type": "text",
     "description": "get_nano"
@@ -815,12 +830,12 @@
     "type": "text",
     "description": "gift_amount"
   },
-  "giftCardCreationError": "",
+  "giftCardCreationError": "Med poskusom ustvarjanja povezave do darilne kartice je prišlo do napake",
   "@giftCardCreationError": {
     "type": "text",
     "description": "create_gift_error"
   },
-  "giftCardCreationErrorSent": "",
+  "giftCardCreationErrorSent": "Med poskusom ustvarjanja darilne kartice je prišlo do napake, POVEZAVA DO DARILNE KARTICE ALI SEME JE BILO KOPIRANO V VAŠE ODLOŽIŠČE, VAŠA SREDSTVA SO MORDA V NJEM, GLEDE NA TO, KAJ JE ŠLO NAROBE.",
   "@giftCardCreationErrorSent": {
     "type": "text",
     "description": "gift_generic_error"
@@ -840,7 +855,7 @@
     "type": "text",
     "description": "gift_message"
   },
-  "giftProcessSuccess": "",
+  "giftProcessSuccess": "Darilo je uspešno prejeto, lahko traja nekaj trenutkov, da se prikaže v vaši denarnici.",
   "@giftProcessSuccess": {
     "type": "text",
     "description": "gift_process_success"
@@ -865,17 +880,17 @@
     "type": "text",
     "description": "go_to_qr_code"
   },
-  "handoff": "",
+  "handoff": "Roke stran",
   "@handoff": {
     "type": "text",
     "description": "send_handoff"
   },
-  "handoffFailed": "",
+  "handoffFailed": "Nekaj je šlo narobe med poskusom blokiranja predaje!",
   "@handoffFailed": {
     "type": "text",
     "description": "handoff_failed"
   },
-  "handoffSupportedMethodNotFound": "",
+  "handoffSupportedMethodNotFound": "Podprte metode predaje ni bilo mogoče najti!",
   "@handoffSupportedMethodNotFound": {
     "type": "text",
     "description": "handoff_method_not_found"
@@ -890,17 +905,17 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "hideAccountsConfirmation": "",
+  "hideAccountsConfirmation": "Ali ste prepričani, da želite skriti prazne račune?\n\nS tem boste skrili vse račune s stanjem natanko 0 (razen naslovov samo za opazovanje in vašega glavnega računa), vendar jih lahko kadar koli znova dodate pozneje, tako da tapnete gumb »Dodaj račun«.",
   "@hideAccountsConfirmation": {
     "type": "text",
     "description": "hide accounts confirmation info"
   },
-  "hideAccountsHeader": "",
+  "hideAccountsHeader": "Skrij račune?",
   "@hideAccountsHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "hideEmptyAccounts": "",
+  "hideEmptyAccounts": "Skrij prazne račune",
   "@hideEmptyAccounts": {
     "type": "text",
     "description": "hide_empty_accounts"
@@ -930,12 +945,12 @@
     "type": "text",
     "description": "import_gift_empty"
   },
-  "importGiftIntro": "",
+  "importGiftIntro": "Videti je, da ste kliknili povezavo, ki vsebuje nekaj NANO. Da bi prejeli ta sredstva, potrebujete le, da dokončate nastavitev svoje denarnice.",
   "@importGiftIntro": {
     "type": "text",
     "description": "import_gift_intro"
   },
-  "importGiftv2": "",
+  "importGiftv2": "Povezava, ki ste jo kliknili, vsebuje nekaj NANO, ali bi ga radi uvozili v to denarnico?",
   "@importGiftv2": {
     "type": "text",
     "description": "import_gift_v2"
@@ -970,7 +985,7 @@
     "type": "text",
     "description": "intro_welcome_have_wallet"
   },
-  "imSure": "",
+  "imSure": "Prepričan sem",
   "@imSure": {
     "type": "text",
     "description": "send_confirm_warning"
@@ -985,12 +1000,12 @@
     "type": "text",
     "description": "send_insufficient_balance"
   },
-  "introSkippedWarningContent": "",
+  "introSkippedWarningContent": "Preskočili smo uvodni postopek, da bi vam prihranili čas, vendar morate takoj varnostno kopirati svoje novo ustvarjeno seme.\n\nČe izgubite svoje seme, boste izgubili dostop do svojih sredstev.\n\nPoleg tega je vaše geslo nastavljeno na »000000«, ki ga prav tako takoj spremenite.",
   "@introSkippedWarningContent": {
     "type": "text",
     "description": "intro_skipped_warning_content"
   },
-  "introSkippedWarningHeader": "",
+  "introSkippedWarningHeader": "Varnostno kopirajte svoje seme!",
   "@introSkippedWarningHeader": {
     "type": "text",
     "description": "intro_skipped_warning_header"
@@ -1005,12 +1020,12 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
-  "invalidPin": "",
+  "invalidPin": "Neveljaven PIN",
   "@invalidPin": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
   },
-  "iosFundingMessage": "",
+  "iosFundingMessage": "Zaradi smernic in omejitev trgovine iOS App Store vas ne moremo povezati z našo stranjo za donacije. Če želite podpreti projekt, razmislite o pošiljanju na naslov vozlišča nautilus.",
   "@iosFundingMessage": {
     "type": "text",
     "description": "ios_funding_message"
@@ -1110,7 +1125,7 @@
     "type": "text",
     "description": "memo_sent_again"
   },
-  "messageCopied": "",
+  "messageCopied": "Sporočilo kopirano",
   "@messageCopied": {
     "type": "text",
     "description": "message_copied"
@@ -1140,7 +1155,7 @@
     "type": "text",
     "description": "err"
   },
-  "monthlyServerCosts": "",
+  "monthlyServerCosts": "Mesečni stroški strežnika",
   "@monthlyServerCosts": {
     "type": "text",
     "description": "support_monthly_costs"
@@ -1150,7 +1165,7 @@
     "type": "text",
     "description": "moonpay_ramp"
   },
-  "moreSettings": "",
+  "moreSettings": "Več nastavitev",
   "@moreSettings": {
     "type": "text",
     "description": "settings_more"
@@ -1160,12 +1175,12 @@
     "type": "text",
     "description": "natricon_settings"
   },
-  "nautilusWallet": "",
+  "nautilusWallet": "Denarnica Nautilus",
   "@nautilusWallet": {
     "type": "text",
     "description": "nautilus_wallet"
   },
-  "nearby": "",
+  "nearby": "V bližini",
   "@nearby": {
     "type": "text",
     "description": "nearby_devices"
@@ -1350,7 +1365,7 @@
     "type": "text",
     "description": "pick rep from list"
   },
-  "pinBlank": "",
+  "pinBlank": "Pin ne sme biti prazen",
   "@pinBlank": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
@@ -1390,7 +1405,7 @@
     "type": "text",
     "description": "change_representative_pin"
   },
-  "pinsDontMatch": "",
+  "pinsDontMatch": "Zatiči se ne ujemajo",
   "@pinsDontMatch": {
     "type": "text",
     "description": "An error indicating a pin has been confirmed incorrectly"
@@ -1400,17 +1415,17 @@
     "type": "text",
     "description": "settings_pin_title"
   },
-  "plausibleDeniabilityParagraph": "",
+  "plausibleDeniabilityParagraph": "To NI isti žebljiček, ki ste ga uporabili za ustvarjanje denarnice. Za več informacij pritisnite gumb info.",
   "@plausibleDeniabilityParagraph": {
     "type": "text",
     "description": "A paragraph that tells warns the user this is plausible deniability pin."
   },
-  "plausibleInfoHeader": "",
+  "plausibleInfoHeader": "Verjetne informacije o zanikanju",
   "@plausibleInfoHeader": {
     "type": "text",
     "description": "plausible_info_header"
   },
-  "plausibleSheetInfo": "",
+  "plausibleSheetInfo": "Nastavite sekundarni pin za verjeten način zanikanja.\n\nČe je vaša denarnica odklenjena s tem sekundarnim zatičem, bo vaše seme nadomeščeno z zgoščeno vrednostjo obstoječega semena. To je varnostna funkcija, namenjena uporabi v primeru, da ste prisiljeni odpreti denarnico.\n\nTa zatič bo deloval kot običajen (pravilen) zatič, RAZEN pri odklepanju vaše denarnice, ko se bo aktiviral verjeten način zanikanja.\n\nVaša sredstva BODO IZGUBLJENA, ko vstopite v verjeten način zanikanja, če niste varnostno kopirali svojega semena!",
   "@plausibleSheetInfo": {
     "type": "text",
     "description": "plausible_sheet_info"
@@ -1615,7 +1630,7 @@
     "type": "text",
     "description": "request_generic_error"
   },
-  "requestFrom": "",
+  "requestFrom": "Zahtevaj od",
   "@requestFrom": {
     "type": "text",
     "description": "request_title"
@@ -1640,12 +1655,12 @@
     "type": "text",
     "description": "request_sent_again"
   },
-  "requestSheetInfo": "",
+  "requestSheetInfo": "Zahtevajte plačilo s šifriranimi sporočili od konca do konca!\n\nZahtevke za plačilo, opombe in sporočila bodo lahko prejeli samo drugi uporabniki nautilusa, vendar jih lahko uporabite za lastno vodenje evidence, tudi če prejemnik ne uporablja nautilusa.",
   "@requestSheetInfo": {
     "type": "text",
     "description": "request_sheet_info"
   },
-  "requestSheetInfoHeader": "",
+  "requestSheetInfoHeader": "Zahtevaj informacije o listu",
   "@requestSheetInfoHeader": {
     "type": "text",
     "description": "request_sheet_info_header"
@@ -1815,7 +1830,7 @@
     "type": "text",
     "description": "send_sheet_info_header"
   },
-  "sendViaNFC": "",
+  "sendViaNFC": "Pošlji prek NFC",
   "@sendViaNFC": {
     "type": "text",
     "description": "send_payment_nfc"
@@ -1840,17 +1855,17 @@
     "type": "text",
     "description": "Setting a Wallet Password was successful"
   },
-  "setPin": "",
+  "setPin": "Set Pin",
   "@setPin": {
     "type": "text",
     "description": "A button that sets the plausible deniability password"
   },
-  "setPinSuccess": "",
+  "setPinSuccess": "Pin je bil uspešno nastavljen",
   "@setPinSuccess": {
     "type": "text",
     "description": "Setting a Wallet Pin was successful"
   },
-  "setPlausibleDeniabilityPin": "",
+  "setPlausibleDeniabilityPin": "Nastavite verjeten žebljiček",
   "@setPlausibleDeniabilityPin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
@@ -1885,7 +1900,7 @@
     "type": "text",
     "description": "share_link"
   },
-  "shareMessage": "",
+  "shareMessage": "Deli sporočilo",
   "@shareMessage": {
     "type": "text",
     "description": "share_message"
@@ -1900,12 +1915,12 @@
     "type": "text",
     "description": "share_extra"
   },
-  "show": "",
+  "show": "Prikaži",
   "@show": {
     "type": "text",
     "description": "funding_show"
   },
-  "showAccountQR": "",
+  "showAccountQR": "Prikaži QR kodo računa",
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
@@ -1915,22 +1930,22 @@
     "type": "text",
     "description": "contacts_enabled"
   },
-  "showFunding": "",
+  "showFunding": "Pokaži pasico financiranja",
   "@showFunding": {
     "type": "text",
     "description": "show_funding_banner"
   },
-  "showLinkQR": "",
+  "showLinkQR": "Prikaži povezavo QR",
   "@showLinkQR": {
     "type": "text",
     "description": "show_link_qr"
   },
-  "showQR": "",
+  "showQR": "Prikaži kodo QR",
   "@showQR": {
     "type": "text",
     "description": "show_qr"
   },
-  "showUnopenedWarning": "",
+  "showUnopenedWarning": "Neodprto opozorilo",
   "@showUnopenedWarning": {
     "type": "text",
     "description": "warn_unsafe_send"
@@ -1940,17 +1955,17 @@
     "type": "text",
     "description": "simplex_ramp"
   },
-  "someone": "",
+  "someone": "nekdo",
   "@someone": {
     "type": "text",
     "description": "send_someone"
   },
-  "spendNano": "",
+  "spendNano": "Porabite NANO",
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
   },
-  "splitBy": "",
+  "splitBy": "Razdeli po",
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
@@ -1960,7 +1975,7 @@
     "type": "text",
     "description": "A button to open up the live support window"
   },
-  "supportDevelopment": "",
+  "supportDevelopment": "Pomoč Podpora razvoju",
   "@supportDevelopment": {
     "type": "text",
     "description": "settings_support_development"
@@ -1980,7 +1995,7 @@
     "type": "text",
     "description": "settings_default_language_string"
   },
-  "tapMessageToEdit": "",
+  "tapMessageToEdit": "Tapnite sporočilo za urejanje",
   "@tapMessageToEdit": {
     "type": "text",
     "description": "gift_creation_message_edit_hint"
@@ -2120,22 +2135,22 @@
     "type": "text",
     "description": "unlock_pin"
   },
-  "unopenedWarningHeader": "",
+  "unopenedWarningHeader": "Pokaži neodprto opozorilo",
   "@unopenedWarningHeader": {
     "type": "text",
     "description": "unopened_warning_header"
   },
-  "unopenedWarningInfo": "",
+  "unopenedWarningInfo": "Pokažite opozorilo, ko pošiljate sredstva na neodprt račun. To je uporabno, ker imajo naslovi, na katere pošiljate, večinoma stanje, pošiljanje na nov naslov pa je lahko posledica tipkarske napake.",
   "@unopenedWarningInfo": {
     "type": "text",
     "description": "unopened_warning_info"
   },
-  "unopenedWarningWarning": "",
+  "unopenedWarningWarning": "Ste prepričani, da je to pravi naslov?\nZdi se, da ta račun ni odprt\n\nTo opozorilo lahko onemogočite v predalu z nastavitvami pod \"Neodprto opozorilo\"",
   "@unopenedWarningWarning": {
     "type": "text",
     "description": "unopened_warning_warning"
   },
-  "unopenedWarningWarningHeader": "",
+  "unopenedWarningWarningHeader": "Račun neodprt",
   "@unopenedWarningWarningHeader": {
     "type": "text",
     "description": "unopened_warning_warning_header"
@@ -2155,7 +2170,7 @@
     "type": "text",
     "description": "Rep uptime"
   },
-  "useNano": "",
+  "useNano": "Uporabite NANO",
   "@useNano": {
     "type": "text",
     "description": "use_nano"
@@ -2210,7 +2225,7 @@
     "type": "text",
     "description": "user_not_found"
   },
-  "using": "",
+  "using": "Uporaba",
   "@using": {
     "type": "text",
     "description": "gift_message_using"
@@ -2220,7 +2235,7 @@
     "type": "text",
     "description": "transaction_details"
   },
-  "viewTX": "",
+  "viewTX": "Ogled transakcije",
   "@viewTX": {
     "type": "text",
     "description": "transaction_transaction"
@@ -2235,17 +2250,17 @@
     "type": "text",
     "description": "settings_logout_alert_title"
   },
-  "watchAccountExists": "",
+  "watchAccountExists": "Račun je že dodan!",
   "@watchAccountExists": {
     "type": "text",
     "description": "account_entry_exists"
   },
-  "watchOnlyAccount": "",
+  "watchOnlyAccount": "Račun samo za ogled",
   "@watchOnlyAccount": {
     "type": "text",
     "description": "watch_only_account"
   },
-  "watchOnlySendDisabled": "",
+  "watchOnlySendDisabled": "Pošiljanje je onemogočeno na naslovih samo za gledanje",
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
@@ -2255,7 +2270,7 @@
     "type": "text",
     "description": "intro_welcome_title"
   },
-  "welcomeTextUpdated": "",
+  "welcomeTextUpdated": "Dobrodošli v Nautilusu. Za začetek ustvarite novo denarnico ali uvozite obstoječo.",
   "@welcomeTextUpdated": {
     "type": "text",
     "description": "intro_welcome_title"

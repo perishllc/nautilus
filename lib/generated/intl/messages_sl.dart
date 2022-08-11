@@ -23,8 +23,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Račun"),
-        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
-        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameHint": MessageLookupByLibrary.simpleMessage("Vnesite ime"),
+        "accountNameMissing":
+            MessageLookupByLibrary.simpleMessage("Izberite ime računa"),
         "accounts": MessageLookupByLibrary.simpleMessage("Računi"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Ste prepričani, da ste varno shranili vaš skrivni niz ali zasebni ključ?"),
@@ -35,10 +36,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Blokiraj uporabnika"),
         "addContact": MessageLookupByLibrary.simpleMessage("Dodaj stik"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Dodaj Favorite"),
-        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "address": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccount":
+            MessageLookupByLibrary.simpleMessage("Dodaj račun samo za ogled"),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
+            "Napaka pri dodajanju računa samo za ogled: račun je bil ničelni"),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
+            "Uspešno ustvarjen račun samo za gledanje!"),
+        "address": MessageLookupByLibrary.simpleMessage("Naslov"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Naslov skopiran"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Vnesite naslov"),
@@ -48,15 +52,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vnesite uporabniško ime ali naslov"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Deli naslov"),
         "aliases": MessageLookupByLibrary.simpleMessage("Vzdevki"),
-        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
+            "Razdeljeni znesek ne sme biti večji od darilnega stanja"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Prosim vnesite znesek"),
         "asked": MessageLookupByLibrary.simpleMessage("Na vprašanje"),
-        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
-        "authError": MessageLookupByLibrary.simpleMessage(""),
+        "authConfirm":
+            MessageLookupByLibrary.simpleMessage("Preverjanje pristnosti"),
+        "authError": MessageLookupByLibrary.simpleMessage(
+            "Med preverjanjem pristnosti je prišlo do napake. Poskusi znova kasneje."),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("Način avtentikacije"),
-        "authenticating": MessageLookupByLibrary.simpleMessage(""),
+        "authenticating":
+            MessageLookupByLibrary.simpleMessage("Preverjanje pristnosti"),
         "autoImport": MessageLookupByLibrary.simpleMessage("Samodejni uvoz"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Samodejno zakleni"),
@@ -93,8 +101,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Izberite Nick Nick Name"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("% 1 je bil odblokiran!"),
-        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
-        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
+            "Zdi se, da ne moremo doseči vmesnika Branch API, običajno je to posledica neke vrste težave z omrežjem ali VPN, ki blokira povezavo.\n\n Aplikacijo bi morali še vedno uporabljati kot običajno, vendar pošiljanje in prejemanje darilnih kartic morda ne bo delovalo."),
+        "branchConnectErrorShortDesc":
+            MessageLookupByLibrary.simpleMessage("Napaka: Branch API ni mogoč"),
+        "branchConnectErrorTitle":
+            MessageLookupByLibrary.simpleMessage("Opozorilo o povezavi"),
         "cancel": MessageLookupByLibrary.simpleMessage("Prekliči"),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Spremeni valuto"),
@@ -114,9 +126,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Potrdi"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Confirm the password"),
-        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "confirmPinHint": MessageLookupByLibrary.simpleMessage("Potrdite pin"),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Connecting"),
-        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarning": MessageLookupByLibrary.simpleMessage(
+            "Ni mogoče vzpostaviti povezave"),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Zdi se, da se ne moremo povezati z zaledjem, to je lahko samo vaša povezava ali če se težava ponovi, je zaledje morda nedosegljivo zaradi vzdrževanja ali celo izpada. Če je minilo več kot eno uro in imate še vedno težave, pošljite poročilo v #bug-reports v strežniku discord @ chat.perish.co"),
+        "connectionWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Zdi se, da se ne moremo povezati z zaledjem, to je lahko samo vaša povezava ali če se težava ponovi, je zaledje morda nedosegljivo zaradi vzdrževanja ali celo izpada. Če je minilo več kot eno uro in imate še vedno težave, pošljite poročilo v #bug-reports v strežniku discord @ chat.perish.co"),
+        "connectionWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Zdi se, da se ne moremo povezati z zaledjem"),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("%1 dodan stikom."),
         "contactExists":
@@ -139,7 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("Kopiraj"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Kopiraj naslov"),
         "copyLink": MessageLookupByLibrary.simpleMessage("Kopiraj povezavo"),
-        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
+        "copyMessage":
+            MessageLookupByLibrary.simpleMessage("Kopiraj sporočilo"),
         "copySeed": MessageLookupByLibrary.simpleMessage("Kopiraj ključ"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Kopirajte naslov denarnice v odložišče"),
@@ -157,9 +177,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password is optional, and your wallet will be protected with your PIN or biometrics regardless."),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Ustvari"),
-        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "createPinHint":
+            MessageLookupByLibrary.simpleMessage("Ustvarite žebljiček"),
         "createQR": MessageLookupByLibrary.simpleMessage("Ustvarite QR kodo"),
-        "created": MessageLookupByLibrary.simpleMessage(""),
+        "created": MessageLookupByLibrary.simpleMessage("ustvarili"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Ustvarjanje darilne kartice"),
         "currency": MessageLookupByLibrary.simpleMessage("Valuta"),
@@ -174,7 +195,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Napaka dešifriranja!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Glavni račun"),
-        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
+            "Oglejte si Nautilus! Poslal sem ti nekaj nano s to povezavo:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Račun %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Izbriši"),
@@ -189,8 +211,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("Zavrni"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Neveljavno ime domene"),
-        "donateButton": MessageLookupByLibrary.simpleMessage(""),
-        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
+        "donateButton": MessageLookupByLibrary.simpleMessage("Donirajte"),
+        "donateToSupport":
+            MessageLookupByLibrary.simpleMessage("Podprite projekt"),
         "edit": MessageLookupByLibrary.simpleMessage("Uredi"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
@@ -201,12 +224,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Vnesite sporočilo"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
-        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
+        "enterSplitAmount":
+            MessageLookupByLibrary.simpleMessage("Vnesite delni znesek"),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage(
             "Vnesite uporabnika ali naslov"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Vnesite uporabniško ime"),
-        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
+            "Med obdelavo te darilne kartice je prišlo do napake. Morda ni veljavna, je potekla ali je prazna."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("od nekoga"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
@@ -262,47 +287,57 @@ class MessageLookup extends MessageLookupByLibrary {
             "Avtenticiraj za shranitev ključa."),
         "from": MessageLookupByLibrary.simpleMessage("Od"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("izpolnjeno"),
-        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
-        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
-        "getNano": MessageLookupByLibrary.simpleMessage(""),
+        "fundingBannerHeader":
+            MessageLookupByLibrary.simpleMessage("Banner za financiranje"),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage("financiranje"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Pridobite NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Imate darilo!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Prazno darilo"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Znesek darila"),
-        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
-        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(
+            "Med poskusom ustvarjanja povezave do darilne kartice je prišlo do napake"),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
+            "Med poskusom ustvarjanja darilne kartice je prišlo do napake, POVEZAVA DO DARILNE KARTICE ALI SEME JE BILO KOPIRANO V VAŠE ODLOŽIŠČE, VAŠA SREDSTVA SO MORDA V NJEM, GLEDE NA TO, KAJ JE ŠLO NAROBE."),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Darilo Od"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Naložite digitalno darilno kartico z NANO! Nastavite znesek in izbirno sporočilo, da bo prejemnik videl, kdaj ga odpre!\n\nKo ustvarite, boste dobili povezavo, ki jo lahko pošljete vsakomur, ki bo ob odprtju samodejno razdelila sredstva prejemniku po namestitvi Nautilusa!\n\nČe je prejemnik že uporabnik Nautilusa, bo ob odprtju povezave dobil poziv za prenos sredstev na svoj račun"),
         "giftMessage":
             MessageLookupByLibrary.simpleMessage("Darilno sporočilo"),
-        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
+            "Darilo je uspešno prejeto, lahko traja nekaj trenutkov, da se prikaže v vaši denarnici."),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Go Back"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Pojdi na QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Razumem!"),
-        "handoff": MessageLookupByLibrary.simpleMessage(""),
-        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
-        "handoffSupportedMethodNotFound":
-            MessageLookupByLibrary.simpleMessage(""),
+        "handoff": MessageLookupByLibrary.simpleMessage("Roke stran"),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(
+            "Nekaj je šlo narobe med poskusom blokiranja predaje!"),
+        "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
+            "Podprte metode predaje ni bilo mogoče najti!"),
         "hide": MessageLookupByLibrary.simpleMessage("Skrij"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Skrij račun?"),
-        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
-        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
-        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Ali ste prepričani, da želite skriti prazne račune?\n\nS tem boste skrili vse račune s stanjem natanko 0 (razen naslovov samo za opazovanje in vašega glavnega računa), vendar jih lahko kadar koli znova dodate pozneje, tako da tapnete gumb »Dodaj račun«."),
+        "hideAccountsHeader":
+            MessageLookupByLibrary.simpleMessage("Skrij račune?"),
+        "hideEmptyAccounts":
+            MessageLookupByLibrary.simpleMessage("Skrij prazne račune"),
         "home": MessageLookupByLibrary.simpleMessage("Domov"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignoriraj"),
-        "imSure": MessageLookupByLibrary.simpleMessage(""),
+        "imSure": MessageLookupByLibrary.simpleMessage("Prepričan sem"),
         "import": MessageLookupByLibrary.simpleMessage("Uvozi"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "Povezava, ki ste jo kliknili, vsebuje nekaj nano, jo želite uvoziti v to denarnico ali vrniti tistemu, ki jo je poslal?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
-        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
-        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(
+            "Videti je, da ste kliknili povezavo, ki vsebuje nekaj NANO. Da bi prejeli ta sredstva, potrebujete le, da dokončate nastavitev svoje denarnice."),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(
+            "Povezava, ki ste jo kliknili, vsebuje nekaj NANO, ali bi ga radi uvozili v to denarnico?"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Uvozi skrivni niz"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -316,14 +351,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("Takoj"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("Premalo na računu"),
-        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
-        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(
+            "Preskočili smo uvodni postopek, da bi vam prihranili čas, vendar morate takoj varnostno kopirati svoje novo ustvarjeno seme.\n\nČe izgubite svoje seme, boste izgubili dostop do svojih sredstev.\n\nPoleg tega je vaše geslo nastavljeno na »000000«, ki ga prav tako takoj spremenite."),
+        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(
+            "Varnostno kopirajte svoje seme!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Naslov je neveljaven"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),
-        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
-        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
+        "invalidPin": MessageLookupByLibrary.simpleMessage("Neveljaven PIN"),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(
+            "Zaradi smernic in omejitev trgovine iOS App Store vas ne moremo povezati z našo stranjo za donacije. Če želite podpreti projekt, razmislite o pošiljanju na naslov vozlišča nautilus."),
         "language": MessageLookupByLibrary.simpleMessage("Jezik"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("Povezava Kopirana"),
         "loaded": MessageLookupByLibrary.simpleMessage("Naložen"),
@@ -351,7 +389,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Memo ponovno poslana! Če še vedno ni potrjena, je naprava prejemnika morda brez povezave."),
-        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
+        "messageCopied":
+            MessageLookupByLibrary.simpleMessage("Sporočilo kopirano"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Sporočilo"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Minimalni znesek za pošiljanje je% 1% 2"),
@@ -360,12 +399,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("Besedna fraza"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Skrivni niz lahko vsebuje samo 24 besed"),
-        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
+        "monthlyServerCosts":
+            MessageLookupByLibrary.simpleMessage("Mesečni stroški strežnika"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
-        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
+        "moreSettings": MessageLookupByLibrary.simpleMessage("Več nastavitev"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
-        "nearby": MessageLookupByLibrary.simpleMessage(""),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Denarnica Nautilus"),
+        "nearby": MessageLookupByLibrary.simpleMessage("V bližini"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Ta funkcija zahteva daljšo zgodovino transakcij, da preprečite neželeno pošto.\n\nLahko pa prikažete tudi QR kodo, ki jo lahko nekdo skenira."),
         "needVerificationAlertHeader":
@@ -422,7 +463,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "payments": MessageLookupByLibrary.simpleMessage("Plačila"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Izberi iz seznama"),
-        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
+        "pinBlank":
+            MessageLookupByLibrary.simpleMessage("Pin ne sme biti prazen"),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("PIN se ne ujema"),
         "pinConfirmTitle": MessageLookupByLibrary.simpleMessage("Potrdi PIN"),
@@ -435,11 +477,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vnesite PIN za spremembo predstavnika."),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Vnesite PIN za shranitev ključa"),
-        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleDeniabilityParagraph":
-            MessageLookupByLibrary.simpleMessage(""),
-        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "pinsDontMatch":
+            MessageLookupByLibrary.simpleMessage("Zatiči se ne ujemajo"),
+        "plausibleDeniabilityParagraph": MessageLookupByLibrary.simpleMessage(
+            "To NI isti žebljiček, ki ste ga uporabili za ustvarjanje denarnice. Za več informacij pritisnite gumb info."),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Verjetne informacije o zanikanju"),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Nastavite sekundarni pin za verjeten način zanikanja.\n\nČe je vaša denarnica odklenjena s tem sekundarnim zatičem, bo vaše seme nadomeščeno z zgoščeno vrednostjo obstoječega semena. To je varnostna funkcija, namenjena uporabi v primeru, da ste prisiljeni odpreti denarnico.\n\nTa zatič bo deloval kot običajen (pravilen) zatič, RAZEN pri odklepanju vaše denarnice, ko se bo aktiviral verjeten način zanikanja.\n\nVaša sredstva BODO IZGUBLJENA, ko vstopite v verjeten način zanikanja, če niste varnostno kopirali svojega semena!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Splošno"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Zasebnost"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Nakup Nano"),
@@ -499,15 +544,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Zahtevite% 1% 2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Zahteva ni uspela: Zdi se, da ta uporabnik nima nameščenega Nautilusa ali da so obvestila onemogočena."),
-        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
+        "requestFrom": MessageLookupByLibrary.simpleMessage("Zahtevaj od"),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("Zahtevajte plačilo"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "Napaka pri pošiljanju zahteve za plačilo, prejemnikova naprava je morda brez povezave ali ni na voljo."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Zahteva ponovno poslana! Če še vedno ni potrjena, je naprava prejemnika morda brez povezave."),
-        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
-        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Zahtevajte plačilo s šifriranimi sporočili od konca do konca!\n\nZahtevke za plačilo, opombe in sporočila bodo lahko prejeli samo drugi uporabniki nautilusa, vendar jih lahko uporabite za lastno vodenje evidence, tudi če prejemnik ne uporablja nautilusa."),
+        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Zahtevaj informacije o listu"),
         "requested": MessageLookupByLibrary.simpleMessage("Zahtevano"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("Zahtevano od"),
         "requesting": MessageLookupByLibrary.simpleMessage("Zahteva"),
@@ -567,16 +614,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pošljite ali zahtevajte plačilo s šifriranimi sporočili od konca do konca!\n\nZahteve za plačilo, beležke in sporočila bodo terjali samo drugi uporabniki Nautilusa.\n\nZa pošiljanje ali prejemanje zahtevkov za plačilo vam ni treba imeti uporabniškega imena in jih lahko uporabite za lastno vodenje evidenc, tudi če ne uporabljajo nautilusa."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Pošlji informacije o listu"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage("Pošlji prek NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Pošiljam"),
         "sent": MessageLookupByLibrary.simpleMessage("Poslano"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Poslano"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
-        "setPin": MessageLookupByLibrary.simpleMessage(""),
-        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPin": MessageLookupByLibrary.simpleMessage("Set Pin"),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(
+            "Pin je bil uspešno nastavljen"),
+        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(
+            "Nastavite verjeten žebljiček"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Set Wallet Password"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -586,29 +635,35 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer": MessageLookupByLibrary.simpleMessage(
             "Naloži iz papirnate denarnice"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Delite povezavo"),
-        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
+        "shareMessage": MessageLookupByLibrary.simpleMessage("Deli sporočilo"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Deli Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Preveri Nautilus! Uradna mobilna Nano denarnica!"),
-        "show": MessageLookupByLibrary.simpleMessage(""),
-        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
+        "show": MessageLookupByLibrary.simpleMessage("Prikaži"),
+        "showAccountQR":
+            MessageLookupByLibrary.simpleMessage("Prikaži QR kodo računa"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Pokaži stike"),
-        "showFunding": MessageLookupByLibrary.simpleMessage(""),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
-        "showQR": MessageLookupByLibrary.simpleMessage(""),
-        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
+        "showFunding":
+            MessageLookupByLibrary.simpleMessage("Pokaži pasico financiranja"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("Prikaži povezavo QR"),
+        "showQR": MessageLookupByLibrary.simpleMessage("Prikaži kodo QR"),
+        "showUnopenedWarning":
+            MessageLookupByLibrary.simpleMessage("Neodprto opozorilo"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
-        "someone": MessageLookupByLibrary.simpleMessage(""),
-        "spendNano": MessageLookupByLibrary.simpleMessage(""),
-        "splitBy": MessageLookupByLibrary.simpleMessage(""),
+        "someone": MessageLookupByLibrary.simpleMessage("nekdo"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Porabite NANO"),
+        "splitBy": MessageLookupByLibrary.simpleMessage("Razdeli po"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
-        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
+        "supportDevelopment":
+            MessageLookupByLibrary.simpleMessage("Pomoč Podpora razvoju"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Podpora razvijalcu"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Preklopi na zasebni ključ"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Sistemski"),
-        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(
+            "Tapnite sporočilo za urejanje"),
         "tapToHide":
             MessageLookupByLibrary.simpleMessage("Pritisnite za skrivanje"),
         "tapToReveal":
@@ -654,15 +709,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Avtenticiraj za odklep Nautilus"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "Vnesite PIN za odklep Nautilus"),
-        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("Pokaži neodprto opozorilo"),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(
+            "Pokažite opozorilo, ko pošiljate sredstva na neodprt račun. To je uporabno, ker imajo naslovi, na katere pošiljate, večinoma stanje, pošiljanje na nov naslov pa je lahko posledica tipkarske napake."),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(
+            "Ste prepričani, da je to pravi naslov?\nZdi se, da ta račun ni odprt\n\nTo opozorilo lahko onemogočite v predalu z nastavitvami pod \"Neodprto opozorilo\""),
         "unopenedWarningWarningHeader":
-            MessageLookupByLibrary.simpleMessage(""),
+            MessageLookupByLibrary.simpleMessage("Račun neodprt"),
         "unpaid": MessageLookupByLibrary.simpleMessage("neplačana"),
         "unread": MessageLookupByLibrary.simpleMessage("neprebrano"),
         "uptime": MessageLookupByLibrary.simpleMessage("prisotnost"),
-        "useNano": MessageLookupByLibrary.simpleMessage(""),
+        "useNano": MessageLookupByLibrary.simpleMessage("Uporabite NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
@@ -683,17 +741,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Uporabniško ime na voljo"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "Uporabniška imena Nautilus so centralizirana storitev, ki jo ponuja Nano.to"),
-        "using": MessageLookupByLibrary.simpleMessage(""),
+        "using": MessageLookupByLibrary.simpleMessage("Uporaba"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Podrobnosti"),
-        "viewTX": MessageLookupByLibrary.simpleMessage(""),
+        "viewTX": MessageLookupByLibrary.simpleMessage("Ogled transakcije"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("teža glasovanja"),
         "warning": MessageLookupByLibrary.simpleMessage("Opozorilo"),
-        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
+        "watchAccountExists":
+            MessageLookupByLibrary.simpleMessage("Račun je že dodan!"),
+        "watchOnlyAccount":
+            MessageLookupByLibrary.simpleMessage("Račun samo za ogled"),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
+            "Pošiljanje je onemogočeno na naslovih samo za gledanje"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Dobrodošli v Nautilus. Za začetek ustvarite novo denarnico ali uvozite že obstoječo."),
-        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
+            "Dobrodošli v Nautilusu. Za začetek ustvarite novo denarnico ali uvozite obstoječo."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Z naslovom"),
         "withMessage": MessageLookupByLibrary.simpleMessage("S sporočilom"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Po %1 minuti"),

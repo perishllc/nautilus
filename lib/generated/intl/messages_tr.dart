@@ -23,8 +23,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Hesap"),
-        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
-        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameHint": MessageLookupByLibrary.simpleMessage("İsim girin"),
+        "accountNameMissing":
+            MessageLookupByLibrary.simpleMessage("Bir Hesap Adı seçin"),
         "accounts": MessageLookupByLibrary.simpleMessage("Hesaplar"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Gizli cümleni veya seedini yedeklediğine emin misin?"),
@@ -35,10 +36,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bir Kullanıcıyı Engelleme"),
         "addContact": MessageLookupByLibrary.simpleMessage("Kişi Ekle"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Favori Ekle"),
-        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "address": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccount":
+            MessageLookupByLibrary.simpleMessage("Yalnızca İzleme Hesabı Ekle"),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
+            "Yalnızca İzleme Hesabı eklenirken hata oluştu: Hesap boştu"),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
+            "Yalnızca izleme hesabı başarıyla oluşturuldu!"),
+        "address": MessageLookupByLibrary.simpleMessage("Adres"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("Kopyalandı"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Adres Gir"),
         "addressMissing":
@@ -47,14 +51,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Lütfen Kullanıcı Adı veya Adres Giriniz"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Paylaş"),
         "aliases": MessageLookupByLibrary.simpleMessage("Takma adlar"),
-        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
+            "Bölünmüş Tutar, hediye bakiyesinden fazla olamaz"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Lütfen bir miktar girin"),
         "asked": MessageLookupByLibrary.simpleMessage("Sordu"),
-        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
-        "authError": MessageLookupByLibrary.simpleMessage(""),
+        "authConfirm": MessageLookupByLibrary.simpleMessage("kimlik doğrulama"),
+        "authError": MessageLookupByLibrary.simpleMessage(
+            "Kimlik doğrulama sırasında bir hata oluştu. Daha sonra tekrar deneyin."),
         "authMethod": MessageLookupByLibrary.simpleMessage("Doğrulama Metodu"),
-        "authenticating": MessageLookupByLibrary.simpleMessage(""),
+        "authenticating":
+            MessageLookupByLibrary.simpleMessage("kimlik doğrulama"),
         "autoImport": MessageLookupByLibrary.simpleMessage("Otomatik İthalat"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Otomatik Kilitle"),
@@ -90,8 +97,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bir Takma Ad Seçin"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("%1 engeli kaldırıldı!"),
-        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
-        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
+            "Branch API\'ye ulaşamıyoruz, bunun nedeni genellikle bir tür ağ sorunu veya VPN\'nin bağlantıyı engellemesidir.\n\n Uygulamayı normal şekilde kullanmaya devam edebilirsiniz, ancak hediye kartları göndermek ve almak çalışmayabilir."),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
+            "Hata: Branch API\'ye ulaşılamıyor"),
+        "branchConnectErrorTitle":
+            MessageLookupByLibrary.simpleMessage("Bağlantı Uyarısı"),
         "cancel": MessageLookupByLibrary.simpleMessage("İptal"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Para Birimi"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Girişi değiştir"),
@@ -110,9 +121,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Onayla"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Şifreni onayla"),
-        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "confirmPinHint":
+            MessageLookupByLibrary.simpleMessage("PIN\'i onaylayın"),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Bağlanıyor"),
-        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarning":
+            MessageLookupByLibrary.simpleMessage("Bağlanamıyorum"),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Arka uca bağlanamıyoruz, bu sadece sizin bağlantınız olabilir veya sorun devam ederse, arka uç bakım veya hatta bir kesinti olabilir. Bir saatten fazla olduysa ve hala sorun yaşıyorsanız, lütfen discord sunucusu @ chat.perish.co\'daki #bug-reports bölümüne bir rapor gönderin."),
+        "connectionWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Arka uca bağlanamıyoruz, bu sadece sizin bağlantınız olabilir veya sorun devam ederse, arka uç bakım veya hatta bir kesinti olabilir. Bir saatten fazla olduysa ve hala sorun yaşıyorsanız, lütfen discord sunucusu @ chat.perish.co\'daki #bug-reports bölümüne bir rapor gönderin."),
+        "connectionWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Arka uca bağlanamıyor gibiyiz"),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("%1 rehbere eklendi!"),
         "contactExists":
@@ -134,7 +153,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("Kopyala"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Adresi Kopyala"),
         "copyLink": MessageLookupByLibrary.simpleMessage("Bağlantı Kopyala"),
-        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
+        "copyMessage": MessageLookupByLibrary.simpleMessage("Mesajı Kopyala"),
         "copySeed": MessageLookupByLibrary.simpleMessage("Seedi Kopyala"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Cüzdan adresini panoya kopyala"),
@@ -152,9 +171,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Şifre isteğe bağlı. Şifre koymasan da cüzdanın pin kodu veya biometrik doğrulama ile korunacak."),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Oluştur"),
-        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "createPinHint":
+            MessageLookupByLibrary.simpleMessage("Bir iğne oluştur"),
         "createQR": MessageLookupByLibrary.simpleMessage("QR Kodu Oluştur"),
-        "created": MessageLookupByLibrary.simpleMessage(""),
+        "created": MessageLookupByLibrary.simpleMessage("yaratıldı"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Hediye Kartı Oluşturma"),
         "currency": MessageLookupByLibrary.simpleMessage("Para Birimi"),
@@ -169,7 +189,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Şifre Çözme Hatası!"),
         "defaultAccountName": MessageLookupByLibrary.simpleMessage("Ana Hesap"),
-        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
+            "Nautilus\'a bakın! Size bu bağlantıyla biraz nano gönderdim:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Hesap %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Sil"),
@@ -184,8 +205,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("Yoksay"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Geçersiz Alan Adı"),
-        "donateButton": MessageLookupByLibrary.simpleMessage(""),
-        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
+        "donateButton": MessageLookupByLibrary.simpleMessage("Bağış yapmak"),
+        "donateToSupport":
+            MessageLookupByLibrary.simpleMessage("Projeyi Destekleyin"),
         "edit": MessageLookupByLibrary.simpleMessage("Düzenle"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Şifre oluşturma işlemi başarısız"),
@@ -196,12 +218,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Mesaj Girin"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Şifreni gir"),
-        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
+        "enterSplitAmount":
+            MessageLookupByLibrary.simpleMessage("Bölünmüş Tutarı Girin"),
         "enterUserOrAddress":
             MessageLookupByLibrary.simpleMessage("Kullanıcı veya Adres Girin"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Bir kullanıcı adı girin"),
-        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
+            "Bu hediye kartı işlenirken bir hata oluştu, geçerli olmayabilir, süresi dolmuş veya boş olabilir."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("birinden"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
@@ -256,46 +280,56 @@ class MessageLookup extends MessageLookupByLibrary {
             "Seed\'i yedeklemek için parmak izini onaylayın."),
         "from": MessageLookupByLibrary.simpleMessage("Nereden"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("yerine getirildi"),
-        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
-        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
-        "getNano": MessageLookupByLibrary.simpleMessage(""),
+        "fundingBannerHeader":
+            MessageLookupByLibrary.simpleMessage("Finansman Afişi"),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansman"),
+        "getNano": MessageLookupByLibrary.simpleMessage("NANO\'yu edinin"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Bir yeteneğin var!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Boş Hediye"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Hediye Miktarı"),
-        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
-        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(
+            "Hediye kartı bağlantısı oluşturmaya çalışırken bir hata oluştu"),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
+            "Hediye kartı oluşturmaya çalışırken bir hata oluştu, HEDİYE KARTI BAĞLANTISI VEYA TOHUM PANOLARINIZA KOPYALANDI, YANLIŞ OLDUĞUNA GÖRE FONLARINIZ İÇERİSİNDE OLABİLİR."),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Hediye Gönderen"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "NANO ile Dijital Hediye Kartı Yükleyin! Alıcının ne zaman açtıklarını görmesi için bir miktar ve isteğe bağlı bir mesaj belirleyin!\n\nOluşturulduktan sonra, herkese gönderebileceğiniz bir bağlantı alacaksınız, bu da açıldığında Nautilus\'u kurduktan sonra parayı alıcıya otomatik olarak dağıtacaktır!\n\nAlıcı zaten bir Nautilus kullanıcısıysa, bağlantıyı açtıktan sonra parayı hesabına aktarma istemi alacaktır."),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Hediye Mesajı"),
-        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
+            "Hediye Başarıyla Alındı, cüzdanınızda görünmesi biraz zaman alabilir."),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Geri Git"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("QR\'ye git"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Anladım!"),
-        "handoff": MessageLookupByLibrary.simpleMessage(""),
-        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
-        "handoffSupportedMethodNotFound":
-            MessageLookupByLibrary.simpleMessage(""),
+        "handoff": MessageLookupByLibrary.simpleMessage("dokunma"),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(
+            "Blok aktarmaya çalışırken bir şeyler ters gitti!"),
+        "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
+            "Desteklenen bir aktarma yöntemi bulunamadı!"),
         "hide": MessageLookupByLibrary.simpleMessage("Gizle"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Hesabı Gizle?"),
-        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
-        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
-        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Boş hesapları gizlemek istediğinizden emin misiniz?\n\nBu, bakiyesi tam olarak 0 olan tüm hesapları gizleyecektir (yalnızca izleme adresleri ve ana hesabınız hariç), ancak bunları daha sonra \"Hesap Ekle\" düğmesine dokunarak istediğiniz zaman yeniden ekleyebilirsiniz."),
+        "hideAccountsHeader":
+            MessageLookupByLibrary.simpleMessage("Hesaplar Gizlensin mi?"),
+        "hideEmptyAccounts":
+            MessageLookupByLibrary.simpleMessage("Boş Hesapları Gizle"),
         "home": MessageLookupByLibrary.simpleMessage("Ana Sayfa"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Risklerin Farkındayım"),
         "ignore": MessageLookupByLibrary.simpleMessage("Yoksay"),
-        "imSure": MessageLookupByLibrary.simpleMessage(""),
+        "imSure": MessageLookupByLibrary.simpleMessage("Eminim"),
         "import": MessageLookupByLibrary.simpleMessage("İçe Aktar"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "Tıkladığınız bağlantı biraz nano içeriyor, bu cüzdana aktarmak mı yoksa gönderen kişiye iade etmek mi istiyorsunuz?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
-        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
-        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(
+            "Görünüşe göre biraz NANO içeren bir bağlantıya tıkladınız, bu fonları almak için cüzdanınızı ayarlamanızı tamamlamanız yeterli."),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(
+            "Tıkladığınız bağlantı biraz NANO içeriyor, onu bu cüzdana aktarmak ister misiniz?"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Gizli Cümle Aktar"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -309,14 +343,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("Hemen"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("Yetersiz Bakiye"),
-        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
-        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(
+            "Size zaman kazandırmak için giriş işlemini atladık, ancak yeni oluşturduğunuz tohumunuzu hemen yedeklemelisiniz.\n\nTohumunuzu kaybederseniz, fonlarınıza erişiminizi kaybedersiniz.\n\nEk olarak, şifreniz \"000000\" olarak ayarlanmıştır ve hemen değiştirmeniz gerekir."),
+        "introSkippedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("Tohumunu yedekle!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Geçersiz bir adres girdiniz"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Geçersiz Şifre"),
-        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
-        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
+        "invalidPin": MessageLookupByLibrary.simpleMessage("Geçersiz Pin"),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(
+            "iOS App Store yönergeleri ve kısıtlamaları nedeniyle, sizi bağış sayfamıza bağlayamıyoruz. Projeyi desteklemek istiyorsanız, nautilus düğümünün adresine göndermeyi düşünün."),
         "language": MessageLookupByLibrary.simpleMessage("Dil"),
         "linkCopied":
             MessageLookupByLibrary.simpleMessage("Bağlantı Kopyalandı"),
@@ -345,7 +382,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Memo yeniden gönderildi! Hala onaylanmamışsa, alıcının cihazı çevrimdışı olabilir."),
-        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
+        "messageCopied":
+            MessageLookupByLibrary.simpleMessage("Mesaj Kopyalandı"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Mesaj"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Minimumu Nano yollama miktarı %1"),
@@ -354,12 +392,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("Memonik Cümle"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Gizli cümle 24 kelime olmalı"),
-        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
+        "monthlyServerCosts":
+            MessageLookupByLibrary.simpleMessage("Aylık Sunucu Maliyetleri"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
-        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
+        "moreSettings": MessageLookupByLibrary.simpleMessage("Daha fazla ayar"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
-        "nearby": MessageLookupByLibrary.simpleMessage(""),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Nautilus Cüzdanı"),
+        "nearby": MessageLookupByLibrary.simpleMessage("Yakında"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Bu özellik, istenmeyen postaları önlemek için daha uzun bir işlem geçmişine sahip olmanızı gerektirir.\n\nAlternatif olarak, birinin taraması için bir QR kodu gösterebilirsiniz."),
         "needVerificationAlertHeader":
@@ -413,7 +453,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Birisi sizden ödeme talep etti! Daha fazla bilgi için ödemeler sayfasını kontrol edin."),
         "payments": MessageLookupByLibrary.simpleMessage("Ödemeler"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("Listeden Seç"),
-        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
+        "pinBlank": MessageLookupByLibrary.simpleMessage("Pin boş olamaz"),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("Şifreler uyuşmuyor"),
         "pinConfirmTitle":
@@ -428,11 +468,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Temsilcinizi değiştirmek için pin kodunuzu girin"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Seed\'i görüntülemek için şifreyi girin."),
-        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleDeniabilityParagraph":
-            MessageLookupByLibrary.simpleMessage(""),
-        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "pinsDontMatch":
+            MessageLookupByLibrary.simpleMessage("Pinler eşleşmiyor"),
+        "plausibleDeniabilityParagraph": MessageLookupByLibrary.simpleMessage(
+            "Bu, cüzdanınızı oluşturmak için kullandığınız pinle aynı DEĞİLDİR. Daha fazla bilgi için bilgi düğmesine basın."),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Makul Reddedilebilirlik Bilgisi"),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Makul reddedilebilirlik modu için ikincil bir pim ayarlayın.\n\nCüzdanınızın kilidi bu ikincil pin kullanılarak açılırsa, tohumunuz mevcut tohumdan bir hash ile değiştirilir. Bu, cüzdanınızı açmaya zorlanmanız durumunda kullanılmak üzere tasarlanmış bir güvenlik özelliğidir.\n\nBu pin, makul reddedilebilirlik modu etkinleştirildiğinde cüzdanınızın kilidini açarken DIŞINDA normal (doğru) bir pin gibi davranacaktır.\n\nTohumunuzu yedeklemediyseniz, makul reddedilebilirlik moduna girdiğinizde paranız KAYBOLACAKTIR!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Tercihler"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Gizlilik Politikası"),
@@ -492,15 +535,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("İstek %1% 2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "İstek Başarısız: Bu kullanıcı Nautilus yüklü görünmüyor, veya bildirimler devre dışı bırakıldı."),
-        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
+        "requestFrom": MessageLookupByLibrary.simpleMessage("İstek Gönderen"),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("Ödeme Talep Et"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "Ödeme isteği gönderilirken hata oluştuğunda alıcının cihazı çevrimdışı olabilir veya kullanılamıyor olabilir."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "İstek yeniden gönderildi! Hala onaylanmamışsa, alıcının cihazı çevrimdışı olabilir."),
-        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
-        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Uçtan Uca Şifreli mesajlarla ödeme talep edin!\n\nÖdeme istekleri, notlar ve mesajlar yalnızca diğer nautilus kullanıcıları tarafından alınabilir, ancak alıcı nautilus kullanmasa bile bunları kendi kayıt tutmak için kullanabilirsiniz."),
+        "requestSheetInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Sayfa Bilgisi İste"),
         "requested": MessageLookupByLibrary.simpleMessage("İstenen"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("Talep Edilen"),
         "requesting": MessageLookupByLibrary.simpleMessage("İstemek"),
@@ -559,16 +604,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Uçtan Uca Şifreli mesajlarla ödeme gönderin veya talep edin!\n\nÖdeme istekleri, notlar, ve mesajlar yalnızca diğer nautilus kullanıcıları tarafından alınacaktır.\n\nÖdeme istekleri göndermek veya almak için bir kullanıcı adınızın olması gerekmez, ve nautilus kullanmasalar bile bunları kendi kayıt tutmanız için kullanabilirsiniz."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Sayfa Bilgisi Gönder"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage("NFC ile gönder"),
         "sending": MessageLookupByLibrary.simpleMessage("Miktar"),
         "sent": MessageLookupByLibrary.simpleMessage("Gönderildi"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Alıcı"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Şifre Oluştur"),
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Şifre başarıyla oluşturuldu"),
-        "setPin": MessageLookupByLibrary.simpleMessage(""),
-        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPin": MessageLookupByLibrary.simpleMessage("Pimi Ayarla"),
+        "setPinSuccess":
+            MessageLookupByLibrary.simpleMessage("Pin başarıyla ayarlandı"),
+        "setPlausibleDeniabilityPin":
+            MessageLookupByLibrary.simpleMessage("Makul Pimi Ayarla"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Cüzdan Şifresi Oluştur"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -578,29 +625,35 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Bakiye Transferi"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Link Paylaş"),
-        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
+        "shareMessage": MessageLookupByLibrary.simpleMessage("Mesajı Paylaş"),
         "shareNautilus":
             MessageLookupByLibrary.simpleMessage("Nautilus\'u Paylaş"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Nano\'nun resmi Android Cüzdanı Nautilus\'u denesene!"),
-        "show": MessageLookupByLibrary.simpleMessage(""),
-        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
+        "show": MessageLookupByLibrary.simpleMessage("Göstermek"),
+        "showAccountQR":
+            MessageLookupByLibrary.simpleMessage("Hesap QR Kodunu Göster"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Kişileri Göster"),
-        "showFunding": MessageLookupByLibrary.simpleMessage(""),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
-        "showQR": MessageLookupByLibrary.simpleMessage(""),
-        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
+        "showFunding":
+            MessageLookupByLibrary.simpleMessage("Finansman Afişini Göster"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("Bağlantı QR\'sini göster"),
+        "showQR": MessageLookupByLibrary.simpleMessage("QR Kodunu Göster"),
+        "showUnopenedWarning":
+            MessageLookupByLibrary.simpleMessage("Açılmamış Uyarı"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
-        "someone": MessageLookupByLibrary.simpleMessage(""),
-        "spendNano": MessageLookupByLibrary.simpleMessage(""),
-        "splitBy": MessageLookupByLibrary.simpleMessage(""),
+        "someone": MessageLookupByLibrary.simpleMessage("birisi"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("NANO harca"),
+        "splitBy": MessageLookupByLibrary.simpleMessage("Bölme Ölçütü"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
-        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
+        "supportDevelopment":
+            MessageLookupByLibrary.simpleMessage("Destek Geliştirmeye Yardım"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Geliştiriciyi Destekleyin"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Seede Geç"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Sistem Dili"),
-        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(
+            "Düzenlemek için mesaja dokunun"),
         "tapToHide":
             MessageLookupByLibrary.simpleMessage("Gizlemek için dokun"),
         "tapToReveal":
@@ -647,15 +700,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nautilus’u Açmak için Kimliğini Doğrula"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "Nautilus’u Açmak için Pin Kodunu Gir"),
-        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("Açılmamış Uyarısını Göster"),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(
+            "Açılmamış bir hesaba para gönderirken bir uyarı göster, bu yararlıdır çünkü gönderdiğiniz adreslerin çoğu zaman bir bakiyeye sahiptir ve yeni bir adrese gönderme, bir yazım hatasının sonucu olabilir."),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(
+            "Bunun doğru adres olduğundan emin misin?\nBu hesap açılmamış görünüyor\n\nBu uyarıyı \"Açılmamış Uyarı\" altındaki ayarlar çekmecesinden devre dışı bırakabilirsiniz."),
         "unopenedWarningWarningHeader":
-            MessageLookupByLibrary.simpleMessage(""),
+            MessageLookupByLibrary.simpleMessage("Hesap Açılmadı"),
         "unpaid": MessageLookupByLibrary.simpleMessage("ödenmemiş"),
         "unread": MessageLookupByLibrary.simpleMessage("okunmamış"),
         "uptime": MessageLookupByLibrary.simpleMessage("Çevrimiçi"),
-        "useNano": MessageLookupByLibrary.simpleMessage(""),
+        "useNano": MessageLookupByLibrary.simpleMessage("NANO kullan"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound":
@@ -676,17 +732,21 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kullanıcı adı kullanılamıyor"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "Nautilus kullanıcı adları Nano.to tarafından sağlanan merkezi bir hizmettir"),
-        "using": MessageLookupByLibrary.simpleMessage(""),
+        "using": MessageLookupByLibrary.simpleMessage("kullanma"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Ayrıntılar"),
-        "viewTX": MessageLookupByLibrary.simpleMessage(""),
+        "viewTX": MessageLookupByLibrary.simpleMessage("İşlemi Görüntüle"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Oy Ağırlığı"),
         "warning": MessageLookupByLibrary.simpleMessage("UYARI"),
-        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
+        "watchAccountExists":
+            MessageLookupByLibrary.simpleMessage("Hesap zaten eklendi!"),
+        "watchOnlyAccount":
+            MessageLookupByLibrary.simpleMessage("Sadece Hesabı İzle"),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
+            "Yalnızca izleme adreslerinde gönderimler devre dışı bırakıldı"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Nautilus\'a hoşgeldiniz. Devam etmek için yeni bir cüzdan oluşturabilir veya var olanı içe aktarabilirsiniz."),
-        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
+            "Nautilus\'a hoş geldiniz. Başlamak için yeni bir cüzdan oluşturun veya mevcut bir cüzdanı içe aktarın."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Adres ile"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Mesaj ile"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 dakika sonra"),

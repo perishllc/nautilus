@@ -23,8 +23,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Account"),
-        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
-        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameHint":
+            MessageLookupByLibrary.simpleMessage("Inserisci un nome"),
+        "accountNameMissing":
+            MessageLookupByLibrary.simpleMessage("Scegli un nome account"),
         "accounts": MessageLookupByLibrary.simpleMessage("Accounts"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Sei sicuro di aver fatto una copia della tua frase segreta o seed?"),
@@ -35,10 +37,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Aggiungi"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Aggiungi preferito"),
-        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "address": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
+            "Aggiungi un account di sola visualizzazione"),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
+            "Errore durante l\'aggiunta dell\'account di sola visualizzazione: l\'account era nullo"),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
+            "Account di solo orologio creato con successo!"),
+        "address": MessageLookupByLibrary.simpleMessage("Indirizzo"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("Copiato"),
         "addressHint":
             MessageLookupByLibrary.simpleMessage("Inserisci Indirizzo"),
@@ -48,15 +53,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Immettere un nome utente o un indirizzo"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Condividi"),
         "aliases": MessageLookupByLibrary.simpleMessage("Alias"),
-        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
+            "L\'importo diviso non può essere maggiore del saldo del regalo"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Inserisci un importo"),
         "asked": MessageLookupByLibrary.simpleMessage("Chiesto"),
-        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
-        "authError": MessageLookupByLibrary.simpleMessage(""),
+        "authConfirm": MessageLookupByLibrary.simpleMessage("Autenticazione"),
+        "authError": MessageLookupByLibrary.simpleMessage(
+            "Si è verificato un errore durante l\'autenticazione. Riprovare più tardi."),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("Metodo di Autenticazione"),
-        "authenticating": MessageLookupByLibrary.simpleMessage(""),
+        "authenticating":
+            MessageLookupByLibrary.simpleMessage("Autenticazione"),
         "autoImport":
             MessageLookupByLibrary.simpleMessage("Importazione automatica"),
         "autoLockHeader":
@@ -93,8 +101,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Scegli un nick name"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("%1 è stato sbloccato!"),
-        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
-        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
+            "Sembra che non riusciamo a raggiungere l\'API Branch, di solito è causato da una sorta di problema di rete o da una VPN che blocca la connessione.\n\n Dovresti comunque essere in grado di utilizzare l\'app normalmente, tuttavia l\'invio e la ricezione di buoni regalo potrebbero non funzionare."),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
+            "Errore: impossibile raggiungere l\'API Branch"),
+        "branchConnectErrorTitle":
+            MessageLookupByLibrary.simpleMessage("Avviso di connessione"),
         "cancel": MessageLookupByLibrary.simpleMessage("Annulla"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Cambia Valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Registro modifiche"),
@@ -113,10 +125,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Conferma"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Conferma la password"),
-        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "confirmPinHint":
+            MessageLookupByLibrary.simpleMessage("Conferma il pin"),
         "connectingHeader":
             MessageLookupByLibrary.simpleMessage("In connessione"),
-        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarning":
+            MessageLookupByLibrary.simpleMessage("Impossibile connettersi"),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Non riusciamo a connetterci al back-end, questa potrebbe essere solo la tua connessione o se il problema persiste, il back-end potrebbe essere inattivo per manutenzione o addirittura un\'interruzione. Se è trascorsa più di un\'ora e continui ad avere problemi, invia una segnalazione in #bug-reports nel server discord @ chat.perish.co"),
+        "connectionWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Non riusciamo a connetterci al back-end, questa potrebbe essere solo la tua connessione o se il problema persiste, il back-end potrebbe essere inattivo per manutenzione o addirittura un\'interruzione. Se è trascorsa più di un\'ora e continui ad avere problemi, invia una segnalazione in #bug-reports nel server discord @ chat.perish.co"),
+        "connectionWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Non riusciamo a connetterci al back-end"),
         "contactAdded": MessageLookupByLibrary.simpleMessage(
             "%1 è stato aggiunto ai contatti!"),
         "contactExists":
@@ -139,7 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("Copia"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Copia Indirizzo"),
         "copyLink": MessageLookupByLibrary.simpleMessage("Copia link"),
-        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
+        "copyMessage": MessageLookupByLibrary.simpleMessage("Copia messaggio"),
         "copySeed": MessageLookupByLibrary.simpleMessage("Copia Seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Copia l\'indirizzo del portafoglio negli appunti"),
@@ -157,9 +177,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "La password è opzionale, e il tuo portafoglio sarà comunque protetto dal PIN o dal riconoscimento biometrico."),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Crea"),
-        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "createPinHint":
+            MessageLookupByLibrary.simpleMessage("Crea una spilla"),
         "createQR": MessageLookupByLibrary.simpleMessage("Crea codice QR"),
-        "created": MessageLookupByLibrary.simpleMessage(""),
+        "created": MessageLookupByLibrary.simpleMessage("creato"),
         "creatingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Creazione di una carta regalo"),
         "currency": MessageLookupByLibrary.simpleMessage("Valuta"),
@@ -174,7 +195,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Errore di decrittazione!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Principale"),
-        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
+            "Scopri Nautilus! Ti ho inviato dei nano con questo link:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Elimina"),
@@ -189,8 +211,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("Licenziare"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Nome di dominio non valido"),
-        "donateButton": MessageLookupByLibrary.simpleMessage(""),
-        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
+        "donateButton": MessageLookupByLibrary.simpleMessage("Donare"),
+        "donateToSupport":
+            MessageLookupByLibrary.simpleMessage("Sostieni il progetto"),
         "edit": MessageLookupByLibrary.simpleMessage("Modifica"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Errore nell’impostazione della password"),
@@ -204,12 +227,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Inserisci messaggio"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Inserisci la password"),
-        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
+        "enterSplitAmount":
+            MessageLookupByLibrary.simpleMessage("Inserisci l\'importo diviso"),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage(
             "Inserisci l\'utente o l\'indirizzo"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Inserisci un nome utente"),
-        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
+            "Si è verificato un errore durante l\'elaborazione di questa carta regalo, potrebbe non essere valida, scaduta o vuota."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("da qualcuno"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
@@ -265,47 +290,57 @@ class MessageLookup extends MessageLookupByLibrary {
             "Conferma l\'impronta per salvare il seed."),
         "from": MessageLookupByLibrary.simpleMessage("Da"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("soddisfatto"),
-        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
-        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
-        "getNano": MessageLookupByLibrary.simpleMessage(""),
+        "fundingBannerHeader":
+            MessageLookupByLibrary.simpleMessage("Banner di finanziamento"),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage("Finanziamento"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Ottieni NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Hai un regalo!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Regalo vuoto"),
         "giftAmount":
             MessageLookupByLibrary.simpleMessage("Importo del regalo"),
-        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
-        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(
+            "Si è verificato un errore durante il tentativo di creare un collegamento alla carta regalo"),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
+            "Si è verificato un errore durante il tentativo di creare una carta regalo, IL LINK O IL SEED DELLA CARTA REGALO È STATO COPIATO NEGLI APPUNTI, I TUOI FONDI POSSONO ESSERE CONTENUTI IN ESSI A SECONDA DI COSA È ANDATO storto."),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Regalo da"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Carica una carta regalo digitale con NANO! Imposta un importo e un messaggio opzionale che il destinatario può vedere quando lo apre!\n\nUna volta creato, riceverai un link che puoi inviare a chiunque, che una volta aperto distribuirà automaticamente i fondi al destinatario dopo aver installato Nautilus!\n\nSe il destinatario è già un utente Nautilus, riceverà una richiesta di trasferire i fondi sul proprio conto all\'apertura del link."),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Messaggio regalo"),
-        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
+            "Regalo ricevuto con successo, potrebbe volerci un momento prima che appaia nel tuo portafoglio."),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Indietro"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Vai a QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Capito!"),
-        "handoff": MessageLookupByLibrary.simpleMessage(""),
-        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
-        "handoffSupportedMethodNotFound":
-            MessageLookupByLibrary.simpleMessage(""),
+        "handoff": MessageLookupByLibrary.simpleMessage("giù le mani"),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(
+            "Qualcosa è andato storto durante il tentativo di trasferimento del blocco!"),
+        "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
+            "Impossibile trovare un metodo di trasferimento supportato!"),
         "hide": MessageLookupByLibrary.simpleMessage("nascondi"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Nascondere l\'Account?"),
-        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
-        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
-        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Sei sicuro di voler nascondere gli account vuoti?\n\nQuesto nasconderà tutti gli account con un saldo esattamente pari a 0 (esclusi gli indirizzi di monitoraggio e il tuo account principale), ma puoi sempre aggiungerli nuovamente in seguito toccando il pulsante \"Aggiungi account\""),
+        "hideAccountsHeader":
+            MessageLookupByLibrary.simpleMessage("Nascondere gli account?"),
+        "hideEmptyAccounts":
+            MessageLookupByLibrary.simpleMessage("Nascondi conti vuoti"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Sono Consapevole dei Rischi"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignora"),
-        "imSure": MessageLookupByLibrary.simpleMessage(""),
+        "imSure": MessageLookupByLibrary.simpleMessage("Sono sicuro"),
         "import": MessageLookupByLibrary.simpleMessage("Importa"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "Il link su cui hai cliccato contiene alcuni nano, vorresti importarlo in questo portafoglio o rimborsarlo a chi lo ha inviato?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
-        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
-        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(
+            "Sembra che tu abbia cliccato su un link che contiene alcuni NANO, per ricevere questi fondi abbiamo solo bisogno che tu finisca di configurare il tuo portafoglio."),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(
+            "Il link che hai cliccato contiene dei NANO, vorresti importarlo in questo portafoglio?"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importa Frase Segreta"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -319,14 +354,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("Subito"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("Saldo Insufficiente"),
-        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
-        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(
+            "Abbiamo saltato il processo di introduzione per farti risparmiare tempo, ma dovresti eseguire immediatamente il backup del seme appena creato.\n\nSe perdi il seme perderai l\'accesso ai tuoi fondi.\n\nInoltre, il tuo passcode è stato impostato su \"000000\" che dovresti anche cambiare immediatamente."),
+        "introSkippedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("Fai il backup del tuo seme!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Indirizzo invalido"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Password Invalida"),
-        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
-        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
+        "invalidPin": MessageLookupByLibrary.simpleMessage("Pin non valido"),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(
+            "A causa delle linee guida e delle restrizioni dell\'App Store iOS, non possiamo collegarti alla nostra pagina delle donazioni. Se desideri supportare il progetto, considera l\'invio all\'indirizzo del nodo nautilus."),
         "language": MessageLookupByLibrary.simpleMessage("Lingua"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("Link copiato"),
         "loaded": MessageLookupByLibrary.simpleMessage("Caricato"),
@@ -353,7 +391,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Memo inviato nuovamente! Se ancora non viene riconosciuto, il dispositivo del destinatario potrebbe essere offline."),
-        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
+        "messageCopied":
+            MessageLookupByLibrary.simpleMessage("Messaggio copiato"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Messaggio"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "L\'importo minimo di invio è %1 %2"),
@@ -363,12 +402,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Frase Mnemonica"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "La frase segreta può contenere solo 24 parole"),
-        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
+        "monthlyServerCosts":
+            MessageLookupByLibrary.simpleMessage("Costi mensili del server"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
-        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
+        "moreSettings":
+            MessageLookupByLibrary.simpleMessage("Più configurazioni"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
-        "nearby": MessageLookupByLibrary.simpleMessage(""),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Portafoglio Nautilus"),
+        "nearby": MessageLookupByLibrary.simpleMessage("Qui vicino"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Questa funzione richiede una cronologia delle transazioni più lunga per prevenire lo spam.\n\nIn alternativa, puoi mostrare un codice QR affinché qualcuno possa scansionarlo."),
         "needVerificationAlertHeader":
@@ -425,7 +467,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "payments": MessageLookupByLibrary.simpleMessage("Pagamenti"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Scegli da una Lista"),
-        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
+        "pinBlank":
+            MessageLookupByLibrary.simpleMessage("Il pin non può essere vuoto"),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("I pin non combaciano"),
         "pinConfirmTitle":
@@ -439,11 +482,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Inserisci pin per cambiare rappresentante"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Inserisci il pin per vedere il seed."),
-        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleDeniabilityParagraph":
-            MessageLookupByLibrary.simpleMessage(""),
-        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "pinsDontMatch":
+            MessageLookupByLibrary.simpleMessage("I pin non corrispondono"),
+        "plausibleDeniabilityParagraph": MessageLookupByLibrary.simpleMessage(
+            "Questo NON è lo stesso pin che hai usato per creare il tuo portafoglio. Premere il pulsante informazioni per ulteriori informazioni."),
+        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informazioni plausibili sulla negazione"),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Imposta un pin secondario per la modalità di negazione plausibile.\n\nSe il tuo portafoglio viene sbloccato utilizzando questo pin secondario, il tuo seme verrà sostituito con un hash del seme esistente. Questa è una funzione di sicurezza destinata ad essere utilizzata nel caso in cui tu sia costretto ad aprire il tuo portafoglio.\n\nQuesto pin agirà come un pin normale (corretto) TRANNE quando sblocchi il tuo portafoglio, che è quando si attiverà la modalità di negazione plausibile.\n\nI tuoi fondi SARANNO PERSI entrando in modalità di negazione plausibile se non hai eseguito il backup del tuo seme!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferenze"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Politica sulla Privacy"),
@@ -505,15 +551,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Richiesta %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Richiesta non riuscita: Sembra che questo utente non abbia installato Nautilus o abbia le notifiche disabilitate."),
-        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
+        "requestFrom": MessageLookupByLibrary.simpleMessage("Richiesta da"),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("Richiesta di pagamento"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "Errore durante l\'invio della richiesta di pagamento, il dispositivo del destinatario potrebbe essere offline o non disponibile."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Richiesta inviata nuovamente! Se ancora non viene riconosciuto, il dispositivo del destinatario potrebbe essere offline."),
-        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
-        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Richiedi un pagamento, con i messaggi crittografati End to End!\n\nRichieste di pagamento, promemoria e messaggi saranno ricevibili solo da altri utenti di nautilus, ma puoi utilizzarli per la tua conservazione anche se il destinatario non utilizza nautilus."),
+        "requestSheetInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Richiedi Info Foglio"),
         "requested": MessageLookupByLibrary.simpleMessage("Richiesto"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("Richiesto da"),
         "requesting": MessageLookupByLibrary.simpleMessage("Richiedere"),
@@ -572,16 +620,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Invia o richiedi un pagamento, con messaggi crittografati End to End!\n\nLe richieste di pagamento, i promemoria e i messaggi saranno ricevibili solo da altri utenti nautilus.\n\nNon è necessario avere un nome utente per inviare o ricevere richieste di pagamento e puoi usarli per la tua tenuta dei registri anche se non usano nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Invia informazioni sul foglio"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage("Invia tramite NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Inviando"),
         "sent": MessageLookupByLibrary.simpleMessage("Inviati"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Inviato A"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Imposta Password"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "La password è stata impostata correttamente"),
-        "setPin": MessageLookupByLibrary.simpleMessage(""),
-        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPin": MessageLookupByLibrary.simpleMessage("Imposta pin"),
+        "setPinSuccess": MessageLookupByLibrary.simpleMessage(
+            "Il pin è stato impostato correttamente"),
+        "setPlausibleDeniabilityPin":
+            MessageLookupByLibrary.simpleMessage("Imposta Pin plausibile"),
         "setWalletPassword": MessageLookupByLibrary.simpleMessage(
             "Imposta Password Portafoglio"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -591,29 +641,35 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Carica Portafoglio Cartaceo"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Condividi link"),
-        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
+        "shareMessage":
+            MessageLookupByLibrary.simpleMessage("Condividi messaggio"),
         "shareNautilus":
             MessageLookupByLibrary.simpleMessage("Condividi Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Dai un\'occhiata a Nautilus! Il portafoglio ufficiale di Nano per Android!"),
-        "show": MessageLookupByLibrary.simpleMessage(""),
-        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
+        "show": MessageLookupByLibrary.simpleMessage("Mostrare"),
+        "showAccountQR": MessageLookupByLibrary.simpleMessage(
+            "Mostra il codice QR dell\'account"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Mostra contatti"),
-        "showFunding": MessageLookupByLibrary.simpleMessage(""),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
-        "showQR": MessageLookupByLibrary.simpleMessage(""),
-        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
+        "showFunding": MessageLookupByLibrary.simpleMessage(
+            "Mostra banner di finanziamento"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("Mostra link QR"),
+        "showQR": MessageLookupByLibrary.simpleMessage("Mostra il codice QR"),
+        "showUnopenedWarning":
+            MessageLookupByLibrary.simpleMessage("Avviso non aperto"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
-        "someone": MessageLookupByLibrary.simpleMessage(""),
-        "spendNano": MessageLookupByLibrary.simpleMessage(""),
-        "splitBy": MessageLookupByLibrary.simpleMessage(""),
+        "someone": MessageLookupByLibrary.simpleMessage("qualcuno"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Spendi NANO"),
+        "splitBy": MessageLookupByLibrary.simpleMessage("Dividi per"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
-        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
+        "supportDevelopment": MessageLookupByLibrary.simpleMessage(
+            "Aiuta a supportare lo sviluppo"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Sostieni lo sviluppatore"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Passa al Seed"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Predefinito"),
-        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(
+            "Tocca messaggio da modificare"),
         "tapToHide":
             MessageLookupByLibrary.simpleMessage("Tocca per nascondere"),
         "tapToReveal":
@@ -661,15 +717,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Autenticati per Sbloccare Nautilus"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "Inserisci il PIN per Sbloccare Nautilus"),
-        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("Mostra avviso non aperto"),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(
+            "Mostra un avviso quando invii fondi su un conto non aperto, questo è utile perché la maggior parte delle volte gli indirizzi a cui invii avranno un saldo e l\'invio a un nuovo indirizzo potrebbe essere il risultato di un errore di battitura."),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(
+            "Sei sicuro che questo sia l\'indirizzo giusto?\nQuesto account sembra non essere aperto\n\nPuoi disabilitare questo avviso nel riquadro delle impostazioni in \"Avviso non aperto\""),
         "unopenedWarningWarningHeader":
-            MessageLookupByLibrary.simpleMessage(""),
+            MessageLookupByLibrary.simpleMessage("Conto non aperto"),
         "unpaid": MessageLookupByLibrary.simpleMessage("non pagati"),
         "unread": MessageLookupByLibrary.simpleMessage("da leggere"),
         "uptime": MessageLookupByLibrary.simpleMessage("Operatività"),
-        "useNano": MessageLookupByLibrary.simpleMessage(""),
+        "useNano": MessageLookupByLibrary.simpleMessage("Usa NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound":
@@ -690,17 +749,22 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nome utente non disponibile"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "I nomi utente Nautilus sono un servizio centralizzato fornito da Nano.to"),
-        "using": MessageLookupByLibrary.simpleMessage(""),
+        "using": MessageLookupByLibrary.simpleMessage("Usando"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Dettagli"),
-        "viewTX": MessageLookupByLibrary.simpleMessage(""),
+        "viewTX":
+            MessageLookupByLibrary.simpleMessage("Visualizza transazione"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Peso del Voto"),
         "warning": MessageLookupByLibrary.simpleMessage("ATTENZIONE"),
-        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
+        "watchAccountExists":
+            MessageLookupByLibrary.simpleMessage("Account già aggiunto!"),
+        "watchOnlyAccount":
+            MessageLookupByLibrary.simpleMessage("Guarda Solo account"),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
+            "Gli invii sono disabilitati sugli indirizzi di sola visualizzazione"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Benvenuto in Nautilus. Per continuare, puoi creare un nuovo portafoglio o importarne uno esistente."),
-        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
+            "Benvenuto in Nautilus. Per iniziare, crea un nuovo portafoglio o importane uno esistente."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Con indirizzo"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Con messaggio"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Dopo %1 minuto"),

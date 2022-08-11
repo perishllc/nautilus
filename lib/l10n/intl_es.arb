@@ -50,7 +50,7 @@
     "type": "text",
     "description": "favorite_add_button"
   },
-  "address": "",
+  "address": "Dirección",
   "@address": {
     "type": "text",
     "description": "send_warning_address"
@@ -100,7 +100,7 @@
     "type": "text",
     "description": "card_details_aliases"
   },
-  "amountGiftGreaterError": "",
+  "amountGiftGreaterError": "El monto dividido no puede ser mayor que el saldo del regalo",
   "@amountGiftGreaterError": {
     "type": "text",
     "description": "gift_split_greater_error"
@@ -115,7 +115,7 @@
     "type": "text",
     "description": "home_asked_cta"
   },
-  "authConfirm": "",
+  "authConfirm": "autenticando",
   "@authConfirm": {
     "type": "text",
     "description": "auth_confirm_message"
@@ -235,12 +235,17 @@
     "type": "text",
     "description": "block_user"
   },
-  "branchConnectErrorShortDesc": "",
+  "branchConnectErrorLongDesc": "Parece que no podemos llegar a la API de Branch, esto generalmente se debe a algún tipo de problema de red o VPN que bloquea la conexión.\n\n Aún debería poder usar la aplicación con normalidad, sin embargo, es posible que no funcione el envío y la recepción de tarjetas de regalo.",
+  "@branchConnectErrorLongDesc": {
+    "type": "text",
+    "description": "branch_connection_error_long_desc"
+  },
+  "branchConnectErrorShortDesc": "Error: no se puede acceder a la API de sucursal",
   "@branchConnectErrorShortDesc": {
     "type": "text",
     "description": "branch_connection_error_short_desc"
   },
-  "branchConnectErrorTitle": "",
+  "branchConnectErrorTitle": "Advertencia de conexión",
   "@branchConnectErrorTitle": {
     "type": "text",
     "description": "branch_connection_error_title"
@@ -315,15 +320,25 @@
     "type": "text",
     "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
   },
-  "connectionWarning": "",
+  "connectionWarning": "no se puede conectar",
   "@connectionWarning": {
     "type": "text",
     "description": "home_connection_warning"
   },
-  "connectionWarningBody": "",
+  "connectionWarningBody": "Parece que no podemos conectarnos al backend, esta podría ser solo su conexión o, si el problema persiste, el backend podría estar inactivo por mantenimiento o incluso una interrupción. Si ha pasado más de una hora y aún tiene problemas, envíe un informe en #bug-reports en el servidor de discordia @ chat.perish.co",
   "@connectionWarningBody": {
     "type": "text",
     "description": "connection_warning_body"
+  },
+  "connectionWarningBodyLong": "Parece que no podemos conectarnos al backend, esta podría ser solo su conexión o, si el problema persiste, el backend podría estar inactivo por mantenimiento o incluso una interrupción. Si ha pasado más de una hora y aún tiene problemas, envíe un informe en #bug-reports en el servidor de discordia @ chat.perish.co",
+  "@connectionWarningBodyLong": {
+    "type": "text",
+    "description": "connection_warning_body_long"
+  },
+  "connectionWarningBodyShort": "Parece que no podemos conectarnos al backend",
+  "@connectionWarningBodyShort": {
+    "type": "text",
+    "description": "connection_warning_body_short"
   },
   "contactAdded": "%1 ha sido añadido",
   "@contactAdded": {
@@ -415,7 +430,7 @@
     "type": "text",
     "description": "A paragraph that tells the users to create a password."
   },
-  "created": "",
+  "created": "creado",
   "@created": {
     "type": "text",
     "description": "gift_created"
@@ -500,7 +515,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "",
+  "defaultGiftMessage": "¡Echa un vistazo a Nautilus! Te envié algunos nano con este enlace:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -590,7 +605,7 @@
     "type": "text",
     "description": "A text field hint that tells the users to enter their password"
   },
-  "enterSplitAmount": "",
+  "enterSplitAmount": "Ingrese la cantidad dividida",
   "@enterSplitAmount": {
     "type": "text",
     "description": "gift_split_amount_hint"
@@ -605,7 +620,7 @@
     "type": "text",
     "description": "enter_user_address"
   },
-  "errorProcessingGiftCard": "",
+  "errorProcessingGiftCard": "Hubo un error al procesar esta tarjeta de regalo, es posible que no sea válida, esté vencida o esté vacía.",
   "@errorProcessingGiftCard": {
     "type": "text",
     "description": "gift_process_error"
@@ -815,12 +830,12 @@
     "type": "text",
     "description": "gift_amount"
   },
-  "giftCardCreationError": "",
+  "giftCardCreationError": "Ocurrió un error al intentar crear un enlace de tarjeta de regalo",
   "@giftCardCreationError": {
     "type": "text",
     "description": "create_gift_error"
   },
-  "giftCardCreationErrorSent": "",
+  "giftCardCreationErrorSent": "Ocurrió un error al intentar crear una tarjeta de regalo, EL ENLACE DE LA TARJETA DE REGALO O LA SEÑAL SE HA COPIADO A SU PORTAPAPELES, SUS FONDOS PUEDEN ESTAR CONTENIDOS AQUÍ DEPENDIENDO DE LO QUE SALIÓ MAL.",
   "@giftCardCreationErrorSent": {
     "type": "text",
     "description": "gift_generic_error"
@@ -840,7 +855,7 @@
     "type": "text",
     "description": "gift_message"
   },
-  "giftProcessSuccess": "",
+  "giftProcessSuccess": "Regalo recibido con éxito, puede tardar un momento en aparecer en su billetera.",
   "@giftProcessSuccess": {
     "type": "text",
     "description": "gift_process_success"
@@ -870,7 +885,7 @@
     "type": "text",
     "description": "send_handoff"
   },
-  "handoffFailed": "",
+  "handoffFailed": "¡Algo salió mal al intentar bloquear el traspaso!",
   "@handoffFailed": {
     "type": "text",
     "description": "handoff_failed"
@@ -930,12 +945,12 @@
     "type": "text",
     "description": "import_gift_empty"
   },
-  "importGiftIntro": "",
+  "importGiftIntro": "Parece que hizo clic en un enlace que contiene algunos NANO, para recibir estos fondos solo necesitamos que termine de configurar su billetera.",
   "@importGiftIntro": {
     "type": "text",
     "description": "import_gift_intro"
   },
-  "importGiftv2": "",
+  "importGiftv2": "El enlace en el que hizo clic contiene algo de NANO, ¿le gustaría importarlo a esta billetera?",
   "@importGiftv2": {
     "type": "text",
     "description": "import_gift_v2"
@@ -970,7 +985,7 @@
     "type": "text",
     "description": "intro_welcome_have_wallet"
   },
-  "imSure": "",
+  "imSure": "Estoy seguro",
   "@imSure": {
     "type": "text",
     "description": "send_confirm_warning"
@@ -985,12 +1000,12 @@
     "type": "text",
     "description": "send_insufficient_balance"
   },
-  "introSkippedWarningContent": "",
+  "introSkippedWarningContent": "Omitimos el proceso de introducción para ahorrarle tiempo, pero debe hacer una copia de seguridad de su semilla recién creada de inmediato.\n\nSi pierde su semilla, perderá el acceso a sus fondos.\n\nAdemás, su código de acceso se ha establecido en \"000000\", que también debe cambiar de inmediato.",
   "@introSkippedWarningContent": {
     "type": "text",
     "description": "intro_skipped_warning_content"
   },
-  "introSkippedWarningHeader": "",
+  "introSkippedWarningHeader": "¡Haz una copia de seguridad de tu semilla!",
   "@introSkippedWarningHeader": {
     "type": "text",
     "description": "intro_skipped_warning_header"
@@ -1150,7 +1165,7 @@
     "type": "text",
     "description": "moonpay_ramp"
   },
-  "moreSettings": "",
+  "moreSettings": "Más ajustes",
   "@moreSettings": {
     "type": "text",
     "description": "settings_more"
@@ -1160,12 +1175,12 @@
     "type": "text",
     "description": "natricon_settings"
   },
-  "nautilusWallet": "",
+  "nautilusWallet": "Monedero Nautilus",
   "@nautilusWallet": {
     "type": "text",
     "description": "nautilus_wallet"
   },
-  "nearby": "",
+  "nearby": "Cercano",
   "@nearby": {
     "type": "text",
     "description": "nearby_devices"
@@ -1405,12 +1420,12 @@
     "type": "text",
     "description": "A paragraph that tells warns the user this is plausible deniability pin."
   },
-  "plausibleInfoHeader": "",
+  "plausibleInfoHeader": "Información de negación plausible",
   "@plausibleInfoHeader": {
     "type": "text",
     "description": "plausible_info_header"
   },
-  "plausibleSheetInfo": "",
+  "plausibleSheetInfo": "Establezca un pin secundario para el modo de negación plausible.\n\nSi su billetera se desbloquea con este pin secundario, su semilla se reemplazará con un hash de la semilla existente. Esta es una función de seguridad destinada a usarse en caso de que se vea obligado a abrir su billetera.\n\nEste pin actuará como un pin normal (correcto), EXCEPTO cuando desbloquee su billetera, que es cuando se activará el modo de negación plausible.\n\n¡Sus fondos SE PERDERÁN al ingresar al modo de negación plausible si no ha realizado una copia de seguridad de su semilla!",
   "@plausibleSheetInfo": {
     "type": "text",
     "description": "plausible_sheet_info"
@@ -1615,7 +1630,7 @@
     "type": "text",
     "description": "request_generic_error"
   },
-  "requestFrom": "",
+  "requestFrom": "Solicitud de",
   "@requestFrom": {
     "type": "text",
     "description": "request_title"
@@ -1640,12 +1655,12 @@
     "type": "text",
     "description": "request_sent_again"
   },
-  "requestSheetInfo": "",
+  "requestSheetInfo": "¡Solicite un pago, con mensajes cifrados de extremo a extremo!\n\nLas solicitudes de pago, las notas y los mensajes solo podrán ser recibidos por otros usuarios de nautilus, pero puede usarlos para su propio mantenimiento de registros incluso si el destinatario no usa nautilus.",
   "@requestSheetInfo": {
     "type": "text",
     "description": "request_sheet_info"
   },
-  "requestSheetInfoHeader": "",
+  "requestSheetInfoHeader": "Solicitud de información de la hoja",
   "@requestSheetInfoHeader": {
     "type": "text",
     "description": "request_sheet_info_header"
@@ -1815,7 +1830,7 @@
     "type": "text",
     "description": "send_sheet_info_header"
   },
-  "sendViaNFC": "",
+  "sendViaNFC": "Enviar a través de NFC",
   "@sendViaNFC": {
     "type": "text",
     "description": "send_payment_nfc"
@@ -1840,17 +1855,17 @@
     "type": "text",
     "description": "Setting a Wallet Password was successful"
   },
-  "setPin": "",
+  "setPin": "Establecer alfiler",
   "@setPin": {
     "type": "text",
     "description": "A button that sets the plausible deniability password"
   },
-  "setPinSuccess": "",
+  "setPinSuccess": "El PIN se ha establecido correctamente",
   "@setPinSuccess": {
     "type": "text",
     "description": "Setting a Wallet Pin was successful"
   },
-  "setPlausibleDeniabilityPin": "",
+  "setPlausibleDeniabilityPin": "Establecer pin plausible",
   "@setPlausibleDeniabilityPin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
@@ -1930,7 +1945,7 @@
     "type": "text",
     "description": "show_qr"
   },
-  "showUnopenedWarning": "",
+  "showUnopenedWarning": "Advertencia sin abrir",
   "@showUnopenedWarning": {
     "type": "text",
     "description": "warn_unsafe_send"
@@ -1940,7 +1955,7 @@
     "type": "text",
     "description": "simplex_ramp"
   },
-  "someone": "",
+  "someone": "alguien",
   "@someone": {
     "type": "text",
     "description": "send_someone"
@@ -1950,7 +1965,7 @@
     "type": "text",
     "description": "spend_nano"
   },
-  "splitBy": "",
+  "splitBy": "Dividir por",
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
@@ -2120,22 +2135,22 @@
     "type": "text",
     "description": "unlock_pin"
   },
-  "unopenedWarningHeader": "",
+  "unopenedWarningHeader": "Mostrar advertencia sin abrir",
   "@unopenedWarningHeader": {
     "type": "text",
     "description": "unopened_warning_header"
   },
-  "unopenedWarningInfo": "",
+  "unopenedWarningInfo": "Muestre una advertencia al enviar fondos a una cuenta sin abrir, esto es útil porque la mayoría de las veces las direcciones a las que envía tendrán un saldo, y el envío a una nueva dirección puede ser el resultado de un error tipográfico.",
   "@unopenedWarningInfo": {
     "type": "text",
     "description": "unopened_warning_info"
   },
-  "unopenedWarningWarning": "",
+  "unopenedWarningWarning": "¿Estás seguro de que esta es la dirección correcta?\nEsta cuenta parece no estar abierta\n\nPuede desactivar esta advertencia en el cajón de configuración en \"Advertencia sin abrir\"",
   "@unopenedWarningWarning": {
     "type": "text",
     "description": "unopened_warning_warning"
   },
-  "unopenedWarningWarningHeader": "",
+  "unopenedWarningWarningHeader": "Cuenta sin abrir",
   "@unopenedWarningWarningHeader": {
     "type": "text",
     "description": "unopened_warning_warning_header"
@@ -2210,7 +2225,7 @@
     "type": "text",
     "description": "user_not_found"
   },
-  "using": "",
+  "using": "Usando",
   "@using": {
     "type": "text",
     "description": "gift_message_using"
@@ -2220,7 +2235,7 @@
     "type": "text",
     "description": "transaction_details"
   },
-  "viewTX": "",
+  "viewTX": "Ver transacción",
   "@viewTX": {
     "type": "text",
     "description": "transaction_transaction"
@@ -2255,7 +2270,7 @@
     "type": "text",
     "description": "intro_welcome_title"
   },
-  "welcomeTextUpdated": "",
+  "welcomeTextUpdated": "Bienvenido a Nautilus. Para comenzar, cree una nueva billetera o importe una existente.",
   "@welcomeTextUpdated": {
     "type": "text",
     "description": "intro_welcome_title"

@@ -23,8 +23,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("Konto"),
-        "accountNameHint": MessageLookupByLibrary.simpleMessage(""),
-        "accountNameMissing": MessageLookupByLibrary.simpleMessage(""),
+        "accountNameHint":
+            MessageLookupByLibrary.simpleMessage("Ange ett namn"),
+        "accountNameMissing":
+            MessageLookupByLibrary.simpleMessage("Välj ett kontonamn"),
         "accounts": MessageLookupByLibrary.simpleMessage("Konton"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Är du säker på att du har sparat ner din hemliga fras eller seed?"),
@@ -36,10 +38,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Lägg till kontakt"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Lägg till favorit"),
-        "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(""),
-        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "address": MessageLookupByLibrary.simpleMessage(""),
+        "addWatchOnlyAccount":
+            MessageLookupByLibrary.simpleMessage("Lägg till Watch Only-konto"),
+        "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
+            "Det gick inte att lägga till Watch Only-konto: Kontot var null"),
+        "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
+            "Bevakningskonto har skapats framgångsrikt!"),
+        "address": MessageLookupByLibrary.simpleMessage("Adress"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Adress kopierad"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Ange adress"),
@@ -49,15 +54,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ange ett användarnamn eller adress"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Dela"),
         "aliases": MessageLookupByLibrary.simpleMessage("Alias"),
-        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(""),
+        "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
+            "Delat belopp kan inte vara större än gåvobalansen"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Ange ett belopp"),
         "asked": MessageLookupByLibrary.simpleMessage("Frågade"),
-        "authConfirm": MessageLookupByLibrary.simpleMessage(""),
-        "authError": MessageLookupByLibrary.simpleMessage(""),
+        "authConfirm": MessageLookupByLibrary.simpleMessage("Autentiseras"),
+        "authError": MessageLookupByLibrary.simpleMessage(
+            "Ett fel uppstod vid autentisering. Försök igen senare."),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("Autentiseringsmetod"),
-        "authenticating": MessageLookupByLibrary.simpleMessage(""),
+        "authenticating": MessageLookupByLibrary.simpleMessage("Autentiseras"),
         "autoImport": MessageLookupByLibrary.simpleMessage("Automatisk import"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Lås automatiskt"),
@@ -95,8 +102,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Välj ett smeknamn"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("% 1 har avblockerats!"),
-        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
-        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
+            "Vi verkar inte kunna nå Branch API, detta beror vanligtvis på något slags nätverksproblem eller att VPN blockerar anslutningen.\n\n Du bör fortfarande kunna använda appen som vanligt, men att skicka och ta emot presentkort kanske inte fungerar."),
+        "branchConnectErrorShortDesc":
+            MessageLookupByLibrary.simpleMessage("Fel: kan inte nå Branch API"),
+        "branchConnectErrorTitle":
+            MessageLookupByLibrary.simpleMessage("Anslutningsvarning"),
         "cancel": MessageLookupByLibrary.simpleMessage("Avbryt"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Ändra valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Ändra logg"),
@@ -115,9 +126,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Bekräfta"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Bekräfta lösenordet"),
-        "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "confirmPinHint":
+            MessageLookupByLibrary.simpleMessage("Bekräfta stiftet"),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Ansluter"),
-        "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
+        "connectionWarning":
+            MessageLookupByLibrary.simpleMessage("Kan inte ansluta"),
+        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Vi verkar inte kunna ansluta till backend, detta kan bara vara din anslutning eller om problemet kvarstår kan backend vara nere för underhåll eller till och med ett avbrott. Om det har gått mer än en timme och du fortfarande har problem, skicka en rapport i #bug-reports på discord-servern @ chat.perish.co"),
+        "connectionWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Vi verkar inte kunna ansluta till backend, detta kan bara vara din anslutning eller om problemet kvarstår kan backend vara nere för underhåll eller till och med ett avbrott. Om det har gått mer än en timme och du fortfarande har problem, skicka en rapport i #bug-reports på discord-servern @ chat.perish.co"),
+        "connectionWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Vi verkar inte kunna ansluta till backend"),
         "contactAdded": MessageLookupByLibrary.simpleMessage(
             "%1 har lagts till under kontakter!"),
         "contactExists":
@@ -140,7 +159,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy": MessageLookupByLibrary.simpleMessage("Kopiera"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Kopiera adress"),
         "copyLink": MessageLookupByLibrary.simpleMessage("Kopiera länk"),
-        "copyMessage": MessageLookupByLibrary.simpleMessage(""),
+        "copyMessage":
+            MessageLookupByLibrary.simpleMessage("Kopiera meddelande"),
         "copySeed": MessageLookupByLibrary.simpleMessage("Kopiera seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Kopiera plånbokens adress till Urklipp"),
@@ -158,9 +178,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Lösenord är valfritt och din plånbok kommer ändå att skyddas av din PIN-kod eller biometriskt."),
         "createPasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Ställ in"),
-        "createPinHint": MessageLookupByLibrary.simpleMessage(""),
+        "createPinHint": MessageLookupByLibrary.simpleMessage("Skapa en nål"),
         "createQR": MessageLookupByLibrary.simpleMessage("Skapa QR-kod"),
-        "created": MessageLookupByLibrary.simpleMessage(""),
+        "created": MessageLookupByLibrary.simpleMessage("skapas"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Skapa presentkort"),
         "currency": MessageLookupByLibrary.simpleMessage("Valuta"),
@@ -175,7 +195,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Dekryptering Fel!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Huvudkonto"),
-        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(""),
+        "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
+            "Kolla in Nautilus! Jag skickade lite nano till dig med denna länk:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Konto %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Ta bort"),
@@ -190,8 +211,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("Avfärda"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Ogiltigt domännamn"),
-        "donateButton": MessageLookupByLibrary.simpleMessage(""),
-        "donateToSupport": MessageLookupByLibrary.simpleMessage(""),
+        "donateButton": MessageLookupByLibrary.simpleMessage("Donera"),
+        "donateToSupport":
+            MessageLookupByLibrary.simpleMessage("Stöd projektet"),
         "edit": MessageLookupByLibrary.simpleMessage("Redigera"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Misslyckades med att ställa in ett lösenord"),
@@ -202,12 +224,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Ange meddelande"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Ange ditt lösenord"),
-        "enterSplitAmount": MessageLookupByLibrary.simpleMessage(""),
+        "enterSplitAmount":
+            MessageLookupByLibrary.simpleMessage("Ange delat belopp"),
         "enterUserOrAddress":
             MessageLookupByLibrary.simpleMessage("Ange användare eller adress"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Ange ett användarnamn"),
-        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(""),
+        "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
+            "Det uppstod ett fel när det här presentkortet bearbetades, det kanske inte är giltigt, har löpt ut eller är tomt."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("från någon"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
@@ -262,47 +286,57 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bekräfta fingeravtryck för att säkerhetskopiera plånboks-seed."),
         "from": MessageLookupByLibrary.simpleMessage("Från"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("uppfyllt"),
-        "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
-        "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
-        "getNano": MessageLookupByLibrary.simpleMessage(""),
+        "fundingBannerHeader":
+            MessageLookupByLibrary.simpleMessage("Finansieringsbanner"),
+        "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansiering"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Skaffa NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Du har en gåva!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Tom gåva"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Gåva belopp"),
-        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(""),
-        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(""),
+        "giftCardCreationError": MessageLookupByLibrary.simpleMessage(
+            "Ett fel uppstod när du försökte skapa en presentkortslänk"),
+        "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
+            "Ett fel uppstod när du försökte skapa ett presentkort, PRESENTKORTSLÄNKEN ELLER SEEDEN HAR KOPIERATS TILL DIN URLIPP, DINA MEDEL KAN INNEHÅLLAS I DET BEROENDE PÅ VAD BLEV FEL."),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Gåva från"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Ladda ett digitalt presentkort med NANO! Ange ett belopp, och ett valfritt meddelande för mottagaren att se när de öppnar det!\n\nNär du väl har skapat får du en länk som du kan skicka till vem som helst, som när den öppnas automatiskt distribuerar pengarna till mottagaren efter installationen av Nautilus!\n\nOm mottagaren redan är en Nautilus-användare kommer de att få en uppmaning att överföra pengarna till sitt konto när länken öppnas"),
         "giftMessage":
             MessageLookupByLibrary.simpleMessage("Present Meddelande"),
-        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(""),
+        "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
+            "Presenten har tagits emot, det kan ta en stund innan den dyker upp i din plånbok."),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Tillbaka"),
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Gå till QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Jag fattar!"),
-        "handoff": MessageLookupByLibrary.simpleMessage(""),
-        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
-        "handoffSupportedMethodNotFound":
-            MessageLookupByLibrary.simpleMessage(""),
+        "handoff": MessageLookupByLibrary.simpleMessage("bort med tassarna"),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(
+            "Något gick fel när du försökte överlämna blockering!"),
+        "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
+            "En överlämningsmetod som stöds kunde inte hittas!"),
         "hide": MessageLookupByLibrary.simpleMessage("Dölj"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Dölja konto?"),
-        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(""),
-        "hideAccountsHeader": MessageLookupByLibrary.simpleMessage(""),
-        "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(""),
+        "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Är du säker på att du vill dölja tomma konton?\n\nDetta kommer att dölja alla konton med ett saldo på exakt 0 (exklusive bara bevakningsadresser och ditt huvudkonto), men du kan alltid lägga till dem igen senare genom att trycka på knappen \"Lägg till konto\""),
+        "hideAccountsHeader":
+            MessageLookupByLibrary.simpleMessage("Dölja konton?"),
+        "hideEmptyAccounts":
+            MessageLookupByLibrary.simpleMessage("Dölj tomma konton"),
         "home": MessageLookupByLibrary.simpleMessage("Hem"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Jag förstår riskerna"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignorera"),
-        "imSure": MessageLookupByLibrary.simpleMessage(""),
+        "imSure": MessageLookupByLibrary.simpleMessage("Jag är säker"),
         "import": MessageLookupByLibrary.simpleMessage("Importera"),
         "importGift": MessageLookupByLibrary.simpleMessage(
             "Länken du klickade på innehåller lite nano, vill du importera den till den här plånboken, eller återbetala den till den som skickade den?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
-        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
-        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(
+            "Det verkar som att du klickade på en länk som innehåller lite NANO, för att kunna ta emot dessa pengar behöver vi bara för att du ska slutföra konfigureringen av din plånbok."),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(
+            "Länken du klickade på innehåller lite NANO, vill du importera den till den här plånboken?"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importera hemlig fras"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -317,14 +351,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("Omedelbart"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("Otillräckligt saldo"),
-        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
-        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(
+            "Vi hoppade över introduktionsprocessen för att spara tid, men du bör säkerhetskopiera ditt nyskapade frö omedelbart.\n\nOm du tappar ditt seed kommer du att förlora tillgången till dina pengar.\n\nDessutom har ditt lösenord ställts in på \"000000\" som du också bör ändra omedelbart."),
+        "introSkippedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("Säkerhetskopiera ditt frö!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Ogiltig mottagaradress"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Ogiltigt lösenord"),
-        "invalidPin": MessageLookupByLibrary.simpleMessage(""),
-        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(""),
+        "invalidPin": MessageLookupByLibrary.simpleMessage("Ogiltig pinkod"),
+        "iosFundingMessage": MessageLookupByLibrary.simpleMessage(
+            "På grund av iOS App Stores riktlinjer och begränsningar kan vi inte länka dig till vår donationssida. Om du vill stödja projektet, överväg att skicka till nautilusnodens adress."),
         "language": MessageLookupByLibrary.simpleMessage("Språk"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("Kopierad länk"),
         "loaded": MessageLookupByLibrary.simpleMessage("Laddad"),
@@ -352,7 +389,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "maybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
         "memoSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Memo skickas igen! Om mottagarens enhet fortfarande inte bekräftas kan mottagarens enhet vara offline."),
-        "messageCopied": MessageLookupByLibrary.simpleMessage(""),
+        "messageCopied":
+            MessageLookupByLibrary.simpleMessage("Meddelande kopierat"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Meddelande"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Minsta möjliga belopp att skicka är %1 NANO"),
@@ -361,12 +399,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("Hemlig fras"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "En hemlig fras kan bara innehålla 24 ord"),
-        "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(""),
+        "monthlyServerCosts":
+            MessageLookupByLibrary.simpleMessage("Månatliga serverkostnader"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
-        "moreSettings": MessageLookupByLibrary.simpleMessage(""),
+        "moreSettings":
+            MessageLookupByLibrary.simpleMessage("Fler inställningar"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natrikon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage(""),
-        "nearby": MessageLookupByLibrary.simpleMessage(""),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Nautilus plånbok"),
+        "nearby": MessageLookupByLibrary.simpleMessage("Närliggande"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Den här funktionen kräver att du har en längre transaktionshistorik för att förhindra skräppost.\n\nAlternativt kan du visa en QR-kod för någon att skanna."),
         "needVerificationAlertHeader":
@@ -422,7 +463,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "payments": MessageLookupByLibrary.simpleMessage("Betalningar"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Välj från en lista"),
-        "pinBlank": MessageLookupByLibrary.simpleMessage(""),
+        "pinBlank":
+            MessageLookupByLibrary.simpleMessage("Pin kan inte vara tom"),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("PIN-kod matchar ej"),
         "pinConfirmTitle":
@@ -437,11 +479,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ange PIN för att byta representant"),
         "pinSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Ange din PIN-kod för att se ditt seed."),
-        "pinsDontMatch": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleDeniabilityParagraph":
-            MessageLookupByLibrary.simpleMessage(""),
-        "plausibleInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
+        "pinsDontMatch":
+            MessageLookupByLibrary.simpleMessage("Pins matchar inte"),
+        "plausibleDeniabilityParagraph": MessageLookupByLibrary.simpleMessage(
+            "Detta är INTE samma pin som du använde för att skapa din plånbok. Tryck på info-knappen för mer information."),
+        "plausibleInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Plausible Deniability Info"),
+        "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Ställ in ett sekundärt stift för rimligt förnekarläge.\n\nOm din plånbok låses upp med denna sekundära stift, kommer ditt frö att ersättas med en hash av det befintliga fröet. Detta är en säkerhetsfunktion avsedd att användas i händelse av att du tvingas öppna din plånbok.\n\nDenna stift kommer att fungera som en vanlig (korrekt) stift UTOM när du låser upp din plånbok, vilket är då läget för rimlig förnekelse kommer att aktiveras.\n\nDina pengar KOMMER FÖRLORA när du går in i rimligt förnekarläge om du inte har säkerhetskopierat ditt frö!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Inställningar"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privatpolicy"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Köp Nano"),
@@ -501,15 +546,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Begäran% 1% 2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Begäran misslyckades: Den här användaren verkar inte ha Nautilus installerat eller har aviseringar inaktiverade."),
-        "requestFrom": MessageLookupByLibrary.simpleMessage(""),
+        "requestFrom": MessageLookupByLibrary.simpleMessage("Förfrågan från"),
         "requestPayment":
             MessageLookupByLibrary.simpleMessage("Begär betalning"),
         "requestSendError": MessageLookupByLibrary.simpleMessage(
             "Det gick inte att skicka betalningsförfrågan, mottagarens enhet kan vara offline eller inte tillgänglig."),
         "requestSentButNotReceived": MessageLookupByLibrary.simpleMessage(
             "Begäran skickas igen! Om mottagarens enhet fortfarande inte bekräftas kan mottagarens enhet vara offline."),
-        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(""),
-        "requestSheetInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "requestSheetInfo": MessageLookupByLibrary.simpleMessage(
+            "Begär en betalning, med End to End-krypterade meddelanden!\n\nBetalningsförfrågningar, anteckningar och meddelanden kommer endast att kunna tas emot av andra nautilus-användare, men du kan använda dem för din egen journalföring även om mottagaren inte använder nautilus."),
+        "requestSheetInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Begär bladinformation"),
         "requested": MessageLookupByLibrary.simpleMessage("Begärt"),
         "requestedFrom": MessageLookupByLibrary.simpleMessage("Begärd från"),
         "requesting": MessageLookupByLibrary.simpleMessage("Begär"),
@@ -570,7 +617,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Skicka eller begär en betalning, med krypterade meddelanden från slut till slut!\n\nBetalningsförfrågningar, PM, och meddelanden kommer endast att tas emot av andra nautilus-användare.\n\nDu behöver inte ha ett användarnamn för att skicka eller ta emot betalningsförfrågningar, och du kan använda dem för din egen journalföring även om de inte använder nautilus."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Skicka arkinformation"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage(""),
+        "sendViaNFC": MessageLookupByLibrary.simpleMessage("Skicka via NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Skickar"),
         "sent": MessageLookupByLibrary.simpleMessage("Skickat"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Skickat till"),
@@ -578,9 +625,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ställ in lösenord"),
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Lösenordet har ställts in"),
-        "setPin": MessageLookupByLibrary.simpleMessage(""),
-        "setPinSuccess": MessageLookupByLibrary.simpleMessage(""),
-        "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(""),
+        "setPin": MessageLookupByLibrary.simpleMessage("Ställ in stift"),
+        "setPinSuccess":
+            MessageLookupByLibrary.simpleMessage("Pin har ställts in"),
+        "setPlausibleDeniabilityPin":
+            MessageLookupByLibrary.simpleMessage("Ställ in Plausible Pin"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Ställ in plånbokslösenord"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
@@ -590,28 +639,33 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Ladda från pappersplånbok"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Dela länk"),
-        "shareMessage": MessageLookupByLibrary.simpleMessage(""),
+        "shareMessage": MessageLookupByLibrary.simpleMessage("Dela meddelande"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Dela Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Kolla in Nautilus! Nanos officiella Androidplånbok!"),
-        "show": MessageLookupByLibrary.simpleMessage(""),
-        "showAccountQR": MessageLookupByLibrary.simpleMessage(""),
+        "show": MessageLookupByLibrary.simpleMessage("Show"),
+        "showAccountQR":
+            MessageLookupByLibrary.simpleMessage("Visa konto QR-kod"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Visa kontakter"),
-        "showFunding": MessageLookupByLibrary.simpleMessage(""),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage(""),
-        "showQR": MessageLookupByLibrary.simpleMessage(""),
-        "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
+        "showFunding":
+            MessageLookupByLibrary.simpleMessage("Visa finansieringsbanner"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("Visa länk QR"),
+        "showQR": MessageLookupByLibrary.simpleMessage("Visa QR-kod"),
+        "showUnopenedWarning":
+            MessageLookupByLibrary.simpleMessage("Oöppnad varning"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
-        "someone": MessageLookupByLibrary.simpleMessage(""),
-        "spendNano": MessageLookupByLibrary.simpleMessage(""),
-        "splitBy": MessageLookupByLibrary.simpleMessage(""),
+        "someone": MessageLookupByLibrary.simpleMessage("någon"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Spendera NANO"),
+        "splitBy": MessageLookupByLibrary.simpleMessage("Dela av"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
-        "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
+        "supportDevelopment":
+            MessageLookupByLibrary.simpleMessage("Hjälp att stödja utveckling"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Stöd utvecklaren"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Byt till seed"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Systemfel"),
-        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(""),
+        "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(
+            "Tryck på meddelande för att redigera"),
         "tapToHide":
             MessageLookupByLibrary.simpleMessage("Tryck för att dölja"),
         "tapToReveal":
@@ -657,15 +711,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Verifiera för att låsa upp Nautilus"),
         "unlockPin": MessageLookupByLibrary.simpleMessage(
             "Ange PIN för att låsa upp Nautilus"),
-        "unopenedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(""),
-        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(""),
+        "unopenedWarningHeader":
+            MessageLookupByLibrary.simpleMessage("Visa oöppnad varning"),
+        "unopenedWarningInfo": MessageLookupByLibrary.simpleMessage(
+            "Visa en varning när du skickar pengar till ett oöppnat konto, detta är användbart eftersom adresser du skickar till oftast kommer att ha ett saldo, och att skicka till en ny adress kan vara resultatet av ett stavfel."),
+        "unopenedWarningWarning": MessageLookupByLibrary.simpleMessage(
+            "Är du säker på att detta är rätt adress?\nDet här kontot verkar vara oöppnat\n\nDu kan inaktivera denna varning i inställningslådan under \"Oöppnad varning\""),
         "unopenedWarningWarningHeader":
-            MessageLookupByLibrary.simpleMessage(""),
+            MessageLookupByLibrary.simpleMessage("Konto oöppnat"),
         "unpaid": MessageLookupByLibrary.simpleMessage("obetald"),
         "unread": MessageLookupByLibrary.simpleMessage("oläst"),
         "uptime": MessageLookupByLibrary.simpleMessage("Upptid"),
-        "useNano": MessageLookupByLibrary.simpleMessage(""),
+        "useNano": MessageLookupByLibrary.simpleMessage("Använd NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound":
@@ -686,17 +743,21 @@ class MessageLookup extends MessageLookupByLibrary {
             "Användarnamn är inte tillgängligt"),
         "usernameWarning": MessageLookupByLibrary.simpleMessage(
             "Nautilus användarnamn är en centraliserad tjänst som tillhandahålls av Nano.to"),
-        "using": MessageLookupByLibrary.simpleMessage(""),
+        "using": MessageLookupByLibrary.simpleMessage("Använder sig av"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Visa detaljer"),
-        "viewTX": MessageLookupByLibrary.simpleMessage(""),
+        "viewTX": MessageLookupByLibrary.simpleMessage("Visa transaktion"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Röstvikt"),
         "warning": MessageLookupByLibrary.simpleMessage("Varning"),
-        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
-        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
+        "watchAccountExists": MessageLookupByLibrary.simpleMessage(
+            "Kontot har redan lagts till!"),
+        "watchOnlyAccount":
+            MessageLookupByLibrary.simpleMessage("Endast titta på konto"),
+        "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
+            "Sändningar är inaktiverade på adresser med endast bevakning"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Välkommen till Nautilus. För att fortsätta, behöver du skapa en ny plånbok eller importera en befintlig."),
-        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(""),
+        "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
+            "Välkommen till Nautilus. Börja med att skapa en ny plånbok eller importera en befintlig."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Med adress"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Med Meddelande"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Efter %1 minut"),

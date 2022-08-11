@@ -5,12 +5,12 @@
     "type": "text",
     "description": "Account text"
   },
-  "accountNameHint": "",
+  "accountNameHint": "名前を入力してください",
   "@accountNameHint": {
     "type": "text",
     "description": "enter_name_hint"
   },
-  "accountNameMissing": "",
+  "accountNameMissing": "アカウント名を選択",
   "@accountNameMissing": {
     "type": "text",
     "description": "account_name_missing"
@@ -50,7 +50,7 @@
     "type": "text",
     "description": "favorite_add_button"
   },
-  "address": "",
+  "address": "住所",
   "@address": {
     "type": "text",
     "description": "send_warning_address"
@@ -80,17 +80,17 @@
     "type": "text",
     "description": "receive_share_cta"
   },
-  "addWatchOnlyAccount": "",
+  "addWatchOnlyAccount": "視聴専用アカウントを追加",
   "@addWatchOnlyAccount": {
     "type": "text",
     "description": "watch_only_add"
   },
-  "addWatchOnlyAccountError": "",
+  "addWatchOnlyAccountError": "Watch Only アカウントの追加エラー: アカウントが null でした",
   "@addWatchOnlyAccountError": {
     "type": "text",
     "description": "watch_only_add_error"
   },
-  "addWatchOnlyAccountSuccess": "",
+  "addWatchOnlyAccountSuccess": "時計専用アカウントが正常に作成されました。",
   "@addWatchOnlyAccountSuccess": {
     "type": "text",
     "description": "watch_only_add_success"
@@ -100,7 +100,7 @@
     "type": "text",
     "description": "card_details_aliases"
   },
-  "amountGiftGreaterError": "",
+  "amountGiftGreaterError": "分割金額はギフト残高より大きくすることはできません",
   "@amountGiftGreaterError": {
     "type": "text",
     "description": "gift_split_greater_error"
@@ -115,17 +115,17 @@
     "type": "text",
     "description": "home_asked_cta"
   },
-  "authConfirm": "",
+  "authConfirm": "認証中",
   "@authConfirm": {
     "type": "text",
     "description": "auth_confirm_message"
   },
-  "authenticating": "",
+  "authenticating": "認証中",
   "@authenticating": {
     "type": "text",
     "description": "auth_authenticating"
   },
-  "authError": "",
+  "authError": "認証中にエラーが発生しました。あとでもう一度試してみてください。",
   "@authError": {
     "type": "text",
     "description": "auth_generic_error"
@@ -235,12 +235,17 @@
     "type": "text",
     "description": "block_user"
   },
-  "branchConnectErrorShortDesc": "",
+  "branchConnectErrorLongDesc": "Branch API に到達できないようです。これは通常、何らかのネットワークの問題または VPN が接続をブロックしていることが原因です。\n\n アプリは通常どおり使用できますが、ギフト カードの送受信が機能しない場合があります。",
+  "@branchConnectErrorLongDesc": {
+    "type": "text",
+    "description": "branch_connection_error_long_desc"
+  },
+  "branchConnectErrorShortDesc": "エラー: Branch API にアクセスできません",
   "@branchConnectErrorShortDesc": {
     "type": "text",
     "description": "branch_connection_error_short_desc"
   },
-  "branchConnectErrorTitle": "",
+  "branchConnectErrorTitle": "接続警告",
   "@branchConnectErrorTitle": {
     "type": "text",
     "description": "branch_connection_error_title"
@@ -305,7 +310,7 @@
     "type": "text",
     "description": "A text field hint that tells the user to confirm the password"
   },
-  "confirmPinHint": "",
+  "confirmPinHint": "ピンを確認する",
   "@confirmPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to confirm the pin"
@@ -315,15 +320,25 @@
     "type": "text",
     "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
   },
-  "connectionWarning": "",
+  "connectionWarning": "接続できません",
   "@connectionWarning": {
     "type": "text",
     "description": "home_connection_warning"
   },
-  "connectionWarningBody": "",
+  "connectionWarningBody": "バックエンドに接続できないようです。これは単に接続に問題があるか、問題が解決しない場合は、バックエンドがメンテナンスまたは停止のためにダウンしている可能性があります。 1 時間以上経過しても問題が解決しない場合は、discord サーバー @ chat.perish.co の #bug-reports でレポートを送信してください。",
   "@connectionWarningBody": {
     "type": "text",
     "description": "connection_warning_body"
+  },
+  "connectionWarningBodyLong": "バックエンドに接続できないようです。これは単に接続に問題があるか、問題が解決しない場合は、バックエンドがメンテナンスまたは停止のためにダウンしている可能性があります。 1 時間以上経過しても問題が解決しない場合は、discord サーバー @ chat.perish.co の #bug-reports でレポートを送信してください。",
+  "@connectionWarningBodyLong": {
+    "type": "text",
+    "description": "connection_warning_body_long"
+  },
+  "connectionWarningBodyShort": "バックエンドに接続できないようです",
+  "@connectionWarningBodyShort": {
+    "type": "text",
+    "description": "connection_warning_body_short"
   },
   "contactAdded": "％1が連絡先に追加されました。",
   "@contactAdded": {
@@ -395,7 +410,7 @@
     "type": "text",
     "description": "copy_link"
   },
-  "copyMessage": "",
+  "copyMessage": "メッセージをコピー",
   "@copyMessage": {
     "type": "text",
     "description": "copy_message"
@@ -415,7 +430,7 @@
     "type": "text",
     "description": "A paragraph that tells the users to create a password."
   },
-  "created": "",
+  "created": "作成した",
   "@created": {
     "type": "text",
     "description": "gift_created"
@@ -450,7 +465,7 @@
     "type": "text",
     "description": "Prompt user to create a new password"
   },
-  "createPinHint": "",
+  "createPinHint": "ピンを作成する",
   "@createPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to create a pin"
@@ -500,7 +515,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "",
+  "defaultGiftMessage": "ノーチラスをチェック！このリンクでnanoを送信しました：",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -545,12 +560,12 @@
     "type": "text",
     "description": "domain_invalid_name"
   },
-  "donateButton": "",
+  "donateButton": "寄付",
   "@donateButton": {
     "type": "text",
     "description": "donate_button"
   },
-  "donateToSupport": "",
+  "donateToSupport": "プロジェクトを支援する",
   "@donateToSupport": {
     "type": "text",
     "description": "settings_support_donate"
@@ -590,7 +605,7 @@
     "type": "text",
     "description": "A text field hint that tells the users to enter their password"
   },
-  "enterSplitAmount": "",
+  "enterSplitAmount": "分割金額を入力",
   "@enterSplitAmount": {
     "type": "text",
     "description": "gift_split_amount_hint"
@@ -605,7 +620,7 @@
     "type": "text",
     "description": "enter_user_address"
   },
-  "errorProcessingGiftCard": "",
+  "errorProcessingGiftCard": "このギフト カードの処理中にエラーが発生しました。有効でないか、有効期限が切れているか、空である可能性があります。",
   "@errorProcessingGiftCard": {
     "type": "text",
     "description": "gift_process_error"
@@ -785,17 +800,17 @@
     "type": "text",
     "description": "history_fulfilled"
   },
-  "fundingBannerHeader": "",
+  "fundingBannerHeader": "ファンディング バナー",
   "@fundingBannerHeader": {
     "type": "text",
     "description": "funding_banner_header"
   },
-  "fundingHeader": "",
+  "fundingHeader": "資金調達",
   "@fundingHeader": {
     "type": "text",
     "description": "funding_header"
   },
-  "getNano": "",
+  "getNano": "ナノを入手",
   "@getNano": {
     "type": "text",
     "description": "get_nano"
@@ -815,12 +830,12 @@
     "type": "text",
     "description": "gift_amount"
   },
-  "giftCardCreationError": "",
+  "giftCardCreationError": "ギフトカード リンクの作成中にエラーが発生しました",
   "@giftCardCreationError": {
     "type": "text",
     "description": "create_gift_error"
   },
-  "giftCardCreationErrorSent": "",
+  "giftCardCreationErrorSent": "ギフト カードの作成中にエラーが発生しました。ギフト カードのリンクまたはシードがクリップボードにコピーされました。問題によっては、資金がクリップボードに含まれている可能性があります。",
   "@giftCardCreationErrorSent": {
     "type": "text",
     "description": "gift_generic_error"
@@ -840,7 +855,7 @@
     "type": "text",
     "description": "gift_message"
   },
-  "giftProcessSuccess": "",
+  "giftProcessSuccess": "ギフトを受け取りました。ウォレットに表示されるまで少し時間がかかる場合があります。",
   "@giftProcessSuccess": {
     "type": "text",
     "description": "gift_process_success"
@@ -865,17 +880,17 @@
     "type": "text",
     "description": "go_to_qr_code"
   },
-  "handoff": "",
+  "handoff": "渡す",
   "@handoff": {
     "type": "text",
     "description": "send_handoff"
   },
-  "handoffFailed": "",
+  "handoffFailed": "ブロックのハンドオフ中に問題が発生しました!",
   "@handoffFailed": {
     "type": "text",
     "description": "handoff_failed"
   },
-  "handoffSupportedMethodNotFound": "",
+  "handoffSupportedMethodNotFound": "サポートされているハンドオフ方法が見つかりませんでした!",
   "@handoffSupportedMethodNotFound": {
     "type": "text",
     "description": "handoff_method_not_found"
@@ -890,17 +905,17 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "hideAccountsConfirmation": "",
+  "hideAccountsConfirmation": "空のアカウントを非表示にしてもよろしいですか?\n\nこれにより、残高がちょうど 0 のすべてのアカウントが非表示になります (監視専用アドレスとメイン アカウントを除く)。ただし、[アカウントを追加] ボタンをタップして、後でいつでも再追加できます。",
   "@hideAccountsConfirmation": {
     "type": "text",
     "description": "hide accounts confirmation info"
   },
-  "hideAccountsHeader": "",
+  "hideAccountsHeader": "アカウントを非表示にしますか?",
   "@hideAccountsHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "hideEmptyAccounts": "",
+  "hideEmptyAccounts": "空のアカウントを非表示",
   "@hideEmptyAccounts": {
     "type": "text",
     "description": "hide_empty_accounts"
@@ -930,12 +945,12 @@
     "type": "text",
     "description": "import_gift_empty"
   },
-  "importGiftIntro": "",
+  "importGiftIntro": "NANO を含むリンクをクリックしたようです。これらの資金を受け取るには、ウォレットの設定を完了する必要があります。",
   "@importGiftIntro": {
     "type": "text",
     "description": "import_gift_intro"
   },
-  "importGiftv2": "",
+  "importGiftv2": "クリックしたリンクには NANO が含まれています。このウォレットにインポートしますか?",
   "@importGiftv2": {
     "type": "text",
     "description": "import_gift_v2"
@@ -970,7 +985,7 @@
     "type": "text",
     "description": "intro_welcome_have_wallet"
   },
-  "imSure": "",
+  "imSure": "私は確信しています",
   "@imSure": {
     "type": "text",
     "description": "send_confirm_warning"
@@ -985,12 +1000,12 @@
     "type": "text",
     "description": "send_insufficient_balance"
   },
-  "introSkippedWarningContent": "",
+  "introSkippedWarningContent": "時間を節約するために導入プロセスをスキップしましたが、新しく作成したシードをすぐにバックアップする必要があります。\n\nシードを失うと、資金にアクセスできなくなります。\n\nさらに、パスコードが「000000」に設定されていますが、これもすぐに変更する必要があります。",
   "@introSkippedWarningContent": {
     "type": "text",
     "description": "intro_skipped_warning_content"
   },
-  "introSkippedWarningHeader": "",
+  "introSkippedWarningHeader": "シードをバックアップしてください！",
   "@introSkippedWarningHeader": {
     "type": "text",
     "description": "intro_skipped_warning_header"
@@ -1005,12 +1020,12 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
-  "invalidPin": "",
+  "invalidPin": "無効なピン",
   "@invalidPin": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
   },
-  "iosFundingMessage": "",
+  "iosFundingMessage": "iOS App Store のガイドラインと制限により、寄付ページにリンクすることはできません。プロジェクトをサポートしたい場合は、nautilus ノードのアドレスに送信することを検討してください。",
   "@iosFundingMessage": {
     "type": "text",
     "description": "ios_funding_message"
@@ -1110,7 +1125,7 @@
     "type": "text",
     "description": "memo_sent_again"
   },
-  "messageCopied": "",
+  "messageCopied": "メッセージをコピーしました",
   "@messageCopied": {
     "type": "text",
     "description": "message_copied"
@@ -1140,7 +1155,7 @@
     "type": "text",
     "description": "err"
   },
-  "monthlyServerCosts": "",
+  "monthlyServerCosts": "月額サーバー費用",
   "@monthlyServerCosts": {
     "type": "text",
     "description": "support_monthly_costs"
@@ -1150,7 +1165,7 @@
     "type": "text",
     "description": "moonpay_ramp"
   },
-  "moreSettings": "",
+  "moreSettings": "その他の設定",
   "@moreSettings": {
     "type": "text",
     "description": "settings_more"
@@ -1160,12 +1175,12 @@
     "type": "text",
     "description": "natricon_settings"
   },
-  "nautilusWallet": "",
+  "nautilusWallet": "ノーチラス ウォレット",
   "@nautilusWallet": {
     "type": "text",
     "description": "nautilus_wallet"
   },
-  "nearby": "",
+  "nearby": "近く",
   "@nearby": {
     "type": "text",
     "description": "nearby_devices"
@@ -1350,7 +1365,7 @@
     "type": "text",
     "description": "pick rep from list"
   },
-  "pinBlank": "",
+  "pinBlank": "ピンを空にすることはできません",
   "@pinBlank": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
@@ -1390,7 +1405,7 @@
     "type": "text",
     "description": "change_representative_pin"
   },
-  "pinsDontMatch": "",
+  "pinsDontMatch": "ピンが一致しません",
   "@pinsDontMatch": {
     "type": "text",
     "description": "An error indicating a pin has been confirmed incorrectly"
@@ -1400,17 +1415,17 @@
     "type": "text",
     "description": "settings_pin_title"
   },
-  "plausibleDeniabilityParagraph": "",
+  "plausibleDeniabilityParagraph": "これは、ウォレットの作成に使用したピンとは異なります。詳細については、情報ボタンを押してください。",
   "@plausibleDeniabilityParagraph": {
     "type": "text",
     "description": "A paragraph that tells warns the user this is plausible deniability pin."
   },
-  "plausibleInfoHeader": "",
+  "plausibleInfoHeader": "もっともらしい否認情報",
   "@plausibleInfoHeader": {
     "type": "text",
     "description": "plausible_info_header"
   },
-  "plausibleSheetInfo": "",
+  "plausibleSheetInfo": "もっともらしい否認モードのセカンダリ ピンを設定します。\n\nこのセカンダリ PIN を使用してウォレットのロックを解除すると、シードは既存のシードのハッシュに置き換えられます。これは、ウォレットを開くことを余儀なくされた場合に使用するためのセキュリティ機能です。\n\nこのピンは、もっともらしい否認モードがアクティブになるウォレットのロックを解除する場合を除いて、通常の (正しい) ピンのように機能します。\n\nシードをバックアップしていない場合、もっともらしい否認モードに入ると、資金が失われます!",
   "@plausibleSheetInfo": {
     "type": "text",
     "description": "plausible_sheet_info"
@@ -1615,7 +1630,7 @@
     "type": "text",
     "description": "request_generic_error"
   },
-  "requestFrom": "",
+  "requestFrom": "リクエスト元",
   "@requestFrom": {
     "type": "text",
     "description": "request_title"
@@ -1640,12 +1655,12 @@
     "type": "text",
     "description": "request_sent_again"
   },
-  "requestSheetInfo": "",
+  "requestSheetInfo": "エンド ツー エンドの暗号化されたメッセージで支払いをリクエストしてください!\n\n支払い請求、メモ、メッセージは、他の nautilus ユーザーのみが受信できますが、受信者が nautilus を使用していなくても、自分の記録管理に使用できます。",
   "@requestSheetInfo": {
     "type": "text",
     "description": "request_sheet_info"
   },
-  "requestSheetInfoHeader": "",
+  "requestSheetInfoHeader": "シート情報のリクエスト",
   "@requestSheetInfoHeader": {
     "type": "text",
     "description": "request_sheet_info_header"
@@ -1815,7 +1830,7 @@
     "type": "text",
     "description": "send_sheet_info_header"
   },
-  "sendViaNFC": "",
+  "sendViaNFC": "NFC経由で送信",
   "@sendViaNFC": {
     "type": "text",
     "description": "send_payment_nfc"
@@ -1840,17 +1855,17 @@
     "type": "text",
     "description": "Setting a Wallet Password was successful"
   },
-  "setPin": "",
+  "setPin": "ピンを設定",
   "@setPin": {
     "type": "text",
     "description": "A button that sets the plausible deniability password"
   },
-  "setPinSuccess": "",
+  "setPinSuccess": "ピンが正常に設定されました",
   "@setPinSuccess": {
     "type": "text",
     "description": "Setting a Wallet Pin was successful"
   },
-  "setPlausibleDeniabilityPin": "",
+  "setPlausibleDeniabilityPin": "もっともらしいピンを設定する",
   "@setPlausibleDeniabilityPin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
@@ -1885,7 +1900,7 @@
     "type": "text",
     "description": "share_link"
   },
-  "shareMessage": "",
+  "shareMessage": "メッセージを共有",
   "@shareMessage": {
     "type": "text",
     "description": "share_message"
@@ -1900,12 +1915,12 @@
     "type": "text",
     "description": "share_extra"
   },
-  "show": "",
+  "show": "見せる",
   "@show": {
     "type": "text",
     "description": "funding_show"
   },
-  "showAccountQR": "",
+  "showAccountQR": "アカウントの QR コードを表示",
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
@@ -1915,22 +1930,22 @@
     "type": "text",
     "description": "contacts_enabled"
   },
-  "showFunding": "",
+  "showFunding": "ファンディング バナーを表示",
   "@showFunding": {
     "type": "text",
     "description": "show_funding_banner"
   },
-  "showLinkQR": "",
+  "showLinkQR": "リンクの QR を表示",
   "@showLinkQR": {
     "type": "text",
     "description": "show_link_qr"
   },
-  "showQR": "",
+  "showQR": "QRコードを表示",
   "@showQR": {
     "type": "text",
     "description": "show_qr"
   },
-  "showUnopenedWarning": "",
+  "showUnopenedWarning": "未開封注意",
   "@showUnopenedWarning": {
     "type": "text",
     "description": "warn_unsafe_send"
@@ -1940,17 +1955,17 @@
     "type": "text",
     "description": "simplex_ramp"
   },
-  "someone": "",
+  "someone": "誰か",
   "@someone": {
     "type": "text",
     "description": "send_someone"
   },
-  "spendNano": "",
+  "spendNano": "NANOを使う",
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
   },
-  "splitBy": "",
+  "splitBy": "分割",
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
@@ -1960,7 +1975,7 @@
     "type": "text",
     "description": "A button to open up the live support window"
   },
-  "supportDevelopment": "",
+  "supportDevelopment": "ヘルプ サポート開発",
   "@supportDevelopment": {
     "type": "text",
     "description": "settings_support_development"
@@ -1980,7 +1995,7 @@
     "type": "text",
     "description": "settings_default_language_string"
   },
-  "tapMessageToEdit": "",
+  "tapMessageToEdit": "メッセージをタップして編集します",
   "@tapMessageToEdit": {
     "type": "text",
     "description": "gift_creation_message_edit_hint"
@@ -2120,22 +2135,22 @@
     "type": "text",
     "description": "unlock_pin"
   },
-  "unopenedWarningHeader": "",
+  "unopenedWarningHeader": "未開封の警告を表示",
   "@unopenedWarningHeader": {
     "type": "text",
     "description": "unopened_warning_header"
   },
-  "unopenedWarningInfo": "",
+  "unopenedWarningInfo": "未開設の口座に資金を送金する際に警告を表示します。これは、ほとんどの場合、送信先のアドレスに残高があり、新しいアドレスへの送信はタイプミスの結果である可能性があるため便利です。",
   "@unopenedWarningInfo": {
     "type": "text",
     "description": "unopened_warning_info"
   },
-  "unopenedWarningWarning": "",
+  "unopenedWarningWarning": "これが正しいアドレスであると確信していますか?\nこのアカウントは未開設のようです\n\n「未開封の警告」の下の設定ドロワーでこの警告を無効にすることができます。",
   "@unopenedWarningWarning": {
     "type": "text",
     "description": "unopened_warning_warning"
   },
-  "unopenedWarningWarningHeader": "",
+  "unopenedWarningWarningHeader": "アカウント未開設",
   "@unopenedWarningWarningHeader": {
     "type": "text",
     "description": "unopened_warning_warning_header"
@@ -2155,7 +2170,7 @@
     "type": "text",
     "description": "Rep uptime"
   },
-  "useNano": "",
+  "useNano": "NANOを使う",
   "@useNano": {
     "type": "text",
     "description": "use_nano"
@@ -2210,7 +2225,7 @@
     "type": "text",
     "description": "user_not_found"
   },
-  "using": "",
+  "using": "使用する",
   "@using": {
     "type": "text",
     "description": "gift_message_using"
@@ -2220,7 +2235,7 @@
     "type": "text",
     "description": "transaction_details"
   },
-  "viewTX": "",
+  "viewTX": "取引を見る",
   "@viewTX": {
     "type": "text",
     "description": "transaction_transaction"
@@ -2235,17 +2250,17 @@
     "type": "text",
     "description": "settings_logout_alert_title"
   },
-  "watchAccountExists": "",
+  "watchAccountExists": "アカウントはすでに追加されています！",
   "@watchAccountExists": {
     "type": "text",
     "description": "account_entry_exists"
   },
-  "watchOnlyAccount": "",
+  "watchOnlyAccount": "視聴専用アカウント",
   "@watchOnlyAccount": {
     "type": "text",
     "description": "watch_only_account"
   },
-  "watchOnlySendDisabled": "",
+  "watchOnlySendDisabled": "監視専用アドレスでは送信が無効になっています",
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
@@ -2255,7 +2270,7 @@
     "type": "text",
     "description": "intro_welcome_title"
   },
-  "welcomeTextUpdated": "",
+  "welcomeTextUpdated": "ノーチラスへようこそ。まず、新しいウォレットを作成するか、既存のウォレットをインポートします。",
   "@welcomeTextUpdated": {
     "type": "text",
     "description": "intro_welcome_title"
