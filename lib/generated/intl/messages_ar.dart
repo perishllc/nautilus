@@ -51,7 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("يرجى إدخال المبلغ"),
         "asked": MessageLookupByLibrary.simpleMessage("طلب"),
         "authConfirm": MessageLookupByLibrary.simpleMessage(""),
+        "authError": MessageLookupByLibrary.simpleMessage(""),
         "authMethod": MessageLookupByLibrary.simpleMessage("طريقة المصادقة"),
+        "authenticating": MessageLookupByLibrary.simpleMessage(""),
         "autoImport": MessageLookupByLibrary.simpleMessage("استيراد تلقائي"),
         "autoLockHeader": MessageLookupByLibrary.simpleMessage("قفل آليً"),
         "backupConfirmButton":
@@ -87,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اختر اسم Nick"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("تم إلغاء حظر %1!"),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("تغيير العملة"),
         "changeLog": MessageLookupByLibrary.simpleMessage("سجل التغيير"),
@@ -108,7 +112,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("الاتصال"),
         "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
-        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded": MessageLookupByLibrary.simpleMessage(
             "تم إضافة %1 إلى جهات الاتصال."),
         "contactExists":
@@ -255,6 +258,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("الوفاء"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
         "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
+        "getNano": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert": MessageLookupByLibrary.simpleMessage("لديك هدية!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("هدية فارغة"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("مبلغ الهدية"),
@@ -271,6 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goToQRCode": MessageLookupByLibrary.simpleMessage("انتقل إلى QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("موافق!"),
         "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
         "handoffSupportedMethodNotFound":
             MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("هيدي"),
@@ -289,6 +294,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "يحتوي الرابط الذي نقرت عليه على بعض النانو، هل ترغب في استيراده إلى هذه المحفظة، أو إعادته إلى من أرسله؟"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("استيراد العبارة السرية"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -302,6 +309,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("فوراً"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("لرصيد غير كافي"),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("العنوان المدخل غير صحيح"),
         "invalidPassword":
@@ -425,6 +434,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences": MessageLookupByLibrary.simpleMessage("الاختيارات"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("شراء نانو"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "لا يحتوي رمز الاستجابة السريعة على وجهة صالحة\n"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -581,6 +591,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("البسيط"),
         "someone": MessageLookupByLibrary.simpleMessage(""),
+        "spendNano": MessageLookupByLibrary.simpleMessage(""),
         "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
@@ -641,6 +652,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("غير مدفوع"),
         "unread": MessageLookupByLibrary.simpleMessage("غير مقروء"),
         "uptime": MessageLookupByLibrary.simpleMessage("مدة التشغيل"),
+        "useNano": MessageLookupByLibrary.simpleMessage(""),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound":
@@ -666,6 +678,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("وزن التصويت"),
         "warning": MessageLookupByLibrary.simpleMessage("تحذير"),
+        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(

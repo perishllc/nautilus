@@ -53,8 +53,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lūdzu ievadiet daudzumu"),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
         "authConfirm": MessageLookupByLibrary.simpleMessage(""),
+        "authError": MessageLookupByLibrary.simpleMessage(""),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("Autentificēšanās metode"),
+        "authenticating": MessageLookupByLibrary.simpleMessage(""),
         "autoImport": MessageLookupByLibrary.simpleMessage("Auto Import"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Automātiski aizslēgt"),
@@ -90,6 +92,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Choose a Nick Name"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("%1 has been unblocked!"),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Atcelt"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Mainīt valūtu"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
@@ -111,7 +115,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Connecting"),
         "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
-        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("%1 pievienots kontaktiem."),
         "contactExists":
@@ -259,6 +262,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("fulfilled"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
         "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
+        "getNano": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert": MessageLookupByLibrary.simpleMessage("You have a gift!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Empty Gift"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Gift Amount"),
@@ -275,6 +279,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Go to QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Sapratu!"),
         "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
         "handoffSupportedMethodNotFound":
             MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("Hide"),
@@ -293,6 +298,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importēt slepeno frāzi"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -306,6 +313,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("Uzreiz"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("Nepietiek līdzekļu"),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Ievadītā adrese nav derīga"),
         "invalidPassword":
@@ -428,6 +437,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferences"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Privātuma politika"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("Purchase Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -584,6 +594,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage(""),
+        "spendNano": MessageLookupByLibrary.simpleMessage(""),
         "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
@@ -648,6 +659,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("unpaid"),
         "unread": MessageLookupByLibrary.simpleMessage("unread"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
+        "useNano": MessageLookupByLibrary.simpleMessage(""),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found!"),
@@ -671,6 +683,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Voting Weight"),
         "warning": MessageLookupByLibrary.simpleMessage("Brīdinājums"),
+        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(

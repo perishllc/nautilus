@@ -53,7 +53,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Masukkan jumlah"),
         "asked": MessageLookupByLibrary.simpleMessage("Ditanya"),
         "authConfirm": MessageLookupByLibrary.simpleMessage(""),
+        "authError": MessageLookupByLibrary.simpleMessage(""),
         "authMethod": MessageLookupByLibrary.simpleMessage("Metode Otentikasi"),
+        "authenticating": MessageLookupByLibrary.simpleMessage(""),
         "autoImport": MessageLookupByLibrary.simpleMessage("Impor Otomatis"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Kunci Otomatis"),
@@ -90,6 +92,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pilih Nama Nick"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("% 1 telah dibuka blokir!"),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Batal"),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Ubah Mata Uang"),
@@ -113,7 +117,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "connectingHeader":
             MessageLookupByLibrary.simpleMessage("Menghubungkan"),
         "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
-        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("%1 ditambahkan ke kontak!"),
         "contactExists":
@@ -263,6 +266,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("terpenuhi"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
         "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
+        "getNano": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Kau punya hadiah!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Hadiah Kosong"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Jumlah Hadiah"),
@@ -279,6 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Pergi ke QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Baiklah!"),
         "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
         "handoffSupportedMethodNotFound":
             MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("Sembunyikan"),
@@ -297,6 +302,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tautan yang Anda klik berisi beberapa nano, apakah Anda ingin mengimpornya ke dompet ini, atau mengembalikannya kepada siapa pun yang mengirimnya?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Impor Kata Rahasia"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -310,6 +317,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("Segera"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("Saldo Tidak mencukupi"),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Alamat Tujuan Tidak Valid"),
         "invalidPassword":
@@ -436,6 +445,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferensi"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Kebijakan Privasi"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("Pembelian Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "Kode QR tidak berisikan alamat yang benar"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -593,6 +603,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
         "someone": MessageLookupByLibrary.simpleMessage(""),
+        "spendNano": MessageLookupByLibrary.simpleMessage(""),
         "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
@@ -656,6 +667,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("tidak dibayar"),
         "unread": MessageLookupByLibrary.simpleMessage("belum dibaca"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
+        "useNano": MessageLookupByLibrary.simpleMessage(""),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound":
@@ -681,6 +693,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Bobot HakSuara"),
         "warning": MessageLookupByLibrary.simpleMessage("PERINGATAN"),
+        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(

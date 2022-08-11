@@ -1,24 +1,12 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/custom_stack.dart';
+import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 
 class DraggableScrollbar extends StatefulWidget {
-  final Widget child;
-  final double scrollbarHeight;
-  final double scrollbarWidth;
-  final double scrollbarActiveWidth;
-  final double scrollbarInvisibleWidth;
-  final double scrollbarTopMargin;
-  final double scrollbarBottomMargin;
-  final Duration scrollbarHideAfterDuration;
-  final ScrollController controller;
-  final bool enableJumpScroll;
-  final bool showTouchArea;
-  final Color scrollbarColor;
-
-  DraggableScrollbar(
+  const DraggableScrollbar(
       {this.scrollbarHeight = 60.0,
       this.scrollbarTopMargin = 10.0,
       this.scrollbarBottomMargin = 10.0,
@@ -32,11 +20,24 @@ class DraggableScrollbar extends StatefulWidget {
       required this.child,
       required this.controller});
 
+  final Widget child;
+  final double scrollbarHeight;
+  final double scrollbarWidth;
+  final double scrollbarActiveWidth;
+  final double scrollbarInvisibleWidth;
+  final double scrollbarTopMargin;
+  final double scrollbarBottomMargin;
+  final Duration scrollbarHideAfterDuration;
+  final ScrollController controller;
+  final bool enableJumpScroll;
+  final bool showTouchArea;
+  final Color scrollbarColor;
+
   @override
-  _DraggableScrollbarState createState() => _DraggableScrollbarState();
+  DraggableScrollbarState createState() => DraggableScrollbarState();
 }
 
-class _DraggableScrollbarState extends State<DraggableScrollbar> {
+class DraggableScrollbarState extends State<DraggableScrollbar> {
   // this counts offset for scroll thumb for Vertical axis
   double _barOffsetTop = 0.0;
   double _barOffsetBottom = 0.0;
@@ -94,9 +95,9 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
       return;
     }
 
-    RenderBox scrollbarBox = scrollbarKey.currentContext?.findRenderObject() as RenderBox;
-    Offset touchPosition = details.globalPosition;
-    Offset scrollbarPosition = scrollbarBox.localToGlobal(Offset.zero);
+    final RenderBox scrollbarBox = scrollbarKey.currentContext?.findRenderObject() as RenderBox;
+    final Offset touchPosition = details.globalPosition;
+    final Offset scrollbarPosition = scrollbarBox.localToGlobal(Offset.zero);
 
     // // don't update past the bounds of the list:
     // if (touchPosition.dy < (scrollbarPosition.dy + (widget.scrollbarHeight / 2) + widget.scrollbarTopMargin)) {
@@ -118,8 +119,8 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
 
     setState(() {
       // _barOffsetTop += details.delta.dy;
-      double prevOffset = _barOffsetTop;
-      double moveToHeight = (touchPosition.dy - scrollbarPosition.dy) - (widget.scrollbarHeight / 2);
+      final double prevOffset = _barOffsetTop;
+      final double moveToHeight = (touchPosition.dy - scrollbarPosition.dy) - (widget.scrollbarHeight / 2);
       _barOffsetTop = (touchPosition.dy - scrollbarPosition.dy) - (widget.scrollbarHeight / 2);
 
       if (_barOffsetTop < barMinScrollExtent) {
@@ -141,7 +142,7 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
 
       // amount to move as scrollViewDelta * (barHeight / viewHeight)
       // double viewDelta = getScrollViewDelta(touchDeltaY, barMaxScrollExtent, viewMaxScrollExtent);
-      double viewDelta = getScrollViewDelta(moveToHeight - prevOffset, barMaxScrollExtent, viewMaxScrollExtent);
+      final double viewDelta = getScrollViewDelta(moveToHeight - prevOffset, barMaxScrollExtent, viewMaxScrollExtent);
 
       _viewOffset = widget.controller.position.pixels + viewDelta;
       if (_viewOffset < viewMinScrollExtent) {
@@ -156,21 +157,22 @@ class _DraggableScrollbarState extends State<DraggableScrollbar> {
 
   void _onVerticalDragStart(DragStartDetails details, GlobalKey scrollbarKey) {
     bool shouldStartDrag = true;
-    RenderBox scrollbarBox = scrollbarKey.currentContext?.findRenderObject() as RenderBox;
-    Offset touchPosition = details.globalPosition;
-    Offset scrollbarPosition = scrollbarBox.localToGlobal(Offset.zero);
-    double globalTopOfScrollbar = scrollbarPosition.dy + _barOffsetTop;
-    double globalBottomOfScrollbar = globalTopOfScrollbar + widget.scrollbarHeight;
+    final RenderBox? scrollbarBox = scrollbarKey.currentContext?.findRenderObject() as RenderBox?;
+    if (scrollbarBox == null) return;
+    final Offset touchPosition = details.globalPosition;
+    final Offset scrollbarPosition = scrollbarBox.localToGlobal(Offset.zero);
+    final double globalTopOfScrollbar = scrollbarPosition.dy + _barOffsetTop;
+    final double globalBottomOfScrollbar = globalTopOfScrollbar + widget.scrollbarHeight;
 
     // touch is outside of scrollbar
     if (touchPosition.dy < globalTopOfScrollbar || touchPosition.dy > globalBottomOfScrollbar) {
       shouldStartDrag = false;
     }
 
-    double prevOffset = _barOffsetTop;
-    double moveTo = (touchPosition.dy - scrollbarPosition.dy) - (widget.scrollbarHeight / 2);
+    final double prevOffset = _barOffsetTop;
+    final double moveTo = (touchPosition.dy - scrollbarPosition.dy) - (widget.scrollbarHeight / 2);
     if (widget.enableJumpScroll) {
-      double viewDelta = getScrollViewDelta(moveTo - prevOffset, barMaxScrollExtent, viewMaxScrollExtent);
+      final double viewDelta = getScrollViewDelta(moveTo - prevOffset, barMaxScrollExtent, viewMaxScrollExtent);
       _viewOffset = widget.controller.position.pixels + viewDelta;
       if (_viewOffset < viewMinScrollExtent) {
         _viewOffset = viewMinScrollExtent;

@@ -49,7 +49,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountMissing": MessageLookupByLibrary.simpleMessage("金額を入力してください"),
         "asked": MessageLookupByLibrary.simpleMessage("尋ねた"),
         "authConfirm": MessageLookupByLibrary.simpleMessage(""),
+        "authError": MessageLookupByLibrary.simpleMessage(""),
         "authMethod": MessageLookupByLibrary.simpleMessage("認証方法"),
+        "authenticating": MessageLookupByLibrary.simpleMessage(""),
         "autoImport": MessageLookupByLibrary.simpleMessage("[自動インポート]"),
         "autoLockHeader": MessageLookupByLibrary.simpleMessage("自動的にロックする"),
         "backupConfirmButton":
@@ -80,6 +82,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedNameMissing": MessageLookupByLibrary.simpleMessage("ニックネームを選ぶ"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("%1はブロック解除されました！"),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("通貨を変更する"),
         "changeLog": MessageLookupByLibrary.simpleMessage("変更ログ"),
@@ -98,7 +102,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Connecting"),
         "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
-        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded": MessageLookupByLibrary.simpleMessage("％1が連絡先に追加されました。"),
         "contactExists": MessageLookupByLibrary.simpleMessage("既に存在する連絡先です"),
         "contactHeader": MessageLookupByLibrary.simpleMessage("連絡先"),
@@ -225,6 +228,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("成就しました"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
         "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
+        "getNano": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert": MessageLookupByLibrary.simpleMessage("おまえには贈り物がある！"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("空のギフト"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("ギフト金額"),
@@ -241,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goToQRCode": MessageLookupByLibrary.simpleMessage("QRに移動"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("了解しました"),
         "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
         "handoffSupportedMethodNotFound":
             MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("隠す"),
@@ -259,6 +264,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "クリックしたリンクにはナノが含まれています。このウォレットにインポートしますか、それとも送信した人に返金しますか？"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("シークレットフレーズをインポートする"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -270,6 +277,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "importWallet": MessageLookupByLibrary.simpleMessage("ウォレットをインポートする"),
         "instantly": MessageLookupByLibrary.simpleMessage("今すぐ"),
         "insufficientBalance": MessageLookupByLibrary.simpleMessage("残高不足です"),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
         "invalidAddress": MessageLookupByLibrary.simpleMessage("入力したアドレスが無効です"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("パスワードが無効です"),
         "invalidPin": MessageLookupByLibrary.simpleMessage(""),
@@ -382,6 +391,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences": MessageLookupByLibrary.simpleMessage("設定"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("個人情報保護方針"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("ナノを購入"),
         "qrInvalidAddress":
             MessageLookupByLibrary.simpleMessage("QRコードに正しい送金先が含まれていません。"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -523,6 +533,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("シンプレックス"),
         "someone": MessageLookupByLibrary.simpleMessage(""),
+        "spendNano": MessageLookupByLibrary.simpleMessage(""),
         "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
@@ -580,6 +591,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("未払い"),
         "unread": MessageLookupByLibrary.simpleMessage("未読です"),
         "uptime": MessageLookupByLibrary.simpleMessage("稼働時間"),
+        "useNano": MessageLookupByLibrary.simpleMessage(""),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound":
@@ -602,6 +614,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("投票ウェイト"),
         "warning": MessageLookupByLibrary.simpleMessage("警告"),
+        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(

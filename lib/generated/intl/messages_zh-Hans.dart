@@ -48,7 +48,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountMissing": MessageLookupByLibrary.simpleMessage("请输入金额"),
         "asked": MessageLookupByLibrary.simpleMessage("问"),
         "authConfirm": MessageLookupByLibrary.simpleMessage(""),
+        "authError": MessageLookupByLibrary.simpleMessage(""),
         "authMethod": MessageLookupByLibrary.simpleMessage("验证方法"),
+        "authenticating": MessageLookupByLibrary.simpleMessage(""),
         "autoImport": MessageLookupByLibrary.simpleMessage("自动导入"),
         "autoLockHeader": MessageLookupByLibrary.simpleMessage("自动锁定"),
         "backupConfirmButton": MessageLookupByLibrary.simpleMessage("我已备份"),
@@ -72,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedNameExists": MessageLookupByLibrary.simpleMessage("昵称已经使用了！"),
         "blockedNameMissing": MessageLookupByLibrary.simpleMessage("选择一个昵称"),
         "blockedRemoved": MessageLookupByLibrary.simpleMessage("%1 已解除封锁！"),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("更改货币"),
         "changeLog": MessageLookupByLibrary.simpleMessage("更改日志"),
@@ -87,7 +91,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmPinHint": MessageLookupByLibrary.simpleMessage(""),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("连接中"),
         "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
-        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded": MessageLookupByLibrary.simpleMessage("%1已被添加到联系人！"),
         "contactExists": MessageLookupByLibrary.simpleMessage("联系人已存在"),
         "contactHeader": MessageLookupByLibrary.simpleMessage("联系人"),
@@ -204,6 +207,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("完成"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
         "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
+        "getNano": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert": MessageLookupByLibrary.simpleMessage("你有天赋！"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("空礼物"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("礼物金额"),
@@ -220,6 +224,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goToQRCode": MessageLookupByLibrary.simpleMessage("前往二维码"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("明白！"),
         "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
         "handoffSupportedMethodNotFound":
             MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("隐藏"),
@@ -236,6 +241,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "你点击的链接包含一些 nano，你想把它导入这个钱包，还是退款给发送它的人？"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
         "importSecretPhrase": MessageLookupByLibrary.simpleMessage("输入秘密词语"),
         "importSecretPhraseHint":
             MessageLookupByLibrary.simpleMessage("请输入您的24个秘密词语。每个词语应该由空格分隔。"),
@@ -245,6 +252,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "importWallet": MessageLookupByLibrary.simpleMessage("导入现有钱包"),
         "instantly": MessageLookupByLibrary.simpleMessage("立刻"),
         "insufficientBalance": MessageLookupByLibrary.simpleMessage("余额不足"),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
         "invalidAddress": MessageLookupByLibrary.simpleMessage("无效的目标地址"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("无效密码"),
         "invalidPin": MessageLookupByLibrary.simpleMessage(""),
@@ -345,6 +354,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences": MessageLookupByLibrary.simpleMessage("偏好"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("隐私政策"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("购买 Nano"),
         "qrInvalidAddress":
             MessageLookupByLibrary.simpleMessage("二维码不包含一个有效的地址"),
         "qrInvalidPermissions":
@@ -475,6 +485,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage(""),
+        "spendNano": MessageLookupByLibrary.simpleMessage(""),
         "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
@@ -529,6 +540,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("未付款"),
         "unread": MessageLookupByLibrary.simpleMessage("未读"),
         "uptime": MessageLookupByLibrary.simpleMessage("上线时间"),
+        "useNano": MessageLookupByLibrary.simpleMessage(""),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("找不到用户！"),
@@ -548,6 +560,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("投票比重"),
         "warning": MessageLookupByLibrary.simpleMessage("警告"),
+        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(

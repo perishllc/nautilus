@@ -369,6 +369,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
         }
         if (!mounted) return;
         if (StateContainer.of(context).introSkiped) {
+          // sleep for a few seconds so it doesn't feel too jarring:
+          await Future<dynamic>.delayed(const Duration(milliseconds: 3000));
           _introSkippedMessage();
         }
         return;
@@ -509,7 +511,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
         if (!mounted) return;
         if (StateContainer.of(context).introSkiped) {
           // sleep for a few seconds so it doesn't feel too jarring:
-          await Future<dynamic>.delayed(const Duration(milliseconds: 4000));
+          await Future<dynamic>.delayed(const Duration(milliseconds: 3000));
           _introSkippedMessage();
         }
         return;
@@ -522,6 +524,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     //   log.d("Error processing gift card: $err");
     //   shouldShowErrorDialog = true;
     // }
+    if (!mounted) return;
 
     // show alert that the gift is empty:
     if (shouldShowEmptyDialog) {
@@ -597,6 +600,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
             );
           });
     }
+    if (!mounted) return;
     if (StateContainer.of(context).introSkiped) {
       // sleep for a few seconds so it doesn't feel too jarring:
       await Future<dynamic>.delayed(const Duration(milliseconds: 4000));
@@ -741,7 +745,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
   }
 
   void showConnectionWarning() {
-    AppDialogs.showInfoDialog(context, AppLocalization.of(context).connectionWarning, AppLocalization.of(context).connectionWarningBody);
+    final AlertResponseItem connectionAlert = AlertResponseItem(
+      id: 4041,
+      active: true,
+      title: AppLocalization.of(context).connectionWarning,
+      shortDescription: AppLocalization.of(context).connectionWarningBodyShort,
+      longDescription: AppLocalization.of(context).connectionWarningBodyLong,
+    );
+    StateContainer.of(context).updateActiveAlert(connectionAlert, null);
     return;
   }
 
@@ -1308,13 +1319,18 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
   }
 
   Future<void> generateUnifiedList({bool fastUpdate = false}) async {
+    ListModel<dynamic>? ULM = _unifiedListMap[StateContainer.of(context).wallet!.address];
+    if (StateContainer.of(context).activeAlert != null) {
+      ULM = _unifiedListMap["${StateContainer.of(context).wallet!.address}alert"];
+    }
+
     if (_historyListMap[StateContainer.of(context).wallet!.address] == null ||
         _solidsListMap[StateContainer.of(context).wallet!.address] == null ||
-        _unifiedListMap[StateContainer.of(context).wallet!.address] == null) {
+        ULM == null) {
       return;
     }
 
-    if (_unifiedListMap[StateContainer.of(context).wallet!.address]!.length > 0) {
+    if (ULM.length > 0) {
       log.d("generating unified list! fastUpdate: $fastUpdate");
     }
 
@@ -1537,16 +1553,13 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     removeIndices = [];
 
     // remove anything that's not supposed to be there anymore:
-    _unifiedListMap[StateContainer.of(context).wallet!.address]!.items.where((dynamic item) => !unifiedList.contains(item)).forEach((dynamic dynamicItem) {
-      removeIndices.add(_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.indexOf(dynamicItem));
+    ULM.items.where((dynamic item) => !unifiedList.contains(item)).forEach((dynamic dynamicItem) {
+      removeIndices.add(ULM!.items.indexOf(dynamicItem));
     });
     // mark anything out of place or not in the unified list as to be removed:
     if (_searchController.text.isNotEmpty) {
-      _unifiedListMap[StateContainer.of(context).wallet!.address]!
-          .items
-          .where((item) => _unifiedListMap[StateContainer.of(context).wallet!.address]!.items.indexOf(item) != (unifiedList.indexOf(item)))
-          .forEach((dynamic dynamicItem) {
-        removeIndices.add(_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.indexOf(dynamicItem));
+      ULM.items.where((item) => ULM!.items.indexOf(item) != (unifiedList.indexOf(item))).forEach((dynamic dynamicItem) {
+        removeIndices.add(ULM!.items.indexOf(dynamicItem));
       });
     }
     // ensure uniqueness and must be sorted to prevent an index error:
@@ -1557,18 +1570,18 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     for (int i = removeIndices.length - 1; i >= 0; i--) {
       // don't set state since we don't need it to re-render just yet:
       // also it will throw an error because the list can be empty and the builder will get upset:
-      _unifiedListMap[StateContainer.of(context).wallet!.address]!.removeAt(removeIndices[i], _buildUnifiedItem, instant: true);
+      ULM.removeAt(removeIndices[i], _buildUnifiedItem, instant: true);
     }
 
     // insert unifiedList into listmap:
-    unifiedList.where((dynamic item) => !_unifiedListMap[StateContainer.of(context).wallet!.address]!.items.contains(item)).forEach((dynamic dynamicItem) {
+    unifiedList.where((dynamic item) => !ULM!.items.contains(item)).forEach((dynamic dynamicItem) {
       int index = unifiedList.indexOf(dynamicItem);
       if (dynamicItem == null) {
         return;
       }
-      index = max(min(index, _unifiedListMap[StateContainer.of(context).wallet!.address]!.length), 0);
+      index = max(min(index, ULM!.length), 0);
       setState(() {
-        _unifiedListMap[StateContainer.of(context).wallet!.address]!.insertAt(dynamicItem, index, instant: fastUpdate);
+        ULM!.insertAt(dynamicItem, index, instant: fastUpdate);
       });
     });
 
@@ -2041,6 +2054,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
   Widget _buildRemoteMessageCard(AlertResponseItem? alert) {
     if (alert == null) {
       return const SizedBox();
+    }
+    if (alert.id == 4040) {
+      alert.title = AppLocalization.of(context).branchConnectErrorTitle;
+      alert.shortDescription = AppLocalization.of(context).branchConnectErrorShortDesc;
+      alert.longDescription = AppLocalization.of(context).branchConnectErrorLongDesc;
     }
     return Container(
       margin: const EdgeInsetsDirectional.fromSTEB(14, 4, 14, 4),
@@ -3693,7 +3711,13 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
       localIndex -= 1;
     }
 
-    final dynamic indexedItem = _unifiedListMap[StateContainer.of(context).wallet!.address]![localIndex];
+    String ADR = StateContainer.of(context).wallet!.address!;
+
+    if (StateContainer.of(context).activeAlert != null) {
+      ADR = "${ADR}alert";
+    }
+
+    final dynamic indexedItem = _unifiedListMap[ADR]![localIndex];
     final TXData txDetails =
         indexedItem is TXData ? indexedItem : convertHistItemToTXData(indexedItem as AccountHistoryResponseItem, txDetails: _txDetailsMap[indexedItem.hash]);
     final bool isRecipient = txDetails.isRecipient(StateContainer.of(context).wallet!.address);
@@ -3709,7 +3733,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     }
 
     // make an invisible container so we can still scroll even with only 1 item:
-    final int listLen = _unifiedListMap[StateContainer.of(context).wallet!.address]!.length;
+    final int listLen = _unifiedListMap[ADR]!.length;
     if (listLen > 0 && listLen < 10) {
       if (index == listLen - 1) {
         return Column(
@@ -3742,22 +3766,44 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
           _solidsListMap.putIfAbsent(StateContainer.of(context).wallet!.address!, () => StateContainer.of(context).wallet!.solids);
         });
       }
+      // // Setup unified list
+      // if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
+      //   _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet!.address}", () => GlobalKey<AnimatedListState>());
+      //   setState(() {
+      //     _unifiedListMap.putIfAbsent(
+      //       StateContainer.of(context).wallet!.address!,
+      //       () => ListModel<dynamic>(
+      //         listKey: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address}"]!,
+      //         initialItems: StateContainer.of(context).wallet!.unified,
+      //       ),
+      //     );
+      //   });
+      // }
+
+      // if (StateContainer.of(context).wallet!.unifiedLoading ||
+      //     (_unifiedListMap[StateContainer.of(context).wallet!.address] != null && _unifiedListMap[StateContainer.of(context).wallet!.address]!.length == 0)) {
+      //   generateUnifiedList(fastUpdate: true);
+      // }
+
+      String ADR = StateContainer.of(context).wallet!.address!;
+      if (StateContainer.of(context).activeAlert != null) {
+        ADR = "${ADR}alert";
+      }
       // Setup unified list
-      if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
-        _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet!.address}", () => GlobalKey<AnimatedListState>());
+      if (!_unifiedListKeyMap.containsKey(ADR)) {
+        _unifiedListKeyMap.putIfAbsent(ADR, () => GlobalKey<AnimatedListState>());
         setState(() {
           _unifiedListMap.putIfAbsent(
-            StateContainer.of(context).wallet!.address!,
+            ADR,
             () => ListModel<dynamic>(
-              listKey: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address}"]!,
+              listKey: _unifiedListKeyMap[ADR]!,
               initialItems: StateContainer.of(context).wallet!.unified,
             ),
           );
         });
       }
 
-      if (StateContainer.of(context).wallet!.unifiedLoading ||
-          (_unifiedListMap[StateContainer.of(context).wallet!.address] != null && _unifiedListMap[StateContainer.of(context).wallet!.address]!.length == 0)) {
+      if (StateContainer.of(context).wallet!.unifiedLoading || (_unifiedListMap[ADR] != null && _unifiedListMap[ADR]!.length == 0)) {
         generateUnifiedList(fastUpdate: true);
       }
     }
@@ -3887,7 +3933,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
             controller: _scrollController,
             key: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address}alert"],
             padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-            initialItemCount: _unifiedListMap[StateContainer.of(context).wallet!.address]!.length + 1,
+            initialItemCount: _unifiedListMap["${StateContainer.of(context).wallet!.address}alert"]!.length + 1,
             itemBuilder: _buildUnifiedItem,
           ),
         ),

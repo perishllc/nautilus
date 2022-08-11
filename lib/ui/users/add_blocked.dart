@@ -461,7 +461,7 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
                                             margin: const EdgeInsets.only(bottom: 50),
                                             child: ListView.builder(
                                               shrinkWrap: true,
-                                              padding: const EdgeInsets.only(bottom: 0, top: 0),
+                                              padding: EdgeInsets.zero,
                                               itemCount: _users.length,
                                               itemBuilder: (BuildContext context, int index) {
                                                 return _buildUserItem(_users[index]);

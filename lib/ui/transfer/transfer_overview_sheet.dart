@@ -129,18 +129,18 @@ class AppTransferOverviewSheet {
                               Container(
                                 constraints:
                                     BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.2, maxWidth: MediaQuery.of(context).size.width * 0.6),
-                                // child: Stack(
-                                //   children: <Widget>[
-                                //     Center(
-                                //       child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_paperwalletonly.svg',
-                                //           color: StateContainer.of(context).curTheme.text45, width: MediaQuery.of(context).size.width),
-                                //     ),
-                                //     Center(
-                                //       child: SvgPicture.asset('legacy_assets/transferfunds_illustration_start_nautiluswalletonly.svg',
-                                //           color: StateContainer.of(context).curTheme.primary, width: MediaQuery.of(context).size.width),
-                                //     ),
-                                //   ],
-                                // ),
+                                child: Stack(
+                                  children: <Widget>[
+                                    Center(
+                                      child: SvgPicture.asset("assets/illustrations/transferfunds_paperwalletonly.svg",
+                                          color: StateContainer.of(context).curTheme.text45, width: MediaQuery.of(context).size.width),
+                                    ),
+                                    Center(
+                                      child: SvgPicture.asset("assets/illustrations/transferfunds_start.svg",
+                                          color: StateContainer.of(context).curTheme.primary, width: MediaQuery.of(context).size.width),
+                                    ),
+                                  ],
+                                ),
                               ),
                               Container(
                                 alignment: AlignmentDirectional.centerStart,

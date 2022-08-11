@@ -53,8 +53,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("कृपया राशि दर्ज करें"),
         "asked": MessageLookupByLibrary.simpleMessage("पूछे जाने पर"),
         "authConfirm": MessageLookupByLibrary.simpleMessage(""),
+        "authError": MessageLookupByLibrary.simpleMessage(""),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("प्रमाणीकरण का तरीका"),
+        "authenticating": MessageLookupByLibrary.simpleMessage(""),
         "autoImport": MessageLookupByLibrary.simpleMessage("स्वतः आयात"),
         "autoLockHeader": MessageLookupByLibrary.simpleMessage("खुद ब खुद बंद"),
         "backupConfirmButton":
@@ -91,6 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nick नाम चुनें"),
         "blockedRemoved": MessageLookupByLibrary.simpleMessage(
             "% 1 को अनब्लॉक कर दिया गया है!"),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("रद्द करें"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("मुद्रा बदलें"),
         "changeLog": MessageLookupByLibrary.simpleMessage("लॉग बदलें"),
@@ -113,7 +117,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "connectingHeader":
             MessageLookupByLibrary.simpleMessage("कनेक्ट हो रहा ह"),
         "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
-        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("%1 अब आपके सम्पर्को में है।"),
         "contactExists": MessageLookupByLibrary.simpleMessage(
@@ -260,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("पूरा"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
         "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
+        "getNano": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("आपके पास एक उपहार है!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("खाली गिफ्ट"),
@@ -277,6 +281,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goToQRCode": MessageLookupByLibrary.simpleMessage("QR पर जाएं"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("समझ गया!"),
         "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
         "handoffSupportedMethodNotFound":
             MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("छिपाएँ"),
@@ -295,6 +300,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "आपके द्वारा क्लिक किए गए लिंक में कुछ नैनो हैं, क्या आप इसे इस वॉलेट में आयात करना चाहते हैं, या इसे भेजने वाले को वापस कर देंगे?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("गुप्त वाक्यांश आयात करें"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -308,6 +315,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("तुरन्त"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("अपर्याप्त शेष राशि (बैलेंस)"),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("गलत गंतव्य पता"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("अवैध पासवर्ड"),
@@ -434,6 +443,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences":
             MessageLookupByLibrary.simpleMessage("पसंद | प्रेफरेन्सेस"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("गोपनीयता नीति"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("नैनो खरीदें"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "क्यूआर कोड में मान्य गंतव्य नहीं है"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -590,6 +600,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("सिंप्लेक्स"),
         "someone": MessageLookupByLibrary.simpleMessage(""),
+        "spendNano": MessageLookupByLibrary.simpleMessage(""),
         "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
@@ -653,6 +664,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("अवैतनिक"),
         "unread": MessageLookupByLibrary.simpleMessage("अपठित"),
         "uptime": MessageLookupByLibrary.simpleMessage("सक्रिय रहने की अवधि"),
+        "useNano": MessageLookupByLibrary.simpleMessage(""),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound":
@@ -679,6 +691,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("मतदान भार"),
         "warning": MessageLookupByLibrary.simpleMessage("चेतावनी !"),
+        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(

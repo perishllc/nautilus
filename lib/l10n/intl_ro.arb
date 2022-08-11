@@ -120,6 +120,16 @@
     "type": "text",
     "description": "auth_confirm_message"
   },
+  "authenticating": "",
+  "@authenticating": {
+    "type": "text",
+    "description": "auth_authenticating"
+  },
+  "authError": "",
+  "@authError": {
+    "type": "text",
+    "description": "auth_generic_error"
+  },
   "authMethod": "Metoda de Autentificare",
   "@authMethod": {
     "type": "text",
@@ -224,6 +234,16 @@
   "@blockUser": {
     "type": "text",
     "description": "block_user"
+  },
+  "branchConnectErrorShortDesc": "",
+  "@branchConnectErrorShortDesc": {
+    "type": "text",
+    "description": "branch_connection_error_short_desc"
+  },
+  "branchConnectErrorTitle": "",
+  "@branchConnectErrorTitle": {
+    "type": "text",
+    "description": "branch_connection_error_title"
   },
   "cancel": "Renunţare",
   "@cancel": {
@@ -775,6 +795,11 @@
     "type": "text",
     "description": "funding_header"
   },
+  "getNano": "",
+  "@getNano": {
+    "type": "text",
+    "description": "get_nano"
+  },
   "giftAlert": "Ai un cadou!",
   "@giftAlert": {
     "type": "text",
@@ -845,6 +870,11 @@
     "type": "text",
     "description": "send_handoff"
   },
+  "handoffFailed": "",
+  "@handoffFailed": {
+    "type": "text",
+    "description": "handoff_failed"
+  },
   "handoffSupportedMethodNotFound": "",
   "@handoffSupportedMethodNotFound": {
     "type": "text",
@@ -900,6 +930,16 @@
     "type": "text",
     "description": "import_gift_empty"
   },
+  "importGiftIntro": "",
+  "@importGiftIntro": {
+    "type": "text",
+    "description": "import_gift_intro"
+  },
+  "importGiftv2": "",
+  "@importGiftv2": {
+    "type": "text",
+    "description": "import_gift_v2"
+  },
   "importSecretPhrase": "Importare formulă secretă",
   "@importSecretPhrase": {
     "type": "text",
@@ -944,6 +984,16 @@
   "@insufficientBalance": {
     "type": "text",
     "description": "send_insufficient_balance"
+  },
+  "introSkippedWarningContent": "",
+  "@introSkippedWarningContent": {
+    "type": "text",
+    "description": "intro_skipped_warning_content"
+  },
+  "introSkippedWarningHeader": "",
+  "@introSkippedWarningHeader": {
+    "type": "text",
+    "description": "intro_skipped_warning_header"
   },
   "invalidAddress": "Adresa introdusă este invalidă",
   "@invalidAddress": {
@@ -1895,6 +1945,11 @@
     "type": "text",
     "description": "send_someone"
   },
+  "spendNano": "",
+  "@spendNano": {
+    "type": "text",
+    "description": "spend_nano"
+  },
   "splitBy": "",
   "@splitBy": {
     "type": "text",
@@ -2100,6 +2155,11 @@
     "type": "text",
     "description": "Rep uptime"
   },
+  "useNano": "",
+  "@useNano": {
+    "type": "text",
+    "description": "use_nano"
+  },
   "useNautilusRep": "Use Nautilus Rep",
   "@useNautilusRep": {
     "type": "text",
@@ -2174,6 +2234,11 @@
   "@warning": {
     "type": "text",
     "description": "settings_logout_alert_title"
+  },
+  "watchAccountExists": "",
+  "@watchAccountExists": {
+    "type": "text",
+    "description": "account_entry_exists"
   },
   "watchOnlyAccount": "",
   "@watchOnlyAccount": {

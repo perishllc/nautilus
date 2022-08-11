@@ -6,7 +6,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as cont;
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -1226,90 +1225,114 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     return true;
   }
 
+  void subMenuDragStart(DragStartDetails details) {
+    if (_moreSettingsOpen || _useNanoOpen || _securityOpen || _blockedOpen || _contactsOpen) {
+      _slideOffset = 1.1;
+    } else {
+      _slideOffset = 0;
+    }
+  }
+
+  void subMenuDragEnd(DragEndDetails details) {
+    AnimationController? controller;
+    if (_moreSettingsOpen) {
+      controller = _moreSettingsController;
+    } else if (_useNanoOpen) {
+      controller = _useNanoController;
+    } else if (_blockedOpen) {
+      controller = _blockedController;
+    } else if (_securityOpen) {
+      controller = _securityController;
+    } else if (_contactsOpen) {
+      controller = _contactsController;
+    }
+
+    // no menus are open, so don't do anything:
+    if (controller == null) {
+      return;
+    }
+
+    if (_slideOffset > 0.7) {
+      controller.forward(from: controller.value);
+    } else {
+      controller.reverse();
+      // we don't call setState since it will trigger a re-render which will cause the animation to be reset before it completes:
+      if (_moreSettingsOpen) {
+        _moreSettingsOpen = false;
+      } else if (_useNanoOpen) {
+        _useNanoOpen = false;
+      } else if (_blockedOpen) {
+        _blockedOpen = false;
+      } else if (_securityOpen) {
+        _securityOpen = false;
+      } else if (_contactsOpen) {
+        _contactsOpen = false;
+      }
+    }
+  }
+
+  void subMenuDragUpdate(DragUpdateDetails details) {
+    if (_moreSettingsOpen) {
+      _moreSettingsController.value = _slideOffset;
+    } else if (_useNanoOpen) {
+      _useNanoController.value = _slideOffset;
+    } else if (_blockedOpen) {
+      _blockedController!.value = _slideOffset;
+    } else if (_securityOpen) {
+      _securityController.value = _slideOffset;
+    } else if (_contactsOpen) {
+      _contactsController!.value = _slideOffset;
+    }
+    _slideOffset -= details.delta.dx / 250;
+  }
+
   @override
   Widget build(BuildContext context) {
     // Drawer in flutter doesn't have a built-in way to push/pop elements
     // on top of it like our Android counterpart. So we can override back button
     // presses and replace the main settings widget with contacts based on a bool
+
     return WillPopScope(
       onWillPop: _onBackButtonPressed,
       child: ClipRect(
-        child: GestureDetector(
-          onHorizontalDragStart: (DragStartDetails details) {
-            if (_moreSettingsOpen || _useNanoOpen || _securityOpen || _blockedOpen || _contactsOpen) {
-              _slideOffset = 1.1;
-            } else {
-              _slideOffset = 0;
-            }
-          },
-          onHorizontalDragUpdate: (DragUpdateDetails details) {
-            if (_moreSettingsOpen) {
-              _moreSettingsController.value = _slideOffset;
-            } else if (_useNanoOpen) {
-              _useNanoController.value = _slideOffset;
-            } else if (_blockedOpen) {
-              _blockedController!.value = _slideOffset;
-            } else if (_securityOpen) {
-              _securityController.value = _slideOffset;
-            } else if (_contactsOpen) {
-              _contactsController!.value = _slideOffset;
-            }
-            _slideOffset -= details.delta.dx / 250;
-          },
-          onHorizontalDragEnd: (DragEndDetails details) {
-            // don't call setstate since it will trigger a re-render and we don't want that
-            final bool forward = _slideOffset > 0.7;
-
-            AnimationController? controller;
-            if (_moreSettingsOpen) {
-              controller = _moreSettingsController;
-            } else if (_useNanoOpen) {
-              controller = _useNanoController;
-            } else if (_blockedOpen) {
-              controller = _blockedController;
-            } else if (_securityOpen) {
-              controller = _securityController;
-            } else if (_contactsOpen) {
-              controller = _contactsController;
-            }
-            
-            // no menus are open, so don't do anything:
-            if (controller == null) {
-              return;
-            }
-
-            if (_slideOffset > 0.7) {
-              controller.forward(from: controller.value);
-            } else {
-              controller.reverse();
-              // we don't call setState since it will trigger a re-render which will cause the animation to be reset before it completes:
-              if (_moreSettingsOpen) {
-                _moreSettingsOpen = false;
-              } else if (_useNanoOpen) {
-                _useNanoOpen = false;
-              } else if (_blockedOpen) {
-                _blockedOpen = false;
-              } else if (_securityOpen) {
-                _securityOpen = false;
-              } else if (_contactsOpen) {
-                _contactsOpen = false;
-              }
-            }
-          },
-          child: Stack(
-            children: <Widget>[
-              Container(
-                color: StateContainer.of(context).curTheme.backgroundDark,
-                constraints: const BoxConstraints.expand(),
-              ),
-              buildMainSettings(context),
-              SlideTransition(position: _contactsOffsetFloat, child: ContactsList(_contactsController, _contactsOpen)),
-              SlideTransition(position: _blockedOffsetFloat, child: BlockedList(_blockedController, _blockedOpen)),
-              SlideTransition(position: _securityOffsetFloat, child: buildSecurityMenu(context)),
-              SlideTransition(position: _moreSettingsOffsetFloat, child: buildMoreSettingsMenu(context)),
-              SlideTransition(position: _useNanoOffsetFloat, child: buildUseNanoMenu(context)),
-            ],
-          ),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              color: StateContainer.of(context).curTheme.backgroundDark,
+              constraints: const BoxConstraints.expand(),
+            ),
+            buildMainSettings(context),
+            GestureDetector(
+              onHorizontalDragStart: subMenuDragStart,
+              onHorizontalDragEnd: subMenuDragEnd,
+              onHorizontalDragUpdate: subMenuDragUpdate,
+              child: SlideTransition(position: _contactsOffsetFloat, child: ContactsList(_contactsController, _contactsOpen)),
+            ),
+            GestureDetector(
+              onHorizontalDragStart: subMenuDragStart,
+              onHorizontalDragEnd: subMenuDragEnd,
+              onHorizontalDragUpdate: subMenuDragUpdate,
+              child: SlideTransition(position: _blockedOffsetFloat, child: BlockedList(_blockedController, _blockedOpen)),
+            ),
+            GestureDetector(
+              onHorizontalDragStart: subMenuDragStart,
+              onHorizontalDragEnd: subMenuDragEnd,
+              onHorizontalDragUpdate: subMenuDragUpdate,
+              child: SlideTransition(position: _securityOffsetFloat, child: buildSecurityMenu(context)),
+            ),
+            GestureDetector(
+              onHorizontalDragStart: subMenuDragStart,
+              onHorizontalDragEnd: subMenuDragEnd,
+              onHorizontalDragUpdate: subMenuDragUpdate,
+              child: SlideTransition(position: _useNanoOffsetFloat, child: buildUseNanoMenu(context)),
+            ),
+            GestureDetector(
+              onHorizontalDragStart: subMenuDragStart,
+              onHorizontalDragEnd: subMenuDragEnd,
+              onHorizontalDragUpdate: subMenuDragUpdate,
+              child: SlideTransition(position: _moreSettingsOffsetFloat, child: buildMoreSettingsMenu(context)),
+            ),
+          ],
         ),
       ),
     );

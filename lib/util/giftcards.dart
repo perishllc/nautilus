@@ -37,10 +37,9 @@ class GiftCards {
           ..addCustomMetadata('seed', paperWalletSeed)
           ..addCustomMetadata('address', paperWalletAccount)
           ..addCustomMetadata('memo', memo ?? "")
-          ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: remove this line
           ..addCustomMetadata('signature', "")
           ..addCustomMetadata('nonce', "")
-          ..addCustomMetadata('sender_address', StateContainer.of(context).wallet!.address) // TODO: sign these:
+          ..addCustomMetadata('from_address', StateContainer.of(context).wallet!.address) // TODO: sign these:
           ..addCustomMetadata('amount_raw', amountRaw));
 
     final BranchLinkProperties lp = BranchLinkProperties(
@@ -49,7 +48,7 @@ class GiftCards {
         feature: 'gift',
         stage: 'new share');
 
-    final BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+    final BranchResponse<dynamic> response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
     return response;
   }
 

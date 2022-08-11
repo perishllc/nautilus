@@ -205,14 +205,14 @@ class NautilusTheme extends BaseTheme {
   BoxShadow? boxShadow = BoxShadow(
     color: white.withOpacity(0.14),
     // color: black.withOpacity(0.5),
-    offset: Offset(0, 0),
+    offset: Offset.zero,
     blurRadius: 0,
     spreadRadius: 1,
   );
   BoxShadow? boxShadowButton = BoxShadow(
     // color: brightRed,
     color: nautilusBlue.withOpacity(0.24),
-    offset: Offset(0, 0),
+    offset: Offset.zero,
     blurRadius: 0,
     spreadRadius: 0,
   );
@@ -318,8 +318,8 @@ class TitaniumTheme extends BaseTheme {
   Brightness? brightness = Brightness.dark;
   SystemUiOverlayStyle? statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
-  BoxShadow? boxShadow = BoxShadow(color: Colors.transparent);
-  BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
+  BoxShadow? boxShadow = const BoxShadow(color: Colors.transparent);
+  BoxShadow? boxShadowButton = const BoxShadow(color: Colors.transparent);
 
   // OverlayTheme? qrScanTheme = OverlayTheme.TITANIUM;
   // AppIconEnum? appIcon = AppIconEnum.TITANIUM;
@@ -422,8 +422,8 @@ class IndiumTheme extends BaseTheme {
   Brightness? brightness = Brightness.light;
   SystemUiOverlayStyle? statusBar = SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent);
 
-  BoxShadow? boxShadow = BoxShadow(color: darkDeepBlue.withOpacity(0.1), offset: Offset(0, 5), blurRadius: 15);
-  BoxShadow? boxShadowButton = BoxShadow(color: darkDeepBlue.withOpacity(0.2), offset: Offset(0, 5), blurRadius: 15);
+  BoxShadow? boxShadow = BoxShadow(color: darkDeepBlue.withOpacity(0.1), offset: const Offset(0, 5), blurRadius: 15);
+  BoxShadow? boxShadowButton = BoxShadow(color: darkDeepBlue.withOpacity(0.2), offset: const Offset(0, 5), blurRadius: 15);
 
   // OverlayTheme? qrScanTheme = OverlayTheme.INDIUM;
 }
@@ -524,8 +524,8 @@ class NeptuniumTheme extends BaseTheme {
   Brightness? brightness = Brightness.dark;
   SystemUiOverlayStyle? statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
-  BoxShadow? boxShadow = BoxShadow(color: Colors.transparent);
-  BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
+  BoxShadow? boxShadow = const BoxShadow(color: Colors.transparent);
+  BoxShadow? boxShadowButton = const BoxShadow(color: Colors.transparent);
 
   // OverlayTheme? qrScanTheme = OverlayTheme.NEPTUNIUM;
 }
@@ -626,8 +626,8 @@ class ThoriumTheme extends BaseTheme {
   Brightness? brightness = Brightness.dark;
   SystemUiOverlayStyle? statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
-  BoxShadow? boxShadow = BoxShadow(color: Colors.transparent);
-  BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
+  BoxShadow? boxShadow = const BoxShadow(color: Colors.transparent);
+  BoxShadow? boxShadowButton = const BoxShadow(color: Colors.transparent);
 
   // OverlayTheme? qrScanTheme = OverlayTheme.THORIUM;
 }
@@ -728,13 +728,13 @@ class CarbonTheme extends BaseTheme {
 
   BoxShadow? boxShadow = BoxShadow(
     color: white.withOpacity(0.14),
-    offset: Offset(0, 0),
+    offset: Offset.zero,
     blurRadius: 0,
     spreadRadius: 1,
   );
   BoxShadow? boxShadowButton = BoxShadow(
     color: brightBlue.withOpacity(0.24),
-    offset: Offset(0, 0),
+    offset: Offset.zero,
     blurRadius: 0,
     spreadRadius: 0,
   );
@@ -842,13 +842,13 @@ class PurpeliumTheme extends BaseTheme {
 
   BoxShadow? boxShadow = BoxShadow(
     color: white.withOpacity(0.14),
-    offset: Offset(0, 0),
+    offset: Offset.zero,
     blurRadius: 0,
     spreadRadius: 1,
   );
   BoxShadow? boxShadowButton = BoxShadow(
     color: purpeliumPurple.withOpacity(0.24),
-    offset: Offset(0, 0),
+    offset: Offset.zero,
     blurRadius: 0,
     spreadRadius: 0,
   );
@@ -957,13 +957,13 @@ class NyanoTheme extends NyanTheme {
 
   BoxShadow? boxShadow = BoxShadow(
     color: white.withOpacity(0.14),
-    offset: Offset(0, 0),
+    offset: Offset.zero,
     blurRadius: 0,
     spreadRadius: 1,
   );
   BoxShadow? boxShadowButton = BoxShadow(
     color: nyanoBlue.withOpacity(0.24),
-    offset: Offset(0, 0),
+    offset: Offset.zero,
     blurRadius: 0,
     spreadRadius: 0,
   );
@@ -979,7 +979,6 @@ class MonochromeTheme extends BaseTheme {
 
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
-
 
   static const Color green = Color(0xFF41E099);
   static const Color greenDark = Color(0xFF148A55);
@@ -1062,15 +1061,12 @@ class MonochromeTheme extends BaseTheme {
   Brightness? brightness = Brightness.dark;
   SystemUiOverlayStyle? statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
-  BoxShadow? boxShadow = BoxShadow(color: Colors.transparent);
-  BoxShadow? boxShadowButton = BoxShadow(color: Colors.transparent);
-
+  BoxShadow? boxShadow = const BoxShadow(color: Colors.transparent);
+  BoxShadow? boxShadowButton = const BoxShadow(color: Colors.transparent);
 }
-
 
 class PerishableTheme extends BaseTheme {
   static const Color nautilusBlue = Color(0xFF4080D7);
-
 
   // static const Color perishPurple = Color(0xFF9A5EFC);
   // // static const Color perishPurple = Color(0xFF6305fa);
@@ -1078,7 +1074,6 @@ class PerishableTheme extends BaseTheme {
   // // static const Color perishYellow = Color(0xFFffcc00);
   // static const Color perishRed = Color.fromRGBO(34, 24, 22, 1);
   // static const Color perishOrange = Color(0xFFFF9966);
-
 
   static const Color perishPurple = Color(0xFF9A5EFC);
   static const Color perishOrange = Color(0xFFff9966);
@@ -1089,9 +1084,6 @@ class PerishableTheme extends BaseTheme {
 
   static const Color purpleLight = Color(0xFF2A1052);
   static const Color purpleDarkest = Color(0xFF200A40);
-
-
-  
 
   static const Color brighterBlue = Color(0xFF80BAC7);
   // some test colors:
@@ -1149,7 +1141,6 @@ class PerishableTheme extends BaseTheme {
   Color? errorDark = redDark;
   Color? errorDark30 = redDark.withOpacity(0.3);
 
-
   Color? background = purpleLight;
   Color? background40 = purpleLight.withOpacity(0.4);
   Color? background00 = purpleLight.withOpacity(0.0);
@@ -1192,18 +1183,17 @@ class PerishableTheme extends BaseTheme {
   BoxShadow? boxShadow = BoxShadow(
     color: white.withOpacity(0.14),
     // color: black.withOpacity(0.5),
-    offset: Offset(0, 0),
+    offset: Offset.zero,
     blurRadius: 0,
     spreadRadius: 1,
   );
   BoxShadow? boxShadowButton = BoxShadow(
     // color: brightRed,
     color: nautilusBlue.withOpacity(0.24),
-    offset: Offset(0, 0),
+    offset: Offset.zero,
     blurRadius: 0,
     spreadRadius: 0,
   );
-
 }
 
 enum AppIconEnum { NAUTILUS, TITANIUM, INDIUM, NEPTUNIUM, THORIUM, CARBON, PURPELIUM, NYANO }

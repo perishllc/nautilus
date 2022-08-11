@@ -120,6 +120,16 @@
     "type": "text",
     "description": "auth_confirm_message"
   },
+  "authenticating": "Authenticating",
+  "@authenticating": {
+    "type": "text",
+    "description": "auth_authenticating"
+  },
+  "authError": "An error occurred while authenticating. Try again later.",
+  "@authError": {
+    "type": "text",
+    "description": "auth_generic_error"
+  },
   "authMethod": "Authentication Method",
   "@authMethod": {
     "type": "text",
@@ -225,6 +235,21 @@
     "type": "text",
     "description": "block_user"
   },
+  "branchConnectErrorShortDesc": "Error: can't reach Gift Card API",
+  "@branchConnectErrorShortDesc": {
+    "type": "text",
+    "description": "branch_connection_error_short_desc"
+  },
+  "branchConnectErrorLongDesc": "We can't seem to reach the Branch (Gift Card) API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work.",
+  "@branchConnectErrorLongDesc": {
+    "type": "text",
+    "description": "branch_connection_error_long_desc"
+  },
+  "branchConnectErrorTitle": "Connection Warning",
+  "@branchConnectErrorTitle": {
+    "type": "text",
+    "description": "branch_connection_error_title"
+  },
   "cancel": "Cancel",
   "@cancel": {
     "type": "text",
@@ -295,15 +320,20 @@
     "type": "text",
     "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
   },
-  "connectionWarning": "Can't Connect",
+  "connectionWarning": "Connection Warning",
   "@connectionWarning": {
     "type": "text",
     "description": "home_connection_warning"
   },
-  "connectionWarningBody": "We can't seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it's been more than an hour and you're still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co",
-  "@connectionWarningBody": {
+  "connectionWarningBodyShort": "We can't seem to connect to the backend",
+  "@connectionWarningBodyShort": {
     "type": "text",
-    "description": "connection_warning_body"
+    "description": "connection_warning_body_short"
+  },
+  "connectionWarningBodyLong": "We can't seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it's been more than an hour and you're still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co",
+  "@connectionWarningBodyLong": {
+    "type": "text",
+    "description": "connection_warning_body_long"
   },
   "contactAdded": "%1 added to contacts.",
   "@contactAdded": {
@@ -314,11 +344,6 @@
   "@contactExists": {
     "type": "text",
     "description": "contact_name_exists"
-  },
-  "watchAccountExists": "Account already added!",
-  "@watchAccountExists": {
-    "type": "text",
-    "description": "account_entry_exists"
   },
   "contactHeader": "Contact",
   "@contactHeader": {
@@ -390,7 +415,7 @@
     "type": "text",
     "description": "copy_seed_btn"
   },
-  "copyWalletAddressToClipboard": "Copy address to clipboard",
+  "copyWalletAddressToClipboard": "Copy wallet address to clipboard",
   "@copyWalletAddressToClipboard": {
     "type": "text",
     "description": "onramp_copy"
@@ -780,6 +805,11 @@
     "type": "text",
     "description": "funding_header"
   },
+  "getNano": "Get NANO",
+  "@getNano": {
+    "type": "text",
+    "description": "get_nano"
+  },
   "giftAlert": "You have a gift!",
   "@giftAlert": {
     "type": "text",
@@ -810,7 +840,7 @@
     "type": "text",
     "description": "gift_from"
   },
-  "giftInfo": "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance.",
+  "giftInfo": "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,",
   "@giftInfo": {
     "type": "text",
     "description": "Description for gift card creation"
@@ -850,15 +880,15 @@
     "type": "text",
     "description": "send_handoff"
   },
-  "handoffSupportedMethodNotFound": "A supported handoff method couldn't be found!",
-  "@handoffSupportedMethodNotFound": {
-    "type": "text",
-    "description": "handoff_method_not_found"
-  },
   "handoffFailed": "Something went wrong while trying to handoff block!",
   "@handoffFailed": {
     "type": "text",
     "description": "handoff_failed"
+  },
+  "handoffSupportedMethodNotFound": "A supported handoff method couldn't be found!",
+  "@handoffSupportedMethodNotFound": {
+    "type": "text",
+    "description": "handoff_method_not_found"
   },
   "hide": "Hide",
   "@hide": {
@@ -900,35 +930,25 @@
     "type": "text",
     "description": "Generic import"
   },
-  "importGift": "The link you clicked contains some NANO, would you like to import it to this wallet, or refund it to whoever sent it?",
+  "importGift": "The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?",
   "@importGift": {
     "type": "text",
     "description": "import_gift"
   },
-  "importGiftv2": "The link you clicked contains some NANO, would you like to import it to this wallet?",
-  "@importGiftv2": {
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "@importGiftEmpty": {
     "type": "text",
-    "description": "import_gift_v2"
+    "description": "import_gift_empty"
   },
   "importGiftIntro": "It looks like you clicked a link that contains some NANO, in order to receive these funds we just need for you to finish setting up your wallet.",
   "@importGiftIntro": {
     "type": "text",
     "description": "import_gift_intro"
   },
-  "importGiftEmpty": "Unfortunately the link you clicked that contained some NANO appears to be empty or has already been redeemed, but you can still see the amount and associated message.",
-  "@importGiftEmpty": {
+  "importGiftv2": "The link you clicked contains some NANO, would you like to import it to this wallet?",
+  "@importGiftv2": {
     "type": "text",
-    "description": "import_gift_empty"
-  },
-  "introSkippedWarningHeader": "Backup your seed!",
-  "@introSkippedWarningHeader": {
-    "type": "text",
-    "description": "intro_skipped_warning_header"
-  },
-  "introSkippedWarningContent": "We skipped the intro process to save you time, but you should backup your newly created seed immediately.\n\nIf you lose your seed you will lose access to your funds.\n\nAdditionally, your passcode has been set to \"000000\" which you should also change immediately.",
-  "@introSkippedWarningContent": {
-    "type": "text",
-    "description": "intro_skipped_warning_content"
+    "description": "import_gift_v2"
   },
   "importSecretPhrase": "Import Secret Phrase",
   "@importSecretPhrase": {
@@ -974,6 +994,16 @@
   "@insufficientBalance": {
     "type": "text",
     "description": "send_insufficient_balance"
+  },
+  "introSkippedWarningContent": "We skipped the intro process to save you time, but you should backup your newly created seed immediately.\n\nIf you lose your seed you will lose access to your funds.\n\nAdditionally, your passcode has been set to \"000000\" which you should also change immediately.",
+  "@introSkippedWarningContent": {
+    "type": "text",
+    "description": "intro_skipped_warning_content"
+  },
+  "introSkippedWarningHeader": "Backup your seed!",
+  "@introSkippedWarningHeader": {
+    "type": "text",
+    "description": "intro_skipped_warning_header"
   },
   "invalidAddress": "Address entered was invalid",
   "@invalidAddress": {
@@ -1405,20 +1435,10 @@
     "type": "text",
     "description": "settings_privacy_policy"
   },
-  "getNano": "Get NANO",
-  "@getNano": {
+  "purchaseNano": "Purchase Nano",
+  "@purchaseNano": {
     "type": "text",
-    "description": "get_nano"
-  },
-  "spendNano": "Spend NANO",
-  "@spendNano": {
-    "type": "text",
-    "description": "spend_nano"
-  },
-  "useNano": "Use NANO",
-  "@useNano": {
-    "type": "text",
-    "description": "use_nano"
+    "description": "purchase_nano"
   },
   "qrInvalidAddress": "QR code does not contain a valid destination",
   "@qrInvalidAddress": {
@@ -1770,11 +1790,6 @@
     "type": "text",
     "description": "send_generic_error"
   },
-  "authError": "An error occurred while authenticating. Try again later.",
-  "@authError": {
-    "type": "text",
-    "description": "auth_generic_error"
-  },
   "sendFrom": "Send From",
   "@sendFrom": {
     "type": "text",
@@ -1784,11 +1799,6 @@
   "@sending": {
     "type": "text",
     "description": "send_sending"
-  },
-  "authenticating": "Authenticating",
-  "@authenticating": {
-    "type": "text",
-    "description": "auth_authenticating"
   },
   "sendMemoError": "Sending memo with transaction failed, they may not be a Nautilus user.",
   "@sendMemoError": {
@@ -1944,6 +1954,11 @@
   "@someone": {
     "type": "text",
     "description": "send_someone"
+  },
+  "spendNano": "Spend NANO",
+  "@spendNano": {
+    "type": "text",
+    "description": "spend_nano"
   },
   "splitBy": "Split By",
   "@splitBy": {
@@ -2150,6 +2165,11 @@
     "type": "text",
     "description": "Rep uptime"
   },
+  "useNano": "Use NANO",
+  "@useNano": {
+    "type": "text",
+    "description": "use_nano"
+  },
   "useNautilusRep": "Use Nautilus Rep",
   "@useNautilusRep": {
     "type": "text",
@@ -2224,6 +2244,11 @@
   "@warning": {
     "type": "text",
     "description": "settings_logout_alert_title"
+  },
+  "watchAccountExists": "Account already added!",
+  "@watchAccountExists": {
+    "type": "text",
+    "description": "account_entry_exists"
   },
   "watchOnlyAccount": "Watch Only Account",
   "@watchOnlyAccount": {

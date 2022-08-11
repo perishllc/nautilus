@@ -30,10 +30,10 @@ class GenerateCompleteSheet extends StatefulWidget {
   final String memo;
 
   @override
-  _GenerateCompleteSheetState createState() => _GenerateCompleteSheetState();
+  GenerateCompleteSheetState createState() => GenerateCompleteSheetState();
 }
 
-class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
+class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
   // Current state references
   bool _linkCopied = false;
   bool _messageCopied = false;
@@ -60,7 +60,7 @@ class _GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
       controller: _messageController,
       cursorColor: StateContainer.of(context).curTheme.primary,
       inputFormatters: [
-        LengthLimitingTextInputFormatter(64),
+        LengthLimitingTextInputFormatter(255),
       ],
       textInputAction: TextInputAction.done,
       maxLines: null,

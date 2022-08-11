@@ -120,6 +120,16 @@
     "type": "text",
     "description": "auth_confirm_message"
   },
+  "authenticating": "",
+  "@authenticating": {
+    "type": "text",
+    "description": "auth_authenticating"
+  },
+  "authError": "Une erreur est survenue pendant l'authentification. Veuillez réessayer.",
+  "@authError": {
+    "type": "text",
+    "description": "auth_generic_error"
+  },
   "authMethod": "Méthode d’authentification",
   "@authMethod": {
     "type": "text",
@@ -225,6 +235,16 @@
     "type": "text",
     "description": "block_user"
   },
+  "branchConnectErrorShortDesc": "",
+  "@branchConnectErrorShortDesc": {
+    "type": "text",
+    "description": "branch_connection_error_short_desc"
+  },
+  "branchConnectErrorTitle": "",
+  "@branchConnectErrorTitle": {
+    "type": "text",
+    "description": "branch_connection_error_title"
+  },
   "cancel": "Annuler",
   "@cancel": {
     "type": "text",
@@ -285,7 +305,7 @@
     "type": "text",
     "description": "A text field hint that tells the user to confirm the password"
   },
-  "confirmPinHint": "",
+  "confirmPinHint": "Confirmez le code PIN",
   "@confirmPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to confirm the pin"
@@ -430,7 +450,7 @@
     "type": "text",
     "description": "Prompt user to create a new password"
   },
-  "createPinHint": "",
+  "createPinHint": "Créer un code PIN",
   "@createPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to create a pin"
@@ -525,12 +545,12 @@
     "type": "text",
     "description": "domain_invalid_name"
   },
-  "donateButton": "",
+  "donateButton": "Faire un don",
   "@donateButton": {
     "type": "text",
     "description": "donate_button"
   },
-  "donateToSupport": "",
+  "donateToSupport": "Soutenir le projet",
   "@donateToSupport": {
     "type": "text",
     "description": "settings_support_donate"
@@ -565,7 +585,7 @@
     "type": "text",
     "description": "enter_memo"
   },
-  "enterPasswordHint": "Entrer le mot de passe",
+  "enterPasswordHint": "Entrez votre mot de passe",
   "@enterPasswordHint": {
     "type": "text",
     "description": "A text field hint that tells the users to enter their password"
@@ -765,15 +785,20 @@
     "type": "text",
     "description": "history_fulfilled"
   },
-  "fundingBannerHeader": "",
+  "fundingBannerHeader": "Bannière de donation",
   "@fundingBannerHeader": {
     "type": "text",
     "description": "funding_banner_header"
   },
-  "fundingHeader": "",
+  "fundingHeader": "Donation",
   "@fundingHeader": {
     "type": "text",
     "description": "funding_header"
+  },
+  "getNano": "",
+  "@getNano": {
+    "type": "text",
+    "description": "get_nano"
   },
   "giftAlert": "Tu as un cadeau !",
   "@giftAlert": {
@@ -845,6 +870,11 @@
     "type": "text",
     "description": "send_handoff"
   },
+  "handoffFailed": "",
+  "@handoffFailed": {
+    "type": "text",
+    "description": "handoff_failed"
+  },
   "handoffSupportedMethodNotFound": "",
   "@handoffSupportedMethodNotFound": {
     "type": "text",
@@ -900,6 +930,16 @@
     "type": "text",
     "description": "import_gift_empty"
   },
+  "importGiftIntro": "",
+  "@importGiftIntro": {
+    "type": "text",
+    "description": "import_gift_intro"
+  },
+  "importGiftv2": "",
+  "@importGiftv2": {
+    "type": "text",
+    "description": "import_gift_v2"
+  },
   "importSecretPhrase": "Importer une phrase secrète",
   "@importSecretPhrase": {
     "type": "text",
@@ -945,6 +985,16 @@
     "type": "text",
     "description": "send_insufficient_balance"
   },
+  "introSkippedWarningContent": "",
+  "@introSkippedWarningContent": {
+    "type": "text",
+    "description": "intro_skipped_warning_content"
+  },
+  "introSkippedWarningHeader": "",
+  "@introSkippedWarningHeader": {
+    "type": "text",
+    "description": "intro_skipped_warning_header"
+  },
   "invalidAddress": "Adresse du destinataire invalide",
   "@invalidAddress": {
     "type": "text",
@@ -955,12 +1005,12 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
-  "invalidPin": "",
+  "invalidPin": "Code PIN incorrect",
   "@invalidPin": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
   },
-  "iosFundingMessage": "",
+  "iosFundingMessage": "La politique de l'App Store sur iOS ne nous permet pas de vous rediriger vers notre page de donation. Si vous désirez soutenir le projet, nous vous suggérons d'envoyer votre don directement au compte Nano de Nautilus.",
   "@iosFundingMessage": {
     "type": "text",
     "description": "ios_funding_message"
@@ -1050,7 +1100,7 @@
     "type": "text",
     "description": "unfulfill_payment"
   },
-  "maybeLater": "Maybe Later",
+  "maybeLater": "Plus tard",
   "@maybeLater": {
     "type": "text",
     "description": "maybe_app_button"
@@ -1090,7 +1140,7 @@
     "type": "text",
     "description": "err"
   },
-  "monthlyServerCosts": "",
+  "monthlyServerCosts": "Coût mensuel des serveurs",
   "@monthlyServerCosts": {
     "type": "text",
     "description": "support_monthly_costs"
@@ -1175,7 +1225,7 @@
     "type": "text",
     "description": "A button that declines and skips the mentioned process."
   },
-  "noThanks": "No Thanks",
+  "noThanks": "Non merci",
   "@noThanks": {
     "type": "text",
     "description": "no_thanks_app_button"
@@ -1265,7 +1315,7 @@
     "type": "text",
     "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
   },
-  "passwordsDontMatch": "Les mots de passe sont différent",
+  "passwordsDontMatch": "Les mots de passe sont différents",
   "@passwordsDontMatch": {
     "type": "text",
     "description": "An error indicating a password has been confirmed incorrectly"
@@ -1300,7 +1350,7 @@
     "type": "text",
     "description": "pick rep from list"
   },
-  "pinBlank": "",
+  "pinBlank": "Le code PIN ne peut pas être vide",
   "@pinBlank": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
@@ -1340,7 +1390,7 @@
     "type": "text",
     "description": "change_representative_pin"
   },
-  "pinsDontMatch": "",
+  "pinsDontMatch": "Les codes PIN ne correspondent pas",
   "@pinsDontMatch": {
     "type": "text",
     "description": "An error indicating a pin has been confirmed incorrectly"
@@ -1350,7 +1400,7 @@
     "type": "text",
     "description": "settings_pin_title"
   },
-  "plausibleDeniabilityParagraph": "",
+  "plausibleDeniabilityParagraph": "Il *ne s'agit pas* du code PIN utilisé pour créer votre portefeuille. Appuyez sur le bouton Info pour en savoir plus.",
   "@plausibleDeniabilityParagraph": {
     "type": "text",
     "description": "A paragraph that tells warns the user this is plausible deniability pin."
@@ -1405,7 +1455,7 @@
     "type": "text",
     "description": "An unknown error occurred with the QR scanner"
   },
-  "rate": "Rate",
+  "rate": "Noter",
   "@rate": {
     "type": "text",
     "description": "rate_app_button"
@@ -1415,7 +1465,7 @@
     "type": "text",
     "description": "rate_app_header"
   },
-  "rateTheAppDescription": "Si vous aimez l'application, pensez à prendre le temps de la revoir,\nCela aide vraiment et cela ne devrait pas prendre plus d'une minute.",
+  "rateTheAppDescription": "Si vous aimez l'application, pensez à prendre le temps de la noter.\nCela nous aide vraiment, et ne devrait pas prendre plus d'une minute.",
   "@rateTheAppDescription": {
     "type": "text",
     "description": "rate_app_desc"
@@ -1485,7 +1535,7 @@
     "type": "text",
     "description": "register_username_header"
   },
-  "removeAccountText": "Êtes-vous sûr de vouloir cacher ce compte? Vous pouvez l'ajouter ultérieurement en appuyant sur le bouton \"%1\"",
+  "removeAccountText": "Êtes-vous sûr(e) de vouloir cacher ce compte? Vous pouvez l'ajouter ultérieurement en appuyant sur le bouton \"%1\"",
   "@removeAccountText": {
     "type": "text",
     "description": "Remove account dialog body"
@@ -1600,7 +1650,7 @@
     "type": "text",
     "description": "request_sheet_info_header"
   },
-  "requireAPasswordToOpenHeader": "Demander un mot de passe pour Nautilus ?",
+  "requireAPasswordToOpenHeader": "Demander un mot de passe à l'ouverture ?",
   "@requireAPasswordToOpenHeader": {
     "type": "text",
     "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
@@ -1645,7 +1695,7 @@
     "type": "text",
     "description": "home_search_hint"
   },
-  "secretInfo": "Dans l'écran suivant, vous verrez votre phrase secrète. C'est un mot de passe qui permet d'accéder à votre portefeuille. Il est crucial de la sauvegarder et de ne jamais la montrer à quelqu'un.",
+  "secretInfo": "Dans l'écran suivant, vous verrez votre phrase secrète. C'est un mot de passe qui permet d'accéder à votre portefeuille. Il est crucial de la sauvegarder et de ne jamais la montrer à un tiers.",
   "@secretInfo": {
     "type": "text",
     "description": "Description for seed"
@@ -1825,7 +1875,7 @@
     "type": "text",
     "description": "Allows user to encrypt wallet with a pin"
   },
-  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "setWalletPlausiblePin": "Paraméter un code PIN",
   "@setWalletPlausiblePin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
@@ -1850,7 +1900,7 @@
     "type": "text",
     "description": "share_extra"
   },
-  "show": "",
+  "show": "Montrer",
   "@show": {
     "type": "text",
     "description": "funding_show"
@@ -1865,7 +1915,7 @@
     "type": "text",
     "description": "contacts_enabled"
   },
-  "showFunding": "",
+  "showFunding": "Bannière de donation",
   "@showFunding": {
     "type": "text",
     "description": "show_funding_banner"
@@ -1895,6 +1945,11 @@
     "type": "text",
     "description": "send_someone"
   },
+  "spendNano": "",
+  "@spendNano": {
+    "type": "text",
+    "description": "spend_nano"
+  },
   "splitBy": "",
   "@splitBy": {
     "type": "text",
@@ -1905,7 +1960,7 @@
     "type": "text",
     "description": "A button to open up the live support window"
   },
-  "supportDevelopment": "",
+  "supportDevelopment": "Aidez le développement de l'app",
   "@supportDevelopment": {
     "type": "text",
     "description": "settings_support_development"
@@ -2100,6 +2155,11 @@
     "type": "text",
     "description": "Rep uptime"
   },
+  "useNano": "",
+  "@useNano": {
+    "type": "text",
+    "description": "use_nano"
+  },
   "useNautilusRep": "Use Nautilus Rep",
   "@useNautilusRep": {
     "type": "text",
@@ -2175,6 +2235,11 @@
     "type": "text",
     "description": "settings_logout_alert_title"
   },
+  "watchAccountExists": "Le compte existe déjà.",
+  "@watchAccountExists": {
+    "type": "text",
+    "description": "account_entry_exists"
+  },
   "watchOnlyAccount": "",
   "@watchOnlyAccount": {
     "type": "text",
@@ -2185,7 +2250,7 @@
     "type": "text",
     "description": "watch_only_send_disabled"
   },
-  "welcomeText": "Bienvenue dans Nautilus. Avant de continuer, veuillez créer un nouveau portefeuille ou en importer un déjà établi.",
+  "welcomeText": "Bienvenue dans Nautilus. Avant de continuer, veuillez créer un nouveau portefeuille ou en importer un existant.",
   "@welcomeText": {
     "type": "text",
     "description": "intro_welcome_title"

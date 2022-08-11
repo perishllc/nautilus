@@ -1,4 +1,15 @@
-## v0.5.4 - [2022-08-11]
+## v0.5.5 - [2022-08-11]
+#### Added
+- Error message for when the wallet can't reach branch.io servers
+- Scrollbar on the accounts sheet
+- Illustration on the transfer funds sheet
+#### Changed
+- Made the connection warning a dismissible card rather than an alert
+#### Fixed
+- Swiping on the settings drawer wasn't dismissing it properly
+- Change input limit on gift completion screen from 64 to 255 since it was cutting off the default message
+- Bug with displaying gift card from address / username
+## v0.5.4 - [2022-08-10]
 #### Added
 - New Use NANO section replacing the old purchase NANO button
 - Links to nanocafe.cc and redeemfor.me

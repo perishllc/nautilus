@@ -6,7 +6,7 @@ description: Nautilus - Fast, Robust & Secure NANO Wallet.
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.5.4+67
+version: 0.5.5+70
 
 environment:
   sdk: '>=2.12.0 < 3.0.0'
@@ -318,6 +318,9 @@ flutter:
     # - assets/logos/redeemforme.svg
     # nyano assets:
     - assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png
+    # illustrations:
+    - assets/illustrations/transferfunds_start.svg
+    - assets/illustrations/transferfunds_paperwalletonly.svg
     # changelog:
     - CHANGELOG.md
 

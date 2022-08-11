@@ -17,10 +17,10 @@ class RemoteMessageSheet extends StatefulWidget {
   final AlertResponseItem? alert;
   final bool hasDismissButton;
 
-  _RemoteMessageSheetStateState createState() => _RemoteMessageSheetStateState();
+  RemoteMessageSheetStateState createState() => RemoteMessageSheetStateState();
 }
 
-class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
+class RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -164,7 +164,7 @@ class _RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                     children: <Widget>[
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).readMore, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
-                        Uri uri = Uri.parse(widget.alert!.link!);
+                        final Uri uri = Uri.parse(widget.alert!.link!);
                         if (await canLaunchUrl(uri)) {
                           await launchUrl(uri);
                           await sl.get<SharedPrefsUtil>().markAlertRead(widget.alert!);

@@ -55,7 +55,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("অনুগ্রহ করে পরিমাণ লিখুন"),
         "asked": MessageLookupByLibrary.simpleMessage("জিজ্ঞাসিত"),
         "authConfirm": MessageLookupByLibrary.simpleMessage(""),
+        "authError": MessageLookupByLibrary.simpleMessage(""),
         "authMethod": MessageLookupByLibrary.simpleMessage("প্রমাণীকরণ পদ্ধতি"),
+        "authenticating": MessageLookupByLibrary.simpleMessage(""),
         "autoImport": MessageLookupByLibrary.simpleMessage("স্বয়ংক্রিয় আমদা"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("স্বয়ংক্রিয়ভাবে লক"),
@@ -93,6 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("একটি ডাকনাম বেছে নিন"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("% 1 আনব্লক করা হয়েছে!"),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("বাতিল"),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("মুদ্রা পরিবর্তন"),
@@ -116,7 +120,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "connectingHeader":
             MessageLookupByLibrary.simpleMessage("সংযোগ হচ্ছে "),
         "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
-        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("%1 কন্টাক্ট সংরক্ষণ সফল"),
         "contactExists":
@@ -263,6 +266,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("পূর্ণ"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
         "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
+        "getNano": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("তোমার কাছে একটা উপহার আছে!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("ফাঁকা উপহার"),
@@ -280,6 +284,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goToQRCode": MessageLookupByLibrary.simpleMessage("QR এ যান"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("বুঝেছি!"),
         "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
         "handoffSupportedMethodNotFound":
             MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("লুকান"),
@@ -298,6 +303,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "আপনার ক্লিক করা লিঙ্কটি কিছু ন্যানো রয়েছে, আপনি কি এই ওয়ালেটে এটি আমদানি করতে চান, অথবা এটি যে কেউ পাঠিয়েছেন তা ফেরত দিতে চান?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("গোপন বাক্যাংশ আমদানি করুন"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -312,6 +319,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("তাত্ক্ষণিকভাবে"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("অপর্যাপ্ত টাকা"),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("এই ঠিকানাটি অবৈধ"),
         "invalidPassword":
@@ -439,6 +448,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(""),
         "preferences": MessageLookupByLibrary.simpleMessage("পছন্দ"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("গোপনীয়তা নীতি"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("ন্যানো ক্রয়"),
         "qrInvalidAddress":
             MessageLookupByLibrary.simpleMessage("QR কোডে কোন বৈধ গন্তব্য নেই"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -600,6 +610,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("সিমপ্লেক্স"),
         "someone": MessageLookupByLibrary.simpleMessage(""),
+        "spendNano": MessageLookupByLibrary.simpleMessage(""),
         "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
@@ -663,6 +674,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("অবৈতনিক"),
         "unread": MessageLookupByLibrary.simpleMessage("অপঠিত"),
         "uptime": MessageLookupByLibrary.simpleMessage("আপটাইম"),
+        "useNano": MessageLookupByLibrary.simpleMessage(""),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound":
@@ -688,6 +700,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("ভোটের ওজন"),
         "warning": MessageLookupByLibrary.simpleMessage("সতর্কতাসূচক"),
+        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(

@@ -290,6 +290,26 @@ class AppLocalization {
     );
   }
 
+  /// `Authenticating`
+  String get authenticating {
+    return Intl.message(
+      'Authenticating',
+      name: 'authenticating',
+      desc: 'auth_authenticating',
+      args: [],
+    );
+  }
+
+  /// `An error occurred while authenticating. Try again later.`
+  String get authError {
+    return Intl.message(
+      'An error occurred while authenticating. Try again later.',
+      name: 'authError',
+      desc: 'auth_generic_error',
+      args: [],
+    );
+  }
+
   /// `Authentication Method`
   String get authMethod {
     return Intl.message(
@@ -500,6 +520,36 @@ class AppLocalization {
     );
   }
 
+  /// `Error: can't reach Gift Card API`
+  String get branchConnectErrorShortDesc {
+    return Intl.message(
+      'Error: can\'t reach Gift Card API',
+      name: 'branchConnectErrorShortDesc',
+      desc: 'branch_connection_error_short_desc',
+      args: [],
+    );
+  }
+
+  /// `We can't seem to reach the Branch (Gift Card) API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work.`
+  String get branchConnectErrorLongDesc {
+    return Intl.message(
+      'We can\'t seem to reach the Branch (Gift Card) API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work.',
+      name: 'branchConnectErrorLongDesc',
+      desc: 'branch_connection_error_long_desc',
+      args: [],
+    );
+  }
+
+  /// `Connection Warning`
+  String get branchConnectErrorTitle {
+    return Intl.message(
+      'Connection Warning',
+      name: 'branchConnectErrorTitle',
+      desc: 'branch_connection_error_title',
+      args: [],
+    );
+  }
+
   /// `Cancel`
   String get cancel {
     return Intl.message(
@@ -641,22 +691,32 @@ class AppLocalization {
     );
   }
 
-  /// `Can't Connect`
+  /// `Connection Warning`
   String get connectionWarning {
     return Intl.message(
-      'Can\'t Connect',
+      'Connection Warning',
       name: 'connectionWarning',
       desc: 'home_connection_warning',
       args: [],
     );
   }
 
+  /// `We can't seem to connect to the backend`
+  String get connectionWarningBodyShort {
+    return Intl.message(
+      'We can\'t seem to connect to the backend',
+      name: 'connectionWarningBodyShort',
+      desc: 'connection_warning_body_short',
+      args: [],
+    );
+  }
+
   /// `We can't seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it's been more than an hour and you're still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co`
-  String get connectionWarningBody {
+  String get connectionWarningBodyLong {
     return Intl.message(
       'We can\'t seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it\'s been more than an hour and you\'re still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co',
-      name: 'connectionWarningBody',
-      desc: 'connection_warning_body',
+      name: 'connectionWarningBodyLong',
+      desc: 'connection_warning_body_long',
       args: [],
     );
   }
@@ -677,16 +737,6 @@ class AppLocalization {
       'Contact Already Exists',
       name: 'contactExists',
       desc: 'contact_name_exists',
-      args: [],
-    );
-  }
-
-  /// `Account already added!`
-  String get watchAccountExists {
-    return Intl.message(
-      'Account already added!',
-      name: 'watchAccountExists',
-      desc: 'account_entry_exists',
       args: [],
     );
   }
@@ -831,10 +881,10 @@ class AppLocalization {
     );
   }
 
-  /// `Copy address to clipboard`
+  /// `Copy wallet address to clipboard`
   String get copyWalletAddressToClipboard {
     return Intl.message(
-      'Copy address to clipboard',
+      'Copy wallet address to clipboard',
       name: 'copyWalletAddressToClipboard',
       desc: 'onramp_copy',
       args: [],
@@ -1613,6 +1663,16 @@ class AppLocalization {
     );
   }
 
+  /// `Get NANO`
+  String get getNano {
+    return Intl.message(
+      'Get NANO',
+      name: 'getNano',
+      desc: 'get_nano',
+      args: [],
+    );
+  }
+
   /// `You have a gift!`
   String get giftAlert {
     return Intl.message(
@@ -1673,10 +1733,10 @@ class AppLocalization {
     );
   }
 
-  /// `Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance.`
+  /// `Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,`
   String get giftInfo {
     return Intl.message(
-      'Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance.',
+      'Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,',
       name: 'giftInfo',
       desc: 'Description for gift card creation',
       args: [],
@@ -1753,22 +1813,22 @@ class AppLocalization {
     );
   }
 
-  /// `A supported handoff method couldn't be found!`
-  String get handoffSupportedMethodNotFound {
-    return Intl.message(
-      'A supported handoff method couldn\'t be found!',
-      name: 'handoffSupportedMethodNotFound',
-      desc: 'handoff_method_not_found',
-      args: [],
-    );
-  }
-
   /// `Something went wrong while trying to handoff block!`
   String get handoffFailed {
     return Intl.message(
       'Something went wrong while trying to handoff block!',
       name: 'handoffFailed',
       desc: 'handoff_failed',
+      args: [],
+    );
+  }
+
+  /// `A supported handoff method couldn't be found!`
+  String get handoffSupportedMethodNotFound {
+    return Intl.message(
+      'A supported handoff method couldn\'t be found!',
+      name: 'handoffSupportedMethodNotFound',
+      desc: 'handoff_method_not_found',
       args: [],
     );
   }
@@ -1853,22 +1913,22 @@ class AppLocalization {
     );
   }
 
-  /// `The link you clicked contains some NANO, would you like to import it to this wallet, or refund it to whoever sent it?`
+  /// `The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?`
   String get importGift {
     return Intl.message(
-      'The link you clicked contains some NANO, would you like to import it to this wallet, or refund it to whoever sent it?',
+      'The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?',
       name: 'importGift',
       desc: 'import_gift',
       args: [],
     );
   }
 
-  /// `The link you clicked contains some NANO, would you like to import it to this wallet?`
-  String get importGiftv2 {
+  /// `Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.`
+  String get importGiftEmpty {
     return Intl.message(
-      'The link you clicked contains some NANO, would you like to import it to this wallet?',
-      name: 'importGiftv2',
-      desc: 'import_gift_v2',
+      'Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.',
+      name: 'importGiftEmpty',
+      desc: 'import_gift_empty',
       args: [],
     );
   }
@@ -1883,32 +1943,12 @@ class AppLocalization {
     );
   }
 
-  /// `Unfortunately the link you clicked that contained some NANO appears to be empty or has already been redeemed, but you can still see the amount and associated message.`
-  String get importGiftEmpty {
+  /// `The link you clicked contains some NANO, would you like to import it to this wallet?`
+  String get importGiftv2 {
     return Intl.message(
-      'Unfortunately the link you clicked that contained some NANO appears to be empty or has already been redeemed, but you can still see the amount and associated message.',
-      name: 'importGiftEmpty',
-      desc: 'import_gift_empty',
-      args: [],
-    );
-  }
-
-  /// `Backup your seed!`
-  String get introSkippedWarningHeader {
-    return Intl.message(
-      'Backup your seed!',
-      name: 'introSkippedWarningHeader',
-      desc: 'intro_skipped_warning_header',
-      args: [],
-    );
-  }
-
-  /// `We skipped the intro process to save you time, but you should backup your newly created seed immediately.\n\nIf you lose your seed you will lose access to your funds.\n\nAdditionally, your passcode has been set to "000000" which you should also change immediately.`
-  String get introSkippedWarningContent {
-    return Intl.message(
-      'We skipped the intro process to save you time, but you should backup your newly created seed immediately.\n\nIf you lose your seed you will lose access to your funds.\n\nAdditionally, your passcode has been set to "000000" which you should also change immediately.',
-      name: 'introSkippedWarningContent',
-      desc: 'intro_skipped_warning_content',
+      'The link you clicked contains some NANO, would you like to import it to this wallet?',
+      name: 'importGiftv2',
+      desc: 'import_gift_v2',
       args: [],
     );
   }
@@ -1999,6 +2039,26 @@ class AppLocalization {
       'Insufficient Balance',
       name: 'insufficientBalance',
       desc: 'send_insufficient_balance',
+      args: [],
+    );
+  }
+
+  /// `We skipped the intro process to save you time, but you should backup your newly created seed immediately.\n\nIf you lose your seed you will lose access to your funds.\n\nAdditionally, your passcode has been set to "000000" which you should also change immediately.`
+  String get introSkippedWarningContent {
+    return Intl.message(
+      'We skipped the intro process to save you time, but you should backup your newly created seed immediately.\n\nIf you lose your seed you will lose access to your funds.\n\nAdditionally, your passcode has been set to "000000" which you should also change immediately.',
+      name: 'introSkippedWarningContent',
+      desc: 'intro_skipped_warning_content',
+      args: [],
+    );
+  }
+
+  /// `Backup your seed!`
+  String get introSkippedWarningHeader {
+    return Intl.message(
+      'Backup your seed!',
+      name: 'introSkippedWarningHeader',
+      desc: 'intro_skipped_warning_header',
       args: [],
     );
   }
@@ -2868,32 +2928,12 @@ class AppLocalization {
     );
   }
 
-  /// `Get NANO`
-  String get getNano {
+  /// `Purchase Nano`
+  String get purchaseNano {
     return Intl.message(
-      'Get NANO',
-      name: 'getNano',
-      desc: 'get_nano',
-      args: [],
-    );
-  }
-
-  /// `Spend NANO`
-  String get spendNano {
-    return Intl.message(
-      'Spend NANO',
-      name: 'spendNano',
-      desc: 'spend_nano',
-      args: [],
-    );
-  }
-
-  /// `Use NANO`
-  String get useNano {
-    return Intl.message(
-      'Use NANO',
-      name: 'useNano',
-      desc: 'use_nano',
+      'Purchase Nano',
+      name: 'purchaseNano',
+      desc: 'purchase_nano',
       args: [],
     );
   }
@@ -3600,16 +3640,6 @@ class AppLocalization {
     );
   }
 
-  /// `An error occurred while authenticating. Try again later.`
-  String get authError {
-    return Intl.message(
-      'An error occurred while authenticating. Try again later.',
-      name: 'authError',
-      desc: 'auth_generic_error',
-      args: [],
-    );
-  }
-
   /// `Send From`
   String get sendFrom {
     return Intl.message(
@@ -3626,16 +3656,6 @@ class AppLocalization {
       'Sending',
       name: 'sending',
       desc: 'send_sending',
-      args: [],
-    );
-  }
-
-  /// `Authenticating`
-  String get authenticating {
-    return Intl.message(
-      'Authenticating',
-      name: 'authenticating',
-      desc: 'auth_authenticating',
       args: [],
     );
   }
@@ -3946,6 +3966,16 @@ class AppLocalization {
       'someone',
       name: 'someone',
       desc: 'send_someone',
+      args: [],
+    );
+  }
+
+  /// `Spend NANO`
+  String get spendNano {
+    return Intl.message(
+      'Spend NANO',
+      name: 'spendNano',
+      desc: 'spend_nano',
       args: [],
     );
   }
@@ -4360,6 +4390,16 @@ class AppLocalization {
     );
   }
 
+  /// `Use NANO`
+  String get useNano {
+    return Intl.message(
+      'Use NANO',
+      name: 'useNano',
+      desc: 'use_nano',
+      args: [],
+    );
+  }
+
   /// `Use Nautilus Rep`
   String get useNautilusRep {
     return Intl.message(
@@ -4506,6 +4546,16 @@ class AppLocalization {
       'Warning',
       name: 'warning',
       desc: 'settings_logout_alert_title',
+      args: [],
+    );
+  }
+
+  /// `Account already added!`
+  String get watchAccountExists {
+    return Intl.message(
+      'Account already added!',
+      name: 'watchAccountExists',
+      desc: 'account_entry_exists',
       args: [],
     );
   }

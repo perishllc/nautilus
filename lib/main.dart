@@ -67,17 +67,17 @@ Future<void> main() async {
   if (kReleaseMode) {
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
-  runApp(StateContainer(child: App()));
+  runApp(const StateContainer(child: App()));
 }
 
 class App extends StatefulWidget {
-  App() : super();
+  const App() : super();
 
   @override
-  _AppState createState() => _AppState();
+  AppState createState() => AppState();
 }
 
-class _AppState extends State<App> {
+class AppState extends State<App> {
   @override
   void initState() {
     super.initState();
@@ -93,7 +93,7 @@ class _AppState extends State<App> {
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       child: MaterialApp(
         debugShowCheckedModeBanner: kDebugMode,
-        title: 'Nautilus',
+        title: "Nautilus",
         // theme: ThemeData(
         //   dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
         //   primaryColor: StateContainer.of(context).curTheme.primary,
@@ -116,7 +116,7 @@ class _AppState extends State<App> {
         ),
         localizationsDelegates: [
           AppLocalizationsDelegate(StateContainer.of(context).curLanguage),
-          // AppLocalization.delegate,
+          AppLocalization.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
@@ -124,7 +124,7 @@ class _AppState extends State<App> {
 
         locale: StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT ? null : StateContainer.of(context).curLanguage.getLocale(),
         // supportedLocales: AppLocalization.delegate.supportedLocales,
-        supportedLocales: const [
+        supportedLocales: const <Locale>[
           Locale('en', 'US'), // English
           Locale('he', 'IL'), // Hebrew
           Locale('de', 'DE'), // German

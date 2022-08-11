@@ -10,11 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
@@ -386,6 +388,36 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
+  Future<void> checkBranchConnection() async {
+    // check if we can reach the branch server:
+    final AlertResponseItem branchAlert = AlertResponseItem(
+      id: 4040,
+      active: true,
+      // can't get localized strings in this context: :/
+      // TODO: find a way, but as a temp fix for the settings drawer, we need to put in something:
+      // title: AppLocalization.of(context).branchConnectErrorTitle,
+      // shortDescription: AppLocalization.of(context).branchConnectErrorShortDesc,
+      // longDescription: AppLocalization.of(context).branchConnectErrorLongDesc,
+      title: "Connection Warning",
+      shortDescription: "Error: can't reach Branch API",
+      longDescription:
+          "We can't seem to reach the Branch API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work.",
+    );
+    try {
+      final http.Response response = await http.get(Uri.parse("https://branch.io"), headers: {'Content-type': 'application/json'});
+
+      // we only care to show this if the server is unreachable but our backend is:
+      final bool connected = await sl.get<AccountService>().isConnected();
+      if (connected && response.statusCode != 200) {
+        updateActiveAlert(branchAlert, null);
+      }
+    } catch (e) {
+      log.e("Error connecting to branch.io", e);
+      updateActiveAlert(branchAlert, null);
+      return;
+    }
+  }
+
   Future<void> checkAndCacheNinjaAPIResponse() async {
     List<NinjaNode>? nodes;
     if ((await sl.get<SharedPrefsUtil>().getNinjaAPICache()) == null) {
@@ -450,6 +482,8 @@ class StateContainerState extends State<StateContainer> {
     checkAndUpdateAlerts();
     // Get funding alerts
     checkAndUpdateFundingAlerts();
+    // make sure we can reach branch.io
+    checkBranchConnection();
     // Get natricon pref
     sl.get<SharedPrefsUtil>().getUseNatricon().then((bool useNatricon) {
       setNatriconOn(useNatricon);

@@ -23,6 +23,7 @@ import 'package:nautilus_wallet_flutter/ui/accounts/add_watch_only_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:quiver/strings.dart';
@@ -256,14 +257,22 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                           child: Text("Loading"),
                         )
                       else
-                        ListView.builder(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          itemCount: widget.accounts.length,
+                        DraggableScrollbar(
                           controller: _scrollController,
-                          itemBuilder: (BuildContext context, int index) {
-                            return _buildAccountListItem(context, widget.accounts[index], setState);
-                          },
+                          scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                          scrollbarTopMargin: 20.0,
+                          scrollbarBottomMargin: 12.0,
+                          child: ListView.builder(
+                            // padding: const EdgeInsets.symmetric(vertical: 20),
+                            // padding: const EdgeInsets.only(right: 2),
+                            itemCount: widget.accounts.length,
+                            controller: _scrollController,
+                            itemBuilder: (BuildContext context, int index) {
+                              return _buildAccountListItem(context, widget.accounts[index], setState);
+                            },
+                          ),
                         ),
+
                       //List Top Gradient
                       Align(
                         alignment: Alignment.topCenter,
@@ -421,37 +430,40 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
       userOrAddress = Address(account.address).getShortString();
     }
 
-    return Slidable(
-      closeOnScroll: true,
-      endActionPane: _getSlideActionsForAccount(context, account, setState),
-      child: TextButton(
-          style: TextButton.styleFrom(
-            primary: StateContainer.of(context).curTheme.text15,
-            backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-            padding: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          ),
-          // highlightColor: StateContainer.of(context).curTheme.text15,
-          // splashColor: StateContainer.of(context).curTheme.text15,
-          // padding: EdgeInsets.all(0.0),
-          onPressed: () {
-            if (!_accountIsChanging) {
-              // Change account
-              if (!account.selected) {
-                setState(() {
-                  _accountIsChanging = true;
-                });
-                _changeAccount(account, setState);
-              }
-            }
-          },
-          child: Column(
-            children: <Widget>[
-              Divider(
-                height: 2,
-                color: StateContainer.of(context).curTheme.text15,
+    return Column(
+      children: <Widget>[
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
+        Container(
+          margin: const EdgeInsets.only(right: 10),
+          child: Slidable(
+            closeOnScroll: true,
+            endActionPane: _getSlideActionsForAccount(context, account, setState),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                primary: StateContainer.of(context).curTheme.text15,
+                backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
               ),
-              SizedBox(
+
+              // highlightColor: StateContainer.of(context).curTheme.text15,
+              // splashColor: StateContainer.of(context).curTheme.text15,
+              // padding: EdgeInsets.all(0.0),
+              onPressed: () {
+                if (!_accountIsChanging) {
+                  // Change account
+                  if (!account.selected) {
+                    setState(() {
+                      _accountIsChanging = true;
+                    });
+                    _changeAccount(account, setState);
+                  }
+                }
+              },
+              child: SizedBox(
                 height: 70.0,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -466,8 +478,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                     // Icon, Account Name, Address and Amount
                     Expanded(
                       child: Container(
-                        margin: EdgeInsetsDirectional.only(
-                            start: StateContainer.of(context).natriconOn! ? 8 : 20, end: StateContainer.of(context).natriconOn! ? 16 : 20),
+                        margin: const EdgeInsetsDirectional.only(start: 20, end: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -615,8 +626,10 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                   ],
                 ),
               ),
-            ],
-          )),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

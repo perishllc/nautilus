@@ -5,12 +5,12 @@
     "type": "text",
     "description": "Account text"
   },
-  "accountNameHint": "",
+  "accountNameHint": "Ingresa un Nombre",
   "@accountNameHint": {
     "type": "text",
     "description": "enter_name_hint"
   },
-  "accountNameMissing": "",
+  "accountNameMissing": "Escoge un Nombre de Cuenta",
   "@accountNameMissing": {
     "type": "text",
     "description": "account_name_missing"
@@ -80,17 +80,17 @@
     "type": "text",
     "description": "receive_share_cta"
   },
-  "addWatchOnlyAccount": "",
+  "addWatchOnlyAccount": "Añadir Cuenta de sólo ver",
   "@addWatchOnlyAccount": {
     "type": "text",
     "description": "watch_only_add"
   },
-  "addWatchOnlyAccountError": "",
+  "addWatchOnlyAccountError": "Error al agregar Cuenta de sólo ver. Cuenta fue null",
   "@addWatchOnlyAccountError": {
     "type": "text",
     "description": "watch_only_add_error"
   },
-  "addWatchOnlyAccountSuccess": "",
+  "addWatchOnlyAccountSuccess": "¡Cuenta de sólo ver creada satisfactoriamente!",
   "@addWatchOnlyAccountSuccess": {
     "type": "text",
     "description": "watch_only_add_success"
@@ -119,6 +119,16 @@
   "@authConfirm": {
     "type": "text",
     "description": "auth_confirm_message"
+  },
+  "authenticating": "Autenticando",
+  "@authenticating": {
+    "type": "text",
+    "description": "auth_authenticating"
+  },
+  "authError": "Ocurrió un error al autenticar. Intenta otra vez después.",
+  "@authError": {
+    "type": "text",
+    "description": "auth_generic_error"
   },
   "authMethod": "Método de Autenticación",
   "@authMethod": {
@@ -225,6 +235,16 @@
     "type": "text",
     "description": "block_user"
   },
+  "branchConnectErrorShortDesc": "",
+  "@branchConnectErrorShortDesc": {
+    "type": "text",
+    "description": "branch_connection_error_short_desc"
+  },
+  "branchConnectErrorTitle": "",
+  "@branchConnectErrorTitle": {
+    "type": "text",
+    "description": "branch_connection_error_title"
+  },
   "cancel": "Cancelar",
   "@cancel": {
     "type": "text",
@@ -285,7 +305,7 @@
     "type": "text",
     "description": "A text field hint that tells the user to confirm the password"
   },
-  "confirmPinHint": "",
+  "confirmPinHint": "Confirma el pin",
   "@confirmPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to confirm the pin"
@@ -375,7 +395,7 @@
     "type": "text",
     "description": "copy_link"
   },
-  "copyMessage": "",
+  "copyMessage": "Copiar Mensaje",
   "@copyMessage": {
     "type": "text",
     "description": "copy_message"
@@ -430,7 +450,7 @@
     "type": "text",
     "description": "Prompt user to create a new password"
   },
-  "createPinHint": "",
+  "createPinHint": "Crea un pin",
   "@createPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to create a pin"
@@ -525,12 +545,12 @@
     "type": "text",
     "description": "domain_invalid_name"
   },
-  "donateButton": "",
+  "donateButton": "Dona",
   "@donateButton": {
     "type": "text",
     "description": "donate_button"
   },
-  "donateToSupport": "",
+  "donateToSupport": "Apoya el Proyecto",
   "@donateToSupport": {
     "type": "text",
     "description": "settings_support_donate"
@@ -625,7 +645,7 @@
     "type": "text",
     "description": "example_payments_explainer"
   },
-  "examplePaymentFrom": "@landlord",
+  "examplePaymentFrom": "@arrendador",
   "@examplePaymentFrom": {
     "type": "text",
     "description": "example_payment_from"
@@ -660,12 +680,12 @@
     "type": "text",
     "description": "example_payment_receivable_memo"
   },
-  "examplePaymentTo": "@best_friend",
+  "examplePaymentTo": "@mejor_amigo",
   "@examplePaymentTo": {
     "type": "text",
     "description": "example_payment_to"
   },
-  "examplePayRecipient": "@dad",
+  "examplePayRecipient": "@padre",
   "@examplePayRecipient": {
     "type": "text",
     "description": "example_pay_recipient"
@@ -675,7 +695,7 @@
     "type": "text",
     "description": "example_pay_recipient_message"
   },
-  "exampleRecRecipient": "@coworker",
+  "exampleRecRecipient": "@compañero",
   "@exampleRecRecipient": {
     "type": "text",
     "description": "example_rec_recipient"
@@ -705,7 +725,7 @@
     "type": "text",
     "description": "fallback_connected"
   },
-  "fallbackInfo": "Los servidores Nautilus parecen estar desconectados, el envío y la recepción (sin notas) deberían seguir funcionando, pero es posible que las solicitudes de pago no se reciban\n\n Vuelve más tarde o reinicia la aplicación para volver a intentarlo",
+  "fallbackInfo": "Los servidores de Nautilus parecen estar desconectados, el envío y la recepción (sin notas) deberían seguir funcionando, pero es posible que las solicitudes de pago no se reciban\n\n Vuelve más tarde o reinicia la aplicación para volver a intentarlo",
   "@fallbackInfo": {
     "type": "text",
     "description": "fallback_info"
@@ -765,15 +785,20 @@
     "type": "text",
     "description": "history_fulfilled"
   },
-  "fundingBannerHeader": "",
+  "fundingBannerHeader": "Bandera de Financiación",
   "@fundingBannerHeader": {
     "type": "text",
     "description": "funding_banner_header"
   },
-  "fundingHeader": "",
+  "fundingHeader": "Financiación",
   "@fundingHeader": {
     "type": "text",
     "description": "funding_header"
+  },
+  "getNano": "Obtén NANO",
+  "@getNano": {
+    "type": "text",
+    "description": "get_nano"
   },
   "giftAlert": "¡Tienes un regalo!",
   "@giftAlert": {
@@ -805,7 +830,7 @@
     "type": "text",
     "description": "gift_from"
   },
-  "giftInfo": "¡Carga una tarjeta regalo digital con NANO! ¡Establece una cantidad y un mensaje opcional para que el destinatario lo vea cuando lo abra!\n\nUna vez creado, recibirá un enlace que puede enviar a cualquier persona, que cuando se abra distribuirá automáticamente los fondos al destinatario después de instalar Nautilus.\n\nSi el destinatario ya es usuario de Nautilus, se le solicitará que transfiera los fondos a su cuenta al abrir el enlace.",
+  "giftInfo": "¡Carga una tarjeta regalo digital con NANO! ¡Establece una cantidad y un mensaje opcional para que el destinatario lo vea cuando lo abra!\n\nUna vez creado, recibirá un enlace que puede enviar a cualquier persona, que cuando se abra distribuirá automáticamente los fondos al destinatario después de instalar Nautilus.\n\nSi el destinatario ya es usuario de Nautilus, se le solicitará que transfiera los fondos a su cuenta al abrir el enlace.\n\nPuede establecer un monto dividido para distribuir desde la tarjeta de regalo en lugar del saldo completo.",
   "@giftInfo": {
     "type": "text",
     "description": "Description for gift card creation"
@@ -820,7 +845,7 @@
     "type": "text",
     "description": "gift_process_success"
   },
-  "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
+  "giftWarning": "¡Ya tienes un nombre de usuario registrado! Actualmente no es posible cambiar tu nombre de usuario, pero eres libre de registrar uno nuevo para una cuenta diferente.",
   "@giftWarning": {
     "type": "text",
     "description": "Description for username already registered"
@@ -840,12 +865,17 @@
     "type": "text",
     "description": "go_to_qr_code"
   },
-  "handoff": "",
+  "handoff": "manoslibres",
   "@handoff": {
     "type": "text",
     "description": "send_handoff"
   },
-  "handoffSupportedMethodNotFound": "",
+  "handoffFailed": "",
+  "@handoffFailed": {
+    "type": "text",
+    "description": "handoff_failed"
+  },
+  "handoffSupportedMethodNotFound": "¡No se encontró un método soportado para manoslibres!",
   "@handoffSupportedMethodNotFound": {
     "type": "text",
     "description": "handoff_method_not_found"
@@ -860,17 +890,17 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "hideAccountsConfirmation": "",
+  "hideAccountsConfirmation": "¿Estás segura de querer ocultar las cuentas vacías?\n\nEsto ocultará todas las cuentas con balance de exactamente 0 (excluyendo direcciones de sólo ver y tu cuenta principal), pero siempre puedes re-agregarlas luego presionando el botón \"Agregar Cuenta\"",
   "@hideAccountsConfirmation": {
     "type": "text",
     "description": "hide accounts confirmation info"
   },
-  "hideAccountsHeader": "",
+  "hideAccountsHeader": "¿Ocultar cuentas?",
   "@hideAccountsHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "hideEmptyAccounts": "",
+  "hideEmptyAccounts": "Ocultar Cuentas Vacías",
   "@hideEmptyAccounts": {
     "type": "text",
     "description": "hide_empty_accounts"
@@ -899,6 +929,16 @@
   "@importGiftEmpty": {
     "type": "text",
     "description": "import_gift_empty"
+  },
+  "importGiftIntro": "",
+  "@importGiftIntro": {
+    "type": "text",
+    "description": "import_gift_intro"
+  },
+  "importGiftv2": "",
+  "@importGiftv2": {
+    "type": "text",
+    "description": "import_gift_v2"
   },
   "importSecretPhrase": "Importar frase secreta",
   "@importSecretPhrase": {
@@ -945,6 +985,16 @@
     "type": "text",
     "description": "send_insufficient_balance"
   },
+  "introSkippedWarningContent": "",
+  "@introSkippedWarningContent": {
+    "type": "text",
+    "description": "intro_skipped_warning_content"
+  },
+  "introSkippedWarningHeader": "",
+  "@introSkippedWarningHeader": {
+    "type": "text",
+    "description": "intro_skipped_warning_header"
+  },
   "invalidAddress": "Billetera de destino incorrecta",
   "@invalidAddress": {
     "type": "text",
@@ -955,12 +1005,12 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
-  "invalidPin": "",
+  "invalidPin": "Pin Inválido",
   "@invalidPin": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
   },
-  "iosFundingMessage": "",
+  "iosFundingMessage": "Debido a pautas y restricciones de la App Store de iOS, no podemos vincularte a nuestra página de donaciones. Si deseas apoyar el proyecto, considera enviarlo a la dirección del nodo de Nautilus.",
   "@iosFundingMessage": {
     "type": "text",
     "description": "ios_funding_message"
@@ -1050,7 +1100,7 @@
     "type": "text",
     "description": "unfulfill_payment"
   },
-  "maybeLater": "Maybe Later",
+  "maybeLater": "Quizá luego",
   "@maybeLater": {
     "type": "text",
     "description": "maybe_app_button"
@@ -1060,7 +1110,7 @@
     "type": "text",
     "description": "memo_sent_again"
   },
-  "messageCopied": "",
+  "messageCopied": "Mensaje Copiado",
   "@messageCopied": {
     "type": "text",
     "description": "message_copied"
@@ -1075,7 +1125,7 @@
     "type": "text",
     "description": "send_minimum_error"
   },
-  "mnemonicInvalidWord": "% 1 no es una palabra válida",
+  "mnemonicInvalidWord": "%1 no es una palabra válida",
   "@mnemonicInvalidWord": {
     "type": "text",
     "description": "A word that is not part of bip39"
@@ -1090,7 +1140,7 @@
     "type": "text",
     "description": "err"
   },
-  "monthlyServerCosts": "",
+  "monthlyServerCosts": "Costos mensuales del Servidor",
   "@monthlyServerCosts": {
     "type": "text",
     "description": "support_monthly_costs"
@@ -1175,7 +1225,7 @@
     "type": "text",
     "description": "A button that declines and skips the mentioned process."
   },
-  "noThanks": "No Thanks",
+  "noThanks": "No Gracias",
   "@noThanks": {
     "type": "text",
     "description": "no_thanks_app_button"
@@ -1300,7 +1350,7 @@
     "type": "text",
     "description": "pick rep from list"
   },
-  "pinBlank": "",
+  "pinBlank": "Pin no puede estar vacío",
   "@pinBlank": {
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
@@ -1340,7 +1390,7 @@
     "type": "text",
     "description": "change_representative_pin"
   },
-  "pinsDontMatch": "",
+  "pinsDontMatch": "Pins no cuadran",
   "@pinsDontMatch": {
     "type": "text",
     "description": "An error indicating a pin has been confirmed incorrectly"
@@ -1350,7 +1400,7 @@
     "type": "text",
     "description": "settings_pin_title"
   },
-  "plausibleDeniabilityParagraph": "",
+  "plausibleDeniabilityParagraph": "Este pin NO es el mismo que usaste para tu billetera. Presiona el botón de info para más información.",
   "@plausibleDeniabilityParagraph": {
     "type": "text",
     "description": "A paragraph that tells warns the user this is plausible deniability pin."
@@ -1405,7 +1455,7 @@
     "type": "text",
     "description": "An unknown error occurred with the QR scanner"
   },
-  "rate": "Rate",
+  "rate": "Califica",
   "@rate": {
     "type": "text",
     "description": "rate_app_button"
@@ -1645,7 +1695,7 @@
     "type": "text",
     "description": "home_search_hint"
   },
-  "secretInfo": "En la siguiente pantalla, verá su frase secreta. Es una contraseña para acceder a sus fondos. Es crucial que la respalde y nunca la comparta con nadie",
+  "secretInfo": "En la siguiente pantalla, verá su frase secreta. Es una contraseña para acceder a sus fondos. Es crucial que la respalde y nunca la comparta con nadie.",
   "@secretInfo": {
     "type": "text",
     "description": "Description for seed"
@@ -1670,7 +1720,7 @@
     "type": "text",
     "description": "Copy secret phrase to clipboard"
   },
-  "secretWarning": "Si pierde su dispositivo o desinstala la aplicación, necesitará su frase secreta o semilla para recuperar sus fondos",
+  "secretWarning": "Si pierde su dispositivo o desinstala la aplicación, necesitará su frase secreta o semilla para recuperar sus fondos!",
   "@secretWarning": {
     "type": "text",
     "description": "Secret warning"
@@ -1700,7 +1750,7 @@
     "type": "text",
     "description": "seed_copied_btn"
   },
-  "seedDescription": "Una semilla contiene la misma información que una frase secreta, pero de forma legible por una máquina. Mientras tenga la copia de seguridad de alguna de ellas, tendrá acceso a sus fondos",
+  "seedDescription": "Una semilla contiene la misma información que una frase secreta, pero de forma legible por una máquina. Mientras tenga la copia de seguridad de alguna de ellas, tendrá acceso a sus fondos.",
   "@seedDescription": {
     "type": "text",
     "description": "Describing what a seed is"
@@ -1825,17 +1875,17 @@
     "type": "text",
     "description": "Allows user to encrypt wallet with a pin"
   },
-  "setWalletPlausiblePin": "Set Wallet Plausible Pin",
+  "setWalletPlausiblePin": "Define Pin Plausible del monedero.",
   "@setWalletPlausiblePin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
-  "shareLink": "Compartir enlace",
+  "shareLink": "Compartir Enlace",
   "@shareLink": {
     "type": "text",
     "description": "share_link"
   },
-  "shareMessage": "",
+  "shareMessage": "Compartir Mensaje",
   "@shareMessage": {
     "type": "text",
     "description": "share_message"
@@ -1850,12 +1900,12 @@
     "type": "text",
     "description": "share_extra"
   },
-  "show": "",
+  "show": "Mostrar",
   "@show": {
     "type": "text",
     "description": "funding_show"
   },
-  "showAccountQR": "",
+  "showAccountQR": "Mostrar Código QR de Cuenta",
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
@@ -1865,17 +1915,17 @@
     "type": "text",
     "description": "contacts_enabled"
   },
-  "showFunding": "",
+  "showFunding": "Mostrar Bandera de Financiación",
   "@showFunding": {
     "type": "text",
     "description": "show_funding_banner"
   },
-  "showLinkQR": "",
+  "showLinkQR": "Mostrar Enlace QR",
   "@showLinkQR": {
     "type": "text",
     "description": "show_link_qr"
   },
-  "showQR": "",
+  "showQR": "Mostrar Código QR",
   "@showQR": {
     "type": "text",
     "description": "show_qr"
@@ -1895,6 +1945,11 @@
     "type": "text",
     "description": "send_someone"
   },
+  "spendNano": "Gasta NANO",
+  "@spendNano": {
+    "type": "text",
+    "description": "spend_nano"
+  },
   "splitBy": "",
   "@splitBy": {
     "type": "text",
@@ -1905,7 +1960,7 @@
     "type": "text",
     "description": "A button to open up the live support window"
   },
-  "supportDevelopment": "",
+  "supportDevelopment": "Ayuda a apoyar el desarrollo",
   "@supportDevelopment": {
     "type": "text",
     "description": "settings_support_development"
@@ -1925,7 +1980,7 @@
     "type": "text",
     "description": "settings_default_language_string"
   },
-  "tapMessageToEdit": "",
+  "tapMessageToEdit": "Toca el mensaje para editarlo",
   "@tapMessageToEdit": {
     "type": "text",
     "description": "gift_creation_message_edit_hint"
@@ -2100,6 +2155,11 @@
     "type": "text",
     "description": "Rep uptime"
   },
+  "useNano": "Usa NANO",
+  "@useNano": {
+    "type": "text",
+    "description": "use_nano"
+  },
   "useNautilusRep": "Use Nautilus Rep",
   "@useNautilusRep": {
     "type": "text",
@@ -2175,17 +2235,22 @@
     "type": "text",
     "description": "settings_logout_alert_title"
   },
-  "watchOnlyAccount": "",
+  "watchAccountExists": "Cuenta ya agregada!",
+  "@watchAccountExists": {
+    "type": "text",
+    "description": "account_entry_exists"
+  },
+  "watchOnlyAccount": "Cuenta de sólo ver",
   "@watchOnlyAccount": {
     "type": "text",
     "description": "watch_only_account"
   },
-  "watchOnlySendDisabled": "",
+  "watchOnlySendDisabled": "Envíos están deshabilitados en direcciones de sólo ver",
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
   },
-  "welcomeText": "Bienvenido a Nautilus. Para continuar, debe crear una billetera nueva o importar una ya existente.",
+  "welcomeText": "Bienvenido a Nautilus. Para continuar, crea una billetera nueva o importa una ya existente.",
   "@welcomeText": {
     "type": "text",
     "description": "intro_welcome_title"

@@ -52,8 +52,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hãy nhập lượng tiền"),
         "asked": MessageLookupByLibrary.simpleMessage("Đã hỏi"),
         "authConfirm": MessageLookupByLibrary.simpleMessage(""),
+        "authError": MessageLookupByLibrary.simpleMessage(""),
         "authMethod":
             MessageLookupByLibrary.simpleMessage("Phương thức xác nhận"),
+        "authenticating": MessageLookupByLibrary.simpleMessage(""),
         "autoImport": MessageLookupByLibrary.simpleMessage("Tự động nhập"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Mở khoá tự động"),
@@ -92,6 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chọn một Nick Name"),
         "blockedRemoved":
             MessageLookupByLibrary.simpleMessage("% 1 đã được bỏ chặn!"),
+        "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(""),
+        "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Đổi loại tiền pháp định"),
@@ -115,7 +119,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "connectingHeader":
             MessageLookupByLibrary.simpleMessage("Đang kết nối"),
         "connectionWarning": MessageLookupByLibrary.simpleMessage(""),
-        "connectionWarningBody": MessageLookupByLibrary.simpleMessage(""),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("Đã thêm %1 vào danh bạ."),
         "contactExists":
@@ -262,6 +265,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("hoàn thành"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(""),
         "fundingHeader": MessageLookupByLibrary.simpleMessage(""),
+        "getNano": MessageLookupByLibrary.simpleMessage(""),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("Anh có một món quà!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Quà Tặng Rỗng"),
@@ -280,6 +284,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goToQRCode": MessageLookupByLibrary.simpleMessage("Chuyển đến QR"),
         "gotItButton": MessageLookupByLibrary.simpleMessage("Đã hiểu!"),
         "handoff": MessageLookupByLibrary.simpleMessage(""),
+        "handoffFailed": MessageLookupByLibrary.simpleMessage(""),
         "handoffSupportedMethodNotFound":
             MessageLookupByLibrary.simpleMessage(""),
         "hide": MessageLookupByLibrary.simpleMessage("Ẩn"),
@@ -298,6 +303,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Liên kết bạn nhấp vào có chứa một số nano, bạn có muốn nhập nó vào ví này, hoặc hoàn lại cho bất kỳ ai đã gửi nó?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
             "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+        "importGiftIntro": MessageLookupByLibrary.simpleMessage(""),
+        "importGiftv2": MessageLookupByLibrary.simpleMessage(""),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Nhập cụm từ bí mật"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -311,6 +318,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "instantly": MessageLookupByLibrary.simpleMessage("Ngay tức thì"),
         "insufficientBalance":
             MessageLookupByLibrary.simpleMessage("Số dư không đủ"),
+        "introSkippedWarningContent": MessageLookupByLibrary.simpleMessage(""),
+        "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(""),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Địa chỉ đã nhập không hợp lệ"),
         "invalidPassword":
@@ -438,6 +447,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Tuỳ chọn"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Chính sách bảo mật"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("Mua Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "Mã QR không chứa điểm đến hợp lệ"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -595,6 +605,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage(""),
         "simplex": MessageLookupByLibrary.simpleMessage("Đơn giản"),
         "someone": MessageLookupByLibrary.simpleMessage(""),
+        "spendNano": MessageLookupByLibrary.simpleMessage(""),
         "splitBy": MessageLookupByLibrary.simpleMessage(""),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(""),
@@ -657,6 +668,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("chưa đọc"),
         "uptime": MessageLookupByLibrary.simpleMessage(
             "Thời gian hoạt động (uptime)"),
+        "useNano": MessageLookupByLibrary.simpleMessage(""),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userNotFound":
@@ -682,6 +694,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewTX": MessageLookupByLibrary.simpleMessage(""),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Lượng bỏ phiếu"),
         "warning": MessageLookupByLibrary.simpleMessage("CẢNH BÁO!"),
+        "watchAccountExists": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlyAccount": MessageLookupByLibrary.simpleMessage(""),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(""),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
