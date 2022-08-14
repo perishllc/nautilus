@@ -1963,6 +1963,16 @@ class AppLocalization {
     );
   }
 
+  /// `We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.`
+  String get askSkipSetup {
+    return Intl.message(
+      'We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.',
+      name: 'askSkipSetup',
+      desc: 'prompt_skip_setup',
+      args: [],
+    );
+  }
+
   /// `Import Secret Phrase`
   String get importSecretPhrase {
     return Intl.message(

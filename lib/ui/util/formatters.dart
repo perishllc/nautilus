@@ -167,7 +167,7 @@ class CurrencyFormatter2 extends TextInputFormatter {
       return newValue;
     }
 
-    // deny if trying to add a 2nd GroupSeparator:
+    // deny if trying to add a 2nd decimalSeparator:
     if (decimalSeparator.allMatches(workingText).length > 1) {
       return same;
     }

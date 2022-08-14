@@ -13,6 +13,7 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
@@ -39,11 +40,22 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
           openedDialog = true;
           timer?.cancel();
 
-          setState(() {
-            StateContainer.of(context).introSkiped = true;
-          });
-          
-          await skipIntro();
+          AppDialogs.showConfirmDialog(
+              context,
+              AppLocalization.of(context).giftAlert,
+              AppLocalization.of(context).askSkipSetup,
+              AppLocalization.of(context).ok,
+              () async {
+                setState(() {
+                  StateContainer.of(context).introSkiped = true;
+                });
+
+                await skipIntro();
+              },
+              cancelText: AppLocalization.of(context).noThanks,
+              cancelAction: () {
+                // do nothing:
+              });
         }
       });
     });
@@ -123,7 +135,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // New Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet,
+                          Dimens.BUTTON_TOP_DIMENS,
                           instanceKey: const Key("new_wallet_button"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_backup_safety');
                       }),
@@ -132,8 +145,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // Import Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).importWallet, Dimens.BUTTON_BOTTOM_DIMENS,
-                          onPressed: () {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                          AppLocalization.of(context).importWallet, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pushNamed('/intro_import');
                       }),
                     ],
@@ -196,7 +209,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).importGiftIntro}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${AppLocalization.of(context).importGiftIntro}\n\n",
+                    style: AppStyles.textStyleParagraph(context)),
                 // RichText(
                 //   textAlign: TextAlign.start,
                 //   text: TextSpan(

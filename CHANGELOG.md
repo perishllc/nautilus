@@ -1,3 +1,11 @@
+## v0.5.7 - [2022-08-XX]
+#### Added
+(FINISH)- Change paste button to a clear button when address is full on send / receive screen
+(TODO)- Stronger reminder to enable notifications since payment requests and memos don't work unless enabled
+#### Changed
+- Replaced star on send / receive page with scan qr code button
+- Prompt to skip setup
+#### Fixed
 ## v0.5.6 - [2022-08-12]
 #### Changed
 - Updated translations

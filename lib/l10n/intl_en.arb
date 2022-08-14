@@ -955,6 +955,11 @@
     "type": "text",
     "description": "import_gift_v2"
   },
+  "askSkipSetup": "We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "importSecretPhrase": "Import Secret Phrase",
   "@importSecretPhrase": {
     "type": "text",
