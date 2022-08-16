@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Notamos que hizo clic en un enlace que contiene algo de nano, ¿le gustaría omitir el proceso de configuración? Siempre puedes cambiar las cosas más tarde.\n\n Sin embargo, si tiene una semilla existente que desea importar, debe seleccionar no.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "autenticando",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Permitir notificaciones",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Error al establecer una contraseña de billetera",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Intercambio NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Salir",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Notificaciones deshabilitadas",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Las solicitudes de pago, las notas y los mensajes requieren que las notificaciones estén habilitadas para funcionar correctamente, ya que utilizan el servicio de notificaciones de FCM para garantizar la entrega de mensajes.\n\nPuede habilitar las notificaciones con el botón a continuación o descartar esta tarjeta si no desea utilizar estas funciones.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Las solicitudes de pago, las notas y los mensajes no funcionarán correctamente.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "no enviado",
   "@notSent": {

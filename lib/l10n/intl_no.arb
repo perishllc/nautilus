@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Vi la merke til at du klikket på en lenke som inneholder noe nano, vil du hoppe over konfigurasjonsprosessen? Du kan alltid endre ting senere.\n\n Hvis du imidlertid har et eksisterende frø som du vil importere, bør du velge nei.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Autentiserer",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Aktiver varsler",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Kunne ikke velge lommebokens passord",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Bytt NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Avslutt",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Varsler deaktivert",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Alle betalingsforespørsler, notater og meldinger krever at varslinger er aktivert for å fungere som de skal, ettersom de bruker FCM-varslingstjenesten for å sikre meldingslevering.\n\nDu kan aktivere varsler med knappen nedenfor eller avvise dette kortet hvis du ikke bryr deg om å bruke disse funksjonene.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Betalingsforespørsler, notater og meldinger vil ikke fungere ordentlig.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "ikke sendt",
   "@notSent": {

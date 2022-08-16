@@ -12,7 +12,6 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
-import 'package:multicast_dns/multicast_dns.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/model/state_block.dart';
 import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
@@ -462,27 +461,36 @@ class AccountService {
   Future<String?> checkOpencapDomain(String domain) async {
     // get the SRV record:
     final String tld = domain.split(r"$").last;
-
-    final MDnsClient client = MDnsClient();
-    // Start the client with default options.
-    await client.start();
-
     String resolvedDomain = "";
 
-    // Look for SRV records for the given domain.
-    await for (final SrvResourceRecord srv in client.lookup<SrvResourceRecord>(ResourceRecordQuery.service(tld))) {
-      resolvedDomain = "${srv.target}:${srv.port}";
+    // GET the SRV record using Cloudflare's DNS over HTTPS API:
+
+    final http.Response dnsSRVResp =
+        await http.get(Uri.parse("https://cloudflare-dns.com/dns-query?name=$tld&type=SRV"), headers: {"Accept": "application/dns-json"});
+    if (dnsSRVResp.statusCode != 200) {
+      return null;
     }
-    client.stop();
+
+    final Map decodedSRVResp = json.decode(dnsSRVResp.body) as Map<dynamic, dynamic>;
+    if (decodedSRVResp.containsKey("Answer")) {
+      final List<dynamic> decodedAnswer = decodedSRVResp["Answer"] as List<dynamic>;
+      for (final dynamic ans in decodedAnswer) {
+        if (ans["data"] != null) {
+          final String srvRecord = ans["data"] as String;
+          final List<String> splitStrs = srvRecord.split(" ");
+          resolvedDomain = splitStrs.last;
+        }
+      }
+    }
 
     if (resolvedDomain.isEmpty) {
       return null;
     }
 
-    // GET /v1/addresses?alias=alice$domain.tld&address_type=100
+    // GET /v1/addresses?alias=alice$domain.tld&address_type=300
 
     final http.Response response =
-        await http.get(Uri.parse("$resolvedDomain/v1/addresses?alias=$domain&address_type=300"), headers: {"Accept": "application/json"});
+        await http.get(Uri.parse("https://$resolvedDomain/v1/addresses?alias=$domain&address_type=300"), headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {
       return null;
     }

@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "A megosztott összeg nem lehet nagyobb, mint az ajándékegyenleg"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Adjon meg egy összeget"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Észrevettük, hogy egy nanoelemet tartalmazó linkre kattintott. Szeretné kihagyni a beállítási folyamatot? Később mindig változtathatsz a dolgokon.\n\n Ha azonban van egy meglévő vetőmagja, amelyet importálni szeretne, válassza a nem lehetőséget."),
         "asked": MessageLookupByLibrary.simpleMessage("Kérdezte"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Hitelesítés"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -213,6 +215,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Támogassa a Projektet"),
         "edit": MessageLookupByLibrary.simpleMessage("szerkesztése"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Értesítések engedélyezése"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
         "enterAddress":
@@ -263,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gáz Pénz"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Csere NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "failed": MessageLookupByLibrary.simpleMessage("nem sikerült"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -436,6 +441,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Annak érdekében, hogy ez a funkció megfelelően működjön, az értesítéseket engedélyezni kell"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Kaptál %1 NANO-t"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Értesítések letiltva"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "A fizetési kérelmek, az emlékeztetők és az üzenetek megfelelő működéséhez engedélyezni kell az értesítéseket, mivel az FCM értesítési szolgáltatást használják az üzenetek kézbesítésének biztosítására.\n\nAz alábbi gombbal engedélyezheti az értesítéseket, vagy elvetheti ezt a kártyát, ha nem szeretné használni ezeket a funkciókat."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "A fizetési kérelmek, emlékeztetők és üzenetek nem működnek megfelelően."),
         "notifications": MessageLookupByLibrary.simpleMessage("Értesítések"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Ki"),

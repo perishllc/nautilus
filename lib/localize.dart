@@ -30,57 +30,59 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalization> {
   }
 }
 
-
 class NonTranslatable {
-
   /// -- NON-TRANSLATABLE ITEMS
   static String getBlockExplorerUrl(String? hash, AvailableBlockExplorer explorer) {
     if (explorer.explorer == AvailableBlockExplorerEnum.NANOCOMMUNITY) {
-      return 'https://nano.community/$hash';
+      return "https://nano.community/$hash";
     } else if (explorer.explorer == AvailableBlockExplorerEnum.NANOLOOKER) {
-      return 'https://nanolooker.com/block/$hash';
+      return "https://nanolooker.com/block/$hash";
     } else if (explorer.explorer == AvailableBlockExplorerEnum.NANOCAFE) {
-      return 'https://nanocafe.cc/$hash';
+      return "https://nanocafe.cc/$hash";
     }
-    return 'https://nanocrawler.cc/explorer/block/$hash';
+    return "https://nanocrawler.cc/explorer/block/$hash";
   }
 
   static String getAccountExplorerUrl(String? account, AvailableBlockExplorer explorer) {
     if (explorer.explorer == AvailableBlockExplorerEnum.NANOCOMMUNITY) {
-      return 'https://nano.community/$account';
+      return "https://nano.community/$account";
     } else if (explorer.explorer == AvailableBlockExplorerEnum.NANOLOOKER) {
-      return 'https://nanolooker.com/account/$account';
+      return "https://nanolooker.com/account/$account";
     } else if (explorer.explorer == AvailableBlockExplorerEnum.NANOCAFE) {
-      return 'https://nanocafe.cc/$account';
+      return "https://nanocafe.cc/$account";
     }
-    return 'https://nanocrawler.cc/explorer/account/$account';
+    return "https://nanocrawler.cc/explorer/account/$account";
   }
 
   static String get discordUrl {
-    return 'https://chat.perish.co';
+    return "https://chat.perish.co";
   }
 
   static String get discord {
-    return 'Discord';
+    return "Discord";
   }
 
   static String get nautilusNodeUrl {
-    return 'https://node.perish.co';
+    return "https://node.perish.co";
   }
 
   static String get eulaUrl {
-    return 'https://perish.co/nautilus/eula.html';
+    return "https://perish.co/nautilus/eula.html";
   }
 
   static String get privacyUrl {
-    return 'https://perish.co/nautilus/privacy.html';
+    return "https://perish.co/nautilus/privacy.html";
   }
 
   static String get nanocafe {
-    return 'nanocafe.cc';
+    return "nanocafe.cc";
   }
 
   static String get redeemforme {
-    return 'redeemfor.me';
+    return "redeemfor.me";
+  }
+
+  static String get nanswap {
+    return "nanswap.com";
   }
 }

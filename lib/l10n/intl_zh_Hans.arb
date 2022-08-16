@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "我们注意到您单击了包含一些 nano 的链接，您想跳过设置过程吗？你以后总是可以改变的。\n\n 但是，如果您有要导入的现有种子，则应选择否。",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "认证",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "启用通知",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "钱包密码设置失败",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "交换纳米",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "退出",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "通知已禁用",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "付款请求、备忘录和消息都需要启用通知才能正常工作，因为它们使用 FCM 通知服务来确保消息传递。\n\n如果您不想使用这些功能，可以使用下面的按钮启用通知或关闭此卡。",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "付款请求、备忘录和消息将无法正常运行。",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "未发送",
   "@notSent": {

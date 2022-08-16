@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "हमने देखा है कि आपने एक लिंक पर क्लिक किया है जिसमें कुछ नैनो है, क्या आप सेटअप प्रक्रिया को छोड़ना चाहेंगे? आप बाद में कभी भी चीजें बदल सकते हैं।\n\n यदि आपके पास एक मौजूदा बीज है जिसे आप आयात करना चाहते हैं, तो आपको नहीं का चयन करना चाहिए।",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "प्रमाणित कर रहा है",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "सूचनाएं सक्षम करें",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "वॉलेट पासवर्ड सेट करने में विफल",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "एक्सचेंज नैनो",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "बाहर निकलें",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "सूचनाएं अक्षम",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "भुगतान अनुरोध, मेमो और संदेश सभी को ठीक से काम करने के लिए सूचनाओं को सक्षम करने की आवश्यकता होती है क्योंकि वे संदेश वितरण सुनिश्चित करने के लिए FCM सूचना सेवा का उपयोग करते हैं।\n\nयदि आप इन सुविधाओं का उपयोग करने की परवाह नहीं करते हैं तो आप नीचे दिए गए बटन से सूचनाएं सक्षम कर सकते हैं या इस कार्ड को खारिज कर सकते हैं।",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "भुगतान अनुरोध, मेमो और संदेश ठीक से काम नहीं करेंगे।",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "नहीं भेजा गया",
   "@notSent": {

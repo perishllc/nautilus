@@ -4,10 +4,13 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 
 /// TextField button
 class TextFieldButton extends StatelessWidget {
-  final IconData icon;
-  final Function? onPressed;
 
-  TextFieldButton({required this.icon, this.onPressed});
+  const TextFieldButton({this.icon, this.onPressed, this.widget, this.padding});
+
+  final IconData? icon;
+  final Function? onPressed;
+  final Widget? widget;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -18,51 +21,22 @@ class TextFieldButton extends StatelessWidget {
           style: TextButton.styleFrom(
             primary: StateContainer.of(context).curTheme.text30,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(200.0)),
-            padding: const EdgeInsets.all(14.0),
+            padding: padding ?? const EdgeInsets.all(14.0),
             // highlightColor: StateContainer.of(context).curTheme.text15,
             // splashColor: StateContainer.of(context).curTheme.primary30,
           ),
           onPressed: () {
             onPressed != null ? onPressed!() : null;
           },
-          child: Icon(icon, size: 20, color: StateContainer.of(context).curTheme.primary),
+          child: widget ?? Icon(icon, size: 20, color: StateContainer.of(context).curTheme.primary),
         ));
   }
 }
 
 /// A widget for our custom textfields
 class AppTextField extends StatefulWidget {
-  final TextAlign textAlign;
-  final FocusNode? focusNode;
-  final TextEditingController? controller;
-  final Color? cursorColor;
-  final Brightness keyboardAppearance;
-  final List<TextInputFormatter>? inputFormatters;
-  final TextInputAction? textInputAction;
-  final int? maxLines;
-  final bool autocorrect;
-  final String? hintText;
-  final TextFieldButton? prefixButton;
-  final TextFieldButton? suffixButton;
-  final bool? fadePrefixOnCondition;
-  final bool? prefixShowFirstCondition;
-  final bool? fadeSuffixOnCondition;
-  final bool? suffixShowFirstCondition;
-  final EdgeInsetsGeometry padding;
-  final Widget? overrideTextFieldWidget;
-  final int buttonFadeDurationMs;
-  final TextInputType? keyboardType;
-  final Function? onSubmitted;
-  final Function? onChanged;
-  final double topMargin;
-  final double bottomMargin;
-  final double? leftMargin;
-  final double? rightMargin;
-  final TextStyle? style;
-  final bool obscureText;
-  final bool autofocus;
 
-  AppTextField(
+  const AppTextField(
       {this.focusNode,
       this.controller,
       this.cursorColor,
@@ -92,6 +66,35 @@ class AppTextField extends StatefulWidget {
       this.topMargin = 0,
       this.bottomMargin = 0,
       this.autofocus = false});
+  final TextAlign textAlign;
+  final FocusNode? focusNode;
+  final TextEditingController? controller;
+  final Color? cursorColor;
+  final Brightness keyboardAppearance;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputAction? textInputAction;
+  final int? maxLines;
+  final bool autocorrect;
+  final String? hintText;
+  final TextFieldButton? prefixButton;
+  final TextFieldButton? suffixButton;
+  final bool? fadePrefixOnCondition;
+  final bool? prefixShowFirstCondition;
+  final bool? fadeSuffixOnCondition;
+  final bool? suffixShowFirstCondition;
+  final EdgeInsetsGeometry padding;
+  final Widget? overrideTextFieldWidget;
+  final int buttonFadeDurationMs;
+  final TextInputType? keyboardType;
+  final Function? onSubmitted;
+  final Function? onChanged;
+  final double topMargin;
+  final double bottomMargin;
+  final double? leftMargin;
+  final double? rightMargin;
+  final TextStyle? style;
+  final bool obscureText;
+  final bool autofocus;
 
   _AppTextFieldState createState() => _AppTextFieldState();
 }

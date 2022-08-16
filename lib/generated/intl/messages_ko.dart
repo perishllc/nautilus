@@ -50,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("분할 금액은 선물 잔액보다 클 수 없습니다."),
         "amountMissing": MessageLookupByLibrary.simpleMessage("금액을 입력하세요"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "나노가 포함된 링크를 클릭한 것을 확인했습니다. 설정 프로세스를 건너뛰시겠습니까? 나중에 언제든지 변경할 수 있습니다.\n\n 그러나 가져오려는 기존 시드가 있는 경우 아니오를 선택해야 합니다."),
         "asked": MessageLookupByLibrary.simpleMessage("질문"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("인증 중"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -183,6 +185,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateButton": MessageLookupByLibrary.simpleMessage("기부"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("프로젝트 지원"),
         "edit": MessageLookupByLibrary.simpleMessage("편집"),
+        "enableNotifications": MessageLookupByLibrary.simpleMessage("알림 활성화"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("주소 입력"),
@@ -226,6 +229,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("가스 머니"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("거래소 나노"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "failed": MessageLookupByLibrary.simpleMessage("실패했습니다"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -382,6 +386,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "이 기능이 제대로 작동하려면 알림을 활성화해야 합니다."),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("% s개의 NANO을 받았습니다"),
+        "notificationWarning": MessageLookupByLibrary.simpleMessage("알림 비활성화됨"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "지불 요청, 메모 및 메시지는 모두 FCM 알림 서비스를 사용하여 메시지 전달을 보장하므로 제대로 작동하려면 알림을 활성화해야 합니다.\n\n아래 버튼으로 알림을 활성화하거나 이러한 기능을 사용하지 않으려면 이 카드를 닫을 수 있습니다."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "결제 요청, 메모, 메시지가 제대로 작동하지 않습니다."),
         "notifications": MessageLookupByLibrary.simpleMessage("알림"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("냐니콘"),
         "off": MessageLookupByLibrary.simpleMessage("끄기"),

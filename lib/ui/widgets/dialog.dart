@@ -18,11 +18,12 @@ import 'package:url_launcher/url_launcher.dart';
 class AppDialogs {
   static void showConfirmDialog(
       BuildContext context, String title, String content, String buttonText, Function onPressed,
-      {String? cancelText, Function? cancelAction}) {
+      {String? cancelText, Function? cancelAction, bool barrierDismissible = true}) {
     cancelText ??= AppLocalization.of(context).cancel.toUpperCase();
 
     showAppDialog(
       context: context,
+      barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return AppAlertDialog(
           title: Text(

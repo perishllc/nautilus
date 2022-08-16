@@ -59,6 +59,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "বিভক্ত পরিমাণ উপহার ব্যালেন্সের চেয়ে বেশি হতে পারে না"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("অনুগ্রহ করে পরিমাণ লিখুন"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "আমরা লক্ষ্য করেছি যে আপনি একটি লিঙ্কে ক্লিক করেছেন যাতে কিছু ন্যানো রয়েছে, আপনি কি সেটআপ প্রক্রিয়াটি এড়িয়ে যেতে চান? আপনি সবসময় পরে জিনিস পরিবর্তন করতে পারেন.\n\n যদি আপনার কাছে একটি বিদ্যমান বীজ থাকে যা আপনি আমদানি করতে চান তবে আপনাকে না নির্বাচন করা উচিত।"),
         "asked": MessageLookupByLibrary.simpleMessage("জিজ্ঞাসিত"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("প্রমাণীকরণ"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -216,6 +218,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("প্রকল্প সমর্থন"),
         "edit": MessageLookupByLibrary.simpleMessage("সম্পাদনা"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("বিজ্ঞপ্তি সক্রিয় করুন"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "ওয়ালেটের পাসওয়ার্ড সেট করতে ব্যর্থ"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("ঠিকানা লিখুন"),
@@ -264,6 +268,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("গ্যাস টাকা"),
+        "exchangeNano":
+            MessageLookupByLibrary.simpleMessage("ন্যানো বিনিময় করুন"),
         "exit": MessageLookupByLibrary.simpleMessage("বাহির"),
         "failed": MessageLookupByLibrary.simpleMessage("ব্যর্থ হওয়া"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -439,6 +445,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "এই বৈশিষ্ট্যটি সঠিকভাবে কাজ করার জন্য, বিজ্ঞপ্তিগুলি সক্ষম করা আবশ্যক"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("%1 NANO পেয়েছি"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("বিজ্ঞপ্তি নিষ্ক্রিয়"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "অর্থপ্রদানের অনুরোধ, মেমো এবং বার্তাগুলিকে সঠিকভাবে কাজ করার জন্য বিজ্ঞপ্তিগুলি সক্রিয় করা প্রয়োজন কারণ তারা বার্তা সরবরাহ নিশ্চিত করতে FCM বিজ্ঞপ্তি পরিষেবা ব্যবহার করে৷\n\nআপনি নীচের বোতামটি দিয়ে বিজ্ঞপ্তিগুলি সক্ষম করতে পারেন বা আপনি যদি এই বৈশিষ্ট্যগুলি ব্যবহার করতে আগ্রহী না হন তবে এই কার্ডটি খারিজ করতে পারেন৷"),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "অর্থপ্রদানের অনুরোধ, মেমো এবং বার্তাগুলি সঠিকভাবে কাজ করবে না।"),
         "notifications": MessageLookupByLibrary.simpleMessage("বিজ্ঞপ্তিপত্র"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("নায়নিকন"),
         "off": MessageLookupByLibrary.simpleMessage("বন্ধ"),

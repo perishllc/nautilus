@@ -99,7 +99,7 @@ class ReactiveRefreshIndicator extends StatefulWidget {
     this.notificationPredicate = defaultScrollNotificationPredicate,
     this.semanticsLabel,
     this.semanticsValue,
-  })  : super(key: key);
+  }) : super(key: key);
 
   /// The widget below this widget in the tree.
   ///

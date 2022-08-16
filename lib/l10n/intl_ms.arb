@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Kami mendapati anda mengklik pada pautan yang mengandungi beberapa nano, adakah anda ingin melangkau proses persediaan? Anda sentiasa boleh mengubah perkara kemudian.\n\n Jika anda mempunyai benih sedia ada yang anda ingin import walau bagaimanapun, anda harus memilih no.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Mengesahkan",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Dayakan Pemberitahuan",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Gagal menetapkan kata laluan dompet",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Tukar NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Keluar",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Pemberitahuan Dilumpuhkan",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Permintaan Pembayaran, Memo dan Mesej semuanya memerlukan pemberitahuan untuk didayakan agar berfungsi dengan betul kerana mereka menggunakan perkhidmatan pemberitahuan FCM untuk memastikan penghantaran mesej.\n\nAnda boleh mendayakan pemberitahuan dengan butang di bawah atau mengetepikan kad ini jika anda tidak mengambil berat untuk menggunakan ciri ini.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Permintaan Pembayaran, Memo dan Mesej tidak akan berfungsi dengan baik.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "tidak dihantar",
   "@notSent": {

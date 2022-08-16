@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "L\'import dividit no pot ser superior al saldo del regal"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Prosím zadejte částku"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Hem observat que heu fet clic en un enllaç que conté una mica de nano, voleu ometre el procés de configuració? Sempre pots canviar les coses després.\n\n Tanmateix, si teniu una llavor existent que voleu importar, haureu de seleccionar no."),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Autenticació"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -210,6 +212,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Donar suport al projecte"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Activa les notificacions"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Nastavení hesla k peněžence se nezdařilo"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Zadejte adresu"),
@@ -257,6 +261,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Money"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Intercanvi NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Odejít"),
         "failed": MessageLookupByLibrary.simpleMessage("failed"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -428,6 +433,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "In order for this feature to work correctly, notifications must be enabled"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Přijato %1 NANO"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Notificacions desactivades"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Les sol·licituds de pagament, les notes i els missatges requereixen que les notificacions estiguin habilitades per funcionar correctament, ja que utilitzen el servei de notificacions de FCM per garantir el lliurament dels missatges.\n\nPodeu activar les notificacions amb el botó següent o ignorar aquesta targeta si no us interessa utilitzar aquestes funcions."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Les sol·licituds de pagament, les notes i els missatges no funcionaran correctament."),
         "notifications": MessageLookupByLibrary.simpleMessage("Upozornění"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Off"),

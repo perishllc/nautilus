@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Hem observat que heu fet clic en un enllaç que conté una mica de nano, voleu ometre el procés de configuració? Sempre pots canviar les coses després.\n\n Tanmateix, si teniu una llavor existent que voleu importar, haureu de seleccionar no.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Autenticació",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Activa les notificacions",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Nastavení hesla k peněžence se nezdařilo",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Intercanvi NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Odejít",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Notificacions desactivades",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Les sol·licituds de pagament, les notes i els missatges requereixen que les notificacions estiguin habilitades per funcionar correctament, ja que utilitzen el servei de notificacions de FCM per garantir el lliurament dels missatges.\n\nPodeu activar les notificacions amb el botó següent o ignorar aquesta targeta si no us interessa utilitzar aquestes funcions.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Les sol·licituds de pagament, les notes i els missatges no funcionaran correctament.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "not sent",
   "@notSent": {

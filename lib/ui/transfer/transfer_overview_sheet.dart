@@ -230,9 +230,7 @@ class AppTransferOverviewSheet {
           privKeyBalanceMap[account]!.receivable = balItem.receivable;
         }
       });
-      accountsToRemove.forEach((String account) {
-        privKeyBalanceMap.remove(account);
-      });
+      accountsToRemove.forEach(privKeyBalanceMap.remove);
       if (privKeyBalanceMap.isEmpty) {
         UIUtil.showSnackbar(AppLocalization.of(context).transferNoFunds, context);
         return;
@@ -271,9 +269,7 @@ class AppTransferOverviewSheet {
           totalBalance += balance + receivable;
         }
       });
-      accountsToRemove.forEach((String account) {
-        privKeyBalanceMap.remove(account);
-      });
+      accountsToRemove.forEach(privKeyBalanceMap.remove);
       if (privKeyBalanceMap.isEmpty) {
         // return null;
         return BigInt.zero;
@@ -357,15 +353,13 @@ class AppTransferOverviewSheet {
           privKeyBalanceMap[account]!.receivable = balItem.receivable;
         }
       });
-      accountsToRemove.forEach((String account) {
-        privKeyBalanceMap.remove(account);
-      });
+      accountsToRemove.forEach(privKeyBalanceMap.remove);
       if (privKeyBalanceMap.isEmpty) {
         UIUtil.showSnackbar(AppLocalization.of(context).transferNoFunds, context);
         return;
       }
 
-      AppTransferConfirmSheet().createState().refundWallets(privKeyBalanceMap, refundAddress);
+      const AppTransferConfirmSheet().createState().refundWallets(privKeyBalanceMap, refundAddress);
       //.autoProcessWallets(privKeyBalanceMap);
       // Go to confirmation screen
       // EventTaxiImpl.singleton().fire(TransferConfirmEvent(balMap: privKeyBalanceMap));

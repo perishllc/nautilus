@@ -72,7 +72,8 @@ Future<void> appMain() async {
   if (kReleaseMode) {
     Logger.level = Level.warning;
   } else {
-    Logger.level = Level.debug;
+    // Logger.level = Level.debug;
+    Logger.level = Level.verbose;
   }
   // Setup firebase
   await Firebase.initializeApp(

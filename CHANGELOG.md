@@ -1,11 +1,19 @@
-## v0.5.7 - [2022-08-XX]
+## v0.5.7 - [2022-08-16]
 #### Added
-(FINISH)- Change paste button to a clear button when address is full on send / receive screen
-(TODO)- Stronger reminder to enable notifications since payment requests and memos don't work unless enabled
+- New "Exchange NANO" section
+- Added link to nanswap.com
+- Opencap username / domain support, for example: "xno$kga.earth"
+- Change paste button to a clear button when address is full on the send / receive / etc. screen
+- Warning card to inform users payment requests and memos/messages don't work unless notifications are enabled
 #### Changed
-- Replaced star on send / receive page with scan qr code button
-- Prompt to skip setup
+- Replaced star on send / receive / etc. page with scan qr code button
+- Prompt to skip setup / intro
+- If the intro is skipped, don't show the changelog until the next launch
+- Allow user to press , instead of . in certain cases to allow entering of decimal separators
+- Allow multiple warning cards to be displayed at once
 #### Fixed
+- Infinite loading refresh indicator on new accounts
+- Bug with refresh indicator not always being trigger-able
 ## v0.5.6 - [2022-08-12]
 #### Changed
 - Updated translations

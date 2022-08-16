@@ -52,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "הסכום המפוצל לא יכול להיות גדול מיתרת המתנה"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("הזן סכום"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "שמנו לב שלחצת על קישור שמכיל קצת ננו, האם תרצה לדלג על תהליך ההגדרה? תמיד תוכל לשנות דברים מאוחר יותר.\n\n אם יש לך זרע קיים שברצונך לייבא עם זאת, עליך לבחור לא."),
         "asked": MessageLookupByLibrary.simpleMessage("נשאל"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("מאמת"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -199,6 +201,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateButton": MessageLookupByLibrary.simpleMessage("לִתְרוֹם"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("תמכו בפרויקט"),
         "edit": MessageLookupByLibrary.simpleMessage("ערוך"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("הפעל התראות"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("הכנס כתובת"),
@@ -244,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("כסף גז"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("החלף NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "failed": MessageLookupByLibrary.simpleMessage("נכשל"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -407,6 +412,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "על מנת שתכונה זו תפעל כראוי, יש להפעיל התראות"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("%1 נאנו התקבלו"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("הודעות מושבתות"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "כל בקשות תשלום, תזכירים והודעות דורשות הפעלת התראות על מנת שיפעלו כראוי, שכן הם משתמשים בשירות ההתראות של FCM כדי להבטיח מסירת הודעות.\n\nאתה יכול להפעיל התראות באמצעות הלחצן למטה או לבטל את הכרטיס הזה אם לא אכפת לך להשתמש בתכונות האלה."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "בקשות תשלום, תזכירים והודעות לא יפעלו כראוי."),
         "notifications": MessageLookupByLibrary.simpleMessage("התראות"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("ניאניקון"),
         "off": MessageLookupByLibrary.simpleMessage("כבוי"),

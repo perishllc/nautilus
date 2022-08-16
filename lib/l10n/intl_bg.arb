@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Забелязахме, че сте кликнали върху връзка, която съдържа някои nano, искате ли да пропуснете процеса на настройка? Винаги можете да промените нещата по-късно.\n\n Ако обаче имате съществуващо семе, което искате да импортирате, трябва да изберете не.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Удостоверява се",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Активиране на известията",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Задаването на парола е невалидно",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Разменете NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Изход",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Известията са деактивирани",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Всички искания за плащане, бележки и съобщения изискват известия да бъдат активирани, за да работят правилно, тъй като използват услугата за известия FCM, за да осигурят доставка на съобщения.\n\nМожете да активирате известията с бутона по-долу или да отхвърлите тази карта, ако не желаете да използвате тези функции.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Заявки за плащане, бележки и съобщения няма да функционират правилно.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "не е изпратено",
   "@notSent": {

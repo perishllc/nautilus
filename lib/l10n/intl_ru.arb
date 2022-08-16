@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Мы заметили, что вы нажали на ссылку, содержащую нано. Хотите пропустить процесс установки? Вы всегда можете изменить ситуацию позже.\n\n Однако, если у вас есть семя, которое вы хотите импортировать, вам следует выбрать нет.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Аутентификация",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Включить уведомления",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Не удалось установить пароль",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Обмен НАНО",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Выход",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Уведомления отключены",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Платежные запросы, заметки и сообщения требуют включения уведомлений для правильной работы, поскольку они используют службу уведомлений FCM для обеспечения доставки сообщений.\n\nВы можете включить уведомления с помощью кнопки ниже или закрыть эту карточку, если не хотите использовать эти функции.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Платежные запросы, заметки и сообщения не будут работать должным образом.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "не отправлено",
   "@notSent": {

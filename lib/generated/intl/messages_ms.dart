@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Jumlah Pisahan tidak boleh lebih besar daripada baki hadiah"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Sila masukkan jumlah"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Kami mendapati anda mengklik pada pautan yang mengandungi beberapa nano, adakah anda ingin melangkau proses persediaan? Anda sentiasa boleh mengubah perkara kemudian.\n\n Jika anda mempunyai benih sedia ada yang anda ingin import walau bagaimanapun, anda harus memilih no."),
         "asked": MessageLookupByLibrary.simpleMessage("Ditanya"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Mengesahkan"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -209,6 +211,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Sokong Projek"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Dayakan Pemberitahuan"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Gagal menetapkan kata laluan dompet"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Masukan Alamat"),
@@ -259,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Wang Gas"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Tukar NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Keluar"),
         "failed": MessageLookupByLibrary.simpleMessage("kecundang"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -430,6 +435,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Agar ciri ini berfungsi dengan betul, pemberitahuan mesti diaktifkan"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("%1 NANO diterimakan"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Pemberitahuan Dilumpuhkan"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Permintaan Pembayaran, Memo dan Mesej semuanya memerlukan pemberitahuan untuk didayakan agar berfungsi dengan betul kerana mereka menggunakan perkhidmatan pemberitahuan FCM untuk memastikan penghantaran mesej.\n\nAnda boleh mendayakan pemberitahuan dengan butang di bawah atau mengetepikan kad ini jika anda tidak mengambil berat untuk menggunakan ciri ini."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Permintaan Pembayaran, Memo dan Mesej tidak akan berfungsi dengan baik."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifikasi"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Off"),

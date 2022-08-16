@@ -39,12 +39,6 @@ class _GiftQRSheetStateState extends State<GiftQRSheet> {
   // Timer reference so we can cancel repeated events
   Timer? _addressCopiedTimer;
 
-  String? _rawAmount;
-  NumberFormat? _localCurrencyFormat;
-  bool _localCurrencyMode = false;
-  String _lastLocalCurrencyAmount = "";
-  String _lastCryptoAmount = "";
-
   Widget? qrWidget;
 
   Future<Uint8List?> _capturePng() async {

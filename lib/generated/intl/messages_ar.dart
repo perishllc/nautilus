@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "لا يمكن أن يكون مبلغ الانقسام أكبر من رصيد الهدية"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("يرجى إدخال المبلغ"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "لاحظنا أنك نقرت على رابط يحتوي على بعض النانو ، هل ترغب في تخطي عملية الإعداد؟ يمكنك دائمًا تغيير الأشياء لاحقًا.\n\n ومع ذلك ، إذا كان لديك بذرة موجودة تريد استيرادها ، فيجب عليك تحديد لا."),
         "asked": MessageLookupByLibrary.simpleMessage("طلب"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("المصادقة"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -206,6 +208,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateButton": MessageLookupByLibrary.simpleMessage("يتبرع"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("دعم المشروع"),
         "edit": MessageLookupByLibrary.simpleMessage("تحرير"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("تمكين الإخطارات"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "أخفق إنشاء كلمة مرور المحفظة\n"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("أدخل العنوان"),
@@ -253,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("أموال الغاز"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("صرف نانو"),
         "exit": MessageLookupByLibrary.simpleMessage("خروج"),
         "failed": MessageLookupByLibrary.simpleMessage("فشل"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -423,6 +428,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "لكي تعمل هذه الميزة بشكل صحيح، يجب تمكين الإشعارات."),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("تم استلام %1 NANO"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("تعطيل الإخطارات"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "تتطلب جميع طلبات الدفع والمذكرات والرسائل تمكين الإخطارات من أجل العمل بشكل صحيح أثناء استخدامهم لخدمة إشعارات FCM لضمان تسليم الرسائل.\n\nيمكنك تمكين الإشعارات بالزر أدناه أو رفض هذه البطاقة إذا كنت لا تهتم باستخدام هذه الميزات."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "لن تعمل طلبات الدفع والمذكرات والرسائل بشكل صحيح."),
         "notifications": MessageLookupByLibrary.simpleMessage("تنبيهات"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("نيانيكون"),
         "off": MessageLookupByLibrary.simpleMessage("غلق"),

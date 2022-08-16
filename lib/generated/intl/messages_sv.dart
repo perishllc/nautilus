@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Delat belopp kan inte vara större än gåvobalansen"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Ange ett belopp"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Vi märkte att du klickade på en länk som innehåller lite nano, vill du hoppa över installationsprocessen? Du kan alltid ändra saker senare.\n\n Om du däremot har ett befintligt frö som du vill importera bör du välja nej."),
         "asked": MessageLookupByLibrary.simpleMessage("Frågade"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Autentiseras"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -215,6 +217,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Stöd projektet"),
         "edit": MessageLookupByLibrary.simpleMessage("Redigera"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Aktivera aviseringar"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Misslyckades med att ställa in ett lösenord"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Ange adress"),
@@ -263,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas pengar"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Byt NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Tillbaka"),
         "failed": MessageLookupByLibrary.simpleMessage("misslyckades"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -435,6 +440,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "För att den här funktionen ska fungera korrekt måste aviseringar vara aktiverade"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Mottog %1 NANO"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Aviseringar inaktiverade"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Betalningsförfrågningar, Memon och Meddelanden kräver alla att aviseringar är aktiverade för att de ska fungera korrekt eftersom de använder FCM-aviseringstjänsten för att säkerställa meddelandeleverans.\n\nDu kan aktivera aviseringar med knappen nedan eller ta bort det här kortet om du inte bryr dig om att använda dessa funktioner."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Betalningsförfrågningar, PM och meddelanden kommer inte att fungera korrekt."),
         "notifications": MessageLookupByLibrary.simpleMessage("Aviseringar"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Av"),

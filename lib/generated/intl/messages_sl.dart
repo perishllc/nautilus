@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Razdeljeni znesek ne sme biti večji od darilnega stanja"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Prosim vnesite znesek"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Opazili smo, da ste kliknili povezavo, ki vsebuje nano, ali želite preskočiti postopek namestitve? Pozneje lahko vedno spremenite stvari.\n\n Če pa imate obstoječe seme, ki ga želite uvoziti, izberite ne."),
         "asked": MessageLookupByLibrary.simpleMessage("Na vprašanje"),
         "authConfirm":
             MessageLookupByLibrary.simpleMessage("Preverjanje pristnosti"),
@@ -215,6 +217,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Podprite projekt"),
         "edit": MessageLookupByLibrary.simpleMessage("Uredi"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Omogoči obvestila"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Vnesite naslov"),
@@ -263,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Plinski denar"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Menjava NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "failed": MessageLookupByLibrary.simpleMessage("neuspelo"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -434,6 +439,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Da bi ta funkcija delovala pravilno, morajo biti omogočena obvestila"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Prejeto %1 NANO"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Obvestila onemogočena"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Zahtevki za plačilo, opombe in sporočila zahtevajo, da so obvestila omogočena, da lahko pravilno delujejo, saj za zagotavljanje dostave sporočil uporabljajo storitev obvestil FCM.\n\nObvestila lahko omogočite s spodnjim gumbom ali opustite to kartico, če ne želite uporabljati teh funkcij."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Zahtevki za plačilo, beležke in sporočila ne bodo delovali pravilno."),
         "notifications": MessageLookupByLibrary.simpleMessage("Opozorila"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Izklopi"),

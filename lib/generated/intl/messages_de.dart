@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Der Aufteilungsbetrag darf nicht größer als das Geschenkguthaben sein"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Bitte Betrag eingeben"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Wir haben festgestellt, dass Sie auf einen Link geklickt haben, der Nano enthält. Möchten Sie den Einrichtungsvorgang überspringen? Sie können die Dinge später immer noch ändern.\n\n Wenn Sie jedoch einen vorhandenen Seed haben, den Sie importieren möchten, sollten Sie Nein auswählen."),
         "asked": MessageLookupByLibrary.simpleMessage("Fragte"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Authentifizieren"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -217,6 +219,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport": MessageLookupByLibrary.simpleMessage(
             "Unterstützen Sie das Projekt"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enableNotifications": MessageLookupByLibrary.simpleMessage(
+            "Benachrichtigungen aktivieren"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Wallet-Passwort konnte nicht festgelegt werden"),
         "enterAddress":
@@ -267,6 +271,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas-Geld"),
+        "exchangeNano":
+            MessageLookupByLibrary.simpleMessage("Nano austauschen"),
         "exit": MessageLookupByLibrary.simpleMessage("Verlassen"),
         "failed": MessageLookupByLibrary.simpleMessage("fehlgeschlagen"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -445,6 +451,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Damit diese Funktion ordnungsgemäß funktioniert, müssen Benachrichtigungen aktiviert sein"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("%1 NANO erhalten"),
+        "notificationWarning": MessageLookupByLibrary.simpleMessage(
+            "Benachrichtigungen deaktiviert"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Für Zahlungsanforderungen, Memos und Nachrichten müssen alle Benachrichtigungen aktiviert werden, damit sie ordnungsgemäß funktionieren, da sie den FCM-Benachrichtigungsdienst verwenden, um die Nachrichtenübermittlung sicherzustellen.\n\nSie können Benachrichtigungen mit der Schaltfläche unten aktivieren oder diese Karte schließen, wenn Sie diese Funktionen nicht verwenden möchten."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Zahlungsaufforderungen, Memos und Nachrichten funktionieren nicht richtig."),
         "notifications":
             MessageLookupByLibrary.simpleMessage("Benachrichtigungen"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),

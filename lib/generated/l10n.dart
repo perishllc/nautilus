@@ -280,6 +280,16 @@ class AppLocalization {
     );
   }
 
+  /// `We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.`
+  String get askSkipSetup {
+    return Intl.message(
+      'We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.',
+      name: 'askSkipSetup',
+      desc: 'prompt_skip_setup',
+      args: [],
+    );
+  }
+
   /// `Authenticating`
   String get authConfirm {
     return Intl.message(
@@ -1203,6 +1213,16 @@ class AppLocalization {
     );
   }
 
+  /// `Enable Notifications`
+  String get enableNotifications {
+    return Intl.message(
+      'Enable Notifications',
+      name: 'enableNotifications',
+      desc: 'notification_warning_enable_button',
+      args: [],
+    );
+  }
+
   /// `Failed to set a wallet password`
   String get encryptionFailedError {
     return Intl.message(
@@ -1489,6 +1509,16 @@ class AppLocalization {
       'Gas Money',
       name: 'exampleRecRecipientMessage',
       desc: 'example_rec_recipient_message',
+      args: [],
+    );
+  }
+
+  /// `Exchange NANO`
+  String get exchangeNano {
+    return Intl.message(
+      'Exchange NANO',
+      name: 'exchangeNano',
+      desc: 'exchange_nano',
       args: [],
     );
   }
@@ -1959,16 +1989,6 @@ class AppLocalization {
       'The link you clicked contains some NANO, would you like to import it to this wallet?',
       name: 'importGiftv2',
       desc: 'import_gift_v2',
-      args: [],
-    );
-  }
-
-  /// `We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.`
-  String get askSkipSetup {
-    return Intl.message(
-      'We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.',
-      name: 'askSkipSetup',
-      desc: 'prompt_skip_setup',
       args: [],
     );
   }
@@ -2601,6 +2621,36 @@ class AppLocalization {
       'Received %1 %2',
       name: 'notificationTitle',
       desc: 'notification_title',
+      args: [],
+    );
+  }
+
+  /// `Notifications Disabled`
+  String get notificationWarning {
+    return Intl.message(
+      'Notifications Disabled',
+      name: 'notificationWarning',
+      desc: 'home_notification_warning',
+      args: [],
+    );
+  }
+
+  /// `Payment Requests, Memos, and Messages all require notifications to be enabled in order to work properly as they use the FCM notifications service to ensure message delivery.\n\nYou can enable notifications with the button below or dismiss this card if you don't care to use these features.`
+  String get notificationWarningBodyLong {
+    return Intl.message(
+      'Payment Requests, Memos, and Messages all require notifications to be enabled in order to work properly as they use the FCM notifications service to ensure message delivery.\n\nYou can enable notifications with the button below or dismiss this card if you don\'t care to use these features.',
+      name: 'notificationWarningBodyLong',
+      desc: 'notification_warning_body_long',
+      args: [],
+    );
+  }
+
+  /// `Payment Requests, Memos, and Messages will not function properly.`
+  String get notificationWarningBodyShort {
+    return Intl.message(
+      'Payment Requests, Memos, and Messages will not function properly.',
+      name: 'notificationWarningBodyShort',
+      desc: 'notification_warning_body_short',
       args: [],
     );
   }

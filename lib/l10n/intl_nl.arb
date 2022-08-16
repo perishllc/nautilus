@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "We hebben gemerkt dat je op een link hebt geklikt die wat nano bevat, wil je het installatieproces overslaan? Je kunt later altijd nog dingen veranderen.\n\n Als je echter een bestaande seed hebt die je wilt importeren, moet je nee selecteren.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Authenticatie",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Notificaties aanzetten",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Kan geen Wallet-wachtwoord instellen",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Ruil NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Verlaten",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Meldingen uitgeschakeld",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Voor betalingsverzoeken, memo's en berichten moeten alle meldingen zijn ingeschakeld om correct te kunnen werken, aangezien ze de FCM-meldingenservice gebruiken om de bezorging van berichten te garanderen.\n\nU kunt meldingen inschakelen met de onderstaande knop of deze kaart sluiten als u deze functies niet wilt gebruiken.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Betalingsverzoeken, memo's en berichten werken niet correct.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "niet verzonden",
   "@notSent": {

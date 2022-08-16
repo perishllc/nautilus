@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "nano を含むリンクをクリックしたことがわかりました。セットアップ プロセスをスキップしますか?後でいつでも変更できます。\n\n ただし、インポートしたい既存のシードがある場合は、いいえを選択する必要があります。",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "認証中",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "通知を有効にします",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "ウォレットパスワードの作成に失敗しました。",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "交換ナノ",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "終了する",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "通知無効",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "支払い要求、メモ、およびメッセージはすべて、FCM 通知サービスを使用してメッセージを確実に配信するため、適切に機能するために通知を有効にする必要があります。\n\n下のボタンで通知を有効にするか、これらの機能を使用したくない場合はこのカードを閉じることができます。",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "支払い請求、メモ、およびメッセージは正しく機能しません。",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "未送信",
   "@notSent": {

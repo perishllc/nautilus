@@ -57,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Сумма разделения не может превышать баланс подарка"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Пожалуйста введите сумму"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Мы заметили, что вы нажали на ссылку, содержащую нано. Хотите пропустить процесс установки? Вы всегда можете изменить ситуацию позже.\n\n Однако, если у вас есть семя, которое вы хотите импортировать, вам следует выбрать нет."),
         "asked": MessageLookupByLibrary.simpleMessage("Спросил"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Аутентификация"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -217,6 +219,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Поддержите проект"),
         "edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Включить уведомления"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Не удалось установить пароль"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Введите Адрес"),
@@ -265,6 +269,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Газовые деньги"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Обмен НАНО"),
         "exit": MessageLookupByLibrary.simpleMessage("Выход"),
         "failed": MessageLookupByLibrary.simpleMessage("не удалось"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -440,6 +445,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Чтобы эта функция работала правильно, уведомления должны быть включены"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Получено %1 NANO"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Уведомления отключены"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Платежные запросы, заметки и сообщения требуют включения уведомлений для правильной работы, поскольку они используют службу уведомлений FCM для обеспечения доставки сообщений.\n\nВы можете включить уведомления с помощью кнопки ниже или закрыть эту карточку, если не хотите использовать эти функции."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Платежные запросы, заметки и сообщения не будут работать должным образом."),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Ньяникон"),
         "off": MessageLookupByLibrary.simpleMessage("Выкл."),

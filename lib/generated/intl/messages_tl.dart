@@ -59,6 +59,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ang Hati na Halaga ay hindi maaaring mas malaki kaysa sa balanse ng regalo"),
         "amountMissing": MessageLookupByLibrary.simpleMessage(
             "Mangyaring magpasok ng isang halaga"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Napansin naming nag-click ka sa isang link na naglalaman ng ilang nano, gusto mo bang laktawan ang proseso ng pag-setup? Maaari mong palaging baguhin ang mga bagay sa ibang pagkakataon.\n\n Kung mayroon kang umiiral na binhi na gusto mong i-import gayunpaman, dapat mong piliin ang hindi."),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Nagpapatotoo"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -217,6 +219,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Suportahan ang Proyekto"),
         "edit": MessageLookupByLibrary.simpleMessage("I-edit"),
+        "enableNotifications": MessageLookupByLibrary.simpleMessage(
+            "Paganahin ang mga notification"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Nabigo sa paglagay ng wallet password"),
         "enterAddress":
@@ -268,6 +272,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Pera"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Palitan ng NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Lumabas"),
         "failed": MessageLookupByLibrary.simpleMessage("nabigo"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -445,6 +450,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Upang maayos ang tampok na ito, dapat na pinagana ang mga notification"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Nakatanggap ng %1 NANO"),
+        "notificationWarning": MessageLookupByLibrary.simpleMessage(
+            "Hindi Pinagana ang Mga Notification"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Ang mga Kahilingan sa Pagbabayad, Memo, at Mensahe ay nangangailangan ng lahat ng mga notification na paganahin upang gumana nang maayos habang ginagamit nila ang serbisyo ng mga notification ng FCM upang matiyak ang paghahatid ng mensahe.\n\nMaaari mong paganahin ang mga notification gamit ang button sa ibaba o i-dismiss ang card na ito kung wala kang pakialam na gamitin ang mga feature na ito."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Hindi gagana nang maayos ang Mga Kahilingan sa Pagbabayad, Memo, at Mensahe."),
         "notifications": MessageLookupByLibrary.simpleMessage("Abiso"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Off"),

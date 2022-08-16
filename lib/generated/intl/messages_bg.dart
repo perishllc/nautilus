@@ -55,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Разделената сума не може да бъде по-голяма от баланса на подаръка"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Моля въведете Сума"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Забелязахме, че сте кликнали върху връзка, която съдържа някои nano, искате ли да пропуснете процеса на настройка? Винаги можете да промените нещата по-късно.\n\n Ако обаче имате съществуващо семе, което искате да импортирате, трябва да изберете не."),
         "asked": MessageLookupByLibrary.simpleMessage("Попитан"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Удостоверява се"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -211,6 +213,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Подкрепете проекта"),
         "edit": MessageLookupByLibrary.simpleMessage("Редактиране"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Активиране на известията"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Задаването на парола е невалидно"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Въведи Адрес"),
@@ -259,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Газови пари"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Разменете NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Изход"),
         "failed": MessageLookupByLibrary.simpleMessage("провали"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -434,6 +439,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "За да може тази функция да работи правилно, уведомленията трябва да бъдат активирани"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Получени %1 NANO"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Известията са деактивирани"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Всички искания за плащане, бележки и съобщения изискват известия да бъдат активирани, за да работят правилно, тъй като използват услугата за известия FCM, за да осигурят доставка на съобщения.\n\nМожете да активирате известията с бутона по-долу или да отхвърлите тази карта, ако не желаете да използвате тези функции."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Заявки за плащане, бележки и съобщения няма да функционират правилно."),
         "notifications": MessageLookupByLibrary.simpleMessage("Известия"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Нианикон"),
         "off": MessageLookupByLibrary.simpleMessage("Изкл."),

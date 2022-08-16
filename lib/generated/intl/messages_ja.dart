@@ -51,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("分割金額はギフト残高より大きくすることはできません"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("金額を入力してください"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "nano を含むリンクをクリックしたことがわかりました。セットアップ プロセスをスキップしますか?後でいつでも変更できます。\n\n ただし、インポートしたい既存のシードがある場合は、いいえを選択する必要があります。"),
         "asked": MessageLookupByLibrary.simpleMessage("尋ねた"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("認証中"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -180,6 +182,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateButton": MessageLookupByLibrary.simpleMessage("寄付"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("プロジェクトを支援する"),
         "edit": MessageLookupByLibrary.simpleMessage("編集"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("通知を有効にします"),
         "encryptionFailedError":
             MessageLookupByLibrary.simpleMessage("ウォレットパスワードの作成に失敗しました。"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("アドレスを入力する"),
@@ -222,6 +226,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("ガスマネー"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("交換ナノ"),
         "exit": MessageLookupByLibrary.simpleMessage("終了する"),
         "failed": MessageLookupByLibrary.simpleMessage("失敗した"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -376,6 +381,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "この機能を正しく動作させるには、通知を有効にする必要があります"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("％1 ナノを着金しました"),
+        "notificationWarning": MessageLookupByLibrary.simpleMessage("通知無効"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "支払い要求、メモ、およびメッセージはすべて、FCM 通知サービスを使用してメッセージを確実に配信するため、適切に機能するために通知を有効にする必要があります。\n\n下のボタンで通知を有効にするか、これらの機能を使用したくない場合はこのカードを閉じることができます。"),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "支払い請求、メモ、およびメッセージは正しく機能しません。"),
         "notifications": MessageLookupByLibrary.simpleMessage("通知"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("ニャニコン"),
         "off": MessageLookupByLibrary.simpleMessage("オフ"),

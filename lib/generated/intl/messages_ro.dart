@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Suma împărțită nu poate fi mai mare decât soldul cadou"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Introduceți o sumă"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Am observat că ați dat clic pe un link care conține niște nano, doriți să săriți peste procesul de configurare? Poți oricând să schimbi lucrurile mai târziu.\n\n Dacă aveți o sămânță existentă pe care doriți să o importați, ar trebui să selectați nu."),
         "asked": MessageLookupByLibrary.simpleMessage("Întrebat"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Autentificare"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -211,6 +213,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Susține proiectul"),
         "edit": MessageLookupByLibrary.simpleMessage("Editează"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Activați notificările"),
         "encryptionFailedError":
             MessageLookupByLibrary.simpleMessage("Setarea parolei a eșuat"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Introdu adresa"),
@@ -262,6 +266,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Bani de gaz"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Schimbă NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Ieșire"),
         "failed": MessageLookupByLibrary.simpleMessage("nu a reușit"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -434,6 +439,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pentru ca această caracteristică să funcționeze corect, notificările trebuie să fie activate"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Ai primit %1 NANO"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Notificări dezactivate"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Solicitările de plată, notele și mesajele necesită toate ca notificările să fie activate pentru a funcționa corect, deoarece folosesc serviciul de notificări FCM pentru a asigura livrarea mesajelor.\n\nPuteți activa notificările cu butonul de mai jos sau puteți închide acest card dacă nu vă interesează să utilizați aceste funcții."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Solicitările de plată, notele și mesajele nu vor funcționa corect."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notificări"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Dezactivate"),

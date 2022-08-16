@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Am observat că ați dat clic pe un link care conține niște nano, doriți să săriți peste procesul de configurare? Poți oricând să schimbi lucrurile mai târziu.\n\n Dacă aveți o sămânță existentă pe care doriți să o importați, ar trebui să selectați nu.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Autentificare",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Activați notificările",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Setarea parolei a eșuat",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Schimbă NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Ieșire",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Notificări dezactivate",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Solicitările de plată, notele și mesajele necesită toate ca notificările să fie activate pentru a funcționa corect, deoarece folosesc serviciul de notificări FCM pentru a asigura livrarea mesajelor.\n\nPuteți activa notificările cu butonul de mai jos sau puteți închide acest card dacă nu vă interesează să utilizați aceste funcții.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Solicitările de plată, notele și mesajele nu vor funcționa corect.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "nu a fost trimis",
   "@notSent": {

@@ -38,7 +38,8 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
 
   // State variables
   bool? _addressValid;
-  bool? _pasteButtonVisible;
+  bool _pasteButtonVisible = true;
+  bool _clearButton = false;
   late bool _addressValidAndUnfocused;
   String? _addressHint;
   late String _addressValidationText;
@@ -70,9 +71,15 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
       if (_addressFocusNode!.hasFocus) {
         setState(() {
           _addressHint = "";
+          _addressValidationText = "";
           _addressValidAndUnfocused = false;
           _pasteButtonVisible = true;
           _addressStyle = AddressStyle.TEXT60;
+          if (_addressController!.text.isNotEmpty) {
+            _clearButton = true;
+          } else {
+            _clearButton = false;
+          }
         });
         _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith("nano_")) {
@@ -208,9 +215,17 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
       fadePrefixOnCondition: true,
       prefixShowFirstCondition: _pasteButtonVisible,
       suffixButton: TextFieldButton(
-        icon: AppIcons.paste,
+        icon: _clearButton ? AppIcons.clear : AppIcons.paste,
         onPressed: () async {
-          if (!_pasteButtonVisible!) {
+          if (_clearButton) {
+            setState(() {
+              _isUser = false;
+              _addressValidationText = "";
+              _pasteButtonVisible = true;
+              _clearButton = false;
+              _addressController!.text = "";
+              _users = <User>[];
+            });
             return;
           }
           final String? data = await UserDataUtil.getClipboardText(DataType.ADDRESS);
@@ -252,13 +267,13 @@ class _AddBlockedSheetState extends State<AddBlockedSheet> {
 
         if (text.isNotEmpty) {
           setState(() {
-            if (!_addressValidAndUnfocused) {
-              _pasteButtonVisible = true;
-            }
+            _pasteButtonVisible = true;
+            _clearButton = true;
           });
         } else {
           setState(() {
             _pasteButtonVisible = true;
+            _clearButton = false;
           });
         }
 

@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Kami melihat Anda mengeklik tautan yang berisi beberapa nano, apakah Anda ingin melewati proses penyiapan? Anda selalu dapat mengubah banyak hal nanti.\n\n Jika Anda memiliki benih yang ingin Anda impor, Anda harus memilih no.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Otentikasi",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Aktifkan Notifikasi",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Gagal menetapkan kata sandi dompet",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Tukarkan NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Keluar",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Notifikasi Dinonaktifkan",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Permintaan Pembayaran, Memo, dan Pesan semuanya memerlukan notifikasi untuk diaktifkan agar berfungsi dengan baik karena mereka menggunakan layanan notifikasi FCM untuk memastikan pengiriman pesan.\n\nAnda dapat mengaktifkan notifikasi dengan tombol di bawah atau menutup kartu ini jika Anda tidak ingin menggunakan fitur ini.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Permintaan Pembayaran, Memo, dan Pesan tidak akan berfungsi dengan baik.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "tidak terkirim",
   "@notSent": {

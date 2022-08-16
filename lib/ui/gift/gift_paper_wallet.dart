@@ -598,7 +598,34 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       autocorrect: false,
       hintText: _amountHint == null ? "" : AppLocalization.of(context).enterAmount,
       prefixButton: TextFieldButton(
-        icon: AppIcons.swapcurrency,
+        padding: EdgeInsets.zero,
+        widget: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RichText(
+              textAlign: TextAlign.center,
+              text: displayCurrencySymbol(
+                context,
+                TextStyle(
+                  color: StateContainer.of(context).curTheme.primary,
+                  fontSize: _localCurrencyMode ? 12 : 20,
+                  fontWeight: _localCurrencyMode ? FontWeight.w400 : FontWeight.w800,
+                  fontFamily: 'NunitoSans',
+                ),
+              ),
+            ),
+            const Text("/"),
+            Text(_localCurrencyFormat.currencySymbol.trim(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: _localCurrencyMode ? 20 : 12,
+                  fontWeight: _localCurrencyMode ? FontWeight.w800 : FontWeight.w400,
+                  color: StateContainer.of(context).curTheme.primary,
+                  fontFamily: 'NunitoSans',
+                )),
+          ],
+        ),
         onPressed: () {
           toggleLocalCurrency();
         },
@@ -672,12 +699,6 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       maxLines: null,
       autocorrect: false,
       hintText: _splitAmountHint == null ? "" : AppLocalization.of(context).enterSplitAmount,
-      prefixButton: TextFieldButton(
-        icon: AppIcons.swapcurrency,
-        onPressed: () {
-          toggleLocalCurrency();
-        },
-      ),
       fadeSuffixOnCondition: true,
       suffixShowFirstCondition: !_isMaxSend(),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),

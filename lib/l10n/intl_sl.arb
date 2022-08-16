@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Opazili smo, da ste kliknili povezavo, ki vsebuje nano, ali želite preskočiti postopek namestitve? Pozneje lahko vedno spremenite stvari.\n\n Če pa imate obstoječe seme, ki ga želite uvoziti, izberite ne.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Preverjanje pristnosti",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Omogoči obvestila",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Failed to set a wallet password",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Menjava NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Exit",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Obvestila onemogočena",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Zahtevki za plačilo, opombe in sporočila zahtevajo, da so obvestila omogočena, da lahko pravilno delujejo, saj za zagotavljanje dostave sporočil uporabljajo storitev obvestil FCM.\n\nObvestila lahko omogočite s spodnjim gumbom ali opustite to kartico, če ne želite uporabljati teh funkcij.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Zahtevki za plačilo, beležke in sporočila ne bodo delovali pravilno.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "ni poslano",
   "@notSent": {

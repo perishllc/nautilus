@@ -55,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bölünmüş Tutar, hediye bakiyesinden fazla olamaz"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Lütfen bir miktar girin"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Biraz nano içeren bir bağlantıya tıkladığınızı fark ettik, kurulum sürecini atlamak ister misiniz? İşleri daha sonra her zaman değiştirebilirsiniz.\n\n Ancak içe aktarmak istediğiniz mevcut bir tohumunuz varsa, hayır\'ı seçmelisiniz."),
         "asked": MessageLookupByLibrary.simpleMessage("Sordu"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("kimlik doğrulama"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -209,6 +211,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Projeyi Destekleyin"),
         "edit": MessageLookupByLibrary.simpleMessage("Düzenle"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Bildirimleri Etkinleştir"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Şifre oluşturma işlemi başarısız"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Adres Gir"),
@@ -256,6 +260,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gaz Para"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("NANO değişimi"),
         "exit": MessageLookupByLibrary.simpleMessage("Çıkış"),
         "failed": MessageLookupByLibrary.simpleMessage("başarısız"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -427,6 +432,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bu özelliğin düzgün çalışması için bildirimlerin etkinleştirilmesi gerekir"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("%1 NANO Alındı"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Bildirimler Devre Dışı"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Ödeme İstekleri, Notlar ve Mesajların tümü, mesaj teslimini sağlamak için FCM bildirim hizmetini kullandıklarından düzgün çalışması için bildirimlerin etkinleştirilmesini gerektirir.\n\nAşağıdaki düğme ile bildirimleri etkinleştirebilir veya bu özellikleri kullanmak istemiyorsanız bu kartı kapatabilirsiniz."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Ödeme İstekleri, Notlar ve Mesajlar düzgün çalışmayacaktır."),
         "notifications": MessageLookupByLibrary.simpleMessage("Bildirimler"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Kapalı"),

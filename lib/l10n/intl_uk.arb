@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Ми помітили, що ви натиснули на посилання, яке містить нано, чи бажаєте ви пропустити процес налаштування? Ви завжди можете щось змінити пізніше.\n\n Однак, якщо у вас є початковий код, який ви хочете імпортувати, вам слід вибрати «ні».",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Автентифікація",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Увімкнути сповіщення",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Не вдалося встановити пароль гаманця",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Обмін NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Вийти",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Сповіщення вимкнено",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Для належної роботи всіх платіжних запитів, нагадувань і повідомлень потрібно ввімкнути сповіщення, оскільки вони використовують службу сповіщень FCM для забезпечення доставки повідомлень.\n\nВи можете ввімкнути сповіщення за допомогою кнопки нижче або закрити цю картку, якщо ви не бажаєте використовувати ці функції.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Платіжні запити, нотатки та повідомлення не працюватимуть належним чином.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "не надіслано",
   "@notSent": {

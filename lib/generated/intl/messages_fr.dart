@@ -59,6 +59,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Le montant partagé ne peut pas être supérieur au solde du cadeau"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Veuillez entrer un montant"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Nous avons remarqué que vous avez cliqué sur un lien contenant des nano, souhaitez-vous ignorer le processus de configuration ? Vous pouvez toujours changer les choses plus tard.\n\n Si vous avez une graine existante que vous souhaitez importer, vous devez sélectionner non."),
         "asked": MessageLookupByLibrary.simpleMessage("A demandé"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Authentification"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -221,6 +223,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Soutenir le projet"),
         "edit": MessageLookupByLibrary.simpleMessage("Modifier"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Activer les notifications"),
         "encryptionFailedError":
             MessageLookupByLibrary.simpleMessage("Problème de mot de passe"),
         "enterAddress":
@@ -272,6 +276,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Argent pour l\'essence"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Échange NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Sortie"),
         "failed": MessageLookupByLibrary.simpleMessage("a échoué"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -445,6 +450,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pour que cette fonctionnalité fonctionne correctement, les notifications doivent être activées"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("%1 NANO reçus"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Notifications désactivées"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Les demandes de paiement, les mémos et les messages nécessitent tous que les notifications soient activées pour fonctionner correctement car ils utilisent le service de notifications FCM pour assurer la livraison des messages.\n\nVous pouvez activer les notifications avec le bouton ci-dessous ou ignorer cette carte si vous ne souhaitez pas utiliser ces fonctionnalités."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Les demandes de paiement, les mémos et les messages ne fonctionneront pas correctement."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Icône Nyan"),
         "off": MessageLookupByLibrary.simpleMessage("Désactivé"),

@@ -55,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Số tiền Chia tách không được lớn hơn số dư quà tặng"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Hãy nhập lượng tiền"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi nhận thấy bạn đã nhấp vào một liên kết có chứa một số nano, bạn có muốn bỏ qua quá trình thiết lập không? Bạn luôn có thể thay đổi mọi thứ sau này.\n\n Tuy nhiên, nếu bạn có một hạt giống hiện có mà bạn muốn nhập, bạn nên chọn không."),
         "asked": MessageLookupByLibrary.simpleMessage("Đã hỏi"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Xác thực"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -212,6 +214,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateButton": MessageLookupByLibrary.simpleMessage("Quyên tặng"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("Hỗ trợ dự án"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Bật thông báo"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Đặt mật khẩu ví không thành công"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Nhập địa chỉ"),
@@ -260,6 +264,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Tiền gas"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Trao đổi NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Thoát"),
         "failed": MessageLookupByLibrary.simpleMessage("thất bại"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -434,6 +439,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Để tính năng này hoạt động chính xác, thông báo phải được bật"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Đã nhận %1 BAN"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Đã tắt thông báo"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Yêu cầu thanh toán, Bản ghi nhớ và Tin nhắn đều yêu cầu bật thông báo để hoạt động bình thường khi chúng sử dụng dịch vụ thông báo FCM để đảm bảo gửi tin nhắn.\n\nBạn có thể bật thông báo bằng nút bên dưới hoặc loại bỏ thẻ này nếu bạn không muốn sử dụng các tính năng này."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Yêu cầu thanh toán, Bản ghi nhớ và Tin nhắn sẽ không hoạt động bình thường."),
         "notifications": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Tắt"),

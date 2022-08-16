@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Biraz nano içeren bir bağlantıya tıkladığınızı fark ettik, kurulum sürecini atlamak ister misiniz? İşleri daha sonra her zaman değiştirebilirsiniz.\n\n Ancak içe aktarmak istediğiniz mevcut bir tohumunuz varsa, hayır'ı seçmelisiniz.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "kimlik doğrulama",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Bildirimleri Etkinleştir",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Şifre oluşturma işlemi başarısız",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "NANO değişimi",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Çıkış",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Bildirimler Devre Dışı",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Ödeme İstekleri, Notlar ve Mesajların tümü, mesaj teslimini sağlamak için FCM bildirim hizmetini kullandıklarından düzgün çalışması için bildirimlerin etkinleştirilmesini gerektirir.\n\nAşağıdaki düğme ile bildirimleri etkinleştirebilir veya bu özellikleri kullanmak istemiyorsanız bu kartı kapatabilirsiniz.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Ödeme İstekleri, Notlar ve Mesajlar düzgün çalışmayacaktır.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "gönderilmedi",
   "@notSent": {

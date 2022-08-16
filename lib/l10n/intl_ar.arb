@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "لاحظنا أنك نقرت على رابط يحتوي على بعض النانو ، هل ترغب في تخطي عملية الإعداد؟ يمكنك دائمًا تغيير الأشياء لاحقًا.\n\n ومع ذلك ، إذا كان لديك بذرة موجودة تريد استيرادها ، فيجب عليك تحديد لا.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "المصادقة",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "تمكين الإخطارات",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "أخفق إنشاء كلمة مرور المحفظة\n",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "صرف نانو",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "خروج",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "تعطيل الإخطارات",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "تتطلب جميع طلبات الدفع والمذكرات والرسائل تمكين الإخطارات من أجل العمل بشكل صحيح أثناء استخدامهم لخدمة إشعارات FCM لضمان تسليم الرسائل.\n\nيمكنك تمكين الإشعارات بالزر أدناه أو رفض هذه البطاقة إذا كنت لا تهتم باستخدام هذه الميزات.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "لن تعمل طلبات الدفع والمذكرات والرسائل بشكل صحيح.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "لم يتم إرسالها",
   "@notSent": {

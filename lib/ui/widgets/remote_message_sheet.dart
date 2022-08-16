@@ -1,26 +1,96 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:event_taxi/event_taxi.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/bus/fcm_update_event.dart';
+import 'package:nautilus_wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
+import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RemoteMessageSheet extends StatefulWidget {
-  RemoteMessageSheet({this.alert, this.hasDismissButton = true}) : super();
+  const RemoteMessageSheet({this.alert, this.hasDismissButton = true}) : super();
 
   final AlertResponseItem? alert;
   final bool hasDismissButton;
 
+  @override
   RemoteMessageSheetStateState createState() => RemoteMessageSheetStateState();
 }
 
 class RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
+  Future<bool> showNotificationDialog() async {
+    final NotificationOptions? option = await showDialog<NotificationOptions>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            title: Text(
+              AppLocalization.of(context).notifications,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            children: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, NotificationOptions.ON);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).onStr,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, NotificationOptions.OFF);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).off,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
+
+    if (option == null) {
+      return false;
+    }
+
+    if (option == NotificationOptions.ON) {
+      sl.get<SharedPrefsUtil>().setNotificationsOn(true).then((void result) {
+        EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: true));
+        FirebaseMessaging.instance.requestPermission();
+        FirebaseMessaging.instance.getToken().then((String? fcmToken) {
+          EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
+        });
+      });
+      return true;
+    } else {
+      sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((void result) {
+        EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: false));
+        FirebaseMessaging.instance.getToken().then((String? fcmToken) {
+          EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
+        });
+      });
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -173,13 +243,33 @@ class RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
                       }),
                     ],
                   ),
+                if (widget.alert?.id == 4042)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).enableNotifications, Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () async {
+                        final bool enabledNotifications = await showNotificationDialog();
+                        if (!mounted) return;
+                        // remove the alert:
+                        if (enabledNotifications) {
+                          sl.get<SharedPrefsUtil>().dismissAlert(widget.alert!);
+                          StateContainer.of(context).removeActiveOrSettingsAlert(widget.alert, null);
+                          Navigator.pop(context);
+                        }
+                      }),
+                    ],
+                  ),
                 if (widget.hasDismissButton)
                   Row(
                     children: <Widget>[
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).dismiss, Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () {
                         sl.get<SharedPrefsUtil>().dismissAlert(widget.alert!);
-                        StateContainer.of(context).updateActiveAlert(null, widget.alert);
+                        StateContainer.of(context).removeActiveOrSettingsAlert(widget.alert, null);
+                        if (widget.alert?.priority == "high") {
+                          StateContainer.of(context).addActiveOrSettingsAlert(null, widget.alert);
+                        }
                         Navigator.pop(context);
                       }),
                     ],

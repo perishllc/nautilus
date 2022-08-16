@@ -57,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "L\'importo diviso non può essere maggiore del saldo del regalo"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Inserisci un importo"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Abbiamo notato che hai cliccato su un link che contiene alcuni nano, vuoi saltare il processo di configurazione? Puoi sempre cambiare le cose dopo.\n\n Se hai un seme esistente che desideri importare, tuttavia, dovresti selezionare no."),
         "asked": MessageLookupByLibrary.simpleMessage("Chiesto"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Autenticazione"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -215,6 +217,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Sostieni il progetto"),
         "edit": MessageLookupByLibrary.simpleMessage("Modifica"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Attivare le notifiche"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Errore nell’impostazione della password"),
         "enterAddress":
@@ -266,6 +270,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Denaro del gas"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Scambio NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Esci"),
         "failed": MessageLookupByLibrary.simpleMessage("mancato"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -438,6 +443,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Affinché questa funzione funzioni correttamente, le notifiche devono essere abilitate"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Ricevuti %1 NANO"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Notifiche disabilitate"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Richieste di pagamento, Memo e Messaggi richiedono che le notifiche siano abilitate per funzionare correttamente poiché utilizzano il servizio di notifiche FCM per garantire la consegna dei messaggi.\n\nPuoi abilitare le notifiche con il pulsante in basso o ignorare questa scheda se non ti interessa utilizzare queste funzionalità."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Richieste di pagamento, promemoria e messaggi non funzioneranno correttamente."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifiche"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Off"),

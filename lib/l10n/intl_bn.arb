@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "আমরা লক্ষ্য করেছি যে আপনি একটি লিঙ্কে ক্লিক করেছেন যাতে কিছু ন্যানো রয়েছে, আপনি কি সেটআপ প্রক্রিয়াটি এড়িয়ে যেতে চান? আপনি সবসময় পরে জিনিস পরিবর্তন করতে পারেন.\n\n যদি আপনার কাছে একটি বিদ্যমান বীজ থাকে যা আপনি আমদানি করতে চান তবে আপনাকে না নির্বাচন করা উচিত।",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "প্রমাণীকরণ",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "বিজ্ঞপ্তি সক্রিয় করুন",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "ওয়ালেটের পাসওয়ার্ড সেট করতে ব্যর্থ",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "ন্যানো বিনিময় করুন",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "বাহির",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "বিজ্ঞপ্তি নিষ্ক্রিয়",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "অর্থপ্রদানের অনুরোধ, মেমো এবং বার্তাগুলিকে সঠিকভাবে কাজ করার জন্য বিজ্ঞপ্তিগুলি সক্রিয় করা প্রয়োজন কারণ তারা বার্তা সরবরাহ নিশ্চিত করতে FCM বিজ্ঞপ্তি পরিষেবা ব্যবহার করে৷\n\nআপনি নীচের বোতামটি দিয়ে বিজ্ঞপ্তিগুলি সক্ষম করতে পারেন বা আপনি যদি এই বৈশিষ্ট্যগুলি ব্যবহার করতে আগ্রহী না হন তবে এই কার্ডটি খারিজ করতে পারেন৷",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "অর্থপ্রদানের অনুরোধ, মেমো এবং বার্তাগুলি সঠিকভাবে কাজ করবে না।",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "পাঠানো হয়নি",
   "@notSent": {

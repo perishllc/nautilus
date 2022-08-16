@@ -49,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("分割金额不能大于礼物余额"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("请输入金额"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "我们注意到您单击了包含一些 nano 的链接，您想跳过设置过程吗？你以后总是可以改变的。\n\n 但是，如果您有要导入的现有种子，则应选择否。"),
         "asked": MessageLookupByLibrary.simpleMessage("问"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("认证"),
         "authError": MessageLookupByLibrary.simpleMessage("验证时出错。稍后再试。"),
@@ -160,6 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateButton": MessageLookupByLibrary.simpleMessage("捐"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("支持项目"),
         "edit": MessageLookupByLibrary.simpleMessage("编辑"),
+        "enableNotifications": MessageLookupByLibrary.simpleMessage("启用通知"),
         "encryptionFailedError":
             MessageLookupByLibrary.simpleMessage("钱包密码设置失败"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("输入地址"),
@@ -200,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("煤气钱"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("交换纳米"),
         "exit": MessageLookupByLibrary.simpleMessage("退出"),
         "failed": MessageLookupByLibrary.simpleMessage("失败了"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -339,6 +343,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo":
             MessageLookupByLibrary.simpleMessage("为了使此功能正常工作，必须启用通知"),
         "notificationTitle": MessageLookupByLibrary.simpleMessage("收到 %1 NANO"),
+        "notificationWarning": MessageLookupByLibrary.simpleMessage("通知已禁用"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "付款请求、备忘录和消息都需要启用通知才能正常工作，因为它们使用 FCM 通知服务来确保消息传递。\n\n如果您不想使用这些功能，可以使用下面的按钮启用通知或关闭此卡。"),
+        "notificationWarningBodyShort":
+            MessageLookupByLibrary.simpleMessage("付款请求、备忘录和消息将无法正常运行。"),
         "notifications": MessageLookupByLibrary.simpleMessage("通知"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("关闭"),

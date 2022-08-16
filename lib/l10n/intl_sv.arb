@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Vi märkte att du klickade på en länk som innehåller lite nano, vill du hoppa över installationsprocessen? Du kan alltid ändra saker senare.\n\n Om du däremot har ett befintligt frö som du vill importera bör du välja nej.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Autentiseras",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Aktivera aviseringar",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Misslyckades med att ställa in ett lösenord",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Byt NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Tillbaka",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Aviseringar inaktiverade",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Betalningsförfrågningar, Memon och Meddelanden kräver alla att aviseringar är aktiverade för att de ska fungera korrekt eftersom de använder FCM-aviseringstjänsten för att säkerställa meddelandeleverans.\n\nDu kan aktivera aviseringar med knappen nedan eller ta bort det här kortet om du inte bryr dig om att använda dessa funktioner.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Betalningsförfrågningar, PM och meddelanden kommer inte att fungera korrekt.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "inte skickat",
   "@notSent": {

@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Розділена сума не може перевищувати баланс подарунку"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Будь ласка вкажіть суму"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Ми помітили, що ви натиснули на посилання, яке містить нано, чи бажаєте ви пропустити процес налаштування? Ви завжди можете щось змінити пізніше.\n\n Однак, якщо у вас є початковий код, який ви хочете імпортувати, вам слід вибрати «ні»."),
         "asked": MessageLookupByLibrary.simpleMessage("Запитав"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Автентифікація"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -219,6 +221,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Підтримайте проект"),
         "edit": MessageLookupByLibrary.simpleMessage("Редагувати"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Увімкнути сповіщення"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Не вдалося встановити пароль гаманця"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Введіть адресу"),
@@ -268,6 +272,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Газові гроші"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Обмін NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Вийти"),
         "failed": MessageLookupByLibrary.simpleMessage("не вдалося"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -444,6 +449,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Щоб ця функція працювала коректно, повідомлення повинні бути включені"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Отримано %1 NANO"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Сповіщення вимкнено"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Для належної роботи всіх платіжних запитів, нагадувань і повідомлень потрібно ввімкнути сповіщення, оскільки вони використовують службу сповіщень FCM для забезпечення доставки повідомлень.\n\nВи можете ввімкнути сповіщення за допомогою кнопки нижче або закрити цю картку, якщо ви не бажаєте використовувати ці функції."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Платіжні запити, нотатки та повідомлення не працюватимуть належним чином."),
         "notifications": MessageLookupByLibrary.simpleMessage("Повідомлення"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Няникон"),
         "off": MessageLookupByLibrary.simpleMessage("Вимкнуто"),

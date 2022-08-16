@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Podzielona kwota nie może być większa niż saldo prezentu"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("Wpisz ilość"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Zauważyliśmy, że kliknąłeś link, który zawiera nano, czy chcesz pominąć proces konfiguracji? Zawsze możesz coś zmienić później.\n\n Jeśli jednak masz istniejący materiał siewny, który chcesz zaimportować, wybierz opcję nie."),
         "asked": MessageLookupByLibrary.simpleMessage("Zapytany"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Uwierzytelnianie"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -210,6 +212,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Wesprzyj projekt"),
         "edit": MessageLookupByLibrary.simpleMessage("Edytuj"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Włącz powiadomienia"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Nie udało się ustawić hasło portfelu"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Wpisz Adres"),
@@ -257,6 +261,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Pieniądz"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Wymiana NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Wyjdz"),
         "failed": MessageLookupByLibrary.simpleMessage("nie powiodło się"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -431,6 +436,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Aby ta funkcja działała poprawnie, powiadomienia muszą być włączone"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Otrzymano %1 NANO"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Powiadomienia wyłączone"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Żądania płatności, notatki i wiadomości wymagają włączenia powiadomień, aby działały prawidłowo, ponieważ korzystają z usługi powiadomień FCM w celu zapewnienia dostarczania wiadomości.\n\nMożesz włączyć powiadomienia za pomocą przycisku poniżej lub odrzucić tę kartę, jeśli nie chcesz korzystać z tych funkcji."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Żądania płatności, notatki i wiadomości nie będą działać prawidłowo."),
         "notifications": MessageLookupByLibrary.simpleMessage("Powiadomienia"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Wyłączone"),

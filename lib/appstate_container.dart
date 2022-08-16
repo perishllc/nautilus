@@ -147,8 +147,10 @@ class StateContainerState extends State<StateContainer> {
   Map<String, String> nyaniconNonce = <String, String>{};
 
   // Active alert
-  AlertResponseItem? activeAlert;
-  AlertResponseItem? settingsAlert;
+  // AlertResponseItem? activeAlert;
+  // AlertResponseItem? settingsAlert;
+  List<AlertResponseItem> activeAlerts = <AlertResponseItem>[];
+  List<AlertResponseItem> settingsAlerts = <AlertResponseItem>[];
   List<FundingResponseItem>? fundingAlerts;
   bool activeAlertIsRead = true;
 
@@ -200,14 +202,36 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
-  void updateActiveAlert(AlertResponseItem? active, AlertResponseItem? settingsAlert) {
+  // void updateActiveAlert(AlertResponseItem? active, AlertResponseItem? settingsAlert) {
+  //   setState(() {
+  //     activeAlert = active;
+  //     if (settingsAlert != null) {
+  //       this.settingsAlert = settingsAlert;
+  //     } else {
+  //       this.settingsAlert = null;
+  //       activeAlertIsRead = true;
+  //     }
+  //   });
+  // }
+
+  void addActiveOrSettingsAlert(AlertResponseItem? active, AlertResponseItem? settingsAlert) {
     setState(() {
-      activeAlert = active;
+      if (active != null) {
+        activeAlerts.add(active);
+      }
       if (settingsAlert != null) {
-        this.settingsAlert = settingsAlert;
-      } else {
-        this.settingsAlert = null;
-        activeAlertIsRead = true;
+        settingsAlerts.add(settingsAlert);
+      }
+    });
+  }
+
+  void removeActiveOrSettingsAlert(AlertResponseItem? active, AlertResponseItem? settingsAlert) {
+    setState(() {
+      if (active != null) {
+        activeAlerts.remove(active);
+      }
+      if (settingsAlert != null) {
+        settingsAlerts.remove(settingsAlert);
       }
     });
   }
@@ -234,13 +258,6 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       activeAlertIsRead = false;
     });
-  }
-
-  String? getNatriconNonce(String address) {
-    if (natriconNonce.containsKey(address)) {
-      return natriconNonce[address];
-    }
-    return "";
   }
 
   Future<void> checkAndUpdateNanoToUsernames([bool forceUpdate = false]) async {
@@ -346,7 +363,7 @@ class StateContainerState extends State<StateContainer> {
       }
       final AlertResponseItem? alert = await sl.get<AccountService>().getAlert(localeString);
       if (alert == null) {
-        updateActiveAlert(null, null);
+        // updateActiveAlert(null, null);
         return;
       } else if (await sl.get<SharedPrefsUtil>().shouldShowAlert(alert)) {
         // See if we should display this one again
@@ -355,14 +372,14 @@ class StateContainerState extends State<StateContainer> {
         } else {
           setAlertUnread();
         }
-        updateActiveAlert(alert, alert);
+        addActiveOrSettingsAlert(alert, alert);
       } else {
         if (alert.link == null || await sl.get<SharedPrefsUtil>().alertIsRead(alert)) {
           setAlertRead();
         } else {
           setAlertUnread();
         }
-        updateActiveAlert(null, alert);
+        addActiveOrSettingsAlert(null, alert);
       }
     } catch (e) {
       log.e("Error retrieving alert", e);
@@ -406,14 +423,14 @@ class StateContainerState extends State<StateContainer> {
     try {
       final http.Response response = await http.get(Uri.parse("https://branch.io"), headers: {'Content-type': 'application/json'});
 
-      // we only care to show this if the server is unreachable but our backend is:
+      // we only care to show this if branch is unreachable but our backend is:
       final bool connected = await sl.get<AccountService>().isConnected();
       if (connected && response.statusCode != 200) {
-        updateActiveAlert(branchAlert, null);
+        addActiveOrSettingsAlert(branchAlert, null);
       }
     } catch (e) {
       log.e("Error connecting to branch.io", e);
-      updateActiveAlert(branchAlert, null);
+      addActiveOrSettingsAlert(branchAlert, null);
       return;
     }
   }

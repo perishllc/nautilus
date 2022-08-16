@@ -57,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Dalītā summa nevar būt lielāka par dāvanas atlikumu"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Lūdzu ievadiet daudzumu"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Mēs pamanījām, ka esat noklikšķinājis uz saites, kurā ir ietverts nanoelements. Vai vēlaties izlaist iestatīšanas procesu? Jūs vienmēr varat mainīt lietas vēlāk.\n\n Tomēr, ja jums ir kāda sēkla, kuru vēlaties importēt, atlasiet nē."),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Autentifikācija"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -213,6 +215,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Atbalstiet projektu"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Iespējot paziņojumus"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Ievadiet adresi"),
@@ -261,6 +265,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Money"),
+        "exchangeNano":
+            MessageLookupByLibrary.simpleMessage("Apmainīties ar NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "failed": MessageLookupByLibrary.simpleMessage("failed"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -429,6 +435,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "In order for this feature to work correctly, notifications must be enabled"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Saņemts %1 NANO"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Paziņojumi ir atspējoti"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Maksājumu pieprasījumiem, piezīmēm un ziņojumiem ir jāiespējo paziņojumi, lai tie darbotos pareizi, jo tie izmanto FCM paziņojumu pakalpojumu, lai nodrošinātu ziņojumu piegādi.\n\nVarat iespējot paziņojumus, izmantojot tālāk esošo pogu, vai noraidīt šo kartīti, ja nevēlaties izmantot šīs funkcijas."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Maksājumu pieprasījumi, piezīmes un ziņojumi nedarbosies pareizi."),
         "notifications": MessageLookupByLibrary.simpleMessage("Paziņojumi"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Izslēgts"),

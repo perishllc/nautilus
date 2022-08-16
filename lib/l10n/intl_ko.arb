@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "나노가 포함된 링크를 클릭한 것을 확인했습니다. 설정 프로세스를 건너뛰시겠습니까? 나중에 언제든지 변경할 수 있습니다.\n\n 그러나 가져오려는 기존 시드가 있는 경우 아니오를 선택해야 합니다.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "인증 중",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "알림 활성화",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Failed to set a wallet password",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "거래소 나노",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Exit",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "알림 비활성화됨",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "지불 요청, 메모 및 메시지는 모두 FCM 알림 서비스를 사용하여 메시지 전달을 보장하므로 제대로 작동하려면 알림을 활성화해야 합니다.\n\n아래 버튼으로 알림을 활성화하거나 이러한 기능을 사용하지 않으려면 이 카드를 닫을 수 있습니다.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "결제 요청, 메모, 메시지가 제대로 작동하지 않습니다.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "보내지 않음",
   "@notSent": {

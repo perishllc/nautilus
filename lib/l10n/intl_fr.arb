@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Nous avons remarqué que vous avez cliqué sur un lien contenant des nano, souhaitez-vous ignorer le processus de configuration ? Vous pouvez toujours changer les choses plus tard.\n\n Si vous avez une graine existante que vous souhaitez importer, vous devez sélectionner non.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Authentification",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Activer les notifications",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Problème de mot de passe",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Échange NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Sortie",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Notifications désactivées",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Les demandes de paiement, les mémos et les messages nécessitent tous que les notifications soient activées pour fonctionner correctement car ils utilisent le service de notifications FCM pour assurer la livraison des messages.\n\nVous pouvez activer les notifications avec le bouton ci-dessous ou ignorer cette carte si vous ne souhaitez pas utiliser ces fonctionnalités.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Les demandes de paiement, les mémos et les messages ne fonctionneront pas correctement.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "non envoyé",
   "@notSent": {

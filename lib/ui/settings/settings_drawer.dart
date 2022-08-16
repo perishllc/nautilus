@@ -34,6 +34,7 @@ import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
 import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
 import 'package:nautilus_wallet_flutter/model/nyanicon_option.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
 import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -1367,30 +1368,39 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       }
     }
 
+    final List<Widget> settingsAlerts = <Widget>[];
+    for (final AlertResponseItem alert in StateContainer.of(context).settingsAlerts) {
+      settingsAlerts.add(
+        Container(
+          padding: const EdgeInsetsDirectional.only(
+            start: 12,
+            end: 12,
+            bottom: 20,
+          ),
+          child: RemoteMessageCard(
+            alert: alert,
+            onPressed: () {
+              Sheets.showAppHeightEightSheet(
+                context: context,
+                widget: RemoteMessageSheet(
+                  alert: alert,
+                  hasDismissButton: false,
+                ),
+              );
+            },
+          ),
+        ),
+      );
+    }
+
     return ListView(
       padding: const EdgeInsets.only(top: 15.0),
       controller: _scrollController,
-      children: [
+      children: <Widget>[
         // Active Alerts, Remote Message Card
-        if (StateContainer.of(context).settingsAlert != null)
-          Container(
-            padding: const EdgeInsetsDirectional.only(
-              start: 12,
-              end: 12,
-              bottom: 20,
-            ),
-            child: RemoteMessageCard(
-              alert: StateContainer.of(context).settingsAlert,
-              onPressed: () {
-                Sheets.showAppHeightEightSheet(
-                  context: context,
-                  widget: RemoteMessageSheet(
-                    alert: StateContainer.of(context).settingsAlert,
-                    hasDismissButton: false,
-                  ),
-                );
-              },
-            ),
+        if (StateContainer.of(context).settingsAlerts.isNotEmpty)
+          Column(
+            children: settingsAlerts,
           ),
         if (!Platform.isIOS &&
             StateContainer.of(context).fundingAlerts != null &&
@@ -2515,6 +2525,30 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                         child: Image(
                           fit: BoxFit.fitWidth,
                           image: AssetImage("assets/logos/redeemforme.png"),
+                        ),
+                      ),
+                    ),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+
+                    Container(
+                      margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
+                      child: Text(AppLocalization.of(context).exchangeNano,
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                    ),
+
+                    AppSettings.buildSettingsListItemSingleLine(
+                      context,
+                      NonTranslatable.nanswap,
+                      AppIcons.coins,
+                      onPressed: () async {
+                        const String url = "https://nanswap.com/?ref=nautilus";
+                        await UIUtil.showWebview(context, url);
+                      },
+                      iconOverride: const SizedBox(
+                        width: 24,
+                        child: Image(
+                          fit: BoxFit.fitWidth,
+                          image: AssetImage("assets/logos/nanswap.png"),
                         ),
                       ),
                     ),

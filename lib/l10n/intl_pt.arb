@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Percebemos que você clicou em um link que contém alguns nano. Você gostaria de pular o processo de configuração? Você sempre pode mudar as coisas mais tarde.\n\n No entanto, se você tiver uma semente existente que deseja importar, selecione não.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Autenticação",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Ativar notificações",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Falha ao definir a senha da carteira",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Troca NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Sair",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Notificações desativadas",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Solicitações de pagamento, memorandos e mensagens exigem que as notificações sejam habilitadas para funcionar corretamente, pois usam o serviço de notificações do FCM para garantir a entrega de mensagens.\n\nVocê pode ativar as notificações com o botão abaixo ou dispensar este cartão se não quiser usar esses recursos.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Solicitações de pagamento, memorandos e mensagens não funcionarão corretamente.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "não enviado",
   "@notSent": {

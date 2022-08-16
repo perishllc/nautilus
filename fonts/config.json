@@ -155,6 +155,18 @@
       "css": "clipboard",
       "code": 62248,
       "src": "fontawesome5"
+    },
+    {
+      "uid": "55df818c163c6195231a3ba2a4159310",
+      "css": "clear",
+      "code": 59402,
+      "src": "material"
+    },
+    {
+      "uid": "af05e9a046b7ea6e6fe5be07675ef0e8",
+      "css": "clear_all",
+      "code": 59403,
+      "src": "material"
     }
   ]
 }

@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Delt beløp kan ikke være større enn gavesaldoen"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Vennligst tast inn et beløp"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "Vi la merke til at du klikket på en lenke som inneholder noe nano, vil du hoppe over konfigurasjonsprosessen? Du kan alltid endre ting senere.\n\n Hvis du imidlertid har et eksisterende frø som du vil importere, bør du velge nei."),
         "asked": MessageLookupByLibrary.simpleMessage("spurte"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Autentiserer"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -211,6 +213,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Støtt prosjektet"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Aktiver varsler"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Kunne ikke velge lommebokens passord"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Angi adresse"),
@@ -259,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gass Penger"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Bytt NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Avslutt"),
         "failed": MessageLookupByLibrary.simpleMessage("mislyktes"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -433,6 +438,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "For at denne funksjonen skal fungere riktig, må varsler være aktivert"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("%1 NANO mottatt"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Varsler deaktivert"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Alle betalingsforespørsler, notater og meldinger krever at varslinger er aktivert for å fungere som de skal, ettersom de bruker FCM-varslingstjenesten for å sikre meldingslevering.\n\nDu kan aktivere varsler med knappen nedenfor eller avvise dette kortet hvis du ikke bryr deg om å bruke disse funksjonene."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Betalingsforespørsler, notater og meldinger vil ikke fungere ordentlig."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifikasjoner"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Deaktiver"),

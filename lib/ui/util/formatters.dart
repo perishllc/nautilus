@@ -7,137 +7,16 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 
 /// Input formatter for Crypto/Fiat amounts
-class CurrencyFormatter extends TextInputFormatter {
-  CurrencyFormatter({required this.currencyFormat, this.maxDecimalDigits = NumberUtil.maxDecimalDigits});
-
-  NumberFormat currencyFormat;
-  int maxDecimalDigits;
-
-  @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    final String commaSeparator = currencyFormat.symbols.GROUP_SEP;
-    final String decimalSeparator = currencyFormat.symbols.DECIMAL_SEP;
-    // final int maxDecimalDigits = currencyFormat.decimalDigits!;
-
-    if (!newValue.text.contains(decimalSeparator) && !newValue.text.contains(commaSeparator)) {
-      return newValue;
+int findDifferentCharacterInString(String str1, String str2) {
+  for (int i = 0; i < str1.length; i++) {
+    if (i > str2.length - 1) {
+      return i;
     }
-
-    String workingText = newValue.text.replaceAll(commaSeparator, "");
-    // if contains more than 2 decimals in newValue, return oldValue
-    if (decimalSeparator.allMatches(workingText).length > 1) {
-      return newValue.copyWith(text: oldValue.text, selection: oldValue.selection);
+    if (str1[i] != str2[i]) {
+      return i;
     }
-
-    if (workingText.startsWith(decimalSeparator)) {
-      workingText = "0$workingText";
-    }
-
-    final List<String> splitStr = workingText.split(decimalSeparator);
-
-    // If this string contains more than 1 decimal, move all characters to after the first decimal
-    // if (splitStr.length > 2) {
-    //   returnOriginal = false;
-    //   splitStr.forEach((val) {
-    //     if (splitStr.indexOf(val) > 1) {
-    //       splitStr[1] += val;
-    //     }
-    //   });
-    // }
-    // if (splitStr.isNotEmpty && splitStr[1].length > maxDecimalDigits) {
-    //   // if (workingText == newValue.text) {
-    //   //   return newValue;
-    //   // } else {
-    //   //   return newValue.copyWith(text: workingText, selection: TextSelection.collapsed(offset: workingText.length));
-    //   // }
-    //   return oldValue;
-    // }
-    late String newText;
-    if (splitStr.length > 1 && newValue.text.contains(decimalSeparator)) {
-      newText = splitStr[0] + decimalSeparator + splitStr[1].substring(0, min(maxDecimalDigits, splitStr[1].length));
-    } else {
-      newText = newValue.text;
-    }
-
-    if (splitStr[0].length > 13) {
-      return newValue.copyWith(text: oldValue.text, selection: oldValue.selection);
-    }
-
-    // selection:
-    final TextSelection oldSelection = oldValue.selection;
-    TextSelection newSelection;
-    if (newText == oldValue.text) {
-      newSelection = oldSelection;
-    } else if (oldSelection.baseOffset < newText.length - 1) {
-      int offset = 0;
-      if (newValue.text.startsWith(decimalSeparator)) {
-        offset = 1;
-      }
-      // move the cursor back by one if this was a backspace:
-      if (newValue.text.length == oldValue.text.length - 1) {
-        offset = -2;
-      }
-      newSelection = TextSelection.collapsed(offset: oldSelection.baseOffset + 1 + offset);
-    } else {
-      newSelection = TextSelection.collapsed(offset: newText.length);
-    }
-
-    return newValue.copyWith(text: newText, selection: newSelection);
   }
-}
-
-class LocalCurrencyFormatter extends TextInputFormatter {
-  LocalCurrencyFormatter({required this.currencyFormat, this.active});
-
-  late NumberFormat currencyFormat;
-  bool? active;
-
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.trim() == currencyFormat.currencySymbol.trim() || newValue.text.isEmpty || newValue.text == " ") {
-      // Return empty string
-      return newValue.copyWith(text: "", selection: const TextSelection.collapsed(offset: 0));
-    }
-
-    String shouldBeText = convertCryptoToLocalAmount(newValue.text, currencyFormat);
-    if (active!) {
-      shouldBeText = currencyFormat.currencySymbol + shouldBeText;
-    }
-
-    if (shouldBeText != newValue.text) {
-      // find selection:
-      final TextSelection oldSelection = oldValue.selection;
-      TextSelection newSelection;
-      if (shouldBeText == oldValue.text) {
-        newSelection = oldSelection;
-      } else if (oldSelection.baseOffset < shouldBeText.length) {
-        int offset = 0;
-        // if (newValue.text.startsWith(decimalSeparator)) {
-        //   offset = 1;
-        // }
-        final int diff = shouldBeText.length - oldValue.text.length;
-        // move the cursor back by one if this was a backspace:
-        if (shouldBeText.length > oldValue.text.length) {
-          offset = diff;
-        } else if (shouldBeText.length < oldValue.text.length) {
-          offset = diff;
-        }
-        newSelection = TextSelection.collapsed(offset: max(oldSelection.baseOffset + offset, 0));
-      } else {
-        newSelection = TextSelection.collapsed(offset: shouldBeText.length);
-      }
-
-      return newValue.copyWith(text: shouldBeText, selection: newSelection);
-    }
-    // } else {
-    //   // Make crypto amount have no symbol and formatted as US locale
-    //   final String curText = newValue.text;
-    //   final String shouldBeText = NumberUtil.sanitizeNumber(curText.replaceAll(",", "."));
-    //   if (shouldBeText != curText) {
-    //     return newValue.copyWith(text: shouldBeText, selection: TextSelection.collapsed(offset: shouldBeText.length));
-    //   }
-    // }
-    return newValue;
-  }
+  return -1;
 }
 
 /// Input formatter for Crypto/Fiat amounts
@@ -176,9 +55,20 @@ class CurrencyFormatter2 extends TextInputFormatter {
 
     // we added 1 character:
     if (workingText.length == oldValue.text.length + 1) {
-      // we added a comma, deny:
+
+      // we added a comma, attempt to replace it with a decimalSeparator if there isn't one already:
       if (commaSeparator.allMatches(workingText).length > commaSeparator.allMatches(oldValue.text).length) {
-        return same;
+
+        // return if we already have a decimalSeparator:
+        if (workingText.contains(decimalSeparator)) {
+          return same;
+        }
+
+        // replace the comma with a decimalSeparator:
+
+        // find the index of the comma:
+        final int commaIndex = findDifferentCharacterInString(workingText, oldValue.text);
+        workingText = workingText.substring(0, commaIndex) + decimalSeparator + workingText.substring(commaIndex + 1);
       }
     }
 
@@ -230,6 +120,8 @@ class CurrencyFormatter2 extends TextInputFormatter {
     int amountLengthChanged = 0;
     amountLengthChanged = localizedAmount.length - workingText.length;
     workingOffset += amountLengthChanged;
+
+    // print("$localizedAmount : $workingText : $amountLengthChanged");
 
     // edge case:
     if (amountLengthChanged < 0 && newValue.text.startsWith(decimalSeparator)) {
@@ -315,6 +207,10 @@ String convertCryptoToLocalAmount(String localAmount, NumberFormat currencyForma
 
   if (secondPart.isNotEmpty || localAmount.contains(currencyFormat.symbols.DECIMAL_SEP)) {
     secondPart = currencyFormat.symbols.DECIMAL_SEP + secondPart;
+  }
+
+  if (firstPart.isEmpty) {
+    return "";
   }
   // shouldBeText = currencyFormat!.currencySymbol + shouldBeText.replaceAll(".", currencyFormat!.symbols.DECIMAL_SEP);
 

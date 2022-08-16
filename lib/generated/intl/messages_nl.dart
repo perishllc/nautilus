@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Gesplitst bedrag kan niet groter zijn dan het cadeausaldo"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Voer a.u.b. een bedrag in"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "We hebben gemerkt dat je op een link hebt geklikt die wat nano bevat, wil je het installatieproces overslaan? Je kunt later altijd nog dingen veranderen.\n\n Als je echter een bestaande seed hebt die je wilt importeren, moet je nee selecteren."),
         "asked": MessageLookupByLibrary.simpleMessage("Vroeg"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Authenticatie"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -214,6 +216,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Steun het project"),
         "edit": MessageLookupByLibrary.simpleMessage("Bewerken"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Notificaties aanzetten"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Kan geen Wallet-wachtwoord instellen"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Vul adres in"),
@@ -262,6 +266,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gasgeld"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Ruil NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Verlaten"),
         "failed": MessageLookupByLibrary.simpleMessage("mislukt"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -436,6 +441,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Om deze functie correct te laten werken, moeten meldingen zijn ingeschakeld"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("%1 NANO ontvangen"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Meldingen uitgeschakeld"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Voor betalingsverzoeken, memo\'s en berichten moeten alle meldingen zijn ingeschakeld om correct te kunnen werken, aangezien ze de FCM-meldingenservice gebruiken om de bezorging van berichten te garanderen.\n\nU kunt meldingen inschakelen met de onderstaande knop of deze kaart sluiten als u deze functies niet wilt gebruiken."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Betalingsverzoeken, memo\'s en berichten werken niet correct."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notificaties"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Uit"),

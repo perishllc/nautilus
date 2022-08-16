@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Napansin naming nag-click ka sa isang link na naglalaman ng ilang nano, gusto mo bang laktawan ang proseso ng pag-setup? Maaari mong palaging baguhin ang mga bagay sa ibang pagkakataon.\n\n Kung mayroon kang umiiral na binhi na gusto mong i-import gayunpaman, dapat mong piliin ang hindi.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Nagpapatotoo",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Paganahin ang mga notification",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Nabigo sa paglagay ng wallet password",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Palitan ng NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Lumabas",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Hindi Pinagana ang Mga Notification",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Ang mga Kahilingan sa Pagbabayad, Memo, at Mensahe ay nangangailangan ng lahat ng mga notification na paganahin upang gumana nang maayos habang ginagamit nila ang serbisyo ng mga notification ng FCM upang matiyak ang paghahatid ng mensahe.\n\nMaaari mong paganahin ang mga notification gamit ang button sa ibaba o i-dismiss ang card na ito kung wala kang pakialam na gamitin ang mga feature na ito.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Hindi gagana nang maayos ang Mga Kahilingan sa Pagbabayad, Memo, at Mensahe.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "hindi ipinadala",
   "@notSent": {

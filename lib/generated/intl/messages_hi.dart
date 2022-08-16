@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "विभाजित राशि उपहार शेष राशि से अधिक नहीं हो सकती"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("कृपया राशि दर्ज करें"),
+        "askSkipSetup": MessageLookupByLibrary.simpleMessage(
+            "हमने देखा है कि आपने एक लिंक पर क्लिक किया है जिसमें कुछ नैनो है, क्या आप सेटअप प्रक्रिया को छोड़ना चाहेंगे? आप बाद में कभी भी चीजें बदल सकते हैं।\n\n यदि आपके पास एक मौजूदा बीज है जिसे आप आयात करना चाहते हैं, तो आपको नहीं का चयन करना चाहिए।"),
         "asked": MessageLookupByLibrary.simpleMessage("पूछे जाने पर"),
         "authConfirm":
             MessageLookupByLibrary.simpleMessage("प्रमाणित कर रहा है"),
@@ -213,6 +215,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("परियोजना का समर्थन करें"),
         "edit": MessageLookupByLibrary.simpleMessage("संपादित करें"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("सूचनाएं सक्षम करें"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "वॉलेट पासवर्ड सेट करने में विफल"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("पता दर्ज करें"),
@@ -261,6 +265,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("गैस मनी"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("एक्सचेंज नैनो"),
         "exit": MessageLookupByLibrary.simpleMessage("बाहर निकलें"),
         "failed": MessageLookupByLibrary.simpleMessage("विफल रहा"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -432,6 +437,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "इस सुविधा को सही तरीके से काम करने के लिए, सूचनाएं सक्षम होनी चाहिए"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("%1 बनानो प्राप्त हुए"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("सूचनाएं अक्षम"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "भुगतान अनुरोध, मेमो और संदेश सभी को ठीक से काम करने के लिए सूचनाओं को सक्षम करने की आवश्यकता होती है क्योंकि वे संदेश वितरण सुनिश्चित करने के लिए FCM सूचना सेवा का उपयोग करते हैं।\n\nयदि आप इन सुविधाओं का उपयोग करने की परवाह नहीं करते हैं तो आप नीचे दिए गए बटन से सूचनाएं सक्षम कर सकते हैं या इस कार्ड को खारिज कर सकते हैं।"),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "भुगतान अनुरोध, मेमो और संदेश ठीक से काम नहीं करेंगे।"),
         "notifications": MessageLookupByLibrary.simpleMessage("सूचनाएं"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("न्यैनिकॉन"),
         "off": MessageLookupByLibrary.simpleMessage("बंद"),

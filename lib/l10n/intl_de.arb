@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Wir haben festgestellt, dass Sie auf einen Link geklickt haben, der Nano enthält. Möchten Sie den Einrichtungsvorgang überspringen? Sie können die Dinge später immer noch ändern.\n\n Wenn Sie jedoch einen vorhandenen Seed haben, den Sie importieren möchten, sollten Sie Nein auswählen.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Authentifizieren",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Benachrichtigungen aktivieren",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Wallet-Passwort konnte nicht festgelegt werden",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Nano austauschen",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Verlassen",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Benachrichtigungen deaktiviert",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Für Zahlungsanforderungen, Memos und Nachrichten müssen alle Benachrichtigungen aktiviert werden, damit sie ordnungsgemäß funktionieren, da sie den FCM-Benachrichtigungsdienst verwenden, um die Nachrichtenübermittlung sicherzustellen.\n\nSie können Benachrichtigungen mit der Schaltfläche unten aktivieren oder diese Karte schließen, wenn Sie diese Funktionen nicht verwenden möchten.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Zahlungsaufforderungen, Memos und Nachrichten funktionieren nicht richtig.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "nicht gesendet",
   "@notSent": {

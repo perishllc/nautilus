@@ -417,7 +417,7 @@ class SharedPrefsUtil {
   }
 
   Future<void> setUseNatricon(bool useNatricon) async {
-    return await set(use_natricon, useNatricon);
+    return set(use_natricon, useNatricon);
   }
 
   Future<bool> getUseNatricon() async {
@@ -425,7 +425,7 @@ class SharedPrefsUtil {
   }
 
   Future<void> setUseNyanicon(bool useNyanicon) async {
-    return await set(use_nyanicon, useNyanicon);
+    return set(use_nyanicon, useNyanicon);
   }
 
   Future<bool> getUseNyanicon() async {
@@ -433,7 +433,7 @@ class SharedPrefsUtil {
   }
 
   Future<void> setMinRawReceive(String minRawReceive) async {
-    return await set(min_raw_receive, minRawReceive);
+    return set(min_raw_receive, minRawReceive);
   }
 
   Future<String> getMinRawReceive() async {
@@ -509,5 +509,9 @@ class SharedPrefsUtil {
     await prefs.remove(last_napi_users_check);
     await prefs.remove(ninja_api_cache);
     await prefs.remove(firstcontact_added);
+    // remove the dismissals of any important alerts:
+    await prefs.remove("alert_4040");
+    await prefs.remove("alert_4041");
+    await prefs.remove("alert_4042");
   }
 }

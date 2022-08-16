@@ -115,6 +115,11 @@
     "type": "text",
     "description": "home_asked_cta"
   },
+  "askSkipSetup": "Chúng tôi nhận thấy bạn đã nhấp vào một liên kết có chứa một số nano, bạn có muốn bỏ qua quá trình thiết lập không? Bạn luôn có thể thay đổi mọi thứ sau này.\n\n Tuy nhiên, nếu bạn có một hạt giống hiện có mà bạn muốn nhập, bạn nên chọn không.",
+  "@askSkipSetup": {
+    "type": "text",
+    "description": "prompt_skip_setup"
+  },
   "authConfirm": "Xác thực",
   "@authConfirm": {
     "type": "text",
@@ -575,6 +580,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableNotifications": "Bật thông báo",
+  "@enableNotifications": {
+    "type": "text",
+    "description": "notification_warning_enable_button"
+  },
   "encryptionFailedError": "Đặt mật khẩu ví không thành công",
   "@encryptionFailedError": {
     "type": "text",
@@ -719,6 +729,11 @@
   "@exampleRecRecipientMessage": {
     "type": "text",
     "description": "example_rec_recipient_message"
+  },
+  "exchangeNano": "Trao đổi NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
   },
   "exit": "Thoát",
   "@exit": {
@@ -1269,6 +1284,21 @@
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
+  },
+  "notificationWarning": "Đã tắt thông báo",
+  "@notificationWarning": {
+    "type": "text",
+    "description": "home_notification_warning"
+  },
+  "notificationWarningBodyLong": "Yêu cầu thanh toán, Bản ghi nhớ và Tin nhắn đều yêu cầu bật thông báo để hoạt động bình thường khi chúng sử dụng dịch vụ thông báo FCM để đảm bảo gửi tin nhắn.\n\nBạn có thể bật thông báo bằng nút bên dưới hoặc loại bỏ thẻ này nếu bạn không muốn sử dụng các tính năng này.",
+  "@notificationWarningBodyLong": {
+    "type": "text",
+    "description": "notification_warning_body_long"
+  },
+  "notificationWarningBodyShort": "Yêu cầu thanh toán, Bản ghi nhớ và Tin nhắn sẽ không hoạt động bình thường.",
+  "@notificationWarningBodyShort": {
+    "type": "text",
+    "description": "notification_warning_body_short"
   },
   "notSent": "chưa được gửi",
   "@notSent": {

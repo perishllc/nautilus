@@ -4,13 +4,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_i
 import 'package:nautilus_wallet_flutter/styles.dart';
 
 class RemoteMessageCard extends StatefulWidget {
-  final AlertResponseItem? alert;
-  final Function? onPressed;
-  final bool showDesc;
-  final bool showTimestamp;
-  final bool hasBg;
-
-  RemoteMessageCard({
+  const RemoteMessageCard({
     this.alert,
     this.onPressed,
     this.showDesc = true,
@@ -18,10 +12,16 @@ class RemoteMessageCard extends StatefulWidget {
     this.hasBg = true,
   });
 
-  _RemoteMessageCardState createState() => _RemoteMessageCardState();
+  final AlertResponseItem? alert;
+  final Function? onPressed;
+  final bool showDesc;
+  final bool showTimestamp;
+  final bool hasBg;
+
+  RemoteMessageCardState createState() => RemoteMessageCardState();
 }
 
-class _RemoteMessageCardState extends State<RemoteMessageCard> {
+class RemoteMessageCardState extends State<RemoteMessageCard> {
   @override
   Widget build(BuildContext context) {
     return Container(

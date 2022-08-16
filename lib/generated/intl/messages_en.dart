@@ -211,6 +211,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Support the Project"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("Enable Notifications"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Enter Address"),
@@ -258,6 +260,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Money"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Exchange NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "failed": MessageLookupByLibrary.simpleMessage("failed"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
@@ -426,6 +429,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "In order for this feature to work correctly, notifications must be enabled"),
         "notificationTitle":
             MessageLookupByLibrary.simpleMessage("Received %1 %2"),
+        "notificationWarning":
+            MessageLookupByLibrary.simpleMessage("Notifications Disabled"),
+        "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Payment Requests, Memos, and Messages all require notifications to be enabled in order to work properly as they use the FCM notifications service to ensure message delivery.\n\nYou can enable notifications with the button below or dismiss this card if you don\'t care to use these features."),
+        "notificationWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Payment Requests, Memos, and Messages will not function properly."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
         "off": MessageLookupByLibrary.simpleMessage("Off"),
