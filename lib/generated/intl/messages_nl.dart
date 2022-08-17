@@ -33,11 +33,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Actief bericht"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Account toevoegen"),
+        "addAddress":
+            MessageLookupByLibrary.simpleMessage("Voeg een adres toe"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("Een gebruiker blokkeren"),
         "addContact": MessageLookupByLibrary.simpleMessage("Contact toevoegen"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Favoriet toevoegen"),
+        "addUser":
+            MessageLookupByLibrary.simpleMessage("Een gebruiker toevoegen"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Alleen kijken-account toevoegen"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -534,6 +538,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader": MessageLookupByLibrary.simpleMessage(
             "Registreer een gebruikersnaam"),
         "registering": MessageLookupByLibrary.simpleMessage("Registreren"),
+        "remove": MessageLookupByLibrary.simpleMessage("Verwijderen"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Weet je zeker dat je dit account wil verbergen? Je kan het later weer terughalen door op de \"%1\" knop te klikken."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Deblokkeer"),
@@ -625,6 +630,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bericht verzenden"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Verzoek opnieuw verzenden"),
+        "sendRequests":
+            MessageLookupByLibrary.simpleMessage("Verzoeken verzenden"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Verzend of vraag een betaling aan, met End-to-end versleutelde berichten!\n\nBetalingsverzoeken, memo\'s en berichten kunnen alleen door andere nautilus-gebruikers worden ontvangen.\n\nU hoeft geen gebruikersnaam te hebben om betalingsverzoeken te verzenden of te ontvangen, en u kunt ze gebruiken voor uw eigen administratie, zelfs als ze geen nautilus gebruiken."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
@@ -661,13 +668,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "showContacts": MessageLookupByLibrary.simpleMessage("Contacten tonen"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Financieringsbanner weergeven"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("Toon link QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR-code weergeven"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Ongeopende waarschuwing"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("iemand"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Besteed NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Factuur splitsen"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Een rekening splitsen"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Verstuur een heleboel betalingsverzoeken in één keer! Maakt het gemakkelijk om bijvoorbeeld een rekening te splitsen in een restaurant."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Factuurgegevens splitsen"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Gesplitst door"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
@@ -739,6 +752,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Gebruik NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Gebruiker al toegevoegd!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("Gebruiker niet gevonden!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

@@ -32,9 +32,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("הודעה פעילה"),
         "addAccount": MessageLookupByLibrary.simpleMessage("הוסף חשבון"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("הוסף כתובת"),
         "addBlocked": MessageLookupByLibrary.simpleMessage("חסימת משתמש"),
         "addContact": MessageLookupByLibrary.simpleMessage("הוסף איש קשר"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("הוסף מועדף"),
+        "addUser": MessageLookupByLibrary.simpleMessage("הוסף משתמש"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("הוסף חשבון צפייה בלבד"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -500,6 +502,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("רשום שם משתמש"),
         "registering": MessageLookupByLibrary.simpleMessage("הרשמה"),
+        "remove": MessageLookupByLibrary.simpleMessage("לְהַסִיר"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "אתה בטוח שאתה רוצה להחביא את החשבון? אתה יכול להוסיף אותו מחודש מאוחר יותר על ידי לחיצה על כפתור ה%1."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("בטל חסימה"),
@@ -582,6 +585,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("שליחת הודעה"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("שלח בקשה שוב"),
+        "sendRequests": MessageLookupByLibrary.simpleMessage("לשלוח בקשות"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "שלח או בקש תשלום, עם הודעות מוצפנות מקצה לקצה!\n\nבקשות תשלום, תזכירים והודעות יהיו חייבים רק על ידי משתמשי נאוטילוס אחרים.\n\nאתה לא צריך שם משתמש כדי לשלוח או לקבל בקשות תשלום, ואתה יכול להשתמש בהם לצורך שמירת רשומות משלך גם אם הם לא משתמשים בנאוטילוס."),
         "sendSheetInfoHeader":
@@ -616,13 +620,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("הצג קוד QR של חשבון"),
         "showContacts": MessageLookupByLibrary.simpleMessage("הצג אנשי קשר"),
         "showFunding": MessageLookupByLibrary.simpleMessage("הצג באנר מימון"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("הצג קישור QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("הצג קוד QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("אזהרה לא נפתחה"),
         "simplex": MessageLookupByLibrary.simpleMessage("סימפלקס"),
         "someone": MessageLookupByLibrary.simpleMessage("מִישֶׁהוּ"),
         "spendNano": MessageLookupByLibrary.simpleMessage("להוציא ננו"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("ביל מפוצל"),
+        "splitBillHeader": MessageLookupByLibrary.simpleMessage("פיצול שטר"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "שלח חבורה של בקשות תשלום בבת אחת! מקל על חלוקת חשבון במסעדה למשל."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("פיצול פרטי חשבון"),
         "splitBy": MessageLookupByLibrary.simpleMessage("פיצול לפי"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -690,6 +699,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("השתמש ב-NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("משתמש כבר נוסף!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("המשתמש לא נמצא!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
             "כבר יש לך שם משתמש רשום! כרגע לא ניתן לשנות את שם המשתמש שלך, אבל אתה חופשי לרשום אחד חדש תחת כתובת אחרת."),

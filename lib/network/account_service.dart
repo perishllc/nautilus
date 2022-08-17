@@ -7,6 +7,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:ens_dart/ens_dart.dart';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
@@ -142,16 +143,16 @@ class AccountService {
     _isConnecting = true;
 
     // DEV SERVER:
-    // if (kDebugMode) {
-    //   _HTTP_PROTO = "http://";
-    //   _WS_PROTO = "ws://";
-    //   _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
-    //   log.d("CONNECTED TO DEV SERVER");
-    // }
+    if (kDebugMode) {
+      _HTTP_PROTO = "http://";
+      _WS_PROTO = "ws://";
+      _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
+      log.d("CONNECTED TO DEV SERVER");
+    }
 
     // ENS:
-    const String rpcUrl = 'https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}';
-    const String wsUrl = 'wss://mainnet.infura.io/ws/v3/${Sensitive.INFURA_API_KEY}';
+    const String rpcUrl = "https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}";
+    const String wsUrl = "wss://mainnet.infura.io/ws/v3/${Sensitive.INFURA_API_KEY}";
 
     _web3Client = Web3Client(rpcUrl, http.Client(), socketConnector: () {
       return IOWebSocketChannel.connect(wsUrl).cast<String>();
@@ -307,7 +308,7 @@ class AccountService {
     await _lock.synchronized(() async {
       //log.d("Request Queue length ${_requestQueue.length}");
       if (_requestQueue != null && _requestQueue!.isNotEmpty) {
-        final RequestItem requestItem = _requestQueue!.first;
+        final RequestItem<dynamic> requestItem = _requestQueue!.first;
         if (!requestItem.isProcessing!) {
           if (!_isConnected && !_isConnecting && !suspended) {
             initCommunication();
@@ -589,8 +590,14 @@ class AccountService {
     String? splitAmountRaw,
     String? memo,
   }) async {
+    final String? appCheckToken = await FirebaseAppCheck.instance.getToken();
+    if (appCheckToken == null) {
+      return {
+        "error": "Something went wrong",
+      };
+    }
     final http.Response response = await http.post(Uri.parse(_SERVER_ADDRESS_HTTP),
-        headers: {"Accept": "application/json"},
+        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
         body: json.encode(
           {
             "action": "gift_split_create",
@@ -603,7 +610,7 @@ class AccountService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      return {"success": false};
+      return {"success": false, "error": "Something went wrong"};
     }
   }
 
@@ -623,8 +630,14 @@ class AccountService {
     String? giftUUID,
     String? requestingAccount,
   }) async {
+    final String? appCheckToken = await FirebaseAppCheck.instance.getToken();
+    if (appCheckToken == null) {
+      return {
+        "error": "Something went wrong",
+      };
+    }
     final http.Response response = await http.post(Uri.parse(_SERVER_ADDRESS_HTTP),
-        headers: {"Accept": "application/json"},
+        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
         body: json.encode(
           {
             "action": "gift_info",
@@ -644,8 +657,14 @@ class AccountService {
     String? giftUUID,
     String? requestingAccount,
   }) async {
+    final String? appCheckToken = await FirebaseAppCheck.instance.getToken();
+    if (appCheckToken == null) {
+      return {
+        "error": "Something went wrong",
+      };
+    }
     final http.Response response = await http.post(Uri.parse(_SERVER_ADDRESS_HTTP),
-        headers: {"Accept": "application/json"},
+        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
         body: json.encode(
           {
             "action": "gift_claim",

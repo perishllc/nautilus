@@ -33,10 +33,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Pesan Aktif"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Tambah Akun"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("Tambahkan Alamat"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("Memblokir Pengguna"),
         "addContact": MessageLookupByLibrary.simpleMessage("Tambah Kontak"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Tambah Favorit"),
+        "addUser": MessageLookupByLibrary.simpleMessage("Tambahkan Pengguna"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Tambahkan Akun Hanya Tonton"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -532,6 +534,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("Daftarkan Username"),
         "registering": MessageLookupByLibrary.simpleMessage("Mendaftar"),
+        "remove": MessageLookupByLibrary.simpleMessage("Menghapus"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Anda yakin akan menyembunyikan akun ini? Anda dapat menambahkan kembali dengan klik tombol \"%1\"."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Buka blokir"),
@@ -621,6 +624,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mengirim pesan"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Kirim Permintaan lagi"),
+        "sendRequests":
+            MessageLookupByLibrary.simpleMessage("Mengirim permintaan"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Kirim atau Minta pembayaran, dengan pesan End to End Encrypted!\n\nPermintaan pembayaran, memo, dan pesan hanya akan diterima oleh pengguna nautilus lainnya.\n\nAnda tidak perlu memiliki nama pengguna untuk mengirim atau menerima permintaan pembayaran, dan Anda dapat menggunakannya untuk penyimpanan catatan Anda sendiri meskipun mereka tidak menggunakan nautilus."),
         "sendSheetInfoHeader":
@@ -658,14 +663,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tampilkan Kontak"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Tampilkan Spanduk Pendanaan"),
-        "showLinkQR":
-            MessageLookupByLibrary.simpleMessage("Tampilkan Tautan QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Tampilkan Kode QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Peringatan Belum Dibuka"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
         "someone": MessageLookupByLibrary.simpleMessage("seseorang"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Habiskan NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Pisahkan Tagihan"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Pisahkan Tagihan"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Kirim banyak permintaan pembayaran sekaligus! Memudahkan itu membagi tagihan di restoran misalnya."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Bagi Info Tagihan"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dibagi Oleh"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
@@ -737,6 +747,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Gunakan NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Pengguna sudah ditambahkan!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("Pengguna tidak ditemukan!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

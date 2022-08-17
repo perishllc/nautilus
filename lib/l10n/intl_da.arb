@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "Tilføj en adresse",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "Bloker en bruger",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "Tilføj en bruger",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "Tilføj kun Watch-konto",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "Fjerne",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "Opravdu chcete tento účet skrýt? Můžete jej znovu přidat později klepnutím na tlačítko \"%1\".",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "Send anmodninger",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "Send eller anmod om en betaling, med End to End-krypterede meddelelser!\n\nBetalingsanmodninger, notater, og meddelelser kan kun modtages af andre nautilus-brugere.\n\nDu behøver ikke at have et brugernavn for at sende eller modtage betalingsanmodninger, og du kan bruge dem til din egen journalføring, selvom de ikke bruger nautilus.",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "Split Bill",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "Del en regning",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "Send en masse betalingsanmodninger på én gang! Gør det nemt at dele en regning på f.eks. en restaurant.",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "Opdel regningsoplysninger",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "Opdel efter",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "Brugeren er allerede tilføjet!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "Du har allerede registreret et brugernavn! Det er i øjeblikket ikke muligt at ændre dit brugernavn, men du er fri til at registrere et nyt under en anden adresse.",
   "@usernameAlreadyRegistered": {

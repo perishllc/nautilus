@@ -33,12 +33,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktív üzenet"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Add Account"),
+        "addAddress":
+            MessageLookupByLibrary.simpleMessage("Adjon hozzá egy címet"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("Felhasználó letiltása"),
         "addContact":
             MessageLookupByLibrary.simpleMessage("Kontakt Hozzáadása"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Kedvenc hozzáadása"),
+        "addUser":
+            MessageLookupByLibrary.simpleMessage("Felhasználó hozzáadása"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Csak figyelési fiók hozzáadása"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -536,6 +540,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader": MessageLookupByLibrary.simpleMessage(
             "Felhasználónév regisztrálása"),
         "registering": MessageLookupByLibrary.simpleMessage("Regisztráció"),
+        "remove": MessageLookupByLibrary.simpleMessage("Távolítsa el"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Feloldás"),
@@ -626,6 +631,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Üzenet küldése"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Kérés küldése újra"),
+        "sendRequests": MessageLookupByLibrary.simpleMessage("Kérések küldése"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Fizetés küldése vagy kérése, End to End to End Titkosított üzenetekkel!\n\nFizetési kérelmek, emlékeztetők, és az üzeneteket csak más nautilus felhasználók fogadják el.\n\nA fizetési kérelmek küldéséhez vagy fogadásához nem kell felhasználónévvel rendelkeznie, és akkor is felhasználhatja őket saját nyilvántartására, még akkor is, ha nem használják a nautilust."),
         "sendSheetInfoHeader":
@@ -665,14 +671,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Névjegyek megjelenítése"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Finanszírozási szalag megjelenítése"),
-        "showLinkQR":
-            MessageLookupByLibrary.simpleMessage("Link QR megjelenítése"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR-kód megjelenítése"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Bontatlan Figyelmeztetés"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("valaki"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Töltsön NANO-t"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),
+        "splitBillHeader": MessageLookupByLibrary.simpleMessage("Split A Bill"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Egyszerre küldjön egy csomó fizetési kérelmet! Megkönnyíti például a számla felosztását egy étteremben."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Split Bill Info"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Felosztás"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
@@ -742,6 +752,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Használj NANO-t"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Felhasználó már hozzáadva!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "A felhasználó nem található!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

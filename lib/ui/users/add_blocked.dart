@@ -26,6 +26,7 @@ class AddBlockedSheet extends StatefulWidget {
   const AddBlockedSheet({this.address}) : super();
   final String? address;
 
+  @override
   AddBlockedSheetState createState() => AddBlockedSheetState();
 }
 
@@ -404,10 +405,20 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
               ),
               // The header of the sheet
               Container(
-                margin: const EdgeInsets.only(top: 30.0),
+                margin: EdgeInsets.zero,
                 constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                 child: Column(
                   children: <Widget>[
+                    // Sheet handle
+                    Container(
+                      margin: const EdgeInsets.only(top: 10, bottom: 15),
+                      height: 5,
+                      width: MediaQuery.of(context).size.width * 0.15,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.text20,
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                    ),
                     AutoSizeText(
                       CaseChange.toUpperCase(AppLocalization.of(context).addBlocked, context),
                       style: AppStyles.textStyleHeader(context),

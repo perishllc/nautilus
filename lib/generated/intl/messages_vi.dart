@@ -32,9 +32,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("TIn nhắn đang hoạt động"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Thêm tài khoản"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("Thêm một địa chỉ"),
         "addBlocked": MessageLookupByLibrary.simpleMessage("Chặn người dùng"),
         "addContact": MessageLookupByLibrary.simpleMessage("Thêm liên hệ"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Thêm yêu thích"),
+        "addUser": MessageLookupByLibrary.simpleMessage("Thêm người dùng"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Thêm tài khoản chỉ xem"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -532,6 +534,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("Đăng ký tên người dùng"),
         "registering": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+        "remove": MessageLookupByLibrary.simpleMessage("Loại bỏ"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc muốn ẩn tài khoản này? Bạn có thể thêm lại bằng cách ấn vào nút \"%1\"."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Bỏ chặn"),
@@ -621,6 +624,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gửi tin nhắn"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Gửi lại yêu cầu"),
+        "sendRequests": MessageLookupByLibrary.simpleMessage("Gửi yêu cầu"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Gửi hoặc yêu cầu thanh toán, với các tin nhắn được mã hóa End to End!\n\nYêu cầu thanh toán, bản ghi nhớ và tin nhắn sẽ chỉ được chấp nhận bởi những người dùng nautilus khác.\n\nBạn không cần phải có tên người dùng để gửi hoặc nhận yêu cầu thanh toán, và bạn có thể sử dụng chúng để lưu giữ hồ sơ của riêng bạn ngay cả khi họ không sử dụng nautilus."),
         "sendSheetInfoHeader":
@@ -659,14 +663,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hiển thị danh bạ"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Hiển thị biểu ngữ tài trợ"),
-        "showLinkQR":
-            MessageLookupByLibrary.simpleMessage("Hiển thị liên kết QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Hiển thị mã QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Cảnh báo chưa mở"),
         "simplex": MessageLookupByLibrary.simpleMessage("Đơn giản"),
         "someone": MessageLookupByLibrary.simpleMessage("người nào"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Tiêu NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Hóa đơn tách"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Chia một hóa đơn"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Gửi một loạt các yêu cầu thanh toán cùng một lúc! Ví dụ, giúp bạn dễ dàng chia hóa đơn tại một nhà hàng."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Thông tin tách bạch hóa đơn"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Chia theo"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -737,6 +746,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Sử dụng NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Người dùng đã được thêm!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("Không tìm thấy người dùng!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

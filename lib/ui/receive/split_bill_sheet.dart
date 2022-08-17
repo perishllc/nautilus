@@ -212,7 +212,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
               if (users.length < MAX_ACCOUNTS)
                 Container(
                   alignment: Alignment.centerRight,
-                  margin: const EdgeInsets.only(right: 30, bottom: 10),
+                  margin: const EdgeInsets.only(right: 28, bottom: 10),
                   child: FloatingActionButton(
                     backgroundColor: StateContainer.of(context).curTheme.primary,
                     onPressed: !_addingAccount
@@ -544,6 +544,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
           onPressed: (BuildContext context) {
             setState(() {
               users.remove(user);
+              userMap[user.getDisplayName()!] = null;
             });
           }));
     }

@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "Добавить адрес",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "Заблокировать пользователя",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "Добавить пользователя",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "Добавить учетную запись только для просмотра",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "Удалять",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "Вы уверены, что хотите скрыть аккаунт? Вы можете добавить его снова, нажав кнопку \"%1\".",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "Отправить запросы",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "Отправляйте или запрашивайте платеж с помощью сообщений со сквозным шифрованием!\n\nЗапросы на оплату, записки и сообщения будут приниматься только другими пользователями nautilus.\n\nВам не нужно иметь имя пользователя для отправки или получения запросов на оплату, и вы можете использовать их для ведения собственного учета, даже если они не используют nautilus.",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "Разделить счет",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "Разделить счет",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "Отправляйте сразу кучу запросов на оплату! Например, легко разделить счет в ресторане.",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "Информация о раздельном счете",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "Разделить по",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "Пользователь уже добавлен!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "У вас уже есть зарегистрированное имя пользователя! В настоящее время изменить имя пользователя невозможно, но вы можете зарегистрировать новое имя под другим адресом.",
   "@usernameAlreadyRegistered": {

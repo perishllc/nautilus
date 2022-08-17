@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ import 'package:nautilus_wallet_flutter/localize.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/model/available_language.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/avatar/avatar.dart';
@@ -56,6 +58,10 @@ Future<void> main() async {
   // Setup firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  await FirebaseAppCheck.instance.activate(
+    webRecaptchaSiteKey: Sensitive.CAPTCHA_SITE_KEY,
   );
 
   if (!kReleaseMode) {

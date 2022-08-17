@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "Adres Ekle",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "Bir Kullanıcıyı Engelleme",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "Kullanıcı Ekle",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "Yalnızca İzleme Hesabı Ekle",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "Kaldırmak",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "Hesabı gizlemek istediğine emin misin? Bu hesabı daha sonra \"%1\" butonuna basarak tekrar ekleyebilirsin.",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "İstekleri göndermek",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "Uçtan Uca Şifreli mesajlarla ödeme gönderin veya talep edin!\n\nÖdeme istekleri, notlar, ve mesajlar yalnızca diğer nautilus kullanıcıları tarafından alınacaktır.\n\nÖdeme istekleri göndermek veya almak için bir kullanıcı adınızın olması gerekmez, ve nautilus kullanmasalar bile bunları kendi kayıt tutmanız için kullanabilirsiniz.",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "Faturayı Böl",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "Fatura Böl",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "Tek seferde bir sürü ödeme isteği gönderin! Örneğin bir restoranda bir faturayı bölmeyi kolaylaştırır.",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "Bölünmüş Fatura Bilgisi",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "Bölme Ölçütü",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "Kullanıcı zaten eklendi!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "Zaten kayıtlı bir kullanıcı adınız var! Şu anda kullanıcı adınızı değiştirmek mümkün değil, ancak farklı bir adres altında yeni bir tane kaydetmekte özgürsünüz.",
   "@usernameAlreadyRegistered": {

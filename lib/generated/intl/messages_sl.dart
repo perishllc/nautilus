@@ -32,10 +32,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktivno sporočilo"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Dodaj račun"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("Dodajte naslov"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("Blokiraj uporabnika"),
         "addContact": MessageLookupByLibrary.simpleMessage("Dodaj stik"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Dodaj Favorite"),
+        "addUser": MessageLookupByLibrary.simpleMessage("Dodajte uporabnika"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Dodaj račun samo za ogled"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -532,6 +534,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader": MessageLookupByLibrary.simpleMessage(
             "Registrirajte uporabniško ime"),
         "registering": MessageLookupByLibrary.simpleMessage("Registracija"),
+        "remove": MessageLookupByLibrary.simpleMessage("Odstrani"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Ste prepričani, da hočete skriti ta račun? Lahko ga ponovno dodate kasneje s pritiskom na gumb \"%1\""),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Odblokiraj"),
@@ -621,6 +624,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pošiljanje sporočila"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Ponovno pošlji zahtevo"),
+        "sendRequests":
+            MessageLookupByLibrary.simpleMessage("Pošiljanje zahtev"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Pošljite ali zahtevajte plačilo s šifriranimi sporočili od konca do konca!\n\nZahteve za plačilo, beležke in sporočila bodo terjali samo drugi uporabniki Nautilusa.\n\nZa pošiljanje ali prejemanje zahtevkov za plačilo vam ni treba imeti uporabniškega imena in jih lahko uporabite za lastno vodenje evidenc, tudi če ne uporabljajo nautilusa."),
         "sendSheetInfoHeader":
@@ -656,14 +661,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "showContacts": MessageLookupByLibrary.simpleMessage("Pokaži stike"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Pokaži pasico financiranja"),
-        "showLinkQR":
-            MessageLookupByLibrary.simpleMessage("Prikaži povezavo QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Prikaži kodo QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Neodprto opozorilo"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
         "someone": MessageLookupByLibrary.simpleMessage("nekdo"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Porabite NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Razdeljeni račun"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Razdeli račun"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Pošljite kup zahtevkov za plačilo hkrati! Poenostavi na primer razdelitev računa v restavraciji."),
+        "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informacije o razdeljenem računu"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Razdeli po"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -734,6 +744,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Uporabite NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Uporabnik je že dodan!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "Uporabnik ni bilo mogoče najti!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

@@ -33,10 +33,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Активне повідомлення"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Додати гаманець"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("Додайте адресу"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("Блокування користувача"),
         "addContact": MessageLookupByLibrary.simpleMessage("Додати контакт"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Додати Улюблене"),
+        "addUser": MessageLookupByLibrary.simpleMessage("Додати користувача"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Додати обліковий запис лише для перегляду"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -545,6 +547,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader": MessageLookupByLibrary.simpleMessage(
             "Зареєструвати ім\'я користувача"),
         "registering": MessageLookupByLibrary.simpleMessage("Реєстрація"),
+        "remove": MessageLookupByLibrary.simpleMessage("видалити"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Чи дійсно ви бажаєте приховати цей профіль? Ви зможете його побачити торкнувши кнопку \"%1\"."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Розблокувати"),
@@ -635,6 +638,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Відправка повідомлення"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Надіслати запит ще раз"),
+        "sendRequests":
+            MessageLookupByLibrary.simpleMessage("Відправити запит"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Надсилайте або запитуйте платіж із зашифрованими повідомленнями End to End!\n\nПлатіжні запити, замітки та повідомлення будуть отримувати лише інші користувачі nautilus.\n\nВам не потрібно мати ім\'я користувача для надсилання або отримання платіжних запитів, і ви можете використовувати їх для власного ведення обліку, навіть якщо вони не використовують nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
@@ -676,14 +681,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Показати контакти"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Показати банер фінансування"),
-        "showLinkQR":
-            MessageLookupByLibrary.simpleMessage("Показати посилання QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Показати QR-код"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Невідкрите попередження"),
         "simplex": MessageLookupByLibrary.simpleMessage("Симплекс"),
         "someone": MessageLookupByLibrary.simpleMessage("хтось"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Витрати НАНО"),
+        "splitBill":
+            MessageLookupByLibrary.simpleMessage("Розділений законопроект"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Розділити купюру"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Надішліть купу платіжних запитів одночасно! Спрощує розділення рахунку, наприклад, у ресторані."),
+        "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Інформація про розділений рахунок"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Розділити за"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -756,6 +767,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Використовуйте NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Користувача вже додано!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("Користувача не знайдено!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

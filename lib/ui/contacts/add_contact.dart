@@ -233,19 +233,19 @@ class _AddContactSheetState extends State<AddContactSheet> {
       fadePrefixOnCondition: true,
       prefixShowFirstCondition: _pasteButtonVisible,
       suffixButton: TextFieldButton(
-          icon: _clearButton ? AppIcons.clear : AppIcons.paste,
-          onPressed: () async {
-            if (_clearButton) {
-              setState(() {
-                _isUser = false;
-                _addressValidationText = "";
-                _pasteButtonVisible = true;
-                _clearButton = false;
-                _addressController!.text = "";
-                _users = <User>[];
-              });
-              return;
-            }
+        icon: _clearButton ? AppIcons.clear : AppIcons.paste,
+        onPressed: () async {
+          if (_clearButton) {
+            setState(() {
+              _isUser = false;
+              _addressValidationText = "";
+              _pasteButtonVisible = true;
+              _clearButton = false;
+              _addressController!.text = "";
+              _users = <User>[];
+            });
+            return;
+          }
           final String? data = await UserDataUtil.getClipboardText(DataType.ADDRESS);
           if (data != null) {
             setState(() {
@@ -283,17 +283,17 @@ class _AddContactSheetState extends State<AddContactSheet> {
           _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         }
 
-          if (text.isNotEmpty) {
-            setState(() {
-              _pasteButtonVisible = true;
-              _clearButton = true;
-            });
-          } else {
-            setState(() {
-              _pasteButtonVisible = true;
-              _clearButton = false;
-            });
-          }
+        if (text.isNotEmpty) {
+          setState(() {
+            _pasteButtonVisible = true;
+            _clearButton = true;
+          });
+        } else {
+          setState(() {
+            _pasteButtonVisible = true;
+            _clearButton = false;
+          });
+        }
 
         if (text.isNotEmpty && !isUser && !isNano) {
           isUser = true;
@@ -418,10 +418,20 @@ class _AddContactSheetState extends State<AddContactSheet> {
               ),
               // The header of the sheet
               Container(
-                margin: const EdgeInsets.only(top: 30.0),
+                margin: EdgeInsets.zero,
                 constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                 child: Column(
                   children: <Widget>[
+                    // Sheet handle
+                    Container(
+                      margin: const EdgeInsets.only(top: 10, bottom: 15),
+                      height: 5,
+                      width: MediaQuery.of(context).size.width * 0.15,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.text20,
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                    ),
                     AutoSizeText(
                       CaseChange.toUpperCase(AppLocalization.of(context).addContact, context),
                       style: AppStyles.textStyleHeader(context),
@@ -596,8 +606,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                         newContact = User(nickname: formattedNickname, address: formAddress, username: _correspondingUsername);
                         await sl.get<DBHelper>().saveContact(newContact);
                       } else if (_correspondingAddress != null) {
-                        newContact =
-                            User(nickname: formattedNickname, address: _correspondingAddress, username: SendSheetHelpers.stripPrefixes(formAddress));
+                        newContact = User(nickname: formattedNickname, address: _correspondingAddress, username: SendSheetHelpers.stripPrefixes(formAddress));
                         await sl.get<DBHelper>().saveContact(newContact);
                       } else {
                         // just an address:

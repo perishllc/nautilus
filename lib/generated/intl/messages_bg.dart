@@ -32,10 +32,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Активно съобщение"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Добави Акаунт"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("Добавяне на адрес"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("Блокиране на потребител"),
         "addContact": MessageLookupByLibrary.simpleMessage("Добави Контакт"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Добави Любими"),
+        "addUser":
+            MessageLookupByLibrary.simpleMessage("Добавяне на потребител"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Добавете акаунт само за гледане"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -532,6 +535,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader": MessageLookupByLibrary.simpleMessage(
             "Регистриране на потребителско име"),
         "registering": MessageLookupByLibrary.simpleMessage("Регистриране"),
+        "remove": MessageLookupByLibrary.simpleMessage("Премахване"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Наистина ли искате да скриете този акаунт? Може да го добавите по-късно като натиснете бутона  \"%1\"."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Отблокиране"),
@@ -622,6 +626,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Изпращане на съобщение"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Изпратете Заявка отново"),
+        "sendRequests": MessageLookupByLibrary.simpleMessage("Изпрати искания"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Изпратете или поискайте плащане с криптирани съобщения от край до край!\n\nИсканията за плащане, бележки и съобщения ще бъдат получени само от други потребители на nautilus.\n\nНе е необходимо да имате потребителско име, за да изпращате или получавате заявки за плащане, и можете да ги използвате за собствено водене на записи, дори ако те не използват nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
@@ -662,14 +667,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Показване на контактите"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Показване на банера за финансиране"),
-        "showLinkQR":
-            MessageLookupByLibrary.simpleMessage("Показване на връзка QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Показване на QR код"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Неотворено предупреждение"),
         "simplex": MessageLookupByLibrary.simpleMessage("Симплекс"),
         "someone": MessageLookupByLibrary.simpleMessage("някой"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Прекарайте NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Разделен Бил"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Разделяне на сметка"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Изпратете куп искания за плащане наведнъж! Улеснява разделянето на сметка в ресторант например."),
+        "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Разделена информация за сметката"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Разделяне по"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
@@ -741,6 +751,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Използвайте NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
+            "Потребителят вече е добавен!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("Потребителят не е намерен!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

@@ -34,10 +34,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Aktibong Mensahe"),
         "addAccount":
             MessageLookupByLibrary.simpleMessage("Magdagdag ng Account"),
+        "addAddress":
+            MessageLookupByLibrary.simpleMessage("Magdagdag ng Address"),
         "addBlocked": MessageLookupByLibrary.simpleMessage("I-block ang User"),
         "addContact": MessageLookupByLibrary.simpleMessage("Mag-add ng kontak"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Magdagdag ng Paboritong"),
+        "addUser": MessageLookupByLibrary.simpleMessage("Magdagdag ng User"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Magdagdag ng Watch Only Account"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -546,6 +549,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("Magrehistro ng Username"),
         "registering": MessageLookupByLibrary.simpleMessage("Pagpaparehistro"),
+        "remove": MessageLookupByLibrary.simpleMessage("Alisin"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Sigurado ka ba na gusto mo itong itago? Pwede mo itong i-add ulit sa pamamagitan ng \"%1\" button."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("I-unblock"),
@@ -639,6 +643,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pagpapadala ng mensahe"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Ipadala muli ang Kahilingan"),
+        "sendRequests":
+            MessageLookupByLibrary.simpleMessage("Magpadala ng mga kahilingan"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Magpadala o Humiling ng pagbabayad, na may End to End End Encrypted na mensahe!\n\nAng mga kahilingan sa pagbabayad, mga memo, at mga mensahe ay matatanggap lamang ng iba pang mga gumagamit ng nautilus.\n\nHindi mo kailangang magkaroon ng username upang makapagpadala o makatanggap ng mga kahilingan sa pagbabayad, at maaari mo itong gamitin para sa iyong sariling record keeping kahit hindi sila gumagamit ng nautilus."),
         "sendSheetInfoHeader":
@@ -679,14 +685,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ipakita ang Contact"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Ipakita ang Funding Banner"),
-        "showLinkQR":
-            MessageLookupByLibrary.simpleMessage("Ipakita ang Link QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Ipakita ang QR Code"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Hindi Nabuksang Babala"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("isang tao"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Gumastos ng NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Hatiin ang Isang Bill"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Magpadala ng isang grupo ng mga kahilingan sa pagbabayad nang sabay-sabay! Pinapadali nito ang paghahati ng bill sa isang restaurant halimbawa."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Impormasyon ng Split Bill"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Hatiin Ni"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
@@ -757,6 +768,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Gumamit ng NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Naidagdag na ang user!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("Hindi natagpuan ang user!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

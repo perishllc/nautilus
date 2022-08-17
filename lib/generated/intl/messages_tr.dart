@@ -32,10 +32,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktif Mesaj"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Hesap Ekle"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("Adres Ekle"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("Bir Kullanıcıyı Engelleme"),
         "addContact": MessageLookupByLibrary.simpleMessage("Kişi Ekle"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Favori Ekle"),
+        "addUser": MessageLookupByLibrary.simpleMessage("Kullanıcı Ekle"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Yalnızca İzleme Hesabı Ekle"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -523,6 +525,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("Kullanıcı Adı Kaydet"),
         "registering": MessageLookupByLibrary.simpleMessage("Kayıt"),
+        "remove": MessageLookupByLibrary.simpleMessage("Kaldırmak"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Hesabı gizlemek istediğine emin misin? Bu hesabı daha sonra \"%1\" butonuna basarak tekrar ekleyebilirsin."),
         "removeBlocked":
@@ -611,6 +614,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mesaj gönderme"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Tekrar İstek Gönder"),
+        "sendRequests":
+            MessageLookupByLibrary.simpleMessage("İstekleri göndermek"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Uçtan Uca Şifreli mesajlarla ödeme gönderin veya talep edin!\n\nÖdeme istekleri, notlar, ve mesajlar yalnızca diğer nautilus kullanıcıları tarafından alınacaktır.\n\nÖdeme istekleri göndermek veya almak için bir kullanıcı adınızın olması gerekmez, ve nautilus kullanmasalar bile bunları kendi kayıt tutmanız için kullanabilirsiniz."),
         "sendSheetInfoHeader":
@@ -647,14 +652,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "showContacts": MessageLookupByLibrary.simpleMessage("Kişileri Göster"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Finansman Afişini Göster"),
-        "showLinkQR":
-            MessageLookupByLibrary.simpleMessage("Bağlantı QR\'sini göster"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR Kodunu Göster"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Açılmamış Uyarı"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
         "someone": MessageLookupByLibrary.simpleMessage("birisi"),
         "spendNano": MessageLookupByLibrary.simpleMessage("NANO harca"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Faturayı Böl"),
+        "splitBillHeader": MessageLookupByLibrary.simpleMessage("Fatura Böl"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Tek seferde bir sürü ödeme isteği gönderin! Örneğin bir restoranda bir faturayı bölmeyi kolaylaştırır."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Bölünmüş Fatura Bilgisi"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Bölme Ölçütü"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -725,6 +734,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("NANO kullan"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Kullanıcı zaten eklendi!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("Kullanıcı bulunamadı!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

@@ -2,6 +2,8 @@
 #### Added
 - Split Bill Menu! Easily split a bill by sending payment requests to multiple people at once!
 #### Changed
+- Added handlebars to some sheet menus that were missing them
+- UI Tweaks to the gift creation / completion sheet
 #### Fixed
 - Nano.to leasing API updated
 - Rounding bug when displaying amounts like 4.99999 -> 5.999999

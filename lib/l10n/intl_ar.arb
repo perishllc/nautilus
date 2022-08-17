@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "إضافة عنوان",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "حظر مستخدم",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "أضف مستخدم",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "أضف حساب المشاهدة فقط",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "إزالة",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "هل أنت متأكد أنك تريد إخفاء هذا الحساب؟ يمكنك إعادة إضافته لاحقًا بذخت على \"%1\"",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "ارسل طلبات",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "أرسل أو اطلب دفعة، مع الرسائل المشفرة من النهاية إلى النهاية!\n\nلن يتم قبول طلبات الدفع والمذكرات والرسائل إلا من قبل مستخدمي nautilus الآخرين.\n\nلا تحتاج إلى اسم مستخدم لإرسال أو استقبال طلبات الدفع، ويمكنك استخدامها لحفظ السجلات الخاصة بك حتى لو لم تستخدم nautilus.",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "سبليت بيل",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "تقسيم مشروع قانون",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "أرسل مجموعة من طلبات الدفع دفعة واحدة! يجعل من السهل تقسيم فاتورة في مطعم على سبيل المثال.",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "تقسيم معلومات بيل",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "تقسيم حسب",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "تمت إضافة المستخدم بالفعل!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "لديك بالفعل اسم مستخدم مسجل! ليس من الممكن حاليًا تغيير اسم المستخدم الخاص بك، ولكن لك مطلق الحرية في تسجيل اسم مستخدم جديد تحت عنوان مختلف.",
   "@usernameAlreadyRegistered": {

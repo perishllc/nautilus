@@ -31,9 +31,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("アクティブメッセージ"),
         "addAccount": MessageLookupByLibrary.simpleMessage("アカウントを追加する"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("アドレスを追加"),
         "addBlocked": MessageLookupByLibrary.simpleMessage("ユーザーをブロックする"),
         "addContact": MessageLookupByLibrary.simpleMessage("連絡先を追加する"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("お気に入りを追加"),
+        "addUser": MessageLookupByLibrary.simpleMessage("ユーザーを追加"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("視聴専用アカウントを追加"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -463,6 +465,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("ユーザー名を登録する"),
         "registering": MessageLookupByLibrary.simpleMessage("登録中"),
+        "remove": MessageLookupByLibrary.simpleMessage("削除する"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "このアカウントを非表示にしてよろしいですか？ 「％1」ボタンをタップして、後に再び追加できます。"),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("ブロック解除"),
@@ -541,6 +544,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendMessageConfirm": MessageLookupByLibrary.simpleMessage("メッセージを送信中"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("リクエストをもう一度送る"),
+        "sendRequests": MessageLookupByLibrary.simpleMessage("要求を送信する"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "エンドツーエンドの暗号化されたメッセージで、支払いを送信またはリクエストしてください！\n\n支払い要求、メモ、メッセージは、他のノーチラスユーザーのみが受領できます。\n\n支払いリクエストを送受信するためにユーザー名は必要ありません。また、ノーチラスを使用していなくても、自分の記録保持に使用できます。"),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage("シート情報を送る"),
@@ -573,12 +577,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("アカウントの QR コードを表示"),
         "showContacts": MessageLookupByLibrary.simpleMessage("連絡先を表示"),
         "showFunding": MessageLookupByLibrary.simpleMessage("ファンディング バナーを表示"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("リンクの QR を表示"),
         "showQR": MessageLookupByLibrary.simpleMessage("QRコードを表示"),
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("未開封注意"),
         "simplex": MessageLookupByLibrary.simpleMessage("シンプレックス"),
         "someone": MessageLookupByLibrary.simpleMessage("誰か"),
         "spendNano": MessageLookupByLibrary.simpleMessage("NANOを使う"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("分割請求"),
+        "splitBillHeader": MessageLookupByLibrary.simpleMessage("請求書を分割する"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "一度にたくさんの支払いリクエストを送信してください！たとえば、レストランで請求書を簡単に分割できます。"),
+        "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage("分割請求情報"),
         "splitBy": MessageLookupByLibrary.simpleMessage("分割"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -644,6 +652,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("NANOを使う"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("ユーザーはすでに追加されています!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("ユーザーが見つかりませんでした！"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

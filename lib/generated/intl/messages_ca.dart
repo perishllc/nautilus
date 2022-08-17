@@ -33,9 +33,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktivní zpráva"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Přidat účet"),
+        "addAddress":
+            MessageLookupByLibrary.simpleMessage("Afegeix una adreça"),
         "addBlocked": MessageLookupByLibrary.simpleMessage("Block a User"),
         "addContact": MessageLookupByLibrary.simpleMessage("Přidat kontakt"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Add Favorite"),
+        "addUser": MessageLookupByLibrary.simpleMessage("Afegeix un usuari"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Afegeix un compte només de rellotge"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -526,6 +529,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("Register a Username"),
         "registering": MessageLookupByLibrary.simpleMessage("Registering"),
+        "remove": MessageLookupByLibrary.simpleMessage("Eliminar"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Opravdu chcete tento účet skrýt? Můžete jej znovu přidat později klepnutím na tlačítko \"%1\"."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Unblock"),
@@ -616,6 +620,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sending message"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Send Request again"),
+        "sendRequests":
+            MessageLookupByLibrary.simpleMessage("Enviar sol · licituds"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users.\n\nYou don\'t need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don\'t use nautilus."),
         "sendSheetInfoHeader":
@@ -654,14 +660,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "showContacts": MessageLookupByLibrary.simpleMessage("Show Contacts"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Mostra el bàner de finançament"),
-        "showLinkQR":
-            MessageLookupByLibrary.simpleMessage("Mostra l\'enllaç QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Mostra el codi QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Avís sense obrir"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("algú"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Gasta NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Bill dividit"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Dividir una factura"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Envieu un munt de sol·licituds de pagament alhora! Per exemple, facilita el repartiment d\'una factura en un restaurant."),
+        "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informació de factura dividida"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dividit per"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -733,6 +744,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Utilitzeu NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Usuari ja afegit!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),

@@ -30,9 +30,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure that you\'ve backed up your secret phrase or seed?"),
         "activeMessageHeader": MessageLookupByLibrary.simpleMessage("액티브 메시지"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Add Account"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("주소 추가"),
         "addBlocked": MessageLookupByLibrary.simpleMessage("사용자 차단"),
         "addContact": MessageLookupByLibrary.simpleMessage("연락처 추가"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("즐겨찾기 추가"),
+        "addUser": MessageLookupByLibrary.simpleMessage("사용자 추가"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("보기 전용 계정 추가"),
         "addWatchOnlyAccountError":
@@ -472,6 +474,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("사용자 이름 등록"),
         "registering": MessageLookupByLibrary.simpleMessage("등록하기"),
+        "remove": MessageLookupByLibrary.simpleMessage("제거하다"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("차단 해제"),
@@ -553,6 +556,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "트랜잭션과 함께 메모를 보내지 못했습니다. Nautilus 사용자가 아닐 수 있습니다."),
         "sendMessageConfirm": MessageLookupByLibrary.simpleMessage("메시지 보내기"),
         "sendRequestAgain": MessageLookupByLibrary.simpleMessage("요청 다시 보내기"),
+        "sendRequests": MessageLookupByLibrary.simpleMessage("요청을 보낼"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "엔드투엔드 암호화 메시지로 결제를 보내거나 요청하세요!\n\n지불 요청, 메모 및 메시지는 다른 nautilus 사용자만 받을 수 있습니다.\n\n지불 요청을 보내거나 받기 위해 사용자 이름이 필요하지 않으며, 노틸러스를 사용하지 않더라도 자신의 기록 보관에 사용할 수 있습니다."),
         "sendSheetInfoHeader":
@@ -586,12 +590,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "showAccountQR": MessageLookupByLibrary.simpleMessage("계정 QR 코드 표시"),
         "showContacts": MessageLookupByLibrary.simpleMessage("연락처 보기"),
         "showFunding": MessageLookupByLibrary.simpleMessage("펀딩 배너 표시"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("링크 QR 표시"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR 코드 표시"),
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("미개봉 경고"),
         "simplex": MessageLookupByLibrary.simpleMessage("심플렉스"),
         "someone": MessageLookupByLibrary.simpleMessage("누구"),
         "spendNano": MessageLookupByLibrary.simpleMessage("나노를 쓰다"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("분할 청구서"),
+        "splitBillHeader": MessageLookupByLibrary.simpleMessage("분할 청구서"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "한 번에 많은 지불 요청을 보내십시오! 예를 들어 레스토랑에서 청구서를 쉽게 분할할 수 있습니다."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("분할 청구서 정보"),
         "splitBy": MessageLookupByLibrary.simpleMessage("분할 기준"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage("도움말 지원 개발"),
@@ -657,6 +666,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("나노를 사용"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("사용자가 이미 추가되었습니다!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("사용자를 찾을 수 없습니다!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
             "이미 사용자 이름을 등록했습니다!현재 사용자 이름을 변경할 수는 없지만 다른 주소로 새 사용자 이름을 등록할 수는 있습니다."),

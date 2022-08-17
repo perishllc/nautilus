@@ -33,11 +33,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktivt Meddelande"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Lägg till konto"),
+        "addAddress":
+            MessageLookupByLibrary.simpleMessage("Lägg till en adress"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("Blockera en användare"),
         "addContact": MessageLookupByLibrary.simpleMessage("Lägg till kontakt"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Lägg till favorit"),
+        "addUser":
+            MessageLookupByLibrary.simpleMessage("Lägg till en användare"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Lägg till Watch Only-konto"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -532,6 +536,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("Registrera ett användarnamn"),
         "registering": MessageLookupByLibrary.simpleMessage("Registrering"),
+        "remove": MessageLookupByLibrary.simpleMessage("Ta bort"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Är du säker på att du vill dölja kontot? Du kan lägga till det igen genom att trycka på \"%1\" knappen."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Avblockera"),
@@ -624,6 +629,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Skicka meddelande"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Skicka förfrågan igen"),
+        "sendRequests":
+            MessageLookupByLibrary.simpleMessage("Skicka förfrågningar"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Skicka eller begär en betalning, med krypterade meddelanden från slut till slut!\n\nBetalningsförfrågningar, PM, och meddelanden kommer endast att tas emot av andra nautilus-användare.\n\nDu behöver inte ha ett användarnamn för att skicka eller ta emot betalningsförfrågningar, och du kan använda dem för din egen journalföring även om de inte använder nautilus."),
         "sendSheetInfoHeader":
@@ -660,13 +667,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "showContacts": MessageLookupByLibrary.simpleMessage("Visa kontakter"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Visa finansieringsbanner"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("Visa länk QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Visa QR-kod"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Oöppnad varning"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("någon"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Spendera NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Dela en räkning"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Skicka ett gäng betalningsförfrågningar på en gång! Gör det enkelt att dela en räkning på en restaurang till exempel."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Dela fakturainformation"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dela av"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -736,6 +749,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Använd NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
+            "Användaren har redan lagts till!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("Användaren hittades inte!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

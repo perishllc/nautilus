@@ -33,11 +33,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Mensagem ativa"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Adicionar Conta"),
+        "addAddress":
+            MessageLookupByLibrary.simpleMessage("Adicionar um endereço"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("Bloquear um usuário"),
         "addContact": MessageLookupByLibrary.simpleMessage("Adicionar Contato"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Adicionar favorito"),
+        "addUser": MessageLookupByLibrary.simpleMessage("Adicionar um usuário"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Adicionar conta somente para assistir"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -540,6 +543,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("Cadastrar um nome"),
         "registering": MessageLookupByLibrary.simpleMessage("Registrando"),
+        "remove": MessageLookupByLibrary.simpleMessage("Remover"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Tem certeza de que deseja ocultar esta conta? Você pode adicioná-la novamente tocando no botão \"%1\""),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Desbloquear"),
@@ -630,6 +634,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enviando mensagem"),
         "sendRequestAgain": MessageLookupByLibrary.simpleMessage(
             "Enviar solicitação novamente"),
+        "sendRequests":
+            MessageLookupByLibrary.simpleMessage("Enviar solicitações"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Envie ou solicite um pagamento, com mensagens criptografadas de ponta a ponta!\n\nSolicitações de pagamento, memorandos e mensagens só poderão ser recebidos por outros usuários do nautilus.\n\nVocê não precisa ter um nome de usuário para enviar ou receber solicitações de pagamento e pode usá-los para manter seus próprios registros, mesmo que eles não usem o nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
@@ -668,13 +674,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mostrar contatos"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Mostrar banner de financiamento"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("Mostrar link QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Mostrar código QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Aviso fechado"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("alguém"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Gaste NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Conta dividida"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Dividir uma conta"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Envie um monte de solicitações de pagamento de uma só vez! Facilita a divisão de uma conta em um restaurante por exemplo."),
+        "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informações da fatura dividida"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dividir por"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
@@ -745,6 +757,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Usar NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Usuário já adicionado!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("Usuário não encontrado!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

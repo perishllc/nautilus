@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "Ajouter une adresse",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "Bloquer un utilisateur",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "Ajouter un utilisateur",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "Ajouter un compte Watch Only",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "Retirer",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "Êtes-vous sûr(e) de vouloir cacher ce compte? Vous pouvez l'ajouter ultérieurement en appuyant sur le bouton \"%1\"",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "Envoyer des demandes",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "Envoyez ou demandez un paiement, avec des messages cryptés de bout en bout !\n\nLes demandes de paiement, les mémos et les messages ne seront recevables que par les autres utilisateurs de nautilus.\n\nVous n'avez pas besoin d'un nom d'utilisateur pour envoyer ou recevoir des demandes de paiement, et vous pouvez les utiliser pour votre propre tenue de dossiers même s'ils n'utilisent pas nautilus.",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "Facture fractionnée",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "Fractionner une facture",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "Envoyez un tas de demandes de paiement à la fois ! Facilite le fractionnement d'une facture dans un restaurant par exemple.",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "Diviser les informations sur la facture",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "Divisé par",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "Utilisateur déjà ajouté !",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "Vous avez déjà un nom d'utilisateur enregistré ! Il n'est actuellement pas possible de modifier votre nom d'utilisateur, mais vous êtes libre d'en enregistrer un nouveau sous une autre adresse.",
   "@usernameAlreadyRegistered": {

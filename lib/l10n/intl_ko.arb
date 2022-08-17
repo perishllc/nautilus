@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "주소 추가",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "사용자 차단",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "사용자 추가",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "보기 전용 계정 추가",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "제거하다",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button.",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "요청을 보낼",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "엔드투엔드 암호화 메시지로 결제를 보내거나 요청하세요!\n\n지불 요청, 메모 및 메시지는 다른 nautilus 사용자만 받을 수 있습니다.\n\n지불 요청을 보내거나 받기 위해 사용자 이름이 필요하지 않으며, 노틸러스를 사용하지 않더라도 자신의 기록 보관에 사용할 수 있습니다.",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "분할 청구서",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "분할 청구서",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "한 번에 많은 지불 요청을 보내십시오! 예를 들어 레스토랑에서 청구서를 쉽게 분할할 수 있습니다.",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "분할 청구서 정보",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "분할 기준",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "사용자가 이미 추가되었습니다!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "이미 사용자 이름을 등록했습니다!현재 사용자 이름을 변경할 수는 없지만 다른 주소로 새 사용자 이름을 등록할 수는 있습니다.",
   "@usernameAlreadyRegistered": {

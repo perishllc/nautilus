@@ -34,10 +34,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("সক্রিয় বার্তা"),
         "addAccount":
             MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট যোগ করুন"),
+        "addAddress":
+            MessageLookupByLibrary.simpleMessage("একটি ঠিকানা যোগ করুন"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("একটি ব্যবহারকারী ব্লক করুন"),
         "addContact": MessageLookupByLibrary.simpleMessage("কন্টাক্ট সংরক্ষণ"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("প্রিয় যোগ করো"),
+        "addUser":
+            MessageLookupByLibrary.simpleMessage("একটি ব্যবহারকারী যোগ করুন"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "শুধুমাত্র ওয়াচ অ্যাকাউন্ট যোগ করুন"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -536,6 +540,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader": MessageLookupByLibrary.simpleMessage(
             "একটি ব্যবহারকারীর নাম নিবন্ধন করুন"),
         "registering": MessageLookupByLibrary.simpleMessage("নিবন্ধন"),
+        "remove": MessageLookupByLibrary.simpleMessage("অপসারণ"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "আপনি কি এই অ্যাকাউন্টটি গোপন করতে চান? আপনি \"%1\" বোতামটি ট্যাপ করে পরে এটি পুনরায় যোগ করতে পারেন।"),
         "removeBlocked":
@@ -630,6 +635,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("বার্তা পাঠানো হচ্ছে"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("পুনরায় অনুরোধ পাঠান"),
+        "sendRequests": MessageLookupByLibrary.simpleMessage("অনুরোধ পাঠানো"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "এনক্রিপ্ট করা বার্তাগুলি শেষ করার সাথে সাথে অর্থ প্রদানের অনুরোধ করুন বা অনুরোধ করুন!\n\nপেমেন্ট অনুরোধ, মেমো, এবং বার্তা শুধুমাত্র অন্যান্য নটিলাস ব্যবহারকারীদের দ্বারা গ্রহণযোগ্য হবে।\n\nপেমেন্ট অনুরোধ পাঠাতে বা গ্রহণ করার জন্য আপনার কোন ব্যবহারকারীর নাম থাকতে হবে না, এবং যদি তারা নটিলাস ব্যবহার না করে তবে আপনি নিজের রেকর্ড রাখার জন্য সেগুলি ব্যবহার করতে পারেন।"),
         "sendSheetInfoHeader":
@@ -668,13 +674,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "showContacts": MessageLookupByLibrary.simpleMessage("পরিচিতি দেখাও"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("ফান্ডিং ব্যানার দেখান"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("লিঙ্ক QR দেখান"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR কোড দেখান"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("উন্মুক্ত সতর্কতা"),
         "simplex": MessageLookupByLibrary.simpleMessage("সিমপ্লেক্স"),
         "someone": MessageLookupByLibrary.simpleMessage("কেউ"),
         "spendNano": MessageLookupByLibrary.simpleMessage("NANO খরচ করুন"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("বিভক্ত বিল"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("বিভক্ত একটি বিল"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "একবারে একগুচ্ছ অর্থপ্রদানের অনুরোধ পাঠান! উদাহরণস্বরূপ এটি একটি রেস্টুরেন্টে একটি বিল ভাগ করা সহজ করে তোলে।"),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("বিভক্ত বিল তথ্য"),
         "splitBy": MessageLookupByLibrary.simpleMessage("দ্বারা বিভক্ত"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -746,6 +758,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("NANO ব্যবহার করুন"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
+            "ব্যবহারকারী ইতিমধ্যে যোগ করা হয়েছে!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("ব্যবহারকারী পাওয়া যায়নি!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

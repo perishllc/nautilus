@@ -32,10 +32,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("सक्रिय संदेश"),
         "addAccount": MessageLookupByLibrary.simpleMessage("खाता जोड़ो"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("एक पता जोड़ें"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("उपयोगकर्ता को अवरोधित करें"),
         "addContact": MessageLookupByLibrary.simpleMessage("संपर्क डालें"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("पसंदीदा जोड़ें"),
+        "addUser": MessageLookupByLibrary.simpleMessage("एक उपयोगकर्ता जोड़ें"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "केवल देखने के लिए खाता जोड़ें"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -530,6 +532,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("उपयोगकर्ता नाम रजिस्टर करें"),
         "registering": MessageLookupByLibrary.simpleMessage("पंजीयन"),
+        "remove": MessageLookupByLibrary.simpleMessage("हटाना"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "क्या आप वाकई इस खाते को छिपाना चाहते हैं? आप इसे बाद में \"%1\" बटन को दबा के फिर से जोड़ सकते हैं।"),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("अनब्लॉक करें"),
@@ -620,6 +623,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("संदेश भेज रहा है"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("अनुरोध फिर से भेजें"),
+        "sendRequests": MessageLookupByLibrary.simpleMessage("अनुरोध भेजना"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "एंड टू एंड एन्क्रिप्टेड संदेशों के साथ भुगतान भेजें या अनुरोध करें!\n\nभुगतान अनुरोध, ज्ञापन और संदेश केवल अन्य नॉटिलस उपयोगकर्ताओं द्वारा प्राप्य होंगे।\n\nभुगतान अनुरोध भेजने या प्राप्त करने के लिए आपके पास उपयोगकर्ता नाम रखने की आवश्यकता नहीं है, और आप उन्हें अपने रिकॉर्ड रखने के लिए उपयोग कर सकते हैं, भले ही वे नॉटिलस का उपयोग न करें।"),
         "sendSheetInfoHeader":
@@ -656,14 +660,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "showContacts": MessageLookupByLibrary.simpleMessage("संपर्क दिखाएँ"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("फंडिंग बैनर दिखाएं"),
-        "showLinkQR":
-            MessageLookupByLibrary.simpleMessage("लिंक क्यूआर दिखाएँ"),
         "showQR": MessageLookupByLibrary.simpleMessage("क्यूआर कोड दिखाएं"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("बंद चेतावनी"),
         "simplex": MessageLookupByLibrary.simpleMessage("सिंप्लेक्स"),
         "someone": MessageLookupByLibrary.simpleMessage("कोई तो"),
         "spendNano": MessageLookupByLibrary.simpleMessage("नैनो खर्च करें"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("स्प्लिट बिल"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("स्प्लिट ए बिल"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "एक बार में भुगतान अनुरोधों का एक गुच्छा भेजें! उदाहरण के लिए यह एक रेस्तरां में बिल को विभाजित करना आसान बनाता है।"),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("स्प्लिट बिल जानकारी"),
         "splitBy": MessageLookupByLibrary.simpleMessage("विभाजित करके"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -735,6 +744,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("नैनो का प्रयोग करें"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
+            "उपयोगकर्ता पहले ही जोड़ा जा चुका है!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("उपयोक्ता नहीं मिला!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "Magdagdag ng Address",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "I-block ang User",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "Magdagdag ng User",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "Magdagdag ng Watch Only Account",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "Alisin",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "Sigurado ka ba na gusto mo itong itago? Pwede mo itong i-add ulit sa pamamagitan ng \"%1\" button.",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "Magpadala ng mga kahilingan",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "Magpadala o Humiling ng pagbabayad, na may End to End End Encrypted na mensahe!\n\nAng mga kahilingan sa pagbabayad, mga memo, at mga mensahe ay matatanggap lamang ng iba pang mga gumagamit ng nautilus.\n\nHindi mo kailangang magkaroon ng username upang makapagpadala o makatanggap ng mga kahilingan sa pagbabayad, at maaari mo itong gamitin para sa iyong sariling record keeping kahit hindi sila gumagamit ng nautilus.",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "Split Bill",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "Hatiin ang Isang Bill",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "Magpadala ng isang grupo ng mga kahilingan sa pagbabayad nang sabay-sabay! Pinapadali nito ang paghahati ng bill sa isang restaurant halimbawa.",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "Impormasyon ng Split Bill",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "Hatiin Ni",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "Naidagdag na ang user!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "Mayroon ka nang isang username na nakarehistro! Sa kasalukuyan ay hindi posible na baguhin ang iyong username, ngunit libre kang magparehistro ng bago sa ilalim ng ibang address.",
   "@usernameAlreadyRegistered": {

@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "Dodajte naslov",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "Blokiraj uporabnika",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "Dodajte uporabnika",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "Dodaj račun samo za ogled",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "Odstrani",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "Ste prepričani, da hočete skriti ta račun? Lahko ga ponovno dodate kasneje s pritiskom na gumb \"%1\"",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "Pošiljanje zahtev",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "Pošljite ali zahtevajte plačilo s šifriranimi sporočili od konca do konca!\n\nZahteve za plačilo, beležke in sporočila bodo terjali samo drugi uporabniki Nautilusa.\n\nZa pošiljanje ali prejemanje zahtevkov za plačilo vam ni treba imeti uporabniškega imena in jih lahko uporabite za lastno vodenje evidenc, tudi če ne uporabljajo nautilusa.",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "Razdeljeni račun",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "Razdeli račun",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "Pošljite kup zahtevkov za plačilo hkrati! Poenostavi na primer razdelitev računa v restavraciji.",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "Informacije o razdeljenem računu",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "Razdeli po",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "Uporabnik je že dodan!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "Že imate registrirano uporabniško ime! Trenutno ni mogoče spremeniti uporabniškega imena, vendar lahko registrirate novega pod drugim naslovom.",
   "@usernameAlreadyRegistered": {

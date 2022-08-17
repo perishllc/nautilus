@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "एक पता जोड़ें",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "उपयोगकर्ता को अवरोधित करें",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "एक उपयोगकर्ता जोड़ें",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "केवल देखने के लिए खाता जोड़ें",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "हटाना",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "क्या आप वाकई इस खाते को छिपाना चाहते हैं? आप इसे बाद में \"%1\" बटन को दबा के फिर से जोड़ सकते हैं।",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "अनुरोध भेजना",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "एंड टू एंड एन्क्रिप्टेड संदेशों के साथ भुगतान भेजें या अनुरोध करें!\n\nभुगतान अनुरोध, ज्ञापन और संदेश केवल अन्य नॉटिलस उपयोगकर्ताओं द्वारा प्राप्य होंगे।\n\nभुगतान अनुरोध भेजने या प्राप्त करने के लिए आपके पास उपयोगकर्ता नाम रखने की आवश्यकता नहीं है, और आप उन्हें अपने रिकॉर्ड रखने के लिए उपयोग कर सकते हैं, भले ही वे नॉटिलस का उपयोग न करें।",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "स्प्लिट बिल",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "स्प्लिट ए बिल",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "एक बार में भुगतान अनुरोधों का एक गुच्छा भेजें! उदाहरण के लिए यह एक रेस्तरां में बिल को विभाजित करना आसान बनाता है।",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "स्प्लिट बिल जानकारी",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "विभाजित करके",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "उपयोगकर्ता पहले ही जोड़ा जा चुका है!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "आपके पास पहले से ही एक उपयोगकर्ता नाम पंजीकृत है! वर्तमान में अपना उपयोगकर्ता नाम बदलना संभव नहीं है, लेकिन आप एक अलग पते के तहत एक नया पंजीकरण करने के लिए स्वतंत्र हैं।",
   "@usernameAlreadyRegistered": {

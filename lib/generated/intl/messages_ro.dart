@@ -33,10 +33,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Mesaj activ"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Adăugare cont"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("Adăugați o adresă"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("Blocați un utilizator"),
         "addContact": MessageLookupByLibrary.simpleMessage("Adaugă contact"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Adauga Favorite"),
+        "addUser":
+            MessageLookupByLibrary.simpleMessage("Adăugați un utilizator"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Adăugați un cont numai pentru vizionare"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -532,6 +535,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader": MessageLookupByLibrary.simpleMessage(
             "Înregistrați un nume de utilizator"),
         "registering": MessageLookupByLibrary.simpleMessage("Înregistrarea"),
+        "remove": MessageLookupByLibrary.simpleMessage("Elimina"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Sigur doriți să ascundeți acest cont? Îl puteți reafișa mai târziu apăsând butonul \"%1\""),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Deblocați"),
@@ -623,6 +627,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Trimiterea mesajului"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Trimite cererea din nou"),
+        "sendRequests": MessageLookupByLibrary.simpleMessage("Trimite cereri"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Trimiteți sau solicitați o plată, cu mesaje criptate End to End!\n\nSolicitările de plată, memoriile și mesajele vor fi primite numai de către alți utilizatori nautilus.\n\nNu este necesar să aveți un nume de utilizator pentru a trimite sau primi cereri de plată și le puteți utiliza pentru păstrarea propriei evidențe, chiar dacă nu utilizează nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
@@ -660,13 +665,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Afișați contactele"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Afișați bannerul de finanțare"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("Afișați linkul QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Afișați codul QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Avertisment nedeschis"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("cineva"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Cheltuiește NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Bill împărțit"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Împărțiți o factură"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Trimiteți o grămadă de solicitări de plată deodată! Ușurează împărțirea unei facturi la un restaurant, de exemplu."),
+        "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Împărțiți informațiile facturii"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Split By"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
@@ -739,6 +750,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Folosește NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Utilizator deja adăugat!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "Utilizatorul nu a fost găsit!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

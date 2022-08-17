@@ -35,9 +35,9 @@ class _GiftQRSheetStateState extends State<GiftQRSheet> {
   // Address copied items
   // Current state references
   bool _showShareCard = false;
-  late bool _addressCopied;
+  late bool _linkCopied;
   // Timer reference so we can cancel repeated events
-  Timer? _addressCopiedTimer;
+  Timer? _linkCopiedTimer;
 
   Widget? qrWidget;
 
@@ -77,7 +77,7 @@ class _GiftQRSheetStateState extends State<GiftQRSheet> {
   void initState() {
     super.initState();
     // Set initial state of copy button
-    _addressCopied = false;
+    _linkCopied = false;
     // Create our SVG-heavy things in the constructor because they are slower operations
     // Share card initialization
     shareCardKey = GlobalKey();
@@ -253,86 +253,35 @@ class _GiftQRSheetStateState extends State<GiftQRSheet> {
                     AppButton.buildAppButton(
                         context,
                         // Copy Address Button
-                        _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _addressCopied ? AppLocalization.of(context).linkCopied : AppLocalization.of(context).copyLink,
-                        Dimens.BUTTON_TOP_DIMENS, onPressed: () {
+                        _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                        _linkCopied ? AppLocalization.of(context).linkCopied : AppLocalization.of(context).copyLink,
+                        Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
                       Clipboard.setData(ClipboardData(text: widget.link));
                       setState(() {
                         // Set copied style
-                        _addressCopied = true;
+                        _linkCopied = true;
                       });
-                      if (_addressCopiedTimer != null) {
-                        _addressCopiedTimer!.cancel();
+                      if (_linkCopiedTimer != null) {
+                        _linkCopiedTimer!.cancel();
                       }
-                      _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                      _linkCopiedTimer = Timer(const Duration(milliseconds: 800), () {
                         if (mounted) {
                           setState(() {
-                            _addressCopied = false;
+                            _linkCopied = false;
                           });
                         }
                       });
                     }),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
                     AppButton.buildAppButton(
                         context,
                         // Share Address Button
                         AppButtonType.PRIMARY_OUTLINE,
                         AppLocalization.of(context).shareLink,
-                        Dimens.BUTTON_BOTTOM_DIMENS,
-                        disabled: _showShareCard, onPressed: () {
-                      final String receiveCardFileName = "share_${widget.link.hashCode}.png";
-                      getApplicationDocumentsDirectory().then((Directory directory) {
-                        final String filePath = "${directory.path}/$receiveCardFileName";
-                        final File f = File(filePath);
-                        setState(() {
-                          _showShareCard = true;
-                        });
-                        Future.delayed(const Duration(milliseconds: 50), () {
-                          if (_showShareCard) {
-                            _capturePng().then((Uint8List? byteData) {
-                              if (byteData != null) {
-                                f.writeAsBytes(byteData).then((File file) {
-                                  UIUtil.cancelLockEvent();
-                                  Share.shareFiles([filePath], text: StateContainer.of(context).wallet!.address);
-                                });
-                              } else {
-                                // TODO - show a something went wrong message
-                              }
-                              setState(() {
-                                _showShareCard = false;
-                              });
-                            });
-                          }
-                        });
-                      });
+                        Dimens.BUTTON_COMPACT_RIGHT_DIMENS, onPressed: () {
+                      Share.share(widget.link);
                     }),
                   ],
                 ),
-                // Row(
-                //   children: <Widget>[
-                //     AppButton.buildAppButton(
-                //         context,
-                //         // Share Address Button
-                //         AppButtonType.PRIMARY_OUTLINE,
-                //         AppLocalization.of(context).requestPayment,
-                //         Dimens.BUTTON_BOTTOM_DIMENS,
-                //         disabled: _showShareCard, onPressed: () {
-                //       // do nothing
-                //       // if (request == null) {
-                //       // return;
-                //       // }
-                //       // Sheets.showAppHeightEightSheet(context: context, widget: request);
-                //       // Remove any other screens from stack
-                //       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-
-                //       // Go to send with address
-                //       Sheets.showAppHeightNineSheet(context: context, widget: RequestSheet());
-                //     }),
-                //   ],
-                // ),
               ],
             ),
           ],

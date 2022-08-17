@@ -33,9 +33,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktivní zpráva"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Přidat účet"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("Tilføj en adresse"),
         "addBlocked": MessageLookupByLibrary.simpleMessage("Bloker en bruger"),
         "addContact": MessageLookupByLibrary.simpleMessage("Přidat kontakt"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Tilføj favorit"),
+        "addUser": MessageLookupByLibrary.simpleMessage("Tilføj en bruger"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Tilføj kun Watch-konto"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -529,6 +531,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("Registrer et brugernavn"),
         "registering": MessageLookupByLibrary.simpleMessage("Registrering"),
+        "remove": MessageLookupByLibrary.simpleMessage("Fjerne"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Opravdu chcete tento účet skrýt? Můžete jej znovu přidat později klepnutím na tlačítko \"%1\"."),
         "removeBlocked":
@@ -619,6 +622,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Afsendelse af besked"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Send forespørgsel igen"),
+        "sendRequests":
+            MessageLookupByLibrary.simpleMessage("Send anmodninger"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Send eller anmod om en betaling, med End to End-krypterede meddelelser!\n\nBetalingsanmodninger, notater, og meddelelser kan kun modtages af andre nautilus-brugere.\n\nDu behøver ikke at have et brugernavn for at sende eller modtage betalingsanmodninger, og du kan bruge dem til din egen journalføring, selvom de ikke bruger nautilus."),
         "sendSheetInfoHeader":
@@ -655,13 +660,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "showContacts": MessageLookupByLibrary.simpleMessage("Vis kontakter"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Vis finansieringsbanner"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("Vis Link QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Vis QR-kode"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Uåbnet advarsel"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("nogen"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Brug NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Del en regning"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Send en masse betalingsanmodninger på én gang! Gør det nemt at dele en regning på f.eks. en restaurant."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Opdel regningsoplysninger"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Opdel efter"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
@@ -732,6 +743,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Brug NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
+            "Brugeren er allerede tilføjet!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("Bruger ikke fundet!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

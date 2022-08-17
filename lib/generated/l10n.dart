@@ -120,32 +120,22 @@ class AppLocalization {
     );
   }
 
-  /// `Block a User`
-  String get addBlocked {
-    return Intl.message(
-      'Block a User',
-      name: 'addBlocked',
-      desc: 'blocked_add_button',
-      args: [],
-    );
-  }
-
-  /// `Add a User`
-  String get addUser {
-    return Intl.message(
-      'Add a User',
-      name: 'addUser',
-      desc: 'split_add_user_header',
-      args: [],
-    );
-  }
-
   /// `Add an Address`
   String get addAddress {
     return Intl.message(
       'Add an Address',
       name: 'addAddress',
       desc: 'split_add_address_header',
+      args: [],
+    );
+  }
+
+  /// `Block a User`
+  String get addBlocked {
+    return Intl.message(
+      'Block a User',
+      name: 'addBlocked',
+      desc: 'blocked_add_button',
       args: [],
     );
   }
@@ -226,6 +216,16 @@ class AppLocalization {
       'Share Address',
       name: 'addressShare',
       desc: 'receive_share_cta',
+      args: [],
+    );
+  }
+
+  /// `Add a User`
+  String get addUser {
+    return Intl.message(
+      'Add a User',
+      name: 'addUser',
+      desc: 'split_add_user_header',
       args: [],
     );
   }
@@ -1903,16 +1903,6 @@ class AppLocalization {
     );
   }
 
-  /// `Remove`
-  String get remove {
-    return Intl.message(
-      'Remove',
-      name: 'remove',
-      desc: 'accounts_remove_slide',
-      args: [],
-    );
-  }
-
   /// `Hide Account?`
   String get hideAccountHeader {
     return Intl.message(
@@ -2109,16 +2099,6 @@ class AppLocalization {
       'Insufficient Balance',
       name: 'insufficientBalance',
       desc: 'send_insufficient_balance',
-      args: [],
-    );
-  }
-
-  /// `User already added!`
-  String get userAlreadyAddedError {
-    return Intl.message(
-      'User already added!',
-      name: 'userAlreadyAddedError',
-      desc: 'split_bill_duplicate_error',
       args: [],
     );
   }
@@ -3258,6 +3238,16 @@ class AppLocalization {
     );
   }
 
+  /// `Remove`
+  String get remove {
+    return Intl.message(
+      'Remove',
+      name: 'remove',
+      desc: 'accounts_remove_slide',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to hide this account? You can re-add it later by tapping the "%1" button.`
   String get removeAccountText {
     return Intl.message(
@@ -3374,16 +3364,6 @@ class AppLocalization {
       'Request',
       name: 'request',
       desc: 'home_request_cta',
-      args: [],
-    );
-  }
-
-  /// `Send Requests`
-  String get sendRequests {
-    return Intl.message(
-      'Send Requests',
-      name: 'sendRequests',
-      desc: 'split_bill_send_requests',
       args: [],
     );
   }
@@ -3810,6 +3790,16 @@ class AppLocalization {
     );
   }
 
+  /// `Send Requests`
+  String get sendRequests {
+    return Intl.message(
+      'Send Requests',
+      name: 'sendRequests',
+      desc: 'split_bill_send_requests',
+      args: [],
+    );
+  }
+
   /// `Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users.\n\nYou don't need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don't use nautilus.`
   String get sendSheetInfo {
     return Intl.message(
@@ -3826,26 +3816,6 @@ class AppLocalization {
       'Send Sheet Info',
       name: 'sendSheetInfoHeader',
       desc: 'send_sheet_info_header',
-      args: [],
-    );
-  }
-
-  /// `Send a bunch of payment requests at once! Makes it easy it split a bill at a restaurant for example.`
-  String get splitBillInfo {
-    return Intl.message(
-      'Send a bunch of payment requests at once! Makes it easy it split a bill at a restaurant for example.',
-      name: 'splitBillInfo',
-      desc: 'split_bill_info',
-      args: [],
-    );
-  }
-
-  /// `Split Bill Info`
-  String get splitBillInfoHeader {
-    return Intl.message(
-      'Split Bill Info',
-      name: 'splitBillInfoHeader',
-      desc: 'split_bill_info_header',
       args: [],
     );
   }
@@ -4040,26 +4010,6 @@ class AppLocalization {
     );
   }
 
-  /// `Split Bill`
-  String get splitBill {
-    return Intl.message(
-      'Split Bill',
-      name: 'splitBill',
-      desc: 'show_split_bill',
-      args: [],
-    );
-  }
-
-  /// `Split A Bill`
-  String get splitBillHeader {
-    return Intl.message(
-      'Split A Bill',
-      name: 'splitBillHeader',
-      desc: 'show_split_bill_header',
-      args: [],
-    );
-  }
-
   /// `Show Contacts`
   String get showContacts {
     return Intl.message(
@@ -4080,12 +4030,12 @@ class AppLocalization {
     );
   }
 
-  /// `Show Link QR`
-  String get showLinkQR {
+  /// `Show Link Options`
+  String get showLinkOptions {
     return Intl.message(
-      'Show Link QR',
-      name: 'showLinkQR',
-      desc: 'show_link_qr',
+      'Show Link Options',
+      name: 'showLinkOptions',
+      desc: 'show_link_options',
       args: [],
     );
   }
@@ -4136,6 +4086,46 @@ class AppLocalization {
       'Spend NANO',
       name: 'spendNano',
       desc: 'spend_nano',
+      args: [],
+    );
+  }
+
+  /// `Split Bill`
+  String get splitBill {
+    return Intl.message(
+      'Split Bill',
+      name: 'splitBill',
+      desc: 'show_split_bill',
+      args: [],
+    );
+  }
+
+  /// `Split A Bill`
+  String get splitBillHeader {
+    return Intl.message(
+      'Split A Bill',
+      name: 'splitBillHeader',
+      desc: 'show_split_bill_header',
+      args: [],
+    );
+  }
+
+  /// `Send a bunch of payment requests at once! Makes it easy it split a bill at a restaurant for example.`
+  String get splitBillInfo {
+    return Intl.message(
+      'Send a bunch of payment requests at once! Makes it easy it split a bill at a restaurant for example.',
+      name: 'splitBillInfo',
+      desc: 'split_bill_info',
+      args: [],
+    );
+  }
+
+  /// `Split Bill Info`
+  String get splitBillInfoHeader {
+    return Intl.message(
+      'Split Bill Info',
+      name: 'splitBillInfoHeader',
+      desc: 'split_bill_info_header',
       args: [],
     );
   }
@@ -4566,6 +4556,16 @@ class AppLocalization {
       'Use Nautilus Rep',
       name: 'useNautilusRep',
       desc: 'use nautilus node as rep',
+      args: [],
+    );
+  }
+
+  /// `User already added!`
+  String get userAlreadyAddedError {
+    return Intl.message(
+      'User already added!',
+      name: 'userAlreadyAddedError',
+      desc: 'split_bill_duplicate_error',
       args: [],
     );
   }

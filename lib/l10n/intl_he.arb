@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "הוסף כתובת",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "חסימת משתמש",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "הוסף משתמש",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "הוסף חשבון צפייה בלבד",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "לְהַסִיר",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "אתה בטוח שאתה רוצה להחביא את החשבון? אתה יכול להוסיף אותו מחודש מאוחר יותר על ידי לחיצה על כפתור ה%1.",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "לשלוח בקשות",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "שלח או בקש תשלום, עם הודעות מוצפנות מקצה לקצה!\n\nבקשות תשלום, תזכירים והודעות יהיו חייבים רק על ידי משתמשי נאוטילוס אחרים.\n\nאתה לא צריך שם משתמש כדי לשלוח או לקבל בקשות תשלום, ואתה יכול להשתמש בהם לצורך שמירת רשומות משלך גם אם הם לא משתמשים בנאוטילוס.",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "ביל מפוצל",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "פיצול שטר",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "שלח חבורה של בקשות תשלום בבת אחת! מקל על חלוקת חשבון במסעדה למשל.",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "פיצול פרטי חשבון",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "פיצול לפי",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "משתמש כבר נוסף!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "כבר יש לך שם משתמש רשום! כרגע לא ניתן לשנות את שם המשתמש שלך, אבל אתה חופשי לרשום אחד חדש תחת כתובת אחרת.",
   "@usernameAlreadyRegistered": {

@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "Thêm một địa chỉ",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "Chặn người dùng",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "Thêm người dùng",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "Thêm tài khoản chỉ xem",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "Loại bỏ",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "Bạn có chắc muốn ẩn tài khoản này? Bạn có thể thêm lại bằng cách ấn vào nút \"%1\".",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "Gửi yêu cầu",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "Gửi hoặc yêu cầu thanh toán, với các tin nhắn được mã hóa End to End!\n\nYêu cầu thanh toán, bản ghi nhớ và tin nhắn sẽ chỉ được chấp nhận bởi những người dùng nautilus khác.\n\nBạn không cần phải có tên người dùng để gửi hoặc nhận yêu cầu thanh toán, và bạn có thể sử dụng chúng để lưu giữ hồ sơ của riêng bạn ngay cả khi họ không sử dụng nautilus.",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "Hóa đơn tách",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "Chia một hóa đơn",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "Gửi một loạt các yêu cầu thanh toán cùng một lúc! Ví dụ, giúp bạn dễ dàng chia hóa đơn tại một nhà hàng.",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "Thông tin tách bạch hóa đơn",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "Chia theo",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "Người dùng đã được thêm!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "Bạn đã đăng ký tên người dùng! Hiện tại không thể thay đổi tên người dùng của bạn, nhưng bạn có thể tự do đăng ký một tên mới dưới một địa chỉ khác.",
   "@usernameAlreadyRegistered": {

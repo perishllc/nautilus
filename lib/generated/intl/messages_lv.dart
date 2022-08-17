@@ -33,10 +33,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Active Message"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Pievienot kontu"),
+        "addAddress":
+            MessageLookupByLibrary.simpleMessage("Pievienojiet adresi"),
         "addBlocked": MessageLookupByLibrary.simpleMessage("Block a User"),
         "addContact":
             MessageLookupByLibrary.simpleMessage("Pievienot kontaktu"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Add Favorite"),
+        "addUser":
+            MessageLookupByLibrary.simpleMessage("Pievienojiet lietotāju"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Pievienojiet tikai skatīšanās kontu"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -525,6 +529,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("Register a Username"),
         "registering": MessageLookupByLibrary.simpleMessage("Registering"),
+        "remove": MessageLookupByLibrary.simpleMessage("Noņemt"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Tiešām paslēpt šo kontu? Vēlāk varēsiet to pievienot atkal, pieskaroties \"%1\" pogai."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Unblock"),
@@ -614,6 +619,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sending message"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Send Request again"),
+        "sendRequests":
+            MessageLookupByLibrary.simpleMessage("Sūtīt pieprasījumus"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users.\n\nYou don\'t need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don\'t use nautilus."),
         "sendSheetInfoHeader":
@@ -651,13 +658,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "showContacts": MessageLookupByLibrary.simpleMessage("Show Contacts"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Rādīt finansējuma reklāmkarogu"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("Rādīt saites QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Rādīt QR kodu"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Neatvērts brīdinājums"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("kāds"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Tērē NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Sadalīts Bils"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Sadaliet rēķinu"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Nosūtiet uzreiz vairākus maksājuma pieprasījumus! Atvieglo, piemēram, rēķina sadalīšanu restorānā."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Dalīta rēķina informācija"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Sadalīt pēc"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
@@ -730,6 +743,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Izmantojiet NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
+            "Lietotājs jau ir pievienots!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),

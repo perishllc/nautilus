@@ -645,7 +645,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "showContacts": MessageLookupByLibrary.simpleMessage("Show Contacts"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Show Funding Banner"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("Show Link QR"),
+        "showLinkOptions":
+            MessageLookupByLibrary.simpleMessage("Show Link Options"),
         "showQR": MessageLookupByLibrary.simpleMessage("Show QR Code"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Unopened Warning"),

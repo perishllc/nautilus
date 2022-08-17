@@ -32,9 +32,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("رسالة نشطة"),
         "addAccount": MessageLookupByLibrary.simpleMessage("إضافة حساب"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("إضافة عنوان"),
         "addBlocked": MessageLookupByLibrary.simpleMessage("حظر مستخدم"),
         "addContact": MessageLookupByLibrary.simpleMessage("إضافة جهة الاتصال"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("إضافة المفضلة"),
+        "addUser": MessageLookupByLibrary.simpleMessage("أضف مستخدم"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("أضف حساب المشاهدة فقط"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -519,6 +521,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("تسجيل اسم مستخدم"),
         "registering": MessageLookupByLibrary.simpleMessage("التسجيل"),
+        "remove": MessageLookupByLibrary.simpleMessage("إزالة"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد أنك تريد إخفاء هذا الحساب؟ يمكنك إعادة إضافته لاحقًا بذخت على \"%1\""),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("إلغاء الحظر"),
@@ -607,6 +610,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إرسال رسالة"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("إرسال الطلب مرة أخرى"),
+        "sendRequests": MessageLookupByLibrary.simpleMessage("ارسل طلبات"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "أرسل أو اطلب دفعة، مع الرسائل المشفرة من النهاية إلى النهاية!\n\nلن يتم قبول طلبات الدفع والمذكرات والرسائل إلا من قبل مستخدمي nautilus الآخرين.\n\nلا تحتاج إلى اسم مستخدم لإرسال أو استقبال طلبات الدفع، ويمكنك استخدامها لحفظ السجلات الخاصة بك حتى لو لم تستخدم nautilus."),
         "sendSheetInfoHeader":
@@ -644,7 +648,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إظهار جهات الاتصال"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("إظهار بانر التمويل"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("إظهار ارتباط QR"),
         "showQR":
             MessageLookupByLibrary.simpleMessage("إظهار رمز الاستجابة السريعة"),
         "showUnopenedWarning":
@@ -652,6 +655,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("البسيط"),
         "someone": MessageLookupByLibrary.simpleMessage("شخصا ما"),
         "spendNano": MessageLookupByLibrary.simpleMessage("أنفق نانو"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("سبليت بيل"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("تقسيم مشروع قانون"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "أرسل مجموعة من طلبات الدفع دفعة واحدة! يجعل من السهل تقسيم فاتورة في مطعم على سبيل المثال."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("تقسيم معلومات بيل"),
         "splitBy": MessageLookupByLibrary.simpleMessage("تقسيم حسب"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -720,6 +730,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("استخدم NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("تمت إضافة المستخدم بالفعل!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على المستخدم!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

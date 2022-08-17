@@ -241,7 +241,7 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                         context,
                         // show link QR
                         AppButtonType.PRIMARY,
-                        AppLocalization.of(context).showLinkQR,
+                        AppLocalization.of(context).showLinkOptions,
                         Dimens.BUTTON_BOTTOM_EXCEPTION_DIMENS, onPressed: () async {
                       final Widget qrWidget = SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, widget.link));
                       Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: widget.link, qrWidget: qrWidget));

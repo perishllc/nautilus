@@ -32,10 +32,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktywna wiadomość"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Dodaj Konto"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("Dodaj adres"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("Blokowanie użytkownika"),
         "addContact": MessageLookupByLibrary.simpleMessage("Dodaj Kontakt"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Dodaj Ulubione"),
+        "addUser": MessageLookupByLibrary.simpleMessage("Dodaj użytkownika"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Dodaj konto tylko do oglądania"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -529,6 +531,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader": MessageLookupByLibrary.simpleMessage(
             "Zarejestruj nazwę użytkownika"),
         "registering": MessageLookupByLibrary.simpleMessage("Rejestracja"),
+        "remove": MessageLookupByLibrary.simpleMessage("Usunąć"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Czy jesteś pewny że chcesz schować to konto? Możesz dodać je później naciskając przycisk %1."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Odblokuj"),
@@ -620,6 +623,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Wysyłanie wiadomości"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Wyślij prośbę ponownie"),
+        "sendRequests": MessageLookupByLibrary.simpleMessage("Wyślij prośby"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Wyślij lub zażądaj płatności, z End to End Encrypted messages!\n\nProśby o płatność, notatki i wiadomości będą odbierane tylko przez innych użytkowników Nautilus.\n\nNie musisz mieć nazwy użytkownika, aby wysyłać lub odbierać prośby o płatność, i możesz ich używać do prowadzenia własnej dokumentacji, nawet jeśli nie używają nautilusa."),
         "sendSheetInfoHeader":
@@ -657,13 +661,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "showContacts": MessageLookupByLibrary.simpleMessage("Pokaż kontakty"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Pokaż baner finansowania"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("Pokaż link QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Pokaż kod QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Nieotwarte ostrzeżenie"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("ktoś"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Wydaj NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Podziel rachunek"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Podziel rachunek"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Wyślij kilka próśb o płatność na raz! Ułatwia np. dzielenie rachunku w restauracji."),
+        "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Podziel informacje o rachunku"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Podziel według"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -736,6 +746,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Użyj NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Użytkownik już dodany!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "Użytkownik nie został znaleziony!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

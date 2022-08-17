@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "একটি ঠিকানা যোগ করুন",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "একটি ব্যবহারকারী ব্লক করুন",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "একটি ব্যবহারকারী যোগ করুন",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "শুধুমাত্র ওয়াচ অ্যাকাউন্ট যোগ করুন",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "অপসারণ",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "আপনি কি এই অ্যাকাউন্টটি গোপন করতে চান? আপনি \"%1\" বোতামটি ট্যাপ করে পরে এটি পুনরায় যোগ করতে পারেন।",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "অনুরোধ পাঠানো",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "এনক্রিপ্ট করা বার্তাগুলি শেষ করার সাথে সাথে অর্থ প্রদানের অনুরোধ করুন বা অনুরোধ করুন!\n\nপেমেন্ট অনুরোধ, মেমো, এবং বার্তা শুধুমাত্র অন্যান্য নটিলাস ব্যবহারকারীদের দ্বারা গ্রহণযোগ্য হবে।\n\nপেমেন্ট অনুরোধ পাঠাতে বা গ্রহণ করার জন্য আপনার কোন ব্যবহারকারীর নাম থাকতে হবে না, এবং যদি তারা নটিলাস ব্যবহার না করে তবে আপনি নিজের রেকর্ড রাখার জন্য সেগুলি ব্যবহার করতে পারেন।",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "বিভক্ত বিল",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "বিভক্ত একটি বিল",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "একবারে একগুচ্ছ অর্থপ্রদানের অনুরোধ পাঠান! উদাহরণস্বরূপ এটি একটি রেস্টুরেন্টে একটি বিল ভাগ করা সহজ করে তোলে।",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "বিভক্ত বিল তথ্য",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "দ্বারা বিভক্ত",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "ব্যবহারকারী ইতিমধ্যে যোগ করা হয়েছে!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "আপনি ইতিমধ্যে একটি ব্যবহারকারীর নাম নিবন্ধিত আছে! আপনার ব্যবহারকারী নাম পরিবর্তন করা বর্তমানে সম্ভব নয়, তবে আপনি একটি ভিন্ন ঠিকানার অধীনে একটি নতুন নিবন্ধন করতে পারবেন।",
   "@usernameAlreadyRegistered": {

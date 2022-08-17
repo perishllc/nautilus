@@ -35,6 +35,11 @@
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
   },
+  "addAddress": "Tambahkan Alamat",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addBlocked": "Memblokir Pengguna",
   "@addBlocked": {
     "type": "text",
@@ -79,6 +84,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addUser": "Tambahkan Pengguna",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
   },
   "addWatchOnlyAccount": "Tambahkan Akun Hanya Tonton",
   "@addWatchOnlyAccount": {
@@ -1580,6 +1590,11 @@
     "type": "text",
     "description": "register_username_header"
   },
+  "remove": "Menghapus",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "removeAccountText": "Anda yakin akan menyembunyikan akun ini? Anda dapat menambahkan kembali dengan klik tombol \"%1\".",
   "@removeAccountText": {
     "type": "text",
@@ -1850,6 +1865,11 @@
     "type": "text",
     "description": "request_again"
   },
+  "sendRequests": "Mengirim permintaan",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "sendSheetInfo": "Kirim atau Minta pembayaran, dengan pesan End to End Encrypted!\n\nPermintaan pembayaran, memo, dan pesan hanya akan diterima oleh pengguna nautilus lainnya.\n\nAnda tidak perlu memiliki nama pengguna untuk mengirim atau menerima permintaan pembayaran, dan Anda dapat menggunakannya untuk penyimpanan catatan Anda sendiri meskipun mereka tidak menggunakan nautilus.",
   "@sendSheetInfo": {
     "type": "text",
@@ -1994,6 +2014,26 @@
   "@spendNano": {
     "type": "text",
     "description": "spend_nano"
+  },
+  "splitBill": "Pisahkan Tagihan",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "Pisahkan Tagihan",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
+  },
+  "splitBillInfo": "Kirim banyak permintaan pembayaran sekaligus! Memudahkan itu membagi tagihan di restoran misalnya.",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "Bagi Info Tagihan",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
   },
   "splitBy": "Dibagi Oleh",
   "@splitBy": {
@@ -2209,6 +2249,11 @@
   "@useNautilusRep": {
     "type": "text",
     "description": "use nautilus node as rep"
+  },
+  "userAlreadyAddedError": "Pengguna sudah ditambahkan!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "usernameAlreadyRegistered": "Anda sudah memiliki nama pengguna yang terdaftar! Saat ini tidak mungkin untuk mengubah nama pengguna Anda, tetapi Anda bebas untuk mendaftarkan yang baru di bawah alamat yang berbeda.",
   "@usernameAlreadyRegistered": {

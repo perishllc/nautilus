@@ -33,11 +33,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktiv melding"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Legg til konto"),
+        "addAddress":
+            MessageLookupByLibrary.simpleMessage("Legg til en adresse"),
         "addBlocked":
             MessageLookupByLibrary.simpleMessage("Blokkere en bruker"),
         "addContact": MessageLookupByLibrary.simpleMessage("Legg til kontakt"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Legg til favoritt"),
+        "addUser": MessageLookupByLibrary.simpleMessage("Legg til en bruker"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Legg til kun overvåkningskonto"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -532,6 +535,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("Registrer et brukernavn"),
         "registering": MessageLookupByLibrary.simpleMessage("Registrering"),
+        "remove": MessageLookupByLibrary.simpleMessage("Fjerne"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Er du sikker på at du vil skjule denne kontoen? Du kan legge den til igjen senere ved å trykke på \"%1\" knappen."),
         "removeBlocked":
@@ -623,6 +627,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sende melding"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Send forespørsel på nytt"),
+        "sendRequests":
+            MessageLookupByLibrary.simpleMessage("Sende forespørsler"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Send eller be om betaling, med End to End-krypterte meldinger!\n\nBetalingsforespørsler, notater, og meldinger vil bare kunne mottas av andre nautilus-brukere.\n\nDu trenger ikke å ha et brukernavn for å sende eller motta betalingsforespørsler, og du kan bruke dem til din egen journalføring selv om de ikke bruker nautilus."),
         "sendSheetInfoHeader":
@@ -658,13 +664,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "showContacts": MessageLookupByLibrary.simpleMessage("Vis kontakter"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Vis finansieringsbanner"),
-        "showLinkQR": MessageLookupByLibrary.simpleMessage("Vis lenke QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Vis QR-kode"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Uåpnet advarsel"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("noen"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Bruk NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Delt regning"),
+        "splitBillHeader":
+            MessageLookupByLibrary.simpleMessage("Del en regning"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Send en haug med betalingsforespørsler på en gang! Gjør det enkelt å dele en regning på en restaurant for eksempel."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Del regningsinformasjon"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Del opp etter"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
@@ -732,6 +744,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Bruk NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("Bruker allerede lagt til!"),
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("Bruker ikke funnet!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
