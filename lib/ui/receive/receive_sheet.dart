@@ -32,6 +32,7 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_show_qr.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/share_card.dart';
+import 'package:nautilus_wallet_flutter/ui/receive/split_bill_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/request/request_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
@@ -735,9 +736,10 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                 // ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).request, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).request, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       final bool validRequest = await _validateRequest(isRequest: true);
+                      if (!mounted) return;
 
                       if (!validRequest) {
                         return;
@@ -751,8 +753,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                         amountRaw = "0";
                       } else {
                         if (_localCurrencyMode) {
-                          amountRaw =
-                              NumberUtil.getAmountAsRaw(sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text)));
+                          amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
+                              _localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)));
                         } else {
                           if (!mounted) return;
                           amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
@@ -819,7 +821,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).showAccountQR, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).showAccountQR, Dimens.BUTTON_COMPACT_LEFT_DIMENS,
                         onPressed: () async {
                       Sheets.showAppHeightEightSheet(
                           context: context,
@@ -829,35 +832,20 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                             qrWidget: widget.qrWidget,
                           ));
                     }),
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).splitBill, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                        onPressed: () async {
+                      Sheets.showAppHeightNineSheet(
+                          context: context,
+                          widget: SplitBillSheet(
+                            localCurrencyFormat: _localCurrencyFormat,
+                          ));
+                    }),
                   ],
                 ),
               ],
             ),
           ],
         ));
-  }
-
-  String _convertLocalCurrencyToLocalizedCrypto(String amount) {
-    final String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
-    if (sanitizedAmt.isEmpty) {
-      return "";
-    }
-    final Decimal valueLocal = Decimal.parse(sanitizedAmt);
-    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    final String nanoAmount = NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
-    return convertCryptoToLocalAmount(nanoAmount, _localCurrencyFormat);
-  }
-
-  String _convertCryptoToLocalCurrency(String amount) {
-    String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
-    if (sanitizedAmt.isEmpty) {
-      return "";
-    }
-    final Decimal valueCrypto = Decimal.parse(sanitizedAmt);
-    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
-
-    return (_localCurrencyFormat.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, _localCurrencyFormat)).replaceAll(" ", "");
   }
 
   // Determine if this is a max send or not by comparing balances
@@ -908,7 +896,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount = _convertLocalCurrencyToLocalizedCrypto(_amountController!.text);
+        _lastCryptoAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       setState(() {
@@ -929,7 +917,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
         }
       } else {
         _lastCryptoAmount = _amountController!.text;
-        _lastLocalCurrencyAmount = _convertCryptoToLocalCurrency(_amountController!.text);
+        _lastLocalCurrencyAmount = convertCryptoToLocalCurrency(context, _localCurrencyFormat, _amountController!.text);
         localAmountStr = _lastLocalCurrencyAmount;
       }
       setState(() {
@@ -946,7 +934,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     String? raw;
     if (_localCurrencyMode) {
       _lastLocalCurrencyAmount = _amountController!.text;
-      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text));
+      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       if (_lastCryptoAmount.isNotEmpty) {
         raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
       }
@@ -1137,7 +1125,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     } else {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text));
+        bananoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       } else {
         if (_rawAmount == null) {
           bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);

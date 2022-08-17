@@ -130,6 +130,26 @@ class AppLocalization {
     );
   }
 
+  /// `Add a User`
+  String get addUser {
+    return Intl.message(
+      'Add a User',
+      name: 'addUser',
+      desc: 'split_add_user_header',
+      args: [],
+    );
+  }
+
+  /// `Add an Address`
+  String get addAddress {
+    return Intl.message(
+      'Add an Address',
+      name: 'addAddress',
+      desc: 'split_add_address_header',
+      args: [],
+    );
+  }
+
   /// `Add Contact`
   String get addContact {
     return Intl.message(
@@ -1883,6 +1903,16 @@ class AppLocalization {
     );
   }
 
+  /// `Remove`
+  String get remove {
+    return Intl.message(
+      'Remove',
+      name: 'remove',
+      desc: 'accounts_remove_slide',
+      args: [],
+    );
+  }
+
   /// `Hide Account?`
   String get hideAccountHeader {
     return Intl.message(
@@ -2079,6 +2109,16 @@ class AppLocalization {
       'Insufficient Balance',
       name: 'insufficientBalance',
       desc: 'send_insufficient_balance',
+      args: [],
+    );
+  }
+
+  /// `User already added!`
+  String get userAlreadyAddedError {
+    return Intl.message(
+      'User already added!',
+      name: 'userAlreadyAddedError',
+      desc: 'split_bill_duplicate_error',
       args: [],
     );
   }
@@ -3338,6 +3378,16 @@ class AppLocalization {
     );
   }
 
+  /// `Send Requests`
+  String get sendRequests {
+    return Intl.message(
+      'Send Requests',
+      name: 'sendRequests',
+      desc: 'split_bill_send_requests',
+      args: [],
+    );
+  }
+
   /// `Request %1 %2`
   String get requestAmountConfirm {
     return Intl.message(
@@ -3780,6 +3830,26 @@ class AppLocalization {
     );
   }
 
+  /// `Send a bunch of payment requests at once! Makes it easy it split a bill at a restaurant for example.`
+  String get splitBillInfo {
+    return Intl.message(
+      'Send a bunch of payment requests at once! Makes it easy it split a bill at a restaurant for example.',
+      name: 'splitBillInfo',
+      desc: 'split_bill_info',
+      args: [],
+    );
+  }
+
+  /// `Split Bill Info`
+  String get splitBillInfoHeader {
+    return Intl.message(
+      'Split Bill Info',
+      name: 'splitBillInfoHeader',
+      desc: 'split_bill_info_header',
+      args: [],
+    );
+  }
+
   /// `Send via NFC`
   String get sendViaNFC {
     return Intl.message(
@@ -3966,6 +4036,26 @@ class AppLocalization {
       'Show Account QR Code',
       name: 'showAccountQR',
       desc: 'show_account_qr',
+      args: [],
+    );
+  }
+
+  /// `Split Bill`
+  String get splitBill {
+    return Intl.message(
+      'Split Bill',
+      name: 'splitBill',
+      desc: 'show_split_bill',
+      args: [],
+    );
+  }
+
+  /// `Split A Bill`
+  String get splitBillHeader {
+    return Intl.message(
+      'Split A Bill',
+      name: 'splitBillHeader',
+      desc: 'show_split_bill_header',
       args: [],
     );
   }

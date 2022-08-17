@@ -1,3 +1,10 @@
+## v0.5.8 - [2022-08-17]
+#### Added
+- Split Bill Menu! Easily split a bill by sending payment requests to multiple people at once!
+#### Changed
+#### Fixed
+- Nano.to leasing API updated
+- Rounding bug when displaying amounts like 4.99999 -> 5.999999
 ## v0.5.7 - [2022-08-16]
 #### Added
 - New "Exchange NANO" section
@@ -7,7 +14,7 @@
 - Warning card to inform users payment requests and memos/messages don't work unless notifications are enabled
 #### Changed
 - Replaced star on send / receive / etc. page with scan qr code button
-- Prompt to skip setup / intro
+- Prompt to skip setup / intro for gift card installs
 - If the intro is skipped, don't show the changelog until the next launch
 - Allow user to press , instead of . in certain cases to allow entering of decimal separators
 - Allow multiple warning cards to be displayed at once

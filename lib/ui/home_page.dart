@@ -1730,6 +1730,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
 
   // branch deep link gift:
   Future<void> handleBranchGift() async {
+
+    if (!mounted) return;
+
     if (StateContainer.of(context).giftedWallet && StateContainer.of(context).wallet != null) {
       StateContainer.of(context).giftedWallet = false;
 
@@ -3763,7 +3766,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
         break;
       }
     }
-    
+
     return _buildUnifiedCard(txDetails, animation, displayName, context);
   }
 
@@ -3782,24 +3785,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
           _solidsListMap.putIfAbsent(StateContainer.of(context).wallet!.address!, () => StateContainer.of(context).wallet!.solids);
         });
       }
-      // // Setup unified list
-      // if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
-      //   _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet!.address}", () => GlobalKey<AnimatedListState>());
-      //   setState(() {
-      //     _unifiedListMap.putIfAbsent(
-      //       StateContainer.of(context).wallet!.address!,
-      //       () => ListModel<dynamic>(
-      //         listKey: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address}"]!,
-      //         initialItems: StateContainer.of(context).wallet!.unified,
-      //       ),
-      //     );
-      //   });
-      // }
-
-      // if (StateContainer.of(context).wallet!.unifiedLoading ||
-      //     (_unifiedListMap[StateContainer.of(context).wallet!.address] != null && _unifiedListMap[StateContainer.of(context).wallet!.address]!.length == 0)) {
-      //   generateUnifiedList(fastUpdate: true);
-      // }
 
       String ADR = StateContainer.of(context).wallet!.address!;
       if (StateContainer.of(context).activeAlerts.isNotEmpty) {

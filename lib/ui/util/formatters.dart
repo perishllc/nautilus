@@ -1,9 +1,12 @@
 import 'dart:math';
 
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 
 /// Input formatter for Crypto/Fiat amounts
@@ -55,10 +58,8 @@ class CurrencyFormatter2 extends TextInputFormatter {
 
     // we added 1 character:
     if (workingText.length == oldValue.text.length + 1) {
-
       // we added a comma, attempt to replace it with a decimalSeparator if there isn't one already:
       if (commaSeparator.allMatches(workingText).length > commaSeparator.allMatches(oldValue.text).length) {
-
         // return if we already have a decimalSeparator:
         if (workingText.contains(decimalSeparator)) {
           return same;
@@ -231,6 +232,30 @@ String convertCryptoToLocalAmount(String localAmount, NumberFormat currencyForma
   return formattedCurrency + secondPart;
 }
 
+String convertLocalCurrencyToLocalizedCrypto(BuildContext context, NumberFormat localCurrencyFormat, String amount) {
+  final String sanitizedAmt = sanitizedAmount(localCurrencyFormat, amount);
+  if (sanitizedAmt.isEmpty) {
+    return "";
+  }
+  final Decimal valueLocal = Decimal.parse(sanitizedAmt);
+  final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
+  final String nanoAmount = NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
+  return convertCryptoToLocalAmount(nanoAmount, localCurrencyFormat);
+}
+
+String convertCryptoToLocalCurrency(BuildContext context, NumberFormat localCurrencyFormat, String amount) {
+  String sanitizedAmt = amount.replaceAll(localCurrencyFormat.symbols.GROUP_SEP, "").replaceAll(localCurrencyFormat.symbols.DECIMAL_SEP, ".");
+  sanitizedAmt = NumberUtil.sanitizeNumber(sanitizedAmt);
+  if (sanitizedAmt.isEmpty) {
+    return "";
+  }
+  final Decimal valueCrypto = Decimal.parse(sanitizedAmt);
+  final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
+  sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
+
+  return (localCurrencyFormat.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, localCurrencyFormat)).replaceAll(" ", "");
+}
+
 /// Input formatter that ensures text starts with @
 class ContactInputFormatter extends TextInputFormatter {
   @override
@@ -390,8 +415,12 @@ String getRawAsThemeAwareFormattedAmount(BuildContext context, String? raw) {
   final NumberFormat currencyFormat = NumberFormat.currency(
       locale: StateContainer.of(context).curCurrency.getLocale().toString(), symbol: StateContainer.of(context).curCurrency.getCurrencySymbol());
 
-  final String formattedAmount =
-      currencyFormat.format(double.parse(amountStr)).replaceAll(StateContainer.of(context).curCurrency.getCurrencySymbol(), "").replaceAll(" ", "");
+  //final String formattedAmount =
+  //    currencyFormat.format(double.parse(amountStr)).replaceAll(StateContainer.of(context).curCurrency.getCurrencySymbol(), "").replaceAll(" ", "");
+  final String formattedAmount = currencyFormat
+      .format(double.parse(amountStr.split(".")[0]))
+      .replaceAll(StateContainer.of(context).curCurrency.getCurrencySymbol(), "")
+      .replaceAll(" ", "");
 
   final String decimalSeparator = currencyFormat.symbols.DECIMAL_SEP;
   // split by the decimal separator:

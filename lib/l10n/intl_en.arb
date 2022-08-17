@@ -40,6 +40,16 @@
     "type": "text",
     "description": "blocked_add_button"
   },
+  "addUser": "Add a User",
+  "@addUser": {
+    "type": "text",
+    "description": "split_add_user_header"
+  },
+  "addAddress": "Add an Address",
+  "@addAddress": {
+    "type": "text",
+    "description": "split_add_address_header"
+  },
   "addContact": "Add Contact",
   "@addContact": {
     "type": "text",
@@ -915,6 +925,11 @@
     "type": "text",
     "description": "accounts_hide_slide"
   },
+  "remove": "Remove",
+  "@remove": {
+    "type": "text",
+    "description": "accounts_remove_slide"
+  },
   "hideAccountHeader": "Hide Account?",
   "@hideAccountHeader": {
     "type": "text",
@@ -1014,6 +1029,11 @@
   "@insufficientBalance": {
     "type": "text",
     "description": "send_insufficient_balance"
+  },
+  "userAlreadyAddedError": "User already added!",
+  "@userAlreadyAddedError": {
+    "type": "text",
+    "description": "split_bill_duplicate_error"
   },
   "introSkippedWarningContent": "We skipped the intro process to save you time, but you should backup your newly created seed immediately.\n\nIf you lose your seed you will lose access to your funds.\n\nAdditionally, your passcode has been set to \"000000\" which you should also change immediately.",
   "@introSkippedWarningContent": {
@@ -1640,6 +1660,11 @@
     "type": "text",
     "description": "home_request_cta"
   },
+  "sendRequests": "Send Requests",
+  "@sendRequests": {
+    "type": "text",
+    "description": "split_bill_send_requests"
+  },
   "requestAmountConfirm": "Request %1 %2",
   "@requestAmountConfirm": {
     "type": "text",
@@ -1860,6 +1885,16 @@
     "type": "text",
     "description": "send_sheet_info_header"
   },
+  "splitBillInfo": "Send a bunch of payment requests at once! Makes it easy it split a bill at a restaurant for example.",
+  "@splitBillInfo": {
+    "type": "text",
+    "description": "split_bill_info"
+  },
+  "splitBillInfoHeader": "Split Bill Info",
+  "@splitBillInfoHeader": {
+    "type": "text",
+    "description": "split_bill_info_header"
+  },
   "sendViaNFC": "Send via NFC",
   "@sendViaNFC": {
     "type": "text",
@@ -1954,6 +1989,16 @@
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
+  },
+  "splitBill": "Split Bill",
+  "@splitBill": {
+    "type": "text",
+    "description": "show_split_bill"
+  },
+  "splitBillHeader": "Split A Bill",
+  "@splitBillHeader": {
+    "type": "text",
+    "description": "show_split_bill_header"
   },
   "showContacts": "Show Contacts",
   "@showContacts": {

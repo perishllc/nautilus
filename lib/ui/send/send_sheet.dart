@@ -871,8 +871,8 @@ class SendSheetState extends State<SendSheet> {
                         amountRaw = "0";
                       } else {
                         if (_localCurrencyMode) {
-                          amountRaw =
-                              NumberUtil.getAmountAsRaw(sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text)));
+                          amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
+                              _localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)));
                         } else {
                           if (_rawAmount != null) {
                             amountRaw = _rawAmount!;
@@ -1044,8 +1044,8 @@ class SendSheetState extends State<SendSheet> {
                               context: context,
                               widget: SendConfirmSheet(
                                   amountRaw: _localCurrencyMode
-                                      ? NumberUtil.getAmountAsRaw(
-                                          sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text)))
+                                      ? NumberUtil.getAmountAsRaw(sanitizedAmount(
+                                          _localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)))
                                       : _rawAmount ?? getThemeAwareAmountAsRaw(context, _amountController!.text),
                                   destination: user?.address ?? address.address!,
                                   contactName: user?.getDisplayName(),
@@ -1129,29 +1129,6 @@ class SendSheetState extends State<SendSheet> {
         ));
   }
 
-  String _convertLocalCurrencyToLocalizedCrypto(String amount) {
-    final String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
-    if (sanitizedAmt.isEmpty) {
-      return "";
-    }
-    final Decimal valueLocal = Decimal.parse(sanitizedAmt);
-    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    final String nanoAmount = NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
-    return convertCryptoToLocalAmount(nanoAmount, _localCurrencyFormat);
-  }
-
-  String _convertCryptoToLocalCurrency(String amount) {
-    String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
-    if (sanitizedAmt.isEmpty) {
-      return "";
-    }
-    final Decimal valueCrypto = Decimal.parse(sanitizedAmt);
-    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
-
-    return (_localCurrencyFormat.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, _localCurrencyFormat)).replaceAll(" ", "");
-  }
-
   // Determine if this is a max send or not by comparing balances
   bool _isMaxSend() {
     // Sanitize commas
@@ -1205,7 +1182,7 @@ class SendSheetState extends State<SendSheet> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount = _convertLocalCurrencyToLocalizedCrypto(_amountController!.text);
+        _lastCryptoAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       setState(() {
@@ -1226,7 +1203,7 @@ class SendSheetState extends State<SendSheet> {
         }
       } else {
         _lastCryptoAmount = _amountController!.text;
-        _lastLocalCurrencyAmount = _convertCryptoToLocalCurrency(_amountController!.text);
+        _lastLocalCurrencyAmount = convertCryptoToLocalCurrency(context, _localCurrencyFormat, _amountController!.text);
         localAmountStr = _lastLocalCurrencyAmount;
       }
       setState(() {
@@ -1287,7 +1264,7 @@ class SendSheetState extends State<SendSheet> {
     } else {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text));
+        bananoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       } else {
         if (_rawAmount == null) {
           bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);

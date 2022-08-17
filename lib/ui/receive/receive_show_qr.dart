@@ -360,29 +360,6 @@ class ReceiveShowQRSheetStateState extends State<ReceiveShowQRSheet> {
             )));
   }
 
-  String _convertLocalCurrencyToLocalizedCrypto(String amount) {
-    final String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
-    if (sanitizedAmt.isEmpty) {
-      return "";
-    }
-    final Decimal valueLocal = Decimal.parse(sanitizedAmt);
-    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    final String nanoAmount = NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
-    return convertCryptoToLocalAmount(nanoAmount, _localCurrencyFormat);
-  }
-
-  String _convertCryptoToLocalCurrency(String amount) {
-    String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
-    if (sanitizedAmt.isEmpty) {
-      return "";
-    }
-    final Decimal valueCrypto = Decimal.parse(sanitizedAmt);
-    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
-
-    return (_localCurrencyFormat.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, _localCurrencyFormat)).replaceAll(" ", "");
-  }
-
   void toggleLocalCurrency() {
     // Keep a cache of previous amounts because, it's kinda nice to see approx what nano is worth
     // this way you can tap button and tap back and not end up with X.9993451 NANO
@@ -394,7 +371,7 @@ class ReceiveShowQRSheetStateState extends State<ReceiveShowQRSheet> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount = _convertLocalCurrencyToLocalizedCrypto(_amountController!.text);
+        _lastCryptoAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       setState(() {
@@ -415,7 +392,7 @@ class ReceiveShowQRSheetStateState extends State<ReceiveShowQRSheet> {
         }
       } else {
         _lastCryptoAmount = _amountController!.text;
-        _lastLocalCurrencyAmount = _convertCryptoToLocalCurrency(_amountController!.text);
+        _lastLocalCurrencyAmount = convertCryptoToLocalCurrency(context, _localCurrencyFormat, _amountController!.text);
         localAmountStr = _lastLocalCurrencyAmount;
       }
       setState(() {
@@ -432,7 +409,7 @@ class ReceiveShowQRSheetStateState extends State<ReceiveShowQRSheet> {
     String? raw;
     if (_localCurrencyMode) {
       _lastLocalCurrencyAmount = _amountController!.text;
-      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text));
+      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       if (_lastCryptoAmount.isNotEmpty) {
         raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
       }

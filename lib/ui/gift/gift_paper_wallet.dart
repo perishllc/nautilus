@@ -153,7 +153,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
     } else {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_amountController!.text));
+        bananoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       } else {
         bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
       }
@@ -179,7 +179,8 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
     if (_splitAmountController!.text.trim().isNotEmpty) {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(_splitAmountController!.text));
+        bananoAmount =
+            sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _splitAmountController!.text));
       } else {
         bananoAmount = sanitizedAmount(_localCurrencyFormat, _splitAmountController!.text);
       }
@@ -406,8 +407,8 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
 
                     if (_splitAmountController!.text.isNotEmpty) {
                       if (_localCurrencyMode) {
-                        splitAmountRaw =
-                            NumberUtil.getAmountAsRaw(sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(splitAmountRaw)));
+                        splitAmountRaw = NumberUtil.getAmountAsRaw(
+                            sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, splitAmountRaw)));
                       } else {
                         splitAmountRaw = getThemeAwareAmountAsRaw(context, splitAmountRaw);
                       }
@@ -420,7 +421,8 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                           memo: memo ?? "",
                           destination: paper_wallet_account,
                           amountRaw: _localCurrencyMode
-                              ? NumberUtil.getAmountAsRaw(sanitizedAmount(_localCurrencyFormat, _convertLocalCurrencyToLocalizedCrypto(formattedAmount)))
+                              ? NumberUtil.getAmountAsRaw(
+                                  sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, formattedAmount)))
                               : getThemeAwareAmountAsRaw(context, formattedAmount),
                           splitAmountRaw: splitAmountRaw,
                         ));
@@ -432,30 +434,6 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         ),
       ),
     );
-  }
-
-  String _convertLocalCurrencyToLocalizedCrypto(String amount) {
-    final String sanitizedAmt = sanitizedAmount(_localCurrencyFormat, amount);
-    if (sanitizedAmt.isEmpty) {
-      return "";
-    }
-    final Decimal valueLocal = Decimal.parse(sanitizedAmt);
-    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    final String nanoAmount = NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
-    return convertCryptoToLocalAmount(nanoAmount, _localCurrencyFormat);
-  }
-
-  String _convertCryptoToLocalCurrency(String amount) {
-    String sanitizedAmt = amount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "").replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
-    sanitizedAmt = NumberUtil.sanitizeNumber(sanitizedAmt);
-    if (sanitizedAmt.isEmpty) {
-      return "";
-    }
-    final Decimal valueCrypto = Decimal.parse(sanitizedAmt);
-    final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-    sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
-
-    return (_localCurrencyFormat.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, _localCurrencyFormat)).replaceAll(" ", "");
   }
 
   // Determine if this is a max send or not by comparing balances
@@ -507,7 +485,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount = _convertLocalCurrencyToLocalizedCrypto(_amountController!.text);
+        _lastCryptoAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       // split:
@@ -515,7 +493,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         cryptoSplitAmountStr = _lastCryptoSplitAmount;
       } else {
         _lastLocalCurrencySplitAmount = _splitAmountController!.text;
-        _lastCryptoSplitAmount = _convertLocalCurrencyToLocalizedCrypto(_splitAmountController!.text);
+        _lastCryptoSplitAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _splitAmountController!.text);
         cryptoSplitAmountStr = _lastCryptoSplitAmount;
       }
       setState(() {
@@ -539,7 +517,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         }
       } else {
         _lastCryptoAmount = _amountController!.text;
-        _lastLocalCurrencyAmount = _convertCryptoToLocalCurrency(_amountController!.text);
+        _lastLocalCurrencyAmount = convertCryptoToLocalCurrency(context, _localCurrencyFormat, _amountController!.text);
         localAmountStr = _lastLocalCurrencyAmount;
       }
       // split:
@@ -550,7 +528,7 @@ class _GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         }
       } else {
         _lastCryptoSplitAmount = _splitAmountController!.text;
-        _lastLocalCurrencySplitAmount = _convertCryptoToLocalCurrency(_splitAmountController!.text);
+        _lastLocalCurrencySplitAmount = convertCryptoToLocalCurrency(context, _localCurrencyFormat, _splitAmountController!.text);
         localSplitAmountStr = _lastLocalCurrencySplitAmount;
       }
 

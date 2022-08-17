@@ -32,9 +32,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Active Message"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Add Account"),
+        "addAddress": MessageLookupByLibrary.simpleMessage("Add an Address"),
         "addBlocked": MessageLookupByLibrary.simpleMessage("Block a User"),
         "addContact": MessageLookupByLibrary.simpleMessage("Add Contact"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Add Favorite"),
+        "addUser": MessageLookupByLibrary.simpleMessage("Add a User"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Add Watch Only Account"),
         "addWatchOnlyAccountError": MessageLookupByLibrary.simpleMessage(
@@ -520,6 +522,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerUsernameHeader":
             MessageLookupByLibrary.simpleMessage("Register a Username"),
         "registering": MessageLookupByLibrary.simpleMessage("Registering"),
+        "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "removeAccountText": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Unblock"),
@@ -607,6 +610,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sending message"),
         "sendRequestAgain":
             MessageLookupByLibrary.simpleMessage("Send Request again"),
+        "sendRequests": MessageLookupByLibrary.simpleMessage("Send Requests"),
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users.\n\nYou don\'t need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don\'t use nautilus."),
         "sendSheetInfoHeader":
@@ -648,6 +652,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "someone": MessageLookupByLibrary.simpleMessage("someone"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Spend NANO"),
+        "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),
+        "splitBillHeader": MessageLookupByLibrary.simpleMessage("Split A Bill"),
+        "splitBillInfo": MessageLookupByLibrary.simpleMessage(
+            "Send a bunch of payment requests at once! Makes it easy it split a bill at a restaurant for example."),
+        "splitBillInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Split Bill Info"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Split By"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -716,6 +726,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "useNano": MessageLookupByLibrary.simpleMessage("Use NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
+        "userAlreadyAddedError":
+            MessageLookupByLibrary.simpleMessage("User already added!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found!"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),

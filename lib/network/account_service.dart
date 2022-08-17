@@ -62,7 +62,7 @@ String _SERVER_ADDRESS_ALERTS = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/alerts";
 String _SERVER_ADDRESS_FUNDING = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/funding";
 String _SERVER_ADDRESS_GIFT = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/gift";
 
-const String _USERNAME_LEASE_ENDPOINT = "https://nano.to/lease";
+const String _USERNAME_LEASE_ENDPOINT = "https://api.nano.to/lease";
 
 // UD / ENS:
 const String _UD_ENDPOINT = "https://unstoppabledomains.g.alchemy.com/domains/";
