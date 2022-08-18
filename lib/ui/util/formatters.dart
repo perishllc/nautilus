@@ -41,7 +41,7 @@ class CurrencyFormatter2 extends TextInputFormatter {
     String workingText = newValue.text;
     int workingOffset = 0;
     final String oldText = oldValue.text;
-    final int oldSelectionOffset = oldValue.selection.baseOffset;
+    final int oldSelectionOffset = oldValue.selection.extentOffset;
     final TextSelection oldSelection = oldValue.selection;
 
     // deny illegal moves:

@@ -7,6 +7,7 @@
 - Added handlebars to some sheet menus that were missing them
 - UI Tweaks to the gift creation / completion sheet
 #### Fixed
+- (iOS) bug when pressing backspace on amount fields
 - Nano.to leasing API updated
 - Rounding bug when displaying amounts like 4.99999 -> 5.999999
 ## v0.5.7 - [2022-08-16]
