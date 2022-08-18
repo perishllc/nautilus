@@ -880,10 +880,20 @@
     "type": "text",
     "description": "gift_message"
   },
+  "giftProcessError": "Une erreur s'est produite lors du traitement de cette carte-cadeau. Vérifiez peut-être votre connexion et essayez de cliquer à nouveau sur le lien du cadeau.",
+  "@giftProcessError": {
+    "type": "text",
+    "description": "gift_process_error"
+  },
   "giftProcessSuccess": "Cadeau reçu avec succès, cela peut prendre un moment pour apparaître dans votre portefeuille.",
   "@giftProcessSuccess": {
     "type": "text",
     "description": "gift_process_success"
+  },
+  "giftRefundSuccess": "Cadeau remboursé avec succès !",
+  "@giftRefundSuccess": {
+    "type": "text",
+    "description": "gift_refund_success"
   },
   "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
   "@giftWarning": {
@@ -1330,6 +1340,16 @@
     "type": "text",
     "description": "ok"
   },
+  "onboard": "Inviter quelqu'un",
+  "@onboard": {
+    "type": "text",
+    "description": "featured_onboard"
+  },
+  "onboarding": "Intégration",
+  "@onboarding": {
+    "type": "text",
+    "description": "share_onboarding"
+  },
   "onramp": "Rampe d'accès",
   "@onramp": {
     "type": "text",
@@ -1479,6 +1499,11 @@
   "@privacyPolicy": {
     "type": "text",
     "description": "settings_privacy_policy"
+  },
+  "promotionalLink": "NANO gratuit",
+  "@promotionalLink": {
+    "type": "text",
+    "description": "promo_Link"
   },
   "purchaseNano": "Acheter Nano",
   "@purchaseNano": {
@@ -1945,6 +1970,11 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
+  "share": "Partager",
+  "@share": {
+    "type": "text",
+    "description": "nautilus_share"
+  },
   "shareLink": "Lien de partage",
   "@shareLink": {
     "type": "text",
@@ -1970,6 +2000,11 @@
     "type": "text",
     "description": "funding_show"
   },
+  "showAccountInfo": "Informations de compte",
+  "@showAccountInfo": {
+    "type": "text",
+    "description": "show_account_info"
+  },
   "showAccountQR": "Afficher le code QR du compte",
   "@showAccountQR": {
     "type": "text",
@@ -1984,6 +2019,11 @@
   "@showFunding": {
     "type": "text",
     "description": "show_funding_banner"
+  },
+  "showLinkOptions": "Afficher les options de lien",
+  "@showLinkOptions": {
+    "type": "text",
+    "description": "show_link_options"
   },
   "showLinkQR": "Afficher le lien QR",
   "@showLinkQR": {
@@ -2004,6 +2044,11 @@
   "@simplex": {
     "type": "text",
     "description": "simplex_ramp"
+  },
+  "social": "Social",
+  "@social": {
+    "type": "text",
+    "description": "share_social"
   },
   "someone": "quelqu'un",
   "@someone": {

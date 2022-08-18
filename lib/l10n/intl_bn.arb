@@ -880,10 +880,20 @@
     "type": "text",
     "description": "gift_message"
   },
+  "giftProcessError": "এই উপহার কার্ড প্রক্রিয়া করার সময় একটি ত্রুটি ছিল. হয়তো আপনার সংযোগ পরীক্ষা করুন এবং আবার উপহার লিঙ্ক ক্লিক করার চেষ্টা করুন.",
+  "@giftProcessError": {
+    "type": "text",
+    "description": "gift_process_error"
+  },
   "giftProcessSuccess": "উপহারটি সফলভাবে গৃহীত হয়েছে, এটি আপনার ওয়ালেটে প্রদর্শিত হতে কিছুক্ষণ সময় নিতে পারে৷",
   "@giftProcessSuccess": {
     "type": "text",
     "description": "gift_process_success"
+  },
+  "giftRefundSuccess": "উপহার সফলভাবে ফেরত দেওয়া হয়েছে!",
+  "@giftRefundSuccess": {
+    "type": "text",
+    "description": "gift_refund_success"
   },
   "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
   "@giftWarning": {
@@ -1330,6 +1340,16 @@
     "type": "text",
     "description": "ok"
   },
+  "onboard": "কাউকে আমন্ত্রণ জানান",
+  "@onboard": {
+    "type": "text",
+    "description": "featured_onboard"
+  },
+  "onboarding": "অনবোর্ডিং",
+  "@onboarding": {
+    "type": "text",
+    "description": "share_onboarding"
+  },
   "onramp": "ঢালু পথ",
   "@onramp": {
     "type": "text",
@@ -1479,6 +1499,11 @@
   "@privacyPolicy": {
     "type": "text",
     "description": "settings_privacy_policy"
+  },
+  "promotionalLink": "বিনামূল্যে ন্যানো",
+  "@promotionalLink": {
+    "type": "text",
+    "description": "promo_Link"
   },
   "purchaseNano": "ন্যানো ক্রয়",
   "@purchaseNano": {
@@ -1945,6 +1970,11 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
+  "share": "শেয়ার করুন",
+  "@share": {
+    "type": "text",
+    "description": "nautilus_share"
+  },
   "shareLink": "লিংক শেয়ার করুন",
   "@shareLink": {
     "type": "text",
@@ -1970,6 +2000,11 @@
     "type": "text",
     "description": "funding_show"
   },
+  "showAccountInfo": "অ্যাকাউন্ট তথ্য",
+  "@showAccountInfo": {
+    "type": "text",
+    "description": "show_account_info"
+  },
   "showAccountQR": "অ্যাকাউন্ট QR কোড দেখান",
   "@showAccountQR": {
     "type": "text",
@@ -1984,6 +2019,11 @@
   "@showFunding": {
     "type": "text",
     "description": "show_funding_banner"
+  },
+  "showLinkOptions": "লিঙ্ক অপশন দেখান",
+  "@showLinkOptions": {
+    "type": "text",
+    "description": "show_link_options"
   },
   "showLinkQR": "লিঙ্ক QR দেখান",
   "@showLinkQR": {
@@ -2004,6 +2044,11 @@
   "@simplex": {
     "type": "text",
     "description": "simplex_ramp"
+  },
+  "social": "সামাজিক",
+  "@social": {
+    "type": "text",
+    "description": "share_social"
   },
   "someone": "কেউ",
   "@someone": {

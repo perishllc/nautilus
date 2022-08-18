@@ -880,10 +880,20 @@
     "type": "text",
     "description": "gift_message"
   },
+  "giftProcessError": "处理此礼品卡时出错。也许检查您的连接并尝试再次单击礼物链接。",
+  "@giftProcessError": {
+    "type": "text",
+    "description": "gift_process_error"
+  },
   "giftProcessSuccess": "礼物已成功收到，可能需要一点时间才会出现在您的钱包中。",
   "@giftProcessSuccess": {
     "type": "text",
     "description": "gift_process_success"
+  },
+  "giftRefundSuccess": "礼品成功退还！",
+  "@giftRefundSuccess": {
+    "type": "text",
+    "description": "gift_refund_success"
   },
   "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
   "@giftWarning": {
@@ -1330,6 +1340,16 @@
     "type": "text",
     "description": "ok"
   },
+  "onboard": "邀请某人",
+  "@onboard": {
+    "type": "text",
+    "description": "featured_onboard"
+  },
+  "onboarding": "入职",
+  "@onboarding": {
+    "type": "text",
+    "description": "share_onboarding"
+  },
   "onramp": "入口匝道",
   "@onramp": {
     "type": "text",
@@ -1479,6 +1499,11 @@
   "@privacyPolicy": {
     "type": "text",
     "description": "settings_privacy_policy"
+  },
+  "promotionalLink": "免费纳米",
+  "@promotionalLink": {
+    "type": "text",
+    "description": "promo_Link"
   },
   "purchaseNano": "购买 Nano",
   "@purchaseNano": {
@@ -1945,6 +1970,11 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
+  "share": "分享",
+  "@share": {
+    "type": "text",
+    "description": "nautilus_share"
+  },
   "shareLink": "分享链接",
   "@shareLink": {
     "type": "text",
@@ -1970,6 +2000,11 @@
     "type": "text",
     "description": "funding_show"
   },
+  "showAccountInfo": "帐户信息",
+  "@showAccountInfo": {
+    "type": "text",
+    "description": "show_account_info"
+  },
   "showAccountQR": "显示账户二维码",
   "@showAccountQR": {
     "type": "text",
@@ -1984,6 +2019,11 @@
   "@showFunding": {
     "type": "text",
     "description": "show_funding_banner"
+  },
+  "showLinkOptions": "显示链接选项",
+  "@showLinkOptions": {
+    "type": "text",
+    "description": "show_link_options"
   },
   "showLinkQR": "显示链接二维码",
   "@showLinkQR": {
@@ -2004,6 +2044,11 @@
   "@simplex": {
     "type": "text",
     "description": "simplex_ramp"
+  },
+  "social": "社会的",
+  "@social": {
+    "type": "text",
+    "description": "share_social"
   },
   "someone": "某人",
   "@someone": {

@@ -295,48 +295,44 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         }
       }
     } catch (e) {
-      // if (animationOpen) {
-      //   Navigator.of(context).pop();
-      // }
-      // widget.errorCallback();
       sl.get<Logger>().e("Error processing wallet", e);
       return BigInt.zero;
     } finally {
       // state.unlockCallback();
     }
-    try {
+    // try {
       // state.lockCallback();
       // Receive all new blocks to our own account? doesn't seem to work:
-      if (state != null) {
-        throw Exception("state is null, can't receive own blocks");
-      }
-      final ReceivableResponse pr = await sl.get<AccountService>().getReceivable(state!.wallet!.address, 20, includeActive: true);
-      final Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
-      for (final String hash in receivableBlocks.keys) {
-        final ReceivableResponseItem? item = receivableBlocks[hash];
-        if (state!.wallet!.openBlock != null) {
-          final ProcessResponse resp = await sl.get<AccountService>().requestReceive(state!.wallet!.representative, state!.wallet!.frontier, item!.amount, hash,
-              state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!));
-          if (resp.hash != null) {
-            state!.wallet!.frontier = resp.hash;
-          }
-        } else {
-          final ProcessResponse resp = await sl.get<AccountService>().requestOpen(
-              item!.amount, hash, state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!),
-              representative: state!.wallet!.representative);
-          if (resp.hash != null) {
-            state!.wallet!.frontier = resp.hash;
-            state!.wallet!.openBlock = resp.hash;
-          }
-        }
-      }
-      state!.requestUpdate();
-    } catch (error) {
-      // Less-important error
-      sl.get<Logger>().e("Error processing wallet", error);
-    } finally {
-      // state.unlockCallback();
-    }
+      // if (state != null) {
+      //   throw Exception("state is null, can't receive own blocks");
+      // }
+      // final ReceivableResponse pr = await sl.get<AccountService>().getReceivable(state!.wallet!.address, 20, includeActive: true);
+      // final Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
+      // for (final String hash in receivableBlocks.keys) {
+      //   final ReceivableResponseItem? item = receivableBlocks[hash];
+      //   if (state!.wallet!.openBlock != null) {
+      //     final ProcessResponse resp = await sl.get<AccountService>().requestReceive(state!.wallet!.representative, state!.wallet!.frontier, item!.amount, hash,
+      //         state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!));
+      //     if (resp.hash != null) {
+      //       state!.wallet!.frontier = resp.hash;
+      //     }
+      //   } else {
+      //     final ProcessResponse resp = await sl.get<AccountService>().requestOpen(
+      //         item!.amount, hash, state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!),
+      //         representative: state!.wallet!.representative);
+      //     if (resp.hash != null) {
+      //       state!.wallet!.frontier = resp.hash;
+      //       state!.wallet!.openBlock = resp.hash;
+      //     }
+      //   }
+      // }
+      // state!.requestUpdate();
+    // } catch (error) {
+    //   // Less-important error
+    //   sl.get<Logger>().e("Error processing wallet", error);
+    // } finally {
+    //   // state.unlockCallback();
+    // }
 
     if (totalTransferred != BigInt.zero) {
       // create a txdata to be shown in place of the tx:

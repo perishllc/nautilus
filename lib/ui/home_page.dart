@@ -64,6 +64,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/transaction_state_tag.dart';
 import 'package:nautilus_wallet_flutter/util/box.dart';
+import 'package:nautilus_wallet_flutter/util/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -386,7 +387,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
       // GIFT UUID is not empty, so we're dealing with gift card v2:
       // check if there's actually any nano to claim:
       final String requestingAccount = StateContainer.of(context).wallet!.address!;
-      final dynamic res = await sl.get<AccountService>().giftCardInfo(giftUUID: giftUUID, requestingAccount: requestingAccount);
+      final dynamic res = await sl.get<GiftCards>().giftCardInfo(giftUUID: giftUUID, requestingAccount: requestingAccount);
       if (!mounted) return;
       final String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
       if (!mounted) return;
@@ -490,7 +491,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
             // sleep to flex the animation a bit:
             await Future<dynamic>.delayed(const Duration(milliseconds: 1500));
 
-            final dynamic res = await sl.get<AccountService>().giftCardClaim(giftUUID: giftUUID, requestingAccount: requestingAccount);
+            final dynamic res = await sl.get<GiftCards>().giftCardClaim(giftUUID: giftUUID, requestingAccount: requestingAccount);
             if (!mounted) return;
 
             if (res["error"] != null) {

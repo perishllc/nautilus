@@ -880,10 +880,20 @@
     "type": "text",
     "description": "gift_message"
   },
+  "giftProcessError": "A apărut o eroare la procesarea acestui card cadou. Poate verificați-vă conexiunea și încercați să dați clic din nou pe linkul cadou.",
+  "@giftProcessError": {
+    "type": "text",
+    "description": "gift_process_error"
+  },
   "giftProcessSuccess": "Cadou primit cu succes, poate dura un moment până când apare în portofel.",
   "@giftProcessSuccess": {
     "type": "text",
     "description": "gift_process_success"
+  },
+  "giftRefundSuccess": "Cadou rambursat cu succes!",
+  "@giftRefundSuccess": {
+    "type": "text",
+    "description": "gift_refund_success"
   },
   "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
   "@giftWarning": {
@@ -1330,6 +1340,16 @@
     "type": "text",
     "description": "ok"
   },
+  "onboard": "Invită pe cineva",
+  "@onboard": {
+    "type": "text",
+    "description": "featured_onboard"
+  },
+  "onboarding": "La imbarcare",
+  "@onboarding": {
+    "type": "text",
+    "description": "share_onboarding"
+  },
   "onramp": "Onrampă",
   "@onramp": {
     "type": "text",
@@ -1479,6 +1499,11 @@
   "@privacyPolicy": {
     "type": "text",
     "description": "settings_privacy_policy"
+  },
+  "promotionalLink": "NANO gratuit",
+  "@promotionalLink": {
+    "type": "text",
+    "description": "promo_Link"
   },
   "purchaseNano": "Achiziționați Nano",
   "@purchaseNano": {
@@ -1945,6 +1970,11 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
+  "share": "Acțiune",
+  "@share": {
+    "type": "text",
+    "description": "nautilus_share"
+  },
   "shareLink": "Distribuiți linkul",
   "@shareLink": {
     "type": "text",
@@ -1970,6 +2000,11 @@
     "type": "text",
     "description": "funding_show"
   },
+  "showAccountInfo": "Informatii cont",
+  "@showAccountInfo": {
+    "type": "text",
+    "description": "show_account_info"
+  },
   "showAccountQR": "Afișați codul QR contului",
   "@showAccountQR": {
     "type": "text",
@@ -1984,6 +2019,11 @@
   "@showFunding": {
     "type": "text",
     "description": "show_funding_banner"
+  },
+  "showLinkOptions": "Afișați opțiunile de legătură",
+  "@showLinkOptions": {
+    "type": "text",
+    "description": "show_link_options"
   },
   "showLinkQR": "Afișați linkul QR",
   "@showLinkQR": {
@@ -2004,6 +2044,11 @@
   "@simplex": {
     "type": "text",
     "description": "simplex_ramp"
+  },
+  "social": "Social",
+  "@social": {
+    "type": "text",
+    "description": "share_social"
   },
   "someone": "cineva",
   "@someone": {

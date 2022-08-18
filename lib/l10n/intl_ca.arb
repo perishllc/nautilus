@@ -880,10 +880,20 @@
     "type": "text",
     "description": "gift_message"
   },
+  "giftProcessError": "S'ha produït un error en processar aquesta targeta regal. Potser comproveu la vostra connexió i torneu a fer clic a l'enllaç del regal.",
+  "@giftProcessError": {
+    "type": "text",
+    "description": "gift_process_error"
+  },
   "giftProcessSuccess": "Regal rebut correctament, pot trigar un moment a aparèixer a la cartera.",
   "@giftProcessSuccess": {
     "type": "text",
     "description": "gift_process_success"
+  },
+  "giftRefundSuccess": "Regal reemborsat correctament!",
+  "@giftRefundSuccess": {
+    "type": "text",
+    "description": "gift_refund_success"
   },
   "giftWarning": "You already have a username registered! It's not currently possible to change your username, but you're free to register a new one under a different address.",
   "@giftWarning": {
@@ -1330,6 +1340,16 @@
     "type": "text",
     "description": "ok"
   },
+  "onboard": "Convida algú",
+  "@onboard": {
+    "type": "text",
+    "description": "featured_onboard"
+  },
+  "onboarding": "En l'embarcament",
+  "@onboarding": {
+    "type": "text",
+    "description": "share_onboarding"
+  },
   "onramp": "Onramp",
   "@onramp": {
     "type": "text",
@@ -1479,6 +1499,11 @@
   "@privacyPolicy": {
     "type": "text",
     "description": "settings_privacy_policy"
+  },
+  "promotionalLink": "NANO gratuït",
+  "@promotionalLink": {
+    "type": "text",
+    "description": "promo_Link"
   },
   "purchaseNano": "Purchase Nano",
   "@purchaseNano": {
@@ -1945,6 +1970,11 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
+  "share": "Compartir",
+  "@share": {
+    "type": "text",
+    "description": "nautilus_share"
+  },
   "shareLink": "Share Link",
   "@shareLink": {
     "type": "text",
@@ -1970,6 +2000,11 @@
     "type": "text",
     "description": "funding_show"
   },
+  "showAccountInfo": "Informació del compte",
+  "@showAccountInfo": {
+    "type": "text",
+    "description": "show_account_info"
+  },
   "showAccountQR": "Mostra el codi QR del compte",
   "@showAccountQR": {
     "type": "text",
@@ -1984,6 +2019,11 @@
   "@showFunding": {
     "type": "text",
     "description": "show_funding_banner"
+  },
+  "showLinkOptions": "Mostra les opcions d'enllaç",
+  "@showLinkOptions": {
+    "type": "text",
+    "description": "show_link_options"
   },
   "showLinkQR": "Mostra l'enllaç QR",
   "@showLinkQR": {
@@ -2004,6 +2044,11 @@
   "@simplex": {
     "type": "text",
     "description": "simplex_ramp"
+  },
+  "social": "Social",
+  "@social": {
+    "type": "text",
+    "description": "share_social"
   },
   "someone": "algú",
   "@someone": {

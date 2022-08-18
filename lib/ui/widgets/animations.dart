@@ -21,16 +21,15 @@ enum AnimationType {
 }
 
 class AnimationLoadingOverlay extends ModalRoute<void> {
+
+  AnimationLoadingOverlay(this.type, this.barrier, this.barrierStronger, {this.onPoppedCallback});
   AnimationType type;
   Function? onPoppedCallback;
   Color? barrier;
   Color? barrierStronger;
-  AnimationController? _controller;
-
-  AnimationLoadingOverlay(this.type, this.barrier, this.barrierStronger, {this.onPoppedCallback});
 
   @override
-  Duration get transitionDuration => Duration(milliseconds: 0);
+  Duration get transitionDuration => Duration.zero;
 
   @override
   bool get opaque => false;
@@ -75,7 +74,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
   }
 
   Widget _getAnimation(BuildContext context) {
-    return SizedBox();
+    return const SizedBox();
   }
 
   Widget _buildOverlayContent(BuildContext context) {
@@ -89,11 +88,11 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
 }
 
 class AppAnimation extends StatefulWidget {
-  AppAnimation(this.type);
+  const AppAnimation(this.type);
   final AnimationType type;
 
   @override
-  _AppAnimationState createState() => _AppAnimationState();
+  AppAnimationState createState() => AppAnimationState();
 
   static void animationLauncher(BuildContext context, AnimationType type, {Function? onPoppedCallback}) {
     Navigator.of(context).push(
@@ -103,7 +102,7 @@ class AppAnimation extends StatefulWidget {
   }
 
   static String getAnimationFilePath(AnimationType type) {
-    var genericLoaders = [
+    final List<String> genericLoaders = [
       "assets/animations/loading/generic_spinner_1.json",
       "assets/animations/loading/generic_spinner_2.json",
       // "assets/animations/loading/generic_spinner_3.json",
@@ -128,10 +127,9 @@ class AppAnimation extends StatefulWidget {
   }
 }
 
-class _AppAnimationState extends State<AppAnimation> with SingleTickerProviderStateMixin {
+class AppAnimationState extends State<AppAnimation> with SingleTickerProviderStateMixin {
   // Invalid animation
   AnimationController? _animationController;
-  Animation<double>? _animation;
 
   @override
   void initState() {
@@ -145,7 +143,7 @@ class _AppAnimationState extends State<AppAnimation> with SingleTickerProviderSt
     super.dispose();
   }
 
-  void onAnimationLoaded(composition, Duration duration) {
+  void onAnimationLoaded(dynamic composition, Duration duration) {
     // Configure the AnimationController with the duration of the
     // Lottie file and start the animation.
     // _animationController
@@ -158,9 +156,9 @@ class _AppAnimationState extends State<AppAnimation> with SingleTickerProviderSt
   }
 
   LottieBuilder _getAnimation(BuildContext context) {
-    double scalar = 0.8;
-    double width = MediaQuery.of(context).size.width * scalar;
-    double height = MediaQuery.of(context).size.height * scalar;
+    const double scalar = 0.8;
+    final double width = MediaQuery.of(context).size.width * scalar;
+    final double height = MediaQuery.of(context).size.height * scalar;
 
     switch (widget.type) {
       case AnimationType.SEND:
@@ -170,7 +168,7 @@ class _AppAnimationState extends State<AppAnimation> with SingleTickerProviderSt
           width: width,
           height: height,
           fit: BoxFit.contain,
-          onLoaded: (composition) => onAnimationLoaded(composition, Duration(milliseconds: 2000)),
+          onLoaded: (LottieComposition composition) => onAnimationLoaded(composition, Duration(milliseconds: 2000)),
         );
       case AnimationType.REQUEST:
         return LottieBuilder.asset(
@@ -179,7 +177,7 @@ class _AppAnimationState extends State<AppAnimation> with SingleTickerProviderSt
           width: width,
           height: height,
           fit: BoxFit.contain,
-          onLoaded: (composition) => onAnimationLoaded(composition, composition.duration),
+          onLoaded: (LottieComposition composition) => onAnimationLoaded(composition, composition.duration),
         );
       case AnimationType.SEND_MESSAGE:
         return LottieBuilder.asset(
@@ -188,7 +186,7 @@ class _AppAnimationState extends State<AppAnimation> with SingleTickerProviderSt
           width: width,
           height: height,
           fit: BoxFit.contain,
-          onLoaded: (composition) => onAnimationLoaded(composition, composition.duration),
+          onLoaded: (LottieComposition composition) => onAnimationLoaded(composition, composition.duration),
         );
       case AnimationType.SEARCHING:
         return LottieBuilder.asset(
@@ -197,7 +195,7 @@ class _AppAnimationState extends State<AppAnimation> with SingleTickerProviderSt
           width: width,
           height: height,
           fit: BoxFit.contain,
-          onLoaded: (composition) => onAnimationLoaded(composition, composition.duration),
+          onLoaded: (LottieComposition composition) => onAnimationLoaded(composition, composition.duration),
         );
       case AnimationType.GENERIC:
         return LottieBuilder.asset(
@@ -206,7 +204,7 @@ class _AppAnimationState extends State<AppAnimation> with SingleTickerProviderSt
           width: width,
           height: height,
           fit: BoxFit.contain,
-          onLoaded: (composition) => onAnimationLoaded(composition, composition.duration),
+          onLoaded: (LottieComposition composition) => onAnimationLoaded(composition, composition.duration),
         );
       default:
         return LottieBuilder.asset(
@@ -215,7 +213,7 @@ class _AppAnimationState extends State<AppAnimation> with SingleTickerProviderSt
           width: width,
           height: height,
           fit: BoxFit.contain,
-          onLoaded: (composition) => onAnimationLoaded(composition, composition.duration),
+          onLoaded: (LottieComposition composition) => onAnimationLoaded(composition, composition.duration),
         );
     }
   }

@@ -28,9 +28,9 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 
 class AppTransferOverviewSheet {
-  static const int NUM_SWEEP = 15; // Number of accounts to sweep from a seed
+  AppTransferOverviewSheet();
 
-  NanoUtil? _nanoUtil;
+  static const int NUM_SWEEP = 15; // Number of accounts to sweep from a seed
 
   // accounts to private keys/account balances
   Map<String, AccountBalanceItem> privKeyBalanceMap = {};
@@ -41,11 +41,7 @@ class AppTransferOverviewSheet {
     return true;
   }
 
-  AppTransferOverviewSheet() {
-    _nanoUtil = NanoUtil();
-  }
-
-  mainBottomSheet(BuildContext context, {String? quickSeed}) {
+  void mainBottomSheet(BuildContext context, {String? quickSeed}) {
     void manualEntryCallback(String seed) {
       Navigator.of(context).pop();
       startTransfer(context, seed, manualEntry: true);
@@ -288,16 +284,11 @@ class AppTransferOverviewSheet {
     _animationOpen = true;
     AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL, onPoppedCallback: () => _animationOpen = false);
 
-    // sleep for a couple seconds to flex the animation:
-    await Future<dynamic>.delayed(const Duration(seconds: 5));
-
     // Get accounts from seed
     final List<String> accounts = await getAccountsFromSeed(context, seed);
+    BigInt amountTransferred = BigInt.zero;
     try {
       final AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances(accounts);
-      if (_animationOpen) {
-        Navigator.of(context).pop();
-      }
       final List<String> accountsToRemove = [];
       resp.balances!.forEach((String account, AccountBalanceItem balItem) {
         final BigInt balance = BigInt.parse(balItem.balance!);
@@ -312,19 +303,29 @@ class AppTransferOverviewSheet {
       });
       accountsToRemove.forEach(privKeyBalanceMap.remove);
       if (privKeyBalanceMap.isEmpty) {
-        UIUtil.showSnackbar(AppLocalization.of(context).transferNoFunds, context);
+        UIUtil.showSnackbar(AppLocalization.of(context).transferNoFunds, context, durationMs: 5000);
         return;
       }
 
-      await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, wallet);
+      amountTransferred = await const AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, wallet);
     } catch (e) {
       sl.get<Logger>().e("error", e);
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).giftProcessError, context, durationMs: 5000);
     }
-    UIUtil.showSnackbar(AppLocalization.of(context).giftProcessSuccess, context);
+
+    // sleep for a couple seconds to flex the animation / since this happens pretty fast
+    await Future<dynamic>.delayed(const Duration(seconds: 2));
+    if (_animationOpen) {
+      Navigator.of(context).pop();
+    }
+    if (amountTransferred == BigInt.zero) {
+      UIUtil.showSnackbar(AppLocalization.of(context).giftProcessError, context, durationMs: 5000);
+    } else {
+      UIUtil.showSnackbar(AppLocalization.of(context).giftProcessSuccess, context, durationMs: 5000);
+    }
   }
 
   Future<void> startAutoRefund(BuildContext context, String seed, String refundAddress) async {
@@ -338,9 +339,6 @@ class AppTransferOverviewSheet {
     final List<String> accounts = await getAccountsFromSeed(context, seed);
     try {
       final AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances(accounts);
-      if (_animationOpen) {
-        Navigator.of(context).pop();
-      }
       final List<String> accountsToRemove = [];
       resp.balances!.forEach((String account, AccountBalanceItem balItem) {
         final BigInt balance = BigInt.parse(balItem.balance!);
@@ -369,8 +367,12 @@ class AppTransferOverviewSheet {
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
+      UIUtil.showSnackbar(AppLocalization.of(context).giftProcessError, context);
     }
+    if (_animationOpen) {
+      Navigator.of(context).pop();
+    }
+    UIUtil.showSnackbar(AppLocalization.of(context).giftRefundSuccess, context, durationMs: 5000);
   }
 
   /// Get NUM_SWEEP accounts from seed to request balances for

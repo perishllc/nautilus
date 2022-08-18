@@ -310,8 +310,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they will get a prompt to transfer the funds into their account upon opening the link"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Gift Message"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Apstrādājot šo dāvanu karti, radās kļūda. Varbūt pārbaudiet savienojumu un mēģiniet vēlreiz noklikšķināt uz dāvanas saites."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Dāvana ir veiksmīgi saņemta, var paiet kāds brīdis, līdz tā parādīsies jūsu makā."),
+        "giftRefundSuccess":
+            MessageLookupByLibrary.simpleMessage("Dāvana veiksmīgi atmaksāta!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Go Back"),
@@ -450,6 +454,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Izslēgts"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Ieslēgts"),
+        "onboard": MessageLookupByLibrary.simpleMessage("Uzaiciniet kādu"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Uzņemšana"),
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Opened"),
@@ -496,6 +502,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferences"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Privātuma politika"),
+        "promotionalLink":
+            MessageLookupByLibrary.simpleMessage("Bezmaksas NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Purchase Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
@@ -646,6 +654,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Iestatījumi"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Ielādēt no papīra maka"),
+        "share": MessageLookupByLibrary.simpleMessage("Dalīties"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Share Link"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Kopīgot ziņu"),
         "shareNautilus":
@@ -653,15 +662,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Uzmet aci Nautilus! Izcils NANO viedais maks!"),
         "show": MessageLookupByLibrary.simpleMessage("Rādīt"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Konta informācija"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Rādīt konta QR kodu"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Show Contacts"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Rādīt finansējuma reklāmkarogu"),
+        "showLinkOptions":
+            MessageLookupByLibrary.simpleMessage("Rādīt saites opcijas"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("Rādīt saites QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Rādīt QR kodu"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Neatvērts brīdinājums"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "social": MessageLookupByLibrary.simpleMessage("Sociālie"),
         "someone": MessageLookupByLibrary.simpleMessage("kāds"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Tērē NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Sadalīts Bils"),

@@ -311,8 +311,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Töltsön be egy digitális ajándékkártyát NANO segítségével! Állítson be egy összeget, és választható üzenetet a címzett számára, hogy lássa, mikor nyitja meg!\n\nMiután létrehozta, kap egy linket, amelyet bárkinek elküldhet, amely megnyitásakor automatikusan elosztja a pénzeszközöket a címzettnek a Nautilus telepítése után!\n\nHa a címzett már Nautilus felhasználó, akkor a hivatkozás megnyitásakor felszólítást kap arra, hogy utalja át a pénzt számlájára"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Ajándék üzenet"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Hiba történt az ajándékutalvány feldolgozása közben. Esetleg ellenőrizze a kapcsolatot, és próbáljon meg újra kattintani az ajándék linkre."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Az ajándékot sikeresen megkaptuk, eltarthat egy pillanatig, amíg megjelenik a pénztárcájában."),
+        "giftRefundSuccess": MessageLookupByLibrary.simpleMessage(
+            "Az ajándékot sikeresen visszatérítettük!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Go Back"),
@@ -456,6 +460,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Ki"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Be"),
+        "onboard": MessageLookupByLibrary.simpleMessage("Hívj meg valakit"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Beszállás"),
         "onramp": MessageLookupByLibrary.simpleMessage("Onrámpa"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Nyitott"),
@@ -506,6 +512,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferenciák"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Adatvédelmi Szabályzat"),
+        "promotionalLink":
+            MessageLookupByLibrary.simpleMessage("Ingyenes NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Vásárlás Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
@@ -657,6 +665,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Beállítások"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Load from Paper Wallet"),
+        "share": MessageLookupByLibrary.simpleMessage("Részvény"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Link megosztása"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Üzenet megosztása"),
@@ -665,16 +674,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Próbáld ki a Nautilusot, a Nano hivatalos Androidos tárcáját!"),
         "show": MessageLookupByLibrary.simpleMessage("Előadás"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Számlainformáció"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage(
             "Fiók QR-kódjának megjelenítése"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Névjegyek megjelenítése"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Finanszírozási szalag megjelenítése"),
+        "showLinkOptions": MessageLookupByLibrary.simpleMessage(
+            "Hivatkozási beállítások megjelenítése"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("Link QR megjelenítése"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR-kód megjelenítése"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Bontatlan Figyelmeztetés"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "social": MessageLookupByLibrary.simpleMessage("Társadalmi"),
         "someone": MessageLookupByLibrary.simpleMessage("valaki"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Töltsön NANO-t"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),

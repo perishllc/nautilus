@@ -1,14 +1,22 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:http/http.dart' as http;
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/gift/gift_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:uuid/uuid.dart';
 
 import 'nanoutil.dart';
@@ -25,11 +33,21 @@ class GiftCards {
   }) async {
     final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
 
+    String giftDescription = "Get the app to open this gift card!";
+
+    final BigInt amountBigInt = BigInt.parse(amountRaw ?? "0");
+    if (amountBigInt > BigInt.parse("1000000000000000000000000000000")) {
+      // more than 1 NANO:
+      final BigInt rawPerNano = BigInt.from(10).pow(30);
+      final String formattedAmount = NumberUtil.getRawAsUsableString(amountRaw, rawPerNano);
+      giftDescription = "Someone sent you $formattedAmount NANO! Get the app to open this gift card!";
+    }
+
     final BranchUniversalObject buo = BranchUniversalObject(
         canonicalIdentifier: 'flutter/branch/giftcard/$paperWalletAccount',
         //canonicalUrl: '',
-        title: 'Nautilus Gift Card',
-        contentDescription: 'Get the app to open this gift card!',
+        title: "Nautilus Wallet",
+        contentDescription: giftDescription,
         keywords: ['Nautilus', "Gift Card"],
         publiclyIndex: false,
         locallyIndex: true,
@@ -52,10 +70,106 @@ class GiftCards {
     return response;
   }
 
+  Future<String?> _getDeviceUUID() async {
+    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if (Platform.isIOS) {
+      final IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+      return iosDeviceInfo.identifierForVendor;
+    } else if (Platform.isAndroid) {
+      final AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
+      return androidDeviceInfo.androidId;
+    }
+    return null;
+  }
+
+  Future<dynamic> createSplitGiftCard({
+    String? seed,
+    String? requestingAccount,
+    String? splitAmountRaw,
+    String? memo,
+  }) async {
+    final String? appCheckToken = await FirebaseAppCheck.instance.getToken();
+    if (appCheckToken == null) {
+      return {
+        "error": "Something went wrong",
+      };
+    }
+    final http.Response response = await http.post(Uri.parse(AccountService.SERVER_ADDRESS_HTTP),
+        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
+        body: json.encode(
+          {
+            "action": "gift_split_create",
+            "seed": seed,
+            "requesting_account": requestingAccount,
+            "split_amount_raw": splitAmountRaw,
+            "memo": memo,
+          },
+        ));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      return {"success": false, "error": "Something went wrong"};
+    }
+  }
+
+  Future<dynamic> giftCardInfo({
+    String? giftUUID,
+    String? requestingAccount,
+  }) async {
+    final String? appCheckToken = await FirebaseAppCheck.instance.getToken();
+    if (appCheckToken == null) {
+      return {
+        "error": "Something went wrong",
+      };
+    }
+    final http.Response response = await http.post(Uri.parse(AccountService.SERVER_ADDRESS_HTTP),
+        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
+        body: json.encode(
+          {
+            "action": "gift_info",
+            "gift_uuid": giftUUID,
+            "requesting_account": requestingAccount,
+            "requesting_device_uuid": await _getDeviceUUID(),
+          },
+        ));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      return {"error": "something went wrong"};
+    }
+  }
+
+  Future<dynamic> giftCardClaim({
+    String? giftUUID,
+    String? requestingAccount,
+  }) async {
+    final String? appCheckToken = await FirebaseAppCheck.instance.getToken();
+    if (appCheckToken == null) {
+      return {
+        "error": "Something went wrong",
+      };
+    }
+    final http.Response response = await http.post(Uri.parse(AccountService.SERVER_ADDRESS_HTTP),
+        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
+        body: json.encode(
+          {
+            "action": "gift_claim",
+            "gift_uuid": giftUUID,
+            "requesting_account": requestingAccount,
+            "requesting_device_uuid": await _getDeviceUUID(),
+          },
+        ));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      return {"error": "something went wrong"};
+    }
+  }
+
   // Future<String> createSplitGiftCardLink(BuildContext context,
   //     {required String paperWalletSeed, String? amountRaw, String? splitAmountRaw, String? memo}) async {
   //   final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
-    
+
   //   sl<AccountService>().createSplitGiftCard(seed: paperWalletSeed, requestingAccount: paperWalletAccount, memo: memo, splitAmountRaw: splitAmountRaw);
 
   //   // final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);

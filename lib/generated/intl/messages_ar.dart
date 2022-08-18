@@ -299,8 +299,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "قم بتحميل بطاقة هدايا رقمية باستخدام NANO! قم بتعيين مبلغ ورسالة اختيارية للمستلم ليراها عند فتحه!\n\nبمجرد الإنشاء، ستحصل على رابط يمكنك إرساله إلى أي شخص، والذي عند فتحه سيوزع الأموال تلقائيًا على المستلم بعد تثبيت Nautilus!\n\nإذا كان المستلم مستخدمًا لـ Nautilus بالفعل، فسيتلقى مطالبة بتحويل الأموال إلى حسابه عند فتح الرابط."),
         "giftMessage": MessageLookupByLibrary.simpleMessage("رسالة هدية"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "حدث خطأ أثناء معالجة بطاقة الهدايا هذه. ربما تحقق من اتصالك وحاول النقر فوق رابط الهدية مرة أخرى."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "تم استلام الهدية بنجاح ، قد يستغرق ظهورها في محفظتك بعض الوقت."),
+        "giftRefundSuccess":
+            MessageLookupByLibrary.simpleMessage("تم رد أموال الهدية بنجاح!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("عد\n"),
@@ -441,6 +445,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("غلق"),
         "ok": MessageLookupByLibrary.simpleMessage("طيب"),
         "onStr": MessageLookupByLibrary.simpleMessage("فتح"),
+        "onboard": MessageLookupByLibrary.simpleMessage("قم بدعوة شخص ما"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("على متن الطائرة"),
         "onramp": MessageLookupByLibrary.simpleMessage("أونرامب"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("تم افتتاحه"),
@@ -488,6 +494,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "قم بتعيين دبوس ثانوي لوضع الإنكار المعقول.\n\nإذا تم إلغاء قفل محفظتك باستخدام هذا الدبوس الثانوي ، فسيتم استبدال بذرتك بتجزئة من البذور الموجودة. هذه ميزة أمان مخصصة لاستخدامها في حالة إجبارك على فتح محفظتك.\n\nسيعمل هذا الدبوس مثل دبوس عادي (صحيح) باستثناء عند فتح محفظتك ، وهو الوقت الذي يتم فيه تنشيط وضع الإنكار المعقول.\n\nستفقد أموالك عند الدخول في وضع الإنكار المعقول إذا لم تقم بعمل نسخة احتياطية من البذور الخاصة بك!"),
         "preferences": MessageLookupByLibrary.simpleMessage("الاختيارات"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("نانو مجاني"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("شراء نانو"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "لا يحتوي رمز الاستجابة السريعة على وجهة صالحة\n"),
@@ -636,23 +643,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("تحميل من المحفظة الورقية"),
+        "share": MessageLookupByLibrary.simpleMessage("يشارك"),
         "shareLink": MessageLookupByLibrary.simpleMessage("مشاركة الرابط"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("مشاركة الرسالة"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("شارك نتريوم"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "راجع نتريوم! محفظة نتريوم الرسمية للهاتف"),
         "show": MessageLookupByLibrary.simpleMessage("يعرض"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("معلومات الحساب"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage(
             "إظهار رمز الاستجابة السريعة للحساب"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("إظهار جهات الاتصال"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("إظهار بانر التمويل"),
+        "showLinkOptions":
+            MessageLookupByLibrary.simpleMessage("إظهار خيارات الارتباط"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("إظهار ارتباط QR"),
         "showQR":
             MessageLookupByLibrary.simpleMessage("إظهار رمز الاستجابة السريعة"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("تحذير غير مفتوح"),
         "simplex": MessageLookupByLibrary.simpleMessage("البسيط"),
+        "social": MessageLookupByLibrary.simpleMessage("اجتماعي"),
         "someone": MessageLookupByLibrary.simpleMessage("شخصا ما"),
         "spendNano": MessageLookupByLibrary.simpleMessage("أنفق نانو"),
         "splitBill": MessageLookupByLibrary.simpleMessage("سبليت بيل"),

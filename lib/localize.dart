@@ -85,4 +85,12 @@ class NonTranslatable {
   static String get nanswap {
     return "nanswap.com";
   }
+
+  static String get promoLink {
+    return "https://perish.co/promo";
+  }
+
+  static String get genericStoreLink {
+    return "https://nautiluswallet.app";
+  }
 }

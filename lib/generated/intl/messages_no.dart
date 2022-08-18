@@ -306,8 +306,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Last inn et digitalt gavekort med NANO! Angi et beløp, og en valgfri melding for mottakeren å se når de åpner den!\n\nNår du er opprettet, får du en lenke som du kan sende til hvem som helst, som når den åpnes automatisk vil distribuere midlene til mottakeren etter installasjon av Nautilus!\n\nHvis mottakeren allerede er en Nautilus-bruker, vil de få beskjed om å overføre midlene til kontoen sin når lenken åpnes"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Gave Melding"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Det oppsto en feil under behandlingen av dette gavekortet. Sjekk kanskje tilkoblingen din og prøv å klikke på gavelenken igjen."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Gaven er mottatt, det kan ta et øyeblikk før den vises i lommeboken din."),
+        "giftRefundSuccess":
+            MessageLookupByLibrary.simpleMessage("Gaven ble refundert!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Gå tilbake"),
@@ -452,6 +456,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Deaktiver"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Aktiver"),
+        "onboard": MessageLookupByLibrary.simpleMessage("Inviter noen"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Onboarding"),
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Åpnet"),
@@ -503,6 +509,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferanser"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Personvernpolicy"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("Gratis NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Kjøp Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR-koden inneholder ikke en gyldig adresse"),
@@ -653,21 +660,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Instillinger"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Last fra papirlommebok"),
+        "share": MessageLookupByLibrary.simpleMessage("Dele"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Del Link"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Del melding"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Del Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Sjekk ut Nautilus! En ledende NANO mobil lommebok!"),
         "show": MessageLookupByLibrary.simpleMessage("Forestilling"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Kontoinformasjon"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Vis konto QR-kode"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Vis kontakter"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Vis finansieringsbanner"),
+        "showLinkOptions":
+            MessageLookupByLibrary.simpleMessage("Vis koblingsalternativer"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("Vis lenke QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Vis QR-kode"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Uåpnet advarsel"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "social": MessageLookupByLibrary.simpleMessage("Sosial"),
         "someone": MessageLookupByLibrary.simpleMessage("noen"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Bruk NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Delt regning"),

@@ -822,7 +822,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                 Row(
                   children: <Widget>[
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).showAccountQR, Dimens.BUTTON_COMPACT_LEFT_DIMENS,
+                        context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).showAccountInfo, Dimens.BUTTON_COMPACT_LEFT_DIMENS,
                         onPressed: () async {
                       Sheets.showAppHeightEightSheet(
                           context: context,

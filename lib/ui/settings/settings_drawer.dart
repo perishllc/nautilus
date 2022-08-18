@@ -41,6 +41,7 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accounts_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/onboard_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/backupseed_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/blocked_widget.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/changerepresentative_sheet.dart';
@@ -84,14 +85,14 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   AnimationController? _blockedController;
   late AnimationController _securityController;
   late AnimationController _moreSettingsController;
-  // late AnimationController _getNanoController;
+  late AnimationController _shareController;
   // late AnimationController _spendNanoController;
   late AnimationController _useNanoController;
   late Animation<Offset> _contactsOffsetFloat;
   late Animation<Offset> _blockedOffsetFloat;
   late Animation<Offset> _securityOffsetFloat;
   late Animation<Offset> _moreSettingsOffsetFloat;
-  // late Animation<Offset> _getNanoOffsetFloat;
+  late Animation<Offset> _shareOffsetFloat;
   // late Animation<Offset> _spendNanoOffsetFloat;
   late Animation<Offset> _useNanoOffsetFloat;
   late ScrollController _scrollController;
@@ -120,7 +121,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   late bool _blockedOpen;
   late bool _securityOpen;
   late bool _moreSettingsOpen;
-  // late bool _getNanoOpen;
+  late bool _shareOpen;
   // late bool _spendNanoOpen;
   late bool _useNanoOpen;
 
@@ -160,7 +161,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     _blockedOpen = false;
     _securityOpen = false;
     _moreSettingsOpen = false;
-    // _getNanoOpen = false;
+    _shareOpen = false;
     // _spendNanoOpen = false;
     _useNanoOpen = false;
     _loadingAccounts = false;
@@ -289,11 +290,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       vsync: this,
       duration: const Duration(milliseconds: 220),
     );
-    // // For get nano menu
-    // _getNanoController = AnimationController(
-    //   vsync: this,
-    //   duration: const Duration(milliseconds: 220),
-    // );
+    // For share menu
+    _shareController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 220),
+    );
     // // For spend nano menu
     // _spendNanoController = AnimationController(
     //   vsync: this,
@@ -312,6 +313,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     _blockedOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_blockedController!);
     _moreSettingsOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_moreSettingsController);
     _useNanoOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_useNanoController);
+    _shareOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_shareController);
     // Version string
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       setState(() {
@@ -1222,12 +1224,18 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       });
       _useNanoController.reverse();
       return false;
+    } else if (_shareOpen) {
+      setState(() {
+        _shareOpen = false;
+      });
+      _shareController.reverse();
+      return false;
     }
     return true;
   }
 
   void subMenuDragStart(DragStartDetails details) {
-    if (_moreSettingsOpen || _useNanoOpen || _securityOpen || _blockedOpen || _contactsOpen) {
+    if (_shareOpen || _moreSettingsOpen || _useNanoOpen || _securityOpen || _blockedOpen || _contactsOpen) {
       _slideOffset = 1.1;
     } else {
       _slideOffset = 0;
@@ -1246,6 +1254,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       controller = _securityController;
     } else if (_contactsOpen) {
       controller = _contactsController;
+    } else if (_shareOpen) {
+      controller = _shareController;
     }
 
     // no menus are open, so don't do anything:
@@ -1268,6 +1278,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         _securityOpen = false;
       } else if (_contactsOpen) {
         _contactsOpen = false;
+      } else if (_shareOpen) {
+        _shareOpen = false;
       }
     }
   }
@@ -1283,6 +1295,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       _securityController.value = _slideOffset;
     } else if (_contactsOpen) {
       _contactsController!.value = _slideOffset;
+    } else if (_shareOpen) {
+      _shareController.value = _slideOffset;
     }
     _slideOffset -= details.delta.dx / 250;
   }
@@ -1332,6 +1346,12 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
               onHorizontalDragEnd: subMenuDragEnd,
               onHorizontalDragUpdate: subMenuDragUpdate,
               child: SlideTransition(position: _moreSettingsOffsetFloat, child: buildMoreSettingsMenu(context)),
+            ),
+            GestureDetector(
+              onHorizontalDragStart: subMenuDragStart,
+              onHorizontalDragEnd: subMenuDragEnd,
+              onHorizontalDragUpdate: subMenuDragUpdate,
+              child: SlideTransition(position: _shareOffsetFloat, child: buildShareMenu(context)),
             ),
           ],
         ),
@@ -1553,9 +1573,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           // Authenticate
           final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
           final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+          if (!mounted) return;
           if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
             try {
               final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context).fingerprintSeedBackup);
+              if (!mounted) return;
               if (authenticated) {
                 sl.get<HapticUtil>().fingerprintSucess();
                 StateContainer.of(context).getSeed().then((String seed) {
@@ -1567,6 +1589,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                 });
               }
             } catch (error) {
+              if (!mounted) return;
               AppDialogs.showConfirmDialog(
                   context,
                   "Error",
@@ -1591,7 +1614,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).shareNautilus, AppIcons.share, onPressed: () {
-          Share.share("Check out Nautilus - NANO Wallet for iOS and Android https://nautiluswallet.app");
+          // Share.share("${AppLocalization.of(context).shareNautilusText} ${NonTranslatable.genericStoreLink}");
+          setState(() {
+            _shareOpen = true;
+          });
+          _shareController.forward();
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).moreSettings, AppIcons.more_horiz, onPressed: () async {
@@ -2560,6 +2587,118 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                   alignment: Alignment.topCenter,
                   child: Container(
                     height: 20,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
+                        begin: const AlignmentDirectional(0.5, -1.0),
+                        end: const AlignmentDirectional(0.5, 1.0),
+                      ),
+                    ),
+                  ),
+                ), //List Top Gradient End
+              ],
+            )),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildShareMenu(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: StateContainer.of(context).curTheme.backgroundDark,
+        boxShadow: [
+          BoxShadow(color: StateContainer.of(context).curTheme.barrierWeakest!, offset: const Offset(-5, 0), blurRadius: 20),
+        ],
+      ),
+      child: SafeArea(
+        minimum: const EdgeInsets.only(
+          top: 60,
+        ),
+        child: Column(
+          children: <Widget>[
+            // Back button and Security Text
+            Container(
+              margin: const EdgeInsets.only(bottom: 10, top: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      // Back button
+                      Container(
+                        height: 40,
+                        width: 40,
+                        margin: const EdgeInsets.only(right: 10, left: 10),
+                        child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: StateContainer.of(context).curTheme.text15,
+                              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                              padding: const EdgeInsets.all(8),
+                              // highlightColor: StateContainer.of(context).curTheme.text15,
+                              // splashColor: StateContainer.of(context).curTheme.text15,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _shareOpen = false;
+                              });
+                              _shareController.reverse();
+                            },
+                            child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
+                      ),
+                      // Header Text
+                      Text(
+                        AppLocalization.of(context).share,
+                        style: AppStyles.textStyleSettingsHeader(context),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+                child: Stack(
+              children: <Widget>[
+                ListView(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+                      child: Text(AppLocalization.of(context).social,
+                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                    ),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).shareNautilus, AppIcons.share, onPressed: () {
+                      Share.share("${AppLocalization.of(context).shareNautilusText} ${NonTranslatable.genericStoreLink}");
+                    }),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    Container(
+                      margin: const EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
+                      child: Text(AppLocalization.of(context).onboarding,
+                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                    ),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).promotionalLink, AppIcons.share, onPressed: () async {
+                      final Widget qrWidget =
+                          SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, NonTranslatable.promoLink));
+                      Sheets.showAppHeightNineSheet(
+                          context: context,
+                          widget: OnboardSheet(
+                            link: NonTranslatable.promoLink,
+                            qrWidget: qrWidget,
+                          ));
+                    }),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                  ],
+                ),
+                // List Top Gradient End
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    height: 20.0,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(

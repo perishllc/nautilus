@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:ens_dart/ens_dart.dart';
 import 'package:event_taxi/event_taxi.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
@@ -51,25 +48,6 @@ import 'package:synchronized/synchronized.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
 
-// Server Connection String
-String _BASE_SERVER_ADDRESS = "nautilus.perish.co";
-String _DEV_SERVER_ADDRESS = "node-local.perish.co:5076";
-String _HTTP_PROTO = "https://";
-String _WS_PROTO = "wss://";
-
-String _SERVER_ADDRESS_WS = "$_WS_PROTO$_BASE_SERVER_ADDRESS";
-String _SERVER_ADDRESS_HTTP = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/api";
-String _SERVER_ADDRESS_ALERTS = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/alerts";
-String _SERVER_ADDRESS_FUNDING = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/funding";
-String _SERVER_ADDRESS_GIFT = "$_HTTP_PROTO$_BASE_SERVER_ADDRESS/gift";
-
-const String _USERNAME_LEASE_ENDPOINT = "https://api.nano.to/lease";
-
-// UD / ENS:
-const String _UD_ENDPOINT = "https://unstoppabledomains.g.alchemy.com/domains/";
-const String _ENS_RPC_ENDPOINT = "https://mainnet.infura.io/v3/";
-const String _ENS_WSS_ENDPOINT = "wss://mainnet.infura.io/ws/v3/";
-
 late Web3Client _web3Client;
 late Ens ens;
 
@@ -79,6 +57,7 @@ Map? decodeJson(dynamic src) {
 
 // AccountService singleton
 class AccountService {
+
   // Constructor
   AccountService() {
     _requestQueue = Queue();
@@ -88,6 +67,29 @@ class AccountService {
     _lock = Lock();
     initCommunication(unsuspend: true);
   }
+
+  // Server Connection Strings
+  static const String BASE_SERVER_ADDRESS = "nautilus.perish.co";
+  static const String DEV_SERVER_ADDRESS = "node-local.perish.co:5076";
+  static const String HTTP_PROTO = "https://";
+  static const String WS_PROTO = "wss://";
+
+  // ignore_for_file: non_constant_identifier_names
+  static String SERVER_ADDRESS_WS = "$WS_PROTO$BASE_SERVER_ADDRESS";
+  static String SERVER_ADDRESS_HTTP = "$HTTP_PROTO$BASE_SERVER_ADDRESS/api";
+  static String SERVER_ADDRESS_ALERTS = "$HTTP_PROTO$BASE_SERVER_ADDRESS/alerts";
+  static String SERVER_ADDRESS_FUNDING = "$HTTP_PROTO$BASE_SERVER_ADDRESS/funding";
+  static String SERVER_ADDRESS_GIFT = "$HTTP_PROTO$BASE_SERVER_ADDRESS/gift";
+
+  static const String NANO_TO_USERNAME_LEASE_ENDPOINT = "https://api.nano.to/lease";
+  static const String NANO_TO_KNOWN_ENDPOINT = "https://nano.to/known.json";
+  static const String XNO_TO_KNOWN_ENDPOINT = "https://nano.to/known.json";
+
+
+  // UD / ENS:
+  static const String UD_ENDPOINT = "https://unstoppabledomains.g.alchemy.com/domains/";
+  static const String ENS_RPC_ENDPOINT = "https://mainnet.infura.io/v3/";
+  static const String ENS_WSS_ENDPOINT = "wss://mainnet.infura.io/ws/v3/";
 
   final Logger log = sl.get<Logger>();
 
@@ -143,12 +145,12 @@ class AccountService {
     _isConnecting = true;
 
     // DEV SERVER:
-    if (kDebugMode) {
-      _HTTP_PROTO = "http://";
-      _WS_PROTO = "ws://";
-      _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
-      log.d("CONNECTED TO DEV SERVER");
-    }
+    // if (kDebugMode) {
+    //   _HTTP_PROTO = "http://";
+    //   _WS_PROTO = "ws://";
+    //   _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
+    //   log.d("CONNECTED TO DEV SERVER");
+    // }
 
     // ENS:
     const String rpcUrl = "https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}";
@@ -164,7 +166,7 @@ class AccountService {
 
       _isConnecting = true;
       suspended = false;
-      _channel = IOWebSocketChannel.connect(_SERVER_ADDRESS_WS, headers: {'X-Client-Version': packageInfo.buildNumber});
+      _channel = IOWebSocketChannel.connect(SERVER_ADDRESS_WS, headers: {'X-Client-Version': packageInfo.buildNumber});
       log.d("Connected to service");
       _isConnecting = false;
       _isConnected = true;
@@ -411,7 +413,7 @@ class AccountService {
 
   Future<dynamic> makeHttpRequest(BaseRequest request) async {
     final http.Response response =
-        await http.post(Uri.parse(_SERVER_ADDRESS_HTTP), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
+        await http.post(Uri.parse(SERVER_ADDRESS_HTTP), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
 
     if (response.statusCode != 200) {
       return null;
@@ -426,7 +428,7 @@ class AccountService {
 
   Future<String?> checkUnstoppableDomain(String domain) async {
     final http.Response response =
-        await http.get(Uri.parse(_UD_ENDPOINT + domain), headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${Sensitive.UD_API_KEY}'});
+        await http.get(Uri.parse(UD_ENDPOINT + domain), headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${Sensitive.UD_API_KEY}'});
 
     if (response.statusCode != 200) {
       return null;
@@ -503,7 +505,7 @@ class AccountService {
   }
 
   Future<dynamic> checkUsernameAvailability(String username) async {
-    final http.Response response = await http.get(Uri.parse("$_USERNAME_LEASE_ENDPOINT/$username"), headers: {"Accept": "application/json"});
+    final http.Response response = await http.get(Uri.parse("$NANO_TO_USERNAME_LEASE_ENDPOINT/$username"), headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {
       return null;
     }
@@ -582,102 +584,6 @@ class AccountService {
       response["history"] = [];
     }
     return AccountHistoryResponse.fromJson(response as Map<String, dynamic>);
-  }
-
-  Future<dynamic> createSplitGiftCard({
-    String? seed,
-    String? requestingAccount,
-    String? splitAmountRaw,
-    String? memo,
-  }) async {
-    final String? appCheckToken = await FirebaseAppCheck.instance.getToken();
-    if (appCheckToken == null) {
-      return {
-        "error": "Something went wrong",
-      };
-    }
-    final http.Response response = await http.post(Uri.parse(_SERVER_ADDRESS_HTTP),
-        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
-        body: json.encode(
-          {
-            "action": "gift_split_create",
-            "seed": seed,
-            "requesting_account": requestingAccount,
-            "split_amount_raw": splitAmountRaw,
-            "memo": memo,
-          },
-        ));
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      return {"success": false, "error": "Something went wrong"};
-    }
-  }
-
-  Future<String?> _getDeviceUUID() async {
-    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) {
-      final IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
-      return iosDeviceInfo.identifierForVendor;
-    } else if (Platform.isAndroid) {
-      final AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
-      return androidDeviceInfo.androidId;
-    }
-    return null;
-  }
-
-  Future<dynamic> giftCardInfo({
-    String? giftUUID,
-    String? requestingAccount,
-  }) async {
-    final String? appCheckToken = await FirebaseAppCheck.instance.getToken();
-    if (appCheckToken == null) {
-      return {
-        "error": "Something went wrong",
-      };
-    }
-    final http.Response response = await http.post(Uri.parse(_SERVER_ADDRESS_HTTP),
-        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
-        body: json.encode(
-          {
-            "action": "gift_info",
-            "gift_uuid": giftUUID,
-            "requesting_account": requestingAccount,
-            "requesting_device_uuid": await _getDeviceUUID(),
-          },
-        ));
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      return {"error": "something went wrong"};
-    }
-  }
-
-  Future<dynamic> giftCardClaim({
-    String? giftUUID,
-    String? requestingAccount,
-  }) async {
-    final String? appCheckToken = await FirebaseAppCheck.instance.getToken();
-    if (appCheckToken == null) {
-      return {
-        "error": "Something went wrong",
-      };
-    }
-    final http.Response response = await http.post(Uri.parse(_SERVER_ADDRESS_HTTP),
-        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
-        body: json.encode(
-          {
-            "action": "gift_claim",
-            "gift_uuid": giftUUID,
-            "requesting_account": requestingAccount,
-            "requesting_device_uuid": await _getDeviceUUID(),
-          },
-        ));
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      return {"error": "something went wrong"};
-    }
   }
 
   // request money from an account:
@@ -899,7 +805,7 @@ class AccountService {
   }
 
   Future<AlertResponseItem?> getAlert(String lang) async {
-    final http.Response response = await http.get(Uri.parse("$_SERVER_ADDRESS_ALERTS/$lang"), headers: {"Accept": "application/json"});
+    final http.Response response = await http.get(Uri.parse("$SERVER_ADDRESS_ALERTS/$lang"), headers: {"Accept": "application/json"});
     if (response.statusCode == 200) {
       List<AlertResponseItem> alerts;
       alerts = (json.decode(response.body) as List).map((i) => AlertResponseItem.fromJson(i as Map<String, dynamic>)).toList();
@@ -913,7 +819,7 @@ class AccountService {
   }
 
   Future<List<FundingResponseItem>?> getFunding(String lang) async {
-    final http.Response response = await http.get(Uri.parse("$_SERVER_ADDRESS_FUNDING/$lang"), headers: {"Accept": "application/json"});
+    final http.Response response = await http.get(Uri.parse("$SERVER_ADDRESS_FUNDING/$lang"), headers: {"Accept": "application/json"});
     if (response.statusCode == 200) {
       List<FundingResponseItem> alerts;
       alerts = (json.decode(response.body) as List).map((i) => FundingResponseItem.fromJson(i as Map<String, dynamic>)).toList();

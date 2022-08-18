@@ -314,8 +314,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "ন্যানো দিয়ে একটি ডিজিটাল উপহার কার্ড লোড করুন! একটি পরিমাণ সেট করুন, এবং প্রাপক যখন এটি খুলবেন তা দেখার জন্য একটি ঐচ্ছিক বার্তা!\n\nএকবার তৈরি হলে, আপনি একটি লিঙ্ক পাবেন যা আপনি যে কাউকে পাঠাতে পারেন, যা খোলা হলে স্বয়ংক্রিয়ভাবে Nautilus ইনস্টল করার পরে প্রাপকের কাছে তহবিল বিতরণ করবে!\n\nযদি প্রাপক ইতিমধ্যেই একটি নটিলাস ব্যবহারকারী হন তবে লিঙ্কটি খোলার পরে তারা তাদের অ্যাকাউন্টে তহবিল স্থানান্তর করার জন্য একটি প্রম্পট পাবেন।"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("উপহার বার্তা"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "এই উপহার কার্ড প্রক্রিয়া করার সময় একটি ত্রুটি ছিল. হয়তো আপনার সংযোগ পরীক্ষা করুন এবং আবার উপহার লিঙ্ক ক্লিক করার চেষ্টা করুন."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "উপহারটি সফলভাবে গৃহীত হয়েছে, এটি আপনার ওয়ালেটে প্রদর্শিত হতে কিছুক্ষণ সময় নিতে পারে৷"),
+        "giftRefundSuccess": MessageLookupByLibrary.simpleMessage(
+            "উপহার সফলভাবে ফেরত দেওয়া হয়েছে!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("পেছনে যান"),
@@ -460,6 +464,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("বন্ধ"),
         "ok": MessageLookupByLibrary.simpleMessage("আচ্ছা"),
         "onStr": MessageLookupByLibrary.simpleMessage("চালু"),
+        "onboard": MessageLookupByLibrary.simpleMessage("কাউকে আমন্ত্রণ জানান"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("অনবোর্ডিং"),
         "onramp": MessageLookupByLibrary.simpleMessage("ঢালু পথ"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("খোলা"),
@@ -507,6 +513,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "যুক্তিযুক্ত অস্বীকারযোগ্যতা মোডের জন্য একটি গৌণ পিন সেট করুন।\n\nএই সেকেন্ডারি পিন ব্যবহার করে আপনার মানিব্যাগ আনলক করা থাকলে, আপনার বীজটি বিদ্যমান বীজের একটি হ্যাশ দিয়ে প্রতিস্থাপিত হবে। এটি এমন একটি নিরাপত্তা বৈশিষ্ট্য যা আপনাকে আপনার ওয়ালেট খুলতে বাধ্য করা হলে ব্যবহার করা হবে।\n\nএই পিনটি আপনার ওয়ালেট আনলক করার সময় ব্যতীত একটি সাধারণ (সঠিক) পিনের মতো কাজ করবে, যেটি যখন যুক্তিযুক্ত অস্বীকারযোগ্যতা মোড সক্রিয় হবে।\n\nআপনি যদি আপনার বীজ ব্যাক আপ না করে থাকেন তাহলে আপনার তহবিলগুলি যুক্তিসঙ্গত অস্বীকৃতি মোডে প্রবেশ করার পরে হারিয়ে যাবে!"),
         "preferences": MessageLookupByLibrary.simpleMessage("পছন্দ"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("গোপনীয়তা নীতি"),
+        "promotionalLink":
+            MessageLookupByLibrary.simpleMessage("বিনামূল্যে ন্যানো"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("ন্যানো ক্রয়"),
         "qrInvalidAddress":
             MessageLookupByLibrary.simpleMessage("QR কোডে কোন বৈধ গন্তব্য নেই"),
@@ -662,6 +670,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("সেটিংস"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("পেপার ওয়ালেট থেকে লোড করুন"),
+        "share": MessageLookupByLibrary.simpleMessage("শেয়ার করুন"),
         "shareLink": MessageLookupByLibrary.simpleMessage("লিংক শেয়ার করুন"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("বার্তা শেয়ার করুন"),
@@ -669,15 +678,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Check out Nautilus! A premier NANO mobile wallet!"),
         "show": MessageLookupByLibrary.simpleMessage("দেখান"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট তথ্য"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট QR কোড দেখান"),
         "showContacts": MessageLookupByLibrary.simpleMessage("পরিচিতি দেখাও"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("ফান্ডিং ব্যানার দেখান"),
+        "showLinkOptions":
+            MessageLookupByLibrary.simpleMessage("লিঙ্ক অপশন দেখান"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("লিঙ্ক QR দেখান"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR কোড দেখান"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("উন্মুক্ত সতর্কতা"),
         "simplex": MessageLookupByLibrary.simpleMessage("সিমপ্লেক্স"),
+        "social": MessageLookupByLibrary.simpleMessage("সামাজিক"),
         "someone": MessageLookupByLibrary.simpleMessage("কেউ"),
         "spendNano": MessageLookupByLibrary.simpleMessage("NANO খরচ করুন"),
         "splitBill": MessageLookupByLibrary.simpleMessage("বিভক্ত বিল"),

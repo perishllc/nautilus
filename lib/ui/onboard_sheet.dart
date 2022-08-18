@@ -1,35 +1,27 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:math' as math;
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/share_card.dart';
-import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/util/numberutil.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:share_plus/share_plus.dart';
 
-class GiftQRSheet extends StatefulWidget {
-  const GiftQRSheet({required this.link, required this.qrWidget}) : super();
+class OnboardSheet extends StatefulWidget {
+  const OnboardSheet({required this.link, required this.qrWidget}) : super();
   final Widget? qrWidget;
   final String link;
 
-  GiftQRSheetStateState createState() => GiftQRSheetStateState();
+  @override
+  OnboardSheetStateState createState() => OnboardSheetStateState();
 }
 
-class GiftQRSheetStateState extends State<GiftQRSheet> {
+class OnboardSheetStateState extends State<OnboardSheet> {
   GlobalKey? shareCardKey;
   ByteData? shareImageData;
   // Address copied items
@@ -40,18 +32,7 @@ class GiftQRSheetStateState extends State<GiftQRSheet> {
   Timer? _linkCopiedTimer;
 
   Widget? qrWidget;
-
-  Future<Uint8List?> _capturePng() async {
-    if (shareCardKey != null && shareCardKey!.currentContext != null) {
-      final RenderRepaintBoundary boundary = shareCardKey!.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      final ui.Image image = await boundary.toImage(pixelRatio: 5.0);
-      final ByteData byteData = (await image.toByteData(format: ui.ImageByteFormat.png))!;
-      return byteData.buffer.asUint8List();
-    } else {
-      return null;
-    }
-  }
-
+  
   Future<Image?> getQRImage(String data) async {
     final PrettyQrCodePainter painter = PrettyQrCodePainter(
       data: data,

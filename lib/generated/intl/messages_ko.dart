@@ -266,8 +266,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "NANO로 디지털 기프트 카드를 로드하세요!금액을 설정하고 수신자가 열 때 볼 수 있는 선택적 메시지를 설정합니다.\n\n링크가 생성되면 누구에게나 보낼 수 있으며, 링크를 열면 Nautilus를 설치 한 후 수취인에게 자동으로 자금을 분배합니다!\n\n수취인이 이미 Nautilus 사용자인 경우 링크를 열 때 자금을 계좌로 이체하라는 메시지가 표시됩니다."),
         "giftMessage": MessageLookupByLibrary.simpleMessage("기프트 메시지"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "이 기프트 카드를 처리하는 동안 오류가 발생했습니다. 연결을 확인하고 선물 링크를 다시 클릭해 보세요."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "선물을 성공적으로 받았습니다. 지갑에 표시되는 데 시간이 걸릴 수 있습니다."),
+        "giftRefundSuccess":
+            MessageLookupByLibrary.simpleMessage("선물이 성공적으로 환불되었습니다!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Go Back"),
@@ -398,6 +402,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("끄기"),
         "ok": MessageLookupByLibrary.simpleMessage("오케이"),
         "onStr": MessageLookupByLibrary.simpleMessage("켜기"),
+        "onboard": MessageLookupByLibrary.simpleMessage("누군가를 초대"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("온보딩"),
         "onramp": MessageLookupByLibrary.simpleMessage("진입로"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("오픈했습니다"),
@@ -443,6 +449,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "그럴듯한 거부 모드에 대한 보조 핀을 설정합니다.\n\n이 보조 핀을 사용하여 지갑을 잠금 해제하면 시드가 기존 시드의 해시로 대체됩니다. 강제로 지갑을 열어야 하는 경우에 사용하기 위한 보안 기능입니다.\n\n이 핀은 지갑을 잠금 해제할 때를 제외하고 정상적인(정확한) 핀처럼 작동하며, 그럴듯한 거부 모드가 활성화됩니다.\n\n귀하의 시드를 백업하지 않은 경우 타당한 거부 모드에 들어가면 자금이 손실됩니다!"),
         "preferences": MessageLookupByLibrary.simpleMessage("환경 설정"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("무료 나노"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("나노 구매"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
@@ -581,18 +588,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("설정"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Load from Paper Wallet"),
+        "share": MessageLookupByLibrary.simpleMessage("공유하다"),
         "shareLink": MessageLookupByLibrary.simpleMessage("공유 링크"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("메시지 공유"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Nautilus 공유 "),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Nautilus을 확인하세요! Nano의 공식 Android 지갑!"),
         "show": MessageLookupByLibrary.simpleMessage("보여 주다"),
+        "showAccountInfo": MessageLookupByLibrary.simpleMessage("계정 정보"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage("계정 QR 코드 표시"),
         "showContacts": MessageLookupByLibrary.simpleMessage("연락처 보기"),
         "showFunding": MessageLookupByLibrary.simpleMessage("펀딩 배너 표시"),
+        "showLinkOptions": MessageLookupByLibrary.simpleMessage("링크 옵션 표시"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("링크 QR 표시"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR 코드 표시"),
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("미개봉 경고"),
         "simplex": MessageLookupByLibrary.simpleMessage("심플렉스"),
+        "social": MessageLookupByLibrary.simpleMessage("사회의"),
         "someone": MessageLookupByLibrary.simpleMessage("누구"),
         "spendNano": MessageLookupByLibrary.simpleMessage("나노를 쓰다"),
         "splitBill": MessageLookupByLibrary.simpleMessage("분할 청구서"),

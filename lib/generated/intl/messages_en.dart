@@ -302,8 +302,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Gift Message"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "There was an error while processing this gift card. Maybe check your connection and try clicking the gift link again."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Gift Successfully Received, it may take a moment to appear in your wallet."),
+        "giftRefundSuccess":
+            MessageLookupByLibrary.simpleMessage("Gift Successfully Refunded!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Go Back"),
@@ -442,6 +446,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
+        "onboard": MessageLookupByLibrary.simpleMessage("Invite Someone"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Onboarding"),
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Opened"),
@@ -489,6 +495,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Set a secondary pin for plausible deniability mode.\n\nIf your wallet is unlocked using this secondary pin, your seed will be replaced with a hash of the existing seed. This is a security feature intended to be used in the event you are forced to open your wallet.\n\nThis pin will act like a normal (correct) pin EXCEPT when unlocking your wallet, which is when plausible deniability mode will activate.\n\nYour funds WILL BE LOST upon entering plausible deniability mode if you have not backed up your seed!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferences"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("Free NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Purchase Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
@@ -634,12 +641,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Settings"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Load from Paper Wallet"),
+        "share": MessageLookupByLibrary.simpleMessage("Share"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Share Link"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Share Message"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Share Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Check out Nautilus! A premier NANO mobile wallet!"),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
+        "showAccountInfo": MessageLookupByLibrary.simpleMessage("Account Info"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Show Account QR Code"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Show Contacts"),
@@ -647,10 +656,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Show Funding Banner"),
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("Show Link Options"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("Show Link QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Show QR Code"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Unopened Warning"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("someone"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Spend NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),

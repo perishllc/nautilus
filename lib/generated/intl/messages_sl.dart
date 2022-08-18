@@ -310,8 +310,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Naložite digitalno darilno kartico z NANO! Nastavite znesek in izbirno sporočilo, da bo prejemnik videl, kdaj ga odpre!\n\nKo ustvarite, boste dobili povezavo, ki jo lahko pošljete vsakomur, ki bo ob odprtju samodejno razdelila sredstva prejemniku po namestitvi Nautilusa!\n\nČe je prejemnik že uporabnik Nautilusa, bo ob odprtju povezave dobil poziv za prenos sredstev na svoj račun"),
         "giftMessage":
             MessageLookupByLibrary.simpleMessage("Darilno sporočilo"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Med obdelavo te darilne kartice je prišlo do napake. Morda preverite svojo povezavo in poskusite znova klikniti povezavo za darilo."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Darilo je uspešno prejeto, lahko traja nekaj trenutkov, da se prikaže v vaši denarnici."),
+        "giftRefundSuccess": MessageLookupByLibrary.simpleMessage(
+            "Darilo je bilo uspešno vrnjeno!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Go Back"),
@@ -452,6 +456,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Izklopi"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Vklopi"),
+        "onboard": MessageLookupByLibrary.simpleMessage("Povabi nekoga"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Na vkrcanje"),
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Odprto"),
@@ -500,6 +506,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nastavite sekundarni pin za verjeten način zanikanja.\n\nČe je vaša denarnica odklenjena s tem sekundarnim zatičem, bo vaše seme nadomeščeno z zgoščeno vrednostjo obstoječega semena. To je varnostna funkcija, namenjena uporabi v primeru, da ste prisiljeni odpreti denarnico.\n\nTa zatič bo deloval kot običajen (pravilen) zatič, RAZEN pri odklepanju vaše denarnice, ko se bo aktiviral verjeten način zanikanja.\n\nVaša sredstva BODO IZGUBLJENA, ko vstopite v verjeten način zanikanja, če niste varnostno kopirali svojega semena!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Splošno"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Zasebnost"),
+        "promotionalLink":
+            MessageLookupByLibrary.simpleMessage("Brezplačni NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Nakup Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
@@ -650,21 +658,29 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Nastavitve"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage(
             "Naloži iz papirnate denarnice"),
+        "share": MessageLookupByLibrary.simpleMessage("Deliti"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Delite povezavo"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Deli sporočilo"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Deli Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Preveri Nautilus! Uradna mobilna Nano denarnica!"),
         "show": MessageLookupByLibrary.simpleMessage("Prikaži"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Informacije o računu"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Prikaži QR kodo računa"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Pokaži stike"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Pokaži pasico financiranja"),
+        "showLinkOptions":
+            MessageLookupByLibrary.simpleMessage("Prikaži možnosti povezave"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("Prikaži povezavo QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Prikaži kodo QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Neodprto opozorilo"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
+        "social": MessageLookupByLibrary.simpleMessage("Socialno"),
         "someone": MessageLookupByLibrary.simpleMessage("nekdo"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Porabite NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Razdeljeni račun"),

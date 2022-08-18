@@ -318,8 +318,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mag-load ng Digital Gift Card gamit ang NANO! Magtakda ng halaga, at opsyonal na mensahe para makita ng tatanggap kapag binuksan nila ito!\n\nSa sandaling nilikha, makakakuha ka ng isang link na maaari mong ipadala sa sinuman, na kapag binuksan ay awtomatikong ipamahagi ang mga pondo sa tatanggap pagkatapos i-install ang Nautilus!\n\nKung ang tatanggap ay isang gumagamit ng Nautilus, makakakuha sila ng prompt upang ilipat ang mga pondo sa kanilang account sa pagbubukas ng link."),
         "giftMessage":
             MessageLookupByLibrary.simpleMessage("Mensahe ng Regalo"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Nagkaroon ng error habang pinoproseso ang gift card na ito. Siguro suriin ang iyong koneksyon at subukang i-click muli ang link ng regalo."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Matagumpay na Natanggap ang Regalo, maaaring tumagal ng ilang sandali upang lumitaw sa iyong wallet."),
+        "giftRefundSuccess": MessageLookupByLibrary.simpleMessage(
+            "Matagumpay na Na-refund ang Regalo!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Bumalik"),
@@ -464,6 +468,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
+        "onboard":
+            MessageLookupByLibrary.simpleMessage("Mag-imbita ng isang tao"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Onboarding"),
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Binuksan"),
@@ -514,6 +521,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Kagustuhan"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Patakaran sa privacy"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("Libreng NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Bumili ng Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code ay walang wasto na destinasyon"),
@@ -671,6 +679,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Mga setting"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage(
             "Ilipat galing sa Paper Wallet"),
+        "share": MessageLookupByLibrary.simpleMessage("Ibahagi"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Ibahagi ang Link"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Ibahagi ang Mensahe"),
@@ -679,16 +688,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Tingnan ang Nautilus! Ang opisyal na Android Wallet ng Nano!"),
         "show": MessageLookupByLibrary.simpleMessage("Ipakita"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Impormasyon ng Account"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Ipakita ang Account QR Code"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Ipakita ang Contact"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Ipakita ang Funding Banner"),
+        "showLinkOptions": MessageLookupByLibrary.simpleMessage(
+            "Ipakita ang Mga Opsyon sa Link"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("Ipakita ang Link QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Ipakita ang QR Code"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Hindi Nabuksang Babala"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "social": MessageLookupByLibrary.simpleMessage("Sosyal"),
         "someone": MessageLookupByLibrary.simpleMessage("isang tao"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Gumastos ng NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),

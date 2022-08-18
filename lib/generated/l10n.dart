@@ -1813,12 +1813,32 @@ class AppLocalization {
     );
   }
 
+  /// `There was an error while processing this gift card. Maybe check your connection and try clicking the gift link again.`
+  String get giftProcessError {
+    return Intl.message(
+      'There was an error while processing this gift card. Maybe check your connection and try clicking the gift link again.',
+      name: 'giftProcessError',
+      desc: 'gift_process_error',
+      args: [],
+    );
+  }
+
   /// `Gift Successfully Received, it may take a moment to appear in your wallet.`
   String get giftProcessSuccess {
     return Intl.message(
       'Gift Successfully Received, it may take a moment to appear in your wallet.',
       name: 'giftProcessSuccess',
       desc: 'gift_process_success',
+      args: [],
+    );
+  }
+
+  /// `Gift Successfully Refunded!`
+  String get giftRefundSuccess {
+    return Intl.message(
+      'Gift Successfully Refunded!',
+      name: 'giftRefundSuccess',
+      desc: 'gift_refund_success',
       args: [],
     );
   }
@@ -2715,6 +2735,26 @@ class AppLocalization {
     );
   }
 
+  /// `Invite Someone`
+  String get onboard {
+    return Intl.message(
+      'Invite Someone',
+      name: 'onboard',
+      desc: 'featured_onboard',
+      args: [],
+    );
+  }
+
+  /// `Onboarding`
+  String get onboarding {
+    return Intl.message(
+      'Onboarding',
+      name: 'onboarding',
+      desc: 'share_onboarding',
+      args: [],
+    );
+  }
+
   /// `Onramp`
   String get onramp {
     return Intl.message(
@@ -3014,6 +3054,16 @@ class AppLocalization {
       'Privacy Policy',
       name: 'privacyPolicy',
       desc: 'settings_privacy_policy',
+      args: [],
+    );
+  }
+
+  /// `Free NANO`
+  String get promotionalLink {
+    return Intl.message(
+      'Free NANO',
+      name: 'promotionalLink',
+      desc: 'promo_Link',
       args: [],
     );
   }
@@ -3950,6 +4000,16 @@ class AppLocalization {
     );
   }
 
+  /// `Share`
+  String get share {
+    return Intl.message(
+      'Share',
+      name: 'share',
+      desc: 'nautilus_share',
+      args: [],
+    );
+  }
+
   /// `Share Link`
   String get shareLink {
     return Intl.message(
@@ -4000,6 +4060,16 @@ class AppLocalization {
     );
   }
 
+  /// `Account Info`
+  String get showAccountInfo {
+    return Intl.message(
+      'Account Info',
+      name: 'showAccountInfo',
+      desc: 'show_account_info',
+      args: [],
+    );
+  }
+
   /// `Show Account QR Code`
   String get showAccountQR {
     return Intl.message(
@@ -4040,6 +4110,16 @@ class AppLocalization {
     );
   }
 
+  /// `Show Link QR`
+  String get showLinkQR {
+    return Intl.message(
+      'Show Link QR',
+      name: 'showLinkQR',
+      desc: 'show_link_qr',
+      args: [],
+    );
+  }
+
   /// `Show QR Code`
   String get showQR {
     return Intl.message(
@@ -4066,6 +4146,16 @@ class AppLocalization {
       'Simplex',
       name: 'simplex',
       desc: 'simplex_ramp',
+      args: [],
+    );
+  }
+
+  /// `Social`
+  String get social {
+    return Intl.message(
+      'Social',
+      name: 'social',
+      desc: 'share_social',
       args: [],
     );
   }

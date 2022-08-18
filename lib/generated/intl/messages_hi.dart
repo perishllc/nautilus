@@ -308,8 +308,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "NANO के साथ एक डिजिटल गिफ्ट कार्ड लोड करें! प्राप्तकर्ता को यह देखने के लिए कि वे कब खोलते हैं, राशि और एक वैकल्पिक संदेश सेट करें!\n\nएक बार बनने के बाद, आपको एक लिंक मिलेगा जिसे आप किसी को भी भेज सकते हैं, जिसे खोलने पर नॉटिलस स्थापित करने के बाद प्राप्तकर्ता को स्वचालित रूप से धन वितरित किया जाएगा!\n\nयदि प्राप्तकर्ता पहले से ही एक Nautilus उपयोगकर्ता है, तो उन्हें लिंक खोलने पर अपने खाते में धनराशि स्थानांतरित करने का संकेत मिलेगा।"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("गिफ्ट मैसेज"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "इस उपहार कार्ड को संसाधित करते समय एक त्रुटि हुई थी। हो सकता है कि अपने कनेक्शन की जांच करें और फिर से उपहार लिंक पर क्लिक करने का प्रयास करें।"),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "उपहार सफलतापूर्वक प्राप्त हुआ, आपके बटुए में दिखाई देने में कुछ समय लग सकता है।"),
+        "giftRefundSuccess": MessageLookupByLibrary.simpleMessage(
+            "उपहार की धनवापसी सफलतापूर्वक की गई!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("वापस जाओ"),
@@ -450,6 +454,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("बंद"),
         "ok": MessageLookupByLibrary.simpleMessage("ओके"),
         "onStr": MessageLookupByLibrary.simpleMessage("चालू"),
+        "onboard": MessageLookupByLibrary.simpleMessage("किसी को आमंत्रित"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("ज्ञानप्राप्ति"),
         "onramp": MessageLookupByLibrary.simpleMessage("रैंप पर"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("खोला गया"),
@@ -499,6 +505,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences":
             MessageLookupByLibrary.simpleMessage("पसंद | प्रेफरेन्सेस"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("गोपनीयता नीति"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("मुफ़्त नैनो"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("नैनो खरीदें"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "क्यूआर कोड में मान्य गंतव्य नहीं है"),
@@ -649,21 +656,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("सेटिंग्स"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("पेपर वॉलेट से लोड करें"),
+        "share": MessageLookupByLibrary.simpleMessage("शेयर करना"),
         "shareLink": MessageLookupByLibrary.simpleMessage("लिंक शेयर करें"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("संदेश साझा करें"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("शेयर नैट्रियम"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "नैट्रियम की जाँच करें! एक प्रमुख नैनो मोबाइल वॉलेट!"),
         "show": MessageLookupByLibrary.simpleMessage("प्रदर्शन"),
+        "showAccountInfo": MessageLookupByLibrary.simpleMessage("खाता जानकारी"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("खाता क्यूआर कोड दिखाएं"),
         "showContacts": MessageLookupByLibrary.simpleMessage("संपर्क दिखाएँ"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("फंडिंग बैनर दिखाएं"),
+        "showLinkOptions":
+            MessageLookupByLibrary.simpleMessage("लिंक विकल्प दिखाएं"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("लिंक क्यूआर दिखाएँ"),
         "showQR": MessageLookupByLibrary.simpleMessage("क्यूआर कोड दिखाएं"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("बंद चेतावनी"),
         "simplex": MessageLookupByLibrary.simpleMessage("सिंप्लेक्स"),
+        "social": MessageLookupByLibrary.simpleMessage("सामाजिक"),
         "someone": MessageLookupByLibrary.simpleMessage("कोई तो"),
         "spendNano": MessageLookupByLibrary.simpleMessage("नैनो खर्च करें"),
         "splitBill": MessageLookupByLibrary.simpleMessage("स्प्लिट बिल"),

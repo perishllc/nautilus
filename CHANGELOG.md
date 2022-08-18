@@ -1,7 +1,9 @@
-## v0.5.8 - [2022-08-17]
+## v0.5.8 - [2022-08-18]
 #### Added
 - Split Bill Menu! Easily split a bill by sending payment requests to multiple people at once!
+- Updated "Share Nautilus" button -> now a menu with some onboarding tools
 #### Changed
+- Lots of minor improvements to gift card UI/UX to make things as smooth as possible for onboarding
 - Added handlebars to some sheet menus that were missing them
 - UI Tweaks to the gift creation / completion sheet
 #### Fixed

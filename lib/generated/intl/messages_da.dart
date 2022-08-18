@@ -304,8 +304,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Indlæs et digitalt gavekort med NANO! Indstil et beløb, og en valgfri meddelelse, som modtageren kan se, når de åbner den!\n\nNår du er oprettet, får du et link, som du kan sende til nogen, som når de åbnes automatisk distribuerer midlerne til modtageren efter installation af Nautilus!\n\nHvis modtageren allerede er en Nautilus-bruger, vil de få en anmodning om at overføre pengene til deres konto, når du åbner linket"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Gave besked"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Der opstod en fejl under behandlingen af dette gavekort. Tjek måske din forbindelse og prøv at klikke på gavelinket igen."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Gave modtaget med succes, det kan tage et øjeblik, før du vises i din tegnebog."),
+        "giftRefundSuccess":
+            MessageLookupByLibrary.simpleMessage("Gaven er blevet refunderet!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Zpět"),
@@ -448,6 +452,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
+        "onboard": MessageLookupByLibrary.simpleMessage("Inviter nogen"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Onboarding"),
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Åbnet"),
@@ -498,6 +504,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Předvolby"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage(
             "Zásady ochrany osobních údajů"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("Gratis NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Køb Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR kód neobsahuje platnou destinaci."),
@@ -648,6 +655,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Nastavení"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Načíst z papírové penězenky"),
+        "share": MessageLookupByLibrary.simpleMessage("Del"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Del link"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Del besked"),
         "shareNautilus":
@@ -655,15 +663,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Vyzkoušejte Nautilus! Špičková mobilní peněženka NANO!"),
         "show": MessageLookupByLibrary.simpleMessage("At vise"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Kontooplysninger"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Vis konto QR-kode"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Vis kontakter"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Vis finansieringsbanner"),
+        "showLinkOptions":
+            MessageLookupByLibrary.simpleMessage("Vis linkindstillinger"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("Vis Link QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Vis QR-kode"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Uåbnet advarsel"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("nogen"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Brug NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),

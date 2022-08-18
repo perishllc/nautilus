@@ -289,8 +289,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "טען כרטיס מתנה דיגיטלי עם NANO! הגדר סכום, והודעה אופציונלית עבור הנמען כדי לראות מתי הוא פותח אותו!\n\nלאחר שנוצר, תקבל קישור שאתה יכול לשלוח לכל אחד, אשר כאשר נפתח באופן אוטומטי להפיץ את הכספים לנמען לאחר התקנת נאוטילוס!\n\nאם הנמען הוא כבר משתמש Nautilus הם יקבלו הנחיה להעביר את הכספים לחשבון שלהם עם פתיחת הקישור"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("הודעת מתנה"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "אירעה שגיאה במהלך עיבוד כרטיס המתנה הזה. אולי תבדוק את החיבור שלך ונסה ללחוץ שוב על קישור המתנה."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "המתנה התקבלה בהצלחה, ייתכן שיידרש רגע עד שתופיע בארנק שלך."),
+        "giftRefundSuccess":
+            MessageLookupByLibrary.simpleMessage("מתנה הוחזרה בהצלחה!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Go Back"),
@@ -425,6 +429,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("כבוי"),
         "ok": MessageLookupByLibrary.simpleMessage("בסדר"),
         "onStr": MessageLookupByLibrary.simpleMessage("פועל"),
+        "onboard": MessageLookupByLibrary.simpleMessage("להזמין מישהו"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("עלייה למטוס"),
         "onramp": MessageLookupByLibrary.simpleMessage("אונרמפה"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("נפתח"),
@@ -470,6 +476,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "הגדר סיכה משנית למצב הכחשה סביר.\n\nאם הארנק שלך לא נעול באמצעות סיכה משנית זו, הזרע שלך יוחלף ב-hash של הזרע הקיים. זוהי תכונת אבטחה שנועדה לשמש במקרה שתיאלץ לפתוח את הארנק.\n\nסיכה זו תפעל כמו סיכה רגילה (נכונה) למעט בעת פתיחת הנעילה של הארנק שלך, כלומר מצב הכחשה סביר יופעל.\n\nהכספים שלך יאבדו עם כניסה למצב הכחשה סביר אם לא גיבית את ה-seed שלך!"),
         "preferences": MessageLookupByLibrary.simpleMessage("העדפות"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("פרטיות"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("חינם NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("רכישת ננו"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
@@ -610,20 +617,26 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("הגדרות"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("טען מארנק נייר"),
+        "share": MessageLookupByLibrary.simpleMessage("לַחֲלוֹק"),
         "shareLink": MessageLookupByLibrary.simpleMessage("שתף קישור"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("שתף הודעה"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Share Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Check out Nautilus! A premier NANO mobile wallet!"),
         "show": MessageLookupByLibrary.simpleMessage("הופעה"),
+        "showAccountInfo": MessageLookupByLibrary.simpleMessage("פרטי חשבון"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("הצג קוד QR של חשבון"),
         "showContacts": MessageLookupByLibrary.simpleMessage("הצג אנשי קשר"),
         "showFunding": MessageLookupByLibrary.simpleMessage("הצג באנר מימון"),
+        "showLinkOptions":
+            MessageLookupByLibrary.simpleMessage("הצג אפשרויות קישור"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("הצג קישור QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("הצג קוד QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("אזהרה לא נפתחה"),
         "simplex": MessageLookupByLibrary.simpleMessage("סימפלקס"),
+        "social": MessageLookupByLibrary.simpleMessage("חֶברָתִי"),
         "someone": MessageLookupByLibrary.simpleMessage("מִישֶׁהוּ"),
         "spendNano": MessageLookupByLibrary.simpleMessage("להוציא ננו"),
         "splitBill": MessageLookupByLibrary.simpleMessage("ביל מפוצל"),

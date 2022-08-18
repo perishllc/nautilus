@@ -327,7 +327,7 @@ class _GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
 
       if (widget.splitAmountRaw.isNotEmpty) {
         final String paperWalletAccount = NanoUtil.seedToAddress(widget.paperWalletSeed, 0);
-        Map resp = await sl<AccountService>().createSplitGiftCard(
+        Map resp = await sl<GiftCards>().createSplitGiftCard(
           seed: widget.paperWalletSeed,
           requestingAccount: walletAddress,
           memo: widget.memo,

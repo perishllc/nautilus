@@ -311,8 +311,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ladda ett digitalt presentkort med NANO! Ange ett belopp, och ett valfritt meddelande för mottagaren att se när de öppnar det!\n\nNär du väl har skapat får du en länk som du kan skicka till vem som helst, som när den öppnas automatiskt distribuerar pengarna till mottagaren efter installationen av Nautilus!\n\nOm mottagaren redan är en Nautilus-användare kommer de att få en uppmaning att överföra pengarna till sitt konto när länken öppnas"),
         "giftMessage":
             MessageLookupByLibrary.simpleMessage("Present Meddelande"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Det uppstod ett fel vid bearbetningen av detta presentkort. Kanske kontrollera din anslutning och försök klicka på gåvolänken igen."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Presenten har tagits emot, det kan ta en stund innan den dyker upp i din plånbok."),
+        "giftRefundSuccess": MessageLookupByLibrary.simpleMessage(
+            "Gåvan har framgångsrikt återbetalats!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Tillbaka"),
@@ -455,6 +459,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Av"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("På"),
+        "onboard": MessageLookupByLibrary.simpleMessage("Bjud in någon"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Onboarding"),
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Öppnade"),
@@ -504,6 +510,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ställ in ett sekundärt stift för rimligt förnekarläge.\n\nOm din plånbok låses upp med denna sekundära stift, kommer ditt frö att ersättas med en hash av det befintliga fröet. Detta är en säkerhetsfunktion avsedd att användas i händelse av att du tvingas öppna din plånbok.\n\nDenna stift kommer att fungera som en vanlig (korrekt) stift UTOM när du låser upp din plånbok, vilket är då läget för rimlig förnekelse kommer att aktiveras.\n\nDina pengar KOMMER FÖRLORA när du går in i rimligt förnekarläge om du inte har säkerhetskopierat ditt frö!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Inställningar"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privatpolicy"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("Gratis NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Köp Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR-koden innehåller inte en giltig destination"),
@@ -656,21 +663,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Inställningar"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Ladda från pappersplånbok"),
+        "share": MessageLookupByLibrary.simpleMessage("Dela med sig"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Dela länk"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Dela meddelande"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Dela Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Kolla in Nautilus! Nanos officiella Androidplånbok!"),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Konto information"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Visa konto QR-kod"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Visa kontakter"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Visa finansieringsbanner"),
+        "showLinkOptions":
+            MessageLookupByLibrary.simpleMessage("Visa länkalternativ"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("Visa länk QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Visa QR-kod"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Oöppnad varning"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("någon"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Spendera NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),

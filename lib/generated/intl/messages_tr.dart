@@ -302,8 +302,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "NANO ile Dijital Hediye Kartı Yükleyin! Alıcının ne zaman açtıklarını görmesi için bir miktar ve isteğe bağlı bir mesaj belirleyin!\n\nOluşturulduktan sonra, herkese gönderebileceğiniz bir bağlantı alacaksınız, bu da açıldığında Nautilus\'u kurduktan sonra parayı alıcıya otomatik olarak dağıtacaktır!\n\nAlıcı zaten bir Nautilus kullanıcısıysa, bağlantıyı açtıktan sonra parayı hesabına aktarma istemi alacaktır."),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Hediye Mesajı"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Bu hediye kartı işlenirken bir hata oluştu. Belki bağlantınızı kontrol edin ve hediye bağlantısını tekrar tıklamayı deneyin."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Hediye Başarıyla Alındı, cüzdanınızda görünmesi biraz zaman alabilir."),
+        "giftRefundSuccess": MessageLookupByLibrary.simpleMessage(
+            "Hediye Başarıyla İade Edildi!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Geri Git"),
@@ -445,6 +449,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Kapalı"),
         "ok": MessageLookupByLibrary.simpleMessage("Tamam"),
         "onStr": MessageLookupByLibrary.simpleMessage("Açık"),
+        "onboard": MessageLookupByLibrary.simpleMessage("Birini davet etmek"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("İlk Katılım"),
         "onramp": MessageLookupByLibrary.simpleMessage("Onrampa"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Açıldı"),
@@ -492,6 +498,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Tercihler"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Gizlilik Politikası"),
+        "promotionalLink":
+            MessageLookupByLibrary.simpleMessage("Ücretsiz NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Satın al Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR kodu geçerli bir adres içermiyor"),
@@ -640,6 +648,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Ayarlar"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Bakiye Transferi"),
+        "share": MessageLookupByLibrary.simpleMessage("Paylaşmak"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Link Paylaş"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Mesajı Paylaş"),
         "shareNautilus":
@@ -647,15 +656,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Nano\'nun resmi Android Cüzdanı Nautilus\'u denesene!"),
         "show": MessageLookupByLibrary.simpleMessage("Göstermek"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Hesap bilgisi"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Hesap QR Kodunu Göster"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Kişileri Göster"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Finansman Afişini Göster"),
+        "showLinkOptions": MessageLookupByLibrary.simpleMessage(
+            "Bağlantı Seçeneklerini Göster"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("Bağlantı QR\'sini göster"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR Kodunu Göster"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Açılmamış Uyarı"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
+        "social": MessageLookupByLibrary.simpleMessage("Sosyal"),
         "someone": MessageLookupByLibrary.simpleMessage("birisi"),
         "spendNano": MessageLookupByLibrary.simpleMessage("NANO harca"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Faturayı Böl"),

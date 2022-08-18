@@ -264,8 +264,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "NANOでデジタルギフトカードを読み込もう！金額と、受信者がそれを開いたときに表示するオプションのメッセージを設定します！\n\n作成すると、誰にでも送信できるリンクが届きます。リンクを開くと、Nautilusをインストールした後に自動的に受取人に資金が分配されます！\n\n受取人がすでにNautilusユーザーの場合、リンクを開くと口座に資金を送金するように促されます。"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("ギフトメッセージ"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "このギフトカードの処理中にエラーが発生しました。接続を確認して、ギフト リンクをもう一度クリックしてみてください。"),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "ギフトを受け取りました。ウォレットに表示されるまで少し時間がかかる場合があります。"),
+        "giftRefundSuccess":
+            MessageLookupByLibrary.simpleMessage("ギフトが正常に払い戻されました!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("戻る"),
@@ -393,6 +397,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("オフ"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "onStr": MessageLookupByLibrary.simpleMessage("オン"),
+        "onboard": MessageLookupByLibrary.simpleMessage("誰かを招待"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("オンボーディング"),
         "onramp": MessageLookupByLibrary.simpleMessage("オンランプ"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("開いた"),
@@ -434,6 +440,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "もっともらしい否認モードのセカンダリ ピンを設定します。\n\nこのセカンダリ PIN を使用してウォレットのロックを解除すると、シードは既存のシードのハッシュに置き換えられます。これは、ウォレットを開くことを余儀なくされた場合に使用するためのセキュリティ機能です。\n\nこのピンは、もっともらしい否認モードがアクティブになるウォレットのロックを解除する場合を除いて、通常の (正しい) ピンのように機能します。\n\nシードをバックアップしていない場合、もっともらしい否認モードに入ると、資金が失われます!"),
         "preferences": MessageLookupByLibrary.simpleMessage("設定"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("個人情報保護方針"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("フリーナノ"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("ナノを購入"),
         "qrInvalidAddress":
             MessageLookupByLibrary.simpleMessage("QRコードに正しい送金先が含まれていません。"),
@@ -567,19 +574,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("設定"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("ペーパーウォレットから読み込む"),
+        "share": MessageLookupByLibrary.simpleMessage("シェア"),
         "shareLink": MessageLookupByLibrary.simpleMessage("共有リンク"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("メッセージを共有"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Nautilusを共有する"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "優秀なナノモバイルウォレットであるナトリアムを使ってみましょう。"),
         "show": MessageLookupByLibrary.simpleMessage("見せる"),
+        "showAccountInfo": MessageLookupByLibrary.simpleMessage("アカウント情報"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("アカウントの QR コードを表示"),
         "showContacts": MessageLookupByLibrary.simpleMessage("連絡先を表示"),
         "showFunding": MessageLookupByLibrary.simpleMessage("ファンディング バナーを表示"),
+        "showLinkOptions": MessageLookupByLibrary.simpleMessage("リンク オプションを表示"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("リンクの QR を表示"),
         "showQR": MessageLookupByLibrary.simpleMessage("QRコードを表示"),
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("未開封注意"),
         "simplex": MessageLookupByLibrary.simpleMessage("シンプレックス"),
+        "social": MessageLookupByLibrary.simpleMessage("社交"),
         "someone": MessageLookupByLibrary.simpleMessage("誰か"),
         "spendNano": MessageLookupByLibrary.simpleMessage("NANOを使う"),
         "splitBill": MessageLookupByLibrary.simpleMessage("分割請求"),

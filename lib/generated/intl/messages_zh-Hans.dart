@@ -239,8 +239,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "使用 NANO 加载一张数字礼品卡！设置金额和一条可选消息，供收件人打开时查看！\n\n创建后，您将获得一个可以发送给任何人的链接，该链接打开后将在安装Nautilus后自动将资金分配给收款人！\n\n如果收款人已经是Nautilus用户，他们将在打开链接时收到将资金转入其账户的提示。"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("礼物留言"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "处理此礼品卡时出错。也许检查您的连接并尝试再次单击礼物链接。"),
         "giftProcessSuccess":
             MessageLookupByLibrary.simpleMessage("礼物已成功收到，可能需要一点时间才会出现在您的钱包中。"),
+        "giftRefundSuccess": MessageLookupByLibrary.simpleMessage("礼品成功退还！"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("返回"),
@@ -355,6 +358,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("关闭"),
         "ok": MessageLookupByLibrary.simpleMessage("好的"),
         "onStr": MessageLookupByLibrary.simpleMessage("开启"),
+        "onboard": MessageLookupByLibrary.simpleMessage("邀请某人"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("入职"),
         "onramp": MessageLookupByLibrary.simpleMessage("入口匝道"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("已开业"),
@@ -390,6 +395,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "为似是而非的否认模式设置辅助引脚。\n\n如果您的钱包使用此辅助密码解锁，您的种子将替换为现有种子的哈希值。这是一项安全功能，旨在在您被迫打开钱包的情况下使用。\n\n除了解锁你的钱包时，这个密码就像一个正常的（正确的）密码，这是在合理的否认模式将激活的时候。\n\n如果您没有备份您的种子，您的资金将在进入合理否认模式时丢失！"),
         "preferences": MessageLookupByLibrary.simpleMessage("偏好"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("隐私政策"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("免费纳米"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("购买 Nano"),
         "qrInvalidAddress":
             MessageLookupByLibrary.simpleMessage("二维码不包含一个有效的地址"),
@@ -511,18 +517,23 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("设置"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage("用纸钱包充值"),
+        "share": MessageLookupByLibrary.simpleMessage("分享"),
         "shareLink": MessageLookupByLibrary.simpleMessage("分享链接"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("分享讯息"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("分享Nautilus"),
         "shareNautilusText":
             MessageLookupByLibrary.simpleMessage("来试试Nautilus！ 一个卓越的NANO手机钱包！"),
         "show": MessageLookupByLibrary.simpleMessage("节目"),
+        "showAccountInfo": MessageLookupByLibrary.simpleMessage("帐户信息"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage("显示账户二维码"),
         "showContacts": MessageLookupByLibrary.simpleMessage("显示联系人"),
         "showFunding": MessageLookupByLibrary.simpleMessage("显示资金横幅"),
+        "showLinkOptions": MessageLookupByLibrary.simpleMessage("显示链接选项"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("显示链接二维码"),
         "showQR": MessageLookupByLibrary.simpleMessage("显示二维码"),
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("未开封警告"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "social": MessageLookupByLibrary.simpleMessage("社会的"),
         "someone": MessageLookupByLibrary.simpleMessage("某人"),
         "spendNano": MessageLookupByLibrary.simpleMessage("花费 NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("拆分账单"),

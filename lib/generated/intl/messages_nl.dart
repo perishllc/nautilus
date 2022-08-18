@@ -311,8 +311,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Laad een digitale cadeaukaart met NANO! Stel een bedrag in en een optioneel bericht voor de ontvanger om te zien wanneer ze het openen!\n\nEenmaal gemaakt, krijg je een link die je naar iedereen kunt sturen, die, wanneer geopend, het geld automatisch naar de ontvanger zal verdelen na het installeren van Nautilus!\n\nAls de ontvanger al Nautilus-gebruiker is, krijgt hij bij het openen van de link een prompt om het geld naar zijn rekening over te maken."),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Cadeaubericht"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Er is een fout opgetreden bij het verwerken van deze cadeaubon. Controleer je verbinding en probeer opnieuw op de cadeaulink te klikken."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Cadeau succesvol ontvangen, het kan even duren voordat het in uw portemonnee verschijnt."),
+        "giftRefundSuccess": MessageLookupByLibrary.simpleMessage(
+            "Cadeau succesvol terugbetaald!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Ga terug"),
@@ -456,6 +460,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Uit"),
         "ok": MessageLookupByLibrary.simpleMessage("Oké"),
         "onStr": MessageLookupByLibrary.simpleMessage("Aan"),
+        "onboard": MessageLookupByLibrary.simpleMessage("Iemand uitnodigen"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Onboarding"),
         "onramp": MessageLookupByLibrary.simpleMessage("Op de oprit"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Geopende"),
@@ -505,6 +511,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Stel een secundaire pin in voor de plausibele ontkenningsmodus.\n\nAls je portemonnee is ontgrendeld met deze secundaire pin, wordt je seed vervangen door een hash van de bestaande seed. Dit is een beveiligingsfunctie die bedoeld is om te worden gebruikt in het geval u gedwongen wordt uw portemonnee te openen.\n\nDeze pin zal werken als een normale (juiste) pin BEHALVE bij het ontgrendelen van uw portemonnee, wanneer de plausibele ontkenningsmodus wordt geactiveerd.\n\nJe geld GAAT VERLOREN bij het openen van de plausibele ontkenningsmodus als je geen back-up van je seed hebt gemaakt!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Voorkeuren"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacybeleid"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("Gratis NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Koop Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code bevat geen geldig adres"),
@@ -657,21 +664,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Instellingen"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage(
             "Van papieren wallet importeren"),
+        "share": MessageLookupByLibrary.simpleMessage("Deel"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Link delen"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Bericht delen"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Deel Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Probeer Nautilus! Een premium mobiele Nano wallet!"),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Account informatie"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage(
             "QR-code van account weergeven"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Contacten tonen"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Financieringsbanner weergeven"),
+        "showLinkOptions":
+            MessageLookupByLibrary.simpleMessage("Koppelingsopties weergeven"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("Toon link QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR-code weergeven"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Ongeopende waarschuwing"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "social": MessageLookupByLibrary.simpleMessage("sociaal"),
         "someone": MessageLookupByLibrary.simpleMessage("iemand"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Besteed NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Factuur splitsen"),

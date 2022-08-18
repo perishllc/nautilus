@@ -306,8 +306,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Muatkan Kad Hadiah Digital dengan NANO! Tetapkan jumlah, dan mesej pilihan untuk penerima untuk melihat apabila mereka membukanya!\n\nSetelah dibuat, anda akan mendapat pautan yang boleh anda hantar kepada sesiapa sahaja, yang apabila dibuka secara automatik akan mengagihkan dana kepada penerima selepas memasang Nautilus!\n\nSekiranya penerima sudah menjadi pengguna Nautilus, mereka akan mendapat arahan untuk memindahkan dana ke akaun mereka semasa membuka pautan"),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Mesej Hadiah"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Terdapat ralat semasa memproses kad hadiah ini. Mungkin semak sambungan anda dan cuba klik pautan hadiah sekali lagi."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Hadiah Berjaya Diterima, mungkin mengambil sedikit masa untuk muncul dalam dompet anda."),
+        "giftRefundSuccess":
+            MessageLookupByLibrary.simpleMessage("Hadiah Berjaya Dipulangkan!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Pergi balik"),
@@ -448,6 +452,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
+        "onboard": MessageLookupByLibrary.simpleMessage("Jemput Seseorang"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Onboarding"),
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Dibuka"),
@@ -497,6 +503,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tetapkan pin kedua untuk mod penafian yang munasabah.\n\nJika dompet anda dibuka kunci menggunakan pin kedua ini, benih anda akan digantikan dengan cincang benih sedia ada. Ini adalah ciri keselamatan yang bertujuan untuk digunakan sekiranya anda terpaksa membuka dompet anda.\n\nPin ini akan bertindak seperti pin biasa (betul) KECUALI apabila membuka kunci dompet anda, iaitu apabila mod penafian yang munasabah akan diaktifkan.\n\nDana anda AKAN HILANG apabila memasuki mod penafian yang munasabah jika anda belum membuat sandaran benih anda!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Keutamaan"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Dasar Privasi"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO percuma"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Pembelian Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "Kod QR tidak mengandungi destinasi yang sah"),
@@ -647,6 +654,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Tetapan"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Muatkan dari Dompet Kertas"),
+        "share": MessageLookupByLibrary.simpleMessage("Kongsi"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Kongsi Pautan"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Kongsi Mesej"),
         "shareNautilus":
@@ -654,15 +662,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Semakkan Nautilus! Dompet Android Nano yang rasmi"),
         "show": MessageLookupByLibrary.simpleMessage("Tunjukkan"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Maklumat akaun"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Tunjukkan Kod QR Akaun"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Papar Kenalan"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Tunjukkan Sepanduk Pembiayaan"),
+        "showLinkOptions":
+            MessageLookupByLibrary.simpleMessage("Tunjukkan Pilihan Pautan"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("Tunjukkan Pautan QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Tunjukkan Kod QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Amaran Belum Dibuka"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "social": MessageLookupByLibrary.simpleMessage("sosial"),
         "someone": MessageLookupByLibrary.simpleMessage("seseorang"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Belanjakan NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Bil Pisah"),

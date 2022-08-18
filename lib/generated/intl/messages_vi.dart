@@ -309,8 +309,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nạp thẻ quà tặng kỹ thuật số với NANO! Đặt số tiền và một tin nhắn tùy chọn cho người nhận để xem khi họ mở nó!\n\nSau khi tạo, bạn sẽ nhận được một liên kết mà bạn có thể gửi cho bất kỳ ai, khi mở sẽ tự động phân phối tiền cho người nhận sau khi cài đặt Nautilus!\n\nNếu người nhận đã là người dùng Nautilus, họ sẽ nhận được lời nhắc để chuyển tiền vào tài khoản của họ khi mở liên kết"),
         "giftMessage":
             MessageLookupByLibrary.simpleMessage("Tin nhắn quà tặng"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Đã xảy ra lỗi khi xử lý thẻ quà tặng này. Có thể kiểm tra kết nối của bạn và thử nhấp lại vào liên kết quà tặng."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Quà đã nhận thành công, có thể mất một lúc để xuất hiện trong ví của bạn."),
+        "giftRefundSuccess": MessageLookupByLibrary.simpleMessage(
+            "Quà tặng đã được hoàn lại thành công!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Quay lại"),
@@ -452,6 +456,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Tắt"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Bật"),
+        "onboard": MessageLookupByLibrary.simpleMessage("Mời ai đó"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Giới thiệu"),
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Đã mở"),
@@ -501,6 +507,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Tuỳ chọn"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Chính sách bảo mật"),
+        "promotionalLink":
+            MessageLookupByLibrary.simpleMessage("NANO miễn phí"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Mua Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "Mã QR không chứa điểm đến hợp lệ"),
@@ -649,6 +657,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Nhập từ ví giấy"),
+        "share": MessageLookupByLibrary.simpleMessage("Đăng lại"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Chia sẻ liên kết"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Chia sẻ tin nhắn"),
@@ -657,16 +666,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Thử ngay Nautilus! Ví Nano di động hàng đầu!"),
         "show": MessageLookupByLibrary.simpleMessage("Trình diễn"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Thông tin tài khoản"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Hiển thị mã QR tài khoản"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Hiển thị danh bạ"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Hiển thị biểu ngữ tài trợ"),
+        "showLinkOptions": MessageLookupByLibrary.simpleMessage(
+            "Hiển thị các tùy chọn liên kết"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("Hiển thị liên kết QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Hiển thị mã QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Cảnh báo chưa mở"),
         "simplex": MessageLookupByLibrary.simpleMessage("Đơn giản"),
+        "social": MessageLookupByLibrary.simpleMessage("Xã hội"),
         "someone": MessageLookupByLibrary.simpleMessage("người nào"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Tiêu NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Hóa đơn tách"),

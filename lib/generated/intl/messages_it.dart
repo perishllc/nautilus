@@ -314,8 +314,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Carica una carta regalo digitale con NANO! Imposta un importo e un messaggio opzionale che il destinatario può vedere quando lo apre!\n\nUna volta creato, riceverai un link che puoi inviare a chiunque, che una volta aperto distribuirà automaticamente i fondi al destinatario dopo aver installato Nautilus!\n\nSe il destinatario è già un utente Nautilus, riceverà una richiesta di trasferire i fondi sul proprio conto all\'apertura del link."),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Messaggio regalo"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Si è verificato un errore durante l\'elaborazione di questa carta regalo. Forse controlla la tua connessione e prova a fare nuovamente clic sul link del regalo."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Regalo ricevuto con successo, potrebbe volerci un momento prima che appaia nel tuo portafoglio."),
+        "giftRefundSuccess": MessageLookupByLibrary.simpleMessage(
+            "Regalo rimborsato con successo!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Indietro"),
@@ -457,6 +461,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
+        "onboard": MessageLookupByLibrary.simpleMessage("Invita qualcuno"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Onboarding"),
         "onramp": MessageLookupByLibrary.simpleMessage("Sulla rampa"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Aperta"),
@@ -507,6 +513,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferenze"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Politica sulla Privacy"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO libero"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Acquista Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "Il codice QR non contiene una destinazione valida"),
@@ -657,6 +664,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Impostazioni"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Carica Portafoglio Cartaceo"),
+        "share": MessageLookupByLibrary.simpleMessage("Condividere"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Condividi link"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Condividi messaggio"),
@@ -665,15 +673,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Dai un\'occhiata a Nautilus! Il portafoglio ufficiale di Nano per Android!"),
         "show": MessageLookupByLibrary.simpleMessage("Mostrare"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Informazioni sull\'account"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage(
             "Mostra il codice QR dell\'account"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Mostra contatti"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Mostra banner di finanziamento"),
+        "showLinkOptions": MessageLookupByLibrary.simpleMessage(
+            "Mostra le opzioni di collegamento"),
+        "showLinkQR": MessageLookupByLibrary.simpleMessage("Mostra link QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Mostra il codice QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Avviso non aperto"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
+        "social": MessageLookupByLibrary.simpleMessage("Sociale"),
         "someone": MessageLookupByLibrary.simpleMessage("qualcuno"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Spendi NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Fattura divisa"),

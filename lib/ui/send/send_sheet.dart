@@ -1435,8 +1435,7 @@ class SendSheetState extends State<SendSheet> {
             setState(() {
               _amountValidationText = "";
               _amountController!.text = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
-              _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
-              _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+              _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
             });
           } else {
             String localAmount = StateContainer.of(context)
@@ -1448,7 +1447,7 @@ class SendSheetState extends State<SendSheet> {
             setState(() {
               _amountValidationText = "";
               _amountController!.text = _localCurrencyFormat.currencySymbol + localAmount;
-              _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+              _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
             });
           }
         },

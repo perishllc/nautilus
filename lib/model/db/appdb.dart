@@ -7,19 +7,25 @@ import 'package:http/http.dart' as http;
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBHelper {
+  DBHelper() {
+    _nanoUtil = NanoUtil();
+  }
   static const int DB_VERSION = 8;
-  static const String CONTACTS_SQL = """CREATE TABLE Contacts( 
+  static const String CONTACTS_SQL = """
+        CREATE TABLE Contacts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
         address TEXT, 
         monkey_path TEXT)""";
-  static const String USERS_SQL = """CREATE TABLE Users(
+  static const String USERS_SQL = """
+        CREATE TABLE Users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         last_updated INTEGER,
         username TEXT,
@@ -27,12 +33,14 @@ class DBHelper {
         address TEXT,
         is_blocked BOOLEAN,
         type TEXT)""";
-  static const String BLOCKED_SQL = """CREATE TABLE Blocked( 
+  static const String BLOCKED_SQL = """
+        CREATE TABLE Blocked( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         username TEXT,
         address TEXT)""";
-  static const String REPS_SQL = """CREATE TABLE Reps( 
+  static const String REPS_SQL = """
+        CREATE TABLE Reps( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         username TEXT, 
@@ -41,7 +49,8 @@ class DBHelper {
         synced TEXT,
         website TEXT
         )""";
-  static const String ACCOUNTS_SQL = """CREATE TABLE Accounts( 
+  static const String ACCOUNTS_SQL = """
+        CREATE TABLE Accounts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
         acct_index INTEGER, 
@@ -51,7 +60,8 @@ class DBHelper {
         private_key TEXT,
         balance TEXT,
         address TEXT)""";
-  static const String TX_DATA_SQL = """CREATE TABLE Transactions( 
+  static const String TX_DATA_SQL = """
+        CREATE TABLE Transactions( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         from_address TEXT,
         to_address TEXT,
@@ -109,10 +119,6 @@ class DBHelper {
   static Database? _db;
 
   NanoUtil? _nanoUtil;
-
-  DBHelper() {
-    _nanoUtil = NanoUtil();
-  }
 
   Future<Database?> get db async {
     if (_db != null) {
@@ -246,10 +252,7 @@ class DBHelper {
   }
 
   Future<List<User>?> fetchNanoToKnown(http.Client client) async {
-    http.Response response = await client.get(Uri.parse("https://xno.to/known.json"));
-    if (response.statusCode != 200) {
-      response = await client.get(Uri.parse("https://nano.to/known.json"));
-    }
+    http.Response response = await client.get(Uri.parse(AccountService.NANO_TO_KNOWN_ENDPOINT));
     // todo: use the compute function to run parseUsers in a separate isolate
     return parseNanoToUsers(response.body);
   }

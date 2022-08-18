@@ -308,8 +308,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Заредете цифрова карта за подарък с NANO! Задайте сума и незадължително съобщение, което получателят да види, когато го отвори!\n\nВеднъж създаден, ще получите линк, който можете да изпратите на всеки, който при отваряне автоматично ще разпредели средствата на получателя след инсталирането на Nautilus!\n\nАко получателят вече е потребител на Nautilus, той ще получи подкана да прехвърли средствата в сметката си при отваряне на връзката"),
         "giftMessage":
             MessageLookupByLibrary.simpleMessage("Подарък Съобщение"),
+        "giftProcessError": MessageLookupByLibrary.simpleMessage(
+            "Възникна грешка при обработката на тази карта за подарък. Може би проверете връзката си и опитайте отново да щракнете върху връзката за подарък."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
             "Подаръкът е получен успешно, може да отнеме известно време, докато се появи в портфейла ви."),
+        "giftRefundSuccess": MessageLookupByLibrary.simpleMessage(
+            "Подаръкът е успешно възстановен!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
             "You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address."),
         "goBackButton": MessageLookupByLibrary.simpleMessage("Върни се"),
@@ -453,6 +457,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "off": MessageLookupByLibrary.simpleMessage("Изкл."),
         "ok": MessageLookupByLibrary.simpleMessage("ОК"),
         "onStr": MessageLookupByLibrary.simpleMessage("Вкл."),
+        "onboard": MessageLookupByLibrary.simpleMessage("Поканете някого"),
+        "onboarding": MessageLookupByLibrary.simpleMessage("Включване"),
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Отворен"),
@@ -501,6 +507,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Предпочитания"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Декларация за Поверителност"),
+        "promotionalLink":
+            MessageLookupByLibrary.simpleMessage("Безплатен NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Покупка Нано"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR кода не съдържа валидна дестинация "),
@@ -652,6 +660,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Настройки"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Зареди от Хартиен Портфейл"),
+        "share": MessageLookupByLibrary.simpleMessage("Дял"),
         "shareLink":
             MessageLookupByLibrary.simpleMessage("Споделяне на връзка"),
         "shareMessage":
@@ -661,16 +670,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Виж Nautilus! Водещият NANO мобилен портфейл!"),
         "show": MessageLookupByLibrary.simpleMessage("Покажи"),
+        "showAccountInfo":
+            MessageLookupByLibrary.simpleMessage("Информация за акаунта"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage(
             "Показване на QR кода на акаунта"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Показване на контактите"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Показване на банера за финансиране"),
+        "showLinkOptions": MessageLookupByLibrary.simpleMessage(
+            "Показване на опциите за връзка"),
+        "showLinkQR":
+            MessageLookupByLibrary.simpleMessage("Показване на връзка QR"),
         "showQR": MessageLookupByLibrary.simpleMessage("Показване на QR код"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Неотворено предупреждение"),
         "simplex": MessageLookupByLibrary.simpleMessage("Симплекс"),
+        "social": MessageLookupByLibrary.simpleMessage("Социални"),
         "someone": MessageLookupByLibrary.simpleMessage("някой"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Прекарайте NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Разделен Бил"),
