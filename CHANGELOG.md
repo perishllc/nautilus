@@ -1,3 +1,9 @@
+## v0.6.0 - [2022-08-XX]
+#### Added
+- Easy Monero Swapping
+- Custom Backend Selection in the More Settings Menu
+#### Changed
+#### Fixed
 ## v0.5.9 - [2022-08-19]
 #### Added
 - Button to export transaction data / history in the more settings menu

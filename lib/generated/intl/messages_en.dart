@@ -575,10 +575,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Require a password to open Nautilus?"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("Resend this memo"),
-        "resetDatabase":
-            MessageLookupByLibrary.simpleMessage("Reset the Database"),
+        "resetDatabase": MessageLookupByLibrary.simpleMessage("Reset the App"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
-            "Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed, but you should still back it up beforehand. If the issue persists feel free to make a bug report on the discord (link at the bottom of the settings drawer)\nMake sure to first check if someone else already reported the issue!"),
+            "Are you sure? This will delete any gift cards you have created, memos, messages, and contacts will all be erased.\n\nThis will NOT delete your wallet\'s internal seed, but you should still back it up if you haven\'t done so already. If you\'re having issues or encountering a bug, you should report it on the discord server (the link to it is at the bottom of the settings drawer)."),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding."),

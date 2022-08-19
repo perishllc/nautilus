@@ -3569,20 +3569,20 @@ class AppLocalization {
     );
   }
 
-  /// `Reset the Database`
+  /// `Reset the App`
   String get resetDatabase {
     return Intl.message(
-      'Reset the Database',
+      'Reset the App',
       name: 'resetDatabase',
       desc: 'settings_nuke_db',
       args: [],
     );
   }
 
-  /// `Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed, but you should still back it up beforehand. If the issue persists feel free to make a bug report on the discord (link at the bottom of the settings drawer)\nMake sure to first check if someone else already reported the issue!`
+  /// `Are you sure? This will delete any gift cards you have created, memos, messages, and contacts will all be erased.\n\nThis will NOT delete your wallet's internal seed, but you should still back it up if you haven't done so already. If you're having issues or encountering a bug, you should report it on the discord server (the link to it is at the bottom of the settings drawer).`
   String get resetDatabaseConfirmation {
     return Intl.message(
-      'Are you sure you want to reset the internal database? \n\nThis may fix issues related to updating the app, but will also delete all saved preferences. This will NOT delete your wallet seed, but you should still back it up beforehand. If the issue persists feel free to make a bug report on the discord (link at the bottom of the settings drawer)\nMake sure to first check if someone else already reported the issue!',
+      'Are you sure? This will delete any gift cards you have created, memos, messages, and contacts will all be erased.\n\nThis will NOT delete your wallet\'s internal seed, but you should still back it up if you haven\'t done so already. If you\'re having issues or encountering a bug, you should report it on the discord server (the link to it is at the bottom of the settings drawer).',
       name: 'resetDatabaseConfirmation',
       desc: 'database_remove_sure',
       args: [],
