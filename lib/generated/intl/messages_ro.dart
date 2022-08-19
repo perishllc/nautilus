@@ -271,6 +271,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bani de gaz"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Schimbă NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Ieșire"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Tranzacții de export"),
         "failed": MessageLookupByLibrary.simpleMessage("nu a reușit"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -435,6 +437,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("Niciun rezultat de căutare!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("Sari peste"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "Nu există tranzacții de exportat."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Starea nodului"),
         "notSent": MessageLookupByLibrary.simpleMessage("nu a fost trimis"),
@@ -666,6 +670,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Share Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Încearcă Nautilus! Portofelul mobil NANO de talie mondială!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Partajați text"),
         "show": MessageLookupByLibrary.simpleMessage("Spectacol"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informatii cont"),

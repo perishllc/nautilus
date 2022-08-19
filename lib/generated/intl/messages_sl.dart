@@ -271,6 +271,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Plinski denar"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Menjava NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Izvozne transakcije"),
         "failed": MessageLookupByLibrary.simpleMessage("neuspelo"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -434,6 +436,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("Ni rezultatov iskanja!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("No, Skip"),
+        "noTXDataExport":
+            MessageLookupByLibrary.simpleMessage("Ni transakcij za izvoz."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Stanje vozlišča"),
         "notSent": MessageLookupByLibrary.simpleMessage("ni poslano"),
@@ -664,6 +668,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Deli Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Preveri Nautilus! Uradna mobilna Nano denarnica!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Delite besedilo"),
         "show": MessageLookupByLibrary.simpleMessage("Prikaži"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informacije o računu"),

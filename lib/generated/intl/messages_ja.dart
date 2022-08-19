@@ -230,6 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ガスマネー"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("交換ナノ"),
         "exit": MessageLookupByLibrary.simpleMessage("終了する"),
+        "exportTXData": MessageLookupByLibrary.simpleMessage("輸出取引"),
         "failed": MessageLookupByLibrary.simpleMessage("失敗した"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader": MessageLookupByLibrary.simpleMessage("ノーチラス切断"),
@@ -376,6 +377,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("インポートする新しい連絡先はありません。"),
         "noSearchResults": MessageLookupByLibrary.simpleMessage("検索結果がありません！"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("いいえ、スキップする"),
+        "noTXDataExport":
+            MessageLookupByLibrary.simpleMessage("エクスポートするトランザクションはありません。"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("ノードステータス"),
         "notSent": MessageLookupByLibrary.simpleMessage("未送信"),
@@ -580,6 +583,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Nautilusを共有する"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "優秀なナノモバイルウォレットであるナトリアムを使ってみましょう。"),
+        "shareText": MessageLookupByLibrary.simpleMessage("テキストを共有"),
         "show": MessageLookupByLibrary.simpleMessage("見せる"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("アカウント情報"),
         "showAccountQR":

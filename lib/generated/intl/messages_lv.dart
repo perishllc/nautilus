@@ -272,6 +272,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "exchangeNano":
             MessageLookupByLibrary.simpleMessage("Apmainīties ar NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Eksporta darījumi"),
         "failed": MessageLookupByLibrary.simpleMessage("failed"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -432,6 +434,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("No Search Results!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("No, Skip"),
+        "noTXDataExport":
+            MessageLookupByLibrary.simpleMessage("Nav eksportējamu darījumu."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Node Status"),
         "notSent": MessageLookupByLibrary.simpleMessage("not sent"),
@@ -661,6 +665,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Dalīties ar Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Uzmet aci Nautilus! Izcils NANO viedais maks!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Kopīgot tekstu"),
         "show": MessageLookupByLibrary.simpleMessage("Rādīt"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Konta informācija"),

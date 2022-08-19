@@ -268,6 +268,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Газови пари"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Разменете NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Изход"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Експортни сделки"),
         "failed": MessageLookupByLibrary.simpleMessage("провали"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -435,6 +437,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults": MessageLookupByLibrary.simpleMessage(
             "Няма резултати от търсенето!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("Не, пропусни"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "Няма транзакции за експортиране."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Статус на възела"),
         "notSent": MessageLookupByLibrary.simpleMessage("не е изпратено"),
@@ -669,6 +673,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Сподели Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Виж Nautilus! Водещият NANO мобилен портфейл!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Споделяне на текст"),
         "show": MessageLookupByLibrary.simpleMessage("Покажи"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Информация за акаунта"),

@@ -265,6 +265,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pieniądz"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Wymiana NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Wyjdz"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Transakcje eksportowe"),
         "failed": MessageLookupByLibrary.simpleMessage("nie powiodło się"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -431,6 +433,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("Brak wyników wyszukiwania!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("Nie, pomiń"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "Nie ma transakcji do wyeksportowania."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Status węzła"),
         "notSent": MessageLookupByLibrary.simpleMessage("nie wysłane"),
@@ -665,6 +669,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Udostępnij Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Zobacz Nautilus! Oficjalny portfel Nano dla Android!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Udostępnij tekst"),
         "show": MessageLookupByLibrary.simpleMessage("Pokazać"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informacje o koncie"),

@@ -268,6 +268,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tiền gas"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Trao đổi NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Thoát"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Giao dịch xuất khẩu"),
         "failed": MessageLookupByLibrary.simpleMessage("thất bại"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -434,6 +436,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("Không có kết quả tìm kiếm!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("Không, bỏ qua"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "Không có giao dịch nào để xuất."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Trạng thái nút"),
         "notSent": MessageLookupByLibrary.simpleMessage("chưa được gửi"),
@@ -665,6 +669,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chia sẻ Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Thử ngay Nautilus! Ví Nano di động hàng đầu!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Chia sẻ văn bản"),
         "show": MessageLookupByLibrary.simpleMessage("Trình diễn"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Thông tin tài khoản"),

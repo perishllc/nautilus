@@ -23,10 +23,10 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 
 // Contact Details Sheet
 class ContactDetailsSheet {
+  ContactDetailsSheet(this.contact, this.documentsDirectory);
+
   User contact;
   String? documentsDirectory;
-
-  ContactDetailsSheet(this.contact, this.documentsDirectory);
 
   // State variables
   bool _addressCopied = false;
@@ -123,6 +123,16 @@ class ContactDetailsSheet {
                 minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
                 child: Column(
                   children: <Widget>[
+                    // Sheet handle
+                    Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      height: 5,
+                      width: MediaQuery.of(context).size.width * 0.15,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.text20,
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,

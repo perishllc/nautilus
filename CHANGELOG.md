@@ -1,3 +1,9 @@
+## v0.5.9 - [2022-08-19]
+#### Added
+- Button to export transaction data / history in the more settings menu
+#### Fixed
+- Handlebars were missing from contact / blocked details sheet
+- Hack to let custom URI schemes work in the in-app browser
 ## v0.5.8 - [2022-08-18]
 #### Added
 - Split Bill Menu! Easily split a bill by sending payment requests to multiple people at once!

@@ -750,6 +750,11 @@
     "type": "text",
     "description": "Exit action, like a button"
   },
+  "exportTXData": "수출 거래",
+  "@exportTXData": {
+    "type": "text",
+    "description": "export_tx_data"
+  },
   "failed": "실패했습니다",
   "@failed": {
     "type": "text",
@@ -1324,6 +1329,11 @@
   "@notSent": {
     "type": "text",
     "description": "not_sent_message"
+  },
+  "noTXDataExport": "내보낼 거래가 없습니다.",
+  "@noTXDataExport": {
+    "type": "text",
+    "description": "tx_export_none"
   },
   "nyanicon": "냐니콘",
   "@nyanicon": {
@@ -1994,6 +2004,11 @@
   "@shareNautilusText": {
     "type": "text",
     "description": "share_extra"
+  },
+  "shareText": "텍스트 공유",
+  "@shareText": {
+    "type": "text",
+    "description": "settings_share_text"
   },
   "show": "보여 주다",
   "@show": {

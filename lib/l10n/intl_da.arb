@@ -750,6 +750,11 @@
     "type": "text",
     "description": "Exit action, like a button"
   },
+  "exportTXData": "Eksporter transaktioner",
+  "@exportTXData": {
+    "type": "text",
+    "description": "export_tx_data"
+  },
   "failed": "mislykkedes",
   "@failed": {
     "type": "text",
@@ -1324,6 +1329,11 @@
   "@notSent": {
     "type": "text",
     "description": "not_sent_message"
+  },
+  "noTXDataExport": "Der er ingen transaktioner at eksportere.",
+  "@noTXDataExport": {
+    "type": "text",
+    "description": "tx_export_none"
   },
   "nyanicon": "Nyanicon",
   "@nyanicon": {
@@ -1994,6 +2004,11 @@
   "@shareNautilusText": {
     "type": "text",
     "description": "share_extra"
+  },
+  "shareText": "Del tekst",
+  "@shareText": {
+    "type": "text",
+    "description": "settings_share_text"
   },
   "show": "At vise",
   "@show": {

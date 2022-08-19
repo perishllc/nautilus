@@ -750,6 +750,11 @@
     "type": "text",
     "description": "Exit action, like a button"
   },
+  "exportTXData": "Giao dịch xuất khẩu",
+  "@exportTXData": {
+    "type": "text",
+    "description": "export_tx_data"
+  },
   "failed": "thất bại",
   "@failed": {
     "type": "text",
@@ -1324,6 +1329,11 @@
   "@notSent": {
     "type": "text",
     "description": "not_sent_message"
+  },
+  "noTXDataExport": "Không có giao dịch nào để xuất.",
+  "@noTXDataExport": {
+    "type": "text",
+    "description": "tx_export_none"
   },
   "nyanicon": "Nyanicon",
   "@nyanicon": {
@@ -1994,6 +2004,11 @@
   "@shareNautilusText": {
     "type": "text",
     "description": "share_extra"
+  },
+  "shareText": "Chia sẻ văn bản",
+  "@shareText": {
+    "type": "text",
+    "description": "settings_share_text"
   },
   "show": "Trình diễn",
   "@show": {

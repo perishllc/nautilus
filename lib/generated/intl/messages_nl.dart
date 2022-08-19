@@ -272,6 +272,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gasgeld"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Ruil NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Verlaten"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Transacties exporteren"),
         "failed": MessageLookupByLibrary.simpleMessage("mislukt"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -438,6 +440,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("Geen zoekresultaten!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("Nee, overslaan"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "Er zijn geen transacties om te exporteren."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Knoopstatus"),
         "notSent": MessageLookupByLibrary.simpleMessage("niet verzonden"),
@@ -670,6 +674,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Deel Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Probeer Nautilus! Een premium mobiele Nano wallet!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Tekst delen"),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Account informatie"),

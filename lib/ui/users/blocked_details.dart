@@ -22,10 +22,9 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 
 // Contact Details Sheet
 class BlockedDetailsSheet {
+  BlockedDetailsSheet(this.blocked, this.documentsDirectory);
   User blocked;
   String? documentsDirectory;
-
-  BlockedDetailsSheet(this.blocked, this.documentsDirectory);
 
   // State variables
   bool _addressCopied = false;
@@ -33,7 +32,7 @@ class BlockedDetailsSheet {
   Timer? _addressCopiedTimer;
 
   List<Widget> getAliases(BuildContext context, User user) {
-    var aliases = <Widget>[];
+    List<Widget> aliases = <Widget>[];
     if (user.aliases == null) {
       aliases = [
         // Contact nickname container
@@ -50,7 +49,7 @@ class BlockedDetailsSheet {
               borderRadius: BorderRadius.circular(25),
             ),
             child: Text(
-              "★" + user.nickname!,
+              "★${user.nickname!}",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
@@ -86,9 +85,9 @@ class BlockedDetailsSheet {
           ),
       ];
     } else {
-      for (var i = 0; i < user.aliases!.length; i += 2) {
+      for (int i = 0; i < user.aliases!.length; i += 2) {
         String? displayName = user.aliases![i];
-        String? userType = user.aliases![i + 1];
+        final String? userType = user.aliases![i + 1];
         displayName = User.getDisplayNameWithType(displayName, userType);
         aliases.add(Container(
           width: double.infinity,
@@ -116,7 +115,7 @@ class BlockedDetailsSheet {
       }
     }
 
-    var aliasContainer = Container(
+    final Container aliasContainer = Container(
       constraints: const BoxConstraints(minHeight: 50, maxHeight: 400),
       child: Scrollbar(
         child: SingleChildScrollView(
@@ -131,13 +130,13 @@ class BlockedDetailsSheet {
   }
 
   List<Widget> combineLists(List<Widget> list1, List<Widget> list2) {
-    List<Widget> combinedList = [];
+    final List<Widget> combinedList = [];
     combinedList.addAll(list2);
     combinedList.addAll(list1);
     return combinedList;
   }
 
-  mainBottomSheet(BuildContext context) {
+  void mainBottomSheet(BuildContext context) {
     AppSheets.showAppHeightEightSheet(
         context: context,
         builder: (BuildContext context) {
@@ -146,6 +145,16 @@ class BlockedDetailsSheet {
                 minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
                 child: Column(
                   children: <Widget>[
+                    // Sheet handle
+                    Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      height: 5,
+                      width: MediaQuery.of(context).size.width * 0.15,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.text20,
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,7 +179,7 @@ class BlockedDetailsSheet {
                                   AppLocalization.of(context).removeBlocked,
                                   AppLocalization.of(context).removeBlockedConfirmation.replaceAll('%1', blocked.getDisplayName()!),
                                   CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
-                                sl.get<DBHelper>().unblockUser(blocked).then((deleted) {
+                                sl.get<DBHelper>().unblockUser(blocked).then((bool deleted) {
                                   if (deleted) {
                                     // Delete image if exists
                                     EventTaxiImpl.singleton().fire(BlockedRemovedEvent(user: blocked));

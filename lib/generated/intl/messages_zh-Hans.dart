@@ -207,6 +207,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("煤气钱"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("交换纳米"),
         "exit": MessageLookupByLibrary.simpleMessage("退出"),
+        "exportTXData": MessageLookupByLibrary.simpleMessage("出口交易"),
         "failed": MessageLookupByLibrary.simpleMessage("失败了"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader": MessageLookupByLibrary.simpleMessage("鹦鹉螺已断开连接"),
@@ -338,6 +339,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noContactsImport": MessageLookupByLibrary.simpleMessage("找不到要导入的联系人"),
         "noSearchResults": MessageLookupByLibrary.simpleMessage("没有搜索结果！"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("不，跳过"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage("没有要导出的交易。"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("节点状态"),
         "notSent": MessageLookupByLibrary.simpleMessage("未发送"),
@@ -523,6 +525,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilus": MessageLookupByLibrary.simpleMessage("分享Nautilus"),
         "shareNautilusText":
             MessageLookupByLibrary.simpleMessage("来试试Nautilus！ 一个卓越的NANO手机钱包！"),
+        "shareText": MessageLookupByLibrary.simpleMessage("分享文字"),
         "show": MessageLookupByLibrary.simpleMessage("节目"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("帐户信息"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage("显示账户二维码"),

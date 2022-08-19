@@ -750,6 +750,11 @@
     "type": "text",
     "description": "Exit action, like a button"
   },
+  "exportTXData": "রপ্তানি লেনদেন",
+  "@exportTXData": {
+    "type": "text",
+    "description": "export_tx_data"
+  },
   "failed": "ব্যর্থ হওয়া",
   "@failed": {
     "type": "text",
@@ -1324,6 +1329,11 @@
   "@notSent": {
     "type": "text",
     "description": "not_sent_message"
+  },
+  "noTXDataExport": "রপ্তানির কোনো লেনদেন নেই।",
+  "@noTXDataExport": {
+    "type": "text",
+    "description": "tx_export_none"
   },
   "nyanicon": "নায়নিকন",
   "@nyanicon": {
@@ -1994,6 +2004,11 @@
   "@shareNautilusText": {
     "type": "text",
     "description": "share_extra"
+  },
+  "shareText": "টেক্সট শেয়ার করুন",
+  "@shareText": {
+    "type": "text",
+    "description": "settings_share_text"
   },
   "show": "দেখান",
   "@show": {

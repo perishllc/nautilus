@@ -1316,43 +1316,42 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     return 0;
   }
 
-  void renderQueueOld() {
-    // if (!overrideRenderQueue) {
-    //   // check the render queue:
-    //   if (_renderQueue.length > 0) {
-    //     // push to the renderQueue and return:
-    //     setState(() {
-    //       _renderQueue.add(fastUpdate);
-    //     });
-    //     print("@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    //     return;
-    //   }
-    //   // push to the render queue, we're the first to render:
-    //   setState(() {
-    //     _renderQueue.add(fastUpdate);
-    //   });
-    // }
+  // void renderQueueOld() {
+  // if (!overrideRenderQueue) {
+  //   // check the render queue:
+  //   if (_renderQueue.length > 0) {
+  //     // push to the renderQueue and return:
+  //     setState(() {
+  //       _renderQueue.add(fastUpdate);
+  //     });
+  //     return;
+  //   }
+  //   // push to the render queue, we're the first to render:
+  //   setState(() {
+  //     _renderQueue.add(fastUpdate);
+  //   });
+  // }
 
-    //     // done with this render, see if there's another in the queue:
-    // if (_renderQueue.length > 0) {
-    //   // if this was a slow render then the next must be after at least 2.5 seconds:
-    //   // if this was a fast render then the next must be after at least 0.5 seconds
-    //   Duration timeBetweenRenders = fastUpdate ? RENDER_QUEUE_SHORT : RENDER_QUEUE_LONG;
-    //   print("START");
-    //   Timer(const Duration(seconds: 10), () async {
-    //     print("END");
-    //     if (mounted) {
-    //       // we just rendered so pop the last element of the list:
-    //       setState(() {
-    //         _renderQueue.removeLast();
-    //       });
-    //       if (_renderQueue.isNotEmpty) {
-    //         generateUnifiedList(fastUpdate: _renderQueue.last, overrideRenderQueue: true);
-    //       }
-    //     }
-    //   });
-    // }
-  }
+  //     // done with this render, see if there's another in the queue:
+  // if (_renderQueue.length > 0) {
+  //   // if this was a slow render then the next must be after at least 2.5 seconds:
+  //   // if this was a fast render then the next must be after at least 0.5 seconds
+  //   Duration timeBetweenRenders = fastUpdate ? RENDER_QUEUE_SHORT : RENDER_QUEUE_LONG;
+  //   print("START");
+  //   Timer(const Duration(seconds: 10), () async {
+  //     print("END");
+  //     if (mounted) {
+  //       // we just rendered so pop the last element of the list:
+  //       setState(() {
+  //         _renderQueue.removeLast();
+  //       });
+  //       if (_renderQueue.isNotEmpty) {
+  //         generateUnifiedList(fastUpdate: _renderQueue.last, overrideRenderQueue: true);
+  //       }
+  //     }
+  //   });
+  // }
+  // }
 
   Future<void> generateUnifiedList({bool fastUpdate = false}) async {
     ListModel<dynamic>? ULM = _unifiedListMap[StateContainer.of(context).wallet!.address];
@@ -1720,18 +1719,18 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
 
       // Go to confirm sheet:
       Sheets.showAppHeightNineSheet(
-          context: context,
-          widget: AuthConfirmSheet(
-            authItem: authItem,
-            destination: user?.address ?? authItem.account,
-            contactName: user?.getDisplayName(),
-          ));
+        context: context,
+        widget: AuthConfirmSheet(
+          authItem: authItem,
+          destination: user?.address ?? authItem.account,
+          contactName: user?.getDisplayName(),
+        ),
+      );
     }
   }
 
   // branch deep link gift:
   Future<void> handleBranchGift() async {
-
     if (!mounted) return;
 
     if (StateContainer.of(context).giftedWallet && StateContainer.of(context).wallet != null) {

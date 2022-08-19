@@ -271,6 +271,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Uang Gas"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Tukarkan NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Keluar"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Transaksi Ekspor"),
         "failed": MessageLookupByLibrary.simpleMessage("gagal"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -433,6 +435,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("Tidak Ada Hasil Pencarian!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("Tidak, lewati"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "Tidak ada transaksi untuk diekspor."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Status Node"),
         "notSent": MessageLookupByLibrary.simpleMessage("tidak terkirim"),
@@ -664,6 +668,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bagikan Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Ayo Cek Nautilus! Nano\'s official Android Wallet!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Bagikan Teks"),
         "show": MessageLookupByLibrary.simpleMessage("Menunjukkan"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("Info akun"),
         "showAccountQR":

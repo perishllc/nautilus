@@ -277,6 +277,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gas Pera"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Palitan ng NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Lumabas"),
+        "exportTXData": MessageLookupByLibrary.simpleMessage(
+            "I-export ang mga Transaksyon"),
         "failed": MessageLookupByLibrary.simpleMessage("nabigo"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader": MessageLookupByLibrary.simpleMessage(
@@ -446,6 +448,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Walang Mga Resulta ng Paghahanap!"),
         "noSkipButton":
             MessageLookupByLibrary.simpleMessage("Hindi, laktawan ito."),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "Walang mga transaksyong ie-export."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Katayuan ng Node"),
         "notSent": MessageLookupByLibrary.simpleMessage("hindi ipinadala"),
@@ -687,6 +691,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I-share ang Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Tingnan ang Nautilus! Ang opisyal na Android Wallet ng Nano!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Ibahagi ang Teksto"),
         "show": MessageLookupByLibrary.simpleMessage("Ipakita"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Impormasyon ng Account"),

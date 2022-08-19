@@ -750,6 +750,11 @@
     "type": "text",
     "description": "Exit action, like a button"
   },
+  "exportTXData": "Transacciones de exportación",
+  "@exportTXData": {
+    "type": "text",
+    "description": "export_tx_data"
+  },
   "failed": "falló",
   "@failed": {
     "type": "text",
@@ -1324,6 +1329,11 @@
   "@notSent": {
     "type": "text",
     "description": "not_sent_message"
+  },
+  "noTXDataExport": "No hay transacciones para exportar.",
+  "@noTXDataExport": {
+    "type": "text",
+    "description": "tx_export_none"
   },
   "nyanicon": "icono de Nyani",
   "@nyanicon": {
@@ -1994,6 +2004,11 @@
   "@shareNautilusText": {
     "type": "text",
     "description": "share_extra"
+  },
+  "shareText": "Compartir texto",
+  "@shareText": {
+    "type": "text",
+    "description": "settings_share_text"
   },
   "show": "Mostrar",
   "@show": {

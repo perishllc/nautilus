@@ -1553,6 +1553,16 @@ class AppLocalization {
     );
   }
 
+  /// `Export Transactions`
+  String get exportTXData {
+    return Intl.message(
+      'Export Transactions',
+      name: 'exportTXData',
+      desc: 'export_tx_data',
+      args: [],
+    );
+  }
+
   /// `failed`
   String get failed {
     return Intl.message(
@@ -2701,6 +2711,16 @@ class AppLocalization {
       'not sent',
       name: 'notSent',
       desc: 'not_sent_message',
+      args: [],
+    );
+  }
+
+  /// `There's no transactions to export.`
+  String get noTXDataExport {
+    return Intl.message(
+      'There\'s no transactions to export.',
+      name: 'noTXDataExport',
+      desc: 'tx_export_none',
       args: [],
     );
   }
@@ -4046,6 +4066,16 @@ class AppLocalization {
       'Check out Nautilus! A premier NANO mobile wallet!',
       name: 'shareNautilusText',
       desc: 'share_extra',
+      args: [],
+    );
+  }
+
+  /// `Share Text`
+  String get shareText {
+    return Intl.message(
+      'Share Text',
+      name: 'shareText',
+      desc: 'settings_share_text',
       args: [],
     );
   }

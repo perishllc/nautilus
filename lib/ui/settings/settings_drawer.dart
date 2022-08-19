@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:event_taxi/event_taxi.dart';
@@ -25,6 +26,7 @@ import 'package:nautilus_wallet_flutter/model/contacts_setting.dart';
 import 'package:nautilus_wallet_flutter/model/currency_mode_setting.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/device_lock_timeout.dart';
 import 'package:nautilus_wallet_flutter/model/device_unlock_option.dart';
@@ -34,6 +36,7 @@ import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
 import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
 import 'package:nautilus_wallet_flutter/model/nyanicon_option.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
 import 'package:nautilus_wallet_flutter/sensitive.dart';
@@ -73,6 +76,7 @@ import 'package:nautilus_wallet_flutter/util/ninja/api.dart';
 import 'package:nautilus_wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:package_info/package_info.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -1614,7 +1618,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).shareNautilus, AppIcons.share, onPressed: () {
-          // Share.share("${AppLocalization.of(context).shareNautilusText} ${NonTranslatable.genericStoreLink}");
           setState(() {
             _shareOpen = true;
           });
@@ -2227,6 +2230,38 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     );
   }
 
+  Future<void> _exportTransactionData() async {
+    final List<TXData> transactionData = await sl.get<DBHelper>().getAccountSpecificTXData(StateContainer.of(context).wallet!.address);
+    if (!mounted) {
+      return;
+    }
+
+    final List<Map<String, dynamic>> jsonList = [];
+    for (final TXData txData in transactionData) {
+      jsonList.add(txData.toJson());
+    }
+
+    final List<AccountHistoryResponseItem> transactionHistory = StateContainer.of(context).wallet!.history;
+
+    for (final AccountHistoryResponseItem histItem in transactionHistory) {
+      jsonList.add(histItem.toJson());
+    }
+
+    if (jsonList.isEmpty) {
+      UIUtil.showSnackbar(AppLocalization.of(context).noTXDataExport, context);
+      return;
+    }
+
+    final DateTime exportTime = DateTime.now();
+    final String filename =
+        "nautilus_txdata_${exportTime.year}${exportTime.month}${exportTime.day}${exportTime.hour}${exportTime.minute}${exportTime.second}.json";
+    final Directory baseDirectory = await getApplicationDocumentsDirectory();
+    final File contactsFile = File("${baseDirectory.path}/$filename");
+    await contactsFile.writeAsString(json.encode(jsonList));
+    UIUtil.cancelLockEvent();
+    Share.shareFiles(["${baseDirectory.path}/$filename"]);
+  }
+
   Widget buildMoreSettingsMenu(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -2286,7 +2321,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
               children: <Widget>[
                 ListView(
                   padding: const EdgeInsets.only(top: 15.0),
-                  children: [
+                  children: <Widget>[
                     Container(
                       margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(AppLocalization.of(context).preferences,
@@ -2324,6 +2359,10 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                           }
                         });
                       }
+                    }),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).exportTXData, AppIcons.file_export, onPressed: () async {
+                      await _exportTransactionData();
                     }),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).resetDatabase, AppIcons.trashcan, onPressed: () async {
@@ -2671,7 +2710,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
                     ),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).shareNautilus, AppIcons.share, onPressed: () {
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).shareText, AppIcons.share, onPressed: () {
                       Share.share("${AppLocalization.of(context).shareNautilusText} ${NonTranslatable.genericStoreLink}");
                     }),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),

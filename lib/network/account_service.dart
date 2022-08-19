@@ -69,10 +69,10 @@ class AccountService {
   }
 
   // Server Connection Strings
-  static const String BASE_SERVER_ADDRESS = "nautilus.perish.co";
+  static String BASE_SERVER_ADDRESS = "nautilus.perish.co";
   static const String DEV_SERVER_ADDRESS = "node-local.perish.co:5076";
-  static const String HTTP_PROTO = "https://";
-  static const String WS_PROTO = "wss://";
+  static String HTTP_PROTO = "https://";
+  static String WS_PROTO = "wss://";
 
   // ignore_for_file: non_constant_identifier_names
   static String SERVER_ADDRESS_WS = "$WS_PROTO$BASE_SERVER_ADDRESS";
@@ -146,9 +146,9 @@ class AccountService {
 
     // DEV SERVER:
     // if (kDebugMode) {
-    //   _HTTP_PROTO = "http://";
-    //   _WS_PROTO = "ws://";
-    //   _BASE_SERVER_ADDRESS = _DEV_SERVER_ADDRESS;
+    //   HTTP_PROTO = "http://";
+    //   WS_PROTO = "ws://";
+    //   BASE_SERVER_ADDRESS = DEV_SERVER_ADDRESS;
     //   log.d("CONNECTED TO DEV SERVER");
     // }
 

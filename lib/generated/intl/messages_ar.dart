@@ -261,6 +261,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أموال الغاز"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("صرف نانو"),
         "exit": MessageLookupByLibrary.simpleMessage("خروج"),
+        "exportTXData": MessageLookupByLibrary.simpleMessage("معاملات التصدير"),
         "failed": MessageLookupByLibrary.simpleMessage("فشل"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -423,6 +424,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("لا توجد نتائج بحث!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("لا ، تخطي\n"),
+        "noTXDataExport":
+            MessageLookupByLibrary.simpleMessage("لا توجد معاملات للتصدير."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("حالة العقدة"),
         "notSent": MessageLookupByLibrary.simpleMessage("لم يتم إرسالها"),
@@ -649,6 +652,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilus": MessageLookupByLibrary.simpleMessage("شارك نتريوم"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "راجع نتريوم! محفظة نتريوم الرسمية للهاتف"),
+        "shareText": MessageLookupByLibrary.simpleMessage("مشاركة النص"),
         "show": MessageLookupByLibrary.simpleMessage("يعرض"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("معلومات الحساب"),

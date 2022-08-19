@@ -268,6 +268,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gass Penger"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Bytt NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Avslutt"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Eksporter transaksjoner"),
         "failed": MessageLookupByLibrary.simpleMessage("mislyktes"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -434,6 +436,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("Ingen søkeresultater!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("Nei, hopp over"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "Det er ingen transaksjoner å eksportere."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Node Status"),
         "notSent": MessageLookupByLibrary.simpleMessage("ikke sendt"),
@@ -666,6 +670,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Del Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Sjekk ut Nautilus! En ledende NANO mobil lommebok!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Del tekst"),
         "show": MessageLookupByLibrary.simpleMessage("Forestilling"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Kontoinformasjon"),

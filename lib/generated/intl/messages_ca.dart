@@ -266,6 +266,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gas Money"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Intercanvi NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Odejít"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Transaccions d\'exportació"),
         "failed": MessageLookupByLibrary.simpleMessage("failed"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -429,6 +431,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("No Search Results!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("Ne, přeskočit"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "No hi ha transaccions per exportar."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Node Status"),
         "notSent": MessageLookupByLibrary.simpleMessage("not sent"),
@@ -662,6 +666,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sdílet Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Vyzkoušejte Nautilus! Špičková mobilní peněženka NANO!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Comparteix el text"),
         "show": MessageLookupByLibrary.simpleMessage("Espectacle"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informació del compte"),

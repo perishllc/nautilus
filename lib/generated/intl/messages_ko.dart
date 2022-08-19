@@ -233,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("가스 머니"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("거래소 나노"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
+        "exportTXData": MessageLookupByLibrary.simpleMessage("수출 거래"),
         "failed": MessageLookupByLibrary.simpleMessage("실패했습니다"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader": MessageLookupByLibrary.simpleMessage("노틸러스 연결 끊김"),
@@ -381,6 +382,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("가져올 연락처를 찾을 수 없습니다."),
         "noSearchResults": MessageLookupByLibrary.simpleMessage("검색 결과 없음!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("No, Skip"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage("내보낼 거래가 없습니다."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("노드 상태"),
         "notSent": MessageLookupByLibrary.simpleMessage("보내지 않음"),
@@ -594,6 +596,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Nautilus 공유 "),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Nautilus을 확인하세요! Nano의 공식 Android 지갑!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("텍스트 공유"),
         "show": MessageLookupByLibrary.simpleMessage("보여 주다"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("계정 정보"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage("계정 QR 코드 표시"),

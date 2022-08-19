@@ -273,6 +273,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gas pengar"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Byt NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Tillbaka"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Exportera transaktioner"),
         "failed": MessageLookupByLibrary.simpleMessage("misslyckades"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -437,6 +439,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("Inga sökresultat!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("Nej, hoppa över"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "Det finns inga transaktioner att exportera."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Nod Status"),
         "notSent": MessageLookupByLibrary.simpleMessage("inte skickat"),
@@ -669,6 +673,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Dela Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Kolla in Nautilus! Nanos officiella Androidplånbok!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Dela text"),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Konto information"),

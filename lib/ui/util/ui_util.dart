@@ -8,16 +8,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/localize.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/util/exceptions.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
 
 enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
+
+class MyInAppBrowser extends InAppBrowser {
+
+  @override
+  Future<CustomSchemeResponse> onLoadResourceCustomScheme(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    }
+    return CustomSchemeResponse(contentType: "text/html", data: <int>[0] as Uint8List);
+  }
+}
 
 class UIUtil {
   static Widget threeLineAddressText(BuildContext context, String address,
@@ -350,7 +361,7 @@ class UIUtil {
   static Future<void> showBlockExplorerWebview(BuildContext context, String? hash) async {
     cancelLockEvent();
     final InAppBrowser browser = InAppBrowser();
-    final options = InAppBrowserClassOptions(
+    final InAppBrowserClassOptions options = InAppBrowserClassOptions(
         crossPlatform: InAppBrowserOptions(
           hideUrlBar: true,
           toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
@@ -363,7 +374,7 @@ class UIUtil {
   static Future<void> showAccountWebview(BuildContext context, String? account) async {
     cancelLockEvent();
     final InAppBrowser browser = InAppBrowser();
-    final options = InAppBrowserClassOptions(
+    final InAppBrowserClassOptions options = InAppBrowserClassOptions(
         crossPlatform: InAppBrowserOptions(
           hideUrlBar: true,
           toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
@@ -375,13 +386,22 @@ class UIUtil {
 
   static Future<void> showWebview(BuildContext context, String url) async {
     cancelLockEvent();
-    final InAppBrowser browser = InAppBrowser();
-    final options = InAppBrowserClassOptions(
-        crossPlatform: InAppBrowserOptions(
-          hideUrlBar: true,
-          toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
+    // final InAppBrowser browser = InAppBrowser();
+    final MyInAppBrowser browser = MyInAppBrowser();
+    final InAppBrowserClassOptions options = InAppBrowserClassOptions(
+      crossPlatform: InAppBrowserOptions(
+        hideUrlBar: true,
+        toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
+      ),
+      inAppWebViewGroupOptions: InAppWebViewGroupOptions(
+        crossPlatform: InAppWebViewOptions(
+          javaScriptEnabled: true,
+          cacheEnabled: true,
+          resourceCustomSchemes: ["nano", "nanopay", "nanoauth", "nautilus"],
+          useShouldOverrideUrlLoading: true,
         ),
-        inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
+      ),
+    );
     await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
   }
 

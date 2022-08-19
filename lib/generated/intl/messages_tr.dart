@@ -264,6 +264,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gaz Para"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("NANO değişimi"),
         "exit": MessageLookupByLibrary.simpleMessage("Çıkış"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("İhracat İşlemleri"),
         "failed": MessageLookupByLibrary.simpleMessage("başarısız"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -427,6 +429,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("Arama Sonarı Yok!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("Hayır, Geç"),
+        "noTXDataExport":
+            MessageLookupByLibrary.simpleMessage("Dışa aktarılacak işlem yok."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Düğüm Durumu"),
         "notSent": MessageLookupByLibrary.simpleMessage("gönderilmedi"),
@@ -655,6 +659,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nautilus\'u Paylaş"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Nano\'nun resmi Android Cüzdanı Nautilus\'u denesene!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Metni Paylaş"),
         "show": MessageLookupByLibrary.simpleMessage("Göstermek"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Hesap bilgisi"),

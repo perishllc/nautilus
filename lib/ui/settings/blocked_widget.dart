@@ -4,35 +4,34 @@ import 'dart:io';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/blocked_added_event.dart';
 import 'package:nautilus_wallet_flutter/bus/blocked_removed_event.dart';
+import 'package:nautilus_wallet_flutter/dimens.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
+import 'package:nautilus_wallet_flutter/model/address.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/users/add_blocked.dart';
 import 'package:nautilus_wallet_flutter/ui/users/blocked_details.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/address.dart';
-import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-
 class BlockedList extends StatefulWidget {
+  BlockedList(this.blockedController, this.blockedOpen);
   final AnimationController? blockedController;
   bool? blockedOpen;
 
-  BlockedList(this.blockedController, this.blockedOpen);
-
-  _BlockedListState createState() => _BlockedListState();
+  @override
+  BlockedListState createState() => BlockedListState();
 }
 
-class _BlockedListState extends State<BlockedList> {
+class BlockedListState extends State<BlockedList> {
   final Logger log = sl.get<Logger>();
 
   late List<User> _blocked;
@@ -92,7 +91,7 @@ class _BlockedListState extends State<BlockedList> {
       final List<String?> addressesToRemove = [];
 
       // search for duplicate address entries:
-      for (User user in blocked) {
+      for (final User user in blocked) {
         if (user.address == null || user.address!.isEmpty) {
           continue;
         }
@@ -125,7 +124,7 @@ class _BlockedListState extends State<BlockedList> {
       }
 
       // add non-duplicate entries to the list as normal:
-      for (User b in blocked) {
+      for (final User b in blocked) {
         if (addressesToRemove.contains(b.address)) {
           // this entry is a duplicate, don't add it to the list:
           continue;
@@ -135,7 +134,7 @@ class _BlockedListState extends State<BlockedList> {
 
       // construct the list of users with multiple usernames:
       final List<User> multiUsers = [];
-      for (String? address in aliasMap.keys) {
+      for (final String? address in aliasMap.keys) {
         if (!addressesToRemove.contains(address)) {
           // we only want the flagged users
           continue;
@@ -164,9 +163,7 @@ class _BlockedListState extends State<BlockedList> {
       }
 
       // add them to the list:
-      for (User user in multiUsers) {
-        newState.add(user);
-      }
+      multiUsers.forEach(newState.add);
 
       if (mounted) {
         setState(() {
@@ -385,7 +382,7 @@ class _BlockedListState extends State<BlockedList> {
     if (user.aliases == null) {
       return [
         // Blocked name
-        if (user.nickname != null && user.nickname!.isNotEmpty) Text("★" + user.nickname!, style: AppStyles.textStyleSettingItemHeader(context)),
+        if (user.nickname != null && user.nickname!.isNotEmpty) Text("★${user.nickname!}", style: AppStyles.textStyleSettingItemHeader(context)),
 
         if (user.username != null)
           Text(

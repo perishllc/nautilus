@@ -274,6 +274,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Газовые деньги"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Обмен НАНО"),
         "exit": MessageLookupByLibrary.simpleMessage("Выход"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Экспорт транзакций"),
         "failed": MessageLookupByLibrary.simpleMessage("не удалось"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -441,6 +443,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("Нет результатов поиска!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("Нет, пропустить"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "Нет транзакций для экспорта."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Статус узла"),
         "notSent": MessageLookupByLibrary.simpleMessage("не отправлено"),
@@ -680,6 +684,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Поделиться Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Оцените Nautilus! Лучший Android кошелёк Nano!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Поделиться текстом"),
         "show": MessageLookupByLibrary.simpleMessage("Показывать"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Информация об аккаунте"),

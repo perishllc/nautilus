@@ -175,6 +175,8 @@ class TXData {
       o.metadata == metadata &&
       o.status == status;
 
+  Map<String, dynamic> toJson() => _$TXDataToJson(this);
+
   // bool operator ==(o) => o is User && o.username == username && o.address == address;
   // int get hashCode => hash2(username.hashCode, address.hashCode);
 }

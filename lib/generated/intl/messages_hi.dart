@@ -269,6 +269,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("गैस मनी"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("एक्सचेंज नैनो"),
         "exit": MessageLookupByLibrary.simpleMessage("बाहर निकलें"),
+        "exportTXData": MessageLookupByLibrary.simpleMessage("निर्यात लेनदेन"),
         "failed": MessageLookupByLibrary.simpleMessage("विफल रहा"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -432,6 +433,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("कोई खोज परिणाम नहीं!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("नहीं, छोड़ें"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "निर्यात करने के लिए कोई लेनदेन नहीं है।"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("नोड स्थिति"),
         "notSent": MessageLookupByLibrary.simpleMessage("नहीं भेजा गया"),
@@ -662,6 +665,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilus": MessageLookupByLibrary.simpleMessage("शेयर नैट्रियम"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "नैट्रियम की जाँच करें! एक प्रमुख नैनो मोबाइल वॉलेट!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("पाठ साझा करें"),
         "show": MessageLookupByLibrary.simpleMessage("प्रदर्शन"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("खाता जानकारी"),
         "showAccountQR":

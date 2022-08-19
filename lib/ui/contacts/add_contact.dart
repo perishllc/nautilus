@@ -486,7 +486,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                                   fontFamily: 'NunitoSans',
                                 ),
                                 inputFormatters: [LengthLimitingTextInputFormatter(20), ContactInputFormatter()],
-                                onSubmitted: (text) {
+                                onSubmitted: (String text) {
                                   if (widget.address == null) {
                                     if (!Address(_addressController!.text).isValid()) {
                                       FocusScope.of(context).requestFocus(_addressFocusNode);

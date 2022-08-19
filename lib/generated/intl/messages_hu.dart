@@ -273,6 +273,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gáz Pénz"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Csere NANO"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Export tranzakciók"),
         "failed": MessageLookupByLibrary.simpleMessage("nem sikerült"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -437,6 +439,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("Nincs keresési eredmény!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("No, Skip"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "Nincsenek exportálandó tranzakciók."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus":
             MessageLookupByLibrary.simpleMessage("Csomópont állapota"),
@@ -673,6 +677,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Oszd meg a Nautilusot"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Próbáld ki a Nautilusot, a Nano hivatalos Androidos tárcáját!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Szöveg megosztása"),
         "show": MessageLookupByLibrary.simpleMessage("Előadás"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Számlainformáció"),

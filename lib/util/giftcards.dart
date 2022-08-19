@@ -162,7 +162,7 @@ class GiftCards {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      return {"error": "something went wrong"};
+      return {"error": "something went wrong: ${response.body}"};
     }
   }
 

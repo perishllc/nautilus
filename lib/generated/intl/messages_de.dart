@@ -278,6 +278,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "exchangeNano":
             MessageLookupByLibrary.simpleMessage("Nano austauschen"),
         "exit": MessageLookupByLibrary.simpleMessage("Verlassen"),
+        "exportTXData":
+            MessageLookupByLibrary.simpleMessage("Transaktionen exportieren"),
         "failed": MessageLookupByLibrary.simpleMessage("fehlgeschlagen"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -447,6 +449,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("Keine Suchergebnisse!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("Überspringen"),
+        "noTXDataExport": MessageLookupByLibrary.simpleMessage(
+            "Es gibt keine zu exportierenden Transaktionen."),
         "noThanks": MessageLookupByLibrary.simpleMessage("Nein danke"),
         "nodeStatus":
             MessageLookupByLibrary.simpleMessage("Status des Knotens"),
@@ -683,6 +687,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nautilus teilen"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Probier mal Nautilus, Nanos offizielles Android-Wallet!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("Text teilen"),
         "show": MessageLookupByLibrary.simpleMessage("Zeigen"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Kontoinformation"),

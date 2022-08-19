@@ -275,6 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "exchangeNano":
             MessageLookupByLibrary.simpleMessage("ন্যানো বিনিময় করুন"),
         "exit": MessageLookupByLibrary.simpleMessage("বাহির"),
+        "exportTXData": MessageLookupByLibrary.simpleMessage("রপ্তানি লেনদেন"),
         "failed": MessageLookupByLibrary.simpleMessage("ব্যর্থ হওয়া"),
         "failedMessage": MessageLookupByLibrary.simpleMessage("msg failed"),
         "fallbackHeader":
@@ -442,6 +443,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSearchResults":
             MessageLookupByLibrary.simpleMessage("কোন অনুসন্ধানের ফলাফল নেই!"),
         "noSkipButton": MessageLookupByLibrary.simpleMessage("না, এড়িয়ে যান"),
+        "noTXDataExport":
+            MessageLookupByLibrary.simpleMessage("রপ্তানির কোনো লেনদেন নেই।"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("নোডের অবস্থা"),
         "notSent": MessageLookupByLibrary.simpleMessage("পাঠানো হয়নি"),
@@ -677,6 +680,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Share Nautilus"),
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Check out Nautilus! A premier NANO mobile wallet!"),
+        "shareText": MessageLookupByLibrary.simpleMessage("টেক্সট শেয়ার করুন"),
         "show": MessageLookupByLibrary.simpleMessage("দেখান"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট তথ্য"),
