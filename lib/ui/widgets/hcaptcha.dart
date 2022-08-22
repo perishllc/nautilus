@@ -34,8 +34,7 @@ class HCaptchaState extends State<HCaptcha> {
             Radius.circular(20.0),
           ),
           child: WebView(
-            // initialUrl: NonTranslatable.hcaptchaUrl,
-            initialUrl: "https://whatwebcando.today/usb.html",
+            initialUrl: NonTranslatable.hcaptchaUrl,
             javascriptMode: JavascriptMode.unrestricted,
             gestureNavigationEnabled: true,
             zoomEnabled: false,
