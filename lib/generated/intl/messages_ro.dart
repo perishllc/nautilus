@@ -111,6 +111,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Avertisment de conectare"),
         "cancel": MessageLookupByLibrary.simpleMessage("Renunţare"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Pentru a preveni abuzul, vă solicităm să rezolvați un captcha pentru a revendica cardul cadou pe pagina următoare."),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Schimbă valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Schimbare jurnal"),
@@ -226,6 +229,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introduceți nota cadou"),
         "enterMemo":
             MessageLookupByLibrary.simpleMessage("Introduceţi mesajul"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Introduceți adresa XMR"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Introduceți parola"),
         "enterSplitAmount":
@@ -589,6 +594,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Solicitând"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Doriți să setați o parolă pentru a deschide Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Solicitați CAPTCHA pentru a revendica cardul cadou"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Retrimite acest memo"),
         "resetDatabase":
@@ -703,6 +710,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ajută la sprijinirea dezvoltării"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Sprijiniți dezvoltatorul"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Schimbați XMR"),
+        "swapXMRHeader":
+            MessageLookupByLibrary.simpleMessage("Schimbați Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Schimbarea"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Folosește seed-ul"),
         "systemDefault":

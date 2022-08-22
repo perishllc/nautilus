@@ -112,6 +112,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Opozorilo o povezavi"),
         "cancel": MessageLookupByLibrary.simpleMessage("Prekliči"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Da bi preprečili zlorabo, zahtevamo, da rešite captcha, da prevzamete darilno kartico na naslednji strani."),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Spremeni valuto"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Spremeni dnevnik"),
@@ -228,6 +231,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Vnesite darilno opombo"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Vnesite sporočilo"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Vnesite naslov XMR"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterSplitAmount":
@@ -586,6 +591,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Zahteva"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Require a password to open Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Za prevzem darilne kartice zahtevajte CAPTCHA"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Ponovno pošljite to beležko"),
         "resetDatabase":
@@ -701,6 +708,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pomoč Podpora razvoju"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Podpora razvijalcu"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Zamenjaj XMR"),
+        "swapXMRHeader":
+            MessageLookupByLibrary.simpleMessage("Zamenjaj Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Zamenjava"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Preklopi na zasebni ključ"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Sistemski"),

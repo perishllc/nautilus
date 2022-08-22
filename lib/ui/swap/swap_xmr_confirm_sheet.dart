@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
@@ -23,36 +22,23 @@ import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/util/biometrics.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
-class GenerateConfirmSheet extends StatefulWidget {
-  const GenerateConfirmSheet(
-      {this.amountRaw = "",
-      this.splitAmountRaw = "",
-      this.destination = "",
-      this.paperWalletSeed = "",
-      this.memo = "",
-      this.requireCaptcha = false,
-      this.localCurrency,
-      this.maxSend = false})
-      : super();
+class SwapXMRConfirmSheet extends StatefulWidget {
+  const SwapXMRConfirmSheet({this.amountRaw = "", this.destination = "", this.localCurrency, this.maxSend = false}) : super();
 
   final String amountRaw;
-  final String splitAmountRaw;
   final String destination;
-  final String paperWalletSeed;
-  final String memo;
-  final bool requireCaptcha;
   final String? localCurrency;
   final bool maxSend;
 
-  GenerateConfirmSheetState createState() => GenerateConfirmSheetState();
+  @override
+  SwapXMRConfirmSheetState createState() => SwapXMRConfirmSheetState();
 }
 
-class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
+class SwapXMRConfirmSheetState extends State<SwapXMRConfirmSheet> {
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
@@ -116,7 +102,7 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).creatingGiftCard, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).swapping, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -160,85 +146,70 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                     ),
                   ),
 
-                  // "SPLIT BY" TEXT
-                  if (widget.splitAmountRaw.isNotEmpty)
+                  // if (widget.splitAmountRaw.isNotEmpty)
+                  //   // Container for the split amount text
+                  //   Container(
+                  //     margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                  //     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  //     width: double.infinity,
+                  //     decoration: BoxDecoration(
+                  //       color: StateContainer.of(context).curTheme.backgroundDarkest,
+                  //       borderRadius: BorderRadius.circular(50),
+                  //     ),
+                  //     // Split Amount text
+                  //     child: RichText(
+                  //       textAlign: TextAlign.center,
+                  //       text: TextSpan(
+                  //         text: "",
+                  //         children: [
+                  //           TextSpan(
+                  //             text: getThemeAwareRawAccuracy(context, widget.splitAmountRaw),
+                  //             style: AppStyles.textStyleParagraphPrimary(context),
+                  //           ),
+                  //           displayCurrencySymbol(
+                  //             context,
+                  //             AppStyles.textStyleParagraphPrimary(context),
+                  //           ),
+                  //           TextSpan(
+                  //             text: getRawAsThemeAwareAmount(context, widget.splitAmountRaw),
+                  //             style: AppStyles.textStyleParagraphPrimary(context),
+                  //           ),
+                  //           TextSpan(
+                  //             text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
+                  //             style: AppStyles.textStyleParagraphPrimary(context).copyWith(
+                  //               color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+
                     Container(
                       margin: const EdgeInsets.only(top: 30.0, bottom: 10),
                       child: Column(
                         children: <Widget>[
                           Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context).splitBy, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).registerFor, context),
                             style: AppStyles.textStyleHeader(context),
                           ),
                         ],
                       ),
                     ),
-
-                  if (widget.splitAmountRaw.isNotEmpty)
-                    // Container for the split amount text
-                    Container(
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      // Split Amount text
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          text: "",
-                          children: [
-                            TextSpan(
-                              text: getThemeAwareRawAccuracy(context, widget.splitAmountRaw),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            displayCurrencySymbol(
-                              context,
-                              AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            TextSpan(
-                              text: getRawAsThemeAwareAmount(context, widget.splitAmountRaw),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            TextSpan(
-                              text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
-                              style: AppStyles.textStyleParagraphPrimary(context).copyWith(
-                                color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                  if (widget.memo.isNotEmpty)
-                    Container(
-                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context).withMessage, context),
-                            style: AppStyles.textStyleHeader(context),
-                          ),
-                        ],
-                      ),
-                    ),
-                  if (widget.memo.isNotEmpty)
-                    Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.backgroundDarkest,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Text(
-                          widget.memo,
-                          style: AppStyles.textStyleParagraph(context),
-                          textAlign: TextAlign.center,
-                        )),
+                  // if (widget.memo.isNotEmpty)
+                  //   Container(
+                  //       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                  //       margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                  //       width: double.infinity,
+                  //       decoration: BoxDecoration(
+                  //         color: StateContainer.of(context).curTheme.backgroundDarkest,
+                  //         borderRadius: BorderRadius.circular(25),
+                  //       ),
+                  //       child: Text(
+                  //         widget.memo,
+                  //         style: AppStyles.textStyleParagraph(context),
+                  //         textAlign: TextAlign.center,
+                  //       )),
                 ],
               ),
             ),
@@ -295,7 +266,6 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
   }
 
   Future<void> _doSend() async {
-    String? branchLink;
     try {
       _showAnimation(context);
       final String walletAddress = StateContainer.of(context).wallet!.address!;
@@ -325,67 +295,37 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
 
       // final BranchResponse branchResponse = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
 
-      BranchResponse<dynamic>? branchResponse;
-
-      if (widget.splitAmountRaw.isNotEmpty) {
-        final String paperWalletAccount = NanoUtil.seedToAddress(widget.paperWalletSeed, 0);
-        Map resp = await sl<GiftCards>().createSplitGiftCard(
-          seed: widget.paperWalletSeed,
-          requestingAccount: walletAddress,
-          memo: widget.memo,
-          splitAmountRaw: widget.splitAmountRaw,
-          requireCaptcha: widget.requireCaptcha,
-        ) as Map;
-
-        if (resp.containsKey("success")) {
-          branchLink = resp["link"] as String;
-        }
-      } else {
-        branchResponse = await sl<GiftCards>().createGiftCard(
-          context,
-          paperWalletSeed: widget.paperWalletSeed,
-          amountRaw: widget.amountRaw,
-          memo: widget.memo,
-          requireCaptcha: widget.requireCaptcha,
-        );
-        if (branchResponse.success) {
-          branchLink = branchResponse.result as String;
-        }
-      }
-
       // send funds:
       ProcessResponse? resp;
-      final bool linkCreationSuccess = branchLink != null;
-      if (linkCreationSuccess) {
-        resp = await sl.get<AccountService>().requestSend(
-            StateContainer.of(context).wallet!.representative,
-            StateContainer.of(context).wallet!.frontier,
-            widget.amountRaw,
-            widget.destination,
-            StateContainer.of(context).wallet!.address,
-            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
-            max: widget.maxSend);
-        StateContainer.of(context).wallet!.frontier = resp.hash;
-        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
-      }
+      resp = await sl.get<AccountService>().requestSend(
+          StateContainer.of(context).wallet!.representative,
+          StateContainer.of(context).wallet!.frontier,
+          widget.amountRaw,
+          widget.destination,
+          StateContainer.of(context).wallet!.address,
+          NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+          max: widget.maxSend);
 
-      // ignore: use_build_context_synchronously
-      await sl.get<GiftCards>().handleResponse(context,
-          success: linkCreationSuccess,
-          amountRaw: widget.amountRaw,
-          destination: widget.destination,
-          localCurrency: widget.localCurrency,
-          hash: resp?.hash,
-          link: branchLink,
-          paperWalletSeed: widget.paperWalletSeed,
-          memo: widget.memo);
+      if (!mounted) return;
+      StateContainer.of(context).wallet!.frontier = resp.hash;
+      StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
+
+      // // ignore: use_build_context_synchronously
+      // await sl.get<GiftCards>().handleResponse(context,
+      //     success: linkCreationSuccess,
+      //     amountRaw: widget.amountRaw,
+      //     destination: widget.destination,
+      //     localCurrency: widget.localCurrency,
+      //     hash: resp?.hash,
+      //     link: branchLink,
+      //     paperWalletSeed: widget.paperWalletSeed,
+      //     memo: widget.memo);
     } catch (error) {
-      sl.get<Logger>().d("gift_confirm_error: $error");
+      sl.get<Logger>().d("swap_xmr_error: $error");
       // Send failed
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      Clipboard.setData(ClipboardData(text: (branchLink ?? "") + RecordTypes.SEPARATOR + widget.paperWalletSeed));
       UIUtil.showSnackbar(AppLocalization.of(context).giftCardCreationErrorSent, context, durationMs: 20000);
       Navigator.of(context).pop();
     }

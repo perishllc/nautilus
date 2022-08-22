@@ -115,6 +115,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Verbindungswarnung"),
         "cancel": MessageLookupByLibrary.simpleMessage("Abbrechen"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Um Missbrauch zu verhindern, müssen Sie ein Captcha lösen, um die Geschenkkarte auf der nächsten Seite zu beanspruchen."),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Währung ändern"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Protokoll ändern"),
@@ -234,6 +237,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Geschenknotiz eingeben"),
         "enterMemo":
             MessageLookupByLibrary.simpleMessage("Nachricht eintragen"),
+        "enterMoneroAddress": MessageLookupByLibrary.simpleMessage(
+            "Geben Sie die XMR-Adresse ein"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Passwort eingeben"),
         "enterSplitAmount":
@@ -602,6 +607,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Beantragen"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Passwortabfrage beim Öffnen der App?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Fordern Sie CAPTCHA an, um die Geschenkkarte anzufordern"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Dieses Memo erneut senden"),
         "resetDatabase":
@@ -720,6 +727,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Helfen Sie mit, die Entwicklung zu unterstützen"),
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage(
             "Unterstützen Sie den Entwickler"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("XMR tauschen"),
+        "swapXMRHeader":
+            MessageLookupByLibrary.simpleMessage("Monero tauschen"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Austauschen"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Zum Seed wechseln"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Systemsprache"),

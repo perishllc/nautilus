@@ -93,4 +93,8 @@ class NonTranslatable {
   static String get genericStoreLink {
     return "https://nautiluswallet.app";
   }
+
+  static String get hcaptchaUrl {
+    return "https://perish.co/hcaptcha";
+  }
 }

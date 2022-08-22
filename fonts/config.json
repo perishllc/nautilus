@@ -167,6 +167,12 @@
       "css": "clear_all",
       "code": 59403,
       "src": "material"
+    },
+    {
+      "uid": "a66c73ed80687952bfb9640830554a0c",
+      "css": "qrcode",
+      "code": 61481,
+      "src": "fontawesome5"
     }
   ]
 }

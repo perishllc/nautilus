@@ -70,12 +70,12 @@
     "type": "text",
     "description": "send_address_hint"
   },
-  "addressMissing": "Please Enter an Address",
+  "addressMissing": "Please enter an Address",
   "@addressMissing": {
     "type": "text",
     "description": "send_enter_address"
   },
-  "addressOrUserMissing": "Please Enter a Username or Address",
+  "addressOrUserMissing": "Please enter a Username or Address",
   "@addressOrUserMissing": {
     "type": "text",
     "description": "send_enter_user_address"
@@ -115,7 +115,7 @@
     "type": "text",
     "description": "gift_split_greater_error"
   },
-  "amountMissing": "Please Enter an Amount",
+  "amountMissing": "Please enter an Amount",
   "@amountMissing": {
     "type": "text",
     "description": "send_enter_amount"
@@ -269,6 +269,16 @@
   "@cancel": {
     "type": "text",
     "description": "dialog_cancel"
+  },
+  "captchaWarning": "Captcha",
+  "@captchaWarning": {
+    "type": "text",
+    "description": "gift_claim_captcha_warning_header"
+  },
+  "captchaWarningBody": "In order to prevent abuse, we require you to solve a quick captcha on the next page to claim this gift card.",
+  "@captchaWarningBody": {
+    "type": "text",
+    "description": "gift_claim_captcha_warning_body"
   },
   "changeCurrency": "Change Currency",
   "@changeCurrency": {
@@ -620,6 +630,11 @@
     "type": "text",
     "description": "enter_memo"
   },
+  "enterMoneroAddress": "Enter XMR Address",
+  "@enterMoneroAddress": {
+    "type": "text",
+    "description": "enter_xmr_address"
+  },
   "enterPasswordHint": "Enter your password",
   "@enterPasswordHint": {
     "type": "text",
@@ -640,7 +655,7 @@
     "type": "text",
     "description": "enter_user_address"
   },
-  "errorProcessingGiftCard": "There was an error while processing this gift card, it may not be valid, expired, or empty.",
+  "errorProcessingGiftCard": "There was an error while processing this gift card, it may be invalid, expired, or empty.\n\nAdditionally, you may need to update the app to the latest version in order to redeem this gift.",
   "@errorProcessingGiftCard": {
     "type": "text",
     "description": "gift_process_error"
@@ -875,7 +890,7 @@
     "type": "text",
     "description": "gift_from"
   },
-  "giftInfo": "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,",
+  "giftInfo": "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance.",
   "@giftInfo": {
     "type": "text",
     "description": "Description for gift card creation"
@@ -1750,6 +1765,11 @@
     "type": "text",
     "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
   },
+  "requireCaptcha": "Require CAPTCHA to claim gift card",
+  "@requireCaptcha": {
+    "type": "text",
+    "description": "gift_claim_require_captcha"
+  },
   "resendMemo": "Resend this memo",
   "@resendMemo": {
     "type": "text",
@@ -2115,6 +2135,26 @@
     "type": "text",
     "description": "change_log_support"
   },
+  "swapping": "Swapping",
+  "@swapping": {
+    "type": "text",
+    "description": "swapping_xmr"
+  },
+  "swapXMR": "Swap XMR",
+  "@swapXMR": {
+    "type": "text",
+    "description": "swap_xmr"
+  },
+  "swapXMRHeader": "Swap Monero",
+  "@swapXMRHeader": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
+  "swapXMRInfo": "Monero is a privacy-focused cryptocurrency that makes it very hard or even impossible to trace transactions. Meanwhile NANO is a payments-focused cryptocurrency that is fast and fee-less. Together they provide some of the most useful aspects of cryptocurrencies!\n\nUse this page to easily swap your NANO for XMR!",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "Switch to Seed",
   "@switchToSeed": {
     "type": "text",
@@ -2325,7 +2365,7 @@
     "type": "text",
     "description": "username_available"
   },
-  "usernameEmpty": "Please Enter a Username",
+  "usernameEmpty": "Please enter a Username",
   "@usernameEmpty": {
     "type": "text",
     "description": "username_empty"

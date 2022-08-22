@@ -114,6 +114,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Advertencia de conexión"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Para evitar abusos, le solicitamos que resuelva un captcha para reclamar la tarjeta de regalo en la página siguiente."),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Cambiar moneda"),
         "changeLog":
@@ -232,6 +235,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Introduce la nota de regalo"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Introducir mensaje"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Ingrese la dirección XMR"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Ingrese su contraseña"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage(
@@ -599,6 +604,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Solicitar"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "¿Requerir de una contraseña para abrir Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Requerir CAPTCHA para reclamar la tarjeta de regalo"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Reenviar esta nota"),
         "resetDatabase":
@@ -720,6 +727,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ayuda a apoyar el desarrollo"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Apoye al desarrollador"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Intercambiar XMR"),
+        "swapXMRHeader":
+            MessageLookupByLibrary.simpleMessage("Intercambiar Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Intercambio"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Cambiar a semilla"),
         "systemDefault":

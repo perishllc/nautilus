@@ -113,6 +113,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Csatlakozási figyelmeztetés"),
         "cancel": MessageLookupByLibrary.simpleMessage("Mégse"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "A visszaélések megelőzése érdekében meg kell oldania a captcha kódot, hogy a következő oldalon igényelje az ajándékutalványt."),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Valuta Megváltoztatása"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Változási napló"),
@@ -231,6 +234,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Adja meg az ajándékjegyet"),
         "enterMemo":
             MessageLookupByLibrary.simpleMessage("Írja be az üzenetet"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Írja be az XMR-címet"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage(
@@ -594,6 +599,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Kérő"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Require a password to open Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "A CAPTCHA megkövetelése az ajándékutalvány igényléséhez"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("A feljegyzés újraküldése"),
         "resetDatabase":
@@ -710,6 +717,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Segítség Támogatás Fejlesztés"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Támogatja a fejlesztőt"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Cserélje ki az XMR-t"),
+        "swapXMRHeader":
+            MessageLookupByLibrary.simpleMessage("Cseréld Monero-t"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Csere"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Switch to Seed"),
         "systemDefault":
             MessageLookupByLibrary.simpleMessage("Rendszer alapértelmezett"),

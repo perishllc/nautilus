@@ -5,9 +5,7 @@ import 'package:markdown/markdown.dart' as md;
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
@@ -16,8 +14,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppDialogs {
-  static void showConfirmDialog(
-      BuildContext context, String title, String content, String buttonText, Function onPressed,
+  static void showConfirmDialog(BuildContext context, String title, String content, String buttonText, Function onPressed,
       {String? cancelText, Function? cancelAction, bool barrierDismissible = true}) {
     cancelText ??= AppLocalization.of(context).cancel.toUpperCase();
 
@@ -74,8 +71,16 @@ class AppDialogs {
     );
   }
 
-  static void showInfoDialog(BuildContext context, String title, String content, {bool barrierDismissible = true}) {
-    showDialog(
+  static Future<void> showInfoDialog(
+    BuildContext context,
+    String title,
+    String content, {
+    bool barrierDismissible = true,
+    String? closeText,
+    Function? onPressed,
+  }) async {
+    closeText ??= AppLocalization.of(context).close.toUpperCase();
+    await showDialog(
       barrierColor: StateContainer.of(context).curTheme.barrier,
       context: context,
       barrierDismissible: barrierDismissible,
@@ -89,11 +94,14 @@ class AppDialogs {
           actions: <Widget>[
             TextButton(
               child: Text(
-                AppLocalization.of(context).close.toUpperCase(),
+                closeText!,
                 style: AppStyles.textStyleDialogButtonText(context),
               ),
-              onPressed: () {
+              onPressed: () async {
                 Navigator.of(context).pop();
+                if (onPressed != null) {
+                  await onPressed();
+                }
               },
             ),
           ],
@@ -177,8 +185,7 @@ class AppDialogs {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(AppLocalization.of(context).changeLog,
-                        textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
+                    child: Text(AppLocalization.of(context).changeLog, textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
                     constraints: const BoxConstraints(minHeight: 300, maxHeight: 400),
@@ -253,9 +260,7 @@ class AppDialogs {
                             Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
                             Sheets.showAppHeightNineSheet(
-                                context: context,
-                                widget: FundingMessagesSheet(
-                                    alerts: StateContainer.of(context).fundingAlerts, hasDismissButton: false));
+                                context: context, widget: FundingMessagesSheet(alerts: StateContainer.of(context).fundingAlerts, hasDismissButton: false));
                           });
                         },
                         child: Text(
@@ -269,8 +274,7 @@ class AppDialogs {
                       TextButton(
                         key: const Key("changelog_dismiss_button"),
                         onPressed: () => Navigator.of(context).pop(),
-                        child: Text(AppLocalization.of(context).dismiss,
-                            style: AppStyles.textStyleDialogOptions(context)),
+                        child: Text(AppLocalization.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
                       ),
                     ]),
                   ),

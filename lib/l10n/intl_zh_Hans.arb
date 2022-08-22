@@ -270,6 +270,16 @@
     "type": "text",
     "description": "dialog_cancel"
   },
+  "captchaWarning": "验证码",
+  "@captchaWarning": {
+    "type": "text",
+    "description": "gift_claim_captcha_warning_header"
+  },
+  "captchaWarningBody": "为了防止滥用，我们要求您解决验证码才能在下一页领取礼品卡。",
+  "@captchaWarningBody": {
+    "type": "text",
+    "description": "gift_claim_captcha_warning_body"
+  },
   "changeCurrency": "更改货币",
   "@changeCurrency": {
     "type": "text",
@@ -619,6 +629,11 @@
   "@enterMemo": {
     "type": "text",
     "description": "enter_memo"
+  },
+  "enterMoneroAddress": "输入 XMR 地址",
+  "@enterMoneroAddress": {
+    "type": "text",
+    "description": "enter_xmr_address"
   },
   "enterPasswordHint": "输入您的密码",
   "@enterPasswordHint": {
@@ -1750,6 +1765,11 @@
     "type": "text",
     "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
   },
+  "requireCaptcha": "要求 CAPTCHA 领取礼品卡",
+  "@requireCaptcha": {
+    "type": "text",
+    "description": "gift_claim_require_captcha"
+  },
   "resendMemo": "重新发送此备忘录",
   "@resendMemo": {
     "type": "text",
@@ -2114,6 +2134,21 @@
   "@supportTheDeveloper": {
     "type": "text",
     "description": "change_log_support"
+  },
+  "swapping": "交换",
+  "@swapping": {
+    "type": "text",
+    "description": "swapping_xmr"
+  },
+  "swapXMR": "交换 XMR",
+  "@swapXMR": {
+    "type": "text",
+    "description": "swap_xmr"
+  },
+  "swapXMRHeader": "交换门罗币",
+  "@swapXMRHeader": {
+    "type": "text",
+    "description": "swap_xmr_header"
   },
   "switchToSeed": "转换成种子",
   "@switchToSeed": {

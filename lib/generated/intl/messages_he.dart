@@ -101,6 +101,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("אזהרת חיבור"),
         "cancel": MessageLookupByLibrary.simpleMessage("בטל"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "על מנת למנוע שימוש לרעה, אנו דורשים ממך לפתור קפטצ\'ה על מנת לתבוע את כרטיס המתנה בעמוד הבא."),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("שנה מטבע חליפין"),
         "changeLog": MessageLookupByLibrary.simpleMessage("שינוי יומן"),
@@ -211,6 +214,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount": MessageLookupByLibrary.simpleMessage("הכנס כמות"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("הזן הערת מתנה"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("הזן הודעה"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("הזן כתובת XMR"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterSplitAmount":
@@ -548,6 +553,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("מבקש"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Require a password to open Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "דרוש CAPTCHA כדי לתבוע כרטיס מתנה"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("שלח שוב תזכיר זה"),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("אפס את מסד הנתונים"),
@@ -655,6 +662,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("עזרה בתמיכה בפיתוח"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("תמיכה במפתח"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("החלפת XMR"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("החלפת Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("החלפה"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Switch to Seed"),
         "systemDefault":
             MessageLookupByLibrary.simpleMessage("בְּרִירַת מֶחדָל"),

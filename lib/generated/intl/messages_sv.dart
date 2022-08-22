@@ -115,6 +115,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Anslutningsvarning"),
         "cancel": MessageLookupByLibrary.simpleMessage("Avbryt"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "För att förhindra missbruk kräver vi att du löser en captcha för att göra anspråk på presentkortet på nästa sida."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Ändra valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Ändra logg"),
         "changeRepAuthenticate":
@@ -230,6 +233,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Ange presentanteckning"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Ange meddelande"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Ange XMR-adress"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Ange ditt lösenord"),
         "enterSplitAmount":
@@ -589,6 +594,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Begär"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Kräv lösenord för att öppna Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Kräv CAPTCHA för att göra anspråk på presentkort"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Skicka detta memo igen"),
         "resetDatabase":
@@ -705,6 +712,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hjälp att stödja utveckling"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Stöd utvecklaren"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Byt XMR"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("Byt Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Byte"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Byt till seed"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Systemfel"),
         "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(

@@ -98,6 +98,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("연결 경고"),
         "cancel": MessageLookupByLibrary.simpleMessage("취소"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("보안문자"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "남용을 방지하기 위해 다음 페이지에서 기프트 카드를 청구하려면 보안 문자를 해결해야 합니다."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("통화 변경"),
         "changeLog": MessageLookupByLibrary.simpleMessage("변경 로그"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage("대리인 변경"),
@@ -194,6 +197,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount": MessageLookupByLibrary.simpleMessage("금액을 입력하세요"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("기프트 노트 입력"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("메시지 입력"),
+        "enterMoneroAddress": MessageLookupByLibrary.simpleMessage("XMR 주소 입력"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage("분할 금액 입력"),
@@ -521,6 +525,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("요청하기"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Require a password to open Nautilus?"),
+        "requireCaptcha":
+            MessageLookupByLibrary.simpleMessage("기프트 카드를 청구하려면 보안문자가 필요합니다."),
         "resendMemo": MessageLookupByLibrary.simpleMessage("이 메모 다시 보내기"),
         "resetDatabase": MessageLookupByLibrary.simpleMessage("데이터베이스 재설정"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -620,6 +626,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage("도움말 지원 개발"),
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("개발자 지원"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("XMR 교환"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("스왑 모네로"),
+        "swapping": MessageLookupByLibrary.simpleMessage("스와핑"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Switch to Seed"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("전화 언어"),
         "tapMessageToEdit":

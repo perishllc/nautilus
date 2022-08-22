@@ -86,6 +86,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("錯誤：無法訪問分支 API"),
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage("連接警告"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("驗證碼"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "為了防止濫用，我們要求您解決驗證碼才能在下一頁領取禮品卡。"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("變更貨幣單位"),
         "changeLog": MessageLookupByLibrary.simpleMessage("更改日誌"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage("變更代表"),
@@ -171,6 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount": MessageLookupByLibrary.simpleMessage("輸入金額"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("輸入禮品備註"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("輸入訊息"),
+        "enterMoneroAddress": MessageLookupByLibrary.simpleMessage("輸入 XMR 地址"),
         "enterPasswordHint": MessageLookupByLibrary.simpleMessage("輸入您的密碼"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage("輸入分割金額"),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage("輸入使用者或地址"),
@@ -459,6 +463,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("要求"),
         "requireAPasswordToOpenHeader":
             MessageLookupByLibrary.simpleMessage("需要密碼才可開啟 Nautilus 嗎？"),
+        "requireCaptcha":
+            MessageLookupByLibrary.simpleMessage("要求 CAPTCHA 領取禮品卡"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("重新傳送此備忘錄"),
         "resetDatabase": MessageLookupByLibrary.simpleMessage("重設資料庫"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -547,6 +553,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage("幫助支持發展"),
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("支持開發人員"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("交換 XMR"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("交換門羅幣"),
+        "swapping": MessageLookupByLibrary.simpleMessage("交換"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("轉換為種子"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("系統預設"),
         "tapMessageToEdit": MessageLookupByLibrary.simpleMessage("點按消息進行編輯"),

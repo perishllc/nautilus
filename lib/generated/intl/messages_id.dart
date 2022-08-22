@@ -110,6 +110,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Peringatan Koneksi"),
         "cancel": MessageLookupByLibrary.simpleMessage("Batal"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Untuk mencegah penyalahgunaan, kami meminta Anda memecahkan captcha untuk mengklaim kartu hadiah di halaman berikutnya."),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Ubah Mata Uang"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Perubahan Log"),
@@ -226,6 +229,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Masukkan Gift Note"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Masukkan Pesan"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Masukkan Alamat XMR"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Masukkan kata sandi anda"),
         "enterSplitAmount":
@@ -585,6 +590,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Meminta"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Membutuhkan kata sandi untuk membuka Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Memerlukan CAPTCHA untuk mengklaim kartu hadiah"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Kirim ulang memo ini"),
         "resetDatabase":
@@ -701,6 +708,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bantuan Dukungan Pengembangan"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Dukung Pengembang"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Tukar XMR"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("Tukar Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Bertukar"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Pindah Ke Benih Lain"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Default Sistem"),

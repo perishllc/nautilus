@@ -113,6 +113,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Advarsel om tilkobling"),
         "cancel": MessageLookupByLibrary.simpleMessage("Avbryt"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "For å forhindre misbruk krever vi at du løser en captcha for å kunne kreve gavekortet på neste side."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Endre valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Endre logg"),
         "changeRepAuthenticate":
@@ -225,6 +228,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Skriv inn gavebrev"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Skriv inn melding"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Skriv inn XMR-adresse"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Tast inn ditt passord"),
         "enterSplitAmount":
@@ -588,6 +593,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Forespørsel"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Krev et passord for å åpne Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Krev CAPTCHA for å kreve gavekort"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Send dette notatet på nytt"),
         "resetDatabase":
@@ -702,6 +709,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hjelp til å støtte utvikling"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Støtt utvikleren"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Bytt XMR"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("Bytt Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Bytting"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Bytt til Seed"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Systemstandard"),
         "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(

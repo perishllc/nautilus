@@ -106,6 +106,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("تحذير الاتصال"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("كلمة التحقق"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "من أجل منع إساءة الاستخدام ، نطلب منك حل captcha للمطالبة ببطاقة الهدايا في الصفحة التالية."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("تغيير العملة"),
         "changeLog": MessageLookupByLibrary.simpleMessage("سجل التغيير"),
         "changeRepAuthenticate":
@@ -219,6 +222,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("أدخل ملاحظة الهدية"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("أدخل رسالة"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("أدخل عنوان XMR"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("ادخل رقمك ادخل رقمك\n"),
         "enterSplitAmount":
@@ -569,6 +574,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("طلب"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "مطالبة كلمة مرور لفتح نتريم ؟"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "يتطلب اختبار CAPTCHA للمطالبة ببطاقة الهدايا"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("إعادة إرسال هذه المذكرة"),
         "resetDatabase":
@@ -686,6 +693,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("مساعدة في دعم التنمية"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("دعم المطور"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("مبادلة XMR"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("مبادلة مونيرو"),
+        "swapping": MessageLookupByLibrary.simpleMessage("مبادلة"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("التبديل إلى المفتاح الخاص"),
         "systemDefault":

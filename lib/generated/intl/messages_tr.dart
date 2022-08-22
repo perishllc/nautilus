@@ -108,6 +108,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Bağlantı Uyarısı"),
         "cancel": MessageLookupByLibrary.simpleMessage("İptal"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Kötüye kullanımı önlemek için, bir sonraki sayfada hediye kartını talep etmek için bir captcha çözmenizi istiyoruz."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Para Birimi"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Girişi değiştir"),
         "changeRepAuthenticate":
@@ -222,6 +225,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Hediye Notunu Girin"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Mesaj Girin"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("XMR Adresini Girin"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Şifreni gir"),
         "enterSplitAmount":
@@ -577,6 +582,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("İstemek"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Nautilus\'u açarken şifre sorulsun mu?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Hediye kartı talep etmek için CAPTCHA gerektir"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Bu notu tekrar gönderme"),
         "resetDatabase":
@@ -691,6 +698,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Destek Geliştirmeye Yardım"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Geliştiriciyi Destekleyin"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("XMR\'yi Değiştir"),
+        "swapXMRHeader":
+            MessageLookupByLibrary.simpleMessage("Monero\'yu Değiştir"),
+        "swapping": MessageLookupByLibrary.simpleMessage("takas"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Seede Geç"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Sistem Dili"),
         "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(

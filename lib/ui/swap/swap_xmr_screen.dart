@@ -4,7 +4,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
@@ -12,50 +11,47 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/gift/gift_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/swap/swap_xmr_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
+import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
-class GeneratePaperWalletScreen extends StatefulWidget {
+class SwapXMRScreen extends StatefulWidget {
   // needs: StateContainer.of(context).curCurrency
-  const GeneratePaperWalletScreen({required this.localCurrency}) : super();
+  const SwapXMRScreen({required this.localCurrency}) : super();
   final AvailableCurrency localCurrency;
 
   @override
-  GeneratePaperWalletScreenState createState() => GeneratePaperWalletScreenState();
+  SwapXMRScreenState createState() => SwapXMRScreenState();
 }
 
-class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
+class SwapXMRScreenState extends State<SwapXMRScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  String paper_wallet_seed = NanoSeeds.generateSeed();
-  late String paper_wallet_account;
+  // String paper_wallet_seed = NanoSeeds.generateSeed();
+  // late String paper_wallet_account;
 
   FocusNode? _amountFocusNode;
-  FocusNode? _splitAmountFocusNode;
-  FocusNode? _memoFocusNode;
+  FocusNode? _addressFocusNode;
   TextEditingController? _amountController;
-  TextEditingController? _splitAmountController;
-  TextEditingController? _memoController;
+  TextEditingController? _xmrAddressController;
 
   ScrollController _scrollController = ScrollController();
 
   // States
   AddressStyle? _addressStyle;
   String? _amountHint = "";
-  String? _splitAmountHint = "";
   String _addressHint = "";
-  String? _memoHint = "";
+  String? _xmrAddressHint = "";
   String _amountValidationText = "";
-  String _splitAmountValidationText = "";
-  String _addressValidationText = "";
-  String _memoValidationText = "";
+  String _xmrAddressValidationText = "";
   String? quickSendAmount;
   List<dynamic>? _users;
   bool? animationOpen;
@@ -68,25 +64,21 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
   // Local currency mode/fiat conversion
   bool _localCurrencyMode = false;
   String _lastLocalCurrencyAmount = "";
-  String _lastLocalCurrencySplitAmount = "";
   String _lastCryptoAmount = "";
-  String _lastCryptoSplitAmount = "";
   late NumberFormat _localCurrencyFormat;
-
-  bool requireCaptcha = false;
+  bool _clearButton = false;
+  bool _pasteButtonVisible = true;
 
   @override
   void initState() {
     super.initState();
 
-    paper_wallet_account = NanoUtil.seedToAddress(paper_wallet_seed, 0);
+    // paper_wallet_account = NanoUtil.seedToAddress(paper_wallet_seed, 0);
 
     _amountFocusNode = FocusNode();
-    _splitAmountFocusNode = FocusNode();
+    _addressFocusNode = FocusNode();
     _amountController = TextEditingController();
-    _splitAmountController = TextEditingController();
-    _memoFocusNode = FocusNode();
-    _memoController = TextEditingController();
+    _xmrAddressController = TextEditingController();
     _addressStyle = AddressStyle.TEXT60;
 
     // On amount focus change
@@ -95,7 +87,6 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         setState(() {
           _amountHint = null;
           _amountValidationText = "";
-          _splitAmountValidationText = "";
         });
       } else {
         setState(() {
@@ -103,30 +94,17 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         });
       }
     });
-    // On split amount focus change
-    _splitAmountFocusNode!.addListener(() {
-      if (_splitAmountFocusNode!.hasFocus) {
+    // On xmr address focus change
+    _addressFocusNode!.addListener(() {
+      if (_addressFocusNode!.hasFocus) {
         setState(() {
-          _splitAmountHint = null;
-          _splitAmountValidationText = "";
+          _xmrAddressHint = null;
           _amountValidationText = "";
+          _pasteButtonVisible = true;
         });
       } else {
         setState(() {
-          _splitAmountHint = "";
-        });
-      }
-    });
-    // On memo focus change
-    _memoFocusNode!.addListener(() {
-      if (_memoFocusNode!.hasFocus) {
-        setState(() {
-          _memoHint = null;
-          _amountValidationText = "";
-        });
-      } else {
-        setState(() {
-          _memoHint = "";
+          _xmrAddressHint = "";
         });
       }
     });
@@ -176,37 +154,19 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       }
     }
 
-    // Validate split amount
-    if (_splitAmountController!.text.trim().isNotEmpty) {
-      String bananoAmount;
-      if (_localCurrencyMode) {
-        bananoAmount =
-            sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _splitAmountController!.text));
-      } else {
-        bananoAmount = sanitizedAmount(_localCurrencyFormat, _splitAmountController!.text);
-      }
-      if (bananoAmount.isEmpty) {
-        bananoAmount = "0";
-      }
-      final BigInt balanceRaw = StateContainer.of(context).wallet!.accountBalance;
-      final BigInt? splitAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
-
-      if (splitAmount == null || splitAmount == BigInt.zero) {
-        isValid = false;
-        setState(() {
-          _splitAmountValidationText = AppLocalization.of(context).amountMissing;
-        });
-      } else if (sendAmount != null && splitAmount > sendAmount) {
-        isValid = false;
-        setState(() {
-          _splitAmountValidationText = AppLocalization.of(context).amountGiftGreaterError;
-        });
-      } else if (splitAmount > balanceRaw) {
-        isValid = false;
-        setState(() {
-          _splitAmountValidationText = AppLocalization.of(context).insufficientBalance;
-        });
-      }
+    // Validate address
+    if (_xmrAddressController!.text.trim().isEmpty) {
+      isValid = false;
+      setState(() {
+        _xmrAddressValidationText = AppLocalization.of(context).addressMissing;
+      });
+    } else {
+      // if (!Address(_xmrAddressController!.text).isValid()) {
+      //   isValid = false;
+      //   setState(() {
+      //     _xmrAddressValidationText = AppLocalization.of(context).invalidAddress;
+      //   });
+      // }
     }
     return isValid;
   }
@@ -246,7 +206,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                   Container(
                     alignment: Alignment.center,
                     child: Icon(
-                      AppIcons.money_bill_wave,
+                      AppIcons.swapcurrency,
                       size: 48,
                       color: StateContainer.of(context).curTheme.primary,
                     ),
@@ -263,7 +223,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                 ),
                 alignment: AlignmentDirectional.center,
                 child: AutoSizeText(
-                  AppLocalization.of(context).createGiftHeader,
+                  AppLocalization.of(context).swapXMRHeader,
                   style: AppStyles.textStyleHeaderColored(context),
                   stepGranularity: 0.1,
                   maxLines: 1,
@@ -291,7 +251,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                     //   stepGranularity: 0.5,
                     // ),
                     child: Text(
-                      AppLocalization.of(context).giftInfo,
+                      AppLocalization.of(context).swapXMRInfo,
                       style: AppStyles.textStyleParagraph(context),
                     ),
                     // ),
@@ -304,8 +264,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                 onTap: () {
                   // Clear focus of our fields when tapped in this empty space
                   _amountFocusNode!.unfocus();
-                  _splitAmountFocusNode!.unfocus();
-                  _memoFocusNode!.unfocus();
+                  _addressFocusNode!.unfocus();
                 },
                 child: KeyboardAvoider(
                   duration: Duration.zero,
@@ -331,23 +290,6 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                             )),
                       ),
 
-                      // ******* Enter Amount Container ******* //
-                      getEnterSplitAmountContainer(),
-                      // ******* Enter Amount Container End ******* //
-
-                      // ******* Enter Amount Error Container ******* //
-                      Container(
-                        alignment: AlignmentDirectional.center,
-                        margin: const EdgeInsets.only(top: 3),
-                        child: Text(_splitAmountValidationText,
-                            style: TextStyle(
-                              fontSize: 14.0,
-                              color: StateContainer.of(context).curTheme.primary,
-                              fontFamily: 'NunitoSans',
-                              fontWeight: FontWeight.w600,
-                            )),
-                      ),
-
                       // ******* Enter Amount Error Container End ******* //
                       // Column for Enter Memo container + Enter Memo Error container
                       Column(
@@ -363,18 +305,18 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                                   constraints: const BoxConstraints(maxHeight: 80, minHeight: 0),
                                 ),
 
-                                // ******* Enter Memo Container ******* //
-                                getEnterMemoContainer(),
-                                // ******* Enter Memo Container End ******* //
+                                // ******* Enter XMR Address Container ******* //
+                                getEnterXMRAddressContainer(),
+                                // ******* Enter XMR Address Container End ******* //
                               ],
                             ),
                           ),
 
-                          // ******* Enter Memo Error Container ******* //
+                          // ******* Enter XMR Address Error Container ******* //
                           Container(
                             alignment: AlignmentDirectional.center,
                             margin: const EdgeInsets.only(top: 3),
-                            child: Text(_memoValidationText,
+                            child: Text(_xmrAddressValidationText,
                                 style: TextStyle(
                                   fontSize: 14.0,
                                   color: StateContainer.of(context).curTheme.primary,
@@ -382,39 +324,9 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                                   fontWeight: FontWeight.w600,
                                 )),
                           )
-                          // ******* Enter Memo Error Container End ******* //
+                          // ******* Enter XMR Address Error Container End ******* //
                         ],
                       ),
-
-                      Row(children: <Widget>[
-                        SizedBox(width: MediaQuery.of(context).size.width * 0.105),
-                        Checkbox(
-                          // fillColor: StateContainer.of(context).curTheme.primary!,
-                          activeColor: StateContainer.of(context).curTheme.primary,
-                          value: requireCaptcha,
-                          onChanged: (bool? value) {
-                            if (value == null) {
-                              return;
-                            }
-                            setState(() {
-                              requireCaptcha = value;
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          AppLocalization.of(context).requireCaptcha,
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: StateContainer.of(context).curTheme.primary,
-                            fontFamily: 'NunitoSans',
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                      ])
                     ],
                   ),
                 ),
@@ -424,39 +336,41 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).createGiftCard, Dimens.BUTTON_BOTTOM_DIMENS,
-                      onPressed: () {
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).swapXMRHeader, Dimens.BUTTON_BOTTOM_DIMENS,
+                      onPressed: () async {
                     final bool isValid = _validateRequest();
                     if (!isValid) {
                       return;
+                    } else {
+                      setState(() {
+                        _amountValidationText = "";
+                        _xmrAddressValidationText = "";
+                      });
                     }
 
-                    final String? memo = _memoController!.text.isNotEmpty ? _memoController!.text : null;
-                    String splitAmountRaw = sanitizedAmount(_localCurrencyFormat, _splitAmountController!.text);
+                    final String xmrAddress = _xmrAddressController!.text;
 
                     final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
+                    final String amountRaw = _localCurrencyMode
+                        ? NumberUtil.getAmountAsRaw(
+                            sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, formattedAmount)))
+                        : getThemeAwareAmountAsRaw(context, formattedAmount);
 
-                    if (_splitAmountController!.text.isNotEmpty) {
-                      if (_localCurrencyMode) {
-                        splitAmountRaw = NumberUtil.getAmountAsRaw(
-                            sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, splitAmountRaw)));
-                      } else {
-                        splitAmountRaw = getThemeAwareAmountAsRaw(context, splitAmountRaw);
-                      }
+                    // start a swap for monero:
+
+                    final Map resp = await sl.get<AccountService>().createSwapToXMR(amountRaw: amountRaw, xmrAddress: xmrAddress) as Map;
+                    if (!resp.containsKey("payInAddress")) {
+                      print("Error creating swap: ${resp["error"]}");
+                      return;
                     }
+
+                    String payInAddress = resp["payInAddress"] as String;
 
                     Sheets.showAppHeightNineSheet(
                         context: context,
-                        widget: GenerateConfirmSheet(
-                          paperWalletSeed: paper_wallet_seed,
-                          memo: memo ?? "",
-                          destination: paper_wallet_account,
-                          amountRaw: _localCurrencyMode
-                              ? NumberUtil.getAmountAsRaw(
-                                  sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, formattedAmount)))
-                              : getThemeAwareAmountAsRaw(context, formattedAmount),
-                          splitAmountRaw: splitAmountRaw,
-                          requireCaptcha: requireCaptcha,
+                        widget: SwapXMRConfirmSheet(
+                          destination: payInAddress,
+                          amountRaw: amountRaw,
                         ));
                   }),
                 ],
@@ -511,7 +425,6 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
     if (_localCurrencyMode) {
       // Switching to crypto-mode
       String cryptoAmountStr;
-      String cryptoSplitAmountStr;
       // Check out previous state
       if (_amountController!.text == _lastLocalCurrencyAmount) {
         cryptoAmountStr = _lastCryptoAmount;
@@ -520,27 +433,16 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         _lastCryptoAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
-      // split:
-      if (_splitAmountController!.text == _lastLocalCurrencySplitAmount) {
-        cryptoSplitAmountStr = _lastCryptoSplitAmount;
-      } else {
-        _lastLocalCurrencySplitAmount = _splitAmountController!.text;
-        _lastCryptoSplitAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _splitAmountController!.text);
-        cryptoSplitAmountStr = _lastCryptoSplitAmount;
-      }
       setState(() {
         _localCurrencyMode = false;
       });
       Future.delayed(const Duration(milliseconds: 50), () {
         _amountController!.text = cryptoAmountStr;
         _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
-        _splitAmountController!.text = cryptoSplitAmountStr;
-        _splitAmountController!.selection = TextSelection.fromPosition(TextPosition(offset: cryptoSplitAmountStr.length));
       });
     } else {
       // Switching to local-currency mode
       String localAmountStr;
-      String localSplitAmountStr;
       // Check our previous state
       if (_amountController!.text == _lastCryptoAmount) {
         localAmountStr = _lastLocalCurrencyAmount;
@@ -552,17 +454,6 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         _lastLocalCurrencyAmount = convertCryptoToLocalCurrency(context, _localCurrencyFormat, _amountController!.text);
         localAmountStr = _lastLocalCurrencyAmount;
       }
-      // split:
-      if (_splitAmountController!.text == _lastCryptoAmount) {
-        localSplitAmountStr = _lastLocalCurrencySplitAmount;
-        if (!_lastLocalCurrencySplitAmount.startsWith(_localCurrencyFormat.currencySymbol)) {
-          _lastLocalCurrencySplitAmount = _localCurrencyFormat.currencySymbol + _lastLocalCurrencySplitAmount;
-        }
-      } else {
-        _lastCryptoSplitAmount = _splitAmountController!.text;
-        _lastLocalCurrencySplitAmount = convertCryptoToLocalCurrency(context, _localCurrencyFormat, _splitAmountController!.text);
-        localSplitAmountStr = _lastLocalCurrencySplitAmount;
-      }
 
       setState(() {
         _localCurrencyMode = true;
@@ -570,8 +461,6 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       Future.delayed(const Duration(milliseconds: 50), () {
         _amountController!.text = localAmountStr;
         _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
-        _splitAmountController!.text = localSplitAmountStr;
-        _splitAmountController!.selection = TextSelection.fromPosition(TextPosition(offset: localSplitAmountStr.length));
       });
     }
   }
@@ -678,57 +567,15 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
   } //************ Enter Address Container Method End ************//
   //*************************************************************//
 
-  //************ Enter Amount Container Method ************//
-  //*******************************************************//
-  Widget getEnterSplitAmountContainer() {
-    return AppTextField(
-      focusNode: _splitAmountFocusNode,
-      controller: _splitAmountController,
-      topMargin: 10,
-      cursorColor: StateContainer.of(context).curTheme.primary,
-      style: TextStyle(
-        fontWeight: FontWeight.w700,
-        fontSize: 16.0,
-        color: StateContainer.of(context).curTheme.primary,
-        fontFamily: 'NunitoSans',
-      ),
-      inputFormatters: [
-        CurrencyFormatter2(
-          active: _localCurrencyMode,
-          currencyFormat: _localCurrencyFormat,
-          maxDecimalDigits: _localCurrencyMode ? _localCurrencyFormat.decimalDigits ?? 2 : NumberUtil.maxDecimalDigits,
-        ),
-      ],
-      onChanged: (String text) {
-        // Always reset the error message to be less annoying
-        setState(() {
-          _splitAmountValidationText = "";
-        });
-      },
-      textInputAction: TextInputAction.next,
-      maxLines: null,
-      autocorrect: false,
-      hintText: _splitAmountHint == null ? "" : AppLocalization.of(context).enterSplitAmount,
-      fadeSuffixOnCondition: true,
-      suffixShowFirstCondition: !_isMaxSend(),
-      keyboardType: const TextInputType.numberWithOptions(decimal: true),
-      textAlign: TextAlign.center,
-      onSubmitted: (String text) {
-        FocusScope.of(context).nextFocus();
-      },
-    );
-  } //************ Enter Address Container Method End ************//
-  //*************************************************************//
-
   //************ Enter Memo Container Method ************//
   //*******************************************************//
-  Widget getEnterMemoContainer() {
+  Widget getEnterXMRAddressContainer() {
     return AppTextField(
       topMargin: 10,
       padding: EdgeInsets.zero,
       textAlign: TextAlign.center,
-      focusNode: _memoFocusNode,
-      controller: _memoController,
+      focusNode: _addressFocusNode,
+      controller: _xmrAddressController,
       cursorColor: StateContainer.of(context).curTheme.primary,
       inputFormatters: [
         LengthLimitingTextInputFormatter(200),
@@ -736,7 +583,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _memoHint == null ? "" : AppLocalization.of(context).enterGiftMemo,
+      hintText: _xmrAddressHint == null ? "" : AppLocalization.of(context).enterMoneroAddress,
       fadeSuffixOnCondition: true,
       style: TextStyle(
         // fontWeight: FontWeight.w700,
@@ -749,6 +596,60 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         fontWeight: FontWeight.w100,
         fontFamily: 'OverpassMono',
       ),
+      suffixShowFirstCondition: _pasteButtonVisible,
+      suffixButton: TextFieldButton(
+        icon: _clearButton ? AppIcons.clear : AppIcons.paste,
+        onPressed: () async {
+          if (_clearButton) {
+            setState(() {
+              _isUser = false;
+              _xmrAddressValidationText = "";
+              _pasteButtonVisible = true;
+              _clearButton = false;
+              _xmrAddressController!.text = "";
+            });
+            return;
+          }
+
+          final String? data = await UserDataUtil.getClipboardText(DataType.RAW);
+          // TODO: validate the monero address:
+          if (data != null) {
+            if (mounted) {
+              setState(() {
+                _xmrAddressController!.text = data;
+                _pasteButtonVisible = false;
+                _clearButton = true;
+              });
+              _addressFocusNode!.unfocus();
+            }
+          }
+        },
+      ),
+      onChanged: (String text) async {
+        bool isUser = false;
+        final bool isDomain = text.contains(".") || text.contains(r"$");
+        final bool isFavorite = text.startsWith("★");
+        final bool isNano = text.startsWith("nano_");
+
+        // prevent spaces:
+        if (text.contains(" ")) {
+          text = text.replaceAll(" ", "");
+          _xmrAddressController!.text = text;
+          _xmrAddressController!.selection = TextSelection.fromPosition(TextPosition(offset: _xmrAddressController!.text.length));
+        }
+
+        if (text.isNotEmpty) {
+          setState(() {
+            _pasteButtonVisible = true;
+            _clearButton = true;
+          });
+        } else {
+          setState(() {
+            _pasteButtonVisible = true;
+            _clearButton = false;
+          });
+        }
+      },
     );
   } //************ Enter Memo Container Method End ************//
   //*************************************************************//

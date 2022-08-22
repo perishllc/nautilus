@@ -112,6 +112,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("कनेक्शन चेतावनी"),
         "cancel": MessageLookupByLibrary.simpleMessage("रद्द करें"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("कॅप्चा"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "दुरुपयोग को रोकने के लिए, हम चाहते हैं कि आप अगले पृष्ठ पर उपहार कार्ड का दावा करने के लिए एक कैप्चा हल करें।"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("मुद्रा बदलें"),
         "changeLog": MessageLookupByLibrary.simpleMessage("लॉग बदलें"),
         "changeRepAuthenticate":
@@ -226,6 +229,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("गिफ़्ट नोट दर्ज करें"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("संदेश दाखिल करें"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("एक्सएमआर पता दर्ज करें"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("अपना पासवर्ड डालें"),
         "enterSplitAmount":
@@ -582,6 +587,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("निवेदन"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "नेट्रियम खोलने के लिए पासवर्ड की आवश्यकता रखें?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "उपहार कार्ड का दावा करने के लिए कैप्चा की आवश्यकता है"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("इस ज्ञापन को फिर से भेजें"),
         "resetDatabase":
@@ -697,6 +704,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("सहायता समर्थन विकास"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("डेवलपर का समर्थन करें"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("स्वैप एक्सएमआर"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("स्वैप मोनेरो"),
+        "swapping": MessageLookupByLibrary.simpleMessage("अदला-बदली"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("सीड पर स्विच करें"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("डिवाइस की भाषा"),

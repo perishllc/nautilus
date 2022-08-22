@@ -37,6 +37,7 @@ import 'package:nautilus_wallet_flutter/ui/lock_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/password_lock_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/purchase_nano.dart';
 import 'package:nautilus_wallet_flutter/ui/register/register_username.dart';
+import 'package:nautilus_wallet_flutter/ui/swap/swap_xmr_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
@@ -63,6 +64,7 @@ Future<void> main() async {
   await FirebaseAppCheck.instance.activate(
     webRecaptchaSiteKey: Sensitive.CAPTCHA_SITE_KEY,
   );
+  FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
 
   if (!kReleaseMode) {
     // we have to stall for whatever reason in debug mode
@@ -330,6 +332,11 @@ class AppState extends State<App> {
             case '/gift_paper_wallet':
               return NoTransitionRoute(
                 builder: (_) => GeneratePaperWalletScreen(localCurrency: StateContainer.of(context).curCurrency),
+                settings: settings,
+              );
+            case '/swap_xmr':
+              return NoTransitionRoute(
+                builder: (_) => SwapXMRScreen(localCurrency: StateContainer.of(context).curCurrency),
                 settings: settings,
               );
             // case '/payments_page':

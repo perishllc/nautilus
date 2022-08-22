@@ -109,6 +109,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Avís de connexió"),
         "cancel": MessageLookupByLibrary.simpleMessage("Zrušit"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Per evitar l\'abús, us demanem que resolgueu un captcha per reclamar la targeta regal a la pàgina següent."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Změna měny"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
         "changeRepAuthenticate":
@@ -224,6 +227,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Enter Message"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Introduïu l\'adreça XMR"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Zadejte vaše heslo"),
         "enterSplitAmount":
@@ -581,6 +586,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Requesting"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Vyžadovat heslo k otevření Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Requereix CAPTCHA per reclamar la targeta regal"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("Resend this memo"),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Reset the Database"),
@@ -699,6 +706,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ajuda al desenvolupament"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Support the Developer"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Canvia XMR"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("Canvia Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Canvi"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Přepnout na semínko"),
         "systemDefault":

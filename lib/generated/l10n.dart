@@ -190,20 +190,20 @@ class AppLocalization {
     );
   }
 
-  /// `Please Enter an Address`
+  /// `Please enter an Address`
   String get addressMissing {
     return Intl.message(
-      'Please Enter an Address',
+      'Please enter an Address',
       name: 'addressMissing',
       desc: 'send_enter_address',
       args: [],
     );
   }
 
-  /// `Please Enter a Username or Address`
+  /// `Please enter a Username or Address`
   String get addressOrUserMissing {
     return Intl.message(
-      'Please Enter a Username or Address',
+      'Please enter a Username or Address',
       name: 'addressOrUserMissing',
       desc: 'send_enter_user_address',
       args: [],
@@ -280,10 +280,10 @@ class AppLocalization {
     );
   }
 
-  /// `Please Enter an Amount`
+  /// `Please enter an Amount`
   String get amountMissing {
     return Intl.message(
-      'Please Enter an Amount',
+      'Please enter an Amount',
       name: 'amountMissing',
       desc: 'send_enter_amount',
       args: [],
@@ -586,6 +586,26 @@ class AppLocalization {
       'Cancel',
       name: 'cancel',
       desc: 'dialog_cancel',
+      args: [],
+    );
+  }
+
+  /// `Captcha`
+  String get captchaWarning {
+    return Intl.message(
+      'Captcha',
+      name: 'captchaWarning',
+      desc: 'gift_claim_captcha_warning_header',
+      args: [],
+    );
+  }
+
+  /// `In order to prevent abuse, we require you to solve a quick captcha on the next page to claim this gift card.`
+  String get captchaWarningBody {
+    return Intl.message(
+      'In order to prevent abuse, we require you to solve a quick captcha on the next page to claim this gift card.',
+      name: 'captchaWarningBody',
+      desc: 'gift_claim_captcha_warning_body',
       args: [],
     );
   }
@@ -1293,6 +1313,16 @@ class AppLocalization {
     );
   }
 
+  /// `Enter XMR Address`
+  String get enterMoneroAddress {
+    return Intl.message(
+      'Enter XMR Address',
+      name: 'enterMoneroAddress',
+      desc: 'enter_xmr_address',
+      args: [],
+    );
+  }
+
   /// `Enter your password`
   String get enterPasswordHint {
     return Intl.message(
@@ -1333,10 +1363,10 @@ class AppLocalization {
     );
   }
 
-  /// `There was an error while processing this gift card, it may not be valid, expired, or empty.`
+  /// `There was an error while processing this gift card, it may be invalid, expired, or empty.\n\nAdditionally, you may need to update the app to the latest version in order to redeem this gift.`
   String get errorProcessingGiftCard {
     return Intl.message(
-      'There was an error while processing this gift card, it may not be valid, expired, or empty.',
+      'There was an error while processing this gift card, it may be invalid, expired, or empty.\n\nAdditionally, you may need to update the app to the latest version in order to redeem this gift.',
       name: 'errorProcessingGiftCard',
       desc: 'gift_process_error',
       args: [],
@@ -1803,10 +1833,10 @@ class AppLocalization {
     );
   }
 
-  /// `Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,`
+  /// `Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance.`
   String get giftInfo {
     return Intl.message(
-      'Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,',
+      'Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance.',
       name: 'giftInfo',
       desc: 'Description for gift card creation',
       args: [],
@@ -3559,6 +3589,16 @@ class AppLocalization {
     );
   }
 
+  /// `Require CAPTCHA to claim gift card`
+  String get requireCaptcha {
+    return Intl.message(
+      'Require CAPTCHA to claim gift card',
+      name: 'requireCaptcha',
+      desc: 'gift_claim_require_captcha',
+      args: [],
+    );
+  }
+
   /// `Resend this memo`
   String get resendMemo {
     return Intl.message(
@@ -4290,6 +4330,46 @@ class AppLocalization {
     );
   }
 
+  /// `Swapping`
+  String get swapping {
+    return Intl.message(
+      'Swapping',
+      name: 'swapping',
+      desc: 'swapping_xmr',
+      args: [],
+    );
+  }
+
+  /// `Swap XMR`
+  String get swapXMR {
+    return Intl.message(
+      'Swap XMR',
+      name: 'swapXMR',
+      desc: 'swap_xmr',
+      args: [],
+    );
+  }
+
+  /// `Swap Monero`
+  String get swapXMRHeader {
+    return Intl.message(
+      'Swap Monero',
+      name: 'swapXMRHeader',
+      desc: 'swap_xmr_header',
+      args: [],
+    );
+  }
+
+  /// `Monero is a privacy-focused cryptocurrency that makes it very hard or even impossible to trace transactions. Meanwhile NANO is a payments-focused cryptocurrency that is fast and fee-less. Together they provide some of the most useful aspects of cryptocurrencies!\n\nUse this page to easily swap your NANO for XMR!`
+  String get swapXMRInfo {
+    return Intl.message(
+      'Monero is a privacy-focused cryptocurrency that makes it very hard or even impossible to trace transactions. Meanwhile NANO is a payments-focused cryptocurrency that is fast and fee-less. Together they provide some of the most useful aspects of cryptocurrencies!\n\nUse this page to easily swap your NANO for XMR!',
+      name: 'swapXMRInfo',
+      desc: 'swap_xmr_header',
+      args: [],
+    );
+  }
+
   /// `Switch to Seed`
   String get switchToSeed {
     return Intl.message(
@@ -4710,10 +4790,10 @@ class AppLocalization {
     );
   }
 
-  /// `Please Enter a Username`
+  /// `Please enter a Username`
   String get usernameEmpty {
     return Intl.message(
-      'Please Enter a Username',
+      'Please enter a Username',
       name: 'usernameEmpty',
       desc: 'username_empty',
       args: [],

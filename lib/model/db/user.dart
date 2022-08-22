@@ -76,7 +76,7 @@ class User {
   // User fromJson() => _$UserFromJson(this);
 
   factory User.fromJson(Map<String, dynamic> json) {
-    String? username = json['username'] as String? ?? json['name'] as String?;
+    final String? username = json['username'] as String? ?? json['name'] as String?;
     return User(
         username: username,
         nickname: (json["nickname"] ?? json["name"]) as String?,
@@ -108,7 +108,13 @@ class User {
       return "★${nickname!}";
     }
 
-    return getDisplayNameWithType(username, type);
+    final String? displayName = getDisplayNameWithType(username, type);
+
+    if (displayName == null && nickname != null) {
+      // fall back to nickname if username is empty:
+      return "★${nickname!}";
+    }
+    return displayName;
   }
 
   static String? getDisplayNameWithType(String? name, String? userType) {

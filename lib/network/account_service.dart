@@ -57,7 +57,6 @@ Map? decodeJson(dynamic src) {
 
 // AccountService singleton
 class AccountService {
-
   // Constructor
   AccountService() {
     _requestQueue = Queue();
@@ -84,7 +83,6 @@ class AccountService {
   static const String NANO_TO_USERNAME_LEASE_ENDPOINT = "https://api.nano.to/lease";
   static const String NANO_TO_KNOWN_ENDPOINT = "https://nano.to/known.json";
   static const String XNO_TO_KNOWN_ENDPOINT = "https://nano.to/known.json";
-
 
   // UD / ENS:
   static const String UD_ENDPOINT = "https://unstoppabledomains.g.alchemy.com/domains/";
@@ -660,6 +658,29 @@ class AccountService {
     }
     final ProcessResponse item = ProcessResponse.fromJson(response as Map<String, dynamic>);
     return item;
+  }
+
+  Future<dynamic> createSwapToXMR({
+    String? amountRaw,
+    String? xmrAddress,
+  }) async {
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    final String runningVersion = packageInfo.version;
+    final http.Response response = await http.post(Uri.parse("https://api.nanswap.com/v1/create-order"),
+        headers: {"Accept": "application/json", "nanswap-api-key": Sensitive.NANSWAP_API_KEY},
+        body: json.encode(
+          <String, String?>{
+            "from": "XNO",
+            "to": "XMR",
+            "amount": amountRaw,
+            "toAddress": xmrAddress,
+          },
+        ));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      return {"error": "something went wrong: ${response.body}"};
+    }
   }
 
   // Future<HandoffResponse?> requestHandoff(String URI, HandoffReplyRequest request) async {

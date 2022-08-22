@@ -114,6 +114,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Babala sa Koneksyon"),
         "cancel": MessageLookupByLibrary.simpleMessage("Kanselahin"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Upang maiwasan ang pang-aabuso, hinihiling namin sa iyo na lutasin ang isang captcha upang ma-claim ang gift card sa susunod na pahina."),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Palitan ang Currency"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Baguhin ang Log"),
@@ -233,6 +236,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Ipasok ang Tala ng Regalo"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Ipasok ang Mensahe"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Ipasok ang XMR Address"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Ilagay ang password"),
         "enterSplitAmount":
@@ -603,6 +608,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Humihiling"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Gumawa ng password para mabuksan ang Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Atasan ang CAPTCHA na mag-claim ng gift card"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Ipadala muli ang memo"),
         "resetDatabase":
@@ -725,6 +732,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tulong sa Pag-unlad ng Suporta"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Suportahan ang Developer"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Palitan ang XMR"),
+        "swapXMRHeader":
+            MessageLookupByLibrary.simpleMessage("Magpalit ng Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Pagpapalit"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Lumipat sa Seed"),
         "systemDefault":
             MessageLookupByLibrary.simpleMessage("Default na System"),

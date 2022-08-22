@@ -114,6 +114,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Verbindingswaarschuwing"),
         "cancel": MessageLookupByLibrary.simpleMessage("Annuleer"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Om misbruik te voorkomen, vragen we je om een captcha op te lossen om de cadeaubon op de volgende pagina te claimen."),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Verander valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Logboek wijzigen"),
@@ -229,6 +232,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Cadeaubon invoeren"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Bericht invoeren"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Voer XMR-adres in"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Voer je wachtwoord in"),
         "enterSplitAmount":
@@ -592,6 +597,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Verzoek"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Wachtwoord vereisen om Nautilus te openen?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "CAPTCHA vereisen om cadeaubon te claimen"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Deze memo opnieuw verzenden"),
         "resetDatabase": MessageLookupByLibrary.simpleMessage(
@@ -706,6 +713,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Help Ondersteuning Ontwikkeling"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Steun de ontwikkelaar"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Ruil XMR"),
+        "swapXMRHeader":
+            MessageLookupByLibrary.simpleMessage("Monero omwisselen"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Ruilen"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Schakel over naar seed"),
         "systemDefault":

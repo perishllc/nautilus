@@ -110,6 +110,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Предупреждение за връзка"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмени"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "За да предотвратим злоупотреба, изискваме от вас да разрешите captcha, за да поискате картата за подарък на следващата страница."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Смени Валута"),
         "changeLog":
             MessageLookupByLibrary.simpleMessage("Промяна на дневника"),
@@ -225,6 +228,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Въведете бележка за подарък"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Въведете съобщение"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Въведете XMR адрес"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Въведи паролата"),
         "enterSplitAmount":
@@ -589,6 +594,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Искане"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Да се изисква парола за отваряне на Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Изискване на CAPTCHA за заявяване на карта за подарък"),
         "resendMemo": MessageLookupByLibrary.simpleMessage(
             "Повторно изпращане на тази бележка"),
         "resetDatabase":
@@ -707,6 +714,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Помощ за поддръжка на развитието"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Подкрепа на разработчика"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Разменете XMR"),
+        "swapXMRHeader":
+            MessageLookupByLibrary.simpleMessage("Разменете Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Размяна"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Премини към Seed"),
         "systemDefault":

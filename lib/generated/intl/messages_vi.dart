@@ -111,6 +111,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Cảnh báo kết nối"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("mã ngẫu nhiên"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Để ngăn chặn việc lạm dụng, chúng tôi yêu cầu bạn giải mã xác thực để yêu cầu thẻ quà tặng trên trang tiếp theo."),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Đổi loại tiền pháp định"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Thay đổi Nhật ký"),
@@ -225,6 +228,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Nhập Ghi Chú Quà Tặng"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Nhập tin nhắn"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Nhập địa chỉ XMR"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Nhập mật khẩu"),
         "enterSplitAmount":
@@ -585,6 +590,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Yêu cầu"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Yêu cầu mật khẩu để mở Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Yêu cầu CAPTCHA để yêu cầu thẻ quà tặng"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Gửi lại bản ghi nhớ này"),
         "resetDatabase":
@@ -703,6 +710,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Trợ giúp Hỗ trợ Phát triển"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Hỗ trợ Nhà phát triển"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Hoán đổi XMR"),
+        "swapXMRHeader":
+            MessageLookupByLibrary.simpleMessage("Hoán đổi Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Hoán đổi"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Chuyển sang hạt giống"),
         "systemDefault":

@@ -47,15 +47,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressCopied": MessageLookupByLibrary.simpleMessage("Address Copied"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Enter Address"),
         "addressMissing":
-            MessageLookupByLibrary.simpleMessage("Please Enter an Address"),
+            MessageLookupByLibrary.simpleMessage("Please enter an Address"),
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
-            "Please Enter a Username or Address"),
+            "Please enter a Username or Address"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Share Address"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Split Amount can\'t be greater than gift balance"),
         "amountMissing":
-            MessageLookupByLibrary.simpleMessage("Please Enter an Amount"),
+            MessageLookupByLibrary.simpleMessage("Please enter an Amount"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no."),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
@@ -107,6 +107,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Connection Warning"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "In order to prevent abuse, we require you to solve a quick captcha on the next page to claim this gift card."),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Change Currency"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
@@ -222,6 +225,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Enter Message"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Enter XMR Address"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterSplitAmount":
@@ -231,7 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Enter a username"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
-            "There was an error while processing this gift card, it may not be valid, expired, or empty."),
+            "There was an error while processing this gift card, it may be invalid, expired, or empty.\n\nAdditionally, you may need to update the app to the latest version in order to redeem this gift."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("someone"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
@@ -302,7 +307,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "An error occured while trying to create a gift card, THE GIFT CARD LINK OR SEED HAS BEEN COPIED TO YOUR CLIPBOARD, YOUR FUNDS MAY BE CONTAINED WITHIN IT DEPENDING ON WHAT WENT WRONG."),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Gift From"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
-            "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a Split amount to distribute from the gift card rather than the entire balance,"),
+            "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance."),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Gift Message"),
         "giftProcessError": MessageLookupByLibrary.simpleMessage(
             "There was an error while processing this gift card. Maybe check your connection and try clicking the gift link again."),
@@ -574,6 +579,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Requesting"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Require a password to open Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Require CAPTCHA to claim gift card"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("Resend this memo"),
         "resetDatabase": MessageLookupByLibrary.simpleMessage("Reset the App"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -680,6 +687,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Help Support Development"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Support the Developer"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Swap XMR"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("Swap Monero"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "Monero is a privacy-focused cryptocurrency that makes it very hard or even impossible to trace transactions. Meanwhile NANO is a payments-focused cryptocurrency that is fast and fee-less. Together they provide some of the most useful aspects of cryptocurrencies!\n\nUse this page to easily swap your NANO for XMR!"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Swapping"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Switch to Seed"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("System Default"),
         "tapMessageToEdit":
@@ -750,7 +762,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "usernameAvailable":
             MessageLookupByLibrary.simpleMessage("Username available!"),
         "usernameEmpty":
-            MessageLookupByLibrary.simpleMessage("Please Enter a Username"),
+            MessageLookupByLibrary.simpleMessage("Please enter a Username"),
         "usernameError": MessageLookupByLibrary.simpleMessage("Username Error"),
         "usernameInfo": MessageLookupByLibrary.simpleMessage(
             "Pick out a unique @username to make it easy for friends and family to find you!\n\nHaving a Nautilus username updates the UI globally to reflect your new handle."),

@@ -17,6 +17,7 @@ import 'package:nautilus_wallet_flutter/ui/gift/gift_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:uuid/uuid.dart';
 
 import 'nanoutil.dart';
@@ -30,6 +31,7 @@ class GiftCards {
     required String paperWalletSeed,
     String? amountRaw,
     String? memo,
+    bool requireCaptcha = false,
   }) async {
     final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
 
@@ -58,6 +60,7 @@ class GiftCards {
           ..addCustomMetadata('signature', "")
           ..addCustomMetadata('nonce', "")
           ..addCustomMetadata('from_address', StateContainer.of(context).wallet!.address) // TODO: sign these:
+          ..addCustomMetadata('require_captcha', requireCaptcha)
           ..addCustomMetadata('amount_raw', amountRaw));
 
     final BranchLinkProperties lp = BranchLinkProperties(
@@ -87,6 +90,7 @@ class GiftCards {
     String? requestingAccount,
     String? splitAmountRaw,
     String? memo,
+    bool requireCaptcha = false,
   }) async {
     final String? appCheckToken = await FirebaseAppCheck.instance.getToken();
     if (appCheckToken == null) {
@@ -103,6 +107,7 @@ class GiftCards {
             "requesting_account": requestingAccount,
             "split_amount_raw": splitAmountRaw,
             "memo": memo,
+            "require_captcha": requireCaptcha,
           },
         ));
     if (response.statusCode == 200) {
@@ -142,6 +147,7 @@ class GiftCards {
   Future<dynamic> giftCardClaim({
     String? giftUUID,
     String? requestingAccount,
+    String? hcaptchaToken,
   }) async {
     final String? appCheckToken = await FirebaseAppCheck.instance.getToken();
     if (appCheckToken == null) {
@@ -149,8 +155,10 @@ class GiftCards {
         "error": "Something went wrong",
       };
     }
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    final String runningVersion = packageInfo.version;
     final http.Response response = await http.post(Uri.parse(AccountService.SERVER_ADDRESS_HTTP),
-        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
+        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken, "AppVersion": runningVersion, "hcaptcha-token": hcaptchaToken ?? ""},
         body: json.encode(
           {
             "action": "gift_claim",

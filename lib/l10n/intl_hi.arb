@@ -270,6 +270,16 @@
     "type": "text",
     "description": "dialog_cancel"
   },
+  "captchaWarning": "कॅप्चा",
+  "@captchaWarning": {
+    "type": "text",
+    "description": "gift_claim_captcha_warning_header"
+  },
+  "captchaWarningBody": "दुरुपयोग को रोकने के लिए, हम चाहते हैं कि आप अगले पृष्ठ पर उपहार कार्ड का दावा करने के लिए एक कैप्चा हल करें।",
+  "@captchaWarningBody": {
+    "type": "text",
+    "description": "gift_claim_captcha_warning_body"
+  },
   "changeCurrency": "मुद्रा बदलें",
   "@changeCurrency": {
     "type": "text",
@@ -619,6 +629,11 @@
   "@enterMemo": {
     "type": "text",
     "description": "enter_memo"
+  },
+  "enterMoneroAddress": "एक्सएमआर पता दर्ज करें",
+  "@enterMoneroAddress": {
+    "type": "text",
+    "description": "enter_xmr_address"
   },
   "enterPasswordHint": "अपना पासवर्ड डालें",
   "@enterPasswordHint": {
@@ -1750,6 +1765,11 @@
     "type": "text",
     "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
   },
+  "requireCaptcha": "उपहार कार्ड का दावा करने के लिए कैप्चा की आवश्यकता है",
+  "@requireCaptcha": {
+    "type": "text",
+    "description": "gift_claim_require_captcha"
+  },
   "resendMemo": "इस ज्ञापन को फिर से भेजें",
   "@resendMemo": {
     "type": "text",
@@ -2114,6 +2134,21 @@
   "@supportTheDeveloper": {
     "type": "text",
     "description": "change_log_support"
+  },
+  "swapping": "अदला-बदली",
+  "@swapping": {
+    "type": "text",
+    "description": "swapping_xmr"
+  },
+  "swapXMR": "स्वैप एक्सएमआर",
+  "@swapXMR": {
+    "type": "text",
+    "description": "swap_xmr"
+  },
+  "swapXMRHeader": "स्वैप मोनेरो",
+  "@swapXMRHeader": {
+    "type": "text",
+    "description": "swap_xmr_header"
   },
   "switchToSeed": "सीड पर स्विच करें",
   "@switchToSeed": {

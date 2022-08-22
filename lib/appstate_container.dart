@@ -172,6 +172,7 @@ class StateContainerState extends State<StateContainer> {
   List<NinjaNode> nanoNinjaNodes = [];
 
   // gifts!
+  // TODO: turn into a map:
   bool giftedWallet = false;
   String giftedWalletSeed = "";
   String giftedWalletAddress = "";
@@ -179,6 +180,7 @@ class StateContainerState extends State<StateContainer> {
   String giftedWalletMemo = "";
   String giftedWalletFromAddress = "";
   String giftedWalletUUID = "";
+  bool giftedWalletRequireCaptcha = false;
   bool introSkiped = false;
 
   // When wallet is encrypted
@@ -639,6 +641,7 @@ class StateContainerState extends State<StateContainer> {
             giftedWalletAddress = data["address"] as String? ?? "";
             giftedWalletFromAddress = data["from_address"] as String? ?? "";
             giftedWalletMemo = data["memo"] as String? ?? "";
+            giftedWalletRequireCaptcha = data["require_captcha"] == "True";
             giftedWalletUUID = data["gift_uuid"] as String? ?? "";
           });
           // }

@@ -113,6 +113,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Brīdinājums par savienojumu"),
         "cancel": MessageLookupByLibrary.simpleMessage("Atcelt"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "Lai novērstu ļaunprātīgu izmantošanu, mēs pieprasām jums atrisināt captcha, lai nākamajā lapā varētu pieprasīt dāvanu karti."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Mainīt valūtu"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
         "changeRepAuthenticate":
@@ -229,6 +232,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Enter Message"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Ievadiet XMR adresi"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterSplitAmount":
@@ -582,6 +587,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Requesting"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Require a password to open Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Lai pieprasītu dāvanu karti, ir nepieciešams CAPTCHA"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("Resend this memo"),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Reset the Database"),
@@ -697,6 +704,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Palīdzība Atbalsts attīstībai"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Support the Developer"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Nomainiet XMR"),
+        "swapXMRHeader":
+            MessageLookupByLibrary.simpleMessage("Apmainīt Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Maiņa"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage(
             "Pārslēgties uz privāto atslēgu"),
         "systemDefault":

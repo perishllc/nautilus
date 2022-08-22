@@ -1514,6 +1514,10 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           Navigator.of(context).pushNamed("/gift_paper_wallet");
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).swapXMR, AppIcons.swapcurrency, onPressed: () {
+          Navigator.of(context).pushNamed("/swap_xmr");
+        }),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         Container(
           margin: const EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
           child: Text(AppLocalization.of(context).preferences,
@@ -2720,7 +2724,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
                     ),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).promotionalLink, AppIcons.share, onPressed: () async {
+                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).promotionalLink, AppIcons.qrcode, onPressed: () async {
                       final Widget qrWidget =
                           SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, NonTranslatable.promoLink));
                       Sheets.showAppHeightNineSheet(

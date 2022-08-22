@@ -1,15 +1,17 @@
 ## v0.6.0 - [2022-08-XX]
 #### Added
-- Easy Monero Swapping
-- Custom Backend Selection in the More Settings Menu
+- Checkbox option to require a captcha in order to redeem a gift card
 #### Changed
 #### Fixed
+- Minor visual fixes on the add accounts sheet
+- Fixes for adding watch only accounts
 ## v0.5.9 - [2022-08-19]
 #### Added
 - Button to export transaction data / history in the more settings menu
 #### Fixed
 - Handlebars were missing from contact / blocked details sheet
 - Hack to let custom URI schemes work in the in-app browser
+- Fixes for adding watch only accounts
 ## v0.5.8 - [2022-08-18]
 #### Added
 - Split Bill Menu! Easily split a bill by sending payment requests to multiple people at once!

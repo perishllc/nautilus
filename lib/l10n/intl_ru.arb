@@ -270,6 +270,16 @@
     "type": "text",
     "description": "dialog_cancel"
   },
+  "captchaWarning": "Капча",
+  "@captchaWarning": {
+    "type": "text",
+    "description": "gift_claim_captcha_warning_header"
+  },
+  "captchaWarningBody": "Во избежание злоупотреблений мы требуем, чтобы вы разгадали капчу, чтобы получить подарочную карту на следующей странице.",
+  "@captchaWarningBody": {
+    "type": "text",
+    "description": "gift_claim_captcha_warning_body"
+  },
   "changeCurrency": "Сменить Валюту",
   "@changeCurrency": {
     "type": "text",
@@ -619,6 +629,11 @@
   "@enterMemo": {
     "type": "text",
     "description": "enter_memo"
+  },
+  "enterMoneroAddress": "Введите XMR-адрес",
+  "@enterMoneroAddress": {
+    "type": "text",
+    "description": "enter_xmr_address"
   },
   "enterPasswordHint": "Введите свой пароль",
   "@enterPasswordHint": {
@@ -1750,6 +1765,11 @@
     "type": "text",
     "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
   },
+  "requireCaptcha": "Требовать CAPTCHA для получения подарочной карты",
+  "@requireCaptcha": {
+    "type": "text",
+    "description": "gift_claim_require_captcha"
+  },
   "resendMemo": "Повторно отправить эту заметку",
   "@resendMemo": {
     "type": "text",
@@ -2114,6 +2134,21 @@
   "@supportTheDeveloper": {
     "type": "text",
     "description": "change_log_support"
+  },
+  "swapping": "Обмен",
+  "@swapping": {
+    "type": "text",
+    "description": "swapping_xmr"
+  },
+  "swapXMR": "Обмен XMR",
+  "@swapXMR": {
+    "type": "text",
+    "description": "swap_xmr"
+  },
+  "swapXMRHeader": "Обмен Монеро",
+  "@swapXMRHeader": {
+    "type": "text",
+    "description": "swap_xmr_header"
   },
   "switchToSeed": "Переключиться на Seed",
   "@switchToSeed": {

@@ -87,6 +87,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("错误：无法访问分支 API"),
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage("连接警告"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("验证码"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "为了防止滥用，我们要求您解决验证码才能在下一页领取礼品卡。"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("更改货币"),
         "changeLog": MessageLookupByLibrary.simpleMessage("更改日志"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage("更改代表"),
@@ -171,6 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount": MessageLookupByLibrary.simpleMessage("输入金额"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("输入礼品备注"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("输入消息"),
+        "enterMoneroAddress": MessageLookupByLibrary.simpleMessage("输入 XMR 地址"),
         "enterPasswordHint": MessageLookupByLibrary.simpleMessage("输入您的密码"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage("输入分割金额"),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage("输入用户或地址"),
@@ -463,6 +467,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("正在申请"),
         "requireAPasswordToOpenHeader":
             MessageLookupByLibrary.simpleMessage("需要密码来打开Nautilus吗？"),
+        "requireCaptcha":
+            MessageLookupByLibrary.simpleMessage("要求 CAPTCHA 领取礼品卡"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("重新发送此备忘录"),
         "resetDatabase": MessageLookupByLibrary.simpleMessage("重置数据库"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -548,6 +554,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage("帮助支持发展"),
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("支持开发者"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("交换 XMR"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("交换门罗币"),
+        "swapping": MessageLookupByLibrary.simpleMessage("交换"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("转换成种子"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("系统默认"),
         "tapMessageToEdit": MessageLookupByLibrary.simpleMessage("点按消息进行编辑"),

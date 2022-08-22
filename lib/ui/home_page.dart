@@ -22,6 +22,7 @@ import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
+import 'package:nautilus_wallet_flutter/localize.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
@@ -38,6 +39,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_i
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
+import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
@@ -58,18 +60,22 @@ import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/hcaptcha.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/transaction_state_tag.dart';
 import 'package:nautilus_wallet_flutter/util/box.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:nautilus_wallet_flutter/util/usb_sheet.dart';
 // import 'package:nfc_manager/nfc_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:quick_usb/quick_usb.dart';
 import 'package:quiver/strings.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
@@ -231,7 +237,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     );
   }
 
-  Future<void> _branchGiftDialog({String seed = "", String memo = "", String amountRaw = "", String fromAddress = "", String giftUUID = ""}) async {
+  Future<void> _branchGiftDialog(
+      {String seed = "", String memo = "", String amountRaw = "", String fromAddress = "", String giftUUID = "", bool requireCaptcha = false}) async {
     final String supposedAmount = getRawAsThemeAwareAmount(context, amountRaw);
 
     String? userOrFromAddress;
@@ -361,6 +368,26 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
             break;
           case 1:
             // transfer to this wallet:
+            String? hcaptchaToken;
+            if (requireCaptcha) {
+              await AppDialogs.showInfoDialog(
+                context,
+                AppLocalization.of(context).captchaWarning,
+                AppLocalization.of(context).captchaWarningBody,
+                barrierDismissible: false,
+                closeText: CaseChange.toUpperCase(AppLocalization.of(context).ok, context),
+              );
+              if (!mounted) return;
+              await Navigator.of(context).push(
+                MaterialPageRoute<dynamic>(builder: (BuildContext context) {
+                  return HCaptcha((String code) => hcaptchaToken = code);
+                }),
+              );
+            }
+            if (!mounted) return;
+
+            // not really worth actually checking the captcha, just send the gift anyway:
+
             // await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, StateContainer.of(context).wallet);
             await AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet);
             break;
@@ -484,6 +511,25 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
           case 0:
             // transfer to this wallet:
 
+            String? hcaptchaToken;
+
+            if (requireCaptcha) {
+              await AppDialogs.showInfoDialog(
+                context,
+                AppLocalization.of(context).captchaWarning,
+                AppLocalization.of(context).captchaWarningBody,
+                barrierDismissible: false,
+                closeText: CaseChange.toUpperCase(AppLocalization.of(context).ok, context),
+              );
+              if (!mounted) return;
+              await Navigator.of(context).push(
+                MaterialPageRoute<dynamic>(builder: (BuildContext context) {
+                  return HCaptcha((String code) => hcaptchaToken = code);
+                }),
+              );
+            }
+            if (!mounted) return;
+
             // show loading animation for ~5 seconds:
             // push animation to prevent early exit:
             bool animationOpen = true;
@@ -491,7 +537,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
             // sleep to flex the animation a bit:
             await Future<dynamic>.delayed(const Duration(milliseconds: 1500));
 
-            final dynamic res = await sl.get<GiftCards>().giftCardClaim(giftUUID: giftUUID, requestingAccount: requestingAccount);
+            final dynamic res = await sl.get<GiftCards>().giftCardClaim(giftUUID: giftUUID, requestingAccount: requestingAccount, hcaptchaToken: hcaptchaToken);
             if (!mounted) return;
 
             if (res["error"] != null) {
@@ -639,7 +685,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     _updateUsers();
     // _updateTXData();
     // infinite scroll:
-    _scrollController = ScrollController()..addListener(_scrollListener);
+    _scrollController = ScrollController() /*..addListener(_scrollListener)*/;
     // Setup placeholder animation and start
     _animationDisposed = false;
     _placeholderCardAnimationController = AnimationController(
@@ -1022,7 +1068,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
   void dispose() {
     _destroyBus();
     WidgetsBinding.instance.removeObserver(this);
-    _scrollController.removeListener(_scrollListener);
+    // _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
     _placeholderCardAnimationController.dispose();
     // confetti:
@@ -1061,25 +1107,25 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     }
   }
 
-  void _scrollListener() {
-    // print(_scrollController.position.extentAfter);
-    // if (_scrollController.position.extentAfter < 500) {
-    //   // check if the oldest item is the initial block:
-    //   if (_historyListMap[StateContainer.of(context).wallet!.address] != null && _historyListMap[StateContainer.of(context).wallet!.address]!.isNotEmpty) {
-    //     final List<AccountHistoryResponseItem> histList = _historyListMap[StateContainer.of(context).wallet!.address]!;
+  // void _scrollListener() {
+  // print(_scrollController.position.extentAfter);
+  // if (_scrollController.position.extentAfter < 500) {
+  //   // check if the oldest item is the initial block:
+  //   if (_historyListMap[StateContainer.of(context).wallet!.address] != null && _historyListMap[StateContainer.of(context).wallet!.address]!.isNotEmpty) {
+  //     final List<AccountHistoryResponseItem> histList = _historyListMap[StateContainer.of(context).wallet!.address]!;
 
-    //     // histList[0] is the most recent block with the highest height (120)
-    //     // histList[1] is the second most recent block with the next highest height (119)
-    //     // histList[120] is the oldest block with the lowest height (1)
+  //     // histList[0] is the most recent block with the highest height (120)
+  //     // histList[1] is the second most recent block with the next highest height (119)
+  //     // histList[120] is the oldest block with the lowest height (1)
 
-    //     if (histList[histList.length - 1].height! > 1) {
-    //       // we don't have all of the blocks yet, so we need to fetch more
-    //       // TODO: implement this
-    //       // StateContainer.of(context).requestUpdate(start: StateContainer.of(context).wallet.history.length, count: 50);
-    //     }
-    //   }
-    // }
-  }
+  //     if (histList[histList.length - 1].height! > 1) {
+  //       // we don't have all of the blocks yet, so we need to fetch more
+  //       // TODO: implement this
+  //       // StateContainer.of(context).requestUpdate(start: StateContainer.of(context).wallet.history.length, count: 50);
+  //     }
+  //   }
+  // }
+  // }
 
   int currentConfHeight = -1;
 
@@ -1737,17 +1783,22 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
       StateContainer.of(context).giftedWallet = false;
 
       Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
-      _branchGiftDialog(
-          seed: StateContainer.of(context).giftedWalletSeed,
-          memo: StateContainer.of(context).giftedWalletMemo,
-          amountRaw: StateContainer.of(context).giftedWalletAmountRaw,
-          fromAddress: StateContainer.of(context).giftedWalletFromAddress,
-          giftUUID: StateContainer.of(context).giftedWalletUUID);
+      await _branchGiftDialog(
+        seed: StateContainer.of(context).giftedWalletSeed,
+        memo: StateContainer.of(context).giftedWalletMemo,
+        amountRaw: StateContainer.of(context).giftedWalletAmountRaw,
+        fromAddress: StateContainer.of(context).giftedWalletFromAddress,
+        giftUUID: StateContainer.of(context).giftedWalletUUID,
+        requireCaptcha: StateContainer.of(context).giftedWalletRequireCaptcha,
+      );
+
+      if (!mounted) return;
       StateContainer.of(context).giftedWalletUUID = "";
       StateContainer.of(context).giftedWalletSeed = "";
       StateContainer.of(context).giftedWalletAmountRaw = "";
       StateContainer.of(context).giftedWalletMemo = "";
       StateContainer.of(context).giftedWalletFromAddress = "";
+      StateContainer.of(context).giftedWalletRequireCaptcha = false;
     }
   }
 
@@ -1897,11 +1948,26 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
                               maxLines: 1,
                               stepGranularity: 0.5,
                             ),
-                            onPressed: () {
+                            onPressed: () async {
                               if (receive == null) {
                                 return;
                               }
-                              Sheets.showAppHeightNineSheet(context: context, widget: receive!);
+                              // Sheets.showAppHeightNineSheet(context: context, widget: receive!);
+
+                              // Sheets.showAppHeightNineSheet(context: context, widget: UsbSheet());
+                              UIUtil.showWebview(context, "https://webusb.github.io/arduino/demos/");
+                              // https://whatwebcando.today/usb.html
+
+                              await Navigator.of(context).push(
+                                MaterialPageRoute<dynamic>(builder: (BuildContext context) {
+                                  return HCaptcha((String code) => print(code));
+                                }),
+                              );
+
+                              // await QuickUsb.init();
+                              // var deviceList = await QuickUsb.getDeviceList();
+                              // print(deviceList);
+                              // print(deviceList[0]);
                             },
                           ),
                         ),

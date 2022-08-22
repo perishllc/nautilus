@@ -425,7 +425,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
     // get username if it exists:
     String? userOrAddress;
     if (account.user != null) {
-      userOrAddress = account.user!.getDisplayName(ignoreNickname: true);
+      userOrAddress = account.user!.getDisplayName(/*ignoreNickname: true*/);
     } else {
       userOrAddress = Address(account.address).getShortString();
     }
@@ -490,10 +490,13 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                 Stack(
                                   children: <Widget>[
                                     Center(
-                                      child: Icon(
-                                        account.watchOnly ? AppIcons.search : AppIcons.accountwallet,
-                                        color: account.selected ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
-                                        size: 30,
+                                      child: Container(
+                                        margin: EdgeInsets.only(left: account.watchOnly ? 5 : 0),
+                                        child: Icon(
+                                          account.watchOnly ? AppIcons.search : AppIcons.accountwallet,
+                                          color: account.selected ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
+                                          size: 30,
+                                        ),
                                       ),
                                     ),
                                     if (!account.watchOnly)
@@ -515,7 +518,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                 // Account name and address
                                 Container(
                                   width: (MediaQuery.of(context).size.width - 116) * 0.5,
-                                  margin: EdgeInsetsDirectional.only(start: StateContainer.of(context).natriconOn! ? 8.0 : 20.0),
+                                  margin: EdgeInsetsDirectional.only(start: account.watchOnly ? 25 : 20),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment: CrossAxisAlignment.start,

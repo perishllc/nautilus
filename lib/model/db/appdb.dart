@@ -425,25 +425,25 @@ class DBHelper {
     return users;
   }
 
-  Future<List<User>> getUserSuggestionsWithNameLike(String pattern) async {
-    final Database dbClient = (await db)!;
-    final List<Map> list = await dbClient.rawQuery("SELECT * FROM Users WHERE username LIKE '%$pattern%' ORDER BY LOWER(username)");
-    final List<User> users = [];
-    const int maxSuggestions = 5;
-    final int length = list.length;
-    // dart doesn't support function overloading so I can't import dart:math for the min() function
-    // which is why I'm doing this
-    final int minned = (maxSuggestions <= list.length) ? maxSuggestions : list.length;
-    for (int i = 0; i < minned; i++) {
-      users.add(User(
-          username: list[i]["username"] as String?,
-          nickname: list[i]["nickname"] as String?,
-          address: list[i]["address"] as String?,
-          type: list[i]["type"] as String?,
-          last_updated: list[i]["last_updated"] as int?));
-    }
-    return users;
-  }
+  // Future<List<User>> getUserSuggestionsWithNameLike(String pattern) async {
+  //   final Database dbClient = (await db)!;
+  //   final List<Map> list = await dbClient.rawQuery("SELECT * FROM Users WHERE username LIKE '%$pattern%' ORDER BY LOWER(username)");
+  //   final List<User> users = [];
+  //   const int maxSuggestions = 5;
+  //   final int length = list.length;
+  //   // dart doesn't support function overloading so I can't import dart:math for the min() function
+  //   // which is why I'm doing this
+  //   final int minned = (maxSuggestions <= list.length) ? maxSuggestions : list.length;
+  //   for (int i = 0; i < minned; i++) {
+  //     users.add(User(
+  //         username: list[i]["username"] as String?,
+  //         nickname: list[i]["nickname"] as String?,
+  //         address: list[i]["address"] as String?,
+  //         type: list[i]["type"] as String?,
+  //         last_updated: list[i]["last_updated"] as int?));
+  //   }
+  //   return users;
+  // }
 
   Future<List<User>> getUserContactSuggestionsWithNameLike(String pattern) async {
     final Database dbClient = (await db)!;

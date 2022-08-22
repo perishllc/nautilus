@@ -97,6 +97,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("エラー: Branch API にアクセスできません"),
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage("接続警告"),
         "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("キャプチャ"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "悪用を防ぐため、次のページでギフト カードを受け取るにはキャプチャを解決する必要があります。"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("通貨を変更する"),
         "changeLog": MessageLookupByLibrary.simpleMessage("変更ログ"),
         "changeRepAuthenticate":
@@ -192,6 +195,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount": MessageLookupByLibrary.simpleMessage("金額を入力する"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("ギフトメモを入力"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("メッセージを入力してください"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("XMR アドレスを入力してください"),
         "enterPasswordHint": MessageLookupByLibrary.simpleMessage("パスワードを入力する"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage("分割金額を入力"),
         "enterUserOrAddress":
@@ -512,6 +517,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("リクエスト中"),
         "requireAPasswordToOpenHeader":
             MessageLookupByLibrary.simpleMessage("Nautilusを開く際にパスワードを要求しますか?"),
+        "requireCaptcha":
+            MessageLookupByLibrary.simpleMessage("ギフトカードを受け取るには CAPTCHA が必要です"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("このメモを再送する"),
         "resetDatabase": MessageLookupByLibrary.simpleMessage("データベースをリセットする"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -608,6 +615,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("ヘルプ サポート開発"),
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("開発者を支援する"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("スワップXMR"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("スワップモネロ"),
+        "swapping": MessageLookupByLibrary.simpleMessage("スワッピング"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("シードに切り替える"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("システムのデフォルト言語"),
         "tapMessageToEdit":

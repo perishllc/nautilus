@@ -109,6 +109,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Advarsel om forbindelse"),
         "cancel": MessageLookupByLibrary.simpleMessage("Zrušit"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "For at forhindre misbrug kræver vi, at du løser en captcha for at gøre krav på gavekortet på næste side."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Změna měny"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Skift log"),
         "changeRepAuthenticate":
@@ -223,6 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Indtast gave note"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Indtast Besked"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("Indtast XMR-adresse"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Zadejte vaše heslo"),
         "enterSplitAmount":
@@ -583,6 +588,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("Anmoder"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Vyžadovat heslo k otevření Nautilus?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "Kræv CAPTCHA for at gøre krav på gavekort"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Send dette notat igen"),
         "resetDatabase":
@@ -698,6 +705,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hjælp med at støtte udvikling"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("Støt udvikleren"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("Byt XMR"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("Byt Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("Bytte"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Přepnout na semínko"),
         "systemDefault":

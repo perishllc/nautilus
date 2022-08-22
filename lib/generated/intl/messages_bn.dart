@@ -115,6 +115,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("সংযোগ সতর্কতা"),
         "cancel": MessageLookupByLibrary.simpleMessage("বাতিল"),
+        "captchaWarning": MessageLookupByLibrary.simpleMessage("ক্যাপচা"),
+        "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
+            "অপব্যবহার প্রতিরোধ করার জন্য, পরবর্তী পৃষ্ঠায় উপহার কার্ড দাবি করার জন্য আপনাকে একটি ক্যাপচা সমাধান করতে হবে।"),
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("মুদ্রা পরিবর্তন"),
         "changeLog": MessageLookupByLibrary.simpleMessage("লগ পরিবর্তন করুন"),
@@ -231,6 +234,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("উপহার নোট লিখুন"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("বার্তা লিখুন"),
+        "enterMoneroAddress":
+            MessageLookupByLibrary.simpleMessage("XMR ঠিকানা লিখুন"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("আপনার পাসওয়ার্ড লিখুন"),
         "enterSplitAmount":
@@ -595,6 +600,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requesting": MessageLookupByLibrary.simpleMessage("অনুরোধ করা"),
         "requireAPasswordToOpenHeader": MessageLookupByLibrary.simpleMessage(
             "Natrium খুলতে একটি পাসওয়ার্ড প্রয়োজন?"),
+        "requireCaptcha": MessageLookupByLibrary.simpleMessage(
+            "উপহার কার্ড দাবি করার জন্য ক্যাপচা প্রয়োজন"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("এই মেমো পুনরায় পাঠন করুন"),
         "resetDatabase":
@@ -712,6 +719,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("সাহায্য সমর্থন উন্নয়ন"),
         "supportTheDeveloper":
             MessageLookupByLibrary.simpleMessage("ডেভেলপারকে সহায়তা করুন"),
+        "swapXMR": MessageLookupByLibrary.simpleMessage("অদলবদল XMR"),
+        "swapXMRHeader": MessageLookupByLibrary.simpleMessage("অদলবদল Monero"),
+        "swapping": MessageLookupByLibrary.simpleMessage("অদলবদল"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("সিডে চলে যান"),
         "systemDefault":
             MessageLookupByLibrary.simpleMessage("সিস্টেমের ডিফল্ট"),

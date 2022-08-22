@@ -115,7 +115,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
               _addressController!.text = formattedAddress;
             });
           }
-          final List<User> userList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(formattedAddress);
+          final List<User> userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
           setState(() {
             _users = userList;
           });
@@ -398,7 +398,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
             _users = [];
           });
         } else if (isUser || isDomain) {
-          final List<User> matchedList = await sl.get<DBHelper>().getUserSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          final List<User> matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
           });
@@ -489,37 +489,30 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
         }
       }
     } else {
-      // we're dealing with a username:
-      final bool accountExists = await sl.get<DBHelper>().watchAccountExistsWithAddress(formattedAddress);
-      if (accountExists) {
-        isValid = false;
+      // check if there's a corresponding address:
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+      if (user != null && user.address != null) {
         setState(() {
-          _addressValidationText = AppLocalization.of(context).watchAccountExists;
+          _correspondingAddress = user.address;
         });
-      } else {
-        // check if there's a corresponding address:
-        final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
-        if (user != null) {
-          setState(() {
-            if (user.address != null) {
-              _correspondingAddress = user.address;
-            }
-            if (user.nickname != null && user.nickname!.isNotEmpty) {
-              isValid = false;
-              setState(() {
-                _addressValidationText = AppLocalization.of(context).watchAccountExists;
-              });
-            }
-          });
-        } else {
+
+        // we're dealing with a username:
+        final bool accountExists = await sl.get<DBHelper>().watchAccountExistsWithAddress(user.address!);
+        if (accountExists) {
           isValid = false;
           setState(() {
-            _addressValidationText = (formattedAddress.contains(".") || formattedAddress.contains(r"$"))
-                ? AppLocalization.of(context).domainInvalid
-                : AppLocalization.of(context).userNotFound;
+            _addressValidationText = AppLocalization.of(context).watchAccountExists;
           });
         }
+      } else {
+        isValid = false;
+        setState(() {
+          _addressValidationText = (formattedAddress.contains(".") || formattedAddress.contains(r"$"))
+              ? AppLocalization.of(context).domainInvalid
+              : AppLocalization.of(context).userNotFound;
+        });
       }
+
       // }
       // reset corresponding username if invalid:
       if (isValid == false && _correspondingUsername != null) {
