@@ -321,7 +321,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftCardCreationError": MessageLookupByLibrary.simpleMessage(
             "Beim Versuch, einen Geschenkkarten-Link zu erstellen, ist ein Fehler aufgetreten"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
-            "Beim Versuch, eine Geschenkkarte zu erstellen, ist ein Fehler aufgetreten. DER LINK ODER SEED DER GESCHENKKARTE WURDE IN IHRE ZWISCHENABLAGE KOPIERT. IHRE GELDKÖNNEN DARIN ENTHALTEN SEIN, JE NACHDEM, WAS FEHLERGEHEN IST."),
+            "Beim Versuch, eine Geschenkkarte zu erstellen, ist ein Fehler aufgetreten! Der Link zur Geschenkkarte und zum Download von Nautilus, mit Seed (getrennt von einem ^ Zeichen) wurde in ihre Zwischenablage kopiert. Je nach Fehlerart ist es möglich, dass die übertragenen Nanos wieder hergestellt werden können."),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Geschenk von"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Laden Sie eine digitale Geschenkkarte mit NANO! Legen Sie einen Betrag und optional eine Nachricht fest, damit der Empfänger sehen kann, wenn er ihn öffnet!\n\nNach der Erstellung erhalten Sie einen Link, den Sie an jeden senden können. Wenn er geöffnet wird, wird das Geld nach der Installation von Nautilus automatisch an den Empfänger verteilt!\n\nWenn der Empfänger bereits Nautilus-Benutzer ist, wird er beim Öffnen des Links aufgefordert, das Geld auf sein Konto zu überweisen."),
@@ -730,6 +730,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "swapXMR": MessageLookupByLibrary.simpleMessage("XMR tauschen"),
         "swapXMRHeader":
             MessageLookupByLibrary.simpleMessage("Monero tauschen"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "Monero ist eine datenschutzorientierte Kryptowährung, die es sehr schwierig oder sogar unmöglich macht, Transaktionen zu verfolgen. Inzwischen ist NANO eine zahlungsorientierte Kryptowährung, die schnell und gebührenfrei ist. Zusammen bieten sie einige der nützlichsten Aspekte von Kryptowährungen!\n\nVerwenden Sie diese Seite, um Ihren NANO ganz einfach gegen XMR auszutauschen!"),
         "swapping": MessageLookupByLibrary.simpleMessage("Austauschen"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Zum Seed wechseln"),

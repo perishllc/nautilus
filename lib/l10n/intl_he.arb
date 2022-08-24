@@ -2150,6 +2150,11 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
+  "swapXMRInfo": "Monero הוא מטבע קריפטוגרפי ממוקד פרטיות שמקשה מאוד או אפילו בלתי אפשרי לעקוב אחר עסקאות. בינתיים NANO הוא מטבע קריפטוגרפי ממוקד תשלומים שהוא מהיר וללא עמלות. יחד הם מספקים כמה מההיבטים השימושיים ביותר של מטבעות קריפטוגרפיים!\n\nהשתמש בדף זה כדי להחליף בקלות את ה-NANO שלך עבור XMR!",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "Switch to Seed",
   "@switchToSeed": {
     "type": "text",

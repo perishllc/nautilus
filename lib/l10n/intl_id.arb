@@ -2150,6 +2150,11 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
+  "swapXMRInfo": "Monero adalah cryptocurrency yang berfokus pada privasi yang membuatnya sangat sulit atau bahkan tidak mungkin untuk melacak transaksi. Sementara itu NANO adalah cryptocurrency yang berfokus pada pembayaran yang cepat dan tanpa biaya. Bersama-sama mereka menyediakan beberapa aspek cryptocurrency yang paling berguna!\n\nGunakan halaman ini untuk menukar NANO Anda dengan XMR dengan mudah!",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "Pindah Ke Benih Lain",
   "@switchToSeed": {
     "type": "text",

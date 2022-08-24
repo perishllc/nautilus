@@ -69,7 +69,7 @@ Future<void> main() async {
   if (!kReleaseMode) {
     // we have to stall for whatever reason in debug mode
     // otherwise the app doesn't start properly (black screen)
-    await Future<dynamic>.delayed(const Duration(seconds: 2));
+    await Future<dynamic>.delayed(const Duration(seconds: 3));
   }
   // Run app
   if (kReleaseMode) {

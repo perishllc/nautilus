@@ -706,6 +706,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("डेवलपर का समर्थन करें"),
         "swapXMR": MessageLookupByLibrary.simpleMessage("स्वैप एक्सएमआर"),
         "swapXMRHeader": MessageLookupByLibrary.simpleMessage("स्वैप मोनेरो"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "मोनेरो एक गोपनीयता-केंद्रित क्रिप्टोक्यूरेंसी है जो लेनदेन का पता लगाना बहुत कठिन या असंभव बना देता है। इस बीच नैनो एक भुगतान-केंद्रित क्रिप्टोक्यूरेंसी है जो तेज और शुल्क-रहित है। साथ में वे क्रिप्टोकरेंसी के कुछ सबसे उपयोगी पहलू प्रदान करते हैं!\n\nएक्सएमआर के लिए अपने नैनो को आसानी से स्वैप करने के लिए इस पेज का उपयोग करें!"),
         "swapping": MessageLookupByLibrary.simpleMessage("अदला-बदली"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("सीड पर स्विच करें"),

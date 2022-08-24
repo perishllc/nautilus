@@ -2150,6 +2150,11 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
+  "swapXMRInfo": "门罗币是一种以隐私为中心的加密货币，它使得追踪交易变得非常困难甚至不可能。同时，NANO 是一种以支付为中心的加密货币，速度快，费用低。它们一起提供了加密货币的一些最有用的方面！\n\n使用此页面轻松将您的 NANO 换成 XMR！",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "转换成种子",
   "@switchToSeed": {
     "type": "text",

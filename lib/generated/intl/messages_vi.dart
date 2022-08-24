@@ -713,6 +713,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "swapXMR": MessageLookupByLibrary.simpleMessage("Hoán đổi XMR"),
         "swapXMRHeader":
             MessageLookupByLibrary.simpleMessage("Hoán đổi Monero"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "Monero là một loại tiền điện tử tập trung vào quyền riêng tư nên rất khó hoặc thậm chí không thể theo dõi các giao dịch. Trong khi đó NANO là một loại tiền điện tử tập trung vào thanh toán, nhanh chóng và không mất phí. Họ cùng nhau cung cấp một số khía cạnh hữu ích nhất của tiền điện tử!\n\nSử dụng trang này để dễ dàng hoán đổi NANO của bạn lấy XMR!"),
         "swapping": MessageLookupByLibrary.simpleMessage("Hoán đổi"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Chuyển sang hạt giống"),

@@ -7,13 +7,16 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
+import 'package:nautilus_wallet_flutter/localize.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
@@ -65,6 +68,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool landscape = MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
@@ -79,52 +83,72 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
             children: <Widget>[
               // A widget that holds welcome animation + paragraph
               Expanded(
-                child: Column(
+                child: Flex(
+                  direction: landscape ? Axis.horizontal : Axis.vertical,
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: landscape ? MainAxisAlignment.center : MainAxisAlignment.start,
                   children: <Widget>[
                     //Container for the animation
                     Container(
-                      margin: const EdgeInsets.only(
-                        bottom: 30,
-                      ),
+                      width: MediaQuery.of(context).size.width / 2,
+                      margin: const EdgeInsets.only(bottom: 30),
                       // Width/Height ratio for the animation is needed because BoxFit is not working as expected
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.width * 4 / 8,
+                      // width: double.infinity,
+                      // width: MediaQuery.of(context).size.width / 2,
+                      // constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 2),
+                      // height: MediaQuery.of(context).size.width * 4 / 8,
                       // width: MediaQuery.of(context).size.width,
-                      child: const Center(
-                        child: Image(image: AssetImage("assets/logo.png")),
-                      ),
+
+                      child: Image.asset("assets/logo.png"),
                     ),
 
-                    Container(
-                      color: Colors.white,
-                      // padding: EdgeInsets.zero,
-                      // padding: const EdgeInsets.only(top: 5, bottom: 5),
-                      // width: double.infinity,
-                      width: MediaQuery.of(context).size.width,
-                      child: TextLiquidFill(
-                        text: "NAUTILUS",
-                        waveColor: Colors.blueAccent,
-                        boxBackgroundColor: Colors.black,
-                        textStyle: const TextStyle(
-                          fontSize: 60.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        boxHeight: 100.0,
-                        boxWidth: double.infinity,
-                        loadDuration: const Duration(seconds: 3),
-                        waveDuration: const Duration(seconds: 3),
-                        loadUntil: 0.5,
-                      ),
-                    ),
-                    //Container for the paragraph
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 30 : 40, vertical: 20),
-                      child: AutoSizeText(
-                        AppLocalization.of(context).welcomeTextUpdated,
-                        style: AppStyles.textStyleParagraph(context),
-                        maxLines: 4,
-                        stepGranularity: 0.5,
+                    SizedBox(
+                      width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(top: 5),
+                                color: Colors.white,
+                                // padding: EdgeInsets.zero,
+                                // width: double.infinity,
+                                width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
+                                height: 95,
+                              ),
+                              Container(
+                                // color: Colors.white,
+                                padding: EdgeInsets.zero,
+                                // padding: const EdgeInsets.all(10),
+                                // width: double.infinity,
+                                width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
+                                child: TextLiquidFill(
+                                  text: CaseChange.toUpperCase(NonTranslatable.nautilus, context),
+                                  waveColor: NautilusTheme.nautilusBlue,
+                                  boxBackgroundColor: Colors.black,
+                                  textStyle: const TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold, color: Colors.white),
+                                  boxHeight: 100.0,
+                                  boxWidth: double.infinity,
+                                  loadDuration: const Duration(seconds: 3),
+                                  waveDuration: const Duration(seconds: 3),
+                                  loadUntil: 0.5,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          // Container for the paragraph
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 30 : 40, vertical: 20),
+                            child: AutoSizeText(
+                              AppLocalization.of(context).welcomeTextUpdated,
+                              style: AppStyles.textStyleParagraph(context),
+                              maxLines: 4,
+                              stepGranularity: 0.5,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -211,45 +235,6 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Text("${AppLocalization.of(context).importGiftIntro}\n\n", style: AppStyles.textStyleParagraph(context)),
-                // RichText(
-                //   textAlign: TextAlign.start,
-                //   text: TextSpan(
-                //     text: "${AppLocalization.of(context).giftFrom}: ",
-                //     style: AppStyles.textStyleParagraph(context),
-                //     children: [
-                //       TextSpan(
-                //         text: "${userOrFromAddress}\n",
-                //         style: AppStyles.textStyleParagraphPrimary(context),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // if (memo.isNotEmpty)
-                //   Text(
-                //     "${AppLocalization.of(context).giftMessage}: $memo\n",
-                //     style: AppStyles.textStyleParagraph(context),
-                //   ),
-                // RichText(
-                //   textAlign: TextAlign.start,
-                //   text: TextSpan(
-                //     text: "${AppLocalization.of(context).giftAmount}: ",
-                //     style: AppStyles.textStyleParagraph(context),
-                //     children: [
-                //       TextSpan(
-                //         text: getThemeAwareRawAccuracy(context, balance.toString()),
-                //         style: AppStyles.textStyleParagraphPrimary(context),
-                //       ),
-                //       displayCurrencySymbol(
-                //         context,
-                //         AppStyles.textStyleParagraphPrimary(context),
-                //       ),
-                //       TextSpan(
-                //         text: actualAmount,
-                //         style: AppStyles.textStyleParagraphPrimary(context),
-                //       ),
-                //     ],
-                //   ),
-                // ),
               ],
             ),
             actionsAlignment: MainAxisAlignment.end,

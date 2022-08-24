@@ -707,6 +707,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Støt udvikleren"),
         "swapXMR": MessageLookupByLibrary.simpleMessage("Byt XMR"),
         "swapXMRHeader": MessageLookupByLibrary.simpleMessage("Byt Monero"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "Monero er en privatlivsfokuseret kryptovaluta, der gør det meget svært eller endda umuligt at spore transaktioner. I mellemtiden er NANO en betalingsfokuseret kryptovaluta, der er hurtig og gebyrfri. Sammen giver de nogle af de mest nyttige aspekter af kryptovalutaer!\n\nBrug denne side til nemt at bytte din NANO ud med XMR!"),
         "swapping": MessageLookupByLibrary.simpleMessage("Bytte"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Přepnout na semínko"),

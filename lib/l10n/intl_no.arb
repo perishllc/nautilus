@@ -2150,6 +2150,11 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
+  "swapXMRInfo": "Monero er en personvernfokusert kryptovaluta som gjør det svært vanskelig eller til og med umulig å spore transaksjoner. I mellomtiden er NANO en betalingsfokusert kryptovaluta som er rask og avgiftsfri. Sammen gir de noen av de mest nyttige aspektene ved kryptovalutaer!\n\nBruk denne siden til å enkelt bytte ut NANO-en din med XMR!",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "Bytt til Seed",
   "@switchToSeed": {
     "type": "text",

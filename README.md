@@ -2,19 +2,19 @@
 
 ![Cover](/assets/banner.png)
 
-### NANO Wallet with usernames, E2EE messages & memos, payment requests, and more.
+### Feature Packed NANO Wallet
 
 ___
 
-#### Features
+### Features
 - [x] Payment Requests to any Nautilus user
 - [x] E2EE Messages & Memos
-- [x] Editable Receive Screen
+- [x] QR-Code Editable Receive Screen
 - [x] Watch only addresses
 - [x] Username Support
    - [x] Nano.to Usernames
-   - [x] Unstoppable Domain addresses
-   - [x] Ethereum Name Service Usernames
+   - [x] Unstoppable Domain Names
+   - [x] Ethereum Name Service (ENS) Addresses
 - [x] Gift Card Creation & Redemption
    - [x] Send nano to anyone via a gift card link
 
@@ -32,19 +32,7 @@ ___
 
 ___
 
-## Contributing
+## Donate
 
-* Fork the repository and clone it to your local machine
-* Follow the instructions [here](https://flutter.io/docs/get-started/install) to install the Flutter SDK
-* Setup [Android Studio](https://flutter.io/docs/development/tools/android-studio) or [Visual Studio Code](https://flutter.io/docs/development/tools/vs-code).
-
-## Building
-
-* iOS: `flutter build ios`
-* Android: `flutter build apk`
-
-If you have a connected device or emulator you can run and deploy the app with `flutter run`
-
-## License
-
-Nautilus is released under the MIT License
+If you like this project, consider donating to Nautilus Node Adddress:
+[Donate](https://nano.to/nautilus)

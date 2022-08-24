@@ -735,6 +735,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "swapXMR": MessageLookupByLibrary.simpleMessage("Palitan ang XMR"),
         "swapXMRHeader":
             MessageLookupByLibrary.simpleMessage("Magpalit ng Monero"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "Ang Monero ay isang cryptocurrency na nakatuon sa privacy na ginagawang napakahirap o kahit imposibleng masubaybayan ang mga transaksyon. Samantala, ang NANO ay isang cryptocurrency na nakatuon sa pagbabayad na mabilis at walang bayad. Magkasama silang nagbibigay ng ilan sa mga pinakakapaki-pakinabang na aspeto ng cryptocurrencies!\n\nGamitin ang page na ito para madaling palitan ang iyong NANO para sa XMR!"),
         "swapping": MessageLookupByLibrary.simpleMessage("Pagpapalit"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Lumipat sa Seed"),
         "systemDefault":

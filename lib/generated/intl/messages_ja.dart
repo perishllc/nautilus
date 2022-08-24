@@ -617,6 +617,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("開発者を支援する"),
         "swapXMR": MessageLookupByLibrary.simpleMessage("スワップXMR"),
         "swapXMRHeader": MessageLookupByLibrary.simpleMessage("スワップモネロ"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "Monero はプライバシー重視の暗号通貨であり、トランザクションの追跡が非常に困難または不可能になっています。一方、NANO は決済に特化した高速で手数料のない暗号通貨です。一緒に、暗号通貨の最も有用な側面のいくつかを提供します!\n\nこのページを使用して、NANO を XMR に簡単に交換できます。"),
         "swapping": MessageLookupByLibrary.simpleMessage("スワッピング"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("シードに切り替える"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("システムのデフォルト言語"),

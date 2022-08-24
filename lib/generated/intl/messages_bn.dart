@@ -721,6 +721,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ডেভেলপারকে সহায়তা করুন"),
         "swapXMR": MessageLookupByLibrary.simpleMessage("অদলবদল XMR"),
         "swapXMRHeader": MessageLookupByLibrary.simpleMessage("অদলবদল Monero"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "Monero হল একটি গোপনীয়তা-কেন্দ্রিক ক্রিপ্টোকারেন্সি যা লেনদেন ট্রেস করা খুব কঠিন বা এমনকি অসম্ভব করে তোলে। এদিকে NANO হল একটি পেমেন্ট-কেন্দ্রিক ক্রিপ্টোকারেন্সি যা দ্রুত এবং ফি-কম। একসাথে তারা ক্রিপ্টোকারেন্সির সবচেয়ে দরকারী দিকগুলির কিছু প্রদান করে!\n\nXMR-এর জন্য সহজেই আপনার NANO অদলবদল করতে এই পৃষ্ঠাটি ব্যবহার করুন!"),
         "swapping": MessageLookupByLibrary.simpleMessage("অদলবদল"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("সিডে চলে যান"),
         "systemDefault":

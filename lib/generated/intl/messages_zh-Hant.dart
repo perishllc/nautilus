@@ -555,6 +555,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("支持開發人員"),
         "swapXMR": MessageLookupByLibrary.simpleMessage("交換 XMR"),
         "swapXMRHeader": MessageLookupByLibrary.simpleMessage("交換門羅幣"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "門羅幣是一種以隱私為中心的加密貨幣，它使得追踪交易變得非常困難甚至不可能。同時，NANO 是一種以支付為中心的加密貨幣，速度快，費用低。它們一起提供了加密貨幣的一些最有用的方面！\n\n使用此頁面輕鬆將您的 NANO 換成 XMR！"),
         "swapping": MessageLookupByLibrary.simpleMessage("交換"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("轉換為種子"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("系統預設"),

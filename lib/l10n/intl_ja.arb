@@ -2150,6 +2150,11 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
+  "swapXMRInfo": "Monero はプライバシー重視の暗号通貨であり、トランザクションの追跡が非常に困難または不可能になっています。一方、NANO は決済に特化した高速で手数料のない暗号通貨です。一緒に、暗号通貨の最も有用な側面のいくつかを提供します!\n\nこのページを使用して、NANO を XMR に簡単に交換できます。",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "シードに切り替える",
   "@switchToSeed": {
     "type": "text",

@@ -880,7 +880,7 @@
     "type": "text",
     "description": "create_gift_error"
   },
-  "giftCardCreationErrorSent": "Beim Versuch, eine Geschenkkarte zu erstellen, ist ein Fehler aufgetreten. DER LINK ODER SEED DER GESCHENKKARTE WURDE IN IHRE ZWISCHENABLAGE KOPIERT. IHRE GELDKÖNNEN DARIN ENTHALTEN SEIN, JE NACHDEM, WAS FEHLERGEHEN IST.",
+  "giftCardCreationErrorSent": "Beim Versuch, eine Geschenkkarte zu erstellen, ist ein Fehler aufgetreten! Der Link zur Geschenkkarte und zum Download von Nautilus, mit Seed (getrennt von einem ^ Zeichen) wurde in ihre Zwischenablage kopiert. Je nach Fehlerart ist es möglich, dass die übertragenen Nanos wieder hergestellt werden können.",
   "@giftCardCreationErrorSent": {
     "type": "text",
     "description": "gift_generic_error"
@@ -2147,6 +2147,11 @@
   },
   "swapXMRHeader": "Monero tauschen",
   "@swapXMRHeader": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
+  "swapXMRInfo": "Monero ist eine datenschutzorientierte Kryptowährung, die es sehr schwierig oder sogar unmöglich macht, Transaktionen zu verfolgen. Inzwischen ist NANO eine zahlungsorientierte Kryptowährung, die schnell und gebührenfrei ist. Zusammen bieten sie einige der nützlichsten Aspekte von Kryptowährungen!\n\nVerwenden Sie diese Seite, um Ihren NANO ganz einfach gegen XMR auszutauschen!",
+  "@swapXMRInfo": {
     "type": "text",
     "description": "swap_xmr_header"
   },

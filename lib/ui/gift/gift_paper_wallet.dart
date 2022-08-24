@@ -389,7 +389,6 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                       Row(children: <Widget>[
                         SizedBox(width: MediaQuery.of(context).size.width * 0.105),
                         Checkbox(
-                          // fillColor: StateContainer.of(context).curTheme.primary!,
                           activeColor: StateContainer.of(context).curTheme.primary,
                           value: requireCaptcha,
                           onChanged: (bool? value) {
@@ -408,7 +407,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                           AppLocalization.of(context).requireCaptcha,
                           style: TextStyle(
                             fontSize: 14.0,
-                            color: StateContainer.of(context).curTheme.primary,
+                            color: StateContainer.of(context).curTheme.text,
                             fontFamily: 'NunitoSans',
                             fontWeight: FontWeight.w600,
                           ),

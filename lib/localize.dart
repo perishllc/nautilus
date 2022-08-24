@@ -97,4 +97,8 @@ class NonTranslatable {
   static String get hcaptchaUrl {
     return "https://perish.co/hcaptcha";
   }
+
+  static String get nautilus {
+    return "Nautilus";
+  }
 }

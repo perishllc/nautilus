@@ -2150,6 +2150,11 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
+  "swapXMRInfo": "Monero is een op privacy gerichte cryptocurrency die het erg moeilijk of zelfs onmogelijk maakt om transacties te traceren. Ondertussen is NANO een op betalingen gerichte cryptocurrency die snel en kosteloos is. Samen bieden ze enkele van de meest bruikbare aspecten van cryptocurrencies!\n\nGebruik deze pagina om eenvoudig je NANO om te wisselen voor XMR!",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "Schakel over naar seed",
   "@switchToSeed": {
     "type": "text",

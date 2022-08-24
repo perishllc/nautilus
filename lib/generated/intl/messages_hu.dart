@@ -720,6 +720,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "swapXMR": MessageLookupByLibrary.simpleMessage("Cserélje ki az XMR-t"),
         "swapXMRHeader":
             MessageLookupByLibrary.simpleMessage("Cseréld Monero-t"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "A Monero egy adatvédelmi központú kriptovaluta, amely nagyon megnehezíti vagy akár lehetetlenné teszi a tranzakciók nyomon követését. Eközben a NANO egy fizetésre összpontosító kriptovaluta, amely gyors és díjmentes. Együtt biztosítják a kriptovaluták leghasznosabb aspektusait!\n\nEzen az oldalon egyszerűen lecserélheti NANO-ját XMR-re!"),
         "swapping": MessageLookupByLibrary.simpleMessage("Csere"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Switch to Seed"),
         "systemDefault":

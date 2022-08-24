@@ -109,7 +109,7 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
               },
               child: Container(
                 alignment: AlignmentDirectional.center,
-                margin: const EdgeInsets.only(bottom: 25),
+                margin: const EdgeInsets.only(top: 20),
                 child: Icon(AppIcons.success, size: 100, color: StateContainer.of(context).curTheme.success),
               ),
             ),
@@ -126,14 +126,14 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      // Container for the "CREATED" text
+                      // Container for the "LOADED" text
                       Container(
-                        margin: const EdgeInsets.only(top: 10.0, bottom: 10),
+                        margin: const EdgeInsets.only(top: 10, bottom: 10),
                         child: Column(
                           children: <Widget>[
                             // "SENT TO" text
                             Text(
-                              CaseChange.toUpperCase(AppLocalization.of(context).created, context),
+                              CaseChange.toUpperCase(AppLocalization.of(context).loaded, context),
                               style: TextStyle(
                                 fontSize: 28.0,
                                 fontWeight: FontWeight.w700,

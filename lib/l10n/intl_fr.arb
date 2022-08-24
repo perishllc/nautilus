@@ -2150,6 +2150,11 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
+  "swapXMRInfo": "Monero est une crypto-monnaie axée sur la confidentialité qui rend très difficile, voire impossible, le suivi des transactions. Pendant ce temps, NANO est une crypto-monnaie axée sur les paiements, rapide et sans frais. Ensemble, ils fournissent certains des aspects les plus utiles des crypto-monnaies !\n\nUtilisez cette page pour échanger facilement votre NANO contre XMR !",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "Utiliser une clé privée",
   "@switchToSeed": {
     "type": "text",

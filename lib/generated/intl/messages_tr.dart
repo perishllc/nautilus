@@ -701,6 +701,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "swapXMR": MessageLookupByLibrary.simpleMessage("XMR\'yi Değiştir"),
         "swapXMRHeader":
             MessageLookupByLibrary.simpleMessage("Monero\'yu Değiştir"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "Monero, işlemleri izlemeyi çok zor hatta imkansız kılan gizlilik odaklı bir kripto para birimidir. Bu arada NANO, hızlı ve ücretsiz, ödeme odaklı bir kripto para birimidir. Birlikte kripto para birimlerinin en faydalı yönlerinden bazılarını sağlarlar!\n\nNANO\'nuzu XMR ile kolayca değiştirmek için bu sayfayı kullanın!"),
         "swapping": MessageLookupByLibrary.simpleMessage("takas"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Seede Geç"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Sistem Dili"),

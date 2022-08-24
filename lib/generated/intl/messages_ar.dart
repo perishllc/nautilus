@@ -695,6 +695,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("دعم المطور"),
         "swapXMR": MessageLookupByLibrary.simpleMessage("مبادلة XMR"),
         "swapXMRHeader": MessageLookupByLibrary.simpleMessage("مبادلة مونيرو"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "Monero هي عملة مشفرة تركز على الخصوصية وتجعل من الصعب جدًا أو حتى المستحيل تتبع المعاملات. وفي الوقت نفسه ، NANO هي عملة مشفرة تركز على المدفوعات وهي سريعة وبدون رسوم. يوفران معًا بعض الجوانب الأكثر فائدة للعملات المشفرة!\n\nاستخدم هذه الصفحة لتبديل NANO الخاص بك بـ XMR بسهولة!"),
         "swapping": MessageLookupByLibrary.simpleMessage("مبادلة"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("التبديل إلى المفتاح الخاص"),

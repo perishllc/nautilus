@@ -628,6 +628,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("개발자 지원"),
         "swapXMR": MessageLookupByLibrary.simpleMessage("XMR 교환"),
         "swapXMRHeader": MessageLookupByLibrary.simpleMessage("스왑 모네로"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "Monero는 개인 정보 보호에 중점을 둔 암호화폐로 거래를 추적하기가 매우 어렵거나 불가능합니다. 한편 NANO는 빠르고 수수료가 없는 지불 중심의 암호화폐입니다. 함께 그들은 cryptocurrencies의 가장 유용한 측면 중 일부를 제공합니다!\n\n이 페이지를 사용하여 NANO를 XMR로 쉽게 교체하십시오!"),
         "swapping": MessageLookupByLibrary.simpleMessage("스와핑"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Switch to Seed"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("전화 언어"),

@@ -2150,6 +2150,11 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
+  "swapXMRInfo": "Monero ialah mata wang kripto tertumpu kepada privasi yang menjadikannya sangat sukar atau bahkan mustahil untuk mengesan transaksi. Sementara itu NANO ialah mata wang kripto tertumpu kepada pembayaran yang pantas dan tanpa bayaran. Bersama-sama mereka menyediakan beberapa aspek yang paling berguna dalam mata wang kripto!\n\nGunakan halaman ini untuk menukar NANO anda dengan XMR dengan mudah!",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "Beralih kepada Benih",
   "@switchToSeed": {
     "type": "text",

@@ -708,6 +708,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Support the Developer"),
         "swapXMR": MessageLookupByLibrary.simpleMessage("Canvia XMR"),
         "swapXMRHeader": MessageLookupByLibrary.simpleMessage("Canvia Monero"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "Monero és una criptomoneda centrada en la privadesa que fa que sigui molt difícil o fins i tot impossible rastrejar les transaccions. Mentrestant, NANO és una criptomoneda centrada en els pagaments que és ràpida i sense comissions. Junts proporcionen alguns dels aspectes més útils de les criptomonedes!\n\nUtilitzeu aquesta pàgina per canviar fàcilment el vostre NANO per XMR!"),
         "swapping": MessageLookupByLibrary.simpleMessage("Canvi"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Přepnout na semínko"),

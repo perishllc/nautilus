@@ -2150,6 +2150,11 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
+  "swapXMRInfo": "Monero este o criptomonedă axată pe confidențialitate, care face foarte dificilă sau chiar imposibilă urmărirea tranzacțiilor. Între timp, NANO este o criptomonedă axată pe plăți, rapidă și fără taxe. Împreună, oferă unele dintre cele mai utile aspecte ale criptomonedelor!\n\nUtilizați această pagină pentru a schimba cu ușurință NANO-ul dvs. cu XMR!",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "Folosește seed-ul",
   "@switchToSeed": {
     "type": "text",

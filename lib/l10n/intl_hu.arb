@@ -2150,6 +2150,11 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
+  "swapXMRInfo": "A Monero egy adatvédelmi központú kriptovaluta, amely nagyon megnehezíti vagy akár lehetetlenné teszi a tranzakciók nyomon követését. Eközben a NANO egy fizetésre összpontosító kriptovaluta, amely gyors és díjmentes. Együtt biztosítják a kriptovaluták leghasznosabb aspektusait!\n\nEzen az oldalon egyszerűen lecserélheti NANO-ját XMR-re!",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "Switch to Seed",
   "@switchToSeed": {
     "type": "text",

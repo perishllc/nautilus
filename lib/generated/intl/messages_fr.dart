@@ -733,6 +733,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "swapXMR": MessageLookupByLibrary.simpleMessage("Échanger XMR"),
         "swapXMRHeader":
             MessageLookupByLibrary.simpleMessage("Échanger Monero"),
+        "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
+            "Monero est une crypto-monnaie axée sur la confidentialité qui rend très difficile, voire impossible, le suivi des transactions. Pendant ce temps, NANO est une crypto-monnaie axée sur les paiements, rapide et sans frais. Ensemble, ils fournissent certains des aspects les plus utiles des crypto-monnaies !\n\nUtilisez cette page pour échanger facilement votre NANO contre XMR !"),
         "swapping": MessageLookupByLibrary.simpleMessage("Échange"),
         "switchToSeed":
             MessageLookupByLibrary.simpleMessage("Utiliser une clé privée"),

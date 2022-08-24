@@ -158,7 +158,7 @@ class GiftCards {
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
     final String runningVersion = packageInfo.version;
     final http.Response response = await http.post(Uri.parse(AccountService.SERVER_ADDRESS_HTTP),
-        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken, "AppVersion": runningVersion, "hcaptcha-token": hcaptchaToken ?? ""},
+        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken, "app-version": runningVersion, "hcaptcha-token": hcaptchaToken ?? ""},
         body: json.encode(
           {
             "action": "gift_claim",

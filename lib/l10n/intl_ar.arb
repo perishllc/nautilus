@@ -2150,6 +2150,11 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
+  "swapXMRInfo": "Monero هي عملة مشفرة تركز على الخصوصية وتجعل من الصعب جدًا أو حتى المستحيل تتبع المعاملات. وفي الوقت نفسه ، NANO هي عملة مشفرة تركز على المدفوعات وهي سريعة وبدون رسوم. يوفران معًا بعض الجوانب الأكثر فائدة للعملات المشفرة!\n\nاستخدم هذه الصفحة لتبديل NANO الخاص بك بـ XMR بسهولة!",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "التبديل إلى المفتاح الخاص",
   "@switchToSeed": {
     "type": "text",

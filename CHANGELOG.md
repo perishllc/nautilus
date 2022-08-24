@@ -1,10 +1,15 @@
 ## v0.6.0 - [2022-08-XX]
 #### Added
 - Checkbox option to require a captcha in order to redeem a gift card
+- Integrated Monero (XMR) exchange (WIP)
+- perish.co/promo
 #### Changed
+- Better support for landscape views / iPads
+- Updated Gift Cards to look a lot more modern and added a custom page for Desktop links
 #### Fixed
 - Minor visual fixes on the add accounts sheet
 - Fixes for adding watch only accounts
+- Fixed rendering glitch on the intro screen + minor tweaks to image size and positioning
 ## v0.5.9 - [2022-08-19]
 #### Added
 - Button to export transaction data / history in the more settings menu

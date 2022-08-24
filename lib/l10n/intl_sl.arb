@@ -2150,6 +2150,11 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
+  "swapXMRInfo": "Monero je kriptovaluta, osredotočena na zasebnost, zaradi katere je zelo težko ali celo nemogoče slediti transakcijam. Medtem je NANO kriptovaluta, osredotočena na plačila, ki je hitra in brez provizij. Skupaj zagotavljajo nekaj najbolj uporabnih vidikov kriptovalut!\n\nUporabite to stran za preprosto zamenjavo NANO za XMR!",
+  "@swapXMRInfo": {
+    "type": "text",
+    "description": "swap_xmr_header"
+  },
   "switchToSeed": "Preklopi na zasebni ključ",
   "@switchToSeed": {
     "type": "text",
