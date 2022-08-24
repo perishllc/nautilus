@@ -11,42 +11,48 @@
    <img src="https://imagedelivery.net/uA65-M4gr037oB0C4RNdvw/9c7fac39-90e5-47e7-48f5-ef6b40e81900/public" width="200">
 </a>
 
-___
+---
 
 ### Features
+
 - [x] Payment Requests to any Nautilus user
 - [x] E2EE Messages & Memos
 - [x] QR-Code Editable Receive Screen
 - [x] Watch only addresses
 - [x] Full support for usernames and aliases
-   - [x] [Nano.to](https://nano.to) Usernames
-   - [x] [OpenCAP](https://github.com/opencap/protocol) Alias support ex: `xno$kga.earth`
-   - [x] Unstoppable Domain Names
-   - [x] Ethereum Name Service (ENS) Addresses
+  - [x] [Nano.to](https://nano.to) Usernames
+  - [x] [OpenCAP](https://github.com/opencap/protocol) Alias support ex: `xno$kga.earth`
+  - [x] Unstoppable Domain Names
+  - [x] Ethereum Name Service (ENS) Addresses
 - [x] Gift Card Creation & Redemption
-   - [x] Send nano to anyone via a gift card link
+  - [x] Send nano to anyone via a gift card link
 - [x] Integrated Onramps, Offramps, Swaps and Services
-   - Onramps / Exchanges
-      - [x] [Onramper](https://onramper.com)
-      - [x] [Nanswap](https://nanswap.com)
-   - Services
-      - [x] [nanocafe](https://nanocafe.cc)
-      - [x] [redeemfor.me](https://redeemfor.me)
+  - Onramps / Exchanges
+    - [x] [Onramper](https://onramper.com)
+    - [x] [Nanswap](https://nanswap.com)
+  - Services
+    - [x] [nanocafe](https://nanocafe.cc)
+    - [x] [redeemfor.me](https://redeemfor.me)
 - [x] Support for `nanopay` and `nanoauth` URIs
 
-<div style="display: flex; flex-direction: row">
-   <img src="/screenshots/android/1080-2116/welcome_intro_screen.png" width="200">
-</div>
-<div style="display: flex; flex-direction: row">
-   <img src="/screenshots/android/1080-2116/home_demo_cards_screen.png" width="200">
-   <img src="/screenshots/android/1080-2116/receive_screen.png" width="200">
-</div>
-<div style="display: flex; flex-direction: row">
-   <img src="/screenshots/android/1080-2116/send_screen.png" width="200">
-   <img src="/screenshots/android/1080-2116/settings_drawer_screen.png" width="200">
-</div>
 
 ___
+
+<div style="display: flex; flex-direction: column; gap: 2px;">
+   <div style="display: flex; flex-direction: row; gap: 10px;">
+      <img style="border-radius: 15px;" src="/screenshots/android/1080-2116/welcome_intro_screen.png" width="200">
+   </div>
+   <div style="display: flex; flex-direction: row; gap: 10px;">
+      <img style="border-radius: 15px;" src="/screenshots/android/1080-2116/home_demo_cards_screen.png" width="200">
+      <img style="border-radius: 15px;" src="/screenshots/android/1080-2116/settings_drawer_screen.png" width="200">
+   </div>
+   <div style="display: flex; flex-direction: row; gap: 10px;">
+      <img style="border-radius: 15px;" src="/screenshots/android/1080-2116/send_screen.png" width="200">
+      <img style="border-radius: 15px;" src="/screenshots/android/1080-2116/receive_screen.png" width="200">
+   </div>
+</div>
+
+---
 
 ## Donate
 
