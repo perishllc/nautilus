@@ -319,6 +319,7 @@ class SendSheetState extends State<SendSheet> {
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               AppLocalization.of(context).notifications,
               style: AppStyles.textStyleDialogHeader(context),
@@ -386,6 +387,7 @@ class SendSheetState extends State<SendSheet> {
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               AppLocalization.of(context).needVerificationAlertHeader,
               style: AppStyles.textStyleDialogHeader(context),
@@ -446,6 +448,7 @@ class SendSheetState extends State<SendSheet> {
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               AppLocalization.of(context).fallbackHeader,
               style: AppStyles.textStyleDialogHeader(context),
@@ -454,7 +457,7 @@ class SendSheetState extends State<SendSheet> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text(AppLocalization.of(context).fallbackInfo + "\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${AppLocalization.of(context).fallbackInfo}\n\n", style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actions: <Widget>[
@@ -1061,7 +1064,7 @@ class SendSheetState extends State<SendSheet> {
 
                         // check if the user has enough balance to send this amount:
                         // If balance is insufficient show error:
-                        final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount!);
+                        final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount);
                         if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
                           UIUtil.showSnackbar(
                               AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),

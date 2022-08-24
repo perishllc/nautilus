@@ -179,7 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "createGiftCard":
             MessageLookupByLibrary.simpleMessage("Geschenkgutschein erstellen"),
         "createGiftHeader": MessageLookupByLibrary.simpleMessage(
-            "Erstellen Sie einen Geschenkgutschein"),
+            "Erstelle einen Geschenkgutschein"),
         "createPasswordFirstParagraph": MessageLookupByLibrary.simpleMessage(
             "Für zusätzliche Sicherheit kannst du ein Passwort festlegen."),
         "createPasswordHint":
@@ -207,7 +207,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Hauptkonto"),
         "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
-            "Schauen Sie sich Nautilus an! Ich habe dir Nano mit diesem Link geschickt:"),
+            "Schauen dir Nautilus an! Ich habe dir Nano mit diesem Link geschickt:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Name des neuen Kontos %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Löschen"),
@@ -313,7 +313,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Finanzierungsbanner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finanzierung"),
         "getNano": MessageLookupByLibrary.simpleMessage("Holen Sie sich Nano"),
-        "giftAlert": MessageLookupByLibrary.simpleMessage("Du hast eine Gabe!"),
+        "giftAlert":
+            MessageLookupByLibrary.simpleMessage("Du hast eine Geschenk!"),
         "giftAlertEmpty":
             MessageLookupByLibrary.simpleMessage("Leeres Geschenk"),
         "giftAmount":
@@ -329,7 +330,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "giftProcessError": MessageLookupByLibrary.simpleMessage(
             "Bei der Verarbeitung dieser Geschenkkarte ist ein Fehler aufgetreten. Überprüfen Sie vielleicht Ihre Verbindung und versuchen Sie erneut, auf den Geschenklink zu klicken."),
         "giftProcessSuccess": MessageLookupByLibrary.simpleMessage(
-            "Geschenk erfolgreich erhalten, es kann einen Moment dauern, bis es in Ihrer Brieftasche erscheint."),
+            "Geschenk erfolgreich erhalten, es kann einen Moment dauern, bis es in deiner Brieftasche erscheint."),
         "giftRefundSuccess": MessageLookupByLibrary.simpleMessage(
             "Geschenk erfolgreich erstattet!"),
         "giftWarning": MessageLookupByLibrary.simpleMessage(
@@ -501,7 +502,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Zahlen Sie diese Anfrage"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
-            "Jemand hat eine Zahlung von dir verlangt! Weitere Informationen finden Sie auf der Zahlungsseite."),
+            "Jemand hat eine Zahlung von dir verlangt! Weitere Informationen findest du auf der Zahlungsseite."),
         "payments": MessageLookupByLibrary.simpleMessage("Zahlungen"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Aus Liste wählen"),
@@ -737,7 +738,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Zum Seed wechseln"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("Systemsprache"),
         "tapMessageToEdit": MessageLookupByLibrary.simpleMessage(
-            "Tippen Sie auf die Nachricht, um sie zu bearbeiten"),
+            "Tippe auf die Nachricht, um sie zu bearbeiten"),
         "tapToHide":
             MessageLookupByLibrary.simpleMessage("Zum Verbergen tippen"),
         "tapToReveal":

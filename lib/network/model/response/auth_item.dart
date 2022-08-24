@@ -17,6 +17,9 @@ class AuthItem {
   @JsonKey(name: 'message', defaultValue: "")
   late String message;
 
+  @JsonKey(name: 'signature', defaultValue: "")
+  late String signature;
+
   @JsonKey(name: 'nonce', required: true)
   late String nonce;
 

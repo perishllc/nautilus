@@ -226,6 +226,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               AppLocalization.of(context).giftAlert,
               style: AppStyles.textStyleDialogHeader(context),

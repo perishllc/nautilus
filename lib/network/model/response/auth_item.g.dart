@@ -14,6 +14,7 @@ AuthItem _$AuthItemFromJson(Map<String, dynamic> json) {
   return AuthItem()
     ..label = json['label'] as String? ?? ''
     ..message = json['message'] as String? ?? ''
+    ..signature = json['signature'] as String? ?? ''
     ..nonce = json['nonce'] as String
     ..timestamp = json['timestamp'] as int
     ..account = json['account'] as String
@@ -28,6 +29,7 @@ AuthItem _$AuthItemFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$AuthItemToJson(AuthItem instance) => <String, dynamic>{
       'label': instance.label,
       'message': instance.message,
+      'signature': instance.signature,
       'nonce': instance.nonce,
       'timestamp': instance.timestamp,
       'account': instance.account,

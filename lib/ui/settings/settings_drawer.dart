@@ -405,6 +405,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               AppLocalization.of(context).authMethod,
               style: AppStyles.textStyleDialogHeader(context),
@@ -462,6 +463,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               AppLocalization.of(context).notifications,
               style: AppStyles.textStyleDialogHeader(context),
@@ -522,6 +524,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               AppLocalization.of(context).contactsHeader,
               style: AppStyles.textStyleDialogHeader(context),
@@ -575,6 +578,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -639,6 +643,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               AppLocalization.of(context).fundingBannerHeader,
               style: AppStyles.textStyleDialogHeader(context),
@@ -692,6 +697,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               AppLocalization.of(context).nyanicon,
               style: AppStyles.textStyleDialogHeader(context),
@@ -746,16 +752,17 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   }
 
   Future<String?> _onrampDialog() async {
-    final String onramper_url =
+    const String onramper_url =
         "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
-    final String moonpay_url = "https://buy.moonpay.com/?currencyCode=xno&colorCode=%234080D7";
-    final String simplex_url = "https://buy.chainbits.com";
+    const String moonpay_url = "https://buy.moonpay.com/?currencyCode=xno&colorCode=%234080D7";
+    const String simplex_url = "https://buy.chainbits.com";
 
     final String? choice = await showDialog<String>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               AppLocalization.of(context).onramp,
               style: AppStyles.textStyleDialogHeader(context),
@@ -849,6 +856,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -883,6 +891,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -917,6 +926,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               AppLocalization.of(context).lockAppSetting,
               style: AppStyles.textStyleDialogHeader(context),
@@ -992,6 +1002,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
@@ -1038,6 +1049,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
@@ -1083,6 +1095,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
               Text(
                 AppLocalization.of(context).blockExplorer,
@@ -1130,6 +1143,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
@@ -1175,6 +1189,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
@@ -1514,10 +1529,10 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           Navigator.of(context).pushNamed("/gift_paper_wallet");
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).swapXMR, AppIcons.swapcurrency, onPressed: () {
-          Navigator.of(context).pushNamed("/swap_xmr");
-        }),
-        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).swapXMR, AppIcons.swapcurrency, onPressed: () {
+        //   Navigator.of(context).pushNamed("/swap_xmr");
+        // }),
+        // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         Container(
           margin: const EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
           child: Text(AppLocalization.of(context).preferences,

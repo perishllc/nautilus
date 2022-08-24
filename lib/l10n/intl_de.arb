@@ -465,7 +465,7 @@
     "type": "text",
     "description": "create_gift_card"
   },
-  "createGiftHeader": "Erstellen Sie einen Geschenkgutschein",
+  "createGiftHeader": "Erstelle einen Geschenkgutschein",
   "@createGiftHeader": {
     "type": "text",
     "description": "create_gift_header"
@@ -540,7 +540,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "Schauen Sie sich Nautilus an! Ich habe dir Nano mit diesem Link geschickt:",
+  "defaultGiftMessage": "Schauen dir Nautilus an! Ich habe dir Nano mit diesem Link geschickt:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -860,7 +860,7 @@
     "type": "text",
     "description": "get_nano"
   },
-  "giftAlert": "Du hast eine Gabe!",
+  "giftAlert": "Du hast eine Geschenk!",
   "@giftAlert": {
     "type": "text",
     "description": "import_gift_header"
@@ -905,7 +905,7 @@
     "type": "text",
     "description": "gift_process_error"
   },
-  "giftProcessSuccess": "Geschenk erfolgreich erhalten, es kann einen Moment dauern, bis es in Ihrer Brieftasche erscheint.",
+  "giftProcessSuccess": "Geschenk erfolgreich erhalten, es kann einen Moment dauern, bis es in deiner Brieftasche erscheint.",
   "@giftProcessSuccess": {
     "type": "text",
     "description": "gift_process_success"
@@ -1430,7 +1430,7 @@
     "type": "text",
     "description": "home_pay_slidable"
   },
-  "paymentRequestMessage": "Jemand hat eine Zahlung von dir verlangt! Weitere Informationen finden Sie auf der Zahlungsseite.",
+  "paymentRequestMessage": "Jemand hat eine Zahlung von dir verlangt! Weitere Informationen findest du auf der Zahlungsseite.",
   "@paymentRequestMessage": {
     "type": "text",
     "description": "payment_request_message"
@@ -2165,7 +2165,7 @@
     "type": "text",
     "description": "settings_default_language_string"
   },
-  "tapMessageToEdit": "Tippen Sie auf die Nachricht, um sie zu bearbeiten",
+  "tapMessageToEdit": "Tippe auf die Nachricht, um sie zu bearbeiten",
   "@tapMessageToEdit": {
     "type": "text",
     "description": "gift_creation_message_edit_hint"

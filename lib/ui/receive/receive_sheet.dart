@@ -1034,6 +1034,9 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
             title: Text(
               AppLocalization.of(context).needVerificationAlertHeader,
               style: AppStyles.textStyleDialogHeader(context),

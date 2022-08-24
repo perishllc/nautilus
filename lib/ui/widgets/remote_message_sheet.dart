@@ -34,6 +34,9 @@ class RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
             title: Text(
               AppLocalization.of(context).notifications,
               style: AppStyles.textStyleDialogHeader(context),

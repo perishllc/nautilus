@@ -6,15 +6,16 @@ import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class BeforeScanScreen extends StatefulWidget {
   @override
-  _BeforeScanScreenState createState() => _BeforeScanScreenState();
+  BeforeScanScreenState createState() => BeforeScanScreenState();
 }
 
-class _BeforeScanScreenState extends State<BeforeScanScreen> {
+class BeforeScanScreenState extends State<BeforeScanScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 150), () async {
-      dynamic scanResult = await UserDataUtil.getQRData(DataType.DATA, context);
+    Future<dynamic>.delayed(const Duration(milliseconds: 150), () async {
+      final dynamic scanResult = await UserDataUtil.getQRData(DataType.DATA, context);
+      if (!mounted) return;
       Navigator.pop(context, scanResult);
     });
   }

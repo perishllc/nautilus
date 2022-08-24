@@ -44,8 +44,8 @@ Future<void> goBack(WidgetTester tester) async {
 Future<String> takeScreenshot() async {
   final RenderRepaintBoundary renderObj = find.byKey(const ValueKey('screenshotter')).evaluate().single.renderObject! as RenderRepaintBoundary;
 
-  double devicePixelRatio = WidgetsBinding.instance.window.devicePixelRatio;
-  ui.Image image = await renderObj.toImage(pixelRatio: devicePixelRatio);
+  final double devicePixelRatio = WidgetsBinding.instance.window.devicePixelRatio;
+  final ui.Image image = await renderObj.toImage(pixelRatio: devicePixelRatio);
   final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
   final Uint8List pngBytes = byteData!.buffer.asUint8List();
   final String bs64 = base64Encode(pngBytes);
@@ -90,8 +90,8 @@ Future<void> appMain() async {
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
   // runApp(StateContainer(child: App()));
-  runApp(RepaintBoundary(
-    key: const ValueKey('screenshotter'),
+  runApp(const RepaintBoundary(
+    key: ValueKey('screenshotter'),
     child: StateContainer(
       child: app.App(),
     ),
@@ -123,16 +123,16 @@ void main() {
     const Duration halfSecond = Duration(milliseconds: 600);
 
     binding.reportData = {
-      'platform': platformName,
-      'width': binding.window.physicalSize.width.toInt().toString(),
-      'height': binding.window.physicalSize.height.toInt().toString(),
+      "platform": platformName,
+      "width": binding.window.physicalSize.width.toInt().toString(),
+      "height": binding.window.physicalSize.height.toInt().toString(),
     };
 
     await appMain();
 
     // await tester.pumpAndSettle();
     // sleep for a bit to let the app load
-    await Future<dynamic>.delayed(Duration(seconds: 6));
+    await Future<dynamic>.delayed(const Duration(seconds: 6));
 
     bool loggedIn = false;
 
@@ -180,6 +180,9 @@ void main() {
 
     await goBack(tester);
     await pumpSettleWait(tester, halfSecond);
+
+    // wait a second for the back press:
+    await Future<dynamic>.delayed(const Duration(seconds: 2));
 
     await tester.tap(find.byKey(const Key("home_receive_button")));
     await pumpSettleWait(tester, halfSecond);

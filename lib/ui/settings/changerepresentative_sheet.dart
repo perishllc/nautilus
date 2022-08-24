@@ -82,6 +82,7 @@ class AppChangeRepresentativeSheet {
 
   Widget _buildRepresenativeDialog(BuildContext context) {
     return AppSimpleDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         title: Container(
           margin: const EdgeInsets.only(bottom: 10),
           child: Text(
@@ -126,8 +127,7 @@ class AppChangeRepresentativeSheet {
             final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
             if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
               try {
-                final bool authenticated =
-                    await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context).changeRepAuthenticate);
+                final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context).changeRepAuthenticate);
                 if (authenticated) {
                   sl.get<HapticUtil>().fingerprintSucess();
                   EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));

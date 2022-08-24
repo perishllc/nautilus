@@ -93,8 +93,8 @@ class Dialog extends StatelessWidget {
               elevation: 24.0,
               color: _getColor(context),
               type: MaterialType.card,
-              child: child,
               shape: shape ?? dialogTheme.shape ?? _defaultDialogShape,
+              child: child,
             ),
           ),
         ),
@@ -184,7 +184,7 @@ class AppAlertDialog extends StatelessWidget {
     this.actions,
     this.semanticLabel,
     this.shape,
-  })  : super(key: key);
+  }) : super(key: key);
 
   /// The (optional) title of the dialog is displayed in a large font at the top
   /// of the dialog.
@@ -260,7 +260,7 @@ class AppAlertDialog extends StatelessWidget {
         padding: titlePadding ?? EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, content == null ? 20.0 : 0.0),
         child: DefaultTextStyle(
           style: Theme.of(context).textTheme.headline1!,
-          child: Semantics(child: title, namesRoute: true),
+          child: Semantics(namesRoute: true, child: title),
         ),
       ));
     } else {
@@ -291,10 +291,10 @@ class AppAlertDialog extends StatelessWidget {
 
     if (actions != null) {
       children.add(ButtonBarTheme(
+          data: ButtonBarTheme.of(context),
           child: ButtonBar(
             children: actions!,
-          ),
-          data: ButtonBarTheme.of(context)));
+          )));
     }
 
     Widget dialogChild = IntrinsicWidth(
@@ -307,7 +307,7 @@ class AppAlertDialog extends StatelessWidget {
 
     if (label != null) dialogChild = Semantics(namesRoute: true, label: label, child: dialogChild);
 
-    return Dialog(child: dialogChild, shape: shape);
+    return Dialog(shape: shape, child: dialogChild);
   }
 }
 
@@ -366,6 +366,7 @@ class AppSimpleDialogOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
+      borderRadius: BorderRadius.circular(25),
       child: Padding(padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0), child: child),
     );
   }
@@ -451,8 +452,8 @@ class AppSimpleDialog extends StatelessWidget {
     this.children,
     this.contentPadding = const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 16.0),
     this.semanticLabel,
-    this.shape,
-  })  : super(key: key);
+    this.shape = const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+  }) : super(key: key);
 
   /// The (optional) title of the dialog is displayed in a large font at the top
   /// of the dialog.
@@ -560,7 +561,7 @@ class AppSimpleDialog extends StatelessWidget {
         label: label,
         child: dialogChild,
       );
-    return Dialog(child: dialogChild, shape: shape);
+    return Dialog(shape: shape, child: dialogChild);
   }
 }
 
@@ -607,8 +608,7 @@ Widget _buildMaterialDialogTransitions(BuildContext context, Animation<double> a
 ///  * [showGeneralDialog], which allows for customization of the dialog popup.
 ///  * <https://material.google.com/components/dialogs.html>
 Future<T?> showAppDialog<T>({
-  required
-      BuildContext context,
+  required BuildContext context,
   bool barrierDismissible = true,
   @Deprecated('Instead of using the "child" argument, return the child from a closure '
       'provided to the "builder" argument. This will ensure that the BuildContext '

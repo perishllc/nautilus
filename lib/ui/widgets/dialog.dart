@@ -23,6 +23,9 @@ class AppDialogs {
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return AppAlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
           title: Text(
             title,
             style: AppStyles.textStyleButtonPrimaryOutline(context),
@@ -86,6 +89,9 @@ class AppDialogs {
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return AppAlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
           title: Text(
             title,
             style: AppStyles.textStyleButtonPrimaryOutline(context),
@@ -177,7 +183,9 @@ class AppDialogs {
         barrierDismissible: false,
         context: context,
         builder: (BuildContext ctx) => material.Dialog(
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
               backgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
               child: Column(
                 mainAxisSize: MainAxisSize.min,

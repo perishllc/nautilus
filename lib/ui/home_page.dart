@@ -273,6 +273,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
             barrierColor: StateContainer.of(context).curTheme.barrier,
             builder: (BuildContext context) {
               return AlertDialog(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 title: Text(
                   AppLocalization.of(context).giftAlert,
                   style: AppStyles.textStyleDialogHeader(context),
@@ -429,6 +430,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
             barrierColor: StateContainer.of(context).curTheme.barrier,
             builder: (BuildContext context) {
               return AlertDialog(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 title: Text(
                   AppLocalization.of(context).giftAlert,
                   style: AppStyles.textStyleDialogHeader(context),
@@ -585,6 +587,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
           barrierColor: StateContainer.of(context).curTheme.barrier,
           builder: (BuildContext context) {
             return AlertDialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               title: Text(
                 AppLocalization.of(context).giftAlertEmpty,
                 style: AppStyles.textStyleDialogHeader(context),
@@ -748,7 +751,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
             return true; // Return false if you want to cancel the click event.
           },
           ignoreNativeDialog: Platform.isAndroid,
-          dialogStyle: const DialogStyle(), // Custom dialog styles.
+          dialogStyle: const DialogStyle(
+            dialogShape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+          ), // Custom dialog styles.
           // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
           onDismissed: () => rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed),
           // This one allows you to change the default dialog content.
@@ -1732,7 +1737,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
 
       // check if the user has enough balance to send this amount:
       // If balance is insufficient show error:
-      final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount!);
+      final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount);
       if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
         UIUtil.showSnackbar(
             AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
@@ -1953,21 +1958,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
                                 return;
                               }
                               Sheets.showAppHeightNineSheet(context: context, widget: receive!);
-
-                              // Sheets.showAppHeightNineSheet(context: context, widget: UsbSheet());
-                              // UIUtil.showWebview(context, "https://webusb.github.io/arduino/demos/");
-                              // https://whatwebcando.today/usb.html
-
-                              await Navigator.of(context).push(
-                                MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-                                  return HCaptcha((String code) => print(code));
-                                }),
-                              );
-
-                              // await QuickUsb.init();
-                              // var deviceList = await QuickUsb.getDeviceList();
-                              // print(deviceList);
-                              // print(deviceList[0]);
                             },
                           ),
                         ),

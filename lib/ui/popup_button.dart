@@ -42,7 +42,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
     animationOpen = false;
   }
 
-  Future<void> scanAndHandlResult() async {
+  Future<void> scanAndHandleResult() async {
     final dynamic scanResult = await Navigator.pushNamed(context, '/before_scan_screen');
     if (!mounted) return;
     if (scanResult == null) {
@@ -92,7 +92,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
 
       // check if the user has enough balance to send this amount:
       // If balance is insufficient show error:
-      final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount!);
+      final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount);
       if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
         UIUtil.showSnackbar(
             AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
@@ -187,7 +187,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
                     setState(() {
                       popupColor = Colors.white;
                     });
-                    scanAndHandlResult();
+                    scanAndHandleResult();
                   }
                   isScrolledUpEnough = false;
                   setState(() {

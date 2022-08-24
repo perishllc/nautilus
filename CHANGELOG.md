@@ -1,11 +1,14 @@
-## v0.6.0 - [2022-08-XX]
+## v0.6.0 - [2022-08-25]
 #### Added
+- "nanopay" and (WIP) "nanoauth" URI scheme support!
+  - [Demo Handoff](https://perihs.co/handoff)
 - Checkbox option to require a captcha in order to redeem a gift card
-- Integrated Monero (XMR) exchange (WIP)
-- perish.co/promo
+- perish.co/promo (feel free to use as a general promotional link for nautilus / easy onboarding)
+- ~~Integrated XMR Swapping~~ (WIP)
 #### Changed
 - Better support for landscape views / iPads
 - Updated Gift Cards to look a lot more modern and added a custom page for Desktop links
+- Rounded a lot of corners on a lot of windows and popups
 #### Fixed
 - Minor visual fixes on the add accounts sheet
 - Fixes for adding watch only accounts
