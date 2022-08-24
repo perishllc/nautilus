@@ -38,17 +38,17 @@
 
 ___
 
-<div style="display: flex; flex-direction: column; gap: 2px;">
+<div style="display: flex; flex-direction: column; gap: 5px;">
    <div style="display: flex; flex-direction: row; gap: 10px;">
-      <img style="border-radius: 15px;" src="/screenshots/android/1080-2116/welcome_intro_screen.png" width="200">
+      <img src="/screenshots/android/1080-2116/welcome_intro_screen.png" width="200">
    </div>
    <div style="display: flex; flex-direction: row; gap: 10px;">
-      <img style="border-radius: 15px;" src="/screenshots/android/1080-2116/home_demo_cards_screen.png" width="200">
-      <img style="border-radius: 15px;" src="/screenshots/android/1080-2116/settings_drawer_screen.png" width="200">
+      <img src="/screenshots/android/1080-2116/home_demo_cards_screen.png" width="200">
+      <img src="/screenshots/android/1080-2116/settings_drawer_screen.png" width="200">
    </div>
    <div style="display: flex; flex-direction: row; gap: 10px;">
-      <img style="border-radius: 15px;" src="/screenshots/android/1080-2116/send_screen.png" width="200">
-      <img style="border-radius: 15px;" src="/screenshots/android/1080-2116/receive_screen.png" width="200">
+      <img src="/screenshots/android/1080-2116/send_screen.png" width="200">
+      <img src="/screenshots/android/1080-2116/receive_screen.png" width="200">
    </div>
 </div>
 
