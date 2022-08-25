@@ -373,11 +373,12 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
 
       if (!mounted) return;
       // StateContainer.of(context).wallet!.frontier = resp.hash;
-      StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.handoffItem.amount);
 
       if (handoffResponse.status != 0) {
         poppedError = handoffResponse.message;
         throw Exception("Handoff failed");
+      } else {
+        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.handoffItem.amount);
       }
 
       // Show complete

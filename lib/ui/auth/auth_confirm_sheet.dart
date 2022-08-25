@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
@@ -13,9 +16,11 @@ import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/method.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/auth_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/handoff_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/auth/auth_complete_sheet.dart';
@@ -28,7 +33,9 @@ import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/biometrics.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/ed25519.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class AuthConfirmSheet extends StatefulWidget {
@@ -97,9 +104,6 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
 
   @override
   Widget build(BuildContext context) {
-    // construct the signature:
-    String signature = "";
-
     return SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
@@ -131,82 +135,81 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.backgroundDarkest,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    // Amount text
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        text: "",
-                        children: [
-                          TextSpan(
-                            text: widget.authItem.label,
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.backgroundDarkest,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    // Amount text
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        text: "",
-                        children: [
-                          TextSpan(
-                            text: widget.authItem.message,
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  Container(
-                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.backgroundDarkest,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    // Amount text
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        text: widget.authItem.account,
-                        style: AppStyles.textStyleParagraphPrimary(context),
-                      ),
-                    ),
-                  ),
-
-                  // "TO" text
-                  if (widget.link.isEmpty)
+                  if (widget.authItem.label.isNotEmpty)
                     Container(
-                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context).to, context),
-                            style: AppStyles.textStyleHeader(context),
-                          ),
-                        ],
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          text: "",
+                          children: [
+                            TextSpan(
+                              text: widget.authItem.label,
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
+                  if (widget.authItem.message.isNotEmpty)
+                    Container(
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          text: "",
+                          children: [
+                            TextSpan(
+                              text: widget.authItem.message,
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  if (widget.authItem.nonce.isNotEmpty)
+                    Container(
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      // Amount text
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          text: widget.authItem.nonce,
+                          style: AppStyles.textStyleParagraphPrimary(context),
+                        ),
+                      ),
+                    ),
+
+                  // "FOR" text
+                  Container(
+                    margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          CaseChange.toUpperCase(AppLocalization.of(context).registerFor, context),
+                          style: AppStyles.textStyleHeader(context),
+                        ),
+                      ],
+                    ),
+                  ),
                   // Address text
                   Container(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
@@ -235,13 +238,9 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
 
-                      // final String authText = AppLocalization.of(context)!
-                      //     .sendAmountConfirm
-                      //     .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.authItem.amount))
-                      //     .replaceAll("%2", StateContainer.of(context).currencyMode);
+                      if (!mounted) return;
 
-                      // TODO:
-                      final String authText = AppLocalization.of(context).sendAmountConfirm;
+                      final String authText = AppLocalization.of(context).authConfirm;
 
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
@@ -276,77 +275,115 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
   }
 
   Future<void> _doSend() async {
-    bool memoSendFailed = false;
-    try {
-      final String walletAddress = StateContainer.of(context).wallet!.address!;
+    final bool memoSendFailed = false;
+    String? poppedError;
+    // try {
+    final String walletAddress = StateContainer.of(context).wallet!.address!;
 
-      _showAnimation(context, AnimationType.SEND);
+    _showAnimation(context, AnimationType.SEND);
 
-      // ProcessResponse? resp = await sl.get<AccountService>().requestSend(
-      //     StateContainer.of(context).wallet!.representative,
-      //     StateContainer.of(context).wallet!.frontier,
-      //     widget.authItem.amount,
-      //     widget.destination,
-      //     StateContainer.of(context).wallet!.address,
-      //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
-      //     max: widget.maxSend);
-      // StateContainer.of(context).wallet!.frontier = resp.hash;
-      // StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.authItem.amount!);
-
-      // construct the response to the server:
-      String? url;
-      for (final Method method in widget.authItem.methods) {
-        if (method.type == "http") {
-          url = method.url;
-        }
+    String? url;
+    for (final Method method in widget.authItem.methods) {
+      if (method.type == "http") {
+        url = method.url;
       }
-
-      if (url != null) {
-        // found a method we support:
-
-      }
-
-      // HandoffResponse? = await sl.get<AccountService>.requestHandoff(
-      //     StateContainer.of(context).wallet!.representative,
-      //     StateContainer.of(context).wallet!.frontier,
-      //     widget.handoffItem.amount,
-      //     widget.destination,
-      //     StateContainer.of(context).wallet!.address,
-      //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
-      //     max: widget.maxSend);
-
-      // Show complete
-      String? contactName = widget.contactName;
-      if (widget.contactName == null || widget.contactName!.isEmpty) {
-        final User? user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
-        if (user != null) {
-          contactName = user.getDisplayName();
-        }
-      }
-
-      if (!mounted) return;
-
-      StateContainer.of(context).requestUpdate();
-      StateContainer.of(context).updateTXMemos();
-      StateContainer.of(context).updateUnified(true);
-
-      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-      Sheets.showAppHeightNineSheet(
-          context: context,
-          closeOnTap: true,
-          removeUntilHome: true,
-          widget: AuthCompleteSheet(
-            label: widget.authItem.label,
-          ));
-    } catch (error) {
-      sl.get<Logger>().d("auth_confirm_error: $error");
-      // Send failed
-      if (animationOpen) {
-        Navigator.of(context).pop();
-      }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context, durationMs: 5000);
-      Navigator.of(context).pop();
     }
+
+    if (url == null) {
+      // no method we support:
+      poppedError = AppLocalization.of(context).handoffSupportedMethodNotFound;
+      throw Exception("No supported method found");
+    }
+
+    // construct the response to the server:
+    String stringToSign = "";
+    for (final String formatType in widget.authItem.format) {
+      if (stringToSign.isNotEmpty) {
+        stringToSign += widget.authItem.separator;
+      }
+      switch (formatType) {
+        case "timestamp":
+          stringToSign += "${DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond}";
+          break;
+        case "label":
+          stringToSign += widget.authItem.label;
+          break;
+        case "message":
+          stringToSign += widget.authItem.message;
+          break;
+        case "nonce":
+          stringToSign += widget.authItem.nonce;
+          break;
+        case "account":
+          stringToSign += widget.authItem.account;
+          break;
+      }
+    }
+    // stringToSign = base64Url.encode(utf8.encode(stringToSign));
+    final String formatted = stringToSign;
+    final String signed = NanoHelpers.byteToHex(NanoHelpers.stringToBytesUtf8(stringToSign));
+
+    final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+    final String signature = NanoSignatures.signBlock(signed, privKey);
+    // final String signature = NanoSignatures.signBlock("AB", privKey);
+
+    final String pubKey = NanoAccounts.extractPublicKey(walletAddress);
+    final bool isValid = NanoSignatures.validateSig(signed, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+
+    print(isValid);
+    // print(signature);
+
+    // var ed = Ed25519();
+    // final String signature = NanoHelpers.byteToHex(ed.sign(NanoHelpers.hexToBytes(signed), NanoHelpers.hexToBytes(privKey)));
+    // print("signature: $signature oldSignature: $oldSignature");
+    print("@@@@@@@@@@@@@@@@@@@@@");
+
+    final HandoffResponse authResponse = await sl.get<AccountService>().requestAuthHTTP(
+          url,
+          walletAddress,
+          signature,
+          signed,
+          formatted,
+          message: widget.authItem.message,
+          label: widget.authItem.label,
+        );
+
+    if (!mounted) return;
+
+    if (authResponse.status != 0) {
+      poppedError = authResponse.message;
+      throw Exception("Auth failed");
+    }
+
+    // Show complete
+
+    if (!mounted) return;
+
+    StateContainer.of(context).requestUpdate();
+    StateContainer.of(context).updateTXMemos();
+    StateContainer.of(context).updateUnified(true);
+
+    Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+    Sheets.showAppHeightNineSheet(
+        context: context,
+        closeOnTap: true,
+        removeUntilHome: true,
+        widget: AuthCompleteSheet(
+          label: widget.authItem.label,
+        ));
+    // } catch (error) {
+    //   sl.get<Logger>().d("auth_confirm_error: $error");
+    //   // Auth failed
+    //   if (animationOpen) {
+    //     Navigator.of(context).pop();
+    //   }
+    //   if (poppedError != null) {
+    //     UIUtil.showSnackbar(poppedError, context, durationMs: 5000);
+    //     Navigator.of(context).pop();
+    //   }
+    //   UIUtil.showSnackbar(AppLocalization.of(context).sendError, context, durationMs: 5000);
+    //   Navigator.of(context).pop();
+    // }
   }
 
   Future<void> authenticateWithPin() async {

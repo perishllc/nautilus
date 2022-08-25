@@ -11,10 +11,14 @@ HandoffReplyRequest _$HandoffReplyRequestFromJson(Map<String, dynamic> json) =>
       block: json['block'] == null
           ? null
           : StateBlock.fromJson(json['block'] as Map<String, dynamic>),
+      message: json['message'] as String?,
+      label: json['label'] as String?,
     );
 
 Map<String, dynamic> _$HandoffReplyRequestToJson(
         HandoffReplyRequest instance) =>
     <String, dynamic>{
       'block': instance.block,
+      'message': instance.message,
+      'label': instance.label,
     };

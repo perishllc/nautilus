@@ -21,6 +21,7 @@ import 'package:nautilus_wallet_flutter/network/model/payment/payment_request.da
 import 'package:nautilus_wallet_flutter/network/model/request/account_history_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/account_info_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/accounts_balances_request.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/auth_reply_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/block_info_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/handoff_reply_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/process_request.dart';
@@ -744,7 +745,7 @@ class AccountService {
 
   Future<HandoffResponse> requestHandoffHTTP(
       String URI, String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
-      {bool max = false, String? work}) async {
+      {bool max = false, String? work, String? label, String? message}) async {
     final StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
         previous: previous,
@@ -764,7 +765,7 @@ class AccountService {
     await sendBlock.sign(privKey);
 
     // Process
-    final HandoffReplyRequest handoffReplyRequest = HandoffReplyRequest(block: sendBlock);
+    final HandoffReplyRequest handoffReplyRequest = HandoffReplyRequest(block: sendBlock, label: label, message: message);
 
     // return requestHandoff(handoffReplyRequest);
 
@@ -784,14 +785,53 @@ class AccountService {
     return item;
   }
 
-  // Future<HandoffWorkResponse> requestWork(String url, String hash) async {
+  Future<HandoffResponse> requestAuthHTTP(String URI, String account, String signature, String signed, String formatted,
+      {String? message, String? label}) async {
+    // Process
+    final AuthReplyRequest authReplyRequest = AuthReplyRequest(
+      account: account,
+      signature: signature,
+      signed: signed,
+      formatted: formatted,
+      message: message,
+      label: label,
+    );
 
+    // return requestHandoff(handoffReplyRequest);
+
+    final http.Response response = await http.post(Uri.parse(URI), headers: {'Content-type': 'application/json'}, body: json.encode(authReplyRequest.toJson()));
+
+    if (response.statusCode != 200) {
+      throw Exception("Received error ${response.statusCode}");
+    }
+    try {
+      final Map<dynamic, dynamic> decoded = json.decode(response.body) as Map<dynamic, dynamic>;
+
+      if (decoded.containsKey("error")) {
+        final ErrorResponse err = ErrorResponse.fromJson(decoded as Map<String, dynamic>);
+        throw Exception("Received error ${err.error} ${err.details}");
+      }
+      final HandoffResponse item = HandoffResponse.fromJson(decoded as Map<String, dynamic>);
+      return item;
+    } catch (e) {
+      throw Exception("Received error ${e}");
+    }
+  }
+
+  // Future<HandoffWorkResponse> requestWork(String url, String hash) async {
   // }
 
   Future<ProcessResponse> requestOpen(String? balance, String? link, String? account, String? privKey, {String? representative}) async {
     representative = representative ?? await sl.get<SharedPrefsUtil>().getRepresentative();
-    final StateBlock openBlock =
-        StateBlock(subtype: BlockTypes.OPEN, previous: "0", representative: representative, balance: balance, link: link, account: account, privKey: privKey);
+    final StateBlock openBlock = StateBlock(
+      subtype: BlockTypes.OPEN,
+      previous: "0",
+      representative: representative,
+      balance: balance,
+      link: link,
+      account: account,
+      privKey: privKey,
+    );
 
     // Sign
     await openBlock.sign(privKey);

@@ -28,32 +28,46 @@ bool compare(Uint8List lh, Uint8List rh) {
   return d == 0;
 }
 
-// class Curve25519 {
-  // Int32List gf0;
-  // Int32List gf1;
-  // Int32List D;
-  // Int32List D2;
-  // Int32List I;
-  // Uint8List _9;
-  // Int32List _121665;
-  // Uint8List _0;
-  // Uint8List sigma;
-  // Uint32List minusp;
+class Curve25519 {
 
-  // Curve25519() {
-    Int32List gf0 = gf();
-    Int32List gf1 = gf([1]);
+  Curve25519() {
+    // Int32List gf0 = gf();
+    // Int32List gf1 = gf([1]);
+    // // Uint8List _9 = new Uint8List(32);
+    // // _9[0] = 9;
+    // Uint8List _9 = Uint8List.fromList([9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);// TODO: fix this
+    // Int32List _121665 = gf([0xdb41, 1]);
+    // Int32List D = gf([0x78a3, 0x1359, 0x4dca, 0x75eb, 0xd8ab, 0x4141, 0x0a4d, 0x0070, 0xe898, 0x7779, 0x4079, 0x8cc7, 0xfe73, 0x2b6f, 0x6cee, 0x5203]);
+    // Int32List D2 = gf([0xf159, 0x26b2, 0x9b94, 0xebd6, 0xb156, 0x8283, 0x149a, 0x00e0, 0xd130, 0xeef3, 0x80f2, 0x198e, 0xfce7, 0x56df, 0xd9dc, 0x2406]);
+    // Int32List I = gf([0xa0b0, 0x4a0e, 0x1b27, 0xc4ee, 0xe478, 0xad2f, 0x1806, 0x2f43, 0xd7a7, 0x3dfb, 0x0099, 0x2b4d, 0xdf0b, 0x4fc1, 0x2480, 0x2b83]);
+    // Uint8List _0 = Uint8List(16);
+    // Uint8List sigma = Uint8List.fromList([101, 120, 112, 97, 110, 100, 32, 51, 50, 45, 98, 121, 116, 101, 32, 107]);
+    // Uint32List minusp = Uint32List.fromList([5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 252]);
+
+    gf0 = gf();
+    gf1 = gf([1]);
     // Uint8List _9 = new Uint8List(32);
     // _9[0] = 9;
-    Uint8List _9 = Uint8List.fromList([9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);// TODO: fix this
-    Int32List _121665 = gf([0xdb41, 1]);
-    Int32List D = gf([0x78a3, 0x1359, 0x4dca, 0x75eb, 0xd8ab, 0x4141, 0x0a4d, 0x0070, 0xe898, 0x7779, 0x4079, 0x8cc7, 0xfe73, 0x2b6f, 0x6cee, 0x5203]);
-    Int32List D2 = gf([0xf159, 0x26b2, 0x9b94, 0xebd6, 0xb156, 0x8283, 0x149a, 0x00e0, 0xd130, 0xeef3, 0x80f2, 0x198e, 0xfce7, 0x56df, 0xd9dc, 0x2406]);
-    Int32List I = gf([0xa0b0, 0x4a0e, 0x1b27, 0xc4ee, 0xe478, 0xad2f, 0x1806, 0x2f43, 0xd7a7, 0x3dfb, 0x0099, 0x2b4d, 0xdf0b, 0x4fc1, 0x2480, 0x2b83]);
-    Uint8List _0 = Uint8List(16);
-    Uint8List sigma = Uint8List.fromList([101, 120, 112, 97, 110, 100, 32, 51, 50, 45, 98, 121, 116, 101, 32, 107]);
-    Uint32List minusp = Uint32List.fromList([5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 252]);
-  // }
+    Uint8List _9 = Uint8List.fromList([9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); // TODO: fix this
+    _121665 = gf([0xdb41, 1]);
+    D = gf([0x78a3, 0x1359, 0x4dca, 0x75eb, 0xd8ab, 0x4141, 0x0a4d, 0x0070, 0xe898, 0x7779, 0x4079, 0x8cc7, 0xfe73, 0x2b6f, 0x6cee, 0x5203]);
+    D2 = gf([0xf159, 0x26b2, 0x9b94, 0xebd6, 0xb156, 0x8283, 0x149a, 0x00e0, 0xd130, 0xeef3, 0x80f2, 0x198e, 0xfce7, 0x56df, 0xd9dc, 0x2406]);
+    I = gf([0xa0b0, 0x4a0e, 0x1b27, 0xc4ee, 0xe478, 0xad2f, 0x1806, 0x2f43, 0xd7a7, 0x3dfb, 0x0099, 0x2b4d, 0xdf0b, 0x4fc1, 0x2480, 0x2b83]);
+    _0 = Uint8List(16);
+    sigma = Uint8List.fromList([101, 120, 112, 97, 110, 100, 32, 51, 50, 45, 98, 121, 116, 101, 32, 107]);
+    minusp = Uint32List.fromList([5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 252]);
+  }
+  
+  late Int32List gf0;
+  late Int32List gf1;
+  late Int32List D;
+  late Int32List D2;
+  late Int32List I;
+  late Uint8List _9;
+  late Int32List _121665;
+  late Uint8List _0;
+  late Uint8List sigma;
+  late Uint32List minusp;
 
   Int32List gf([List<int>? init]) {
     final Int32List r = Int32List(16);
@@ -1104,13 +1118,12 @@ bool compare(Uint8List lh, Uint8List rh) {
 	 * @param {Uint8List} p Public key
 	 */
   void cryptoScalarmult(Uint8List q, Uint8List s, Uint8List p) {
-
     final Int32List x = Int32List(80);
     int r, i;
     Int32List a = gf(), b = gf(), c = gf(), d = gf(), e = gf(), f = gf();
 
     unpack25519(x, p);
-    
+
     for (i = 0; i < 16; i++) {
       b[i] = x[i];
       d[i] = a[i] = c[i] = 0;
@@ -1595,4 +1608,4 @@ bool compare(Uint8List lh, Uint8List rh) {
       out[i] = hash[i];
     }
   }
-// }
+}

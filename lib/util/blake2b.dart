@@ -699,7 +699,7 @@ blake2bUpdate(ctx, Uint8List input) {
   for (int i = 0; i < input.length; i++) {
     if (ctx["c"] == 128) {
       // buffer full ?
-      ctx["t"] += ctx.c; // add counters
+      ctx["t"] += ctx["c"]; // add counters
       blake2bCompress(ctx, false); // compress (not last)
       ctx["c"] = 0; // counter to zero
     }

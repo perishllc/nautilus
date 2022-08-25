@@ -1,3 +1,6 @@
+## v0.6.1 - [2022-08-26]
+#### Fixed
+- lots of nanoauth fixes
 ## v0.6.0 - [2022-08-25]
 #### Added
 - "nanopay" and (WIP) "nanoauth" URI scheme support!
