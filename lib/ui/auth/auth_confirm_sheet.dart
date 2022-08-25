@@ -277,113 +277,103 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
   Future<void> _doSend() async {
     final bool memoSendFailed = false;
     String? poppedError;
-    // try {
-    final String walletAddress = StateContainer.of(context).wallet!.address!;
+    try {
+      final String walletAddress = StateContainer.of(context).wallet!.address!;
 
-    _showAnimation(context, AnimationType.SEND);
+      _showAnimation(context, AnimationType.SEND);
 
-    String? url;
-    for (final Method method in widget.authItem.methods) {
-      if (method.type == "http") {
-        url = method.url;
+      String? url;
+      for (final Method method in widget.authItem.methods) {
+        if (method.type == "http") {
+          url = method.url;
+        }
       }
-    }
 
-    if (url == null) {
-      // no method we support:
-      poppedError = AppLocalization.of(context).handoffSupportedMethodNotFound;
-      throw Exception("No supported method found");
-    }
-
-    // construct the response to the server:
-    String stringToSign = "";
-    for (final String formatType in widget.authItem.format) {
-      if (stringToSign.isNotEmpty) {
-        stringToSign += widget.authItem.separator;
+      if (url == null) {
+        // no method we support:
+        poppedError = AppLocalization.of(context).handoffSupportedMethodNotFound;
+        throw Exception("No supported method found");
       }
-      switch (formatType) {
-        case "timestamp":
-          stringToSign += "${DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond}";
-          break;
-        case "label":
-          stringToSign += widget.authItem.label;
-          break;
-        case "message":
-          stringToSign += widget.authItem.message;
-          break;
-        case "nonce":
-          stringToSign += widget.authItem.nonce;
-          break;
-        case "account":
-          stringToSign += widget.authItem.account;
-          break;
+
+      // construct the response to the server:
+      String stringToSign = "";
+      for (final String formatType in widget.authItem.format) {
+        if (stringToSign.isNotEmpty) {
+          stringToSign += widget.authItem.separator;
+        }
+        switch (formatType) {
+          case "timestamp":
+            stringToSign += "${DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond}";
+            break;
+          case "label":
+            stringToSign += widget.authItem.label;
+            break;
+          case "message":
+            stringToSign += widget.authItem.message;
+            break;
+          case "nonce":
+            stringToSign += widget.authItem.nonce;
+            break;
+          case "account":
+            stringToSign += widget.authItem.account;
+            break;
+        }
       }
+      // stringToSign = base64Url.encode(utf8.encode(stringToSign));
+      final String formatted = stringToSign;
+      final String signed = NanoHelpers.byteToHex(NanoHelpers.stringToBytesUtf8(stringToSign));
+
+      final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+      final String signature = NanoSignatures.signBlock(signed, privKey);
+      // final String pubKey = NanoAccounts.extractPublicKey(walletAddress);
+      // final bool isValid = NanoSignatures.validateSig(signed, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+
+      final HandoffResponse authResponse = await sl.get<AccountService>().requestAuthHTTP(
+            url,
+            walletAddress,
+            signature,
+            signed,
+            formatted,
+            message: widget.authItem.message,
+            label: widget.authItem.label,
+          );
+
+      if (!mounted) return;
+
+      if (authResponse.status != 0) {
+        poppedError = authResponse.message;
+        throw Exception("Auth failed");
+      }
+
+      // Show complete
+
+      if (!mounted) return;
+
+      StateContainer.of(context).requestUpdate();
+      StateContainer.of(context).updateTXMemos();
+      StateContainer.of(context).updateUnified(true);
+
+      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          closeOnTap: true,
+          removeUntilHome: true,
+          widget: AuthCompleteSheet(
+            label: widget.authItem.label,
+          ));
+    } catch (error) {
+      sl.get<Logger>().d("auth_confirm_error: $error");
+      // Auth failed
+      if (animationOpen) {
+        Navigator.of(context).pop();
+      }
+      if (poppedError != null) {
+        UIUtil.showSnackbar(poppedError, context, durationMs: 5000);
+        Navigator.of(context).pop();
+      }
+      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context, durationMs: 5000);
+      Navigator.of(context).pop();
     }
-    // stringToSign = base64Url.encode(utf8.encode(stringToSign));
-    final String formatted = stringToSign;
-    final String signed = NanoHelpers.byteToHex(NanoHelpers.stringToBytesUtf8(stringToSign));
-
-    final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
-    final String signature = NanoSignatures.signBlock(signed, privKey);
-    // final String signature = NanoSignatures.signBlock("AB", privKey);
-
-    final String pubKey = NanoAccounts.extractPublicKey(walletAddress);
-    final bool isValid = NanoSignatures.validateSig(signed, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
-
-    print(isValid);
-    // print(signature);
-
-    // var ed = Ed25519();
-    // final String signature = NanoHelpers.byteToHex(ed.sign(NanoHelpers.hexToBytes(signed), NanoHelpers.hexToBytes(privKey)));
-    // print("signature: $signature oldSignature: $oldSignature");
-    print("@@@@@@@@@@@@@@@@@@@@@");
-
-    final HandoffResponse authResponse = await sl.get<AccountService>().requestAuthHTTP(
-          url,
-          walletAddress,
-          signature,
-          signed,
-          formatted,
-          message: widget.authItem.message,
-          label: widget.authItem.label,
-        );
-
-    if (!mounted) return;
-
-    if (authResponse.status != 0) {
-      poppedError = authResponse.message;
-      throw Exception("Auth failed");
-    }
-
-    // Show complete
-
-    if (!mounted) return;
-
-    StateContainer.of(context).requestUpdate();
-    StateContainer.of(context).updateTXMemos();
-    StateContainer.of(context).updateUnified(true);
-
-    Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-    Sheets.showAppHeightNineSheet(
-        context: context,
-        closeOnTap: true,
-        removeUntilHome: true,
-        widget: AuthCompleteSheet(
-          label: widget.authItem.label,
-        ));
-    // } catch (error) {
-    //   sl.get<Logger>().d("auth_confirm_error: $error");
-    //   // Auth failed
-    //   if (animationOpen) {
-    //     Navigator.of(context).pop();
-    //   }
-    //   if (poppedError != null) {
-    //     UIUtil.showSnackbar(poppedError, context, durationMs: 5000);
-    //     Navigator.of(context).pop();
-    //   }
-    //   UIUtil.showSnackbar(AppLocalization.of(context).sendError, context, durationMs: 5000);
-    //   Navigator.of(context).pop();
-    // }
   }
 
   Future<void> authenticateWithPin() async {
