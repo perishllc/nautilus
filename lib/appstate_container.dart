@@ -76,7 +76,7 @@ Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
 
 class _InheritedStateContainer extends InheritedWidget {
   // You must pass through a child and your state.
-  _InheritedStateContainer({
+  const _InheritedStateContainer({
     Key? key,
     required this.data,
     required Widget child,
@@ -172,18 +172,16 @@ class StateContainerState extends State<StateContainer> {
 
   // gifts!
   // TODO: turn into a map:
-  bool giftedWallet = false;
-  String giftedWalletSeed = "";
-  String giftedWalletAddress = "";
-  String giftedWalletAmountRaw = "";
-  String giftedWalletMemo = "";
-  String giftedWalletFromAddress = "";
-  String giftedWalletUUID = "";
-  bool giftedWalletRequireCaptcha = false;
+  Map<String, dynamic>? gift;
   bool introSkiped = false;
 
   // When wallet is encrypted
   String? encryptedSecret;
+
+  
+  void resetGift() {
+    gift = null;
+  }
 
   void updateNinjaNodes(List<NinjaNode> list) {
     setState(() {
@@ -304,9 +302,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> updateTXMemos() async {
-    if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
-      EventTaxiImpl.singleton().fire(TXUpdateEvent());
-    }
+    EventTaxiImpl.singleton().fire(TXUpdateEvent());
   }
 
   // Future<void> updateTransactionData() async {
@@ -330,10 +326,10 @@ class StateContainerState extends State<StateContainer> {
         delayUpdate = true;
       }
       for (final String strMsg in event.message_list!) {
-        final msg = jsonDecode(strMsg);
+        final dynamic msg = jsonDecode(strMsg);
         await handleMessage(msg, delay_update: delayUpdate);
-        // sleep between updates if there are more than 1 to make the UI feel snappier / show the animation:
-        if (event.message_list!.length > 1 && delayUpdate) {
+        // sleep between updates if there are more than 1 and < max to make the UI feel snappier / show the animation:
+        if (event.message_list!.length > 1 && !delayUpdate) {
           await Future<dynamic>.delayed(const Duration(milliseconds: 600));
         }
       }
@@ -540,6 +536,12 @@ class StateContainerState extends State<StateContainer> {
   StreamSubscription<FcmMessageEvent>? _fcmMessageSub;
   StreamSubscription<AccountModifiedEvent>? _accountModifiedSub;
 
+  @override
+  void dispose() {
+    _destroyBus();
+    super.dispose();
+  }
+
   // Register RX event listenerss
   void _registerBus() {
     _subscribeEventSub = EventTaxiImpl.singleton().registerTo<SubscribeEvent>().listen((SubscribeEvent event) {
@@ -634,28 +636,23 @@ class StateContainerState extends State<StateContainer> {
           // if (data["+match_guaranteed"] == true) {
           // setup the auto load wallet:
           setState(() {
-            giftedWallet = true;
-            giftedWalletSeed = data["seed"] as String? ?? "";
-            giftedWalletAmountRaw = data["amount_raw"] as String? ?? "";
-            giftedWalletAddress = data["address"] as String? ?? "";
-            giftedWalletFromAddress = data["from_address"] as String? ?? "";
-            giftedWalletMemo = data["memo"] as String? ?? "";
-            giftedWalletRequireCaptcha = data["require_captcha"] == "True";
-            giftedWalletUUID = data["gift_uuid"] as String? ?? "";
+            gift = <String, dynamic>{
+              "seed": data["seed"] as String? ?? "",
+              "amount_raw": data["amount_raw"] as String? ?? "",
+              "address": data["address"] as String? ?? "",
+              "from_address": data["from_address"] as String? ?? "",
+              "memo": data["memo"] as String? ?? "",
+              "require_captcha": data["require_captcha"] == "True",
+              "uuid": data["uuid"] as String? ?? "",
+            };
           });
           // }
         }
       }
-    }, onError: (error) {
+    }, onError: (dynamic error) {
       final PlatformException platformException = error as PlatformException;
       log.d('InitSession error: ${platformException.code} - ${platformException.message}');
     });
-  }
-
-  @override
-  void dispose() {
-    _destroyBus();
-    super.dispose();
   }
 
   void _destroyBus() {

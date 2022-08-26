@@ -101,4 +101,12 @@ class NonTranslatable {
   static String get nautilus {
     return "Nautilus";
   }
+
+  static String get nano {
+    return "NANO";
+  }
+
+  static String get monero {
+    return "Monero";
+  }
 }

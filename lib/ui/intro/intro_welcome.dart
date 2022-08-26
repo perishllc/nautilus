@@ -39,7 +39,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
       // check every 500ms if there's a giftcard:
       timer = Timer.periodic(const Duration(milliseconds: 500), (Timer t) async {
         if (!mounted) return;
-        if (!openedDialog && StateContainer.of(context).giftedWallet) {
+        if (!openedDialog && StateContainer.of(context).gift != null) {
           openedDialog = true;
           timer?.cancel();
 

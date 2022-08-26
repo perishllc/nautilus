@@ -152,8 +152,7 @@ class UsbSheetState extends State<UsbSheet> {
         ElevatedButton(
           child: const Text('setConfiguration'),
           onPressed: () async {
-            var setConfiguration =
-                await QuickUsb.setConfiguration(_configuration!);
+            var setConfiguration = await QuickUsb.setConfiguration(_configuration!);
             log('setConfiguration $setConfiguration');
           },
         ),
@@ -168,16 +167,14 @@ class UsbSheetState extends State<UsbSheet> {
         ElevatedButton(
           child: const Text('claimInterface'),
           onPressed: () async {
-            var claimInterface =
-                await QuickUsb.claimInterface(_configuration!.interfaces[0]);
+            var claimInterface = await QuickUsb.claimInterface(_configuration!.interfaces[0]);
             log('claimInterface $claimInterface');
           },
         ),
         ElevatedButton(
           child: const Text('releaseInterface'),
           onPressed: () async {
-            var releaseInterface =
-                await QuickUsb.releaseInterface(_configuration!.interfaces[0]);
+            var releaseInterface = await QuickUsb.releaseInterface(_configuration!.interfaces[0]);
             log('releaseInterface $releaseInterface');
           },
         ),
@@ -192,8 +189,7 @@ class UsbSheetState extends State<UsbSheet> {
         ElevatedButton(
           child: const Text('bulkTransferIn'),
           onPressed: () async {
-            var endpoint = _configuration!.interfaces[0].endpoints
-                .firstWhere((e) => e.direction == UsbEndpoint.DIRECTION_IN);
+            var endpoint = _configuration!.interfaces[0].endpoints.firstWhere((e) => e.direction == UsbEndpoint.DIRECTION_IN);
             var bulkTransferIn = await QuickUsb.bulkTransferIn(endpoint, 1024);
             log('bulkTransferIn ${hex.encode(bulkTransferIn)}');
           },
@@ -202,10 +198,8 @@ class UsbSheetState extends State<UsbSheet> {
           child: const Text('bulkTransferOut'),
           onPressed: () async {
             var data = Uint8List.fromList(utf8.encode(''));
-            var endpoint = _configuration!.interfaces[0].endpoints
-                .firstWhere((e) => e.direction == UsbEndpoint.DIRECTION_OUT);
-            var bulkTransferOut =
-                await QuickUsb.bulkTransferOut(endpoint, data);
+            var endpoint = _configuration!.interfaces[0].endpoints.firstWhere((e) => e.direction == UsbEndpoint.DIRECTION_OUT);
+            var bulkTransferOut = await QuickUsb.bulkTransferOut(endpoint, data);
             log('bulkTransferOut $bulkTransferOut');
           },
         ),
@@ -228,8 +222,7 @@ class UsbSheetState extends State<UsbSheet> {
     return ElevatedButton(
       child: const Text('getDeviceDescription'),
       onPressed: () async {
-        var description =
-            await QuickUsb.getDeviceDescription(_deviceList!.first);
+        var description = await QuickUsb.getDeviceDescription(_deviceList!.first);
         log('description ${description.toMap()}');
       },
     );

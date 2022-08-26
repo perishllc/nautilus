@@ -138,7 +138,7 @@ class AppStyles {
   }
 
   static TextStyle textStyleCurrencyAltHidden(BuildContext context) {
-    return TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent);
+    return const TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent);
   }
 
   // Text style for primary currency on home page

@@ -1,8 +1,10 @@
 // ignore_for_file: avoid_dynamic_calls
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:confetti/confetti.dart';
 import 'package:event_taxi/event_taxi.dart';
@@ -40,6 +42,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/sensitive.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
@@ -49,6 +52,7 @@ import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_xmr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_drawer.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/users/add_blocked.dart';
@@ -91,7 +95,7 @@ class AppHomePage extends StatefulWidget {
   AppHomePageState createState() => AppHomePageState();
 }
 
-class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, SingleTickerProviderStateMixin {
+class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final Logger log = sl.get<Logger>();
 
@@ -136,6 +140,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
 
   // infinite scroll:
   late ScrollController _scrollController;
+  late TabController _tabController;
 
   // Price conversion state (BTC, NANO, NONE)
   PriceConversion? _priceConversion;
@@ -237,8 +242,20 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     );
   }
 
-  Future<void> _branchGiftDialog(
-      {String seed = "", String memo = "", String amountRaw = "", String fromAddress = "", String giftUUID = "", bool requireCaptcha = false}) async {
+  Future<void> handleBranchGift(dynamic gift) async {
+    if (gift == null || !mounted) {
+      return;
+    }
+
+    Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+
+    final String seed = gift["seed"] as String;
+    final String memo = gift["memo"] as String;
+    final String amountRaw = gift["amount_raw"] as String;
+    final String fromAddress = gift["from_address"] as String;
+    final String giftUUID = gift["uuid"] as String;
+    final bool requireCaptcha = gift["require_captcha"] as bool;
+
     final String supposedAmount = getRawAsThemeAwareAmount(context, amountRaw);
 
     String? userOrFromAddress;
@@ -689,6 +706,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     // _updateTXData();
     // infinite scroll:
     _scrollController = ScrollController() /*..addListener(_scrollListener)*/;
+    _tabController = TabController(vsync: this, length: 2);
     // Setup placeholder animation and start
     _animationDisposed = false;
     _placeholderCardAnimationController = AnimationController(
@@ -793,17 +811,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
         }
       });
 
-      // // Check availability
-      // bool isAvailable = await NfcManager.instance.isAvailable();
-      // // Start Session
-      // NfcManager.instance.startSession(
-      //   onDiscovered: (NfcTag tag) async {
-      //     // Do something with an NfcTag instance.
-      //     // log.d("NfcTag: $tag");
-      //     _confettiControllerLeft.play();
-      //     _confettiControllerRight.play();
-      //   },
-      // );
+      // listend for nfc tag events:
+      listenForNFC();
     });
     // confetti:
     _confettiControllerLeft = ConfettiController(duration: const Duration(milliseconds: 150));
@@ -871,6 +880,38 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
       _placeholderCardAnimationController.removeListener(_animationControllerListener);
       _placeholderCardAnimationController.stop();
     }
+  }
+
+  Future<void> listenForNFC() async {
+    final bool isAvailable = await NfcManager.instance.isAvailable();
+
+    if (!isAvailable) {
+      return;
+    }
+
+    // Start Session
+    NfcManager.instance.startSession(
+      onDiscovered: (NfcTag tag) async {
+        // Do something with an NfcTag instance.
+        Ndef? ndef = Ndef.from(tag);
+        if (ndef?.cachedMessage != null && ndef!.cachedMessage!.records.isNotEmpty) {
+          Uint8List payload = ndef.cachedMessage!.records[0].payload;
+
+          if (payload.length < 3) {
+            return;
+          }
+
+          if (payload[0] == 0x00) {
+            payload = payload.sublist(1);
+            handleDeepLink(utf8.decode(payload));
+          } else {
+            // try anyways?
+            handleDeepLink(utf8.decode(payload));
+          }
+        }
+      },
+      // pollingOptions: NfcPollingOption.iso14443
+    );
   }
 
   // Add donations contact if it hasnt already been added
@@ -1075,10 +1116,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     WidgetsBinding.instance.removeObserver(this);
     // _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
+    _tabController.dispose();
     _placeholderCardAnimationController.dispose();
     // confetti:
     _confettiControllerLeft.dispose();
     _confettiControllerRight.dispose();
+
+    NfcManager.instance.stopSession();
+
     super.dispose();
   }
 
@@ -1180,14 +1225,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
         cancelLockEvent();
         StateContainer.of(context).reconnect();
         // handle deep links:
-        if (!StateContainer.of(context).wallet!.loading && StateContainer.of(context).initialDeepLink != null && !_lockTriggered) {
+        if (/*!StateContainer.of(context).wallet!.loading && */ StateContainer.of(context).initialDeepLink != null && !_lockTriggered) {
           handleDeepLink(StateContainer.of(context).initialDeepLink);
           StateContainer.of(context).initialDeepLink = null;
         }
         // branch gift:
-        if (!StateContainer.of(context).wallet!.loading && StateContainer.of(context).giftedWallet == true && !_lockTriggered) {
-          StateContainer.of(context).giftedWallet = false;
-          handleBranchGift();
+        if (StateContainer.of(context).gift != null && !_lockTriggered) {
+          handleBranchGift(StateContainer.of(context).gift);
+          StateContainer.of(context).resetGift();
         }
         // handle pending background events:
         if (!StateContainer.of(context).wallet!.loading && !_lockTriggered) {
@@ -1692,6 +1737,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     if (link.contains("confetti")) {
       _confettiControllerLeft.play();
       _confettiControllerRight.play();
+      setState(() {});
     }
 
     final dynamic result = uriParser(link);
@@ -1780,46 +1826,19 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     }
   }
 
-  // branch deep link gift:
-  Future<void> handleBranchGift() async {
-    if (!mounted) return;
-
-    if (StateContainer.of(context).giftedWallet && StateContainer.of(context).wallet != null) {
-      StateContainer.of(context).giftedWallet = false;
-
-      Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
-      await _branchGiftDialog(
-        seed: StateContainer.of(context).giftedWalletSeed,
-        memo: StateContainer.of(context).giftedWalletMemo,
-        amountRaw: StateContainer.of(context).giftedWalletAmountRaw,
-        fromAddress: StateContainer.of(context).giftedWalletFromAddress,
-        giftUUID: StateContainer.of(context).giftedWalletUUID,
-        requireCaptcha: StateContainer.of(context).giftedWalletRequireCaptcha,
-      );
-
-      if (!mounted) return;
-      StateContainer.of(context).giftedWalletUUID = "";
-      StateContainer.of(context).giftedWalletSeed = "";
-      StateContainer.of(context).giftedWalletAmountRaw = "";
-      StateContainer.of(context).giftedWalletMemo = "";
-      StateContainer.of(context).giftedWalletFromAddress = "";
-      StateContainer.of(context).giftedWalletRequireCaptcha = false;
-    }
-  }
-
   // handle receivable messages
   Future<void> handleReceivableBackgroundMessages() async {
     if (StateContainer.of(context).wallet != null) {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.reload();
-      final List<String>? backgroundMessages = prefs.getStringList('background_messages');
+      final List<String>? backgroundMessages = prefs.getStringList("background_messages");
       // process the message now that we're in the foreground:
 
       if (backgroundMessages != null) {
         // EventTaxiImpl.singleton().fire(FcmMessageEvent(message_list: backgroundMessages));
         await StateContainer.of(context).handleStoredMessages(FcmMessageEvent(message_list: backgroundMessages));
         // clear the storage since we just processed it:
-        await prefs.remove('background_messages');
+        await prefs.remove("background_messages");
       }
     }
   }
@@ -1837,6 +1856,208 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     });
   }
 
+  Widget _buildMainColumnView(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  _buildMainCard(context, _scaffoldKey),
+                  Container(
+                    margin: const EdgeInsetsDirectional.only(top: 20),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    child: TabBar(
+                      controller: _tabController,
+                      indicatorWeight: 3,
+                      indicatorColor: StateContainer.of(context).curTheme.primary,
+                      indicatorPadding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                      ),
+                      tabs: <Widget>[
+                        Tab(
+                          child: Container(
+                            margin: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                            child: Text(
+                              NonTranslatable.nano,
+                              textAlign: TextAlign.center,
+                              style: AppStyles.textStyleTransactionWelcome(context),
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Container(
+                            margin: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                            child: Text(
+                              NonTranslatable.monero,
+                              textAlign: TextAlign.center,
+                              style: AppStyles.textStyleTransactionWelcome(context),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Expanded(
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: [
+                        Stack(
+                          children: <Widget>[
+                            _getUnifiedListWidget(context),
+                            // list gradients:
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Container(
+                                height: 10.0,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                    begin: const AlignmentDirectional(0.5, 1.0),
+                                    end: const AlignmentDirectional(0.5, -1.0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                height: 20.0,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: <Color>[StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                    begin: const AlignmentDirectional(0.5, -1),
+                                    end: const AlignmentDirectional(0.5, 0.5),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Stack(
+                          children: <Widget>[
+                            // _getMoneroListWidget(context),
+                            Text("TODO"),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 55,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                ],
+              ),
+
+              // Buttons
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
+                    ),
+                    height: 55,
+                    width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
+                    margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
+                    // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
+                    child: TextButton(
+                      key: const Key("home_receive_button"),
+                      style: TextButton.styleFrom(
+                        backgroundColor: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                        primary: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                        // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                        // splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                      ),
+                      child: AutoSizeText(
+                        AppLocalization.of(context).receive,
+                        textAlign: TextAlign.center,
+                        style: AppStyles.textStyleButtonPrimary(context),
+                        maxLines: 1,
+                        stepGranularity: 0.5,
+                      ),
+                      onPressed: () async {
+                        if (receive == null) {
+                          return;
+                        }
+
+                        if (_tabController.index == 0) {
+                          Sheets.showAppHeightNineSheet(context: context, widget: receive!);
+                        } else {
+                          Sheets.showAppHeightNineSheet(context: context, widget: SendXMRSheet(localCurrency: StateContainer.of(context).curCurrency));
+                        }
+
+                        // Sheets.showAppHeightNineSheet(context: context, widget: const UsbSheet());
+                        // await QuickUsb.init();
+                        // final List<UsbDevice> deviceList = await QuickUsb.getDeviceList();
+                        // print(deviceList);
+                        // final UsbDevice ledgerDevice = deviceList[0];
+
+                        // var configuration = await QuickUsb.getConfiguration(0);
+                        // log.d('getConfiguration $configuration');
+                        // // var setConfiguration = await QuickUsb.setConfiguration(configuration);
+                        // // log.d('setConfiguration $setConfiguration');
+                        // var claimInterface = await QuickUsb.claimInterface(configuration.interfaces[0]);
+                        // log.d('claimInterface $claimInterface');
+
+                        // var openDevice = await QuickUsb.openDevice(ledgerDevice);
+                        // log.d('openDevice $openDevice');
+                      },
+                    ),
+                  ),
+                  AppPopupButton(moneroEnabled: _tabController.index == 1),
+                ],
+              ),
+
+              // confetti: LEFT
+              Align(
+                alignment: Alignment.centerLeft,
+                child: ConfettiWidget(
+                  blastDirectionality: BlastDirectionality.explosive,
+                  confettiController: _confettiControllerLeft,
+                  blastDirection: -pi / 3,
+                  emissionFrequency: 0.02,
+                  // numberOfParticles: 30,
+                  numberOfParticles: 40,
+                  maxBlastForce: 60,
+                  minBlastForce: 10,
+                  // strokeWidth: 1,
+                  gravity: 0.3,
+                ),
+              ),
+              // confetti: RIGHT
+              Align(
+                alignment: Alignment.centerRight,
+                child: ConfettiWidget(
+                  blastDirectionality: BlastDirectionality.explosive,
+                  confettiController: _confettiControllerRight,
+                  blastDirection: -2 * pi / 3,
+                  emissionFrequency: 0.02,
+                  // numberOfParticles: 30,
+                  numberOfParticles: 40,
+                  maxBlastForce: 60,
+                  minBlastForce: 10,
+                  gravity: 0.3,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Create QR ahead of time because it improves performance this way
@@ -1845,7 +2066,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     }
 
     // handle branch gift if it exists:
-    handleBranchGift();
+    if (StateContainer.of(context).gift != null) {
+      handleBranchGift(StateContainer.of(context).gift);
+      StateContainer.of(context).resetGift();
+    }
 
     if (!UIUtil.isTablet(context)) {
       return Scaffold(
@@ -1862,145 +2086,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
         ),
         body: SafeArea(
           minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.045, bottom: MediaQuery.of(context).size.height * 0.035),
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: <Widget>[
-                    //Everything else
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        //Main Card
-                        _buildMainCard(context, _scaffoldKey),
-                        //Main Card End
-                        //Transactions Text
-                        Container(
-                          margin: const EdgeInsetsDirectional.only(top: 20),
-                        ), //Transactions Text End
-                        //Transactions List
-                        Expanded(
-                          child: Stack(
-                            children: <Widget>[
-                              _getUnifiedListWidget(context),
-                              //List Top Gradient End
-                              Align(
-                                alignment: Alignment.topCenter,
-                                child: Container(
-                                  height: 10.0,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
-                                      begin: const AlignmentDirectional(0.5, 1.0),
-                                      end: const AlignmentDirectional(0.5, -1.0),
-                                    ),
-                                  ),
-                                ),
-                              ), // List Top Gradient End
-                              //List Bottom Gradient
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Container(
-                                  height: 20.0,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
-                                      begin: const AlignmentDirectional(0.5, -1),
-                                      end: const AlignmentDirectional(0.5, 0.5),
-                                    ),
-                                  ),
-                                ),
-                              ), //List Bottom Gradient End
-                            ],
-                          ),
-                        ), //Transactions List End
-                        //Buttons background
-                        SizedBox(
-                          height: 55,
-                          width: MediaQuery.of(context).size.width,
-                        ), //Buttons background
-                      ],
-                    ),
-                    // Buttons
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
-                          ),
-                          height: 55,
-                          width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
-                          margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
-                          // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
-                          child: TextButton(
-                            key: const Key("home_receive_button"),
-                            style: TextButton.styleFrom(
-                              backgroundColor: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                              primary: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                              // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                              // splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                            ),
-                            child: AutoSizeText(
-                              AppLocalization.of(context).receive,
-                              textAlign: TextAlign.center,
-                              style: AppStyles.textStyleButtonPrimary(context),
-                              maxLines: 1,
-                              stepGranularity: 0.5,
-                            ),
-                            onPressed: () async {
-                              if (receive == null) {
-                                return;
-                              }
-                              Sheets.showAppHeightNineSheet(context: context, widget: receive!);
-                            },
-                          ),
-                        ),
-                        AppPopupButton(),
-                      ],
-                    ),
-
-                    // confetti: LEFT
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: ConfettiWidget(
-                        blastDirectionality: BlastDirectionality.explosive,
-                        confettiController: _confettiControllerLeft,
-                        blastDirection: -pi / 3,
-                        emissionFrequency: 0.02,
-                        // numberOfParticles: 30,
-                        numberOfParticles: 40,
-                        maxBlastForce: 60,
-                        minBlastForce: 10,
-                        // strokeWidth: 1,
-                        gravity: 0.3,
-                      ),
-                    ),
-                    // confetti: RIGHT
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: ConfettiWidget(
-                        blastDirectionality: BlastDirectionality.explosive,
-                        confettiController: _confettiControllerRight,
-                        blastDirection: -2 * pi / 3,
-                        emissionFrequency: 0.02,
-                        // numberOfParticles: 30,
-                        numberOfParticles: 40,
-                        maxBlastForce: 60,
-                        minBlastForce: 10,
-                        gravity: 0.3,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          child: _buildMainColumnView(context),
         ),
       );
     }
@@ -2025,116 +2111,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
               width: UIUtil.getDrawerAwareScreenWidth(context),
               height: MediaQuery.of(context).size.height,
               margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.015),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: <Widget>[
-                        //Everything else
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            //Main Card
-                            _buildMainCard(context, _scaffoldKey),
-                            //Main Card End
-                            //Transactions Text
-                            Container(
-                              margin: const EdgeInsetsDirectional.only(top: 20),
-                            ), //Transactions Text End
-                            //Transactions List
-                            Expanded(
-                              child: Stack(
-                                children: <Widget>[
-                                  // _getUnifiedListWidget(context),
-                                  _getUnifiedListWidget(context),
-                                  //List Top Gradient End
-                                  Align(
-                                    alignment: Alignment.topCenter,
-                                    child: Container(
-                                      height: 10.0,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
-                                          begin: const AlignmentDirectional(0.5, 1.0),
-                                          end: const AlignmentDirectional(0.5, -1.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ), // List Top Gradient End
-                                  //List Bottom Gradient
-                                  Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Container(
-                                      height: 20.0,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
-                                          begin: const AlignmentDirectional(0.5, -1),
-                                          end: const AlignmentDirectional(0.5, 0.5),
-                                        ),
-                                      ),
-                                    ),
-                                  ), //List Bottom Gradient End
-                                ],
-                              ),
-                            ), //Transactions List End
-                            //Buttons background
-                            SizedBox(
-                              height: 55,
-                              width: MediaQuery.of(context).size.width,
-                            ), //Buttons background
-                          ],
-                        ),
-
-                        // Send / Receive Buttons
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
-                              ),
-                              height: 55,
-                              width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
-                              margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
-                              // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
-                              child: TextButton(
-                                key: const Key("home_receive_button"),
-                                style: TextButton.styleFrom(
-                                  backgroundColor:
-                                      receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                                  primary: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                                  // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                                  // splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                                ),
-                                child: AutoSizeText(
-                                  AppLocalization.of(context).receive,
-                                  textAlign: TextAlign.center,
-                                  style: AppStyles.textStyleButtonPrimary(context),
-                                  maxLines: 1,
-                                  stepGranularity: 0.5,
-                                ),
-                                onPressed: () {
-                                  if (receive == null) {
-                                    return;
-                                  }
-                                  Sheets.showAppHeightNineSheet(context: context, widget: receive!);
-                                },
-                              ),
-                            ),
-                            AppPopupButton(),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              child: _buildMainColumnView(context),
             ),
           ],
         ),
@@ -2580,7 +2557,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
       enableBoxShadow: false,
       enableButtonBorder: false,
       enableButtonShadow: false,
-      // textAlignToRight: StateContainer.of(context).
       durationInMilliSeconds: 300,
       enableKeyboardFocus: true,
       enteredTextStyle: TextStyle(
@@ -3824,6 +3800,208 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, S
     }
 
     return _buildUnifiedCard(txDetails, animation, displayName, context);
+  }
+
+  Widget _getMoneroListWidget(BuildContext context) {
+    if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.historyLoading == false) {
+      // Setup history list
+      if (!_historyListMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
+        setState(() {
+          _historyListMap.putIfAbsent(StateContainer.of(context).wallet!.address!, () => StateContainer.of(context).wallet!.history);
+        });
+      }
+      // Setup payments list
+      if (!_solidsListMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
+        setState(() {
+          _solidsListMap.putIfAbsent(StateContainer.of(context).wallet!.address!, () => StateContainer.of(context).wallet!.solids);
+        });
+      }
+
+      String ADR = StateContainer.of(context).wallet!.address!;
+      if (StateContainer.of(context).activeAlerts.isNotEmpty) {
+        ADR = "${ADR}alert";
+      }
+      // Setup unified list
+      if (!_unifiedListKeyMap.containsKey(ADR)) {
+        _unifiedListKeyMap.putIfAbsent(ADR, () => GlobalKey<AnimatedListState>());
+        setState(() {
+          _unifiedListMap.putIfAbsent(
+            ADR,
+            () => ListModel<dynamic>(
+              listKey: _unifiedListKeyMap[ADR]!,
+              initialItems: StateContainer.of(context).wallet!.unified,
+            ),
+          );
+        });
+      }
+
+      if (StateContainer.of(context).wallet!.unifiedLoading || (_unifiedListMap[ADR] != null && _unifiedListMap[ADR]!.length == 0)) {
+        generateUnifiedList(fastUpdate: true);
+      }
+    }
+
+    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading || StateContainer.of(context).wallet!.unifiedLoading) {
+      // Loading Animation
+      return ReactiveRefreshIndicator(
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          onRefresh: _refresh,
+          isRefreshing: _isRefreshing,
+          child: ListView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            controller: _scrollController,
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+            children: <Widget>[
+              _buildLoadingTransactionCard("Sent", "10244000", "123456789121234", context),
+              _buildLoadingTransactionCard("Received", "100,00000", "@fosse1234", context),
+              _buildLoadingTransactionCard("Sent", "14500000", "12345678912345671234", context),
+              _buildLoadingTransactionCard("Sent", "12,51200", "123456789121234", context),
+              _buildLoadingTransactionCard("Received", "1,45300", "123456789121234", context),
+              _buildLoadingTransactionCard("Sent", "100,00000", "12345678912345671234", context),
+              _buildLoadingTransactionCard("Received", "24,00000", "12345678912345671234", context),
+              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
+              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
+              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
+            ],
+          ));
+    } else {
+      _disposeAnimation();
+    }
+
+    if (StateContainer.of(context).wallet!.history.isEmpty && StateContainer.of(context).wallet!.solids.isEmpty) {
+      final List<Widget> activeAlerts = [];
+      for (final AlertResponseItem alert in StateContainer.of(context).activeAlerts) {
+        activeAlerts.add(_buildRemoteMessageCard(alert));
+      }
+      return DraggableScrollbar(
+        controller: _scrollController,
+        scrollbarColor: StateContainer.of(context).curTheme.primary!,
+        scrollbarTopMargin: 10.0,
+        scrollbarBottomMargin: 20.0,
+        child: ReactiveRefreshIndicator(
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          onRefresh: _refresh,
+          isRefreshing: _isRefreshing,
+          child: ListView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            controller: _scrollController,
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+            children: <Widget>[
+              // REMOTE MESSAGE CARDS
+              if (StateContainer.of(context).activeAlerts.isNotEmpty)
+                Column(
+                  children: activeAlerts,
+                ),
+              _buildWelcomeTransactionCard(context),
+              _buildDummyTXCard(
+                context,
+                amount_raw: "30000000000000000000000000000000",
+                displayName: AppLocalization.of(context).exampleRecRecipient,
+                memo: AppLocalization.of(context).exampleRecRecipientMessage,
+                is_recipient: true,
+                is_tx: true,
+                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60),
+              ),
+              _buildDummyTXCard(
+                context,
+                amount_raw: "50000000000000000000000000000000",
+                displayName: AppLocalization.of(context).examplePayRecipient,
+                memo: AppLocalization.of(context).examplePayRecipientMessage,
+                is_recipient: false,
+                is_tx: true,
+                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 1),
+              ),
+              _buildWelcomePaymentCardTwo(context),
+
+              _buildDummyTXCard(
+                context,
+                amount_raw: "10000000000000000000000000000000",
+                displayName: AppLocalization.of(context).examplePaymentTo,
+                memo: AppLocalization.of(context).examplePaymentFulfilledMemo,
+                is_recipient: false,
+                is_request: true,
+                is_fulfilled: true,
+                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 5),
+              ),
+              _buildDummyTXCard(
+                context,
+                amount_raw: "2000000000000000000000000000000000",
+                displayName: AppLocalization.of(context).examplePaymentFrom,
+                memo: AppLocalization.of(context).examplePaymentReceivableMemo,
+                is_recipient: true,
+                is_request: true,
+                is_fulfilled: false,
+                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 7),
+              ),
+              _buildDummyTXCard(
+                context,
+                displayName: AppLocalization.of(context).examplePaymentTo,
+                memo: AppLocalization.of(context).examplePaymentMessage,
+                is_recipient: true,
+                is_message: true,
+                is_fulfilled: false,
+                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 9),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    if (StateContainer.of(context).activeAlerts.isNotEmpty) {
+      // Setup unified list
+      if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet!.address}alert")) {
+        _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet!.address}alert", () => GlobalKey<AnimatedListState>());
+        setState(() {
+          _unifiedListMap.putIfAbsent(
+            StateContainer.of(context).wallet!.address!,
+            () => ListModel<dynamic>(
+              listKey: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address!}alert"]!,
+              initialItems: StateContainer.of(context).wallet!.unified,
+            ),
+          );
+        });
+      }
+      return DraggableScrollbar(
+        controller: _scrollController,
+        scrollbarColor: StateContainer.of(context).curTheme.primary!,
+        scrollbarTopMargin: 10.0,
+        scrollbarBottomMargin: 20.0,
+        child: ReactiveRefreshIndicator(
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          onRefresh: _refresh,
+          isRefreshing: _isRefreshing,
+          child: AnimatedList(
+            physics: const AlwaysScrollableScrollPhysics(),
+            controller: _scrollController,
+            key: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address}alert"],
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+            initialItemCount: _unifiedListMap["${StateContainer.of(context).wallet!.address}alert"]!.length + StateContainer.of(context).activeAlerts.length,
+            itemBuilder: _buildUnifiedItem,
+          ),
+        ),
+      );
+    }
+
+    return DraggableScrollbar(
+      controller: _scrollController,
+      scrollbarColor: StateContainer.of(context).curTheme.primary!,
+      scrollbarTopMargin: 10.0,
+      scrollbarBottomMargin: 20.0,
+      child: ReactiveRefreshIndicator(
+        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        onRefresh: _refresh,
+        isRefreshing: _isRefreshing,
+        child: AnimatedList(
+          physics: const AlwaysScrollableScrollPhysics(),
+          controller: _scrollController,
+          primary: false,
+          key: _unifiedListKeyMap[StateContainer.of(context).wallet!.address!],
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+          initialItemCount: _unifiedListMap[StateContainer.of(context).wallet!.address]!.length,
+          itemBuilder: _buildUnifiedItem,
+        ),
+      ),
+    );
   }
 
   // Return widget for list

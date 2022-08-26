@@ -1,22 +1,23 @@
-import 'dart:convert';
-import 'dart:ui';
-import 'dart:io';
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:intl/intl.dart';
-import 'package:nautilus_wallet_flutter/model/currency_mode_setting.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
-import 'package:nautilus_wallet_flutter/util/random_util.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/util/encrypt.dart';
-import 'package:nautilus_wallet_flutter/model/available_themes.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
+import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/model/available_language.dart';
-import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
+import 'package:nautilus_wallet_flutter/model/available_themes.dart';
+import 'package:nautilus_wallet_flutter/model/currency_mode_setting.dart';
 import 'package:nautilus_wallet_flutter/model/device_lock_timeout.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/util/encrypt.dart';
+import 'package:nautilus_wallet_flutter/util/random_util.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Price conversion preference values
 enum PriceConversion { CURRENCY, NONE, HIDDEN }
