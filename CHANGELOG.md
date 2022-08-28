@@ -1,8 +1,7 @@
-## v0.6.2 - [2022-08-XX]
+## v0.6.2 - [2022-08-29]
 #### Added
 - Major improvements to NFC handling, NFC scans within the app no longer re-load the entire app
 - Integrated Monero wallet support (Alpha)
-  - Please don't trust this with a lot of money, it's a quick hack while I slowly update things in the background
 - ~~Integrated XMR Wallet and swapping~~ (WIP)
 - Reworked Nautilus theme to be more inviting and easier on the eyes
 #### Changed

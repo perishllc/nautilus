@@ -643,7 +643,7 @@ class StateContainerState extends State<StateContainer> {
               "from_address": data["from_address"] as String? ?? "",
               "memo": data["memo"] as String? ?? "",
               "require_captcha": data["require_captcha"] == "True",
-              "uuid": data["uuid"] as String? ?? "",
+              "uuid": data["gift_uuid"] as String? ?? "",
             };
           });
           // }
