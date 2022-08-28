@@ -1259,7 +1259,7 @@ class SendSheetState extends State<SendSheet> {
     _addressFocusNode!.unfocus();
     _memoFocusNode!.unfocus();
     // Validate amount
-    if (_amountController!.text.trim().isEmpty && _memoController!.text.trim().isNotEmpty) {
+    if (_amountController!.text.trim().isEmpty && _memoController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
         _amountValidationText = AppLocalization.of(context).amountMissing;

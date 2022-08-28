@@ -173,6 +173,12 @@
       "css": "qrcode",
       "code": 61481,
       "src": "fontawesome5"
+    },
+    {
+      "uid": "95535e598dca8b1eaaa7f79acd105086",
+      "css": "content_copy",
+      "code": 59404,
+      "src": "material"
     }
   ]
 }

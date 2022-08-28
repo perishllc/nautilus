@@ -738,7 +738,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                   children: <Widget>[
                     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).request, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
-                      final bool validRequest = await _validateRequest(isRequest: true);
+                      final bool validRequest = await _validateRequest();
                       if (!mounted) return;
 
                       if (!validRequest) {
@@ -1114,13 +1114,13 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
 
   /// Validate form data to see if valid
   /// @returns true if valid, false otherwise
-  Future<bool> _validateRequest({bool isRequest = false}) async {
+  Future<bool> _validateRequest() async {
     bool isValid = true;
     _amountFocusNode!.unfocus();
     _addressFocusNode!.unfocus();
     _memoFocusNode!.unfocus();
     // Validate amount
-    if (_amountController!.text.trim().isEmpty && isRequest && _memoController!.text.trim().isNotEmpty) {
+    if (_amountController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
         _amountValidationText = AppLocalization.of(context).amountMissing;
@@ -1142,7 +1142,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       final BigInt balanceRaw = StateContainer.of(context).wallet!.accountBalance;
       final BigInt? sendAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
       if (sendAmount == null || sendAmount == BigInt.zero) {
-        if (_memoController!.text.trim().isEmpty || isRequest) {
+        if (_memoController!.text.trim().isEmpty) {
           isValid = false;
           setState(() {
             _amountValidationText = AppLocalization.of(context).amountMissing;
@@ -1152,11 +1152,6 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
             _amountValidationText = "";
           });
         }
-      } else if (sendAmount > balanceRaw && !isRequest) {
-        isValid = false;
-        setState(() {
-          _amountValidationText = AppLocalization.of(context).insufficientBalance;
-        });
       } else {
         setState(() {
           _amountValidationText = "";
@@ -1169,7 +1164,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     final bool isDomain = _addressController!.text.contains(".") || _addressController!.text.contains(r"$");
     final bool isNano = _addressController!.text.startsWith("nano_");
     // final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
-    if (_addressController!.text.trim().isEmpty && isRequest) {
+    if (_addressController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context).addressMissing;
@@ -1192,7 +1187,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
       // notifications must be turned on if sending a request or memo:
       final bool notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
 
-      if ((isRequest || (_memoController!.text.isNotEmpty && _addressController!.text.isNotEmpty)) && !notificationsEnabled) {
+      if ((_memoController!.text.isNotEmpty && _addressController!.text.isNotEmpty) && !notificationsEnabled) {
         final bool notificationTurnedOn = await showNotificationDialog();
         if (!notificationTurnedOn) {
           isValid = false;
@@ -1203,7 +1198,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
         }
       }
 
-      if (isValid && isRequest) {
+      if (isValid) {
         // still valid && you have to have a nautilus username to send requests:
         if (StateContainer.of(context).wallet!.user == null && StateContainer.of(context).wallet!.confirmationHeight < _REQUIRED_CONFIRMATION_HEIGHT) {
           isValid = false;

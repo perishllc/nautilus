@@ -1,6 +1,8 @@
 name: nautilus_wallet_flutter
 description: Nautilus - Fast, Robust & Secure NANO Wallet.
 
+publish_to: "none"
+
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
@@ -200,6 +202,35 @@ dependencies:
       ref: main
   x25519: ^0.1.1
   encrypt: ^5.0.1
+
+  # xmr:
+  # flutter_libmonero:
+  #   git:
+  #     url: https://github.com/cypherstack/flutter_libmonero.git
+  #     ref: a63b69fd4cc437b789f82085c3cdb50b3b99db94
+  # cw_core:
+  #   git:
+  #     url: https://github.com/cypherstack/flutter_libmonero.git
+  #     ref: a63b69fd4cc437b789f82085c3cdb50b3b99db94
+  #     path: cw_core
+  # cw_monero:
+  #   git:
+  #     url: https://github.com/cypherstack/flutter_libmonero.git
+  #     ref: a63b69fd4cc437b789f82085c3cdb50b3b99db94
+  #     path: cw_monero
+  # cw_shared_external:
+  #   git:
+  #     url: https://github.com/cypherstack/flutter_libmonero.git
+  #     ref: a63b69fd4cc437b789f82085c3cdb50b3b99db94
+  #     path: cw_shared_external
+  # cw_core:
+  #   path: ./crypto_plugins/flutter_libmonero/cw_core
+  # cw_monero:
+  #   path: ./crypto_plugins/flutter_libmonero/cw_monero
+  # cw_shared_external:
+  #   path: ./crypto_plugins/flutter_libmonero/cw_shared_external
+  # flutter_libmonero:
+  #   path: ./crypto_plugins/flutter_libmonero
 
   # search bar + text highlighting:
   searchbar_animation: ^0.0.2

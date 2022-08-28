@@ -33,6 +33,7 @@ class AppAccountsSheet extends StatefulWidget {
 
   final List<Account> accounts;
 
+  @override
   AppAccountsSheetState createState() => AppAccountsSheetState();
 }
 
@@ -616,6 +617,24 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                     //         width: 6,
                     //         color: account.selected ? StateContainer.of(context).curTheme.primary : Colors.transparent,
                     //       )
+                    // copy address button:
+                    // Container(
+                    //   height: 40,
+                    //   width: 40,
+                    //   child: TextButton(
+                    //     // style: styles.roundedTextButtonStyle,
+                    //     child: Icon(Icons.copy, color: theme.text),
+                    //     onPressed: () async {
+                    //       await Clipboard.setData(
+                    //         ClipboardData(text: account.viteAddress),
+                    //       );
+                    //       UIUtil.showSnackbar(
+                    //         'Account address copied!',
+                    //         context,
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
                     // handle bars:
                     Container(
                       width: 4,

@@ -1,7 +1,10 @@
 ## v0.6.2 - [2022-08-XX]
 #### Added
+- Major improvements to NFC handling, NFC scans within the app no longer re-load the entire app
+- ~~Integrated XMR Wallet and swapping~~ (WIP)
 #### Changed
 #### Fixed
+- Bugs related to sending messages
 ## v0.6.1 - [2022-08-26]
 #### Fixed
 - lots of nanoauth fixes
@@ -11,7 +14,6 @@
   - [Demo Handoff](https://perihs.co/handoff)
 - Checkbox option to require a captcha in order to redeem a gift card
 - perish.co/promo (feel free to use as a general promotional link for nautilus / easy onboarding)
-- ~~Integrated XMR Swapping~~ (WIP)
 #### Changed
 - Better support for landscape views / iPads
 - Updated Gift Cards to look a lot more modern and added a custom page for Desktop links

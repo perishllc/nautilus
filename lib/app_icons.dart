@@ -89,6 +89,7 @@ class AppIcons {
   static const IconData more_horiz = IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData clear = IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData clear_all = IconData(0xe80b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData content_copy = IconData(0xe80c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData heart = IconData(0xf004, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData star = IconData(0xf005, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData home = IconData(0xf015, fontFamily: _kFontFam, fontPackage: _kFontPkg);
