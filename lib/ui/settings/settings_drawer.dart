@@ -753,7 +753,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
 
   Future<String?> _onrampDialog() async {
     const String onramper_url =
-        "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
+        "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&darkMode=true";
     const String moonpay_url = "https://buy.moonpay.com/?currencyCode=xno&colorCode=%234080D7";
     const String simplex_url = "https://buy.chainbits.com";
 
@@ -1748,19 +1748,19 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                   children: <Widget>[
                     GestureDetector(
                         onTap: () async {
-                          await UIUtil.showWebview(context, NonTranslatable.privacyUrl);
+                          await UIUtil.showChromeSafariWebview(context, NonTranslatable.privacyUrl);
                         },
                         child: Text(AppLocalization.of(context).privacyPolicy, style: AppStyles.textStyleVersionUnderline(context))),
                     Text(" | ", style: AppStyles.textStyleVersion(context)),
                     GestureDetector(
                         onTap: () async {
-                          await UIUtil.showWebview(context, NonTranslatable.eulaUrl);
+                          await UIUtil.showChromeSafariWebview(context, NonTranslatable.eulaUrl);
                         },
                         child: Text(AppLocalization.of(context).eula, style: AppStyles.textStyleVersionUnderline(context))),
                     Text(" | ", style: AppStyles.textStyleVersion(context)),
                     GestureDetector(
                         onTap: () async {
-                          await UIUtil.showWebview(context, NonTranslatable.nautilusNodeUrl);
+                          await UIUtil.showChromeSafariWebview(context, NonTranslatable.nautilusNodeUrl);
                         },
                         child: Text(AppLocalization.of(context).nodeStatus, style: AppStyles.textStyleVersionUnderline(context))),
                   ],
@@ -2544,7 +2544,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       onPressed: () async {
                         const String url =
                             "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
-                        await UIUtil.showWebview(context, url);
+                        await UIUtil.showChromeSafariWebview(context, url);
                       },
                       iconOverride: const SizedBox(
                         width: 24,
@@ -2561,7 +2561,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       AppIcons.coins,
                       onPressed: () async {
                         const String url = "https://nanocafe.cc";
-                        await UIUtil.showWebview(context, url);
+                        await UIUtil.showChromeSafariWebview(context, url);
                       },
                       iconOverride: const SizedBox(
                         width: 24,
@@ -2603,7 +2603,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       AppIcons.coins,
                       onPressed: () async {
                         const String url = "https://redeemfor.me";
-                        await UIUtil.showWebview(context, url);
+                        await UIUtil.showChromeSafariWebview(context, url);
                       },
                       iconOverride: const SizedBox(
                         width: 24,
@@ -2627,7 +2627,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       AppIcons.coins,
                       onPressed: () async {
                         const String url = "https://nanswap.com/?ref=nautilus";
-                        await UIUtil.showWebview(context, url);
+                        await UIUtil.showChromeSafariWebview(context, url);
                       },
                       iconOverride: const SizedBox(
                         width: 24,

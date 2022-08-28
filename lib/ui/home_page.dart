@@ -9,8 +9,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:confetti/confetti.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -42,6 +45,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/sensitive.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/mymonero.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -86,6 +90,7 @@ import 'package:searchbar_animation/searchbar_animation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 import 'package:uuid/uuid.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class AppHomePage extends StatefulWidget {
   AppHomePage({this.priceConversion}) : super();
@@ -1943,9 +1948,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                           ],
                         ),
                         Stack(
-                          children: <Widget>[
+                          children: const <Widget>[
                             // _getMoneroListWidget(context),
-                            Text("TODO"),
+                            // Text("TODO"),
+                            MyMonero(),
                           ],
                         ),
                       ],

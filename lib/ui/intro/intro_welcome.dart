@@ -118,15 +118,12 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                                 height: 95,
                               ),
                               Container(
-                                // color: Colors.white,
                                 padding: EdgeInsets.zero,
-                                // padding: const EdgeInsets.all(10),
-                                // width: double.infinity,
                                 width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
                                 child: TextLiquidFill(
                                   text: CaseChange.toUpperCase(NonTranslatable.nautilus, context),
                                   waveColor: NautilusTheme.nautilusBlue,
-                                  boxBackgroundColor: Colors.black,
+                                  boxBackgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
                                   textStyle: const TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold, color: Colors.white),
                                   boxHeight: 100.0,
                                   boxWidth: double.infinity,

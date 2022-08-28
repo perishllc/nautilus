@@ -20,7 +20,6 @@ enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
 enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
 
 class MyInAppBrowser extends InAppBrowser {
-
   @override
   Future<CustomSchemeResponse> onLoadResourceCustomScheme(Uri url) async {
     if (await canLaunchUrl(url)) {
@@ -404,6 +403,25 @@ class UIUtil {
     );
     await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
   }
+
+  static Future<void> showChromeSafariWebview(BuildContext context, String url) async {
+    cancelLockEvent();
+    final ChromeSafariBrowser browser = ChromeSafariBrowser();
+
+    final ChromeSafariBrowserClassOptions options = ChromeSafariBrowserClassOptions(
+      android: AndroidChromeCustomTabsOptions(shareState: CustomTabsShareState.SHARE_STATE_OFF),
+      ios: IOSSafariOptions(barCollapsingEnabled: true),
+    );
+    await browser.open(url: Uri.parse(url), options: options);
+  }
+
+  // static Widget getWebView(BuildContext context, String url) {
+  //   InAppWebView(
+  //     key: webViewKey,
+  //     initialUrlRequest: URLRequest(url: Uri.parse("https://inappwebview.dev/")),
+  //     initialOptions: options,
+  //   );
+  // }
 
   static double drawerWidth(BuildContext context) {
     if (MediaQuery.of(context).size.width < 375) {

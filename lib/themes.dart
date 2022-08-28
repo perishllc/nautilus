@@ -20,6 +20,7 @@ enum OverlayTheme {
   BLAISEDARK,
   COPPER,
   MONOCHROME,
+  MIDNIGHT,
   PERISHABLE,
 }
 
@@ -108,18 +109,20 @@ abstract class NyanTheme extends BaseTheme {
 
 class NautilusTheme extends BaseTheme {
   static const Color nautilusBlue = Color(0xFF4080D7);
-  static const Color brighterBlue = Color(0xFF80BAC7);
-  // some test colors:
-  // current: #B999F0
-  // darker: #B19CD9
-  // lighter: #CCA9DD
+
+  // static const Color tealLightest = Color.fromRGBO(128, 128, 128, 1);
+
+  static const Color tealLightest = nautilusBlue;
+
+  // static const Color tealLight = Color.fromRGBO(64, 64, 64, 1);
+
+  static const Color tealLight = Color.fromRGBO(24, 24, 24, 1);
+
+  static const Color tealDark = Color.fromRGBO(16, 16, 16, 1);
+  static const Color tealDarkest = Color.fromRGBO(10, 10, 10, 1);
 
   static const Color white = Color(0xFFFFFFFF);
-  static const Color whiteish = Color(0xFFE9E9F2);
-
   static const Color black = Color(0xFF000000);
-  static const Color blackBlueish = Color(0xFF0D1014);
-  static const Color blackLighter = Color(0xFF0E0F0F);
 
   static const Color green = Color(0xFF41E099);
   static const Color greenDark = Color(0xFF148A55);
@@ -130,13 +133,13 @@ class NautilusTheme extends BaseTheme {
   static const Color red = Color(0xFFE80000);
   static const Color redDark = Color(0xFFB20000);
 
-  Color? primary = nautilusBlue;
-  Color? primary60 = nautilusBlue.withOpacity(0.6);
-  Color? primary45 = nautilusBlue.withOpacity(0.45);
-  Color? primary30 = nautilusBlue.withOpacity(0.3);
-  Color? primary20 = nautilusBlue.withOpacity(0.2);
-  Color? primary15 = nautilusBlue.withOpacity(0.15);
-  Color? primary10 = nautilusBlue.withOpacity(0.1);
+  Color? primary = tealLightest;
+  Color? primary60 = tealLightest.withOpacity(0.6);
+  Color? primary45 = tealLightest.withOpacity(0.45);
+  Color? primary30 = tealLightest.withOpacity(0.3);
+  Color? primary20 = tealLightest.withOpacity(0.2);
+  Color? primary15 = tealLightest.withOpacity(0.15);
+  Color? primary10 = tealLightest.withOpacity(0.1);
 
   Color? success = green;
   Color? success60 = green.withOpacity(0.6);
@@ -164,61 +167,46 @@ class NautilusTheme extends BaseTheme {
   Color? errorDark = redDark;
   Color? errorDark30 = redDark.withOpacity(0.3);
 
-  Color? background = black;
-  Color? background40 = black.withOpacity(0.4);
-  Color? background00 = black.withOpacity(0.0);
+  Color? background = tealLight;
+  Color? background40 = tealLight.withOpacity(0.4);
+  Color? background00 = tealLight.withOpacity(0.0);
 
-  Color? backgroundDark = black;
-  Color? backgroundDark00 = black.withOpacity(0.0);
+  Color? backgroundDark = tealDark;
+  Color? backgroundDark00 = tealDark.withOpacity(0.0);
 
-  Color? backgroundDarkest = blackLighter;
+  Color? backgroundDarkest = tealDarkest;
 
-  Color? text = whiteish.withOpacity(0.9);
-  Color? text60 = whiteish.withOpacity(0.6);
-  Color? text45 = whiteish.withOpacity(0.45);
-  Color? text30 = whiteish.withOpacity(0.3);
-  Color? text20 = whiteish.withOpacity(0.2);
-  Color? text15 = whiteish.withOpacity(0.15);
-  Color? text10 = whiteish.withOpacity(0.1);
-  Color? text05 = whiteish.withOpacity(0.05);
-  Color? text03 = whiteish.withOpacity(0.03);
+  Color? text = white.withOpacity(0.9);
+  Color? text60 = white.withOpacity(0.6);
+  Color? text45 = white.withOpacity(0.45);
+  Color? text30 = white.withOpacity(0.3);
+  Color? text20 = white.withOpacity(0.2);
+  Color? text15 = white.withOpacity(0.15);
+  Color? text10 = white.withOpacity(0.1);
+  Color? text05 = white.withOpacity(0.05);
+  Color? text03 = white.withOpacity(0.03);
 
-  Color? overlay90 = blackLighter.withOpacity(0.9);
-  Color? overlay85 = blackLighter.withOpacity(0.85);
-  Color? overlay80 = blackLighter.withOpacity(0.8);
-  Color? overlay70 = blackLighter.withOpacity(0.7);
-  Color? overlay50 = blackLighter.withOpacity(0.5);
-  Color? overlay30 = blackLighter.withOpacity(0.3);
-  Color? overlay20 = blackLighter.withOpacity(0.2);
+  Color? overlay90 = black.withOpacity(0.9);
+  Color? overlay85 = black.withOpacity(0.85);
+  Color? overlay80 = black.withOpacity(0.8);
+  Color? overlay70 = black.withOpacity(0.7);
+  Color? overlay50 = black.withOpacity(0.5);
+  Color? overlay30 = black.withOpacity(0.3);
+  Color? overlay20 = black.withOpacity(0.2);
 
-  Color? barrier = blackBlueish.withOpacity(0.8);
-  Color? barrierWeaker = blackBlueish.withOpacity(0.7);
-  Color? barrierWeakest = blackBlueish.withOpacity(0.35);
-  Color? barrierStronger = blackBlueish.withOpacity(0.9);
+  Color? barrier = black.withOpacity(0.7);
+  Color? barrierWeaker = black.withOpacity(0.4);
+  Color? barrierWeakest = black.withOpacity(0.3);
+  Color? barrierStronger = black.withOpacity(0.85);
 
-  Color? animationOverlayMedium = blackBlueish.withOpacity(0.8);
-  Color? animationOverlayStrong = blackBlueish.withOpacity(0.9);
+  Color? animationOverlayMedium = black.withOpacity(0.7);
+  Color? animationOverlayStrong = black.withOpacity(0.85);
 
   Brightness? brightness = Brightness.dark;
   SystemUiOverlayStyle? statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
-  BoxShadow? boxShadow = BoxShadow(
-    color: white.withOpacity(0.14),
-    // color: black.withOpacity(0.5),
-    offset: Offset.zero,
-    blurRadius: 0,
-    spreadRadius: 1,
-  );
-  BoxShadow? boxShadowButton = BoxShadow(
-    // color: brightRed,
-    color: nautilusBlue.withOpacity(0.24),
-    offset: Offset.zero,
-    blurRadius: 0,
-    spreadRadius: 0,
-  );
-
-  // OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
-  // AppIconEnum? appIcon = AppIconEnum.CARBON;
+  BoxShadow? boxShadow = const BoxShadow(color: Colors.transparent);
+  BoxShadow? boxShadowButton = const BoxShadow(color: Colors.transparent);
 }
 
 class TitaniumTheme extends BaseTheme {
@@ -1063,6 +1051,121 @@ class MonochromeTheme extends BaseTheme {
 
   BoxShadow? boxShadow = const BoxShadow(color: Colors.transparent);
   BoxShadow? boxShadowButton = const BoxShadow(color: Colors.transparent);
+}
+
+class MidnightTheme extends BaseTheme {
+  static const Color nautilusBlue = Color(0xFF4080D7);
+  static const Color brighterBlue = Color(0xFF80BAC7);
+  // some test colors:
+  // current: #B999F0
+  // darker: #B19CD9
+  // lighter: #CCA9DD
+
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color whiteish = Color(0xFFE9E9F2);
+
+  static const Color black = Color(0xFF000000);
+  static const Color blackBlueish = Color(0xFF0D1014);
+  static const Color blackLighter = Color(0xFF0E0F0F);
+
+  static const Color green = Color(0xFF41E099);
+  static const Color greenDark = Color(0xFF148A55);
+
+  static const Color yellow = Color(0xFFFFB300);
+  static const Color yellowDark = Color(0xFFFFCB00);
+
+  static const Color red = Color(0xFFE80000);
+  static const Color redDark = Color(0xFFB20000);
+
+  Color? primary = nautilusBlue;
+  Color? primary60 = nautilusBlue.withOpacity(0.6);
+  Color? primary45 = nautilusBlue.withOpacity(0.45);
+  Color? primary30 = nautilusBlue.withOpacity(0.3);
+  Color? primary20 = nautilusBlue.withOpacity(0.2);
+  Color? primary15 = nautilusBlue.withOpacity(0.15);
+  Color? primary10 = nautilusBlue.withOpacity(0.1);
+
+  Color? success = green;
+  Color? success60 = green.withOpacity(0.6);
+  Color? success45 = green.withOpacity(0.45);
+  Color? success30 = green.withOpacity(0.3);
+  Color? success15 = green.withOpacity(0.15);
+
+  Color? successDark = greenDark;
+  Color? successDark30 = greenDark.withOpacity(0.3);
+
+  Color? warning = yellow;
+  Color? warning60 = yellow.withOpacity(0.6);
+  Color? warning45 = yellow.withOpacity(0.45);
+  Color? warning30 = yellow.withOpacity(0.3);
+  Color? warning15 = yellow.withOpacity(0.15);
+
+  Color? warningDark = yellowDark;
+  Color? warningDark30 = yellowDark.withOpacity(0.3);
+
+  Color? error = red;
+  Color? error60 = red.withOpacity(0.6);
+  Color? error30 = red.withOpacity(0.3);
+  Color? error15 = red.withOpacity(0.15);
+
+  Color? errorDark = redDark;
+  Color? errorDark30 = redDark.withOpacity(0.3);
+
+  Color? background = black;
+  Color? background40 = black.withOpacity(0.4);
+  Color? background00 = black.withOpacity(0.0);
+
+  Color? backgroundDark = black;
+  Color? backgroundDark00 = black.withOpacity(0.0);
+
+  Color? backgroundDarkest = blackLighter;
+
+  Color? text = whiteish.withOpacity(0.9);
+  Color? text60 = whiteish.withOpacity(0.6);
+  Color? text45 = whiteish.withOpacity(0.45);
+  Color? text30 = whiteish.withOpacity(0.3);
+  Color? text20 = whiteish.withOpacity(0.2);
+  Color? text15 = whiteish.withOpacity(0.15);
+  Color? text10 = whiteish.withOpacity(0.1);
+  Color? text05 = whiteish.withOpacity(0.05);
+  Color? text03 = whiteish.withOpacity(0.03);
+
+  Color? overlay90 = blackLighter.withOpacity(0.9);
+  Color? overlay85 = blackLighter.withOpacity(0.85);
+  Color? overlay80 = blackLighter.withOpacity(0.8);
+  Color? overlay70 = blackLighter.withOpacity(0.7);
+  Color? overlay50 = blackLighter.withOpacity(0.5);
+  Color? overlay30 = blackLighter.withOpacity(0.3);
+  Color? overlay20 = blackLighter.withOpacity(0.2);
+
+  Color? barrier = blackBlueish.withOpacity(0.8);
+  Color? barrierWeaker = blackBlueish.withOpacity(0.7);
+  Color? barrierWeakest = blackBlueish.withOpacity(0.35);
+  Color? barrierStronger = blackBlueish.withOpacity(0.9);
+
+  Color? animationOverlayMedium = blackBlueish.withOpacity(0.8);
+  Color? animationOverlayStrong = blackBlueish.withOpacity(0.9);
+
+  Brightness? brightness = Brightness.dark;
+  SystemUiOverlayStyle? statusBar = SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
+
+  BoxShadow? boxShadow = BoxShadow(
+    color: white.withOpacity(0.14),
+    // color: black.withOpacity(0.5),
+    offset: Offset.zero,
+    blurRadius: 0,
+    spreadRadius: 1,
+  );
+  BoxShadow? boxShadowButton = BoxShadow(
+    // color: brightRed,
+    color: nautilusBlue.withOpacity(0.24),
+    offset: Offset.zero,
+    blurRadius: 0,
+    spreadRadius: 0,
+  );
+
+  // OverlayTheme? qrScanTheme = OverlayTheme.CARBON;
+  // AppIconEnum? appIcon = AppIconEnum.CARBON;
 }
 
 class PerishableTheme extends BaseTheme {

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
@@ -21,6 +22,7 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/add_watch_only_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
@@ -611,30 +613,6 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                         ),
                       ),
                     ),
-                    // Selected indicator
-                    // Container(
-                    //         height: 70,
-                    //         width: 6,
-                    //         color: account.selected ? StateContainer.of(context).curTheme.primary : Colors.transparent,
-                    //       )
-                    // copy address button:
-                    // Container(
-                    //   height: 40,
-                    //   width: 40,
-                    //   child: TextButton(
-                    //     // style: styles.roundedTextButtonStyle,
-                    //     child: Icon(Icons.copy, color: theme.text),
-                    //     onPressed: () async {
-                    //       await Clipboard.setData(
-                    //         ClipboardData(text: account.viteAddress),
-                    //       );
-                    //       UIUtil.showSnackbar(
-                    //         'Account address copied!',
-                    //         context,
-                    //       );
-                    //     },
-                    //   ),
-                    // ),
                     // handle bars:
                     Container(
                       width: 4,
@@ -656,9 +634,9 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
   }
 
   ActionPane _getSlideActionsForAccount(BuildContext context, Account account, StateSetter setState) {
-    final List<Widget> _actions = [];
+    final List<Widget> actions = <Widget>[];
 
-    _actions.add(SlidableAction(
+    actions.add(SlidableAction(
         autoClose: false,
         borderRadius: BorderRadius.circular(5.0),
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
@@ -667,11 +645,30 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
         label: AppLocalization.of(context).edit,
         onPressed: (BuildContext context) async {
           await Future<dynamic>.delayed(const Duration(milliseconds: 250));
+          if (!mounted) return;
           AccountDetailsSheet(account).mainBottomSheet(context);
           await Slidable.of(context)!.close();
         }));
+
+    actions.add(SlidableAction(
+        autoClose: false,
+        borderRadius: BorderRadius.circular(5.0),
+        backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
+        foregroundColor: StateContainer.of(context).curTheme.warning,
+        icon: Icons.copy,
+        label: AppLocalization.of(context).copy,
+        onPressed: (BuildContext context) async {
+          await Clipboard.setData(
+            ClipboardData(text: account.address),
+          );
+          if (!mounted) return;
+          UIUtil.showSnackbar(
+            AppLocalization.of(context).addressCopied,
+            context,
+          );
+        }));
     if (account.index! > 0) {
-      _actions.add(SlidableAction(
+      actions.add(SlidableAction(
           autoClose: false,
           borderRadius: BorderRadius.circular(5.0),
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
@@ -699,9 +696,10 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
     return ActionPane(
       // motion: const DrawerMotion(),
       motion: const ScrollMotion(),
-      extentRatio: (account.index! > 0) ? 0.5 : 0.25,
+      // extentRatio: (account.index! > 0) ? 0.5 : 0.25,
+      extentRatio: (account.index! > 0) ? 0.66 : 0.5,
       // All actions are defined in the children parameter.
-      children: _actions,
+      children: actions,
     );
   }
 }
