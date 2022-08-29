@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decimal/decimal.dart';
@@ -14,6 +16,7 @@ import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/bus/deep_link_event.dart';
 import 'package:nautilus_wallet_flutter/bus/fcm_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -46,6 +49,7 @@ import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:uni_links/uni_links.dart';
 
@@ -1111,21 +1115,48 @@ class SendSheetState extends State<SendSheet> {
                     })
                   ],
                 ),
-                //   if (Platform.isIOS && !isIpad)
-                //     Row(
-                //       children: <Widget>[
-                //         // scan for nfc
-                //         AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).sendViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
-                //             onPressed: () async {
-                //           try {
-                //             UIUtil.cancelLockEvent();
-                //             startNFCSession("");
-                //           } catch (e) {
-                //             stopNFCSession();
-                //           }
-                //         })
-                //       ],
-                //     ),
+                if (Platform.isIOS && !isIpad)
+                  Row(
+                    children: <Widget>[
+                      // scan for nfc
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).sendViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () async {
+                        // Start Session
+                        NfcManager.instance.startSession(
+                          onError: (NfcError error) async {
+                            log.d("onError: ${error.message}");
+                          },
+                          pollingOptions: Set()..add(NfcPollingOption.iso14443),
+                          onDiscovered: (NfcTag tag) async {
+                            // Do something with an NfcTag instance.
+                            final Ndef? ndef = Ndef.from(tag);
+                            if (ndef?.cachedMessage != null && ndef!.cachedMessage!.records.isNotEmpty) {
+                              Uint8List payload = ndef.cachedMessage!.records[0].payload;
+
+                              if (payload.length < 3) {
+                                return;
+                              }
+
+                              if (payload[0] == 0x00) {
+                                payload = payload.sublist(1);
+                                EventTaxiImpl.singleton().fire(DeepLinkEvent(link: utf8.decode(payload)));
+                              } else {
+                                // try anyways?
+                                EventTaxiImpl.singleton().fire(DeepLinkEvent(link: utf8.decode(payload)));
+                              }
+                              NfcManager.instance.stopSession();
+                            }
+                          },
+                        );
+                        // try {
+                        //   UIUtil.cancelLockEvent();
+                        //   startNFCSession("");
+                        // } catch (e) {
+                        //   stopNFCSession();
+                        // }
+                      })
+                    ],
+                  ),
               ],
             ),
           ],

@@ -9,11 +9,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:confetti/confetti.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -21,6 +18,7 @@ import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/blocked_modified_event.dart';
+import 'package:nautilus_wallet_flutter/bus/deep_link_event.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
@@ -44,7 +42,6 @@ import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_i
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
-import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/mymonero.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -80,17 +77,14 @@ import 'package:nautilus_wallet_flutter/util/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:nautilus_wallet_flutter/util/usb_sheet.dart';
 // import 'package:nfc_manager/nfc_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:quick_usb/quick_usb.dart';
 import 'package:quiver/strings.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 import 'package:uuid/uuid.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class AppHomePage extends StatefulWidget {
   AppHomePage({this.priceConversion}) : super();
@@ -890,12 +884,17 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   Future<void> listenForNFC() async {
     final bool isAvailable = await NfcManager.instance.isAvailable();
 
-    if (!isAvailable) {
+    if (!isAvailable || Platform.isIOS) {
       return;
     }
 
     // Start Session
     NfcManager.instance.startSession(
+      // alertMessage: "Scan",
+      onError: (NfcError error) async {
+        log.d("onError: ${error.message}");
+      },
+      pollingOptions: Set()..add(NfcPollingOption.iso14443),
       onDiscovered: (NfcTag tag) async {
         // Do something with an NfcTag instance.
         Ndef? ndef = Ndef.from(tag);
@@ -915,7 +914,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           }
         }
       },
-      // pollingOptions: NfcPollingOption.iso14443
     );
   }
 
@@ -1041,6 +1039,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   StreamSubscription<BlockedModifiedEvent>? _blockedModifiedSub;
   StreamSubscription<DisableLockTimeoutEvent>? _disableLockSub;
   StreamSubscription<AccountChangedEvent>? _switchAccountSub;
+  StreamSubscription<DeepLinkEvent>? _deepLinkEventSub;
 
   void _registerBus() {
     _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((HistoryHomeEvent event) {
@@ -1112,6 +1111,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     // Handle subscribe
     _confirmEventSub = EventTaxiImpl.singleton().registerTo<ConfirmationHeightChangedEvent>().listen((ConfirmationHeightChangedEvent event) {
       updateConfirmationHeights(event.confirmationHeight);
+    });
+    // deep link scan:
+    _deepLinkEventSub = EventTaxiImpl.singleton().registerTo<DeepLinkEvent>().listen((DeepLinkEvent event) {
+      handleDeepLink(event.link);
     });
   }
 
@@ -1300,6 +1303,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     // queries the db for account specific solids:
     await StateContainer.of(context).updateSolids();
     // _updateTXData();
+
+    if (!mounted) return;
     // for memos:
     await _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
 
