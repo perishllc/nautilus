@@ -16,6 +16,7 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
+import 'package:nautilus_wallet_flutter/bus/xmr_event.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
@@ -125,6 +126,8 @@ class StateContainerState extends State<StateContainer> {
   final int MAX_SEQUENTIAL_UPDATES = 5;
 
   AppWallet? wallet;
+  String? xmrAddress;
+  int xmrRestoreHeight = 2701000;
   String currencyLocale = "en_US";
   Locale deviceLocale = const Locale('en', 'US');
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
@@ -178,7 +181,6 @@ class StateContainerState extends State<StateContainer> {
   // When wallet is encrypted
   String? encryptedSecret;
 
-  
   void resetGift() {
     gift = null;
   }
@@ -514,6 +516,10 @@ class StateContainerState extends State<StateContainer> {
     sl.get<SharedPrefsUtil>().getCurrencyMode().then((String currencyMode) {
       setCurrencyMode(currencyMode);
     });
+    // Get xmr restore height:
+    sl.get<SharedPrefsUtil>().getXMRRestoreHeight().then((int height) {
+      setXMRRestoreHeight(height);
+    });
     // restore payments from the cache
     updateSolids();
 
@@ -535,6 +541,7 @@ class StateContainerState extends State<StateContainer> {
   StreamSubscription<FcmUpdateEvent>? _fcmUpdateSub;
   StreamSubscription<FcmMessageEvent>? _fcmMessageSub;
   StreamSubscription<AccountModifiedEvent>? _accountModifiedSub;
+  StreamSubscription<XMREvent>? _xmrSub;
 
   @override
   void dispose() {
@@ -628,12 +635,9 @@ class StateContainerState extends State<StateContainer> {
 
     // branch deep links:
     _branchSub = FlutterBranchSdk.initSession().listen((Map data) {
-
       // TODO: investigate:
-      
-      if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) {
-        // Link clicked. Add logic to get link data
 
+      if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) {
         // check if they were gifted a wallet:
         if (data.containsKey("~feature") && (data["~feature"] == "gift" || data["~feature"] == "splitgift")) {
           // if (data["+match_guaranteed"] == true) {
@@ -655,6 +659,18 @@ class StateContainerState extends State<StateContainer> {
     }, onError: (dynamic error) {
       final PlatformException platformException = error as PlatformException;
       log.d('InitSession error: ${platformException.code} - ${platformException.message}');
+    });
+
+    // xmr:
+    _xmrSub = EventTaxiImpl.singleton().registerTo<XMREvent>().listen((XMREvent event) {
+      if (event.type == "primary_address") {
+        setState(() {
+          xmrAddress = event.message;
+        });
+      }
+      if (event.type == "update_restore_height") {
+        setXMRRestoreHeight(int.parse(event.message));
+      }
     });
   }
 
@@ -812,6 +828,13 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       this.currencyMode = currencyMode;
       nyanoMode = this.currencyMode == CurrencyModeSetting(CurrencyModeOptions.NYANO).getDisplayName();
+    });
+  }
+
+  // Change currency mode setting
+  void setXMRRestoreHeight(int height) {
+    setState(() {
+      xmrRestoreHeight = height;
     });
   }
 

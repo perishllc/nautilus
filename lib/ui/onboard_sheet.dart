@@ -18,10 +18,10 @@ class OnboardSheet extends StatefulWidget {
   final String link;
 
   @override
-  OnboardSheetStateState createState() => OnboardSheetStateState();
+  OnboardSheetState createState() => OnboardSheetState();
 }
 
-class OnboardSheetStateState extends State<OnboardSheet> {
+class OnboardSheetState extends State<OnboardSheet> {
   GlobalKey? shareCardKey;
   ByteData? shareImageData;
   // Address copied items

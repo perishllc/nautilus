@@ -52,10 +52,11 @@ class ReceiveShowQRSheet extends StatefulWidget {
   final Widget? qrWidget;
   final String? address;
 
-  ReceiveShowQRSheetStateState createState() => ReceiveShowQRSheetStateState();
+  @override
+  ReceiveShowQRSheetState createState() => ReceiveShowQRSheetState();
 }
 
-class ReceiveShowQRSheetStateState extends State<ReceiveShowQRSheet> {
+class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
   GlobalKey? shareCardKey;
   ByteData? shareImageData;
   // Address copied items

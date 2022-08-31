@@ -23,6 +23,7 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
+import 'package:nautilus_wallet_flutter/bus/xmr_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/localize.dart';
@@ -42,7 +43,11 @@ import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_i
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
+import 'package:nautilus_wallet_flutter/ui/receive/receive_xmr_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/custom_monero.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/mymonero.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/top_card.dart';
+import 'package:nautilus_wallet_flutter/util/deviceutil.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -86,6 +91,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 import 'package:uuid/uuid.dart';
 
+// ignore: must_be_immutable
 class AppHomePage extends StatefulWidget {
   AppHomePage({this.priceConversion}) : super();
   PriceConversion? priceConversion;
@@ -104,11 +110,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   late Animation<double> _emptyAnimation;
   late bool _animationDisposed;
 
-  // Receive card instance
-  ReceiveSheet? receive;
-  // Request card instance
-  // RequestSheet request;
-
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
   final Map<String, List<AccountHistoryResponseItem>> _historyListMap = <String, List<AccountHistoryResponseItem>>{};
@@ -121,6 +122,15 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   // but seems the only way to handle the animations
   final Map<String, GlobalKey<AnimatedListState>> _unifiedListKeyMap = <String, GlobalKey<AnimatedListState>>{};
   final Map<String, ListModel<dynamic>> _unifiedListMap = <String, ListModel<dynamic>>{};
+
+  // A separate unfortunate instance of this list, is a little unfortunate
+  // but seems the only way to handle the animations
+  List<dynamic> _moneroHistoryList = <dynamic>[];
+  // final Map<String, GlobalKey<AnimatedListState>> _moneroListKeyMap = <String, GlobalKey<AnimatedListState>>{};
+  // final Map<String, ListModel<dynamic>> _moneroListMap = <String, ListModel<dynamic>>{};
+  GlobalKey<AnimatedListState>? _moneroListKey = GlobalKey<AnimatedListState>();
+  GlobalKey<AnimatedListState>? _moneroListKeyAlert;
+  late ListModel<dynamic>? _moneroList;
 
   // used to associate memos with blocks so we don't have search on every re-render:
   final Map<String, TXData> _txDetailsMap = {};
@@ -139,6 +149,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   // infinite scroll:
   late ScrollController _scrollController;
+  late ScrollController _xmrScrollController;
   late TabController _tabController;
 
   // Price conversion state (BTC, NANO, NONE)
@@ -148,9 +159,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   bool _lockDisabled = false; // whether we should avoid locking the app
   bool _lockTriggered = false;
 
-  // Main card height
-  double? mainCardHeight;
-  double settingsIconMarginTop = 5;
   // FCM instance
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
@@ -173,8 +181,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   late ConfettiController _confettiControllerLeft;
   late ConfettiController _confettiControllerRight;
 
+  // receive disabled?:
+  bool _receiveDisabled = false;
+
   Future<void> _switchToAccount(String account) async {
     final List<Account> accounts = await sl.get<DBHelper>().getAccounts(await StateContainer.of(context).getSeed());
+    if (!mounted) return;
     for (final Account acc in accounts) {
       if (acc.address == account && acc.address != StateContainer.of(context).wallet!.address) {
         await sl.get<DBHelper>().changeAccount(acc);
@@ -689,23 +701,46 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     } else {
       _priceConversion = PriceConversion.CURRENCY;
     }
-    // Main Card Size
-    if (_priceConversion == PriceConversion.CURRENCY) {
-      mainCardHeight = 80;
-      settingsIconMarginTop = 15;
-    } else if (_priceConversion == PriceConversion.NONE) {
-      mainCardHeight = 64;
-      settingsIconMarginTop = 7;
-    } else if (_priceConversion == PriceConversion.HIDDEN) {
-      mainCardHeight = 64;
-      settingsIconMarginTop = 7;
-    }
     _addSampleContact();
     _updateUsers();
     // _updateTXData();
     // infinite scroll:
     _scrollController = ScrollController() /*..addListener(_scrollListener)*/;
+    _xmrScrollController = ScrollController() /*..addListener(_scrollListener)*/;
     _tabController = TabController(vsync: this, length: 2);
+    _tabController.addListener(() {
+      final String mode = _tabController.index == 0 ? "nano" : "monero";
+      EventTaxiImpl.singleton().fire(XMREvent(type: "mode_change", message: mode));
+      if (_tabController.index == 0) {
+        if (!_receiveDisabled) {
+          if (StateContainer.of(context).wallet?.address == null || StateContainer.of(context).wallet!.address!.isEmpty) {
+            setState(() {
+              _receiveDisabled = true;
+            });
+          }
+        } else {
+          if (StateContainer.of(context).wallet?.address != null && StateContainer.of(context).wallet!.address!.isNotEmpty) {
+            setState(() {
+              _receiveDisabled = false;
+            });
+          }
+        }
+      } else if (_tabController.index == 1) {
+        if (!_receiveDisabled) {
+          if (StateContainer.of(context).xmrAddress == null || StateContainer.of(context).xmrAddress!.isEmpty) {
+            setState(() {
+              _receiveDisabled = true;
+            });
+          }
+        } else {
+          if (StateContainer.of(context).xmrAddress != null && StateContainer.of(context).xmrAddress!.isNotEmpty) {
+            setState(() {
+              _receiveDisabled = false;
+            });
+          }
+        }
+      }
+    });
     // Setup placeholder animation and start
     _animationDisposed = false;
     _placeholderCardAnimationController = AnimationController(
@@ -730,6 +765,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     );
     _opacityAnimation.addStatusListener(_animationStatusListener);
     _placeholderCardAnimationController.forward();
+
+    _moneroListKey = GlobalKey<AnimatedListState>();
+    _moneroList = ListModel<dynamic>(listKey: _moneroListKey!);
     // Register handling of push notifications
     // *only triggers when tapped!*:
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
@@ -799,7 +837,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
 
       // are we not connected after ~5 seconds?
-      Future.delayed(const Duration(seconds: 5), () async {
+      Future<dynamic>.delayed(const Duration(seconds: 5), () async {
         final bool connected = await sl.get<AccountService>().isConnected();
         if (!connected) {
           showConnectionWarning();
@@ -812,6 +850,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
       // listend for nfc tag events:
       listenForNFC();
+      DeviceUtil.isAndroid13OrGreater();
     });
     // confetti:
     _confettiControllerLeft = ConfettiController(duration: const Duration(milliseconds: 150));
@@ -897,7 +936,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       pollingOptions: Set()..add(NfcPollingOption.iso14443),
       onDiscovered: (NfcTag tag) async {
         // Do something with an NfcTag instance.
-        Ndef? ndef = Ndef.from(tag);
+        final Ndef? ndef = Ndef.from(tag);
         if (ndef?.cachedMessage != null && ndef!.cachedMessage!.records.isNotEmpty) {
           Uint8List payload = ndef.cachedMessage!.records[0].payload;
 
@@ -1040,6 +1079,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   StreamSubscription<DisableLockTimeoutEvent>? _disableLockSub;
   StreamSubscription<AccountChangedEvent>? _switchAccountSub;
   StreamSubscription<DeepLinkEvent>? _deepLinkEventSub;
+  StreamSubscription<XMREvent>? _xmrSub;
 
   void _registerBus() {
     _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((HistoryHomeEvent event) {
@@ -1099,7 +1139,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         StateContainer.of(context).updateWallet(account: event.account!);
         currentConfHeight = -1;
       });
-      paintQrCode(address: event.account!.address);
       if (event.delayPop) {
         Future.delayed(const Duration(milliseconds: 300), () {
           Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
@@ -1116,6 +1155,24 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     _deepLinkEventSub = EventTaxiImpl.singleton().registerTo<DeepLinkEvent>().listen((DeepLinkEvent event) {
       handleDeepLink(event.link);
     });
+    // xmr:
+    _xmrSub = EventTaxiImpl.singleton().registerTo<XMREvent>().listen((XMREvent event) {
+      if (event.type == "update_txs") {
+        final List<dynamic> txs = jsonDecode(event.message) as List<dynamic>;
+        // for (var tx in txs) {
+        //   print(tx);
+        // }
+
+        _moneroHistoryList = txs;
+      }
+      if (event.type == "update_status") {
+        if (event.message == "ready") {
+          setState(() {
+            StateContainer.of(context).wallet!.xmrLoading = false;
+          });
+        }
+      }
+    });
   }
 
   @override
@@ -1124,6 +1181,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     WidgetsBinding.instance.removeObserver(this);
     // _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
+    _xmrScrollController.dispose();
     _tabController.dispose();
     _placeholderCardAnimationController.dispose();
     // confetti:
@@ -1162,6 +1220,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
     if (_unifiedSub != null) {
       _unifiedSub!.cancel();
+    }
+    if (_xmrSub != null) {
+      _xmrSub!.cancel();
     }
   }
 
@@ -1298,15 +1359,23 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         _isRefreshing = false;
       });
     });
-    await StateContainer.of(context).requestUpdate();
-    if (!mounted) return;
-    // queries the db for account specific solids:
-    await StateContainer.of(context).updateSolids();
-    // _updateTXData();
+    if (_tabController.index == 0) {
+      await StateContainer.of(context).requestUpdate();
+      if (!mounted) return;
+      // queries the db for account specific solids:
+      await StateContainer.of(context).updateSolids();
+      // _updateTXData();
 
-    if (!mounted) return;
-    // for memos:
-    await _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
+      if (!mounted) return;
+      // for memos:
+      await _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
+    } else {
+      EventTaxiImpl.singleton().fire(XMREvent(type: "xmr_reload"));
+      EventTaxiImpl.singleton().fire(XMREvent(type: "update_status", message: "loading"));
+      setState(() {
+        StateContainer.of(context).wallet!.xmrLoading = true;
+      });
+    }
 
     // are we not connected after ~5 seconds?
     await Future<dynamic>.delayed(const Duration(seconds: 8));
@@ -1458,6 +1527,218 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   //   });
   // }
   // }
+
+  Future<void> generateMoneroList({bool fastUpdate = false}) async {
+    ListModel<dynamic>? ULM = _moneroList;
+    // if (StateContainer.of(context).activeAlert != null) {
+    //   ULM = _unifiedListMap["${StateContainer.of(context).wallet!.address}alert"];
+    // }
+    if (StateContainer.of(context).activeAlerts.isNotEmpty) {
+      ULM = _moneroList; // todo: use the alert list
+    }
+
+    if (_moneroHistoryList == null || ULM == null) {
+      return;
+    }
+
+    if (ULM.length > 0) {
+      log.d("generating unified list! fastUpdate: $fastUpdate");
+    }
+
+    // this isn't performant but w/e
+    List<dynamic> unifiedList = [];
+    List<int> removeIndices = [];
+
+    // combine history and payments:
+    // List<AccountHistoryResponseItem> historyList = StateContainer.of(context).wallet!.history!;
+    // List<TXData> solidsList = StateContainer.of(context).wallet!.solids!;
+    // final List<AccountHistoryResponseItem> historyList = _historyListMap[StateContainer.of(context).wallet!.address]!;
+    // final List<TXData> solidsList = _solidsListMap[StateContainer.of(context).wallet!.address]!;
+
+    // for (var tx in solidsList) {
+    //   print("memo: ${tx.memo} is_request: ${tx.is_request}");
+    // }
+
+    // add tx's to the unified list:
+    // unifiedList.addAll(historyList);
+    // unifiedList.addAll(solidsList);
+    // don't process change or openblocks:
+    // unifiedList =
+    //     List<dynamic>.from(historyList.where((AccountHistoryResponseItem element) => ![BlockTypes.CHANGE, BlockTypes.OPEN].contains(element.subtype)).toList());
+
+    unifiedList = _moneroHistoryList;
+
+    if (!mounted) return;
+
+    bool overrideSort = false;
+
+    // filter by search results:
+    if (_searchController.text.isNotEmpty) {
+      removeIndices = [];
+      final String lowerCaseSearch = _searchController.text.toLowerCase();
+
+      // override the sorting algo if the search is numeric:
+      overrideSort = double.tryParse(lowerCaseSearch) != null;
+
+      for (final dynamicItem in unifiedList) {
+        bool shouldRemove = true;
+
+        final TXData txDetails = dynamicItem is TXData
+            ? dynamicItem
+            : convertHistItemToTXData(dynamicItem as AccountHistoryResponseItem, txDetails: _txDetailsMap[dynamicItem.hash]);
+        final bool isRecipient = txDetails.isRecipient(StateContainer.of(context).wallet!.address);
+
+        String displayName = txDetails.getShortestString(isRecipient)!;
+
+        // check if there's a username:
+        final String account = txDetails.getAccount(isRecipient);
+        for (final User user in _users) {
+          if (user.address == account.replaceAll("xrb_", "nano_")) {
+            displayName = user.getDisplayName()!;
+            break;
+          }
+        }
+
+        String? amountStr;
+        int? localTimestamp;
+
+        if (txDetails.request_time != null) {
+          localTimestamp = txDetails.request_time;
+        }
+
+        if (txDetails.amount_raw != null && txDetails.amount_raw!.isNotEmpty) {
+          amountStr = getRawAsThemeAwareAmount(context, txDetails.amount_raw);
+          if (txDetails.is_request) {
+            if (isRecipient) {
+              if (AppLocalization.of(context).request.toLowerCase().contains(lowerCaseSearch)) {
+                shouldRemove = false;
+              }
+            } else {
+              if (AppLocalization.of(context).asked.toLowerCase().contains(lowerCaseSearch)) {
+                shouldRemove = false;
+              }
+            }
+          }
+        }
+
+        if (txDetails.is_tx) {
+          if (txDetails.sub_type == BlockTypes.SEND) {
+            if (AppLocalization.of(context).sent.toLowerCase().contains(lowerCaseSearch)) {
+              shouldRemove = false;
+            }
+          }
+          if (txDetails.sub_type == BlockTypes.RECEIVE) {
+            if (AppLocalization.of(context).received.toLowerCase().contains(lowerCaseSearch)) {
+              shouldRemove = false;
+            }
+          }
+        }
+
+        if (localTimestamp != null) {
+          final String timeStr = DateFormat(CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(localTimestamp * 1000));
+          if (timeStr.toLowerCase().contains(lowerCaseSearch)) {
+            shouldRemove = false;
+          }
+        }
+
+        if (amountStr != null && amountStr.contains(lowerCaseSearch)) {
+          shouldRemove = false;
+        }
+        if (isNotEmpty(txDetails.memo)) {
+          if (txDetails.memo!.toLowerCase().contains(lowerCaseSearch)) {
+            shouldRemove = false;
+          }
+        }
+
+        if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
+          if (AppLocalization.of(context).loaded.toLowerCase().contains(lowerCaseSearch)) {
+            shouldRemove = false;
+          }
+        }
+
+        if (isNotEmpty(displayName)) {
+          if (displayName.toLowerCase().contains(lowerCaseSearch)) {
+            shouldRemove = false;
+          }
+        } else if (account.toLowerCase().contains(lowerCaseSearch)) {
+          shouldRemove = false;
+        }
+
+        if (shouldRemove) {
+          removeIndices.add(unifiedList.indexOf(dynamicItem));
+        }
+      }
+
+      for (int i = removeIndices.length - 1; i >= 0; i--) {
+        unifiedList.removeAt(removeIndices[i]);
+      }
+    }
+
+    // sort by timestamp
+    // should already be sorted but:
+    // needed to sort payment requests by request time from each other:
+    // if (!overrideSort) {
+    //   unifiedList.sort(defaultSortComparison);
+    // } else {
+    //   unifiedList.sort(amountSortComparison);
+    // }
+
+    final bool areThereNoSearchResults = unifiedList.isEmpty && _searchController.text.isNotEmpty;
+
+    if (areThereNoSearchResults) {
+      unifiedList.add(const SizedBox());
+    }
+
+    if (areThereNoSearchResults != _noSearchResults) {
+      setState(() {
+        _noSearchResults = areThereNoSearchResults;
+      });
+    }
+
+    // create a list of indices to remove:
+    removeIndices = [];
+
+    // remove anything that's not supposed to be there anymore:
+    ULM.items.where((dynamic item) => !unifiedList.contains(item)).forEach((dynamic dynamicItem) {
+      removeIndices.add(ULM!.items.indexOf(dynamicItem));
+    });
+    // mark anything out of place or not in the unified list as to be removed:
+    if (_searchController.text.isNotEmpty) {
+      ULM.items.where((item) => ULM!.items.indexOf(item) != (unifiedList.indexOf(item))).forEach((dynamic dynamicItem) {
+        removeIndices.add(ULM!.items.indexOf(dynamicItem));
+      });
+    }
+    // ensure uniqueness and must be sorted to prevent an index error:
+    removeIndices = removeIndices.toSet().toList();
+    removeIndices.sort((int a, int b) => a.compareTo(b));
+
+    // remove from the listmap:
+    for (int i = removeIndices.length - 1; i >= 0; i--) {
+      // don't set state since we don't need it to re-render just yet:
+      // also it will throw an error because the list can be empty and the builder will get upset:
+      ULM.removeAt(removeIndices[i], _buildUnifiedItem, instant: true);
+    }
+
+    // insert unifiedList into listmap:
+    unifiedList.where((dynamic item) => !ULM!.items.contains(item)).forEach((dynamic dynamicItem) {
+      int index = unifiedList.indexOf(dynamicItem);
+      if (dynamicItem == null) {
+        return;
+      }
+      index = max(min(index, ULM!.length), 0);
+      setState(() {
+        ULM!.insertAt(dynamicItem, index, instant: fastUpdate);
+      });
+    });
+
+    // ready to be rendered:
+    // if (StateContainer.of(context).wallet!.xmrLoading) {
+    //   setState(() {
+    //     // _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
+    //     StateContainer.of(context).wallet!.xmrLoading = false;
+    //   });
+    // }
+  }
 
   Future<void> generateUnifiedList({bool fastUpdate = false}) async {
     ListModel<dynamic>? ULM = _unifiedListMap[StateContainer.of(context).wallet!.address];
@@ -1745,10 +2026,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
 
     if (link.contains("confetti")) {
+      Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 150));
       _confettiControllerLeft.play();
       _confettiControllerRight.play();
       setState(() {});
     }
+
+    if (!mounted) return;
 
     final dynamic result = uriParser(link);
 
@@ -1853,20 +2138,20 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
   }
 
-  Future<void> paintQrCode({String? address}) async {
-    final double qrSize = MediaQuery.of(context).size.width;
-    final String data = "nano:${address ?? StateContainer.of(context).wallet!.address}";
-    final Widget? qrWidget = await UIUtil.getQRImage(context, data);
-    setState(() {
-      receive = ReceiveSheet(
-        localCurrency: StateContainer.of(context).curCurrency,
-        address: StateContainer.of(context).wallet!.address,
-        qrWidget: SizedBox(width: qrSize, child: qrWidget),
-      );
-    });
-  }
-
   Widget _buildMainColumnView(BuildContext context) {
+    if (_tabController.index == 0 && _receiveDisabled) {
+      if (StateContainer.of(context).wallet?.address != null && StateContainer.of(context).wallet!.address!.isNotEmpty) {
+        setState(() {
+          _receiveDisabled = false;
+        });
+      }
+    } else if (_tabController.index == 1 && _receiveDisabled) {
+      if (StateContainer.of(context).xmrAddress != null && StateContainer.of(context).xmrAddress!.isNotEmpty) {
+        setState(() {
+          _receiveDisabled = false;
+        });
+      }
+    }
     return Column(
       children: <Widget>[
         Expanded(
@@ -1875,7 +2160,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  _buildMainCard(context, _scaffoldKey),
+                  TopCard(
+                    scaffoldKey: _scaffoldKey,
+                    opacityAnimation: _opacityAnimation,
+                    child: _buildSearchbarAnimation(),
+                  ),
                   Container(
                     margin: const EdgeInsetsDirectional.only(top: 20),
                   ),
@@ -1953,10 +2242,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                           ],
                         ),
                         Stack(
-                          children: const <Widget>[
-                            // _getMoneroListWidget(context),
+                          children: <Widget>[
+                            _getMoneroListWidget(context),
                             // Text("TODO"),
-                            MyMonero(),
+                            // MyMonero(),
+                            CustomMonero(),
                           ],
                         ),
                       ],
@@ -1985,9 +2275,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                     child: TextButton(
                       key: const Key("home_receive_button"),
                       style: TextButton.styleFrom(
-                        backgroundColor: receive != null ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
+                        backgroundColor: !_receiveDisabled ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                        primary: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                        primary: !_receiveDisabled ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                         // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                         // splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                       ),
@@ -1999,14 +2289,39 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                         stepGranularity: 0.5,
                       ),
                       onPressed: () async {
-                        if (receive == null) {
+                        if (_receiveDisabled) {
                           return;
                         }
 
                         if (_tabController.index == 0) {
-                          Sheets.showAppHeightNineSheet(context: context, widget: receive!);
+                          final String data = "nano:${StateContainer.of(context).wallet!.address}";
+                          final Widget qrWidget = SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: await UIUtil.getQRImage(context, data),
+                          );
+                          if (!mounted) return;
+                          Sheets.showAppHeightNineSheet(
+                              context: context,
+                              widget: ReceiveSheet(
+                                localCurrency: StateContainer.of(context).curCurrency,
+                                address: StateContainer.of(context).wallet!.address,
+                                qrWidget: qrWidget,
+                              ));
                         } else {
-                          Sheets.showAppHeightNineSheet(context: context, widget: SendXMRSheet(localCurrency: StateContainer.of(context).curCurrency));
+                          final String data = "monero:${StateContainer.of(context).xmrAddress}";
+                          final Widget qrWidget = SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: await UIUtil.getQRImage(context, data),
+                          );
+                          if (!mounted) return;
+                          Sheets.showAppHeightNineSheet(
+                            context: context,
+                            widget: ReceiveXMRSheet(
+                              address: StateContainer.of(context).xmrAddress,
+                              qrWidget: qrWidget,
+                              localCurrency: StateContainer.of(context).curCurrency,
+                            ),
+                          );
                         }
 
                         // Sheets.showAppHeightNineSheet(context: context, widget: const UsbSheet());
@@ -2071,11 +2386,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   @override
   Widget build(BuildContext context) {
-    // Create QR ahead of time because it improves performance this way
-    if (receive == null && StateContainer.of(context).wallet != null) {
-      paintQrCode();
-    }
-
     // handle branch gift if it exists:
     if (StateContainer.of(context).gift != null) {
       handleBranchGift(StateContainer.of(context).gift);
@@ -2602,291 +2912,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   }
 
   //Main Card
-  Widget _buildMainCard(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
-    return Container(
-      decoration: BoxDecoration(
-        color: StateContainer.of(context).curTheme.backgroundDark,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
-      ),
-      margin: EdgeInsets.only(left: 14.0, right: 14.0, top: MediaQuery.of(context).size.height * 0.005),
-      child: Stack(
-        children: <Widget>[
-          Row(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeInOut,
-              width: 80.0,
-              height: mainCardHeight,
-              alignment: AlignmentDirectional.topStart,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.easeInOut,
-                margin: EdgeInsetsDirectional.only(top: settingsIconMarginTop, start: 5),
-                height: 50,
-                width: 50,
-                child: !UIUtil.isTablet(context)
-                    ? TextButton(
-                        key: const Key("home_settings_button"),
-                        style: TextButton.styleFrom(
-                          primary: StateContainer.of(context).curTheme.text15,
-                          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                          // highlightColor: StateContainer.of(context).curTheme.text15,
-                          // splashColor: StateContainer.of(context).curTheme.text15,
-                        ),
-                        onPressed: () {
-                          scaffoldKey.currentState?.openDrawer();
-                        },
-                        child: Stack(
-                          children: [
-                            Icon(
-                              AppIcons.settings,
-                              color: StateContainer.of(context).curTheme.text,
-                              size: 24,
-                            ),
-                            if (!StateContainer.of(context).activeAlertIsRead)
-                              Positioned(
-                                top: -3,
-                                right: -3,
-                                child: Container(
-                                  padding: const EdgeInsets.all(3),
-                                  decoration: BoxDecoration(
-                                    color: StateContainer.of(context).curTheme.backgroundDark,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: StateContainer.of(context).curTheme.success,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    height: 11,
-                                    width: 11,
-                                  ),
-                                ),
-                              )
-                          ],
-                        ),
-                      )
-                    : const SizedBox(),
-              ),
-            ),
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeInOut,
-              height: mainCardHeight,
-              child: _getBalanceWidget(),
-            ),
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeInOut,
-              width: 80,
-              height: mainCardHeight,
-            ),
-          ]),
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeInOut,
-            height: mainCardHeight,
-            // height: mainCardHeight == 64 ? 60 : 74,
-            margin: const EdgeInsets.only(
-              left: 5,
-              right: 5,
-            ),
-            // padding: EdgeInsets.all(0.0),
-            padding: const EdgeInsets.only(bottom: 2), // covers the top of the balance text in the currency widget
-            child: _buildSearchbarAnimation(),
-          ),
-        ],
-      ),
-    );
-  } //Main Card
-
-  // Get balance display
-  Widget _getBalanceWidget() {
-    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading) {
-      // Placeholder for balance text
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          if (_priceConversion == PriceConversion.CURRENCY)
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: <Widget>[
-                const Text(
-                  "1234567",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
-                ),
-                Opacity(
-                  opacity: _opacityAnimation.value,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.text20,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: const Text(
-                      "1234567",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          Container(
-            constraints: BoxConstraints(maxWidth: (UIUtil.getDrawerAwareScreenWidth(context) - 225).abs()),
-            child: Stack(
-              alignment: AlignmentDirectional.center,
-              children: <Widget>[
-                const AutoSizeText(
-                  "1234567",
-                  style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.largestc, fontWeight: FontWeight.w900, color: Colors.transparent),
-                  maxLines: 1,
-                  stepGranularity: 0.1,
-                  minFontSize: 1,
-                ),
-                Opacity(
-                  opacity: _opacityAnimation.value,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.primary60,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: const AutoSizeText(
-                      "1234567",
-                      style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.largestc - 8, fontWeight: FontWeight.w900, color: Colors.transparent),
-                      maxLines: 1,
-                      stepGranularity: 0.1,
-                      minFontSize: 1,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (_priceConversion == PriceConversion.CURRENCY)
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: <Widget>[
-                const Text(
-                  "1234567",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
-                ),
-                Opacity(
-                  opacity: _opacityAnimation.value,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.text20,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: const Text(
-                      "1234567",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-        ],
-      );
-    }
-    // Balance texts
-    return GestureDetector(
-      onTap: () {
-        if (_priceConversion == PriceConversion.CURRENCY) {
-          // Hide prices
-          setState(() {
-            _priceConversion = PriceConversion.NONE;
-            mainCardHeight = 64;
-            settingsIconMarginTop = 7;
-          });
-          sl.get<SharedPrefsUtil>().setPriceConversion(PriceConversion.NONE);
-        } else if (_priceConversion == PriceConversion.NONE) {
-          // Cyclce to hidden
-          setState(() {
-            _priceConversion = PriceConversion.HIDDEN;
-            mainCardHeight = 64;
-            settingsIconMarginTop = 7;
-          });
-          sl.get<SharedPrefsUtil>().setPriceConversion(PriceConversion.HIDDEN);
-        } else if (_priceConversion == PriceConversion.HIDDEN) {
-          // Cycle to CURRENCY price
-          setState(() {
-            mainCardHeight = 80;
-            settingsIconMarginTop = 15;
-          });
-          Future.delayed(const Duration(milliseconds: 150), () {
-            setState(() {
-              _priceConversion = PriceConversion.CURRENCY;
-            });
-          });
-          sl.get<SharedPrefsUtil>().setPriceConversion(PriceConversion.CURRENCY);
-        }
-      },
-      child: Container(
-        alignment: Alignment.center,
-        width: (UIUtil.getDrawerAwareScreenWidth(context) - 190).abs(),
-        color: Colors.transparent,
-        child: _priceConversion == PriceConversion.HIDDEN
-            ?
-            // Nano logo
-            Center(child: Icon(AppIcons.nanologo, size: 32, color: StateContainer.of(context).curTheme.primary))
-            : Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  if (_priceConversion == PriceConversion.CURRENCY)
-                    Text(
-                        StateContainer.of(context)
-                            .wallet!
-                            .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale),
-                        textAlign: TextAlign.center,
-                        style: AppStyles.textStyleCurrencyAlt(context)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        constraints: BoxConstraints(maxWidth: (UIUtil.getDrawerAwareScreenWidth(context) - 205).abs()),
-                        child: AutoSizeText.rich(
-                          TextSpan(
-                            children: [
-                              if (_priceConversion == PriceConversion.CURRENCY)
-                                displayCurrencySymbol(context, AppStyles.textStyleCurrency(context))
-                              else
-                                displayCurrencySymbol(context, AppStyles.textStyleCurrencySmaller(context)),
-                              // Main balance text
-                              TextSpan(
-                                text: getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet?.accountBalance.toString()),
-                                style: _priceConversion == PriceConversion.CURRENCY
-                                    ? AppStyles.textStyleCurrency(context)
-                                    : AppStyles.textStyleCurrencySmaller(
-                                        context,
-                                      ),
-                              ),
-                            ],
-                          ),
-                          maxLines: 1,
-                          style: TextStyle(fontSize: _priceConversion == PriceConversion.CURRENCY ? 28 : 22),
-                          stepGranularity: 0.1,
-                          minFontSize: 1,
-                          maxFontSize: _priceConversion == PriceConversion.CURRENCY ? 28 : 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 0),
-                ],
-              ),
-      ),
-    );
-  }
+  // Widget _buildMainCard(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {} //Main Card
 
   // TX / Card Action functions:
   static Future<void> resendRequest(BuildContext context, TXData txDetails) async {
@@ -3775,6 +3801,50 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     return converted;
   }
 
+  TXData convertMoneroHistItemToTXData(dynamic histItem, {TXData? txDetails}) {
+    TXData converted = TXData();
+    if (txDetails != null) {
+      converted = txDetails;
+    }
+    histItem = histItem["state"];
+    // converted.amount_raw ??= histItem[""];
+
+    // if (histItem.subtype == BlockTypes.SEND) {
+    //   converted.to_address ??= histItem.account;
+    // } else if (histItem.subtype == BlockTypes.RECEIVE) {
+    //   converted.from_address ??= histItem.account;
+    // }
+
+    if (histItem["isIncoming"] as bool) {
+      converted.to_address = StateContainer.of(context).xmrAddress;
+      converted.from_address = histItem["incomingTransfers"][0]["state"]["address"] as String;
+      converted.amount_raw = (histItem["incomingTransfers"][0]["state"]["amount"]["_d"][0] as int).toString();
+    } else if (histItem["isOutgoing"] as bool) {
+      converted.from_address = StateContainer.of(context).xmrAddress;
+      // converted.from_address = histItem["incomingTransfers"][0]["state"]["address"] as String;
+    }
+
+    converted.block ??= histItem["hash"] as String;
+    converted.request_time ??= histItem["block"]["state"]["timestamp"] as int;
+
+    if (histItem["isConfirmed"] != null) {
+      converted.is_fulfilled = histItem["isConfirmed"] as bool; // confirmation status
+    } else {
+      converted.is_fulfilled = true; // default to true as it cannot be null
+    }
+    // converted.height ??= histItem.height!; // block height
+    // converted.record_type ??= histItem.type; // transaction type
+    // converted.sub_type ??= histItem.subtype; // transaction subtype
+
+    if (isNotEmpty(txDetails?.memo)) {
+      converted.is_memo = true;
+    } else {
+      converted.is_acknowledged = true;
+    }
+    converted.is_tx = true;
+    return converted;
+  }
+
   // Used to build list items that haven't been removed.
   Widget _buildUnifiedItem(BuildContext context, int index, Animation<double> animation) {
     if (index < StateContainer.of(context).activeAlerts.length && StateContainer.of(context).activeAlerts.isNotEmpty) {
@@ -3813,45 +3883,83 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     return _buildUnifiedCard(txDetails, animation, displayName, context);
   }
 
+  // Used to build list items that haven't been removed.
+  Widget _buildMoneroItem(BuildContext context, int index, Animation<double> animation) {
+    if (index < StateContainer.of(context).activeAlerts.length && StateContainer.of(context).activeAlerts.isNotEmpty) {
+      return _buildRemoteMessageCard(StateContainer.of(context).activeAlerts[index]);
+    }
+    if (index == 0 && _noSearchResults) {
+      return _buildNoSearchResultsCard(context);
+    }
+
+    int localIndex = index;
+    if (StateContainer.of(context).activeAlerts.isNotEmpty) {
+      localIndex -= StateContainer.of(context).activeAlerts.length;
+    }
+
+    ListModel? list;
+
+    final String ADR = StateContainer.of(context).wallet!.address!;
+
+    if (StateContainer.of(context).activeAlerts.isNotEmpty) {
+      list = _moneroList;
+    } else {
+      list = _moneroList; // todo:
+    }
+
+    final dynamic indexedItem = list![localIndex];
+    final TXData txDetails = indexedItem is TXData ? indexedItem : convertMoneroHistItemToTXData(indexedItem /*, txDetails: _txDetailsMap[indexedItem.hash]*/);
+    final bool isRecipient = txDetails.isRecipient(StateContainer.of(context).xmrAddress);
+    final String displayName = txDetails.getShortestString(isRecipient) ?? "";
+
+    // // check if there's a username:
+    // final String account = txDetails.getAccount(isRecipient);
+    // for (final User user in _users) {
+    //   if (user.address == account.replaceAll("xrb_", "nano_")) {
+    //     displayName = user.getDisplayName()!;
+    //     break;
+    //   }
+    // }
+
+    return _buildUnifiedCard(txDetails, animation, displayName, context);
+  }
+
   Widget _getMoneroListWidget(BuildContext context) {
     if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.historyLoading == false) {
       // Setup history list
-      if (!_historyListMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
+      if (_moneroHistoryList == null) {
         setState(() {
-          _historyListMap.putIfAbsent(StateContainer.of(context).wallet!.address!, () => StateContainer.of(context).wallet!.history);
-        });
-      }
-      // Setup payments list
-      if (!_solidsListMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
-        setState(() {
-          _solidsListMap.putIfAbsent(StateContainer.of(context).wallet!.address!, () => StateContainer.of(context).wallet!.solids);
+          _moneroHistoryList = [];
         });
       }
 
-      String ADR = StateContainer.of(context).wallet!.address!;
+      GlobalKey<AnimatedListState>? listKey;
+      ListModel? list;
       if (StateContainer.of(context).activeAlerts.isNotEmpty) {
-        ADR = "${ADR}alert";
+        listKey = _moneroListKeyAlert!;
+        list = _moneroList; // todo:
+      } else {
+        listKey = _moneroListKey;
+        list = _moneroList;
       }
+
       // Setup unified list
-      if (!_unifiedListKeyMap.containsKey(ADR)) {
-        _unifiedListKeyMap.putIfAbsent(ADR, () => GlobalKey<AnimatedListState>());
+      if (_moneroListKey == null) {
+        _moneroListKey = GlobalKey<AnimatedListState>();
         setState(() {
-          _unifiedListMap.putIfAbsent(
-            ADR,
-            () => ListModel<dynamic>(
-              listKey: _unifiedListKeyMap[ADR]!,
-              initialItems: StateContainer.of(context).wallet!.unified,
-            ),
+          _moneroList = ListModel<dynamic>(
+            listKey: listKey as GlobalKey<AnimatedListState>,
+            initialItems: [],
           );
         });
       }
 
-      if (StateContainer.of(context).wallet!.unifiedLoading || (_unifiedListMap[ADR] != null && _unifiedListMap[ADR]!.length == 0)) {
-        generateUnifiedList(fastUpdate: true);
+      if (StateContainer.of(context).wallet!.unifiedLoading || (list != null && list.length == 0)) {
+        generateMoneroList(fastUpdate: true);
       }
     }
 
-    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading || StateContainer.of(context).wallet!.unifiedLoading) {
+    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading || StateContainer.of(context).wallet!.xmrLoading) {
       // Loading Animation
       return ReactiveRefreshIndicator(
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -3859,7 +3967,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           isRefreshing: _isRefreshing,
           child: ListView(
             physics: const AlwaysScrollableScrollPhysics(),
-            controller: _scrollController,
+            controller: _xmrScrollController,
             padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
             children: <Widget>[
               _buildLoadingTransactionCard("Sent", "10244000", "123456789121234", context),
@@ -3875,126 +3983,43 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             ],
           ));
     } else {
-      _disposeAnimation();
+      // _disposeAnimation();
     }
 
-    if (StateContainer.of(context).wallet!.history.isEmpty && StateContainer.of(context).wallet!.solids.isEmpty) {
-      final List<Widget> activeAlerts = [];
-      for (final AlertResponseItem alert in StateContainer.of(context).activeAlerts) {
-        activeAlerts.add(_buildRemoteMessageCard(alert));
-      }
-      return DraggableScrollbar(
-        controller: _scrollController,
-        scrollbarColor: StateContainer.of(context).curTheme.primary!,
-        scrollbarTopMargin: 10.0,
-        scrollbarBottomMargin: 20.0,
-        child: ReactiveRefreshIndicator(
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-          onRefresh: _refresh,
-          isRefreshing: _isRefreshing,
-          child: ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            controller: _scrollController,
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-            children: <Widget>[
-              // REMOTE MESSAGE CARDS
-              if (StateContainer.of(context).activeAlerts.isNotEmpty)
-                Column(
-                  children: activeAlerts,
-                ),
-              _buildWelcomeTransactionCard(context),
-              _buildDummyTXCard(
-                context,
-                amount_raw: "30000000000000000000000000000000",
-                displayName: AppLocalization.of(context).exampleRecRecipient,
-                memo: AppLocalization.of(context).exampleRecRecipientMessage,
-                is_recipient: true,
-                is_tx: true,
-                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60),
-              ),
-              _buildDummyTXCard(
-                context,
-                amount_raw: "50000000000000000000000000000000",
-                displayName: AppLocalization.of(context).examplePayRecipient,
-                memo: AppLocalization.of(context).examplePayRecipientMessage,
-                is_recipient: false,
-                is_tx: true,
-                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 1),
-              ),
-              _buildWelcomePaymentCardTwo(context),
-
-              _buildDummyTXCard(
-                context,
-                amount_raw: "10000000000000000000000000000000",
-                displayName: AppLocalization.of(context).examplePaymentTo,
-                memo: AppLocalization.of(context).examplePaymentFulfilledMemo,
-                is_recipient: false,
-                is_request: true,
-                is_fulfilled: true,
-                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 5),
-              ),
-              _buildDummyTXCard(
-                context,
-                amount_raw: "2000000000000000000000000000000000",
-                displayName: AppLocalization.of(context).examplePaymentFrom,
-                memo: AppLocalization.of(context).examplePaymentReceivableMemo,
-                is_recipient: true,
-                is_request: true,
-                is_fulfilled: false,
-                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 7),
-              ),
-              _buildDummyTXCard(
-                context,
-                displayName: AppLocalization.of(context).examplePaymentTo,
-                memo: AppLocalization.of(context).examplePaymentMessage,
-                is_recipient: true,
-                is_message: true,
-                is_fulfilled: false,
-                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 9),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
-    if (StateContainer.of(context).activeAlerts.isNotEmpty) {
-      // Setup unified list
-      if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet!.address}alert")) {
-        _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet!.address}alert", () => GlobalKey<AnimatedListState>());
-        setState(() {
-          _unifiedListMap.putIfAbsent(
-            StateContainer.of(context).wallet!.address!,
-            () => ListModel<dynamic>(
-              listKey: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address!}alert"]!,
-              initialItems: StateContainer.of(context).wallet!.unified,
-            ),
-          );
-        });
-      }
-      return DraggableScrollbar(
-        controller: _scrollController,
-        scrollbarColor: StateContainer.of(context).curTheme.primary!,
-        scrollbarTopMargin: 10.0,
-        scrollbarBottomMargin: 20.0,
-        child: ReactiveRefreshIndicator(
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-          onRefresh: _refresh,
-          isRefreshing: _isRefreshing,
-          child: AnimatedList(
-            physics: const AlwaysScrollableScrollPhysics(),
-            controller: _scrollController,
-            key: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address}alert"],
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-            initialItemCount: _unifiedListMap["${StateContainer.of(context).wallet!.address}alert"]!.length + StateContainer.of(context).activeAlerts.length,
-            itemBuilder: _buildUnifiedItem,
-          ),
-        ),
-      );
-    }
+    // if (StateContainer.of(context).activeAlerts.isNotEmpty) {
+    //   // Setup unified list
+    //   if (_moneroListKeyAlert == null) {
+    //     _moneroListKeyAlert = GlobalKey<AnimatedListState>();
+    //     setState(() {
+    //       _moneroList = ListModel<dynamic>(
+    //         listKey: _moneroListKeyAlert!,
+    //         initialItems: [],
+    //       );
+    //     });
+    //   }
+    //   return DraggableScrollbar(
+    //     controller: _scrollController,
+    //     scrollbarColor: StateContainer.of(context).curTheme.primary!,
+    //     scrollbarTopMargin: 10.0,
+    //     scrollbarBottomMargin: 20.0,
+    //     child: ReactiveRefreshIndicator(
+    //       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+    //       onRefresh: _refresh,
+    //       isRefreshing: _isRefreshing,
+    //       child: AnimatedList(
+    //         physics: const AlwaysScrollableScrollPhysics(),
+    //         controller: _scrollController,
+    //         key: _moneroListKeyAlert,
+    //         padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+    //         initialItemCount: _moneroList!.length + StateContainer.of(context).activeAlerts.length,
+    //         itemBuilder: _buildMoneroItem,
+    //       ),
+    //     ),
+    //   );
+    // }
 
     return DraggableScrollbar(
-      controller: _scrollController,
+      controller: _xmrScrollController,
       scrollbarColor: StateContainer.of(context).curTheme.primary!,
       scrollbarTopMargin: 10.0,
       scrollbarBottomMargin: 20.0,
@@ -4004,12 +4029,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         isRefreshing: _isRefreshing,
         child: AnimatedList(
           physics: const AlwaysScrollableScrollPhysics(),
-          controller: _scrollController,
+          controller: _xmrScrollController,
           primary: false,
-          key: _unifiedListKeyMap[StateContainer.of(context).wallet!.address!],
+          key: _moneroListKey,
           padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-          initialItemCount: _unifiedListMap[StateContainer.of(context).wallet!.address]!.length,
-          itemBuilder: _buildUnifiedItem,
+          initialItemCount: _moneroList!.length,
+          itemBuilder: _buildMoneroItem,
         ),
       ),
     );
@@ -4078,7 +4103,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             ],
           ));
     } else {
-      _disposeAnimation();
+      // _disposeAnimation();
     }
 
     if (StateContainer.of(context).wallet!.history.isEmpty && StateContainer.of(context).wallet!.solids.isEmpty) {

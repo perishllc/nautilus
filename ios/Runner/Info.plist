@@ -122,5 +122,10 @@
 	</array>
 	<key>NSContactsUsageDescription</key>
 	<string>Allow sending to contacts</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

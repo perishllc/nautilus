@@ -603,6 +603,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tampaknya perangkat Anda \"di-root\", \"jailbroken\", atau dimodifikasi dengan cara yang membahayakan keamanan. Anda disarankan untuk mereset perangkat Anda ke keadaan semula sebelum melanjutkan."),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Pindai QR code\n alamat Nano"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("Kirim melalui NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Pindai QR Code"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Cari apa saja"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -648,7 +649,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kirim atau Minta pembayaran, dengan pesan End to End Encrypted!\n\nPermintaan pembayaran, memo, dan pesan hanya akan diterima oleh pengguna nautilus lainnya.\n\nAnda tidak perlu memiliki nama pengguna untuk mengirim atau menerima permintaan pembayaran, dan Anda dapat menggunakannya untuk penyimpanan catatan Anda sendiri meskipun mereka tidak menggunakan nautilus."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Kirim Info Lembar"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("Kirim melalui NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Mengirim"),
         "sent": MessageLookupByLibrary.simpleMessage("Terkirim"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Terkirim Kepada"),
@@ -817,6 +817,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Dengan Pesan"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Setelah %1 menit"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Setelah %1 menit"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("Ya"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Ya")
       };

@@ -56,6 +56,20 @@ class DeviceUtil {
     return false;
   }
 
+  static Future<bool> isAndroid13OrGreater() async {
+    if (!Platform.isAndroid) {
+      return false;
+    }
+    final AndroidDeviceInfo deviceInfo = await DeviceInfoPlugin().androidInfo;
+    final int? osVer = int.tryParse(deviceInfo.version.release ?? "nan");
+
+    // default to true since if we don't know we don't want to assume we have the notification permission:
+    if (osVer == null) {
+      return true;
+    }
+    return osVer >= 13;
+  }
+
   static Future<bool> supportsNFCReader() async {
     return await isIPhone7OrGreater() && await isIOS11OrGreater();
   }

@@ -607,6 +607,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Изглежда вашето устройство е “рутнато”, “джейлбрейкнато” или модифицирано така, че да може да бъде компроментирано. Препоръчително е да върнете устройството към фабрични настройки преди да продължите. "),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Сканирай Nano адрес или QR-код"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("Изпращане чрез NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Сканирай QR-код"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Търсете каквото и да е"),
@@ -650,8 +651,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Изпратете или поискайте плащане с криптирани съобщения от край до край!\n\nИсканията за плащане, бележки и съобщения ще бъдат получени само от други потребители на nautilus.\n\nНе е необходимо да имате потребителско име, за да изпращате или получавате заявки за плащане, и можете да ги използвате за собствено водене на записи, дори ако те не използват nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Изпращане на информация за листа"),
-        "sendViaNFC":
-            MessageLookupByLibrary.simpleMessage("Изпращане чрез NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Изпращам"),
         "sent": MessageLookupByLibrary.simpleMessage("Изпратено"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Изпратено до"),
@@ -825,6 +824,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Със Съобщение"),
         "xMinute": MessageLookupByLibrary.simpleMessage("След %1 минута"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("След %1 минути"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("Да"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Да")
       };

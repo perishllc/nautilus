@@ -24,10 +24,10 @@ class RemoteMessageSheet extends StatefulWidget {
   final bool hasDismissButton;
 
   @override
-  RemoteMessageSheetStateState createState() => RemoteMessageSheetStateState();
+  RemoteMessageSheetState createState() => RemoteMessageSheetState();
 }
 
-class RemoteMessageSheetStateState extends State<RemoteMessageSheet> {
+class RemoteMessageSheetState extends State<RemoteMessageSheet> {
   Future<bool> showNotificationDialog() async {
     final NotificationOptions? option = await showDialog<NotificationOptions>(
         context: context,

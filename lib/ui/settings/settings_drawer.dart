@@ -6,7 +6,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_contacts/flutter_contacts.dart' as cont;
+// import 'package:flutter_contacts/flutter_contacts.dart' as cont;
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -142,7 +142,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
 
     // ask for contacts permission:
     if (!contactsOn) {
-      final bool contactsEnabled = await cont.FlutterContacts.requestPermission();
+      // final bool contactsEnabled = await cont.FlutterContacts.requestPermission();
+      final bool contactsEnabled = false;
       await sl.get<SharedPrefsUtil>().setContactsOn(contactsEnabled);
       setState(() {
         _curContactsSetting = ContactsSetting(contactsEnabled ? ContactsOptions.ON : ContactsOptions.OFF);
@@ -2349,9 +2350,9 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemDoubleLine(
                         context, AppLocalization.of(context).showUnopenedWarning, _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
+                    // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    // AppSettings.buildSettingsListItemDoubleLine(
+                    //     context, AppLocalization.of(context).showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemDoubleLine(
                         context, AppLocalization.of(context).showFunding, _curFundingSetting, AppIcons.money_bill_wave, _fundingDialog),
@@ -2760,7 +2761,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     width: double.infinity,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
+                        colors: <Color>[StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
                         begin: const AlignmentDirectional(0.5, -1.0),
                         end: const AlignmentDirectional(0.5, 1.0),
                       ),
@@ -2779,7 +2780,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
     final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
-    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    if (!mounted) return;
+    final bool? auth = await Navigator.of(context).push(MaterialPageRoute<bool>(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
@@ -2789,6 +2791,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     }));
     if (auth != null && auth) {
       await Future<dynamic>.delayed(const Duration(milliseconds: 200));
+      if (!mounted) return;
       Navigator.of(context).pop();
       StateContainer.of(context).getSeed().then((String seed) {
         Sheets.showAppHeightNineSheet(

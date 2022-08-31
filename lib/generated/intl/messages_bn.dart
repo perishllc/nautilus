@@ -613,6 +613,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "মনে হচ্ছে আপনার ডিভাইসটি \"রুট\", \"জেলব্রোকেন\", বা এমনভাবে সংশোধন করা হয়েছে যা নিরাপত্তার সাথে আপোষ করে। এগিয়ে যাওয়ার আগে আপনার ডিভাইসটিকে তার আসল অবস্থায় রিসেট করার পরামর্শ দেওয়া হচ্ছে।"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "একটি ন্যানো <নতুন লাইন> ঠিকানা QR কোড স্ক্যান করুন"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("NFC এর মাধ্যমে পাঠান"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("QR কোড স্ক্যান করুন"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
@@ -658,8 +659,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "এনক্রিপ্ট করা বার্তাগুলি শেষ করার সাথে সাথে অর্থ প্রদানের অনুরোধ করুন বা অনুরোধ করুন!\n\nপেমেন্ট অনুরোধ, মেমো, এবং বার্তা শুধুমাত্র অন্যান্য নটিলাস ব্যবহারকারীদের দ্বারা গ্রহণযোগ্য হবে।\n\nপেমেন্ট অনুরোধ পাঠাতে বা গ্রহণ করার জন্য আপনার কোন ব্যবহারকারীর নাম থাকতে হবে না, এবং যদি তারা নটিলাস ব্যবহার না করে তবে আপনি নিজের রেকর্ড রাখার জন্য সেগুলি ব্যবহার করতে পারেন।"),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("পত্রকের তথ্য পাঠান"),
-        "sendViaNFC":
-            MessageLookupByLibrary.simpleMessage("NFC এর মাধ্যমে পাঠান"),
         "sending": MessageLookupByLibrary.simpleMessage("পাঠানো হচ্ছে"),
         "sent": MessageLookupByLibrary.simpleMessage("পাঠানো হয়েছে"),
         "sentTo": MessageLookupByLibrary.simpleMessage("পাঠানো হয়েছে"),
@@ -828,6 +827,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("বার্তা সহ"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 মিনিট পরে"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 মিনিট এর পরে"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("হ্যাঁ"),
         "yesButton": MessageLookupByLibrary.simpleMessage("হ্যাঁ")
       };

@@ -614,6 +614,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Aparentemente o seu dispositivo é \"rooted\", \"jailbroken\" ou modificado de uma maneira que comprometa a sua segurança. É recomendável que você redefina o dispositivo para o estado original antes de continuar."),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Escaneie o código QR \nde um endereço Nano"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("Enviar por NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Escanear QR Code"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Procure por qualquer coisa"),
@@ -658,7 +659,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Envie ou solicite um pagamento, com mensagens criptografadas de ponta a ponta!\n\nSolicitações de pagamento, memorandos e mensagens só poderão ser recebidos por outros usuários do nautilus.\n\nVocê não precisa ter um nome de usuário para enviar ou receber solicitações de pagamento e pode usá-los para manter seus próprios registros, mesmo que eles não usem o nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Enviar informações da planilha"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("Enviar por NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Enviando"),
         "sent": MessageLookupByLibrary.simpleMessage("Enviado"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Enviado para"),
@@ -827,6 +827,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Com mensagem"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Após %1 minuto"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Após %1 minutos"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("Sim"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Sim")
       };

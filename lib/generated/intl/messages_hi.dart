@@ -600,6 +600,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "ऐसा प्रतीत होता है कि आपका डिवाइस \"रूटेड\", \"जेलब्रोकन\" है, या सुरक्षा से समझौता करने वाले तरीके से संशोधित है। यह अनुशंसा की जाती है कि आप आगे बढ़ने से पहले अपने डिवाइस को उसकी मूल स्थिति में रीसेट कर दें।"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "बनानो के पते का \nक्यू आर कोड स्कैन करें "),
+        "scanNFC":
+            MessageLookupByLibrary.simpleMessage("एनएफसी के माध्यम से भेजें"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("क्यूआर कोड स्कैन करें"),
         "searchHint":
@@ -645,8 +647,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "एंड टू एंड एन्क्रिप्टेड संदेशों के साथ भुगतान भेजें या अनुरोध करें!\n\nभुगतान अनुरोध, ज्ञापन और संदेश केवल अन्य नॉटिलस उपयोगकर्ताओं द्वारा प्राप्य होंगे।\n\nभुगतान अनुरोध भेजने या प्राप्त करने के लिए आपके पास उपयोगकर्ता नाम रखने की आवश्यकता नहीं है, और आप उन्हें अपने रिकॉर्ड रखने के लिए उपयोग कर सकते हैं, भले ही वे नॉटिलस का उपयोग न करें।"),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("शीट की जानकारी भेजें"),
-        "sendViaNFC":
-            MessageLookupByLibrary.simpleMessage("एनएफसी के माध्यम से भेजें"),
         "sending": MessageLookupByLibrary.simpleMessage("भेजा जा रहा है -"),
         "sent": MessageLookupByLibrary.simpleMessage("भेजे -"),
         "sentTo": MessageLookupByLibrary.simpleMessage("इसको भेजा गया -"),
@@ -814,6 +814,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("मैसेज के साथ"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 मिनट के बाद"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 मिनट के बाद"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("हाँ"),
         "yesButton": MessageLookupByLibrary.simpleMessage("हाँ")
       };

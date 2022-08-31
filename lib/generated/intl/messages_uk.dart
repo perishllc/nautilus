@@ -618,6 +618,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Схоже що ваш прилад \"rooted\", \"jailbroken\", чи модифікований настільки, що це небезпечно. Рекомендовано повернути фабричні установки вашому приладу перед продовженням."),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Сканувати QR код \n NANO адреси"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("Надіслати через NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Сканувати QR код"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Шукати що-небудь"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -663,8 +664,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Надсилайте або запитуйте платіж із зашифрованими повідомленнями End to End!\n\nПлатіжні запити, замітки та повідомлення будуть отримувати лише інші користувачі nautilus.\n\nВам не потрібно мати ім\'я користувача для надсилання або отримання платіжних запитів, і ви можете використовувати їх для власного ведення обліку, навіть якщо вони не використовують nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Надіслати інформацію про аркуш"),
-        "sendViaNFC":
-            MessageLookupByLibrary.simpleMessage("Надіслати через NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Надсилання"),
         "sent": MessageLookupByLibrary.simpleMessage("Надіслано"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Надіслано для"),
@@ -841,6 +840,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("З повідомленням"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Після %1 хвилини"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Після %1 хвилин"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("Так"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Так")
       };

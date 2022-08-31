@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -9,7 +8,6 @@ import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 
 class FundingSpecificSheet extends StatefulWidget {
   final FundingResponseItem alert;
@@ -17,10 +15,12 @@ class FundingSpecificSheet extends StatefulWidget {
 
   FundingSpecificSheet({required this.alert, this.hasDismissButton = true}) : super();
 
-  _FundingSpecificSheetStateState createState() => _FundingSpecificSheetStateState();
+  @override
+  // ignore: library_private_types_in_public_api
+  _FundingSpecificSheetState createState() => _FundingSpecificSheetState();
 }
 
-class _FundingSpecificSheetStateState extends State<FundingSpecificSheet> {
+class _FundingSpecificSheetState extends State<FundingSpecificSheet> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

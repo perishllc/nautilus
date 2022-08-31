@@ -587,6 +587,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "يبدو أن جهازك \"rooted\" أو \"jailbroken\" أو تم تعديله بطريقة تعرض الأمان للخطر. يرجى إعادة ضبط جهازك إلى حالته الأصلية قبل المتابعة.\n"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "مسح \nعنوان رمز الاستجابة السريعة"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("إرسال عبر NFC"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("مسح رمز الاستجابة السريعة"),
         "searchHint": MessageLookupByLibrary.simpleMessage("ابحث عن أي شيء"),
@@ -632,7 +633,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "أرسل أو اطلب دفعة، مع الرسائل المشفرة من النهاية إلى النهاية!\n\nلن يتم قبول طلبات الدفع والمذكرات والرسائل إلا من قبل مستخدمي nautilus الآخرين.\n\nلا تحتاج إلى اسم مستخدم لإرسال أو استقبال طلبات الدفع، ويمكنك استخدامها لحفظ السجلات الخاصة بك حتى لو لم تستخدم nautilus."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("إرسال معلومات الورقة"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("إرسال عبر NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("إرسال"),
         "sent": MessageLookupByLibrary.simpleMessage("تم الارسال"),
         "sentTo": MessageLookupByLibrary.simpleMessage("تم الإرسال إلى"),
@@ -799,6 +799,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("مع رسالة"),
         "xMinute": MessageLookupByLibrary.simpleMessage("بعد %1 دقيقة"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("بعد %1 دقائق"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("نعم"),
         "yesButton": MessageLookupByLibrary.simpleMessage("نعم")
       };

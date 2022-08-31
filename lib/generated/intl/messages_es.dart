@@ -617,6 +617,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Parece que su dispositivo está \"rooteado\", \"liberado\" o modificado de una manera que compromete su seguridad. Se recomienda que restablezca su dispositivo a su estado original antes de continuar."),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Escanear el código QR\n de una billetera de Nano."),
+        "scanNFC":
+            MessageLookupByLibrary.simpleMessage("Enviar a través de NFC"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("Escanear código QR"),
         "searchHint":
@@ -664,8 +666,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "¡Envíe o solicite un pago, con mensajes cifrados de extremo a extremo!\n\nLas solicitudes de pago, notas y mensajes solo podrán ser recibidos por otros usuarios de nautilus.\n\nNo necesita tener un nombre de usuario para enviar o recibir solicitudes de pago, y puede usarlos para llevar su propio registro incluso si no utilizan nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Enviar información de la hoja"),
-        "sendViaNFC":
-            MessageLookupByLibrary.simpleMessage("Enviar a través de NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Enviando"),
         "sent": MessageLookupByLibrary.simpleMessage("Enviados"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Enviar a"),
@@ -838,6 +838,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Con mensaje"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Tras %1 minuto"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Tras %1 minutos"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("Sí"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Sí")
       };

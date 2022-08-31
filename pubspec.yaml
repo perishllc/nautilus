@@ -363,6 +363,19 @@ flutter:
     - assets/illustrations/transferfunds_paperwalletonly.svg
     # changelog:
     - CHANGELOG.md
+    # xmr:
+    - assets/xmr/
+    - assets/xmr/apple-touch-icon.png
+    - assets/xmr/favicon-16x16.png
+    - assets/xmr/favicon-32x32.png
+    - assets/xmr/index.html
+    - assets/xmr/main.js
+    - assets/xmr/monero_wallet_full.js
+    - monero_wallet_full.wasm
+    # - assets/xmr/monero_wallet_keys.js
+    # - assets/xmr/monero_wallet_keys.wasm
+    # - assets/xmr/monero_web_worker.js
+    # - assets/xmr/monero_web_worker.js.map
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -3660,6 +3660,16 @@ class AppLocalization {
     );
   }
 
+  /// `Scan NFC`
+  String get scanNFC {
+    return Intl.message(
+      'Scan NFC',
+      name: 'scanNFC',
+      desc: 'scan_nfc',
+      args: [],
+    );
+  }
+
   /// `Scan QR Code`
   String get scanQrCode {
     return Intl.message(
@@ -3926,16 +3936,6 @@ class AppLocalization {
       'Send Sheet Info',
       name: 'sendSheetInfoHeader',
       desc: 'send_sheet_info_header',
-      args: [],
-    );
-  }
-
-  /// `Send via NFC`
-  String get sendViaNFC {
-    return Intl.message(
-      'Send via NFC',
-      name: 'sendViaNFC',
-      desc: 'send_payment_nfc',
       args: [],
     );
   }
@@ -4996,6 +4996,56 @@ class AppLocalization {
       'After %1 minutes',
       name: 'xMinutes',
       desc: 'after_minutes',
+      args: [],
+    );
+  }
+
+  /// `Connecting`
+  String get xmrStatusConnecting {
+    return Intl.message(
+      'Connecting',
+      name: 'xmrStatusConnecting',
+      desc: 'xmr_connecting_status',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get xmrStatusError {
+    return Intl.message(
+      'Error',
+      name: 'xmrStatusError',
+      desc: 'xmr_error_status',
+      args: [],
+    );
+  }
+
+  /// `Synced`
+  String get xmrStatusSynchronized {
+    return Intl.message(
+      'Synced',
+      name: 'xmrStatusSynchronized',
+      desc: 'xmr_synced_status',
+      args: [],
+    );
+  }
+
+  /// `Syncing`
+  String get xmrStatusSynchronizing {
+    return Intl.message(
+      'Syncing',
+      name: 'xmrStatusSynchronizing',
+      desc: 'xmr_syncing_status',
+      args: [],
+    );
+  }
+
+  /// `Loading`
+  String get xmrStatusLoading {
+    return Intl.message(
+      'Loading',
+      name: 'xmrStatusLoading',
+      desc: 'xmr_loading_status',
       args: [],
     );
   }

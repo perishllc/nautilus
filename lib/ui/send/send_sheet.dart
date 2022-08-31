@@ -308,7 +308,14 @@ class SendSheetState extends State<SendSheet> {
     }
 
     // kind of a hack but w/e
-    DeviceUtil.isIpad().then((bool value) {
+    DeviceUtil.isIpad().then((bool value) async {
+      final bool isAvailable = await NfcManager.instance.isAvailable();
+
+      // we don't support NFC so don't show the NFC button:
+      if (!isAvailable) {
+        return;
+      }
+
       if (value) {
         setState(() {
           isIpad = true;
@@ -498,6 +505,182 @@ class SendSheetState extends State<SendSheet> {
         );
       });
     });
+  }
+
+  Future<void> _scanQR() async {
+    UIUtil.cancelLockEvent();
+    final dynamic scanResult = await UserDataUtil.getQRData(DataType.DATA, context);
+    if (!mounted) return;
+    if (scanResult == null) {
+      UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+    } else if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
+      if (scanResult == QRScanErrs.PERMISSION_DENIED) {
+        UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
+      } else if (scanResult == QRScanErrs.UNKNOWN_ERROR) {
+        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+      }
+      return;
+    } else if (scanResult is Address) {
+      // Is a URI
+      final Address address = scanResult;
+      // See if this address belongs to a contact or username
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
+      if (user != null) {
+        // Is a user
+        if (mounted) {
+          setState(() {
+            _isUser = true;
+            _addressValidationText = "";
+            _addressStyle = AddressStyle.PRIMARY;
+            _pasteButtonVisible = false;
+            _showContactButton = false;
+          });
+          _addressController!.text = user.getDisplayName()!;
+        }
+      } else {
+        // Not a contact or username
+        if (mounted) {
+          setState(() {
+            _isUser = false;
+            _addressValidationText = "";
+            _addressStyle = AddressStyle.TEXT90;
+            _pasteButtonVisible = false;
+            _showContactButton = false;
+          });
+          _addressController!.text = address.address!;
+          _addressFocusNode!.unfocus();
+          setState(() {
+            _addressValidAndUnfocused = true;
+          });
+        }
+      }
+
+      // If amount is present, fill it and go to SendConfirm
+      if (mounted && address.amount != null) {
+        final BigInt? amountBigInt = BigInt.tryParse(address.amount!);
+        if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
+          UIUtil.showSnackbar(
+              AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
+          return;
+        } else if (_localCurrencyMode && mounted) {
+          toggleLocalCurrency();
+          _amountController!.text = getRawAsThemeAwareAmount(context, address.amount);
+        } else if (mounted) {
+          setState(() {
+            _rawAmount = address.amount;
+            // If raw amount has more precision than we support show a special indicator
+            _amountController!.text = getThemeAwareAccuracyAmount(context, address.amount);
+          });
+          _addressFocusNode!.unfocus();
+        }
+
+        // If balance is insufficient show error:
+        if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
+          UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
+          return;
+        }
+
+        // Go to confirm sheet
+        Sheets.showAppHeightNineSheet(
+            context: context,
+            widget: SendConfirmSheet(
+                amountRaw: _localCurrencyMode
+                    ? NumberUtil.getAmountAsRaw(
+                        sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)))
+                    : _rawAmount ?? getThemeAwareAmountAsRaw(context, _amountController!.text),
+                destination: user?.address ?? address.address!,
+                contactName: user?.getDisplayName(),
+                maxSend: _isMaxSend(),
+                localCurrency: _localCurrencyMode ? _amountController!.text : null));
+      }
+    } else if (scanResult is HandoffItem) {
+      // block handoff item:
+      final HandoffItem handoffItem = scanResult;
+
+      // See if this address belongs to a contact or username
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(handoffItem.account);
+
+      // check if the user has enough balance to send this amount:
+      // If balance is insufficient show error:
+      final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount);
+      if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
+        UIUtil.showSnackbar(
+            AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
+        return;
+      } else if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
+        UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
+        return;
+      }
+
+      // if handoffItem.exact is false, we should allow the user to change the amount to send to >= amount
+      if (!handoffItem.exact && mounted) {
+        // TODO:
+        log.d("HandoffItem exact is false: unsupported handoff flow!");
+        return;
+      }
+
+      // Go to confirm sheet:
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          widget: HandoffConfirmSheet(
+            handoffItem: handoffItem,
+            destination: user?.address ?? handoffItem.account,
+            contactName: user?.getDisplayName(),
+          ));
+    } else if (scanResult is AuthItem) {
+      // handle auth handoff:
+      final AuthItem authItem = scanResult;
+      // See if this address belongs to a contact or username
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
+
+      // Go to confirm sheet:
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          widget: AuthConfirmSheet(
+            authItem: authItem,
+            destination: user?.address ?? authItem.account,
+            contactName: user?.getDisplayName(),
+          ));
+    } else {
+      // something went wrong, show generic error:
+      UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+    }
+  }
+
+  Future<void> _scanNFC() async {
+    // Start Session
+    NfcManager.instance.startSession(
+      onError: (NfcError error) async {
+        log.d("onError: ${error.message}");
+      },
+      pollingOptions: Set()..add(NfcPollingOption.iso14443),
+      onDiscovered: (NfcTag tag) async {
+        // Do something with an NfcTag instance.
+        final Ndef? ndef = Ndef.from(tag);
+        if (ndef?.cachedMessage != null && ndef!.cachedMessage!.records.isNotEmpty) {
+          Uint8List payload = ndef.cachedMessage!.records[0].payload;
+
+          if (payload.length < 3) {
+            return;
+          }
+
+          if (payload[0] == 0x00) {
+            payload = payload.sublist(1);
+            EventTaxiImpl.singleton().fire(DeepLinkEvent(link: utf8.decode(payload)));
+          } else {
+            // try anyways?
+            EventTaxiImpl.singleton().fire(DeepLinkEvent(link: utf8.decode(payload)));
+          }
+          NfcManager.instance.stopSession();
+        }
+      },
+    );
+    // try {
+    //   UIUtil.cancelLockEvent();
+    //   startNFCSession("");
+    // } catch (e) {
+    //   stopNFCSession();
+    // }
   }
 
   @override
@@ -730,7 +913,7 @@ class SendSheetState extends State<SendSheet> {
 
                                 // ******* Enter Amount Error Container ******* //
                                 Container(
-                                  alignment: const AlignmentDirectional(0, 0),
+                                  alignment: AlignmentDirectional.center,
                                   margin: const EdgeInsets.only(top: 3),
                                   child: Text(_amountValidationText,
                                       style: TextStyle(
@@ -865,7 +1048,7 @@ class SendSheetState extends State<SendSheet> {
                     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       final bool validRequest = await _validateRequest();
 
-                      if (!validRequest) {
+                      if (!validRequest || !mounted) {
                         return;
                       }
 
@@ -968,193 +1151,38 @@ class SendSheetState extends State<SendSheet> {
                     }),
                   ],
                 ),
-                Row(
-                  children: <Widget>[
-                    // Scan QR Code Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).scanQrCode, Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () async {
-                      UIUtil.cancelLockEvent();
-                      final dynamic scanResult = await UserDataUtil.getQRData(DataType.DATA, context);
-                      if (!mounted) return;
-                      if (scanResult == null) {
-                        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
-                      } else if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
-                        if (scanResult == QRScanErrs.PERMISSION_DENIED) {
-                          UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
-                        } else if (scanResult == QRScanErrs.UNKNOWN_ERROR) {
-                          UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
-                        }
-                        return;
-                      } else if (scanResult is Address) {
-                        // Is a URI
-                        final Address address = scanResult;
-                        // See if this address belongs to a contact or username
-                        final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
-                        if (user != null) {
-                          // Is a user
-                          if (mounted) {
-                            setState(() {
-                              _isUser = true;
-                              _addressValidationText = "";
-                              _addressStyle = AddressStyle.PRIMARY;
-                              _pasteButtonVisible = false;
-                              _showContactButton = false;
-                            });
-                            _addressController!.text = user.getDisplayName()!;
-                          }
-                        } else {
-                          // Not a contact or username
-                          if (mounted) {
-                            setState(() {
-                              _isUser = false;
-                              _addressValidationText = "";
-                              _addressStyle = AddressStyle.TEXT90;
-                              _pasteButtonVisible = false;
-                              _showContactButton = false;
-                            });
-                            _addressController!.text = address.address!;
-                            _addressFocusNode!.unfocus();
-                            setState(() {
-                              _addressValidAndUnfocused = true;
-                            });
-                          }
-                        }
-
-                        // If amount is present, fill it and go to SendConfirm
-                        if (mounted && address.amount != null) {
-                          final BigInt? amountBigInt = BigInt.tryParse(address.amount!);
-                          if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
-                            UIUtil.showSnackbar(
-                                AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),
-                                context);
-                            return;
-                          } else if (_localCurrencyMode && mounted) {
-                            toggleLocalCurrency();
-                            _amountController!.text = getRawAsThemeAwareAmount(context, address.amount);
-                          } else if (mounted) {
-                            setState(() {
-                              _rawAmount = address.amount;
-                              // If raw amount has more precision than we support show a special indicator
-                              _amountController!.text = getThemeAwareAccuracyAmount(context, address.amount);
-                            });
-                            _addressFocusNode!.unfocus();
-                          }
-
-                          // If balance is insufficient show error:
-                          if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-                            UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
-                            return;
-                          }
-
-                          // Go to confirm sheet
-                          Sheets.showAppHeightNineSheet(
-                              context: context,
-                              widget: SendConfirmSheet(
-                                  amountRaw: _localCurrencyMode
-                                      ? NumberUtil.getAmountAsRaw(sanitizedAmount(
-                                          _localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)))
-                                      : _rawAmount ?? getThemeAwareAmountAsRaw(context, _amountController!.text),
-                                  destination: user?.address ?? address.address!,
-                                  contactName: user?.getDisplayName(),
-                                  maxSend: _isMaxSend(),
-                                  localCurrency: _localCurrencyMode ? _amountController!.text : null));
-                        }
-                      } else if (scanResult is HandoffItem) {
-                        // block handoff item:
-                        final HandoffItem handoffItem = scanResult;
-
-                        // See if this address belongs to a contact or username
-                        final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(handoffItem.account);
-
-                        // check if the user has enough balance to send this amount:
-                        // If balance is insufficient show error:
-                        final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount);
-                        if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
-                          UIUtil.showSnackbar(
-                              AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),
-                              context);
-                          return;
-                        } else if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-                          UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
-                          return;
-                        }
-
-                        // if handoffItem.exact is false, we should allow the user to change the amount to send to >= amount
-                        if (!handoffItem.exact && mounted) {
-                          // TODO:
-                          log.d("HandoffItem exact is false: unsupported handoff flow!");
-                          return;
-                        }
-
-                        // Go to confirm sheet:
-                        Sheets.showAppHeightNineSheet(
-                            context: context,
-                            widget: HandoffConfirmSheet(
-                              handoffItem: handoffItem,
-                              destination: user?.address ?? handoffItem.account,
-                              contactName: user?.getDisplayName(),
-                            ));
-                      } else if (scanResult is AuthItem) {
-                        // handle auth handoff:
-                        final AuthItem authItem = scanResult;
-                        // See if this address belongs to a contact or username
-                        final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
-
-                        // Go to confirm sheet:
-                        Sheets.showAppHeightNineSheet(
-                            context: context,
-                            widget: AuthConfirmSheet(
-                              authItem: authItem,
-                              destination: user?.address ?? authItem.account,
-                              contactName: user?.getDisplayName(),
-                            ));
-                      } else {
-                        // something went wrong, show generic error:
-                        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
-                      }
-                    })
-                  ],
-                ),
                 if (Platform.isIOS && !isIpad)
                   Row(
                     children: <Widget>[
+                      // Scan QR Code Button
+                      AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        AppLocalization.of(context).scanQrCode,
+                        Dimens.BUTTON_COMPACT_LEFT_DIMENS,
+                        onPressed: _scanQR,
+                      ),
                       // scan for nfc
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).sendViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
-                          onPressed: () async {
-                        // Start Session
-                        NfcManager.instance.startSession(
-                          onError: (NfcError error) async {
-                            log.d("onError: ${error.message}");
-                          },
-                          pollingOptions: Set()..add(NfcPollingOption.iso14443),
-                          onDiscovered: (NfcTag tag) async {
-                            // Do something with an NfcTag instance.
-                            final Ndef? ndef = Ndef.from(tag);
-                            if (ndef?.cachedMessage != null && ndef!.cachedMessage!.records.isNotEmpty) {
-                              Uint8List payload = ndef.cachedMessage!.records[0].payload;
-
-                              if (payload.length < 3) {
-                                return;
-                              }
-
-                              if (payload[0] == 0x00) {
-                                payload = payload.sublist(1);
-                                EventTaxiImpl.singleton().fire(DeepLinkEvent(link: utf8.decode(payload)));
-                              } else {
-                                // try anyways?
-                                EventTaxiImpl.singleton().fire(DeepLinkEvent(link: utf8.decode(payload)));
-                              }
-                              NfcManager.instance.stopSession();
-                            }
-                          },
-                        );
-                        // try {
-                        //   UIUtil.cancelLockEvent();
-                        //   startNFCSession("");
-                        // } catch (e) {
-                        //   stopNFCSession();
-                        // }
-                      })
+                      AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        AppLocalization.of(context).scanNFC,
+                        Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                        onPressed: _scanNFC,
+                      )
+                    ],
+                  )
+                else
+                  Row(
+                    children: <Widget>[
+                      // Scan QR Code Button
+                      AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        AppLocalization.of(context).scanQrCode,
+                        Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: _scanQR,
+                      )
                     ],
                   ),
               ],

@@ -15,6 +15,7 @@ import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/util/deviceutil.dart';
 import 'package:nautilus_wallet_flutter/util/encrypt.dart';
 import 'package:nautilus_wallet_flutter/util/random_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -62,6 +63,8 @@ class SharedPrefsUtil {
   static const String last_napi_users_check = 'fnautilus_last_napi_users_check';
   // store app version (for showing the change log):
   static const String app_version = 'fnautilus_app_version';
+  // xmr restore height:
+  static const String xmr_restore_height = 'fxmr_restore_height';
 
   // For plain-text data
   Future<void> set(String key, dynamic value) async {
@@ -266,12 +269,17 @@ class SharedPrefsUtil {
   }
 
   Future<bool> getNotificationsOn() async {
-    // Notifications off by default on iOS,
     final bool defaultValue;
+    // Notifications off by default on iOS,
     if (Platform.isIOS) {
       defaultValue = false;
     } else {
-      defaultValue = true;
+      // as of android 13 we must ask for permission to send notifications:
+      if (await DeviceUtil.isAndroid13OrGreater()) {
+        defaultValue = false;
+      } else {
+        defaultValue = true;
+      }
     }
     return await get(notification_enabled, defaultValue: defaultValue) as bool;
   }
@@ -329,7 +337,6 @@ class SharedPrefsUtil {
     // funding false by default
     return await get(funding_enabled, defaultValue: true) as bool;
   }
-  
 
   Future<void> setLock(bool value) async {
     return set(lock_kalium, value);
@@ -475,6 +482,14 @@ class SharedPrefsUtil {
     }
   }
 
+  Future<void> setXMRRestoreHeight(int height) async {
+    return set(xmr_restore_height, height);
+  }
+
+  Future<int> getXMRRestoreHeight() async {
+    return await get(xmr_restore_height, defaultValue: 2701000) as int;
+  }
+
   // TODO:
   // Future<bool> alreadyDonated( alert) async {
   //   final int? exists = await getWithExpiry("alert_${alert.id}") as int?;
@@ -510,6 +525,7 @@ class SharedPrefsUtil {
     await prefs.remove(last_napi_users_check);
     await prefs.remove(ninja_api_cache);
     await prefs.remove(firstcontact_added);
+    await prefs.remove(xmr_restore_height);
     // remove the dismissals of any important alerts:
     await prefs.remove("alert_4040");
     await prefs.remove("alert_4041");

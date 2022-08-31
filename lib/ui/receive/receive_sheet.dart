@@ -1,7 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-import 'dart:math' as Math;
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -31,7 +28,6 @@ import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_show_qr.dart';
-import 'package:nautilus_wallet_flutter/ui/receive/share_card.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/split_bill_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/request/request_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
@@ -46,9 +42,7 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:quiver/strings.dart';
-import 'package:share_plus/share_plus.dart';
 // import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
 // import 'package:ndef/ndef.dart' as ndef;
 // import 'package:flutter_nearby_messages_api/flutter_nearby_messages_api.dart';
@@ -67,7 +61,7 @@ class NumericalRangeFormatter extends TextInputFormatter {
     if (newValue.text == '') {
       return newValue;
     } else if (int.parse(newValue.text) < min!) {
-      return const TextEditingValue().copyWith(text: min!.toStringAsFixed(2));
+      return TextEditingValue.empty.copyWith(text: min!.toStringAsFixed(2));
     } else {
       return int.parse(newValue.text) > max! ? oldValue : newValue;
     }
@@ -75,15 +69,17 @@ class NumericalRangeFormatter extends TextInputFormatter {
 }
 
 class ReceiveSheet extends StatefulWidget {
-  ReceiveSheet({required this.localCurrency, this.address, this.qrWidget}) : super();
+  const ReceiveSheet({required this.localCurrency, this.address, this.qrWidget}) : super();
   final AvailableCurrency localCurrency;
   final Widget? qrWidget;
   final String? address;
 
-  _ReceiveSheetStateState createState() => _ReceiveSheetStateState();
+  @override
+  // ignore: library_private_types_in_public_api
+  _ReceiveSheetState createState() => _ReceiveSheetState();
 }
 
-class _ReceiveSheetStateState extends State<ReceiveSheet> {
+class _ReceiveSheetState extends State<ReceiveSheet> {
   GlobalKey? shareCardKey;
   ByteData? shareImageData;
   // Address copied items

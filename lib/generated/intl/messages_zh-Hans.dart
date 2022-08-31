@@ -477,6 +477,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "您的设备似乎被“越狱”或被修改，从而存在安全隐患。建议您在继续之前把设备还原到初始状态。"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage("扫描NANO二维码地址"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("通过 NFC 发送"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("扫描二维码"),
         "searchHint": MessageLookupByLibrary.simpleMessage("搜索任何东西"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -509,7 +510,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "使用端到端加密消息发送或请求付款！\n\n付款请求、备忘录和消息只能由其他 nautilus 用户接收。\n\n您无需拥有用户名即可发送或接收付款请求，即使他们不使用nautilus，您也可以将其用于自己的记录保存。"),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage("发送工作表信息"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("通过 NFC 发送"),
         "sending": MessageLookupByLibrary.simpleMessage("发出"),
         "sent": MessageLookupByLibrary.simpleMessage("发送"),
         "sentTo": MessageLookupByLibrary.simpleMessage("发给"),
@@ -645,6 +645,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("带消息"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 分钟后"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 分钟后"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("确认"),
         "yesButton": MessageLookupByLibrary.simpleMessage("确认")
       };

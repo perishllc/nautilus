@@ -474,6 +474,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "您的裝置似乎已「越獄」或被修改，從而存在安全疑慮。建議您在繼續之前，將裝置還原至初始狀態。"),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("掃描 NANO 二維條碼地址"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("通過 NFC 發送"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("掃描二維條碼"),
         "searchHint": MessageLookupByLibrary.simpleMessage("搜尋任何東西"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -508,7 +509,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "發送或請求付款，帶有端到端加密消息！\n\n付款請求，備忘錄和消息僅由其他 Nautilus 用戶應收。\n\n您無需擁有用戶名即可發送或接收付款請求，即使他們不使用鸚鵡螺，也可以將它們用於自己的記錄保存。"),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage("傳送工作表資訊"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("通過 NFC 發送"),
         "sending": MessageLookupByLibrary.simpleMessage("傳送"),
         "sent": MessageLookupByLibrary.simpleMessage("發送"),
         "sentTo": MessageLookupByLibrary.simpleMessage("發送給："),
@@ -644,6 +644,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("有訊息"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 分鐘後"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 分鐘後"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("確認"),
         "yesButton": MessageLookupByLibrary.simpleMessage("確認")
       };

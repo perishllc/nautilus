@@ -1800,6 +1800,11 @@
     "type": "text",
     "description": "scan_send_instruction_label"
   },
+  "scanNFC": "Изпращане чрез NFC",
+  "@scanNFC": {
+    "type": "text",
+    "description": "scan_nfc"
+  },
   "scanQrCode": "Сканирай QR-код",
   "@scanQrCode": {
     "type": "text",
@@ -1934,11 +1939,6 @@
   "@sendSheetInfoHeader": {
     "type": "text",
     "description": "send_sheet_info_header"
-  },
-  "sendViaNFC": "Изпращане чрез NFC",
-  "@sendViaNFC": {
-    "type": "text",
-    "description": "send_payment_nfc"
   },
   "sent": "Изпратено",
   "@sent": {
@@ -2469,6 +2469,26 @@
   "@xMinutes": {
     "type": "text",
     "description": "after_minutes"
+  },
+  "xmrStatusConnecting": "",
+  "@xmrStatusConnecting": {
+    "type": "text",
+    "description": "xmr_connecting_status"
+  },
+  "xmrStatusError": "",
+  "@xmrStatusError": {
+    "type": "text",
+    "description": "xmr_error_status"
+  },
+  "xmrStatusSynchronized": "",
+  "@xmrStatusSynchronized": {
+    "type": "text",
+    "description": "xmr_synced_status"
+  },
+  "xmrStatusSynchronizing": "",
+  "@xmrStatusSynchronizing": {
+    "type": "text",
+    "description": "xmr_syncing_status"
   },
   "yes": "Да",
   "@yes": {

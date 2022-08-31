@@ -3,18 +3,14 @@ import 'dart:math' as math;
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/share_card.dart';
-import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 class BackupSeedQRSheet extends StatefulWidget {
@@ -22,10 +18,12 @@ class BackupSeedQRSheet extends StatefulWidget {
   final Widget? qrWidget;
   final String data;
 
-  _BackupSeedQRSheetStateState createState() => _BackupSeedQRSheetStateState();
+  @override
+  // ignore: library_private_types_in_public_api
+  _BackupSeedQRSheetState createState() => _BackupSeedQRSheetState();
 }
 
-class _BackupSeedQRSheetStateState extends State<BackupSeedQRSheet> {
+class _BackupSeedQRSheetState extends State<BackupSeedQRSheet> {
   GlobalKey? shareCardKey;
   ByteData? shareImageData;
   // Address copied items

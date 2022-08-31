@@ -727,7 +727,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
 
                                 // ******* Enter Amount Error Container ******* //
                                 Container(
-                                  alignment: const AlignmentDirectional(0, 0),
+                                  alignment: AlignmentDirectional.center,
                                   margin: const EdgeInsets.only(top: 3),
                                   child: Text(_amountValidationText,
                                       style: TextStyle(
@@ -749,38 +749,38 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                                   child: Stack(
                                     alignment: Alignment.topCenter,
                                     children: <Widget>[
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                                        alignment: Alignment.bottomCenter,
-                                        constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
-                                        // ********************************************* //
-                                        // ********* The pop-up Contacts List ********* //
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(25),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(25),
-                                              color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                            ),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(25),
-                                              ),
-                                              margin: const EdgeInsets.only(bottom: 50),
-                                              child: ListView.builder(
-                                                shrinkWrap: true,
-                                                // padding: const EdgeInsets.only(bottom: 0, top: 0),
-                                                itemCount: _users.length,
-                                                itemBuilder: (BuildContext context, int index) {
-                                                  return _buildUserItem(_users[index]);
-                                                },
-                                              ), // ********* The pop-up Contacts List End ********* //
-                                              // ************************************************** //
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                      // Container(
+                                      //   margin:
+                                      //       EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                      //   alignment: Alignment.bottomCenter,
+                                      //   constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
+                                      //   // ********************************************* //
+                                      //   // ********* The pop-up Contacts List ********* //
+                                      //   child: ClipRRect(
+                                      //     borderRadius: BorderRadius.circular(25),
+                                      //     child: Container(
+                                      //       decoration: BoxDecoration(
+                                      //         borderRadius: BorderRadius.circular(25),
+                                      //         color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                      //       ),
+                                      //       child: Container(
+                                      //         decoration: BoxDecoration(
+                                      //           borderRadius: BorderRadius.circular(25),
+                                      //         ),
+                                      //         margin: const EdgeInsets.only(bottom: 50),
+                                      //         child: ListView.builder(
+                                      //           shrinkWrap: true,
+                                      //           // padding: const EdgeInsets.only(bottom: 0, top: 0),
+                                      //           itemCount: _users.length,
+                                      //           itemBuilder: (BuildContext context, int index) {
+                                      //             return _buildUserItem(_users[index]);
+                                      //           },
+                                      //         ), // ********* The pop-up Contacts List End ********* //
+                                      //         // ************************************************** //
+                                      //       ),
+                                      //     ),
+                                      //   ),
+                                      // ),
 
                                       // ******* Enter Address Container ******* //
                                       getEnterAddressContainer(),
@@ -805,43 +805,43 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                               ],
                             ),
 
-                            // Column for Enter Memo container + Enter Memo Error container
-                            Column(
-                              children: <Widget>[
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  child: Stack(
-                                    alignment: Alignment.topCenter,
-                                    children: <Widget>[
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                                        alignment: Alignment.bottomCenter,
-                                        constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
-                                      ),
+                            // // Column for Enter Memo container + Enter Memo Error container
+                            // Column(
+                            //   children: <Widget>[
+                            //     Container(
+                            //       alignment: Alignment.topCenter,
+                            //       child: Stack(
+                            //         alignment: Alignment.topCenter,
+                            //         children: <Widget>[
+                            //           Container(
+                            //             margin:
+                            //                 EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                            //             alignment: Alignment.bottomCenter,
+                            //             constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
+                            //           ),
 
-                                      // ******* Enter Memo Container ******* //
-                                      getEnterMemoContainer(),
-                                      // ******* Enter Memo Container End ******* //
-                                    ],
-                                  ),
-                                ),
+                            //           // ******* Enter Memo Container ******* //
+                            //           getEnterMemoContainer(),
+                            //           // ******* Enter Memo Container End ******* //
+                            //         ],
+                            //       ),
+                            //     ),
 
-                                // ******* Enter Memo Error Container ******* //
-                                Container(
-                                  alignment: AlignmentDirectional.center,
-                                  margin: const EdgeInsets.only(top: 3),
-                                  child: Text(_memoValidationText,
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: StateContainer.of(context).curTheme.primary,
-                                        fontFamily: 'NunitoSans',
-                                        fontWeight: FontWeight.w600,
-                                      )),
-                                ),
-                                // ******* Enter Memo Error Container End ******* //
-                              ],
-                            ),
+                            //     // ******* Enter Memo Error Container ******* //
+                            //     Container(
+                            //       alignment: AlignmentDirectional.center,
+                            //       margin: const EdgeInsets.only(top: 3),
+                            //       child: Text(_memoValidationText,
+                            //           style: TextStyle(
+                            //             fontSize: 14.0,
+                            //             color: StateContainer.of(context).curTheme.primary,
+                            //             fontFamily: 'NunitoSans',
+                            //             fontWeight: FontWeight.w600,
+                            //           )),
+                            //     ),
+                            //     // ******* Enter Memo Error Container End ******* //
+                            //   ],
+                            // ),
                           ],
                         ),
                       ],
@@ -1112,21 +1112,6 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                     })
                   ],
                 ),
-                //   if (Platform.isIOS && !isIpad)
-                //     Row(
-                //       children: <Widget>[
-                //         // scan for nfc
-                //         AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).sendViaNFC, Dimens.BUTTON_BOTTOM_DIMENS,
-                //             onPressed: () async {
-                //           try {
-                //             UIUtil.cancelLockEvent();
-                //             startNFCSession("");
-                //           } catch (e) {
-                //             stopNFCSession();
-                //           }
-                //         })
-                //       ],
-                //     ),
               ],
             ),
           ],

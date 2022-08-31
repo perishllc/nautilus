@@ -603,6 +603,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Có vẻ như thiết bị của bạn đã được \"root\", \"jailbreak\" hoặc được sửa đổi gây ảnh hưởng đến tính bảo mật. Bạn nên đặt lại thiết bị của bạn về trạng thái ban đầu trước khi tiếp tục."),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("Quét \nmã QR địa chỉ Banano"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("Gửi qua NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Quét mã QR"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Tìm bất cứ điều gì"),
@@ -648,7 +649,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Gửi hoặc yêu cầu thanh toán, với các tin nhắn được mã hóa End to End!\n\nYêu cầu thanh toán, bản ghi nhớ và tin nhắn sẽ chỉ được chấp nhận bởi những người dùng nautilus khác.\n\nBạn không cần phải có tên người dùng để gửi hoặc nhận yêu cầu thanh toán, và bạn có thể sử dụng chúng để lưu giữ hồ sơ của riêng bạn ngay cả khi họ không sử dụng nautilus."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Gửi thông tin trang tính"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("Gửi qua NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Đang gửi"),
         "sent": MessageLookupByLibrary.simpleMessage("Đã gửi"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Đã gửi tới"),
@@ -819,6 +819,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Với tin nhắn"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Sau %1 phút"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Sau %1 phút"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("Có"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Đồng ý")
       };

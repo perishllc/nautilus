@@ -595,6 +595,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Cihazın \"root\" veya \"jailbreak\" edilmiş gibi görünüyor. Bu durum bir güvenlik riski oluşturuyor. Devam etmeden önce cihazını sıfırlamanı ve eski haline döndürmeni tavsiye ederiz."),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Nano Adresi\'nin \n QR Kodu\'nu tarayın"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("NFC ile gönder"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("QR Kodu Tara"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Herhangi bir şey arayın"),
@@ -639,7 +640,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Uçtan Uca Şifreli mesajlarla ödeme gönderin veya talep edin!\n\nÖdeme istekleri, notlar, ve mesajlar yalnızca diğer nautilus kullanıcıları tarafından alınacaktır.\n\nÖdeme istekleri göndermek veya almak için bir kullanıcı adınızın olması gerekmez, ve nautilus kullanmasalar bile bunları kendi kayıt tutmanız için kullanabilirsiniz."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Sayfa Bilgisi Gönder"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("NFC ile gönder"),
         "sending": MessageLookupByLibrary.simpleMessage("Miktar"),
         "sent": MessageLookupByLibrary.simpleMessage("Gönderildi"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Alıcı"),
@@ -807,6 +807,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Mesaj ile"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 dakika sonra"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 dakika sonra"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("Evet"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Evet")
       };

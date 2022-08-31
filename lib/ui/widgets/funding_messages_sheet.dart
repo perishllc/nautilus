@@ -13,15 +13,17 @@ import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 
 class FundingMessagesSheet extends StatefulWidget {
+
+  const FundingMessagesSheet({this.alerts, this.hasDismissButton = true}) : super();
   final List<FundingResponseItem>? alerts;
   final bool hasDismissButton;
 
-  FundingMessagesSheet({this.alerts, this.hasDismissButton = true}) : super();
-
-  _FundingMessagesSheetStateState createState() => _FundingMessagesSheetStateState();
+  @override
+  // ignore: library_private_types_in_public_api
+  _FundingMessagesSheetState createState() => _FundingMessagesSheetState();
 }
 
-class _FundingMessagesSheetStateState extends State<FundingMessagesSheet> {
+class _FundingMessagesSheetState extends State<FundingMessagesSheet> {
   ScrollController _scrollController = ScrollController();
 
   @override

@@ -565,6 +565,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding."),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("סרוק כתובת ברקוד \n של נאנו"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("שלח דרך NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("סרוק ברקוד"),
         "searchHint": MessageLookupByLibrary.simpleMessage("חפש כל דבר"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -607,7 +608,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "שלח או בקש תשלום, עם הודעות מוצפנות מקצה לקצה!\n\nבקשות תשלום, תזכירים והודעות יהיו חייבים רק על ידי משתמשי נאוטילוס אחרים.\n\nאתה לא צריך שם משתמש כדי לשלוח או לקבל בקשות תשלום, ואתה יכול להשתמש בהם לצורך שמירת רשומות משלך גם אם הם לא משתמשים בנאוטילוס."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("שלח פרטי גיליון"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("שלח דרך NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("נשלח"),
         "sent": MessageLookupByLibrary.simpleMessage("נשלח"),
         "sentTo": MessageLookupByLibrary.simpleMessage("נשלח ל"),
@@ -765,6 +765,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("עם הודעה"),
         "xMinute": MessageLookupByLibrary.simpleMessage("אחרי דקה %1"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("אחרי %1 דקות"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("כן"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
       };

@@ -57,6 +57,7 @@ class AppWallet {
     this.watchOnly = false,
     this.confirmationHeight = -1,
     this.loading = true,
+    this.xmrLoading = true,
     this.historyLoading = true,
     this.solidsLoading = true,
     this.unifiedLoading = true,
@@ -77,6 +78,7 @@ class AppWallet {
 
   bool loading; // Whether or not app is initially loading
   bool historyLoading; // Whether or not we have received initial account history response
+  bool xmrLoading;
   bool solidsLoading;
   bool unifiedLoading;
   bool watchOnly;

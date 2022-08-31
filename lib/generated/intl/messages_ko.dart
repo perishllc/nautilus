@@ -536,6 +536,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding."),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("Nano QR 코드 주소를 스캔하하세요"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("NFC를 통해 보내기"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("QR 코드를 스캔하세요"),
         "searchHint": MessageLookupByLibrary.simpleMessage("무엇이든 검색"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -576,7 +577,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "엔드투엔드 암호화 메시지로 결제를 보내거나 요청하세요!\n\n지불 요청, 메모 및 메시지는 다른 nautilus 사용자만 받을 수 있습니다.\n\n지불 요청을 보내거나 받기 위해 사용자 이름이 필요하지 않으며, 노틸러스를 사용하지 않더라도 자신의 기록 보관에 사용할 수 있습니다."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("시트 정보 보내기"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("NFC를 통해 보내기"),
         "sending": MessageLookupByLibrary.simpleMessage("전송중"),
         "sent": MessageLookupByLibrary.simpleMessage("전송 완료"),
         "sentTo": MessageLookupByLibrary.simpleMessage("받는 사람"),
@@ -726,6 +726,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("메시지 포함"),
         "xMinute": MessageLookupByLibrary.simpleMessage("After %1 minute"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("After %1 minutes"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("네"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
       };

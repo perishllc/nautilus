@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
@@ -53,8 +54,8 @@ Future<void> main() async {
   if (kReleaseMode) {
     Logger.level = Level.warning;
   } else {
-    // Logger.level = Level.debug;
-    Logger.level = Level.verbose;
+    Logger.level = Level.debug;
+    // Logger.level = Level.verbose;
   }
   // Setup firebase
   await Firebase.initializeApp(
@@ -65,6 +66,10 @@ Future<void> main() async {
     webRecaptchaSiteKey: Sensitive.CAPTCHA_SITE_KEY,
   );
   FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
+
+  // setup web server for xmr:
+  final InAppLocalhostServer localhostServer = InAppLocalhostServer();
+  await localhostServer.start();
 
   if (!kReleaseMode) {
     // we have to stall for whatever reason in debug mode

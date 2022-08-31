@@ -1800,6 +1800,11 @@
     "type": "text",
     "description": "scan_send_instruction_label"
   },
+  "scanNFC": "Scan NFC",
+  "@scanNFC": {
+    "type": "text",
+    "description": "scan_nfc"
+  },
   "scanQrCode": "Scan QR Code",
   "@scanQrCode": {
     "type": "text",
@@ -1934,11 +1939,6 @@
   "@sendSheetInfoHeader": {
     "type": "text",
     "description": "send_sheet_info_header"
-  },
-  "sendViaNFC": "Send via NFC",
-  "@sendViaNFC": {
-    "type": "text",
-    "description": "send_payment_nfc"
   },
   "sent": "Sent",
   "@sent": {
@@ -2469,6 +2469,31 @@
   "@xMinutes": {
     "type": "text",
     "description": "after_minutes"
+  },
+  "xmrStatusConnecting": "Connecting",
+  "@xmrStatusConnecting": {
+    "type": "text",
+    "description": "xmr_connecting_status"
+  },
+  "xmrStatusError": "Error",
+  "@xmrStatusError": {
+    "type": "text",
+    "description": "xmr_error_status"
+  },
+  "xmrStatusSynchronized": "Synced",
+  "@xmrStatusSynchronized": {
+    "type": "text",
+    "description": "xmr_synced_status"
+  },
+  "xmrStatusSynchronizing": "Syncing",
+  "@xmrStatusSynchronizing": {
+    "type": "text",
+    "description": "xmr_syncing_status"
+  },
+  "xmrStatusLoading": "Loading",
+  "@xmrStatusLoading": {
+    "type": "text",
+    "description": "xmr_loading_status"
   },
   "yes": "Yes",
   "@yes": {

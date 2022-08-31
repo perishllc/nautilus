@@ -599,6 +599,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding."),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Noskenējiet Nano \nadreses QR kodu"),
+        "scanNFC":
+            MessageLookupByLibrary.simpleMessage("Sūtīt, izmantojot NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Skenēt QR kodu"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search for anything"),
@@ -644,8 +646,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users.\n\nYou don\'t need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don\'t use nautilus."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Send Sheet Info"),
-        "sendViaNFC":
-            MessageLookupByLibrary.simpleMessage("Sūtīt, izmantojot NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Sūta"),
         "sent": MessageLookupByLibrary.simpleMessage("Nosūtītie"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Nosūtīts"),
@@ -813,6 +813,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("With Message"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Pēc %1 minūtes"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Pēc %1 minūtēm"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("Jā"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
       };

@@ -590,6 +590,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding."),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Scan a Nano \naddress QR code"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("Scan NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Scan QR Code"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search for anything"),
@@ -632,7 +633,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users.\n\nYou don\'t need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don\'t use nautilus."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Send Sheet Info"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("Send via NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Sending"),
         "sent": MessageLookupByLibrary.simpleMessage("Sent"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Sent To"),
@@ -790,6 +790,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("With Message"),
         "xMinute": MessageLookupByLibrary.simpleMessage("After %1 minute"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("After %1 minutes"),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("Connecting"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("Error"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("Loading"),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage("Synced"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("Syncing"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
       };

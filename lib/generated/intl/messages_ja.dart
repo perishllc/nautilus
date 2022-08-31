@@ -528,6 +528,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "お使いの電子機器は制限が不正に無効化されており、セキュリティが不十分な状態です。作業を進行する前に元の状態にリセットするよう推奨します。"),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("ナノ \n アドレスのQRコードをスキャンします"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("NFC経由で送信"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("QRコードをスキャン"),
         "searchHint": MessageLookupByLibrary.simpleMessage("何でも検索"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -565,7 +566,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendSheetInfo": MessageLookupByLibrary.simpleMessage(
             "エンドツーエンドの暗号化されたメッセージで、支払いを送信またはリクエストしてください！\n\n支払い要求、メモ、メッセージは、他のノーチラスユーザーのみが受領できます。\n\n支払いリクエストを送受信するためにユーザー名は必要ありません。また、ノーチラスを使用していなくても、自分の記録保持に使用できます。"),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage("シート情報を送る"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("NFC経由で送信"),
         "sending": MessageLookupByLibrary.simpleMessage("送金金額"),
         "sent": MessageLookupByLibrary.simpleMessage("送金した"),
         "sentTo": MessageLookupByLibrary.simpleMessage("送金先"),
@@ -715,6 +715,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("メッセージ付き"),
         "xMinute": MessageLookupByLibrary.simpleMessage("％1分後"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("％1分後"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("はい"),
         "yesButton": MessageLookupByLibrary.simpleMessage("はい")
       };

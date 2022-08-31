@@ -1800,6 +1800,11 @@
     "type": "text",
     "description": "scan_send_instruction_label"
   },
+  "scanNFC": "एनएफसी के माध्यम से भेजें",
+  "@scanNFC": {
+    "type": "text",
+    "description": "scan_nfc"
+  },
   "scanQrCode": "क्यूआर कोड स्कैन करें",
   "@scanQrCode": {
     "type": "text",
@@ -1934,11 +1939,6 @@
   "@sendSheetInfoHeader": {
     "type": "text",
     "description": "send_sheet_info_header"
-  },
-  "sendViaNFC": "एनएफसी के माध्यम से भेजें",
-  "@sendViaNFC": {
-    "type": "text",
-    "description": "send_payment_nfc"
   },
   "sent": "भेजे -",
   "@sent": {
@@ -2469,6 +2469,26 @@
   "@xMinutes": {
     "type": "text",
     "description": "after_minutes"
+  },
+  "xmrStatusConnecting": "",
+  "@xmrStatusConnecting": {
+    "type": "text",
+    "description": "xmr_connecting_status"
+  },
+  "xmrStatusError": "",
+  "@xmrStatusError": {
+    "type": "text",
+    "description": "xmr_error_status"
+  },
+  "xmrStatusSynchronized": "",
+  "@xmrStatusSynchronized": {
+    "type": "text",
+    "description": "xmr_synced_status"
+  },
+  "xmrStatusSynchronizing": "",
+  "@xmrStatusSynchronizing": {
+    "type": "text",
+    "description": "xmr_syncing_status"
   },
   "yes": "हाँ",
   "@yes": {

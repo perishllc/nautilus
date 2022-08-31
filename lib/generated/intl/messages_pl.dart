@@ -602,6 +602,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Wygląda na to, że twoje urządzenie zostało zmodyfikowane. Jest rekomendowane żeby zresetować urządzenie do oryginalnego stanu przed kontynuacją."),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("Zeskanuj  \naddres Kod QR "),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("Wyślij przez NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Skanuj Kod QR"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Szukaj czegokolwiek"),
@@ -648,7 +649,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Wyślij lub zażądaj płatności, z End to End Encrypted messages!\n\nProśby o płatność, notatki i wiadomości będą odbierane tylko przez innych użytkowników Nautilus.\n\nNie musisz mieć nazwy użytkownika, aby wysyłać lub odbierać prośby o płatność, i możesz ich używać do prowadzenia własnej dokumentacji, nawet jeśli nie używają nautilusa."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Wyślij informacje o arkuszu"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("Wyślij przez NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Wysyłanie"),
         "sent": MessageLookupByLibrary.simpleMessage("Wysłane"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Wysłane Do"),
@@ -818,6 +818,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Z wiadomością"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Po 1% minucie"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Po %1 minutach"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("Tak"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Tak")
       };

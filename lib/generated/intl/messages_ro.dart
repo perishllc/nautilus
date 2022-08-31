@@ -607,6 +607,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Se pare că acest dispozitiv este \"rootat\" / \"jailbroken\" sau modificat astfel încât securitatea este pusă în pericol. Recomandăm să resetați dispozitivul la starea originală înainte de a continua."),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Scanează o adresă NANO de tip cod QR"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("Trimite prin NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Scanare cod QR"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Caută orice"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -650,7 +651,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Trimiteți sau solicitați o plată, cu mesaje criptate End to End!\n\nSolicitările de plată, memoriile și mesajele vor fi primite numai de către alți utilizatori nautilus.\n\nNu este necesar să aveți un nume de utilizator pentru a trimite sau primi cereri de plată și le puteți utiliza pentru păstrarea propriei evidențe, chiar dacă nu utilizează nautilus."),
         "sendSheetInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Trimiteți informații despre foaie"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("Trimite prin NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Trimitere..."),
         "sent": MessageLookupByLibrary.simpleMessage("Ai trimis"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Trimis către"),
@@ -822,6 +822,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Cu mesaj"),
         "xMinute": MessageLookupByLibrary.simpleMessage("După %1 minut"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("După %1 minute"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("Da"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Da")
       };

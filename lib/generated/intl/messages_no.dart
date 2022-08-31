@@ -606,6 +606,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Din enhet er tilsynelatende \"rooted\", \"jailbroken\", eller endret på en måte som kompromitterer din sikkerhet. Det er anbefalt at du nullstiller enheten til opprinnelig tilstand, før du fortsetter."),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Scan en NANO \nadresse QR-kode"),
+        "scanNFC": MessageLookupByLibrary.simpleMessage("Send via NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Scan QR-kode"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Søk etter hva som helst"),
@@ -651,7 +652,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Send eller be om betaling, med End to End-krypterte meldinger!\n\nBetalingsforespørsler, notater, og meldinger vil bare kunne mottas av andre nautilus-brukere.\n\nDu trenger ikke å ha et brukernavn for å sende eller motta betalingsforespørsler, og du kan bruke dem til din egen journalføring selv om de ikke bruker nautilus."),
         "sendSheetInfoHeader":
             MessageLookupByLibrary.simpleMessage("Send info om ark"),
-        "sendViaNFC": MessageLookupByLibrary.simpleMessage("Send via NFC"),
         "sending": MessageLookupByLibrary.simpleMessage("Sender"),
         "sent": MessageLookupByLibrary.simpleMessage("Sendt"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Sendt til"),
@@ -814,6 +814,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Med melding"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Etter %1 minutt"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Etter %1 minutter"),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
         "yes": MessageLookupByLibrary.simpleMessage("Ja"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Ja")
       };
