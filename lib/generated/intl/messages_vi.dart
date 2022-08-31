@@ -819,10 +819,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Với tin nhắn"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Sau %1 phút"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Sau %1 phút"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("Đang kết nối"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("Lỗi"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("Đang tải"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("Đã đồng bộ hóa"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("Đồng bộ hóa"),
         "yes": MessageLookupByLibrary.simpleMessage("Có"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Đồng ý")
       };

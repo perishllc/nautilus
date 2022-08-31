@@ -847,10 +847,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pagkatapos ng %1 minuto"),
         "xMinutes":
             MessageLookupByLibrary.simpleMessage("Pagkatapos ng %1 minuto"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("Kumokonekta"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("Error"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("Naglo-load"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("Naka-sync"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("Nagsi-sync"),
         "yes": MessageLookupByLibrary.simpleMessage("Oo"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Oo")
       };

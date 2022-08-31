@@ -822,10 +822,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Cu mesaj"),
         "xMinute": MessageLookupByLibrary.simpleMessage("După %1 minut"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("După %1 minute"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("Conectare"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("Eroare"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("Se încarcă"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("Sincronizat"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("Sincronizare"),
         "yes": MessageLookupByLibrary.simpleMessage("Da"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Da")
       };

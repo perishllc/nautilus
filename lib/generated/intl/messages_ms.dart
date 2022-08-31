@@ -812,10 +812,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Dengan Mesej"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Selepas %1 minit"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Selepas %1 minit"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("Menyambung"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("ralat"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("Memuatkan"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("disegerakkan"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("Menyegerakkan"),
         "yes": MessageLookupByLibrary.simpleMessage("Ya"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Ya")
       };

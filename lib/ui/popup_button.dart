@@ -266,7 +266,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
               ),
               onPressed: () {
                 if (widget.moneroEnabled) {
-                  Sheets.showAppHeightNineSheet(context: context, widget: SendXMRSheet(localCurrency: StateContainer.of(context).curCurrency));
+                  // Sheets.showAppHeightNineSheet(context: context, widget: SendXMRSheet(localCurrency: StateContainer.of(context).curCurrency));
                   return;
                 }
                 if (StateContainer.of(context).wallet != null && !disableSend) {

@@ -807,10 +807,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Mesaj ile"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 dakika sonra"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 dakika sonra"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("Bağlanıyor"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("Hata"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("Yükleniyor"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("senkronize edildi"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("senkronizasyon"),
         "yes": MessageLookupByLibrary.simpleMessage("Evet"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Evet")
       };

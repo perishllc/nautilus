@@ -2470,22 +2470,27 @@
     "type": "text",
     "description": "after_minutes"
   },
-  "xmrStatusConnecting": "",
+  "xmrStatusConnecting": "Savienojuma izveide",
   "@xmrStatusConnecting": {
     "type": "text",
     "description": "xmr_connecting_status"
   },
-  "xmrStatusError": "",
+  "xmrStatusError": "Kļūda",
   "@xmrStatusError": {
     "type": "text",
     "description": "xmr_error_status"
   },
-  "xmrStatusSynchronized": "",
+  "xmrStatusLoading": "Notiek ielāde",
+  "@xmrStatusLoading": {
+    "type": "text",
+    "description": "xmr_loading_status"
+  },
+  "xmrStatusSynchronized": "Sinhronizēts",
   "@xmrStatusSynchronized": {
     "type": "text",
     "description": "xmr_synced_status"
   },
-  "xmrStatusSynchronizing": "",
+  "xmrStatusSynchronizing": "Sinhronizācija",
   "@xmrStatusSynchronizing": {
     "type": "text",
     "description": "xmr_syncing_status"

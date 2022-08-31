@@ -827,10 +827,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("বার্তা সহ"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 মিনিট পরে"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 মিনিট এর পরে"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("সংযোগ করা হচ্ছে"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("ত্রুটি"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("লোড হচ্ছে"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("সিঙ্ক করা হয়েছে"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("সিঙ্ক হচ্ছে"),
         "yes": MessageLookupByLibrary.simpleMessage("হ্যাঁ"),
         "yesButton": MessageLookupByLibrary.simpleMessage("হ্যাঁ")
       };

@@ -839,10 +839,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Avec message"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Après %1 minute"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Après %1 minutes"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("De liaison"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("Erreur"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("Chargement"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("Synchronisé"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("Synchronisation"),
         "yes": MessageLookupByLibrary.simpleMessage("Oui"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Oui")
       };

@@ -827,10 +827,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Üzenettel"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 perc után"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 perc után"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("Csatlakozás"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("Hiba"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("Betöltés"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("Szinkronizálva"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("Szinkronizálás"),
         "yes": MessageLookupByLibrary.simpleMessage("Igen"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
       };

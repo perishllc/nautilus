@@ -2470,22 +2470,27 @@
     "type": "text",
     "description": "after_minutes"
   },
-  "xmrStatusConnecting": "",
+  "xmrStatusConnecting": "מְקַשֵׁר",
   "@xmrStatusConnecting": {
     "type": "text",
     "description": "xmr_connecting_status"
   },
-  "xmrStatusError": "",
+  "xmrStatusError": "שְׁגִיאָה",
   "@xmrStatusError": {
     "type": "text",
     "description": "xmr_error_status"
   },
-  "xmrStatusSynchronized": "",
+  "xmrStatusLoading": "טוען",
+  "@xmrStatusLoading": {
+    "type": "text",
+    "description": "xmr_loading_status"
+  },
+  "xmrStatusSynchronized": "מסונכרן",
   "@xmrStatusSynchronized": {
     "type": "text",
     "description": "xmr_synced_status"
   },
-  "xmrStatusSynchronizing": "",
+  "xmrStatusSynchronizing": "מסנכרן",
   "@xmrStatusSynchronizing": {
     "type": "text",
     "description": "xmr_syncing_status"

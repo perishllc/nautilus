@@ -814,10 +814,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Med melding"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Etter %1 minutt"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Etter %1 minutter"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("Kobler til"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("Feil"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("Laster"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("Synkronisert"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("Synkroniserer"),
         "yes": MessageLookupByLibrary.simpleMessage("Ja"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Ja")
       };

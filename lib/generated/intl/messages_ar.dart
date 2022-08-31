@@ -799,10 +799,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("مع رسالة"),
         "xMinute": MessageLookupByLibrary.simpleMessage("بعد %1 دقيقة"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("بعد %1 دقائق"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage("توصيل"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("خطأ"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("جار التحميل"),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage("متزامن"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("مزامنة"),
         "yes": MessageLookupByLibrary.simpleMessage("نعم"),
         "yesButton": MessageLookupByLibrary.simpleMessage("نعم")
       };

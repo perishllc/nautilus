@@ -2470,22 +2470,27 @@
     "type": "text",
     "description": "after_minutes"
   },
-  "xmrStatusConnecting": "",
+  "xmrStatusConnecting": "Connectant",
   "@xmrStatusConnecting": {
     "type": "text",
     "description": "xmr_connecting_status"
   },
-  "xmrStatusError": "",
+  "xmrStatusError": "Error",
   "@xmrStatusError": {
     "type": "text",
     "description": "xmr_error_status"
   },
-  "xmrStatusSynchronized": "",
+  "xmrStatusLoading": "Carregant",
+  "@xmrStatusLoading": {
+    "type": "text",
+    "description": "xmr_loading_status"
+  },
+  "xmrStatusSynchronized": "Sincronitzat",
   "@xmrStatusSynchronized": {
     "type": "text",
     "description": "xmr_synced_status"
   },
-  "xmrStatusSynchronizing": "",
+  "xmrStatusSynchronizing": "Sincronització",
   "@xmrStatusSynchronizing": {
     "type": "text",
     "description": "xmr_syncing_status"

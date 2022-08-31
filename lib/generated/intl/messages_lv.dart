@@ -813,10 +813,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("With Message"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Pēc %1 minūtes"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Pēc %1 minūtēm"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("Savienojuma izveide"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("Kļūda"),
+        "xmrStatusLoading":
+            MessageLookupByLibrary.simpleMessage("Notiek ielāde"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("Sinhronizēts"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("Sinhronizācija"),
         "yes": MessageLookupByLibrary.simpleMessage("Jā"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
       };

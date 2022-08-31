@@ -817,10 +817,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("S sporočilom"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Po %1 minuti"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Po %1 minutah"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("Povezovanje"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("Napaka"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("nalaganje"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("Sinhronizirano"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("Sinhronizacija"),
         "yes": MessageLookupByLibrary.simpleMessage("Da"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
       };

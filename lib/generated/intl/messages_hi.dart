@@ -814,10 +814,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("मैसेज के साथ"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 मिनट के बाद"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 मिनट के बाद"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage("कनेक्ट"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("गलती"),
+        "xmrStatusLoading":
+            MessageLookupByLibrary.simpleMessage("लोड हो रहा है"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("सिंक किया गया"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("सिंक्रनाइज़ किए जा रहे"),
         "yes": MessageLookupByLibrary.simpleMessage("हाँ"),
         "yesButton": MessageLookupByLibrary.simpleMessage("हाँ")
       };

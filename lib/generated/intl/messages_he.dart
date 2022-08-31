@@ -765,10 +765,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("עם הודעה"),
         "xMinute": MessageLookupByLibrary.simpleMessage("אחרי דקה %1"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("אחרי %1 דקות"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage("מְקַשֵׁר"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("שְׁגִיאָה"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("טוען"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("מסונכרן"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("מסנכרן"),
         "yes": MessageLookupByLibrary.simpleMessage("כן"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
       };

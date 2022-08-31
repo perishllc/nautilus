@@ -726,10 +726,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("메시지 포함"),
         "xMinute": MessageLookupByLibrary.simpleMessage("After %1 minute"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("After %1 minutes"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage("연결 중"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("오류"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("로딩 중"),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage("동기화됨"),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage("동기화 중"),
         "yes": MessageLookupByLibrary.simpleMessage("네"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
       };

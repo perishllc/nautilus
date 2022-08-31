@@ -5020,6 +5020,16 @@ class AppLocalization {
     );
   }
 
+  /// `Loading`
+  String get xmrStatusLoading {
+    return Intl.message(
+      'Loading',
+      name: 'xmrStatusLoading',
+      desc: 'xmr_loading_status',
+      args: [],
+    );
+  }
+
   /// `Synced`
   String get xmrStatusSynchronized {
     return Intl.message(
@@ -5036,16 +5046,6 @@ class AppLocalization {
       'Syncing',
       name: 'xmrStatusSynchronizing',
       desc: 'xmr_syncing_status',
-      args: [],
-    );
-  }
-
-  /// `Loading`
-  String get xmrStatusLoading {
-    return Intl.message(
-      'Loading',
-      name: 'xmrStatusLoading',
-      desc: 'xmr_loading_status',
       args: [],
     );
   }

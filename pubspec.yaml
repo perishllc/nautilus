@@ -372,10 +372,10 @@ flutter:
     - assets/xmr/main.js
     - assets/xmr/monero_wallet_full.js
     - monero_wallet_full.wasm
-    # - assets/xmr/monero_wallet_keys.js
-    # - assets/xmr/monero_wallet_keys.wasm
-    # - assets/xmr/monero_web_worker.js
-    # - assets/xmr/monero_web_worker.js.map
+    - assets/xmr/monero_wallet_keys.js
+    - assets/xmr/monero_wallet_keys.wasm
+    - assets/xmr/monero_web_worker.js
+    - assets/xmr/monero_web_worker.js.map
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

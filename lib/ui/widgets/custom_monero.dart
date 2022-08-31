@@ -60,8 +60,7 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-      // width: MediaQuery.of(context).size.width / 2,
-      height: 500,
+      height: 0,
 
       // margin: const EdgeInsets.all(30),
       child: ClipRRect(

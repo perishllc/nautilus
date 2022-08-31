@@ -644,10 +644,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("有訊息"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 分鐘後"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 分鐘後"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage("連接"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("錯誤"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("正在加載"),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage("同步"),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage("同步"),
         "yes": MessageLookupByLibrary.simpleMessage("確認"),
         "yesButton": MessageLookupByLibrary.simpleMessage("確認")
       };

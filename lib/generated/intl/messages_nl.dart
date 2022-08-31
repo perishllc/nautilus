@@ -823,10 +823,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("Met boodschap"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Na %1 minuten"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Na %1 minuut"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("Verbinden"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("Fout"),
+        "xmrStatusLoading":
+            MessageLookupByLibrary.simpleMessage("Bezig met laden"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("Gesynchroniseerd"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("Synchroniseren"),
         "yes": MessageLookupByLibrary.simpleMessage("Ja"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Ja")
       };

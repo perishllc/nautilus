@@ -715,10 +715,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("メッセージ付き"),
         "xMinute": MessageLookupByLibrary.simpleMessage("％1分後"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("％1分後"),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage("接続中"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("エラー"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("読み込み中"),
+        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage("同期済み"),
+        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage("同期中"),
         "yes": MessageLookupByLibrary.simpleMessage("はい"),
         "yesButton": MessageLookupByLibrary.simpleMessage("はい")
       };

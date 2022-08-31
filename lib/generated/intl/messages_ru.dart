@@ -833,10 +833,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "withMessage": MessageLookupByLibrary.simpleMessage("С сообщением"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Через %1 мин."),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Через %1 мин."),
-        "xmrStatusConnecting": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusError": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage(""),
-        "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage(""),
+        "xmrStatusConnecting":
+            MessageLookupByLibrary.simpleMessage("Подключение"),
+        "xmrStatusError": MessageLookupByLibrary.simpleMessage("Ошибка"),
+        "xmrStatusLoading": MessageLookupByLibrary.simpleMessage("Загрузка"),
+        "xmrStatusSynchronized":
+            MessageLookupByLibrary.simpleMessage("Синхронизировано"),
+        "xmrStatusSynchronizing":
+            MessageLookupByLibrary.simpleMessage("Синхронизации"),
         "yes": MessageLookupByLibrary.simpleMessage("Да"),
         "yesButton": MessageLookupByLibrary.simpleMessage("Да")
       };

@@ -2480,6 +2480,11 @@
     "type": "text",
     "description": "xmr_error_status"
   },
+  "xmrStatusLoading": "Loading",
+  "@xmrStatusLoading": {
+    "type": "text",
+    "description": "xmr_loading_status"
+  },
   "xmrStatusSynchronized": "Synced",
   "@xmrStatusSynchronized": {
     "type": "text",
@@ -2489,11 +2494,6 @@
   "@xmrStatusSynchronizing": {
     "type": "text",
     "description": "xmr_syncing_status"
-  },
-  "xmrStatusLoading": "Loading",
-  "@xmrStatusLoading": {
-    "type": "text",
-    "description": "xmr_loading_status"
   },
   "yes": "Yes",
   "@yes": {

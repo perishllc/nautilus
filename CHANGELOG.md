@@ -1,7 +1,8 @@
-## v0.6.2 - [2022-08-29]
+## v0.6.2 - [2022-09-01]
 #### Added
 - Major improvements to NFC handling, NFC scans within the app no longer re-load the entire app
-- Integrated Monero wallet support (Alpha)
+- Scan NFC button on relevant iOS platforms / send screen (on android scanning is automatic)
+- Integrated Monero wallet support (WIP)
 - ~~Integrated XMR Wallet and swapping~~ (WIP)
 - Reworked Nautilus theme to be more inviting and easier on the eyes
 #### Changed
@@ -9,6 +10,7 @@
 - Improvements to the in-app webview for the use-nano section and more
 #### Fixed
 - Bugs related to sending messages
+- Minor fixes to the app icon on android
 ## v0.6.1 - [2022-08-26]
 #### Fixed
 - lots of nanoauth fixes
