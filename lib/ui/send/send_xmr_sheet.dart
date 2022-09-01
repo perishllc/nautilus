@@ -887,36 +887,6 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                         }
                       }
 
-                      final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
-                      String? link;
-                      String? phoneNumber;
-                      String? paperWalletSeed;
-                      if (isPhoneNumber) {
-                        phoneNumber = _addressController!.text;
-                      }
-                      if (isPhoneNumber || _addressController!.text.isEmpty) {
-                        // we need to create a gift card and change the destination address to the gift card address:
-                        paperWalletSeed = NanoSeeds.generateSeed();
-                        final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
-                        // final String paperWalletAccount = "nano_1i4fcujt49de3mio9eb9y5jakw8o9m1za6ntidxn4nkwgnunktpy54z1ma58";
-                        if (!mounted) return;
-                        final BranchResponse<dynamic> giftCardItem = await sl<GiftCards>().createGiftCard(
-                          context,
-                          paperWalletSeed: paperWalletSeed,
-                          amountRaw: amountRaw,
-                          memo: _memoController!.text,
-                        );
-
-                        if (giftCardItem.success) {
-                          link = giftCardItem.result as String;
-                          formattedAddress = paperWalletAccount;
-                        } else {
-                          if (!mounted) return;
-                          UIUtil.showSnackbar(AppLocalization.of(context).giftCardCreationError, context);
-                          return;
-                        }
-                      }
-
                       bool isMaxSend = false;
                       if (_isMaxSend()) {
                         isMaxSend = true;
@@ -925,7 +895,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                       }
 
                       // verifies the input is a user in the db
-                      if (!_addressController!.text.startsWith("nano_") && !isPhoneNumber && _addressController!.text.isNotEmpty) {
+                      if (!_addressController!.text.startsWith("nano_") && _addressController!.text.isNotEmpty) {
                         // Need to make sure its a valid contact or user
                         final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
                         if (user == null) {
@@ -950,17 +920,18 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                                   memo: _memoController!.text));
                         }
                       } else {
-                        Sheets.showAppHeightNineSheet(
-                            context: context,
-                            widget: SendConfirmSheet(
-                                amountRaw: amountRaw,
-                                destination: formattedAddress,
-                                maxSend: isMaxSend,
-                                phoneNumber: phoneNumber ?? "",
-                                link: link ?? "",
-                                paperWalletSeed: paperWalletSeed ?? "",
-                                localCurrency: _localCurrencyMode ? _amountController!.text : null,
-                                memo: _memoController!.text));
+                        // Sheets.showAppHeightNineSheet(
+                        //     context: context,
+                        //     widget: SendConfirmSheet(
+                        //         amountRaw: amountRaw,
+                        //         destination: formattedAddress,
+                        //         maxSend: isMaxSend,
+                        //         phoneNumber: phoneNumber ?? "",
+                        //         link: link ?? "",
+                        //         paperWalletSeed: paperWalletSeed ?? "",
+                        //         localCurrency: _localCurrencyMode ? _amountController!.text : null,
+                        //         memo: _memoController!.text));
+                        // EventTaxiImpl.singleton().fire(XMREvent(type: "xmr_send", message: "0.5"));
                       }
                     }),
                   ],
@@ -1239,7 +1210,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
 
   /// Validate form data to see if valid
   /// @returns true if valid, false otherwise
-  Future<bool> _validateRequest({bool isRequest = false}) async {
+  Future<bool> _validateRequest() async {
     bool isValid = true;
     _amountFocusNode!.unfocus();
     _addressFocusNode!.unfocus();
@@ -1267,7 +1238,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       final BigInt balanceRaw = StateContainer.of(context).wallet!.accountBalance;
       final BigInt? sendAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
       if (sendAmount == null || sendAmount == BigInt.zero) {
-        if (_memoController!.text.trim().isEmpty || isRequest) {
+        if (_memoController!.text.trim().isEmpty) {
           isValid = false;
           setState(() {
             _amountValidationText = AppLocalization.of(context).amountMissing;
@@ -1277,7 +1248,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
             _amountValidationText = "";
           });
         }
-      } else if (sendAmount > balanceRaw && !isRequest) {
+      } else if (sendAmount > balanceRaw) {
         isValid = false;
         setState(() {
           _amountValidationText = AppLocalization.of(context).insufficientBalance;
@@ -1293,14 +1264,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     final bool isFavorite = _addressController!.text.startsWith("★");
     final bool isDomain = _addressController!.text.contains(".") || _addressController!.text.contains(r"$");
     final bool isNano = _addressController!.text.startsWith("nano_");
-    final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
-    if (_addressController!.text.trim().isEmpty && isRequest) {
-      isValid = false;
-      setState(() {
-        _addressValidationText = AppLocalization.of(context).addressMissing;
-        _pasteButtonVisible = true;
-      });
-    } else if (_addressController!.text.isNotEmpty && !isPhoneNumber && !isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
+    // final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
+    if (_addressController!.text.isNotEmpty && !isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context).invalidAddress;
@@ -1317,31 +1282,31 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       // notifications must be turned on if sending a request or memo:
       final bool notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
 
-      if ((isRequest || (_memoController!.text.isNotEmpty && !isPhoneNumber && _addressController!.text.isNotEmpty)) && !notificationsEnabled) {
-        final bool notificationTurnedOn = await showNotificationDialog();
-        if (!notificationTurnedOn) {
-          isValid = false;
-        } else {
-          // not sure why this is needed to get it to update:
-          // probably event bus related:
-          await sl.get<SharedPrefsUtil>().setNotificationsOn(true);
-        }
-      }
+      // if (((_memoController!.text.isNotEmpty && _addressController!.text.isNotEmpty)) && !notificationsEnabled) {
+      //   final bool notificationTurnedOn = await showNotificationDialog();
+      //   if (!notificationTurnedOn) {
+      //     isValid = false;
+      //   } else {
+      //     // not sure why this is needed to get it to update:
+      //     // probably event bus related:
+      //     await sl.get<SharedPrefsUtil>().setNotificationsOn(true);
+      //   }
+      // }
 
-      if (isValid && isRequest) {
-        // still valid && you have to meet requirements to send requests:
-        if (StateContainer.of(context).wallet!.user == null && StateContainer.of(context).wallet!.confirmationHeight < _REQUIRED_CONFIRMATION_HEIGHT) {
-          isValid = false;
-          await showNeedVerificationAlert();
-        }
-      }
+      // if (isValid && isRequest) {
+      //   // still valid && you have to meet requirements to send requests:
+      //   if (StateContainer.of(context).wallet!.user == null && StateContainer.of(context).wallet!.confirmationHeight < _REQUIRED_CONFIRMATION_HEIGHT) {
+      //     isValid = false;
+      //     await showNeedVerificationAlert();
+      //   }
+      // }
 
-      if (isValid && sl.get<AccountService>().fallbackConnected) {
-        if (_memoController!.text.trim().isNotEmpty) {
-          isValid = false;
-          await showFallbackConnectedAlert();
-        }
-      }
+      // if (isValid && sl.get<AccountService>().fallbackConnected) {
+      //   if (_memoController!.text.trim().isNotEmpty) {
+      //     isValid = false;
+      //     await showFallbackConnectedAlert();
+      //   }
+      // }
     }
     return isValid;
   }

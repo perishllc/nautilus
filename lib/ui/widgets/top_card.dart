@@ -69,7 +69,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
           xmrBalance = event.message;
         });
       }
-      if (event.type == "sync_progress") {
+      if (event.type == "update_progress") {
         setState(() {
           syncPercentage = double.parse(event.message);
         });

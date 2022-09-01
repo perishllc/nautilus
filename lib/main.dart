@@ -67,10 +67,6 @@ Future<void> main() async {
   );
   FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
 
-  // setup web server for xmr:
-  final InAppLocalhostServer localhostServer = InAppLocalhostServer();
-  await localhostServer.start();
-
   if (!kReleaseMode) {
     // we have to stall for whatever reason in debug mode
     // otherwise the app doesn't start properly (black screen)
@@ -121,6 +117,7 @@ class AppState extends State<App> {
           backgroundColor: StateContainer.of(context).curTheme.background,
           fontFamily: 'NunitoSans',
           brightness: Brightness.dark,
+          useMaterial3: true,
           colorScheme: ColorScheme.fromSwatch().copyWith(
               secondary: StateContainer.of(context).curTheme.primary10,
               brightness: Brightness.dark,

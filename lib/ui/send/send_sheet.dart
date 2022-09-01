@@ -812,7 +812,7 @@ class SendSheetState extends State<SendSheet> {
             // Balance Text
             FutureBuilder(
               future: sl.get<SharedPrefsUtil>().getPriceConversion(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData && snapshot.data != null && snapshot.data != PriceConversion.HIDDEN) {
                   return RichText(
                     textAlign: TextAlign.start,

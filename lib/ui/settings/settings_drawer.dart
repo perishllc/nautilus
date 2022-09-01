@@ -110,6 +110,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   NotificationSetting _curNotificiationSetting = NotificationSetting(NotificationOptions.ON);
   ContactsSetting _curContactsSetting = ContactsSetting(ContactsOptions.OFF);
   ContactsSetting _curUnopenedWarningSetting = ContactsSetting(ContactsOptions.ON);
+  ContactsSetting _curShowMoneroSetting = ContactsSetting(ContactsOptions.ON);
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
   NyaniconSetting _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
   FundingSetting _curFundingSetting = FundingSetting(FundingOptions.SHOW);
@@ -206,6 +207,18 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     sl.get<SharedPrefsUtil>().getContactsOn().then((bool contactsOn) {
       setState(() {
         _curContactsSetting = contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
+      });
+    });
+    // Get unpopened warning setting:
+    sl.get<SharedPrefsUtil>().getUnopenedWarningOn().then((bool contactsOn) {
+      setState(() {
+        _curUnopenedWarningSetting = contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
+      });
+    });
+    // Get show monero setting:
+    sl.get<SharedPrefsUtil>().getShowMoneroOn().then((bool contactsOn) {
+      setState(() {
+        _curShowMoneroSetting = contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
       });
     });
     // Get funding setting:
@@ -628,13 +641,73 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       return;
     }
 
-    if (picked == ContactsOptions.ON) {
-      await sl.get<SharedPrefsUtil>().setUnopenedWarningOn(true);
-    } else {
-      await sl.get<SharedPrefsUtil>().setUnopenedWarningOn(false);
-    }
+    await sl.get<SharedPrefsUtil>().setUnopenedWarningOn(picked == ContactsOptions.ON);
     setState(() {
       _curUnopenedWarningSetting = ContactsSetting(picked);
+    });
+  }
+
+  Future<void> _showMoneroDialog() async {
+    final ContactsOptions? picked = await showDialog<ContactsOptions>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  AppLocalization.of(context).showMoneroHeader,
+                  style: AppStyles.textStyleDialogHeader(context),
+                ),
+                AppDialogs.infoButton(
+                  context,
+                  () {
+                    AppDialogs.showInfoDialog(context, AppLocalization.of(context).showMoneroHeader, AppLocalization.of(context).showMoneroInfo);
+                  },
+                )
+              ],
+            ),
+            children: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, ContactsOptions.ON);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    AppLocalization.of(context).onStr,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, ContactsOptions.OFF);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    AppLocalization.of(context).off,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
+
+    if (picked == null) {
+      return;
+    }
+
+    final bool enabled = picked == ContactsOptions.ON;
+    await sl.get<SharedPrefsUtil>().setShowMoneroOn(enabled);
+    if (!mounted) return;
+    StateContainer.of(context).setShowXMR(enabled);
+    setState(() {
+      _curShowMoneroSetting = ContactsSetting(picked);
     });
   }
 
@@ -682,11 +755,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       return;
     }
 
-    if (picked == FundingOptions.SHOW) {
-      await sl.get<SharedPrefsUtil>().setFundingOn(true);
-    } else {
-      await sl.get<SharedPrefsUtil>().setFundingOn(false);
-    }
+    await sl.get<SharedPrefsUtil>().setFundingOn(picked == FundingOptions.SHOW);
     setState(() {
       _curFundingSetting = FundingSetting(picked);
     });
@@ -2350,6 +2419,9 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemDoubleLine(
                         context, AppLocalization.of(context).showUnopenedWarning, _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context).showMoneroHeader, _curShowMoneroSetting, AppIcons.money_bill_alt, _showMoneroDialog),
                     // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     // AppSettings.buildSettingsListItemDoubleLine(
                     //     context, AppLocalization.of(context).showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),

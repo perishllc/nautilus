@@ -9,6 +9,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
@@ -126,8 +127,6 @@ class StateContainerState extends State<StateContainer> {
   final int MAX_SEQUENTIAL_UPDATES = 5;
 
   AppWallet? wallet;
-  String? xmrAddress;
-  int xmrRestoreHeight = 2701000;
   String currencyLocale = "en_US";
   Locale deviceLocale = const Locale('en', 'US');
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
@@ -141,6 +140,12 @@ class StateContainerState extends State<StateContainer> {
   // Two most recently used accounts
   Account? recentLast;
   Account? recentSecondLast;
+
+  // xmr:
+  String? xmrAddress;
+  int? xmrRestoreHeight;
+  bool xmrEnabled = true;
+  final InAppLocalhostServer localhostServer = InAppLocalhostServer();
 
   // Natricon / Nyanicon settings
   bool? natriconOn = false;
@@ -520,6 +525,10 @@ class StateContainerState extends State<StateContainer> {
     sl.get<SharedPrefsUtil>().getXMRRestoreHeight().then((int height) {
       setXMRRestoreHeight(height);
     });
+    // Get xmr enabled:
+    sl.get<SharedPrefsUtil>().getShowMoneroOn().then((bool enabled) {
+      setShowXMR(enabled);
+    });
     // restore payments from the cache
     updateSolids();
 
@@ -797,9 +806,6 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       curTheme = theme.getTheme();
     });
-    // if (setIcon) {
-    //   AppIcon.setAppIcon(theme.getTheme().appIcon);
-    // }
   }
 
   // Change natricon setting
@@ -831,11 +837,25 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
-  // Change currency mode setting
+  // set xmr restore height:
   void setXMRRestoreHeight(int height) {
     setState(() {
       xmrRestoreHeight = height;
     });
+  }
+
+  // Change currency mode setting
+  void setShowXMR(bool enabled) {
+    setState(() {
+      xmrEnabled = enabled;
+    });
+    // start/stop web server for xmr:
+    if (enabled && !localhostServer.isRunning()) {
+      localhostServer.start();
+    }
+    if (!enabled && localhostServer.isRunning()) {
+      localhostServer.close();
+    }
   }
 
   void disconnect() {
@@ -1157,12 +1177,11 @@ class StateContainerState extends State<StateContainer> {
       sl.get<AccountService>().clearQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
           account: wallet!.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
-      sl.get<AccountService>().queueRequest(AccountHistoryRequest(account: wallet!.address, raw: true));
       sl.get<AccountService>().processQueue();
       // Request account history
 
       // Choose correct blockCount to minimize bandwidth
-      // This is can still be improved because history excludes change/open, blockCount doesn't
+      // This can still be improved because history excludes change/open, blockCount doesn't
       // Get largest count we have + 5 (just a safe-buffer)
       int count = 500;
       if (wallet!.history != null && wallet!.history.length > 1) {
@@ -1202,43 +1221,6 @@ class StateContainerState extends State<StateContainer> {
           EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
           await updateUnified(false);
         }
-
-        // if (wallet!.watchOnly) {
-        //   // check for duplicates in the wallet history:
-        //   final List<String?> histHashes = [];
-        //   final List<String?> toRemove = [];
-        //   for (final AccountHistoryResponseItem histItem in wallet!.history!) {
-        //     print(histItem.hash);
-        //     if (histHashes.contains(histItem.hash)) {
-        //       toRemove.add(histItem.hash);
-        //     } else {
-        //       histHashes.add(histItem.hash);
-        //     }
-        //   }
-        //   print(toRemove);
-        //   print("aaaaaaa");
-
-        //   bool shouldPost = toRemove.isNotEmpty;
-
-        //   for (final AccountHistoryResponseItem histItem in wallet!.history!) {
-        //     if (toRemove.contains(histItem.hash)) {
-        //       if (histItem.type == BlockTypes.RECEIVE) {
-        //         // this is a duplicate receivable, remove it:
-        //         setState(() {
-        //           wallet!.history!.remove(histItem);
-        //         });
-        //         toRemove.remove(histItem.hash);
-        //         if (toRemove.isEmpty) {
-        //           break;
-        //         }
-        //       }
-        //     }
-        //   }
-        //   if (shouldPost) {
-        //     EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
-        //     await updateUnified(false);
-        //   }
-        // }
 
         sl.get<AccountService>().pop();
         sl.get<AccountService>().processQueue();

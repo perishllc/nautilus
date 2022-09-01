@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:confetti/confetti.dart';
 import 'package:event_taxi/event_taxi.dart';
@@ -43,12 +44,6 @@ import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_i
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
-import 'package:nautilus_wallet_flutter/ui/receive/receive_xmr_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/custom_monero.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/mymonero.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/top_card.dart';
-import 'package:nautilus_wallet_flutter/util/deviceutil.dart';
-import 'package:nfc_manager/nfc_manager.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
@@ -56,9 +51,9 @@ import 'package:nautilus_wallet_flutter/ui/gift/gift_qr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/receive/receive_xmr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/send/send_xmr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_drawer.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/users/add_blocked.dart';
@@ -68,6 +63,7 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/custom_monero.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/hcaptcha.dart';
@@ -75,14 +71,16 @@ import 'package:nautilus_wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/top_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/transaction_state_tag.dart';
 import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/deviceutil.dart';
 import 'package:nautilus_wallet_flutter/util/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-// import 'package:nfc_manager/nfc_manager.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:quiver/strings.dart';
 import 'package:rate_my_app/rate_my_app.dart';
@@ -1171,6 +1169,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             StateContainer.of(context).wallet!.xmrLoading = false;
           });
         }
+      } else if (event.type == "update_progress") {
+        if (event.message == "1") {
+          setState(() {
+            StateContainer.of(context).wallet!.xmrLoading = false;
+          });
+        }
       }
     });
   }
@@ -2168,89 +2172,123 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   Container(
                     margin: const EdgeInsetsDirectional.only(top: 20),
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
-                    child: TabBar(
-                      controller: _tabController,
-                      indicatorWeight: 3,
-                      indicatorColor: StateContainer.of(context).curTheme.primary,
-                      indicatorPadding: const EdgeInsets.only(
-                        left: 20,
-                        right: 20,
+                  if (StateContainer.of(context).xmrEnabled)
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      child: TabBar(
+                        controller: _tabController,
+                        indicatorWeight: 3,
+                        indicatorColor: StateContainer.of(context).curTheme.primary,
+                        indicatorPadding: const EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                        ),
+                        tabs: <Widget>[
+                          Tab(
+                            child: Container(
+                              margin: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                              child: Text(
+                                NonTranslatable.nano,
+                                textAlign: TextAlign.center,
+                                style: AppStyles.textStyleTransactionWelcome(context),
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Container(
+                              margin: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                              child: Text(
+                                NonTranslatable.monero,
+                                textAlign: TextAlign.center,
+                                style: AppStyles.textStyleTransactionWelcome(context),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      tabs: <Widget>[
-                        Tab(
-                          child: Container(
-                            margin: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                            child: Text(
-                              NonTranslatable.nano,
-                              textAlign: TextAlign.center,
-                              style: AppStyles.textStyleTransactionWelcome(context),
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Container(
-                            margin: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                            child: Text(
-                              NonTranslatable.monero,
-                              textAlign: TextAlign.center,
-                              style: AppStyles.textStyleTransactionWelcome(context),
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
-                  ),
                   const SizedBox(height: 6),
                   Expanded(
-                    child: TabBarView(
-                      controller: _tabController,
-                      children: [
-                        Stack(
-                          children: <Widget>[
-                            _getUnifiedListWidget(context),
-                            // list gradients:
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Container(
-                                height: 10.0,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
-                                    begin: const AlignmentDirectional(0.5, 1.0),
-                                    end: const AlignmentDirectional(0.5, -1.0),
+                    child: (StateContainer.of(context).xmrEnabled)
+                        ? TabBarView(
+                            controller: _tabController,
+                            children: [
+                              Stack(
+                                children: <Widget>[
+                                  _getUnifiedListWidget(context),
+                                  // list gradients:
+                                  Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Container(
+                                      height: 10.0,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                          begin: const AlignmentDirectional(0.5, 1.0),
+                                          end: const AlignmentDirectional(0.5, -1.0),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Container(
+                                      height: 20.0,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: <Color>[StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                          begin: const AlignmentDirectional(0.5, -1),
+                                          end: const AlignmentDirectional(0.5, 0.5),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Stack(
+                                children: <Widget>[
+                                  _getMoneroListWidget(context),
+                                  CustomMonero(),
+                                ],
+                              ),
+                            ],
+                          )
+                        : Stack(
+                            children: <Widget>[
+                              _getUnifiedListWidget(context),
+                              // list gradients:
+                              Align(
+                                alignment: Alignment.topCenter,
+                                child: Container(
+                                  height: 10.0,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                      begin: const AlignmentDirectional(0.5, 1.0),
+                                      end: const AlignmentDirectional(0.5, -1.0),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                height: 20.0,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: <Color>[StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
-                                    begin: const AlignmentDirectional(0.5, -1),
-                                    end: const AlignmentDirectional(0.5, 0.5),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  height: 20.0,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: <Color>[StateContainer.of(context).curTheme.background00!, StateContainer.of(context).curTheme.background!],
+                                      begin: const AlignmentDirectional(0.5, -1),
+                                      end: const AlignmentDirectional(0.5, 0.5),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Stack(
-                          children: <Widget>[
-                            _getMoneroListWidget(context),
-                            // Text("TODO"),
-                            // MyMonero(),
-                            CustomMonero(),
-                          ],
-                        ),
-                      ],
-                    ),
+                            ],
+                          ),
                   ),
                   SizedBox(
                     height: 55,
@@ -2975,8 +3013,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       sl.get<Logger>().v("request send failed, deleting TXData object");
       // remove failed txdata from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
-      // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
-      await Future<dynamic>.delayed(const Duration(seconds: 2));
       // show error:
       UIUtil.showSnackbar(AppLocalization.of(context).requestSendError, context, durationMs: 5000);
     } else {
@@ -3048,8 +3084,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       sl.get<Logger>().v("memo send failed, deleting TXData object");
       // remove from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
-      // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
-      await Future<dynamic>.delayed(const Duration(seconds: 2));
       // show error:
       UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
     } else {
@@ -3125,8 +3159,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       sl.get<Logger>().v("request send failed, deleting TXData object");
       // remove failed txdata from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
-      // sleep for 2 seconds so the animation finishes otherwise the UX is weird:
-      await Future<dynamic>.delayed(const Duration(seconds: 2));
       // show error:
       UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
     } else {
@@ -3396,8 +3428,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           icon: Icons.send,
           label: label,
           onPressed: (BuildContext context) async {
-            // sleep for a bit to give the ripple effect time to finish
-            await Future<dynamic>.delayed(const Duration(milliseconds: 250));
             if (!mounted) return;
             await payTX(context, txDetails);
             if (!mounted) return;
@@ -3415,8 +3445,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           icon: Icons.send,
           label: AppLocalization.of(context).reply,
           onPressed: (BuildContext context) async {
-            // sleep for a bit to give the ripple effect time to finish
-            await Future<dynamic>.delayed(const Duration(milliseconds: 250));
             if (!mounted) return;
             await payTX(context, txDetails);
             if (!mounted) return;
@@ -3435,8 +3463,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             icon: Icons.refresh_rounded,
             label: AppLocalization.of(context).retry,
             onPressed: (BuildContext context) async {
-              // sleep for a bit to give the ripple effect time to finish
-              await Future<dynamic>.delayed(const Duration(milliseconds: 250));
               if (!mounted) return;
               await resendRequest(context, txDetails);
               if (!mounted) return;
@@ -3451,8 +3477,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             icon: Icons.refresh_rounded,
             label: AppLocalization.of(context).retry,
             onPressed: (BuildContext context) async {
-              // sleep for a bit to give the ripple effect time to finish
-              await Future<dynamic>.delayed(const Duration(milliseconds: 250));
               if (!mounted) return;
               await resendMemo(context, txDetails);
               if (!mounted) return;
@@ -3468,8 +3492,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             icon: Icons.refresh_rounded,
             label: AppLocalization.of(context).retry,
             onPressed: (BuildContext context) async {
-              // sleep for a bit to give the ripple effect time to finish
-              await Future<dynamic>.delayed(const Duration(milliseconds: 250));
               if (!mounted) return;
               await resendMessage(context, txDetails);
               if (!mounted) return;
@@ -3487,8 +3509,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           icon: Icons.delete,
           label: AppLocalization.of(context).delete,
           onPressed: (BuildContext context) async {
-            // sleep for a bit to give the ripple effect time to finish
-            await Future<dynamic>.delayed(const Duration(milliseconds: 250));
             if (txDetails.uuid != null) {
               await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
             }
@@ -3954,7 +3974,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         });
       }
 
-      if (StateContainer.of(context).wallet!.unifiedLoading || (list != null && list.length == 0)) {
+      if (StateContainer.of(context).wallet!.xmrLoading || (list != null && list.length == 0)) {
         generateMoneroList(fastUpdate: true);
       }
     }
@@ -3982,8 +4002,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
             ],
           ));
-    } else {
-      // _disposeAnimation();
+    } else if (!StateContainer.of(context).wallet!.unifiedLoading) {
+      _disposeAnimation();
     }
 
     // if (StateContainer.of(context).activeAlerts.isNotEmpty) {
@@ -4102,8 +4122,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
             ],
           ));
-    } else {
-      // _disposeAnimation();
+    } else if (!StateContainer.of(context).wallet!.xmrLoading) {
+      _disposeAnimation();
     }
 
     if (StateContainer.of(context).wallet!.history.isEmpty && StateContainer.of(context).wallet!.solids.isEmpty) {

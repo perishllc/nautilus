@@ -40,6 +40,7 @@ class SharedPrefsUtil {
   static const String notification_enabled = 'fkalium_notification_on';
   static const String contacts_enabled = 'fnautilus_contacts_on';
   static const String unopened_warning = 'fnautilus_unopened_warning';
+  static const String show_monero = 'fnautilus_show_monero';
   static const String funding_enabled = 'fnautilus_funding_on';
   static const String lock_kalium = 'fkalium_lock_dev';
   static const String kalium_lock_timeout = 'fkalium_lock_timeout';
@@ -338,6 +339,14 @@ class SharedPrefsUtil {
     return await get(funding_enabled, defaultValue: true) as bool;
   }
 
+  Future<bool> getShowMoneroOn() async {
+    return await get(show_monero, defaultValue: true) as bool;
+  }
+
+  Future<void> setShowMoneroOn(bool value) async {
+    return set(show_monero, value);
+  }
+
   Future<void> setLock(bool value) async {
     return set(lock_kalium, value);
   }
@@ -487,7 +496,7 @@ class SharedPrefsUtil {
   }
 
   Future<int> getXMRRestoreHeight() async {
-    return await get(xmr_restore_height, defaultValue: 2701000) as int;
+    return await get(xmr_restore_height, defaultValue: 2702447) as int;
   }
 
   // TODO:
@@ -512,6 +521,7 @@ class SharedPrefsUtil {
     await prefs.remove(notification_enabled);
     await prefs.remove(contacts_enabled);
     await prefs.remove(unopened_warning);
+    await prefs.remove(show_monero);
     await prefs.remove(funding_enabled);
     await prefs.remove(lock_kalium);
     await prefs.remove(pin_attempts);

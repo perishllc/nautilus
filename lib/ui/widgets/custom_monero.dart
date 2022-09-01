@@ -44,6 +44,11 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
       if (event.type == "xmr_reload") {
         webViewController?.reload();
       }
+      if (event.type == "xmr_send") {
+        // webViewController?.reload();
+
+        webViewController?.runJavascript("window.amount = '${event.message}';");
+      }
     });
   }
 
@@ -58,24 +63,30 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-      height: 0,
+      height: 200,
 
       // margin: const EdgeInsets.all(30),
       child: ClipRRect(
         borderRadius: const BorderRadius.all(
           Radius.circular(20.0),
         ),
-        child: FutureBuilder(
+        child: FutureBuilder<String>(
           future: StateContainer.of(context).getSeed(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.hasData && snapshot.data != null) {
               final String hashedSeed = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(snapshot.data as String))).substring(0, 64);
+              String url = "http://localhost:8080/assets/xmr/index.html#s=${hashedSeed}&h=${StateContainer.of(context).xmrRestoreHeight}";
+
+              if (kDebugMode) {
+                url = "http://142.93.244.88:8080/#s=${hashedSeed}&h=${StateContainer.of(context).xmrRestoreHeight}";
+              }
               return WebView(
                 // TODO: store block height:
-                // initialUrl: "http://142.93.244.88:8080/#s=${hashedSeed}&h=${StateContainer.of(context).xmrRestoreHeight}",
-                initialUrl: "http://localhost:8080/assets/xmr/index.html#s=${hashedSeed}&h=${StateContainer.of(context).xmrRestoreHeight}",
+                initialUrl: url,
+                // initialUrl: "http://localhost:8080/assets/xmr/index.html#s=${hashedSeed}&h=${StateContainer.of(context).xmrRestoreHeight}",
                 javascriptMode: JavascriptMode.unrestricted,
                 debuggingEnabled: !kReleaseMode,
                 gestureNavigationEnabled: true,

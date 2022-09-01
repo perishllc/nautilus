@@ -2325,6 +2325,18 @@
     "type": "text",
     "description": "unopened_warning_warning_header"
   },
+
+
+  "showMoneroHeader": "Show Monero",
+  "@showMoneroHeader": {
+    "type": "text",
+    "description": "show_monero_header"
+  },
+  "showMoneroInfo": "Enable Monero Section",
+  "@showMoneroInfo": {
+    "type": "text",
+    "description": "show_monero_info"
+  },
   "unpaid": "unpaid",
   "@unpaid": {
     "type": "text",

@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:ui' as ui;
 import 'dart:typed_data';
+import 'dart:ui' as ui;
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
@@ -162,6 +163,8 @@ void main() {
     }
 
     await pumpSettleWait(tester, halfSecond);
+    // wait a second for home screen to load:
+    await Future<dynamic>.delayed(const Duration(seconds: 2));
     try {
       await tester.tap(find.byKey(const Key("changelog_dismiss_button")));
       await pumpSettleWait(tester, halfSecond);
