@@ -698,6 +698,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hivatkozási beállítások megjelenítése"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Link QR megjelenítése"),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
         "showQR": MessageLookupByLibrary.simpleMessage("QR-kód megjelenítése"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Bontatlan Figyelmeztetés"),

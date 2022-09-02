@@ -3,25 +3,21 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
+import 'package:nautilus_wallet_flutter/bus/xmr_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
-import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
-import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/send/send_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_xmr_complete_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
@@ -32,13 +28,10 @@ import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/biometrics.dart';
-import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:uuid/uuid.dart';
 
 class SendXMRConfirmSheet extends StatefulWidget {
   const SendXMRConfirmSheet(
@@ -49,7 +42,6 @@ class SendXMRConfirmSheet extends StatefulWidget {
       this.maxSend = false,
       this.phoneNumber = "",
       this.paperWalletSeed = "",
-      this.link = "",
       this.memo = ""})
       : super();
 
@@ -64,6 +56,7 @@ class SendXMRConfirmSheet extends StatefulWidget {
   final String paperWalletSeed;
   final String memo;
 
+  @override
   _SendXMRConfirmSheetState createState() => _SendXMRConfirmSheetState();
 }
 
@@ -131,116 +124,104 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(
-                              (widget.link.isEmpty) ? AppLocalization.of(context).sending : AppLocalization.of(context).creatingGiftCard, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).sending, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
                     ),
                   ),
                   // Container for the amount text
-                  if (widget.memo.isNotEmpty && (widget.amountRaw == "0"))
-                    Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.backgroundDarkest,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Text(
-                          widget.memo,
-                          style: AppStyles.textStyleParagraph(context),
-                          textAlign: TextAlign.center,
-                        ))
-                  else
-                    Container(
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      // Amount text
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          text: "",
-                          children: [
-                            TextSpan(
-                              text: getThemeAwareRawAccuracy(context, widget.amountRaw),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            displayCurrencySymbol(
-                              context,
-                              AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            TextSpan(
-                              text: getRawAsThemeAwareFormattedAmount(context, widget.amountRaw),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            TextSpan(
-                              text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
-                              style: AppStyles.textStyleParagraphPrimary(context).copyWith(
-                                color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.105,
+                        right: MediaQuery.of(context).size.width * 0.105),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      borderRadius: BorderRadius.circular(50),
                     ),
-
-                  // "TO" text
-                  if (widget.link.isEmpty)
-                    Container(
-                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context).to, context),
-                            style: AppStyles.textStyleHeader(context),
+                    // Amount text
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: "",
+                        children: [
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          displayCurrencySymbol(
+                            context,
+                            AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          TextSpan(
+                            text: getRawAsThemeAwareFormattedAmount(context, widget.amountRaw),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          TextSpan(
+                            text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
+                            style: AppStyles.textStyleParagraphPrimary(context).copyWith(
+                              color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
+                            ),
                           ),
                         ],
                       ),
                     ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          CaseChange.toUpperCase(AppLocalization.of(context).to, context),
+                          style: AppStyles.textStyleHeader(context),
+                        ),
+                      ],
+                    ),
+                  ),
                   // Address text
                   if (widget.link.isEmpty)
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.105,
+                            right: MediaQuery.of(context).size.width * 0.105),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: StateContainer.of(context).curTheme.backgroundDarkest,
                           borderRadius: BorderRadius.circular(25),
                         ),
-                        child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
+                        child:
+                            UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
 
-                  // WITH MESSAGE:
-                  if (widget.memo.isNotEmpty && (widget.amountRaw != "0"))
+                  // WITH FEE:
+                  if (StateContainer.of(context).xmrFee.isNotEmpty)
                     Container(
                       margin: const EdgeInsets.only(top: 30.0, bottom: 10),
                       child: Column(
                         children: <Widget>[
                           Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context).withMessage, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).withFee, context),
                             style: AppStyles.textStyleHeader(context),
                           ),
                         ],
                       ),
                     ),
-                  // MEMO:
-                  if (widget.memo.isNotEmpty && (widget.amountRaw != "0"))
+                  // FEE:
+                  if (StateContainer.of(context).xmrFee.isNotEmpty)
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.105,
+                            right: MediaQuery.of(context).size.width * 0.105),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: StateContainer.of(context).curTheme.backgroundDarkest,
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: Text(
-                          widget.memo,
+                          StateContainer.of(context).xmrFee,
                           style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.center,
                         )),
@@ -256,8 +237,10 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
+                        context,
+                        AppButtonType.PRIMARY,
+                        CaseChange.toUpperCase(AppLocalization.of(context).confirm, context),
+                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
@@ -272,13 +255,16 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                               .replaceAll("%2", StateContainer.of(context).currencyMode);
 
                       // show warning dialog if this is a send:
-                      if ((widget.amountRaw != "0") && widget.link.isEmpty && !await showUnopenedWarning(widget.destination)) {
-                        return;
-                      }
+                      // if ((widget.amountRaw != "0") &&
+                      //     widget.link.isEmpty &&
+                      //     !await showUnopenedWarning(widget.destination)) {
+                      //   return;
+                      // }
 
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
-                          final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, authText);
+                          final bool authenticated =
+                              await sl.get<BiometricUtil>().authenticateWithBiometrics(context, authText);
                           if (authenticated) {
                             sl.get<HapticUtil>().fingerprintSucess();
                             EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
@@ -296,7 +282,10 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                    AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -337,7 +326,8 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).unopenedWarningWarning}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${AppLocalization.of(context).unopenedWarningWarning}\n\n",
+                    style: AppStyles.textStyleParagraph(context)),
                 RichText(
                   textAlign: TextAlign.start,
                   text: TextSpan(
@@ -394,21 +384,10 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
 
       _showAnimation(context, isMessage ? AnimationType.SEND_MESSAGE : AnimationType.SEND);
 
-      ProcessResponse? resp;
+      EventTaxiImpl.singleton().fire(XMREvent(type: "xmr_send", message: "${widget.destination}:${widget.amountRaw}"));
 
-      if (!isMessage) {
-        resp = await sl.get<AccountService>().requestSend(
-            StateContainer.of(context).wallet!.representative,
-            StateContainer.of(context).wallet!.frontier,
-            widget.amountRaw,
-            widget.destination,
-            StateContainer.of(context).wallet!.address,
-            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
-            max: widget.maxSend);
-        if (!mounted) return;
-        StateContainer.of(context).wallet!.frontier = resp.hash;
-        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
-      }
+      // sleep to flex the animation a bit:
+      await Future<dynamic>.delayed(const Duration(milliseconds: 1500));
 
       // Show complete
       String? contactName = widget.contactName;

@@ -790,6 +790,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Welcome to Nautilus. To start, create a new wallet or import an existing one."),
         "withAddress": MessageLookupByLibrary.simpleMessage("With Address"),
+        "withFee": MessageLookupByLibrary.simpleMessage("With Fee"),
         "withMessage": MessageLookupByLibrary.simpleMessage("With Message"),
         "xMinute": MessageLookupByLibrary.simpleMessage("After %1 minute"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("After %1 minutes"),

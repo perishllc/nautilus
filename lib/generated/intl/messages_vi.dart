@@ -690,6 +690,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hiển thị các tùy chọn liên kết"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Hiển thị liên kết QR"),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
         "showQR": MessageLookupByLibrary.simpleMessage("Hiển thị mã QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Cảnh báo chưa mở"),

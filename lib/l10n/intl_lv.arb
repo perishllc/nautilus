@@ -2065,6 +2065,16 @@
     "type": "text",
     "description": "show_link_qr"
   },
+  "showMoneroHeader": "",
+  "@showMoneroHeader": {
+    "type": "text",
+    "description": "show_monero_header"
+  },
+  "showMoneroInfo": "",
+  "@showMoneroInfo": {
+    "type": "text",
+    "description": "show_monero_info"
+  },
   "showQR": "Rādīt QR kodu",
   "@showQR": {
     "type": "text",

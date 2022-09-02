@@ -679,6 +679,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bağlantı Seçeneklerini Göster"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Bağlantı QR\'sini göster"),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
         "showQR": MessageLookupByLibrary.simpleMessage("QR Kodunu Göster"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Açılmamış Uyarı"),

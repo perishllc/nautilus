@@ -1073,14 +1073,14 @@ class SendSheetState extends State<SendSheet> {
                         }
                       }
 
-                      final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
+                      // final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
+                      // String? phoneNumber;
                       String? link;
-                      String? phoneNumber;
                       String? paperWalletSeed;
-                      if (isPhoneNumber) {
-                        phoneNumber = _addressController!.text;
-                      }
-                      if (isPhoneNumber || _addressController!.text.isEmpty) {
+                      // if (isPhoneNumber) {
+                      //   phoneNumber = _addressController!.text;
+                      // }
+                      if (/*isPhoneNumber || */_addressController!.text.isEmpty) {
                         // we need to create a gift card and change the destination address to the gift card address:
                         paperWalletSeed = NanoSeeds.generateSeed();
                         final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
@@ -1111,7 +1111,7 @@ class SendSheetState extends State<SendSheet> {
                       }
 
                       // verifies the input is a user in the db
-                      if (!_addressController!.text.startsWith("nano_") && !isPhoneNumber && _addressController!.text.isNotEmpty) {
+                      if (!_addressController!.text.startsWith("nano_") && /*!isPhoneNumber &&*/ _addressController!.text.isNotEmpty) {
                         // Need to make sure its a valid contact or user
                         final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
                         if (user == null) {
@@ -1142,7 +1142,7 @@ class SendSheetState extends State<SendSheet> {
                                 amountRaw: amountRaw,
                                 destination: formattedAddress,
                                 maxSend: isMaxSend,
-                                phoneNumber: phoneNumber ?? "",
+                                // phoneNumber: phoneNumber ?? "",
                                 link: link ?? "",
                                 paperWalletSeed: paperWalletSeed ?? "",
                                 localCurrency: _localCurrencyMode ? _amountController!.text : null,
@@ -1366,14 +1366,14 @@ class SendSheetState extends State<SendSheet> {
     final bool isFavorite = _addressController!.text.startsWith("★");
     final bool isDomain = _addressController!.text.contains(".") || _addressController!.text.contains(r"$");
     final bool isNano = _addressController!.text.startsWith("nano_");
-    final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
+    // final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
     if (_addressController!.text.trim().isEmpty && isRequest) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context).addressMissing;
         _pasteButtonVisible = true;
       });
-    } else if (_addressController!.text.isNotEmpty && !isPhoneNumber && !isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
+    } else if (_addressController!.text.isNotEmpty /*&& !isPhoneNumber*/ && !isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context).invalidAddress;
@@ -1390,7 +1390,7 @@ class SendSheetState extends State<SendSheet> {
       // notifications must be turned on if sending a request or memo:
       final bool notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
 
-      if ((isRequest || (_memoController!.text.isNotEmpty && !isPhoneNumber && _addressController!.text.isNotEmpty)) && !notificationsEnabled) {
+      if ((isRequest || (_memoController!.text.isNotEmpty /*&& !isPhoneNumber*/ && _addressController!.text.isNotEmpty)) && !notificationsEnabled) {
         final bool notificationTurnedOn = await showNotificationDialog();
         if (!notificationTurnedOn) {
           isValid = false;

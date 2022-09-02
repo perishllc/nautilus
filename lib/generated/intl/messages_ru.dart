@@ -704,6 +704,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Показать параметры ссылки"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Показать ссылку QR"),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
         "showQR": MessageLookupByLibrary.simpleMessage("Показать QR-код"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Неоткрытое предупреждение"),

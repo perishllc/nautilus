@@ -599,6 +599,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "showFunding": MessageLookupByLibrary.simpleMessage("ファンディング バナーを表示"),
         "showLinkOptions": MessageLookupByLibrary.simpleMessage("リンク オプションを表示"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("リンクの QR を表示"),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
         "showQR": MessageLookupByLibrary.simpleMessage("QRコードを表示"),
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("未開封注意"),
         "simplex": MessageLookupByLibrary.simpleMessage("シンプレックス"),

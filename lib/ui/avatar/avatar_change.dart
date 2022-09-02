@@ -67,7 +67,8 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
       UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
       return;
     }
-    Sheets.showAppHeightNineSheet(context: context, widget: SendConfirmSheet(amountRaw: sendAmount.toString(), destination: NATRICON_ADDRESS));
+    Sheets.showAppHeightNineSheet(
+        context: context, widget: SendConfirmSheet(amountRaw: sendAmount.toString(), destination: NATRICON_ADDRESS));
   }
 
   @override
@@ -78,7 +79,8 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
-          minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
+          minimum: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
               //A widget that holds the header, the paragraph and Back Button
@@ -125,7 +127,8 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                     ),
                     // The paragraph
                     Container(
-                      margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
+                      margin: EdgeInsetsDirectional.only(
+                          start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                       child: AutoSizeText(
                         "You'll be asked to send 0.001~ Nano to the Natricon address to change your Natricon.",
                         style: AppStyles.textStyleParagraph(context),
@@ -134,7 +137,8 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 8),
+                      margin: EdgeInsetsDirectional.only(
+                          start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 8),
                       child: AutoSizeText(
                         "This amount will be automatically refunded completely.",
                         style: AppStyles.textStyleParagraphPrimary(context),
@@ -147,92 +151,15 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                       alignment: Alignment.center,
                       child: Stack(alignment: Alignment.center, children: [
                         Container(
-                          constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.5, maxWidth: MediaQuery.of(context).size.width * 0.75),
+                          constraints: BoxConstraints(
+                              maxHeight: MediaQuery.of(context).size.height * 0.5,
+                              maxWidth: MediaQuery.of(context).size.width * 0.75),
                           child: const SizedBox(),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            // Previous Natricon Button
-                            Container(
-                              height: 50,
-                              width: 50,
-                              margin: const EdgeInsetsDirectional.only(start: 28),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    width: 2,
-                                    color: nonce != null ? StateContainer.of(context).curTheme.primary! : StateContainer.of(context).curTheme.primary20!),
-                              ),
-                              child: FlatButton(
-                                highlightColor: StateContainer.of(context).curTheme.text15,
-                                splashColor: StateContainer.of(context).curTheme.text15,
-                                onPressed: () {
-                                  if (nonce == null || loading) {
-                                    return;
-                                  } else if (nonce == -1 || (nonce == 0 && currentNonce == -1)) {
-                                    setState(() {
-                                      nonce = null;
-                                    });
-                                  } else {
-                                    setState(() {
-                                      if (nonce! - 1 == currentNonce) {
-                                        nonce = nonce! - 2;
-                                      } else {
-                                        nonce = nonce! - 1;
-                                      }
-                                    });
-                                  }
-                                },
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                                padding: const EdgeInsetsDirectional.only(end: 4),
-                                child: Icon(AppIcons.back,
-                                    color: nonce != null && !loading
-                                        ? StateContainer.of(context).curTheme.primary
-                                        : StateContainer.of(context).curTheme.primary20,
-                                    size: 24),
-                              ),
-                            ),
-                            // Next Natricon Button
-                            Container(
-                              height: 50,
-                              width: 50,
-                              margin: const EdgeInsetsDirectional.only(end: 28),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(width: 2, color: StateContainer.of(context).curTheme.primary!),
-                              ),
-                              child: FlatButton(
-                                highlightColor: StateContainer.of(context).curTheme.text15,
-                                splashColor: StateContainer.of(context).curTheme.text15,
-                                onPressed: () {
-                                  if (loading) {
-                                    return;
-                                  } else if (nonce == null) {
-                                    setState(() {
-                                      nonce = currentNonce == -1 ? 0 : -1;
-                                    });
-                                  } else {
-                                    setState(() {
-                                      if (nonce! + 1 == currentNonce) {
-                                        nonce = nonce! + 2;
-                                      } else {
-                                        nonce = nonce! + 1;
-                                      }
-                                    });
-                                  }
-                                },
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                                padding: const EdgeInsetsDirectional.only(start: 4),
-                                child: Transform(
-                                  alignment: Alignment.center,
-                                  transform: Matrix4.rotationY(math.pi),
-                                  child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.primary, size: 24),
-                                ),
-                              ),
-                            ),
-                          ],
+                          children: <Widget>[],
                         ),
                       ]),
                     ))
@@ -248,7 +175,8 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                     child: Row(
                       children: <Widget>[
                         // I want this Button
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, "I Want This One", Dimens.BUTTON_TOP_DIMENS, onPressed: () {
+                        AppButton.buildAppButton(
+                            context, AppButtonType.PRIMARY, "I Want This One", Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                           showSendConfirmSheet();
                         }, disabled: nonce == null || loading || nonce == currentNonce),
                       ],
@@ -257,8 +185,8 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                   Row(
                     children: <Widget>[
                       // Go Back Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
-                          onPressed: () {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                          AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).popUntil((Route route) => route.isFirst);
                       }),
                     ],

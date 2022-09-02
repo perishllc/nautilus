@@ -4190,6 +4190,26 @@ class AppLocalization {
     );
   }
 
+  /// `Show Monero`
+  String get showMoneroHeader {
+    return Intl.message(
+      'Show Monero',
+      name: 'showMoneroHeader',
+      desc: 'show_monero_header',
+      args: [],
+    );
+  }
+
+  /// `Enable Monero Section`
+  String get showMoneroInfo {
+    return Intl.message(
+      'Enable Monero Section',
+      name: 'showMoneroInfo',
+      desc: 'show_monero_info',
+      args: [],
+    );
+  }
+
   /// `Show QR Code`
   String get showQR {
     return Intl.message(
@@ -4710,26 +4730,6 @@ class AppLocalization {
     );
   }
 
-  /// `Show Monero`
-  String get showMoneroHeader {
-    return Intl.message(
-      'Show Monero',
-      name: 'showMoneroHeader',
-      desc: 'show_monero_header',
-      args: [],
-    );
-  }
-
-  /// `Enable Monero Section`
-  String get showMoneroInfo {
-    return Intl.message(
-      'Enable Monero Section',
-      name: 'showMoneroInfo',
-      desc: 'show_monero_info',
-      args: [],
-    );
-  }
-
   /// `unpaid`
   String get unpaid {
     return Intl.message(
@@ -4996,6 +4996,16 @@ class AppLocalization {
       'With Message',
       name: 'withMessage',
       desc: 'with_message',
+      args: [],
+    );
+  }
+
+  /// `With Fee`
+  String get withFee {
+    return Intl.message(
+      'With Fee',
+      name: 'withFee',
+      desc: 'with_fee',
       args: [],
     );
   }

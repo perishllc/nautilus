@@ -684,6 +684,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("Rādīt saites opcijas"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("Rādīt saites QR"),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
         "showQR": MessageLookupByLibrary.simpleMessage("Rādīt QR kodu"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Neatvērts brīdinājums"),

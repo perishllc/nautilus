@@ -610,6 +610,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "showFunding": MessageLookupByLibrary.simpleMessage("펀딩 배너 표시"),
         "showLinkOptions": MessageLookupByLibrary.simpleMessage("링크 옵션 표시"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("링크 QR 표시"),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
         "showQR": MessageLookupByLibrary.simpleMessage("QR 코드 표시"),
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("미개봉 경고"),
         "simplex": MessageLookupByLibrary.simpleMessage("심플렉스"),

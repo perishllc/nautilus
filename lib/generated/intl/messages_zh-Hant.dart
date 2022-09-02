@@ -538,6 +538,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "showFunding": MessageLookupByLibrary.simpleMessage("顯示資金橫幅"),
         "showLinkOptions": MessageLookupByLibrary.simpleMessage("顯示鏈接選項"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("顯示鏈接二維碼"),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
         "showQR": MessageLookupByLibrary.simpleMessage("顯示二維碼"),
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("未開封警告"),
         "simplex": MessageLookupByLibrary.simpleMessage("單面"),

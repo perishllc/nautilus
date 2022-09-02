@@ -2065,6 +2065,16 @@
     "type": "text",
     "description": "show_link_qr"
   },
+  "showMoneroHeader": "Show Monero",
+  "@showMoneroHeader": {
+    "type": "text",
+    "description": "show_monero_header"
+  },
+  "showMoneroInfo": "Enable Monero Section",
+  "@showMoneroInfo": {
+    "type": "text",
+    "description": "show_monero_info"
+  },
   "showQR": "Show QR Code",
   "@showQR": {
     "type": "text",
@@ -2325,18 +2335,6 @@
     "type": "text",
     "description": "unopened_warning_warning_header"
   },
-
-
-  "showMoneroHeader": "Show Monero",
-  "@showMoneroHeader": {
-    "type": "text",
-    "description": "show_monero_header"
-  },
-  "showMoneroInfo": "Enable Monero Section",
-  "@showMoneroInfo": {
-    "type": "text",
-    "description": "show_monero_info"
-  },
   "unpaid": "unpaid",
   "@unpaid": {
     "type": "text",
@@ -2471,6 +2469,11 @@
   "@withMessage": {
     "type": "text",
     "description": "with_message"
+  },
+  "withFee": "With Fee",
+  "@withFee": {
+    "type": "text",
+    "description": "with_fee"
   },
   "xMinute": "After %1 minute",
   "@xMinute": {

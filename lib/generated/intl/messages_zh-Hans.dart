@@ -539,6 +539,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "showFunding": MessageLookupByLibrary.simpleMessage("显示资金横幅"),
         "showLinkOptions": MessageLookupByLibrary.simpleMessage("显示链接选项"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("显示链接二维码"),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
         "showQR": MessageLookupByLibrary.simpleMessage("显示二维码"),
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("未开封警告"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),

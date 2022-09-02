@@ -690,6 +690,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions": MessageLookupByLibrary.simpleMessage(
             "Afișați opțiunile de legătură"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("Afișați linkul QR"),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
         "showQR": MessageLookupByLibrary.simpleMessage("Afișați codul QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Avertisment nedeschis"),

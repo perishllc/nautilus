@@ -688,6 +688,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("Pokaż opcje łącza"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("Pokaż link QR"),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
         "showQR": MessageLookupByLibrary.simpleMessage("Pokaż kod QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Nieotwarte ostrzeżenie"),
