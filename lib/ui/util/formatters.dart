@@ -326,9 +326,6 @@ class LowerCaseTextFormatter extends TextInputFormatter {
   }
 }
 
-final BigInt rawPerNano = BigInt.from(10).pow(30);
-final BigInt rawPerNyano = BigInt.from(10).pow(24);
-
 // String getCurrencySymbol(BuildContext context) {
 //   if (StateContainer.of(context).nyanoMode) {
 //     // TODO: decide on a symbol
@@ -355,12 +352,32 @@ List<TextSpan> displayRawFull(BuildContext context, TextStyle textStyle, String 
 }
 
 String getRawAsThemeAwareAmount(BuildContext context, String? raw) {
-  final BigInt rawPerCur = StateContainer.of(context).nyanoMode ? rawPerNyano : rawPerNano;
+  final BigInt rawPerCur = StateContainer.of(context).nyanoMode ? NumberUtil.rawPerNyano : NumberUtil.rawPerNano;
   return NumberUtil.getRawAsUsableString(raw, rawPerCur); // "$amount.$decPart"
 }
 
 String getThemeAwareRawAccuracy(BuildContext context, String? raw) {
-  final BigInt rawPerCur = StateContainer.of(context).nyanoMode ? rawPerNyano : rawPerNano;
+  final BigInt rawPerCur = StateContainer.of(context).nyanoMode ? NumberUtil.rawPerNyano : NumberUtil.rawPerNano;
+  final String rawString = NumberUtil.getRawAsUsableString(raw, rawPerCur);
+  final String rawDecimalString = NumberUtil.getRawAsDecimal(raw, rawPerCur).toString();
+
+  if (raw == null || raw.isEmpty || raw == "0") {
+    return "";
+  }
+
+  if (rawString != rawDecimalString) {
+    return "~";
+  }
+  return "";
+}
+
+String getXMRRawAsThemeAwareAmount(BuildContext context, String? raw) {
+  final BigInt rawPerCur = NumberUtil.rawPerXMR;
+  return NumberUtil.getRawAsUsableString(raw, rawPerCur); // "$amount.$decPart"
+}
+
+String getXMRThemeAwareRawAccuracy(BuildContext context, String? raw) {
+  final BigInt rawPerCur = NumberUtil.rawPerXMR;
   final String rawString = NumberUtil.getRawAsUsableString(raw, rawPerCur);
   final String rawDecimalString = NumberUtil.getRawAsDecimal(raw, rawPerCur).toString();
 

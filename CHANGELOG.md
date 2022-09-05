@@ -1,3 +1,13 @@
+## v0.6.3 - [2022-09-05]
+#### Added
+- (EXPERIMENTAL) XMR Support
+  - Option to disable XMR Section
+- Tracking Permission dialogs and warnings
+#### Changed
+- Minor global UI updates
+#### Fixed
+- Android 13 Notification fixes and support
+- Rendering bugs in the intro screen
 ## v0.6.2 - [2022-09-01]
 #### Added
 - Major improvements to NFC handling, NFC scans within the app no longer re-load the entire app

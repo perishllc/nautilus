@@ -65,7 +65,9 @@ class SharedPrefsUtil {
   // store app version (for showing the change log):
   static const String app_version = 'fnautilus_app_version';
   // xmr restore height:
-  static const String xmr_restore_height = 'fxmr_restore_height';
+  static const String xmr_restore_height = 'fnautilus_xmr_restore_height';
+  // tracking permissions:
+  static const String tracking_enabled = 'fnautilus_tracking_enabled';
 
   // For plain-text data
   Future<void> set(String key, dynamic value) async {
@@ -347,6 +349,14 @@ class SharedPrefsUtil {
     return set(show_monero, value);
   }
 
+  Future<bool> getTrackingEnabled() async {
+    return await get(tracking_enabled, defaultValue: false) as bool;
+  }
+
+  Future<void> setTrackingEnabled(bool value) async {
+    return set(tracking_enabled, value);
+  }
+
   Future<void> setLock(bool value) async {
     return set(lock_kalium, value);
   }
@@ -469,6 +479,10 @@ class SharedPrefsUtil {
     await setWithExpiry("alert_${alert.id}", alert.id, -1);
   }
 
+  Future<void> dismissAlertForWeek(AlertResponseItem alert) async {
+    await setWithExpiry("alert_${alert.id}", alert.id, 604800);
+  }
+
   Future<void> markAlertRead(AlertResponseItem alert) async {
     await setWithExpiry("alertread_${alert.id}", alert.id, -1);
   }
@@ -536,9 +550,11 @@ class SharedPrefsUtil {
     await prefs.remove(ninja_api_cache);
     await prefs.remove(firstcontact_added);
     await prefs.remove(xmr_restore_height);
+    await prefs.remove(tracking_enabled);
     // remove the dismissals of any important alerts:
     await prefs.remove("alert_4040");
     await prefs.remove("alert_4041");
     await prefs.remove("alert_4042");
+    await prefs.remove("alert_4043");
   }
 }

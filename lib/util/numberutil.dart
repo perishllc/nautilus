@@ -1,10 +1,11 @@
 import 'package:decimal/decimal.dart';
 
-final BigInt rawPerNano = BigInt.from(10).pow(30);
-final BigInt rawPerNyano = BigInt.from(10).pow(24);
 
 class NumberUtil {
   static const int maxDecimalDigits = 6; // Max digits after decimal
+  static BigInt rawPerNano = BigInt.parse("1000000000000000000000000000000");
+  static BigInt rawPerNyano = BigInt.parse("1000000000000000000000000");
+  static BigInt rawPerXMR = BigInt.parse("1000000000000");
 
   /// Convert raw to ban and return as BigDecimal
   ///
@@ -112,6 +113,12 @@ class NumberUtil {
   static String getAmountAsRaw(String amount) {
     final Decimal asDecimal = Decimal.parse(amount);
     final Decimal rawDecimal = Decimal.parse(rawPerNano.toString());
+    return (asDecimal * rawDecimal).toString();
+  }
+
+  static String getXMRAmountAsRaw(String amount) {
+    final Decimal asDecimal = Decimal.parse(amount);
+    final Decimal rawDecimal = Decimal.parse(rawPerXMR.toString());
     return (asDecimal * rawDecimal).toString();
   }
 

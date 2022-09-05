@@ -310,6 +310,26 @@ class AppLocalization {
     );
   }
 
+  /// `Tracking Authorization`
+  String get trackingHeader {
+    return Intl.message(
+      'Tracking Authorization',
+      name: 'trackingHeader',
+      desc: 'prompt_ask_tracking_header',
+      args: [],
+    );
+  }
+
+  /// `We're about to ask for the 'tracking' permission, this is used *strictly* for attributing links / referals, and minor analytics (things like number of installs, what app version, etc.) We believe you are entitled to your privacy and are not interested in any of your personal data, we just need the permission in order for link attributions to work correctly.`
+  String get askTracking {
+    return Intl.message(
+      'We\'re about to ask for the \'tracking\' permission, this is used *strictly* for attributing links / referals, and minor analytics (things like number of installs, what app version, etc.) We believe you are entitled to your privacy and are not interested in any of your personal data, we just need the permission in order for link attributions to work correctly.',
+      name: 'askTracking',
+      desc: 'prompt_ask_tracking',
+      args: [],
+    );
+  }
+
   /// `Authenticating`
   String get authConfirm {
     return Intl.message(
@@ -1259,6 +1279,16 @@ class AppLocalization {
       'Enable Notifications',
       name: 'enableNotifications',
       desc: 'notification_warning_enable_button',
+      args: [],
+    );
+  }
+
+  /// `Enable Tracking`
+  String get enableTracking {
+    return Intl.message(
+      'Enable Tracking',
+      name: 'enableTracking',
+      desc: 'tracking_warning_enable_button',
       args: [],
     );
   }
@@ -2731,6 +2761,36 @@ class AppLocalization {
       'Payment Requests, Memos, and Messages will not function properly.',
       name: 'notificationWarningBodyShort',
       desc: 'notification_warning_body_short',
+      args: [],
+    );
+  }
+
+  /// `Tracking Disabled`
+  String get trackingWarning {
+    return Intl.message(
+      'Tracking Disabled',
+      name: 'trackingWarning',
+      desc: 'home_tracking_warning',
+      args: [],
+    );
+  }
+
+  /// `Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)`
+  String get trackingWarningBodyLong {
+    return Intl.message(
+      'Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)',
+      name: 'trackingWarningBodyLong',
+      desc: 'tracking_warning_body_long',
+      args: [],
+    );
+  }
+
+  /// `Payment Requests, Memos, and Messages will not function properly.`
+  String get trackingWarningBodyShort {
+    return Intl.message(
+      'Payment Requests, Memos, and Messages will not function properly.',
+      name: 'trackingWarningBodyShort',
+      desc: 'tracking_warning_body_short',
       args: [],
     );
   }

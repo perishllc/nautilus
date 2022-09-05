@@ -127,5 +127,7 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Used strictly for install / link attribution (i.e. promotional links)</string>
 </dict>
 </plist>

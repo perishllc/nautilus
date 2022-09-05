@@ -877,7 +877,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                         onPressed: () async {
                       final bool validRequest = await _validateRequest();
 
-                      if (!validRequest) {
+                      if (!validRequest || !mounted) {
                         return;
                       }
 
@@ -895,12 +895,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                               convertLocalCurrencyToLocalizedCrypto(
                                   context, _localCurrencyFormat, _amountController!.text)));
                         } else {
-                          if (_rawAmount != null) {
-                            amountRaw = _rawAmount!;
-                          } else {
-                            if (!mounted) return;
-                            amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
-                          }
+                          amountRaw = NumberUtil.getXMRAmountAsRaw(formattedAmount);
                         }
                       }
 
@@ -908,13 +903,11 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                       if (_isMaxSend()) {
                         isMaxSend = true;
                         if (!mounted) return;
-                        amountRaw = StateContainer.of(context).wallet!.accountBalance.toString();
+                        amountRaw = StateContainer.of(context).xmrBalance;
                       }
 
-                      EventTaxiImpl.singleton().fire(XMREvent(type: "xmr_get_fee", message: amountRaw));
-
                       // verifies the input is a user in the db
-                      if (!_addressController!.text.startsWith("nano_") && _addressController!.text.isNotEmpty) {
+                      if (false /*!_addressController!.text.startsWith("nano_") && _addressController!.text.isNotEmpty*/) {
                         // Need to make sure its a valid contact or user
                         final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
                         if (user == null) {
@@ -940,9 +933,11 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                                   memo: _memoController!.text));
                         }
                       } else {
+                        EventTaxiImpl.singleton()
+                            .fire(XMREvent(type: "xmr_get_fee", message: "$formattedAddress:$amountRaw"));
                         Sheets.showAppHeightNineSheet(
                             context: context,
-                            widget: SendConfirmSheet(
+                            widget: SendXMRConfirmSheet(
                                 amountRaw: amountRaw,
                                 destination: formattedAddress,
                                 maxSend: isMaxSend,
@@ -1261,17 +1256,13 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         bananoAmount = sanitizedAmount(_localCurrencyFormat,
             convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       } else {
-        if (_rawAmount == null) {
-          bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
-        } else {
-          bananoAmount = getRawAsThemeAwareAmount(context, _rawAmount);
-        }
+        bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
       }
       if (bananoAmount.isEmpty) {
         bananoAmount = "0";
       }
-      final BigInt balanceRaw = StateContainer.of(context).wallet!.accountBalance;
-      final BigInt? sendAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
+      final BigInt balanceRaw = BigInt.parse(StateContainer.of(context).xmrBalance);
+      final BigInt? sendAmount = BigInt.tryParse(NumberUtil.getXMRAmountAsRaw(bananoAmount));
       if (sendAmount == null || sendAmount == BigInt.zero) {
         if (_memoController!.text.trim().isEmpty) {
           isValid = false;
@@ -1304,7 +1295,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         !isFavorite &&
         !isUser &&
         !isDomain &&
-        !Address(_addressController!.text).isValid()) {
+        /*!Address(_addressController!.text).isValid()*/ false) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context).invalidAddress;
@@ -1522,36 +1513,38 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                 return;
               }
               final Address address = Address(data.text);
-              if (address.isValid()) {
-                sl.get<DBHelper>().getUserOrContactWithAddress(address.address!).then((User? user) {
-                  if (user == null) {
-                    setState(() {
-                      _isUser = false;
-                      _addressValidationText = "";
-                      _addressStyle = AddressStyle.TEXT90;
-                      _pasteButtonVisible = true;
-                      _clearButton = true;
-                      _showContactButton = false;
-                      _addressController!.text = address.address!;
-                      _addressFocusNode!.unfocus();
-                      _addressValidAndUnfocused = true;
-                    });
-                  } else {
-                    // Is a user
-                    setState(() {
-                      _addressController!.text = user.getDisplayName()!;
-                      _addressFocusNode!.unfocus();
-                      _users = [];
-                      _isUser = true;
-                      _addressValidationText = "";
-                      _addressStyle = AddressStyle.PRIMARY;
-                      _pasteButtonVisible = true;
-                      _clearButton = true;
-                      _showContactButton = false;
-                    });
-                  }
-                });
-              }
+              String addressText = data.text!;
+              // if (!address.isValid()) {
+              //   return;
+              // }
+              sl.get<DBHelper>().getUserOrContactWithAddress(addressText).then((User? user) {
+                if (user == null) {
+                  setState(() {
+                    _isUser = false;
+                    _addressValidationText = "";
+                    _addressStyle = AddressStyle.TEXT90;
+                    _pasteButtonVisible = true;
+                    _clearButton = true;
+                    _showContactButton = false;
+                    _addressController!.text = addressText;
+                    _addressFocusNode!.unfocus();
+                    _addressValidAndUnfocused = true;
+                  });
+                } else {
+                  // Is a user
+                  setState(() {
+                    _addressController!.text = user.getDisplayName()!;
+                    _addressFocusNode!.unfocus();
+                    _users = [];
+                    _isUser = true;
+                    _addressValidationText = "";
+                    _addressStyle = AddressStyle.PRIMARY;
+                    _pasteButtonVisible = true;
+                    _clearButton = true;
+                    _showContactButton = false;
+                  });
+                }
+              });
             });
           },
         ),

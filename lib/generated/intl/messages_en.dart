@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please enter an Amount"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "We\'re about to ask for the \'tracking\' permission, this is used *strictly* for attributing links / referals, and minor analytics (things like number of installs, what app version, etc.) We believe you are entitled to your privacy and are not interested in any of your personal data, we just need the permission in order for link attributions to work correctly."),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Authenticating"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -218,6 +220,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Enable Notifications"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Enable Tracking"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Enter Address"),
@@ -705,6 +709,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("To"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Too many failed unlock attempts."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Tracking Authorization"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Tracking Disabled"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Payment Requests, Memos, and Messages will not function properly."),
         "transactions": MessageLookupByLibrary.simpleMessage("Transactions"),
         "transfer": MessageLookupByLibrary.simpleMessage("Transfer"),
         "transferClose": MessageLookupByLibrary.simpleMessage(

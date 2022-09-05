@@ -14,6 +14,7 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:decimal/decimal.dart';
 
 // ignore: must_be_immutable
 class TopCard extends StatefulWidget {
@@ -46,9 +47,9 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
 
   StreamSubscription<XMREvent>? _xmrEventSub;
 
-  String xmrBalance = "0.00000000";
+  String xmrBalance = "0";
   double syncPercentage = 0;
-  String xmrStatus = "LOADING";
+  String xmrStatus = "CONNECTING...";
   Color? xmrStatusColor;
 
   void _registerBus() {
@@ -66,7 +67,8 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
       }
       if (event.type == "update_balance") {
         setState(() {
-          xmrBalance = event.message;
+          // var bal = Decimal.parse(event.message) / Decimal.parse("1000000000000");
+          xmrBalance = getXMRRawAsThemeAwareAmount(context, event.message);
         });
       }
       if (event.type == "update_progress") {
@@ -84,12 +86,12 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
               break;
 
             case "loading":
-              title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusLoading, context);
+              title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusLoading, context) + "...";
               color = StateContainer.of(context).curTheme.warning;
               break;
 
             case "connecting":
-              title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusConnecting, context);
+              title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusConnecting, context) + "...";
               color = StateContainer.of(context).curTheme.warning;
               break;
 

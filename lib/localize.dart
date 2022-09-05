@@ -103,7 +103,7 @@ class NonTranslatable {
   }
 
   static String get nano {
-    return "NANO";
+    return "Nano";
   }
 
   static String get monero {

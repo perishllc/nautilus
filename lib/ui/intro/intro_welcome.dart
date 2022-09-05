@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -19,6 +21,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 
 class IntroWelcomePage extends StatefulWidget {
   @override
@@ -34,8 +37,35 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
   void initState() {
     super.initState();
     // post frame callback:
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       bool openedDialog = false;
+
+      // If the system can show an authorization request dialog
+      if (await sl.get<SharedPrefsUtil>().getTrackingEnabled() == false ||
+          await AppTrackingTransparency.trackingAuthorizationStatus == TrackingStatus.notDetermined) {
+        // Show a custom explainer dialog before the system dialog
+        // await showCustomTrackingDialog(context);
+
+        await AppDialogs.showInfoDialog(
+          context,
+          AppLocalization.of(context).trackingHeader,
+          AppLocalization.of(context).askTracking,
+          closeText: AppLocalization.of(context).ok,
+          barrierDismissible: false,
+          onPressed: () async {
+            bool trackingEnabled = false;
+            if (Platform.isIOS) {
+              trackingEnabled =
+                  await AppTrackingTransparency.requestTrackingAuthorization() == TrackingStatus.authorized;
+            } else {
+              trackingEnabled = await AppDialogs.showTrackingDialog(context);
+            }
+            await sl.get<SharedPrefsUtil>().setTrackingEnabled(trackingEnabled);
+            FlutterBranchSdk.disableTracking(!trackingEnabled);
+          },
+        );
+      }
+
       // check every 500ms if there's a giftcard:
       timer = Timer.periodic(const Duration(milliseconds: 500), (Timer t) async {
         if (!mounted) return;
@@ -68,7 +98,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    bool landscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final bool landscape = MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
@@ -110,27 +140,44 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                           Stack(
                             children: [
                               Container(
-                                margin: const EdgeInsets.only(top: 5),
+                                // margin: const EdgeInsets.only(top: 0),
                                 color: Colors.white,
                                 // padding: EdgeInsets.zero,
                                 // width: double.infinity,
-                                width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
-                                height: 95,
+                                width: landscape
+                                    ? MediaQuery.of(context).size.width / 2
+                                    : MediaQuery.of(context).size.width,
+                                height: 90,
                               ),
                               Container(
+                                // margin:
                                 padding: EdgeInsets.zero,
-                                width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
+                                width: landscape
+                                    ? MediaQuery.of(context).size.width / 2
+                                    : MediaQuery.of(context).size.width,
                                 child: TextLiquidFill(
                                   text: CaseChange.toUpperCase(NonTranslatable.nautilus, context),
                                   waveColor: NautilusTheme.nautilusBlue,
                                   boxBackgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
-                                  textStyle: const TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold, color: Colors.white),
+                                  textStyle:
+                                      const TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold, color: Colors.white),
                                   boxHeight: 100.0,
                                   boxWidth: double.infinity,
                                   loadDuration: const Duration(seconds: 3),
                                   waveDuration: const Duration(seconds: 3),
                                   loadUntil: 0.5,
                                 ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 90),
+                                color: StateContainer.of(context).curTheme.backgroundDark,
+                                // color: Colors.green,
+                                // padding: EdgeInsets.zero,
+                                // width: double.infinity,
+                                width: landscape
+                                    ? MediaQuery.of(context).size.width / 2
+                                    : MediaQuery.of(context).size.width,
+                                height: 15,
                               ),
                             ],
                           ),
@@ -158,7 +205,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // New Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet,
+                          Dimens.BUTTON_TOP_DIMENS,
                           instanceKey: const Key("new_wallet_button"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_backup_safety');
                       }),
@@ -167,8 +215,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // Import Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).importWallet, Dimens.BUTTON_BOTTOM_DIMENS,
-                          onPressed: () {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                          AppLocalization.of(context).importWallet, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pushNamed('/intro_import');
                       }),
                     ],
@@ -232,7 +280,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).importGiftIntro}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${AppLocalization.of(context).importGiftIntro}\n\n",
+                    style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actionsAlignment: MainAxisAlignment.end,

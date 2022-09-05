@@ -11,7 +11,7 @@ publish_to: "none"
 version: 0.6.3+87
 
 environment:
-  sdk: '>=2.12.0 < 3.0.0'
+  sdk: '>=2.17.0 < 3.0.0'
   # sdk: ">=2.14.0 <3.0.0"
   # sdk: ">=2.12.0 <3.0.0"
 
@@ -27,11 +27,15 @@ dependencies:
   # uuid:
   uuid: ^3.0.6
 
-  # Securley store data in a keystore
+  # Secureley store data in a keystore
   flutter_secure_storage: ^5.0.2
 
   # Nano core functions
-  flutter_nano_ffi: ^2.0.0
+  # flutter_nano_ffi: ^2.0.0
+  flutter_nano_ffi:
+    git:
+      url: https://github.com/appditto/flutter_nano_ffi.git
+      ref: master
 
   # Shared prefs
   shared_preferences: ^2.0.8
@@ -143,12 +147,13 @@ dependencies:
   oktoast: ^3.2.0
 
   # Push notifications
-  firebase_messaging: ^12.0.1
+  firebase_messaging: ^13.0.0
   # firebase_messaging: 11.2.8
   # firebase_core: ^1.10.0# for sure works
   # firebase_core: ^1.13.1
-  firebase_core: ^1.17.1
+  firebase_core: ^1.21.1
   firebase_analytics: ^9.1.9
+  firebase_app_check: ^0.0.7
 
   # windows plugins / ffi:
   # firebase_auth: ^3.1.5
@@ -243,12 +248,14 @@ dependencies:
   confetti: ^0.7.0
 
   
-  firebase_app_check: ^0.0.6+20
   path: ^1.8.1
 
   # hcaptcha:
   webview_flutter: ^3.0.4
-  quick_usb: ^0.4.0
+  app_tracking_transparency: ^2.0.2+4
+
+
+  # quick_usb: ^0.4.0
 
 flutter_intl:
   enabled: true

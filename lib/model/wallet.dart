@@ -99,7 +99,7 @@ class AppWallet {
   List<dynamic> unified;
 
   String getLocalCurrencyBalance(BuildContext context, AvailableCurrency currency, {String locale = "en_US"}) {
-    final BigInt rawPerCur = rawPerNano;
+    final BigInt rawPerCur = NumberUtil.rawPerNano;
     final Decimal converted = Decimal.parse(localCurrencyPrice) * NumberUtil.getRawAsDecimal(accountBalance.toString(), rawPerCur);
     return NumberFormat.currency(locale: locale, symbol: currency.getCurrencySymbol()).format(converted.toDouble());
   }

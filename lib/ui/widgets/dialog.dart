@@ -14,7 +14,8 @@ import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppDialogs {
-  static void showConfirmDialog(BuildContext context, String title, String content, String buttonText, Function onPressed,
+  static void showConfirmDialog(
+      BuildContext context, String title, String content, String buttonText, Function onPressed,
       {String? cancelText, Function? cancelAction, bool barrierDismissible = true}) {
     cancelText ??= AppLocalization.of(context).cancel.toUpperCase();
 
@@ -193,7 +194,8 @@ class AppDialogs {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(AppLocalization.of(context).changeLog, textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
+                    child: Text(AppLocalization.of(context).changeLog,
+                        textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
                     constraints: const BoxConstraints(minHeight: 300, maxHeight: 400),
@@ -268,7 +270,9 @@ class AppDialogs {
                             Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
                             Sheets.showAppHeightNineSheet(
-                                context: context, widget: FundingMessagesSheet(alerts: StateContainer.of(context).fundingAlerts, hasDismissButton: false));
+                                context: context,
+                                widget: FundingMessagesSheet(
+                                    alerts: StateContainer.of(context).fundingAlerts, hasDismissButton: false));
                           });
                         },
                         child: Text(
@@ -282,12 +286,58 @@ class AppDialogs {
                       TextButton(
                         key: const Key("changelog_dismiss_button"),
                         onPressed: () => Navigator.of(context).pop(),
-                        child: Text(AppLocalization.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
+                        child:
+                            Text(AppLocalization.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
                       ),
                     ]),
                   ),
                 ],
               ),
             ));
+  }
+
+  static Future<bool> showTrackingDialog(BuildContext context) async {
+    final bool? option = await showDialog<bool>(
+        context: context,
+        barrierColor: StateContainer.of(context).curTheme.barrier,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            title: Text(
+              AppLocalization.of(context).trackingHeader,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            children: <Widget>[
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).onStr,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    AppLocalization.of(context).off,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
+    return option ?? false;
   }
 }

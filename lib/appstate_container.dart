@@ -142,10 +142,11 @@ class StateContainerState extends State<StateContainer> {
   Account? recentSecondLast;
 
   // xmr:
-  String? xmrAddress;
+  String xmrAddress = "";
   int? xmrRestoreHeight;
   bool xmrEnabled = true;
   String xmrFee = "";
+  String xmrBalance = "0";
   final InAppLocalhostServer localhostServer = InAppLocalhostServer();
 
   // Natricon / Nyanicon settings
@@ -424,6 +425,7 @@ class StateContainerState extends State<StateContainer> {
       shortDescription: "Error: can't reach Branch API",
       longDescription:
           "We can't seem to reach the Branch API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work.",
+      dismissable: true,
     );
     try {
       final http.Response response =
@@ -688,6 +690,13 @@ class StateContainerState extends State<StateContainer> {
       if (event.type == "update_fee") {
         setState(() {
           xmrFee = event.message;
+          print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+          print(xmrFee);
+        });
+      }
+      if (event.type == "update_balance") {
+        setState(() {
+          xmrBalance = event.message;
         });
       }
     });
@@ -1887,6 +1896,8 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       wallet = AppWallet();
       encryptedSecret = null;
+      xmrAddress = "";
+      xmrFee = "";
     });
     sl.get<DBHelper>().dropAccounts();
     sl.get<AccountService>().clearQueue();

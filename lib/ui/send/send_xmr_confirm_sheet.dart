@@ -40,7 +40,7 @@ class SendXMRConfirmSheet extends StatefulWidget {
       this.contactName,
       this.localCurrency,
       this.maxSend = false,
-      this.phoneNumber = "",
+      // this.phoneNumber = "",
       this.paperWalletSeed = "",
       this.memo = ""})
       : super();
@@ -51,8 +51,7 @@ class SendXMRConfirmSheet extends StatefulWidget {
   final String? localCurrency;
   final bool maxSend;
   // final bool isPhoneNumber;
-  final String phoneNumber;
-  final String link;
+  // final String phoneNumber;
   final String paperWalletSeed;
   final String memo;
 
@@ -148,15 +147,11 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                         text: "",
                         children: [
                           TextSpan(
-                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                            text: getXMRThemeAwareRawAccuracy(context, widget.amountRaw),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
-                          displayCurrencySymbol(
-                            context,
-                            AppStyles.textStyleParagraphPrimary(context),
-                          ),
                           TextSpan(
-                            text: getRawAsThemeAwareFormattedAmount(context, widget.amountRaw),
+                            text: "${getXMRRawAsThemeAwareAmount(context, widget.amountRaw)} XMR",
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
@@ -181,19 +176,17 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                     ),
                   ),
                   // Address text
-                  if (widget.link.isEmpty)
-                    Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.105,
-                            right: MediaQuery.of(context).size.width * 0.105),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.backgroundDarkest,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child:
-                            UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
+                  Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.105,
+                          right: MediaQuery.of(context).size.width * 0.105),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
 
                   // WITH FEE:
                   if (StateContainer.of(context).xmrFee.isNotEmpty)
@@ -221,8 +214,8 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: Text(
-                          StateContainer.of(context).xmrFee,
-                          style: AppStyles.textStyleParagraph(context),
+                          "${getXMRThemeAwareRawAccuracy(context, StateContainer.of(context).xmrFee)}${getXMRRawAsThemeAwareAmount(context, StateContainer.of(context).xmrFee)} XMR",
+                          style: AppStyles.textStyleParagraphPrimary(context),
                           textAlign: TextAlign.center,
                         )),
                 ],
@@ -387,7 +380,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
       EventTaxiImpl.singleton().fire(XMREvent(type: "xmr_send", message: "${widget.destination}:${widget.amountRaw}"));
 
       // sleep to flex the animation a bit:
-      await Future<dynamic>.delayed(const Duration(milliseconds: 1500));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 3500));
 
       // Show complete
       String? contactName = widget.contactName;
@@ -439,7 +432,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
         description: AppLocalization.of(context)
             .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
-            .replaceAll("%2", StateContainer.of(context).currencyMode),
+            .replaceAll("%2", "XMR"),
       );
     }));
     if (auth != null && auth) {
