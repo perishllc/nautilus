@@ -202,6 +202,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   }
 
   Future<void> getNotificationPermissions() async {
+    bool notificationsAllowed = false;
     try {
       final NotificationSettings settings =
           await _firebaseMessaging.requestPermission(sound: true, badge: true, alert: true);
@@ -211,6 +212,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           settings.authorizationStatus == AuthorizationStatus.authorized) {
         sl.get<SharedPrefsUtil>().getNotificationsSet().then((bool beenSet) {
           if (!beenSet) {
+            notificationsAllowed = true;
             sl.get<SharedPrefsUtil>().setNotificationsOn(true);
           }
         });
@@ -233,7 +235,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     } catch (e) {
       sl.get<SharedPrefsUtil>().setNotificationsOn(false);
     }
-    if (!await sl.get<SharedPrefsUtil>().getNotificationsOn()) {
+    if (!await sl.get<SharedPrefsUtil>().getNotificationsOn() && !notificationsAllowed) {
       showNotificationWarning();
     }
   }
@@ -243,7 +245,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     if (Platform.isIOS) {
       final TrackingStatus status = await AppTrackingTransparency.trackingAuthorizationStatus;
       if (status == TrackingStatus.notDetermined || status == TrackingStatus.denied) {
-        showTrackingWarning();
+        await showTrackingWarning();
 
         // update the setting if there's a mismatch:
         if (await sl.get<SharedPrefsUtil>().getTrackingEnabled()) {
@@ -253,7 +255,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     } else {
       // the setting is just a user preference on android:
       if (!await sl.get<SharedPrefsUtil>().getTrackingEnabled()) {
-        showTrackingWarning();
+        await showTrackingWarning();
       }
     }
   }
@@ -833,16 +835,18 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
 
       // first launch:
-      final bool isFirstLaunch = await sl.get<SharedPrefsUtil>().getFirstContactAdded();
+      final bool isFirstLaunch = !(await sl.get<SharedPrefsUtil>().getFirstContactAdded());
       if (!mounted) return;
 
       // Setup notifications
       // skip if we just opened a gift card:
       if (!StateContainer.of(context).introSkiped) {
-        getNotificationPermissions();
+        await getNotificationPermissions();
       }
 
-      getTrackingPermissions();
+      await getTrackingPermissions();
+
+      if (!mounted) return;
 
       // show changelog?
 
@@ -905,7 +909,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     );
     // don't show if already dismissed:
     // if (await sl.get<SharedPrefsUtil>().shouldShowAlert(alert)) {
-      StateContainer.of(context).addActiveOrSettingsAlert(alert, null);
+    StateContainer.of(context).addActiveOrSettingsAlert(alert, null);
     // }
     return;
   }

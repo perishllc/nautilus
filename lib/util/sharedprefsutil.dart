@@ -550,7 +550,8 @@ class SharedPrefsUtil {
     await prefs.remove(ninja_api_cache);
     await prefs.remove(firstcontact_added);
     await prefs.remove(xmr_restore_height);
-    await prefs.remove(tracking_enabled);
+    // don't remove this preference since it's annoying when you log out:
+    // await prefs.remove(tracking_enabled);
     // remove the dismissals of any important alerts:
     await prefs.remove("alert_4040");
     await prefs.remove("alert_4041");

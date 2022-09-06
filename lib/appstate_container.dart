@@ -225,10 +225,16 @@ class StateContainerState extends State<StateContainer> {
   void addActiveOrSettingsAlert(AlertResponseItem? active, AlertResponseItem? settingsAlert) {
     setState(() {
       if (active != null) {
-        activeAlerts.add(active);
+        // disallow duplicates:
+        if (!activeAlerts.any((AlertResponseItem element) => element.id == active.id)) {
+          activeAlerts.add(active);
+        }
       }
       if (settingsAlert != null) {
-        settingsAlerts.add(settingsAlert);
+        // disallow duplicates:
+        if (!settingsAlerts.any((AlertResponseItem element) => element.id == settingsAlert.id)) {
+          settingsAlerts.add(settingsAlert);
+        }
       }
     });
   }

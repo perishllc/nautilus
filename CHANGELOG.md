@@ -1,4 +1,4 @@
-## v0.6.3 - [2022-09-05]
+## v0.6.3 - [2022-09-06]
 #### Added
 - (EXPERIMENTAL) Bare-Bones XMR Support
   - Option to disable XMR Section
